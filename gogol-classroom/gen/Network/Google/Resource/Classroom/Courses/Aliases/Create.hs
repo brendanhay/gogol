@@ -48,8 +48,8 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
     , cacCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.aliases.create@ method which the
 -- 'CoursesAliasesCreate' request conforms to.
@@ -78,13 +78,13 @@ type CoursesAliasesCreateResource =
 -- /See:/ 'coursesAliasesCreate' smart constructor.
 data CoursesAliasesCreate =
   CoursesAliasesCreate'
-    { _cacXgafv          :: !(Maybe Xgafv)
+    { _cacXgafv :: !(Maybe Xgafv)
     , _cacUploadProtocol :: !(Maybe Text)
-    , _cacCourseId       :: !Text
-    , _cacAccessToken    :: !(Maybe Text)
-    , _cacUploadType     :: !(Maybe Text)
-    , _cacPayload        :: !CourseAlias
-    , _cacCallback       :: !(Maybe Text)
+    , _cacCourseId :: !Text
+    , _cacAccessToken :: !(Maybe Text)
+    , _cacUploadType :: !(Maybe Text)
+    , _cacPayload :: !CourseAlias
+    , _cacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

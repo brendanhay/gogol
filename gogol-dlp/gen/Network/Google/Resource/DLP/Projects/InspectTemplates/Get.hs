@@ -42,8 +42,8 @@ module Network.Google.Resource.DLP.Projects.InspectTemplates.Get
     , pitgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.inspectTemplates.get@ method which the
 -- 'ProjectsInspectTemplatesGet' request conforms to.
@@ -64,12 +64,12 @@ type ProjectsInspectTemplatesGetResource =
 -- /See:/ 'projectsInspectTemplatesGet' smart constructor.
 data ProjectsInspectTemplatesGet =
   ProjectsInspectTemplatesGet'
-    { _pitgXgafv          :: !(Maybe Xgafv)
+    { _pitgXgafv :: !(Maybe Xgafv)
     , _pitgUploadProtocol :: !(Maybe Text)
-    , _pitgAccessToken    :: !(Maybe Text)
-    , _pitgUploadType     :: !(Maybe Text)
-    , _pitgName           :: !Text
-    , _pitgCallback       :: !(Maybe Text)
+    , _pitgAccessToken :: !(Maybe Text)
+    , _pitgUploadType :: !(Maybe Text)
+    , _pitgName :: !Text
+    , _pitgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,8 +126,9 @@ pitgUploadType
   = lens _pitgUploadType
       (\ s a -> s{_pitgUploadType = a})
 
--- | Resource name of the organization and inspectTemplate to be read, for
--- example \`organizations\/433245324\/inspectTemplates\/432452342\` or
+-- | Required. Resource name of the organization and inspectTemplate to be
+-- read, for example
+-- \`organizations\/433245324\/inspectTemplates\/432452342\` or
 -- projects\/project-id\/inspectTemplates\/432452342.
 pitgName :: Lens' ProjectsInspectTemplatesGet Text
 pitgName = lens _pitgName (\ s a -> s{_pitgName = a})

@@ -61,6 +61,12 @@ module Network.Google.CloudScheduler
 
     -- * Types
 
+    -- ** OAuthToken
+    , OAuthToken
+    , oAuthToken
+    , oatScope
+    , oatServiceAccountEmail
+
     -- ** Status
     , Status
     , status
@@ -81,6 +87,12 @@ module Network.Google.CloudScheduler
     -- ** ResumeJobRequest
     , ResumeJobRequest
     , resumeJobRequest
+
+    -- ** OidcToken
+    , OidcToken
+    , oidcToken
+    , otAudience
+    , otServiceAccountEmail
 
     -- ** AppEngineHTTPTargetHeaders
     , AppEngineHTTPTargetHeaders
@@ -126,6 +138,7 @@ module Network.Google.CloudScheduler
     , pmPublishTime
     , pmAttributes
     , pmMessageId
+    , pmOrderingKey
 
     -- ** JobState
     , JobState (..)
@@ -147,7 +160,9 @@ module Network.Google.CloudScheduler
     -- ** HTTPTarget
     , HTTPTarget
     , hTTPTarget
+    , httptOAuthToken
     , httptHTTPMethod
+    , httptOidcToken
     , httptBody
     , httptURI
     , httptHeaders
@@ -160,6 +175,7 @@ module Network.Google.CloudScheduler
     , Job
     , job
     , jStatus
+    , jAttemptDeadline
     , jState
     , jLastAttemptTime
     , jRetryConfig
@@ -219,18 +235,18 @@ module Network.Google.CloudScheduler
     , AppEngineHTTPTargetHTTPMethod (..)
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Get
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Create
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Delete
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Get
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.List
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Patch
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Pause
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Resume
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Run
-import           Network.Google.Resource.CloudScheduler.Projects.Locations.List
+import Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Get
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Create
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Delete
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Get
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.List
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Patch
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Pause
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Resume
+import Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Run
+import Network.Google.Resource.CloudScheduler.Projects.Locations.List
 
 {- $resources
 TODO

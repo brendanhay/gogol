@@ -16,9 +16,11 @@
 --
 module Network.Google.AdExperienceReport.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | The ad filtering status of the site.
+-- | The site\'s [enforcement
+-- status](https:\/\/support.google.com\/webtools\/answer\/7308033) on this
+-- platform.
 data PlatformSummaryFilterStatus
     = Unknown
       -- ^ @UNKNOWN@
@@ -62,6 +64,44 @@ instance FromJSON PlatformSummaryFilterStatus where
 instance ToJSON PlatformSummaryFilterStatus where
     toJSON = toJSONText
 
+data PlatformSummaryRegionItem
+    = RegionUnknown
+      -- ^ @REGION_UNKNOWN@
+      -- Ad standard not yet defined for your region.
+    | RegionA
+      -- ^ @REGION_A@
+      -- Region A.
+    | RegionB
+      -- ^ @REGION_B@
+      -- Region B.
+    | RegionC
+      -- ^ @REGION_C@
+      -- Region C.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PlatformSummaryRegionItem
+
+instance FromHttpApiData PlatformSummaryRegionItem where
+    parseQueryParam = \case
+        "REGION_UNKNOWN" -> Right RegionUnknown
+        "REGION_A" -> Right RegionA
+        "REGION_B" -> Right RegionB
+        "REGION_C" -> Right RegionC
+        x -> Left ("Unable to parse PlatformSummaryRegionItem from: " <> x)
+
+instance ToHttpApiData PlatformSummaryRegionItem where
+    toQueryParam = \case
+        RegionUnknown -> "REGION_UNKNOWN"
+        RegionA -> "REGION_A"
+        RegionB -> "REGION_B"
+        RegionC -> "REGION_C"
+
+instance FromJSON PlatformSummaryRegionItem where
+    parseJSON = parseJSONText "PlatformSummaryRegionItem"
+
+instance ToJSON PlatformSummaryRegionItem where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1
@@ -91,7 +131,7 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
--- | The status of the site reviewed for the Better Ads Standards.
+-- | The site\'s Ad Experience Report status on this platform.
 data PlatformSummaryBetterAdsStatus
     = PSBASUnknown
       -- ^ @UNKNOWN@
@@ -101,7 +141,7 @@ data PlatformSummaryBetterAdsStatus
       -- Passing.
     | PSBASWarning
       -- ^ @WARNING@
-      -- Warning.
+      -- Warning. No longer a possible status.
     | PSBASFailing
       -- ^ @FAILING@
       -- Failing.

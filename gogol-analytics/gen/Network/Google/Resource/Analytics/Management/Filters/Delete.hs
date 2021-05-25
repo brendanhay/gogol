@@ -37,8 +37,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Delete
     , mfdAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.delete@ method which the
 -- 'ManagementFiltersDelete' request conforms to.
@@ -57,7 +57,7 @@ type ManagementFiltersDeleteResource =
 -- /See:/ 'managementFiltersDelete' smart constructor.
 data ManagementFiltersDelete =
   ManagementFiltersDelete'
-    { _mfdFilterId  :: !Text
+    { _mfdFilterId :: !Text
     , _mfdAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

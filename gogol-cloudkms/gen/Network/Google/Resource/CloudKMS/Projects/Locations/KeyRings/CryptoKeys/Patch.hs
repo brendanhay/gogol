@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.P
     , plkrckpCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.patch@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysPatch' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsLocationsKeyRingsCryptoKeysPatchResource
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysPatch' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysPatch =
   ProjectsLocationsKeyRingsCryptoKeysPatch'
-    { _plkrckpXgafv          :: !(Maybe Xgafv)
+    { _plkrckpXgafv :: !(Maybe Xgafv)
     , _plkrckpUploadProtocol :: !(Maybe Text)
-    , _plkrckpUpdateMask     :: !(Maybe GFieldMask)
-    , _plkrckpAccessToken    :: !(Maybe Text)
-    , _plkrckpUploadType     :: !(Maybe Text)
-    , _plkrckpPayload        :: !CryptoKey
-    , _plkrckpName           :: !Text
-    , _plkrckpCallback       :: !(Maybe Text)
+    , _plkrckpUpdateMask :: !(Maybe GFieldMask)
+    , _plkrckpAccessToken :: !(Maybe Text)
+    , _plkrckpUploadType :: !(Maybe Text)
+    , _plkrckpPayload :: !CryptoKey
+    , _plkrckpName :: !Text
+    , _plkrckpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,7 +125,7 @@ plkrckpUploadProtocol
   = lens _plkrckpUploadProtocol
       (\ s a -> s{_plkrckpUploadProtocol = a})
 
--- | Required list of fields to be updated in this request.
+-- | Required. List of fields to be updated in this request.
 plkrckpUpdateMask :: Lens' ProjectsLocationsKeyRingsCryptoKeysPatch (Maybe GFieldMask)
 plkrckpUpdateMask
   = lens _plkrckpUpdateMask

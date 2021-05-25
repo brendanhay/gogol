@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates app details for this edit. This method supports patch semantics.
+-- Patches details of an app.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.details.patch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.details.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
     , EditsDetailsPatch
 
     -- * Request Lenses
+    , edpXgafv
+    , edpUploadProtocol
     , edpPackageName
+    , edpAccessToken
+    , edpUploadType
     , edpPayload
     , edpEditId
+    , edpCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.details.patch@ method which the
 -- 'EditsDetailsPatch' request conforms to.
@@ -51,18 +56,28 @@ type EditsDetailsPatchResource =
              "edits" :>
                Capture "editId" Text :>
                  "details" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] AppDetails :>
-                       Patch '[JSON] AppDetails
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] AppDetails :>
+                                 Patch '[JSON] AppDetails
 
--- | Updates app details for this edit. This method supports patch semantics.
+-- | Patches details of an app.
 --
 -- /See:/ 'editsDetailsPatch' smart constructor.
 data EditsDetailsPatch =
   EditsDetailsPatch'
-    { _edpPackageName :: !Text
-    , _edpPayload     :: !AppDetails
-    , _edpEditId      :: !Text
+    { _edpXgafv :: !(Maybe Xgafv)
+    , _edpUploadProtocol :: !(Maybe Text)
+    , _edpPackageName :: !Text
+    , _edpAccessToken :: !(Maybe Text)
+    , _edpUploadType :: !(Maybe Text)
+    , _edpPayload :: !AppDetails
+    , _edpEditId :: !Text
+    , _edpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,11 +86,21 @@ data EditsDetailsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'edpXgafv'
+--
+-- * 'edpUploadProtocol'
+--
 -- * 'edpPackageName'
+--
+-- * 'edpAccessToken'
+--
+-- * 'edpUploadType'
 --
 -- * 'edpPayload'
 --
 -- * 'edpEditId'
+--
+-- * 'edpCallback'
 editsDetailsPatch
     :: Text -- ^ 'edpPackageName'
     -> AppDetails -- ^ 'edpPayload'
@@ -83,35 +108,71 @@ editsDetailsPatch
     -> EditsDetailsPatch
 editsDetailsPatch pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
   EditsDetailsPatch'
-    { _edpPackageName = pEdpPackageName_
+    { _edpXgafv = Nothing
+    , _edpUploadProtocol = Nothing
+    , _edpPackageName = pEdpPackageName_
+    , _edpAccessToken = Nothing
+    , _edpUploadType = Nothing
     , _edpPayload = pEdpPayload_
     , _edpEditId = pEdpEditId_
+    , _edpCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+edpXgafv :: Lens' EditsDetailsPatch (Maybe Xgafv)
+edpXgafv = lens _edpXgafv (\ s a -> s{_edpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+edpUploadProtocol :: Lens' EditsDetailsPatch (Maybe Text)
+edpUploadProtocol
+  = lens _edpUploadProtocol
+      (\ s a -> s{_edpUploadProtocol = a})
+
+-- | Package name of the app.
 edpPackageName :: Lens' EditsDetailsPatch Text
 edpPackageName
   = lens _edpPackageName
       (\ s a -> s{_edpPackageName = a})
+
+-- | OAuth access token.
+edpAccessToken :: Lens' EditsDetailsPatch (Maybe Text)
+edpAccessToken
+  = lens _edpAccessToken
+      (\ s a -> s{_edpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+edpUploadType :: Lens' EditsDetailsPatch (Maybe Text)
+edpUploadType
+  = lens _edpUploadType
+      (\ s a -> s{_edpUploadType = a})
 
 -- | Multipart request metadata.
 edpPayload :: Lens' EditsDetailsPatch AppDetails
 edpPayload
   = lens _edpPayload (\ s a -> s{_edpPayload = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 edpEditId :: Lens' EditsDetailsPatch Text
 edpEditId
   = lens _edpEditId (\ s a -> s{_edpEditId = a})
+
+-- | JSONP
+edpCallback :: Lens' EditsDetailsPatch (Maybe Text)
+edpCallback
+  = lens _edpCallback (\ s a -> s{_edpCallback = a})
 
 instance GoogleRequest EditsDetailsPatch where
         type Rs EditsDetailsPatch = AppDetails
         type Scopes EditsDetailsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsDetailsPatch'{..}
-          = go _edpPackageName _edpEditId (Just AltJSON)
+          = go _edpPackageName _edpEditId _edpXgafv
+              _edpUploadProtocol
+              _edpAccessToken
+              _edpUploadType
+              _edpCallback
+              (Just AltJSON)
               _edpPayload
               androidPublisherService
           where go

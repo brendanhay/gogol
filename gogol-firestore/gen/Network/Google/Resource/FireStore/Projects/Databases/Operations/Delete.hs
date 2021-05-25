@@ -44,8 +44,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Operations.Delete
     , pdodCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.operations.delete@ method which the
 -- 'ProjectsDatabasesOperationsDelete' request conforms to.
@@ -67,12 +67,12 @@ type ProjectsDatabasesOperationsDeleteResource =
 -- /See:/ 'projectsDatabasesOperationsDelete' smart constructor.
 data ProjectsDatabasesOperationsDelete =
   ProjectsDatabasesOperationsDelete'
-    { _pdodXgafv          :: !(Maybe Xgafv)
+    { _pdodXgafv :: !(Maybe Xgafv)
     , _pdodUploadProtocol :: !(Maybe Text)
-    , _pdodAccessToken    :: !(Maybe Text)
-    , _pdodUploadType     :: !(Maybe Text)
-    , _pdodName           :: !Text
-    , _pdodCallback       :: !(Maybe Text)
+    , _pdodAccessToken :: !(Maybe Text)
+    , _pdodUploadType :: !(Maybe Text)
+    , _pdodName :: !Text
+    , _pdodCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

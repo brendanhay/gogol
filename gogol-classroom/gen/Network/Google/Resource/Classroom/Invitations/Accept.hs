@@ -49,8 +49,8 @@ module Network.Google.Resource.Classroom.Invitations.Accept
     , iaCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.accept@ method which the
 -- 'InvitationsAccept' request conforms to.
@@ -78,12 +78,12 @@ type InvitationsAcceptResource =
 -- /See:/ 'invitationsAccept' smart constructor.
 data InvitationsAccept =
   InvitationsAccept'
-    { _iaXgafv          :: !(Maybe Xgafv)
+    { _iaXgafv :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
-    , _iaAccessToken    :: !(Maybe Text)
-    , _iaUploadType     :: !(Maybe Text)
-    , _iaId             :: !Text
-    , _iaCallback       :: !(Maybe Text)
+    , _iaAccessToken :: !(Maybe Text)
+    , _iaUploadType :: !(Maybe Text)
+    , _iaId :: !Text
+    , _iaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

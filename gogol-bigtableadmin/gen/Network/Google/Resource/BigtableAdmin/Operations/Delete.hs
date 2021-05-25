@@ -44,8 +44,8 @@ module Network.Google.Resource.BigtableAdmin.Operations.Delete
     , odCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.operations.delete@ method which the
 -- 'OperationsDelete' request conforms to.
@@ -67,12 +67,12 @@ type OperationsDeleteResource =
 -- /See:/ 'operationsDelete' smart constructor.
 data OperationsDelete =
   OperationsDelete'
-    { _odXgafv          :: !(Maybe Xgafv)
+    { _odXgafv :: !(Maybe Xgafv)
     , _odUploadProtocol :: !(Maybe Text)
-    , _odAccessToken    :: !(Maybe Text)
-    , _odUploadType     :: !(Maybe Text)
-    , _odName           :: !Text
-    , _odCallback       :: !(Maybe Text)
+    , _odAccessToken :: !(Maybe Text)
+    , _odUploadType :: !(Maybe Text)
+    , _odName :: !Text
+    , _odCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

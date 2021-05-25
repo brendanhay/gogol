@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists Super Chat events for a channel.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.superChatEvents.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.superChatEvents.list@.
 module Network.Google.Resource.YouTube.SuperChatEvents.List
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.YouTube.SuperChatEvents.List
     , SuperChatEventsList
 
     -- * Request Lenses
+    , scelXgafv
     , scelPart
+    , scelUploadProtocol
+    , scelAccessToken
+    , scelUploadType
     , scelHl
     , scelPageToken
     , scelMaxResults
+    , scelCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.superChatEvents.list@ method which the
 -- 'SuperChatEventsList' request conforms to.
@@ -48,22 +53,32 @@ type SuperChatEventsListResource =
      "youtube" :>
        "v3" :>
          "superChatEvents" :>
-           QueryParam "part" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Word32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] SuperChatEventListResponse
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "hl" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] SuperChatEventListResponse
 
--- | Lists Super Chat events for a channel.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'superChatEventsList' smart constructor.
 data SuperChatEventsList =
   SuperChatEventsList'
-    { _scelPart       :: !Text
-    , _scelHl         :: !(Maybe Text)
-    , _scelPageToken  :: !(Maybe Text)
+    { _scelXgafv :: !(Maybe Xgafv)
+    , _scelPart :: ![Text]
+    , _scelUploadProtocol :: !(Maybe Text)
+    , _scelAccessToken :: !(Maybe Text)
+    , _scelUploadType :: !(Maybe Text)
+    , _scelHl :: !(Maybe Text)
+    , _scelPageToken :: !(Maybe Text)
     , _scelMaxResults :: !(Textual Word32)
+    , _scelCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,42 +87,76 @@ data SuperChatEventsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'scelXgafv'
+--
 -- * 'scelPart'
+--
+-- * 'scelUploadProtocol'
+--
+-- * 'scelAccessToken'
+--
+-- * 'scelUploadType'
 --
 -- * 'scelHl'
 --
 -- * 'scelPageToken'
 --
 -- * 'scelMaxResults'
+--
+-- * 'scelCallback'
 superChatEventsList
-    :: Text -- ^ 'scelPart'
+    :: [Text] -- ^ 'scelPart'
     -> SuperChatEventsList
 superChatEventsList pScelPart_ =
   SuperChatEventsList'
-    { _scelPart = pScelPart_
+    { _scelXgafv = Nothing
+    , _scelPart = _Coerce # pScelPart_
+    , _scelUploadProtocol = Nothing
+    , _scelAccessToken = Nothing
+    , _scelUploadType = Nothing
     , _scelHl = Nothing
     , _scelPageToken = Nothing
     , _scelMaxResults = 5
+    , _scelCallback = Nothing
     }
 
 
--- | The part parameter specifies the superChatEvent resource parts that the
--- API response will include. Supported values are id and snippet.
-scelPart :: Lens' SuperChatEventsList Text
-scelPart = lens _scelPart (\ s a -> s{_scelPart = a})
+-- | V1 error format.
+scelXgafv :: Lens' SuperChatEventsList (Maybe Xgafv)
+scelXgafv
+  = lens _scelXgafv (\ s a -> s{_scelXgafv = a})
 
--- | The hl parameter instructs the API to retrieve localized resource
--- metadata for a specific application language that the YouTube website
--- supports. The parameter value must be a language code included in the
--- list returned by the i18nLanguages.list method. If localized resource
--- details are available in that language, the resource\'s
--- snippet.localized object will contain the localized values. However, if
--- localized details are not available, the snippet.localized object will
--- contain resource details in the resource\'s default language.
+-- | The *part* parameter specifies the superChatEvent resource parts that
+-- the API response will include. This parameter is currently not
+-- supported.
+scelPart :: Lens' SuperChatEventsList [Text]
+scelPart
+  = lens _scelPart (\ s a -> s{_scelPart = a}) .
+      _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+scelUploadProtocol :: Lens' SuperChatEventsList (Maybe Text)
+scelUploadProtocol
+  = lens _scelUploadProtocol
+      (\ s a -> s{_scelUploadProtocol = a})
+
+-- | OAuth access token.
+scelAccessToken :: Lens' SuperChatEventsList (Maybe Text)
+scelAccessToken
+  = lens _scelAccessToken
+      (\ s a -> s{_scelAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+scelUploadType :: Lens' SuperChatEventsList (Maybe Text)
+scelUploadType
+  = lens _scelUploadType
+      (\ s a -> s{_scelUploadType = a})
+
+-- | Return rendered funding amounts in specified language.
 scelHl :: Lens' SuperChatEventsList (Maybe Text)
 scelHl = lens _scelHl (\ s a -> s{_scelHl = a})
 
--- | The pageToken parameter identifies a specific page in the result set
+-- | The *pageToken* parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
 scelPageToken :: Lens' SuperChatEventsList (Maybe Text)
@@ -115,13 +164,18 @@ scelPageToken
   = lens _scelPageToken
       (\ s a -> s{_scelPageToken = a})
 
--- | The maxResults parameter specifies the maximum number of items that
+-- | The *maxResults* parameter specifies the maximum number of items that
 -- should be returned in the result set.
 scelMaxResults :: Lens' SuperChatEventsList Word32
 scelMaxResults
   = lens _scelMaxResults
       (\ s a -> s{_scelMaxResults = a})
       . _Coerce
+
+-- | JSONP
+scelCallback :: Lens' SuperChatEventsList (Maybe Text)
+scelCallback
+  = lens _scelCallback (\ s a -> s{_scelCallback = a})
 
 instance GoogleRequest SuperChatEventsList where
         type Rs SuperChatEventsList =
@@ -131,8 +185,13 @@ instance GoogleRequest SuperChatEventsList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient SuperChatEventsList'{..}
-          = go (Just _scelPart) _scelHl _scelPageToken
+          = go _scelPart _scelXgafv _scelUploadProtocol
+              _scelAccessToken
+              _scelUploadType
+              _scelHl
+              _scelPageToken
               (Just _scelMaxResults)
+              _scelCallback
               (Just AltJSON)
               youTubeService
           where go

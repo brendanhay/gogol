@@ -41,8 +41,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Get
     , piapfgCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.appProfiles.get@ method which the
 -- 'ProjectsInstancesAppProFilesGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsInstancesAppProFilesGetResource =
 -- /See:/ 'projectsInstancesAppProFilesGet' smart constructor.
 data ProjectsInstancesAppProFilesGet =
   ProjectsInstancesAppProFilesGet'
-    { _piapfgXgafv          :: !(Maybe Xgafv)
+    { _piapfgXgafv :: !(Maybe Xgafv)
     , _piapfgUploadProtocol :: !(Maybe Text)
-    , _piapfgAccessToken    :: !(Maybe Text)
-    , _piapfgUploadType     :: !(Maybe Text)
-    , _piapfgName           :: !Text
-    , _piapfgCallback       :: !(Maybe Text)
+    , _piapfgAccessToken :: !(Maybe Text)
+    , _piapfgUploadType :: !(Maybe Text)
+    , _piapfgName :: !Text
+    , _piapfgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,8 +123,9 @@ piapfgUploadType
   = lens _piapfgUploadType
       (\ s a -> s{_piapfgUploadType = a})
 
--- | The unique name of the requested app profile. Values are of the form
--- \`projects\/\/instances\/\/appProfiles\/\`.
+-- | Required. The unique name of the requested app profile. Values are of
+-- the form
+-- \`projects\/{project}\/instances\/{instance}\/appProfiles\/{app_profile}\`.
 piapfgName :: Lens' ProjectsInstancesAppProFilesGet Text
 piapfgName
   = lens _piapfgName (\ s a -> s{_piapfgName = a})
@@ -145,7 +146,8 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/bigtable.admin.instance",
                "https://www.googleapis.com/auth/cloud-bigtable.admin",
                "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
-               "https://www.googleapis.com/auth/cloud-platform"]
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsInstancesAppProFilesGet'{..}
           = go _piapfgName _piapfgXgafv _piapfgUploadProtocol
               _piapfgAccessToken

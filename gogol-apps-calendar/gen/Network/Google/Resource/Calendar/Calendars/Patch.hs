@@ -37,8 +37,8 @@ module Network.Google.Resource.Calendar.Calendars.Patch
     , cpPayload
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.patch@ method which the
 -- 'CalendarsPatch' request conforms to.
@@ -56,7 +56,7 @@ type CalendarsPatchResource =
 data CalendarsPatch =
   CalendarsPatch'
     { _cpCalendarId :: !Text
-    , _cpPayload    :: !Calendar
+    , _cpPayload :: !Calendar
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

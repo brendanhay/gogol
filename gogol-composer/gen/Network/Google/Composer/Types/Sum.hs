@@ -16,7 +16,7 @@
 --
 module Network.Google.Composer.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Output only. The type of operation being performed.
 data OperationMetadataOperationType
@@ -32,6 +32,9 @@ data OperationMetadataOperationType
     | Update
       -- ^ @UPDATE@
       -- A resource update operation.
+    | Check
+      -- ^ @CHECK@
+      -- A resource check operation.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationMetadataOperationType
@@ -42,6 +45,7 @@ instance FromHttpApiData OperationMetadataOperationType where
         "CREATE" -> Right Create
         "DELETE" -> Right Delete'
         "UPDATE" -> Right Update
+        "CHECK" -> Right Check
         x -> Left ("Unable to parse OperationMetadataOperationType from: " <> x)
 
 instance ToHttpApiData OperationMetadataOperationType where
@@ -50,11 +54,46 @@ instance ToHttpApiData OperationMetadataOperationType where
         Create -> "CREATE"
         Delete' -> "DELETE"
         Update -> "UPDATE"
+        Check -> "CHECK"
 
 instance FromJSON OperationMetadataOperationType where
     parseJSON = parseJSONText "OperationMetadataOperationType"
 
 instance ToJSON OperationMetadataOperationType where
+    toJSON = toJSONText
+
+-- | Output only. Whether build has succeeded or failed on modules conflicts.
+data CheckUpgradeResponseContainsPypiModulesConflict
+    = ConflictResultUnspecified
+      -- ^ @CONFLICT_RESULT_UNSPECIFIED@
+      -- It is unknown whether build had conflicts or not.
+    | Conflict
+      -- ^ @CONFLICT@
+      -- There were python packages conflicts.
+    | NoConflict
+      -- ^ @NO_CONFLICT@
+      -- There were no python packages conflicts.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CheckUpgradeResponseContainsPypiModulesConflict
+
+instance FromHttpApiData CheckUpgradeResponseContainsPypiModulesConflict where
+    parseQueryParam = \case
+        "CONFLICT_RESULT_UNSPECIFIED" -> Right ConflictResultUnspecified
+        "CONFLICT" -> Right Conflict
+        "NO_CONFLICT" -> Right NoConflict
+        x -> Left ("Unable to parse CheckUpgradeResponseContainsPypiModulesConflict from: " <> x)
+
+instance ToHttpApiData CheckUpgradeResponseContainsPypiModulesConflict where
+    toQueryParam = \case
+        ConflictResultUnspecified -> "CONFLICT_RESULT_UNSPECIFIED"
+        Conflict -> "CONFLICT"
+        NoConflict -> "NO_CONFLICT"
+
+instance FromJSON CheckUpgradeResponseContainsPypiModulesConflict where
+    parseJSON = parseJSONText "CheckUpgradeResponseContainsPypiModulesConflict"
+
+instance ToJSON CheckUpgradeResponseContainsPypiModulesConflict where
     toJSON = toJSONText
 
 -- | Output only. The current operation state.

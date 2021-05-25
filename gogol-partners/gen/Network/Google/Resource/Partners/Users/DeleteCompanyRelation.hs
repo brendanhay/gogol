@@ -49,8 +49,8 @@ module Network.Google.Resource.Partners.Users.DeleteCompanyRelation
     , udcrCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.users.deleteCompanyRelation@ method which the
 -- 'UsersDeleteCompanyRelation' request conforms to.
@@ -91,19 +91,19 @@ type UsersDeleteCompanyRelationResource =
 -- /See:/ 'usersDeleteCompanyRelation' smart constructor.
 data UsersDeleteCompanyRelation =
   UsersDeleteCompanyRelation'
-    { _udcrXgafv                                       :: !(Maybe Xgafv)
-    , _udcrUploadProtocol                              :: !(Maybe Text)
-    , _udcrAccessToken                                 :: !(Maybe Text)
-    , _udcrUploadType                                  :: !(Maybe Text)
-    , _udcrUserId                                      :: !Text
-    , _udcrRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _udcrRequestMetadataLocale                       :: !(Maybe Text)
-    , _udcrRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _udcrRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _udcrRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _udcrRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _udcrXgafv :: !(Maybe Xgafv)
+    , _udcrUploadProtocol :: !(Maybe Text)
+    , _udcrAccessToken :: !(Maybe Text)
+    , _udcrUploadType :: !(Maybe Text)
+    , _udcrUserId :: !Text
+    , _udcrRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _udcrRequestMetadataLocale :: !(Maybe Text)
+    , _udcrRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _udcrRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _udcrRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _udcrRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _udcrRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _udcrCallback                                    :: !(Maybe Text)
+    , _udcrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

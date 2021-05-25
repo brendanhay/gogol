@@ -43,8 +43,8 @@ module Network.Google.Resource.Container.Projects.Locations.GetServerConfig
     , plgscCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.getServerConfig@ method which the
 -- 'ProjectsLocationsGetServerConfig' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsLocationsGetServerConfigResource =
 -- /See:/ 'projectsLocationsGetServerConfig' smart constructor.
 data ProjectsLocationsGetServerConfig =
   ProjectsLocationsGetServerConfig'
-    { _plgscXgafv          :: !(Maybe Xgafv)
+    { _plgscXgafv :: !(Maybe Xgafv)
     , _plgscUploadProtocol :: !(Maybe Text)
-    , _plgscAccessToken    :: !(Maybe Text)
-    , _plgscUploadType     :: !(Maybe Text)
-    , _plgscZone           :: !(Maybe Text)
-    , _plgscName           :: !Text
-    , _plgscProjectId      :: !(Maybe Text)
-    , _plgscCallback       :: !(Maybe Text)
+    , _plgscAccessToken :: !(Maybe Text)
+    , _plgscUploadType :: !(Maybe Text)
+    , _plgscZone :: !(Maybe Text)
+    , _plgscName :: !Text
+    , _plgscProjectId :: !(Maybe Text)
+    , _plgscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,14 +137,15 @@ plgscUploadType
       (\ s a -> s{_plgscUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) to return operations for. This
--- field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) to
+-- return operations for. This field has been deprecated and replaced by
+-- the name field.
 plgscZone :: Lens' ProjectsLocationsGetServerConfig (Maybe Text)
 plgscZone
   = lens _plgscZone (\ s a -> s{_plgscZone = a})
 
 -- | The name (project and location) of the server config to get, specified
--- in the format \'projects\/*\/locations\/*\'.
+-- in the format \`projects\/*\/locations\/*\`.
 plgscName :: Lens' ProjectsLocationsGetServerConfig Text
 plgscName
   = lens _plgscName (\ s a -> s{_plgscName = a})

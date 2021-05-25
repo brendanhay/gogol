@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates the given topic with the given name. See the
--- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
+-- Creates the given topic with the given name. See the [resource name
+-- rules] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.create@.
 module Network.Google.Resource.PubSub.Projects.Topics.Create
@@ -43,8 +43,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Create
     , ptcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.create@ method which the
 -- 'ProjectsTopicsCreate' request conforms to.
@@ -59,19 +59,19 @@ type ProjectsTopicsCreateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Topic :> Put '[JSON] Topic
 
--- | Creates the given topic with the given name. See the
--- <https://cloud.google.com/pubsub/docs/admin#resource_names resource name rules>.
+-- | Creates the given topic with the given name. See the [resource name
+-- rules] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
 --
 -- /See:/ 'projectsTopicsCreate' smart constructor.
 data ProjectsTopicsCreate =
   ProjectsTopicsCreate'
-    { _ptcXgafv          :: !(Maybe Xgafv)
+    { _ptcXgafv :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
-    , _ptcAccessToken    :: !(Maybe Text)
-    , _ptcUploadType     :: !(Maybe Text)
-    , _ptcPayload        :: !Topic
-    , _ptcName           :: !Text
-    , _ptcCallback       :: !(Maybe Text)
+    , _ptcAccessToken :: !(Maybe Text)
+    , _ptcUploadType :: !(Maybe Text)
+    , _ptcPayload :: !Topic
+    , _ptcName :: !Text
+    , _ptcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,7 +136,7 @@ ptcPayload :: Lens' ProjectsTopicsCreate Topic
 ptcPayload
   = lens _ptcPayload (\ s a -> s{_ptcPayload = a})
 
--- | The name of the topic. It must have the format
+-- | Required. The name of the topic. It must have the format
 -- \`\"projects\/{project}\/topics\/{topic}\"\`. \`{topic}\` must start
 -- with a letter, and contain only letters (\`[A-Za-z]\`), numbers
 -- (\`[0-9]\`), dashes (\`-\`), underscores (\`_\`), periods (\`.\`),

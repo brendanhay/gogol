@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Networks.SwitchToCustomMode
     , nstcmNetwork
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.switchToCustomMode@ method which the
 -- 'NetworksSwitchToCustomMode' request conforms to.
@@ -61,8 +61,8 @@ type NetworksSwitchToCustomModeResource =
 data NetworksSwitchToCustomMode =
   NetworksSwitchToCustomMode'
     { _nstcmRequestId :: !(Maybe Text)
-    , _nstcmProject   :: !Text
-    , _nstcmNetwork   :: !Text
+    , _nstcmProject :: !Text
+    , _nstcmNetwork :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

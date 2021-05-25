@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.GlobalAddresses.List
     , GlobalAddressesList
 
     -- * Request Lenses
+    , galReturnPartialSuccess
     , galOrderBy
     , galProject
     , galFilter
@@ -40,8 +41,8 @@ module Network.Google.Resource.Compute.GlobalAddresses.List
     , galMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalAddresses.list@ method which the
 -- 'GlobalAddressesList' request conforms to.
@@ -52,21 +53,23 @@ type GlobalAddressesListResource =
            Capture "project" Text :>
              "global" :>
                "addresses" :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] AddressList
+                 QueryParam "returnPartialSuccess" Bool :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves a list of global addresses.
 --
 -- /See:/ 'globalAddressesList' smart constructor.
 data GlobalAddressesList =
   GlobalAddressesList'
-    { _galOrderBy    :: !(Maybe Text)
-    , _galProject    :: !Text
-    , _galFilter     :: !(Maybe Text)
-    , _galPageToken  :: !(Maybe Text)
+    { _galReturnPartialSuccess :: !(Maybe Bool)
+    , _galOrderBy :: !(Maybe Text)
+    , _galProject :: !Text
+    , _galFilter :: !(Maybe Text)
+    , _galPageToken :: !(Maybe Text)
     , _galMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -75,6 +78,8 @@ data GlobalAddressesList =
 -- | Creates a value of 'GlobalAddressesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'galReturnPartialSuccess'
 --
 -- * 'galOrderBy'
 --
@@ -90,7 +95,8 @@ globalAddressesList
     -> GlobalAddressesList
 globalAddressesList pGalProject_ =
   GlobalAddressesList'
-    { _galOrderBy = Nothing
+    { _galReturnPartialSuccess = Nothing
+    , _galOrderBy = Nothing
     , _galProject = pGalProject_
     , _galFilter = Nothing
     , _galPageToken = Nothing
@@ -98,14 +104,21 @@ globalAddressesList pGalProject_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+galReturnPartialSuccess :: Lens' GlobalAddressesList (Maybe Bool)
+galReturnPartialSuccess
+  = lens _galReturnPartialSuccess
+      (\ s a -> s{_galReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 galOrderBy :: Lens' GlobalAddressesList (Maybe Text)
 galOrderBy
   = lens _galOrderBy (\ s a -> s{_galOrderBy = a})
@@ -118,34 +131,36 @@ galProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 galFilter :: Lens' GlobalAddressesList (Maybe Text)
 galFilter
   = lens _galFilter (\ s a -> s{_galFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 galPageToken :: Lens' GlobalAddressesList (Maybe Text)
 galPageToken
   = lens _galPageToken (\ s a -> s{_galPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 galMaxResults :: Lens' GlobalAddressesList Word32
 galMaxResults
   = lens _galMaxResults
@@ -159,7 +174,9 @@ instance GoogleRequest GlobalAddressesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalAddressesList'{..}
-          = go _galProject _galOrderBy _galFilter _galPageToken
+          = go _galProject _galReturnPartialSuccess _galOrderBy
+              _galFilter
+              _galPageToken
               (Just _galMaxResults)
               (Just AltJSON)
               computeService

@@ -56,8 +56,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.Patch
     , ccwpCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.patch@ method which the
 -- 'CoursesCourseWorkPatch' request conforms to.
@@ -94,15 +94,15 @@ type CoursesCourseWorkPatchResource =
 -- /See:/ 'coursesCourseWorkPatch' smart constructor.
 data CoursesCourseWorkPatch =
   CoursesCourseWorkPatch'
-    { _ccwpXgafv          :: !(Maybe Xgafv)
+    { _ccwpXgafv :: !(Maybe Xgafv)
     , _ccwpUploadProtocol :: !(Maybe Text)
-    , _ccwpUpdateMask     :: !(Maybe GFieldMask)
-    , _ccwpCourseId       :: !Text
-    , _ccwpAccessToken    :: !(Maybe Text)
-    , _ccwpUploadType     :: !(Maybe Text)
-    , _ccwpPayload        :: !CourseWork
-    , _ccwpId             :: !Text
-    , _ccwpCallback       :: !(Maybe Text)
+    , _ccwpUpdateMask :: !(Maybe GFieldMask)
+    , _ccwpCourseId :: !Text
+    , _ccwpAccessToken :: !(Maybe Text)
+    , _ccwpUploadType :: !(Maybe Text)
+    , _ccwpPayload :: !CourseWork
+    , _ccwpId :: !Text
+    , _ccwpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -163,10 +163,11 @@ ccwpUploadProtocol
 -- are specified. If a field supports empty values, it can be cleared by
 -- specifying it in the update mask and not in the CourseWork object. If a
 -- field that does not support empty values is included in the update mask
--- and not set in the CourseWork object, an \`INVALID_ARGUMENT\` error will
--- be returned. The following fields may be specified by teachers: *
--- \`title\` * \`description\` * \`state\` * \`due_date\` * \`due_time\` *
--- \`max_points\` * \`scheduled_time\` * \`submission_modification_mode\`
+-- and not set in the CourseWork object, an \`INVALID_ARGUMENT\` error is
+-- returned. The following fields may be specified by teachers: * \`title\`
+-- * \`description\` * \`state\` * \`due_date\` * \`due_time\` *
+-- \`max_points\` * \`scheduled_time\` * \`submission_modification_mode\` *
+-- \`topic_id\`
 ccwpUpdateMask :: Lens' CoursesCourseWorkPatch (Maybe GFieldMask)
 ccwpUpdateMask
   = lens _ccwpUpdateMask

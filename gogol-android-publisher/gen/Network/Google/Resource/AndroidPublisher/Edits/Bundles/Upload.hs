@@ -23,11 +23,11 @@
 -- Uploads a new Android App Bundle to this edit. If you are using the
 -- Google API client libraries, please increase the timeout of the http
 -- request before calling this endpoint (a timeout of 2 minutes is
--- recommended). See:
--- https:\/\/developers.google.com\/api-client-library\/java\/google-api-java-client\/errors
+-- recommended). See [Timeouts and
+-- Errors](https:\/\/developers.google.com\/api-client-library\/java\/google-api-java-client\/errors)
 -- for an example in java.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.bundles.upload@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.bundles.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
     (
     -- * REST Resource
@@ -38,13 +38,18 @@ module Network.Google.Resource.AndroidPublisher.Edits.Bundles.Upload
     , EditsBundlesUpload
 
     -- * Request Lenses
+    , ebuXgafv
+    , ebuUploadProtocol
     , ebuPackageName
+    , ebuAccessToken
+    , ebuUploadType
     , ebuAckBundleInstallationWarning
     , ebuEditId
+    , ebuCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.bundles.upload@ method which the
 -- 'EditsBundlesUpload' request conforms to.
@@ -56,8 +61,13 @@ type EditsBundlesUploadResource =
              "edits" :>
                Capture "editId" Text :>
                  "bundles" :>
-                   QueryParam "ackBundleInstallationWarning" Bool :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] Bundle
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "ackBundleInstallationWarning" Bool :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Post '[JSON] Bundle
        :<|>
        "upload" :>
          "androidpublisher" :>
@@ -67,24 +77,34 @@ type EditsBundlesUploadResource =
                  "edits" :>
                    Capture "editId" Text :>
                      "bundles" :>
-                       QueryParam "ackBundleInstallationWarning" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           QueryParam "uploadType" AltMedia :>
-                             AltMedia :> Post '[JSON] Bundle
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "ackBundleInstallationWarning" Bool :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     QueryParam "uploadType" AltMedia :>
+                                       AltMedia :> Post '[JSON] Bundle
 
 -- | Uploads a new Android App Bundle to this edit. If you are using the
 -- Google API client libraries, please increase the timeout of the http
 -- request before calling this endpoint (a timeout of 2 minutes is
--- recommended). See:
--- https:\/\/developers.google.com\/api-client-library\/java\/google-api-java-client\/errors
+-- recommended). See [Timeouts and
+-- Errors](https:\/\/developers.google.com\/api-client-library\/java\/google-api-java-client\/errors)
 -- for an example in java.
 --
 -- /See:/ 'editsBundlesUpload' smart constructor.
 data EditsBundlesUpload =
   EditsBundlesUpload'
-    { _ebuPackageName                  :: !Text
+    { _ebuXgafv :: !(Maybe Xgafv)
+    , _ebuUploadProtocol :: !(Maybe Text)
+    , _ebuPackageName :: !Text
+    , _ebuAccessToken :: !(Maybe Text)
+    , _ebuUploadType :: !(Maybe Text)
     , _ebuAckBundleInstallationWarning :: !(Maybe Bool)
-    , _ebuEditId                       :: !Text
+    , _ebuEditId :: !Text
+    , _ebuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,50 +113,95 @@ data EditsBundlesUpload =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ebuXgafv'
+--
+-- * 'ebuUploadProtocol'
+--
 -- * 'ebuPackageName'
+--
+-- * 'ebuAccessToken'
+--
+-- * 'ebuUploadType'
 --
 -- * 'ebuAckBundleInstallationWarning'
 --
 -- * 'ebuEditId'
+--
+-- * 'ebuCallback'
 editsBundlesUpload
     :: Text -- ^ 'ebuPackageName'
     -> Text -- ^ 'ebuEditId'
     -> EditsBundlesUpload
 editsBundlesUpload pEbuPackageName_ pEbuEditId_ =
   EditsBundlesUpload'
-    { _ebuPackageName = pEbuPackageName_
+    { _ebuXgafv = Nothing
+    , _ebuUploadProtocol = Nothing
+    , _ebuPackageName = pEbuPackageName_
+    , _ebuAccessToken = Nothing
+    , _ebuUploadType = Nothing
     , _ebuAckBundleInstallationWarning = Nothing
     , _ebuEditId = pEbuEditId_
+    , _ebuCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+ebuXgafv :: Lens' EditsBundlesUpload (Maybe Xgafv)
+ebuXgafv = lens _ebuXgafv (\ s a -> s{_ebuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ebuUploadProtocol :: Lens' EditsBundlesUpload (Maybe Text)
+ebuUploadProtocol
+  = lens _ebuUploadProtocol
+      (\ s a -> s{_ebuUploadProtocol = a})
+
+-- | Package name of the app.
 ebuPackageName :: Lens' EditsBundlesUpload Text
 ebuPackageName
   = lens _ebuPackageName
       (\ s a -> s{_ebuPackageName = a})
 
--- | Must be set to true if the bundle installation may trigger a warning on
--- user devices (for example, if installation size may be over a threshold,
--- typically 100 MB).
+-- | OAuth access token.
+ebuAccessToken :: Lens' EditsBundlesUpload (Maybe Text)
+ebuAccessToken
+  = lens _ebuAccessToken
+      (\ s a -> s{_ebuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ebuUploadType :: Lens' EditsBundlesUpload (Maybe Text)
+ebuUploadType
+  = lens _ebuUploadType
+      (\ s a -> s{_ebuUploadType = a})
+
+-- | Must be set to true if the app bundle installation may trigger a warning
+-- on user devices (for example, if installation size may be over a
+-- threshold, typically 100 MB).
 ebuAckBundleInstallationWarning :: Lens' EditsBundlesUpload (Maybe Bool)
 ebuAckBundleInstallationWarning
   = lens _ebuAckBundleInstallationWarning
       (\ s a -> s{_ebuAckBundleInstallationWarning = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 ebuEditId :: Lens' EditsBundlesUpload Text
 ebuEditId
   = lens _ebuEditId (\ s a -> s{_ebuEditId = a})
+
+-- | JSONP
+ebuCallback :: Lens' EditsBundlesUpload (Maybe Text)
+ebuCallback
+  = lens _ebuCallback (\ s a -> s{_ebuCallback = a})
 
 instance GoogleRequest EditsBundlesUpload where
         type Rs EditsBundlesUpload = Bundle
         type Scopes EditsBundlesUpload =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsBundlesUpload'{..}
-          = go _ebuPackageName _ebuEditId
+          = go _ebuPackageName _ebuEditId _ebuXgafv
+              _ebuUploadProtocol
+              _ebuAccessToken
+              _ebuUploadType
               _ebuAckBundleInstallationWarning
+              _ebuCallback
               (Just AltJSON)
               androidPublisherService
           where go :<|> _
@@ -152,8 +217,12 @@ instance GoogleRequest
              Scopes EditsBundlesUpload
         requestClient
           (MediaUpload EditsBundlesUpload'{..} body)
-          = go _ebuPackageName _ebuEditId
+          = go _ebuPackageName _ebuEditId _ebuXgafv
+              _ebuUploadProtocol
+              _ebuAccessToken
+              _ebuUploadType
               _ebuAckBundleInstallationWarning
+              _ebuCallback
               (Just AltJSON)
               (Just AltMedia)
               body

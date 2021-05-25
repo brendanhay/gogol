@@ -17,19 +17,18 @@
 --
 module Network.Google.Spanner.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Spanner.Types.Sum
 
--- | The SQL string can contain parameter placeholders. A parameter
--- placeholder consists of \`\'\'\'\` followed by the parameter name.
--- Parameter names consist of any combination of letters, numbers, and
--- underscores. Parameters can appear anywhere that a literal value is
--- expected. The same parameter name can be used more than once, for
--- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
--- error to execute an SQL statement with unbound parameters. Parameter
--- values are specified using \`params\`, which is a JSON object whose keys
--- are parameter names, and whose values are the corresponding parameter
--- values.
+-- | Parameter names and values that bind to placeholders in the SQL string.
+-- A parameter placeholder consists of the \`\'\` character followed by the
+-- parameter name (for example, \`\'firstName\`). Parameter names must
+-- conform to the naming requirements of identifiers as specified at
+-- https:\/\/cloud.google.com\/spanner\/docs\/lexical#identifiers.
+-- Parameters can appear anywhere that a literal value is expected. The
+-- same parameter name can be used more than once, for example: \`\"WHERE
+-- id > \'msg_id AND id \< \'msg_id + 100\"\` It is an error to execute a
+-- SQL statement with unbound parameters.
 --
 -- /See:/ 'executeSQLRequestParams' smart constructor.
 newtype ExecuteSQLRequestParams =
@@ -66,6 +65,116 @@ instance FromJSON ExecuteSQLRequestParams where
 
 instance ToJSON ExecuteSQLRequestParams where
         toJSON = toJSON . _esqlrpAddtional
+
+-- | The request for RestoreDatabase.
+--
+-- /See:/ 'restoreDatabaseRequest' smart constructor.
+data RestoreDatabaseRequest =
+  RestoreDatabaseRequest'
+    { _rdrBackup :: !(Maybe Text)
+    , _rdrEncryptionConfig :: !(Maybe RestoreDatabaseEncryptionConfig)
+    , _rdrDatabaseId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreDatabaseRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdrBackup'
+--
+-- * 'rdrEncryptionConfig'
+--
+-- * 'rdrDatabaseId'
+restoreDatabaseRequest
+    :: RestoreDatabaseRequest
+restoreDatabaseRequest =
+  RestoreDatabaseRequest'
+    { _rdrBackup = Nothing
+    , _rdrEncryptionConfig = Nothing
+    , _rdrDatabaseId = Nothing
+    }
+
+
+-- | Name of the backup from which to restore. Values are of the form
+-- \`projects\/\/instances\/\/backups\/\`.
+rdrBackup :: Lens' RestoreDatabaseRequest (Maybe Text)
+rdrBackup
+  = lens _rdrBackup (\ s a -> s{_rdrBackup = a})
+
+-- | Optional. An encryption configuration describing the encryption type and
+-- key resources in Cloud KMS used to encrypt\/decrypt the database to
+-- restore to. If this field is not specified, the restored database will
+-- use the same encryption configuration as the backup by default, namely
+-- encryption_type = \`USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION\`.
+rdrEncryptionConfig :: Lens' RestoreDatabaseRequest (Maybe RestoreDatabaseEncryptionConfig)
+rdrEncryptionConfig
+  = lens _rdrEncryptionConfig
+      (\ s a -> s{_rdrEncryptionConfig = a})
+
+-- | Required. The id of the database to create and restore to. This database
+-- must not already exist. The \`database_id\` appended to \`parent\` forms
+-- the full database name of the form
+-- \`projects\/\/instances\/\/databases\/\`.
+rdrDatabaseId :: Lens' RestoreDatabaseRequest (Maybe Text)
+rdrDatabaseId
+  = lens _rdrDatabaseId
+      (\ s a -> s{_rdrDatabaseId = a})
+
+instance FromJSON RestoreDatabaseRequest where
+        parseJSON
+          = withObject "RestoreDatabaseRequest"
+              (\ o ->
+                 RestoreDatabaseRequest' <$>
+                   (o .:? "backup") <*> (o .:? "encryptionConfig") <*>
+                     (o .:? "databaseId"))
+
+instance ToJSON RestoreDatabaseRequest where
+        toJSON RestoreDatabaseRequest'{..}
+          = object
+              (catMaybes
+                 [("backup" .=) <$> _rdrBackup,
+                  ("encryptionConfig" .=) <$> _rdrEncryptionConfig,
+                  ("databaseId" .=) <$> _rdrDatabaseId])
+
+-- | The (sparse) mapping from time index to an IndexedHotKey message,
+-- representing those time intervals for which there are hot keys.
+--
+-- /See:/ 'metricIndexedHotKeys' smart constructor.
+newtype MetricIndexedHotKeys =
+  MetricIndexedHotKeys'
+    { _mihkAddtional :: HashMap Text IndexedHotKey
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MetricIndexedHotKeys' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mihkAddtional'
+metricIndexedHotKeys
+    :: HashMap Text IndexedHotKey -- ^ 'mihkAddtional'
+    -> MetricIndexedHotKeys
+metricIndexedHotKeys pMihkAddtional_ =
+  MetricIndexedHotKeys' {_mihkAddtional = _Coerce # pMihkAddtional_}
+
+
+mihkAddtional :: Lens' MetricIndexedHotKeys (HashMap Text IndexedHotKey)
+mihkAddtional
+  = lens _mihkAddtional
+      (\ s a -> s{_mihkAddtional = a})
+      . _Coerce
+
+instance FromJSON MetricIndexedHotKeys where
+        parseJSON
+          = withObject "MetricIndexedHotKeys"
+              (\ o ->
+                 MetricIndexedHotKeys' <$> (parseJSONObject o))
+
+instance ToJSON MetricIndexedHotKeys where
+        toJSON = toJSON . _mihkAddtional
 
 -- | Cloud Labels are a flexible and lightweight mechanism for organizing
 -- cloud resources into groups that reflect a customer\'s organizational
@@ -155,140 +264,141 @@ instance ToJSON CreateDatabaseMetadata where
           = object
               (catMaybes [("database" .=) <$> _cdmDatabase])
 
--- | # Transactions Each session can have at most one active transaction at a
--- time. After the active transaction is completed, the session can
--- immediately be re-used for the next transaction. It is not necessary to
--- create a new session for each transaction. # Transaction Modes Cloud
--- Spanner supports three transaction modes: 1. Locking read-write. This
--- type of transaction is the only way to write data into Cloud Spanner.
--- These transactions rely on pessimistic locking and, if necessary,
--- two-phase commit. Locking read-write transactions may abort, requiring
--- the application to retry. 2. Snapshot read-only. This transaction type
--- provides guaranteed consistency across several reads, but does not allow
--- writes. Snapshot read-only transactions can be configured to read at
--- timestamps in the past. Snapshot read-only transactions do not need to
--- be committed. 3. Partitioned DML. This type of transaction is used to
--- execute a single Partitioned DML statement. Partitioned DML partitions
--- the key space and runs the DML statement over each partition in parallel
--- using separate, internal transactions that commit independently.
--- Partitioned DML transactions do not need to be committed. For
--- transactions that only read, snapshot read-only transactions provide
--- simpler semantics and are almost always faster. In particular, read-only
--- transactions do not take locks, so they do not conflict with read-write
--- transactions. As a consequence of not taking locks, they also do not
--- abort, so retry loops are not needed. Transactions may only read\/write
--- data in a single database. They may, however, read\/write data in
--- different tables within that database. ## Locking Read-Write
--- Transactions Locking transactions may be used to atomically
--- read-modify-write data anywhere in a database. This type of transaction
--- is externally consistent. Clients should attempt to minimize the amount
--- of time a transaction is active. Faster transactions commit with higher
--- probability and cause less contention. Cloud Spanner attempts to keep
--- read locks active as long as the transaction continues to do reads, and
--- the transaction has not been terminated by Commit or Rollback. Long
--- periods of inactivity at the client may cause Cloud Spanner to release a
--- transaction\'s locks and abort it. Conceptually, a read-write
--- transaction consists of zero or more reads or SQL statements followed by
--- Commit. At any time before Commit, the client can send a Rollback
--- request to abort the transaction. ### Semantics Cloud Spanner can commit
--- the transaction if all read locks it acquired are still valid at commit
--- time, and it is able to acquire write locks for all writes. Cloud
--- Spanner can abort the transaction for any reason. If a commit attempt
--- returns \`ABORTED\`, Cloud Spanner guarantees that the transaction has
--- not modified any user data in Cloud Spanner. Unless the transaction
--- commits, Cloud Spanner makes no guarantees about how long the
--- transaction\'s locks were held for. It is an error to use Cloud Spanner
--- locks for any sort of mutual exclusion other than between Cloud Spanner
--- transactions themselves. ### Retrying Aborted Transactions When a
--- transaction aborts, the application can choose to retry the whole
--- transaction again. To maximize the chances of successfully committing
--- the retry, the client should execute the retry in the same session as
--- the original attempt. The original session\'s lock priority increases
--- with each consecutive abort, meaning that each attempt has a slightly
--- better chance of success than the previous. Under some circumstances
--- (e.g., many transactions attempting to modify the same row(s)), a
--- transaction can abort many times in a short period before successfully
--- committing. Thus, it is not a good idea to cap the number of retries a
--- transaction can attempt; instead, it is better to limit the total amount
--- of wall time spent retrying. ### Idle Transactions A transaction is
--- considered idle if it has no outstanding reads or SQL queries and has
--- not started a read or SQL query within the last 10 seconds. Idle
--- transactions can be aborted by Cloud Spanner so that they don\'t hold on
--- to locks indefinitely. In that case, the commit will fail with error
--- \`ABORTED\`. If this behavior is undesirable, periodically executing a
--- simple SQL query in the transaction (e.g., \`SELECT 1\`) prevents the
--- transaction from becoming idle. ## Snapshot Read-Only Transactions
--- Snapshot read-only transactions provides a simpler method than locking
--- read-write transactions for doing several consistent reads. However,
--- this type of transaction does not support writes. Snapshot transactions
--- do not take locks. Instead, they work by choosing a Cloud Spanner
--- timestamp, then executing all reads at that timestamp. Since they do not
--- acquire locks, they do not block concurrent read-write transactions.
--- Unlike locking read-write transactions, snapshot read-only transactions
--- never abort. They can fail if the chosen read timestamp is garbage
--- collected; however, the default garbage collection policy is generous
--- enough that most applications do not need to worry about this in
--- practice. Snapshot read-only transactions do not need to call Commit or
--- Rollback (and in fact are not permitted to do so). To execute a snapshot
--- transaction, the client specifies a timestamp bound, which tells Cloud
--- Spanner how to choose a read timestamp. The types of timestamp bound
--- are: - Strong (the default). - Bounded staleness. - Exact staleness. If
--- the Cloud Spanner database to be read is geographically distributed,
--- stale read-only transactions can execute more quickly than strong or
--- read-write transaction, because they are able to execute far from the
--- leader replica. Each type of timestamp bound is discussed in detail
--- below. ### Strong Strong reads are guaranteed to see the effects of all
--- transactions that have committed before the start of the read.
--- Furthermore, all rows yielded by a single read are consistent with each
--- other -- if any part of the read observes a transaction, all parts of
--- the read see the transaction. Strong reads are not repeatable: two
--- consecutive strong read-only transactions might return inconsistent
--- results if there are concurrent writes. If consistency across reads is
--- required, the reads should be executed within a transaction or at an
--- exact read timestamp. See TransactionOptions.ReadOnly.strong. ### Exact
--- Staleness These timestamp bounds execute reads at a user-specified
--- timestamp. Reads at a timestamp are guaranteed to see a consistent
--- prefix of the global transaction history: they observe modifications
--- done by all transactions with a commit timestamp \<= the read timestamp,
--- and observe none of the modifications done by transactions with a larger
--- commit timestamp. They will block until all conflicting transactions
--- that may be assigned commit timestamps \<= the read timestamp have
--- finished. The timestamp can either be expressed as an absolute Cloud
--- Spanner commit timestamp or a staleness relative to the current time.
--- These modes do not require a \"negotiation phase\" to pick a timestamp.
--- As a result, they execute slightly faster than the equivalent boundedly
--- stale concurrency modes. On the other hand, boundedly stale reads
--- usually return fresher results. See
--- TransactionOptions.ReadOnly.read_timestamp and
--- TransactionOptions.ReadOnly.exact_staleness. ### Bounded Staleness
--- Bounded staleness modes allow Cloud Spanner to pick the read timestamp,
--- subject to a user-provided staleness bound. Cloud Spanner chooses the
--- newest timestamp within the staleness bound that allows execution of the
--- reads at the closest available replica without blocking. All rows
--- yielded are consistent with each other -- if any part of the read
--- observes a transaction, all parts of the read see the transaction.
--- Boundedly stale reads are not repeatable: two stale reads, even if they
--- use the same staleness bound, can execute at different timestamps and
--- thus return inconsistent results. Boundedly stale reads execute in two
--- phases: the first phase negotiates a timestamp among all replicas needed
--- to serve the read. In the second phase, reads are executed at the
--- negotiated timestamp. As a result of the two phase execution, bounded
--- staleness reads are usually a little slower than comparable exact
--- staleness reads. However, they are typically able to return fresher
--- results, and are more likely to execute at the closest replica. Because
--- the timestamp negotiation requires up-front knowledge of which rows will
--- be read, it can only be used with single-use read-only transactions. See
+-- | Transactions: Each session can have at most one active transaction at a
+-- time (note that standalone reads and queries use a transaction
+-- internally and do count towards the one transaction limit). After the
+-- active transaction is completed, the session can immediately be re-used
+-- for the next transaction. It is not necessary to create a new session
+-- for each transaction. Transaction Modes: Cloud Spanner supports three
+-- transaction modes: 1. Locking read-write. This type of transaction is
+-- the only way to write data into Cloud Spanner. These transactions rely
+-- on pessimistic locking and, if necessary, two-phase commit. Locking
+-- read-write transactions may abort, requiring the application to retry.
+-- 2. Snapshot read-only. This transaction type provides guaranteed
+-- consistency across several reads, but does not allow writes. Snapshot
+-- read-only transactions can be configured to read at timestamps in the
+-- past. Snapshot read-only transactions do not need to be committed. 3.
+-- Partitioned DML. This type of transaction is used to execute a single
+-- Partitioned DML statement. Partitioned DML partitions the key space and
+-- runs the DML statement over each partition in parallel using separate,
+-- internal transactions that commit independently. Partitioned DML
+-- transactions do not need to be committed. For transactions that only
+-- read, snapshot read-only transactions provide simpler semantics and are
+-- almost always faster. In particular, read-only transactions do not take
+-- locks, so they do not conflict with read-write transactions. As a
+-- consequence of not taking locks, they also do not abort, so retry loops
+-- are not needed. Transactions may only read\/write data in a single
+-- database. They may, however, read\/write data in different tables within
+-- that database. Locking Read-Write Transactions: Locking transactions may
+-- be used to atomically read-modify-write data anywhere in a database.
+-- This type of transaction is externally consistent. Clients should
+-- attempt to minimize the amount of time a transaction is active. Faster
+-- transactions commit with higher probability and cause less contention.
+-- Cloud Spanner attempts to keep read locks active as long as the
+-- transaction continues to do reads, and the transaction has not been
+-- terminated by Commit or Rollback. Long periods of inactivity at the
+-- client may cause Cloud Spanner to release a transaction\'s locks and
+-- abort it. Conceptually, a read-write transaction consists of zero or
+-- more reads or SQL statements followed by Commit. At any time before
+-- Commit, the client can send a Rollback request to abort the transaction.
+-- Semantics: Cloud Spanner can commit the transaction if all read locks it
+-- acquired are still valid at commit time, and it is able to acquire write
+-- locks for all writes. Cloud Spanner can abort the transaction for any
+-- reason. If a commit attempt returns \`ABORTED\`, Cloud Spanner
+-- guarantees that the transaction has not modified any user data in Cloud
+-- Spanner. Unless the transaction commits, Cloud Spanner makes no
+-- guarantees about how long the transaction\'s locks were held for. It is
+-- an error to use Cloud Spanner locks for any sort of mutual exclusion
+-- other than between Cloud Spanner transactions themselves. Retrying
+-- Aborted Transactions: When a transaction aborts, the application can
+-- choose to retry the whole transaction again. To maximize the chances of
+-- successfully committing the retry, the client should execute the retry
+-- in the same session as the original attempt. The original session\'s
+-- lock priority increases with each consecutive abort, meaning that each
+-- attempt has a slightly better chance of success than the previous. Under
+-- some circumstances (e.g., many transactions attempting to modify the
+-- same row(s)), a transaction can abort many times in a short period
+-- before successfully committing. Thus, it is not a good idea to cap the
+-- number of retries a transaction can attempt; instead, it is better to
+-- limit the total amount of wall time spent retrying. Idle Transactions: A
+-- transaction is considered idle if it has no outstanding reads or SQL
+-- queries and has not started a read or SQL query within the last 10
+-- seconds. Idle transactions can be aborted by Cloud Spanner so that they
+-- don\'t hold on to locks indefinitely. In that case, the commit will fail
+-- with error \`ABORTED\`. If this behavior is undesirable, periodically
+-- executing a simple SQL query in the transaction (e.g., \`SELECT 1\`)
+-- prevents the transaction from becoming idle. Snapshot Read-Only
+-- Transactions: Snapshot read-only transactions provides a simpler method
+-- than locking read-write transactions for doing several consistent reads.
+-- However, this type of transaction does not support writes. Snapshot
+-- transactions do not take locks. Instead, they work by choosing a Cloud
+-- Spanner timestamp, then executing all reads at that timestamp. Since
+-- they do not acquire locks, they do not block concurrent read-write
+-- transactions. Unlike locking read-write transactions, snapshot read-only
+-- transactions never abort. They can fail if the chosen read timestamp is
+-- garbage collected; however, the default garbage collection policy is
+-- generous enough that most applications do not need to worry about this
+-- in practice. Snapshot read-only transactions do not need to call Commit
+-- or Rollback (and in fact are not permitted to do so). To execute a
+-- snapshot transaction, the client specifies a timestamp bound, which
+-- tells Cloud Spanner how to choose a read timestamp. The types of
+-- timestamp bound are: - Strong (the default). - Bounded staleness. -
+-- Exact staleness. If the Cloud Spanner database to be read is
+-- geographically distributed, stale read-only transactions can execute
+-- more quickly than strong or read-write transaction, because they are
+-- able to execute far from the leader replica. Each type of timestamp
+-- bound is discussed in detail below. Strong: Strong reads are guaranteed
+-- to see the effects of all transactions that have committed before the
+-- start of the read. Furthermore, all rows yielded by a single read are
+-- consistent with each other -- if any part of the read observes a
+-- transaction, all parts of the read see the transaction. Strong reads are
+-- not repeatable: two consecutive strong read-only transactions might
+-- return inconsistent results if there are concurrent writes. If
+-- consistency across reads is required, the reads should be executed
+-- within a transaction or at an exact read timestamp. See
+-- TransactionOptions.ReadOnly.strong. Exact Staleness: These timestamp
+-- bounds execute reads at a user-specified timestamp. Reads at a timestamp
+-- are guaranteed to see a consistent prefix of the global transaction
+-- history: they observe modifications done by all transactions with a
+-- commit timestamp \<= the read timestamp, and observe none of the
+-- modifications done by transactions with a larger commit timestamp. They
+-- will block until all conflicting transactions that may be assigned
+-- commit timestamps \<= the read timestamp have finished. The timestamp
+-- can either be expressed as an absolute Cloud Spanner commit timestamp or
+-- a staleness relative to the current time. These modes do not require a
+-- \"negotiation phase\" to pick a timestamp. As a result, they execute
+-- slightly faster than the equivalent boundedly stale concurrency modes.
+-- On the other hand, boundedly stale reads usually return fresher results.
+-- See TransactionOptions.ReadOnly.read_timestamp and
+-- TransactionOptions.ReadOnly.exact_staleness. Bounded Staleness: Bounded
+-- staleness modes allow Cloud Spanner to pick the read timestamp, subject
+-- to a user-provided staleness bound. Cloud Spanner chooses the newest
+-- timestamp within the staleness bound that allows execution of the reads
+-- at the closest available replica without blocking. All rows yielded are
+-- consistent with each other -- if any part of the read observes a
+-- transaction, all parts of the read see the transaction. Boundedly stale
+-- reads are not repeatable: two stale reads, even if they use the same
+-- staleness bound, can execute at different timestamps and thus return
+-- inconsistent results. Boundedly stale reads execute in two phases: the
+-- first phase negotiates a timestamp among all replicas needed to serve
+-- the read. In the second phase, reads are executed at the negotiated
+-- timestamp. As a result of the two phase execution, bounded staleness
+-- reads are usually a little slower than comparable exact staleness reads.
+-- However, they are typically able to return fresher results, and are more
+-- likely to execute at the closest replica. Because the timestamp
+-- negotiation requires up-front knowledge of which rows will be read, it
+-- can only be used with single-use read-only transactions. See
 -- TransactionOptions.ReadOnly.max_staleness and
--- TransactionOptions.ReadOnly.min_read_timestamp. ### Old Read Timestamps
--- and Garbage Collection Cloud Spanner continuously garbage collects
--- deleted and overwritten data in the background to reclaim storage space.
--- This process is known as \"version GC\". By default, version GC reclaims
+-- TransactionOptions.ReadOnly.min_read_timestamp. Old Read Timestamps and
+-- Garbage Collection: Cloud Spanner continuously garbage collects deleted
+-- and overwritten data in the background to reclaim storage space. This
+-- process is known as \"version GC\". By default, version GC reclaims
 -- versions after they are one hour old. Because of this, Cloud Spanner
 -- cannot perform reads at read timestamps more than one hour in the past.
 -- This restriction also applies to in-progress reads and\/or SQL queries
 -- whose timestamp become too old while executing. Reads and SQL queries
 -- with too-old read timestamps fail with the error
--- \`FAILED_PRECONDITION\`. ## Partitioned DML Transactions Partitioned DML
+-- \`FAILED_PRECONDITION\`. Partitioned DML Transactions: Partitioned DML
 -- transactions are used to execute DML statements with a different
 -- execution strategy that provides different, and often better,
 -- scalability properties for large, table-wide operations than DML in a
@@ -333,9 +443,9 @@ instance ToJSON CreateDatabaseMetadata where
 -- /See:/ 'transactionOptions' smart constructor.
 data TransactionOptions =
   TransactionOptions'
-    { _toReadWrite      :: !(Maybe ReadWrite)
+    { _toReadWrite :: !(Maybe ReadWrite)
     , _toPartitionedDml :: !(Maybe PartitionedDml)
-    , _toReadOnly       :: !(Maybe ReadOnly)
+    , _toReadOnly :: !(Maybe ReadOnly)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -395,6 +505,61 @@ instance ToJSON TransactionOptions where
                   ("partitionedDml" .=) <$> _toPartitionedDml,
                   ("readOnly" .=) <$> _toReadOnly])
 
+-- | The response for ListBackups.
+--
+-- /See:/ 'listBackupsResponse' smart constructor.
+data ListBackupsResponse =
+  ListBackupsResponse'
+    { _lbrNextPageToken :: !(Maybe Text)
+    , _lbrBackups :: !(Maybe [Backup])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListBackupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbrNextPageToken'
+--
+-- * 'lbrBackups'
+listBackupsResponse
+    :: ListBackupsResponse
+listBackupsResponse =
+  ListBackupsResponse' {_lbrNextPageToken = Nothing, _lbrBackups = Nothing}
+
+
+-- | \`next_page_token\` can be sent in a subsequent ListBackups call to
+-- fetch more of the matching backups.
+lbrNextPageToken :: Lens' ListBackupsResponse (Maybe Text)
+lbrNextPageToken
+  = lens _lbrNextPageToken
+      (\ s a -> s{_lbrNextPageToken = a})
+
+-- | The list of matching backups. Backups returned are ordered by
+-- \`create_time\` in descending order, starting from the most recent
+-- \`create_time\`.
+lbrBackups :: Lens' ListBackupsResponse [Backup]
+lbrBackups
+  = lens _lbrBackups (\ s a -> s{_lbrBackups = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListBackupsResponse where
+        parseJSON
+          = withObject "ListBackupsResponse"
+              (\ o ->
+                 ListBackupsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "backups" .!= mempty))
+
+instance ToJSON ListBackupsResponse where
+        toJSON ListBackupsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbrNextPageToken,
+                  ("backups" .=) <$> _lbrBackups])
+
 -- | The response for GetDatabaseDdl.
 --
 -- /See:/ 'getDatabaseDdlResponse' smart constructor.
@@ -438,45 +603,17 @@ instance ToJSON GetDatabaseDdlResponse where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -538,7 +675,7 @@ instance ToJSON Status where
 data CreateInstanceRequest =
   CreateInstanceRequest'
     { _cirInstanceId :: !(Maybe Text)
-    , _cirInstance   :: !(Maybe Instance)
+    , _cirInstance :: !(Maybe Instance)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -582,6 +719,61 @@ instance ToJSON CreateInstanceRequest where
               (catMaybes
                  [("instanceId" .=) <$> _cirInstanceId,
                   ("instance" .=) <$> _cirInstance])
+
+-- | The request for BatchCreateSessions.
+--
+-- /See:/ 'batchCreateSessionsRequest' smart constructor.
+data BatchCreateSessionsRequest =
+  BatchCreateSessionsRequest'
+    { _bcsrSessionCount :: !(Maybe (Textual Int32))
+    , _bcsrSessionTemplate :: !(Maybe Session)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchCreateSessionsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcsrSessionCount'
+--
+-- * 'bcsrSessionTemplate'
+batchCreateSessionsRequest
+    :: BatchCreateSessionsRequest
+batchCreateSessionsRequest =
+  BatchCreateSessionsRequest'
+    {_bcsrSessionCount = Nothing, _bcsrSessionTemplate = Nothing}
+
+
+-- | Required. The number of sessions to be created in this batch call. The
+-- API may return fewer than the requested number of sessions. If a
+-- specific number of sessions are desired, the client can make additional
+-- calls to BatchCreateSessions (adjusting session_count as necessary).
+bcsrSessionCount :: Lens' BatchCreateSessionsRequest (Maybe Int32)
+bcsrSessionCount
+  = lens _bcsrSessionCount
+      (\ s a -> s{_bcsrSessionCount = a})
+      . mapping _Coerce
+
+-- | Parameters to be applied to each created session.
+bcsrSessionTemplate :: Lens' BatchCreateSessionsRequest (Maybe Session)
+bcsrSessionTemplate
+  = lens _bcsrSessionTemplate
+      (\ s a -> s{_bcsrSessionTemplate = a})
+
+instance FromJSON BatchCreateSessionsRequest where
+        parseJSON
+          = withObject "BatchCreateSessionsRequest"
+              (\ o ->
+                 BatchCreateSessionsRequest' <$>
+                   (o .:? "sessionCount") <*> (o .:? "sessionTemplate"))
+
+instance ToJSON BatchCreateSessionsRequest where
+        toJSON BatchCreateSessionsRequest'{..}
+          = object
+              (catMaybes
+                 [("sessionCount" .=) <$> _bcsrSessionCount,
+                  ("sessionTemplate" .=) <$> _bcsrSessionTemplate])
 
 -- | Message type to initiate a read-write transaction. Currently this
 -- transaction type has no options.
@@ -644,13 +836,55 @@ instance ToJSON RollbackRequest where
               (catMaybes
                  [("transactionId" .=) <$> _rrTransactionId])
 
+-- | A (sparse) mapping from key bucket index to the KeyRangeInfos for that
+-- key bucket.
+--
+-- /See:/ 'indexedKeyRangeInfosKeyRangeInfos' smart constructor.
+newtype IndexedKeyRangeInfosKeyRangeInfos =
+  IndexedKeyRangeInfosKeyRangeInfos'
+    { _ikrikriAddtional :: HashMap Text KeyRangeInfos
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IndexedKeyRangeInfosKeyRangeInfos' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ikrikriAddtional'
+indexedKeyRangeInfosKeyRangeInfos
+    :: HashMap Text KeyRangeInfos -- ^ 'ikrikriAddtional'
+    -> IndexedKeyRangeInfosKeyRangeInfos
+indexedKeyRangeInfosKeyRangeInfos pIkrikriAddtional_ =
+  IndexedKeyRangeInfosKeyRangeInfos'
+    {_ikrikriAddtional = _Coerce # pIkrikriAddtional_}
+
+
+ikrikriAddtional :: Lens' IndexedKeyRangeInfosKeyRangeInfos (HashMap Text KeyRangeInfos)
+ikrikriAddtional
+  = lens _ikrikriAddtional
+      (\ s a -> s{_ikrikriAddtional = a})
+      . _Coerce
+
+instance FromJSON IndexedKeyRangeInfosKeyRangeInfos
+         where
+        parseJSON
+          = withObject "IndexedKeyRangeInfosKeyRangeInfos"
+              (\ o ->
+                 IndexedKeyRangeInfosKeyRangeInfos' <$>
+                   (parseJSONObject o))
+
+instance ToJSON IndexedKeyRangeInfosKeyRangeInfos
+         where
+        toJSON = toJSON . _ikrikriAddtional
+
 -- | The response for ListDatabases.
 --
 -- /See:/ 'listDatabasesResponse' smart constructor.
 data ListDatabasesResponse =
   ListDatabasesResponse'
     { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDatabases     :: !(Maybe [Database])
+    , _ldrDatabases :: !(Maybe [Database])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -697,16 +931,30 @@ instance ToJSON ListDatabasesResponse where
                  [("nextPageToken" .=) <$> _ldrNextPageToken,
                   ("databases" .=) <$> _ldrDatabases])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -734,26 +982,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -783,7 +1030,7 @@ instance ToJSON Expr where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -834,25 +1081,38 @@ instance ToJSON ListOperationsResponse where
 -- | Request message for \`GetIamPolicy\` method.
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
-data GetIAMPolicyRequest =
+newtype GetIAMPolicyRequest =
   GetIAMPolicyRequest'
+    { _giprOptions :: Maybe GetPolicyOptions
+    }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giprOptions'
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest'
+getIAMPolicyRequest = GetIAMPolicyRequest' {_giprOptions = Nothing}
 
+
+-- | OPTIONAL: A \`GetPolicyOptions\` object for specifying options to
+-- \`GetIamPolicy\`.
+giprOptions :: Lens' GetIAMPolicyRequest (Maybe GetPolicyOptions)
+giprOptions
+  = lens _giprOptions (\ s a -> s{_giprOptions = a})
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest')
+              (\ o -> GetIAMPolicyRequest' <$> (o .:? "options"))
 
 instance ToJSON GetIAMPolicyRequest where
-        toJSON = const emptyObject
+        toJSON GetIAMPolicyRequest'{..}
+          = object
+              (catMaybes [("options" .=) <$> _giprOptions])
 
 -- | Metadata associated with a parent-child relationship appearing in a
 -- PlanNode.
@@ -861,8 +1121,8 @@ instance ToJSON GetIAMPolicyRequest where
 data ChildLink =
   ChildLink'
     { _clChildIndex :: !(Maybe (Textual Int32))
-    , _clVariable   :: !(Maybe Text)
-    , _clType       :: !(Maybe Text)
+    , _clVariable :: !(Maybe Text)
+    , _clType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -922,12 +1182,53 @@ instance ToJSON ChildLink where
                   ("variable" .=) <$> _clVariable,
                   ("type" .=) <$> _clType])
 
+-- | A message representing a (sparse) collection of KeyRangeInfos for
+-- specific key buckets.
+--
+-- /See:/ 'indexedKeyRangeInfos' smart constructor.
+newtype IndexedKeyRangeInfos =
+  IndexedKeyRangeInfos'
+    { _ikriKeyRangeInfos :: Maybe IndexedKeyRangeInfosKeyRangeInfos
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IndexedKeyRangeInfos' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ikriKeyRangeInfos'
+indexedKeyRangeInfos
+    :: IndexedKeyRangeInfos
+indexedKeyRangeInfos = IndexedKeyRangeInfos' {_ikriKeyRangeInfos = Nothing}
+
+
+-- | A (sparse) mapping from key bucket index to the KeyRangeInfos for that
+-- key bucket.
+ikriKeyRangeInfos :: Lens' IndexedKeyRangeInfos (Maybe IndexedKeyRangeInfosKeyRangeInfos)
+ikriKeyRangeInfos
+  = lens _ikriKeyRangeInfos
+      (\ s a -> s{_ikriKeyRangeInfos = a})
+
+instance FromJSON IndexedKeyRangeInfos where
+        parseJSON
+          = withObject "IndexedKeyRangeInfos"
+              (\ o ->
+                 IndexedKeyRangeInfos' <$> (o .:? "keyRangeInfos"))
+
+instance ToJSON IndexedKeyRangeInfos where
+        toJSON IndexedKeyRangeInfos'{..}
+          = object
+              (catMaybes
+                 [("keyRangeInfos" .=) <$> _ikriKeyRangeInfos])
+
 -- | The request for BeginTransaction.
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
-newtype BeginTransactionRequest =
+data BeginTransactionRequest =
   BeginTransactionRequest'
-    { _btrOptions :: Maybe TransactionOptions
+    { _btrOptions :: !(Maybe TransactionOptions)
+    , _btrRequestOptions :: !(Maybe RequestOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -937,9 +1238,12 @@ newtype BeginTransactionRequest =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'btrOptions'
+--
+-- * 'btrRequestOptions'
 beginTransactionRequest
     :: BeginTransactionRequest
-beginTransactionRequest = BeginTransactionRequest' {_btrOptions = Nothing}
+beginTransactionRequest =
+  BeginTransactionRequest' {_btrOptions = Nothing, _btrRequestOptions = Nothing}
 
 
 -- | Required. Options for the new transaction.
@@ -947,22 +1251,133 @@ btrOptions :: Lens' BeginTransactionRequest (Maybe TransactionOptions)
 btrOptions
   = lens _btrOptions (\ s a -> s{_btrOptions = a})
 
+-- | Common options for this request. Priority is ignored for this request.
+-- Setting the priority in this request_options struct will not do
+-- anything. To set the priority for a transaction, set it on the reads and
+-- writes that are part of this transaction instead.
+btrRequestOptions :: Lens' BeginTransactionRequest (Maybe RequestOptions)
+btrRequestOptions
+  = lens _btrRequestOptions
+      (\ s a -> s{_btrRequestOptions = a})
+
 instance FromJSON BeginTransactionRequest where
         parseJSON
           = withObject "BeginTransactionRequest"
               (\ o ->
-                 BeginTransactionRequest' <$> (o .:? "options"))
+                 BeginTransactionRequest' <$>
+                   (o .:? "options") <*> (o .:? "requestOptions"))
 
 instance ToJSON BeginTransactionRequest where
         toJSON BeginTransactionRequest'{..}
-          = object (catMaybes [("options" .=) <$> _btrOptions])
+          = object
+              (catMaybes
+                 [("options" .=) <$> _btrOptions,
+                  ("requestOptions" .=) <$> _btrRequestOptions])
+
+-- | A (sparse) mapping from key bucket index to the index of the specific
+-- hot row key for that key bucket. The index of the hot row key can be
+-- translated to the actual row key via the
+-- ScanData.VisualizationData.indexed_keys repeated field.
+--
+-- /See:/ 'indexedHotKeySparseHotKeys' smart constructor.
+newtype IndexedHotKeySparseHotKeys =
+  IndexedHotKeySparseHotKeys'
+    { _ihkshkAddtional :: HashMap Text (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IndexedHotKeySparseHotKeys' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ihkshkAddtional'
+indexedHotKeySparseHotKeys
+    :: HashMap Text Int32 -- ^ 'ihkshkAddtional'
+    -> IndexedHotKeySparseHotKeys
+indexedHotKeySparseHotKeys pIhkshkAddtional_ =
+  IndexedHotKeySparseHotKeys' {_ihkshkAddtional = _Coerce # pIhkshkAddtional_}
+
+
+ihkshkAddtional :: Lens' IndexedHotKeySparseHotKeys (HashMap Text Int32)
+ihkshkAddtional
+  = lens _ihkshkAddtional
+      (\ s a -> s{_ihkshkAddtional = a})
+      . _Coerce
+
+instance FromJSON IndexedHotKeySparseHotKeys where
+        parseJSON
+          = withObject "IndexedHotKeySparseHotKeys"
+              (\ o ->
+                 IndexedHotKeySparseHotKeys' <$> (parseJSONObject o))
+
+instance ToJSON IndexedHotKeySparseHotKeys where
+        toJSON = toJSON . _ihkshkAddtional
+
+-- | The response for ListDatabaseOperations.
+--
+-- /See:/ 'listDatabaseOperationsResponse' smart constructor.
+data ListDatabaseOperationsResponse =
+  ListDatabaseOperationsResponse'
+    { _ldorNextPageToken :: !(Maybe Text)
+    , _ldorOperations :: !(Maybe [Operation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListDatabaseOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ldorNextPageToken'
+--
+-- * 'ldorOperations'
+listDatabaseOperationsResponse
+    :: ListDatabaseOperationsResponse
+listDatabaseOperationsResponse =
+  ListDatabaseOperationsResponse'
+    {_ldorNextPageToken = Nothing, _ldorOperations = Nothing}
+
+
+-- | \`next_page_token\` can be sent in a subsequent ListDatabaseOperations
+-- call to fetch more of the matching metadata.
+ldorNextPageToken :: Lens' ListDatabaseOperationsResponse (Maybe Text)
+ldorNextPageToken
+  = lens _ldorNextPageToken
+      (\ s a -> s{_ldorNextPageToken = a})
+
+-- | The list of matching database long-running operations. Each operation\'s
+-- name will be prefixed by the database\'s name. The operation\'s metadata
+-- field type \`metadata.type_url\` describes the type of the metadata.
+ldorOperations :: Lens' ListDatabaseOperationsResponse [Operation]
+ldorOperations
+  = lens _ldorOperations
+      (\ s a -> s{_ldorOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListDatabaseOperationsResponse
+         where
+        parseJSON
+          = withObject "ListDatabaseOperationsResponse"
+              (\ o ->
+                 ListDatabaseOperationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListDatabaseOperationsResponse where
+        toJSON ListDatabaseOperationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ldorNextPageToken,
+                  ("operations" .=) <$> _ldorOperations])
 
 -- | Options for a PartitionQueryRequest and PartitionReadRequest.
 --
 -- /See:/ 'partitionOptions' smart constructor.
 data PartitionOptions =
   PartitionOptions'
-    { _poMaxPartitions      :: !(Maybe (Textual Int64))
+    { _poMaxPartitions :: !(Maybe (Textual Int64))
     , _poPartitionSizeBytes :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1025,10 +1440,10 @@ instance ToJSON PartitionOptions where
 -- /See:/ 'resultSetStats' smart constructor.
 data ResultSetStats =
   ResultSetStats'
-    { _rssRowCountExact      :: !(Maybe (Textual Int64))
+    { _rssRowCountExact :: !(Maybe (Textual Int64))
     , _rssRowCountLowerBound :: !(Maybe (Textual Int64))
-    , _rssQueryStats         :: !(Maybe ResultSetStatsQueryStats)
-    , _rssQueryPlan          :: !(Maybe QueryPlan)
+    , _rssQueryStats :: !(Maybe ResultSetStatsQueryStats)
+    , _rssQueryPlan :: !(Maybe QueryPlan)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1130,7 +1545,7 @@ field = Field' {_fName = Nothing, _fType = Nothing}
 -- queries, it is the column alias (e.g., \`\"Word\"\` in the query
 -- \`\"SELECT \'hello\' AS Word\"\`), or the column name (e.g.,
 -- \`\"ColName\"\` in the query \`\"SELECT ColName FROM Table\"\`). Some
--- columns might have an empty name (e.g., !\"SELECT UPPER(ColName)\"\`).
+-- columns might have an empty name (e.g., \`\"SELECT UPPER(ColName)\"\`).
 -- Note that a query result can contain multiple fields with the same name.
 fName :: Lens' Field (Maybe Text)
 fName = lens _fName (\ s a -> s{_fName = a})
@@ -1150,14 +1565,93 @@ instance ToJSON Field where
               (catMaybes
                  [("name" .=) <$> _fName, ("type" .=) <$> _fType])
 
+-- | Query optimizer configuration.
+--
+-- /See:/ 'queryOptions' smart constructor.
+data QueryOptions =
+  QueryOptions'
+    { _qoOptimizerStatisticsPackage :: !(Maybe Text)
+    , _qoOptimizerVersion :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'QueryOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qoOptimizerStatisticsPackage'
+--
+-- * 'qoOptimizerVersion'
+queryOptions
+    :: QueryOptions
+queryOptions =
+  QueryOptions'
+    {_qoOptimizerStatisticsPackage = Nothing, _qoOptimizerVersion = Nothing}
+
+
+-- | An option to control the selection of optimizer statistics package. This
+-- parameter allows individual queries to use a different query optimizer
+-- statistics package. Specifying \`latest\` as a value instructs Cloud
+-- Spanner to use the latest generated statistics package. If not
+-- specified, Cloud Spanner uses the statistics package set at the database
+-- level options, or the latest package if the database option is not set.
+-- The statistics package requested by the query has to be exempt from
+-- garbage collection. This can be achieved with the following DDL
+-- statement: \`\`\` ALTER STATISTICS SET OPTIONS (allow_gc=false) \`\`\`
+-- The list of available statistics packages can be queried from
+-- \`INFORMATION_SCHEMA.SPANNER_STATISTICS\`. Executing a SQL statement
+-- with an invalid optimizer statistics package or with a statistics
+-- package that allows garbage collection fails with an
+-- \`INVALID_ARGUMENT\` error.
+qoOptimizerStatisticsPackage :: Lens' QueryOptions (Maybe Text)
+qoOptimizerStatisticsPackage
+  = lens _qoOptimizerStatisticsPackage
+      (\ s a -> s{_qoOptimizerStatisticsPackage = a})
+
+-- | An option to control the selection of optimizer version. This parameter
+-- allows individual queries to pick different query optimizer versions.
+-- Specifying \`latest\` as a value instructs Cloud Spanner to use the
+-- latest supported query optimizer version. If not specified, Cloud
+-- Spanner uses the optimizer version set at the database level options.
+-- Any other positive integer (from the list of supported optimizer
+-- versions) overrides the default optimizer version for query execution.
+-- The list of supported optimizer versions can be queried from
+-- SPANNER_SYS.SUPPORTED_OPTIMIZER_VERSIONS. Executing a SQL statement with
+-- an invalid optimizer version fails with an \`INVALID_ARGUMENT\` error.
+-- See
+-- https:\/\/cloud.google.com\/spanner\/docs\/query-optimizer\/manage-query-optimizer
+-- for more information on managing the query optimizer. The
+-- \`optimizer_version\` statement hint has precedence over this setting.
+qoOptimizerVersion :: Lens' QueryOptions (Maybe Text)
+qoOptimizerVersion
+  = lens _qoOptimizerVersion
+      (\ s a -> s{_qoOptimizerVersion = a})
+
+instance FromJSON QueryOptions where
+        parseJSON
+          = withObject "QueryOptions"
+              (\ o ->
+                 QueryOptions' <$>
+                   (o .:? "optimizerStatisticsPackage") <*>
+                     (o .:? "optimizerVersion"))
+
+instance ToJSON QueryOptions where
+        toJSON QueryOptions'{..}
+          = object
+              (catMaybes
+                 [("optimizerStatisticsPackage" .=) <$>
+                    _qoOptimizerStatisticsPackage,
+                  ("optimizerVersion" .=) <$> _qoOptimizerVersion])
+
 -- | Arguments to insert, update, insert_or_update, and replace operations.
 --
 -- /See:/ 'write' smart constructor.
 data Write =
   Write'
-    { _wValues  :: !(Maybe [[JSONValue]])
+    { _wValues :: !(Maybe [[JSONValue]])
     , _wColumns :: !(Maybe [Text])
-    , _wTable   :: !(Maybe Text)
+    , _wTable :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1228,9 +1722,9 @@ instance ToJSON Write where
 -- /See:/ 'keySet' smart constructor.
 data KeySet =
   KeySet'
-    { _ksAll    :: !(Maybe Bool)
+    { _ksAll :: !(Maybe Bool)
     , _ksRanges :: !(Maybe [KeyRange])
-    , _ksKeys   :: !(Maybe [[JSONValue]])
+    , _ksKeys :: !(Maybe [[JSONValue]])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1293,8 +1787,8 @@ instance ToJSON KeySet where
 data Statement =
   Statement'
     { _sParamTypes :: !(Maybe StatementParamTypes)
-    , _sParams     :: !(Maybe StatementParams)
-    , _sSQL        :: !(Maybe Text)
+    , _sParams :: !(Maybe StatementParams)
+    , _sSQL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1324,16 +1818,14 @@ sParamTypes :: Lens' Statement (Maybe StatementParamTypes)
 sParamTypes
   = lens _sParamTypes (\ s a -> s{_sParamTypes = a})
 
--- | The DML string can contain parameter placeholders. A parameter
--- placeholder consists of \`\'\'\'\` followed by the parameter name.
--- Parameter names consist of any combination of letters, numbers, and
--- underscores. Parameters can appear anywhere that a literal value is
--- expected. The same parameter name can be used more than once, for
--- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
--- error to execute an SQL statement with unbound parameters. Parameter
--- values are specified using \`params\`, which is a JSON object whose keys
--- are parameter names, and whose values are the corresponding parameter
--- values.
+-- | Parameter names and values that bind to placeholders in the DML string.
+-- A parameter placeholder consists of the \`\'\` character followed by the
+-- parameter name (for example, \`\'firstName\`). Parameter names can
+-- contain letters, numbers, and underscores. Parameters can appear
+-- anywhere that a literal value is expected. The same parameter name can
+-- be used more than once, for example: \`\"WHERE id > \'msg_id AND id \<
+-- \'msg_id + 100\"\` It is an error to execute a SQL statement with
+-- unbound parameters.
 sParams :: Lens' Statement (Maybe StatementParams)
 sParams = lens _sParams (\ s a -> s{_sParams = a})
 
@@ -1356,16 +1848,14 @@ instance ToJSON Statement where
                  [("paramTypes" .=) <$> _sParamTypes,
                   ("params" .=) <$> _sParams, ("sql" .=) <$> _sSQL])
 
--- | The SQL query string can contain parameter placeholders. A parameter
--- placeholder consists of \`\'\'\'\` followed by the parameter name.
--- Parameter names consist of any combination of letters, numbers, and
--- underscores. Parameters can appear anywhere that a literal value is
--- expected. The same parameter name can be used more than once, for
--- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
--- error to execute an SQL query with unbound parameters. Parameter values
--- are specified using \`params\`, which is a JSON object whose keys are
--- parameter names, and whose values are the corresponding parameter
--- values.
+-- | Parameter names and values that bind to placeholders in the SQL string.
+-- A parameter placeholder consists of the \`\'\` character followed by the
+-- parameter name (for example, \`\'firstName\`). Parameter names can
+-- contain letters, numbers, and underscores. Parameters can appear
+-- anywhere that a literal value is expected. The same parameter name can
+-- be used more than once, for example: \`\"WHERE id > \'msg_id AND id \<
+-- \'msg_id + 100\"\` It is an error to execute a SQL statement with
+-- unbound parameters.
 --
 -- /See:/ 'partitionQueryRequestParams' smart constructor.
 newtype PartitionQueryRequestParams =
@@ -1403,25 +1893,27 @@ instance FromJSON PartitionQueryRequestParams where
 instance ToJSON PartitionQueryRequestParams where
         toJSON = toJSON . _pqrpAddtional
 
--- | The response for ExecuteBatchDml. Contains a list of ResultSet, one for
--- each DML statement that has successfully executed. If a statement fails,
--- the error is returned as part of the response payload. Clients can
--- determine whether all DML statements have run successfully, or if a
--- statement failed, using one of the following approaches: 1. Check if
--- \'status\' field is OkStatus. 2. Check if result_sets_size() equals the
--- number of statements in ExecuteBatchDmlRequest. Example 1: A request
--- with 5 DML statements, all executed successfully. Result: A response
--- with 5 ResultSets, one for each statement in the same order, and an OK
--- status. Example 2: A request with 5 DML statements. The 3rd statement
--- has a syntax error. Result: A response with 2 ResultSets, for the first
--- 2 statements that run successfully, and a syntax error
--- (INVALID_ARGUMENT) status. From result_set_size() client can determine
--- that the 3rd statement has failed.
+-- | The response for ExecuteBatchDml. Contains a list of ResultSet messages,
+-- one for each DML statement that has successfully executed, in the same
+-- order as the statements in the request. If a statement fails, the status
+-- in the response body identifies the cause of the failure. To check for
+-- DML statements that failed, use the following approach: 1. Check the
+-- status in the response message. The google.rpc.Code enum value \`OK\`
+-- indicates that all statements were executed successfully. 2. If the
+-- status was not \`OK\`, check the number of result sets in the response.
+-- If the response contains \`N\` ResultSet messages, then statement
+-- \`N+1\` in the request failed. Example 1: * Request: 5 DML statements,
+-- all executed successfully. * Response: 5 ResultSet messages, with the
+-- status \`OK\`. Example 2: * Request: 5 DML statements. The third
+-- statement has a syntax error. * Response: 2 ResultSet messages, and a
+-- syntax error (\`INVALID_ARGUMENT\`) status. The number of ResultSet
+-- messages indicates that the third statement failed, and the fourth and
+-- fifth statements were not executed.
 --
 -- /See:/ 'executeBatchDmlResponse' smart constructor.
 data ExecuteBatchDmlResponse =
   ExecuteBatchDmlResponse'
-    { _ebdrStatus     :: !(Maybe Status)
+    { _ebdrStatus :: !(Maybe Status)
     , _ebdrResultSets :: !(Maybe [ResultSet])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1440,17 +1932,17 @@ executeBatchDmlResponse =
   ExecuteBatchDmlResponse' {_ebdrStatus = Nothing, _ebdrResultSets = Nothing}
 
 
--- | If all DML statements are executed successfully, status will be OK.
+-- | If all DML statements are executed successfully, the status is \`OK\`.
 -- Otherwise, the error status of the first failed statement.
 ebdrStatus :: Lens' ExecuteBatchDmlResponse (Maybe Status)
 ebdrStatus
   = lens _ebdrStatus (\ s a -> s{_ebdrStatus = a})
 
--- | ResultSets, one for each statement in the request that ran successfully,
--- in the same order as the statements in the request. Each ResultSet will
--- not contain any rows. The ResultSetStats in each ResultSet will contain
--- the number of rows modified by the statement. Only the first ResultSet
--- in the response contains a valid ResultSetMetadata.
+-- | One ResultSet for each statement in the request that ran successfully,
+-- in the same order as the statements in the request. Each ResultSet does
+-- not contain any rows. The ResultSetStats in each ResultSet contain the
+-- number of rows modified by the statement. Only the first ResultSet in
+-- the response contains valid ResultSetMetadata.
 ebdrResultSets :: Lens' ExecuteBatchDmlResponse [ResultSet]
 ebdrResultSets
   = lens _ebdrResultSets
@@ -1478,10 +1970,10 @@ instance ToJSON ExecuteBatchDmlResponse where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1536,7 +2028,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1573,8 +2066,10 @@ instance ToJSON Operation where
 data UpdateDatabaseDdlMetadata =
   UpdateDatabaseDdlMetadata'
     { _uddmCommitTimestamps :: !(Maybe [DateTime'])
-    , _uddmDatabase         :: !(Maybe Text)
-    , _uddmStatements       :: !(Maybe [Text])
+    , _uddmThrottled :: !(Maybe Bool)
+    , _uddmProgress :: !(Maybe [OperationProgress])
+    , _uddmDatabase :: !(Maybe Text)
+    , _uddmStatements :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1585,6 +2080,10 @@ data UpdateDatabaseDdlMetadata =
 --
 -- * 'uddmCommitTimestamps'
 --
+-- * 'uddmThrottled'
+--
+-- * 'uddmProgress'
+--
 -- * 'uddmDatabase'
 --
 -- * 'uddmStatements'
@@ -1593,6 +2092,8 @@ updateDatabaseDdlMetadata
 updateDatabaseDdlMetadata =
   UpdateDatabaseDdlMetadata'
     { _uddmCommitTimestamps = Nothing
+    , _uddmThrottled = Nothing
+    , _uddmProgress = Nothing
     , _uddmDatabase = Nothing
     , _uddmStatements = Nothing
     }
@@ -1605,6 +2106,26 @@ uddmCommitTimestamps :: Lens' UpdateDatabaseDdlMetadata [UTCTime]
 uddmCommitTimestamps
   = lens _uddmCommitTimestamps
       (\ s a -> s{_uddmCommitTimestamps = a})
+      . _Default
+      . _Coerce
+
+-- | Output only. When true, indicates that the operation is throttled e.g
+-- due to resource constraints. When resources become available the
+-- operation will resume and this field will be false again.
+uddmThrottled :: Lens' UpdateDatabaseDdlMetadata (Maybe Bool)
+uddmThrottled
+  = lens _uddmThrottled
+      (\ s a -> s{_uddmThrottled = a})
+
+-- | The progress of the UpdateDatabaseDdl operations. Currently, only index
+-- creation statements will have a continuously updating progress. For
+-- non-index creation statements, \`progress[i]\` will have start time and
+-- end time populated with commit timestamp of operation, as well as a
+-- progress of 100% once the operation has completed. \`progress[i]\` is
+-- the operation progress for \`statements[i]\`.
+uddmProgress :: Lens' UpdateDatabaseDdlMetadata [OperationProgress]
+uddmProgress
+  = lens _uddmProgress (\ s a -> s{_uddmProgress = a})
       . _Default
       . _Coerce
 
@@ -1628,7 +2149,9 @@ instance FromJSON UpdateDatabaseDdlMetadata where
               (\ o ->
                  UpdateDatabaseDdlMetadata' <$>
                    (o .:? "commitTimestamps" .!= mempty) <*>
-                     (o .:? "database")
+                     (o .:? "throttled")
+                     <*> (o .:? "progress" .!= mempty)
+                     <*> (o .:? "database")
                      <*> (o .:? "statements" .!= mempty))
 
 instance ToJSON UpdateDatabaseDdlMetadata where
@@ -1636,6 +2159,8 @@ instance ToJSON UpdateDatabaseDdlMetadata where
           = object
               (catMaybes
                  [("commitTimestamps" .=) <$> _uddmCommitTimestamps,
+                  ("throttled" .=) <$> _uddmThrottled,
+                  ("progress" .=) <$> _uddmProgress,
                   ("database" .=) <$> _uddmDatabase,
                   ("statements" .=) <$> _uddmStatements])
 
@@ -1664,13 +2189,73 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
+-- | A message representing a list of specific information for multiple key
+-- ranges.
+--
+-- /See:/ 'keyRangeInfos' smart constructor.
+data KeyRangeInfos =
+  KeyRangeInfos'
+    { _kriTotalSize :: !(Maybe (Textual Int32))
+    , _kriInfos :: !(Maybe [KeyRangeInfo])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KeyRangeInfos' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kriTotalSize'
+--
+-- * 'kriInfos'
+keyRangeInfos
+    :: KeyRangeInfos
+keyRangeInfos = KeyRangeInfos' {_kriTotalSize = Nothing, _kriInfos = Nothing}
+
+
+-- | The total size of the list of all KeyRangeInfos. This may be larger than
+-- the number of repeated messages above. If that is the case, this number
+-- may be used to determine how many are not being shown.
+kriTotalSize :: Lens' KeyRangeInfos (Maybe Int32)
+kriTotalSize
+  = lens _kriTotalSize (\ s a -> s{_kriTotalSize = a})
+      . mapping _Coerce
+
+-- | The list individual KeyRangeInfos.
+kriInfos :: Lens' KeyRangeInfos [KeyRangeInfo]
+kriInfos
+  = lens _kriInfos (\ s a -> s{_kriInfos = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON KeyRangeInfos where
+        parseJSON
+          = withObject "KeyRangeInfos"
+              (\ o ->
+                 KeyRangeInfos' <$>
+                   (o .:? "totalSize") <*> (o .:? "infos" .!= mempty))
+
+instance ToJSON KeyRangeInfos where
+        toJSON KeyRangeInfos'{..}
+          = object
+              (catMaybes
+                 [("totalSize" .=) <$> _kriTotalSize,
+                  ("infos" .=) <$> _kriInfos])
+
 -- | A Cloud Spanner database.
 --
 -- /See:/ 'database' smart constructor.
 data Database =
   Database'
     { _dState :: !(Maybe DatabaseState)
-    , _dName  :: !(Maybe Text)
+    , _dDefaultLeader :: !(Maybe Text)
+    , _dEarliestVersionTime :: !(Maybe DateTime')
+    , _dName :: !(Maybe Text)
+    , _dEncryptionConfig :: !(Maybe EncryptionConfig)
+    , _dVersionRetentionPeriod :: !(Maybe Text)
+    , _dRestoreInfo :: !(Maybe RestoreInfo)
+    , _dEncryptionInfo :: !(Maybe [EncryptionInfo])
+    , _dCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1681,15 +2266,60 @@ data Database =
 --
 -- * 'dState'
 --
+-- * 'dDefaultLeader'
+--
+-- * 'dEarliestVersionTime'
+--
 -- * 'dName'
+--
+-- * 'dEncryptionConfig'
+--
+-- * 'dVersionRetentionPeriod'
+--
+-- * 'dRestoreInfo'
+--
+-- * 'dEncryptionInfo'
+--
+-- * 'dCreateTime'
 database
     :: Database
-database = Database' {_dState = Nothing, _dName = Nothing}
+database =
+  Database'
+    { _dState = Nothing
+    , _dDefaultLeader = Nothing
+    , _dEarliestVersionTime = Nothing
+    , _dName = Nothing
+    , _dEncryptionConfig = Nothing
+    , _dVersionRetentionPeriod = Nothing
+    , _dRestoreInfo = Nothing
+    , _dEncryptionInfo = Nothing
+    , _dCreateTime = Nothing
+    }
 
 
 -- | Output only. The current database state.
 dState :: Lens' Database (Maybe DatabaseState)
 dState = lens _dState (\ s a -> s{_dState = a})
+
+-- | Output only. The read-write region which contains the database\'s leader
+-- replicas. This is the same as the value of default_leader database
+-- option set using DatabaseAdmin.CreateDatabase or
+-- DatabaseAdmin.UpdateDatabaseDdl. If not explicitly set, this is empty.
+dDefaultLeader :: Lens' Database (Maybe Text)
+dDefaultLeader
+  = lens _dDefaultLeader
+      (\ s a -> s{_dDefaultLeader = a})
+
+-- | Output only. Earliest timestamp at which older versions of the data can
+-- be read. This value is continuously updated by Cloud Spanner and becomes
+-- stale the moment it is queried. If you are using this value to recover
+-- data, make sure to account for the time from the moment when the value
+-- is queried to the moment when you initiate the recovery.
+dEarliestVersionTime :: Lens' Database (Maybe UTCTime)
+dEarliestVersionTime
+  = lens _dEarliestVersionTime
+      (\ s a -> s{_dEarliestVersionTime = a})
+      . mapping _DateTime
 
 -- | Required. The name of the database. Values are of the form
 -- \`projects\/\/instances\/\/databases\/\`, where \`\` is as specified in
@@ -1698,30 +2328,294 @@ dState = lens _dState (\ s a -> s{_dState = a})
 dName :: Lens' Database (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
+-- | Output only. For databases that are using customer managed encryption,
+-- this field contains the encryption configuration for the database. For
+-- databases that are using Google default or other types of encryption,
+-- this field is empty.
+dEncryptionConfig :: Lens' Database (Maybe EncryptionConfig)
+dEncryptionConfig
+  = lens _dEncryptionConfig
+      (\ s a -> s{_dEncryptionConfig = a})
+
+-- | Output only. The period in which Cloud Spanner retains all versions of
+-- data for the database. This is the same as the value of
+-- version_retention_period database option set using UpdateDatabaseDdl.
+-- Defaults to 1 hour, if not set.
+dVersionRetentionPeriod :: Lens' Database (Maybe Text)
+dVersionRetentionPeriod
+  = lens _dVersionRetentionPeriod
+      (\ s a -> s{_dVersionRetentionPeriod = a})
+
+-- | Output only. Applicable only for restored databases. Contains
+-- information about the restore source.
+dRestoreInfo :: Lens' Database (Maybe RestoreInfo)
+dRestoreInfo
+  = lens _dRestoreInfo (\ s a -> s{_dRestoreInfo = a})
+
+-- | Output only. For databases that are using customer managed encryption,
+-- this field contains the encryption information for the database, such as
+-- encryption state and the Cloud KMS key versions that are in use. For
+-- databases that are using Google default or other types of encryption,
+-- this field is empty. This field is propagated lazily from the backend.
+-- There might be a delay from when a key version is being used and when it
+-- appears in this field.
+dEncryptionInfo :: Lens' Database [EncryptionInfo]
+dEncryptionInfo
+  = lens _dEncryptionInfo
+      (\ s a -> s{_dEncryptionInfo = a})
+      . _Default
+      . _Coerce
+
+-- | Output only. If exists, the time at which the database creation started.
+dCreateTime :: Lens' Database (Maybe UTCTime)
+dCreateTime
+  = lens _dCreateTime (\ s a -> s{_dCreateTime = a}) .
+      mapping _DateTime
+
 instance FromJSON Database where
         parseJSON
           = withObject "Database"
               (\ o ->
-                 Database' <$> (o .:? "state") <*> (o .:? "name"))
+                 Database' <$>
+                   (o .:? "state") <*> (o .:? "defaultLeader") <*>
+                     (o .:? "earliestVersionTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "encryptionConfig")
+                     <*> (o .:? "versionRetentionPeriod")
+                     <*> (o .:? "restoreInfo")
+                     <*> (o .:? "encryptionInfo" .!= mempty)
+                     <*> (o .:? "createTime"))
 
 instance ToJSON Database where
         toJSON Database'{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _dState, ("name" .=) <$> _dName])
+                 [("state" .=) <$> _dState,
+                  ("defaultLeader" .=) <$> _dDefaultLeader,
+                  ("earliestVersionTime" .=) <$> _dEarliestVersionTime,
+                  ("name" .=) <$> _dName,
+                  ("encryptionConfig" .=) <$> _dEncryptionConfig,
+                  ("versionRetentionPeriod" .=) <$>
+                    _dVersionRetentionPeriod,
+                  ("restoreInfo" .=) <$> _dRestoreInfo,
+                  ("encryptionInfo" .=) <$> _dEncryptionInfo,
+                  ("createTime" .=) <$> _dCreateTime])
+
+-- | A message representing a key prefix node in the key prefix hierarchy.
+-- for eg. Bigtable keyspaces are lexicographically ordered mappings of
+-- keys to values. Keys often have a shared prefix structure where users
+-- use the keys to organize data. Eg \/\/\/employee In this case Keysight
+-- will possibly use one node for a company and reuse it for all employees
+-- that fall under the company. Doing so improves legibility in the UI.
+--
+-- /See:/ 'prefixNode' smart constructor.
+data PrefixNode =
+  PrefixNode'
+    { _pnEndIndex :: !(Maybe (Textual Int32))
+    , _pnDepth :: !(Maybe (Textual Int32))
+    , _pnDataSourceNode :: !(Maybe Bool)
+    , _pnStartIndex :: !(Maybe (Textual Int32))
+    , _pnWord :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PrefixNode' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pnEndIndex'
+--
+-- * 'pnDepth'
+--
+-- * 'pnDataSourceNode'
+--
+-- * 'pnStartIndex'
+--
+-- * 'pnWord'
+prefixNode
+    :: PrefixNode
+prefixNode =
+  PrefixNode'
+    { _pnEndIndex = Nothing
+    , _pnDepth = Nothing
+    , _pnDataSourceNode = Nothing
+    , _pnStartIndex = Nothing
+    , _pnWord = Nothing
+    }
+
+
+-- | The index of the end key bucket of the range that this node spans.
+pnEndIndex :: Lens' PrefixNode (Maybe Int32)
+pnEndIndex
+  = lens _pnEndIndex (\ s a -> s{_pnEndIndex = a}) .
+      mapping _Coerce
+
+-- | The depth in the prefix hierarchy.
+pnDepth :: Lens' PrefixNode (Maybe Int32)
+pnDepth
+  = lens _pnDepth (\ s a -> s{_pnDepth = a}) .
+      mapping _Coerce
+
+-- | Whether this corresponds to a data_source name.
+pnDataSourceNode :: Lens' PrefixNode (Maybe Bool)
+pnDataSourceNode
+  = lens _pnDataSourceNode
+      (\ s a -> s{_pnDataSourceNode = a})
+
+-- | The index of the start key bucket of the range that this node spans.
+pnStartIndex :: Lens' PrefixNode (Maybe Int32)
+pnStartIndex
+  = lens _pnStartIndex (\ s a -> s{_pnStartIndex = a})
+      . mapping _Coerce
+
+-- | The string represented by the prefix node.
+pnWord :: Lens' PrefixNode (Maybe Text)
+pnWord = lens _pnWord (\ s a -> s{_pnWord = a})
+
+instance FromJSON PrefixNode where
+        parseJSON
+          = withObject "PrefixNode"
+              (\ o ->
+                 PrefixNode' <$>
+                   (o .:? "endIndex") <*> (o .:? "depth") <*>
+                     (o .:? "dataSourceNode")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "word"))
+
+instance ToJSON PrefixNode where
+        toJSON PrefixNode'{..}
+          = object
+              (catMaybes
+                 [("endIndex" .=) <$> _pnEndIndex,
+                  ("depth" .=) <$> _pnDepth,
+                  ("dataSourceNode" .=) <$> _pnDataSourceNode,
+                  ("startIndex" .=) <$> _pnStartIndex,
+                  ("word" .=) <$> _pnWord])
+
+-- | Additional statistics about a commit.
+--
+-- /See:/ 'commitStats' smart constructor.
+newtype CommitStats =
+  CommitStats'
+    { _csMutationCount :: Maybe (Textual Int64)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CommitStats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csMutationCount'
+commitStats
+    :: CommitStats
+commitStats = CommitStats' {_csMutationCount = Nothing}
+
+
+-- | The total number of mutations for the transaction. Knowing the
+-- \`mutation_count\` value can help you maximize the number of mutations
+-- in a transaction and minimize the number of API round trips. You can
+-- also monitor this value to prevent transactions from exceeding the
+-- system
+-- [limit](https:\/\/cloud.google.com\/spanner\/quotas#limits_for_creating_reading_updating_and_deleting_data).
+-- If the number of mutations exceeds the limit, the server returns
+-- [INVALID_ARGUMENT](https:\/\/cloud.google.com\/spanner\/docs\/reference\/rest\/v1\/Code#ENUM_VALUES.INVALID_ARGUMENT).
+csMutationCount :: Lens' CommitStats (Maybe Int64)
+csMutationCount
+  = lens _csMutationCount
+      (\ s a -> s{_csMutationCount = a})
+      . mapping _Coerce
+
+instance FromJSON CommitStats where
+        parseJSON
+          = withObject "CommitStats"
+              (\ o -> CommitStats' <$> (o .:? "mutationCount"))
+
+instance ToJSON CommitStats where
+        toJSON CommitStats'{..}
+          = object
+              (catMaybes
+                 [("mutationCount" .=) <$> _csMutationCount])
+
+-- | Encapsulates progress related information for a Cloud Spanner long
+-- running operation.
+--
+-- /See:/ 'operationProgress' smart constructor.
+data OperationProgress =
+  OperationProgress'
+    { _opStartTime :: !(Maybe DateTime')
+    , _opProgressPercent :: !(Maybe (Textual Int32))
+    , _opEndTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationProgress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'opStartTime'
+--
+-- * 'opProgressPercent'
+--
+-- * 'opEndTime'
+operationProgress
+    :: OperationProgress
+operationProgress =
+  OperationProgress'
+    {_opStartTime = Nothing, _opProgressPercent = Nothing, _opEndTime = Nothing}
+
+
+-- | Time the request was received.
+opStartTime :: Lens' OperationProgress (Maybe UTCTime)
+opStartTime
+  = lens _opStartTime (\ s a -> s{_opStartTime = a}) .
+      mapping _DateTime
+
+-- | Percent completion of the operation. Values are between 0 and 100
+-- inclusive.
+opProgressPercent :: Lens' OperationProgress (Maybe Int32)
+opProgressPercent
+  = lens _opProgressPercent
+      (\ s a -> s{_opProgressPercent = a})
+      . mapping _Coerce
+
+-- | If set, the time at which this operation failed or was completed
+-- successfully.
+opEndTime :: Lens' OperationProgress (Maybe UTCTime)
+opEndTime
+  = lens _opEndTime (\ s a -> s{_opEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON OperationProgress where
+        parseJSON
+          = withObject "OperationProgress"
+              (\ o ->
+                 OperationProgress' <$>
+                   (o .:? "startTime") <*> (o .:? "progressPercent") <*>
+                     (o .:? "endTime"))
+
+instance ToJSON OperationProgress where
+        toJSON OperationProgress'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _opStartTime,
+                  ("progressPercent" .=) <$> _opProgressPercent,
+                  ("endTime" .=) <$> _opEndTime])
 
 -- | Node information for nodes appearing in a QueryPlan.plan_nodes.
 --
 -- /See:/ 'planNode' smart constructor.
 data PlanNode =
   PlanNode'
-    { _pnKind                :: !(Maybe PlanNodeKind)
+    { _pnKind :: !(Maybe PlanNodeKind)
     , _pnShortRepresentation :: !(Maybe ShortRepresentation)
-    , _pnMetadata            :: !(Maybe PlanNodeMetadata)
-    , _pnDisplayName         :: !(Maybe Text)
-    , _pnExecutionStats      :: !(Maybe PlanNodeExecutionStats)
-    , _pnIndex               :: !(Maybe (Textual Int32))
-    , _pnChildLinks          :: !(Maybe [ChildLink])
+    , _pnMetadata :: !(Maybe PlanNodeMetadata)
+    , _pnDisplayName :: !(Maybe Text)
+    , _pnExecutionStats :: !(Maybe PlanNodeExecutionStats)
+    , _pnIndex :: !(Maybe (Textual Int32))
+    , _pnChildLinks :: !(Maybe [ChildLink])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1851,7 +2745,7 @@ createSessionRequest
 createSessionRequest = CreateSessionRequest' {_csrSession = Nothing}
 
 
--- | The session to create.
+-- | Required. The session to create.
 csrSession :: Lens' CreateSessionRequest (Maybe Session)
 csrSession
   = lens _csrSession (\ s a -> s{_csrSession = a})
@@ -1871,7 +2765,7 @@ instance ToJSON CreateSessionRequest where
 -- /See:/ 'shortRepresentation' smart constructor.
 data ShortRepresentation =
   ShortRepresentation'
-    { _srSubqueries  :: !(Maybe ShortRepresentationSubqueries)
+    { _srSubqueries :: !(Maybe ShortRepresentationSubqueries)
     , _srDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2034,6 +2928,230 @@ instance FromJSON PlanNodeMetadata where
 instance ToJSON PlanNodeMetadata where
         toJSON = toJSON . _pnmAddtional
 
+-- | The (sparse) mapping from time interval index to an IndexedKeyRangeInfos
+-- message, representing those time intervals for which there are
+-- informational messages concerning key ranges.
+--
+-- /See:/ 'metricIndexedKeyRangeInfos' smart constructor.
+newtype MetricIndexedKeyRangeInfos =
+  MetricIndexedKeyRangeInfos'
+    { _mikriAddtional :: HashMap Text IndexedKeyRangeInfos
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MetricIndexedKeyRangeInfos' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mikriAddtional'
+metricIndexedKeyRangeInfos
+    :: HashMap Text IndexedKeyRangeInfos -- ^ 'mikriAddtional'
+    -> MetricIndexedKeyRangeInfos
+metricIndexedKeyRangeInfos pMikriAddtional_ =
+  MetricIndexedKeyRangeInfos' {_mikriAddtional = _Coerce # pMikriAddtional_}
+
+
+mikriAddtional :: Lens' MetricIndexedKeyRangeInfos (HashMap Text IndexedKeyRangeInfos)
+mikriAddtional
+  = lens _mikriAddtional
+      (\ s a -> s{_mikriAddtional = a})
+      . _Coerce
+
+instance FromJSON MetricIndexedKeyRangeInfos where
+        parseJSON
+          = withObject "MetricIndexedKeyRangeInfos"
+              (\ o ->
+                 MetricIndexedKeyRangeInfos' <$> (parseJSONObject o))
+
+instance ToJSON MetricIndexedKeyRangeInfos where
+        toJSON = toJSON . _mikriAddtional
+
+-- | Encapsulates settings provided to GetIamPolicy.
+--
+-- /See:/ 'getPolicyOptions' smart constructor.
+newtype GetPolicyOptions =
+  GetPolicyOptions'
+    { _gpoRequestedPolicyVersion :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpoRequestedPolicyVersion'
+getPolicyOptions
+    :: GetPolicyOptions
+getPolicyOptions = GetPolicyOptions' {_gpoRequestedPolicyVersion = Nothing}
+
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+gpoRequestedPolicyVersion :: Lens' GetPolicyOptions (Maybe Int32)
+gpoRequestedPolicyVersion
+  = lens _gpoRequestedPolicyVersion
+      (\ s a -> s{_gpoRequestedPolicyVersion = a})
+      . mapping _Coerce
+
+instance FromJSON GetPolicyOptions where
+        parseJSON
+          = withObject "GetPolicyOptions"
+              (\ o ->
+                 GetPolicyOptions' <$>
+                   (o .:? "requestedPolicyVersion"))
+
+instance ToJSON GetPolicyOptions where
+        toJSON GetPolicyOptions'{..}
+          = object
+              (catMaybes
+                 [("requestedPolicyVersion" .=) <$>
+                    _gpoRequestedPolicyVersion])
+
+-- | A message representing information for a key range (possibly one key).
+--
+-- /See:/ 'keyRangeInfo' smart constructor.
+data KeyRangeInfo =
+  KeyRangeInfo'
+    { _kriContextValues :: !(Maybe [ContextValue])
+    , _kriTimeOffSet :: !(Maybe GDuration)
+    , _kriValue :: !(Maybe (Textual Double))
+    , _kriEndKeyIndex :: !(Maybe (Textual Int32))
+    , _kriStartKeyIndex :: !(Maybe (Textual Int32))
+    , _kriMetric :: !(Maybe LocalizedString)
+    , _kriKeysCount :: !(Maybe (Textual Int64))
+    , _kriUnit :: !(Maybe LocalizedString)
+    , _kriInfo :: !(Maybe LocalizedString)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KeyRangeInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kriContextValues'
+--
+-- * 'kriTimeOffSet'
+--
+-- * 'kriValue'
+--
+-- * 'kriEndKeyIndex'
+--
+-- * 'kriStartKeyIndex'
+--
+-- * 'kriMetric'
+--
+-- * 'kriKeysCount'
+--
+-- * 'kriUnit'
+--
+-- * 'kriInfo'
+keyRangeInfo
+    :: KeyRangeInfo
+keyRangeInfo =
+  KeyRangeInfo'
+    { _kriContextValues = Nothing
+    , _kriTimeOffSet = Nothing
+    , _kriValue = Nothing
+    , _kriEndKeyIndex = Nothing
+    , _kriStartKeyIndex = Nothing
+    , _kriMetric = Nothing
+    , _kriKeysCount = Nothing
+    , _kriUnit = Nothing
+    , _kriInfo = Nothing
+    }
+
+
+-- | The list of context values for this key range.
+kriContextValues :: Lens' KeyRangeInfo [ContextValue]
+kriContextValues
+  = lens _kriContextValues
+      (\ s a -> s{_kriContextValues = a})
+      . _Default
+      . _Coerce
+
+-- | The time offset. This is the time since the start of the time interval.
+kriTimeOffSet :: Lens' KeyRangeInfo (Maybe Scientific)
+kriTimeOffSet
+  = lens _kriTimeOffSet
+      (\ s a -> s{_kriTimeOffSet = a})
+      . mapping _GDuration
+
+-- | The value of the metric.
+kriValue :: Lens' KeyRangeInfo (Maybe Double)
+kriValue
+  = lens _kriValue (\ s a -> s{_kriValue = a}) .
+      mapping _Coerce
+
+-- | The index of the end key in indexed_keys.
+kriEndKeyIndex :: Lens' KeyRangeInfo (Maybe Int32)
+kriEndKeyIndex
+  = lens _kriEndKeyIndex
+      (\ s a -> s{_kriEndKeyIndex = a})
+      . mapping _Coerce
+
+-- | The index of the start key in indexed_keys.
+kriStartKeyIndex :: Lens' KeyRangeInfo (Maybe Int32)
+kriStartKeyIndex
+  = lens _kriStartKeyIndex
+      (\ s a -> s{_kriStartKeyIndex = a})
+      . mapping _Coerce
+
+-- | The name of the metric. e.g. \"latency\".
+kriMetric :: Lens' KeyRangeInfo (Maybe LocalizedString)
+kriMetric
+  = lens _kriMetric (\ s a -> s{_kriMetric = a})
+
+-- | The number of keys this range covers.
+kriKeysCount :: Lens' KeyRangeInfo (Maybe Int64)
+kriKeysCount
+  = lens _kriKeysCount (\ s a -> s{_kriKeysCount = a})
+      . mapping _Coerce
+
+-- | The unit of the metric. This is an unstructured field and will be mapped
+-- as is to the user.
+kriUnit :: Lens' KeyRangeInfo (Maybe LocalizedString)
+kriUnit = lens _kriUnit (\ s a -> s{_kriUnit = a})
+
+-- | Information about this key range, for all metrics.
+kriInfo :: Lens' KeyRangeInfo (Maybe LocalizedString)
+kriInfo = lens _kriInfo (\ s a -> s{_kriInfo = a})
+
+instance FromJSON KeyRangeInfo where
+        parseJSON
+          = withObject "KeyRangeInfo"
+              (\ o ->
+                 KeyRangeInfo' <$>
+                   (o .:? "contextValues" .!= mempty) <*>
+                     (o .:? "timeOffset")
+                     <*> (o .:? "value")
+                     <*> (o .:? "endKeyIndex")
+                     <*> (o .:? "startKeyIndex")
+                     <*> (o .:? "metric")
+                     <*> (o .:? "keysCount")
+                     <*> (o .:? "unit")
+                     <*> (o .:? "info"))
+
+instance ToJSON KeyRangeInfo where
+        toJSON KeyRangeInfo'{..}
+          = object
+              (catMaybes
+                 [("contextValues" .=) <$> _kriContextValues,
+                  ("timeOffset" .=) <$> _kriTimeOffSet,
+                  ("value" .=) <$> _kriValue,
+                  ("endKeyIndex" .=) <$> _kriEndKeyIndex,
+                  ("startKeyIndex" .=) <$> _kriStartKeyIndex,
+                  ("metric" .=) <$> _kriMetric,
+                  ("keysCount" .=) <$> _kriKeysCount,
+                  ("unit" .=) <$> _kriUnit, ("info" .=) <$> _kriInfo])
+
 -- | Message type to initiate a Partitioned DML transaction.
 --
 -- /See:/ 'partitionedDml' smart constructor.
@@ -2056,6 +3174,166 @@ instance FromJSON PartitionedDml where
 
 instance ToJSON PartitionedDml where
         toJSON = const emptyObject
+
+-- | A backup of a Cloud Spanner database.
+--
+-- /See:/ 'backup' smart constructor.
+data Backup =
+  Backup'
+    { _bSizeBytes :: !(Maybe (Textual Int64))
+    , _bState :: !(Maybe BackupState)
+    , _bDatabase :: !(Maybe Text)
+    , _bName :: !(Maybe Text)
+    , _bVersionTime :: !(Maybe DateTime')
+    , _bReferencingDatabases :: !(Maybe [Text])
+    , _bExpireTime :: !(Maybe DateTime')
+    , _bEncryptionInfo :: !(Maybe EncryptionInfo)
+    , _bCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Backup' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bSizeBytes'
+--
+-- * 'bState'
+--
+-- * 'bDatabase'
+--
+-- * 'bName'
+--
+-- * 'bVersionTime'
+--
+-- * 'bReferencingDatabases'
+--
+-- * 'bExpireTime'
+--
+-- * 'bEncryptionInfo'
+--
+-- * 'bCreateTime'
+backup
+    :: Backup
+backup =
+  Backup'
+    { _bSizeBytes = Nothing
+    , _bState = Nothing
+    , _bDatabase = Nothing
+    , _bName = Nothing
+    , _bVersionTime = Nothing
+    , _bReferencingDatabases = Nothing
+    , _bExpireTime = Nothing
+    , _bEncryptionInfo = Nothing
+    , _bCreateTime = Nothing
+    }
+
+
+-- | Output only. Size of the backup in bytes.
+bSizeBytes :: Lens' Backup (Maybe Int64)
+bSizeBytes
+  = lens _bSizeBytes (\ s a -> s{_bSizeBytes = a}) .
+      mapping _Coerce
+
+-- | Output only. The current state of the backup.
+bState :: Lens' Backup (Maybe BackupState)
+bState = lens _bState (\ s a -> s{_bState = a})
+
+-- | Required for the CreateBackup operation. Name of the database from which
+-- this backup was created. This needs to be in the same instance as the
+-- backup. Values are of the form \`projects\/\/instances\/\/databases\/\`.
+bDatabase :: Lens' Backup (Maybe Text)
+bDatabase
+  = lens _bDatabase (\ s a -> s{_bDatabase = a})
+
+-- | Output only for the CreateBackup operation. Required for the
+-- UpdateBackup operation. A globally unique identifier for the backup
+-- which cannot be changed. Values are of the form
+-- \`projects\/\/instances\/\/backups\/a-z*[a-z0-9]\` The final segment of
+-- the name must be between 2 and 60 characters in length. The backup is
+-- stored in the location(s) specified in the instance configuration of the
+-- instance containing the backup, identified by the prefix of the backup
+-- name of the form \`projects\/\/instances\/\`.
+bName :: Lens' Backup (Maybe Text)
+bName = lens _bName (\ s a -> s{_bName = a})
+
+-- | The backup will contain an externally consistent copy of the database at
+-- the timestamp specified by \`version_time\`. If \`version_time\` is not
+-- specified, the system will set \`version_time\` to the \`create_time\`
+-- of the backup.
+bVersionTime :: Lens' Backup (Maybe UTCTime)
+bVersionTime
+  = lens _bVersionTime (\ s a -> s{_bVersionTime = a})
+      . mapping _DateTime
+
+-- | Output only. The names of the restored databases that reference the
+-- backup. The database names are of the form
+-- \`projects\/\/instances\/\/databases\/\`. Referencing databases may
+-- exist in different instances. The existence of any referencing database
+-- prevents the backup from being deleted. When a restored database from
+-- the backup enters the \`READY\` state, the reference to the backup is
+-- removed.
+bReferencingDatabases :: Lens' Backup [Text]
+bReferencingDatabases
+  = lens _bReferencingDatabases
+      (\ s a -> s{_bReferencingDatabases = a})
+      . _Default
+      . _Coerce
+
+-- | Required for the CreateBackup operation. The expiration time of the
+-- backup, with microseconds granularity that must be at least 6 hours and
+-- at most 366 days from the time the CreateBackup request is processed.
+-- Once the \`expire_time\` has passed, the backup is eligible to be
+-- automatically deleted by Cloud Spanner to free the resources used by the
+-- backup.
+bExpireTime :: Lens' Backup (Maybe UTCTime)
+bExpireTime
+  = lens _bExpireTime (\ s a -> s{_bExpireTime = a}) .
+      mapping _DateTime
+
+-- | Output only. The encryption information for the backup.
+bEncryptionInfo :: Lens' Backup (Maybe EncryptionInfo)
+bEncryptionInfo
+  = lens _bEncryptionInfo
+      (\ s a -> s{_bEncryptionInfo = a})
+
+-- | Output only. The time the CreateBackup request is received. If the
+-- request does not specify \`version_time\`, the \`version_time\` of the
+-- backup will be equivalent to the \`create_time\`.
+bCreateTime :: Lens' Backup (Maybe UTCTime)
+bCreateTime
+  = lens _bCreateTime (\ s a -> s{_bCreateTime = a}) .
+      mapping _DateTime
+
+instance FromJSON Backup where
+        parseJSON
+          = withObject "Backup"
+              (\ o ->
+                 Backup' <$>
+                   (o .:? "sizeBytes") <*> (o .:? "state") <*>
+                     (o .:? "database")
+                     <*> (o .:? "name")
+                     <*> (o .:? "versionTime")
+                     <*> (o .:? "referencingDatabases" .!= mempty)
+                     <*> (o .:? "expireTime")
+                     <*> (o .:? "encryptionInfo")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON Backup where
+        toJSON Backup'{..}
+          = object
+              (catMaybes
+                 [("sizeBytes" .=) <$> _bSizeBytes,
+                  ("state" .=) <$> _bState,
+                  ("database" .=) <$> _bDatabase,
+                  ("name" .=) <$> _bName,
+                  ("versionTime" .=) <$> _bVersionTime,
+                  ("referencingDatabases" .=) <$>
+                    _bReferencingDatabases,
+                  ("expireTime" .=) <$> _bExpireTime,
+                  ("encryptionInfo" .=) <$> _bEncryptionInfo,
+                  ("createTime" .=) <$> _bCreateTime])
 
 -- | Request message for \`SetIamPolicy\` method.
 --
@@ -2151,7 +3429,7 @@ instance ToJSON StatementParamTypes where
 data UpdateDatabaseDdlRequest =
   UpdateDatabaseDdlRequest'
     { _uddrOperationId :: !(Maybe Text)
-    , _uddrStatements  :: !(Maybe [Text])
+    , _uddrStatements :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2187,7 +3465,7 @@ uddrOperationId
   = lens _uddrOperationId
       (\ s a -> s{_uddrOperationId = a})
 
--- | DDL statements to be applied to the database.
+-- | Required. DDL statements to be applied to the database.
 uddrStatements :: Lens' UpdateDatabaseDdlRequest [Text]
 uddrStatements
   = lens _uddrStatements
@@ -2216,11 +3494,11 @@ instance ToJSON UpdateDatabaseDdlRequest where
 -- /See:/ 'mutation' smart constructor.
 data Mutation =
   Mutation'
-    { _mReplace        :: !(Maybe Write)
-    , _mInsert         :: !(Maybe Write)
+    { _mReplace :: !(Maybe Write)
+    , _mInsert :: !(Maybe Write)
     , _mInsertOrUpdate :: !(Maybe Write)
-    , _mDelete         :: !(Maybe Delete')
-    , _mUpdate         :: !(Maybe Write)
+    , _mDelete :: !(Maybe Delete')
+    , _mUpdate :: !(Maybe Write)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2253,7 +3531,10 @@ mutation =
 -- | Like insert, except that if the row already exists, it is deleted, and
 -- the column values provided are inserted instead. Unlike
 -- insert_or_update, this means any values not explicitly written become
--- \`NULL\`.
+-- \`NULL\`. In an interleaved table, if you create the child table with
+-- the \`ON DELETE CASCADE\` annotation, then replacing a parent row also
+-- deletes the child rows. Otherwise, you must delete the child rows before
+-- you replace the parent row.
 mReplace :: Lens' Mutation (Maybe Write)
 mReplace = lens _mReplace (\ s a -> s{_mReplace = a})
 
@@ -2264,7 +3545,10 @@ mInsert = lens _mInsert (\ s a -> s{_mInsert = a})
 
 -- | Like insert, except that if the row already exists, then its column
 -- values are overwritten with the ones provided. Any column values not
--- explicitly written are preserved.
+-- explicitly written are preserved. When using insert_or_update, just as
+-- when using insert, all \`NOT NULL\` columns in the table must be given a
+-- value. This holds true even when the row already exists and will
+-- therefore actually be updated.
 mInsertOrUpdate :: Lens' Mutation (Maybe Write)
 mInsertOrUpdate
   = lens _mInsertOrUpdate
@@ -2300,17 +3584,66 @@ instance ToJSON Mutation where
                   ("delete" .=) <$> _mDelete,
                   ("update" .=) <$> _mUpdate])
 
+-- | A message representing a derived metric.
+--
+-- /See:/ 'derivedMetric' smart constructor.
+data DerivedMetric =
+  DerivedMetric'
+    { _dmDenominator :: !(Maybe LocalizedString)
+    , _dmNumerator :: !(Maybe LocalizedString)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DerivedMetric' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dmDenominator'
+--
+-- * 'dmNumerator'
+derivedMetric
+    :: DerivedMetric
+derivedMetric =
+  DerivedMetric' {_dmDenominator = Nothing, _dmNumerator = Nothing}
+
+
+-- | The name of the denominator metric. e.g. \"rows\".
+dmDenominator :: Lens' DerivedMetric (Maybe LocalizedString)
+dmDenominator
+  = lens _dmDenominator
+      (\ s a -> s{_dmDenominator = a})
+
+-- | The name of the numerator metric. e.g. \"latency\".
+dmNumerator :: Lens' DerivedMetric (Maybe LocalizedString)
+dmNumerator
+  = lens _dmNumerator (\ s a -> s{_dmNumerator = a})
+
+instance FromJSON DerivedMetric where
+        parseJSON
+          = withObject "DerivedMetric"
+              (\ o ->
+                 DerivedMetric' <$>
+                   (o .:? "denominator") <*> (o .:? "numerator"))
+
+instance ToJSON DerivedMetric where
+        toJSON DerivedMetric'{..}
+          = object
+              (catMaybes
+                 [("denominator" .=) <$> _dmDenominator,
+                  ("numerator" .=) <$> _dmNumerator])
+
 -- | The request for PartitionRead
 --
 -- /See:/ 'partitionReadRequest' smart constructor.
 data PartitionReadRequest =
   PartitionReadRequest'
     { _prrPartitionOptions :: !(Maybe PartitionOptions)
-    , _prrKeySet           :: !(Maybe KeySet)
-    , _prrTransaction      :: !(Maybe TransactionSelector)
-    , _prrColumns          :: !(Maybe [Text])
-    , _prrIndex            :: !(Maybe Text)
-    , _prrTable            :: !(Maybe Text)
+    , _prrKeySet :: !(Maybe KeySet)
+    , _prrTransaction :: !(Maybe TransactionSelector)
+    , _prrColumns :: !(Maybe [Text])
+    , _prrIndex :: !(Maybe Text)
+    , _prrTable :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2453,7 +3786,7 @@ instance ToJSON ExecuteSQLRequestParamTypes where
 data Transaction =
   Transaction'
     { _tReadTimestamp :: !(Maybe DateTime')
-    , _tId            :: !(Maybe Bytes)
+    , _tId :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2503,13 +3836,175 @@ instance ToJSON Transaction where
                  [("readTimestamp" .=) <$> _tReadTimestamp,
                   ("id" .=) <$> _tId])
 
+-- | A message representing the key visualizer diagnostic messages.
+--
+-- /See:/ 'diagnosticMessage' smart constructor.
+data DiagnosticMessage =
+  DiagnosticMessage'
+    { _dmSeverity :: !(Maybe DiagnosticMessageSeverity)
+    , _dmShortMessage :: !(Maybe LocalizedString)
+    , _dmMetricSpecific :: !(Maybe Bool)
+    , _dmMetric :: !(Maybe LocalizedString)
+    , _dmInfo :: !(Maybe LocalizedString)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiagnosticMessage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dmSeverity'
+--
+-- * 'dmShortMessage'
+--
+-- * 'dmMetricSpecific'
+--
+-- * 'dmMetric'
+--
+-- * 'dmInfo'
+diagnosticMessage
+    :: DiagnosticMessage
+diagnosticMessage =
+  DiagnosticMessage'
+    { _dmSeverity = Nothing
+    , _dmShortMessage = Nothing
+    , _dmMetricSpecific = Nothing
+    , _dmMetric = Nothing
+    , _dmInfo = Nothing
+    }
+
+
+-- | The severity of the diagnostic message.
+dmSeverity :: Lens' DiagnosticMessage (Maybe DiagnosticMessageSeverity)
+dmSeverity
+  = lens _dmSeverity (\ s a -> s{_dmSeverity = a})
+
+-- | The short message.
+dmShortMessage :: Lens' DiagnosticMessage (Maybe LocalizedString)
+dmShortMessage
+  = lens _dmShortMessage
+      (\ s a -> s{_dmShortMessage = a})
+
+-- | Whether this message is specific only for the current metric. By default
+-- Diagnostics are shown for all metrics, regardless which metric is the
+-- currently selected metric in the UI. However occasionally a metric will
+-- generate so many messages that the resulting visual clutter becomes
+-- overwhelming. In this case setting this to true, will show the
+-- diagnostic messages for that metric only if it is the currently selected
+-- metric.
+dmMetricSpecific :: Lens' DiagnosticMessage (Maybe Bool)
+dmMetricSpecific
+  = lens _dmMetricSpecific
+      (\ s a -> s{_dmMetricSpecific = a})
+
+-- | The metric.
+dmMetric :: Lens' DiagnosticMessage (Maybe LocalizedString)
+dmMetric = lens _dmMetric (\ s a -> s{_dmMetric = a})
+
+-- | Information about this diagnostic information.
+dmInfo :: Lens' DiagnosticMessage (Maybe LocalizedString)
+dmInfo = lens _dmInfo (\ s a -> s{_dmInfo = a})
+
+instance FromJSON DiagnosticMessage where
+        parseJSON
+          = withObject "DiagnosticMessage"
+              (\ o ->
+                 DiagnosticMessage' <$>
+                   (o .:? "severity") <*> (o .:? "shortMessage") <*>
+                     (o .:? "metricSpecific")
+                     <*> (o .:? "metric")
+                     <*> (o .:? "info"))
+
+instance ToJSON DiagnosticMessage where
+        toJSON DiagnosticMessage'{..}
+          = object
+              (catMaybes
+                 [("severity" .=) <$> _dmSeverity,
+                  ("shortMessage" .=) <$> _dmShortMessage,
+                  ("metricSpecific" .=) <$> _dmMetricSpecific,
+                  ("metric" .=) <$> _dmMetric,
+                  ("info" .=) <$> _dmInfo])
+
+-- | A message representing context for a KeyRangeInfo, including a label,
+-- value, unit, and severity.
+--
+-- /See:/ 'contextValue' smart constructor.
+data ContextValue =
+  ContextValue'
+    { _cvValue :: !(Maybe (Textual Double))
+    , _cvSeverity :: !(Maybe ContextValueSeverity)
+    , _cvUnit :: !(Maybe Text)
+    , _cvLabel :: !(Maybe LocalizedString)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ContextValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvValue'
+--
+-- * 'cvSeverity'
+--
+-- * 'cvUnit'
+--
+-- * 'cvLabel'
+contextValue
+    :: ContextValue
+contextValue =
+  ContextValue'
+    { _cvValue = Nothing
+    , _cvSeverity = Nothing
+    , _cvUnit = Nothing
+    , _cvLabel = Nothing
+    }
+
+
+-- | The value for the context.
+cvValue :: Lens' ContextValue (Maybe Double)
+cvValue
+  = lens _cvValue (\ s a -> s{_cvValue = a}) .
+      mapping _Coerce
+
+-- | The severity of this context.
+cvSeverity :: Lens' ContextValue (Maybe ContextValueSeverity)
+cvSeverity
+  = lens _cvSeverity (\ s a -> s{_cvSeverity = a})
+
+-- | The unit of the context value.
+cvUnit :: Lens' ContextValue (Maybe Text)
+cvUnit = lens _cvUnit (\ s a -> s{_cvUnit = a})
+
+-- | The label for the context value. e.g. \"latency\".
+cvLabel :: Lens' ContextValue (Maybe LocalizedString)
+cvLabel = lens _cvLabel (\ s a -> s{_cvLabel = a})
+
+instance FromJSON ContextValue where
+        parseJSON
+          = withObject "ContextValue"
+              (\ o ->
+                 ContextValue' <$>
+                   (o .:? "value") <*> (o .:? "severity") <*>
+                     (o .:? "unit")
+                     <*> (o .:? "label"))
+
+instance ToJSON ContextValue where
+        toJSON ContextValue'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _cvValue,
+                  ("severity" .=) <$> _cvSeverity,
+                  ("unit" .=) <$> _cvUnit, ("label" .=) <$> _cvLabel])
+
 -- | The response for ListSessions.
 --
 -- /See:/ 'listSessionsResponse' smart constructor.
 data ListSessionsResponse =
   ListSessionsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrSessions      :: !(Maybe [Session])
+    , _lsrSessions :: !(Maybe [Session])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2556,14 +4051,372 @@ instance ToJSON ListSessionsResponse where
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("sessions" .=) <$> _lsrSessions])
 
--- | The request for ExecuteBatchDml
+-- | A message representing the actual monitoring data, values for each key
+-- bucket over time, of a metric.
+--
+-- /See:/ 'metric' smart constructor.
+data Metric =
+  Metric'
+    { _mDisplayLabel :: !(Maybe LocalizedString)
+    , _mHasNonzeroData :: !(Maybe Bool)
+    , _mIndexedKeyRangeInfos :: !(Maybe MetricIndexedKeyRangeInfos)
+    , _mCategory :: !(Maybe LocalizedString)
+    , _mMatrix :: !(Maybe MetricMatrix)
+    , _mVisible :: !(Maybe Bool)
+    , _mAggregation :: !(Maybe MetricAggregation)
+    , _mDerived :: !(Maybe DerivedMetric)
+    , _mHotValue :: !(Maybe (Textual Double))
+    , _mIndexedHotKeys :: !(Maybe MetricIndexedHotKeys)
+    , _mUnit :: !(Maybe LocalizedString)
+    , _mInfo :: !(Maybe LocalizedString)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Metric' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mDisplayLabel'
+--
+-- * 'mHasNonzeroData'
+--
+-- * 'mIndexedKeyRangeInfos'
+--
+-- * 'mCategory'
+--
+-- * 'mMatrix'
+--
+-- * 'mVisible'
+--
+-- * 'mAggregation'
+--
+-- * 'mDerived'
+--
+-- * 'mHotValue'
+--
+-- * 'mIndexedHotKeys'
+--
+-- * 'mUnit'
+--
+-- * 'mInfo'
+metric
+    :: Metric
+metric =
+  Metric'
+    { _mDisplayLabel = Nothing
+    , _mHasNonzeroData = Nothing
+    , _mIndexedKeyRangeInfos = Nothing
+    , _mCategory = Nothing
+    , _mMatrix = Nothing
+    , _mVisible = Nothing
+    , _mAggregation = Nothing
+    , _mDerived = Nothing
+    , _mHotValue = Nothing
+    , _mIndexedHotKeys = Nothing
+    , _mUnit = Nothing
+    , _mInfo = Nothing
+    }
+
+
+-- | The displayed label of the metric.
+mDisplayLabel :: Lens' Metric (Maybe LocalizedString)
+mDisplayLabel
+  = lens _mDisplayLabel
+      (\ s a -> s{_mDisplayLabel = a})
+
+-- | Whether the metric has any non-zero data.
+mHasNonzeroData :: Lens' Metric (Maybe Bool)
+mHasNonzeroData
+  = lens _mHasNonzeroData
+      (\ s a -> s{_mHasNonzeroData = a})
+
+-- | The (sparse) mapping from time interval index to an IndexedKeyRangeInfos
+-- message, representing those time intervals for which there are
+-- informational messages concerning key ranges.
+mIndexedKeyRangeInfos :: Lens' Metric (Maybe MetricIndexedKeyRangeInfos)
+mIndexedKeyRangeInfos
+  = lens _mIndexedKeyRangeInfos
+      (\ s a -> s{_mIndexedKeyRangeInfos = a})
+
+-- | The category of the metric, e.g. \"Activity\", \"Alerts\", \"Reads\",
+-- etc.
+mCategory :: Lens' Metric (Maybe LocalizedString)
+mCategory
+  = lens _mCategory (\ s a -> s{_mCategory = a})
+
+-- | The data for the metric as a matrix.
+mMatrix :: Lens' Metric (Maybe MetricMatrix)
+mMatrix = lens _mMatrix (\ s a -> s{_mMatrix = a})
+
+-- | Whether the metric is visible to the end user.
+mVisible :: Lens' Metric (Maybe Bool)
+mVisible = lens _mVisible (\ s a -> s{_mVisible = a})
+
+-- | The aggregation function used to aggregate each key bucket
+mAggregation :: Lens' Metric (Maybe MetricAggregation)
+mAggregation
+  = lens _mAggregation (\ s a -> s{_mAggregation = a})
+
+-- | The references to numerator and denominator metrics for a derived
+-- metric.
+mDerived :: Lens' Metric (Maybe DerivedMetric)
+mDerived = lens _mDerived (\ s a -> s{_mDerived = a})
+
+-- | The value that is considered hot for the metric. On a per metric basis
+-- hotness signals high utilization and something that might potentially be
+-- a cause for concern by the end user. hot_value is used to calibrate and
+-- scale visual color scales.
+mHotValue :: Lens' Metric (Maybe Double)
+mHotValue
+  = lens _mHotValue (\ s a -> s{_mHotValue = a}) .
+      mapping _Coerce
+
+-- | The (sparse) mapping from time index to an IndexedHotKey message,
+-- representing those time intervals for which there are hot keys.
+mIndexedHotKeys :: Lens' Metric (Maybe MetricIndexedHotKeys)
+mIndexedHotKeys
+  = lens _mIndexedHotKeys
+      (\ s a -> s{_mIndexedHotKeys = a})
+
+-- | The unit of the metric.
+mUnit :: Lens' Metric (Maybe LocalizedString)
+mUnit = lens _mUnit (\ s a -> s{_mUnit = a})
+
+-- | Information about the metric.
+mInfo :: Lens' Metric (Maybe LocalizedString)
+mInfo = lens _mInfo (\ s a -> s{_mInfo = a})
+
+instance FromJSON Metric where
+        parseJSON
+          = withObject "Metric"
+              (\ o ->
+                 Metric' <$>
+                   (o .:? "displayLabel") <*> (o .:? "hasNonzeroData")
+                     <*> (o .:? "indexedKeyRangeInfos")
+                     <*> (o .:? "category")
+                     <*> (o .:? "matrix")
+                     <*> (o .:? "visible")
+                     <*> (o .:? "aggregation")
+                     <*> (o .:? "derived")
+                     <*> (o .:? "hotValue")
+                     <*> (o .:? "indexedHotKeys")
+                     <*> (o .:? "unit")
+                     <*> (o .:? "info"))
+
+instance ToJSON Metric where
+        toJSON Metric'{..}
+          = object
+              (catMaybes
+                 [("displayLabel" .=) <$> _mDisplayLabel,
+                  ("hasNonzeroData" .=) <$> _mHasNonzeroData,
+                  ("indexedKeyRangeInfos" .=) <$>
+                    _mIndexedKeyRangeInfos,
+                  ("category" .=) <$> _mCategory,
+                  ("matrix" .=) <$> _mMatrix,
+                  ("visible" .=) <$> _mVisible,
+                  ("aggregation" .=) <$> _mAggregation,
+                  ("derived" .=) <$> _mDerived,
+                  ("hotValue" .=) <$> _mHotValue,
+                  ("indexedHotKeys" .=) <$> _mIndexedHotKeys,
+                  ("unit" .=) <$> _mUnit, ("info" .=) <$> _mInfo])
+
+-- | ScanData contains Cloud Key Visualizer scan data used by the caller to
+-- construct a visualization.
+--
+-- /See:/ 'scanData' smart constructor.
+data ScanData =
+  ScanData'
+    { _sdStartTime :: !(Maybe DateTime')
+    , _sdData :: !(Maybe VisualizationData)
+    , _sdEndTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScanData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdStartTime'
+--
+-- * 'sdData'
+--
+-- * 'sdEndTime'
+scanData
+    :: ScanData
+scanData =
+  ScanData' {_sdStartTime = Nothing, _sdData = Nothing, _sdEndTime = Nothing}
+
+
+-- | A range of time (inclusive) for when the contained data is defined. The
+-- lower bound for when the contained data is defined.
+sdStartTime :: Lens' ScanData (Maybe UTCTime)
+sdStartTime
+  = lens _sdStartTime (\ s a -> s{_sdStartTime = a}) .
+      mapping _DateTime
+
+-- | Cloud Key Visualizer scan data. The range of time this information
+-- covers is captured via the above time range fields. Note, this field is
+-- not available to the ListScans method.
+sdData :: Lens' ScanData (Maybe VisualizationData)
+sdData = lens _sdData (\ s a -> s{_sdData = a})
+
+-- | The upper bound for when the contained data is defined.
+sdEndTime :: Lens' ScanData (Maybe UTCTime)
+sdEndTime
+  = lens _sdEndTime (\ s a -> s{_sdEndTime = a}) .
+      mapping _DateTime
+
+instance FromJSON ScanData where
+        parseJSON
+          = withObject "ScanData"
+              (\ o ->
+                 ScanData' <$>
+                   (o .:? "startTime") <*> (o .:? "data") <*>
+                     (o .:? "endTime"))
+
+instance ToJSON ScanData where
+        toJSON ScanData'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _sdStartTime,
+                  ("data" .=) <$> _sdData,
+                  ("endTime" .=) <$> _sdEndTime])
+
+-- | A message representing a matrix of floats.
+--
+-- /See:/ 'metricMatrix' smart constructor.
+newtype MetricMatrix =
+  MetricMatrix'
+    { _mmRows :: Maybe [MetricMatrixRow]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MetricMatrix' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mmRows'
+metricMatrix
+    :: MetricMatrix
+metricMatrix = MetricMatrix' {_mmRows = Nothing}
+
+
+-- | The rows of the matrix.
+mmRows :: Lens' MetricMatrix [MetricMatrixRow]
+mmRows
+  = lens _mmRows (\ s a -> s{_mmRows = a}) . _Default .
+      _Coerce
+
+instance FromJSON MetricMatrix where
+        parseJSON
+          = withObject "MetricMatrix"
+              (\ o -> MetricMatrix' <$> (o .:? "rows" .!= mempty))
+
+instance ToJSON MetricMatrix where
+        toJSON MetricMatrix'{..}
+          = object (catMaybes [("rows" .=) <$> _mmRows])
+
+-- | Scan is a structure which describes Cloud Key Visualizer scan
+-- information.
+--
+-- /See:/ 'scan' smart constructor.
+data Scan =
+  Scan'
+    { _scaStartTime :: !(Maybe DateTime')
+    , _scaName :: !(Maybe Text)
+    , _scaScanData :: !(Maybe ScanData)
+    , _scaEndTime :: !(Maybe DateTime')
+    , _scaDetails :: !(Maybe ScanDetails)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Scan' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scaStartTime'
+--
+-- * 'scaName'
+--
+-- * 'scaScanData'
+--
+-- * 'scaEndTime'
+--
+-- * 'scaDetails'
+scan
+    :: Scan
+scan =
+  Scan'
+    { _scaStartTime = Nothing
+    , _scaName = Nothing
+    , _scaScanData = Nothing
+    , _scaEndTime = Nothing
+    , _scaDetails = Nothing
+    }
+
+
+-- | A range of time (inclusive) for when the scan is defined. The lower
+-- bound for when the scan is defined.
+scaStartTime :: Lens' Scan (Maybe UTCTime)
+scaStartTime
+  = lens _scaStartTime (\ s a -> s{_scaStartTime = a})
+      . mapping _DateTime
+
+-- | The unique name of the scan, specific to the Database service
+-- implementing this interface.
+scaName :: Lens' Scan (Maybe Text)
+scaName = lens _scaName (\ s a -> s{_scaName = a})
+
+-- | Output only. Cloud Key Visualizer scan data. Note, this field is not
+-- available to the ListScans method.
+scaScanData :: Lens' Scan (Maybe ScanData)
+scaScanData
+  = lens _scaScanData (\ s a -> s{_scaScanData = a})
+
+-- | The upper bound for when the scan is defined.
+scaEndTime :: Lens' Scan (Maybe UTCTime)
+scaEndTime
+  = lens _scaEndTime (\ s a -> s{_scaEndTime = a}) .
+      mapping _DateTime
+
+-- | Additional information provided by the implementer.
+scaDetails :: Lens' Scan (Maybe ScanDetails)
+scaDetails
+  = lens _scaDetails (\ s a -> s{_scaDetails = a})
+
+instance FromJSON Scan where
+        parseJSON
+          = withObject "Scan"
+              (\ o ->
+                 Scan' <$>
+                   (o .:? "startTime") <*> (o .:? "name") <*>
+                     (o .:? "scanData")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "details"))
+
+instance ToJSON Scan where
+        toJSON Scan'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _scaStartTime,
+                  ("name" .=) <$> _scaName,
+                  ("scanData" .=) <$> _scaScanData,
+                  ("endTime" .=) <$> _scaEndTime,
+                  ("details" .=) <$> _scaDetails])
+
+-- | The request for ExecuteBatchDml.
 --
 -- /See:/ 'executeBatchDmlRequest' smart constructor.
 data ExecuteBatchDmlRequest =
   ExecuteBatchDmlRequest'
-    { _ebdrSeqno       :: !(Maybe (Textual Int64))
+    { _ebdrSeqno :: !(Maybe (Textual Int64))
     , _ebdrTransaction :: !(Maybe TransactionSelector)
-    , _ebdrStatements  :: !(Maybe [Statement])
+    , _ebdrStatements :: !(Maybe [Statement])
+    , _ebdrRequestOptions :: !(Maybe RequestOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2577,6 +4430,8 @@ data ExecuteBatchDmlRequest =
 -- * 'ebdrTransaction'
 --
 -- * 'ebdrStatements'
+--
+-- * 'ebdrRequestOptions'
 executeBatchDmlRequest
     :: ExecuteBatchDmlRequest
 executeBatchDmlRequest =
@@ -2584,30 +4439,36 @@ executeBatchDmlRequest =
     { _ebdrSeqno = Nothing
     , _ebdrTransaction = Nothing
     , _ebdrStatements = Nothing
+    , _ebdrRequestOptions = Nothing
     }
 
 
--- | A per-transaction sequence number used to identify this request. This is
--- used in the same space as the seqno in ExecuteSqlRequest. See more
--- details in ExecuteSqlRequest.
+-- | Required. A per-transaction sequence number used to identify this
+-- request. This field makes each request idempotent such that if the
+-- request is received multiple times, at most one will succeed. The
+-- sequence number must be monotonically increasing within the transaction.
+-- If a request arrives for the first time with an out-of-order sequence
+-- number, the transaction may be aborted. Replays of previously handled
+-- requests will yield the same response as the first execution.
 ebdrSeqno :: Lens' ExecuteBatchDmlRequest (Maybe Int64)
 ebdrSeqno
   = lens _ebdrSeqno (\ s a -> s{_ebdrSeqno = a}) .
       mapping _Coerce
 
--- | The transaction to use. A ReadWrite transaction is required. Single-use
--- transactions are not supported (to avoid replay). The caller must either
--- supply an existing transaction ID or begin a new transaction.
+-- | Required. The transaction to use. Must be a read-write transaction. To
+-- protect against replays, single-use transactions are not supported. The
+-- caller must either supply an existing transaction ID or begin a new
+-- transaction.
 ebdrTransaction :: Lens' ExecuteBatchDmlRequest (Maybe TransactionSelector)
 ebdrTransaction
   = lens _ebdrTransaction
       (\ s a -> s{_ebdrTransaction = a})
 
--- | The list of statements to execute in this batch. Statements are executed
--- serially, such that the effects of statement i are visible to statement
--- i+1. Each statement must be a DML statement. Execution will stop at the
--- first failed statement; the remaining statements will not run. REQUIRES:
--- statements_size() > 0.
+-- | Required. The list of statements to execute in this batch. Statements
+-- are executed serially, such that the effects of statement \`i\` are
+-- visible to statement \`i+1\`. Each statement must be a DML statement.
+-- Execution stops at the first failed statement; the remaining statements
+-- are not executed. Callers must provide at least one statement.
 ebdrStatements :: Lens' ExecuteBatchDmlRequest [Statement]
 ebdrStatements
   = lens _ebdrStatements
@@ -2615,13 +4476,20 @@ ebdrStatements
       . _Default
       . _Coerce
 
+-- | Common options for this request.
+ebdrRequestOptions :: Lens' ExecuteBatchDmlRequest (Maybe RequestOptions)
+ebdrRequestOptions
+  = lens _ebdrRequestOptions
+      (\ s a -> s{_ebdrRequestOptions = a})
+
 instance FromJSON ExecuteBatchDmlRequest where
         parseJSON
           = withObject "ExecuteBatchDmlRequest"
               (\ o ->
                  ExecuteBatchDmlRequest' <$>
                    (o .:? "seqno") <*> (o .:? "transaction") <*>
-                     (o .:? "statements" .!= mempty))
+                     (o .:? "statements" .!= mempty)
+                     <*> (o .:? "requestOptions"))
 
 instance ToJSON ExecuteBatchDmlRequest where
         toJSON ExecuteBatchDmlRequest'{..}
@@ -2629,7 +4497,8 @@ instance ToJSON ExecuteBatchDmlRequest where
               (catMaybes
                  [("seqno" .=) <$> _ebdrSeqno,
                   ("transaction" .=) <$> _ebdrTransaction,
-                  ("statements" .=) <$> _ebdrStatements])
+                  ("statements" .=) <$> _ebdrStatements,
+                  ("requestOptions" .=) <$> _ebdrRequestOptions])
 
 -- | \`StructType\` defines the fields of a STRUCT type.
 --
@@ -2671,12 +4540,256 @@ instance ToJSON StructType where
         toJSON StructType'{..}
           = object (catMaybes [("fields" .=) <$> _stFields])
 
+-- | Metadata type for the operation returned by CreateBackup.
+--
+-- /See:/ 'createBackupMetadata' smart constructor.
+data CreateBackupMetadata =
+  CreateBackupMetadata'
+    { _cbmProgress :: !(Maybe OperationProgress)
+    , _cbmDatabase :: !(Maybe Text)
+    , _cbmCancelTime :: !(Maybe DateTime')
+    , _cbmName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CreateBackupMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbmProgress'
+--
+-- * 'cbmDatabase'
+--
+-- * 'cbmCancelTime'
+--
+-- * 'cbmName'
+createBackupMetadata
+    :: CreateBackupMetadata
+createBackupMetadata =
+  CreateBackupMetadata'
+    { _cbmProgress = Nothing
+    , _cbmDatabase = Nothing
+    , _cbmCancelTime = Nothing
+    , _cbmName = Nothing
+    }
+
+
+-- | The progress of the CreateBackup operation.
+cbmProgress :: Lens' CreateBackupMetadata (Maybe OperationProgress)
+cbmProgress
+  = lens _cbmProgress (\ s a -> s{_cbmProgress = a})
+
+-- | The name of the database the backup is created from.
+cbmDatabase :: Lens' CreateBackupMetadata (Maybe Text)
+cbmDatabase
+  = lens _cbmDatabase (\ s a -> s{_cbmDatabase = a})
+
+-- | The time at which cancellation of this operation was received.
+-- Operations.CancelOperation starts asynchronous cancellation on a
+-- long-running operation. The server makes a best effort to cancel the
+-- operation, but success is not guaranteed. Clients can use
+-- Operations.GetOperation or other methods to check whether the
+-- cancellation succeeded or whether the operation completed despite
+-- cancellation. On successful cancellation, the operation is not deleted;
+-- instead, it becomes an operation with an Operation.error value with a
+-- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
+cbmCancelTime :: Lens' CreateBackupMetadata (Maybe UTCTime)
+cbmCancelTime
+  = lens _cbmCancelTime
+      (\ s a -> s{_cbmCancelTime = a})
+      . mapping _DateTime
+
+-- | The name of the backup being created.
+cbmName :: Lens' CreateBackupMetadata (Maybe Text)
+cbmName = lens _cbmName (\ s a -> s{_cbmName = a})
+
+instance FromJSON CreateBackupMetadata where
+        parseJSON
+          = withObject "CreateBackupMetadata"
+              (\ o ->
+                 CreateBackupMetadata' <$>
+                   (o .:? "progress") <*> (o .:? "database") <*>
+                     (o .:? "cancelTime")
+                     <*> (o .:? "name"))
+
+instance ToJSON CreateBackupMetadata where
+        toJSON CreateBackupMetadata'{..}
+          = object
+              (catMaybes
+                 [("progress" .=) <$> _cbmProgress,
+                  ("database" .=) <$> _cbmDatabase,
+                  ("cancelTime" .=) <$> _cbmCancelTime,
+                  ("name" .=) <$> _cbmName])
+
+--
+-- /See:/ 'visualizationData' smart constructor.
+data VisualizationData =
+  VisualizationData'
+    { _vdDiagnosticMessages :: !(Maybe [DiagnosticMessage])
+    , _vdMetrics :: !(Maybe [Metric])
+    , _vdHasPii :: !(Maybe Bool)
+    , _vdKeySeparator :: !(Maybe Text)
+    , _vdDataSourceSeparatorToken :: !(Maybe Text)
+    , _vdIndexedKeys :: !(Maybe [Text])
+    , _vdEndKeyStrings :: !(Maybe [Text])
+    , _vdPrefixNodes :: !(Maybe [PrefixNode])
+    , _vdKeyUnit :: !(Maybe VisualizationDataKeyUnit)
+    , _vdDataSourceEndToken :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VisualizationData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vdDiagnosticMessages'
+--
+-- * 'vdMetrics'
+--
+-- * 'vdHasPii'
+--
+-- * 'vdKeySeparator'
+--
+-- * 'vdDataSourceSeparatorToken'
+--
+-- * 'vdIndexedKeys'
+--
+-- * 'vdEndKeyStrings'
+--
+-- * 'vdPrefixNodes'
+--
+-- * 'vdKeyUnit'
+--
+-- * 'vdDataSourceEndToken'
+visualizationData
+    :: VisualizationData
+visualizationData =
+  VisualizationData'
+    { _vdDiagnosticMessages = Nothing
+    , _vdMetrics = Nothing
+    , _vdHasPii = Nothing
+    , _vdKeySeparator = Nothing
+    , _vdDataSourceSeparatorToken = Nothing
+    , _vdIndexedKeys = Nothing
+    , _vdEndKeyStrings = Nothing
+    , _vdPrefixNodes = Nothing
+    , _vdKeyUnit = Nothing
+    , _vdDataSourceEndToken = Nothing
+    }
+
+
+-- | The list of messages (info, alerts, ...)
+vdDiagnosticMessages :: Lens' VisualizationData [DiagnosticMessage]
+vdDiagnosticMessages
+  = lens _vdDiagnosticMessages
+      (\ s a -> s{_vdDiagnosticMessages = a})
+      . _Default
+      . _Coerce
+
+-- | The list of data objects for each metric.
+vdMetrics :: Lens' VisualizationData [Metric]
+vdMetrics
+  = lens _vdMetrics (\ s a -> s{_vdMetrics = a}) .
+      _Default
+      . _Coerce
+
+-- | Whether this scan contains PII.
+vdHasPii :: Lens' VisualizationData (Maybe Bool)
+vdHasPii = lens _vdHasPii (\ s a -> s{_vdHasPii = a})
+
+-- | The token delimiting the key prefixes.
+vdKeySeparator :: Lens' VisualizationData (Maybe Text)
+vdKeySeparator
+  = lens _vdKeySeparator
+      (\ s a -> s{_vdKeySeparator = a})
+
+-- | The token delimiting a datasource name from the rest of a key in a
+-- data_source.
+vdDataSourceSeparatorToken :: Lens' VisualizationData (Maybe Text)
+vdDataSourceSeparatorToken
+  = lens _vdDataSourceSeparatorToken
+      (\ s a -> s{_vdDataSourceSeparatorToken = a})
+
+-- | Keys of key ranges that contribute significantly to a given metric Can
+-- be thought of as heavy hitters.
+vdIndexedKeys :: Lens' VisualizationData [Text]
+vdIndexedKeys
+  = lens _vdIndexedKeys
+      (\ s a -> s{_vdIndexedKeys = a})
+      . _Default
+      . _Coerce
+
+-- | We discretize the entire keyspace into buckets. Assuming each bucket has
+-- an inclusive keyrange and covers keys from k(i) ... k(n). In this case
+-- k(n) would be an end key for a given range. end_key_string is the
+-- collection of all such end keys
+vdEndKeyStrings :: Lens' VisualizationData [Text]
+vdEndKeyStrings
+  = lens _vdEndKeyStrings
+      (\ s a -> s{_vdEndKeyStrings = a})
+      . _Default
+      . _Coerce
+
+-- | The list of extracted key prefix nodes used in the key prefix hierarchy.
+vdPrefixNodes :: Lens' VisualizationData [PrefixNode]
+vdPrefixNodes
+  = lens _vdPrefixNodes
+      (\ s a -> s{_vdPrefixNodes = a})
+      . _Default
+      . _Coerce
+
+-- | The unit for the key: e.g. \'key\' or \'chunk\'.
+vdKeyUnit :: Lens' VisualizationData (Maybe VisualizationDataKeyUnit)
+vdKeyUnit
+  = lens _vdKeyUnit (\ s a -> s{_vdKeyUnit = a})
+
+-- | The token signifying the end of a data_source.
+vdDataSourceEndToken :: Lens' VisualizationData (Maybe Text)
+vdDataSourceEndToken
+  = lens _vdDataSourceEndToken
+      (\ s a -> s{_vdDataSourceEndToken = a})
+
+instance FromJSON VisualizationData where
+        parseJSON
+          = withObject "VisualizationData"
+              (\ o ->
+                 VisualizationData' <$>
+                   (o .:? "diagnosticMessages" .!= mempty) <*>
+                     (o .:? "metrics" .!= mempty)
+                     <*> (o .:? "hasPii")
+                     <*> (o .:? "keySeparator")
+                     <*> (o .:? "dataSourceSeparatorToken")
+                     <*> (o .:? "indexedKeys" .!= mempty)
+                     <*> (o .:? "endKeyStrings" .!= mempty)
+                     <*> (o .:? "prefixNodes" .!= mempty)
+                     <*> (o .:? "keyUnit")
+                     <*> (o .:? "dataSourceEndToken"))
+
+instance ToJSON VisualizationData where
+        toJSON VisualizationData'{..}
+          = object
+              (catMaybes
+                 [("diagnosticMessages" .=) <$> _vdDiagnosticMessages,
+                  ("metrics" .=) <$> _vdMetrics,
+                  ("hasPii" .=) <$> _vdHasPii,
+                  ("keySeparator" .=) <$> _vdKeySeparator,
+                  ("dataSourceSeparatorToken" .=) <$>
+                    _vdDataSourceSeparatorToken,
+                  ("indexedKeys" .=) <$> _vdIndexedKeys,
+                  ("endKeyStrings" .=) <$> _vdEndKeyStrings,
+                  ("prefixNodes" .=) <$> _vdPrefixNodes,
+                  ("keyUnit" .=) <$> _vdKeyUnit,
+                  ("dataSourceEndToken" .=) <$> _vdDataSourceEndToken])
+
 -- | The response for Commit.
 --
 -- /See:/ 'commitResponse' smart constructor.
-newtype CommitResponse =
+data CommitResponse =
   CommitResponse'
-    { _crCommitTimestamp :: Maybe DateTime'
+    { _crCommitTimestamp :: !(Maybe DateTime')
+    , _crCommitStats :: !(Maybe CommitStats)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2686,9 +4799,12 @@ newtype CommitResponse =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'crCommitTimestamp'
+--
+-- * 'crCommitStats'
 commitResponse
     :: CommitResponse
-commitResponse = CommitResponse' {_crCommitTimestamp = Nothing}
+commitResponse =
+  CommitResponse' {_crCommitTimestamp = Nothing, _crCommitStats = Nothing}
 
 
 -- | The Cloud Spanner timestamp at which the transaction committed.
@@ -2698,17 +4814,26 @@ crCommitTimestamp
       (\ s a -> s{_crCommitTimestamp = a})
       . mapping _DateTime
 
+-- | The statistics about this Commit. Not returned by default. For more
+-- information, see CommitRequest.return_commit_stats.
+crCommitStats :: Lens' CommitResponse (Maybe CommitStats)
+crCommitStats
+  = lens _crCommitStats
+      (\ s a -> s{_crCommitStats = a})
+
 instance FromJSON CommitResponse where
         parseJSON
           = withObject "CommitResponse"
               (\ o ->
-                 CommitResponse' <$> (o .:? "commitTimestamp"))
+                 CommitResponse' <$>
+                   (o .:? "commitTimestamp") <*> (o .:? "commitStats"))
 
 instance ToJSON CommitResponse where
         toJSON CommitResponse'{..}
           = object
               (catMaybes
-                 [("commitTimestamp" .=) <$> _crCommitTimestamp])
+                 [("commitTimestamp" .=) <$> _crCommitTimestamp,
+                  ("commitStats" .=) <$> _crCommitStats])
 
 -- | Information returned for each partition returned in a PartitionResponse.
 --
@@ -2793,6 +4918,244 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
+-- | A message representing a user-facing string whose value may need to be
+-- translated before being displayed.
+--
+-- /See:/ 'localizedString' smart constructor.
+data LocalizedString =
+  LocalizedString'
+    { _lsArgs :: !(Maybe LocalizedStringArgs)
+    , _lsToken :: !(Maybe Text)
+    , _lsMessage :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LocalizedString' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsArgs'
+--
+-- * 'lsToken'
+--
+-- * 'lsMessage'
+localizedString
+    :: LocalizedString
+localizedString =
+  LocalizedString' {_lsArgs = Nothing, _lsToken = Nothing, _lsMessage = Nothing}
+
+
+-- | A map of arguments used when creating the localized message. Keys
+-- represent parameter names which may be used by the localized version
+-- when substituting dynamic values.
+lsArgs :: Lens' LocalizedString (Maybe LocalizedStringArgs)
+lsArgs = lens _lsArgs (\ s a -> s{_lsArgs = a})
+
+-- | The token identifying the message, e.g. \'METRIC_READ_CPU\'. This should
+-- be unique within the service.
+lsToken :: Lens' LocalizedString (Maybe Text)
+lsToken = lens _lsToken (\ s a -> s{_lsToken = a})
+
+-- | The canonical English version of this message. If no token is provided
+-- or the front-end has no message associated with the token, this text
+-- will be displayed as-is.
+lsMessage :: Lens' LocalizedString (Maybe Text)
+lsMessage
+  = lens _lsMessage (\ s a -> s{_lsMessage = a})
+
+instance FromJSON LocalizedString where
+        parseJSON
+          = withObject "LocalizedString"
+              (\ o ->
+                 LocalizedString' <$>
+                   (o .:? "args") <*> (o .:? "token") <*>
+                     (o .:? "message"))
+
+instance ToJSON LocalizedString where
+        toJSON LocalizedString'{..}
+          = object
+              (catMaybes
+                 [("args" .=) <$> _lsArgs, ("token" .=) <$> _lsToken,
+                  ("message" .=) <$> _lsMessage])
+
+-- | Metadata type for the long-running operation used to track the progress
+-- of optimizations performed on a newly restored database. This
+-- long-running operation is automatically created by the system after the
+-- successful completion of a database restore, and cannot be cancelled.
+--
+-- /See:/ 'optimizeRestoredDatabaseMetadata' smart constructor.
+data OptimizeRestoredDatabaseMetadata =
+  OptimizeRestoredDatabaseMetadata'
+    { _ordmProgress :: !(Maybe OperationProgress)
+    , _ordmName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OptimizeRestoredDatabaseMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ordmProgress'
+--
+-- * 'ordmName'
+optimizeRestoredDatabaseMetadata
+    :: OptimizeRestoredDatabaseMetadata
+optimizeRestoredDatabaseMetadata =
+  OptimizeRestoredDatabaseMetadata'
+    {_ordmProgress = Nothing, _ordmName = Nothing}
+
+
+-- | The progress of the post-restore optimizations.
+ordmProgress :: Lens' OptimizeRestoredDatabaseMetadata (Maybe OperationProgress)
+ordmProgress
+  = lens _ordmProgress (\ s a -> s{_ordmProgress = a})
+
+-- | Name of the restored database being optimized.
+ordmName :: Lens' OptimizeRestoredDatabaseMetadata (Maybe Text)
+ordmName = lens _ordmName (\ s a -> s{_ordmName = a})
+
+instance FromJSON OptimizeRestoredDatabaseMetadata
+         where
+        parseJSON
+          = withObject "OptimizeRestoredDatabaseMetadata"
+              (\ o ->
+                 OptimizeRestoredDatabaseMetadata' <$>
+                   (o .:? "progress") <*> (o .:? "name"))
+
+instance ToJSON OptimizeRestoredDatabaseMetadata
+         where
+        toJSON OptimizeRestoredDatabaseMetadata'{..}
+          = object
+              (catMaybes
+                 [("progress" .=) <$> _ordmProgress,
+                  ("name" .=) <$> _ordmName])
+
+-- | Response method from the ListScans method.
+--
+-- /See:/ 'listScansResponse' smart constructor.
+data ListScansResponse =
+  ListScansResponse'
+    { _lNextPageToken :: !(Maybe Text)
+    , _lScans :: !(Maybe [Scan])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListScansResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lNextPageToken'
+--
+-- * 'lScans'
+listScansResponse
+    :: ListScansResponse
+listScansResponse =
+  ListScansResponse' {_lNextPageToken = Nothing, _lScans = Nothing}
+
+
+-- | Token to retrieve the next page of results, or empty if there are no
+-- more results in the list.
+lNextPageToken :: Lens' ListScansResponse (Maybe Text)
+lNextPageToken
+  = lens _lNextPageToken
+      (\ s a -> s{_lNextPageToken = a})
+
+-- | Available scans based on the list query parameters.
+lScans :: Lens' ListScansResponse [Scan]
+lScans
+  = lens _lScans (\ s a -> s{_lScans = a}) . _Default .
+      _Coerce
+
+instance FromJSON ListScansResponse where
+        parseJSON
+          = withObject "ListScansResponse"
+              (\ o ->
+                 ListScansResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "scans" .!= mempty))
+
+instance ToJSON ListScansResponse where
+        toJSON ListScansResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lNextPageToken,
+                  ("scans" .=) <$> _lScans])
+
+-- | Additional information provided by the implementer.
+--
+-- /See:/ 'scanDetails' smart constructor.
+newtype ScanDetails =
+  ScanDetails'
+    { _sdAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ScanDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdAddtional'
+scanDetails
+    :: HashMap Text JSONValue -- ^ 'sdAddtional'
+    -> ScanDetails
+scanDetails pSdAddtional_ =
+  ScanDetails' {_sdAddtional = _Coerce # pSdAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+sdAddtional :: Lens' ScanDetails (HashMap Text JSONValue)
+sdAddtional
+  = lens _sdAddtional (\ s a -> s{_sdAddtional = a}) .
+      _Coerce
+
+instance FromJSON ScanDetails where
+        parseJSON
+          = withObject "ScanDetails"
+              (\ o -> ScanDetails' <$> (parseJSONObject o))
+
+instance ToJSON ScanDetails where
+        toJSON = toJSON . _sdAddtional
+
+-- | A message representing a row of a matrix of floats.
+--
+-- /See:/ 'metricMatrixRow' smart constructor.
+newtype MetricMatrixRow =
+  MetricMatrixRow'
+    { _mmrCols :: Maybe [Textual Double]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MetricMatrixRow' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mmrCols'
+metricMatrixRow
+    :: MetricMatrixRow
+metricMatrixRow = MetricMatrixRow' {_mmrCols = Nothing}
+
+
+-- | The columns of the row.
+mmrCols :: Lens' MetricMatrixRow [Double]
+mmrCols
+  = lens _mmrCols (\ s a -> s{_mmrCols = a}) . _Default
+      . _Coerce
+
+instance FromJSON MetricMatrixRow where
+        parseJSON
+          = withObject "MetricMatrixRow"
+              (\ o ->
+                 MetricMatrixRow' <$> (o .:? "cols" .!= mempty))
+
+instance ToJSON MetricMatrixRow where
+        toJSON MetricMatrixRow'{..}
+          = object (catMaybes [("cols" .=) <$> _mmrCols])
+
 -- | It is not always possible for Cloud Spanner to infer the right SQL type
 -- from a JSON value. For example, values of type \`BYTES\` and values of
 -- type \`STRING\` both appear in params as JSON strings. In these cases,
@@ -2838,15 +5201,89 @@ instance FromJSON PartitionQueryRequestParamTypes
 instance ToJSON PartitionQueryRequestParamTypes where
         toJSON = toJSON . _pqrptAddtional
 
+-- | Encryption configuration for a Cloud Spanner database.
+--
+-- /See:/ 'encryptionConfig' smart constructor.
+newtype EncryptionConfig =
+  EncryptionConfig'
+    { _ecKmsKeyName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecKmsKeyName'
+encryptionConfig
+    :: EncryptionConfig
+encryptionConfig = EncryptionConfig' {_ecKmsKeyName = Nothing}
+
+
+-- | The Cloud KMS key to be used for encrypting and decrypting the database.
+-- Values are of the form
+-- \`projects\/\/locations\/\/keyRings\/\/cryptoKeys\/\`.
+ecKmsKeyName :: Lens' EncryptionConfig (Maybe Text)
+ecKmsKeyName
+  = lens _ecKmsKeyName (\ s a -> s{_ecKmsKeyName = a})
+
+instance FromJSON EncryptionConfig where
+        parseJSON
+          = withObject "EncryptionConfig"
+              (\ o -> EncryptionConfig' <$> (o .:? "kmsKeyName"))
+
+instance ToJSON EncryptionConfig where
+        toJSON EncryptionConfig'{..}
+          = object
+              (catMaybes [("kmsKeyName" .=) <$> _ecKmsKeyName])
+
+-- | A map of arguments used when creating the localized message. Keys
+-- represent parameter names which may be used by the localized version
+-- when substituting dynamic values.
+--
+-- /See:/ 'localizedStringArgs' smart constructor.
+newtype LocalizedStringArgs =
+  LocalizedStringArgs'
+    { _lsaAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LocalizedStringArgs' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsaAddtional'
+localizedStringArgs
+    :: HashMap Text Text -- ^ 'lsaAddtional'
+    -> LocalizedStringArgs
+localizedStringArgs pLsaAddtional_ =
+  LocalizedStringArgs' {_lsaAddtional = _Coerce # pLsaAddtional_}
+
+
+lsaAddtional :: Lens' LocalizedStringArgs (HashMap Text Text)
+lsaAddtional
+  = lens _lsaAddtional (\ s a -> s{_lsaAddtional = a})
+      . _Coerce
+
+instance FromJSON LocalizedStringArgs where
+        parseJSON
+          = withObject "LocalizedStringArgs"
+              (\ o -> LocalizedStringArgs' <$> (parseJSONObject o))
+
+instance ToJSON LocalizedStringArgs where
+        toJSON = toJSON . _lsaAddtional
+
 -- | Metadata type for the operation returned by UpdateInstance.
 --
 -- /See:/ 'updateInstanceMetadata' smart constructor.
 data UpdateInstanceMetadata =
   UpdateInstanceMetadata'
-    { _uimStartTime  :: !(Maybe DateTime')
+    { _uimStartTime :: !(Maybe DateTime')
     , _uimCancelTime :: !(Maybe DateTime')
-    , _uimEndTime    :: !(Maybe DateTime')
-    , _uimInstance   :: !(Maybe Instance)
+    , _uimEndTime :: !(Maybe DateTime')
+    , _uimInstance :: !(Maybe Instance)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3001,6 +5438,124 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
+-- | Metadata type for the long-running operation returned by
+-- RestoreDatabase.
+--
+-- /See:/ 'restoreDatabaseMetadata' smart constructor.
+data RestoreDatabaseMetadata =
+  RestoreDatabaseMetadata'
+    { _rdmSourceType :: !(Maybe RestoreDatabaseMetadataSourceType)
+    , _rdmProgress :: !(Maybe OperationProgress)
+    , _rdmCancelTime :: !(Maybe DateTime')
+    , _rdmName :: !(Maybe Text)
+    , _rdmBackupInfo :: !(Maybe BackupInfo)
+    , _rdmOptimizeDatabaseOperationName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreDatabaseMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdmSourceType'
+--
+-- * 'rdmProgress'
+--
+-- * 'rdmCancelTime'
+--
+-- * 'rdmName'
+--
+-- * 'rdmBackupInfo'
+--
+-- * 'rdmOptimizeDatabaseOperationName'
+restoreDatabaseMetadata
+    :: RestoreDatabaseMetadata
+restoreDatabaseMetadata =
+  RestoreDatabaseMetadata'
+    { _rdmSourceType = Nothing
+    , _rdmProgress = Nothing
+    , _rdmCancelTime = Nothing
+    , _rdmName = Nothing
+    , _rdmBackupInfo = Nothing
+    , _rdmOptimizeDatabaseOperationName = Nothing
+    }
+
+
+-- | The type of the restore source.
+rdmSourceType :: Lens' RestoreDatabaseMetadata (Maybe RestoreDatabaseMetadataSourceType)
+rdmSourceType
+  = lens _rdmSourceType
+      (\ s a -> s{_rdmSourceType = a})
+
+-- | The progress of the RestoreDatabase operation.
+rdmProgress :: Lens' RestoreDatabaseMetadata (Maybe OperationProgress)
+rdmProgress
+  = lens _rdmProgress (\ s a -> s{_rdmProgress = a})
+
+-- | The time at which cancellation of this operation was received.
+-- Operations.CancelOperation starts asynchronous cancellation on a
+-- long-running operation. The server makes a best effort to cancel the
+-- operation, but success is not guaranteed. Clients can use
+-- Operations.GetOperation or other methods to check whether the
+-- cancellation succeeded or whether the operation completed despite
+-- cancellation. On successful cancellation, the operation is not deleted;
+-- instead, it becomes an operation with an Operation.error value with a
+-- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
+rdmCancelTime :: Lens' RestoreDatabaseMetadata (Maybe UTCTime)
+rdmCancelTime
+  = lens _rdmCancelTime
+      (\ s a -> s{_rdmCancelTime = a})
+      . mapping _DateTime
+
+-- | Name of the database being created and restored to.
+rdmName :: Lens' RestoreDatabaseMetadata (Maybe Text)
+rdmName = lens _rdmName (\ s a -> s{_rdmName = a})
+
+-- | Information about the backup used to restore the database.
+rdmBackupInfo :: Lens' RestoreDatabaseMetadata (Maybe BackupInfo)
+rdmBackupInfo
+  = lens _rdmBackupInfo
+      (\ s a -> s{_rdmBackupInfo = a})
+
+-- | If exists, the name of the long-running operation that will be used to
+-- track the post-restore optimization process to optimize the performance
+-- of the restored database, and remove the dependency on the restore
+-- source. The name is of the form
+-- \`projects\/\/instances\/\/databases\/\/operations\/\` where the is the
+-- name of database being created and restored to. The metadata type of the
+-- long-running operation is OptimizeRestoredDatabaseMetadata. This
+-- long-running operation will be automatically created by the system after
+-- the RestoreDatabase long-running operation completes successfully. This
+-- operation will not be created if the restore was not successful.
+rdmOptimizeDatabaseOperationName :: Lens' RestoreDatabaseMetadata (Maybe Text)
+rdmOptimizeDatabaseOperationName
+  = lens _rdmOptimizeDatabaseOperationName
+      (\ s a -> s{_rdmOptimizeDatabaseOperationName = a})
+
+instance FromJSON RestoreDatabaseMetadata where
+        parseJSON
+          = withObject "RestoreDatabaseMetadata"
+              (\ o ->
+                 RestoreDatabaseMetadata' <$>
+                   (o .:? "sourceType") <*> (o .:? "progress") <*>
+                     (o .:? "cancelTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "backupInfo")
+                     <*> (o .:? "optimizeDatabaseOperationName"))
+
+instance ToJSON RestoreDatabaseMetadata where
+        toJSON RestoreDatabaseMetadata'{..}
+          = object
+              (catMaybes
+                 [("sourceType" .=) <$> _rdmSourceType,
+                  ("progress" .=) <$> _rdmProgress,
+                  ("cancelTime" .=) <$> _rdmCancelTime,
+                  ("name" .=) <$> _rdmName,
+                  ("backupInfo" .=) <$> _rdmBackupInfo,
+                  ("optimizeDatabaseOperationName" .=) <$>
+                    _rdmOptimizeDatabaseOperationName])
+
 -- | Partial results from a streaming read or SQL query. Streaming reads and
 -- SQL queries better tolerate large result sets, large rows, and large
 -- values, but are a little trickier to consume.
@@ -3008,10 +5563,10 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'partialResultSet' smart constructor.
 data PartialResultSet =
   PartialResultSet'
-    { _prsResumeToken  :: !(Maybe Bytes)
-    , _prsValues       :: !(Maybe [JSONValue])
-    , _prsStats        :: !(Maybe ResultSetStats)
-    , _prsMetadata     :: !(Maybe ResultSetMetadata)
+    { _prsResumeToken :: !(Maybe Bytes)
+    , _prsValues :: !(Maybe [JSONValue])
+    , _prsStats :: !(Maybe ResultSetStats)
+    , _prsMetadata :: !(Maybe ResultSetMetadata)
     , _prsChunkedValue :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3138,29 +5693,180 @@ instance ToJSON PartialResultSet where
                   ("metadata" .=) <$> _prsMetadata,
                   ("chunkedValue" .=) <$> _prsChunkedValue])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | Encryption configuration for the restored database.
+--
+-- /See:/ 'restoreDatabaseEncryptionConfig' smart constructor.
+data RestoreDatabaseEncryptionConfig =
+  RestoreDatabaseEncryptionConfig'
+    { _rdecEncryptionType :: !(Maybe RestoreDatabaseEncryptionConfigEncryptionType)
+    , _rdecKmsKeyName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreDatabaseEncryptionConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdecEncryptionType'
+--
+-- * 'rdecKmsKeyName'
+restoreDatabaseEncryptionConfig
+    :: RestoreDatabaseEncryptionConfig
+restoreDatabaseEncryptionConfig =
+  RestoreDatabaseEncryptionConfig'
+    {_rdecEncryptionType = Nothing, _rdecKmsKeyName = Nothing}
+
+
+-- | Required. The encryption type of the restored database.
+rdecEncryptionType :: Lens' RestoreDatabaseEncryptionConfig (Maybe RestoreDatabaseEncryptionConfigEncryptionType)
+rdecEncryptionType
+  = lens _rdecEncryptionType
+      (\ s a -> s{_rdecEncryptionType = a})
+
+-- | Optional. The Cloud KMS key that will be used to encrypt\/decrypt the
+-- restored database. This field should be set only when encryption_type is
+-- \`CUSTOMER_MANAGED_ENCRYPTION\`. Values are of the form
+-- \`projects\/\/locations\/\/keyRings\/\/cryptoKeys\/\`.
+rdecKmsKeyName :: Lens' RestoreDatabaseEncryptionConfig (Maybe Text)
+rdecKmsKeyName
+  = lens _rdecKmsKeyName
+      (\ s a -> s{_rdecKmsKeyName = a})
+
+instance FromJSON RestoreDatabaseEncryptionConfig
+         where
+        parseJSON
+          = withObject "RestoreDatabaseEncryptionConfig"
+              (\ o ->
+                 RestoreDatabaseEncryptionConfig' <$>
+                   (o .:? "encryptionType") <*> (o .:? "kmsKeyName"))
+
+instance ToJSON RestoreDatabaseEncryptionConfig where
+        toJSON RestoreDatabaseEncryptionConfig'{..}
+          = object
+              (catMaybes
+                 [("encryptionType" .=) <$> _rdecEncryptionType,
+                  ("kmsKeyName" .=) <$> _rdecKmsKeyName])
+
+-- | Information about a backup.
+--
+-- /See:/ 'backupInfo' smart constructor.
+data BackupInfo =
+  BackupInfo'
+    { _biBackup :: !(Maybe Text)
+    , _biVersionTime :: !(Maybe DateTime')
+    , _biSourceDatabase :: !(Maybe Text)
+    , _biCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BackupInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'biBackup'
+--
+-- * 'biVersionTime'
+--
+-- * 'biSourceDatabase'
+--
+-- * 'biCreateTime'
+backupInfo
+    :: BackupInfo
+backupInfo =
+  BackupInfo'
+    { _biBackup = Nothing
+    , _biVersionTime = Nothing
+    , _biSourceDatabase = Nothing
+    , _biCreateTime = Nothing
+    }
+
+
+-- | Name of the backup.
+biBackup :: Lens' BackupInfo (Maybe Text)
+biBackup = lens _biBackup (\ s a -> s{_biBackup = a})
+
+-- | The backup contains an externally consistent copy of \`source_database\`
+-- at the timestamp specified by \`version_time\`. If the CreateBackup
+-- request did not specify \`version_time\`, the \`version_time\` of the
+-- backup is equivalent to the \`create_time\`.
+biVersionTime :: Lens' BackupInfo (Maybe UTCTime)
+biVersionTime
+  = lens _biVersionTime
+      (\ s a -> s{_biVersionTime = a})
+      . mapping _DateTime
+
+-- | Name of the database the backup was created from.
+biSourceDatabase :: Lens' BackupInfo (Maybe Text)
+biSourceDatabase
+  = lens _biSourceDatabase
+      (\ s a -> s{_biSourceDatabase = a})
+
+-- | The time the CreateBackup request was received.
+biCreateTime :: Lens' BackupInfo (Maybe UTCTime)
+biCreateTime
+  = lens _biCreateTime (\ s a -> s{_biCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON BackupInfo where
+        parseJSON
+          = withObject "BackupInfo"
+              (\ o ->
+                 BackupInfo' <$>
+                   (o .:? "backup") <*> (o .:? "versionTime") <*>
+                     (o .:? "sourceDatabase")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON BackupInfo where
+        toJSON BackupInfo'{..}
+          = object
+              (catMaybes
+                 [("backup" .=) <$> _biBackup,
+                  ("versionTime" .=) <$> _biVersionTime,
+                  ("sourceDatabase" .=) <$> _biSourceDatabase,
+                  ("createTime" .=) <$> _biCreateTime])
+
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pEtag     :: !(Maybe Bytes)
-    , _pVersion  :: !(Maybe (Textual Int32))
+    { _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3187,21 +5893,40 @@ policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -3230,6 +5955,7 @@ instance ToJSON Policy where
 data CreateDatabaseRequest =
   CreateDatabaseRequest'
     { _cdrExtraStatements :: !(Maybe [Text])
+    , _cdrEncryptionConfig :: !(Maybe EncryptionConfig)
     , _cdrCreateStatement :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3241,15 +5967,20 @@ data CreateDatabaseRequest =
 --
 -- * 'cdrExtraStatements'
 --
+-- * 'cdrEncryptionConfig'
+--
 -- * 'cdrCreateStatement'
 createDatabaseRequest
     :: CreateDatabaseRequest
 createDatabaseRequest =
   CreateDatabaseRequest'
-    {_cdrExtraStatements = Nothing, _cdrCreateStatement = Nothing}
+    { _cdrExtraStatements = Nothing
+    , _cdrEncryptionConfig = Nothing
+    , _cdrCreateStatement = Nothing
+    }
 
 
--- | An optional list of DDL statements to run inside the newly created
+-- | Optional. A list of DDL statements to run inside the newly created
 -- database. Statements can create tables, indexes, etc. These statements
 -- execute atomically with the creation of the database: if there is an
 -- error in any statement, the database is not created.
@@ -3259,6 +5990,14 @@ cdrExtraStatements
       (\ s a -> s{_cdrExtraStatements = a})
       . _Default
       . _Coerce
+
+-- | Optional. The encryption configuration for the database. If this field
+-- is not specified, Cloud Spanner will encrypt\/decrypt all data at rest
+-- using Google default encryption.
+cdrEncryptionConfig :: Lens' CreateDatabaseRequest (Maybe EncryptionConfig)
+cdrEncryptionConfig
+  = lens _cdrEncryptionConfig
+      (\ s a -> s{_cdrEncryptionConfig = a})
 
 -- | Required. A \`CREATE DATABASE\` statement, which specifies the ID of the
 -- new database. The database ID must conform to the regular expression
@@ -3276,13 +6015,15 @@ instance FromJSON CreateDatabaseRequest where
               (\ o ->
                  CreateDatabaseRequest' <$>
                    (o .:? "extraStatements" .!= mempty) <*>
-                     (o .:? "createStatement"))
+                     (o .:? "encryptionConfig")
+                     <*> (o .:? "createStatement"))
 
 instance ToJSON CreateDatabaseRequest where
         toJSON CreateDatabaseRequest'{..}
           = object
               (catMaybes
                  [("extraStatements" .=) <$> _cdrExtraStatements,
+                  ("encryptionConfig" .=) <$> _cdrEncryptionConfig,
                   ("createStatement" .=) <$> _cdrCreateStatement])
 
 -- | The request for ExecuteSql and ExecuteStreamingSql.
@@ -3290,14 +6031,16 @@ instance ToJSON CreateDatabaseRequest where
 -- /See:/ 'executeSQLRequest' smart constructor.
 data ExecuteSQLRequest =
   ExecuteSQLRequest'
-    { _esqlrParamTypes     :: !(Maybe ExecuteSQLRequestParamTypes)
-    , _esqlrResumeToken    :: !(Maybe Bytes)
-    , _esqlrSeqno          :: !(Maybe (Textual Int64))
-    , _esqlrParams         :: !(Maybe ExecuteSQLRequestParams)
-    , _esqlrTransaction    :: !(Maybe TransactionSelector)
-    , _esqlrSQL            :: !(Maybe Text)
+    { _esqlrParamTypes :: !(Maybe ExecuteSQLRequestParamTypes)
+    , _esqlrQueryOptions :: !(Maybe QueryOptions)
+    , _esqlrResumeToken :: !(Maybe Bytes)
+    , _esqlrSeqno :: !(Maybe (Textual Int64))
+    , _esqlrParams :: !(Maybe ExecuteSQLRequestParams)
+    , _esqlrTransaction :: !(Maybe TransactionSelector)
+    , _esqlrSQL :: !(Maybe Text)
     , _esqlrPartitionToken :: !(Maybe Bytes)
-    , _esqlrQueryMode      :: !(Maybe ExecuteSQLRequestQueryMode)
+    , _esqlrQueryMode :: !(Maybe ExecuteSQLRequestQueryMode)
+    , _esqlrRequestOptions :: !(Maybe RequestOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3307,6 +6050,8 @@ data ExecuteSQLRequest =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'esqlrParamTypes'
+--
+-- * 'esqlrQueryOptions'
 --
 -- * 'esqlrResumeToken'
 --
@@ -3321,11 +6066,14 @@ data ExecuteSQLRequest =
 -- * 'esqlrPartitionToken'
 --
 -- * 'esqlrQueryMode'
+--
+-- * 'esqlrRequestOptions'
 executeSQLRequest
     :: ExecuteSQLRequest
 executeSQLRequest =
   ExecuteSQLRequest'
     { _esqlrParamTypes = Nothing
+    , _esqlrQueryOptions = Nothing
     , _esqlrResumeToken = Nothing
     , _esqlrSeqno = Nothing
     , _esqlrParams = Nothing
@@ -3333,6 +6081,7 @@ executeSQLRequest =
     , _esqlrSQL = Nothing
     , _esqlrPartitionToken = Nothing
     , _esqlrQueryMode = Nothing
+    , _esqlrRequestOptions = Nothing
     }
 
 
@@ -3347,6 +6096,12 @@ esqlrParamTypes
   = lens _esqlrParamTypes
       (\ s a -> s{_esqlrParamTypes = a})
 
+-- | Query optimizer configuration to use for the given query.
+esqlrQueryOptions :: Lens' ExecuteSQLRequest (Maybe QueryOptions)
+esqlrQueryOptions
+  = lens _esqlrQueryOptions
+      (\ s a -> s{_esqlrQueryOptions = a})
+
 -- | If this request is resuming a previously interrupted SQL statement
 -- execution, \`resume_token\` should be copied from the last
 -- PartialResultSet yielded before the interruption. Doing this enables the
@@ -3360,7 +6115,7 @@ esqlrResumeToken
       . mapping _Bytes
 
 -- | A per-transaction sequence number used to identify this request. This
--- makes each request idempotent such that if the request is received
+-- field makes each request idempotent such that if the request is received
 -- multiple times, at most one will succeed. The sequence number must be
 -- monotonically increasing within the transaction. If a request arrives
 -- for the first time with an out-of-order sequence number, the transaction
@@ -3372,28 +6127,25 @@ esqlrSeqno
   = lens _esqlrSeqno (\ s a -> s{_esqlrSeqno = a}) .
       mapping _Coerce
 
--- | The SQL string can contain parameter placeholders. A parameter
--- placeholder consists of \`\'\'\'\` followed by the parameter name.
--- Parameter names consist of any combination of letters, numbers, and
--- underscores. Parameters can appear anywhere that a literal value is
--- expected. The same parameter name can be used more than once, for
--- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
--- error to execute an SQL statement with unbound parameters. Parameter
--- values are specified using \`params\`, which is a JSON object whose keys
--- are parameter names, and whose values are the corresponding parameter
--- values.
+-- | Parameter names and values that bind to placeholders in the SQL string.
+-- A parameter placeholder consists of the \`\'\` character followed by the
+-- parameter name (for example, \`\'firstName\`). Parameter names must
+-- conform to the naming requirements of identifiers as specified at
+-- https:\/\/cloud.google.com\/spanner\/docs\/lexical#identifiers.
+-- Parameters can appear anywhere that a literal value is expected. The
+-- same parameter name can be used more than once, for example: \`\"WHERE
+-- id > \'msg_id AND id \< \'msg_id + 100\"\` It is an error to execute a
+-- SQL statement with unbound parameters.
 esqlrParams :: Lens' ExecuteSQLRequest (Maybe ExecuteSQLRequestParams)
 esqlrParams
   = lens _esqlrParams (\ s a -> s{_esqlrParams = a})
 
--- | The transaction to use. If none is provided, the default is a temporary
--- read-only transaction with strong concurrency. The transaction to use.
--- For queries, if none is provided, the default is a temporary read-only
--- transaction with strong concurrency. Standard DML statements require a
--- ReadWrite transaction. Single-use transactions are not supported (to
--- avoid replay). The caller must either supply an existing transaction ID
--- or begin a new transaction. Partitioned DML requires an existing
--- PartitionedDml transaction ID.
+-- | The transaction to use. For queries, if none is provided, the default is
+-- a temporary read-only transaction with strong concurrency. Standard DML
+-- statements require a read-write transaction. To protect against replays,
+-- single-use transactions are not supported. The caller must either supply
+-- an existing transaction ID or begin a new transaction. Partitioned DML
+-- requires an existing Partitioned DML transaction ID.
 esqlrTransaction :: Lens' ExecuteSQLRequest (Maybe TransactionSelector)
 esqlrTransaction
   = lens _esqlrTransaction
@@ -3421,40 +6173,52 @@ esqlrQueryMode
   = lens _esqlrQueryMode
       (\ s a -> s{_esqlrQueryMode = a})
 
+-- | Common options for this request.
+esqlrRequestOptions :: Lens' ExecuteSQLRequest (Maybe RequestOptions)
+esqlrRequestOptions
+  = lens _esqlrRequestOptions
+      (\ s a -> s{_esqlrRequestOptions = a})
+
 instance FromJSON ExecuteSQLRequest where
         parseJSON
           = withObject "ExecuteSQLRequest"
               (\ o ->
                  ExecuteSQLRequest' <$>
-                   (o .:? "paramTypes") <*> (o .:? "resumeToken") <*>
-                     (o .:? "seqno")
+                   (o .:? "paramTypes") <*> (o .:? "queryOptions") <*>
+                     (o .:? "resumeToken")
+                     <*> (o .:? "seqno")
                      <*> (o .:? "params")
                      <*> (o .:? "transaction")
                      <*> (o .:? "sql")
                      <*> (o .:? "partitionToken")
-                     <*> (o .:? "queryMode"))
+                     <*> (o .:? "queryMode")
+                     <*> (o .:? "requestOptions"))
 
 instance ToJSON ExecuteSQLRequest where
         toJSON ExecuteSQLRequest'{..}
           = object
               (catMaybes
                  [("paramTypes" .=) <$> _esqlrParamTypes,
+                  ("queryOptions" .=) <$> _esqlrQueryOptions,
                   ("resumeToken" .=) <$> _esqlrResumeToken,
                   ("seqno" .=) <$> _esqlrSeqno,
                   ("params" .=) <$> _esqlrParams,
                   ("transaction" .=) <$> _esqlrTransaction,
                   ("sql" .=) <$> _esqlrSQL,
                   ("partitionToken" .=) <$> _esqlrPartitionToken,
-                  ("queryMode" .=) <$> _esqlrQueryMode])
+                  ("queryMode" .=) <$> _esqlrQueryMode,
+                  ("requestOptions" .=) <$> _esqlrRequestOptions])
 
 -- | The request for Commit.
 --
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest =
   CommitRequest'
-    { _crMutations            :: !(Maybe [Mutation])
-    , _crTransactionId        :: !(Maybe Bytes)
+    { _crReturnCommitStats :: !(Maybe Bool)
+    , _crMutations :: !(Maybe [Mutation])
+    , _crTransactionId :: !(Maybe Bytes)
     , _crSingleUseTransaction :: !(Maybe TransactionOptions)
+    , _crRequestOptions :: !(Maybe RequestOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3463,20 +6227,33 @@ data CommitRequest =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'crReturnCommitStats'
+--
 -- * 'crMutations'
 --
 -- * 'crTransactionId'
 --
 -- * 'crSingleUseTransaction'
+--
+-- * 'crRequestOptions'
 commitRequest
     :: CommitRequest
 commitRequest =
   CommitRequest'
-    { _crMutations = Nothing
+    { _crReturnCommitStats = Nothing
+    , _crMutations = Nothing
     , _crTransactionId = Nothing
     , _crSingleUseTransaction = Nothing
+    , _crRequestOptions = Nothing
     }
 
+
+-- | If \`true\`, then statistics related to the transaction will be included
+-- in the CommitResponse. Default value is \`false\`.
+crReturnCommitStats :: Lens' CommitRequest (Maybe Bool)
+crReturnCommitStats
+  = lens _crReturnCommitStats
+      (\ s a -> s{_crReturnCommitStats = a})
 
 -- | The mutations to be executed when this transaction commits. All
 -- mutations are applied atomically, in the order they appear in this list.
@@ -3505,23 +6282,33 @@ crSingleUseTransaction
   = lens _crSingleUseTransaction
       (\ s a -> s{_crSingleUseTransaction = a})
 
+-- | Common options for this request.
+crRequestOptions :: Lens' CommitRequest (Maybe RequestOptions)
+crRequestOptions
+  = lens _crRequestOptions
+      (\ s a -> s{_crRequestOptions = a})
+
 instance FromJSON CommitRequest where
         parseJSON
           = withObject "CommitRequest"
               (\ o ->
                  CommitRequest' <$>
-                   (o .:? "mutations" .!= mempty) <*>
-                     (o .:? "transactionId")
-                     <*> (o .:? "singleUseTransaction"))
+                   (o .:? "returnCommitStats") <*>
+                     (o .:? "mutations" .!= mempty)
+                     <*> (o .:? "transactionId")
+                     <*> (o .:? "singleUseTransaction")
+                     <*> (o .:? "requestOptions"))
 
 instance ToJSON CommitRequest where
         toJSON CommitRequest'{..}
           = object
               (catMaybes
-                 [("mutations" .=) <$> _crMutations,
+                 [("returnCommitStats" .=) <$> _crReturnCommitStats,
+                  ("mutations" .=) <$> _crMutations,
                   ("transactionId" .=) <$> _crTransactionId,
                   ("singleUseTransaction" .=) <$>
-                    _crSingleUseTransaction])
+                    _crSingleUseTransaction,
+                  ("requestOptions" .=) <$> _crRequestOptions])
 
 -- | \`Type\` indicates the type of a Cloud Spanner value, as might be stored
 -- in a table cell or returned from an SQL query.
@@ -3530,8 +6317,8 @@ instance ToJSON CommitRequest where
 data Type =
   Type'
     { _tArrayElementType :: !(Maybe Type)
-    , _tStructType       :: !(Maybe StructType)
-    , _tCode             :: !(Maybe TypeCode)
+    , _tStructType :: !(Maybe StructType)
+    , _tCode :: !(Maybe TypeCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3589,10 +6376,10 @@ instance ToJSON Type where
 -- /See:/ 'createInstanceMetadata' smart constructor.
 data CreateInstanceMetadata =
   CreateInstanceMetadata'
-    { _cimStartTime  :: !(Maybe DateTime')
+    { _cimStartTime :: !(Maybe DateTime')
     , _cimCancelTime :: !(Maybe DateTime')
-    , _cimEndTime    :: !(Maybe DateTime')
-    , _cimInstance   :: !(Maybe Instance)
+    , _cimEndTime :: !(Maybe DateTime')
+    , _cimInstance :: !(Maybe Instance)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3706,9 +6493,9 @@ instance ToJSON CreateInstanceMetadata where
 data KeyRange =
   KeyRange'
     { _krStartClosed :: !(Maybe [JSONValue])
-    , _krEndOpen     :: !(Maybe [JSONValue])
-    , _krStartOpen   :: !(Maybe [JSONValue])
-    , _krEndClosed   :: !(Maybe [JSONValue])
+    , _krEndOpen :: !(Maybe [JSONValue])
+    , _krStartOpen :: !(Maybe [JSONValue])
+    , _krEndClosed :: !(Maybe [JSONValue])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3832,8 +6619,10 @@ instance ToJSON OperationMetadata where
 -- /See:/ 'instanceConfig' smart constructor.
 data InstanceConfig =
   InstanceConfig'
-    { _icName        :: !(Maybe Text)
+    { _icLeaderOptions :: !(Maybe [Text])
+    , _icName :: !(Maybe Text)
     , _icDisplayName :: !(Maybe Text)
+    , _icReplicas :: !(Maybe [ReplicaInfo])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3842,13 +6631,32 @@ data InstanceConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'icLeaderOptions'
+--
 -- * 'icName'
 --
 -- * 'icDisplayName'
+--
+-- * 'icReplicas'
 instanceConfig
     :: InstanceConfig
-instanceConfig = InstanceConfig' {_icName = Nothing, _icDisplayName = Nothing}
+instanceConfig =
+  InstanceConfig'
+    { _icLeaderOptions = Nothing
+    , _icName = Nothing
+    , _icDisplayName = Nothing
+    , _icReplicas = Nothing
+    }
 
+
+-- | Allowed values of the “default_leader” schema option for databases in
+-- instances that use this instance configuration.
+icLeaderOptions :: Lens' InstanceConfig [Text]
+icLeaderOptions
+  = lens _icLeaderOptions
+      (\ s a -> s{_icLeaderOptions = a})
+      . _Default
+      . _Coerce
 
 -- | A unique identifier for the instance configuration. Values are of the
 -- form \`projects\/\/instanceConfigs\/a-z*\`
@@ -3861,27 +6669,39 @@ icDisplayName
   = lens _icDisplayName
       (\ s a -> s{_icDisplayName = a})
 
+-- | The geographic placement of nodes in this instance configuration and
+-- their replication properties.
+icReplicas :: Lens' InstanceConfig [ReplicaInfo]
+icReplicas
+  = lens _icReplicas (\ s a -> s{_icReplicas = a}) .
+      _Default
+      . _Coerce
+
 instance FromJSON InstanceConfig where
         parseJSON
           = withObject "InstanceConfig"
               (\ o ->
                  InstanceConfig' <$>
-                   (o .:? "name") <*> (o .:? "displayName"))
+                   (o .:? "leaderOptions" .!= mempty) <*> (o .:? "name")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "replicas" .!= mempty))
 
 instance ToJSON InstanceConfig where
         toJSON InstanceConfig'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _icName,
-                  ("displayName" .=) <$> _icDisplayName])
+                 [("leaderOptions" .=) <$> _icLeaderOptions,
+                  ("name" .=) <$> _icName,
+                  ("displayName" .=) <$> _icDisplayName,
+                  ("replicas" .=) <$> _icReplicas])
 
 -- | Results from Read or ExecuteSql.
 --
 -- /See:/ 'resultSet' smart constructor.
 data ResultSet =
   ResultSet'
-    { _rsStats    :: !(Maybe ResultSetStats)
-    , _rsRows     :: !(Maybe [[JSONValue]])
+    { _rsStats :: !(Maybe ResultSetStats)
+    , _rsRows :: !(Maybe [[JSONValue]])
     , _rsMetadata :: !(Maybe ResultSetMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3987,7 +6807,8 @@ instance ToJSON SessionLabels where
 data ListInstancesResponse =
   ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
-    , _lirInstances     :: !(Maybe [Instance])
+    , _lirUnreachable :: !(Maybe [Text])
+    , _lirInstances :: !(Maybe [Instance])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3998,11 +6819,17 @@ data ListInstancesResponse =
 --
 -- * 'lirNextPageToken'
 --
+-- * 'lirUnreachable'
+--
 -- * 'lirInstances'
 listInstancesResponse
     :: ListInstancesResponse
 listInstancesResponse =
-  ListInstancesResponse' {_lirNextPageToken = Nothing, _lirInstances = Nothing}
+  ListInstancesResponse'
+    { _lirNextPageToken = Nothing
+    , _lirUnreachable = Nothing
+    , _lirInstances = Nothing
+    }
 
 
 -- | \`next_page_token\` can be sent in a subsequent ListInstances call to
@@ -4011,6 +6838,15 @@ lirNextPageToken :: Lens' ListInstancesResponse (Maybe Text)
 lirNextPageToken
   = lens _lirNextPageToken
       (\ s a -> s{_lirNextPageToken = a})
+
+-- | The list of unreachable instances. It includes the names of instances
+-- whose metadata could not be retrieved within instance_deadline.
+lirUnreachable :: Lens' ListInstancesResponse [Text]
+lirUnreachable
+  = lens _lirUnreachable
+      (\ s a -> s{_lirUnreachable = a})
+      . _Default
+      . _Coerce
 
 -- | The list of requested instances.
 lirInstances :: Lens' ListInstancesResponse [Instance]
@@ -4025,13 +6861,15 @@ instance FromJSON ListInstancesResponse where
               (\ o ->
                  ListInstancesResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "instances" .!= mempty))
+                     (o .:? "unreachable" .!= mempty)
+                     <*> (o .:? "instances" .!= mempty))
 
 instance ToJSON ListInstancesResponse where
         toJSON ListInstancesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lirNextPageToken,
+                  ("unreachable" .=) <$> _lirUnreachable,
                   ("instances" .=) <$> _lirInstances])
 
 -- | The request for Read and StreamingRead.
@@ -4039,14 +6877,15 @@ instance ToJSON ListInstancesResponse where
 -- /See:/ 'readRequest' smart constructor.
 data ReadRequest =
   ReadRequest'
-    { _rrResumeToken    :: !(Maybe Bytes)
-    , _rrKeySet         :: !(Maybe KeySet)
-    , _rrTransaction    :: !(Maybe TransactionSelector)
-    , _rrColumns        :: !(Maybe [Text])
-    , _rrLimit          :: !(Maybe (Textual Int64))
-    , _rrIndex          :: !(Maybe Text)
-    , _rrTable          :: !(Maybe Text)
+    { _rrResumeToken :: !(Maybe Bytes)
+    , _rrKeySet :: !(Maybe KeySet)
+    , _rrTransaction :: !(Maybe TransactionSelector)
+    , _rrColumns :: !(Maybe [Text])
+    , _rrLimit :: !(Maybe (Textual Int64))
+    , _rrIndex :: !(Maybe Text)
+    , _rrTable :: !(Maybe Text)
     , _rrPartitionToken :: !(Maybe Bytes)
+    , _rrRequestOptions :: !(Maybe RequestOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4070,6 +6909,8 @@ data ReadRequest =
 -- * 'rrTable'
 --
 -- * 'rrPartitionToken'
+--
+-- * 'rrRequestOptions'
 readRequest
     :: ReadRequest
 readRequest =
@@ -4082,6 +6923,7 @@ readRequest =
     , _rrIndex = Nothing
     , _rrTable = Nothing
     , _rrPartitionToken = Nothing
+    , _rrRequestOptions = Nothing
     }
 
 
@@ -4115,7 +6957,8 @@ rrTransaction
   = lens _rrTransaction
       (\ s a -> s{_rrTransaction = a})
 
--- | The columns of table to be returned for each row matching this request.
+-- | Required. The columns of table to be returned for each row matching this
+-- request.
 rrColumns :: Lens' ReadRequest [Text]
 rrColumns
   = lens _rrColumns (\ s a -> s{_rrColumns = a}) .
@@ -4150,6 +6993,12 @@ rrPartitionToken
       (\ s a -> s{_rrPartitionToken = a})
       . mapping _Bytes
 
+-- | Common options for this request.
+rrRequestOptions :: Lens' ReadRequest (Maybe RequestOptions)
+rrRequestOptions
+  = lens _rrRequestOptions
+      (\ s a -> s{_rrRequestOptions = a})
+
 instance FromJSON ReadRequest where
         parseJSON
           = withObject "ReadRequest"
@@ -4161,7 +7010,8 @@ instance FromJSON ReadRequest where
                      <*> (o .:? "limit")
                      <*> (o .:? "index")
                      <*> (o .:? "table")
-                     <*> (o .:? "partitionToken"))
+                     <*> (o .:? "partitionToken")
+                     <*> (o .:? "requestOptions"))
 
 instance ToJSON ReadRequest where
         toJSON ReadRequest'{..}
@@ -4173,7 +7023,115 @@ instance ToJSON ReadRequest where
                   ("columns" .=) <$> _rrColumns,
                   ("limit" .=) <$> _rrLimit, ("index" .=) <$> _rrIndex,
                   ("table" .=) <$> _rrTable,
-                  ("partitionToken" .=) <$> _rrPartitionToken])
+                  ("partitionToken" .=) <$> _rrPartitionToken,
+                  ("requestOptions" .=) <$> _rrRequestOptions])
+
+-- | A message representing a (sparse) collection of hot keys for specific
+-- key buckets.
+--
+-- /See:/ 'indexedHotKey' smart constructor.
+newtype IndexedHotKey =
+  IndexedHotKey'
+    { _ihkSparseHotKeys :: Maybe IndexedHotKeySparseHotKeys
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IndexedHotKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ihkSparseHotKeys'
+indexedHotKey
+    :: IndexedHotKey
+indexedHotKey = IndexedHotKey' {_ihkSparseHotKeys = Nothing}
+
+
+-- | A (sparse) mapping from key bucket index to the index of the specific
+-- hot row key for that key bucket. The index of the hot row key can be
+-- translated to the actual row key via the
+-- ScanData.VisualizationData.indexed_keys repeated field.
+ihkSparseHotKeys :: Lens' IndexedHotKey (Maybe IndexedHotKeySparseHotKeys)
+ihkSparseHotKeys
+  = lens _ihkSparseHotKeys
+      (\ s a -> s{_ihkSparseHotKeys = a})
+
+instance FromJSON IndexedHotKey where
+        parseJSON
+          = withObject "IndexedHotKey"
+              (\ o -> IndexedHotKey' <$> (o .:? "sparseHotKeys"))
+
+instance ToJSON IndexedHotKey where
+        toJSON IndexedHotKey'{..}
+          = object
+              (catMaybes
+                 [("sparseHotKeys" .=) <$> _ihkSparseHotKeys])
+
+--
+-- /See:/ 'replicaInfo' smart constructor.
+data ReplicaInfo =
+  ReplicaInfo'
+    { _riDefaultLeaderLocation :: !(Maybe Bool)
+    , _riLocation :: !(Maybe Text)
+    , _riType :: !(Maybe ReplicaInfoType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ReplicaInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riDefaultLeaderLocation'
+--
+-- * 'riLocation'
+--
+-- * 'riType'
+replicaInfo
+    :: ReplicaInfo
+replicaInfo =
+  ReplicaInfo'
+    { _riDefaultLeaderLocation = Nothing
+    , _riLocation = Nothing
+    , _riType = Nothing
+    }
+
+
+-- | If true, this location is designated as the default leader location
+-- where leader replicas are placed. See the [region types
+-- documentation](https:\/\/cloud.google.com\/spanner\/docs\/instances#region_types)
+-- for more details.
+riDefaultLeaderLocation :: Lens' ReplicaInfo (Maybe Bool)
+riDefaultLeaderLocation
+  = lens _riDefaultLeaderLocation
+      (\ s a -> s{_riDefaultLeaderLocation = a})
+
+-- | The location of the serving resources, e.g. \"us-central1\".
+riLocation :: Lens' ReplicaInfo (Maybe Text)
+riLocation
+  = lens _riLocation (\ s a -> s{_riLocation = a})
+
+-- | The type of replica.
+riType :: Lens' ReplicaInfo (Maybe ReplicaInfoType)
+riType = lens _riType (\ s a -> s{_riType = a})
+
+instance FromJSON ReplicaInfo where
+        parseJSON
+          = withObject "ReplicaInfo"
+              (\ o ->
+                 ReplicaInfo' <$>
+                   (o .:? "defaultLeaderLocation") <*>
+                     (o .:? "location")
+                     <*> (o .:? "type"))
+
+instance ToJSON ReplicaInfo where
+        toJSON ReplicaInfo'{..}
+          = object
+              (catMaybes
+                 [("defaultLeaderLocation" .=) <$>
+                    _riDefaultLeaderLocation,
+                  ("location" .=) <$> _riLocation,
+                  ("type" .=) <$> _riType])
 
 -- | A session in the Cloud Spanner API.
 --
@@ -4181,9 +7139,9 @@ instance ToJSON ReadRequest where
 data Session =
   Session'
     { _sApproximateLastUseTime :: !(Maybe DateTime')
-    , _sName                   :: !(Maybe Text)
-    , _sLabels                 :: !(Maybe SessionLabels)
-    , _sCreateTime             :: !(Maybe DateTime')
+    , _sName :: !(Maybe Text)
+    , _sLabels :: !(Maybe SessionLabels)
+    , _sCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4218,8 +7176,7 @@ sApproximateLastUseTime
       (\ s a -> s{_sApproximateLastUseTime = a})
       . mapping _DateTime
 
--- | The name of the session. This is always system-assigned; values provided
--- when creating a session are ignored.
+-- | Output only. The name of the session. This is always system-assigned.
 sName :: Lens' Session (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
@@ -4256,6 +7213,94 @@ instance ToJSON Session where
                     _sApproximateLastUseTime,
                   ("name" .=) <$> _sName, ("labels" .=) <$> _sLabels,
                   ("createTime" .=) <$> _sCreateTime])
+
+-- | The response for BatchCreateSessions.
+--
+-- /See:/ 'batchCreateSessionsResponse' smart constructor.
+newtype BatchCreateSessionsResponse =
+  BatchCreateSessionsResponse'
+    { _bcsrSession :: Maybe [Session]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchCreateSessionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcsrSession'
+batchCreateSessionsResponse
+    :: BatchCreateSessionsResponse
+batchCreateSessionsResponse =
+  BatchCreateSessionsResponse' {_bcsrSession = Nothing}
+
+
+-- | The freshly created sessions.
+bcsrSession :: Lens' BatchCreateSessionsResponse [Session]
+bcsrSession
+  = lens _bcsrSession (\ s a -> s{_bcsrSession = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON BatchCreateSessionsResponse where
+        parseJSON
+          = withObject "BatchCreateSessionsResponse"
+              (\ o ->
+                 BatchCreateSessionsResponse' <$>
+                   (o .:? "session" .!= mempty))
+
+instance ToJSON BatchCreateSessionsResponse where
+        toJSON BatchCreateSessionsResponse'{..}
+          = object
+              (catMaybes [("session" .=) <$> _bcsrSession])
+
+-- | Information about the database restore.
+--
+-- /See:/ 'restoreInfo' smart constructor.
+data RestoreInfo =
+  RestoreInfo'
+    { _riSourceType :: !(Maybe RestoreInfoSourceType)
+    , _riBackupInfo :: !(Maybe BackupInfo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riSourceType'
+--
+-- * 'riBackupInfo'
+restoreInfo
+    :: RestoreInfo
+restoreInfo = RestoreInfo' {_riSourceType = Nothing, _riBackupInfo = Nothing}
+
+
+-- | The type of the restore source.
+riSourceType :: Lens' RestoreInfo (Maybe RestoreInfoSourceType)
+riSourceType
+  = lens _riSourceType (\ s a -> s{_riSourceType = a})
+
+-- | Information about the backup used to restore the database. The backup
+-- may no longer exist.
+riBackupInfo :: Lens' RestoreInfo (Maybe BackupInfo)
+riBackupInfo
+  = lens _riBackupInfo (\ s a -> s{_riBackupInfo = a})
+
+instance FromJSON RestoreInfo where
+        parseJSON
+          = withObject "RestoreInfo"
+              (\ o ->
+                 RestoreInfo' <$>
+                   (o .:? "sourceType") <*> (o .:? "backupInfo"))
+
+instance ToJSON RestoreInfo where
+        toJSON RestoreInfo'{..}
+          = object
+              (catMaybes
+                 [("sourceType" .=) <$> _riSourceType,
+                  ("backupInfo" .=) <$> _riBackupInfo])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -4305,11 +7350,11 @@ instance ToJSON OperationResponse where
 -- /See:/ 'readOnly' smart constructor.
 data ReadOnly =
   ReadOnly'
-    { _roReadTimestamp       :: !(Maybe DateTime')
-    , _roExactStaleness      :: !(Maybe GDuration)
-    , _roMaxStaleness        :: !(Maybe GDuration)
-    , _roStrong              :: !(Maybe Bool)
-    , _roMinReadTimestamp    :: !(Maybe DateTime')
+    { _roReadTimestamp :: !(Maybe DateTime')
+    , _roExactStaleness :: !(Maybe GDuration)
+    , _roMaxStaleness :: !(Maybe GDuration)
+    , _roStrong :: !(Maybe Bool)
+    , _roMinReadTimestamp :: !(Maybe DateTime')
     , _roReturnReadTimestamp :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4438,7 +7483,7 @@ instance ToJSON ReadOnly where
 -- /See:/ 'resultSetMetadata' smart constructor.
 data ResultSetMetadata =
   ResultSetMetadata'
-    { _rsmRowType     :: !(Maybe StructType)
+    { _rsmRowType :: !(Maybe StructType)
     , _rsmTransaction :: !(Maybe Transaction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4493,7 +7538,7 @@ instance ToJSON ResultSetMetadata where
 data Delete' =
   Delete''
     { _dKeySet :: !(Maybe KeySet)
-    , _dTable  :: !(Maybe Text)
+    , _dTable :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4510,9 +7555,11 @@ delete'
 delete' = Delete'' {_dKeySet = Nothing, _dTable = Nothing}
 
 
--- | Required. The primary keys of the rows within table to delete. Delete is
--- idempotent. The transaction will succeed even if some or all rows do not
--- exist.
+-- | Required. The primary keys of the rows within table to delete. The
+-- primary keys must be specified in the order in which they appear in the
+-- \`PRIMARY KEY()\` clause of the table\'s equivalent DDL statement (the
+-- DDL statement used to create the table). Delete is idempotent. The
+-- transaction will succeed even if some or all rows do not exist.
 dKeySet :: Lens' Delete' (Maybe KeySet)
 dKeySet = lens _dKeySet (\ s a -> s{_dKeySet = a})
 
@@ -4539,7 +7586,7 @@ instance ToJSON Delete' where
 data UpdateInstanceRequest =
   UpdateInstanceRequest'
     { _uirFieldMask :: !(Maybe GFieldMask)
-    , _uirInstance  :: !(Maybe Instance)
+    , _uirInstance :: !(Maybe Instance)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4557,20 +7604,16 @@ updateInstanceRequest =
   UpdateInstanceRequest' {_uirFieldMask = Nothing, _uirInstance = Nothing}
 
 
--- | Required. A mask specifying which fields in
--- [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance]
--- should be updated. The field mask must always be specified; this
--- prevents any future fields in
--- [][google.spanner.admin.instance.v1.Instance] from being erased
--- accidentally by clients that do not know about them.
+-- | Required. A mask specifying which fields in Instance should be updated.
+-- The field mask must always be specified; this prevents any future fields
+-- in Instance from being erased accidentally by clients that do not know
+-- about them.
 uirFieldMask :: Lens' UpdateInstanceRequest (Maybe GFieldMask)
 uirFieldMask
   = lens _uirFieldMask (\ s a -> s{_uirFieldMask = a})
 
 -- | Required. The instance to update, which must always include the instance
--- name. Otherwise, only fields mentioned in
--- [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask]
--- need be included.
+-- name. Otherwise, only fields mentioned in field_mask need be included.
 uirInstance :: Lens' UpdateInstanceRequest (Maybe Instance)
 uirInstance
   = lens _uirInstance (\ s a -> s{_uirInstance = a})
@@ -4588,6 +7631,67 @@ instance ToJSON UpdateInstanceRequest where
               (catMaybes
                  [("fieldMask" .=) <$> _uirFieldMask,
                   ("instance" .=) <$> _uirInstance])
+
+-- | The response for ListBackupOperations.
+--
+-- /See:/ 'listBackupOperationsResponse' smart constructor.
+data ListBackupOperationsResponse =
+  ListBackupOperationsResponse'
+    { _lborNextPageToken :: !(Maybe Text)
+    , _lborOperations :: !(Maybe [Operation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListBackupOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lborNextPageToken'
+--
+-- * 'lborOperations'
+listBackupOperationsResponse
+    :: ListBackupOperationsResponse
+listBackupOperationsResponse =
+  ListBackupOperationsResponse'
+    {_lborNextPageToken = Nothing, _lborOperations = Nothing}
+
+
+-- | \`next_page_token\` can be sent in a subsequent ListBackupOperations
+-- call to fetch more of the matching metadata.
+lborNextPageToken :: Lens' ListBackupOperationsResponse (Maybe Text)
+lborNextPageToken
+  = lens _lborNextPageToken
+      (\ s a -> s{_lborNextPageToken = a})
+
+-- | The list of matching backup long-running operations. Each operation\'s
+-- name will be prefixed by the backup\'s name and the operation\'s
+-- metadata will be of type CreateBackupMetadata. Operations returned
+-- include those that are pending or have completed\/failed\/canceled
+-- within the last 7 days. Operations returned are ordered by
+-- \`operation.metadata.value.progress.start_time\` in descending order
+-- starting from the most recently started operation.
+lborOperations :: Lens' ListBackupOperationsResponse [Operation]
+lborOperations
+  = lens _lborOperations
+      (\ s a -> s{_lborOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListBackupOperationsResponse where
+        parseJSON
+          = withObject "ListBackupOperationsResponse"
+              (\ o ->
+                 ListBackupOperationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListBackupOperationsResponse where
+        toJSON ListBackupOperationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lborNextPageToken,
+                  ("operations" .=) <$> _lborOperations])
 
 -- | Aggregated statistics from the execution of the query. Only present when
 -- the query is profiled. For example, a query could return the statistics
@@ -4630,16 +7734,14 @@ instance FromJSON ResultSetStatsQueryStats where
 instance ToJSON ResultSetStatsQueryStats where
         toJSON = toJSON . _rssqsAddtional
 
--- | The DML string can contain parameter placeholders. A parameter
--- placeholder consists of \`\'\'\'\` followed by the parameter name.
--- Parameter names consist of any combination of letters, numbers, and
--- underscores. Parameters can appear anywhere that a literal value is
--- expected. The same parameter name can be used more than once, for
--- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
--- error to execute an SQL statement with unbound parameters. Parameter
--- values are specified using \`params\`, which is a JSON object whose keys
--- are parameter names, and whose values are the corresponding parameter
--- values.
+-- | Parameter names and values that bind to placeholders in the DML string.
+-- A parameter placeholder consists of the \`\'\` character followed by the
+-- parameter name (for example, \`\'firstName\`). Parameter names can
+-- contain letters, numbers, and underscores. Parameters can appear
+-- anywhere that a literal value is expected. The same parameter name can
+-- be used more than once, for example: \`\"WHERE id > \'msg_id AND id \<
+-- \'msg_id + 100\"\` It is an error to execute a SQL statement with
+-- unbound parameters.
 --
 -- /See:/ 'statementParams' smart constructor.
 newtype StatementParams =
@@ -4682,8 +7784,8 @@ instance ToJSON StatementParams where
 -- /See:/ 'transactionSelector' smart constructor.
 data TransactionSelector =
   TransactionSelector'
-    { _tsBegin     :: !(Maybe TransactionOptions)
-    , _tsId        :: !(Maybe Bytes)
+    { _tsBegin :: !(Maybe TransactionOptions)
+    , _tsId :: !(Maybe Bytes)
     , _tsSingleUse :: !(Maybe TransactionOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4743,7 +7845,7 @@ instance ToJSON TransactionSelector where
 -- /See:/ 'listInstanceConfigsResponse' smart constructor.
 data ListInstanceConfigsResponse =
   ListInstanceConfigsResponse'
-    { _licrNextPageToken   :: !(Maybe Text)
+    { _licrNextPageToken :: !(Maybe Text)
     , _licrInstanceConfigs :: !(Maybe [InstanceConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4793,13 +7895,160 @@ instance ToJSON ListInstanceConfigsResponse where
                  [("nextPageToken" .=) <$> _licrNextPageToken,
                   ("instanceConfigs" .=) <$> _licrInstanceConfigs])
 
+-- | Common request options for various APIs.
+--
+-- /See:/ 'requestOptions' smart constructor.
+data RequestOptions =
+  RequestOptions'
+    { _roPriority :: !(Maybe RequestOptionsPriority)
+    , _roRequestTag :: !(Maybe Text)
+    , _roTransactionTag :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RequestOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'roPriority'
+--
+-- * 'roRequestTag'
+--
+-- * 'roTransactionTag'
+requestOptions
+    :: RequestOptions
+requestOptions =
+  RequestOptions'
+    { _roPriority = Nothing
+    , _roRequestTag = Nothing
+    , _roTransactionTag = Nothing
+    }
+
+
+-- | Priority for the request.
+roPriority :: Lens' RequestOptions (Maybe RequestOptionsPriority)
+roPriority
+  = lens _roPriority (\ s a -> s{_roPriority = a})
+
+-- | A per-request tag which can be applied to queries or reads, used for
+-- statistics collection. Both request_tag and transaction_tag can be
+-- specified for a read or query that belongs to a transaction. This field
+-- is ignored for requests where it\'s not applicable (e.g. CommitRequest).
+-- Legal characters for \`request_tag\` values are all printable characters
+-- (ASCII 32 - 126) and the length of a request_tag is limited to 50
+-- characters. Values that exceed this limit are truncated. Any leading
+-- underscore (_) characters will be removed from the string.
+roRequestTag :: Lens' RequestOptions (Maybe Text)
+roRequestTag
+  = lens _roRequestTag (\ s a -> s{_roRequestTag = a})
+
+-- | A tag used for statistics collection about this transaction. Both
+-- request_tag and transaction_tag can be specified for a read or query
+-- that belongs to a transaction. The value of transaction_tag should be
+-- the same for all requests belonging to the same transaction. If this
+-- request doesn’t belong to any transaction, transaction_tag will be
+-- ignored. Legal characters for \`transaction_tag\` values are all
+-- printable characters (ASCII 32 - 126) and the length of a
+-- transaction_tag is limited to 50 characters. Values that exceed this
+-- limit are truncated. Any leading underscore (_) characters will be
+-- removed from the string.
+roTransactionTag :: Lens' RequestOptions (Maybe Text)
+roTransactionTag
+  = lens _roTransactionTag
+      (\ s a -> s{_roTransactionTag = a})
+
+instance FromJSON RequestOptions where
+        parseJSON
+          = withObject "RequestOptions"
+              (\ o ->
+                 RequestOptions' <$>
+                   (o .:? "priority") <*> (o .:? "requestTag") <*>
+                     (o .:? "transactionTag"))
+
+instance ToJSON RequestOptions where
+        toJSON RequestOptions'{..}
+          = object
+              (catMaybes
+                 [("priority" .=) <$> _roPriority,
+                  ("requestTag" .=) <$> _roRequestTag,
+                  ("transactionTag" .=) <$> _roTransactionTag])
+
+-- | Encryption information for a Cloud Spanner database or backup.
+--
+-- /See:/ 'encryptionInfo' smart constructor.
+data EncryptionInfo =
+  EncryptionInfo'
+    { _eiEncryptionType :: !(Maybe EncryptionInfoEncryptionType)
+    , _eiKmsKeyVersion :: !(Maybe Text)
+    , _eiEncryptionStatus :: !(Maybe Status)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eiEncryptionType'
+--
+-- * 'eiKmsKeyVersion'
+--
+-- * 'eiEncryptionStatus'
+encryptionInfo
+    :: EncryptionInfo
+encryptionInfo =
+  EncryptionInfo'
+    { _eiEncryptionType = Nothing
+    , _eiKmsKeyVersion = Nothing
+    , _eiEncryptionStatus = Nothing
+    }
+
+
+-- | Output only. The type of encryption.
+eiEncryptionType :: Lens' EncryptionInfo (Maybe EncryptionInfoEncryptionType)
+eiEncryptionType
+  = lens _eiEncryptionType
+      (\ s a -> s{_eiEncryptionType = a})
+
+-- | Output only. A Cloud KMS key version that is being used to protect the
+-- database or backup.
+eiKmsKeyVersion :: Lens' EncryptionInfo (Maybe Text)
+eiKmsKeyVersion
+  = lens _eiKmsKeyVersion
+      (\ s a -> s{_eiKmsKeyVersion = a})
+
+-- | Output only. If present, the status of a recent encrypt\/decrypt call on
+-- underlying data for this database or backup. Regardless of status, data
+-- is always encrypted at rest.
+eiEncryptionStatus :: Lens' EncryptionInfo (Maybe Status)
+eiEncryptionStatus
+  = lens _eiEncryptionStatus
+      (\ s a -> s{_eiEncryptionStatus = a})
+
+instance FromJSON EncryptionInfo where
+        parseJSON
+          = withObject "EncryptionInfo"
+              (\ o ->
+                 EncryptionInfo' <$>
+                   (o .:? "encryptionType") <*> (o .:? "kmsKeyVersion")
+                     <*> (o .:? "encryptionStatus"))
+
+instance ToJSON EncryptionInfo where
+        toJSON EncryptionInfo'{..}
+          = object
+              (catMaybes
+                 [("encryptionType" .=) <$> _eiEncryptionType,
+                  ("kmsKeyVersion" .=) <$> _eiKmsKeyVersion,
+                  ("encryptionStatus" .=) <$> _eiEncryptionStatus])
+
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4827,13 +8076,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -4845,10 +8111,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -4874,7 +8144,7 @@ instance ToJSON Binding where
 -- /See:/ 'partitionResponse' smart constructor.
 data PartitionResponse =
   PartitionResponse'
-    { _prPartitions  :: !(Maybe [Partition])
+    { _prPartitions :: !(Maybe [Partition])
     , _prTransaction :: !(Maybe Transaction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4926,11 +8196,11 @@ instance ToJSON PartitionResponse where
 -- /See:/ 'partitionQueryRequest' smart constructor.
 data PartitionQueryRequest =
   PartitionQueryRequest'
-    { _pqrParamTypes       :: !(Maybe PartitionQueryRequestParamTypes)
+    { _pqrParamTypes :: !(Maybe PartitionQueryRequestParamTypes)
     , _pqrPartitionOptions :: !(Maybe PartitionOptions)
-    , _pqrParams           :: !(Maybe PartitionQueryRequestParams)
-    , _pqrTransaction      :: !(Maybe TransactionSelector)
-    , _pqrSQL              :: !(Maybe Text)
+    , _pqrParams :: !(Maybe PartitionQueryRequestParams)
+    , _pqrTransaction :: !(Maybe TransactionSelector)
+    , _pqrSQL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4977,16 +8247,14 @@ pqrPartitionOptions
   = lens _pqrPartitionOptions
       (\ s a -> s{_pqrPartitionOptions = a})
 
--- | The SQL query string can contain parameter placeholders. A parameter
--- placeholder consists of \`\'\'\'\` followed by the parameter name.
--- Parameter names consist of any combination of letters, numbers, and
--- underscores. Parameters can appear anywhere that a literal value is
--- expected. The same parameter name can be used more than once, for
--- example: \`\"WHERE id > \'msg_id AND id \< \'msg_id + 100\"\` It is an
--- error to execute an SQL query with unbound parameters. Parameter values
--- are specified using \`params\`, which is a JSON object whose keys are
--- parameter names, and whose values are the corresponding parameter
--- values.
+-- | Parameter names and values that bind to placeholders in the SQL string.
+-- A parameter placeholder consists of the \`\'\` character followed by the
+-- parameter name (for example, \`\'firstName\`). Parameter names can
+-- contain letters, numbers, and underscores. Parameters can appear
+-- anywhere that a literal value is expected. The same parameter name can
+-- be used more than once, for example: \`\"WHERE id > \'msg_id AND id \<
+-- \'msg_id + 100\"\` It is an error to execute a SQL statement with
+-- unbound parameters.
 pqrParams :: Lens' PartitionQueryRequest (Maybe PartitionQueryRequestParams)
 pqrParams
   = lens _pqrParams (\ s a -> s{_pqrParams = a})
@@ -4998,8 +8266,8 @@ pqrTransaction
   = lens _pqrTransaction
       (\ s a -> s{_pqrTransaction = a})
 
--- | The query request to generate partitions for. The request will fail if
--- the query is not root partitionable. The query plan of a root
+-- | Required. The query request to generate partitions for. The request will
+-- fail if the query is not root partitionable. The query plan of a root
 -- partitionable query has a single distributed union operator. A
 -- distributed union operator conceptually divides one or more tables into
 -- multiple splits, remotely evaluates a subquery independently on each
@@ -5075,12 +8343,14 @@ instance ToJSON QueryPlan where
 -- /See:/ 'instance'' smart constructor.
 data Instance =
   Instance'
-    { _iState       :: !(Maybe InstanceState)
-    , _iConfig      :: !(Maybe Text)
-    , _iNodeCount   :: !(Maybe (Textual Int32))
-    , _iName        :: !(Maybe Text)
+    { _iState :: !(Maybe InstanceState)
+    , _iConfig :: !(Maybe Text)
+    , _iNodeCount :: !(Maybe (Textual Int32))
+    , _iProcessingUnits :: !(Maybe (Textual Int32))
+    , _iEndpointURIs :: !(Maybe [Text])
+    , _iName :: !(Maybe Text)
     , _iDisplayName :: !(Maybe Text)
-    , _iLabels      :: !(Maybe InstanceLabels)
+    , _iLabels :: !(Maybe InstanceLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5095,6 +8365,10 @@ data Instance =
 --
 -- * 'iNodeCount'
 --
+-- * 'iProcessingUnits'
+--
+-- * 'iEndpointURIs'
+--
 -- * 'iName'
 --
 -- * 'iDisplayName'
@@ -5107,6 +8381,8 @@ instance' =
     { _iState = Nothing
     , _iConfig = Nothing
     , _iNodeCount = Nothing
+    , _iProcessingUnits = Nothing
+    , _iEndpointURIs = Nothing
     , _iName = Nothing
     , _iDisplayName = Nothing
     , _iLabels = Nothing
@@ -5125,15 +8401,32 @@ iState = lens _iState (\ s a -> s{_iState = a})
 iConfig :: Lens' Instance (Maybe Text)
 iConfig = lens _iConfig (\ s a -> s{_iConfig = a})
 
--- | Required. The number of nodes allocated to this instance. This may be
--- zero in API responses for instances that are not yet in state \`READY\`.
--- See [the
+-- | The number of nodes allocated to this instance. This may be zero in API
+-- responses for instances that are not yet in state \`READY\`. See [the
 -- documentation](https:\/\/cloud.google.com\/spanner\/docs\/instances#node_count)
 -- for more information about nodes.
 iNodeCount :: Lens' Instance (Maybe Int32)
 iNodeCount
   = lens _iNodeCount (\ s a -> s{_iNodeCount = a}) .
       mapping _Coerce
+
+-- | The number of processing units allocated to this instance. At most one
+-- of processing_units or node_count should be present in the message. This
+-- may be zero in API responses for instances that are not yet in state
+-- \`READY\`.
+iProcessingUnits :: Lens' Instance (Maybe Int32)
+iProcessingUnits
+  = lens _iProcessingUnits
+      (\ s a -> s{_iProcessingUnits = a})
+      . mapping _Coerce
+
+-- | Deprecated. This field is not populated.
+iEndpointURIs :: Lens' Instance [Text]
+iEndpointURIs
+  = lens _iEndpointURIs
+      (\ s a -> s{_iEndpointURIs = a})
+      . _Default
+      . _Coerce
 
 -- | Required. A unique identifier for the instance, which cannot be changed
 -- after the instance is created. Values are of the form
@@ -5176,6 +8469,8 @@ instance FromJSON Instance where
                  Instance' <$>
                    (o .:? "state") <*> (o .:? "config") <*>
                      (o .:? "nodeCount")
+                     <*> (o .:? "processingUnits")
+                     <*> (o .:? "endpointUris" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "displayName")
                      <*> (o .:? "labels"))
@@ -5187,6 +8482,8 @@ instance ToJSON Instance where
                  [("state" .=) <$> _iState,
                   ("config" .=) <$> _iConfig,
                   ("nodeCount" .=) <$> _iNodeCount,
+                  ("processingUnits" .=) <$> _iProcessingUnits,
+                  ("endpointUris" .=) <$> _iEndpointURIs,
                   ("name" .=) <$> _iName,
                   ("displayName" .=) <$> _iDisplayName,
                   ("labels" .=) <$> _iLabels])

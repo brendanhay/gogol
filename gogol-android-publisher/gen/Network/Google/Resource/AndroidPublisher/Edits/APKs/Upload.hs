@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apks.upload@.
+-- Uploads an APK and adds to the current edit.
+--
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.apks.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
     (
     -- * REST Resource
@@ -31,12 +33,17 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
     , EditsAPKsUpload
 
     -- * Request Lenses
+    , eapkuXgafv
+    , eapkuUploadProtocol
     , eapkuPackageName
+    , eapkuAccessToken
+    , eapkuUploadType
     , eapkuEditId
+    , eapkuCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apks.upload@ method which the
 -- 'EditsAPKsUpload' request conforms to.
@@ -48,7 +55,12 @@ type EditsAPKsUploadResource =
              "edits" :>
                Capture "editId" Text :>
                  "apks" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] APK
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] APK
        :<|>
        "upload" :>
          "androidpublisher" :>
@@ -58,16 +70,27 @@ type EditsAPKsUploadResource =
                  "edits" :>
                    Capture "editId" Text :>
                      "apks" :>
-                       QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           AltMedia :> Post '[JSON] APK
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   QueryParam "uploadType" AltMedia :>
+                                     AltMedia :> Post '[JSON] APK
 
+-- | Uploads an APK and adds to the current edit.
 --
 -- /See:/ 'editsAPKsUpload' smart constructor.
 data EditsAPKsUpload =
   EditsAPKsUpload'
-    { _eapkuPackageName :: !Text
-    , _eapkuEditId      :: !Text
+    { _eapkuXgafv :: !(Maybe Xgafv)
+    , _eapkuUploadProtocol :: !(Maybe Text)
+    , _eapkuPackageName :: !Text
+    , _eapkuAccessToken :: !(Maybe Text)
+    , _eapkuUploadType :: !(Maybe Text)
+    , _eapkuEditId :: !Text
+    , _eapkuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,36 +99,86 @@ data EditsAPKsUpload =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eapkuXgafv'
+--
+-- * 'eapkuUploadProtocol'
+--
 -- * 'eapkuPackageName'
 --
+-- * 'eapkuAccessToken'
+--
+-- * 'eapkuUploadType'
+--
 -- * 'eapkuEditId'
+--
+-- * 'eapkuCallback'
 editsAPKsUpload
     :: Text -- ^ 'eapkuPackageName'
     -> Text -- ^ 'eapkuEditId'
     -> EditsAPKsUpload
 editsAPKsUpload pEapkuPackageName_ pEapkuEditId_ =
   EditsAPKsUpload'
-    {_eapkuPackageName = pEapkuPackageName_, _eapkuEditId = pEapkuEditId_}
+    { _eapkuXgafv = Nothing
+    , _eapkuUploadProtocol = Nothing
+    , _eapkuPackageName = pEapkuPackageName_
+    , _eapkuAccessToken = Nothing
+    , _eapkuUploadType = Nothing
+    , _eapkuEditId = pEapkuEditId_
+    , _eapkuCallback = Nothing
+    }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+eapkuXgafv :: Lens' EditsAPKsUpload (Maybe Xgafv)
+eapkuXgafv
+  = lens _eapkuXgafv (\ s a -> s{_eapkuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eapkuUploadProtocol :: Lens' EditsAPKsUpload (Maybe Text)
+eapkuUploadProtocol
+  = lens _eapkuUploadProtocol
+      (\ s a -> s{_eapkuUploadProtocol = a})
+
+-- | Package name of the app.
 eapkuPackageName :: Lens' EditsAPKsUpload Text
 eapkuPackageName
   = lens _eapkuPackageName
       (\ s a -> s{_eapkuPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+eapkuAccessToken :: Lens' EditsAPKsUpload (Maybe Text)
+eapkuAccessToken
+  = lens _eapkuAccessToken
+      (\ s a -> s{_eapkuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eapkuUploadType :: Lens' EditsAPKsUpload (Maybe Text)
+eapkuUploadType
+  = lens _eapkuUploadType
+      (\ s a -> s{_eapkuUploadType = a})
+
+-- | Identifier of the edit.
 eapkuEditId :: Lens' EditsAPKsUpload Text
 eapkuEditId
   = lens _eapkuEditId (\ s a -> s{_eapkuEditId = a})
+
+-- | JSONP
+eapkuCallback :: Lens' EditsAPKsUpload (Maybe Text)
+eapkuCallback
+  = lens _eapkuCallback
+      (\ s a -> s{_eapkuCallback = a})
 
 instance GoogleRequest EditsAPKsUpload where
         type Rs EditsAPKsUpload = APK
         type Scopes EditsAPKsUpload =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKsUpload'{..}
-          = go _eapkuPackageName _eapkuEditId (Just AltJSON)
+          = go _eapkuPackageName _eapkuEditId _eapkuXgafv
+              _eapkuUploadProtocol
+              _eapkuAccessToken
+              _eapkuUploadType
+              _eapkuCallback
+              (Just AltJSON)
               androidPublisherService
           where go :<|> _
                   = buildClient
@@ -118,7 +191,12 @@ instance GoogleRequest (MediaUpload EditsAPKsUpload)
         type Scopes (MediaUpload EditsAPKsUpload) =
              Scopes EditsAPKsUpload
         requestClient (MediaUpload EditsAPKsUpload'{..} body)
-          = go _eapkuPackageName _eapkuEditId (Just AltJSON)
+          = go _eapkuPackageName _eapkuEditId _eapkuXgafv
+              _eapkuUploadProtocol
+              _eapkuAccessToken
+              _eapkuUploadType
+              _eapkuCallback
+              (Just AltJSON)
               (Just AltMedia)
               body
               androidPublisherService

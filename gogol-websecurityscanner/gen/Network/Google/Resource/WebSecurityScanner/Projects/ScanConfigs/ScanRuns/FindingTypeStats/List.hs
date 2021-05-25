@@ -22,7 +22,7 @@
 --
 -- List all FindingTypeStats under a given ScanRun.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.FindingTypeStats.List
     (
     -- * REST Resource
@@ -41,14 +41,14 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.
     , pscsrftslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list@ method which the
 -- 'ProjectsScanConfigsScanRunsFindingTypeStatsList' request conforms to.
 type ProjectsScanConfigsScanRunsFindingTypeStatsListResource
      =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "findingTypeStats" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -64,12 +64,12 @@ type ProjectsScanConfigsScanRunsFindingTypeStatsListResource
 -- /See:/ 'projectsScanConfigsScanRunsFindingTypeStatsList' smart constructor.
 data ProjectsScanConfigsScanRunsFindingTypeStatsList =
   ProjectsScanConfigsScanRunsFindingTypeStatsList'
-    { _pscsrftslParent         :: !Text
-    , _pscsrftslXgafv          :: !(Maybe Xgafv)
+    { _pscsrftslParent :: !Text
+    , _pscsrftslXgafv :: !(Maybe Xgafv)
     , _pscsrftslUploadProtocol :: !(Maybe Text)
-    , _pscsrftslAccessToken    :: !(Maybe Text)
-    , _pscsrftslUploadType     :: !(Maybe Text)
-    , _pscsrftslCallback       :: !(Maybe Text)
+    , _pscsrftslAccessToken :: !(Maybe Text)
+    , _pscsrftslUploadType :: !(Maybe Text)
+    , _pscsrftslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

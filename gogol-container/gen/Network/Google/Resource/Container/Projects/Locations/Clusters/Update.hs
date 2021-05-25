@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.Update
     , plcuCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.update@ method which the
 -- 'ProjectsLocationsClustersUpdate' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsClustersUpdateResource =
 -- /See:/ 'projectsLocationsClustersUpdate' smart constructor.
 data ProjectsLocationsClustersUpdate =
   ProjectsLocationsClustersUpdate'
-    { _plcuXgafv          :: !(Maybe Xgafv)
+    { _plcuXgafv :: !(Maybe Xgafv)
     , _plcuUploadProtocol :: !(Maybe Text)
-    , _plcuAccessToken    :: !(Maybe Text)
-    , _plcuUploadType     :: !(Maybe Text)
-    , _plcuPayload        :: !UpdateClusterRequest
-    , _plcuName           :: !Text
-    , _plcuCallback       :: !(Maybe Text)
+    , _plcuAccessToken :: !(Maybe Text)
+    , _plcuUploadType :: !(Maybe Text)
+    , _plcuPayload :: !UpdateClusterRequest
+    , _plcuName :: !Text
+    , _plcuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ plcuPayload
   = lens _plcuPayload (\ s a -> s{_plcuPayload = a})
 
 -- | The name (project, location, cluster) of the cluster to update.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcuName :: Lens' ProjectsLocationsClustersUpdate Text
 plcuName = lens _plcuName (\ s a -> s{_plcuName = a})
 

@@ -22,7 +22,7 @@
 --
 -- Returns information about a data transfer config.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.get@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.get@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcgCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.get@ method which the
 -- 'ProjectsLocationsTransferConfigsGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsLocationsTransferConfigsGetResource =
 -- /See:/ 'projectsLocationsTransferConfigsGet' smart constructor.
 data ProjectsLocationsTransferConfigsGet =
   ProjectsLocationsTransferConfigsGet'
-    { _pltcgXgafv          :: !(Maybe Xgafv)
+    { _pltcgXgafv :: !(Maybe Xgafv)
     , _pltcgUploadProtocol :: !(Maybe Text)
-    , _pltcgAccessToken    :: !(Maybe Text)
-    , _pltcgUploadType     :: !(Maybe Text)
-    , _pltcgName           :: !Text
-    , _pltcgCallback       :: !(Maybe Text)
+    , _pltcgAccessToken :: !(Maybe Text)
+    , _pltcgUploadType :: !(Maybe Text)
+    , _pltcgName :: !Text
+    , _pltcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,9 @@ pltcgUploadType
   = lens _pltcgUploadType
       (\ s a -> s{_pltcgUploadType = a})
 
--- | The field will contain name of the resource requested, for example:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`
+-- | Required. The field will contain name of the resource requested, for
+-- example: \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`
 pltcgName :: Lens' ProjectsLocationsTransferConfigsGet Text
 pltcgName
   = lens _pltcgName (\ s a -> s{_pltcgName = a})

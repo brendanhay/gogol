@@ -51,8 +51,8 @@ module Network.Google.Resource.Script.Processes.ListScriptProcesses
     , plspCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.processes.listScriptProcesses@ method which the
 -- 'ProcessesListScriptProcesses' request conforms to.
@@ -63,9 +63,11 @@ type ProcessesListScriptProcessesResource =
            QueryParam "scriptProcessFilter.functionName" Text :>
              QueryParam "upload_protocol" Text :>
                QueryParams "scriptProcessFilter.userAccessLevels"
-                 Text
+                 ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
                  :>
-                 QueryParams "scriptProcessFilter.statuses" Text :>
+                 QueryParams "scriptProcessFilter.statuses"
+                   ProcessesListScriptProcessesScriptProcessFilterStatuses
+                   :>
                    QueryParam "scriptProcessFilter.endTime" DateTime' :>
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
@@ -75,7 +77,8 @@ type ProcessesListScriptProcessesResource =
                              QueryParam "scriptId" Text :>
                                QueryParam "pageToken" Text :>
                                  QueryParam "pageSize" (Textual Int32) :>
-                                   QueryParams "scriptProcessFilter.types" Text
+                                   QueryParams "scriptProcessFilter.types"
+                                     ProcessesListScriptProcessesScriptProcessFilterTypes
                                      :>
                                      QueryParam "callback" Text :>
                                        QueryParam "alt" AltJSON :>
@@ -87,21 +90,21 @@ type ProcessesListScriptProcessesResource =
 -- /See:/ 'processesListScriptProcesses' smart constructor.
 data ProcessesListScriptProcesses =
   ProcessesListScriptProcesses'
-    { _plspXgafv                               :: !(Maybe Xgafv)
-    , _plspScriptProcessFilterFunctionName     :: !(Maybe Text)
-    , _plspUploadProtocol                      :: !(Maybe Text)
-    , _plspScriptProcessFilterUserAccessLevels :: !(Maybe [Text])
-    , _plspScriptProcessFilterStatuses         :: !(Maybe [Text])
-    , _plspScriptProcessFilterEndTime          :: !(Maybe DateTime')
-    , _plspAccessToken                         :: !(Maybe Text)
-    , _plspUploadType                          :: !(Maybe Text)
-    , _plspScriptProcessFilterDeploymentId     :: !(Maybe Text)
-    , _plspScriptProcessFilterStartTime        :: !(Maybe DateTime')
-    , _plspScriptId                            :: !(Maybe Text)
-    , _plspPageToken                           :: !(Maybe Text)
-    , _plspPageSize                            :: !(Maybe (Textual Int32))
-    , _plspScriptProcessFilterTypes            :: !(Maybe [Text])
-    , _plspCallback                            :: !(Maybe Text)
+    { _plspXgafv :: !(Maybe Xgafv)
+    , _plspScriptProcessFilterFunctionName :: !(Maybe Text)
+    , _plspUploadProtocol :: !(Maybe Text)
+    , _plspScriptProcessFilterUserAccessLevels :: !(Maybe [ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels])
+    , _plspScriptProcessFilterStatuses :: !(Maybe [ProcessesListScriptProcessesScriptProcessFilterStatuses])
+    , _plspScriptProcessFilterEndTime :: !(Maybe DateTime')
+    , _plspAccessToken :: !(Maybe Text)
+    , _plspUploadType :: !(Maybe Text)
+    , _plspScriptProcessFilterDeploymentId :: !(Maybe Text)
+    , _plspScriptProcessFilterStartTime :: !(Maybe DateTime')
+    , _plspScriptId :: !(Maybe Text)
+    , _plspPageToken :: !(Maybe Text)
+    , _plspPageSize :: !(Maybe (Textual Int32))
+    , _plspScriptProcessFilterTypes :: !(Maybe [ProcessesListScriptProcessesScriptProcessFilterTypes])
+    , _plspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -182,7 +185,7 @@ plspUploadProtocol
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified user access levels.
-plspScriptProcessFilterUserAccessLevels :: Lens' ProcessesListScriptProcesses [Text]
+plspScriptProcessFilterUserAccessLevels :: Lens' ProcessesListScriptProcesses [ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels]
 plspScriptProcessFilterUserAccessLevels
   = lens _plspScriptProcessFilterUserAccessLevels
       (\ s a ->
@@ -192,7 +195,7 @@ plspScriptProcessFilterUserAccessLevels
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified process statuses.
-plspScriptProcessFilterStatuses :: Lens' ProcessesListScriptProcesses [Text]
+plspScriptProcessFilterStatuses :: Lens' ProcessesListScriptProcesses [ProcessesListScriptProcessesScriptProcessFilterStatuses]
 plspScriptProcessFilterStatuses
   = lens _plspScriptProcessFilterStatuses
       (\ s a -> s{_plspScriptProcessFilterStatuses = a})
@@ -257,7 +260,7 @@ plspPageSize
 
 -- | Optional field used to limit returned processes to those having one of
 -- the specified process types.
-plspScriptProcessFilterTypes :: Lens' ProcessesListScriptProcesses [Text]
+plspScriptProcessFilterTypes :: Lens' ProcessesListScriptProcesses [ProcessesListScriptProcessesScriptProcessFilterTypes]
 plspScriptProcessFilterTypes
   = lens _plspScriptProcessFilterTypes
       (\ s a -> s{_plspScriptProcessFilterTypes = a})

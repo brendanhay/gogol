@@ -22,7 +22,7 @@
 --
 -- Lists logs-based metrics.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.metrics.list@.
 module Network.Google.Resource.Logging.Projects.Metrics.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.Projects.Metrics.List
     , pmlCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.metrics.list@ method which the
 -- 'ProjectsMetricsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsMetricsListResource =
 -- /See:/ 'projectsMetricsList' smart constructor.
 data ProjectsMetricsList =
   ProjectsMetricsList'
-    { _pmlParent         :: !Text
-    , _pmlXgafv          :: !(Maybe Xgafv)
+    { _pmlParent :: !Text
+    , _pmlXgafv :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
-    , _pmlAccessToken    :: !(Maybe Text)
-    , _pmlUploadType     :: !(Maybe Text)
-    , _pmlPageToken      :: !(Maybe Text)
-    , _pmlPageSize       :: !(Maybe (Textual Int32))
-    , _pmlCallback       :: !(Maybe Text)
+    , _pmlAccessToken :: !(Maybe Text)
+    , _pmlUploadType :: !(Maybe Text)
+    , _pmlPageToken :: !(Maybe Text)
+    , _pmlPageSize :: !(Maybe (Textual Int32))
+    , _pmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists holds within a matter. An empty page token in ListHoldsResponse
--- denotes no more holds to list.
+-- Lists the holds in a matter.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.list@.
 module Network.Google.Resource.Vault.Matters.Holds.List
@@ -45,8 +44,8 @@ module Network.Google.Resource.Vault.Matters.Holds.List
     , mhlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.list@ method which the
 -- 'MattersHoldsList' request conforms to.
@@ -59,28 +58,27 @@ type MattersHoldsListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "view" Text :>
+                     QueryParam "view" MattersHoldsListView :>
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListHoldsResponse
 
--- | Lists holds within a matter. An empty page token in ListHoldsResponse
--- denotes no more holds to list.
+-- | Lists the holds in a matter.
 --
 -- /See:/ 'mattersHoldsList' smart constructor.
 data MattersHoldsList =
   MattersHoldsList'
-    { _mhlXgafv          :: !(Maybe Xgafv)
+    { _mhlXgafv :: !(Maybe Xgafv)
     , _mhlUploadProtocol :: !(Maybe Text)
-    , _mhlAccessToken    :: !(Maybe Text)
-    , _mhlUploadType     :: !(Maybe Text)
-    , _mhlMatterId       :: !Text
-    , _mhlView           :: !(Maybe Text)
-    , _mhlPageToken      :: !(Maybe Text)
-    , _mhlPageSize       :: !(Maybe (Textual Int32))
-    , _mhlCallback       :: !(Maybe Text)
+    , _mhlAccessToken :: !(Maybe Text)
+    , _mhlUploadType :: !(Maybe Text)
+    , _mhlMatterId :: !Text
+    , _mhlView :: !(Maybe MattersHoldsListView)
+    , _mhlPageToken :: !(Maybe Text)
+    , _mhlPageSize :: !(Maybe (Textual Int32))
+    , _mhlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,8 +148,8 @@ mhlMatterId :: Lens' MattersHoldsList Text
 mhlMatterId
   = lens _mhlMatterId (\ s a -> s{_mhlMatterId = a})
 
--- | Specifies which parts of the Hold to return.
-mhlView :: Lens' MattersHoldsList (Maybe Text)
+-- | The amount of detail to return for a hold.
+mhlView :: Lens' MattersHoldsList (Maybe MattersHoldsListView)
 mhlView = lens _mhlView (\ s a -> s{_mhlView = a})
 
 -- | The pagination token as returned in the response. An empty token means
@@ -161,7 +159,8 @@ mhlPageToken
   = lens _mhlPageToken (\ s a -> s{_mhlPageToken = a})
 
 -- | The number of holds to return in the response, between 0 and 100
--- inclusive. Leaving this empty, or as 0, is the same as page_size = 100.
+-- inclusive. Leaving this empty, or as 0, is the same as **page_size** =
+-- 100.
 mhlPageSize :: Lens' MattersHoldsList (Maybe Int32)
 mhlPageSize
   = lens _mhlPageSize (\ s a -> s{_mhlPageSize = a}) .

@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NetworkEndpointGroups.TestIAMPermissions
     , negtipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networkEndpointGroups.testIamPermissions@ method which the
 -- 'NetworkEndpointGroupsTestIAMPermissions' request conforms to.
@@ -64,9 +64,9 @@ type NetworkEndpointGroupsTestIAMPermissionsResource
 -- /See:/ 'networkEndpointGroupsTestIAMPermissions' smart constructor.
 data NetworkEndpointGroupsTestIAMPermissions =
   NetworkEndpointGroupsTestIAMPermissions'
-    { _negtipProject  :: !Text
-    , _negtipZone     :: !Text
-    , _negtipPayload  :: !TestPermissionsRequest
+    { _negtipProject :: !Text
+    , _negtipZone :: !Text
+    , _negtipPayload :: !TestPermissionsRequest
     , _negtipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

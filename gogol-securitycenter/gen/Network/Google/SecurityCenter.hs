@@ -13,10 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cloud Security Command Center API provides access to temporal views of
--- assets and findings within an organization.
+-- Security Command Center API provides access to temporal views of assets
+-- and findings within an organization.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference>
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference>
 module Network.Google.SecurityCenter
     (
     -- * Service Configuration
@@ -44,6 +44,21 @@ module Network.Google.SecurityCenter
 
     -- ** securitycenter.organizations.getOrganizationSettings
     , module Network.Google.Resource.SecurityCenter.Organizations.GetOrganizationSettings
+
+    -- ** securitycenter.organizations.notificationConfigs.create
+    , module Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Create
+
+    -- ** securitycenter.organizations.notificationConfigs.delete
+    , module Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Delete
+
+    -- ** securitycenter.organizations.notificationConfigs.get
+    , module Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Get
+
+    -- ** securitycenter.organizations.notificationConfigs.list
+    , module Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.List
+
+    -- ** securitycenter.organizations.notificationConfigs.patch
+    , module Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Patch
 
     -- ** securitycenter.organizations.operations.cancel
     , module Network.Google.Resource.SecurityCenter.Organizations.Operations.Cancel
@@ -111,6 +126,24 @@ module Network.Google.SecurityCenter
     , sCode
     , sMessage
 
+    -- ** GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+    , GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+    , googleCloudSecuritycenterV1p1beta1TemporalAsset
+    , gcsvtaAsset
+    , gcsvtaChangeType
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    , GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    , googleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    , gcsvscpResourceDisplayName
+    , gcsvscpResourceType
+    , gcsvscpResourceName
+    , gcsvscpResourceParentDisplayName
+    , gcsvscpResourceParent
+    , gcsvscpResourceProject
+    , gcsvscpResourceProjectDisplayName
+    , gcsvscpResourceOwners
+
     -- ** ListFindingsResponse
     , ListFindingsResponse
     , listFindingsResponse
@@ -124,6 +157,16 @@ module Network.Google.SecurityCenter
     , auditConfig
     , acService
     , acAuditLogConfigs
+
+    -- ** NotificationConfig
+    , NotificationConfig
+    , notificationConfig
+    , ncServiceAccount
+    , ncEventType
+    , ncName
+    , ncPubsubTopic
+    , ncStreamingConfig
+    , ncDescription
 
     -- ** Expr
     , Expr
@@ -142,6 +185,7 @@ module Network.Google.SecurityCenter
     -- ** GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
 
     -- ** GroupFindingsResponse
     , GroupFindingsResponse
@@ -155,8 +199,28 @@ module Network.Google.SecurityCenter
     , RunAssetDiscoveryRequest
     , runAssetDiscoveryRequest
 
+    -- ** GoogleCloudSecuritycenterV1p1beta1Resource
+    , GoogleCloudSecuritycenterV1p1beta1Resource
+    , googleCloudSecuritycenterV1p1beta1Resource
+    , gcsvrParent
+    , gcsvrProject
+    , gcsvrProjectDisplayName
+    , gcsvrName
+    , gcsvrParentDisplayName
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1FindingState
+    , GoogleCloudSecuritycenterV1p1beta1FindingState (..)
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType
+    , GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType (..)
+
     -- ** AssetDiscoveryConfigInclusionMode
     , AssetDiscoveryConfigInclusionMode (..)
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+    , GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+    , googleCloudSecuritycenterV1p1beta1IAMPolicy
+    , gcsvipPolicyBlob
 
     -- ** Operation
     , Operation
@@ -189,7 +253,14 @@ module Network.Google.SecurityCenter
     , ListFindingsResult
     , listFindingsResult
     , lfrFinding
+    , lfrResource
     , lfrStateChange
+
+    -- ** ListNotificationConfigsResponse
+    , ListNotificationConfigsResponse
+    , listNotificationConfigsResponse
+    , lncrNotificationConfigs
+    , lncrNextPageToken
 
     -- ** GroupAssetsRequest
     , GroupAssetsRequest
@@ -211,22 +282,20 @@ module Network.Google.SecurityCenter
     , gPageSize
     , gCompareDuration
 
+    -- ** GoogleCloudSecuritycenterV1Resource
+    , GoogleCloudSecuritycenterV1Resource
+    , googleCloudSecuritycenterV1Resource
+    , gParent
+    , gProject
+    , gProjectDisplayName
+    , gName
+    , gParentDisplayName
+
     -- ** AssetDiscoveryConfig
     , AssetDiscoveryConfig
     , assetDiscoveryConfig
     , adcInclusionMode
     , adcProjectIds
-
-    -- ** Asset
-    , Asset
-    , asset
-    , aSecurityMarks
-    , aResourceProperties
-    , aUpdateTime
-    , aSecurityCenterProperties
-    , aName
-    , aIAMPolicy
-    , aCreateTime
 
     -- ** SecurityMarks
     , SecurityMarks
@@ -234,15 +303,24 @@ module Network.Google.SecurityCenter
     , smName
     , smMarks
 
-    -- ** AssetResourceProperties
-    , AssetResourceProperties
-    , assetResourceProperties
-    , arpAddtional
+    -- ** NotificationConfigEventType
+    , NotificationConfigEventType (..)
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+    , GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+    , googleCloudSecuritycenterV1p1beta1NotificationMessage
+    , gcsvnmFinding
+    , gcsvnmTemporalAsset
+    , gcsvnmResource
+    , gcsvnmNotificationConfigName
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1FindingSeverity
+    , GoogleCloudSecuritycenterV1p1beta1FindingSeverity (..)
 
     -- ** OrganizationSettings
     , OrganizationSettings
@@ -250,6 +328,16 @@ module Network.Google.SecurityCenter
     , osAssetDiscoveryConfig
     , osEnableAssetDiscovery
     , osName
+
+    -- ** GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    , GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    , googleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    , gcsvsmmAddtional
 
     -- ** SetFindingStateRequestState
     , SetFindingStateRequestState (..)
@@ -274,14 +362,12 @@ module Network.Google.SecurityCenter
     , sfsrState
     , sfsrStartTime
 
-    -- ** SecurityCenterProperties
-    , SecurityCenterProperties
-    , securityCenterProperties
-    , scpResourceType
-    , scpResourceName
-    , scpResourceParent
-    , scpResourceProject
-    , scpResourceOwners
+    -- ** GoogleCloudSecuritycenterV1NotificationMessage
+    , GoogleCloudSecuritycenterV1NotificationMessage
+    , googleCloudSecuritycenterV1NotificationMessage
+    , gFinding
+    , gResource
+    , gNotificationConfigName
 
     -- ** GroupAssetsResponse
     , GroupAssetsResponse
@@ -297,6 +383,9 @@ module Network.Google.SecurityCenter
     , lsrNextPageToken
     , lsrSources
 
+    -- ** GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState
+    , GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState (..)
+
     -- ** GroupResultProperties
     , GroupResultProperties
     , groupResultProperties
@@ -304,6 +393,15 @@ module Network.Google.SecurityCenter
 
     -- ** AuditLogConfigLogType
     , AuditLogConfigLogType (..)
+
+    -- ** Resource
+    , Resource
+    , resource
+    , rProjectDisplayName
+    , rName
+    , rProjectName
+    , rParentName
+    , rParentDisplayName
 
     -- ** GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
     , GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
@@ -333,17 +431,39 @@ module Network.Google.SecurityCenter
     -- ** GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState
     , GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState (..)
 
-    -- ** IAMPolicy
-    , IAMPolicy
-    , iamPolicy
-    , ipPolicyBlob
-
     -- ** Source
     , Source
     , source
     , sName
     , sDisplayName
     , sDescription
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1Finding
+    , GoogleCloudSecuritycenterV1p1beta1Finding
+    , googleCloudSecuritycenterV1p1beta1Finding
+    , gcsvfParent
+    , gcsvfSourceProperties
+    , gcsvfState
+    , gcsvfResourceName
+    , gcsvfSecurityMarks
+    , gcsvfCategory
+    , gcsvfSeverity
+    , gcsvfExternalURI
+    , gcsvfEventTime
+    , gcsvfName
+    , gcsvfCreateTime
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    , GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    , googleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    , gState
+    , gDuration
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+    , GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+    , googleCloudSecuritycenterV1p1beta1SecurityMarks
+    , gcsvsmName
+    , gcsvsmMarks
 
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -369,11 +489,27 @@ module Network.Google.SecurityCenter
     , operationMetadata
     , omAddtional
 
+    -- ** GoogleCloudSecuritycenterV1p1beta1Asset
+    , GoogleCloudSecuritycenterV1p1beta1Asset
+    , googleCloudSecuritycenterV1p1beta1Asset
+    , gcsvaSecurityMarks
+    , gcsvaResourceProperties
+    , gcsvaUpdateTime
+    , gcsvaSecurityCenterProperties
+    , gcsvaName
+    , gcsvaIAMPolicy
+    , gcsvaCreateTime
+
     -- ** AuditLogConfig
     , AuditLogConfig
     , auditLogConfig
     , alcLogType
     , alcExemptedMembers
+
+    -- ** GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    , GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    , googleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    , gcsvarpAddtional
 
     -- ** GroupResult
     , GroupResult
@@ -386,6 +522,11 @@ module Network.Google.SecurityCenter
     , operationResponse
     , orAddtional
 
+    -- ** StreamingConfig
+    , StreamingConfig
+    , streamingConfig
+    , scFilter
+
     -- ** SecurityMarksMarks
     , SecurityMarksMarks
     , securityMarksMarks
@@ -394,11 +535,16 @@ module Network.Google.SecurityCenter
     -- ** GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
     , GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState (..)
 
+    -- ** GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    , GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    , googleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    , gcsvfspAddtional
+
     -- ** GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
     , GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
     , googleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
-    , gState
-    , gDuration
+    , gooState
+    , gooDuration
 
     -- ** Binding
     , Binding
@@ -408,40 +554,50 @@ module Network.Google.SecurityCenter
     , bCondition
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.SecurityCenter.Organizations.Assets.Group
-import           Network.Google.Resource.SecurityCenter.Organizations.Assets.List
-import           Network.Google.Resource.SecurityCenter.Organizations.Assets.RunDiscovery
-import           Network.Google.Resource.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
-import           Network.Google.Resource.SecurityCenter.Organizations.GetOrganizationSettings
-import           Network.Google.Resource.SecurityCenter.Organizations.Operations.Cancel
-import           Network.Google.Resource.SecurityCenter.Organizations.Operations.Delete
-import           Network.Google.Resource.SecurityCenter.Organizations.Operations.Get
-import           Network.Google.Resource.SecurityCenter.Organizations.Operations.List
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Create
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Create
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Group
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.List
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Patch
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.SetState
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Get
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.GetIAMPolicy
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.List
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.Patch
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.SetIAMPolicy
-import           Network.Google.Resource.SecurityCenter.Organizations.Sources.TestIAMPermissions
-import           Network.Google.Resource.SecurityCenter.Organizations.UpdateOrganizationSettings
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.Resource.SecurityCenter.Organizations.Assets.Group
+import Network.Google.Resource.SecurityCenter.Organizations.Assets.List
+import Network.Google.Resource.SecurityCenter.Organizations.Assets.RunDiscovery
+import Network.Google.Resource.SecurityCenter.Organizations.Assets.UpdateSecurityMarks
+import Network.Google.Resource.SecurityCenter.Organizations.GetOrganizationSettings
+import Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Create
+import Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Delete
+import Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Get
+import Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.List
+import Network.Google.Resource.SecurityCenter.Organizations.NotificationConfigs.Patch
+import Network.Google.Resource.SecurityCenter.Organizations.Operations.Cancel
+import Network.Google.Resource.SecurityCenter.Organizations.Operations.Delete
+import Network.Google.Resource.SecurityCenter.Organizations.Operations.Get
+import Network.Google.Resource.SecurityCenter.Organizations.Operations.List
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Create
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Create
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Group
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.List
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Patch
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.SetState
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Get
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.GetIAMPolicy
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.List
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.Patch
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.SetIAMPolicy
+import Network.Google.Resource.SecurityCenter.Organizations.Sources.TestIAMPermissions
+import Network.Google.Resource.SecurityCenter.Organizations.UpdateOrganizationSettings
+import Network.Google.SecurityCenter.Types
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Cloud Security Command Center API service.
+-- | Represents the entirety of the methods and resources available for the Security Command Center API service.
 type SecurityCenterAPI =
-     OrganizationsSourcesFindingsGroupResource :<|>
-       OrganizationsSourcesFindingsListResource
+     OrganizationsNotificationConfigsListResource :<|>
+       OrganizationsNotificationConfigsPatchResource
+       :<|> OrganizationsNotificationConfigsGetResource
+       :<|> OrganizationsNotificationConfigsCreateResource
+       :<|> OrganizationsNotificationConfigsDeleteResource
+       :<|> OrganizationsSourcesFindingsGroupResource
+       :<|> OrganizationsSourcesFindingsListResource
        :<|> OrganizationsSourcesFindingsSetStateResource
        :<|> OrganizationsSourcesFindingsPatchResource
        :<|>

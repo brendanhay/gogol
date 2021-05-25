@@ -42,8 +42,8 @@ module Network.Google.Resource.AppEngine.Apps.Locations.Get
     , algCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.locations.get@ method which the
 -- 'AppsLocationsGet' request conforms to.
@@ -65,13 +65,13 @@ type AppsLocationsGetResource =
 -- /See:/ 'appsLocationsGet' smart constructor.
 data AppsLocationsGet =
   AppsLocationsGet'
-    { _algXgafv          :: !(Maybe Xgafv)
+    { _algXgafv :: !(Maybe Xgafv)
     , _algUploadProtocol :: !(Maybe Text)
-    , _algAccessToken    :: !(Maybe Text)
-    , _algUploadType     :: !(Maybe Text)
-    , _algAppsId         :: !Text
-    , _algLocationsId    :: !Text
-    , _algCallback       :: !(Maybe Text)
+    , _algAccessToken :: !(Maybe Text)
+    , _algUploadType :: !(Maybe Text)
+    , _algAppsId :: !Text
+    , _algLocationsId :: !Text
+    , _algCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

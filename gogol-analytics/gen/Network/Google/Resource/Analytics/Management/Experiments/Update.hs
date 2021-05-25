@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
     , meuExperimentId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.update@ method which the
 -- 'ManagementExperimentsUpdate' request conforms to.
@@ -67,10 +67,10 @@ type ManagementExperimentsUpdateResource =
 data ManagementExperimentsUpdate =
   ManagementExperimentsUpdate'
     { _meuWebPropertyId :: !Text
-    , _meuProFileId     :: !Text
-    , _meuPayload       :: !Experiment
-    , _meuAccountId     :: !Text
-    , _meuExperimentId  :: !Text
+    , _meuProFileId :: !Text
+    , _meuPayload :: !Experiment
+    , _meuAccountId :: !Text
+    , _meuExperimentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

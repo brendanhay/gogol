@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -85,6 +85,7 @@ module Network.Google.TagManager.Types
     -- * ContainerVersionHeader
     , ContainerVersionHeader
     , containerVersionHeader
+    , cvhNumClients
     , cvhNumTags
     , cvhNumMacros
     , cvhContainerId
@@ -105,11 +106,17 @@ module Network.Google.TagManager.Types
     , ttStopTeardownOnFailure
     , ttTagName
 
+    -- * ListTemplatesResponse
+    , ListTemplatesResponse
+    , listTemplatesResponse
+    , ltrNextPageToken
+    , ltrTemplate
+
     -- * ListTriggersResponse
     , ListTriggersResponse
     , listTriggersResponse
-    , ltrNextPageToken
-    , ltrTrigger
+    , lNextPageToken
+    , lTrigger
 
     -- * Tag
     , Tag
@@ -123,6 +130,7 @@ module Network.Google.TagManager.Types
     , tTeardownTag
     , tPath
     , tFingerprint
+    , tMonitoringMetadata
     , tTagFiringOption
     , tAccountId
     , tTagId
@@ -134,6 +142,7 @@ module Network.Google.TagManager.Types
     , tWorkspaceId
     , tType
     , tScheduleStartMs
+    , tMonitoringMetadataTagNameKey
     , tNotes
     , tPaused
     , tFiringRuleId
@@ -236,6 +245,16 @@ module Network.Google.TagManager.Types
     , larNextPageToken
     , larAccount
 
+    -- * GalleryReference
+    , GalleryReference
+    , galleryReference
+    , grSignature
+    , grRepository
+    , grOwner
+    , grVersion
+    , grHost
+    , grIsModified
+
     -- * MergeConflict
     , MergeConflict
     , mergeConflict
@@ -303,6 +322,11 @@ module Network.Google.TagManager.Types
 
     -- * AccountAccessPermission
     , AccountAccessPermission (..)
+
+    -- * RevertTemplateResponse
+    , RevertTemplateResponse
+    , revertTemplateResponse
+    , rtrTemplate
 
     -- * SyncWorkspaceResponse
     , SyncWorkspaceResponse
@@ -386,6 +410,9 @@ module Network.Google.TagManager.Types
     -- * VariableFormatValueCaseConversionType
     , VariableFormatValueCaseConversionType (..)
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * ContainerVersion
     , ContainerVersion
     , containerVersion
@@ -406,6 +433,7 @@ module Network.Google.TagManager.Types
     , cvTrigger
     , cvCustomTemplate
     , cvDescription
+    , cvClient
 
     -- * EnvironmentType
     , EnvironmentType (..)
@@ -461,8 +489,8 @@ module Network.Google.TagManager.Types
     -- * ListTagsResponse
     , ListTagsResponse
     , listTagsResponse
-    , lNextPageToken
-    , lTag
+    , lisNextPageToken
+    , lisTag
 
     -- * ListEnabledBuiltInVariablesResponse
     , ListEnabledBuiltInVariablesResponse
@@ -477,6 +505,7 @@ module Network.Google.TagManager.Types
     , ctPath
     , ctTemplateId
     , ctFingerprint
+    , ctGalleryReference
     , ctAccountId
     , ctName
     , ctTagManagerURL
@@ -516,18 +545,13 @@ module Network.Google.TagManager.Types
     , eVariable
     , eChangeStatus
     , eTrigger
+    , eClient
 
     -- * ContainerAccess
     , ContainerAccess
     , containerAccess
     , caContainerId
     , caPermission
-
-    -- * Timestamp
-    , Timestamp
-    , timestamp
-    , tNanos
-    , tSeconds
 
     -- * VariableFormatValue
     , VariableFormatValue
@@ -546,6 +570,23 @@ module Network.Google.TagManager.Types
     -- * AccountsContainersWorkspacesBuilt_in_variablesRevertType
     , AccountsContainersWorkspacesBuilt_in_variablesRevertType (..)
 
+    -- * Client
+    , Client
+    , client
+    , cliClientId
+    , cliParentFolderId
+    , cliContainerId
+    , cliPriority
+    , cliPath
+    , cliFingerprint
+    , cliAccountId
+    , cliName
+    , cliTagManagerURL
+    , cliWorkspaceId
+    , cliType
+    , cliNotes
+    , cliParameter
+
     -- * Parameter
     , Parameter
     , parameter
@@ -556,15 +597,15 @@ module Network.Google.TagManager.Types
     , pType
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types.Product
-import           Network.Google.TagManager.Types.Sum
+import Network.Google.Prelude
+import Network.Google.TagManager.Types.Product
+import Network.Google.TagManager.Types.Sum
 
 -- | Default request referring to version 'v2' of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
 tagManagerService :: ServiceConfig
 tagManagerService
   = defaultService (ServiceId "tagmanager:v2")
-      "www.googleapis.com"
+      "tagmanager.googleapis.com"
 
 -- | View your Google Tag Manager container and its subcomponents
 tagManagerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]

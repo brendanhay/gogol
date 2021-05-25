@@ -22,7 +22,7 @@
 --
 -- Lists all the enabled Built-In Variables of a GTM Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.built_in_variables.list@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.built_in_variables.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.List
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltIn
 
     -- * Request Lenses
     , acwbivlParent
+    , acwbivlXgafv
+    , acwbivlUploadProtocol
+    , acwbivlAccessToken
+    , acwbivlUploadType
     , acwbivlPageToken
+    , acwbivlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.built_in_variables.list@ method which the
 -- 'AccountsContainersWorkspacesBuiltInVariablesList' request conforms to.
@@ -48,17 +53,27 @@ type AccountsContainersWorkspacesBuiltInVariablesListResource
        "v2" :>
          Capture "parent" Text :>
            "built_in_variables" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListEnabledBuiltInVariablesResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListEnabledBuiltInVariablesResponse
 
 -- | Lists all the enabled Built-In Variables of a GTM Container.
 --
 -- /See:/ 'accountsContainersWorkspacesBuiltInVariablesList' smart constructor.
 data AccountsContainersWorkspacesBuiltInVariablesList =
   AccountsContainersWorkspacesBuiltInVariablesList'
-    { _acwbivlParent    :: !Text
+    { _acwbivlParent :: !Text
+    , _acwbivlXgafv :: !(Maybe Xgafv)
+    , _acwbivlUploadProtocol :: !(Maybe Text)
+    , _acwbivlAccessToken :: !(Maybe Text)
+    , _acwbivlUploadType :: !(Maybe Text)
     , _acwbivlPageToken :: !(Maybe Text)
+    , _acwbivlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,13 +84,30 @@ data AccountsContainersWorkspacesBuiltInVariablesList =
 --
 -- * 'acwbivlParent'
 --
+-- * 'acwbivlXgafv'
+--
+-- * 'acwbivlUploadProtocol'
+--
+-- * 'acwbivlAccessToken'
+--
+-- * 'acwbivlUploadType'
+--
 -- * 'acwbivlPageToken'
+--
+-- * 'acwbivlCallback'
 accountsContainersWorkspacesBuiltInVariablesList
     :: Text -- ^ 'acwbivlParent'
     -> AccountsContainersWorkspacesBuiltInVariablesList
 accountsContainersWorkspacesBuiltInVariablesList pAcwbivlParent_ =
   AccountsContainersWorkspacesBuiltInVariablesList'
-    {_acwbivlParent = pAcwbivlParent_, _acwbivlPageToken = Nothing}
+    { _acwbivlParent = pAcwbivlParent_
+    , _acwbivlXgafv = Nothing
+    , _acwbivlUploadProtocol = Nothing
+    , _acwbivlAccessToken = Nothing
+    , _acwbivlUploadType = Nothing
+    , _acwbivlPageToken = Nothing
+    , _acwbivlCallback = Nothing
+    }
 
 
 -- | GTM Workspace\'s API relative path. Example:
@@ -85,11 +117,40 @@ acwbivlParent
   = lens _acwbivlParent
       (\ s a -> s{_acwbivlParent = a})
 
+-- | V1 error format.
+acwbivlXgafv :: Lens' AccountsContainersWorkspacesBuiltInVariablesList (Maybe Xgafv)
+acwbivlXgafv
+  = lens _acwbivlXgafv (\ s a -> s{_acwbivlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwbivlUploadProtocol :: Lens' AccountsContainersWorkspacesBuiltInVariablesList (Maybe Text)
+acwbivlUploadProtocol
+  = lens _acwbivlUploadProtocol
+      (\ s a -> s{_acwbivlUploadProtocol = a})
+
+-- | OAuth access token.
+acwbivlAccessToken :: Lens' AccountsContainersWorkspacesBuiltInVariablesList (Maybe Text)
+acwbivlAccessToken
+  = lens _acwbivlAccessToken
+      (\ s a -> s{_acwbivlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwbivlUploadType :: Lens' AccountsContainersWorkspacesBuiltInVariablesList (Maybe Text)
+acwbivlUploadType
+  = lens _acwbivlUploadType
+      (\ s a -> s{_acwbivlUploadType = a})
+
 -- | Continuation token for fetching the next page of results.
 acwbivlPageToken :: Lens' AccountsContainersWorkspacesBuiltInVariablesList (Maybe Text)
 acwbivlPageToken
   = lens _acwbivlPageToken
       (\ s a -> s{_acwbivlPageToken = a})
+
+-- | JSONP
+acwbivlCallback :: Lens' AccountsContainersWorkspacesBuiltInVariablesList (Maybe Text)
+acwbivlCallback
+  = lens _acwbivlCallback
+      (\ s a -> s{_acwbivlCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesBuiltInVariablesList
@@ -104,7 +165,13 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient
           AccountsContainersWorkspacesBuiltInVariablesList'{..}
-          = go _acwbivlParent _acwbivlPageToken (Just AltJSON)
+          = go _acwbivlParent _acwbivlXgafv
+              _acwbivlUploadProtocol
+              _acwbivlAccessToken
+              _acwbivlUploadType
+              _acwbivlPageToken
+              _acwbivlCallback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

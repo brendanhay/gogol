@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetPools.AddInstance
     , tpaiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.addInstance@ method which the
 -- 'TargetPoolsAddInstance' request conforms to.
@@ -65,11 +65,11 @@ type TargetPoolsAddInstanceResource =
 -- /See:/ 'targetPoolsAddInstance' smart constructor.
 data TargetPoolsAddInstance =
   TargetPoolsAddInstance'
-    { _tpaiRequestId  :: !(Maybe Text)
-    , _tpaiProject    :: !Text
+    { _tpaiRequestId :: !(Maybe Text)
+    , _tpaiProject :: !Text
     , _tpaiTargetPool :: !Text
-    , _tpaiPayload    :: !TargetPoolsAddInstanceRequest
-    , _tpaiRegion     :: !Text
+    , _tpaiPayload :: !TargetPoolsAddInstanceRequest
+    , _tpaiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

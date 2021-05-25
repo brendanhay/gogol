@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.AddAccessConfig
     , iaacInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.addAccessConfig@ method which the
 -- 'InstancesAddAccessConfig' request conforms to.
@@ -67,12 +67,12 @@ type InstancesAddAccessConfigResource =
 -- /See:/ 'instancesAddAccessConfig' smart constructor.
 data InstancesAddAccessConfig =
   InstancesAddAccessConfig'
-    { _iaacRequestId        :: !(Maybe Text)
-    , _iaacProject          :: !Text
+    { _iaacRequestId :: !(Maybe Text)
+    , _iaacProject :: !Text
     , _iaacNetworkInterface :: !Text
-    , _iaacZone             :: !Text
-    , _iaacPayload          :: !AccessConfig
-    , _iaacInstance         :: !Text
+    , _iaacZone :: !Text
+    , _iaacPayload :: !AccessConfig
+    , _iaacInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -16,7 +16,7 @@
 --
 module Network.Google.Compute.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
@@ -37,6 +37,8 @@ data HTTPSHealthCheckListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | InjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | LargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | MissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NextHopAddressNotAssigned
@@ -53,6 +55,8 @@ data HTTPSHealthCheckListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | PartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ResourceInUseByOtherResourceWarning
@@ -81,6 +85,7 @@ instance FromHttpApiData HTTPSHealthCheckListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right FieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right InjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right LargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right MissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NextHopCannotIPForward
@@ -89,6 +94,7 @@ instance FromHttpApiData HTTPSHealthCheckListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ResourceNotDeleted
@@ -108,6 +114,7 @@ instance ToHttpApiData HTTPSHealthCheckListWarningCode where
         ExternalAPIWarning -> "EXTERNAL_API_WARNING"
         FieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         InjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        LargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         MissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -116,6 +123,7 @@ instance ToHttpApiData HTTPSHealthCheckListWarningCode where
         NextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NotCriticalError -> "NOT_CRITICAL_ERROR"
         NoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PartialSuccess -> "PARTIAL_SUCCESS"
         RequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -130,7 +138,70 @@ instance FromJSON HTTPSHealthCheckListWarningCode where
 instance ToJSON HTTPSHealthCheckListWarningCode where
     toJSON = toJSONText
 
+-- | Specifies the cache setting for all responses from this backend. The
+-- possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid
+-- caching headers to cache content. Responses without these headers will
+-- not be cached at Google\'s edge, and will require a full trip to the
+-- origin on every request, potentially impacting performance and
+-- increasing load on the origin server. FORCE_CACHE_ALL Cache all content,
+-- ignoring any \"private\", \"no-store\" or \"no-cache\" directives in
+-- Cache-Control response headers. Warning: this may result in Cloud CDN
+-- caching private, per-user (user identifiable) content. CACHE_ALL_STATIC
+-- Automatically cache static content, including common image formats,
+-- media (video and audio), and web assets (JavaScript and CSS). Requests
+-- and responses that are marked as uncacheable, as well as dynamic content
+-- (including HTML), will not be cached.
+data BackendBucketCdnPolicyCacheMode
+    = CacheAllStatic
+      -- ^ @CACHE_ALL_STATIC@
+    | ForceCacheAll
+      -- ^ @FORCE_CACHE_ALL@
+    | InvalidCacheMode
+      -- ^ @INVALID_CACHE_MODE@
+    | UseOriginHeaders
+      -- ^ @USE_ORIGIN_HEADERS@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendBucketCdnPolicyCacheMode
+
+instance FromHttpApiData BackendBucketCdnPolicyCacheMode where
+    parseQueryParam = \case
+        "CACHE_ALL_STATIC" -> Right CacheAllStatic
+        "FORCE_CACHE_ALL" -> Right ForceCacheAll
+        "INVALID_CACHE_MODE" -> Right InvalidCacheMode
+        "USE_ORIGIN_HEADERS" -> Right UseOriginHeaders
+        x -> Left ("Unable to parse BackendBucketCdnPolicyCacheMode from: " <> x)
+
+instance ToHttpApiData BackendBucketCdnPolicyCacheMode where
+    toQueryParam = \case
+        CacheAllStatic -> "CACHE_ALL_STATIC"
+        ForceCacheAll -> "FORCE_CACHE_ALL"
+        InvalidCacheMode -> "INVALID_CACHE_MODE"
+        UseOriginHeaders -> "USE_ORIGIN_HEADERS"
+
+instance FromJSON BackendBucketCdnPolicyCacheMode where
+    parseJSON = parseJSONText "BackendBucketCdnPolicyCacheMode"
+
+instance ToJSON BackendBucketCdnPolicyCacheMode where
+    toJSON = toJSONText
+
 -- | [Output Only] The current state of this attachment\'s functionality.
+-- Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED\/PRIVATE,
+-- PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum
+-- values PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER
+-- are used for only PARTNER and PARTNER_PROVIDER interconnect attachments.
+-- This state can take one of the following values: - ACTIVE: The
+-- attachment has been turned up and is ready to use. - UNPROVISIONED: The
+-- attachment is not ready to use yet, because turnup is not complete. -
+-- PENDING_PARTNER: A newly-created PARTNER attachment that has not yet
+-- been configured on the Partner side. - PARTNER_REQUEST_RECEIVED: A
+-- PARTNER attachment is in the process of provisioning after a
+-- PARTNER_PROVIDER attachment was created that references it. -
+-- PENDING_CUSTOMER: A PARTNER or PARTNER_PROVIDER attachment that is
+-- waiting for a customer to activate it. - DEFUNCT: The attachment was
+-- deleted externally and is no longer functional. This could be because
+-- the associated Interconnect was removed, or because the other side of a
+-- Partner attachment was deleted.
 data InterconnectAttachmentState
     = Active
       -- ^ @ACTIVE@
@@ -207,6 +278,47 @@ instance FromJSON SchedulingOnHostMaintenance where
 instance ToJSON SchedulingOnHostMaintenance where
     toJSON = toJSONText
 
+-- | The minimal action that you want to perform on each instance during the
+-- update: - REPLACE: At minimum, delete the instance and create it again.
+-- - RESTART: Stop the instance and start it again. - REFRESH: Do not stop
+-- the instance. - NONE: Do not disrupt the instance at all. By default,
+-- the minimum action is NONE. If your update requires a more disruptive
+-- action than you set with this flag, the necessary action is performed to
+-- execute the update.
+data RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction
+    = None
+      -- ^ @NONE@
+    | Refresh
+      -- ^ @REFRESH@
+    | Replace
+      -- ^ @REPLACE@
+    | Restart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction
+
+instance FromHttpApiData RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    parseQueryParam = \case
+        "NONE" -> Right None
+        "REFRESH" -> Right Refresh
+        "REPLACE" -> Right Replace
+        "RESTART" -> Right Restart
+        x -> Left ("Unable to parse RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction from: " <> x)
+
+instance ToHttpApiData RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    toQueryParam = \case
+        None -> "NONE"
+        Refresh -> "REFRESH"
+        Replace -> "REPLACE"
+        Restart -> "RESTART"
+
+instance FromJSON RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    parseJSON = parseJSONText "RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction"
+
+instance ToJSON RegionInstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    toJSON = toJSONText
+
 -- | Defines how target utilization value is expressed for a Stackdriver
 -- Monitoring metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE.
 data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
@@ -258,6 +370,8 @@ data BackendServiceListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | BSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | BSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | BSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | BSLWCNextHopAddressNotAssigned
@@ -274,6 +388,8 @@ data BackendServiceListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | BSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | BSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | BSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | BSLWCResourceInUseByOtherResourceWarning
@@ -302,6 +418,7 @@ instance FromHttpApiData BackendServiceListWarningCode where
         "EXTERNAL_API_WARNING" -> Right BSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right BSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right BSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right BSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right BSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right BSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right BSLWCNextHopCannotIPForward
@@ -310,6 +427,7 @@ instance FromHttpApiData BackendServiceListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right BSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right BSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right BSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right BSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right BSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right BSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right BSLWCResourceNotDeleted
@@ -329,6 +447,7 @@ instance ToHttpApiData BackendServiceListWarningCode where
         BSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         BSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         BSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        BSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         BSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         BSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         BSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -337,6 +456,7 @@ instance ToHttpApiData BackendServiceListWarningCode where
         BSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         BSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         BSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        BSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         BSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         BSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         BSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -349,6 +469,103 @@ instance FromJSON BackendServiceListWarningCode where
     parseJSON = parseJSONText "BackendServiceListWarningCode"
 
 instance ToJSON BackendServiceListWarningCode where
+    toJSON = toJSONText
+
+-- | The stack type for this subnet to identify whether the IPv6 feature is
+-- enabled or not. If not specified IPV4_ONLY will be used. This field can
+-- be both set at resource creation time and updated using patch.
+data SubnetworkStackType
+    = IPV4IPV6
+      -- ^ @IPV4_IPV6@
+    | IPV4Only
+      -- ^ @IPV4_ONLY@
+    | UnspecifiedStackType
+      -- ^ @UNSPECIFIED_STACK_TYPE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkStackType
+
+instance FromHttpApiData SubnetworkStackType where
+    parseQueryParam = \case
+        "IPV4_IPV6" -> Right IPV4IPV6
+        "IPV4_ONLY" -> Right IPV4Only
+        "UNSPECIFIED_STACK_TYPE" -> Right UnspecifiedStackType
+        x -> Left ("Unable to parse SubnetworkStackType from: " <> x)
+
+instance ToHttpApiData SubnetworkStackType where
+    toQueryParam = \case
+        IPV4IPV6 -> "IPV4_IPV6"
+        IPV4Only -> "IPV4_ONLY"
+        UnspecifiedStackType -> "UNSPECIFIED_STACK_TYPE"
+
+instance FromJSON SubnetworkStackType where
+    parseJSON = parseJSONText "SubnetworkStackType"
+
+instance ToJSON SubnetworkStackType where
+    toJSON = toJSONText
+
+-- | These stateful disks will never be deleted during autohealing, update,
+-- instance recreate operations. This flag is used to configure if the disk
+-- should be deleted after it is no longer used by the group, e.g. when the
+-- given instance or the whole MIG is deleted. Note: disks attached in
+-- READ_ONLY mode cannot be auto-deleted.
+data PreservedStatePreservedDiskAutoDelete
+    = Never
+      -- ^ @NEVER@
+    | OnPermanentInstanceDeletion
+      -- ^ @ON_PERMANENT_INSTANCE_DELETION@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PreservedStatePreservedDiskAutoDelete
+
+instance FromHttpApiData PreservedStatePreservedDiskAutoDelete where
+    parseQueryParam = \case
+        "NEVER" -> Right Never
+        "ON_PERMANENT_INSTANCE_DELETION" -> Right OnPermanentInstanceDeletion
+        x -> Left ("Unable to parse PreservedStatePreservedDiskAutoDelete from: " <> x)
+
+instance ToHttpApiData PreservedStatePreservedDiskAutoDelete where
+    toQueryParam = \case
+        Never -> "NEVER"
+        OnPermanentInstanceDeletion -> "ON_PERMANENT_INSTANCE_DELETION"
+
+instance FromJSON PreservedStatePreservedDiskAutoDelete where
+    parseJSON = parseJSONText "PreservedStatePreservedDiskAutoDelete"
+
+instance ToJSON PreservedStatePreservedDiskAutoDelete where
+    toJSON = toJSONText
+
+-- | The distribution shape to which the group converges either proactively
+-- or on resize events (depending on the value set in
+-- updatePolicy.instanceRedistributionType).
+data DistributionPolicyTargetShape
+    = Any
+      -- ^ @ANY@
+    | Balanced
+      -- ^ @BALANCED@
+    | Even
+      -- ^ @EVEN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DistributionPolicyTargetShape
+
+instance FromHttpApiData DistributionPolicyTargetShape where
+    parseQueryParam = \case
+        "ANY" -> Right Any
+        "BALANCED" -> Right Balanced
+        "EVEN" -> Right Even
+        x -> Left ("Unable to parse DistributionPolicyTargetShape from: " <> x)
+
+instance ToHttpApiData DistributionPolicyTargetShape where
+    toQueryParam = \case
+        Any -> "ANY"
+        Balanced -> "BALANCED"
+        Even -> "EVEN"
+
+instance FromJSON DistributionPolicyTargetShape where
+    parseJSON = parseJSONText "DistributionPolicyTargetShape"
+
+instance ToJSON DistributionPolicyTargetShape where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -370,6 +587,8 @@ data InstanceListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ILWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ILWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ILWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ILWCNextHopAddressNotAssigned
@@ -386,6 +605,8 @@ data InstanceListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ILWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ILWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ILWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ILWCResourceInUseByOtherResourceWarning
@@ -414,6 +635,7 @@ instance FromHttpApiData InstanceListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ILWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ILWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ILWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ILWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ILWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ILWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ILWCNextHopCannotIPForward
@@ -422,6 +644,7 @@ instance FromHttpApiData InstanceListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ILWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ILWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ILWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ILWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ILWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ILWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ILWCResourceNotDeleted
@@ -441,6 +664,7 @@ instance ToHttpApiData InstanceListWarningCode where
         ILWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ILWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ILWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ILWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ILWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ILWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ILWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -449,6 +673,7 @@ instance ToHttpApiData InstanceListWarningCode where
         ILWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ILWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ILWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ILWCPartialSuccess -> "PARTIAL_SUCCESS"
         ILWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ILWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ILWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -464,18 +689,19 @@ instance ToJSON InstanceListWarningCode where
     toJSON = toJSONText
 
 -- | Specifies the QUIC override policy for this TargetHttpsProxy resource.
--- This determines whether the load balancer will attempt to negotiate QUIC
--- with clients or not. Can specify one of NONE, ENABLE, or DISABLE.
--- Specify ENABLE to always enable QUIC, Enables QUIC when set to ENABLE,
--- and disables QUIC when set to DISABLE. If NONE is specified, uses the
--- QUIC policy with no user overrides, which is equivalent to DISABLE. Not
--- specifying this field is equivalent to specifying NONE.
+-- This setting determines whether the load balancer attempts to negotiate
+-- QUIC with clients. You can specify NONE, ENABLE, or DISABLE. - When
+-- quic-override is set to NONE, Google manages whether QUIC is used. -
+-- When quic-override is set to ENABLE, the load balancer uses QUIC when
+-- possible. - When quic-override is set to DISABLE, the load balancer
+-- doesn\'t use QUIC. - If the quic-override flag is not specified, NONE is
+-- implied.
 data TargetHTTPSProxyQuicOverride
-    = Disable
+    = THPQODisable
       -- ^ @DISABLE@
-    | Enable
+    | THPQOEnable
       -- ^ @ENABLE@
-    | None
+    | THPQONone
       -- ^ @NONE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -483,16 +709,16 @@ instance Hashable TargetHTTPSProxyQuicOverride
 
 instance FromHttpApiData TargetHTTPSProxyQuicOverride where
     parseQueryParam = \case
-        "DISABLE" -> Right Disable
-        "ENABLE" -> Right Enable
-        "NONE" -> Right None
+        "DISABLE" -> Right THPQODisable
+        "ENABLE" -> Right THPQOEnable
+        "NONE" -> Right THPQONone
         x -> Left ("Unable to parse TargetHTTPSProxyQuicOverride from: " <> x)
 
 instance ToHttpApiData TargetHTTPSProxyQuicOverride where
     toQueryParam = \case
-        Disable -> "DISABLE"
-        Enable -> "ENABLE"
-        None -> "NONE"
+        THPQODisable -> "DISABLE"
+        THPQOEnable -> "ENABLE"
+        THPQONone -> "NONE"
 
 instance FromJSON TargetHTTPSProxyQuicOverride where
     parseJSON = parseJSONText "TargetHTTPSProxyQuicOverride"
@@ -500,8 +726,244 @@ instance FromJSON TargetHTTPSProxyQuicOverride where
 instance ToJSON TargetHTTPSProxyQuicOverride where
     toJSON = toJSONText
 
--- | Specify the NatIpAllocateOption. If it is AUTO_ONLY, then nat_ip should
--- be empty.
+-- | The purpose of the resource. This field can be either PRIVATE_RFC_1918
+-- or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to
+-- INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is
+-- reserved for Internal HTTP(S) Load Balancing. If unspecified, the
+-- purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn\'t
+-- supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
+data SubnetworkPurpose
+    = InternalHTTPSLoadBalancer
+      -- ^ @INTERNAL_HTTPS_LOAD_BALANCER@
+    | Private
+      -- ^ @PRIVATE@
+    | PrivateRfc1918
+      -- ^ @PRIVATE_RFC_1918@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkPurpose
+
+instance FromHttpApiData SubnetworkPurpose where
+    parseQueryParam = \case
+        "INTERNAL_HTTPS_LOAD_BALANCER" -> Right InternalHTTPSLoadBalancer
+        "PRIVATE" -> Right Private
+        "PRIVATE_RFC_1918" -> Right PrivateRfc1918
+        x -> Left ("Unable to parse SubnetworkPurpose from: " <> x)
+
+instance ToHttpApiData SubnetworkPurpose where
+    toQueryParam = \case
+        InternalHTTPSLoadBalancer -> "INTERNAL_HTTPS_LOAD_BALANCER"
+        Private -> "PRIVATE"
+        PrivateRfc1918 -> "PRIVATE_RFC_1918"
+
+instance FromJSON SubnetworkPurpose where
+    parseJSON = parseJSONText "SubnetworkPurpose"
+
+instance ToJSON SubnetworkPurpose where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PacketMirroringListWarningCode
+    = PMLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PMLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PMLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PMLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PMLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PMLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PMLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PMLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PMLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PMLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PMLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PMLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PMLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PMLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PMLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PMLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PMLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PMLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PMLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PMLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PMLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PMLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PMLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PMLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PMLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PacketMirroringListWarningCode
+
+instance FromHttpApiData PacketMirroringListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PMLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PMLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PMLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PMLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PMLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PMLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PMLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PMLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PMLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PMLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PMLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PMLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PMLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PMLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PMLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PMLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PMLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PMLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PMLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PMLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PMLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PMLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PMLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PMLWCUndeclaredProperties
+        "UNREACHABLE" -> Right PMLWCUnreachable
+        x -> Left ("Unable to parse PacketMirroringListWarningCode from: " <> x)
+
+instance ToHttpApiData PacketMirroringListWarningCode where
+    toQueryParam = \case
+        PMLWCCleanupFailed -> "CLEANUP_FAILED"
+        PMLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PMLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PMLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PMLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PMLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PMLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PMLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PMLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PMLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PMLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PMLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PMLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PMLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PMLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PMLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PMLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PMLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PMLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PMLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PMLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PMLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PMLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PMLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PMLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PacketMirroringListWarningCode where
+    parseJSON = parseJSONText "PacketMirroringListWarningCode"
+
+instance ToJSON PacketMirroringListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of the reservation.
+data ReservationStatus
+    = Creating
+      -- ^ @CREATING@
+    | Deleting
+      -- ^ @DELETING@
+    | Invalid
+      -- ^ @INVALID@
+    | Ready
+      -- ^ @READY@
+    | Updating
+      -- ^ @UPDATING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReservationStatus
+
+instance FromHttpApiData ReservationStatus where
+    parseQueryParam = \case
+        "CREATING" -> Right Creating
+        "DELETING" -> Right Deleting
+        "INVALID" -> Right Invalid
+        "READY" -> Right Ready
+        "UPDATING" -> Right Updating
+        x -> Left ("Unable to parse ReservationStatus from: " <> x)
+
+instance ToHttpApiData ReservationStatus where
+    toQueryParam = \case
+        Creating -> "CREATING"
+        Deleting -> "DELETING"
+        Invalid -> "INVALID"
+        Ready -> "READY"
+        Updating -> "UPDATING"
+
+instance FromJSON ReservationStatus where
+    parseJSON = parseJSONText "ReservationStatus"
+
+instance ToJSON ReservationStatus where
+    toJSON = toJSONText
+
+-- | Indicates the user-supplied encryption option of this VLAN attachment
+-- (interconnectAttachment). Can only be specified at attachment creation
+-- for PARTNER or DEDICATED attachments. Possible values are: - NONE - This
+-- is the default value, which means that the VLAN attachment carries
+-- unencrypted traffic. VMs are able to send traffic to, or receive traffic
+-- from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only
+-- encrypted traffic that is encrypted by an IPsec device, such as an HA
+-- VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic
+-- to, or receive traffic from, such a VLAN attachment. To use
+-- IPsec-encrypted Cloud Interconnect, the VLAN attachment must be created
+-- with this option. Not currently available publicly.
+data InterconnectAttachmentEncryption
+    = IAEIPsec
+      -- ^ @IPSEC@
+    | IAENone
+      -- ^ @NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InterconnectAttachmentEncryption
+
+instance FromHttpApiData InterconnectAttachmentEncryption where
+    parseQueryParam = \case
+        "IPSEC" -> Right IAEIPsec
+        "NONE" -> Right IAENone
+        x -> Left ("Unable to parse InterconnectAttachmentEncryption from: " <> x)
+
+instance ToHttpApiData InterconnectAttachmentEncryption where
+    toQueryParam = \case
+        IAEIPsec -> "IPSEC"
+        IAENone -> "NONE"
+
+instance FromJSON InterconnectAttachmentEncryption where
+    parseJSON = parseJSONText "InterconnectAttachmentEncryption"
+
+instance ToJSON InterconnectAttachmentEncryption where
+    toJSON = toJSONText
+
+-- | Specify the NatIpAllocateOption, which can take one of the following
+-- values: - MANUAL_ONLY: Uses only Nat IP addresses provided by customers.
+-- When there are not enough specified Nat IPs, the Nat service fails for
+-- new VMs. - AUTO_ONLY: Nat IPs are allocated by Google Cloud Platform;
+-- customers can\'t specify any Nat IPs. When choosing AUTO_ONLY, then
+-- nat_ip should be empty.
 data RouterNATNATIPAllocateOption
     = AutoOnly
       -- ^ @AUTO_ONLY@
@@ -528,6 +990,36 @@ instance FromJSON RouterNATNATIPAllocateOption where
 instance ToJSON RouterNATNATIPAllocateOption where
     toJSON = toJSONText
 
+data ServerBindingType
+    = RestartNodeOnAnyServer
+      -- ^ @RESTART_NODE_ON_ANY_SERVER@
+    | RestartNodeOnMinimalServers
+      -- ^ @RESTART_NODE_ON_MINIMAL_SERVERS@
+    | ServerBindingTypeUnspecified
+      -- ^ @SERVER_BINDING_TYPE_UNSPECIFIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ServerBindingType
+
+instance FromHttpApiData ServerBindingType where
+    parseQueryParam = \case
+        "RESTART_NODE_ON_ANY_SERVER" -> Right RestartNodeOnAnyServer
+        "RESTART_NODE_ON_MINIMAL_SERVERS" -> Right RestartNodeOnMinimalServers
+        "SERVER_BINDING_TYPE_UNSPECIFIED" -> Right ServerBindingTypeUnspecified
+        x -> Left ("Unable to parse ServerBindingType from: " <> x)
+
+instance ToHttpApiData ServerBindingType where
+    toQueryParam = \case
+        RestartNodeOnAnyServer -> "RESTART_NODE_ON_ANY_SERVER"
+        RestartNodeOnMinimalServers -> "RESTART_NODE_ON_MINIMAL_SERVERS"
+        ServerBindingTypeUnspecified -> "SERVER_BINDING_TYPE_UNSPECIFIED"
+
+instance FromJSON ServerBindingType where
+    parseJSON = parseJSONText "ServerBindingType"
+
+instance ToJSON ServerBindingType where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data OperationWarningsItemCode
@@ -547,6 +1039,8 @@ data OperationWarningsItemCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | OWICInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | OWICLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | OWICMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | OWICNextHopAddressNotAssigned
@@ -563,6 +1057,8 @@ data OperationWarningsItemCode
       -- ^ @NOT_CRITICAL_ERROR@
     | OWICNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | OWICPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | OWICRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | OWICResourceInUseByOtherResourceWarning
@@ -591,6 +1087,7 @@ instance FromHttpApiData OperationWarningsItemCode where
         "EXTERNAL_API_WARNING" -> Right OWICExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right OWICFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right OWICInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right OWICLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right OWICMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right OWICNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right OWICNextHopCannotIPForward
@@ -599,6 +1096,7 @@ instance FromHttpApiData OperationWarningsItemCode where
         "NEXT_HOP_NOT_RUNNING" -> Right OWICNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right OWICNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right OWICNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right OWICPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right OWICRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right OWICResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right OWICResourceNotDeleted
@@ -618,6 +1116,7 @@ instance ToHttpApiData OperationWarningsItemCode where
         OWICExternalAPIWarning -> "EXTERNAL_API_WARNING"
         OWICFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         OWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        OWICLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         OWICMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         OWICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         OWICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -626,6 +1125,7 @@ instance ToHttpApiData OperationWarningsItemCode where
         OWICNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         OWICNotCriticalError -> "NOT_CRITICAL_ERROR"
         OWICNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        OWICPartialSuccess -> "PARTIAL_SUCCESS"
         OWICRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         OWICResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         OWICResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -638,6 +1138,101 @@ instance FromJSON OperationWarningsItemCode where
     parseJSON = parseJSONText "OperationWarningsItemCode"
 
 instance ToJSON OperationWarningsItemCode where
+    toJSON = toJSONText
+
+-- | Specifies the most disruptive action that can be taken on the instance
+-- as part of the update. Compute Engine returns an error if the instance
+-- properties require a more disruptive action as part of the instance
+-- update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and
+-- RESTART.
+data InstancesUpdateMostDisruptiveAllowedAction
+    = IUMDAAInvalid
+      -- ^ @INVALID@
+    | IUMDAANoEffect
+      -- ^ @NO_EFFECT@
+    | IUMDAARefresh
+      -- ^ @REFRESH@
+    | IUMDAARestart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstancesUpdateMostDisruptiveAllowedAction
+
+instance FromHttpApiData InstancesUpdateMostDisruptiveAllowedAction where
+    parseQueryParam = \case
+        "INVALID" -> Right IUMDAAInvalid
+        "NO_EFFECT" -> Right IUMDAANoEffect
+        "REFRESH" -> Right IUMDAARefresh
+        "RESTART" -> Right IUMDAARestart
+        x -> Left ("Unable to parse InstancesUpdateMostDisruptiveAllowedAction from: " <> x)
+
+instance ToHttpApiData InstancesUpdateMostDisruptiveAllowedAction where
+    toQueryParam = \case
+        IUMDAAInvalid -> "INVALID"
+        IUMDAANoEffect -> "NO_EFFECT"
+        IUMDAARefresh -> "REFRESH"
+        IUMDAARestart -> "RESTART"
+
+instance FromJSON InstancesUpdateMostDisruptiveAllowedAction where
+    parseJSON = parseJSONText "InstancesUpdateMostDisruptiveAllowedAction"
+
+instance ToJSON InstancesUpdateMostDisruptiveAllowedAction where
+    toJSON = toJSONText
+
+-- | [Output Only] Action that managed instance group was executing on the
+-- instance when the error occurred. Possible values:
+data InstanceManagedByIgmErrorInstanceActionDetailsAction
+    = IMBIEIADAAbandoning
+      -- ^ @ABANDONING@
+    | IMBIEIADACreating
+      -- ^ @CREATING@
+    | IMBIEIADACreatingWithoutRetries
+      -- ^ @CREATING_WITHOUT_RETRIES@
+    | IMBIEIADADeleting
+      -- ^ @DELETING@
+    | IMBIEIADANone
+      -- ^ @NONE@
+    | IMBIEIADARecreating
+      -- ^ @RECREATING@
+    | IMBIEIADARefreshing
+      -- ^ @REFRESHING@
+    | IMBIEIADARestarting
+      -- ^ @RESTARTING@
+    | IMBIEIADAVerifying
+      -- ^ @VERIFYING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceManagedByIgmErrorInstanceActionDetailsAction
+
+instance FromHttpApiData InstanceManagedByIgmErrorInstanceActionDetailsAction where
+    parseQueryParam = \case
+        "ABANDONING" -> Right IMBIEIADAAbandoning
+        "CREATING" -> Right IMBIEIADACreating
+        "CREATING_WITHOUT_RETRIES" -> Right IMBIEIADACreatingWithoutRetries
+        "DELETING" -> Right IMBIEIADADeleting
+        "NONE" -> Right IMBIEIADANone
+        "RECREATING" -> Right IMBIEIADARecreating
+        "REFRESHING" -> Right IMBIEIADARefreshing
+        "RESTARTING" -> Right IMBIEIADARestarting
+        "VERIFYING" -> Right IMBIEIADAVerifying
+        x -> Left ("Unable to parse InstanceManagedByIgmErrorInstanceActionDetailsAction from: " <> x)
+
+instance ToHttpApiData InstanceManagedByIgmErrorInstanceActionDetailsAction where
+    toQueryParam = \case
+        IMBIEIADAAbandoning -> "ABANDONING"
+        IMBIEIADACreating -> "CREATING"
+        IMBIEIADACreatingWithoutRetries -> "CREATING_WITHOUT_RETRIES"
+        IMBIEIADADeleting -> "DELETING"
+        IMBIEIADANone -> "NONE"
+        IMBIEIADARecreating -> "RECREATING"
+        IMBIEIADARefreshing -> "REFRESHING"
+        IMBIEIADARestarting -> "RESTARTING"
+        IMBIEIADAVerifying -> "VERIFYING"
+
+instance FromJSON InstanceManagedByIgmErrorInstanceActionDetailsAction where
+    parseJSON = parseJSONText "InstanceManagedByIgmErrorInstanceActionDetailsAction"
+
+instance ToJSON InstanceManagedByIgmErrorInstanceActionDetailsAction where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -659,6 +1254,8 @@ data NodeGroupAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NGALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NGALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NGALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NGALWCNextHopAddressNotAssigned
@@ -675,6 +1272,8 @@ data NodeGroupAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NGALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NGALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NGALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NGALWCResourceInUseByOtherResourceWarning
@@ -703,6 +1302,7 @@ instance FromHttpApiData NodeGroupAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NGALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NGALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NGALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NGALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NGALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NGALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NGALWCNextHopCannotIPForward
@@ -711,6 +1311,7 @@ instance FromHttpApiData NodeGroupAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NGALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NGALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NGALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NGALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NGALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NGALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NGALWCResourceNotDeleted
@@ -730,6 +1331,7 @@ instance ToHttpApiData NodeGroupAggregatedListWarningCode where
         NGALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NGALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NGALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NGALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NGALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NGALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NGALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -738,6 +1340,7 @@ instance ToHttpApiData NodeGroupAggregatedListWarningCode where
         NGALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NGALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NGALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NGALWCPartialSuccess -> "PARTIAL_SUCCESS"
         NGALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NGALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NGALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -752,12 +1355,198 @@ instance FromJSON NodeGroupAggregatedListWarningCode where
 instance ToJSON NodeGroupAggregatedListWarningCode where
     toJSON = toJSONText
 
+-- | The access type of IPv6 address this subnet holds. It\'s immutable and
+-- can only be specified during creation or the first time the subnet is
+-- updated into IPV4_IPV6 dual stack. If the ipv6_type is EXTERNAL then
+-- this subnet cannot enable direct path.
+data SubnetworkIPv6AccessType
+    = External
+      -- ^ @EXTERNAL@
+    | UnspecifiedIPV6AccessType
+      -- ^ @UNSPECIFIED_IPV6_ACCESS_TYPE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkIPv6AccessType
+
+instance FromHttpApiData SubnetworkIPv6AccessType where
+    parseQueryParam = \case
+        "EXTERNAL" -> Right External
+        "UNSPECIFIED_IPV6_ACCESS_TYPE" -> Right UnspecifiedIPV6AccessType
+        x -> Left ("Unable to parse SubnetworkIPv6AccessType from: " <> x)
+
+instance ToHttpApiData SubnetworkIPv6AccessType where
+    toQueryParam = \case
+        External -> "EXTERNAL"
+        UnspecifiedIPV6AccessType -> "UNSPECIFIED_IPV6_ACCESS_TYPE"
+
+instance FromJSON SubnetworkIPv6AccessType where
+    parseJSON = parseJSONText "SubnetworkIPv6AccessType"
+
+instance ToJSON SubnetworkIPv6AccessType where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data URLMapsScopedListWarningCode
+    = UMSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | UMSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | UMSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | UMSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | UMSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | UMSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | UMSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | UMSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | UMSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | UMSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | UMSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | UMSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | UMSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | UMSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | UMSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | UMSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | UMSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | UMSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | UMSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | UMSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | UMSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | UMSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | UMSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | UMSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | UMSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable URLMapsScopedListWarningCode
+
+instance FromHttpApiData URLMapsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right UMSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right UMSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right UMSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right UMSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right UMSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right UMSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right UMSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right UMSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right UMSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right UMSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right UMSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right UMSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right UMSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right UMSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right UMSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right UMSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right UMSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right UMSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right UMSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right UMSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right UMSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right UMSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right UMSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right UMSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right UMSLWCUnreachable
+        x -> Left ("Unable to parse URLMapsScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData URLMapsScopedListWarningCode where
+    toQueryParam = \case
+        UMSLWCCleanupFailed -> "CLEANUP_FAILED"
+        UMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        UMSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        UMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        UMSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        UMSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        UMSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        UMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        UMSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        UMSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        UMSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        UMSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        UMSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        UMSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        UMSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        UMSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        UMSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        UMSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        UMSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        UMSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        UMSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        UMSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        UMSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        UMSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        UMSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON URLMapsScopedListWarningCode where
+    parseJSON = parseJSONText "URLMapsScopedListWarningCode"
+
+instance ToJSON URLMapsScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies the behavior to apply to scheduled snapshots when the source
+-- disk is deleted.
+data ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete
+    = ApplyRetentionPolicy
+      -- ^ @APPLY_RETENTION_POLICY@
+    | KeepAutoSnapshots
+      -- ^ @KEEP_AUTO_SNAPSHOTS@
+    | UnspecifiedOnSourceDiskDelete
+      -- ^ @UNSPECIFIED_ON_SOURCE_DISK_DELETE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete
+
+instance FromHttpApiData ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete where
+    parseQueryParam = \case
+        "APPLY_RETENTION_POLICY" -> Right ApplyRetentionPolicy
+        "KEEP_AUTO_SNAPSHOTS" -> Right KeepAutoSnapshots
+        "UNSPECIFIED_ON_SOURCE_DISK_DELETE" -> Right UnspecifiedOnSourceDiskDelete
+        x -> Left ("Unable to parse ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete from: " <> x)
+
+instance ToHttpApiData ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete where
+    toQueryParam = \case
+        ApplyRetentionPolicy -> "APPLY_RETENTION_POLICY"
+        KeepAutoSnapshots -> "KEEP_AUTO_SNAPSHOTS"
+        UnspecifiedOnSourceDiskDelete -> "UNSPECIFIED_ON_SOURCE_DISK_DELETE"
+
+instance FromJSON ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete where
+    parseJSON = parseJSONText "ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete"
+
+instance ToJSON ResourcePolicySnapshotSchedulePolicyRetentionPolicyOnSourceDiskDelete where
+    toJSON = toJSONText
+
 -- | The protocol this BackendService uses to communicate with backends.
--- Possible values are HTTP, HTTPS, TCP, and SSL. The default is HTTP. For
--- internal load balancing, the possible values are TCP and UDP, and the
--- default is TCP.
+-- Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending
+-- on the chosen load balancer or Traffic Director configuration. Refer to
+-- the documentation for the load balancer or for Traffic Director for more
+-- information. Must be set to GRPC when the backend service is referenced
+-- by a URL map that is bound to target gRPC proxy.
 data BackendServiceProtocol
-    = HTTP
+    = Grpc
+      -- ^ @GRPC@
+    | HTTP
       -- ^ @HTTP@
     | HTTP2
       -- ^ @HTTP2@
@@ -775,6 +1564,7 @@ instance Hashable BackendServiceProtocol
 
 instance FromHttpApiData BackendServiceProtocol where
     parseQueryParam = \case
+        "GRPC" -> Right Grpc
         "HTTP" -> Right HTTP
         "HTTP2" -> Right HTTP2
         "HTTPS" -> Right HTTPS
@@ -785,6 +1575,7 @@ instance FromHttpApiData BackendServiceProtocol where
 
 instance ToHttpApiData BackendServiceProtocol where
     toQueryParam = \case
+        Grpc -> "GRPC"
         HTTP -> "HTTP"
         HTTP2 -> "HTTP2"
         HTTPS -> "HTTPS"
@@ -798,23 +1589,44 @@ instance FromJSON BackendServiceProtocol where
 instance ToJSON BackendServiceProtocol where
     toJSON = toJSONText
 
--- | Type of network endpoints in this network endpoint group. Currently the
--- only supported value is GCE_VM_IP_PORT.
+-- | Type of network endpoints in this network endpoint group. Can be one of
+-- GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT,
+-- INTERNET_IP_PORT, or SERVERLESS.
 data NetworkEndpointGroupNetworkEndpointType
-    = GceVMIPPort
+    = GceVMIP
+      -- ^ @GCE_VM_IP@
+    | GceVMIPPort
       -- ^ @GCE_VM_IP_PORT@
+    | InternetFqdnPort
+      -- ^ @INTERNET_FQDN_PORT@
+    | InternetIPPort
+      -- ^ @INTERNET_IP_PORT@
+    | NonGcpPrivateIPPort
+      -- ^ @NON_GCP_PRIVATE_IP_PORT@
+    | Serverless
+      -- ^ @SERVERLESS@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable NetworkEndpointGroupNetworkEndpointType
 
 instance FromHttpApiData NetworkEndpointGroupNetworkEndpointType where
     parseQueryParam = \case
+        "GCE_VM_IP" -> Right GceVMIP
         "GCE_VM_IP_PORT" -> Right GceVMIPPort
+        "INTERNET_FQDN_PORT" -> Right InternetFqdnPort
+        "INTERNET_IP_PORT" -> Right InternetIPPort
+        "NON_GCP_PRIVATE_IP_PORT" -> Right NonGcpPrivateIPPort
+        "SERVERLESS" -> Right Serverless
         x -> Left ("Unable to parse NetworkEndpointGroupNetworkEndpointType from: " <> x)
 
 instance ToHttpApiData NetworkEndpointGroupNetworkEndpointType where
     toQueryParam = \case
+        GceVMIP -> "GCE_VM_IP"
         GceVMIPPort -> "GCE_VM_IP_PORT"
+        InternetFqdnPort -> "INTERNET_FQDN_PORT"
+        InternetIPPort -> "INTERNET_IP_PORT"
+        NonGcpPrivateIPPort -> "NON_GCP_PRIVATE_IP_PORT"
+        Serverless -> "SERVERLESS"
 
 instance FromJSON NetworkEndpointGroupNetworkEndpointType where
     parseJSON = parseJSONText "NetworkEndpointGroupNetworkEndpointType"
@@ -841,6 +1653,8 @@ data BackendBucketListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | BBLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | BBLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | BBLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | BBLWCNextHopAddressNotAssigned
@@ -857,6 +1671,8 @@ data BackendBucketListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | BBLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | BBLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | BBLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | BBLWCResourceInUseByOtherResourceWarning
@@ -885,6 +1701,7 @@ instance FromHttpApiData BackendBucketListWarningCode where
         "EXTERNAL_API_WARNING" -> Right BBLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right BBLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right BBLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right BBLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right BBLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right BBLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right BBLWCNextHopCannotIPForward
@@ -893,6 +1710,7 @@ instance FromHttpApiData BackendBucketListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right BBLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right BBLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right BBLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right BBLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right BBLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right BBLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right BBLWCResourceNotDeleted
@@ -912,6 +1730,7 @@ instance ToHttpApiData BackendBucketListWarningCode where
         BBLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         BBLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         BBLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        BBLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         BBLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         BBLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         BBLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -920,6 +1739,7 @@ instance ToHttpApiData BackendBucketListWarningCode where
         BBLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         BBLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         BBLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        BBLWCPartialSuccess -> "PARTIAL_SUCCESS"
         BBLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         BBLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         BBLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -953,6 +1773,8 @@ data AcceleratorTypesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ATSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ATSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ATSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ATSLWCNextHopAddressNotAssigned
@@ -969,6 +1791,8 @@ data AcceleratorTypesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ATSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ATSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ATSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ATSLWCResourceInUseByOtherResourceWarning
@@ -997,6 +1821,7 @@ instance FromHttpApiData AcceleratorTypesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ATSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ATSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ATSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ATSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ATSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ATSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ATSLWCNextHopCannotIPForward
@@ -1005,6 +1830,7 @@ instance FromHttpApiData AcceleratorTypesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ATSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ATSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ATSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ATSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ATSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ATSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ATSLWCResourceNotDeleted
@@ -1024,6 +1850,7 @@ instance ToHttpApiData AcceleratorTypesScopedListWarningCode where
         ATSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ATSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ATSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ATSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ATSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ATSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ATSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1032,6 +1859,7 @@ instance ToHttpApiData AcceleratorTypesScopedListWarningCode where
         ATSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ATSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ATSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ATSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ATSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ATSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ATSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -1044,6 +1872,126 @@ instance FromJSON AcceleratorTypesScopedListWarningCode where
     parseJSON = parseJSONText "AcceleratorTypesScopedListWarningCode"
 
 instance ToJSON AcceleratorTypesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PublicDelegatedPrefixListWarningCode
+    = PDPLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PDPLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PDPLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PDPLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PDPLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PDPLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PDPLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PDPLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PDPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PDPLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PDPLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PDPLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PDPLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PDPLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PDPLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PDPLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PDPLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PDPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PDPLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PDPLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PDPLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PDPLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PDPLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PDPLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PDPLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicDelegatedPrefixListWarningCode
+
+instance FromHttpApiData PublicDelegatedPrefixListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PDPLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PDPLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PDPLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PDPLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PDPLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PDPLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PDPLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PDPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PDPLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PDPLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PDPLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PDPLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PDPLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PDPLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PDPLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PDPLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PDPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PDPLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PDPLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PDPLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PDPLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PDPLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PDPLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PDPLWCUndeclaredProperties
+        "UNREACHABLE" -> Right PDPLWCUnreachable
+        x -> Left ("Unable to parse PublicDelegatedPrefixListWarningCode from: " <> x)
+
+instance ToHttpApiData PublicDelegatedPrefixListWarningCode where
+    toQueryParam = \case
+        PDPLWCCleanupFailed -> "CLEANUP_FAILED"
+        PDPLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PDPLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PDPLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PDPLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PDPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PDPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PDPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PDPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PDPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PDPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PDPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PDPLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PDPLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PDPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PDPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PDPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PDPLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PDPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PDPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PDPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PDPLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PDPLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PDPLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PDPLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PublicDelegatedPrefixListWarningCode where
+    parseJSON = parseJSONText "PublicDelegatedPrefixListWarningCode"
+
+instance ToJSON PublicDelegatedPrefixListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -1065,6 +2013,8 @@ data NodeGroupsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NGSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NGSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NGSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NGSLWCNextHopAddressNotAssigned
@@ -1081,6 +2031,8 @@ data NodeGroupsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NGSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NGSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NGSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NGSLWCResourceInUseByOtherResourceWarning
@@ -1109,6 +2061,7 @@ instance FromHttpApiData NodeGroupsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NGSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NGSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NGSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NGSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NGSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NGSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NGSLWCNextHopCannotIPForward
@@ -1117,6 +2070,7 @@ instance FromHttpApiData NodeGroupsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NGSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NGSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NGSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NGSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NGSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NGSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NGSLWCResourceNotDeleted
@@ -1136,6 +2090,7 @@ instance ToHttpApiData NodeGroupsScopedListWarningCode where
         NGSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NGSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NGSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1144,6 +2099,7 @@ instance ToHttpApiData NodeGroupsScopedListWarningCode where
         NGSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NGSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NGSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NGSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NGSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NGSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NGSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -1156,6 +2112,126 @@ instance FromJSON NodeGroupsScopedListWarningCode where
     parseJSON = parseJSONText "NodeGroupsScopedListWarningCode"
 
 instance ToJSON NodeGroupsScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PublicAdvertisedPrefixListWarningCode
+    = PAPLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PAPLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PAPLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PAPLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PAPLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PAPLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PAPLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PAPLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PAPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PAPLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PAPLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PAPLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PAPLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PAPLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PAPLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PAPLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PAPLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PAPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PAPLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PAPLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PAPLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PAPLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PAPLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PAPLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PAPLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicAdvertisedPrefixListWarningCode
+
+instance FromHttpApiData PublicAdvertisedPrefixListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PAPLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PAPLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PAPLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PAPLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PAPLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PAPLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PAPLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PAPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PAPLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PAPLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PAPLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PAPLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PAPLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PAPLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PAPLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PAPLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PAPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PAPLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PAPLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PAPLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PAPLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PAPLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PAPLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PAPLWCUndeclaredProperties
+        "UNREACHABLE" -> Right PAPLWCUnreachable
+        x -> Left ("Unable to parse PublicAdvertisedPrefixListWarningCode from: " <> x)
+
+instance ToHttpApiData PublicAdvertisedPrefixListWarningCode where
+    toQueryParam = \case
+        PAPLWCCleanupFailed -> "CLEANUP_FAILED"
+        PAPLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PAPLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PAPLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PAPLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PAPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PAPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PAPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PAPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PAPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PAPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PAPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PAPLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PAPLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PAPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PAPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PAPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PAPLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PAPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PAPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PAPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PAPLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PAPLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PAPLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PAPLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PublicAdvertisedPrefixListWarningCode where
+    parseJSON = parseJSONText "PublicAdvertisedPrefixListWarningCode"
+
+instance ToJSON PublicAdvertisedPrefixListWarningCode where
     toJSON = toJSONText
 
 -- | The new type of proxy header to append before sending data to the
@@ -1214,13 +2290,13 @@ instance FromJSON AttachedDiskType where
 instance ToJSON AttachedDiskType where
     toJSON = toJSONText
 
--- | [Output Only] The resource that configures and manages this BGP peer.
+-- | [Output Only] The resource that configures and manages this BGP peer. -
 -- MANAGED_BY_USER is the default value and can be managed by you or other
--- users; MANAGED_BY_ATTACHMENT is a BGP peer that is configured and
+-- users - MANAGED_BY_ATTACHMENT is a BGP peer that is configured and
 -- managed by Cloud Interconnect, specifically by an InterconnectAttachment
--- of type PARTNER. Google will automatically create, update, and delete
--- this type of BGP peer when the PARTNER InterconnectAttachment is
--- created, updated, or deleted.
+-- of type PARTNER. Google automatically creates, updates, and deletes this
+-- type of BGP peer when the PARTNER InterconnectAttachment is created,
+-- updated, or deleted.
 data RouterBGPPeerManagementType
     = ManagedByAttachment
       -- ^ @MANAGED_BY_ATTACHMENT@
@@ -1296,6 +2372,8 @@ data AcceleratorTypeAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ATALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ATALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ATALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ATALWCNextHopAddressNotAssigned
@@ -1312,6 +2390,8 @@ data AcceleratorTypeAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ATALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ATALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ATALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ATALWCResourceInUseByOtherResourceWarning
@@ -1340,6 +2420,7 @@ instance FromHttpApiData AcceleratorTypeAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ATALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ATALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ATALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ATALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ATALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ATALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ATALWCNextHopCannotIPForward
@@ -1348,6 +2429,7 @@ instance FromHttpApiData AcceleratorTypeAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ATALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ATALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ATALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ATALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ATALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ATALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ATALWCResourceNotDeleted
@@ -1367,6 +2449,7 @@ instance ToHttpApiData AcceleratorTypeAggregatedListWarningCode where
         ATALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ATALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ATALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ATALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ATALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ATALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ATALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1375,6 +2458,7 @@ instance ToHttpApiData AcceleratorTypeAggregatedListWarningCode where
         ATALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ATALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ATALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ATALWCPartialSuccess -> "PARTIAL_SUCCESS"
         ATALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ATALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ATALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -1387,6 +2471,126 @@ instance FromJSON AcceleratorTypeAggregatedListWarningCode where
     parseJSON = parseJSONText "AcceleratorTypeAggregatedListWarningCode"
 
 instance ToJSON AcceleratorTypeAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ResourcePolicyListWarningCode
+    = RPLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RPLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RPLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RPLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RPLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RPLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RPLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RPLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RPLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RPLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RPLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RPLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RPLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RPLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RPLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RPLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RPLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RPLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RPLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RPLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RPLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RPLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RPLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePolicyListWarningCode
+
+instance FromHttpApiData ResourcePolicyListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RPLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RPLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RPLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RPLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RPLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RPLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RPLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RPLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RPLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RPLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RPLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RPLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RPLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RPLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RPLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RPLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RPLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RPLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RPLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RPLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RPLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RPLWCUndeclaredProperties
+        "UNREACHABLE" -> Right RPLWCUnreachable
+        x -> Left ("Unable to parse ResourcePolicyListWarningCode from: " <> x)
+
+instance ToHttpApiData ResourcePolicyListWarningCode where
+    toQueryParam = \case
+        RPLWCCleanupFailed -> "CLEANUP_FAILED"
+        RPLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RPLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RPLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RPLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RPLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RPLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RPLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        RPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RPLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RPLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RPLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RPLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ResourcePolicyListWarningCode where
+    parseJSON = parseJSONText "ResourcePolicyListWarningCode"
+
+instance ToJSON ResourcePolicyListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -1408,6 +2612,8 @@ data HealthCheckListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | HCLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | HCLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | HCLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | HCLWCNextHopAddressNotAssigned
@@ -1424,6 +2630,8 @@ data HealthCheckListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | HCLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | HCLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | HCLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | HCLWCResourceInUseByOtherResourceWarning
@@ -1452,6 +2660,7 @@ instance FromHttpApiData HealthCheckListWarningCode where
         "EXTERNAL_API_WARNING" -> Right HCLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right HCLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right HCLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right HCLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right HCLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right HCLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right HCLWCNextHopCannotIPForward
@@ -1460,6 +2669,7 @@ instance FromHttpApiData HealthCheckListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right HCLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right HCLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right HCLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right HCLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right HCLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right HCLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right HCLWCResourceNotDeleted
@@ -1479,6 +2689,7 @@ instance ToHttpApiData HealthCheckListWarningCode where
         HCLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         HCLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         HCLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        HCLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         HCLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         HCLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         HCLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1487,6 +2698,7 @@ instance ToHttpApiData HealthCheckListWarningCode where
         HCLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         HCLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         HCLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        HCLWCPartialSuccess -> "PARTIAL_SUCCESS"
         HCLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         HCLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         HCLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -1499,6 +2711,38 @@ instance FromJSON HealthCheckListWarningCode where
     parseJSON = parseJSONText "HealthCheckListWarningCode"
 
 instance ToJSON HealthCheckListWarningCode where
+    toJSON = toJSONText
+
+-- | The type of vNIC to be used on this interface. This may be gVNIC or
+-- VirtioNet.
+data NetworkInterfaceNicType
+    = Gvnic
+      -- ^ @GVNIC@
+    | UnspecifiedNicType
+      -- ^ @UNSPECIFIED_NIC_TYPE@
+    | VirtioNet
+      -- ^ @VIRTIO_NET@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkInterfaceNicType
+
+instance FromHttpApiData NetworkInterfaceNicType where
+    parseQueryParam = \case
+        "GVNIC" -> Right Gvnic
+        "UNSPECIFIED_NIC_TYPE" -> Right UnspecifiedNicType
+        "VIRTIO_NET" -> Right VirtioNet
+        x -> Left ("Unable to parse NetworkInterfaceNicType from: " <> x)
+
+instance ToHttpApiData NetworkInterfaceNicType where
+    toQueryParam = \case
+        Gvnic -> "GVNIC"
+        UnspecifiedNicType -> "UNSPECIFIED_NIC_TYPE"
+        VirtioNet -> "VIRTIO_NET"
+
+instance FromJSON NetworkInterfaceNicType where
+    parseJSON = parseJSONText "NetworkInterfaceNicType"
+
+instance ToJSON NetworkInterfaceNicType where
     toJSON = toJSONText
 
 -- | Profile specifies the set of SSL features that can be used by the load
@@ -1539,8 +2783,129 @@ instance FromJSON SSLPolicyProFile where
 instance ToJSON SSLPolicyProFile where
     toJSON = toJSONText
 
--- | The party that generated this notification. Note that \"NSRC_GOOGLE\"
--- has been deprecated in favor of \"GOOGLE\"
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data RegionInstanceGroupManagersListInstanceConfigsRespWarningCode
+    = RIGMLICRWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RIGMLICRWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RIGMLICRWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RIGMLICRWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RIGMLICRWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RIGMLICRWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RIGMLICRWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RIGMLICRWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RIGMLICRWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RIGMLICRWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RIGMLICRWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RIGMLICRWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RIGMLICRWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RIGMLICRWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RIGMLICRWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RIGMLICRWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RIGMLICRWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RIGMLICRWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RIGMLICRWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RIGMLICRWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RIGMLICRWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RIGMLICRWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RIGMLICRWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RIGMLICRWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RIGMLICRWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RegionInstanceGroupManagersListInstanceConfigsRespWarningCode
+
+instance FromHttpApiData RegionInstanceGroupManagersListInstanceConfigsRespWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RIGMLICRWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RIGMLICRWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RIGMLICRWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RIGMLICRWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RIGMLICRWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RIGMLICRWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RIGMLICRWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RIGMLICRWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RIGMLICRWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RIGMLICRWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RIGMLICRWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RIGMLICRWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RIGMLICRWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RIGMLICRWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RIGMLICRWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RIGMLICRWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RIGMLICRWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RIGMLICRWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RIGMLICRWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RIGMLICRWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RIGMLICRWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RIGMLICRWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RIGMLICRWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RIGMLICRWCUndeclaredProperties
+        "UNREACHABLE" -> Right RIGMLICRWCUnreachable
+        x -> Left ("Unable to parse RegionInstanceGroupManagersListInstanceConfigsRespWarningCode from: " <> x)
+
+instance ToHttpApiData RegionInstanceGroupManagersListInstanceConfigsRespWarningCode where
+    toQueryParam = \case
+        RIGMLICRWCCleanupFailed -> "CLEANUP_FAILED"
+        RIGMLICRWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RIGMLICRWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RIGMLICRWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RIGMLICRWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RIGMLICRWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RIGMLICRWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RIGMLICRWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RIGMLICRWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RIGMLICRWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RIGMLICRWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RIGMLICRWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RIGMLICRWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RIGMLICRWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RIGMLICRWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RIGMLICRWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RIGMLICRWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RIGMLICRWCPartialSuccess -> "PARTIAL_SUCCESS"
+        RIGMLICRWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RIGMLICRWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RIGMLICRWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RIGMLICRWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RIGMLICRWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RIGMLICRWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RIGMLICRWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON RegionInstanceGroupManagersListInstanceConfigsRespWarningCode where
+    parseJSON = parseJSONText "RegionInstanceGroupManagersListInstanceConfigsRespWarningCode"
+
+instance ToJSON RegionInstanceGroupManagersListInstanceConfigsRespWarningCode where
+    toJSON = toJSONText
+
+-- | The party that generated this notification, which can take the following
+-- value: - GOOGLE: this notification as generated by Google. Note that the
+-- value of NSRC_GOOGLE has been deprecated in favor of GOOGLE.
 data InterconnectOutageNotificationSource
     = Google
       -- ^ @GOOGLE@
@@ -1567,10 +2932,42 @@ instance FromJSON InterconnectOutageNotificationSource where
 instance ToJSON InterconnectOutageNotificationSource where
     toJSON = toJSONText
 
--- | Type of link requested. This field indicates speed of each of the links
--- in the bundle, not the entire bundle.
+-- | The direction of the exchanged routes.
+data NetworksListPeeringRoutesDirection
+    = Incoming
+      -- ^ @INCOMING@
+    | Outgoing
+      -- ^ @OUTGOING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworksListPeeringRoutesDirection
+
+instance FromHttpApiData NetworksListPeeringRoutesDirection where
+    parseQueryParam = \case
+        "INCOMING" -> Right Incoming
+        "OUTGOING" -> Right Outgoing
+        x -> Left ("Unable to parse NetworksListPeeringRoutesDirection from: " <> x)
+
+instance ToHttpApiData NetworksListPeeringRoutesDirection where
+    toQueryParam = \case
+        Incoming -> "INCOMING"
+        Outgoing -> "OUTGOING"
+
+instance FromJSON NetworksListPeeringRoutesDirection where
+    parseJSON = parseJSONText "NetworksListPeeringRoutesDirection"
+
+instance ToJSON NetworksListPeeringRoutesDirection where
+    toJSON = toJSONText
+
+-- | Type of link requested, which can take one of the following values: -
+-- LINK_TYPE_ETHERNET_10G_LR: A 10G Ethernet with LR optics -
+-- LINK_TYPE_ETHERNET_100G_LR: A 100G Ethernet with LR optics. Note that
+-- this field indicates the speed of each of the links in the bundle, not
+-- the speed of the entire bundle.
 data InterconnectLinkType
-    = LinkTypeEthernet10GLr
+    = LinkTypeEthernet100GLr
+      -- ^ @LINK_TYPE_ETHERNET_100G_LR@
+    | LinkTypeEthernet10GLr
       -- ^ @LINK_TYPE_ETHERNET_10G_LR@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -1578,17 +2975,139 @@ instance Hashable InterconnectLinkType
 
 instance FromHttpApiData InterconnectLinkType where
     parseQueryParam = \case
+        "LINK_TYPE_ETHERNET_100G_LR" -> Right LinkTypeEthernet100GLr
         "LINK_TYPE_ETHERNET_10G_LR" -> Right LinkTypeEthernet10GLr
         x -> Left ("Unable to parse InterconnectLinkType from: " <> x)
 
 instance ToHttpApiData InterconnectLinkType where
     toQueryParam = \case
+        LinkTypeEthernet100GLr -> "LINK_TYPE_ETHERNET_100G_LR"
         LinkTypeEthernet10GLr -> "LINK_TYPE_ETHERNET_10G_LR"
 
 instance FromJSON InterconnectLinkType where
     parseJSON = parseJSONText "InterconnectLinkType"
 
 instance ToJSON InterconnectLinkType where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ExchangedPeeringRoutesListWarningCode
+    = EPRLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | EPRLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | EPRLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | EPRLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | EPRLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | EPRLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | EPRLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | EPRLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | EPRLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | EPRLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | EPRLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | EPRLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | EPRLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | EPRLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | EPRLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | EPRLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | EPRLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | EPRLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | EPRLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | EPRLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | EPRLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | EPRLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | EPRLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | EPRLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | EPRLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ExchangedPeeringRoutesListWarningCode
+
+instance FromHttpApiData ExchangedPeeringRoutesListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right EPRLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right EPRLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right EPRLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right EPRLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right EPRLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right EPRLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right EPRLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right EPRLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right EPRLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right EPRLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right EPRLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right EPRLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right EPRLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right EPRLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right EPRLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right EPRLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right EPRLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right EPRLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right EPRLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right EPRLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right EPRLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right EPRLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right EPRLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right EPRLWCUndeclaredProperties
+        "UNREACHABLE" -> Right EPRLWCUnreachable
+        x -> Left ("Unable to parse ExchangedPeeringRoutesListWarningCode from: " <> x)
+
+instance ToHttpApiData ExchangedPeeringRoutesListWarningCode where
+    toQueryParam = \case
+        EPRLWCCleanupFailed -> "CLEANUP_FAILED"
+        EPRLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        EPRLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        EPRLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        EPRLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        EPRLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        EPRLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        EPRLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        EPRLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        EPRLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        EPRLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        EPRLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        EPRLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        EPRLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        EPRLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        EPRLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        EPRLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        EPRLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        EPRLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        EPRLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        EPRLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        EPRLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        EPRLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        EPRLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        EPRLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ExchangedPeeringRoutesListWarningCode where
+    parseJSON = parseJSONText "ExchangedPeeringRoutesListWarningCode"
+
+instance ToJSON ExchangedPeeringRoutesListWarningCode where
     toJSON = toJSONText
 
 -- | Specifies the type of proxy header to append before sending data to the
@@ -1619,7 +3138,8 @@ instance FromJSON TargetSSLProxyProxyHeader where
 instance ToJSON TargetSSLProxyProxyHeader where
     toJSON = toJSONText
 
--- | User-specified flag to indicate which mode to use for advertisement.
+-- | User-specified flag to indicate which mode to use for advertisement. The
+-- options are DEFAULT or CUSTOM.
 data RouterBGPAdvertiseMode
     = RBAMCustom
       -- ^ @CUSTOM@
@@ -1665,6 +3185,8 @@ data NodeGroupsListNodesWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NGLNWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NGLNWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NGLNWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NGLNWCNextHopAddressNotAssigned
@@ -1681,6 +3203,8 @@ data NodeGroupsListNodesWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NGLNWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NGLNWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NGLNWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NGLNWCResourceInUseByOtherResourceWarning
@@ -1709,6 +3233,7 @@ instance FromHttpApiData NodeGroupsListNodesWarningCode where
         "EXTERNAL_API_WARNING" -> Right NGLNWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NGLNWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NGLNWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NGLNWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NGLNWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NGLNWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NGLNWCNextHopCannotIPForward
@@ -1717,6 +3242,7 @@ instance FromHttpApiData NodeGroupsListNodesWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NGLNWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NGLNWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NGLNWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NGLNWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NGLNWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NGLNWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NGLNWCResourceNotDeleted
@@ -1736,6 +3262,7 @@ instance ToHttpApiData NodeGroupsListNodesWarningCode where
         NGLNWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NGLNWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NGLNWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NGLNWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NGLNWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NGLNWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NGLNWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1744,6 +3271,7 @@ instance ToHttpApiData NodeGroupsListNodesWarningCode where
         NGLNWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NGLNWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NGLNWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NGLNWCPartialSuccess -> "PARTIAL_SUCCESS"
         NGLNWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NGLNWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NGLNWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -1822,6 +3350,8 @@ data InterconnectLocationListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ILLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ILLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ILLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ILLWCNextHopAddressNotAssigned
@@ -1838,6 +3368,8 @@ data InterconnectLocationListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ILLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ILLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ILLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ILLWCResourceInUseByOtherResourceWarning
@@ -1866,6 +3398,7 @@ instance FromHttpApiData InterconnectLocationListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ILLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ILLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ILLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ILLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ILLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ILLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ILLWCNextHopCannotIPForward
@@ -1874,6 +3407,7 @@ instance FromHttpApiData InterconnectLocationListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ILLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ILLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ILLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ILLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ILLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ILLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ILLWCResourceNotDeleted
@@ -1893,6 +3427,7 @@ instance ToHttpApiData InterconnectLocationListWarningCode where
         ILLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ILLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ILLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ILLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ILLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ILLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ILLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1901,6 +3436,7 @@ instance ToHttpApiData InterconnectLocationListWarningCode where
         ILLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ILLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ILLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ILLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ILLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ILLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ILLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -1934,6 +3470,8 @@ data InstanceGroupsListInstancesWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGLIWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGLIWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGLIWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGLIWCNextHopAddressNotAssigned
@@ -1950,6 +3488,8 @@ data InstanceGroupsListInstancesWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGLIWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGLIWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGLIWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGLIWCResourceInUseByOtherResourceWarning
@@ -1978,6 +3518,7 @@ instance FromHttpApiData InstanceGroupsListInstancesWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGLIWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGLIWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGLIWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGLIWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGLIWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGLIWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGLIWCNextHopCannotIPForward
@@ -1986,6 +3527,7 @@ instance FromHttpApiData InstanceGroupsListInstancesWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGLIWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGLIWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGLIWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGLIWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGLIWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGLIWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGLIWCResourceNotDeleted
@@ -2005,6 +3547,7 @@ instance ToHttpApiData InstanceGroupsListInstancesWarningCode where
         IGLIWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGLIWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGLIWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGLIWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGLIWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGLIWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGLIWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2013,6 +3556,7 @@ instance ToHttpApiData InstanceGroupsListInstancesWarningCode where
         IGLIWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGLIWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGLIWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGLIWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGLIWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGLIWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGLIWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2025,6 +3569,44 @@ instance FromJSON InstanceGroupsListInstancesWarningCode where
     parseJSON = parseJSONText "InstanceGroupsListInstancesWarningCode"
 
 instance ToJSON InstanceGroupsListInstancesWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies how to handle instances when a node in the group undergoes
+-- maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or
+-- MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more
+-- information, see Maintenance policies.
+data NodeGroupMaintenancePolicy
+    = Default
+      -- ^ @DEFAULT@
+    | MaintenancePolicyUnspecified
+      -- ^ @MAINTENANCE_POLICY_UNSPECIFIED@
+    | MigrateWithinNodeGroup
+      -- ^ @MIGRATE_WITHIN_NODE_GROUP@
+    | RestartInPlace
+      -- ^ @RESTART_IN_PLACE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NodeGroupMaintenancePolicy
+
+instance FromHttpApiData NodeGroupMaintenancePolicy where
+    parseQueryParam = \case
+        "DEFAULT" -> Right Default
+        "MAINTENANCE_POLICY_UNSPECIFIED" -> Right MaintenancePolicyUnspecified
+        "MIGRATE_WITHIN_NODE_GROUP" -> Right MigrateWithinNodeGroup
+        "RESTART_IN_PLACE" -> Right RestartInPlace
+        x -> Left ("Unable to parse NodeGroupMaintenancePolicy from: " <> x)
+
+instance ToHttpApiData NodeGroupMaintenancePolicy where
+    toQueryParam = \case
+        Default -> "DEFAULT"
+        MaintenancePolicyUnspecified -> "MAINTENANCE_POLICY_UNSPECIFIED"
+        MigrateWithinNodeGroup -> "MIGRATE_WITHIN_NODE_GROUP"
+        RestartInPlace -> "RESTART_IN_PLACE"
+
+instance FromJSON NodeGroupMaintenancePolicy where
+    parseJSON = parseJSONText "NodeGroupMaintenancePolicy"
+
+instance ToJSON NodeGroupMaintenancePolicy where
     toJSON = toJSONText
 
 -- | Instances in which state should be returned. Valid options are: \'ALL\',
@@ -2056,7 +3638,8 @@ instance ToJSON RegionInstanceGroupsListInstancesRequestInstanceState where
     toJSON = toJSONText
 
 -- | [Output Only] The role this project has in a shared VPC configuration.
--- Currently only HOST projects are differentiated.
+-- Currently, only projects with the host role, which is specified by the
+-- value HOST, are differentiated.
 data ProjectXpnProjectStatus
     = Host
       -- ^ @HOST@
@@ -2193,6 +3776,126 @@ instance FromJSON ConditionSys where
 instance ToJSON ConditionSys where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data HealthChecksScopedListWarningCode
+    = HCSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | HCSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | HCSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | HCSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | HCSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | HCSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | HCSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | HCSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | HCSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | HCSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | HCSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | HCSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | HCSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | HCSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | HCSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | HCSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | HCSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | HCSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | HCSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | HCSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | HCSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | HCSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | HCSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | HCSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | HCSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthChecksScopedListWarningCode
+
+instance FromHttpApiData HealthChecksScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right HCSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right HCSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right HCSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right HCSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right HCSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right HCSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right HCSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right HCSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right HCSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right HCSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right HCSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right HCSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right HCSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right HCSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right HCSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right HCSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right HCSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right HCSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right HCSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right HCSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right HCSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right HCSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right HCSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right HCSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right HCSLWCUnreachable
+        x -> Left ("Unable to parse HealthChecksScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData HealthChecksScopedListWarningCode where
+    toQueryParam = \case
+        HCSLWCCleanupFailed -> "CLEANUP_FAILED"
+        HCSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        HCSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        HCSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        HCSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        HCSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        HCSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        HCSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        HCSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        HCSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        HCSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        HCSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        HCSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        HCSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        HCSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        HCSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        HCSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        HCSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        HCSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        HCSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        HCSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        HCSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        HCSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        HCSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        HCSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON HealthChecksScopedListWarningCode where
+    parseJSON = parseJSONText "HealthChecksScopedListWarningCode"
+
+instance ToJSON HealthChecksScopedListWarningCode where
+    toJSON = toJSONText
+
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
 data ImageSourceType
@@ -2236,6 +3939,8 @@ data SubnetworkAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SALWCNextHopAddressNotAssigned
@@ -2252,6 +3957,8 @@ data SubnetworkAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SALWCResourceInUseByOtherResourceWarning
@@ -2280,6 +3987,7 @@ instance FromHttpApiData SubnetworkAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SALWCNextHopCannotIPForward
@@ -2288,6 +3996,7 @@ instance FromHttpApiData SubnetworkAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SALWCResourceNotDeleted
@@ -2307,6 +4016,7 @@ instance ToHttpApiData SubnetworkAggregatedListWarningCode where
         SALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2315,6 +4025,7 @@ instance ToHttpApiData SubnetworkAggregatedListWarningCode where
         SALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         SALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SALWCPartialSuccess -> "PARTIAL_SUCCESS"
         SALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2348,6 +4059,8 @@ data NetworkEndpointGroupAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NEGALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NEGALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NEGALWCNextHopAddressNotAssigned
@@ -2364,6 +4077,8 @@ data NetworkEndpointGroupAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NEGALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NEGALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NEGALWCResourceInUseByOtherResourceWarning
@@ -2392,6 +4107,7 @@ instance FromHttpApiData NetworkEndpointGroupAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NEGALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NEGALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NEGALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NEGALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NEGALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGALWCNextHopCannotIPForward
@@ -2400,6 +4116,7 @@ instance FromHttpApiData NetworkEndpointGroupAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NEGALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NEGALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NEGALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NEGALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NEGALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NEGALWCResourceNotDeleted
@@ -2419,6 +4136,7 @@ instance ToHttpApiData NetworkEndpointGroupAggregatedListWarningCode where
         NEGALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NEGALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NEGALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NEGALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NEGALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NEGALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2427,6 +4145,7 @@ instance ToHttpApiData NetworkEndpointGroupAggregatedListWarningCode where
         NEGALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NEGALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NEGALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGALWCPartialSuccess -> "PARTIAL_SUCCESS"
         NEGALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NEGALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NEGALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2441,20 +4160,34 @@ instance FromJSON NetworkEndpointGroupAggregatedListWarningCode where
 instance ToJSON NetworkEndpointGroupAggregatedListWarningCode where
     toJSON = toJSONText
 
--- | Type of session affinity to use. The default is NONE. When the load
--- balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or
--- GENERATED_COOKIE. When the load balancing scheme is INTERNAL, can be
--- NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. When the
--- protocol is UDP, this field is not used.
+-- | Type of session affinity to use. The default is NONE. When the
+-- loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the
+-- possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or
+-- CLIENT_IP_PORT_PROTO. * For all other load balancers that use
+-- loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP,
+-- or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is
+-- HTTP, HTTP2, or HTTPS. When the loadBalancingScheme is INTERNAL,
+-- possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or
+-- CLIENT_IP_PORT_PROTO. When the loadBalancingScheme is
+-- INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED, possible values are NONE,
+-- CLIENT_IP, GENERATED_COOKIE, HEADER_FIELD, or HTTP_COOKIE. Not supported
+-- when the backend service is referenced by a URL map that is bound to
+-- target gRPC proxy that has validateForProxyless field set to true.
 data BackendServiceSessionAffinity
     = BSSAClientIP
       -- ^ @CLIENT_IP@
+    | BSSAClientIPNoDestination
+      -- ^ @CLIENT_IP_NO_DESTINATION@
     | BSSAClientIPPortProto
       -- ^ @CLIENT_IP_PORT_PROTO@
     | BSSAClientIPProto
       -- ^ @CLIENT_IP_PROTO@
     | BSSAGeneratedCookie
       -- ^ @GENERATED_COOKIE@
+    | BSSAHeaderField
+      -- ^ @HEADER_FIELD@
+    | BSSAHTTPCookie
+      -- ^ @HTTP_COOKIE@
     | BSSANone
       -- ^ @NONE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -2464,24 +4197,64 @@ instance Hashable BackendServiceSessionAffinity
 instance FromHttpApiData BackendServiceSessionAffinity where
     parseQueryParam = \case
         "CLIENT_IP" -> Right BSSAClientIP
+        "CLIENT_IP_NO_DESTINATION" -> Right BSSAClientIPNoDestination
         "CLIENT_IP_PORT_PROTO" -> Right BSSAClientIPPortProto
         "CLIENT_IP_PROTO" -> Right BSSAClientIPProto
         "GENERATED_COOKIE" -> Right BSSAGeneratedCookie
+        "HEADER_FIELD" -> Right BSSAHeaderField
+        "HTTP_COOKIE" -> Right BSSAHTTPCookie
         "NONE" -> Right BSSANone
         x -> Left ("Unable to parse BackendServiceSessionAffinity from: " <> x)
 
 instance ToHttpApiData BackendServiceSessionAffinity where
     toQueryParam = \case
         BSSAClientIP -> "CLIENT_IP"
+        BSSAClientIPNoDestination -> "CLIENT_IP_NO_DESTINATION"
         BSSAClientIPPortProto -> "CLIENT_IP_PORT_PROTO"
         BSSAClientIPProto -> "CLIENT_IP_PROTO"
         BSSAGeneratedCookie -> "GENERATED_COOKIE"
+        BSSAHeaderField -> "HEADER_FIELD"
+        BSSAHTTPCookie -> "HTTP_COOKIE"
         BSSANone -> "NONE"
 
 instance FromJSON BackendServiceSessionAffinity where
     parseJSON = parseJSONText "BackendServiceSessionAffinity"
 
 instance ToJSON BackendServiceSessionAffinity where
+    toJSON = toJSONText
+
+-- | The stack type for this network interface to identify whether the IPv6
+-- feature is enabled or not. If not specified, IPV4_ONLY will be used.
+-- This field can be both set at instance creation and update network
+-- interface operations.
+data NetworkInterfaceStackType
+    = NISTIPV4IPV6
+      -- ^ @IPV4_IPV6@
+    | NISTIPV4Only
+      -- ^ @IPV4_ONLY@
+    | NISTUnspecifiedStackType
+      -- ^ @UNSPECIFIED_STACK_TYPE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkInterfaceStackType
+
+instance FromHttpApiData NetworkInterfaceStackType where
+    parseQueryParam = \case
+        "IPV4_IPV6" -> Right NISTIPV4IPV6
+        "IPV4_ONLY" -> Right NISTIPV4Only
+        "UNSPECIFIED_STACK_TYPE" -> Right NISTUnspecifiedStackType
+        x -> Left ("Unable to parse NetworkInterfaceStackType from: " <> x)
+
+instance ToHttpApiData NetworkInterfaceStackType where
+    toQueryParam = \case
+        NISTIPV4IPV6 -> "IPV4_IPV6"
+        NISTIPV4Only -> "IPV4_ONLY"
+        NISTUnspecifiedStackType -> "UNSPECIFIED_STACK_TYPE"
+
+instance FromJSON NetworkInterfaceStackType where
+    parseJSON = parseJSONText "NetworkInterfaceStackType"
+
+instance ToJSON NetworkInterfaceStackType where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -2503,6 +4276,8 @@ data ForwardingRulesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | FRSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | FRSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | FRSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | FRSLWCNextHopAddressNotAssigned
@@ -2519,6 +4294,8 @@ data ForwardingRulesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | FRSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | FRSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | FRSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | FRSLWCResourceInUseByOtherResourceWarning
@@ -2547,6 +4324,7 @@ instance FromHttpApiData ForwardingRulesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right FRSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right FRSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right FRSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right FRSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right FRSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FRSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FRSLWCNextHopCannotIPForward
@@ -2555,6 +4333,7 @@ instance FromHttpApiData ForwardingRulesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right FRSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right FRSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right FRSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right FRSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right FRSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right FRSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right FRSLWCResourceNotDeleted
@@ -2574,6 +4353,7 @@ instance ToHttpApiData ForwardingRulesScopedListWarningCode where
         FRSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         FRSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         FRSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        FRSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         FRSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         FRSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         FRSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2582,6 +4362,7 @@ instance ToHttpApiData ForwardingRulesScopedListWarningCode where
         FRSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         FRSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         FRSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        FRSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         FRSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         FRSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         FRSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2651,6 +4432,8 @@ data OperationsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | OSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | OSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | OSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | OSLWCNextHopAddressNotAssigned
@@ -2667,6 +4450,8 @@ data OperationsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | OSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | OSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | OSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | OSLWCResourceInUseByOtherResourceWarning
@@ -2695,6 +4480,7 @@ instance FromHttpApiData OperationsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right OSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right OSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right OSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right OSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right OSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right OSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right OSLWCNextHopCannotIPForward
@@ -2703,6 +4489,7 @@ instance FromHttpApiData OperationsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right OSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right OSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right OSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right OSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right OSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right OSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right OSLWCResourceNotDeleted
@@ -2722,6 +4509,7 @@ instance ToHttpApiData OperationsScopedListWarningCode where
         OSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         OSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         OSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        OSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         OSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         OSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         OSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2730,6 +4518,7 @@ instance ToHttpApiData OperationsScopedListWarningCode where
         OSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         OSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         OSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        OSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         OSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         OSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         OSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2763,6 +4552,8 @@ data OperationAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | OALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | OALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | OALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | OALWCNextHopAddressNotAssigned
@@ -2779,6 +4570,8 @@ data OperationAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | OALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | OALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | OALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | OALWCResourceInUseByOtherResourceWarning
@@ -2807,6 +4600,7 @@ instance FromHttpApiData OperationAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right OALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right OALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right OALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right OALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right OALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right OALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right OALWCNextHopCannotIPForward
@@ -2815,6 +4609,7 @@ instance FromHttpApiData OperationAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right OALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right OALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right OALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right OALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right OALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right OALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right OALWCResourceNotDeleted
@@ -2834,6 +4629,7 @@ instance ToHttpApiData OperationAggregatedListWarningCode where
         OALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         OALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         OALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        OALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         OALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         OALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         OALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2842,6 +4638,7 @@ instance ToHttpApiData OperationAggregatedListWarningCode where
         OALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         OALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         OALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        OALWCPartialSuccess -> "PARTIAL_SUCCESS"
         OALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         OALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         OALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2875,6 +4672,8 @@ data DiskAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | DALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | DALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | DALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | DALWCNextHopAddressNotAssigned
@@ -2891,6 +4690,8 @@ data DiskAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | DALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | DALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | DALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | DALWCResourceInUseByOtherResourceWarning
@@ -2919,6 +4720,7 @@ instance FromHttpApiData DiskAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right DALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right DALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right DALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right DALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DALWCNextHopCannotIPForward
@@ -2927,6 +4729,7 @@ instance FromHttpApiData DiskAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right DALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right DALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right DALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right DALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right DALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right DALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right DALWCResourceNotDeleted
@@ -2946,6 +4749,7 @@ instance ToHttpApiData DiskAggregatedListWarningCode where
         DALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         DALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         DALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         DALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2954,6 +4758,7 @@ instance ToHttpApiData DiskAggregatedListWarningCode where
         DALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         DALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         DALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DALWCPartialSuccess -> "PARTIAL_SUCCESS"
         DALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         DALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         DALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -2987,6 +4792,8 @@ data UsableSubnetworksAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | USALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | USALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | USALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | USALWCNextHopAddressNotAssigned
@@ -3003,6 +4810,8 @@ data UsableSubnetworksAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | USALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | USALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | USALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | USALWCResourceInUseByOtherResourceWarning
@@ -3031,6 +4840,7 @@ instance FromHttpApiData UsableSubnetworksAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right USALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right USALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right USALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right USALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right USALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right USALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right USALWCNextHopCannotIPForward
@@ -3039,6 +4849,7 @@ instance FromHttpApiData UsableSubnetworksAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right USALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right USALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right USALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right USALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right USALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right USALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right USALWCResourceNotDeleted
@@ -3058,6 +4869,7 @@ instance ToHttpApiData UsableSubnetworksAggregatedListWarningCode where
         USALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         USALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         USALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        USALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         USALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         USALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         USALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3066,6 +4878,7 @@ instance ToHttpApiData UsableSubnetworksAggregatedListWarningCode where
         USALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         USALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         USALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        USALWCPartialSuccess -> "PARTIAL_SUCCESS"
         USALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         USALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         USALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3078,6 +4891,126 @@ instance FromJSON UsableSubnetworksAggregatedListWarningCode where
     parseJSON = parseJSONText "UsableSubnetworksAggregatedListWarningCode"
 
 instance ToJSON UsableSubnetworksAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ReservationListWarningCode
+    = RLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReservationListWarningCode
+
+instance FromHttpApiData ReservationListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RLWCUndeclaredProperties
+        "UNREACHABLE" -> Right RLWCUnreachable
+        x -> Left ("Unable to parse ReservationListWarningCode from: " <> x)
+
+instance ToHttpApiData ReservationListWarningCode where
+    toQueryParam = \case
+        RLWCCleanupFailed -> "CLEANUP_FAILED"
+        RLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        RLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ReservationListWarningCode where
+    parseJSON = parseJSONText "ReservationListWarningCode"
+
+instance ToJSON ReservationListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -3099,6 +5032,8 @@ data DisksScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | DSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | DSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | DSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | DSLWCNextHopAddressNotAssigned
@@ -3115,6 +5050,8 @@ data DisksScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | DSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | DSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | DSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | DSLWCResourceInUseByOtherResourceWarning
@@ -3143,6 +5080,7 @@ instance FromHttpApiData DisksScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right DSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right DSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right DSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right DSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DSLWCNextHopCannotIPForward
@@ -3151,6 +5089,7 @@ instance FromHttpApiData DisksScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right DSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right DSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right DSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right DSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right DSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right DSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right DSLWCResourceNotDeleted
@@ -3170,6 +5109,7 @@ instance ToHttpApiData DisksScopedListWarningCode where
         DSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         DSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         DSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         DSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3178,6 +5118,7 @@ instance ToHttpApiData DisksScopedListWarningCode where
         DSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         DSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         DSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         DSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         DSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         DSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3190,6 +5131,47 @@ instance FromJSON DisksScopedListWarningCode where
     parseJSON = parseJSONText "DisksScopedListWarningCode"
 
 instance ToJSON DisksScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | The most disruptive action that you want to perform on each instance
+-- during the update: - REPLACE: Delete the instance and create it again. -
+-- RESTART: Stop the instance and start it again. - REFRESH: Do not stop
+-- the instance. - NONE: Do not disrupt the instance at all. By default,
+-- the most disruptive allowed action is REPLACE. If your update requires a
+-- more disruptive action than you set with this flag, the update request
+-- will fail.
+data RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction
+    = RIGMAURMDAANone
+      -- ^ @NONE@
+    | RIGMAURMDAARefresh
+      -- ^ @REFRESH@
+    | RIGMAURMDAAReplace
+      -- ^ @REPLACE@
+    | RIGMAURMDAARestart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction
+
+instance FromHttpApiData RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    parseQueryParam = \case
+        "NONE" -> Right RIGMAURMDAANone
+        "REFRESH" -> Right RIGMAURMDAARefresh
+        "REPLACE" -> Right RIGMAURMDAAReplace
+        "RESTART" -> Right RIGMAURMDAARestart
+        x -> Left ("Unable to parse RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction from: " <> x)
+
+instance ToHttpApiData RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    toQueryParam = \case
+        RIGMAURMDAANone -> "NONE"
+        RIGMAURMDAARefresh -> "REFRESH"
+        RIGMAURMDAAReplace -> "REPLACE"
+        RIGMAURMDAARestart -> "RESTART"
+
+instance FromJSON RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    parseJSON = parseJSONText "RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction"
+
+instance ToJSON RegionInstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -3211,6 +5193,8 @@ data InstanceGroupManagersScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGMSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGMSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGMSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGMSLWCNextHopAddressNotAssigned
@@ -3227,6 +5211,8 @@ data InstanceGroupManagersScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGMSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGMSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGMSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGMSLWCResourceInUseByOtherResourceWarning
@@ -3255,6 +5241,7 @@ instance FromHttpApiData InstanceGroupManagersScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGMSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGMSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGMSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGMSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGMSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGMSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGMSLWCNextHopCannotIPForward
@@ -3263,6 +5250,7 @@ instance FromHttpApiData InstanceGroupManagersScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGMSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGMSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGMSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGMSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGMSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGMSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGMSLWCResourceNotDeleted
@@ -3282,6 +5270,7 @@ instance ToHttpApiData InstanceGroupManagersScopedListWarningCode where
         IGMSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGMSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGMSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGMSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGMSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGMSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3290,6 +5279,7 @@ instance ToHttpApiData InstanceGroupManagersScopedListWarningCode where
         IGMSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGMSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGMSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGMSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGMSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGMSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGMSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3323,6 +5313,8 @@ data SSLPolicyWarningsItemCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SPWICInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SPWICLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SPWICMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SPWICNextHopAddressNotAssigned
@@ -3339,6 +5331,8 @@ data SSLPolicyWarningsItemCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SPWICNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SPWICPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SPWICRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SPWICResourceInUseByOtherResourceWarning
@@ -3367,6 +5361,7 @@ instance FromHttpApiData SSLPolicyWarningsItemCode where
         "EXTERNAL_API_WARNING" -> Right SPWICExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SPWICFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SPWICInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SPWICLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SPWICMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SPWICNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SPWICNextHopCannotIPForward
@@ -3375,6 +5370,7 @@ instance FromHttpApiData SSLPolicyWarningsItemCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SPWICNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SPWICNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SPWICNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SPWICPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SPWICRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SPWICResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SPWICResourceNotDeleted
@@ -3394,6 +5390,7 @@ instance ToHttpApiData SSLPolicyWarningsItemCode where
         SPWICExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SPWICFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SPWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SPWICLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SPWICMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SPWICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SPWICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3402,6 +5399,7 @@ instance ToHttpApiData SSLPolicyWarningsItemCode where
         SPWICNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SPWICNotCriticalError -> "NOT_CRITICAL_ERROR"
         SPWICNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SPWICPartialSuccess -> "PARTIAL_SUCCESS"
         SPWICRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SPWICResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SPWICResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3414,6 +5412,33 @@ instance FromJSON SSLPolicyWarningsItemCode where
     parseJSON = parseJSONText "SSLPolicyWarningsItemCode"
 
 instance ToJSON SSLPolicyWarningsItemCode where
+    toJSON = toJSONText
+
+-- | The direction in which this rule applies.
+data FirewallPolicyRuleDirection
+    = Egress
+      -- ^ @EGRESS@
+    | Ingress
+      -- ^ @INGRESS@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FirewallPolicyRuleDirection
+
+instance FromHttpApiData FirewallPolicyRuleDirection where
+    parseQueryParam = \case
+        "EGRESS" -> Right Egress
+        "INGRESS" -> Right Ingress
+        x -> Left ("Unable to parse FirewallPolicyRuleDirection from: " <> x)
+
+instance ToHttpApiData FirewallPolicyRuleDirection where
+    toQueryParam = \case
+        Egress -> "EGRESS"
+        Ingress -> "INGRESS"
+
+instance FromJSON FirewallPolicyRuleDirection where
+    parseJSON = parseJSONText "FirewallPolicyRuleDirection"
+
+instance ToJSON FirewallPolicyRuleDirection where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -3435,6 +5460,8 @@ data ForwardingRuleAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | FRALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | FRALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | FRALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | FRALWCNextHopAddressNotAssigned
@@ -3451,6 +5478,8 @@ data ForwardingRuleAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | FRALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | FRALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | FRALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | FRALWCResourceInUseByOtherResourceWarning
@@ -3479,6 +5508,7 @@ instance FromHttpApiData ForwardingRuleAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right FRALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right FRALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right FRALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right FRALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right FRALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FRALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FRALWCNextHopCannotIPForward
@@ -3487,6 +5517,7 @@ instance FromHttpApiData ForwardingRuleAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right FRALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right FRALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right FRALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right FRALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right FRALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right FRALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right FRALWCResourceNotDeleted
@@ -3506,6 +5537,7 @@ instance ToHttpApiData ForwardingRuleAggregatedListWarningCode where
         FRALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         FRALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         FRALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        FRALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         FRALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         FRALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         FRALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3514,6 +5546,7 @@ instance ToHttpApiData ForwardingRuleAggregatedListWarningCode where
         FRALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         FRALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         FRALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        FRALWCPartialSuccess -> "PARTIAL_SUCCESS"
         FRALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         FRALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         FRALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3547,6 +5580,8 @@ data TargetPoolAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TPALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TPALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TPALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TPALWCNextHopAddressNotAssigned
@@ -3563,6 +5598,8 @@ data TargetPoolAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TPALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TPALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TPALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TPALWCResourceInUseByOtherResourceWarning
@@ -3591,6 +5628,7 @@ instance FromHttpApiData TargetPoolAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TPALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TPALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TPALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TPALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TPALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TPALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TPALWCNextHopCannotIPForward
@@ -3599,6 +5637,7 @@ instance FromHttpApiData TargetPoolAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TPALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TPALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TPALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TPALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TPALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TPALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TPALWCResourceNotDeleted
@@ -3618,6 +5657,7 @@ instance ToHttpApiData TargetPoolAggregatedListWarningCode where
         TPALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TPALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TPALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TPALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TPALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TPALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TPALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3626,6 +5666,7 @@ instance ToHttpApiData TargetPoolAggregatedListWarningCode where
         TPALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TPALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TPALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TPALWCPartialSuccess -> "PARTIAL_SUCCESS"
         TPALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TPALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TPALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3659,6 +5700,8 @@ data TargetPoolsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TPSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TPSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TPSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TPSLWCNextHopAddressNotAssigned
@@ -3675,6 +5718,8 @@ data TargetPoolsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TPSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TPSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TPSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TPSLWCResourceInUseByOtherResourceWarning
@@ -3703,6 +5748,7 @@ instance FromHttpApiData TargetPoolsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TPSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TPSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TPSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TPSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TPSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TPSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TPSLWCNextHopCannotIPForward
@@ -3711,6 +5757,7 @@ instance FromHttpApiData TargetPoolsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TPSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TPSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TPSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TPSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TPSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TPSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TPSLWCResourceNotDeleted
@@ -3730,6 +5777,7 @@ instance ToHttpApiData TargetPoolsScopedListWarningCode where
         TPSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TPSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TPSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TPSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3738,6 +5786,7 @@ instance ToHttpApiData TargetPoolsScopedListWarningCode where
         TPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TPSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TPSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3771,6 +5820,8 @@ data TargetInstanceListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TILWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TILWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TILWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TILWCNextHopAddressNotAssigned
@@ -3787,6 +5838,8 @@ data TargetInstanceListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TILWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TILWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TILWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TILWCResourceInUseByOtherResourceWarning
@@ -3815,6 +5868,7 @@ instance FromHttpApiData TargetInstanceListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TILWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TILWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TILWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TILWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TILWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TILWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TILWCNextHopCannotIPForward
@@ -3823,6 +5877,7 @@ instance FromHttpApiData TargetInstanceListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TILWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TILWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TILWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TILWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TILWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TILWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TILWCResourceNotDeleted
@@ -3842,6 +5897,7 @@ instance ToHttpApiData TargetInstanceListWarningCode where
         TILWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TILWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TILWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TILWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TILWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TILWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TILWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -3850,6 +5906,7 @@ instance ToHttpApiData TargetInstanceListWarningCode where
         TILWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TILWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TILWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TILWCPartialSuccess -> "PARTIAL_SUCCESS"
         TILWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TILWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TILWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -3930,13 +5987,13 @@ instance ToJSON SSLHealthCheckProxyHeader where
 -- | [Output Only] The status of the VPN gateway, which can be one of the
 -- following: CREATING, READY, FAILED, or DELETING.
 data TargetVPNGatewayStatus
-    = Creating
+    = TVGSCreating
       -- ^ @CREATING@
-    | Deleting
+    | TVGSDeleting
       -- ^ @DELETING@
-    | Failed
+    | TVGSFailed
       -- ^ @FAILED@
-    | Ready
+    | TVGSReady
       -- ^ @READY@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -3944,23 +6001,58 @@ instance Hashable TargetVPNGatewayStatus
 
 instance FromHttpApiData TargetVPNGatewayStatus where
     parseQueryParam = \case
-        "CREATING" -> Right Creating
-        "DELETING" -> Right Deleting
-        "FAILED" -> Right Failed
-        "READY" -> Right Ready
+        "CREATING" -> Right TVGSCreating
+        "DELETING" -> Right TVGSDeleting
+        "FAILED" -> Right TVGSFailed
+        "READY" -> Right TVGSReady
         x -> Left ("Unable to parse TargetVPNGatewayStatus from: " <> x)
 
 instance ToHttpApiData TargetVPNGatewayStatus where
     toQueryParam = \case
-        Creating -> "CREATING"
-        Deleting -> "DELETING"
-        Failed -> "FAILED"
-        Ready -> "READY"
+        TVGSCreating -> "CREATING"
+        TVGSDeleting -> "DELETING"
+        TVGSFailed -> "FAILED"
+        TVGSReady -> "READY"
 
 instance FromJSON TargetVPNGatewayStatus where
     parseJSON = parseJSONText "TargetVPNGatewayStatus"
 
 instance ToJSON TargetVPNGatewayStatus where
+    toJSON = toJSONText
+
+-- | Specifies how individual filterLabel matches within the list of
+-- filterLabels contribute towards the overall metadataFilter match.
+-- Supported values are: - MATCH_ANY: At least one of the filterLabels must
+-- have a matching label in the provided metadata. - MATCH_ALL: All
+-- filterLabels must have matching labels in the provided metadata.
+data MetadataFilterFilterMatchCriteria
+    = MatchAll
+      -- ^ @MATCH_ALL@
+    | MatchAny
+      -- ^ @MATCH_ANY@
+    | NotSet
+      -- ^ @NOT_SET@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MetadataFilterFilterMatchCriteria
+
+instance FromHttpApiData MetadataFilterFilterMatchCriteria where
+    parseQueryParam = \case
+        "MATCH_ALL" -> Right MatchAll
+        "MATCH_ANY" -> Right MatchAny
+        "NOT_SET" -> Right NotSet
+        x -> Left ("Unable to parse MetadataFilterFilterMatchCriteria from: " <> x)
+
+instance ToHttpApiData MetadataFilterFilterMatchCriteria where
+    toQueryParam = \case
+        MatchAll -> "MATCH_ALL"
+        MatchAny -> "MATCH_ANY"
+        NotSet -> "NOT_SET"
+
+instance FromJSON MetadataFilterFilterMatchCriteria where
+    parseJSON = parseJSONText "MetadataFilterFilterMatchCriteria"
+
+instance ToJSON MetadataFilterFilterMatchCriteria where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -3982,6 +6074,8 @@ data InstanceGroupManagerAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGMALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGMALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGMALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGMALWCNextHopAddressNotAssigned
@@ -3998,6 +6092,8 @@ data InstanceGroupManagerAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGMALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGMALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGMALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGMALWCResourceInUseByOtherResourceWarning
@@ -4026,6 +6122,7 @@ instance FromHttpApiData InstanceGroupManagerAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGMALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGMALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGMALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGMALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGMALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGMALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGMALWCNextHopCannotIPForward
@@ -4034,6 +6131,7 @@ instance FromHttpApiData InstanceGroupManagerAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGMALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGMALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGMALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGMALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGMALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGMALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGMALWCResourceNotDeleted
@@ -4053,6 +6151,7 @@ instance ToHttpApiData InstanceGroupManagerAggregatedListWarningCode where
         IGMALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGMALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGMALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGMALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGMALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGMALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGMALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4061,6 +6160,7 @@ instance ToHttpApiData InstanceGroupManagerAggregatedListWarningCode where
         IGMALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGMALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGMALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGMALWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGMALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGMALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGMALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4073,6 +6173,126 @@ instance FromJSON InstanceGroupManagerAggregatedListWarningCode where
     parseJSON = parseJSONText "InstanceGroupManagerAggregatedListWarningCode"
 
 instance ToJSON InstanceGroupManagerAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data InstanceGroupManagersListPerInstanceConfigsRespWarningCode
+    = IGMLPICRWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | IGMLPICRWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | IGMLPICRWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | IGMLPICRWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | IGMLPICRWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | IGMLPICRWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | IGMLPICRWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | IGMLPICRWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGMLPICRWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | IGMLPICRWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | IGMLPICRWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | IGMLPICRWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | IGMLPICRWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | IGMLPICRWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | IGMLPICRWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | IGMLPICRWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | IGMLPICRWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | IGMLPICRWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | IGMLPICRWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | IGMLPICRWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | IGMLPICRWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | IGMLPICRWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | IGMLPICRWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | IGMLPICRWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | IGMLPICRWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagersListPerInstanceConfigsRespWarningCode
+
+instance FromHttpApiData InstanceGroupManagersListPerInstanceConfigsRespWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right IGMLPICRWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right IGMLPICRWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right IGMLPICRWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right IGMLPICRWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right IGMLPICRWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right IGMLPICRWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right IGMLPICRWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right IGMLPICRWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGMLPICRWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right IGMLPICRWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGMLPICRWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGMLPICRWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right IGMLPICRWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right IGMLPICRWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right IGMLPICRWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right IGMLPICRWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right IGMLPICRWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGMLPICRWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right IGMLPICRWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGMLPICRWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right IGMLPICRWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right IGMLPICRWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right IGMLPICRWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right IGMLPICRWCUndeclaredProperties
+        "UNREACHABLE" -> Right IGMLPICRWCUnreachable
+        x -> Left ("Unable to parse InstanceGroupManagersListPerInstanceConfigsRespWarningCode from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagersListPerInstanceConfigsRespWarningCode where
+    toQueryParam = \case
+        IGMLPICRWCCleanupFailed -> "CLEANUP_FAILED"
+        IGMLPICRWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        IGMLPICRWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        IGMLPICRWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        IGMLPICRWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        IGMLPICRWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        IGMLPICRWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        IGMLPICRWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGMLPICRWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        IGMLPICRWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        IGMLPICRWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        IGMLPICRWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        IGMLPICRWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        IGMLPICRWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        IGMLPICRWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        IGMLPICRWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        IGMLPICRWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGMLPICRWCPartialSuccess -> "PARTIAL_SUCCESS"
+        IGMLPICRWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        IGMLPICRWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        IGMLPICRWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        IGMLPICRWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        IGMLPICRWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        IGMLPICRWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        IGMLPICRWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON InstanceGroupManagersListPerInstanceConfigsRespWarningCode where
+    parseJSON = parseJSONText "InstanceGroupManagersListPerInstanceConfigsRespWarningCode"
+
+instance ToJSON InstanceGroupManagersListPerInstanceConfigsRespWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the snapshot. This can be CREATING,
@@ -4160,6 +6380,8 @@ data AutoscalerListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ALWCNextHopAddressNotAssigned
@@ -4176,6 +6398,8 @@ data AutoscalerListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ALWCResourceInUseByOtherResourceWarning
@@ -4204,6 +6428,7 @@ instance FromHttpApiData AutoscalerListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ALWCNextHopCannotIPForward
@@ -4212,6 +6437,7 @@ instance FromHttpApiData AutoscalerListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ALWCResourceNotDeleted
@@ -4231,6 +6457,7 @@ instance ToHttpApiData AutoscalerListWarningCode where
         ALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4239,6 +6466,7 @@ instance ToHttpApiData AutoscalerListWarningCode where
         ALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ALWCPartialSuccess -> "PARTIAL_SUCCESS"
         ALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4272,6 +6500,8 @@ data DiskTypeListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | DTLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | DTLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | DTLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | DTLWCNextHopAddressNotAssigned
@@ -4288,6 +6518,8 @@ data DiskTypeListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | DTLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | DTLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | DTLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | DTLWCResourceInUseByOtherResourceWarning
@@ -4316,6 +6548,7 @@ instance FromHttpApiData DiskTypeListWarningCode where
         "EXTERNAL_API_WARNING" -> Right DTLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right DTLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DTLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right DTLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right DTLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DTLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DTLWCNextHopCannotIPForward
@@ -4324,6 +6557,7 @@ instance FromHttpApiData DiskTypeListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right DTLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right DTLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right DTLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right DTLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right DTLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right DTLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right DTLWCResourceNotDeleted
@@ -4343,6 +6577,7 @@ instance ToHttpApiData DiskTypeListWarningCode where
         DTLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         DTLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DTLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DTLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         DTLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         DTLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DTLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4351,6 +6586,7 @@ instance ToHttpApiData DiskTypeListWarningCode where
         DTLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         DTLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         DTLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DTLWCPartialSuccess -> "PARTIAL_SUCCESS"
         DTLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         DTLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         DTLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4365,14 +6601,29 @@ instance FromJSON DiskTypeListWarningCode where
 instance ToJSON DiskTypeListWarningCode where
     toJSON = toJSONText
 
--- | The purpose of resource, only used with INTERNAL type.
+-- | The purpose of this resource, which can be one of the following values:
+-- - \`GCE_ENDPOINT\` for addresses that are used by VM instances, alias IP
+-- ranges, internal load balancers, and similar resources. -
+-- \`DNS_RESOLVER\` for a DNS resolver address in a subnetwork -
+-- \`VPC_PEERING\` for addresses that are reserved for VPC peer networks. -
+-- \`NAT_AUTO\` for addresses that are external IP addresses automatically
+-- reserved for Cloud NAT. - \`IPSEC_INTERCONNECT\` for addresses created
+-- from a private IP range that are reserved for a VLAN attachment in an
+-- IPsec-encrypted Cloud Interconnect configuration. These addresses are
+-- regional resources. Not currently available publicly.
 data AddressPurpose
     = DNSResolver
       -- ^ @DNS_RESOLVER@
     | GceEndpoint
       -- ^ @GCE_ENDPOINT@
+    | IPsecInterconnect
+      -- ^ @IPSEC_INTERCONNECT@
     | NATAuto
       -- ^ @NAT_AUTO@
+    | PrivateServiceConnect
+      -- ^ @PRIVATE_SERVICE_CONNECT@
+    | SharedLoadbalancerVIP
+      -- ^ @SHARED_LOADBALANCER_VIP@
     | VPCPeering
       -- ^ @VPC_PEERING@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4383,7 +6634,10 @@ instance FromHttpApiData AddressPurpose where
     parseQueryParam = \case
         "DNS_RESOLVER" -> Right DNSResolver
         "GCE_ENDPOINT" -> Right GceEndpoint
+        "IPSEC_INTERCONNECT" -> Right IPsecInterconnect
         "NAT_AUTO" -> Right NATAuto
+        "PRIVATE_SERVICE_CONNECT" -> Right PrivateServiceConnect
+        "SHARED_LOADBALANCER_VIP" -> Right SharedLoadbalancerVIP
         "VPC_PEERING" -> Right VPCPeering
         x -> Left ("Unable to parse AddressPurpose from: " <> x)
 
@@ -4391,7 +6645,10 @@ instance ToHttpApiData AddressPurpose where
     toQueryParam = \case
         DNSResolver -> "DNS_RESOLVER"
         GceEndpoint -> "GCE_ENDPOINT"
+        IPsecInterconnect -> "IPSEC_INTERCONNECT"
         NATAuto -> "NAT_AUTO"
+        PrivateServiceConnect -> "PRIVATE_SERVICE_CONNECT"
+        SharedLoadbalancerVIP -> "SHARED_LOADBALANCER_VIP"
         VPCPeering -> "VPC_PEERING"
 
 instance FromJSON AddressPurpose where
@@ -4419,6 +6676,8 @@ data NodeTypeAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NTALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NTALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NTALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NTALWCNextHopAddressNotAssigned
@@ -4435,6 +6694,8 @@ data NodeTypeAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NTALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NTALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NTALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NTALWCResourceInUseByOtherResourceWarning
@@ -4463,6 +6724,7 @@ instance FromHttpApiData NodeTypeAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NTALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NTALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NTALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NTALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NTALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NTALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NTALWCNextHopCannotIPForward
@@ -4471,6 +6733,7 @@ instance FromHttpApiData NodeTypeAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NTALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NTALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NTALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NTALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NTALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NTALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NTALWCResourceNotDeleted
@@ -4490,6 +6753,7 @@ instance ToHttpApiData NodeTypeAggregatedListWarningCode where
         NTALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NTALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NTALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NTALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NTALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NTALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NTALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4498,6 +6762,7 @@ instance ToHttpApiData NodeTypeAggregatedListWarningCode where
         NTALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NTALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NTALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NTALWCPartialSuccess -> "PARTIAL_SUCCESS"
         NTALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NTALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NTALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4531,6 +6796,8 @@ data TargetInstancesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TISLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TISLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TISLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TISLWCNextHopAddressNotAssigned
@@ -4547,6 +6814,8 @@ data TargetInstancesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TISLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TISLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TISLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TISLWCResourceInUseByOtherResourceWarning
@@ -4575,6 +6844,7 @@ instance FromHttpApiData TargetInstancesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TISLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TISLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TISLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TISLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TISLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TISLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TISLWCNextHopCannotIPForward
@@ -4583,6 +6853,7 @@ instance FromHttpApiData TargetInstancesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TISLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TISLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TISLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TISLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TISLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TISLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TISLWCResourceNotDeleted
@@ -4602,6 +6873,7 @@ instance ToHttpApiData TargetInstancesScopedListWarningCode where
         TISLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TISLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TISLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TISLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TISLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TISLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TISLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4610,6 +6882,7 @@ instance ToHttpApiData TargetInstancesScopedListWarningCode where
         TISLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TISLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TISLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TISLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TISLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TISLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TISLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4643,6 +6916,8 @@ data VPNTunnelAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | VTALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VTALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | VTALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | VTALWCNextHopAddressNotAssigned
@@ -4659,6 +6934,8 @@ data VPNTunnelAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | VTALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | VTALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | VTALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | VTALWCResourceInUseByOtherResourceWarning
@@ -4687,6 +6964,7 @@ instance FromHttpApiData VPNTunnelAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right VTALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right VTALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right VTALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VTALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right VTALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VTALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VTALWCNextHopCannotIPForward
@@ -4695,6 +6973,7 @@ instance FromHttpApiData VPNTunnelAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right VTALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right VTALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right VTALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VTALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right VTALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VTALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right VTALWCResourceNotDeleted
@@ -4714,6 +6993,7 @@ instance ToHttpApiData VPNTunnelAggregatedListWarningCode where
         VTALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         VTALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         VTALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VTALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         VTALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         VTALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         VTALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4722,6 +7002,7 @@ instance ToHttpApiData VPNTunnelAggregatedListWarningCode where
         VTALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         VTALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         VTALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VTALWCPartialSuccess -> "PARTIAL_SUCCESS"
         VTALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         VTALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         VTALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4734,6 +7015,228 @@ instance FromJSON VPNTunnelAggregatedListWarningCode where
     parseJSON = parseJSONText "VPNTunnelAggregatedListWarningCode"
 
 instance ToJSON VPNTunnelAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of the sub public delegated prefix.
+data PublicDelegatedPrefixPublicDelegatedSubPrefixStatus
+    = PDPPDSPSActive
+      -- ^ @ACTIVE@
+    | PDPPDSPSInactive
+      -- ^ @INACTIVE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicDelegatedPrefixPublicDelegatedSubPrefixStatus
+
+instance FromHttpApiData PublicDelegatedPrefixPublicDelegatedSubPrefixStatus where
+    parseQueryParam = \case
+        "ACTIVE" -> Right PDPPDSPSActive
+        "INACTIVE" -> Right PDPPDSPSInactive
+        x -> Left ("Unable to parse PublicDelegatedPrefixPublicDelegatedSubPrefixStatus from: " <> x)
+
+instance ToHttpApiData PublicDelegatedPrefixPublicDelegatedSubPrefixStatus where
+    toQueryParam = \case
+        PDPPDSPSActive -> "ACTIVE"
+        PDPPDSPSInactive -> "INACTIVE"
+
+instance FromJSON PublicDelegatedPrefixPublicDelegatedSubPrefixStatus where
+    parseJSON = parseJSONText "PublicDelegatedPrefixPublicDelegatedSubPrefixStatus"
+
+instance ToJSON PublicDelegatedPrefixPublicDelegatedSubPrefixStatus where
+    toJSON = toJSONText
+
+-- | The status of applying this per-instance config on the corresponding
+-- managed instance.
+data PerInstanceConfigStatus
+    = PICSApplying
+      -- ^ @APPLYING@
+    | PICSDeleting
+      -- ^ @DELETING@
+    | PICSEffective
+      -- ^ @EFFECTIVE@
+    | PICSNone
+      -- ^ @NONE@
+    | PICSUnApplied
+      -- ^ @UNAPPLIED@
+    | PICSUnAppliedDeletion
+      -- ^ @UNAPPLIED_DELETION@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PerInstanceConfigStatus
+
+instance FromHttpApiData PerInstanceConfigStatus where
+    parseQueryParam = \case
+        "APPLYING" -> Right PICSApplying
+        "DELETING" -> Right PICSDeleting
+        "EFFECTIVE" -> Right PICSEffective
+        "NONE" -> Right PICSNone
+        "UNAPPLIED" -> Right PICSUnApplied
+        "UNAPPLIED_DELETION" -> Right PICSUnAppliedDeletion
+        x -> Left ("Unable to parse PerInstanceConfigStatus from: " <> x)
+
+instance ToHttpApiData PerInstanceConfigStatus where
+    toQueryParam = \case
+        PICSApplying -> "APPLYING"
+        PICSDeleting -> "DELETING"
+        PICSEffective -> "EFFECTIVE"
+        PICSNone -> "NONE"
+        PICSUnApplied -> "UNAPPLIED"
+        PICSUnAppliedDeletion -> "UNAPPLIED_DELETION"
+
+instance FromJSON PerInstanceConfigStatus where
+    parseJSON = parseJSONText "PerInstanceConfigStatus"
+
+instance ToJSON PerInstanceConfigStatus where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data VPNGatewayAggregatedListWarningCode
+    = VGALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | VGALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | VGALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | VGALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | VGALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | VGALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | VGALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | VGALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VGALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | VGALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | VGALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | VGALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | VGALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | VGALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | VGALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | VGALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | VGALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | VGALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | VGALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | VGALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | VGALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | VGALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | VGALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | VGALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | VGALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VPNGatewayAggregatedListWarningCode
+
+instance FromHttpApiData VPNGatewayAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right VGALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right VGALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right VGALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right VGALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right VGALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right VGALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right VGALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right VGALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VGALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right VGALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VGALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VGALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right VGALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right VGALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right VGALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right VGALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right VGALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VGALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right VGALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VGALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right VGALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right VGALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right VGALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right VGALWCUndeclaredProperties
+        "UNREACHABLE" -> Right VGALWCUnreachable
+        x -> Left ("Unable to parse VPNGatewayAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData VPNGatewayAggregatedListWarningCode where
+    toQueryParam = \case
+        VGALWCCleanupFailed -> "CLEANUP_FAILED"
+        VGALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        VGALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        VGALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        VGALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        VGALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        VGALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        VGALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VGALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        VGALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        VGALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        VGALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        VGALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        VGALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        VGALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        VGALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        VGALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VGALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        VGALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        VGALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        VGALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        VGALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        VGALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        VGALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        VGALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON VPNGatewayAggregatedListWarningCode where
+    parseJSON = parseJSONText "VPNGatewayAggregatedListWarningCode"
+
+instance ToJSON VPNGatewayAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | These stateful disks will never be deleted during autohealing, update or
+-- VM instance recreate operations. This flag is used to configure if the
+-- disk should be deleted after it is no longer used by the group, e.g.
+-- when the given instance or the whole group is deleted. Note: disks
+-- attached in READ_ONLY mode cannot be auto-deleted.
+data StatefulPolicyPreservedStateDiskDeviceAutoDelete
+    = SPPSDDADNever
+      -- ^ @NEVER@
+    | SPPSDDADOnPermanentInstanceDeletion
+      -- ^ @ON_PERMANENT_INSTANCE_DELETION@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable StatefulPolicyPreservedStateDiskDeviceAutoDelete
+
+instance FromHttpApiData StatefulPolicyPreservedStateDiskDeviceAutoDelete where
+    parseQueryParam = \case
+        "NEVER" -> Right SPPSDDADNever
+        "ON_PERMANENT_INSTANCE_DELETION" -> Right SPPSDDADOnPermanentInstanceDeletion
+        x -> Left ("Unable to parse StatefulPolicyPreservedStateDiskDeviceAutoDelete from: " <> x)
+
+instance ToHttpApiData StatefulPolicyPreservedStateDiskDeviceAutoDelete where
+    toQueryParam = \case
+        SPPSDDADNever -> "NEVER"
+        SPPSDDADOnPermanentInstanceDeletion -> "ON_PERMANENT_INSTANCE_DELETION"
+
+instance FromJSON StatefulPolicyPreservedStateDiskDeviceAutoDelete where
+    parseJSON = parseJSONText "StatefulPolicyPreservedStateDiskDeviceAutoDelete"
+
+instance ToJSON StatefulPolicyPreservedStateDiskDeviceAutoDelete where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -4755,6 +7258,8 @@ data TargetHTTPProxyListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | THTTPPLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | THTTPPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | THTTPPLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | THTTPPLWCNextHopAddressNotAssigned
@@ -4771,6 +7276,8 @@ data TargetHTTPProxyListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | THTTPPLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | THTTPPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | THTTPPLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | THTTPPLWCResourceInUseByOtherResourceWarning
@@ -4799,6 +7306,7 @@ instance FromHttpApiData TargetHTTPProxyListWarningCode where
         "EXTERNAL_API_WARNING" -> Right THTTPPLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right THTTPPLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right THTTPPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right THTTPPLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right THTTPPLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right THTTPPLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right THTTPPLWCNextHopCannotIPForward
@@ -4807,6 +7315,7 @@ instance FromHttpApiData TargetHTTPProxyListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right THTTPPLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right THTTPPLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right THTTPPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right THTTPPLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right THTTPPLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right THTTPPLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right THTTPPLWCResourceNotDeleted
@@ -4826,6 +7335,7 @@ instance ToHttpApiData TargetHTTPProxyListWarningCode where
         THTTPPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         THTTPPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         THTTPPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        THTTPPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         THTTPPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         THTTPPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         THTTPPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4834,6 +7344,7 @@ instance ToHttpApiData TargetHTTPProxyListWarningCode where
         THTTPPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         THTTPPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         THTTPPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        THTTPPLWCPartialSuccess -> "PARTIAL_SUCCESS"
         THTTPPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         THTTPPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         THTTPPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4846,6 +7357,44 @@ instance FromJSON TargetHTTPProxyListWarningCode where
     parseJSON = parseJSONText "TargetHTTPProxyListWarningCode"
 
 instance ToJSON TargetHTTPProxyListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies how port is selected for health checking, can be one of
+-- following values: USE_FIXED_PORT: The port number in port is used for
+-- health checking. USE_NAMED_PORT: The portName is used for health
+-- checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified
+-- for each network endpoint is used for health checking. For other
+-- backends, the port or named port specified in the Backend Service is
+-- used for health checking. If not specified, gRPC health check follows
+-- behavior specified in port and portName fields.
+data GRPCHealthCheckPortSpecification
+    = GRPCHCPSUseFixedPort
+      -- ^ @USE_FIXED_PORT@
+    | GRPCHCPSUseNamedPort
+      -- ^ @USE_NAMED_PORT@
+    | GRPCHCPSUseServingPort
+      -- ^ @USE_SERVING_PORT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GRPCHealthCheckPortSpecification
+
+instance FromHttpApiData GRPCHealthCheckPortSpecification where
+    parseQueryParam = \case
+        "USE_FIXED_PORT" -> Right GRPCHCPSUseFixedPort
+        "USE_NAMED_PORT" -> Right GRPCHCPSUseNamedPort
+        "USE_SERVING_PORT" -> Right GRPCHCPSUseServingPort
+        x -> Left ("Unable to parse GRPCHealthCheckPortSpecification from: " <> x)
+
+instance ToHttpApiData GRPCHealthCheckPortSpecification where
+    toQueryParam = \case
+        GRPCHCPSUseFixedPort -> "USE_FIXED_PORT"
+        GRPCHCPSUseNamedPort -> "USE_NAMED_PORT"
+        GRPCHCPSUseServingPort -> "USE_SERVING_PORT"
+
+instance FromJSON GRPCHealthCheckPortSpecification where
+    parseJSON = parseJSONText "GRPCHealthCheckPortSpecification"
+
+instance ToJSON GRPCHealthCheckPortSpecification where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -4867,6 +7416,8 @@ data MachineTypeListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | MTLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | MTLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | MTLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | MTLWCNextHopAddressNotAssigned
@@ -4883,6 +7434,8 @@ data MachineTypeListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | MTLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | MTLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | MTLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | MTLWCResourceInUseByOtherResourceWarning
@@ -4911,6 +7464,7 @@ instance FromHttpApiData MachineTypeListWarningCode where
         "EXTERNAL_API_WARNING" -> Right MTLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right MTLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right MTLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right MTLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right MTLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right MTLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right MTLWCNextHopCannotIPForward
@@ -4919,6 +7473,7 @@ instance FromHttpApiData MachineTypeListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right MTLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right MTLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right MTLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right MTLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right MTLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right MTLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right MTLWCResourceNotDeleted
@@ -4938,6 +7493,7 @@ instance ToHttpApiData MachineTypeListWarningCode where
         MTLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         MTLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         MTLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        MTLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         MTLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         MTLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         MTLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -4946,6 +7502,7 @@ instance ToHttpApiData MachineTypeListWarningCode where
         MTLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         MTLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         MTLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        MTLWCPartialSuccess -> "PARTIAL_SUCCESS"
         MTLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         MTLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         MTLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -4963,17 +7520,21 @@ instance ToJSON MachineTypeListWarningCode where
 -- | The ID of a supported feature. Read Enabling guest operating system
 -- features to see a list of available options.
 data GuestOSFeatureType
-    = FeatureTypeUnspecified
+    = GOFTFeatureTypeUnspecified
       -- ^ @FEATURE_TYPE_UNSPECIFIED@
-    | MultiIPSubnet
+    | GOFTGvnic
+      -- ^ @GVNIC@
+    | GOFTMultiIPSubnet
       -- ^ @MULTI_IP_SUBNET@
-    | SecureBoot
+    | GOFTSecureBoot
       -- ^ @SECURE_BOOT@
-    | UefiCompatible
+    | GOFTSevCapable
+      -- ^ @SEV_CAPABLE@
+    | GOFTUefiCompatible
       -- ^ @UEFI_COMPATIBLE@
-    | VirtioScsiMultiQueue
+    | GOFTVirtioScsiMultiQueue
       -- ^ @VIRTIO_SCSI_MULTIQUEUE@
-    | Windows
+    | GOFTWindows
       -- ^ @WINDOWS@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -4981,22 +7542,26 @@ instance Hashable GuestOSFeatureType
 
 instance FromHttpApiData GuestOSFeatureType where
     parseQueryParam = \case
-        "FEATURE_TYPE_UNSPECIFIED" -> Right FeatureTypeUnspecified
-        "MULTI_IP_SUBNET" -> Right MultiIPSubnet
-        "SECURE_BOOT" -> Right SecureBoot
-        "UEFI_COMPATIBLE" -> Right UefiCompatible
-        "VIRTIO_SCSI_MULTIQUEUE" -> Right VirtioScsiMultiQueue
-        "WINDOWS" -> Right Windows
+        "FEATURE_TYPE_UNSPECIFIED" -> Right GOFTFeatureTypeUnspecified
+        "GVNIC" -> Right GOFTGvnic
+        "MULTI_IP_SUBNET" -> Right GOFTMultiIPSubnet
+        "SECURE_BOOT" -> Right GOFTSecureBoot
+        "SEV_CAPABLE" -> Right GOFTSevCapable
+        "UEFI_COMPATIBLE" -> Right GOFTUefiCompatible
+        "VIRTIO_SCSI_MULTIQUEUE" -> Right GOFTVirtioScsiMultiQueue
+        "WINDOWS" -> Right GOFTWindows
         x -> Left ("Unable to parse GuestOSFeatureType from: " <> x)
 
 instance ToHttpApiData GuestOSFeatureType where
     toQueryParam = \case
-        FeatureTypeUnspecified -> "FEATURE_TYPE_UNSPECIFIED"
-        MultiIPSubnet -> "MULTI_IP_SUBNET"
-        SecureBoot -> "SECURE_BOOT"
-        UefiCompatible -> "UEFI_COMPATIBLE"
-        VirtioScsiMultiQueue -> "VIRTIO_SCSI_MULTIQUEUE"
-        Windows -> "WINDOWS"
+        GOFTFeatureTypeUnspecified -> "FEATURE_TYPE_UNSPECIFIED"
+        GOFTGvnic -> "GVNIC"
+        GOFTMultiIPSubnet -> "MULTI_IP_SUBNET"
+        GOFTSecureBoot -> "SECURE_BOOT"
+        GOFTSevCapable -> "SEV_CAPABLE"
+        GOFTUefiCompatible -> "UEFI_COMPATIBLE"
+        GOFTVirtioScsiMultiQueue -> "VIRTIO_SCSI_MULTIQUEUE"
+        GOFTWindows -> "WINDOWS"
 
 instance FromJSON GuestOSFeatureType where
     parseJSON = parseJSONText "GuestOSFeatureType"
@@ -5023,6 +7588,8 @@ data RouteWarningsItemCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RWICInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RWICLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RWICMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RWICNextHopAddressNotAssigned
@@ -5039,6 +7606,8 @@ data RouteWarningsItemCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RWICNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RWICPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RWICRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RWICResourceInUseByOtherResourceWarning
@@ -5067,6 +7636,7 @@ instance FromHttpApiData RouteWarningsItemCode where
         "EXTERNAL_API_WARNING" -> Right RWICExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RWICFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RWICInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RWICLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RWICMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RWICNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RWICNextHopCannotIPForward
@@ -5075,6 +7645,7 @@ instance FromHttpApiData RouteWarningsItemCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RWICNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RWICNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RWICNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RWICPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RWICRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RWICResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RWICResourceNotDeleted
@@ -5094,6 +7665,7 @@ instance ToHttpApiData RouteWarningsItemCode where
         RWICExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RWICFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RWICLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RWICMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RWICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RWICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -5102,6 +7674,7 @@ instance ToHttpApiData RouteWarningsItemCode where
         RWICNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RWICNotCriticalError -> "NOT_CRITICAL_ERROR"
         RWICNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RWICPartialSuccess -> "PARTIAL_SUCCESS"
         RWICRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RWICResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RWICResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -5114,6 +7687,126 @@ instance FromJSON RouteWarningsItemCode where
     parseJSON = parseJSONText "RouteWarningsItemCode"
 
 instance ToJSON RouteWarningsItemCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ReservationsScopedListWarningCode
+    = RSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReservationsScopedListWarningCode
+
+instance FromHttpApiData ReservationsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right RSLWCUnreachable
+        x -> Left ("Unable to parse ReservationsScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData ReservationsScopedListWarningCode where
+    toQueryParam = \case
+        RSLWCCleanupFailed -> "CLEANUP_FAILED"
+        RSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        RSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ReservationsScopedListWarningCode where
+    parseJSON = parseJSONText "ReservationsScopedListWarningCode"
+
+instance ToJSON ReservationsScopedListWarningCode where
     toJSON = toJSONText
 
 -- | User-specified flag to indicate which mode to use for advertisement.
@@ -5162,6 +7855,8 @@ data RegionInstanceGroupManagerListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RIGMLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RIGMLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RIGMLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RIGMLWCNextHopAddressNotAssigned
@@ -5178,6 +7873,8 @@ data RegionInstanceGroupManagerListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RIGMLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RIGMLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RIGMLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RIGMLWCResourceInUseByOtherResourceWarning
@@ -5206,6 +7903,7 @@ instance FromHttpApiData RegionInstanceGroupManagerListWarningCode where
         "EXTERNAL_API_WARNING" -> Right RIGMLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RIGMLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RIGMLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RIGMLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RIGMLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RIGMLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RIGMLWCNextHopCannotIPForward
@@ -5214,6 +7912,7 @@ instance FromHttpApiData RegionInstanceGroupManagerListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RIGMLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RIGMLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RIGMLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RIGMLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RIGMLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RIGMLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RIGMLWCResourceNotDeleted
@@ -5233,6 +7932,7 @@ instance ToHttpApiData RegionInstanceGroupManagerListWarningCode where
         RIGMLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RIGMLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RIGMLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RIGMLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RIGMLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RIGMLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RIGMLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -5241,6 +7941,7 @@ instance ToHttpApiData RegionInstanceGroupManagerListWarningCode where
         RIGMLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RIGMLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         RIGMLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RIGMLWCPartialSuccess -> "PARTIAL_SUCCESS"
         RIGMLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RIGMLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RIGMLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -5260,9 +7961,9 @@ instance ToJSON RegionInstanceGroupManagerListWarningCode where
 -- status can either be UPDATING, meaning the size of the snapshot is being
 -- updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
 data SnapshotStorageBytesStatus
-    = Updating
+    = SSBSUpdating
       -- ^ @UPDATING@
-    | UpToDate
+    | SSBSUpToDate
       -- ^ @UP_TO_DATE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -5270,19 +7971,139 @@ instance Hashable SnapshotStorageBytesStatus
 
 instance FromHttpApiData SnapshotStorageBytesStatus where
     parseQueryParam = \case
-        "UPDATING" -> Right Updating
-        "UP_TO_DATE" -> Right UpToDate
+        "UPDATING" -> Right SSBSUpdating
+        "UP_TO_DATE" -> Right SSBSUpToDate
         x -> Left ("Unable to parse SnapshotStorageBytesStatus from: " <> x)
 
 instance ToHttpApiData SnapshotStorageBytesStatus where
     toQueryParam = \case
-        Updating -> "UPDATING"
-        UpToDate -> "UP_TO_DATE"
+        SSBSUpdating -> "UPDATING"
+        SSBSUpToDate -> "UP_TO_DATE"
 
 instance FromJSON SnapshotStorageBytesStatus where
     parseJSON = parseJSONText "SnapshotStorageBytesStatus"
 
 instance ToJSON SnapshotStorageBytesStatus where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ExternalVPNGatewayListWarningCode
+    = EVGLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | EVGLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | EVGLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | EVGLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | EVGLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | EVGLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | EVGLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | EVGLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | EVGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | EVGLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | EVGLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | EVGLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | EVGLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | EVGLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | EVGLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | EVGLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | EVGLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | EVGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | EVGLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | EVGLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | EVGLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | EVGLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | EVGLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | EVGLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | EVGLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ExternalVPNGatewayListWarningCode
+
+instance FromHttpApiData ExternalVPNGatewayListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right EVGLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right EVGLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right EVGLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right EVGLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right EVGLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right EVGLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right EVGLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right EVGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right EVGLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right EVGLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right EVGLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right EVGLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right EVGLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right EVGLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right EVGLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right EVGLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right EVGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right EVGLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right EVGLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right EVGLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right EVGLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right EVGLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right EVGLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right EVGLWCUndeclaredProperties
+        "UNREACHABLE" -> Right EVGLWCUnreachable
+        x -> Left ("Unable to parse ExternalVPNGatewayListWarningCode from: " <> x)
+
+instance ToHttpApiData ExternalVPNGatewayListWarningCode where
+    toQueryParam = \case
+        EVGLWCCleanupFailed -> "CLEANUP_FAILED"
+        EVGLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        EVGLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        EVGLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        EVGLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        EVGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        EVGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        EVGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        EVGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        EVGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        EVGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        EVGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        EVGLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        EVGLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        EVGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        EVGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        EVGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        EVGLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        EVGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        EVGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        EVGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        EVGLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        EVGLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        EVGLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        EVGLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ExternalVPNGatewayListWarningCode where
+    parseJSON = parseJSONText "ExternalVPNGatewayListWarningCode"
+
+instance ToJSON ExternalVPNGatewayListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -5304,6 +8125,8 @@ data NodeTemplateAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NNextHopAddressNotAssigned
@@ -5320,6 +8143,8 @@ data NodeTemplateAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NResourceInUseByOtherResourceWarning
@@ -5348,6 +8173,7 @@ instance FromHttpApiData NodeTemplateAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NNextHopCannotIPForward
@@ -5356,6 +8182,7 @@ instance FromHttpApiData NodeTemplateAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NResourceNotDeleted
@@ -5375,6 +8202,7 @@ instance ToHttpApiData NodeTemplateAggregatedListWarningCode where
         NExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -5383,6 +8211,7 @@ instance ToHttpApiData NodeTemplateAggregatedListWarningCode where
         NNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NNotCriticalError -> "NOT_CRITICAL_ERROR"
         NNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NPartialSuccess -> "PARTIAL_SUCCESS"
         NRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -5395,6 +8224,36 @@ instance FromJSON NodeTemplateAggregatedListWarningCode where
     parseJSON = parseJSONText "NodeTemplateAggregatedListWarningCode"
 
 instance ToJSON NodeTemplateAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | The instance redistribution policy for regional managed instance groups.
+-- Valid values are: - PROACTIVE (default): The group attempts to maintain
+-- an even distribution of VM instances across zones in the region. - NONE:
+-- For non-autoscaled groups, proactive redistribution is disabled.
+data InstanceGroupManagerUpdatePolicyInstanceRedistributionType
+    = IGMUPIRTNone
+      -- ^ @NONE@
+    | IGMUPIRTProactive
+      -- ^ @PROACTIVE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagerUpdatePolicyInstanceRedistributionType
+
+instance FromHttpApiData InstanceGroupManagerUpdatePolicyInstanceRedistributionType where
+    parseQueryParam = \case
+        "NONE" -> Right IGMUPIRTNone
+        "PROACTIVE" -> Right IGMUPIRTProactive
+        x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyInstanceRedistributionType from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagerUpdatePolicyInstanceRedistributionType where
+    toQueryParam = \case
+        IGMUPIRTNone -> "NONE"
+        IGMUPIRTProactive -> "PROACTIVE"
+
+instance FromJSON InstanceGroupManagerUpdatePolicyInstanceRedistributionType where
+    parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyInstanceRedistributionType"
+
+instance ToJSON InstanceGroupManagerUpdatePolicyInstanceRedistributionType where
     toJSON = toJSONText
 
 -- | Required
@@ -5459,6 +8318,8 @@ data AddressesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ASLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ASLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ASLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ASLWCNextHopAddressNotAssigned
@@ -5475,6 +8336,8 @@ data AddressesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ASLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ASLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ASLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ASLWCResourceInUseByOtherResourceWarning
@@ -5503,6 +8366,7 @@ instance FromHttpApiData AddressesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ASLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ASLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ASLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ASLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ASLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ASLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ASLWCNextHopCannotIPForward
@@ -5511,6 +8375,7 @@ instance FromHttpApiData AddressesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ASLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ASLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ASLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ASLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ASLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ASLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ASLWCResourceNotDeleted
@@ -5530,6 +8395,7 @@ instance ToHttpApiData AddressesScopedListWarningCode where
         ASLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ASLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ASLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ASLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ASLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ASLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ASLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -5538,6 +8404,7 @@ instance ToHttpApiData AddressesScopedListWarningCode where
         ASLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ASLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ASLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ASLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ASLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ASLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ASLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -5609,6 +8476,8 @@ data InstanceGroupListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGLWCNextHopAddressNotAssigned
@@ -5625,6 +8494,8 @@ data InstanceGroupListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGLWCResourceInUseByOtherResourceWarning
@@ -5653,6 +8524,7 @@ instance FromHttpApiData InstanceGroupListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGLWCNextHopCannotIPForward
@@ -5661,6 +8533,7 @@ instance FromHttpApiData InstanceGroupListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGLWCResourceNotDeleted
@@ -5680,6 +8553,7 @@ instance ToHttpApiData InstanceGroupListWarningCode where
         IGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -5688,6 +8562,7 @@ instance ToHttpApiData InstanceGroupListWarningCode where
         IGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGLWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -5721,6 +8596,8 @@ data FirewallListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | FLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | FLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | FLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | FLWCNextHopAddressNotAssigned
@@ -5737,6 +8614,8 @@ data FirewallListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | FLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | FLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | FLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | FLWCResourceInUseByOtherResourceWarning
@@ -5765,6 +8644,7 @@ instance FromHttpApiData FirewallListWarningCode where
         "EXTERNAL_API_WARNING" -> Right FLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right FLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right FLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right FLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right FLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FLWCNextHopCannotIPForward
@@ -5773,6 +8653,7 @@ instance FromHttpApiData FirewallListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right FLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right FLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right FLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right FLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right FLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right FLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right FLWCResourceNotDeleted
@@ -5792,6 +8673,7 @@ instance ToHttpApiData FirewallListWarningCode where
         FLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         FLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         FLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        FLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         FLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         FLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         FLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -5800,6 +8682,7 @@ instance ToHttpApiData FirewallListWarningCode where
         FLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         FLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         FLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        FLWCPartialSuccess -> "PARTIAL_SUCCESS"
         FLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         FLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         FLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -5814,6 +8697,11 @@ instance FromJSON FirewallListWarningCode where
 instance ToJSON FirewallListWarningCode where
     toJSON = toJSONText
 
+-- | The type of interconnect attachment this is, which can take one of the
+-- following values: - DEDICATED: an attachment to a Dedicated
+-- Interconnect. - PARTNER: an attachment to a Partner Interconnect,
+-- created by the customer. - PARTNER_PROVIDER: an attachment to a Partner
+-- Interconnect, created by the partner.
 data InterconnectAttachmentType
     = Dedicated
       -- ^ @DEDICATED@
@@ -5844,7 +8732,41 @@ instance FromJSON InterconnectAttachmentType where
 instance ToJSON InterconnectAttachmentType where
     toJSON = toJSONText
 
--- | The type of error returned.
+-- | The type of error, warning, or notice returned. Current set of possible
+-- values: - ALL_INSTANCES_UNHEALTHY (WARNING): All instances in the
+-- instance group are unhealthy (not in RUNNING state). -
+-- BACKEND_SERVICE_DOES_NOT_EXIST (ERROR): There is no backend service
+-- attached to the instance group. - CAPPED_AT_MAX_NUM_REPLICAS (WARNING):
+-- Autoscaler recommends a size greater than maxNumReplicas. -
+-- CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE (WARNING): The custom metric
+-- samples are not exported often enough to be a credible base for
+-- autoscaling. - CUSTOM_METRIC_INVALID (ERROR): The custom metric that was
+-- specified does not exist or does not have the necessary labels. -
+-- MIN_EQUALS_MAX (WARNING): The minNumReplicas is equal to maxNumReplicas.
+-- This means the autoscaler cannot add or remove instances from the
+-- instance group. - MISSING_CUSTOM_METRIC_DATA_POINTS (WARNING): The
+-- autoscaler did not receive any data from the custom metric configured
+-- for autoscaling. - MISSING_LOAD_BALANCING_DATA_POINTS (WARNING): The
+-- autoscaler is configured to scale based on a load balancing signal but
+-- the instance group has not received any requests from the load balancer.
+-- - MODE_OFF (WARNING): Autoscaling is turned off. The number of instances
+-- in the group won\'t change automatically. The autoscaling configuration
+-- is preserved. - MODE_ONLY_UP (WARNING): Autoscaling is in the
+-- \"Autoscale only out\" mode. The autoscaler can add instances but not
+-- remove any. - MORE_THAN_ONE_BACKEND_SERVICE (ERROR): The instance group
+-- cannot be autoscaled because it has more than one backend service
+-- attached to it. - NOT_ENOUGH_QUOTA_AVAILABLE (ERROR): There is
+-- insufficient quota for the necessary resources, such as CPU or number of
+-- instances. - REGION_RESOURCE_STOCKOUT (ERROR): Shown only for regional
+-- autoscalers: there is a resource stockout in the chosen region. -
+-- SCALING_TARGET_DOES_NOT_EXIST (ERROR): The target to be scaled does not
+-- exist. - UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION (ERROR):
+-- Autoscaling does not work with an HTTP\/S load balancer that has been
+-- configured for maxRate. - ZONE_RESOURCE_STOCKOUT (ERROR): For zonal
+-- autoscalers: there is a resource stockout in the chosen zone. For
+-- regional autoscalers: in at least one of the zones you\'re using there
+-- is a resource stockout. New values might be added in the future. Some of
+-- the values might not be available in all API versions.
 data AutoscalerStatusDetailsType
     = ASDTAllInstancesUnhealthy
       -- ^ @ALL_INSTANCES_UNHEALTHY@
@@ -5862,6 +8784,12 @@ data AutoscalerStatusDetailsType
       -- ^ @MISSING_CUSTOM_METRIC_DATA_POINTS@
     | ASDTMissingLoadBalancingDataPoints
       -- ^ @MISSING_LOAD_BALANCING_DATA_POINTS@
+    | ASDTModeOff
+      -- ^ @MODE_OFF@
+    | ASDTModeOnlyScaleOut
+      -- ^ @MODE_ONLY_SCALE_OUT@
+    | ASDTModeOnlyUp
+      -- ^ @MODE_ONLY_UP@
     | ASDTMoreThanOneBackendService
       -- ^ @MORE_THAN_ONE_BACKEND_SERVICE@
     | ASDTNotEnoughQuotaAvailable
@@ -5870,6 +8798,10 @@ data AutoscalerStatusDetailsType
       -- ^ @REGION_RESOURCE_STOCKOUT@
     | ASDTScalingTargetDoesNotExist
       -- ^ @SCALING_TARGET_DOES_NOT_EXIST@
+    | ASDTScheduledInstancesGreaterThanAutoscalerMax
+      -- ^ @SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX@
+    | ASDTScheduledInstancesLessThanAutoscalerMin
+      -- ^ @SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN@
     | ASDTUnknown
       -- ^ @UNKNOWN@
     | ASDTUnsupportedMaxRateLoadBalancingConfiguration
@@ -5890,10 +8822,15 @@ instance FromHttpApiData AutoscalerStatusDetailsType where
         "MIN_EQUALS_MAX" -> Right ASDTMinEqualsMax
         "MISSING_CUSTOM_METRIC_DATA_POINTS" -> Right ASDTMissingCustomMetricDataPoints
         "MISSING_LOAD_BALANCING_DATA_POINTS" -> Right ASDTMissingLoadBalancingDataPoints
+        "MODE_OFF" -> Right ASDTModeOff
+        "MODE_ONLY_SCALE_OUT" -> Right ASDTModeOnlyScaleOut
+        "MODE_ONLY_UP" -> Right ASDTModeOnlyUp
         "MORE_THAN_ONE_BACKEND_SERVICE" -> Right ASDTMoreThanOneBackendService
         "NOT_ENOUGH_QUOTA_AVAILABLE" -> Right ASDTNotEnoughQuotaAvailable
         "REGION_RESOURCE_STOCKOUT" -> Right ASDTRegionResourceStockout
         "SCALING_TARGET_DOES_NOT_EXIST" -> Right ASDTScalingTargetDoesNotExist
+        "SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX" -> Right ASDTScheduledInstancesGreaterThanAutoscalerMax
+        "SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN" -> Right ASDTScheduledInstancesLessThanAutoscalerMin
         "UNKNOWN" -> Right ASDTUnknown
         "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION" -> Right ASDTUnsupportedMaxRateLoadBalancingConfiguration
         "ZONE_RESOURCE_STOCKOUT" -> Right ASDTZoneResourceStockout
@@ -5909,10 +8846,15 @@ instance ToHttpApiData AutoscalerStatusDetailsType where
         ASDTMinEqualsMax -> "MIN_EQUALS_MAX"
         ASDTMissingCustomMetricDataPoints -> "MISSING_CUSTOM_METRIC_DATA_POINTS"
         ASDTMissingLoadBalancingDataPoints -> "MISSING_LOAD_BALANCING_DATA_POINTS"
+        ASDTModeOff -> "MODE_OFF"
+        ASDTModeOnlyScaleOut -> "MODE_ONLY_SCALE_OUT"
+        ASDTModeOnlyUp -> "MODE_ONLY_UP"
         ASDTMoreThanOneBackendService -> "MORE_THAN_ONE_BACKEND_SERVICE"
         ASDTNotEnoughQuotaAvailable -> "NOT_ENOUGH_QUOTA_AVAILABLE"
         ASDTRegionResourceStockout -> "REGION_RESOURCE_STOCKOUT"
         ASDTScalingTargetDoesNotExist -> "SCALING_TARGET_DOES_NOT_EXIST"
+        ASDTScheduledInstancesGreaterThanAutoscalerMax -> "SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX"
+        ASDTScheduledInstancesLessThanAutoscalerMin -> "SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN"
         ASDTUnknown -> "UNKNOWN"
         ASDTUnsupportedMaxRateLoadBalancingConfiguration -> "UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION"
         ASDTZoneResourceStockout -> "ZONE_RESOURCE_STOCKOUT"
@@ -5923,14 +8865,14 @@ instance FromJSON AutoscalerStatusDetailsType where
 instance ToJSON AutoscalerStatusDetailsType where
     toJSON = toJSONText
 
--- | Direction of traffic to which this firewall applies; default is INGRESS.
--- Note: For INGRESS traffic, it is NOT supported to specify
--- destinationRanges; For EGRESS traffic, it is NOT supported to specify
--- sourceRanges OR sourceTags.
+-- | Direction of traffic to which this firewall applies, either \`INGRESS\`
+-- or \`EGRESS\`. The default is \`INGRESS\`. For \`INGRESS\` traffic, you
+-- cannot specify the destinationRanges field, and for \`EGRESS\` traffic,
+-- you cannot specify the sourceRanges or sourceTags fields.
 data FirewallDirection
-    = Egress
+    = FDEgress
       -- ^ @EGRESS@
-    | Ingress
+    | FDIngress
       -- ^ @INGRESS@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -5938,14 +8880,14 @@ instance Hashable FirewallDirection
 
 instance FromHttpApiData FirewallDirection where
     parseQueryParam = \case
-        "EGRESS" -> Right Egress
-        "INGRESS" -> Right Ingress
+        "EGRESS" -> Right FDEgress
+        "INGRESS" -> Right FDIngress
         x -> Left ("Unable to parse FirewallDirection from: " <> x)
 
 instance ToHttpApiData FirewallDirection where
     toQueryParam = \case
-        Egress -> "EGRESS"
-        Ingress -> "INGRESS"
+        FDEgress -> "EGRESS"
+        FDIngress -> "INGRESS"
 
 instance FromJSON FirewallDirection where
     parseJSON = parseJSONText "FirewallDirection"
@@ -6049,6 +8991,39 @@ instance FromJSON HealthStatusHealthState where
 instance ToJSON HealthStatusHealthState where
     toJSON = toJSONText
 
+-- | Optional. Policy for how the results from multiple health checks for the
+-- same endpoint are aggregated. Defaults to NO_AGGREGATION if unspecified.
+-- - NO_AGGREGATION. An EndpointHealth message is returned for each backend
+-- in the health check service. - AND. If any backend\'s health check
+-- reports UNHEALTHY, then UNHEALTHY is the HealthState of the entire
+-- health check service. If all backend\'s are healthy, the HealthState of
+-- the health check service is HEALTHY. .
+data HealthCheckServiceHealthStatusAggregationPolicy
+    = And
+      -- ^ @AND@
+    | NoAggregation
+      -- ^ @NO_AGGREGATION@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthCheckServiceHealthStatusAggregationPolicy
+
+instance FromHttpApiData HealthCheckServiceHealthStatusAggregationPolicy where
+    parseQueryParam = \case
+        "AND" -> Right And
+        "NO_AGGREGATION" -> Right NoAggregation
+        x -> Left ("Unable to parse HealthCheckServiceHealthStatusAggregationPolicy from: " <> x)
+
+instance ToHttpApiData HealthCheckServiceHealthStatusAggregationPolicy where
+    toQueryParam = \case
+        And -> "AND"
+        NoAggregation -> "NO_AGGREGATION"
+
+instance FromJSON HealthCheckServiceHealthStatusAggregationPolicy where
+    parseJSON = parseJSONText "HealthCheckServiceHealthStatusAggregationPolicy"
+
+instance ToJSON HealthCheckServiceHealthStatusAggregationPolicy where
+    toJSON = toJSONText
+
 -- | The deprecation state of this resource. This can be ACTIVE, DEPRECATED,
 -- OBSOLETE, or DELETED. Operations which communicate the end of life date
 -- for an image, can use ACTIVE. Operations which create a new resource
@@ -6124,6 +9099,71 @@ instance FromJSON NodeGroupStatus where
 instance ToJSON NodeGroupStatus where
     toJSON = toJSONText
 
+-- | The private IPv6 google access type for the VMs in this subnet. This is
+-- an expanded field of enablePrivateV6Access. If both fields are set,
+-- privateIpv6GoogleAccess will take priority. This field can be both set
+-- at resource creation time and updated using patch.
+data SubnetworkPrivateIPv6GoogleAccess
+    = DisableGoogleAccess
+      -- ^ @DISABLE_GOOGLE_ACCESS@
+    | EnableBidirectionalAccessToGoogle
+      -- ^ @ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE@
+    | EnableOutboundVMAccessToGoogle
+      -- ^ @ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkPrivateIPv6GoogleAccess
+
+instance FromHttpApiData SubnetworkPrivateIPv6GoogleAccess where
+    parseQueryParam = \case
+        "DISABLE_GOOGLE_ACCESS" -> Right DisableGoogleAccess
+        "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE" -> Right EnableBidirectionalAccessToGoogle
+        "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE" -> Right EnableOutboundVMAccessToGoogle
+        x -> Left ("Unable to parse SubnetworkPrivateIPv6GoogleAccess from: " <> x)
+
+instance ToHttpApiData SubnetworkPrivateIPv6GoogleAccess where
+    toQueryParam = \case
+        DisableGoogleAccess -> "DISABLE_GOOGLE_ACCESS"
+        EnableBidirectionalAccessToGoogle -> "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
+        EnableOutboundVMAccessToGoogle -> "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
+
+instance FromJSON SubnetworkPrivateIPv6GoogleAccess where
+    parseJSON = parseJSONText "SubnetworkPrivateIPv6GoogleAccess"
+
+instance ToJSON SubnetworkPrivateIPv6GoogleAccess where
+    toJSON = toJSONText
+
+-- | [Output Only] The type of the firewall policy.
+data NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType
+    = NGEFREFPTHierarchy
+      -- ^ @HIERARCHY@
+    | NGEFREFPTNetwork
+      -- ^ @NETWORK@
+    | NGEFREFPTUnspecified
+      -- ^ @UNSPECIFIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType
+
+instance FromHttpApiData NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    parseQueryParam = \case
+        "HIERARCHY" -> Right NGEFREFPTHierarchy
+        "NETWORK" -> Right NGEFREFPTNetwork
+        "UNSPECIFIED" -> Right NGEFREFPTUnspecified
+        x -> Left ("Unable to parse NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType from: " <> x)
+
+instance ToHttpApiData NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    toQueryParam = \case
+        NGEFREFPTHierarchy -> "HIERARCHY"
+        NGEFREFPTNetwork -> "NETWORK"
+        NGEFREFPTUnspecified -> "UNSPECIFIED"
+
+instance FromJSON NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    parseJSON = parseJSONText "NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType"
+
+instance ToJSON NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data RouterAggregatedListWarningCode
@@ -6143,6 +9183,8 @@ data RouterAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RALWCNextHopAddressNotAssigned
@@ -6159,6 +9201,8 @@ data RouterAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RALWCResourceInUseByOtherResourceWarning
@@ -6187,6 +9231,7 @@ instance FromHttpApiData RouterAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right RALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RALWCNextHopCannotIPForward
@@ -6195,6 +9240,7 @@ instance FromHttpApiData RouterAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RALWCResourceNotDeleted
@@ -6214,6 +9260,7 @@ instance ToHttpApiData RouterAggregatedListWarningCode where
         RALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -6222,6 +9269,7 @@ instance ToHttpApiData RouterAggregatedListWarningCode where
         RALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         RALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RALWCPartialSuccess -> "PARTIAL_SUCCESS"
         RALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -6239,51 +9287,55 @@ instance ToJSON RouterAggregatedListWarningCode where
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data RoutersScopedListWarningCode
-    = RSLWCCleanupFailed
+    = RCleanupFailed
       -- ^ @CLEANUP_FAILED@
-    | RSLWCDeprecatedResourceUsed
+    | RDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
-    | RSLWCDeprecatedTypeUsed
+    | RDeprecatedTypeUsed
       -- ^ @DEPRECATED_TYPE_USED@
-    | RSLWCDiskSizeLargerThanImageSize
+    | RDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | RSLWCExperimentalTypeUsed
+    | RExperimentalTypeUsed
       -- ^ @EXPERIMENTAL_TYPE_USED@
-    | RSLWCExternalAPIWarning
+    | RExternalAPIWarning
       -- ^ @EXTERNAL_API_WARNING@
-    | RSLWCFieldValueOverriden
+    | RFieldValueOverriden
       -- ^ @FIELD_VALUE_OVERRIDEN@
-    | RSLWCInjectedKernelsDeprecated
+    | RInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | RSLWCMissingTypeDependency
+    | RLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
-    | RSLWCNextHopAddressNotAssigned
+    | RNextHopAddressNotAssigned
       -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | RSLWCNextHopCannotIPForward
+    | RNextHopCannotIPForward
       -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | RSLWCNextHopInstanceNotFound
+    | RNextHopInstanceNotFound
       -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | RSLWCNextHopInstanceNotOnNetwork
+    | RNextHopInstanceNotOnNetwork
       -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | RSLWCNextHopNotRunning
+    | RNextHopNotRunning
       -- ^ @NEXT_HOP_NOT_RUNNING@
-    | RSLWCNotCriticalError
+    | RNotCriticalError
       -- ^ @NOT_CRITICAL_ERROR@
-    | RSLWCNoResultsOnPage
+    | RNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
-    | RSLWCRequiredTosAgreement
+    | RPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
-    | RSLWCResourceInUseByOtherResourceWarning
+    | RResourceInUseByOtherResourceWarning
       -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
-    | RSLWCResourceNotDeleted
+    | RResourceNotDeleted
       -- ^ @RESOURCE_NOT_DELETED@
-    | RSLWCSchemaValidationIgnored
+    | RSchemaValidationIgnored
       -- ^ @SCHEMA_VALIDATION_IGNORED@
-    | RSLWCSingleInstancePropertyTemplate
+    | RSingleInstancePropertyTemplate
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | RSLWCUndeclaredProperties
+    | RUndeclaredProperties
       -- ^ @UNDECLARED_PROPERTIES@
-    | RSLWCUnreachable
+    | RUnreachable
       -- ^ @UNREACHABLE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -6291,56 +9343,60 @@ instance Hashable RoutersScopedListWarningCode
 
 instance FromHttpApiData RoutersScopedListWarningCode where
     parseQueryParam = \case
-        "CLEANUP_FAILED" -> Right RSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Right RSLWCDeprecatedResourceUsed
-        "DEPRECATED_TYPE_USED" -> Right RSLWCDeprecatedTypeUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RSLWCDiskSizeLargerThanImageSize
-        "EXPERIMENTAL_TYPE_USED" -> Right RSLWCExperimentalTypeUsed
-        "EXTERNAL_API_WARNING" -> Right RSLWCExternalAPIWarning
-        "FIELD_VALUE_OVERRIDEN" -> Right RSLWCFieldValueOverriden
-        "INJECTED_KERNELS_DEPRECATED" -> Right RSLWCInjectedKernelsDeprecated
-        "MISSING_TYPE_DEPENDENCY" -> Right RSLWCMissingTypeDependency
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Right RSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Right RSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Right RSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Right RSLWCRequiredTosAgreement
-        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RSLWCResourceInUseByOtherResourceWarning
-        "RESOURCE_NOT_DELETED" -> Right RSLWCResourceNotDeleted
-        "SCHEMA_VALIDATION_IGNORED" -> Right RSLWCSchemaValidationIgnored
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RSLWCSingleInstancePropertyTemplate
-        "UNDECLARED_PROPERTIES" -> Right RSLWCUndeclaredProperties
-        "UNREACHABLE" -> Right RSLWCUnreachable
+        "CLEANUP_FAILED" -> Right RCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RUndeclaredProperties
+        "UNREACHABLE" -> Right RUnreachable
         x -> Left ("Unable to parse RoutersScopedListWarningCode from: " <> x)
 
 instance ToHttpApiData RoutersScopedListWarningCode where
     toQueryParam = \case
-        RSLWCCleanupFailed -> "CLEANUP_FAILED"
-        RSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        RSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
-        RSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        RSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
-        RSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
-        RSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
-        RSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        RSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
-        RSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        RSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        RSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        RSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        RSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        RSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
-        RSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        RSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        RSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
-        RSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        RSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
-        RSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        RSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
-        RSLWCUnreachable -> "UNREACHABLE"
+        RCleanupFailed -> "CLEANUP_FAILED"
+        RDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RPartialSuccess -> "PARTIAL_SUCCESS"
+        RRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RUnreachable -> "UNREACHABLE"
 
 instance FromJSON RoutersScopedListWarningCode where
     parseJSON = parseJSONText "RoutersScopedListWarningCode"
@@ -6367,6 +9423,8 @@ data TargetHTTPSProxyListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | THPLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | THPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | THPLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | THPLWCNextHopAddressNotAssigned
@@ -6383,6 +9441,8 @@ data TargetHTTPSProxyListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | THPLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | THPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | THPLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | THPLWCResourceInUseByOtherResourceWarning
@@ -6411,6 +9471,7 @@ instance FromHttpApiData TargetHTTPSProxyListWarningCode where
         "EXTERNAL_API_WARNING" -> Right THPLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right THPLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right THPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right THPLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right THPLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right THPLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right THPLWCNextHopCannotIPForward
@@ -6419,6 +9480,7 @@ instance FromHttpApiData TargetHTTPSProxyListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right THPLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right THPLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right THPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right THPLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right THPLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right THPLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right THPLWCResourceNotDeleted
@@ -6438,6 +9500,7 @@ instance ToHttpApiData TargetHTTPSProxyListWarningCode where
         THPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         THPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         THPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        THPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         THPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         THPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         THPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -6446,6 +9509,7 @@ instance ToHttpApiData TargetHTTPSProxyListWarningCode where
         THPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         THPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         THPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        THPLWCPartialSuccess -> "PARTIAL_SUCCESS"
         THPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         THPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         THPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -6460,6 +9524,10 @@ instance FromJSON TargetHTTPSProxyListWarningCode where
 instance ToJSON TargetHTTPSProxyListWarningCode where
     toJSON = toJSONText
 
+-- | The state of a LACP link, which can take one of the following values: -
+-- ACTIVE: The link is configured and active within the bundle. - DETACHED:
+-- The link is not configured within the bundle. This means that the rest
+-- of the object should be empty.
 data InterconnectDiagnosticsLinkLACPStatusState
     = IDLLACPSSActive
       -- ^ @ACTIVE@
@@ -6584,6 +9652,126 @@ instance FromJSON TargetInstanceNATPolicy where
 instance ToJSON TargetInstanceNATPolicy where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data TargetHTTPSProxyAggregatedListWarningCode
+    = THPALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | THPALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | THPALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | THPALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | THPALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | THPALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | THPALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | THPALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | THPALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | THPALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | THPALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | THPALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | THPALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | THPALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | THPALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | THPALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | THPALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | THPALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | THPALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | THPALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | THPALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | THPALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | THPALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | THPALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | THPALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetHTTPSProxyAggregatedListWarningCode
+
+instance FromHttpApiData TargetHTTPSProxyAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right THPALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right THPALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right THPALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right THPALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right THPALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right THPALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right THPALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right THPALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right THPALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right THPALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right THPALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right THPALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right THPALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right THPALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right THPALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right THPALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right THPALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right THPALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right THPALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right THPALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right THPALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right THPALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right THPALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right THPALWCUndeclaredProperties
+        "UNREACHABLE" -> Right THPALWCUnreachable
+        x -> Left ("Unable to parse TargetHTTPSProxyAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData TargetHTTPSProxyAggregatedListWarningCode where
+    toQueryParam = \case
+        THPALWCCleanupFailed -> "CLEANUP_FAILED"
+        THPALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        THPALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        THPALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        THPALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        THPALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        THPALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        THPALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        THPALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        THPALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        THPALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        THPALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        THPALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        THPALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        THPALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        THPALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        THPALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        THPALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        THPALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        THPALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        THPALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        THPALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        THPALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        THPALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        THPALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON TargetHTTPSProxyAggregatedListWarningCode where
+    parseJSON = parseJSONText "TargetHTTPSProxyAggregatedListWarningCode"
+
+instance ToJSON TargetHTTPSProxyAggregatedListWarningCode where
+    toJSON = toJSONText
+
 data RouterBGPPeerAdvertisedGroupsItem
     = AllSubnets
       -- ^ @ALL_SUBNETS@
@@ -6606,10 +9794,44 @@ instance FromJSON RouterBGPPeerAdvertisedGroupsItem where
 instance ToJSON RouterBGPPeerAdvertisedGroupsItem where
     toJSON = toJSONText
 
+-- | Indicates whether predictive autoscaling based on CPU metric is enabled.
+-- Valid values are: * NONE (default). No predictive method is used. The
+-- autoscaler scales the group to meet current demand based on real-time
+-- metrics. * OPTIMIZE_AVAILABILITY. Predictive autoscaling improves
+-- availability by monitoring daily and weekly load patterns and scaling
+-- out ahead of anticipated demand.
+data AutoscalingPolicyCPUUtilizationPredictiveMethod
+    = APCUPMNone
+      -- ^ @NONE@
+    | APCUPMOptimizeAvailability
+      -- ^ @OPTIMIZE_AVAILABILITY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AutoscalingPolicyCPUUtilizationPredictiveMethod
+
+instance FromHttpApiData AutoscalingPolicyCPUUtilizationPredictiveMethod where
+    parseQueryParam = \case
+        "NONE" -> Right APCUPMNone
+        "OPTIMIZE_AVAILABILITY" -> Right APCUPMOptimizeAvailability
+        x -> Left ("Unable to parse AutoscalingPolicyCPUUtilizationPredictiveMethod from: " <> x)
+
+instance ToHttpApiData AutoscalingPolicyCPUUtilizationPredictiveMethod where
+    toQueryParam = \case
+        APCUPMNone -> "NONE"
+        APCUPMOptimizeAvailability -> "OPTIMIZE_AVAILABILITY"
+
+instance FromJSON AutoscalingPolicyCPUUtilizationPredictiveMethod where
+    parseJSON = parseJSONText "AutoscalingPolicyCPUUtilizationPredictiveMethod"
+
+instance ToJSON AutoscalingPolicyCPUUtilizationPredictiveMethod where
+    toJSON = toJSONText
+
 -- | The type of configuration. The default and only option is
 -- ONE_TO_ONE_NAT.
 data AccessConfigType
-    = OneToOneNAT
+    = DirectIPV6
+      -- ^ @DIRECT_IPV6@
+    | OneToOneNAT
       -- ^ @ONE_TO_ONE_NAT@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -6617,17 +9839,91 @@ instance Hashable AccessConfigType
 
 instance FromHttpApiData AccessConfigType where
     parseQueryParam = \case
+        "DIRECT_IPV6" -> Right DirectIPV6
         "ONE_TO_ONE_NAT" -> Right OneToOneNAT
         x -> Left ("Unable to parse AccessConfigType from: " <> x)
 
 instance ToHttpApiData AccessConfigType where
     toQueryParam = \case
+        DirectIPV6 -> "DIRECT_IPV6"
         OneToOneNAT -> "ONE_TO_ONE_NAT"
 
 instance FromJSON AccessConfigType where
     parseJSON = parseJSONText "AccessConfigType"
 
 instance ToJSON AccessConfigType where
+    toJSON = toJSONText
+
+-- | The load balancing algorithm used within the scope of the locality. The
+-- possible values are: - ROUND_ROBIN: This is a simple policy in which
+-- each healthy backend is selected in round robin order. This is the
+-- default. - LEAST_REQUEST: An O(1) algorithm which selects two random
+-- healthy hosts and picks the host which has fewer active requests. -
+-- RING_HASH: The ring\/modulo hash load balancer implements consistent
+-- hashing to backends. The algorithm has the property that the
+-- addition\/removal of a host from a set of N hosts only affects 1\/N of
+-- the requests. - RANDOM: The load balancer selects a random healthy host.
+-- - ORIGINAL_DESTINATION: Backend host is selected based on the client
+-- connection metadata, i.e., connections are opened to the same address as
+-- the destination address of the incoming connection before the connection
+-- was redirected to the load balancer. - MAGLEV: used as a drop in
+-- replacement for the ring hash load balancer. Maglev is not as stable as
+-- ring hash but has faster table lookup build times and host selection
+-- times. For more information about Maglev, see
+-- https:\/\/ai.google\/research\/pubs\/pub44824 This field is applicable
+-- to either: - A regional backend service with the service_protocol set to
+-- HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to
+-- INTERNAL_MANAGED. - A global backend service with the
+-- load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity
+-- is not NONE, and this field is not set to MAGLEV or RING_HASH, session
+-- affinity settings will not take effect. Only the default ROUND_ROBIN
+-- policy is supported when the backend service is referenced by a URL map
+-- that is bound to target gRPC proxy that has validateForProxyless field
+-- set to true.
+data BackendServiceLocalityLbPolicy
+    = InvalidLbPolicy
+      -- ^ @INVALID_LB_POLICY@
+    | LeastRequest
+      -- ^ @LEAST_REQUEST@
+    | Maglev
+      -- ^ @MAGLEV@
+    | OriginalDestination
+      -- ^ @ORIGINAL_DESTINATION@
+    | Random
+      -- ^ @RANDOM@
+    | RingHash
+      -- ^ @RING_HASH@
+    | RoundRobin
+      -- ^ @ROUND_ROBIN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendServiceLocalityLbPolicy
+
+instance FromHttpApiData BackendServiceLocalityLbPolicy where
+    parseQueryParam = \case
+        "INVALID_LB_POLICY" -> Right InvalidLbPolicy
+        "LEAST_REQUEST" -> Right LeastRequest
+        "MAGLEV" -> Right Maglev
+        "ORIGINAL_DESTINATION" -> Right OriginalDestination
+        "RANDOM" -> Right Random
+        "RING_HASH" -> Right RingHash
+        "ROUND_ROBIN" -> Right RoundRobin
+        x -> Left ("Unable to parse BackendServiceLocalityLbPolicy from: " <> x)
+
+instance ToHttpApiData BackendServiceLocalityLbPolicy where
+    toQueryParam = \case
+        InvalidLbPolicy -> "INVALID_LB_POLICY"
+        LeastRequest -> "LEAST_REQUEST"
+        Maglev -> "MAGLEV"
+        OriginalDestination -> "ORIGINAL_DESTINATION"
+        Random -> "RANDOM"
+        RingHash -> "RING_HASH"
+        RoundRobin -> "ROUND_ROBIN"
+
+instance FromJSON BackendServiceLocalityLbPolicy where
+    parseJSON = parseJSONText "BackendServiceLocalityLbPolicy"
+
+instance ToJSON BackendServiceLocalityLbPolicy where
     toJSON = toJSONText
 
 -- | The IP Version that will be used by this forwarding rule. Valid options
@@ -6663,54 +9959,94 @@ instance FromJSON ForwardingRuleIPVersion where
 instance ToJSON ForwardingRuleIPVersion where
     toJSON = toJSONText
 
+-- | Specify the desired filtering of logs on this NAT. If unspecified, logs
+-- are exported for all connections handled by this NAT. This option can
+-- take one of the following values: - ERRORS_ONLY: Export logs only for
+-- connection failures. - TRANSLATIONS_ONLY: Export logs only for
+-- successful connections. - ALL: Export logs for all connections,
+-- successful and unsuccessful.
+data RouterNATLogConfigFilter
+    = RNATLCFAll
+      -- ^ @ALL@
+    | RNATLCFErrorsOnly
+      -- ^ @ERRORS_ONLY@
+    | RNATLCFTranslationsOnly
+      -- ^ @TRANSLATIONS_ONLY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RouterNATLogConfigFilter
+
+instance FromHttpApiData RouterNATLogConfigFilter where
+    parseQueryParam = \case
+        "ALL" -> Right RNATLCFAll
+        "ERRORS_ONLY" -> Right RNATLCFErrorsOnly
+        "TRANSLATIONS_ONLY" -> Right RNATLCFTranslationsOnly
+        x -> Left ("Unable to parse RouterNATLogConfigFilter from: " <> x)
+
+instance ToHttpApiData RouterNATLogConfigFilter where
+    toQueryParam = \case
+        RNATLCFAll -> "ALL"
+        RNATLCFErrorsOnly -> "ERRORS_ONLY"
+        RNATLCFTranslationsOnly -> "TRANSLATIONS_ONLY"
+
+instance FromJSON RouterNATLogConfigFilter where
+    parseJSON = parseJSONText "RouterNATLogConfigFilter"
+
+instance ToJSON RouterNATLogConfigFilter where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data RouterListWarningCode
-    = RLWCCleanupFailed
+    = ROUCleanupFailed
       -- ^ @CLEANUP_FAILED@
-    | RLWCDeprecatedResourceUsed
+    | ROUDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
-    | RLWCDeprecatedTypeUsed
+    | ROUDeprecatedTypeUsed
       -- ^ @DEPRECATED_TYPE_USED@
-    | RLWCDiskSizeLargerThanImageSize
+    | ROUDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | RLWCExperimentalTypeUsed
+    | ROUExperimentalTypeUsed
       -- ^ @EXPERIMENTAL_TYPE_USED@
-    | RLWCExternalAPIWarning
+    | ROUExternalAPIWarning
       -- ^ @EXTERNAL_API_WARNING@
-    | RLWCFieldValueOverriden
+    | ROUFieldValueOverriden
       -- ^ @FIELD_VALUE_OVERRIDEN@
-    | RLWCInjectedKernelsDeprecated
+    | ROUInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | RLWCMissingTypeDependency
+    | ROULargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | ROUMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
-    | RLWCNextHopAddressNotAssigned
+    | ROUNextHopAddressNotAssigned
       -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | RLWCNextHopCannotIPForward
+    | ROUNextHopCannotIPForward
       -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | RLWCNextHopInstanceNotFound
+    | ROUNextHopInstanceNotFound
       -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | RLWCNextHopInstanceNotOnNetwork
+    | ROUNextHopInstanceNotOnNetwork
       -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | RLWCNextHopNotRunning
+    | ROUNextHopNotRunning
       -- ^ @NEXT_HOP_NOT_RUNNING@
-    | RLWCNotCriticalError
+    | ROUNotCriticalError
       -- ^ @NOT_CRITICAL_ERROR@
-    | RLWCNoResultsOnPage
+    | ROUNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
-    | RLWCRequiredTosAgreement
+    | ROUPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | ROURequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
-    | RLWCResourceInUseByOtherResourceWarning
+    | ROUResourceInUseByOtherResourceWarning
       -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
-    | RLWCResourceNotDeleted
+    | ROUResourceNotDeleted
       -- ^ @RESOURCE_NOT_DELETED@
-    | RLWCSchemaValidationIgnored
+    | ROUSchemaValidationIgnored
       -- ^ @SCHEMA_VALIDATION_IGNORED@
-    | RLWCSingleInstancePropertyTemplate
+    | ROUSingleInstancePropertyTemplate
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | RLWCUndeclaredProperties
+    | ROUUndeclaredProperties
       -- ^ @UNDECLARED_PROPERTIES@
-    | RLWCUnreachable
+    | ROUUnreachable
       -- ^ @UNREACHABLE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -6718,56 +10054,60 @@ instance Hashable RouterListWarningCode
 
 instance FromHttpApiData RouterListWarningCode where
     parseQueryParam = \case
-        "CLEANUP_FAILED" -> Right RLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Right RLWCDeprecatedResourceUsed
-        "DEPRECATED_TYPE_USED" -> Right RLWCDeprecatedTypeUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RLWCDiskSizeLargerThanImageSize
-        "EXPERIMENTAL_TYPE_USED" -> Right RLWCExperimentalTypeUsed
-        "EXTERNAL_API_WARNING" -> Right RLWCExternalAPIWarning
-        "FIELD_VALUE_OVERRIDEN" -> Right RLWCFieldValueOverriden
-        "INJECTED_KERNELS_DEPRECATED" -> Right RLWCInjectedKernelsDeprecated
-        "MISSING_TYPE_DEPENDENCY" -> Right RLWCMissingTypeDependency
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Right RLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Right RLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Right RLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Right RLWCRequiredTosAgreement
-        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RLWCResourceInUseByOtherResourceWarning
-        "RESOURCE_NOT_DELETED" -> Right RLWCResourceNotDeleted
-        "SCHEMA_VALIDATION_IGNORED" -> Right RLWCSchemaValidationIgnored
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RLWCSingleInstancePropertyTemplate
-        "UNDECLARED_PROPERTIES" -> Right RLWCUndeclaredProperties
-        "UNREACHABLE" -> Right RLWCUnreachable
+        "CLEANUP_FAILED" -> Right ROUCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right ROUDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right ROUDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ROUDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right ROUExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right ROUExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right ROUFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right ROUInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ROULargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right ROUMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ROUNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ROUNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right ROUNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right ROUNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right ROUNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right ROUNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right ROUNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ROUPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right ROURequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ROUResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right ROUResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right ROUSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right ROUSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right ROUUndeclaredProperties
+        "UNREACHABLE" -> Right ROUUnreachable
         x -> Left ("Unable to parse RouterListWarningCode from: " <> x)
 
 instance ToHttpApiData RouterListWarningCode where
     toQueryParam = \case
-        RLWCCleanupFailed -> "CLEANUP_FAILED"
-        RLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        RLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
-        RLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        RLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
-        RLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
-        RLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
-        RLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        RLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
-        RLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        RLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        RLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        RLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        RLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        RLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
-        RLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        RLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        RLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
-        RLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        RLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
-        RLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        RLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
-        RLWCUnreachable -> "UNREACHABLE"
+        ROUCleanupFailed -> "CLEANUP_FAILED"
+        ROUDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        ROUDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        ROUDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        ROUExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        ROUExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        ROUFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        ROUInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ROULargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        ROUMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        ROUNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        ROUNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        ROUNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        ROUNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        ROUNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        ROUNotCriticalError -> "NOT_CRITICAL_ERROR"
+        ROUNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ROUPartialSuccess -> "PARTIAL_SUCCESS"
+        ROURequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        ROUResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        ROUResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        ROUSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        ROUSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        ROUUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        ROUUnreachable -> "UNREACHABLE"
 
 instance FromJSON RouterListWarningCode where
     parseJSON = parseJSONText "RouterListWarningCode"
@@ -6794,6 +10134,8 @@ data InstanceGroupAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGALWCNextHopAddressNotAssigned
@@ -6810,6 +10152,8 @@ data InstanceGroupAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGALWCResourceInUseByOtherResourceWarning
@@ -6838,6 +10182,7 @@ instance FromHttpApiData InstanceGroupAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGALWCNextHopCannotIPForward
@@ -6846,6 +10191,7 @@ instance FromHttpApiData InstanceGroupAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGALWCResourceNotDeleted
@@ -6865,6 +10211,7 @@ instance ToHttpApiData InstanceGroupAggregatedListWarningCode where
         IGALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -6873,6 +10220,7 @@ instance ToHttpApiData InstanceGroupAggregatedListWarningCode where
         IGALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGALWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -6885,6 +10233,35 @@ instance FromJSON InstanceGroupAggregatedListWarningCode where
     parseJSON = parseJSONText "InstanceGroupAggregatedListWarningCode"
 
 instance ToJSON InstanceGroupAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can
+-- be accessed from the Internet. This field is always inherited from its
+-- subnetwork. Valid only if stackType is IPV4_IPV6.
+data NetworkInterfaceIPv6AccessType
+    = NIIATExternal
+      -- ^ @EXTERNAL@
+    | NIIATUnspecifiedIPV6AccessType
+      -- ^ @UNSPECIFIED_IPV6_ACCESS_TYPE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NetworkInterfaceIPv6AccessType
+
+instance FromHttpApiData NetworkInterfaceIPv6AccessType where
+    parseQueryParam = \case
+        "EXTERNAL" -> Right NIIATExternal
+        "UNSPECIFIED_IPV6_ACCESS_TYPE" -> Right NIIATUnspecifiedIPV6AccessType
+        x -> Left ("Unable to parse NetworkInterfaceIPv6AccessType from: " <> x)
+
+instance ToHttpApiData NetworkInterfaceIPv6AccessType where
+    toQueryParam = \case
+        NIIATExternal -> "EXTERNAL"
+        NIIATUnspecifiedIPV6AccessType -> "UNSPECIFIED_IPV6_ACCESS_TYPE"
+
+instance FromJSON NetworkInterfaceIPv6AccessType where
+    parseJSON = parseJSONText "NetworkInterfaceIPv6AccessType"
+
+instance ToJSON NetworkInterfaceIPv6AccessType where
     toJSON = toJSONText
 
 -- | Default network tier to be set.
@@ -6914,16 +10291,22 @@ instance FromJSON ProjectsSetDefaultNetworkTierRequestNetworkTier where
 instance ToJSON ProjectsSetDefaultNetworkTierRequestNetworkTier where
     toJSON = toJSONText
 
--- | Indicates whether the backend service will be used with internal or
--- external load balancing. A backend service created for one type of load
--- balancing cannot be used with the other. Possible values are INTERNAL
--- and EXTERNAL.
+-- | Specifies the load balancer type. Choose EXTERNAL for external HTTP(S),
+-- SSL Proxy, TCP Proxy and Network Load Balancing. Choose INTERNAL for
+-- Internal TCP\/UDP Load Balancing. Choose INTERNAL_MANAGED for Internal
+-- HTTP(S) Load Balancing. INTERNAL_SELF_MANAGED for Traffic Director. A
+-- backend service created for one type of load balancer cannot be used
+-- with another. For more information, refer to Choosing a load balancer.
 data BackendServiceLoadBalancingScheme
-    = External
+    = BSLBSExternal
       -- ^ @EXTERNAL@
-    | Internal
+    | BSLBSInternal
       -- ^ @INTERNAL@
-    | InvalidLoadBalancingScheme
+    | BSLBSInternalManaged
+      -- ^ @INTERNAL_MANAGED@
+    | BSLBSInternalSelfManaged
+      -- ^ @INTERNAL_SELF_MANAGED@
+    | BSLBSInvalidLoadBalancingScheme
       -- ^ @INVALID_LOAD_BALANCING_SCHEME@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -6931,21 +10314,172 @@ instance Hashable BackendServiceLoadBalancingScheme
 
 instance FromHttpApiData BackendServiceLoadBalancingScheme where
     parseQueryParam = \case
-        "EXTERNAL" -> Right External
-        "INTERNAL" -> Right Internal
-        "INVALID_LOAD_BALANCING_SCHEME" -> Right InvalidLoadBalancingScheme
+        "EXTERNAL" -> Right BSLBSExternal
+        "INTERNAL" -> Right BSLBSInternal
+        "INTERNAL_MANAGED" -> Right BSLBSInternalManaged
+        "INTERNAL_SELF_MANAGED" -> Right BSLBSInternalSelfManaged
+        "INVALID_LOAD_BALANCING_SCHEME" -> Right BSLBSInvalidLoadBalancingScheme
         x -> Left ("Unable to parse BackendServiceLoadBalancingScheme from: " <> x)
 
 instance ToHttpApiData BackendServiceLoadBalancingScheme where
     toQueryParam = \case
-        External -> "EXTERNAL"
-        Internal -> "INTERNAL"
-        InvalidLoadBalancingScheme -> "INVALID_LOAD_BALANCING_SCHEME"
+        BSLBSExternal -> "EXTERNAL"
+        BSLBSInternal -> "INTERNAL"
+        BSLBSInternalManaged -> "INTERNAL_MANAGED"
+        BSLBSInternalSelfManaged -> "INTERNAL_SELF_MANAGED"
+        BSLBSInvalidLoadBalancingScheme -> "INVALID_LOAD_BALANCING_SCHEME"
 
 instance FromJSON BackendServiceLoadBalancingScheme where
     parseJSON = parseJSONText "BackendServiceLoadBalancingScheme"
 
 instance ToJSON BackendServiceLoadBalancingScheme where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data SSLCertificatesScopedListWarningCode
+    = SCSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | SCSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | SCSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | SCSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | SCSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | SCSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | SCSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | SCSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SCSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | SCSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | SCSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | SCSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | SCSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | SCSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | SCSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | SCSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | SCSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | SCSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | SCSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | SCSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | SCSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | SCSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | SCSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | SCSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | SCSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLCertificatesScopedListWarningCode
+
+instance FromHttpApiData SSLCertificatesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right SCSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right SCSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right SCSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right SCSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right SCSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right SCSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right SCSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right SCSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SCSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right SCSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SCSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SCSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right SCSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right SCSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right SCSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right SCSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right SCSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SCSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right SCSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SCSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right SCSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right SCSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right SCSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right SCSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right SCSLWCUnreachable
+        x -> Left ("Unable to parse SSLCertificatesScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData SSLCertificatesScopedListWarningCode where
+    toQueryParam = \case
+        SCSLWCCleanupFailed -> "CLEANUP_FAILED"
+        SCSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        SCSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        SCSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        SCSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        SCSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        SCSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        SCSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SCSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        SCSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        SCSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        SCSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        SCSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        SCSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        SCSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        SCSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        SCSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SCSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        SCSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        SCSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        SCSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        SCSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        SCSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        SCSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        SCSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON SSLCertificatesScopedListWarningCode where
+    parseJSON = parseJSONText "SSLCertificatesScopedListWarningCode"
+
+instance ToJSON SSLCertificatesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies network collocation
+data ResourcePolicyGroupPlacementPolicyCollocation
+    = Collocated
+      -- ^ @COLLOCATED@
+    | UnspecifiedCollocation
+      -- ^ @UNSPECIFIED_COLLOCATION@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePolicyGroupPlacementPolicyCollocation
+
+instance FromHttpApiData ResourcePolicyGroupPlacementPolicyCollocation where
+    parseQueryParam = \case
+        "COLLOCATED" -> Right Collocated
+        "UNSPECIFIED_COLLOCATION" -> Right UnspecifiedCollocation
+        x -> Left ("Unable to parse ResourcePolicyGroupPlacementPolicyCollocation from: " <> x)
+
+instance ToHttpApiData ResourcePolicyGroupPlacementPolicyCollocation where
+    toQueryParam = \case
+        Collocated -> "COLLOCATED"
+        UnspecifiedCollocation -> "UNSPECIFIED_COLLOCATION"
+
+instance FromJSON ResourcePolicyGroupPlacementPolicyCollocation where
+    parseJSON = parseJSONText "ResourcePolicyGroupPlacementPolicyCollocation"
+
+instance ToJSON ResourcePolicyGroupPlacementPolicyCollocation where
     toJSON = toJSONText
 
 -- | Specifies the type of proxy header to append before sending data to the
@@ -6995,6 +10529,8 @@ data TargetVPNGatewayAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TVGALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TVGALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TVGALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TVGALWCNextHopAddressNotAssigned
@@ -7011,6 +10547,8 @@ data TargetVPNGatewayAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TVGALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TVGALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TVGALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TVGALWCResourceInUseByOtherResourceWarning
@@ -7039,6 +10577,7 @@ instance FromHttpApiData TargetVPNGatewayAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TVGALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TVGALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TVGALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TVGALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TVGALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TVGALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TVGALWCNextHopCannotIPForward
@@ -7047,6 +10586,7 @@ instance FromHttpApiData TargetVPNGatewayAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TVGALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TVGALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TVGALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TVGALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TVGALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TVGALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TVGALWCResourceNotDeleted
@@ -7066,6 +10606,7 @@ instance ToHttpApiData TargetVPNGatewayAggregatedListWarningCode where
         TVGALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TVGALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TVGALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TVGALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TVGALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TVGALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TVGALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -7074,6 +10615,7 @@ instance ToHttpApiData TargetVPNGatewayAggregatedListWarningCode where
         TVGALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TVGALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TVGALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TVGALWCPartialSuccess -> "PARTIAL_SUCCESS"
         TVGALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TVGALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TVGALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -7089,7 +10631,7 @@ instance ToJSON TargetVPNGatewayAggregatedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the operation, which can be one of the
--- following: PENDING, RUNNING, or DONE.
+-- following: \`PENDING\`, \`RUNNING\`, or \`DONE\`.
 data OperationStatus
     = OSDone
       -- ^ @DONE@
@@ -7247,6 +10789,8 @@ data TargetVPNGatewaysScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TVGSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TVGSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TVGSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TVGSLWCNextHopAddressNotAssigned
@@ -7263,6 +10807,8 @@ data TargetVPNGatewaysScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TVGSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TVGSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TVGSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TVGSLWCResourceInUseByOtherResourceWarning
@@ -7291,6 +10837,7 @@ instance FromHttpApiData TargetVPNGatewaysScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TVGSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TVGSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TVGSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TVGSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TVGSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TVGSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TVGSLWCNextHopCannotIPForward
@@ -7299,6 +10846,7 @@ instance FromHttpApiData TargetVPNGatewaysScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TVGSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TVGSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TVGSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TVGSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TVGSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TVGSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TVGSLWCResourceNotDeleted
@@ -7318,6 +10866,7 @@ instance ToHttpApiData TargetVPNGatewaysScopedListWarningCode where
         TVGSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TVGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TVGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TVGSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TVGSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TVGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TVGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -7326,6 +10875,7 @@ instance ToHttpApiData TargetVPNGatewaysScopedListWarningCode where
         TVGSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TVGSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TVGSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TVGSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TVGSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TVGSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TVGSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -7340,7 +10890,41 @@ instance FromJSON TargetVPNGatewaysScopedListWarningCode where
 instance ToJSON TargetVPNGatewaysScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The status of disk creation.
+-- | The file type of source file.
+data FileContentBufferFileType
+    = Bin
+      -- ^ @BIN@
+    | Undefined
+      -- ^ @UNDEFINED@
+    | X509
+      -- ^ @X509@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FileContentBufferFileType
+
+instance FromHttpApiData FileContentBufferFileType where
+    parseQueryParam = \case
+        "BIN" -> Right Bin
+        "UNDEFINED" -> Right Undefined
+        "X509" -> Right X509
+        x -> Left ("Unable to parse FileContentBufferFileType from: " <> x)
+
+instance ToHttpApiData FileContentBufferFileType where
+    toQueryParam = \case
+        Bin -> "BIN"
+        Undefined -> "UNDEFINED"
+        X509 -> "X509"
+
+instance FromJSON FileContentBufferFileType where
+    parseJSON = parseJSONText "FileContentBufferFileType"
+
+instance ToJSON FileContentBufferFileType where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of disk creation. - CREATING: Disk is
+-- provisioning. - RESTORING: Source data is being copied into the disk. -
+-- FAILED: Disk creation failed. - READY: Disk is ready for use. -
+-- DELETING: Disk is deleting.
 data DiskStatus
     = DSCreating
       -- ^ @CREATING@
@@ -7398,6 +10982,8 @@ data SnapshotListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SLWCNextHopAddressNotAssigned
@@ -7414,6 +11000,8 @@ data SnapshotListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SLWCResourceInUseByOtherResourceWarning
@@ -7442,6 +11030,7 @@ instance FromHttpApiData SnapshotListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SLWCNextHopCannotIPForward
@@ -7450,6 +11039,7 @@ instance FromHttpApiData SnapshotListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SLWCResourceNotDeleted
@@ -7469,6 +11059,7 @@ instance ToHttpApiData SnapshotListWarningCode where
         SLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -7477,6 +11068,7 @@ instance ToHttpApiData SnapshotListWarningCode where
         SLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         SLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SLWCPartialSuccess -> "PARTIAL_SUCCESS"
         SLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -7491,13 +11083,47 @@ instance FromJSON SnapshotListWarningCode where
 instance ToJSON SnapshotListWarningCode where
     toJSON = toJSONText
 
+-- | Can only be specified if VPC flow logs for this subnetwork is enabled.
+-- Configures whether all, none or a subset of metadata fields should be
+-- added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
+data SubnetworkLogConfigMetadata
+    = CustomMetadata
+      -- ^ @CUSTOM_METADATA@
+    | ExcludeAllMetadata
+      -- ^ @EXCLUDE_ALL_METADATA@
+    | IncludeAllMetadata
+      -- ^ @INCLUDE_ALL_METADATA@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkLogConfigMetadata
+
+instance FromHttpApiData SubnetworkLogConfigMetadata where
+    parseQueryParam = \case
+        "CUSTOM_METADATA" -> Right CustomMetadata
+        "EXCLUDE_ALL_METADATA" -> Right ExcludeAllMetadata
+        "INCLUDE_ALL_METADATA" -> Right IncludeAllMetadata
+        x -> Left ("Unable to parse SubnetworkLogConfigMetadata from: " <> x)
+
+instance ToHttpApiData SubnetworkLogConfigMetadata where
+    toQueryParam = \case
+        CustomMetadata -> "CUSTOM_METADATA"
+        ExcludeAllMetadata -> "EXCLUDE_ALL_METADATA"
+        IncludeAllMetadata -> "INCLUDE_ALL_METADATA"
+
+instance FromJSON SubnetworkLogConfigMetadata where
+    parseJSON = parseJSONText "SubnetworkLogConfigMetadata"
+
+instance ToJSON SubnetworkLogConfigMetadata where
+    toJSON = toJSONText
+
 -- | Desired availability domain for the attachment. Only available for type
--- PARTNER, at creation time. For improved reliability, customers should
--- configure a pair of attachments with one per availability domain. The
--- selected availability domain will be provided to the Partner via the
--- pairing key so that the provisioned circuit will lie in the specified
--- domain. If not specified, the value will default to
--- AVAILABILITY_DOMAIN_ANY.
+-- PARTNER, at creation time, and can take one of the following values: -
+-- AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2
+-- For improved reliability, customers should configure a pair of
+-- attachments, one per availability domain. The selected availability
+-- domain will be provided to the Partner via the pairing key, so that the
+-- provisioned circuit will lie in the specified domain. If not specified,
+-- the value will default to AVAILABILITY_DOMAIN_ANY.
 data InterconnectAttachmentEdgeAvailabilityDomain
     = AvailabilityDomain1
       -- ^ @AVAILABILITY_DOMAIN_1@
@@ -7531,7 +11157,9 @@ instance ToJSON InterconnectAttachmentEdgeAvailabilityDomain where
 -- | [Output Only] The status of the instance. This field is empty when the
 -- instance does not exist.
 data ManagedInstanceInstanceStatus
-    = MIISProvisioning
+    = MIISDeprovisioning
+      -- ^ @DEPROVISIONING@
+    | MIISProvisioning
       -- ^ @PROVISIONING@
     | MIISRepairing
       -- ^ @REPAIRING@
@@ -7555,6 +11183,7 @@ instance Hashable ManagedInstanceInstanceStatus
 
 instance FromHttpApiData ManagedInstanceInstanceStatus where
     parseQueryParam = \case
+        "DEPROVISIONING" -> Right MIISDeprovisioning
         "PROVISIONING" -> Right MIISProvisioning
         "REPAIRING" -> Right MIISRepairing
         "RUNNING" -> Right MIISRunning
@@ -7568,6 +11197,7 @@ instance FromHttpApiData ManagedInstanceInstanceStatus where
 
 instance ToHttpApiData ManagedInstanceInstanceStatus where
     toQueryParam = \case
+        MIISDeprovisioning -> "DEPROVISIONING"
         MIISProvisioning -> "PROVISIONING"
         MIISRepairing -> "REPAIRING"
         MIISRunning -> "RUNNING"
@@ -7612,7 +11242,9 @@ instance FromJSON HTTPHealthCheckProxyHeader where
 instance ToJSON HTTPHealthCheckProxyHeader where
     toJSON = toJSONText
 
--- | [Output Only] Continent for this location.
+-- | [Output Only] Continent for this location, which can take one of the
+-- following values: - AFRICA - ASIA_PAC - EUROPE - NORTH_AMERICA -
+-- SOUTH_AMERICA
 data InterconnectLocationContinent
     = Africa
       -- ^ @AFRICA@
@@ -7673,6 +11305,157 @@ instance ToJSON InterconnectLocationContinent where
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data SSLCertificateAggregatedListWarningCode
+    = SCALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | SCALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | SCALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | SCALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | SCALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | SCALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | SCALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | SCALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SCALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | SCALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | SCALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | SCALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | SCALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | SCALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | SCALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | SCALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | SCALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | SCALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | SCALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | SCALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | SCALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | SCALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | SCALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | SCALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | SCALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLCertificateAggregatedListWarningCode
+
+instance FromHttpApiData SSLCertificateAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right SCALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right SCALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right SCALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right SCALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right SCALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right SCALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right SCALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right SCALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SCALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right SCALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SCALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SCALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right SCALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right SCALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right SCALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right SCALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right SCALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SCALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right SCALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SCALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right SCALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right SCALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right SCALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right SCALWCUndeclaredProperties
+        "UNREACHABLE" -> Right SCALWCUnreachable
+        x -> Left ("Unable to parse SSLCertificateAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData SSLCertificateAggregatedListWarningCode where
+    toQueryParam = \case
+        SCALWCCleanupFailed -> "CLEANUP_FAILED"
+        SCALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        SCALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        SCALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        SCALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        SCALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        SCALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        SCALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SCALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        SCALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        SCALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        SCALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        SCALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        SCALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        SCALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        SCALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        SCALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SCALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        SCALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        SCALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        SCALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        SCALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        SCALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        SCALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        SCALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON SSLCertificateAggregatedListWarningCode where
+    parseJSON = parseJSONText "SSLCertificateAggregatedListWarningCode"
+
+instance ToJSON SSLCertificateAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | CPU overcommit.
+data NodeTemplateCPUOvercommitType
+    = NTCOTCPUOvercommitTypeUnspecified
+      -- ^ @CPU_OVERCOMMIT_TYPE_UNSPECIFIED@
+    | NTCOTEnabled
+      -- ^ @ENABLED@
+    | NTCOTNone
+      -- ^ @NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NodeTemplateCPUOvercommitType
+
+instance FromHttpApiData NodeTemplateCPUOvercommitType where
+    parseQueryParam = \case
+        "CPU_OVERCOMMIT_TYPE_UNSPECIFIED" -> Right NTCOTCPUOvercommitTypeUnspecified
+        "ENABLED" -> Right NTCOTEnabled
+        "NONE" -> Right NTCOTNone
+        x -> Left ("Unable to parse NodeTemplateCPUOvercommitType from: " <> x)
+
+instance ToHttpApiData NodeTemplateCPUOvercommitType where
+    toQueryParam = \case
+        NTCOTCPUOvercommitTypeUnspecified -> "CPU_OVERCOMMIT_TYPE_UNSPECIFIED"
+        NTCOTEnabled -> "ENABLED"
+        NTCOTNone -> "NONE"
+
+instance FromJSON NodeTemplateCPUOvercommitType where
+    parseJSON = parseJSONText "NodeTemplateCPUOvercommitType"
+
+instance ToJSON NodeTemplateCPUOvercommitType where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data VMEndpointNATMAppingsListWarningCode
     = VMENATMALWCCleanupFailed
       -- ^ @CLEANUP_FAILED@
@@ -7690,6 +11473,8 @@ data VMEndpointNATMAppingsListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | VMENATMALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VMENATMALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | VMENATMALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | VMENATMALWCNextHopAddressNotAssigned
@@ -7706,6 +11491,8 @@ data VMEndpointNATMAppingsListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | VMENATMALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | VMENATMALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | VMENATMALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | VMENATMALWCResourceInUseByOtherResourceWarning
@@ -7734,6 +11521,7 @@ instance FromHttpApiData VMEndpointNATMAppingsListWarningCode where
         "EXTERNAL_API_WARNING" -> Right VMENATMALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right VMENATMALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right VMENATMALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VMENATMALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right VMENATMALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VMENATMALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VMENATMALWCNextHopCannotIPForward
@@ -7742,6 +11530,7 @@ instance FromHttpApiData VMEndpointNATMAppingsListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right VMENATMALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right VMENATMALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right VMENATMALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VMENATMALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right VMENATMALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VMENATMALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right VMENATMALWCResourceNotDeleted
@@ -7761,6 +11550,7 @@ instance ToHttpApiData VMEndpointNATMAppingsListWarningCode where
         VMENATMALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         VMENATMALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         VMENATMALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VMENATMALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         VMENATMALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         VMENATMALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         VMENATMALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -7769,6 +11559,7 @@ instance ToHttpApiData VMEndpointNATMAppingsListWarningCode where
         VMENATMALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         VMENATMALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         VMENATMALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VMENATMALWCPartialSuccess -> "PARTIAL_SUCCESS"
         VMENATMALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         VMENATMALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         VMENATMALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -7781,6 +11572,126 @@ instance FromJSON VMEndpointNATMAppingsListWarningCode where
     parseJSON = parseJSONText "VMEndpointNATMAppingsListWarningCode"
 
 instance ToJSON VMEndpointNATMAppingsListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data HealthCheckServicesListWarningCode
+    = HCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | HDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | HDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | HDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | HExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | HExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | HFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | HInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | HLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | HMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | HNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | HNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | HNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | HNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | HNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | HNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | HNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | HPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | HRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | HResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | HResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | HSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | HSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | HUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | HUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthCheckServicesListWarningCode
+
+instance FromHttpApiData HealthCheckServicesListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right HCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right HDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right HDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right HDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right HExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right HExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right HFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right HInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right HLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right HMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right HNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right HNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right HNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right HNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right HNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right HNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right HNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right HPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right HRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right HResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right HResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right HSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right HSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right HUndeclaredProperties
+        "UNREACHABLE" -> Right HUnreachable
+        x -> Left ("Unable to parse HealthCheckServicesListWarningCode from: " <> x)
+
+instance ToHttpApiData HealthCheckServicesListWarningCode where
+    toQueryParam = \case
+        HCleanupFailed -> "CLEANUP_FAILED"
+        HDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        HDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        HDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        HExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        HExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        HFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        HInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        HLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        HMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        HNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        HNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        HNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        HNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        HNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        HNotCriticalError -> "NOT_CRITICAL_ERROR"
+        HNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        HPartialSuccess -> "PARTIAL_SUCCESS"
+        HRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        HResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        HResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        HSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        HSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        HUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        HUnreachable -> "UNREACHABLE"
+
+instance FromJSON HealthCheckServicesListWarningCode where
+    parseJSON = parseJSONText "HealthCheckServicesListWarningCode"
+
+instance ToJSON HealthCheckServicesListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the node template. One of the following
@@ -7847,6 +11758,52 @@ instance FromJSON AttachedDiskMode where
 instance ToJSON AttachedDiskMode where
     toJSON = toJSONText
 
+-- | The minimal action that you want to perform on each instance during the
+-- update: - REPLACE: At minimum, delete the instance and create it again.
+-- - RESTART: Stop the instance and start it again. - REFRESH: Do not stop
+-- the instance. - NONE: Do not disrupt the instance at all. By default,
+-- the minimum action is NONE. If your update requires a more disruptive
+-- action than you set with this flag, the necessary action is performed to
+-- execute the update.
+data InstanceGroupManagersApplyUpdatesRequestMinimalAction
+    = IGMAURMANone
+      -- ^ @NONE@
+    | IGMAURMARefresh
+      -- ^ @REFRESH@
+    | IGMAURMAReplace
+      -- ^ @REPLACE@
+    | IGMAURMARestart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagersApplyUpdatesRequestMinimalAction
+
+instance FromHttpApiData InstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    parseQueryParam = \case
+        "NONE" -> Right IGMAURMANone
+        "REFRESH" -> Right IGMAURMARefresh
+        "REPLACE" -> Right IGMAURMAReplace
+        "RESTART" -> Right IGMAURMARestart
+        x -> Left ("Unable to parse InstanceGroupManagersApplyUpdatesRequestMinimalAction from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    toQueryParam = \case
+        IGMAURMANone -> "NONE"
+        IGMAURMARefresh -> "REFRESH"
+        IGMAURMAReplace -> "REPLACE"
+        IGMAURMARestart -> "RESTART"
+
+instance FromJSON InstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    parseJSON = parseJSONText "InstanceGroupManagersApplyUpdatesRequestMinimalAction"
+
+instance ToJSON InstanceGroupManagersApplyUpdatesRequestMinimalAction where
+    toJSON = toJSONText
+
+-- | The type of update process. You can specify either PROACTIVE so that the
+-- instance group manager proactively executes actions in order to bring
+-- instances to their target versions or OPPORTUNISTIC so that no action is
+-- proactively executed but the update will be performed as part of other
+-- actions (for example, resizes or recreateInstances calls).
 data InstanceGroupManagerUpdatePolicyType
     = Opportunistic
       -- ^ @OPPORTUNISTIC@
@@ -7892,6 +11849,8 @@ data TargetVPNGatewayListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TVGLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TVGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TVGLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TVGLWCNextHopAddressNotAssigned
@@ -7908,6 +11867,8 @@ data TargetVPNGatewayListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TVGLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TVGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TVGLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TVGLWCResourceInUseByOtherResourceWarning
@@ -7936,6 +11897,7 @@ instance FromHttpApiData TargetVPNGatewayListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TVGLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TVGLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TVGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TVGLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TVGLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TVGLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TVGLWCNextHopCannotIPForward
@@ -7944,6 +11906,7 @@ instance FromHttpApiData TargetVPNGatewayListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TVGLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TVGLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TVGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TVGLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TVGLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TVGLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TVGLWCResourceNotDeleted
@@ -7963,6 +11926,7 @@ instance ToHttpApiData TargetVPNGatewayListWarningCode where
         TVGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TVGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TVGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TVGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TVGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TVGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TVGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -7971,6 +11935,7 @@ instance ToHttpApiData TargetVPNGatewayListWarningCode where
         TVGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TVGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TVGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TVGLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TVGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TVGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TVGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -8004,6 +11969,8 @@ data InstanceTemplateListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ITLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ITLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ITLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ITLWCNextHopAddressNotAssigned
@@ -8020,6 +11987,8 @@ data InstanceTemplateListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ITLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ITLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ITLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ITLWCResourceInUseByOtherResourceWarning
@@ -8048,6 +12017,7 @@ instance FromHttpApiData InstanceTemplateListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ITLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ITLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ITLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ITLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ITLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ITLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ITLWCNextHopCannotIPForward
@@ -8056,6 +12026,7 @@ instance FromHttpApiData InstanceTemplateListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ITLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ITLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ITLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ITLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ITLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ITLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ITLWCResourceNotDeleted
@@ -8075,6 +12046,7 @@ instance ToHttpApiData InstanceTemplateListWarningCode where
         ITLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ITLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ITLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ITLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ITLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ITLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ITLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -8083,6 +12055,7 @@ instance ToHttpApiData InstanceTemplateListWarningCode where
         ITLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ITLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ITLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ITLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ITLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ITLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ITLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -8095,6 +12068,35 @@ instance FromJSON InstanceTemplateListWarningCode where
     parseJSON = parseJSONText "InstanceTemplateListWarningCode"
 
 instance ToJSON InstanceTemplateListWarningCode where
+    toJSON = toJSONText
+
+-- | Indicates the high availability requirement state for the VPN
+-- connection. Valid values are CONNECTION_REDUNDANCY_MET,
+-- CONNECTION_REDUNDANCY_NOT_MET.
+data VPNGatewayStatusHighAvailabilityRequirementStateState
+    = ConnectionRedundancyMet
+      -- ^ @CONNECTION_REDUNDANCY_MET@
+    | ConnectionRedundancyNotMet
+      -- ^ @CONNECTION_REDUNDANCY_NOT_MET@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VPNGatewayStatusHighAvailabilityRequirementStateState
+
+instance FromHttpApiData VPNGatewayStatusHighAvailabilityRequirementStateState where
+    parseQueryParam = \case
+        "CONNECTION_REDUNDANCY_MET" -> Right ConnectionRedundancyMet
+        "CONNECTION_REDUNDANCY_NOT_MET" -> Right ConnectionRedundancyNotMet
+        x -> Left ("Unable to parse VPNGatewayStatusHighAvailabilityRequirementStateState from: " <> x)
+
+instance ToHttpApiData VPNGatewayStatusHighAvailabilityRequirementStateState where
+    toQueryParam = \case
+        ConnectionRedundancyMet -> "CONNECTION_REDUNDANCY_MET"
+        ConnectionRedundancyNotMet -> "CONNECTION_REDUNDANCY_NOT_MET"
+
+instance FromJSON VPNGatewayStatusHighAvailabilityRequirementStateState where
+    parseJSON = parseJSONText "VPNGatewayStatusHighAvailabilityRequirementStateState"
+
+instance ToJSON VPNGatewayStatusHighAvailabilityRequirementStateState where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -8116,6 +12118,8 @@ data TargetSSLProxyListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TSPLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TSPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TSPLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TSPLWCNextHopAddressNotAssigned
@@ -8132,6 +12136,8 @@ data TargetSSLProxyListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TSPLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TSPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TSPLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TSPLWCResourceInUseByOtherResourceWarning
@@ -8160,6 +12166,7 @@ instance FromHttpApiData TargetSSLProxyListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TSPLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TSPLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TSPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TSPLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TSPLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TSPLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TSPLWCNextHopCannotIPForward
@@ -8168,6 +12175,7 @@ instance FromHttpApiData TargetSSLProxyListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TSPLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TSPLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TSPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TSPLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TSPLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TSPLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TSPLWCResourceNotDeleted
@@ -8187,6 +12195,7 @@ instance ToHttpApiData TargetSSLProxyListWarningCode where
         TSPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TSPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TSPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TSPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TSPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TSPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TSPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -8195,6 +12204,7 @@ instance ToHttpApiData TargetSSLProxyListWarningCode where
         TSPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TSPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TSPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TSPLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TSPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TSPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TSPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -8236,10 +12246,16 @@ instance FromJSON RegionStatus where
 instance ToJSON RegionStatus where
     toJSON = toJSONText
 
--- | Provisioned bandwidth capacity for the interconnectAttachment. Can be
--- set by the partner to update the customer\'s provisioned bandwidth.
--- Output only for PARTNER type, mutable for PARTNER_PROVIDER and
--- DEDICATED.
+-- | Provisioned bandwidth capacity for the interconnect attachment. For
+-- attachments of type DEDICATED, the user can set the bandwidth. For
+-- attachments of type PARTNER, the Google Partner that is operating the
+-- interconnect must set the bandwidth. Output only for PARTNER type,
+-- mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the
+-- following values: - BPS_50M: 50 Mbit\/s - BPS_100M: 100 Mbit\/s -
+-- BPS_200M: 200 Mbit\/s - BPS_300M: 300 Mbit\/s - BPS_400M: 400 Mbit\/s -
+-- BPS_500M: 500 Mbit\/s - BPS_1G: 1 Gbit\/s - BPS_2G: 2 Gbit\/s - BPS_5G:
+-- 5 Gbit\/s - BPS_10G: 10 Gbit\/s - BPS_20G: 20 Gbit\/s - BPS_50G: 50
+-- Gbit\/s
 data InterconnectAttachmentBandwidth
     = Bps100M
       -- ^ @BPS_100M@
@@ -8249,6 +12265,8 @@ data InterconnectAttachmentBandwidth
       -- ^ @BPS_1G@
     | Bps200M
       -- ^ @BPS_200M@
+    | Bps20G
+      -- ^ @BPS_20G@
     | Bps2G
       -- ^ @BPS_2G@
     | Bps300M
@@ -8257,6 +12275,8 @@ data InterconnectAttachmentBandwidth
       -- ^ @BPS_400M@
     | Bps500M
       -- ^ @BPS_500M@
+    | Bps50G
+      -- ^ @BPS_50G@
     | Bps50M
       -- ^ @BPS_50M@
     | Bps5G
@@ -8271,10 +12291,12 @@ instance FromHttpApiData InterconnectAttachmentBandwidth where
         "BPS_10G" -> Right Bps10G
         "BPS_1G" -> Right Bps1G
         "BPS_200M" -> Right Bps200M
+        "BPS_20G" -> Right Bps20G
         "BPS_2G" -> Right Bps2G
         "BPS_300M" -> Right Bps300M
         "BPS_400M" -> Right Bps400M
         "BPS_500M" -> Right Bps500M
+        "BPS_50G" -> Right Bps50G
         "BPS_50M" -> Right Bps50M
         "BPS_5G" -> Right Bps5G
         x -> Left ("Unable to parse InterconnectAttachmentBandwidth from: " <> x)
@@ -8285,10 +12307,12 @@ instance ToHttpApiData InterconnectAttachmentBandwidth where
         Bps10G -> "BPS_10G"
         Bps1G -> "BPS_1G"
         Bps200M -> "BPS_200M"
+        Bps20G -> "BPS_20G"
         Bps2G -> "BPS_2G"
         Bps300M -> "BPS_300M"
         Bps400M -> "BPS_400M"
         Bps500M -> "BPS_500M"
+        Bps50G -> "BPS_50G"
         Bps50M -> "BPS_50M"
         Bps5G -> "BPS_5G"
 
@@ -8324,6 +12348,38 @@ instance FromJSON TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
     parseJSON = parseJSONText "TargetSSLProxiesSetProxyHeaderRequestProxyHeader"
 
 instance ToJSON TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
+    toJSON = toJSONText
+
+-- | Direction of traffic to mirror, either INGRESS, EGRESS, or BOTH. The
+-- default is BOTH.
+data PacketMirroringFilterDirection
+    = PMFDBoth
+      -- ^ @BOTH@
+    | PMFDEgress
+      -- ^ @EGRESS@
+    | PMFDIngress
+      -- ^ @INGRESS@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PacketMirroringFilterDirection
+
+instance FromHttpApiData PacketMirroringFilterDirection where
+    parseQueryParam = \case
+        "BOTH" -> Right PMFDBoth
+        "EGRESS" -> Right PMFDEgress
+        "INGRESS" -> Right PMFDIngress
+        x -> Left ("Unable to parse PacketMirroringFilterDirection from: " <> x)
+
+instance ToHttpApiData PacketMirroringFilterDirection where
+    toQueryParam = \case
+        PMFDBoth -> "BOTH"
+        PMFDEgress -> "EGRESS"
+        PMFDIngress -> "INGRESS"
+
+instance FromJSON PacketMirroringFilterDirection where
+    parseJSON = parseJSONText "PacketMirroringFilterDirection"
+
+instance ToJSON PacketMirroringFilterDirection where
     toJSON = toJSONText
 
 -- | Specifies how port is selected for health checking, can be one of
@@ -8364,6 +12420,157 @@ instance FromJSON HTTP2HealthCheckPortSpecification where
 instance ToJSON HTTP2HealthCheckPortSpecification where
     toJSON = toJSONText
 
+-- | The type of the peering route.
+data ExchangedPeeringRouteType
+    = DynamicPeeringRoute
+      -- ^ @DYNAMIC_PEERING_ROUTE@
+    | StaticPeeringRoute
+      -- ^ @STATIC_PEERING_ROUTE@
+    | SubnetPeeringRoute
+      -- ^ @SUBNET_PEERING_ROUTE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ExchangedPeeringRouteType
+
+instance FromHttpApiData ExchangedPeeringRouteType where
+    parseQueryParam = \case
+        "DYNAMIC_PEERING_ROUTE" -> Right DynamicPeeringRoute
+        "STATIC_PEERING_ROUTE" -> Right StaticPeeringRoute
+        "SUBNET_PEERING_ROUTE" -> Right SubnetPeeringRoute
+        x -> Left ("Unable to parse ExchangedPeeringRouteType from: " <> x)
+
+instance ToHttpApiData ExchangedPeeringRouteType where
+    toQueryParam = \case
+        DynamicPeeringRoute -> "DYNAMIC_PEERING_ROUTE"
+        StaticPeeringRoute -> "STATIC_PEERING_ROUTE"
+        SubnetPeeringRoute -> "SUBNET_PEERING_ROUTE"
+
+instance FromJSON ExchangedPeeringRouteType where
+    parseJSON = parseJSONText "ExchangedPeeringRouteType"
+
+instance ToJSON ExchangedPeeringRouteType where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data URLMapsAggregatedListWarningCode
+    = UMALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | UMALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | UMALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | UMALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | UMALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | UMALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | UMALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | UMALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | UMALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | UMALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | UMALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | UMALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | UMALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | UMALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | UMALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | UMALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | UMALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | UMALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | UMALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | UMALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | UMALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | UMALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | UMALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | UMALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | UMALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable URLMapsAggregatedListWarningCode
+
+instance FromHttpApiData URLMapsAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right UMALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right UMALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right UMALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right UMALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right UMALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right UMALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right UMALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right UMALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right UMALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right UMALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right UMALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right UMALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right UMALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right UMALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right UMALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right UMALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right UMALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right UMALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right UMALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right UMALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right UMALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right UMALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right UMALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right UMALWCUndeclaredProperties
+        "UNREACHABLE" -> Right UMALWCUnreachable
+        x -> Left ("Unable to parse URLMapsAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData URLMapsAggregatedListWarningCode where
+    toQueryParam = \case
+        UMALWCCleanupFailed -> "CLEANUP_FAILED"
+        UMALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        UMALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        UMALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        UMALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        UMALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        UMALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        UMALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        UMALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        UMALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        UMALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        UMALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        UMALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        UMALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        UMALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        UMALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        UMALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        UMALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        UMALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        UMALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        UMALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        UMALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        UMALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        UMALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        UMALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON URLMapsAggregatedListWarningCode where
+    parseJSON = parseJSONText "URLMapsAggregatedListWarningCode"
+
+instance ToJSON URLMapsAggregatedListWarningCode where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceListReferrersWarningCode
@@ -8383,6 +12590,8 @@ data InstanceListReferrersWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ILRWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ILRWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ILRWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ILRWCNextHopAddressNotAssigned
@@ -8399,6 +12608,8 @@ data InstanceListReferrersWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ILRWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ILRWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ILRWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ILRWCResourceInUseByOtherResourceWarning
@@ -8427,6 +12638,7 @@ instance FromHttpApiData InstanceListReferrersWarningCode where
         "EXTERNAL_API_WARNING" -> Right ILRWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ILRWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ILRWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ILRWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ILRWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ILRWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ILRWCNextHopCannotIPForward
@@ -8435,6 +12647,7 @@ instance FromHttpApiData InstanceListReferrersWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ILRWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ILRWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ILRWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ILRWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ILRWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ILRWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ILRWCResourceNotDeleted
@@ -8454,6 +12667,7 @@ instance ToHttpApiData InstanceListReferrersWarningCode where
         ILRWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ILRWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ILRWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ILRWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ILRWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ILRWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ILRWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -8462,6 +12676,7 @@ instance ToHttpApiData InstanceListReferrersWarningCode where
         ILRWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ILRWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ILRWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ILRWCPartialSuccess -> "PARTIAL_SUCCESS"
         ILRWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ILRWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ILRWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -8522,51 +12737,55 @@ instance ToJSON ConditionOp where
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data RouteListWarningCode
-    = RCleanupFailed
+    = RLWCLCleanupFailed
       -- ^ @CLEANUP_FAILED@
-    | RDeprecatedResourceUsed
+    | RLWCLDeprecatedResourceUsed
       -- ^ @DEPRECATED_RESOURCE_USED@
-    | RDeprecatedTypeUsed
+    | RLWCLDeprecatedTypeUsed
       -- ^ @DEPRECATED_TYPE_USED@
-    | RDiskSizeLargerThanImageSize
+    | RLWCLDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
-    | RExperimentalTypeUsed
+    | RLWCLExperimentalTypeUsed
       -- ^ @EXPERIMENTAL_TYPE_USED@
-    | RExternalAPIWarning
+    | RLWCLExternalAPIWarning
       -- ^ @EXTERNAL_API_WARNING@
-    | RFieldValueOverriden
+    | RLWCLFieldValueOverriden
       -- ^ @FIELD_VALUE_OVERRIDEN@
-    | RInjectedKernelsDeprecated
+    | RLWCLInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
-    | RMissingTypeDependency
+    | RLWCLLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RLWCLMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
-    | RNextHopAddressNotAssigned
+    | RLWCLNextHopAddressNotAssigned
       -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
-    | RNextHopCannotIPForward
+    | RLWCLNextHopCannotIPForward
       -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
-    | RNextHopInstanceNotFound
+    | RLWCLNextHopInstanceNotFound
       -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
-    | RNextHopInstanceNotOnNetwork
+    | RLWCLNextHopInstanceNotOnNetwork
       -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
-    | RNextHopNotRunning
+    | RLWCLNextHopNotRunning
       -- ^ @NEXT_HOP_NOT_RUNNING@
-    | RNotCriticalError
+    | RLWCLNotCriticalError
       -- ^ @NOT_CRITICAL_ERROR@
-    | RNoResultsOnPage
+    | RLWCLNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
-    | RRequiredTosAgreement
+    | RLWCLPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RLWCLRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
-    | RResourceInUseByOtherResourceWarning
+    | RLWCLResourceInUseByOtherResourceWarning
       -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
-    | RResourceNotDeleted
+    | RLWCLResourceNotDeleted
       -- ^ @RESOURCE_NOT_DELETED@
-    | RSchemaValidationIgnored
+    | RLWCLSchemaValidationIgnored
       -- ^ @SCHEMA_VALIDATION_IGNORED@
-    | RSingleInstancePropertyTemplate
+    | RLWCLSingleInstancePropertyTemplate
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
-    | RUndeclaredProperties
+    | RLWCLUndeclaredProperties
       -- ^ @UNDECLARED_PROPERTIES@
-    | RUnreachable
+    | RLWCLUnreachable
       -- ^ @UNREACHABLE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -8574,56 +12793,60 @@ instance Hashable RouteListWarningCode
 
 instance FromHttpApiData RouteListWarningCode where
     parseQueryParam = \case
-        "CLEANUP_FAILED" -> Right RCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Right RDeprecatedResourceUsed
-        "DEPRECATED_TYPE_USED" -> Right RDeprecatedTypeUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RDiskSizeLargerThanImageSize
-        "EXPERIMENTAL_TYPE_USED" -> Right RExperimentalTypeUsed
-        "EXTERNAL_API_WARNING" -> Right RExternalAPIWarning
-        "FIELD_VALUE_OVERRIDEN" -> Right RFieldValueOverriden
-        "INJECTED_KERNELS_DEPRECATED" -> Right RInjectedKernelsDeprecated
-        "MISSING_TYPE_DEPENDENCY" -> Right RMissingTypeDependency
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Right RNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Right RNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Right RNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Right RRequiredTosAgreement
-        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RResourceInUseByOtherResourceWarning
-        "RESOURCE_NOT_DELETED" -> Right RResourceNotDeleted
-        "SCHEMA_VALIDATION_IGNORED" -> Right RSchemaValidationIgnored
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RSingleInstancePropertyTemplate
-        "UNDECLARED_PROPERTIES" -> Right RUndeclaredProperties
-        "UNREACHABLE" -> Right RUnreachable
+        "CLEANUP_FAILED" -> Right RLWCLCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RLWCLDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RLWCLDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RLWCLDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RLWCLExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RLWCLExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RLWCLFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RLWCLInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RLWCLLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RLWCLMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RLWCLNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RLWCLNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RLWCLNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RLWCLNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RLWCLNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RLWCLNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RLWCLNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RLWCLPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RLWCLRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RLWCLResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RLWCLResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RLWCLSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RLWCLSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RLWCLUndeclaredProperties
+        "UNREACHABLE" -> Right RLWCLUnreachable
         x -> Left ("Unable to parse RouteListWarningCode from: " <> x)
 
 instance ToHttpApiData RouteListWarningCode where
     toQueryParam = \case
-        RCleanupFailed -> "CLEANUP_FAILED"
-        RDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
-        RDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
-        RDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
-        RExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
-        RExternalAPIWarning -> "EXTERNAL_API_WARNING"
-        RFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
-        RInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
-        RMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
-        RNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
-        RNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
-        RNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
-        RNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
-        RNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
-        RNotCriticalError -> "NOT_CRITICAL_ERROR"
-        RNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
-        RRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
-        RResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
-        RResourceNotDeleted -> "RESOURCE_NOT_DELETED"
-        RSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
-        RSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
-        RUndeclaredProperties -> "UNDECLARED_PROPERTIES"
-        RUnreachable -> "UNREACHABLE"
+        RLWCLCleanupFailed -> "CLEANUP_FAILED"
+        RLWCLDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RLWCLDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RLWCLDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RLWCLExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RLWCLExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RLWCLFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RLWCLInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RLWCLLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RLWCLMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RLWCLNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RLWCLNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RLWCLNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RLWCLNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RLWCLNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RLWCLNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RLWCLNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RLWCLPartialSuccess -> "PARTIAL_SUCCESS"
+        RLWCLRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RLWCLResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RLWCLResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RLWCLSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RLWCLSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RLWCLUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RLWCLUnreachable -> "UNREACHABLE"
 
 instance FromJSON RouteListWarningCode where
     parseJSON = parseJSONText "RouteListWarningCode"
@@ -8642,31 +12865,41 @@ instance ToJSON RouteListWarningCode where
 -- AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). -
 -- NEGOTIATION_FAILURE: Handshake failed. - DEPROVISIONING: Resources are
 -- being deallocated for the VPN tunnel. - FAILED: Tunnel creation has
--- failed and the tunnel is not ready to be used.
+-- failed and the tunnel is not ready to be used. - NO_INCOMING_PACKETS: No
+-- incoming packets from peer. - REJECTED: Tunnel configuration was
+-- rejected, can be result of being denied access. - ALLOCATING_RESOURCES:
+-- Cloud VPN is in the process of allocating all required resources. -
+-- STOPPED: Tunnel is stopped due to its Forwarding Rules being deleted for
+-- Classic VPN tunnels or the project is in frozen state. -
+-- PEER_IDENTITY_MISMATCH: Peer identity does not match peer IP, probably
+-- behind NAT. - TS_NARROWING_NOT_ALLOWED: Traffic selector narrowing not
+-- allowed for an HA-VPN tunnel.
 data VPNTunnelStatus
-    = VTSAllocatingResources
+    = AllocatingResources
       -- ^ @ALLOCATING_RESOURCES@
-    | VTSAuthorizationError
+    | AuthorizationError
       -- ^ @AUTHORIZATION_ERROR@
-    | VTSDeprovisioning
+    | Deprovisioning
       -- ^ @DEPROVISIONING@
-    | VTSEstablished
+    | Established
       -- ^ @ESTABLISHED@
-    | VTSFailed
+    | Failed
       -- ^ @FAILED@
-    | VTSFirstHandshake
+    | FirstHandshake
       -- ^ @FIRST_HANDSHAKE@
-    | VTSNegotiationFailure
+    | NegotiationFailure
       -- ^ @NEGOTIATION_FAILURE@
-    | VTSNetworkError
+    | NetworkError
       -- ^ @NETWORK_ERROR@
-    | VTSNoIncomingPackets
+    | NoIncomingPackets
       -- ^ @NO_INCOMING_PACKETS@
-    | VTSProvisioning
+    | Provisioning
       -- ^ @PROVISIONING@
-    | VTSRejected
+    | Rejected
       -- ^ @REJECTED@
-    | VTSWaitingForFullConfig
+    | Stopped
+      -- ^ @STOPPED@
+    | WaitingForFullConfig
       -- ^ @WAITING_FOR_FULL_CONFIG@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -8674,34 +12907,36 @@ instance Hashable VPNTunnelStatus
 
 instance FromHttpApiData VPNTunnelStatus where
     parseQueryParam = \case
-        "ALLOCATING_RESOURCES" -> Right VTSAllocatingResources
-        "AUTHORIZATION_ERROR" -> Right VTSAuthorizationError
-        "DEPROVISIONING" -> Right VTSDeprovisioning
-        "ESTABLISHED" -> Right VTSEstablished
-        "FAILED" -> Right VTSFailed
-        "FIRST_HANDSHAKE" -> Right VTSFirstHandshake
-        "NEGOTIATION_FAILURE" -> Right VTSNegotiationFailure
-        "NETWORK_ERROR" -> Right VTSNetworkError
-        "NO_INCOMING_PACKETS" -> Right VTSNoIncomingPackets
-        "PROVISIONING" -> Right VTSProvisioning
-        "REJECTED" -> Right VTSRejected
-        "WAITING_FOR_FULL_CONFIG" -> Right VTSWaitingForFullConfig
+        "ALLOCATING_RESOURCES" -> Right AllocatingResources
+        "AUTHORIZATION_ERROR" -> Right AuthorizationError
+        "DEPROVISIONING" -> Right Deprovisioning
+        "ESTABLISHED" -> Right Established
+        "FAILED" -> Right Failed
+        "FIRST_HANDSHAKE" -> Right FirstHandshake
+        "NEGOTIATION_FAILURE" -> Right NegotiationFailure
+        "NETWORK_ERROR" -> Right NetworkError
+        "NO_INCOMING_PACKETS" -> Right NoIncomingPackets
+        "PROVISIONING" -> Right Provisioning
+        "REJECTED" -> Right Rejected
+        "STOPPED" -> Right Stopped
+        "WAITING_FOR_FULL_CONFIG" -> Right WaitingForFullConfig
         x -> Left ("Unable to parse VPNTunnelStatus from: " <> x)
 
 instance ToHttpApiData VPNTunnelStatus where
     toQueryParam = \case
-        VTSAllocatingResources -> "ALLOCATING_RESOURCES"
-        VTSAuthorizationError -> "AUTHORIZATION_ERROR"
-        VTSDeprovisioning -> "DEPROVISIONING"
-        VTSEstablished -> "ESTABLISHED"
-        VTSFailed -> "FAILED"
-        VTSFirstHandshake -> "FIRST_HANDSHAKE"
-        VTSNegotiationFailure -> "NEGOTIATION_FAILURE"
-        VTSNetworkError -> "NETWORK_ERROR"
-        VTSNoIncomingPackets -> "NO_INCOMING_PACKETS"
-        VTSProvisioning -> "PROVISIONING"
-        VTSRejected -> "REJECTED"
-        VTSWaitingForFullConfig -> "WAITING_FOR_FULL_CONFIG"
+        AllocatingResources -> "ALLOCATING_RESOURCES"
+        AuthorizationError -> "AUTHORIZATION_ERROR"
+        Deprovisioning -> "DEPROVISIONING"
+        Established -> "ESTABLISHED"
+        Failed -> "FAILED"
+        FirstHandshake -> "FIRST_HANDSHAKE"
+        NegotiationFailure -> "NEGOTIATION_FAILURE"
+        NetworkError -> "NETWORK_ERROR"
+        NoIncomingPackets -> "NO_INCOMING_PACKETS"
+        Provisioning -> "PROVISIONING"
+        Rejected -> "REJECTED"
+        Stopped -> "STOPPED"
+        WaitingForFullConfig -> "WAITING_FOR_FULL_CONFIG"
 
 instance FromJSON VPNTunnelStatus where
     parseJSON = parseJSONText "VPNTunnelStatus"
@@ -8728,6 +12963,8 @@ data SSLCertificateListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SCLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SCLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SCLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SCLWCNextHopAddressNotAssigned
@@ -8744,6 +12981,8 @@ data SSLCertificateListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SCLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SCLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SCLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SCLWCResourceInUseByOtherResourceWarning
@@ -8772,6 +13011,7 @@ instance FromHttpApiData SSLCertificateListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SCLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SCLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SCLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SCLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SCLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SCLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SCLWCNextHopCannotIPForward
@@ -8780,6 +13020,7 @@ instance FromHttpApiData SSLCertificateListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SCLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SCLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SCLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SCLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SCLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SCLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SCLWCResourceNotDeleted
@@ -8799,6 +13040,7 @@ instance ToHttpApiData SSLCertificateListWarningCode where
         SCLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SCLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SCLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SCLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SCLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SCLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SCLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -8807,6 +13049,7 @@ instance ToHttpApiData SSLCertificateListWarningCode where
         SCLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SCLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         SCLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SCLWCPartialSuccess -> "PARTIAL_SUCCESS"
         SCLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SCLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SCLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -8834,19 +13077,19 @@ instance ToJSON SSLCertificateListWarningCode where
 -- Applicable to additional read-write disks, local SSDs, and read-only
 -- disks.
 data DiskInstantiationConfigInstantiateFrom
-    = AttachReadOnly
+    = DICIFAttachReadOnly
       -- ^ @ATTACH_READ_ONLY@
-    | Blank
+    | DICIFBlank
       -- ^ @BLANK@
-    | CustomImage
+    | DICIFCustomImage
       -- ^ @CUSTOM_IMAGE@
-    | Default
+    | DICIFDefault
       -- ^ @DEFAULT@
-    | DoNotInclude
+    | DICIFDoNotInclude
       -- ^ @DO_NOT_INCLUDE@
-    | SourceImage
+    | DICIFSourceImage
       -- ^ @SOURCE_IMAGE@
-    | SourceImageFamily
+    | DICIFSourceImageFamily
       -- ^ @SOURCE_IMAGE_FAMILY@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -8854,24 +13097,24 @@ instance Hashable DiskInstantiationConfigInstantiateFrom
 
 instance FromHttpApiData DiskInstantiationConfigInstantiateFrom where
     parseQueryParam = \case
-        "ATTACH_READ_ONLY" -> Right AttachReadOnly
-        "BLANK" -> Right Blank
-        "CUSTOM_IMAGE" -> Right CustomImage
-        "DEFAULT" -> Right Default
-        "DO_NOT_INCLUDE" -> Right DoNotInclude
-        "SOURCE_IMAGE" -> Right SourceImage
-        "SOURCE_IMAGE_FAMILY" -> Right SourceImageFamily
+        "ATTACH_READ_ONLY" -> Right DICIFAttachReadOnly
+        "BLANK" -> Right DICIFBlank
+        "CUSTOM_IMAGE" -> Right DICIFCustomImage
+        "DEFAULT" -> Right DICIFDefault
+        "DO_NOT_INCLUDE" -> Right DICIFDoNotInclude
+        "SOURCE_IMAGE" -> Right DICIFSourceImage
+        "SOURCE_IMAGE_FAMILY" -> Right DICIFSourceImageFamily
         x -> Left ("Unable to parse DiskInstantiationConfigInstantiateFrom from: " <> x)
 
 instance ToHttpApiData DiskInstantiationConfigInstantiateFrom where
     toQueryParam = \case
-        AttachReadOnly -> "ATTACH_READ_ONLY"
-        Blank -> "BLANK"
-        CustomImage -> "CUSTOM_IMAGE"
-        Default -> "DEFAULT"
-        DoNotInclude -> "DO_NOT_INCLUDE"
-        SourceImage -> "SOURCE_IMAGE"
-        SourceImageFamily -> "SOURCE_IMAGE_FAMILY"
+        DICIFAttachReadOnly -> "ATTACH_READ_ONLY"
+        DICIFBlank -> "BLANK"
+        DICIFCustomImage -> "CUSTOM_IMAGE"
+        DICIFDefault -> "DEFAULT"
+        DICIFDoNotInclude -> "DO_NOT_INCLUDE"
+        DICIFSourceImage -> "SOURCE_IMAGE"
+        DICIFSourceImageFamily -> "SOURCE_IMAGE_FAMILY"
 
 instance FromJSON DiskInstantiationConfigInstantiateFrom where
     parseJSON = parseJSONText "DiskInstantiationConfigInstantiateFrom"
@@ -8879,11 +13122,68 @@ instance FromJSON DiskInstantiationConfigInstantiateFrom where
 instance ToJSON DiskInstantiationConfigInstantiateFrom where
     toJSON = toJSONText
 
--- | Specifies the balancing mode for this backend. For global HTTP(S) or
--- TCP\/SSL load balancing, the default is UTILIZATION. Valid values are
--- UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP\/SSL). For
--- Internal Load Balancing, the default and only supported mode is
--- CONNECTION.
+-- | Indicates the user-supplied redundancy type of this external VPN
+-- gateway.
+data ExternalVPNGatewayRedundancyType
+    = FourIPsRedundancy
+      -- ^ @FOUR_IPS_REDUNDANCY@
+    | SingleIPInternallyRedundant
+      -- ^ @SINGLE_IP_INTERNALLY_REDUNDANT@
+    | TwoIPsRedundancy
+      -- ^ @TWO_IPS_REDUNDANCY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ExternalVPNGatewayRedundancyType
+
+instance FromHttpApiData ExternalVPNGatewayRedundancyType where
+    parseQueryParam = \case
+        "FOUR_IPS_REDUNDANCY" -> Right FourIPsRedundancy
+        "SINGLE_IP_INTERNALLY_REDUNDANT" -> Right SingleIPInternallyRedundant
+        "TWO_IPS_REDUNDANCY" -> Right TwoIPsRedundancy
+        x -> Left ("Unable to parse ExternalVPNGatewayRedundancyType from: " <> x)
+
+instance ToHttpApiData ExternalVPNGatewayRedundancyType where
+    toQueryParam = \case
+        FourIPsRedundancy -> "FOUR_IPS_REDUNDANCY"
+        SingleIPInternallyRedundant -> "SINGLE_IP_INTERNALLY_REDUNDANT"
+        TwoIPsRedundancy -> "TWO_IPS_REDUNDANCY"
+
+instance FromJSON ExternalVPNGatewayRedundancyType where
+    parseJSON = parseJSONText "ExternalVPNGatewayRedundancyType"
+
+instance ToJSON ExternalVPNGatewayRedundancyType where
+    toJSON = toJSONText
+
+-- | [Output Only] The type of the firewall policy.
+data InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType
+    = Hierarchy
+      -- ^ @HIERARCHY@
+    | Unspecified
+      -- ^ @UNSPECIFIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType
+
+instance FromHttpApiData InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    parseQueryParam = \case
+        "HIERARCHY" -> Right Hierarchy
+        "UNSPECIFIED" -> Right Unspecified
+        x -> Left ("Unable to parse InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType from: " <> x)
+
+instance ToHttpApiData InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    toQueryParam = \case
+        Hierarchy -> "HIERARCHY"
+        Unspecified -> "UNSPECIFIED"
+
+instance FromJSON InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    parseJSON = parseJSONText "InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType"
+
+instance ToJSON InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicyType where
+    toJSON = toJSONText
+
+-- | Specifies how to determine whether the backend of a load balancer can
+-- handle additional traffic or is fully loaded. For usage guidelines, see
+-- Connection balancing mode.
 data BackendBalancingMode
     = Connection
       -- ^ @CONNECTION@
@@ -8938,6 +13238,126 @@ instance ToJSON RouterBGPAdvertisedGroupsItem where
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ResourcePoliciesScopedListWarningCode
+    = RPSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RPSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RPSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RPSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RPSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RPSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RPSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RPSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RPSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RPSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RPSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RPSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RPSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RPSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RPSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RPSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RPSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RPSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RPSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RPSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RPSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RPSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RPSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RPSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RPSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePoliciesScopedListWarningCode
+
+instance FromHttpApiData ResourcePoliciesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RPSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RPSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RPSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RPSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RPSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RPSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RPSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RPSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RPSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RPSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RPSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RPSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RPSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RPSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RPSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RPSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RPSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RPSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RPSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RPSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RPSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RPSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RPSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RPSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right RPSLWCUnreachable
+        x -> Left ("Unable to parse ResourcePoliciesScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData ResourcePoliciesScopedListWarningCode where
+    toQueryParam = \case
+        RPSLWCCleanupFailed -> "CLEANUP_FAILED"
+        RPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RPSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RPSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RPSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RPSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RPSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RPSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RPSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RPSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RPSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        RPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RPSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RPSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RPSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RPSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RPSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ResourcePoliciesScopedListWarningCode where
+    parseJSON = parseJSONText "ResourcePoliciesScopedListWarningCode"
+
+instance ToJSON ResourcePoliciesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data NetworkEndpointGroupListWarningCode
     = NEGLWCCleanupFailed
       -- ^ @CLEANUP_FAILED@
@@ -8955,6 +13375,8 @@ data NetworkEndpointGroupListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NEGLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NEGLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NEGLWCNextHopAddressNotAssigned
@@ -8971,6 +13393,8 @@ data NetworkEndpointGroupListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NEGLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NEGLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NEGLWCResourceInUseByOtherResourceWarning
@@ -8999,6 +13423,7 @@ instance FromHttpApiData NetworkEndpointGroupListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NEGLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NEGLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NEGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NEGLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NEGLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGLWCNextHopCannotIPForward
@@ -9007,6 +13432,7 @@ instance FromHttpApiData NetworkEndpointGroupListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NEGLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NEGLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NEGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NEGLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NEGLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NEGLWCResourceNotDeleted
@@ -9026,6 +13452,7 @@ instance ToHttpApiData NetworkEndpointGroupListWarningCode where
         NEGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NEGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NEGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NEGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NEGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NEGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9034,6 +13461,7 @@ instance ToHttpApiData NetworkEndpointGroupListWarningCode where
         NEGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NEGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NEGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NEGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NEGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NEGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9049,9 +13477,9 @@ instance ToJSON NetworkEndpointGroupListWarningCode where
     toJSON = toJSONText
 
 -- | The network-wide routing mode to use. If set to REGIONAL, this
--- network\'s cloud routers will only advertise routes with subnets of this
+-- network\'s Cloud Routers will only advertise routes with subnets of this
 -- network in the same region as the router. If set to GLOBAL, this
--- network\'s cloud routers will advertise routes with all subnets of this
+-- network\'s Cloud Routers will advertise routes with all subnets of this
 -- network, across regions.
 data NetworkRoutingConfigRoutingMode
     = NRCRMGlobal
@@ -9098,6 +13526,8 @@ data SubnetworkListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SNextHopAddressNotAssigned
@@ -9114,6 +13544,8 @@ data SubnetworkListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SResourceInUseByOtherResourceWarning
@@ -9142,6 +13574,7 @@ instance FromHttpApiData SubnetworkListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SNextHopCannotIPForward
@@ -9150,6 +13583,7 @@ instance FromHttpApiData SubnetworkListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SResourceNotDeleted
@@ -9169,6 +13603,7 @@ instance ToHttpApiData SubnetworkListWarningCode where
         SExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9177,6 +13612,7 @@ instance ToHttpApiData SubnetworkListWarningCode where
         SNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SNotCriticalError -> "NOT_CRITICAL_ERROR"
         SNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SPartialSuccess -> "PARTIAL_SUCCESS"
         SRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9247,6 +13683,8 @@ data InterconnectListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ILargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | INextHopAddressNotAssigned
@@ -9263,6 +13701,8 @@ data InterconnectListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | INoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IResourceInUseByOtherResourceWarning
@@ -9291,6 +13731,7 @@ instance FromHttpApiData InterconnectListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ILargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right INextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right INextHopCannotIPForward
@@ -9299,6 +13740,7 @@ instance FromHttpApiData InterconnectListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right INextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right INotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right INoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IResourceNotDeleted
@@ -9318,6 +13760,7 @@ instance ToHttpApiData InterconnectListWarningCode where
         IExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ILargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         INextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         INextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9326,6 +13769,7 @@ instance ToHttpApiData InterconnectListWarningCode where
         INextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         INotCriticalError -> "NOT_CRITICAL_ERROR"
         INoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IPartialSuccess -> "PARTIAL_SUCCESS"
         IRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9392,6 +13836,8 @@ data HTTPHealthCheckListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | HTTPHCLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | HTTPHCLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | HTTPHCLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | HTTPHCLWCNextHopAddressNotAssigned
@@ -9408,6 +13854,8 @@ data HTTPHealthCheckListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | HTTPHCLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | HTTPHCLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | HTTPHCLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | HTTPHCLWCResourceInUseByOtherResourceWarning
@@ -9436,6 +13884,7 @@ instance FromHttpApiData HTTPHealthCheckListWarningCode where
         "EXTERNAL_API_WARNING" -> Right HTTPHCLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right HTTPHCLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right HTTPHCLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right HTTPHCLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right HTTPHCLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right HTTPHCLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right HTTPHCLWCNextHopCannotIPForward
@@ -9444,6 +13893,7 @@ instance FromHttpApiData HTTPHealthCheckListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right HTTPHCLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right HTTPHCLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right HTTPHCLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right HTTPHCLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right HTTPHCLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right HTTPHCLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right HTTPHCLWCResourceNotDeleted
@@ -9463,6 +13913,7 @@ instance ToHttpApiData HTTPHealthCheckListWarningCode where
         HTTPHCLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         HTTPHCLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         HTTPHCLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        HTTPHCLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         HTTPHCLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         HTTPHCLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         HTTPHCLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9471,6 +13922,7 @@ instance ToHttpApiData HTTPHealthCheckListWarningCode where
         HTTPHCLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         HTTPHCLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         HTTPHCLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        HTTPHCLWCPartialSuccess -> "PARTIAL_SUCCESS"
         HTTPHCLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         HTTPHCLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         HTTPHCLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9504,6 +13956,8 @@ data SSLPoliciesListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SPLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SPLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SPLWCNextHopAddressNotAssigned
@@ -9520,6 +13974,8 @@ data SSLPoliciesListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SPLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SPLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SPLWCResourceInUseByOtherResourceWarning
@@ -9548,6 +14004,7 @@ instance FromHttpApiData SSLPoliciesListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SPLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SPLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SPLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SPLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SPLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SPLWCNextHopCannotIPForward
@@ -9556,6 +14013,7 @@ instance FromHttpApiData SSLPoliciesListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SPLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SPLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SPLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SPLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SPLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SPLWCResourceNotDeleted
@@ -9575,6 +14033,7 @@ instance ToHttpApiData SSLPoliciesListWarningCode where
         SPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9583,6 +14042,7 @@ instance ToHttpApiData SSLPoliciesListWarningCode where
         SPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         SPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SPLWCPartialSuccess -> "PARTIAL_SUCCESS"
         SPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9597,8 +14057,58 @@ instance FromJSON SSLPoliciesListWarningCode where
 instance ToJSON SSLPoliciesListWarningCode where
     toJSON = toJSONText
 
+-- | Specifies the cache setting for all responses from this backend. The
+-- possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid
+-- caching headers to cache content. Responses without these headers will
+-- not be cached at Google\'s edge, and will require a full trip to the
+-- origin on every request, potentially impacting performance and
+-- increasing load on the origin server. FORCE_CACHE_ALL Cache all content,
+-- ignoring any \"private\", \"no-store\" or \"no-cache\" directives in
+-- Cache-Control response headers. Warning: this may result in Cloud CDN
+-- caching private, per-user (user identifiable) content. CACHE_ALL_STATIC
+-- Automatically cache static content, including common image formats,
+-- media (video and audio), and web assets (JavaScript and CSS). Requests
+-- and responses that are marked as uncacheable, as well as dynamic content
+-- (including HTML), will not be cached.
+data BackendServiceCdnPolicyCacheMode
+    = BSCPCMCacheAllStatic
+      -- ^ @CACHE_ALL_STATIC@
+    | BSCPCMForceCacheAll
+      -- ^ @FORCE_CACHE_ALL@
+    | BSCPCMInvalidCacheMode
+      -- ^ @INVALID_CACHE_MODE@
+    | BSCPCMUseOriginHeaders
+      -- ^ @USE_ORIGIN_HEADERS@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendServiceCdnPolicyCacheMode
+
+instance FromHttpApiData BackendServiceCdnPolicyCacheMode where
+    parseQueryParam = \case
+        "CACHE_ALL_STATIC" -> Right BSCPCMCacheAllStatic
+        "FORCE_CACHE_ALL" -> Right BSCPCMForceCacheAll
+        "INVALID_CACHE_MODE" -> Right BSCPCMInvalidCacheMode
+        "USE_ORIGIN_HEADERS" -> Right BSCPCMUseOriginHeaders
+        x -> Left ("Unable to parse BackendServiceCdnPolicyCacheMode from: " <> x)
+
+instance ToHttpApiData BackendServiceCdnPolicyCacheMode where
+    toQueryParam = \case
+        BSCPCMCacheAllStatic -> "CACHE_ALL_STATIC"
+        BSCPCMForceCacheAll -> "FORCE_CACHE_ALL"
+        BSCPCMInvalidCacheMode -> "INVALID_CACHE_MODE"
+        BSCPCMUseOriginHeaders -> "USE_ORIGIN_HEADERS"
+
+instance FromJSON BackendServiceCdnPolicyCacheMode where
+    parseJSON = parseJSONText "BackendServiceCdnPolicyCacheMode"
+
+instance ToJSON BackendServiceCdnPolicyCacheMode where
+    toJSON = toJSONText
+
 -- | [Output Only] The current status of whether or not this interconnect
--- attachment is functional.
+-- attachment is functional, which can take one of the following values: -
+-- OS_ACTIVE: The attachment has been turned up and is ready to use. -
+-- OS_UNPROVISIONED: The attachment is not ready to use yet, because turnup
+-- is not complete.
 data InterconnectAttachmentOperationalStatus
     = OSActive
       -- ^ @OS_ACTIVE@
@@ -9644,6 +14154,8 @@ data TargetTCPProxyListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TTPLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TTPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TTPLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TTPLWCNextHopAddressNotAssigned
@@ -9660,6 +14172,8 @@ data TargetTCPProxyListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TTPLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TTPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TTPLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TTPLWCResourceInUseByOtherResourceWarning
@@ -9688,6 +14202,7 @@ instance FromHttpApiData TargetTCPProxyListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TTPLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TTPLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TTPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TTPLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TTPLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TTPLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TTPLWCNextHopCannotIPForward
@@ -9696,6 +14211,7 @@ instance FromHttpApiData TargetTCPProxyListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TTPLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TTPLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TTPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TTPLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TTPLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TTPLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TTPLWCResourceNotDeleted
@@ -9715,6 +14231,7 @@ instance ToHttpApiData TargetTCPProxyListWarningCode where
         TTPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TTPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TTPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TTPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TTPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TTPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TTPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9723,6 +14240,7 @@ instance ToHttpApiData TargetTCPProxyListWarningCode where
         TTPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TTPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TTPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TTPLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TTPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TTPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TTPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9735,6 +14253,173 @@ instance FromJSON TargetTCPProxyListWarningCode where
     parseJSON = parseJSONText "TargetTCPProxyListWarningCode"
 
 instance ToJSON TargetTCPProxyListWarningCode where
+    toJSON = toJSONText
+
+-- | Can only be specified if VPC flow logging for this subnetwork is
+-- enabled. Toggles the aggregation interval for collecting flow logs.
+-- Increasing the interval time will reduce the amount of generated flow
+-- logs for long lasting connections. Default is an interval of 5 seconds
+-- per connection.
+data SubnetworkLogConfigAggregationInterval
+    = Interval10Min
+      -- ^ @INTERVAL_10_MIN@
+    | Interval15Min
+      -- ^ @INTERVAL_15_MIN@
+    | Interval1Min
+      -- ^ @INTERVAL_1_MIN@
+    | Interval30Sec
+      -- ^ @INTERVAL_30_SEC@
+    | Interval5Min
+      -- ^ @INTERVAL_5_MIN@
+    | Interval5Sec
+      -- ^ @INTERVAL_5_SEC@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkLogConfigAggregationInterval
+
+instance FromHttpApiData SubnetworkLogConfigAggregationInterval where
+    parseQueryParam = \case
+        "INTERVAL_10_MIN" -> Right Interval10Min
+        "INTERVAL_15_MIN" -> Right Interval15Min
+        "INTERVAL_1_MIN" -> Right Interval1Min
+        "INTERVAL_30_SEC" -> Right Interval30Sec
+        "INTERVAL_5_MIN" -> Right Interval5Min
+        "INTERVAL_5_SEC" -> Right Interval5Sec
+        x -> Left ("Unable to parse SubnetworkLogConfigAggregationInterval from: " <> x)
+
+instance ToHttpApiData SubnetworkLogConfigAggregationInterval where
+    toQueryParam = \case
+        Interval10Min -> "INTERVAL_10_MIN"
+        Interval15Min -> "INTERVAL_15_MIN"
+        Interval1Min -> "INTERVAL_1_MIN"
+        Interval30Sec -> "INTERVAL_30_SEC"
+        Interval5Min -> "INTERVAL_5_MIN"
+        Interval5Sec -> "INTERVAL_5_SEC"
+
+instance FromJSON SubnetworkLogConfigAggregationInterval where
+    parseJSON = parseJSONText "SubnetworkLogConfigAggregationInterval"
+
+instance ToJSON SubnetworkLogConfigAggregationInterval where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PublicDelegatedPrefixesScopedListWarningCode
+    = PDPSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PDPSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PDPSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PDPSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PDPSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PDPSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PDPSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PDPSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PDPSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PDPSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PDPSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PDPSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PDPSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PDPSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PDPSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PDPSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PDPSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PDPSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PDPSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PDPSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PDPSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PDPSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PDPSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PDPSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PDPSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicDelegatedPrefixesScopedListWarningCode
+
+instance FromHttpApiData PublicDelegatedPrefixesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PDPSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PDPSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PDPSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PDPSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PDPSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PDPSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PDPSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PDPSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PDPSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PDPSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PDPSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PDPSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PDPSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PDPSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PDPSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PDPSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PDPSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PDPSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PDPSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PDPSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PDPSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PDPSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PDPSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PDPSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right PDPSLWCUnreachable
+        x -> Left ("Unable to parse PublicDelegatedPrefixesScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData PublicDelegatedPrefixesScopedListWarningCode where
+    toQueryParam = \case
+        PDPSLWCCleanupFailed -> "CLEANUP_FAILED"
+        PDPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PDPSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PDPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PDPSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PDPSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PDPSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PDPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PDPSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PDPSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PDPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PDPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PDPSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PDPSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PDPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PDPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PDPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PDPSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PDPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PDPSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PDPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PDPSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PDPSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PDPSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PDPSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PublicDelegatedPrefixesScopedListWarningCode where
+    parseJSON = parseJSONText "PublicDelegatedPrefixesScopedListWarningCode"
+
+instance ToJSON PublicDelegatedPrefixesScopedListWarningCode where
     toJSON = toJSONText
 
 -- | The log type that this config enables.
@@ -9772,10 +14457,17 @@ instance FromJSON AuditLogConfigLogType where
 instance ToJSON AuditLogConfigLogType where
     toJSON = toJSONText
 
--- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
--- ESP, AH, SCTP or ICMP. When the load balancing scheme is INTERNAL, only
--- TCP and UDP are valid. When the load balancing scheme is
--- INTERNAL_SELF_MANAGED, only TCPis valid.
+-- | The IP protocol to which this rule applies. For protocol forwarding,
+-- valid options are TCP, UDP, ESP, AH, SCTP, ICMP and L3_DEFAULT. The
+-- valid IP protocols are different for different load balancing products:
+-- - Internal TCP\/UDP Load Balancing: The load balancing scheme is
+-- INTERNAL, and one of TCP, UDP or L3_DEFAULT is valid. - Traffic
+-- Director: The load balancing scheme is INTERNAL_SELF_MANAGED, and only
+-- TCP is valid. - Internal HTTP(S) Load Balancing: The load balancing
+-- scheme is INTERNAL_MANAGED, and only TCP is valid. - HTTP(S), SSL Proxy,
+-- and TCP Proxy Load Balancing: The load balancing scheme is EXTERNAL and
+-- only TCP is valid. - Network Load Balancing: The load balancing scheme
+-- is EXTERNAL, and one of TCP, UDP or L3_DEFAULT is valid.
 data ForwardingRuleIPProtocol
     = FRIPAH
       -- ^ @AH@
@@ -9819,7 +14511,7 @@ instance ToJSON ForwardingRuleIPProtocol where
     toJSON = toJSONText
 
 -- | Optional query parameter for showing the health status of each network
--- endpoint. Valid options are SKIP or SHOW. If you don\'t specifiy this
+-- endpoint. Valid options are SKIP or SHOW. If you don\'t specify this
 -- parameter, the health status of network endpoints will not be provided.
 data NetworkEndpointGroupsListEndpointsRequestHealthStatus
     = Show
@@ -9847,6 +14539,32 @@ instance FromJSON NetworkEndpointGroupsListEndpointsRequestHealthStatus where
 instance ToJSON NetworkEndpointGroupsListEndpointsRequestHealthStatus where
     toJSON = toJSONText
 
+data SecurityPolicyAdvancedOptionsConfigJSONParsing
+    = SPAOCJPDisabled
+      -- ^ @DISABLED@
+    | SPAOCJPStandard
+      -- ^ @STANDARD@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SecurityPolicyAdvancedOptionsConfigJSONParsing
+
+instance FromHttpApiData SecurityPolicyAdvancedOptionsConfigJSONParsing where
+    parseQueryParam = \case
+        "DISABLED" -> Right SPAOCJPDisabled
+        "STANDARD" -> Right SPAOCJPStandard
+        x -> Left ("Unable to parse SecurityPolicyAdvancedOptionsConfigJSONParsing from: " <> x)
+
+instance ToHttpApiData SecurityPolicyAdvancedOptionsConfigJSONParsing where
+    toQueryParam = \case
+        SPAOCJPDisabled -> "DISABLED"
+        SPAOCJPStandard -> "STANDARD"
+
+instance FromJSON SecurityPolicyAdvancedOptionsConfigJSONParsing where
+    parseJSON = parseJSONText "SecurityPolicyAdvancedOptionsConfigJSONParsing"
+
+instance ToJSON SecurityPolicyAdvancedOptionsConfigJSONParsing where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data ImageListWarningCode
@@ -9866,6 +14584,8 @@ data ImageListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IMAInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IMALargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IMAMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IMANextHopAddressNotAssigned
@@ -9882,6 +14602,8 @@ data ImageListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IMANoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IMAPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IMARequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IMAResourceInUseByOtherResourceWarning
@@ -9910,6 +14632,7 @@ instance FromHttpApiData ImageListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IMAExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IMAFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IMAInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IMALargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IMAMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IMANextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IMANextHopCannotIPForward
@@ -9918,6 +14641,7 @@ instance FromHttpApiData ImageListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IMANextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IMANotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IMANoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IMAPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IMARequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IMAResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IMAResourceNotDeleted
@@ -9937,6 +14661,7 @@ instance ToHttpApiData ImageListWarningCode where
         IMAExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IMAFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IMAInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IMALargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IMAMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IMANextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IMANextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -9945,6 +14670,7 @@ instance ToHttpApiData ImageListWarningCode where
         IMANextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IMANotCriticalError -> "NOT_CRITICAL_ERROR"
         IMANoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IMAPartialSuccess -> "PARTIAL_SUCCESS"
         IMARequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IMAResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IMAResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -9996,6 +14722,126 @@ instance ToJSON AddressStatus where
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ResourcePolicyAggregatedListWarningCode
+    = RPALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RPALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RPALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RPALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RPALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RPALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RPALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RPALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RPALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RPALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RPALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RPALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RPALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RPALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RPALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RPALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RPALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RPALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RPALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RPALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RPALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RPALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RPALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RPALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RPALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePolicyAggregatedListWarningCode
+
+instance FromHttpApiData ResourcePolicyAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RPALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RPALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RPALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RPALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RPALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RPALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RPALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RPALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RPALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RPALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RPALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RPALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RPALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RPALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RPALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RPALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RPALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RPALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RPALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RPALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RPALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RPALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RPALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RPALWCUndeclaredProperties
+        "UNREACHABLE" -> Right RPALWCUnreachable
+        x -> Left ("Unable to parse ResourcePolicyAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData ResourcePolicyAggregatedListWarningCode where
+    toQueryParam = \case
+        RPALWCCleanupFailed -> "CLEANUP_FAILED"
+        RPALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RPALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RPALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RPALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RPALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RPALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RPALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RPALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RPALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RPALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RPALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RPALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RPALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RPALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RPALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RPALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RPALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        RPALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RPALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RPALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RPALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RPALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RPALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RPALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON ResourcePolicyAggregatedListWarningCode where
+    parseJSON = parseJSONText "ResourcePolicyAggregatedListWarningCode"
+
+instance ToJSON ResourcePolicyAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data AcceleratorTypeListWarningCode
     = ATLWCCleanupFailed
       -- ^ @CLEANUP_FAILED@
@@ -10013,6 +14859,8 @@ data AcceleratorTypeListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ATLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ATLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ATLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ATLWCNextHopAddressNotAssigned
@@ -10029,6 +14877,8 @@ data AcceleratorTypeListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ATLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ATLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ATLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ATLWCResourceInUseByOtherResourceWarning
@@ -10057,6 +14907,7 @@ instance FromHttpApiData AcceleratorTypeListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ATLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ATLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ATLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ATLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ATLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ATLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ATLWCNextHopCannotIPForward
@@ -10065,6 +14916,7 @@ instance FromHttpApiData AcceleratorTypeListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ATLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ATLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ATLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ATLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ATLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ATLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ATLWCResourceNotDeleted
@@ -10084,6 +14936,7 @@ instance ToHttpApiData AcceleratorTypeListWarningCode where
         ATLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ATLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ATLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ATLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ATLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ATLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ATLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -10092,6 +14945,7 @@ instance ToHttpApiData AcceleratorTypeListWarningCode where
         ATLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ATLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ATLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ATLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ATLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ATLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ATLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -10106,13 +14960,14 @@ instance FromJSON AcceleratorTypeListWarningCode where
 instance ToJSON AcceleratorTypeListWarningCode where
     toJSON = toJSONText
 
--- | This signifies the networking tier used for configuring this Address and
--- can only take the following values: PREMIUM, STANDARD. Global forwarding
--- rules can only be Premium Tier. Regional forwarding rules can be either
--- Premium or Standard Tier. Standard Tier addresses applied to regional
--- forwarding rules can be used with any external load balancer. Regional
--- forwarding rules in Premium Tier can only be used with a Network load
--- balancer. If this field is not specified, it is assumed to be PREMIUM.
+-- | This signifies the networking tier used for configuring this address and
+-- can only take the following values: PREMIUM or STANDARD. Global
+-- forwarding rules can only be Premium Tier. Regional forwarding rules can
+-- be either Premium or Standard Tier. Standard Tier addresses applied to
+-- regional forwarding rules can be used with any external load balancer.
+-- Regional forwarding rules in Premium Tier can only be used with a
+-- network load balancer. If this field is not specified, it is assumed to
+-- be PREMIUM.
 data AddressNetworkTier
     = ANTPremium
       -- ^ @PREMIUM@
@@ -10158,6 +15013,8 @@ data URLMapListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | UMLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | UMLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | UMLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | UMLWCNextHopAddressNotAssigned
@@ -10174,6 +15031,8 @@ data URLMapListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | UMLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | UMLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | UMLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | UMLWCResourceInUseByOtherResourceWarning
@@ -10202,6 +15061,7 @@ instance FromHttpApiData URLMapListWarningCode where
         "EXTERNAL_API_WARNING" -> Right UMLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right UMLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right UMLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right UMLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right UMLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right UMLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right UMLWCNextHopCannotIPForward
@@ -10210,6 +15070,7 @@ instance FromHttpApiData URLMapListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right UMLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right UMLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right UMLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right UMLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right UMLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right UMLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right UMLWCResourceNotDeleted
@@ -10229,6 +15090,7 @@ instance ToHttpApiData URLMapListWarningCode where
         UMLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         UMLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         UMLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        UMLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         UMLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         UMLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         UMLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -10237,6 +15099,7 @@ instance ToHttpApiData URLMapListWarningCode where
         UMLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         UMLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         UMLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        UMLWCPartialSuccess -> "PARTIAL_SUCCESS"
         UMLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         UMLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         UMLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -10280,7 +15143,8 @@ instance FromJSON InstanceGroupsListInstancesRequestInstanceState where
 instance ToJSON InstanceGroupsListInstancesRequestInstanceState where
     toJSON = toJSONText
 
--- | Defines the operation of node selection.
+-- | Defines the operation of node selection. Valid operators are IN for
+-- affinity and NOT_IN for anti-affinity.
 data SchedulingNodeAffinityOperator
     = SNAOIN
       -- ^ @IN@
@@ -10359,6 +15223,8 @@ data NodeGroupListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NGLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NGLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NGLWCNextHopAddressNotAssigned
@@ -10375,6 +15241,8 @@ data NodeGroupListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NGLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NGLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NGLWCResourceInUseByOtherResourceWarning
@@ -10403,6 +15271,7 @@ instance FromHttpApiData NodeGroupListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NGLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NGLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NGLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NGLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NGLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NGLWCNextHopCannotIPForward
@@ -10411,6 +15280,7 @@ instance FromHttpApiData NodeGroupListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NGLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NGLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NGLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NGLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NGLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NGLWCResourceNotDeleted
@@ -10430,6 +15300,7 @@ instance ToHttpApiData NodeGroupListWarningCode where
         NGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -10438,6 +15309,7 @@ instance ToHttpApiData NodeGroupListWarningCode where
         NGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NGLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -10452,10 +15324,136 @@ instance FromJSON NodeGroupListWarningCode where
 instance ToJSON NodeGroupListWarningCode where
     toJSON = toJSONText
 
--- | Specify the Nat option. If this field contains
--- ALL_SUBNETWORKS_ALL_IP_RANGES or ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES,
--- then there should not be any other Router.Nat section in any Router for
--- this network in this region.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PublicDelegatedPrefixAggregatedListWarningCode
+    = PDPALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PDPALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PDPALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PDPALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PDPALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PDPALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PDPALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PDPALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PDPALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PDPALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PDPALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PDPALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PDPALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PDPALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PDPALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PDPALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PDPALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PDPALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PDPALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PDPALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PDPALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PDPALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PDPALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PDPALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PDPALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicDelegatedPrefixAggregatedListWarningCode
+
+instance FromHttpApiData PublicDelegatedPrefixAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PDPALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PDPALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PDPALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PDPALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PDPALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PDPALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PDPALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PDPALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PDPALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PDPALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PDPALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PDPALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PDPALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PDPALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PDPALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PDPALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PDPALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PDPALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PDPALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PDPALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PDPALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PDPALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PDPALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PDPALWCUndeclaredProperties
+        "UNREACHABLE" -> Right PDPALWCUnreachable
+        x -> Left ("Unable to parse PublicDelegatedPrefixAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData PublicDelegatedPrefixAggregatedListWarningCode where
+    toQueryParam = \case
+        PDPALWCCleanupFailed -> "CLEANUP_FAILED"
+        PDPALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PDPALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PDPALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PDPALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PDPALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PDPALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PDPALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PDPALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PDPALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PDPALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PDPALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PDPALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PDPALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PDPALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PDPALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PDPALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PDPALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PDPALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PDPALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PDPALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PDPALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PDPALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PDPALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PDPALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PublicDelegatedPrefixAggregatedListWarningCode where
+    parseJSON = parseJSONText "PublicDelegatedPrefixAggregatedListWarningCode"
+
+instance ToJSON PublicDelegatedPrefixAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | Specify the Nat option, which can take one of the following values: -
+-- ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork
+-- are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the
+-- primary IP ranges in every Subnetwork are allowed to Nat. -
+-- LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified
+-- in the field subnetwork below) The default is
+-- SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field
+-- contains ALL_SUBNETWORKS_ALL_IP_RANGES or
+-- ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, then there should not be any
+-- other Router.Nat section in any Router for this network in this region.
 data RouterNATSourceSubnetworkIPRangesToNAT
     = AllSubnetworksAllIPRanges
       -- ^ @ALL_SUBNETWORKS_ALL_IP_RANGES@
@@ -10546,12 +15544,53 @@ instance FromJSON AttachedDiskInterface where
 instance ToJSON AttachedDiskInterface where
     toJSON = toJSONText
 
+-- | [Output Only] The current detailed instance health state.
+data ManagedInstanceInstanceHealthDetailedHealthState
+    = MIIHDHSDraining
+      -- ^ @DRAINING@
+    | MIIHDHSHealthy
+      -- ^ @HEALTHY@
+    | MIIHDHSTimeout
+      -- ^ @TIMEOUT@
+    | MIIHDHSUnhealthy
+      -- ^ @UNHEALTHY@
+    | MIIHDHSUnknown
+      -- ^ @UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ManagedInstanceInstanceHealthDetailedHealthState
+
+instance FromHttpApiData ManagedInstanceInstanceHealthDetailedHealthState where
+    parseQueryParam = \case
+        "DRAINING" -> Right MIIHDHSDraining
+        "HEALTHY" -> Right MIIHDHSHealthy
+        "TIMEOUT" -> Right MIIHDHSTimeout
+        "UNHEALTHY" -> Right MIIHDHSUnhealthy
+        "UNKNOWN" -> Right MIIHDHSUnknown
+        x -> Left ("Unable to parse ManagedInstanceInstanceHealthDetailedHealthState from: " <> x)
+
+instance ToHttpApiData ManagedInstanceInstanceHealthDetailedHealthState where
+    toQueryParam = \case
+        MIIHDHSDraining -> "DRAINING"
+        MIIHDHSHealthy -> "HEALTHY"
+        MIIHDHSTimeout -> "TIMEOUT"
+        MIIHDHSUnhealthy -> "UNHEALTHY"
+        MIIHDHSUnknown -> "UNKNOWN"
+
+instance FromJSON ManagedInstanceInstanceHealthDetailedHealthState where
+    parseJSON = parseJSONText "ManagedInstanceInstanceHealthDetailedHealthState"
+
+instance ToJSON ManagedInstanceInstanceHealthDetailedHealthState where
+    toJSON = toJSONText
+
 -- | Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or
 -- HTTP2. If not specified, the default is TCP. Exactly one of the
 -- protocol-specific health check field must be specified, which must match
 -- type field.
 data HealthCheckType
-    = HCTHTTP
+    = HCTGrpc
+      -- ^ @GRPC@
+    | HCTHTTP
       -- ^ @HTTP@
     | HCTHTTP2
       -- ^ @HTTP2@
@@ -10569,6 +15608,7 @@ instance Hashable HealthCheckType
 
 instance FromHttpApiData HealthCheckType where
     parseQueryParam = \case
+        "GRPC" -> Right HCTGrpc
         "HTTP" -> Right HCTHTTP
         "HTTP2" -> Right HCTHTTP2
         "HTTPS" -> Right HCTHTTPS
@@ -10579,6 +15619,7 @@ instance FromHttpApiData HealthCheckType where
 
 instance ToHttpApiData HealthCheckType where
     toQueryParam = \case
+        HCTGrpc -> "GRPC"
         HCTHTTP -> "HTTP"
         HCTHTTP2 -> "HTTP2"
         HCTHTTPS -> "HTTPS"
@@ -10611,6 +15652,8 @@ data RegionInstanceGroupsListInstancesWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RIGLIWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RIGLIWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RIGLIWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RIGLIWCNextHopAddressNotAssigned
@@ -10627,6 +15670,8 @@ data RegionInstanceGroupsListInstancesWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RIGLIWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RIGLIWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RIGLIWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RIGLIWCResourceInUseByOtherResourceWarning
@@ -10655,6 +15700,7 @@ instance FromHttpApiData RegionInstanceGroupsListInstancesWarningCode where
         "EXTERNAL_API_WARNING" -> Right RIGLIWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RIGLIWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RIGLIWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RIGLIWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RIGLIWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RIGLIWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RIGLIWCNextHopCannotIPForward
@@ -10663,6 +15709,7 @@ instance FromHttpApiData RegionInstanceGroupsListInstancesWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RIGLIWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RIGLIWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RIGLIWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RIGLIWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RIGLIWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RIGLIWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RIGLIWCResourceNotDeleted
@@ -10682,6 +15729,7 @@ instance ToHttpApiData RegionInstanceGroupsListInstancesWarningCode where
         RIGLIWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RIGLIWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RIGLIWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RIGLIWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RIGLIWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RIGLIWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RIGLIWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -10690,6 +15738,7 @@ instance ToHttpApiData RegionInstanceGroupsListInstancesWarningCode where
         RIGLIWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RIGLIWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         RIGLIWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RIGLIWCPartialSuccess -> "PARTIAL_SUCCESS"
         RIGLIWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RIGLIWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RIGLIWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -10750,6 +15799,8 @@ data NetworkEndpointGroupsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NEGSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NEGSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NEGSLWCNextHopAddressNotAssigned
@@ -10766,6 +15817,8 @@ data NetworkEndpointGroupsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NEGSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NEGSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NEGSLWCResourceInUseByOtherResourceWarning
@@ -10794,6 +15847,7 @@ instance FromHttpApiData NetworkEndpointGroupsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NEGSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NEGSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NEGSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NEGSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NEGSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGSLWCNextHopCannotIPForward
@@ -10802,6 +15856,7 @@ instance FromHttpApiData NetworkEndpointGroupsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NEGSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NEGSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NEGSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NEGSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NEGSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NEGSLWCResourceNotDeleted
@@ -10821,6 +15876,7 @@ instance ToHttpApiData NetworkEndpointGroupsScopedListWarningCode where
         NEGSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NEGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NEGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NEGSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NEGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NEGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -10829,6 +15885,7 @@ instance ToHttpApiData NetworkEndpointGroupsScopedListWarningCode where
         NEGSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NEGSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NEGSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NEGSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NEGSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NEGSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -10862,6 +15919,8 @@ data SubnetworksScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SSLWCNextHopAddressNotAssigned
@@ -10878,6 +15937,8 @@ data SubnetworksScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SSLWCResourceInUseByOtherResourceWarning
@@ -10906,6 +15967,7 @@ instance FromHttpApiData SubnetworksScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SSLWCNextHopCannotIPForward
@@ -10914,6 +15976,7 @@ instance FromHttpApiData SubnetworksScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SSLWCResourceNotDeleted
@@ -10933,6 +15996,7 @@ instance ToHttpApiData SubnetworksScopedListWarningCode where
         SSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -10941,6 +16005,7 @@ instance ToHttpApiData SubnetworksScopedListWarningCode where
         SSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         SSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         SSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -10974,6 +16039,8 @@ data NetworkEndpointGroupsListNetworkEndpointsWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NEGLNEWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NEGLNEWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NEGLNEWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NEGLNEWCNextHopAddressNotAssigned
@@ -10990,6 +16057,8 @@ data NetworkEndpointGroupsListNetworkEndpointsWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NEGLNEWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NEGLNEWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NEGLNEWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NEGLNEWCResourceInUseByOtherResourceWarning
@@ -11018,6 +16087,7 @@ instance FromHttpApiData NetworkEndpointGroupsListNetworkEndpointsWarningCode wh
         "EXTERNAL_API_WARNING" -> Right NEGLNEWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NEGLNEWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NEGLNEWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NEGLNEWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NEGLNEWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NEGLNEWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NEGLNEWCNextHopCannotIPForward
@@ -11026,6 +16096,7 @@ instance FromHttpApiData NetworkEndpointGroupsListNetworkEndpointsWarningCode wh
         "NEXT_HOP_NOT_RUNNING" -> Right NEGLNEWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NEGLNEWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NEGLNEWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NEGLNEWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NEGLNEWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NEGLNEWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NEGLNEWCResourceNotDeleted
@@ -11045,6 +16116,7 @@ instance ToHttpApiData NetworkEndpointGroupsListNetworkEndpointsWarningCode wher
         NEGLNEWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NEGLNEWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NEGLNEWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NEGLNEWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NEGLNEWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NEGLNEWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NEGLNEWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -11053,6 +16125,7 @@ instance ToHttpApiData NetworkEndpointGroupsListNetworkEndpointsWarningCode wher
         NEGLNEWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NEGLNEWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NEGLNEWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NEGLNEWCPartialSuccess -> "PARTIAL_SUCCESS"
         NEGLNEWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NEGLNEWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NEGLNEWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -11069,288 +16142,492 @@ instance ToJSON NetworkEndpointGroupsListNetworkEndpointsWarningCode where
 
 -- | [Output Only] Name of the quota metric.
 data QuotaMetric
-    = Autoscalers
+    = QMA2CPUs
+      -- ^ @A2_CPUS@
+    | QMAffinityGroups
+      -- ^ @AFFINITY_GROUPS@
+    | QMAutoscalers
       -- ^ @AUTOSCALERS@
-    | BackendBuckets
+    | QMBackendBuckets
       -- ^ @BACKEND_BUCKETS@
-    | BackendServices
+    | QMBackendServices
       -- ^ @BACKEND_SERVICES@
-    | Commitments
+    | QMC2DCPUs
+      -- ^ @C2D_CPUS@
+    | QMC2CPUs
+      -- ^ @C2_CPUS@
+    | QMCommitments
       -- ^ @COMMITMENTS@
-    | CPUs
+    | QMCommittedA2CPUs
+      -- ^ @COMMITTED_A2_CPUS@
+    | QMCommittedC2DCPUs
+      -- ^ @COMMITTED_C2D_CPUS@
+    | QMCommittedC2CPUs
+      -- ^ @COMMITTED_C2_CPUS@
+    | QMCommittedCPUs
+      -- ^ @COMMITTED_CPUS@
+    | QMCommittedE2CPUs
+      -- ^ @COMMITTED_E2_CPUS@
+    | QMCommittedLicenses
+      -- ^ @COMMITTED_LICENSES@
+    | QMCommittedLocalSsdTotalGb
+      -- ^ @COMMITTED_LOCAL_SSD_TOTAL_GB@
+    | QMCommittedMemoryOptimizedCPUs
+      -- ^ @COMMITTED_MEMORY_OPTIMIZED_CPUS@
+    | QMCommittedN2ACPUs
+      -- ^ @COMMITTED_N2A_CPUS@
+    | QMCommittedN2DCPUs
+      -- ^ @COMMITTED_N2D_CPUS@
+    | QMCommittedN2CPUs
+      -- ^ @COMMITTED_N2_CPUS@
+    | QMCommittedNvidiaA100Gpus
+      -- ^ @COMMITTED_NVIDIA_A100_GPUS@
+    | QMCommittedNvidiaK80Gpus
+      -- ^ @COMMITTED_NVIDIA_K80_GPUS@
+    | QMCommittedNvidiaP100Gpus
+      -- ^ @COMMITTED_NVIDIA_P100_GPUS@
+    | QMCommittedNvidiaP4Gpus
+      -- ^ @COMMITTED_NVIDIA_P4_GPUS@
+    | QMCommittedNvidiaT4Gpus
+      -- ^ @COMMITTED_NVIDIA_T4_GPUS@
+    | QMCommittedNvidiaV100Gpus
+      -- ^ @COMMITTED_NVIDIA_V100_GPUS@
+    | QMCommittedP2DCPUs
+      -- ^ @COMMITTED_P2D_CPUS@
+    | QMCPUs
       -- ^ @CPUS@
-    | CPUsAllRegions
+    | QMCPUsAllRegions
       -- ^ @CPUS_ALL_REGIONS@
-    | DisksTotalGb
+    | QMDisksTotalGb
       -- ^ @DISKS_TOTAL_GB@
-    | ExternalVPNGateways
+    | QME2CPUs
+      -- ^ @E2_CPUS@
+    | QMExternalNetworkLbForwardingRules
+      -- ^ @EXTERNAL_NETWORK_LB_FORWARDING_RULES@
+    | QMExternalProtocolForwardingRules
+      -- ^ @EXTERNAL_PROTOCOL_FORWARDING_RULES@
+    | QMExternalVPNGateways
       -- ^ @EXTERNAL_VPN_GATEWAYS@
-    | Firewalls
+    | QMFirewalls
       -- ^ @FIREWALLS@
-    | ForwardingRules
+    | QMForwardingRules
       -- ^ @FORWARDING_RULES@
-    | GlobalInternalAddresses
+    | QMGlobalInternalAddresses
       -- ^ @GLOBAL_INTERNAL_ADDRESSES@
-    | GpusAllRegions
+    | QMGpusAllRegions
       -- ^ @GPUS_ALL_REGIONS@
-    | HealthChecks
+    | QMHealthChecks
       -- ^ @HEALTH_CHECKS@
-    | Images
+    | QMImages
       -- ^ @IMAGES@
-    | Instances
+    | QMInstances
       -- ^ @INSTANCES@
-    | InstanceGroups
+    | QMInstanceGroups
       -- ^ @INSTANCE_GROUPS@
-    | InstanceGroupManagers
+    | QMInstanceGroupManagers
       -- ^ @INSTANCE_GROUP_MANAGERS@
-    | InstanceTemplates
+    | QMInstanceTemplates
       -- ^ @INSTANCE_TEMPLATES@
-    | Interconnects
+    | QMInterconnects
       -- ^ @INTERCONNECTS@
-    | InterconnectAttachmentsPerRegion
+    | QMInterconnectAttachmentsPerRegion
       -- ^ @INTERCONNECT_ATTACHMENTS_PER_REGION@
-    | InterconnectAttachmentsTotalMbps
+    | QMInterconnectAttachmentsTotalMbps
       -- ^ @INTERCONNECT_ATTACHMENTS_TOTAL_MBPS@
-    | InternalAddresses
+    | QMInterconnectTotalGbps
+      -- ^ @INTERCONNECT_TOTAL_GBPS@
+    | QMInternalAddresses
       -- ^ @INTERNAL_ADDRESSES@
-    | InUseAddresses
+    | QMInternalTrafficDirectorForwardingRules
+      -- ^ @INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES@
+    | QMInPlaceSnapshots
+      -- ^ @IN_PLACE_SNAPSHOTS@
+    | QMInUseAddresses
       -- ^ @IN_USE_ADDRESSES@
-    | InUseBackupSchedules
+    | QMInUseBackupSchedules
       -- ^ @IN_USE_BACKUP_SCHEDULES@
-    | InUseSnapshotSchedules
+    | QMInUseSnapshotSchedules
       -- ^ @IN_USE_SNAPSHOT_SCHEDULES@
-    | LocalSsdTotalGb
+    | QMLocalSsdTotalGb
       -- ^ @LOCAL_SSD_TOTAL_GB@
-    | Networks
+    | QMM1CPUs
+      -- ^ @M1_CPUS@
+    | QMM2CPUs
+      -- ^ @M2_CPUS@
+    | QMMachineImages
+      -- ^ @MACHINE_IMAGES@
+    | QMN2ACPUs
+      -- ^ @N2A_CPUS@
+    | QMN2DCPUs
+      -- ^ @N2D_CPUS@
+    | QMN2CPUs
+      -- ^ @N2_CPUS@
+    | QMNetworks
       -- ^ @NETWORKS@
-    | NetworkEndpointGroups
+    | QMNetworkEndpointGroups
       -- ^ @NETWORK_ENDPOINT_GROUPS@
-    | NvidiaK80Gpus
+    | QMNetworkFirewallPolicies
+      -- ^ @NETWORK_FIREWALL_POLICIES@
+    | QMNodeGroups
+      -- ^ @NODE_GROUPS@
+    | QMNodeTemplates
+      -- ^ @NODE_TEMPLATES@
+    | QMNvidiaA100Gpus
+      -- ^ @NVIDIA_A100_GPUS@
+    | QMNvidiaK80Gpus
       -- ^ @NVIDIA_K80_GPUS@
-    | NvidiaP100Gpus
+    | QMNvidiaP100Gpus
       -- ^ @NVIDIA_P100_GPUS@
-    | NvidiaP100VwsGpus
+    | QMNvidiaP100VwsGpus
       -- ^ @NVIDIA_P100_VWS_GPUS@
-    | NvidiaP4Gpus
+    | QMNvidiaP4Gpus
       -- ^ @NVIDIA_P4_GPUS@
-    | NvidiaP4VwsGpus
+    | QMNvidiaP4VwsGpus
       -- ^ @NVIDIA_P4_VWS_GPUS@
-    | NvidiaT4Gpus
+    | QMNvidiaT4Gpus
       -- ^ @NVIDIA_T4_GPUS@
-    | NvidiaT4VwsGpus
+    | QMNvidiaT4VwsGpus
       -- ^ @NVIDIA_T4_VWS_GPUS@
-    | NvidiaV100Gpus
+    | QMNvidiaV100Gpus
       -- ^ @NVIDIA_V100_GPUS@
-    | PreemptibleCPUs
+    | QMP2DCPUs
+      -- ^ @P2D_CPUS@
+    | QMPacketMirrorings
+      -- ^ @PACKET_MIRRORINGS@
+    | QMPdExtremeTotalProvisionedIops
+      -- ^ @PD_EXTREME_TOTAL_PROVISIONED_IOPS@
+    | QMPreemptibleCPUs
       -- ^ @PREEMPTIBLE_CPUS@
-    | PreemptibleLocalSsdGb
+    | QMPreemptibleLocalSsdGb
       -- ^ @PREEMPTIBLE_LOCAL_SSD_GB@
-    | PreemptibleNvidiaK80Gpus
+    | QMPreemptibleNvidiaA100Gpus
+      -- ^ @PREEMPTIBLE_NVIDIA_A100_GPUS@
+    | QMPreemptibleNvidiaK80Gpus
       -- ^ @PREEMPTIBLE_NVIDIA_K80_GPUS@
-    | PreemptibleNvidiaP100Gpus
+    | QMPreemptibleNvidiaP100Gpus
       -- ^ @PREEMPTIBLE_NVIDIA_P100_GPUS@
-    | PreemptibleNvidiaP100VwsGpus
+    | QMPreemptibleNvidiaP100VwsGpus
       -- ^ @PREEMPTIBLE_NVIDIA_P100_VWS_GPUS@
-    | PreemptibleNvidiaP4Gpus
+    | QMPreemptibleNvidiaP4Gpus
       -- ^ @PREEMPTIBLE_NVIDIA_P4_GPUS@
-    | PreemptibleNvidiaP4VwsGpus
+    | QMPreemptibleNvidiaP4VwsGpus
       -- ^ @PREEMPTIBLE_NVIDIA_P4_VWS_GPUS@
-    | PreemptibleNvidiaT4Gpus
+    | QMPreemptibleNvidiaT4Gpus
       -- ^ @PREEMPTIBLE_NVIDIA_T4_GPUS@
-    | PreemptibleNvidiaT4VwsGpus
+    | QMPreemptibleNvidiaT4VwsGpus
       -- ^ @PREEMPTIBLE_NVIDIA_T4_VWS_GPUS@
-    | PreemptibleNvidiaV100Gpus
+    | QMPreemptibleNvidiaV100Gpus
       -- ^ @PREEMPTIBLE_NVIDIA_V100_GPUS@
-    | RegionalAutoscalers
+    | QMPscIlbConsumerForwardingRulesPerProducerNetwork
+      -- ^ @PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK@
+    | QMPublicAdvertisedPrefixes
+      -- ^ @PUBLIC_ADVERTISED_PREFIXES@
+    | QMPublicDelegatedPrefixes
+      -- ^ @PUBLIC_DELEGATED_PREFIXES@
+    | QMRegionalAutoscalers
       -- ^ @REGIONAL_AUTOSCALERS@
-    | RegionalInstanceGroupManagers
+    | QMRegionalInstanceGroupManagers
       -- ^ @REGIONAL_INSTANCE_GROUP_MANAGERS@
-    | ResourcePolicies
+    | QMReservations
+      -- ^ @RESERVATIONS@
+    | QMResourcePolicies
       -- ^ @RESOURCE_POLICIES@
-    | Routers
+    | QMRouters
       -- ^ @ROUTERS@
-    | Routes
+    | QMRoutes
       -- ^ @ROUTES@
-    | SecurityPolicies
+    | QMSecurityPolicies
       -- ^ @SECURITY_POLICIES@
-    | SecurityPolicyRules
+    | QMSecurityPoliciesPerRegion
+      -- ^ @SECURITY_POLICIES_PER_REGION@
+    | QMSecurityPolicyCevalRules
+      -- ^ @SECURITY_POLICY_CEVAL_RULES@
+    | QMSecurityPolicyRules
       -- ^ @SECURITY_POLICY_RULES@
-    | Snapshots
+    | QMSecurityPolicyRulesPerRegion
+      -- ^ @SECURITY_POLICY_RULES_PER_REGION@
+    | QMSnapshots
       -- ^ @SNAPSHOTS@
-    | SsdTotalGb
+    | QMSsdTotalGb
       -- ^ @SSD_TOTAL_GB@
-    | SSLCertificates
+    | QMSSLCertificates
       -- ^ @SSL_CERTIFICATES@
-    | StaticAddresses
+    | QMStaticAddresses
       -- ^ @STATIC_ADDRESSES@
-    | Subnetworks
+    | QMStaticByoipAddresses
+      -- ^ @STATIC_BYOIP_ADDRESSES@
+    | QMSubnetworks
       -- ^ @SUBNETWORKS@
-    | TargetHTTPSProxies
+    | QMTargetHTTPSProxies
       -- ^ @TARGET_HTTPS_PROXIES@
-    | TargetHTTPProxies
+    | QMTargetHTTPProxies
       -- ^ @TARGET_HTTP_PROXIES@
-    | TargetInstances
+    | QMTargetInstances
       -- ^ @TARGET_INSTANCES@
-    | TargetPools
+    | QMTargetPools
       -- ^ @TARGET_POOLS@
-    | TargetSSLProxies
+    | QMTargetSSLProxies
       -- ^ @TARGET_SSL_PROXIES@
-    | TargetTCPProxies
+    | QMTargetTCPProxies
       -- ^ @TARGET_TCP_PROXIES@
-    | TargetVPNGateways
+    | QMTargetVPNGateways
       -- ^ @TARGET_VPN_GATEWAYS@
-    | URLMaps
+    | QMURLMaps
       -- ^ @URL_MAPS@
-    | VPNGateways
+    | QMVPNGateways
       -- ^ @VPN_GATEWAYS@
-    | VPNTunnels
+    | QMVPNTunnels
       -- ^ @VPN_TUNNELS@
+    | QMXpnServiceProjects
+      -- ^ @XPN_SERVICE_PROJECTS@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QuotaMetric
 
 instance FromHttpApiData QuotaMetric where
     parseQueryParam = \case
-        "AUTOSCALERS" -> Right Autoscalers
-        "BACKEND_BUCKETS" -> Right BackendBuckets
-        "BACKEND_SERVICES" -> Right BackendServices
-        "COMMITMENTS" -> Right Commitments
-        "CPUS" -> Right CPUs
-        "CPUS_ALL_REGIONS" -> Right CPUsAllRegions
-        "DISKS_TOTAL_GB" -> Right DisksTotalGb
-        "EXTERNAL_VPN_GATEWAYS" -> Right ExternalVPNGateways
-        "FIREWALLS" -> Right Firewalls
-        "FORWARDING_RULES" -> Right ForwardingRules
-        "GLOBAL_INTERNAL_ADDRESSES" -> Right GlobalInternalAddresses
-        "GPUS_ALL_REGIONS" -> Right GpusAllRegions
-        "HEALTH_CHECKS" -> Right HealthChecks
-        "IMAGES" -> Right Images
-        "INSTANCES" -> Right Instances
-        "INSTANCE_GROUPS" -> Right InstanceGroups
-        "INSTANCE_GROUP_MANAGERS" -> Right InstanceGroupManagers
-        "INSTANCE_TEMPLATES" -> Right InstanceTemplates
-        "INTERCONNECTS" -> Right Interconnects
-        "INTERCONNECT_ATTACHMENTS_PER_REGION" -> Right InterconnectAttachmentsPerRegion
-        "INTERCONNECT_ATTACHMENTS_TOTAL_MBPS" -> Right InterconnectAttachmentsTotalMbps
-        "INTERNAL_ADDRESSES" -> Right InternalAddresses
-        "IN_USE_ADDRESSES" -> Right InUseAddresses
-        "IN_USE_BACKUP_SCHEDULES" -> Right InUseBackupSchedules
-        "IN_USE_SNAPSHOT_SCHEDULES" -> Right InUseSnapshotSchedules
-        "LOCAL_SSD_TOTAL_GB" -> Right LocalSsdTotalGb
-        "NETWORKS" -> Right Networks
-        "NETWORK_ENDPOINT_GROUPS" -> Right NetworkEndpointGroups
-        "NVIDIA_K80_GPUS" -> Right NvidiaK80Gpus
-        "NVIDIA_P100_GPUS" -> Right NvidiaP100Gpus
-        "NVIDIA_P100_VWS_GPUS" -> Right NvidiaP100VwsGpus
-        "NVIDIA_P4_GPUS" -> Right NvidiaP4Gpus
-        "NVIDIA_P4_VWS_GPUS" -> Right NvidiaP4VwsGpus
-        "NVIDIA_T4_GPUS" -> Right NvidiaT4Gpus
-        "NVIDIA_T4_VWS_GPUS" -> Right NvidiaT4VwsGpus
-        "NVIDIA_V100_GPUS" -> Right NvidiaV100Gpus
-        "PREEMPTIBLE_CPUS" -> Right PreemptibleCPUs
-        "PREEMPTIBLE_LOCAL_SSD_GB" -> Right PreemptibleLocalSsdGb
-        "PREEMPTIBLE_NVIDIA_K80_GPUS" -> Right PreemptibleNvidiaK80Gpus
-        "PREEMPTIBLE_NVIDIA_P100_GPUS" -> Right PreemptibleNvidiaP100Gpus
-        "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS" -> Right PreemptibleNvidiaP100VwsGpus
-        "PREEMPTIBLE_NVIDIA_P4_GPUS" -> Right PreemptibleNvidiaP4Gpus
-        "PREEMPTIBLE_NVIDIA_P4_VWS_GPUS" -> Right PreemptibleNvidiaP4VwsGpus
-        "PREEMPTIBLE_NVIDIA_T4_GPUS" -> Right PreemptibleNvidiaT4Gpus
-        "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS" -> Right PreemptibleNvidiaT4VwsGpus
-        "PREEMPTIBLE_NVIDIA_V100_GPUS" -> Right PreemptibleNvidiaV100Gpus
-        "REGIONAL_AUTOSCALERS" -> Right RegionalAutoscalers
-        "REGIONAL_INSTANCE_GROUP_MANAGERS" -> Right RegionalInstanceGroupManagers
-        "RESOURCE_POLICIES" -> Right ResourcePolicies
-        "ROUTERS" -> Right Routers
-        "ROUTES" -> Right Routes
-        "SECURITY_POLICIES" -> Right SecurityPolicies
-        "SECURITY_POLICY_RULES" -> Right SecurityPolicyRules
-        "SNAPSHOTS" -> Right Snapshots
-        "SSD_TOTAL_GB" -> Right SsdTotalGb
-        "SSL_CERTIFICATES" -> Right SSLCertificates
-        "STATIC_ADDRESSES" -> Right StaticAddresses
-        "SUBNETWORKS" -> Right Subnetworks
-        "TARGET_HTTPS_PROXIES" -> Right TargetHTTPSProxies
-        "TARGET_HTTP_PROXIES" -> Right TargetHTTPProxies
-        "TARGET_INSTANCES" -> Right TargetInstances
-        "TARGET_POOLS" -> Right TargetPools
-        "TARGET_SSL_PROXIES" -> Right TargetSSLProxies
-        "TARGET_TCP_PROXIES" -> Right TargetTCPProxies
-        "TARGET_VPN_GATEWAYS" -> Right TargetVPNGateways
-        "URL_MAPS" -> Right URLMaps
-        "VPN_GATEWAYS" -> Right VPNGateways
-        "VPN_TUNNELS" -> Right VPNTunnels
+        "A2_CPUS" -> Right QMA2CPUs
+        "AFFINITY_GROUPS" -> Right QMAffinityGroups
+        "AUTOSCALERS" -> Right QMAutoscalers
+        "BACKEND_BUCKETS" -> Right QMBackendBuckets
+        "BACKEND_SERVICES" -> Right QMBackendServices
+        "C2D_CPUS" -> Right QMC2DCPUs
+        "C2_CPUS" -> Right QMC2CPUs
+        "COMMITMENTS" -> Right QMCommitments
+        "COMMITTED_A2_CPUS" -> Right QMCommittedA2CPUs
+        "COMMITTED_C2D_CPUS" -> Right QMCommittedC2DCPUs
+        "COMMITTED_C2_CPUS" -> Right QMCommittedC2CPUs
+        "COMMITTED_CPUS" -> Right QMCommittedCPUs
+        "COMMITTED_E2_CPUS" -> Right QMCommittedE2CPUs
+        "COMMITTED_LICENSES" -> Right QMCommittedLicenses
+        "COMMITTED_LOCAL_SSD_TOTAL_GB" -> Right QMCommittedLocalSsdTotalGb
+        "COMMITTED_MEMORY_OPTIMIZED_CPUS" -> Right QMCommittedMemoryOptimizedCPUs
+        "COMMITTED_N2A_CPUS" -> Right QMCommittedN2ACPUs
+        "COMMITTED_N2D_CPUS" -> Right QMCommittedN2DCPUs
+        "COMMITTED_N2_CPUS" -> Right QMCommittedN2CPUs
+        "COMMITTED_NVIDIA_A100_GPUS" -> Right QMCommittedNvidiaA100Gpus
+        "COMMITTED_NVIDIA_K80_GPUS" -> Right QMCommittedNvidiaK80Gpus
+        "COMMITTED_NVIDIA_P100_GPUS" -> Right QMCommittedNvidiaP100Gpus
+        "COMMITTED_NVIDIA_P4_GPUS" -> Right QMCommittedNvidiaP4Gpus
+        "COMMITTED_NVIDIA_T4_GPUS" -> Right QMCommittedNvidiaT4Gpus
+        "COMMITTED_NVIDIA_V100_GPUS" -> Right QMCommittedNvidiaV100Gpus
+        "COMMITTED_P2D_CPUS" -> Right QMCommittedP2DCPUs
+        "CPUS" -> Right QMCPUs
+        "CPUS_ALL_REGIONS" -> Right QMCPUsAllRegions
+        "DISKS_TOTAL_GB" -> Right QMDisksTotalGb
+        "E2_CPUS" -> Right QME2CPUs
+        "EXTERNAL_NETWORK_LB_FORWARDING_RULES" -> Right QMExternalNetworkLbForwardingRules
+        "EXTERNAL_PROTOCOL_FORWARDING_RULES" -> Right QMExternalProtocolForwardingRules
+        "EXTERNAL_VPN_GATEWAYS" -> Right QMExternalVPNGateways
+        "FIREWALLS" -> Right QMFirewalls
+        "FORWARDING_RULES" -> Right QMForwardingRules
+        "GLOBAL_INTERNAL_ADDRESSES" -> Right QMGlobalInternalAddresses
+        "GPUS_ALL_REGIONS" -> Right QMGpusAllRegions
+        "HEALTH_CHECKS" -> Right QMHealthChecks
+        "IMAGES" -> Right QMImages
+        "INSTANCES" -> Right QMInstances
+        "INSTANCE_GROUPS" -> Right QMInstanceGroups
+        "INSTANCE_GROUP_MANAGERS" -> Right QMInstanceGroupManagers
+        "INSTANCE_TEMPLATES" -> Right QMInstanceTemplates
+        "INTERCONNECTS" -> Right QMInterconnects
+        "INTERCONNECT_ATTACHMENTS_PER_REGION" -> Right QMInterconnectAttachmentsPerRegion
+        "INTERCONNECT_ATTACHMENTS_TOTAL_MBPS" -> Right QMInterconnectAttachmentsTotalMbps
+        "INTERCONNECT_TOTAL_GBPS" -> Right QMInterconnectTotalGbps
+        "INTERNAL_ADDRESSES" -> Right QMInternalAddresses
+        "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES" -> Right QMInternalTrafficDirectorForwardingRules
+        "IN_PLACE_SNAPSHOTS" -> Right QMInPlaceSnapshots
+        "IN_USE_ADDRESSES" -> Right QMInUseAddresses
+        "IN_USE_BACKUP_SCHEDULES" -> Right QMInUseBackupSchedules
+        "IN_USE_SNAPSHOT_SCHEDULES" -> Right QMInUseSnapshotSchedules
+        "LOCAL_SSD_TOTAL_GB" -> Right QMLocalSsdTotalGb
+        "M1_CPUS" -> Right QMM1CPUs
+        "M2_CPUS" -> Right QMM2CPUs
+        "MACHINE_IMAGES" -> Right QMMachineImages
+        "N2A_CPUS" -> Right QMN2ACPUs
+        "N2D_CPUS" -> Right QMN2DCPUs
+        "N2_CPUS" -> Right QMN2CPUs
+        "NETWORKS" -> Right QMNetworks
+        "NETWORK_ENDPOINT_GROUPS" -> Right QMNetworkEndpointGroups
+        "NETWORK_FIREWALL_POLICIES" -> Right QMNetworkFirewallPolicies
+        "NODE_GROUPS" -> Right QMNodeGroups
+        "NODE_TEMPLATES" -> Right QMNodeTemplates
+        "NVIDIA_A100_GPUS" -> Right QMNvidiaA100Gpus
+        "NVIDIA_K80_GPUS" -> Right QMNvidiaK80Gpus
+        "NVIDIA_P100_GPUS" -> Right QMNvidiaP100Gpus
+        "NVIDIA_P100_VWS_GPUS" -> Right QMNvidiaP100VwsGpus
+        "NVIDIA_P4_GPUS" -> Right QMNvidiaP4Gpus
+        "NVIDIA_P4_VWS_GPUS" -> Right QMNvidiaP4VwsGpus
+        "NVIDIA_T4_GPUS" -> Right QMNvidiaT4Gpus
+        "NVIDIA_T4_VWS_GPUS" -> Right QMNvidiaT4VwsGpus
+        "NVIDIA_V100_GPUS" -> Right QMNvidiaV100Gpus
+        "P2D_CPUS" -> Right QMP2DCPUs
+        "PACKET_MIRRORINGS" -> Right QMPacketMirrorings
+        "PD_EXTREME_TOTAL_PROVISIONED_IOPS" -> Right QMPdExtremeTotalProvisionedIops
+        "PREEMPTIBLE_CPUS" -> Right QMPreemptibleCPUs
+        "PREEMPTIBLE_LOCAL_SSD_GB" -> Right QMPreemptibleLocalSsdGb
+        "PREEMPTIBLE_NVIDIA_A100_GPUS" -> Right QMPreemptibleNvidiaA100Gpus
+        "PREEMPTIBLE_NVIDIA_K80_GPUS" -> Right QMPreemptibleNvidiaK80Gpus
+        "PREEMPTIBLE_NVIDIA_P100_GPUS" -> Right QMPreemptibleNvidiaP100Gpus
+        "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS" -> Right QMPreemptibleNvidiaP100VwsGpus
+        "PREEMPTIBLE_NVIDIA_P4_GPUS" -> Right QMPreemptibleNvidiaP4Gpus
+        "PREEMPTIBLE_NVIDIA_P4_VWS_GPUS" -> Right QMPreemptibleNvidiaP4VwsGpus
+        "PREEMPTIBLE_NVIDIA_T4_GPUS" -> Right QMPreemptibleNvidiaT4Gpus
+        "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS" -> Right QMPreemptibleNvidiaT4VwsGpus
+        "PREEMPTIBLE_NVIDIA_V100_GPUS" -> Right QMPreemptibleNvidiaV100Gpus
+        "PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK" -> Right QMPscIlbConsumerForwardingRulesPerProducerNetwork
+        "PUBLIC_ADVERTISED_PREFIXES" -> Right QMPublicAdvertisedPrefixes
+        "PUBLIC_DELEGATED_PREFIXES" -> Right QMPublicDelegatedPrefixes
+        "REGIONAL_AUTOSCALERS" -> Right QMRegionalAutoscalers
+        "REGIONAL_INSTANCE_GROUP_MANAGERS" -> Right QMRegionalInstanceGroupManagers
+        "RESERVATIONS" -> Right QMReservations
+        "RESOURCE_POLICIES" -> Right QMResourcePolicies
+        "ROUTERS" -> Right QMRouters
+        "ROUTES" -> Right QMRoutes
+        "SECURITY_POLICIES" -> Right QMSecurityPolicies
+        "SECURITY_POLICIES_PER_REGION" -> Right QMSecurityPoliciesPerRegion
+        "SECURITY_POLICY_CEVAL_RULES" -> Right QMSecurityPolicyCevalRules
+        "SECURITY_POLICY_RULES" -> Right QMSecurityPolicyRules
+        "SECURITY_POLICY_RULES_PER_REGION" -> Right QMSecurityPolicyRulesPerRegion
+        "SNAPSHOTS" -> Right QMSnapshots
+        "SSD_TOTAL_GB" -> Right QMSsdTotalGb
+        "SSL_CERTIFICATES" -> Right QMSSLCertificates
+        "STATIC_ADDRESSES" -> Right QMStaticAddresses
+        "STATIC_BYOIP_ADDRESSES" -> Right QMStaticByoipAddresses
+        "SUBNETWORKS" -> Right QMSubnetworks
+        "TARGET_HTTPS_PROXIES" -> Right QMTargetHTTPSProxies
+        "TARGET_HTTP_PROXIES" -> Right QMTargetHTTPProxies
+        "TARGET_INSTANCES" -> Right QMTargetInstances
+        "TARGET_POOLS" -> Right QMTargetPools
+        "TARGET_SSL_PROXIES" -> Right QMTargetSSLProxies
+        "TARGET_TCP_PROXIES" -> Right QMTargetTCPProxies
+        "TARGET_VPN_GATEWAYS" -> Right QMTargetVPNGateways
+        "URL_MAPS" -> Right QMURLMaps
+        "VPN_GATEWAYS" -> Right QMVPNGateways
+        "VPN_TUNNELS" -> Right QMVPNTunnels
+        "XPN_SERVICE_PROJECTS" -> Right QMXpnServiceProjects
         x -> Left ("Unable to parse QuotaMetric from: " <> x)
 
 instance ToHttpApiData QuotaMetric where
     toQueryParam = \case
-        Autoscalers -> "AUTOSCALERS"
-        BackendBuckets -> "BACKEND_BUCKETS"
-        BackendServices -> "BACKEND_SERVICES"
-        Commitments -> "COMMITMENTS"
-        CPUs -> "CPUS"
-        CPUsAllRegions -> "CPUS_ALL_REGIONS"
-        DisksTotalGb -> "DISKS_TOTAL_GB"
-        ExternalVPNGateways -> "EXTERNAL_VPN_GATEWAYS"
-        Firewalls -> "FIREWALLS"
-        ForwardingRules -> "FORWARDING_RULES"
-        GlobalInternalAddresses -> "GLOBAL_INTERNAL_ADDRESSES"
-        GpusAllRegions -> "GPUS_ALL_REGIONS"
-        HealthChecks -> "HEALTH_CHECKS"
-        Images -> "IMAGES"
-        Instances -> "INSTANCES"
-        InstanceGroups -> "INSTANCE_GROUPS"
-        InstanceGroupManagers -> "INSTANCE_GROUP_MANAGERS"
-        InstanceTemplates -> "INSTANCE_TEMPLATES"
-        Interconnects -> "INTERCONNECTS"
-        InterconnectAttachmentsPerRegion -> "INTERCONNECT_ATTACHMENTS_PER_REGION"
-        InterconnectAttachmentsTotalMbps -> "INTERCONNECT_ATTACHMENTS_TOTAL_MBPS"
-        InternalAddresses -> "INTERNAL_ADDRESSES"
-        InUseAddresses -> "IN_USE_ADDRESSES"
-        InUseBackupSchedules -> "IN_USE_BACKUP_SCHEDULES"
-        InUseSnapshotSchedules -> "IN_USE_SNAPSHOT_SCHEDULES"
-        LocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
-        Networks -> "NETWORKS"
-        NetworkEndpointGroups -> "NETWORK_ENDPOINT_GROUPS"
-        NvidiaK80Gpus -> "NVIDIA_K80_GPUS"
-        NvidiaP100Gpus -> "NVIDIA_P100_GPUS"
-        NvidiaP100VwsGpus -> "NVIDIA_P100_VWS_GPUS"
-        NvidiaP4Gpus -> "NVIDIA_P4_GPUS"
-        NvidiaP4VwsGpus -> "NVIDIA_P4_VWS_GPUS"
-        NvidiaT4Gpus -> "NVIDIA_T4_GPUS"
-        NvidiaT4VwsGpus -> "NVIDIA_T4_VWS_GPUS"
-        NvidiaV100Gpus -> "NVIDIA_V100_GPUS"
-        PreemptibleCPUs -> "PREEMPTIBLE_CPUS"
-        PreemptibleLocalSsdGb -> "PREEMPTIBLE_LOCAL_SSD_GB"
-        PreemptibleNvidiaK80Gpus -> "PREEMPTIBLE_NVIDIA_K80_GPUS"
-        PreemptibleNvidiaP100Gpus -> "PREEMPTIBLE_NVIDIA_P100_GPUS"
-        PreemptibleNvidiaP100VwsGpus -> "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS"
-        PreemptibleNvidiaP4Gpus -> "PREEMPTIBLE_NVIDIA_P4_GPUS"
-        PreemptibleNvidiaP4VwsGpus -> "PREEMPTIBLE_NVIDIA_P4_VWS_GPUS"
-        PreemptibleNvidiaT4Gpus -> "PREEMPTIBLE_NVIDIA_T4_GPUS"
-        PreemptibleNvidiaT4VwsGpus -> "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS"
-        PreemptibleNvidiaV100Gpus -> "PREEMPTIBLE_NVIDIA_V100_GPUS"
-        RegionalAutoscalers -> "REGIONAL_AUTOSCALERS"
-        RegionalInstanceGroupManagers -> "REGIONAL_INSTANCE_GROUP_MANAGERS"
-        ResourcePolicies -> "RESOURCE_POLICIES"
-        Routers -> "ROUTERS"
-        Routes -> "ROUTES"
-        SecurityPolicies -> "SECURITY_POLICIES"
-        SecurityPolicyRules -> "SECURITY_POLICY_RULES"
-        Snapshots -> "SNAPSHOTS"
-        SsdTotalGb -> "SSD_TOTAL_GB"
-        SSLCertificates -> "SSL_CERTIFICATES"
-        StaticAddresses -> "STATIC_ADDRESSES"
-        Subnetworks -> "SUBNETWORKS"
-        TargetHTTPSProxies -> "TARGET_HTTPS_PROXIES"
-        TargetHTTPProxies -> "TARGET_HTTP_PROXIES"
-        TargetInstances -> "TARGET_INSTANCES"
-        TargetPools -> "TARGET_POOLS"
-        TargetSSLProxies -> "TARGET_SSL_PROXIES"
-        TargetTCPProxies -> "TARGET_TCP_PROXIES"
-        TargetVPNGateways -> "TARGET_VPN_GATEWAYS"
-        URLMaps -> "URL_MAPS"
-        VPNGateways -> "VPN_GATEWAYS"
-        VPNTunnels -> "VPN_TUNNELS"
+        QMA2CPUs -> "A2_CPUS"
+        QMAffinityGroups -> "AFFINITY_GROUPS"
+        QMAutoscalers -> "AUTOSCALERS"
+        QMBackendBuckets -> "BACKEND_BUCKETS"
+        QMBackendServices -> "BACKEND_SERVICES"
+        QMC2DCPUs -> "C2D_CPUS"
+        QMC2CPUs -> "C2_CPUS"
+        QMCommitments -> "COMMITMENTS"
+        QMCommittedA2CPUs -> "COMMITTED_A2_CPUS"
+        QMCommittedC2DCPUs -> "COMMITTED_C2D_CPUS"
+        QMCommittedC2CPUs -> "COMMITTED_C2_CPUS"
+        QMCommittedCPUs -> "COMMITTED_CPUS"
+        QMCommittedE2CPUs -> "COMMITTED_E2_CPUS"
+        QMCommittedLicenses -> "COMMITTED_LICENSES"
+        QMCommittedLocalSsdTotalGb -> "COMMITTED_LOCAL_SSD_TOTAL_GB"
+        QMCommittedMemoryOptimizedCPUs -> "COMMITTED_MEMORY_OPTIMIZED_CPUS"
+        QMCommittedN2ACPUs -> "COMMITTED_N2A_CPUS"
+        QMCommittedN2DCPUs -> "COMMITTED_N2D_CPUS"
+        QMCommittedN2CPUs -> "COMMITTED_N2_CPUS"
+        QMCommittedNvidiaA100Gpus -> "COMMITTED_NVIDIA_A100_GPUS"
+        QMCommittedNvidiaK80Gpus -> "COMMITTED_NVIDIA_K80_GPUS"
+        QMCommittedNvidiaP100Gpus -> "COMMITTED_NVIDIA_P100_GPUS"
+        QMCommittedNvidiaP4Gpus -> "COMMITTED_NVIDIA_P4_GPUS"
+        QMCommittedNvidiaT4Gpus -> "COMMITTED_NVIDIA_T4_GPUS"
+        QMCommittedNvidiaV100Gpus -> "COMMITTED_NVIDIA_V100_GPUS"
+        QMCommittedP2DCPUs -> "COMMITTED_P2D_CPUS"
+        QMCPUs -> "CPUS"
+        QMCPUsAllRegions -> "CPUS_ALL_REGIONS"
+        QMDisksTotalGb -> "DISKS_TOTAL_GB"
+        QME2CPUs -> "E2_CPUS"
+        QMExternalNetworkLbForwardingRules -> "EXTERNAL_NETWORK_LB_FORWARDING_RULES"
+        QMExternalProtocolForwardingRules -> "EXTERNAL_PROTOCOL_FORWARDING_RULES"
+        QMExternalVPNGateways -> "EXTERNAL_VPN_GATEWAYS"
+        QMFirewalls -> "FIREWALLS"
+        QMForwardingRules -> "FORWARDING_RULES"
+        QMGlobalInternalAddresses -> "GLOBAL_INTERNAL_ADDRESSES"
+        QMGpusAllRegions -> "GPUS_ALL_REGIONS"
+        QMHealthChecks -> "HEALTH_CHECKS"
+        QMImages -> "IMAGES"
+        QMInstances -> "INSTANCES"
+        QMInstanceGroups -> "INSTANCE_GROUPS"
+        QMInstanceGroupManagers -> "INSTANCE_GROUP_MANAGERS"
+        QMInstanceTemplates -> "INSTANCE_TEMPLATES"
+        QMInterconnects -> "INTERCONNECTS"
+        QMInterconnectAttachmentsPerRegion -> "INTERCONNECT_ATTACHMENTS_PER_REGION"
+        QMInterconnectAttachmentsTotalMbps -> "INTERCONNECT_ATTACHMENTS_TOTAL_MBPS"
+        QMInterconnectTotalGbps -> "INTERCONNECT_TOTAL_GBPS"
+        QMInternalAddresses -> "INTERNAL_ADDRESSES"
+        QMInternalTrafficDirectorForwardingRules -> "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES"
+        QMInPlaceSnapshots -> "IN_PLACE_SNAPSHOTS"
+        QMInUseAddresses -> "IN_USE_ADDRESSES"
+        QMInUseBackupSchedules -> "IN_USE_BACKUP_SCHEDULES"
+        QMInUseSnapshotSchedules -> "IN_USE_SNAPSHOT_SCHEDULES"
+        QMLocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
+        QMM1CPUs -> "M1_CPUS"
+        QMM2CPUs -> "M2_CPUS"
+        QMMachineImages -> "MACHINE_IMAGES"
+        QMN2ACPUs -> "N2A_CPUS"
+        QMN2DCPUs -> "N2D_CPUS"
+        QMN2CPUs -> "N2_CPUS"
+        QMNetworks -> "NETWORKS"
+        QMNetworkEndpointGroups -> "NETWORK_ENDPOINT_GROUPS"
+        QMNetworkFirewallPolicies -> "NETWORK_FIREWALL_POLICIES"
+        QMNodeGroups -> "NODE_GROUPS"
+        QMNodeTemplates -> "NODE_TEMPLATES"
+        QMNvidiaA100Gpus -> "NVIDIA_A100_GPUS"
+        QMNvidiaK80Gpus -> "NVIDIA_K80_GPUS"
+        QMNvidiaP100Gpus -> "NVIDIA_P100_GPUS"
+        QMNvidiaP100VwsGpus -> "NVIDIA_P100_VWS_GPUS"
+        QMNvidiaP4Gpus -> "NVIDIA_P4_GPUS"
+        QMNvidiaP4VwsGpus -> "NVIDIA_P4_VWS_GPUS"
+        QMNvidiaT4Gpus -> "NVIDIA_T4_GPUS"
+        QMNvidiaT4VwsGpus -> "NVIDIA_T4_VWS_GPUS"
+        QMNvidiaV100Gpus -> "NVIDIA_V100_GPUS"
+        QMP2DCPUs -> "P2D_CPUS"
+        QMPacketMirrorings -> "PACKET_MIRRORINGS"
+        QMPdExtremeTotalProvisionedIops -> "PD_EXTREME_TOTAL_PROVISIONED_IOPS"
+        QMPreemptibleCPUs -> "PREEMPTIBLE_CPUS"
+        QMPreemptibleLocalSsdGb -> "PREEMPTIBLE_LOCAL_SSD_GB"
+        QMPreemptibleNvidiaA100Gpus -> "PREEMPTIBLE_NVIDIA_A100_GPUS"
+        QMPreemptibleNvidiaK80Gpus -> "PREEMPTIBLE_NVIDIA_K80_GPUS"
+        QMPreemptibleNvidiaP100Gpus -> "PREEMPTIBLE_NVIDIA_P100_GPUS"
+        QMPreemptibleNvidiaP100VwsGpus -> "PREEMPTIBLE_NVIDIA_P100_VWS_GPUS"
+        QMPreemptibleNvidiaP4Gpus -> "PREEMPTIBLE_NVIDIA_P4_GPUS"
+        QMPreemptibleNvidiaP4VwsGpus -> "PREEMPTIBLE_NVIDIA_P4_VWS_GPUS"
+        QMPreemptibleNvidiaT4Gpus -> "PREEMPTIBLE_NVIDIA_T4_GPUS"
+        QMPreemptibleNvidiaT4VwsGpus -> "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS"
+        QMPreemptibleNvidiaV100Gpus -> "PREEMPTIBLE_NVIDIA_V100_GPUS"
+        QMPscIlbConsumerForwardingRulesPerProducerNetwork -> "PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK"
+        QMPublicAdvertisedPrefixes -> "PUBLIC_ADVERTISED_PREFIXES"
+        QMPublicDelegatedPrefixes -> "PUBLIC_DELEGATED_PREFIXES"
+        QMRegionalAutoscalers -> "REGIONAL_AUTOSCALERS"
+        QMRegionalInstanceGroupManagers -> "REGIONAL_INSTANCE_GROUP_MANAGERS"
+        QMReservations -> "RESERVATIONS"
+        QMResourcePolicies -> "RESOURCE_POLICIES"
+        QMRouters -> "ROUTERS"
+        QMRoutes -> "ROUTES"
+        QMSecurityPolicies -> "SECURITY_POLICIES"
+        QMSecurityPoliciesPerRegion -> "SECURITY_POLICIES_PER_REGION"
+        QMSecurityPolicyCevalRules -> "SECURITY_POLICY_CEVAL_RULES"
+        QMSecurityPolicyRules -> "SECURITY_POLICY_RULES"
+        QMSecurityPolicyRulesPerRegion -> "SECURITY_POLICY_RULES_PER_REGION"
+        QMSnapshots -> "SNAPSHOTS"
+        QMSsdTotalGb -> "SSD_TOTAL_GB"
+        QMSSLCertificates -> "SSL_CERTIFICATES"
+        QMStaticAddresses -> "STATIC_ADDRESSES"
+        QMStaticByoipAddresses -> "STATIC_BYOIP_ADDRESSES"
+        QMSubnetworks -> "SUBNETWORKS"
+        QMTargetHTTPSProxies -> "TARGET_HTTPS_PROXIES"
+        QMTargetHTTPProxies -> "TARGET_HTTP_PROXIES"
+        QMTargetInstances -> "TARGET_INSTANCES"
+        QMTargetPools -> "TARGET_POOLS"
+        QMTargetSSLProxies -> "TARGET_SSL_PROXIES"
+        QMTargetTCPProxies -> "TARGET_TCP_PROXIES"
+        QMTargetVPNGateways -> "TARGET_VPN_GATEWAYS"
+        QMURLMaps -> "URL_MAPS"
+        QMVPNGateways -> "VPN_GATEWAYS"
+        QMVPNTunnels -> "VPN_TUNNELS"
+        QMXpnServiceProjects -> "XPN_SERVICE_PROJECTS"
 
 instance FromJSON QuotaMetric where
     parseJSON = parseJSONText "QuotaMetric"
@@ -11358,8 +16635,13 @@ instance FromJSON QuotaMetric where
 instance ToJSON QuotaMetric where
     toJSON = toJSONText
 
--- | [Output Only] The current state of whether or not this Interconnect is
--- functional.
+-- | [Output Only] The current state of Interconnect functionality, which can
+-- take one of the following values: - ACTIVE: The Interconnect is valid,
+-- turned up and ready to use. Attachments may be provisioned on this
+-- Interconnect. - UNPROVISIONED: The Interconnect has not completed
+-- turnup. No attachments may be provisioned on this Interconnect. -
+-- UNDER_MAINTENANCE: The Interconnect is undergoing internal maintenance.
+-- No attachments may be provisioned or updated on this Interconnect.
 data InterconnectState
     = ISActive
       -- ^ @ACTIVE@
@@ -11386,6 +16668,36 @@ instance FromJSON InterconnectState where
 instance ToJSON InterconnectState where
     toJSON = toJSONText
 
+-- | The status of the BGP peer connection. If set to FALSE, any active
+-- session with the peer is terminated and all associated routing
+-- information is removed. If set to TRUE, the peer connection can be
+-- established with routing information. The default is TRUE.
+data RouterBGPPeerEnable
+    = False'
+      -- ^ @FALSE@
+    | True'
+      -- ^ @TRUE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RouterBGPPeerEnable
+
+instance FromHttpApiData RouterBGPPeerEnable where
+    parseQueryParam = \case
+        "FALSE" -> Right False'
+        "TRUE" -> Right True'
+        x -> Left ("Unable to parse RouterBGPPeerEnable from: " <> x)
+
+instance ToHttpApiData RouterBGPPeerEnable where
+    toQueryParam = \case
+        False' -> "FALSE"
+        True' -> "TRUE"
+
+instance FromJSON RouterBGPPeerEnable where
+    parseJSON = parseJSONText "RouterBGPPeerEnable"
+
+instance ToJSON RouterBGPPeerEnable where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data AutoscalerAggregatedListWarningCode
@@ -11405,6 +16717,8 @@ data AutoscalerAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | AALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | AALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | AALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | AALWCNextHopAddressNotAssigned
@@ -11421,6 +16735,8 @@ data AutoscalerAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | AALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | AALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | AALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | AALWCResourceInUseByOtherResourceWarning
@@ -11449,6 +16765,7 @@ instance FromHttpApiData AutoscalerAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right AALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right AALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right AALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right AALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right AALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right AALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right AALWCNextHopCannotIPForward
@@ -11457,6 +16774,7 @@ instance FromHttpApiData AutoscalerAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right AALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right AALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right AALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right AALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right AALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right AALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right AALWCResourceNotDeleted
@@ -11476,6 +16794,7 @@ instance ToHttpApiData AutoscalerAggregatedListWarningCode where
         AALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         AALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         AALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        AALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         AALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         AALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         AALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -11484,6 +16803,7 @@ instance ToHttpApiData AutoscalerAggregatedListWarningCode where
         AALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         AALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         AALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        AALWCPartialSuccess -> "PARTIAL_SUCCESS"
         AALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         AALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         AALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -11498,7 +16818,77 @@ instance FromJSON AutoscalerAggregatedListWarningCode where
 instance ToJSON AutoscalerAggregatedListWarningCode where
     toJSON = toJSONText
 
--- | The IP Version that will be used by this address. Valid options are IPV4
+-- | This field can only be specified for a particular firewall rule if
+-- logging is enabled for that rule. This field denotes whether to include
+-- or exclude metadata for firewall logs.
+data FirewallLogConfigMetadata
+    = FLCMExcludeAllMetadata
+      -- ^ @EXCLUDE_ALL_METADATA@
+    | FLCMIncludeAllMetadata
+      -- ^ @INCLUDE_ALL_METADATA@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FirewallLogConfigMetadata
+
+instance FromHttpApiData FirewallLogConfigMetadata where
+    parseQueryParam = \case
+        "EXCLUDE_ALL_METADATA" -> Right FLCMExcludeAllMetadata
+        "INCLUDE_ALL_METADATA" -> Right FLCMIncludeAllMetadata
+        x -> Left ("Unable to parse FirewallLogConfigMetadata from: " <> x)
+
+instance ToHttpApiData FirewallLogConfigMetadata where
+    toQueryParam = \case
+        FLCMExcludeAllMetadata -> "EXCLUDE_ALL_METADATA"
+        FLCMIncludeAllMetadata -> "INCLUDE_ALL_METADATA"
+
+instance FromJSON FirewallLogConfigMetadata where
+    parseJSON = parseJSONText "FirewallLogConfigMetadata"
+
+instance ToJSON FirewallLogConfigMetadata where
+    toJSON = toJSONText
+
+-- | The most disruptive action that you want to perform on each instance
+-- during the update: - REPLACE: Delete the instance and create it again. -
+-- RESTART: Stop the instance and start it again. - REFRESH: Do not stop
+-- the instance. - NONE: Do not disrupt the instance at all. By default,
+-- the most disruptive allowed action is REPLACE. If your update requires a
+-- more disruptive action than you set with this flag, the update request
+-- will fail.
+data InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction
+    = IGMAURMDAANone
+      -- ^ @NONE@
+    | IGMAURMDAARefresh
+      -- ^ @REFRESH@
+    | IGMAURMDAAReplace
+      -- ^ @REPLACE@
+    | IGMAURMDAARestart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction
+
+instance FromHttpApiData InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    parseQueryParam = \case
+        "NONE" -> Right IGMAURMDAANone
+        "REFRESH" -> Right IGMAURMDAARefresh
+        "REPLACE" -> Right IGMAURMDAAReplace
+        "RESTART" -> Right IGMAURMDAARestart
+        x -> Left ("Unable to parse InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    toQueryParam = \case
+        IGMAURMDAANone -> "NONE"
+        IGMAURMDAARefresh -> "REFRESH"
+        IGMAURMDAAReplace -> "REPLACE"
+        IGMAURMDAARestart -> "RESTART"
+
+instance FromJSON InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    parseJSON = parseJSONText "InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction"
+
+instance ToJSON InstanceGroupManagersApplyUpdatesRequestMostDisruptiveAllowedAction where
+    toJSON = toJSONText
+
+-- | The IP version that will be used by this address. Valid options are IPV4
 -- or IPV6. This can only be specified for a global address.
 data AddressIPVersion
     = AIVIPV4
@@ -11531,10 +16921,13 @@ instance ToJSON AddressIPVersion where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the instance. One of the following values:
--- PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING,
--- SUSPENDED, and TERMINATED.
+-- PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED,
+-- REPAIRING, and TERMINATED. For more information about the status of the
+-- instance, see Instance life cycle.
 data InstanceStatus
-    = ISProvisioning
+    = ISDeprovisioning
+      -- ^ @DEPROVISIONING@
+    | ISProvisioning
       -- ^ @PROVISIONING@
     | ISRepairing
       -- ^ @REPAIRING@
@@ -11558,6 +16951,7 @@ instance Hashable InstanceStatus
 
 instance FromHttpApiData InstanceStatus where
     parseQueryParam = \case
+        "DEPROVISIONING" -> Right ISDeprovisioning
         "PROVISIONING" -> Right ISProvisioning
         "REPAIRING" -> Right ISRepairing
         "RUNNING" -> Right ISRunning
@@ -11571,6 +16965,7 @@ instance FromHttpApiData InstanceStatus where
 
 instance ToHttpApiData InstanceStatus where
     toQueryParam = \case
+        ISDeprovisioning -> "DEPROVISIONING"
         ISProvisioning -> "PROVISIONING"
         ISRepairing -> "REPAIRING"
         ISRunning -> "RUNNING"
@@ -11606,6 +17001,8 @@ data NodeTypeListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NTLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NTLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NTLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NTLWCNextHopAddressNotAssigned
@@ -11622,6 +17019,8 @@ data NodeTypeListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NTLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NTLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NTLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NTLWCResourceInUseByOtherResourceWarning
@@ -11650,6 +17049,7 @@ instance FromHttpApiData NodeTypeListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NTLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NTLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NTLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NTLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NTLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NTLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NTLWCNextHopCannotIPForward
@@ -11658,6 +17058,7 @@ instance FromHttpApiData NodeTypeListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NTLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NTLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NTLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NTLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NTLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NTLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NTLWCResourceNotDeleted
@@ -11677,6 +17078,7 @@ instance ToHttpApiData NodeTypeListWarningCode where
         NTLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NTLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NTLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NTLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NTLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NTLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NTLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -11685,6 +17087,7 @@ instance ToHttpApiData NodeTypeListWarningCode where
         NTLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NTLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NTLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NTLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NTLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NTLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NTLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -11697,6 +17100,34 @@ instance FromJSON NodeTypeListWarningCode where
     parseJSON = parseJSONText "NodeTypeListWarningCode"
 
 instance ToJSON NodeTypeListWarningCode where
+    toJSON = toJSONText
+
+-- | What action should be used to replace instances. See
+-- minimal_action.REPLACE
+data InstanceGroupManagerUpdatePolicyReplacementMethod
+    = Recreate
+      -- ^ @RECREATE@
+    | Substitute
+      -- ^ @SUBSTITUTE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupManagerUpdatePolicyReplacementMethod
+
+instance FromHttpApiData InstanceGroupManagerUpdatePolicyReplacementMethod where
+    parseQueryParam = \case
+        "RECREATE" -> Right Recreate
+        "SUBSTITUTE" -> Right Substitute
+        x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyReplacementMethod from: " <> x)
+
+instance ToHttpApiData InstanceGroupManagerUpdatePolicyReplacementMethod where
+    toQueryParam = \case
+        Recreate -> "RECREATE"
+        Substitute -> "SUBSTITUTE"
+
+instance FromJSON InstanceGroupManagerUpdatePolicyReplacementMethod where
+    parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyReplacementMethod"
+
+instance ToJSON InstanceGroupManagerUpdatePolicyReplacementMethod where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -11718,6 +17149,8 @@ data MachineTypesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | MTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | MTSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | MTSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | MTSLWCNextHopAddressNotAssigned
@@ -11734,6 +17167,8 @@ data MachineTypesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | MTSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | MTSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | MTSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | MTSLWCResourceInUseByOtherResourceWarning
@@ -11762,6 +17197,7 @@ instance FromHttpApiData MachineTypesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right MTSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right MTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right MTSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right MTSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right MTSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right MTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right MTSLWCNextHopCannotIPForward
@@ -11770,6 +17206,7 @@ instance FromHttpApiData MachineTypesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right MTSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right MTSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right MTSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right MTSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right MTSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right MTSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right MTSLWCResourceNotDeleted
@@ -11789,6 +17226,7 @@ instance ToHttpApiData MachineTypesScopedListWarningCode where
         MTSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         MTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         MTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        MTSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         MTSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         MTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         MTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -11797,6 +17235,7 @@ instance ToHttpApiData MachineTypesScopedListWarningCode where
         MTSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         MTSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         MTSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        MTSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         MTSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         MTSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         MTSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -11830,6 +17269,8 @@ data NodeTemplateListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NODInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NODLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NODMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NODNextHopAddressNotAssigned
@@ -11846,6 +17287,8 @@ data NodeTemplateListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NODNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NODPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NODRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NODResourceInUseByOtherResourceWarning
@@ -11874,6 +17317,7 @@ instance FromHttpApiData NodeTemplateListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NODExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NODFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NODInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NODLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NODMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NODNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NODNextHopCannotIPForward
@@ -11882,6 +17326,7 @@ instance FromHttpApiData NodeTemplateListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NODNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NODNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NODNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NODPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NODRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NODResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NODResourceNotDeleted
@@ -11901,6 +17346,7 @@ instance ToHttpApiData NodeTemplateListWarningCode where
         NODExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NODFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NODInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NODLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NODMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NODNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NODNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -11909,6 +17355,7 @@ instance ToHttpApiData NodeTemplateListWarningCode where
         NODNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NODNotCriticalError -> "NOT_CRITICAL_ERROR"
         NODNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NODPartialSuccess -> "PARTIAL_SUCCESS"
         NODRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NODResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NODResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -11921,6 +17368,126 @@ instance FromJSON NodeTemplateListWarningCode where
     parseJSON = parseJSONText "NodeTemplateListWarningCode"
 
 instance ToJSON NodeTemplateListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data VPNGatewayListWarningCode
+    = VGLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | VGLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | VGLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | VGLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | VGLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | VGLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | VGLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | VGLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | VGLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | VGLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | VGLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | VGLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | VGLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | VGLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | VGLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | VGLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | VGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | VGLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | VGLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | VGLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | VGLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | VGLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | VGLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | VGLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VPNGatewayListWarningCode
+
+instance FromHttpApiData VPNGatewayListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right VGLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right VGLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right VGLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right VGLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right VGLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right VGLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right VGLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right VGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VGLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right VGLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VGLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VGLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right VGLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right VGLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right VGLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right VGLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right VGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VGLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right VGLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VGLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right VGLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right VGLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right VGLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right VGLWCUndeclaredProperties
+        "UNREACHABLE" -> Right VGLWCUnreachable
+        x -> Left ("Unable to parse VPNGatewayListWarningCode from: " <> x)
+
+instance ToHttpApiData VPNGatewayListWarningCode where
+    toQueryParam = \case
+        VGLWCCleanupFailed -> "CLEANUP_FAILED"
+        VGLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        VGLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        VGLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        VGLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        VGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        VGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        VGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        VGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        VGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        VGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        VGLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        VGLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        VGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        VGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        VGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VGLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        VGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        VGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        VGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        VGLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        VGLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        VGLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        VGLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON VPNGatewayListWarningCode where
+    parseJSON = parseJSONText "VPNGatewayListWarningCode"
+
+instance ToJSON VPNGatewayListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -11942,6 +17509,8 @@ data RegionListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | REGInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | REGLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | REGMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | REGNextHopAddressNotAssigned
@@ -11958,6 +17527,8 @@ data RegionListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | REGNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | REGPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | REGRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | REGResourceInUseByOtherResourceWarning
@@ -11986,6 +17557,7 @@ instance FromHttpApiData RegionListWarningCode where
         "EXTERNAL_API_WARNING" -> Right REGExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right REGFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right REGInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right REGLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right REGMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right REGNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right REGNextHopCannotIPForward
@@ -11994,6 +17566,7 @@ instance FromHttpApiData RegionListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right REGNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right REGNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right REGNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right REGPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right REGRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right REGResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right REGResourceNotDeleted
@@ -12013,6 +17586,7 @@ instance ToHttpApiData RegionListWarningCode where
         REGExternalAPIWarning -> "EXTERNAL_API_WARNING"
         REGFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         REGInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        REGLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         REGMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         REGNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         REGNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12021,6 +17595,7 @@ instance ToHttpApiData RegionListWarningCode where
         REGNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         REGNotCriticalError -> "NOT_CRITICAL_ERROR"
         REGNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        REGPartialSuccess -> "PARTIAL_SUCCESS"
         REGRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         REGResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         REGResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12035,13 +17610,13 @@ instance FromJSON RegionListWarningCode where
 instance ToJSON RegionListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The resource that configures and manages this interface.
--- MANAGED_BY_USER is the default value and can be managed by you or other
--- users; MANAGED_BY_ATTACHMENT is an interface that is configured and
--- managed by Cloud Interconnect, specifically by an InterconnectAttachment
--- of type PARTNER. Google will automatically create, update, and delete
--- this type of interface when the PARTNER InterconnectAttachment is
--- created, updated, or deleted.
+-- | [Output Only] The resource that configures and manages this interface. -
+-- MANAGED_BY_USER is the default value and can be managed directly by
+-- users. - MANAGED_BY_ATTACHMENT is an interface that is configured and
+-- managed by Cloud Interconnect, specifically, by an
+-- InterconnectAttachment of type PARTNER. Google automatically creates,
+-- updates, and deletes this type of interface when the PARTNER
+-- InterconnectAttachment is created, updated, or deleted.
 data RouterInterfaceManagementType
     = RIMTManagedByAttachment
       -- ^ @MANAGED_BY_ATTACHMENT@
@@ -12087,6 +17662,8 @@ data DiskTypesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | DTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | DTSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | DTSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | DTSLWCNextHopAddressNotAssigned
@@ -12103,6 +17680,8 @@ data DiskTypesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | DTSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | DTSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | DTSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | DTSLWCResourceInUseByOtherResourceWarning
@@ -12131,6 +17710,7 @@ instance FromHttpApiData DiskTypesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right DTSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right DTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DTSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right DTSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right DTSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DTSLWCNextHopCannotIPForward
@@ -12139,6 +17719,7 @@ instance FromHttpApiData DiskTypesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right DTSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right DTSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right DTSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right DTSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right DTSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right DTSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right DTSLWCResourceNotDeleted
@@ -12158,6 +17739,7 @@ instance ToHttpApiData DiskTypesScopedListWarningCode where
         DTSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         DTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DTSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         DTSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         DTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12166,6 +17748,7 @@ instance ToHttpApiData DiskTypesScopedListWarningCode where
         DTSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         DTSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         DTSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DTSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         DTSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         DTSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         DTSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12199,6 +17782,8 @@ data MachineTypeAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | MTALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | MTALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | MTALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | MTALWCNextHopAddressNotAssigned
@@ -12215,6 +17800,8 @@ data MachineTypeAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | MTALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | MTALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | MTALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | MTALWCResourceInUseByOtherResourceWarning
@@ -12243,6 +17830,7 @@ instance FromHttpApiData MachineTypeAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right MTALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right MTALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right MTALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right MTALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right MTALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right MTALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right MTALWCNextHopCannotIPForward
@@ -12251,6 +17839,7 @@ instance FromHttpApiData MachineTypeAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right MTALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right MTALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right MTALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right MTALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right MTALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right MTALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right MTALWCResourceNotDeleted
@@ -12270,6 +17859,7 @@ instance ToHttpApiData MachineTypeAggregatedListWarningCode where
         MTALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         MTALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         MTALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        MTALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         MTALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         MTALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         MTALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12278,6 +17868,7 @@ instance ToHttpApiData MachineTypeAggregatedListWarningCode where
         MTALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         MTALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         MTALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        MTALWCPartialSuccess -> "PARTIAL_SUCCESS"
         MTALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         MTALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         MTALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12292,12 +17883,7 @@ instance FromJSON MachineTypeAggregatedListWarningCode where
 instance ToJSON MachineTypeAggregatedListWarningCode where
     toJSON = toJSONText
 
--- | Whether Gin logging should happen in a fail-closed manner at the caller.
--- This is relevant only in the LocalIAM implementation, for now. NOTE:
--- Logging to Gin in a fail-closed manner is currently unsupported while
--- work is being done to satisfy the requirements of go\/345. Currently,
--- setting LOG_FAIL_CLOSED mode will have no effect, but still exists
--- because there is active work being done to support it (b\/115874152).
+-- |
 data LogConfigDataAccessOptionsLogMode
     = LogFailClosed
       -- ^ @LOG_FAIL_CLOSED@
@@ -12324,13 +17910,21 @@ instance FromJSON LogConfigDataAccessOptionsLogMode where
 instance ToJSON LogConfigDataAccessOptionsLogMode where
     toJSON = toJSONText
 
--- | State of this notification. Note that the \"NS_\" versions of this enum
--- have been deprecated in favor of the unprefixed values.
+-- | State of this notification, which can take one of the following values:
+-- - ACTIVE: This outage notification is active. The event could be in the
+-- past, present, or future. See start_time and end_time for scheduling. -
+-- CANCELLED: The outage associated with this notification was cancelled
+-- before the outage was due to start. - COMPLETED: The outage associated
+-- with this notification is complete. Note that the versions of this enum
+-- prefixed with \"NS_\" have been deprecated in favor of the unprefixed
+-- values.
 data InterconnectOutageNotificationState
     = IONSActive
       -- ^ @ACTIVE@
     | IONSCancelled
       -- ^ @CANCELLED@
+    | IONSCompleted
+      -- ^ @COMPLETED@
     | IONSNsActive
       -- ^ @NS_ACTIVE@
     | IONSNsCanceled
@@ -12343,6 +17937,7 @@ instance FromHttpApiData InterconnectOutageNotificationState where
     parseQueryParam = \case
         "ACTIVE" -> Right IONSActive
         "CANCELLED" -> Right IONSCancelled
+        "COMPLETED" -> Right IONSCompleted
         "NS_ACTIVE" -> Right IONSNsActive
         "NS_CANCELED" -> Right IONSNsCanceled
         x -> Left ("Unable to parse InterconnectOutageNotificationState from: " <> x)
@@ -12351,6 +17946,7 @@ instance ToHttpApiData InterconnectOutageNotificationState where
     toQueryParam = \case
         IONSActive -> "ACTIVE"
         IONSCancelled -> "CANCELLED"
+        IONSCompleted -> "COMPLETED"
         IONSNsActive -> "NS_ACTIVE"
         IONSNsCanceled -> "NS_CANCELED"
 
@@ -12379,6 +17975,8 @@ data VPNTunnelListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | VTLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VTLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | VTLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | VTLWCNextHopAddressNotAssigned
@@ -12395,6 +17993,8 @@ data VPNTunnelListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | VTLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | VTLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | VTLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | VTLWCResourceInUseByOtherResourceWarning
@@ -12423,6 +18023,7 @@ instance FromHttpApiData VPNTunnelListWarningCode where
         "EXTERNAL_API_WARNING" -> Right VTLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right VTLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right VTLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VTLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right VTLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VTLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VTLWCNextHopCannotIPForward
@@ -12431,6 +18032,7 @@ instance FromHttpApiData VPNTunnelListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right VTLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right VTLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right VTLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VTLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right VTLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VTLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right VTLWCResourceNotDeleted
@@ -12450,6 +18052,7 @@ instance ToHttpApiData VPNTunnelListWarningCode where
         VTLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         VTLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         VTLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VTLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         VTLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         VTLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         VTLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12458,6 +18061,7 @@ instance ToHttpApiData VPNTunnelListWarningCode where
         VTLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         VTLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         VTLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VTLWCPartialSuccess -> "PARTIAL_SUCCESS"
         VTLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         VTLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         VTLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12470,6 +18074,38 @@ instance FromJSON VPNTunnelListWarningCode where
     parseJSON = parseJSONText "VPNTunnelListWarningCode"
 
 instance ToJSON VPNTunnelListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies which action to take on instance update with this disk.
+-- Default is to use the existing disk.
+data AttachedDiskInitializeParamsOnUpdateAction
+    = RecreateDisk
+      -- ^ @RECREATE_DISK@
+    | RecreateDiskIfSourceChanged
+      -- ^ @RECREATE_DISK_IF_SOURCE_CHANGED@
+    | UseExistingDisk
+      -- ^ @USE_EXISTING_DISK@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AttachedDiskInitializeParamsOnUpdateAction
+
+instance FromHttpApiData AttachedDiskInitializeParamsOnUpdateAction where
+    parseQueryParam = \case
+        "RECREATE_DISK" -> Right RecreateDisk
+        "RECREATE_DISK_IF_SOURCE_CHANGED" -> Right RecreateDiskIfSourceChanged
+        "USE_EXISTING_DISK" -> Right UseExistingDisk
+        x -> Left ("Unable to parse AttachedDiskInitializeParamsOnUpdateAction from: " <> x)
+
+instance ToHttpApiData AttachedDiskInitializeParamsOnUpdateAction where
+    toQueryParam = \case
+        RecreateDisk -> "RECREATE_DISK"
+        RecreateDiskIfSourceChanged -> "RECREATE_DISK_IF_SOURCE_CHANGED"
+        UseExistingDisk -> "USE_EXISTING_DISK"
+
+instance FromJSON AttachedDiskInitializeParamsOnUpdateAction where
+    parseJSON = parseJSONText "AttachedDiskInitializeParamsOnUpdateAction"
+
+instance ToJSON AttachedDiskInitializeParamsOnUpdateAction where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -12491,6 +18127,8 @@ data AutoscalersScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | AInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ALargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | AMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ANextHopAddressNotAssigned
@@ -12507,6 +18145,8 @@ data AutoscalersScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ANoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | APartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ARequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | AResourceInUseByOtherResourceWarning
@@ -12535,6 +18175,7 @@ instance FromHttpApiData AutoscalersScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right AExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right AFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right AInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ALargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right AMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ANextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ANextHopCannotIPForward
@@ -12543,6 +18184,7 @@ instance FromHttpApiData AutoscalersScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ANextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ANotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ANoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right APartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ARequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right AResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right AResourceNotDeleted
@@ -12562,6 +18204,7 @@ instance ToHttpApiData AutoscalersScopedListWarningCode where
         AExternalAPIWarning -> "EXTERNAL_API_WARNING"
         AFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         AInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ALargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         AMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ANextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ANextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12570,6 +18213,7 @@ instance ToHttpApiData AutoscalersScopedListWarningCode where
         ANextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ANotCriticalError -> "NOT_CRITICAL_ERROR"
         ANoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        APartialSuccess -> "PARTIAL_SUCCESS"
         ARequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         AResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         AResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12622,18 +18266,23 @@ instance FromJSON HTTPSHealthCheckPortSpecification where
 instance ToJSON HTTPSHealthCheckPortSpecification where
     toJSON = toJSONText
 
--- | This signifies what the ForwardingRule will be used for and can only
--- take the following values: INTERNAL, INTERNAL_SELF_MANAGED, EXTERNAL.
--- The value of INTERNAL means that this will be used for Internal Network
--- Load Balancing (TCP, UDP). The value of INTERNAL_SELF_MANAGED means that
--- this will be used for Internal Global HTTP(S) LB. The value of EXTERNAL
--- means that this will be used for External Load Balancing (HTTP(S) LB,
--- External TCP\/UDP LB, SSL Proxy)
+-- | Specifies the forwarding rule type. - EXTERNAL is used for: - Classic
+-- Cloud VPN gateways - Protocol forwarding to VMs from an external IP
+-- address - HTTP(S), SSL Proxy, TCP Proxy, and Network Load Balancing -
+-- INTERNAL is used for: - Protocol forwarding to VMs from an internal IP
+-- address - Internal TCP\/UDP Load Balancing - INTERNAL_MANAGED is used
+-- for: - Internal HTTP(S) Load Balancing - INTERNAL_SELF_MANAGED is used
+-- for: - Traffic Director For more information about forwarding rules,
+-- refer to Forwarding rule concepts.
 data ForwardingRuleLoadBalancingScheme
     = FRLBSExternal
       -- ^ @EXTERNAL@
     | FRLBSInternal
       -- ^ @INTERNAL@
+    | FRLBSInternalManaged
+      -- ^ @INTERNAL_MANAGED@
+    | FRLBSInternalSelfManaged
+      -- ^ @INTERNAL_SELF_MANAGED@
     | FRLBSInvalid
       -- ^ @INVALID@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -12644,6 +18293,8 @@ instance FromHttpApiData ForwardingRuleLoadBalancingScheme where
     parseQueryParam = \case
         "EXTERNAL" -> Right FRLBSExternal
         "INTERNAL" -> Right FRLBSInternal
+        "INTERNAL_MANAGED" -> Right FRLBSInternalManaged
+        "INTERNAL_SELF_MANAGED" -> Right FRLBSInternalSelfManaged
         "INVALID" -> Right FRLBSInvalid
         x -> Left ("Unable to parse ForwardingRuleLoadBalancingScheme from: " <> x)
 
@@ -12651,6 +18302,8 @@ instance ToHttpApiData ForwardingRuleLoadBalancingScheme where
     toQueryParam = \case
         FRLBSExternal -> "EXTERNAL"
         FRLBSInternal -> "INTERNAL"
+        FRLBSInternalManaged -> "INTERNAL_MANAGED"
+        FRLBSInternalSelfManaged -> "INTERNAL_SELF_MANAGED"
         FRLBSInvalid -> "INVALID"
 
 instance FromJSON ForwardingRuleLoadBalancingScheme where
@@ -12678,6 +18331,8 @@ data DiskTypeAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | DTALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | DTALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | DTALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | DTALWCNextHopAddressNotAssigned
@@ -12694,6 +18349,8 @@ data DiskTypeAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | DTALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | DTALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | DTALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | DTALWCResourceInUseByOtherResourceWarning
@@ -12722,6 +18379,7 @@ instance FromHttpApiData DiskTypeAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right DTALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right DTALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DTALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right DTALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right DTALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DTALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DTALWCNextHopCannotIPForward
@@ -12730,6 +18388,7 @@ instance FromHttpApiData DiskTypeAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right DTALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right DTALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right DTALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right DTALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right DTALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right DTALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right DTALWCResourceNotDeleted
@@ -12749,6 +18408,7 @@ instance ToHttpApiData DiskTypeAggregatedListWarningCode where
         DTALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         DTALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DTALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DTALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         DTALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         DTALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DTALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12757,6 +18417,7 @@ instance ToHttpApiData DiskTypeAggregatedListWarningCode where
         DTALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         DTALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         DTALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DTALWCPartialSuccess -> "PARTIAL_SUCCESS"
         DTALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         DTALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         DTALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12771,8 +18432,117 @@ instance FromJSON DiskTypeAggregatedListWarningCode where
 instance ToJSON DiskTypeAggregatedListWarningCode where
     toJSON = toJSONText
 
--- | Type of interconnect. Note that \"IT_PRIVATE\" has been deprecated in
--- favor of \"DEDICATED\"
+-- | [Output Only] The state of the subnetwork, which can be one of the
+-- following values: READY: Subnetwork is created and ready to use
+-- DRAINING: only applicable to subnetworks that have the purpose set to
+-- INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load
+-- balancer are being drained. A subnetwork that is draining cannot be used
+-- or modified until it reaches a status of READY
+data SubnetworkState
+    = SDraining
+      -- ^ @DRAINING@
+    | SReady
+      -- ^ @READY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkState
+
+instance FromHttpApiData SubnetworkState where
+    parseQueryParam = \case
+        "DRAINING" -> Right SDraining
+        "READY" -> Right SReady
+        x -> Left ("Unable to parse SubnetworkState from: " <> x)
+
+instance ToHttpApiData SubnetworkState where
+    toQueryParam = \case
+        SDraining -> "DRAINING"
+        SReady -> "READY"
+
+instance FromJSON SubnetworkState where
+    parseJSON = parseJSONText "SubnetworkState"
+
+instance ToJSON SubnetworkState where
+    toJSON = toJSONText
+
+-- | Indicates whether or not this packet mirroring takes effect. If set to
+-- FALSE, this packet mirroring policy will not be enforced on the network.
+-- The default is TRUE.
+data PacketMirroringEnable
+    = PMEFalse'
+      -- ^ @FALSE@
+    | PMETrue'
+      -- ^ @TRUE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PacketMirroringEnable
+
+instance FromHttpApiData PacketMirroringEnable where
+    parseQueryParam = \case
+        "FALSE" -> Right PMEFalse'
+        "TRUE" -> Right PMETrue'
+        x -> Left ("Unable to parse PacketMirroringEnable from: " <> x)
+
+instance ToHttpApiData PacketMirroringEnable where
+    toQueryParam = \case
+        PMEFalse' -> "FALSE"
+        PMETrue' -> "TRUE"
+
+instance FromJSON PacketMirroringEnable where
+    parseJSON = parseJSONText "PacketMirroringEnable"
+
+instance ToJSON PacketMirroringEnable where
+    toJSON = toJSONText
+
+-- | The HTTP Status code to use for this RedirectAction. Supported values
+-- are: - MOVED_PERMANENTLY_DEFAULT, which is the default value and
+-- corresponds to 301. - FOUND, which corresponds to 302. - SEE_OTHER which
+-- corresponds to 303. - TEMPORARY_REDIRECT, which corresponds to 307. In
+-- this case, the request method will be retained. - PERMANENT_REDIRECT,
+-- which corresponds to 308. In this case, the request method will be
+-- retained.
+data HTTPRedirectActionRedirectResponseCode
+    = Found
+      -- ^ @FOUND@
+    | MovedPermanentlyDefault
+      -- ^ @MOVED_PERMANENTLY_DEFAULT@
+    | PermanentRedirect
+      -- ^ @PERMANENT_REDIRECT@
+    | SeeOther
+      -- ^ @SEE_OTHER@
+    | TemporaryRedirect
+      -- ^ @TEMPORARY_REDIRECT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPRedirectActionRedirectResponseCode
+
+instance FromHttpApiData HTTPRedirectActionRedirectResponseCode where
+    parseQueryParam = \case
+        "FOUND" -> Right Found
+        "MOVED_PERMANENTLY_DEFAULT" -> Right MovedPermanentlyDefault
+        "PERMANENT_REDIRECT" -> Right PermanentRedirect
+        "SEE_OTHER" -> Right SeeOther
+        "TEMPORARY_REDIRECT" -> Right TemporaryRedirect
+        x -> Left ("Unable to parse HTTPRedirectActionRedirectResponseCode from: " <> x)
+
+instance ToHttpApiData HTTPRedirectActionRedirectResponseCode where
+    toQueryParam = \case
+        Found -> "FOUND"
+        MovedPermanentlyDefault -> "MOVED_PERMANENTLY_DEFAULT"
+        PermanentRedirect -> "PERMANENT_REDIRECT"
+        SeeOther -> "SEE_OTHER"
+        TemporaryRedirect -> "TEMPORARY_REDIRECT"
+
+instance FromJSON HTTPRedirectActionRedirectResponseCode where
+    parseJSON = parseJSONText "HTTPRedirectActionRedirectResponseCode"
+
+instance ToJSON HTTPRedirectActionRedirectResponseCode where
+    toJSON = toJSONText
+
+-- | Type of interconnect, which can take one of the following values: -
+-- PARTNER: A partner-managed interconnection shared between customers
+-- though a partner. - DEDICATED: A dedicated physical interconnection with
+-- the customer. Note that a value IT_PRIVATE has been deprecated in favor
+-- of DEDICATED.
 data InterconnectInterconnectType
     = IITDedicated
       -- ^ @DEDICATED@
@@ -12805,6 +18575,126 @@ instance ToJSON InterconnectInterconnectType where
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data ReservationAggregatedListWarningCode
+    = RESCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RESDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RESDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | RESDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RESExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | RESExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | RESFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RESInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RESLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | RESMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | RESNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RESNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RESNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RESNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RESNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RESNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RESNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RESPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | RESRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RESResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | RESResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RESSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | RESSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RESUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | RESUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReservationAggregatedListWarningCode
+
+instance FromHttpApiData ReservationAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RESCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RESDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right RESDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RESDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right RESExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right RESExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right RESFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RESInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RESLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right RESMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RESNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RESNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RESNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RESNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RESNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RESNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RESNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RESPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right RESRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RESResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right RESResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right RESSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RESSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right RESUndeclaredProperties
+        "UNREACHABLE" -> Right RESUnreachable
+        x -> Left ("Unable to parse ReservationAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData ReservationAggregatedListWarningCode where
+    toQueryParam = \case
+        RESCleanupFailed -> "CLEANUP_FAILED"
+        RESDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RESDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        RESDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RESExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        RESExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        RESFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RESInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RESLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        RESMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        RESNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RESNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RESNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RESNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RESNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RESNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RESNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RESPartialSuccess -> "PARTIAL_SUCCESS"
+        RESRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RESResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        RESResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RESSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        RESSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RESUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        RESUnreachable -> "UNREACHABLE"
+
+instance FromJSON ReservationAggregatedListWarningCode where
+    parseJSON = parseJSONText "ReservationAggregatedListWarningCode"
+
+instance ToJSON ReservationAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceGroupManagerListWarningCode
     = IGMLWCCleanupFailed
       -- ^ @CLEANUP_FAILED@
@@ -12822,6 +18712,8 @@ data InstanceGroupManagerListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGMLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGMLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGMLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGMLWCNextHopAddressNotAssigned
@@ -12838,6 +18730,8 @@ data InstanceGroupManagerListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGMLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGMLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGMLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGMLWCResourceInUseByOtherResourceWarning
@@ -12866,6 +18760,7 @@ instance FromHttpApiData InstanceGroupManagerListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGMLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGMLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGMLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGMLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGMLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGMLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGMLWCNextHopCannotIPForward
@@ -12874,6 +18769,7 @@ instance FromHttpApiData InstanceGroupManagerListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGMLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGMLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGMLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGMLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGMLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGMLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGMLWCResourceNotDeleted
@@ -12893,6 +18789,7 @@ instance ToHttpApiData InstanceGroupManagerListWarningCode where
         IGMLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGMLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGMLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGMLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGMLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGMLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGMLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -12901,6 +18798,7 @@ instance ToHttpApiData InstanceGroupManagerListWarningCode where
         IGMLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGMLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGMLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGMLWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGMLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGMLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGMLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -12965,6 +18863,8 @@ data DiskListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | DLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | DLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | DLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | DLWCNextHopAddressNotAssigned
@@ -12981,6 +18881,8 @@ data DiskListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | DLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | DLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | DLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | DLWCResourceInUseByOtherResourceWarning
@@ -13009,6 +18911,7 @@ instance FromHttpApiData DiskListWarningCode where
         "EXTERNAL_API_WARNING" -> Right DLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right DLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right DLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right DLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DLWCNextHopCannotIPForward
@@ -13017,6 +18920,7 @@ instance FromHttpApiData DiskListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right DLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right DLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right DLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right DLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right DLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right DLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right DLWCResourceNotDeleted
@@ -13036,6 +18940,7 @@ instance ToHttpApiData DiskListWarningCode where
         DLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         DLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        DLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         DLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         DLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13044,6 +18949,7 @@ instance ToHttpApiData DiskListWarningCode where
         DLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         DLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         DLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        DLWCPartialSuccess -> "PARTIAL_SUCCESS"
         DLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         DLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         DLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13056,6 +18962,126 @@ instance FromJSON DiskListWarningCode where
     parseJSON = parseJSONText "DiskListWarningCode"
 
 instance ToJSON DiskListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data VPNGatewaysScopedListWarningCode
+    = VGSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | VGSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | VGSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | VGSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | VGSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | VGSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | VGSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | VGSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VGSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | VGSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | VGSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | VGSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | VGSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | VGSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | VGSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | VGSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | VGSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | VGSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | VGSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | VGSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | VGSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | VGSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | VGSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | VGSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | VGSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VPNGatewaysScopedListWarningCode
+
+instance FromHttpApiData VPNGatewaysScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right VGSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right VGSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right VGSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right VGSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right VGSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right VGSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right VGSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right VGSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VGSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right VGSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VGSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VGSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right VGSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right VGSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right VGSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right VGSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right VGSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VGSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right VGSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VGSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right VGSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right VGSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right VGSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right VGSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right VGSLWCUnreachable
+        x -> Left ("Unable to parse VPNGatewaysScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData VPNGatewaysScopedListWarningCode where
+    toQueryParam = \case
+        VGSLWCCleanupFailed -> "CLEANUP_FAILED"
+        VGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        VGSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        VGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        VGSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        VGSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        VGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        VGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VGSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        VGSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        VGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        VGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        VGSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        VGSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        VGSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        VGSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        VGSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VGSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        VGSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        VGSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        VGSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        VGSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        VGSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        VGSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        VGSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON VPNGatewaysScopedListWarningCode where
+    parseJSON = parseJSONText "VPNGatewaysScopedListWarningCode"
+
+instance ToJSON VPNGatewaysScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -13077,6 +19103,8 @@ data RegionAutoscalerListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RALWCAInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RALWCALargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RALWCAMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RALWCANextHopAddressNotAssigned
@@ -13093,6 +19121,8 @@ data RegionAutoscalerListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RALWCANoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RALWCAPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RALWCARequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RALWCAResourceInUseByOtherResourceWarning
@@ -13121,6 +19151,7 @@ instance FromHttpApiData RegionAutoscalerListWarningCode where
         "EXTERNAL_API_WARNING" -> Right RALWCAExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RALWCAFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RALWCAInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RALWCALargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RALWCAMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RALWCANextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RALWCANextHopCannotIPForward
@@ -13129,6 +19160,7 @@ instance FromHttpApiData RegionAutoscalerListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RALWCANextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RALWCANotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RALWCANoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RALWCAPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RALWCARequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RALWCAResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RALWCAResourceNotDeleted
@@ -13148,6 +19180,7 @@ instance ToHttpApiData RegionAutoscalerListWarningCode where
         RALWCAExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RALWCAFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RALWCAInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RALWCALargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RALWCAMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RALWCANextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RALWCANextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13156,6 +19189,7 @@ instance ToHttpApiData RegionAutoscalerListWarningCode where
         RALWCANextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RALWCANotCriticalError -> "NOT_CRITICAL_ERROR"
         RALWCANoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RALWCAPartialSuccess -> "PARTIAL_SUCCESS"
         RALWCARequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RALWCAResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RALWCAResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13174,11 +19208,11 @@ instance ToJSON RegionAutoscalerListWarningCode where
 -- rate. The currently supported plans are TWELVE_MONTH (1 year), and
 -- THIRTY_SIX_MONTH (3 years).
 data CommitmentPlan
-    = Invalid
+    = CPInvalid
       -- ^ @INVALID@
-    | ThirtySixMonth
+    | CPThirtySixMonth
       -- ^ @THIRTY_SIX_MONTH@
-    | TwelveMonth
+    | CPTwelveMonth
       -- ^ @TWELVE_MONTH@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -13186,16 +19220,16 @@ instance Hashable CommitmentPlan
 
 instance FromHttpApiData CommitmentPlan where
     parseQueryParam = \case
-        "INVALID" -> Right Invalid
-        "THIRTY_SIX_MONTH" -> Right ThirtySixMonth
-        "TWELVE_MONTH" -> Right TwelveMonth
+        "INVALID" -> Right CPInvalid
+        "THIRTY_SIX_MONTH" -> Right CPThirtySixMonth
+        "TWELVE_MONTH" -> Right CPTwelveMonth
         x -> Left ("Unable to parse CommitmentPlan from: " <> x)
 
 instance ToHttpApiData CommitmentPlan where
     toQueryParam = \case
-        Invalid -> "INVALID"
-        ThirtySixMonth -> "THIRTY_SIX_MONTH"
-        TwelveMonth -> "TWELVE_MONTH"
+        CPInvalid -> "INVALID"
+        CPThirtySixMonth -> "THIRTY_SIX_MONTH"
+        CPTwelveMonth -> "TWELVE_MONTH"
 
 instance FromJSON CommitmentPlan where
     parseJSON = parseJSONText "CommitmentPlan"
@@ -13222,6 +19256,8 @@ data OperationListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | OLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | OLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | OLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | OLWCNextHopAddressNotAssigned
@@ -13238,6 +19274,8 @@ data OperationListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | OLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | OLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | OLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | OLWCResourceInUseByOtherResourceWarning
@@ -13266,6 +19304,7 @@ instance FromHttpApiData OperationListWarningCode where
         "EXTERNAL_API_WARNING" -> Right OLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right OLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right OLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right OLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right OLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right OLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right OLWCNextHopCannotIPForward
@@ -13274,6 +19313,7 @@ instance FromHttpApiData OperationListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right OLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right OLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right OLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right OLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right OLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right OLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right OLWCResourceNotDeleted
@@ -13293,6 +19333,7 @@ instance ToHttpApiData OperationListWarningCode where
         OLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         OLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         OLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        OLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         OLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         OLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         OLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13301,6 +19342,7 @@ instance ToHttpApiData OperationListWarningCode where
         OLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         OLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         OLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        OLWCPartialSuccess -> "PARTIAL_SUCCESS"
         OLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         OLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         OLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13313,6 +19355,40 @@ instance FromJSON OperationListWarningCode where
     parseJSON = parseJSONText "OperationListWarningCode"
 
 instance ToJSON OperationListWarningCode where
+    toJSON = toJSONText
+
+data HealthStatusWeightError
+    = InvalidWeight
+      -- ^ @INVALID_WEIGHT@
+    | MissingWeight
+      -- ^ @MISSING_WEIGHT@
+    | UnavailableWeight
+      -- ^ @UNAVAILABLE_WEIGHT@
+    | WeightNone
+      -- ^ @WEIGHT_NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthStatusWeightError
+
+instance FromHttpApiData HealthStatusWeightError where
+    parseQueryParam = \case
+        "INVALID_WEIGHT" -> Right InvalidWeight
+        "MISSING_WEIGHT" -> Right MissingWeight
+        "UNAVAILABLE_WEIGHT" -> Right UnavailableWeight
+        "WEIGHT_NONE" -> Right WeightNone
+        x -> Left ("Unable to parse HealthStatusWeightError from: " <> x)
+
+instance ToHttpApiData HealthStatusWeightError where
+    toQueryParam = \case
+        InvalidWeight -> "INVALID_WEIGHT"
+        MissingWeight -> "MISSING_WEIGHT"
+        UnavailableWeight -> "UNAVAILABLE_WEIGHT"
+        WeightNone -> "WEIGHT_NONE"
+
+instance FromJSON HealthStatusWeightError where
+    parseJSON = parseJSONText "HealthStatusWeightError"
+
+instance ToJSON HealthStatusWeightError where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -13334,6 +19410,8 @@ data ForwardingRuleListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | FRLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | FRLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | FRLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | FRLWCNextHopAddressNotAssigned
@@ -13350,6 +19428,8 @@ data ForwardingRuleListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | FRLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | FRLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | FRLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | FRLWCResourceInUseByOtherResourceWarning
@@ -13378,6 +19458,7 @@ instance FromHttpApiData ForwardingRuleListWarningCode where
         "EXTERNAL_API_WARNING" -> Right FRLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right FRLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right FRLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right FRLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right FRLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FRLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FRLWCNextHopCannotIPForward
@@ -13386,6 +19467,7 @@ instance FromHttpApiData ForwardingRuleListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right FRLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right FRLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right FRLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right FRLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right FRLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right FRLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right FRLWCResourceNotDeleted
@@ -13405,6 +19487,7 @@ instance ToHttpApiData ForwardingRuleListWarningCode where
         FRLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         FRLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         FRLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        FRLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         FRLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         FRLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         FRLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13413,6 +19496,7 @@ instance ToHttpApiData ForwardingRuleListWarningCode where
         FRLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         FRLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         FRLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        FRLWCPartialSuccess -> "PARTIAL_SUCCESS"
         FRLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         FRLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         FRLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13425,6 +19509,52 @@ instance FromJSON ForwardingRuleListWarningCode where
     parseJSON = parseJSONText "ForwardingRuleListWarningCode"
 
 instance ToJSON ForwardingRuleListWarningCode where
+    toJSON = toJSONText
+
+data SSLCertificateManagedSSLCertificateDomainStatusAdditional
+    = SCMSCDSAActive
+      -- ^ @ACTIVE@
+    | SCMSCDSADomainStatusUnspecified
+      -- ^ @DOMAIN_STATUS_UNSPECIFIED@
+    | SCMSCDSAFailedCaaChecking
+      -- ^ @FAILED_CAA_CHECKING@
+    | SCMSCDSAFailedCaaForBidden
+      -- ^ @FAILED_CAA_FORBIDDEN@
+    | SCMSCDSAFailedNotVisible
+      -- ^ @FAILED_NOT_VISIBLE@
+    | SCMSCDSAFailedRateLimited
+      -- ^ @FAILED_RATE_LIMITED@
+    | SCMSCDSAProvisioning
+      -- ^ @PROVISIONING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLCertificateManagedSSLCertificateDomainStatusAdditional
+
+instance FromHttpApiData SSLCertificateManagedSSLCertificateDomainStatusAdditional where
+    parseQueryParam = \case
+        "ACTIVE" -> Right SCMSCDSAActive
+        "DOMAIN_STATUS_UNSPECIFIED" -> Right SCMSCDSADomainStatusUnspecified
+        "FAILED_CAA_CHECKING" -> Right SCMSCDSAFailedCaaChecking
+        "FAILED_CAA_FORBIDDEN" -> Right SCMSCDSAFailedCaaForBidden
+        "FAILED_NOT_VISIBLE" -> Right SCMSCDSAFailedNotVisible
+        "FAILED_RATE_LIMITED" -> Right SCMSCDSAFailedRateLimited
+        "PROVISIONING" -> Right SCMSCDSAProvisioning
+        x -> Left ("Unable to parse SSLCertificateManagedSSLCertificateDomainStatusAdditional from: " <> x)
+
+instance ToHttpApiData SSLCertificateManagedSSLCertificateDomainStatusAdditional where
+    toQueryParam = \case
+        SCMSCDSAActive -> "ACTIVE"
+        SCMSCDSADomainStatusUnspecified -> "DOMAIN_STATUS_UNSPECIFIED"
+        SCMSCDSAFailedCaaChecking -> "FAILED_CAA_CHECKING"
+        SCMSCDSAFailedCaaForBidden -> "FAILED_CAA_FORBIDDEN"
+        SCMSCDSAFailedNotVisible -> "FAILED_NOT_VISIBLE"
+        SCMSCDSAFailedRateLimited -> "FAILED_RATE_LIMITED"
+        SCMSCDSAProvisioning -> "PROVISIONING"
+
+instance FromJSON SSLCertificateManagedSSLCertificateDomainStatusAdditional where
+    parseJSON = parseJSONText "SSLCertificateManagedSSLCertificateDomainStatusAdditional"
+
+instance ToJSON SSLCertificateManagedSSLCertificateDomainStatusAdditional where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -13446,6 +19576,8 @@ data VPNTunnelsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | VTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | VTSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | VTSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | VTSLWCNextHopAddressNotAssigned
@@ -13462,6 +19594,8 @@ data VPNTunnelsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | VTSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | VTSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | VTSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | VTSLWCResourceInUseByOtherResourceWarning
@@ -13490,6 +19624,7 @@ instance FromHttpApiData VPNTunnelsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right VTSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right VTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right VTSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right VTSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right VTSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VTSLWCNextHopCannotIPForward
@@ -13498,6 +19633,7 @@ instance FromHttpApiData VPNTunnelsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right VTSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right VTSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right VTSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right VTSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right VTSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right VTSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right VTSLWCResourceNotDeleted
@@ -13517,6 +19653,7 @@ instance ToHttpApiData VPNTunnelsScopedListWarningCode where
         VTSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         VTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         VTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        VTSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         VTSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         VTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         VTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13525,6 +19662,7 @@ instance ToHttpApiData VPNTunnelsScopedListWarningCode where
         VTSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         VTSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         VTSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        VTSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         VTSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         VTSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         VTSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13558,6 +19696,8 @@ data NodeTypesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NTSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NTSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NTSLWCNextHopAddressNotAssigned
@@ -13574,6 +19714,8 @@ data NodeTypesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NTSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NTSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NTSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NTSLWCResourceInUseByOtherResourceWarning
@@ -13602,6 +19744,7 @@ instance FromHttpApiData NodeTypesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NTSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NTSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NTSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NTSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NTSLWCNextHopCannotIPForward
@@ -13610,6 +19753,7 @@ instance FromHttpApiData NodeTypesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NTSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NTSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NTSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NTSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NTSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NTSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NTSLWCResourceNotDeleted
@@ -13629,6 +19773,7 @@ instance ToHttpApiData NodeTypesScopedListWarningCode where
         NTSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NTSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NTSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13637,6 +19782,7 @@ instance ToHttpApiData NodeTypesScopedListWarningCode where
         NTSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NTSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NTSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NTSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NTSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NTSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NTSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13649,6 +19795,155 @@ instance FromJSON NodeTypesScopedListWarningCode where
     parseJSON = parseJSONText "NodeTypesScopedListWarningCode"
 
 instance ToJSON NodeTypesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies the disk interface to use for attaching this disk, which is
+-- either SCSI or NVME. The default is SCSI. For performance
+-- characteristics of SCSI over NVMe, see Local SSD performance.
+data AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface
+    = ASSKUAAIPRDINvme
+      -- ^ @NVME@
+    | ASSKUAAIPRDIScsi
+      -- ^ @SCSI@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface
+
+instance FromHttpApiData AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface where
+    parseQueryParam = \case
+        "NVME" -> Right ASSKUAAIPRDINvme
+        "SCSI" -> Right ASSKUAAIPRDIScsi
+        x -> Left ("Unable to parse AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface from: " <> x)
+
+instance ToHttpApiData AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface where
+    toQueryParam = \case
+        ASSKUAAIPRDINvme -> "NVME"
+        ASSKUAAIPRDIScsi -> "SCSI"
+
+instance FromJSON AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface where
+    parseJSON = parseJSONText "AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface"
+
+instance ToJSON AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDiskInterface where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data TargetHTTPProxiesScopedListWarningCode
+    = THTTPPSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | THTTPPSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | THTTPPSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | THTTPPSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | THTTPPSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | THTTPPSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | THTTPPSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | THTTPPSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | THTTPPSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | THTTPPSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | THTTPPSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | THTTPPSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | THTTPPSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | THTTPPSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | THTTPPSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | THTTPPSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | THTTPPSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | THTTPPSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | THTTPPSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | THTTPPSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | THTTPPSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | THTTPPSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | THTTPPSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | THTTPPSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | THTTPPSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetHTTPProxiesScopedListWarningCode
+
+instance FromHttpApiData TargetHTTPProxiesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right THTTPPSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right THTTPPSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right THTTPPSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right THTTPPSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right THTTPPSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right THTTPPSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right THTTPPSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right THTTPPSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right THTTPPSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right THTTPPSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right THTTPPSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right THTTPPSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right THTTPPSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right THTTPPSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right THTTPPSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right THTTPPSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right THTTPPSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right THTTPPSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right THTTPPSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right THTTPPSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right THTTPPSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right THTTPPSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right THTTPPSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right THTTPPSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right THTTPPSLWCUnreachable
+        x -> Left ("Unable to parse TargetHTTPProxiesScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData TargetHTTPProxiesScopedListWarningCode where
+    toQueryParam = \case
+        THTTPPSLWCCleanupFailed -> "CLEANUP_FAILED"
+        THTTPPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        THTTPPSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        THTTPPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        THTTPPSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        THTTPPSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        THTTPPSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        THTTPPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        THTTPPSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        THTTPPSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        THTTPPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        THTTPPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        THTTPPSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        THTTPPSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        THTTPPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        THTTPPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        THTTPPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        THTTPPSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        THTTPPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        THTTPPSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        THTTPPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        THTTPPSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        THTTPPSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        THTTPPSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        THTTPPSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON TargetHTTPProxiesScopedListWarningCode where
+    parseJSON = parseJSONText "TargetHTTPProxiesScopedListWarningCode"
+
+instance ToJSON TargetHTTPProxiesScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -13670,6 +19965,8 @@ data TargetInstanceAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TIALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TIALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TIALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TIALWCNextHopAddressNotAssigned
@@ -13686,6 +19983,8 @@ data TargetInstanceAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TIALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TIALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TIALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TIALWCResourceInUseByOtherResourceWarning
@@ -13714,6 +20013,7 @@ instance FromHttpApiData TargetInstanceAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TIALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TIALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TIALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TIALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TIALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TIALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TIALWCNextHopCannotIPForward
@@ -13722,6 +20022,7 @@ instance FromHttpApiData TargetInstanceAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TIALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TIALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TIALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TIALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TIALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TIALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TIALWCResourceNotDeleted
@@ -13741,6 +20042,7 @@ instance ToHttpApiData TargetInstanceAggregatedListWarningCode where
         TIALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TIALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TIALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TIALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TIALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TIALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TIALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13749,6 +20051,7 @@ instance ToHttpApiData TargetInstanceAggregatedListWarningCode where
         TIALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TIALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TIALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TIALWCPartialSuccess -> "PARTIAL_SUCCESS"
         TIALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TIALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TIALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13782,6 +20085,8 @@ data RegionDiskTypeListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RDTLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RDTLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RDTLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RDTLWCNextHopAddressNotAssigned
@@ -13798,6 +20103,8 @@ data RegionDiskTypeListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RDTLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RDTLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RDTLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RDTLWCResourceInUseByOtherResourceWarning
@@ -13826,6 +20133,7 @@ instance FromHttpApiData RegionDiskTypeListWarningCode where
         "EXTERNAL_API_WARNING" -> Right RDTLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RDTLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RDTLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RDTLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RDTLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RDTLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RDTLWCNextHopCannotIPForward
@@ -13834,6 +20142,7 @@ instance FromHttpApiData RegionDiskTypeListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RDTLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RDTLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RDTLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RDTLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RDTLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RDTLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RDTLWCResourceNotDeleted
@@ -13853,6 +20162,7 @@ instance ToHttpApiData RegionDiskTypeListWarningCode where
         RDTLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RDTLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RDTLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RDTLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RDTLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RDTLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RDTLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -13861,6 +20171,7 @@ instance ToHttpApiData RegionDiskTypeListWarningCode where
         RDTLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RDTLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         RDTLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RDTLWCPartialSuccess -> "PARTIAL_SUCCESS"
         RDTLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RDTLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RDTLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -13873,6 +20184,64 @@ instance FromJSON RegionDiskTypeListWarningCode where
     parseJSON = parseJSONText "RegionDiskTypeListWarningCode"
 
 instance ToJSON RegionDiskTypeListWarningCode where
+    toJSON = toJSONText
+
+-- | The private IPv6 google access type for the VM. If not specified, use
+-- INHERIT_FROM_SUBNETWORK as default.
+data InstancePrivateIPv6GoogleAccess
+    = IPIGAEnableBidirectionalAccessToGoogle
+      -- ^ @ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE@
+    | IPIGAEnableOutboundVMAccessToGoogle
+      -- ^ @ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE@
+    | IPIGAInheritFromSubnetwork
+      -- ^ @INHERIT_FROM_SUBNETWORK@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstancePrivateIPv6GoogleAccess
+
+instance FromHttpApiData InstancePrivateIPv6GoogleAccess where
+    parseQueryParam = \case
+        "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE" -> Right IPIGAEnableBidirectionalAccessToGoogle
+        "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE" -> Right IPIGAEnableOutboundVMAccessToGoogle
+        "INHERIT_FROM_SUBNETWORK" -> Right IPIGAInheritFromSubnetwork
+        x -> Left ("Unable to parse InstancePrivateIPv6GoogleAccess from: " <> x)
+
+instance ToHttpApiData InstancePrivateIPv6GoogleAccess where
+    toQueryParam = \case
+        IPIGAEnableBidirectionalAccessToGoogle -> "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
+        IPIGAEnableOutboundVMAccessToGoogle -> "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
+        IPIGAInheritFromSubnetwork -> "INHERIT_FROM_SUBNETWORK"
+
+instance FromJSON InstancePrivateIPv6GoogleAccess where
+    parseJSON = parseJSONText "InstancePrivateIPv6GoogleAccess"
+
+instance ToJSON InstancePrivateIPv6GoogleAccess where
+    toJSON = toJSONText
+
+data SecurityPolicyAdvancedOptionsConfigLogLevel
+    = Normal
+      -- ^ @NORMAL@
+    | Verbose
+      -- ^ @VERBOSE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SecurityPolicyAdvancedOptionsConfigLogLevel
+
+instance FromHttpApiData SecurityPolicyAdvancedOptionsConfigLogLevel where
+    parseQueryParam = \case
+        "NORMAL" -> Right Normal
+        "VERBOSE" -> Right Verbose
+        x -> Left ("Unable to parse SecurityPolicyAdvancedOptionsConfigLogLevel from: " <> x)
+
+instance ToHttpApiData SecurityPolicyAdvancedOptionsConfigLogLevel where
+    toQueryParam = \case
+        Normal -> "NORMAL"
+        Verbose -> "VERBOSE"
+
+instance FromJSON SecurityPolicyAdvancedOptionsConfigLogLevel where
+    parseJSON = parseJSONText "SecurityPolicyAdvancedOptionsConfigLogLevel"
+
+instance ToJSON SecurityPolicyAdvancedOptionsConfigLogLevel where
     toJSON = toJSONText
 
 -- | The type of address to reserve, either INTERNAL or EXTERNAL. If
@@ -13926,6 +20295,8 @@ data TargetPoolListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | TPLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | TPLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | TPLWCNextHopAddressNotAssigned
@@ -13942,6 +20313,8 @@ data TargetPoolListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | TPLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | TPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | TPLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | TPLWCResourceInUseByOtherResourceWarning
@@ -13970,6 +20343,7 @@ instance FromHttpApiData TargetPoolListWarningCode where
         "EXTERNAL_API_WARNING" -> Right TPLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right TPLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TPLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right TPLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TPLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TPLWCNextHopCannotIPForward
@@ -13978,6 +20352,7 @@ instance FromHttpApiData TargetPoolListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right TPLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right TPLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right TPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TPLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right TPLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TPLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right TPLWCResourceNotDeleted
@@ -13997,6 +20372,7 @@ instance ToHttpApiData TargetPoolListWarningCode where
         TPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         TPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         TPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         TPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14005,6 +20381,7 @@ instance ToHttpApiData TargetPoolListWarningCode where
         TPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         TPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         TPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TPLWCPartialSuccess -> "PARTIAL_SUCCESS"
         TPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         TPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         TPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14038,6 +20415,8 @@ data NodeTemplatesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NTSLWCTInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NTSLWCTLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NTSLWCTMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NTSLWCTNextHopAddressNotAssigned
@@ -14054,6 +20433,8 @@ data NodeTemplatesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NTSLWCTNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NTSLWCTPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NTSLWCTRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NTSLWCTResourceInUseByOtherResourceWarning
@@ -14082,6 +20463,7 @@ instance FromHttpApiData NodeTemplatesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NTSLWCTExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NTSLWCTFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NTSLWCTInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NTSLWCTLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NTSLWCTMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NTSLWCTNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NTSLWCTNextHopCannotIPForward
@@ -14090,6 +20472,7 @@ instance FromHttpApiData NodeTemplatesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NTSLWCTNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NTSLWCTNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NTSLWCTNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NTSLWCTPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NTSLWCTRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NTSLWCTResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NTSLWCTResourceNotDeleted
@@ -14109,6 +20492,7 @@ instance ToHttpApiData NodeTemplatesScopedListWarningCode where
         NTSLWCTExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NTSLWCTFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NTSLWCTInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NTSLWCTLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NTSLWCTMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NTSLWCTNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NTSLWCTNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14117,6 +20501,7 @@ instance ToHttpApiData NodeTemplatesScopedListWarningCode where
         NTSLWCTNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NTSLWCTNotCriticalError -> "NOT_CRITICAL_ERROR"
         NTSLWCTNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NTSLWCTPartialSuccess -> "PARTIAL_SUCCESS"
         NTSLWCTRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NTSLWCTResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NTSLWCTResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14150,6 +20535,8 @@ data NetworkListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | NLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | NLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | NLWCNextHopAddressNotAssigned
@@ -14166,6 +20553,8 @@ data NetworkListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | NLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | NLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | NLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | NLWCResourceInUseByOtherResourceWarning
@@ -14194,6 +20583,7 @@ instance FromHttpApiData NetworkListWarningCode where
         "EXTERNAL_API_WARNING" -> Right NLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right NLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right NLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right NLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NLWCNextHopCannotIPForward
@@ -14202,6 +20592,7 @@ instance FromHttpApiData NetworkListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right NLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right NLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right NLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right NLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right NLWCResourceNotDeleted
@@ -14221,6 +20612,7 @@ instance ToHttpApiData NetworkListWarningCode where
         NLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         NLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         NLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         NLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         NLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14229,6 +20621,7 @@ instance ToHttpApiData NetworkListWarningCode where
         NLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         NLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         NLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NLWCPartialSuccess -> "PARTIAL_SUCCESS"
         NLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         NLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         NLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14241,6 +20634,72 @@ instance FromJSON NetworkListWarningCode where
     parseJSON = parseJSONText "NetworkListWarningCode"
 
 instance ToJSON NetworkListWarningCode where
+    toJSON = toJSONText
+
+-- | Preference for a given location: ALLOW or DENY.
+data LocationPolicyLocationPreference
+    = LPLPAllow
+      -- ^ @ALLOW@
+    | LPLPDeny
+      -- ^ @DENY@
+    | LPLPPreferenceUnspecified
+      -- ^ @PREFERENCE_UNSPECIFIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LocationPolicyLocationPreference
+
+instance FromHttpApiData LocationPolicyLocationPreference where
+    parseQueryParam = \case
+        "ALLOW" -> Right LPLPAllow
+        "DENY" -> Right LPLPDeny
+        "PREFERENCE_UNSPECIFIED" -> Right LPLPPreferenceUnspecified
+        x -> Left ("Unable to parse LocationPolicyLocationPreference from: " <> x)
+
+instance ToHttpApiData LocationPolicyLocationPreference where
+    toQueryParam = \case
+        LPLPAllow -> "ALLOW"
+        LPLPDeny -> "DENY"
+        LPLPPreferenceUnspecified -> "PREFERENCE_UNSPECIFIED"
+
+instance FromJSON LocationPolicyLocationPreference where
+    parseJSON = parseJSONText "LocationPolicyLocationPreference"
+
+instance ToJSON LocationPolicyLocationPreference where
+    toJSON = toJSONText
+
+-- | [Output Only] The current state of a scaling schedule.
+data ScalingScheduleStatusState
+    = SSSSActive
+      -- ^ @ACTIVE@
+    | SSSSDisabled
+      -- ^ @DISABLED@
+    | SSSSObsolete
+      -- ^ @OBSOLETE@
+    | SSSSReady
+      -- ^ @READY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ScalingScheduleStatusState
+
+instance FromHttpApiData ScalingScheduleStatusState where
+    parseQueryParam = \case
+        "ACTIVE" -> Right SSSSActive
+        "DISABLED" -> Right SSSSDisabled
+        "OBSOLETE" -> Right SSSSObsolete
+        "READY" -> Right SSSSReady
+        x -> Left ("Unable to parse ScalingScheduleStatusState from: " <> x)
+
+instance ToHttpApiData ScalingScheduleStatusState where
+    toQueryParam = \case
+        SSSSActive -> "ACTIVE"
+        SSSSDisabled -> "DISABLED"
+        SSSSObsolete -> "OBSOLETE"
+        SSSSReady -> "READY"
+
+instance FromJSON ScalingScheduleStatusState where
+    parseJSON = parseJSONText "ScalingScheduleStatusState"
+
+instance ToJSON ScalingScheduleStatusState where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -14262,6 +20721,8 @@ data XpnHostListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | XHLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | XHLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | XHLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | XHLWCNextHopAddressNotAssigned
@@ -14278,6 +20739,8 @@ data XpnHostListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | XHLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | XHLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | XHLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | XHLWCResourceInUseByOtherResourceWarning
@@ -14306,6 +20769,7 @@ instance FromHttpApiData XpnHostListWarningCode where
         "EXTERNAL_API_WARNING" -> Right XHLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right XHLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right XHLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right XHLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right XHLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right XHLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right XHLWCNextHopCannotIPForward
@@ -14314,6 +20778,7 @@ instance FromHttpApiData XpnHostListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right XHLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right XHLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right XHLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right XHLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right XHLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right XHLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right XHLWCResourceNotDeleted
@@ -14333,6 +20798,7 @@ instance ToHttpApiData XpnHostListWarningCode where
         XHLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         XHLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         XHLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        XHLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         XHLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         XHLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         XHLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14341,6 +20807,7 @@ instance ToHttpApiData XpnHostListWarningCode where
         XHLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         XHLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         XHLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        XHLWCPartialSuccess -> "PARTIAL_SUCCESS"
         XHLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         XHLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         XHLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14374,6 +20841,8 @@ data InterconnectAttachmentAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IAALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IAALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IAALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IAALWCNextHopAddressNotAssigned
@@ -14390,6 +20859,8 @@ data InterconnectAttachmentAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IAALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IAALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IAALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IAALWCResourceInUseByOtherResourceWarning
@@ -14418,6 +20889,7 @@ instance FromHttpApiData InterconnectAttachmentAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IAALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IAALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IAALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IAALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IAALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IAALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IAALWCNextHopCannotIPForward
@@ -14426,6 +20898,7 @@ instance FromHttpApiData InterconnectAttachmentAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IAALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IAALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IAALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IAALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IAALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IAALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IAALWCResourceNotDeleted
@@ -14445,6 +20918,7 @@ instance ToHttpApiData InterconnectAttachmentAggregatedListWarningCode where
         IAALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IAALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IAALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IAALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IAALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IAALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IAALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14453,6 +20927,7 @@ instance ToHttpApiData InterconnectAttachmentAggregatedListWarningCode where
         IAALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IAALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IAALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IAALWCPartialSuccess -> "PARTIAL_SUCCESS"
         IAALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IAALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IAALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14465,6 +20940,126 @@ instance FromJSON InterconnectAttachmentAggregatedListWarningCode where
     parseJSON = parseJSONText "InterconnectAttachmentAggregatedListWarningCode"
 
 instance ToJSON InterconnectAttachmentAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data FirewallPolicyListWarningCode
+    = FPLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | FPLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | FPLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | FPLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | FPLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | FPLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | FPLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | FPLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | FPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | FPLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | FPLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | FPLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | FPLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | FPLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | FPLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | FPLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | FPLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | FPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | FPLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | FPLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | FPLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | FPLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | FPLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | FPLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | FPLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FirewallPolicyListWarningCode
+
+instance FromHttpApiData FirewallPolicyListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right FPLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right FPLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right FPLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right FPLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right FPLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right FPLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right FPLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right FPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right FPLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right FPLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FPLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FPLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right FPLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right FPLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right FPLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right FPLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right FPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right FPLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right FPLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right FPLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right FPLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right FPLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right FPLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right FPLWCUndeclaredProperties
+        "UNREACHABLE" -> Right FPLWCUnreachable
+        x -> Left ("Unable to parse FirewallPolicyListWarningCode from: " <> x)
+
+instance ToHttpApiData FirewallPolicyListWarningCode where
+    toQueryParam = \case
+        FPLWCCleanupFailed -> "CLEANUP_FAILED"
+        FPLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        FPLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        FPLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        FPLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        FPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        FPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        FPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        FPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        FPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        FPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        FPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        FPLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        FPLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        FPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        FPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        FPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        FPLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        FPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        FPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        FPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        FPLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        FPLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        FPLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        FPLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON FirewallPolicyListWarningCode where
+    parseJSON = parseJSONText "FirewallPolicyListWarningCode"
+
+instance ToJSON FirewallPolicyListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -14486,6 +21081,8 @@ data AddressListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ADDInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ADDLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ADDMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ADDNextHopAddressNotAssigned
@@ -14502,6 +21099,8 @@ data AddressListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ADDNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ADDPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ADDRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ADDResourceInUseByOtherResourceWarning
@@ -14530,6 +21129,7 @@ instance FromHttpApiData AddressListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ADDExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ADDFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ADDInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ADDLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ADDMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ADDNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ADDNextHopCannotIPForward
@@ -14538,6 +21138,7 @@ instance FromHttpApiData AddressListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ADDNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ADDNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ADDNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ADDPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ADDRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ADDResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ADDResourceNotDeleted
@@ -14557,6 +21158,7 @@ instance ToHttpApiData AddressListWarningCode where
         ADDExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ADDFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ADDInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ADDLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ADDMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ADDNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ADDNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14565,6 +21167,7 @@ instance ToHttpApiData AddressListWarningCode where
         ADDNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ADDNotCriticalError -> "NOT_CRITICAL_ERROR"
         ADDNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ADDPartialSuccess -> "PARTIAL_SUCCESS"
         ADDRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ADDResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ADDResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14579,7 +21182,129 @@ instance FromJSON AddressListWarningCode where
 instance ToJSON AddressListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] State for the peering.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data TargetHTTPSProxiesScopedListWarningCode
+    = THPSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | THPSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | THPSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | THPSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | THPSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | THPSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | THPSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | THPSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | THPSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | THPSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | THPSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | THPSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | THPSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | THPSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | THPSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | THPSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | THPSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | THPSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | THPSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | THPSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | THPSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | THPSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | THPSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | THPSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | THPSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetHTTPSProxiesScopedListWarningCode
+
+instance FromHttpApiData TargetHTTPSProxiesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right THPSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right THPSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right THPSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right THPSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right THPSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right THPSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right THPSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right THPSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right THPSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right THPSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right THPSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right THPSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right THPSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right THPSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right THPSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right THPSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right THPSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right THPSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right THPSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right THPSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right THPSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right THPSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right THPSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right THPSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right THPSLWCUnreachable
+        x -> Left ("Unable to parse TargetHTTPSProxiesScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData TargetHTTPSProxiesScopedListWarningCode where
+    toQueryParam = \case
+        THPSLWCCleanupFailed -> "CLEANUP_FAILED"
+        THPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        THPSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        THPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        THPSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        THPSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        THPSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        THPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        THPSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        THPSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        THPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        THPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        THPSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        THPSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        THPSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        THPSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        THPSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        THPSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        THPSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        THPSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        THPSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        THPSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        THPSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        THPSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        THPSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON TargetHTTPSProxiesScopedListWarningCode where
+    parseJSON = parseJSONText "TargetHTTPSProxiesScopedListWarningCode"
+
+instance ToJSON TargetHTTPSProxiesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | [Output Only] State for the peering, either \`ACTIVE\` or \`INACTIVE\`.
+-- The peering is \`ACTIVE\` when there\'s a matching configuration in the
+-- peer network.
 data NetworkPeeringState
     = NPSActive
       -- ^ @ACTIVE@
@@ -14625,6 +21350,8 @@ data ZoneListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ZLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ZLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ZLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ZLWCNextHopAddressNotAssigned
@@ -14641,6 +21368,8 @@ data ZoneListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ZLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ZLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ZLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ZLWCResourceInUseByOtherResourceWarning
@@ -14669,6 +21398,7 @@ instance FromHttpApiData ZoneListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ZLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ZLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ZLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ZLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ZLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ZLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ZLWCNextHopCannotIPForward
@@ -14677,6 +21407,7 @@ instance FromHttpApiData ZoneListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ZLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ZLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ZLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ZLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ZLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ZLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ZLWCResourceNotDeleted
@@ -14696,6 +21427,7 @@ instance ToHttpApiData ZoneListWarningCode where
         ZLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ZLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ZLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ZLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ZLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ZLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ZLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14704,6 +21436,7 @@ instance ToHttpApiData ZoneListWarningCode where
         ZLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ZLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ZLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ZLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ZLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ZLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ZLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14716,6 +21449,161 @@ instance FromJSON ZoneListWarningCode where
     parseJSON = parseJSONText "ZoneListWarningCode"
 
 instance ToJSON ZoneListWarningCode where
+    toJSON = toJSONText
+
+-- | The category of the commitment. Category MACHINE specifies commitments
+-- composed of machine resources such as VCPU or MEMORY, listed in
+-- resources. Category LICENSE specifies commitments composed of software
+-- licenses, listed in licenseResources. Note that only MACHINE commitments
+-- should have a Type specified.
+data CommitmentCategory
+    = CCCategoryUnspecified
+      -- ^ @CATEGORY_UNSPECIFIED@
+    | CCLicense
+      -- ^ @LICENSE@
+    | CCMachine
+      -- ^ @MACHINE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CommitmentCategory
+
+instance FromHttpApiData CommitmentCategory where
+    parseQueryParam = \case
+        "CATEGORY_UNSPECIFIED" -> Right CCCategoryUnspecified
+        "LICENSE" -> Right CCLicense
+        "MACHINE" -> Right CCMachine
+        x -> Left ("Unable to parse CommitmentCategory from: " <> x)
+
+instance ToHttpApiData CommitmentCategory where
+    toQueryParam = \case
+        CCCategoryUnspecified -> "CATEGORY_UNSPECIFIED"
+        CCLicense -> "LICENSE"
+        CCMachine -> "MACHINE"
+
+instance FromJSON CommitmentCategory where
+    parseJSON = parseJSONText "CommitmentCategory"
+
+instance ToJSON CommitmentCategory where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data NotificationEndpointListWarningCode
+    = NELWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | NELWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | NELWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | NELWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | NELWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | NELWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | NELWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | NELWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | NELWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | NELWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | NELWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | NELWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | NELWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | NELWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | NELWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | NELWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | NELWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | NELWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | NELWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | NELWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | NELWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | NELWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | NELWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | NELWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | NELWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NotificationEndpointListWarningCode
+
+instance FromHttpApiData NotificationEndpointListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right NELWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right NELWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right NELWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right NELWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right NELWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right NELWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right NELWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right NELWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right NELWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right NELWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NELWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NELWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NELWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NELWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NELWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NELWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NELWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right NELWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right NELWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right NELWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right NELWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right NELWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right NELWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right NELWCUndeclaredProperties
+        "UNREACHABLE" -> Right NELWCUnreachable
+        x -> Left ("Unable to parse NotificationEndpointListWarningCode from: " <> x)
+
+instance ToHttpApiData NotificationEndpointListWarningCode where
+    toQueryParam = \case
+        NELWCCleanupFailed -> "CLEANUP_FAILED"
+        NELWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        NELWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        NELWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        NELWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        NELWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        NELWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        NELWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        NELWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        NELWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        NELWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        NELWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        NELWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        NELWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        NELWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        NELWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        NELWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        NELWCPartialSuccess -> "PARTIAL_SUCCESS"
+        NELWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        NELWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        NELWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        NELWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        NELWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        NELWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        NELWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON NotificationEndpointListWarningCode where
+    parseJSON = parseJSONText "NotificationEndpointListWarningCode"
+
+instance ToJSON NotificationEndpointListWarningCode where
     toJSON = toJSONText
 
 -- | The type of the permission that was checked.
@@ -14757,8 +21645,12 @@ instance FromJSON AuthorizationLoggingOptionsPermissionType where
 instance ToJSON AuthorizationLoggingOptionsPermissionType where
     toJSON = toJSONText
 
--- | Form this outage is expected to take. Note that the \"IT_\" versions of
--- this enum have been deprecated in favor of the unprefixed values.
+-- | Form this outage is expected to take, which can take one of the
+-- following values: - OUTAGE: The Interconnect may be completely out of
+-- service for some or all of the specified window. - PARTIAL_OUTAGE: Some
+-- circuits comprising the Interconnect as a whole should remain up, but
+-- with reduced bandwidth. Note that the versions of this enum prefixed
+-- with \"IT_\" have been deprecated in favor of the unprefixed values.
 data InterconnectOutageNotificationIssueType
     = ItOutage
       -- ^ @IT_OUTAGE@
@@ -14812,6 +21704,8 @@ data CommitmentsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | CSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | CSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | CSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | CSLWCNextHopAddressNotAssigned
@@ -14828,6 +21722,8 @@ data CommitmentsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | CSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | CSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | CSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | CSLWCResourceInUseByOtherResourceWarning
@@ -14856,6 +21752,7 @@ instance FromHttpApiData CommitmentsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right CSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right CSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right CSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right CSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right CSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right CSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right CSLWCNextHopCannotIPForward
@@ -14864,6 +21761,7 @@ instance FromHttpApiData CommitmentsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right CSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right CSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right CSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right CSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right CSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right CSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right CSLWCResourceNotDeleted
@@ -14883,6 +21781,7 @@ instance ToHttpApiData CommitmentsScopedListWarningCode where
         CSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         CSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         CSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        CSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         CSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         CSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         CSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -14891,6 +21790,7 @@ instance ToHttpApiData CommitmentsScopedListWarningCode where
         CSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         CSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         CSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        CSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         CSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         CSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         CSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -14952,6 +21852,8 @@ data InterconnectAttachmentsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IASLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IASLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IASLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IASLWCNextHopAddressNotAssigned
@@ -14968,6 +21870,8 @@ data InterconnectAttachmentsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IASLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IASLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IASLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IASLWCResourceInUseByOtherResourceWarning
@@ -14996,6 +21900,7 @@ instance FromHttpApiData InterconnectAttachmentsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IASLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IASLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IASLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IASLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IASLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IASLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IASLWCNextHopCannotIPForward
@@ -15004,6 +21909,7 @@ instance FromHttpApiData InterconnectAttachmentsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IASLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IASLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IASLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IASLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IASLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IASLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IASLWCResourceNotDeleted
@@ -15023,6 +21929,7 @@ instance ToHttpApiData InterconnectAttachmentsScopedListWarningCode where
         IASLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IASLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IASLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IASLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IASLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IASLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IASLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15031,6 +21938,7 @@ instance ToHttpApiData InterconnectAttachmentsScopedListWarningCode where
         IASLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IASLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IASLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IASLWCPartialSuccess -> "PARTIAL_SUCCESS"
         IASLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IASLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IASLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15064,6 +21972,8 @@ data SecurityPolicyListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | SECInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | SECLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | SECMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | SECNextHopAddressNotAssigned
@@ -15080,6 +21990,8 @@ data SecurityPolicyListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | SECNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | SECPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | SECRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | SECResourceInUseByOtherResourceWarning
@@ -15108,6 +22020,7 @@ instance FromHttpApiData SecurityPolicyListWarningCode where
         "EXTERNAL_API_WARNING" -> Right SECExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right SECFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SECInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right SECLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right SECMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SECNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SECNextHopCannotIPForward
@@ -15116,6 +22029,7 @@ instance FromHttpApiData SecurityPolicyListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right SECNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right SECNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right SECNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right SECPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right SECRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right SECResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right SECResourceNotDeleted
@@ -15135,6 +22049,7 @@ instance ToHttpApiData SecurityPolicyListWarningCode where
         SECExternalAPIWarning -> "EXTERNAL_API_WARNING"
         SECFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SECInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        SECLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         SECMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         SECNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SECNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15143,6 +22058,7 @@ instance ToHttpApiData SecurityPolicyListWarningCode where
         SECNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         SECNotCriticalError -> "NOT_CRITICAL_ERROR"
         SECNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        SECPartialSuccess -> "PARTIAL_SUCCESS"
         SECRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         SECResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         SECResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15176,6 +22092,8 @@ data CommitmentAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | CALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | CALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | CALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | CALWCNextHopAddressNotAssigned
@@ -15192,6 +22110,8 @@ data CommitmentAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | CALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | CALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | CALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | CALWCResourceInUseByOtherResourceWarning
@@ -15220,6 +22140,7 @@ instance FromHttpApiData CommitmentAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right CALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right CALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right CALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right CALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right CALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right CALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right CALWCNextHopCannotIPForward
@@ -15228,6 +22149,7 @@ instance FromHttpApiData CommitmentAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right CALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right CALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right CALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right CALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right CALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right CALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right CALWCResourceNotDeleted
@@ -15247,6 +22169,7 @@ instance ToHttpApiData CommitmentAggregatedListWarningCode where
         CALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         CALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         CALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        CALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         CALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         CALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         CALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15255,6 +22178,7 @@ instance ToHttpApiData CommitmentAggregatedListWarningCode where
         CALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         CALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         CALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        CALWCPartialSuccess -> "PARTIAL_SUCCESS"
         CALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         CALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         CALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15288,6 +22212,8 @@ data RegionInstanceGroupListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | RIGLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RIGLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | RIGLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | RIGLWCNextHopAddressNotAssigned
@@ -15304,6 +22230,8 @@ data RegionInstanceGroupListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | RIGLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | RIGLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | RIGLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | RIGLWCResourceInUseByOtherResourceWarning
@@ -15332,6 +22260,7 @@ instance FromHttpApiData RegionInstanceGroupListWarningCode where
         "EXTERNAL_API_WARNING" -> Right RIGLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right RIGLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RIGLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right RIGLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right RIGLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RIGLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RIGLWCNextHopCannotIPForward
@@ -15340,6 +22269,7 @@ instance FromHttpApiData RegionInstanceGroupListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right RIGLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right RIGLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right RIGLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right RIGLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right RIGLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right RIGLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right RIGLWCResourceNotDeleted
@@ -15359,6 +22289,7 @@ instance ToHttpApiData RegionInstanceGroupListWarningCode where
         RIGLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         RIGLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RIGLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RIGLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         RIGLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         RIGLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RIGLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15367,6 +22298,7 @@ instance ToHttpApiData RegionInstanceGroupListWarningCode where
         RIGLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         RIGLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         RIGLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RIGLWCPartialSuccess -> "PARTIAL_SUCCESS"
         RIGLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         RIGLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         RIGLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15381,10 +22313,11 @@ instance FromJSON RegionInstanceGroupListWarningCode where
 instance ToJSON RegionInstanceGroupListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The status of this InterconnectLocation. If the status is
--- AVAILABLE, new Interconnects may be provisioned in this
--- InterconnectLocation. Otherwise, no new Interconnects may be
--- provisioned.
+-- | [Output Only] The status of this InterconnectLocation, which can take
+-- one of the following values: - CLOSED: The InterconnectLocation is
+-- closed and is unavailable for provisioning new Interconnects. -
+-- AVAILABLE: The InterconnectLocation is available for provisioning new
+-- Interconnects.
 data InterconnectLocationStatus
     = Available
       -- ^ @AVAILABLE@
@@ -15430,6 +22363,8 @@ data InstanceGroupsScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IGSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IGSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IGSLWCNextHopAddressNotAssigned
@@ -15446,6 +22381,8 @@ data InstanceGroupsScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IGSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IGSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IGSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IGSLWCResourceInUseByOtherResourceWarning
@@ -15474,6 +22411,7 @@ instance FromHttpApiData InstanceGroupsScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IGSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IGSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IGSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IGSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGSLWCNextHopCannotIPForward
@@ -15482,6 +22420,7 @@ instance FromHttpApiData InstanceGroupsScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IGSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IGSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IGSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IGSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IGSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IGSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IGSLWCResourceNotDeleted
@@ -15501,6 +22440,7 @@ instance ToHttpApiData InstanceGroupsScopedListWarningCode where
         IGSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IGSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IGSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15509,6 +22449,7 @@ instance ToHttpApiData InstanceGroupsScopedListWarningCode where
         IGSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IGSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IGSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IGSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         IGSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IGSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IGSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15523,8 +22464,14 @@ instance FromJSON InstanceGroupsScopedListWarningCode where
 instance ToJSON InstanceGroupsScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The current status of whether or not this Interconnect is
--- functional.
+-- | [Output Only] The current status of this Interconnect\'s functionality,
+-- which can take one of the following values: - OS_ACTIVE: A valid
+-- Interconnect, which is turned up and is ready to use. Attachments may be
+-- provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect
+-- that has not completed turnup. No attachments may be provisioned on this
+-- Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing
+-- internal maintenance. No attachments may be provisioned or updated on
+-- this Interconnect.
 data InterconnectOperationalStatus
     = IOSOSActive
       -- ^ @OS_ACTIVE@
@@ -15570,6 +22517,8 @@ data LicensesListResponseWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | LLRWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | LLRWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | LLRWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | LLRWCNextHopAddressNotAssigned
@@ -15586,6 +22535,8 @@ data LicensesListResponseWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | LLRWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | LLRWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | LLRWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | LLRWCResourceInUseByOtherResourceWarning
@@ -15614,6 +22565,7 @@ instance FromHttpApiData LicensesListResponseWarningCode where
         "EXTERNAL_API_WARNING" -> Right LLRWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right LLRWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right LLRWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right LLRWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right LLRWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right LLRWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right LLRWCNextHopCannotIPForward
@@ -15622,6 +22574,7 @@ instance FromHttpApiData LicensesListResponseWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right LLRWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right LLRWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right LLRWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right LLRWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right LLRWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right LLRWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right LLRWCResourceNotDeleted
@@ -15641,6 +22594,7 @@ instance ToHttpApiData LicensesListResponseWarningCode where
         LLRWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         LLRWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         LLRWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        LLRWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         LLRWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         LLRWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         LLRWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15649,6 +22603,7 @@ instance ToHttpApiData LicensesListResponseWarningCode where
         LLRWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         LLRWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         LLRWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        LLRWCPartialSuccess -> "PARTIAL_SUCCESS"
         LLRWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         LLRWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         LLRWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15663,9 +22618,127 @@ instance FromJSON LicensesListResponseWarningCode where
 instance ToJSON LicensesListResponseWarningCode where
     toJSON = toJSONText
 
+-- | The role of subnetwork. Currently, this field is only used when purpose
+-- = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or
+-- BACKUP. An ACTIVE subnetwork is one that is currently being used for
+-- Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is
+-- ready to be promoted to ACTIVE or is currently draining. This field can
+-- be updated with a patch request.
+data SubnetworkRole
+    = SRActive
+      -- ^ @ACTIVE@
+    | SRBackup
+      -- ^ @BACKUP@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SubnetworkRole
+
+instance FromHttpApiData SubnetworkRole where
+    parseQueryParam = \case
+        "ACTIVE" -> Right SRActive
+        "BACKUP" -> Right SRBackup
+        x -> Left ("Unable to parse SubnetworkRole from: " <> x)
+
+instance ToHttpApiData SubnetworkRole where
+    toQueryParam = \case
+        SRActive -> "ACTIVE"
+        SRBackup -> "BACKUP"
+
+instance FromJSON SubnetworkRole where
+    parseJSON = parseJSONText "SubnetworkRole"
+
+instance ToJSON SubnetworkRole where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of the public delegated prefix.
+data PublicDelegatedPrefixStatus
+    = PDPSAnnounced
+      -- ^ @ANNOUNCED@
+    | PDPSDeleting
+      -- ^ @DELETING@
+    | PDPSInitializing
+      -- ^ @INITIALIZING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicDelegatedPrefixStatus
+
+instance FromHttpApiData PublicDelegatedPrefixStatus where
+    parseQueryParam = \case
+        "ANNOUNCED" -> Right PDPSAnnounced
+        "DELETING" -> Right PDPSDeleting
+        "INITIALIZING" -> Right PDPSInitializing
+        x -> Left ("Unable to parse PublicDelegatedPrefixStatus from: " <> x)
+
+instance ToHttpApiData PublicDelegatedPrefixStatus where
+    toQueryParam = \case
+        PDPSAnnounced -> "ANNOUNCED"
+        PDPSDeleting -> "DELETING"
+        PDPSInitializing -> "INITIALIZING"
+
+instance FromJSON PublicDelegatedPrefixStatus where
+    parseJSON = parseJSONText "PublicDelegatedPrefixStatus"
+
+instance ToJSON PublicDelegatedPrefixStatus where
+    toJSON = toJSONText
+
+-- | Defines a schedule that runs on specific days of the week. Specify one
+-- or more days. The following options are available: MONDAY, TUESDAY,
+-- WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY.
+data ResourcePolicyWeeklyCycleDayOfWeekDay
+    = RPWCDOWDFriday
+      -- ^ @FRIDAY@
+    | RPWCDOWDInvalid
+      -- ^ @INVALID@
+    | RPWCDOWDMonday
+      -- ^ @MONDAY@
+    | RPWCDOWDSaturday
+      -- ^ @SATURDAY@
+    | RPWCDOWDSunday
+      -- ^ @SUNDAY@
+    | RPWCDOWDThursday
+      -- ^ @THURSDAY@
+    | RPWCDOWDTuesday
+      -- ^ @TUESDAY@
+    | RPWCDOWDWednesday
+      -- ^ @WEDNESDAY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePolicyWeeklyCycleDayOfWeekDay
+
+instance FromHttpApiData ResourcePolicyWeeklyCycleDayOfWeekDay where
+    parseQueryParam = \case
+        "FRIDAY" -> Right RPWCDOWDFriday
+        "INVALID" -> Right RPWCDOWDInvalid
+        "MONDAY" -> Right RPWCDOWDMonday
+        "SATURDAY" -> Right RPWCDOWDSaturday
+        "SUNDAY" -> Right RPWCDOWDSunday
+        "THURSDAY" -> Right RPWCDOWDThursday
+        "TUESDAY" -> Right RPWCDOWDTuesday
+        "WEDNESDAY" -> Right RPWCDOWDWednesday
+        x -> Left ("Unable to parse ResourcePolicyWeeklyCycleDayOfWeekDay from: " <> x)
+
+instance ToHttpApiData ResourcePolicyWeeklyCycleDayOfWeekDay where
+    toQueryParam = \case
+        RPWCDOWDFriday -> "FRIDAY"
+        RPWCDOWDInvalid -> "INVALID"
+        RPWCDOWDMonday -> "MONDAY"
+        RPWCDOWDSaturday -> "SATURDAY"
+        RPWCDOWDSunday -> "SUNDAY"
+        RPWCDOWDThursday -> "THURSDAY"
+        RPWCDOWDTuesday -> "TUESDAY"
+        RPWCDOWDWednesday -> "WEDNESDAY"
+
+instance FromJSON ResourcePolicyWeeklyCycleDayOfWeekDay where
+    parseJSON = parseJSONText "ResourcePolicyWeeklyCycleDayOfWeekDay"
+
+instance ToJSON ResourcePolicyWeeklyCycleDayOfWeekDay where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the instance.
 data InstanceWithNamedPortsStatus
-    = IWNPSProvisioning
+    = IWNPSDeprovisioning
+      -- ^ @DEPROVISIONING@
+    | IWNPSProvisioning
       -- ^ @PROVISIONING@
     | IWNPSRepairing
       -- ^ @REPAIRING@
@@ -15689,6 +22762,7 @@ instance Hashable InstanceWithNamedPortsStatus
 
 instance FromHttpApiData InstanceWithNamedPortsStatus where
     parseQueryParam = \case
+        "DEPROVISIONING" -> Right IWNPSDeprovisioning
         "PROVISIONING" -> Right IWNPSProvisioning
         "REPAIRING" -> Right IWNPSRepairing
         "RUNNING" -> Right IWNPSRunning
@@ -15702,6 +22776,7 @@ instance FromHttpApiData InstanceWithNamedPortsStatus where
 
 instance ToHttpApiData InstanceWithNamedPortsStatus where
     toQueryParam = \case
+        IWNPSDeprovisioning -> "DEPROVISIONING"
         IWNPSProvisioning -> "PROVISIONING"
         IWNPSRepairing -> "REPAIRING"
         IWNPSRunning -> "RUNNING"
@@ -15765,6 +22840,8 @@ data CommitmentListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | CLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | CLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | CLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | CLWCNextHopAddressNotAssigned
@@ -15781,6 +22858,8 @@ data CommitmentListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | CLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | CLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | CLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | CLWCResourceInUseByOtherResourceWarning
@@ -15809,6 +22888,7 @@ instance FromHttpApiData CommitmentListWarningCode where
         "EXTERNAL_API_WARNING" -> Right CLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right CLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right CLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right CLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right CLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right CLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right CLWCNextHopCannotIPForward
@@ -15817,6 +22897,7 @@ instance FromHttpApiData CommitmentListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right CLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right CLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right CLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right CLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right CLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right CLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right CLWCResourceNotDeleted
@@ -15836,6 +22917,7 @@ instance ToHttpApiData CommitmentListWarningCode where
         CLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         CLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         CLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        CLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         CLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         CLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         CLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -15844,6 +22926,7 @@ instance ToHttpApiData CommitmentListWarningCode where
         CLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         CLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         CLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        CLWCPartialSuccess -> "PARTIAL_SUCCESS"
         CLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         CLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         CLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -15896,6 +22979,42 @@ instance FromJSON HTTPHealthCheckPortSpecification where
 instance ToJSON HTTPHealthCheckPortSpecification where
     toJSON = toJSONText
 
+-- | The autoscaling mode. Set to one of: ON, OFF, or ONLY_SCALE_OUT. For
+-- more information, see Autoscaler modes.
+data NodeGroupAutoscalingPolicyMode
+    = ModeUnspecified
+      -- ^ @MODE_UNSPECIFIED@
+    | Off
+      -- ^ @OFF@
+    | ON
+      -- ^ @ON@
+    | OnlyScaleOut
+      -- ^ @ONLY_SCALE_OUT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NodeGroupAutoscalingPolicyMode
+
+instance FromHttpApiData NodeGroupAutoscalingPolicyMode where
+    parseQueryParam = \case
+        "MODE_UNSPECIFIED" -> Right ModeUnspecified
+        "OFF" -> Right Off
+        "ON" -> Right ON
+        "ONLY_SCALE_OUT" -> Right OnlyScaleOut
+        x -> Left ("Unable to parse NodeGroupAutoscalingPolicyMode from: " <> x)
+
+instance ToHttpApiData NodeGroupAutoscalingPolicyMode where
+    toQueryParam = \case
+        ModeUnspecified -> "MODE_UNSPECIFIED"
+        Off -> "OFF"
+        ON -> "ON"
+        OnlyScaleOut -> "ONLY_SCALE_OUT"
+
+instance FromJSON NodeGroupAutoscalingPolicyMode where
+    parseJSON = parseJSONText "NodeGroupAutoscalingPolicyMode"
+
+instance ToJSON NodeGroupAutoscalingPolicyMode where
+    toJSON = toJSONText
+
 -- | Trusted attributes supplied by the IAM system.
 data ConditionIAM
     = Approver
@@ -15906,6 +23025,8 @@ data ConditionIAM
       -- ^ @AUTHORITY@
     | CredentialsType
       -- ^ @CREDENTIALS_TYPE@
+    | CredsAssertion
+      -- ^ @CREDS_ASSERTION@
     | JustificationType
       -- ^ @JUSTIFICATION_TYPE@
     | NoAttr
@@ -15922,6 +23043,7 @@ instance FromHttpApiData ConditionIAM where
         "ATTRIBUTION" -> Right Attribution
         "AUTHORITY" -> Right Authority
         "CREDENTIALS_TYPE" -> Right CredentialsType
+        "CREDS_ASSERTION" -> Right CredsAssertion
         "JUSTIFICATION_TYPE" -> Right JustificationType
         "NO_ATTR" -> Right NoAttr
         "SECURITY_REALM" -> Right SecurityRealm
@@ -15933,6 +23055,7 @@ instance ToHttpApiData ConditionIAM where
         Attribution -> "ATTRIBUTION"
         Authority -> "AUTHORITY"
         CredentialsType -> "CREDENTIALS_TYPE"
+        CredsAssertion -> "CREDS_ASSERTION"
         JustificationType -> "JUSTIFICATION_TYPE"
         NoAttr -> "NO_ATTR"
         SecurityRealm -> "SECURITY_REALM"
@@ -15941,6 +23064,70 @@ instance FromJSON ConditionIAM where
     parseJSON = parseJSONText "ConditionIAM"
 
 instance ToJSON ConditionIAM where
+    toJSON = toJSONText
+
+-- | [Output Only] The status of resource policy creation.
+data ResourcePolicyStatus
+    = RPSCreating
+      -- ^ @CREATING@
+    | RPSDeleting
+      -- ^ @DELETING@
+    | RPSExpired
+      -- ^ @EXPIRED@
+    | RPSInvalid
+      -- ^ @INVALID@
+    | RPSReady
+      -- ^ @READY@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ResourcePolicyStatus
+
+instance FromHttpApiData ResourcePolicyStatus where
+    parseQueryParam = \case
+        "CREATING" -> Right RPSCreating
+        "DELETING" -> Right RPSDeleting
+        "EXPIRED" -> Right RPSExpired
+        "INVALID" -> Right RPSInvalid
+        "READY" -> Right RPSReady
+        x -> Left ("Unable to parse ResourcePolicyStatus from: " <> x)
+
+instance ToHttpApiData ResourcePolicyStatus where
+    toQueryParam = \case
+        RPSCreating -> "CREATING"
+        RPSDeleting -> "DELETING"
+        RPSExpired -> "EXPIRED"
+        RPSInvalid -> "INVALID"
+        RPSReady -> "READY"
+
+instance FromJSON ResourcePolicyStatus where
+    parseJSON = parseJSONText "ResourcePolicyStatus"
+
+instance ToJSON ResourcePolicyStatus where
+    toJSON = toJSONText
+
+-- | Indicates the reason why the VPN connection does not meet the high
+-- availability redundancy criteria\/requirement. Valid values is
+-- INCOMPLETE_TUNNELS_COVERAGE.
+data VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason
+    = IncompleteTunnelsCoverage
+      -- ^ @INCOMPLETE_TUNNELS_COVERAGE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason
+
+instance FromHttpApiData VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason where
+    parseQueryParam = \case
+        "INCOMPLETE_TUNNELS_COVERAGE" -> Right IncompleteTunnelsCoverage
+        x -> Left ("Unable to parse VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason from: " <> x)
+
+instance ToHttpApiData VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason where
+    toQueryParam = \case
+        IncompleteTunnelsCoverage -> "INCOMPLETE_TUNNELS_COVERAGE"
+
+instance FromJSON VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason where
+    parseJSON = parseJSONText "VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason"
+
+instance ToJSON VPNGatewayStatusHighAvailabilityRequirementStateUnsatisfiedReason where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -15962,6 +23149,8 @@ data AddressAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | AALWCAInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | AALWCALargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | AALWCAMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | AALWCANextHopAddressNotAssigned
@@ -15978,6 +23167,8 @@ data AddressAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | AALWCANoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | AALWCAPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | AALWCARequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | AALWCAResourceInUseByOtherResourceWarning
@@ -16006,6 +23197,7 @@ instance FromHttpApiData AddressAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right AALWCAExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right AALWCAFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right AALWCAInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right AALWCALargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right AALWCAMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right AALWCANextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right AALWCANextHopCannotIPForward
@@ -16014,6 +23206,7 @@ instance FromHttpApiData AddressAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right AALWCANextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right AALWCANotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right AALWCANoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right AALWCAPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right AALWCARequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right AALWCAResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right AALWCAResourceNotDeleted
@@ -16033,6 +23226,7 @@ instance ToHttpApiData AddressAggregatedListWarningCode where
         AALWCAExternalAPIWarning -> "EXTERNAL_API_WARNING"
         AALWCAFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         AALWCAInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        AALWCALargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         AALWCAMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         AALWCANextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         AALWCANextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -16041,6 +23235,7 @@ instance ToHttpApiData AddressAggregatedListWarningCode where
         AALWCANextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         AALWCANotCriticalError -> "NOT_CRITICAL_ERROR"
         AALWCANoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        AALWCAPartialSuccess -> "PARTIAL_SUCCESS"
         AALWCARequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         AALWCAResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         AALWCAResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -16074,6 +23269,8 @@ data InterconnectAttachmentListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | IALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | IALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | IALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | IALWCNextHopAddressNotAssigned
@@ -16090,6 +23287,8 @@ data InterconnectAttachmentListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | IALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | IALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | IALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | IALWCResourceInUseByOtherResourceWarning
@@ -16118,6 +23317,7 @@ instance FromHttpApiData InterconnectAttachmentListWarningCode where
         "EXTERNAL_API_WARNING" -> Right IALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right IALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right IALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right IALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IALWCNextHopCannotIPForward
@@ -16126,6 +23326,7 @@ instance FromHttpApiData InterconnectAttachmentListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right IALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right IALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right IALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right IALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right IALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right IALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right IALWCResourceNotDeleted
@@ -16145,6 +23346,7 @@ instance ToHttpApiData InterconnectAttachmentListWarningCode where
         IALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         IALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        IALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         IALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         IALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -16153,6 +23355,7 @@ instance ToHttpApiData InterconnectAttachmentListWarningCode where
         IALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         IALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         IALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        IALWCPartialSuccess -> "PARTIAL_SUCCESS"
         IALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         IALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         IALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -16165,6 +23368,279 @@ instance FromJSON InterconnectAttachmentListWarningCode where
     parseJSON = parseJSONText "InterconnectAttachmentListWarningCode"
 
 instance ToJSON InterconnectAttachmentListWarningCode where
+    toJSON = toJSONText
+
+-- | The status of the public advertised prefix.
+data PublicAdvertisedPrefixStatus
+    = Initial
+      -- ^ @INITIAL@
+    | PrefixConfigurationComplete
+      -- ^ @PREFIX_CONFIGURATION_COMPLETE@
+    | PrefixConfigurationInProgress
+      -- ^ @PREFIX_CONFIGURATION_IN_PROGRESS@
+    | PrefixRemovalInProgress
+      -- ^ @PREFIX_REMOVAL_IN_PROGRESS@
+    | PtrConfigured
+      -- ^ @PTR_CONFIGURED@
+    | ReverseDNSLookupFailed
+      -- ^ @REVERSE_DNS_LOOKUP_FAILED@
+    | Validated
+      -- ^ @VALIDATED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublicAdvertisedPrefixStatus
+
+instance FromHttpApiData PublicAdvertisedPrefixStatus where
+    parseQueryParam = \case
+        "INITIAL" -> Right Initial
+        "PREFIX_CONFIGURATION_COMPLETE" -> Right PrefixConfigurationComplete
+        "PREFIX_CONFIGURATION_IN_PROGRESS" -> Right PrefixConfigurationInProgress
+        "PREFIX_REMOVAL_IN_PROGRESS" -> Right PrefixRemovalInProgress
+        "PTR_CONFIGURED" -> Right PtrConfigured
+        "REVERSE_DNS_LOOKUP_FAILED" -> Right ReverseDNSLookupFailed
+        "VALIDATED" -> Right Validated
+        x -> Left ("Unable to parse PublicAdvertisedPrefixStatus from: " <> x)
+
+instance ToHttpApiData PublicAdvertisedPrefixStatus where
+    toQueryParam = \case
+        Initial -> "INITIAL"
+        PrefixConfigurationComplete -> "PREFIX_CONFIGURATION_COMPLETE"
+        PrefixConfigurationInProgress -> "PREFIX_CONFIGURATION_IN_PROGRESS"
+        PrefixRemovalInProgress -> "PREFIX_REMOVAL_IN_PROGRESS"
+        PtrConfigured -> "PTR_CONFIGURED"
+        ReverseDNSLookupFailed -> "REVERSE_DNS_LOOKUP_FAILED"
+        Validated -> "VALIDATED"
+
+instance FromJSON PublicAdvertisedPrefixStatus where
+    parseJSON = parseJSONText "PublicAdvertisedPrefixStatus"
+
+instance ToJSON PublicAdvertisedPrefixStatus where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data TargetGrpcProxyListWarningCode
+    = TGPLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | TGPLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | TGPLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | TGPLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | TGPLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | TGPLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | TGPLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | TGPLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | TGPLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | TGPLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | TGPLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | TGPLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | TGPLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | TGPLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | TGPLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | TGPLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | TGPLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | TGPLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | TGPLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | TGPLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | TGPLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | TGPLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | TGPLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | TGPLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | TGPLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetGrpcProxyListWarningCode
+
+instance FromHttpApiData TargetGrpcProxyListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right TGPLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right TGPLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right TGPLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TGPLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right TGPLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right TGPLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right TGPLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right TGPLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right TGPLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right TGPLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TGPLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TGPLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right TGPLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right TGPLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right TGPLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right TGPLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right TGPLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right TGPLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right TGPLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right TGPLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right TGPLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right TGPLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right TGPLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right TGPLWCUndeclaredProperties
+        "UNREACHABLE" -> Right TGPLWCUnreachable
+        x -> Left ("Unable to parse TargetGrpcProxyListWarningCode from: " <> x)
+
+instance ToHttpApiData TargetGrpcProxyListWarningCode where
+    toQueryParam = \case
+        TGPLWCCleanupFailed -> "CLEANUP_FAILED"
+        TGPLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        TGPLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        TGPLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        TGPLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        TGPLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        TGPLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        TGPLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        TGPLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        TGPLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        TGPLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        TGPLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        TGPLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        TGPLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        TGPLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        TGPLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        TGPLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        TGPLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        TGPLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        TGPLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        TGPLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        TGPLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        TGPLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        TGPLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        TGPLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON TargetGrpcProxyListWarningCode where
+    parseJSON = parseJSONText "TargetGrpcProxyListWarningCode"
+
+instance ToJSON TargetGrpcProxyListWarningCode where
+    toJSON = toJSONText
+
+-- | CPU overcommit.
+data NodeGroupNodeCPUOvercommitType
+    = NGNCOTCPUOvercommitTypeUnspecified
+      -- ^ @CPU_OVERCOMMIT_TYPE_UNSPECIFIED@
+    | NGNCOTEnabled
+      -- ^ @ENABLED@
+    | NGNCOTNone
+      -- ^ @NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NodeGroupNodeCPUOvercommitType
+
+instance FromHttpApiData NodeGroupNodeCPUOvercommitType where
+    parseQueryParam = \case
+        "CPU_OVERCOMMIT_TYPE_UNSPECIFIED" -> Right NGNCOTCPUOvercommitTypeUnspecified
+        "ENABLED" -> Right NGNCOTEnabled
+        "NONE" -> Right NGNCOTNone
+        x -> Left ("Unable to parse NodeGroupNodeCPUOvercommitType from: " <> x)
+
+instance ToHttpApiData NodeGroupNodeCPUOvercommitType where
+    toQueryParam = \case
+        NGNCOTCPUOvercommitTypeUnspecified -> "CPU_OVERCOMMIT_TYPE_UNSPECIFIED"
+        NGNCOTEnabled -> "ENABLED"
+        NGNCOTNone -> "NONE"
+
+instance FromJSON NodeGroupNodeCPUOvercommitType where
+    parseJSON = parseJSONText "NodeGroupNodeCPUOvercommitType"
+
+instance ToJSON NodeGroupNodeCPUOvercommitType where
+    toJSON = toJSONText
+
+-- | Specifies the action to take when updating an instance even if the
+-- updated properties do not require it. If not specified, then Compute
+-- Engine acts based on the minimum action that the updated properties
+-- require.
+data InstancesUpdateMinimalAction
+    = IUMAInvalid
+      -- ^ @INVALID@
+    | IUMANoEffect
+      -- ^ @NO_EFFECT@
+    | IUMARefresh
+      -- ^ @REFRESH@
+    | IUMARestart
+      -- ^ @RESTART@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstancesUpdateMinimalAction
+
+instance FromHttpApiData InstancesUpdateMinimalAction where
+    parseQueryParam = \case
+        "INVALID" -> Right IUMAInvalid
+        "NO_EFFECT" -> Right IUMANoEffect
+        "REFRESH" -> Right IUMARefresh
+        "RESTART" -> Right IUMARestart
+        x -> Left ("Unable to parse InstancesUpdateMinimalAction from: " <> x)
+
+instance ToHttpApiData InstancesUpdateMinimalAction where
+    toQueryParam = \case
+        IUMAInvalid -> "INVALID"
+        IUMANoEffect -> "NO_EFFECT"
+        IUMARefresh -> "REFRESH"
+        IUMARestart -> "RESTART"
+
+instance FromJSON InstancesUpdateMinimalAction where
+    parseJSON = parseJSONText "InstancesUpdateMinimalAction"
+
+instance ToJSON InstancesUpdateMinimalAction where
+    toJSON = toJSONText
+
+-- | Specifies the type of reservation from which this instance can consume
+-- resources: ANY_RESERVATION (default), SPECIFIC_RESERVATION, or
+-- NO_RESERVATION. See Consuming reserved instances for examples.
+data ReservationAffinityConsumeReservationType
+    = RACRTAnyReservation
+      -- ^ @ANY_RESERVATION@
+    | RACRTNoReservation
+      -- ^ @NO_RESERVATION@
+    | RACRTSpecificReservation
+      -- ^ @SPECIFIC_RESERVATION@
+    | RACRTUnspecified
+      -- ^ @UNSPECIFIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReservationAffinityConsumeReservationType
+
+instance FromHttpApiData ReservationAffinityConsumeReservationType where
+    parseQueryParam = \case
+        "ANY_RESERVATION" -> Right RACRTAnyReservation
+        "NO_RESERVATION" -> Right RACRTNoReservation
+        "SPECIFIC_RESERVATION" -> Right RACRTSpecificReservation
+        "UNSPECIFIED" -> Right RACRTUnspecified
+        x -> Left ("Unable to parse ReservationAffinityConsumeReservationType from: " <> x)
+
+instance ToHttpApiData ReservationAffinityConsumeReservationType where
+    toQueryParam = \case
+        RACRTAnyReservation -> "ANY_RESERVATION"
+        RACRTNoReservation -> "NO_RESERVATION"
+        RACRTSpecificReservation -> "SPECIFIC_RESERVATION"
+        RACRTUnspecified -> "UNSPECIFIED"
+
+instance FromJSON ReservationAffinityConsumeReservationType where
+    parseJSON = parseJSONText "ReservationAffinityConsumeReservationType"
+
+instance ToJSON ReservationAffinityConsumeReservationType where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -16186,6 +23662,8 @@ data InstancesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | ISLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | ISLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | ISLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | ISLWCNextHopAddressNotAssigned
@@ -16202,6 +23680,8 @@ data InstancesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | ISLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | ISLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | ISLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | ISLWCResourceInUseByOtherResourceWarning
@@ -16230,6 +23710,7 @@ instance FromHttpApiData InstancesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right ISLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right ISLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ISLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right ISLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right ISLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ISLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ISLWCNextHopCannotIPForward
@@ -16238,6 +23719,7 @@ instance FromHttpApiData InstancesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right ISLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right ISLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right ISLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right ISLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right ISLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right ISLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right ISLWCResourceNotDeleted
@@ -16257,6 +23739,7 @@ instance ToHttpApiData InstancesScopedListWarningCode where
         ISLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         ISLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ISLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        ISLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         ISLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         ISLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ISLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -16265,6 +23748,7 @@ instance ToHttpApiData InstancesScopedListWarningCode where
         ISLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         ISLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         ISLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        ISLWCPartialSuccess -> "PARTIAL_SUCCESS"
         ISLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         ISLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         ISLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -16277,6 +23761,201 @@ instance FromJSON InstancesScopedListWarningCode where
     parseJSON = parseJSONText "InstancesScopedListWarningCode"
 
 instance ToJSON InstancesScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | The private IPv6 google access type for VMs. If not specified, use
+-- INHERIT_FROM_SUBNETWORK as default.
+data InstancePropertiesPrivateIPv6GoogleAccess
+    = IPPIGAEnableBidirectionalAccessToGoogle
+      -- ^ @ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE@
+    | IPPIGAEnableOutboundVMAccessToGoogle
+      -- ^ @ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE@
+    | IPPIGAInheritFromSubnetwork
+      -- ^ @INHERIT_FROM_SUBNETWORK@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstancePropertiesPrivateIPv6GoogleAccess
+
+instance FromHttpApiData InstancePropertiesPrivateIPv6GoogleAccess where
+    parseQueryParam = \case
+        "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE" -> Right IPPIGAEnableBidirectionalAccessToGoogle
+        "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE" -> Right IPPIGAEnableOutboundVMAccessToGoogle
+        "INHERIT_FROM_SUBNETWORK" -> Right IPPIGAInheritFromSubnetwork
+        x -> Left ("Unable to parse InstancePropertiesPrivateIPv6GoogleAccess from: " <> x)
+
+instance ToHttpApiData InstancePropertiesPrivateIPv6GoogleAccess where
+    toQueryParam = \case
+        IPPIGAEnableBidirectionalAccessToGoogle -> "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
+        IPPIGAEnableOutboundVMAccessToGoogle -> "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
+        IPPIGAInheritFromSubnetwork -> "INHERIT_FROM_SUBNETWORK"
+
+instance FromJSON InstancePropertiesPrivateIPv6GoogleAccess where
+    parseJSON = parseJSONText "InstancePropertiesPrivateIPv6GoogleAccess"
+
+instance ToJSON InstancePropertiesPrivateIPv6GoogleAccess where
+    toJSON = toJSONText
+
+-- | [Output only] Status of the managed certificate resource.
+data SSLCertificateManagedSSLCertificateStatus
+    = SCMSCSActive
+      -- ^ @ACTIVE@
+    | SCMSCSManagedCertificateStatusUnspecified
+      -- ^ @MANAGED_CERTIFICATE_STATUS_UNSPECIFIED@
+    | SCMSCSProvisioning
+      -- ^ @PROVISIONING@
+    | SCMSCSProvisioningFailed
+      -- ^ @PROVISIONING_FAILED@
+    | SCMSCSProvisioningFailedPermanently
+      -- ^ @PROVISIONING_FAILED_PERMANENTLY@
+    | SCMSCSRenewalFailed
+      -- ^ @RENEWAL_FAILED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLCertificateManagedSSLCertificateStatus
+
+instance FromHttpApiData SSLCertificateManagedSSLCertificateStatus where
+    parseQueryParam = \case
+        "ACTIVE" -> Right SCMSCSActive
+        "MANAGED_CERTIFICATE_STATUS_UNSPECIFIED" -> Right SCMSCSManagedCertificateStatusUnspecified
+        "PROVISIONING" -> Right SCMSCSProvisioning
+        "PROVISIONING_FAILED" -> Right SCMSCSProvisioningFailed
+        "PROVISIONING_FAILED_PERMANENTLY" -> Right SCMSCSProvisioningFailedPermanently
+        "RENEWAL_FAILED" -> Right SCMSCSRenewalFailed
+        x -> Left ("Unable to parse SSLCertificateManagedSSLCertificateStatus from: " <> x)
+
+instance ToHttpApiData SSLCertificateManagedSSLCertificateStatus where
+    toQueryParam = \case
+        SCMSCSActive -> "ACTIVE"
+        SCMSCSManagedCertificateStatusUnspecified -> "MANAGED_CERTIFICATE_STATUS_UNSPECIFIED"
+        SCMSCSProvisioning -> "PROVISIONING"
+        SCMSCSProvisioningFailed -> "PROVISIONING_FAILED"
+        SCMSCSProvisioningFailedPermanently -> "PROVISIONING_FAILED_PERMANENTLY"
+        SCMSCSRenewalFailed -> "RENEWAL_FAILED"
+
+instance FromJSON SSLCertificateManagedSSLCertificateStatus where
+    parseJSON = parseJSONText "SSLCertificateManagedSSLCertificateStatus"
+
+instance ToJSON SSLCertificateManagedSSLCertificateStatus where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data HealthChecksAggregatedListWarningCode
+    = HCALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | HCALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | HCALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | HCALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | HCALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | HCALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | HCALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | HCALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | HCALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | HCALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | HCALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | HCALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | HCALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | HCALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | HCALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | HCALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | HCALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | HCALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | HCALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | HCALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | HCALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | HCALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | HCALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | HCALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | HCALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthChecksAggregatedListWarningCode
+
+instance FromHttpApiData HealthChecksAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right HCALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right HCALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right HCALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right HCALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right HCALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right HCALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right HCALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right HCALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right HCALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right HCALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right HCALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right HCALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right HCALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right HCALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right HCALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right HCALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right HCALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right HCALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right HCALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right HCALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right HCALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right HCALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right HCALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right HCALWCUndeclaredProperties
+        "UNREACHABLE" -> Right HCALWCUnreachable
+        x -> Left ("Unable to parse HealthChecksAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData HealthChecksAggregatedListWarningCode where
+    toQueryParam = \case
+        HCALWCCleanupFailed -> "CLEANUP_FAILED"
+        HCALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        HCALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        HCALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        HCALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        HCALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        HCALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        HCALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        HCALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        HCALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        HCALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        HCALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        HCALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        HCALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        HCALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        HCALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        HCALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        HCALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        HCALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        HCALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        HCALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        HCALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        HCALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        HCALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        HCALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON HealthChecksAggregatedListWarningCode where
+    parseJSON = parseJSONText "HealthChecksAggregatedListWarningCode"
+
+instance ToJSON HealthChecksAggregatedListWarningCode where
     toJSON = toJSONText
 
 -- | The type of the service resource.
@@ -16306,6 +23985,34 @@ instance FromJSON XpnResourceIdType where
 instance ToJSON XpnResourceIdType where
     toJSON = toJSONText
 
+-- | The mode in which to attach this disk, either READ_WRITE or READ_ONLY.
+-- If not specified, the default is to attach the disk in READ_WRITE mode.
+data PreservedStatePreservedDiskMode
+    = PSPDMReadOnly
+      -- ^ @READ_ONLY@
+    | PSPDMReadWrite
+      -- ^ @READ_WRITE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PreservedStatePreservedDiskMode
+
+instance FromHttpApiData PreservedStatePreservedDiskMode where
+    parseQueryParam = \case
+        "READ_ONLY" -> Right PSPDMReadOnly
+        "READ_WRITE" -> Right PSPDMReadWrite
+        x -> Left ("Unable to parse PreservedStatePreservedDiskMode from: " <> x)
+
+instance ToHttpApiData PreservedStatePreservedDiskMode where
+    toQueryParam = \case
+        PSPDMReadOnly -> "READ_ONLY"
+        PSPDMReadWrite -> "READ_WRITE"
+
+instance FromJSON PreservedStatePreservedDiskMode where
+    parseJSON = parseJSONText "PreservedStatePreservedDiskMode"
+
+instance ToJSON PreservedStatePreservedDiskMode where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data BackendServicesScopedListWarningCode
@@ -16325,6 +24032,8 @@ data BackendServicesScopedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | BSSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | BSSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | BSSLWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | BSSLWCNextHopAddressNotAssigned
@@ -16341,6 +24050,8 @@ data BackendServicesScopedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | BSSLWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | BSSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | BSSLWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | BSSLWCResourceInUseByOtherResourceWarning
@@ -16369,6 +24080,7 @@ instance FromHttpApiData BackendServicesScopedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right BSSLWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right BSSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right BSSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right BSSLWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right BSSLWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right BSSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right BSSLWCNextHopCannotIPForward
@@ -16377,6 +24089,7 @@ instance FromHttpApiData BackendServicesScopedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right BSSLWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right BSSLWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right BSSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right BSSLWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right BSSLWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right BSSLWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right BSSLWCResourceNotDeleted
@@ -16396,6 +24109,7 @@ instance ToHttpApiData BackendServicesScopedListWarningCode where
         BSSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         BSSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         BSSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        BSSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         BSSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         BSSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         BSSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -16404,6 +24118,7 @@ instance ToHttpApiData BackendServicesScopedListWarningCode where
         BSSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         BSSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         BSSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        BSSLWCPartialSuccess -> "PARTIAL_SUCCESS"
         BSSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         BSSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         BSSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -16418,6 +24133,126 @@ instance FromJSON BackendServicesScopedListWarningCode where
 instance ToJSON BackendServicesScopedListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PacketMirroringAggregatedListWarningCode
+    = PMALWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PMALWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PMALWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PMALWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PMALWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PMALWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PMALWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PMALWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PMALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PMALWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PMALWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PMALWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PMALWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PMALWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PMALWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PMALWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PMALWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PMALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PMALWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PMALWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PMALWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PMALWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PMALWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PMALWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PMALWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PacketMirroringAggregatedListWarningCode
+
+instance FromHttpApiData PacketMirroringAggregatedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PMALWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PMALWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PMALWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PMALWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PMALWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PMALWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PMALWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PMALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PMALWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PMALWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PMALWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PMALWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PMALWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PMALWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PMALWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PMALWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PMALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PMALWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PMALWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PMALWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PMALWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PMALWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PMALWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PMALWCUndeclaredProperties
+        "UNREACHABLE" -> Right PMALWCUnreachable
+        x -> Left ("Unable to parse PacketMirroringAggregatedListWarningCode from: " <> x)
+
+instance ToHttpApiData PacketMirroringAggregatedListWarningCode where
+    toQueryParam = \case
+        PMALWCCleanupFailed -> "CLEANUP_FAILED"
+        PMALWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PMALWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PMALWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PMALWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PMALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PMALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PMALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PMALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PMALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PMALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PMALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PMALWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PMALWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PMALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PMALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PMALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PMALWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PMALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PMALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PMALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PMALWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PMALWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PMALWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PMALWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PacketMirroringAggregatedListWarningCode where
+    parseJSON = parseJSONText "PacketMirroringAggregatedListWarningCode"
+
+instance ToJSON PacketMirroringAggregatedListWarningCode where
+    toJSON = toJSONText
+
 -- | Session affinity option, must be one of the following values: NONE:
 -- Connections from the same client IP may go to any instance in the pool.
 -- CLIENT_IP: Connections from the same client IP will go to the same
@@ -16428,12 +24263,18 @@ instance ToJSON BackendServicesScopedListWarningCode where
 data TargetPoolSessionAffinity
     = TPSAClientIP
       -- ^ @CLIENT_IP@
+    | TPSAClientIPNoDestination
+      -- ^ @CLIENT_IP_NO_DESTINATION@
     | TPSAClientIPPortProto
       -- ^ @CLIENT_IP_PORT_PROTO@
     | TPSAClientIPProto
       -- ^ @CLIENT_IP_PROTO@
     | TPSAGeneratedCookie
       -- ^ @GENERATED_COOKIE@
+    | TPSAHeaderField
+      -- ^ @HEADER_FIELD@
+    | TPSAHTTPCookie
+      -- ^ @HTTP_COOKIE@
     | TPSANone
       -- ^ @NONE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -16443,18 +24284,24 @@ instance Hashable TargetPoolSessionAffinity
 instance FromHttpApiData TargetPoolSessionAffinity where
     parseQueryParam = \case
         "CLIENT_IP" -> Right TPSAClientIP
+        "CLIENT_IP_NO_DESTINATION" -> Right TPSAClientIPNoDestination
         "CLIENT_IP_PORT_PROTO" -> Right TPSAClientIPPortProto
         "CLIENT_IP_PROTO" -> Right TPSAClientIPProto
         "GENERATED_COOKIE" -> Right TPSAGeneratedCookie
+        "HEADER_FIELD" -> Right TPSAHeaderField
+        "HTTP_COOKIE" -> Right TPSAHTTPCookie
         "NONE" -> Right TPSANone
         x -> Left ("Unable to parse TargetPoolSessionAffinity from: " <> x)
 
 instance ToHttpApiData TargetPoolSessionAffinity where
     toQueryParam = \case
         TPSAClientIP -> "CLIENT_IP"
+        TPSAClientIPNoDestination -> "CLIENT_IP_NO_DESTINATION"
         TPSAClientIPPortProto -> "CLIENT_IP_PORT_PROTO"
         TPSAClientIPProto -> "CLIENT_IP_PROTO"
         TPSAGeneratedCookie -> "GENERATED_COOKIE"
+        TPSAHeaderField -> "HEADER_FIELD"
+        TPSAHTTPCookie -> "HTTP_COOKIE"
         TPSANone -> "NONE"
 
 instance FromJSON TargetPoolSessionAffinity where
@@ -16463,7 +24310,13 @@ instance FromJSON TargetPoolSessionAffinity where
 instance ToJSON TargetPoolSessionAffinity where
     toJSON = toJSONText
 
--- | [Output Only] The status of the autoscaler configuration.
+-- | [Output Only] The status of the autoscaler configuration. Current set of
+-- possible values: - PENDING: Autoscaler backend hasn\'t read new\/updated
+-- configuration. - DELETING: Configuration is being deleted. - ACTIVE:
+-- Configuration is acknowledged to be effective. Some warnings might be
+-- present in the statusDetails field. - ERROR: Configuration has errors.
+-- Actionable for users. Details are present in the statusDetails field.
+-- New values might be added in the future.
 data AutoscalerStatus
     = ASActive
       -- ^ @ACTIVE@
@@ -16542,6 +24395,8 @@ data InstanceAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | INSInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | INSLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | INSMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | INSNextHopAddressNotAssigned
@@ -16558,6 +24413,8 @@ data InstanceAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | INSNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | INSPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | INSRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | INSResourceInUseByOtherResourceWarning
@@ -16586,6 +24443,7 @@ instance FromHttpApiData InstanceAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right INSExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right INSFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right INSInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right INSLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right INSMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right INSNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right INSNextHopCannotIPForward
@@ -16594,6 +24452,7 @@ instance FromHttpApiData InstanceAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right INSNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right INSNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right INSNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right INSPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right INSRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right INSResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right INSResourceNotDeleted
@@ -16613,6 +24472,7 @@ instance ToHttpApiData InstanceAggregatedListWarningCode where
         INSExternalAPIWarning -> "EXTERNAL_API_WARNING"
         INSFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         INSInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        INSLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         INSMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         INSNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         INSNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -16621,6 +24481,7 @@ instance ToHttpApiData InstanceAggregatedListWarningCode where
         INSNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         INSNotCriticalError -> "NOT_CRITICAL_ERROR"
         INSNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        INSPartialSuccess -> "PARTIAL_SUCCESS"
         INSRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         INSResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         INSResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -16638,11 +24499,15 @@ instance ToJSON InstanceAggregatedListWarningCode where
 -- | Type of resource for which this commitment applies. Possible values are
 -- VCPU and MEMORY
 data ResourceCommitmentType
-    = Memory
+    = RCTAccelerator
+      -- ^ @ACCELERATOR@
+    | RCTLocalSsd
+      -- ^ @LOCAL_SSD@
+    | RCTMemory
       -- ^ @MEMORY@
-    | Unspecified
+    | RCTUnspecified
       -- ^ @UNSPECIFIED@
-    | Vcpu
+    | RCTVcpu
       -- ^ @VCPU@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -16650,16 +24515,20 @@ instance Hashable ResourceCommitmentType
 
 instance FromHttpApiData ResourceCommitmentType where
     parseQueryParam = \case
-        "MEMORY" -> Right Memory
-        "UNSPECIFIED" -> Right Unspecified
-        "VCPU" -> Right Vcpu
+        "ACCELERATOR" -> Right RCTAccelerator
+        "LOCAL_SSD" -> Right RCTLocalSsd
+        "MEMORY" -> Right RCTMemory
+        "UNSPECIFIED" -> Right RCTUnspecified
+        "VCPU" -> Right RCTVcpu
         x -> Left ("Unable to parse ResourceCommitmentType from: " <> x)
 
 instance ToHttpApiData ResourceCommitmentType where
     toQueryParam = \case
-        Memory -> "MEMORY"
-        Unspecified -> "UNSPECIFIED"
-        Vcpu -> "VCPU"
+        RCTAccelerator -> "ACCELERATOR"
+        RCTLocalSsd -> "LOCAL_SSD"
+        RCTMemory -> "MEMORY"
+        RCTUnspecified -> "UNSPECIFIED"
+        RCTVcpu -> "VCPU"
 
 instance FromJSON ResourceCommitmentType where
     parseJSON = parseJSONText "ResourceCommitmentType"
@@ -16668,7 +24537,7 @@ instance ToJSON ResourceCommitmentType where
     toJSON = toJSONText
 
 -- | This signifies the networking tier used for configuring this load
--- balancer and can only take the following values: PREMIUM , STANDARD. For
+-- balancer and can only take the following values: PREMIUM, STANDARD. For
 -- regional ForwardingRule, the valid values are PREMIUM and STANDARD. For
 -- GlobalForwardingRule, the valid value is PREMIUM. If this field is not
 -- specified, it is assumed to be PREMIUM. If IPAddress is specified, this
@@ -16699,6 +24568,39 @@ instance FromJSON ForwardingRuleNetworkTier where
 instance ToJSON ForwardingRuleNetworkTier where
     toJSON = toJSONText
 
+-- | (Optional) Specifies the type of SSL certificate, either
+-- \"SELF_MANAGED\" or \"MANAGED\". If not specified, the certificate is
+-- self-managed and the fields certificate and private_key are used.
+data SSLCertificateType
+    = Managed
+      -- ^ @MANAGED@
+    | SelfManaged
+      -- ^ @SELF_MANAGED@
+    | TypeUnspecified
+      -- ^ @TYPE_UNSPECIFIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLCertificateType
+
+instance FromHttpApiData SSLCertificateType where
+    parseQueryParam = \case
+        "MANAGED" -> Right Managed
+        "SELF_MANAGED" -> Right SelfManaged
+        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
+        x -> Left ("Unable to parse SSLCertificateType from: " <> x)
+
+instance ToHttpApiData SSLCertificateType where
+    toQueryParam = \case
+        Managed -> "MANAGED"
+        SelfManaged -> "SELF_MANAGED"
+        TypeUnspecified -> "TYPE_UNSPECIFIED"
+
+instance FromJSON SSLCertificateType where
+    parseJSON = parseJSONText "SSLCertificateType"
+
+instance ToJSON SSLCertificateType where
+    toJSON = toJSONText
+
 -- | Minimal action to be taken on an instance. You can specify either
 -- RESTART to restart existing instances or REPLACE to delete and create
 -- new instances from the target template. If you specify a RESTART, the
@@ -16706,9 +24608,13 @@ instance ToJSON ForwardingRuleNetworkTier where
 -- Updater determines that the minimal action you specify is not enough to
 -- perform the update, it might perform a more disruptive action.
 data InstanceGroupManagerUpdatePolicyMinimalAction
-    = Replace
+    = IGMUPMANone
+      -- ^ @NONE@
+    | IGMUPMARefresh
+      -- ^ @REFRESH@
+    | IGMUPMAReplace
       -- ^ @REPLACE@
-    | Restart
+    | IGMUPMARestart
       -- ^ @RESTART@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -16716,19 +24622,143 @@ instance Hashable InstanceGroupManagerUpdatePolicyMinimalAction
 
 instance FromHttpApiData InstanceGroupManagerUpdatePolicyMinimalAction where
     parseQueryParam = \case
-        "REPLACE" -> Right Replace
-        "RESTART" -> Right Restart
+        "NONE" -> Right IGMUPMANone
+        "REFRESH" -> Right IGMUPMARefresh
+        "REPLACE" -> Right IGMUPMAReplace
+        "RESTART" -> Right IGMUPMARestart
         x -> Left ("Unable to parse InstanceGroupManagerUpdatePolicyMinimalAction from: " <> x)
 
 instance ToHttpApiData InstanceGroupManagerUpdatePolicyMinimalAction where
     toQueryParam = \case
-        Replace -> "REPLACE"
-        Restart -> "RESTART"
+        IGMUPMANone -> "NONE"
+        IGMUPMARefresh -> "REFRESH"
+        IGMUPMAReplace -> "REPLACE"
+        IGMUPMARestart -> "RESTART"
 
 instance FromJSON InstanceGroupManagerUpdatePolicyMinimalAction where
     parseJSON = parseJSONText "InstanceGroupManagerUpdatePolicyMinimalAction"
 
 instance ToJSON InstanceGroupManagerUpdatePolicyMinimalAction where
+    toJSON = toJSONText
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data PacketMirroringsScopedListWarningCode
+    = PMSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | PMSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | PMSLWCDeprecatedTypeUsed
+      -- ^ @DEPRECATED_TYPE_USED@
+    | PMSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | PMSLWCExperimentalTypeUsed
+      -- ^ @EXPERIMENTAL_TYPE_USED@
+    | PMSLWCExternalAPIWarning
+      -- ^ @EXTERNAL_API_WARNING@
+    | PMSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | PMSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | PMSLWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
+    | PMSLWCMissingTypeDependency
+      -- ^ @MISSING_TYPE_DEPENDENCY@
+    | PMSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | PMSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | PMSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | PMSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | PMSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | PMSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | PMSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | PMSLWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
+    | PMSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | PMSLWCResourceInUseByOtherResourceWarning
+      -- ^ @RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING@
+    | PMSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | PMSLWCSchemaValidationIgnored
+      -- ^ @SCHEMA_VALIDATION_IGNORED@
+    | PMSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | PMSLWCUndeclaredProperties
+      -- ^ @UNDECLARED_PROPERTIES@
+    | PMSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PacketMirroringsScopedListWarningCode
+
+instance FromHttpApiData PacketMirroringsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right PMSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right PMSLWCDeprecatedResourceUsed
+        "DEPRECATED_TYPE_USED" -> Right PMSLWCDeprecatedTypeUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right PMSLWCDiskSizeLargerThanImageSize
+        "EXPERIMENTAL_TYPE_USED" -> Right PMSLWCExperimentalTypeUsed
+        "EXTERNAL_API_WARNING" -> Right PMSLWCExternalAPIWarning
+        "FIELD_VALUE_OVERRIDEN" -> Right PMSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right PMSLWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right PMSLWCLargeDeploymentWarning
+        "MISSING_TYPE_DEPENDENCY" -> Right PMSLWCMissingTypeDependency
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right PMSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right PMSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right PMSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right PMSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right PMSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right PMSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right PMSLWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right PMSLWCPartialSuccess
+        "REQUIRED_TOS_AGREEMENT" -> Right PMSLWCRequiredTosAgreement
+        "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right PMSLWCResourceInUseByOtherResourceWarning
+        "RESOURCE_NOT_DELETED" -> Right PMSLWCResourceNotDeleted
+        "SCHEMA_VALIDATION_IGNORED" -> Right PMSLWCSchemaValidationIgnored
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right PMSLWCSingleInstancePropertyTemplate
+        "UNDECLARED_PROPERTIES" -> Right PMSLWCUndeclaredProperties
+        "UNREACHABLE" -> Right PMSLWCUnreachable
+        x -> Left ("Unable to parse PacketMirroringsScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData PacketMirroringsScopedListWarningCode where
+    toQueryParam = \case
+        PMSLWCCleanupFailed -> "CLEANUP_FAILED"
+        PMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        PMSLWCDeprecatedTypeUsed -> "DEPRECATED_TYPE_USED"
+        PMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        PMSLWCExperimentalTypeUsed -> "EXPERIMENTAL_TYPE_USED"
+        PMSLWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
+        PMSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        PMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        PMSLWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
+        PMSLWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
+        PMSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        PMSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        PMSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        PMSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        PMSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        PMSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        PMSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        PMSLWCPartialSuccess -> "PARTIAL_SUCCESS"
+        PMSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        PMSLWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+        PMSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        PMSLWCSchemaValidationIgnored -> "SCHEMA_VALIDATION_IGNORED"
+        PMSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        PMSLWCUndeclaredProperties -> "UNDECLARED_PROPERTIES"
+        PMSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON PacketMirroringsScopedListWarningCode where
+    parseJSON = parseJSONText "PacketMirroringsScopedListWarningCode"
+
+instance ToJSON PacketMirroringsScopedListWarningCode where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -16750,6 +24780,8 @@ data BackendServiceAggregatedListWarningCode
       -- ^ @FIELD_VALUE_OVERRIDEN@
     | BSALWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | BSALWCLargeDeploymentWarning
+      -- ^ @LARGE_DEPLOYMENT_WARNING@
     | BSALWCMissingTypeDependency
       -- ^ @MISSING_TYPE_DEPENDENCY@
     | BSALWCNextHopAddressNotAssigned
@@ -16766,6 +24798,8 @@ data BackendServiceAggregatedListWarningCode
       -- ^ @NOT_CRITICAL_ERROR@
     | BSALWCNoResultsOnPage
       -- ^ @NO_RESULTS_ON_PAGE@
+    | BSALWCPartialSuccess
+      -- ^ @PARTIAL_SUCCESS@
     | BSALWCRequiredTosAgreement
       -- ^ @REQUIRED_TOS_AGREEMENT@
     | BSALWCResourceInUseByOtherResourceWarning
@@ -16794,6 +24828,7 @@ instance FromHttpApiData BackendServiceAggregatedListWarningCode where
         "EXTERNAL_API_WARNING" -> Right BSALWCExternalAPIWarning
         "FIELD_VALUE_OVERRIDEN" -> Right BSALWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right BSALWCInjectedKernelsDeprecated
+        "LARGE_DEPLOYMENT_WARNING" -> Right BSALWCLargeDeploymentWarning
         "MISSING_TYPE_DEPENDENCY" -> Right BSALWCMissingTypeDependency
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right BSALWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right BSALWCNextHopCannotIPForward
@@ -16802,6 +24837,7 @@ instance FromHttpApiData BackendServiceAggregatedListWarningCode where
         "NEXT_HOP_NOT_RUNNING" -> Right BSALWCNextHopNotRunning
         "NOT_CRITICAL_ERROR" -> Right BSALWCNotCriticalError
         "NO_RESULTS_ON_PAGE" -> Right BSALWCNoResultsOnPage
+        "PARTIAL_SUCCESS" -> Right BSALWCPartialSuccess
         "REQUIRED_TOS_AGREEMENT" -> Right BSALWCRequiredTosAgreement
         "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING" -> Right BSALWCResourceInUseByOtherResourceWarning
         "RESOURCE_NOT_DELETED" -> Right BSALWCResourceNotDeleted
@@ -16821,6 +24857,7 @@ instance ToHttpApiData BackendServiceAggregatedListWarningCode where
         BSALWCExternalAPIWarning -> "EXTERNAL_API_WARNING"
         BSALWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         BSALWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        BSALWCLargeDeploymentWarning -> "LARGE_DEPLOYMENT_WARNING"
         BSALWCMissingTypeDependency -> "MISSING_TYPE_DEPENDENCY"
         BSALWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         BSALWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -16829,6 +24866,7 @@ instance ToHttpApiData BackendServiceAggregatedListWarningCode where
         BSALWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
         BSALWCNotCriticalError -> "NOT_CRITICAL_ERROR"
         BSALWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        BSALWCPartialSuccess -> "PARTIAL_SUCCESS"
         BSALWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
         BSALWCResourceInUseByOtherResourceWarning -> "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
         BSALWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
@@ -16841,4 +24879,39 @@ instance FromJSON BackendServiceAggregatedListWarningCode where
     parseJSON = parseJSONText "BackendServiceAggregatedListWarningCode"
 
 instance ToJSON BackendServiceAggregatedListWarningCode where
+    toJSON = toJSONText
+
+-- | Defines operating mode for this policy.
+data AutoscalingPolicyMode
+    = APMOff
+      -- ^ @OFF@
+    | APMON
+      -- ^ @ON@
+    | APMOnlyScaleOut
+      -- ^ @ONLY_SCALE_OUT@
+    | APMOnlyUp
+      -- ^ @ONLY_UP@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AutoscalingPolicyMode
+
+instance FromHttpApiData AutoscalingPolicyMode where
+    parseQueryParam = \case
+        "OFF" -> Right APMOff
+        "ON" -> Right APMON
+        "ONLY_SCALE_OUT" -> Right APMOnlyScaleOut
+        "ONLY_UP" -> Right APMOnlyUp
+        x -> Left ("Unable to parse AutoscalingPolicyMode from: " <> x)
+
+instance ToHttpApiData AutoscalingPolicyMode where
+    toQueryParam = \case
+        APMOff -> "OFF"
+        APMON -> "ON"
+        APMOnlyScaleOut -> "ONLY_SCALE_OUT"
+        APMOnlyUp -> "ONLY_UP"
+
+instance FromJSON AutoscalingPolicyMode where
+    parseJSON = parseJSONText "AutoscalingPolicyMode"
+
+instance ToJSON AutoscalingPolicyMode where
     toJSON = toJSONText

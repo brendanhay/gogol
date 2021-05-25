@@ -41,8 +41,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
     , zolMaxResults
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.zoneOperations.list@ method which the
 -- 'ZoneOperationsList' request conforms to.
@@ -65,10 +65,10 @@ type ZoneOperationsListResource =
 -- /See:/ 'zoneOperationsList' smart constructor.
 data ZoneOperationsList =
   ZoneOperationsList'
-    { _zolProject    :: !Text
-    , _zolZone       :: !Text
-    , _zolFilter     :: !(Maybe Text)
-    , _zolPageToken  :: !(Maybe Text)
+    { _zolProject :: !Text
+    , _zolZone :: !Text
+    , _zolFilter :: !(Maybe Text)
+    , _zolPageToken :: !(Maybe Text)
     , _zolMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

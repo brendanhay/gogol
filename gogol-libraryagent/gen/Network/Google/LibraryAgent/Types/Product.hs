@@ -17,15 +17,15 @@
 --
 module Network.Google.LibraryAgent.Types.Product where
 
-import           Network.Google.LibraryAgent.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.LibraryAgent.Types.Sum
+import Network.Google.Prelude
 
 -- | A Shelf contains a collection of books with a theme.
 --
 -- /See:/ 'googleExampleLibraryagentV1Shelf' smart constructor.
 data GoogleExampleLibraryagentV1Shelf =
   GoogleExampleLibraryagentV1Shelf'
-    { _gelvsName  :: !(Maybe Text)
+    { _gelvsName :: !(Maybe Text)
     , _gelvsTheme :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -78,7 +78,7 @@ instance ToJSON GoogleExampleLibraryagentV1Shelf
 data GoogleExampleLibraryagentV1ListShelvesResponse =
   GoogleExampleLibraryagentV1ListShelvesResponse'
     { _gelvlsrNextPageToken :: !(Maybe Text)
-    , _gelvlsrShelves       :: !(Maybe [GoogleExampleLibraryagentV1Shelf])
+    , _gelvlsrShelves :: !(Maybe [GoogleExampleLibraryagentV1Shelf])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +140,7 @@ instance ToJSON
 data GoogleExampleLibraryagentV1ListBooksResponse =
   GoogleExampleLibraryagentV1ListBooksResponse'
     { _gelvlbrNextPageToken :: !(Maybe Text)
-    , _gelvlbrBooks         :: !(Maybe [GoogleExampleLibraryagentV1Book])
+    , _gelvlbrBooks :: !(Maybe [GoogleExampleLibraryagentV1Book])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -200,10 +200,10 @@ instance ToJSON
 -- /See:/ 'googleExampleLibraryagentV1Book' smart constructor.
 data GoogleExampleLibraryagentV1Book =
   GoogleExampleLibraryagentV1Book'
-    { _gelvbRead   :: !(Maybe Bool)
-    , _gelvbName   :: !(Maybe Text)
+    { _gelvbRead :: !(Maybe Bool)
+    , _gelvbName :: !(Maybe Text)
     , _gelvbAuthor :: !(Maybe Text)
-    , _gelvbTitle  :: !(Maybe Text)
+    , _gelvbTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

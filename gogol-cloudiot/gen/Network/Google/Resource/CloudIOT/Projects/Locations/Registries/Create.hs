@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Create
     , plrcCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.create@ method which the
 -- 'ProjectsLocationsRegistriesCreate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsLocationsRegistriesCreateResource =
 -- /See:/ 'projectsLocationsRegistriesCreate' smart constructor.
 data ProjectsLocationsRegistriesCreate =
   ProjectsLocationsRegistriesCreate'
-    { _plrcParent         :: !Text
-    , _plrcXgafv          :: !(Maybe Xgafv)
+    { _plrcParent :: !Text
+    , _plrcXgafv :: !(Maybe Xgafv)
     , _plrcUploadProtocol :: !(Maybe Text)
-    , _plrcAccessToken    :: !(Maybe Text)
-    , _plrcUploadType     :: !(Maybe Text)
-    , _plrcPayload        :: !DeviceRegistry
-    , _plrcCallback       :: !(Maybe Text)
+    , _plrcAccessToken :: !(Maybe Text)
+    , _plrcUploadType :: !(Maybe Text)
+    , _plrcPayload :: !DeviceRegistry
+    , _plrcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,8 +109,9 @@ projectsLocationsRegistriesCreate pPlrcParent_ pPlrcPayload_ =
     }
 
 
--- | The project and cloud region where this device registry must be created.
--- For example, \`projects\/example-project\/locations\/us-central1\`.
+-- | Required. The project and cloud region where this device registry must
+-- be created. For example,
+-- \`projects\/example-project\/locations\/us-central1\`.
 plrcParent :: Lens' ProjectsLocationsRegistriesCreate Text
 plrcParent
   = lens _plrcParent (\ s a -> s{_plrcParent = a})

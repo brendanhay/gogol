@@ -36,10 +36,11 @@ module Network.Google.Resource.Compute.Images.GetIAMPolicy
     -- * Request Lenses
     , igipProject
     , igipResource
+    , igipOptionsRequestedPolicyVersion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.getIamPolicy@ method which the
 -- 'ImagesGetIAMPolicy' request conforms to.
@@ -52,7 +53,9 @@ type ImagesGetIAMPolicyResource =
                "images" :>
                  Capture "resource" Text :>
                    "getIamPolicy" :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                     QueryParam "optionsRequestedPolicyVersion"
+                       (Textual Int32)
+                       :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -60,8 +63,9 @@ type ImagesGetIAMPolicyResource =
 -- /See:/ 'imagesGetIAMPolicy' smart constructor.
 data ImagesGetIAMPolicy =
   ImagesGetIAMPolicy'
-    { _igipProject  :: !Text
+    { _igipProject :: !Text
     , _igipResource :: !Text
+    , _igipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,13 +77,18 @@ data ImagesGetIAMPolicy =
 -- * 'igipProject'
 --
 -- * 'igipResource'
+--
+-- * 'igipOptionsRequestedPolicyVersion'
 imagesGetIAMPolicy
     :: Text -- ^ 'igipProject'
     -> Text -- ^ 'igipResource'
     -> ImagesGetIAMPolicy
 imagesGetIAMPolicy pIgipProject_ pIgipResource_ =
   ImagesGetIAMPolicy'
-    {_igipProject = pIgipProject_, _igipResource = pIgipResource_}
+    { _igipProject = pIgipProject_
+    , _igipResource = pIgipResource_
+    , _igipOptionsRequestedPolicyVersion = Nothing
+    }
 
 
 -- | Project ID for this request.
@@ -92,6 +101,13 @@ igipResource :: Lens' ImagesGetIAMPolicy Text
 igipResource
   = lens _igipResource (\ s a -> s{_igipResource = a})
 
+-- | Requested IAM Policy version.
+igipOptionsRequestedPolicyVersion :: Lens' ImagesGetIAMPolicy (Maybe Int32)
+igipOptionsRequestedPolicyVersion
+  = lens _igipOptionsRequestedPolicyVersion
+      (\ s a -> s{_igipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 instance GoogleRequest ImagesGetIAMPolicy where
         type Rs ImagesGetIAMPolicy = Policy
         type Scopes ImagesGetIAMPolicy =
@@ -99,7 +115,9 @@ instance GoogleRequest ImagesGetIAMPolicy where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ImagesGetIAMPolicy'{..}
-          = go _igipProject _igipResource (Just AltJSON)
+          = go _igipProject _igipResource
+              _igipOptionsRequestedPolicyVersion
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

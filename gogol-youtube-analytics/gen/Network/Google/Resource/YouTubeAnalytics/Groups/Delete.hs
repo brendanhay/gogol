@@ -42,8 +42,8 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
     , gdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groups.delete@ method which the
 -- 'GroupsDelete' request conforms to.
@@ -65,13 +65,13 @@ type GroupsDeleteResource =
 -- /See:/ 'groupsDelete' smart constructor.
 data GroupsDelete =
   GroupsDelete'
-    { _gdXgafv                  :: !(Maybe Xgafv)
-    , _gdUploadProtocol         :: !(Maybe Text)
-    , _gdAccessToken            :: !(Maybe Text)
-    , _gdUploadType             :: !(Maybe Text)
+    { _gdXgafv :: !(Maybe Xgafv)
+    , _gdUploadProtocol :: !(Maybe Text)
+    , _gdAccessToken :: !(Maybe Text)
+    , _gdUploadType :: !(Maybe Text)
     , _gdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _gdId                     :: !(Maybe Text)
-    , _gdCallback               :: !(Maybe Text)
+    , _gdId :: !(Maybe Text)
+    , _gdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

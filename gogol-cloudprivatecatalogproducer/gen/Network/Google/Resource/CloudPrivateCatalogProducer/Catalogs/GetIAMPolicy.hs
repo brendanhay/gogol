@@ -22,7 +22,7 @@
 --
 -- Gets IAM policy for the specified Catalog.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.getIamPolicy@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
     (
     -- * REST Resource
@@ -33,6 +33,7 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
     , CatalogsGetIAMPolicy
 
     -- * Request Lenses
+    , cgipOptionsRequestedPolicyVersion
     , cgipXgafv
     , cgipUploadProtocol
     , cgipAccessToken
@@ -41,33 +42,37 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
     , cgipCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.getIamPolicy@ method which the
 -- 'CatalogsGetIAMPolicy' request conforms to.
 type CatalogsGetIAMPolicyResource =
      "v1beta1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] GoogleIAMV1Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] GoogleIAMV1Policy
 
 -- | Gets IAM policy for the specified Catalog.
 --
 -- /See:/ 'catalogsGetIAMPolicy' smart constructor.
 data CatalogsGetIAMPolicy =
   CatalogsGetIAMPolicy'
-    { _cgipXgafv          :: !(Maybe Xgafv)
+    { _cgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _cgipXgafv :: !(Maybe Xgafv)
     , _cgipUploadProtocol :: !(Maybe Text)
-    , _cgipAccessToken    :: !(Maybe Text)
-    , _cgipUploadType     :: !(Maybe Text)
-    , _cgipResource       :: !Text
-    , _cgipCallback       :: !(Maybe Text)
+    , _cgipAccessToken :: !(Maybe Text)
+    , _cgipUploadType :: !(Maybe Text)
+    , _cgipResource :: !Text
+    , _cgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,6 +80,8 @@ data CatalogsGetIAMPolicy =
 -- | Creates a value of 'CatalogsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cgipOptionsRequestedPolicyVersion'
 --
 -- * 'cgipXgafv'
 --
@@ -92,7 +99,8 @@ catalogsGetIAMPolicy
     -> CatalogsGetIAMPolicy
 catalogsGetIAMPolicy pCgipResource_ =
   CatalogsGetIAMPolicy'
-    { _cgipXgafv = Nothing
+    { _cgipOptionsRequestedPolicyVersion = Nothing
+    , _cgipXgafv = Nothing
     , _cgipUploadProtocol = Nothing
     , _cgipAccessToken = Nothing
     , _cgipUploadType = Nothing
@@ -100,6 +108,17 @@ catalogsGetIAMPolicy pCgipResource_ =
     , _cgipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset.
+cgipOptionsRequestedPolicyVersion :: Lens' CatalogsGetIAMPolicy (Maybe Int32)
+cgipOptionsRequestedPolicyVersion
+  = lens _cgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_cgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 cgipXgafv :: Lens' CatalogsGetIAMPolicy (Maybe Xgafv)
@@ -140,7 +159,9 @@ instance GoogleRequest CatalogsGetIAMPolicy where
         type Scopes CatalogsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient CatalogsGetIAMPolicy'{..}
-          = go _cgipResource _cgipXgafv _cgipUploadProtocol
+          = go _cgipResource _cgipOptionsRequestedPolicyVersion
+              _cgipXgafv
+              _cgipUploadProtocol
               _cgipAccessToken
               _cgipUploadType
               _cgipCallback

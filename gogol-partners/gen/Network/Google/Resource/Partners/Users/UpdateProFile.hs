@@ -49,8 +49,8 @@ module Network.Google.Resource.Partners.Users.UpdateProFile
     , uupfCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.users.updateProfile@ method which the
 -- 'UsersUpdateProFile' request conforms to.
@@ -91,19 +91,19 @@ type UsersUpdateProFileResource =
 -- /See:/ 'usersUpdateProFile' smart constructor.
 data UsersUpdateProFile =
   UsersUpdateProFile'
-    { _uupfXgafv                                       :: !(Maybe Xgafv)
-    , _uupfUploadProtocol                              :: !(Maybe Text)
-    , _uupfAccessToken                                 :: !(Maybe Text)
-    , _uupfUploadType                                  :: !(Maybe Text)
-    , _uupfPayload                                     :: !UserProFile
-    , _uupfRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _uupfRequestMetadataLocale                       :: !(Maybe Text)
-    , _uupfRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _uupfRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _uupfRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _uupfRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _uupfXgafv :: !(Maybe Xgafv)
+    , _uupfUploadProtocol :: !(Maybe Text)
+    , _uupfAccessToken :: !(Maybe Text)
+    , _uupfUploadType :: !(Maybe Text)
+    , _uupfPayload :: !UserProFile
+    , _uupfRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _uupfRequestMetadataLocale :: !(Maybe Text)
+    , _uupfRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _uupfRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _uupfRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _uupfRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _uupfRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _uupfCallback                                    :: !(Maybe Text)
+    , _uupfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

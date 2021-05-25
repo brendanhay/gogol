@@ -39,8 +39,8 @@ module Network.Google.Resource.AdExchangeBuyer.Proposals.Patch
     , ppProposalId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.proposals.patch@ method which the
 -- 'ProposalsPatch' request conforms to.
@@ -59,10 +59,10 @@ type ProposalsPatchResource =
 -- /See:/ 'proposalsPatch' smart constructor.
 data ProposalsPatch =
   ProposalsPatch'
-    { _ppUpdateAction   :: !ProposalsPatchUpdateAction
+    { _ppUpdateAction :: !ProposalsPatchUpdateAction
     , _ppRevisionNumber :: !(Textual Int64)
-    , _ppPayload        :: !Proposal
-    , _ppProposalId     :: !Text
+    , _ppPayload :: !Proposal
+    , _ppProposalId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -17,18 +17,18 @@
 --
 module Network.Google.CloudErrorReporting.Types.Product where
 
-import           Network.Google.CloudErrorReporting.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types.Sum
+import Network.Google.Prelude
 
 -- | An error event which is returned by the Error Reporting system.
 --
 -- /See:/ 'errorEvent' smart constructor.
 data ErrorEvent =
   ErrorEvent'
-    { _eeContext        :: !(Maybe ErrorContext)
-    , _eeEventTime      :: !(Maybe DateTime')
+    { _eeContext :: !(Maybe ErrorContext)
+    , _eeEventTime :: !(Maybe DateTime')
     , _eeServiceContext :: !(Maybe ServiceContext)
-    , _eeMessage        :: !(Maybe Text)
+    , _eeMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,10 +105,10 @@ instance ToJSON ErrorEvent where
 -- /See:/ 'errorContext' smart constructor.
 data ErrorContext =
   ErrorContext'
-    { _ecHTTPRequest      :: !(Maybe HTTPRequestContext)
-    , _ecUser             :: !(Maybe Text)
+    { _ecHTTPRequest :: !(Maybe HTTPRequestContext)
+    , _ecUser :: !(Maybe Text)
     , _ecSourceReferences :: !(Maybe [SourceReference])
-    , _ecReportLocation   :: !(Maybe SourceLocation)
+    , _ecReportLocation :: !(Maybe SourceLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -192,8 +192,9 @@ instance ToJSON ErrorContext where
 data ErrorGroup =
   ErrorGroup'
     { _egTrackingIssues :: !(Maybe [TrackingIssue])
-    , _egName           :: !(Maybe Text)
-    , _egGroupId        :: !(Maybe Text)
+    , _egName :: !(Maybe Text)
+    , _egGroupId :: !(Maybe Text)
+    , _egResolutionStatus :: !(Maybe ErrorGroupResolutionStatus)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -207,11 +208,17 @@ data ErrorGroup =
 -- * 'egName'
 --
 -- * 'egGroupId'
+--
+-- * 'egResolutionStatus'
 errorGroup
     :: ErrorGroup
 errorGroup =
   ErrorGroup'
-    {_egTrackingIssues = Nothing, _egName = Nothing, _egGroupId = Nothing}
+    { _egTrackingIssues = Nothing
+    , _egName = Nothing
+    , _egGroupId = Nothing
+    , _egResolutionStatus = Nothing
+    }
 
 
 -- | Associated tracking issues.
@@ -223,7 +230,7 @@ egTrackingIssues
       . _Coerce
 
 -- | The group resource name. Example:
--- 'projects\/my-project-123\/groups\/my-groupid'
+-- projects\/my-project-123\/groups\/CNSgkpnppqKCUw
 egName :: Lens' ErrorGroup (Maybe Text)
 egName = lens _egName (\ s a -> s{_egName = a})
 
@@ -233,6 +240,13 @@ egGroupId :: Lens' ErrorGroup (Maybe Text)
 egGroupId
   = lens _egGroupId (\ s a -> s{_egGroupId = a})
 
+-- | Error group\'s resolution status. An unspecified resolution status will
+-- be interpreted as OPEN
+egResolutionStatus :: Lens' ErrorGroup (Maybe ErrorGroupResolutionStatus)
+egResolutionStatus
+  = lens _egResolutionStatus
+      (\ s a -> s{_egResolutionStatus = a})
+
 instance FromJSON ErrorGroup where
         parseJSON
           = withObject "ErrorGroup"
@@ -240,7 +254,8 @@ instance FromJSON ErrorGroup where
                  ErrorGroup' <$>
                    (o .:? "trackingIssues" .!= mempty) <*>
                      (o .:? "name")
-                     <*> (o .:? "groupId"))
+                     <*> (o .:? "groupId")
+                     <*> (o .:? "resolutionStatus"))
 
 instance ToJSON ErrorGroup where
         toJSON ErrorGroup'{..}
@@ -248,7 +263,8 @@ instance ToJSON ErrorGroup where
               (catMaybes
                  [("trackingIssues" .=) <$> _egTrackingIssues,
                   ("name" .=) <$> _egName,
-                  ("groupId" .=) <$> _egGroupId])
+                  ("groupId" .=) <$> _egGroupId,
+                  ("resolutionStatus" .=) <$> _egResolutionStatus])
 
 -- | Response message for deleting error events.
 --
@@ -278,10 +294,10 @@ instance ToJSON DeleteEventsResponse where
 -- /See:/ 'reportedErrorEvent' smart constructor.
 data ReportedErrorEvent =
   ReportedErrorEvent'
-    { _reeContext        :: !(Maybe ErrorContext)
-    , _reeEventTime      :: !(Maybe DateTime')
+    { _reeContext :: !(Maybe ErrorContext)
+    , _reeEventTime :: !(Maybe DateTime')
     , _reeServiceContext :: !(Maybe ServiceContext)
-    , _reeMessage        :: !(Maybe Text)
+    , _reeMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -308,25 +324,25 @@ reportedErrorEvent =
     }
 
 
--- | [Optional] A description of the context in which the error occurred.
+-- | Optional. A description of the context in which the error occurred.
 reeContext :: Lens' ReportedErrorEvent (Maybe ErrorContext)
 reeContext
   = lens _reeContext (\ s a -> s{_reeContext = a})
 
--- | [Optional] Time when the event occurred. If not provided, the time when
+-- | Optional. Time when the event occurred. If not provided, the time when
 -- the event was received by the Error Reporting system will be used.
 reeEventTime :: Lens' ReportedErrorEvent (Maybe UTCTime)
 reeEventTime
   = lens _reeEventTime (\ s a -> s{_reeEventTime = a})
       . mapping _DateTime
 
--- | [Required] The service context in which this error has occurred.
+-- | Required. The service context in which this error has occurred.
 reeServiceContext :: Lens' ReportedErrorEvent (Maybe ServiceContext)
 reeServiceContext
   = lens _reeServiceContext
       (\ s a -> s{_reeServiceContext = a})
 
--- | [Required] The error message. If no \`context.reportLocation\` is
+-- | Required. The error message. If no \`context.reportLocation\` is
 -- provided, the message must contain a header (typically consisting of the
 -- exception type name and an error message) and an exception stack trace
 -- in one of the supported programming languages and formats. Supported
@@ -375,12 +391,12 @@ instance ToJSON ReportedErrorEvent where
 -- /See:/ 'hTTPRequestContext' smart constructor.
 data HTTPRequestContext =
   HTTPRequestContext'
-    { _httprcRemoteIP           :: !(Maybe Text)
-    , _httprcURL                :: !(Maybe Text)
-    , _httprcReferrer           :: !(Maybe Text)
-    , _httprcMethod             :: !(Maybe Text)
+    { _httprcRemoteIP :: !(Maybe Text)
+    , _httprcURL :: !(Maybe Text)
+    , _httprcReferrer :: !(Maybe Text)
+    , _httprcMethod :: !(Maybe Text)
     , _httprcResponseStatusCode :: !(Maybe (Textual Int32))
-    , _httprcUserAgent          :: !(Maybe Text)
+    , _httprcUserAgent :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -494,7 +510,7 @@ trackingIssue = TrackingIssue' {_tiURL = Nothing}
 
 
 -- | A URL pointing to a related entry in an issue tracking system. Example:
--- https:\/\/github.com\/user\/project\/issues\/4
+-- \`https:\/\/github.com\/user\/project\/issues\/4\`
 tiURL :: Lens' TrackingIssue (Maybe Text)
 tiURL = lens _tiURL (\ s a -> s{_tiURL = a})
 
@@ -512,9 +528,9 @@ instance ToJSON TrackingIssue where
 -- /See:/ 'listEventsResponse' smart constructor.
 data ListEventsResponse =
   ListEventsResponse'
-    { _lerNextPageToken  :: !(Maybe Text)
+    { _lerNextPageToken :: !(Maybe Text)
     , _lerTimeRangeBegin :: !(Maybe DateTime')
-    , _lerErrorEvents    :: !(Maybe [ErrorEvent])
+    , _lerErrorEvents :: !(Maybe [ErrorEvent])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -584,15 +600,15 @@ instance ToJSON ListEventsResponse where
 -- /See:/ 'errorGroupStats' smart constructor.
 data ErrorGroupStats =
   ErrorGroupStats'
-    { _egsAffectedServices    :: !(Maybe [ServiceContext])
-    , _egsGroup               :: !(Maybe ErrorGroup)
-    , _egsFirstSeenTime       :: !(Maybe DateTime')
-    , _egsAffectedUsersCount  :: !(Maybe (Textual Int64))
-    , _egsCount               :: !(Maybe (Textual Int64))
-    , _egsTimedCounts         :: !(Maybe [TimedCount])
+    { _egsAffectedServices :: !(Maybe [ServiceContext])
+    , _egsGroup :: !(Maybe ErrorGroup)
+    , _egsFirstSeenTime :: !(Maybe DateTime')
+    , _egsAffectedUsersCount :: !(Maybe (Textual Int64))
+    , _egsCount :: !(Maybe (Textual Int64))
+    , _egsTimedCounts :: !(Maybe [TimedCount])
     , _egsNumAffectedServices :: !(Maybe (Textual Int32))
-    , _egsLastSeenTime        :: !(Maybe DateTime')
-    , _egsRepresentative      :: !(Maybe ErrorEvent)
+    , _egsLastSeenTime :: !(Maybe DateTime')
+    , _egsRepresentative :: !(Maybe ErrorEvent)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -751,8 +767,8 @@ instance ToJSON ErrorGroupStats where
 -- /See:/ 'listGroupStatsResponse' smart constructor.
 data ListGroupStatsResponse =
   ListGroupStatsResponse'
-    { _lgsrNextPageToken   :: !(Maybe Text)
-    , _lgsrTimeRangeBegin  :: !(Maybe DateTime')
+    { _lgsrNextPageToken :: !(Maybe Text)
+    , _lgsrTimeRangeBegin :: !(Maybe DateTime')
     , _lgsrErrorGroupStats :: !(Maybe [ErrorGroupStats])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -826,8 +842,8 @@ instance ToJSON ListGroupStatsResponse where
 data ServiceContext =
   ServiceContext'
     { _scResourceType :: !(Maybe Text)
-    , _scService      :: !(Maybe Text)
-    , _scVersion      :: !(Maybe Text)
+    , _scService :: !(Maybe Text)
+    , _scVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -898,8 +914,8 @@ instance ToJSON ServiceContext where
 data TimedCount =
   TimedCount'
     { _tcStartTime :: !(Maybe DateTime')
-    , _tcCount     :: !(Maybe (Textual Int64))
-    , _tcEndTime   :: !(Maybe DateTime')
+    , _tcCount :: !(Maybe (Textual Int64))
+    , _tcEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -962,8 +978,8 @@ instance ToJSON TimedCount where
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation =
   SourceLocation'
-    { _slLineNumber   :: !(Maybe (Textual Int32))
-    , _slFilePath     :: !(Maybe Text)
+    { _slLineNumber :: !(Maybe (Textual Int32))
+    , _slFilePath :: !(Maybe Text)
     , _slFunctionName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

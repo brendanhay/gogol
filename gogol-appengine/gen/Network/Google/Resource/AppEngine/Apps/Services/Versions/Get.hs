@@ -45,8 +45,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
     , asvgCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.versions.get@ method which the
 -- 'AppsServicesVersionsGet' request conforms to.
@@ -62,7 +62,7 @@ type AppsServicesVersionsGetResource =
                      QueryParam "upload_protocol" Text :>
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
-                           QueryParam "view" Text :>
+                           QueryParam "view" AppsServicesVersionsGetView :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :> Get '[JSON] Version
 
@@ -72,15 +72,15 @@ type AppsServicesVersionsGetResource =
 -- /See:/ 'appsServicesVersionsGet' smart constructor.
 data AppsServicesVersionsGet =
   AppsServicesVersionsGet'
-    { _asvgXgafv          :: !(Maybe Xgafv)
+    { _asvgXgafv :: !(Maybe Xgafv)
     , _asvgUploadProtocol :: !(Maybe Text)
-    , _asvgAccessToken    :: !(Maybe Text)
-    , _asvgUploadType     :: !(Maybe Text)
-    , _asvgVersionsId     :: !Text
-    , _asvgAppsId         :: !Text
-    , _asvgView           :: !(Maybe Text)
-    , _asvgServicesId     :: !Text
-    , _asvgCallback       :: !(Maybe Text)
+    , _asvgAccessToken :: !(Maybe Text)
+    , _asvgUploadType :: !(Maybe Text)
+    , _asvgVersionsId :: !Text
+    , _asvgAppsId :: !Text
+    , _asvgView :: !(Maybe AppsServicesVersionsGetView)
+    , _asvgServicesId :: !Text
+    , _asvgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -161,7 +161,7 @@ asvgAppsId
   = lens _asvgAppsId (\ s a -> s{_asvgAppsId = a})
 
 -- | Controls the set of fields returned in the Get response.
-asvgView :: Lens' AppsServicesVersionsGet (Maybe Text)
+asvgView :: Lens' AppsServicesVersionsGet (Maybe AppsServicesVersionsGetView)
 asvgView = lens _asvgView (\ s a -> s{_asvgView = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.

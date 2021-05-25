@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -23,6 +23,9 @@ module Network.Google.Blogger.Types
     , bloggerScope
     , bloggerReadOnlyScope
 
+    -- * PostStatus
+    , PostStatus (..)
+
     -- * PostsListOrderBy
     , PostsListOrderBy (..)
 
@@ -38,6 +41,9 @@ module Network.Google.Blogger.Types
     , puiPostUserInfo
     , puiPost
     , puiKind
+
+    -- * PageStatus
+    , PageStatus (..)
 
     -- * CommentsListView
     , CommentsListView (..)
@@ -57,6 +63,7 @@ module Network.Google.Blogger.Types
     , plNextPageToken
     , plKind
     , plItems
+    , plPrevPageToken
 
     -- * CommentInReplyTo
     , CommentInReplyTo
@@ -67,6 +74,9 @@ module Network.Google.Blogger.Types
     , CommentBlog
     , commentBlog
     , cbId
+
+    -- * PostReaderComments
+    , PostReaderComments (..)
 
     -- * Pageviews
     , Pageviews
@@ -251,8 +261,23 @@ module Network.Google.Blogger.Types
     , blItems
     , blBlogUserInfos
 
+    -- * CommentStatus
+    , CommentStatus (..)
+
     -- * PagesListView
     , PagesListView (..)
+
+    -- * PageviewsCountsItemTimeRange
+    , PageviewsCountsItemTimeRange (..)
+
+    -- * BlogStatus
+    , BlogStatus (..)
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * BlogPerUserInfoRole
+    , BlogPerUserInfoRole (..)
 
     -- * PageBlog
     , PageBlog
@@ -375,15 +400,15 @@ module Network.Google.Blogger.Types
     , piiURL
     ) where
 
-import           Network.Google.Blogger.Types.Product
-import           Network.Google.Blogger.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types.Product
+import Network.Google.Blogger.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v3' of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3' of the Blogger API v3. This contains the host and root path used as a starting point for constructing service requests.
 bloggerService :: ServiceConfig
 bloggerService
   = defaultService (ServiceId "blogger:v3")
-      "www.googleapis.com"
+      "blogger.googleapis.com"
 
 -- | Manage your Blogger account
 bloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]

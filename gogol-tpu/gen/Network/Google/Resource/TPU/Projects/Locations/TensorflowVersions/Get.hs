@@ -41,8 +41,8 @@ module Network.Google.Resource.TPU.Projects.Locations.TensorflowVersions.Get
     , pltvgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.tensorflowVersions.get@ method which the
 -- 'ProjectsLocationsTensorflowVersionsGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsLocationsTensorflowVersionsGetResource =
 -- /See:/ 'projectsLocationsTensorflowVersionsGet' smart constructor.
 data ProjectsLocationsTensorflowVersionsGet =
   ProjectsLocationsTensorflowVersionsGet'
-    { _pltvgXgafv          :: !(Maybe Xgafv)
+    { _pltvgXgafv :: !(Maybe Xgafv)
     , _pltvgUploadProtocol :: !(Maybe Text)
-    , _pltvgAccessToken    :: !(Maybe Text)
-    , _pltvgUploadType     :: !(Maybe Text)
-    , _pltvgName           :: !Text
-    , _pltvgCallback       :: !(Maybe Text)
+    , _pltvgAccessToken :: !(Maybe Text)
+    , _pltvgUploadType :: !(Maybe Text)
+    , _pltvgName :: !Text
+    , _pltvgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,7 +124,7 @@ pltvgUploadType
   = lens _pltvgUploadType
       (\ s a -> s{_pltvgUploadType = a})
 
--- | The resource name.
+-- | Required. The resource name.
 pltvgName :: Lens' ProjectsLocationsTensorflowVersionsGet Text
 pltvgName
   = lens _pltvgName (\ s a -> s{_pltvgName = a})

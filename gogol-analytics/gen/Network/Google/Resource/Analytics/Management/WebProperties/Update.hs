@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Update
     , mwpuAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.update@ method which the
 -- 'ManagementWebPropertiesUpdate' request conforms to.
@@ -61,8 +61,8 @@ type ManagementWebPropertiesUpdateResource =
 data ManagementWebPropertiesUpdate =
   ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId :: !Text
-    , _mwpuPayload       :: !WebProperty
-    , _mwpuAccountId     :: !Text
+    , _mwpuPayload :: !WebProperty
+    , _mwpuAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

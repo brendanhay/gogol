@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/kms/ Cloud Key Management Service (KMS) API Reference> for @cloudkms.projects.locations.keyRings.setIamPolicy@.
 module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.SetIAMPolicy
     , plkrsipCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.setIamPolicy@ method which the
 -- 'ProjectsLocationsKeyRingsSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ProjectsLocationsKeyRingsSetIAMPolicyResource =
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsLocationsKeyRingsSetIAMPolicy' smart constructor.
 data ProjectsLocationsKeyRingsSetIAMPolicy =
   ProjectsLocationsKeyRingsSetIAMPolicy'
-    { _plkrsipXgafv          :: !(Maybe Xgafv)
+    { _plkrsipXgafv :: !(Maybe Xgafv)
     , _plkrsipUploadProtocol :: !(Maybe Text)
-    , _plkrsipAccessToken    :: !(Maybe Text)
-    , _plkrsipUploadType     :: !(Maybe Text)
-    , _plkrsipPayload        :: !SetIAMPolicyRequest
-    , _plkrsipResource       :: !Text
-    , _plkrsipCallback       :: !(Maybe Text)
+    , _plkrsipAccessToken :: !(Maybe Text)
+    , _plkrsipUploadType :: !(Maybe Text)
+    , _plkrsipPayload :: !SetIAMPolicyRequest
+    , _plkrsipResource :: !Text
+    , _plkrsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

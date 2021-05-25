@@ -21,10 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Patches the specified BackendService resource with the data included in
--- the request. There are several restrictions and guidelines to keep in
--- mind when updating a backend service. Read Restrictions and Guidelines
--- for more information. This method supports PATCH semantics and uses the
--- JSON merge patch format and processing rules.
+-- the request. For more information, see Backend services overview. This
+-- method supports PATCH semantics and uses the JSON merge patch format and
+-- processing rules.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.patch@.
 module Network.Google.Resource.Compute.BackendServices.Patch
@@ -43,8 +42,8 @@ module Network.Google.Resource.Compute.BackendServices.Patch
     , bspBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.patch@ method which the
 -- 'BackendServicesPatch' request conforms to.
@@ -62,17 +61,16 @@ type BackendServicesPatchResource =
                          Patch '[JSON] Operation
 
 -- | Patches the specified BackendService resource with the data included in
--- the request. There are several restrictions and guidelines to keep in
--- mind when updating a backend service. Read Restrictions and Guidelines
--- for more information. This method supports PATCH semantics and uses the
--- JSON merge patch format and processing rules.
+-- the request. For more information, see Backend services overview. This
+-- method supports PATCH semantics and uses the JSON merge patch format and
+-- processing rules.
 --
 -- /See:/ 'backendServicesPatch' smart constructor.
 data BackendServicesPatch =
   BackendServicesPatch'
-    { _bspRequestId      :: !(Maybe Text)
-    , _bspProject        :: !Text
-    , _bspPayload        :: !BackendService
+    { _bspRequestId :: !(Maybe Text)
+    , _bspProject :: !Text
+    , _bspPayload :: !BackendService
     , _bspBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

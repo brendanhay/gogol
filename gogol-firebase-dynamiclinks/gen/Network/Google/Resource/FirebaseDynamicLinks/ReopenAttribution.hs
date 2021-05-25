@@ -41,8 +41,8 @@ module Network.Google.Resource.FirebaseDynamicLinks.ReopenAttribution
     , raCallback
     ) where
 
-import           Network.Google.FirebaseDynamicLinks.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebasedynamiclinks.reopenAttribution@ method which the
 -- 'ReopenAttribution' request conforms to.
@@ -63,12 +63,12 @@ type ReopenAttributionResource =
 -- /See:/ 'reopenAttribution' smart constructor.
 data ReopenAttribution =
   ReopenAttribution'
-    { _raXgafv          :: !(Maybe Xgafv)
+    { _raXgafv :: !(Maybe Xgafv)
     , _raUploadProtocol :: !(Maybe Text)
-    , _raAccessToken    :: !(Maybe Text)
-    , _raUploadType     :: !(Maybe Text)
-    , _raPayload        :: !GetIosReopenAttributionRequest
-    , _raCallback       :: !(Maybe Text)
+    , _raAccessToken :: !(Maybe Text)
+    , _raUploadType :: !(Maybe Text)
+    , _raPayload :: !GetIosReopenAttributionRequest
+    , _raCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

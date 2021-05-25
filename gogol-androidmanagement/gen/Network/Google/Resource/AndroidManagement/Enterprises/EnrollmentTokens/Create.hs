@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.Cr
     , eetcCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.enrollmentTokens.create@ method which the
 -- 'EnterprisesEnrollmentTokensCreate' request conforms to.
@@ -65,13 +65,13 @@ type EnterprisesEnrollmentTokensCreateResource =
 -- /See:/ 'enterprisesEnrollmentTokensCreate' smart constructor.
 data EnterprisesEnrollmentTokensCreate =
   EnterprisesEnrollmentTokensCreate'
-    { _eetcParent         :: !Text
-    , _eetcXgafv          :: !(Maybe Xgafv)
+    { _eetcParent :: !Text
+    , _eetcXgafv :: !(Maybe Xgafv)
     , _eetcUploadProtocol :: !(Maybe Text)
-    , _eetcAccessToken    :: !(Maybe Text)
-    , _eetcUploadType     :: !(Maybe Text)
-    , _eetcPayload        :: !EnrollmentToken
-    , _eetcCallback       :: !(Maybe Text)
+    , _eetcAccessToken :: !(Maybe Text)
+    , _eetcUploadType :: !(Maybe Text)
+    , _eetcPayload :: !EnrollmentToken
+    , _eetcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

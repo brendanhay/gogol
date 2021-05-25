@@ -16,11 +16,16 @@
 --
 module Network.Google.CloudTasks.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | Output only. The view specifies which subset of the Task has been
--- returned.
-data TaskView
+-- | The response_view specifies which subset of the Task will be returned.
+-- By default response_view is BASIC; not all information is retrieved by
+-- default because some data, such as payloads, might be desirable to
+-- return only when needed because of its large size or because of the
+-- sensitivity of data that it contains. Authorization for FULL requires
+-- \`cloudtasks.tasks.fullView\` [Google
+-- IAM](https:\/\/cloud.google.com\/iam\/) permission on the Task resource.
+data ProjectsLocationsQueuesTasksListResponseView
     = ViewUnspecified
       -- ^ @VIEW_UNSPECIFIED@
       -- Unspecified. Defaults to BASIC.
@@ -39,20 +44,62 @@ data TaskView
       -- resource.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable TaskView
+instance Hashable ProjectsLocationsQueuesTasksListResponseView
 
-instance FromHttpApiData TaskView where
+instance FromHttpApiData ProjectsLocationsQueuesTasksListResponseView where
     parseQueryParam = \case
         "VIEW_UNSPECIFIED" -> Right ViewUnspecified
         "BASIC" -> Right Basic
         "FULL" -> Right Full
-        x -> Left ("Unable to parse TaskView from: " <> x)
+        x -> Left ("Unable to parse ProjectsLocationsQueuesTasksListResponseView from: " <> x)
 
-instance ToHttpApiData TaskView where
+instance ToHttpApiData ProjectsLocationsQueuesTasksListResponseView where
     toQueryParam = \case
         ViewUnspecified -> "VIEW_UNSPECIFIED"
         Basic -> "BASIC"
         Full -> "FULL"
+
+instance FromJSON ProjectsLocationsQueuesTasksListResponseView where
+    parseJSON = parseJSONText "ProjectsLocationsQueuesTasksListResponseView"
+
+instance ToJSON ProjectsLocationsQueuesTasksListResponseView where
+    toJSON = toJSONText
+
+-- | Output only. The view specifies which subset of the Task has been
+-- returned.
+data TaskView
+    = TVViewUnspecified
+      -- ^ @VIEW_UNSPECIFIED@
+      -- Unspecified. Defaults to BASIC.
+    | TVBasic
+      -- ^ @BASIC@
+      -- The basic view omits fields which can be large or can contain sensitive
+      -- data. This view does not include the body in AppEngineHttpRequest.
+      -- Bodies are desirable to return only when needed, because they can be
+      -- large and because of the sensitivity of the data that you choose to
+      -- store in it.
+    | TVFull
+      -- ^ @FULL@
+      -- All information is returned. Authorization for FULL requires
+      -- \`cloudtasks.tasks.fullView\` [Google
+      -- IAM](https:\/\/cloud.google.com\/iam\/) permission on the Queue
+      -- resource.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TaskView
+
+instance FromHttpApiData TaskView where
+    parseQueryParam = \case
+        "VIEW_UNSPECIFIED" -> Right TVViewUnspecified
+        "BASIC" -> Right TVBasic
+        "FULL" -> Right TVFull
+        x -> Left ("Unable to parse TaskView from: " <> x)
+
+instance ToHttpApiData TaskView where
+    toQueryParam = \case
+        TVViewUnspecified -> "VIEW_UNSPECIFIED"
+        TVBasic -> "BASIC"
+        TVFull -> "FULL"
 
 instance FromJSON TaskView where
     parseJSON = parseJSONText "TaskView"
@@ -61,7 +108,7 @@ instance ToJSON TaskView where
     toJSON = toJSONText
 
 -- | Output only. The state of the queue. \`state\` can only be changed by
--- called PauseQueue, ResumeQueue, or uploading
+-- calling PauseQueue, ResumeQueue, or uploading
 -- [queue.yaml\/xml](https:\/\/cloud.google.com\/appengine\/docs\/python\/config\/queueref).
 -- UpdateQueue cannot be used to change \`state\`.
 data QueueState
@@ -164,13 +211,11 @@ instance ToJSON CreateTaskRequestResponseView where
 
 -- | The HTTP method to use for the request. The default is POST. The app\'s
 -- request handler for the task\'s target URL must be able to handle HTTP
--- requests with this http_method, otherwise the task attempt will fail
--- with error code 405 (Method Not Allowed). See [Writing a push task
--- request
+-- requests with this http_method, otherwise the task attempt fails with
+-- error code 405 (Method Not Allowed). See [Writing a push task request
 -- handler](https:\/\/cloud.google.com\/appengine\/docs\/java\/taskqueue\/push\/creating-handlers#writing_a_push_task_request_handler)
--- and the documentation for the request handlers in the language your app
--- is written in e.g. [Python Request
--- Handler](https:\/\/cloud.google.com\/appengine\/docs\/python\/tools\/webapp\/requesthandlerclass).
+-- and the App Engine documentation for your runtime on [How Requests are
+-- Handled](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python3\/how-requests-are-handled).
 data AppEngineHTTPRequestHTTPMethod
     = HTTPMethodUnspecified
       -- ^ @HTTP_METHOD_UNSPECIFIED@
@@ -227,6 +272,53 @@ instance FromJSON AppEngineHTTPRequestHTTPMethod where
     parseJSON = parseJSONText "AppEngineHTTPRequestHTTPMethod"
 
 instance ToJSON AppEngineHTTPRequestHTTPMethod where
+    toJSON = toJSONText
+
+-- | The response_view specifies which subset of the Task will be returned.
+-- By default response_view is BASIC; not all information is retrieved by
+-- default because some data, such as payloads, might be desirable to
+-- return only when needed because of its large size or because of the
+-- sensitivity of data that it contains. Authorization for FULL requires
+-- \`cloudtasks.tasks.fullView\` [Google
+-- IAM](https:\/\/cloud.google.com\/iam\/) permission on the Task resource.
+data ProjectsLocationsQueuesTasksGetResponseView
+    = PLQTGRVViewUnspecified
+      -- ^ @VIEW_UNSPECIFIED@
+      -- Unspecified. Defaults to BASIC.
+    | PLQTGRVBasic
+      -- ^ @BASIC@
+      -- The basic view omits fields which can be large or can contain sensitive
+      -- data. This view does not include the body in AppEngineHttpRequest.
+      -- Bodies are desirable to return only when needed, because they can be
+      -- large and because of the sensitivity of the data that you choose to
+      -- store in it.
+    | PLQTGRVFull
+      -- ^ @FULL@
+      -- All information is returned. Authorization for FULL requires
+      -- \`cloudtasks.tasks.fullView\` [Google
+      -- IAM](https:\/\/cloud.google.com\/iam\/) permission on the Queue
+      -- resource.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsLocationsQueuesTasksGetResponseView
+
+instance FromHttpApiData ProjectsLocationsQueuesTasksGetResponseView where
+    parseQueryParam = \case
+        "VIEW_UNSPECIFIED" -> Right PLQTGRVViewUnspecified
+        "BASIC" -> Right PLQTGRVBasic
+        "FULL" -> Right PLQTGRVFull
+        x -> Left ("Unable to parse ProjectsLocationsQueuesTasksGetResponseView from: " <> x)
+
+instance ToHttpApiData ProjectsLocationsQueuesTasksGetResponseView where
+    toQueryParam = \case
+        PLQTGRVViewUnspecified -> "VIEW_UNSPECIFIED"
+        PLQTGRVBasic -> "BASIC"
+        PLQTGRVFull -> "FULL"
+
+instance FromJSON ProjectsLocationsQueuesTasksGetResponseView where
+    parseJSON = parseJSONText "ProjectsLocationsQueuesTasksGetResponseView"
+
+instance ToJSON ProjectsLocationsQueuesTasksGetResponseView where
     toJSON = toJSONText
 
 -- | V1 error format.
@@ -303,4 +395,63 @@ instance FromJSON RunTaskRequestResponseView where
     parseJSON = parseJSONText "RunTaskRequestResponseView"
 
 instance ToJSON RunTaskRequestResponseView where
+    toJSON = toJSONText
+
+-- | The HTTP method to use for the request. The default is POST.
+data HTTPRequestHTTPMethod
+    = HTTPRHTTPMHTTPMethodUnspecified
+      -- ^ @HTTP_METHOD_UNSPECIFIED@
+      -- HTTP method unspecified
+    | HTTPRHTTPMPost'
+      -- ^ @POST@
+      -- HTTP POST
+    | HTTPRHTTPMGet'
+      -- ^ @GET@
+      -- HTTP GET
+    | HTTPRHTTPMHead'
+      -- ^ @HEAD@
+      -- HTTP HEAD
+    | HTTPRHTTPMPut'
+      -- ^ @PUT@
+      -- HTTP PUT
+    | HTTPRHTTPMDelete'
+      -- ^ @DELETE@
+      -- HTTP DELETE
+    | HTTPRHTTPMPatch'
+      -- ^ @PATCH@
+      -- HTTP PATCH
+    | HTTPRHTTPMOptions
+      -- ^ @OPTIONS@
+      -- HTTP OPTIONS
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPRequestHTTPMethod
+
+instance FromHttpApiData HTTPRequestHTTPMethod where
+    parseQueryParam = \case
+        "HTTP_METHOD_UNSPECIFIED" -> Right HTTPRHTTPMHTTPMethodUnspecified
+        "POST" -> Right HTTPRHTTPMPost'
+        "GET" -> Right HTTPRHTTPMGet'
+        "HEAD" -> Right HTTPRHTTPMHead'
+        "PUT" -> Right HTTPRHTTPMPut'
+        "DELETE" -> Right HTTPRHTTPMDelete'
+        "PATCH" -> Right HTTPRHTTPMPatch'
+        "OPTIONS" -> Right HTTPRHTTPMOptions
+        x -> Left ("Unable to parse HTTPRequestHTTPMethod from: " <> x)
+
+instance ToHttpApiData HTTPRequestHTTPMethod where
+    toQueryParam = \case
+        HTTPRHTTPMHTTPMethodUnspecified -> "HTTP_METHOD_UNSPECIFIED"
+        HTTPRHTTPMPost' -> "POST"
+        HTTPRHTTPMGet' -> "GET"
+        HTTPRHTTPMHead' -> "HEAD"
+        HTTPRHTTPMPut' -> "PUT"
+        HTTPRHTTPMDelete' -> "DELETE"
+        HTTPRHTTPMPatch' -> "PATCH"
+        HTTPRHTTPMOptions -> "OPTIONS"
+
+instance FromJSON HTTPRequestHTTPMethod where
+    parseJSON = parseJSONText "HTTPRequestHTTPMethod"
+
+instance ToJSON HTTPRequestHTTPMethod where
     toJSON = toJSONText

@@ -22,7 +22,7 @@
 --
 -- Gets a GTM Account.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.get@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.get@.
 module Network.Google.Resource.TagManager.Accounts.Get
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.TagManager.Accounts.Get
     , AccountsGet
 
     -- * Request Lenses
+    , agXgafv
+    , agUploadProtocol
     , agPath
+    , agAccessToken
+    , agUploadType
+    , agCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.
@@ -45,14 +50,24 @@ type AccountsGetResource =
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Account
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets a GTM Account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet =
+data AccountsGet =
   AccountsGet'
-    { _agPath :: Text
+    { _agXgafv :: !(Maybe Xgafv)
+    , _agUploadProtocol :: !(Maybe Text)
+    , _agPath :: !Text
+    , _agAccessToken :: !(Maybe Text)
+    , _agUploadType :: !(Maybe Text)
+    , _agCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -61,16 +76,60 @@ newtype AccountsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'agXgafv'
+--
+-- * 'agUploadProtocol'
+--
 -- * 'agPath'
+--
+-- * 'agAccessToken'
+--
+-- * 'agUploadType'
+--
+-- * 'agCallback'
 accountsGet
     :: Text -- ^ 'agPath'
     -> AccountsGet
-accountsGet pAgPath_ = AccountsGet' {_agPath = pAgPath_}
+accountsGet pAgPath_ =
+  AccountsGet'
+    { _agXgafv = Nothing
+    , _agUploadProtocol = Nothing
+    , _agPath = pAgPath_
+    , _agAccessToken = Nothing
+    , _agUploadType = Nothing
+    , _agCallback = Nothing
+    }
 
+
+-- | V1 error format.
+agXgafv :: Lens' AccountsGet (Maybe Xgafv)
+agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+agUploadProtocol :: Lens' AccountsGet (Maybe Text)
+agUploadProtocol
+  = lens _agUploadProtocol
+      (\ s a -> s{_agUploadProtocol = a})
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
 agPath :: Lens' AccountsGet Text
 agPath = lens _agPath (\ s a -> s{_agPath = a})
+
+-- | OAuth access token.
+agAccessToken :: Lens' AccountsGet (Maybe Text)
+agAccessToken
+  = lens _agAccessToken
+      (\ s a -> s{_agAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+agUploadType :: Lens' AccountsGet (Maybe Text)
+agUploadType
+  = lens _agUploadType (\ s a -> s{_agUploadType = a})
+
+-- | JSONP
+agCallback :: Lens' AccountsGet (Maybe Text)
+agCallback
+  = lens _agCallback (\ s a -> s{_agCallback = a})
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
@@ -79,7 +138,12 @@ instance GoogleRequest AccountsGet where
                "https://www.googleapis.com/auth/tagmanager.manage.accounts",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsGet'{..}
-          = go _agPath (Just AltJSON) tagManagerService
+          = go _agPath _agXgafv _agUploadProtocol
+              _agAccessToken
+              _agUploadType
+              _agCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)
                       mempty

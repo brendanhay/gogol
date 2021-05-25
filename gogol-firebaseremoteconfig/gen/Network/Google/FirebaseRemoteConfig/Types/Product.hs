@@ -17,8 +17,8 @@
 --
 module Network.Google.FirebaseRemoteConfig.Types.Product where
 
-import           Network.Google.FirebaseRemoteConfig.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FirebaseRemoteConfig.Types.Sum
+import Network.Google.Prelude
 
 -- | A RemoteConfigParameter\'s \"value\" (either the default value, or the
 -- value associated with a condition name) is either a string, or the
@@ -30,7 +30,7 @@ import           Network.Google.Prelude
 -- /See:/ 'remoteConfigParameterValue' smart constructor.
 data RemoteConfigParameterValue =
   RemoteConfigParameterValue'
-    { _rcpvValue           :: !(Maybe Text)
+    { _rcpvValue :: !(Maybe Text)
     , _rcpvUseInAppDefault :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -166,8 +166,8 @@ instance ToJSON RemoteConfigParameters where
 -- /See:/ 'remoteConfigParameter' smart constructor.
 data RemoteConfigParameter =
   RemoteConfigParameter'
-    { _rcpDefaultValue      :: !(Maybe RemoteConfigParameterValue)
-    , _rcpDescription       :: !(Maybe Text)
+    { _rcpDefaultValue :: !(Maybe RemoteConfigParameterValue)
+    , _rcpDescription :: !(Maybe Text)
     , _rcpConditionalValues :: !(Maybe RemoteConfigParameterConditionalValues)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -239,9 +239,9 @@ instance ToJSON RemoteConfigParameter where
 -- /See:/ 'remoteConfigCondition' smart constructor.
 data RemoteConfigCondition =
   RemoteConfigCondition'
-    { _rccTagColor    :: !(Maybe RemoteConfigConditionTagColor)
-    , _rccName        :: !(Maybe Text)
-    , _rccExpression  :: !(Maybe Text)
+    { _rccTagColor :: !(Maybe RemoteConfigConditionTagColor)
+    , _rccName :: !(Maybe Text)
+    , _rccExpression :: !(Maybe Text)
     , _rccDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

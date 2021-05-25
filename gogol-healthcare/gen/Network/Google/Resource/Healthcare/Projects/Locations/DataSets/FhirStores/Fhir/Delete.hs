@@ -20,13 +20,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a FHIR resource. Implements the FHIR standard [delete
--- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#delete).
+-- Deletes a FHIR resource. Implements the FHIR standard delete interaction
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#delete),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#delete),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#delete)).
 -- Note: Unless resource versioning is disabled by setting the
 -- disable_resource_versioning flag on the FHIR store, the deleted
 -- resources will be moved to a history repository that can still be
 -- retrieved through vread and related methods, unless they are removed by
--- the purge method.
+-- the purge method. For samples that show how to call \`delete\`, see
+-- [Deleting a FHIR
+-- resource](\/healthcare\/docs\/how-tos\/fhir-resources#deleting_a_fhir_resource).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.fhir.delete@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.Delete
@@ -47,14 +51,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfsfdCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.delete@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresFhirDelete' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresFhirDeleteResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,23 +67,27 @@ type ProjectsLocationsDataSetsFhirStoresFhirDeleteResource
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] HTTPBody
 
--- | Deletes a FHIR resource. Implements the FHIR standard [delete
--- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#delete).
+-- | Deletes a FHIR resource. Implements the FHIR standard delete interaction
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#delete),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#delete),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#delete)).
 -- Note: Unless resource versioning is disabled by setting the
 -- disable_resource_versioning flag on the FHIR store, the deleted
 -- resources will be moved to a history repository that can still be
 -- retrieved through vread and related methods, unless they are removed by
--- the purge method.
+-- the purge method. For samples that show how to call \`delete\`, see
+-- [Deleting a FHIR
+-- resource](\/healthcare\/docs\/how-tos\/fhir-resources#deleting_a_fhir_resource).
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresFhirDelete' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresFhirDelete =
   ProjectsLocationsDataSetsFhirStoresFhirDelete'
-    { _pldsfsfdXgafv          :: !(Maybe Xgafv)
+    { _pldsfsfdXgafv :: !(Maybe Xgafv)
     , _pldsfsfdUploadProtocol :: !(Maybe Text)
-    , _pldsfsfdAccessToken    :: !(Maybe Text)
-    , _pldsfsfdUploadType     :: !(Maybe Text)
-    , _pldsfsfdName           :: !Text
-    , _pldsfsfdCallback       :: !(Maybe Text)
+    , _pldsfsfdAccessToken :: !(Maybe Text)
+    , _pldsfsfdUploadType :: !(Maybe Text)
+    , _pldsfsfdName :: !Text
+    , _pldsfsfdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

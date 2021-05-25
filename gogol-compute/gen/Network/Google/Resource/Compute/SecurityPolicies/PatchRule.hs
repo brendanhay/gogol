@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.PatchRule
     , spprSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.patchRule@ method which the
 -- 'SecurityPoliciesPatchRule' request conforms to.
@@ -63,9 +63,9 @@ type SecurityPoliciesPatchRuleResource =
 -- /See:/ 'securityPoliciesPatchRule' smart constructor.
 data SecurityPoliciesPatchRule =
   SecurityPoliciesPatchRule'
-    { _spprPriority       :: !(Maybe (Textual Int32))
-    , _spprProject        :: !Text
-    , _spprPayload        :: !SecurityPolicyRule
+    { _spprPriority :: !(Maybe (Textual Int32))
+    , _spprProject :: !Text
+    , _spprPayload :: !SecurityPolicyRule
     , _spprSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

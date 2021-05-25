@@ -27,7 +27,10 @@
 -- operations.get. The Operation will complete when entire workflow is
 -- finished.The running workflow can be aborted via operations.cancel. This
 -- will cause any inflight jobs to be cancelled and workflow-owned clusters
--- to be deleted.The Operation.metadata will be WorkflowMetadata.On
+-- to be deleted.The Operation.metadata will be WorkflowMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#workflowmetadata).
+-- Also see Using WorkflowMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/debugging#using_workflowmetadata).On
 -- successful completion, Operation.response will be Empty.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.workflowTemplates.instantiateInline@.
@@ -51,8 +54,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.Insta
     , prwtiiCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.instantiateInline@ method which the
 -- 'ProjectsRegionsWorkflowTemplatesInstantiateInline' request conforms to.
@@ -78,20 +81,23 @@ type ProjectsRegionsWorkflowTemplatesInstantiateInlineResource
 -- operations.get. The Operation will complete when entire workflow is
 -- finished.The running workflow can be aborted via operations.cancel. This
 -- will cause any inflight jobs to be cancelled and workflow-owned clusters
--- to be deleted.The Operation.metadata will be WorkflowMetadata.On
+-- to be deleted.The Operation.metadata will be WorkflowMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#workflowmetadata).
+-- Also see Using WorkflowMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/debugging#using_workflowmetadata).On
 -- successful completion, Operation.response will be Empty.
 --
 -- /See:/ 'projectsRegionsWorkflowTemplatesInstantiateInline' smart constructor.
 data ProjectsRegionsWorkflowTemplatesInstantiateInline =
   ProjectsRegionsWorkflowTemplatesInstantiateInline'
-    { _prwtiiParent         :: !Text
-    , _prwtiiXgafv          :: !(Maybe Xgafv)
-    , _prwtiiRequestId      :: !(Maybe Text)
+    { _prwtiiParent :: !Text
+    , _prwtiiXgafv :: !(Maybe Xgafv)
+    , _prwtiiRequestId :: !(Maybe Text)
     , _prwtiiUploadProtocol :: !(Maybe Text)
-    , _prwtiiAccessToken    :: !(Maybe Text)
-    , _prwtiiUploadType     :: !(Maybe Text)
-    , _prwtiiPayload        :: !WorkflowTemplate
-    , _prwtiiCallback       :: !(Maybe Text)
+    , _prwtiiAccessToken :: !(Maybe Text)
+    , _prwtiiUploadType :: !(Maybe Text)
+    , _prwtiiPayload :: !WorkflowTemplate
+    , _prwtiiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -132,9 +138,14 @@ projectsRegionsWorkflowTemplatesInstantiateInline pPrwtiiParent_ pPrwtiiPayload_
     }
 
 
--- | Required. The \"resource name\" of the workflow template region, as
--- described in https:\/\/cloud.google.com\/apis\/design\/resource_names of
--- the form projects\/{project_id}\/regions\/{region}
+-- | Required. The resource name of the region or location, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates,instantiateinline, the resource name
+-- of the region has the following format:
+-- projects\/{project_id}\/regions\/{region} For
+-- projects.locations.workflowTemplates.instantiateinline, the resource
+-- name of the location has the following format:
+-- projects\/{project_id}\/locations\/{location}
 prwtiiParent :: Lens' ProjectsRegionsWorkflowTemplatesInstantiateInline Text
 prwtiiParent
   = lens _prwtiiParent (\ s a -> s{_prwtiiParent = a})

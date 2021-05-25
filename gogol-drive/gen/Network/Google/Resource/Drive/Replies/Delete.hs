@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Replies.Delete
     , rdCommentId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.delete@ method which the
 -- 'RepliesDelete' request conforms to.
@@ -59,8 +59,8 @@ type RepliesDeleteResource =
 -- /See:/ 'repliesDelete' smart constructor.
 data RepliesDelete =
   RepliesDelete'
-    { _rdReplyId   :: !Text
-    , _rdFileId    :: !Text
+    { _rdReplyId :: !Text
+    , _rdFileId :: !Text
     , _rdCommentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

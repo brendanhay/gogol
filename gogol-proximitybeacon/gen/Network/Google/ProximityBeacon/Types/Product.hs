@@ -17,8 +17,8 @@
 --
 module Network.Google.ProximityBeacon.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types.Sum
 
 -- | An object representing a latitude\/longitude pair. This is expressed as
 -- a pair of doubles representing degrees latitude and degrees longitude.
@@ -29,7 +29,7 @@ import           Network.Google.ProximityBeacon.Types.Sum
 -- /See:/ 'latLng' smart constructor.
 data LatLng =
   LatLng'
-    { _llLatitude  :: !(Maybe (Textual Double))
+    { _llLatitude :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,8 +81,8 @@ instance ToJSON LatLng where
 data AttachmentInfo =
   AttachmentInfo'
     { _aiMaxDistanceMeters :: !(Maybe (Textual Double))
-    , _aiData              :: !(Maybe Bytes)
-    , _aiNamespacedType    :: !(Maybe Text)
+    , _aiData :: !(Maybe Bytes)
+    , _aiNamespacedType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -129,7 +129,7 @@ aiData
       mapping _Bytes
 
 -- | Specifies what kind of attachment this is. Tells a client how to
--- interpret the \`data\` field. Format is namespace\/type, for example
+-- interpret the \`data\` field. Format is 'namespace\/type', for example
 -- 'scrupulous-wombat-12345\/welcome-message'
 aiNamespacedType :: Lens' AttachmentInfo (Maybe Text)
 aiNamespacedType
@@ -258,7 +258,7 @@ instance ToJSON DeleteAttachmentsResponse where
 -- /See:/ 'getInfoForObservedBeaconsRequest' smart constructor.
 data GetInfoForObservedBeaconsRequest =
   GetInfoForObservedBeaconsRequest'
-    { _gifobrObservations    :: !(Maybe [Observation])
+    { _gifobrObservations :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -289,7 +289,7 @@ gifobrObservations
 -- | Specifies what kind of attachments to include in the response. When
 -- given, the response will include only attachments of the given types.
 -- When empty, no attachments will be returned. Must be in the format
--- namespace\/type. Accepts \`*\` to specify all types in all namespaces
+-- 'namespace\/type'. Accepts \`*\` to specify all types in all namespaces
 -- owned by the client. Optional.
 gifobrNamespacedTypes :: Lens' GetInfoForObservedBeaconsRequest [Text]
 gifobrNamespacedTypes
@@ -324,7 +324,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 data Namespace =
   Namespace'
     { _nServingVisibility :: !(Maybe NamespaceServingVisibility)
-    , _nNamespaceName     :: !(Maybe Text)
+    , _nNamespaceName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -395,11 +395,11 @@ instance ToJSON Namespace where
 data EphemeralIdRegistration =
   EphemeralIdRegistration'
     { _eirRotationPeriodExponent :: !(Maybe (Textual Word32))
-    , _eirInitialClockValue      :: !(Maybe (Textual Word64))
-    , _eirBeaconIdentityKey      :: !(Maybe Bytes)
-    , _eirBeaconEcdhPublicKey    :: !(Maybe Bytes)
-    , _eirInitialEid             :: !(Maybe Bytes)
-    , _eirServiceEcdhPublicKey   :: !(Maybe Bytes)
+    , _eirInitialClockValue :: !(Maybe (Textual Word64))
+    , _eirBeaconIdentityKey :: !(Maybe Bytes)
+    , _eirBeaconEcdhPublicKey :: !(Maybe Bytes)
+    , _eirInitialEid :: !(Maybe Bytes)
+    , _eirServiceEcdhPublicKey :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -573,8 +573,8 @@ instance ToJSON ListNamespacesResponse where
 -- /See:/ 'date' smart constructor.
 data Date =
   Date'
-    { _dDay   :: !(Maybe (Textual Int32))
-    , _dYear  :: !(Maybe (Textual Int32))
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -635,17 +635,17 @@ instance ToJSON Date where
 -- /See:/ 'beacon' smart constructor.
 data Beacon =
   Beacon'
-    { _beaLatLng                  :: !(Maybe LatLng)
-    , _beaStatus                  :: !(Maybe BeaconStatus)
-    , _beaBeaconName              :: !(Maybe Text)
+    { _beaLatLng :: !(Maybe LatLng)
+    , _beaStatus :: !(Maybe BeaconStatus)
+    , _beaBeaconName :: !(Maybe Text)
     , _beaEphemeralIdRegistration :: !(Maybe EphemeralIdRegistration)
-    , _beaIndoorLevel             :: !(Maybe IndoorLevel)
-    , _beaExpectedStability       :: !(Maybe BeaconExpectedStability)
-    , _beaProvisioningKey         :: !(Maybe Bytes)
-    , _beaDescription             :: !(Maybe Text)
-    , _beaPlaceId                 :: !(Maybe Text)
-    , _beaAdvertisedId            :: !(Maybe AdvertisedId)
-    , _beaProperties              :: !(Maybe BeaconProperties)
+    , _beaIndoorLevel :: !(Maybe IndoorLevel)
+    , _beaExpectedStability :: !(Maybe BeaconExpectedStability)
+    , _beaProvisioningKey :: !(Maybe Bytes)
+    , _beaDescription :: !(Maybe Text)
+    , _beaPlaceId :: !(Maybe Text)
+    , _beaAdvertisedId :: !(Maybe AdvertisedId)
+    , _beaProperties :: !(Maybe BeaconProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -827,8 +827,8 @@ instance ToJSON Beacon where
 -- /See:/ 'diagnostics' smart constructor.
 data Diagnostics =
   Diagnostics'
-    { _dAlerts                  :: !(Maybe [Text])
-    , _dBeaconName              :: !(Maybe Text)
+    { _dAlerts :: !(Maybe [Text])
+    , _dBeaconName :: !(Maybe Text)
     , _dEstimatedLowBatteryDate :: !(Maybe Date)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -977,7 +977,7 @@ data EphemeralIdRegistrationParams =
   EphemeralIdRegistrationParams'
     { _eirpMinRotationPeriodExponent :: !(Maybe (Textual Word32))
     , _eirpMaxRotationPeriodExponent :: !(Maybe (Textual Word32))
-    , _eirpServiceEcdhPublicKey      :: !(Maybe Bytes)
+    , _eirpServiceEcdhPublicKey :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1052,8 +1052,8 @@ instance ToJSON EphemeralIdRegistrationParams where
 -- /See:/ 'beaconInfo' smart constructor.
 data BeaconInfo =
   BeaconInfo'
-    { _biAttachments  :: !(Maybe [AttachmentInfo])
-    , _biBeaconName   :: !(Maybe Text)
+    { _biAttachments :: !(Maybe [AttachmentInfo])
+    , _biBeaconName :: !(Maybe Text)
     , _biAdvertisedId :: !(Maybe AdvertisedId)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1120,8 +1120,8 @@ instance ToJSON BeaconInfo where
 -- /See:/ 'observation' smart constructor.
 data Observation =
   Observation'
-    { _oTelemetry    :: !(Maybe Bytes)
-    , _oTimestampMs  :: !(Maybe DateTime')
+    { _oTelemetry :: !(Maybe Bytes)
+    , _oTimestampMs :: !(Maybe DateTime')
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1188,10 +1188,10 @@ instance ToJSON Observation where
 data BeaconAttachment =
   BeaconAttachment'
     { _baMaxDistanceMeters :: !(Maybe (Textual Double))
-    , _baCreationTimeMs    :: !(Maybe DateTime')
-    , _baData              :: !(Maybe Bytes)
-    , _baAttachmentName    :: !(Maybe Text)
-    , _baNamespacedType    :: !(Maybe Text)
+    , _baCreationTimeMs :: !(Maybe DateTime')
+    , _baData :: !(Maybe Bytes)
+    , _baAttachmentName :: !(Maybe Text)
+    , _baNamespacedType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1264,7 +1264,7 @@ baAttachmentName
       (\ s a -> s{_baAttachmentName = a})
 
 -- | Specifies what kind of attachment this is. Tells a client how to
--- interpret the \`data\` field. Format is namespace\/type. Namespace
+-- interpret the \`data\` field. Format is 'namespace\/type'. Namespace
 -- provides type separation between clients. Type describes the type of
 -- \`data\`, for use by the client when parsing the \`data\` field.
 -- Required.
@@ -1300,7 +1300,7 @@ instance ToJSON BeaconAttachment where
 data ListDiagnosticsResponse =
   ListDiagnosticsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDiagnostics   :: !(Maybe [Diagnostics])
+    , _ldrDiagnostics :: !(Maybe [Diagnostics])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1354,7 +1354,7 @@ instance ToJSON ListDiagnosticsResponse where
 -- /See:/ 'advertisedId' smart constructor.
 data AdvertisedId =
   AdvertisedId'
-    { _aiId   :: !(Maybe Bytes)
+    { _aiId :: !(Maybe Bytes)
     , _aiType :: !(Maybe AdvertisedIdType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1403,8 +1403,8 @@ instance ToJSON AdvertisedId where
 data ListBeaconsResponse =
   ListBeaconsResponse'
     { _lbrNextPageToken :: !(Maybe Text)
-    , _lbrBeacons       :: !(Maybe [Beacon])
-    , _lbrTotalCount    :: !(Maybe (Textual Int64))
+    , _lbrBeacons :: !(Maybe [Beacon])
+    , _lbrTotalCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

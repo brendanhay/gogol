@@ -44,8 +44,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.DropRowRa
     , pitdrrCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.dropRowRange@ method which the
 -- 'ProjectsInstancesTablesDropRowRange' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsInstancesTablesDropRowRangeResource =
 -- /See:/ 'projectsInstancesTablesDropRowRange' smart constructor.
 data ProjectsInstancesTablesDropRowRange =
   ProjectsInstancesTablesDropRowRange'
-    { _pitdrrXgafv          :: !(Maybe Xgafv)
+    { _pitdrrXgafv :: !(Maybe Xgafv)
     , _pitdrrUploadProtocol :: !(Maybe Text)
-    , _pitdrrAccessToken    :: !(Maybe Text)
-    , _pitdrrUploadType     :: !(Maybe Text)
-    , _pitdrrPayload        :: !DropRowRangeRequest
-    , _pitdrrName           :: !Text
-    , _pitdrrCallback       :: !(Maybe Text)
+    , _pitdrrAccessToken :: !(Maybe Text)
+    , _pitdrrUploadType :: !(Maybe Text)
+    , _pitdrrPayload :: !DropRowRangeRequest
+    , _pitdrrName :: !Text
+    , _pitdrrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,9 +141,9 @@ pitdrrPayload
   = lens _pitdrrPayload
       (\ s a -> s{_pitdrrPayload = a})
 
--- | The unique name of the table on which to drop a range of rows. Values
--- are of the form \`projects\/\/instances\/\/tables\/
--- \`.
+-- | Required. The unique name of the table on which to drop a range of rows.
+-- Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/tables\/{table}\`.
 pitdrrName :: Lens' ProjectsInstancesTablesDropRowRange Text
 pitdrrName
   = lens _pitdrrName (\ s a -> s{_pitdrrName = a})

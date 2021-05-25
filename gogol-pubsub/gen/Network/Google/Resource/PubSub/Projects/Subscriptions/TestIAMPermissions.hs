@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,8 +47,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
     , pstiampCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.testIamPermissions@ method which the
 -- 'ProjectsSubscriptionsTestIAMPermissions' request conforms to.
@@ -67,21 +67,21 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
 data ProjectsSubscriptionsTestIAMPermissions =
   ProjectsSubscriptionsTestIAMPermissions'
-    { _pstiampXgafv          :: !(Maybe Xgafv)
+    { _pstiampXgafv :: !(Maybe Xgafv)
     , _pstiampUploadProtocol :: !(Maybe Text)
-    , _pstiampAccessToken    :: !(Maybe Text)
-    , _pstiampUploadType     :: !(Maybe Text)
-    , _pstiampPayload        :: !TestIAMPermissionsRequest
-    , _pstiampResource       :: !Text
-    , _pstiampCallback       :: !(Maybe Text)
+    , _pstiampAccessToken :: !(Maybe Text)
+    , _pstiampUploadType :: !(Maybe Text)
+    , _pstiampPayload :: !TestIAMPermissionsRequest
+    , _pstiampResource :: !Text
+    , _pstiampCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

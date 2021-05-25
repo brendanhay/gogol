@@ -44,8 +44,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
     , svbuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchUpdate@ method which the
 -- 'SpreadsheetsValuesBatchUpdate' request conforms to.
@@ -70,13 +70,13 @@ type SpreadsheetsValuesBatchUpdateResource =
 -- /See:/ 'spreadsheetsValuesBatchUpdate' smart constructor.
 data SpreadsheetsValuesBatchUpdate =
   SpreadsheetsValuesBatchUpdate'
-    { _svbuXgafv          :: !(Maybe Xgafv)
+    { _svbuXgafv :: !(Maybe Xgafv)
     , _svbuUploadProtocol :: !(Maybe Text)
-    , _svbuAccessToken    :: !(Maybe Text)
-    , _svbuSpreadsheetId  :: !Text
-    , _svbuUploadType     :: !(Maybe Text)
-    , _svbuPayload        :: !BatchUpdateValuesRequest
-    , _svbuCallback       :: !(Maybe Text)
+    , _svbuAccessToken :: !(Maybe Text)
+    , _svbuSpreadsheetId :: !Text
+    , _svbuUploadType :: !(Maybe Text)
+    , _svbuPayload :: !BatchUpdateValuesRequest
+    , _svbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up [resource
+-- Looks up the [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of a
--- Membership within a Group by member\'s EntityKey.
+-- \`Membership\` by its \`EntityKey\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.memberships.lookup@.
 module Network.Google.Resource.CloudIdentity.Groups.Memberships.Lookup
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Memberships.Lookup
     , gmlCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.memberships.lookup@ method which the
 -- 'GroupsMembershipsLookup' request conforms to.
@@ -64,21 +64,21 @@ type GroupsMembershipsLookupResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] LookupMembershipNameResponse
 
--- | Looks up [resource
+-- | Looks up the [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of a
--- Membership within a Group by member\'s EntityKey.
+-- \`Membership\` by its \`EntityKey\`.
 --
 -- /See:/ 'groupsMembershipsLookup' smart constructor.
 data GroupsMembershipsLookup =
   GroupsMembershipsLookup'
-    { _gmlParent             :: !Text
-    , _gmlXgafv              :: !(Maybe Xgafv)
-    , _gmlUploadProtocol     :: !(Maybe Text)
-    , _gmlAccessToken        :: !(Maybe Text)
-    , _gmlUploadType         :: !(Maybe Text)
-    , _gmlMemberKeyId        :: !(Maybe Text)
+    { _gmlParent :: !Text
+    , _gmlXgafv :: !(Maybe Xgafv)
+    , _gmlUploadProtocol :: !(Maybe Text)
+    , _gmlAccessToken :: !(Maybe Text)
+    , _gmlUploadType :: !(Maybe Text)
+    , _gmlMemberKeyId :: !(Maybe Text)
     , _gmlMemberKeyNamespace :: !(Maybe Text)
-    , _gmlCallback           :: !(Maybe Text)
+    , _gmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,10 +118,8 @@ groupsMembershipsLookup pGmlParent_ =
     }
 
 
--- | [Resource
--- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
--- Group to lookup Membership within. Format: \`groups\/{group_id}\`, where
--- \`group_id\` is the unique ID assigned to the Group.
+-- | Required. The parent \`Group\` resource under which to lookup the
+-- \`Membership\` name. Must be of the form \`groups\/{group_id}\`.
 gmlParent :: Lens' GroupsMembershipsLookup Text
 gmlParent
   = lens _gmlParent (\ s a -> s{_gmlParent = a})
@@ -148,18 +146,22 @@ gmlUploadType
   = lens _gmlUploadType
       (\ s a -> s{_gmlUploadType = a})
 
--- | The ID of the entity within the given namespace. The ID must be unique
--- within its namespace.
+-- | The ID of the entity. For Google-managed entities, the \`id\` should be
+-- the email address of an existing group or user. For
+-- external-identity-mapped entities, the \`id\` must be a string
+-- conforming to the Identity Source\'s requirements. Must be unique within
+-- a \`namespace\`.
 gmlMemberKeyId :: Lens' GroupsMembershipsLookup (Maybe Text)
 gmlMemberKeyId
   = lens _gmlMemberKeyId
       (\ s a -> s{_gmlMemberKeyId = a})
 
--- | Namespaces provide isolation for IDs, so an ID only needs to be unique
--- within its namespace. Namespaces are currently only created as part of
--- IdentitySource creation from Admin Console. A namespace
--- \`\"identitysources\/{identity_source_id}\"\` is created corresponding
--- to every Identity Source \`identity_source_id\`.
+-- | The namespace in which the entity exists. If not specified, the
+-- \`EntityKey\` represents a Google-managed entity such as a Google user
+-- or a Google Group. If specified, the \`EntityKey\` represents an
+-- external-identity-mapped group. The namespace must correspond to an
+-- identity source created in Admin Console and must be in the form of
+-- \`identitysources\/{identity_source_id}\`.
 gmlMemberKeyNamespace :: Lens' GroupsMembershipsLookup (Maybe Text)
 gmlMemberKeyNamespace
   = lens _gmlMemberKeyNamespace
@@ -175,7 +177,8 @@ instance GoogleRequest GroupsMembershipsLookup where
              LookupMembershipNameResponse
         type Scopes GroupsMembershipsLookup =
              '["https://www.googleapis.com/auth/cloud-identity.groups",
-               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsMembershipsLookup'{..}
           = go _gmlParent _gmlXgafv _gmlUploadProtocol
               _gmlAccessToken

@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for viewing and managing your reports in DoubleClick Bid Manager.
+-- DoubleClick Bid Manager API allows users to manage and create campaigns
+-- and reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference>
 module Network.Google.DoubleClickBids
@@ -28,12 +29,6 @@ module Network.Google.DoubleClickBids
     , DoubleClickBidsAPI
 
     -- * Resources
-
-    -- ** doubleclickbidmanager.lineitems.downloadlineitems
-    , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
-
-    -- ** doubleclickbidmanager.lineitems.uploadlineitems
-    , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
 
     -- ** doubleclickbidmanager.queries.createquery
     , module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
@@ -53,19 +48,25 @@ module Network.Google.DoubleClickBids
     -- ** doubleclickbidmanager.reports.listreports
     , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
-    -- ** doubleclickbidmanager.sdf.download
-    , module Network.Google.Resource.DoubleClickBidManager.Sdf.Download
-
     -- * Types
 
     -- ** ListReportsResponse
     , ListReportsResponse
     , listReportsResponse
+    , lrrNextPageToken
     , lrrReports
     , lrrKind
 
+    -- ** DisjunctiveMatchStatement
+    , DisjunctiveMatchStatement
+    , disjunctiveMatchStatement
+    , dmsEventFilters
+
     -- ** QueryMetadataFormat
     , QueryMetadataFormat (..)
+
+    -- ** PathQueryOptionsFilterFilter
+    , PathQueryOptionsFilterFilter (..)
 
     -- ** QueryMetadata
     , QueryMetadata
@@ -82,6 +83,12 @@ module Network.Google.DoubleClickBids
     , qmTitle
     , qmSendNotification
 
+    -- ** PathQueryOptions
+    , PathQueryOptions
+    , pathQueryOptions
+    , pqoPathFilters
+    , pqoChannelGrouping
+
     -- ** RunQueryRequest
     , RunQueryRequest
     , runQueryRequest
@@ -96,51 +103,15 @@ module Network.Google.DoubleClickBids
     , fpValue
     , fpType
 
-    -- ** UploadLineItemsRequest
-    , UploadLineItemsRequest
-    , uploadLineItemsRequest
-    , ulirLineItems
-    , ulirFormat
-    , ulirDryRun
-
     -- ** ParametersType
     , ParametersType (..)
-
-    -- ** DownloadLineItemsRequestFilterType
-    , DownloadLineItemsRequestFilterType (..)
-
-    -- ** DownloadRequestFilterType
-    , DownloadRequestFilterType (..)
-
-    -- ** DownloadLineItemsRequest
-    , DownloadLineItemsRequest
-    , downloadLineItemsRequest
-    , dlirFilterType
-    , dlirFormat
-    , dlirFileSpec
-    , dlirFilterIds
-
-    -- ** DownloadRequestFileTypesItem
-    , DownloadRequestFileTypesItem (..)
-
-    -- ** DownloadRequest
-    , DownloadRequest
-    , downloadRequest
-    , drFileTypes
-    , drFilterType
-    , drVersion
-    , drFilterIds
 
     -- ** ListQueriesResponse
     , ListQueriesResponse
     , listQueriesResponse
     , lqrQueries
+    , lqrNextPageToken
     , lqrKind
-
-    -- ** UploadLineItemsResponse
-    , UploadLineItemsResponse
-    , uploadLineItemsResponse
-    , ulirUploadStatus
 
     -- ** QueryMetadataDataRange
     , QueryMetadataDataRange (..)
@@ -166,18 +137,11 @@ module Network.Google.DoubleClickBids
     , rKey
     , rMetadata
 
-    -- ** RowStatus
-    , RowStatus
-    , rowStatus
-    , rsEntityName
-    , rsChanged
-    , rsPersisted
-    , rsRowNumber
-    , rsErrors
-    , rsEntityId
-
-    -- ** DownloadLineItemsRequestFileSpec
-    , DownloadLineItemsRequestFileSpec (..)
+    -- ** Rule
+    , Rule
+    , rule
+    , rName
+    , rDisjunctiveMatchStatements
 
     -- ** ReportKey
     , ReportKey
@@ -185,37 +149,36 @@ module Network.Google.DoubleClickBids
     , rkQueryId
     , rkReportId
 
-    -- ** UploadLineItemsRequestFormat
-    , UploadLineItemsRequestFormat (..)
+    -- ** EventFilter
+    , EventFilter
+    , eventFilter
+    , efDimensionFilter
 
-    -- ** UploadStatus
-    , UploadStatus
-    , uploadStatus
-    , usRowStatus
-    , usErrors
+    -- ** ChannelGrouping
+    , ChannelGrouping
+    , channelGrouping
+    , cgRules
+    , cgFallbackName
+    , cgName
+
+    -- ** PathQueryOptionsFilterMatch
+    , PathQueryOptionsFilterMatch (..)
+
+    -- ** PathQueryOptionsFilter
+    , PathQueryOptionsFilter
+    , pathQueryOptionsFilter
+    , pqofValues
+    , pqofFilter
+    , pqofMatch
 
     -- ** QuerySchedule
     , QuerySchedule
     , querySchedule
     , qsFrequency
+    , qsStartTimeMs
     , qsEndTimeMs
     , qsNextRunMinuteOfDay
     , qsNextRunTimezoneCode
-
-    -- ** DownloadLineItemsResponse
-    , DownloadLineItemsResponse
-    , downloadLineItemsResponse
-    , dlirLineItems
-
-    -- ** DownloadResponse
-    , DownloadResponse
-    , downloadResponse
-    , drInventorySources
-    , drInsertionOrders
-    , drCampaigns
-    , drLineItems
-    , drAdGroups
-    , drAds
 
     -- ** ReportStatus
     , ReportStatus
@@ -244,7 +207,14 @@ module Network.Google.DoubleClickBids
     , pIncludeInviteData
     , pFilters
     , pGroupBys
+    , pOptions
     , pType
+
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** PathFilterPathMatchPosition
+    , PathFilterPathMatchPosition (..)
 
     -- ** FilterPairType
     , FilterPairType (..)
@@ -255,14 +225,23 @@ module Network.Google.DoubleClickBids
     -- ** ReportStatusState
     , ReportStatusState (..)
 
+    -- ** PathFilter
+    , PathFilter
+    , pathFilter
+    , pfEventFilters
+    , pfPathMatchPosition
+
+    -- ** Options
+    , Options
+    , options
+    , oPathQueryOptions
+    , oIncludeOnlyTargetedUserLists
+
     -- ** ParametersGroupBysItem
     , ParametersGroupBysItem (..)
 
     -- ** ReportFailureErrorCode
     , ReportFailureErrorCode (..)
-
-    -- ** DownloadLineItemsRequestFormat
-    , DownloadLineItemsRequestFormat (..)
 
     -- ** ReportFailure
     , ReportFailure
@@ -273,17 +252,14 @@ module Network.Google.DoubleClickBids
     , ReportStatusFormat (..)
     ) where
 
-import           Network.Google.DoubleClickBids.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
-import           Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
-import           Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
-import           Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
-import           Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
-import           Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
-import           Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
-import           Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
-import           Network.Google.Resource.DoubleClickBidManager.Sdf.Download
+import Network.Google.Prelude
+import Network.Google.DoubleClickBids.Types
+import Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
+import Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
+import Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
+import Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
+import Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
+import Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
 {- $resources
 TODO
@@ -296,6 +272,3 @@ type DoubleClickBidsAPI =
        :<|> QueriesCreateQueryResource
        :<|> QueriesListqueriesResource
        :<|> ReportsListreportsResource
-       :<|> LineitemsUploadlineitemsResource
-       :<|> LineitemsDownloadlineitemsResource
-       :<|> SdfDownloadResource

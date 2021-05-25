@@ -45,6 +45,7 @@ library
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Destroy
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Get
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.GetPublicKey
+        , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.List
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
@@ -59,7 +60,10 @@ library
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.Get
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.GetIAMPolicy
+        , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
+        , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIAMPolicy
+        , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.List
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.SetIAMPolicy
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.ImportJobs.TestIAMPermissions
         , Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.List

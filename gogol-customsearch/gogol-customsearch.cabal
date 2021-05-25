@@ -1,6 +1,6 @@
 name:                  gogol-customsearch
 version:               0.5.0
-synopsis:              Google CustomSearch SDK.
+synopsis:              Google Custom Search SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

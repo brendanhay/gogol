@@ -1,6 +1,6 @@
 name:                  gogol-searchconsole
 version:               0.5.0
-synopsis:              Google Search Console URL Testing Tools SDK.
+synopsis:              Google Search Console SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Provides tools for running validation tests against single URLs
+    The Search Console API provides access to both Search Console data
+    (verified users only) and to public information on an URL basis (anyone)
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -34,6 +35,15 @@ library
 
     exposed-modules:
           Network.Google.Resource.SearchConsole.URLTestingTools.MobileFriendlyTest.Run
+        , Network.Google.Resource.Webmasters.Searchanalytics.Query
+        , Network.Google.Resource.Webmasters.Sitemaps.Delete
+        , Network.Google.Resource.Webmasters.Sitemaps.Get
+        , Network.Google.Resource.Webmasters.Sitemaps.List
+        , Network.Google.Resource.Webmasters.Sitemaps.Submit
+        , Network.Google.Resource.Webmasters.Sites.Add
+        , Network.Google.Resource.Webmasters.Sites.Delete
+        , Network.Google.Resource.Webmasters.Sites.Get
+        , Network.Google.Resource.Webmasters.Sites.List
         , Network.Google.SearchConsole
         , Network.Google.SearchConsole.Types
 

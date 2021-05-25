@@ -22,7 +22,7 @@
 --
 -- Deletes the backup taken by a backup run.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.backupRuns.delete@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.backupRuns.delete@.
 module Network.Google.Resource.SQL.BackupRuns.Delete
     (
     -- * REST Resource
@@ -33,34 +33,49 @@ module Network.Google.Resource.SQL.BackupRuns.Delete
     , BackupRunsDelete
 
     -- * Request Lenses
+    , brdXgafv
+    , brdUploadProtocol
     , brdProject
+    , brdAccessToken
+    , brdUploadType
     , brdId
+    , brdCallback
     , brdInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.backupRuns.delete@ method which the
 -- 'BackupRunsDelete' request conforms to.
 type BackupRunsDeleteResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "backupRuns" :>
-                   Capture "id" (Textual Int64) :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "backupRuns" :>
+                 Capture "id" (Textual Int64) :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Delete '[JSON] Operation
 
 -- | Deletes the backup taken by a backup run.
 --
 -- /See:/ 'backupRunsDelete' smart constructor.
 data BackupRunsDelete =
   BackupRunsDelete'
-    { _brdProject  :: !Text
-    , _brdId       :: !(Textual Int64)
+    { _brdXgafv :: !(Maybe Xgafv)
+    , _brdUploadProtocol :: !(Maybe Text)
+    , _brdProject :: !Text
+    , _brdAccessToken :: !(Maybe Text)
+    , _brdUploadType :: !(Maybe Text)
+    , _brdId :: !(Textual Int64)
+    , _brdCallback :: !(Maybe Text)
     , _brdInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -70,9 +85,19 @@ data BackupRunsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'brdXgafv'
+--
+-- * 'brdUploadProtocol'
+--
 -- * 'brdProject'
 --
+-- * 'brdAccessToken'
+--
+-- * 'brdUploadType'
+--
 -- * 'brdId'
+--
+-- * 'brdCallback'
 --
 -- * 'brdInstance'
 backupRunsDelete
@@ -82,22 +107,54 @@ backupRunsDelete
     -> BackupRunsDelete
 backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
   BackupRunsDelete'
-    { _brdProject = pBrdProject_
+    { _brdXgafv = Nothing
+    , _brdUploadProtocol = Nothing
+    , _brdProject = pBrdProject_
+    , _brdAccessToken = Nothing
+    , _brdUploadType = Nothing
     , _brdId = _Coerce # pBrdId_
+    , _brdCallback = Nothing
     , _brdInstance = pBrdInstance_
     }
 
+
+-- | V1 error format.
+brdXgafv :: Lens' BackupRunsDelete (Maybe Xgafv)
+brdXgafv = lens _brdXgafv (\ s a -> s{_brdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+brdUploadProtocol :: Lens' BackupRunsDelete (Maybe Text)
+brdUploadProtocol
+  = lens _brdUploadProtocol
+      (\ s a -> s{_brdUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 brdProject :: Lens' BackupRunsDelete Text
 brdProject
   = lens _brdProject (\ s a -> s{_brdProject = a})
 
--- | The ID of the Backup Run to delete. To find a Backup Run ID, use the
+-- | OAuth access token.
+brdAccessToken :: Lens' BackupRunsDelete (Maybe Text)
+brdAccessToken
+  = lens _brdAccessToken
+      (\ s a -> s{_brdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+brdUploadType :: Lens' BackupRunsDelete (Maybe Text)
+brdUploadType
+  = lens _brdUploadType
+      (\ s a -> s{_brdUploadType = a})
+
+-- | The ID of the backup run to delete. To find a backup run ID, use the
 -- list method.
 brdId :: Lens' BackupRunsDelete Int64
 brdId
   = lens _brdId (\ s a -> s{_brdId = a}) . _Coerce
+
+-- | JSONP
+brdCallback :: Lens' BackupRunsDelete (Maybe Text)
+brdCallback
+  = lens _brdCallback (\ s a -> s{_brdCallback = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 brdInstance :: Lens' BackupRunsDelete Text
@@ -110,7 +167,12 @@ instance GoogleRequest BackupRunsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient BackupRunsDelete'{..}
-          = go _brdProject _brdInstance _brdId (Just AltJSON)
+          = go _brdProject _brdInstance _brdId _brdXgafv
+              _brdUploadProtocol
+              _brdAccessToken
+              _brdUploadType
+              _brdCallback
+              (Just AltJSON)
               sQLAdminService
           where go
                   = buildClient

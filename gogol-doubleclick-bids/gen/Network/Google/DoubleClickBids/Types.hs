@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -25,11 +25,20 @@ module Network.Google.DoubleClickBids.Types
     -- * ListReportsResponse
     , ListReportsResponse
     , listReportsResponse
+    , lrrNextPageToken
     , lrrReports
     , lrrKind
 
+    -- * DisjunctiveMatchStatement
+    , DisjunctiveMatchStatement
+    , disjunctiveMatchStatement
+    , dmsEventFilters
+
     -- * QueryMetadataFormat
     , QueryMetadataFormat (..)
+
+    -- * PathQueryOptionsFilterFilter
+    , PathQueryOptionsFilterFilter (..)
 
     -- * QueryMetadata
     , QueryMetadata
@@ -46,6 +55,12 @@ module Network.Google.DoubleClickBids.Types
     , qmTitle
     , qmSendNotification
 
+    -- * PathQueryOptions
+    , PathQueryOptions
+    , pathQueryOptions
+    , pqoPathFilters
+    , pqoChannelGrouping
+
     -- * RunQueryRequest
     , RunQueryRequest
     , runQueryRequest
@@ -60,51 +75,15 @@ module Network.Google.DoubleClickBids.Types
     , fpValue
     , fpType
 
-    -- * UploadLineItemsRequest
-    , UploadLineItemsRequest
-    , uploadLineItemsRequest
-    , ulirLineItems
-    , ulirFormat
-    , ulirDryRun
-
     -- * ParametersType
     , ParametersType (..)
-
-    -- * DownloadLineItemsRequestFilterType
-    , DownloadLineItemsRequestFilterType (..)
-
-    -- * DownloadRequestFilterType
-    , DownloadRequestFilterType (..)
-
-    -- * DownloadLineItemsRequest
-    , DownloadLineItemsRequest
-    , downloadLineItemsRequest
-    , dlirFilterType
-    , dlirFormat
-    , dlirFileSpec
-    , dlirFilterIds
-
-    -- * DownloadRequestFileTypesItem
-    , DownloadRequestFileTypesItem (..)
-
-    -- * DownloadRequest
-    , DownloadRequest
-    , downloadRequest
-    , drFileTypes
-    , drFilterType
-    , drVersion
-    , drFilterIds
 
     -- * ListQueriesResponse
     , ListQueriesResponse
     , listQueriesResponse
     , lqrQueries
+    , lqrNextPageToken
     , lqrKind
-
-    -- * UploadLineItemsResponse
-    , UploadLineItemsResponse
-    , uploadLineItemsResponse
-    , ulirUploadStatus
 
     -- * QueryMetadataDataRange
     , QueryMetadataDataRange (..)
@@ -130,18 +109,11 @@ module Network.Google.DoubleClickBids.Types
     , rKey
     , rMetadata
 
-    -- * RowStatus
-    , RowStatus
-    , rowStatus
-    , rsEntityName
-    , rsChanged
-    , rsPersisted
-    , rsRowNumber
-    , rsErrors
-    , rsEntityId
-
-    -- * DownloadLineItemsRequestFileSpec
-    , DownloadLineItemsRequestFileSpec (..)
+    -- * Rule
+    , Rule
+    , rule
+    , rName
+    , rDisjunctiveMatchStatements
 
     -- * ReportKey
     , ReportKey
@@ -149,37 +121,36 @@ module Network.Google.DoubleClickBids.Types
     , rkQueryId
     , rkReportId
 
-    -- * UploadLineItemsRequestFormat
-    , UploadLineItemsRequestFormat (..)
+    -- * EventFilter
+    , EventFilter
+    , eventFilter
+    , efDimensionFilter
 
-    -- * UploadStatus
-    , UploadStatus
-    , uploadStatus
-    , usRowStatus
-    , usErrors
+    -- * ChannelGrouping
+    , ChannelGrouping
+    , channelGrouping
+    , cgRules
+    , cgFallbackName
+    , cgName
+
+    -- * PathQueryOptionsFilterMatch
+    , PathQueryOptionsFilterMatch (..)
+
+    -- * PathQueryOptionsFilter
+    , PathQueryOptionsFilter
+    , pathQueryOptionsFilter
+    , pqofValues
+    , pqofFilter
+    , pqofMatch
 
     -- * QuerySchedule
     , QuerySchedule
     , querySchedule
     , qsFrequency
+    , qsStartTimeMs
     , qsEndTimeMs
     , qsNextRunMinuteOfDay
     , qsNextRunTimezoneCode
-
-    -- * DownloadLineItemsResponse
-    , DownloadLineItemsResponse
-    , downloadLineItemsResponse
-    , dlirLineItems
-
-    -- * DownloadResponse
-    , DownloadResponse
-    , downloadResponse
-    , drInventorySources
-    , drInsertionOrders
-    , drCampaigns
-    , drLineItems
-    , drAdGroups
-    , drAds
 
     -- * ReportStatus
     , ReportStatus
@@ -208,7 +179,14 @@ module Network.Google.DoubleClickBids.Types
     , pIncludeInviteData
     , pFilters
     , pGroupBys
+    , pOptions
     , pType
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * PathFilterPathMatchPosition
+    , PathFilterPathMatchPosition (..)
 
     -- * FilterPairType
     , FilterPairType (..)
@@ -219,14 +197,23 @@ module Network.Google.DoubleClickBids.Types
     -- * ReportStatusState
     , ReportStatusState (..)
 
+    -- * PathFilter
+    , PathFilter
+    , pathFilter
+    , pfEventFilters
+    , pfPathMatchPosition
+
+    -- * Options
+    , Options
+    , options
+    , oPathQueryOptions
+    , oIncludeOnlyTargetedUserLists
+
     -- * ParametersGroupBysItem
     , ParametersGroupBysItem (..)
 
     -- * ReportFailureErrorCode
     , ReportFailureErrorCode (..)
-
-    -- * DownloadLineItemsRequestFormat
-    , DownloadLineItemsRequestFormat (..)
 
     -- * ReportFailure
     , ReportFailure
@@ -237,16 +224,16 @@ module Network.Google.DoubleClickBids.Types
     , ReportStatusFormat (..)
     ) where
 
-import           Network.Google.DoubleClickBids.Types.Product
-import           Network.Google.DoubleClickBids.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DoubleClickBids.Types.Product
+import Network.Google.DoubleClickBids.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1.1' of the DoubleClick Bid Manager API. This contains the host and root path used as a starting point for constructing service requests.
 doubleClickBidsService :: ServiceConfig
 doubleClickBidsService
   = defaultService
-      (ServiceId "doubleclickbidmanager:v1")
-      "www.googleapis.com"
+      (ServiceId "doubleclickbidmanager:v1.1")
+      "doubleclickbidmanager.googleapis.com"
 
 -- | View and manage your reports in DoubleClick Bid Manager
 doubleClickBidManagerScope :: Proxy '["https://www.googleapis.com/auth/doubleclickbidmanager"]

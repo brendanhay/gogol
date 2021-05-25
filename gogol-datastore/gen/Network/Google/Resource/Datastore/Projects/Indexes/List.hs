@@ -46,8 +46,8 @@ module Network.Google.Resource.Datastore.Projects.Indexes.List
     , pilCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.indexes.list@ method which the
 -- 'ProjectsIndexesList' request conforms to.
@@ -75,15 +75,15 @@ type ProjectsIndexesListResource =
 -- /See:/ 'projectsIndexesList' smart constructor.
 data ProjectsIndexesList =
   ProjectsIndexesList'
-    { _pilXgafv          :: !(Maybe Xgafv)
+    { _pilXgafv :: !(Maybe Xgafv)
     , _pilUploadProtocol :: !(Maybe Text)
-    , _pilAccessToken    :: !(Maybe Text)
-    , _pilUploadType     :: !(Maybe Text)
-    , _pilFilter         :: !(Maybe Text)
-    , _pilPageToken      :: !(Maybe Text)
-    , _pilProjectId      :: !Text
-    , _pilPageSize       :: !(Maybe (Textual Int32))
-    , _pilCallback       :: !(Maybe Text)
+    , _pilAccessToken :: !(Maybe Text)
+    , _pilUploadType :: !(Maybe Text)
+    , _pilFilter :: !(Maybe Text)
+    , _pilPageToken :: !(Maybe Text)
+    , _pilProjectId :: !Text
+    , _pilPageSize :: !(Maybe (Textual Int32))
+    , _pilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

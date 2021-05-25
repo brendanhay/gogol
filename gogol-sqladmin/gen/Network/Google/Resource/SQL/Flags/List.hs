@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all available database flags for Cloud SQL instances.
+-- Lists all available database flags for Cloud SQL instances.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.flags.list@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.flags.list@.
 module Network.Google.Resource.SQL.Flags.List
     (
     -- * REST Resource
@@ -33,28 +33,42 @@ module Network.Google.Resource.SQL.Flags.List
     , FlagsList
 
     -- * Request Lenses
+    , flXgafv
     , flDatabaseVersion
+    , flUploadProtocol
+    , flAccessToken
+    , flUploadType
+    , flCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.flags.list@ method which the
 -- 'FlagsList' request conforms to.
 type FlagsListResource =
-     "sql" :>
-       "v1beta4" :>
-         "flags" :>
+     "v1" :>
+       "flags" :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "databaseVersion" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] FlagsListResponse
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] FlagsListResponse
 
--- | List all available database flags for Cloud SQL instances.
+-- | Lists all available database flags for Cloud SQL instances.
 --
 -- /See:/ 'flagsList' smart constructor.
-newtype FlagsList =
+data FlagsList =
   FlagsList'
-    { _flDatabaseVersion :: Maybe Text
+    { _flXgafv :: !(Maybe Xgafv)
+    , _flDatabaseVersion :: !(Maybe Text)
+    , _flUploadProtocol :: !(Maybe Text)
+    , _flAccessToken :: !(Maybe Text)
+    , _flUploadType :: !(Maybe Text)
+    , _flCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,11 +77,33 @@ newtype FlagsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'flXgafv'
+--
 -- * 'flDatabaseVersion'
+--
+-- * 'flUploadProtocol'
+--
+-- * 'flAccessToken'
+--
+-- * 'flUploadType'
+--
+-- * 'flCallback'
 flagsList
     :: FlagsList
-flagsList = FlagsList' {_flDatabaseVersion = Nothing}
+flagsList =
+  FlagsList'
+    { _flXgafv = Nothing
+    , _flDatabaseVersion = Nothing
+    , _flUploadProtocol = Nothing
+    , _flAccessToken = Nothing
+    , _flUploadType = Nothing
+    , _flCallback = Nothing
+    }
 
+
+-- | V1 error format.
+flXgafv :: Lens' FlagsList (Maybe Xgafv)
+flXgafv = lens _flXgafv (\ s a -> s{_flXgafv = a})
 
 -- | Database type and version you want to retrieve flags for. By default,
 -- this method returns flags for all database types and versions.
@@ -76,13 +112,39 @@ flDatabaseVersion
   = lens _flDatabaseVersion
       (\ s a -> s{_flDatabaseVersion = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+flUploadProtocol :: Lens' FlagsList (Maybe Text)
+flUploadProtocol
+  = lens _flUploadProtocol
+      (\ s a -> s{_flUploadProtocol = a})
+
+-- | OAuth access token.
+flAccessToken :: Lens' FlagsList (Maybe Text)
+flAccessToken
+  = lens _flAccessToken
+      (\ s a -> s{_flAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+flUploadType :: Lens' FlagsList (Maybe Text)
+flUploadType
+  = lens _flUploadType (\ s a -> s{_flUploadType = a})
+
+-- | JSONP
+flCallback :: Lens' FlagsList (Maybe Text)
+flCallback
+  = lens _flCallback (\ s a -> s{_flCallback = a})
+
 instance GoogleRequest FlagsList where
         type Rs FlagsList = FlagsListResponse
         type Scopes FlagsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient FlagsList'{..}
-          = go _flDatabaseVersion (Just AltJSON)
+          = go _flXgafv _flDatabaseVersion _flUploadProtocol
+              _flAccessToken
+              _flUploadType
+              _flCallback
+              (Just AltJSON)
               sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy FlagsListResource)

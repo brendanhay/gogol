@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Caution This resource is intended for use only by
+-- third-party partners who are creating Cloud Marketplace images.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.licenses.setIamPolicy@.
 module Network.Google.Resource.Compute.Licenses.SetIAMPolicy
@@ -39,8 +40,8 @@ module Network.Google.Resource.Compute.Licenses.SetIAMPolicy
     , lsipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.licenses.setIamPolicy@ method which the
 -- 'LicensesSetIAMPolicy' request conforms to.
@@ -58,13 +59,14 @@ type LicensesSetIAMPolicyResource =
                          Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Caution This resource is intended for use only by
+-- third-party partners who are creating Cloud Marketplace images.
 --
 -- /See:/ 'licensesSetIAMPolicy' smart constructor.
 data LicensesSetIAMPolicy =
   LicensesSetIAMPolicy'
-    { _lsipProject  :: !Text
-    , _lsipPayload  :: !GlobalSetPolicyRequest
+    { _lsipProject :: !Text
+    , _lsipPayload :: !GlobalSetPolicyRequest
     , _lsipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

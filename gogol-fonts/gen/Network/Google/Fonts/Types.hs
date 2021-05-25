@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -37,6 +37,9 @@ module Network.Google.Fonts.Types
     , wlKind
     , wlItems
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * WebfontsListSort
     , WebfontsListSort (..)
 
@@ -46,12 +49,12 @@ module Network.Google.Fonts.Types
     , wfAddtional
     ) where
 
-import           Network.Google.Fonts.Types.Product
-import           Network.Google.Fonts.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Fonts.Types.Product
+import Network.Google.Fonts.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Fonts Developer API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Web Fonts Developer API. This contains the host and root path used as a starting point for constructing service requests.
 fontsService :: ServiceConfig
 fontsService
   = defaultService (ServiceId "webfonts:v1")
-      "www.googleapis.com"
+      "webfonts.googleapis.com"

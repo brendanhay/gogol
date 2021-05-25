@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.TargetSSLProxies.Delete
     , tspdTargetSSLProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetSslProxies.delete@ method which the
 -- 'TargetSSLProxiesDelete' request conforms to.
@@ -59,8 +59,8 @@ type TargetSSLProxiesDeleteResource =
 -- /See:/ 'targetSSLProxiesDelete' smart constructor.
 data TargetSSLProxiesDelete =
   TargetSSLProxiesDelete'
-    { _tspdRequestId      :: !(Maybe Text)
-    , _tspdProject        :: !Text
+    { _tspdRequestId :: !(Maybe Text)
+    , _tspdProject :: !Text
     , _tspdTargetSSLProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

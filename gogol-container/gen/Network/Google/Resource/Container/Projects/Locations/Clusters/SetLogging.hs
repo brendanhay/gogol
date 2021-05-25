@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.SetLogging
     , plcslCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.setLogging@ method which the
 -- 'ProjectsLocationsClustersSetLogging' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsClustersSetLoggingResource =
 -- /See:/ 'projectsLocationsClustersSetLogging' smart constructor.
 data ProjectsLocationsClustersSetLogging =
   ProjectsLocationsClustersSetLogging'
-    { _plcslXgafv          :: !(Maybe Xgafv)
+    { _plcslXgafv :: !(Maybe Xgafv)
     , _plcslUploadProtocol :: !(Maybe Text)
-    , _plcslAccessToken    :: !(Maybe Text)
-    , _plcslUploadType     :: !(Maybe Text)
-    , _plcslPayload        :: !SetLoggingServiceRequest
-    , _plcslName           :: !Text
-    , _plcslCallback       :: !(Maybe Text)
+    , _plcslAccessToken :: !(Maybe Text)
+    , _plcslUploadType :: !(Maybe Text)
+    , _plcslPayload :: !SetLoggingServiceRequest
+    , _plcslName :: !Text
+    , _plcslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ plcslPayload
   = lens _plcslPayload (\ s a -> s{_plcslPayload = a})
 
 -- | The name (project, location, cluster) of the cluster to set logging.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 plcslName :: Lens' ProjectsLocationsClustersSetLogging Text
 plcslName
   = lens _plcslName (\ s a -> s{_plcslName = a})

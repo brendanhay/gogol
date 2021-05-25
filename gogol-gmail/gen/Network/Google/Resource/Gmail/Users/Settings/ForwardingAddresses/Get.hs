@@ -33,12 +33,17 @@ module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Get
     , UsersSettingsForwardingAddressesGet
 
     -- * Request Lenses
+    , usfagXgafv
     , usfagForwardingEmail
+    , usfagUploadProtocol
+    , usfagAccessToken
+    , usfagUploadType
     , usfagUserId
+    , usfagCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.forwardingAddresses.get@ method which the
 -- 'UsersSettingsForwardingAddressesGet' request conforms to.
@@ -50,16 +55,26 @@ type UsersSettingsForwardingAddressesGetResource =
              "settings" :>
                "forwardingAddresses" :>
                  Capture "forwardingEmail" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ForwardingAddress
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ForwardingAddress
 
 -- | Gets the specified forwarding address.
 --
 -- /See:/ 'usersSettingsForwardingAddressesGet' smart constructor.
 data UsersSettingsForwardingAddressesGet =
   UsersSettingsForwardingAddressesGet'
-    { _usfagForwardingEmail :: !Text
-    , _usfagUserId          :: !Text
+    { _usfagXgafv :: !(Maybe Xgafv)
+    , _usfagForwardingEmail :: !Text
+    , _usfagUploadProtocol :: !(Maybe Text)
+    , _usfagAccessToken :: !(Maybe Text)
+    , _usfagUploadType :: !(Maybe Text)
+    , _usfagUserId :: !Text
+    , _usfagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,16 +83,38 @@ data UsersSettingsForwardingAddressesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usfagXgafv'
+--
 -- * 'usfagForwardingEmail'
 --
+-- * 'usfagUploadProtocol'
+--
+-- * 'usfagAccessToken'
+--
+-- * 'usfagUploadType'
+--
 -- * 'usfagUserId'
+--
+-- * 'usfagCallback'
 usersSettingsForwardingAddressesGet
     :: Text -- ^ 'usfagForwardingEmail'
     -> UsersSettingsForwardingAddressesGet
 usersSettingsForwardingAddressesGet pUsfagForwardingEmail_ =
   UsersSettingsForwardingAddressesGet'
-    {_usfagForwardingEmail = pUsfagForwardingEmail_, _usfagUserId = "me"}
+    { _usfagXgafv = Nothing
+    , _usfagForwardingEmail = pUsfagForwardingEmail_
+    , _usfagUploadProtocol = Nothing
+    , _usfagAccessToken = Nothing
+    , _usfagUploadType = Nothing
+    , _usfagUserId = "me"
+    , _usfagCallback = Nothing
+    }
 
+
+-- | V1 error format.
+usfagXgafv :: Lens' UsersSettingsForwardingAddressesGet (Maybe Xgafv)
+usfagXgafv
+  = lens _usfagXgafv (\ s a -> s{_usfagXgafv = a})
 
 -- | The forwarding address to be retrieved.
 usfagForwardingEmail :: Lens' UsersSettingsForwardingAddressesGet Text
@@ -85,11 +122,35 @@ usfagForwardingEmail
   = lens _usfagForwardingEmail
       (\ s a -> s{_usfagForwardingEmail = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usfagUploadProtocol :: Lens' UsersSettingsForwardingAddressesGet (Maybe Text)
+usfagUploadProtocol
+  = lens _usfagUploadProtocol
+      (\ s a -> s{_usfagUploadProtocol = a})
+
+-- | OAuth access token.
+usfagAccessToken :: Lens' UsersSettingsForwardingAddressesGet (Maybe Text)
+usfagAccessToken
+  = lens _usfagAccessToken
+      (\ s a -> s{_usfagAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usfagUploadType :: Lens' UsersSettingsForwardingAddressesGet (Maybe Text)
+usfagUploadType
+  = lens _usfagUploadType
+      (\ s a -> s{_usfagUploadType = a})
+
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
 usfagUserId :: Lens' UsersSettingsForwardingAddressesGet Text
 usfagUserId
   = lens _usfagUserId (\ s a -> s{_usfagUserId = a})
+
+-- | JSONP
+usfagCallback :: Lens' UsersSettingsForwardingAddressesGet (Maybe Text)
+usfagCallback
+  = lens _usfagCallback
+      (\ s a -> s{_usfagCallback = a})
 
 instance GoogleRequest
            UsersSettingsForwardingAddressesGet
@@ -103,7 +164,11 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/gmail.settings.basic"]
         requestClient
           UsersSettingsForwardingAddressesGet'{..}
-          = go _usfagUserId _usfagForwardingEmail
+          = go _usfagUserId _usfagForwardingEmail _usfagXgafv
+              _usfagUploadProtocol
+              _usfagAccessToken
+              _usfagUploadType
+              _usfagCallback
               (Just AltJSON)
               gmailService
           where go

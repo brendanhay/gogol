@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a cluster in a project.
+-- Deletes a cluster in a project. The returned Operation.metadata will be
+-- ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.delete@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
@@ -45,8 +47,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
     , prcdCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.clusters.delete@ method which the
 -- 'ProjectsRegionsClustersDelete' request conforms to.
@@ -68,21 +70,23 @@ type ProjectsRegionsClustersDeleteResource =
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Operation
 
--- | Deletes a cluster in a project.
+-- | Deletes a cluster in a project. The returned Operation.metadata will be
+-- ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
 --
 -- /See:/ 'projectsRegionsClustersDelete' smart constructor.
 data ProjectsRegionsClustersDelete =
   ProjectsRegionsClustersDelete'
-    { _prcdXgafv          :: !(Maybe Xgafv)
-    , _prcdRequestId      :: !(Maybe Text)
-    , _prcdClusterUuid    :: !(Maybe Text)
+    { _prcdXgafv :: !(Maybe Xgafv)
+    , _prcdRequestId :: !(Maybe Text)
+    , _prcdClusterUuid :: !(Maybe Text)
     , _prcdUploadProtocol :: !(Maybe Text)
-    , _prcdAccessToken    :: !(Maybe Text)
-    , _prcdUploadType     :: !(Maybe Text)
-    , _prcdClusterName    :: !Text
-    , _prcdRegion         :: !Text
-    , _prcdProjectId      :: !Text
-    , _prcdCallback       :: !(Maybe Text)
+    , _prcdAccessToken :: !(Maybe Text)
+    , _prcdUploadType :: !(Maybe Text)
+    , _prcdClusterName :: !Text
+    , _prcdRegion :: !Text
+    , _prcdProjectId :: !Text
+    , _prcdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,12 +139,13 @@ prcdXgafv :: Lens' ProjectsRegionsClustersDelete (Maybe Xgafv)
 prcdXgafv
   = lens _prcdXgafv (\ s a -> s{_prcdXgafv = a})
 
--- | Optional. A unique id used to identify the request. If the server
--- receives two DeleteClusterRequest requests with the same id, then the
--- second request will be ignored and the first
+-- | Optional. A unique ID used to identify the request. If the server
+-- receives two DeleteClusterRequest
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
+-- with the same id, then the second request will be ignored and the first
 -- google.longrunning.Operation created and stored in the backend is
 -- returned.It is recommended to always set this value to a UUID
--- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The id
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The ID
 -- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
 -- and hyphens (-). The maximum length is 40 characters.
 prcdRequestId :: Lens' ProjectsRegionsClustersDelete (Maybe Text)
@@ -179,7 +184,7 @@ prcdClusterName
   = lens _prcdClusterName
       (\ s a -> s{_prcdClusterName = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prcdRegion :: Lens' ProjectsRegionsClustersDelete Text
 prcdRegion
   = lens _prcdRegion (\ s a -> s{_prcdRegion = a})

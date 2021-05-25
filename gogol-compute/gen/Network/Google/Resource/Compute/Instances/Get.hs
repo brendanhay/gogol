@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Instances.Get
     , igInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.get@ method which the
 -- 'InstancesGet' request conforms to.
@@ -61,8 +61,8 @@ type InstancesGetResource =
 -- /See:/ 'instancesGet' smart constructor.
 data InstancesGet =
   InstancesGet'
-    { _igProject  :: !Text
-    , _igZone     :: !Text
+    { _igProject :: !Text
+    , _igZone :: !Text
     , _igInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

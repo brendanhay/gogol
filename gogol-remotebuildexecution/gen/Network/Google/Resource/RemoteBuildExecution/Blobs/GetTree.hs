@@ -31,8 +31,8 @@
 -- retrieving subsequent pages from an earlier request, is not guaranteed
 -- to be stable across multiple invocations of \`GetTree\`. If part of the
 -- tree is missing from the CAS, the server will return the portion present
--- and omit the rest. * \`NOT_FOUND\`: The requested tree root is not
--- present in the CAS.
+-- and omit the rest. Errors: * \`NOT_FOUND\`: The requested tree root is
+-- not present in the CAS.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.blobs.getTree@.
 module Network.Google.Resource.RemoteBuildExecution.Blobs.GetTree
@@ -57,8 +57,8 @@ module Network.Google.Resource.RemoteBuildExecution.Blobs.GetTree
     , bgtCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.getTree@ method which the
 -- 'BlobsGetTree' request conforms to.
@@ -90,22 +90,22 @@ type BlobsGetTreeResource =
 -- retrieving subsequent pages from an earlier request, is not guaranteed
 -- to be stable across multiple invocations of \`GetTree\`. If part of the
 -- tree is missing from the CAS, the server will return the portion present
--- and omit the rest. * \`NOT_FOUND\`: The requested tree root is not
--- present in the CAS.
+-- and omit the rest. Errors: * \`NOT_FOUND\`: The requested tree root is
+-- not present in the CAS.
 --
 -- /See:/ 'blobsGetTree' smart constructor.
 data BlobsGetTree =
   BlobsGetTree'
-    { _bgtSizeBytes      :: !(Textual Int64)
-    , _bgtXgafv          :: !(Maybe Xgafv)
-    , _bgtHash           :: !Text
+    { _bgtSizeBytes :: !(Textual Int64)
+    , _bgtXgafv :: !(Maybe Xgafv)
+    , _bgtHash :: !Text
     , _bgtUploadProtocol :: !(Maybe Text)
-    , _bgtAccessToken    :: !(Maybe Text)
-    , _bgtUploadType     :: !(Maybe Text)
-    , _bgtPageToken      :: !(Maybe Text)
-    , _bgtPageSize       :: !(Maybe (Textual Int32))
-    , _bgtInstanceName   :: !Text
-    , _bgtCallback       :: !(Maybe Text)
+    , _bgtAccessToken :: !(Maybe Text)
+    , _bgtUploadType :: !(Maybe Text)
+    , _bgtPageToken :: !(Maybe Text)
+    , _bgtPageSize :: !(Maybe (Textual Int32))
+    , _bgtInstanceName :: !Text
+    , _bgtCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -187,8 +187,8 @@ bgtUploadType
       (\ s a -> s{_bgtUploadType = a})
 
 -- | A page token, which must be a value received in a previous
--- GetTreeResponse. If present, the server will use it to return the
--- following page of results.
+-- GetTreeResponse. If present, the server will use that token as an
+-- offset, returning only that page and the ones that succeed it.
 bgtPageToken :: Lens' BlobsGetTree (Maybe Text)
 bgtPageToken
   = lens _bgtPageToken (\ s a -> s{_bgtPageToken = a})

@@ -48,14 +48,18 @@ library
         , Network.Google.Resource.Dataflow.Projects.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Locations.FlexTemplates.Launch
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshot
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Snapshots.List
+        , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus

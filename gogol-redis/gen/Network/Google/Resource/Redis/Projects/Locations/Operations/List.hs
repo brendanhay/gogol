@@ -53,8 +53,8 @@ module Network.Google.Resource.Redis.Projects.Locations.Operations.List
     , plolCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Redis.Types
+import Network.Google.Prelude
+import Network.Google.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.operations.list@ method which the
 -- 'ProjectsLocationsOperationsList' request conforms to.
@@ -87,15 +87,15 @@ type ProjectsLocationsOperationsListResource =
 -- /See:/ 'projectsLocationsOperationsList' smart constructor.
 data ProjectsLocationsOperationsList =
   ProjectsLocationsOperationsList'
-    { _plolXgafv          :: !(Maybe Xgafv)
+    { _plolXgafv :: !(Maybe Xgafv)
     , _plolUploadProtocol :: !(Maybe Text)
-    , _plolAccessToken    :: !(Maybe Text)
-    , _plolUploadType     :: !(Maybe Text)
-    , _plolName           :: !Text
-    , _plolFilter         :: !(Maybe Text)
-    , _plolPageToken      :: !(Maybe Text)
-    , _plolPageSize       :: !(Maybe (Textual Int32))
-    , _plolCallback       :: !(Maybe Text)
+    , _plolAccessToken :: !(Maybe Text)
+    , _plolUploadType :: !(Maybe Text)
+    , _plolName :: !Text
+    , _plolFilter :: !(Maybe Text)
+    , _plolPageToken :: !(Maybe Text)
+    , _plolPageSize :: !(Maybe (Textual Int32))
+    , _plolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

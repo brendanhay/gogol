@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.NodeGroups.Insert
     , ngiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.insert@ method which the
 -- 'NodeGroupsInsert' request conforms to.
@@ -65,11 +65,11 @@ type NodeGroupsInsertResource =
 -- /See:/ 'nodeGroupsInsert' smart constructor.
 data NodeGroupsInsert =
   NodeGroupsInsert'
-    { _ngiRequestId        :: !(Maybe Text)
-    , _ngiProject          :: !Text
+    { _ngiRequestId :: !(Maybe Text)
+    , _ngiProject :: !Text
     , _ngiInitialNodeCount :: !(Textual Int32)
-    , _ngiZone             :: !Text
-    , _ngiPayload          :: !NodeGroup
+    , _ngiZone :: !Text
+    , _ngiPayload :: !NodeGroup
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

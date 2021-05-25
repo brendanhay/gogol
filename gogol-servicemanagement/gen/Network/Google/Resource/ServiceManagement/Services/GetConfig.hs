@@ -43,8 +43,8 @@ module Network.Google.Resource.ServiceManagement.Services.GetConfig
     , sgcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.getConfig@ method which the
 -- 'ServicesGetConfig' request conforms to.
@@ -58,7 +58,7 @@ type ServicesGetConfigResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "configId" Text :>
-                       QueryParam "view" Text :>
+                       QueryParam "view" ServicesGetConfigView :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :> Get '[JSON] Service
 
@@ -67,14 +67,14 @@ type ServicesGetConfigResource =
 -- /See:/ 'servicesGetConfig' smart constructor.
 data ServicesGetConfig =
   ServicesGetConfig'
-    { _sgcXgafv          :: !(Maybe Xgafv)
+    { _sgcXgafv :: !(Maybe Xgafv)
     , _sgcUploadProtocol :: !(Maybe Text)
-    , _sgcAccessToken    :: !(Maybe Text)
-    , _sgcUploadType     :: !(Maybe Text)
-    , _sgcConfigId       :: !(Maybe Text)
-    , _sgcServiceName    :: !Text
-    , _sgcView           :: !(Maybe Text)
-    , _sgcCallback       :: !(Maybe Text)
+    , _sgcAccessToken :: !(Maybe Text)
+    , _sgcUploadType :: !(Maybe Text)
+    , _sgcConfigId :: !(Maybe Text)
+    , _sgcServiceName :: !Text
+    , _sgcView :: !(Maybe ServicesGetConfigView)
+    , _sgcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,13 +136,14 @@ sgcUploadType
   = lens _sgcUploadType
       (\ s a -> s{_sgcUploadType = a})
 
--- | The id of the service configuration resource. This field must be
--- specified for the server to return all fields, including \`SourceInfo\`.
+-- | Required. The id of the service configuration resource. This field must
+-- be specified for the server to return all fields, including
+-- \`SourceInfo\`.
 sgcConfigId :: Lens' ServicesGetConfig (Maybe Text)
 sgcConfigId
   = lens _sgcConfigId (\ s a -> s{_sgcConfigId = a})
 
--- | The name of the service. See the
+-- | Required. The name of the service. See the
 -- [overview](\/service-management\/overview) for naming requirements. For
 -- example: \`example.googleapis.com\`.
 sgcServiceName :: Lens' ServicesGetConfig Text
@@ -152,7 +153,7 @@ sgcServiceName
 
 -- | Specifies which parts of the Service Config should be returned in the
 -- response.
-sgcView :: Lens' ServicesGetConfig (Maybe Text)
+sgcView :: Lens' ServicesGetConfig (Maybe ServicesGetConfigView)
 sgcView = lens _sgcView (\ s a -> s{_sgcView = a})
 
 -- | JSONP

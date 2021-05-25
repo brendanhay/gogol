@@ -34,8 +34,8 @@ module Network.Google.Resource.Mirror.Contacts.List
 
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.list@ method which the
 -- 'ContactsList' request conforms to.

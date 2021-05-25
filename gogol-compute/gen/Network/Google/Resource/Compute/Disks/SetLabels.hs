@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Disks.SetLabels
     , dslResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.setLabels@ method which the
 -- 'DisksSetLabels' request conforms to.
@@ -68,10 +68,10 @@ type DisksSetLabelsResource =
 data DisksSetLabels =
   DisksSetLabels'
     { _dslRequestId :: !(Maybe Text)
-    , _dslProject   :: !Text
-    , _dslZone      :: !Text
-    , _dslPayload   :: !ZoneSetLabelsRequest
-    , _dslResource  :: !Text
+    , _dslProject :: !Text
+    , _dslZone :: !Text
+    , _dslPayload :: !ZoneSetLabelsRequest
+    , _dslResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

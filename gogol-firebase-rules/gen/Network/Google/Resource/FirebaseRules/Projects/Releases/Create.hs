@@ -27,15 +27,15 @@
 -- \`Ruleset\`, the rules can be enforced by Firebase Rules-enabled
 -- services. More than one \`Release\` may be \'live\' concurrently.
 -- Consider the following three \`Release\` names for \`projects\/foo\` and
--- the \`Ruleset\` to which they refer. Release Name | Ruleset Name
--- --------------------------------|-------------
--- projects\/foo\/releases\/prod | projects\/foo\/rulesets\/uuid123
--- projects\/foo\/releases\/prod\/beta | projects\/foo\/rulesets\/uuid123
--- projects\/foo\/releases\/prod\/v23 | projects\/foo\/rulesets\/uuid456
--- The table reflects the \`Ruleset\` rollout in progress. The \`prod\` and
--- \`prod\/beta\` releases refer to the same \`Ruleset\`. However,
--- \`prod\/v23\` refers to a new \`Ruleset\`. The \`Ruleset\` reference for
--- a \`Release\` may be updated using the UpdateRelease method.
+-- the \`Ruleset\` to which they refer. Release Name -> Ruleset Name *
+-- projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/uuid123 *
+-- projects\/foo\/releases\/prod\/beta -> projects\/foo\/rulesets\/uuid123
+-- * projects\/foo\/releases\/prod\/v23 -> projects\/foo\/rulesets\/uuid456
+-- The relationships reflect a \`Ruleset\` rollout in progress. The
+-- \`prod\` and \`prod\/beta\` releases refer to the same \`Ruleset\`.
+-- However, \`prod\/v23\` refers to a new \`Ruleset\`. The \`Ruleset\`
+-- reference for a \`Release\` may be updated using the UpdateRelease
+-- method.
 --
 -- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.create@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Create
@@ -57,8 +57,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.Create
     , prcrCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.releases.create@ method which the
 -- 'ProjectsReleasesCreate' request conforms to.
@@ -81,26 +81,26 @@ type ProjectsReleasesCreateResource =
 -- \`Ruleset\`, the rules can be enforced by Firebase Rules-enabled
 -- services. More than one \`Release\` may be \'live\' concurrently.
 -- Consider the following three \`Release\` names for \`projects\/foo\` and
--- the \`Ruleset\` to which they refer. Release Name | Ruleset Name
--- --------------------------------|-------------
--- projects\/foo\/releases\/prod | projects\/foo\/rulesets\/uuid123
--- projects\/foo\/releases\/prod\/beta | projects\/foo\/rulesets\/uuid123
--- projects\/foo\/releases\/prod\/v23 | projects\/foo\/rulesets\/uuid456
--- The table reflects the \`Ruleset\` rollout in progress. The \`prod\` and
--- \`prod\/beta\` releases refer to the same \`Ruleset\`. However,
--- \`prod\/v23\` refers to a new \`Ruleset\`. The \`Ruleset\` reference for
--- a \`Release\` may be updated using the UpdateRelease method.
+-- the \`Ruleset\` to which they refer. Release Name -> Ruleset Name *
+-- projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/uuid123 *
+-- projects\/foo\/releases\/prod\/beta -> projects\/foo\/rulesets\/uuid123
+-- * projects\/foo\/releases\/prod\/v23 -> projects\/foo\/rulesets\/uuid456
+-- The relationships reflect a \`Ruleset\` rollout in progress. The
+-- \`prod\` and \`prod\/beta\` releases refer to the same \`Ruleset\`.
+-- However, \`prod\/v23\` refers to a new \`Ruleset\`. The \`Ruleset\`
+-- reference for a \`Release\` may be updated using the UpdateRelease
+-- method.
 --
 -- /See:/ 'projectsReleasesCreate' smart constructor.
 data ProjectsReleasesCreate =
   ProjectsReleasesCreate'
-    { _prcrXgafv          :: !(Maybe Xgafv)
+    { _prcrXgafv :: !(Maybe Xgafv)
     , _prcrUploadProtocol :: !(Maybe Text)
-    , _prcrAccessToken    :: !(Maybe Text)
-    , _prcrUploadType     :: !(Maybe Text)
-    , _prcrPayload        :: !Release
-    , _prcrName           :: !Text
-    , _prcrCallback       :: !(Maybe Text)
+    , _prcrAccessToken :: !(Maybe Text)
+    , _prcrUploadType :: !(Maybe Text)
+    , _prcrPayload :: !Release
+    , _prcrName :: !Text
+    , _prcrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -166,8 +166,8 @@ prcrPayload :: Lens' ProjectsReleasesCreate Release
 prcrPayload
   = lens _prcrPayload (\ s a -> s{_prcrPayload = a})
 
--- | Resource name for the project which owns this \`Release\`. Format:
--- \`projects\/{project_id}\`
+-- | Required. Resource name for the project which owns this \`Release\`.
+-- Format: \`projects\/{project_id}\`
 prcrName :: Lens' ProjectsReleasesCreate Text
 prcrName = lens _prcrName (\ s a -> s{_prcrName = a})
 

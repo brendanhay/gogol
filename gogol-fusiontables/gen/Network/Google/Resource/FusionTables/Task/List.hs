@@ -39,8 +39,8 @@ module Network.Google.Resource.FusionTables.Task.List
     , tlMaxResults
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.task.list@ method which the
 -- 'TaskList'' request conforms to.
@@ -60,8 +60,8 @@ type TaskListResource =
 -- /See:/ 'taskList'' smart constructor.
 data TaskList' =
   TaskList''
-    { _tlPageToken  :: !(Maybe Text)
-    , _tlTableId    :: !Text
+    { _tlPageToken :: !(Maybe Text)
+    , _tlTableId :: !Text
     , _tlStartIndex :: !(Maybe (Textual Word32))
     , _tlMaxResults :: !(Maybe (Textual Word32))
     }

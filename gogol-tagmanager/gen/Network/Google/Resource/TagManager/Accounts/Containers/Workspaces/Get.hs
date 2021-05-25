@@ -22,7 +22,7 @@
 --
 -- Gets a Workspace.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.get@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
     , AccountsContainersWorkspacesGet
 
     -- * Request Lenses
+    , acwgXgafv
+    , acwgUploadProtocol
     , acwgPath
+    , acwgAccessToken
+    , acwgUploadType
+    , acwgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.get@ method which the
 -- 'AccountsContainersWorkspacesGet' request conforms to.
@@ -45,14 +50,24 @@ type AccountsContainersWorkspacesGetResource =
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Workspace
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Workspace
 
 -- | Gets a Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesGet' smart constructor.
-newtype AccountsContainersWorkspacesGet =
+data AccountsContainersWorkspacesGet =
   AccountsContainersWorkspacesGet'
-    { _acwgPath :: Text
+    { _acwgXgafv :: !(Maybe Xgafv)
+    , _acwgUploadProtocol :: !(Maybe Text)
+    , _acwgPath :: !Text
+    , _acwgAccessToken :: !(Maybe Text)
+    , _acwgUploadType :: !(Maybe Text)
+    , _acwgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -61,18 +76,63 @@ newtype AccountsContainersWorkspacesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acwgXgafv'
+--
+-- * 'acwgUploadProtocol'
+--
 -- * 'acwgPath'
+--
+-- * 'acwgAccessToken'
+--
+-- * 'acwgUploadType'
+--
+-- * 'acwgCallback'
 accountsContainersWorkspacesGet
     :: Text -- ^ 'acwgPath'
     -> AccountsContainersWorkspacesGet
 accountsContainersWorkspacesGet pAcwgPath_ =
-  AccountsContainersWorkspacesGet' {_acwgPath = pAcwgPath_}
+  AccountsContainersWorkspacesGet'
+    { _acwgXgafv = Nothing
+    , _acwgUploadProtocol = Nothing
+    , _acwgPath = pAcwgPath_
+    , _acwgAccessToken = Nothing
+    , _acwgUploadType = Nothing
+    , _acwgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acwgXgafv :: Lens' AccountsContainersWorkspacesGet (Maybe Xgafv)
+acwgXgafv
+  = lens _acwgXgafv (\ s a -> s{_acwgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwgUploadProtocol :: Lens' AccountsContainersWorkspacesGet (Maybe Text)
+acwgUploadProtocol
+  = lens _acwgUploadProtocol
+      (\ s a -> s{_acwgUploadProtocol = a})
 
 -- | GTM Workspace\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
 acwgPath :: Lens' AccountsContainersWorkspacesGet Text
 acwgPath = lens _acwgPath (\ s a -> s{_acwgPath = a})
+
+-- | OAuth access token.
+acwgAccessToken :: Lens' AccountsContainersWorkspacesGet (Maybe Text)
+acwgAccessToken
+  = lens _acwgAccessToken
+      (\ s a -> s{_acwgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwgUploadType :: Lens' AccountsContainersWorkspacesGet (Maybe Text)
+acwgUploadType
+  = lens _acwgUploadType
+      (\ s a -> s{_acwgUploadType = a})
+
+-- | JSONP
+acwgCallback :: Lens' AccountsContainersWorkspacesGet (Maybe Text)
+acwgCallback
+  = lens _acwgCallback (\ s a -> s{_acwgCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesGet
@@ -82,7 +142,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersWorkspacesGet'{..}
-          = go _acwgPath (Just AltJSON) tagManagerService
+          = go _acwgPath _acwgXgafv _acwgUploadProtocol
+              _acwgAccessToken
+              _acwgUploadType
+              _acwgCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

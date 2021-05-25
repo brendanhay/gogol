@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists names of items associated with an unmapped identity.
+-- Lists names of items associated with an unmapped identity. **Note:**
+-- This API requires an admin account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.debug.identitysources.items.listForunmappedidentity@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.debug.identitysources.items.listForunmappedidentity@.
 module Network.Google.Resource.CloudSearch.Debug.Identitysources.Items.ListForunmAppedidentity
     (
     -- * REST Resource
@@ -46,8 +47,8 @@ module Network.Google.Resource.CloudSearch.Debug.Identitysources.Items.ListForun
     , diilfaCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.debug.identitysources.items.listForunmappedidentity@ method which the
 -- 'DebugIdentitysourcesItemsListForunmAppedidentity' request conforms to.
@@ -71,22 +72,23 @@ type DebugIdentitysourcesItemsListForunmAppedidentityResource
                                    Get '[JSON]
                                      ListItemNamesForUnmAppedIdentityResponse
 
--- | Lists names of items associated with an unmapped identity.
+-- | Lists names of items associated with an unmapped identity. **Note:**
+-- This API requires an admin account to execute.
 --
 -- /See:/ 'debugIdentitysourcesItemsListForunmAppedidentity' smart constructor.
 data DebugIdentitysourcesItemsListForunmAppedidentity =
   DebugIdentitysourcesItemsListForunmAppedidentity'
-    { _diilfaUserResourceName            :: !(Maybe Text)
-    , _diilfaParent                      :: !Text
-    , _diilfaXgafv                       :: !(Maybe Xgafv)
-    , _diilfaUploadProtocol              :: !(Maybe Text)
-    , _diilfaGroupResourceName           :: !(Maybe Text)
-    , _diilfaAccessToken                 :: !(Maybe Text)
-    , _diilfaUploadType                  :: !(Maybe Text)
+    { _diilfaUserResourceName :: !(Maybe Text)
+    , _diilfaParent :: !Text
+    , _diilfaXgafv :: !(Maybe Xgafv)
+    , _diilfaUploadProtocol :: !(Maybe Text)
+    , _diilfaGroupResourceName :: !(Maybe Text)
+    , _diilfaAccessToken :: !(Maybe Text)
+    , _diilfaUploadType :: !(Maybe Text)
     , _diilfaDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _diilfaPageToken                   :: !(Maybe Text)
-    , _diilfaPageSize                    :: !(Maybe (Textual Int32))
-    , _diilfaCallback                    :: !(Maybe Text)
+    , _diilfaPageToken :: !(Maybe Text)
+    , _diilfaPageSize :: !(Maybe (Textual Int32))
+    , _diilfaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

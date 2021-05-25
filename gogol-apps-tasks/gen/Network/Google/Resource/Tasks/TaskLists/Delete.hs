@@ -22,7 +22,7 @@
 --
 -- Deletes the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.delete@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.delete@.
 module Network.Google.Resource.Tasks.TaskLists.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Tasks.TaskLists.Delete
     , TaskListsDelete
 
     -- * Request Lenses
+    , tldXgafv
+    , tldUploadProtocol
+    , tldAccessToken
+    , tldUploadType
     , tldTaskList
+    , tldCallback
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.delete@ method which the
 -- 'TaskListsDelete' request conforms to.
@@ -48,14 +53,24 @@ type TaskListsDeleteResource =
            "@me" :>
              "lists" :>
                Capture "tasklist" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsDelete' smart constructor.
-newtype TaskListsDelete =
+data TaskListsDelete =
   TaskListsDelete'
-    { _tldTaskList :: Text
+    { _tldXgafv :: !(Maybe Xgafv)
+    , _tldUploadProtocol :: !(Maybe Text)
+    , _tldAccessToken :: !(Maybe Text)
+    , _tldUploadType :: !(Maybe Text)
+    , _tldTaskList :: !Text
+    , _tldCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,24 +79,74 @@ newtype TaskListsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tldXgafv'
+--
+-- * 'tldUploadProtocol'
+--
+-- * 'tldAccessToken'
+--
+-- * 'tldUploadType'
+--
 -- * 'tldTaskList'
+--
+-- * 'tldCallback'
 taskListsDelete
     :: Text -- ^ 'tldTaskList'
     -> TaskListsDelete
-taskListsDelete pTldTaskList_ = TaskListsDelete' {_tldTaskList = pTldTaskList_}
+taskListsDelete pTldTaskList_ =
+  TaskListsDelete'
+    { _tldXgafv = Nothing
+    , _tldUploadProtocol = Nothing
+    , _tldAccessToken = Nothing
+    , _tldUploadType = Nothing
+    , _tldTaskList = pTldTaskList_
+    , _tldCallback = Nothing
+    }
 
+
+-- | V1 error format.
+tldXgafv :: Lens' TaskListsDelete (Maybe Xgafv)
+tldXgafv = lens _tldXgafv (\ s a -> s{_tldXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tldUploadProtocol :: Lens' TaskListsDelete (Maybe Text)
+tldUploadProtocol
+  = lens _tldUploadProtocol
+      (\ s a -> s{_tldUploadProtocol = a})
+
+-- | OAuth access token.
+tldAccessToken :: Lens' TaskListsDelete (Maybe Text)
+tldAccessToken
+  = lens _tldAccessToken
+      (\ s a -> s{_tldAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tldUploadType :: Lens' TaskListsDelete (Maybe Text)
+tldUploadType
+  = lens _tldUploadType
+      (\ s a -> s{_tldUploadType = a})
 
 -- | Task list identifier.
 tldTaskList :: Lens' TaskListsDelete Text
 tldTaskList
   = lens _tldTaskList (\ s a -> s{_tldTaskList = a})
 
+-- | JSONP
+tldCallback :: Lens' TaskListsDelete (Maybe Text)
+tldCallback
+  = lens _tldCallback (\ s a -> s{_tldCallback = a})
+
 instance GoogleRequest TaskListsDelete where
         type Rs TaskListsDelete = ()
         type Scopes TaskListsDelete =
              '["https://www.googleapis.com/auth/tasks"]
         requestClient TaskListsDelete'{..}
-          = go _tldTaskList (Just AltJSON) appsTasksService
+          = go _tldTaskList _tldXgafv _tldUploadProtocol
+              _tldAccessToken
+              _tldUploadType
+              _tldCallback
+              (Just AltJSON)
+              appsTasksService
           where go
                   = buildClient
                       (Proxy :: Proxy TaskListsDeleteResource)

@@ -42,13 +42,13 @@ module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Get
     , fargCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.folders.approvalRequests.get@ method which the
 -- 'FoldersApprovalRequestsGet' request conforms to.
 type FoldersApprovalRequestsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,12 +64,12 @@ type FoldersApprovalRequestsGetResource =
 -- /See:/ 'foldersApprovalRequestsGet' smart constructor.
 data FoldersApprovalRequestsGet =
   FoldersApprovalRequestsGet'
-    { _fargXgafv          :: !(Maybe Xgafv)
+    { _fargXgafv :: !(Maybe Xgafv)
     , _fargUploadProtocol :: !(Maybe Text)
-    , _fargAccessToken    :: !(Maybe Text)
-    , _fargUploadType     :: !(Maybe Text)
-    , _fargName           :: !Text
-    , _fargCallback       :: !(Maybe Text)
+    , _fargAccessToken :: !(Maybe Text)
+    , _fargUploadType :: !(Maybe Text)
+    , _fargName :: !Text
+    , _fargCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

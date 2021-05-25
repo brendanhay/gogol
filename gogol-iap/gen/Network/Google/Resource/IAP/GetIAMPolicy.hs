@@ -45,8 +45,8 @@ module Network.Google.Resource.IAP.GetIAMPolicy
     , gipCallback
     ) where
 
-import           Network.Google.IAP.Types
-import           Network.Google.Prelude
+import Network.Google.IAP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iap.getIamPolicy@ method which the
 -- 'GetIAMPolicy' request conforms to.
@@ -70,13 +70,13 @@ type GetIAMPolicyResource =
 -- /See:/ 'getIAMPolicy' smart constructor.
 data GetIAMPolicy =
   GetIAMPolicy'
-    { _gipXgafv          :: !(Maybe Xgafv)
+    { _gipXgafv :: !(Maybe Xgafv)
     , _gipUploadProtocol :: !(Maybe Text)
-    , _gipAccessToken    :: !(Maybe Text)
-    , _gipUploadType     :: !(Maybe Text)
-    , _gipPayload        :: !GetIAMPolicyRequest
-    , _gipResource       :: !Text
-    , _gipCallback       :: !(Maybe Text)
+    , _gipAccessToken :: !(Maybe Text)
+    , _gipUploadType :: !(Maybe Text)
+    , _gipPayload :: !GetIAMPolicyRequest
+    , _gipResource :: !Text
+    , _gipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

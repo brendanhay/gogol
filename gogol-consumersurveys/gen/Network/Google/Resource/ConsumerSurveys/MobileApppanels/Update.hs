@@ -38,8 +38,8 @@ module Network.Google.Resource.ConsumerSurveys.MobileApppanels.Update
     , mauPanelId
     ) where
 
-import           Network.Google.ConsumerSurveys.Types
-import           Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @consumersurveys.mobileapppanels.update@ method which the
 -- 'MobileApppanelsUpdate' request conforms to.

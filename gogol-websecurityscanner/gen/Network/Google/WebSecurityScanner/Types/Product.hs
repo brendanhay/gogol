@@ -17,8 +17,8 @@
 --
 module Network.Google.WebSecurityScanner.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types.Sum
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types.Sum
 
 -- | A FindingTypeStats resource represents stats regarding a specific
 -- FindingType of Findings under a given ScanRun.
@@ -27,7 +27,7 @@ import           Network.Google.WebSecurityScanner.Types.Sum
 data FindingTypeStats =
   FindingTypeStats'
     { _ftsFindingCount :: !(Maybe (Textual Int32))
-    , _ftsFindingType  :: !(Maybe Text)
+    , _ftsFindingType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,13 +72,56 @@ instance ToJSON FindingTypeStats where
                  [("findingCount" .=) <$> _ftsFindingCount,
                   ("findingType" .=) <$> _ftsFindingType])
 
+-- | Describes authentication configuration when Web-Security-Scanner service
+-- account is added in Identity-Aware-Proxy (IAP) access policies.
+--
+-- /See:/ 'iapTestServiceAccountInfo' smart constructor.
+newtype IapTestServiceAccountInfo =
+  IapTestServiceAccountInfo'
+    { _itsaiTargetAudienceClientId :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IapTestServiceAccountInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itsaiTargetAudienceClientId'
+iapTestServiceAccountInfo
+    :: IapTestServiceAccountInfo
+iapTestServiceAccountInfo =
+  IapTestServiceAccountInfo' {_itsaiTargetAudienceClientId = Nothing}
+
+
+-- | Required. Describes OAuth2 client id of resources protected by
+-- Identity-Aware-Proxy (IAP).
+itsaiTargetAudienceClientId :: Lens' IapTestServiceAccountInfo (Maybe Text)
+itsaiTargetAudienceClientId
+  = lens _itsaiTargetAudienceClientId
+      (\ s a -> s{_itsaiTargetAudienceClientId = a})
+
+instance FromJSON IapTestServiceAccountInfo where
+        parseJSON
+          = withObject "IapTestServiceAccountInfo"
+              (\ o ->
+                 IapTestServiceAccountInfo' <$>
+                   (o .:? "targetAudienceClientId"))
+
+instance ToJSON IapTestServiceAccountInfo where
+        toJSON IapTestServiceAccountInfo'{..}
+          = object
+              (catMaybes
+                 [("targetAudienceClientId" .=) <$>
+                    _itsaiTargetAudienceClientId])
+
 -- | Response for the \`ListFindings\` method.
 --
 -- /See:/ 'listFindingsResponse' smart constructor.
 data ListFindingsResponse =
   ListFindingsResponse'
     { _lfrNextPageToken :: !(Maybe Text)
-    , _lfrFindings      :: !(Maybe [Finding])
+    , _lfrFindings :: !(Maybe [Finding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -157,7 +200,7 @@ instance ToJSON StopScanRunRequest where
 data ScanConfigError =
   ScanConfigError'
     { _sceFieldName :: !(Maybe Text)
-    , _sceCode      :: !(Maybe ScanConfigErrorCode)
+    , _sceCode :: !(Maybe ScanConfigErrorCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -205,7 +248,7 @@ instance ToJSON ScanConfigError where
 -- /See:/ 'schedule' smart constructor.
 data Schedule =
   Schedule'
-    { _sScheduleTime         :: !(Maybe DateTime')
+    { _sScheduleTime :: !(Maybe DateTime')
     , _sIntervalDurationDays :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -263,22 +306,23 @@ instance ToJSON Schedule where
 -- /See:/ 'finding' smart constructor.
 data Finding =
   Finding'
-    { _fFinalURL             :: !(Maybe Text)
-    , _fHTTPMethod           :: !(Maybe Text)
-    , _fReProductionURL      :: !(Maybe Text)
-    , _fTrackingId           :: !(Maybe Text)
-    , _fBody                 :: !(Maybe Text)
-    , _fXss                  :: !(Maybe Xss)
+    { _fFinalURL :: !(Maybe Text)
+    , _fHTTPMethod :: !(Maybe Text)
+    , _fReProductionURL :: !(Maybe Text)
+    , _fTrackingId :: !(Maybe Text)
+    , _fBody :: !(Maybe Text)
+    , _fXss :: !(Maybe Xss)
+    , _fSeverity :: !(Maybe FindingSeverity)
     , _fVulnerableParameters :: !(Maybe VulnerableParameters)
-    , _fOutdatedLibrary      :: !(Maybe OutdatedLibrary)
-    , _fFuzzedURL            :: !(Maybe Text)
-    , _fName                 :: !(Maybe Text)
-    , _fFindingType          :: !(Maybe Text)
-    , _fVulnerableHeaders    :: !(Maybe VulnerableHeaders)
-    , _fViolatingResource    :: !(Maybe ViolatingResource)
-    , _fForm                 :: !(Maybe Form)
-    , _fFrameURL             :: !(Maybe Text)
-    , _fDescription          :: !(Maybe Text)
+    , _fOutdatedLibrary :: !(Maybe OutdatedLibrary)
+    , _fFuzzedURL :: !(Maybe Text)
+    , _fName :: !(Maybe Text)
+    , _fFindingType :: !(Maybe Text)
+    , _fVulnerableHeaders :: !(Maybe VulnerableHeaders)
+    , _fViolatingResource :: !(Maybe ViolatingResource)
+    , _fForm :: !(Maybe Form)
+    , _fFrameURL :: !(Maybe Text)
+    , _fDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -298,6 +342,8 @@ data Finding =
 -- * 'fBody'
 --
 -- * 'fXss'
+--
+-- * 'fSeverity'
 --
 -- * 'fVulnerableParameters'
 --
@@ -328,6 +374,7 @@ finding =
     , _fTrackingId = Nothing
     , _fBody = Nothing
     , _fXss = Nothing
+    , _fSeverity = Nothing
     , _fVulnerableParameters = Nothing
     , _fOutdatedLibrary = Nothing
     , _fFuzzedURL = Nothing
@@ -375,6 +422,11 @@ fBody = lens _fBody (\ s a -> s{_fBody = a})
 fXss :: Lens' Finding (Maybe Xss)
 fXss = lens _fXss (\ s a -> s{_fXss = a})
 
+-- | Output only. The severity level of the reported vulnerability.
+fSeverity :: Lens' Finding (Maybe FindingSeverity)
+fSeverity
+  = lens _fSeverity (\ s a -> s{_fSeverity = a})
+
 -- | Output only. An addon containing information about request parameters
 -- which were found to be vulnerable.
 fVulnerableParameters :: Lens' Finding (Maybe VulnerableParameters)
@@ -403,7 +455,7 @@ fName = lens _fName (\ s a -> s{_fName = a})
 
 -- | Output only. The type of the Finding. Detailed and up-to-date
 -- information on findings can be found here:
--- https:\/\/cloud.google.com\/security-scanner\/docs\/scan-result-details
+-- https:\/\/cloud.google.com\/security-command-center\/docs\/how-to-remediate-web-security-scanner-findings
 fFindingType :: Lens' Finding (Maybe Text)
 fFindingType
   = lens _fFindingType (\ s a -> s{_fFindingType = a})
@@ -449,6 +501,7 @@ instance FromJSON Finding where
                      <*> (o .:? "trackingId")
                      <*> (o .:? "body")
                      <*> (o .:? "xss")
+                     <*> (o .:? "severity")
                      <*> (o .:? "vulnerableParameters")
                      <*> (o .:? "outdatedLibrary")
                      <*> (o .:? "fuzzedUrl")
@@ -469,6 +522,7 @@ instance ToJSON Finding where
                   ("reproductionUrl" .=) <$> _fReProductionURL,
                   ("trackingId" .=) <$> _fTrackingId,
                   ("body" .=) <$> _fBody, ("xss" .=) <$> _fXss,
+                  ("severity" .=) <$> _fSeverity,
                   ("vulnerableParameters" .=) <$>
                     _fVulnerableParameters,
                   ("outdatedLibrary" .=) <$> _fOutdatedLibrary,
@@ -611,7 +665,7 @@ gaUsername :: Lens' GoogleAccount (Maybe Text)
 gaUsername
   = lens _gaUsername (\ s a -> s{_gaUsername = a})
 
--- | Input only. Required. The password of the Google account. The credential
+-- | Required. Input only. The password of the Google account. The credential
 -- is stored encrypted and not returned in any response nor included in
 -- audit logs.
 gaPassword :: Lens' GoogleAccount (Maybe Text)
@@ -637,7 +691,9 @@ instance ToJSON GoogleAccount where
 -- /See:/ 'xss' smart constructor.
 data Xss =
   Xss'
-    { _xStackTraces  :: !(Maybe [Text])
+    { _xStoredXssSeedingURL :: !(Maybe Text)
+    , _xAttackVector :: !(Maybe XssAttackVector)
+    , _xStackTraces :: !(Maybe [Text])
     , _xErrorMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -647,13 +703,35 @@ data Xss =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'xStoredXssSeedingURL'
+--
+-- * 'xAttackVector'
+--
 -- * 'xStackTraces'
 --
 -- * 'xErrorMessage'
 xss
     :: Xss
-xss = Xss' {_xStackTraces = Nothing, _xErrorMessage = Nothing}
+xss =
+  Xss'
+    { _xStoredXssSeedingURL = Nothing
+    , _xAttackVector = Nothing
+    , _xStackTraces = Nothing
+    , _xErrorMessage = Nothing
+    }
 
+
+-- | The reproduction url for the seeding POST request of a Stored XSS.
+xStoredXssSeedingURL :: Lens' Xss (Maybe Text)
+xStoredXssSeedingURL
+  = lens _xStoredXssSeedingURL
+      (\ s a -> s{_xStoredXssSeedingURL = a})
+
+-- | The attack vector of the payload triggering this XSS.
+xAttackVector :: Lens' Xss (Maybe XssAttackVector)
+xAttackVector
+  = lens _xAttackVector
+      (\ s a -> s{_xAttackVector = a})
 
 -- | Stack traces leading to the point where the XSS occurred.
 xStackTraces :: Lens' Xss [Text]
@@ -673,14 +751,19 @@ instance FromJSON Xss where
           = withObject "Xss"
               (\ o ->
                  Xss' <$>
-                   (o .:? "stackTraces" .!= mempty) <*>
-                     (o .:? "errorMessage"))
+                   (o .:? "storedXssSeedingUrl") <*>
+                     (o .:? "attackVector")
+                     <*> (o .:? "stackTraces" .!= mempty)
+                     <*> (o .:? "errorMessage"))
 
 instance ToJSON Xss where
         toJSON Xss'{..}
           = object
               (catMaybes
-                 [("stackTraces" .=) <$> _xStackTraces,
+                 [("storedXssSeedingUrl" .=) <$>
+                    _xStoredXssSeedingURL,
+                  ("attackVector" .=) <$> _xAttackVector,
+                  ("stackTraces" .=) <$> _xStackTraces,
                   ("errorMessage" .=) <$> _xErrorMessage])
 
 -- | Scan authentication configuration.
@@ -689,6 +772,7 @@ instance ToJSON Xss where
 data Authentication =
   Authentication'
     { _aGoogleAccount :: !(Maybe GoogleAccount)
+    , _aIapCredential :: !(Maybe IapCredential)
     , _aCustomAccount :: !(Maybe CustomAccount)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -700,11 +784,17 @@ data Authentication =
 --
 -- * 'aGoogleAccount'
 --
+-- * 'aIapCredential'
+--
 -- * 'aCustomAccount'
 authentication
     :: Authentication
 authentication =
-  Authentication' {_aGoogleAccount = Nothing, _aCustomAccount = Nothing}
+  Authentication'
+    { _aGoogleAccount = Nothing
+    , _aIapCredential = Nothing
+    , _aCustomAccount = Nothing
+    }
 
 
 -- | Authentication using a Google account.
@@ -712,6 +802,12 @@ aGoogleAccount :: Lens' Authentication (Maybe GoogleAccount)
 aGoogleAccount
   = lens _aGoogleAccount
       (\ s a -> s{_aGoogleAccount = a})
+
+-- | Authentication using Identity-Aware-Proxy (IAP).
+aIapCredential :: Lens' Authentication (Maybe IapCredential)
+aIapCredential
+  = lens _aIapCredential
+      (\ s a -> s{_aIapCredential = a})
 
 -- | Authentication using a custom account.
 aCustomAccount :: Lens' Authentication (Maybe CustomAccount)
@@ -724,13 +820,15 @@ instance FromJSON Authentication where
           = withObject "Authentication"
               (\ o ->
                  Authentication' <$>
-                   (o .:? "googleAccount") <*> (o .:? "customAccount"))
+                   (o .:? "googleAccount") <*> (o .:? "iapCredential")
+                     <*> (o .:? "customAccount"))
 
 instance ToJSON Authentication where
         toJSON Authentication'{..}
           = object
               (catMaybes
                  [("googleAccount" .=) <$> _aGoogleAccount,
+                  ("iapCredential" .=) <$> _aIapCredential,
                   ("customAccount" .=) <$> _aCustomAccount])
 
 -- | Response for the \`ListCrawledUrls\` method.
@@ -739,7 +837,7 @@ instance ToJSON Authentication where
 data ListCrawledURLsResponse =
   ListCrawledURLsResponse'
     { _lcurNextPageToken :: !(Maybe Text)
-    , _lcurCrawledURLs   :: !(Maybe [CrawledURL])
+    , _lcurCrawledURLs :: !(Maybe [CrawledURL])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -787,6 +885,47 @@ instance ToJSON ListCrawledURLsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lcurNextPageToken,
                   ("crawledUrls" .=) <$> _lcurCrawledURLs])
+
+-- | Describes authentication configuration for Identity-Aware-Proxy (IAP).
+--
+-- /See:/ 'iapCredential' smart constructor.
+newtype IapCredential =
+  IapCredential'
+    { _icIapTestServiceAccountInfo :: Maybe IapTestServiceAccountInfo
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IapCredential' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'icIapTestServiceAccountInfo'
+iapCredential
+    :: IapCredential
+iapCredential = IapCredential' {_icIapTestServiceAccountInfo = Nothing}
+
+
+-- | Authentication configuration when Web-Security-Scanner service account
+-- is added in Identity-Aware-Proxy (IAP) access policies.
+icIapTestServiceAccountInfo :: Lens' IapCredential (Maybe IapTestServiceAccountInfo)
+icIapTestServiceAccountInfo
+  = lens _icIapTestServiceAccountInfo
+      (\ s a -> s{_icIapTestServiceAccountInfo = a})
+
+instance FromJSON IapCredential where
+        parseJSON
+          = withObject "IapCredential"
+              (\ o ->
+                 IapCredential' <$>
+                   (o .:? "iapTestServiceAccountInfo"))
+
+instance ToJSON IapCredential where
+        toJSON IapCredential'{..}
+          = object
+              (catMaybes
+                 [("iapTestServiceAccountInfo" .=) <$>
+                    _icIapTestServiceAccountInfo])
 
 -- | Information about vulnerable request parameters.
 --
@@ -838,8 +977,8 @@ instance ToJSON VulnerableParameters where
 data CrawledURL =
   CrawledURL'
     { _cuHTTPMethod :: !(Maybe Text)
-    , _cuBody       :: !(Maybe Text)
-    , _cuURL        :: !(Maybe Text)
+    , _cuBody :: !(Maybe Text)
+    , _cuURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -894,8 +1033,8 @@ instance ToJSON CrawledURL where
 data OutdatedLibrary =
   OutdatedLibrary'
     { _olLearnMoreURLs :: !(Maybe [Text])
-    , _olVersion       :: !(Maybe Text)
-    , _olLibraryName   :: !(Maybe Text)
+    , _olVersion :: !(Maybe Text)
+    , _olLibraryName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -958,7 +1097,7 @@ instance ToJSON OutdatedLibrary where
 data ListScanRunsResponse =
   ListScanRunsResponse'
     { _lsrrNextPageToken :: !(Maybe Text)
-    , _lsrrScanRuns      :: !(Maybe [ScanRun])
+    , _lsrrScanRuns :: !(Maybe [ScanRun])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1011,7 +1150,7 @@ instance ToJSON ListScanRunsResponse where
 data Header =
   Header'
     { _hValue :: !(Maybe Text)
-    , _hName  :: !(Maybe Text)
+    , _hName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1054,8 +1193,8 @@ instance ToJSON Header where
 data ScanRunErrorTrace =
   ScanRunErrorTrace'
     { _sretMostCommonHTTPErrorCode :: !(Maybe (Textual Int32))
-    , _sretScanConfigError         :: !(Maybe ScanConfigError)
-    , _sretCode                    :: !(Maybe ScanRunErrorTraceCode)
+    , _sretScanConfigError :: !(Maybe ScanConfigError)
+    , _sretCode :: !(Maybe ScanRunErrorTraceCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1125,7 +1264,7 @@ instance ToJSON ScanRunErrorTrace where
 data ListScanConfigsResponse =
   ListScanConfigsResponse'
     { _lscrNextPageToken :: !(Maybe Text)
-    , _lscrScanConfigs   :: !(Maybe [ScanConfig])
+    , _lscrScanConfigs :: !(Maybe [ScanConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1235,7 +1374,7 @@ caUsername :: Lens' CustomAccount (Maybe Text)
 caUsername
   = lens _caUsername (\ s a -> s{_caUsername = a})
 
--- | Input only. Required. The password of the custom account. The credential
+-- | Required. Input only. The password of the custom account. The credential
 -- is stored encrypted and not returned in any response nor included in
 -- audit logs.
 caPassword :: Lens' CustomAccount (Maybe Text)
@@ -1258,23 +1397,24 @@ instance ToJSON CustomAccount where
                   ("username" .=) <$> _caUsername,
                   ("password" .=) <$> _caPassword])
 
--- | A ScanConfig resource contains the configurations to launch a scan. next
--- id: 12
+-- | A ScanConfig resource contains the configurations to launch a scan.
 --
 -- /See:/ 'scanConfig' smart constructor.
 data ScanConfig =
   ScanConfig'
-    { _scLatestRun                     :: !(Maybe ScanRun)
-    , _scSchedule                      :: !(Maybe Schedule)
-    , _scTargetPlatforms               :: !(Maybe [Text])
-    , _scStartingURLs                  :: !(Maybe [Text])
-    , _scAuthentication                :: !(Maybe Authentication)
-    , _scMaxQps                        :: !(Maybe (Textual Int32))
-    , _scName                          :: !(Maybe Text)
+    { _scIgnoreHTTPStatusErrors :: !(Maybe Bool)
+    , _scSchedule :: !(Maybe Schedule)
+    , _scStartingURLs :: !(Maybe [Text])
+    , _scAuthentication :: !(Maybe Authentication)
+    , _scStaticIPScan :: !(Maybe Bool)
+    , _scMaxQps :: !(Maybe (Textual Int32))
+    , _scName :: !(Maybe Text)
+    , _scManagedScan :: !(Maybe Bool)
     , _scExportToSecurityCommandCenter :: !(Maybe ScanConfigExportToSecurityCommandCenter)
-    , _scDisplayName                   :: !(Maybe Text)
-    , _scUserAgent                     :: !(Maybe ScanConfigUserAgent)
-    , _scBlackListPatterns             :: !(Maybe [Text])
+    , _scDisplayName :: !(Maybe Text)
+    , _scRiskLevel :: !(Maybe ScanConfigRiskLevel)
+    , _scUserAgent :: !(Maybe ScanConfigUserAgent)
+    , _scBlackListPatterns :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1283,23 +1423,27 @@ data ScanConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scLatestRun'
+-- * 'scIgnoreHTTPStatusErrors'
 --
 -- * 'scSchedule'
---
--- * 'scTargetPlatforms'
 --
 -- * 'scStartingURLs'
 --
 -- * 'scAuthentication'
 --
+-- * 'scStaticIPScan'
+--
 -- * 'scMaxQps'
 --
 -- * 'scName'
 --
+-- * 'scManagedScan'
+--
 -- * 'scExportToSecurityCommandCenter'
 --
 -- * 'scDisplayName'
+--
+-- * 'scRiskLevel'
 --
 -- * 'scUserAgent'
 --
@@ -1308,38 +1452,32 @@ scanConfig
     :: ScanConfig
 scanConfig =
   ScanConfig'
-    { _scLatestRun = Nothing
+    { _scIgnoreHTTPStatusErrors = Nothing
     , _scSchedule = Nothing
-    , _scTargetPlatforms = Nothing
     , _scStartingURLs = Nothing
     , _scAuthentication = Nothing
+    , _scStaticIPScan = Nothing
     , _scMaxQps = Nothing
     , _scName = Nothing
+    , _scManagedScan = Nothing
     , _scExportToSecurityCommandCenter = Nothing
     , _scDisplayName = Nothing
+    , _scRiskLevel = Nothing
     , _scUserAgent = Nothing
     , _scBlackListPatterns = Nothing
     }
 
 
--- | Latest ScanRun if available.
-scLatestRun :: Lens' ScanConfig (Maybe ScanRun)
-scLatestRun
-  = lens _scLatestRun (\ s a -> s{_scLatestRun = a})
+-- | Whether to keep scanning even if most requests return HTTP error codes.
+scIgnoreHTTPStatusErrors :: Lens' ScanConfig (Maybe Bool)
+scIgnoreHTTPStatusErrors
+  = lens _scIgnoreHTTPStatusErrors
+      (\ s a -> s{_scIgnoreHTTPStatusErrors = a})
 
 -- | The schedule of the ScanConfig.
 scSchedule :: Lens' ScanConfig (Maybe Schedule)
 scSchedule
   = lens _scSchedule (\ s a -> s{_scSchedule = a})
-
--- | Set of Cloud Platforms targeted by the scan. If empty, APP_ENGINE will
--- be used as a default.
-scTargetPlatforms :: Lens' ScanConfig [Text]
-scTargetPlatforms
-  = lens _scTargetPlatforms
-      (\ s a -> s{_scTargetPlatforms = a})
-      . _Default
-      . _Coerce
 
 -- | Required. The starting URLs from which the scanner finds site pages.
 scStartingURLs :: Lens' ScanConfig [Text]
@@ -1356,6 +1494,14 @@ scAuthentication
   = lens _scAuthentication
       (\ s a -> s{_scAuthentication = a})
 
+-- | Whether the scan configuration has enabled static IP address scan
+-- feature. If enabled, the scanner will access applications from static IP
+-- addresses.
+scStaticIPScan :: Lens' ScanConfig (Maybe Bool)
+scStaticIPScan
+  = lens _scStaticIPScan
+      (\ s a -> s{_scStaticIPScan = a})
+
 -- | The maximum QPS during scanning. A valid value ranges from 5 to 20
 -- inclusively. If the field is unspecified or its value is set 0, server
 -- will default to 15. Other values outside of [5, 20] range will be
@@ -1371,8 +1517,14 @@ scMaxQps
 scName :: Lens' ScanConfig (Maybe Text)
 scName = lens _scName (\ s a -> s{_scName = a})
 
--- | Controls export of scan configurations and results to Cloud Security
--- Command Center.
+-- | Whether the scan config is managed by Web Security Scanner, output only.
+scManagedScan :: Lens' ScanConfig (Maybe Bool)
+scManagedScan
+  = lens _scManagedScan
+      (\ s a -> s{_scManagedScan = a})
+
+-- | Controls export of scan configurations and results to Security Command
+-- Center.
 scExportToSecurityCommandCenter :: Lens' ScanConfig (Maybe ScanConfigExportToSecurityCommandCenter)
 scExportToSecurityCommandCenter
   = lens _scExportToSecurityCommandCenter
@@ -1384,13 +1536,18 @@ scDisplayName
   = lens _scDisplayName
       (\ s a -> s{_scDisplayName = a})
 
+-- | The risk level selected for the scan
+scRiskLevel :: Lens' ScanConfig (Maybe ScanConfigRiskLevel)
+scRiskLevel
+  = lens _scRiskLevel (\ s a -> s{_scRiskLevel = a})
+
 -- | The user agent used during scanning.
 scUserAgent :: Lens' ScanConfig (Maybe ScanConfigUserAgent)
 scUserAgent
   = lens _scUserAgent (\ s a -> s{_scUserAgent = a})
 
--- | The blacklist URL patterns as described in
--- https:\/\/cloud.google.com\/security-scanner\/docs\/excluded-urls
+-- | The excluded URL patterns as described in
+-- https:\/\/cloud.google.com\/security-command-center\/docs\/how-to-use-web-security-scanner#excluding_urls
 scBlackListPatterns :: Lens' ScanConfig [Text]
 scBlackListPatterns
   = lens _scBlackListPatterns
@@ -1403,14 +1560,17 @@ instance FromJSON ScanConfig where
           = withObject "ScanConfig"
               (\ o ->
                  ScanConfig' <$>
-                   (o .:? "latestRun") <*> (o .:? "schedule") <*>
-                     (o .:? "targetPlatforms" .!= mempty)
+                   (o .:? "ignoreHttpStatusErrors") <*>
+                     (o .:? "schedule")
                      <*> (o .:? "startingUrls" .!= mempty)
                      <*> (o .:? "authentication")
+                     <*> (o .:? "staticIpScan")
                      <*> (o .:? "maxQps")
                      <*> (o .:? "name")
+                     <*> (o .:? "managedScan")
                      <*> (o .:? "exportToSecurityCommandCenter")
                      <*> (o .:? "displayName")
+                     <*> (o .:? "riskLevel")
                      <*> (o .:? "userAgent")
                      <*> (o .:? "blacklistPatterns" .!= mempty))
 
@@ -1418,15 +1578,18 @@ instance ToJSON ScanConfig where
         toJSON ScanConfig'{..}
           = object
               (catMaybes
-                 [("latestRun" .=) <$> _scLatestRun,
+                 [("ignoreHttpStatusErrors" .=) <$>
+                    _scIgnoreHTTPStatusErrors,
                   ("schedule" .=) <$> _scSchedule,
-                  ("targetPlatforms" .=) <$> _scTargetPlatforms,
                   ("startingUrls" .=) <$> _scStartingURLs,
                   ("authentication" .=) <$> _scAuthentication,
+                  ("staticIpScan" .=) <$> _scStaticIPScan,
                   ("maxQps" .=) <$> _scMaxQps, ("name" .=) <$> _scName,
+                  ("managedScan" .=) <$> _scManagedScan,
                   ("exportToSecurityCommandCenter" .=) <$>
                     _scExportToSecurityCommandCenter,
                   ("displayName" .=) <$> _scDisplayName,
+                  ("riskLevel" .=) <$> _scRiskLevel,
                   ("userAgent" .=) <$> _scUserAgent,
                   ("blacklistPatterns" .=) <$> _scBlackListPatterns])
 
@@ -1436,7 +1599,7 @@ instance ToJSON ScanConfig where
 data VulnerableHeaders =
   VulnerableHeaders'
     { _vhMissingHeaders :: !(Maybe [Header])
-    , _vhHeaders        :: !(Maybe [Header])
+    , _vhHeaders :: !(Maybe [Header])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1541,7 +1704,7 @@ instance ToJSON ViolatingResource where
 data Form =
   Form'
     { _fActionURI :: !(Maybe Text)
-    , _fFields    :: !(Maybe [Text])
+    , _fFields :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1589,17 +1752,17 @@ instance ToJSON Form where
 -- /See:/ 'scanRun' smart constructor.
 data ScanRun =
   ScanRun'
-    { _srStartTime          :: !(Maybe DateTime')
+    { _srStartTime :: !(Maybe DateTime')
     , _srHasVulnerabilities :: !(Maybe Bool)
-    , _srWarningTraces      :: !(Maybe [ScanRunWarningTrace])
-    , _srResultState        :: !(Maybe ScanRunResultState)
-    , _srProgressPercent    :: !(Maybe (Textual Int32))
-    , _srURLsCrawledCount   :: !(Maybe (Textual Int64))
-    , _srURLsTestedCount    :: !(Maybe (Textual Int64))
-    , _srName               :: !(Maybe Text)
-    , _srEndTime            :: !(Maybe DateTime')
-    , _srExecutionState     :: !(Maybe ScanRunExecutionState)
-    , _srErrorTrace         :: !(Maybe ScanRunErrorTrace)
+    , _srWarningTraces :: !(Maybe [ScanRunWarningTrace])
+    , _srResultState :: !(Maybe ScanRunResultState)
+    , _srProgressPercent :: !(Maybe (Textual Int32))
+    , _srURLsCrawledCount :: !(Maybe (Textual Int64))
+    , _srURLsTestedCount :: !(Maybe (Textual Int64))
+    , _srName :: !(Maybe Text)
+    , _srEndTime :: !(Maybe DateTime')
+    , _srExecutionState :: !(Maybe ScanRunExecutionState)
+    , _srErrorTrace :: !(Maybe ScanRunErrorTrace)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

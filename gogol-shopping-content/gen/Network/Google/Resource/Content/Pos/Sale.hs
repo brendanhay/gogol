@@ -22,7 +22,7 @@
 --
 -- Submit a sale event for the given merchant.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.pos.sale@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.pos.sale@.
 module Network.Google.Resource.Content.Pos.Sale
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Pos.Sale
     , PosSale'
 
     -- * Request Lenses
+    , psXgafv
     , psMerchantId
+    , psUploadProtocol
+    , psAccessToken
+    , psUploadType
     , psTargetMerchantId
     , psPayload
+    , psCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.pos.sale@ method which the
 -- 'PosSale'' request conforms to.
@@ -50,18 +55,28 @@ type PosSaleResource =
            "pos" :>
              Capture "targetMerchantId" (Textual Word64) :>
                "sale" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] PosSaleRequest :>
-                     Post '[JSON] PosSaleResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] PosSaleRequest :>
+                               Post '[JSON] PosSaleResponse
 
 -- | Submit a sale event for the given merchant.
 --
 -- /See:/ 'posSale'' smart constructor.
 data PosSale' =
   PosSale''
-    { _psMerchantId       :: !(Textual Word64)
+    { _psXgafv :: !(Maybe Xgafv)
+    , _psMerchantId :: !(Textual Word64)
+    , _psUploadProtocol :: !(Maybe Text)
+    , _psAccessToken :: !(Maybe Text)
+    , _psUploadType :: !(Maybe Text)
     , _psTargetMerchantId :: !(Textual Word64)
-    , _psPayload          :: !PosSaleRequest
+    , _psPayload :: !PosSaleRequest
+    , _psCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +85,21 @@ data PosSale' =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'psXgafv'
+--
 -- * 'psMerchantId'
+--
+-- * 'psUploadProtocol'
+--
+-- * 'psAccessToken'
+--
+-- * 'psUploadType'
 --
 -- * 'psTargetMerchantId'
 --
 -- * 'psPayload'
+--
+-- * 'psCallback'
 posSale'
     :: Word64 -- ^ 'psMerchantId'
     -> Word64 -- ^ 'psTargetMerchantId'
@@ -82,17 +107,43 @@ posSale'
     -> PosSale'
 posSale' pPsMerchantId_ pPsTargetMerchantId_ pPsPayload_ =
   PosSale''
-    { _psMerchantId = _Coerce # pPsMerchantId_
+    { _psXgafv = Nothing
+    , _psMerchantId = _Coerce # pPsMerchantId_
+    , _psUploadProtocol = Nothing
+    , _psAccessToken = Nothing
+    , _psUploadType = Nothing
     , _psTargetMerchantId = _Coerce # pPsTargetMerchantId_
     , _psPayload = pPsPayload_
+    , _psCallback = Nothing
     }
 
+
+-- | V1 error format.
+psXgafv :: Lens' PosSale' (Maybe Xgafv)
+psXgafv = lens _psXgafv (\ s a -> s{_psXgafv = a})
 
 -- | The ID of the POS or inventory data provider.
 psMerchantId :: Lens' PosSale' Word64
 psMerchantId
   = lens _psMerchantId (\ s a -> s{_psMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+psUploadProtocol :: Lens' PosSale' (Maybe Text)
+psUploadProtocol
+  = lens _psUploadProtocol
+      (\ s a -> s{_psUploadProtocol = a})
+
+-- | OAuth access token.
+psAccessToken :: Lens' PosSale' (Maybe Text)
+psAccessToken
+  = lens _psAccessToken
+      (\ s a -> s{_psAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+psUploadType :: Lens' PosSale' (Maybe Text)
+psUploadType
+  = lens _psUploadType (\ s a -> s{_psUploadType = a})
 
 -- | The ID of the target merchant.
 psTargetMerchantId :: Lens' PosSale' Word64
@@ -106,12 +157,22 @@ psPayload :: Lens' PosSale' PosSaleRequest
 psPayload
   = lens _psPayload (\ s a -> s{_psPayload = a})
 
+-- | JSONP
+psCallback :: Lens' PosSale' (Maybe Text)
+psCallback
+  = lens _psCallback (\ s a -> s{_psCallback = a})
+
 instance GoogleRequest PosSale' where
         type Rs PosSale' = PosSaleResponse
         type Scopes PosSale' =
              '["https://www.googleapis.com/auth/content"]
         requestClient PosSale''{..}
-          = go _psMerchantId _psTargetMerchantId (Just AltJSON)
+          = go _psMerchantId _psTargetMerchantId _psXgafv
+              _psUploadProtocol
+              _psAccessToken
+              _psUploadType
+              _psCallback
+              (Just AltJSON)
               _psPayload
               shoppingContentService
           where go

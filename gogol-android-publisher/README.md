@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Play Developer.
+A client library for the Google Play Android Developer.
 
 
 ## Contribute

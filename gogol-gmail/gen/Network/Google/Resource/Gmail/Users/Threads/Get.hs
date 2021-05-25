@@ -33,14 +33,19 @@ module Network.Google.Resource.Gmail.Users.Threads.Get
     , UsersThreadsGet
 
     -- * Request Lenses
+    , utgXgafv
+    , utgUploadProtocol
+    , utgAccessToken
     , utgFormat
+    , utgUploadType
     , utgUserId
     , utgId
     , utgMetadataHeaders
+    , utgCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.get@ method which the
 -- 'UsersThreadsGet' request conforms to.
@@ -51,19 +56,29 @@ type UsersThreadsGetResource =
            Capture "userId" Text :>
              "threads" :>
                Capture "id" Text :>
-                 QueryParam "format" UsersThreadsGetFormat :>
-                   QueryParams "metadataHeaders" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Thread
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "format" UsersThreadsGetFormat :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "metadataHeaders" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Thread
 
 -- | Gets the specified thread.
 --
 -- /See:/ 'usersThreadsGet' smart constructor.
 data UsersThreadsGet =
   UsersThreadsGet'
-    { _utgFormat          :: !UsersThreadsGetFormat
-    , _utgUserId          :: !Text
-    , _utgId              :: !Text
+    { _utgXgafv :: !(Maybe Xgafv)
+    , _utgUploadProtocol :: !(Maybe Text)
+    , _utgAccessToken :: !(Maybe Text)
+    , _utgFormat :: !UsersThreadsGetFormat
+    , _utgUploadType :: !(Maybe Text)
+    , _utgUserId :: !Text
+    , _utgId :: !Text
     , _utgMetadataHeaders :: !(Maybe [Text])
+    , _utgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,32 +87,69 @@ data UsersThreadsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'utgXgafv'
+--
+-- * 'utgUploadProtocol'
+--
+-- * 'utgAccessToken'
+--
 -- * 'utgFormat'
+--
+-- * 'utgUploadType'
 --
 -- * 'utgUserId'
 --
 -- * 'utgId'
 --
 -- * 'utgMetadataHeaders'
+--
+-- * 'utgCallback'
 usersThreadsGet
     :: Text -- ^ 'utgId'
     -> UsersThreadsGet
 usersThreadsGet pUtgId_ =
   UsersThreadsGet'
-    { _utgFormat = UTGFFull
+    { _utgXgafv = Nothing
+    , _utgUploadProtocol = Nothing
+    , _utgAccessToken = Nothing
+    , _utgFormat = UTGFFull
+    , _utgUploadType = Nothing
     , _utgUserId = "me"
     , _utgId = pUtgId_
     , _utgMetadataHeaders = Nothing
+    , _utgCallback = Nothing
     }
 
+
+-- | V1 error format.
+utgXgafv :: Lens' UsersThreadsGet (Maybe Xgafv)
+utgXgafv = lens _utgXgafv (\ s a -> s{_utgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+utgUploadProtocol :: Lens' UsersThreadsGet (Maybe Text)
+utgUploadProtocol
+  = lens _utgUploadProtocol
+      (\ s a -> s{_utgUploadProtocol = a})
+
+-- | OAuth access token.
+utgAccessToken :: Lens' UsersThreadsGet (Maybe Text)
+utgAccessToken
+  = lens _utgAccessToken
+      (\ s a -> s{_utgAccessToken = a})
 
 -- | The format to return the messages in.
 utgFormat :: Lens' UsersThreadsGet UsersThreadsGetFormat
 utgFormat
   = lens _utgFormat (\ s a -> s{_utgFormat = a})
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+utgUploadType :: Lens' UsersThreadsGet (Maybe Text)
+utgUploadType
+  = lens _utgUploadType
+      (\ s a -> s{_utgUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 utgUserId :: Lens' UsersThreadsGet Text
 utgUserId
   = lens _utgUserId (\ s a -> s{_utgUserId = a})
@@ -114,16 +166,28 @@ utgMetadataHeaders
       . _Default
       . _Coerce
 
+-- | JSONP
+utgCallback :: Lens' UsersThreadsGet (Maybe Text)
+utgCallback
+  = lens _utgCallback (\ s a -> s{_utgCallback = a})
+
 instance GoogleRequest UsersThreadsGet where
         type Rs UsersThreadsGet = Thread
         type Scopes UsersThreadsGet =
              '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.addons.current.message.action",
+               "https://www.googleapis.com/auth/gmail.addons.current.message.metadata",
+               "https://www.googleapis.com/auth/gmail.addons.current.message.readonly",
                "https://www.googleapis.com/auth/gmail.metadata",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersThreadsGet'{..}
-          = go _utgUserId _utgId (Just _utgFormat)
+          = go _utgUserId _utgId _utgXgafv _utgUploadProtocol
+              _utgAccessToken
+              (Just _utgFormat)
+              _utgUploadType
               (_utgMetadataHeaders ^. _Default)
+              _utgCallback
               (Just AltJSON)
               gmailService
           where go

@@ -70,13 +70,24 @@ module Network.Google.FirebaseRules
     -- ** SourcePosition
     , SourcePosition
     , sourcePosition
+    , spCurrentOffSet
     , spLine
+    , spEndOffSet
     , spColumn
     , spFileName
+
+    -- ** ExpressionReport
+    , ExpressionReport
+    , expressionReport
+    , erSourcePosition
+    , erValues
+    , erChildren
 
     -- ** TestCase
     , TestCase
     , testCase
+    , tcExpressionReportLevel
+    , tcPathEncoding
     , tcResource
     , tcExpectation
     , tcFunctionMocks
@@ -98,6 +109,12 @@ module Network.Google.FirebaseRules
     , fmArgs
     , fmFunction
     , fmResult
+
+    -- ** ProjectsReleasesGetExecutableExecutableVersion
+    , ProjectsReleasesGetExecutableExecutableVersion (..)
+
+    -- ** TestCaseExpressionReportLevel
+    , TestCaseExpressionReportLevel (..)
 
     -- ** TestResultState
     , TestResultState (..)
@@ -144,6 +161,7 @@ module Network.Google.FirebaseRules
     , Ruleset
     , ruleset
     , rulName
+    , rulMetadata
     , rulSource
     , rulCreateTime
 
@@ -157,10 +175,14 @@ module Network.Google.FirebaseRules
     , grerExecutableVersion
     , grerLanguage
 
+    -- ** TestCasePathEncoding
+    , TestCasePathEncoding (..)
+
     -- ** TestResult
     , TestResult
     , testResult
     , trState
+    , trExpressionReports
     , trFunctionCalls
     , trVisitedExpressions
     , trErrorPosition
@@ -172,6 +194,11 @@ module Network.Google.FirebaseRules
     -- ** IssueSeverity
     , IssueSeverity (..)
 
+    -- ** Metadata
+    , Metadata
+    , metadata
+    , mServices
+
     -- ** Source
     , Source
     , source
@@ -179,6 +206,12 @@ module Network.Google.FirebaseRules
 
     -- ** TestCaseExpectation
     , TestCaseExpectation (..)
+
+    -- ** ValueCount
+    , ValueCount
+    , valueCount
+    , vcValue
+    , vcCount
 
     -- ** TestSuite
     , TestSuite
@@ -224,19 +257,19 @@ module Network.Google.FirebaseRules
     , urrRelease
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.FirebaseRules.Projects.Releases.Create
-import           Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
-import           Network.Google.Resource.FirebaseRules.Projects.Releases.Get
-import           Network.Google.Resource.FirebaseRules.Projects.Releases.GetExecutable
-import           Network.Google.Resource.FirebaseRules.Projects.Releases.List
-import           Network.Google.Resource.FirebaseRules.Projects.Releases.Patch
-import           Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
-import           Network.Google.Resource.FirebaseRules.Projects.Rulesets.Delete
-import           Network.Google.Resource.FirebaseRules.Projects.Rulesets.Get
-import           Network.Google.Resource.FirebaseRules.Projects.Rulesets.List
-import           Network.Google.Resource.FirebaseRules.Projects.Test
+import Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Resource.FirebaseRules.Projects.Releases.Create
+import Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
+import Network.Google.Resource.FirebaseRules.Projects.Releases.Get
+import Network.Google.Resource.FirebaseRules.Projects.Releases.GetExecutable
+import Network.Google.Resource.FirebaseRules.Projects.Releases.List
+import Network.Google.Resource.FirebaseRules.Projects.Releases.Patch
+import Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
+import Network.Google.Resource.FirebaseRules.Projects.Rulesets.Delete
+import Network.Google.Resource.FirebaseRules.Projects.Rulesets.Get
+import Network.Google.Resource.FirebaseRules.Projects.Rulesets.List
+import Network.Google.Resource.FirebaseRules.Projects.Test
 
 {- $resources
 TODO

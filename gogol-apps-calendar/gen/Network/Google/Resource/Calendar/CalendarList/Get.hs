@@ -36,8 +36,8 @@ module Network.Google.Resource.Calendar.CalendarList.Get
     , clgCalendarId
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.get@ method which the
 -- 'CalendarListGet' request conforms to.

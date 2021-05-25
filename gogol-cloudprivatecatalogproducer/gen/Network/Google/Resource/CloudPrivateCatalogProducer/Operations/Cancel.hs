@@ -30,7 +30,7 @@
 -- instead, it becomes an operation with an Operation.error value with a
 -- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.operations.cancel@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.operations.cancel@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
     (
     -- * REST Resource
@@ -50,8 +50,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
     , ocCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.operations.cancel@ method which the
 -- 'OperationsCancel' request conforms to.
@@ -81,13 +81,13 @@ type OperationsCancelResource =
 -- /See:/ 'operationsCancel' smart constructor.
 data OperationsCancel =
   OperationsCancel'
-    { _ocXgafv          :: !(Maybe Xgafv)
+    { _ocXgafv :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
-    , _ocAccessToken    :: !(Maybe Text)
-    , _ocUploadType     :: !(Maybe Text)
-    , _ocPayload        :: !GoogleLongrunningCancelOperationRequest
-    , _ocName           :: !Text
-    , _ocCallback       :: !(Maybe Text)
+    , _ocAccessToken :: !(Maybe Text)
+    , _ocUploadType :: !(Maybe Text)
+    , _ocPayload :: !GoogleLongrunningCancelOperationRequest
+    , _ocName :: !Text
+    , _ocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,8 +43,8 @@ module Network.Google.Resource.Docs.Documents.Create
     , dcCallback
     ) where
 
-import           Network.Google.Docs.Types
-import           Network.Google.Prelude
+import Network.Google.Docs.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @docs.documents.create@ method which the
 -- 'DocumentsCreate' request conforms to.
@@ -66,12 +66,12 @@ type DocumentsCreateResource =
 -- /See:/ 'documentsCreate' smart constructor.
 data DocumentsCreate =
   DocumentsCreate'
-    { _dcXgafv          :: !(Maybe Xgafv)
+    { _dcXgafv :: !(Maybe Xgafv)
     , _dcUploadProtocol :: !(Maybe Text)
-    , _dcAccessToken    :: !(Maybe Text)
-    , _dcUploadType     :: !(Maybe Text)
-    , _dcPayload        :: !Document
-    , _dcCallback       :: !(Maybe Text)
+    , _dcAccessToken :: !(Maybe Text)
+    , _dcUploadType :: !(Maybe Text)
+    , _dcPayload :: !Document
+    , _dcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

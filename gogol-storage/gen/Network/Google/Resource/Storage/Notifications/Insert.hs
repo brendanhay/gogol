@@ -36,10 +36,11 @@ module Network.Google.Resource.Storage.Notifications.Insert
     , niBucket
     , niPayload
     , niUserProject
+    , niProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.notifications.insert@ method which the
 -- 'NotificationsInsert' request conforms to.
@@ -50,18 +51,20 @@ type NotificationsInsertResource =
            Capture "bucket" Text :>
              "notificationConfigs" :>
                QueryParam "userProject" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Notification :>
-                     Post '[JSON] Notification
+                 QueryParam "provisionalUserProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Notification :>
+                       Post '[JSON] Notification
 
 -- | Creates a notification subscription for a given bucket.
 --
 -- /See:/ 'notificationsInsert' smart constructor.
 data NotificationsInsert =
   NotificationsInsert'
-    { _niBucket      :: !Text
-    , _niPayload     :: !Notification
+    { _niBucket :: !Text
+    , _niPayload :: !Notification
     , _niUserProject :: !(Maybe Text)
+    , _niProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,13 +78,19 @@ data NotificationsInsert =
 -- * 'niPayload'
 --
 -- * 'niUserProject'
+--
+-- * 'niProvisionalUserProject'
 notificationsInsert
     :: Text -- ^ 'niBucket'
     -> Notification -- ^ 'niPayload'
     -> NotificationsInsert
 notificationsInsert pNiBucket_ pNiPayload_ =
   NotificationsInsert'
-    {_niBucket = pNiBucket_, _niPayload = pNiPayload_, _niUserProject = Nothing}
+    { _niBucket = pNiBucket_
+    , _niPayload = pNiPayload_
+    , _niUserProject = Nothing
+    , _niProvisionalUserProject = Nothing
+    }
 
 
 -- | The parent bucket of the notification.
@@ -100,6 +109,13 @@ niUserProject
   = lens _niUserProject
       (\ s a -> s{_niUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+niProvisionalUserProject :: Lens' NotificationsInsert (Maybe Text)
+niProvisionalUserProject
+  = lens _niProvisionalUserProject
+      (\ s a -> s{_niProvisionalUserProject = a})
+
 instance GoogleRequest NotificationsInsert where
         type Rs NotificationsInsert = Notification
         type Scopes NotificationsInsert =
@@ -107,7 +123,9 @@ instance GoogleRequest NotificationsInsert where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient NotificationsInsert'{..}
-          = go _niBucket _niUserProject (Just AltJSON)
+          = go _niBucket _niUserProject
+              _niProvisionalUserProject
+              (Just AltJSON)
               _niPayload
               storageService
           where go

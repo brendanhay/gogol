@@ -36,12 +36,17 @@ module Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
     , UsersSettingsUpdateAutoForwarding
 
     -- * Request Lenses
+    , usuafXgafv
+    , usuafUploadProtocol
+    , usuafAccessToken
+    , usuafUploadType
     , usuafPayload
     , usuafUserId
+    , usuafCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.updateAutoForwarding@ method which the
 -- 'UsersSettingsUpdateAutoForwarding' request conforms to.
@@ -52,9 +57,14 @@ type UsersSettingsUpdateAutoForwardingResource =
            Capture "userId" Text :>
              "settings" :>
                "autoForwarding" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] AutoForwarding :>
-                     Put '[JSON] AutoForwarding
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] AutoForwarding :>
+                               Put '[JSON] AutoForwarding
 
 -- | Updates the auto-forwarding setting for the specified account. A
 -- verified forwarding address must be specified when auto-forwarding is
@@ -64,8 +74,13 @@ type UsersSettingsUpdateAutoForwardingResource =
 -- /See:/ 'usersSettingsUpdateAutoForwarding' smart constructor.
 data UsersSettingsUpdateAutoForwarding =
   UsersSettingsUpdateAutoForwarding'
-    { _usuafPayload :: !AutoForwarding
-    , _usuafUserId  :: !Text
+    { _usuafXgafv :: !(Maybe Xgafv)
+    , _usuafUploadProtocol :: !(Maybe Text)
+    , _usuafAccessToken :: !(Maybe Text)
+    , _usuafUploadType :: !(Maybe Text)
+    , _usuafPayload :: !AutoForwarding
+    , _usuafUserId :: !Text
+    , _usuafCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,16 +89,56 @@ data UsersSettingsUpdateAutoForwarding =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usuafXgafv'
+--
+-- * 'usuafUploadProtocol'
+--
+-- * 'usuafAccessToken'
+--
+-- * 'usuafUploadType'
+--
 -- * 'usuafPayload'
 --
 -- * 'usuafUserId'
+--
+-- * 'usuafCallback'
 usersSettingsUpdateAutoForwarding
     :: AutoForwarding -- ^ 'usuafPayload'
     -> UsersSettingsUpdateAutoForwarding
 usersSettingsUpdateAutoForwarding pUsuafPayload_ =
   UsersSettingsUpdateAutoForwarding'
-    {_usuafPayload = pUsuafPayload_, _usuafUserId = "me"}
+    { _usuafXgafv = Nothing
+    , _usuafUploadProtocol = Nothing
+    , _usuafAccessToken = Nothing
+    , _usuafUploadType = Nothing
+    , _usuafPayload = pUsuafPayload_
+    , _usuafUserId = "me"
+    , _usuafCallback = Nothing
+    }
 
+
+-- | V1 error format.
+usuafXgafv :: Lens' UsersSettingsUpdateAutoForwarding (Maybe Xgafv)
+usuafXgafv
+  = lens _usuafXgafv (\ s a -> s{_usuafXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usuafUploadProtocol :: Lens' UsersSettingsUpdateAutoForwarding (Maybe Text)
+usuafUploadProtocol
+  = lens _usuafUploadProtocol
+      (\ s a -> s{_usuafUploadProtocol = a})
+
+-- | OAuth access token.
+usuafAccessToken :: Lens' UsersSettingsUpdateAutoForwarding (Maybe Text)
+usuafAccessToken
+  = lens _usuafAccessToken
+      (\ s a -> s{_usuafAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usuafUploadType :: Lens' UsersSettingsUpdateAutoForwarding (Maybe Text)
+usuafUploadType
+  = lens _usuafUploadType
+      (\ s a -> s{_usuafUploadType = a})
 
 -- | Multipart request metadata.
 usuafPayload :: Lens' UsersSettingsUpdateAutoForwarding AutoForwarding
@@ -96,6 +151,12 @@ usuafUserId :: Lens' UsersSettingsUpdateAutoForwarding Text
 usuafUserId
   = lens _usuafUserId (\ s a -> s{_usuafUserId = a})
 
+-- | JSONP
+usuafCallback :: Lens' UsersSettingsUpdateAutoForwarding (Maybe Text)
+usuafCallback
+  = lens _usuafCallback
+      (\ s a -> s{_usuafCallback = a})
+
 instance GoogleRequest
            UsersSettingsUpdateAutoForwarding
          where
@@ -104,7 +165,12 @@ instance GoogleRequest
         type Scopes UsersSettingsUpdateAutoForwarding =
              '["https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsUpdateAutoForwarding'{..}
-          = go _usuafUserId (Just AltJSON) _usuafPayload
+          = go _usuafUserId _usuafXgafv _usuafUploadProtocol
+              _usuafAccessToken
+              _usuafUploadType
+              _usuafCallback
+              (Just AltJSON)
+              _usuafPayload
               gmailService
           where go
                   = buildClient

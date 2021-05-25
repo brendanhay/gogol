@@ -23,7 +23,7 @@
 -- Retrieves a list of creative groups, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.creativeGroups.list@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
     , CreativeGroupsList
 
     -- * Request Lenses
+    , cglXgafv
+    , cglUploadProtocol
+    , cglAccessToken
     , cglSearchString
+    , cglUploadType
     , cglIds
     , cglProFileId
     , cglSortOrder
@@ -43,29 +47,39 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
     , cglSortField
     , cglAdvertiserIds
     , cglMaxResults
+    , cglCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.list@ method which the
 -- 'CreativeGroupsList' request conforms to.
 type CreativeGroupsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" (Textual Int64) :>
-                   QueryParam "sortOrder" CreativeGroupsListSortOrder :>
-                     QueryParam "groupNumber" (Textual Int32) :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField" CreativeGroupsListSortField :>
-                           QueryParams "advertiserIds" (Textual Int64) :>
-                             QueryParam "maxResults" (Textual Int32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] CreativeGroupsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParam "sortOrder" CreativeGroupsListSortOrder :>
+                             QueryParam "groupNumber" (Textual Int32) :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField"
+                                   CreativeGroupsListSortField
+                                   :>
+                                   QueryParams "advertiserIds" (Textual Int64)
+                                     :>
+                                     QueryParam "maxResults" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON]
+                                             CreativeGroupsListResponse
 
 -- | Retrieves a list of creative groups, possibly filtered. This method
 -- supports paging.
@@ -73,15 +87,20 @@ type CreativeGroupsListResource =
 -- /See:/ 'creativeGroupsList' smart constructor.
 data CreativeGroupsList =
   CreativeGroupsList'
-    { _cglSearchString  :: !(Maybe Text)
-    , _cglIds           :: !(Maybe [Textual Int64])
-    , _cglProFileId     :: !(Textual Int64)
-    , _cglSortOrder     :: !CreativeGroupsListSortOrder
-    , _cglGroupNumber   :: !(Maybe (Textual Int32))
-    , _cglPageToken     :: !(Maybe Text)
-    , _cglSortField     :: !CreativeGroupsListSortField
+    { _cglXgafv :: !(Maybe Xgafv)
+    , _cglUploadProtocol :: !(Maybe Text)
+    , _cglAccessToken :: !(Maybe Text)
+    , _cglSearchString :: !(Maybe Text)
+    , _cglUploadType :: !(Maybe Text)
+    , _cglIds :: !(Maybe [Textual Int64])
+    , _cglProFileId :: !(Textual Int64)
+    , _cglSortOrder :: !CreativeGroupsListSortOrder
+    , _cglGroupNumber :: !(Maybe (Textual Int32))
+    , _cglPageToken :: !(Maybe Text)
+    , _cglSortField :: !CreativeGroupsListSortField
     , _cglAdvertiserIds :: !(Maybe [Textual Int64])
-    , _cglMaxResults    :: !(Textual Int32)
+    , _cglMaxResults :: !(Textual Int32)
+    , _cglCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,7 +109,15 @@ data CreativeGroupsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cglXgafv'
+--
+-- * 'cglUploadProtocol'
+--
+-- * 'cglAccessToken'
+--
 -- * 'cglSearchString'
+--
+-- * 'cglUploadType'
 --
 -- * 'cglIds'
 --
@@ -107,12 +134,18 @@ data CreativeGroupsList =
 -- * 'cglAdvertiserIds'
 --
 -- * 'cglMaxResults'
+--
+-- * 'cglCallback'
 creativeGroupsList
     :: Int64 -- ^ 'cglProFileId'
     -> CreativeGroupsList
 creativeGroupsList pCglProFileId_ =
   CreativeGroupsList'
-    { _cglSearchString = Nothing
+    { _cglXgafv = Nothing
+    , _cglUploadProtocol = Nothing
+    , _cglAccessToken = Nothing
+    , _cglSearchString = Nothing
+    , _cglUploadType = Nothing
     , _cglIds = Nothing
     , _cglProFileId = _Coerce # pCglProFileId_
     , _cglSortOrder = CGLSOAscending
@@ -121,8 +154,25 @@ creativeGroupsList pCglProFileId_ =
     , _cglSortField = CGLSFID
     , _cglAdvertiserIds = Nothing
     , _cglMaxResults = 1000
+    , _cglCallback = Nothing
     }
 
+
+-- | V1 error format.
+cglXgafv :: Lens' CreativeGroupsList (Maybe Xgafv)
+cglXgafv = lens _cglXgafv (\ s a -> s{_cglXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cglUploadProtocol :: Lens' CreativeGroupsList (Maybe Text)
+cglUploadProtocol
+  = lens _cglUploadProtocol
+      (\ s a -> s{_cglUploadProtocol = a})
+
+-- | OAuth access token.
+cglAccessToken :: Lens' CreativeGroupsList (Maybe Text)
+cglAccessToken
+  = lens _cglAccessToken
+      (\ s a -> s{_cglAccessToken = a})
 
 -- | Allows searching for creative groups by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativegroup*2015\" will return creative groups
@@ -136,6 +186,12 @@ cglSearchString :: Lens' CreativeGroupsList (Maybe Text)
 cglSearchString
   = lens _cglSearchString
       (\ s a -> s{_cglSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cglUploadType :: Lens' CreativeGroupsList (Maybe Text)
+cglUploadType
+  = lens _cglUploadType
+      (\ s a -> s{_cglUploadType = a})
 
 -- | Select only creative groups with these IDs.
 cglIds :: Lens' CreativeGroupsList [Int64]
@@ -186,13 +242,21 @@ cglMaxResults
       (\ s a -> s{_cglMaxResults = a})
       . _Coerce
 
+-- | JSONP
+cglCallback :: Lens' CreativeGroupsList (Maybe Text)
+cglCallback
+  = lens _cglCallback (\ s a -> s{_cglCallback = a})
+
 instance GoogleRequest CreativeGroupsList where
         type Rs CreativeGroupsList =
              CreativeGroupsListResponse
         type Scopes CreativeGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CreativeGroupsList'{..}
-          = go _cglProFileId _cglSearchString
+          = go _cglProFileId _cglXgafv _cglUploadProtocol
+              _cglAccessToken
+              _cglSearchString
+              _cglUploadType
               (_cglIds ^. _Default)
               (Just _cglSortOrder)
               _cglGroupNumber
@@ -200,6 +264,7 @@ instance GoogleRequest CreativeGroupsList where
               (Just _cglSortField)
               (_cglAdvertiserIds ^. _Default)
               (Just _cglMaxResults)
+              _cglCallback
               (Just AltJSON)
               dFAReportingService
           where go

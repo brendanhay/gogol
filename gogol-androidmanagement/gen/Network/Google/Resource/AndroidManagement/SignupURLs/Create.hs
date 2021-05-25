@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidManagement.SignupURLs.Create
     , sucCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.signupUrls.create@ method which the
 -- 'SignupURLsCreate' request conforms to.
@@ -64,13 +64,13 @@ type SignupURLsCreateResource =
 -- /See:/ 'signupURLsCreate' smart constructor.
 data SignupURLsCreate =
   SignupURLsCreate'
-    { _sucXgafv          :: !(Maybe Xgafv)
+    { _sucXgafv :: !(Maybe Xgafv)
     , _sucUploadProtocol :: !(Maybe Text)
-    , _sucCallbackURL    :: !(Maybe Text)
-    , _sucAccessToken    :: !(Maybe Text)
-    , _sucUploadType     :: !(Maybe Text)
-    , _sucProjectId      :: !(Maybe Text)
-    , _sucCallback       :: !(Maybe Text)
+    , _sucCallbackURL :: !(Maybe Text)
+    , _sucAccessToken :: !(Maybe Text)
+    , _sucUploadType :: !(Maybe Text)
+    , _sucProjectId :: !(Maybe Text)
+    , _sucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

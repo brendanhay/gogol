@@ -39,8 +39,8 @@ module Network.Google.Resource.Drive.Changes.GetStartPageToken
     , cgsptDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.changes.getStartPageToken@ method which the
 -- 'ChangesGetStartPageToken' request conforms to.
@@ -61,10 +61,10 @@ type ChangesGetStartPageTokenResource =
 -- /See:/ 'changesGetStartPageToken' smart constructor.
 data ChangesGetStartPageToken =
   ChangesGetStartPageToken'
-    { _cgsptTeamDriveId        :: !(Maybe Text)
-    , _cgsptSupportsAllDrives  :: !Bool
+    { _cgsptTeamDriveId :: !(Maybe Text)
+    , _cgsptSupportsAllDrives :: !Bool
     , _cgsptSupportsTeamDrives :: !Bool
-    , _cgsptDriveId            :: !(Maybe Text)
+    , _cgsptDriveId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -111,7 +111,7 @@ cgsptSupportsTeamDrives
       (\ s a -> s{_cgsptSupportsTeamDrives = a})
 
 -- | The ID of the shared drive for which the starting pageToken for listing
--- future changes from that shared drive will be returned.
+-- future changes from that shared drive is returned.
 cgsptDriveId :: Lens' ChangesGetStartPageToken (Maybe Text)
 cgsptDriveId
   = lens _cgsptDriveId (\ s a -> s{_cgsptDriveId = a})

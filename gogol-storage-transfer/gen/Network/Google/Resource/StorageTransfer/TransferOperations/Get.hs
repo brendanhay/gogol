@@ -43,8 +43,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     , togCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.get@ method which the
 -- 'TransferOperationsGet' request conforms to.
@@ -65,12 +65,12 @@ type TransferOperationsGetResource =
 -- /See:/ 'transferOperationsGet' smart constructor.
 data TransferOperationsGet =
   TransferOperationsGet'
-    { _togXgafv          :: !(Maybe Xgafv)
+    { _togXgafv :: !(Maybe Xgafv)
     , _togUploadProtocol :: !(Maybe Text)
-    , _togAccessToken    :: !(Maybe Text)
-    , _togUploadType     :: !(Maybe Text)
-    , _togName           :: !Text
-    , _togCallback       :: !(Maybe Text)
+    , _togAccessToken :: !(Maybe Text)
+    , _togUploadType :: !(Maybe Text)
+    , _togName :: !Text
+    , _togCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

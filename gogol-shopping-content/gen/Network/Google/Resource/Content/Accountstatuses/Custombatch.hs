@@ -22,7 +22,7 @@
 --
 -- Retrieves multiple Merchant Center account statuses in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.custombatch@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.accountstatuses.custombatch@.
 module Network.Google.Resource.Content.Accountstatuses.Custombatch
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Content.Accountstatuses.Custombatch
     , AccountstatusesCustombatch
 
     -- * Request Lenses
+    , acXgafv
+    , acUploadProtocol
+    , acAccessToken
+    , acUploadType
     , acPayload
+    , acCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountstatuses.custombatch@ method which the
 -- 'AccountstatusesCustombatch' request conforms to.
@@ -46,16 +51,26 @@ type AccountstatusesCustombatchResource =
        "v2.1" :>
          "accountstatuses" :>
            "batch" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] AccountstatusesCustomBatchRequest :>
-                 Post '[JSON] AccountstatusesCustomBatchResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AccountstatusesCustomBatchRequest :>
+                           Post '[JSON] AccountstatusesCustomBatchResponse
 
 -- | Retrieves multiple Merchant Center account statuses in a single request.
 --
 -- /See:/ 'accountstatusesCustombatch' smart constructor.
-newtype AccountstatusesCustombatch =
+data AccountstatusesCustombatch =
   AccountstatusesCustombatch'
-    { _acPayload :: AccountstatusesCustomBatchRequest
+    { _acXgafv :: !(Maybe Xgafv)
+    , _acUploadProtocol :: !(Maybe Text)
+    , _acAccessToken :: !(Maybe Text)
+    , _acUploadType :: !(Maybe Text)
+    , _acPayload :: !AccountstatusesCustomBatchRequest
+    , _acCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,18 +79,61 @@ newtype AccountstatusesCustombatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acXgafv'
+--
+-- * 'acUploadProtocol'
+--
+-- * 'acAccessToken'
+--
+-- * 'acUploadType'
+--
 -- * 'acPayload'
+--
+-- * 'acCallback'
 accountstatusesCustombatch
     :: AccountstatusesCustomBatchRequest -- ^ 'acPayload'
     -> AccountstatusesCustombatch
 accountstatusesCustombatch pAcPayload_ =
-  AccountstatusesCustombatch' {_acPayload = pAcPayload_}
+  AccountstatusesCustombatch'
+    { _acXgafv = Nothing
+    , _acUploadProtocol = Nothing
+    , _acAccessToken = Nothing
+    , _acUploadType = Nothing
+    , _acPayload = pAcPayload_
+    , _acCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acXgafv :: Lens' AccountstatusesCustombatch (Maybe Xgafv)
+acXgafv = lens _acXgafv (\ s a -> s{_acXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acUploadProtocol :: Lens' AccountstatusesCustombatch (Maybe Text)
+acUploadProtocol
+  = lens _acUploadProtocol
+      (\ s a -> s{_acUploadProtocol = a})
+
+-- | OAuth access token.
+acAccessToken :: Lens' AccountstatusesCustombatch (Maybe Text)
+acAccessToken
+  = lens _acAccessToken
+      (\ s a -> s{_acAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acUploadType :: Lens' AccountstatusesCustombatch (Maybe Text)
+acUploadType
+  = lens _acUploadType (\ s a -> s{_acUploadType = a})
 
 -- | Multipart request metadata.
 acPayload :: Lens' AccountstatusesCustombatch AccountstatusesCustomBatchRequest
 acPayload
   = lens _acPayload (\ s a -> s{_acPayload = a})
+
+-- | JSONP
+acCallback :: Lens' AccountstatusesCustombatch (Maybe Text)
+acCallback
+  = lens _acCallback (\ s a -> s{_acCallback = a})
 
 instance GoogleRequest AccountstatusesCustombatch
          where
@@ -84,7 +142,12 @@ instance GoogleRequest AccountstatusesCustombatch
         type Scopes AccountstatusesCustombatch =
              '["https://www.googleapis.com/auth/content"]
         requestClient AccountstatusesCustombatch'{..}
-          = go (Just AltJSON) _acPayload shoppingContentService
+          = go _acXgafv _acUploadProtocol _acAccessToken
+              _acUploadType
+              _acCallback
+              (Just AltJSON)
+              _acPayload
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountstatusesCustombatchResource)

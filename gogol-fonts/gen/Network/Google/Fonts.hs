@@ -13,11 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Accesses the metadata for all families served by Google Fonts, providing
--- a list of families currently available (including available styles and a
--- list of supported script subsets).
+-- The Google Web Fonts Developer API lets you retrieve information about
+-- web fonts served by Google.
 --
--- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
+-- /See:/ <https://developers.google.com/fonts/docs/developer_api Web Fonts Developer API Reference>
 module Network.Google.Fonts
     (
     -- * Service Configuration
@@ -51,6 +50,9 @@ module Network.Google.Fonts
     , wlKind
     , wlItems
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** WebfontsListSort
     , WebfontsListSort (..)
 
@@ -60,13 +62,13 @@ module Network.Google.Fonts
     , wfAddtional
     ) where
 
-import           Network.Google.Fonts.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Webfonts.Webfonts.List
+import Network.Google.Prelude
+import Network.Google.Fonts.Types
+import Network.Google.Resource.Webfonts.Webfonts.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Fonts Developer API service.
+-- | Represents the entirety of the methods and resources available for the Web Fonts Developer API service.
 type FontsAPI = WebfontsListResource

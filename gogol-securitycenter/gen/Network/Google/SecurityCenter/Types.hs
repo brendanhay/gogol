@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -32,6 +32,24 @@ module Network.Google.SecurityCenter.Types
     , sCode
     , sMessage
 
+    -- * GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+    , GoogleCloudSecuritycenterV1p1beta1TemporalAsset
+    , googleCloudSecuritycenterV1p1beta1TemporalAsset
+    , gcsvtaAsset
+    , gcsvtaChangeType
+
+    -- * GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    , GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    , googleCloudSecuritycenterV1p1beta1SecurityCenterProperties
+    , gcsvscpResourceDisplayName
+    , gcsvscpResourceType
+    , gcsvscpResourceName
+    , gcsvscpResourceParentDisplayName
+    , gcsvscpResourceParent
+    , gcsvscpResourceProject
+    , gcsvscpResourceProjectDisplayName
+    , gcsvscpResourceOwners
+
     -- * ListFindingsResponse
     , ListFindingsResponse
     , listFindingsResponse
@@ -45,6 +63,16 @@ module Network.Google.SecurityCenter.Types
     , auditConfig
     , acService
     , acAuditLogConfigs
+
+    -- * NotificationConfig
+    , NotificationConfig
+    , notificationConfig
+    , ncServiceAccount
+    , ncEventType
+    , ncName
+    , ncPubsubTopic
+    , ncStreamingConfig
+    , ncDescription
 
     -- * Expr
     , Expr
@@ -63,6 +91,7 @@ module Network.Google.SecurityCenter.Types
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
 
     -- * GroupFindingsResponse
     , GroupFindingsResponse
@@ -76,8 +105,28 @@ module Network.Google.SecurityCenter.Types
     , RunAssetDiscoveryRequest
     , runAssetDiscoveryRequest
 
+    -- * GoogleCloudSecuritycenterV1p1beta1Resource
+    , GoogleCloudSecuritycenterV1p1beta1Resource
+    , googleCloudSecuritycenterV1p1beta1Resource
+    , gcsvrParent
+    , gcsvrProject
+    , gcsvrProjectDisplayName
+    , gcsvrName
+    , gcsvrParentDisplayName
+
+    -- * GoogleCloudSecuritycenterV1p1beta1FindingState
+    , GoogleCloudSecuritycenterV1p1beta1FindingState (..)
+
+    -- * GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType
+    , GoogleCloudSecuritycenterV1p1beta1TemporalAssetChangeType (..)
+
     -- * AssetDiscoveryConfigInclusionMode
     , AssetDiscoveryConfigInclusionMode (..)
+
+    -- * GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+    , GoogleCloudSecuritycenterV1p1beta1IAMPolicy
+    , googleCloudSecuritycenterV1p1beta1IAMPolicy
+    , gcsvipPolicyBlob
 
     -- * Operation
     , Operation
@@ -110,7 +159,14 @@ module Network.Google.SecurityCenter.Types
     , ListFindingsResult
     , listFindingsResult
     , lfrFinding
+    , lfrResource
     , lfrStateChange
+
+    -- * ListNotificationConfigsResponse
+    , ListNotificationConfigsResponse
+    , listNotificationConfigsResponse
+    , lncrNotificationConfigs
+    , lncrNextPageToken
 
     -- * GroupAssetsRequest
     , GroupAssetsRequest
@@ -132,22 +188,20 @@ module Network.Google.SecurityCenter.Types
     , gPageSize
     , gCompareDuration
 
+    -- * GoogleCloudSecuritycenterV1Resource
+    , GoogleCloudSecuritycenterV1Resource
+    , googleCloudSecuritycenterV1Resource
+    , gParent
+    , gProject
+    , gProjectDisplayName
+    , gName
+    , gParentDisplayName
+
     -- * AssetDiscoveryConfig
     , AssetDiscoveryConfig
     , assetDiscoveryConfig
     , adcInclusionMode
     , adcProjectIds
-
-    -- * Asset
-    , Asset
-    , asset
-    , aSecurityMarks
-    , aResourceProperties
-    , aUpdateTime
-    , aSecurityCenterProperties
-    , aName
-    , aIAMPolicy
-    , aCreateTime
 
     -- * SecurityMarks
     , SecurityMarks
@@ -155,15 +209,24 @@ module Network.Google.SecurityCenter.Types
     , smName
     , smMarks
 
-    -- * AssetResourceProperties
-    , AssetResourceProperties
-    , assetResourceProperties
-    , arpAddtional
+    -- * NotificationConfigEventType
+    , NotificationConfigEventType (..)
 
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- * GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+    , GoogleCloudSecuritycenterV1p1beta1NotificationMessage
+    , googleCloudSecuritycenterV1p1beta1NotificationMessage
+    , gcsvnmFinding
+    , gcsvnmTemporalAsset
+    , gcsvnmResource
+    , gcsvnmNotificationConfigName
+
+    -- * GoogleCloudSecuritycenterV1p1beta1FindingSeverity
+    , GoogleCloudSecuritycenterV1p1beta1FindingSeverity (..)
 
     -- * OrganizationSettings
     , OrganizationSettings
@@ -171,6 +234,16 @@ module Network.Google.SecurityCenter.Types
     , osAssetDiscoveryConfig
     , osEnableAssetDiscovery
     , osName
+
+    -- * GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
+
+    -- * GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    , GoogleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    , googleCloudSecuritycenterV1p1beta1SecurityMarksMarks
+    , gcsvsmmAddtional
 
     -- * SetFindingStateRequestState
     , SetFindingStateRequestState (..)
@@ -195,14 +268,12 @@ module Network.Google.SecurityCenter.Types
     , sfsrState
     , sfsrStartTime
 
-    -- * SecurityCenterProperties
-    , SecurityCenterProperties
-    , securityCenterProperties
-    , scpResourceType
-    , scpResourceName
-    , scpResourceParent
-    , scpResourceProject
-    , scpResourceOwners
+    -- * GoogleCloudSecuritycenterV1NotificationMessage
+    , GoogleCloudSecuritycenterV1NotificationMessage
+    , googleCloudSecuritycenterV1NotificationMessage
+    , gFinding
+    , gResource
+    , gNotificationConfigName
 
     -- * GroupAssetsResponse
     , GroupAssetsResponse
@@ -218,6 +289,9 @@ module Network.Google.SecurityCenter.Types
     , lsrNextPageToken
     , lsrSources
 
+    -- * GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState
+    , GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponseState (..)
+
     -- * GroupResultProperties
     , GroupResultProperties
     , groupResultProperties
@@ -225,6 +299,15 @@ module Network.Google.SecurityCenter.Types
 
     -- * AuditLogConfigLogType
     , AuditLogConfigLogType (..)
+
+    -- * Resource
+    , Resource
+    , resource
+    , rProjectDisplayName
+    , rName
+    , rProjectName
+    , rParentName
+    , rParentDisplayName
 
     -- * GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
     , GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
@@ -254,17 +337,39 @@ module Network.Google.SecurityCenter.Types
     -- * GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState
     , GoogleCloudSecuritycenterV1RunAssetDiscoveryResponseState (..)
 
-    -- * IAMPolicy
-    , IAMPolicy
-    , iamPolicy
-    , ipPolicyBlob
-
     -- * Source
     , Source
     , source
     , sName
     , sDisplayName
     , sDescription
+
+    -- * GoogleCloudSecuritycenterV1p1beta1Finding
+    , GoogleCloudSecuritycenterV1p1beta1Finding
+    , googleCloudSecuritycenterV1p1beta1Finding
+    , gcsvfParent
+    , gcsvfSourceProperties
+    , gcsvfState
+    , gcsvfResourceName
+    , gcsvfSecurityMarks
+    , gcsvfCategory
+    , gcsvfSeverity
+    , gcsvfExternalURI
+    , gcsvfEventTime
+    , gcsvfName
+    , gcsvfCreateTime
+
+    -- * GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    , GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    , googleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
+    , gState
+    , gDuration
+
+    -- * GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+    , GoogleCloudSecuritycenterV1p1beta1SecurityMarks
+    , googleCloudSecuritycenterV1p1beta1SecurityMarks
+    , gcsvsmName
+    , gcsvsmMarks
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -290,11 +395,27 @@ module Network.Google.SecurityCenter.Types
     , operationMetadata
     , omAddtional
 
+    -- * GoogleCloudSecuritycenterV1p1beta1Asset
+    , GoogleCloudSecuritycenterV1p1beta1Asset
+    , googleCloudSecuritycenterV1p1beta1Asset
+    , gcsvaSecurityMarks
+    , gcsvaResourceProperties
+    , gcsvaUpdateTime
+    , gcsvaSecurityCenterProperties
+    , gcsvaName
+    , gcsvaIAMPolicy
+    , gcsvaCreateTime
+
     -- * AuditLogConfig
     , AuditLogConfig
     , auditLogConfig
     , alcLogType
     , alcExemptedMembers
+
+    -- * GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    , GoogleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    , googleCloudSecuritycenterV1p1beta1AssetResourceProperties
+    , gcsvarpAddtional
 
     -- * GroupResult
     , GroupResult
@@ -307,6 +428,11 @@ module Network.Google.SecurityCenter.Types
     , operationResponse
     , orAddtional
 
+    -- * StreamingConfig
+    , StreamingConfig
+    , streamingConfig
+    , scFilter
+
     -- * SecurityMarksMarks
     , SecurityMarksMarks
     , securityMarksMarks
@@ -315,11 +441,16 @@ module Network.Google.SecurityCenter.Types
     -- * GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState
     , GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponseState (..)
 
+    -- * GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    , GoogleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    , googleCloudSecuritycenterV1p1beta1FindingSourceProperties
+    , gcsvfspAddtional
+
     -- * GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
     , GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
     , googleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
-    , gState
-    , gDuration
+    , gooState
+    , gooDuration
 
     -- * Binding
     , Binding
@@ -329,14 +460,15 @@ module Network.Google.SecurityCenter.Types
     , bCondition
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types.Product
-import           Network.Google.SecurityCenter.Types.Sum
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types.Product
+import Network.Google.SecurityCenter.Types.Sum
 
--- | Default request referring to version 'v1' of the Cloud Security Command Center API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1p1beta1' of the Security Command Center API. This contains the host and root path used as a starting point for constructing service requests.
 securityCenterService :: ServiceConfig
 securityCenterService
-  = defaultService (ServiceId "securitycenter:v1")
+  = defaultService
+      (ServiceId "securitycenter:v1p1beta1")
       "securitycenter.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services

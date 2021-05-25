@@ -68,9 +68,9 @@ module Network.Google.AcceleratedMobilePageURL
     , BatchGetAmpURLsRequestLookupStrategy (..)
     ) where
 
-import           Network.Google.AcceleratedMobilePageURL.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AcceleratedMobilePageURL.AmpURLs.BatchGet
+import Network.Google.Prelude
+import Network.Google.AcceleratedMobilePageURL.Types
+import Network.Google.Resource.AcceleratedMobilePageURL.AmpURLs.BatchGet
 
 {- $resources
 TODO

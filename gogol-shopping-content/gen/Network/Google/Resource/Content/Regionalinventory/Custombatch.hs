@@ -23,7 +23,7 @@
 -- Updates regional inventory for multiple products or regions in a single
 -- request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.regionalinventory.custombatch@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.regionalinventory.custombatch@.
 module Network.Google.Resource.Content.Regionalinventory.Custombatch
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.Content.Regionalinventory.Custombatch
     , RegionalinventoryCustombatch
 
     -- * Request Lenses
-    , rcPayload
+    , rccXgafv
+    , rccUploadProtocol
+    , rccAccessToken
+    , rccUploadType
+    , rccPayload
+    , rccCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.regionalinventory.custombatch@ method which the
 -- 'RegionalinventoryCustombatch' request conforms to.
@@ -47,17 +52,27 @@ type RegionalinventoryCustombatchResource =
        "v2.1" :>
          "regionalinventory" :>
            "batch" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] RegionalinventoryCustomBatchRequest
-                 :> Post '[JSON] RegionalinventoryCustomBatchResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] RegionalinventoryCustomBatchRequest
+                           :> Post '[JSON] RegionalinventoryCustomBatchResponse
 
 -- | Updates regional inventory for multiple products or regions in a single
 -- request.
 --
 -- /See:/ 'regionalinventoryCustombatch' smart constructor.
-newtype RegionalinventoryCustombatch =
+data RegionalinventoryCustombatch =
   RegionalinventoryCustombatch'
-    { _rcPayload :: RegionalinventoryCustomBatchRequest
+    { _rccXgafv :: !(Maybe Xgafv)
+    , _rccUploadProtocol :: !(Maybe Text)
+    , _rccAccessToken :: !(Maybe Text)
+    , _rccUploadType :: !(Maybe Text)
+    , _rccPayload :: !RegionalinventoryCustomBatchRequest
+    , _rccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,18 +81,62 @@ newtype RegionalinventoryCustombatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcPayload'
+-- * 'rccXgafv'
+--
+-- * 'rccUploadProtocol'
+--
+-- * 'rccAccessToken'
+--
+-- * 'rccUploadType'
+--
+-- * 'rccPayload'
+--
+-- * 'rccCallback'
 regionalinventoryCustombatch
-    :: RegionalinventoryCustomBatchRequest -- ^ 'rcPayload'
+    :: RegionalinventoryCustomBatchRequest -- ^ 'rccPayload'
     -> RegionalinventoryCustombatch
-regionalinventoryCustombatch pRcPayload_ =
-  RegionalinventoryCustombatch' {_rcPayload = pRcPayload_}
+regionalinventoryCustombatch pRccPayload_ =
+  RegionalinventoryCustombatch'
+    { _rccXgafv = Nothing
+    , _rccUploadProtocol = Nothing
+    , _rccAccessToken = Nothing
+    , _rccUploadType = Nothing
+    , _rccPayload = pRccPayload_
+    , _rccCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rccXgafv :: Lens' RegionalinventoryCustombatch (Maybe Xgafv)
+rccXgafv = lens _rccXgafv (\ s a -> s{_rccXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rccUploadProtocol :: Lens' RegionalinventoryCustombatch (Maybe Text)
+rccUploadProtocol
+  = lens _rccUploadProtocol
+      (\ s a -> s{_rccUploadProtocol = a})
+
+-- | OAuth access token.
+rccAccessToken :: Lens' RegionalinventoryCustombatch (Maybe Text)
+rccAccessToken
+  = lens _rccAccessToken
+      (\ s a -> s{_rccAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rccUploadType :: Lens' RegionalinventoryCustombatch (Maybe Text)
+rccUploadType
+  = lens _rccUploadType
+      (\ s a -> s{_rccUploadType = a})
 
 -- | Multipart request metadata.
-rcPayload :: Lens' RegionalinventoryCustombatch RegionalinventoryCustomBatchRequest
-rcPayload
-  = lens _rcPayload (\ s a -> s{_rcPayload = a})
+rccPayload :: Lens' RegionalinventoryCustombatch RegionalinventoryCustomBatchRequest
+rccPayload
+  = lens _rccPayload (\ s a -> s{_rccPayload = a})
+
+-- | JSONP
+rccCallback :: Lens' RegionalinventoryCustombatch (Maybe Text)
+rccCallback
+  = lens _rccCallback (\ s a -> s{_rccCallback = a})
 
 instance GoogleRequest RegionalinventoryCustombatch
          where
@@ -86,7 +145,12 @@ instance GoogleRequest RegionalinventoryCustombatch
         type Scopes RegionalinventoryCustombatch =
              '["https://www.googleapis.com/auth/content"]
         requestClient RegionalinventoryCustombatch'{..}
-          = go (Just AltJSON) _rcPayload shoppingContentService
+          = go _rccXgafv _rccUploadProtocol _rccAccessToken
+              _rccUploadType
+              _rccCallback
+              (Just AltJSON)
+              _rccPayload
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy RegionalinventoryCustombatchResource)

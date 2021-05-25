@@ -23,7 +23,7 @@
 -- Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.applications.listHidden@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.applications.listHidden@.
 module Network.Google.Resource.GamesManagement.Applications.ListHidden
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.GamesManagement.Applications.ListHidden
     , ApplicationsListHidden
 
     -- * Request Lenses
+    , alhXgafv
+    , alhUploadProtocol
+    , alhAccessToken
+    , alhUploadType
     , alhApplicationId
     , alhPageToken
     , alhMaxResults
+    , alhCallback
     ) where
 
-import           Network.Google.GamesManagement.Types
-import           Network.Google.Prelude
+import Network.Google.GamesManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.applications.listHidden@ method which the
 -- 'ApplicationsListHidden' request conforms to.
@@ -51,10 +56,15 @@ type ApplicationsListHiddenResource =
            Capture "applicationId" Text :>
              "players" :>
                "hidden" :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] HiddenPlayerList
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] HiddenPlayerList
 
 -- | Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
@@ -62,9 +72,14 @@ type ApplicationsListHiddenResource =
 -- /See:/ 'applicationsListHidden' smart constructor.
 data ApplicationsListHidden =
   ApplicationsListHidden'
-    { _alhApplicationId :: !Text
-    , _alhPageToken     :: !(Maybe Text)
-    , _alhMaxResults    :: !(Maybe (Textual Int32))
+    { _alhXgafv :: !(Maybe Xgafv)
+    , _alhUploadProtocol :: !(Maybe Text)
+    , _alhAccessToken :: !(Maybe Text)
+    , _alhUploadType :: !(Maybe Text)
+    , _alhApplicationId :: !Text
+    , _alhPageToken :: !(Maybe Text)
+    , _alhMaxResults :: !(Maybe (Textual Int32))
+    , _alhCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,21 +88,58 @@ data ApplicationsListHidden =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'alhXgafv'
+--
+-- * 'alhUploadProtocol'
+--
+-- * 'alhAccessToken'
+--
+-- * 'alhUploadType'
+--
 -- * 'alhApplicationId'
 --
 -- * 'alhPageToken'
 --
 -- * 'alhMaxResults'
+--
+-- * 'alhCallback'
 applicationsListHidden
     :: Text -- ^ 'alhApplicationId'
     -> ApplicationsListHidden
 applicationsListHidden pAlhApplicationId_ =
   ApplicationsListHidden'
-    { _alhApplicationId = pAlhApplicationId_
+    { _alhXgafv = Nothing
+    , _alhUploadProtocol = Nothing
+    , _alhAccessToken = Nothing
+    , _alhUploadType = Nothing
+    , _alhApplicationId = pAlhApplicationId_
     , _alhPageToken = Nothing
     , _alhMaxResults = Nothing
+    , _alhCallback = Nothing
     }
 
+
+-- | V1 error format.
+alhXgafv :: Lens' ApplicationsListHidden (Maybe Xgafv)
+alhXgafv = lens _alhXgafv (\ s a -> s{_alhXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+alhUploadProtocol :: Lens' ApplicationsListHidden (Maybe Text)
+alhUploadProtocol
+  = lens _alhUploadProtocol
+      (\ s a -> s{_alhUploadProtocol = a})
+
+-- | OAuth access token.
+alhAccessToken :: Lens' ApplicationsListHidden (Maybe Text)
+alhAccessToken
+  = lens _alhAccessToken
+      (\ s a -> s{_alhAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+alhUploadType :: Lens' ApplicationsListHidden (Maybe Text)
+alhUploadType
+  = lens _alhUploadType
+      (\ s a -> s{_alhUploadType = a})
 
 -- | The application ID from the Google Play developer console.
 alhApplicationId :: Lens' ApplicationsListHidden Text
@@ -102,19 +154,29 @@ alhPageToken
 
 -- | The maximum number of player resources to return in the response, used
 -- for paging. For any response, the actual number of player resources
--- returned may be less than the specified maxResults.
+-- returned may be less than the specified \`maxResults\`.
 alhMaxResults :: Lens' ApplicationsListHidden (Maybe Int32)
 alhMaxResults
   = lens _alhMaxResults
       (\ s a -> s{_alhMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+alhCallback :: Lens' ApplicationsListHidden (Maybe Text)
+alhCallback
+  = lens _alhCallback (\ s a -> s{_alhCallback = a})
+
 instance GoogleRequest ApplicationsListHidden where
         type Rs ApplicationsListHidden = HiddenPlayerList
         type Scopes ApplicationsListHidden =
              '["https://www.googleapis.com/auth/games"]
         requestClient ApplicationsListHidden'{..}
-          = go _alhApplicationId _alhPageToken _alhMaxResults
+          = go _alhApplicationId _alhXgafv _alhUploadProtocol
+              _alhAccessToken
+              _alhUploadType
+              _alhPageToken
+              _alhMaxResults
+              _alhCallback
               (Just AltJSON)
               gamesManagementService
           where go

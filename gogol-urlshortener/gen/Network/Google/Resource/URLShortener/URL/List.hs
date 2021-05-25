@@ -37,8 +37,8 @@ module Network.Google.Resource.URLShortener.URL.List
     , ulProjection
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.URLShortener.Types
+import Network.Google.Prelude
+import Network.Google.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.list@ method which the
 -- 'URLList' request conforms to.

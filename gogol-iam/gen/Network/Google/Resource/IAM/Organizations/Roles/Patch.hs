@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Role definition.
+-- Updates the definition of a custom Role.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.organizations.roles.patch@.
 module Network.Google.Resource.IAM.Organizations.Roles.Patch
@@ -43,8 +43,8 @@ module Network.Google.Resource.IAM.Organizations.Roles.Patch
     , orpCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.organizations.roles.patch@ method which the
 -- 'OrganizationsRolesPatch' request conforms to.
@@ -60,19 +60,19 @@ type OrganizationsRolesPatchResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Role :> Patch '[JSON] Role
 
--- | Updates a Role definition.
+-- | Updates the definition of a custom Role.
 --
 -- /See:/ 'organizationsRolesPatch' smart constructor.
 data OrganizationsRolesPatch =
   OrganizationsRolesPatch'
-    { _orpXgafv          :: !(Maybe Xgafv)
+    { _orpXgafv :: !(Maybe Xgafv)
     , _orpUploadProtocol :: !(Maybe Text)
-    , _orpUpdateMask     :: !(Maybe GFieldMask)
-    , _orpAccessToken    :: !(Maybe Text)
-    , _orpUploadType     :: !(Maybe Text)
-    , _orpPayload        :: !Role
-    , _orpName           :: !Text
-    , _orpCallback       :: !(Maybe Text)
+    , _orpUpdateMask :: !(Maybe GFieldMask)
+    , _orpAccessToken :: !(Maybe Text)
+    , _orpUploadType :: !(Maybe Text)
+    , _orpPayload :: !Role
+    , _orpName :: !Text
+    , _orpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,10 +146,25 @@ orpPayload :: Lens' OrganizationsRolesPatch Role
 orpPayload
   = lens _orpPayload (\ s a -> s{_orpPayload = a})
 
--- | The resource name of the role in one of the following formats:
--- \`roles\/{ROLE_NAME}\`
--- \`organizations\/{ORGANIZATION_ID}\/roles\/{ROLE_NAME}\`
--- \`projects\/{PROJECT_ID}\/roles\/{ROLE_NAME}\`
+-- | The \`name\` parameter\'s value depends on the target resource for the
+-- request, namely
+-- [\`projects\`](\/iam\/reference\/rest\/v1\/projects.roles) or
+-- [\`organizations\`](\/iam\/reference\/rest\/v1\/organizations.roles).
+-- Each resource type\'s \`name\` value format is described below: *
+-- [\`projects.roles.patch()\`](\/iam\/reference\/rest\/v1\/projects.roles\/patch):
+-- \`projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This method updates
+-- only [custom roles](\/iam\/docs\/understanding-custom-roles) that have
+-- been created at the project level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- *
+-- [\`organizations.roles.patch()\`](\/iam\/reference\/rest\/v1\/organizations.roles\/patch):
+-- \`organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This
+-- method updates only [custom
+-- roles](\/iam\/docs\/understanding-custom-roles) that have been created
+-- at the organization level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- Note: Wildcard (*) values are invalid; you must specify a complete
+-- project ID or organization ID.
 orpName :: Lens' OrganizationsRolesPatch Text
 orpName = lens _orpName (\ s a -> s{_orpName = a})
 

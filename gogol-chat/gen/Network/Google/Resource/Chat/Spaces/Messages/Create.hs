@@ -22,7 +22,7 @@
 --
 -- Creates a message.
 --
--- /See:/ <https://developers.google.com/hangouts/chat Hangouts Chat API Reference> for @chat.spaces.messages.create@.
+-- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.create@.
 module Network.Google.Resource.Chat.Spaces.Messages.Create
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Chat.Spaces.Messages.Create
     , smcThreadKey
     ) where
 
-import           Network.Google.Chat.Types
-import           Network.Google.Prelude
+import Network.Google.Chat.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @chat.spaces.messages.create@ method which the
 -- 'SpacesMessagesCreate' request conforms to.
@@ -66,14 +66,14 @@ type SpacesMessagesCreateResource =
 -- /See:/ 'spacesMessagesCreate' smart constructor.
 data SpacesMessagesCreate =
   SpacesMessagesCreate'
-    { _smcParent         :: !Text
-    , _smcXgafv          :: !(Maybe Xgafv)
+    { _smcParent :: !Text
+    , _smcXgafv :: !(Maybe Xgafv)
     , _smcUploadProtocol :: !(Maybe Text)
-    , _smcAccessToken    :: !(Maybe Text)
-    , _smcUploadType     :: !(Maybe Text)
-    , _smcPayload        :: !Message
-    , _smcCallback       :: !(Maybe Text)
-    , _smcThreadKey      :: !(Maybe Text)
+    , _smcAccessToken :: !(Maybe Text)
+    , _smcUploadType :: !(Maybe Text)
+    , _smcPayload :: !Message
+    , _smcCallback :: !(Maybe Text)
+    , _smcThreadKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

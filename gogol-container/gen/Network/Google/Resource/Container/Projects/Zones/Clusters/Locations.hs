@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the locations for a specific cluster.
+-- Sets the locations for a specific cluster. Deprecated. Use
+-- [projects.locations.clusters.update](https:\/\/cloud.google.com\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.locations.clusters\/update)
+-- instead.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.locations@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Locations
@@ -44,8 +46,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Locations
     , pCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.locations@ method which the
 -- 'ProjectsZonesClustersLocations' request conforms to.
@@ -67,20 +69,22 @@ type ProjectsZonesClustersLocationsResource =
                                  ReqBody '[JSON] SetLocationsRequest :>
                                    Post '[JSON] Operation
 
--- | Sets the locations for a specific cluster.
+-- | Sets the locations for a specific cluster. Deprecated. Use
+-- [projects.locations.clusters.update](https:\/\/cloud.google.com\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.locations.clusters\/update)
+-- instead.
 --
 -- /See:/ 'projectsZonesClustersLocations' smart constructor.
 data ProjectsZonesClustersLocations =
   ProjectsZonesClustersLocations'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pZone           :: !Text
-    , _pPayload        :: !SetLocationsRequest
-    , _pClusterId      :: !Text
-    , _pProjectId      :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pZone :: !Text
+    , _pPayload :: !SetLocationsRequest
+    , _pClusterId :: !Text
+    , _pProjectId :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,8 +151,9 @@ pUploadType
   = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pZone :: Lens' ProjectsZonesClustersLocations Text
 pZone = lens _pZone (\ s a -> s{_pZone = a})
 

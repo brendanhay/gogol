@@ -38,8 +38,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
     , aauuAccountId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.update@ method which the
 -- 'AccountsAdUnitsUpdate' request conforms to.
@@ -59,9 +59,9 @@ type AccountsAdUnitsUpdateResource =
 -- /See:/ 'accountsAdUnitsUpdate' smart constructor.
 data AccountsAdUnitsUpdate =
   AccountsAdUnitsUpdate'
-    { _aauuPayload    :: !AdUnit
+    { _aauuPayload :: !AdUnit
     , _aauuAdClientId :: !Text
-    , _aauuAccountId  :: !Text
+    , _aauuAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

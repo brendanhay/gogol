@@ -22,7 +22,7 @@
 --
 -- Gets a sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.get@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.sinks.get@.
 module Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
     , basgCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.sinks.get@ method which the
 -- 'BillingAccountsSinksGet' request conforms to.
@@ -61,12 +61,12 @@ type BillingAccountsSinksGetResource =
 -- /See:/ 'billingAccountsSinksGet' smart constructor.
 data BillingAccountsSinksGet =
   BillingAccountsSinksGet'
-    { _basgXgafv          :: !(Maybe Xgafv)
+    { _basgXgafv :: !(Maybe Xgafv)
     , _basgUploadProtocol :: !(Maybe Text)
-    , _basgAccessToken    :: !(Maybe Text)
-    , _basgUploadType     :: !(Maybe Text)
-    , _basgSinkName       :: !Text
-    , _basgCallback       :: !(Maybe Text)
+    , _basgAccessToken :: !(Maybe Text)
+    , _basgUploadType :: !(Maybe Text)
+    , _basgSinkName :: !Text
+    , _basgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Gets the description of an exclusion.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.exclusions.get@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.exclusions.get@.
 module Network.Google.Resource.Logging.BillingAccounts.Exclusions.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Exclusions.Get
     , baegCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.exclusions.get@ method which the
 -- 'BillingAccountsExclusionsGet' request conforms to.
@@ -61,12 +61,12 @@ type BillingAccountsExclusionsGetResource =
 -- /See:/ 'billingAccountsExclusionsGet' smart constructor.
 data BillingAccountsExclusionsGet =
   BillingAccountsExclusionsGet'
-    { _baegXgafv          :: !(Maybe Xgafv)
+    { _baegXgafv :: !(Maybe Xgafv)
     , _baegUploadProtocol :: !(Maybe Text)
-    , _baegAccessToken    :: !(Maybe Text)
-    , _baegUploadType     :: !(Maybe Text)
-    , _baegName           :: !Text
-    , _baegCallback       :: !(Maybe Text)
+    , _baegAccessToken :: !(Maybe Text)
+    , _baegUploadType :: !(Maybe Text)
+    , _baegName :: !Text
+    , _baegCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

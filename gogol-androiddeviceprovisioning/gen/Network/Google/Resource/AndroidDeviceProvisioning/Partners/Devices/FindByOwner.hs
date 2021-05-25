@@ -45,8 +45,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Devices.FindBy
     , pdfboCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.findByOwner@ method which the
 -- 'PartnersDevicesFindByOwner' request conforms to.
@@ -72,13 +72,13 @@ type PartnersDevicesFindByOwnerResource =
 -- /See:/ 'partnersDevicesFindByOwner' smart constructor.
 data PartnersDevicesFindByOwner =
   PartnersDevicesFindByOwner'
-    { _pdfboXgafv          :: !(Maybe Xgafv)
+    { _pdfboXgafv :: !(Maybe Xgafv)
     , _pdfboUploadProtocol :: !(Maybe Text)
-    , _pdfboAccessToken    :: !(Maybe Text)
-    , _pdfboPartnerId      :: !(Textual Int64)
-    , _pdfboUploadType     :: !(Maybe Text)
-    , _pdfboPayload        :: !FindDevicesByOwnerRequest
-    , _pdfboCallback       :: !(Maybe Text)
+    , _pdfboAccessToken :: !(Maybe Text)
+    , _pdfboPartnerId :: !(Textual Int64)
+    , _pdfboUploadType :: !(Maybe Text)
+    , _pdfboPayload :: !FindDevicesByOwnerRequest
+    , _pdfboCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

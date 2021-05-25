@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Update the version of a CryptoKey that will be used in Encrypt. Returns
--- an error if called on an asymmetric key.
+-- an error if called on a key whose purpose is not ENCRYPT_DECRYPT.
 --
 -- /See:/ <https://cloud.google.com/kms/ Cloud Key Management Service (KMS) API Reference> for @cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion@.
 module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.U
     , plkrckupvCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion' request conforms to.
@@ -62,18 +62,18 @@ type ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource
                        :> Post '[JSON] CryptoKey
 
 -- | Update the version of a CryptoKey that will be used in Encrypt. Returns
--- an error if called on an asymmetric key.
+-- an error if called on a key whose purpose is not ENCRYPT_DECRYPT.
 --
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion =
   ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion'
-    { _plkrckupvXgafv          :: !(Maybe Xgafv)
+    { _plkrckupvXgafv :: !(Maybe Xgafv)
     , _plkrckupvUploadProtocol :: !(Maybe Text)
-    , _plkrckupvAccessToken    :: !(Maybe Text)
-    , _plkrckupvUploadType     :: !(Maybe Text)
-    , _plkrckupvPayload        :: !UpdateCryptoKeyPrimaryVersionRequest
-    , _plkrckupvName           :: !Text
-    , _plkrckupvCallback       :: !(Maybe Text)
+    , _plkrckupvAccessToken :: !(Maybe Text)
+    , _plkrckupvUploadType :: !(Maybe Text)
+    , _plkrckupvPayload :: !UpdateCryptoKeyPrimaryVersionRequest
+    , _plkrckupvName :: !Text
+    , _plkrckupvCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,7 +141,7 @@ plkrckupvPayload
   = lens _plkrckupvPayload
       (\ s a -> s{_plkrckupvPayload = a})
 
--- | The resource name of the CryptoKey to update.
+-- | Required. The resource name of the CryptoKey to update.
 plkrckupvName :: Lens' ProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion Text
 plkrckupvName
   = lens _plkrckupvName

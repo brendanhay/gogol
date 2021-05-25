@@ -57,8 +57,8 @@ module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
     , upfgipCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.guardianInvitations.patch@ method which the
 -- 'UserProFilesGuardianInvitationsPatch' request conforms to.
@@ -96,15 +96,15 @@ type UserProFilesGuardianInvitationsPatchResource =
 -- /See:/ 'userProFilesGuardianInvitationsPatch' smart constructor.
 data UserProFilesGuardianInvitationsPatch =
   UserProFilesGuardianInvitationsPatch'
-    { _upfgipStudentId      :: !Text
-    , _upfgipXgafv          :: !(Maybe Xgafv)
+    { _upfgipStudentId :: !Text
+    , _upfgipXgafv :: !(Maybe Xgafv)
     , _upfgipUploadProtocol :: !(Maybe Text)
-    , _upfgipUpdateMask     :: !(Maybe GFieldMask)
-    , _upfgipAccessToken    :: !(Maybe Text)
-    , _upfgipUploadType     :: !(Maybe Text)
-    , _upfgipPayload        :: !GuardianInvitation
-    , _upfgipInvitationId   :: !Text
-    , _upfgipCallback       :: !(Maybe Text)
+    , _upfgipUpdateMask :: !(Maybe GFieldMask)
+    , _upfgipAccessToken :: !(Maybe Text)
+    , _upfgipUploadType :: !(Maybe Text)
+    , _upfgipPayload :: !GuardianInvitation
+    , _upfgipInvitationId :: !Text
+    , _upfgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -167,7 +167,7 @@ upfgipUploadProtocol
       (\ s a -> s{_upfgipUploadProtocol = a})
 
 -- | Mask that identifies which fields on the course to update. This field is
--- required to do an update. The update will fail if invalid fields are
+-- required to do an update. The update fails if invalid fields are
 -- specified. The following fields are valid: * \`state\` When set in a
 -- query parameter, this field should be specified as \`updateMask=,,...\`
 upfgipUpdateMask :: Lens' UserProFilesGuardianInvitationsPatch (Maybe GFieldMask)

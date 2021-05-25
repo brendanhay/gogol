@@ -35,15 +35,20 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Update
     , InstallsUpdate
 
     -- * Request Lenses
+    , iuXgafv
+    , iuUploadProtocol
     , iuEnterpriseId
+    , iuAccessToken
+    , iuUploadType
     , iuPayload
     , iuUserId
     , iuInstallId
     , iuDeviceId
+    , iuCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.update@ method which the
 -- 'InstallsUpdate' request conforms to.
@@ -58,8 +63,14 @@ type InstallsUpdateResource =
                    Capture "deviceId" Text :>
                      "installs" :>
                        Capture "installId" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Install :> Put '[JSON] Install
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Install :>
+                                       Put '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app
 -- is already installed, then it is updated to the latest version if
@@ -68,11 +79,16 @@ type InstallsUpdateResource =
 -- /See:/ 'installsUpdate' smart constructor.
 data InstallsUpdate =
   InstallsUpdate'
-    { _iuEnterpriseId :: !Text
-    , _iuPayload      :: !Install
-    , _iuUserId       :: !Text
-    , _iuInstallId    :: !Text
-    , _iuDeviceId     :: !Text
+    { _iuXgafv :: !(Maybe Xgafv)
+    , _iuUploadProtocol :: !(Maybe Text)
+    , _iuEnterpriseId :: !Text
+    , _iuAccessToken :: !(Maybe Text)
+    , _iuUploadType :: !(Maybe Text)
+    , _iuPayload :: !Install
+    , _iuUserId :: !Text
+    , _iuInstallId :: !Text
+    , _iuDeviceId :: !Text
+    , _iuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -81,7 +97,15 @@ data InstallsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'iuXgafv'
+--
+-- * 'iuUploadProtocol'
+--
 -- * 'iuEnterpriseId'
+--
+-- * 'iuAccessToken'
+--
+-- * 'iuUploadType'
 --
 -- * 'iuPayload'
 --
@@ -90,6 +114,8 @@ data InstallsUpdate =
 -- * 'iuInstallId'
 --
 -- * 'iuDeviceId'
+--
+-- * 'iuCallback'
 installsUpdate
     :: Text -- ^ 'iuEnterpriseId'
     -> Install -- ^ 'iuPayload'
@@ -99,19 +125,45 @@ installsUpdate
     -> InstallsUpdate
 installsUpdate pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
   InstallsUpdate'
-    { _iuEnterpriseId = pIuEnterpriseId_
+    { _iuXgafv = Nothing
+    , _iuUploadProtocol = Nothing
+    , _iuEnterpriseId = pIuEnterpriseId_
+    , _iuAccessToken = Nothing
+    , _iuUploadType = Nothing
     , _iuPayload = pIuPayload_
     , _iuUserId = pIuUserId_
     , _iuInstallId = pIuInstallId_
     , _iuDeviceId = pIuDeviceId_
+    , _iuCallback = Nothing
     }
 
+
+-- | V1 error format.
+iuXgafv :: Lens' InstallsUpdate (Maybe Xgafv)
+iuXgafv = lens _iuXgafv (\ s a -> s{_iuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+iuUploadProtocol :: Lens' InstallsUpdate (Maybe Text)
+iuUploadProtocol
+  = lens _iuUploadProtocol
+      (\ s a -> s{_iuUploadProtocol = a})
 
 -- | The ID of the enterprise.
 iuEnterpriseId :: Lens' InstallsUpdate Text
 iuEnterpriseId
   = lens _iuEnterpriseId
       (\ s a -> s{_iuEnterpriseId = a})
+
+-- | OAuth access token.
+iuAccessToken :: Lens' InstallsUpdate (Maybe Text)
+iuAccessToken
+  = lens _iuAccessToken
+      (\ s a -> s{_iuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+iuUploadType :: Lens' InstallsUpdate (Maybe Text)
+iuUploadType
+  = lens _iuUploadType (\ s a -> s{_iuUploadType = a})
 
 -- | Multipart request metadata.
 iuPayload :: Lens' InstallsUpdate Install
@@ -133,6 +185,11 @@ iuDeviceId :: Lens' InstallsUpdate Text
 iuDeviceId
   = lens _iuDeviceId (\ s a -> s{_iuDeviceId = a})
 
+-- | JSONP
+iuCallback :: Lens' InstallsUpdate (Maybe Text)
+iuCallback
+  = lens _iuCallback (\ s a -> s{_iuCallback = a})
+
 instance GoogleRequest InstallsUpdate where
         type Rs InstallsUpdate = Install
         type Scopes InstallsUpdate =
@@ -140,6 +197,11 @@ instance GoogleRequest InstallsUpdate where
         requestClient InstallsUpdate'{..}
           = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId
+              _iuXgafv
+              _iuUploadProtocol
+              _iuAccessToken
+              _iuUploadType
+              _iuCallback
               (Just AltJSON)
               _iuPayload
               androidEnterpriseService

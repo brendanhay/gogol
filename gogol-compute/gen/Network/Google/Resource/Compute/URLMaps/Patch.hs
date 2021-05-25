@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.URLMaps.Patch
     , umpPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.patch@ method which the
 -- 'URLMapsPatch' request conforms to.
@@ -66,9 +66,9 @@ type URLMapsPatchResource =
 data URLMapsPatch =
   URLMapsPatch'
     { _umpRequestId :: !(Maybe Text)
-    , _umpURLMap    :: !Text
-    , _umpProject   :: !Text
-    , _umpPayload   :: !URLMap
+    , _umpURLMap :: !Text
+    , _umpProject :: !Text
+    , _umpPayload :: !URLMap
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

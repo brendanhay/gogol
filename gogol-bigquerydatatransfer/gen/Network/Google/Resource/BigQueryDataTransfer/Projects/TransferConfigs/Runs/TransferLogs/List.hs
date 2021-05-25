@@ -22,7 +22,7 @@
 --
 -- Returns user facing log messages for the data transfer run.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.TransferLogs.List
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Run
     , ptcrtllCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list@ method which the
 -- 'ProjectsTransferConfigsRunsTransferLogsList' request conforms to.
@@ -56,7 +56,9 @@ type ProjectsTransferConfigsRunsTransferLogsListResource
          "transferLogs" :>
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParams "messageTypes" Text :>
+               QueryParams "messageTypes"
+                 ProjectsTransferConfigsRunsTransferLogsListMessageTypes
+                 :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
@@ -70,15 +72,15 @@ type ProjectsTransferConfigsRunsTransferLogsListResource
 -- /See:/ 'projectsTransferConfigsRunsTransferLogsList' smart constructor.
 data ProjectsTransferConfigsRunsTransferLogsList =
   ProjectsTransferConfigsRunsTransferLogsList'
-    { _ptcrtllParent         :: !Text
-    , _ptcrtllXgafv          :: !(Maybe Xgafv)
+    { _ptcrtllParent :: !Text
+    , _ptcrtllXgafv :: !(Maybe Xgafv)
     , _ptcrtllUploadProtocol :: !(Maybe Text)
-    , _ptcrtllMessageTypes   :: !(Maybe [Text])
-    , _ptcrtllAccessToken    :: !(Maybe Text)
-    , _ptcrtllUploadType     :: !(Maybe Text)
-    , _ptcrtllPageToken      :: !(Maybe Text)
-    , _ptcrtllPageSize       :: !(Maybe (Textual Int32))
-    , _ptcrtllCallback       :: !(Maybe Text)
+    , _ptcrtllMessageTypes :: !(Maybe [ProjectsTransferConfigsRunsTransferLogsListMessageTypes])
+    , _ptcrtllAccessToken :: !(Maybe Text)
+    , _ptcrtllUploadType :: !(Maybe Text)
+    , _ptcrtllPageToken :: !(Maybe Text)
+    , _ptcrtllPageSize :: !(Maybe (Textual Int32))
+    , _ptcrtllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -121,8 +123,10 @@ projectsTransferConfigsRunsTransferLogsList pPtcrtllParent_ =
     }
 
 
--- | Transfer run name in the form:
--- \`projects\/{project_id}\/transferConfigs\/{config_Id}\/runs\/{run_id}\`.
+-- | Required. Transfer run name in the form:
+-- \`projects\/{project_id}\/transferConfigs\/{config_id}\/runs\/{run_id}\`
+-- or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\/runs\/{run_id}\`
 ptcrtllParent :: Lens' ProjectsTransferConfigsRunsTransferLogsList Text
 ptcrtllParent
   = lens _ptcrtllParent
@@ -141,7 +145,7 @@ ptcrtllUploadProtocol
 
 -- | Message types to return. If not populated - INFO, WARNING and ERROR
 -- messages are returned.
-ptcrtllMessageTypes :: Lens' ProjectsTransferConfigsRunsTransferLogsList [Text]
+ptcrtllMessageTypes :: Lens' ProjectsTransferConfigsRunsTransferLogsList [ProjectsTransferConfigsRunsTransferLogsListMessageTypes]
 ptcrtllMessageTypes
   = lens _ptcrtllMessageTypes
       (\ s a -> s{_ptcrtllMessageTypes = a})

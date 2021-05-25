@@ -17,8 +17,8 @@
 --
 module Network.Google.Language.Types.Product where
 
-import           Network.Google.Language.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Language.Types.Sum
+import Network.Google.Prelude
 
 -- | The syntax analysis request message.
 --
@@ -26,7 +26,7 @@ import           Network.Google.Prelude
 data AnalyzeSyntaxRequest =
   AnalyzeSyntaxRequest'
     { _asrEncodingType :: !(Maybe AnalyzeSyntaxRequestEncodingType)
-    , _asrDocument     :: !(Maybe Document)
+    , _asrDocument :: !(Maybe Document)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -50,7 +50,7 @@ asrEncodingType
   = lens _asrEncodingType
       (\ s a -> s{_asrEncodingType = a})
 
--- | Input document.
+-- | Required. Input document.
 asrDocument :: Lens' AnalyzeSyntaxRequest (Maybe Document)
 asrDocument
   = lens _asrDocument (\ s a -> s{_asrDocument = a})
@@ -77,7 +77,7 @@ instance ToJSON AnalyzeSyntaxRequest where
 data DependencyEdge =
   DependencyEdge'
     { _deHeadTokenIndex :: !(Maybe (Textual Int32))
-    , _deLabel          :: !(Maybe DependencyEdgeLabel)
+    , _deLabel :: !(Maybe DependencyEdgeLabel)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,7 +144,7 @@ classifyTextRequest
 classifyTextRequest = ClassifyTextRequest' {_ctrDocument = Nothing}
 
 
--- | Input document.
+-- | Required. Input document.
 ctrDocument :: Lens' ClassifyTextRequest (Maybe Document)
 ctrDocument
   = lens _ctrDocument (\ s a -> s{_ctrDocument = a})
@@ -161,45 +161,17 @@ instance ToJSON ClassifyTextRequest where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -261,7 +233,7 @@ instance ToJSON Status where
 -- /See:/ 'sentiment' smart constructor.
 data Sentiment =
   Sentiment'
-    { _sScore     :: !(Maybe (Textual Double))
+    { _sScore :: !(Maybe (Textual Double))
     , _sMagnitude :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -314,9 +286,9 @@ instance ToJSON Sentiment where
 data Token =
   Token'
     { _tDependencyEdge :: !(Maybe DependencyEdge)
-    , _tText           :: !(Maybe TextSpan)
-    , _tLemma          :: !(Maybe Text)
-    , _tPartOfSpeech   :: !(Maybe PartOfSpeech)
+    , _tText :: !(Maybe TextSpan)
+    , _tLemma :: !(Maybe Text)
+    , _tPartOfSpeech :: !(Maybe PartOfSpeech)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -422,7 +394,7 @@ instance ToJSON StatusDetailsItem where
 data ClassificationCategory =
   ClassificationCategory'
     { _ccConfidence :: !(Maybe (Textual Double))
-    , _ccName       :: !(Maybe Text)
+    , _ccName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -448,7 +420,7 @@ ccConfidence
       . mapping _Coerce
 
 -- | The name of the category representing the document, from the [predefined
--- taxonomy](\/natural-language\/docs\/categories).
+-- taxonomy](https:\/\/cloud.google.com\/natural-language\/docs\/categories).
 ccName :: Lens' ClassificationCategory (Maybe Text)
 ccName = lens _ccName (\ s a -> s{_ccName = a})
 
@@ -473,8 +445,8 @@ instance ToJSON ClassificationCategory where
 data AnnotateTextRequest =
   AnnotateTextRequest'
     { _atrEncodingType :: !(Maybe AnnotateTextRequestEncodingType)
-    , _atrFeatures     :: !(Maybe Features)
-    , _atrDocument     :: !(Maybe Document)
+    , _atrFeatures :: !(Maybe Features)
+    , _atrDocument :: !(Maybe Document)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -501,12 +473,12 @@ atrEncodingType
   = lens _atrEncodingType
       (\ s a -> s{_atrEncodingType = a})
 
--- | The enabled features.
+-- | Required. The enabled features.
 atrFeatures :: Lens' AnnotateTextRequest (Maybe Features)
 atrFeatures
   = lens _atrFeatures (\ s a -> s{_atrFeatures = a})
 
--- | Input document.
+-- | Required. Input document.
 atrDocument :: Lens' AnnotateTextRequest (Maybe Document)
 atrDocument
   = lens _atrDocument (\ s a -> s{_atrDocument = a})
@@ -534,8 +506,8 @@ instance ToJSON AnnotateTextRequest where
 data EntityMention =
   EntityMention'
     { _emSentiment :: !(Maybe Sentiment)
-    , _emText      :: !(Maybe TextSpan)
-    , _emType      :: !(Maybe EntityMentionType)
+    , _emText :: !(Maybe TextSpan)
+    , _emType :: !(Maybe EntityMentionType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -592,7 +564,7 @@ instance ToJSON EntityMention where
 data TextSpan =
   TextSpan'
     { _tsBeginOffSet :: !(Maybe (Textual Int32))
-    , _tsContent     :: !(Maybe Text)
+    , _tsContent :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -642,7 +614,7 @@ instance ToJSON TextSpan where
 data AnalyzeEntitySentimentRequest =
   AnalyzeEntitySentimentRequest'
     { _aesrEncodingType :: !(Maybe AnalyzeEntitySentimentRequestEncodingType)
-    , _aesrDocument     :: !(Maybe Document)
+    , _aesrDocument :: !(Maybe Document)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -667,7 +639,7 @@ aesrEncodingType
   = lens _aesrEncodingType
       (\ s a -> s{_aesrEncodingType = a})
 
--- | Input document.
+-- | Required. Input document.
 aesrDocument :: Lens' AnalyzeEntitySentimentRequest (Maybe Document)
 aesrDocument
   = lens _aesrDocument (\ s a -> s{_aesrDocument = a})
@@ -691,12 +663,12 @@ instance ToJSON AnalyzeEntitySentimentRequest where
 -- /See:/ 'annotateTextResponse' smart constructor.
 data AnnotateTextResponse =
   AnnotateTextResponse'
-    { _atrEntities          :: !(Maybe [Entity])
-    , _atrTokens            :: !(Maybe [Token])
+    { _atrEntities :: !(Maybe [Entity])
+    , _atrTokens :: !(Maybe [Token])
     , _atrDocumentSentiment :: !(Maybe Sentiment)
-    , _atrCategories        :: !(Maybe [ClassificationCategory])
-    , _atrSentences         :: !(Maybe [Sentence])
-    , _atrLanguage          :: !(Maybe Text)
+    , _atrCategories :: !(Maybe [ClassificationCategory])
+    , _atrSentences :: !(Maybe [Sentence])
+    , _atrLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -808,11 +780,11 @@ instance ToJSON AnnotateTextResponse where
 -- /See:/ 'features' smart constructor.
 data Features =
   Features'
-    { _fExtractSyntax            :: !(Maybe Bool)
+    { _fExtractSyntax :: !(Maybe Bool)
     , _fExtractDocumentSentiment :: !(Maybe Bool)
-    , _fClassifyText             :: !(Maybe Bool)
-    , _fExtractEntitySentiment   :: !(Maybe Bool)
-    , _fExtractEntities          :: !(Maybe Bool)
+    , _fClassifyText :: !(Maybe Bool)
+    , _fExtractEntitySentiment :: !(Maybe Bool)
+    , _fExtractEntities :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -901,10 +873,10 @@ instance ToJSON Features where
 -- /See:/ 'document' smart constructor.
 data Document =
   Document'
-    { _dContent       :: !(Maybe Text)
-    , _dLanguage      :: !(Maybe Text)
+    { _dContent :: !(Maybe Text)
+    , _dLanguage :: !(Maybe Text)
     , _dGcsContentURI :: !(Maybe Text)
-    , _dType          :: !(Maybe DocumentType)
+    , _dType :: !(Maybe DocumentType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -938,11 +910,12 @@ dContent = lens _dContent (\ s a -> s{_dContent = a})
 
 -- | The language of the document (if not specified, the language is
 -- automatically detected). Both ISO and BCP-47 language codes are
--- accepted.
--- [Language Support](\/natural-language\/docs\/languages) lists currently
--- supported languages for each API method. If the language (either
--- specified by the caller or automatically detected) is not supported by
--- the called API method, an \`INVALID_ARGUMENT\` error is returned.
+-- accepted. [Language
+-- Support](https:\/\/cloud.google.com\/natural-language\/docs\/languages)
+-- lists currently supported languages for each API method. If the language
+-- (either specified by the caller or automatically detected) is not
+-- supported by the called API method, an \`INVALID_ARGUMENT\` error is
+-- returned.
 dLanguage :: Lens' Document (Maybe Text)
 dLanguage
   = lens _dLanguage (\ s a -> s{_dLanguage = a})
@@ -985,7 +958,7 @@ instance ToJSON Document where
 data AnalyzeSentimentRequest =
   AnalyzeSentimentRequest'
     { _aEncodingType :: !(Maybe AnalyzeSentimentRequestEncodingType)
-    , _aDocument     :: !(Maybe Document)
+    , _aDocument :: !(Maybe Document)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1009,7 +982,7 @@ aEncodingType
   = lens _aEncodingType
       (\ s a -> s{_aEncodingType = a})
 
--- | Input document.
+-- | Required. Input document.
 aDocument :: Lens' AnalyzeSentimentRequest (Maybe Document)
 aDocument
   = lens _aDocument (\ s a -> s{_aDocument = a})
@@ -1087,8 +1060,8 @@ instance ToJSON AnalyzeEntitiesResponse where
 data AnalyzeSentimentResponse =
   AnalyzeSentimentResponse'
     { _asrDocumentSentiment :: !(Maybe Sentiment)
-    , _asrSentences         :: !(Maybe [Sentence])
-    , _asrLanguage          :: !(Maybe Text)
+    , _asrSentences :: !(Maybe [Sentence])
+    , _asrLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1156,7 +1129,7 @@ instance ToJSON AnalyzeSentimentResponse where
 data AnalyzeEntitiesRequest =
   AnalyzeEntitiesRequest'
     { _aerEncodingType :: !(Maybe AnalyzeEntitiesRequestEncodingType)
-    , _aerDocument     :: !(Maybe Document)
+    , _aerDocument :: !(Maybe Document)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1180,7 +1153,7 @@ aerEncodingType
   = lens _aerEncodingType
       (\ s a -> s{_aerEncodingType = a})
 
--- | Input document.
+-- | Required. Input document.
 aerDocument :: Lens' AnalyzeEntitiesRequest (Maybe Document)
 aerDocument
   = lens _aerDocument (\ s a -> s{_aerDocument = a})
@@ -1207,11 +1180,11 @@ instance ToJSON AnalyzeEntitiesRequest where
 data Entity =
   Entity'
     { _eSentiment :: !(Maybe Sentiment)
-    , _eName      :: !(Maybe Text)
-    , _eSalience  :: !(Maybe (Textual Double))
-    , _eMetadata  :: !(Maybe EntityMetadata)
-    , _eType      :: !(Maybe EntityType)
-    , _eMentions  :: !(Maybe [EntityMention])
+    , _eName :: !(Maybe Text)
+    , _eSalience :: !(Maybe (Textual Double))
+    , _eMetadata :: !(Maybe EntityMetadata)
+    , _eType :: !(Maybe EntityType)
+    , _eMentions :: !(Maybe [EntityMention])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1368,9 +1341,9 @@ instance ToJSON AnalyzeEntitySentimentResponse where
 -- /See:/ 'analyzeSyntaxResponse' smart constructor.
 data AnalyzeSyntaxResponse =
   AnalyzeSyntaxResponse'
-    { _aTokens    :: !(Maybe [Token])
+    { _aTokens :: !(Maybe [Token])
     , _aSentences :: !(Maybe [Sentence])
-    , _aLanguage  :: !(Maybe Text)
+    , _aLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1514,18 +1487,18 @@ instance ToJSON ClassifyTextResponse where
 -- /See:/ 'partOfSpeech' smart constructor.
 data PartOfSpeech =
   PartOfSpeech'
-    { _posProper      :: !(Maybe PartOfSpeechProper)
-    , _posTag         :: !(Maybe PartOfSpeechTag)
-    , _posPerson      :: !(Maybe PartOfSpeechPerson)
-    , _posAspect      :: !(Maybe PartOfSpeechAspect)
-    , _posCase        :: !(Maybe PartOfSpeechCase)
-    , _posGender      :: !(Maybe PartOfSpeechGender)
+    { _posProper :: !(Maybe PartOfSpeechProper)
+    , _posTag :: !(Maybe PartOfSpeechTag)
+    , _posPerson :: !(Maybe PartOfSpeechPerson)
+    , _posAspect :: !(Maybe PartOfSpeechAspect)
+    , _posCase :: !(Maybe PartOfSpeechCase)
+    , _posGender :: !(Maybe PartOfSpeechGender)
     , _posReciprocity :: !(Maybe PartOfSpeechReciprocity)
-    , _posNumber      :: !(Maybe PartOfSpeechNumber)
-    , _posVoice       :: !(Maybe PartOfSpeechVoice)
-    , _posForm        :: !(Maybe PartOfSpeechForm)
-    , _posTense       :: !(Maybe PartOfSpeechTense)
-    , _posMood        :: !(Maybe PartOfSpeechMood)
+    , _posNumber :: !(Maybe PartOfSpeechNumber)
+    , _posVoice :: !(Maybe PartOfSpeechVoice)
+    , _posForm :: !(Maybe PartOfSpeechForm)
+    , _posTense :: !(Maybe PartOfSpeechTense)
+    , _posMood :: !(Maybe PartOfSpeechMood)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1669,7 +1642,7 @@ instance ToJSON PartOfSpeech where
 data Sentence =
   Sentence'
     { _sSentiment :: !(Maybe Sentiment)
-    , _sText      :: !(Maybe TextSpan)
+    , _sText :: !(Maybe TextSpan)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

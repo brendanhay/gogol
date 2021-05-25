@@ -22,7 +22,7 @@
 --
 -- Lists available video formats.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.videoFormats.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.videoFormats.list@.
 module Network.Google.Resource.DFAReporting.VideoFormats.List
     (
     -- * REST Resource
@@ -33,29 +33,44 @@ module Network.Google.Resource.DFAReporting.VideoFormats.List
     , VideoFormatsList
 
     -- * Request Lenses
+    , vflXgafv
+    , vflUploadProtocol
+    , vflAccessToken
+    , vflUploadType
     , vflProFileId
+    , vflCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.videoFormats.list@ method which the
 -- 'VideoFormatsList' request conforms to.
 type VideoFormatsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "videoFormats" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] VideoFormatsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] VideoFormatsListResponse
 
 -- | Lists available video formats.
 --
 -- /See:/ 'videoFormatsList' smart constructor.
-newtype VideoFormatsList =
+data VideoFormatsList =
   VideoFormatsList'
-    { _vflProFileId :: Textual Int64
+    { _vflXgafv :: !(Maybe Xgafv)
+    , _vflUploadProtocol :: !(Maybe Text)
+    , _vflAccessToken :: !(Maybe Text)
+    , _vflUploadType :: !(Maybe Text)
+    , _vflProFileId :: !(Textual Int64)
+    , _vflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,13 +79,52 @@ newtype VideoFormatsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vflXgafv'
+--
+-- * 'vflUploadProtocol'
+--
+-- * 'vflAccessToken'
+--
+-- * 'vflUploadType'
+--
 -- * 'vflProFileId'
+--
+-- * 'vflCallback'
 videoFormatsList
     :: Int64 -- ^ 'vflProFileId'
     -> VideoFormatsList
 videoFormatsList pVflProFileId_ =
-  VideoFormatsList' {_vflProFileId = _Coerce # pVflProFileId_}
+  VideoFormatsList'
+    { _vflXgafv = Nothing
+    , _vflUploadProtocol = Nothing
+    , _vflAccessToken = Nothing
+    , _vflUploadType = Nothing
+    , _vflProFileId = _Coerce # pVflProFileId_
+    , _vflCallback = Nothing
+    }
 
+
+-- | V1 error format.
+vflXgafv :: Lens' VideoFormatsList (Maybe Xgafv)
+vflXgafv = lens _vflXgafv (\ s a -> s{_vflXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vflUploadProtocol :: Lens' VideoFormatsList (Maybe Text)
+vflUploadProtocol
+  = lens _vflUploadProtocol
+      (\ s a -> s{_vflUploadProtocol = a})
+
+-- | OAuth access token.
+vflAccessToken :: Lens' VideoFormatsList (Maybe Text)
+vflAccessToken
+  = lens _vflAccessToken
+      (\ s a -> s{_vflAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vflUploadType :: Lens' VideoFormatsList (Maybe Text)
+vflUploadType
+  = lens _vflUploadType
+      (\ s a -> s{_vflUploadType = a})
 
 -- | User profile ID associated with this request.
 vflProFileId :: Lens' VideoFormatsList Int64
@@ -78,12 +132,22 @@ vflProFileId
   = lens _vflProFileId (\ s a -> s{_vflProFileId = a})
       . _Coerce
 
+-- | JSONP
+vflCallback :: Lens' VideoFormatsList (Maybe Text)
+vflCallback
+  = lens _vflCallback (\ s a -> s{_vflCallback = a})
+
 instance GoogleRequest VideoFormatsList where
         type Rs VideoFormatsList = VideoFormatsListResponse
         type Scopes VideoFormatsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient VideoFormatsList'{..}
-          = go _vflProFileId (Just AltJSON) dFAReportingService
+          = go _vflProFileId _vflXgafv _vflUploadProtocol
+              _vflAccessToken
+              _vflUploadType
+              _vflCallback
+              (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient
                       (Proxy :: Proxy VideoFormatsListResource)

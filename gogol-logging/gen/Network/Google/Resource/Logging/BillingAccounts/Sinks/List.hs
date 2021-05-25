@@ -22,7 +22,7 @@
 --
 -- Lists sinks.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.sinks.list@.
 module Network.Google.Resource.Logging.BillingAccounts.Sinks.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.List
     , baslCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.sinks.list@ method which the
 -- 'BillingAccountsSinksList' request conforms to.
@@ -67,14 +67,14 @@ type BillingAccountsSinksListResource =
 -- /See:/ 'billingAccountsSinksList' smart constructor.
 data BillingAccountsSinksList =
   BillingAccountsSinksList'
-    { _baslParent         :: !Text
-    , _baslXgafv          :: !(Maybe Xgafv)
+    { _baslParent :: !Text
+    , _baslXgafv :: !(Maybe Xgafv)
     , _baslUploadProtocol :: !(Maybe Text)
-    , _baslAccessToken    :: !(Maybe Text)
-    , _baslUploadType     :: !(Maybe Text)
-    , _baslPageToken      :: !(Maybe Text)
-    , _baslPageSize       :: !(Maybe (Textual Int32))
-    , _baslCallback       :: !(Maybe Text)
+    , _baslAccessToken :: !(Maybe Text)
+    , _baslUploadType :: !(Maybe Text)
+    , _baslPageToken :: !(Maybe Text)
+    , _baslPageSize :: !(Maybe (Textual Int32))
+    , _baslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

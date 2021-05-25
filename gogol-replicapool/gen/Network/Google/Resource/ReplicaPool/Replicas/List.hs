@@ -40,8 +40,8 @@ module Network.Google.Resource.ReplicaPool.Replicas.List
     , rlMaxResults
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.replicas.list@ method which the
 -- 'ReplicasList' request conforms to.
@@ -65,11 +65,11 @@ type ReplicasListResource =
 -- /See:/ 'replicasList' smart constructor.
 data ReplicasList =
   ReplicasList'
-    { _rlPoolName    :: !Text
-    , _rlZone        :: !Text
+    { _rlPoolName :: !Text
+    , _rlZone :: !Text
     , _rlProjectName :: !Text
-    , _rlPageToken   :: !(Maybe Text)
-    , _rlMaxResults  :: !(Textual Int32)
+    , _rlPageToken :: !(Maybe Text)
+    , _rlMaxResults :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

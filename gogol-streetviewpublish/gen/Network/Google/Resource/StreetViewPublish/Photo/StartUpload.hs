@@ -23,13 +23,13 @@
 -- Creates an upload session to start uploading photo bytes. The method
 -- uses the upload URL of the returned UploadRef to upload the bytes for
 -- the Photo. In addition to the photo requirements shown in
--- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
+-- https:\/\/support.google.com\/maps\/answer\/7012050?ref_topic=6275604,
 -- the photo must meet the following requirements: * Photo Sphere XMP
--- metadata must be included in the photo medadata. See
+-- metadata must be included in the photo metadata. See
 -- https:\/\/developers.google.com\/streetview\/spherical-metadata for the
 -- required fields. * The pixel size of the photo must meet the size
 -- requirements listed in
--- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
+-- https:\/\/support.google.com\/maps\/answer\/7012050?ref_topic=6275604,
 -- and the photo must be a full 360 horizontally. After the upload
 -- completes, the method uses UploadRef with CreatePhoto to create the
 -- Photo object entry.
@@ -53,8 +53,8 @@ module Network.Google.Resource.StreetViewPublish.Photo.StartUpload
     , psuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photo.startUpload@ method which the
 -- 'PhotoStartUpload' request conforms to.
@@ -72,13 +72,13 @@ type PhotoStartUploadResource =
 -- | Creates an upload session to start uploading photo bytes. The method
 -- uses the upload URL of the returned UploadRef to upload the bytes for
 -- the Photo. In addition to the photo requirements shown in
--- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
+-- https:\/\/support.google.com\/maps\/answer\/7012050?ref_topic=6275604,
 -- the photo must meet the following requirements: * Photo Sphere XMP
--- metadata must be included in the photo medadata. See
+-- metadata must be included in the photo metadata. See
 -- https:\/\/developers.google.com\/streetview\/spherical-metadata for the
 -- required fields. * The pixel size of the photo must meet the size
 -- requirements listed in
--- https:\/\/support.google.com\/maps\/answer\/7012050?hl=en&ref_topic=6275604,
+-- https:\/\/support.google.com\/maps\/answer\/7012050?ref_topic=6275604,
 -- and the photo must be a full 360 horizontally. After the upload
 -- completes, the method uses UploadRef with CreatePhoto to create the
 -- Photo object entry.
@@ -86,12 +86,12 @@ type PhotoStartUploadResource =
 -- /See:/ 'photoStartUpload' smart constructor.
 data PhotoStartUpload =
   PhotoStartUpload'
-    { _psuXgafv          :: !(Maybe Xgafv)
+    { _psuXgafv :: !(Maybe Xgafv)
     , _psuUploadProtocol :: !(Maybe Text)
-    , _psuAccessToken    :: !(Maybe Text)
-    , _psuUploadType     :: !(Maybe Text)
-    , _psuPayload        :: !Empty
-    , _psuCallback       :: !(Maybe Text)
+    , _psuAccessToken :: !(Maybe Text)
+    , _psuUploadType :: !(Maybe Text)
+    , _psuPayload :: !Empty
+    , _psuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

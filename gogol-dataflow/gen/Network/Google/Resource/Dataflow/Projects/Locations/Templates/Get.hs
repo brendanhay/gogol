@@ -44,8 +44,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Templates.Get
     , pltgCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.templates.get@ method which the
 -- 'ProjectsLocationsTemplatesGet' request conforms to.
@@ -61,7 +61,8 @@ type ProjectsLocationsTemplatesGetResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "gcsPath" Text :>
-                           QueryParam "view" Text :>
+                           QueryParam "view" ProjectsLocationsTemplatesGetView
+                             :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] GetTemplateResponse
@@ -71,15 +72,15 @@ type ProjectsLocationsTemplatesGetResource =
 -- /See:/ 'projectsLocationsTemplatesGet' smart constructor.
 data ProjectsLocationsTemplatesGet =
   ProjectsLocationsTemplatesGet'
-    { _pltgXgafv          :: !(Maybe Xgafv)
+    { _pltgXgafv :: !(Maybe Xgafv)
     , _pltgUploadProtocol :: !(Maybe Text)
-    , _pltgLocation       :: !Text
-    , _pltgAccessToken    :: !(Maybe Text)
-    , _pltgUploadType     :: !(Maybe Text)
-    , _pltgGcsPath        :: !(Maybe Text)
-    , _pltgView           :: !(Maybe Text)
-    , _pltgProjectId      :: !Text
-    , _pltgCallback       :: !(Maybe Text)
+    , _pltgLocation :: !Text
+    , _pltgAccessToken :: !(Maybe Text)
+    , _pltgUploadType :: !(Maybe Text)
+    , _pltgGcsPath :: !(Maybe Text)
+    , _pltgView :: !(Maybe ProjectsLocationsTemplatesGetView)
+    , _pltgProjectId :: !Text
+    , _pltgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,7 +161,7 @@ pltgGcsPath
   = lens _pltgGcsPath (\ s a -> s{_pltgGcsPath = a})
 
 -- | The view to retrieve. Defaults to METADATA_ONLY.
-pltgView :: Lens' ProjectsLocationsTemplatesGet (Maybe Text)
+pltgView :: Lens' ProjectsLocationsTemplatesGet (Maybe ProjectsLocationsTemplatesGetView)
 pltgView = lens _pltgView (\ s a -> s{_pltgView = a})
 
 -- | Required. The ID of the Cloud Platform project that the job belongs to.

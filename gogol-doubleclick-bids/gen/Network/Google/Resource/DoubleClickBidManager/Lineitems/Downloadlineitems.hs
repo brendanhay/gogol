@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves line items in CSV format. TrueView line items are not
--- supported.
+-- Retrieves line items in CSV format. YouTube & partners line items are
+-- not supported.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.lineitems.downloadlineitems@.
 module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
@@ -34,30 +34,45 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
     , LineitemsDownloadlineitems
 
     -- * Request Lenses
+    , ldXgafv
+    , ldUploadProtocol
+    , ldAccessToken
+    , ldUploadType
     , ldPayload
+    , ldCallback
     ) where
 
-import           Network.Google.DoubleClickBids.Types
-import           Network.Google.Prelude
+import Network.Google.DoubleClickBids.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.lineitems.downloadlineitems@ method which the
 -- 'LineitemsDownloadlineitems' request conforms to.
 type LineitemsDownloadlineitemsResource =
      "doubleclickbidmanager" :>
-       "v1" :>
+       "v1.1" :>
          "lineitems" :>
            "downloadlineitems" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] DownloadLineItemsRequest :>
-                 Post '[JSON] DownloadLineItemsResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DownloadLineItemsRequest :>
+                           Post '[JSON] DownloadLineItemsResponse
 
--- | Retrieves line items in CSV format. TrueView line items are not
--- supported.
+-- | Retrieves line items in CSV format. YouTube & partners line items are
+-- not supported.
 --
 -- /See:/ 'lineitemsDownloadlineitems' smart constructor.
-newtype LineitemsDownloadlineitems =
+data LineitemsDownloadlineitems =
   LineitemsDownloadlineitems'
-    { _ldPayload :: DownloadLineItemsRequest
+    { _ldXgafv :: !(Maybe Xgafv)
+    , _ldUploadProtocol :: !(Maybe Text)
+    , _ldAccessToken :: !(Maybe Text)
+    , _ldUploadType :: !(Maybe Text)
+    , _ldPayload :: !DownloadLineItemsRequest
+    , _ldCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,18 +81,61 @@ newtype LineitemsDownloadlineitems =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ldXgafv'
+--
+-- * 'ldUploadProtocol'
+--
+-- * 'ldAccessToken'
+--
+-- * 'ldUploadType'
+--
 -- * 'ldPayload'
+--
+-- * 'ldCallback'
 lineitemsDownloadlineitems
     :: DownloadLineItemsRequest -- ^ 'ldPayload'
     -> LineitemsDownloadlineitems
 lineitemsDownloadlineitems pLdPayload_ =
-  LineitemsDownloadlineitems' {_ldPayload = pLdPayload_}
+  LineitemsDownloadlineitems'
+    { _ldXgafv = Nothing
+    , _ldUploadProtocol = Nothing
+    , _ldAccessToken = Nothing
+    , _ldUploadType = Nothing
+    , _ldPayload = pLdPayload_
+    , _ldCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ldXgafv :: Lens' LineitemsDownloadlineitems (Maybe Xgafv)
+ldXgafv = lens _ldXgafv (\ s a -> s{_ldXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ldUploadProtocol :: Lens' LineitemsDownloadlineitems (Maybe Text)
+ldUploadProtocol
+  = lens _ldUploadProtocol
+      (\ s a -> s{_ldUploadProtocol = a})
+
+-- | OAuth access token.
+ldAccessToken :: Lens' LineitemsDownloadlineitems (Maybe Text)
+ldAccessToken
+  = lens _ldAccessToken
+      (\ s a -> s{_ldAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ldUploadType :: Lens' LineitemsDownloadlineitems (Maybe Text)
+ldUploadType
+  = lens _ldUploadType (\ s a -> s{_ldUploadType = a})
 
 -- | Multipart request metadata.
 ldPayload :: Lens' LineitemsDownloadlineitems DownloadLineItemsRequest
 ldPayload
   = lens _ldPayload (\ s a -> s{_ldPayload = a})
+
+-- | JSONP
+ldCallback :: Lens' LineitemsDownloadlineitems (Maybe Text)
+ldCallback
+  = lens _ldCallback (\ s a -> s{_ldCallback = a})
 
 instance GoogleRequest LineitemsDownloadlineitems
          where
@@ -86,7 +144,12 @@ instance GoogleRequest LineitemsDownloadlineitems
         type Scopes LineitemsDownloadlineitems =
              '["https://www.googleapis.com/auth/doubleclickbidmanager"]
         requestClient LineitemsDownloadlineitems'{..}
-          = go (Just AltJSON) _ldPayload doubleClickBidsService
+          = go _ldXgafv _ldUploadProtocol _ldAccessToken
+              _ldUploadType
+              _ldCallback
+              (Just AltJSON)
+              _ldPayload
+              doubleClickBidsService
           where go
                   = buildClient
                       (Proxy :: Proxy LineitemsDownloadlineitemsResource)

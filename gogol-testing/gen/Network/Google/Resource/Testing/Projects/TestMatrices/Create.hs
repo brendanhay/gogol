@@ -22,11 +22,11 @@
 --
 -- Creates and runs a matrix of tests according to the given
 -- specifications. Unsupported environments will be returned in the state
--- UNSUPPORTED. Matrices are limited to at most 200 supported executions.
--- May return any of the following canonical error codes: -
+-- UNSUPPORTED. A test matrix is limited to use at most 2000 devices in
+-- parallel. May return any of the following canonical error codes: -
 -- PERMISSION_DENIED - if the user is not authorized to write to project -
--- INVALID_ARGUMENT - if the request is malformed or if the matrix expands
--- to more than 200 supported executions
+-- INVALID_ARGUMENT - if the request is malformed or if the matrix tries to
+-- use too many simultaneous devices.
 --
 -- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.create@.
 module Network.Google.Resource.Testing.Projects.TestMatrices.Create
@@ -49,8 +49,8 @@ module Network.Google.Resource.Testing.Projects.TestMatrices.Create
     , pCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types
+import Network.Google.Prelude
+import Network.Google.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.create@ method which the
 -- 'ProjectsTestMatricesCreate' request conforms to.
@@ -70,23 +70,23 @@ type ProjectsTestMatricesCreateResource =
 
 -- | Creates and runs a matrix of tests according to the given
 -- specifications. Unsupported environments will be returned in the state
--- UNSUPPORTED. Matrices are limited to at most 200 supported executions.
--- May return any of the following canonical error codes: -
+-- UNSUPPORTED. A test matrix is limited to use at most 2000 devices in
+-- parallel. May return any of the following canonical error codes: -
 -- PERMISSION_DENIED - if the user is not authorized to write to project -
--- INVALID_ARGUMENT - if the request is malformed or if the matrix expands
--- to more than 200 supported executions
+-- INVALID_ARGUMENT - if the request is malformed or if the matrix tries to
+-- use too many simultaneous devices.
 --
 -- /See:/ 'projectsTestMatricesCreate' smart constructor.
 data ProjectsTestMatricesCreate =
   ProjectsTestMatricesCreate'
-    { _pXgafv          :: !(Maybe Xgafv)
-    , _pRequestId      :: !(Maybe Text)
+    { _pXgafv :: !(Maybe Xgafv)
+    , _pRequestId :: !(Maybe Text)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !TestMatrix
-    , _pProjectId      :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !TestMatrix
+    , _pProjectId :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

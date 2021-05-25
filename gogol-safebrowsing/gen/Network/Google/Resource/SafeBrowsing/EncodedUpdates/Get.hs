@@ -43,8 +43,8 @@ module Network.Google.Resource.SafeBrowsing.EncodedUpdates.Get
     , eugCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SafeBrowsing.Types
+import Network.Google.Prelude
+import Network.Google.SafeBrowsing.Types
 
 -- | A resource alias for @safebrowsing.encodedUpdates.get@ method which the
 -- 'EncodedUpdatesGet' request conforms to.
@@ -60,21 +60,22 @@ type EncodedUpdatesGetResource =
                      QueryParam "clientVersion" Text :>
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :>
-                           Get '[JSON] FetchThreatListUpdatesResponse
+                           Get '[JSON]
+                             GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
 
 -- |
 --
 -- /See:/ 'encodedUpdatesGet' smart constructor.
 data EncodedUpdatesGet =
   EncodedUpdatesGet'
-    { _eugClientId       :: !(Maybe Text)
-    , _eugXgafv          :: !(Maybe Xgafv)
+    { _eugClientId :: !(Maybe Text)
+    , _eugXgafv :: !(Maybe Xgafv)
     , _eugUploadProtocol :: !(Maybe Text)
-    , _eugAccessToken    :: !(Maybe Text)
+    , _eugAccessToken :: !(Maybe Text)
     , _eugEncodedRequest :: !Bytes
-    , _eugUploadType     :: !(Maybe Text)
-    , _eugClientVersion  :: !(Maybe Text)
-    , _eugCallback       :: !(Maybe Text)
+    , _eugUploadType :: !(Maybe Text)
+    , _eugClientVersion :: !(Maybe Text)
+    , _eugCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,7 +163,7 @@ eugCallback
 
 instance GoogleRequest EncodedUpdatesGet where
         type Rs EncodedUpdatesGet =
-             FetchThreatListUpdatesResponse
+             GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
         type Scopes EncodedUpdatesGet = '[]
         requestClient EncodedUpdatesGet'{..}
           = go _eugEncodedRequest _eugClientId _eugXgafv

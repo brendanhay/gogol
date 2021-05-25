@@ -22,7 +22,8 @@
 --
 -- Specifies the instance template to use when creating new instances in
 -- this group. The templates for existing instances in the group do not
--- change unless you recreate them.
+-- change unless you run recreateInstances, run applyUpdatesToInstances, or
+-- set the group\'s updatePolicy.type to PROACTIVE.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.setInstanceTemplate@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
     , igmsitPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.setInstanceTemplate@ method which the
 -- 'InstanceGroupManagersSetInstanceTemplate' request conforms to.
@@ -66,16 +67,17 @@ type InstanceGroupManagersSetInstanceTemplateResource
 
 -- | Specifies the instance template to use when creating new instances in
 -- this group. The templates for existing instances in the group do not
--- change unless you recreate them.
+-- change unless you run recreateInstances, run applyUpdatesToInstances, or
+-- set the group\'s updatePolicy.type to PROACTIVE.
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplate' smart constructor.
 data InstanceGroupManagersSetInstanceTemplate =
   InstanceGroupManagersSetInstanceTemplate'
-    { _igmsitRequestId            :: !(Maybe Text)
-    , _igmsitProject              :: !Text
+    { _igmsitRequestId :: !(Maybe Text)
+    , _igmsitProject :: !Text
     , _igmsitInstanceGroupManager :: !Text
-    , _igmsitZone                 :: !Text
-    , _igmsitPayload              :: !InstanceGroupManagersSetInstanceTemplateRequest
+    , _igmsitZone :: !Text
+    , _igmsitPayload :: !InstanceGroupManagersSetInstanceTemplateRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

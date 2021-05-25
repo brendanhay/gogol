@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
     , idacInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.deleteAccessConfig@ method which the
 -- 'InstancesDeleteAccessConfig' request conforms to.
@@ -66,12 +66,12 @@ type InstancesDeleteAccessConfigResource =
 -- /See:/ 'instancesDeleteAccessConfig' smart constructor.
 data InstancesDeleteAccessConfig =
   InstancesDeleteAccessConfig'
-    { _idacRequestId        :: !(Maybe Text)
-    , _idacProject          :: !Text
+    { _idacRequestId :: !(Maybe Text)
+    , _idacProject :: !Text
     , _idacNetworkInterface :: !Text
-    , _idacZone             :: !Text
-    , _idacAccessConfig     :: !Text
-    , _idacInstance         :: !Text
+    , _idacZone :: !Text
+    , _idacAccessConfig :: !Text
+    , _idacInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

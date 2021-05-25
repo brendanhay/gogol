@@ -20,11 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that the caller has on the specified database
--- resource. Attempting this RPC on a non-existent Cloud Spanner database
--- will result in a NOT_FOUND error if the user has
+-- Returns permissions that the caller has on the specified database or
+-- backup resource. Attempting this RPC on a non-existent Cloud Spanner
+-- database will result in a NOT_FOUND error if the user has
 -- \`spanner.databases.list\` permission on the containing Cloud Spanner
--- instance. Otherwise returns an empty set of permissions.
+-- instance. Otherwise returns an empty set of permissions. Calling this
+-- method on a backup that does not exist will result in a NOT_FOUND error
+-- if the user has \`spanner.backups.list\` permission on the containing
+-- instance.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.testIamPermissions@.
 module Network.Google.Resource.Spanner.Projects.Instances.Databases.TestIAMPermissions
@@ -46,8 +49,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.TestIAMPermi
     , pidtipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.testIamPermissions@ method which the
 -- 'ProjectsInstancesDatabasesTestIAMPermissions' request conforms to.
@@ -64,22 +67,25 @@ type ProjectsInstancesDatabasesTestIAMPermissionsResource
                      ReqBody '[JSON] TestIAMPermissionsRequest :>
                        Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that the caller has on the specified database
--- resource. Attempting this RPC on a non-existent Cloud Spanner database
--- will result in a NOT_FOUND error if the user has
+-- | Returns permissions that the caller has on the specified database or
+-- backup resource. Attempting this RPC on a non-existent Cloud Spanner
+-- database will result in a NOT_FOUND error if the user has
 -- \`spanner.databases.list\` permission on the containing Cloud Spanner
--- instance. Otherwise returns an empty set of permissions.
+-- instance. Otherwise returns an empty set of permissions. Calling this
+-- method on a backup that does not exist will result in a NOT_FOUND error
+-- if the user has \`spanner.backups.list\` permission on the containing
+-- instance.
 --
 -- /See:/ 'projectsInstancesDatabasesTestIAMPermissions' smart constructor.
 data ProjectsInstancesDatabasesTestIAMPermissions =
   ProjectsInstancesDatabasesTestIAMPermissions'
-    { _pidtipXgafv          :: !(Maybe Xgafv)
+    { _pidtipXgafv :: !(Maybe Xgafv)
     , _pidtipUploadProtocol :: !(Maybe Text)
-    , _pidtipAccessToken    :: !(Maybe Text)
-    , _pidtipUploadType     :: !(Maybe Text)
-    , _pidtipPayload        :: !TestIAMPermissionsRequest
-    , _pidtipResource       :: !Text
-    , _pidtipCallback       :: !(Maybe Text)
+    , _pidtipAccessToken :: !(Maybe Text)
+    , _pidtipUploadType :: !(Maybe Text)
+    , _pidtipPayload :: !TestIAMPermissionsRequest
+    , _pidtipResource :: !Text
+    , _pidtipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

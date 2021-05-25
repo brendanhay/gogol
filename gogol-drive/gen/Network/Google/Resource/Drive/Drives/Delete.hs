@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Drives.Delete
     , ddDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.drives.delete@ method which the
 -- 'DrivesDelete' request conforms to.

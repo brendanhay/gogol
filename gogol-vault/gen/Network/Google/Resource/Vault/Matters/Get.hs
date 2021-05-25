@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.Get
     , mgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.get@ method which the
 -- 'MattersGet' request conforms to.
@@ -55,7 +55,7 @@ type MattersGetResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "view" Text :>
+                   QueryParam "view" MattersGetView :>
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Matter
 
@@ -64,13 +64,13 @@ type MattersGetResource =
 -- /See:/ 'mattersGet' smart constructor.
 data MattersGet =
   MattersGet'
-    { _mgXgafv          :: !(Maybe Xgafv)
+    { _mgXgafv :: !(Maybe Xgafv)
     , _mgUploadProtocol :: !(Maybe Text)
-    , _mgAccessToken    :: !(Maybe Text)
-    , _mgUploadType     :: !(Maybe Text)
-    , _mgMatterId       :: !Text
-    , _mgView           :: !(Maybe Text)
-    , _mgCallback       :: !(Maybe Text)
+    , _mgAccessToken :: !(Maybe Text)
+    , _mgUploadType :: !(Maybe Text)
+    , _mgMatterId :: !Text
+    , _mgView :: !(Maybe MattersGetView)
+    , _mgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -133,8 +133,9 @@ mgMatterId :: Lens' MattersGet Text
 mgMatterId
   = lens _mgMatterId (\ s a -> s{_mgMatterId = a})
 
--- | Specifies which parts of the Matter to return in the response.
-mgView :: Lens' MattersGet (Maybe Text)
+-- | Specifies how much information about the matter to return in the
+-- response.
+mgView :: Lens' MattersGet (Maybe MattersGetView)
 mgView = lens _mgView (\ s a -> s{_mgView = a})
 
 -- | JSONP

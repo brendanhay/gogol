@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Aggregated.UsableSubnetworks.L
     , pauslCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.aggregated.usableSubnetworks.list@ method which the
 -- 'ProjectsAggregatedUsableSubnetworksList' request conforms to.
@@ -71,15 +71,15 @@ type ProjectsAggregatedUsableSubnetworksListResource
 -- /See:/ 'projectsAggregatedUsableSubnetworksList' smart constructor.
 data ProjectsAggregatedUsableSubnetworksList =
   ProjectsAggregatedUsableSubnetworksList'
-    { _pauslParent         :: !Text
-    , _pauslXgafv          :: !(Maybe Xgafv)
+    { _pauslParent :: !Text
+    , _pauslXgafv :: !(Maybe Xgafv)
     , _pauslUploadProtocol :: !(Maybe Text)
-    , _pauslAccessToken    :: !(Maybe Text)
-    , _pauslUploadType     :: !(Maybe Text)
-    , _pauslFilter         :: !(Maybe Text)
-    , _pauslPageToken      :: !(Maybe Text)
-    , _pauslPageSize       :: !(Maybe (Textual Int32))
-    , _pauslCallback       :: !(Maybe Text)
+    , _pauslAccessToken :: !(Maybe Text)
+    , _pauslUploadType :: !(Maybe Text)
+    , _pauslFilter :: !(Maybe Text)
+    , _pauslPageToken :: !(Maybe Text)
+    , _pauslPageSize :: !(Maybe (Textual Int32))
+    , _pauslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ projectsAggregatedUsableSubnetworksList pPauslParent_ =
 
 
 -- | The parent project where subnetworks are usable. Specified in the format
--- \'projects\/*\'.
+-- \`projects\/*\`.
 pauslParent :: Lens' ProjectsAggregatedUsableSubnetworksList Text
 pauslParent
   = lens _pauslParent (\ s a -> s{_pauslParent = a})

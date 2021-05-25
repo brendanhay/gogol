@@ -22,7 +22,7 @@
 --
 -- Lists all the exclusions in a parent resource.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.exclusions.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.exclusions.list@.
 module Network.Google.Resource.Logging.Folders.Exclusions.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.Folders.Exclusions.List
     , felCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.exclusions.list@ method which the
 -- 'FoldersExclusionsList' request conforms to.
@@ -67,14 +67,14 @@ type FoldersExclusionsListResource =
 -- /See:/ 'foldersExclusionsList' smart constructor.
 data FoldersExclusionsList =
   FoldersExclusionsList'
-    { _felParent         :: !Text
-    , _felXgafv          :: !(Maybe Xgafv)
+    { _felParent :: !Text
+    , _felXgafv :: !(Maybe Xgafv)
     , _felUploadProtocol :: !(Maybe Text)
-    , _felAccessToken    :: !(Maybe Text)
-    , _felUploadType     :: !(Maybe Text)
-    , _felPageToken      :: !(Maybe Text)
-    , _felPageSize       :: !(Maybe (Textual Int32))
-    , _felCallback       :: !(Maybe Text)
+    , _felAccessToken :: !(Maybe Text)
+    , _felUploadType :: !(Maybe Text)
+    , _felPageToken :: !(Maybe Text)
+    , _felPageSize :: !(Maybe (Textual Int32))
+    , _felCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

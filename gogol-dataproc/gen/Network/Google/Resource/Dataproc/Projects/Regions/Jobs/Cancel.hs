@@ -21,8 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Starts a job cancellation request. To access the job resource after
--- cancellation, call regions\/{region}\/jobs.list or
--- regions\/{region}\/jobs.get.
+-- cancellation, call regions\/{region}\/jobs.list
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rest\/v1\/projects.regions.jobs\/list)
+-- or regions\/{region}\/jobs.get
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rest\/v1\/projects.regions.jobs\/get).
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.jobs.cancel@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
@@ -46,8 +48,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Cancel
     , prjcCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.jobs.cancel@ method which the
 -- 'ProjectsRegionsJobsCancel' request conforms to.
@@ -69,21 +71,23 @@ type ProjectsRegionsJobsCancelResource =
                                  Post '[JSON] Job
 
 -- | Starts a job cancellation request. To access the job resource after
--- cancellation, call regions\/{region}\/jobs.list or
--- regions\/{region}\/jobs.get.
+-- cancellation, call regions\/{region}\/jobs.list
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rest\/v1\/projects.regions.jobs\/list)
+-- or regions\/{region}\/jobs.get
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rest\/v1\/projects.regions.jobs\/get).
 --
 -- /See:/ 'projectsRegionsJobsCancel' smart constructor.
 data ProjectsRegionsJobsCancel =
   ProjectsRegionsJobsCancel'
-    { _prjcXgafv          :: !(Maybe Xgafv)
-    , _prjcJobId          :: !Text
+    { _prjcXgafv :: !(Maybe Xgafv)
+    , _prjcJobId :: !Text
     , _prjcUploadProtocol :: !(Maybe Text)
-    , _prjcAccessToken    :: !(Maybe Text)
-    , _prjcUploadType     :: !(Maybe Text)
-    , _prjcPayload        :: !CancelJobRequest
-    , _prjcRegion         :: !Text
-    , _prjcProjectId      :: !Text
-    , _prjcCallback       :: !(Maybe Text)
+    , _prjcAccessToken :: !(Maybe Text)
+    , _prjcUploadType :: !(Maybe Text)
+    , _prjcPayload :: !CancelJobRequest
+    , _prjcRegion :: !Text
+    , _prjcProjectId :: !Text
+    , _prjcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,7 +166,7 @@ prjcPayload :: Lens' ProjectsRegionsJobsCancel CancelJobRequest
 prjcPayload
   = lens _prjcPayload (\ s a -> s{_prjcPayload = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prjcRegion :: Lens' ProjectsRegionsJobsCancel Text
 prjcRegion
   = lens _prjcRegion (\ s a -> s{_prjcRegion = a})

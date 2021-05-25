@@ -43,8 +43,8 @@ module Network.Google.Resource.Script.Projects.Deployments.List
     , pdlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.deployments.list@ method which the
 -- 'ProjectsDeploymentsList' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsDeploymentsListResource =
 -- /See:/ 'projectsDeploymentsList' smart constructor.
 data ProjectsDeploymentsList =
   ProjectsDeploymentsList'
-    { _pdlXgafv          :: !(Maybe Xgafv)
+    { _pdlXgafv :: !(Maybe Xgafv)
     , _pdlUploadProtocol :: !(Maybe Text)
-    , _pdlAccessToken    :: !(Maybe Text)
-    , _pdlUploadType     :: !(Maybe Text)
-    , _pdlScriptId       :: !Text
-    , _pdlPageToken      :: !(Maybe Text)
-    , _pdlPageSize       :: !(Maybe (Textual Int32))
-    , _pdlCallback       :: !(Maybe Text)
+    , _pdlAccessToken :: !(Maybe Text)
+    , _pdlUploadType :: !(Maybe Text)
+    , _pdlScriptId :: !Text
+    , _pdlPageToken :: !(Maybe Text)
+    , _pdlPageSize :: !(Maybe (Textual Int32))
+    , _pdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

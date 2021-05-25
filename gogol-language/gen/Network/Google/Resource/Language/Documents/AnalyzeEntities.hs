@@ -43,8 +43,8 @@ module Network.Google.Resource.Language.Documents.AnalyzeEntities
     , daeCallback
     ) where
 
-import           Network.Google.Language.Types
-import           Network.Google.Prelude
+import Network.Google.Language.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @language.documents.analyzeEntities@ method which the
 -- 'DocumentsAnalyzeEntities' request conforms to.
@@ -67,12 +67,12 @@ type DocumentsAnalyzeEntitiesResource =
 -- /See:/ 'documentsAnalyzeEntities' smart constructor.
 data DocumentsAnalyzeEntities =
   DocumentsAnalyzeEntities'
-    { _daeXgafv          :: !(Maybe Xgafv)
+    { _daeXgafv :: !(Maybe Xgafv)
     , _daeUploadProtocol :: !(Maybe Text)
-    , _daeAccessToken    :: !(Maybe Text)
-    , _daeUploadType     :: !(Maybe Text)
-    , _daePayload        :: !AnalyzeEntitiesRequest
-    , _daeCallback       :: !(Maybe Text)
+    , _daeAccessToken :: !(Maybe Text)
+    , _daeUploadType :: !(Maybe Text)
+    , _daePayload :: !AnalyzeEntitiesRequest
+    , _daeCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

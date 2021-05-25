@@ -56,8 +56,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.L
     , ccwsslCourseWorkId
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.list@ method which the
 -- 'CoursesCourseWorkStudentSubmissionsList' request conforms to.
@@ -69,9 +69,13 @@ type CoursesCourseWorkStudentSubmissionsListResource
            "courseWork" :>
              Capture "courseWorkId" Text :>
                "studentSubmissions" :>
-                 QueryParams "states" Text :>
+                 QueryParams "states"
+                   CoursesCourseWorkStudentSubmissionsListStates
+                   :>
                    QueryParam "$.xgafv" Xgafv :>
-                     QueryParam "late" Text :>
+                     QueryParam "late"
+                       CoursesCourseWorkStudentSubmissionsListLate
+                       :>
                        QueryParam "upload_protocol" Text :>
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
@@ -97,18 +101,18 @@ type CoursesCourseWorkStudentSubmissionsListResource
 -- /See:/ 'coursesCourseWorkStudentSubmissionsList' smart constructor.
 data CoursesCourseWorkStudentSubmissionsList =
   CoursesCourseWorkStudentSubmissionsList'
-    { _ccwsslStates         :: !(Maybe [Text])
-    , _ccwsslXgafv          :: !(Maybe Xgafv)
-    , _ccwsslLate           :: !(Maybe Text)
+    { _ccwsslStates :: !(Maybe [CoursesCourseWorkStudentSubmissionsListStates])
+    , _ccwsslXgafv :: !(Maybe Xgafv)
+    , _ccwsslLate :: !(Maybe CoursesCourseWorkStudentSubmissionsListLate)
     , _ccwsslUploadProtocol :: !(Maybe Text)
-    , _ccwsslCourseId       :: !Text
-    , _ccwsslAccessToken    :: !(Maybe Text)
-    , _ccwsslUploadType     :: !(Maybe Text)
-    , _ccwsslUserId         :: !(Maybe Text)
-    , _ccwsslPageToken      :: !(Maybe Text)
-    , _ccwsslPageSize       :: !(Maybe (Textual Int32))
-    , _ccwsslCallback       :: !(Maybe Text)
-    , _ccwsslCourseWorkId   :: !Text
+    , _ccwsslCourseId :: !Text
+    , _ccwsslAccessToken :: !(Maybe Text)
+    , _ccwsslUploadType :: !(Maybe Text)
+    , _ccwsslUserId :: !(Maybe Text)
+    , _ccwsslPageToken :: !(Maybe Text)
+    , _ccwsslPageSize :: !(Maybe (Textual Int32))
+    , _ccwsslCallback :: !(Maybe Text)
+    , _ccwsslCourseWorkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -163,7 +167,7 @@ coursesCourseWorkStudentSubmissionsList pCcwsslCourseId_ pCcwsslCourseWorkId_ =
 
 -- | Requested submission states. If specified, returned student submissions
 -- match one of the specified submission states.
-ccwsslStates :: Lens' CoursesCourseWorkStudentSubmissionsList [Text]
+ccwsslStates :: Lens' CoursesCourseWorkStudentSubmissionsList [CoursesCourseWorkStudentSubmissionsListStates]
 ccwsslStates
   = lens _ccwsslStates (\ s a -> s{_ccwsslStates = a})
       . _Default
@@ -177,7 +181,7 @@ ccwsslXgafv
 -- | Requested lateness value. If specified, returned student submissions are
 -- restricted by the requested value. If unspecified, submissions are
 -- returned regardless of \`late\` value.
-ccwsslLate :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe Text)
+ccwsslLate :: Lens' CoursesCourseWorkStudentSubmissionsList (Maybe CoursesCourseWorkStudentSubmissionsListLate)
 ccwsslLate
   = lens _ccwsslLate (\ s a -> s{_ccwsslLate = a})
 

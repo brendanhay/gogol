@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetMachineType
     , ismtInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setMachineType@ method which the
 -- 'InstancesSetMachineType' request conforms to.
@@ -68,10 +68,10 @@ type InstancesSetMachineTypeResource =
 data InstancesSetMachineType =
   InstancesSetMachineType'
     { _ismtRequestId :: !(Maybe Text)
-    , _ismtProject   :: !Text
-    , _ismtZone      :: !Text
-    , _ismtPayload   :: !InstancesSetMachineTypeRequest
-    , _ismtInstance  :: !Text
+    , _ismtProject :: !Text
+    , _ismtZone :: !Text
+    , _ismtPayload :: !InstancesSetMachineTypeRequest
+    , _ismtInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

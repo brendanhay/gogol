@@ -20,8 +20,24 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels a transfer. Use the get method to check whether the cancellation
--- succeeded or whether the operation completed despite cancellation.
+-- Cancels a transfer. Use the transferOperations.get method to check if
+-- the cancellation succeeded or if the operation completed despite the
+-- \`cancel\` request. When you cancel an operation, the currently running
+-- transfer is interrupted. For recurring transfer jobs, the next instance
+-- of the transfer job will still run. For example, if your job is
+-- configured to run every day at 1pm and you cancel Monday\'s operation at
+-- 1:05pm, Monday\'s transfer will stop. However, a transfer job will still
+-- be attempted on Tuesday. This applies only to currently running
+-- operations. If an operation is not currently running, \`cancel\` does
+-- nothing. *Caution:* Canceling a transfer job can leave your data in an
+-- unknown state. We recommend that you restore the state at both the
+-- destination and the source after the \`cancel\` request completes so
+-- that your data is in a consistent state. When you cancel a job, the next
+-- job computes a delta of files and may repair any inconsistent state. For
+-- instance, if you run a job every day, and today\'s job found 10 new
+-- files and transferred five files before you canceled the job,
+-- tomorrow\'s transfer operation will compute a new delta with the five
+-- files that were not copied today plus any new files discovered tomorrow.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferOperations.cancel@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
@@ -38,12 +54,13 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     , tocUploadProtocol
     , tocAccessToken
     , tocUploadType
+    , tocPayload
     , tocName
     , tocCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.cancel@ method which the
 -- 'TransferOperationsCancel' request conforms to.
@@ -55,20 +72,39 @@ type TransferOperationsCancelResource =
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] CancelOperationRequest :>
+                       Post '[JSON] Empty
 
--- | Cancels a transfer. Use the get method to check whether the cancellation
--- succeeded or whether the operation completed despite cancellation.
+-- | Cancels a transfer. Use the transferOperations.get method to check if
+-- the cancellation succeeded or if the operation completed despite the
+-- \`cancel\` request. When you cancel an operation, the currently running
+-- transfer is interrupted. For recurring transfer jobs, the next instance
+-- of the transfer job will still run. For example, if your job is
+-- configured to run every day at 1pm and you cancel Monday\'s operation at
+-- 1:05pm, Monday\'s transfer will stop. However, a transfer job will still
+-- be attempted on Tuesday. This applies only to currently running
+-- operations. If an operation is not currently running, \`cancel\` does
+-- nothing. *Caution:* Canceling a transfer job can leave your data in an
+-- unknown state. We recommend that you restore the state at both the
+-- destination and the source after the \`cancel\` request completes so
+-- that your data is in a consistent state. When you cancel a job, the next
+-- job computes a delta of files and may repair any inconsistent state. For
+-- instance, if you run a job every day, and today\'s job found 10 new
+-- files and transferred five files before you canceled the job,
+-- tomorrow\'s transfer operation will compute a new delta with the five
+-- files that were not copied today plus any new files discovered tomorrow.
 --
 -- /See:/ 'transferOperationsCancel' smart constructor.
 data TransferOperationsCancel =
   TransferOperationsCancel'
-    { _tocXgafv          :: !(Maybe Xgafv)
+    { _tocXgafv :: !(Maybe Xgafv)
     , _tocUploadProtocol :: !(Maybe Text)
-    , _tocAccessToken    :: !(Maybe Text)
-    , _tocUploadType     :: !(Maybe Text)
-    , _tocName           :: !Text
-    , _tocCallback       :: !(Maybe Text)
+    , _tocAccessToken :: !(Maybe Text)
+    , _tocUploadType :: !(Maybe Text)
+    , _tocPayload :: !CancelOperationRequest
+    , _tocName :: !Text
+    , _tocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,18 +121,22 @@ data TransferOperationsCancel =
 --
 -- * 'tocUploadType'
 --
+-- * 'tocPayload'
+--
 -- * 'tocName'
 --
 -- * 'tocCallback'
 transferOperationsCancel
-    :: Text -- ^ 'tocName'
+    :: CancelOperationRequest -- ^ 'tocPayload'
+    -> Text -- ^ 'tocName'
     -> TransferOperationsCancel
-transferOperationsCancel pTocName_ =
+transferOperationsCancel pTocPayload_ pTocName_ =
   TransferOperationsCancel'
     { _tocXgafv = Nothing
     , _tocUploadProtocol = Nothing
     , _tocAccessToken = Nothing
     , _tocUploadType = Nothing
+    , _tocPayload = pTocPayload_
     , _tocName = pTocName_
     , _tocCallback = Nothing
     }
@@ -124,6 +164,11 @@ tocUploadType
   = lens _tocUploadType
       (\ s a -> s{_tocUploadType = a})
 
+-- | Multipart request metadata.
+tocPayload :: Lens' TransferOperationsCancel CancelOperationRequest
+tocPayload
+  = lens _tocPayload (\ s a -> s{_tocPayload = a})
+
 -- | The name of the operation resource to be cancelled.
 tocName :: Lens' TransferOperationsCancel Text
 tocName = lens _tocName (\ s a -> s{_tocName = a})
@@ -143,6 +188,7 @@ instance GoogleRequest TransferOperationsCancel where
               _tocUploadType
               _tocCallback
               (Just AltJSON)
+              _tocPayload
               storageTransferService
           where go
                   = buildClient

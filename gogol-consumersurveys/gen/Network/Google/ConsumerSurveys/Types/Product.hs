@@ -17,17 +17,17 @@
 --
 module Network.Google.ConsumerSurveys.Types.Product where
 
-import           Network.Google.ConsumerSurveys.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'surveysListResponse' smart constructor.
 data SurveysListResponse =
   SurveysListResponse'
-    { _slrRequestId       :: !(Maybe Text)
+    { _slrRequestId :: !(Maybe Text)
     , _slrTokenPagination :: !(Maybe TokenPagination)
-    , _slrPageInfo        :: !(Maybe PageInfo)
-    , _slrResources       :: !(Maybe [Survey])
+    , _slrPageInfo :: !(Maybe PageInfo)
+    , _slrResources :: !(Maybe [Survey])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -98,12 +98,12 @@ instance ToJSON SurveysListResponse where
 -- /See:/ 'mobileAppPanel' smart constructor.
 data MobileAppPanel =
   MobileAppPanel'
-    { _mapOwners           :: !(Maybe [Text])
-    , _mapCountry          :: !(Maybe Text)
-    , _mapName             :: !(Maybe Text)
+    { _mapOwners :: !(Maybe [Text])
+    , _mapCountry :: !(Maybe Text)
+    , _mapName :: !(Maybe Text)
     , _mapMobileAppPanelId :: !(Maybe Text)
-    , _mapLanguage         :: !(Maybe Text)
-    , _mapIsPublicPanel    :: !(Maybe Bool)
+    , _mapLanguage :: !(Maybe Text)
+    , _mapIsPublicPanel :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -189,7 +189,7 @@ instance ToJSON MobileAppPanel where
 -- /See:/ 'tokenPagination' smart constructor.
 data TokenPagination =
   TokenPagination'
-    { _tpNextPageToken     :: !(Maybe Text)
+    { _tpNextPageToken :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -271,10 +271,10 @@ instance ToJSON ResultsGetRequest where
 -- /See:/ 'mobileAppPanelsListResponse' smart constructor.
 data MobileAppPanelsListResponse =
   MobileAppPanelsListResponse'
-    { _maplrRequestId       :: !(Maybe Text)
+    { _maplrRequestId :: !(Maybe Text)
     , _maplrTokenPagination :: !(Maybe TokenPagination)
-    , _maplrPageInfo        :: !(Maybe PageInfo)
-    , _maplrResources       :: !(Maybe [MobileAppPanel])
+    , _maplrPageInfo :: !(Maybe PageInfo)
+    , _maplrResources :: !(Maybe [MobileAppPanel])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -349,8 +349,8 @@ instance ToJSON MobileAppPanelsListResponse where
 data PageInfo =
   PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
-    , _piTotalResults  :: !(Maybe (Textual Int32))
-    , _piStartIndex    :: !(Maybe (Textual Int32))
+    , _piTotalResults :: !(Maybe (Textual Int32))
+    , _piStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -411,7 +411,7 @@ instance ToJSON PageInfo where
 -- /See:/ 'fieldMask' smart constructor.
 data FieldMask =
   FieldMask'
-    { _fmId     :: !(Maybe (Textual Int32))
+    { _fmId :: !(Maybe (Textual Int32))
     , _fmFields :: !(Maybe [FieldMask])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -457,17 +457,17 @@ instance ToJSON FieldMask where
 -- /See:/ 'survey' smart constructor.
 data Survey =
   Survey'
-    { _sAudience            :: !(Maybe SurveyAudience)
-    , _sState               :: !(Maybe Text)
-    , _sOwners              :: !(Maybe [Text])
+    { _sAudience :: !(Maybe SurveyAudience)
+    , _sState :: !(Maybe Text)
+    , _sOwners :: !(Maybe [Text])
     , _sWantedResponseCount :: !(Maybe (Textual Int32))
-    , _sSurveyURLId         :: !(Maybe Text)
-    , _sCost                :: !(Maybe SurveyCost)
-    , _sRejectionReason     :: !(Maybe SurveyRejection)
-    , _sCustomerData        :: !(Maybe Bytes)
-    , _sQuestions           :: !(Maybe [SurveyQuestion])
-    , _sTitle               :: !(Maybe Text)
-    , _sDescription         :: !(Maybe Text)
+    , _sSurveyURLId :: !(Maybe Text)
+    , _sCost :: !(Maybe SurveyCost)
+    , _sRejectionReason :: !(Maybe SurveyRejection)
+    , _sCustomerData :: !(Maybe Bytes)
+    , _sQuestions :: !(Maybe [SurveyQuestion])
+    , _sTitle :: !(Maybe Text)
+    , _sDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -671,7 +671,7 @@ instance ToJSON SurveysStopResponse where
 data ResultsMask =
   ResultsMask'
     { _rmProjection :: !(Maybe Text)
-    , _rmFields     :: !(Maybe [FieldMask])
+    , _rmFields :: !(Maybe [FieldMask])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -717,7 +717,7 @@ instance ToJSON ResultsMask where
 data SurveyRejection =
   SurveyRejection'
     { _srExplanation :: !(Maybe Text)
-    , _srType        :: !(Maybe Text)
+    , _srType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -760,7 +760,7 @@ instance ToJSON SurveyRejection where
 -- /See:/ 'surveyResults' smart constructor.
 data SurveyResults =
   SurveyResults'
-    { _srStatus      :: !(Maybe Text)
+    { _srStatus :: !(Maybe Text)
     , _srSurveyURLId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -882,8 +882,8 @@ instance ToJSON SurveysDeleteResponse where
 -- /See:/ 'surveyQuestionImage' smart constructor.
 data SurveyQuestionImage =
   SurveyQuestionImage'
-    { _sqiData    :: !(Maybe Bytes)
-    , _sqiURL     :: !(Maybe Text)
+    { _sqiData :: !(Maybe Bytes)
+    , _sqiURL :: !(Maybe Text)
     , _sqiAltText :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -936,13 +936,13 @@ instance ToJSON SurveyQuestionImage where
 -- /See:/ 'surveyAudience' smart constructor.
 data SurveyAudience =
   SurveyAudience'
-    { _saCountry            :: !(Maybe Text)
-    , _saAges               :: !(Maybe [Text])
-    , _saLanguages          :: !(Maybe [Text])
-    , _saGender             :: !(Maybe Text)
-    , _saMobileAppPanelId   :: !(Maybe Text)
+    { _saCountry :: !(Maybe Text)
+    , _saAges :: !(Maybe [Text])
+    , _saLanguages :: !(Maybe [Text])
+    , _saGender :: !(Maybe Text)
+    , _saMobileAppPanelId :: !(Maybe Text)
     , _saCountrySubdivision :: !(Maybe Text)
-    , _saPopulationSource   :: !(Maybe Text)
+    , _saPopulationSource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1039,10 +1039,10 @@ instance ToJSON SurveyAudience where
 -- /See:/ 'surveyCost' smart constructor.
 data SurveyCost =
   SurveyCost'
-    { _scCurrencyCode            :: !(Maybe Text)
-    , _scNanos                   :: !(Maybe (Textual Int64))
+    { _scCurrencyCode :: !(Maybe Text)
+    , _scNanos :: !(Maybe (Textual Int64))
     , _scMaxCostPerResponseNanos :: !(Maybe (Textual Int64))
-    , _scCostPerResponseNanos    :: !(Maybe (Textual Int64))
+    , _scCostPerResponseNanos :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1115,24 +1115,24 @@ instance ToJSON SurveyCost where
 -- /See:/ 'surveyQuestion' smart constructor.
 data SurveyQuestion =
   SurveyQuestion'
-    { _sqImages                   :: !(Maybe [SurveyQuestionImage])
-    , _sqAnswers                  :: !(Maybe [Text])
-    , _sqSingleLineResponse       :: !(Maybe Bool)
-    , _sqMustPickSuggestion       :: !(Maybe Bool)
-    , _sqSentimentText            :: !(Maybe Text)
-    , _sqThresholdAnswers         :: !(Maybe [Text])
-    , _sqHasOther                 :: !(Maybe Bool)
-    , _sqOpenTextSuggestions      :: !(Maybe [Text])
-    , _sqVideoId                  :: !(Maybe Text)
+    { _sqImages :: !(Maybe [SurveyQuestionImage])
+    , _sqAnswers :: !(Maybe [Text])
+    , _sqSingleLineResponse :: !(Maybe Bool)
+    , _sqMustPickSuggestion :: !(Maybe Bool)
+    , _sqSentimentText :: !(Maybe Text)
+    , _sqThresholdAnswers :: !(Maybe [Text])
+    , _sqHasOther :: !(Maybe Bool)
+    , _sqOpenTextSuggestions :: !(Maybe [Text])
+    , _sqVideoId :: !(Maybe Text)
     , _sqLastAnswerPositionPinned :: !(Maybe Bool)
-    , _sqAnswerOrder              :: !(Maybe Text)
-    , _sqOpenTextPlaceholder      :: !(Maybe Text)
-    , _sqType                     :: !(Maybe Text)
-    , _sqUnitOfMeasurementLabel   :: !(Maybe Text)
-    , _sqHighValueLabel           :: !(Maybe Text)
-    , _sqQuestion                 :: !(Maybe Text)
-    , _sqNumStars                 :: !(Maybe Text)
-    , _sqLowValueLabel            :: !(Maybe Text)
+    , _sqAnswerOrder :: !(Maybe Text)
+    , _sqOpenTextPlaceholder :: !(Maybe Text)
+    , _sqType :: !(Maybe Text)
+    , _sqUnitOfMeasurementLabel :: !(Maybe Text)
+    , _sqHighValueLabel :: !(Maybe Text)
+    , _sqQuestion :: !(Maybe Text)
+    , _sqNumStars :: !(Maybe Text)
+    , _sqLowValueLabel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

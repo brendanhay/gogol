@@ -17,18 +17,18 @@
 --
 module Network.Google.GamesConfiguration.Types.Product where
 
-import           Network.Google.GamesConfiguration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types.Sum
+import Network.Google.Prelude
 
--- | This is a JSON template for an image configuration resource.
+-- | An image configuration resource.
 --
 -- /See:/ 'imageConfiguration' smart constructor.
 data ImageConfiguration =
   ImageConfiguration'
     { _icResourceId :: !(Maybe Text)
-    , _icKind       :: !Text
-    , _icURL        :: !(Maybe Text)
-    , _icImageType  :: !(Maybe Text)
+    , _icKind :: !(Maybe Text)
+    , _icURL :: !(Maybe Text)
+    , _icImageType :: !(Maybe ImageConfigurationImageType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -49,7 +49,7 @@ imageConfiguration
 imageConfiguration =
   ImageConfiguration'
     { _icResourceId = Nothing
-    , _icKind = "gamesConfiguration#imageConfiguration"
+    , _icKind = Nothing
     , _icURL = Nothing
     , _icImageType = Nothing
     }
@@ -61,8 +61,8 @@ icResourceId
   = lens _icResourceId (\ s a -> s{_icResourceId = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#imageConfiguration.
-icKind :: Lens' ImageConfiguration Text
+-- string \`gamesConfiguration#imageConfiguration\`.
+icKind :: Lens' ImageConfiguration (Maybe Text)
 icKind = lens _icKind (\ s a -> s{_icKind = a})
 
 -- | The url for this image.
@@ -70,7 +70,7 @@ icURL :: Lens' ImageConfiguration (Maybe Text)
 icURL = lens _icURL (\ s a -> s{_icURL = a})
 
 -- | The image type for the image.
-icImageType :: Lens' ImageConfiguration (Maybe Text)
+icImageType :: Lens' ImageConfiguration (Maybe ImageConfigurationImageType)
 icImageType
   = lens _icImageType (\ s a -> s{_icImageType = a})
 
@@ -79,10 +79,8 @@ instance FromJSON ImageConfiguration where
           = withObject "ImageConfiguration"
               (\ o ->
                  ImageConfiguration' <$>
-                   (o .:? "resourceId") <*>
-                     (o .:? "kind" .!=
-                        "gamesConfiguration#imageConfiguration")
-                     <*> (o .:? "url")
+                   (o .:? "resourceId") <*> (o .:? "kind") <*>
+                     (o .:? "url")
                      <*> (o .:? "imageType"))
 
 instance ToJSON ImageConfiguration where
@@ -90,17 +88,17 @@ instance ToJSON ImageConfiguration where
           = object
               (catMaybes
                  [("resourceId" .=) <$> _icResourceId,
-                  Just ("kind" .= _icKind), ("url" .=) <$> _icURL,
+                  ("kind" .=) <$> _icKind, ("url" .=) <$> _icURL,
                   ("imageType" .=) <$> _icImageType])
 
--- | This is a JSON template for a ListConfigurations response.
+-- | A ListConfigurations response.
 --
 -- /See:/ 'leaderboardConfigurationListResponse' smart constructor.
 data LeaderboardConfigurationListResponse =
   LeaderboardConfigurationListResponse'
     { _lclrNextPageToken :: !(Maybe Text)
-    , _lclrKind          :: !Text
-    , _lclrItems         :: !(Maybe [LeaderboardConfiguration])
+    , _lclrKind :: !(Maybe Text)
+    , _lclrItems :: !(Maybe [LeaderboardConfiguration])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,10 +116,7 @@ leaderboardConfigurationListResponse
     :: LeaderboardConfigurationListResponse
 leaderboardConfigurationListResponse =
   LeaderboardConfigurationListResponse'
-    { _lclrNextPageToken = Nothing
-    , _lclrKind = "gamesConfiguration#leaderboardConfigurationListResponse"
-    , _lclrItems = Nothing
-    }
+    {_lclrNextPageToken = Nothing, _lclrKind = Nothing, _lclrItems = Nothing}
 
 
 -- | The pagination token for the next page of results.
@@ -131,8 +126,8 @@ lclrNextPageToken
       (\ s a -> s{_lclrNextPageToken = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#leaderboardConfigurationListResponse.
-lclrKind :: Lens' LeaderboardConfigurationListResponse Text
+-- string \`gamesConfiguration#leaderboardConfigurationListResponse\`.
+lclrKind :: Lens' LeaderboardConfigurationListResponse (Maybe Text)
 lclrKind = lens _lclrKind (\ s a -> s{_lclrKind = a})
 
 -- | The leaderboard configurations.
@@ -149,10 +144,8 @@ instance FromJSON
           = withObject "LeaderboardConfigurationListResponse"
               (\ o ->
                  LeaderboardConfigurationListResponse' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "gamesConfiguration#leaderboardConfigurationListResponse")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "nextPageToken") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty))
 
 instance ToJSON LeaderboardConfigurationListResponse
          where
@@ -160,20 +153,20 @@ instance ToJSON LeaderboardConfigurationListResponse
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lclrNextPageToken,
-                  Just ("kind" .= _lclrKind),
+                  ("kind" .=) <$> _lclrKind,
                   ("items" .=) <$> _lclrItems])
 
--- | This is a JSON template for a number affix resource.
+-- | A number affix resource.
 --
 -- /See:/ 'gamesNumberAffixConfiguration' smart constructor.
 data GamesNumberAffixConfiguration =
   GamesNumberAffixConfiguration'
-    { _gnacFew   :: !(Maybe LocalizedStringBundle)
+    { _gnacFew :: !(Maybe LocalizedStringBundle)
     , _gnacOther :: !(Maybe LocalizedStringBundle)
-    , _gnacTwo   :: !(Maybe LocalizedStringBundle)
-    , _gnacOne   :: !(Maybe LocalizedStringBundle)
-    , _gnacZero  :: !(Maybe LocalizedStringBundle)
-    , _gnacMany  :: !(Maybe LocalizedStringBundle)
+    , _gnacTwo :: !(Maybe LocalizedStringBundle)
+    , _gnacOne :: !(Maybe LocalizedStringBundle)
+    , _gnacZero :: !(Maybe LocalizedStringBundle)
+    , _gnacMany :: !(Maybe LocalizedStringBundle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -258,14 +251,14 @@ instance ToJSON GamesNumberAffixConfiguration where
                   ("one" .=) <$> _gnacOne, ("zero" .=) <$> _gnacZero,
                   ("many" .=) <$> _gnacMany])
 
--- | This is a JSON template for a ListConfigurations response.
+-- | A ListConfigurations response.
 --
 -- /See:/ 'achievementConfigurationListResponse' smart constructor.
 data AchievementConfigurationListResponse =
   AchievementConfigurationListResponse'
     { _aclrNextPageToken :: !(Maybe Text)
-    , _aclrKind          :: !Text
-    , _aclrItems         :: !(Maybe [AchievementConfiguration])
+    , _aclrKind :: !(Maybe Text)
+    , _aclrItems :: !(Maybe [AchievementConfiguration])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -283,10 +276,7 @@ achievementConfigurationListResponse
     :: AchievementConfigurationListResponse
 achievementConfigurationListResponse =
   AchievementConfigurationListResponse'
-    { _aclrNextPageToken = Nothing
-    , _aclrKind = "gamesConfiguration#achievementConfigurationListResponse"
-    , _aclrItems = Nothing
-    }
+    {_aclrNextPageToken = Nothing, _aclrKind = Nothing, _aclrItems = Nothing}
 
 
 -- | The pagination token for the next page of results.
@@ -296,8 +286,8 @@ aclrNextPageToken
       (\ s a -> s{_aclrNextPageToken = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string games#achievementConfigurationListResponse.
-aclrKind :: Lens' AchievementConfigurationListResponse Text
+-- string \`gamesConfiguration#achievementConfigurationListResponse\`.
+aclrKind :: Lens' AchievementConfigurationListResponse (Maybe Text)
 aclrKind = lens _aclrKind (\ s a -> s{_aclrKind = a})
 
 -- | The achievement configurations.
@@ -314,10 +304,8 @@ instance FromJSON
           = withObject "AchievementConfigurationListResponse"
               (\ o ->
                  AchievementConfigurationListResponse' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "gamesConfiguration#achievementConfigurationListResponse")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "nextPageToken") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty))
 
 instance ToJSON AchievementConfigurationListResponse
          where
@@ -325,22 +313,22 @@ instance ToJSON AchievementConfigurationListResponse
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aclrNextPageToken,
-                  Just ("kind" .= _aclrKind),
+                  ("kind" .=) <$> _aclrKind,
                   ("items" .=) <$> _aclrItems])
 
--- | This is a JSON template for an leaderboard configuration resource.
+-- | An leaderboard configuration resource.
 --
 -- /See:/ 'leaderboardConfiguration' smart constructor.
 data LeaderboardConfiguration =
   LeaderboardConfiguration'
-    { _lcScoreMax   :: !(Maybe (Textual Int64))
-    , _lcKind       :: !Text
-    , _lcPublished  :: !(Maybe LeaderboardConfigurationDetail)
-    , _lcToken      :: !(Maybe Text)
-    , _lcScoreMin   :: !(Maybe (Textual Int64))
-    , _lcDraft      :: !(Maybe LeaderboardConfigurationDetail)
-    , _lcId         :: !(Maybe Text)
-    , _lcScoreOrder :: !(Maybe Text)
+    { _lcScoreMax :: !(Maybe (Textual Int64))
+    , _lcKind :: !(Maybe Text)
+    , _lcPublished :: !(Maybe LeaderboardConfigurationDetail)
+    , _lcToken :: !(Maybe Text)
+    , _lcScoreMin :: !(Maybe (Textual Int64))
+    , _lcDraft :: !(Maybe LeaderboardConfigurationDetail)
+    , _lcId :: !(Maybe Text)
+    , _lcScoreOrder :: !(Maybe LeaderboardConfigurationScoreOrder)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -369,7 +357,7 @@ leaderboardConfiguration
 leaderboardConfiguration =
   LeaderboardConfiguration'
     { _lcScoreMax = Nothing
-    , _lcKind = "gamesConfiguration#leaderboardConfiguration"
+    , _lcKind = Nothing
     , _lcPublished = Nothing
     , _lcToken = Nothing
     , _lcScoreMin = Nothing
@@ -386,8 +374,8 @@ lcScoreMax
       mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#leaderboardConfiguration.
-lcKind :: Lens' LeaderboardConfiguration Text
+-- string \`gamesConfiguration#leaderboardConfiguration\`.
+lcKind :: Lens' LeaderboardConfiguration (Maybe Text)
 lcKind = lens _lcKind (\ s a -> s{_lcKind = a})
 
 -- | The read-only published data of the leaderboard.
@@ -413,10 +401,7 @@ lcDraft = lens _lcDraft (\ s a -> s{_lcDraft = a})
 lcId :: Lens' LeaderboardConfiguration (Maybe Text)
 lcId = lens _lcId (\ s a -> s{_lcId = a})
 
--- | The type of the leaderboard. Possible values are: - \"LARGER_IS_BETTER\"
--- - Larger scores posted are ranked higher. - \"SMALLER_IS_BETTER\" -
--- Smaller scores posted are ranked higher.
-lcScoreOrder :: Lens' LeaderboardConfiguration (Maybe Text)
+lcScoreOrder :: Lens' LeaderboardConfiguration (Maybe LeaderboardConfigurationScoreOrder)
 lcScoreOrder
   = lens _lcScoreOrder (\ s a -> s{_lcScoreOrder = a})
 
@@ -425,10 +410,8 @@ instance FromJSON LeaderboardConfiguration where
           = withObject "LeaderboardConfiguration"
               (\ o ->
                  LeaderboardConfiguration' <$>
-                   (o .:? "scoreMax") <*>
-                     (o .:? "kind" .!=
-                        "gamesConfiguration#leaderboardConfiguration")
-                     <*> (o .:? "published")
+                   (o .:? "scoreMax") <*> (o .:? "kind") <*>
+                     (o .:? "published")
                      <*> (o .:? "token")
                      <*> (o .:? "scoreMin")
                      <*> (o .:? "draft")
@@ -440,26 +423,26 @@ instance ToJSON LeaderboardConfiguration where
           = object
               (catMaybes
                  [("scoreMax" .=) <$> _lcScoreMax,
-                  Just ("kind" .= _lcKind),
+                  ("kind" .=) <$> _lcKind,
                   ("published" .=) <$> _lcPublished,
                   ("token" .=) <$> _lcToken,
                   ("scoreMin" .=) <$> _lcScoreMin,
                   ("draft" .=) <$> _lcDraft, ("id" .=) <$> _lcId,
                   ("scoreOrder" .=) <$> _lcScoreOrder])
 
--- | This is a JSON template for an achievement configuration resource.
+-- | An achievement configuration resource.
 --
 -- /See:/ 'achievementConfiguration' smart constructor.
 data AchievementConfiguration =
   AchievementConfiguration'
-    { _acAchievementType :: !(Maybe Text)
-    , _acStepsToUnlock   :: !(Maybe (Textual Int32))
-    , _acKind            :: !Text
-    , _acPublished       :: !(Maybe AchievementConfigurationDetail)
-    , _acToken           :: !(Maybe Text)
-    , _acInitialState    :: !(Maybe Text)
-    , _acDraft           :: !(Maybe AchievementConfigurationDetail)
-    , _acId              :: !(Maybe Text)
+    { _acAchievementType :: !(Maybe AchievementConfigurationAchievementType)
+    , _acStepsToUnlock :: !(Maybe (Textual Int32))
+    , _acKind :: !(Maybe Text)
+    , _acPublished :: !(Maybe AchievementConfigurationDetail)
+    , _acToken :: !(Maybe Text)
+    , _acInitialState :: !(Maybe AchievementConfigurationInitialState)
+    , _acDraft :: !(Maybe AchievementConfigurationDetail)
+    , _acId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -489,7 +472,7 @@ achievementConfiguration =
   AchievementConfiguration'
     { _acAchievementType = Nothing
     , _acStepsToUnlock = Nothing
-    , _acKind = "gamesConfiguration#achievementConfiguration"
+    , _acKind = Nothing
     , _acPublished = Nothing
     , _acToken = Nothing
     , _acInitialState = Nothing
@@ -498,10 +481,8 @@ achievementConfiguration =
     }
 
 
--- | The type of the achievement. Possible values are: - \"STANDARD\" -
--- Achievement is either locked or unlocked. - \"INCREMENTAL\" -
--- Achievement is incremental.
-acAchievementType :: Lens' AchievementConfiguration (Maybe Text)
+-- | The type of the achievement.
+acAchievementType :: Lens' AchievementConfiguration (Maybe AchievementConfigurationAchievementType)
 acAchievementType
   = lens _acAchievementType
       (\ s a -> s{_acAchievementType = a})
@@ -514,8 +495,8 @@ acStepsToUnlock
       . mapping _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#achievementConfiguration.
-acKind :: Lens' AchievementConfiguration Text
+-- string \`gamesConfiguration#achievementConfiguration\`.
+acKind :: Lens' AchievementConfiguration (Maybe Text)
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The read-only published data of the achievement.
@@ -527,10 +508,8 @@ acPublished
 acToken :: Lens' AchievementConfiguration (Maybe Text)
 acToken = lens _acToken (\ s a -> s{_acToken = a})
 
--- | The initial state of the achievement. Possible values are: - \"HIDDEN\"
--- - Achievement is hidden. - \"REVEALED\" - Achievement is revealed. -
--- \"UNLOCKED\" - Achievement is unlocked.
-acInitialState :: Lens' AchievementConfiguration (Maybe Text)
+-- | The initial state of the achievement.
+acInitialState :: Lens' AchievementConfiguration (Maybe AchievementConfigurationInitialState)
 acInitialState
   = lens _acInitialState
       (\ s a -> s{_acInitialState = a})
@@ -549,9 +528,7 @@ instance FromJSON AchievementConfiguration where
               (\ o ->
                  AchievementConfiguration' <$>
                    (o .:? "achievementType") <*> (o .:? "stepsToUnlock")
-                     <*>
-                     (o .:? "kind" .!=
-                        "gamesConfiguration#achievementConfiguration")
+                     <*> (o .:? "kind")
                      <*> (o .:? "published")
                      <*> (o .:? "token")
                      <*> (o .:? "initialState")
@@ -564,20 +541,20 @@ instance ToJSON AchievementConfiguration where
               (catMaybes
                  [("achievementType" .=) <$> _acAchievementType,
                   ("stepsToUnlock" .=) <$> _acStepsToUnlock,
-                  Just ("kind" .= _acKind),
+                  ("kind" .=) <$> _acKind,
                   ("published" .=) <$> _acPublished,
                   ("token" .=) <$> _acToken,
                   ("initialState" .=) <$> _acInitialState,
                   ("draft" .=) <$> _acDraft, ("id" .=) <$> _acId])
 
--- | This is a JSON template for a localized string resource.
+-- | A localized string resource.
 --
 -- /See:/ 'localizedString' smart constructor.
 data LocalizedString =
   LocalizedString'
-    { _lsKind   :: !Text
+    { _lsKind :: !(Maybe Text)
     , _lsLocale :: !(Maybe Text)
-    , _lsValue  :: !(Maybe Text)
+    , _lsValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -594,16 +571,12 @@ data LocalizedString =
 localizedString
     :: LocalizedString
 localizedString =
-  LocalizedString'
-    { _lsKind = "gamesConfiguration#localizedString"
-    , _lsLocale = Nothing
-    , _lsValue = Nothing
-    }
+  LocalizedString' {_lsKind = Nothing, _lsLocale = Nothing, _lsValue = Nothing}
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#localizedString.
-lsKind :: Lens' LocalizedString Text
+-- string \`gamesConfiguration#localizedString\`.
+lsKind :: Lens' LocalizedString (Maybe Text)
 lsKind = lens _lsKind (\ s a -> s{_lsKind = a})
 
 -- | The locale string.
@@ -619,27 +592,25 @@ instance FromJSON LocalizedString where
           = withObject "LocalizedString"
               (\ o ->
                  LocalizedString' <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#localizedString")
-                     <*> (o .:? "locale")
-                     <*> (o .:? "value"))
+                   (o .:? "kind") <*> (o .:? "locale") <*>
+                     (o .:? "value"))
 
 instance ToJSON LocalizedString where
         toJSON LocalizedString'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _lsKind),
+                 [("kind" .=) <$> _lsKind,
                   ("locale" .=) <$> _lsLocale,
                   ("value" .=) <$> _lsValue])
 
--- | This is a JSON template for a number format resource.
+-- | A number format resource.
 --
 -- /See:/ 'gamesNumberFormatConfiguration' smart constructor.
 data GamesNumberFormatConfiguration =
   GamesNumberFormatConfiguration'
-    { _gnfcSuffix           :: !(Maybe GamesNumberAffixConfiguration)
-    , _gnfcCurrencyCode     :: !(Maybe Text)
-    , _gnfcNumberFormatType :: !(Maybe Text)
+    { _gnfcSuffix :: !(Maybe GamesNumberAffixConfiguration)
+    , _gnfcCurrencyCode :: !(Maybe Text)
+    , _gnfcNumberFormatType :: !(Maybe GamesNumberFormatConfigurationNumberFormatType)
     , _gnfcNumDecimalPlaces :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -679,13 +650,8 @@ gnfcCurrencyCode
   = lens _gnfcCurrencyCode
       (\ s a -> s{_gnfcCurrencyCode = a})
 
--- | The formatting for the number. Possible values are: - \"NUMERIC\" -
--- Numbers are formatted to have no digits or a fixed number of digits
--- after the decimal point according to locale. An optional custom unit can
--- be added. - \"TIME_DURATION\" - Numbers are formatted to hours, minutes
--- and seconds. - \"CURRENCY\" - Numbers are formatted to currency
--- according to locale.
-gnfcNumberFormatType :: Lens' GamesNumberFormatConfiguration (Maybe Text)
+-- | The formatting for the number.
+gnfcNumberFormatType :: Lens' GamesNumberFormatConfiguration (Maybe GamesNumberFormatConfigurationNumberFormatType)
 gnfcNumberFormatType
   = lens _gnfcNumberFormatType
       (\ s a -> s{_gnfcNumberFormatType = a})
@@ -717,16 +683,16 @@ instance ToJSON GamesNumberFormatConfiguration where
                   ("numberFormatType" .=) <$> _gnfcNumberFormatType,
                   ("numDecimalPlaces" .=) <$> _gnfcNumDecimalPlaces])
 
--- | This is a JSON template for a leaderboard configuration detail.
+-- | A leaderboard configuration detail.
 --
 -- /See:/ 'leaderboardConfigurationDetail' smart constructor.
 data LeaderboardConfigurationDetail =
   LeaderboardConfigurationDetail'
-    { _lcdKind        :: !Text
+    { _lcdKind :: !(Maybe Text)
     , _lcdScoreFormat :: !(Maybe GamesNumberFormatConfiguration)
-    , _lcdSortRank    :: !(Maybe (Textual Int32))
-    , _lcdName        :: !(Maybe LocalizedStringBundle)
-    , _lcdIconURL     :: !(Maybe Text)
+    , _lcdSortRank :: !(Maybe (Textual Int32))
+    , _lcdName :: !(Maybe LocalizedStringBundle)
+    , _lcdIconURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -748,7 +714,7 @@ leaderboardConfigurationDetail
     :: LeaderboardConfigurationDetail
 leaderboardConfigurationDetail =
   LeaderboardConfigurationDetail'
-    { _lcdKind = "gamesConfiguration#leaderboardConfigurationDetail"
+    { _lcdKind = Nothing
     , _lcdScoreFormat = Nothing
     , _lcdSortRank = Nothing
     , _lcdName = Nothing
@@ -757,8 +723,8 @@ leaderboardConfigurationDetail =
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#leaderboardConfigurationDetail.
-lcdKind :: Lens' LeaderboardConfigurationDetail Text
+-- string \`gamesConfiguration#leaderboardConfigurationDetail\`.
+lcdKind :: Lens' LeaderboardConfigurationDetail (Maybe Text)
 lcdKind = lens _lcdKind (\ s a -> s{_lcdKind = a})
 
 -- | The score formatting for the leaderboard.
@@ -788,10 +754,8 @@ instance FromJSON LeaderboardConfigurationDetail
           = withObject "LeaderboardConfigurationDetail"
               (\ o ->
                  LeaderboardConfigurationDetail' <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#leaderboardConfigurationDetail")
-                     <*> (o .:? "scoreFormat")
-                     <*> (o .:? "sortRank")
+                   (o .:? "kind") <*> (o .:? "scoreFormat") <*>
+                     (o .:? "sortRank")
                      <*> (o .:? "name")
                      <*> (o .:? "iconUrl"))
 
@@ -799,22 +763,22 @@ instance ToJSON LeaderboardConfigurationDetail where
         toJSON LeaderboardConfigurationDetail'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _lcdKind),
+                 [("kind" .=) <$> _lcdKind,
                   ("scoreFormat" .=) <$> _lcdScoreFormat,
                   ("sortRank" .=) <$> _lcdSortRank,
                   ("name" .=) <$> _lcdName,
                   ("iconUrl" .=) <$> _lcdIconURL])
 
--- | This is a JSON template for an achievement configuration detail.
+-- | An achievement configuration detail.
 --
 -- /See:/ 'achievementConfigurationDetail' smart constructor.
 data AchievementConfigurationDetail =
   AchievementConfigurationDetail'
-    { _acdKind        :: !Text
-    , _acdSortRank    :: !(Maybe (Textual Int32))
-    , _acdName        :: !(Maybe LocalizedStringBundle)
-    , _acdPointValue  :: !(Maybe (Textual Int32))
-    , _acdIconURL     :: !(Maybe Text)
+    { _acdKind :: !(Maybe Text)
+    , _acdSortRank :: !(Maybe (Textual Int32))
+    , _acdName :: !(Maybe LocalizedStringBundle)
+    , _acdPointValue :: !(Maybe (Textual Int32))
+    , _acdIconURL :: !(Maybe Text)
     , _acdDescription :: !(Maybe LocalizedStringBundle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -839,7 +803,7 @@ achievementConfigurationDetail
     :: AchievementConfigurationDetail
 achievementConfigurationDetail =
   AchievementConfigurationDetail'
-    { _acdKind = "gamesConfiguration#achievementConfigurationDetail"
+    { _acdKind = Nothing
     , _acdSortRank = Nothing
     , _acdName = Nothing
     , _acdPointValue = Nothing
@@ -849,8 +813,8 @@ achievementConfigurationDetail =
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#achievementConfigurationDetail.
-acdKind :: Lens' AchievementConfigurationDetail Text
+-- string \`gamesConfiguration#achievementConfigurationDetail\`.
+acdKind :: Lens' AchievementConfigurationDetail (Maybe Text)
 acdKind = lens _acdKind (\ s a -> s{_acdKind = a})
 
 -- | The sort rank of this achievement. Writes to this field are ignored.
@@ -887,10 +851,8 @@ instance FromJSON AchievementConfigurationDetail
           = withObject "AchievementConfigurationDetail"
               (\ o ->
                  AchievementConfigurationDetail' <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#achievementConfigurationDetail")
-                     <*> (o .:? "sortRank")
-                     <*> (o .:? "name")
+                   (o .:? "kind") <*> (o .:? "sortRank") <*>
+                     (o .:? "name")
                      <*> (o .:? "pointValue")
                      <*> (o .:? "iconUrl")
                      <*> (o .:? "description"))
@@ -899,19 +861,19 @@ instance ToJSON AchievementConfigurationDetail where
         toJSON AchievementConfigurationDetail'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _acdKind),
+                 [("kind" .=) <$> _acdKind,
                   ("sortRank" .=) <$> _acdSortRank,
                   ("name" .=) <$> _acdName,
                   ("pointValue" .=) <$> _acdPointValue,
                   ("iconUrl" .=) <$> _acdIconURL,
                   ("description" .=) <$> _acdDescription])
 
--- | This is a JSON template for a localized string bundle resource.
+-- | A localized string bundle resource.
 --
 -- /See:/ 'localizedStringBundle' smart constructor.
 data LocalizedStringBundle =
   LocalizedStringBundle'
-    { _lsbKind         :: !Text
+    { _lsbKind :: !(Maybe Text)
     , _lsbTranslations :: !(Maybe [LocalizedString])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -927,15 +889,12 @@ data LocalizedStringBundle =
 localizedStringBundle
     :: LocalizedStringBundle
 localizedStringBundle =
-  LocalizedStringBundle'
-    { _lsbKind = "gamesConfiguration#localizedStringBundle"
-    , _lsbTranslations = Nothing
-    }
+  LocalizedStringBundle' {_lsbKind = Nothing, _lsbTranslations = Nothing}
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesConfiguration#localizedStringBundle.
-lsbKind :: Lens' LocalizedStringBundle Text
+-- string \`gamesConfiguration#localizedStringBundle\`.
+lsbKind :: Lens' LocalizedStringBundle (Maybe Text)
 lsbKind = lens _lsbKind (\ s a -> s{_lsbKind = a})
 
 -- | The locale strings.
@@ -951,13 +910,11 @@ instance FromJSON LocalizedStringBundle where
           = withObject "LocalizedStringBundle"
               (\ o ->
                  LocalizedStringBundle' <$>
-                   (o .:? "kind" .!=
-                      "gamesConfiguration#localizedStringBundle")
-                     <*> (o .:? "translations" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "translations" .!= mempty))
 
 instance ToJSON LocalizedStringBundle where
         toJSON LocalizedStringBundle'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _lsbKind),
+                 [("kind" .=) <$> _lsbKind,
                   ("translations" .=) <$> _lsbTranslations])

@@ -44,8 +44,8 @@ module Network.Google.Resource.Classroom.Invitations.Delete
     , idCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.delete@ method which the
 -- 'InvitationsDelete' request conforms to.
@@ -68,12 +68,12 @@ type InvitationsDeleteResource =
 -- /See:/ 'invitationsDelete' smart constructor.
 data InvitationsDelete =
   InvitationsDelete'
-    { _idXgafv          :: !(Maybe Xgafv)
+    { _idXgafv :: !(Maybe Xgafv)
     , _idUploadProtocol :: !(Maybe Text)
-    , _idAccessToken    :: !(Maybe Text)
-    , _idUploadType     :: !(Maybe Text)
-    , _idId             :: !Text
-    , _idCallback       :: !(Maybe Text)
+    , _idAccessToken :: !(Maybe Text)
+    , _idUploadType :: !(Maybe Text)
+    , _idId :: !Text
+    , _idCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Organizations.InspectTemplates.Patch
     , oitpCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.inspectTemplates.patch@ method which the
 -- 'OrganizationsInspectTemplatesPatch' request conforms to.
@@ -67,13 +67,13 @@ type OrganizationsInspectTemplatesPatchResource =
 -- /See:/ 'organizationsInspectTemplatesPatch' smart constructor.
 data OrganizationsInspectTemplatesPatch =
   OrganizationsInspectTemplatesPatch'
-    { _oitpXgafv          :: !(Maybe Xgafv)
+    { _oitpXgafv :: !(Maybe Xgafv)
     , _oitpUploadProtocol :: !(Maybe Text)
-    , _oitpAccessToken    :: !(Maybe Text)
-    , _oitpUploadType     :: !(Maybe Text)
-    , _oitpPayload        :: !GooglePrivacyDlpV2UpdateInspectTemplateRequest
-    , _oitpName           :: !Text
-    , _oitpCallback       :: !(Maybe Text)
+    , _oitpAccessToken :: !(Maybe Text)
+    , _oitpUploadType :: !(Maybe Text)
+    , _oitpPayload :: !GooglePrivacyDlpV2UpdateInspectTemplateRequest
+    , _oitpName :: !Text
+    , _oitpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,8 +139,9 @@ oitpPayload :: Lens' OrganizationsInspectTemplatesPatch GooglePrivacyDlpV2Update
 oitpPayload
   = lens _oitpPayload (\ s a -> s{_oitpPayload = a})
 
--- | Resource name of organization and inspectTemplate to be updated, for
--- example \`organizations\/433245324\/inspectTemplates\/432452342\` or
+-- | Required. Resource name of organization and inspectTemplate to be
+-- updated, for example
+-- \`organizations\/433245324\/inspectTemplates\/432452342\` or
 -- projects\/project-id\/inspectTemplates\/432452342.
 oitpName :: Lens' OrganizationsInspectTemplatesPatch Text
 oitpName = lens _oitpName (\ s a -> s{_oitpName = a})

@@ -42,6 +42,9 @@ module Network.Google.Genomics
     -- ** genomics.projects.operations.list
     , module Network.Google.Resource.Genomics.Projects.Operations.List
 
+    -- ** genomics.projects.workers.checkIn
+    , module Network.Google.Resource.Genomics.Projects.Workers.CheckIn
+
     -- ** genomics.workers.checkIn
     , module Network.Google.Resource.Genomics.Workers.CheckIn
 
@@ -51,6 +54,9 @@ module Network.Google.Genomics
     , ContainerStartedEventPortMAppings
     , containerStartedEventPortMAppings
     , csepmaAddtional
+
+    -- ** ActionFlagsItem
+    , ActionFlagsItem (..)
 
     -- ** Event
     , Event
@@ -70,11 +76,6 @@ module Network.Google.Genomics
     , sDetails
     , sCode
     , sMessage
-
-    -- ** OperationSchema
-    , OperationSchema
-    , operationSchema
-    , osAddtional
 
     -- ** RunPipelineRequestLabels
     , RunPipelineRequestLabels
@@ -116,6 +117,7 @@ module Network.Google.Genomics
     -- ** CheckInResponse
     , CheckInResponse
     , checkInResponse
+    , cirFeatures
     , cirDeadline
     , cirMetadata
 
@@ -123,12 +125,8 @@ module Network.Google.Genomics
     , WorkerAssignedEvent
     , workerAssignedEvent
     , waeZone
+    , waeMachineType
     , waeInstance
-
-    -- ** OperationMetadataLabels
-    , OperationMetadataLabels
-    , operationMetadataLabels
-    , omlAddtional
 
     -- ** Operation
     , Operation
@@ -179,7 +177,16 @@ module Network.Google.Genomics
     , cirEvent
     , cirWorkerStatus
     , cirResult
+    , cirEvents
     , cirDeadlineExpired
+    , cirSosReport
+
+    -- ** PersistentDisk
+    , PersistentDisk
+    , persistentDisk
+    , pdSourceImage
+    , pdSizeGb
+    , pdType
 
     -- ** ContainerKilledEvent
     , ContainerKilledEvent
@@ -191,10 +198,29 @@ module Network.Google.Genomics
     , pullStoppedEvent
     , pseImageURI
 
+    -- ** Volume
+    , Volume
+    , volume
+    , vPersistentDisk
+    , vVolume
+    , vExistingDisk
+    , vNfsMount
+
     -- ** ActionLabels
     , ActionLabels
     , actionLabels
     , alAddtional
+
+    -- ** TimestampedEventData
+    , TimestampedEventData
+    , timestampedEventData
+    , tedAddtional
+
+    -- ** TimestampedEvent
+    , TimestampedEvent
+    , timestampedEvent
+    , teData
+    , teTimestamp
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
@@ -213,6 +239,11 @@ module Network.Google.Genomics
     , eventDetails
     , edAddtional
 
+    -- ** ExistingDisk
+    , ExistingDisk
+    , existingDisk
+    , edDisk
+
     -- ** Action
     , Action
     , action
@@ -226,6 +257,7 @@ module Network.Google.Genomics
     , aImageURI
     , aName
     , aLabels
+    , aEncryptedEnvironment
     , aTimeout
     , aPidNamespace
 
@@ -239,11 +271,6 @@ module Network.Google.Genomics
     , WorkerStatusAttachedDisks
     , workerStatusAttachedDisks
     , wsadAddtional
-
-    -- ** OperationMetadataRequest
-    , OperationMetadataRequest
-    , operationMetadataRequest
-    , omrAddtional
 
     -- ** Resources
     , Resources
@@ -264,20 +291,19 @@ module Network.Google.Genomics
     , virtualMachineLabels
     , vmlAddtional
 
-    -- ** OperationMetadataRuntimeMetadata
-    , OperationMetadataRuntimeMetadata
-    , operationMetadataRuntimeMetadata
-    , omrmAddtional
-
     -- ** VirtualMachine
     , VirtualMachine
     , virtualMachine
+    , vmDockerCacheImages
+    , vmReservation
     , vmNetwork
     , vmCPUPlatform
     , vmServiceAccount
     , vmAccelerators
     , vmMachineType
+    , vmEnableStackdriverMonitoring
     , vmLabels
+    , vmVolumes
     , vmBootDiskSizeGb
     , vmDisks
     , vmBootImage
@@ -329,6 +355,7 @@ module Network.Google.Genomics
     , RunPipelineRequest
     , runPipelineRequest
     , rprPipeline
+    , rprPubSubTopic
     , rprLabels
 
     -- ** Pipeline
@@ -337,6 +364,7 @@ module Network.Google.Genomics
     , pActions
     , pEnvironment
     , pResources
+    , pEncryptedEnvironment
     , pTimeout
 
     -- ** Metadata
@@ -348,6 +376,11 @@ module Network.Google.Genomics
     , mPipeline
     , mLabels
     , mCreateTime
+
+    -- ** CheckInResponseFeatures
+    , CheckInResponseFeatures
+    , checkInResponseFeatures
+    , cirfAddtional
 
     -- ** Mount
     , Mount
@@ -368,54 +401,32 @@ module Network.Google.Genomics
     -- ** OperationMetadata
     , OperationMetadata
     , operationMetadata
-    , omClientId
-    , omStartTime
-    , omEvents
-    , omEndTime
-    , omLabels
-    , omProjectId
-    , omCreateTime
-    , omRuntimeMetadata
-    , omRequest
+    , omAddtional
 
     -- ** ActionEnvironment
     , ActionEnvironment
     , actionEnvironment
     , aeAddtional
 
-    -- ** ComputeEngine
-    , ComputeEngine
-    , computeEngine
-    , ceZone
-    , ceDiskNames
-    , ceMachineType
-    , ceInstanceName
+    -- ** NFSMount
+    , NFSMount
+    , nFSMount
+    , nfsmTarget
 
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
-
-    -- ** OperationEvent
-    , OperationEvent
-    , operationEvent
-    , oeStartTime
-    , oeEndTime
-    , oeDescription
-
-    -- ** RuntimeMetadata
-    , RuntimeMetadata
-    , runtimeMetadata
-    , rmComputeEngine
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Genomics.Pipelines.Run
-import           Network.Google.Resource.Genomics.Projects.Operations.Cancel
-import           Network.Google.Resource.Genomics.Projects.Operations.Get
-import           Network.Google.Resource.Genomics.Projects.Operations.List
-import           Network.Google.Resource.Genomics.Workers.CheckIn
+import Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Resource.Genomics.Pipelines.Run
+import Network.Google.Resource.Genomics.Projects.Operations.Cancel
+import Network.Google.Resource.Genomics.Projects.Operations.Get
+import Network.Google.Resource.Genomics.Projects.Operations.List
+import Network.Google.Resource.Genomics.Projects.Workers.CheckIn
+import Network.Google.Resource.Genomics.Workers.CheckIn
 
 {- $resources
 TODO
@@ -424,6 +435,7 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Genomics API service.
 type GenomicsAPI =
      PipelinesRunResource :<|> WorkersCheckInResource :<|>
-       ProjectsOperationsListResource
+       ProjectsWorkersCheckInResource
+       :<|> ProjectsOperationsListResource
        :<|> ProjectsOperationsGetResource
        :<|> ProjectsOperationsCancelResource

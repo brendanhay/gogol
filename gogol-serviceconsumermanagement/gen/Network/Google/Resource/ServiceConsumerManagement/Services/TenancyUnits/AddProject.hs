@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Add a new tenant project to the tenancy unit. There can be a maximum of
--- 512 tenant projects in a tenancy unit. If there are previously failed
+-- 1024 tenant projects in a tenancy unit. If there are previously failed
 -- \`AddTenantProject\` calls, you might need to call
 -- \`RemoveTenantProject\` first to resolve them before you can make
 -- another call to \`AddTenantProject\` with the same tag. Operation.
@@ -46,8 +46,8 @@ module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.A
     , sCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.addProject@ method which the
 -- 'ServicesTenancyUnitsAddProject' request conforms to.
@@ -64,7 +64,7 @@ type ServicesTenancyUnitsAddProjectResource =
                        Post '[JSON] Operation
 
 -- | Add a new tenant project to the tenancy unit. There can be a maximum of
--- 512 tenant projects in a tenancy unit. If there are previously failed
+-- 1024 tenant projects in a tenancy unit. If there are previously failed
 -- \`AddTenantProject\` calls, you might need to call
 -- \`RemoveTenantProject\` first to resolve them before you can make
 -- another call to \`AddTenantProject\` with the same tag. Operation.
@@ -72,13 +72,13 @@ type ServicesTenancyUnitsAddProjectResource =
 -- /See:/ 'servicesTenancyUnitsAddProject' smart constructor.
 data ServicesTenancyUnitsAddProject =
   ServicesTenancyUnitsAddProject'
-    { _sParent         :: !Text
-    , _sXgafv          :: !(Maybe Xgafv)
+    { _sParent :: !Text
+    , _sXgafv :: !(Maybe Xgafv)
     , _sUploadProtocol :: !(Maybe Text)
-    , _sAccessToken    :: !(Maybe Text)
-    , _sUploadType     :: !(Maybe Text)
-    , _sPayload        :: !AddTenantProjectRequest
-    , _sCallback       :: !(Maybe Text)
+    , _sAccessToken :: !(Maybe Text)
+    , _sUploadType :: !(Maybe Text)
+    , _sPayload :: !AddTenantProjectRequest
+    , _sCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,7 +116,7 @@ servicesTenancyUnitsAddProject pSParent_ pSPayload_ =
     }
 
 
--- | Name of the tenancy unit. Such as
+-- | Required. Name of the tenancy unit. Such as
 -- \'services\/service.googleapis.com\/projects\/12345\/tenancyUnits\/abcd\'.
 sParent :: Lens' ServicesTenancyUnitsAddProject Text
 sParent = lens _sParent (\ s a -> s{_sParent = a})

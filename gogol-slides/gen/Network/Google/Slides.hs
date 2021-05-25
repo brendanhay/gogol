@@ -52,6 +52,13 @@ module Network.Google.Slides
 
     -- * Types
 
+    -- ** Autofit
+    , Autofit
+    , autofit
+    , aFontScale
+    , aLineSpacingReduction
+    , aAutofitType
+
     -- ** ParagraphMarker
     , ParagraphMarker
     , paragraphMarker
@@ -424,6 +431,9 @@ module Network.Google.Slides
     , dorObjectId
     , dorObjectIds
 
+    -- ** PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize
+    , PresentationsPagesGetThumbnailThumbnailPropertiesThumbnailSize (..)
+
     -- ** PlaceholderType
     , PlaceholderType (..)
 
@@ -476,6 +486,7 @@ module Network.Google.Slides
     , slideProperties
     , spLayoutObjectId
     , spMasterObjectId
+    , spIsSkipped
     , spNotesPage
 
     -- ** Presentation
@@ -517,6 +528,16 @@ module Network.Google.Slides
 
     -- ** LinePropertiesDashStyle
     , LinePropertiesDashStyle (..)
+
+    -- ** UpdateSlidePropertiesRequest
+    , UpdateSlidePropertiesRequest
+    , updateSlidePropertiesRequest
+    , usprObjectId
+    , usprSlideProperties
+    , usprFields
+
+    -- ** PresentationsPagesGetThumbnailThumbnailPropertiesMimeType
+    , PresentationsPagesGetThumbnailThumbnailPropertiesMimeType (..)
 
     -- ** ImageProperties
     , ImageProperties
@@ -878,6 +899,9 @@ module Network.Google.Slides
     , listNestingLevel
     , lnlAddtional
 
+    -- ** AutofitAutofitType
+    , AutofitAutofitType (..)
+
     -- ** Outline
     , Outline
     , outline
@@ -987,9 +1011,9 @@ module Network.Google.Slides
     -- ** UpdateShapePropertiesRequest
     , UpdateShapePropertiesRequest
     , updateShapePropertiesRequest
-    , usprObjectId
-    , usprShapeProperties
-    , usprFields
+    , uObjectId
+    , uShapeProperties
+    , uFields
 
     -- ** Table
     , Table
@@ -1016,6 +1040,7 @@ module Network.Google.Slides
     -- ** ShapeProperties
     , ShapeProperties
     , shapeProperties
+    , spAutofit
     , spLink
     , spShadow
     , spOutline
@@ -1067,10 +1092,10 @@ module Network.Google.Slides
     -- ** UpdateTableCellPropertiesRequest
     , UpdateTableCellPropertiesRequest
     , updateTableCellPropertiesRequest
-    , uObjectId
-    , uTableCellProperties
-    , uTableRange
-    , uFields
+    , updObjectId
+    , updTableCellProperties
+    , updTableRange
+    , updFields
 
     -- ** ReplaceAllShapesWithImageRequestImageReplaceMethod
     , ReplaceAllShapesWithImageRequestImageReplaceMethod (..)
@@ -1167,6 +1192,7 @@ module Network.Google.Slides
     , reqUpdateTableRowProperties
     , reqCreateSheetsChart
     , reqInsertTableColumns
+    , reqUpdateSlideProperties
     , reqUpdateImageProperties
     , reqUnGroupObjects
     , reqDuplicateObject
@@ -1190,13 +1216,13 @@ module Network.Google.Slides
     , smcText
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Slides.Presentations.BatchUpdate
-import           Network.Google.Resource.Slides.Presentations.Create
-import           Network.Google.Resource.Slides.Presentations.Get
-import           Network.Google.Resource.Slides.Presentations.Pages.Get
-import           Network.Google.Resource.Slides.Presentations.Pages.GetThumbnail
-import           Network.Google.Slides.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Slides.Presentations.BatchUpdate
+import Network.Google.Resource.Slides.Presentations.Create
+import Network.Google.Resource.Slides.Presentations.Get
+import Network.Google.Resource.Slides.Presentations.Pages.Get
+import Network.Google.Resource.Slides.Presentations.Pages.GetThumbnail
+import Network.Google.Slides.Types
 
 {- $resources
 TODO

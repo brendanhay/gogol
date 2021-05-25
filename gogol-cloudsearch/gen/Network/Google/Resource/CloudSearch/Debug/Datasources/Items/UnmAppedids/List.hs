@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all unmapped identities for a specific item.
+-- List all unmapped identities for a specific item. **Note:** This API
+-- requires an admin account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.unmappedids.list@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.unmappedids.list@.
 module Network.Google.Resource.CloudSearch.Debug.Datasources.Items.UnmAppedids.List
     (
     -- * REST Resource
@@ -44,8 +45,8 @@ module Network.Google.Resource.CloudSearch.Debug.Datasources.Items.UnmAppedids.L
     , ddiualCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.debug.datasources.items.unmappedids.list@ method which the
 -- 'DebugDatasourcesItemsUnmAppedidsList' request conforms to.
@@ -65,20 +66,21 @@ type DebugDatasourcesItemsUnmAppedidsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListUnmAppedIdentitiesResponse
 
--- | List all unmapped identities for a specific item.
+-- | List all unmapped identities for a specific item. **Note:** This API
+-- requires an admin account to execute.
 --
 -- /See:/ 'debugDatasourcesItemsUnmAppedidsList' smart constructor.
 data DebugDatasourcesItemsUnmAppedidsList =
   DebugDatasourcesItemsUnmAppedidsList'
-    { _ddiualParent                      :: !Text
-    , _ddiualXgafv                       :: !(Maybe Xgafv)
-    , _ddiualUploadProtocol              :: !(Maybe Text)
-    , _ddiualAccessToken                 :: !(Maybe Text)
-    , _ddiualUploadType                  :: !(Maybe Text)
+    { _ddiualParent :: !Text
+    , _ddiualXgafv :: !(Maybe Xgafv)
+    , _ddiualUploadProtocol :: !(Maybe Text)
+    , _ddiualAccessToken :: !(Maybe Text)
+    , _ddiualUploadType :: !(Maybe Text)
     , _ddiualDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _ddiualPageToken                   :: !(Maybe Text)
-    , _ddiualPageSize                    :: !(Maybe (Textual Int32))
-    , _ddiualCallback                    :: !(Maybe Text)
+    , _ddiualPageToken :: !(Maybe Text)
+    , _ddiualPageSize :: !(Maybe (Textual Int32))
+    , _ddiualCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

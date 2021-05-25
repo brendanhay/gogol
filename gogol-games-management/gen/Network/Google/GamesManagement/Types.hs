@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -42,12 +42,6 @@ module Network.Google.GamesManagement.Types
     , psrarResults
     , psrarKind
 
-    -- * GamesPlayedResource
-    , GamesPlayedResource
-    , gamesPlayedResource
-    , gprAutoMatched
-    , gprTimeMillis
-
     -- * GamesPlayerLevelResource
     , GamesPlayerLevelResource
     , gamesPlayerLevelResource
@@ -67,12 +61,6 @@ module Network.Google.GamesManagement.Types
     , scoresResetMultipleForAllRequest
     , srmfarKind
     , srmfarLeaderboardIds
-
-    -- * QuestsResetMultipleForAllRequest
-    , QuestsResetMultipleForAllRequest
-    , questsResetMultipleForAllRequest
-    , qrmfarKind
-    , qrmfarQuestIds
 
     -- * HiddenPlayerList
     , HiddenPlayerList
@@ -100,6 +88,9 @@ module Network.Google.GamesManagement.Types
     , hpHiddenTimeMillis
     , hpPlayer
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * AchievementResetAllResponse
     , AchievementResetAllResponse
     , achievementResetAllResponse
@@ -110,7 +101,6 @@ module Network.Google.GamesManagement.Types
     , Player
     , player
     , pBannerURLLandscape
-    , pLastPlayedWith
     , pAvatarImageURL
     , pKind
     , pExperienceInfo
@@ -137,16 +127,16 @@ module Network.Google.GamesManagement.Types
     , arrDefinitionId
     ) where
 
-import           Network.Google.GamesManagement.Types.Product
-import           Network.Google.GamesManagement.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GamesManagement.Types.Product
+import Network.Google.GamesManagement.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1management' of the Google Play Game Services Management API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1management' of the Google Play Game Management. This contains the host and root path used as a starting point for constructing service requests.
 gamesManagementService :: ServiceConfig
 gamesManagementService
   = defaultService
       (ServiceId "gamesManagement:v1management")
-      "www.googleapis.com"
+      "gamesmanagement.googleapis.com"
 
 -- | Create, edit, and delete your Google Play Games activity
 gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]

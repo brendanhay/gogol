@@ -22,7 +22,7 @@
 --
 -- Gets one operating system by DART ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystems.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.operatingSystems.get@.
 module Network.Google.Resource.DFAReporting.OperatingSystems.Get
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.Get
     , OperatingSystemsGet
 
     -- * Request Lenses
+    , osgXgafv
+    , osgUploadProtocol
+    , osgAccessToken
+    , osgUploadType
     , osgProFileId
     , osgDartId
+    , osgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.operatingSystems.get@ method which the
 -- 'OperatingSystemsGet' request conforms to.
 type OperatingSystemsGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>
                Capture "dartId" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] OperatingSystem
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] OperatingSystem
 
 -- | Gets one operating system by DART ID.
 --
 -- /See:/ 'operatingSystemsGet' smart constructor.
 data OperatingSystemsGet =
   OperatingSystemsGet'
-    { _osgProFileId :: !(Textual Int64)
-    , _osgDartId    :: !(Textual Int64)
+    { _osgXgafv :: !(Maybe Xgafv)
+    , _osgUploadProtocol :: !(Maybe Text)
+    , _osgAccessToken :: !(Maybe Text)
+    , _osgUploadType :: !(Maybe Text)
+    , _osgProFileId :: !(Textual Int64)
+    , _osgDartId :: !(Textual Int64)
+    , _osgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,19 +82,56 @@ data OperatingSystemsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'osgXgafv'
+--
+-- * 'osgUploadProtocol'
+--
+-- * 'osgAccessToken'
+--
+-- * 'osgUploadType'
+--
 -- * 'osgProFileId'
 --
 -- * 'osgDartId'
+--
+-- * 'osgCallback'
 operatingSystemsGet
     :: Int64 -- ^ 'osgProFileId'
     -> Int64 -- ^ 'osgDartId'
     -> OperatingSystemsGet
 operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
   OperatingSystemsGet'
-    { _osgProFileId = _Coerce # pOsgProFileId_
+    { _osgXgafv = Nothing
+    , _osgUploadProtocol = Nothing
+    , _osgAccessToken = Nothing
+    , _osgUploadType = Nothing
+    , _osgProFileId = _Coerce # pOsgProFileId_
     , _osgDartId = _Coerce # pOsgDartId_
+    , _osgCallback = Nothing
     }
 
+
+-- | V1 error format.
+osgXgafv :: Lens' OperatingSystemsGet (Maybe Xgafv)
+osgXgafv = lens _osgXgafv (\ s a -> s{_osgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+osgUploadProtocol :: Lens' OperatingSystemsGet (Maybe Text)
+osgUploadProtocol
+  = lens _osgUploadProtocol
+      (\ s a -> s{_osgUploadProtocol = a})
+
+-- | OAuth access token.
+osgAccessToken :: Lens' OperatingSystemsGet (Maybe Text)
+osgAccessToken
+  = lens _osgAccessToken
+      (\ s a -> s{_osgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+osgUploadType :: Lens' OperatingSystemsGet (Maybe Text)
+osgUploadType
+  = lens _osgUploadType
+      (\ s a -> s{_osgUploadType = a})
 
 -- | User profile ID associated with this request.
 osgProFileId :: Lens' OperatingSystemsGet Int64
@@ -93,12 +145,22 @@ osgDartId
   = lens _osgDartId (\ s a -> s{_osgDartId = a}) .
       _Coerce
 
+-- | JSONP
+osgCallback :: Lens' OperatingSystemsGet (Maybe Text)
+osgCallback
+  = lens _osgCallback (\ s a -> s{_osgCallback = a})
+
 instance GoogleRequest OperatingSystemsGet where
         type Rs OperatingSystemsGet = OperatingSystem
         type Scopes OperatingSystemsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OperatingSystemsGet'{..}
-          = go _osgProFileId _osgDartId (Just AltJSON)
+          = go _osgProFileId _osgDartId _osgXgafv
+              _osgUploadProtocol
+              _osgAccessToken
+              _osgUploadType
+              _osgCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

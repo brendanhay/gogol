@@ -22,7 +22,7 @@
 --
 -- Updates the customer-level settings.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.updateSettings@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.updateSettings@.
 module Network.Google.Resource.AlertCenter.UpdateSettings
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.AlertCenter.UpdateSettings
     , usCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.updateSettings@ method which the
 -- 'UpdateSettings' request conforms to.
@@ -64,13 +64,13 @@ type UpdateSettingsResource =
 -- /See:/ 'updateSettings' smart constructor.
 data UpdateSettings =
   UpdateSettings'
-    { _usXgafv          :: !(Maybe Xgafv)
+    { _usXgafv :: !(Maybe Xgafv)
     , _usUploadProtocol :: !(Maybe Text)
-    , _usAccessToken    :: !(Maybe Text)
-    , _usUploadType     :: !(Maybe Text)
-    , _usPayload        :: !Settings
-    , _usCustomerId     :: !(Maybe Text)
-    , _usCallback       :: !(Maybe Text)
+    , _usAccessToken :: !(Maybe Text)
+    , _usUploadType :: !(Maybe Text)
+    , _usPayload :: !Settings
+    , _usCustomerId :: !(Maybe Text)
+    , _usCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -133,9 +133,9 @@ usPayload :: Lens' UpdateSettings Settings
 usPayload
   = lens _usPayload (\ s a -> s{_usPayload = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alert settings are associated with. Inferred from the
--- caller identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alert settings are associated with. Inferred
+-- from the caller identity if not provided.
 usCustomerId :: Lens' UpdateSettings (Maybe Text)
 usCustomerId
   = lens _usCustomerId (\ s a -> s{_usCustomerId = a})

@@ -315,14 +315,14 @@ module Network.Google.Spectrum
     , dcFrequencyRanges
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Spectrum.Paws.GetSpectrum
-import           Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
-import           Network.Google.Resource.Spectrum.Paws.Init
-import           Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
-import           Network.Google.Resource.Spectrum.Paws.Register
-import           Network.Google.Resource.Spectrum.Paws.VerifyDevice
-import           Network.Google.Spectrum.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Spectrum.Paws.GetSpectrum
+import Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
+import Network.Google.Resource.Spectrum.Paws.Init
+import Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
+import Network.Google.Resource.Spectrum.Paws.Register
+import Network.Google.Resource.Spectrum.Paws.VerifyDevice
+import Network.Google.Spectrum.Types
 
 {- $resources
 TODO

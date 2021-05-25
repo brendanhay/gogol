@@ -16,7 +16,7 @@
 --
 module Network.Google.SourceRepo.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The format of the Cloud Pub\/Sub messages.
 data PubsubConfigMessageFormat

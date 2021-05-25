@@ -22,7 +22,7 @@
 --
 -- Retrieves list of available mobile apps.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.mobileApps.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.mobileApps.list@.
 module Network.Google.Resource.DFAReporting.MobileApps.List
     (
     -- * REST Resource
@@ -33,45 +33,60 @@ module Network.Google.Resource.DFAReporting.MobileApps.List
     , MobileAppsList
 
     -- * Request Lenses
+    , malXgafv
     , malDirectories
+    , malUploadProtocol
+    , malAccessToken
     , malSearchString
+    , malUploadType
     , malIds
     , malProFileId
     , malPageToken
     , malMaxResults
+    , malCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.mobileApps.list@ method which the
 -- 'MobileAppsList' request conforms to.
 type MobileAppsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileApps" :>
-               QueryParams "directories" MobileAppsListDirectories
-                 :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] MobileAppsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParams "directories" MobileAppsListDirectories
+                   :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "ids" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "maxResults" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] MobileAppsListResponse
 
 -- | Retrieves list of available mobile apps.
 --
 -- /See:/ 'mobileAppsList' smart constructor.
 data MobileAppsList =
   MobileAppsList'
-    { _malDirectories  :: !(Maybe [MobileAppsListDirectories])
+    { _malXgafv :: !(Maybe Xgafv)
+    , _malDirectories :: !(Maybe [MobileAppsListDirectories])
+    , _malUploadProtocol :: !(Maybe Text)
+    , _malAccessToken :: !(Maybe Text)
     , _malSearchString :: !(Maybe Text)
-    , _malIds          :: !(Maybe [Text])
-    , _malProFileId    :: !(Textual Int64)
-    , _malPageToken    :: !(Maybe Text)
-    , _malMaxResults   :: !(Textual Int32)
+    , _malUploadType :: !(Maybe Text)
+    , _malIds :: !(Maybe [Text])
+    , _malProFileId :: !(Textual Int64)
+    , _malPageToken :: !(Maybe Text)
+    , _malMaxResults :: !(Textual Int32)
+    , _malCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,9 +95,17 @@ data MobileAppsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'malXgafv'
+--
 -- * 'malDirectories'
 --
+-- * 'malUploadProtocol'
+--
+-- * 'malAccessToken'
+--
 -- * 'malSearchString'
+--
+-- * 'malUploadType'
 --
 -- * 'malIds'
 --
@@ -91,19 +114,30 @@ data MobileAppsList =
 -- * 'malPageToken'
 --
 -- * 'malMaxResults'
+--
+-- * 'malCallback'
 mobileAppsList
     :: Int64 -- ^ 'malProFileId'
     -> MobileAppsList
 mobileAppsList pMalProFileId_ =
   MobileAppsList'
-    { _malDirectories = Nothing
+    { _malXgafv = Nothing
+    , _malDirectories = Nothing
+    , _malUploadProtocol = Nothing
+    , _malAccessToken = Nothing
     , _malSearchString = Nothing
+    , _malUploadType = Nothing
     , _malIds = Nothing
     , _malProFileId = _Coerce # pMalProFileId_
     , _malPageToken = Nothing
     , _malMaxResults = 1000
+    , _malCallback = Nothing
     }
 
+
+-- | V1 error format.
+malXgafv :: Lens' MobileAppsList (Maybe Xgafv)
+malXgafv = lens _malXgafv (\ s a -> s{_malXgafv = a})
 
 -- | Select only apps from these directories.
 malDirectories :: Lens' MobileAppsList [MobileAppsListDirectories]
@@ -112,6 +146,18 @@ malDirectories
       (\ s a -> s{_malDirectories = a})
       . _Default
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+malUploadProtocol :: Lens' MobileAppsList (Maybe Text)
+malUploadProtocol
+  = lens _malUploadProtocol
+      (\ s a -> s{_malUploadProtocol = a})
+
+-- | OAuth access token.
+malAccessToken :: Lens' MobileAppsList (Maybe Text)
+malAccessToken
+  = lens _malAccessToken
+      (\ s a -> s{_malAccessToken = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"app*2015\" will return objects with names like \"app Jan
@@ -123,6 +169,12 @@ malSearchString :: Lens' MobileAppsList (Maybe Text)
 malSearchString
   = lens _malSearchString
       (\ s a -> s{_malSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+malUploadType :: Lens' MobileAppsList (Maybe Text)
+malUploadType
+  = lens _malUploadType
+      (\ s a -> s{_malUploadType = a})
 
 -- | Select only apps with these IDs.
 malIds :: Lens' MobileAppsList [Text]
@@ -148,16 +200,26 @@ malMaxResults
       (\ s a -> s{_malMaxResults = a})
       . _Coerce
 
+-- | JSONP
+malCallback :: Lens' MobileAppsList (Maybe Text)
+malCallback
+  = lens _malCallback (\ s a -> s{_malCallback = a})
+
 instance GoogleRequest MobileAppsList where
         type Rs MobileAppsList = MobileAppsListResponse
         type Scopes MobileAppsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient MobileAppsList'{..}
-          = go _malProFileId (_malDirectories ^. _Default)
+          = go _malProFileId _malXgafv
+              (_malDirectories ^. _Default)
+              _malUploadProtocol
+              _malAccessToken
               _malSearchString
+              _malUploadType
               (_malIds ^. _Default)
               _malPageToken
               (Just _malMaxResults)
+              _malCallback
               (Just AltJSON)
               dFAReportingService
           where go

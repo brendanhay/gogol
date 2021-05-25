@@ -46,8 +46,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
     , svcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.clear@ method which the
 -- 'SpreadsheetsValuesClear' request conforms to.
@@ -74,14 +74,14 @@ type SpreadsheetsValuesClearResource =
 -- /See:/ 'spreadsheetsValuesClear' smart constructor.
 data SpreadsheetsValuesClear =
   SpreadsheetsValuesClear'
-    { _svcXgafv          :: !(Maybe Xgafv)
+    { _svcXgafv :: !(Maybe Xgafv)
     , _svcUploadProtocol :: !(Maybe Text)
-    , _svcAccessToken    :: !(Maybe Text)
-    , _svcSpreadsheetId  :: !Text
-    , _svcUploadType     :: !(Maybe Text)
-    , _svcPayload        :: !ClearValuesRequest
-    , _svcRange          :: !Text
-    , _svcCallback       :: !(Maybe Text)
+    , _svcAccessToken :: !(Maybe Text)
+    , _svcSpreadsheetId :: !Text
+    , _svcUploadType :: !(Maybe Text)
+    , _svcPayload :: !ClearValuesRequest
+    , _svcRange :: !Text
+    , _svcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -156,7 +156,7 @@ svcPayload :: Lens' SpreadsheetsValuesClear ClearValuesRequest
 svcPayload
   = lens _svcPayload (\ s a -> s{_svcPayload = a})
 
--- | The A1 notation of the values to clear.
+-- | The A1 notation or R1C1 notation of the values to clear.
 svcRange :: Lens' SpreadsheetsValuesClear Text
 svcRange = lens _svcRange (\ s a -> s{_svcRange = a})
 

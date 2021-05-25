@@ -13,10 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Declares, configures, and deploys complex solutions on Google Cloud
--- Platform.
+-- The Google Cloud Deployment Manager v2 API provides services for
+-- configuring, deploying, and viewing Google Cloud services and APIs via
+-- templates which specify deployments of Cloud resources.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference>
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference>
 module Network.Google.DeploymentManager
     (
     -- * Service Configuration
@@ -100,12 +101,14 @@ module Network.Google.DeploymentManager
     , configFile
     , cfContent
 
+    -- ** OperationWarningsItemCode
+    , OperationWarningsItemCode (..)
+
     -- ** AuditConfig
     , AuditConfig
     , auditConfig
     , acService
     , acAuditLogConfigs
-    , acExemptedMembers
 
     -- ** DeploymentsUpdateCreatePolicy
     , DeploymentsUpdateCreatePolicy (..)
@@ -130,6 +133,9 @@ module Network.Google.DeploymentManager
     , ruwidiValue
     , ruwidiKey
 
+    -- ** ResourceUpdateWarningsItemCode
+    , ResourceUpdateWarningsItemCode (..)
+
     -- ** DeploymentsDeleteDeletePolicy
     , DeploymentsDeleteDeletePolicy (..)
 
@@ -138,12 +144,6 @@ module Network.Google.DeploymentManager
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
-
-    -- ** LogConfigCounterOptions
-    , LogConfigCounterOptions
-    , logConfigCounterOptions
-    , lccoField
-    , lccoMetric
 
     -- ** DeploymentsUpdateDeletePolicy
     , DeploymentsUpdateDeletePolicy (..)
@@ -156,6 +156,7 @@ module Network.Google.DeploymentManager
     , operation
     , oTargetId
     , oStatus
+    , oOperationGroupId
     , oInsertTime
     , oProgress
     , oStartTime
@@ -217,16 +218,14 @@ module Network.Google.DeploymentManager
     , dleValue
     , dleKey
 
-    -- ** Rule
-    , Rule
-    , rule
-    , rAction
-    , rNotIns
-    , rIns
-    , rLogConfigs
-    , rConditions
-    , rPermissions
-    , rDescription
+    -- ** OperationStatus
+    , OperationStatus (..)
+
+    -- ** ResourceUpdateState
+    , ResourceUpdateState (..)
+
+    -- ** ResourceUpdateIntent
+    , ResourceUpdateIntent (..)
 
     -- ** TestPermissionsRequest
     , TestPermissionsRequest
@@ -240,10 +239,12 @@ module Network.Google.DeploymentManager
     , mLayout
     , mConfig
     , mExpandedConfig
+    , mManifestSizeBytes
     , mImports
     , mSelfLink
     , mName
     , mId
+    , mManifestSizeLimitBytes
 
     -- ** ResourceUpdateWarningsItem
     , ResourceUpdateWarningsItem
@@ -257,11 +258,8 @@ module Network.Google.DeploymentManager
     , deploymentsCancelPreviewRequest
     , dcprFingerprint
 
-    -- ** LogConfigCloudAuditOptions
-    , LogConfigCloudAuditOptions
-    , logConfigCloudAuditOptions
-    , lccaoAuthorizationLoggingOptions
-    , lccaoLogName
+    -- ** AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
 
     -- ** Resource
     , Resource
@@ -279,10 +277,8 @@ module Network.Google.DeploymentManager
     , rUpdate
     , rProperties
 
-    -- ** LogConfigDataAccessOptions
-    , LogConfigDataAccessOptions
-    , logConfigDataAccessOptions
-    , lcdaoLogMode
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** DeploymentUpdateLabelEntry
     , DeploymentUpdateLabelEntry
@@ -315,20 +311,13 @@ module Network.Google.DeploymentManager
     , gsprBindings
     , gsprPolicy
 
-    -- ** AuthorizationLoggingOptions
-    , AuthorizationLoggingOptions
-    , authorizationLoggingOptions
-    , aloPermissionType
-
     -- ** Policy
     , Policy
     , policy
     , pAuditConfigs
     , pEtag
-    , pRules
     , pVersion
     , pBindings
-    , pIAMOwned
 
     -- ** Type
     , Type
@@ -374,15 +363,8 @@ module Network.Google.DeploymentManager
     , resourceUpdateError
     , rueErrors
 
-    -- ** Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cValue
-    , cSys
-    , cSvc
+    -- ** ResourceWarningsItemCode
+    , ResourceWarningsItemCode (..)
 
     -- ** DeploymentsListResponse
     , DeploymentsListResponse
@@ -396,13 +378,6 @@ module Network.Google.DeploymentManager
     , rwiData
     , rwiCode
     , rwiMessage
-
-    -- ** LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
 
     -- ** ResourceAccessControl
     , ResourceAccessControl
@@ -449,32 +424,32 @@ module Network.Google.DeploymentManager
     , DeploymentsInsertCreatePolicy (..)
     ) where
 
-import           Network.Google.DeploymentManager.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
-import           Network.Google.Resource.DeploymentManager.Deployments.Delete
-import           Network.Google.Resource.DeploymentManager.Deployments.Get
-import           Network.Google.Resource.DeploymentManager.Deployments.GetIAMPolicy
-import           Network.Google.Resource.DeploymentManager.Deployments.Insert
-import           Network.Google.Resource.DeploymentManager.Deployments.List
-import           Network.Google.Resource.DeploymentManager.Deployments.Patch
-import           Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
-import           Network.Google.Resource.DeploymentManager.Deployments.Stop
-import           Network.Google.Resource.DeploymentManager.Deployments.TestIAMPermissions
-import           Network.Google.Resource.DeploymentManager.Deployments.Update
-import           Network.Google.Resource.DeploymentManager.Manifests.Get
-import           Network.Google.Resource.DeploymentManager.Manifests.List
-import           Network.Google.Resource.DeploymentManager.Operations.Get
-import           Network.Google.Resource.DeploymentManager.Operations.List
-import           Network.Google.Resource.DeploymentManager.Resources.Get
-import           Network.Google.Resource.DeploymentManager.Resources.List
-import           Network.Google.Resource.DeploymentManager.Types.List
+import Network.Google.Prelude
+import Network.Google.DeploymentManager.Types
+import Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
+import Network.Google.Resource.DeploymentManager.Deployments.Delete
+import Network.Google.Resource.DeploymentManager.Deployments.Get
+import Network.Google.Resource.DeploymentManager.Deployments.GetIAMPolicy
+import Network.Google.Resource.DeploymentManager.Deployments.Insert
+import Network.Google.Resource.DeploymentManager.Deployments.List
+import Network.Google.Resource.DeploymentManager.Deployments.Patch
+import Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
+import Network.Google.Resource.DeploymentManager.Deployments.Stop
+import Network.Google.Resource.DeploymentManager.Deployments.TestIAMPermissions
+import Network.Google.Resource.DeploymentManager.Deployments.Update
+import Network.Google.Resource.DeploymentManager.Manifests.Get
+import Network.Google.Resource.DeploymentManager.Manifests.List
+import Network.Google.Resource.DeploymentManager.Operations.Get
+import Network.Google.Resource.DeploymentManager.Operations.List
+import Network.Google.Resource.DeploymentManager.Resources.Get
+import Network.Google.Resource.DeploymentManager.Resources.List
+import Network.Google.Resource.DeploymentManager.Types.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Deployment Manager API service.
+-- | Represents the entirety of the methods and resources available for the Cloud Deployment Manager V2 API service.
 type DeploymentManagerAPI =
      TypesListResource :<|> ResourcesListResource :<|>
        ResourcesGetResource

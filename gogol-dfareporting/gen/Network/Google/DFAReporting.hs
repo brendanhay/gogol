@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages your DoubleClick Campaign Manager ad campaigns and reports.
+-- Build applications to efficiently manage large or complex trafficking,
+-- reporting, and attribution workflows for Campaign Manager 360.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference>
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference>
 module Network.Google.DFAReporting
     (
     -- * Service Configuration
@@ -660,6 +661,12 @@ module Network.Google.DFAReporting
     , dlAppURL
     , dlMobileApp
 
+    -- ** DisjunctiveMatchStatement
+    , DisjunctiveMatchStatement
+    , disjunctiveMatchStatement
+    , dmsEventFilters
+    , dmsKind
+
     -- ** PlacementsListSortOrder
     , PlacementsListSortOrder (..)
 
@@ -683,6 +690,15 @@ module Network.Google.DFAReporting
     -- ** TargetingTemplatesListSortOrder
     , TargetingTemplatesListSortOrder (..)
 
+    -- ** PathReportCompatibleFields
+    , PathReportCompatibleFields
+    , pathReportCompatibleFields
+    , prcfMetrics
+    , prcfChannelGroupings
+    , prcfKind
+    , prcfPathFilters
+    , prcfDimensions
+
     -- ** OptimizationActivity
     , OptimizationActivity
     , optimizationActivity
@@ -698,10 +714,7 @@ module Network.Google.DFAReporting
     -- ** AdBlockingConfiguration
     , AdBlockingConfiguration
     , adBlockingConfiguration
-    , abcCreativeBundleId
-    , abcOverrideClickThroughURL
     , abcEnabled
-    , abcClickThroughURL
 
     -- ** AdvertiserLandingPagesListSortOrder
     , AdvertiserLandingPagesListSortOrder (..)
@@ -752,7 +765,10 @@ module Network.Google.DFAReporting
     , videoSettings
     , vsKind
     , vsCompanionSettings
+    , vsObaSettings
+    , vsObaEnabled
     , vsTranscodeSettings
+    , vsDurationSeconds
     , vsOrientation
     , vsSkippableSettings
 
@@ -816,6 +832,18 @@ module Network.Google.DFAReporting
 
     -- ** PricingScheduleCapCostOption
     , PricingScheduleCapCostOption (..)
+
+    -- ** ObaIcon
+    , ObaIcon
+    , obaIcon
+    , oiSize
+    , oiIconClickThroughURL
+    , oiYPosition
+    , oiIconClickTrackingURL
+    , oiXPosition
+    , oiProgram
+    , oiIconViewTrackingURL
+    , oiResourceURL
 
     -- ** ListPopulationRule
     , ListPopulationRule
@@ -912,6 +940,8 @@ module Network.Google.DFAReporting
     , siteVideoSettings
     , svsKind
     , svsCompanionSettings
+    , svsObaSettings
+    , svsObaEnabled
     , svsTranscodeSettings
     , svsOrientation
     , svsSkippableSettings
@@ -981,7 +1011,6 @@ module Network.Google.DFAReporting
     , dsURL
     , dsIdDimensionValue
     , dsInpageTagFormats
-    , dsActive
     , dsName
     , dsId
 
@@ -1022,6 +1051,13 @@ module Network.Google.DFAReporting
     , cdrrcfKind
     , cdrrcfDimensionFilters
     , cdrrcfOverlapMetrics
+
+    -- ** ChannelGroupingRule
+    , ChannelGroupingRule
+    , channelGroupingRule
+    , cgrKind
+    , cgrName
+    , cgrDisjunctiveMatchStatements
 
     -- ** FsCommand
     , FsCommand
@@ -1147,6 +1183,9 @@ module Network.Google.DFAReporting
 
     -- ** FloodlightConfigurationNATuralSearchConversionAttributionOption
     , FloodlightConfigurationNATuralSearchConversionAttributionOption (..)
+
+    -- ** MeasurementPartnerWrAppingDataTagWrAppingMode
+    , MeasurementPartnerWrAppingDataTagWrAppingMode (..)
 
     -- ** PlacementStrategiesListResponse
     , PlacementStrategiesListResponse
@@ -1340,7 +1379,6 @@ module Network.Google.DFAReporting
     , psTestingStartDate
     , psFloodlightActivityId
     , psEndDate
-    , psDisregardOverdelivery
     , psStartDate
     , psCapCostOption
     , psPricingType
@@ -1491,6 +1529,17 @@ module Network.Google.DFAReporting
     -- ** PlacementsListCompatibilities
     , PlacementsListCompatibilities (..)
 
+    -- ** ReportPathCriteria
+    , ReportPathCriteria
+    , reportPathCriteria
+    , rpcCustomChannelGrouping
+    , rpcMetricNames
+    , rpcDateRange
+    , rpcPathFilters
+    , rpcFloodlightConfigId
+    , rpcDimensions
+    , rpcActivityFilters
+
     -- ** TargetableRemarketingListsListResponse
     , TargetableRemarketingListsListResponse
     , targetableRemarketingListsListResponse
@@ -1610,6 +1659,7 @@ module Network.Google.DFAReporting
     , creRenderingIdDimensionValue
     , creCustomKeyValues
     , creSkipOffSet
+    , creObaIcon
     , creRenderingId
     , creThirdPartyBackupImageImpressionsURL
     , creFsCommand
@@ -1718,10 +1768,12 @@ module Network.Google.DFAReporting
     , rPathToConversionCriteria
     , rKind
     , rFormat
+    , rPathCriteria
     , rReachCriteria
     , rLastModifiedTime
     , rAccountId
     , rName
+    , rPathAttributionCriteria
     , rId
     , rCrossDimensionReachCriteria
     , rType
@@ -1754,6 +1806,7 @@ module Network.Google.DFAReporting
     -- ** Campaign
     , Campaign
     , campaign
+    , camMeasurementPartnerLink
     , camAdBlockingConfiguration
     , camCreativeOptimizationConfiguration
     , camCreativeGroupIds
@@ -1791,6 +1844,9 @@ module Network.Google.DFAReporting
 
     -- ** CreativesListSortOrder
     , CreativesListSortOrder (..)
+
+    -- ** MeasurementPartnerCampaignLinkMeasurementPartner
+    , MeasurementPartnerCampaignLinkMeasurementPartner (..)
 
     -- ** InventoryItemsListType
     , InventoryItemsListType (..)
@@ -1830,6 +1886,9 @@ module Network.Google.DFAReporting
     -- ** RemarketingListListSource
     , RemarketingListListSource (..)
 
+    -- ** MeasurementPartnerCampaignLinkLinkStatus
+    , MeasurementPartnerCampaignLinkLinkStatus (..)
+
     -- ** BrowsersListResponse
     , BrowsersListResponse
     , browsersListResponse
@@ -1867,6 +1926,17 @@ module Network.Google.DFAReporting
 
     -- ** UserDefinedVariableConfigurationDataType
     , UserDefinedVariableConfigurationDataType (..)
+
+    -- ** ReportPathAttributionCriteria
+    , ReportPathAttributionCriteria
+    , reportPathAttributionCriteria
+    , rpacCustomChannelGrouping
+    , rpacMetricNames
+    , rpacDateRange
+    , rpacPathFilters
+    , rpacFloodlightConfigId
+    , rpacDimensions
+    , rpacActivityFilters
 
     -- ** FloodlightActivityCacheBustingType
     , FloodlightActivityCacheBustingType (..)
@@ -2049,6 +2119,9 @@ module Network.Google.DFAReporting
     , rptccrpIncludeUnattributedCookieConversions
     , rptccrpIncludeAttributedIPConversions
 
+    -- ** MeasurementPartnerWrAppingDataLinkStatus
+    , MeasurementPartnerWrAppingDataLinkStatus (..)
+
     -- ** UserRolePermissionsListResponse
     , UserRolePermissionsListResponse
     , userRolePermissionsListResponse
@@ -2100,6 +2173,15 @@ module Network.Google.DFAReporting
     , ctlrKind
     , ctlrConnectionTypes
 
+    -- ** EventFilter
+    , EventFilter
+    , eventFilter
+    , efKind
+    , efDimensionFilter
+
+    -- ** MeasurementPartnerWrAppingDataMeasurementPartner
+    , MeasurementPartnerWrAppingDataMeasurementPartner (..)
+
     -- ** OrdersListResponse
     , OrdersListResponse
     , ordersListResponse
@@ -2126,6 +2208,14 @@ module Network.Google.DFAReporting
     , cgName
     , cgId
     , cgSubAccountId
+
+    -- ** ChannelGrouping
+    , ChannelGrouping
+    , channelGrouping
+    , chaRules
+    , chaKind
+    , chaFallbackName
+    , chaName
 
     -- ** SubAccountsListSortField
     , SubAccountsListSortField (..)
@@ -2237,8 +2327,10 @@ module Network.Google.DFAReporting
     -- ** CompatibleFields
     , CompatibleFields
     , compatibleFields
+    , cfPathReportCompatibleFields
     , cfReachReportCompatibleFields
     , cfCrossDimensionReachReportCompatibleFields
+    , cfPathAttributionReportCompatibleFields
     , cfKind
     , cfFloodlightReportCompatibleFields
     , cfReportCompatibleFields
@@ -2406,6 +2498,12 @@ module Network.Google.DFAReporting
     , osvName
     , osvId
 
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** PathFilterPathMatchPosition
+    , PathFilterPathMatchPosition (..)
+
     -- ** InventoryItemsListSortOrder
     , InventoryItemsListSortOrder (..)
 
@@ -2421,6 +2519,13 @@ module Network.Google.DFAReporting
     , acccId
     , acccLevel
     , acccPermissionGroupId
+
+    -- ** MeasurementPartnerCampaignLink
+    , MeasurementPartnerCampaignLink
+    , measurementPartnerCampaignLink
+    , mpclLinkStatus
+    , mpclMeasurementPartner
+    , mpclPartnerCampaignId
 
     -- ** UserProFile
     , UserProFile
@@ -2476,20 +2581,20 @@ module Network.Google.DFAReporting
     -- ** ChangeLog
     , ChangeLog
     , changeLog
-    , chaUserProFileId
-    , chaObjectType
-    , chaUserProFileName
-    , chaKind
-    , chaObjectId
-    , chaAction
-    , chaTransactionId
-    , chaOldValue
-    , chaAccountId
-    , chaNewValue
-    , chaFieldName
-    , chaId
-    , chaSubAccountId
-    , chaChangeTime
+    , chahUserProFileId
+    , chahObjectType
+    , chahUserProFileName
+    , chahKind
+    , chahObjectId
+    , chahAction
+    , chahTransactionId
+    , chahOldValue
+    , chahAccountId
+    , chahNewValue
+    , chahFieldName
+    , chahId
+    , chahSubAccountId
+    , chahChangeTime
 
     -- ** Language
     , Language
@@ -2514,6 +2619,8 @@ module Network.Google.DFAReporting
     , FloodlightActivity
     , floodlightActivity
     , faCountingMethod
+    , faAttributionEnabled
+    , faStatus
     , faTagString
     , faSecure
     , faExpectedURL
@@ -2530,7 +2637,6 @@ module Network.Google.DFAReporting
     , faName
     , faPublisherTags
     , faFloodlightActivityGroupId
-    , faHidden
     , faFloodlightActivityGroupType
     , faDefaultTags
     , faFloodlightTagType
@@ -2578,6 +2684,9 @@ module Network.Google.DFAReporting
     , lastModifiedInfo
     , lmiTime
 
+    -- ** MeasurementPartnerAdvertiserLinkLinkStatus
+    , MeasurementPartnerAdvertiserLinkLinkStatus (..)
+
     -- ** TargetWindow
     , TargetWindow
     , targetWindow
@@ -2603,6 +2712,7 @@ module Network.Google.DFAReporting
     -- ** Advertiser
     , Advertiser
     , advertiser
+    , advdMeasurementPartnerLink
     , advdOriginalFloodlightConfigurationId
     , advdStatus
     , advdFloodlightConfigurationId
@@ -2633,6 +2743,16 @@ module Network.Google.DFAReporting
     , urId
     , urPermissions
     , urSubAccountId
+
+    -- ** PathFilter
+    , PathFilter
+    , pathFilter
+    , pfEventFilters
+    , pfKind
+    , pfPathMatchPosition
+
+    -- ** MeasurementPartnerAdvertiserLinkMeasurementPartner
+    , MeasurementPartnerAdvertiserLinkMeasurementPartner (..)
 
     -- ** FloodlightActivityUserDefinedVariableTypesItem
     , FloodlightActivityUserDefinedVariableTypesItem (..)
@@ -2731,6 +2851,15 @@ module Network.Google.DFAReporting
     , dfValue
     , dfDimensionName
 
+    -- ** PathReportDimensionValue
+    , PathReportDimensionValue
+    , pathReportDimensionValue
+    , prdvKind
+    , prdvValues
+    , prdvMatchType
+    , prdvIds
+    , prdvDimensionName
+
     -- ** UserProFileList
     , UserProFileList
     , userProFileList
@@ -2806,6 +2935,8 @@ module Network.Google.DFAReporting
     , conoChildDirectedTreatment
     , conoGclid
     , conoOrdinal
+    , conoDclid
+    , conoMatchId
 
     -- ** CreativeFieldValuesListResponse
     , CreativeFieldValuesListResponse
@@ -2816,6 +2947,14 @@ module Network.Google.DFAReporting
 
     -- ** SiteSettingsVpaidAdapterChoiceTemplate
     , SiteSettingsVpaidAdapterChoiceTemplate (..)
+
+    -- ** MeasurementPartnerWrAppingData
+    , MeasurementPartnerWrAppingData
+    , measurementPartnerWrAppingData
+    , mpwadLinkStatus
+    , mpwadMeasurementPartner
+    , mpwadWrAppedTag
+    , mpwadTagWrAppingMode
 
     -- ** AccountsListSortField
     , AccountsListSortField (..)
@@ -2860,6 +2999,9 @@ module Network.Google.DFAReporting
     , sdKind
     , sdSortOrder
     , sdName
+
+    -- ** PathReportDimensionValueMatchType
+    , PathReportDimensionValueMatchType (..)
 
     -- ** PlacementGroupsListSortOrder
     , PlacementGroupsListSortOrder (..)
@@ -3184,12 +3326,16 @@ module Network.Google.DFAReporting
     -- ** CreativeAssetMetadata
     , CreativeAssetMetadata
     , creativeAssetMetadata
+    , camaRichMedia
+    , camaCounterCustomEvents
     , camaKind
     , camaAssetIdentifier
     , camaIdDimensionValue
+    , camaExitCustomEvents
     , camaClickTags
     , camaWarnedValidationRules
     , camaId
+    , camaTimerCustomEvents
     , camaDetectedFeatures
 
     -- ** OmnitureSettings
@@ -3306,6 +3452,16 @@ module Network.Google.DFAReporting
     , assComment
     , assCompatibility
 
+    -- ** MeasurementPartnerAdvertiserLink
+    , MeasurementPartnerAdvertiserLink
+    , measurementPartnerAdvertiserLink
+    , mpalLinkStatus
+    , mpalMeasurementPartner
+    , mpalPartnerAdvertiserId
+
+    -- ** FloodlightActivityStatus
+    , FloodlightActivityStatus (..)
+
     -- ** ThirdPartyTrackingURL
     , ThirdPartyTrackingURL
     , thirdPartyTrackingURL
@@ -3368,6 +3524,7 @@ module Network.Google.DFAReporting
     , p1Status
     , p1VideoSettings
     , p1PlacementStrategyId
+    , p1PartnerWrAppingData
     , p1TagFormats
     , p1SiteIdDimensionValue
     , p1PricingSchedule
@@ -3381,6 +3538,7 @@ module Network.Google.DFAReporting
     , p1IdDimensionValue
     , p1VpaidAdapterChoice
     , p1AdBlockingOptOut
+    , p1WrAppingOptOut
     , p1Primary
     , p1LookbackConfiguration
     , p1TagSetting
@@ -3471,218 +3629,218 @@ module Network.Google.DFAReporting
     , lteExpression
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
-import           Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
-import           Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
-import           Network.Google.Resource.DFAReporting.AccountPermissions.Get
-import           Network.Google.Resource.DFAReporting.AccountPermissions.List
-import           Network.Google.Resource.DFAReporting.Accounts.Get
-import           Network.Google.Resource.DFAReporting.Accounts.List
-import           Network.Google.Resource.DFAReporting.Accounts.Patch
-import           Network.Google.Resource.DFAReporting.Accounts.Update
-import           Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
-import           Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
-import           Network.Google.Resource.DFAReporting.AccountUserProFiles.List
-import           Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
-import           Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
-import           Network.Google.Resource.DFAReporting.Ads.Get
-import           Network.Google.Resource.DFAReporting.Ads.Insert
-import           Network.Google.Resource.DFAReporting.Ads.List
-import           Network.Google.Resource.DFAReporting.Ads.Patch
-import           Network.Google.Resource.DFAReporting.Ads.Update
-import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
-import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
-import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
-import           Network.Google.Resource.DFAReporting.AdvertiserGroups.List
-import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
-import           Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
-import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
-import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
-import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
-import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
-import           Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
-import           Network.Google.Resource.DFAReporting.Advertisers.Get
-import           Network.Google.Resource.DFAReporting.Advertisers.Insert
-import           Network.Google.Resource.DFAReporting.Advertisers.List
-import           Network.Google.Resource.DFAReporting.Advertisers.Patch
-import           Network.Google.Resource.DFAReporting.Advertisers.Update
-import           Network.Google.Resource.DFAReporting.Browsers.List
-import           Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
-import           Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
-import           Network.Google.Resource.DFAReporting.Campaigns.Get
-import           Network.Google.Resource.DFAReporting.Campaigns.Insert
-import           Network.Google.Resource.DFAReporting.Campaigns.List
-import           Network.Google.Resource.DFAReporting.Campaigns.Patch
-import           Network.Google.Resource.DFAReporting.Campaigns.Update
-import           Network.Google.Resource.DFAReporting.ChangeLogs.Get
-import           Network.Google.Resource.DFAReporting.ChangeLogs.List
-import           Network.Google.Resource.DFAReporting.Cities.List
-import           Network.Google.Resource.DFAReporting.ConnectionTypes.Get
-import           Network.Google.Resource.DFAReporting.ConnectionTypes.List
-import           Network.Google.Resource.DFAReporting.ContentCategories.Delete
-import           Network.Google.Resource.DFAReporting.ContentCategories.Get
-import           Network.Google.Resource.DFAReporting.ContentCategories.Insert
-import           Network.Google.Resource.DFAReporting.ContentCategories.List
-import           Network.Google.Resource.DFAReporting.ContentCategories.Patch
-import           Network.Google.Resource.DFAReporting.ContentCategories.Update
-import           Network.Google.Resource.DFAReporting.Conversions.Batchinsert
-import           Network.Google.Resource.DFAReporting.Conversions.Batchupdate
-import           Network.Google.Resource.DFAReporting.Countries.Get
-import           Network.Google.Resource.DFAReporting.Countries.List
-import           Network.Google.Resource.DFAReporting.CreativeAssets.Insert
-import           Network.Google.Resource.DFAReporting.CreativeFields.Delete
-import           Network.Google.Resource.DFAReporting.CreativeFields.Get
-import           Network.Google.Resource.DFAReporting.CreativeFields.Insert
-import           Network.Google.Resource.DFAReporting.CreativeFields.List
-import           Network.Google.Resource.DFAReporting.CreativeFields.Patch
-import           Network.Google.Resource.DFAReporting.CreativeFields.Update
-import           Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
-import           Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
-import           Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
-import           Network.Google.Resource.DFAReporting.CreativeFieldValues.List
-import           Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
-import           Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
-import           Network.Google.Resource.DFAReporting.CreativeGroups.Get
-import           Network.Google.Resource.DFAReporting.CreativeGroups.Insert
-import           Network.Google.Resource.DFAReporting.CreativeGroups.List
-import           Network.Google.Resource.DFAReporting.CreativeGroups.Patch
-import           Network.Google.Resource.DFAReporting.CreativeGroups.Update
-import           Network.Google.Resource.DFAReporting.Creatives.Get
-import           Network.Google.Resource.DFAReporting.Creatives.Insert
-import           Network.Google.Resource.DFAReporting.Creatives.List
-import           Network.Google.Resource.DFAReporting.Creatives.Patch
-import           Network.Google.Resource.DFAReporting.Creatives.Update
-import           Network.Google.Resource.DFAReporting.DimensionValues.Query
-import           Network.Google.Resource.DFAReporting.DirectorySites.Get
-import           Network.Google.Resource.DFAReporting.DirectorySites.Insert
-import           Network.Google.Resource.DFAReporting.DirectorySites.List
-import           Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
-import           Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
-import           Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
-import           Network.Google.Resource.DFAReporting.EventTags.Delete
-import           Network.Google.Resource.DFAReporting.EventTags.Get
-import           Network.Google.Resource.DFAReporting.EventTags.Insert
-import           Network.Google.Resource.DFAReporting.EventTags.List
-import           Network.Google.Resource.DFAReporting.EventTags.Patch
-import           Network.Google.Resource.DFAReporting.EventTags.Update
-import           Network.Google.Resource.DFAReporting.Files.Get
-import           Network.Google.Resource.DFAReporting.Files.List
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.Get
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.List
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
-import           Network.Google.Resource.DFAReporting.FloodlightActivities.Update
-import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
-import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
-import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
-import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
-import           Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
-import           Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
-import           Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
-import           Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
-import           Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
-import           Network.Google.Resource.DFAReporting.InventoryItems.Get
-import           Network.Google.Resource.DFAReporting.InventoryItems.List
-import           Network.Google.Resource.DFAReporting.Languages.List
-import           Network.Google.Resource.DFAReporting.Metros.List
-import           Network.Google.Resource.DFAReporting.MobileApps.Get
-import           Network.Google.Resource.DFAReporting.MobileApps.List
-import           Network.Google.Resource.DFAReporting.MobileCarriers.Get
-import           Network.Google.Resource.DFAReporting.MobileCarriers.List
-import           Network.Google.Resource.DFAReporting.OperatingSystems.Get
-import           Network.Google.Resource.DFAReporting.OperatingSystems.List
-import           Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
-import           Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
-import           Network.Google.Resource.DFAReporting.OrderDocuments.Get
-import           Network.Google.Resource.DFAReporting.OrderDocuments.List
-import           Network.Google.Resource.DFAReporting.Orders.Get
-import           Network.Google.Resource.DFAReporting.Orders.List
-import           Network.Google.Resource.DFAReporting.PlacementGroups.Get
-import           Network.Google.Resource.DFAReporting.PlacementGroups.Insert
-import           Network.Google.Resource.DFAReporting.PlacementGroups.List
-import           Network.Google.Resource.DFAReporting.PlacementGroups.Patch
-import           Network.Google.Resource.DFAReporting.PlacementGroups.Update
-import           Network.Google.Resource.DFAReporting.Placements.Generatetags
-import           Network.Google.Resource.DFAReporting.Placements.Get
-import           Network.Google.Resource.DFAReporting.Placements.Insert
-import           Network.Google.Resource.DFAReporting.Placements.List
-import           Network.Google.Resource.DFAReporting.Placements.Patch
-import           Network.Google.Resource.DFAReporting.Placements.Update
-import           Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
-import           Network.Google.Resource.DFAReporting.PlacementStrategies.Get
-import           Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
-import           Network.Google.Resource.DFAReporting.PlacementStrategies.List
-import           Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
-import           Network.Google.Resource.DFAReporting.PlacementStrategies.Update
-import           Network.Google.Resource.DFAReporting.PlatformTypes.Get
-import           Network.Google.Resource.DFAReporting.PlatformTypes.List
-import           Network.Google.Resource.DFAReporting.PostalCodes.Get
-import           Network.Google.Resource.DFAReporting.PostalCodes.List
-import           Network.Google.Resource.DFAReporting.Projects.Get
-import           Network.Google.Resource.DFAReporting.Projects.List
-import           Network.Google.Resource.DFAReporting.Regions.List
-import           Network.Google.Resource.DFAReporting.RemarketingLists.Get
-import           Network.Google.Resource.DFAReporting.RemarketingLists.Insert
-import           Network.Google.Resource.DFAReporting.RemarketingLists.List
-import           Network.Google.Resource.DFAReporting.RemarketingLists.Patch
-import           Network.Google.Resource.DFAReporting.RemarketingLists.Update
-import           Network.Google.Resource.DFAReporting.RemarketingListShares.Get
-import           Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
-import           Network.Google.Resource.DFAReporting.RemarketingListShares.Update
-import           Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
-import           Network.Google.Resource.DFAReporting.Reports.Delete
-import           Network.Google.Resource.DFAReporting.Reports.Files.Get
-import           Network.Google.Resource.DFAReporting.Reports.Files.List
-import           Network.Google.Resource.DFAReporting.Reports.Get
-import           Network.Google.Resource.DFAReporting.Reports.Insert
-import           Network.Google.Resource.DFAReporting.Reports.List
-import           Network.Google.Resource.DFAReporting.Reports.Patch
-import           Network.Google.Resource.DFAReporting.Reports.Run
-import           Network.Google.Resource.DFAReporting.Reports.Update
-import           Network.Google.Resource.DFAReporting.Sites.Get
-import           Network.Google.Resource.DFAReporting.Sites.Insert
-import           Network.Google.Resource.DFAReporting.Sites.List
-import           Network.Google.Resource.DFAReporting.Sites.Patch
-import           Network.Google.Resource.DFAReporting.Sites.Update
-import           Network.Google.Resource.DFAReporting.Sizes.Get
-import           Network.Google.Resource.DFAReporting.Sizes.Insert
-import           Network.Google.Resource.DFAReporting.Sizes.List
-import           Network.Google.Resource.DFAReporting.SubAccounts.Get
-import           Network.Google.Resource.DFAReporting.SubAccounts.Insert
-import           Network.Google.Resource.DFAReporting.SubAccounts.List
-import           Network.Google.Resource.DFAReporting.SubAccounts.Patch
-import           Network.Google.Resource.DFAReporting.SubAccounts.Update
-import           Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
-import           Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
-import           Network.Google.Resource.DFAReporting.TargetingTemplates.Get
-import           Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
-import           Network.Google.Resource.DFAReporting.TargetingTemplates.List
-import           Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
-import           Network.Google.Resource.DFAReporting.TargetingTemplates.Update
-import           Network.Google.Resource.DFAReporting.UserProFiles.Get
-import           Network.Google.Resource.DFAReporting.UserProFiles.List
-import           Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
-import           Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
-import           Network.Google.Resource.DFAReporting.UserRolePermissions.Get
-import           Network.Google.Resource.DFAReporting.UserRolePermissions.List
-import           Network.Google.Resource.DFAReporting.UserRoles.Delete
-import           Network.Google.Resource.DFAReporting.UserRoles.Get
-import           Network.Google.Resource.DFAReporting.UserRoles.Insert
-import           Network.Google.Resource.DFAReporting.UserRoles.List
-import           Network.Google.Resource.DFAReporting.UserRoles.Patch
-import           Network.Google.Resource.DFAReporting.UserRoles.Update
-import           Network.Google.Resource.DFAReporting.VideoFormats.Get
-import           Network.Google.Resource.DFAReporting.VideoFormats.List
+import Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
+import Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
+import Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
+import Network.Google.Resource.DFAReporting.AccountPermissions.Get
+import Network.Google.Resource.DFAReporting.AccountPermissions.List
+import Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
+import Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
+import Network.Google.Resource.DFAReporting.AccountUserProFiles.List
+import Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
+import Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
+import Network.Google.Resource.DFAReporting.Accounts.Get
+import Network.Google.Resource.DFAReporting.Accounts.List
+import Network.Google.Resource.DFAReporting.Accounts.Patch
+import Network.Google.Resource.DFAReporting.Accounts.Update
+import Network.Google.Resource.DFAReporting.Ads.Get
+import Network.Google.Resource.DFAReporting.Ads.Insert
+import Network.Google.Resource.DFAReporting.Ads.List
+import Network.Google.Resource.DFAReporting.Ads.Patch
+import Network.Google.Resource.DFAReporting.Ads.Update
+import Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
+import Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
+import Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
+import Network.Google.Resource.DFAReporting.AdvertiserGroups.List
+import Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
+import Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
+import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Get
+import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Insert
+import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.List
+import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Patch
+import Network.Google.Resource.DFAReporting.AdvertiserLandingPages.Update
+import Network.Google.Resource.DFAReporting.Advertisers.Get
+import Network.Google.Resource.DFAReporting.Advertisers.Insert
+import Network.Google.Resource.DFAReporting.Advertisers.List
+import Network.Google.Resource.DFAReporting.Advertisers.Patch
+import Network.Google.Resource.DFAReporting.Advertisers.Update
+import Network.Google.Resource.DFAReporting.Browsers.List
+import Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
+import Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
+import Network.Google.Resource.DFAReporting.Campaigns.Get
+import Network.Google.Resource.DFAReporting.Campaigns.Insert
+import Network.Google.Resource.DFAReporting.Campaigns.List
+import Network.Google.Resource.DFAReporting.Campaigns.Patch
+import Network.Google.Resource.DFAReporting.Campaigns.Update
+import Network.Google.Resource.DFAReporting.ChangeLogs.Get
+import Network.Google.Resource.DFAReporting.ChangeLogs.List
+import Network.Google.Resource.DFAReporting.Cities.List
+import Network.Google.Resource.DFAReporting.ConnectionTypes.Get
+import Network.Google.Resource.DFAReporting.ConnectionTypes.List
+import Network.Google.Resource.DFAReporting.ContentCategories.Delete
+import Network.Google.Resource.DFAReporting.ContentCategories.Get
+import Network.Google.Resource.DFAReporting.ContentCategories.Insert
+import Network.Google.Resource.DFAReporting.ContentCategories.List
+import Network.Google.Resource.DFAReporting.ContentCategories.Patch
+import Network.Google.Resource.DFAReporting.ContentCategories.Update
+import Network.Google.Resource.DFAReporting.Conversions.Batchinsert
+import Network.Google.Resource.DFAReporting.Conversions.Batchupdate
+import Network.Google.Resource.DFAReporting.Countries.Get
+import Network.Google.Resource.DFAReporting.Countries.List
+import Network.Google.Resource.DFAReporting.CreativeAssets.Insert
+import Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
+import Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
+import Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
+import Network.Google.Resource.DFAReporting.CreativeFieldValues.List
+import Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
+import Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
+import Network.Google.Resource.DFAReporting.CreativeFields.Delete
+import Network.Google.Resource.DFAReporting.CreativeFields.Get
+import Network.Google.Resource.DFAReporting.CreativeFields.Insert
+import Network.Google.Resource.DFAReporting.CreativeFields.List
+import Network.Google.Resource.DFAReporting.CreativeFields.Patch
+import Network.Google.Resource.DFAReporting.CreativeFields.Update
+import Network.Google.Resource.DFAReporting.CreativeGroups.Get
+import Network.Google.Resource.DFAReporting.CreativeGroups.Insert
+import Network.Google.Resource.DFAReporting.CreativeGroups.List
+import Network.Google.Resource.DFAReporting.CreativeGroups.Patch
+import Network.Google.Resource.DFAReporting.CreativeGroups.Update
+import Network.Google.Resource.DFAReporting.Creatives.Get
+import Network.Google.Resource.DFAReporting.Creatives.Insert
+import Network.Google.Resource.DFAReporting.Creatives.List
+import Network.Google.Resource.DFAReporting.Creatives.Patch
+import Network.Google.Resource.DFAReporting.Creatives.Update
+import Network.Google.Resource.DFAReporting.DimensionValues.Query
+import Network.Google.Resource.DFAReporting.DirectorySites.Get
+import Network.Google.Resource.DFAReporting.DirectorySites.Insert
+import Network.Google.Resource.DFAReporting.DirectorySites.List
+import Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
+import Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
+import Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
+import Network.Google.Resource.DFAReporting.EventTags.Delete
+import Network.Google.Resource.DFAReporting.EventTags.Get
+import Network.Google.Resource.DFAReporting.EventTags.Insert
+import Network.Google.Resource.DFAReporting.EventTags.List
+import Network.Google.Resource.DFAReporting.EventTags.Patch
+import Network.Google.Resource.DFAReporting.EventTags.Update
+import Network.Google.Resource.DFAReporting.Files.Get
+import Network.Google.Resource.DFAReporting.Files.List
+import Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
+import Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
+import Network.Google.Resource.DFAReporting.FloodlightActivities.Get
+import Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
+import Network.Google.Resource.DFAReporting.FloodlightActivities.List
+import Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
+import Network.Google.Resource.DFAReporting.FloodlightActivities.Update
+import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
+import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
+import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
+import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
+import Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
+import Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
+import Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
+import Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
+import Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
+import Network.Google.Resource.DFAReporting.InventoryItems.Get
+import Network.Google.Resource.DFAReporting.InventoryItems.List
+import Network.Google.Resource.DFAReporting.Languages.List
+import Network.Google.Resource.DFAReporting.Metros.List
+import Network.Google.Resource.DFAReporting.MobileApps.Get
+import Network.Google.Resource.DFAReporting.MobileApps.List
+import Network.Google.Resource.DFAReporting.MobileCarriers.Get
+import Network.Google.Resource.DFAReporting.MobileCarriers.List
+import Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
+import Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
+import Network.Google.Resource.DFAReporting.OperatingSystems.Get
+import Network.Google.Resource.DFAReporting.OperatingSystems.List
+import Network.Google.Resource.DFAReporting.OrderDocuments.Get
+import Network.Google.Resource.DFAReporting.OrderDocuments.List
+import Network.Google.Resource.DFAReporting.Orders.Get
+import Network.Google.Resource.DFAReporting.Orders.List
+import Network.Google.Resource.DFAReporting.PlacementGroups.Get
+import Network.Google.Resource.DFAReporting.PlacementGroups.Insert
+import Network.Google.Resource.DFAReporting.PlacementGroups.List
+import Network.Google.Resource.DFAReporting.PlacementGroups.Patch
+import Network.Google.Resource.DFAReporting.PlacementGroups.Update
+import Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
+import Network.Google.Resource.DFAReporting.PlacementStrategies.Get
+import Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
+import Network.Google.Resource.DFAReporting.PlacementStrategies.List
+import Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
+import Network.Google.Resource.DFAReporting.PlacementStrategies.Update
+import Network.Google.Resource.DFAReporting.Placements.Generatetags
+import Network.Google.Resource.DFAReporting.Placements.Get
+import Network.Google.Resource.DFAReporting.Placements.Insert
+import Network.Google.Resource.DFAReporting.Placements.List
+import Network.Google.Resource.DFAReporting.Placements.Patch
+import Network.Google.Resource.DFAReporting.Placements.Update
+import Network.Google.Resource.DFAReporting.PlatformTypes.Get
+import Network.Google.Resource.DFAReporting.PlatformTypes.List
+import Network.Google.Resource.DFAReporting.PostalCodes.Get
+import Network.Google.Resource.DFAReporting.PostalCodes.List
+import Network.Google.Resource.DFAReporting.Projects.Get
+import Network.Google.Resource.DFAReporting.Projects.List
+import Network.Google.Resource.DFAReporting.Regions.List
+import Network.Google.Resource.DFAReporting.RemarketingListShares.Get
+import Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
+import Network.Google.Resource.DFAReporting.RemarketingListShares.Update
+import Network.Google.Resource.DFAReporting.RemarketingLists.Get
+import Network.Google.Resource.DFAReporting.RemarketingLists.Insert
+import Network.Google.Resource.DFAReporting.RemarketingLists.List
+import Network.Google.Resource.DFAReporting.RemarketingLists.Patch
+import Network.Google.Resource.DFAReporting.RemarketingLists.Update
+import Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
+import Network.Google.Resource.DFAReporting.Reports.Delete
+import Network.Google.Resource.DFAReporting.Reports.Files.Get
+import Network.Google.Resource.DFAReporting.Reports.Files.List
+import Network.Google.Resource.DFAReporting.Reports.Get
+import Network.Google.Resource.DFAReporting.Reports.Insert
+import Network.Google.Resource.DFAReporting.Reports.List
+import Network.Google.Resource.DFAReporting.Reports.Patch
+import Network.Google.Resource.DFAReporting.Reports.Run
+import Network.Google.Resource.DFAReporting.Reports.Update
+import Network.Google.Resource.DFAReporting.Sites.Get
+import Network.Google.Resource.DFAReporting.Sites.Insert
+import Network.Google.Resource.DFAReporting.Sites.List
+import Network.Google.Resource.DFAReporting.Sites.Patch
+import Network.Google.Resource.DFAReporting.Sites.Update
+import Network.Google.Resource.DFAReporting.Sizes.Get
+import Network.Google.Resource.DFAReporting.Sizes.Insert
+import Network.Google.Resource.DFAReporting.Sizes.List
+import Network.Google.Resource.DFAReporting.SubAccounts.Get
+import Network.Google.Resource.DFAReporting.SubAccounts.Insert
+import Network.Google.Resource.DFAReporting.SubAccounts.List
+import Network.Google.Resource.DFAReporting.SubAccounts.Patch
+import Network.Google.Resource.DFAReporting.SubAccounts.Update
+import Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
+import Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
+import Network.Google.Resource.DFAReporting.TargetingTemplates.Get
+import Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
+import Network.Google.Resource.DFAReporting.TargetingTemplates.List
+import Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
+import Network.Google.Resource.DFAReporting.TargetingTemplates.Update
+import Network.Google.Resource.DFAReporting.UserProFiles.Get
+import Network.Google.Resource.DFAReporting.UserProFiles.List
+import Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
+import Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
+import Network.Google.Resource.DFAReporting.UserRolePermissions.Get
+import Network.Google.Resource.DFAReporting.UserRolePermissions.List
+import Network.Google.Resource.DFAReporting.UserRoles.Delete
+import Network.Google.Resource.DFAReporting.UserRoles.Get
+import Network.Google.Resource.DFAReporting.UserRoles.Insert
+import Network.Google.Resource.DFAReporting.UserRoles.List
+import Network.Google.Resource.DFAReporting.UserRoles.Patch
+import Network.Google.Resource.DFAReporting.UserRoles.Update
+import Network.Google.Resource.DFAReporting.VideoFormats.Get
+import Network.Google.Resource.DFAReporting.VideoFormats.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the DCM/DFA Reporting And Trafficking API service.
+-- | Represents the entirety of the methods and resources available for the Campaign Manager 360 API service.
 type DFAReportingAPI =
      InventoryItemsListResource :<|>
        InventoryItemsGetResource

@@ -22,7 +22,7 @@
 --
 -- List Findings under a given ScanRun.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.findings.list@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.findings.list@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.List
     (
     -- * REST Resource
@@ -44,14 +44,14 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.
     , pscsrflCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.findings.list@ method which the
 -- 'ProjectsScanConfigsScanRunsFindingsList' request conforms to.
 type ProjectsScanConfigsScanRunsFindingsListResource
      =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "findings" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -70,15 +70,15 @@ type ProjectsScanConfigsScanRunsFindingsListResource
 -- /See:/ 'projectsScanConfigsScanRunsFindingsList' smart constructor.
 data ProjectsScanConfigsScanRunsFindingsList =
   ProjectsScanConfigsScanRunsFindingsList'
-    { _pscsrflParent         :: !Text
-    , _pscsrflXgafv          :: !(Maybe Xgafv)
+    { _pscsrflParent :: !Text
+    , _pscsrflXgafv :: !(Maybe Xgafv)
     , _pscsrflUploadProtocol :: !(Maybe Text)
-    , _pscsrflAccessToken    :: !(Maybe Text)
-    , _pscsrflUploadType     :: !(Maybe Text)
-    , _pscsrflFilter         :: !(Maybe Text)
-    , _pscsrflPageToken      :: !(Maybe Text)
-    , _pscsrflPageSize       :: !(Maybe (Textual Int32))
-    , _pscsrflCallback       :: !(Maybe Text)
+    , _pscsrflAccessToken :: !(Maybe Text)
+    , _pscsrflUploadType :: !(Maybe Text)
+    , _pscsrflFilter :: !(Maybe Text)
+    , _pscsrflPageToken :: !(Maybe Text)
+    , _pscsrflPageSize :: !(Maybe (Textual Int32))
+    , _pscsrflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

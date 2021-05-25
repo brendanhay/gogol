@@ -42,8 +42,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.List
     , pilCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.list@ method which the
 -- 'ProjectsInstancesList' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsInstancesListResource =
 -- /See:/ 'projectsInstancesList' smart constructor.
 data ProjectsInstancesList =
   ProjectsInstancesList'
-    { _pilParent         :: !Text
-    , _pilXgafv          :: !(Maybe Xgafv)
+    { _pilParent :: !Text
+    , _pilXgafv :: !(Maybe Xgafv)
     , _pilUploadProtocol :: !(Maybe Text)
-    , _pilAccessToken    :: !(Maybe Text)
-    , _pilUploadType     :: !(Maybe Text)
-    , _pilPageToken      :: !(Maybe Text)
-    , _pilCallback       :: !(Maybe Text)
+    , _pilAccessToken :: !(Maybe Text)
+    , _pilUploadType :: !(Maybe Text)
+    , _pilPageToken :: !(Maybe Text)
+    , _pilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,8 +108,8 @@ projectsInstancesList pPilParent_ =
     }
 
 
--- | The unique name of the project for which a list of instances is
--- requested. Values are of the form \`projects\/\`.
+-- | Required. The unique name of the project for which a list of instances
+-- is requested. Values are of the form \`projects\/{project}\`.
 pilParent :: Lens' ProjectsInstancesList Text
 pilParent
   = lens _pilParent (\ s a -> s{_pilParent = a})

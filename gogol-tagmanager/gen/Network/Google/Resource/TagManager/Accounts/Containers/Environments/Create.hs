@@ -22,7 +22,7 @@
 --
 -- Creates a GTM Environment.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.environments.create@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.environments.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Environments.Creat
 
     -- * Request Lenses
     , acecParent
+    , acecXgafv
+    , acecUploadProtocol
+    , acecAccessToken
+    , acecUploadType
     , acecPayload
+    , acecCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.environments.create@ method which the
 -- 'AccountsContainersEnvironmentsCreate' request conforms to.
@@ -47,17 +52,27 @@ type AccountsContainersEnvironmentsCreateResource =
        "v2" :>
          Capture "parent" Text :>
            "environments" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Environment :>
-                 Post '[JSON] Environment
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Environment :>
+                           Post '[JSON] Environment
 
 -- | Creates a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsCreate' smart constructor.
 data AccountsContainersEnvironmentsCreate =
   AccountsContainersEnvironmentsCreate'
-    { _acecParent  :: !Text
+    { _acecParent :: !Text
+    , _acecXgafv :: !(Maybe Xgafv)
+    , _acecUploadProtocol :: !(Maybe Text)
+    , _acecAccessToken :: !(Maybe Text)
+    , _acecUploadType :: !(Maybe Text)
     , _acecPayload :: !Environment
+    , _acecCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,14 +83,31 @@ data AccountsContainersEnvironmentsCreate =
 --
 -- * 'acecParent'
 --
+-- * 'acecXgafv'
+--
+-- * 'acecUploadProtocol'
+--
+-- * 'acecAccessToken'
+--
+-- * 'acecUploadType'
+--
 -- * 'acecPayload'
+--
+-- * 'acecCallback'
 accountsContainersEnvironmentsCreate
     :: Text -- ^ 'acecParent'
     -> Environment -- ^ 'acecPayload'
     -> AccountsContainersEnvironmentsCreate
 accountsContainersEnvironmentsCreate pAcecParent_ pAcecPayload_ =
   AccountsContainersEnvironmentsCreate'
-    {_acecParent = pAcecParent_, _acecPayload = pAcecPayload_}
+    { _acecParent = pAcecParent_
+    , _acecXgafv = Nothing
+    , _acecUploadProtocol = Nothing
+    , _acecAccessToken = Nothing
+    , _acecUploadType = Nothing
+    , _acecPayload = pAcecPayload_
+    , _acecCallback = Nothing
+    }
 
 
 -- | GTM Container\'s API relative path. Example:
@@ -84,10 +116,38 @@ acecParent :: Lens' AccountsContainersEnvironmentsCreate Text
 acecParent
   = lens _acecParent (\ s a -> s{_acecParent = a})
 
+-- | V1 error format.
+acecXgafv :: Lens' AccountsContainersEnvironmentsCreate (Maybe Xgafv)
+acecXgafv
+  = lens _acecXgafv (\ s a -> s{_acecXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acecUploadProtocol :: Lens' AccountsContainersEnvironmentsCreate (Maybe Text)
+acecUploadProtocol
+  = lens _acecUploadProtocol
+      (\ s a -> s{_acecUploadProtocol = a})
+
+-- | OAuth access token.
+acecAccessToken :: Lens' AccountsContainersEnvironmentsCreate (Maybe Text)
+acecAccessToken
+  = lens _acecAccessToken
+      (\ s a -> s{_acecAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acecUploadType :: Lens' AccountsContainersEnvironmentsCreate (Maybe Text)
+acecUploadType
+  = lens _acecUploadType
+      (\ s a -> s{_acecUploadType = a})
+
 -- | Multipart request metadata.
 acecPayload :: Lens' AccountsContainersEnvironmentsCreate Environment
 acecPayload
   = lens _acecPayload (\ s a -> s{_acecPayload = a})
+
+-- | JSONP
+acecCallback :: Lens' AccountsContainersEnvironmentsCreate (Maybe Text)
+acecCallback
+  = lens _acecCallback (\ s a -> s{_acecCallback = a})
 
 instance GoogleRequest
            AccountsContainersEnvironmentsCreate
@@ -98,7 +158,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersEnvironmentsCreate'{..}
-          = go _acecParent (Just AltJSON) _acecPayload
+          = go _acecParent _acecXgafv _acecUploadProtocol
+              _acecAccessToken
+              _acecUploadType
+              _acecCallback
+              (Just AltJSON)
+              _acecPayload
               tagManagerService
           where go
                   = buildClient

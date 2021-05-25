@@ -59,8 +59,8 @@ module Network.Google.Resource.Classroom.UserProFiles.Guardians.List
     , upfglCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.guardians.list@ method which the
 -- 'UserProFilesGuardiansList' request conforms to.
@@ -100,15 +100,15 @@ type UserProFilesGuardiansListResource =
 -- /See:/ 'userProFilesGuardiansList' smart constructor.
 data UserProFilesGuardiansList =
   UserProFilesGuardiansList'
-    { _upfglStudentId           :: !Text
-    , _upfglXgafv               :: !(Maybe Xgafv)
-    , _upfglUploadProtocol      :: !(Maybe Text)
-    , _upfglAccessToken         :: !(Maybe Text)
-    , _upfglUploadType          :: !(Maybe Text)
+    { _upfglStudentId :: !Text
+    , _upfglXgafv :: !(Maybe Xgafv)
+    , _upfglUploadProtocol :: !(Maybe Text)
+    , _upfglAccessToken :: !(Maybe Text)
+    , _upfglUploadType :: !(Maybe Text)
     , _upfglInvitedEmailAddress :: !(Maybe Text)
-    , _upfglPageToken           :: !(Maybe Text)
-    , _upfglPageSize            :: !(Maybe (Textual Int32))
-    , _upfglCallback            :: !(Maybe Text)
+    , _upfglPageToken :: !(Maybe Text)
+    , _upfglPageSize :: !(Maybe (Textual Int32))
+    , _upfglCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

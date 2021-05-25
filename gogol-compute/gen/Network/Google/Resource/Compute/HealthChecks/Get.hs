@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.HealthChecks.Get
     , hcgProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.healthChecks.get@ method which the
 -- 'HealthChecksGet' request conforms to.
@@ -60,7 +60,7 @@ type HealthChecksGetResource =
 data HealthChecksGet =
   HealthChecksGet'
     { _hcgHealthCheck :: !Text
-    , _hcgProject     :: !Text
+    , _hcgProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

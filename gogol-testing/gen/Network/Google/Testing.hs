@@ -64,12 +64,23 @@ module Network.Google.Testing
     -- ** IosTestSetup
     , IosTestSetup
     , iosTestSetup
+    , itsAdditionalIPas
+    , itsPullDirectories
     , itsNetworkProFile
+    , itsPushFiles
+
+    -- ** Shard
+    , Shard
+    , shard
+    , sShardIndex
+    , sTestTargetsForShard
+    , sNumShards
 
     -- ** TestExecution
     , TestExecution
     , testExecution
     , teTestDetails
+    , teShard
     , teState
     , teEnvironment
     , teTestSpecification
@@ -78,6 +89,13 @@ module Network.Google.Testing
     , teProjectId
     , teToolResultsStep
     , teTimestamp
+
+    -- ** IosTestLoop
+    , IosTestLoop
+    , iosTestLoop
+    , itlScenarios
+    , itlAppBundleId
+    , itlAppIPa
 
     -- ** IosVersion
     , IosVersion
@@ -112,6 +130,11 @@ module Network.Google.Testing
     , xvVersion
     , xvTags
 
+    -- ** SystraceSetup
+    , SystraceSetup
+    , systraceSetup
+    , ssDurationSeconds
+
     -- ** Distribution
     , Distribution
     , distribution
@@ -125,8 +148,11 @@ module Network.Google.Testing
     , IosModel
     , iosModel
     , imFormFactor
+    , imScreenX
+    , imScreenDensity
     , imName
     , imSupportedVersionIds
+    , imScreenY
     , imId
     , imDeviceCapabilities
     , imTags
@@ -166,6 +192,7 @@ module Network.Google.Testing
     , artStartingIntents
     , artAppInitialActivity
     , artMaxSteps
+    , artRoboMode
     , artAppPackageId
     , artAppBundle
     , artAppAPK
@@ -195,6 +222,7 @@ module Network.Google.Testing
     , tecNetworkConfigurationCatalog
     , tecAndroidDeviceCatalog
     , tecIosDeviceCatalog
+    , tecDeviceIPBlockCatalog
 
     -- ** Locale
     , Locale
@@ -214,13 +242,24 @@ module Network.Google.Testing
     -- ** AndroidInstrumentationTestOrchestratorOption
     , AndroidInstrumentationTestOrchestratorOption (..)
 
+    -- ** IosDeviceFile
+    , IosDeviceFile
+    , iosDeviceFile
+    , idfDevicePath
+    , idfBundleId
+    , idfContent
+
     -- ** TestExecutionState
     , TestExecutionState (..)
+
+    -- ** TestEnvironmentCatalogGetEnvironmentType
+    , TestEnvironmentCatalogGetEnvironmentType (..)
 
     -- ** TestSpecification
     , TestSpecification
     , testSpecification
     , tsIosTestSetup
+    , tsIosTestLoop
     , tsTestTimeout
     , tsAndroidRoboTest
     , tsDisableVideoRecording
@@ -230,10 +269,19 @@ module Network.Google.Testing
     , tsTestSetup
     , tsAndroidTestLoop
 
+    -- ** TestTargetsForShard
+    , TestTargetsForShard
+    , testTargetsForShard
+    , ttfsTestTargets
+
+    -- ** TestMatrixOutcomeSummary
+    , TestMatrixOutcomeSummary (..)
+
     -- ** ProvidedSoftwareCatalog
     , ProvidedSoftwareCatalog
     , providedSoftwareCatalog
     , pscOrchestratorVersion
+    , pscAndroidxOrchestratorVersion
 
     -- ** TrafficRule
     , TrafficRule
@@ -255,6 +303,9 @@ module Network.Google.Testing
     -- ** GoogleAuto
     , GoogleAuto
     , googleAuto
+
+    -- ** DeviceIPBlockForm
+    , DeviceIPBlockForm (..)
 
     -- ** CancelTestMatrixResponseTestState
     , CancelTestMatrixResponseTestState (..)
@@ -300,6 +351,7 @@ module Network.Google.Testing
     -- ** AndroidModel
     , AndroidModel
     , androidModel
+    , amThumbnailURL
     , amSupportedAbis
     , amManufacturer
     , amCodename
@@ -324,6 +376,12 @@ module Network.Google.Testing
     -- ** AndroidModelFormFactor
     , AndroidModelFormFactor (..)
 
+    -- ** ShardingOption
+    , ShardingOption
+    , shardingOption
+    , soUniformSharding
+    , soManualSharding
+
     -- ** AndroidModelForm
     , AndroidModelForm (..)
 
@@ -339,6 +397,7 @@ module Network.Google.Testing
     , apkmPackageName
     , apkmIntentFilters
     , apkmMaxSdkVersion
+    , apkmUsesPermission
 
     -- ** AppBundle
     , AppBundle
@@ -352,6 +411,7 @@ module Network.Google.Testing
     , aitTestRunnerClass
     , aitAppPackageId
     , aitTestAPK
+    , aitShardingOption
     , aitOrchestratorOption
     , aitAppBundle
     , aitAppAPK
@@ -363,9 +423,11 @@ module Network.Google.Testing
     , tmState
     , tmTestMatrixId
     , tmTestSpecification
+    , tmOutcomeSummary
     , tmFlakyTestAttempts
     , tmClientInfo
     , tmTestExecutions
+    , tmFailFast
     , tmResultStorage
     , tmInvalidMatrixDetails
     , tmProjectId
@@ -384,11 +446,17 @@ module Network.Google.Testing
     , treHistoryId
     , treProjectId
 
+    -- ** UniformSharding
+    , UniformSharding
+    , uniformSharding
+    , usNumShards
+
     -- ** IosXcTest
     , IosXcTest
     , iosXcTest
     , ixtXctestrun
     , ixtXcodeVersion
+    , ixtTestSpecialEntitlements
     , ixtAppBundleId
     , ixtTestsZip
 
@@ -396,6 +464,7 @@ module Network.Google.Testing
     , ResultStorage
     , resultStorage
     , rsToolResultsHistory
+    , rsResultsURL
     , rsToolResultsExecution
     , rsGoogleCloudStorage
 
@@ -414,6 +483,13 @@ module Network.Google.Testing
     , trsStepId
     , trsHistoryId
     , trsProjectId
+
+    -- ** DeviceIPBlock
+    , DeviceIPBlock
+    , deviceIPBlock
+    , dibAddedDate
+    , dibBlock
+    , dibForm
 
     -- ** LauncherActivityIntent
     , LauncherActivityIntent
@@ -438,6 +514,11 @@ module Network.Google.Testing
     , evValue
     , evKey
 
+    -- ** DeviceIPBlockCatalog
+    , DeviceIPBlockCatalog
+    , deviceIPBlockCatalog
+    , dibcIPBlocks
+
     -- ** Orientation
     , Orientation
     , orientation
@@ -458,11 +539,19 @@ module Network.Google.Testing
     , dfRegularFile
     , dfObbFile
 
+    -- ** ManualSharding
+    , ManualSharding
+    , manualSharding
+    , msTestTargetsForShard
+
     -- ** ClientInfoDetail
     , ClientInfoDetail
     , clientInfoDetail
     , cidValue
     , cidKey
+
+    -- ** AndroidRoboTestRoboMode
+    , AndroidRoboTestRoboMode (..)
 
     -- ** NetworkConfiguration
     , NetworkConfiguration
@@ -516,6 +605,8 @@ module Network.Google.Testing
     -- ** TestSetup
     , TestSetup
     , testSetup
+    , tsDontAutograntPermissions
+    , tsSystrace
     , tsAccount
     , tsNetworkProFile
     , tsEnvironmentVariables
@@ -524,13 +615,13 @@ module Network.Google.Testing
     , tsDirectoriesToPull
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Testing.ApplicationDetailService.GetAPKDetails
-import           Network.Google.Resource.Testing.Projects.TestMatrices.Cancel
-import           Network.Google.Resource.Testing.Projects.TestMatrices.Create
-import           Network.Google.Resource.Testing.Projects.TestMatrices.Get
-import           Network.Google.Resource.Testing.TestEnvironmentCatalog.Get
-import           Network.Google.Testing.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Testing.ApplicationDetailService.GetAPKDetails
+import Network.Google.Resource.Testing.Projects.TestMatrices.Cancel
+import Network.Google.Resource.Testing.Projects.TestMatrices.Create
+import Network.Google.Resource.Testing.Projects.TestMatrices.Get
+import Network.Google.Resource.Testing.TestEnvironmentCatalog.Get
+import Network.Google.Testing.Types
 
 {- $resources
 TODO

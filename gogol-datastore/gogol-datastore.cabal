@@ -41,6 +41,8 @@ library
         , Network.Google.Resource.Datastore.Projects.Commit
         , Network.Google.Resource.Datastore.Projects.Export
         , Network.Google.Resource.Datastore.Projects.Import
+        , Network.Google.Resource.Datastore.Projects.Indexes.Create
+        , Network.Google.Resource.Datastore.Projects.Indexes.Delete
         , Network.Google.Resource.Datastore.Projects.Indexes.Get
         , Network.Google.Resource.Datastore.Projects.Indexes.List
         , Network.Google.Resource.Datastore.Projects.Lookup

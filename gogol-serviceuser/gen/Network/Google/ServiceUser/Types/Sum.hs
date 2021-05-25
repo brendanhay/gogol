@@ -16,7 +16,7 @@
 --
 module Network.Google.ServiceUser.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Whether the measurement is an integer, a floating-point number, etc.
 -- Some combinations of \`metric_kind\` and \`value_type\` might not be

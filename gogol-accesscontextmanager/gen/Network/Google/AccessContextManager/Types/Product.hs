@@ -17,50 +17,22 @@
 --
 module Network.Google.AccessContextManager.Types.Product where
 
-import           Network.Google.AccessContextManager.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types.Sum
+import Network.Google.Prelude
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -122,7 +94,7 @@ instance ToJSON Status where
 -- /See:/ 'basicLevel' smart constructor.
 data BasicLevel =
   BasicLevel'
-    { _blConditions        :: !(Maybe [Condition])
+    { _blConditions :: !(Maybe [Condition])
     , _blCombiningFunction :: !(Maybe BasicLevelCombiningFunction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -174,13 +146,167 @@ instance ToJSON BasicLevel where
                  [("conditions" .=) <$> _blConditions,
                   ("combiningFunction" .=) <$> _blCombiningFunction])
 
+-- | Policy for ingress into ServicePerimeter. IngressPolicies match requests
+-- based on \`ingress_from\` and \`ingress_to\` stanzas. For an ingress
+-- policy to match, both the \`ingress_from\` and \`ingress_to\` stanzas
+-- must be matched. If an IngressPolicy matches a request, the request is
+-- allowed through the perimeter boundary from outside the perimeter. For
+-- example, access from the internet can be allowed either based on an
+-- AccessLevel or, for traffic hosted on Google Cloud, the project of the
+-- source network. For access from private networks, using the project of
+-- the hosting network is required. Individual ingress policies can be
+-- limited by restricting which services and\/or actions they match using
+-- the \`ingress_to\` field.
+--
+-- /See:/ 'ingressPolicy' smart constructor.
+data IngressPolicy =
+  IngressPolicy'
+    { _ipIngressFrom :: !(Maybe IngressFrom)
+    , _ipIngressTo :: !(Maybe IngressTo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IngressPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ipIngressFrom'
+--
+-- * 'ipIngressTo'
+ingressPolicy
+    :: IngressPolicy
+ingressPolicy =
+  IngressPolicy' {_ipIngressFrom = Nothing, _ipIngressTo = Nothing}
+
+
+-- | Defines the conditions on the source of a request causing this
+-- IngressPolicy to apply.
+ipIngressFrom :: Lens' IngressPolicy (Maybe IngressFrom)
+ipIngressFrom
+  = lens _ipIngressFrom
+      (\ s a -> s{_ipIngressFrom = a})
+
+-- | Defines the conditions on the ApiOperation and request destination that
+-- cause this IngressPolicy to apply.
+ipIngressTo :: Lens' IngressPolicy (Maybe IngressTo)
+ipIngressTo
+  = lens _ipIngressTo (\ s a -> s{_ipIngressTo = a})
+
+instance FromJSON IngressPolicy where
+        parseJSON
+          = withObject "IngressPolicy"
+              (\ o ->
+                 IngressPolicy' <$>
+                   (o .:? "ingressFrom") <*> (o .:? "ingressTo"))
+
+instance ToJSON IngressPolicy where
+        toJSON IngressPolicy'{..}
+          = object
+              (catMaybes
+                 [("ingressFrom" .=) <$> _ipIngressFrom,
+                  ("ingressTo" .=) <$> _ipIngressTo])
+
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
+--
+-- /See:/ 'expr' smart constructor.
+data Expr =
+  Expr'
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
+    , _eDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Expr' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eLocation'
+--
+-- * 'eExpression'
+--
+-- * 'eTitle'
+--
+-- * 'eDescription'
+expr
+    :: Expr
+expr =
+  Expr'
+    { _eLocation = Nothing
+    , _eExpression = Nothing
+    , _eTitle = Nothing
+    , _eDescription = Nothing
+    }
+
+
+-- | Optional. String indicating the location of the expression for error
+-- reporting, e.g. a file name and a position in the file.
+eLocation :: Lens' Expr (Maybe Text)
+eLocation
+  = lens _eLocation (\ s a -> s{_eLocation = a})
+
+-- | Textual representation of an expression in Common Expression Language
+-- syntax.
+eExpression :: Lens' Expr (Maybe Text)
+eExpression
+  = lens _eExpression (\ s a -> s{_eExpression = a})
+
+-- | Optional. Title for the expression, i.e. a short string describing its
+-- purpose. This can be used e.g. in UIs which allow to enter the
+-- expression.
+eTitle :: Lens' Expr (Maybe Text)
+eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
+
+-- | Optional. Description of the expression. This is a longer text which
+-- describes the expression, e.g. when hovered over it in a UI.
+eDescription :: Lens' Expr (Maybe Text)
+eDescription
+  = lens _eDescription (\ s a -> s{_eDescription = a})
+
+instance FromJSON Expr where
+        parseJSON
+          = withObject "Expr"
+              (\ o ->
+                 Expr' <$>
+                   (o .:? "location") <*> (o .:? "expression") <*>
+                     (o .:? "title")
+                     <*> (o .:? "description"))
+
+instance ToJSON Expr where
+        toJSON Expr'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _eLocation,
+                  ("expression" .=) <$> _eExpression,
+                  ("title" .=) <$> _eTitle,
+                  ("description" .=) <$> _eDescription])
+
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -251,19 +377,18 @@ instance FromJSON CancelOperationRequest where
 instance ToJSON CancelOperationRequest where
         toJSON = const emptyObject
 
--- | An \`AccessLevel\` is a label that can be applied to requests to GCP
--- services, along with a list of requirements necessary for the label to
--- be applied.
+-- | An \`AccessLevel\` is a label that can be applied to requests to Google
+-- Cloud services, along with a list of requirements necessary for the
+-- label to be applied.
 --
 -- /See:/ 'accessLevel' smart constructor.
 data AccessLevel =
   AccessLevel'
-    { _alBasic       :: !(Maybe BasicLevel)
-    , _alUpdateTime  :: !(Maybe DateTime')
-    , _alName        :: !(Maybe Text)
-    , _alTitle       :: !(Maybe Text)
+    { _alBasic :: !(Maybe BasicLevel)
+    , _alCustom :: !(Maybe CustomLevel)
+    , _alName :: !(Maybe Text)
+    , _alTitle :: !(Maybe Text)
     , _alDescription :: !(Maybe Text)
-    , _alCreateTime  :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -274,25 +399,22 @@ data AccessLevel =
 --
 -- * 'alBasic'
 --
--- * 'alUpdateTime'
+-- * 'alCustom'
 --
 -- * 'alName'
 --
 -- * 'alTitle'
 --
 -- * 'alDescription'
---
--- * 'alCreateTime'
 accessLevel
     :: AccessLevel
 accessLevel =
   AccessLevel'
     { _alBasic = Nothing
-    , _alUpdateTime = Nothing
+    , _alCustom = Nothing
     , _alName = Nothing
     , _alTitle = Nothing
     , _alDescription = Nothing
-    , _alCreateTime = Nothing
     }
 
 
@@ -300,16 +422,15 @@ accessLevel =
 alBasic :: Lens' AccessLevel (Maybe BasicLevel)
 alBasic = lens _alBasic (\ s a -> s{_alBasic = a})
 
--- | Output only. Time the \`AccessLevel\` was updated in UTC.
-alUpdateTime :: Lens' AccessLevel (Maybe UTCTime)
-alUpdateTime
-  = lens _alUpdateTime (\ s a -> s{_alUpdateTime = a})
-      . mapping _DateTime
+-- | A \`CustomLevel\` written in the Common Expression Language.
+alCustom :: Lens' AccessLevel (Maybe CustomLevel)
+alCustom = lens _alCustom (\ s a -> s{_alCustom = a})
 
 -- | Required. Resource name for the Access Level. The \`short_name\`
 -- component must begin with a letter and only include alphanumeric and
 -- \'_\'. Format:
--- \`accessPolicies\/{policy_id}\/accessLevels\/{short_name}\`
+-- \`accessPolicies\/{policy_id}\/accessLevels\/{short_name}\`. The maximum
+-- length of the \`short_name\` component is 50 characters.
 alName :: Lens' AccessLevel (Maybe Text)
 alName = lens _alName (\ s a -> s{_alName = a})
 
@@ -324,42 +445,99 @@ alDescription
   = lens _alDescription
       (\ s a -> s{_alDescription = a})
 
--- | Output only. Time the \`AccessLevel\` was created in UTC.
-alCreateTime :: Lens' AccessLevel (Maybe UTCTime)
-alCreateTime
-  = lens _alCreateTime (\ s a -> s{_alCreateTime = a})
-      . mapping _DateTime
-
 instance FromJSON AccessLevel where
         parseJSON
           = withObject "AccessLevel"
               (\ o ->
                  AccessLevel' <$>
-                   (o .:? "basic") <*> (o .:? "updateTime") <*>
+                   (o .:? "basic") <*> (o .:? "custom") <*>
                      (o .:? "name")
                      <*> (o .:? "title")
-                     <*> (o .:? "description")
-                     <*> (o .:? "createTime"))
+                     <*> (o .:? "description"))
 
 instance ToJSON AccessLevel where
         toJSON AccessLevel'{..}
           = object
               (catMaybes
                  [("basic" .=) <$> _alBasic,
-                  ("updateTime" .=) <$> _alUpdateTime,
-                  ("name" .=) <$> _alName, ("title" .=) <$> _alTitle,
-                  ("description" .=) <$> _alDescription,
-                  ("createTime" .=) <$> _alCreateTime])
+                  ("custom" .=) <$> _alCustom, ("name" .=) <$> _alName,
+                  ("title" .=) <$> _alTitle,
+                  ("description" .=) <$> _alDescription])
 
--- | \`ServicePerimeterConfig\` specifies a set of GCP resources that
--- describe specific Service Perimeter configuration.
+-- | The source that IngressPolicy authorizes access from.
+--
+-- /See:/ 'ingressSource' smart constructor.
+data IngressSource =
+  IngressSource'
+    { _isAccessLevel :: !(Maybe Text)
+    , _isResource :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IngressSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isAccessLevel'
+--
+-- * 'isResource'
+ingressSource
+    :: IngressSource
+ingressSource = IngressSource' {_isAccessLevel = Nothing, _isResource = Nothing}
+
+
+-- | An AccessLevel resource name that allow resources within the
+-- ServicePerimeters to be accessed from the internet. AccessLevels listed
+-- must be in the same policy as this ServicePerimeter. Referencing a
+-- nonexistent AccessLevel will cause an error. If no AccessLevel names are
+-- listed, resources within the perimeter can only be accessed via Google
+-- Cloud calls with request origins within the perimeter. Example:
+-- \`accessPolicies\/MY_POLICY\/accessLevels\/MY_LEVEL\`. If a single \`*\`
+-- is specified for \`access_level\`, then all IngressSources will be
+-- allowed.
+isAccessLevel :: Lens' IngressSource (Maybe Text)
+isAccessLevel
+  = lens _isAccessLevel
+      (\ s a -> s{_isAccessLevel = a})
+
+-- | A Google Cloud resource that is allowed to ingress the perimeter.
+-- Requests from these resources will be allowed to access perimeter data.
+-- Currently only projects are allowed. Format:
+-- \`projects\/{project_number}\` The project may be in any Google Cloud
+-- organization, not just the organization that the perimeter is defined
+-- in. \`*\` is not allowed, the case of allowing all Google Cloud
+-- resources only is not supported.
+isResource :: Lens' IngressSource (Maybe Text)
+isResource
+  = lens _isResource (\ s a -> s{_isResource = a})
+
+instance FromJSON IngressSource where
+        parseJSON
+          = withObject "IngressSource"
+              (\ o ->
+                 IngressSource' <$>
+                   (o .:? "accessLevel") <*> (o .:? "resource"))
+
+instance ToJSON IngressSource where
+        toJSON IngressSource'{..}
+          = object
+              (catMaybes
+                 [("accessLevel" .=) <$> _isAccessLevel,
+                  ("resource" .=) <$> _isResource])
+
+-- | \`ServicePerimeterConfig\` specifies a set of Google Cloud resources
+-- that describe specific Service Perimeter configuration.
 --
 -- /See:/ 'servicePerimeterConfig' smart constructor.
 data ServicePerimeterConfig =
   ServicePerimeterConfig'
-    { _spcResources          :: !(Maybe [Text])
+    { _spcResources :: !(Maybe [Text])
+    , _spcVPCAccessibleServices :: !(Maybe VPCAccessibleServices)
     , _spcRestrictedServices :: !(Maybe [Text])
-    , _spcAccessLevels       :: !(Maybe [Text])
+    , _spcEgressPolicies :: !(Maybe [EgressPolicy])
+    , _spcAccessLevels :: !(Maybe [Text])
+    , _spcIngressPolicies :: !(Maybe [IngressPolicy])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -370,21 +548,30 @@ data ServicePerimeterConfig =
 --
 -- * 'spcResources'
 --
+-- * 'spcVPCAccessibleServices'
+--
 -- * 'spcRestrictedServices'
 --
+-- * 'spcEgressPolicies'
+--
 -- * 'spcAccessLevels'
+--
+-- * 'spcIngressPolicies'
 servicePerimeterConfig
     :: ServicePerimeterConfig
 servicePerimeterConfig =
   ServicePerimeterConfig'
     { _spcResources = Nothing
+    , _spcVPCAccessibleServices = Nothing
     , _spcRestrictedServices = Nothing
+    , _spcEgressPolicies = Nothing
     , _spcAccessLevels = Nothing
+    , _spcIngressPolicies = Nothing
     }
 
 
--- | A list of GCP resources that are inside of the service perimeter.
--- Currently only projects are allowed. Format:
+-- | A list of Google Cloud resources that are inside of the service
+-- perimeter. Currently only projects are allowed. Format:
 -- \`projects\/{project_number}\`
 spcResources :: Lens' ServicePerimeterConfig [Text]
 spcResources
@@ -392,14 +579,31 @@ spcResources
       . _Default
       . _Coerce
 
--- | GCP services that are subject to the Service Perimeter restrictions. For
--- example, if \`storage.googleapis.com\` is specified, access to the
--- storage buckets inside the perimeter must meet the perimeter\'s access
--- restrictions.
+-- | Configuration for APIs allowed within Perimeter.
+spcVPCAccessibleServices :: Lens' ServicePerimeterConfig (Maybe VPCAccessibleServices)
+spcVPCAccessibleServices
+  = lens _spcVPCAccessibleServices
+      (\ s a -> s{_spcVPCAccessibleServices = a})
+
+-- | Google Cloud services that are subject to the Service Perimeter
+-- restrictions. For example, if \`storage.googleapis.com\` is specified,
+-- access to the storage buckets inside the perimeter must meet the
+-- perimeter\'s access restrictions.
 spcRestrictedServices :: Lens' ServicePerimeterConfig [Text]
 spcRestrictedServices
   = lens _spcRestrictedServices
       (\ s a -> s{_spcRestrictedServices = a})
+      . _Default
+      . _Coerce
+
+-- | List of EgressPolicies to apply to the perimeter. A perimeter may have
+-- multiple EgressPolicies, each of which is evaluated separately. Access
+-- is granted if any EgressPolicy grants it. Must be empty for a perimeter
+-- bridge.
+spcEgressPolicies :: Lens' ServicePerimeterConfig [EgressPolicy]
+spcEgressPolicies
+  = lens _spcEgressPolicies
+      (\ s a -> s{_spcEgressPolicies = a})
       . _Default
       . _Coerce
 
@@ -408,7 +612,7 @@ spcRestrictedServices
 -- listed must be in the same policy as this \`ServicePerimeter\`.
 -- Referencing a nonexistent \`AccessLevel\` is a syntax error. If no
 -- \`AccessLevel\` names are listed, resources within the perimeter can
--- only be accessed via GCP calls with request origins within the
+-- only be accessed via Google Cloud calls with request origins within the
 -- perimeter. Example:
 -- \`\"accessPolicies\/MY_POLICY\/accessLevels\/MY_LEVEL\"\`. For Service
 -- Perimeter Bridge, must be empty.
@@ -419,22 +623,40 @@ spcAccessLevels
       . _Default
       . _Coerce
 
+-- | List of IngressPolicies to apply to the perimeter. A perimeter may have
+-- multiple IngressPolicies, each of which is evaluated separately. Access
+-- is granted if any Ingress Policy grants it. Must be empty for a
+-- perimeter bridge.
+spcIngressPolicies :: Lens' ServicePerimeterConfig [IngressPolicy]
+spcIngressPolicies
+  = lens _spcIngressPolicies
+      (\ s a -> s{_spcIngressPolicies = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON ServicePerimeterConfig where
         parseJSON
           = withObject "ServicePerimeterConfig"
               (\ o ->
                  ServicePerimeterConfig' <$>
                    (o .:? "resources" .!= mempty) <*>
-                     (o .:? "restrictedServices" .!= mempty)
-                     <*> (o .:? "accessLevels" .!= mempty))
+                     (o .:? "vpcAccessibleServices")
+                     <*> (o .:? "restrictedServices" .!= mempty)
+                     <*> (o .:? "egressPolicies" .!= mempty)
+                     <*> (o .:? "accessLevels" .!= mempty)
+                     <*> (o .:? "ingressPolicies" .!= mempty))
 
 instance ToJSON ServicePerimeterConfig where
         toJSON ServicePerimeterConfig'{..}
           = object
               (catMaybes
                  [("resources" .=) <$> _spcResources,
+                  ("vpcAccessibleServices" .=) <$>
+                    _spcVPCAccessibleServices,
                   ("restrictedServices" .=) <$> _spcRestrictedServices,
-                  ("accessLevels" .=) <$> _spcAccessLevels])
+                  ("egressPolicies" .=) <$> _spcEgressPolicies,
+                  ("accessLevels" .=) <$> _spcAccessLevels,
+                  ("ingressPolicies" .=) <$> _spcIngressPolicies])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -442,10 +664,10 @@ instance ToJSON ServicePerimeterConfig where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -500,7 +722,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -531,6 +754,67 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
+-- | Policy for egress from perimeter. EgressPolicies match requests based on
+-- \`egress_from\` and \`egress_to\` stanzas. For an EgressPolicy to match,
+-- both \`egress_from\` and \`egress_to\` stanzas must be matched. If an
+-- EgressPolicy matches a request, the request is allowed to span the
+-- ServicePerimeter boundary. For example, an EgressPolicy can be used to
+-- allow VMs on networks within the ServicePerimeter to access a defined
+-- set of projects outside the perimeter in certain contexts (e.g. to read
+-- data from a Cloud Storage bucket or query against a BigQuery dataset).
+-- EgressPolicies are concerned with the *resources* that a request relates
+-- as well as the API services and API actions being used. They do not
+-- related to the direction of data movement. More detailed documentation
+-- for this concept can be found in the descriptions of EgressFrom and
+-- EgressTo.
+--
+-- /See:/ 'egressPolicy' smart constructor.
+data EgressPolicy =
+  EgressPolicy'
+    { _epEgressFrom :: !(Maybe EgressFrom)
+    , _epEgressTo :: !(Maybe EgressTo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EgressPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epEgressFrom'
+--
+-- * 'epEgressTo'
+egressPolicy
+    :: EgressPolicy
+egressPolicy = EgressPolicy' {_epEgressFrom = Nothing, _epEgressTo = Nothing}
+
+
+-- | Defines conditions on the source of a request causing this EgressPolicy
+-- to apply.
+epEgressFrom :: Lens' EgressPolicy (Maybe EgressFrom)
+epEgressFrom
+  = lens _epEgressFrom (\ s a -> s{_epEgressFrom = a})
+
+-- | Defines the conditions on the ApiOperation and destination resources
+-- that cause this EgressPolicy to apply.
+epEgressTo :: Lens' EgressPolicy (Maybe EgressTo)
+epEgressTo
+  = lens _epEgressTo (\ s a -> s{_epEgressTo = a})
+
+instance FromJSON EgressPolicy where
+        parseJSON
+          = withObject "EgressPolicy"
+              (\ o ->
+                 EgressPolicy' <$>
+                   (o .:? "egressFrom") <*> (o .:? "egressTo"))
+
+instance ToJSON EgressPolicy where
+        toJSON EgressPolicy'{..}
+          = object
+              (catMaybes
+                 [("egressFrom" .=) <$> _epEgressFrom,
+                  ("egressTo" .=) <$> _epEgressTo])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -556,27 +840,103 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | \`ServicePerimeter\` describes a set of GCP resources which can freely
--- import and export data amongst themselves, but not export outside of the
--- \`ServicePerimeter\`. If a request with a source within this
+-- | Restricts access to Cloud Console and Google Cloud APIs for a set of
+-- users using Context-Aware Access.
+--
+-- /See:/ 'gcpUserAccessBinding' smart constructor.
+data GcpUserAccessBinding =
+  GcpUserAccessBinding'
+    { _guabGroupKey :: !(Maybe Text)
+    , _guabName :: !(Maybe Text)
+    , _guabAccessLevels :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GcpUserAccessBinding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'guabGroupKey'
+--
+-- * 'guabName'
+--
+-- * 'guabAccessLevels'
+gcpUserAccessBinding
+    :: GcpUserAccessBinding
+gcpUserAccessBinding =
+  GcpUserAccessBinding'
+    {_guabGroupKey = Nothing, _guabName = Nothing, _guabAccessLevels = Nothing}
+
+
+-- | Required. Immutable. Google Group id whose members are subject to this
+-- binding\'s restrictions. See \"id\" in the [G Suite Directory API\'s
+-- Groups resource]
+-- (https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/reference\/groups#resource).
+-- If a group\'s email address\/alias is changed, this resource will
+-- continue to point at the changed group. This field does not accept group
+-- email addresses or aliases. Example: \"01d520gv4vjcrht\"
+guabGroupKey :: Lens' GcpUserAccessBinding (Maybe Text)
+guabGroupKey
+  = lens _guabGroupKey (\ s a -> s{_guabGroupKey = a})
+
+-- | Immutable. Assigned by the server during creation. The last segment has
+-- an arbitrary length and has only URI unreserved characters (as defined
+-- by [RFC 3986 Section
+-- 2.3](https:\/\/tools.ietf.org\/html\/rfc3986#section-2.3)). Should not
+-- be specified by the client during creation. Example:
+-- \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\"
+guabName :: Lens' GcpUserAccessBinding (Maybe Text)
+guabName = lens _guabName (\ s a -> s{_guabName = a})
+
+-- | Required. Access level that a user must have to be granted access. Only
+-- one access level is supported, not multiple. This repeated field must
+-- have exactly one element. Example:
+-- \"accessPolicies\/9522\/accessLevels\/device_trusted\"
+guabAccessLevels :: Lens' GcpUserAccessBinding [Text]
+guabAccessLevels
+  = lens _guabAccessLevels
+      (\ s a -> s{_guabAccessLevels = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GcpUserAccessBinding where
+        parseJSON
+          = withObject "GcpUserAccessBinding"
+              (\ o ->
+                 GcpUserAccessBinding' <$>
+                   (o .:? "groupKey") <*> (o .:? "name") <*>
+                     (o .:? "accessLevels" .!= mempty))
+
+instance ToJSON GcpUserAccessBinding where
+        toJSON GcpUserAccessBinding'{..}
+          = object
+              (catMaybes
+                 [("groupKey" .=) <$> _guabGroupKey,
+                  ("name" .=) <$> _guabName,
+                  ("accessLevels" .=) <$> _guabAccessLevels])
+
+-- | \`ServicePerimeter\` describes a set of Google Cloud resources which can
+-- freely import and export data amongst themselves, but not export outside
+-- of the \`ServicePerimeter\`. If a request with a source within this
 -- \`ServicePerimeter\` has a target outside of the \`ServicePerimeter\`,
 -- the request will be blocked. Otherwise the request is allowed. There are
 -- two types of Service Perimeter - Regular and Bridge. Regular Service
--- Perimeters cannot overlap, a single GCP project can only belong to a
--- single regular Service Perimeter. Service Perimeter Bridges can contain
--- only GCP projects as members, a single GCP project may belong to
--- multiple Service Perimeter Bridges.
+-- Perimeters cannot overlap, a single Google Cloud project can only belong
+-- to a single regular Service Perimeter. Service Perimeter Bridges can
+-- contain only Google Cloud projects as members, a single Google Cloud
+-- project may belong to multiple Service Perimeter Bridges.
 --
 -- /See:/ 'servicePerimeter' smart constructor.
 data ServicePerimeter =
   ServicePerimeter'
-    { _spStatus        :: !(Maybe ServicePerimeterConfig)
+    { _spStatus :: !(Maybe ServicePerimeterConfig)
     , _spPerimeterType :: !(Maybe ServicePerimeterPerimeterType)
-    , _spUpdateTime    :: !(Maybe DateTime')
-    , _spName          :: !(Maybe Text)
-    , _spTitle         :: !(Maybe Text)
-    , _spDescription   :: !(Maybe Text)
-    , _spCreateTime    :: !(Maybe DateTime')
+    , _spName :: !(Maybe Text)
+    , _spSpec :: !(Maybe ServicePerimeterConfig)
+    , _spTitle :: !(Maybe Text)
+    , _spUseExplicitDryRunSpec :: !(Maybe Bool)
+    , _spDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -589,26 +949,26 @@ data ServicePerimeter =
 --
 -- * 'spPerimeterType'
 --
--- * 'spUpdateTime'
---
 -- * 'spName'
+--
+-- * 'spSpec'
 --
 -- * 'spTitle'
 --
--- * 'spDescription'
+-- * 'spUseExplicitDryRunSpec'
 --
--- * 'spCreateTime'
+-- * 'spDescription'
 servicePerimeter
     :: ServicePerimeter
 servicePerimeter =
   ServicePerimeter'
     { _spStatus = Nothing
     , _spPerimeterType = Nothing
-    , _spUpdateTime = Nothing
     , _spName = Nothing
+    , _spSpec = Nothing
     , _spTitle = Nothing
+    , _spUseExplicitDryRunSpec = Nothing
     , _spDescription = Nothing
-    , _spCreateTime = Nothing
     }
 
 
@@ -628,12 +988,6 @@ spPerimeterType
   = lens _spPerimeterType
       (\ s a -> s{_spPerimeterType = a})
 
--- | Output only. Time the \`ServicePerimeter\` was updated in UTC.
-spUpdateTime :: Lens' ServicePerimeter (Maybe UTCTime)
-spUpdateTime
-  = lens _spUpdateTime (\ s a -> s{_spUpdateTime = a})
-      . mapping _DateTime
-
 -- | Required. Resource name for the ServicePerimeter. The \`short_name\`
 -- component must begin with a letter and only include alphanumeric and
 -- \'_\'. Format:
@@ -641,9 +995,32 @@ spUpdateTime
 spName :: Lens' ServicePerimeter (Maybe Text)
 spName = lens _spName (\ s a -> s{_spName = a})
 
+-- | Proposed (or dry run) ServicePerimeter configuration. This configuration
+-- allows to specify and test ServicePerimeter configuration without
+-- enforcing actual access restrictions. Only allowed to be set when the
+-- \"use_explicit_dry_run_spec\" flag is set.
+spSpec :: Lens' ServicePerimeter (Maybe ServicePerimeterConfig)
+spSpec = lens _spSpec (\ s a -> s{_spSpec = a})
+
 -- | Human readable title. Must be unique within the Policy.
 spTitle :: Lens' ServicePerimeter (Maybe Text)
 spTitle = lens _spTitle (\ s a -> s{_spTitle = a})
+
+-- | Use explicit dry run spec flag. Ordinarily, a dry-run spec implicitly
+-- exists for all Service Perimeters, and that spec is identical to the
+-- status for those Service Perimeters. When this flag is set, it inhibits
+-- the generation of the implicit spec, thereby allowing the user to
+-- explicitly provide a configuration (\"spec\") to use in a dry-run
+-- version of the Service Perimeter. This allows the user to test changes
+-- to the enforced config (\"status\") without actually enforcing them.
+-- This testing is done through analyzing the differences between currently
+-- enforced and suggested restrictions. use_explicit_dry_run_spec must bet
+-- set to True if any of the fields in the spec are set to non-default
+-- values.
+spUseExplicitDryRunSpec :: Lens' ServicePerimeter (Maybe Bool)
+spUseExplicitDryRunSpec
+  = lens _spUseExplicitDryRunSpec
+      (\ s a -> s{_spUseExplicitDryRunSpec = a})
 
 -- | Description of the \`ServicePerimeter\` and its use. Does not affect
 -- behavior.
@@ -652,23 +1029,17 @@ spDescription
   = lens _spDescription
       (\ s a -> s{_spDescription = a})
 
--- | Output only. Time the \`ServicePerimeter\` was created in UTC.
-spCreateTime :: Lens' ServicePerimeter (Maybe UTCTime)
-spCreateTime
-  = lens _spCreateTime (\ s a -> s{_spCreateTime = a})
-      . mapping _DateTime
-
 instance FromJSON ServicePerimeter where
         parseJSON
           = withObject "ServicePerimeter"
               (\ o ->
                  ServicePerimeter' <$>
                    (o .:? "status") <*> (o .:? "perimeterType") <*>
-                     (o .:? "updateTime")
-                     <*> (o .:? "name")
+                     (o .:? "name")
+                     <*> (o .:? "spec")
                      <*> (o .:? "title")
-                     <*> (o .:? "description")
-                     <*> (o .:? "createTime"))
+                     <*> (o .:? "useExplicitDryRunSpec")
+                     <*> (o .:? "description"))
 
 instance ToJSON ServicePerimeter where
         toJSON ServicePerimeter'{..}
@@ -676,17 +1047,60 @@ instance ToJSON ServicePerimeter where
               (catMaybes
                  [("status" .=) <$> _spStatus,
                   ("perimeterType" .=) <$> _spPerimeterType,
-                  ("updateTime" .=) <$> _spUpdateTime,
-                  ("name" .=) <$> _spName, ("title" .=) <$> _spTitle,
-                  ("description" .=) <$> _spDescription,
-                  ("createTime" .=) <$> _spCreateTime])
+                  ("name" .=) <$> _spName, ("spec" .=) <$> _spSpec,
+                  ("title" .=) <$> _spTitle,
+                  ("useExplicitDryRunSpec" .=) <$>
+                    _spUseExplicitDryRunSpec,
+                  ("description" .=) <$> _spDescription])
+
+-- | A request to commit dry-run specs in all Service Perimeters belonging to
+-- an Access Policy.
+--
+-- /See:/ 'commitServicePerimetersRequest' smart constructor.
+newtype CommitServicePerimetersRequest =
+  CommitServicePerimetersRequest'
+    { _csprEtag :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CommitServicePerimetersRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csprEtag'
+commitServicePerimetersRequest
+    :: CommitServicePerimetersRequest
+commitServicePerimetersRequest =
+  CommitServicePerimetersRequest' {_csprEtag = Nothing}
+
+
+-- | Optional. The etag for the version of the Access Policy that this commit
+-- operation is to be performed on. If, at the time of commit, the etag for
+-- the Access Policy stored in Access Context Manager is different from the
+-- specified etag, then the commit operation will not be performed and the
+-- call will fail. This field is not required. If etag is not provided, the
+-- operation will be performed as if a valid etag is provided.
+csprEtag :: Lens' CommitServicePerimetersRequest (Maybe Text)
+csprEtag = lens _csprEtag (\ s a -> s{_csprEtag = a})
+
+instance FromJSON CommitServicePerimetersRequest
+         where
+        parseJSON
+          = withObject "CommitServicePerimetersRequest"
+              (\ o ->
+                 CommitServicePerimetersRequest' <$> (o .:? "etag"))
+
+instance ToJSON CommitServicePerimetersRequest where
+        toJSON CommitServicePerimetersRequest'{..}
+          = object (catMaybes [("etag" .=) <$> _csprEtag])
 
 -- | A response to \`ListAccessPoliciesRequest\`.
 --
 -- /See:/ 'listAccessPoliciesResponse' smart constructor.
 data ListAccessPoliciesResponse =
   ListAccessPoliciesResponse'
-    { _laprNextPageToken  :: !(Maybe Text)
+    { _laprNextPageToken :: !(Maybe Text)
     , _laprAccessPolicies :: !(Maybe [AccessPolicy])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -736,6 +1150,65 @@ instance ToJSON ListAccessPoliciesResponse where
                  [("nextPageToken" .=) <$> _laprNextPageToken,
                   ("accessPolicies" .=) <$> _laprAccessPolicies])
 
+-- | Defines the conditions under which an EgressPolicy matches a request.
+-- Conditions based on information about the source of the request. Note
+-- that if the destination of the request is also protected by a
+-- ServicePerimeter, then that ServicePerimeter must have an IngressPolicy
+-- which allows access in order for this request to succeed.
+--
+-- /See:/ 'egressFrom' smart constructor.
+data EgressFrom =
+  EgressFrom'
+    { _efIdentityType :: !(Maybe EgressFromIdentityType)
+    , _efIdentities :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EgressFrom' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'efIdentityType'
+--
+-- * 'efIdentities'
+egressFrom
+    :: EgressFrom
+egressFrom = EgressFrom' {_efIdentityType = Nothing, _efIdentities = Nothing}
+
+
+-- | Specifies the type of identities that are allowed access to outside the
+-- perimeter. If left unspecified, then members of \`identities\` field
+-- will be allowed access.
+efIdentityType :: Lens' EgressFrom (Maybe EgressFromIdentityType)
+efIdentityType
+  = lens _efIdentityType
+      (\ s a -> s{_efIdentityType = a})
+
+-- | A list of identities that are allowed access through this
+-- [EgressPolicy]. Should be in the format of email address. The email
+-- address should represent individual user or service account only.
+efIdentities :: Lens' EgressFrom [Text]
+efIdentities
+  = lens _efIdentities (\ s a -> s{_efIdentities = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON EgressFrom where
+        parseJSON
+          = withObject "EgressFrom"
+              (\ o ->
+                 EgressFrom' <$>
+                   (o .:? "identityType") <*>
+                     (o .:? "identities" .!= mempty))
+
+instance ToJSON EgressFrom where
+        toJSON EgressFrom'{..}
+          = object
+              (catMaybes
+                 [("identityType" .=) <$> _efIdentityType,
+                  ("identities" .=) <$> _efIdentities])
+
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem =
@@ -771,13 +1244,182 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | A request to replace all existing Service Perimeters in an Access Policy
+-- with the Service Perimeters provided. This is done atomically.
+--
+-- /See:/ 'replaceServicePerimetersRequest' smart constructor.
+data ReplaceServicePerimetersRequest =
+  ReplaceServicePerimetersRequest'
+    { _rsprEtag :: !(Maybe Text)
+    , _rsprServicePerimeters :: !(Maybe [ServicePerimeter])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ReplaceServicePerimetersRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsprEtag'
+--
+-- * 'rsprServicePerimeters'
+replaceServicePerimetersRequest
+    :: ReplaceServicePerimetersRequest
+replaceServicePerimetersRequest =
+  ReplaceServicePerimetersRequest'
+    {_rsprEtag = Nothing, _rsprServicePerimeters = Nothing}
+
+
+-- | Optional. The etag for the version of the Access Policy that this
+-- replace operation is to be performed on. If, at the time of replace, the
+-- etag for the Access Policy stored in Access Context Manager is different
+-- from the specified etag, then the replace operation will not be
+-- performed and the call will fail. This field is not required. If etag is
+-- not provided, the operation will be performed as if a valid etag is
+-- provided.
+rsprEtag :: Lens' ReplaceServicePerimetersRequest (Maybe Text)
+rsprEtag = lens _rsprEtag (\ s a -> s{_rsprEtag = a})
+
+-- | Required. The desired Service Perimeters that should replace all
+-- existing Service Perimeters in the Access Policy.
+rsprServicePerimeters :: Lens' ReplaceServicePerimetersRequest [ServicePerimeter]
+rsprServicePerimeters
+  = lens _rsprServicePerimeters
+      (\ s a -> s{_rsprServicePerimeters = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ReplaceServicePerimetersRequest
+         where
+        parseJSON
+          = withObject "ReplaceServicePerimetersRequest"
+              (\ o ->
+                 ReplaceServicePerimetersRequest' <$>
+                   (o .:? "etag") <*>
+                     (o .:? "servicePerimeters" .!= mempty))
+
+instance ToJSON ReplaceServicePerimetersRequest where
+        toJSON ReplaceServicePerimetersRequest'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rsprEtag,
+                  ("servicePerimeters" .=) <$> _rsprServicePerimeters])
+
+-- | A response to ReplaceAccessLevelsRequest. This will be put inside of
+-- Operation.response field.
+--
+-- /See:/ 'replaceAccessLevelsResponse' smart constructor.
+newtype ReplaceAccessLevelsResponse =
+  ReplaceAccessLevelsResponse'
+    { _ralrAccessLevels :: Maybe [AccessLevel]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ReplaceAccessLevelsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ralrAccessLevels'
+replaceAccessLevelsResponse
+    :: ReplaceAccessLevelsResponse
+replaceAccessLevelsResponse =
+  ReplaceAccessLevelsResponse' {_ralrAccessLevels = Nothing}
+
+
+-- | List of the Access Level instances.
+ralrAccessLevels :: Lens' ReplaceAccessLevelsResponse [AccessLevel]
+ralrAccessLevels
+  = lens _ralrAccessLevels
+      (\ s a -> s{_ralrAccessLevels = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ReplaceAccessLevelsResponse where
+        parseJSON
+          = withObject "ReplaceAccessLevelsResponse"
+              (\ o ->
+                 ReplaceAccessLevelsResponse' <$>
+                   (o .:? "accessLevels" .!= mempty))
+
+instance ToJSON ReplaceAccessLevelsResponse where
+        toJSON ReplaceAccessLevelsResponse'{..}
+          = object
+              (catMaybes
+                 [("accessLevels" .=) <$> _ralrAccessLevels])
+
+-- | Defines the conditions under which an EgressPolicy matches a request.
+-- Conditions are based on information about the ApiOperation intended to
+-- be performed on the \`resources\` specified. Note that if the
+-- destination of the request is also protected by a ServicePerimeter, then
+-- that ServicePerimeter must have an IngressPolicy which allows access in
+-- order for this request to succeed. The request must match \`operations\`
+-- AND \`resources\` fields in order to be allowed egress out of the
+-- perimeter.
+--
+-- /See:/ 'egressTo' smart constructor.
+data EgressTo =
+  EgressTo'
+    { _etResources :: !(Maybe [Text])
+    , _etOperations :: !(Maybe [APIOperation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EgressTo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'etResources'
+--
+-- * 'etOperations'
+egressTo
+    :: EgressTo
+egressTo = EgressTo' {_etResources = Nothing, _etOperations = Nothing}
+
+
+-- | A list of resources, currently only projects in the form \`projects\/\`,
+-- that are allowed to be accessed by sources defined in the corresponding
+-- EgressFrom. A request matches if it contains a resource in this list. If
+-- \`*\` is specified for \`resources\`, then this EgressTo rule will
+-- authorize access to all resources outside the perimeter.
+etResources :: Lens' EgressTo [Text]
+etResources
+  = lens _etResources (\ s a -> s{_etResources = a}) .
+      _Default
+      . _Coerce
+
+-- | A list of ApiOperations allowed to be performed by the sources specified
+-- in the corresponding EgressFrom. A request matches if it uses an
+-- operation\/service in this list.
+etOperations :: Lens' EgressTo [APIOperation]
+etOperations
+  = lens _etOperations (\ s a -> s{_etOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON EgressTo where
+        parseJSON
+          = withObject "EgressTo"
+              (\ o ->
+                 EgressTo' <$>
+                   (o .:? "resources" .!= mempty) <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON EgressTo where
+        toJSON EgressTo'{..}
+          = object
+              (catMaybes
+                 [("resources" .=) <$> _etResources,
+                  ("operations" .=) <$> _etOperations])
+
 -- | A restriction on the OS type and version of devices making requests.
 --
 -- /See:/ 'osConstraint' smart constructor.
 data OSConstraint =
   OSConstraint'
-    { _ocOSType                  :: !(Maybe OSConstraintOSType)
-    , _ocMinimumVersion          :: !(Maybe Text)
+    { _ocOSType :: !(Maybe OSConstraintOSType)
+    , _ocMinimumVersion :: !(Maybe Text)
     , _ocRequireVerifiedChromeOS :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -816,8 +1458,8 @@ ocMinimumVersion
 
 -- | Only allows requests from devices with a verified Chrome OS.
 -- Verifications includes requirements that the device is
--- enterprise-managed, conformant to Dasher domain policies, and the caller
--- has permission to call the API targeted by the request.
+-- enterprise-managed, conformant to domain policies, and the caller has
+-- permission to call the API targeted by the request.
 ocRequireVerifiedChromeOS :: Lens' OSConstraint (Maybe Bool)
 ocRequireVerifiedChromeOS
   = lens _ocRequireVerifiedChromeOS
@@ -840,21 +1482,137 @@ instance ToJSON OSConstraint where
                   ("requireVerifiedChromeOs" .=) <$>
                     _ocRequireVerifiedChromeOS])
 
+-- | Defines the conditions under which an IngressPolicy matches a request.
+-- Conditions are based on information about the source of the request. The
+-- request must satisfy what is defined in \`sources\` AND identity related
+-- fields in order to match.
+--
+-- /See:/ 'ingressFrom' smart constructor.
+data IngressFrom =
+  IngressFrom'
+    { _ifIdentityType :: !(Maybe IngressFromIdentityType)
+    , _ifSources :: !(Maybe [IngressSource])
+    , _ifIdentities :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IngressFrom' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ifIdentityType'
+--
+-- * 'ifSources'
+--
+-- * 'ifIdentities'
+ingressFrom
+    :: IngressFrom
+ingressFrom =
+  IngressFrom'
+    {_ifIdentityType = Nothing, _ifSources = Nothing, _ifIdentities = Nothing}
+
+
+-- | Specifies the type of identities that are allowed access from outside
+-- the perimeter. If left unspecified, then members of \`identities\` field
+-- will be allowed access.
+ifIdentityType :: Lens' IngressFrom (Maybe IngressFromIdentityType)
+ifIdentityType
+  = lens _ifIdentityType
+      (\ s a -> s{_ifIdentityType = a})
+
+-- | Sources that this IngressPolicy authorizes access from.
+ifSources :: Lens' IngressFrom [IngressSource]
+ifSources
+  = lens _ifSources (\ s a -> s{_ifSources = a}) .
+      _Default
+      . _Coerce
+
+-- | A list of identities that are allowed access through this ingress
+-- policy. Should be in the format of email address. The email address
+-- should represent individual user or service account only.
+ifIdentities :: Lens' IngressFrom [Text]
+ifIdentities
+  = lens _ifIdentities (\ s a -> s{_ifIdentities = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON IngressFrom where
+        parseJSON
+          = withObject "IngressFrom"
+              (\ o ->
+                 IngressFrom' <$>
+                   (o .:? "identityType") <*>
+                     (o .:? "sources" .!= mempty)
+                     <*> (o .:? "identities" .!= mempty))
+
+instance ToJSON IngressFrom where
+        toJSON IngressFrom'{..}
+          = object
+              (catMaybes
+                 [("identityType" .=) <$> _ifIdentityType,
+                  ("sources" .=) <$> _ifSources,
+                  ("identities" .=) <$> _ifIdentities])
+
+-- | A response to ReplaceServicePerimetersRequest. This will be put inside
+-- of Operation.response field.
+--
+-- /See:/ 'replaceServicePerimetersResponse' smart constructor.
+newtype ReplaceServicePerimetersResponse =
+  ReplaceServicePerimetersResponse'
+    { _rServicePerimeters :: Maybe [ServicePerimeter]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ReplaceServicePerimetersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rServicePerimeters'
+replaceServicePerimetersResponse
+    :: ReplaceServicePerimetersResponse
+replaceServicePerimetersResponse =
+  ReplaceServicePerimetersResponse' {_rServicePerimeters = Nothing}
+
+
+-- | List of the Service Perimeter instances.
+rServicePerimeters :: Lens' ReplaceServicePerimetersResponse [ServicePerimeter]
+rServicePerimeters
+  = lens _rServicePerimeters
+      (\ s a -> s{_rServicePerimeters = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ReplaceServicePerimetersResponse
+         where
+        parseJSON
+          = withObject "ReplaceServicePerimetersResponse"
+              (\ o ->
+                 ReplaceServicePerimetersResponse' <$>
+                   (o .:? "servicePerimeters" .!= mempty))
+
+instance ToJSON ReplaceServicePerimetersResponse
+         where
+        toJSON ReplaceServicePerimetersResponse'{..}
+          = object
+              (catMaybes
+                 [("servicePerimeters" .=) <$> _rServicePerimeters])
+
 -- | \`AccessPolicy\` is a container for \`AccessLevels\` (which define the
--- necessary attributes to use GCP services) and \`ServicePerimeters\`
--- (which define regions of services able to freely pass data within a
--- perimeter). An access policy is globally visible within an organization,
--- and the restrictions it specifies apply to all projects within an
--- organization.
+-- necessary attributes to use Google Cloud services) and
+-- \`ServicePerimeters\` (which define regions of services able to freely
+-- pass data within a perimeter). An access policy is globally visible
+-- within an organization, and the restrictions it specifies apply to all
+-- projects within an organization.
 --
 -- /See:/ 'accessPolicy' smart constructor.
 data AccessPolicy =
   AccessPolicy'
-    { _apParent     :: !(Maybe Text)
-    , _apUpdateTime :: !(Maybe DateTime')
-    , _apName       :: !(Maybe Text)
-    , _apTitle      :: !(Maybe Text)
-    , _apCreateTime :: !(Maybe DateTime')
+    { _apParent :: !(Maybe Text)
+    , _apEtag :: !(Maybe Text)
+    , _apName :: !(Maybe Text)
+    , _apTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -865,22 +1623,19 @@ data AccessPolicy =
 --
 -- * 'apParent'
 --
--- * 'apUpdateTime'
+-- * 'apEtag'
 --
 -- * 'apName'
 --
 -- * 'apTitle'
---
--- * 'apCreateTime'
 accessPolicy
     :: AccessPolicy
 accessPolicy =
   AccessPolicy'
     { _apParent = Nothing
-    , _apUpdateTime = Nothing
+    , _apEtag = Nothing
     , _apName = Nothing
     , _apTitle = Nothing
-    , _apCreateTime = Nothing
     }
 
 
@@ -890,11 +1645,12 @@ accessPolicy =
 apParent :: Lens' AccessPolicy (Maybe Text)
 apParent = lens _apParent (\ s a -> s{_apParent = a})
 
--- | Output only. Time the \`AccessPolicy\` was updated in UTC.
-apUpdateTime :: Lens' AccessPolicy (Maybe UTCTime)
-apUpdateTime
-  = lens _apUpdateTime (\ s a -> s{_apUpdateTime = a})
-      . mapping _DateTime
+-- | Output only. An opaque identifier for the current version of the
+-- \`AccessPolicy\`. This will always be a strongly validated etag, meaning
+-- that two Access Polices will be identical if and only if their etags are
+-- identical. Clients should not expect this to be in any specific format.
+apEtag :: Lens' AccessPolicy (Maybe Text)
+apEtag = lens _apEtag (\ s a -> s{_apEtag = a})
 
 -- | Output only. Resource name of the \`AccessPolicy\`. Format:
 -- \`accessPolicies\/{policy_id}\`
@@ -905,37 +1661,254 @@ apName = lens _apName (\ s a -> s{_apName = a})
 apTitle :: Lens' AccessPolicy (Maybe Text)
 apTitle = lens _apTitle (\ s a -> s{_apTitle = a})
 
--- | Output only. Time the \`AccessPolicy\` was created in UTC.
-apCreateTime :: Lens' AccessPolicy (Maybe UTCTime)
-apCreateTime
-  = lens _apCreateTime (\ s a -> s{_apCreateTime = a})
-      . mapping _DateTime
-
 instance FromJSON AccessPolicy where
         parseJSON
           = withObject "AccessPolicy"
               (\ o ->
                  AccessPolicy' <$>
-                   (o .:? "parent") <*> (o .:? "updateTime") <*>
+                   (o .:? "parent") <*> (o .:? "etag") <*>
                      (o .:? "name")
-                     <*> (o .:? "title")
-                     <*> (o .:? "createTime"))
+                     <*> (o .:? "title"))
 
 instance ToJSON AccessPolicy where
         toJSON AccessPolicy'{..}
           = object
               (catMaybes
                  [("parent" .=) <$> _apParent,
-                  ("updateTime" .=) <$> _apUpdateTime,
-                  ("name" .=) <$> _apName, ("title" .=) <$> _apTitle,
-                  ("createTime" .=) <$> _apCreateTime])
+                  ("etag" .=) <$> _apEtag, ("name" .=) <$> _apName,
+                  ("title" .=) <$> _apTitle])
+
+-- | A request to replace all existing Access Levels in an Access Policy with
+-- the Access Levels provided. This is done atomically.
+--
+-- /See:/ 'replaceAccessLevelsRequest' smart constructor.
+data ReplaceAccessLevelsRequest =
+  ReplaceAccessLevelsRequest'
+    { _rEtag :: !(Maybe Text)
+    , _rAccessLevels :: !(Maybe [AccessLevel])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ReplaceAccessLevelsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rEtag'
+--
+-- * 'rAccessLevels'
+replaceAccessLevelsRequest
+    :: ReplaceAccessLevelsRequest
+replaceAccessLevelsRequest =
+  ReplaceAccessLevelsRequest' {_rEtag = Nothing, _rAccessLevels = Nothing}
+
+
+-- | Optional. The etag for the version of the Access Policy that this
+-- replace operation is to be performed on. If, at the time of replace, the
+-- etag for the Access Policy stored in Access Context Manager is different
+-- from the specified etag, then the replace operation will not be
+-- performed and the call will fail. This field is not required. If etag is
+-- not provided, the operation will be performed as if a valid etag is
+-- provided.
+rEtag :: Lens' ReplaceAccessLevelsRequest (Maybe Text)
+rEtag = lens _rEtag (\ s a -> s{_rEtag = a})
+
+-- | Required. The desired Access Levels that should replace all existing
+-- Access Levels in the Access Policy.
+rAccessLevels :: Lens' ReplaceAccessLevelsRequest [AccessLevel]
+rAccessLevels
+  = lens _rAccessLevels
+      (\ s a -> s{_rAccessLevels = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ReplaceAccessLevelsRequest where
+        parseJSON
+          = withObject "ReplaceAccessLevelsRequest"
+              (\ o ->
+                 ReplaceAccessLevelsRequest' <$>
+                   (o .:? "etag") <*> (o .:? "accessLevels" .!= mempty))
+
+instance ToJSON ReplaceAccessLevelsRequest where
+        toJSON ReplaceAccessLevelsRequest'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rEtag,
+                  ("accessLevels" .=) <$> _rAccessLevels])
+
+-- | Defines the conditions under which an IngressPolicy matches a request.
+-- Conditions are based on information about the ApiOperation intended to
+-- be performed on the target resource of the request. The request must
+-- satisfy what is defined in \`operations\` AND \`resources\` in order to
+-- match.
+--
+-- /See:/ 'ingressTo' smart constructor.
+data IngressTo =
+  IngressTo'
+    { _itResources :: !(Maybe [Text])
+    , _itOperations :: !(Maybe [APIOperation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IngressTo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itResources'
+--
+-- * 'itOperations'
+ingressTo
+    :: IngressTo
+ingressTo = IngressTo' {_itResources = Nothing, _itOperations = Nothing}
+
+
+-- | A list of resources, currently only projects in the form \`projects\/\`,
+-- protected by this ServicePerimeter that are allowed to be accessed by
+-- sources defined in the corresponding IngressFrom. If a single \`*\` is
+-- specified, then access to all resources inside the perimeter are
+-- allowed.
+itResources :: Lens' IngressTo [Text]
+itResources
+  = lens _itResources (\ s a -> s{_itResources = a}) .
+      _Default
+      . _Coerce
+
+-- | A list of ApiOperations allowed to be performed by the sources specified
+-- in corresponding IngressFrom in this ServicePerimeter.
+itOperations :: Lens' IngressTo [APIOperation]
+itOperations
+  = lens _itOperations (\ s a -> s{_itOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON IngressTo where
+        parseJSON
+          = withObject "IngressTo"
+              (\ o ->
+                 IngressTo' <$>
+                   (o .:? "resources" .!= mempty) <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON IngressTo where
+        toJSON IngressTo'{..}
+          = object
+              (catMaybes
+                 [("resources" .=) <$> _itResources,
+                  ("operations" .=) <$> _itOperations])
+
+-- | An allowed method or permission of a service specified in ApiOperation.
+--
+-- /See:/ 'methodSelector' smart constructor.
+data MethodSelector =
+  MethodSelector'
+    { _msMethod :: !(Maybe Text)
+    , _msPermission :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MethodSelector' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'msMethod'
+--
+-- * 'msPermission'
+methodSelector
+    :: MethodSelector
+methodSelector = MethodSelector' {_msMethod = Nothing, _msPermission = Nothing}
+
+
+-- | Value for \`method\` should be a valid method name for the corresponding
+-- \`service_name\` in ApiOperation. If \`*\` used as value for \`method\`,
+-- then ALL methods and permissions are allowed.
+msMethod :: Lens' MethodSelector (Maybe Text)
+msMethod = lens _msMethod (\ s a -> s{_msMethod = a})
+
+-- | Value for \`permission\` should be a valid Cloud IAM permission for the
+-- corresponding \`service_name\` in ApiOperation.
+msPermission :: Lens' MethodSelector (Maybe Text)
+msPermission
+  = lens _msPermission (\ s a -> s{_msPermission = a})
+
+instance FromJSON MethodSelector where
+        parseJSON
+          = withObject "MethodSelector"
+              (\ o ->
+                 MethodSelector' <$>
+                   (o .:? "method") <*> (o .:? "permission"))
+
+instance ToJSON MethodSelector where
+        toJSON MethodSelector'{..}
+          = object
+              (catMaybes
+                 [("method" .=) <$> _msMethod,
+                  ("permission" .=) <$> _msPermission])
+
+-- | Response of ListGcpUserAccessBindings.
+--
+-- /See:/ 'listGcpUserAccessBindingsResponse' smart constructor.
+data ListGcpUserAccessBindingsResponse =
+  ListGcpUserAccessBindingsResponse'
+    { _lguabrNextPageToken :: !(Maybe Text)
+    , _lguabrGcpUserAccessBindings :: !(Maybe [GcpUserAccessBinding])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListGcpUserAccessBindingsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lguabrNextPageToken'
+--
+-- * 'lguabrGcpUserAccessBindings'
+listGcpUserAccessBindingsResponse
+    :: ListGcpUserAccessBindingsResponse
+listGcpUserAccessBindingsResponse =
+  ListGcpUserAccessBindingsResponse'
+    {_lguabrNextPageToken = Nothing, _lguabrGcpUserAccessBindings = Nothing}
+
+
+-- | Token to get the next page of items. If blank, there are no more items.
+lguabrNextPageToken :: Lens' ListGcpUserAccessBindingsResponse (Maybe Text)
+lguabrNextPageToken
+  = lens _lguabrNextPageToken
+      (\ s a -> s{_lguabrNextPageToken = a})
+
+-- | GcpUserAccessBinding
+lguabrGcpUserAccessBindings :: Lens' ListGcpUserAccessBindingsResponse [GcpUserAccessBinding]
+lguabrGcpUserAccessBindings
+  = lens _lguabrGcpUserAccessBindings
+      (\ s a -> s{_lguabrGcpUserAccessBindings = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListGcpUserAccessBindingsResponse
+         where
+        parseJSON
+          = withObject "ListGcpUserAccessBindingsResponse"
+              (\ o ->
+                 ListGcpUserAccessBindingsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "gcpUserAccessBindings" .!= mempty))
+
+instance ToJSON ListGcpUserAccessBindingsResponse
+         where
+        toJSON ListGcpUserAccessBindingsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lguabrNextPageToken,
+                  ("gcpUserAccessBindings" .=) <$>
+                    _lguabrGcpUserAccessBindings])
 
 -- | A response to \`ListServicePerimetersRequest\`.
 --
 -- /See:/ 'listServicePerimetersResponse' smart constructor.
 data ListServicePerimetersResponse =
   ListServicePerimetersResponse'
-    { _lsprNextPageToken     :: !(Maybe Text)
+    { _lsprNextPageToken :: !(Maybe Text)
     , _lsprServicePerimeters :: !(Maybe [ServicePerimeter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -985,13 +1958,167 @@ instance ToJSON ListServicePerimetersResponse where
                  [("nextPageToken" .=) <$> _lsprNextPageToken,
                   ("servicePerimeters" .=) <$> _lsprServicePerimeters])
 
+-- | Specifies how APIs are allowed to communicate within the Service
+-- Perimeter.
+--
+-- /See:/ 'vpcAccessibleServices' smart constructor.
+data VPCAccessibleServices =
+  VPCAccessibleServices'
+    { _vasAllowedServices :: !(Maybe [Text])
+    , _vasEnableRestriction :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VPCAccessibleServices' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vasAllowedServices'
+--
+-- * 'vasEnableRestriction'
+vpcAccessibleServices
+    :: VPCAccessibleServices
+vpcAccessibleServices =
+  VPCAccessibleServices'
+    {_vasAllowedServices = Nothing, _vasEnableRestriction = Nothing}
+
+
+-- | The list of APIs usable within the Service Perimeter. Must be empty
+-- unless \'enable_restriction\' is True. You can specify a list of
+-- individual services, as well as include the \'RESTRICTED-SERVICES\'
+-- value, which automatically includes all of the services protected by the
+-- perimeter.
+vasAllowedServices :: Lens' VPCAccessibleServices [Text]
+vasAllowedServices
+  = lens _vasAllowedServices
+      (\ s a -> s{_vasAllowedServices = a})
+      . _Default
+      . _Coerce
+
+-- | Whether to restrict API calls within the Service Perimeter to the list
+-- of APIs specified in \'allowed_services\'.
+vasEnableRestriction :: Lens' VPCAccessibleServices (Maybe Bool)
+vasEnableRestriction
+  = lens _vasEnableRestriction
+      (\ s a -> s{_vasEnableRestriction = a})
+
+instance FromJSON VPCAccessibleServices where
+        parseJSON
+          = withObject "VPCAccessibleServices"
+              (\ o ->
+                 VPCAccessibleServices' <$>
+                   (o .:? "allowedServices" .!= mempty) <*>
+                     (o .:? "enableRestriction"))
+
+instance ToJSON VPCAccessibleServices where
+        toJSON VPCAccessibleServices'{..}
+          = object
+              (catMaybes
+                 [("allowedServices" .=) <$> _vasAllowedServices,
+                  ("enableRestriction" .=) <$> _vasEnableRestriction])
+
+-- | \`CustomLevel\` is an \`AccessLevel\` using the Cloud Common Expression
+-- Language to represent the necessary conditions for the level to apply to
+-- a request. See CEL spec at: https:\/\/github.com\/google\/cel-spec
+--
+-- /See:/ 'customLevel' smart constructor.
+newtype CustomLevel =
+  CustomLevel'
+    { _clExpr :: Maybe Expr
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CustomLevel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clExpr'
+customLevel
+    :: CustomLevel
+customLevel = CustomLevel' {_clExpr = Nothing}
+
+
+-- | Required. A Cloud CEL expression evaluating to a boolean.
+clExpr :: Lens' CustomLevel (Maybe Expr)
+clExpr = lens _clExpr (\ s a -> s{_clExpr = a})
+
+instance FromJSON CustomLevel where
+        parseJSON
+          = withObject "CustomLevel"
+              (\ o -> CustomLevel' <$> (o .:? "expr"))
+
+instance ToJSON CustomLevel where
+        toJSON CustomLevel'{..}
+          = object (catMaybes [("expr" .=) <$> _clExpr])
+
+-- | Identification for an API Operation.
+--
+-- /See:/ 'apiOperation' smart constructor.
+data APIOperation =
+  APIOperation'
+    { _aoMethodSelectors :: !(Maybe [MethodSelector])
+    , _aoServiceName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'APIOperation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aoMethodSelectors'
+--
+-- * 'aoServiceName'
+apiOperation
+    :: APIOperation
+apiOperation =
+  APIOperation' {_aoMethodSelectors = Nothing, _aoServiceName = Nothing}
+
+
+-- | API methods or permissions to allow. Method or permission must belong to
+-- the service specified by \`service_name\` field. A single MethodSelector
+-- entry with \`*\` specified for the \`method\` field will allow all
+-- methods AND permissions for the service specified in \`service_name\`.
+aoMethodSelectors :: Lens' APIOperation [MethodSelector]
+aoMethodSelectors
+  = lens _aoMethodSelectors
+      (\ s a -> s{_aoMethodSelectors = a})
+      . _Default
+      . _Coerce
+
+-- | The name of the API whose methods or permissions the IngressPolicy or
+-- EgressPolicy want to allow. A single ApiOperation with \`service_name\`
+-- field set to \`*\` will allow all methods AND permissions for all
+-- services.
+aoServiceName :: Lens' APIOperation (Maybe Text)
+aoServiceName
+  = lens _aoServiceName
+      (\ s a -> s{_aoServiceName = a})
+
+instance FromJSON APIOperation where
+        parseJSON
+          = withObject "APIOperation"
+              (\ o ->
+                 APIOperation' <$>
+                   (o .:? "methodSelectors" .!= mempty) <*>
+                     (o .:? "serviceName"))
+
+instance ToJSON APIOperation where
+        toJSON APIOperation'{..}
+          = object
+              (catMaybes
+                 [("methodSelectors" .=) <$> _aoMethodSelectors,
+                  ("serviceName" .=) <$> _aoServiceName])
+
 -- | A response to \`ListAccessLevelsRequest\`.
 --
 -- /See:/ 'listAccessLevelsResponse' smart constructor.
 data ListAccessLevelsResponse =
   ListAccessLevelsResponse'
     { _lalrNextPageToken :: !(Maybe Text)
-    , _lalrAccessLevels  :: !(Maybe [AccessLevel])
+    , _lalrAccessLevels :: !(Maybe [AccessLevel])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1092,12 +2219,12 @@ instance ToJSON OperationMetadata where
 -- /See:/ 'devicePolicy' smart constructor.
 data DevicePolicy =
   DevicePolicy'
-    { _dpOSConstraints                 :: !(Maybe [OSConstraint])
-    , _dpRequireAdminApproval          :: !(Maybe Bool)
-    , _dpRequireCorpOwned              :: !(Maybe Bool)
-    , _dpRequireScreenlock             :: !(Maybe Bool)
-    , _dpAllowedEncryptionStatuses     :: !(Maybe [Text])
-    , _dpAllowedDeviceManagementLevels :: !(Maybe [Text])
+    { _dpOSConstraints :: !(Maybe [OSConstraint])
+    , _dpRequireAdminApproval :: !(Maybe Bool)
+    , _dpRequireCorpOwned :: !(Maybe Bool)
+    , _dpRequireScreenlock :: !(Maybe Bool)
+    , _dpAllowedEncryptionStatuses :: !(Maybe [DevicePolicyAllowedEncryptionStatusesItem])
+    , _dpAllowedDeviceManagementLevels :: !(Maybe [DevicePolicyAllowedDeviceManagementLevelsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1158,7 +2285,7 @@ dpRequireScreenlock
       (\ s a -> s{_dpRequireScreenlock = a})
 
 -- | Allowed encryptions statuses, an empty list allows all statuses.
-dpAllowedEncryptionStatuses :: Lens' DevicePolicy [Text]
+dpAllowedEncryptionStatuses :: Lens' DevicePolicy [DevicePolicyAllowedEncryptionStatusesItem]
 dpAllowedEncryptionStatuses
   = lens _dpAllowedEncryptionStatuses
       (\ s a -> s{_dpAllowedEncryptionStatuses = a})
@@ -1167,7 +2294,7 @@ dpAllowedEncryptionStatuses
 
 -- | Allowed device management levels, an empty list allows all management
 -- levels.
-dpAllowedDeviceManagementLevels :: Lens' DevicePolicy [Text]
+dpAllowedDeviceManagementLevels :: Lens' DevicePolicy [DevicePolicyAllowedDeviceManagementLevelsItem]
 dpAllowedDeviceManagementLevels
   = lens _dpAllowedDeviceManagementLevels
       (\ s a -> s{_dpAllowedDeviceManagementLevels = a})
@@ -1211,11 +2338,11 @@ instance ToJSON DevicePolicy where
 -- /See:/ 'condition' smart constructor.
 data Condition =
   Condition'
-    { _cMembers              :: !(Maybe [Text])
-    , _cRegions              :: !(Maybe [Text])
-    , _cNegate               :: !(Maybe Bool)
-    , _cIPSubnetworks        :: !(Maybe [Text])
-    , _cDevicePolicy         :: !(Maybe DevicePolicy)
+    { _cMembers :: !(Maybe [Text])
+    , _cRegions :: !(Maybe [Text])
+    , _cNegate :: !(Maybe Bool)
+    , _cIPSubnetworks :: !(Maybe [Text])
+    , _cDevicePolicy :: !(Maybe DevicePolicy)
     , _cRequiredAccessLevels :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1373,3 +2500,48 @@ instance FromJSON OperationResponse where
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
+
+-- | A response to CommitServicePerimetersRequest. This will be put inside of
+-- Operation.response field.
+--
+-- /See:/ 'commitServicePerimetersResponse' smart constructor.
+newtype CommitServicePerimetersResponse =
+  CommitServicePerimetersResponse'
+    { _csprServicePerimeters :: Maybe [ServicePerimeter]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CommitServicePerimetersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csprServicePerimeters'
+commitServicePerimetersResponse
+    :: CommitServicePerimetersResponse
+commitServicePerimetersResponse =
+  CommitServicePerimetersResponse' {_csprServicePerimeters = Nothing}
+
+
+-- | List of all the Service Perimeter instances in the Access Policy.
+csprServicePerimeters :: Lens' CommitServicePerimetersResponse [ServicePerimeter]
+csprServicePerimeters
+  = lens _csprServicePerimeters
+      (\ s a -> s{_csprServicePerimeters = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON CommitServicePerimetersResponse
+         where
+        parseJSON
+          = withObject "CommitServicePerimetersResponse"
+              (\ o ->
+                 CommitServicePerimetersResponse' <$>
+                   (o .:? "servicePerimeters" .!= mempty))
+
+instance ToJSON CommitServicePerimetersResponse where
+        toJSON CommitServicePerimetersResponse'{..}
+          = object
+              (catMaybes
+                 [("servicePerimeters" .=) <$>
+                    _csprServicePerimeters])

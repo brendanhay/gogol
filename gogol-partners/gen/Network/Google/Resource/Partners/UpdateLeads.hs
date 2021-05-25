@@ -49,8 +49,8 @@ module Network.Google.Resource.Partners.UpdateLeads
     , ulCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.updateLeads@ method which the
 -- 'UpdateLeads' request conforms to.
@@ -89,20 +89,20 @@ type UpdateLeadsResource =
 -- /See:/ 'updateLeads' smart constructor.
 data UpdateLeads =
   UpdateLeads'
-    { _ulXgafv                                       :: !(Maybe Xgafv)
-    , _ulUploadProtocol                              :: !(Maybe Text)
-    , _ulUpdateMask                                  :: !(Maybe GFieldMask)
-    , _ulAccessToken                                 :: !(Maybe Text)
-    , _ulUploadType                                  :: !(Maybe Text)
-    , _ulPayload                                     :: !Lead
-    , _ulRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _ulRequestMetadataLocale                       :: !(Maybe Text)
-    , _ulRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _ulRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _ulRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _ulRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _ulXgafv :: !(Maybe Xgafv)
+    , _ulUploadProtocol :: !(Maybe Text)
+    , _ulUpdateMask :: !(Maybe GFieldMask)
+    , _ulAccessToken :: !(Maybe Text)
+    , _ulUploadType :: !(Maybe Text)
+    , _ulPayload :: !Lead
+    , _ulRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _ulRequestMetadataLocale :: !(Maybe Text)
+    , _ulRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _ulRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _ulRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _ulRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _ulRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _ulCallback                                    :: !(Maybe Text)
+    , _ulCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,12 @@
 --
 -- DeleteSeries deletes all instances within the given study and series.
 -- Delete requests are equivalent to the GET requests specified in the
--- WADO-RS standard.
+-- Retrieve transaction. The method returns an Operation which will be
+-- marked successful when the deletion is complete. Warning: Instances
+-- cannot be inserted into a series that is being deleted by an operation
+-- until the operation completes. For samples that show how to call
+-- DeleteSeries, see [Deleting a study, series, or
+-- instance](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#deleting_a_study_series_or_instance).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.series.delete@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Delete
@@ -44,14 +49,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsssdDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.series.delete@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesSeriesDeleteResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -60,22 +65,27 @@ type ProjectsLocationsDataSetsDicomStoresStudiesSeriesDeleteResource
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | DeleteSeries deletes all instances within the given study and series.
 -- Delete requests are equivalent to the GET requests specified in the
--- WADO-RS standard.
+-- Retrieve transaction. The method returns an Operation which will be
+-- marked successful when the deletion is complete. Warning: Instances
+-- cannot be inserted into a series that is being deleted by an operation
+-- until the operation completes. For samples that show how to call
+-- DeleteSeries, see [Deleting a study, series, or
+-- instance](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#deleting_a_study_series_or_instance).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesSeriesDelete' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete =
   ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete'
-    { _pldsdsssdParent         :: !Text
-    , _pldsdsssdXgafv          :: !(Maybe Xgafv)
+    { _pldsdsssdParent :: !Text
+    , _pldsdsssdXgafv :: !(Maybe Xgafv)
     , _pldsdsssdUploadProtocol :: !(Maybe Text)
-    , _pldsdsssdAccessToken    :: !(Maybe Text)
-    , _pldsdsssdUploadType     :: !(Maybe Text)
-    , _pldsdsssdCallback       :: !(Maybe Text)
-    , _pldsdsssdDicomWebPath   :: !Text
+    , _pldsdsssdAccessToken :: !(Maybe Text)
+    , _pldsdsssdUploadType :: !(Maybe Text)
+    , _pldsdsssdCallback :: !(Maybe Text)
+    , _pldsdsssdDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,8 +123,8 @@ projectsLocationsDataSetsDicomStoresStudiesSeriesDelete pPldsdsssdParent_ pPldsd
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsssdParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete Text
 pldsdsssdParent
   = lens _pldsdsssdParent
@@ -150,9 +160,8 @@ pldsdsssdCallback
   = lens _pldsdsssdCallback
       (\ s a -> s{_pldsdsssdCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g.,
--- \`studies\/{study_id}\/series\/{series_id}\`).
+-- | The path of the DeleteSeries request. For example,
+-- \`studies\/{study_uid}\/series\/{series_uid}\`.
 pldsdsssdDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete Text
 pldsdsssdDicomWebPath
   = lens _pldsdsssdDicomWebPath
@@ -163,7 +172,7 @@ instance GoogleRequest
          where
         type Rs
                ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete
-             = Empty
+             = Operation
         type Scopes
                ProjectsLocationsDataSetsDicomStoresStudiesSeriesDelete
              = '["https://www.googleapis.com/auth/cloud-platform"]

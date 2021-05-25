@@ -46,8 +46,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.SetIAMPolicy
     , basipCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.setIamPolicy@ method which the
 -- 'BillingAccountsSetIAMPolicy' request conforms to.
@@ -72,13 +72,13 @@ type BillingAccountsSetIAMPolicyResource =
 -- /See:/ 'billingAccountsSetIAMPolicy' smart constructor.
 data BillingAccountsSetIAMPolicy =
   BillingAccountsSetIAMPolicy'
-    { _basipXgafv          :: !(Maybe Xgafv)
+    { _basipXgafv :: !(Maybe Xgafv)
     , _basipUploadProtocol :: !(Maybe Text)
-    , _basipAccessToken    :: !(Maybe Text)
-    , _basipUploadType     :: !(Maybe Text)
-    , _basipPayload        :: !SetIAMPolicyRequest
-    , _basipResource       :: !Text
-    , _basipCallback       :: !(Maybe Text)
+    , _basipAccessToken :: !(Maybe Text)
+    , _basipUploadType :: !(Maybe Text)
+    , _basipPayload :: !SetIAMPolicyRequest
+    , _basipResource :: !Text
+    , _basipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -161,7 +161,8 @@ instance GoogleRequest BillingAccountsSetIAMPolicy
          where
         type Rs BillingAccountsSetIAMPolicy = Policy
         type Scopes BillingAccountsSetIAMPolicy =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsSetIAMPolicy'{..}
           = go _basipResource _basipXgafv _basipUploadProtocol
               _basipAccessToken

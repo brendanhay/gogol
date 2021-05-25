@@ -45,8 +45,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Exe
     , pidsessqlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.executeStreamingSql@ method which the
 -- 'ProjectsInstancesDatabasesSessionsExecuteStreamingSQL' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsInstancesDatabasesSessionsExecuteStreamingSQLResource
 -- /See:/ 'projectsInstancesDatabasesSessionsExecuteStreamingSQL' smart constructor.
 data ProjectsInstancesDatabasesSessionsExecuteStreamingSQL =
   ProjectsInstancesDatabasesSessionsExecuteStreamingSQL'
-    { _pidsessqlXgafv          :: !(Maybe Xgafv)
+    { _pidsessqlXgafv :: !(Maybe Xgafv)
     , _pidsessqlUploadProtocol :: !(Maybe Text)
-    , _pidsessqlAccessToken    :: !(Maybe Text)
-    , _pidsessqlUploadType     :: !(Maybe Text)
-    , _pidsessqlPayload        :: !ExecuteSQLRequest
-    , _pidsessqlSession        :: !Text
-    , _pidsessqlCallback       :: !(Maybe Text)
+    , _pidsessqlAccessToken :: !(Maybe Text)
+    , _pidsessqlUploadType :: !(Maybe Text)
+    , _pidsessqlPayload :: !ExecuteSQLRequest
+    , _pidsessqlSession :: !Text
+    , _pidsessqlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

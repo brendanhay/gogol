@@ -23,7 +23,7 @@
 -- Updates a specific model resource. Currently the only supported fields
 -- to update are \`description\` and \`default_version.name\`.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.patch@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.patch@.
 module Network.Google.Resource.Ml.Projects.Models.Patch
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.Ml.Projects.Models.Patch
     , pmpCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.patch@ method which the
 -- 'ProjectsModelsPatch' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsModelsPatchResource =
 -- /See:/ 'projectsModelsPatch' smart constructor.
 data ProjectsModelsPatch =
   ProjectsModelsPatch'
-    { _pmpXgafv          :: !(Maybe Xgafv)
+    { _pmpXgafv :: !(Maybe Xgafv)
     , _pmpUploadProtocol :: !(Maybe Text)
-    , _pmpUpdateMask     :: !(Maybe GFieldMask)
-    , _pmpAccessToken    :: !(Maybe Text)
-    , _pmpUploadType     :: !(Maybe Text)
-    , _pmpPayload        :: !GoogleCloudMlV1__Model
-    , _pmpName           :: !Text
-    , _pmpCallback       :: !(Maybe Text)
+    , _pmpUpdateMask :: !(Maybe GFieldMask)
+    , _pmpAccessToken :: !(Maybe Text)
+    , _pmpUploadType :: !(Maybe Text)
+    , _pmpPayload :: !GoogleCloudMlV1__Model
+    , _pmpName :: !Text
+    , _pmpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

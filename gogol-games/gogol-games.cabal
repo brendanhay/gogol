@@ -14,7 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The API for Google Play Game Services.
+    The Google Play games service allows developers to enhance games with
+    social leaderboards, achievements, game state, sign-in with Google, and
+    more.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -43,6 +45,7 @@ library
         , Network.Google.Resource.Games.Achievements.Unlock
         , Network.Google.Resource.Games.Achievements.UpdateMultiple
         , Network.Google.Resource.Games.Applications.Get
+        , Network.Google.Resource.Games.Applications.GetEndPoint
         , Network.Google.Resource.Games.Applications.Played
         , Network.Google.Resource.Games.Applications.Verify
         , Network.Google.Resource.Games.Events.ListByPlayer
@@ -54,20 +57,7 @@ library
         , Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
         , Network.Google.Resource.Games.Players.Get
         , Network.Google.Resource.Games.Players.List
-        , Network.Google.Resource.Games.Pushtokens.Remove
-        , Network.Google.Resource.Games.Pushtokens.Update
-        , Network.Google.Resource.Games.QuestMilestones.Claim
-        , Network.Google.Resource.Games.Quests.Accept
-        , Network.Google.Resource.Games.Quests.List
         , Network.Google.Resource.Games.Revisions.Check
-        , Network.Google.Resource.Games.Rooms.Create
-        , Network.Google.Resource.Games.Rooms.Decline
-        , Network.Google.Resource.Games.Rooms.Dismiss
-        , Network.Google.Resource.Games.Rooms.Get
-        , Network.Google.Resource.Games.Rooms.Join
-        , Network.Google.Resource.Games.Rooms.Leave
-        , Network.Google.Resource.Games.Rooms.List
-        , Network.Google.Resource.Games.Rooms.ReportStatus
         , Network.Google.Resource.Games.Scores.Get
         , Network.Google.Resource.Games.Scores.List
         , Network.Google.Resource.Games.Scores.ListWindow
@@ -75,19 +65,7 @@ library
         , Network.Google.Resource.Games.Scores.SubmitMultiple
         , Network.Google.Resource.Games.Snapshots.Get
         , Network.Google.Resource.Games.Snapshots.List
-        , Network.Google.Resource.Games.TurnBasedMatches.Cancel
-        , Network.Google.Resource.Games.TurnBasedMatches.Create
-        , Network.Google.Resource.Games.TurnBasedMatches.Decline
-        , Network.Google.Resource.Games.TurnBasedMatches.Dismiss
-        , Network.Google.Resource.Games.TurnBasedMatches.Finish
-        , Network.Google.Resource.Games.TurnBasedMatches.Get
-        , Network.Google.Resource.Games.TurnBasedMatches.Join
-        , Network.Google.Resource.Games.TurnBasedMatches.Leave
-        , Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
-        , Network.Google.Resource.Games.TurnBasedMatches.List
-        , Network.Google.Resource.Games.TurnBasedMatches.Rematch
-        , Network.Google.Resource.Games.TurnBasedMatches.Sync
-        , Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
+        , Network.Google.Resource.Games.Stats.Get
 
     other-modules:
           Network.Google.Games.Types.Product

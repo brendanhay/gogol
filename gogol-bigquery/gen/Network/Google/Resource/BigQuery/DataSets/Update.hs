@@ -40,8 +40,8 @@ module Network.Google.Resource.BigQuery.DataSets.Update
     , dsuProjectId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.update@ method which the
 -- 'DataSetsUpdate' request conforms to.
@@ -62,7 +62,7 @@ type DataSetsUpdateResource =
 -- /See:/ 'dataSetsUpdate' smart constructor.
 data DataSetsUpdate =
   DataSetsUpdate'
-    { _dsuPayload   :: !DataSet
+    { _dsuPayload :: !DataSet
     , _dsuDataSetId :: !Text
     , _dsuProjectId :: !Text
     }

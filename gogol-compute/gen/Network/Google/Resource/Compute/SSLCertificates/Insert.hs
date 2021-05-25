@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.SSLCertificates.Insert
     , sciPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslCertificates.insert@ method which the
 -- 'SSLCertificatesInsert' request conforms to.
@@ -63,8 +63,8 @@ type SSLCertificatesInsertResource =
 data SSLCertificatesInsert =
   SSLCertificatesInsert'
     { _sciRequestId :: !(Maybe Text)
-    , _sciProject   :: !Text
-    , _sciPayload   :: !SSLCertificate
+    , _sciProject :: !Text
+    , _sciPayload :: !SSLCertificate
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -37,8 +37,8 @@ module Network.Google.Resource.Mirror.Subscriptions.Update
     , suId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.update@ method which the
 -- 'SubscriptionsUpdate' request conforms to.
@@ -57,7 +57,7 @@ type SubscriptionsUpdateResource =
 data SubscriptionsUpdate =
   SubscriptionsUpdate'
     { _suPayload :: !Subscription
-    , _suId      :: !Text
+    , _suId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

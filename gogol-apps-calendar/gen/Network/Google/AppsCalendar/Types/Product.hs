@@ -17,32 +17,32 @@
 --
 module Network.Google.AppsCalendar.Types.Product where
 
-import           Network.Google.AppsCalendar.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'calendarListEntry' smart constructor.
 data CalendarListEntry =
   CalendarListEntry'
-    { _cleSummary              :: !(Maybe Text)
+    { _cleSummary :: !(Maybe Text)
     , _cleConferenceProperties :: !(Maybe ConferenceProperties)
-    , _cleEtag                 :: !(Maybe Text)
-    , _cleLocation             :: !(Maybe Text)
-    , _cleKind                 :: !Text
+    , _cleEtag :: !(Maybe Text)
+    , _cleLocation :: !(Maybe Text)
+    , _cleKind :: !Text
     , _cleNotificationSettings :: !(Maybe CalendarListEntryNotificationSettings)
-    , _cleBackgRoundColor      :: !(Maybe Text)
-    , _cleForegRoundColor      :: !(Maybe Text)
-    , _cleDefaultReminders     :: !(Maybe [EventReminder])
-    , _cleSelected             :: !Bool
-    , _clePrimary              :: !Bool
-    , _cleHidden               :: !Bool
-    , _cleId                   :: !(Maybe Text)
-    , _cleDeleted              :: !Bool
-    , _cleAccessRole           :: !(Maybe Text)
-    , _cleSummaryOverride      :: !(Maybe Text)
-    , _cleColorId              :: !(Maybe Text)
-    , _cleTimeZone             :: !(Maybe Text)
-    , _cleDescription          :: !(Maybe Text)
+    , _cleBackgRoundColor :: !(Maybe Text)
+    , _cleForegRoundColor :: !(Maybe Text)
+    , _cleDefaultReminders :: !(Maybe [EventReminder])
+    , _cleSelected :: !Bool
+    , _clePrimary :: !Bool
+    , _cleHidden :: !Bool
+    , _cleId :: !(Maybe Text)
+    , _cleDeleted :: !Bool
+    , _cleAccessRole :: !(Maybe Text)
+    , _cleSummaryOverride :: !(Maybe Text)
+    , _cleColorId :: !(Maybe Text)
+    , _cleTimeZone :: !(Maybe Text)
+    , _cleDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -186,7 +186,8 @@ clePrimary
   = lens _clePrimary (\ s a -> s{_clePrimary = a})
 
 -- | Whether the calendar has been hidden from the list. Optional. The
--- default is False.
+-- attribute is only returned when the calendar is hidden, in which case
+-- the value is true.
 cleHidden :: Lens' CalendarListEntry Bool
 cleHidden
   = lens _cleHidden (\ s a -> s{_cleHidden = a})
@@ -332,44 +333,45 @@ instance ToJSON ConferenceParameters where
 -- /See:/ 'event' smart constructor.
 data Event =
   Event'
-    { _eSummary                 :: !(Maybe Text)
-    , _eOriginalStartTime       :: !(Maybe EventDateTime)
-    , _eCreator                 :: !(Maybe EventCreator)
-    , _eStatus                  :: !(Maybe Text)
-    , _eGuestsCanModify         :: !Bool
-    , _eEtag                    :: !(Maybe Text)
-    , _eAttachments             :: !(Maybe [EventAttachment])
-    , _eLocked                  :: !Bool
-    , _eLocation                :: !(Maybe Text)
-    , _eAttendees               :: !(Maybe [EventAttendee])
-    , _eReminders               :: !(Maybe EventReminders)
-    , _eKind                    :: !Text
-    , _eCreated                 :: !(Maybe DateTime')
-    , _eTransparency            :: !Text
-    , _eRecurringEventId        :: !(Maybe Text)
-    , _eStart                   :: !(Maybe EventDateTime)
-    , _ePrivateCopy             :: !Bool
-    , _eEndTimeUnspecified      :: !Bool
-    , _eConferenceData          :: !(Maybe ConferenceData)
-    , _eExtendedProperties      :: !(Maybe EventExtendedProperties)
-    , _eVisibility              :: !Text
-    , _eGuestsCanInviteOthers   :: !Bool
-    , _eRecurrence              :: !(Maybe [Text])
-    , _eGadget                  :: !(Maybe EventGadget)
-    , _eSequence                :: !(Maybe (Textual Int32))
-    , _eICalUId                 :: !(Maybe Text)
-    , _eEnd                     :: !(Maybe EventDateTime)
-    , _eAttendeesOmitted        :: !Bool
-    , _eSource                  :: !(Maybe EventSource)
-    , _eId                      :: !(Maybe Text)
-    , _eHTMLLink                :: !(Maybe Text)
-    , _eUpdated                 :: !(Maybe DateTime')
-    , _eColorId                 :: !(Maybe Text)
-    , _eAnyoneCanAddSelf        :: !Bool
+    { _eSummary :: !(Maybe Text)
+    , _eOriginalStartTime :: !(Maybe EventDateTime)
+    , _eCreator :: !(Maybe EventCreator)
+    , _eStatus :: !(Maybe Text)
+    , _eGuestsCanModify :: !Bool
+    , _eEtag :: !(Maybe Text)
+    , _eAttachments :: !(Maybe [EventAttachment])
+    , _eLocked :: !Bool
+    , _eLocation :: !(Maybe Text)
+    , _eAttendees :: !(Maybe [EventAttendee])
+    , _eReminders :: !(Maybe EventReminders)
+    , _eKind :: !Text
+    , _eCreated :: !(Maybe DateTime')
+    , _eTransparency :: !Text
+    , _eRecurringEventId :: !(Maybe Text)
+    , _eStart :: !(Maybe EventDateTime)
+    , _ePrivateCopy :: !Bool
+    , _eEndTimeUnspecified :: !Bool
+    , _eConferenceData :: !(Maybe ConferenceData)
+    , _eExtendedProperties :: !(Maybe EventExtendedProperties)
+    , _eVisibility :: !Text
+    , _eGuestsCanInviteOthers :: !Bool
+    , _eRecurrence :: !(Maybe [Text])
+    , _eGadget :: !(Maybe EventGadget)
+    , _eEventType :: !Text
+    , _eSequence :: !(Maybe (Textual Int32))
+    , _eICalUId :: !(Maybe Text)
+    , _eEnd :: !(Maybe EventDateTime)
+    , _eAttendeesOmitted :: !Bool
+    , _eSource :: !(Maybe EventSource)
+    , _eId :: !(Maybe Text)
+    , _eHTMLLink :: !(Maybe Text)
+    , _eUpdated :: !(Maybe DateTime')
+    , _eColorId :: !(Maybe Text)
+    , _eAnyoneCanAddSelf :: !Bool
     , _eGuestsCanSeeOtherGuests :: !Bool
-    , _eHangoutLink             :: !(Maybe Text)
-    , _eDescription             :: !(Maybe Text)
-    , _eOrganizer               :: !(Maybe EventOrganizer)
+    , _eHangoutLink :: !(Maybe Text)
+    , _eDescription :: !(Maybe Text)
+    , _eOrganizer :: !(Maybe EventOrganizer)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -426,6 +428,8 @@ data Event =
 --
 -- * 'eGadget'
 --
+-- * 'eEventType'
+--
 -- * 'eSequence'
 --
 -- * 'eICalUId'
@@ -481,6 +485,7 @@ event =
     , _eGuestsCanInviteOthers = True
     , _eRecurrence = Nothing
     , _eGadget = Nothing
+    , _eEventType = "default"
     , _eSequence = Nothing
     , _eICalUId = Nothing
     , _eEnd = Nothing
@@ -577,7 +582,9 @@ eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | The attendees of the event. See the Events with attendees guide for more
--- information on scheduling events with other calendar users.
+-- information on scheduling events with other calendar users. Service
+-- accounts need to use domain-wide delegation of authority to populate the
+-- attendee list.
 eAttendees :: Lens' Event [EventAttendee]
 eAttendees
   = lens _eAttendees (\ s a -> s{_eAttendees = a}) .
@@ -622,9 +629,9 @@ eRecurringEventId
 eStart :: Lens' Event (Maybe EventDateTime)
 eStart = lens _eStart (\ s a -> s{_eStart = a})
 
--- | Whether this is a private event copy where changes are not shared with
--- other copies on other calendars. Optional. Immutable. The default is
--- False.
+-- | If set to True, Event propagation is disabled. Note that it is not the
+-- same thing as Private event properties. Optional. Immutable. The default
+-- is False.
 ePrivateCopy :: Lens' Event Bool
 ePrivateCopy
   = lens _ePrivateCopy (\ s a -> s{_ePrivateCopy = a})
@@ -637,7 +644,7 @@ eEndTimeUnspecified
   = lens _eEndTimeUnspecified
       (\ s a -> s{_eEndTimeUnspecified = a})
 
--- | The conference-related information, such as details of a Hangouts Meet
+-- | The conference-related information, such as details of a Google Meet
 -- conference. To create new conference details use the createRequest
 -- field. To persist your changes, remember to set the
 -- conferenceDataVersion request parameter to 1 for all event modification
@@ -682,9 +689,17 @@ eRecurrence
       _Default
       . _Coerce
 
--- | A gadget that extends this event.
+-- | A gadget that extends this event. Gadgets are deprecated; this structure
+-- is instead only used for returning birthday calendar metadata.
 eGadget :: Lens' Event (Maybe EventGadget)
 eGadget = lens _eGadget (\ s a -> s{_eGadget = a})
+
+-- | Specific type of the event. Read-only. Possible values are: -
+-- \"default\" - A regular event or not further specified. -
+-- \"outOfOffice\" - An out-of-office event.
+eEventType :: Lens' Event Text
+eEventType
+  = lens _eEventType (\ s a -> s{_eEventType = a})
 
 -- | Sequence number as per iCalendar.
 eSequence :: Lens' Event (Maybe Int32)
@@ -756,8 +771,8 @@ eUpdated
 eColorId :: Lens' Event (Maybe Text)
 eColorId = lens _eColorId (\ s a -> s{_eColorId = a})
 
--- | Whether anyone can invite themselves to the event (currently works for
--- Google+ events only). Optional. The default is False.
+-- | Whether anyone can invite themselves to the event (deprecated).
+-- Optional. The default is False.
 eAnyoneCanAddSelf :: Lens' Event Bool
 eAnyoneCanAddSelf
   = lens _eAnyoneCanAddSelf
@@ -770,13 +785,13 @@ eGuestsCanSeeOtherGuests
   = lens _eGuestsCanSeeOtherGuests
       (\ s a -> s{_eGuestsCanSeeOtherGuests = a})
 
--- | An absolute link to the Google+ hangout associated with this event.
+-- | An absolute link to the Google Hangout associated with this event.
 -- Read-only.
 eHangoutLink :: Lens' Event (Maybe Text)
 eHangoutLink
   = lens _eHangoutLink (\ s a -> s{_eHangoutLink = a})
 
--- | Description of the event. Optional.
+-- | Description of the event. Can contain HTML. Optional.
 eDescription :: Lens' Event (Maybe Text)
 eDescription
   = lens _eDescription (\ s a -> s{_eDescription = a})
@@ -817,6 +832,7 @@ instance FromJSON Event where
                      <*> (o .:? "guestsCanInviteOthers" .!= True)
                      <*> (o .:? "recurrence" .!= mempty)
                      <*> (o .:? "gadget")
+                     <*> (o .:? "eventType" .!= "default")
                      <*> (o .:? "sequence")
                      <*> (o .:? "iCalUID")
                      <*> (o .:? "end")
@@ -861,6 +877,7 @@ instance ToJSON Event where
                     ("guestsCanInviteOthers" .= _eGuestsCanInviteOthers),
                   ("recurrence" .=) <$> _eRecurrence,
                   ("gadget" .=) <$> _eGadget,
+                  Just ("eventType" .= _eEventType),
                   ("sequence" .=) <$> _eSequence,
                   ("iCalUID" .=) <$> _eICalUId, ("end" .=) <$> _eEnd,
                   Just ("attendeesOmitted" .= _eAttendeesOmitted),
@@ -971,8 +988,8 @@ instance ToJSON ConferenceProperties where
 data ConferenceSolution =
   ConferenceSolution'
     { _csIconURI :: !(Maybe Text)
-    , _csKey     :: !(Maybe ConferenceSolutionKey)
-    , _csName    :: !(Maybe Text)
+    , _csKey :: !(Maybe ConferenceSolutionKey)
+    , _csName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1022,13 +1039,13 @@ instance ToJSON ConferenceSolution where
                  [("iconUri" .=) <$> _csIconURI,
                   ("key" .=) <$> _csKey, ("name" .=) <$> _csName])
 
--- | The scope of the rule.
+-- | The extent to which calendar access is granted by this ACL rule.
 --
 -- /See:/ 'aclRuleScope' smart constructor.
 data ACLRuleScope =
   ACLRuleScope'
     { _arsValue :: !(Maybe Text)
-    , _arsType  :: !(Maybe Text)
+    , _arsType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1073,7 +1090,7 @@ instance ToJSON ACLRuleScope where
 
 -- | A global palette of event colors, mapping from the color ID to its
 -- definition. An event resource may refer to one of these color IDs in its
--- color field. Read-only.
+-- colorId field. Read-only.
 --
 -- /See:/ 'colorsEvent' smart constructor.
 newtype ColorsEvent =
@@ -1113,10 +1130,10 @@ instance ToJSON ColorsEvent where
 -- /See:/ 'settings' smart constructor.
 data Settings =
   Settings'
-    { _sEtag          :: !(Maybe Text)
+    { _sEtag :: !(Maybe Text)
     , _sNextPageToken :: !(Maybe Text)
-    , _sKind          :: !Text
-    , _sItems         :: !(Maybe [Setting])
+    , _sKind :: !Text
+    , _sItems :: !(Maybe [Setting])
     , _sNextSyncToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1231,11 +1248,11 @@ instance ToJSON FreeBusyRequestItem where
 -- /See:/ 'eventAttachment' smart constructor.
 data EventAttachment =
   EventAttachment'
-    { _eaFileURL  :: !(Maybe Text)
+    { _eaFileURL :: !(Maybe Text)
     , _eaIconLink :: !(Maybe Text)
     , _eaMimeType :: !(Maybe Text)
-    , _eaTitle    :: !(Maybe Text)
-    , _eaFileId   :: !(Maybe Text)
+    , _eaTitle :: !(Maybe Text)
+    , _eaFileId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1315,16 +1332,16 @@ instance ToJSON EventAttachment where
 -- /See:/ 'entryPoint' smart constructor.
 data EntryPoint =
   EntryPoint'
-    { _epPasscode           :: !(Maybe Text)
-    , _epRegionCode         :: !(Maybe Text)
-    , _epURI                :: !(Maybe Text)
-    , _epMeetingCode        :: !(Maybe Text)
-    , _epPassword           :: !(Maybe Text)
-    , _epPin                :: !(Maybe Text)
+    { _epPasscode :: !(Maybe Text)
+    , _epRegionCode :: !(Maybe Text)
+    , _epURI :: !(Maybe Text)
+    , _epMeetingCode :: !(Maybe Text)
+    , _epPassword :: !(Maybe Text)
+    , _epPin :: !(Maybe Text)
     , _epEntryPointFeatures :: !(Maybe [Text])
-    , _epEntryPointType     :: !(Maybe Text)
-    , _epLabel              :: !(Maybe Text)
-    , _epAccessCode         :: !(Maybe Text)
+    , _epEntryPointType :: !(Maybe Text)
+    , _epLabel :: !(Maybe Text)
+    , _epAccessCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1496,7 +1513,7 @@ instance ToJSON EntryPoint where
 data TimePeriod =
   TimePeriod'
     { _tpStart :: !(Maybe DateTime')
-    , _tpEnd   :: !(Maybe DateTime')
+    , _tpEnd :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1561,8 +1578,9 @@ conferenceSolutionKey = ConferenceSolutionKey' {_cskType = Nothing}
 -- However, it should disallow modifications. The possible values are: -
 -- \"eventHangout\" for Hangouts for consumers
 -- (http:\/\/hangouts.google.com) - \"eventNamedHangout\" for classic
--- Hangouts for G Suite users (http:\/\/hangouts.google.com) -
--- \"hangoutsMeet\" for Hangouts Meet (http:\/\/meet.google.com)
+-- Hangouts for Google Workspace users (deprecated;
+-- http:\/\/hangouts.google.com) - \"hangoutsMeet\" for Google Meet
+-- (http:\/\/meet.google.com) - \"addOn\" for 3P conference providers
 cskType :: Lens' ConferenceSolutionKey (Maybe Text)
 cskType = lens _cskType (\ s a -> s{_cskType = a})
 
@@ -1580,10 +1598,10 @@ instance ToJSON ConferenceSolutionKey where
 -- /See:/ 'eventCreator' smart constructor.
 data EventCreator =
   EventCreator'
-    { _ecEmail       :: !(Maybe Text)
-    , _ecSelf        :: !Bool
+    { _ecEmail :: !(Maybe Text)
+    , _ecSelf :: !Bool
     , _ecDisplayName :: !(Maybe Text)
-    , _ecId          :: !(Maybe Text)
+    , _ecId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1625,8 +1643,7 @@ ecDisplayName
   = lens _ecDisplayName
       (\ s a -> s{_ecDisplayName = a})
 
--- | The creator\'s Profile ID, if available. It corresponds to the id field
--- in the People collection of the Google+ API
+-- | The creator\'s Profile ID, if available.
 ecId :: Lens' EventCreator (Maybe Text)
 ecId = lens _ecId (\ s a -> s{_ecId = a})
 
@@ -1750,15 +1767,15 @@ instance ToJSON ColorDefinition where
 data Channel =
   Channel'
     { _cResourceURI :: !(Maybe Text)
-    , _cResourceId  :: !(Maybe Text)
-    , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (Textual Int64))
-    , _cToken       :: !(Maybe Text)
-    , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe ChannelParams)
-    , _cId          :: !(Maybe Text)
-    , _cType        :: !(Maybe Text)
+    , _cResourceId :: !(Maybe Text)
+    , _cKind :: !Text
+    , _cExpiration :: !(Maybe (Textual Int64))
+    , _cToken :: !(Maybe Text)
+    , _cAddress :: !(Maybe Text)
+    , _cPayload :: !(Maybe Bool)
+    , _cParams :: !(Maybe ChannelParams)
+    , _cId :: !(Maybe Text)
+    , _cType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1815,7 +1832,7 @@ cResourceId
   = lens _cResourceId (\ s a -> s{_cResourceId = a})
 
 -- | Identifies this as a notification channel used to watch for changes to a
--- resource. Value: the fixed string \"api#channel\".
+-- resource, which is \"api#channel\".
 cKind :: Lens' Channel Text
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
@@ -1847,7 +1864,9 @@ cParams = lens _cParams (\ s a -> s{_cParams = a})
 cId :: Lens' Channel (Maybe Text)
 cId = lens _cId (\ s a -> s{_cId = a})
 
--- | The type of delivery mechanism used for this channel.
+-- | The type of delivery mechanism used for this channel. Valid values are
+-- \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http
+-- requests are used to deliver messages.
 cType :: Lens' Channel (Maybe Text)
 cType = lens _cType (\ s a -> s{_cType = a})
 
@@ -1924,7 +1943,7 @@ instance ToJSON ConferenceRequestStatus where
 -- /See:/ 'freeBusyCalendar' smart constructor.
 data FreeBusyCalendar =
   FreeBusyCalendar'
-    { _fbcBusy   :: !(Maybe [TimePeriod])
+    { _fbcBusy :: !(Maybe [TimePeriod])
     , _fbcErrors :: !(Maybe [Error'])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1975,13 +1994,13 @@ instance ToJSON FreeBusyCalendar where
 -- /See:/ 'conferenceData' smart constructor.
 data ConferenceData =
   ConferenceData'
-    { _cdSignature          :: !(Maybe Text)
+    { _cdSignature :: !(Maybe Text)
     , _cdConferenceSolution :: !(Maybe ConferenceSolution)
-    , _cdCreateRequest      :: !(Maybe CreateConferenceRequest)
-    , _cdConferenceId       :: !(Maybe Text)
-    , _cdParameters         :: !(Maybe ConferenceParameters)
-    , _cdNotes              :: !(Maybe Text)
-    , _cdEntryPoints        :: !(Maybe [EntryPoint])
+    , _cdCreateRequest :: !(Maybe CreateConferenceRequest)
+    , _cdConferenceId :: !(Maybe Text)
+    , _cdParameters :: !(Maybe ConferenceParameters)
+    , _cdNotes :: !(Maybe Text)
+    , _cdEntryPoints :: !(Maybe [EntryPoint])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2017,7 +2036,7 @@ conferenceData =
     }
 
 
--- | The signature of the conference data. Genereated on server side. Must be
+-- | The signature of the conference data. Generated on server side. Must be
 -- preserved while copying the conference data between events, otherwise
 -- the conference data will not be copied. Unset for a conference with a
 -- failed create request. Optional for a conference with a pending create
@@ -2026,7 +2045,7 @@ cdSignature :: Lens' ConferenceData (Maybe Text)
 cdSignature
   = lens _cdSignature (\ s a -> s{_cdSignature = a})
 
--- | The conference solution, such as Hangouts or Hangouts Meet. Unset for a
+-- | The conference solution, such as Hangouts or Google Meet. Unset for a
 -- conference with a failed create request. Either conferenceSolution and
 -- at least one entryPoint, or createRequest is required.
 cdConferenceSolution :: Lens' ConferenceData (Maybe ConferenceSolution)
@@ -2044,10 +2063,11 @@ cdCreateRequest
       (\ s a -> s{_cdCreateRequest = a})
 
 -- | The ID of the conference. Can be used by developers to keep track of
--- conferences, should not be displayed to users. Values for solution
--- types: - \"eventHangout\": unset. - \"eventNamedHangout\": the name of
--- the Hangout. - \"hangoutsMeet\": the 10-letter meeting code, for example
--- \"aaa-bbbb-ccc\". Optional.
+-- conferences, should not be displayed to users. The ID value is formed
+-- differently for each conference solution type: - eventHangout: ID is not
+-- set. - eventNamedHangout: ID is the name of the Hangout. - hangoutsMeet:
+-- ID is the 10-letter meeting code, for example aaa-bbbb-ccc. - addOn: ID
+-- is defined by the third-party provider. Optional.
 cdConferenceId :: Lens' ConferenceData (Maybe Text)
 cdConferenceId
   = lens _cdConferenceId
@@ -2104,10 +2124,10 @@ instance ToJSON ConferenceData where
 -- /See:/ 'setting' smart constructor.
 data Setting =
   Setting'
-    { _setEtag  :: !(Maybe Text)
-    , _setKind  :: !Text
+    { _setEtag :: !(Maybe Text)
+    , _setKind :: !Text
     , _setValue :: !(Maybe Text)
-    , _setId    :: !(Maybe Text)
+    , _setId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2212,7 +2232,7 @@ instance ToJSON FreeBusyResponseGroups where
 -- /See:/ 'eventReminders' smart constructor.
 data EventReminders =
   EventReminders'
-    { _erOverrides  :: !(Maybe [EventReminder])
+    { _erOverrides :: !(Maybe [EventReminder])
     , _erUseDefault :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2263,7 +2283,7 @@ instance ToJSON EventReminders where
 
 -- | A global palette of calendar colors, mapping from the color ID to its
 -- definition. A calendarListEntry resource refers to one of these color
--- IDs in its color field. Read-only.
+-- IDs in its colorId field. Read-only.
 --
 -- /See:/ 'colorsCalendar' smart constructor.
 newtype ColorsCalendar =
@@ -2285,7 +2305,7 @@ colorsCalendar pCcAddtional_ =
   ColorsCalendar' {_ccAddtional = _Coerce # pCcAddtional_}
 
 
--- | A calendar color defintion.
+-- | A calendar color definition.
 ccAddtional :: Lens' ColorsCalendar (HashMap Text ColorDefinition)
 ccAddtional
   = lens _ccAddtional (\ s a -> s{_ccAddtional = a}) .
@@ -2347,7 +2367,7 @@ instance ToJSON
 data CalendarNotification =
   CalendarNotification'
     { _cnMethod :: !(Maybe Text)
-    , _cnType   :: !(Maybe Text)
+    , _cnType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2365,14 +2385,9 @@ calendarNotification =
   CalendarNotification' {_cnMethod = Nothing, _cnType = Nothing}
 
 
--- | The method used to deliver the notification. Possible values are: -
--- \"email\" - Notifications are sent via email. - \"sms\" - Deprecated.
--- Once this feature is shutdown, the API will no longer return
--- notifications using this method. Any newly added SMS notifications will
--- be ignored. See Google Calendar SMS notifications to be removed for more
--- information. Notifications are sent via SMS. This value is read-only and
--- is ignored on inserts and updates. SMS notifications are only available
--- for G Suite customers. Required when adding a notification.
+-- | The method used to deliver the notification. The possible value is: -
+-- \"email\" - Notifications are sent via email. Required when adding a
+-- notification.
 cnMethod :: Lens' CalendarNotification (Maybe Text)
 cnMethod = lens _cnMethod (\ s a -> s{_cnMethod = a})
 
@@ -2481,17 +2496,17 @@ instance ToJSON ChannelParams where
 -- /See:/ 'events' smart constructor.
 data Events =
   Events'
-    { _eveSummary          :: !(Maybe Text)
-    , _eveEtag             :: !(Maybe Text)
-    , _eveNextPageToken    :: !(Maybe Text)
-    , _eveKind             :: !Text
-    , _eveItems            :: !(Maybe [Event])
+    { _eveSummary :: !(Maybe Text)
+    , _eveEtag :: !(Maybe Text)
+    , _eveNextPageToken :: !(Maybe Text)
+    , _eveKind :: !Text
+    , _eveItems :: !(Maybe [Event])
     , _eveDefaultReminders :: !(Maybe [EventReminder])
-    , _eveUpdated          :: !(Maybe DateTime')
-    , _eveAccessRole       :: !(Maybe Text)
-    , _eveTimeZone         :: !(Maybe Text)
-    , _eveNextSyncToken    :: !(Maybe Text)
-    , _eveDescription      :: !(Maybe Text)
+    , _eveUpdated :: !(Maybe DateTime')
+    , _eveAccessRole :: !(Maybe Text)
+    , _eveTimeZone :: !(Maybe Text)
+    , _eveNextSyncToken :: !(Maybe Text)
+    , _eveDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2653,16 +2668,16 @@ instance ToJSON Events where
 -- /See:/ 'eventAttendee' smart constructor.
 data EventAttendee =
   EventAttendee'
-    { _eaEmail            :: !(Maybe Text)
-    , _eaResponseStatus   :: !(Maybe Text)
-    , _eaSelf             :: !Bool
-    , _eaResource         :: !Bool
+    { _eaEmail :: !(Maybe Text)
+    , _eaResponseStatus :: !(Maybe Text)
+    , _eaSelf :: !Bool
+    , _eaResource :: !Bool
     , _eaAdditionalGuests :: !(Textual Int32)
-    , _eaDisplayName      :: !(Maybe Text)
-    , _eaId               :: !(Maybe Text)
-    , _eaComment          :: !(Maybe Text)
-    , _eaOptional         :: !Bool
-    , _eaOrganizer        :: !(Maybe Bool)
+    , _eaDisplayName :: !(Maybe Text)
+    , _eaId :: !(Maybe Text)
+    , _eaComment :: !(Maybe Text)
+    , _eaOptional :: !Bool
+    , _eaOrganizer :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2748,8 +2763,7 @@ eaDisplayName
   = lens _eaDisplayName
       (\ s a -> s{_eaDisplayName = a})
 
--- | The attendee\'s Profile ID, if available. It corresponds to the id field
--- in the People collection of the Google+ API
+-- | The attendee\'s Profile ID, if available.
 eaId :: Lens' EventAttendee (Maybe Text)
 eaId = lens _eaId (\ s a -> s{_eaId = a})
 
@@ -2802,14 +2816,14 @@ instance ToJSON EventAttendee where
 -- /See:/ 'calendar' smart constructor.
 data Calendar =
   Calendar'
-    { _calSummary              :: !(Maybe Text)
+    { _calSummary :: !(Maybe Text)
     , _calConferenceProperties :: !(Maybe ConferenceProperties)
-    , _calEtag                 :: !(Maybe Text)
-    , _calLocation             :: !(Maybe Text)
-    , _calKind                 :: !Text
-    , _calId                   :: !(Maybe Text)
-    , _calTimeZone             :: !(Maybe Text)
-    , _calDescription          :: !(Maybe Text)
+    , _calEtag :: !(Maybe Text)
+    , _calLocation :: !(Maybe Text)
+    , _calKind :: !Text
+    , _calId :: !(Maybe Text)
+    , _calTimeZone :: !(Maybe Text)
+    , _calDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2920,11 +2934,11 @@ instance ToJSON Calendar where
 -- /See:/ 'freeBusyResponse' smart constructor.
 data FreeBusyResponse =
   FreeBusyResponse'
-    { _fbrGroups    :: !(Maybe FreeBusyResponseGroups)
-    , _fbrTimeMin   :: !(Maybe DateTime')
-    , _fbrKind      :: !Text
+    { _fbrGroups :: !(Maybe FreeBusyResponseGroups)
+    , _fbrTimeMin :: !(Maybe DateTime')
+    , _fbrKind :: !Text
     , _fbrCalendars :: !(Maybe FreeBusyResponseCalendars)
-    , _fbrTimeMax   :: !(Maybe DateTime')
+    , _fbrTimeMax :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3004,7 +3018,7 @@ instance ToJSON FreeBusyResponse where
 -- /See:/ 'eventReminder' smart constructor.
 data EventReminder =
   EventReminder'
-    { _erMethod  :: !(Maybe Text)
+    { _erMethod :: !(Maybe Text)
     , _erMinutes :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3023,13 +3037,8 @@ eventReminder = EventReminder' {_erMethod = Nothing, _erMinutes = Nothing}
 
 
 -- | The method used by this reminder. Possible values are: - \"email\" -
--- Reminders are sent via email. - \"sms\" - Deprecated. Once this feature
--- is shutdown, the API will no longer return reminders using this method.
--- Any newly added SMS reminders will be ignored. See Google Calendar SMS
--- notifications to be removed for more information. Reminders are sent via
--- SMS. These are only available for G Suite customers. Requests to set SMS
--- reminders for other account types are ignored. - \"popup\" - Reminders
--- are sent via a UI popup. Required when adding a reminder.
+-- Reminders are sent via email. - \"popup\" - Reminders are sent via a UI
+-- popup. Required when adding a reminder.
 erMethod :: Lens' EventReminder (Maybe Text)
 erMethod = lens _erMethod (\ s a -> s{_erMethod = a})
 
@@ -3061,7 +3070,7 @@ instance ToJSON EventReminder where
 data EventExtendedProperties =
   EventExtendedProperties'
     { _eepPrivate :: !(Maybe EventExtendedPropertiesPrivate)
-    , _eepShared  :: !(Maybe EventExtendedPropertiesShared)
+    , _eepShared :: !(Maybe EventExtendedPropertiesShared)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3109,7 +3118,7 @@ instance ToJSON EventExtendedProperties where
 -- /See:/ 'eventDateTime' smart constructor.
 data EventDateTime =
   EventDateTime'
-    { _edtDate     :: !(Maybe Date')
+    { _edtDate :: !(Maybe Date')
     , _edtTimeZone :: !(Maybe Text)
     , _edtDateTime :: !(Maybe DateTime')
     }
@@ -3179,10 +3188,10 @@ instance ToJSON EventDateTime where
 -- /See:/ 'eventOrganizer' smart constructor.
 data EventOrganizer =
   EventOrganizer'
-    { _eoEmail       :: !(Maybe Text)
-    , _eoSelf        :: !Bool
+    { _eoEmail :: !(Maybe Text)
+    , _eoSelf :: !Bool
     , _eoDisplayName :: !(Maybe Text)
-    , _eoId          :: !(Maybe Text)
+    , _eoId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3225,8 +3234,7 @@ eoDisplayName
   = lens _eoDisplayName
       (\ s a -> s{_eoDisplayName = a})
 
--- | The organizer\'s Profile ID, if available. It corresponds to the id
--- field in the People collection of the Google+ API
+-- | The organizer\'s Profile ID, if available.
 eoId :: Lens' EventOrganizer (Maybe Text)
 eoId = lens _eoId (\ s a -> s{_eoId = a})
 
@@ -3251,10 +3259,10 @@ instance ToJSON EventOrganizer where
 -- /See:/ 'calendarList' smart constructor.
 data CalendarList =
   CalendarList'
-    { _clEtag          :: !(Maybe Text)
+    { _clEtag :: !(Maybe Text)
     , _clNextPageToken :: !(Maybe Text)
-    , _clKind          :: !Text
-    , _clItems         :: !(Maybe [CalendarListEntry])
+    , _clKind :: !Text
+    , _clItems :: !(Maybe [CalendarListEntry])
     , _clNextSyncToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3333,19 +3341,20 @@ instance ToJSON CalendarList where
                   Just ("kind" .= _clKind), ("items" .=) <$> _clItems,
                   ("nextSyncToken" .=) <$> _clNextSyncToken])
 
--- | A gadget that extends this event.
+-- | A gadget that extends this event. Gadgets are deprecated; this structure
+-- is instead only used for returning birthday calendar metadata.
 --
 -- /See:/ 'eventGadget' smart constructor.
 data EventGadget =
   EventGadget'
-    { _egHeight      :: !(Maybe (Textual Int32))
-    , _egDisplay     :: !(Maybe Text)
+    { _egHeight :: !(Maybe (Textual Int32))
+    , _egDisplay :: !(Maybe Text)
     , _egPreferences :: !(Maybe EventGadgetPreferences)
-    , _egLink        :: !(Maybe Text)
-    , _egIconLink    :: !(Maybe Text)
-    , _egWidth       :: !(Maybe (Textual Int32))
-    , _egTitle       :: !(Maybe Text)
-    , _egType        :: !(Maybe Text)
+    , _egLink :: !(Maybe Text)
+    , _egIconLink :: !(Maybe Text)
+    , _egWidth :: !(Maybe (Textual Int32))
+    , _egTitle :: !(Maybe Text)
+    , _egType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3385,14 +3394,14 @@ eventGadget =
 
 
 -- | The gadget\'s height in pixels. The height must be an integer greater
--- than 0. Optional.
+-- than 0. Optional. Deprecated.
 egHeight :: Lens' EventGadget (Maybe Int32)
 egHeight
   = lens _egHeight (\ s a -> s{_egHeight = a}) .
       mapping _Coerce
 
--- | The gadget\'s display mode. Optional. Possible values are: - \"icon\" -
--- The gadget displays next to the event\'s title in the calendar view. -
+-- | The gadget\'s display mode. Deprecated. Possible values are: - \"icon\"
+-- - The gadget displays next to the event\'s title in the calendar view. -
 -- \"chip\" - The gadget displays when the event is clicked.
 egDisplay :: Lens' EventGadget (Maybe Text)
 egDisplay
@@ -3404,27 +3413,27 @@ egPreferences
   = lens _egPreferences
       (\ s a -> s{_egPreferences = a})
 
--- | The gadget\'s URL. The URL scheme must be HTTPS.
+-- | The gadget\'s URL. The URL scheme must be HTTPS. Deprecated.
 egLink :: Lens' EventGadget (Maybe Text)
 egLink = lens _egLink (\ s a -> s{_egLink = a})
 
--- | The gadget\'s icon URL. The URL scheme must be HTTPS.
+-- | The gadget\'s icon URL. The URL scheme must be HTTPS. Deprecated.
 egIconLink :: Lens' EventGadget (Maybe Text)
 egIconLink
   = lens _egIconLink (\ s a -> s{_egIconLink = a})
 
 -- | The gadget\'s width in pixels. The width must be an integer greater than
--- 0. Optional.
+-- 0. Optional. Deprecated.
 egWidth :: Lens' EventGadget (Maybe Int32)
 egWidth
   = lens _egWidth (\ s a -> s{_egWidth = a}) .
       mapping _Coerce
 
--- | The gadget\'s title.
+-- | The gadget\'s title. Deprecated.
 egTitle :: Lens' EventGadget (Maybe Text)
 egTitle = lens _egTitle (\ s a -> s{_egTitle = a})
 
--- | The gadget\'s type.
+-- | The gadget\'s type. Deprecated.
 egType :: Lens' EventGadget (Maybe Text)
 egType = lens _egType (\ s a -> s{_egType = a})
 
@@ -3495,11 +3504,11 @@ instance ToJSON EventGadgetPreferences where
 data FreeBusyRequest =
   FreeBusyRequest'
     { _fCalendarExpansionMax :: !(Maybe (Textual Int32))
-    , _fTimeMin              :: !(Maybe DateTime')
-    , _fItems                :: !(Maybe [FreeBusyRequestItem])
-    , _fGroupExpansionMax    :: !(Maybe (Textual Int32))
-    , _fTimeZone             :: !Text
-    , _fTimeMax              :: !(Maybe DateTime')
+    , _fTimeMin :: !(Maybe DateTime')
+    , _fItems :: !(Maybe [FreeBusyRequestItem])
+    , _fGroupExpansionMax :: !(Maybe (Textual Int32))
+    , _fTimeZone :: !Text
+    , _fTimeMax :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3599,11 +3608,11 @@ instance ToJSON FreeBusyRequest where
 -- /See:/ 'aclRule' smart constructor.
 data ACLRule =
   ACLRule'
-    { _arEtag  :: !(Maybe Text)
-    , _arKind  :: !Text
-    , _arRole  :: !(Maybe Text)
+    { _arEtag :: !(Maybe Text)
+    , _arKind :: !Text
+    , _arRole :: !(Maybe Text)
     , _arScope :: !(Maybe ACLRuleScope)
-    , _arId    :: !(Maybe Text)
+    , _arId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3653,11 +3662,11 @@ arKind = lens _arKind (\ s a -> s{_arKind = a})
 arRole :: Lens' ACLRule (Maybe Text)
 arRole = lens _arRole (\ s a -> s{_arRole = a})
 
--- | The scope of the rule.
+-- | The extent to which calendar access is granted by this ACL rule.
 arScope :: Lens' ACLRule (Maybe ACLRuleScope)
 arScope = lens _arScope (\ s a -> s{_arScope = a})
 
--- | Identifier of the ACL rule.
+-- | Identifier of the Access Control List (ACL) rule. See Sharing calendars.
 arId :: Lens' ACLRule (Maybe Text)
 arId = lens _arId (\ s a -> s{_arId = a})
 
@@ -3684,8 +3693,8 @@ instance ToJSON ACLRule where
 -- /See:/ 'createConferenceRequest' smart constructor.
 data CreateConferenceRequest =
   CreateConferenceRequest'
-    { _ccrStatus                :: !(Maybe ConferenceRequestStatus)
-    , _ccrRequestId             :: !(Maybe Text)
+    { _ccrStatus :: !(Maybe ConferenceRequestStatus)
+    , _ccrRequestId :: !(Maybe Text)
     , _ccrConferenceSolutionKey :: !(Maybe ConferenceSolutionKey)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3722,7 +3731,7 @@ ccrRequestId :: Lens' CreateConferenceRequest (Maybe Text)
 ccrRequestId
   = lens _ccrRequestId (\ s a -> s{_ccrRequestId = a})
 
--- | The conference solution, such as Hangouts or Hangouts Meet.
+-- | The conference solution, such as Hangouts or Google Meet.
 ccrConferenceSolutionKey :: Lens' CreateConferenceRequest (Maybe ConferenceSolutionKey)
 ccrConferenceSolutionKey
   = lens _ccrConferenceSolutionKey
@@ -3827,10 +3836,10 @@ instance ToJSON FreeBusyResponseCalendars where
 -- /See:/ 'acl' smart constructor.
 data ACL =
   ACL'
-    { _aEtag          :: !(Maybe Text)
+    { _aEtag :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
-    , _aKind          :: !Text
-    , _aItems         :: !(Maybe [ACLRule])
+    , _aKind :: !Text
+    , _aItems :: !(Maybe [ACLRule])
     , _aNextSyncToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3913,10 +3922,10 @@ instance ToJSON ACL where
 -- /See:/ 'colors' smart constructor.
 data Colors =
   Colors'
-    { _colEvent    :: !(Maybe ColorsEvent)
-    , _colKind     :: !Text
+    { _colEvent :: !(Maybe ColorsEvent)
+    , _colKind :: !Text
     , _colCalendar :: !(Maybe ColorsCalendar)
-    , _colUpdated  :: !(Maybe DateTime')
+    , _colUpdated :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3945,7 +3954,7 @@ colors =
 
 -- | A global palette of event colors, mapping from the color ID to its
 -- definition. An event resource may refer to one of these color IDs in its
--- color field. Read-only.
+-- colorId field. Read-only.
 colEvent :: Lens' Colors (Maybe ColorsEvent)
 colEvent = lens _colEvent (\ s a -> s{_colEvent = a})
 
@@ -3955,7 +3964,7 @@ colKind = lens _colKind (\ s a -> s{_colKind = a})
 
 -- | A global palette of calendar colors, mapping from the color ID to its
 -- definition. A calendarListEntry resource refers to one of these color
--- IDs in its color field. Read-only.
+-- IDs in its colorId field. Read-only.
 colCalendar :: Lens' Colors (Maybe ColorsCalendar)
 colCalendar
   = lens _colCalendar (\ s a -> s{_colCalendar = a})
@@ -3991,7 +4000,7 @@ instance ToJSON Colors where
 data FreeBusyGroup =
   FreeBusyGroup'
     { _fbgCalendars :: !(Maybe [Text])
-    , _fbgErrors    :: !(Maybe [Error'])
+    , _fbgErrors :: !(Maybe [Error'])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4083,7 +4092,7 @@ instance ToJSON ConferenceParametersAddOnParameters
 -- /See:/ 'eventSource' smart constructor.
 data EventSource =
   EventSource'
-    { _esURL   :: !(Maybe Text)
+    { _esURL :: !(Maybe Text)
     , _esTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

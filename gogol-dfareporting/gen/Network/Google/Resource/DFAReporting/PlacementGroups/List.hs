@@ -23,7 +23,7 @@
 -- Retrieves a list of placement groups, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementGroups.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.placementGroups.list@.
 module Network.Google.Resource.DFAReporting.PlacementGroups.List
     (
     -- * REST Resource
@@ -35,11 +35,15 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
 
     -- * Request Lenses
     , pglPlacementStrategyIds
+    , pglXgafv
     , pglContentCategoryIds
     , pglMaxEndDate
+    , pglUploadProtocol
+    , pglAccessToken
     , pglCampaignIds
     , pglPricingTypes
     , pglSearchString
+    , pglUploadType
     , pglIds
     , pglProFileId
     , pglPlacementGroupType
@@ -54,54 +58,75 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
     , pglArchived
     , pglMaxResults
     , pglMinEndDate
+    , pglCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.list@ method which the
 -- 'PlacementGroupsList' request conforms to.
 type PlacementGroupsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
                QueryParams "placementStrategyIds" (Textual Int64) :>
-                 QueryParams "contentCategoryIds" (Textual Int64) :>
-                   QueryParam "maxEndDate" Text :>
-                     QueryParams "campaignIds" (Textual Int64) :>
-                       QueryParams "pricingTypes"
-                         PlacementGroupsListPricingTypes
-                         :>
-                         QueryParam "searchString" Text :>
-                           QueryParams "ids" (Textual Int64) :>
-                             QueryParam "placementGroupType"
-                               PlacementGroupsListPlacementGroupType
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParams "contentCategoryIds" (Textual Int64) :>
+                     QueryParam "maxEndDate" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParams "campaignIds" (Textual Int64) :>
+                             QueryParams "pricingTypes"
+                               PlacementGroupsListPricingTypes
                                :>
-                               QueryParams "directorySiteIds" (Textual Int64) :>
-                                 QueryParam "sortOrder"
-                                   PlacementGroupsListSortOrder
-                                   :>
-                                   QueryParams "siteIds" (Textual Int64) :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "sortField"
-                                         PlacementGroupsListSortField
+                               QueryParam "searchString" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParams "ids" (Textual Int64) :>
+                                     QueryParam "placementGroupType"
+                                       PlacementGroupsListPlacementGroupType
+                                       :>
+                                       QueryParams "directorySiteIds"
+                                         (Textual Int64)
                                          :>
-                                         QueryParam "maxStartDate" Text :>
-                                           QueryParams "advertiserIds"
-                                             (Textual Int64)
+                                         QueryParam "sortOrder"
+                                           PlacementGroupsListSortOrder
+                                           :>
+                                           QueryParams "siteIds" (Textual Int64)
                                              :>
-                                             QueryParam "minStartDate" Text :>
-                                               QueryParam "archived" Bool :>
-                                                 QueryParam "maxResults"
-                                                   (Textual Int32)
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "sortField"
+                                                 PlacementGroupsListSortField
+                                                 :>
+                                                 QueryParam "maxStartDate" Text
                                                    :>
-                                                   QueryParam "minEndDate" Text
+                                                   QueryParams "advertiserIds"
+                                                     (Textual Int64)
                                                      :>
-                                                     QueryParam "alt" AltJSON :>
-                                                       Get '[JSON]
-                                                         PlacementGroupsListResponse
+                                                     QueryParam "minStartDate"
+                                                       Text
+                                                       :>
+                                                       QueryParam "archived"
+                                                         Bool
+                                                         :>
+                                                         QueryParam "maxResults"
+                                                           (Textual Int32)
+                                                           :>
+                                                           QueryParam
+                                                             "minEndDate"
+                                                             Text
+                                                             :>
+                                                             QueryParam
+                                                               "callback"
+                                                               Text
+                                                               :>
+                                                               QueryParam "alt"
+                                                                 AltJSON
+                                                                 :>
+                                                                 Get '[JSON]
+                                                                   PlacementGroupsListResponse
 
 -- | Retrieves a list of placement groups, possibly filtered. This method
 -- supports paging.
@@ -110,25 +135,30 @@ type PlacementGroupsListResource =
 data PlacementGroupsList =
   PlacementGroupsList'
     { _pglPlacementStrategyIds :: !(Maybe [Textual Int64])
-    , _pglContentCategoryIds   :: !(Maybe [Textual Int64])
-    , _pglMaxEndDate           :: !(Maybe Text)
-    , _pglCampaignIds          :: !(Maybe [Textual Int64])
-    , _pglPricingTypes         :: !(Maybe [PlacementGroupsListPricingTypes])
-    , _pglSearchString         :: !(Maybe Text)
-    , _pglIds                  :: !(Maybe [Textual Int64])
-    , _pglProFileId            :: !(Textual Int64)
-    , _pglPlacementGroupType   :: !(Maybe PlacementGroupsListPlacementGroupType)
-    , _pglDirectorySiteIds     :: !(Maybe [Textual Int64])
-    , _pglSortOrder            :: !PlacementGroupsListSortOrder
-    , _pglSiteIds              :: !(Maybe [Textual Int64])
-    , _pglPageToken            :: !(Maybe Text)
-    , _pglSortField            :: !PlacementGroupsListSortField
-    , _pglMaxStartDate         :: !(Maybe Text)
-    , _pglAdvertiserIds        :: !(Maybe [Textual Int64])
-    , _pglMinStartDate         :: !(Maybe Text)
-    , _pglArchived             :: !(Maybe Bool)
-    , _pglMaxResults           :: !(Textual Int32)
-    , _pglMinEndDate           :: !(Maybe Text)
+    , _pglXgafv :: !(Maybe Xgafv)
+    , _pglContentCategoryIds :: !(Maybe [Textual Int64])
+    , _pglMaxEndDate :: !(Maybe Text)
+    , _pglUploadProtocol :: !(Maybe Text)
+    , _pglAccessToken :: !(Maybe Text)
+    , _pglCampaignIds :: !(Maybe [Textual Int64])
+    , _pglPricingTypes :: !(Maybe [PlacementGroupsListPricingTypes])
+    , _pglSearchString :: !(Maybe Text)
+    , _pglUploadType :: !(Maybe Text)
+    , _pglIds :: !(Maybe [Textual Int64])
+    , _pglProFileId :: !(Textual Int64)
+    , _pglPlacementGroupType :: !(Maybe PlacementGroupsListPlacementGroupType)
+    , _pglDirectorySiteIds :: !(Maybe [Textual Int64])
+    , _pglSortOrder :: !PlacementGroupsListSortOrder
+    , _pglSiteIds :: !(Maybe [Textual Int64])
+    , _pglPageToken :: !(Maybe Text)
+    , _pglSortField :: !PlacementGroupsListSortField
+    , _pglMaxStartDate :: !(Maybe Text)
+    , _pglAdvertiserIds :: !(Maybe [Textual Int64])
+    , _pglMinStartDate :: !(Maybe Text)
+    , _pglArchived :: !(Maybe Bool)
+    , _pglMaxResults :: !(Textual Int32)
+    , _pglMinEndDate :: !(Maybe Text)
+    , _pglCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,15 +169,23 @@ data PlacementGroupsList =
 --
 -- * 'pglPlacementStrategyIds'
 --
+-- * 'pglXgafv'
+--
 -- * 'pglContentCategoryIds'
 --
 -- * 'pglMaxEndDate'
+--
+-- * 'pglUploadProtocol'
+--
+-- * 'pglAccessToken'
 --
 -- * 'pglCampaignIds'
 --
 -- * 'pglPricingTypes'
 --
 -- * 'pglSearchString'
+--
+-- * 'pglUploadType'
 --
 -- * 'pglIds'
 --
@@ -176,17 +214,23 @@ data PlacementGroupsList =
 -- * 'pglMaxResults'
 --
 -- * 'pglMinEndDate'
+--
+-- * 'pglCallback'
 placementGroupsList
     :: Int64 -- ^ 'pglProFileId'
     -> PlacementGroupsList
 placementGroupsList pPglProFileId_ =
   PlacementGroupsList'
     { _pglPlacementStrategyIds = Nothing
+    , _pglXgafv = Nothing
     , _pglContentCategoryIds = Nothing
     , _pglMaxEndDate = Nothing
+    , _pglUploadProtocol = Nothing
+    , _pglAccessToken = Nothing
     , _pglCampaignIds = Nothing
     , _pglPricingTypes = Nothing
     , _pglSearchString = Nothing
+    , _pglUploadType = Nothing
     , _pglIds = Nothing
     , _pglProFileId = _Coerce # pPglProFileId_
     , _pglPlacementGroupType = Nothing
@@ -201,6 +245,7 @@ placementGroupsList pPglProFileId_ =
     , _pglArchived = Nothing
     , _pglMaxResults = 800
     , _pglMinEndDate = Nothing
+    , _pglCallback = Nothing
     }
 
 
@@ -212,6 +257,10 @@ pglPlacementStrategyIds
       (\ s a -> s{_pglPlacementStrategyIds = a})
       . _Default
       . _Coerce
+
+-- | V1 error format.
+pglXgafv :: Lens' PlacementGroupsList (Maybe Xgafv)
+pglXgafv = lens _pglXgafv (\ s a -> s{_pglXgafv = a})
 
 -- | Select only placement groups that are associated with these content
 -- categories.
@@ -229,6 +278,18 @@ pglMaxEndDate :: Lens' PlacementGroupsList (Maybe Text)
 pglMaxEndDate
   = lens _pglMaxEndDate
       (\ s a -> s{_pglMaxEndDate = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pglUploadProtocol :: Lens' PlacementGroupsList (Maybe Text)
+pglUploadProtocol
+  = lens _pglUploadProtocol
+      (\ s a -> s{_pglUploadProtocol = a})
+
+-- | OAuth access token.
+pglAccessToken :: Lens' PlacementGroupsList (Maybe Text)
+pglAccessToken
+  = lens _pglAccessToken
+      (\ s a -> s{_pglAccessToken = a})
 
 -- | Select only placement groups that belong to these campaigns.
 pglCampaignIds :: Lens' PlacementGroupsList [Int64]
@@ -258,6 +319,12 @@ pglSearchString :: Lens' PlacementGroupsList (Maybe Text)
 pglSearchString
   = lens _pglSearchString
       (\ s a -> s{_pglSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pglUploadType :: Lens' PlacementGroupsList (Maybe Text)
+pglUploadType
+  = lens _pglUploadType
+      (\ s a -> s{_pglUploadType = a})
 
 -- | Select only placement groups with these IDs.
 pglIds :: Lens' PlacementGroupsList [Int64]
@@ -358,6 +425,11 @@ pglMinEndDate
   = lens _pglMinEndDate
       (\ s a -> s{_pglMinEndDate = a})
 
+-- | JSONP
+pglCallback :: Lens' PlacementGroupsList (Maybe Text)
+pglCallback
+  = lens _pglCallback (\ s a -> s{_pglCallback = a})
+
 instance GoogleRequest PlacementGroupsList where
         type Rs PlacementGroupsList =
              PlacementGroupsListResponse
@@ -366,11 +438,15 @@ instance GoogleRequest PlacementGroupsList where
         requestClient PlacementGroupsList'{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
+              _pglXgafv
               (_pglContentCategoryIds ^. _Default)
               _pglMaxEndDate
+              _pglUploadProtocol
+              _pglAccessToken
               (_pglCampaignIds ^. _Default)
               (_pglPricingTypes ^. _Default)
               _pglSearchString
+              _pglUploadType
               (_pglIds ^. _Default)
               _pglPlacementGroupType
               (_pglDirectorySiteIds ^. _Default)
@@ -384,6 +460,7 @@ instance GoogleRequest PlacementGroupsList where
               _pglArchived
               (Just _pglMaxResults)
               _pglMinEndDate
+              _pglCallback
               (Just AltJSON)
               dFAReportingService
           where go

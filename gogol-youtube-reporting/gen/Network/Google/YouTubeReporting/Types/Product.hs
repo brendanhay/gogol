@@ -17,8 +17,8 @@
 --
 module Network.Google.YouTubeReporting.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types.Sum
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types.Sum
 
 -- | Response message for ReportingService.ListReports.
 --
@@ -26,7 +26,7 @@ import           Network.Google.YouTubeReporting.Types.Sum
 data ListReportsResponse =
   ListReportsResponse'
     { _lrrNextPageToken :: !(Maybe Text)
-    , _lrrReports       :: !(Maybe [Report])
+    , _lrrReports :: !(Maybe [Report])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,10 +80,10 @@ instance ToJSON ListReportsResponse where
 data GDataDiffChecksumsResponse =
   GDataDiffChecksumsResponse'
     { _gddcrChecksumsLocation :: !(Maybe GDataCompositeMedia)
-    , _gddcrObjectSizeBytes   :: !(Maybe (Textual Int64))
-    , _gddcrChunkSizeBytes    :: !(Maybe (Textual Int64))
-    , _gddcrObjectVersion     :: !(Maybe Text)
-    , _gddcrObjectLocation    :: !(Maybe GDataCompositeMedia)
+    , _gddcrObjectSizeBytes :: !(Maybe (Textual Int64))
+    , _gddcrChunkSizeBytes :: !(Maybe (Textual Int64))
+    , _gddcrObjectVersion :: !(Maybe Text)
+    , _gddcrObjectLocation :: !(Maybe GDataCompositeMedia)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -263,11 +263,11 @@ instance ToJSON Empty where
 -- /See:/ 'gDataContentTypeInfo' smart constructor.
 data GDataContentTypeInfo =
   GDataContentTypeInfo'
-    { _gdctiFromBytes    :: !(Maybe Text)
+    { _gdctiFromBytes :: !(Maybe Text)
     , _gdctiFromFileName :: !(Maybe Text)
-    , _gdctiFromHeader   :: !(Maybe Text)
-    , _gdctiBestGuess    :: !(Maybe Text)
-    , _gdctiFromURLPath  :: !(Maybe Text)
+    , _gdctiFromHeader :: !(Maybe Text)
+    , _gdctiBestGuess :: !(Maybe Text)
+    , _gdctiFromURLPath :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -352,36 +352,36 @@ instance ToJSON GDataContentTypeInfo where
 -- /See:/ 'gDataMedia' smart constructor.
 data GDataMedia =
   GDataMedia'
-    { _gdmLength                :: !(Maybe (Textual Int64))
-    , _gdmDiffVersionResponse   :: !(Maybe GDataDiffVersionResponse)
-    , _gdmDiffUploadRequest     :: !(Maybe GDataDiffUploadRequest)
-    , _gdmBigstoreObjectRef     :: !(Maybe Bytes)
-    , _gdmHash                  :: !(Maybe Text)
-    , _gdmIsPotentialRetry      :: !(Maybe Bool)
-    , _gdmCrc32cHash            :: !(Maybe (Textual Word32))
-    , _gdmBlobRef               :: !(Maybe Bytes)
-    , _gdmPath                  :: !(Maybe Text)
-    , _gdmObjectId              :: !(Maybe GDataObjectId)
-    , _gdmToken                 :: !(Maybe Text)
-    , _gdmInline                :: !(Maybe Bytes)
-    , _gdmMediaId               :: !(Maybe Bytes)
-    , _gdmSha1Hash              :: !(Maybe Bytes)
-    , _gdmHashVerified          :: !(Maybe Bool)
-    , _gdmContentTypeInfo       :: !(Maybe GDataContentTypeInfo)
-    , _gdmAlgorithm             :: !(Maybe Text)
-    , _gdmDiffDownloadResponse  :: !(Maybe GDataDiffDownloadResponse)
-    , _gdmDiffUploadResponse    :: !(Maybe GDataDiffUploadResponse)
+    { _gdmLength :: !(Maybe (Textual Int64))
+    , _gdmDiffVersionResponse :: !(Maybe GDataDiffVersionResponse)
+    , _gdmDiffUploadRequest :: !(Maybe GDataDiffUploadRequest)
+    , _gdmBigstoreObjectRef :: !(Maybe Bytes)
+    , _gdmHash :: !(Maybe Text)
+    , _gdmIsPotentialRetry :: !(Maybe Bool)
+    , _gdmCrc32cHash :: !(Maybe (Textual Word32))
+    , _gdmBlobRef :: !(Maybe Bytes)
+    , _gdmPath :: !(Maybe Text)
+    , _gdmObjectId :: !(Maybe GDataObjectId)
+    , _gdmToken :: !(Maybe Text)
+    , _gdmInline :: !(Maybe Bytes)
+    , _gdmMediaId :: !(Maybe Bytes)
+    , _gdmSha1Hash :: !(Maybe Bytes)
+    , _gdmHashVerified :: !(Maybe Bool)
+    , _gdmContentTypeInfo :: !(Maybe GDataContentTypeInfo)
+    , _gdmAlgorithm :: !(Maybe Text)
+    , _gdmDiffDownloadResponse :: !(Maybe GDataDiffDownloadResponse)
+    , _gdmDiffUploadResponse :: !(Maybe GDataDiffUploadResponse)
     , _gdmDiffChecksumsResponse :: !(Maybe GDataDiffChecksumsResponse)
-    , _gdmBlobstore2Info        :: !(Maybe GDataBlobstore2Info)
-    , _gdmReferenceType         :: !(Maybe GDataMediaReferenceType)
-    , _gdmTimestamp             :: !(Maybe (Textual Word64))
-    , _gdmMD5Hash               :: !(Maybe Bytes)
-    , _gdmDownloadParameters    :: !(Maybe GDataDownloadParameters)
-    , _gdmCosmoBinaryReference  :: !(Maybe Bytes)
-    , _gdmFilename              :: !(Maybe Text)
-    , _gdmSha256Hash            :: !(Maybe Bytes)
-    , _gdmContentType           :: !(Maybe Text)
-    , _gdmCompositeMedia        :: !(Maybe [GDataCompositeMedia])
+    , _gdmBlobstore2Info :: !(Maybe GDataBlobstore2Info)
+    , _gdmReferenceType :: !(Maybe GDataMediaReferenceType)
+    , _gdmTimestamp :: !(Maybe (Textual Word64))
+    , _gdmMD5Hash :: !(Maybe Bytes)
+    , _gdmDownloadParameters :: !(Maybe GDataDownloadParameters)
+    , _gdmCosmoBinaryReference :: !(Maybe Bytes)
+    , _gdmFilename :: !(Maybe Text)
+    , _gdmSha256Hash :: !(Maybe Bytes)
+    , _gdmContentType :: !(Maybe Text)
+    , _gdmCompositeMedia :: !(Maybe [GDataCompositeMedia])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -743,12 +743,12 @@ instance ToJSON GDataMedia where
 -- /See:/ 'report' smart constructor.
 data Report =
   Report'
-    { _rJobId         :: !(Maybe Text)
-    , _rStartTime     :: !(Maybe DateTime')
-    , _rDownloadURL   :: !(Maybe Text)
-    , _rEndTime       :: !(Maybe DateTime')
-    , _rId            :: !(Maybe Text)
-    , _rCreateTime    :: !(Maybe DateTime')
+    { _rJobId :: !(Maybe Text)
+    , _rStartTime :: !(Maybe DateTime')
+    , _rDownloadURL :: !(Maybe Text)
+    , _rEndTime :: !(Maybe DateTime')
+    , _rId :: !(Maybe Text)
+    , _rCreateTime :: !(Maybe DateTime')
     , _rJobExpireTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -853,16 +853,16 @@ instance ToJSON Report where
 -- /See:/ 'gDataCompositeMedia' smart constructor.
 data GDataCompositeMedia =
   GDataCompositeMedia'
-    { _gdcmLength               :: !(Maybe (Textual Int64))
-    , _gdcmCrc32cHash           :: !(Maybe (Textual Word32))
-    , _gdcmBlobRef              :: !(Maybe Bytes)
-    , _gdcmPath                 :: !(Maybe Text)
-    , _gdcmObjectId             :: !(Maybe GDataObjectId)
-    , _gdcmInline               :: !(Maybe Bytes)
-    , _gdcmSha1Hash             :: !(Maybe Bytes)
-    , _gdcmBlobstore2Info       :: !(Maybe GDataBlobstore2Info)
-    , _gdcmReferenceType        :: !(Maybe GDataCompositeMediaReferenceType)
-    , _gdcmMD5Hash              :: !(Maybe Bytes)
+    { _gdcmLength :: !(Maybe (Textual Int64))
+    , _gdcmCrc32cHash :: !(Maybe (Textual Word32))
+    , _gdcmBlobRef :: !(Maybe Bytes)
+    , _gdcmPath :: !(Maybe Text)
+    , _gdcmObjectId :: !(Maybe GDataObjectId)
+    , _gdcmInline :: !(Maybe Bytes)
+    , _gdcmSha1Hash :: !(Maybe Bytes)
+    , _gdcmBlobstore2Info :: !(Maybe GDataBlobstore2Info)
+    , _gdcmReferenceType :: !(Maybe GDataCompositeMediaReferenceType)
+    , _gdcmMD5Hash :: !(Maybe Bytes)
     , _gdcmCosmoBinaryReference :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1014,7 +1014,7 @@ instance ToJSON GDataCompositeMedia where
 -- /See:/ 'gDataDownloadParameters' smart constructor.
 data GDataDownloadParameters =
   GDataDownloadParameters'
-    { _gddpIgnoreRange          :: !(Maybe Bool)
+    { _gddpIgnoreRange :: !(Maybe Bool)
     , _gddpAllowGzipCompression :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1068,7 +1068,7 @@ instance ToJSON GDataDownloadParameters where
 data ListReportTypesResponse =
   ListReportTypesResponse'
     { _lrtrNextPageToken :: !(Maybe Text)
-    , _lrtrReportTypes   :: !(Maybe [ReportType])
+    , _lrtrReportTypes :: !(Maybe [ReportType])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1123,10 +1123,10 @@ instance ToJSON ListReportTypesResponse where
 -- /See:/ 'gDataBlobstore2Info' smart constructor.
 data GDataBlobstore2Info =
   GDataBlobstore2Info'
-    { _gdbiBlobGeneration          :: !(Maybe (Textual Int64))
-    , _gdbiBlobId                  :: !(Maybe Text)
-    , _gdbiReadToken               :: !(Maybe Text)
-    , _gdbiDownloadReadHandle      :: !(Maybe Bytes)
+    { _gdbiBlobGeneration :: !(Maybe (Textual Int64))
+    , _gdbiBlobId :: !(Maybe Text)
+    , _gdbiReadToken :: !(Maybe Text)
+    , _gdbiDownloadReadHandle :: !(Maybe Bytes)
     , _gdbiUploadMetadataContainer :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1216,12 +1216,12 @@ instance ToJSON GDataBlobstore2Info where
 -- /See:/ 'job' smart constructor.
 data Job =
   Job'
-    { _jName          :: !(Maybe Text)
-    , _jId            :: !(Maybe Text)
+    { _jName :: !(Maybe Text)
+    , _jId :: !(Maybe Text)
     , _jSystemManaged :: !(Maybe Bool)
-    , _jReportTypeId  :: !(Maybe Text)
-    , _jExpireTime    :: !(Maybe DateTime')
-    , _jCreateTime    :: !(Maybe DateTime')
+    , _jReportTypeId :: !(Maybe Text)
+    , _jExpireTime :: !(Maybe DateTime')
+    , _jCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1316,7 +1316,7 @@ instance ToJSON Job where
 data GDataDiffUploadResponse =
   GDataDiffUploadResponse'
     { _gddurOriginalObject :: !(Maybe GDataCompositeMedia)
-    , _gddurObjectVersion  :: !(Maybe Text)
+    , _gddurObjectVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1407,7 +1407,7 @@ instance ToJSON GDataDiffDownloadResponse where
 data ListJobsResponse =
   ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
-    , _ljrJobs          :: !(Maybe [Job])
+    , _ljrJobs :: !(Maybe [Job])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1461,7 +1461,7 @@ data GDataDiffUploadRequest =
   GDataDiffUploadRequest'
     { _gChecksumsInfo :: !(Maybe GDataCompositeMedia)
     , _gObjectVersion :: !(Maybe Text)
-    , _gObjectInfo    :: !(Maybe GDataCompositeMedia)
+    , _gObjectInfo :: !(Maybe GDataCompositeMedia)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1524,7 +1524,7 @@ instance ToJSON GDataDiffUploadRequest where
 data GDataDiffVersionResponse =
   GDataDiffVersionResponse'
     { _gddvrObjectSizeBytes :: !(Maybe (Textual Int64))
-    , _gddvrObjectVersion   :: !(Maybe Text)
+    , _gddvrObjectVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1576,8 +1576,8 @@ instance ToJSON GDataDiffVersionResponse where
 -- /See:/ 'reportType' smart constructor.
 data ReportType =
   ReportType'
-    { _rtName          :: !(Maybe Text)
-    , _rtId            :: !(Maybe Text)
+    { _rtName :: !(Maybe Text)
+    , _rtId :: !(Maybe Text)
     , _rtDeprecateTime :: !(Maybe DateTime')
     , _rtSystemManaged :: !(Maybe Bool)
     }

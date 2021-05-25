@@ -21,11 +21,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Exports assets with time and resource types to a given Cloud Storage
--- location. The output format is newline-delimited JSON. This API
--- implements the google.longrunning.Operation API allowing you to keep
--- track of the export.
+-- location\/BigQuery table. For Cloud Storage location destinations, the
+-- output format is newline-delimited JSON. Each line represents a
+-- google.cloud.asset.v1p7beta1.Asset in the JSON format; for BigQuery
+-- table destinations, the output table stores the fields in asset proto as
+-- columns. This API implements the google.longrunning.Operation API ,
+-- which allows you to keep track of the export. We recommend intervals of
+-- at least 2 seconds with exponential retry to poll the export operation
+-- result. For regular-size resource parent, the export operation usually
+-- finishes within 5 minutes.
 --
--- /See:/ <https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/quickstart-cloud-asset-inventory Cloud Asset API Reference> for @cloudasset.exportAssets@.
+-- /See:/ <https://cloud.google.com/asset-inventory/docs/quickstart Cloud Asset API Reference> for @cloudasset.exportAssets@.
 module Network.Google.Resource.CloudAsset.ExportAssets
     (
     -- * REST Resource
@@ -45,13 +51,13 @@ module Network.Google.Resource.CloudAsset.ExportAssets
     , eaCallback
     ) where
 
-import           Network.Google.CloudAsset.Types
-import           Network.Google.Prelude
+import Network.Google.CloudAsset.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudasset.exportAssets@ method which the
 -- 'ExportAssets' request conforms to.
 type ExportAssetsResource =
-     "v1" :>
+     "v1p7beta1" :>
        CaptureMode "parent" "exportAssets" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,24 +65,31 @@ type ExportAssetsResource =
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ExportAssetsRequest :>
-                       Post '[JSON] Operation
+                     ReqBody '[JSON]
+                       GoogleCloudAssetV1p7beta1ExportAssetsRequest
+                       :> Post '[JSON] Operation
 
 -- | Exports assets with time and resource types to a given Cloud Storage
--- location. The output format is newline-delimited JSON. This API
--- implements the google.longrunning.Operation API allowing you to keep
--- track of the export.
+-- location\/BigQuery table. For Cloud Storage location destinations, the
+-- output format is newline-delimited JSON. Each line represents a
+-- google.cloud.asset.v1p7beta1.Asset in the JSON format; for BigQuery
+-- table destinations, the output table stores the fields in asset proto as
+-- columns. This API implements the google.longrunning.Operation API ,
+-- which allows you to keep track of the export. We recommend intervals of
+-- at least 2 seconds with exponential retry to poll the export operation
+-- result. For regular-size resource parent, the export operation usually
+-- finishes within 5 minutes.
 --
 -- /See:/ 'exportAssets' smart constructor.
 data ExportAssets =
   ExportAssets'
-    { _eaParent         :: !Text
-    , _eaXgafv          :: !(Maybe Xgafv)
+    { _eaParent :: !Text
+    , _eaXgafv :: !(Maybe Xgafv)
     , _eaUploadProtocol :: !(Maybe Text)
-    , _eaAccessToken    :: !(Maybe Text)
-    , _eaUploadType     :: !(Maybe Text)
-    , _eaPayload        :: !ExportAssetsRequest
-    , _eaCallback       :: !(Maybe Text)
+    , _eaAccessToken :: !(Maybe Text)
+    , _eaUploadType :: !(Maybe Text)
+    , _eaPayload :: !GoogleCloudAssetV1p7beta1ExportAssetsRequest
+    , _eaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -100,7 +113,7 @@ data ExportAssets =
 -- * 'eaCallback'
 exportAssets
     :: Text -- ^ 'eaParent'
-    -> ExportAssetsRequest -- ^ 'eaPayload'
+    -> GoogleCloudAssetV1p7beta1ExportAssetsRequest -- ^ 'eaPayload'
     -> ExportAssets
 exportAssets pEaParent_ pEaPayload_ =
   ExportAssets'
@@ -143,7 +156,7 @@ eaUploadType
   = lens _eaUploadType (\ s a -> s{_eaUploadType = a})
 
 -- | Multipart request metadata.
-eaPayload :: Lens' ExportAssets ExportAssetsRequest
+eaPayload :: Lens' ExportAssets GoogleCloudAssetV1p7beta1ExportAssetsRequest
 eaPayload
   = lens _eaPayload (\ s a -> s{_eaPayload = a})
 

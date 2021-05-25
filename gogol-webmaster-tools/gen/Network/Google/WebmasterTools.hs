@@ -57,18 +57,6 @@ module Network.Google.WebmasterTools
     -- ** webmasters.sites.list
     , module Network.Google.Resource.Webmasters.Sites.List
 
-    -- ** webmasters.urlcrawlerrorscounts.query
-    , module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
-
-    -- ** webmasters.urlcrawlerrorssamples.get
-    , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
-
-    -- ** webmasters.urlcrawlerrorssamples.list
-    , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
-
-    -- ** webmasters.urlcrawlerrorssamples.markAsFixed
-    , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
-
     -- * Types
 
     -- ** WmxSitemapContent
@@ -83,25 +71,6 @@ module Network.Google.WebmasterTools
     , apidimensionFilterGroup
     , afgFilters
     , afgGroupType
-
-    -- ** URLSampleDetails
-    , URLSampleDetails
-    , urlSampleDetails
-    , usdLinkedFromURLs
-    , usdContainingSitemaps
-
-    -- ** URLCrawlErrorsSamplesMarkAsFixedCategory
-    , URLCrawlErrorsSamplesMarkAsFixedCategory (..)
-
-    -- ** URLCrawlErrorCountsPerType
-    , URLCrawlErrorCountsPerType
-    , urlCrawlErrorCountsPerType
-    , ucecptPlatform
-    , ucecptEntries
-    , ucecptCategory
-
-    -- ** URLCrawlErrorsSamplesGetPlatform
-    , URLCrawlErrorsSamplesGetPlatform (..)
 
     -- ** APIDataRow
     , APIDataRow
@@ -119,48 +88,11 @@ module Network.Google.WebmasterTools
     , afDimension
     , afExpression
 
-    -- ** URLCrawlErrorsSamplesMarkAsFixedPlatform
-    , URLCrawlErrorsSamplesMarkAsFixedPlatform (..)
-
-    -- ** URLCrawlErrorsSamplesGetCategory
-    , URLCrawlErrorsSamplesGetCategory (..)
-
-    -- ** URLCrawlErrorCount
-    , URLCrawlErrorCount
-    , urlCrawlErrorCount
-    , ucecCount
-    , ucecTimestamp
-
-    -- ** URLCrawlErrorscountsQueryPlatform
-    , URLCrawlErrorscountsQueryPlatform (..)
-
     -- ** SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
     , searchAnalyticsQueryResponse
     , saqrRows
     , saqrResponseAggregationType
-
-    -- ** URLCrawlErrorsSamplesListCategory
-    , URLCrawlErrorsSamplesListCategory (..)
-
-    -- ** URLCrawlErrorsSamplesListResponse
-    , URLCrawlErrorsSamplesListResponse
-    , urlCrawlErrorsSamplesListResponse
-    , uceslrURLCrawlErrorSample
-
-    -- ** URLCrawlErrorsCountsQueryResponse
-    , URLCrawlErrorsCountsQueryResponse
-    , urlCrawlErrorsCountsQueryResponse
-    , ucecqrCountPerTypes
-
-    -- ** URLCrawlErrorsSample
-    , URLCrawlErrorsSample
-    , urlCrawlErrorsSample
-    , ucesResponseCode
-    , ucesURLDetails
-    , ucesLastCrawled
-    , ucesPageURL
-    , ucesFirstDetected
 
     -- ** WmxSitemap
     , WmxSitemap
@@ -184,6 +116,7 @@ module Network.Google.WebmasterTools
     , SearchAnalyticsQueryRequest
     , searchAnalyticsQueryRequest
     , saqrAggregationType
+    , saqrDataState
     , saqrRowLimit
     , saqrEndDate
     , saqrSearchType
@@ -191,9 +124,6 @@ module Network.Google.WebmasterTools
     , saqrStartDate
     , saqrStartRow
     , saqrDimensions
-
-    -- ** URLCrawlErrorsSamplesListPlatform
-    , URLCrawlErrorsSamplesListPlatform (..)
 
     -- ** SitesListResponse
     , SitesListResponse
@@ -205,26 +135,19 @@ module Network.Google.WebmasterTools
     , wmxSite
     , wsPermissionLevel
     , wsSiteURL
-
-    -- ** URLCrawlErrorscountsQueryCategory
-    , URLCrawlErrorscountsQueryCategory (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Webmasters.Searchanalytics.Query
-import           Network.Google.Resource.Webmasters.Sitemaps.Delete
-import           Network.Google.Resource.Webmasters.Sitemaps.Get
-import           Network.Google.Resource.Webmasters.Sitemaps.List
-import           Network.Google.Resource.Webmasters.Sitemaps.Submit
-import           Network.Google.Resource.Webmasters.Sites.Add
-import           Network.Google.Resource.Webmasters.Sites.Delete
-import           Network.Google.Resource.Webmasters.Sites.Get
-import           Network.Google.Resource.Webmasters.Sites.List
-import           Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
-import           Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
-import           Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
-import           Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Webmasters.Searchanalytics.Query
+import Network.Google.Resource.Webmasters.Sitemaps.Delete
+import Network.Google.Resource.Webmasters.Sitemaps.Get
+import Network.Google.Resource.Webmasters.Sitemaps.List
+import Network.Google.Resource.Webmasters.Sitemaps.Submit
+import Network.Google.Resource.Webmasters.Sites.Add
+import Network.Google.Resource.Webmasters.Sites.Delete
+import Network.Google.Resource.Webmasters.Sites.Get
+import Network.Google.Resource.Webmasters.Sites.List
+import Network.Google.WebmasterTools.Types
 
 {- $resources
 TODO
@@ -232,16 +155,11 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Search Console API service.
 type WebmasterToolsAPI =
-     URLCrawlErrorsSamplesListResource :<|>
-       URLCrawlErrorsSamplesGetResource
-       :<|> URLCrawlErrorsSamplesMarkAsFixedResource
-       :<|> SitemapsListResource
-       :<|> SitemapsGetResource
-       :<|> SitemapsSubmitResource
+     SitemapsListResource :<|> SitemapsGetResource :<|>
+       SitemapsSubmitResource
        :<|> SitemapsDeleteResource
        :<|> SearchanalyticsQueryResource
        :<|> SitesListResource
        :<|> SitesGetResource
        :<|> SitesAddResource
        :<|> SitesDeleteResource
-       :<|> URLCrawlErrorscountsQueryResource

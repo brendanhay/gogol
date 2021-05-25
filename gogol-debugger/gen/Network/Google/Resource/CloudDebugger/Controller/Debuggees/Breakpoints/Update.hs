@@ -28,7 +28,7 @@
 -- may only make changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
--- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
     (
     -- * REST Resource
@@ -49,8 +49,8 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Up
     , cdbuCallback
     ) where
 
-import           Network.Google.Debugger.Types
-import           Network.Google.Prelude
+import Network.Google.Debugger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.update@ method which the
 -- 'ControllerDebuggeesBreakpointsUpdate' request conforms to.
@@ -81,14 +81,14 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 -- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
 data ControllerDebuggeesBreakpointsUpdate =
   ControllerDebuggeesBreakpointsUpdate'
-    { _cdbuXgafv          :: !(Maybe Xgafv)
+    { _cdbuXgafv :: !(Maybe Xgafv)
     , _cdbuUploadProtocol :: !(Maybe Text)
-    , _cdbuAccessToken    :: !(Maybe Text)
-    , _cdbuUploadType     :: !(Maybe Text)
-    , _cdbuPayload        :: !UpdateActiveBreakpointRequest
-    , _cdbuId             :: !Text
-    , _cdbuDebuggeeId     :: !Text
-    , _cdbuCallback       :: !(Maybe Text)
+    , _cdbuAccessToken :: !(Maybe Text)
+    , _cdbuUploadType :: !(Maybe Text)
+    , _cdbuPayload :: !UpdateActiveBreakpointRequest
+    , _cdbuId :: !Text
+    , _cdbuDebuggeeId :: !Text
+    , _cdbuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,7 +162,7 @@ cdbuPayload
 cdbuId :: Lens' ControllerDebuggeesBreakpointsUpdate Text
 cdbuId = lens _cdbuId (\ s a -> s{_cdbuId = a})
 
--- | Identifies the debuggee being debugged.
+-- | Required. Identifies the debuggee being debugged.
 cdbuDebuggeeId :: Lens' ControllerDebuggeesBreakpointsUpdate Text
 cdbuDebuggeeId
   = lens _cdbuDebuggeeId

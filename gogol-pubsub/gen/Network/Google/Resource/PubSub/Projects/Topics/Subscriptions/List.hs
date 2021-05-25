@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the names of the subscriptions on this topic.
+-- Lists the names of the attached subscriptions on this topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.subscriptions.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
@@ -43,8 +43,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
     , ptslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.subscriptions.list@ method which the
 -- 'ProjectsTopicsSubscriptionsList' request conforms to.
@@ -62,19 +62,19 @@ type ProjectsTopicsSubscriptionsListResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ListTopicSubscriptionsResponse
 
--- | Lists the names of the subscriptions on this topic.
+-- | Lists the names of the attached subscriptions on this topic.
 --
 -- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
 data ProjectsTopicsSubscriptionsList =
   ProjectsTopicsSubscriptionsList'
-    { _ptslXgafv          :: !(Maybe Xgafv)
+    { _ptslXgafv :: !(Maybe Xgafv)
     , _ptslUploadProtocol :: !(Maybe Text)
-    , _ptslAccessToken    :: !(Maybe Text)
-    , _ptslUploadType     :: !(Maybe Text)
-    , _ptslTopic          :: !Text
-    , _ptslPageToken      :: !(Maybe Text)
-    , _ptslPageSize       :: !(Maybe (Textual Int32))
-    , _ptslCallback       :: !(Maybe Text)
+    , _ptslAccessToken :: !(Maybe Text)
+    , _ptslUploadType :: !(Maybe Text)
+    , _ptslTopic :: !Text
+    , _ptslPageToken :: !(Maybe Text)
+    , _ptslPageSize :: !(Maybe (Textual Int32))
+    , _ptslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,8 +137,8 @@ ptslUploadType
   = lens _ptslUploadType
       (\ s a -> s{_ptslUploadType = a})
 
--- | The name of the topic that subscriptions are attached to. Format is
--- \`projects\/{project}\/topics\/{topic}\`.
+-- | Required. The name of the topic that subscriptions are attached to.
+-- Format is \`projects\/{project}\/topics\/{topic}\`.
 ptslTopic :: Lens' ProjectsTopicsSubscriptionsList Text
 ptslTopic
   = lens _ptslTopic (\ s a -> s{_ptslTopic = a})

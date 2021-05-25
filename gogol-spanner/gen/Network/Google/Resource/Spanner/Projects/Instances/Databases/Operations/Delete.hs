@@ -44,8 +44,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.D
     , pidodCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.operations.delete@ method which the
 -- 'ProjectsInstancesDatabasesOperationsDelete' request conforms to.
@@ -68,12 +68,12 @@ type ProjectsInstancesDatabasesOperationsDeleteResource
 -- /See:/ 'projectsInstancesDatabasesOperationsDelete' smart constructor.
 data ProjectsInstancesDatabasesOperationsDelete =
   ProjectsInstancesDatabasesOperationsDelete'
-    { _pidodXgafv          :: !(Maybe Xgafv)
+    { _pidodXgafv :: !(Maybe Xgafv)
     , _pidodUploadProtocol :: !(Maybe Text)
-    , _pidodAccessToken    :: !(Maybe Text)
-    , _pidodUploadType     :: !(Maybe Text)
-    , _pidodName           :: !Text
-    , _pidodCallback       :: !(Maybe Text)
+    , _pidodAccessToken :: !(Maybe Text)
+    , _pidodUploadType :: !(Maybe Text)
+    , _pidodName :: !Text
+    , _pidodCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

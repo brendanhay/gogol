@@ -17,19 +17,19 @@
 --
 module Network.Google.Reports.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Reports.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Reports.Types.Sum
 
 --
 -- /See:/ 'usageReportParametersItem' smart constructor.
 data UsageReportParametersItem =
   UsageReportParametersItem'
     { _urpiDatetimeValue :: !(Maybe DateTime')
-    , _urpiBoolValue     :: !(Maybe Bool)
-    , _urpiIntValue      :: !(Maybe (Textual Int64))
-    , _urpiStringValue   :: !(Maybe Text)
-    , _urpiName          :: !(Maybe Text)
-    , _urpiMsgValue      :: !(Maybe [UsageReportParametersItemMsgValueItem])
+    , _urpiBoolValue :: !(Maybe Bool)
+    , _urpiIntValue :: !(Maybe (Textual Int64))
+    , _urpiStringValue :: !(Maybe Text)
+    , _urpiName :: !(Maybe Text)
+    , _urpiMsgValue :: !(Maybe [UsageReportParametersItemMsgValueItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,36 +62,38 @@ usageReportParametersItem =
     }
 
 
--- | RFC 3339 formatted value of the parameter.
+-- | The RFC 3339 formatted value of the parameter, for example
+-- 2010-10-28T10:26:35.000Z.
 urpiDatetimeValue :: Lens' UsageReportParametersItem (Maybe UTCTime)
 urpiDatetimeValue
   = lens _urpiDatetimeValue
       (\ s a -> s{_urpiDatetimeValue = a})
       . mapping _DateTime
 
--- | Boolean value of the parameter.
+-- | Output only. Boolean value of the parameter.
 urpiBoolValue :: Lens' UsageReportParametersItem (Maybe Bool)
 urpiBoolValue
   = lens _urpiBoolValue
       (\ s a -> s{_urpiBoolValue = a})
 
--- | Integral value of the parameter.
+-- | Output only. Integer value of the parameter.
 urpiIntValue :: Lens' UsageReportParametersItem (Maybe Int64)
 urpiIntValue
   = lens _urpiIntValue (\ s a -> s{_urpiIntValue = a})
       . mapping _Coerce
 
--- | String value of the parameter.
+-- | Output only. String value of the parameter.
 urpiStringValue :: Lens' UsageReportParametersItem (Maybe Text)
 urpiStringValue
   = lens _urpiStringValue
       (\ s a -> s{_urpiStringValue = a})
 
--- | The name of the parameter.
+-- | The name of the parameter. For the User Usage Report parameter names,
+-- see the User Usage parameters reference.
 urpiName :: Lens' UsageReportParametersItem (Maybe Text)
 urpiName = lens _urpiName (\ s a -> s{_urpiName = a})
 
--- | Nested message value of the parameter.
+-- | Output only. Nested message value of the parameter.
 urpiMsgValue :: Lens' UsageReportParametersItem [UsageReportParametersItemMsgValueItem]
 urpiMsgValue
   = lens _urpiMsgValue (\ s a -> s{_urpiMsgValue = a})
@@ -120,14 +122,175 @@ instance ToJSON UsageReportParametersItem where
                   ("name" .=) <$> _urpiName,
                   ("msgValue" .=) <$> _urpiMsgValue])
 
+--
+-- /See:/ 'activityEventsItemParametersItemMultiMessageValueItem' smart constructor.
+newtype ActivityEventsItemParametersItemMultiMessageValueItem =
+  ActivityEventsItemParametersItemMultiMessageValueItem'
+    { _aeipimmviParameter :: Maybe [NestedParameter]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ActivityEventsItemParametersItemMultiMessageValueItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aeipimmviParameter'
+activityEventsItemParametersItemMultiMessageValueItem
+    :: ActivityEventsItemParametersItemMultiMessageValueItem
+activityEventsItemParametersItemMultiMessageValueItem =
+  ActivityEventsItemParametersItemMultiMessageValueItem'
+    {_aeipimmviParameter = Nothing}
+
+
+-- | Parameter values
+aeipimmviParameter :: Lens' ActivityEventsItemParametersItemMultiMessageValueItem [NestedParameter]
+aeipimmviParameter
+  = lens _aeipimmviParameter
+      (\ s a -> s{_aeipimmviParameter = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           ActivityEventsItemParametersItemMultiMessageValueItem
+         where
+        parseJSON
+          = withObject
+              "ActivityEventsItemParametersItemMultiMessageValueItem"
+              (\ o ->
+                 ActivityEventsItemParametersItemMultiMessageValueItem'
+                   <$> (o .:? "parameter" .!= mempty))
+
+instance ToJSON
+           ActivityEventsItemParametersItemMultiMessageValueItem
+         where
+        toJSON
+          ActivityEventsItemParametersItemMultiMessageValueItem'{..}
+          = object
+              (catMaybes
+                 [("parameter" .=) <$> _aeipimmviParameter])
+
+-- | JSON template for a parameter used in various reports.
+--
+-- /See:/ 'nestedParameter' smart constructor.
+data NestedParameter =
+  NestedParameter'
+    { _npBoolValue :: !(Maybe Bool)
+    , _npIntValue :: !(Maybe (Textual Int64))
+    , _npValue :: !(Maybe Text)
+    , _npMultiIntValue :: !(Maybe [Textual Int64])
+    , _npMultiBoolValue :: !(Maybe [Bool])
+    , _npName :: !(Maybe Text)
+    , _npMultiValue :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NestedParameter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'npBoolValue'
+--
+-- * 'npIntValue'
+--
+-- * 'npValue'
+--
+-- * 'npMultiIntValue'
+--
+-- * 'npMultiBoolValue'
+--
+-- * 'npName'
+--
+-- * 'npMultiValue'
+nestedParameter
+    :: NestedParameter
+nestedParameter =
+  NestedParameter'
+    { _npBoolValue = Nothing
+    , _npIntValue = Nothing
+    , _npValue = Nothing
+    , _npMultiIntValue = Nothing
+    , _npMultiBoolValue = Nothing
+    , _npName = Nothing
+    , _npMultiValue = Nothing
+    }
+
+
+-- | Boolean value of the parameter.
+npBoolValue :: Lens' NestedParameter (Maybe Bool)
+npBoolValue
+  = lens _npBoolValue (\ s a -> s{_npBoolValue = a})
+
+-- | Integer value of the parameter.
+npIntValue :: Lens' NestedParameter (Maybe Int64)
+npIntValue
+  = lens _npIntValue (\ s a -> s{_npIntValue = a}) .
+      mapping _Coerce
+
+-- | String value of the parameter.
+npValue :: Lens' NestedParameter (Maybe Text)
+npValue = lens _npValue (\ s a -> s{_npValue = a})
+
+-- | Multiple integer values of the parameter.
+npMultiIntValue :: Lens' NestedParameter [Int64]
+npMultiIntValue
+  = lens _npMultiIntValue
+      (\ s a -> s{_npMultiIntValue = a})
+      . _Default
+      . _Coerce
+
+-- | Multiple boolean values of the parameter.
+npMultiBoolValue :: Lens' NestedParameter [Bool]
+npMultiBoolValue
+  = lens _npMultiBoolValue
+      (\ s a -> s{_npMultiBoolValue = a})
+      . _Default
+      . _Coerce
+
+-- | The name of the parameter.
+npName :: Lens' NestedParameter (Maybe Text)
+npName = lens _npName (\ s a -> s{_npName = a})
+
+-- | Multiple string values of the parameter.
+npMultiValue :: Lens' NestedParameter [Text]
+npMultiValue
+  = lens _npMultiValue (\ s a -> s{_npMultiValue = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON NestedParameter where
+        parseJSON
+          = withObject "NestedParameter"
+              (\ o ->
+                 NestedParameter' <$>
+                   (o .:? "boolValue") <*> (o .:? "intValue") <*>
+                     (o .:? "value")
+                     <*> (o .:? "multiIntValue" .!= mempty)
+                     <*> (o .:? "multiBoolValue" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "multiValue" .!= mempty))
+
+instance ToJSON NestedParameter where
+        toJSON NestedParameter'{..}
+          = object
+              (catMaybes
+                 [("boolValue" .=) <$> _npBoolValue,
+                  ("intValue" .=) <$> _npIntValue,
+                  ("value" .=) <$> _npValue,
+                  ("multiIntValue" .=) <$> _npMultiIntValue,
+                  ("multiBoolValue" .=) <$> _npMultiBoolValue,
+                  ("name" .=) <$> _npName,
+                  ("multiValue" .=) <$> _npMultiValue])
+
 -- | Unique identifier for each activity record.
 --
 -- /See:/ 'activityId' smart constructor.
 data ActivityId =
   ActivityId'
-    { _aiTime            :: !(Maybe DateTime')
+    { _aiTime :: !(Maybe DateTime')
     , _aiUniqueQualifier :: !(Maybe (Textual Int64))
-    , _aiCustomerId      :: !(Maybe Text)
+    , _aiCustomerId :: !(Maybe Text)
     , _aiApplicationName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -155,7 +318,8 @@ activityId =
     }
 
 
--- | Time of occurrence of the activity.
+-- | Time of occurrence of the activity. This is in UNIX epoch time in
+-- seconds.
 aiTime :: Lens' ActivityId (Maybe UTCTime)
 aiTime
   = lens _aiTime (\ s a -> s{_aiTime = a}) .
@@ -168,12 +332,13 @@ aiUniqueQualifier
       (\ s a -> s{_aiUniqueQualifier = a})
       . mapping _Coerce
 
--- | Obfuscated customer ID of the source customer.
+-- | The unique identifier for a Google Workspace account.
 aiCustomerId :: Lens' ActivityId (Maybe Text)
 aiCustomerId
   = lens _aiCustomerId (\ s a -> s{_aiCustomerId = a})
 
--- | Application name to which the event belongs.
+-- | Application name to which the event belongs. For possible values see the
+-- list of applications above in \`applicationName\`.
 aiApplicationName :: Lens' ActivityId (Maybe Text)
 aiApplicationName
   = lens _aiApplicationName
@@ -197,16 +362,15 @@ instance ToJSON ActivityId where
                   ("customerId" .=) <$> _aiCustomerId,
                   ("applicationName" .=) <$> _aiApplicationName])
 
--- | JSON template for a collection of usage reports.
 --
 -- /See:/ 'usageReports' smart constructor.
 data UsageReports =
   UsageReports'
-    { _urEtag          :: !(Maybe Text)
+    { _urEtag :: !(Maybe Text)
     , _urNextPageToken :: !(Maybe Text)
-    , _urUsageReports  :: !(Maybe [UsageReport])
-    , _urKind          :: !Text
-    , _urWarnings      :: !(Maybe [UsageReportsWarningsItem])
+    , _urUsageReports :: !(Maybe [UsageReport])
+    , _urKind :: !Text
+    , _urWarnings :: !(Maybe [UsageReportsWarningsItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -240,7 +404,10 @@ usageReports =
 urEtag :: Lens' UsageReports (Maybe Text)
 urEtag = lens _urEtag (\ s a -> s{_urEtag = a})
 
--- | Token for retrieving the next page
+-- | Token to specify next page. A report with multiple pages has a
+-- \`nextPageToken\` property in the response. For your follow-on requests
+-- getting all of the report\'s pages, enter the \`nextPageToken\` value in
+-- the \`pageToken\` query string.
 urNextPageToken :: Lens' UsageReports (Maybe Text)
 urNextPageToken
   = lens _urNextPageToken
@@ -254,11 +421,12 @@ urUsageReports
       . _Default
       . _Coerce
 
--- | The kind of object.
+-- | The type of API resource. For a usage report, the value is
+-- \`admin#reports#usageReports\`.
 urKind :: Lens' UsageReports Text
 urKind = lens _urKind (\ s a -> s{_urKind = a})
 
--- | Warnings if any.
+-- | Warnings, if any.
 urWarnings :: Lens' UsageReports [UsageReportsWarningsItem]
 urWarnings
   = lens _urWarnings (\ s a -> s{_urWarnings = a}) .
@@ -307,6 +475,7 @@ usageReportParametersItemMsgValueItem pUrpimviAddtional_ =
     {_urpimviAddtional = _Coerce # pUrpimviAddtional_}
 
 
+-- | Properties of the object.
 urpimviAddtional :: Lens' UsageReportParametersItemMsgValueItem (HashMap Text JSONValue)
 urpimviAddtional
   = lens _urpimviAddtional
@@ -326,15 +495,15 @@ instance ToJSON UsageReportParametersItemMsgValueItem
          where
         toJSON = toJSON . _urpimviAddtional
 
--- | JSON template for a collection of activites.
+-- | JSON template for a collection of activities.
 --
 -- /See:/ 'activities' smart constructor.
 data Activities =
   Activities'
-    { _aEtag          :: !(Maybe Text)
+    { _aEtag :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
-    , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Activity])
+    , _aKind :: !Text
+    , _aItems :: !(Maybe [Activity])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -365,17 +534,20 @@ activities =
 aEtag :: Lens' Activities (Maybe Text)
 aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
 
--- | Token for retrieving the next page
+-- | Token for retrieving the follow-on next page of the report. The
+-- \`nextPageToken\` value is used in the request\'s \`pageToken\` query
+-- string.
 aNextPageToken :: Lens' Activities (Maybe Text)
 aNextPageToken
   = lens _aNextPageToken
       (\ s a -> s{_aNextPageToken = a})
 
--- | Kind of list response this is.
+-- | The type of API resource. For an activity report, the value is
+-- \`reports#activities\`.
 aKind :: Lens' Activities Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
--- | Each record in read response.
+-- | Each activity record in the response.
 aItems :: Lens' Activities [Activity]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
@@ -398,21 +570,21 @@ instance ToJSON Activities where
                   ("nextPageToken" .=) <$> _aNextPageToken,
                   Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
--- | An notification channel used to watch for resource changes.
+-- | A notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
 data Channel =
   Channel'
     { _cResourceURI :: !(Maybe Text)
-    , _cResourceId  :: !(Maybe Text)
-    , _cKind        :: !Text
-    , _cExpiration  :: !(Maybe (Textual Int64))
-    , _cToken       :: !(Maybe Text)
-    , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
-    , _cParams      :: !(Maybe ChannelParams)
-    , _cId          :: !(Maybe Text)
-    , _cType        :: !(Maybe Text)
+    , _cResourceId :: !(Maybe Text)
+    , _cKind :: !Text
+    , _cExpiration :: !(Maybe (Textual Int64))
+    , _cToken :: !(Maybe Text)
+    , _cAddress :: !(Maybe Text)
+    , _cPayload :: !(Maybe Bool)
+    , _cParams :: !(Maybe ChannelParams)
+    , _cId :: !(Maybe Text)
+    , _cType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -469,7 +641,7 @@ cResourceId
   = lens _cResourceId (\ s a -> s{_cResourceId = a})
 
 -- | Identifies this as a notification channel used to watch for changes to a
--- resource. Value: the fixed string \"api#channel\".
+-- resource, which is \"\`api#channel\`\".
 cKind :: Lens' Channel Text
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
@@ -501,7 +673,8 @@ cParams = lens _cParams (\ s a -> s{_cParams = a})
 cId :: Lens' Channel (Maybe Text)
 cId = lens _cId (\ s a -> s{_cId = a})
 
--- | The type of delivery mechanism used for this channel.
+-- | The type of delivery mechanism used for this channel. The value should
+-- be set to \`\"web_hook\"\`.
 cType :: Lens' Channel (Maybe Text)
 cType = lens _cType (\ s a -> s{_cType = a})
 
@@ -539,11 +712,11 @@ instance ToJSON Channel where
 -- /See:/ 'usageReport' smart constructor.
 data UsageReport =
   UsageReport'
-    { _uEtag       :: !(Maybe Text)
-    , _uKind       :: !Text
-    , _uDate       :: !(Maybe Text)
+    { _uEtag :: !(Maybe Text)
+    , _uKind :: !Text
+    , _uDate :: !(Maybe Text)
     , _uParameters :: !(Maybe [UsageReportParametersItem])
-    , _uEntity     :: !(Maybe UsageReportEntity)
+    , _uEntity :: !(Maybe UsageReportEntity)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -577,22 +750,26 @@ usageReport =
 uEtag :: Lens' UsageReport (Maybe Text)
 uEtag = lens _uEtag (\ s a -> s{_uEtag = a})
 
--- | The kind of object.
+-- | The type of API resource. For a usage report, the value is
+-- \`admin#reports#usageReport\`.
 uKind :: Lens' UsageReport Text
 uKind = lens _uKind (\ s a -> s{_uKind = a})
 
--- | The date to which the record belongs.
+-- | Output only. The date of the report request.
 uDate :: Lens' UsageReport (Maybe Text)
 uDate = lens _uDate (\ s a -> s{_uDate = a})
 
--- | Parameter value pairs for various applications.
+-- | Output only. Parameter value pairs for various applications. For the
+-- Entity Usage Report parameters and values, see [the Entity Usage
+-- parameters
+-- reference](\/admin-sdk\/reports\/v1\/reference\/usage-ref-appendix-a\/entities).
 uParameters :: Lens' UsageReport [UsageReportParametersItem]
 uParameters
   = lens _uParameters (\ s a -> s{_uParameters = a}) .
       _Default
       . _Coerce
 
--- | Information about the type of the item.
+-- | Output only. Information about the type of the item.
 uEntity :: Lens' UsageReport (Maybe UsageReportEntity)
 uEntity = lens _uEntity (\ s a -> s{_uEntity = a})
 
@@ -621,7 +798,7 @@ instance ToJSON UsageReport where
 data UsageReportsWarningsItemDataItem =
   UsageReportsWarningsItemDataItem'
     { _urwidiValue :: !(Maybe Text)
-    , _urwidiKey   :: !(Maybe Text)
+    , _urwidiKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -672,8 +849,8 @@ instance ToJSON UsageReportsWarningsItemDataItem
 -- /See:/ 'usageReportsWarningsItem' smart constructor.
 data UsageReportsWarningsItem =
   UsageReportsWarningsItem'
-    { _urwiData    :: !(Maybe [UsageReportsWarningsItemDataItem])
-    , _urwiCode    :: !(Maybe Text)
+    { _urwiData :: !(Maybe [UsageReportsWarningsItemDataItem])
+    , _urwiCode :: !(Maybe Text)
     , _urwiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -695,18 +872,23 @@ usageReportsWarningsItem =
     {_urwiData = Nothing, _urwiCode = Nothing, _urwiMessage = Nothing}
 
 
--- | Key-Value pairs to give detailed information on the warning.
+-- | Key-value pairs to give detailed information on the warning.
 urwiData :: Lens' UsageReportsWarningsItem [UsageReportsWarningsItemDataItem]
 urwiData
   = lens _urwiData (\ s a -> s{_urwiData = a}) .
       _Default
       . _Coerce
 
--- | Machine readable code \/ warning type.
+-- | Machine readable code or warning type. The warning code value is
+-- \`200\`.
 urwiCode :: Lens' UsageReportsWarningsItem (Maybe Text)
 urwiCode = lens _urwiCode (\ s a -> s{_urwiCode = a})
 
--- | Human readable message for the warning.
+-- | The human readable messages for a warning are: - Data is not available
+-- warning - Sorry, data for date yyyy-mm-dd for application
+-- \"\`application name\`\" is not available. - Partial data is available
+-- warning - Data for date yyyy-mm-dd for application \"\`application
+-- name\`\" is not available right now, please try again after a few hours.
 urwiMessage :: Lens' UsageReportsWarningsItem (Maybe Text)
 urwiMessage
   = lens _urwiMessage (\ s a -> s{_urwiMessage = a})
@@ -731,9 +913,9 @@ instance ToJSON UsageReportsWarningsItem where
 -- /See:/ 'activityEventsItem' smart constructor.
 data ActivityEventsItem =
   ActivityEventsItem'
-    { _aeiName       :: !(Maybe Text)
+    { _aeiName :: !(Maybe Text)
     , _aeiParameters :: !(Maybe [ActivityEventsItemParametersItem])
-    , _aeiType       :: !(Maybe Text)
+    , _aeiType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -754,11 +936,23 @@ activityEventsItem =
     {_aeiName = Nothing, _aeiParameters = Nothing, _aeiType = Nothing}
 
 
--- | Name of event.
+-- | Name of the event. This is the specific name of the activity reported by
+-- the API. And each \`eventName\` is related to a specific Google
+-- Workspace service or feature which the API organizes into types of
+-- events. For \`eventName\` request parameters in general: - If no
+-- \`eventName\` is given, the report returns all possible instances of an
+-- \`eventName\`. - When you request an \`eventName\`, the API\'s response
+-- returns all activities which contain that \`eventName\`. It is possible
+-- that the returned activities will have other \`eventName\` properties in
+-- addition to the one requested. For more information about \`eventName\`
+-- properties, see the list of event names for various applications above
+-- in \`applicationName\`.
 aeiName :: Lens' ActivityEventsItem (Maybe Text)
 aeiName = lens _aeiName (\ s a -> s{_aeiName = a})
 
--- | Parameter value pairs for various applications.
+-- | Parameter value pairs for various applications. For more information
+-- about \`eventName\` parameters, see the list of event names for various
+-- applications above in \`applicationName\`.
 aeiParameters :: Lens' ActivityEventsItem [ActivityEventsItemParametersItem]
 aeiParameters
   = lens _aeiParameters
@@ -766,7 +960,11 @@ aeiParameters
       . _Default
       . _Coerce
 
--- | Type of event.
+-- | Type of event. The Google Workspace service or feature that an
+-- administrator changes is identified in the \`type\` property which
+-- identifies an event using the \`eventName\` property. For a full list of
+-- the API\'s \`type\` categories, see the list of event names for various
+-- applications above in \`applicationName\`.
 aeiType :: Lens' ActivityEventsItem (Maybe Text)
 aeiType = lens _aeiType (\ s a -> s{_aeiType = a})
 
@@ -808,7 +1006,6 @@ channelParams pCpAddtional_ =
   ChannelParams' {_cpAddtional = _Coerce # pCpAddtional_}
 
 
--- | Declares a new parameter by name.
 cpAddtional :: Lens' ChannelParams (HashMap Text Text)
 cpAddtional
   = lens _cpAddtional (\ s a -> s{_cpAddtional = a}) .
@@ -827,13 +1024,13 @@ instance ToJSON ChannelParams where
 -- /See:/ 'activity' smart constructor.
 data Activity =
   Activity'
-    { _actEtag        :: !(Maybe Text)
-    , _actIPAddress   :: !(Maybe Text)
-    , _actKind        :: !Text
-    , _actActor       :: !(Maybe ActivityActor)
+    { _actEtag :: !(Maybe Text)
+    , _actIPAddress :: !(Maybe Text)
+    , _actKind :: !Text
+    , _actActor :: !(Maybe ActivityActor)
     , _actOwnerDomain :: !(Maybe Text)
-    , _actEvents      :: !(Maybe [ActivityEventsItem])
-    , _actId          :: !(Maybe ActivityId)
+    , _actEvents :: !(Maybe [ActivityEventsItem])
+    , _actId :: !(Maybe ActivityId)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -873,12 +1070,17 @@ activity =
 actEtag :: Lens' Activity (Maybe Text)
 actEtag = lens _actEtag (\ s a -> s{_actEtag = a})
 
--- | IP Address of the user doing the action.
+-- | IP address of the user doing the action. This is the Internet Protocol
+-- (IP) address of the user when logging into Google Workspace, which may
+-- or may not reflect the user\'s physical location. For example, the IP
+-- address can be the user\'s proxy server\'s address or a virtual private
+-- network (VPN) address. The API supports IPv4 and IPv6.
 actIPAddress :: Lens' Activity (Maybe Text)
 actIPAddress
   = lens _actIPAddress (\ s a -> s{_actIPAddress = a})
 
--- | Kind of resource this is.
+-- | The type of API resource. For an activity report, the value is
+-- \`audit#activity\`.
 actKind :: Lens' Activity Text
 actKind = lens _actKind (\ s a -> s{_actKind = a})
 
@@ -886,13 +1088,14 @@ actKind = lens _actKind (\ s a -> s{_actKind = a})
 actActor :: Lens' Activity (Maybe ActivityActor)
 actActor = lens _actActor (\ s a -> s{_actActor = a})
 
--- | Domain of source customer.
+-- | This is the domain that is affected by the report\'s event. For example
+-- domain of Admin console or the Drive application\'s document owner.
 actOwnerDomain :: Lens' Activity (Maybe Text)
 actOwnerDomain
   = lens _actOwnerDomain
       (\ s a -> s{_actOwnerDomain = a})
 
--- | Activity events.
+-- | Activity events in the report.
 actEvents :: Lens' Activity [ActivityEventsItem]
 actEvents
   = lens _actEvents (\ s a -> s{_actEvents = a}) .
@@ -926,16 +1129,16 @@ instance ToJSON Activity where
                   ("ownerDomain" .=) <$> _actOwnerDomain,
                   ("events" .=) <$> _actEvents, ("id" .=) <$> _actId])
 
--- | Information about the type of the item.
+-- | Output only. Information about the type of the item.
 --
 -- /See:/ 'usageReportEntity' smart constructor.
 data UsageReportEntity =
   UsageReportEntity'
-    { _ureProFileId  :: !(Maybe Text)
+    { _ureProFileId :: !(Maybe Text)
     , _ureCustomerId :: !(Maybe Text)
-    , _ureUserEmail  :: !(Maybe Text)
-    , _ureType       :: !(Maybe Text)
-    , _ureEntityId   :: !(Maybe Text)
+    , _ureUserEmail :: !(Maybe Text)
+    , _ureType :: !(Maybe Text)
+    , _ureEntityId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -965,27 +1168,28 @@ usageReportEntity =
     }
 
 
--- | Obfuscated user id for the record.
+-- | Output only. The user\'s immutable Google Workspace profile identifier.
 ureProFileId :: Lens' UsageReportEntity (Maybe Text)
 ureProFileId
   = lens _ureProFileId (\ s a -> s{_ureProFileId = a})
 
--- | Obfuscated customer id for the record.
+-- | Output only. The unique identifier of the customer\'s account.
 ureCustomerId :: Lens' UsageReportEntity (Maybe Text)
 ureCustomerId
   = lens _ureCustomerId
       (\ s a -> s{_ureCustomerId = a})
 
--- | user\'s email. Only relevant if entity.type = \"USER\"
+-- | Output only. The user\'s email address. Only relevant if entity.type =
+-- \"USER\"
 ureUserEmail :: Lens' UsageReportEntity (Maybe Text)
 ureUserEmail
   = lens _ureUserEmail (\ s a -> s{_ureUserEmail = a})
 
--- | The type of item, can be customer, user, or entity (aka. object).
+-- | Output only. The type of item. The value is \`user\`.
 ureType :: Lens' UsageReportEntity (Maybe Text)
 ureType = lens _ureType (\ s a -> s{_ureType = a})
 
--- | Object key. Only relevant if entity.type = \"OBJECT\" Note:
+-- | Output only. Object key. Only relevant if entity.type = \"OBJECT\" Note:
 -- external-facing name of report is \"Entities\" rather than \"Objects\".
 ureEntityId :: Lens' UsageReportEntity (Maybe Text)
 ureEntityId
@@ -1015,12 +1219,14 @@ instance ToJSON UsageReportEntity where
 -- /See:/ 'activityEventsItemParametersItem' smart constructor.
 data ActivityEventsItemParametersItem =
   ActivityEventsItemParametersItem'
-    { _aeipiBoolValue     :: !(Maybe Bool)
-    , _aeipiIntValue      :: !(Maybe (Textual Int64))
-    , _aeipiValue         :: !(Maybe Text)
+    { _aeipiBoolValue :: !(Maybe Bool)
+    , _aeipiMessageValue :: !(Maybe ActivityEventsItemParametersItemMessageValue)
+    , _aeipiIntValue :: !(Maybe (Textual Int64))
+    , _aeipiValue :: !(Maybe Text)
     , _aeipiMultiIntValue :: !(Maybe [Textual Int64])
-    , _aeipiName          :: !(Maybe Text)
-    , _aeipiMultiValue    :: !(Maybe [Text])
+    , _aeipiMultiMessageValue :: !(Maybe [ActivityEventsItemParametersItemMultiMessageValueItem])
+    , _aeipiName :: !(Maybe Text)
+    , _aeipiMultiValue :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1031,11 +1237,15 @@ data ActivityEventsItemParametersItem =
 --
 -- * 'aeipiBoolValue'
 --
+-- * 'aeipiMessageValue'
+--
 -- * 'aeipiIntValue'
 --
 -- * 'aeipiValue'
 --
 -- * 'aeipiMultiIntValue'
+--
+-- * 'aeipiMultiMessageValue'
 --
 -- * 'aeipiName'
 --
@@ -1045,9 +1255,11 @@ activityEventsItemParametersItem
 activityEventsItemParametersItem =
   ActivityEventsItemParametersItem'
     { _aeipiBoolValue = Nothing
+    , _aeipiMessageValue = Nothing
     , _aeipiIntValue = Nothing
     , _aeipiValue = Nothing
     , _aeipiMultiIntValue = Nothing
+    , _aeipiMultiMessageValue = Nothing
     , _aeipiName = Nothing
     , _aeipiMultiValue = Nothing
     }
@@ -1059,7 +1271,16 @@ aeipiBoolValue
   = lens _aeipiBoolValue
       (\ s a -> s{_aeipiBoolValue = a})
 
--- | Integral value of the parameter.
+-- | Nested parameter value pairs associated with this parameter. Complex
+-- value type for a parameter are returned as a list of parameter values.
+-- For example, the address parameter may have a value as \`[{parameter:
+-- [{name: city, value: abc}]}]\`
+aeipiMessageValue :: Lens' ActivityEventsItemParametersItem (Maybe ActivityEventsItemParametersItemMessageValue)
+aeipiMessageValue
+  = lens _aeipiMessageValue
+      (\ s a -> s{_aeipiMessageValue = a})
+
+-- | Integer value of the parameter.
 aeipiIntValue :: Lens' ActivityEventsItemParametersItem (Maybe Int64)
 aeipiIntValue
   = lens _aeipiIntValue
@@ -1071,11 +1292,19 @@ aeipiValue :: Lens' ActivityEventsItemParametersItem (Maybe Text)
 aeipiValue
   = lens _aeipiValue (\ s a -> s{_aeipiValue = a})
 
--- | Multi-int value of the parameter.
+-- | Integer values of the parameter.
 aeipiMultiIntValue :: Lens' ActivityEventsItemParametersItem [Int64]
 aeipiMultiIntValue
   = lens _aeipiMultiIntValue
       (\ s a -> s{_aeipiMultiIntValue = a})
+      . _Default
+      . _Coerce
+
+-- | List of \`messageValue\` objects.
+aeipiMultiMessageValue :: Lens' ActivityEventsItemParametersItem [ActivityEventsItemParametersItemMultiMessageValueItem]
+aeipiMultiMessageValue
+  = lens _aeipiMultiMessageValue
+      (\ s a -> s{_aeipiMultiMessageValue = a})
       . _Default
       . _Coerce
 
@@ -1084,7 +1313,7 @@ aeipiName :: Lens' ActivityEventsItemParametersItem (Maybe Text)
 aeipiName
   = lens _aeipiName (\ s a -> s{_aeipiName = a})
 
--- | Multi-string value of the parameter.
+-- | String values of the parameter.
 aeipiMultiValue :: Lens' ActivityEventsItemParametersItem [Text]
 aeipiMultiValue
   = lens _aeipiMultiValue
@@ -1098,9 +1327,11 @@ instance FromJSON ActivityEventsItemParametersItem
           = withObject "ActivityEventsItemParametersItem"
               (\ o ->
                  ActivityEventsItemParametersItem' <$>
-                   (o .:? "boolValue") <*> (o .:? "intValue") <*>
-                     (o .:? "value")
+                   (o .:? "boolValue") <*> (o .:? "messageValue") <*>
+                     (o .:? "intValue")
+                     <*> (o .:? "value")
                      <*> (o .:? "multiIntValue" .!= mempty)
+                     <*> (o .:? "multiMessageValue" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "multiValue" .!= mempty))
 
@@ -1110,21 +1341,73 @@ instance ToJSON ActivityEventsItemParametersItem
           = object
               (catMaybes
                  [("boolValue" .=) <$> _aeipiBoolValue,
+                  ("messageValue" .=) <$> _aeipiMessageValue,
                   ("intValue" .=) <$> _aeipiIntValue,
                   ("value" .=) <$> _aeipiValue,
                   ("multiIntValue" .=) <$> _aeipiMultiIntValue,
+                  ("multiMessageValue" .=) <$> _aeipiMultiMessageValue,
                   ("name" .=) <$> _aeipiName,
                   ("multiValue" .=) <$> _aeipiMultiValue])
+
+-- | Nested parameter value pairs associated with this parameter. Complex
+-- value type for a parameter are returned as a list of parameter values.
+-- For example, the address parameter may have a value as \`[{parameter:
+-- [{name: city, value: abc}]}]\`
+--
+-- /See:/ 'activityEventsItemParametersItemMessageValue' smart constructor.
+newtype ActivityEventsItemParametersItemMessageValue =
+  ActivityEventsItemParametersItemMessageValue'
+    { _aeipimvParameter :: Maybe [NestedParameter]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ActivityEventsItemParametersItemMessageValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aeipimvParameter'
+activityEventsItemParametersItemMessageValue
+    :: ActivityEventsItemParametersItemMessageValue
+activityEventsItemParametersItemMessageValue =
+  ActivityEventsItemParametersItemMessageValue' {_aeipimvParameter = Nothing}
+
+
+-- | Parameter values
+aeipimvParameter :: Lens' ActivityEventsItemParametersItemMessageValue [NestedParameter]
+aeipimvParameter
+  = lens _aeipimvParameter
+      (\ s a -> s{_aeipimvParameter = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           ActivityEventsItemParametersItemMessageValue
+         where
+        parseJSON
+          = withObject
+              "ActivityEventsItemParametersItemMessageValue"
+              (\ o ->
+                 ActivityEventsItemParametersItemMessageValue' <$>
+                   (o .:? "parameter" .!= mempty))
+
+instance ToJSON
+           ActivityEventsItemParametersItemMessageValue
+         where
+        toJSON
+          ActivityEventsItemParametersItemMessageValue'{..}
+          = object
+              (catMaybes [("parameter" .=) <$> _aeipimvParameter])
 
 -- | User doing the action.
 --
 -- /See:/ 'activityActor' smart constructor.
 data ActivityActor =
   ActivityActor'
-    { _aaEmail      :: !(Maybe Text)
+    { _aaEmail :: !(Maybe Text)
     , _aaCallerType :: !(Maybe Text)
-    , _aaProFileId  :: !(Maybe Text)
-    , _aaKey        :: !(Maybe Text)
+    , _aaProFileId :: !(Maybe Text)
+    , _aaKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1151,21 +1434,25 @@ activityActor =
     }
 
 
--- | Email address of the user.
+-- | The primary email address of the actor. May be absent if there is no
+-- email address associated with the actor.
 aaEmail :: Lens' ActivityActor (Maybe Text)
 aaEmail = lens _aaEmail (\ s a -> s{_aaEmail = a})
 
--- | User or OAuth 2LO request.
+-- | The type of actor.
 aaCallerType :: Lens' ActivityActor (Maybe Text)
 aaCallerType
   = lens _aaCallerType (\ s a -> s{_aaCallerType = a})
 
--- | Obfuscated user id of the user.
+-- | The unique Google Workspace profile ID of the actor. May be absent if
+-- the actor is not a Google Workspace user.
 aaProFileId :: Lens' ActivityActor (Maybe Text)
 aaProFileId
   = lens _aaProFileId (\ s a -> s{_aaProFileId = a})
 
--- | For OAuth 2LO API requests, consumer_key of the requestor.
+-- | Only present when \`callerType\` is \`KEY\`. Can be the \`consumer_key\`
+-- of the requestor for OAuth 2LO API requests or an identifier for robot
+-- accounts.
 aaKey :: Lens' ActivityActor (Maybe Text)
 aaKey = lens _aaKey (\ s a -> s{_aaKey = a})
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.Vision.Images.Annotate
     , iaCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vision.Types
+import Network.Google.Prelude
+import Network.Google.Vision.Types
 
 -- | A resource alias for @vision.images.annotate@ method which the
 -- 'ImagesAnnotate' request conforms to.
@@ -66,12 +66,12 @@ type ImagesAnnotateResource =
 -- /See:/ 'imagesAnnotate' smart constructor.
 data ImagesAnnotate =
   ImagesAnnotate'
-    { _iaXgafv          :: !(Maybe Xgafv)
+    { _iaXgafv :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
-    , _iaAccessToken    :: !(Maybe Text)
-    , _iaUploadType     :: !(Maybe Text)
-    , _iaPayload        :: !GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
-    , _iaCallback       :: !(Maybe Text)
+    , _iaAccessToken :: !(Maybe Text)
+    , _iaUploadType :: !(Maybe Text)
+    , _iaPayload :: !GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
+    , _iaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

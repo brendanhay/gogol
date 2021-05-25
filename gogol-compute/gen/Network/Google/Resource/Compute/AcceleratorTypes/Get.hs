@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.AcceleratorTypes.Get
     , atgZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.acceleratorTypes.get@ method which the
 -- 'AcceleratorTypesGet' request conforms to.
@@ -61,8 +61,8 @@ type AcceleratorTypesGetResource =
 data AcceleratorTypesGet =
   AcceleratorTypesGet'
     { _atgAcceleratorType :: !Text
-    , _atgProject         :: !Text
-    , _atgZone            :: !Text
+    , _atgProject :: !Text
+    , _atgZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

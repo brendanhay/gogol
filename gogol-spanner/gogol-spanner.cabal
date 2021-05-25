@@ -36,17 +36,34 @@ library
     exposed-modules:
           Network.Google.Resource.Spanner.Projects.InstanceConfigs.Get
         , Network.Google.Resource.Spanner.Projects.InstanceConfigs.List
+        , Network.Google.Resource.Spanner.Projects.Instances.BackupOperations.List
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Create
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Delete
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Get
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.GetIAMPolicy
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.List
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Cancel
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Delete
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.Get
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Operations.List
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.Patch
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.SetIAMPolicy
+        , Network.Google.Resource.Spanner.Projects.Instances.Backups.TestIAMPermissions
         , Network.Google.Resource.Spanner.Projects.Instances.Create
+        , Network.Google.Resource.Spanner.Projects.Instances.DatabaseOperations.List
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Create
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.DropDatabase
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Get
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.GetDdl
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.GetIAMPolicy
+        , Network.Google.Resource.Spanner.Projects.Instances.Databases.GetScans
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.List
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Cancel
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Delete
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.Get
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.List
+        , Network.Google.Resource.Spanner.Projects.Instances.Databases.Restore
+        , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Commit
         , Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Create
@@ -75,6 +92,7 @@ library
         , Network.Google.Resource.Spanner.Projects.Instances.Patch
         , Network.Google.Resource.Spanner.Projects.Instances.SetIAMPolicy
         , Network.Google.Resource.Spanner.Projects.Instances.TestIAMPermissions
+        , Network.Google.Resource.Spanner.Scans.List
         , Network.Google.Spanner
         , Network.Google.Spanner.Types
 

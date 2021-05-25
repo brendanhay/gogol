@@ -37,8 +37,8 @@ module Network.Google.Resource.Webmasters.Sitemaps.Get
     , sgSiteURL
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sitemaps.get@ method which the
 -- 'SitemapsGet' request conforms to.
@@ -57,7 +57,7 @@ type SitemapsGetResource =
 data SitemapsGet =
   SitemapsGet'
     { _sgFeedpath :: !Text
-    , _sgSiteURL  :: !Text
+    , _sgSiteURL :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

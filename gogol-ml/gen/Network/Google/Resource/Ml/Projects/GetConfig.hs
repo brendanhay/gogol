@@ -25,7 +25,7 @@
 -- for the Google Cloud Storage location where you put your model training
 -- code for training the model with Google Cloud Machine Learning.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.getConfig@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.getConfig@.
 module Network.Google.Resource.Ml.Projects.GetConfig
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.Ml.Projects.GetConfig
     , pgcCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.getConfig@ method which the
 -- 'ProjectsGetConfig' request conforms to.
@@ -68,12 +68,12 @@ type ProjectsGetConfigResource =
 -- /See:/ 'projectsGetConfig' smart constructor.
 data ProjectsGetConfig =
   ProjectsGetConfig'
-    { _pgcXgafv          :: !(Maybe Xgafv)
+    { _pgcXgafv :: !(Maybe Xgafv)
     , _pgcUploadProtocol :: !(Maybe Text)
-    , _pgcAccessToken    :: !(Maybe Text)
-    , _pgcUploadType     :: !(Maybe Text)
-    , _pgcName           :: !Text
-    , _pgcCallback       :: !(Maybe Text)
+    , _pgcAccessToken :: !(Maybe Text)
+    , _pgcUploadType :: !(Maybe Text)
+    , _pgcName :: !Text
+    , _pgcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

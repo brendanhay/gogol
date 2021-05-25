@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.BackendBuckets.AddSignedURLKey
     , bbasukPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendBuckets.addSignedUrlKey@ method which the
 -- 'BackendBucketsAddSignedURLKey' request conforms to.
@@ -65,10 +65,10 @@ type BackendBucketsAddSignedURLKeyResource =
 -- /See:/ 'backendBucketsAddSignedURLKey' smart constructor.
 data BackendBucketsAddSignedURLKey =
   BackendBucketsAddSignedURLKey'
-    { _bbasukRequestId     :: !(Maybe Text)
+    { _bbasukRequestId :: !(Maybe Text)
     , _bbasukBackendBucket :: !Text
-    , _bbasukProject       :: !Text
-    , _bbasukPayload       :: !SignedURLKey
+    , _bbasukProject :: !Text
+    , _bbasukPayload :: !SignedURLKey
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

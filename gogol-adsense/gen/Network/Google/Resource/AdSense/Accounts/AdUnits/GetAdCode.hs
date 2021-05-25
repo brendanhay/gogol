@@ -38,8 +38,8 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
     , aaugacAccountId
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.adunits.getAdCode@ method which the
 -- 'AccountsAdUnitsGetAdCode' request conforms to.
@@ -60,9 +60,9 @@ type AccountsAdUnitsGetAdCodeResource =
 -- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
 data AccountsAdUnitsGetAdCode =
   AccountsAdUnitsGetAdCode'
-    { _aaugacAdUnitId   :: !Text
+    { _aaugacAdUnitId :: !Text
     , _aaugacAdClientId :: !Text
-    , _aaugacAccountId  :: !Text
+    , _aaugacAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

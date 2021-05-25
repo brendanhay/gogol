@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.Snapshots.Delete
     , sddProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.delete@ method which the
 -- 'SnapshotsDelete' request conforms to.
@@ -68,8 +68,8 @@ type SnapshotsDeleteResource =
 data SnapshotsDelete =
   SnapshotsDelete'
     { _sddRequestId :: !(Maybe Text)
-    , _sddSnapshot  :: !Text
-    , _sddProject   :: !Text
+    , _sddSnapshot :: !Text
+    , _sddProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

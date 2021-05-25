@@ -36,8 +36,8 @@ module Network.Google.Resource.AdSense.Alerts.List
     , alLocale
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.alerts.list@ method which the
 -- 'AlertsList' request conforms to.

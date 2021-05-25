@@ -42,8 +42,8 @@ module Network.Google.Resource.Webmasters.Searchanalytics.Query
     , sqPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.searchanalytics.query@ method which the
 -- 'SearchanalyticsQuery' request conforms to.

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -55,11 +55,15 @@ module Network.Google.TPU.Types
     -- * NodeState
     , NodeState (..)
 
+    -- * NodeAPIVersion
+    , NodeAPIVersion (..)
+
     -- * ListAcceleratorTypesResponse
     , ListAcceleratorTypesResponse
     , listAcceleratorTypesResponse
     , latrAcceleratorTypes
     , latrNextPageToken
+    , latrUnreachable
 
     -- * Location
     , Location
@@ -95,6 +99,9 @@ module Network.Google.TPU.Types
     , nAcceleratorType
     , nIPAddress
     , nState
+    , nSymptoms
+    , nAPIVersion
+    , nUseServiceNetworking
     , nNetwork
     , nHealth
     , nServiceAccount
@@ -109,6 +116,9 @@ module Network.Google.TPU.Types
     , nTensorflowVersion
     , nPort
 
+    -- * SymptomSymptomType
+    , SymptomSymptomType (..)
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
@@ -117,6 +127,14 @@ module Network.Google.TPU.Types
     -- * StopNodeRequest
     , StopNodeRequest
     , stopNodeRequest
+
+    -- * Symptom
+    , Symptom
+    , symptom
+    , symDetails
+    , symWorkerId
+    , symCreateTime
+    , symSymptomType
 
     -- * ReimageNodeRequest
     , ReimageNodeRequest
@@ -172,6 +190,7 @@ module Network.Google.TPU.Types
     , ListTensorFlowVersionsResponse
     , listTensorFlowVersionsResponse
     , ltfvrNextPageToken
+    , ltfvrUnreachable
     , ltfvrTensorflowVersions
 
     -- * OperationResponse
@@ -190,9 +209,9 @@ module Network.Google.TPU.Types
     , startNodeRequest
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types.Product
-import           Network.Google.TPU.Types.Sum
+import Network.Google.Prelude
+import Network.Google.TPU.Types.Product
+import Network.Google.TPU.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
 tPUService :: ServiceConfig
@@ -200,6 +219,6 @@ tPUService
   = defaultService (ServiceId "tpu:v1")
       "tpu.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

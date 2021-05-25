@@ -36,12 +36,17 @@ module Network.Google.Resource.Gmail.Users.Settings.Delegates.Get
     , UsersSettingsDelegatesGet
 
     -- * Request Lenses
+    , usdgXgafv
+    , usdgUploadProtocol
+    , usdgAccessToken
+    , usdgUploadType
     , usdgUserId
     , usdgDelegateEmail
+    , usdgCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.delegates.get@ method which the
 -- 'UsersSettingsDelegatesGet' request conforms to.
@@ -53,7 +58,12 @@ type UsersSettingsDelegatesGetResource =
              "settings" :>
                "delegates" :>
                  Capture "delegateEmail" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Delegate
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Delegate
 
 -- | Gets the specified delegate. Note that a delegate user must be referred
 -- to by their primary email address, and not an email alias. This method
@@ -63,8 +73,13 @@ type UsersSettingsDelegatesGetResource =
 -- /See:/ 'usersSettingsDelegatesGet' smart constructor.
 data UsersSettingsDelegatesGet =
   UsersSettingsDelegatesGet'
-    { _usdgUserId        :: !Text
+    { _usdgXgafv :: !(Maybe Xgafv)
+    , _usdgUploadProtocol :: !(Maybe Text)
+    , _usdgAccessToken :: !(Maybe Text)
+    , _usdgUploadType :: !(Maybe Text)
+    , _usdgUserId :: !Text
     , _usdgDelegateEmail :: !Text
+    , _usdgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,16 +88,56 @@ data UsersSettingsDelegatesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usdgXgafv'
+--
+-- * 'usdgUploadProtocol'
+--
+-- * 'usdgAccessToken'
+--
+-- * 'usdgUploadType'
+--
 -- * 'usdgUserId'
 --
 -- * 'usdgDelegateEmail'
+--
+-- * 'usdgCallback'
 usersSettingsDelegatesGet
     :: Text -- ^ 'usdgDelegateEmail'
     -> UsersSettingsDelegatesGet
 usersSettingsDelegatesGet pUsdgDelegateEmail_ =
   UsersSettingsDelegatesGet'
-    {_usdgUserId = "me", _usdgDelegateEmail = pUsdgDelegateEmail_}
+    { _usdgXgafv = Nothing
+    , _usdgUploadProtocol = Nothing
+    , _usdgAccessToken = Nothing
+    , _usdgUploadType = Nothing
+    , _usdgUserId = "me"
+    , _usdgDelegateEmail = pUsdgDelegateEmail_
+    , _usdgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+usdgXgafv :: Lens' UsersSettingsDelegatesGet (Maybe Xgafv)
+usdgXgafv
+  = lens _usdgXgafv (\ s a -> s{_usdgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usdgUploadProtocol :: Lens' UsersSettingsDelegatesGet (Maybe Text)
+usdgUploadProtocol
+  = lens _usdgUploadProtocol
+      (\ s a -> s{_usdgUploadProtocol = a})
+
+-- | OAuth access token.
+usdgAccessToken :: Lens' UsersSettingsDelegatesGet (Maybe Text)
+usdgAccessToken
+  = lens _usdgAccessToken
+      (\ s a -> s{_usdgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usdgUploadType :: Lens' UsersSettingsDelegatesGet (Maybe Text)
+usdgUploadType
+  = lens _usdgUploadType
+      (\ s a -> s{_usdgUploadType = a})
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
@@ -97,6 +152,11 @@ usdgDelegateEmail
   = lens _usdgDelegateEmail
       (\ s a -> s{_usdgDelegateEmail = a})
 
+-- | JSONP
+usdgCallback :: Lens' UsersSettingsDelegatesGet (Maybe Text)
+usdgCallback
+  = lens _usdgCallback (\ s a -> s{_usdgCallback = a})
+
 instance GoogleRequest UsersSettingsDelegatesGet
          where
         type Rs UsersSettingsDelegatesGet = Delegate
@@ -106,7 +166,12 @@ instance GoogleRequest UsersSettingsDelegatesGet
                "https://www.googleapis.com/auth/gmail.readonly",
                "https://www.googleapis.com/auth/gmail.settings.basic"]
         requestClient UsersSettingsDelegatesGet'{..}
-          = go _usdgUserId _usdgDelegateEmail (Just AltJSON)
+          = go _usdgUserId _usdgDelegateEmail _usdgXgafv
+              _usdgUploadProtocol
+              _usdgAccessToken
+              _usdgUploadType
+              _usdgCallback
+              (Just AltJSON)
               gmailService
           where go
                   = buildClient

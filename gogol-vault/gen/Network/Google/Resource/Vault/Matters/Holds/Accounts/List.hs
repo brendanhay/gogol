@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists HeldAccounts for a hold. This will only list individually
--- specified held accounts. If the hold is on an OU, then use
--- <https://developers.google.com/admin-sdk/ Admin SDK> to enumerate its
--- members.
+-- Lists the accounts covered by a hold. This can list only
+-- individually-specified accounts covered by the hold. If the hold covers
+-- an organizational unit, use the [Admin
+-- SDK](https:\/\/developers.google.com\/admin-sdk\/). to list the members
+-- of the organizational unit on hold.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.accounts.list@.
 module Network.Google.Resource.Vault.Matters.Holds.Accounts.List
@@ -45,8 +46,8 @@ module Network.Google.Resource.Vault.Matters.Holds.Accounts.List
     , mhalCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.accounts.list@ method which the
 -- 'MattersHoldsAccountsList' request conforms to.
@@ -65,21 +66,22 @@ type MattersHoldsAccountsListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListHeldAccountsResponse
 
--- | Lists HeldAccounts for a hold. This will only list individually
--- specified held accounts. If the hold is on an OU, then use
--- <https://developers.google.com/admin-sdk/ Admin SDK> to enumerate its
--- members.
+-- | Lists the accounts covered by a hold. This can list only
+-- individually-specified accounts covered by the hold. If the hold covers
+-- an organizational unit, use the [Admin
+-- SDK](https:\/\/developers.google.com\/admin-sdk\/). to list the members
+-- of the organizational unit on hold.
 --
 -- /See:/ 'mattersHoldsAccountsList' smart constructor.
 data MattersHoldsAccountsList =
   MattersHoldsAccountsList'
-    { _mhalXgafv          :: !(Maybe Xgafv)
+    { _mhalXgafv :: !(Maybe Xgafv)
     , _mhalUploadProtocol :: !(Maybe Text)
-    , _mhalHoldId         :: !Text
-    , _mhalAccessToken    :: !(Maybe Text)
-    , _mhalUploadType     :: !(Maybe Text)
-    , _mhalMatterId       :: !Text
-    , _mhalCallback       :: !(Maybe Text)
+    , _mhalHoldId :: !Text
+    , _mhalAccessToken :: !(Maybe Text)
+    , _mhalUploadType :: !(Maybe Text)
+    , _mhalMatterId :: !Text
+    , _mhalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

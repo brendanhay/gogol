@@ -20,12 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a collection of search results that match the query parameters
--- specified in the API request. By default, a search result set identifies
--- matching video, channel, and playlist resources, but you can also
--- configure queries to only retrieve a specific type of resource.
+-- Retrieves a list of search resources
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.search.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.search.list@.
 module Network.Google.Resource.YouTube.Search.List
     (
     -- * REST Resource
@@ -38,14 +35,18 @@ module Network.Google.Resource.YouTube.Search.List
     -- * Request Lenses
     , slPublishedAfter
     , slVideoDefinition
+    , slXgafv
     , slPart
     , slVideoDuration
     , slVideoCaption
+    , slUploadProtocol
     , slVideoLicense
     , slRegionCode
     , slForDeveloper
     , slLocation
     , slLocationRadius
+    , slAccessToken
+    , slUploadType
     , slForContentOwner
     , slChannelId
     , slQ
@@ -67,10 +68,11 @@ module Network.Google.Resource.YouTube.Search.List
     , slPublishedBefore
     , slVideoType
     , slVideoDimension
+    , slCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.search.list@ method which the
 -- 'SearchList' request conforms to.
@@ -78,125 +80,143 @@ type SearchListResource =
      "youtube" :>
        "v3" :>
          "search" :>
-           QueryParam "part" Text :>
+           QueryParams "part" Text :>
              QueryParam "publishedAfter" DateTime' :>
                QueryParam "videoDefinition"
                  SearchListVideoDefinition
                  :>
-                 QueryParam "videoDuration" SearchListVideoDuration :>
-                   QueryParam "videoCaption" SearchListVideoCaption :>
-                     QueryParam "videoLicense" SearchListVideoLicense :>
-                       QueryParam "regionCode" Text :>
-                         QueryParam "forDeveloper" Bool :>
-                           QueryParam "location" Text :>
-                             QueryParam "locationRadius" Text :>
-                               QueryParam "forContentOwner" Bool :>
-                                 QueryParam "channelId" Text :>
-                                   QueryParam "q" Text :>
-                                     QueryParam "forMine" Bool :>
-                                       QueryParam "videoEmbeddable"
-                                         SearchListVideoEmbeddable
-                                         :>
-                                         QueryParam "eventType"
-                                           SearchListEventType
-                                           :>
-                                           QueryParam "onBehalfOfContentOwner"
-                                             Text
-                                             :>
-                                             QueryParam "videoCategoryId" Text
-                                               :>
-                                               QueryParam "topicId" Text :>
-                                                 QueryParam "safeSearch"
-                                                   SearchListSafeSearch
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "videoDuration" SearchListVideoDuration :>
+                     QueryParam "videoCaption" SearchListVideoCaption :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "videoLicense" SearchListVideoLicense :>
+                           QueryParam "regionCode" Text :>
+                             QueryParam "forDeveloper" Bool :>
+                               QueryParam "location" Text :>
+                                 QueryParam "locationRadius" Text :>
+                                   QueryParam "access_token" Text :>
+                                     QueryParam "uploadType" Text :>
+                                       QueryParam "forContentOwner" Bool :>
+                                         QueryParam "channelId" Text :>
+                                           QueryParam "q" Text :>
+                                             QueryParam "forMine" Bool :>
+                                               QueryParam "videoEmbeddable"
+                                                 SearchListVideoEmbeddable
+                                                 :>
+                                                 QueryParam "eventType"
+                                                   SearchListEventType
                                                    :>
-                                                   QueryParam "videoSyndicated"
-                                                     SearchListVideoSyndicated
+                                                   QueryParam
+                                                     "onBehalfOfContentOwner"
+                                                     Text
                                                      :>
                                                      QueryParam
-                                                       "relatedToVideoId"
+                                                       "videoCategoryId"
                                                        Text
                                                        :>
-                                                       QueryParam "pageToken"
-                                                         Text
+                                                       QueryParam "topicId" Text
                                                          :>
-                                                         QueryParam "type" Text
+                                                         QueryParam "safeSearch"
+                                                           SearchListSafeSearch
                                                            :>
                                                            QueryParam
-                                                             "channelType"
-                                                             SearchListChannelType
+                                                             "videoSyndicated"
+                                                             SearchListVideoSyndicated
                                                              :>
                                                              QueryParam
-                                                               "relevanceLanguage"
+                                                               "relatedToVideoId"
                                                                Text
                                                                :>
                                                                QueryParam
-                                                                 "order"
-                                                                 SearchListOrder
+                                                                 "pageToken"
+                                                                 Text
                                                                  :>
-                                                                 QueryParam
-                                                                   "maxResults"
-                                                                   (Textual
-                                                                      Word32)
+                                                                 QueryParams
+                                                                   "type"
+                                                                   Text
                                                                    :>
                                                                    QueryParam
-                                                                     "publishedBefore"
-                                                                     DateTime'
+                                                                     "channelType"
+                                                                     SearchListChannelType
                                                                      :>
                                                                      QueryParam
-                                                                       "videoType"
-                                                                       SearchListVideoType
+                                                                       "relevanceLanguage"
+                                                                       Text
                                                                        :>
                                                                        QueryParam
-                                                                         "videoDimension"
-                                                                         SearchListVideoDimension
+                                                                         "order"
+                                                                         SearchListOrder
                                                                          :>
                                                                          QueryParam
-                                                                           "alt"
-                                                                           AltJSON
+                                                                           "maxResults"
+                                                                           (Textual
+                                                                              Word32)
                                                                            :>
-                                                                           Get
-                                                                             '[JSON]
-                                                                             SearchListResponse
+                                                                           QueryParam
+                                                                             "publishedBefore"
+                                                                             DateTime'
+                                                                             :>
+                                                                             QueryParam
+                                                                               "videoType"
+                                                                               SearchListVideoType
+                                                                               :>
+                                                                               QueryParam
+                                                                                 "videoDimension"
+                                                                                 SearchListVideoDimension
+                                                                                 :>
+                                                                                 QueryParam
+                                                                                   "callback"
+                                                                                   Text
+                                                                                   :>
+                                                                                   QueryParam
+                                                                                     "alt"
+                                                                                     AltJSON
+                                                                                     :>
+                                                                                     Get
+                                                                                       '[JSON]
+                                                                                       SearchListResponse
 
--- | Returns a collection of search results that match the query parameters
--- specified in the API request. By default, a search result set identifies
--- matching video, channel, and playlist resources, but you can also
--- configure queries to only retrieve a specific type of resource.
+-- | Retrieves a list of search resources
 --
 -- /See:/ 'searchList' smart constructor.
 data SearchList =
   SearchList'
-    { _slPublishedAfter         :: !(Maybe DateTime')
-    , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
-    , _slPart                   :: !Text
-    , _slVideoDuration          :: !(Maybe SearchListVideoDuration)
-    , _slVideoCaption           :: !(Maybe SearchListVideoCaption)
-    , _slVideoLicense           :: !(Maybe SearchListVideoLicense)
-    , _slRegionCode             :: !(Maybe Text)
-    , _slForDeveloper           :: !(Maybe Bool)
-    , _slLocation               :: !(Maybe Text)
-    , _slLocationRadius         :: !(Maybe Text)
-    , _slForContentOwner        :: !(Maybe Bool)
-    , _slChannelId              :: !(Maybe Text)
-    , _slQ                      :: !(Maybe Text)
-    , _slForMine                :: !(Maybe Bool)
-    , _slVideoEmbeddable        :: !(Maybe SearchListVideoEmbeddable)
-    , _slEventType              :: !(Maybe SearchListEventType)
+    { _slPublishedAfter :: !(Maybe DateTime')
+    , _slVideoDefinition :: !(Maybe SearchListVideoDefinition)
+    , _slXgafv :: !(Maybe Xgafv)
+    , _slPart :: ![Text]
+    , _slVideoDuration :: !(Maybe SearchListVideoDuration)
+    , _slVideoCaption :: !(Maybe SearchListVideoCaption)
+    , _slUploadProtocol :: !(Maybe Text)
+    , _slVideoLicense :: !(Maybe SearchListVideoLicense)
+    , _slRegionCode :: !(Maybe Text)
+    , _slForDeveloper :: !(Maybe Bool)
+    , _slLocation :: !(Maybe Text)
+    , _slLocationRadius :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slForContentOwner :: !(Maybe Bool)
+    , _slChannelId :: !(Maybe Text)
+    , _slQ :: !(Maybe Text)
+    , _slForMine :: !(Maybe Bool)
+    , _slVideoEmbeddable :: !(Maybe SearchListVideoEmbeddable)
+    , _slEventType :: !(Maybe SearchListEventType)
     , _slOnBehalfOfContentOwner :: !(Maybe Text)
-    , _slVideoCategoryId        :: !(Maybe Text)
-    , _slTopicId                :: !(Maybe Text)
-    , _slSafeSearch             :: !(Maybe SearchListSafeSearch)
-    , _slVideoSyndicated        :: !(Maybe SearchListVideoSyndicated)
-    , _slRelatedToVideoId       :: !(Maybe Text)
-    , _slPageToken              :: !(Maybe Text)
-    , _slType                   :: !Text
-    , _slChannelType            :: !(Maybe SearchListChannelType)
-    , _slRelevanceLanguage      :: !(Maybe Text)
-    , _slOrder                  :: !SearchListOrder
-    , _slMaxResults             :: !(Textual Word32)
-    , _slPublishedBefore        :: !(Maybe DateTime')
-    , _slVideoType              :: !(Maybe SearchListVideoType)
-    , _slVideoDimension         :: !(Maybe SearchListVideoDimension)
+    , _slVideoCategoryId :: !(Maybe Text)
+    , _slTopicId :: !(Maybe Text)
+    , _slSafeSearch :: !SearchListSafeSearch
+    , _slVideoSyndicated :: !(Maybe SearchListVideoSyndicated)
+    , _slRelatedToVideoId :: !(Maybe Text)
+    , _slPageToken :: !(Maybe Text)
+    , _slType :: !(Maybe [Text])
+    , _slChannelType :: !(Maybe SearchListChannelType)
+    , _slRelevanceLanguage :: !(Maybe Text)
+    , _slOrder :: !SearchListOrder
+    , _slMaxResults :: !(Textual Word32)
+    , _slPublishedBefore :: !(Maybe DateTime')
+    , _slVideoType :: !(Maybe SearchListVideoType)
+    , _slVideoDimension :: !(Maybe SearchListVideoDimension)
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -209,11 +229,15 @@ data SearchList =
 --
 -- * 'slVideoDefinition'
 --
+-- * 'slXgafv'
+--
 -- * 'slPart'
 --
 -- * 'slVideoDuration'
 --
 -- * 'slVideoCaption'
+--
+-- * 'slUploadProtocol'
 --
 -- * 'slVideoLicense'
 --
@@ -224,6 +248,10 @@ data SearchList =
 -- * 'slLocation'
 --
 -- * 'slLocationRadius'
+--
+-- * 'slAccessToken'
+--
+-- * 'slUploadType'
 --
 -- * 'slForContentOwner'
 --
@@ -266,21 +294,27 @@ data SearchList =
 -- * 'slVideoType'
 --
 -- * 'slVideoDimension'
+--
+-- * 'slCallback'
 searchList
-    :: Text -- ^ 'slPart'
+    :: [Text] -- ^ 'slPart'
     -> SearchList
 searchList pSlPart_ =
   SearchList'
     { _slPublishedAfter = Nothing
     , _slVideoDefinition = Nothing
-    , _slPart = pSlPart_
+    , _slXgafv = Nothing
+    , _slPart = _Coerce # pSlPart_
     , _slVideoDuration = Nothing
     , _slVideoCaption = Nothing
+    , _slUploadProtocol = Nothing
     , _slVideoLicense = Nothing
     , _slRegionCode = Nothing
     , _slForDeveloper = Nothing
     , _slLocation = Nothing
     , _slLocationRadius = Nothing
+    , _slAccessToken = Nothing
+    , _slUploadType = Nothing
     , _slForContentOwner = Nothing
     , _slChannelId = Nothing
     , _slQ = Nothing
@@ -290,11 +324,11 @@ searchList pSlPart_ =
     , _slOnBehalfOfContentOwner = Nothing
     , _slVideoCategoryId = Nothing
     , _slTopicId = Nothing
-    , _slSafeSearch = Nothing
+    , _slSafeSearch = SLSSModerate
     , _slVideoSyndicated = Nothing
     , _slRelatedToVideoId = Nothing
     , _slPageToken = Nothing
-    , _slType = "video,channel,playlist"
+    , _slType = Nothing
     , _slChannelType = Nothing
     , _slRelevanceLanguage = Nothing
     , _slOrder = Relevance
@@ -302,160 +336,125 @@ searchList pSlPart_ =
     , _slPublishedBefore = Nothing
     , _slVideoType = Nothing
     , _slVideoDimension = Nothing
+    , _slCallback = Nothing
     }
 
 
--- | The publishedAfter parameter indicates that the API response should only
--- contain resources created after the specified time. The value is an RFC
--- 3339 formatted date-time value (1970-01-01T00:00:00Z).
+-- | Filter on resources published after this date.
 slPublishedAfter :: Lens' SearchList (Maybe UTCTime)
 slPublishedAfter
   = lens _slPublishedAfter
       (\ s a -> s{_slPublishedAfter = a})
       . mapping _DateTime
 
--- | The videoDefinition parameter lets you restrict a search to only include
--- either high definition (HD) or standard definition (SD) videos. HD
--- videos are available for playback in at least 720p, though higher
--- resolutions, like 1080p, might also be available. If you specify a value
--- for this parameter, you must also set the type parameter\'s value to
--- video.
+-- | Filter on the definition of the videos.
 slVideoDefinition :: Lens' SearchList (Maybe SearchListVideoDefinition)
 slVideoDefinition
   = lens _slVideoDefinition
       (\ s a -> s{_slVideoDefinition = a})
 
--- | The part parameter specifies a comma-separated list of one or more
+-- | V1 error format.
+slXgafv :: Lens' SearchList (Maybe Xgafv)
+slXgafv = lens _slXgafv (\ s a -> s{_slXgafv = a})
+
+-- | The *part* parameter specifies a comma-separated list of one or more
 -- search resource properties that the API response will include. Set the
 -- parameter value to snippet.
-slPart :: Lens' SearchList Text
-slPart = lens _slPart (\ s a -> s{_slPart = a})
+slPart :: Lens' SearchList [Text]
+slPart
+  = lens _slPart (\ s a -> s{_slPart = a}) . _Coerce
 
--- | The videoDuration parameter filters video search results based on their
--- duration. If you specify a value for this parameter, you must also set
--- the type parameter\'s value to video.
+-- | Filter on the duration of the videos.
 slVideoDuration :: Lens' SearchList (Maybe SearchListVideoDuration)
 slVideoDuration
   = lens _slVideoDuration
       (\ s a -> s{_slVideoDuration = a})
 
--- | The videoCaption parameter indicates whether the API should filter video
--- search results based on whether they have captions. If you specify a
--- value for this parameter, you must also set the type parameter\'s value
--- to video.
+-- | Filter on the presence of captions on the videos.
 slVideoCaption :: Lens' SearchList (Maybe SearchListVideoCaption)
 slVideoCaption
   = lens _slVideoCaption
       (\ s a -> s{_slVideoCaption = a})
 
--- | The videoLicense parameter filters search results to only include videos
--- with a particular license. YouTube lets video uploaders choose to attach
--- either the Creative Commons license or the standard YouTube license to
--- each of their videos. If you specify a value for this parameter, you
--- must also set the type parameter\'s value to video.
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+slUploadProtocol :: Lens' SearchList (Maybe Text)
+slUploadProtocol
+  = lens _slUploadProtocol
+      (\ s a -> s{_slUploadProtocol = a})
+
+-- | Filter on the license of the videos.
 slVideoLicense :: Lens' SearchList (Maybe SearchListVideoLicense)
 slVideoLicense
   = lens _slVideoLicense
       (\ s a -> s{_slVideoLicense = a})
 
--- | The regionCode parameter instructs the API to return search results for
--- the specified country. The parameter value is an ISO 3166-1 alpha-2
--- country code.
+-- | Display the content as seen by viewers in this country.
 slRegionCode :: Lens' SearchList (Maybe Text)
 slRegionCode
   = lens _slRegionCode (\ s a -> s{_slRegionCode = a})
 
--- | The forDeveloper parameter restricts the search to only retrieve videos
--- uploaded via the developer\'s application or website. The API server
--- uses the request\'s authorization credentials to identify the developer.
--- Therefore, a developer can restrict results to videos uploaded through
--- the developer\'s own app or website but not to videos uploaded through
--- other apps or sites.
+-- | Restrict the search to only retrieve videos uploaded using the project
+-- id of the authenticated user.
 slForDeveloper :: Lens' SearchList (Maybe Bool)
 slForDeveloper
   = lens _slForDeveloper
       (\ s a -> s{_slForDeveloper = a})
 
--- | The location parameter, in conjunction with the locationRadius
--- parameter, defines a circular geographic area and also restricts a
--- search to videos that specify, in their metadata, a geographic location
--- that falls within that area. The parameter value is a string that
--- specifies latitude\/longitude coordinates e.g. (37.42307,-122.08427). -
--- The location parameter value identifies the point at the center of the
--- area. - The locationRadius parameter specifies the maximum distance that
--- the location associated with a video can be from that point for the
--- video to still be included in the search results.The API returns an
--- error if your request specifies a value for the location parameter but
--- does not also specify a value for the locationRadius parameter.
+-- | Filter on location of the video
 slLocation :: Lens' SearchList (Maybe Text)
 slLocation
   = lens _slLocation (\ s a -> s{_slLocation = a})
 
--- | The locationRadius parameter, in conjunction with the location
--- parameter, defines a circular geographic area. The parameter value must
--- be a floating point number followed by a measurement unit. Valid
--- measurement units are m, km, ft, and mi. For example, valid parameter
--- values include 1500m, 5km, 10000ft, and 0.75mi. The API does not support
--- locationRadius parameter values larger than 1000 kilometers. Note: See
--- the definition of the location parameter for more information.
+-- | Filter on distance from the location (specified above).
 slLocationRadius :: Lens' SearchList (Maybe Text)
 slLocationRadius
   = lens _slLocationRadius
       (\ s a -> s{_slLocationRadius = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The forContentOwner parameter restricts the search to only
--- retrieve resources owned by the content owner specified by the
--- onBehalfOfContentOwner parameter. The user must be authenticated using a
--- CMS account linked to the specified content owner and
--- onBehalfOfContentOwner must be provided.
+-- | OAuth access token.
+slAccessToken :: Lens' SearchList (Maybe Text)
+slAccessToken
+  = lens _slAccessToken
+      (\ s a -> s{_slAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+slUploadType :: Lens' SearchList (Maybe Text)
+slUploadType
+  = lens _slUploadType (\ s a -> s{_slUploadType = a})
+
+-- | Search owned by a content owner.
 slForContentOwner :: Lens' SearchList (Maybe Bool)
 slForContentOwner
   = lens _slForContentOwner
       (\ s a -> s{_slForContentOwner = a})
 
--- | The channelId parameter indicates that the API response should only
--- contain resources created by the channel
+-- | Filter on resources belonging to this channelId.
 slChannelId :: Lens' SearchList (Maybe Text)
 slChannelId
   = lens _slChannelId (\ s a -> s{_slChannelId = a})
 
--- | The q parameter specifies the query term to search for. Your request can
--- also use the Boolean NOT (-) and OR (|) operators to exclude videos or
--- to find videos that are associated with one of several search terms. For
--- example, to search for videos matching either \"boating\" or
--- \"sailing\", set the q parameter value to boating|sailing. Similarly, to
--- search for videos matching either \"boating\" or \"sailing\" but not
--- \"fishing\", set the q parameter value to boating|sailing -fishing. Note
--- that the pipe character must be URL-escaped when it is sent in your API
--- request. The URL-escaped value for the pipe character is %7C.
+-- | Textual search terms to match.
 slQ :: Lens' SearchList (Maybe Text)
 slQ = lens _slQ (\ s a -> s{_slQ = a})
 
--- | The forMine parameter restricts the search to only retrieve videos owned
--- by the authenticated user. If you set this parameter to true, then the
--- type parameter\'s value must also be set to video.
+-- | Search for the private videos of the authenticated user.
 slForMine :: Lens' SearchList (Maybe Bool)
 slForMine
   = lens _slForMine (\ s a -> s{_slForMine = a})
 
--- | The videoEmbeddable parameter lets you to restrict a search to only
--- videos that can be embedded into a webpage. If you specify a value for
--- this parameter, you must also set the type parameter\'s value to video.
+-- | Filter on embeddable videos.
 slVideoEmbeddable :: Lens' SearchList (Maybe SearchListVideoEmbeddable)
 slVideoEmbeddable
   = lens _slVideoEmbeddable
       (\ s a -> s{_slVideoEmbeddable = a})
 
--- | The eventType parameter restricts a search to broadcast events. If you
--- specify a value for this parameter, you must also set the type
--- parameter\'s value to video.
+-- | Filter on the livestream status of the videos.
 slEventType :: Lens' SearchList (Maybe SearchListEventType)
 slEventType
   = lens _slEventType (\ s a -> s{_slEventType = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -469,111 +468,94 @@ slOnBehalfOfContentOwner
   = lens _slOnBehalfOfContentOwner
       (\ s a -> s{_slOnBehalfOfContentOwner = a})
 
--- | The videoCategoryId parameter filters video search results based on
--- their category. If you specify a value for this parameter, you must also
--- set the type parameter\'s value to video.
+-- | Filter on videos in a specific category.
 slVideoCategoryId :: Lens' SearchList (Maybe Text)
 slVideoCategoryId
   = lens _slVideoCategoryId
       (\ s a -> s{_slVideoCategoryId = a})
 
--- | The topicId parameter indicates that the API response should only
--- contain resources associated with the specified topic. The value
--- identifies a Freebase topic ID.
+-- | Restrict results to a particular topic.
 slTopicId :: Lens' SearchList (Maybe Text)
 slTopicId
   = lens _slTopicId (\ s a -> s{_slTopicId = a})
 
--- | The safeSearch parameter indicates whether the search results should
--- include restricted content as well as standard content.
-slSafeSearch :: Lens' SearchList (Maybe SearchListSafeSearch)
+-- | Indicates whether the search results should include restricted content
+-- as well as standard content.
+slSafeSearch :: Lens' SearchList SearchListSafeSearch
 slSafeSearch
   = lens _slSafeSearch (\ s a -> s{_slSafeSearch = a})
 
--- | The videoSyndicated parameter lets you to restrict a search to only
--- videos that can be played outside youtube.com. If you specify a value
--- for this parameter, you must also set the type parameter\'s value to
--- video.
+-- | Filter on syndicated videos.
 slVideoSyndicated :: Lens' SearchList (Maybe SearchListVideoSyndicated)
 slVideoSyndicated
   = lens _slVideoSyndicated
       (\ s a -> s{_slVideoSyndicated = a})
 
--- | The relatedToVideoId parameter retrieves a list of videos that are
--- related to the video that the parameter value identifies. The parameter
--- value must be set to a YouTube video ID and, if you are using this
--- parameter, the type parameter must be set to video.
+-- | Search related to a resource.
 slRelatedToVideoId :: Lens' SearchList (Maybe Text)
 slRelatedToVideoId
   = lens _slRelatedToVideoId
       (\ s a -> s{_slRelatedToVideoId = a})
 
--- | The pageToken parameter identifies a specific page in the result set
+-- | The *pageToken* parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
 slPageToken :: Lens' SearchList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
--- | The type parameter restricts a search query to only retrieve a
--- particular type of resource. The value is a comma-separated list of
--- resource types.
-slType :: Lens' SearchList Text
-slType = lens _slType (\ s a -> s{_slType = a})
+-- | Restrict results to a particular set of resource types from One
+-- Platform.
+slType :: Lens' SearchList [Text]
+slType
+  = lens _slType (\ s a -> s{_slType = a}) . _Default .
+      _Coerce
 
--- | The channelType parameter lets you restrict a search to a particular
--- type of channel.
+-- | Add a filter on the channel search.
 slChannelType :: Lens' SearchList (Maybe SearchListChannelType)
 slChannelType
   = lens _slChannelType
       (\ s a -> s{_slChannelType = a})
 
--- | The relevanceLanguage parameter instructs the API to return search
--- results that are most relevant to the specified language. The parameter
--- value is typically an ISO 639-1 two-letter language code. However, you
--- should use the values zh-Hans for simplified Chinese and zh-Hant for
--- traditional Chinese. Please note that results in other languages will
--- still be returned if they are highly relevant to the search query term.
+-- | Return results relevant to this language.
 slRelevanceLanguage :: Lens' SearchList (Maybe Text)
 slRelevanceLanguage
   = lens _slRelevanceLanguage
       (\ s a -> s{_slRelevanceLanguage = a})
 
--- | The order parameter specifies the method that will be used to order
--- resources in the API response.
+-- | Sort order of the results.
 slOrder :: Lens' SearchList SearchListOrder
 slOrder = lens _slOrder (\ s a -> s{_slOrder = a})
 
--- | The maxResults parameter specifies the maximum number of items that
+-- | The *maxResults* parameter specifies the maximum number of items that
 -- should be returned in the result set.
 slMaxResults :: Lens' SearchList Word32
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
       . _Coerce
 
--- | The publishedBefore parameter indicates that the API response should
--- only contain resources created before the specified time. The value is
--- an RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).
+-- | Filter on resources published before this date.
 slPublishedBefore :: Lens' SearchList (Maybe UTCTime)
 slPublishedBefore
   = lens _slPublishedBefore
       (\ s a -> s{_slPublishedBefore = a})
       . mapping _DateTime
 
--- | The videoType parameter lets you restrict a search to a particular type
--- of videos. If you specify a value for this parameter, you must also set
--- the type parameter\'s value to video.
+-- | Filter on videos of a specific type.
 slVideoType :: Lens' SearchList (Maybe SearchListVideoType)
 slVideoType
   = lens _slVideoType (\ s a -> s{_slVideoType = a})
 
--- | The videoDimension parameter lets you restrict a search to only retrieve
--- 2D or 3D videos. If you specify a value for this parameter, you must
--- also set the type parameter\'s value to video.
+-- | Filter on 3d videos.
 slVideoDimension :: Lens' SearchList (Maybe SearchListVideoDimension)
 slVideoDimension
   = lens _slVideoDimension
       (\ s a -> s{_slVideoDimension = a})
+
+-- | JSONP
+slCallback :: Lens' SearchList (Maybe Text)
+slCallback
+  = lens _slCallback (\ s a -> s{_slCallback = a})
 
 instance GoogleRequest SearchList where
         type Rs SearchList = SearchListResponse
@@ -583,15 +565,18 @@ instance GoogleRequest SearchList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient SearchList'{..}
-          = go (Just _slPart) _slPublishedAfter
-              _slVideoDefinition
+          = go _slPart _slPublishedAfter _slVideoDefinition
+              _slXgafv
               _slVideoDuration
               _slVideoCaption
+              _slUploadProtocol
               _slVideoLicense
               _slRegionCode
               _slForDeveloper
               _slLocation
               _slLocationRadius
+              _slAccessToken
+              _slUploadType
               _slForContentOwner
               _slChannelId
               _slQ
@@ -601,11 +586,11 @@ instance GoogleRequest SearchList where
               _slOnBehalfOfContentOwner
               _slVideoCategoryId
               _slTopicId
-              _slSafeSearch
+              (Just _slSafeSearch)
               _slVideoSyndicated
               _slRelatedToVideoId
               _slPageToken
-              (Just _slType)
+              (_slType ^. _Default)
               _slChannelType
               _slRelevanceLanguage
               (Just _slOrder)
@@ -613,6 +598,7 @@ instance GoogleRequest SearchList where
               _slPublishedBefore
               _slVideoType
               _slVideoDimension
+              _slCallback
               (Just AltJSON)
               youTubeService
           where go

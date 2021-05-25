@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.Projects.GetXpnHost
     , pgxhProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.getXpnHost@ method which the
 -- 'ProjectsGetXpnHost' request conforms to.

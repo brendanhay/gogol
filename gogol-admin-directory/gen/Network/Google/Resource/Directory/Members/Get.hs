@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve Group Member
+-- Retrieves a group member\'s properties.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.members.get@.
 module Network.Google.Resource.Directory.Members.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Members.Get
     , MembersGet
 
     -- * Request Lenses
+    , mgXgafv
     , mgMemberKey
+    , mgUploadProtocol
+    , mgAccessToken
     , mgGroupKey
+    , mgUploadType
+    , mgCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.members.get@ method which the
 -- 'MembersGet' request conforms to.
@@ -50,15 +55,25 @@ type MembersGetResource =
              Capture "groupKey" Text :>
                "members" :>
                  Capture "memberKey" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Member
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Member
 
--- | Retrieve Group Member
+-- | Retrieves a group member\'s properties.
 --
 -- /See:/ 'membersGet' smart constructor.
 data MembersGet =
   MembersGet'
-    { _mgMemberKey :: !Text
-    , _mgGroupKey  :: !Text
+    { _mgXgafv :: !(Maybe Xgafv)
+    , _mgMemberKey :: !Text
+    , _mgUploadProtocol :: !(Maybe Text)
+    , _mgAccessToken :: !(Maybe Text)
+    , _mgGroupKey :: !Text
+    , _mgUploadType :: !(Maybe Text)
+    , _mgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,26 +82,73 @@ data MembersGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mgXgafv'
+--
 -- * 'mgMemberKey'
 --
+-- * 'mgUploadProtocol'
+--
+-- * 'mgAccessToken'
+--
 -- * 'mgGroupKey'
+--
+-- * 'mgUploadType'
+--
+-- * 'mgCallback'
 membersGet
     :: Text -- ^ 'mgMemberKey'
     -> Text -- ^ 'mgGroupKey'
     -> MembersGet
 membersGet pMgMemberKey_ pMgGroupKey_ =
-  MembersGet' {_mgMemberKey = pMgMemberKey_, _mgGroupKey = pMgGroupKey_}
+  MembersGet'
+    { _mgXgafv = Nothing
+    , _mgMemberKey = pMgMemberKey_
+    , _mgUploadProtocol = Nothing
+    , _mgAccessToken = Nothing
+    , _mgGroupKey = pMgGroupKey_
+    , _mgUploadType = Nothing
+    , _mgCallback = Nothing
+    }
 
 
--- | Email or immutable ID of the member
+-- | V1 error format.
+mgXgafv :: Lens' MembersGet (Maybe Xgafv)
+mgXgafv = lens _mgXgafv (\ s a -> s{_mgXgafv = a})
+
+-- | Identifies the group member in the API request. A group member can be a
+-- user or another group. The value can be the member\'s (group or user)
+-- primary email address, alias, or unique ID.
 mgMemberKey :: Lens' MembersGet Text
 mgMemberKey
   = lens _mgMemberKey (\ s a -> s{_mgMemberKey = a})
 
--- | Email or immutable ID of the group
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mgUploadProtocol :: Lens' MembersGet (Maybe Text)
+mgUploadProtocol
+  = lens _mgUploadProtocol
+      (\ s a -> s{_mgUploadProtocol = a})
+
+-- | OAuth access token.
+mgAccessToken :: Lens' MembersGet (Maybe Text)
+mgAccessToken
+  = lens _mgAccessToken
+      (\ s a -> s{_mgAccessToken = a})
+
+-- | Identifies the group in the API request. The value can be the group\'s
+-- email address, group alias, or the unique group ID.
 mgGroupKey :: Lens' MembersGet Text
 mgGroupKey
   = lens _mgGroupKey (\ s a -> s{_mgGroupKey = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mgUploadType :: Lens' MembersGet (Maybe Text)
+mgUploadType
+  = lens _mgUploadType (\ s a -> s{_mgUploadType = a})
+
+-- | JSONP
+mgCallback :: Lens' MembersGet (Maybe Text)
+mgCallback
+  = lens _mgCallback (\ s a -> s{_mgCallback = a})
 
 instance GoogleRequest MembersGet where
         type Rs MembersGet = Member
@@ -96,7 +158,12 @@ instance GoogleRequest MembersGet where
                "https://www.googleapis.com/auth/admin.directory.group.member.readonly",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
         requestClient MembersGet'{..}
-          = go _mgGroupKey _mgMemberKey (Just AltJSON)
+          = go _mgGroupKey _mgMemberKey _mgXgafv
+              _mgUploadProtocol
+              _mgAccessToken
+              _mgUploadType
+              _mgCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy MembersGetResource)

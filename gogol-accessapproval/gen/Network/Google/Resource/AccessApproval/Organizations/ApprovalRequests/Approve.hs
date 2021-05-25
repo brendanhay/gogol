@@ -44,13 +44,13 @@ module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.App
     , oaraCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.organizations.approvalRequests.approve@ method which the
 -- 'OrganizationsApprovalRequestsApprove' request conforms to.
 type OrganizationsApprovalRequestsApproveResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "approve" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -68,13 +68,13 @@ type OrganizationsApprovalRequestsApproveResource =
 -- /See:/ 'organizationsApprovalRequestsApprove' smart constructor.
 data OrganizationsApprovalRequestsApprove =
   OrganizationsApprovalRequestsApprove'
-    { _oaraXgafv          :: !(Maybe Xgafv)
+    { _oaraXgafv :: !(Maybe Xgafv)
     , _oaraUploadProtocol :: !(Maybe Text)
-    , _oaraAccessToken    :: !(Maybe Text)
-    , _oaraUploadType     :: !(Maybe Text)
-    , _oaraPayload        :: !ApproveApprovalRequestMessage
-    , _oaraName           :: !Text
-    , _oaraCallback       :: !(Maybe Text)
+    , _oaraAccessToken :: !(Maybe Text)
+    , _oaraUploadType :: !(Maybe Text)
+    , _oaraPayload :: !ApproveApprovalRequestMessage
+    , _oaraName :: !Text
+    , _oaraCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

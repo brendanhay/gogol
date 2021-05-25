@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.BindDevice
     , plrbdtgCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.bindDeviceToGateway@ method which the
 -- 'ProjectsLocationsRegistriesBindDeviceToGateway' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsLocationsRegistriesBindDeviceToGatewayResource
 -- /See:/ 'projectsLocationsRegistriesBindDeviceToGateway' smart constructor.
 data ProjectsLocationsRegistriesBindDeviceToGateway =
   ProjectsLocationsRegistriesBindDeviceToGateway'
-    { _plrbdtgParent         :: !Text
-    , _plrbdtgXgafv          :: !(Maybe Xgafv)
+    { _plrbdtgParent :: !Text
+    , _plrbdtgXgafv :: !(Maybe Xgafv)
     , _plrbdtgUploadProtocol :: !(Maybe Text)
-    , _plrbdtgAccessToken    :: !(Maybe Text)
-    , _plrbdtgUploadType     :: !(Maybe Text)
-    , _plrbdtgPayload        :: !BindDeviceToGatewayRequest
-    , _plrbdtgCallback       :: !(Maybe Text)
+    , _plrbdtgAccessToken :: !(Maybe Text)
+    , _plrbdtgUploadType :: !(Maybe Text)
+    , _plrbdtgPayload :: !BindDeviceToGatewayRequest
+    , _plrbdtgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,7 +109,7 @@ projectsLocationsRegistriesBindDeviceToGateway pPlrbdtgParent_ pPlrbdtgPayload_ 
     }
 
 
--- | The name of the registry. For example,
+-- | Required. The name of the registry. For example,
 -- \`projects\/example-project\/locations\/us-central1\/registries\/my-registry\`.
 plrbdtgParent :: Lens' ProjectsLocationsRegistriesBindDeviceToGateway Text
 plrbdtgParent

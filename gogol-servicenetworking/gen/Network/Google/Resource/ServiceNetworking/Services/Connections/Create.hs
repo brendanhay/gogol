@@ -26,9 +26,7 @@
 -- method. The administrator must assign one or more allocated IP ranges
 -- for provisioning subnetworks in the service producer\'s VPC network.
 -- This connection is used for all supported services in the service
--- producer\'s organization, so it only needs to be invoked once. The
--- response from the \`get\` operation will be of type \`Connection\` if
--- the operation successfully completes.
+-- producer\'s organization, so it only needs to be invoked once.
 --
 -- /See:/ <https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started Service Networking API Reference> for @servicenetworking.services.connections.create@.
 module Network.Google.Resource.ServiceNetworking.Services.Connections.Create
@@ -50,8 +48,8 @@ module Network.Google.Resource.ServiceNetworking.Services.Connections.Create
     , sccCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceNetworking.Types
+import Network.Google.Prelude
+import Network.Google.ServiceNetworking.Types
 
 -- | A resource alias for @servicenetworking.services.connections.create@ method which the
 -- 'ServicesConnectionsCreate' request conforms to.
@@ -73,20 +71,18 @@ type ServicesConnectionsCreateResource =
 -- method. The administrator must assign one or more allocated IP ranges
 -- for provisioning subnetworks in the service producer\'s VPC network.
 -- This connection is used for all supported services in the service
--- producer\'s organization, so it only needs to be invoked once. The
--- response from the \`get\` operation will be of type \`Connection\` if
--- the operation successfully completes.
+-- producer\'s organization, so it only needs to be invoked once.
 --
 -- /See:/ 'servicesConnectionsCreate' smart constructor.
 data ServicesConnectionsCreate =
   ServicesConnectionsCreate'
-    { _sccParent         :: !Text
-    , _sccXgafv          :: !(Maybe Xgafv)
+    { _sccParent :: !Text
+    , _sccXgafv :: !(Maybe Xgafv)
     , _sccUploadProtocol :: !(Maybe Text)
-    , _sccAccessToken    :: !(Maybe Text)
-    , _sccUploadType     :: !(Maybe Text)
-    , _sccPayload        :: !Connection
-    , _sccCallback       :: !(Maybe Text)
+    , _sccAccessToken :: !(Maybe Text)
+    , _sccUploadType :: !(Maybe Text)
+    , _sccPayload :: !Connection
+    , _sccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

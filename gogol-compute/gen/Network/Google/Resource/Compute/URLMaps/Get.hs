@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.URLMaps.Get
     , umgProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.get@ method which the
 -- 'URLMapsGet' request conforms to.
@@ -59,7 +59,7 @@ type URLMapsGetResource =
 -- /See:/ 'urlMapsGet' smart constructor.
 data URLMapsGet =
   URLMapsGet'
-    { _umgURLMap  :: !Text
+    { _umgURLMap :: !Text
     , _umgProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

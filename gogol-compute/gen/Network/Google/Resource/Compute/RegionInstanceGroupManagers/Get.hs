@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
     , rigmgRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.get@ method which the
 -- 'RegionInstanceGroupManagersGet' request conforms to.
@@ -60,9 +60,9 @@ type RegionInstanceGroupManagersGetResource =
 -- /See:/ 'regionInstanceGroupManagersGet' smart constructor.
 data RegionInstanceGroupManagersGet =
   RegionInstanceGroupManagersGet'
-    { _rigmgProject              :: !Text
+    { _rigmgProject :: !Text
     , _rigmgInstanceGroupManager :: !Text
-    , _rigmgRegion               :: !Text
+    , _rigmgRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

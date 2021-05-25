@@ -41,6 +41,7 @@ module Network.Google.Resource.Drive.Changes.Watch
     , cwSpaces
     , cwIncludeItemsFromAllDrives
     , cwSupportsAllDrives
+    , cwIncludePermissionsForView
     , cwPageToken
     , cwPageSize
     , cwIncludeRemoved
@@ -48,8 +49,8 @@ module Network.Google.Resource.Drive.Changes.Watch
     , cwDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.changes.watch@ method which the
 -- 'ChangesWatch' request conforms to.
@@ -66,32 +67,34 @@ type ChangesWatchResource =
                        QueryParam "spaces" Text :>
                          QueryParam "includeItemsFromAllDrives" Bool :>
                            QueryParam "supportsAllDrives" Bool :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "includeRemoved" Bool :>
-                                 QueryParam "supportsTeamDrives" Bool :>
-                                   QueryParam "driveId" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       ReqBody '[JSON] Channel :>
-                                         Post '[JSON] Channel
+                             QueryParam "includePermissionsForView" Text :>
+                               QueryParam "pageSize" (Textual Int32) :>
+                                 QueryParam "includeRemoved" Bool :>
+                                   QueryParam "supportsTeamDrives" Bool :>
+                                     QueryParam "driveId" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Channel :>
+                                           Post '[JSON] Channel
 
 -- | Subscribes to changes for a user.
 --
 -- /See:/ 'changesWatch' smart constructor.
 data ChangesWatch =
   ChangesWatch'
-    { _cwIncludeTeamDriveItems     :: !Bool
-    , _cwPayload                   :: !Channel
-    , _cwIncludeCorpusRemovals     :: !Bool
-    , _cwTeamDriveId               :: !(Maybe Text)
-    , _cwRestrictToMyDrive         :: !Bool
-    , _cwSpaces                    :: !Text
+    { _cwIncludeTeamDriveItems :: !Bool
+    , _cwPayload :: !Channel
+    , _cwIncludeCorpusRemovals :: !Bool
+    , _cwTeamDriveId :: !(Maybe Text)
+    , _cwRestrictToMyDrive :: !Bool
+    , _cwSpaces :: !Text
     , _cwIncludeItemsFromAllDrives :: !Bool
-    , _cwSupportsAllDrives         :: !Bool
-    , _cwPageToken                 :: !Text
-    , _cwPageSize                  :: !(Textual Int32)
-    , _cwIncludeRemoved            :: !Bool
-    , _cwSupportsTeamDrives        :: !Bool
-    , _cwDriveId                   :: !(Maybe Text)
+    , _cwSupportsAllDrives :: !Bool
+    , _cwIncludePermissionsForView :: !(Maybe Text)
+    , _cwPageToken :: !Text
+    , _cwPageSize :: !(Textual Int32)
+    , _cwIncludeRemoved :: !Bool
+    , _cwSupportsTeamDrives :: !Bool
+    , _cwDriveId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,6 +119,8 @@ data ChangesWatch =
 --
 -- * 'cwSupportsAllDrives'
 --
+-- * 'cwIncludePermissionsForView'
+--
 -- * 'cwPageToken'
 --
 -- * 'cwPageSize'
@@ -139,6 +144,7 @@ changesWatch pCwPayload_ pCwPageToken_ =
     , _cwSpaces = "drive"
     , _cwIncludeItemsFromAllDrives = False
     , _cwSupportsAllDrives = False
+    , _cwIncludePermissionsForView = Nothing
     , _cwPageToken = pCwPageToken_
     , _cwPageSize = 100
     , _cwIncludeRemoved = True
@@ -200,6 +206,13 @@ cwSupportsAllDrives
   = lens _cwSupportsAllDrives
       (\ s a -> s{_cwSupportsAllDrives = a})
 
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+cwIncludePermissionsForView :: Lens' ChangesWatch (Maybe Text)
+cwIncludePermissionsForView
+  = lens _cwIncludePermissionsForView
+      (\ s a -> s{_cwIncludePermissionsForView = a})
+
 -- | The token for continuing a previous list request on the next page. This
 -- should be set to the value of \'nextPageToken\' from the previous
 -- response or to the response from the getStartPageToken method.
@@ -226,7 +239,7 @@ cwSupportsTeamDrives
   = lens _cwSupportsTeamDrives
       (\ s a -> s{_cwSupportsTeamDrives = a})
 
--- | The shared drive from which changes will be returned. If specified the
+-- | The shared drive from which changes are returned. If specified the
 -- change IDs will be reflective of the shared drive; use the combined
 -- drive ID and change ID as an identifier.
 cwDriveId :: Lens' ChangesWatch (Maybe Text)
@@ -252,6 +265,7 @@ instance GoogleRequest ChangesWatch where
               (Just _cwSpaces)
               (Just _cwIncludeItemsFromAllDrives)
               (Just _cwSupportsAllDrives)
+              _cwIncludePermissionsForView
               (Just _cwPageSize)
               (Just _cwIncludeRemoved)
               (Just _cwSupportsTeamDrives)

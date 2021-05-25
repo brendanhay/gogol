@@ -49,8 +49,8 @@ module Network.Google.Resource.BigtableAdmin.Operations.Cancel
     , ocCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.operations.cancel@ method which the
 -- 'OperationsCancel' request conforms to.
@@ -77,12 +77,12 @@ type OperationsCancelResource =
 -- /See:/ 'operationsCancel' smart constructor.
 data OperationsCancel =
   OperationsCancel'
-    { _ocXgafv          :: !(Maybe Xgafv)
+    { _ocXgafv :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
-    , _ocAccessToken    :: !(Maybe Text)
-    , _ocUploadType     :: !(Maybe Text)
-    , _ocName           :: !Text
-    , _ocCallback       :: !(Maybe Text)
+    , _ocAccessToken :: !(Maybe Text)
+    , _ocUploadType :: !(Maybe Text)
+    , _ocName :: !Text
+    , _ocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -52,8 +52,8 @@ module Network.Google.Resource.AppEngine.Apps.Operations.List
     , aolCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.operations.list@ method which the
 -- 'AppsOperationsList' request conforms to.
@@ -86,15 +86,15 @@ type AppsOperationsListResource =
 -- /See:/ 'appsOperationsList' smart constructor.
 data AppsOperationsList =
   AppsOperationsList'
-    { _aolXgafv          :: !(Maybe Xgafv)
+    { _aolXgafv :: !(Maybe Xgafv)
     , _aolUploadProtocol :: !(Maybe Text)
-    , _aolAccessToken    :: !(Maybe Text)
-    , _aolUploadType     :: !(Maybe Text)
-    , _aolAppsId         :: !Text
-    , _aolFilter         :: !(Maybe Text)
-    , _aolPageToken      :: !(Maybe Text)
-    , _aolPageSize       :: !(Maybe (Textual Int32))
-    , _aolCallback       :: !(Maybe Text)
+    , _aolAccessToken :: !(Maybe Text)
+    , _aolUploadType :: !(Maybe Text)
+    , _aolAppsId :: !Text
+    , _aolFilter :: !(Maybe Text)
+    , _aolPageToken :: !(Maybe Text)
+    , _aolPageSize :: !(Maybe (Textual Int32))
+    , _aolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

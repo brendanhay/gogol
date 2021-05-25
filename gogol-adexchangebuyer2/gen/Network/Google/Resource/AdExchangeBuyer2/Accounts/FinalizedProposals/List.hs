@@ -47,8 +47,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.FinalizedProposals.List
     , afplCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.finalizedProposals.list@ method which the
 -- 'AccountsFinalizedProposalsList' request conforms to.
@@ -61,7 +61,9 @@ type AccountsFinalizedProposalsListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "filterSyntax" Text :>
+                     QueryParam "filterSyntax"
+                       AccountsFinalizedProposalsListFilterSyntax
+                       :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" (Textual Int32) :>
@@ -76,16 +78,16 @@ type AccountsFinalizedProposalsListResource =
 -- /See:/ 'accountsFinalizedProposalsList' smart constructor.
 data AccountsFinalizedProposalsList =
   AccountsFinalizedProposalsList'
-    { _afplXgafv          :: !(Maybe Xgafv)
+    { _afplXgafv :: !(Maybe Xgafv)
     , _afplUploadProtocol :: !(Maybe Text)
-    , _afplAccessToken    :: !(Maybe Text)
-    , _afplUploadType     :: !(Maybe Text)
-    , _afplFilterSyntax   :: !(Maybe Text)
-    , _afplAccountId      :: !Text
-    , _afplFilter         :: !(Maybe Text)
-    , _afplPageToken      :: !(Maybe Text)
-    , _afplPageSize       :: !(Maybe (Textual Int32))
-    , _afplCallback       :: !(Maybe Text)
+    , _afplAccessToken :: !(Maybe Text)
+    , _afplUploadType :: !(Maybe Text)
+    , _afplFilterSyntax :: !(Maybe AccountsFinalizedProposalsListFilterSyntax)
+    , _afplAccountId :: !Text
+    , _afplFilter :: !(Maybe Text)
+    , _afplPageToken :: !(Maybe Text)
+    , _afplPageSize :: !(Maybe (Textual Int32))
+    , _afplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -156,7 +158,7 @@ afplUploadType
 
 -- | Syntax the filter is written in. Current implementation defaults to PQL
 -- but in the future it will be LIST_FILTER.
-afplFilterSyntax :: Lens' AccountsFinalizedProposalsList (Maybe Text)
+afplFilterSyntax :: Lens' AccountsFinalizedProposalsList (Maybe AccountsFinalizedProposalsListFilterSyntax)
 afplFilterSyntax
   = lens _afplFilterSyntax
       (\ s a -> s{_afplFilterSyntax = a})

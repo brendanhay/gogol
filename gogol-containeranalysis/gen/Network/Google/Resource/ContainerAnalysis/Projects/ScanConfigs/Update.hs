@@ -42,8 +42,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.ScanConfigs.Update
     , pscuCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.scanConfigs.update@ method which the
 -- 'ProjectsScanConfigsUpdate' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsScanConfigsUpdateResource =
 -- /See:/ 'projectsScanConfigsUpdate' smart constructor.
 data ProjectsScanConfigsUpdate =
   ProjectsScanConfigsUpdate'
-    { _pscuXgafv          :: !(Maybe Xgafv)
+    { _pscuXgafv :: !(Maybe Xgafv)
     , _pscuUploadProtocol :: !(Maybe Text)
-    , _pscuAccessToken    :: !(Maybe Text)
-    , _pscuUploadType     :: !(Maybe Text)
-    , _pscuPayload        :: !ScanConfig
-    , _pscuName           :: !Text
-    , _pscuCallback       :: !(Maybe Text)
+    , _pscuAccessToken :: !(Maybe Text)
+    , _pscuUploadType :: !(Maybe Text)
+    , _pscuPayload :: !ScanConfig
+    , _pscuName :: !Text
+    , _pscuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,7 +135,7 @@ pscuPayload :: Lens' ProjectsScanConfigsUpdate ScanConfig
 pscuPayload
   = lens _pscuPayload (\ s a -> s{_pscuPayload = a})
 
--- | The name of the scan configuration in the form of
+-- | Required. The name of the scan configuration in the form of
 -- \`projects\/[PROJECT_ID]\/scanConfigs\/[SCAN_CONFIG_ID]\`.
 pscuName :: Lens' ProjectsScanConfigsUpdate Text
 pscuName = lens _pscuName (\ s a -> s{_pscuName = a})

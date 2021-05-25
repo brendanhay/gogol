@@ -25,7 +25,7 @@
 -- DeleteCatalogRequest.force is true. The delete operation can be
 -- recovered by the PrivateCatalogProducer.UndeleteCatalog method.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.delete@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.delete@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
     , cdCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.delete@ method which the
 -- 'CatalogsDelete' request conforms to.
@@ -71,13 +71,13 @@ type CatalogsDeleteResource =
 -- /See:/ 'catalogsDelete' smart constructor.
 data CatalogsDelete =
   CatalogsDelete'
-    { _cdXgafv          :: !(Maybe Xgafv)
+    { _cdXgafv :: !(Maybe Xgafv)
     , _cdUploadProtocol :: !(Maybe Text)
-    , _cdForce          :: !(Maybe Bool)
-    , _cdAccessToken    :: !(Maybe Text)
-    , _cdUploadType     :: !(Maybe Text)
-    , _cdName           :: !Text
-    , _cdCallback       :: !(Maybe Text)
+    , _cdForce :: !(Maybe Bool)
+    , _cdAccessToken :: !(Maybe Text)
+    , _cdUploadType :: !(Maybe Text)
+    , _cdName :: !Text
+    , _cdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

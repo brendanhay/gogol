@@ -22,7 +22,7 @@
 --
 -- Batches multiple POS-related calls in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.pos.custombatch@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.pos.custombatch@.
 module Network.Google.Resource.Content.Pos.Custombatch
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Content.Pos.Custombatch
     , PosCustombatch
 
     -- * Request Lenses
-    , pPayload
+    , posXgafv
+    , posUploadProtocol
+    , posAccessToken
+    , posUploadType
+    , posPayload
+    , posCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.pos.custombatch@ method which the
 -- 'PosCustombatch' request conforms to.
@@ -46,16 +51,26 @@ type PosCustombatchResource =
        "v2.1" :>
          "pos" :>
            "batch" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] PosCustomBatchRequest :>
-                 Post '[JSON] PosCustomBatchResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] PosCustomBatchRequest :>
+                           Post '[JSON] PosCustomBatchResponse
 
 -- | Batches multiple POS-related calls in a single request.
 --
 -- /See:/ 'posCustombatch' smart constructor.
-newtype PosCustombatch =
+data PosCustombatch =
   PosCustombatch'
-    { _pPayload :: PosCustomBatchRequest
+    { _posXgafv :: !(Maybe Xgafv)
+    , _posUploadProtocol :: !(Maybe Text)
+    , _posAccessToken :: !(Maybe Text)
+    , _posUploadType :: !(Maybe Text)
+    , _posPayload :: !PosCustomBatchRequest
+    , _posCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,23 +79,74 @@ newtype PosCustombatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pPayload'
+-- * 'posXgafv'
+--
+-- * 'posUploadProtocol'
+--
+-- * 'posAccessToken'
+--
+-- * 'posUploadType'
+--
+-- * 'posPayload'
+--
+-- * 'posCallback'
 posCustombatch
-    :: PosCustomBatchRequest -- ^ 'pPayload'
+    :: PosCustomBatchRequest -- ^ 'posPayload'
     -> PosCustombatch
-posCustombatch pPPayload_ = PosCustombatch' {_pPayload = pPPayload_}
+posCustombatch pPosPayload_ =
+  PosCustombatch'
+    { _posXgafv = Nothing
+    , _posUploadProtocol = Nothing
+    , _posAccessToken = Nothing
+    , _posUploadType = Nothing
+    , _posPayload = pPosPayload_
+    , _posCallback = Nothing
+    }
 
+
+-- | V1 error format.
+posXgafv :: Lens' PosCustombatch (Maybe Xgafv)
+posXgafv = lens _posXgafv (\ s a -> s{_posXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+posUploadProtocol :: Lens' PosCustombatch (Maybe Text)
+posUploadProtocol
+  = lens _posUploadProtocol
+      (\ s a -> s{_posUploadProtocol = a})
+
+-- | OAuth access token.
+posAccessToken :: Lens' PosCustombatch (Maybe Text)
+posAccessToken
+  = lens _posAccessToken
+      (\ s a -> s{_posAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+posUploadType :: Lens' PosCustombatch (Maybe Text)
+posUploadType
+  = lens _posUploadType
+      (\ s a -> s{_posUploadType = a})
 
 -- | Multipart request metadata.
-pPayload :: Lens' PosCustombatch PosCustomBatchRequest
-pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
+posPayload :: Lens' PosCustombatch PosCustomBatchRequest
+posPayload
+  = lens _posPayload (\ s a -> s{_posPayload = a})
+
+-- | JSONP
+posCallback :: Lens' PosCustombatch (Maybe Text)
+posCallback
+  = lens _posCallback (\ s a -> s{_posCallback = a})
 
 instance GoogleRequest PosCustombatch where
         type Rs PosCustombatch = PosCustomBatchResponse
         type Scopes PosCustombatch =
              '["https://www.googleapis.com/auth/content"]
         requestClient PosCustombatch'{..}
-          = go (Just AltJSON) _pPayload shoppingContentService
+          = go _posXgafv _posUploadProtocol _posAccessToken
+              _posUploadType
+              _posCallback
+              (Just AltJSON)
+              _posPayload
+              shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy PosCustombatchResource)
                       mempty

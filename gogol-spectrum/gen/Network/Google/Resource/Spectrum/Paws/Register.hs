@@ -37,8 +37,8 @@ module Network.Google.Resource.Spectrum.Paws.Register
     , prPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spectrum.Types
+import Network.Google.Prelude
+import Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.register@ method which the
 -- 'PawsRegister' request conforms to.

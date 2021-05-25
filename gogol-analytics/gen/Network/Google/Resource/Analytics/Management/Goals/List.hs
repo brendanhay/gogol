@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.Goals.List
     , mglMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.list@ method which the
 -- 'ManagementGoalsList' request conforms to.
@@ -66,10 +66,10 @@ type ManagementGoalsListResource =
 data ManagementGoalsList =
   ManagementGoalsList'
     { _mglWebPropertyId :: !Text
-    , _mglProFileId     :: !Text
-    , _mglAccountId     :: !Text
-    , _mglStartIndex    :: !(Maybe (Textual Int32))
-    , _mglMaxResults    :: !(Maybe (Textual Int32))
+    , _mglProFileId :: !Text
+    , _mglAccountId :: !Text
+    , _mglStartIndex :: !(Maybe (Textual Int32))
+    , _mglMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

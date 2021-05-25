@@ -46,8 +46,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollb
     , pzcnprCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.rollback@ method which the
 -- 'ProjectsZonesClustersNodePoolsRollback' request conforms to.
@@ -77,16 +77,16 @@ type ProjectsZonesClustersNodePoolsRollbackResource =
 -- /See:/ 'projectsZonesClustersNodePoolsRollback' smart constructor.
 data ProjectsZonesClustersNodePoolsRollback =
   ProjectsZonesClustersNodePoolsRollback'
-    { _pzcnprXgafv          :: !(Maybe Xgafv)
+    { _pzcnprXgafv :: !(Maybe Xgafv)
     , _pzcnprUploadProtocol :: !(Maybe Text)
-    , _pzcnprAccessToken    :: !(Maybe Text)
-    , _pzcnprUploadType     :: !(Maybe Text)
-    , _pzcnprZone           :: !Text
-    , _pzcnprPayload        :: !RollbackNodePoolUpgradeRequest
-    , _pzcnprNodePoolId     :: !Text
-    , _pzcnprClusterId      :: !Text
-    , _pzcnprProjectId      :: !Text
-    , _pzcnprCallback       :: !(Maybe Text)
+    , _pzcnprAccessToken :: !(Maybe Text)
+    , _pzcnprUploadType :: !(Maybe Text)
+    , _pzcnprZone :: !Text
+    , _pzcnprPayload :: !RollbackNodePoolUpgradeRequest
+    , _pzcnprNodePoolId :: !Text
+    , _pzcnprClusterId :: !Text
+    , _pzcnprProjectId :: !Text
+    , _pzcnprCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,8 +160,9 @@ pzcnprUploadType
       (\ s a -> s{_pzcnprUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcnprZone :: Lens' ProjectsZonesClustersNodePoolsRollback Text
 pzcnprZone
   = lens _pzcnprZone (\ s a -> s{_pzcnprZone = a})

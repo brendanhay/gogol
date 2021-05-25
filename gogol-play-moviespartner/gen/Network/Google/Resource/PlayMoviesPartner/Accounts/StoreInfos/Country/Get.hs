@@ -47,8 +47,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     , asicgCallback
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.country.get@ method which the
 -- 'AccountsStoreInfosCountryGet' request conforms to.
@@ -77,16 +77,16 @@ type AccountsStoreInfosCountryGetResource =
 -- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
 data AccountsStoreInfosCountryGet =
   AccountsStoreInfosCountryGet'
-    { _asicgXgafv          :: !(Maybe Xgafv)
+    { _asicgXgafv :: !(Maybe Xgafv)
     , _asicgUploadProtocol :: !(Maybe Text)
-    , _asicgCountry        :: !Text
-    , _asicgPp             :: !Bool
-    , _asicgAccessToken    :: !(Maybe Text)
-    , _asicgUploadType     :: !(Maybe Text)
-    , _asicgVideoId        :: !Text
-    , _asicgAccountId      :: !Text
-    , _asicgBearerToken    :: !(Maybe Text)
-    , _asicgCallback       :: !(Maybe Text)
+    , _asicgCountry :: !Text
+    , _asicgPp :: !Bool
+    , _asicgAccessToken :: !(Maybe Text)
+    , _asicgUploadType :: !(Maybe Text)
+    , _asicgVideoId :: !Text
+    , _asicgAccountId :: !Text
+    , _asicgBearerToken :: !(Maybe Text)
+    , _asicgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

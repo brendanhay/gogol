@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Get
     , edgCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.get@ method which the
 -- 'EnterprisesDevicesGet' request conforms to.
@@ -61,12 +61,12 @@ type EnterprisesDevicesGetResource =
 -- /See:/ 'enterprisesDevicesGet' smart constructor.
 data EnterprisesDevicesGet =
   EnterprisesDevicesGet'
-    { _edgXgafv          :: !(Maybe Xgafv)
+    { _edgXgafv :: !(Maybe Xgafv)
     , _edgUploadProtocol :: !(Maybe Text)
-    , _edgAccessToken    :: !(Maybe Text)
-    , _edgUploadType     :: !(Maybe Text)
-    , _edgName           :: !Text
-    , _edgCallback       :: !(Maybe Text)
+    , _edgAccessToken :: !(Maybe Text)
+    , _edgUploadType :: !(Maybe Text)
+    , _edgName :: !Text
+    , _edgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

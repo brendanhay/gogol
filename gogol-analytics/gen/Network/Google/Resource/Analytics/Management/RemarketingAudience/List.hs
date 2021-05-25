@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.RemarketingAudience.List
     , mralMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.remarketingAudience.list@ method which the
 -- 'ManagementRemarketingAudienceList' request conforms to.
@@ -66,10 +66,10 @@ type ManagementRemarketingAudienceListResource =
 data ManagementRemarketingAudienceList =
   ManagementRemarketingAudienceList'
     { _mralWebPropertyId :: !Text
-    , _mralAccountId     :: !Text
-    , _mralType          :: !Text
-    , _mralStartIndex    :: !(Maybe (Textual Int32))
-    , _mralMaxResults    :: !(Maybe (Textual Int32))
+    , _mralAccountId :: !Text
+    , _mralType :: !Text
+    , _mralStartIndex :: !(Maybe (Textual Int32))
+    , _mralMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

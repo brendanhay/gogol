@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
     , pcgConfigId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.get@ method which the
 -- 'PretargetingConfigGet' request conforms to.
@@ -57,7 +57,7 @@ type PretargetingConfigGetResource =
 data PretargetingConfigGet =
   PretargetingConfigGet'
     { _pcgAccountId :: !(Textual Int64)
-    , _pcgConfigId  :: !(Textual Int64)
+    , _pcgConfigId :: !(Textual Int64)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

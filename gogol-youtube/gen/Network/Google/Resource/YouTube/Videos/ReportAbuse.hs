@@ -22,7 +22,7 @@
 --
 -- Report abuse for a video.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.reportAbuse@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videos.reportAbuse@.
 module Network.Google.Resource.YouTube.Videos.ReportAbuse
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
     , VideosReportAbuse
 
     -- * Request Lenses
+    , vraXgafv
+    , vraUploadProtocol
+    , vraAccessToken
+    , vraUploadType
     , vraPayload
     , vraOnBehalfOfContentOwner
+    , vraCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.reportAbuse@ method which the
 -- 'VideosReportAbuse' request conforms to.
@@ -47,17 +52,27 @@ type VideosReportAbuseResource =
        "v3" :>
          "videos" :>
            "reportAbuse" :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
 
 -- | Report abuse for a video.
 --
 -- /See:/ 'videosReportAbuse' smart constructor.
 data VideosReportAbuse =
   VideosReportAbuse'
-    { _vraPayload                :: !VideoAbuseReport
+    { _vraXgafv :: !(Maybe Xgafv)
+    , _vraUploadProtocol :: !(Maybe Text)
+    , _vraAccessToken :: !(Maybe Text)
+    , _vraUploadType :: !(Maybe Text)
+    , _vraPayload :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
+    , _vraCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,24 +81,63 @@ data VideosReportAbuse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vraXgafv'
+--
+-- * 'vraUploadProtocol'
+--
+-- * 'vraAccessToken'
+--
+-- * 'vraUploadType'
+--
 -- * 'vraPayload'
 --
 -- * 'vraOnBehalfOfContentOwner'
+--
+-- * 'vraCallback'
 videosReportAbuse
     :: VideoAbuseReport -- ^ 'vraPayload'
     -> VideosReportAbuse
 videosReportAbuse pVraPayload_ =
   VideosReportAbuse'
-    {_vraPayload = pVraPayload_, _vraOnBehalfOfContentOwner = Nothing}
+    { _vraXgafv = Nothing
+    , _vraUploadProtocol = Nothing
+    , _vraAccessToken = Nothing
+    , _vraUploadType = Nothing
+    , _vraPayload = pVraPayload_
+    , _vraOnBehalfOfContentOwner = Nothing
+    , _vraCallback = Nothing
+    }
 
+
+-- | V1 error format.
+vraXgafv :: Lens' VideosReportAbuse (Maybe Xgafv)
+vraXgafv = lens _vraXgafv (\ s a -> s{_vraXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vraUploadProtocol :: Lens' VideosReportAbuse (Maybe Text)
+vraUploadProtocol
+  = lens _vraUploadProtocol
+      (\ s a -> s{_vraUploadProtocol = a})
+
+-- | OAuth access token.
+vraAccessToken :: Lens' VideosReportAbuse (Maybe Text)
+vraAccessToken
+  = lens _vraAccessToken
+      (\ s a -> s{_vraAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vraUploadType :: Lens' VideosReportAbuse (Maybe Text)
+vraUploadType
+  = lens _vraUploadType
+      (\ s a -> s{_vraUploadType = a})
 
 -- | Multipart request metadata.
 vraPayload :: Lens' VideosReportAbuse VideoAbuseReport
 vraPayload
   = lens _vraPayload (\ s a -> s{_vraPayload = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -97,6 +151,11 @@ vraOnBehalfOfContentOwner
   = lens _vraOnBehalfOfContentOwner
       (\ s a -> s{_vraOnBehalfOfContentOwner = a})
 
+-- | JSONP
+vraCallback :: Lens' VideosReportAbuse (Maybe Text)
+vraCallback
+  = lens _vraCallback (\ s a -> s{_vraCallback = a})
+
 instance GoogleRequest VideosReportAbuse where
         type Rs VideosReportAbuse = ()
         type Scopes VideosReportAbuse =
@@ -104,7 +163,11 @@ instance GoogleRequest VideosReportAbuse where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosReportAbuse'{..}
-          = go _vraOnBehalfOfContentOwner (Just AltJSON)
+          = go _vraXgafv _vraUploadProtocol _vraAccessToken
+              _vraUploadType
+              _vraOnBehalfOfContentOwner
+              _vraCallback
+              (Just AltJSON)
               _vraPayload
               youTubeService
           where go

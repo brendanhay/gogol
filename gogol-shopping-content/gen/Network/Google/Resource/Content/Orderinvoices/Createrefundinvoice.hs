@@ -22,11 +22,11 @@
 --
 -- Creates a refund invoice for one or more shipment groups, and triggers a
 -- refund for orderinvoice enabled orders. This can only be used for line
--- items that have previously been charged using createChargeInvoice. All
--- amounts (except for the summary) are incremental with respect to the
+-- items that have previously been charged using \`createChargeInvoice\`.
+-- All amounts (except for the summary) are incremental with respect to the
 -- previous invoice.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderinvoices.createrefundinvoice@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orderinvoices.createrefundinvoice@.
 module Network.Google.Resource.Content.Orderinvoices.Createrefundinvoice
     (
     -- * REST Resource
@@ -37,13 +37,18 @@ module Network.Google.Resource.Content.Orderinvoices.Createrefundinvoice
     , OrderinvoicesCreaterefundinvoice
 
     -- * Request Lenses
+    , ocXgafv
     , ocMerchantId
+    , ocUploadProtocol
+    , ocAccessToken
+    , ocUploadType
     , ocPayload
     , ocOrderId
+    , ocCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orderinvoices.createrefundinvoice@ method which the
 -- 'OrderinvoicesCreaterefundinvoice' request conforms to.
@@ -54,24 +59,35 @@ type OrderinvoicesCreaterefundinvoiceResource =
            "orderinvoices" :>
              Capture "orderId" Text :>
                "createRefundInvoice" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON]
-                     OrderinvoicesCreateRefundInvoiceRequest
-                     :>
-                     Post '[JSON] OrderinvoicesCreateRefundInvoiceResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON]
+                               OrderinvoicesCreateRefundInvoiceRequest
+                               :>
+                               Post '[JSON]
+                                 OrderinvoicesCreateRefundInvoiceResponse
 
 -- | Creates a refund invoice for one or more shipment groups, and triggers a
 -- refund for orderinvoice enabled orders. This can only be used for line
--- items that have previously been charged using createChargeInvoice. All
--- amounts (except for the summary) are incremental with respect to the
+-- items that have previously been charged using \`createChargeInvoice\`.
+-- All amounts (except for the summary) are incremental with respect to the
 -- previous invoice.
 --
 -- /See:/ 'orderinvoicesCreaterefundinvoice' smart constructor.
 data OrderinvoicesCreaterefundinvoice =
   OrderinvoicesCreaterefundinvoice'
-    { _ocMerchantId :: !(Textual Word64)
-    , _ocPayload    :: !OrderinvoicesCreateRefundInvoiceRequest
-    , _ocOrderId    :: !Text
+    { _ocXgafv :: !(Maybe Xgafv)
+    , _ocMerchantId :: !(Textual Word64)
+    , _ocUploadProtocol :: !(Maybe Text)
+    , _ocAccessToken :: !(Maybe Text)
+    , _ocUploadType :: !(Maybe Text)
+    , _ocPayload :: !OrderinvoicesCreateRefundInvoiceRequest
+    , _ocOrderId :: !Text
+    , _ocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,11 +96,21 @@ data OrderinvoicesCreaterefundinvoice =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ocXgafv'
+--
 -- * 'ocMerchantId'
+--
+-- * 'ocUploadProtocol'
+--
+-- * 'ocAccessToken'
+--
+-- * 'ocUploadType'
 --
 -- * 'ocPayload'
 --
 -- * 'ocOrderId'
+--
+-- * 'ocCallback'
 orderinvoicesCreaterefundinvoice
     :: Word64 -- ^ 'ocMerchantId'
     -> OrderinvoicesCreateRefundInvoiceRequest -- ^ 'ocPayload'
@@ -92,11 +118,20 @@ orderinvoicesCreaterefundinvoice
     -> OrderinvoicesCreaterefundinvoice
 orderinvoicesCreaterefundinvoice pOcMerchantId_ pOcPayload_ pOcOrderId_ =
   OrderinvoicesCreaterefundinvoice'
-    { _ocMerchantId = _Coerce # pOcMerchantId_
+    { _ocXgafv = Nothing
+    , _ocMerchantId = _Coerce # pOcMerchantId_
+    , _ocUploadProtocol = Nothing
+    , _ocAccessToken = Nothing
+    , _ocUploadType = Nothing
     , _ocPayload = pOcPayload_
     , _ocOrderId = pOcOrderId_
+    , _ocCallback = Nothing
     }
 
+
+-- | V1 error format.
+ocXgafv :: Lens' OrderinvoicesCreaterefundinvoice (Maybe Xgafv)
+ocXgafv = lens _ocXgafv (\ s a -> s{_ocXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -104,6 +139,23 @@ ocMerchantId :: Lens' OrderinvoicesCreaterefundinvoice Word64
 ocMerchantId
   = lens _ocMerchantId (\ s a -> s{_ocMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ocUploadProtocol :: Lens' OrderinvoicesCreaterefundinvoice (Maybe Text)
+ocUploadProtocol
+  = lens _ocUploadProtocol
+      (\ s a -> s{_ocUploadProtocol = a})
+
+-- | OAuth access token.
+ocAccessToken :: Lens' OrderinvoicesCreaterefundinvoice (Maybe Text)
+ocAccessToken
+  = lens _ocAccessToken
+      (\ s a -> s{_ocAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ocUploadType :: Lens' OrderinvoicesCreaterefundinvoice (Maybe Text)
+ocUploadType
+  = lens _ocUploadType (\ s a -> s{_ocUploadType = a})
 
 -- | Multipart request metadata.
 ocPayload :: Lens' OrderinvoicesCreaterefundinvoice OrderinvoicesCreateRefundInvoiceRequest
@@ -115,6 +167,11 @@ ocOrderId :: Lens' OrderinvoicesCreaterefundinvoice Text
 ocOrderId
   = lens _ocOrderId (\ s a -> s{_ocOrderId = a})
 
+-- | JSONP
+ocCallback :: Lens' OrderinvoicesCreaterefundinvoice (Maybe Text)
+ocCallback
+  = lens _ocCallback (\ s a -> s{_ocCallback = a})
+
 instance GoogleRequest
            OrderinvoicesCreaterefundinvoice
          where
@@ -123,7 +180,12 @@ instance GoogleRequest
         type Scopes OrderinvoicesCreaterefundinvoice =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrderinvoicesCreaterefundinvoice'{..}
-          = go _ocMerchantId _ocOrderId (Just AltJSON)
+          = go _ocMerchantId _ocOrderId _ocXgafv
+              _ocUploadProtocol
+              _ocAccessToken
+              _ocUploadType
+              _ocCallback
+              (Just AltJSON)
               _ocPayload
               shoppingContentService
           where go

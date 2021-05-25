@@ -33,12 +33,17 @@ module Network.Google.Resource.Gmail.Users.Messages.Untrash
     , UsersMessagesUntrash
 
     -- * Request Lenses
+    , umuXgafv
+    , umuUploadProtocol
+    , umuAccessToken
+    , umuUploadType
     , umuUserId
     , umuId
+    , umuCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.untrash@ method which the
 -- 'UsersMessagesUntrash' request conforms to.
@@ -50,15 +55,25 @@ type UsersMessagesUntrashResource =
              "messages" :>
                Capture "id" Text :>
                  "untrash" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Message
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Message
 
 -- | Removes the specified message from the trash.
 --
 -- /See:/ 'usersMessagesUntrash' smart constructor.
 data UsersMessagesUntrash =
   UsersMessagesUntrash'
-    { _umuUserId :: !Text
-    , _umuId     :: !Text
+    { _umuXgafv :: !(Maybe Xgafv)
+    , _umuUploadProtocol :: !(Maybe Text)
+    , _umuAccessToken :: !(Maybe Text)
+    , _umuUploadType :: !(Maybe Text)
+    , _umuUserId :: !Text
+    , _umuId :: !Text
+    , _umuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,18 +82,58 @@ data UsersMessagesUntrash =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'umuXgafv'
+--
+-- * 'umuUploadProtocol'
+--
+-- * 'umuAccessToken'
+--
+-- * 'umuUploadType'
+--
 -- * 'umuUserId'
 --
 -- * 'umuId'
+--
+-- * 'umuCallback'
 usersMessagesUntrash
     :: Text -- ^ 'umuId'
     -> UsersMessagesUntrash
 usersMessagesUntrash pUmuId_ =
-  UsersMessagesUntrash' {_umuUserId = "me", _umuId = pUmuId_}
+  UsersMessagesUntrash'
+    { _umuXgafv = Nothing
+    , _umuUploadProtocol = Nothing
+    , _umuAccessToken = Nothing
+    , _umuUploadType = Nothing
+    , _umuUserId = "me"
+    , _umuId = pUmuId_
+    , _umuCallback = Nothing
+    }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+umuXgafv :: Lens' UsersMessagesUntrash (Maybe Xgafv)
+umuXgafv = lens _umuXgafv (\ s a -> s{_umuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+umuUploadProtocol :: Lens' UsersMessagesUntrash (Maybe Text)
+umuUploadProtocol
+  = lens _umuUploadProtocol
+      (\ s a -> s{_umuUploadProtocol = a})
+
+-- | OAuth access token.
+umuAccessToken :: Lens' UsersMessagesUntrash (Maybe Text)
+umuAccessToken
+  = lens _umuAccessToken
+      (\ s a -> s{_umuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+umuUploadType :: Lens' UsersMessagesUntrash (Maybe Text)
+umuUploadType
+  = lens _umuUploadType
+      (\ s a -> s{_umuUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 umuUserId :: Lens' UsersMessagesUntrash Text
 umuUserId
   = lens _umuUserId (\ s a -> s{_umuUserId = a})
@@ -87,13 +142,23 @@ umuUserId
 umuId :: Lens' UsersMessagesUntrash Text
 umuId = lens _umuId (\ s a -> s{_umuId = a})
 
+-- | JSONP
+umuCallback :: Lens' UsersMessagesUntrash (Maybe Text)
+umuCallback
+  = lens _umuCallback (\ s a -> s{_umuCallback = a})
+
 instance GoogleRequest UsersMessagesUntrash where
         type Rs UsersMessagesUntrash = Message
         type Scopes UsersMessagesUntrash =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersMessagesUntrash'{..}
-          = go _umuUserId _umuId (Just AltJSON) gmailService
+          = go _umuUserId _umuId _umuXgafv _umuUploadProtocol
+              _umuAccessToken
+              _umuUploadType
+              _umuCallback
+              (Just AltJSON)
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersMessagesUntrashResource)

@@ -53,8 +53,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Par
     , pidsprCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.partitionRead@ method which the
 -- 'ProjectsInstancesDatabasesSessionsPartitionRead' request conforms to.
@@ -87,13 +87,13 @@ type ProjectsInstancesDatabasesSessionsPartitionReadResource
 -- /See:/ 'projectsInstancesDatabasesSessionsPartitionRead' smart constructor.
 data ProjectsInstancesDatabasesSessionsPartitionRead =
   ProjectsInstancesDatabasesSessionsPartitionRead'
-    { _pidsprXgafv          :: !(Maybe Xgafv)
+    { _pidsprXgafv :: !(Maybe Xgafv)
     , _pidsprUploadProtocol :: !(Maybe Text)
-    , _pidsprAccessToken    :: !(Maybe Text)
-    , _pidsprUploadType     :: !(Maybe Text)
-    , _pidsprPayload        :: !PartitionReadRequest
-    , _pidsprSession        :: !Text
-    , _pidsprCallback       :: !(Maybe Text)
+    , _pidsprAccessToken :: !(Maybe Text)
+    , _pidsprUploadType :: !(Maybe Text)
+    , _pidsprPayload :: !PartitionReadRequest
+    , _pidsprSession :: !Text
+    , _pidsprCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

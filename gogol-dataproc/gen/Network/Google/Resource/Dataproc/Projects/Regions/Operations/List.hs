@@ -52,8 +52,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Operations.List
     , prolCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.operations.list@ method which the
 -- 'ProjectsRegionsOperationsList' request conforms to.
@@ -84,15 +84,15 @@ type ProjectsRegionsOperationsListResource =
 -- /See:/ 'projectsRegionsOperationsList' smart constructor.
 data ProjectsRegionsOperationsList =
   ProjectsRegionsOperationsList'
-    { _prolXgafv          :: !(Maybe Xgafv)
+    { _prolXgafv :: !(Maybe Xgafv)
     , _prolUploadProtocol :: !(Maybe Text)
-    , _prolAccessToken    :: !(Maybe Text)
-    , _prolUploadType     :: !(Maybe Text)
-    , _prolName           :: !Text
-    , _prolFilter         :: !(Maybe Text)
-    , _prolPageToken      :: !(Maybe Text)
-    , _prolPageSize       :: !(Maybe (Textual Int32))
-    , _prolCallback       :: !(Maybe Text)
+    , _prolAccessToken :: !(Maybe Text)
+    , _prolUploadType :: !(Maybe Text)
+    , _prolName :: !Text
+    , _prolFilter :: !(Maybe Text)
+    , _prolPageToken :: !(Maybe Text)
+    , _prolPageSize :: !(Maybe (Textual Int32))
+    , _prolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

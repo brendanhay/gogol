@@ -44,8 +44,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Operations.Delete
     , plodCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.operations.delete@ method which the
 -- 'ProjectsLocationsOperationsDelete' request conforms to.
@@ -67,12 +67,12 @@ type ProjectsLocationsOperationsDeleteResource =
 -- /See:/ 'projectsLocationsOperationsDelete' smart constructor.
 data ProjectsLocationsOperationsDelete =
   ProjectsLocationsOperationsDelete'
-    { _plodXgafv          :: !(Maybe Xgafv)
+    { _plodXgafv :: !(Maybe Xgafv)
     , _plodUploadProtocol :: !(Maybe Text)
-    , _plodAccessToken    :: !(Maybe Text)
-    , _plodUploadType     :: !(Maybe Text)
-    , _plodName           :: !Text
-    , _plodCallback       :: !(Maybe Text)
+    , _plodAccessToken :: !(Maybe Text)
+    , _plodUploadType :: !(Maybe Text)
+    , _plodName :: !Text
+    , _plodCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

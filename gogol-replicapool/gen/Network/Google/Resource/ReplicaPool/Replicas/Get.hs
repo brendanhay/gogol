@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPool.Replicas.Get
     , rgProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.replicas.get@ method which the
 -- 'ReplicasGet' request conforms to.
@@ -62,8 +62,8 @@ type ReplicasGetResource =
 -- /See:/ 'replicasGet' smart constructor.
 data ReplicasGet =
   ReplicasGet'
-    { _rgPoolName    :: !Text
-    , _rgZone        :: !Text
+    { _rgPoolName :: !Text
+    , _rgZone :: !Text
     , _rgReplicaName :: !Text
     , _rgProjectName :: !Text
     }

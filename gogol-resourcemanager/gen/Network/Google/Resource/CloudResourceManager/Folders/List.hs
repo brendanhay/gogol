@@ -20,12 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the Folders that are direct descendants of supplied parent
--- resource. List provides a strongly consistent view of the Folders
--- underneath the specified parent resource. List returns Folders sorted
--- based upon the (ascending) lexical ordering of their display_name. The
--- caller must have \`resourcemanager.folders.list\` permission on the
--- identified parent.
+-- Lists the folders that are direct descendants of supplied parent
+-- resource. \`list()\` provides a strongly consistent view of the folders
+-- underneath the specified parent resource. \`list()\` returns folders
+-- sorted based upon the (ascending) lexical ordering of their
+-- display_name. The caller must have \`resourcemanager.folders.list\`
+-- permission on the identified parent.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.folders.list@.
 module Network.Google.Resource.CloudResourceManager.Folders.List
@@ -49,13 +49,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.List
     , flCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.list@ method which the
 -- 'FoldersList' request conforms to.
 type FoldersListResource =
-     "v2" :>
+     "v3" :>
        "folders" :>
          QueryParam "parent" Text :>
            QueryParam "$.xgafv" Xgafv :>
@@ -69,25 +69,25 @@ type FoldersListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListFoldersResponse
 
--- | Lists the Folders that are direct descendants of supplied parent
--- resource. List provides a strongly consistent view of the Folders
--- underneath the specified parent resource. List returns Folders sorted
--- based upon the (ascending) lexical ordering of their display_name. The
--- caller must have \`resourcemanager.folders.list\` permission on the
--- identified parent.
+-- | Lists the folders that are direct descendants of supplied parent
+-- resource. \`list()\` provides a strongly consistent view of the folders
+-- underneath the specified parent resource. \`list()\` returns folders
+-- sorted based upon the (ascending) lexical ordering of their
+-- display_name. The caller must have \`resourcemanager.folders.list\`
+-- permission on the identified parent.
 --
 -- /See:/ 'foldersList' smart constructor.
 data FoldersList =
   FoldersList'
-    { _flParent         :: !(Maybe Text)
-    , _flXgafv          :: !(Maybe Xgafv)
+    { _flParent :: !(Maybe Text)
+    , _flXgafv :: !(Maybe Xgafv)
     , _flUploadProtocol :: !(Maybe Text)
-    , _flAccessToken    :: !(Maybe Text)
-    , _flUploadType     :: !(Maybe Text)
-    , _flShowDeleted    :: !(Maybe Bool)
-    , _flPageToken      :: !(Maybe Text)
-    , _flPageSize       :: !(Maybe (Textual Int32))
-    , _flCallback       :: !(Maybe Text)
+    , _flAccessToken :: !(Maybe Text)
+    , _flUploadType :: !(Maybe Text)
+    , _flShowDeleted :: !(Maybe Bool)
+    , _flPageToken :: !(Maybe Text)
+    , _flPageSize :: !(Maybe (Textual Int32))
+    , _flCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -129,8 +129,8 @@ foldersList =
     }
 
 
--- | The resource name of the Organization or Folder whose Folders are being
--- listed. Must be of the form \`folders\/{folder_id}\` or
+-- | Required. The resource name of the organization or folder whose folders
+-- are being listed. Must be of the form \`folders\/{folder_id}\` or
 -- \`organizations\/{org_id}\`. Access to this method is controlled by
 -- checking the \`resourcemanager.folders.list\` permission on the
 -- \`parent\`.
@@ -158,22 +158,21 @@ flUploadType :: Lens' FoldersList (Maybe Text)
 flUploadType
   = lens _flUploadType (\ s a -> s{_flUploadType = a})
 
--- | Controls whether Folders in the DELETE_REQUESTED state should be
--- returned. Defaults to false. This field is optional.
+-- | Optional. Controls whether folders in the DELETE_REQUESTED state should
+-- be returned. Defaults to false.
 flShowDeleted :: Lens' FoldersList (Maybe Bool)
 flShowDeleted
   = lens _flShowDeleted
       (\ s a -> s{_flShowDeleted = a})
 
--- | A pagination token returned from a previous call to \`ListFolders\` that
--- indicates where this listing should continue from. This field is
--- optional.
+-- | Optional. A pagination token returned from a previous call to
+-- \`ListFolders\` that indicates where this listing should continue from.
 flPageToken :: Lens' FoldersList (Maybe Text)
 flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
--- | The maximum number of Folders to return in the response. This field is
--- optional.
+-- | Optional. The maximum number of folders to return in the response. If
+-- unspecified, server picks an appropriate default.
 flPageSize :: Lens' FoldersList (Maybe Int32)
 flPageSize
   = lens _flPageSize (\ s a -> s{_flPageSize = a}) .

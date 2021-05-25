@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
     , thttppsumTargetHTTPProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpProxies.setUrlMap@ method which the
 -- 'TargetHTTPProxiesSetURLMap' request conforms to.
@@ -62,9 +62,9 @@ type TargetHTTPProxiesSetURLMapResource =
 -- /See:/ 'targetHTTPProxiesSetURLMap' smart constructor.
 data TargetHTTPProxiesSetURLMap =
   TargetHTTPProxiesSetURLMap'
-    { _thttppsumRequestId       :: !(Maybe Text)
-    , _thttppsumProject         :: !Text
-    , _thttppsumPayload         :: !URLMapReference
+    { _thttppsumRequestId :: !(Maybe Text)
+    , _thttppsumProject :: !Text
+    , _thttppsumPayload :: !URLMapReference
     , _thttppsumTargetHTTPProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

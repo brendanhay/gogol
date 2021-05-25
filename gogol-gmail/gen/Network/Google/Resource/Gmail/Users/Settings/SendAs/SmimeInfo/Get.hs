@@ -33,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.Get
     , UsersSettingsSendAsSmimeInfoGet
 
     -- * Request Lenses
+    , ussasigXgafv
+    , ussasigUploadProtocol
+    , ussasigAccessToken
+    , ussasigUploadType
     , ussasigUserId
     , ussasigSendAsEmail
     , ussasigId
+    , ussasigCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.smimeInfo.get@ method which the
 -- 'UsersSettingsSendAsSmimeInfoGet' request conforms to.
@@ -53,16 +58,27 @@ type UsersSettingsSendAsSmimeInfoGetResource =
                  Capture "sendAsEmail" Text :>
                    "smimeInfo" :>
                      Capture "id" Text :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] SmimeInfo
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] SmimeInfo
 
 -- | Gets the specified S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoGet' smart constructor.
 data UsersSettingsSendAsSmimeInfoGet =
   UsersSettingsSendAsSmimeInfoGet'
-    { _ussasigUserId      :: !Text
+    { _ussasigXgafv :: !(Maybe Xgafv)
+    , _ussasigUploadProtocol :: !(Maybe Text)
+    , _ussasigAccessToken :: !(Maybe Text)
+    , _ussasigUploadType :: !(Maybe Text)
+    , _ussasigUserId :: !Text
     , _ussasigSendAsEmail :: !Text
-    , _ussasigId          :: !Text
+    , _ussasigId :: !Text
+    , _ussasigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,25 +87,63 @@ data UsersSettingsSendAsSmimeInfoGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussasigXgafv'
+--
+-- * 'ussasigUploadProtocol'
+--
+-- * 'ussasigAccessToken'
+--
+-- * 'ussasigUploadType'
+--
 -- * 'ussasigUserId'
 --
 -- * 'ussasigSendAsEmail'
 --
 -- * 'ussasigId'
+--
+-- * 'ussasigCallback'
 usersSettingsSendAsSmimeInfoGet
     :: Text -- ^ 'ussasigSendAsEmail'
     -> Text -- ^ 'ussasigId'
     -> UsersSettingsSendAsSmimeInfoGet
 usersSettingsSendAsSmimeInfoGet pUssasigSendAsEmail_ pUssasigId_ =
   UsersSettingsSendAsSmimeInfoGet'
-    { _ussasigUserId = "me"
+    { _ussasigXgafv = Nothing
+    , _ussasigUploadProtocol = Nothing
+    , _ussasigAccessToken = Nothing
+    , _ussasigUploadType = Nothing
+    , _ussasigUserId = "me"
     , _ussasigSendAsEmail = pUssasigSendAsEmail_
     , _ussasigId = pUssasigId_
+    , _ussasigCallback = Nothing
     }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+ussasigXgafv :: Lens' UsersSettingsSendAsSmimeInfoGet (Maybe Xgafv)
+ussasigXgafv
+  = lens _ussasigXgafv (\ s a -> s{_ussasigXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussasigUploadProtocol :: Lens' UsersSettingsSendAsSmimeInfoGet (Maybe Text)
+ussasigUploadProtocol
+  = lens _ussasigUploadProtocol
+      (\ s a -> s{_ussasigUploadProtocol = a})
+
+-- | OAuth access token.
+ussasigAccessToken :: Lens' UsersSettingsSendAsSmimeInfoGet (Maybe Text)
+ussasigAccessToken
+  = lens _ussasigAccessToken
+      (\ s a -> s{_ussasigAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussasigUploadType :: Lens' UsersSettingsSendAsSmimeInfoGet (Maybe Text)
+ussasigUploadType
+  = lens _ussasigUploadType
+      (\ s a -> s{_ussasigUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 ussasigUserId :: Lens' UsersSettingsSendAsSmimeInfoGet Text
 ussasigUserId
   = lens _ussasigUserId
@@ -107,6 +161,12 @@ ussasigId :: Lens' UsersSettingsSendAsSmimeInfoGet Text
 ussasigId
   = lens _ussasigId (\ s a -> s{_ussasigId = a})
 
+-- | JSONP
+ussasigCallback :: Lens' UsersSettingsSendAsSmimeInfoGet (Maybe Text)
+ussasigCallback
+  = lens _ussasigCallback
+      (\ s a -> s{_ussasigCallback = a})
+
 instance GoogleRequest
            UsersSettingsSendAsSmimeInfoGet
          where
@@ -119,6 +179,11 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsSendAsSmimeInfoGet'{..}
           = go _ussasigUserId _ussasigSendAsEmail _ussasigId
+              _ussasigXgafv
+              _ussasigUploadProtocol
+              _ussasigAccessToken
+              _ussasigUploadType
+              _ussasigCallback
               (Just AltJSON)
               gmailService
           where go

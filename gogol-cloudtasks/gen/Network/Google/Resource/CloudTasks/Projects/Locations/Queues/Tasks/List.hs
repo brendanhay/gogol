@@ -47,8 +47,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.List
     , plqtlCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.list@ method which the
 -- 'ProjectsLocationsQueuesTasksList' request conforms to.
@@ -60,7 +60,9 @@ type ProjectsLocationsQueuesTasksListResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "responseView" Text :>
+                   QueryParam "responseView"
+                     ProjectsLocationsQueuesTasksListResponseView
+                     :>
                      QueryParam "pageToken" Text :>
                        QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
@@ -75,15 +77,15 @@ type ProjectsLocationsQueuesTasksListResource =
 -- /See:/ 'projectsLocationsQueuesTasksList' smart constructor.
 data ProjectsLocationsQueuesTasksList =
   ProjectsLocationsQueuesTasksList'
-    { _plqtlParent         :: !Text
-    , _plqtlXgafv          :: !(Maybe Xgafv)
+    { _plqtlParent :: !Text
+    , _plqtlXgafv :: !(Maybe Xgafv)
     , _plqtlUploadProtocol :: !(Maybe Text)
-    , _plqtlAccessToken    :: !(Maybe Text)
-    , _plqtlUploadType     :: !(Maybe Text)
-    , _plqtlResponseView   :: !(Maybe Text)
-    , _plqtlPageToken      :: !(Maybe Text)
-    , _plqtlPageSize       :: !(Maybe (Textual Int32))
-    , _plqtlCallback       :: !(Maybe Text)
+    , _plqtlAccessToken :: !(Maybe Text)
+    , _plqtlUploadType :: !(Maybe Text)
+    , _plqtlResponseView :: !(Maybe ProjectsLocationsQueuesTasksListResponseView)
+    , _plqtlPageToken :: !(Maybe Text)
+    , _plqtlPageSize :: !(Maybe (Textual Int32))
+    , _plqtlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,7 +164,7 @@ plqtlUploadType
 -- sensitivity of data that it contains. Authorization for FULL requires
 -- \`cloudtasks.tasks.fullView\` [Google
 -- IAM](https:\/\/cloud.google.com\/iam\/) permission on the Task resource.
-plqtlResponseView :: Lens' ProjectsLocationsQueuesTasksList (Maybe Text)
+plqtlResponseView :: Lens' ProjectsLocationsQueuesTasksList (Maybe ProjectsLocationsQueuesTasksListResponseView)
 plqtlResponseView
   = lens _plqtlResponseView
       (\ s a -> s{_plqtlResponseView = a})
@@ -177,11 +179,10 @@ plqtlPageToken
   = lens _plqtlPageToken
       (\ s a -> s{_plqtlPageToken = a})
 
--- | Requested page size. Fewer tasks than requested might be returned. The
--- maximum page size is 1000. If unspecified, the page size will be the
--- maximum. Fewer tasks than requested might be returned, even if more
--- tasks exist; use next_page_token in the response to determine if more
--- tasks exist.
+-- | Maximum page size. Fewer tasks than requested might be returned, even if
+-- more tasks exist; use next_page_token in the response to determine if
+-- more tasks exist. The maximum page size is 1000. If unspecified, the
+-- page size will be the maximum.
 plqtlPageSize :: Lens' ProjectsLocationsQueuesTasksList (Maybe Int32)
 plqtlPageSize
   = lens _plqtlPageSize

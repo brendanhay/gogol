@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.Insert
     , iiiSourceInstanceTemplate
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.insert@ method which the
 -- 'InstancesInsert' request conforms to.
@@ -65,10 +65,10 @@ type InstancesInsertResource =
 -- /See:/ 'instancesInsert' smart constructor.
 data InstancesInsert =
   InstancesInsert'
-    { _iiiRequestId              :: !(Maybe Text)
-    , _iiiProject                :: !Text
-    , _iiiZone                   :: !Text
-    , _iiiPayload                :: !Instance
+    { _iiiRequestId :: !(Maybe Text)
+    , _iiiProject :: !Text
+    , _iiiZone :: !Text
+    , _iiiPayload :: !Instance
     , _iiiSourceInstanceTemplate :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

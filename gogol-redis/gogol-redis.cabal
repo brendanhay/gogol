@@ -38,10 +38,15 @@ library
         , Network.Google.Resource.Redis.Projects.Locations.Get
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Create
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Delete
+        , Network.Google.Resource.Redis.Projects.Locations.Instances.Export
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Failover
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Get
+        , Network.Google.Resource.Redis.Projects.Locations.Instances.GetAuthString
+        , Network.Google.Resource.Redis.Projects.Locations.Instances.Import
         , Network.Google.Resource.Redis.Projects.Locations.Instances.List
         , Network.Google.Resource.Redis.Projects.Locations.Instances.Patch
+        , Network.Google.Resource.Redis.Projects.Locations.Instances.RescheduleMaintenance
+        , Network.Google.Resource.Redis.Projects.Locations.Instances.Upgrade
         , Network.Google.Resource.Redis.Projects.Locations.List
         , Network.Google.Resource.Redis.Projects.Locations.Operations.Cancel
         , Network.Google.Resource.Redis.Projects.Locations.Operations.Delete

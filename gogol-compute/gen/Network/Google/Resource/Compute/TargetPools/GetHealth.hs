@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetPools.GetHealth
     , tpghRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.getHealth@ method which the
 -- 'TargetPoolsGetHealth' request conforms to.
@@ -65,10 +65,10 @@ type TargetPoolsGetHealthResource =
 -- /See:/ 'targetPoolsGetHealth' smart constructor.
 data TargetPoolsGetHealth =
   TargetPoolsGetHealth'
-    { _tpghProject    :: !Text
+    { _tpghProject :: !Text
     , _tpghTargetPool :: !Text
-    , _tpghPayload    :: !InstanceReference
-    , _tpghRegion     :: !Text
+    , _tpghPayload :: !InstanceReference
+    , _tpghRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

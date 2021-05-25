@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.C
     , plkrckckvrCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.restore@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestoreResource
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore =
   ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore'
-    { _plkrckckvrXgafv          :: !(Maybe Xgafv)
+    { _plkrckckvrXgafv :: !(Maybe Xgafv)
     , _plkrckckvrUploadProtocol :: !(Maybe Text)
-    , _plkrckckvrAccessToken    :: !(Maybe Text)
-    , _plkrckckvrUploadType     :: !(Maybe Text)
-    , _plkrckckvrPayload        :: !RestoreCryptoKeyVersionRequest
-    , _plkrckckvrName           :: !Text
-    , _plkrckckvrCallback       :: !(Maybe Text)
+    , _plkrckckvrAccessToken :: !(Maybe Text)
+    , _plkrckckvrUploadType :: !(Maybe Text)
+    , _plkrckckvrPayload :: !RestoreCryptoKeyVersionRequest
+    , _plkrckckvrName :: !Text
+    , _plkrckckvrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,7 +143,7 @@ plkrckckvrPayload
   = lens _plkrckckvrPayload
       (\ s a -> s{_plkrckckvrPayload = a})
 
--- | The resource name of the CryptoKeyVersion to restore.
+-- | Required. The resource name of the CryptoKeyVersion to restore.
 plkrckckvrName :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore Text
 plkrckckvrName
   = lens _plkrckckvrName

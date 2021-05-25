@@ -90,15 +90,15 @@ module Network.Google.SiteVerification
     , svwrrSite
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.SiteVerification.WebResource.Delete
-import           Network.Google.Resource.SiteVerification.WebResource.Get
-import           Network.Google.Resource.SiteVerification.WebResource.GetToken
-import           Network.Google.Resource.SiteVerification.WebResource.Insert
-import           Network.Google.Resource.SiteVerification.WebResource.List
-import           Network.Google.Resource.SiteVerification.WebResource.Patch
-import           Network.Google.Resource.SiteVerification.WebResource.Update
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.Resource.SiteVerification.WebResource.Delete
+import Network.Google.Resource.SiteVerification.WebResource.Get
+import Network.Google.Resource.SiteVerification.WebResource.GetToken
+import Network.Google.Resource.SiteVerification.WebResource.Insert
+import Network.Google.Resource.SiteVerification.WebResource.List
+import Network.Google.Resource.SiteVerification.WebResource.Patch
+import Network.Google.Resource.SiteVerification.WebResource.Update
+import Network.Google.SiteVerification.Types
 
 {- $resources
 TODO

@@ -23,7 +23,7 @@
 -- Initiates revoking content that has already been shared with the user\'s
 -- family. Empty response indicates success.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.familysharing.unshare@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.familysharing.unshare@.
 module Network.Google.Resource.Books.Familysharing.Unshare
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.Books.Familysharing.Unshare
     , FamilysharingUnshare
 
     -- * Request Lenses
+    , fuXgafv
+    , fuUploadProtocol
+    , fuAccessToken
+    , fuUploadType
     , fuVolumeId
     , fuSource
     , fuDocId
+    , fuCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.familysharing.unshare@ method which the
 -- 'FamilysharingUnshare' request conforms to.
@@ -49,10 +54,15 @@ type FamilysharingUnshareResource =
        "v1" :>
          "familysharing" :>
            "unshare" :>
-             QueryParam "volumeId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "docId" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "volumeId" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "docId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Initiates revoking content that has already been shared with the user\'s
 -- family. Empty response indicates success.
@@ -60,9 +70,14 @@ type FamilysharingUnshareResource =
 -- /See:/ 'familysharingUnshare' smart constructor.
 data FamilysharingUnshare =
   FamilysharingUnshare'
-    { _fuVolumeId :: !(Maybe Text)
-    , _fuSource   :: !(Maybe Text)
-    , _fuDocId    :: !(Maybe Text)
+    { _fuXgafv :: !(Maybe Xgafv)
+    , _fuUploadProtocol :: !(Maybe Text)
+    , _fuAccessToken :: !(Maybe Text)
+    , _fuUploadType :: !(Maybe Text)
+    , _fuVolumeId :: !(Maybe Text)
+    , _fuSource :: !(Maybe Text)
+    , _fuDocId :: !(Maybe Text)
+    , _fuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,17 +86,56 @@ data FamilysharingUnshare =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fuXgafv'
+--
+-- * 'fuUploadProtocol'
+--
+-- * 'fuAccessToken'
+--
+-- * 'fuUploadType'
+--
 -- * 'fuVolumeId'
 --
 -- * 'fuSource'
 --
 -- * 'fuDocId'
+--
+-- * 'fuCallback'
 familysharingUnshare
     :: FamilysharingUnshare
 familysharingUnshare =
   FamilysharingUnshare'
-    {_fuVolumeId = Nothing, _fuSource = Nothing, _fuDocId = Nothing}
+    { _fuXgafv = Nothing
+    , _fuUploadProtocol = Nothing
+    , _fuAccessToken = Nothing
+    , _fuUploadType = Nothing
+    , _fuVolumeId = Nothing
+    , _fuSource = Nothing
+    , _fuDocId = Nothing
+    , _fuCallback = Nothing
+    }
 
+
+-- | V1 error format.
+fuXgafv :: Lens' FamilysharingUnshare (Maybe Xgafv)
+fuXgafv = lens _fuXgafv (\ s a -> s{_fuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+fuUploadProtocol :: Lens' FamilysharingUnshare (Maybe Text)
+fuUploadProtocol
+  = lens _fuUploadProtocol
+      (\ s a -> s{_fuUploadProtocol = a})
+
+-- | OAuth access token.
+fuAccessToken :: Lens' FamilysharingUnshare (Maybe Text)
+fuAccessToken
+  = lens _fuAccessToken
+      (\ s a -> s{_fuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+fuUploadType :: Lens' FamilysharingUnshare (Maybe Text)
+fuUploadType
+  = lens _fuUploadType (\ s a -> s{_fuUploadType = a})
 
 -- | The volume to unshare.
 fuVolumeId :: Lens' FamilysharingUnshare (Maybe Text)
@@ -96,12 +150,23 @@ fuSource = lens _fuSource (\ s a -> s{_fuSource = a})
 fuDocId :: Lens' FamilysharingUnshare (Maybe Text)
 fuDocId = lens _fuDocId (\ s a -> s{_fuDocId = a})
 
+-- | JSONP
+fuCallback :: Lens' FamilysharingUnshare (Maybe Text)
+fuCallback
+  = lens _fuCallback (\ s a -> s{_fuCallback = a})
+
 instance GoogleRequest FamilysharingUnshare where
-        type Rs FamilysharingUnshare = ()
+        type Rs FamilysharingUnshare = Empty
         type Scopes FamilysharingUnshare =
              '["https://www.googleapis.com/auth/books"]
         requestClient FamilysharingUnshare'{..}
-          = go _fuVolumeId _fuSource _fuDocId (Just AltJSON)
+          = go _fuXgafv _fuUploadProtocol _fuAccessToken
+              _fuUploadType
+              _fuVolumeId
+              _fuSource
+              _fuDocId
+              _fuCallback
+              (Just AltJSON)
               booksService
           where go
                   = buildClient

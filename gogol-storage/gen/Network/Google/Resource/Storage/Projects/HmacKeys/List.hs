@@ -34,14 +34,15 @@ module Network.Google.Resource.Storage.Projects.HmacKeys.List
 
     -- * Request Lenses
     , phklShowDeletedKeys
+    , phklUserProject
     , phklServiceAccountEmail
     , phklPageToken
     , phklProjectId
     , phklMaxResults
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.projects.hmacKeys.list@ method which the
 -- 'ProjectsHmacKeysList' request conforms to.
@@ -52,22 +53,24 @@ type ProjectsHmacKeysListResource =
            Capture "projectId" Text :>
              "hmacKeys" :>
                QueryParam "showDeletedKeys" Bool :>
-                 QueryParam "serviceAccountEmail" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] HmacKeysMetadata
+                 QueryParam "userProject" Text :>
+                   QueryParam "serviceAccountEmail" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] HmacKeysMetadata
 
 -- | Retrieves a list of HMAC keys matching the criteria.
 --
 -- /See:/ 'projectsHmacKeysList' smart constructor.
 data ProjectsHmacKeysList =
   ProjectsHmacKeysList'
-    { _phklShowDeletedKeys     :: !(Maybe Bool)
+    { _phklShowDeletedKeys :: !(Maybe Bool)
+    , _phklUserProject :: !(Maybe Text)
     , _phklServiceAccountEmail :: !(Maybe Text)
-    , _phklPageToken           :: !(Maybe Text)
-    , _phklProjectId           :: !Text
-    , _phklMaxResults          :: !(Textual Word32)
+    , _phklPageToken :: !(Maybe Text)
+    , _phklProjectId :: !Text
+    , _phklMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +80,8 @@ data ProjectsHmacKeysList =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'phklShowDeletedKeys'
+--
+-- * 'phklUserProject'
 --
 -- * 'phklServiceAccountEmail'
 --
@@ -91,10 +96,11 @@ projectsHmacKeysList
 projectsHmacKeysList pPhklProjectId_ =
   ProjectsHmacKeysList'
     { _phklShowDeletedKeys = Nothing
+    , _phklUserProject = Nothing
     , _phklServiceAccountEmail = Nothing
     , _phklPageToken = Nothing
     , _phklProjectId = pPhklProjectId_
-    , _phklMaxResults = 1000
+    , _phklMaxResults = 250
     }
 
 
@@ -103,6 +109,12 @@ phklShowDeletedKeys :: Lens' ProjectsHmacKeysList (Maybe Bool)
 phklShowDeletedKeys
   = lens _phklShowDeletedKeys
       (\ s a -> s{_phklShowDeletedKeys = a})
+
+-- | The project to be billed for this request.
+phklUserProject :: Lens' ProjectsHmacKeysList (Maybe Text)
+phklUserProject
+  = lens _phklUserProject
+      (\ s a -> s{_phklUserProject = a})
 
 -- | If present, only keys for the given service account are returned.
 phklServiceAccountEmail :: Lens' ProjectsHmacKeysList (Maybe Text)
@@ -123,10 +135,12 @@ phklProjectId
   = lens _phklProjectId
       (\ s a -> s{_phklProjectId = a})
 
--- | Maximum number of items plus prefixes to return in a single page of
--- responses. Because duplicate prefixes are omitted, fewer total results
--- may be returned than requested. The service uses this parameter or 1,000
--- items, whichever is smaller.
+-- | Maximum number of items to return in a single page of responses. The
+-- service uses this parameter or 250 items, whichever is smaller. The max
+-- number of items per page will also be limited by the number of distinct
+-- service accounts in the response. If the number of service accounts in a
+-- single response is too high, the page will truncated and a next page
+-- token will be returned.
 phklMaxResults :: Lens' ProjectsHmacKeysList Word32
 phklMaxResults
   = lens _phklMaxResults
@@ -142,6 +156,7 @@ instance GoogleRequest ProjectsHmacKeysList where
                "https://www.googleapis.com/auth/devstorage.read_only"]
         requestClient ProjectsHmacKeysList'{..}
           = go _phklProjectId _phklShowDeletedKeys
+              _phklUserProject
               _phklServiceAccountEmail
               _phklPageToken
               (Just _phklMaxResults)

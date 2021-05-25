@@ -38,8 +38,8 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrum
     , pgsPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spectrum.Types
+import Network.Google.Prelude
+import Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.getSpectrum@ method which the
 -- 'PawsGetSpectrum' request conforms to.

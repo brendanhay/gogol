@@ -53,8 +53,8 @@ module Network.Google.Resource.BigtableAdmin.Operations.Projects.Operations.List
     , opolCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.operations.projects.operations.list@ method which the
 -- 'OperationsProjectsOperationsList' request conforms to.
@@ -87,15 +87,15 @@ type OperationsProjectsOperationsListResource =
 -- /See:/ 'operationsProjectsOperationsList' smart constructor.
 data OperationsProjectsOperationsList =
   OperationsProjectsOperationsList'
-    { _opolXgafv          :: !(Maybe Xgafv)
+    { _opolXgafv :: !(Maybe Xgafv)
     , _opolUploadProtocol :: !(Maybe Text)
-    , _opolAccessToken    :: !(Maybe Text)
-    , _opolUploadType     :: !(Maybe Text)
-    , _opolName           :: !Text
-    , _opolFilter         :: !(Maybe Text)
-    , _opolPageToken      :: !(Maybe Text)
-    , _opolPageSize       :: !(Maybe (Textual Int32))
-    , _opolCallback       :: !(Maybe Text)
+    , _opolAccessToken :: !(Maybe Text)
+    , _opolUploadType :: !(Maybe Text)
+    , _opolName :: !Text
+    , _opolFilter :: !(Maybe Text)
+    , _opolPageToken :: !(Maybe Text)
+    , _opolPageSize :: !(Maybe (Textual Int32))
+    , _opolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

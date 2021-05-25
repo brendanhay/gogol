@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.NodeTemplates.List
     , NodeTemplatesList
 
     -- * Request Lenses
+    , ntlReturnPartialSuccess
     , ntlOrderBy
     , ntlProject
     , ntlFilter
@@ -41,8 +42,8 @@ module Network.Google.Resource.Compute.NodeTemplates.List
     , ntlMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTemplates.list@ method which the
 -- 'NodeTemplatesList' request conforms to.
@@ -54,23 +55,25 @@ type NodeTemplatesListResource =
              "regions" :>
                Capture "region" Text :>
                  "nodeTemplates" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] NodeTemplateList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] NodeTemplateList
 
 -- | Retrieves a list of node templates available to the specified project.
 --
 -- /See:/ 'nodeTemplatesList' smart constructor.
 data NodeTemplatesList =
   NodeTemplatesList'
-    { _ntlOrderBy    :: !(Maybe Text)
-    , _ntlProject    :: !Text
-    , _ntlFilter     :: !(Maybe Text)
-    , _ntlRegion     :: !Text
-    , _ntlPageToken  :: !(Maybe Text)
+    { _ntlReturnPartialSuccess :: !(Maybe Bool)
+    , _ntlOrderBy :: !(Maybe Text)
+    , _ntlProject :: !Text
+    , _ntlFilter :: !(Maybe Text)
+    , _ntlRegion :: !Text
+    , _ntlPageToken :: !(Maybe Text)
     , _ntlMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -79,6 +82,8 @@ data NodeTemplatesList =
 -- | Creates a value of 'NodeTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ntlReturnPartialSuccess'
 --
 -- * 'ntlOrderBy'
 --
@@ -97,7 +102,8 @@ nodeTemplatesList
     -> NodeTemplatesList
 nodeTemplatesList pNtlProject_ pNtlRegion_ =
   NodeTemplatesList'
-    { _ntlOrderBy = Nothing
+    { _ntlReturnPartialSuccess = Nothing
+    , _ntlOrderBy = Nothing
     , _ntlProject = pNtlProject_
     , _ntlFilter = Nothing
     , _ntlRegion = pNtlRegion_
@@ -106,14 +112,21 @@ nodeTemplatesList pNtlProject_ pNtlRegion_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+ntlReturnPartialSuccess :: Lens' NodeTemplatesList (Maybe Bool)
+ntlReturnPartialSuccess
+  = lens _ntlReturnPartialSuccess
+      (\ s a -> s{_ntlReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 ntlOrderBy :: Lens' NodeTemplatesList (Maybe Text)
 ntlOrderBy
   = lens _ntlOrderBy (\ s a -> s{_ntlOrderBy = a})
@@ -126,19 +139,20 @@ ntlProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 ntlFilter :: Lens' NodeTemplatesList (Maybe Text)
 ntlFilter
   = lens _ntlFilter (\ s a -> s{_ntlFilter = a})
@@ -148,17 +162,18 @@ ntlRegion :: Lens' NodeTemplatesList Text
 ntlRegion
   = lens _ntlRegion (\ s a -> s{_ntlRegion = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 ntlPageToken :: Lens' NodeTemplatesList (Maybe Text)
 ntlPageToken
   = lens _ntlPageToken (\ s a -> s{_ntlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 ntlMaxResults :: Lens' NodeTemplatesList Word32
 ntlMaxResults
   = lens _ntlMaxResults
@@ -172,7 +187,9 @@ instance GoogleRequest NodeTemplatesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NodeTemplatesList'{..}
-          = go _ntlProject _ntlRegion _ntlOrderBy _ntlFilter
+          = go _ntlProject _ntlRegion _ntlReturnPartialSuccess
+              _ntlOrderBy
+              _ntlFilter
               _ntlPageToken
               (Just _ntlMaxResults)
               (Just AltJSON)

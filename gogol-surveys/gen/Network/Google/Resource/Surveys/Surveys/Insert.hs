@@ -36,8 +36,8 @@ module Network.Google.Resource.Surveys.Surveys.Insert
     , siPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.insert@ method which the
 -- 'SurveysInsert' request conforms to.

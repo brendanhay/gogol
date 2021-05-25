@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/dialogflow-enterprise/ Dialogflow API Reference> for @dialogflow.projects.operations.get@.
+-- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.operations.get@.
 module Network.Google.Resource.DialogFlow.Projects.Operations.Get
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.DialogFlow.Projects.Operations.Get
     , pogCallback
     ) where
 
-import           Network.Google.DialogFlow.Types
-import           Network.Google.Prelude
+import Network.Google.DialogFlow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dialogflow.projects.operations.get@ method which the
 -- 'ProjectsOperationsGet' request conforms to.
 type ProjectsOperationsGetResource =
-     "v2" :>
+     "v3" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -66,12 +66,12 @@ type ProjectsOperationsGetResource =
 -- /See:/ 'projectsOperationsGet' smart constructor.
 data ProjectsOperationsGet =
   ProjectsOperationsGet'
-    { _pogXgafv          :: !(Maybe Xgafv)
+    { _pogXgafv :: !(Maybe Xgafv)
     , _pogUploadProtocol :: !(Maybe Text)
-    , _pogAccessToken    :: !(Maybe Text)
-    , _pogUploadType     :: !(Maybe Text)
-    , _pogName           :: !Text
-    , _pogCallback       :: !(Maybe Text)
+    , _pogAccessToken :: !(Maybe Text)
+    , _pogUploadType :: !(Maybe Text)
+    , _pogName :: !Text
+    , _pogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

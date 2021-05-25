@@ -43,8 +43,8 @@ module Network.Google.Resource.Language.Documents.AnnotateText
     , datCallback
     ) where
 
-import           Network.Google.Language.Types
-import           Network.Google.Prelude
+import Network.Google.Language.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @language.documents.annotateText@ method which the
 -- 'DocumentsAnnotateText' request conforms to.
@@ -67,12 +67,12 @@ type DocumentsAnnotateTextResource =
 -- /See:/ 'documentsAnnotateText' smart constructor.
 data DocumentsAnnotateText =
   DocumentsAnnotateText'
-    { _datXgafv          :: !(Maybe Xgafv)
+    { _datXgafv :: !(Maybe Xgafv)
     , _datUploadProtocol :: !(Maybe Text)
-    , _datAccessToken    :: !(Maybe Text)
-    , _datUploadType     :: !(Maybe Text)
-    , _datPayload        :: !AnnotateTextRequest
-    , _datCallback       :: !(Maybe Text)
+    , _datAccessToken :: !(Maybe Text)
+    , _datUploadType :: !(Maybe Text)
+    , _datPayload :: !AnnotateTextRequest
+    , _datCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

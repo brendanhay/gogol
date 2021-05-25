@@ -17,15 +17,16 @@
 --
 module Network.Google.Debugger.Types.Product where
 
-import           Network.Google.Debugger.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Debugger.Types.Sum
+import Network.Google.Prelude
 
 -- | Response for registering a debuggee.
 --
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
-newtype RegisterDebuggeeResponse =
+data RegisterDebuggeeResponse =
   RegisterDebuggeeResponse'
-    { _rdrDebuggee :: Maybe Debuggee
+    { _rdrAgentId :: !(Maybe Text)
+    , _rdrDebuggee :: !(Maybe Debuggee)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -34,11 +35,20 @@ newtype RegisterDebuggeeResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rdrAgentId'
+--
 -- * 'rdrDebuggee'
 registerDebuggeeResponse
     :: RegisterDebuggeeResponse
-registerDebuggeeResponse = RegisterDebuggeeResponse' {_rdrDebuggee = Nothing}
+registerDebuggeeResponse =
+  RegisterDebuggeeResponse' {_rdrAgentId = Nothing, _rdrDebuggee = Nothing}
 
+
+-- | A unique ID generated for the agent. Each RegisterDebuggee request will
+-- generate a new agent ID.
+rdrAgentId :: Lens' RegisterDebuggeeResponse (Maybe Text)
+rdrAgentId
+  = lens _rdrAgentId (\ s a -> s{_rdrAgentId = a})
 
 -- | Debuggee resource. The field \`id\` is guaranteed to be set (in addition
 -- to the echoed fields). If the field \`is_disabled\` is set to \`true\`,
@@ -53,12 +63,15 @@ instance FromJSON RegisterDebuggeeResponse where
         parseJSON
           = withObject "RegisterDebuggeeResponse"
               (\ o ->
-                 RegisterDebuggeeResponse' <$> (o .:? "debuggee"))
+                 RegisterDebuggeeResponse' <$>
+                   (o .:? "agentId") <*> (o .:? "debuggee"))
 
 instance ToJSON RegisterDebuggeeResponse where
         toJSON RegisterDebuggeeResponse'{..}
           = object
-              (catMaybes [("debuggee" .=) <$> _rdrDebuggee])
+              (catMaybes
+                 [("agentId" .=) <$> _rdrAgentId,
+                  ("debuggee" .=) <$> _rdrDebuggee])
 
 -- | A SourceContext is a reference to a tree of files. A SourceContext
 -- together with a path point to a unique revision of a single file or
@@ -68,9 +81,9 @@ instance ToJSON RegisterDebuggeeResponse where
 data SourceContext =
   SourceContext'
     { _scCloudWorkspace :: !(Maybe CloudWorkspaceSourceContext)
-    , _scCloudRepo      :: !(Maybe CloudRepoSourceContext)
-    , _scGerrit         :: !(Maybe GerritSourceContext)
-    , _scGit            :: !(Maybe GitSourceContext)
+    , _scCloudRepo :: !(Maybe CloudRepoSourceContext)
+    , _scGerrit :: !(Maybe GerritSourceContext)
+    , _scGit :: !(Maybe GitSourceContext)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -154,7 +167,7 @@ setBreakpointResponse = SetBreakpointResponse' {_sbrBreakpoint = Nothing}
 
 
 -- | Breakpoint resource. The field \`id\` is guaranteed to be set (in
--- addition to the echoed fileds).
+-- addition to the echoed fields).
 sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe Breakpoint)
 sbrBreakpoint
   = lens _sbrBreakpoint
@@ -227,10 +240,10 @@ instance ToJSON UpdateActiveBreakpointResponse where
 data GerritSourceContext =
   GerritSourceContext'
     { _gscGerritProject :: !(Maybe Text)
-    , _gscAliasName     :: !(Maybe Text)
-    , _gscRevisionId    :: !(Maybe Text)
-    , _gscHostURI       :: !(Maybe Text)
-    , _gscAliasContext  :: !(Maybe AliasContext)
+    , _gscAliasName :: !(Maybe Text)
+    , _gscRevisionId :: !(Maybe Text)
+    , _gscHostURI :: !(Maybe Text)
+    , _gscAliasContext :: !(Maybe AliasContext)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -315,7 +328,7 @@ instance ToJSON GerritSourceContext where
 -- /See:/ 'repoId' smart constructor.
 data RepoId =
   RepoId'
-    { _riUid           :: !(Maybe Text)
+    { _riUid :: !(Maybe Text)
     , _riProjectRepoId :: !(Maybe ProjectRepoId)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -400,7 +413,7 @@ instance ToJSON ExtendedSourceContextLabels where
 -- /See:/ 'projectRepoId' smart constructor.
 data ProjectRepoId =
   ProjectRepoId'
-    { _priRepoName  :: !(Maybe Text)
+    { _priRepoName :: !(Maybe Text)
     , _priProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -447,7 +460,7 @@ instance ToJSON ProjectRepoId where
 -- /See:/ 'formatMessage' smart constructor.
 data FormatMessage =
   FormatMessage'
-    { _fmFormat     :: !(Maybe Text)
+    { _fmFormat :: !(Maybe Text)
     , _fmParameters :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -494,27 +507,31 @@ instance ToJSON FormatMessage where
                  [("format" .=) <$> _fmFormat,
                   ("parameters" .=) <$> _fmParameters])
 
--- | Represents the breakpoint specification, status and results.
+-- | ------------------------------------------------------------------------------
+-- ## Breakpoint (the resource) Represents the breakpoint specification,
+-- status and results.
 --
 -- /See:/ 'breakpoint' smart constructor.
 data Breakpoint =
   Breakpoint'
-    { _bStatus               :: !(Maybe StatusMessage)
-    , _bLogLevel             :: !(Maybe BreakpointLogLevel)
-    , _bLocation             :: !(Maybe SourceLocation)
-    , _bAction               :: !(Maybe BreakpointAction)
-    , _bFinalTime            :: !(Maybe DateTime')
-    , _bExpressions          :: !(Maybe [Text])
-    , _bLogMessageFormat     :: !(Maybe Text)
-    , _bId                   :: !(Maybe Text)
-    , _bLabels               :: !(Maybe BreakpointLabels)
-    , _bUserEmail            :: !(Maybe Text)
-    , _bVariableTable        :: !(Maybe [Variable])
-    , _bStackFrames          :: !(Maybe [StackFrame])
-    , _bCondition            :: !(Maybe Text)
+    { _bStatus :: !(Maybe StatusMessage)
+    , _bState :: !(Maybe BreakpointState)
+    , _bLogLevel :: !(Maybe BreakpointLogLevel)
+    , _bLocation :: !(Maybe SourceLocation)
+    , _bAction :: !(Maybe BreakpointAction)
+    , _bFinalTime :: !(Maybe DateTime')
+    , _bExpressions :: !(Maybe [Text])
+    , _bLogMessageFormat :: !(Maybe Text)
+    , _bId :: !(Maybe Text)
+    , _bLabels :: !(Maybe BreakpointLabels)
+    , _bUserEmail :: !(Maybe Text)
+    , _bVariableTable :: !(Maybe [Variable])
+    , _bCanaryExpireTime :: !(Maybe DateTime')
+    , _bStackFrames :: !(Maybe [StackFrame])
+    , _bCondition :: !(Maybe Text)
     , _bEvaluatedExpressions :: !(Maybe [Variable])
-    , _bCreateTime           :: !(Maybe DateTime')
-    , _bIsFinalState         :: !(Maybe Bool)
+    , _bCreateTime :: !(Maybe DateTime')
+    , _bIsFinalState :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -524,6 +541,8 @@ data Breakpoint =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bStatus'
+--
+-- * 'bState'
 --
 -- * 'bLogLevel'
 --
@@ -545,6 +564,8 @@ data Breakpoint =
 --
 -- * 'bVariableTable'
 --
+-- * 'bCanaryExpireTime'
+--
 -- * 'bStackFrames'
 --
 -- * 'bCondition'
@@ -559,6 +580,7 @@ breakpoint
 breakpoint =
   Breakpoint'
     { _bStatus = Nothing
+    , _bState = Nothing
     , _bLogLevel = Nothing
     , _bLocation = Nothing
     , _bAction = Nothing
@@ -569,6 +591,7 @@ breakpoint =
     , _bLabels = Nothing
     , _bUserEmail = Nothing
     , _bVariableTable = Nothing
+    , _bCanaryExpireTime = Nothing
     , _bStackFrames = Nothing
     , _bCondition = Nothing
     , _bEvaluatedExpressions = Nothing
@@ -587,6 +610,10 @@ breakpoint =
 -- condition
 bStatus :: Lens' Breakpoint (Maybe StatusMessage)
 bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
+
+-- | The current state of the breakpoint.
+bState :: Lens' Breakpoint (Maybe BreakpointState)
+bState = lens _bState (\ s a -> s{_bState = a})
 
 -- | Indicates the severity of the log. Only relevant when action is \`LOG\`.
 bLogLevel :: Lens' Breakpoint (Maybe BreakpointLogLevel)
@@ -663,6 +690,14 @@ bVariableTable
       . _Default
       . _Coerce
 
+-- | The deadline for the breakpoint to stay in CANARY_ACTIVE state. The
+-- value is meaningless when the breakpoint is not in CANARY_ACTIVE state.
+bCanaryExpireTime :: Lens' Breakpoint (Maybe UTCTime)
+bCanaryExpireTime
+  = lens _bCanaryExpireTime
+      (\ s a -> s{_bCanaryExpireTime = a})
+      . mapping _DateTime
+
 -- | The stack at breakpoint time, where stack_frames[0] represents the most
 -- recently entered function.
 bStackFrames :: Lens' Breakpoint [StackFrame]
@@ -710,8 +745,9 @@ instance FromJSON Breakpoint where
           = withObject "Breakpoint"
               (\ o ->
                  Breakpoint' <$>
-                   (o .:? "status") <*> (o .:? "logLevel") <*>
-                     (o .:? "location")
+                   (o .:? "status") <*> (o .:? "state") <*>
+                     (o .:? "logLevel")
+                     <*> (o .:? "location")
                      <*> (o .:? "action")
                      <*> (o .:? "finalTime")
                      <*> (o .:? "expressions" .!= mempty)
@@ -720,6 +756,7 @@ instance FromJSON Breakpoint where
                      <*> (o .:? "labels")
                      <*> (o .:? "userEmail")
                      <*> (o .:? "variableTable" .!= mempty)
+                     <*> (o .:? "canaryExpireTime")
                      <*> (o .:? "stackFrames" .!= mempty)
                      <*> (o .:? "condition")
                      <*> (o .:? "evaluatedExpressions" .!= mempty)
@@ -731,6 +768,7 @@ instance ToJSON Breakpoint where
           = object
               (catMaybes
                  [("status" .=) <$> _bStatus,
+                  ("state" .=) <$> _bState,
                   ("logLevel" .=) <$> _bLogLevel,
                   ("location" .=) <$> _bLocation,
                   ("action" .=) <$> _bAction,
@@ -740,6 +778,7 @@ instance ToJSON Breakpoint where
                   ("id" .=) <$> _bId, ("labels" .=) <$> _bLabels,
                   ("userEmail" .=) <$> _bUserEmail,
                   ("variableTable" .=) <$> _bVariableTable,
+                  ("canaryExpireTime" .=) <$> _bCanaryExpireTime,
                   ("stackFrames" .=) <$> _bStackFrames,
                   ("condition" .=) <$> _bCondition,
                   ("evaluatedExpressions" .=) <$>
@@ -863,12 +902,12 @@ instance ToJSON GetBreakpointResponse where
 -- /See:/ 'variable' smart constructor.
 data Variable =
   Variable'
-    { _vStatus        :: !(Maybe StatusMessage)
+    { _vStatus :: !(Maybe StatusMessage)
     , _vVarTableIndex :: !(Maybe (Textual Int32))
-    , _vMembers       :: !(Maybe [Variable])
-    , _vValue         :: !(Maybe Text)
-    , _vName          :: !(Maybe Text)
-    , _vType          :: !(Maybe Text)
+    , _vMembers :: !(Maybe [Variable])
+    , _vValue :: !(Maybe Text)
+    , _vName :: !(Maybe Text)
+    , _vType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -975,7 +1014,7 @@ instance ToJSON Variable where
 data ListBreakpointsResponse =
   ListBreakpointsResponse'
     { _lbrNextWaitToken :: !(Maybe Text)
-    , _lbrBreakpoints   :: !(Maybe [Breakpoint])
+    , _lbrBreakpoints :: !(Maybe [Breakpoint])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1091,8 +1130,8 @@ updateActiveBreakpointRequest =
   UpdateActiveBreakpointRequest' {_uabrBreakpoint = Nothing}
 
 
--- | Updated breakpoint information. The field \`id\` must be set. The agent
--- must echo all Breakpoint specification fields in the update.
+-- | Required. Updated breakpoint information. The field \`id\` must be set.
+-- The agent must echo all Breakpoint specification fields in the update.
 uabrBreakpoint :: Lens' UpdateActiveBreakpointRequest (Maybe Breakpoint)
 uabrBreakpoint
   = lens _uabrBreakpoint
@@ -1119,8 +1158,8 @@ instance ToJSON UpdateActiveBreakpointRequest where
 -- /See:/ 'statusMessage' smart constructor.
 data StatusMessage =
   StatusMessage'
-    { _smRefersTo    :: !(Maybe StatusMessageRefersTo)
-    , _smIsError     :: !(Maybe Bool)
+    { _smRefersTo :: !(Maybe StatusMessageRefersTo)
+    , _smIsError :: !(Maybe Bool)
     , _smDescription :: !(Maybe FormatMessage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1180,8 +1219,8 @@ instance ToJSON StatusMessage where
 data ListActiveBreakpointsResponse =
   ListActiveBreakpointsResponse'
     { _labrNextWaitToken :: !(Maybe Text)
-    , _labrBreakpoints   :: !(Maybe [Breakpoint])
-    , _labrWaitExpired   :: !(Maybe Bool)
+    , _labrBreakpoints :: !(Maybe [Breakpoint])
+    , _labrWaitExpired :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1253,7 +1292,7 @@ instance ToJSON ListActiveBreakpointsResponse where
 data ExtendedSourceContext =
   ExtendedSourceContext'
     { _escContext :: !(Maybe SourceContext)
-    , _escLabels  :: !(Maybe ExtendedSourceContextLabels)
+    , _escLabels :: !(Maybe ExtendedSourceContextLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1301,7 +1340,7 @@ instance ToJSON ExtendedSourceContext where
 -- /See:/ 'gitSourceContext' smart constructor.
 data GitSourceContext =
   GitSourceContext'
-    { _gURL        :: !(Maybe Text)
+    { _gURL :: !(Maybe Text)
     , _gRevisionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1347,8 +1386,8 @@ instance ToJSON GitSourceContext where
 -- /See:/ 'sourceLocation' smart constructor.
 data SourceLocation =
   SourceLocation'
-    { _slPath   :: !(Maybe Text)
-    , _slLine   :: !(Maybe (Textual Int32))
+    { _slPath :: !(Maybe Text)
+    , _slLine :: !(Maybe (Textual Int32))
     , _slColumn :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1407,10 +1446,10 @@ instance ToJSON SourceLocation where
 -- /See:/ 'stackFrame' smart constructor.
 data StackFrame =
   StackFrame'
-    { _sfFunction  :: !(Maybe Text)
-    , _sfLocation  :: !(Maybe SourceLocation)
+    { _sfFunction :: !(Maybe Text)
+    , _sfLocation :: !(Maybe SourceLocation)
     , _sfArguments :: !(Maybe [Variable])
-    , _sfLocals    :: !(Maybe [Variable])
+    , _sfLocals :: !(Maybe [Variable])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1487,9 +1526,9 @@ instance ToJSON StackFrame where
 -- /See:/ 'cloudRepoSourceContext' smart constructor.
 data CloudRepoSourceContext =
   CloudRepoSourceContext'
-    { _crscRepoId       :: !(Maybe RepoId)
-    , _crscAliasName    :: !(Maybe Text)
-    , _crscRevisionId   :: !(Maybe Text)
+    { _crscRepoId :: !(Maybe RepoId)
+    , _crscAliasName :: !(Maybe Text)
+    , _crscRevisionId :: !(Maybe Text)
     , _crscAliasContext :: !(Maybe AliasContext)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1603,17 +1642,18 @@ instance ToJSON DebuggeeLabels where
 -- /See:/ 'debuggee' smart constructor.
 data Debuggee =
   Debuggee'
-    { _dStatus            :: !(Maybe StatusMessage)
-    , _dUniquifier        :: !(Maybe Text)
-    , _dProject           :: !(Maybe Text)
+    { _dStatus :: !(Maybe StatusMessage)
+    , _dUniquifier :: !(Maybe Text)
+    , _dProject :: !(Maybe Text)
     , _dExtSourceContexts :: !(Maybe [ExtendedSourceContext])
-    , _dAgentVersion      :: !(Maybe Text)
-    , _dIsDisabled        :: !(Maybe Bool)
-    , _dId                :: !(Maybe Text)
-    , _dLabels            :: !(Maybe DebuggeeLabels)
-    , _dDescription       :: !(Maybe Text)
-    , _dIsInactive        :: !(Maybe Bool)
-    , _dSourceContexts    :: !(Maybe [SourceContext])
+    , _dAgentVersion :: !(Maybe Text)
+    , _dIsDisabled :: !(Maybe Bool)
+    , _dId :: !(Maybe Text)
+    , _dLabels :: !(Maybe DebuggeeLabels)
+    , _dCanaryMode :: !(Maybe DebuggeeCanaryMode)
+    , _dDescription :: !(Maybe Text)
+    , _dIsInactive :: !(Maybe Bool)
+    , _dSourceContexts :: !(Maybe [SourceContext])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1638,6 +1678,8 @@ data Debuggee =
 --
 -- * 'dLabels'
 --
+-- * 'dCanaryMode'
+--
 -- * 'dDescription'
 --
 -- * 'dIsInactive'
@@ -1655,6 +1697,7 @@ debuggee =
     , _dIsDisabled = Nothing
     , _dId = Nothing
     , _dLabels = Nothing
+    , _dCanaryMode = Nothing
     , _dDescription = Nothing
     , _dIsInactive = Nothing
     , _dSourceContexts = Nothing
@@ -1714,6 +1757,11 @@ dId = lens _dId (\ s a -> s{_dId = a})
 dLabels :: Lens' Debuggee (Maybe DebuggeeLabels)
 dLabels = lens _dLabels (\ s a -> s{_dLabels = a})
 
+-- | Used when setting breakpoint canary for this debuggee.
+dCanaryMode :: Lens' Debuggee (Maybe DebuggeeCanaryMode)
+dCanaryMode
+  = lens _dCanaryMode (\ s a -> s{_dCanaryMode = a})
+
 -- | Human readable description of the debuggee. Including a human-readable
 -- project name, environment name and version information is recommended.
 dDescription :: Lens' Debuggee (Maybe Text)
@@ -1748,6 +1796,7 @@ instance FromJSON Debuggee where
                      <*> (o .:? "isDisabled")
                      <*> (o .:? "id")
                      <*> (o .:? "labels")
+                     <*> (o .:? "canaryMode")
                      <*> (o .:? "description")
                      <*> (o .:? "isInactive")
                      <*> (o .:? "sourceContexts" .!= mempty))
@@ -1763,6 +1812,7 @@ instance ToJSON Debuggee where
                   ("agentVersion" .=) <$> _dAgentVersion,
                   ("isDisabled" .=) <$> _dIsDisabled,
                   ("id" .=) <$> _dId, ("labels" .=) <$> _dLabels,
+                  ("canaryMode" .=) <$> _dCanaryMode,
                   ("description" .=) <$> _dDescription,
                   ("isInactive" .=) <$> _dIsInactive,
                   ("sourceContexts" .=) <$> _dSourceContexts])
@@ -1774,7 +1824,7 @@ instance ToJSON Debuggee where
 data CloudWorkspaceSourceContext =
   CloudWorkspaceSourceContext'
     { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
-    , _cwscSnapshotId  :: !(Maybe Text)
+    , _cwscSnapshotId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1840,7 +1890,7 @@ registerDebuggeeRequest
 registerDebuggeeRequest = RegisterDebuggeeRequest' {_rDebuggee = Nothing}
 
 
--- | Debuggee information to register. The fields \`project\`,
+-- | Required. Debuggee information to register. The fields \`project\`,
 -- \`uniquifier\`, \`description\` and \`agent_version\` of the debuggee
 -- must be set.
 rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe Debuggee)
@@ -1908,7 +1958,7 @@ instance ToJSON AliasContext where
 data CloudWorkspaceId =
   CloudWorkspaceId'
     { _cwiRepoId :: !(Maybe RepoId)
-    , _cwiName   :: !(Maybe Text)
+    , _cwiName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

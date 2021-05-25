@@ -49,8 +49,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
     , procCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.operations.cancel@ method which the
 -- 'ProjectsRegionsOperationsCancel' request conforms to.
@@ -77,12 +77,12 @@ type ProjectsRegionsOperationsCancelResource =
 -- /See:/ 'projectsRegionsOperationsCancel' smart constructor.
 data ProjectsRegionsOperationsCancel =
   ProjectsRegionsOperationsCancel'
-    { _procXgafv          :: !(Maybe Xgafv)
+    { _procXgafv :: !(Maybe Xgafv)
     , _procUploadProtocol :: !(Maybe Text)
-    , _procAccessToken    :: !(Maybe Text)
-    , _procUploadType     :: !(Maybe Text)
-    , _procName           :: !Text
-    , _procCallback       :: !(Maybe Text)
+    , _procAccessToken :: !(Maybe Text)
+    , _procUploadType :: !(Maybe Text)
+    , _procName :: !Text
+    , _procCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

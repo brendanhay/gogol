@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
     , rprpPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.resetPassword@ method which the
 -- 'RelyingPartyResetPassword' request conforms to.

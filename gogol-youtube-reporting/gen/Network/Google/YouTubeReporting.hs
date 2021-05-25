@@ -231,16 +231,16 @@ module Network.Google.YouTubeReporting
     , rtSystemManaged
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.YouTubeReporting.Jobs.Create
-import           Network.Google.Resource.YouTubeReporting.Jobs.Delete
-import           Network.Google.Resource.YouTubeReporting.Jobs.Get
-import           Network.Google.Resource.YouTubeReporting.Jobs.List
-import           Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
-import           Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
-import           Network.Google.Resource.YouTubeReporting.Media.Download
-import           Network.Google.Resource.YouTubeReporting.ReportTypes.List
-import           Network.Google.YouTubeReporting.Types
+import Network.Google.Prelude
+import Network.Google.Resource.YouTubeReporting.Jobs.Create
+import Network.Google.Resource.YouTubeReporting.Jobs.Delete
+import Network.Google.Resource.YouTubeReporting.Jobs.Get
+import Network.Google.Resource.YouTubeReporting.Jobs.List
+import Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
+import Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
+import Network.Google.Resource.YouTubeReporting.Media.Download
+import Network.Google.Resource.YouTubeReporting.ReportTypes.List
+import Network.Google.YouTubeReporting.Types
 
 {- $resources
 TODO

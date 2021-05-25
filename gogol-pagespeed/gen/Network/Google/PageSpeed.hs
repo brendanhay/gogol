@@ -13,14 +13,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Analyzes the performance of a web page and provides tailored suggestions
--- to make that page faster.
+-- The PageSpeed Insights API lets you analyze the performance of your
+-- website with a simple API. It offers tailored suggestions for how you
+-- can optimize your site, and lets you easily integrate PageSpeed Insights
+-- analysis into your development tools and workflow.
 --
--- /See:/ <https://developers.google.com/speed/docs/insights/v5/get-started PageSpeed Insights API Reference>
+-- /See:/ <https://developers.google.com/speed/docs/insights/v5/about PageSpeed Insights API Reference>
 module Network.Google.PageSpeed
     (
     -- * Service Configuration
       pageSpeedService
+
+    -- * OAuth Scopes
+    , openidScope
 
     -- * API Declaration
     , PageSpeedAPI
@@ -37,53 +42,59 @@ module Network.Google.PageSpeed
     , lighthouseResultV5CategoryGroups
     , lrvcgAddtional
 
-    -- ** LighthouseResultV5RuntimeError
-    , LighthouseResultV5RuntimeError
-    , lighthouseResultV5RuntimeError
-    , lrvreCode
-    , lrvreMessage
+    -- ** RuntimeError
+    , RuntimeError
+    , runtimeError
+    , reCode
+    , reMessage
+
+    -- ** ConfigSettings
+    , ConfigSettings
+    , configSettings
+    , csLocale
+    , csFormFactor
+    , csChannel
+    , csEmulatedFormFactor
+    , csOnlyCategories
+
+    -- ** StackPack
+    , StackPack
+    , stackPack
+    , spDescriptions
+    , spId
+    , spTitle
+    , spIconDataURL
 
     -- ** LighthouseAuditResultV5Details
     , LighthouseAuditResultV5Details
     , lighthouseAuditResultV5Details
     , larvdAddtional
 
-    -- ** LighthouseResultV5ConfigSettings
-    , LighthouseResultV5ConfigSettings
-    , lighthouseResultV5ConfigSettings
-    , lrvcsLocale
-    , lrvcsEmulatedFormFactor
-    , lrvcsOnlyCategories
-
     -- ** PagespeedAPIRunPagespeedStrategy
     , PagespeedAPIRunPagespeedStrategy (..)
-
-    -- ** LighthouseResultV5Environment
-    , LighthouseResultV5Environment
-    , lighthouseResultV5Environment
-    , lrveHostUserAgent
-    , lrveBenchmarkIndex
-    , lrveNetworkUserAgent
-
-    -- ** LighthouseResultV5CategoryGroupsAdditional
-    , LighthouseResultV5CategoryGroupsAdditional
-    , lighthouseResultV5CategoryGroupsAdditional
-    , lrvcgaTitle
-    , lrvcgaDescription
 
     -- ** LighthouseAuditResultV5
     , LighthouseAuditResultV5
     , lighthouseAuditResultV5
     , larvScore
+    , larvNumericValue
     , larvExplanation
     , larvWarnings
     , larvScoreDisplayMode
     , larvDisplayValue
     , larvDetails
+    , larvNumericUnit
     , larvId
     , larvTitle
     , larvErrorMessage
     , larvDescription
+
+    -- ** Environment
+    , Environment
+    , environment
+    , eHostUserAgent
+    , eBenchmarkIndex
+    , eNetworkUserAgent
 
     -- ** PagespeedAPIPagespeedResponseV5
     , PagespeedAPIPagespeedResponseV5
@@ -107,6 +118,7 @@ module Network.Google.PageSpeed
     , lighthouseResultV5
     , lrvRuntimeError
     , lrvCategoryGroups
+    , lrvStackPacks
     , lrvFinalURL
     , lrvConfigSettings
     , lrvEnvironment
@@ -120,14 +132,27 @@ module Network.Google.PageSpeed
     , lrvAudits
     , lrvI18n
 
-    -- ** LighthouseResultV5Categories
-    , LighthouseResultV5Categories
-    , lighthouseResultV5Categories
-    , lrvcBestPractices
-    , lrvcPerformance
-    , lrvcPwa
-    , lrvcSeo
-    , lrvcAccessibility
+    -- ** Categories
+    , Categories
+    , categories
+    , cBestPractices
+    , cPerformance
+    , cPwa
+    , cSeo
+    , cAccessibility
+
+    -- ** Bucket
+    , Bucket
+    , bucket
+    , bMax
+    , bProportion
+    , bMin
+
+    -- ** PagespeedVersion
+    , PagespeedVersion
+    , pagespeedVersion
+    , pvMinor
+    , pvMajor
 
     -- ** PagespeedAPIRunPagespeedCategory
     , PagespeedAPIRunPagespeedCategory (..)
@@ -142,70 +167,109 @@ module Network.Google.PageSpeed
     , lcvTitle
     , lcvDescription
 
-    -- ** PagespeedAPILoadingExperienceV5MetricsAdditional
-    , PagespeedAPILoadingExperienceV5MetricsAdditional
-    , pagespeedAPILoadingExperienceV5MetricsAdditional
-    , palevmaCategory
-    , palevmaPercentile
-    , palevmaDistributions
+    -- ** CategoryGroupV5
+    , CategoryGroupV5
+    , categoryGroupV5
+    , cgvTitle
+    , cgvDescription
 
     -- ** PagespeedAPILoadingExperienceV5
     , PagespeedAPILoadingExperienceV5
     , pagespeedAPILoadingExperienceV5
+    , palevOriginFallback
     , palevMetrics
     , palevInitialURL
     , palevId
     , palevOverallCategory
 
-    -- ** PagespeedAPIPagespeedResponseV5Version
-    , PagespeedAPIPagespeedResponseV5Version
-    , pagespeedAPIPagespeedResponseV5Version
-    , paprvvMinor
-    , paprvvMajor
+    -- ** AuditRefs
+    , AuditRefs
+    , auditRefs
+    , arGroup
+    , arAcronym
+    , arWeight
+    , arRelevantAudits
+    , arId
 
-    -- ** PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
-    , PagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
-    , pagespeedAPILoadingExperienceV5MetricsAdditionalDistributionsItem
-    , palevmadiMax
-    , palevmadiProportion
-    , palevmadiMin
+    -- ** StackPackDescriptions
+    , StackPackDescriptions
+    , stackPackDescriptions
+    , spdAddtional
 
-    -- ** LighthouseResultV5Timing
-    , LighthouseResultV5Timing
-    , lighthouseResultV5Timing
-    , lrvtTotal
+    -- ** Xgafv
+    , Xgafv (..)
 
-    -- ** LighthouseResultV5I18nRendererFormattedStrings
-    , LighthouseResultV5I18nRendererFormattedStrings
-    , lighthouseResultV5I18nRendererFormattedStrings
-    , lrvirfsLabDataTitle
-    , lrvirfsWarningHeader
-    , lrvirfsOpportUnityResourceColumnLabel
-    , lrvirfsManualAuditsGroupTitle
-    , lrvirfsCrcInitialNavigation
-    , lrvirfsVarianceDisclaimer
-    , lrvirfsPassedAuditsGroupTitle
-    , lrvirfsToplevelWarningsMessage
-    , lrvirfsErrorMissingAuditInfo
-    , lrvirfsCrcLongestDurationLabel
-    , lrvirfsScorescaleLabel
-    , lrvirfsOpportUnitySavingsColumnLabel
-    , lrvirfsErrorLabel
-    , lrvirfsLsPerformanceCategoryDescription
-    , lrvirfsAuditGroupExpandTooltip
-    , lrvirfsNotApplicableAuditsGroupTitle
+    -- ** RendererFormattedStrings
+    , RendererFormattedStrings
+    , rendererFormattedStrings
+    , rfsRuntimeUnknown
+    , rfsCalculatorLink
+    , rfsLabDataTitle
+    , rfsDropdownSaveHTML
+    , rfsRuntimeSettingsNetworkThrottling
+    , rfsRuntimeDesktopEmulation
+    , rfsWarningHeader
+    , rfsRuntimeSettingsUA
+    , rfsOpportUnityResourceColumnLabel
+    , rfsManualAuditsGroupTitle
+    , rfsDropdownSaveGist
+    , rfsRuntimeSettingsUANetwork
+    , rfsCrcInitialNavigation
+    , rfsDropdownPrintSummary
+    , rfsVarianceDisclaimer
+    , rfsRuntimeSettingsTitle
+    , rfsPassedAuditsGroupTitle
+    , rfsRuntimeSettingsDevice
+    , rfsDropdownViewer
+    , rfsFooterIssue
+    , rfsRuntimeSettingsAxeVersion
+    , rfsToplevelWarningsMessage
+    , rfsErrorMissingAuditInfo
+    , rfsRuntimeSettingsURL
+    , rfsRuntimeSettingsCPUThrottling
+    , rfsThirdPartyResourcesLabel
+    , rfsDropdownSaveJSON
+    , rfsRuntimeSettingsChannel
+    , rfsCrcLongestDurationLabel
+    , rfsThrottlingProvided
+    , rfsDropdownPrintExpanded
+    , rfsRuntimeMobileEmulation
+    , rfsRuntimeSettingsFetchTime
+    , rfsWarningAuditsGroupTitle
+    , rfsSnippetExpandButtonLabel
+    , rfsRuntimeSettingsBenchmark
+    , rfsSnippetCollapseButtonLabel
+    , rfsDropdownDarkTheme
+    , rfsScorescaleLabel
+    , rfsShowRelevantAudits
+    , rfsDropdownCopyJSON
+    , rfsOpportUnitySavingsColumnLabel
+    , rfsErrorLabel
+    , rfsViewTreemapLabel
+    , rfsLsPerformanceCategoryDescription
+    , rfsAuditGroupExpandTooltip
+    , rfsRuntimeNoEmulation
+    , rfsNotApplicableAuditsGroupTitle
 
-    -- ** LighthouseCategoryV5AuditRefsItem
-    , LighthouseCategoryV5AuditRefsItem
-    , lighthouseCategoryV5AuditRefsItem
-    , lcvariGroup
-    , lcvariWeight
-    , lcvariId
+    -- ** Timing
+    , Timing
+    , timing
+    , tTotal
 
-    -- ** LighthouseResultV5I18n
-    , LighthouseResultV5I18n
-    , lighthouseResultV5I18n
-    , lrviRendererFormattedStrings
+    -- ** UserPageLoadMetricV5
+    , UserPageLoadMetricV5
+    , userPageLoadMetricV5
+    , uplmvMedian
+    , uplmvCategory
+    , uplmvFormFactor
+    , uplmvMetricId
+    , uplmvPercentile
+    , uplmvDistributions
+
+    -- ** I18n
+    , I18n
+    , i18n
+    , iRendererFormattedStrings
 
     -- ** LighthouseResultV5Audits
     , LighthouseResultV5Audits
@@ -213,9 +277,9 @@ module Network.Google.PageSpeed
     , lrvaAddtional
     ) where
 
-import           Network.Google.PageSpeed.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
+import Network.Google.Prelude
+import Network.Google.PageSpeed.Types
+import Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 
 {- $resources
 TODO

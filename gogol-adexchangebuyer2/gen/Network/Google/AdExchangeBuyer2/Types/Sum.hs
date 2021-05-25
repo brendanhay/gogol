@@ -16,11 +16,11 @@
 --
 module Network.Google.AdExchangeBuyer2.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | Specifies the creative source for programmatic deals. PUBLISHER means
--- creative is provided by seller and ADVERTISER means creative is provided
--- by buyer. \'OutputOnly
+-- | Output only. Specifies the creative source for programmatic deals.
+-- PUBLISHER means creative is provided by seller and ADVERTISER means
+-- creative is provided by buyer.
 data DealProgrammaticCreativeSource
     = ProgrammaticCreativeSourceUnspecified
       -- ^ @PROGRAMMATIC_CREATIVE_SOURCE_UNSPECIFIED@
@@ -54,7 +54,35 @@ instance FromJSON DealProgrammaticCreativeSource where
 instance ToJSON DealProgrammaticCreativeSource where
     toJSON = toJSONText
 
--- | Specifies the creative pre-approval policy. \'OutputOnly
+data SecurityContextSecuritiesItem
+    = Insecure
+      -- ^ @INSECURE@
+      -- Matches impressions that require insecure compatibility.
+    | SSL
+      -- ^ @SSL@
+      -- Matches impressions that require SSL compatibility.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SecurityContextSecuritiesItem
+
+instance FromHttpApiData SecurityContextSecuritiesItem where
+    parseQueryParam = \case
+        "INSECURE" -> Right Insecure
+        "SSL" -> Right SSL
+        x -> Left ("Unable to parse SecurityContextSecuritiesItem from: " <> x)
+
+instance ToHttpApiData SecurityContextSecuritiesItem where
+    toQueryParam = \case
+        Insecure -> "INSECURE"
+        SSL -> "SSL"
+
+instance FromJSON SecurityContextSecuritiesItem where
+    parseJSON = parseJSONText "SecurityContextSecuritiesItem"
+
+instance ToJSON SecurityContextSecuritiesItem where
+    toJSON = toJSONText
+
+-- | Output only. Specifies the creative pre-approval policy.
 data DealCreativePreApprovalPolicy
     = CreativePreApprovalPolicyUnspecified
       -- ^ @CREATIVE_PRE_APPROVAL_POLICY_UNSPECIFIED@
@@ -88,7 +116,45 @@ instance FromJSON DealCreativePreApprovalPolicy where
 instance ToJSON DealCreativePreApprovalPolicy where
     toJSON = toJSONText
 
--- | Specified the creative blocking levels to be applied. \'OutputOnly
+data VideoTargetingTargetedPositionTypesItem
+    = PositionTypeUnspecified
+      -- ^ @POSITION_TYPE_UNSPECIFIED@
+      -- A placeholder for an undefined video position.
+    | Preroll
+      -- ^ @PREROLL@
+      -- Ad is played before the video.
+    | Midroll
+      -- ^ @MIDROLL@
+      -- Ad is played during the video.
+    | Postroll
+      -- ^ @POSTROLL@
+      -- Ad is played after the video.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VideoTargetingTargetedPositionTypesItem
+
+instance FromHttpApiData VideoTargetingTargetedPositionTypesItem where
+    parseQueryParam = \case
+        "POSITION_TYPE_UNSPECIFIED" -> Right PositionTypeUnspecified
+        "PREROLL" -> Right Preroll
+        "MIDROLL" -> Right Midroll
+        "POSTROLL" -> Right Postroll
+        x -> Left ("Unable to parse VideoTargetingTargetedPositionTypesItem from: " <> x)
+
+instance ToHttpApiData VideoTargetingTargetedPositionTypesItem where
+    toQueryParam = \case
+        PositionTypeUnspecified -> "POSITION_TYPE_UNSPECIFIED"
+        Preroll -> "PREROLL"
+        Midroll -> "MIDROLL"
+        Postroll -> "POSTROLL"
+
+instance FromJSON VideoTargetingTargetedPositionTypesItem where
+    parseJSON = parseJSONText "VideoTargetingTargetedPositionTypesItem"
+
+instance ToJSON VideoTargetingTargetedPositionTypesItem where
+    toJSON = toJSONText
+
+-- | Output only. Specified the creative blocking levels to be applied.
 data DeliveryControlCreativeBlockingLevel
     = CreativeBlockingLevelUnspecified
       -- ^ @CREATIVE_BLOCKING_LEVEL_UNSPECIFIED@
@@ -122,7 +188,7 @@ instance FromJSON DeliveryControlCreativeBlockingLevel where
 instance ToJSON DeliveryControlCreativeBlockingLevel where
     toJSON = toJSONText
 
--- | The current state of the proposal. \'OutputOnly
+-- | Output only. The current state of the proposal.
 data ProposalProposalState
     = ProposalStateUnspecified
       -- ^ @PROPOSAL_STATE_UNSPECIFIED@
@@ -215,6 +281,86 @@ instance FromJSON ProductSyndicationProduct where
     parseJSON = parseJSONText "ProductSyndicationProduct"
 
 instance ToJSON ProductSyndicationProduct where
+    toJSON = toJSONText
+
+-- | Indicates if multiple creatives can share an ID or not. Default is
+-- NO_DUPLICATES (one ID per creative).
+data AccountsCreativesCreateDuplicateIdMode
+    = NoDuplicates
+      -- ^ @NO_DUPLICATES@
+      -- Recommended. This means that an ID will be unique to a single creative.
+      -- Multiple creatives will not share an ID.
+    | ForceEnableDuplicateIds
+      -- ^ @FORCE_ENABLE_DUPLICATE_IDS@
+      -- Not recommended. Using this option will allow multiple creatives to
+      -- share the same ID. Get and Update requests will not be possible for any
+      -- ID that has more than one creative associated. (List will still
+      -- function.) This is only intended for backwards compatibility in cases
+      -- where a single ID is already shared by multiple creatives from previous
+      -- APIs.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccountsCreativesCreateDuplicateIdMode
+
+instance FromHttpApiData AccountsCreativesCreateDuplicateIdMode where
+    parseQueryParam = \case
+        "NO_DUPLICATES" -> Right NoDuplicates
+        "FORCE_ENABLE_DUPLICATE_IDS" -> Right ForceEnableDuplicateIds
+        x -> Left ("Unable to parse AccountsCreativesCreateDuplicateIdMode from: " <> x)
+
+instance ToHttpApiData AccountsCreativesCreateDuplicateIdMode where
+    toQueryParam = \case
+        NoDuplicates -> "NO_DUPLICATES"
+        ForceEnableDuplicateIds -> "FORCE_ENABLE_DUPLICATE_IDS"
+
+instance FromJSON AccountsCreativesCreateDuplicateIdMode where
+    parseJSON = parseJSONText "AccountsCreativesCreateDuplicateIdMode"
+
+instance ToJSON AccountsCreativesCreateDuplicateIdMode where
+    toJSON = toJSONText
+
+data FilterSetFormatsItem
+    = FormatUnspecified
+      -- ^ @FORMAT_UNSPECIFIED@
+      -- A placeholder for an undefined format; indicates that no format filter
+      -- will be applied.
+    | NATiveDisplay
+      -- ^ @NATIVE_DISPLAY@
+      -- The ad impression is a native ad, and display (i.e., image) format.
+    | NATiveVideo
+      -- ^ @NATIVE_VIDEO@
+      -- The ad impression is a native ad, and video format.
+    | NonNATiveDisplay
+      -- ^ @NON_NATIVE_DISPLAY@
+      -- The ad impression is not a native ad, and display (i.e., image) format.
+    | NonNATiveVideo
+      -- ^ @NON_NATIVE_VIDEO@
+      -- The ad impression is not a native ad, and video format.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FilterSetFormatsItem
+
+instance FromHttpApiData FilterSetFormatsItem where
+    parseQueryParam = \case
+        "FORMAT_UNSPECIFIED" -> Right FormatUnspecified
+        "NATIVE_DISPLAY" -> Right NATiveDisplay
+        "NATIVE_VIDEO" -> Right NATiveVideo
+        "NON_NATIVE_DISPLAY" -> Right NonNATiveDisplay
+        "NON_NATIVE_VIDEO" -> Right NonNATiveVideo
+        x -> Left ("Unable to parse FilterSetFormatsItem from: " <> x)
+
+instance ToHttpApiData FilterSetFormatsItem where
+    toQueryParam = \case
+        FormatUnspecified -> "FORMAT_UNSPECIFIED"
+        NATiveDisplay -> "NATIVE_DISPLAY"
+        NATiveVideo -> "NATIVE_VIDEO"
+        NonNATiveDisplay -> "NON_NATIVE_DISPLAY"
+        NonNATiveVideo -> "NON_NATIVE_VIDEO"
+
+instance FromJSON FilterSetFormatsItem where
+    parseJSON = parseJSONText "FilterSetFormatsItem"
+
+instance ToJSON FilterSetFormatsItem where
     toJSON = toJSONText
 
 -- | Skippable video ads allow viewers to skip ads after 5 seconds.
@@ -589,7 +735,7 @@ data DisApprovalReason
       -- Misuse by an Open Measurement SDK script.
     | NonWhiteListedOmidVendor
       -- ^ @NON_WHITELISTED_OMID_VENDOR@
-      -- Use of an Open Measurement SDK vendor not on approved whitelist.
+      -- Use of an Open Measurement SDK vendor not on approved vendor list.
     | DestinationExperience
       -- ^ @DESTINATION_EXPERIENCE@
       -- Unacceptable landing page.
@@ -605,6 +751,9 @@ data DisApprovalReason
     | BailBonds
       -- ^ @BAIL_BONDS@
       -- Promotes services related to bail bonds.
+    | ExperimentalMedicalTreatment
+      -- ^ @EXPERIMENTAL_MEDICAL_TREATMENT@
+      -- Promotes speculative and\/or experimental medical treatments.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DisApprovalReason
@@ -712,6 +861,7 @@ instance FromHttpApiData DisApprovalReason where
         "NON_SSL_COMPLIANT" -> Right NonSSLCompliant
         "TEMPORARY_PAUSE" -> Right TemporaryPause
         "BAIL_BONDS" -> Right BailBonds
+        "EXPERIMENTAL_MEDICAL_TREATMENT" -> Right ExperimentalMedicalTreatment
         x -> Left ("Unable to parse DisApprovalReason from: " <> x)
 
 instance ToHttpApiData DisApprovalReason where
@@ -817,6 +967,7 @@ instance ToHttpApiData DisApprovalReason where
         NonSSLCompliant -> "NON_SSL_COMPLIANT"
         TemporaryPause -> "TEMPORARY_PAUSE"
         BailBonds -> "BAIL_BONDS"
+        ExperimentalMedicalTreatment -> "EXPERIMENTAL_MEDICAL_TREATMENT"
 
 instance FromJSON DisApprovalReason where
     parseJSON = parseJSONText "DisApprovalReason"
@@ -873,7 +1024,7 @@ instance FromJSON ClientRole where
 instance ToJSON ClientRole where
     toJSON = toJSONText
 
--- | Specifies whether the creative is safeFrame compatible. \'OutputOnly
+-- | Output only. Specifies whether the creative is safeFrame compatible.
 data DealCreativeSafeFrameCompatibility
     = CreativeSafeFrameCompatibilityUnspecified
       -- ^ @CREATIVE_SAFE_FRAME_COMPATIBILITY_UNSPECIFIED@
@@ -907,7 +1058,7 @@ instance FromJSON DealCreativeSafeFrameCompatibility where
 instance ToJSON DealCreativeSafeFrameCompatibility where
     toJSON = toJSONText
 
--- | Specifies how the impression delivery will be paced. \'OutputOnly
+-- | Output only. Specifies how the impression delivery will be paced.
 data DeliveryControlDeliveryRateType
     = DeliveryRateTypeUnspecified
       -- ^ @DELIVERY_RATE_TYPE_UNSPECIFIED@
@@ -980,7 +1131,7 @@ instance FromJSON DealPauseStatusFirstPausedBy where
 instance ToJSON DealPauseStatusFirstPausedBy where
     toJSON = toJSONText
 
--- | \'OutputOnly The top-level open auction status of this creative. If
+-- | Output only. The top-level open auction status of this creative. If
 -- disapproved, an entry for \'auctionType = OPEN_AUCTION\' (or \'ALL\') in
 -- serving_restrictions will also exist. Note that this may be nuanced with
 -- other contextual restrictions, in which case, it may be preferable to
@@ -1003,6 +1154,12 @@ data CreativeOpenAuctionStatus
     | DisApproved
       -- ^ @DISAPPROVED@
       -- The creative has been disapproved.
+    | PendingReview
+      -- ^ @PENDING_REVIEW@
+      -- Placeholder for transition to v1beta1. Currently not used.
+    | StatusTypeUnspecified
+      -- ^ @STATUS_TYPE_UNSPECIFIED@
+      -- Placeholder for transition to v1beta1. Currently not used.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeOpenAuctionStatus
@@ -1014,6 +1171,8 @@ instance FromHttpApiData CreativeOpenAuctionStatus where
         "CONDITIONALLY_APPROVED" -> Right ConditionallyApproved
         "APPROVED" -> Right Approved
         "DISAPPROVED" -> Right DisApproved
+        "PENDING_REVIEW" -> Right PendingReview
+        "STATUS_TYPE_UNSPECIFIED" -> Right StatusTypeUnspecified
         x -> Left ("Unable to parse CreativeOpenAuctionStatus from: " <> x)
 
 instance ToHttpApiData CreativeOpenAuctionStatus where
@@ -1023,6 +1182,8 @@ instance ToHttpApiData CreativeOpenAuctionStatus where
         ConditionallyApproved -> "CONDITIONALLY_APPROVED"
         Approved -> "APPROVED"
         DisApproved -> "DISAPPROVED"
+        PendingReview -> "PENDING_REVIEW"
+        StatusTypeUnspecified -> "STATUS_TYPE_UNSPECIFIED"
 
 instance FromJSON CreativeOpenAuctionStatus where
     parseJSON = parseJSONText "CreativeOpenAuctionStatus"
@@ -1076,6 +1237,44 @@ instance FromJSON DealSyndicationProduct where
 instance ToJSON DealSyndicationProduct where
     toJSON = toJSONText
 
+-- | The reservation type for a Programmatic Guaranteed deal. This indicates
+-- whether the number of impressions is fixed, or a percent of available
+-- impressions. If not specified, the default reservation type is STANDARD.
+data GuaranteedFixedPriceTermsReservationType
+    = ReservationTypeUnspecified
+      -- ^ @RESERVATION_TYPE_UNSPECIFIED@
+      -- An unspecified reservation type.
+    | Standard
+      -- ^ @STANDARD@
+      -- Non-sponsorship deal.
+    | Sponsorship
+      -- ^ @SPONSORSHIP@
+      -- Sponsorship deals don\'t have impression goal (guaranteed_looks) and
+      -- they are served based on the flight dates. For CPM Sponsorship deals,
+      -- impression_cap is the lifetime impression limit.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GuaranteedFixedPriceTermsReservationType
+
+instance FromHttpApiData GuaranteedFixedPriceTermsReservationType where
+    parseQueryParam = \case
+        "RESERVATION_TYPE_UNSPECIFIED" -> Right ReservationTypeUnspecified
+        "STANDARD" -> Right Standard
+        "SPONSORSHIP" -> Right Sponsorship
+        x -> Left ("Unable to parse GuaranteedFixedPriceTermsReservationType from: " <> x)
+
+instance ToHttpApiData GuaranteedFixedPriceTermsReservationType where
+    toQueryParam = \case
+        ReservationTypeUnspecified -> "RESERVATION_TYPE_UNSPECIFIED"
+        Standard -> "STANDARD"
+        Sponsorship -> "SPONSORSHIP"
+
+instance FromJSON GuaranteedFixedPriceTermsReservationType where
+    parseJSON = parseJSONText "GuaranteedFixedPriceTermsReservationType"
+
+instance ToJSON GuaranteedFixedPriceTermsReservationType where
+    toJSON = toJSONText
+
 -- | The granularity of time intervals if a time series breakdown is desired;
 -- optional.
 data FilterSetTimeSeriesGranularity
@@ -1115,58 +1314,154 @@ instance ToJSON FilterSetTimeSeriesGranularity where
 
 -- | The type of detail that the detail IDs represent.
 data ListCreativeStatusBreakdownByDetailResponseDetailType
-    = DetailTypeUnspecified
+    = LCSBBDRDTDetailTypeUnspecified
       -- ^ @DETAIL_TYPE_UNSPECIFIED@
       -- A placeholder for an undefined status. This value will never be returned
       -- in responses.
-    | CreativeAttribute
+    | LCSBBDRDTCreativeAttribute
       -- ^ @CREATIVE_ATTRIBUTE@
       -- Indicates that the detail ID refers to a creative attribute; see
       -- [publisher-excludable-creative-attributes](https:\/\/developers.google.com\/authorized-buyers\/rtb\/downloads\/publisher-excludable-creative-attributes).
-    | Vendor
+    | LCSBBDRDTVendor
       -- ^ @VENDOR@
       -- Indicates that the detail ID refers to a vendor; see
       -- [vendors](https:\/\/developers.google.com\/authorized-buyers\/rtb\/downloads\/vendors).
-    | SensitiveCategory
+      -- This namespace is different from that of the \`ATP_VENDOR\` detail type.
+    | LCSBBDRDTSensitiveCategory
       -- ^ @SENSITIVE_CATEGORY@
       -- Indicates that the detail ID refers to a sensitive category; see
       -- [ad-sensitive-categories](https:\/\/developers.google.com\/authorized-buyers\/rtb\/downloads\/ad-sensitive-categories).
-    | ProductCategory
+    | LCSBBDRDTProductCategory
       -- ^ @PRODUCT_CATEGORY@
       -- Indicates that the detail ID refers to a product category; see
       -- [ad-product-categories](https:\/\/developers.google.com\/authorized-buyers\/rtb\/downloads\/ad-product-categories).
-    | DisApprovalReason
+    | LCSBBDRDTDisApprovalReason
       -- ^ @DISAPPROVAL_REASON@
       -- Indicates that the detail ID refers to a disapproval reason; see
       -- DisapprovalReason enum in
       -- [snippet-status-report-proto](https:\/\/developers.google.com\/authorized-buyers\/rtb\/downloads\/snippet-status-report-proto).
+    | LCSBBDRDTPolicyTopic
+      -- ^ @POLICY_TOPIC@
+      -- Indicates that the detail ID refers to a policy topic.
+    | LCSBBDRDTAtpVendor
+      -- ^ @ATP_VENDOR@
+      -- Indicates that the detail ID refers to an ad technology provider (ATP);
+      -- see [providers]
+      -- (https:\/\/storage.googleapis.com\/adx-rtb-dictionaries\/providers.csv).
+      -- This namespace is different from the \`VENDOR\` detail type; see [ad
+      -- technology
+      -- providers](https:\/\/support.google.com\/admanager\/answer\/9012903) for
+      -- more information.
+    | LCSBBDRDTVendorDomain
+      -- ^ @VENDOR_DOMAIN@
+      -- Indicates that the detail string refers the domain of an unknown vendor.
+    | LCSBBDRDTGvlId
+      -- ^ @GVL_ID@
+      -- Indicates that the detail ID refers an IAB GVL ID which Google did not
+      -- detect in the latest TCF Vendor List. See [Global Vendor List]
+      -- (https:\/\/vendor-list.consensu.org\/v2\/vendor-list.json)
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ListCreativeStatusBreakdownByDetailResponseDetailType
 
 instance FromHttpApiData ListCreativeStatusBreakdownByDetailResponseDetailType where
     parseQueryParam = \case
-        "DETAIL_TYPE_UNSPECIFIED" -> Right DetailTypeUnspecified
-        "CREATIVE_ATTRIBUTE" -> Right CreativeAttribute
-        "VENDOR" -> Right Vendor
-        "SENSITIVE_CATEGORY" -> Right SensitiveCategory
-        "PRODUCT_CATEGORY" -> Right ProductCategory
-        "DISAPPROVAL_REASON" -> Right DisApprovalReason
+        "DETAIL_TYPE_UNSPECIFIED" -> Right LCSBBDRDTDetailTypeUnspecified
+        "CREATIVE_ATTRIBUTE" -> Right LCSBBDRDTCreativeAttribute
+        "VENDOR" -> Right LCSBBDRDTVendor
+        "SENSITIVE_CATEGORY" -> Right LCSBBDRDTSensitiveCategory
+        "PRODUCT_CATEGORY" -> Right LCSBBDRDTProductCategory
+        "DISAPPROVAL_REASON" -> Right LCSBBDRDTDisApprovalReason
+        "POLICY_TOPIC" -> Right LCSBBDRDTPolicyTopic
+        "ATP_VENDOR" -> Right LCSBBDRDTAtpVendor
+        "VENDOR_DOMAIN" -> Right LCSBBDRDTVendorDomain
+        "GVL_ID" -> Right LCSBBDRDTGvlId
         x -> Left ("Unable to parse ListCreativeStatusBreakdownByDetailResponseDetailType from: " <> x)
 
 instance ToHttpApiData ListCreativeStatusBreakdownByDetailResponseDetailType where
     toQueryParam = \case
-        DetailTypeUnspecified -> "DETAIL_TYPE_UNSPECIFIED"
-        CreativeAttribute -> "CREATIVE_ATTRIBUTE"
-        Vendor -> "VENDOR"
-        SensitiveCategory -> "SENSITIVE_CATEGORY"
-        ProductCategory -> "PRODUCT_CATEGORY"
-        DisApprovalReason -> "DISAPPROVAL_REASON"
+        LCSBBDRDTDetailTypeUnspecified -> "DETAIL_TYPE_UNSPECIFIED"
+        LCSBBDRDTCreativeAttribute -> "CREATIVE_ATTRIBUTE"
+        LCSBBDRDTVendor -> "VENDOR"
+        LCSBBDRDTSensitiveCategory -> "SENSITIVE_CATEGORY"
+        LCSBBDRDTProductCategory -> "PRODUCT_CATEGORY"
+        LCSBBDRDTDisApprovalReason -> "DISAPPROVAL_REASON"
+        LCSBBDRDTPolicyTopic -> "POLICY_TOPIC"
+        LCSBBDRDTAtpVendor -> "ATP_VENDOR"
+        LCSBBDRDTVendorDomain -> "VENDOR_DOMAIN"
+        LCSBBDRDTGvlId -> "GVL_ID"
 
 instance FromJSON ListCreativeStatusBreakdownByDetailResponseDetailType where
     parseJSON = parseJSONText "ListCreativeStatusBreakdownByDetailResponseDetailType"
 
 instance ToJSON ListCreativeStatusBreakdownByDetailResponseDetailType where
+    toJSON = toJSONText
+
+data FilterSetPlatformsItem
+    = FSPIPlatformUnspecified
+      -- ^ @PLATFORM_UNSPECIFIED@
+      -- A placeholder for an undefined platform; indicates that no platform
+      -- filter will be applied.
+    | FSPIDesktop
+      -- ^ @DESKTOP@
+      -- The ad impression appears on a desktop.
+    | FSPITablet
+      -- ^ @TABLET@
+      -- The ad impression appears on a tablet.
+    | FSPIMobile
+      -- ^ @MOBILE@
+      -- The ad impression appears on a mobile device.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FilterSetPlatformsItem
+
+instance FromHttpApiData FilterSetPlatformsItem where
+    parseQueryParam = \case
+        "PLATFORM_UNSPECIFIED" -> Right FSPIPlatformUnspecified
+        "DESKTOP" -> Right FSPIDesktop
+        "TABLET" -> Right FSPITablet
+        "MOBILE" -> Right FSPIMobile
+        x -> Left ("Unable to parse FilterSetPlatformsItem from: " <> x)
+
+instance ToHttpApiData FilterSetPlatformsItem where
+    toQueryParam = \case
+        FSPIPlatformUnspecified -> "PLATFORM_UNSPECIFIED"
+        FSPIDesktop -> "DESKTOP"
+        FSPITablet -> "TABLET"
+        FSPIMobile -> "MOBILE"
+
+instance FromJSON FilterSetPlatformsItem where
+    parseJSON = parseJSONText "FilterSetPlatformsItem"
+
+instance ToJSON FilterSetPlatformsItem where
+    toJSON = toJSONText
+
+data CreativeSizeAllowedFormatsItem
+    = Unknown
+      -- ^ @UNKNOWN@
+      -- A placeholder for an undefined allowed format.
+    | Audio
+      -- ^ @AUDIO@
+      -- An audio-only ad (without any video).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreativeSizeAllowedFormatsItem
+
+instance FromHttpApiData CreativeSizeAllowedFormatsItem where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right Unknown
+        "AUDIO" -> Right Audio
+        x -> Left ("Unable to parse CreativeSizeAllowedFormatsItem from: " <> x)
+
+instance ToHttpApiData CreativeSizeAllowedFormatsItem where
+    toQueryParam = \case
+        Unknown -> "UNKNOWN"
+        Audio -> "AUDIO"
+
+instance FromJSON CreativeSizeAllowedFormatsItem where
+    parseJSON = parseJSONText "CreativeSizeAllowedFormatsItem"
+
+instance ToJSON CreativeSizeAllowedFormatsItem where
     toJSON = toJSONText
 
 -- | The status specifying why the bid responses were considered to have no
@@ -1182,12 +1477,16 @@ data BidResponseWithoutBidsStatusRowStatus
     | BRWBSRSResponsesWithoutBidsForAccount
       -- ^ @RESPONSES_WITHOUT_BIDS_FOR_ACCOUNT@
       -- The response had no bids for the specified account, though it may have
-      -- included bids on behalf of other accounts.
+      -- included bids on behalf of other accounts. Applies if: 1. Request is on
+      -- behalf of a bidder and an account filter is present. 2. Request is on
+      -- behalf of a child seat.
     | BRWBSRSResponsesWithoutBidsForDeal
       -- ^ @RESPONSES_WITHOUT_BIDS_FOR_DEAL@
       -- The response had no bids for the specified deal, though it may have
       -- included bids on other deals on behalf of the account to which the deal
-      -- belongs.
+      -- belongs. If request is on behalf of a bidder and an account filter is
+      -- not present, this also includes responses that have bids on behalf of
+      -- accounts other than the account to which the deal belongs.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BidResponseWithoutBidsStatusRowStatus
@@ -1211,6 +1510,303 @@ instance FromJSON BidResponseWithoutBidsStatusRowStatus where
     parseJSON = parseJSONText "BidResponseWithoutBidsStatusRowStatus"
 
 instance ToJSON BidResponseWithoutBidsStatusRowStatus where
+    toJSON = toJSONText
+
+-- | The app store the app belongs to.
+data PublisherProFileMobileApplicationAppStore
+    = AppStoreTypeUnspecified
+      -- ^ @APP_STORE_TYPE_UNSPECIFIED@
+      -- A placeholder for an unknown app store.
+    | AppleItunes
+      -- ^ @APPLE_ITUNES@
+      -- Apple iTunes
+    | GooglePlay
+      -- ^ @GOOGLE_PLAY@
+      -- Google Play
+    | Roku
+      -- ^ @ROKU@
+      -- Roku
+    | AmazonFiretv
+      -- ^ @AMAZON_FIRETV@
+      -- Amazon Fire TV
+    | Playstation
+      -- ^ @PLAYSTATION@
+      -- Playstation
+    | Xbox
+      -- ^ @XBOX@
+      -- Xbox
+    | SamsungTv
+      -- ^ @SAMSUNG_TV@
+      -- Samsung TV
+    | Amazon
+      -- ^ @AMAZON@
+      -- Amazon Appstore
+    | Oppo
+      -- ^ @OPPO@
+      -- OPPO App Market
+    | Samsung
+      -- ^ @SAMSUNG@
+      -- Samsung Galaxy Store
+    | Vivo
+      -- ^ @VIVO@
+      -- VIVO App Store
+    | Xiaomi
+      -- ^ @XIAOMI@
+      -- Xiaomi GetApps
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PublisherProFileMobileApplicationAppStore
+
+instance FromHttpApiData PublisherProFileMobileApplicationAppStore where
+    parseQueryParam = \case
+        "APP_STORE_TYPE_UNSPECIFIED" -> Right AppStoreTypeUnspecified
+        "APPLE_ITUNES" -> Right AppleItunes
+        "GOOGLE_PLAY" -> Right GooglePlay
+        "ROKU" -> Right Roku
+        "AMAZON_FIRETV" -> Right AmazonFiretv
+        "PLAYSTATION" -> Right Playstation
+        "XBOX" -> Right Xbox
+        "SAMSUNG_TV" -> Right SamsungTv
+        "AMAZON" -> Right Amazon
+        "OPPO" -> Right Oppo
+        "SAMSUNG" -> Right Samsung
+        "VIVO" -> Right Vivo
+        "XIAOMI" -> Right Xiaomi
+        x -> Left ("Unable to parse PublisherProFileMobileApplicationAppStore from: " <> x)
+
+instance ToHttpApiData PublisherProFileMobileApplicationAppStore where
+    toQueryParam = \case
+        AppStoreTypeUnspecified -> "APP_STORE_TYPE_UNSPECIFIED"
+        AppleItunes -> "APPLE_ITUNES"
+        GooglePlay -> "GOOGLE_PLAY"
+        Roku -> "ROKU"
+        AmazonFiretv -> "AMAZON_FIRETV"
+        Playstation -> "PLAYSTATION"
+        Xbox -> "XBOX"
+        SamsungTv -> "SAMSUNG_TV"
+        Amazon -> "AMAZON"
+        Oppo -> "OPPO"
+        Samsung -> "SAMSUNG"
+        Vivo -> "VIVO"
+        Xiaomi -> "XIAOMI"
+
+instance FromJSON PublisherProFileMobileApplicationAppStore where
+    parseJSON = parseJSONText "PublisherProFileMobileApplicationAppStore"
+
+instance ToJSON PublisherProFileMobileApplicationAppStore where
+    toJSON = toJSONText
+
+data CreativeAttributesItem
+    = AttributeUnspecified
+      -- ^ @ATTRIBUTE_UNSPECIFIED@
+      -- Do not use. This is a placeholder value only.
+    | ImageRichMedia
+      -- ^ @IMAGE_RICH_MEDIA@
+      -- The creative is of type image\/rich media. For pretargeting.
+    | AdobeFlashFlv
+      -- ^ @ADOBE_FLASH_FLV@
+      -- The creative is of video type Adobe Flash FLV. For pretargeting.
+    | IsTagged
+      -- ^ @IS_TAGGED@
+      -- The creative is tagged.
+    | IsCookieTargeted
+      -- ^ @IS_COOKIE_TARGETED@
+      -- The creative is cookie targeted.
+    | IsUserInterestTargeted
+      -- ^ @IS_USER_INTEREST_TARGETED@
+      -- The creative is user interest targeted.
+    | ExpandingDirectionNone
+      -- ^ @EXPANDING_DIRECTION_NONE@
+      -- The creative does not expand.
+    | ExpandingDirectionUp
+      -- ^ @EXPANDING_DIRECTION_UP@
+      -- The creative expands up.
+    | ExpandingDirectionDown
+      -- ^ @EXPANDING_DIRECTION_DOWN@
+      -- The creative expands down.
+    | ExpandingDirectionLeft
+      -- ^ @EXPANDING_DIRECTION_LEFT@
+      -- The creative expands left.
+    | ExpandingDirectionRight
+      -- ^ @EXPANDING_DIRECTION_RIGHT@
+      -- The creative expands right.
+    | ExpandingDirectionUpLeft
+      -- ^ @EXPANDING_DIRECTION_UP_LEFT@
+      -- The creative expands up and left.
+    | ExpandingDirectionUpRight
+      -- ^ @EXPANDING_DIRECTION_UP_RIGHT@
+      -- The creative expands up and right.
+    | ExpandingDirectionDownLeft
+      -- ^ @EXPANDING_DIRECTION_DOWN_LEFT@
+      -- The creative expands down and left.
+    | ExpandingDirectionDownRight
+      -- ^ @EXPANDING_DIRECTION_DOWN_RIGHT@
+      -- The creative expands down and right.
+    | CreativeTypeHTML
+      -- ^ @CREATIVE_TYPE_HTML@
+      -- The creative type is HTML.
+    | CreativeTypeVastVideo
+      -- ^ @CREATIVE_TYPE_VAST_VIDEO@
+      -- The creative type is VAST video.
+    | ExpandingDirectionUpOrDown
+      -- ^ @EXPANDING_DIRECTION_UP_OR_DOWN@
+      -- The creative expands up or down.
+    | ExpandingDirectionLeftOrRight
+      -- ^ @EXPANDING_DIRECTION_LEFT_OR_RIGHT@
+      -- The creative expands left or right.
+    | ExpandingDirectionAnyDiagonal
+      -- ^ @EXPANDING_DIRECTION_ANY_DIAGONAL@
+      -- The creative expands on any diagonal.
+    | ExpandingActionRolloverToExpand
+      -- ^ @EXPANDING_ACTION_ROLLOVER_TO_EXPAND@
+      -- The creative expands when rolled over.
+    | InstreamVastVideoTypeVpaidFlash
+      -- ^ @INSTREAM_VAST_VIDEO_TYPE_VPAID_FLASH@
+      -- The instream vast video type is vpaid flash.
+    | RichMediaCapabilityTypeMraid
+      -- ^ @RICH_MEDIA_CAPABILITY_TYPE_MRAID@
+      -- The creative is MRAID.
+    | RichMediaCapabilityTypeFlash
+      -- ^ @RICH_MEDIA_CAPABILITY_TYPE_FLASH@
+      -- The creative is Flash.
+    | RichMediaCapabilityTypeHTML5
+      -- ^ @RICH_MEDIA_CAPABILITY_TYPE_HTML5@
+      -- The creative is HTML5.
+    | SkippableInstreamVideo
+      -- ^ @SKIPPABLE_INSTREAM_VIDEO@
+      -- The creative has an instream VAST video type of skippable instream
+      -- video. For pretargeting.
+    | RichMediaCapabilityTypeSSL
+      -- ^ @RICH_MEDIA_CAPABILITY_TYPE_SSL@
+      -- The creative is SSL.
+    | RichMediaCapabilityTypeNonSSL
+      -- ^ @RICH_MEDIA_CAPABILITY_TYPE_NON_SSL@
+      -- The creative is non-SSL.
+    | RichMediaCapabilityTypeInterstitial
+      -- ^ @RICH_MEDIA_CAPABILITY_TYPE_INTERSTITIAL@
+      -- The creative is an interstitial.
+    | NonSkippableInstreamVideo
+      -- ^ @NON_SKIPPABLE_INSTREAM_VIDEO@
+      -- The creative has an instream VAST video type of non-skippable instream
+      -- video. For pretargeting.
+    | NATiveEligibilityEligible
+      -- ^ @NATIVE_ELIGIBILITY_ELIGIBLE@
+      -- The creative is eligible for native.
+    | NonVpaid
+      -- ^ @NON_VPAID@
+      -- The creative has an instream VAST video type of non-VPAID. For
+      -- pretargeting.
+    | NATiveEligibilityNotEligible
+      -- ^ @NATIVE_ELIGIBILITY_NOT_ELIGIBLE@
+      -- The creative is not eligible for native.
+    | AnyInterstitial
+      -- ^ @ANY_INTERSTITIAL@
+      -- The creative has an interstitial size of any interstitial. For
+      -- pretargeting.
+    | NonInterstitial
+      -- ^ @NON_INTERSTITIAL@
+      -- The creative has an interstitial size of non interstitial. For
+      -- pretargeting.
+    | InBannerVideo
+      -- ^ @IN_BANNER_VIDEO@
+      -- The video type is in-banner video.
+    | RenderingSizelessAdx
+      -- ^ @RENDERING_SIZELESS_ADX@
+      -- The creative can dynamically resize to fill a variety of slot sizes.
+    | Omsdk10
+      -- ^ @OMSDK_1_0@
+      -- The open measurement SDK is supported.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreativeAttributesItem
+
+instance FromHttpApiData CreativeAttributesItem where
+    parseQueryParam = \case
+        "ATTRIBUTE_UNSPECIFIED" -> Right AttributeUnspecified
+        "IMAGE_RICH_MEDIA" -> Right ImageRichMedia
+        "ADOBE_FLASH_FLV" -> Right AdobeFlashFlv
+        "IS_TAGGED" -> Right IsTagged
+        "IS_COOKIE_TARGETED" -> Right IsCookieTargeted
+        "IS_USER_INTEREST_TARGETED" -> Right IsUserInterestTargeted
+        "EXPANDING_DIRECTION_NONE" -> Right ExpandingDirectionNone
+        "EXPANDING_DIRECTION_UP" -> Right ExpandingDirectionUp
+        "EXPANDING_DIRECTION_DOWN" -> Right ExpandingDirectionDown
+        "EXPANDING_DIRECTION_LEFT" -> Right ExpandingDirectionLeft
+        "EXPANDING_DIRECTION_RIGHT" -> Right ExpandingDirectionRight
+        "EXPANDING_DIRECTION_UP_LEFT" -> Right ExpandingDirectionUpLeft
+        "EXPANDING_DIRECTION_UP_RIGHT" -> Right ExpandingDirectionUpRight
+        "EXPANDING_DIRECTION_DOWN_LEFT" -> Right ExpandingDirectionDownLeft
+        "EXPANDING_DIRECTION_DOWN_RIGHT" -> Right ExpandingDirectionDownRight
+        "CREATIVE_TYPE_HTML" -> Right CreativeTypeHTML
+        "CREATIVE_TYPE_VAST_VIDEO" -> Right CreativeTypeVastVideo
+        "EXPANDING_DIRECTION_UP_OR_DOWN" -> Right ExpandingDirectionUpOrDown
+        "EXPANDING_DIRECTION_LEFT_OR_RIGHT" -> Right ExpandingDirectionLeftOrRight
+        "EXPANDING_DIRECTION_ANY_DIAGONAL" -> Right ExpandingDirectionAnyDiagonal
+        "EXPANDING_ACTION_ROLLOVER_TO_EXPAND" -> Right ExpandingActionRolloverToExpand
+        "INSTREAM_VAST_VIDEO_TYPE_VPAID_FLASH" -> Right InstreamVastVideoTypeVpaidFlash
+        "RICH_MEDIA_CAPABILITY_TYPE_MRAID" -> Right RichMediaCapabilityTypeMraid
+        "RICH_MEDIA_CAPABILITY_TYPE_FLASH" -> Right RichMediaCapabilityTypeFlash
+        "RICH_MEDIA_CAPABILITY_TYPE_HTML5" -> Right RichMediaCapabilityTypeHTML5
+        "SKIPPABLE_INSTREAM_VIDEO" -> Right SkippableInstreamVideo
+        "RICH_MEDIA_CAPABILITY_TYPE_SSL" -> Right RichMediaCapabilityTypeSSL
+        "RICH_MEDIA_CAPABILITY_TYPE_NON_SSL" -> Right RichMediaCapabilityTypeNonSSL
+        "RICH_MEDIA_CAPABILITY_TYPE_INTERSTITIAL" -> Right RichMediaCapabilityTypeInterstitial
+        "NON_SKIPPABLE_INSTREAM_VIDEO" -> Right NonSkippableInstreamVideo
+        "NATIVE_ELIGIBILITY_ELIGIBLE" -> Right NATiveEligibilityEligible
+        "NON_VPAID" -> Right NonVpaid
+        "NATIVE_ELIGIBILITY_NOT_ELIGIBLE" -> Right NATiveEligibilityNotEligible
+        "ANY_INTERSTITIAL" -> Right AnyInterstitial
+        "NON_INTERSTITIAL" -> Right NonInterstitial
+        "IN_BANNER_VIDEO" -> Right InBannerVideo
+        "RENDERING_SIZELESS_ADX" -> Right RenderingSizelessAdx
+        "OMSDK_1_0" -> Right Omsdk10
+        x -> Left ("Unable to parse CreativeAttributesItem from: " <> x)
+
+instance ToHttpApiData CreativeAttributesItem where
+    toQueryParam = \case
+        AttributeUnspecified -> "ATTRIBUTE_UNSPECIFIED"
+        ImageRichMedia -> "IMAGE_RICH_MEDIA"
+        AdobeFlashFlv -> "ADOBE_FLASH_FLV"
+        IsTagged -> "IS_TAGGED"
+        IsCookieTargeted -> "IS_COOKIE_TARGETED"
+        IsUserInterestTargeted -> "IS_USER_INTEREST_TARGETED"
+        ExpandingDirectionNone -> "EXPANDING_DIRECTION_NONE"
+        ExpandingDirectionUp -> "EXPANDING_DIRECTION_UP"
+        ExpandingDirectionDown -> "EXPANDING_DIRECTION_DOWN"
+        ExpandingDirectionLeft -> "EXPANDING_DIRECTION_LEFT"
+        ExpandingDirectionRight -> "EXPANDING_DIRECTION_RIGHT"
+        ExpandingDirectionUpLeft -> "EXPANDING_DIRECTION_UP_LEFT"
+        ExpandingDirectionUpRight -> "EXPANDING_DIRECTION_UP_RIGHT"
+        ExpandingDirectionDownLeft -> "EXPANDING_DIRECTION_DOWN_LEFT"
+        ExpandingDirectionDownRight -> "EXPANDING_DIRECTION_DOWN_RIGHT"
+        CreativeTypeHTML -> "CREATIVE_TYPE_HTML"
+        CreativeTypeVastVideo -> "CREATIVE_TYPE_VAST_VIDEO"
+        ExpandingDirectionUpOrDown -> "EXPANDING_DIRECTION_UP_OR_DOWN"
+        ExpandingDirectionLeftOrRight -> "EXPANDING_DIRECTION_LEFT_OR_RIGHT"
+        ExpandingDirectionAnyDiagonal -> "EXPANDING_DIRECTION_ANY_DIAGONAL"
+        ExpandingActionRolloverToExpand -> "EXPANDING_ACTION_ROLLOVER_TO_EXPAND"
+        InstreamVastVideoTypeVpaidFlash -> "INSTREAM_VAST_VIDEO_TYPE_VPAID_FLASH"
+        RichMediaCapabilityTypeMraid -> "RICH_MEDIA_CAPABILITY_TYPE_MRAID"
+        RichMediaCapabilityTypeFlash -> "RICH_MEDIA_CAPABILITY_TYPE_FLASH"
+        RichMediaCapabilityTypeHTML5 -> "RICH_MEDIA_CAPABILITY_TYPE_HTML5"
+        SkippableInstreamVideo -> "SKIPPABLE_INSTREAM_VIDEO"
+        RichMediaCapabilityTypeSSL -> "RICH_MEDIA_CAPABILITY_TYPE_SSL"
+        RichMediaCapabilityTypeNonSSL -> "RICH_MEDIA_CAPABILITY_TYPE_NON_SSL"
+        RichMediaCapabilityTypeInterstitial -> "RICH_MEDIA_CAPABILITY_TYPE_INTERSTITIAL"
+        NonSkippableInstreamVideo -> "NON_SKIPPABLE_INSTREAM_VIDEO"
+        NATiveEligibilityEligible -> "NATIVE_ELIGIBILITY_ELIGIBLE"
+        NonVpaid -> "NON_VPAID"
+        NATiveEligibilityNotEligible -> "NATIVE_ELIGIBILITY_NOT_ELIGIBLE"
+        AnyInterstitial -> "ANY_INTERSTITIAL"
+        NonInterstitial -> "NON_INTERSTITIAL"
+        InBannerVideo -> "IN_BANNER_VIDEO"
+        RenderingSizelessAdx -> "RENDERING_SIZELESS_ADX"
+        Omsdk10 -> "OMSDK_1_0"
+
+instance FromJSON CreativeAttributesItem where
+    parseJSON = parseJSONText "CreativeAttributesItem"
+
+instance ToJSON CreativeAttributesItem where
     toJSON = toJSONText
 
 -- | The timezone to use for interpreting the day part targeting.
@@ -1245,6 +1841,39 @@ instance FromJSON DayPartTargetingTimeZoneType where
     parseJSON = parseJSONText "DayPartTargetingTimeZoneType"
 
 instance ToJSON DayPartTargetingTimeZoneType where
+    toJSON = toJSONText
+
+data PlatformContextPlatformsItem
+    = Desktop
+      -- ^ @DESKTOP@
+      -- Desktop platform.
+    | Android
+      -- ^ @ANDROID@
+      -- Android platform.
+    | Ios
+      -- ^ @IOS@
+      -- iOS platform.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PlatformContextPlatformsItem
+
+instance FromHttpApiData PlatformContextPlatformsItem where
+    parseQueryParam = \case
+        "DESKTOP" -> Right Desktop
+        "ANDROID" -> Right Android
+        "IOS" -> Right Ios
+        x -> Left ("Unable to parse PlatformContextPlatformsItem from: " <> x)
+
+instance ToHttpApiData PlatformContextPlatformsItem where
+    toQueryParam = \case
+        Desktop -> "DESKTOP"
+        Android -> "ANDROID"
+        Ios -> "IOS"
+
+instance FromJSON PlatformContextPlatformsItem where
+    parseJSON = parseJSONText "PlatformContextPlatformsItem"
+
+instance ToJSON PlatformContextPlatformsItem where
     toJSON = toJSONText
 
 -- | The status of the client user.
@@ -1345,7 +1974,7 @@ instance FromJSON CreativeRestrictionsCreativeFormat where
 instance ToJSON CreativeRestrictionsCreativeFormat where
     toJSON = toJSONText
 
--- | Indicates whether the buyer\/seller created the proposal. \'OutputOnly
+-- | Output only. Indicates whether the buyer\/seller created the proposal.
 data ProposalOriginatorRole
     = PORBuyerSellerRoleUnspecified
       -- ^ @BUYER_SELLER_ROLE_UNSPECIFIED@
@@ -1379,8 +2008,8 @@ instance FromJSON ProposalOriginatorRole where
 instance ToJSON ProposalOriginatorRole where
     toJSON = toJSONText
 
--- | The native template for this creative. It will have a value only if
--- creative_size_type = CreativeSizeType.NATIVE. \'OutputOnly
+-- | Output only. The native template for this creative. It will have a value
+-- only if creative_size_type = CreativeSizeType.NATIVE.
 data CreativeSizeNATiveTemplate
     = UnknownNATiveTemplate
       -- ^ @UNKNOWN_NATIVE_TEMPLATE@
@@ -1582,8 +2211,8 @@ instance FromJSON DealTermsBrandingType where
 instance ToJSON DealTermsBrandingType where
     toJSON = toJSONText
 
--- | The role of the last user that either updated the proposal or left a
--- comment. \'OutputOnly
+-- | Output only. The role of the last user that either updated the proposal
+-- or left a comment.
 data ProposalLastUpdaterOrCommentorRole
     = PLUOCRBuyerSellerRoleUnspecified
       -- ^ @BUYER_SELLER_ROLE_UNSPECIFIED@
@@ -1617,7 +2246,8 @@ instance FromJSON ProposalLastUpdaterOrCommentorRole where
 instance ToJSON ProposalLastUpdaterOrCommentorRole where
     toJSON = toJSONText
 
--- | The type of the client entity: \`ADVERTISER\`, \`BRAND\`, or \`AGENCY\`.
+-- | An optional field for specifying the type of the client entity:
+-- \`ADVERTISER\`, \`BRAND\`, or \`AGENCY\`.
 data ClientEntityType
     = CETEntityTypeUnspecified
       -- ^ @ENTITY_TYPE_UNSPECIFIED@
@@ -1665,57 +2295,95 @@ instance ToJSON ClientEntityType where
 -- | The time unit. Along with num_time_units defines the amount of time over
 -- which impressions per user are counted and capped.
 data FrequencyCapTimeUnitType
-    = TimeUnitTypeUnspecified
+    = FCTUTTimeUnitTypeUnspecified
       -- ^ @TIME_UNIT_TYPE_UNSPECIFIED@
       -- A placeholder for an undefined time unit type. This just indicates the
       -- variable with this value hasn\'t been initialized.
-    | Minute
+    | FCTUTMinute
       -- ^ @MINUTE@
       -- Minute
-    | Hour
+    | FCTUTHour
       -- ^ @HOUR@
       -- Hour
-    | Day
+    | FCTUTDay
       -- ^ @DAY@
       -- Day
-    | Week
+    | FCTUTWeek
       -- ^ @WEEK@
       -- Week
-    | Month
+    | FCTUTMonth
       -- ^ @MONTH@
       -- Month
-    | Lifetime
+    | FCTUTLifetime
       -- ^ @LIFETIME@
       -- Lifetime
+    | FCTUTPod
+      -- ^ @POD@
+      -- Pod
+    | FCTUTStream
+      -- ^ @STREAM@
+      -- Stream
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FrequencyCapTimeUnitType
 
 instance FromHttpApiData FrequencyCapTimeUnitType where
     parseQueryParam = \case
-        "TIME_UNIT_TYPE_UNSPECIFIED" -> Right TimeUnitTypeUnspecified
-        "MINUTE" -> Right Minute
-        "HOUR" -> Right Hour
-        "DAY" -> Right Day
-        "WEEK" -> Right Week
-        "MONTH" -> Right Month
-        "LIFETIME" -> Right Lifetime
+        "TIME_UNIT_TYPE_UNSPECIFIED" -> Right FCTUTTimeUnitTypeUnspecified
+        "MINUTE" -> Right FCTUTMinute
+        "HOUR" -> Right FCTUTHour
+        "DAY" -> Right FCTUTDay
+        "WEEK" -> Right FCTUTWeek
+        "MONTH" -> Right FCTUTMonth
+        "LIFETIME" -> Right FCTUTLifetime
+        "POD" -> Right FCTUTPod
+        "STREAM" -> Right FCTUTStream
         x -> Left ("Unable to parse FrequencyCapTimeUnitType from: " <> x)
 
 instance ToHttpApiData FrequencyCapTimeUnitType where
     toQueryParam = \case
-        TimeUnitTypeUnspecified -> "TIME_UNIT_TYPE_UNSPECIFIED"
-        Minute -> "MINUTE"
-        Hour -> "HOUR"
-        Day -> "DAY"
-        Week -> "WEEK"
-        Month -> "MONTH"
-        Lifetime -> "LIFETIME"
+        FCTUTTimeUnitTypeUnspecified -> "TIME_UNIT_TYPE_UNSPECIFIED"
+        FCTUTMinute -> "MINUTE"
+        FCTUTHour -> "HOUR"
+        FCTUTDay -> "DAY"
+        FCTUTWeek -> "WEEK"
+        FCTUTMonth -> "MONTH"
+        FCTUTLifetime -> "LIFETIME"
+        FCTUTPod -> "POD"
+        FCTUTStream -> "STREAM"
 
 instance FromJSON FrequencyCapTimeUnitType where
     parseJSON = parseJSONText "FrequencyCapTimeUnitType"
 
 instance ToJSON FrequencyCapTimeUnitType where
+    toJSON = toJSONText
+
+data CreativeRestrictedCategoriesItem
+    = NoRestrictedCategories
+      -- ^ @NO_RESTRICTED_CATEGORIES@
+      -- The ad has no restricted categories
+    | Alcohol
+      -- ^ @ALCOHOL@
+      -- The alcohol restricted category.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreativeRestrictedCategoriesItem
+
+instance FromHttpApiData CreativeRestrictedCategoriesItem where
+    parseQueryParam = \case
+        "NO_RESTRICTED_CATEGORIES" -> Right NoRestrictedCategories
+        "ALCOHOL" -> Right Alcohol
+        x -> Left ("Unable to parse CreativeRestrictedCategoriesItem from: " <> x)
+
+instance ToHttpApiData CreativeRestrictedCategoriesItem where
+    toQueryParam = \case
+        NoRestrictedCategories -> "NO_RESTRICTED_CATEGORIES"
+        Alcohol -> "ALCOHOL"
+
+instance FromJSON CreativeRestrictedCategoriesItem where
+    parseJSON = parseJSONText "CreativeRestrictedCategoriesItem"
+
+instance ToJSON CreativeRestrictedCategoriesItem where
     toJSON = toJSONText
 
 -- | The pricing type for the deal\/product. (default: CPM)
@@ -1767,6 +2435,14 @@ data NonBillableWinningBidStatusRowStatus
       -- ^ @INVALID_IMPRESSION@
       -- The buyer was not billed because the impression won by the bid was
       -- determined to be invalid.
+    | NBWBSRSFatalVastError
+      -- ^ @FATAL_VAST_ERROR@
+      -- A video impression was served but a fatal error was reported from the
+      -- client during playback.
+    | NBWBSRSLostInMediation
+      -- ^ @LOST_IN_MEDIATION@
+      -- The buyer was not billed because the ad was outplaced in the mediation
+      -- waterfall.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable NonBillableWinningBidStatusRowStatus
@@ -1776,6 +2452,8 @@ instance FromHttpApiData NonBillableWinningBidStatusRowStatus where
         "STATUS_UNSPECIFIED" -> Right NBWBSRSStatusUnspecified
         "AD_NOT_RENDERED" -> Right NBWBSRSAdNotRendered
         "INVALID_IMPRESSION" -> Right NBWBSRSInvalidImpression
+        "FATAL_VAST_ERROR" -> Right NBWBSRSFatalVastError
+        "LOST_IN_MEDIATION" -> Right NBWBSRSLostInMediation
         x -> Left ("Unable to parse NonBillableWinningBidStatusRowStatus from: " <> x)
 
 instance ToHttpApiData NonBillableWinningBidStatusRowStatus where
@@ -1783,11 +2461,51 @@ instance ToHttpApiData NonBillableWinningBidStatusRowStatus where
         NBWBSRSStatusUnspecified -> "STATUS_UNSPECIFIED"
         NBWBSRSAdNotRendered -> "AD_NOT_RENDERED"
         NBWBSRSInvalidImpression -> "INVALID_IMPRESSION"
+        NBWBSRSFatalVastError -> "FATAL_VAST_ERROR"
+        NBWBSRSLostInMediation -> "LOST_IN_MEDIATION"
 
 instance FromJSON NonBillableWinningBidStatusRowStatus where
     parseJSON = parseJSONText "NonBillableWinningBidStatusRowStatus"
 
 instance ToJSON NonBillableWinningBidStatusRowStatus where
+    toJSON = toJSONText
+
+data VideoTargetingExcludedPositionTypesItem
+    = VTEPTIPositionTypeUnspecified
+      -- ^ @POSITION_TYPE_UNSPECIFIED@
+      -- A placeholder for an undefined video position.
+    | VTEPTIPreroll
+      -- ^ @PREROLL@
+      -- Ad is played before the video.
+    | VTEPTIMidroll
+      -- ^ @MIDROLL@
+      -- Ad is played during the video.
+    | VTEPTIPostroll
+      -- ^ @POSTROLL@
+      -- Ad is played after the video.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VideoTargetingExcludedPositionTypesItem
+
+instance FromHttpApiData VideoTargetingExcludedPositionTypesItem where
+    parseQueryParam = \case
+        "POSITION_TYPE_UNSPECIFIED" -> Right VTEPTIPositionTypeUnspecified
+        "PREROLL" -> Right VTEPTIPreroll
+        "MIDROLL" -> Right VTEPTIMidroll
+        "POSTROLL" -> Right VTEPTIPostroll
+        x -> Left ("Unable to parse VideoTargetingExcludedPositionTypesItem from: " <> x)
+
+instance ToHttpApiData VideoTargetingExcludedPositionTypesItem where
+    toQueryParam = \case
+        VTEPTIPositionTypeUnspecified -> "POSITION_TYPE_UNSPECIFIED"
+        VTEPTIPreroll -> "PREROLL"
+        VTEPTIMidroll -> "MIDROLL"
+        VTEPTIPostroll -> "POSTROLL"
+
+instance FromJSON VideoTargetingExcludedPositionTypesItem where
+    parseJSON = parseJSONText "VideoTargetingExcludedPositionTypesItem"
+
+instance ToJSON VideoTargetingExcludedPositionTypesItem where
     toJSON = toJSONText
 
 -- | The status of the client buyer.
@@ -1869,7 +2587,7 @@ instance FromJSON AdSizeSizeType where
 instance ToJSON AdSizeSizeType where
     toJSON = toJSONText
 
--- | \'OutputOnly The top-level deals status of this creative. If
+-- | Output only. The top-level deals status of this creative. If
 -- disapproved, an entry for \'auctionType=DIRECT_DEALS\' (or \'ALL\') in
 -- serving_restrictions will also exist. Note that this may be nuanced with
 -- other contextual restrictions, in which case, it may be preferable to
@@ -1892,6 +2610,12 @@ data CreativeDealsStatus
     | CDSDisApproved
       -- ^ @DISAPPROVED@
       -- The creative has been disapproved.
+    | CDSPendingReview
+      -- ^ @PENDING_REVIEW@
+      -- Placeholder for transition to v1beta1. Currently not used.
+    | CDSStatusTypeUnspecified
+      -- ^ @STATUS_TYPE_UNSPECIFIED@
+      -- Placeholder for transition to v1beta1. Currently not used.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeDealsStatus
@@ -1903,6 +2627,8 @@ instance FromHttpApiData CreativeDealsStatus where
         "CONDITIONALLY_APPROVED" -> Right CDSConditionallyApproved
         "APPROVED" -> Right CDSApproved
         "DISAPPROVED" -> Right CDSDisApproved
+        "PENDING_REVIEW" -> Right CDSPendingReview
+        "STATUS_TYPE_UNSPECIFIED" -> Right CDSStatusTypeUnspecified
         x -> Left ("Unable to parse CreativeDealsStatus from: " <> x)
 
 instance ToHttpApiData CreativeDealsStatus where
@@ -1912,6 +2638,8 @@ instance ToHttpApiData CreativeDealsStatus where
         CDSConditionallyApproved -> "CONDITIONALLY_APPROVED"
         CDSApproved -> "APPROVED"
         CDSDisApproved -> "DISAPPROVED"
+        CDSPendingReview -> "PENDING_REVIEW"
+        CDSStatusTypeUnspecified -> "STATUS_TYPE_UNSPECIFIED"
 
 instance FromJSON CreativeDealsStatus where
     parseJSON = parseJSONText "CreativeDealsStatus"
@@ -1961,7 +2689,45 @@ instance FromJSON CreativeSizeSkippableAdType where
 instance ToJSON CreativeSizeSkippableAdType where
     toJSON = toJSONText
 
--- | The role of the person (buyer\/seller) creating the note. \'OutputOnly
+-- | Syntax the filter is written in. Current implementation defaults to PQL
+-- but in the future it will be LIST_FILTER.
+data AccountsFinalizedProposalsListFilterSyntax
+    = FilterSyntaxUnspecified
+      -- ^ @FILTER_SYNTAX_UNSPECIFIED@
+      -- A placeholder for an undefined filter syntax.
+    | Pql
+      -- ^ @PQL@
+      -- PQL query syntax. Visit
+      -- https:\/\/developers.google.com\/ad-manager\/api\/pqlreference for PQL
+      -- documentation and examples.
+    | ListFilter
+      -- ^ @LIST_FILTER@
+      -- API list filtering syntax. Read about syntax and usage at
+      -- https:\/\/developers.google.com\/authorized-buyers\/apis\/guides\/v2\/list-filters.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccountsFinalizedProposalsListFilterSyntax
+
+instance FromHttpApiData AccountsFinalizedProposalsListFilterSyntax where
+    parseQueryParam = \case
+        "FILTER_SYNTAX_UNSPECIFIED" -> Right FilterSyntaxUnspecified
+        "PQL" -> Right Pql
+        "LIST_FILTER" -> Right ListFilter
+        x -> Left ("Unable to parse AccountsFinalizedProposalsListFilterSyntax from: " <> x)
+
+instance ToHttpApiData AccountsFinalizedProposalsListFilterSyntax where
+    toQueryParam = \case
+        FilterSyntaxUnspecified -> "FILTER_SYNTAX_UNSPECIFIED"
+        Pql -> "PQL"
+        ListFilter -> "LIST_FILTER"
+
+instance FromJSON AccountsFinalizedProposalsListFilterSyntax where
+    parseJSON = parseJSONText "AccountsFinalizedProposalsListFilterSyntax"
+
+instance ToJSON AccountsFinalizedProposalsListFilterSyntax where
+    toJSON = toJSONText
+
+-- | Output only. The role of the person (buyer\/seller) creating the note.
 data NoteCreatorRole
     = NCRBuyerSellerRoleUnspecified
       -- ^ @BUYER_SELLER_ROLE_UNSPECIFIED@
@@ -2037,6 +2803,44 @@ instance FromJSON CreativeSizeCreativeSizeType where
     parseJSON = parseJSONText "CreativeSizeCreativeSizeType"
 
 instance ToJSON CreativeSizeCreativeSizeType where
+    toJSON = toJSONText
+
+-- | Syntax the filter is written in. Current implementation defaults to PQL
+-- but in the future it will be LIST_FILTER.
+data AccountsProposalsListFilterSyntax
+    = APLFSFilterSyntaxUnspecified
+      -- ^ @FILTER_SYNTAX_UNSPECIFIED@
+      -- A placeholder for an undefined filter syntax.
+    | APLFSPql
+      -- ^ @PQL@
+      -- PQL query syntax. Visit
+      -- https:\/\/developers.google.com\/ad-manager\/api\/pqlreference for PQL
+      -- documentation and examples.
+    | APLFSListFilter
+      -- ^ @LIST_FILTER@
+      -- API list filtering syntax. Read about syntax and usage at
+      -- https:\/\/developers.google.com\/authorized-buyers\/apis\/guides\/v2\/list-filters.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccountsProposalsListFilterSyntax
+
+instance FromHttpApiData AccountsProposalsListFilterSyntax where
+    parseQueryParam = \case
+        "FILTER_SYNTAX_UNSPECIFIED" -> Right APLFSFilterSyntaxUnspecified
+        "PQL" -> Right APLFSPql
+        "LIST_FILTER" -> Right APLFSListFilter
+        x -> Left ("Unable to parse AccountsProposalsListFilterSyntax from: " <> x)
+
+instance ToHttpApiData AccountsProposalsListFilterSyntax where
+    toQueryParam = \case
+        APLFSFilterSyntaxUnspecified -> "FILTER_SYNTAX_UNSPECIFIED"
+        APLFSPql -> "PQL"
+        APLFSListFilter -> "LIST_FILTER"
+
+instance FromJSON AccountsProposalsListFilterSyntax where
+    parseJSON = parseJSONText "AccountsProposalsListFilterSyntax"
+
+instance ToJSON AccountsProposalsListFilterSyntax where
     toJSON = toJSONText
 
 -- | The type of correction that was applied to the creative.
@@ -2126,4 +2930,134 @@ instance FromJSON CorrectionType where
     parseJSON = parseJSONText "CorrectionType"
 
 instance ToJSON CorrectionType where
+    toJSON = toJSONText
+
+data AuctionContextAuctionTypesItem
+    = OpenAuction
+      -- ^ @OPEN_AUCTION@
+      -- The restriction applies to open auction.
+    | DirectDeals
+      -- ^ @DIRECT_DEALS@
+      -- The restriction applies to direct deals.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AuctionContextAuctionTypesItem
+
+instance FromHttpApiData AuctionContextAuctionTypesItem where
+    parseQueryParam = \case
+        "OPEN_AUCTION" -> Right OpenAuction
+        "DIRECT_DEALS" -> Right DirectDeals
+        x -> Left ("Unable to parse AuctionContextAuctionTypesItem from: " <> x)
+
+instance ToHttpApiData AuctionContextAuctionTypesItem where
+    toQueryParam = \case
+        OpenAuction -> "OPEN_AUCTION"
+        DirectDeals -> "DIRECT_DEALS"
+
+instance FromJSON AuctionContextAuctionTypesItem where
+    parseJSON = parseJSONText "AuctionContextAuctionTypesItem"
+
+instance ToJSON AuctionContextAuctionTypesItem where
+    toJSON = toJSONText
+
+-- | Creative format bidded on or allowed to bid on, can be empty.
+data FilterSetFormat
+    = FSFFormatUnspecified
+      -- ^ @FORMAT_UNSPECIFIED@
+      -- A placeholder for an undefined format; indicates that no format filter
+      -- will be applied.
+    | FSFNATiveDisplay
+      -- ^ @NATIVE_DISPLAY@
+      -- The ad impression is a native ad, and display (i.e., image) format.
+    | FSFNATiveVideo
+      -- ^ @NATIVE_VIDEO@
+      -- The ad impression is a native ad, and video format.
+    | FSFNonNATiveDisplay
+      -- ^ @NON_NATIVE_DISPLAY@
+      -- The ad impression is not a native ad, and display (i.e., image) format.
+    | FSFNonNATiveVideo
+      -- ^ @NON_NATIVE_VIDEO@
+      -- The ad impression is not a native ad, and video format.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FilterSetFormat
+
+instance FromHttpApiData FilterSetFormat where
+    parseQueryParam = \case
+        "FORMAT_UNSPECIFIED" -> Right FSFFormatUnspecified
+        "NATIVE_DISPLAY" -> Right FSFNATiveDisplay
+        "NATIVE_VIDEO" -> Right FSFNATiveVideo
+        "NON_NATIVE_DISPLAY" -> Right FSFNonNATiveDisplay
+        "NON_NATIVE_VIDEO" -> Right FSFNonNATiveVideo
+        x -> Left ("Unable to parse FilterSetFormat from: " <> x)
+
+instance ToHttpApiData FilterSetFormat where
+    toQueryParam = \case
+        FSFFormatUnspecified -> "FORMAT_UNSPECIFIED"
+        FSFNATiveDisplay -> "NATIVE_DISPLAY"
+        FSFNATiveVideo -> "NATIVE_VIDEO"
+        FSFNonNATiveDisplay -> "NON_NATIVE_DISPLAY"
+        FSFNonNATiveVideo -> "NON_NATIVE_VIDEO"
+
+instance FromJSON FilterSetFormat where
+    parseJSON = parseJSONText "FilterSetFormat"
+
+instance ToJSON FilterSetFormat where
+    toJSON = toJSONText
+
+data AppContextAppTypesItem
+    = ACATINATive
+      -- ^ @NATIVE@
+      -- Native app context.
+    | ACATIWeb
+      -- ^ @WEB@
+      -- Mobile web app context.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AppContextAppTypesItem
+
+instance FromHttpApiData AppContextAppTypesItem where
+    parseQueryParam = \case
+        "NATIVE" -> Right ACATINATive
+        "WEB" -> Right ACATIWeb
+        x -> Left ("Unable to parse AppContextAppTypesItem from: " <> x)
+
+instance ToHttpApiData AppContextAppTypesItem where
+    toQueryParam = \case
+        ACATINATive -> "NATIVE"
+        ACATIWeb -> "WEB"
+
+instance FromJSON AppContextAppTypesItem where
+    parseJSON = parseJSONText "AppContextAppTypesItem"
+
+instance ToJSON AppContextAppTypesItem where
+    toJSON = toJSONText
+
+data FilterSetBreakdownDimensionsItem
+    = BreakdownDimensionUnspecified
+      -- ^ @BREAKDOWN_DIMENSION_UNSPECIFIED@
+      -- A placeholder for an unspecified dimension; should not be used.
+    | PublisherIdentifier
+      -- ^ @PUBLISHER_IDENTIFIER@
+      -- The response should be broken down by publisher identifier. This option
+      -- is available only for Open Bidding buyers.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FilterSetBreakdownDimensionsItem
+
+instance FromHttpApiData FilterSetBreakdownDimensionsItem where
+    parseQueryParam = \case
+        "BREAKDOWN_DIMENSION_UNSPECIFIED" -> Right BreakdownDimensionUnspecified
+        "PUBLISHER_IDENTIFIER" -> Right PublisherIdentifier
+        x -> Left ("Unable to parse FilterSetBreakdownDimensionsItem from: " <> x)
+
+instance ToHttpApiData FilterSetBreakdownDimensionsItem where
+    toQueryParam = \case
+        BreakdownDimensionUnspecified -> "BREAKDOWN_DIMENSION_UNSPECIFIED"
+        PublisherIdentifier -> "PUBLISHER_IDENTIFIER"
+
+instance FromJSON FilterSetBreakdownDimensionsItem where
+    parseJSON = parseJSONText "FilterSetBreakdownDimensionsItem"
+
+instance ToJSON FilterSetBreakdownDimensionsItem where
     toJSON = toJSONText

@@ -22,7 +22,7 @@
 --
 -- Undeletes a deleted Catalog and all resources under it.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.undelete@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.undelete@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
     , cuCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.undelete@ method which the
 -- 'CatalogsUndelete' request conforms to.
@@ -67,13 +67,13 @@ type CatalogsUndeleteResource =
 -- /See:/ 'catalogsUndelete' smart constructor.
 data CatalogsUndelete =
   CatalogsUndelete'
-    { _cuXgafv          :: !(Maybe Xgafv)
+    { _cuXgafv :: !(Maybe Xgafv)
     , _cuUploadProtocol :: !(Maybe Text)
-    , _cuAccessToken    :: !(Maybe Text)
-    , _cuUploadType     :: !(Maybe Text)
-    , _cuPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
-    , _cuName           :: !Text
-    , _cuCallback       :: !(Maybe Text)
+    , _cuAccessToken :: !(Maybe Text)
+    , _cuUploadType :: !(Maybe Text)
+    , _cuPayload :: !GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest
+    , _cuName :: !Text
+    , _cuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

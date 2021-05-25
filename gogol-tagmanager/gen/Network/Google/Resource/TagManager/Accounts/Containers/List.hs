@@ -22,7 +22,7 @@
 --
 -- Lists all Containers that belongs to a GTM Account.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.list@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.List
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.List
 
     -- * Request Lenses
     , aclParent
+    , aclXgafv
+    , aclUploadProtocol
+    , aclAccessToken
+    , aclUploadType
     , aclPageToken
+    , aclCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.list@ method which the
 -- 'AccountsContainersList' request conforms to.
@@ -47,17 +52,27 @@ type AccountsContainersListResource =
        "v2" :>
          Capture "parent" Text :>
            "containers" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListContainersResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListContainersResponse
 
 -- | Lists all Containers that belongs to a GTM Account.
 --
 -- /See:/ 'accountsContainersList' smart constructor.
 data AccountsContainersList =
   AccountsContainersList'
-    { _aclParent    :: !Text
+    { _aclParent :: !Text
+    , _aclXgafv :: !(Maybe Xgafv)
+    , _aclUploadProtocol :: !(Maybe Text)
+    , _aclAccessToken :: !(Maybe Text)
+    , _aclUploadType :: !(Maybe Text)
     , _aclPageToken :: !(Maybe Text)
+    , _aclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,12 +83,30 @@ data AccountsContainersList =
 --
 -- * 'aclParent'
 --
+-- * 'aclXgafv'
+--
+-- * 'aclUploadProtocol'
+--
+-- * 'aclAccessToken'
+--
+-- * 'aclUploadType'
+--
 -- * 'aclPageToken'
+--
+-- * 'aclCallback'
 accountsContainersList
     :: Text -- ^ 'aclParent'
     -> AccountsContainersList
 accountsContainersList pAclParent_ =
-  AccountsContainersList' {_aclParent = pAclParent_, _aclPageToken = Nothing}
+  AccountsContainersList'
+    { _aclParent = pAclParent_
+    , _aclXgafv = Nothing
+    , _aclUploadProtocol = Nothing
+    , _aclAccessToken = Nothing
+    , _aclUploadType = Nothing
+    , _aclPageToken = Nothing
+    , _aclCallback = Nothing
+    }
 
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}.
@@ -81,10 +114,37 @@ aclParent :: Lens' AccountsContainersList Text
 aclParent
   = lens _aclParent (\ s a -> s{_aclParent = a})
 
+-- | V1 error format.
+aclXgafv :: Lens' AccountsContainersList (Maybe Xgafv)
+aclXgafv = lens _aclXgafv (\ s a -> s{_aclXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aclUploadProtocol :: Lens' AccountsContainersList (Maybe Text)
+aclUploadProtocol
+  = lens _aclUploadProtocol
+      (\ s a -> s{_aclUploadProtocol = a})
+
+-- | OAuth access token.
+aclAccessToken :: Lens' AccountsContainersList (Maybe Text)
+aclAccessToken
+  = lens _aclAccessToken
+      (\ s a -> s{_aclAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aclUploadType :: Lens' AccountsContainersList (Maybe Text)
+aclUploadType
+  = lens _aclUploadType
+      (\ s a -> s{_aclUploadType = a})
+
 -- | Continuation token for fetching the next page of results.
 aclPageToken :: Lens' AccountsContainersList (Maybe Text)
 aclPageToken
   = lens _aclPageToken (\ s a -> s{_aclPageToken = a})
+
+-- | JSONP
+aclCallback :: Lens' AccountsContainersList (Maybe Text)
+aclCallback
+  = lens _aclCallback (\ s a -> s{_aclCallback = a})
 
 instance GoogleRequest AccountsContainersList where
         type Rs AccountsContainersList =
@@ -93,7 +153,12 @@ instance GoogleRequest AccountsContainersList where
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient AccountsContainersList'{..}
-          = go _aclParent _aclPageToken (Just AltJSON)
+          = go _aclParent _aclXgafv _aclUploadProtocol
+              _aclAccessToken
+              _aclUploadType
+              _aclPageToken
+              _aclCallback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

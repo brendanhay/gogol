@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -54,6 +54,14 @@ module Network.Google.Redis.Types
     , lorNextPageToken
     , lorOperations
 
+    -- * GcsSource
+    , GcsSource
+    , gcsSource
+    , gsURI
+
+    -- * InstanceTransitEncryptionMode
+    , InstanceTransitEncryptionMode (..)
+
     -- * Location
     , Location
     , location
@@ -80,8 +88,28 @@ module Network.Google.Redis.Types
     , Empty
     , empty
 
+    -- * MaintenanceSchedule
+    , MaintenanceSchedule
+    , maintenanceSchedule
+    , msStartTime
+    , msCanReschedule
+    , msEndTime
+    , msScheduleDeadlineTime
+
+    -- * WeeklyMaintenanceWindow
+    , WeeklyMaintenanceWindow
+    , weeklyMaintenanceWindow
+    , wmwStartTime
+    , wmwDay
+    , wmwDuration
+
     -- * InstanceTier
     , InstanceTier (..)
+
+    -- * GcsDestination
+    , GcsDestination
+    , gcsDestination
+    , gdURI
 
     -- * StatusDetailsItem
     , StatusDetailsItem
@@ -109,6 +137,30 @@ module Network.Google.Redis.Types
     , instanceRedisConfigs
     , ircAddtional
 
+    -- * InputConfig
+    , InputConfig
+    , inputConfig
+    , icGcsSource
+
+    -- * InstanceConnectMode
+    , InstanceConnectMode (..)
+
+    -- * ExportInstanceRequest
+    , ExportInstanceRequest
+    , exportInstanceRequest
+    , eirOutputConfig
+
+    -- * InstanceAuthString
+    , InstanceAuthString
+    , instanceAuthString
+    , iasAuthString
+
+    -- * RescheduleMaintenanceRequestRescheduleType
+    , RescheduleMaintenanceRequestRescheduleType (..)
+
+    -- * WeeklyMaintenanceWindowDay
+    , WeeklyMaintenanceWindowDay (..)
+
     -- * GoogleCloudRedisV1LocationMetadataAvailableZones
     , GoogleCloudRedisV1LocationMetadataAvailableZones
     , googleCloudRedisV1LocationMetadataAvailableZones
@@ -116,6 +168,37 @@ module Network.Google.Redis.Types
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * MaintenancePolicy
+    , MaintenancePolicy
+    , maintenancePolicy
+    , mpWeeklyMaintenanceWindow
+    , mpUpdateTime
+    , mpDescription
+    , mpCreateTime
+
+    -- * OutputConfig
+    , OutputConfig
+    , outputConfig
+    , ocGcsDestination
+
+    -- * ImportInstanceRequest
+    , ImportInstanceRequest
+    , importInstanceRequest
+    , iirInputConfig
+
+    -- * UpgradeInstanceRequest
+    , UpgradeInstanceRequest
+    , upgradeInstanceRequest
+    , uirRedisVersion
+
+    -- * TimeOfDay'
+    , TimeOfDay'
+    , timeOfDay
+    , todNanos
+    , todHours
+    , todMinutes
+    , todSeconds
 
     -- * LocationLabels
     , LocationLabels
@@ -147,10 +230,30 @@ module Network.Google.Redis.Types
     , operationResponse
     , orAddtional
 
+    -- * TLSCertificate
+    , TLSCertificate
+    , tlsCertificate
+    , tcCert
+    , tcSerialNumber
+    , tcSha1Fingerprint
+    , tcExpireTime
+    , tcCreateTime
+
+    -- * RescheduleMaintenanceRequest
+    , RescheduleMaintenanceRequest
+    , rescheduleMaintenanceRequest
+    , rmrScheduleTime
+    , rmrRescheduleType
+
     -- * Instance
     , Instance
     , instance'
+    , iServerCaCerts
+    , iPersistenceIAMIdentity
     , iState
+    , iAuthEnabled
+    , iMaintenanceSchedule
+    , iTransitEncryptionMode
     , iAuthorizedNetwork
     , iMemorySizeGb
     , iName
@@ -160,6 +263,8 @@ module Network.Google.Redis.Types
     , iTier
     , iDisplayName
     , iLabels
+    , iMaintenancePolicy
+    , iConnectMode
     , iLocationId
     , iHost
     , iRedisConfigs
@@ -169,9 +274,9 @@ module Network.Google.Redis.Types
     , iCurrentLocationId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Redis.Types.Product
-import           Network.Google.Redis.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Redis.Types.Product
+import Network.Google.Redis.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Cloud Memorystore for Redis API. This contains the host and root path used as a starting point for constructing service requests.
 redisService :: ServiceConfig
@@ -179,6 +284,6 @@ redisService
   = defaultService (ServiceId "redis:v1")
       "redis.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

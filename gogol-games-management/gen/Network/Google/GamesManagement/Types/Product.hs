@@ -17,18 +17,17 @@
 --
 module Network.Google.GamesManagement.Types.Product where
 
-import           Network.Google.GamesManagement.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GamesManagement.Types.Sum
+import Network.Google.Prelude
 
--- | This is a JSON template for 1P\/3P metadata about the player\'s
--- experience.
+-- | 1P\/3P metadata about the player\'s experience.
 --
 -- /See:/ 'gamesPlayerExperienceInfoResource' smart constructor.
 data GamesPlayerExperienceInfoResource =
   GamesPlayerExperienceInfoResource'
-    { _gpeirCurrentExperiencePoints    :: !(Maybe (Textual Int64))
-    , _gpeirCurrentLevel               :: !(Maybe GamesPlayerLevelResource)
-    , _gpeirNextLevel                  :: !(Maybe GamesPlayerLevelResource)
+    { _gpeirCurrentExperiencePoints :: !(Maybe (Textual Int64))
+    , _gpeirCurrentLevel :: !(Maybe GamesPlayerLevelResource)
+    , _gpeirNextLevel :: !(Maybe GamesPlayerLevelResource)
     , _gpeirLastLevelUpTimestampMillis :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -113,7 +112,7 @@ instance ToJSON GamesPlayerExperienceInfoResource
 -- /See:/ 'playerName' smart constructor.
 data PlayerName =
   PlayerName'
-    { _pnGivenName  :: !(Maybe Text)
+    { _pnGivenName :: !(Maybe Text)
     , _pnFamilyName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -157,13 +156,13 @@ instance ToJSON PlayerName where
                  [("givenName" .=) <$> _pnGivenName,
                   ("familyName" .=) <$> _pnFamilyName])
 
--- | This is a JSON template for a list of leaderboard reset resources.
+-- | A list of leaderboard reset resources.
 --
 -- /See:/ 'playerScoreResetAllResponse' smart constructor.
 data PlayerScoreResetAllResponse =
   PlayerScoreResetAllResponse'
     { _psrarResults :: !(Maybe [PlayerScoreResetResponse])
-    , _psrarKind    :: !Text
+    , _psrarKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -178,10 +177,7 @@ data PlayerScoreResetAllResponse =
 playerScoreResetAllResponse
     :: PlayerScoreResetAllResponse
 playerScoreResetAllResponse =
-  PlayerScoreResetAllResponse'
-    { _psrarResults = Nothing
-    , _psrarKind = "gamesManagement#playerScoreResetAllResponse"
-    }
+  PlayerScoreResetAllResponse' {_psrarResults = Nothing, _psrarKind = Nothing}
 
 
 -- | The leaderboard reset results.
@@ -192,8 +188,8 @@ psrarResults
       . _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#playerScoreResetResponse.
-psrarKind :: Lens' PlayerScoreResetAllResponse Text
+-- string \`gamesManagement#playerScoreResetAllResponse\`.
+psrarKind :: Lens' PlayerScoreResetAllResponse (Maybe Text)
 psrarKind
   = lens _psrarKind (\ s a -> s{_psrarKind = a})
 
@@ -202,79 +198,23 @@ instance FromJSON PlayerScoreResetAllResponse where
           = withObject "PlayerScoreResetAllResponse"
               (\ o ->
                  PlayerScoreResetAllResponse' <$>
-                   (o .:? "results" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "gamesManagement#playerScoreResetAllResponse"))
+                   (o .:? "results" .!= mempty) <*> (o .:? "kind"))
 
 instance ToJSON PlayerScoreResetAllResponse where
         toJSON PlayerScoreResetAllResponse'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _psrarResults,
-                  Just ("kind" .= _psrarKind)])
+                  ("kind" .=) <$> _psrarKind])
 
--- | This is a JSON template for metadata about a player playing a game with
--- the currently authenticated user.
---
--- /See:/ 'gamesPlayedResource' smart constructor.
-data GamesPlayedResource =
-  GamesPlayedResource'
-    { _gprAutoMatched :: !(Maybe Bool)
-    , _gprTimeMillis  :: !(Maybe (Textual Int64))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'GamesPlayedResource' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'gprAutoMatched'
---
--- * 'gprTimeMillis'
-gamesPlayedResource
-    :: GamesPlayedResource
-gamesPlayedResource =
-  GamesPlayedResource' {_gprAutoMatched = Nothing, _gprTimeMillis = Nothing}
-
-
--- | True if the player was auto-matched with the currently authenticated
--- user.
-gprAutoMatched :: Lens' GamesPlayedResource (Maybe Bool)
-gprAutoMatched
-  = lens _gprAutoMatched
-      (\ s a -> s{_gprAutoMatched = a})
-
--- | The last time the player played the game in milliseconds since the epoch
--- in UTC.
-gprTimeMillis :: Lens' GamesPlayedResource (Maybe Int64)
-gprTimeMillis
-  = lens _gprTimeMillis
-      (\ s a -> s{_gprTimeMillis = a})
-      . mapping _Coerce
-
-instance FromJSON GamesPlayedResource where
-        parseJSON
-          = withObject "GamesPlayedResource"
-              (\ o ->
-                 GamesPlayedResource' <$>
-                   (o .:? "autoMatched") <*> (o .:? "timeMillis"))
-
-instance ToJSON GamesPlayedResource where
-        toJSON GamesPlayedResource'{..}
-          = object
-              (catMaybes
-                 [("autoMatched" .=) <$> _gprAutoMatched,
-                  ("timeMillis" .=) <$> _gprTimeMillis])
-
--- | This is a JSON template for 1P\/3P metadata about a user\'s level.
+-- | 1P\/3P metadata about a user\'s level.
 --
 -- /See:/ 'gamesPlayerLevelResource' smart constructor.
 data GamesPlayerLevelResource =
   GamesPlayerLevelResource'
     { _gplrMaxExperiencePoints :: !(Maybe (Textual Int64))
     , _gplrMinExperiencePoints :: !(Maybe (Textual Int64))
-    , _gplrLevel               :: !(Maybe (Textual Int32))
+    , _gplrLevel :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -337,14 +277,14 @@ instance ToJSON GamesPlayerLevelResource where
                     _gplrMinExperiencePoints,
                   ("level" .=) <$> _gplrLevel])
 
--- | This is a JSON template for a list of reset leaderboard entry resources.
+-- | A list of reset leaderboard entry resources.
 --
 -- /See:/ 'playerScoreResetResponse' smart constructor.
 data PlayerScoreResetResponse =
   PlayerScoreResetResponse'
-    { _psrrKind                :: !Text
+    { _psrrKind :: !(Maybe Text)
     , _psrrResetScoreTimeSpans :: !(Maybe [Text])
-    , _psrrDefinitionId        :: !(Maybe Text)
+    , _psrrDefinitionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -362,20 +302,21 @@ playerScoreResetResponse
     :: PlayerScoreResetResponse
 playerScoreResetResponse =
   PlayerScoreResetResponse'
-    { _psrrKind = "gamesManagement#playerScoreResetResponse"
+    { _psrrKind = Nothing
     , _psrrResetScoreTimeSpans = Nothing
     , _psrrDefinitionId = Nothing
     }
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#playerScoreResetResponse.
-psrrKind :: Lens' PlayerScoreResetResponse Text
+-- string \`gamesManagement#playerScoreResetResponse\`.
+psrrKind :: Lens' PlayerScoreResetResponse (Maybe Text)
 psrrKind = lens _psrrKind (\ s a -> s{_psrrKind = a})
 
--- | The time spans of the updated score. Possible values are: - \"ALL_TIME\"
--- - The score is an all-time score. - \"WEEKLY\" - The score is a weekly
--- score. - \"DAILY\" - The score is a daily score.
+-- | The time spans of the updated score. Possible values are: -
+-- \"\`ALL_TIME\`\" - The score is an all-time score. - \"\`WEEKLY\`\" -
+-- The score is a weekly score. - \"\`DAILY\`\" - The score is a daily
+-- score.
 psrrResetScoreTimeSpans :: Lens' PlayerScoreResetResponse [Text]
 psrrResetScoreTimeSpans
   = lens _psrrResetScoreTimeSpans
@@ -394,26 +335,24 @@ instance FromJSON PlayerScoreResetResponse where
           = withObject "PlayerScoreResetResponse"
               (\ o ->
                  PlayerScoreResetResponse' <$>
-                   (o .:? "kind" .!=
-                      "gamesManagement#playerScoreResetResponse")
-                     <*> (o .:? "resetScoreTimeSpans" .!= mempty)
+                   (o .:? "kind") <*>
+                     (o .:? "resetScoreTimeSpans" .!= mempty)
                      <*> (o .:? "definitionId"))
 
 instance ToJSON PlayerScoreResetResponse where
         toJSON PlayerScoreResetResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _psrrKind),
+                 [("kind" .=) <$> _psrrKind,
                   ("resetScoreTimeSpans" .=) <$>
                     _psrrResetScoreTimeSpans,
                   ("definitionId" .=) <$> _psrrDefinitionId])
 
--- | This is a JSON template for multiple scores reset all request.
 --
 -- /See:/ 'scoresResetMultipleForAllRequest' smart constructor.
 data ScoresResetMultipleForAllRequest =
   ScoresResetMultipleForAllRequest'
-    { _srmfarKind           :: !Text
+    { _srmfarKind :: !(Maybe Text)
     , _srmfarLeaderboardIds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -430,14 +369,12 @@ scoresResetMultipleForAllRequest
     :: ScoresResetMultipleForAllRequest
 scoresResetMultipleForAllRequest =
   ScoresResetMultipleForAllRequest'
-    { _srmfarKind = "gamesManagement#scoresResetMultipleForAllRequest"
-    , _srmfarLeaderboardIds = Nothing
-    }
+    {_srmfarKind = Nothing, _srmfarLeaderboardIds = Nothing}
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#scoresResetMultipleForAllRequest.
-srmfarKind :: Lens' ScoresResetMultipleForAllRequest Text
+-- string \`gamesManagement#scoresResetMultipleForAllRequest\`.
+srmfarKind :: Lens' ScoresResetMultipleForAllRequest (Maybe Text)
 srmfarKind
   = lens _srmfarKind (\ s a -> s{_srmfarKind = a})
 
@@ -455,85 +392,25 @@ instance FromJSON ScoresResetMultipleForAllRequest
           = withObject "ScoresResetMultipleForAllRequest"
               (\ o ->
                  ScoresResetMultipleForAllRequest' <$>
-                   (o .:? "kind" .!=
-                      "gamesManagement#scoresResetMultipleForAllRequest")
-                     <*> (o .:? "leaderboard_ids" .!= mempty))
+                   (o .:? "kind") <*>
+                     (o .:? "leaderboard_ids" .!= mempty))
 
 instance ToJSON ScoresResetMultipleForAllRequest
          where
         toJSON ScoresResetMultipleForAllRequest'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _srmfarKind),
+                 [("kind" .=) <$> _srmfarKind,
                   ("leaderboard_ids" .=) <$> _srmfarLeaderboardIds])
 
--- | This is a JSON template for multiple quests reset all request.
---
--- /See:/ 'questsResetMultipleForAllRequest' smart constructor.
-data QuestsResetMultipleForAllRequest =
-  QuestsResetMultipleForAllRequest'
-    { _qrmfarKind     :: !Text
-    , _qrmfarQuestIds :: !(Maybe [Text])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'QuestsResetMultipleForAllRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'qrmfarKind'
---
--- * 'qrmfarQuestIds'
-questsResetMultipleForAllRequest
-    :: QuestsResetMultipleForAllRequest
-questsResetMultipleForAllRequest =
-  QuestsResetMultipleForAllRequest'
-    { _qrmfarKind = "gamesManagement#questsResetMultipleForAllRequest"
-    , _qrmfarQuestIds = Nothing
-    }
-
-
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#questsResetMultipleForAllRequest.
-qrmfarKind :: Lens' QuestsResetMultipleForAllRequest Text
-qrmfarKind
-  = lens _qrmfarKind (\ s a -> s{_qrmfarKind = a})
-
--- | The IDs of quests to reset.
-qrmfarQuestIds :: Lens' QuestsResetMultipleForAllRequest [Text]
-qrmfarQuestIds
-  = lens _qrmfarQuestIds
-      (\ s a -> s{_qrmfarQuestIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON QuestsResetMultipleForAllRequest
-         where
-        parseJSON
-          = withObject "QuestsResetMultipleForAllRequest"
-              (\ o ->
-                 QuestsResetMultipleForAllRequest' <$>
-                   (o .:? "kind" .!=
-                      "gamesManagement#questsResetMultipleForAllRequest")
-                     <*> (o .:? "quest_ids" .!= mempty))
-
-instance ToJSON QuestsResetMultipleForAllRequest
-         where
-        toJSON QuestsResetMultipleForAllRequest'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _qrmfarKind),
-                  ("quest_ids" .=) <$> _qrmfarQuestIds])
-
--- | This is a JSON template for a list of hidden players.
+-- | A list of hidden players.
 --
 -- /See:/ 'hiddenPlayerList' smart constructor.
 data HiddenPlayerList =
   HiddenPlayerList'
     { _hplNextPageToken :: !(Maybe Text)
-    , _hplKind          :: !Text
-    , _hplItems         :: !(Maybe [HiddenPlayer])
+    , _hplKind :: !(Maybe Text)
+    , _hplItems :: !(Maybe [HiddenPlayer])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -551,10 +428,7 @@ hiddenPlayerList
     :: HiddenPlayerList
 hiddenPlayerList =
   HiddenPlayerList'
-    { _hplNextPageToken = Nothing
-    , _hplKind = "gamesManagement#hiddenPlayerList"
-    , _hplItems = Nothing
-    }
+    {_hplNextPageToken = Nothing, _hplKind = Nothing, _hplItems = Nothing}
 
 
 -- | The pagination token for the next page of results.
@@ -564,8 +438,8 @@ hplNextPageToken
       (\ s a -> s{_hplNextPageToken = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#hiddenPlayerList.
-hplKind :: Lens' HiddenPlayerList Text
+-- string \`gamesManagement#hiddenPlayerList\`.
+hplKind :: Lens' HiddenPlayerList (Maybe Text)
 hplKind = lens _hplKind (\ s a -> s{_hplKind = a})
 
 -- | The players.
@@ -580,24 +454,23 @@ instance FromJSON HiddenPlayerList where
           = withObject "HiddenPlayerList"
               (\ o ->
                  HiddenPlayerList' <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "gamesManagement#hiddenPlayerList")
-                     <*> (o .:? "items" .!= mempty))
+                   (o .:? "nextPageToken") <*> (o .:? "kind") <*>
+                     (o .:? "items" .!= mempty))
 
 instance ToJSON HiddenPlayerList where
         toJSON HiddenPlayerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _hplNextPageToken,
-                  Just ("kind" .= _hplKind),
+                  ("kind" .=) <$> _hplKind,
                   ("items" .=) <$> _hplItems])
 
--- | This is a JSON template for multiple events reset all request.
+-- | Multiple events reset all request.
 --
 -- /See:/ 'eventsResetMultipleForAllRequest' smart constructor.
 data EventsResetMultipleForAllRequest =
   EventsResetMultipleForAllRequest'
-    { _ermfarKind     :: !Text
+    { _ermfarKind :: !(Maybe Text)
     , _ermfarEventIds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -614,14 +487,12 @@ eventsResetMultipleForAllRequest
     :: EventsResetMultipleForAllRequest
 eventsResetMultipleForAllRequest =
   EventsResetMultipleForAllRequest'
-    { _ermfarKind = "gamesManagement#eventsResetMultipleForAllRequest"
-    , _ermfarEventIds = Nothing
-    }
+    {_ermfarKind = Nothing, _ermfarEventIds = Nothing}
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#eventsResetMultipleForAllRequest.
-ermfarKind :: Lens' EventsResetMultipleForAllRequest Text
+-- string \`gamesManagement#eventsResetMultipleForAllRequest\`.
+ermfarKind :: Lens' EventsResetMultipleForAllRequest (Maybe Text)
 ermfarKind
   = lens _ermfarKind (\ s a -> s{_ermfarKind = a})
 
@@ -639,24 +510,21 @@ instance FromJSON EventsResetMultipleForAllRequest
           = withObject "EventsResetMultipleForAllRequest"
               (\ o ->
                  EventsResetMultipleForAllRequest' <$>
-                   (o .:? "kind" .!=
-                      "gamesManagement#eventsResetMultipleForAllRequest")
-                     <*> (o .:? "event_ids" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "event_ids" .!= mempty))
 
 instance ToJSON EventsResetMultipleForAllRequest
          where
         toJSON EventsResetMultipleForAllRequest'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _ermfarKind),
+                 [("kind" .=) <$> _ermfarKind,
                   ("event_ids" .=) <$> _ermfarEventIds])
 
--- | This is a JSON template for multiple achievements reset all request.
 --
 -- /See:/ 'achievementResetMultipleForAllRequest' smart constructor.
 data AchievementResetMultipleForAllRequest =
   AchievementResetMultipleForAllRequest'
-    { _armfarKind           :: !Text
+    { _armfarKind :: !(Maybe Text)
     , _armfarAchievementIds :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -673,14 +541,12 @@ achievementResetMultipleForAllRequest
     :: AchievementResetMultipleForAllRequest
 achievementResetMultipleForAllRequest =
   AchievementResetMultipleForAllRequest'
-    { _armfarKind = "gamesManagement#achievementResetMultipleForAllRequest"
-    , _armfarAchievementIds = Nothing
-    }
+    {_armfarKind = Nothing, _armfarAchievementIds = Nothing}
 
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#achievementResetMultipleForAllRequest.
-armfarKind :: Lens' AchievementResetMultipleForAllRequest Text
+-- string \`gamesManagement#achievementResetMultipleForAllRequest\`.
+armfarKind :: Lens' AchievementResetMultipleForAllRequest (Maybe Text)
 armfarKind
   = lens _armfarKind (\ s a -> s{_armfarKind = a})
 
@@ -699,26 +565,25 @@ instance FromJSON
           = withObject "AchievementResetMultipleForAllRequest"
               (\ o ->
                  AchievementResetMultipleForAllRequest' <$>
-                   (o .:? "kind" .!=
-                      "gamesManagement#achievementResetMultipleForAllRequest")
-                     <*> (o .:? "achievement_ids" .!= mempty))
+                   (o .:? "kind") <*>
+                     (o .:? "achievement_ids" .!= mempty))
 
 instance ToJSON AchievementResetMultipleForAllRequest
          where
         toJSON AchievementResetMultipleForAllRequest'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _armfarKind),
+                 [("kind" .=) <$> _armfarKind,
                   ("achievement_ids" .=) <$> _armfarAchievementIds])
 
--- | This is a JSON template for the HiddenPlayer resource.
+-- | The HiddenPlayer resource.
 --
 -- /See:/ 'hiddenPlayer' smart constructor.
 data HiddenPlayer =
   HiddenPlayer'
-    { _hpKind             :: !Text
+    { _hpKind :: !(Maybe Text)
     , _hpHiddenTimeMillis :: !(Maybe (Textual Int64))
-    , _hpPlayer           :: !(Maybe Player)
+    , _hpPlayer :: !(Maybe Player)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -736,25 +601,22 @@ hiddenPlayer
     :: HiddenPlayer
 hiddenPlayer =
   HiddenPlayer'
-    { _hpKind = "gamesManagement#hiddenPlayer"
-    , _hpHiddenTimeMillis = Nothing
-    , _hpPlayer = Nothing
-    }
+    {_hpKind = Nothing, _hpHiddenTimeMillis = Nothing, _hpPlayer = Nothing}
 
 
--- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#hiddenPlayer.
-hpKind :: Lens' HiddenPlayer Text
+-- | Output only. Uniquely identifies the type of this resource. Value is
+-- always the fixed string \`gamesManagement#hiddenPlayer\`.
+hpKind :: Lens' HiddenPlayer (Maybe Text)
 hpKind = lens _hpKind (\ s a -> s{_hpKind = a})
 
--- | The time this player was hidden.
+-- | Output only. The time this player was hidden.
 hpHiddenTimeMillis :: Lens' HiddenPlayer (Maybe Int64)
 hpHiddenTimeMillis
   = lens _hpHiddenTimeMillis
       (\ s a -> s{_hpHiddenTimeMillis = a})
       . mapping _Coerce
 
--- | The player information.
+-- | Output only. The player information.
 hpPlayer :: Lens' HiddenPlayer (Maybe Player)
 hpPlayer = lens _hpPlayer (\ s a -> s{_hpPlayer = a})
 
@@ -763,25 +625,24 @@ instance FromJSON HiddenPlayer where
           = withObject "HiddenPlayer"
               (\ o ->
                  HiddenPlayer' <$>
-                   (o .:? "kind" .!= "gamesManagement#hiddenPlayer") <*>
-                     (o .:? "hiddenTimeMillis")
-                     <*> (o .:? "player"))
+                   (o .:? "kind") <*> (o .:? "hiddenTimeMillis") <*>
+                     (o .:? "player"))
 
 instance ToJSON HiddenPlayer where
         toJSON HiddenPlayer'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _hpKind),
+                 [("kind" .=) <$> _hpKind,
                   ("hiddenTimeMillis" .=) <$> _hpHiddenTimeMillis,
                   ("player" .=) <$> _hpPlayer])
 
--- | This is a JSON template for achievement reset all response.
+-- | Achievement reset all response.
 --
 -- /See:/ 'achievementResetAllResponse' smart constructor.
 data AchievementResetAllResponse =
   AchievementResetAllResponse'
     { _ararResults :: !(Maybe [AchievementResetResponse])
-    , _ararKind    :: !Text
+    , _ararKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -796,10 +657,7 @@ data AchievementResetAllResponse =
 achievementResetAllResponse
     :: AchievementResetAllResponse
 achievementResetAllResponse =
-  AchievementResetAllResponse'
-    { _ararResults = Nothing
-    , _ararKind = "gamesManagement#achievementResetAllResponse"
-    }
+  AchievementResetAllResponse' {_ararResults = Nothing, _ararKind = Nothing}
 
 
 -- | The achievement reset results.
@@ -810,8 +668,8 @@ ararResults
       . _Coerce
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#achievementResetAllResponse.
-ararKind :: Lens' AchievementResetAllResponse Text
+-- string \`gamesManagement#achievementResetAllResponse\`.
+ararKind :: Lens' AchievementResetAllResponse (Maybe Text)
 ararKind = lens _ararKind (\ s a -> s{_ararKind = a})
 
 instance FromJSON AchievementResetAllResponse where
@@ -819,34 +677,31 @@ instance FromJSON AchievementResetAllResponse where
           = withObject "AchievementResetAllResponse"
               (\ o ->
                  AchievementResetAllResponse' <$>
-                   (o .:? "results" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "gamesManagement#achievementResetAllResponse"))
+                   (o .:? "results" .!= mempty) <*> (o .:? "kind"))
 
 instance ToJSON AchievementResetAllResponse where
         toJSON AchievementResetAllResponse'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _ararResults,
-                  Just ("kind" .= _ararKind)])
+                  ("kind" .=) <$> _ararKind])
 
--- | This is a JSON template for a Player resource.
+-- | A Player resource.
 --
 -- /See:/ 'player' smart constructor.
 data Player =
   Player'
     { _pBannerURLLandscape :: !(Maybe Text)
-    , _pLastPlayedWith     :: !(Maybe GamesPlayedResource)
-    , _pAvatarImageURL     :: !(Maybe Text)
-    , _pKind               :: !Text
-    , _pExperienceInfo     :: !(Maybe GamesPlayerExperienceInfoResource)
-    , _pName               :: !(Maybe PlayerName)
-    , _pOriginalPlayerId   :: !(Maybe Text)
-    , _pDisplayName        :: !(Maybe Text)
-    , _pTitle              :: !(Maybe Text)
-    , _pBannerURLPortrait  :: !(Maybe Text)
-    , _pPlayerId           :: !(Maybe Text)
-    , _pProFileSettings    :: !(Maybe ProFileSettings)
+    , _pAvatarImageURL :: !(Maybe Text)
+    , _pKind :: !(Maybe Text)
+    , _pExperienceInfo :: !(Maybe GamesPlayerExperienceInfoResource)
+    , _pName :: !(Maybe PlayerName)
+    , _pOriginalPlayerId :: !(Maybe Text)
+    , _pDisplayName :: !(Maybe Text)
+    , _pTitle :: !(Maybe Text)
+    , _pBannerURLPortrait :: !(Maybe Text)
+    , _pPlayerId :: !(Maybe Text)
+    , _pProFileSettings :: !(Maybe ProFileSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -856,8 +711,6 @@ data Player =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pBannerURLLandscape'
---
--- * 'pLastPlayedWith'
 --
 -- * 'pAvatarImageURL'
 --
@@ -883,9 +736,8 @@ player
 player =
   Player'
     { _pBannerURLLandscape = Nothing
-    , _pLastPlayedWith = Nothing
     , _pAvatarImageURL = Nothing
-    , _pKind = "gamesManagement#player"
+    , _pKind = Nothing
     , _pExperienceInfo = Nothing
     , _pName = Nothing
     , _pOriginalPlayerId = Nothing
@@ -903,14 +755,6 @@ pBannerURLLandscape
   = lens _pBannerURLLandscape
       (\ s a -> s{_pBannerURLLandscape = a})
 
--- | Details about the last time this player played a multiplayer game with
--- the currently authenticated player. Populated for PLAYED_WITH player
--- collection members.
-pLastPlayedWith :: Lens' Player (Maybe GamesPlayedResource)
-pLastPlayedWith
-  = lens _pLastPlayedWith
-      (\ s a -> s{_pLastPlayedWith = a})
-
 -- | The base URL for the image that represents the player.
 pAvatarImageURL :: Lens' Player (Maybe Text)
 pAvatarImageURL
@@ -918,8 +762,8 @@ pAvatarImageURL
       (\ s a -> s{_pAvatarImageURL = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#player.
-pKind :: Lens' Player Text
+-- string \`gamesManagement#player\`.
+pKind :: Lens' Player (Maybe Text)
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
 -- | An object to represent Play Game experience information for the player.
@@ -976,9 +820,8 @@ instance FromJSON Player where
               (\ o ->
                  Player' <$>
                    (o .:? "bannerUrlLandscape") <*>
-                     (o .:? "lastPlayedWith")
-                     <*> (o .:? "avatarImageUrl")
-                     <*> (o .:? "kind" .!= "gamesManagement#player")
+                     (o .:? "avatarImageUrl")
+                     <*> (o .:? "kind")
                      <*> (o .:? "experienceInfo")
                      <*> (o .:? "name")
                      <*> (o .:? "originalPlayerId")
@@ -993,9 +836,8 @@ instance ToJSON Player where
           = object
               (catMaybes
                  [("bannerUrlLandscape" .=) <$> _pBannerURLLandscape,
-                  ("lastPlayedWith" .=) <$> _pLastPlayedWith,
                   ("avatarImageUrl" .=) <$> _pAvatarImageURL,
-                  Just ("kind" .= _pKind),
+                  ("kind" .=) <$> _pKind,
                   ("experienceInfo" .=) <$> _pExperienceInfo,
                   ("name" .=) <$> _pName,
                   ("originalPlayerId" .=) <$> _pOriginalPlayerId,
@@ -1005,13 +847,13 @@ instance ToJSON Player where
                   ("playerId" .=) <$> _pPlayerId,
                   ("profileSettings" .=) <$> _pProFileSettings])
 
--- | This is a JSON template for profile settings
+-- | Profile settings
 --
 -- /See:/ 'proFileSettings' smart constructor.
 data ProFileSettings =
   ProFileSettings'
     { _pfsProFileVisible :: !(Maybe Bool)
-    , _pfsKind           :: !Text
+    , _pfsKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1026,20 +868,17 @@ data ProFileSettings =
 proFileSettings
     :: ProFileSettings
 proFileSettings =
-  ProFileSettings'
-    {_pfsProFileVisible = Nothing, _pfsKind = "gamesManagement#profileSettings"}
+  ProFileSettings' {_pfsProFileVisible = Nothing, _pfsKind = Nothing}
 
 
--- | The player\'s current profile visibility. This field is visible to both
--- 1P and 3P APIs.
 pfsProFileVisible :: Lens' ProFileSettings (Maybe Bool)
 pfsProFileVisible
   = lens _pfsProFileVisible
       (\ s a -> s{_pfsProFileVisible = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#profileSettings.
-pfsKind :: Lens' ProFileSettings Text
+-- string \`gamesManagement#profileSettings\`.
+pfsKind :: Lens' ProFileSettings (Maybe Text)
 pfsKind = lens _pfsKind (\ s a -> s{_pfsKind = a})
 
 instance FromJSON ProFileSettings where
@@ -1047,25 +886,24 @@ instance FromJSON ProFileSettings where
           = withObject "ProFileSettings"
               (\ o ->
                  ProFileSettings' <$>
-                   (o .:? "profileVisible") <*>
-                     (o .:? "kind" .!= "gamesManagement#profileSettings"))
+                   (o .:? "profileVisible") <*> (o .:? "kind"))
 
 instance ToJSON ProFileSettings where
         toJSON ProFileSettings'{..}
           = object
               (catMaybes
                  [("profileVisible" .=) <$> _pfsProFileVisible,
-                  Just ("kind" .= _pfsKind)])
+                  ("kind" .=) <$> _pfsKind])
 
--- | This is a JSON template for an achievement reset response.
+-- | An achievement reset response.
 --
 -- /See:/ 'achievementResetResponse' smart constructor.
 data AchievementResetResponse =
   AchievementResetResponse'
     { _arrUpdateOccurred :: !(Maybe Bool)
-    , _arrKind           :: !Text
-    , _arrCurrentState   :: !(Maybe Text)
-    , _arrDefinitionId   :: !(Maybe Text)
+    , _arrKind :: !(Maybe Text)
+    , _arrCurrentState :: !(Maybe Text)
+    , _arrDefinitionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1086,7 +924,7 @@ achievementResetResponse
 achievementResetResponse =
   AchievementResetResponse'
     { _arrUpdateOccurred = Nothing
-    , _arrKind = "gamesManagement#achievementResetResponse"
+    , _arrKind = Nothing
     , _arrCurrentState = Nothing
     , _arrDefinitionId = Nothing
     }
@@ -1099,14 +937,14 @@ arrUpdateOccurred
       (\ s a -> s{_arrUpdateOccurred = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
--- string gamesManagement#achievementResetResponse.
-arrKind :: Lens' AchievementResetResponse Text
+-- string \`gamesManagement#achievementResetResponse\`.
+arrKind :: Lens' AchievementResetResponse (Maybe Text)
 arrKind = lens _arrKind (\ s a -> s{_arrKind = a})
 
 -- | The current state of the achievement. This is the same as the initial
--- state of the achievement. Possible values are: - \"HIDDEN\"- Achievement
--- is hidden. - \"REVEALED\" - Achievement is revealed. - \"UNLOCKED\" -
--- Achievement is unlocked.
+-- state of the achievement. Possible values are: - \"\`HIDDEN\`\"-
+-- Achievement is hidden. - \"\`REVEALED\`\" - Achievement is revealed. -
+-- \"\`UNLOCKED\`\" - Achievement is unlocked.
 arrCurrentState :: Lens' AchievementResetResponse (Maybe Text)
 arrCurrentState
   = lens _arrCurrentState
@@ -1123,10 +961,8 @@ instance FromJSON AchievementResetResponse where
           = withObject "AchievementResetResponse"
               (\ o ->
                  AchievementResetResponse' <$>
-                   (o .:? "updateOccurred") <*>
-                     (o .:? "kind" .!=
-                        "gamesManagement#achievementResetResponse")
-                     <*> (o .:? "currentState")
+                   (o .:? "updateOccurred") <*> (o .:? "kind") <*>
+                     (o .:? "currentState")
                      <*> (o .:? "definitionId"))
 
 instance ToJSON AchievementResetResponse where
@@ -1134,6 +970,6 @@ instance ToJSON AchievementResetResponse where
           = object
               (catMaybes
                  [("updateOccurred" .=) <$> _arrUpdateOccurred,
-                  Just ("kind" .= _arrKind),
+                  ("kind" .=) <$> _arrKind,
                   ("currentState" .=) <$> _arrCurrentState,
                   ("definitionId" .=) <$> _arrDefinitionId])

@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Policies.Get
     , epgCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.policies.get@ method which the
 -- 'EnterprisesPoliciesGet' request conforms to.
@@ -61,12 +61,12 @@ type EnterprisesPoliciesGetResource =
 -- /See:/ 'enterprisesPoliciesGet' smart constructor.
 data EnterprisesPoliciesGet =
   EnterprisesPoliciesGet'
-    { _epgXgafv          :: !(Maybe Xgafv)
+    { _epgXgafv :: !(Maybe Xgafv)
     , _epgUploadProtocol :: !(Maybe Text)
-    , _epgAccessToken    :: !(Maybe Text)
-    , _epgUploadType     :: !(Maybe Text)
-    , _epgName           :: !Text
-    , _epgCallback       :: !(Maybe Text)
+    , _epgAccessToken :: !(Maybe Text)
+    , _epgUploadType :: !(Maybe Text)
+    , _epgName :: !Text
+    , _epgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

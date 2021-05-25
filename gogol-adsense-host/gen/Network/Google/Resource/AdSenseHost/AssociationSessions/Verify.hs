@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
     , asvToken
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.associationsessions.verify@ method which the
 -- 'AssociationSessionsVerify' request conforms to.

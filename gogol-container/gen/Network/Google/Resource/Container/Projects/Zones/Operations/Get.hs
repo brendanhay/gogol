@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Get
     , pzogCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.operations.get@ method which the
 -- 'ProjectsZonesOperationsGet' request conforms to.
@@ -70,15 +70,15 @@ type ProjectsZonesOperationsGetResource =
 -- /See:/ 'projectsZonesOperationsGet' smart constructor.
 data ProjectsZonesOperationsGet =
   ProjectsZonesOperationsGet'
-    { _pzogXgafv          :: !(Maybe Xgafv)
+    { _pzogXgafv :: !(Maybe Xgafv)
     , _pzogUploadProtocol :: !(Maybe Text)
-    , _pzogAccessToken    :: !(Maybe Text)
-    , _pzogUploadType     :: !(Maybe Text)
-    , _pzogZone           :: !Text
-    , _pzogName           :: !(Maybe Text)
-    , _pzogProjectId      :: !Text
-    , _pzogOperationId    :: !Text
-    , _pzogCallback       :: !(Maybe Text)
+    , _pzogAccessToken :: !(Maybe Text)
+    , _pzogUploadType :: !(Maybe Text)
+    , _pzogZone :: !Text
+    , _pzogName :: !(Maybe Text)
+    , _pzogProjectId :: !Text
+    , _pzogOperationId :: !Text
+    , _pzogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,13 +147,14 @@ pzogUploadType
       (\ s a -> s{_pzogUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzogZone :: Lens' ProjectsZonesOperationsGet Text
 pzogZone = lens _pzogZone (\ s a -> s{_pzogZone = a})
 
 -- | The name (project, location, operation id) of the operation to get.
--- Specified in the format \'projects\/*\/locations\/*\/operations\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/operations\/*\`.
 pzogName :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogName = lens _pzogName (\ s a -> s{_pzogName = a})
 

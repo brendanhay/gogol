@@ -44,8 +44,8 @@ module Network.Google.Resource.Classroom.Invitations.Get
     , igCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.get@ method which the
 -- 'InvitationsGet' request conforms to.
@@ -68,12 +68,12 @@ type InvitationsGetResource =
 -- /See:/ 'invitationsGet' smart constructor.
 data InvitationsGet =
   InvitationsGet'
-    { _igXgafv          :: !(Maybe Xgafv)
+    { _igXgafv :: !(Maybe Xgafv)
     , _igUploadProtocol :: !(Maybe Text)
-    , _igAccessToken    :: !(Maybe Text)
-    , _igUploadType     :: !(Maybe Text)
-    , _igId             :: !Text
-    , _igCallback       :: !(Maybe Text)
+    , _igAccessToken :: !(Maybe Text)
+    , _igUploadType :: !(Maybe Text)
+    , _igId :: !Text
+    , _igCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

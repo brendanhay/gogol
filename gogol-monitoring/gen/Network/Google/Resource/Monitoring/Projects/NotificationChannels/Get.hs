@@ -26,7 +26,7 @@
 -- matter and thus the response may not be 100% identical to the
 -- information that was supplied in the call to the create method.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.notificationChannels.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.get@.
 module Network.Google.Resource.Monitoring.Projects.NotificationChannels.Get
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.Monitoring.Projects.NotificationChannels.Get
     , pncgCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.notificationChannels.get@ method which the
 -- 'ProjectsNotificationChannelsGet' request conforms to.
@@ -70,12 +70,12 @@ type ProjectsNotificationChannelsGetResource =
 -- /See:/ 'projectsNotificationChannelsGet' smart constructor.
 data ProjectsNotificationChannelsGet =
   ProjectsNotificationChannelsGet'
-    { _pncgXgafv          :: !(Maybe Xgafv)
+    { _pncgXgafv :: !(Maybe Xgafv)
     , _pncgUploadProtocol :: !(Maybe Text)
-    , _pncgAccessToken    :: !(Maybe Text)
-    , _pncgUploadType     :: !(Maybe Text)
-    , _pncgName           :: !Text
-    , _pncgCallback       :: !(Maybe Text)
+    , _pncgAccessToken :: !(Maybe Text)
+    , _pncgUploadType :: !(Maybe Text)
+    , _pncgName :: !Text
+    , _pncgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -132,8 +132,8 @@ pncgUploadType
   = lens _pncgUploadType
       (\ s a -> s{_pncgUploadType = a})
 
--- | The channel for which to execute the request. The format is
--- projects\/[PROJECT_ID]\/notificationChannels\/[CHANNEL_ID].
+-- | Required. The channel for which to execute the request. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/notificationChannels\/[CHANNEL_ID]
 pncgName :: Lens' ProjectsNotificationChannelsGet Text
 pncgName = lens _pncgName (\ s a -> s{_pncgName = a})
 

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -62,6 +62,11 @@ module Network.Google.Script.Types
     -- * GoogleAppsScriptTypeProcessUserAccessLevel
     , GoogleAppsScriptTypeProcessUserAccessLevel (..)
 
+    -- * ScriptExecutionResult
+    , ScriptExecutionResult
+    , scriptExecutionResult
+    , serReturnValue
+
     -- * Metrics
     , Metrics
     , metrics
@@ -79,6 +84,14 @@ module Network.Google.Script.Types
     , gastpUserAccessLevel
     , gastpProcessType
     , gastpDuration
+
+    -- * Struct
+    , Struct
+    , struct
+    , sFields
+
+    -- * ProcessesListScriptProcessesScriptProcessFilterTypes
+    , ProcessesListScriptProcessesScriptProcessFilterTypes (..)
 
     -- * GoogleAppsScriptTypeWebAppConfigExecuteAs
     , GoogleAppsScriptTypeWebAppConfigExecuteAs (..)
@@ -119,6 +132,11 @@ module Network.Google.Script.Types
     , gastuDomain
     , gastuName
 
+    -- * ExecuteStreamResponse
+    , ExecuteStreamResponse
+    , executeStreamResponse
+    , esrResult
+
     -- * EntryPoint
     , EntryPoint
     , entryPoint
@@ -136,6 +154,9 @@ module Network.Google.Script.Types
     -- * GoogleAppsScriptTypeExecutionAPIConfigAccess
     , GoogleAppsScriptTypeExecutionAPIConfigAccess (..)
 
+    -- * ProcessesListScriptProcessesScriptProcessFilterStatuses
+    , ProcessesListScriptProcessesScriptProcessFilterStatuses (..)
+
     -- * ExecutionRequest
     , ExecutionRequest
     , executionRequest
@@ -149,6 +170,22 @@ module Network.Google.Script.Types
     , listScriptProcessesResponse
     , lsprNextPageToken
     , lsprProcesses
+
+    -- * Value
+    , Value
+    , value
+    , vBytesValue
+    , vProtoValue
+    , vBoolValue
+    , vNumberValue
+    , vStringValue
+    , vListValue
+    , vStructValue
+    , vDateValue
+    , vNullValue
+
+    -- * ValueNullValue
+    , ValueNullValue (..)
 
     -- * StatusDetailsItem
     , StatusDetailsItem
@@ -164,11 +201,30 @@ module Network.Google.Script.Types
     , ssteFunction
     , ssteLineNumber
 
+    -- * StructFields
+    , StructFields
+    , structFields
+    , sfAddtional
+
+    -- * ProcessesListUserProcessFilterTypes
+    , ProcessesListUserProcessFilterTypes (..)
+
+    -- * ListValue
+    , ListValue
+    , listValue
+    , lvValues
+
+    -- * ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
+    , ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels (..)
+
     -- * Content
     , Content
     , content
     , cScriptId
     , cFiles
+
+    -- * ProjectsGetMetricsMetricsGranularity
+    , ProjectsGetMetricsMetricsGranularity (..)
 
     -- * GoogleAppsScriptTypeAddOnEntryPointAddOnType
     , GoogleAppsScriptTypeAddOnEntryPointAddOnType (..)
@@ -189,6 +245,9 @@ module Network.Google.Script.Types
     , gastaoepHelpURL
     , gastaoepTitle
     , gastaoepDescription
+
+    -- * ProcessesListUserProcessFilterStatuses
+    , ProcessesListUserProcessFilterStatuses (..)
 
     -- * GoogleAppsScriptTypeWebAppConfig
     , GoogleAppsScriptTypeWebAppConfig
@@ -219,6 +278,9 @@ module Network.Google.Script.Types
     , googleAppsScriptTypeWebAppEntryPoint
     , gastwaepEntryPointConfig
     , gastwaepURL
+
+    -- * ProcessesListUserProcessFilterUserAccessLevels
+    , ProcessesListUserProcessFilterUserAccessLevels (..)
 
     -- * EntryPointEntryPointType
     , EntryPointEntryPointType (..)
@@ -253,6 +315,11 @@ module Network.Google.Script.Types
     , GoogleAppsScriptTypeFunction
     , googleAppsScriptTypeFunction
     , gastfName
+
+    -- * ValueProtoValue
+    , ValueProtoValue
+    , valueProtoValue
+    , vpvAddtional
 
     -- * File
     , File
@@ -294,9 +361,9 @@ module Network.Google.Script.Types
     , udrDeploymentConfig
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types.Product
-import           Network.Google.Script.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Script.Types.Product
+import Network.Google.Script.Types.Sum
 
 -- | Default request referring to version 'v1' of the Apps Script API. This contains the host and root path used as a starting point for constructing service requests.
 scriptService :: ServiceConfig
@@ -320,7 +387,7 @@ adminDirectoryUserScope = Proxy
 scriptProjectsScope :: Proxy '["https://www.googleapis.com/auth/script.projects"]
 scriptProjectsScope = Proxy
 
--- | View your email address
+-- | See your primary Google Account email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
 userInfoEmailScope = Proxy
 
@@ -357,7 +424,7 @@ calendarFeedsScope = Proxy
 formsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
 formsScope = Proxy
 
--- | See, edit, create, and delete your spreadsheets in Google Drive
+-- | See, edit, create, and delete all your Google Sheets spreadsheets
 spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
 spreadsheetsScope = Proxy
 
@@ -373,6 +440,6 @@ groupsScope = Proxy
 scriptProcessesScope :: Proxy '["https://www.googleapis.com/auth/script.processes"]
 scriptProcessesScope = Proxy
 
--- | View and manage your Google Docs documents
+-- | See, edit, create, and delete all your Google Docs documents
 documentsScope :: Proxy '["https://www.googleapis.com/auth/documents"]
 documentsScope = Proxy

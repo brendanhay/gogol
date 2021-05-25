@@ -29,26 +29,11 @@ module Network.Google.Speech
 
     -- * Resources
 
-    -- ** speech.operations.get
-    , module Network.Google.Resource.Speech.Operations.Get
-
-    -- ** speech.operations.list
-    , module Network.Google.Resource.Speech.Operations.List
-
     -- ** speech.projects.locations.operations.get
     , module Network.Google.Resource.Speech.Projects.Locations.Operations.Get
 
     -- ** speech.projects.locations.operations.list
     , module Network.Google.Resource.Speech.Projects.Locations.Operations.List
-
-    -- ** speech.projects.operations.manualRecognitionTasks.get
-    , module Network.Google.Resource.Speech.Projects.Operations.ManualRecognitionTasks.Get
-
-    -- ** speech.speech.longrunningrecognize
-    , module Network.Google.Resource.Speech.Speech.Longrunningrecognize
-
-    -- ** speech.speech.recognize
-    , module Network.Google.Resource.Speech.Speech.Recognize
 
     -- * Types
 
@@ -56,6 +41,7 @@ module Network.Google.Speech
     , LongRunningRecognizeMetadata
     , longRunningRecognizeMetadata
     , lrrmStartTime
+    , lrrmURI
     , lrrmProgressPercent
     , lrrmLastUpdateTime
 
@@ -66,39 +52,11 @@ module Network.Google.Speech
     , sCode
     , sMessage
 
-    -- ** SpeechContext
-    , SpeechContext
-    , speechContext
-    , scPhrases
-
-    -- ** RecognitionMetadataOriginalMediaType
-    , RecognitionMetadataOriginalMediaType (..)
-
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
-
-    -- ** RecognitionMetadata
-    , RecognitionMetadata
-    , recognitionMetadata
-    , rmAudioTopic
-    , rmInteractionType
-    , rmOriginalMediaType
-    , rmOriginalMimeType
-    , rmIndustryNaicsCodeOfAudio
-    , rmObfuscatedId
-    , rmRecordingDeviceName
-    , rmRecordingDeviceType
-    , rmMicrophoneDistance
-
-    -- ** RecognizeRequest
-    , RecognizeRequest
-    , recognizeRequest
-    , rrConfig
-    , rrName
-    , rrAudio
 
     -- ** Operation
     , Operation
@@ -119,14 +77,11 @@ module Network.Google.Speech
     -- ** WordInfo
     , WordInfo
     , wordInfo
-    , wiStartTime
+    , wiStartOffSet
     , wiConfidence
-    , wiEndTime
+    , wiEndOffSet
     , wiWord
     , wiSpeakerTag
-
-    -- ** RecognitionMetadataInteractionType
-    , RecognitionMetadataInteractionType (..)
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
@@ -140,23 +95,6 @@ module Network.Google.Speech
     , srrLanguageCode
     , srrChannelTag
 
-    -- ** RecognitionAudio
-    , RecognitionAudio
-    , recognitionAudio
-    , raURI
-    , raContent
-
-    -- ** RecognizeResponse
-    , RecognizeResponse
-    , recognizeResponse
-    , rrResults
-
-    -- ** RecognitionMetadataRecordingDeviceType
-    , RecognitionMetadataRecordingDeviceType (..)
-
-    -- ** RecognitionMetadataMicrophoneDistance
-    , RecognitionMetadataMicrophoneDistance (..)
-
     -- ** Xgafv
     , Xgafv (..)
 
@@ -165,64 +103,21 @@ module Network.Google.Speech
     , longRunningRecognizeResponse
     , lrrrResults
 
-    -- ** RecognitionConfig
-    , RecognitionConfig
-    , recognitionConfig
-    , rcEnableWordTimeOffSets
-    , rcSpeechContexts
-    , rcLanguageCode
-    , rcDiarizationConfig
-    , rcSampleRateHertz
-    , rcEnableAutomaticPunctuation
-    , rcMaxAlternatives
-    , rcAudioChannelCount
-    , rcEnableSeparateRecognitionPerChannel
-    , rcModel
-    , rcEnableSpeakerDiarization
-    , rcMetadata
-    , rcUseEnhanced
-    , rcProfanityFilter
-    , rcDiarizationSpeakerCount
-    , rcEncoding
-    , rcAlternativeLanguageCodes
-    , rcEnableWordConfidence
-
-    -- ** LongRunningRecognizeRequest
-    , LongRunningRecognizeRequest
-    , longRunningRecognizeRequest
-    , lrrrConfig
-    , lrrrAudio
-
     -- ** OperationMetadata
     , OperationMetadata
     , operationMetadata
     , omAddtional
 
-    -- ** RecognitionConfigEncoding
-    , RecognitionConfigEncoding (..)
-
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
     , orAddtional
-
-    -- ** SpeakerDiarizationConfig
-    , SpeakerDiarizationConfig
-    , speakerDiarizationConfig
-    , sdcMinSpeakerCount
-    , sdcMaxSpeakerCount
-    , sdcEnableSpeakerDiarization
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Speech.Operations.Get
-import           Network.Google.Resource.Speech.Operations.List
-import           Network.Google.Resource.Speech.Projects.Locations.Operations.Get
-import           Network.Google.Resource.Speech.Projects.Locations.Operations.List
-import           Network.Google.Resource.Speech.Projects.Operations.ManualRecognitionTasks.Get
-import           Network.Google.Resource.Speech.Speech.Longrunningrecognize
-import           Network.Google.Resource.Speech.Speech.Recognize
-import           Network.Google.Speech.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Speech.Projects.Locations.Operations.Get
+import Network.Google.Resource.Speech.Projects.Locations.Operations.List
+import Network.Google.Speech.Types
 
 {- $resources
 TODO
@@ -230,11 +125,5 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud Speech-to-Text API service.
 type SpeechAPI =
-     SpeechRecognizeResource :<|>
-       SpeechLongrunningrecognizeResource
-       :<|> OperationsListResource
-       :<|> OperationsGetResource
-       :<|>
-       ProjectsOperationsManualRecognitionTasksGetResource
-       :<|> ProjectsLocationsOperationsListResource
-       :<|> ProjectsLocationsOperationsGetResource
+     ProjectsLocationsOperationsListResource :<|>
+       ProjectsLocationsOperationsGetResource

@@ -21,9 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.setIamPolicy@.
 module Network.Google.Resource.Ml.Projects.Models.SetIAMPolicy
     (
     -- * REST Resource
@@ -43,8 +44,8 @@ module Network.Google.Resource.Ml.Projects.Models.SetIAMPolicy
     , pmsipCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.setIamPolicy@ method which the
 -- 'ProjectsModelsSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ProjectsModelsSetIAMPolicyResource =
                        Post '[JSON] GoogleIAMV1__Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsModelsSetIAMPolicy' smart constructor.
 data ProjectsModelsSetIAMPolicy =
   ProjectsModelsSetIAMPolicy'
-    { _pmsipXgafv          :: !(Maybe Xgafv)
+    { _pmsipXgafv :: !(Maybe Xgafv)
     , _pmsipUploadProtocol :: !(Maybe Text)
-    , _pmsipAccessToken    :: !(Maybe Text)
-    , _pmsipUploadType     :: !(Maybe Text)
-    , _pmsipPayload        :: !GoogleIAMV1__SetIAMPolicyRequest
-    , _pmsipResource       :: !Text
-    , _pmsipCallback       :: !(Maybe Text)
+    , _pmsipAccessToken :: !(Maybe Text)
+    , _pmsipUploadType :: !(Maybe Text)
+    , _pmsipPayload :: !GoogleIAMV1__SetIAMPolicyRequest
+    , _pmsipResource :: !Text
+    , _pmsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

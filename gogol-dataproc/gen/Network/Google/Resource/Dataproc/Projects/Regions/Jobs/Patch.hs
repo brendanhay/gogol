@@ -45,8 +45,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.Patch
     , prjpCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.jobs.patch@ method which the
 -- 'ProjectsRegionsJobsPatch' request conforms to.
@@ -72,16 +72,16 @@ type ProjectsRegionsJobsPatchResource =
 -- /See:/ 'projectsRegionsJobsPatch' smart constructor.
 data ProjectsRegionsJobsPatch =
   ProjectsRegionsJobsPatch'
-    { _prjpXgafv          :: !(Maybe Xgafv)
-    , _prjpJobId          :: !Text
+    { _prjpXgafv :: !(Maybe Xgafv)
+    , _prjpJobId :: !Text
     , _prjpUploadProtocol :: !(Maybe Text)
-    , _prjpUpdateMask     :: !(Maybe GFieldMask)
-    , _prjpAccessToken    :: !(Maybe Text)
-    , _prjpUploadType     :: !(Maybe Text)
-    , _prjpPayload        :: !Job
-    , _prjpRegion         :: !Text
-    , _prjpProjectId      :: !Text
-    , _prjpCallback       :: !(Maybe Text)
+    , _prjpUpdateMask :: !(Maybe GFieldMask)
+    , _prjpAccessToken :: !(Maybe Text)
+    , _prjpUploadType :: !(Maybe Text)
+    , _prjpPayload :: !Job
+    , _prjpRegion :: !Text
+    , _prjpProjectId :: !Text
+    , _prjpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,11 +146,11 @@ prjpUploadProtocol
   = lens _prjpUploadProtocol
       (\ s a -> s{_prjpUploadProtocol = a})
 
--- | Required. Specifies the path, relative to 'Job', of the field to update.
--- For example, to update the labels of a Job the 'update_mask' parameter
--- would be specified as 'labels', and the PATCH request body would specify
--- the new value. __Note:__ Currently, 'labels' is the only field that can
--- be updated.
+-- | Required. Specifies the path, relative to Job, of the field to update.
+-- For example, to update the labels of a Job the update_mask parameter
+-- would be specified as labels, and the PATCH request body would specify
+-- the new value. *Note:* Currently, labels is the only field that can be
+-- updated.
 prjpUpdateMask :: Lens' ProjectsRegionsJobsPatch (Maybe GFieldMask)
 prjpUpdateMask
   = lens _prjpUpdateMask
@@ -173,7 +173,7 @@ prjpPayload :: Lens' ProjectsRegionsJobsPatch Job
 prjpPayload
   = lens _prjpPayload (\ s a -> s{_prjpPayload = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prjpRegion :: Lens' ProjectsRegionsJobsPatch Text
 prjpRegion
   = lens _prjpRegion (\ s a -> s{_prjpRegion = a})

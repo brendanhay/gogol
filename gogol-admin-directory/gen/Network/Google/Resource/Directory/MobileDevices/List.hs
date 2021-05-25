@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve all Mobile Devices of a customer (paginated)
+-- Retrieves a paginated list of all mobile devices for an account.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.mobiledevices.list@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.mobiledevices.list@.
 module Network.Google.Resource.Directory.MobileDevices.List
     (
     -- * REST Resource
@@ -33,17 +33,22 @@ module Network.Google.Resource.Directory.MobileDevices.List
     , MobileDevicesList
 
     -- * Request Lenses
+    , mdlXgafv
+    , mdlUploadProtocol
     , mdlOrderBy
+    , mdlAccessToken
+    , mdlUploadType
     , mdlCustomerId
     , mdlSortOrder
     , mdlQuery
     , mdlProjection
     , mdlPageToken
     , mdlMaxResults
+    , mdlCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.mobiledevices.list@ method which the
 -- 'MobileDevicesList' request conforms to.
@@ -55,28 +60,40 @@ type MobileDevicesListResource =
              Capture "customerId" Text :>
                "devices" :>
                  "mobile" :>
-                   QueryParam "orderBy" MobileDevicesListOrderBy :>
-                     QueryParam "sortOrder" MobileDevicesListSortOrder :>
-                       QueryParam "query" Text :>
-                         QueryParam "projection" MobileDevicesListProjection
-                           :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" (Textual Int32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] MobileDevices
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "orderBy" MobileDevicesListOrderBy :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "sortOrder" MobileDevicesListSortOrder
+                               :>
+                               QueryParam "query" Text :>
+                                 QueryParam "projection"
+                                   MobileDevicesListProjection
+                                   :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "maxResults" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] MobileDevices
 
--- | Retrieve all Mobile Devices of a customer (paginated)
+-- | Retrieves a paginated list of all mobile devices for an account.
 --
 -- /See:/ 'mobileDevicesList' smart constructor.
 data MobileDevicesList =
   MobileDevicesList'
-    { _mdlOrderBy    :: !(Maybe MobileDevicesListOrderBy)
+    { _mdlXgafv :: !(Maybe Xgafv)
+    , _mdlUploadProtocol :: !(Maybe Text)
+    , _mdlOrderBy :: !(Maybe MobileDevicesListOrderBy)
+    , _mdlAccessToken :: !(Maybe Text)
+    , _mdlUploadType :: !(Maybe Text)
     , _mdlCustomerId :: !Text
-    , _mdlSortOrder  :: !(Maybe MobileDevicesListSortOrder)
-    , _mdlQuery      :: !(Maybe Text)
+    , _mdlSortOrder :: !(Maybe MobileDevicesListSortOrder)
+    , _mdlQuery :: !(Maybe Text)
     , _mdlProjection :: !(Maybe MobileDevicesListProjection)
-    , _mdlPageToken  :: !(Maybe Text)
-    , _mdlMaxResults :: !(Maybe (Textual Int32))
+    , _mdlPageToken :: !(Maybe Text)
+    , _mdlMaxResults :: !(Textual Int32)
+    , _mdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,7 +102,15 @@ data MobileDevicesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mdlXgafv'
+--
+-- * 'mdlUploadProtocol'
+--
 -- * 'mdlOrderBy'
+--
+-- * 'mdlAccessToken'
+--
+-- * 'mdlUploadType'
 --
 -- * 'mdlCustomerId'
 --
@@ -98,40 +123,73 @@ data MobileDevicesList =
 -- * 'mdlPageToken'
 --
 -- * 'mdlMaxResults'
+--
+-- * 'mdlCallback'
 mobileDevicesList
     :: Text -- ^ 'mdlCustomerId'
     -> MobileDevicesList
 mobileDevicesList pMdlCustomerId_ =
   MobileDevicesList'
-    { _mdlOrderBy = Nothing
+    { _mdlXgafv = Nothing
+    , _mdlUploadProtocol = Nothing
+    , _mdlOrderBy = Nothing
+    , _mdlAccessToken = Nothing
+    , _mdlUploadType = Nothing
     , _mdlCustomerId = pMdlCustomerId_
     , _mdlSortOrder = Nothing
     , _mdlQuery = Nothing
     , _mdlProjection = Nothing
     , _mdlPageToken = Nothing
-    , _mdlMaxResults = Nothing
+    , _mdlMaxResults = 100
+    , _mdlCallback = Nothing
     }
 
 
--- | Column to use for sorting results
+-- | V1 error format.
+mdlXgafv :: Lens' MobileDevicesList (Maybe Xgafv)
+mdlXgafv = lens _mdlXgafv (\ s a -> s{_mdlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mdlUploadProtocol :: Lens' MobileDevicesList (Maybe Text)
+mdlUploadProtocol
+  = lens _mdlUploadProtocol
+      (\ s a -> s{_mdlUploadProtocol = a})
+
+-- | Device property to use for sorting results.
 mdlOrderBy :: Lens' MobileDevicesList (Maybe MobileDevicesListOrderBy)
 mdlOrderBy
   = lens _mdlOrderBy (\ s a -> s{_mdlOrderBy = a})
 
--- | Immutable ID of the G Suite account
+-- | OAuth access token.
+mdlAccessToken :: Lens' MobileDevicesList (Maybe Text)
+mdlAccessToken
+  = lens _mdlAccessToken
+      (\ s a -> s{_mdlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mdlUploadType :: Lens' MobileDevicesList (Maybe Text)
+mdlUploadType
+  = lens _mdlUploadType
+      (\ s a -> s{_mdlUploadType = a})
+
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s \`customerId\`. The \`customerId\` is also
+-- returned as part of the [Users
+-- resource](\/admin-sdk\/directory\/v1\/reference\/users).
 mdlCustomerId :: Lens' MobileDevicesList Text
 mdlCustomerId
   = lens _mdlCustomerId
       (\ s a -> s{_mdlCustomerId = a})
 
--- | Whether to return results in ascending or descending order. Only of use
--- when orderBy is also used
+-- | Whether to return results in ascending or descending order. Must be used
+-- with the \`orderBy\` parameter.
 mdlSortOrder :: Lens' MobileDevicesList (Maybe MobileDevicesListSortOrder)
 mdlSortOrder
   = lens _mdlSortOrder (\ s a -> s{_mdlSortOrder = a})
 
 -- | Search string in the format given at
--- http:\/\/support.google.com\/a\/bin\/answer.py?answer=1408863#search
+-- https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/search-operators
 mdlQuery :: Lens' MobileDevicesList (Maybe Text)
 mdlQuery = lens _mdlQuery (\ s a -> s{_mdlQuery = a})
 
@@ -146,12 +204,17 @@ mdlPageToken :: Lens' MobileDevicesList (Maybe Text)
 mdlPageToken
   = lens _mdlPageToken (\ s a -> s{_mdlPageToken = a})
 
--- | Maximum number of results to return. Default is 100
-mdlMaxResults :: Lens' MobileDevicesList (Maybe Int32)
+-- | Maximum number of results to return. Max allowed value is 100.
+mdlMaxResults :: Lens' MobileDevicesList Int32
 mdlMaxResults
   = lens _mdlMaxResults
       (\ s a -> s{_mdlMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
+
+-- | JSONP
+mdlCallback :: Lens' MobileDevicesList (Maybe Text)
+mdlCallback
+  = lens _mdlCallback (\ s a -> s{_mdlCallback = a})
 
 instance GoogleRequest MobileDevicesList where
         type Rs MobileDevicesList = MobileDevices
@@ -160,11 +223,16 @@ instance GoogleRequest MobileDevicesList where
                "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
                "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
         requestClient MobileDevicesList'{..}
-          = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
+          = go _mdlCustomerId _mdlXgafv _mdlUploadProtocol
+              _mdlOrderBy
+              _mdlAccessToken
+              _mdlUploadType
+              _mdlSortOrder
               _mdlQuery
               _mdlProjection
               _mdlPageToken
-              _mdlMaxResults
+              (Just _mdlMaxResults)
+              _mdlCallback
               (Just AltJSON)
               directoryService
           where go

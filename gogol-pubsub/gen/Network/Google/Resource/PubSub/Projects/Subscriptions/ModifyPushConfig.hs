@@ -47,8 +47,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     , psmpcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.modifyPushConfig@ method which the
 -- 'ProjectsSubscriptionsModifyPushConfig' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 -- /See:/ 'projectsSubscriptionsModifyPushConfig' smart constructor.
 data ProjectsSubscriptionsModifyPushConfig =
   ProjectsSubscriptionsModifyPushConfig'
-    { _psmpcXgafv          :: !(Maybe Xgafv)
+    { _psmpcXgafv :: !(Maybe Xgafv)
     , _psmpcUploadProtocol :: !(Maybe Text)
-    , _psmpcAccessToken    :: !(Maybe Text)
-    , _psmpcUploadType     :: !(Maybe Text)
-    , _psmpcPayload        :: !ModifyPushConfigRequest
-    , _psmpcSubscription   :: !Text
-    , _psmpcCallback       :: !(Maybe Text)
+    , _psmpcAccessToken :: !(Maybe Text)
+    , _psmpcUploadType :: !(Maybe Text)
+    , _psmpcPayload :: !ModifyPushConfigRequest
+    , _psmpcSubscription :: !Text
+    , _psmpcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,7 +146,7 @@ psmpcPayload :: Lens' ProjectsSubscriptionsModifyPushConfig ModifyPushConfigRequ
 psmpcPayload
   = lens _psmpcPayload (\ s a -> s{_psmpcPayload = a})
 
--- | The name of the subscription. Format is
+-- | Required. The name of the subscription. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
 psmpcSubscription :: Lens' ProjectsSubscriptionsModifyPushConfig Text
 psmpcSubscription

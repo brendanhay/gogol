@@ -44,8 +44,8 @@ module Network.Google.Resource.FirebaseRemoteConfig.Projects.GetRemoteConfig
     , pgrcCallback
     ) where
 
-import           Network.Google.FirebaseRemoteConfig.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRemoteConfig.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaseremoteconfig.projects.getRemoteConfig@ method which the
 -- 'ProjectsGetRemoteConfig' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsGetRemoteConfigResource =
 -- /See:/ 'projectsGetRemoteConfig' smart constructor.
 data ProjectsGetRemoteConfig =
   ProjectsGetRemoteConfig'
-    { _pgrcXgafv          :: !(Maybe Xgafv)
+    { _pgrcXgafv :: !(Maybe Xgafv)
     , _pgrcUploadProtocol :: !(Maybe Text)
-    , _pgrcProject        :: !Text
-    , _pgrcPp             :: !Bool
-    , _pgrcAccessToken    :: !(Maybe Text)
-    , _pgrcUploadType     :: !(Maybe Text)
-    , _pgrcBearerToken    :: !(Maybe Text)
-    , _pgrcCallback       :: !(Maybe Text)
+    , _pgrcProject :: !Text
+    , _pgrcPp :: !Bool
+    , _pgrcAccessToken :: !(Maybe Text)
+    , _pgrcUploadType :: !(Maybe Text)
+    , _pgrcBearerToken :: !(Maybe Text)
+    , _pgrcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a deployment and all of the resources described by the
--- deployment manifest. This method supports patch semantics.
+-- Patches a deployment and all of the resources described by the
+-- deployment manifest.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.patch@.
+-- /See:/ <https://cloud.google.com/deployment-manager Cloud Deployment Manager V2 API Reference> for @deploymentmanager.deployments.patch@.
 module Network.Google.Resource.DeploymentManager.Deployments.Patch
     (
     -- * REST Resource
@@ -35,15 +35,20 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
 
     -- * Request Lenses
     , dpCreatePolicy
+    , dpXgafv
+    , dpUploadProtocol
     , dpProject
+    , dpAccessToken
+    , dpUploadType
     , dpPayload
     , dpDeletePolicy
     , dpPreview
+    , dpCallback
     , dpDeployment
     ) where
 
-import           Network.Google.DeploymentManager.Types
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.patch@ method which the
 -- 'DeploymentsPatch' request conforms to.
@@ -58,25 +63,36 @@ type DeploymentsPatchResource =
                    QueryParam "createPolicy"
                      DeploymentsPatchCreatePolicy
                      :>
-                     QueryParam "deletePolicy"
-                       DeploymentsPatchDeletePolicy
-                       :>
-                       QueryParam "preview" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Deployment :> Patch '[JSON] Operation
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "deletePolicy"
+                               DeploymentsPatchDeletePolicy
+                               :>
+                               QueryParam "preview" Bool :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Deployment :>
+                                       Patch '[JSON] Operation
 
--- | Updates a deployment and all of the resources described by the
--- deployment manifest. This method supports patch semantics.
+-- | Patches a deployment and all of the resources described by the
+-- deployment manifest.
 --
 -- /See:/ 'deploymentsPatch' smart constructor.
 data DeploymentsPatch =
   DeploymentsPatch'
     { _dpCreatePolicy :: !DeploymentsPatchCreatePolicy
-    , _dpProject      :: !Text
-    , _dpPayload      :: !Deployment
+    , _dpXgafv :: !(Maybe Xgafv)
+    , _dpUploadProtocol :: !(Maybe Text)
+    , _dpProject :: !Text
+    , _dpAccessToken :: !(Maybe Text)
+    , _dpUploadType :: !(Maybe Text)
+    , _dpPayload :: !Deployment
     , _dpDeletePolicy :: !DeploymentsPatchDeletePolicy
-    , _dpPreview      :: !Bool
-    , _dpDeployment   :: !Text
+    , _dpPreview :: !Bool
+    , _dpCallback :: !(Maybe Text)
+    , _dpDeployment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,13 +103,23 @@ data DeploymentsPatch =
 --
 -- * 'dpCreatePolicy'
 --
+-- * 'dpXgafv'
+--
+-- * 'dpUploadProtocol'
+--
 -- * 'dpProject'
+--
+-- * 'dpAccessToken'
+--
+-- * 'dpUploadType'
 --
 -- * 'dpPayload'
 --
 -- * 'dpDeletePolicy'
 --
 -- * 'dpPreview'
+--
+-- * 'dpCallback'
 --
 -- * 'dpDeployment'
 deploymentsPatch
@@ -104,10 +130,15 @@ deploymentsPatch
 deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
   DeploymentsPatch'
     { _dpCreatePolicy = DPCPCreateOrAcquire
+    , _dpXgafv = Nothing
+    , _dpUploadProtocol = Nothing
     , _dpProject = pDpProject_
+    , _dpAccessToken = Nothing
+    , _dpUploadType = Nothing
     , _dpPayload = pDpPayload_
     , _dpDeletePolicy = DPDPDelete'
     , _dpPreview = False
+    , _dpCallback = Nothing
     , _dpDeployment = pDpDeployment_
     }
 
@@ -118,10 +149,31 @@ dpCreatePolicy
   = lens _dpCreatePolicy
       (\ s a -> s{_dpCreatePolicy = a})
 
+-- | V1 error format.
+dpXgafv :: Lens' DeploymentsPatch (Maybe Xgafv)
+dpXgafv = lens _dpXgafv (\ s a -> s{_dpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dpUploadProtocol :: Lens' DeploymentsPatch (Maybe Text)
+dpUploadProtocol
+  = lens _dpUploadProtocol
+      (\ s a -> s{_dpUploadProtocol = a})
+
 -- | The project ID for this request.
 dpProject :: Lens' DeploymentsPatch Text
 dpProject
   = lens _dpProject (\ s a -> s{_dpProject = a})
+
+-- | OAuth access token.
+dpAccessToken :: Lens' DeploymentsPatch (Maybe Text)
+dpAccessToken
+  = lens _dpAccessToken
+      (\ s a -> s{_dpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dpUploadType :: Lens' DeploymentsPatch (Maybe Text)
+dpUploadType
+  = lens _dpUploadType (\ s a -> s{_dpUploadType = a})
 
 -- | Multipart request metadata.
 dpPayload :: Lens' DeploymentsPatch Deployment
@@ -138,15 +190,20 @@ dpDeletePolicy
 -- \"shell\" resources but does not actually alter or instantiate these
 -- resources. This allows you to preview what your deployment will look
 -- like. You can use this intent to preview how an update would affect your
--- deployment. You must provide a target.config with a configuration if
+-- deployment. You must provide a \`target.config\` with a configuration if
 -- this is set to true. After previewing a deployment, you can deploy your
--- resources by making a request with the update() or you can
--- cancelPreview() to remove the preview altogether. Note that the
+-- resources by making a request with the \`update()\` or you can
+-- \`cancelPreview()\` to remove the preview altogether. Note that the
 -- deployment will still exist after you cancel the preview and you must
 -- separately delete this deployment if you want to remove it.
 dpPreview :: Lens' DeploymentsPatch Bool
 dpPreview
   = lens _dpPreview (\ s a -> s{_dpPreview = a})
+
+-- | JSONP
+dpCallback :: Lens' DeploymentsPatch (Maybe Text)
+dpCallback
+  = lens _dpCallback (\ s a -> s{_dpCallback = a})
 
 -- | The name of the deployment for this request.
 dpDeployment :: Lens' DeploymentsPatch Text
@@ -160,8 +217,13 @@ instance GoogleRequest DeploymentsPatch where
                "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsPatch'{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
+              _dpXgafv
+              _dpUploadProtocol
+              _dpAccessToken
+              _dpUploadType
               (Just _dpDeletePolicy)
               (Just _dpPreview)
+              _dpCallback
               (Just AltJSON)
               _dpPayload
               deploymentManagerService

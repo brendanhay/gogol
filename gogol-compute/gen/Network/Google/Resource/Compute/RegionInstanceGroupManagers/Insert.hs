@@ -45,8 +45,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
     , rigmiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.insert@ method which the
 -- 'RegionInstanceGroupManagersInsert' request conforms to.
@@ -75,9 +75,9 @@ type RegionInstanceGroupManagersInsertResource =
 data RegionInstanceGroupManagersInsert =
   RegionInstanceGroupManagersInsert'
     { _rigmiRequestId :: !(Maybe Text)
-    , _rigmiProject   :: !Text
-    , _rigmiPayload   :: !InstanceGroupManager
-    , _rigmiRegion    :: !Text
+    , _rigmiProject :: !Text
+    , _rigmiPayload :: !InstanceGroupManager
+    , _rigmiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

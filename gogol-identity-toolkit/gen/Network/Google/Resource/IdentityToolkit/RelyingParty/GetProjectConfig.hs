@@ -37,8 +37,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetProjectConfig
     , rpgpcProjectNumber
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getProjectConfig@ method which the
 -- 'RelyingPartyGetProjectConfig' request conforms to.
@@ -59,7 +59,7 @@ type RelyingPartyGetProjectConfigResource =
 data RelyingPartyGetProjectConfig =
   RelyingPartyGetProjectConfig'
     { _rpgpcDelegatedProjectNumber :: !(Maybe Text)
-    , _rpgpcProjectNumber          :: !(Maybe Text)
+    , _rpgpcProjectNumber :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

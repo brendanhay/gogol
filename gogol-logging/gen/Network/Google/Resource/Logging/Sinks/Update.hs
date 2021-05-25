@@ -25,7 +25,7 @@
 -- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.sinks.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.sinks.update@.
 module Network.Google.Resource.Logging.Sinks.Update
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Logging.Sinks.Update
     , suCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.sinks.update@ method which the
 -- 'SinksUpdate' request conforms to.
@@ -73,15 +73,15 @@ type SinksUpdateResource =
 -- /See:/ 'sinksUpdate' smart constructor.
 data SinksUpdate =
   SinksUpdate'
-    { _suXgafv                :: !(Maybe Xgafv)
+    { _suXgafv :: !(Maybe Xgafv)
     , _suUniqueWriterIdentity :: !(Maybe Bool)
-    , _suUploadProtocol       :: !(Maybe Text)
-    , _suUpdateMask           :: !(Maybe GFieldMask)
-    , _suAccessToken          :: !(Maybe Text)
-    , _suUploadType           :: !(Maybe Text)
-    , _suPayload              :: !LogSink
-    , _suSinkName             :: !Text
-    , _suCallback             :: !(Maybe Text)
+    , _suUploadProtocol :: !(Maybe Text)
+    , _suUpdateMask :: !(Maybe GFieldMask)
+    , _suAccessToken :: !(Maybe Text)
+    , _suUploadType :: !(Maybe Text)
+    , _suPayload :: !LogSink
+    , _suSinkName :: !Text
+    , _suCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

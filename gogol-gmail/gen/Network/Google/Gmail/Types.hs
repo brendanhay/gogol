@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -21,12 +21,16 @@ module Network.Google.Gmail.Types
 
     -- * OAuth Scopes
     , gmailSettingsBasicScope
+    , gmailAddonsCurrentMessageActionScope
+    , gmailAddonsCurrentMessageMetadataScope
     , mailGoogleComScope
     , gmailModifyScope
     , gmailMetadataScope
     , gmailLabelsScope
     , gmailSettingsSharingScope
     , gmailSendScope
+    , gmailAddonsCurrentMessageReadOnlyScope
+    , gmailAddonsCurrentActionComposeScope
     , gmailInsertScope
     , gmailComposeScope
     , gmailReadOnlyScope
@@ -256,6 +260,9 @@ module Network.Google.Gmail.Types
     , wrExpiration
     , wrHistoryId
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * DelegateVerificationStatus
     , DelegateVerificationStatus (..)
 
@@ -404,25 +411,33 @@ module Network.Google.Gmail.Types
     , hmaMessage
     ) where
 
-import           Network.Google.Gmail.Types.Product
-import           Network.Google.Gmail.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types.Product
+import Network.Google.Gmail.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
 gmailService :: ServiceConfig
 gmailService
   = defaultService (ServiceId "gmail:v1")
-      "www.googleapis.com"
+      "gmail.googleapis.com"
 
--- | Manage your basic mail settings
+-- | See, edit, create, or change your email settings and filters in Gmail
 gmailSettingsBasicScope :: Proxy '["https://www.googleapis.com/auth/gmail.settings.basic"]
 gmailSettingsBasicScope = Proxy
+
+-- | View your email messages when you interact with the add-on
+gmailAddonsCurrentMessageActionScope :: Proxy '["https://www.googleapis.com/auth/gmail.addons.current.message.action"]
+gmailAddonsCurrentMessageActionScope = Proxy
+
+-- | View your email message metadata when the add-on is running
+gmailAddonsCurrentMessageMetadataScope :: Proxy '["https://www.googleapis.com/auth/gmail.addons.current.message.metadata"]
+gmailAddonsCurrentMessageMetadataScope = Proxy
 
 -- | Read, compose, send, and permanently delete all your email from Gmail
 mailGoogleComScope :: Proxy '["https://mail.google.com/"]
 mailGoogleComScope = Proxy
 
--- | View and modify but not delete your email
+-- | Read, compose, and send emails from your Gmail account
 gmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
 gmailModifyScope = Proxy
 
@@ -431,7 +446,7 @@ gmailModifyScope = Proxy
 gmailMetadataScope :: Proxy '["https://www.googleapis.com/auth/gmail.metadata"]
 gmailMetadataScope = Proxy
 
--- | Manage mailbox labels
+-- | See and edit your email labels
 gmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
 gmailLabelsScope = Proxy
 
@@ -443,7 +458,15 @@ gmailSettingsSharingScope = Proxy
 gmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
 gmailSendScope = Proxy
 
--- | Insert mail into your mailbox
+-- | View your email messages when the add-on is running
+gmailAddonsCurrentMessageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.addons.current.message.readonly"]
+gmailAddonsCurrentMessageReadOnlyScope = Proxy
+
+-- | Manage drafts and send emails when you interact with the add-on
+gmailAddonsCurrentActionComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.addons.current.action.compose"]
+gmailAddonsCurrentActionComposeScope = Proxy
+
+-- | Add emails into your Gmail mailbox
 gmailInsertScope :: Proxy '["https://www.googleapis.com/auth/gmail.insert"]
 gmailInsertScope = Proxy
 

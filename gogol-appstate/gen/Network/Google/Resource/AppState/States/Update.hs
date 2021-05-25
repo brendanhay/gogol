@@ -40,8 +40,8 @@ module Network.Google.Resource.AppState.States.Update
     , suPayload
     ) where
 
-import           Network.Google.AppState.Types
-import           Network.Google.Prelude
+import Network.Google.AppState.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.update@ method which the
 -- 'StatesUpdate' request conforms to.
@@ -63,8 +63,8 @@ type StatesUpdateResource =
 data StatesUpdate =
   StatesUpdate'
     { _suCurrentStateVersion :: !(Maybe Text)
-    , _suStateKey            :: !(Textual Int32)
-    , _suPayload             :: !UpdateRequest
+    , _suStateKey :: !(Textual Int32)
+    , _suPayload :: !UpdateRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

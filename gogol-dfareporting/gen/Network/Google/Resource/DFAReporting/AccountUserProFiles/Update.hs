@@ -22,7 +22,7 @@
 --
 -- Updates an existing account user profile.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accountUserProfiles.update@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
     , AccountUserProFilesUpdate
 
     -- * Request Lenses
+    , aupfuXgafv
+    , aupfuUploadProtocol
+    , aupfuAccessToken
+    , aupfuUploadType
     , aupfuProFileId
     , aupfuPayload
+    , aupfuCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountUserProfiles.update@ method which the
 -- 'AccountUserProFilesUpdate' request conforms to.
 type AccountUserProFilesUpdateResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] AccountUserProFile :>
-                   Put '[JSON] AccountUserProFile
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AccountUserProFile :>
+                             Put '[JSON] AccountUserProFile
 
 -- | Updates an existing account user profile.
 --
 -- /See:/ 'accountUserProFilesUpdate' smart constructor.
 data AccountUserProFilesUpdate =
   AccountUserProFilesUpdate'
-    { _aupfuProFileId :: !(Textual Int64)
-    , _aupfuPayload   :: !AccountUserProFile
+    { _aupfuXgafv :: !(Maybe Xgafv)
+    , _aupfuUploadProtocol :: !(Maybe Text)
+    , _aupfuAccessToken :: !(Maybe Text)
+    , _aupfuUploadType :: !(Maybe Text)
+    , _aupfuProFileId :: !(Textual Int64)
+    , _aupfuPayload :: !AccountUserProFile
+    , _aupfuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,19 +82,57 @@ data AccountUserProFilesUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aupfuXgafv'
+--
+-- * 'aupfuUploadProtocol'
+--
+-- * 'aupfuAccessToken'
+--
+-- * 'aupfuUploadType'
+--
 -- * 'aupfuProFileId'
 --
 -- * 'aupfuPayload'
+--
+-- * 'aupfuCallback'
 accountUserProFilesUpdate
     :: Int64 -- ^ 'aupfuProFileId'
     -> AccountUserProFile -- ^ 'aupfuPayload'
     -> AccountUserProFilesUpdate
 accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
   AccountUserProFilesUpdate'
-    { _aupfuProFileId = _Coerce # pAupfuProFileId_
+    { _aupfuXgafv = Nothing
+    , _aupfuUploadProtocol = Nothing
+    , _aupfuAccessToken = Nothing
+    , _aupfuUploadType = Nothing
+    , _aupfuProFileId = _Coerce # pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
+    , _aupfuCallback = Nothing
     }
 
+
+-- | V1 error format.
+aupfuXgafv :: Lens' AccountUserProFilesUpdate (Maybe Xgafv)
+aupfuXgafv
+  = lens _aupfuXgafv (\ s a -> s{_aupfuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aupfuUploadProtocol :: Lens' AccountUserProFilesUpdate (Maybe Text)
+aupfuUploadProtocol
+  = lens _aupfuUploadProtocol
+      (\ s a -> s{_aupfuUploadProtocol = a})
+
+-- | OAuth access token.
+aupfuAccessToken :: Lens' AccountUserProFilesUpdate (Maybe Text)
+aupfuAccessToken
+  = lens _aupfuAccessToken
+      (\ s a -> s{_aupfuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aupfuUploadType :: Lens' AccountUserProFilesUpdate (Maybe Text)
+aupfuUploadType
+  = lens _aupfuUploadType
+      (\ s a -> s{_aupfuUploadType = a})
 
 -- | User profile ID associated with this request.
 aupfuProFileId :: Lens' AccountUserProFilesUpdate Int64
@@ -93,6 +146,12 @@ aupfuPayload :: Lens' AccountUserProFilesUpdate AccountUserProFile
 aupfuPayload
   = lens _aupfuPayload (\ s a -> s{_aupfuPayload = a})
 
+-- | JSONP
+aupfuCallback :: Lens' AccountUserProFilesUpdate (Maybe Text)
+aupfuCallback
+  = lens _aupfuCallback
+      (\ s a -> s{_aupfuCallback = a})
+
 instance GoogleRequest AccountUserProFilesUpdate
          where
         type Rs AccountUserProFilesUpdate =
@@ -100,7 +159,12 @@ instance GoogleRequest AccountUserProFilesUpdate
         type Scopes AccountUserProFilesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountUserProFilesUpdate'{..}
-          = go _aupfuProFileId (Just AltJSON) _aupfuPayload
+          = go _aupfuProFileId _aupfuXgafv _aupfuUploadProtocol
+              _aupfuAccessToken
+              _aupfuUploadType
+              _aupfuCallback
+              (Just AltJSON)
+              _aupfuPayload
               dFAReportingService
           where go
                   = buildClient

@@ -264,9 +264,9 @@ module Network.Google.QPXExpress
     , sliAlliance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.QPXExpress.Types
-import           Network.Google.Resource.QPXExpress.Trips.Search
+import Network.Google.Prelude
+import Network.Google.QPXExpress.Types
+import Network.Google.Resource.QPXExpress.Trips.Search
 
 {- $resources
 TODO

@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Patch
     , rapRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionAutoscalers.patch@ method which the
 -- 'RegionAutoscalersPatch' request conforms to.
@@ -67,11 +67,11 @@ type RegionAutoscalersPatchResource =
 -- /See:/ 'regionAutoscalersPatch' smart constructor.
 data RegionAutoscalersPatch =
   RegionAutoscalersPatch'
-    { _rapRequestId  :: !(Maybe Text)
-    , _rapProject    :: !Text
-    , _rapPayload    :: !Autoscaler
+    { _rapRequestId :: !(Maybe Text)
+    , _rapProject :: !Text
+    , _rapPayload :: !Autoscaler
     , _rapAutoscaler :: !(Maybe Text)
-    , _rapRegion     :: !Text
+    , _rapRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

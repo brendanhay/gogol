@@ -26,7 +26,7 @@
 -- than or equal to the dataset end time and whose end time is greater than
 -- or equal to the dataset start time.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.datasets.get@.
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.datasets.get@.
 module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
     (
     -- * REST Resource
@@ -37,15 +37,20 @@ module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
     , UsersDataSourcesDataSetsGet
 
     -- * Request Lenses
+    , udsdsgXgafv
+    , udsdsgUploadProtocol
+    , udsdsgAccessToken
     , udsdsgDataSourceId
+    , udsdsgUploadType
     , udsdsgUserId
     , udsdsgDataSetId
     , udsdsgLimit
     , udsdsgPageToken
+    , udsdsgCallback
     ) where
 
-import           Network.Google.Fitness.Types
-import           Network.Google.Prelude
+import Network.Google.Fitness.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.datasets.get@ method which the
 -- 'UsersDataSourcesDataSetsGet' request conforms to.
@@ -58,9 +63,15 @@ type UsersDataSourcesDataSetsGetResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "limit" (Textual Int32) :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] DataSet
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "limit" (Textual Int32) :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] DataSet
 
 -- | Returns a dataset containing all data points whose start and end times
 -- overlap with the specified range of the dataset minimum start time and
@@ -71,11 +82,16 @@ type UsersDataSourcesDataSetsGetResource =
 -- /See:/ 'usersDataSourcesDataSetsGet' smart constructor.
 data UsersDataSourcesDataSetsGet =
   UsersDataSourcesDataSetsGet'
-    { _udsdsgDataSourceId :: !Text
-    , _udsdsgUserId       :: !Text
-    , _udsdsgDataSetId    :: !Text
-    , _udsdsgLimit        :: !(Maybe (Textual Int32))
-    , _udsdsgPageToken    :: !(Maybe Text)
+    { _udsdsgXgafv :: !(Maybe Xgafv)
+    , _udsdsgUploadProtocol :: !(Maybe Text)
+    , _udsdsgAccessToken :: !(Maybe Text)
+    , _udsdsgDataSourceId :: !Text
+    , _udsdsgUploadType :: !(Maybe Text)
+    , _udsdsgUserId :: !Text
+    , _udsdsgDataSetId :: !Text
+    , _udsdsgLimit :: !(Maybe (Textual Int32))
+    , _udsdsgPageToken :: !(Maybe Text)
+    , _udsdsgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,7 +100,15 @@ data UsersDataSourcesDataSetsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'udsdsgXgafv'
+--
+-- * 'udsdsgUploadProtocol'
+--
+-- * 'udsdsgAccessToken'
+--
 -- * 'udsdsgDataSourceId'
+--
+-- * 'udsdsgUploadType'
 --
 -- * 'udsdsgUserId'
 --
@@ -93,6 +117,8 @@ data UsersDataSourcesDataSetsGet =
 -- * 'udsdsgLimit'
 --
 -- * 'udsdsgPageToken'
+--
+-- * 'udsdsgCallback'
 usersDataSourcesDataSetsGet
     :: Text -- ^ 'udsdsgDataSourceId'
     -> Text -- ^ 'udsdsgUserId'
@@ -100,19 +126,47 @@ usersDataSourcesDataSetsGet
     -> UsersDataSourcesDataSetsGet
 usersDataSourcesDataSetsGet pUdsdsgDataSourceId_ pUdsdsgUserId_ pUdsdsgDataSetId_ =
   UsersDataSourcesDataSetsGet'
-    { _udsdsgDataSourceId = pUdsdsgDataSourceId_
+    { _udsdsgXgafv = Nothing
+    , _udsdsgUploadProtocol = Nothing
+    , _udsdsgAccessToken = Nothing
+    , _udsdsgDataSourceId = pUdsdsgDataSourceId_
+    , _udsdsgUploadType = Nothing
     , _udsdsgUserId = pUdsdsgUserId_
     , _udsdsgDataSetId = pUdsdsgDataSetId_
     , _udsdsgLimit = Nothing
     , _udsdsgPageToken = Nothing
+    , _udsdsgCallback = Nothing
     }
 
+
+-- | V1 error format.
+udsdsgXgafv :: Lens' UsersDataSourcesDataSetsGet (Maybe Xgafv)
+udsdsgXgafv
+  = lens _udsdsgXgafv (\ s a -> s{_udsdsgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+udsdsgUploadProtocol :: Lens' UsersDataSourcesDataSetsGet (Maybe Text)
+udsdsgUploadProtocol
+  = lens _udsdsgUploadProtocol
+      (\ s a -> s{_udsdsgUploadProtocol = a})
+
+-- | OAuth access token.
+udsdsgAccessToken :: Lens' UsersDataSourcesDataSetsGet (Maybe Text)
+udsdsgAccessToken
+  = lens _udsdsgAccessToken
+      (\ s a -> s{_udsdsgAccessToken = a})
 
 -- | The data stream ID of the data source that created the dataset.
 udsdsgDataSourceId :: Lens' UsersDataSourcesDataSetsGet Text
 udsdsgDataSourceId
   = lens _udsdsgDataSourceId
       (\ s a -> s{_udsdsgDataSourceId = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+udsdsgUploadType :: Lens' UsersDataSourcesDataSetsGet (Maybe Text)
+udsdsgUploadType
+  = lens _udsdsgUploadType
+      (\ s a -> s{_udsdsgUploadType = a})
 
 -- | Retrieve a dataset for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -131,7 +185,9 @@ udsdsgDataSetId
 
 -- | If specified, no more than this many data points will be included in the
 -- dataset. If there are more data points in the dataset, nextPageToken
--- will be set in the dataset response.
+-- will be set in the dataset response. The limit is applied from the end
+-- of the time range. That is, if pageToken is absent, the limit most
+-- recent data points will be returned.
 udsdsgLimit :: Lens' UsersDataSourcesDataSetsGet (Maybe Int32)
 udsdsgLimit
   = lens _udsdsgLimit (\ s a -> s{_udsdsgLimit = a}) .
@@ -147,6 +203,12 @@ udsdsgPageToken
   = lens _udsdsgPageToken
       (\ s a -> s{_udsdsgPageToken = a})
 
+-- | JSONP
+udsdsgCallback :: Lens' UsersDataSourcesDataSetsGet (Maybe Text)
+udsdsgCallback
+  = lens _udsdsgCallback
+      (\ s a -> s{_udsdsgCallback = a})
+
 instance GoogleRequest UsersDataSourcesDataSetsGet
          where
         type Rs UsersDataSourcesDataSetsGet = DataSet
@@ -161,6 +223,8 @@ instance GoogleRequest UsersDataSourcesDataSetsGet
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.body_temperature.read",
                "https://www.googleapis.com/auth/fitness.body_temperature.write",
+               "https://www.googleapis.com/auth/fitness.heart_rate.read",
+               "https://www.googleapis.com/auth/fitness.heart_rate.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write",
                "https://www.googleapis.com/auth/fitness.nutrition.read",
@@ -168,12 +232,19 @@ instance GoogleRequest UsersDataSourcesDataSetsGet
                "https://www.googleapis.com/auth/fitness.oxygen_saturation.read",
                "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
                "https://www.googleapis.com/auth/fitness.reproductive_health.read",
-               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write",
+               "https://www.googleapis.com/auth/fitness.sleep.read",
+               "https://www.googleapis.com/auth/fitness.sleep.write"]
         requestClient UsersDataSourcesDataSetsGet'{..}
           = go _udsdsgUserId _udsdsgDataSourceId
               _udsdsgDataSetId
+              _udsdsgXgafv
+              _udsdsgUploadProtocol
+              _udsdsgAccessToken
+              _udsdsgUploadType
               _udsdsgLimit
               _udsdsgPageToken
+              _udsdsgCallback
               (Just AltJSON)
               fitnessService
           where go

@@ -54,8 +54,8 @@ module Network.Google.Resource.CloudTasks.Projects.Locations.Queues.Tasks.Run
     , plqtrCallback
     ) where
 
-import           Network.Google.CloudTasks.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.run@ method which the
 -- 'ProjectsLocationsQueuesTasksRun' request conforms to.
@@ -87,13 +87,13 @@ type ProjectsLocationsQueuesTasksRunResource =
 -- /See:/ 'projectsLocationsQueuesTasksRun' smart constructor.
 data ProjectsLocationsQueuesTasksRun =
   ProjectsLocationsQueuesTasksRun'
-    { _plqtrXgafv          :: !(Maybe Xgafv)
+    { _plqtrXgafv :: !(Maybe Xgafv)
     , _plqtrUploadProtocol :: !(Maybe Text)
-    , _plqtrAccessToken    :: !(Maybe Text)
-    , _plqtrUploadType     :: !(Maybe Text)
-    , _plqtrPayload        :: !RunTaskRequest
-    , _plqtrName           :: !Text
-    , _plqtrCallback       :: !(Maybe Text)
+    , _plqtrAccessToken :: !(Maybe Text)
+    , _plqtrUploadType :: !(Maybe Text)
+    , _plqtrPayload :: !RunTaskRequest
+    , _plqtrName :: !Text
+    , _plqtrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

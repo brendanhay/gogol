@@ -35,12 +35,17 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.CompleteSignup
     , EnterprisesCompleteSignup
 
     -- * Request Lenses
+    , ecsXgafv
     , ecsCompletionToken
+    , ecsUploadProtocol
+    , ecsAccessToken
+    , ecsUploadType
     , ecsEnterpriseToken
+    , ecsCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.completeSignup@ method which the
 -- 'EnterprisesCompleteSignup' request conforms to.
@@ -49,9 +54,14 @@ type EnterprisesCompleteSignupResource =
        "v1" :>
          "enterprises" :>
            "completeSignup" :>
-             QueryParam "completionToken" Text :>
-               QueryParam "enterpriseToken" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Enterprise
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "completionToken" Text :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "enterpriseToken" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] Enterprise
 
 -- | Completes the signup flow, by specifying the Completion token and
 -- Enterprise token. This request must not be called multiple times for a
@@ -60,8 +70,13 @@ type EnterprisesCompleteSignupResource =
 -- /See:/ 'enterprisesCompleteSignup' smart constructor.
 data EnterprisesCompleteSignup =
   EnterprisesCompleteSignup'
-    { _ecsCompletionToken :: !(Maybe Text)
+    { _ecsXgafv :: !(Maybe Xgafv)
+    , _ecsCompletionToken :: !(Maybe Text)
+    , _ecsUploadProtocol :: !(Maybe Text)
+    , _ecsAccessToken :: !(Maybe Text)
+    , _ecsUploadType :: !(Maybe Text)
     , _ecsEnterpriseToken :: !(Maybe Text)
+    , _ecsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,15 +85,36 @@ data EnterprisesCompleteSignup =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ecsXgafv'
+--
 -- * 'ecsCompletionToken'
 --
+-- * 'ecsUploadProtocol'
+--
+-- * 'ecsAccessToken'
+--
+-- * 'ecsUploadType'
+--
 -- * 'ecsEnterpriseToken'
+--
+-- * 'ecsCallback'
 enterprisesCompleteSignup
     :: EnterprisesCompleteSignup
 enterprisesCompleteSignup =
   EnterprisesCompleteSignup'
-    {_ecsCompletionToken = Nothing, _ecsEnterpriseToken = Nothing}
+    { _ecsXgafv = Nothing
+    , _ecsCompletionToken = Nothing
+    , _ecsUploadProtocol = Nothing
+    , _ecsAccessToken = Nothing
+    , _ecsUploadType = Nothing
+    , _ecsEnterpriseToken = Nothing
+    , _ecsCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ecsXgafv :: Lens' EnterprisesCompleteSignup (Maybe Xgafv)
+ecsXgafv = lens _ecsXgafv (\ s a -> s{_ecsXgafv = a})
 
 -- | The Completion token initially returned by GenerateSignupUrl.
 ecsCompletionToken :: Lens' EnterprisesCompleteSignup (Maybe Text)
@@ -86,11 +122,34 @@ ecsCompletionToken
   = lens _ecsCompletionToken
       (\ s a -> s{_ecsCompletionToken = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ecsUploadProtocol :: Lens' EnterprisesCompleteSignup (Maybe Text)
+ecsUploadProtocol
+  = lens _ecsUploadProtocol
+      (\ s a -> s{_ecsUploadProtocol = a})
+
+-- | OAuth access token.
+ecsAccessToken :: Lens' EnterprisesCompleteSignup (Maybe Text)
+ecsAccessToken
+  = lens _ecsAccessToken
+      (\ s a -> s{_ecsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ecsUploadType :: Lens' EnterprisesCompleteSignup (Maybe Text)
+ecsUploadType
+  = lens _ecsUploadType
+      (\ s a -> s{_ecsUploadType = a})
+
 -- | The Enterprise token appended to the Callback URL.
 ecsEnterpriseToken :: Lens' EnterprisesCompleteSignup (Maybe Text)
 ecsEnterpriseToken
   = lens _ecsEnterpriseToken
       (\ s a -> s{_ecsEnterpriseToken = a})
+
+-- | JSONP
+ecsCallback :: Lens' EnterprisesCompleteSignup (Maybe Text)
+ecsCallback
+  = lens _ecsCallback (\ s a -> s{_ecsCallback = a})
 
 instance GoogleRequest EnterprisesCompleteSignup
          where
@@ -98,7 +157,11 @@ instance GoogleRequest EnterprisesCompleteSignup
         type Scopes EnterprisesCompleteSignup =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesCompleteSignup'{..}
-          = go _ecsCompletionToken _ecsEnterpriseToken
+          = go _ecsXgafv _ecsCompletionToken _ecsUploadProtocol
+              _ecsAccessToken
+              _ecsUploadType
+              _ecsEnterpriseToken
+              _ecsCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

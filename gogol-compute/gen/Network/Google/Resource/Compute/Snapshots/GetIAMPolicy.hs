@@ -36,10 +36,11 @@ module Network.Google.Resource.Compute.Snapshots.GetIAMPolicy
     -- * Request Lenses
     , sgiampProject
     , sgiampResource
+    , sgiampOptionsRequestedPolicyVersion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.getIamPolicy@ method which the
 -- 'SnapshotsGetIAMPolicy' request conforms to.
@@ -52,7 +53,9 @@ type SnapshotsGetIAMPolicyResource =
                "snapshots" :>
                  Capture "resource" Text :>
                    "getIamPolicy" :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                     QueryParam "optionsRequestedPolicyVersion"
+                       (Textual Int32)
+                       :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -60,8 +63,9 @@ type SnapshotsGetIAMPolicyResource =
 -- /See:/ 'snapshotsGetIAMPolicy' smart constructor.
 data SnapshotsGetIAMPolicy =
   SnapshotsGetIAMPolicy'
-    { _sgiampProject  :: !Text
+    { _sgiampProject :: !Text
     , _sgiampResource :: !Text
+    , _sgiampOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,13 +77,18 @@ data SnapshotsGetIAMPolicy =
 -- * 'sgiampProject'
 --
 -- * 'sgiampResource'
+--
+-- * 'sgiampOptionsRequestedPolicyVersion'
 snapshotsGetIAMPolicy
     :: Text -- ^ 'sgiampProject'
     -> Text -- ^ 'sgiampResource'
     -> SnapshotsGetIAMPolicy
 snapshotsGetIAMPolicy pSgiampProject_ pSgiampResource_ =
   SnapshotsGetIAMPolicy'
-    {_sgiampProject = pSgiampProject_, _sgiampResource = pSgiampResource_}
+    { _sgiampProject = pSgiampProject_
+    , _sgiampResource = pSgiampResource_
+    , _sgiampOptionsRequestedPolicyVersion = Nothing
+    }
 
 
 -- | Project ID for this request.
@@ -94,6 +103,14 @@ sgiampResource
   = lens _sgiampResource
       (\ s a -> s{_sgiampResource = a})
 
+-- | Requested IAM Policy version.
+sgiampOptionsRequestedPolicyVersion :: Lens' SnapshotsGetIAMPolicy (Maybe Int32)
+sgiampOptionsRequestedPolicyVersion
+  = lens _sgiampOptionsRequestedPolicyVersion
+      (\ s a ->
+         s{_sgiampOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 instance GoogleRequest SnapshotsGetIAMPolicy where
         type Rs SnapshotsGetIAMPolicy = Policy
         type Scopes SnapshotsGetIAMPolicy =
@@ -101,7 +118,9 @@ instance GoogleRequest SnapshotsGetIAMPolicy where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient SnapshotsGetIAMPolicy'{..}
-          = go _sgiampProject _sgiampResource (Just AltJSON)
+          = go _sgiampProject _sgiampResource
+              _sgiampOptionsRequestedPolicyVersion
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

@@ -23,7 +23,7 @@
 -- Search Catalog resources that consumers have access to, within the scope
 -- of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.catalogs.search@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.folders.catalogs.search@.
 module Network.Google.Resource.CloudPrivateCatalog.Folders.Catalogs.Search
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalog.Folders.Catalogs.Search
     , fcsCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalog.folders.catalogs.search@ method which the
 -- 'FoldersCatalogsSearch' request conforms to.
@@ -72,15 +72,15 @@ type FoldersCatalogsSearchResource =
 -- /See:/ 'foldersCatalogsSearch' smart constructor.
 data FoldersCatalogsSearch =
   FoldersCatalogsSearch'
-    { _fcsXgafv          :: !(Maybe Xgafv)
+    { _fcsXgafv :: !(Maybe Xgafv)
     , _fcsUploadProtocol :: !(Maybe Text)
-    , _fcsAccessToken    :: !(Maybe Text)
-    , _fcsUploadType     :: !(Maybe Text)
-    , _fcsResource       :: !Text
-    , _fcsQuery          :: !(Maybe Text)
-    , _fcsPageToken      :: !(Maybe Text)
-    , _fcsPageSize       :: !(Maybe (Textual Int32))
-    , _fcsCallback       :: !(Maybe Text)
+    , _fcsAccessToken :: !(Maybe Text)
+    , _fcsUploadType :: !(Maybe Text)
+    , _fcsResource :: !Text
+    , _fcsQuery :: !(Maybe Text)
+    , _fcsPageToken :: !(Maybe Text)
+    , _fcsPageSize :: !(Maybe (Textual Int32))
+    , _fcsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

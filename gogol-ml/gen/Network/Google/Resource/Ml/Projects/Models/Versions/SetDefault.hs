@@ -26,7 +26,7 @@
 -- automatically set as the default. You must make any subsequent changes
 -- to the default version setting manually using this method.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.versions.setDefault@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.versions.setDefault@.
 module Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Ml.Projects.Models.Versions.SetDefault
     , pmvsdCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.versions.setDefault@ method which the
 -- 'ProjectsModelsVersionsSetDefault' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsModelsVersionsSetDefaultResource =
 -- /See:/ 'projectsModelsVersionsSetDefault' smart constructor.
 data ProjectsModelsVersionsSetDefault =
   ProjectsModelsVersionsSetDefault'
-    { _pmvsdXgafv          :: !(Maybe Xgafv)
+    { _pmvsdXgafv :: !(Maybe Xgafv)
     , _pmvsdUploadProtocol :: !(Maybe Text)
-    , _pmvsdAccessToken    :: !(Maybe Text)
-    , _pmvsdUploadType     :: !(Maybe Text)
-    , _pmvsdPayload        :: !GoogleCloudMlV1__SetDefaultVersionRequest
-    , _pmvsdName           :: !Text
-    , _pmvsdCallback       :: !(Maybe Text)
+    , _pmvsdAccessToken :: !(Maybe Text)
+    , _pmvsdUploadType :: !(Maybe Text)
+    , _pmvsdPayload :: !GoogleCloudMlV1__SetDefaultVersionRequest
+    , _pmvsdName :: !Text
+    , _pmvsdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,7 +147,7 @@ pmvsdPayload
 
 -- | Required. The name of the version to make the default for the model. You
 -- can get the names of all the versions of a model by calling
--- [projects.models.versions.list](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/list).
+-- projects.models.versions.list.
 pmvsdName :: Lens' ProjectsModelsVersionsSetDefault Text
 pmvsdName
   = lens _pmvsdName (\ s a -> s{_pmvsdName = a})

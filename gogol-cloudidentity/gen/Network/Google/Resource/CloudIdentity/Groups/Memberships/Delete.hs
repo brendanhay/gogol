@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a Membership.
+-- Deletes a \`Membership\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.memberships.delete@.
 module Network.Google.Resource.CloudIdentity.Groups.Memberships.Delete
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Memberships.Delete
     , gmdCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.memberships.delete@ method which the
 -- 'GroupsMembershipsDelete' request conforms to.
@@ -56,17 +56,17 @@ type GroupsMembershipsDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a Membership.
+-- | Deletes a \`Membership\`.
 --
 -- /See:/ 'groupsMembershipsDelete' smart constructor.
 data GroupsMembershipsDelete =
   GroupsMembershipsDelete'
-    { _gmdXgafv          :: !(Maybe Xgafv)
+    { _gmdXgafv :: !(Maybe Xgafv)
     , _gmdUploadProtocol :: !(Maybe Text)
-    , _gmdAccessToken    :: !(Maybe Text)
-    , _gmdUploadType     :: !(Maybe Text)
-    , _gmdName           :: !Text
-    , _gmdCallback       :: !(Maybe Text)
+    , _gmdAccessToken :: !(Maybe Text)
+    , _gmdUploadType :: !(Maybe Text)
+    , _gmdName :: !Text
+    , _gmdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,12 +122,10 @@ gmdUploadType
   = lens _gmdUploadType
       (\ s a -> s{_gmdUploadType = a})
 
--- | [Resource
+-- | Required. The [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
--- Membership to be deleted. Format:
--- \`groups\/{group_id}\/memberships\/{member_id}\`, where \`group_id\` is
--- the unique ID assigned to the Group to which Membership belongs to, and
--- member_id is the unique ID assigned to the member.
+-- \`Membership\` to delete. Must be of the form
+-- \`groups\/{group_id}\/memberships\/{membership_id}\`
 gmdName :: Lens' GroupsMembershipsDelete Text
 gmdName = lens _gmdName (\ s a -> s{_gmdName = a})
 
@@ -139,7 +137,8 @@ gmdCallback
 instance GoogleRequest GroupsMembershipsDelete where
         type Rs GroupsMembershipsDelete = Operation
         type Scopes GroupsMembershipsDelete =
-             '["https://www.googleapis.com/auth/cloud-identity.groups"]
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsMembershipsDelete'{..}
           = go _gmdName _gmdXgafv _gmdUploadProtocol
               _gmdAccessToken

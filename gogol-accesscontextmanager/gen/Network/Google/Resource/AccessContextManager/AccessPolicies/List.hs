@@ -43,8 +43,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.List
     , aplCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.list@ method which the
 -- 'AccessPoliciesList' request conforms to.
@@ -67,14 +67,14 @@ type AccessPoliciesListResource =
 -- /See:/ 'accessPoliciesList' smart constructor.
 data AccessPoliciesList =
   AccessPoliciesList'
-    { _aplParent         :: !(Maybe Text)
-    , _aplXgafv          :: !(Maybe Xgafv)
+    { _aplParent :: !(Maybe Text)
+    , _aplXgafv :: !(Maybe Xgafv)
     , _aplUploadProtocol :: !(Maybe Text)
-    , _aplAccessToken    :: !(Maybe Text)
-    , _aplUploadType     :: !(Maybe Text)
-    , _aplPageToken      :: !(Maybe Text)
-    , _aplPageSize       :: !(Maybe (Textual Int32))
-    , _aplCallback       :: !(Maybe Text)
+    , _aplAccessToken :: !(Maybe Text)
+    , _aplUploadType :: !(Maybe Text)
+    , _aplPageToken :: !(Maybe Text)
+    , _aplPageSize :: !(Maybe (Textual Int32))
+    , _aplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

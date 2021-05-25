@@ -22,7 +22,7 @@
 --
 -- Lists an organization\'s assets.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.assets.list@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.assets.list@.
 module Network.Google.Resource.SecurityCenter.Organizations.Assets.List
     (
     -- * REST Resource
@@ -48,13 +48,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Assets.List
     , oalCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.assets.list@ method which the
 -- 'OrganizationsAssetsList' request conforms to.
 type OrganizationsAssetsListResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "parent" Text :>
          "assets" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -77,19 +77,19 @@ type OrganizationsAssetsListResource =
 -- /See:/ 'organizationsAssetsList' smart constructor.
 data OrganizationsAssetsList =
   OrganizationsAssetsList'
-    { _oalParent          :: !Text
-    , _oalXgafv           :: !(Maybe Xgafv)
-    , _oalReadTime        :: !(Maybe DateTime')
-    , _oalUploadProtocol  :: !(Maybe Text)
-    , _oalOrderBy         :: !(Maybe Text)
-    , _oalAccessToken     :: !(Maybe Text)
-    , _oalUploadType      :: !(Maybe Text)
-    , _oalFieldMask       :: !(Maybe GFieldMask)
-    , _oalFilter          :: !(Maybe Text)
-    , _oalPageToken       :: !(Maybe Text)
-    , _oalPageSize        :: !(Maybe (Textual Int32))
+    { _oalParent :: !Text
+    , _oalXgafv :: !(Maybe Xgafv)
+    , _oalReadTime :: !(Maybe DateTime')
+    , _oalUploadProtocol :: !(Maybe Text)
+    , _oalOrderBy :: !(Maybe Text)
+    , _oalAccessToken :: !(Maybe Text)
+    , _oalUploadType :: !(Maybe Text)
+    , _oalFieldMask :: !(Maybe GFieldMask)
+    , _oalFilter :: !(Maybe Text)
+    , _oalPageToken :: !(Maybe Text)
+    , _oalPageSize :: !(Maybe (Textual Int32))
     , _oalCompareDuration :: !(Maybe GDuration)
-    , _oalCallback        :: !(Maybe Text)
+    , _oalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,8 +144,8 @@ organizationsAssetsList pOalParent_ =
     }
 
 
--- | Name of the organization assets should belong to. Its format is
--- \"organizations\/[organization_id]\".
+-- | Required. Name of the organization assets should belong to. Its format
+-- is \"organizations\/[organization_id]\".
 oalParent :: Lens' OrganizationsAssetsList Text
 oalParent
   = lens _oalParent (\ s a -> s{_oalParent = a})
@@ -178,10 +178,13 @@ oalUploadProtocol
 -- in the syntax are insignificant. \"name
 -- desc,resource_properties.a_property\" and \" name desc ,
 -- resource_properties.a_property \" are equivalent. The following fields
--- are supported: name update_time resource_properties security_marks
+-- are supported: name update_time resource_properties security_marks.marks
 -- security_center_properties.resource_name
+-- security_center_properties.resource_display_name
 -- security_center_properties.resource_parent
+-- security_center_properties.resource_parent_display_name
 -- security_center_properties.resource_project
+-- security_center_properties.resource_project_display_name
 -- security_center_properties.resource_type
 oalOrderBy :: Lens' OrganizationsAssetsList (Maybe Text)
 oalOrderBy
@@ -199,8 +202,8 @@ oalUploadType
   = lens _oalUploadType
       (\ s a -> s{_oalUploadType = a})
 
--- | Optional. A field mask to specify the ListAssetsResult fields to be
--- listed in the response. An empty field mask will list all fields.
+-- | A field mask to specify the ListAssetsResult fields to be listed in the
+-- response. An empty field mask will list all fields.
 oalFieldMask :: Lens' OrganizationsAssetsList (Maybe GFieldMask)
 oalFieldMask
   = lens _oalFieldMask (\ s a -> s{_oalFieldMask = a})
@@ -218,15 +221,28 @@ oalFieldMask
 -- for strings. The supported value types are: * string literals in quotes.
 -- * integer literals without quotes. * boolean literals \`true\` and
 -- \`false\` without quotes. The following are the allowed field and
--- operator combinations: name | \`=\` update_time | \`>\`, \`\<\`, \`>=\`,
--- \`\<=\` iam_policy.policy_blob | \'=\', \':\' resource_properties |
--- \'=\', \':\', \`>\`, \`\<\`, \`>=\`, \`\<=\` security_marks | \'=\',
--- \':\' security_center_properties.resource_name | \'=\', \':\'
--- security_center_properties.resource_type | \'=\', \':\'
--- security_center_properties.resource_parent | \'=\', \':\'
--- security_center_properties.resource_project | \'=\', \':\'
--- security_center_properties.resource_owners | \'=\', \':\' For example,
--- \`resource_properties.size = 100\` is a valid filter string.
+-- operator combinations: * name: \`=\` * update_time: \`=\`, \`>\`,
+-- \`\<\`, \`>=\`, \`\<=\` Usage: This should be milliseconds since epoch
+-- or an RFC3339 string. Examples: \`update_time =
+-- \"2019-06-10T16:07:18-07:00\"\` \`update_time = 1560208038000\` *
+-- create_time: \`=\`, \`>\`, \`\<\`, \`>=\`, \`\<=\` Usage: This should be
+-- milliseconds since epoch or an RFC3339 string. Examples: \`create_time =
+-- \"2019-06-10T16:07:18-07:00\"\` \`create_time = 1560208038000\` *
+-- iam_policy.policy_blob: \`=\`, \`:\` * resource_properties: \`=\`,
+-- \`:\`, \`>\`, \`\<\`, \`>=\`, \`\<=\` * security_marks.marks: \`=\`,
+-- \`:\` * security_center_properties.resource_name: \`=\`, \`:\` *
+-- security_center_properties.resource_display_name: \`=\`, \`:\` *
+-- security_center_properties.resource_type: \`=\`, \`:\` *
+-- security_center_properties.resource_parent: \`=\`, \`:\` *
+-- security_center_properties.resource_parent_display_name: \`=\`, \`:\` *
+-- security_center_properties.resource_project: \`=\`, \`:\` *
+-- security_center_properties.resource_project_display_name: \`=\`, \`:\` *
+-- security_center_properties.resource_owners: \`=\`, \`:\` For example,
+-- \`resource_properties.size = 100\` is a valid filter string. Use a
+-- partial match on the empty string to filter based on a property
+-- existing: \`resource_properties.my_property : \"\"\` Use a negated
+-- partial match on the empty string to filter based on a property not
+-- existing: \`-resource_properties.my_property : \"\"\`
 oalFilter :: Lens' OrganizationsAssetsList (Maybe Text)
 oalFilter
   = lens _oalFilter (\ s a -> s{_oalFilter = a})

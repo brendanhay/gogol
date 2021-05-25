@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,14 +47,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdstipCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.testIamPermissions@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresTestIAMPermissions' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresTestIAMPermissionsResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,21 +67,21 @@ type ProjectsLocationsDataSetsDicomStoresTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresTestIAMPermissions' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresTestIAMPermissions =
   ProjectsLocationsDataSetsDicomStoresTestIAMPermissions'
-    { _pldsdstipXgafv          :: !(Maybe Xgafv)
+    { _pldsdstipXgafv :: !(Maybe Xgafv)
     , _pldsdstipUploadProtocol :: !(Maybe Text)
-    , _pldsdstipAccessToken    :: !(Maybe Text)
-    , _pldsdstipUploadType     :: !(Maybe Text)
-    , _pldsdstipPayload        :: !TestIAMPermissionsRequest
-    , _pldsdstipResource       :: !Text
-    , _pldsdstipCallback       :: !(Maybe Text)
+    , _pldsdstipAccessToken :: !(Maybe Text)
+    , _pldsdstipUploadType :: !(Maybe Text)
+    , _pldsdstipPayload :: !TestIAMPermissionsRequest
+    , _pldsdstipResource :: !Text
+    , _pldsdstipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Views and manages licenses for your domain.
+-- The Google Enterprise License Manager API\'s allows you to license apps
+-- for all the users of a domain managed by you.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference>
+-- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference>
 module Network.Google.AppsLicensing
     (
     -- * Service Configuration
@@ -65,6 +66,10 @@ module Network.Google.AppsLicensing
     , lalKind
     , lalItems
 
+    -- ** Empty
+    , Empty
+    , empty
+
     -- ** LicenseAssignment
     , LicenseAssignment
     , licenseAssignment
@@ -76,17 +81,20 @@ module Network.Google.AppsLicensing
     , laUserId
     , laSelfLink
     , laProductId
+
+    -- ** Xgafv
+    , Xgafv (..)
     ) where
 
-import           Network.Google.AppsLicensing.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Licensing.LicenseAssignments.Delete
-import           Network.Google.Resource.Licensing.LicenseAssignments.Get
-import           Network.Google.Resource.Licensing.LicenseAssignments.Insert
-import           Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
-import           Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
-import           Network.Google.Resource.Licensing.LicenseAssignments.Patch
-import           Network.Google.Resource.Licensing.LicenseAssignments.Update
+import Network.Google.Prelude
+import Network.Google.AppsLicensing.Types
+import Network.Google.Resource.Licensing.LicenseAssignments.Delete
+import Network.Google.Resource.Licensing.LicenseAssignments.Get
+import Network.Google.Resource.Licensing.LicenseAssignments.Insert
+import Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
+import Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
+import Network.Google.Resource.Licensing.LicenseAssignments.Patch
+import Network.Google.Resource.Licensing.LicenseAssignments.Update
 
 {- $resources
 TODO

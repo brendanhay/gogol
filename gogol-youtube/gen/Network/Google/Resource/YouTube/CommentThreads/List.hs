@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of comment threads that match the API request parameters.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.commentThreads.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.commentThreads.list@.
 module Network.Google.Resource.YouTube.CommentThreads.List
     (
     -- * REST Resource
@@ -33,9 +33,13 @@ module Network.Google.Resource.YouTube.CommentThreads.List
     , CommentThreadsList
 
     -- * Request Lenses
+    , ctlXgafv
     , ctlPart
+    , ctlUploadProtocol
     , ctlModerationStatus
+    , ctlAccessToken
     , ctlSearchTerms
+    , ctlUploadType
     , ctlChannelId
     , ctlAllThreadsRelatedToChannelId
     , ctlVideoId
@@ -44,10 +48,11 @@ module Network.Google.Resource.YouTube.CommentThreads.List
     , ctlOrder
     , ctlTextFormat
     , ctlMaxResults
+    , ctlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.commentThreads.list@ method which the
 -- 'CommentThreadsList' request conforms to.
@@ -55,40 +60,52 @@ type CommentThreadsListResource =
      "youtube" :>
        "v3" :>
          "commentThreads" :>
-           QueryParam "part" Text :>
-             QueryParam "moderationStatus"
-               CommentThreadsListModerationStatus
-               :>
-               QueryParam "searchTerms" Text :>
-                 QueryParam "channelId" Text :>
-                   QueryParam "allThreadsRelatedToChannelId" Text :>
-                     QueryParam "videoId" Text :>
-                       QueryParam "id" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "order" CommentThreadsListOrder :>
-                             QueryParam "textFormat"
-                               CommentThreadsListTextFormat
-                               :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] CommentThreadListResponse
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "moderationStatus"
+                   CommentThreadsListModerationStatus
+                   :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchTerms" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "channelId" Text :>
+                           QueryParam "allThreadsRelatedToChannelId" Text :>
+                             QueryParam "videoId" Text :>
+                               QueryParams "id" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "order" CommentThreadsListOrder :>
+                                     QueryParam "textFormat"
+                                       CommentThreadsListTextFormat
+                                       :>
+                                       QueryParam "maxResults" (Textual Word32)
+                                         :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON]
+                                               CommentThreadListResponse
 
--- | Returns a list of comment threads that match the API request parameters.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'commentThreadsList' smart constructor.
 data CommentThreadsList =
   CommentThreadsList'
-    { _ctlPart                         :: !Text
-    , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
-    , _ctlSearchTerms                  :: !(Maybe Text)
-    , _ctlChannelId                    :: !(Maybe Text)
+    { _ctlXgafv :: !(Maybe Xgafv)
+    , _ctlPart :: ![Text]
+    , _ctlUploadProtocol :: !(Maybe Text)
+    , _ctlModerationStatus :: !CommentThreadsListModerationStatus
+    , _ctlAccessToken :: !(Maybe Text)
+    , _ctlSearchTerms :: !(Maybe Text)
+    , _ctlUploadType :: !(Maybe Text)
+    , _ctlChannelId :: !(Maybe Text)
     , _ctlAllThreadsRelatedToChannelId :: !(Maybe Text)
-    , _ctlVideoId                      :: !(Maybe Text)
-    , _ctlId                           :: !(Maybe Text)
-    , _ctlPageToken                    :: !(Maybe Text)
-    , _ctlOrder                        :: !CommentThreadsListOrder
-    , _ctlTextFormat                   :: !CommentThreadsListTextFormat
-    , _ctlMaxResults                   :: !(Textual Word32)
+    , _ctlVideoId :: !(Maybe Text)
+    , _ctlId :: !(Maybe [Text])
+    , _ctlPageToken :: !(Maybe Text)
+    , _ctlOrder :: !CommentThreadsListOrder
+    , _ctlTextFormat :: !CommentThreadsListTextFormat
+    , _ctlMaxResults :: !(Textual Word32)
+    , _ctlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -97,11 +114,19 @@ data CommentThreadsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ctlXgafv'
+--
 -- * 'ctlPart'
+--
+-- * 'ctlUploadProtocol'
 --
 -- * 'ctlModerationStatus'
 --
+-- * 'ctlAccessToken'
+--
 -- * 'ctlSearchTerms'
+--
+-- * 'ctlUploadType'
 --
 -- * 'ctlChannelId'
 --
@@ -118,14 +143,20 @@ data CommentThreadsList =
 -- * 'ctlTextFormat'
 --
 -- * 'ctlMaxResults'
+--
+-- * 'ctlCallback'
 commentThreadsList
-    :: Text -- ^ 'ctlPart'
+    :: [Text] -- ^ 'ctlPart'
     -> CommentThreadsList
 commentThreadsList pCtlPart_ =
   CommentThreadsList'
-    { _ctlPart = pCtlPart_
+    { _ctlXgafv = Nothing
+    , _ctlPart = _Coerce # pCtlPart_
+    , _ctlUploadProtocol = Nothing
     , _ctlModerationStatus = Published
+    , _ctlAccessToken = Nothing
     , _ctlSearchTerms = Nothing
+    , _ctlUploadType = Nothing
     , _ctlChannelId = Nothing
     , _ctlAllThreadsRelatedToChannelId = Nothing
     , _ctlVideoId = Nothing
@@ -134,88 +165,105 @@ commentThreadsList pCtlPart_ =
     , _ctlOrder = CTLOTime
     , _ctlTextFormat = CTLTFHTML
     , _ctlMaxResults = 20
+    , _ctlCallback = Nothing
     }
 
 
--- | The part parameter specifies a comma-separated list of one or more
--- commentThread resource properties that the API response will include.
-ctlPart :: Lens' CommentThreadsList Text
-ctlPart = lens _ctlPart (\ s a -> s{_ctlPart = a})
+-- | V1 error format.
+ctlXgafv :: Lens' CommentThreadsList (Maybe Xgafv)
+ctlXgafv = lens _ctlXgafv (\ s a -> s{_ctlXgafv = a})
 
--- | Set this parameter to limit the returned comment threads to a particular
--- moderation state. Note: This parameter is not supported for use in
--- conjunction with the id parameter.
+-- | The *part* parameter specifies a comma-separated list of one or more
+-- commentThread resource properties that the API response will include.
+ctlPart :: Lens' CommentThreadsList [Text]
+ctlPart
+  = lens _ctlPart (\ s a -> s{_ctlPart = a}) . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ctlUploadProtocol :: Lens' CommentThreadsList (Maybe Text)
+ctlUploadProtocol
+  = lens _ctlUploadProtocol
+      (\ s a -> s{_ctlUploadProtocol = a})
+
+-- | Limits the returned comment threads to those with the specified
+-- moderation status. Not compatible with the \'id\' filter. Valid values:
+-- published, heldForReview, likelySpam.
 ctlModerationStatus :: Lens' CommentThreadsList CommentThreadsListModerationStatus
 ctlModerationStatus
   = lens _ctlModerationStatus
       (\ s a -> s{_ctlModerationStatus = a})
 
--- | The searchTerms parameter instructs the API to limit the API response to
--- only contain comments that contain the specified search terms. Note:
--- This parameter is not supported for use in conjunction with the id
--- parameter.
+-- | OAuth access token.
+ctlAccessToken :: Lens' CommentThreadsList (Maybe Text)
+ctlAccessToken
+  = lens _ctlAccessToken
+      (\ s a -> s{_ctlAccessToken = a})
+
+-- | Limits the returned comment threads to those matching the specified key
+-- words. Not compatible with the \'id\' filter.
 ctlSearchTerms :: Lens' CommentThreadsList (Maybe Text)
 ctlSearchTerms
   = lens _ctlSearchTerms
       (\ s a -> s{_ctlSearchTerms = a})
 
--- | The channelId parameter instructs the API to return comment threads
--- containing comments about the specified channel. (The response will not
--- include comments left on videos that the channel uploaded.)
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ctlUploadType :: Lens' CommentThreadsList (Maybe Text)
+ctlUploadType
+  = lens _ctlUploadType
+      (\ s a -> s{_ctlUploadType = a})
+
+-- | Returns the comment threads for all the channel comments (ie does not
+-- include comments left on videos).
 ctlChannelId :: Lens' CommentThreadsList (Maybe Text)
 ctlChannelId
   = lens _ctlChannelId (\ s a -> s{_ctlChannelId = a})
 
--- | The allThreadsRelatedToChannelId parameter instructs the API to return
--- all comment threads associated with the specified channel. The response
--- can include comments about the channel or about the channel\'s videos.
+-- | Returns the comment threads of all videos of the channel and the channel
+-- comments as well.
 ctlAllThreadsRelatedToChannelId :: Lens' CommentThreadsList (Maybe Text)
 ctlAllThreadsRelatedToChannelId
   = lens _ctlAllThreadsRelatedToChannelId
       (\ s a -> s{_ctlAllThreadsRelatedToChannelId = a})
 
--- | The videoId parameter instructs the API to return comment threads
--- associated with the specified video ID.
+-- | Returns the comment threads of the specified video.
 ctlVideoId :: Lens' CommentThreadsList (Maybe Text)
 ctlVideoId
   = lens _ctlVideoId (\ s a -> s{_ctlVideoId = a})
 
--- | The id parameter specifies a comma-separated list of comment thread IDs
--- for the resources that should be retrieved.
-ctlId :: Lens' CommentThreadsList (Maybe Text)
-ctlId = lens _ctlId (\ s a -> s{_ctlId = a})
+-- | Returns the comment threads with the given IDs for Stubby or Apiary.
+ctlId :: Lens' CommentThreadsList [Text]
+ctlId
+  = lens _ctlId (\ s a -> s{_ctlId = a}) . _Default .
+      _Coerce
 
--- | The pageToken parameter identifies a specific page in the result set
--- that should be returned. In an API response, the nextPageToken property
--- identifies the next page of the result that can be retrieved. Note: This
--- parameter is not supported for use in conjunction with the id parameter.
+-- | The *pageToken* parameter identifies a specific page in the result set
+-- that should be returned. In an API response, the nextPageToken and
+-- prevPageToken properties identify other pages that could be retrieved.
 ctlPageToken :: Lens' CommentThreadsList (Maybe Text)
 ctlPageToken
   = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
 
--- | The order parameter specifies the order in which the API response should
--- list comment threads. Valid values are: - time - Comment threads are
--- ordered by time. This is the default behavior. - relevance - Comment
--- threads are ordered by relevance.Note: This parameter is not supported
--- for use in conjunction with the id parameter.
 ctlOrder :: Lens' CommentThreadsList CommentThreadsListOrder
 ctlOrder = lens _ctlOrder (\ s a -> s{_ctlOrder = a})
 
--- | Set this parameter\'s value to html or plainText to instruct the API to
--- return the comments left by users in html formatted or in plain text.
+-- | The requested text format for the returned comments.
 ctlTextFormat :: Lens' CommentThreadsList CommentThreadsListTextFormat
 ctlTextFormat
   = lens _ctlTextFormat
       (\ s a -> s{_ctlTextFormat = a})
 
--- | The maxResults parameter specifies the maximum number of items that
--- should be returned in the result set. Note: This parameter is not
--- supported for use in conjunction with the id parameter.
+-- | The *maxResults* parameter specifies the maximum number of items that
+-- should be returned in the result set.
 ctlMaxResults :: Lens' CommentThreadsList Word32
 ctlMaxResults
   = lens _ctlMaxResults
       (\ s a -> s{_ctlMaxResults = a})
       . _Coerce
+
+-- | JSONP
+ctlCallback :: Lens' CommentThreadsList (Maybe Text)
+ctlCallback
+  = lens _ctlCallback (\ s a -> s{_ctlCallback = a})
 
 instance GoogleRequest CommentThreadsList where
         type Rs CommentThreadsList =
@@ -223,16 +271,20 @@ instance GoogleRequest CommentThreadsList where
         type Scopes CommentThreadsList =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentThreadsList'{..}
-          = go (Just _ctlPart) (Just _ctlModerationStatus)
+          = go _ctlPart _ctlXgafv _ctlUploadProtocol
+              (Just _ctlModerationStatus)
+              _ctlAccessToken
               _ctlSearchTerms
+              _ctlUploadType
               _ctlChannelId
               _ctlAllThreadsRelatedToChannelId
               _ctlVideoId
-              _ctlId
+              (_ctlId ^. _Default)
               _ctlPageToken
               (Just _ctlOrder)
               (Just _ctlTextFormat)
               (Just _ctlMaxResults)
+              _ctlCallback
               (Just AltJSON)
               youTubeService
           where go

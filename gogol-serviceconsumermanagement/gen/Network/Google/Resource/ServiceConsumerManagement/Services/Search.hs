@@ -44,8 +44,8 @@ module Network.Google.Resource.ServiceConsumerManagement.Services.Search
     , ssCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.search@ method which the
 -- 'ServicesSearch' request conforms to.
@@ -68,15 +68,15 @@ type ServicesSearchResource =
 -- /See:/ 'servicesSearch' smart constructor.
 data ServicesSearch =
   ServicesSearch'
-    { _ssParent         :: !Text
-    , _ssXgafv          :: !(Maybe Xgafv)
+    { _ssParent :: !Text
+    , _ssXgafv :: !(Maybe Xgafv)
     , _ssUploadProtocol :: !(Maybe Text)
-    , _ssAccessToken    :: !(Maybe Text)
-    , _ssUploadType     :: !(Maybe Text)
-    , _ssQuery          :: !(Maybe Text)
-    , _ssPageToken      :: !(Maybe Text)
-    , _ssPageSize       :: !(Maybe (Textual Int32))
-    , _ssCallback       :: !(Maybe Text)
+    , _ssAccessToken :: !(Maybe Text)
+    , _ssUploadType :: !(Maybe Text)
+    , _ssQuery :: !(Maybe Text)
+    , _ssPageToken :: !(Maybe Text)
+    , _ssPageSize :: !(Maybe (Textual Int32))
+    , _ssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -119,8 +119,8 @@ servicesSearch pSsParent_ =
     }
 
 
--- | Service for which search is performed. services\/{service} {service} the
--- name of a service, for example \'service.googleapis.com\'.
+-- | Required. Service for which search is performed. services\/{service}
+-- {service} the name of a service, for example \'service.googleapis.com\'.
 ssParent :: Lens' ServicesSearch Text
 ssParent = lens _ssParent (\ s a -> s{_ssParent = a})
 
@@ -145,7 +145,7 @@ ssUploadType :: Lens' ServicesSearch (Maybe Text)
 ssUploadType
   = lens _ssUploadType (\ s a -> s{_ssUploadType = a})
 
--- | Set a query \`{expression}\` for querying tenancy units. Your
+-- | Optional. Set a query \`{expression}\` for querying tenancy units. Your
 -- \`{expression}\` must be in the format: \`field_name=literal_string\`.
 -- The \`field_name\` is the name of the field you want to compare.
 -- Supported fields are \`tenant_resources.tag\` and
@@ -157,21 +157,21 @@ ssUploadType
 -- \`tenant_resources.resource=projects\/123456\`. Multiple expressions can
 -- be joined with \`AND\`s. Tenancy units must match all expressions to be
 -- included in the result set. For example, \`tenant_resources.tag=xyz AND
--- tenant_resources.resource=projects\/123456\` Optional.
+-- tenant_resources.resource=projects\/123456\`
 ssQuery :: Lens' ServicesSearch (Maybe Text)
 ssQuery = lens _ssQuery (\ s a -> s{_ssQuery = a})
 
--- | The continuation token, which is used to page through large result sets.
--- To get the next page of results, set this parameter to the value of
--- \`nextPageToken\` from the previous response. Optional.
+-- | Optional. The continuation token, which is used to page through large
+-- result sets. To get the next page of results, set this parameter to the
+-- value of \`nextPageToken\` from the previous response.
 ssPageToken :: Lens' ServicesSearch (Maybe Text)
 ssPageToken
   = lens _ssPageToken (\ s a -> s{_ssPageToken = a})
 
--- | The maximum number of results returned by this request. Currently, the
--- default maximum is set to 1000. If \`page_size\` isn\'t provided or the
--- size provided is a number larger than 1000, it\'s automatically set to
--- 1000. Optional.
+-- | Optional. The maximum number of results returned by this request.
+-- Currently, the default maximum is set to 1000. If \`page_size\` isn\'t
+-- provided or the size provided is a number larger than 1000, it\'s
+-- automatically set to 1000.
 ssPageSize :: Lens' ServicesSearch (Maybe Int32)
 ssPageSize
   = lens _ssPageSize (\ s a -> s{_ssPageSize = a}) .

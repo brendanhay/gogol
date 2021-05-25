@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.Delete
     , itdInstanceTemplate
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.delete@ method which the
 -- 'InstanceTemplatesDelete' request conforms to.
@@ -63,8 +63,8 @@ type InstanceTemplatesDeleteResource =
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
 data InstanceTemplatesDelete =
   InstanceTemplatesDelete'
-    { _itdRequestId        :: !(Maybe Text)
-    , _itdProject          :: !Text
+    { _itdRequestId :: !(Maybe Text)
+    , _itdProject :: !Text
     , _itdInstanceTemplate :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

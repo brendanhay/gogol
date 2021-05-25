@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get information about an ASP issued by a user.
+-- Gets information about an ASP issued by a user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.asps.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.asps.get@.
 module Network.Google.Resource.Directory.Asps.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Asps.Get
     , AspsGet
 
     -- * Request Lenses
+    , agXgafv
+    , agUploadProtocol
     , agCodeId
+    , agAccessToken
+    , agUploadType
     , agUserKey
+    , agCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.asps.get@ method which the
 -- 'AspsGet' request conforms to.
@@ -50,15 +55,25 @@ type AspsGetResource =
              Capture "userKey" Text :>
                "asps" :>
                  Capture "codeId" (Textual Int32) :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Asp
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
--- | Get information about an ASP issued by a user.
+-- | Gets information about an ASP issued by a user.
 --
 -- /See:/ 'aspsGet' smart constructor.
 data AspsGet =
   AspsGet'
-    { _agCodeId  :: !(Textual Int32)
+    { _agXgafv :: !(Maybe Xgafv)
+    , _agUploadProtocol :: !(Maybe Text)
+    , _agCodeId :: !(Textual Int32)
+    , _agAccessToken :: !(Maybe Text)
+    , _agUploadType :: !(Maybe Text)
     , _agUserKey :: !Text
+    , _agCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,16 +82,44 @@ data AspsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'agXgafv'
+--
+-- * 'agUploadProtocol'
+--
 -- * 'agCodeId'
 --
+-- * 'agAccessToken'
+--
+-- * 'agUploadType'
+--
 -- * 'agUserKey'
+--
+-- * 'agCallback'
 aspsGet
     :: Int32 -- ^ 'agCodeId'
     -> Text -- ^ 'agUserKey'
     -> AspsGet
 aspsGet pAgCodeId_ pAgUserKey_ =
-  AspsGet' {_agCodeId = _Coerce # pAgCodeId_, _agUserKey = pAgUserKey_}
+  AspsGet'
+    { _agXgafv = Nothing
+    , _agUploadProtocol = Nothing
+    , _agCodeId = _Coerce # pAgCodeId_
+    , _agAccessToken = Nothing
+    , _agUploadType = Nothing
+    , _agUserKey = pAgUserKey_
+    , _agCallback = Nothing
+    }
 
+
+-- | V1 error format.
+agXgafv :: Lens' AspsGet (Maybe Xgafv)
+agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+agUploadProtocol :: Lens' AspsGet (Maybe Text)
+agUploadProtocol
+  = lens _agUploadProtocol
+      (\ s a -> s{_agUploadProtocol = a})
 
 -- | The unique ID of the ASP.
 agCodeId :: Lens' AspsGet Int32
@@ -84,18 +127,38 @@ agCodeId
   = lens _agCodeId (\ s a -> s{_agCodeId = a}) .
       _Coerce
 
+-- | OAuth access token.
+agAccessToken :: Lens' AspsGet (Maybe Text)
+agAccessToken
+  = lens _agAccessToken
+      (\ s a -> s{_agAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+agUploadType :: Lens' AspsGet (Maybe Text)
+agUploadType
+  = lens _agUploadType (\ s a -> s{_agUploadType = a})
+
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
 agUserKey :: Lens' AspsGet Text
 agUserKey
   = lens _agUserKey (\ s a -> s{_agUserKey = a})
 
+-- | JSONP
+agCallback :: Lens' AspsGet (Maybe Text)
+agCallback
+  = lens _agCallback (\ s a -> s{_agCallback = a})
+
 instance GoogleRequest AspsGet where
         type Rs AspsGet = Asp
         type Scopes AspsGet =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
         requestClient AspsGet'{..}
-          = go _agUserKey _agCodeId (Just AltJSON)
+          = go _agUserKey _agCodeId _agXgafv _agUploadProtocol
+              _agAccessToken
+              _agUploadType
+              _agCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy AspsGetResource) mempty

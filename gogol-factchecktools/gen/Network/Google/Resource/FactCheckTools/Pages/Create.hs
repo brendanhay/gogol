@@ -41,8 +41,8 @@ module Network.Google.Resource.FactCheckTools.Pages.Create
     , pcCallback
     ) where
 
-import           Network.Google.FactCheckTools.Types
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @factchecktools.pages.create@ method which the
 -- 'PagesCreate' request conforms to.
@@ -66,12 +66,12 @@ type PagesCreateResource =
 -- /See:/ 'pagesCreate' smart constructor.
 data PagesCreate =
   PagesCreate'
-    { _pcXgafv          :: !(Maybe Xgafv)
+    { _pcXgafv :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcAccessToken    :: !(Maybe Text)
-    , _pcUploadType     :: !(Maybe Text)
-    , _pcPayload        :: !GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
-    , _pcCallback       :: !(Maybe Text)
+    , _pcAccessToken :: !(Maybe Text)
+    , _pcUploadType :: !(Maybe Text)
+    , _pcPayload :: !GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
+    , _pcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

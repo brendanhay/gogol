@@ -53,8 +53,8 @@ module Network.Google.Resource.Datastore.Projects.Operations.List
     , polCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.operations.list@ method which the
 -- 'ProjectsOperationsList' request conforms to.
@@ -87,15 +87,15 @@ type ProjectsOperationsListResource =
 -- /See:/ 'projectsOperationsList' smart constructor.
 data ProjectsOperationsList =
   ProjectsOperationsList'
-    { _polXgafv          :: !(Maybe Xgafv)
+    { _polXgafv :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
-    , _polAccessToken    :: !(Maybe Text)
-    , _polUploadType     :: !(Maybe Text)
-    , _polName           :: !Text
-    , _polFilter         :: !(Maybe Text)
-    , _polPageToken      :: !(Maybe Text)
-    , _polPageSize       :: !(Maybe (Textual Int32))
-    , _polCallback       :: !(Maybe Text)
+    , _polAccessToken :: !(Maybe Text)
+    , _polUploadType :: !(Maybe Text)
+    , _polName :: !Text
+    , _polFilter :: !(Maybe Text)
+    , _polPageToken :: !(Maybe Text)
+    , _polPageSize :: !(Maybe (Textual Int32))
+    , _polCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

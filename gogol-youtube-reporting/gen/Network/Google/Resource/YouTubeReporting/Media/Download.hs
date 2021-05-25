@@ -42,8 +42,8 @@ module Network.Google.Resource.YouTubeReporting.Media.Download
     , mdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.media.download@ method which the
 -- 'MediaDownload'' request conforms to.
@@ -75,12 +75,12 @@ type MediaDownloadResource =
 -- /See:/ 'mediaDownload' smart constructor.
 data MediaDownload' =
   MediaDownload''
-    { _mdXgafv          :: !(Maybe Xgafv)
+    { _mdXgafv :: !(Maybe Xgafv)
     , _mdUploadProtocol :: !(Maybe Text)
-    , _mdResourceName   :: !Text
-    , _mdAccessToken    :: !(Maybe Text)
-    , _mdUploadType     :: !(Maybe Text)
-    , _mdCallback       :: !(Maybe Text)
+    , _mdResourceName :: !Text
+    , _mdAccessToken :: !(Maybe Text)
+    , _mdUploadType :: !(Maybe Text)
+    , _mdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

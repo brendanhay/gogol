@@ -44,8 +44,8 @@ module Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Create
     , ositcCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.storedInfoTypes.create@ method which the
 -- 'OrganizationsStoredInfoTypesCreate' request conforms to.
@@ -70,13 +70,13 @@ type OrganizationsStoredInfoTypesCreateResource =
 -- /See:/ 'organizationsStoredInfoTypesCreate' smart constructor.
 data OrganizationsStoredInfoTypesCreate =
   OrganizationsStoredInfoTypesCreate'
-    { _ositcParent         :: !Text
-    , _ositcXgafv          :: !(Maybe Xgafv)
+    { _ositcParent :: !Text
+    , _ositcXgafv :: !(Maybe Xgafv)
     , _ositcUploadProtocol :: !(Maybe Text)
-    , _ositcAccessToken    :: !(Maybe Text)
-    , _ositcUploadType     :: !(Maybe Text)
-    , _ositcPayload        :: !GooglePrivacyDlpV2CreateStoredInfoTypeRequest
-    , _ositcCallback       :: !(Maybe Text)
+    , _ositcAccessToken :: !(Maybe Text)
+    , _ositcUploadType :: !(Maybe Text)
+    , _ositcPayload :: !GooglePrivacyDlpV2CreateStoredInfoTypeRequest
+    , _ositcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,8 +114,20 @@ organizationsStoredInfoTypesCreate pOsitcParent_ pOsitcPayload_ =
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 ositcParent :: Lens' OrganizationsStoredInfoTypesCreate Text
 ositcParent
   = lens _ositcParent (\ s a -> s{_ositcParent = a})

@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.policy.setIamPolicy@.
 module Network.Google.Resource.BinaryAuthorization.Projects.Policy.SetIAMPolicy
@@ -43,13 +44,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Policy.SetIAMPolicy
     , ppsipCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.policy.setIamPolicy@ method which the
 -- 'ProjectsPolicySetIAMPolicy' request conforms to.
 type ProjectsPolicySetIAMPolicyResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,18 +62,19 @@ type ProjectsPolicySetIAMPolicyResource =
                        Post '[JSON] IAMPolicy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsPolicySetIAMPolicy' smart constructor.
 data ProjectsPolicySetIAMPolicy =
   ProjectsPolicySetIAMPolicy'
-    { _ppsipXgafv          :: !(Maybe Xgafv)
+    { _ppsipXgafv :: !(Maybe Xgafv)
     , _ppsipUploadProtocol :: !(Maybe Text)
-    , _ppsipAccessToken    :: !(Maybe Text)
-    , _ppsipUploadType     :: !(Maybe Text)
-    , _ppsipPayload        :: !SetIAMPolicyRequest
-    , _ppsipResource       :: !Text
-    , _ppsipCallback       :: !(Maybe Text)
+    , _ppsipAccessToken :: !(Maybe Text)
+    , _ppsipUploadType :: !(Maybe Text)
+    , _ppsipPayload :: !SetIAMPolicyRequest
+    , _ppsipResource :: !Text
+    , _ppsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

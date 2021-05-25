@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Firewalls.Insert
     , fiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.insert@ method which the
 -- 'FirewallsInsert' request conforms to.
@@ -62,8 +62,8 @@ type FirewallsInsertResource =
 data FirewallsInsert =
   FirewallsInsert'
     { _fiRequestId :: !(Maybe Text)
-    , _fiProject   :: !Text
-    , _fiPayload   :: !Firewall
+    , _fiProject :: !Text
+    , _fiPayload :: !Firewall
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

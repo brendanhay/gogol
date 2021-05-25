@@ -50,8 +50,8 @@ module Network.Google.Resource.CloudShell.Operations.Cancel
     , ocCallback
     ) where
 
-import           Network.Google.CloudShell.Types
-import           Network.Google.Prelude
+import Network.Google.CloudShell.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudshell.operations.cancel@ method which the
 -- 'OperationsCancel' request conforms to.
@@ -80,13 +80,13 @@ type OperationsCancelResource =
 -- /See:/ 'operationsCancel' smart constructor.
 data OperationsCancel =
   OperationsCancel'
-    { _ocXgafv          :: !(Maybe Xgafv)
+    { _ocXgafv :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
-    , _ocAccessToken    :: !(Maybe Text)
-    , _ocUploadType     :: !(Maybe Text)
-    , _ocPayload        :: !CancelOperationRequest
-    , _ocName           :: !Text
-    , _ocCallback       :: !(Maybe Text)
+    , _ocAccessToken :: !(Maybe Text)
+    , _ocUploadType :: !(Maybe Text)
+    , _ocPayload :: !CancelOperationRequest
+    , _ocName :: !Text
+    , _ocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

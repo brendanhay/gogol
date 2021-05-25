@@ -46,13 +46,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.UpdatePolicy
     , pupCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.updatePolicy@ method which the
 -- 'ProjectsUpdatePolicy' request conforms to.
 type ProjectsUpdatePolicyResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -71,13 +71,13 @@ type ProjectsUpdatePolicyResource =
 -- /See:/ 'projectsUpdatePolicy' smart constructor.
 data ProjectsUpdatePolicy =
   ProjectsUpdatePolicy'
-    { _pupXgafv          :: !(Maybe Xgafv)
+    { _pupXgafv :: !(Maybe Xgafv)
     , _pupUploadProtocol :: !(Maybe Text)
-    , _pupAccessToken    :: !(Maybe Text)
-    , _pupUploadType     :: !(Maybe Text)
-    , _pupPayload        :: !Policy
-    , _pupName           :: !Text
-    , _pupCallback       :: !(Maybe Text)
+    , _pupAccessToken :: !(Maybe Text)
+    , _pupUploadType :: !(Maybe Text)
+    , _pupPayload :: !Policy
+    , _pupName :: !Text
+    , _pupCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

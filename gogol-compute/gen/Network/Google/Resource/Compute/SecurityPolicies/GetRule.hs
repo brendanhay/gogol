@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.GetRule
     , spgrSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.getRule@ method which the
 -- 'SecurityPoliciesGetRule' request conforms to.
@@ -61,8 +61,8 @@ type SecurityPoliciesGetRuleResource =
 -- /See:/ 'securityPoliciesGetRule' smart constructor.
 data SecurityPoliciesGetRule =
   SecurityPoliciesGetRule'
-    { _spgrPriority       :: !(Maybe (Textual Int32))
-    , _spgrProject        :: !Text
+    { _spgrPriority :: !(Maybe (Textual Int32))
+    , _spgrProject :: !Text
     , _spgrSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

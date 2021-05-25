@@ -38,8 +38,8 @@ module Network.Google.Resource.ReplicaPool.Pools.Insert
     , piProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.insert@ method which the
 -- 'PoolsInsert' request conforms to.
@@ -59,8 +59,8 @@ type PoolsInsertResource =
 -- /See:/ 'poolsInsert' smart constructor.
 data PoolsInsert =
   PoolsInsert'
-    { _piZone        :: !Text
-    , _piPayload     :: !Pool
+    { _piZone :: !Text
+    , _piPayload :: !Pool
     , _piProjectName :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

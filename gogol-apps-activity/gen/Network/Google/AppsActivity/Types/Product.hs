@@ -17,8 +17,8 @@
 --
 module Network.Google.AppsActivity.Types.Product where
 
-import           Network.Google.AppsActivity.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsActivity.Types.Sum
+import Network.Google.Prelude
 
 -- | Contains information about a parent object. For example, a folder in
 -- Drive is a parent for all files within it.
@@ -27,8 +27,8 @@ import           Network.Google.Prelude
 data Parent =
   Parent'
     { _pIsRoot :: !(Maybe Bool)
-    , _pId     :: !(Maybe Text)
-    , _pTitle  :: !(Maybe Text)
+    , _pId :: !(Maybe Text)
+    , _pTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -112,15 +112,15 @@ instance ToJSON Photo where
 -- /See:/ 'event' smart constructor.
 data Event =
   Event'
-    { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
-    , _eUser                 :: !(Maybe User)
-    , _eEventTimeMillis      :: !(Maybe (Textual Word64))
-    , _eRename               :: !(Maybe Rename)
-    , _eFromUserDeletion     :: !(Maybe Bool)
+    { _ePrimaryEventType :: !(Maybe EventPrimaryEventType)
+    , _eUser :: !(Maybe User)
+    , _eEventTimeMillis :: !(Maybe (Textual Word64))
+    , _eRename :: !(Maybe Rename)
+    , _eFromUserDeletion :: !(Maybe Bool)
     , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypesItem])
-    , _ePermissionChanges    :: !(Maybe [PermissionChange])
-    , _eTarget               :: !(Maybe Target)
-    , _eMove                 :: !(Maybe Move)
+    , _ePermissionChanges :: !(Maybe [PermissionChange])
+    , _eTarget :: !(Maybe Target)
+    , _eMove :: !(Maybe Move)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -254,7 +254,7 @@ instance ToJSON Event where
 data ListActivitiesResponse =
   ListActivitiesResponse'
     { _larNextPageToken :: !(Maybe Text)
-    , _larActivities    :: !(Maybe [Activity])
+    , _larActivities :: !(Maybe [Activity])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -308,7 +308,7 @@ instance ToJSON ListActivitiesResponse where
 -- /See:/ 'permissionChange' smart constructor.
 data PermissionChange =
   PermissionChange'
-    { _pcAddedPermissions   :: !(Maybe [Permission])
+    { _pcAddedPermissions :: !(Maybe [Permission])
     , _pcRemovedPermissions :: !(Maybe [Permission])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -364,10 +364,10 @@ instance ToJSON PermissionChange where
 -- /See:/ 'user' smart constructor.
 data User =
   User'
-    { _uPhoto        :: !(Maybe Photo)
-    , _uIsDeleted    :: !(Maybe Bool)
-    , _uName         :: !(Maybe Text)
-    , _uIsMe         :: !(Maybe Bool)
+    { _uPhoto :: !(Maybe Photo)
+    , _uIsDeleted :: !(Maybe Bool)
+    , _uName :: !(Maybe Text)
+    , _uIsMe :: !(Maybe Bool)
     , _uPermissionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -451,7 +451,7 @@ instance ToJSON User where
 -- /See:/ 'activity' smart constructor.
 data Activity =
   Activity'
-    { _aSingleEvents  :: !(Maybe [Event])
+    { _aSingleEvents :: !(Maybe [Event])
     , _aCombinedEvent :: !(Maybe Event)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -552,11 +552,11 @@ instance ToJSON Rename where
 -- /See:/ 'permission' smart constructor.
 data Permission =
   Permission'
-    { _pWithLink     :: !(Maybe Bool)
-    , _pUser         :: !(Maybe User)
-    , _pRole         :: !(Maybe PermissionRole)
-    , _pName         :: !(Maybe Text)
-    , _pType         :: !(Maybe PermissionType)
+    { _pWithLink :: !(Maybe Bool)
+    , _pUser :: !(Maybe User)
+    , _pRole :: !(Maybe PermissionRole)
+    , _pName :: !(Maybe Text)
+    , _pType :: !(Maybe PermissionType)
     , _pPermissionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -645,8 +645,8 @@ instance ToJSON Permission where
 data Target =
   Target'
     { _tMimeType :: !(Maybe Text)
-    , _tName     :: !(Maybe Text)
-    , _tId       :: !(Maybe Text)
+    , _tName :: !(Maybe Text)
+    , _tId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -701,7 +701,7 @@ instance ToJSON Target where
 -- /See:/ 'move' smart constructor.
 data Move =
   Move'
-    { _mAddedParents   :: !(Maybe [Parent])
+    { _mAddedParents :: !(Maybe [Parent])
     , _mRemovedParents :: !(Maybe [Parent])
     }
   deriving (Eq, Show, Data, Typeable, Generic)

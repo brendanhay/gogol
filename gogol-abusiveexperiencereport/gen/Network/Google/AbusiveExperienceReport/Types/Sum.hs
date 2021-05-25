@@ -16,9 +16,9 @@
 --
 module Network.Google.AbusiveExperienceReport.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | The status of the site reviewed for the abusive experiences.
+-- | The site\'s Abusive Experience Report status.
 data SiteSummaryResponseAbusiveStatus
     = Unknown
       -- ^ @UNKNOWN@
@@ -81,23 +81,24 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
--- | The abusive experience enforcement status of the site.
+-- | The site\'s [enforcement
+-- status](https:\/\/support.google.com\/webtools\/answer\/7538608).
 data SiteSummaryResponseFilterStatus
     = SSRFSUnknown
       -- ^ @UNKNOWN@
       -- N\/A.
     | SSRFSON
       -- ^ @ON@
-      -- Ad filtering is on.
+      -- Enforcement is on.
     | SSRFSOff
       -- ^ @OFF@
-      -- Ad filtering is off.
+      -- Enforcement is off.
     | SSRFSPaused
       -- ^ @PAUSED@
-      -- Ad filtering is paused.
+      -- Enforcement is paused.
     | SSRFSPending
       -- ^ @PENDING@
-      -- Ad filtering is pending.
+      -- Enforcement is pending.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SiteSummaryResponseFilterStatus

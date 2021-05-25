@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Indicate that the the currently authenticated user is playing your
+-- Indicate that the currently authenticated user is playing your
 -- application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.applications.played@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference> for @games.applications.played@.
 module Network.Google.Resource.Games.Applications.Played
     (
     -- * REST Resource
@@ -34,11 +34,15 @@ module Network.Google.Resource.Games.Applications.Played
     , ApplicationsPlayed
 
     -- * Request Lenses
-    , apBuiltinGameId
+    , apXgafv
+    , apUploadProtocol
+    , apAccessToken
+    , apUploadType
+    , apCallback
     ) where
 
-import           Network.Google.Games.Types
-import           Network.Google.Prelude
+import Network.Google.Games.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @games.applications.played@ method which the
 -- 'ApplicationsPlayed' request conforms to.
@@ -47,16 +51,24 @@ type ApplicationsPlayedResource =
        "v1" :>
          "applications" :>
            "played" :>
-             QueryParam "builtinGameId" Text :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
--- | Indicate that the the currently authenticated user is playing your
+-- | Indicate that the currently authenticated user is playing your
 -- application.
 --
 -- /See:/ 'applicationsPlayed' smart constructor.
-newtype ApplicationsPlayed =
+data ApplicationsPlayed =
   ApplicationsPlayed'
-    { _apBuiltinGameId :: Maybe Text
+    { _apXgafv :: !(Maybe Xgafv)
+    , _apUploadProtocol :: !(Maybe Text)
+    , _apAccessToken :: !(Maybe Text)
+    , _apUploadType :: !(Maybe Text)
+    , _apCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,25 +77,63 @@ newtype ApplicationsPlayed =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apBuiltinGameId'
+-- * 'apXgafv'
+--
+-- * 'apUploadProtocol'
+--
+-- * 'apAccessToken'
+--
+-- * 'apUploadType'
+--
+-- * 'apCallback'
 applicationsPlayed
     :: ApplicationsPlayed
-applicationsPlayed = ApplicationsPlayed' {_apBuiltinGameId = Nothing}
+applicationsPlayed =
+  ApplicationsPlayed'
+    { _apXgafv = Nothing
+    , _apUploadProtocol = Nothing
+    , _apAccessToken = Nothing
+    , _apUploadType = Nothing
+    , _apCallback = Nothing
+    }
 
 
--- | Override used only by built-in games in Play Games application.
-apBuiltinGameId :: Lens' ApplicationsPlayed (Maybe Text)
-apBuiltinGameId
-  = lens _apBuiltinGameId
-      (\ s a -> s{_apBuiltinGameId = a})
+-- | V1 error format.
+apXgafv :: Lens' ApplicationsPlayed (Maybe Xgafv)
+apXgafv = lens _apXgafv (\ s a -> s{_apXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+apUploadProtocol :: Lens' ApplicationsPlayed (Maybe Text)
+apUploadProtocol
+  = lens _apUploadProtocol
+      (\ s a -> s{_apUploadProtocol = a})
+
+-- | OAuth access token.
+apAccessToken :: Lens' ApplicationsPlayed (Maybe Text)
+apAccessToken
+  = lens _apAccessToken
+      (\ s a -> s{_apAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+apUploadType :: Lens' ApplicationsPlayed (Maybe Text)
+apUploadType
+  = lens _apUploadType (\ s a -> s{_apUploadType = a})
+
+-- | JSONP
+apCallback :: Lens' ApplicationsPlayed (Maybe Text)
+apCallback
+  = lens _apCallback (\ s a -> s{_apCallback = a})
 
 instance GoogleRequest ApplicationsPlayed where
         type Rs ApplicationsPlayed = ()
         type Scopes ApplicationsPlayed =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.me"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ApplicationsPlayed'{..}
-          = go _apBuiltinGameId (Just AltJSON) gamesService
+          = go _apXgafv _apUploadProtocol _apAccessToken
+              _apUploadType
+              _apCallback
+              (Just AltJSON)
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsPlayedResource)

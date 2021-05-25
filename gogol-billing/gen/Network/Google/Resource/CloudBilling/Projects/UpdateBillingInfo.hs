@@ -27,10 +27,11 @@
 -- billing on the project and allows charges for resource usage. If the
 -- project already had a billing account, this method changes the billing
 -- account used for resource usage charges. *Note:* Incurred charges that
--- have not yet been reported in the transaction history of the GCP Console
--- might be billed to the new billing account, even if the charge occurred
--- before the new billing account was assigned to the project. The current
--- authenticated user must have ownership privileges for both the
+-- have not yet been reported in the transaction history of the Google
+-- Cloud Console might be billed to the new billing account, even if the
+-- charge occurred before the new billing account was assigned to the
+-- project. The current authenticated user must have ownership privileges
+-- for both the
 -- [project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ) and the [billing
 -- account](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
@@ -67,8 +68,8 @@ module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
     , pubiCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.projects.updateBillingInfo@ method which the
 -- 'ProjectsUpdateBillingInfo' request conforms to.
@@ -92,10 +93,11 @@ type ProjectsUpdateBillingInfoResource =
 -- billing on the project and allows charges for resource usage. If the
 -- project already had a billing account, this method changes the billing
 -- account used for resource usage charges. *Note:* Incurred charges that
--- have not yet been reported in the transaction history of the GCP Console
--- might be billed to the new billing account, even if the charge occurred
--- before the new billing account was assigned to the project. The current
--- authenticated user must have ownership privileges for both the
+-- have not yet been reported in the transaction history of the Google
+-- Cloud Console might be billed to the new billing account, even if the
+-- charge occurred before the new billing account was assigned to the
+-- project. The current authenticated user must have ownership privileges
+-- for both the
 -- [project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ) and the [billing
 -- account](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
@@ -115,13 +117,13 @@ type ProjectsUpdateBillingInfoResource =
 -- /See:/ 'projectsUpdateBillingInfo' smart constructor.
 data ProjectsUpdateBillingInfo =
   ProjectsUpdateBillingInfo'
-    { _pubiXgafv          :: !(Maybe Xgafv)
+    { _pubiXgafv :: !(Maybe Xgafv)
     , _pubiUploadProtocol :: !(Maybe Text)
-    , _pubiAccessToken    :: !(Maybe Text)
-    , _pubiUploadType     :: !(Maybe Text)
-    , _pubiPayload        :: !ProjectBillingInfo
-    , _pubiName           :: !Text
-    , _pubiCallback       :: !(Maybe Text)
+    , _pubiAccessToken :: !(Maybe Text)
+    , _pubiUploadType :: !(Maybe Text)
+    , _pubiPayload :: !ProjectBillingInfo
+    , _pubiName :: !Text
+    , _pubiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -187,8 +189,9 @@ pubiPayload :: Lens' ProjectsUpdateBillingInfo ProjectBillingInfo
 pubiPayload
   = lens _pubiPayload (\ s a -> s{_pubiPayload = a})
 
--- | The resource name of the project associated with the billing information
--- that you want to update. For example, \`projects\/tokyo-rain-123\`.
+-- | Required. The resource name of the project associated with the billing
+-- information that you want to update. For example,
+-- \`projects\/tokyo-rain-123\`.
 pubiName :: Lens' ProjectsUpdateBillingInfo Text
 pubiName = lens _pubiName (\ s a -> s{_pubiName = a})
 
@@ -202,7 +205,8 @@ instance GoogleRequest ProjectsUpdateBillingInfo
         type Rs ProjectsUpdateBillingInfo =
              ProjectBillingInfo
         type Scopes ProjectsUpdateBillingInfo =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsUpdateBillingInfo'{..}
           = go _pubiName _pubiXgafv _pubiUploadProtocol
               _pubiAccessToken

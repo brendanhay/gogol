@@ -22,7 +22,7 @@
 --
 -- Gets one ad by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.ads.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.ads.get@.
 module Network.Google.Resource.DFAReporting.Ads.Get
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.Ads.Get
     , AdsGet
 
     -- * Request Lenses
+    , adsXgafv
+    , adsUploadProtocol
+    , adsAccessToken
+    , adsUploadType
     , adsProFileId
     , adsId
+    , adsCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.get@ method which the
 -- 'AdsGet' request conforms to.
 type AdsGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
                Capture "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Ad
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Ad
 
 -- | Gets one ad by ID.
 --
 -- /See:/ 'adsGet' smart constructor.
 data AdsGet =
   AdsGet'
-    { _adsProFileId :: !(Textual Int64)
-    , _adsId        :: !(Textual Int64)
+    { _adsXgafv :: !(Maybe Xgafv)
+    , _adsUploadProtocol :: !(Maybe Text)
+    , _adsAccessToken :: !(Maybe Text)
+    , _adsUploadType :: !(Maybe Text)
+    , _adsProFileId :: !(Textual Int64)
+    , _adsId :: !(Textual Int64)
+    , _adsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,16 +81,56 @@ data AdsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'adsXgafv'
+--
+-- * 'adsUploadProtocol'
+--
+-- * 'adsAccessToken'
+--
+-- * 'adsUploadType'
+--
 -- * 'adsProFileId'
 --
 -- * 'adsId'
+--
+-- * 'adsCallback'
 adsGet
     :: Int64 -- ^ 'adsProFileId'
     -> Int64 -- ^ 'adsId'
     -> AdsGet
 adsGet pAdsProFileId_ pAdsId_ =
-  AdsGet' {_adsProFileId = _Coerce # pAdsProFileId_, _adsId = _Coerce # pAdsId_}
+  AdsGet'
+    { _adsXgafv = Nothing
+    , _adsUploadProtocol = Nothing
+    , _adsAccessToken = Nothing
+    , _adsUploadType = Nothing
+    , _adsProFileId = _Coerce # pAdsProFileId_
+    , _adsId = _Coerce # pAdsId_
+    , _adsCallback = Nothing
+    }
 
+
+-- | V1 error format.
+adsXgafv :: Lens' AdsGet (Maybe Xgafv)
+adsXgafv = lens _adsXgafv (\ s a -> s{_adsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+adsUploadProtocol :: Lens' AdsGet (Maybe Text)
+adsUploadProtocol
+  = lens _adsUploadProtocol
+      (\ s a -> s{_adsUploadProtocol = a})
+
+-- | OAuth access token.
+adsAccessToken :: Lens' AdsGet (Maybe Text)
+adsAccessToken
+  = lens _adsAccessToken
+      (\ s a -> s{_adsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+adsUploadType :: Lens' AdsGet (Maybe Text)
+adsUploadType
+  = lens _adsUploadType
+      (\ s a -> s{_adsUploadType = a})
 
 -- | User profile ID associated with this request.
 adsProFileId :: Lens' AdsGet Int64
@@ -88,12 +143,22 @@ adsId :: Lens' AdsGet Int64
 adsId
   = lens _adsId (\ s a -> s{_adsId = a}) . _Coerce
 
+-- | JSONP
+adsCallback :: Lens' AdsGet (Maybe Text)
+adsCallback
+  = lens _adsCallback (\ s a -> s{_adsCallback = a})
+
 instance GoogleRequest AdsGet where
         type Rs AdsGet = Ad
         type Scopes AdsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsGet'{..}
-          = go _adsProFileId _adsId (Just AltJSON)
+          = go _adsProFileId _adsId _adsXgafv
+              _adsUploadProtocol
+              _adsAccessToken
+              _adsUploadType
+              _adsCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsGetResource) mempty

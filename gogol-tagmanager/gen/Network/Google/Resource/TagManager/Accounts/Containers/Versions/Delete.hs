@@ -22,7 +22,7 @@
 --
 -- Deletes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.delete@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.versions.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
     , AccountsContainersVersionsDelete
 
     -- * Request Lenses
+    , acvdXgafv
+    , acvdUploadProtocol
     , acvdPath
+    , acvdAccessToken
+    , acvdUploadType
+    , acvdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.delete@ method which the
 -- 'AccountsContainersVersionsDelete' request conforms to.
@@ -45,14 +50,24 @@ type AccountsContainersVersionsDeleteResource =
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :> Delete '[JSON] ()
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsDelete' smart constructor.
-newtype AccountsContainersVersionsDelete =
+data AccountsContainersVersionsDelete =
   AccountsContainersVersionsDelete'
-    { _acvdPath :: Text
+    { _acvdXgafv :: !(Maybe Xgafv)
+    , _acvdUploadProtocol :: !(Maybe Text)
+    , _acvdPath :: !Text
+    , _acvdAccessToken :: !(Maybe Text)
+    , _acvdUploadType :: !(Maybe Text)
+    , _acvdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -61,18 +76,63 @@ newtype AccountsContainersVersionsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acvdXgafv'
+--
+-- * 'acvdUploadProtocol'
+--
 -- * 'acvdPath'
+--
+-- * 'acvdAccessToken'
+--
+-- * 'acvdUploadType'
+--
+-- * 'acvdCallback'
 accountsContainersVersionsDelete
     :: Text -- ^ 'acvdPath'
     -> AccountsContainersVersionsDelete
 accountsContainersVersionsDelete pAcvdPath_ =
-  AccountsContainersVersionsDelete' {_acvdPath = pAcvdPath_}
+  AccountsContainersVersionsDelete'
+    { _acvdXgafv = Nothing
+    , _acvdUploadProtocol = Nothing
+    , _acvdPath = pAcvdPath_
+    , _acvdAccessToken = Nothing
+    , _acvdUploadType = Nothing
+    , _acvdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acvdXgafv :: Lens' AccountsContainersVersionsDelete (Maybe Xgafv)
+acvdXgafv
+  = lens _acvdXgafv (\ s a -> s{_acvdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acvdUploadProtocol :: Lens' AccountsContainersVersionsDelete (Maybe Text)
+acvdUploadProtocol
+  = lens _acvdUploadProtocol
+      (\ s a -> s{_acvdUploadProtocol = a})
 
 -- | GTM ContainerVersion\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/versions\/{version_id}
 acvdPath :: Lens' AccountsContainersVersionsDelete Text
 acvdPath = lens _acvdPath (\ s a -> s{_acvdPath = a})
+
+-- | OAuth access token.
+acvdAccessToken :: Lens' AccountsContainersVersionsDelete (Maybe Text)
+acvdAccessToken
+  = lens _acvdAccessToken
+      (\ s a -> s{_acvdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acvdUploadType :: Lens' AccountsContainersVersionsDelete (Maybe Text)
+acvdUploadType
+  = lens _acvdUploadType
+      (\ s a -> s{_acvdUploadType = a})
+
+-- | JSONP
+acvdCallback :: Lens' AccountsContainersVersionsDelete (Maybe Text)
+acvdCallback
+  = lens _acvdCallback (\ s a -> s{_acvdCallback = a})
 
 instance GoogleRequest
            AccountsContainersVersionsDelete
@@ -81,7 +141,12 @@ instance GoogleRequest
         type Scopes AccountsContainersVersionsDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
         requestClient AccountsContainersVersionsDelete'{..}
-          = go _acvdPath (Just AltJSON) tagManagerService
+          = go _acvdPath _acvdXgafv _acvdUploadProtocol
+              _acvdAccessToken
+              _acvdUploadType
+              _acvdCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

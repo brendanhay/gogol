@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Ge
     , plrdgCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.devices.get@ method which the
 -- 'ProjectsLocationsRegistriesDevicesGet' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsLocationsRegistriesDevicesGetResource =
 -- /See:/ 'projectsLocationsRegistriesDevicesGet' smart constructor.
 data ProjectsLocationsRegistriesDevicesGet =
   ProjectsLocationsRegistriesDevicesGet'
-    { _plrdgXgafv          :: !(Maybe Xgafv)
+    { _plrdgXgafv :: !(Maybe Xgafv)
     , _plrdgUploadProtocol :: !(Maybe Text)
-    , _plrdgAccessToken    :: !(Maybe Text)
-    , _plrdgUploadType     :: !(Maybe Text)
-    , _plrdgFieldMask      :: !(Maybe GFieldMask)
-    , _plrdgName           :: !Text
-    , _plrdgCallback       :: !(Maybe Text)
+    , _plrdgAccessToken :: !(Maybe Text)
+    , _plrdgUploadType :: !(Maybe Text)
+    , _plrdgFieldMask :: !(Maybe GFieldMask)
+    , _plrdgName :: !Text
+    , _plrdgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,13 +130,15 @@ plrdgUploadType
       (\ s a -> s{_plrdgUploadType = a})
 
 -- | The fields of the \`Device\` resource to be returned in the response. If
--- the field mask is unset or empty, all fields are returned.
+-- the field mask is unset or empty, all fields are returned. Fields have
+-- to be provided in snake_case format, for example:
+-- \`last_heartbeat_time\`.
 plrdgFieldMask :: Lens' ProjectsLocationsRegistriesDevicesGet (Maybe GFieldMask)
 plrdgFieldMask
   = lens _plrdgFieldMask
       (\ s a -> s{_plrdgFieldMask = a})
 
--- | The name of the device. For example,
+-- | Required. The name of the device. For example,
 -- \`projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/device0\`
 -- or
 -- \`projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/{num_id}\`.

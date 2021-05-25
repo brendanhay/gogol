@@ -1,6 +1,6 @@
 name:                  gogol-doubleclick-search
 version:               0.5.0
-synopsis:              Google DoubleClick Search SDK.
+synopsis:              Google Search Ads 360 SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,8 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Reports and modifies your advertising data in DoubleClick Search (for
-    example, campaigns, ad groups, keywords, and conversions).
+    The Search Ads 360 API allows developers to automate uploading
+    conversions and downloading reports from Search Ads 360.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -38,7 +38,6 @@ library
         , Network.Google.DoubleClickSearch.Types
         , Network.Google.Resource.DoubleClickSearch.Conversion.Get
         , Network.Google.Resource.DoubleClickSearch.Conversion.Insert
-        , Network.Google.Resource.DoubleClickSearch.Conversion.Patch
         , Network.Google.Resource.DoubleClickSearch.Conversion.Update
         , Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
         , Network.Google.Resource.DoubleClickSearch.Reports.Generate

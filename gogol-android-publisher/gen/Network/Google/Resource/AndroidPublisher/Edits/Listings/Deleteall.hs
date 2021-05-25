@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes all localized listings from an edit.
+-- Deletes all store listings.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.deleteall@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.listings.deleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
     , EditsListingsDeleteall
 
     -- * Request Lenses
+    , eldlXgafv
+    , eldlUploadProtocol
     , eldlPackageName
+    , eldlAccessToken
+    , eldlUploadType
     , eldlEditId
+    , eldlCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.deleteall@ method which the
 -- 'EditsListingsDeleteall' request conforms to.
@@ -50,15 +55,25 @@ type EditsListingsDeleteallResource =
              "edits" :>
                Capture "editId" Text :>
                  "listings" :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes all localized listings from an edit.
+-- | Deletes all store listings.
 --
 -- /See:/ 'editsListingsDeleteall' smart constructor.
 data EditsListingsDeleteall =
   EditsListingsDeleteall'
-    { _eldlPackageName :: !Text
-    , _eldlEditId      :: !Text
+    { _eldlXgafv :: !(Maybe Xgafv)
+    , _eldlUploadProtocol :: !(Maybe Text)
+    , _eldlPackageName :: !Text
+    , _eldlAccessToken :: !(Maybe Text)
+    , _eldlUploadType :: !(Maybe Text)
+    , _eldlEditId :: !Text
+    , _eldlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,36 +82,85 @@ data EditsListingsDeleteall =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eldlXgafv'
+--
+-- * 'eldlUploadProtocol'
+--
 -- * 'eldlPackageName'
 --
+-- * 'eldlAccessToken'
+--
+-- * 'eldlUploadType'
+--
 -- * 'eldlEditId'
+--
+-- * 'eldlCallback'
 editsListingsDeleteall
     :: Text -- ^ 'eldlPackageName'
     -> Text -- ^ 'eldlEditId'
     -> EditsListingsDeleteall
 editsListingsDeleteall pEldlPackageName_ pEldlEditId_ =
   EditsListingsDeleteall'
-    {_eldlPackageName = pEldlPackageName_, _eldlEditId = pEldlEditId_}
+    { _eldlXgafv = Nothing
+    , _eldlUploadProtocol = Nothing
+    , _eldlPackageName = pEldlPackageName_
+    , _eldlAccessToken = Nothing
+    , _eldlUploadType = Nothing
+    , _eldlEditId = pEldlEditId_
+    , _eldlCallback = Nothing
+    }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+eldlXgafv :: Lens' EditsListingsDeleteall (Maybe Xgafv)
+eldlXgafv
+  = lens _eldlXgafv (\ s a -> s{_eldlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eldlUploadProtocol :: Lens' EditsListingsDeleteall (Maybe Text)
+eldlUploadProtocol
+  = lens _eldlUploadProtocol
+      (\ s a -> s{_eldlUploadProtocol = a})
+
+-- | Package name of the app.
 eldlPackageName :: Lens' EditsListingsDeleteall Text
 eldlPackageName
   = lens _eldlPackageName
       (\ s a -> s{_eldlPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+eldlAccessToken :: Lens' EditsListingsDeleteall (Maybe Text)
+eldlAccessToken
+  = lens _eldlAccessToken
+      (\ s a -> s{_eldlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eldlUploadType :: Lens' EditsListingsDeleteall (Maybe Text)
+eldlUploadType
+  = lens _eldlUploadType
+      (\ s a -> s{_eldlUploadType = a})
+
+-- | Identifier of the edit.
 eldlEditId :: Lens' EditsListingsDeleteall Text
 eldlEditId
   = lens _eldlEditId (\ s a -> s{_eldlEditId = a})
+
+-- | JSONP
+eldlCallback :: Lens' EditsListingsDeleteall (Maybe Text)
+eldlCallback
+  = lens _eldlCallback (\ s a -> s{_eldlCallback = a})
 
 instance GoogleRequest EditsListingsDeleteall where
         type Rs EditsListingsDeleteall = ()
         type Scopes EditsListingsDeleteall =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsListingsDeleteall'{..}
-          = go _eldlPackageName _eldlEditId (Just AltJSON)
+          = go _eldlPackageName _eldlEditId _eldlXgafv
+              _eldlUploadProtocol
+              _eldlAccessToken
+              _eldlUploadType
+              _eldlCallback
+              (Just AltJSON)
               androidPublisherService
           where go
                   = buildClient

@@ -49,8 +49,8 @@ module Network.Google.Resource.Poly.Users.Assets.List
     , ualCallback
     ) where
 
-import           Network.Google.Poly.Types
-import           Network.Google.Prelude
+import Network.Google.Poly.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @poly.users.assets.list@ method which the
 -- 'UsersAssetsList' request conforms to.
@@ -64,7 +64,7 @@ type UsersAssetsListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "format" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "visibility" Text :>
+                       QueryParam "visibility" UsersAssetsListVisibility :>
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" (Textual Int32) :>
                              QueryParam "callback" Text :>
@@ -79,17 +79,17 @@ type UsersAssetsListResource =
 -- /See:/ 'usersAssetsList' smart constructor.
 data UsersAssetsList =
   UsersAssetsList'
-    { _ualXgafv          :: !(Maybe Xgafv)
+    { _ualXgafv :: !(Maybe Xgafv)
     , _ualUploadProtocol :: !(Maybe Text)
-    , _ualOrderBy        :: !(Maybe Text)
-    , _ualAccessToken    :: !(Maybe Text)
-    , _ualFormat         :: !(Maybe Text)
-    , _ualUploadType     :: !(Maybe Text)
-    , _ualVisibility     :: !(Maybe Text)
-    , _ualName           :: !Text
-    , _ualPageToken      :: !(Maybe Text)
-    , _ualPageSize       :: !(Maybe (Textual Int32))
-    , _ualCallback       :: !(Maybe Text)
+    , _ualOrderBy :: !(Maybe Text)
+    , _ualAccessToken :: !(Maybe Text)
+    , _ualFormat :: !(Maybe Text)
+    , _ualUploadType :: !(Maybe Text)
+    , _ualVisibility :: !(Maybe UsersAssetsListVisibility)
+    , _ualName :: !Text
+    , _ualPageToken :: !(Maybe Text)
+    , _ualPageSize :: !(Maybe (Textual Int32))
+    , _ualCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -175,7 +175,7 @@ ualUploadType
 
 -- | The visibility of the assets to be returned. Defaults to
 -- VISIBILITY_UNSPECIFIED which returns all assets.
-ualVisibility :: Lens' UsersAssetsList (Maybe Text)
+ualVisibility :: Lens' UsersAssetsList (Maybe UsersAssetsListVisibility)
 ualVisibility
   = lens _ualVisibility
       (\ s a -> s{_ualVisibility = a})

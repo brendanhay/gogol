@@ -22,8 +22,9 @@
 --
 -- Determine if blobs are present in the CAS. Clients can use this API
 -- before uploading blobs to determine which ones are already present in
--- the CAS and do not need to be uploaded again. There are no
--- method-specific errors.
+-- the CAS and do not need to be uploaded again. Servers SHOULD increase
+-- the lifetimes of the referenced blobs if necessary and applicable. There
+-- are no method-specific errors.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.blobs.findMissing@.
 module Network.Google.Resource.RemoteBuildExecution.Blobs.FindMissing
@@ -45,8 +46,8 @@ module Network.Google.Resource.RemoteBuildExecution.Blobs.FindMissing
     , bfmCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.findMissing@ method which the
 -- 'BlobsFindMissing' request conforms to.
@@ -68,19 +69,20 @@ type BlobsFindMissingResource =
 
 -- | Determine if blobs are present in the CAS. Clients can use this API
 -- before uploading blobs to determine which ones are already present in
--- the CAS and do not need to be uploaded again. There are no
--- method-specific errors.
+-- the CAS and do not need to be uploaded again. Servers SHOULD increase
+-- the lifetimes of the referenced blobs if necessary and applicable. There
+-- are no method-specific errors.
 --
 -- /See:/ 'blobsFindMissing' smart constructor.
 data BlobsFindMissing =
   BlobsFindMissing'
-    { _bfmXgafv          :: !(Maybe Xgafv)
+    { _bfmXgafv :: !(Maybe Xgafv)
     , _bfmUploadProtocol :: !(Maybe Text)
-    , _bfmAccessToken    :: !(Maybe Text)
-    , _bfmUploadType     :: !(Maybe Text)
-    , _bfmPayload        :: !BuildBazelRemoteExecutionV2FindMissingBlobsRequest
-    , _bfmInstanceName   :: !Text
-    , _bfmCallback       :: !(Maybe Text)
+    , _bfmAccessToken :: !(Maybe Text)
+    , _bfmUploadType :: !(Maybe Text)
+    , _bfmPayload :: !BuildBazelRemoteExecutionV2FindMissingBlobsRequest
+    , _bfmInstanceName :: !Text
+    , _bfmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

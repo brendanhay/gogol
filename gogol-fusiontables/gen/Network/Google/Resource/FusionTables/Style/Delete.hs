@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Style.Delete
     , sdTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.delete@ method which the
 -- 'StyleDelete' request conforms to.

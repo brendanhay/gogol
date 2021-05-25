@@ -36,10 +36,11 @@ module Network.Google.Resource.Storage.BucketAccessControls.Insert
     , baciBucket
     , baciPayload
     , baciUserProject
+    , baciProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.insert@ method which the
 -- 'BucketAccessControlsInsert' request conforms to.
@@ -50,18 +51,20 @@ type BucketAccessControlsInsertResource =
            Capture "bucket" Text :>
              "acl" :>
                QueryParam "userProject" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] BucketAccessControl :>
-                     Post '[JSON] BucketAccessControl
+                 QueryParam "provisionalUserProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] BucketAccessControl :>
+                       Post '[JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsInsert' smart constructor.
 data BucketAccessControlsInsert =
   BucketAccessControlsInsert'
-    { _baciBucket      :: !Text
-    , _baciPayload     :: !BucketAccessControl
+    { _baciBucket :: !Text
+    , _baciPayload :: !BucketAccessControl
     , _baciUserProject :: !(Maybe Text)
+    , _baciProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,6 +78,8 @@ data BucketAccessControlsInsert =
 -- * 'baciPayload'
 --
 -- * 'baciUserProject'
+--
+-- * 'baciProvisionalUserProject'
 bucketAccessControlsInsert
     :: Text -- ^ 'baciBucket'
     -> BucketAccessControl -- ^ 'baciPayload'
@@ -84,6 +89,7 @@ bucketAccessControlsInsert pBaciBucket_ pBaciPayload_ =
     { _baciBucket = pBaciBucket_
     , _baciPayload = pBaciPayload_
     , _baciUserProject = Nothing
+    , _baciProvisionalUserProject = Nothing
     }
 
 
@@ -104,6 +110,13 @@ baciUserProject
   = lens _baciUserProject
       (\ s a -> s{_baciUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+baciProvisionalUserProject :: Lens' BucketAccessControlsInsert (Maybe Text)
+baciProvisionalUserProject
+  = lens _baciProvisionalUserProject
+      (\ s a -> s{_baciProvisionalUserProject = a})
+
 instance GoogleRequest BucketAccessControlsInsert
          where
         type Rs BucketAccessControlsInsert =
@@ -112,7 +125,9 @@ instance GoogleRequest BucketAccessControlsInsert
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsInsert'{..}
-          = go _baciBucket _baciUserProject (Just AltJSON)
+          = go _baciBucket _baciUserProject
+              _baciProvisionalUserProject
+              (Just AltJSON)
               _baciPayload
               storageService
           where go

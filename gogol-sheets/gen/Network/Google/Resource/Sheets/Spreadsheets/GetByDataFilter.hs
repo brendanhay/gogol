@@ -53,8 +53,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.GetByDataFilter
     , sgbdfCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.getByDataFilter@ method which the
 -- 'SpreadsheetsGetByDataFilter' request conforms to.
@@ -87,13 +87,13 @@ type SpreadsheetsGetByDataFilterResource =
 -- /See:/ 'spreadsheetsGetByDataFilter' smart constructor.
 data SpreadsheetsGetByDataFilter =
   SpreadsheetsGetByDataFilter'
-    { _sgbdfXgafv          :: !(Maybe Xgafv)
+    { _sgbdfXgafv :: !(Maybe Xgafv)
     , _sgbdfUploadProtocol :: !(Maybe Text)
-    , _sgbdfAccessToken    :: !(Maybe Text)
-    , _sgbdfSpreadsheetId  :: !Text
-    , _sgbdfUploadType     :: !(Maybe Text)
-    , _sgbdfPayload        :: !GetSpreadsheetByDataFilterRequest
-    , _sgbdfCallback       :: !(Maybe Text)
+    , _sgbdfAccessToken :: !(Maybe Text)
+    , _sgbdfSpreadsheetId :: !Text
+    , _sgbdfUploadType :: !(Maybe Text)
+    , _sgbdfPayload :: !GetSpreadsheetByDataFilterRequest
+    , _sgbdfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

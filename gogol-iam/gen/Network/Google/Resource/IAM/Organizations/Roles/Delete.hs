@@ -20,13 +20,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Soft deletes a role. The role is suspended and cannot be used to create
--- new IAM Policy Bindings. The Role will not be included in
--- \`ListRoles()\` unless \`show_deleted\` is set in the
--- \`ListRolesRequest\`. The Role contains the deleted boolean set.
--- Existing Bindings remains, but are inactive. The Role can be undeleted
--- within 7 days. After 7 days the Role is deleted and all Bindings
--- associated with the role are removed.
+-- Deletes a custom Role. When you delete a custom role, the following
+-- changes occur immediately: * You cannot bind a member to the custom role
+-- in an IAM Policy. * Existing bindings to the custom role are not
+-- changed, but they have no effect. * By default, the response from
+-- ListRoles does not include the custom role. You have 7 days to undelete
+-- the custom role. After 7 days, the following changes occur: * The custom
+-- role is permanently deleted and cannot be recovered. * If an IAM policy
+-- contains a binding to the custom role, the binding is permanently
+-- removed.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.organizations.roles.delete@.
 module Network.Google.Resource.IAM.Organizations.Roles.Delete
@@ -48,8 +50,8 @@ module Network.Google.Resource.IAM.Organizations.Roles.Delete
     , ordCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.organizations.roles.delete@ method which the
 -- 'OrganizationsRolesDelete' request conforms to.
@@ -64,24 +66,26 @@ type OrganizationsRolesDeleteResource =
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Role
 
--- | Soft deletes a role. The role is suspended and cannot be used to create
--- new IAM Policy Bindings. The Role will not be included in
--- \`ListRoles()\` unless \`show_deleted\` is set in the
--- \`ListRolesRequest\`. The Role contains the deleted boolean set.
--- Existing Bindings remains, but are inactive. The Role can be undeleted
--- within 7 days. After 7 days the Role is deleted and all Bindings
--- associated with the role are removed.
+-- | Deletes a custom Role. When you delete a custom role, the following
+-- changes occur immediately: * You cannot bind a member to the custom role
+-- in an IAM Policy. * Existing bindings to the custom role are not
+-- changed, but they have no effect. * By default, the response from
+-- ListRoles does not include the custom role. You have 7 days to undelete
+-- the custom role. After 7 days, the following changes occur: * The custom
+-- role is permanently deleted and cannot be recovered. * If an IAM policy
+-- contains a binding to the custom role, the binding is permanently
+-- removed.
 --
 -- /See:/ 'organizationsRolesDelete' smart constructor.
 data OrganizationsRolesDelete =
   OrganizationsRolesDelete'
-    { _ordXgafv          :: !(Maybe Xgafv)
-    , _ordEtag           :: !(Maybe Bytes)
+    { _ordXgafv :: !(Maybe Xgafv)
+    , _ordEtag :: !(Maybe Bytes)
     , _ordUploadProtocol :: !(Maybe Text)
-    , _ordAccessToken    :: !(Maybe Text)
-    , _ordUploadType     :: !(Maybe Text)
-    , _ordName           :: !Text
-    , _ordCallback       :: !(Maybe Text)
+    , _ordAccessToken :: !(Maybe Text)
+    , _ordUploadType :: !(Maybe Text)
+    , _ordName :: !Text
+    , _ordCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,9 +150,25 @@ ordUploadType
   = lens _ordUploadType
       (\ s a -> s{_ordUploadType = a})
 
--- | The resource name of the role in one of the following formats:
--- \`organizations\/{ORGANIZATION_ID}\/roles\/{ROLE_NAME}\`
--- \`projects\/{PROJECT_ID}\/roles\/{ROLE_NAME}\`
+-- | The \`name\` parameter\'s value depends on the target resource for the
+-- request, namely
+-- [\`projects\`](\/iam\/reference\/rest\/v1\/projects.roles) or
+-- [\`organizations\`](\/iam\/reference\/rest\/v1\/organizations.roles).
+-- Each resource type\'s \`name\` value format is described below: *
+-- [\`projects.roles.delete()\`](\/iam\/reference\/rest\/v1\/projects.roles\/delete):
+-- \`projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This method deletes
+-- only [custom roles](\/iam\/docs\/understanding-custom-roles) that have
+-- been created at the project level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- *
+-- [\`organizations.roles.delete()\`](\/iam\/reference\/rest\/v1\/organizations.roles\/delete):
+-- \`organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This
+-- method deletes only [custom
+-- roles](\/iam\/docs\/understanding-custom-roles) that have been created
+-- at the organization level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- Note: Wildcard (*) values are invalid; you must specify a complete
+-- project ID or organization ID.
 ordName :: Lens' OrganizationsRolesDelete Text
 ordName = lens _ordName (\ s a -> s{_ordName = a})
 

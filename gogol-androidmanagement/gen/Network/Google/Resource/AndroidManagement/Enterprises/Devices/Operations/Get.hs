@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.
     , edogCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.operations.get@ method which the
 -- 'EnterprisesDevicesOperationsGet' request conforms to.
@@ -65,12 +65,12 @@ type EnterprisesDevicesOperationsGetResource =
 -- /See:/ 'enterprisesDevicesOperationsGet' smart constructor.
 data EnterprisesDevicesOperationsGet =
   EnterprisesDevicesOperationsGet'
-    { _edogXgafv          :: !(Maybe Xgafv)
+    { _edogXgafv :: !(Maybe Xgafv)
     , _edogUploadProtocol :: !(Maybe Text)
-    , _edogAccessToken    :: !(Maybe Text)
-    , _edogUploadType     :: !(Maybe Text)
-    , _edogName           :: !Text
-    , _edogCallback       :: !(Maybe Text)
+    , _edogAccessToken :: !(Maybe Text)
+    , _edogUploadType :: !(Maybe Text)
+    , _edogName :: !Text
+    , _edogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

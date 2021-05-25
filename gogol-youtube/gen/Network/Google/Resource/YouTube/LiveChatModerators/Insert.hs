@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a new moderator for the chat.
+-- Inserts a new resource into this collection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveChatModerators.insert@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveChatModerators.insert@.
 module Network.Google.Resource.YouTube.LiveChatModerators.Insert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.YouTube.LiveChatModerators.Insert
     , LiveChatModeratorsInsert
 
     -- * Request Lenses
+    , lXgafv
     , lPart
+    , lUploadProtocol
+    , lAccessToken
+    , lUploadType
     , lPayload
+    , lCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatModerators.insert@ method which the
 -- 'LiveChatModeratorsInsert' request conforms to.
@@ -47,18 +52,28 @@ type LiveChatModeratorsInsertResource =
        "v3" :>
          "liveChat" :>
            "moderators" :>
-             QueryParam "part" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LiveChatModerator :>
-                   Post '[JSON] LiveChatModerator
+             QueryParams "part" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LiveChatModerator :>
+                             Post '[JSON] LiveChatModerator
 
--- | Adds a new moderator for the chat.
+-- | Inserts a new resource into this collection.
 --
 -- /See:/ 'liveChatModeratorsInsert' smart constructor.
 data LiveChatModeratorsInsert =
   LiveChatModeratorsInsert'
-    { _lPart    :: !Text
+    { _lXgafv :: !(Maybe Xgafv)
+    , _lPart :: ![Text]
+    , _lUploadProtocol :: !(Maybe Text)
+    , _lAccessToken :: !(Maybe Text)
+    , _lUploadType :: !(Maybe Text)
     , _lPayload :: !LiveChatModerator
+    , _lCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,27 +82,71 @@ data LiveChatModeratorsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lXgafv'
+--
 -- * 'lPart'
 --
+-- * 'lUploadProtocol'
+--
+-- * 'lAccessToken'
+--
+-- * 'lUploadType'
+--
 -- * 'lPayload'
+--
+-- * 'lCallback'
 liveChatModeratorsInsert
-    :: Text -- ^ 'lPart'
+    :: [Text] -- ^ 'lPart'
     -> LiveChatModerator -- ^ 'lPayload'
     -> LiveChatModeratorsInsert
 liveChatModeratorsInsert pLPart_ pLPayload_ =
-  LiveChatModeratorsInsert' {_lPart = pLPart_, _lPayload = pLPayload_}
+  LiveChatModeratorsInsert'
+    { _lXgafv = Nothing
+    , _lPart = _Coerce # pLPart_
+    , _lUploadProtocol = Nothing
+    , _lAccessToken = Nothing
+    , _lUploadType = Nothing
+    , _lPayload = pLPayload_
+    , _lCallback = Nothing
+    }
 
 
--- | The part parameter serves two purposes in this operation. It identifies
--- the properties that the write operation will set as well as the
--- properties that the API response returns. Set the parameter value to
+-- | V1 error format.
+lXgafv :: Lens' LiveChatModeratorsInsert (Maybe Xgafv)
+lXgafv = lens _lXgafv (\ s a -> s{_lXgafv = a})
+
+-- | The *part* parameter serves two purposes in this operation. It
+-- identifies the properties that the write operation will set as well as
+-- the properties that the API response returns. Set the parameter value to
 -- snippet.
-lPart :: Lens' LiveChatModeratorsInsert Text
-lPart = lens _lPart (\ s a -> s{_lPart = a})
+lPart :: Lens' LiveChatModeratorsInsert [Text]
+lPart
+  = lens _lPart (\ s a -> s{_lPart = a}) . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lUploadProtocol :: Lens' LiveChatModeratorsInsert (Maybe Text)
+lUploadProtocol
+  = lens _lUploadProtocol
+      (\ s a -> s{_lUploadProtocol = a})
+
+-- | OAuth access token.
+lAccessToken :: Lens' LiveChatModeratorsInsert (Maybe Text)
+lAccessToken
+  = lens _lAccessToken (\ s a -> s{_lAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lUploadType :: Lens' LiveChatModeratorsInsert (Maybe Text)
+lUploadType
+  = lens _lUploadType (\ s a -> s{_lUploadType = a})
 
 -- | Multipart request metadata.
 lPayload :: Lens' LiveChatModeratorsInsert LiveChatModerator
 lPayload = lens _lPayload (\ s a -> s{_lPayload = a})
+
+-- | JSONP
+lCallback :: Lens' LiveChatModeratorsInsert (Maybe Text)
+lCallback
+  = lens _lCallback (\ s a -> s{_lCallback = a})
 
 instance GoogleRequest LiveChatModeratorsInsert where
         type Rs LiveChatModeratorsInsert = LiveChatModerator
@@ -95,7 +154,11 @@ instance GoogleRequest LiveChatModeratorsInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatModeratorsInsert'{..}
-          = go (Just _lPart) (Just AltJSON) _lPayload
+          = go _lPart _lXgafv _lUploadProtocol _lAccessToken
+              _lUploadType
+              _lCallback
+              (Just AltJSON)
+              _lPayload
               youTubeService
           where go
                   = buildClient

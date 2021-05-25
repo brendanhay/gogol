@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.WorkflowTemplates.GetIA
     , prwtgipCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.getIamPolicy@ method which the
 -- 'ProjectsRegionsWorkflowTemplatesGetIAMPolicy' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsRegionsWorkflowTemplatesGetIAMPolicyResource
 -- /See:/ 'projectsRegionsWorkflowTemplatesGetIAMPolicy' smart constructor.
 data ProjectsRegionsWorkflowTemplatesGetIAMPolicy =
   ProjectsRegionsWorkflowTemplatesGetIAMPolicy'
-    { _prwtgipXgafv          :: !(Maybe Xgafv)
+    { _prwtgipXgafv :: !(Maybe Xgafv)
     , _prwtgipUploadProtocol :: !(Maybe Text)
-    , _prwtgipAccessToken    :: !(Maybe Text)
-    , _prwtgipUploadType     :: !(Maybe Text)
-    , _prwtgipPayload        :: !GetIAMPolicyRequest
-    , _prwtgipResource       :: !Text
-    , _prwtgipCallback       :: !(Maybe Text)
+    , _prwtgipAccessToken :: !(Maybe Text)
+    , _prwtgipUploadType :: !(Maybe Text)
+    , _prwtgipPayload :: !GetIAMPolicyRequest
+    , _prwtgipResource :: !Text
+    , _prwtgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

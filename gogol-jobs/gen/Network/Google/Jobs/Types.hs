@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -29,12 +29,22 @@ module Network.Google.Jobs.Types
     , llLatitude
     , llLongitude
 
+    -- * MendelDebugInputNamespacedDebugInput
+    , MendelDebugInputNamespacedDebugInput
+    , mendelDebugInputNamespacedDebugInput
+    , mdindiAddtional
+
     -- * ApplicationInfo
     , ApplicationInfo
     , applicationInfo
     , aiURIs
     , aiEmails
     , aiInstruction
+
+    -- * MendelDebugInput
+    , MendelDebugInput
+    , mendelDebugInput
+    , mdiNamespacedDebugInput
 
     -- * MatchingJob
     , MatchingJob
@@ -59,33 +69,18 @@ module Network.Google.Jobs.Types
     , RequestMetadata
     , requestMetadata
     , rmDomain
+    , rmAllowMissingIds
     , rmUserId
     , rmSessionId
     , rmDeviceInfo
 
-    -- * UpdateCompanyRequest
-    , UpdateCompanyRequest
-    , updateCompanyRequest
-    , ucrUpdateMask
-    , ucrCompany
-
-    -- * HistogramResultSearchType
-    , HistogramResultSearchType (..)
-
     -- * CommuteFilterCommuteMethod
     , CommuteFilterCommuteMethod (..)
 
-    -- * UpdateJobRequest
-    , UpdateJobRequest
-    , updateJobRequest
-    , ujrUpdateMask
-    , ujrJob
-
-    -- * BucketizedCount
-    , BucketizedCount
-    , bucketizedCount
-    , bcCount
-    , bcRange
+    -- * BatchCreateJobsResponse
+    , BatchCreateJobsResponse
+    , batchCreateJobsResponse
+    , bcjrJobResults
 
     -- * SearchJobsRequestDiversificationLevel
     , SearchJobsRequestDiversificationLevel (..)
@@ -97,20 +92,20 @@ module Network.Google.Jobs.Types
     , ciEntries
     , ciAnnualizedBaseCompensationRange
 
-    -- * CreateCompanyRequest
-    , CreateCompanyRequest
-    , createCompanyRequest
-    , ccrCompany
+    -- * BatchUpdateJobsResponse
+    , BatchUpdateJobsResponse
+    , batchUpdateJobsResponse
+    , bujrJobResults
+
+    -- * BatchDeleteJobsResponse
+    , BatchDeleteJobsResponse
+    , batchDeleteJobsResponse
+    , bdjrJobResults
 
     -- * HistogramQuery
     , HistogramQuery
     , histogramQuery
     , hqHistogramQuery
-
-    -- * CreateJobRequest
-    , CreateJobRequest
-    , createJobRequest
-    , cjrJob
 
     -- * CompletionResult
     , CompletionResult
@@ -119,16 +114,13 @@ module Network.Google.Jobs.Types
     , crImageURI
     , crType
 
-    -- * CompensationHistogramResultType
-    , CompensationHistogramResultType (..)
-
     -- * Location
     , Location
     , location
     , lLatLng
+    , lRadiusMiles
     , lLocationType
     , lPostalAddress
-    , lRadiusInMiles
 
     -- * Operation
     , Operation
@@ -147,17 +139,22 @@ module Network.Google.Jobs.Types
     , ClientEvent
     , clientEvent
     , ceRequestId
-    , ceExtraInfo
     , ceJobEvent
-    , ceParentEventId
+    , ceEventNotes
     , ceCreateTime
     , ceEventId
 
-    -- * CompensationHistogramRequest
-    , CompensationHistogramRequest
-    , compensationHistogramRequest
-    , chrBucketingOption
-    , chrType
+    -- * JobDegreeTypesItem
+    , JobDegreeTypesItem (..)
+
+    -- * ProjectsTenantsJobsListJobView
+    , ProjectsTenantsJobsListJobView (..)
+
+    -- * BatchUpdateJobsRequest
+    , BatchUpdateJobsRequest
+    , batchUpdateJobsRequest
+    , bujrUpdateMask
+    , bujrJobs
 
     -- * Money
     , Money
@@ -165,6 +162,9 @@ module Network.Google.Jobs.Types
     , mCurrencyCode
     , mNanos
     , mUnits
+
+    -- * JobDerivedInfoJobCategoriesItem
+    , JobDerivedInfoJobCategoriesItem (..)
 
     -- * ListCompaniesResponse
     , ListCompaniesResponse
@@ -175,6 +175,24 @@ module Network.Google.Jobs.Types
 
     -- * CompensationEntryType
     , CompensationEntryType (..)
+
+    -- * NamespacedDebugInput
+    , NamespacedDebugInput
+    , namespacedDebugInput
+    , ndiDisableAutomaticEnrollmentSelection
+    , ndiDisableExpTags
+    , ndiDisableOrganicSelection
+    , ndiForcedFlags
+    , ndiConditionallyForcedExps
+    , ndiAbsolutelyForcedExpTags
+    , ndiAbsolutelyForcedExpNames
+    , ndiDisableManualEnrollmentSelection
+    , ndiDisableExps
+    , ndiAbsolutelyForcedExps
+    , ndiDisableExpNames
+    , ndiConditionallyForcedExpNames
+    , ndiConditionallyForcedExpTags
+    , ndiForcedRollouts
 
     -- * CommuteFilter
     , CommuteFilter
@@ -189,7 +207,10 @@ module Network.Google.Jobs.Types
     -- * BatchDeleteJobsRequest
     , BatchDeleteJobsRequest
     , batchDeleteJobsRequest
-    , bdjrFilter
+    , bdjrNames
+
+    -- * JobQueryEmploymentTypesItem
+    , JobQueryEmploymentTypesItem (..)
 
     -- * JobCustomAttributes
     , JobCustomAttributes
@@ -207,19 +228,17 @@ module Network.Google.Jobs.Types
     , searchJobsRequest
     , sjrRequestMetadata
     , sjrJobView
+    , sjrMaxPageSize
     , sjrOrderBy
     , sjrOffSet
     , sjrSearchMode
     , sjrDiversificationLevel
     , sjrHistogramQueries
-    , sjrRequirePreciseResultSize
     , sjrJobQuery
     , sjrEnableBroadening
     , sjrPageToken
     , sjrCustomRankingInfo
     , sjrDisableKeywordMatch
-    , sjrPageSize
-    , sjrHistogramFacets
 
     -- * HistogramQueryResultHistogram
     , HistogramQueryResultHistogram
@@ -243,12 +262,16 @@ module Network.Google.Jobs.Types
     -- * CompensationEntryUnit
     , CompensationEntryUnit (..)
 
-    -- * CustomAttributeHistogramRequest
-    , CustomAttributeHistogramRequest
-    , customAttributeHistogramRequest
-    , cahrLongValueHistogramBucketingOption
-    , cahrKey
-    , cahrStringValueHistogram
+    -- * JobResult
+    , JobResult
+    , jobResult
+    , jrStatus
+    , jrJob
+
+    -- * NamespacedDebugInputForcedFlags
+    , NamespacedDebugInputForcedFlags
+    , namespacedDebugInputForcedFlags
+    , ndiffAddtional
 
     -- * ResponseMetadata
     , ResponseMetadata
@@ -264,31 +287,14 @@ module Network.Google.Jobs.Types
     -- * JobJobLevel
     , JobJobLevel (..)
 
-    -- * CustomAttributeHistogramResult
-    , CustomAttributeHistogramResult
-    , customAttributeHistogramResult
-    , cStringValueHistogramResult
-    , cLongValueHistogramResult
-    , cKey
-
-    -- * BucketRange
-    , BucketRange
-    , bucketRange
-    , brTo
-    , brFrom
-
     -- * JobVisibility
     , JobVisibility (..)
 
+    -- * JobEmploymentTypesItem
+    , JobEmploymentTypesItem (..)
+
     -- * CustomRankingInfoImportanceLevel
     , CustomRankingInfoImportanceLevel (..)
-
-    -- * NumericBucketingResult
-    , NumericBucketingResult
-    , numericBucketingResult
-    , nbrMaxValue
-    , nbrCounts
-    , nbrMinValue
 
     -- * JobDerivedInfo
     , JobDerivedInfo
@@ -296,10 +302,25 @@ module Network.Google.Jobs.Types
     , jdiJobCategories
     , jdiLocations
 
+    -- * BatchOperationMetadata
+    , BatchOperationMetadata
+    , batchOperationMetadata
+    , bomState
+    , bomUpdateTime
+    , bomEndTime
+    , bomSuccessCount
+    , bomFailureCount
+    , bomCreateTime
+    , bomStateDescription
+    , bomTotalCount
+
     -- * CompanyDerivedInfo
     , CompanyDerivedInfo
     , companyDerivedInfo
     , cdiHeadquartersLocation
+
+    -- * CompensationFilterUnitsItem
+    , CompensationFilterUnitsItem (..)
 
     -- * CompensationFilter
     , CompensationFilter
@@ -308,6 +329,12 @@ module Network.Google.Jobs.Types
     , cfRange
     , cfUnits
     , cfType
+
+    -- * Tenant
+    , Tenant
+    , tenant
+    , tName
+    , tExternalId
 
     -- * JobPostingRegion
     , JobPostingRegion (..)
@@ -334,6 +361,7 @@ module Network.Google.Jobs.Types
     , customAttribute
     , caLongValues
     , caFilterable
+    , caKeywordSearchable
     , caStringValues
 
     -- * Job
@@ -346,7 +374,6 @@ module Network.Google.Jobs.Types
     , jResponsibilities
     , jJobStartTime
     , jPromotionValue
-    , jCompanyName
     , jAddresses
     , jJobBenefits
     , jVisibility
@@ -356,6 +383,7 @@ module Network.Google.Jobs.Types
     , jPostingPublishTime
     , jName
     , jDegreeTypes
+    , jCompany
     , jQualifications
     , jCompanyDisplayName
     , jIncentives
@@ -370,15 +398,11 @@ module Network.Google.Jobs.Types
     , jRequisitionId
     , jPostingCreateTime
 
-    -- * HistogramResults
-    , HistogramResults
-    , histogramResults
-    , hrSimpleHistogramResults
-    , hrCustomAttributeHistogramResults
-    , hrCompensationHistogramResults
-
     -- * CompanySize
     , CompanySize (..)
+
+    -- * ProjectsTenantsCompleteQueryType
+    , ProjectsTenantsCompleteQueryType (..)
 
     -- * Xgafv
     , Xgafv (..)
@@ -402,15 +426,6 @@ module Network.Google.Jobs.Types
     -- * CommuteFilterRoadTraffic
     , CommuteFilterRoadTraffic (..)
 
-    -- * CompensationHistogramResult
-    , CompensationHistogramResult
-    , compensationHistogramResult
-    , cResult
-    , cType
-
-    -- * CompensationHistogramRequestType
-    , CompensationHistogramRequestType (..)
-
     -- * CompletionResultType
     , CompletionResultType (..)
 
@@ -425,22 +440,27 @@ module Network.Google.Jobs.Types
     , jqLocationFilters
     , jqCompanyDisplayNames
     , jqJobCategories
+    , jqCompanies
     , jqCompensationFilter
     , jqQuery
-    , jqCompanyNames
+    , jqQueryLanguageCode
     , jqEmploymentTypes
     , jqExcludedJobs
 
-    -- * CreateClientEventRequest
-    , CreateClientEventRequest
-    , createClientEventRequest
-    , ccerClientEvent
+    -- * BatchCreateJobsRequest
+    , BatchCreateJobsRequest
+    , batchCreateJobsRequest
+    , bcjrJobs
+
+    -- * ProjectsTenantsCompleteQueryScope
+    , ProjectsTenantsCompleteQueryScope (..)
 
     -- * SpellingCorrection
     , SpellingCorrection
     , spellingCorrection
     , scCorrected
     , scCorrectedText
+    , scCorrectedHTML
 
     -- * CompleteQueryResponse
     , CompleteQueryResponse
@@ -510,17 +530,21 @@ module Network.Google.Jobs.Types
     , paRevision
     , paOrganization
 
+    -- * BatchOperationMetadataState
+    , BatchOperationMetadataState (..)
+
     -- * DeviceInfo
     , DeviceInfo
     , deviceInfo
     , diId
     , diDeviceType
 
-    -- * NumericBucketingOption
-    , NumericBucketingOption
-    , numericBucketingOption
-    , nboBucketBounds
-    , nboRequiresMinMax
+    -- * ListTenantsResponse
+    , ListTenantsResponse
+    , listTenantsResponse
+    , ltrTenants
+    , ltrNextPageToken
+    , ltrMetadata
 
     -- * OperationResponse
     , OperationResponse
@@ -530,56 +554,37 @@ module Network.Google.Jobs.Types
     -- * SearchJobsRequestSearchMode
     , SearchJobsRequestSearchMode (..)
 
-    -- * HistogramFacets
-    , HistogramFacets
-    , histogramFacets
-    , hfCompensationHistogramFacets
-    , hfCustomAttributeHistogramFacets
-    , hfSimpleHistogramFacets
-
     -- * LocationFilterTelecommutePreference
     , LocationFilterTelecommutePreference (..)
 
     -- * ProcessingOptionsHTMLSanitization
     , ProcessingOptionsHTMLSanitization (..)
 
-    -- * HistogramResult
-    , HistogramResult
-    , histogramResult
-    , hrValues
-    , hrSearchType
-
-    -- * CustomAttributeHistogramResultStringValueHistogramResult
-    , CustomAttributeHistogramResultStringValueHistogramResult
-    , customAttributeHistogramResultStringValueHistogramResult
-    , cahrsvhrAddtional
-
-    -- * ClientEventExtraInfo
-    , ClientEventExtraInfo
-    , clientEventExtraInfo
-    , ceeiAddtional
+    -- * JobQueryJobCategoriesItem
+    , JobQueryJobCategoriesItem (..)
 
     -- * SearchJobsResponse
     , SearchJobsResponse
     , searchJobsResponse
     , sjrNextPageToken
-    , sjrEstimatedTotalSize
     , sjrHistogramQueryResults
     , sjrLocationFilters
     , sjrMatchingJobs
     , sjrTotalSize
-    , sjrHistogramResults
     , sjrMetadata
     , sjrBroadenedQueryJobsCount
     , sjrSpellCorrection
 
+    -- * JobJobBenefitsItem
+    , JobJobBenefitsItem (..)
+
     -- * SearchJobsRequestJobView
     , SearchJobsRequestJobView (..)
 
-    -- * HistogramResultValues
-    , HistogramResultValues
-    , histogramResultValues
-    , hrvAddtional
+    -- * NamespacedDebugInputForcedRollouts
+    , NamespacedDebugInputForcedRollouts
+    , namespacedDebugInputForcedRollouts
+    , ndifrAddtional
 
     -- * TimestampRange
     , TimestampRange
@@ -588,17 +593,17 @@ module Network.Google.Jobs.Types
     , trEndTime
     ) where
 
-import           Network.Google.Jobs.Types.Product
-import           Network.Google.Jobs.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Jobs.Types.Product
+import Network.Google.Jobs.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v3p1beta1' of the Cloud Talent Solution API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v4' of the Cloud Talent Solution API. This contains the host and root path used as a starting point for constructing service requests.
 jobsService :: ServiceConfig
 jobsService
-  = defaultService (ServiceId "jobs:v3p1beta1")
+  = defaultService (ServiceId "jobs:v4")
       "jobs.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

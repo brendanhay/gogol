@@ -1,6 +1,6 @@
 name:                  gogol-fonts
 version:               0.5.0
-synopsis:              Google Fonts Developer SDK.
+synopsis:              Google Web Fonts Developer SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,9 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Accesses the metadata for all families served by Google Fonts, providing
-    a list of families currently available (including available styles and a
-    list of supported script subsets).
+    The Google Web Fonts Developer API lets you retrieve information about
+    web fonts served by Google.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

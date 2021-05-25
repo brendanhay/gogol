@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPool.Replicas.Restart
     , rrProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.replicas.restart@ method which the
 -- 'ReplicasRestart' request conforms to.
@@ -63,8 +63,8 @@ type ReplicasRestartResource =
 -- /See:/ 'replicasRestart' smart constructor.
 data ReplicasRestart =
   ReplicasRestart'
-    { _rrPoolName    :: !Text
-    , _rrZone        :: !Text
+    { _rrPoolName :: !Text
+    , _rrZone :: !Text
     , _rrReplicaName :: !Text
     , _rrProjectName :: !Text
     }

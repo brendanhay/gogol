@@ -17,8 +17,71 @@
 --
 module Network.Google.ServiceConsumerManagement.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types.Sum
+
+-- | Specifies a location to extract JWT from an API request.
+--
+-- /See:/ 'jwtLocation' smart constructor.
+data JwtLocation =
+  JwtLocation'
+    { _jlValuePrefix :: !(Maybe Text)
+    , _jlHeader :: !(Maybe Text)
+    , _jlQuery :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'JwtLocation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jlValuePrefix'
+--
+-- * 'jlHeader'
+--
+-- * 'jlQuery'
+jwtLocation
+    :: JwtLocation
+jwtLocation =
+  JwtLocation'
+    {_jlValuePrefix = Nothing, _jlHeader = Nothing, _jlQuery = Nothing}
+
+
+-- | The value prefix. The value format is \"value_prefix{token}\" Only
+-- applies to \"in\" header type. Must be empty for \"in\" query type. If
+-- not empty, the header value has to match (case sensitive) this prefix.
+-- If not matched, JWT will not be extracted. If matched, JWT will be
+-- extracted after the prefix is removed. For example, for \"Authorization:
+-- Bearer {JWT}\", value_prefix=\"Bearer \" with a space at the end.
+jlValuePrefix :: Lens' JwtLocation (Maybe Text)
+jlValuePrefix
+  = lens _jlValuePrefix
+      (\ s a -> s{_jlValuePrefix = a})
+
+-- | Specifies HTTP header name to extract JWT token.
+jlHeader :: Lens' JwtLocation (Maybe Text)
+jlHeader = lens _jlHeader (\ s a -> s{_jlHeader = a})
+
+-- | Specifies URL query parameter name to extract JWT token.
+jlQuery :: Lens' JwtLocation (Maybe Text)
+jlQuery = lens _jlQuery (\ s a -> s{_jlQuery = a})
+
+instance FromJSON JwtLocation where
+        parseJSON
+          = withObject "JwtLocation"
+              (\ o ->
+                 JwtLocation' <$>
+                   (o .:? "valuePrefix") <*> (o .:? "header") <*>
+                     (o .:? "query"))
+
+instance ToJSON JwtLocation where
+        toJSON JwtLocation'{..}
+          = object
+              (catMaybes
+                 [("valuePrefix" .=) <$> _jlValuePrefix,
+                  ("header" .=) <$> _jlHeader,
+                  ("query" .=) <$> _jlQuery])
 
 -- | Define a parameter\'s name and location. The parameter may be passed as
 -- either an HTTP header or a URL query parameter, and if both are passed
@@ -27,9 +90,9 @@ import           Network.Google.ServiceConsumerManagement.Types.Sum
 -- /See:/ 'systemParameter' smart constructor.
 data SystemParameter =
   SystemParameter'
-    { _spHTTPHeader        :: !(Maybe Text)
+    { _spHTTPHeader :: !(Maybe Text)
     , _spURLQueryParameter :: !(Maybe Text)
-    , _spName              :: !(Maybe Text)
+    , _spName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -96,11 +159,12 @@ instance ToJSON SystemParameter where
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
 data MonitoredResourceDescriptor =
   MonitoredResourceDescriptor'
-    { _mrdName        :: !(Maybe Text)
+    { _mrdName :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
-    , _mrdLabels      :: !(Maybe [LabelDescriptor])
-    , _mrdType        :: !(Maybe Text)
+    , _mrdLabels :: !(Maybe [LabelDescriptor])
+    , _mrdType :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
+    , _mrdLaunchStage :: !(Maybe MonitoredResourceDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,6 +182,8 @@ data MonitoredResourceDescriptor =
 -- * 'mrdType'
 --
 -- * 'mrdDescription'
+--
+-- * 'mrdLaunchStage'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
@@ -127,6 +193,7 @@ monitoredResourceDescriptor =
     , _mrdLabels = Nothing
     , _mrdType = Nothing
     , _mrdDescription = Nothing
+    , _mrdLaunchStage = Nothing
     }
 
 
@@ -159,8 +226,7 @@ mrdLabels
       . _Coerce
 
 -- | Required. The monitored resource type. For example, the type
--- \`\"cloudsql_database\"\` represents databases in Google Cloud SQL. The
--- maximum length of this value is 256 characters.
+-- \`\"cloudsql_database\"\` represents databases in Google Cloud SQL.
 mrdType :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdType = lens _mrdType (\ s a -> s{_mrdType = a})
 
@@ -171,6 +237,12 @@ mrdDescription
   = lens _mrdDescription
       (\ s a -> s{_mrdDescription = a})
 
+-- | Optional. The launch stage of the monitored resource definition.
+mrdLaunchStage :: Lens' MonitoredResourceDescriptor (Maybe MonitoredResourceDescriptorLaunchStage)
+mrdLaunchStage
+  = lens _mrdLaunchStage
+      (\ s a -> s{_mrdLaunchStage = a})
+
 instance FromJSON MonitoredResourceDescriptor where
         parseJSON
           = withObject "MonitoredResourceDescriptor"
@@ -179,7 +251,8 @@ instance FromJSON MonitoredResourceDescriptor where
                    (o .:? "name") <*> (o .:? "displayName") <*>
                      (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "description")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON MonitoredResourceDescriptor where
         toJSON MonitoredResourceDescriptor'{..}
@@ -189,7 +262,8 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("displayName" .=) <$> _mrdDisplayName,
                   ("labels" .=) <$> _mrdLabels,
                   ("type" .=) <$> _mrdType,
-                  ("description" .=) <$> _mrdDescription])
+                  ("description" .=) <$> _mrdDescription,
+                  ("launchStage" .=) <$> _mrdLaunchStage])
 
 -- | Response message for the \`RefreshConsumer\` method. This response
 -- message is assigned to the \`response\` field of the returned Operation
@@ -222,9 +296,9 @@ instance ToJSON V1Beta1RefreshConsumerResponse where
 -- /See:/ 'documentationRule' smart constructor.
 data DocumentationRule =
   DocumentationRule'
-    { _drSelector               :: !(Maybe Text)
+    { _drSelector :: !(Maybe Text)
     , _drDeprecationDescription :: !(Maybe Text)
-    , _drDescription            :: !(Maybe Text)
+    , _drDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -248,13 +322,13 @@ documentationRule =
     }
 
 
--- | The selector is a comma-separated list of patterns. Each pattern is a
--- qualified name of the element which may end in \"*\", indicating a
--- wildcard. Wildcards are only allowed at the end and for a whole
--- component of the qualified name, i.e. \"foo.*\" is ok, but not
--- \"foo.b*\" or \"foo.*.bar\". A wildcard will match one or more
--- components. To specify a default for all applicable elements, the whole
--- pattern \"*\" is used.
+-- | The selector is a comma-separated list of patterns for any element such
+-- as a method, a field, an enum value. Each pattern is a qualified name of
+-- the element which may end in \"*\", indicating a wildcard. Wildcards are
+-- only allowed at the end and for a whole component of the qualified name,
+-- i.e. \"foo.*\" is ok, but not \"foo.b*\" or \"foo.*.bar\". A wildcard
+-- will match one or more components. To specify a default for all
+-- applicable elements, the whole pattern \"*\" is used.
 drSelector :: Lens' DocumentationRule (Maybe Text)
 drSelector
   = lens _drSelector (\ s a -> s{_drSelector = a})
@@ -266,7 +340,8 @@ drDeprecationDescription
   = lens _drDeprecationDescription
       (\ s a -> s{_drDeprecationDescription = a})
 
--- | Description of the selected API(s).
+-- | The description is the comment in front of the selected proto element,
+-- such as a message, a method, a \'service\' definition, or a field.
 drDescription :: Lens' DocumentationRule (Maybe Text)
 drDescription
   = lens _drDescription
@@ -292,45 +367,17 @@ instance ToJSON DocumentationRule where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -386,13 +433,87 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | A service identity in the Identity and Access Management API.
+--
+-- /See:/ 'v1Beta1ServiceIdentity' smart constructor.
+data V1Beta1ServiceIdentity =
+  V1Beta1ServiceIdentity'
+    { _vbsiEmail :: !(Maybe Text)
+    , _vbsiTag :: !(Maybe Text)
+    , _vbsiUniqueId :: !(Maybe Text)
+    , _vbsiName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1ServiceIdentity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbsiEmail'
+--
+-- * 'vbsiTag'
+--
+-- * 'vbsiUniqueId'
+--
+-- * 'vbsiName'
+v1Beta1ServiceIdentity
+    :: V1Beta1ServiceIdentity
+v1Beta1ServiceIdentity =
+  V1Beta1ServiceIdentity'
+    { _vbsiEmail = Nothing
+    , _vbsiTag = Nothing
+    , _vbsiUniqueId = Nothing
+    , _vbsiName = Nothing
+    }
+
+
+-- | The email address of the service identity.
+vbsiEmail :: Lens' V1Beta1ServiceIdentity (Maybe Text)
+vbsiEmail
+  = lens _vbsiEmail (\ s a -> s{_vbsiEmail = a})
+
+-- | The P4 service identity configuration tag. This must be defined in
+-- activation_grants. If not specified when creating the account, the tag
+-- is set to \"default\".
+vbsiTag :: Lens' V1Beta1ServiceIdentity (Maybe Text)
+vbsiTag = lens _vbsiTag (\ s a -> s{_vbsiTag = a})
+
+-- | The unique and stable id of the service identity.
+vbsiUniqueId :: Lens' V1Beta1ServiceIdentity (Maybe Text)
+vbsiUniqueId
+  = lens _vbsiUniqueId (\ s a -> s{_vbsiUniqueId = a})
+
+-- | P4 service identity resource name. An example name would be:
+-- \`services\/serviceconsumermanagement.googleapis.com\/projects\/123\/serviceIdentities\/default\`
+vbsiName :: Lens' V1Beta1ServiceIdentity (Maybe Text)
+vbsiName = lens _vbsiName (\ s a -> s{_vbsiName = a})
+
+instance FromJSON V1Beta1ServiceIdentity where
+        parseJSON
+          = withObject "V1Beta1ServiceIdentity"
+              (\ o ->
+                 V1Beta1ServiceIdentity' <$>
+                   (o .:? "email") <*> (o .:? "tag") <*>
+                     (o .:? "uniqueId")
+                     <*> (o .:? "name"))
+
+instance ToJSON V1Beta1ServiceIdentity where
+        toJSON V1Beta1ServiceIdentity'{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _vbsiEmail,
+                  ("tag" .=) <$> _vbsiTag,
+                  ("uniqueId" .=) <$> _vbsiUniqueId,
+                  ("name" .=) <$> _vbsiName])
+
 -- | Configuration of a specific billing destination (Currently only support
 -- bill against consumer project).
 --
 -- /See:/ 'billingDestination' smart constructor.
 data BillingDestination =
   BillingDestination'
-    { _bdMetrics           :: !(Maybe [Text])
+    { _bdMetrics :: !(Maybe [Text])
     , _bdMonitoredResource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -487,7 +608,7 @@ instance ToJSON Control where
 data AuthRequirement =
   AuthRequirement'
     { _arProviderId :: !(Maybe Text)
-    , _arAudiences  :: !(Maybe Text)
+    , _arAudiences :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -539,13 +660,58 @@ instance ToJSON AuthRequirement where
                  [("providerId" .=) <$> _arProviderId,
                   ("audiences" .=) <$> _arAudiences])
 
+-- | Response message for the \`GenerateServiceIdentity\` method. This
+-- response message is assigned to the \`response\` field of the returned
+-- Operation when that operation is done.
+--
+-- /See:/ 'v1Beta1GenerateServiceIdentityResponse' smart constructor.
+newtype V1Beta1GenerateServiceIdentityResponse =
+  V1Beta1GenerateServiceIdentityResponse'
+    { _vbgsirIdentity :: Maybe V1Beta1ServiceIdentity
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1GenerateServiceIdentityResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbgsirIdentity'
+v1Beta1GenerateServiceIdentityResponse
+    :: V1Beta1GenerateServiceIdentityResponse
+v1Beta1GenerateServiceIdentityResponse =
+  V1Beta1GenerateServiceIdentityResponse' {_vbgsirIdentity = Nothing}
+
+
+-- | ServiceIdentity that was created or retrieved.
+vbgsirIdentity :: Lens' V1Beta1GenerateServiceIdentityResponse (Maybe V1Beta1ServiceIdentity)
+vbgsirIdentity
+  = lens _vbgsirIdentity
+      (\ s a -> s{_vbgsirIdentity = a})
+
+instance FromJSON
+           V1Beta1GenerateServiceIdentityResponse
+         where
+        parseJSON
+          = withObject "V1Beta1GenerateServiceIdentityResponse"
+              (\ o ->
+                 V1Beta1GenerateServiceIdentityResponse' <$>
+                   (o .:? "identity"))
+
+instance ToJSON
+           V1Beta1GenerateServiceIdentityResponse
+         where
+        toJSON V1Beta1GenerateServiceIdentityResponse'{..}
+          = object
+              (catMaybes [("identity" .=) <$> _vbgsirIdentity])
+
 -- | \`Context\` defines which contexts an API requests. Example: context:
 -- rules: - selector: \"*\" requested: - google.rpc.context.ProjectContext
 -- - google.rpc.context.OriginContext The above specifies that all methods
 -- in the API request \`google.rpc.context.ProjectContext\` and
 -- \`google.rpc.context.OriginContext\`. Available context types are
 -- defined in package \`google.rpc.context\`. This also provides mechanism
--- to whitelist any protobuf message extension that can be sent in grpc
+-- to allowlist any protobuf message extension that can be sent in grpc
 -- metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For
 -- example, list any service specific protobuf types that can appear in
 -- grpc metadata as follows in your yaml file: Example: context: rules: -
@@ -596,7 +762,7 @@ instance ToJSON Context where
 data LoggingDestination =
   LoggingDestination'
     { _ldMonitoredResource :: !(Maybe Text)
-    , _ldLogs              :: !(Maybe [Text])
+    , _ldLogs :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -652,15 +818,17 @@ instance ToJSON LoggingDestination where
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor =
   MetricDescriptor'
-    { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
-    , _mdName        :: !(Maybe Text)
-    , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
+    { _mdMonitoredResourceTypes :: !(Maybe [Text])
+    , _mdMetricKind :: !(Maybe MetricDescriptorMetricKind)
+    , _mdName :: !(Maybe Text)
+    , _mdMetadata :: !(Maybe MetricDescriptorMetadata)
     , _mdDisplayName :: !(Maybe Text)
-    , _mdLabels      :: !(Maybe [LabelDescriptor])
-    , _mdType        :: !(Maybe Text)
-    , _mdValueType   :: !(Maybe MetricDescriptorValueType)
+    , _mdLabels :: !(Maybe [LabelDescriptor])
+    , _mdType :: !(Maybe Text)
+    , _mdValueType :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
-    , _mdUnit        :: !(Maybe Text)
+    , _mdUnit :: !(Maybe Text)
+    , _mdLaunchStage :: !(Maybe MetricDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -668,6 +836,8 @@ data MetricDescriptor =
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdMonitoredResourceTypes'
 --
 -- * 'mdMetricKind'
 --
@@ -686,11 +856,14 @@ data MetricDescriptor =
 -- * 'mdDescription'
 --
 -- * 'mdUnit'
+--
+-- * 'mdLaunchStage'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
   MetricDescriptor'
-    { _mdMetricKind = Nothing
+    { _mdMonitoredResourceTypes = Nothing
+    , _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
     , _mdDisplayName = Nothing
@@ -699,8 +872,20 @@ metricDescriptor =
     , _mdValueType = Nothing
     , _mdDescription = Nothing
     , _mdUnit = Nothing
+    , _mdLaunchStage = Nothing
     }
 
+
+-- | Read-only. If present, then a time series, which is identified partially
+-- by a metric type and a MonitoredResourceDescriptor, that is associated
+-- with this metric type can only be associated with one of the monitored
+-- resource types listed here.
+mdMonitoredResourceTypes :: Lens' MetricDescriptor [Text]
+mdMonitoredResourceTypes
+  = lens _mdMonitoredResourceTypes
+      (\ s a -> s{_mdMonitoredResourceTypes = a})
+      . _Default
+      . _Coerce
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of \`metric_kind\` and \`value_type\` might not
@@ -764,60 +949,101 @@ mdDescription
   = lens _mdDescription
       (\ s a -> s{_mdDescription = a})
 
--- | The unit in which the metric value is reported. It is only applicable if
--- the \`value_type\` is \`INT64\`, \`DOUBLE\`, or \`DISTRIBUTION\`. The
+-- | The units in which the metric value is reported. It is only applicable
+-- if the \`value_type\` is \`INT64\`, \`DOUBLE\`, or \`DISTRIBUTION\`. The
+-- \`unit\` defines the representation of the stored metric values.
+-- Different systems might scale the values to be more easily displayed (so
+-- a value of \`0.02kBy\` _might_ be displayed as \`20By\`, and a value of
+-- \`3523kBy\` _might_ be displayed as \`3.5MBy\`). However, if the
+-- \`unit\` is \`kBy\`, then the value of the metric is always in thousands
+-- of bytes, no matter how it might be displayed. If you want a custom
+-- metric to record the exact number of CPU-seconds used by a job, you can
+-- create an \`INT64 CUMULATIVE\` metric whose \`unit\` is \`s{CPU}\` (or
+-- equivalently \`1s{CPU}\` or just \`s\`). If the job uses 12,005
+-- CPU-seconds, then the value is written as \`12005\`. Alternatively, if
+-- you want a custom metric to record data in a more granular way, you can
+-- create a \`DOUBLE CUMULATIVE\` metric whose \`unit\` is \`ks{CPU}\`, and
+-- then write the value \`12.005\` (which is \`12005\/1000\`), or use
+-- \`Kis{CPU}\` and write \`11.723\` (which is \`12005\/1024\`). The
 -- supported units are a subset of [The Unified Code for Units of
--- Measure](http:\/\/unitsofmeasure.org\/ucum.html) standard: **Basic units
--- (UNIT)** * \`bit\` bit * \`By\` byte * \`s\` second * \`min\` minute *
--- \`h\` hour * \`d\` day **Prefixes (PREFIX)** * \`k\` kilo (10**3) *
--- \`M\` mega (10**6) * \`G\` giga (10**9) * \`T\` tera (10**12) * \`P\`
--- peta (10**15) * \`E\` exa (10**18) * \`Z\` zetta (10**21) * \`Y\` yotta
--- (10**24) * \`m\` milli (10**-3) * \`u\` micro (10**-6) * \`n\` nano
--- (10**-9) * \`p\` pico (10**-12) * \`f\` femto (10**-15) * \`a\` atto
--- (10**-18) * \`z\` zepto (10**-21) * \`y\` yocto (10**-24) * \`Ki\` kibi
--- (2**10) * \`Mi\` mebi (2**20) * \`Gi\` gibi (2**30) * \`Ti\` tebi
--- (2**40) **Grammar** The grammar also includes these connectors: * \`\/\`
--- division (as an infix operator, e.g. \`1\/s\`). * \`.\` multiplication
--- (as an infix operator, e.g. \`GBy.d\`) The grammar for a unit is as
+-- Measure](https:\/\/unitsofmeasure.org\/ucum.html) standard: **Basic
+-- units (UNIT)** * \`bit\` bit * \`By\` byte * \`s\` second * \`min\`
+-- minute * \`h\` hour * \`d\` day * \`1\` dimensionless **Prefixes
+-- (PREFIX)** * \`k\` kilo (10^3) * \`M\` mega (10^6) * \`G\` giga (10^9) *
+-- \`T\` tera (10^12) * \`P\` peta (10^15) * \`E\` exa (10^18) * \`Z\`
+-- zetta (10^21) * \`Y\` yotta (10^24) * \`m\` milli (10^-3) * \`u\` micro
+-- (10^-6) * \`n\` nano (10^-9) * \`p\` pico (10^-12) * \`f\` femto
+-- (10^-15) * \`a\` atto (10^-18) * \`z\` zepto (10^-21) * \`y\` yocto
+-- (10^-24) * \`Ki\` kibi (2^10) * \`Mi\` mebi (2^20) * \`Gi\` gibi (2^30)
+-- * \`Ti\` tebi (2^40) * \`Pi\` pebi (2^50) **Grammar** The grammar also
+-- includes these connectors: * \`\/\` division or ratio (as an infix
+-- operator). For examples, \`kBy\/{email}\` or \`MiBy\/10ms\` (although
+-- you should almost never have \`\/s\` in a metric \`unit\`; rates should
+-- always be computed at query time from the underlying cumulative or delta
+-- value). * \`.\` multiplication or composition (as an infix operator).
+-- For examples, \`GBy.d\` or \`k{watt}.h\`. The grammar for a unit is as
 -- follows: Expression = Component { \".\" Component } { \"\/\" Component }
 -- ; Component = ( [ PREFIX ] UNIT | \"%\" ) [ Annotation ] | Annotation |
 -- \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: * \`Annotation\` is just
--- a comment if it follows a \`UNIT\` and is equivalent to \`1\` if it is
--- used alone. For examples, \`{requests}\/s == 1\/s\`,
--- \`By{transmitted}\/s == By\/s\`. * \`NAME\` is a sequence of non-blank
--- printable ASCII characters not containing \'{\' or \'}\'. * \`1\`
--- represents dimensionless value 1, such as in \`1\/s\`. * \`%\`
--- represents dimensionless value 1\/100, and annotates values giving a
--- percentage.
+-- a comment if it follows a \`UNIT\`. If the annotation is used alone,
+-- then the unit is equivalent to \`1\`. For examples, \`{request}\/s ==
+-- 1\/s\`, \`By{transmitted}\/s == By\/s\`. * \`NAME\` is a sequence of
+-- non-blank printable ASCII characters not containing \`{\` or \`}\`. *
+-- \`1\` represents a unitary [dimensionless
+-- unit](https:\/\/en.wikipedia.org\/wiki\/Dimensionless_quantity) of 1,
+-- such as in \`1\/s\`. It is typically used when none of the basic units
+-- are appropriate. For example, \"new users per day\" can be represented
+-- as \`1\/d\` or \`{new-users}\/d\` (and a metric value \`5\` would mean
+-- \"5 new users). Alternatively, \"thousands of page views per day\" would
+-- be represented as \`1000\/d\` or \`k1\/d\` or \`k{page_views}\/d\` (and
+-- a metric value of \`5.3\` would mean \"5300 page views per day\"). *
+-- \`%\` represents dimensionless value of 1\/100, and annotates values
+-- giving a percentage (so the metric values are typically in the range of
+-- 0..100, and a metric value \`3\` means \"3 percent\"). * \`10^2.%\`
+-- indicates a metric contains a ratio, typically in the range 0..1, that
+-- will be multiplied by 100 and displayed as a percentage (so a metric
+-- value \`0.03\` means \"3 percent\").
 mdUnit :: Lens' MetricDescriptor (Maybe Text)
 mdUnit = lens _mdUnit (\ s a -> s{_mdUnit = a})
+
+-- | Optional. The launch stage of the metric definition.
+mdLaunchStage :: Lens' MetricDescriptor (Maybe MetricDescriptorLaunchStage)
+mdLaunchStage
+  = lens _mdLaunchStage
+      (\ s a -> s{_mdLaunchStage = a})
 
 instance FromJSON MetricDescriptor where
         parseJSON
           = withObject "MetricDescriptor"
               (\ o ->
                  MetricDescriptor' <$>
-                   (o .:? "metricKind") <*> (o .:? "name") <*>
-                     (o .:? "metadata")
+                   (o .:? "monitoredResourceTypes" .!= mempty) <*>
+                     (o .:? "metricKind")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata")
                      <*> (o .:? "displayName")
                      <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
                      <*> (o .:? "valueType")
                      <*> (o .:? "description")
-                     <*> (o .:? "unit"))
+                     <*> (o .:? "unit")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON MetricDescriptor where
         toJSON MetricDescriptor'{..}
           = object
               (catMaybes
-                 [("metricKind" .=) <$> _mdMetricKind,
+                 [("monitoredResourceTypes" .=) <$>
+                    _mdMonitoredResourceTypes,
+                  ("metricKind" .=) <$> _mdMetricKind,
                   ("name" .=) <$> _mdName,
                   ("metadata" .=) <$> _mdMetadata,
                   ("displayName" .=) <$> _mdDisplayName,
                   ("labels" .=) <$> _mdLabels, ("type" .=) <$> _mdType,
                   ("valueType" .=) <$> _mdValueType,
                   ("description" .=) <$> _mdDescription,
-                  ("unit" .=) <$> _mdUnit])
+                  ("unit" .=) <$> _mdUnit,
+                  ("launchStage" .=) <$> _mdLaunchStage])
 
 -- | The response message for Operations.ListOperations.
 --
@@ -825,7 +1051,7 @@ instance ToJSON MetricDescriptor where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -901,13 +1127,14 @@ instance ToJSON CancelOperationRequest where
 -- /See:/ 'backendRule' smart constructor.
 data BackendRule =
   BackendRule'
-    { _brJwtAudience       :: !(Maybe Text)
-    , _brSelector          :: !(Maybe Text)
-    , _brMinDeadline       :: !(Maybe (Textual Double))
-    , _brAddress           :: !(Maybe Text)
+    { _brJwtAudience :: !(Maybe Text)
+    , _brSelector :: !(Maybe Text)
+    , _brAddress :: !(Maybe Text)
+    , _brProtocol :: !(Maybe Text)
+    , _brDisableAuth :: !(Maybe Bool)
     , _brOperationDeadline :: !(Maybe (Textual Double))
-    , _brDeadline          :: !(Maybe (Textual Double))
-    , _brPathTranslation   :: !(Maybe BackendRulePathTranslation)
+    , _brDeadline :: !(Maybe (Textual Double))
+    , _brPathTranslation :: !(Maybe BackendRulePathTranslation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -920,9 +1147,11 @@ data BackendRule =
 --
 -- * 'brSelector'
 --
--- * 'brMinDeadline'
---
 -- * 'brAddress'
+--
+-- * 'brProtocol'
+--
+-- * 'brDisableAuth'
 --
 -- * 'brOperationDeadline'
 --
@@ -935,15 +1164,18 @@ backendRule =
   BackendRule'
     { _brJwtAudience = Nothing
     , _brSelector = Nothing
-    , _brMinDeadline = Nothing
     , _brAddress = Nothing
+    , _brProtocol = Nothing
+    , _brDisableAuth = Nothing
     , _brOperationDeadline = Nothing
     , _brDeadline = Nothing
     , _brPathTranslation = Nothing
     }
 
 
--- | The JWT audience is used when generating a JWT id token for the backend.
+-- | The JWT audience is used when generating a JWT ID token for the backend.
+-- This ID token will be added in the HTTP \"authorization\" header, and
+-- sent to the backend.
 brJwtAudience :: Lens' BackendRule (Maybe Text)
 brJwtAudience
   = lens _brJwtAudience
@@ -955,18 +1187,40 @@ brSelector :: Lens' BackendRule (Maybe Text)
 brSelector
   = lens _brSelector (\ s a -> s{_brSelector = a})
 
--- | Minimum deadline in seconds needed for this method. Calls having
--- deadline value lower than this will be rejected.
-brMinDeadline :: Lens' BackendRule (Maybe Double)
-brMinDeadline
-  = lens _brMinDeadline
-      (\ s a -> s{_brMinDeadline = a})
-      . mapping _Coerce
-
--- | The address of the API backend.
+-- | The address of the API backend. The scheme is used to determine the
+-- backend protocol and security. The following schemes are accepted:
+-- SCHEME PROTOCOL SECURITY http:\/\/ HTTP None https:\/\/ HTTP TLS
+-- grpc:\/\/ gRPC None grpcs:\/\/ gRPC TLS It is recommended to explicitly
+-- include a scheme. Leaving out the scheme may cause constrasting
+-- behaviors across platforms. If the port is unspecified, the default is:
+-- - 80 for schemes without TLS - 443 for schemes with TLS For HTTP
+-- backends, use protocol to specify the protocol version.
 brAddress :: Lens' BackendRule (Maybe Text)
 brAddress
   = lens _brAddress (\ s a -> s{_brAddress = a})
+
+-- | The protocol used for sending a request to the backend. The supported
+-- values are \"http\/1.1\" and \"h2\". The default value is inferred from
+-- the scheme in the address field: SCHEME PROTOCOL http:\/\/ http\/1.1
+-- https:\/\/ http\/1.1 grpc:\/\/ h2 grpcs:\/\/ h2 For secure HTTP backends
+-- (https:\/\/) that support HTTP\/2, set this field to \"h2\" for improved
+-- performance. Configuring this field to non-default values is only
+-- supported for secure HTTP backends. This field will be ignored for all
+-- other backends. See
+-- https:\/\/www.iana.org\/assignments\/tls-extensiontype-values\/tls-extensiontype-values.xhtml#alpn-protocol-ids
+-- for more details on the supported values.
+brProtocol :: Lens' BackendRule (Maybe Text)
+brProtocol
+  = lens _brProtocol (\ s a -> s{_brProtocol = a})
+
+-- | When disable_auth is true, a JWT ID token won\'t be generated and the
+-- original \"Authorization\" HTTP header will be preserved. If the header
+-- is used to carry the original token and is expected by the backend, this
+-- field must be set to true to preserve the header.
+brDisableAuth :: Lens' BackendRule (Maybe Bool)
+brDisableAuth
+  = lens _brDisableAuth
+      (\ s a -> s{_brDisableAuth = a})
 
 -- | The number of seconds to wait for the completion of a long running
 -- operation. The default is no deadline.
@@ -977,8 +1231,7 @@ brOperationDeadline
       . mapping _Coerce
 
 -- | The number of seconds to wait for a response from a request. The default
--- deadline for gRPC is infinite (no deadline) and HTTP requests is 5
--- seconds.
+-- varies based on the request protocol and deployment environment.
 brDeadline :: Lens' BackendRule (Maybe Double)
 brDeadline
   = lens _brDeadline (\ s a -> s{_brDeadline = a}) .
@@ -995,8 +1248,9 @@ instance FromJSON BackendRule where
               (\ o ->
                  BackendRule' <$>
                    (o .:? "jwtAudience") <*> (o .:? "selector") <*>
-                     (o .:? "minDeadline")
-                     <*> (o .:? "address")
+                     (o .:? "address")
+                     <*> (o .:? "protocol")
+                     <*> (o .:? "disableAuth")
                      <*> (o .:? "operationDeadline")
                      <*> (o .:? "deadline")
                      <*> (o .:? "pathTranslation"))
@@ -1007,8 +1261,9 @@ instance ToJSON BackendRule where
               (catMaybes
                  [("jwtAudience" .=) <$> _brJwtAudience,
                   ("selector" .=) <$> _brSelector,
-                  ("minDeadline" .=) <$> _brMinDeadline,
                   ("address" .=) <$> _brAddress,
+                  ("protocol" .=) <$> _brProtocol,
+                  ("disableAuth" .=) <$> _brDisableAuth,
                   ("operationDeadline" .=) <$> _brOperationDeadline,
                   ("deadline" .=) <$> _brDeadline,
                   ("pathTranslation" .=) <$> _brPathTranslation])
@@ -1051,12 +1306,59 @@ instance ToJSON SourceContext where
           = object
               (catMaybes [("fileName" .=) <$> _scFileName])
 
+-- | Response message for ImportProducerQuotaPolicies
+--
+-- /See:/ 'v1Beta1ImportProducerQuotaPoliciesResponse' smart constructor.
+newtype V1Beta1ImportProducerQuotaPoliciesResponse =
+  V1Beta1ImportProducerQuotaPoliciesResponse'
+    { _vbipqprPolicies :: Maybe [V1Beta1ProducerQuotaPolicy]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1ImportProducerQuotaPoliciesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbipqprPolicies'
+v1Beta1ImportProducerQuotaPoliciesResponse
+    :: V1Beta1ImportProducerQuotaPoliciesResponse
+v1Beta1ImportProducerQuotaPoliciesResponse =
+  V1Beta1ImportProducerQuotaPoliciesResponse' {_vbipqprPolicies = Nothing}
+
+
+-- | The policies that were created from the imported data.
+vbipqprPolicies :: Lens' V1Beta1ImportProducerQuotaPoliciesResponse [V1Beta1ProducerQuotaPolicy]
+vbipqprPolicies
+  = lens _vbipqprPolicies
+      (\ s a -> s{_vbipqprPolicies = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+           V1Beta1ImportProducerQuotaPoliciesResponse
+         where
+        parseJSON
+          = withObject
+              "V1Beta1ImportProducerQuotaPoliciesResponse"
+              (\ o ->
+                 V1Beta1ImportProducerQuotaPoliciesResponse' <$>
+                   (o .:? "policies" .!= mempty))
+
+instance ToJSON
+           V1Beta1ImportProducerQuotaPoliciesResponse
+         where
+        toJSON
+          V1Beta1ImportProducerQuotaPoliciesResponse'{..}
+          = object
+              (catMaybes [("policies" .=) <$> _vbipqprPolicies])
+
 -- | Response for the search query.
 --
 -- /See:/ 'searchTenancyUnitsResponse' smart constructor.
 data SearchTenancyUnitsResponse =
   SearchTenancyUnitsResponse'
-    { _sturTenancyUnits  :: !(Maybe [TenancyUnit])
+    { _sturTenancyUnits :: !(Maybe [TenancyUnit])
     , _sturNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1110,16 +1412,16 @@ instance ToJSON SearchTenancyUnitsResponse where
 -- /See:/ 'field' smart constructor.
 data Field =
   Field'
-    { _fKind         :: !(Maybe FieldKind)
-    , _fOneofIndex   :: !(Maybe (Textual Int32))
-    , _fName         :: !(Maybe Text)
-    , _fJSONName     :: !(Maybe Text)
-    , _fCardinality  :: !(Maybe FieldCardinality)
-    , _fOptions      :: !(Maybe [Option])
-    , _fPacked       :: !(Maybe Bool)
+    { _fKind :: !(Maybe FieldKind)
+    , _fOneofIndex :: !(Maybe (Textual Int32))
+    , _fName :: !(Maybe Text)
+    , _fJSONName :: !(Maybe Text)
+    , _fCardinality :: !(Maybe FieldCardinality)
+    , _fOptions :: !(Maybe [Option])
+    , _fPacked :: !(Maybe Bool)
     , _fDefaultValue :: !(Maybe Text)
-    , _fNumber       :: !(Maybe (Textual Int32))
-    , _fTypeURL      :: !(Maybe Text)
+    , _fNumber :: !(Maybe (Textual Int32))
+    , _fTypeURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1254,7 +1556,7 @@ instance ToJSON Field where
 -- /See:/ 'metricRule' smart constructor.
 data MetricRule =
   MetricRule'
-    { _mrSelector    :: !(Maybe Text)
+    { _mrSelector :: !(Maybe Text)
     , _mrMetricCosts :: !(Maybe MetricRuleMetricCosts)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1306,14 +1608,14 @@ instance ToJSON MetricRule where
 -- override on a limit with the unit 1\/{project}\/{region} could contain
 -- an entry with the key \"region\" and the value \"us-east-1\"; the
 -- override is only applied to quota consumed in that region. This map has
--- the following restrictions: - Keys that are not defined in the limit\'s
+-- the following restrictions: * Keys that are not defined in the limit\'s
 -- unit are not valid keys. Any string appearing in {brackets} in the unit
--- (besides {project} or {user}) is a defined key. - \"project\" is not a
+-- (besides {project} or {user}) is a defined key. * \"project\" is not a
 -- valid key; the project is already specified in the parent resource name.
--- - \"user\" is not a valid key; the API does not support quota overrides
--- that apply only to a specific user. - If \"region\" appears as a key,
--- its value must be a valid Cloud region. - If \"zone\" appears as a key,
--- its value must be a valid Cloud zone. - If any valid key other than
+-- * \"user\" is not a valid key; the API does not support quota overrides
+-- that apply only to a specific user. * If \"region\" appears as a key,
+-- its value must be a valid Cloud region. * If \"zone\" appears as a key,
+-- its value must be a valid Cloud zone. * If any valid key other than
 -- \"region\" or \"zone\" appears in the map, then all valid keys other
 -- than \"region\" or \"zone\" must also appear in the map.
 --
@@ -1354,15 +1656,18 @@ instance FromJSON V1Beta1QuotaOverrideDimensions
 instance ToJSON V1Beta1QuotaOverrideDimensions where
         toJSON = toJSON . _vbqodAddtional
 
--- | \`Service\` is the root object of Google service configuration schema.
--- It describes basic information about a service, such as the name and the
--- title, and delegates other aspects to sub-sections. Each sub-section is
--- either a proto message or a repeated proto message that configures a
--- specific aspect, such as auth. See each proto message definition for
--- details. Example: type: google.api.Service config_version: 3 name:
+-- | \`Service\` is the root object of Google API service configuration
+-- (service config). It describes the basic information about a logical
+-- service, such as the service name and the user-facing title, and
+-- delegates other aspects to sub-sections. Each sub-section is either a
+-- proto message or a repeated proto message that configures a specific
+-- aspect, such as auth. For more information, see each proto message
+-- definition. Example: type: google.api.Service name:
 -- calendar.googleapis.com title: Google Calendar API apis: - name:
--- google.calendar.v3.Calendar authentication: providers: - id:
--- google_calendar_auth jwks_uri:
+-- google.calendar.v3.Calendar visibility: rules: - selector:
+-- \"google.calendar.v3.*\" restriction: PREVIEW backend: rules: -
+-- selector: \"google.calendar.v3.*\" address: calendar.example.com
+-- authentication: providers: - id: google_calendar_auth jwks_uri:
 -- https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer:
 -- https:\/\/securetoken.google.com rules: - selector: \"*\" requirements:
 -- provider_id: google_calendar_auth
@@ -1370,34 +1675,33 @@ instance ToJSON V1Beta1QuotaOverrideDimensions where
 -- /See:/ 'service' smart constructor.
 data Service =
   Service'
-    { _sControl            :: !(Maybe Control)
-    , _sMetrics            :: !(Maybe [MetricDescriptor])
-    , _sContext            :: !(Maybe Context)
-    , _sAuthentication     :: !(Maybe Authentication)
-    , _sAPIs               :: !(Maybe [API])
-    , _sTypes              :: !(Maybe [Type])
-    , _sSystemTypes        :: !(Maybe [Type])
-    , _sExperimental       :: !(Maybe Experimental)
+    { _sControl :: !(Maybe Control)
+    , _sMetrics :: !(Maybe [MetricDescriptor])
+    , _sContext :: !(Maybe Context)
+    , _sAuthentication :: !(Maybe Authentication)
+    , _sAPIs :: !(Maybe [API])
+    , _sTypes :: !(Maybe [Type])
+    , _sSystemTypes :: !(Maybe [Type])
     , _sMonitoredResources :: !(Maybe [MonitoredResourceDescriptor])
-    , _sBackend            :: !(Maybe Backend)
-    , _sMonitoring         :: !(Maybe Monitoring)
-    , _sName               :: !(Maybe Text)
-    , _sSystemParameters   :: !(Maybe SystemParameters)
-    , _sLogs               :: !(Maybe [LogDescriptor])
-    , _sDocumentation      :: !(Maybe Documentation)
-    , _sId                 :: !(Maybe Text)
-    , _sUsage              :: !(Maybe Usage)
-    , _sEndpoints          :: !(Maybe [Endpoint])
-    , _sEnums              :: !(Maybe [Enum'])
-    , _sConfigVersion      :: !(Maybe (Textual Word32))
-    , _sHTTP               :: !(Maybe HTTP)
-    , _sTitle              :: !(Maybe Text)
-    , _sProducerProjectId  :: !(Maybe Text)
-    , _sSourceInfo         :: !(Maybe SourceInfo)
-    , _sBilling            :: !(Maybe Billing)
-    , _sCustomError        :: !(Maybe CustomError)
-    , _sLogging            :: !(Maybe Logging)
-    , _sQuota              :: !(Maybe Quota)
+    , _sBackend :: !(Maybe Backend)
+    , _sMonitoring :: !(Maybe Monitoring)
+    , _sName :: !(Maybe Text)
+    , _sSystemParameters :: !(Maybe SystemParameters)
+    , _sLogs :: !(Maybe [LogDescriptor])
+    , _sDocumentation :: !(Maybe Documentation)
+    , _sId :: !(Maybe Text)
+    , _sUsage :: !(Maybe Usage)
+    , _sEndpoints :: !(Maybe [Endpoint])
+    , _sEnums :: !(Maybe [Enum'])
+    , _sConfigVersion :: !(Maybe (Textual Word32))
+    , _sHTTP :: !(Maybe HTTP)
+    , _sTitle :: !(Maybe Text)
+    , _sProducerProjectId :: !(Maybe Text)
+    , _sSourceInfo :: !(Maybe SourceInfo)
+    , _sBilling :: !(Maybe Billing)
+    , _sCustomError :: !(Maybe CustomError)
+    , _sLogging :: !(Maybe Logging)
+    , _sQuota :: !(Maybe Quota)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1419,8 +1723,6 @@ data Service =
 -- * 'sTypes'
 --
 -- * 'sSystemTypes'
---
--- * 'sExperimental'
 --
 -- * 'sMonitoredResources'
 --
@@ -1472,7 +1774,6 @@ service =
     , _sAPIs = Nothing
     , _sTypes = Nothing
     , _sSystemTypes = Nothing
-    , _sExperimental = Nothing
     , _sMonitoredResources = Nothing
     , _sBackend = Nothing
     , _sMonitoring = Nothing
@@ -1532,7 +1833,8 @@ sAPIs
 -- referenced directly or indirectly by the \`apis\` are automatically
 -- included. Messages which are not referenced but shall be included, such
 -- as types used by the \`google.protobuf.Any\` type, should be listed here
--- by name. Example: types: - name: google.protobuf.Int32
+-- by name by the configuration author. Example: types: - name:
+-- google.protobuf.Int32
 sTypes :: Lens' Service [Type]
 sTypes
   = lens _sTypes (\ s a -> s{_sTypes = a}) . _Default .
@@ -1548,12 +1850,6 @@ sSystemTypes
   = lens _sSystemTypes (\ s a -> s{_sSystemTypes = a})
       . _Default
       . _Coerce
-
--- | Experimental configuration.
-sExperimental :: Lens' Service (Maybe Experimental)
-sExperimental
-  = lens _sExperimental
-      (\ s a -> s{_sExperimental = a})
 
 -- | Defines the monitored resources used by this service. This is required
 -- by the Service.monitoring and Service.logging configurations.
@@ -1599,8 +1895,9 @@ sDocumentation
       (\ s a -> s{_sDocumentation = a})
 
 -- | A unique ID for a specific instance of this message, typically assigned
--- by the client for tracking purpose. If empty, the server may choose to
--- generate one instead. Must be no longer than 60 characters.
+-- by the client for tracking purpose. Must be no longer than 63 characters
+-- and only lower case letters, digits, \'.\', \'_\' and \'-\' are allowed.
+-- If empty, the server may choose to generate one instead.
 sId :: Lens' Service (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
@@ -1620,16 +1917,15 @@ sEndpoints
 -- | A list of all enum types included in this API service. Enums referenced
 -- directly or indirectly by the \`apis\` are automatically included. Enums
 -- which are not referenced but shall be included should be listed here by
--- name. Example: enums: - name: google.someapi.v1.SomeEnum
+-- name by the configuration author. Example: enums: - name:
+-- google.someapi.v1.SomeEnum
 sEnums :: Lens' Service [Enum']
 sEnums
   = lens _sEnums (\ s a -> s{_sEnums = a}) . _Default .
       _Coerce
 
--- | The semantic version of the service configuration. The config version
--- affects the interpretation of the service configuration. For example,
--- certain features are enabled by default for certain config versions. The
--- latest config version is \`3\`.
+-- | Obsolete. Do not use. This field has no semantic meaning. The service
+-- config compiler always sets this field to \`3\`.
 sConfigVersion :: Lens' Service (Maybe Word32)
 sConfigVersion
   = lens _sConfigVersion
@@ -1640,7 +1936,8 @@ sConfigVersion
 sHTTP :: Lens' Service (Maybe HTTP)
 sHTTP = lens _sHTTP (\ s a -> s{_sHTTP = a})
 
--- | The product title for this service.
+-- | The product title for this service, it is the name displayed in Google
+-- Cloud Console.
 sTitle :: Lens' Service (Maybe Text)
 sTitle = lens _sTitle (\ s a -> s{_sTitle = a})
 
@@ -1683,7 +1980,6 @@ instance FromJSON Service where
                      <*> (o .:? "apis" .!= mempty)
                      <*> (o .:? "types" .!= mempty)
                      <*> (o .:? "systemTypes" .!= mempty)
-                     <*> (o .:? "experimental")
                      <*> (o .:? "monitoredResources" .!= mempty)
                      <*> (o .:? "backend")
                      <*> (o .:? "monitoring")
@@ -1715,7 +2011,6 @@ instance ToJSON Service where
                   ("authentication" .=) <$> _sAuthentication,
                   ("apis" .=) <$> _sAPIs, ("types" .=) <$> _sTypes,
                   ("systemTypes" .=) <$> _sSystemTypes,
-                  ("experimental" .=) <$> _sExperimental,
                   ("monitoredResources" .=) <$> _sMonitoredResources,
                   ("backend" .=) <$> _sBackend,
                   ("monitoring" .=) <$> _sMonitoring,
@@ -1741,10 +2036,10 @@ instance ToJSON Service where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1799,7 +2094,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1906,7 +2202,7 @@ instance ToJSON
 data CustomErrorRule =
   CustomErrorRule'
     { _cerIsErrorType :: !(Maybe Bool)
-    , _cerSelector    :: !(Maybe Text)
+    , _cerSelector :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2021,9 +2317,9 @@ instance ToJSON OptionValue where
 -- /See:/ 'enumValue' smart constructor.
 data EnumValue =
   EnumValue'
-    { _evName    :: !(Maybe Text)
+    { _evName :: !(Maybe Text)
     , _evOptions :: !(Maybe [Option])
-    , _evNumber  :: !(Maybe (Textual Int32))
+    , _evNumber :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2076,18 +2372,20 @@ instance ToJSON EnumValue where
                   ("options" .=) <$> _evOptions,
                   ("number" .=) <$> _evNumber])
 
--- | \`Authentication\` defines the authentication configuration for an API.
--- Example for an API targeted for external use: name:
+-- | \`Authentication\` defines the authentication configuration for API
+-- methods provided by an API service. Example: name:
 -- calendar.googleapis.com authentication: providers: - id:
 -- google_calendar_auth jwks_uri:
 -- https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer:
 -- https:\/\/securetoken.google.com rules: - selector: \"*\" requirements:
--- provider_id: google_calendar_auth
+-- provider_id: google_calendar_auth - selector: google.calendar.Delegate
+-- oauth: canonical_scopes:
+-- https:\/\/www.googleapis.com\/auth\/calendar.read
 --
 -- /See:/ 'authentication' smart constructor.
 data Authentication =
   Authentication'
-    { _aRules     :: !(Maybe [AuthenticationRule])
+    { _aRules :: !(Maybe [AuthenticationRule])
     , _aProviders :: !(Maybe [AuthProvider])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2181,7 +2479,7 @@ instance ToJSON V1EnableConsumerResponse where
 -- The mixin construct implies that all methods in \`AccessControl\` are
 -- also declared with same name and request\/response types in \`Storage\`.
 -- A documentation generator or annotation processor will see the effective
--- \`Storage.GetAcl\` method after inherting documentation and annotations
+-- \`Storage.GetAcl\` method after inheriting documentation and annotations
 -- as follows: service Storage { \/\/ Get the underlying ACL object. rpc
 -- GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get =
 -- \"\/v2\/{resource=**}:getAcl\"; } ... } Note how the version in the path
@@ -2298,9 +2596,9 @@ instance ToJSON CustomHTTPPattern where
 -- /See:/ 'usageRule' smart constructor.
 data UsageRule =
   UsageRule'
-    { _urSelector               :: !(Maybe Text)
+    { _urSelector :: !(Maybe Text)
     , _urAllowUnregisteredCalls :: !(Maybe Bool)
-    , _urSkipServiceControl     :: !(Maybe Bool)
+    , _urSkipServiceControl :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2406,8 +2704,8 @@ instance ToJSON StatusDetailsItem where
 data Page =
   Page'
     { _pSubpages :: !(Maybe [Page])
-    , _pContent  :: !(Maybe Text)
-    , _pName     :: !(Maybe Text)
+    , _pContent :: !(Maybe Text)
+    , _pName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2434,8 +2732,9 @@ pSubpages
       _Default
       . _Coerce
 
--- | The Markdown content of the page. You can use '(== include {path} ==)'
--- to include content from a Markdown file.
+-- | The Markdown content of the page. You can use (== include {path} ==) to
+-- include content from a Markdown file. The content can be used to produce
+-- the documentation page such as HTML format page.
 pContent :: Lens' Page (Maybe Text)
 pContent = lens _pContent (\ s a -> s{_pContent = a})
 
@@ -2443,17 +2742,10 @@ pContent = lens _pContent (\ s a -> s{_pContent = a})
 -- generate URI of the page, text of the link to this page in navigation,
 -- etc. The full page name (start from the root page name to this page
 -- concatenated with \`.\`) can be used as reference to the page in your
--- documentation. For example:
---
--- > pages:
--- > - name: Tutorial
--- >   content: (== include tutorial.md ==)
--- >   subpages:
--- >   - name: Java
--- >     content: (== include tutorial_java.md ==)
---
--- You can reference \`Java\` page using Markdown reference link syntax:
--- \`Java\`.
+-- documentation. For example: pages: - name: Tutorial content: (== include
+-- tutorial.md ==) subpages: - name: Java content: (== include
+-- tutorial_java.md ==) You can reference \`Java\` page using Markdown
+-- reference link syntax: \`Java\`.
 pName :: Lens' Page (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
@@ -2525,10 +2817,10 @@ instance ToJSON V1GenerateServiceAccountResponse
 -- /See:/ 'authenticationRule' smart constructor.
 data AuthenticationRule =
   AuthenticationRule'
-    { _arRequirements           :: !(Maybe [AuthRequirement])
-    , _arSelector               :: !(Maybe Text)
+    { _arRequirements :: !(Maybe [AuthRequirement])
+    , _arSelector :: !(Maybe Text)
     , _arAllowWithoutCredential :: !(Maybe Bool)
-    , _arOAuth                  :: !(Maybe OAuthRequirements)
+    , _arOAuth :: !(Maybe OAuthRequirements)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2569,7 +2861,8 @@ arSelector :: Lens' AuthenticationRule (Maybe Text)
 arSelector
   = lens _arSelector (\ s a -> s{_arSelector = a})
 
--- | If true, the service accepts API keys without any other credential.
+-- | If true, the service accepts API keys without any other credential. This
+-- flag only applies to HTTP and gRPC requests.
 arAllowWithoutCredential :: Lens' AuthenticationRule (Maybe Bool)
 arAllowWithoutCredential
   = lens _arAllowWithoutCredential
@@ -2645,7 +2938,7 @@ instance ToJSON V1AddVisibilityLabelsResponse where
 -- /See:/ 'serviceAccountConfig' smart constructor.
 data ServiceAccountConfig =
   ServiceAccountConfig'
-    { _sacAccountId          :: !(Maybe Text)
+    { _sacAccountId :: !(Maybe Text)
     , _sacTenantProjectRoles :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2703,11 +2996,12 @@ instance ToJSON ServiceAccountConfig where
 -- /See:/ 'v1Beta1QuotaOverride' smart constructor.
 data V1Beta1QuotaOverride =
   V1Beta1QuotaOverride'
-    { _vbqoMetric        :: !(Maybe Text)
+    { _vbqoAdminOverrideAncestor :: !(Maybe Text)
+    , _vbqoMetric :: !(Maybe Text)
     , _vbqoOverrideValue :: !(Maybe (Textual Int64))
-    , _vbqoName          :: !(Maybe Text)
-    , _vbqoDimensions    :: !(Maybe V1Beta1QuotaOverrideDimensions)
-    , _vbqoUnit          :: !(Maybe Text)
+    , _vbqoName :: !(Maybe Text)
+    , _vbqoDimensions :: !(Maybe V1Beta1QuotaOverrideDimensions)
+    , _vbqoUnit :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2715,6 +3009,8 @@ data V1Beta1QuotaOverride =
 -- | Creates a value of 'V1Beta1QuotaOverride' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbqoAdminOverrideAncestor'
 --
 -- * 'vbqoMetric'
 --
@@ -2729,13 +3025,22 @@ v1Beta1QuotaOverride
     :: V1Beta1QuotaOverride
 v1Beta1QuotaOverride =
   V1Beta1QuotaOverride'
-    { _vbqoMetric = Nothing
+    { _vbqoAdminOverrideAncestor = Nothing
+    , _vbqoMetric = Nothing
     , _vbqoOverrideValue = Nothing
     , _vbqoName = Nothing
     , _vbqoDimensions = Nothing
     , _vbqoUnit = Nothing
     }
 
+
+-- | The resource name of the ancestor that requested the override. For
+-- example: \"organizations\/12345\" or \"folders\/67890\". Used by admin
+-- overrides only.
+vbqoAdminOverrideAncestor :: Lens' V1Beta1QuotaOverride (Maybe Text)
+vbqoAdminOverrideAncestor
+  = lens _vbqoAdminOverrideAncestor
+      (\ s a -> s{_vbqoAdminOverrideAncestor = a})
 
 -- | The name of the metric to which this override applies. An example name
 -- would be: \`compute.googleapis.com\/cpus\`
@@ -2761,14 +3066,14 @@ vbqoName = lens _vbqoName (\ s a -> s{_vbqoName = a})
 -- override on a limit with the unit 1\/{project}\/{region} could contain
 -- an entry with the key \"region\" and the value \"us-east-1\"; the
 -- override is only applied to quota consumed in that region. This map has
--- the following restrictions: - Keys that are not defined in the limit\'s
+-- the following restrictions: * Keys that are not defined in the limit\'s
 -- unit are not valid keys. Any string appearing in {brackets} in the unit
--- (besides {project} or {user}) is a defined key. - \"project\" is not a
+-- (besides {project} or {user}) is a defined key. * \"project\" is not a
 -- valid key; the project is already specified in the parent resource name.
--- - \"user\" is not a valid key; the API does not support quota overrides
--- that apply only to a specific user. - If \"region\" appears as a key,
--- its value must be a valid Cloud region. - If \"zone\" appears as a key,
--- its value must be a valid Cloud zone. - If any valid key other than
+-- * \"user\" is not a valid key; the API does not support quota overrides
+-- that apply only to a specific user. * If \"region\" appears as a key,
+-- its value must be a valid Cloud region. * If \"zone\" appears as a key,
+-- its value must be a valid Cloud zone. * If any valid key other than
 -- \"region\" or \"zone\" appears in the map, then all valid keys other
 -- than \"region\" or \"zone\" must also appear in the map.
 vbqoDimensions :: Lens' V1Beta1QuotaOverride (Maybe V1Beta1QuotaOverrideDimensions)
@@ -2788,8 +3093,9 @@ instance FromJSON V1Beta1QuotaOverride where
           = withObject "V1Beta1QuotaOverride"
               (\ o ->
                  V1Beta1QuotaOverride' <$>
-                   (o .:? "metric") <*> (o .:? "overrideValue") <*>
-                     (o .:? "name")
+                   (o .:? "adminOverrideAncestor") <*> (o .:? "metric")
+                     <*> (o .:? "overrideValue")
+                     <*> (o .:? "name")
                      <*> (o .:? "dimensions")
                      <*> (o .:? "unit"))
 
@@ -2797,7 +3103,9 @@ instance ToJSON V1Beta1QuotaOverride where
         toJSON V1Beta1QuotaOverride'{..}
           = object
               (catMaybes
-                 [("metric" .=) <$> _vbqoMetric,
+                 [("adminOverrideAncestor" .=) <$>
+                    _vbqoAdminOverrideAncestor,
+                  ("metric" .=) <$> _vbqoMetric,
                   ("overrideValue" .=) <$> _vbqoOverrideValue,
                   ("name" .=) <$> _vbqoName,
                   ("dimensions" .=) <$> _vbqoDimensions,
@@ -2843,44 +3151,61 @@ instance FromJSON MetricRuleMetricCosts where
 instance ToJSON MetricRuleMetricCosts where
         toJSON = toJSON . _mrmcAddtional
 
--- | Configuration of authorization. This section determines the
--- authorization provider, if unspecified, then no authorization check will
--- be done. Example: experimental: authorization: provider:
--- firebaserules.googleapis.com
+-- | If this map is nonempty, then this policy applies only to specific
+-- values for dimensions defined in the limit unit. For example, an policy
+-- on a limit with the unit 1\/{project}\/{region} could contain an entry
+-- with the key \"region\" and the value \"us-east-1\"; the policy is only
+-- applied to quota consumed in that region. This map has the following
+-- restrictions: * Keys that are not defined in the limit\'s unit are not
+-- valid keys. Any string appearing in {brackets} in the unit (besides
+-- {project} or {user}) is a defined key. * \"project\" is not a valid key;
+-- the project is already specified in the parent resource name. * \"user\"
+-- is not a valid key; the API does not support quota polcies that apply
+-- only to a specific user. * If \"region\" appears as a key, its value
+-- must be a valid Cloud region. * If \"zone\" appears as a key, its value
+-- must be a valid Cloud zone. * If any valid key other than \"region\" or
+-- \"zone\" appears in the map, then all valid keys other than \"region\"
+-- or \"zone\" must also appear in the map.
 --
--- /See:/ 'authorizationConfig' smart constructor.
-newtype AuthorizationConfig =
-  AuthorizationConfig'
-    { _acProvider :: Maybe Text
+-- /See:/ 'v1Beta1ProducerQuotaPolicyDimensions' smart constructor.
+newtype V1Beta1ProducerQuotaPolicyDimensions =
+  V1Beta1ProducerQuotaPolicyDimensions'
+    { _vbpqpdAddtional :: HashMap Text Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AuthorizationConfig' with the minimum fields required to make a request.
+-- | Creates a value of 'V1Beta1ProducerQuotaPolicyDimensions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acProvider'
-authorizationConfig
-    :: AuthorizationConfig
-authorizationConfig = AuthorizationConfig' {_acProvider = Nothing}
+-- * 'vbpqpdAddtional'
+v1Beta1ProducerQuotaPolicyDimensions
+    :: HashMap Text Text -- ^ 'vbpqpdAddtional'
+    -> V1Beta1ProducerQuotaPolicyDimensions
+v1Beta1ProducerQuotaPolicyDimensions pVbpqpdAddtional_ =
+  V1Beta1ProducerQuotaPolicyDimensions'
+    {_vbpqpdAddtional = _Coerce # pVbpqpdAddtional_}
 
 
--- | The name of the authorization provider, such as
--- firebaserules.googleapis.com.
-acProvider :: Lens' AuthorizationConfig (Maybe Text)
-acProvider
-  = lens _acProvider (\ s a -> s{_acProvider = a})
+vbpqpdAddtional :: Lens' V1Beta1ProducerQuotaPolicyDimensions (HashMap Text Text)
+vbpqpdAddtional
+  = lens _vbpqpdAddtional
+      (\ s a -> s{_vbpqpdAddtional = a})
+      . _Coerce
 
-instance FromJSON AuthorizationConfig where
+instance FromJSON
+           V1Beta1ProducerQuotaPolicyDimensions
+         where
         parseJSON
-          = withObject "AuthorizationConfig"
-              (\ o -> AuthorizationConfig' <$> (o .:? "provider"))
+          = withObject "V1Beta1ProducerQuotaPolicyDimensions"
+              (\ o ->
+                 V1Beta1ProducerQuotaPolicyDimensions' <$>
+                   (parseJSONObject o))
 
-instance ToJSON AuthorizationConfig where
-        toJSON AuthorizationConfig'{..}
-          = object
-              (catMaybes [("provider" .=) <$> _acProvider])
+instance ToJSON V1Beta1ProducerQuotaPolicyDimensions
+         where
+        toJSON = toJSON . _vbpqpdAddtional
 
 -- | Request message to delete tenant project resource from the tenancy unit.
 --
@@ -2902,7 +3227,7 @@ deleteTenantProjectRequest
 deleteTenantProjectRequest = DeleteTenantProjectRequest' {_dtprTag = Nothing}
 
 
--- | Tag of the resource within the tenancy unit.
+-- | Required. Tag of the resource within the tenancy unit.
 dtprTag :: Lens' DeleteTenantProjectRequest (Maybe Text)
 dtprTag = lens _dtprTag (\ s a -> s{_dtprTag = a})
 
@@ -2939,9 +3264,7 @@ tenantProjectPolicy = TenantProjectPolicy' {_tppPolicyBindings = Nothing}
 
 -- | Policy bindings to be applied to the tenant project, in addition to the
 -- \'roles\/owner\' role granted to the Service Consumer Management service
--- account. At least one binding must have the role \`roles\/owner\`. Among
--- the list of members for \`roles\/owner\`, at least one of them must be
--- either the \`user\` or \`group\` type.
+-- account. At least one binding must have the role \`roles\/owner\`.
 tppPolicyBindings :: Lens' TenantProjectPolicy [PolicyBinding]
 tppPolicyBindings
   = lens _tppPolicyBindings
@@ -2968,7 +3291,7 @@ instance ToJSON TenantProjectPolicy where
 data PolicyBinding =
   PolicyBinding'
     { _pbMembers :: !(Maybe [Text])
-    , _pbRole    :: !(Maybe Text)
+    , _pbRole :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3013,44 +3336,6 @@ instance ToJSON PolicyBinding where
                  [("members" .=) <$> _pbMembers,
                   ("role" .=) <$> _pbRole])
 
--- | Experimental service configuration. These configuration options can only
--- be used by whitelisted users.
---
--- /See:/ 'experimental' smart constructor.
-newtype Experimental =
-  Experimental'
-    { _eAuthorization :: Maybe AuthorizationConfig
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Experimental' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'eAuthorization'
-experimental
-    :: Experimental
-experimental = Experimental' {_eAuthorization = Nothing}
-
-
--- | Authorization configuration.
-eAuthorization :: Lens' Experimental (Maybe AuthorizationConfig)
-eAuthorization
-  = lens _eAuthorization
-      (\ s a -> s{_eAuthorization = a})
-
-instance FromJSON Experimental where
-        parseJSON
-          = withObject "Experimental"
-              (\ o -> Experimental' <$> (o .:? "authorization"))
-
-instance ToJSON Experimental where
-        toJSON Experimental'{..}
-          = object
-              (catMaybes
-                 [("authorization" .=) <$> _eAuthorization])
-
 -- | \`Backend\` defines the backend configuration for a service.
 --
 -- /See:/ 'backend' smart constructor.
@@ -3093,11 +3378,11 @@ instance ToJSON Backend where
 -- /See:/ 'tenancyUnit' smart constructor.
 data TenancyUnit =
   TenancyUnit'
-    { _tuService         :: !(Maybe Text)
-    , _tuName            :: !(Maybe Text)
+    { _tuService :: !(Maybe Text)
+    , _tuName :: !(Maybe Text)
     , _tuTenantResources :: !(Maybe [TenantResource])
-    , _tuConsumer        :: !(Maybe Text)
-    , _tuCreateTime      :: !(Maybe DateTime')
+    , _tuConsumer :: !(Maybe Text)
+    , _tuCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3148,13 +3433,13 @@ tuTenantResources
       . _Default
       . _Coerce
 
--- | \'OutputOnly Cloud resource name of the consumer of this service. For
--- example \'projects\/123456\'.
+-- | Output only. \'OutputOnly Cloud resource name of the consumer of this
+-- service. For example \'projects\/123456\'.
 tuConsumer :: Lens' TenancyUnit (Maybe Text)
 tuConsumer
   = lens _tuConsumer (\ s a -> s{_tuConsumer = a})
 
--- | \'OutputOnly The time this tenancy unit was created.
+-- | Output only. \'OutputOnly The time this tenancy unit was created.
 tuCreateTime :: Lens' TenancyUnit (Maybe UTCTime)
 tuCreateTime
   = lens _tuCreateTime (\ s a -> s{_tuCreateTime = a})
@@ -3185,21 +3470,27 @@ instance ToJSON TenancyUnit where
 -- example, a monitored resource and two metrics are defined. The
 -- \`library.googleapis.com\/book\/returned_count\` metric is sent to both
 -- producer and consumer projects, whereas the
--- \`library.googleapis.com\/book\/overdue_count\` metric is only sent to
--- the consumer project. monitored_resources: - type:
--- library.googleapis.com\/branch labels: - key: \/city description: The
--- city where the library branch is located in. - key: \/name description:
--- The name of the branch. metrics: - name:
--- library.googleapis.com\/book\/returned_count metric_kind: DELTA
--- value_type: INT64 labels: - key: \/customer_id - name:
--- library.googleapis.com\/book\/overdue_count metric_kind: GAUGE
--- value_type: INT64 labels: - key: \/customer_id monitoring:
--- producer_destinations: - monitored_resource:
--- library.googleapis.com\/branch metrics: -
+-- \`library.googleapis.com\/book\/num_overdue\` metric is only sent to the
+-- consumer project. monitored_resources: - type:
+-- library.googleapis.com\/Branch display_name: \"Library Branch\"
+-- description: \"A branch of a library.\" launch_stage: GA labels: - key:
+-- resource_container description: \"The Cloud container (ie. project id)
+-- for the Branch.\" - key: location description: \"The location of the
+-- library branch.\" - key: branch_id description: \"The id of the
+-- branch.\" metrics: - name: library.googleapis.com\/book\/returned_count
+-- display_name: \"Books Returned\" description: \"The count of books that
+-- have been returned.\" launch_stage: GA metric_kind: DELTA value_type:
+-- INT64 unit: \"1\" labels: - key: customer_id description: \"The id of
+-- the customer.\" - name: library.googleapis.com\/book\/num_overdue
+-- display_name: \"Books Overdue\" description: \"The current number of
+-- overdue books.\" launch_stage: GA metric_kind: GAUGE value_type: INT64
+-- unit: \"1\" labels: - key: customer_id description: \"The id of the
+-- customer.\" monitoring: producer_destinations: - monitored_resource:
+-- library.googleapis.com\/Branch metrics: -
 -- library.googleapis.com\/book\/returned_count consumer_destinations: -
--- monitored_resource: library.googleapis.com\/branch metrics: -
+-- monitored_resource: library.googleapis.com\/Branch metrics: -
 -- library.googleapis.com\/book\/returned_count -
--- library.googleapis.com\/book\/overdue_count
+-- library.googleapis.com\/book\/num_overdue
 --
 -- /See:/ 'monitoring' smart constructor.
 data Monitoring =
@@ -3225,7 +3516,7 @@ monitoring =
 
 
 -- | Monitoring configurations for sending metrics to the producer project.
--- There can be multiple producer destinations. A monitored resouce type
+-- There can be multiple producer destinations. A monitored resource type
 -- may appear in multiple monitoring destinations if different aggregations
 -- are needed for different sets of metrics associated with that monitored
 -- resource type. A monitored resource and metric pair may only be used
@@ -3238,7 +3529,7 @@ mProducerDestinations
       . _Coerce
 
 -- | Monitoring configurations for sending metrics to the consumer project.
--- There can be multiple consumer destinations. A monitored resouce type
+-- There can be multiple consumer destinations. A monitored resource type
 -- may appear in multiple monitoring destinations if different aggregations
 -- are needed for different sets of metrics associated with that monitored
 -- resource type. A monitored resource and metric pair may only be used
@@ -3275,9 +3566,9 @@ instance ToJSON Monitoring where
 -- /See:/ 'logDescriptor' smart constructor.
 data LogDescriptor =
   LogDescriptor'
-    { _ldName        :: !(Maybe Text)
+    { _ldName :: !(Maybe Text)
     , _ldDisplayName :: !(Maybe Text)
-    , _ldLabels      :: !(Maybe [LabelDescriptor])
+    , _ldLabels :: !(Maybe [LabelDescriptor])
     , _ldDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3358,13 +3649,13 @@ instance ToJSON LogDescriptor where
 -- /See:/ 'method' smart constructor.
 data Method =
   Method'
-    { _metRequestStreaming  :: !(Maybe Bool)
-    , _metResponseTypeURL   :: !(Maybe Text)
-    , _metName              :: !(Maybe Text)
+    { _metRequestStreaming :: !(Maybe Bool)
+    , _metResponseTypeURL :: !(Maybe Text)
+    , _metName :: !(Maybe Text)
     , _metResponseStreaming :: !(Maybe Bool)
-    , _metRequestTypeURL    :: !(Maybe Text)
-    , _metOptions           :: !(Maybe [Option])
-    , _metSyntax            :: !(Maybe MethodSyntax)
+    , _metRequestTypeURL :: !(Maybe Text)
+    , _metOptions :: !(Maybe [Option])
+    , _metSyntax :: !(Maybe MethodSyntax)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3540,71 +3831,44 @@ instance ToJSON SystemParameters where
           = object (catMaybes [("rules" .=) <$> _spRules])
 
 -- | \`Documentation\` provides the information for describing a service.
--- Example:
---
--- > documentation:
--- >   summary: >
--- >     The Google Calendar API gives access
--- >     to most calendar features.
--- >   pages:
--- >   - name: Overview
--- >     content: (== include google/foo/overview.md ==)
--- >   - name: Tutorial
--- >     content: (== include google/foo/tutorial.md ==)
--- >     subpages;
--- >     - name: Java
--- >       content: (== include google/foo/tutorial_java.md ==)
--- >   rules:
--- >   - selector: google.calendar.Calendar.Get
--- >     description: >
--- >       ...
--- >   - selector: google.calendar.Calendar.Put
--- >     description: >
--- >       ...
---
--- Documentation is provided in markdown syntax. In addition to standard
--- markdown features, definition lists, tables and fenced code blocks are
--- supported. Section headers can be provided and are interpreted relative
--- to the section nesting of the context where a documentation fragment is
--- embedded. Documentation from the IDL is merged with documentation
--- defined via the config at normalization time, where documentation
--- provided by config rules overrides IDL provided. A number of constructs
--- specific to the API platform are supported in documentation text. In
--- order to reference a proto element, the following notation can be used:
---
--- > [fully.qualified.proto.name][]
---
--- To override the display text used for the link, this can be used:
---
--- > [display text][fully.qualified.proto.name]
---
--- Text can be excluded from doc using the following notation:
---
--- > (-- internal comment --)
---
--- A few directives are available in documentation. Note that directives
--- must appear on a single line to be properly identified. The \`include\`
--- directive includes a markdown file from an external source:
---
--- > (== include path/to/file ==)
---
--- The \`resource_for\` directive marks a message to be the resource of a
--- collection in REST view. If it is not specified, tools attempt to infer
--- the resource from the operations in a collection:
---
--- > (== resource_for v1.shelves.books ==)
---
--- The directive \`suppress_warning\` does not directly affect
--- documentation and is documented together with service config validation.
+-- Example: documentation: summary: > The Google Calendar API gives access
+-- to most calendar features. pages: - name: Overview content: (== include
+-- google\/foo\/overview.md ==) - name: Tutorial content: (== include
+-- google\/foo\/tutorial.md ==) subpages; - name: Java content: (== include
+-- google\/foo\/tutorial_java.md ==) rules: - selector:
+-- google.calendar.Calendar.Get description: > ... - selector:
+-- google.calendar.Calendar.Put description: > ... Documentation is
+-- provided in markdown syntax. In addition to standard markdown features,
+-- definition lists, tables and fenced code blocks are supported. Section
+-- headers can be provided and are interpreted relative to the section
+-- nesting of the context where a documentation fragment is embedded.
+-- Documentation from the IDL is merged with documentation defined via the
+-- config at normalization time, where documentation provided by config
+-- rules overrides IDL provided. A number of constructs specific to the API
+-- platform are supported in documentation text. In order to reference a
+-- proto element, the following notation can be used:
+-- [fully.qualified.proto.name][] To override the display text used for the
+-- link, this can be used: [display text][fully.qualified.proto.name] Text
+-- can be excluded from doc using the following notation: (-- internal
+-- comment --) A few directives are available in documentation. Note that
+-- directives must appear on a single line to be properly identified. The
+-- \`include\` directive includes a markdown file from an external source:
+-- (== include path\/to\/file ==) The \`resource_for\` directive marks a
+-- message to be the resource of a collection in REST view. If it is not
+-- specified, tools attempt to infer the resource from the operations in a
+-- collection: (== resource_for v1.shelves.books ==) The directive
+-- \`suppress_warning\` does not directly affect documentation and is
+-- documented together with service config validation.
 --
 -- /See:/ 'documentation' smart constructor.
 data Documentation =
   Documentation'
-    { _dSummary              :: !(Maybe Text)
+    { _dSummary :: !(Maybe Text)
     , _dDocumentationRootURL :: !(Maybe Text)
-    , _dRules                :: !(Maybe [DocumentationRule])
-    , _dPages                :: !(Maybe [Page])
-    , _dOverview             :: !(Maybe Text)
+    , _dRules :: !(Maybe [DocumentationRule])
+    , _dPages :: !(Maybe [Page])
+    , _dServiceRootURL :: !(Maybe Text)
+    , _dOverview :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3621,6 +3885,8 @@ data Documentation =
 --
 -- * 'dPages'
 --
+-- * 'dServiceRootURL'
+--
 -- * 'dOverview'
 documentation
     :: Documentation
@@ -3630,12 +3896,15 @@ documentation =
     , _dDocumentationRootURL = Nothing
     , _dRules = Nothing
     , _dPages = Nothing
+    , _dServiceRootURL = Nothing
     , _dOverview = Nothing
     }
 
 
--- | A short summary of what the service does. Can only be provided by plain
--- text.
+-- | A short description of what the service does. The summary must be plain
+-- text. It becomes the overview of the service displayed in Google Cloud
+-- Console. NOTE: This field is equivalent to the standard field
+-- \`description\`.
 dSummary :: Lens' Documentation (Maybe Text)
 dSummary = lens _dSummary (\ s a -> s{_dSummary = a})
 
@@ -3659,21 +3928,20 @@ dPages
   = lens _dPages (\ s a -> s{_dPages = a}) . _Default .
       _Coerce
 
--- | Declares a single overview page. For example:
---
--- > documentation:
--- >   summary: ...
--- >   overview: (== include overview.md ==)
---
--- This is a shortcut for the following declaration (using pages style):
---
--- > documentation:
--- >   summary: ...
--- >   pages:
--- >   - name: Overview
--- >     content: (== include overview.md ==)
---
--- Note: you cannot specify both \`overview\` field and \`pages\` field.
+-- | Specifies the service root url if the default one (the service name from
+-- the yaml file) is not suitable. This can be seen in any fully specified
+-- service urls as well as sections that show a base that other urls are
+-- relative to.
+dServiceRootURL :: Lens' Documentation (Maybe Text)
+dServiceRootURL
+  = lens _dServiceRootURL
+      (\ s a -> s{_dServiceRootURL = a})
+
+-- | Declares a single overview page. For example: documentation: summary:
+-- ... overview: (== include overview.md ==) This is a shortcut for the
+-- following declaration (using pages style): documentation: summary: ...
+-- pages: - name: Overview content: (== include overview.md ==) Note: you
+-- cannot specify both \`overview\` field and \`pages\` field.
 dOverview :: Lens' Documentation (Maybe Text)
 dOverview
   = lens _dOverview (\ s a -> s{_dOverview = a})
@@ -3686,6 +3954,7 @@ instance FromJSON Documentation where
                    (o .:? "summary") <*> (o .:? "documentationRootUrl")
                      <*> (o .:? "rules" .!= mempty)
                      <*> (o .:? "pages" .!= mempty)
+                     <*> (o .:? "serviceRootUrl")
                      <*> (o .:? "overview"))
 
 instance ToJSON Documentation where
@@ -3696,7 +3965,198 @@ instance ToJSON Documentation where
                   ("documentationRootUrl" .=) <$>
                     _dDocumentationRootURL,
                   ("rules" .=) <$> _dRules, ("pages" .=) <$> _dPages,
+                  ("serviceRootUrl" .=) <$> _dServiceRootURL,
                   ("overview" .=) <$> _dOverview])
+
+-- | Response message for the \`GenerateDefaultIdentity\` method. This
+-- response message is assigned to the \`response\` field of the returned
+-- Operation when that operation is done.
+--
+-- /See:/ 'v1GenerateDefaultIdentityResponse' smart constructor.
+data V1GenerateDefaultIdentityResponse =
+  V1GenerateDefaultIdentityResponse'
+    { _vgdirAttachStatus :: !(Maybe V1GenerateDefaultIdentityResponseAttachStatus)
+    , _vgdirRole :: !(Maybe Text)
+    , _vgdirIdentity :: !(Maybe V1DefaultIdentity)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1GenerateDefaultIdentityResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vgdirAttachStatus'
+--
+-- * 'vgdirRole'
+--
+-- * 'vgdirIdentity'
+v1GenerateDefaultIdentityResponse
+    :: V1GenerateDefaultIdentityResponse
+v1GenerateDefaultIdentityResponse =
+  V1GenerateDefaultIdentityResponse'
+    { _vgdirAttachStatus = Nothing
+    , _vgdirRole = Nothing
+    , _vgdirIdentity = Nothing
+    }
+
+
+-- | Status of the role attachment. Under development (go\/si-attach-role),
+-- currently always return ATTACH_STATUS_UNSPECIFIED)
+vgdirAttachStatus :: Lens' V1GenerateDefaultIdentityResponse (Maybe V1GenerateDefaultIdentityResponseAttachStatus)
+vgdirAttachStatus
+  = lens _vgdirAttachStatus
+      (\ s a -> s{_vgdirAttachStatus = a})
+
+-- | Role attached to consumer project. Empty if not attached in this
+-- request. (Under development, currently always return empty.)
+vgdirRole :: Lens' V1GenerateDefaultIdentityResponse (Maybe Text)
+vgdirRole
+  = lens _vgdirRole (\ s a -> s{_vgdirRole = a})
+
+-- | DefaultIdentity that was created or retrieved.
+vgdirIdentity :: Lens' V1GenerateDefaultIdentityResponse (Maybe V1DefaultIdentity)
+vgdirIdentity
+  = lens _vgdirIdentity
+      (\ s a -> s{_vgdirIdentity = a})
+
+instance FromJSON V1GenerateDefaultIdentityResponse
+         where
+        parseJSON
+          = withObject "V1GenerateDefaultIdentityResponse"
+              (\ o ->
+                 V1GenerateDefaultIdentityResponse' <$>
+                   (o .:? "attachStatus") <*> (o .:? "role") <*>
+                     (o .:? "identity"))
+
+instance ToJSON V1GenerateDefaultIdentityResponse
+         where
+        toJSON V1GenerateDefaultIdentityResponse'{..}
+          = object
+              (catMaybes
+                 [("attachStatus" .=) <$> _vgdirAttachStatus,
+                  ("role" .=) <$> _vgdirRole,
+                  ("identity" .=) <$> _vgdirIdentity])
+
+-- | Quota policy created by service producer.
+--
+-- /See:/ 'v1Beta1ProducerQuotaPolicy' smart constructor.
+data V1Beta1ProducerQuotaPolicy =
+  V1Beta1ProducerQuotaPolicy'
+    { _vbpqpMetric :: !(Maybe Text)
+    , _vbpqpName :: !(Maybe Text)
+    , _vbpqpContainer :: !(Maybe Text)
+    , _vbpqpDimensions :: !(Maybe V1Beta1ProducerQuotaPolicyDimensions)
+    , _vbpqpPolicyValue :: !(Maybe (Textual Int64))
+    , _vbpqpUnit :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1Beta1ProducerQuotaPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbpqpMetric'
+--
+-- * 'vbpqpName'
+--
+-- * 'vbpqpContainer'
+--
+-- * 'vbpqpDimensions'
+--
+-- * 'vbpqpPolicyValue'
+--
+-- * 'vbpqpUnit'
+v1Beta1ProducerQuotaPolicy
+    :: V1Beta1ProducerQuotaPolicy
+v1Beta1ProducerQuotaPolicy =
+  V1Beta1ProducerQuotaPolicy'
+    { _vbpqpMetric = Nothing
+    , _vbpqpName = Nothing
+    , _vbpqpContainer = Nothing
+    , _vbpqpDimensions = Nothing
+    , _vbpqpPolicyValue = Nothing
+    , _vbpqpUnit = Nothing
+    }
+
+
+-- | The name of the metric to which this policy applies. An example name
+-- would be: \`compute.googleapis.com\/cpus\`
+vbpqpMetric :: Lens' V1Beta1ProducerQuotaPolicy (Maybe Text)
+vbpqpMetric
+  = lens _vbpqpMetric (\ s a -> s{_vbpqpMetric = a})
+
+-- | The resource name of the producer policy. An example name would be:
+-- \`services\/compute.googleapis.com\/organizations\/123\/consumerQuotaMetrics\/compute.googleapis.com%2Fcpus\/limits\/%2Fproject%2Fregion\/producerQuotaPolicies\/4a3f2c1d\`
+vbpqpName :: Lens' V1Beta1ProducerQuotaPolicy (Maybe Text)
+vbpqpName
+  = lens _vbpqpName (\ s a -> s{_vbpqpName = a})
+
+-- | The cloud resource container at which the quota policy is created. The
+-- format is {container_type}\/{container_number}
+vbpqpContainer :: Lens' V1Beta1ProducerQuotaPolicy (Maybe Text)
+vbpqpContainer
+  = lens _vbpqpContainer
+      (\ s a -> s{_vbpqpContainer = a})
+
+-- | If this map is nonempty, then this policy applies only to specific
+-- values for dimensions defined in the limit unit. For example, an policy
+-- on a limit with the unit 1\/{project}\/{region} could contain an entry
+-- with the key \"region\" and the value \"us-east-1\"; the policy is only
+-- applied to quota consumed in that region. This map has the following
+-- restrictions: * Keys that are not defined in the limit\'s unit are not
+-- valid keys. Any string appearing in {brackets} in the unit (besides
+-- {project} or {user}) is a defined key. * \"project\" is not a valid key;
+-- the project is already specified in the parent resource name. * \"user\"
+-- is not a valid key; the API does not support quota polcies that apply
+-- only to a specific user. * If \"region\" appears as a key, its value
+-- must be a valid Cloud region. * If \"zone\" appears as a key, its value
+-- must be a valid Cloud zone. * If any valid key other than \"region\" or
+-- \"zone\" appears in the map, then all valid keys other than \"region\"
+-- or \"zone\" must also appear in the map.
+vbpqpDimensions :: Lens' V1Beta1ProducerQuotaPolicy (Maybe V1Beta1ProducerQuotaPolicyDimensions)
+vbpqpDimensions
+  = lens _vbpqpDimensions
+      (\ s a -> s{_vbpqpDimensions = a})
+
+-- | The quota policy value. Can be any nonnegative integer, or -1 (unlimited
+-- quota).
+vbpqpPolicyValue :: Lens' V1Beta1ProducerQuotaPolicy (Maybe Int64)
+vbpqpPolicyValue
+  = lens _vbpqpPolicyValue
+      (\ s a -> s{_vbpqpPolicyValue = a})
+      . mapping _Coerce
+
+-- | The limit unit of the limit to which this policy applies. An example
+-- unit would be: \`1\/{project}\/{region}\` Note that \`{project}\` and
+-- \`{region}\` are not placeholders in this example; the literal
+-- characters \`{\` and \`}\` occur in the string.
+vbpqpUnit :: Lens' V1Beta1ProducerQuotaPolicy (Maybe Text)
+vbpqpUnit
+  = lens _vbpqpUnit (\ s a -> s{_vbpqpUnit = a})
+
+instance FromJSON V1Beta1ProducerQuotaPolicy where
+        parseJSON
+          = withObject "V1Beta1ProducerQuotaPolicy"
+              (\ o ->
+                 V1Beta1ProducerQuotaPolicy' <$>
+                   (o .:? "metric") <*> (o .:? "name") <*>
+                     (o .:? "container")
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "policyValue")
+                     <*> (o .:? "unit"))
+
+instance ToJSON V1Beta1ProducerQuotaPolicy where
+        toJSON V1Beta1ProducerQuotaPolicy'{..}
+          = object
+              (catMaybes
+                 [("metric" .=) <$> _vbpqpMetric,
+                  ("name" .=) <$> _vbpqpName,
+                  ("container" .=) <$> _vbpqpContainer,
+                  ("dimensions" .=) <$> _vbpqpDimensions,
+                  ("policyValue" .=) <$> _vbpqpPolicyValue,
+                  ("unit" .=) <$> _vbpqpUnit])
 
 -- | Additional annotations that can be used to guide the usage of a metric.
 --
@@ -3704,8 +4164,8 @@ instance ToJSON Documentation where
 data MetricDescriptorMetadata =
   MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
-    , _mdmIngestDelay  :: !(Maybe GDuration)
-    , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
+    , _mdmIngestDelay :: !(Maybe GDuration)
+    , _mdmLaunchStage :: !(Maybe MetricDescriptorMetadataLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3748,7 +4208,7 @@ mdmIngestDelay
       (\ s a -> s{_mdmIngestDelay = a})
       . mapping _GDuration
 
--- | The launch stage of the metric definition.
+-- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
 mdmLaunchStage :: Lens' MetricDescriptorMetadata (Maybe MetricDescriptorMetadataLaunchStage)
 mdmLaunchStage
   = lens _mdmLaunchStage
@@ -3769,6 +4229,78 @@ instance ToJSON MetricDescriptorMetadata where
                  [("samplePeriod" .=) <$> _mdmSamplePeriod,
                   ("ingestDelay" .=) <$> _mdmIngestDelay,
                   ("launchStage" .=) <$> _mdmLaunchStage])
+
+-- | A default identity in the Identity and Access Management API.
+--
+-- /See:/ 'v1DefaultIdentity' smart constructor.
+data V1DefaultIdentity =
+  V1DefaultIdentity'
+    { _vdiEmail :: !(Maybe Text)
+    , _vdiTag :: !(Maybe Text)
+    , _vdiUniqueId :: !(Maybe Text)
+    , _vdiName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'V1DefaultIdentity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vdiEmail'
+--
+-- * 'vdiTag'
+--
+-- * 'vdiUniqueId'
+--
+-- * 'vdiName'
+v1DefaultIdentity
+    :: V1DefaultIdentity
+v1DefaultIdentity =
+  V1DefaultIdentity'
+    { _vdiEmail = Nothing
+    , _vdiTag = Nothing
+    , _vdiUniqueId = Nothing
+    , _vdiName = Nothing
+    }
+
+
+-- | The email address of the default identity.
+vdiEmail :: Lens' V1DefaultIdentity (Maybe Text)
+vdiEmail = lens _vdiEmail (\ s a -> s{_vdiEmail = a})
+
+-- | The Default Identity tag. If specified when creating the account, the
+-- tag must be present in activation_grants. If not specified when creating
+-- the account, the tag is set to the tag specified in activation_grants.
+vdiTag :: Lens' V1DefaultIdentity (Maybe Text)
+vdiTag = lens _vdiTag (\ s a -> s{_vdiTag = a})
+
+-- | The unique and stable id of the default identity.
+vdiUniqueId :: Lens' V1DefaultIdentity (Maybe Text)
+vdiUniqueId
+  = lens _vdiUniqueId (\ s a -> s{_vdiUniqueId = a})
+
+-- | Default identity resource name. An example name would be:
+-- \`services\/serviceconsumermanagement.googleapis.com\/projects\/123\/defaultIdentity\`
+vdiName :: Lens' V1DefaultIdentity (Maybe Text)
+vdiName = lens _vdiName (\ s a -> s{_vdiName = a})
+
+instance FromJSON V1DefaultIdentity where
+        parseJSON
+          = withObject "V1DefaultIdentity"
+              (\ o ->
+                 V1DefaultIdentity' <$>
+                   (o .:? "email") <*> (o .:? "tag") <*>
+                     (o .:? "uniqueId")
+                     <*> (o .:? "name"))
+
+instance ToJSON V1DefaultIdentity where
+        toJSON V1DefaultIdentity'{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _vdiEmail, ("tag" .=) <$> _vdiTag,
+                  ("uniqueId" .=) <$> _vdiUniqueId,
+                  ("name" .=) <$> _vdiName])
 
 -- | Request message to undelete tenant project resource previously deleted
 -- from the tenancy unit.
@@ -3792,7 +4324,7 @@ undeleteTenantProjectRequest =
   UndeleteTenantProjectRequest' {_utprTag = Nothing}
 
 
--- | Tag of the resource within the tenancy unit.
+-- | Required. Tag of the resource within the tenancy unit.
 utprTag :: Lens' UndeleteTenantProjectRequest (Maybe Text)
 utprTag = lens _utprTag (\ s a -> s{_utprTag = a})
 
@@ -3812,7 +4344,7 @@ instance ToJSON UndeleteTenantProjectRequest where
 -- /See:/ 'systemParameterRule' smart constructor.
 data SystemParameterRule =
   SystemParameterRule'
-    { _sprSelector   :: !(Maybe Text)
+    { _sprSelector :: !(Maybe Text)
     , _sprParameters :: !(Maybe [SystemParameter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3868,8 +4400,8 @@ instance ToJSON SystemParameterRule where
 -- /See:/ 'labelDescriptor' smart constructor.
 data LabelDescriptor =
   LabelDescriptor'
-    { _lKey         :: !(Maybe Text)
-    , _lValueType   :: !(Maybe LabelDescriptorValueType)
+    { _lKey :: !(Maybe Text)
+    , _lValueType :: !(Maybe LabelDescriptorValueType)
     , _lDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3952,8 +4484,8 @@ instance ToJSON V1Beta1DisableConsumerResponse where
 -- /See:/ 'usage' smart constructor.
 data Usage =
   Usage'
-    { _uRequirements                :: !(Maybe [Text])
-    , _uRules                       :: !(Maybe [UsageRule])
+    { _uRequirements :: !(Maybe [Text])
+    , _uRules :: !(Maybe [UsageRule])
     , _uProducerNotificationChannel :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3980,7 +4512,11 @@ usage =
 
 -- | Requirements that must be satisfied before a consumer project can use
 -- the service. Each requirement is of the form \/; for example
--- \'serviceusage.googleapis.com\/billing-enabled\'.
+-- \'serviceusage.googleapis.com\/billing-enabled\'. For Google APIs, a
+-- Terms of Service requirement must be included here. Google Cloud APIs
+-- must include \"serviceusage.googleapis.com\/tos\/cloud\". Other Google
+-- APIs should include \"serviceusage.googleapis.com\/tos\/universal\".
+-- Additional ToS can be included based on the business needs.
 uRequirements :: Lens' Usage [Text]
 uRequirements
   = lens _uRequirements
@@ -4079,7 +4615,7 @@ instance ToJSON
 -- /See:/ 'hTTP' smart constructor.
 data HTTP =
   HTTP'
-    { _hRules                        :: !(Maybe [HTTPRule])
+    { _hRules :: !(Maybe [HTTPRule])
     , _hFullyDecodeReservedExpansion :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4136,11 +4672,11 @@ instance ToJSON HTTP where
 data Type =
   Type'
     { _tSourceContext :: !(Maybe SourceContext)
-    , _tOneofs        :: !(Maybe [Text])
-    , _tName          :: !(Maybe Text)
-    , _tOptions       :: !(Maybe [Option])
-    , _tFields        :: !(Maybe [Field])
-    , _tSyntax        :: !(Maybe TypeSyntax)
+    , _tOneofs :: !(Maybe [Text])
+    , _tName :: !(Maybe Text)
+    , _tOptions :: !(Maybe [Option])
+    , _tFields :: !(Maybe [Field])
+    , _tSyntax :: !(Maybe TypeSyntax)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4242,12 +4778,12 @@ instance ToJSON Type where
 data API =
   API'
     { _aSourceContext :: !(Maybe SourceContext)
-    , _aMixins        :: !(Maybe [Mixin])
-    , _aMethods       :: !(Maybe [Method])
-    , _aName          :: !(Maybe Text)
-    , _aVersion       :: !(Maybe Text)
-    , _aOptions       :: !(Maybe [Option])
-    , _aSyntax        :: !(Maybe APISyntax)
+    , _aMixins :: !(Maybe [Mixin])
+    , _aMethods :: !(Maybe [Method])
+    , _aName :: !(Maybe Text)
+    , _aVersion :: !(Maybe Text)
+    , _aOptions :: !(Maybe [Option])
+    , _aSyntax :: !(Maybe APISyntax)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4367,7 +4903,7 @@ instance ToJSON API where
 -- /See:/ 'monitoringDestination' smart constructor.
 data MonitoringDestination =
   MonitoringDestination'
-    { _mdMetrics           :: !(Maybe [Text])
+    { _mdMetrics :: !(Maybe [Text])
     , _mdMonitoredResource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4455,25 +4991,27 @@ instance FromJSON OperationMetadata where
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
 
--- | \`Endpoint\` describes a network endpoint that serves a set of APIs. A
--- service may expose any number of endpoints, and all endpoints share the
--- same service configuration, such as quota configuration and monitoring
--- configuration. Example service configuration: name:
--- library-example.googleapis.com endpoints: # Below entry makes
--- \'google.example.library.v1.Library\' # API be served from endpoint
--- address library-example.googleapis.com. # It also allows HTTP OPTIONS
--- calls to be passed to the backend, for # it to decide whether the
--- subsequent cross-origin request is # allowed to proceed. - name:
--- library-example.googleapis.com allow_cors: true
+-- | \`Endpoint\` describes a network address of a service that serves a set
+-- of APIs. It is commonly known as a service endpoint. A service may
+-- expose any number of service endpoints, and all service endpoints share
+-- the same service definition, such as quota limits and monitoring
+-- metrics. Example: type: google.api.Service name:
+-- library-example.googleapis.com endpoints: # Declares network address
+-- \`https:\/\/library-example.googleapis.com\` # for service
+-- \`library-example.googleapis.com\`. The \`https\` scheme # is implicit
+-- for all service endpoints. Other schemes may be # supported in the
+-- future. - name: library-example.googleapis.com allow_cors: false - name:
+-- content-staging-library-example.googleapis.com # Allows HTTP OPTIONS
+-- calls to be passed to the API frontend, for it # to decide whether the
+-- subsequent cross-origin request is allowed # to proceed. allow_cors:
+-- true
 --
 -- /See:/ 'endpoint' smart constructor.
 data Endpoint =
   Endpoint'
-    { _eAliases   :: !(Maybe [Text])
-    , _eAllowCORS :: !(Maybe Bool)
-    , _eName      :: !(Maybe Text)
-    , _eFeatures  :: !(Maybe [Text])
-    , _eTarget    :: !(Maybe Text)
+    { _eAllowCORS :: !(Maybe Bool)
+    , _eName :: !(Maybe Text)
+    , _eTarget :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4482,35 +5020,16 @@ data Endpoint =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eAliases'
---
 -- * 'eAllowCORS'
 --
 -- * 'eName'
---
--- * 'eFeatures'
 --
 -- * 'eTarget'
 endpoint
     :: Endpoint
 endpoint =
-  Endpoint'
-    { _eAliases = Nothing
-    , _eAllowCORS = Nothing
-    , _eName = Nothing
-    , _eFeatures = Nothing
-    , _eTarget = Nothing
-    }
+  Endpoint' {_eAllowCORS = Nothing, _eName = Nothing, _eTarget = Nothing}
 
-
--- | DEPRECATED: This field is no longer supported. Instead of using aliases,
--- please specify multiple google.api.Endpoint for each of the intended
--- aliases. Additional names that this endpoint will be hosted on.
-eAliases :: Lens' Endpoint [Text]
-eAliases
-  = lens _eAliases (\ s a -> s{_eAliases = a}) .
-      _Default
-      . _Coerce
 
 -- | Allowing
 -- [CORS](https:\/\/en.wikipedia.org\/wiki\/Cross-origin_resource_sharing),
@@ -4526,13 +5045,6 @@ eAllowCORS
 eName :: Lens' Endpoint (Maybe Text)
 eName = lens _eName (\ s a -> s{_eName = a})
 
--- | The list of features enabled on this endpoint.
-eFeatures :: Lens' Endpoint [Text]
-eFeatures
-  = lens _eFeatures (\ s a -> s{_eFeatures = a}) .
-      _Default
-      . _Coerce
-
 -- | The specification of an Internet routable address of API frontend that
 -- will handle requests to this [API
 -- Endpoint](https:\/\/cloud.google.com\/apis\/design\/glossary). It should
@@ -4546,20 +5058,15 @@ instance FromJSON Endpoint where
           = withObject "Endpoint"
               (\ o ->
                  Endpoint' <$>
-                   (o .:? "aliases" .!= mempty) <*> (o .:? "allowCors")
-                     <*> (o .:? "name")
-                     <*> (o .:? "features" .!= mempty)
-                     <*> (o .:? "target"))
+                   (o .:? "allowCors") <*> (o .:? "name") <*>
+                     (o .:? "target"))
 
 instance ToJSON Endpoint where
         toJSON Endpoint'{..}
           = object
               (catMaybes
-                 [("aliases" .=) <$> _eAliases,
-                  ("allowCors" .=) <$> _eAllowCORS,
-                  ("name" .=) <$> _eName,
-                  ("features" .=) <$> _eFeatures,
-                  ("target" .=) <$> _eTarget])
+                 [("allowCors" .=) <$> _eAllowCORS,
+                  ("name" .=) <$> _eName, ("target" .=) <$> _eTarget])
 
 -- | OAuth scopes are a way to define data and permissions on data. For
 -- example, there are scopes defined for \"Read-only access to Google
@@ -4624,12 +5131,12 @@ instance ToJSON OAuthRequirements where
 -- /See:/ 'tenantProjectConfig' smart constructor.
 data TenantProjectConfig =
   TenantProjectConfig'
-    { _tpcFolder               :: !(Maybe Text)
+    { _tpcFolder :: !(Maybe Text)
     , _tpcServiceAccountConfig :: !(Maybe ServiceAccountConfig)
-    , _tpcTenantProjectPolicy  :: !(Maybe TenantProjectPolicy)
-    , _tpcLabels               :: !(Maybe TenantProjectConfigLabels)
-    , _tpcServices             :: !(Maybe [Text])
-    , _tpcBillingConfig        :: !(Maybe BillingConfig)
+    , _tpcTenantProjectPolicy :: !(Maybe TenantProjectPolicy)
+    , _tpcLabels :: !(Maybe TenantProjectConfigLabels)
+    , _tpcServices :: !(Maybe [Text])
+    , _tpcBillingConfig :: !(Maybe BillingConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4791,16 +5298,16 @@ instance ToJSON CustomError where
 -- /See:/ 'quotaLimit' smart constructor.
 data QuotaLimit =
   QuotaLimit'
-    { _qlValues       :: !(Maybe QuotaLimitValues)
-    , _qlFreeTier     :: !(Maybe (Textual Int64))
-    , _qlMetric       :: !(Maybe Text)
-    , _qlName         :: !(Maybe Text)
-    , _qlDisplayName  :: !(Maybe Text)
-    , _qlDuration     :: !(Maybe Text)
+    { _qlValues :: !(Maybe QuotaLimitValues)
+    , _qlFreeTier :: !(Maybe (Textual Int64))
+    , _qlMetric :: !(Maybe Text)
+    , _qlName :: !(Maybe Text)
+    , _qlDisplayName :: !(Maybe Text)
+    , _qlDuration :: !(Maybe Text)
     , _qlDefaultLimit :: !(Maybe (Textual Int64))
-    , _qlDescription  :: !(Maybe Text)
-    , _qlUnit         :: !(Maybe Text)
-    , _qlMaxLimit     :: !(Maybe (Textual Int64))
+    , _qlDescription :: !(Maybe Text)
+    , _qlUnit :: !(Maybe Text)
+    , _qlMaxLimit :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4884,11 +5391,8 @@ qlDisplayName
   = lens _qlDisplayName
       (\ s a -> s{_qlDisplayName = a})
 
--- | Duration of this limit in textual notation. Example: \"100s\", \"24h\",
--- \"1d\". For duration longer than a day, only multiple of days is
--- supported. We support only \"100s\" and \"1d\" for now. Additional
--- support will be added in the future. \"0\" indicates indefinite
--- duration. Used by group-based quotas only.
+-- | Duration of this limit in textual notation. Must be \"100s\" or \"1d\".
+-- Used by group-based quotas only.
 qlDuration :: Lens' QuotaLimit (Maybe Text)
 qlDuration
   = lens _qlDuration (\ s a -> s{_qlDuration = a})
@@ -4971,7 +5475,7 @@ instance ToJSON QuotaLimit where
 data Option =
   Option'
     { _optValue :: !(Maybe OptionValue)
-    , _optName  :: !(Maybe Text)
+    , _optName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5017,13 +5521,21 @@ instance ToJSON Option where
                   ("name" .=) <$> _optName])
 
 -- | Billing related configuration of the service. The following example
--- shows how to configure monitored resources and metrics for billing:
--- monitored_resources: - type: library.googleapis.com\/branch labels: -
--- key: \/city description: The city where the library branch is located
--- in. - key: \/name description: The name of the branch. metrics: - name:
+-- shows how to configure monitored resources and metrics for billing,
+-- \`consumer_destinations\` is the only supported destination and the
+-- monitored resources need at least one label key
+-- \`cloud.googleapis.com\/location\` to indicate the location of the
+-- billing usage, using different monitored resources between monitoring
+-- and billing is recommended so they can be evolved independently:
+-- monitored_resources: - type: library.googleapis.com\/billing_branch
+-- labels: - key: cloud.googleapis.com\/location description: | Predefined
+-- label to support billing location restriction. - key: city description:
+-- | Custom label to define the city where the library branch is located
+-- in. - key: name description: Custom label to define the name of the
+-- library branch. metrics: - name:
 -- library.googleapis.com\/book\/borrowed_count metric_kind: DELTA
--- value_type: INT64 billing: consumer_destinations: - monitored_resource:
--- library.googleapis.com\/branch metrics: -
+-- value_type: INT64 unit: \"1\" billing: consumer_destinations: -
+-- monitored_resource: library.googleapis.com\/billing_branch metrics: -
 -- library.googleapis.com\/book\/borrowed_count
 --
 -- /See:/ 'billing' smart constructor.
@@ -5150,11 +5662,11 @@ instance ToJSON QuotaLimitValues where
 -- /See:/ 'v1ServiceAccount' smart constructor.
 data V1ServiceAccount =
   V1ServiceAccount'
-    { _vsaEmail          :: !(Maybe Text)
-    , _vsaTag            :: !(Maybe Text)
+    { _vsaEmail :: !(Maybe Text)
+    , _vsaTag :: !(Maybe Text)
     , _vsaIAMAccountName :: !(Maybe Text)
-    , _vsaUniqueId       :: !(Maybe Text)
-    , _vsaName           :: !(Maybe Text)
+    , _vsaUniqueId :: !(Maybe Text)
+    , _vsaName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5194,8 +5706,7 @@ vsaEmail = lens _vsaEmail (\ s a -> s{_vsaEmail = a})
 vsaTag :: Lens' V1ServiceAccount (Maybe Text)
 vsaTag = lens _vsaTag (\ s a -> s{_vsaTag = a})
 
--- | The IAM resource name of the service account in the following format:
--- projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}.
+-- | Deprecated. See b\/136209818.
 vsaIAMAccountName :: Lens' V1ServiceAccount (Maybe Text)
 vsaIAMAccountName
   = lens _vsaIAMAccountName
@@ -5236,7 +5747,7 @@ instance ToJSON V1ServiceAccount where
 -- /See:/ 'attachTenantProjectRequest' smart constructor.
 data AttachTenantProjectRequest =
   AttachTenantProjectRequest'
-    { _atprTag              :: !(Maybe Text)
+    { _atprTag :: !(Maybe Text)
     , _atprExternalResource :: !(Maybe Text)
     , _atprReservedResource :: !(Maybe Text)
     }
@@ -5262,8 +5773,8 @@ attachTenantProjectRequest =
     }
 
 
--- | Tag of the tenant resource after attachment. Must be less than 128
--- characters. Required.
+-- | Required. Tag of the tenant resource after attachment. Must be less than
+-- 128 characters. Required.
 atprTag :: Lens' AttachTenantProjectRequest (Maybe Text)
 atprTag = lens _atprTag (\ s a -> s{_atprTag = a})
 
@@ -5305,10 +5816,10 @@ instance ToJSON AttachTenantProjectRequest where
 data Enum' =
   Enum''
     { _enuSourceContext :: !(Maybe SourceContext)
-    , _enuEnumvalue     :: !(Maybe [EnumValue])
-    , _enuName          :: !(Maybe Text)
-    , _enuOptions       :: !(Maybe [Option])
-    , _enuSyntax        :: !(Maybe EnumSyntax)
+    , _enuEnumvalue :: !(Maybe [EnumValue])
+    , _enuName :: !(Maybe Text)
+    , _enuOptions :: !(Maybe [Option])
+    , _enuSyntax :: !(Maybe EnumSyntax)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5484,7 +5995,7 @@ removeTenantProjectRequest
 removeTenantProjectRequest = RemoveTenantProjectRequest' {_rtprTag = Nothing}
 
 
--- | Tag of the resource within the tenancy unit.
+-- | Required. Tag of the resource within the tenancy unit.
 rtprTag :: Lens' RemoveTenantProjectRequest (Maybe Text)
 rtprTag = lens _rtprTag (\ s a -> s{_rtprTag = a})
 
@@ -5561,7 +6072,7 @@ instance ToJSON SourceInfoSourceFilesItem where
 -- /See:/ 'quota' smart constructor.
 data Quota =
   Quota'
-    { _qLimits      :: !(Maybe [QuotaLimit])
+    { _qLimits :: !(Maybe [QuotaLimit])
     , _qMetricRules :: !(Maybe [MetricRule])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5787,16 +6298,16 @@ instance ToJSON V1DisableConsumerResponse where
 -- /See:/ 'hTTPRule' smart constructor.
 data HTTPRule =
   HTTPRule'
-    { _httprSelector           :: !(Maybe Text)
-    , _httprPost               :: !(Maybe Text)
-    , _httprBody               :: !(Maybe Text)
-    , _httprCustom             :: !(Maybe CustomHTTPPattern)
-    , _httprResponseBody       :: !(Maybe Text)
-    , _httprPatch              :: !(Maybe Text)
-    , _httprGet                :: !(Maybe Text)
+    { _httprSelector :: !(Maybe Text)
+    , _httprPost :: !(Maybe Text)
+    , _httprBody :: !(Maybe Text)
+    , _httprCustom :: !(Maybe CustomHTTPPattern)
+    , _httprResponseBody :: !(Maybe Text)
+    , _httprPatch :: !(Maybe Text)
+    , _httprGet :: !(Maybe Text)
     , _httprAdditionalBindings :: !(Maybe [HTTPRule])
-    , _httprDelete             :: !(Maybe Text)
-    , _httprPut                :: !(Maybe Text)
+    , _httprDelete :: !(Maybe Text)
+    , _httprPut :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5945,7 +6456,7 @@ instance ToJSON HTTPRule where
 data ApplyTenantProjectConfigRequest =
   ApplyTenantProjectConfigRequest'
     { _atpcrProjectConfig :: !(Maybe TenantProjectConfig)
-    , _atpcrTag           :: !(Maybe Text)
+    , _atpcrTag :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5970,7 +6481,8 @@ atpcrProjectConfig
   = lens _atpcrProjectConfig
       (\ s a -> s{_atpcrProjectConfig = a})
 
--- | Tag of the project. Must be less than 128 characters. Required.
+-- | Required. Tag of the project. Must be less than 128 characters.
+-- Required.
 atpcrTag :: Lens' ApplyTenantProjectConfigRequest (Maybe Text)
 atpcrTag = lens _atpcrTag (\ s a -> s{_atpcrTag = a})
 
@@ -5994,7 +6506,7 @@ instance ToJSON ApplyTenantProjectConfigRequest where
 -- /See:/ 'listTenancyUnitsResponse' smart constructor.
 data ListTenancyUnitsResponse =
   ListTenancyUnitsResponse'
-    { _lturTenancyUnits  :: !(Maybe [TenancyUnit])
+    { _lturTenancyUnits :: !(Maybe [TenancyUnit])
     , _lturNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6091,8 +6603,8 @@ instance ToJSON OperationResponse where
 -- /See:/ 'tenantResource' smart constructor.
 data TenantResource =
   TenantResource'
-    { _trStatus   :: !(Maybe TenantResourceStatus)
-    , _trTag      :: !(Maybe Text)
+    { _trStatus :: !(Maybe TenantResourceStatus)
+    , _trTag :: !(Maybe Text)
     , _trResource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6121,8 +6633,9 @@ trStatus = lens _trStatus (\ s a -> s{_trStatus = a})
 trTag :: Lens' TenantResource (Maybe Text)
 trTag = lens _trTag (\ s a -> s{_trTag = a})
 
--- | \'OutputOnly Identifier of the tenant resource. For cloud projects, it
--- is in the form \'projects\/{number}\'. For example \'projects\/123456\'.
+-- | Output only. \'OutputOnly Identifier of the tenant resource. For cloud
+-- projects, it is in the form \'projects\/{number}\'. For example
+-- \'projects\/123456\'.
 trResource :: Lens' TenantResource (Maybe Text)
 trResource
   = lens _trResource (\ s a -> s{_trResource = a})
@@ -6229,11 +6742,12 @@ instance ToJSON V1RemoveVisibilityLabelsResponse
 -- /See:/ 'authProvider' smart constructor.
 data AuthProvider =
   AuthProvider'
-    { _apJWKsURI          :: !(Maybe Text)
-    , _apAudiences        :: !(Maybe Text)
-    , _apId               :: !(Maybe Text)
+    { _apJWKsURI :: !(Maybe Text)
+    , _apAudiences :: !(Maybe Text)
+    , _apJwtLocations :: !(Maybe [JwtLocation])
+    , _apId :: !(Maybe Text)
     , _apAuthorizationURL :: !(Maybe Text)
-    , _apIssuer           :: !(Maybe Text)
+    , _apIssuer :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6246,6 +6760,8 @@ data AuthProvider =
 --
 -- * 'apAudiences'
 --
+-- * 'apJwtLocations'
+--
 -- * 'apId'
 --
 -- * 'apAuthorizationURL'
@@ -6257,6 +6773,7 @@ authProvider =
   AuthProvider'
     { _apJWKsURI = Nothing
     , _apAudiences = Nothing
+    , _apJwtLocations = Nothing
     , _apId = Nothing
     , _apAuthorizationURL = Nothing
     , _apIssuer = Nothing
@@ -6267,7 +6784,7 @@ authProvider =
 -- See [OpenID
 -- Discovery](https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html#ProviderMetadata).
 -- Optional if the key set document: - can be retrieved from [OpenID
--- Discovery](https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html
+-- Discovery](https:\/\/openid.net\/specs\/openid-connect-discovery-1_0.html)
 -- of the issuer. - can be inferred from the email domain of the issuer
 -- (e.g. a Google service account). Example:
 -- https:\/\/www.googleapis.com\/oauth2\/v1\/certs
@@ -6278,16 +6795,33 @@ apJWKsURI
 -- | The list of JWT
 -- [audiences](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32#section-4.1.3).
 -- that are allowed to access. A JWT containing any of these audiences will
--- be accepted. When this setting is absent, only JWTs with audience
--- \"https:\/\/Service_name\/API_name\" will be accepted. For example, if
--- no audiences are in the setting, LibraryService API will only accept
--- JWTs with the following audience
--- \"https:\/\/library-example.googleapis.com\/google.example.library.v1.LibraryService\".
--- Example: audiences: bookstore_android.apps.googleusercontent.com,
+-- be accepted. When this setting is absent, JWTs with audiences: -
+-- \"https:\/\/[service.name]\/[google.protobuf.Api.name]\" -
+-- \"https:\/\/[service.name]\/\" will be accepted. For example, if no
+-- audiences are in the setting, LibraryService API will accept JWTs with
+-- the following audiences: -
+-- https:\/\/library-example.googleapis.com\/google.example.library.v1.LibraryService
+-- - https:\/\/library-example.googleapis.com\/ Example: audiences:
+-- bookstore_android.apps.googleusercontent.com,
 -- bookstore_web.apps.googleusercontent.com
 apAudiences :: Lens' AuthProvider (Maybe Text)
 apAudiences
   = lens _apAudiences (\ s a -> s{_apAudiences = a})
+
+-- | Defines the locations to extract the JWT. JWT locations can be either
+-- from HTTP headers or URL query parameters. The rule is that the first
+-- match wins. The checking order is: checking all headers first, then URL
+-- query parameters. If not specified, default to use following 3
+-- locations: 1) Authorization: Bearer 2) x-goog-iap-jwt-assertion 3)
+-- access_token query parameter Default locations can be specified as
+-- followings: jwt_locations: - header: Authorization value_prefix:
+-- \"Bearer \" - header: x-goog-iap-jwt-assertion - query: access_token
+apJwtLocations :: Lens' AuthProvider [JwtLocation]
+apJwtLocations
+  = lens _apJwtLocations
+      (\ s a -> s{_apJwtLocations = a})
+      . _Default
+      . _Coerce
 
 -- | The unique identifier of the auth provider. It will be referred to by
 -- \`AuthRequirement.provider_id\`. Example: \"bookstore_auth\".
@@ -6315,7 +6849,8 @@ instance FromJSON AuthProvider where
               (\ o ->
                  AuthProvider' <$>
                    (o .:? "jwksUri") <*> (o .:? "audiences") <*>
-                     (o .:? "id")
+                     (o .:? "jwtLocations" .!= mempty)
+                     <*> (o .:? "id")
                      <*> (o .:? "authorizationUrl")
                      <*> (o .:? "issuer"))
 
@@ -6325,6 +6860,7 @@ instance ToJSON AuthProvider where
               (catMaybes
                  [("jwksUri" .=) <$> _apJWKsURI,
                   ("audiences" .=) <$> _apAudiences,
+                  ("jwtLocations" .=) <$> _apJwtLocations,
                   ("id" .=) <$> _apId,
                   ("authorizationUrl" .=) <$> _apAuthorizationURL,
                   ("issuer" .=) <$> _apIssuer])
@@ -6389,13 +6925,14 @@ createTenancyUnitRequest =
   CreateTenancyUnitRequest' {_cturTenancyUnitId = Nothing}
 
 
--- | Optional service producer-provided identifier of the tenancy unit. Must
--- be no longer than 40 characters and preferably URI friendly. If it
--- isn\'t provided, a UID for the tenancy unit is automatically generated.
--- The identifier must be unique across a managed service. If the tenancy
--- unit already exists for the managed service and service consumer pair,
--- calling \`CreateTenancyUnit\` returns the existing tenancy unit if the
--- provided identifier is identical or empty, otherwise the call fails.
+-- | Optional. Optional service producer-provided identifier of the tenancy
+-- unit. Must be no longer than 40 characters and preferably URI friendly.
+-- If it isn\'t provided, a UID for the tenancy unit is automatically
+-- generated. The identifier must be unique across a managed service. If
+-- the tenancy unit already exists for the managed service and service
+-- consumer pair, calling \`CreateTenancyUnit\` returns the existing
+-- tenancy unit if the provided identifier is identical or empty, otherwise
+-- the call fails.
 cturTenancyUnitId :: Lens' CreateTenancyUnitRequest (Maybe Text)
 cturTenancyUnitId
   = lens _cturTenancyUnitId
@@ -6420,10 +6957,10 @@ instance ToJSON CreateTenancyUnitRequest where
 -- /See:/ 'contextRule' smart constructor.
 data ContextRule =
   ContextRule'
-    { _crSelector                  :: !(Maybe Text)
-    , _crRequested                 :: !(Maybe [Text])
-    , _crAllowedRequestExtensions  :: !(Maybe [Text])
-    , _crProvided                  :: !(Maybe [Text])
+    { _crSelector :: !(Maybe Text)
+    , _crRequested :: !(Maybe [Text])
+    , _crAllowedRequestExtensions :: !(Maybe [Text])
+    , _crProvided :: !(Maybe [Text])
     , _crAllowedResponseExtensions :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6521,7 +7058,7 @@ instance ToJSON ContextRule where
 data AddTenantProjectRequest =
   AddTenantProjectRequest'
     { _aProjectConfig :: !(Maybe TenantProjectConfig)
-    , _aTag           :: !(Maybe Text)
+    , _aTag :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6546,7 +7083,8 @@ aProjectConfig
   = lens _aProjectConfig
       (\ s a -> s{_aProjectConfig = a})
 
--- | Tag of the added project. Must be less than 128 characters. Required.
+-- | Required. Tag of the added project. Must be less than 128 characters.
+-- Required.
 aTag :: Lens' AddTenantProjectRequest (Maybe Text)
 aTag = lens _aTag (\ s a -> s{_aTag = a})
 

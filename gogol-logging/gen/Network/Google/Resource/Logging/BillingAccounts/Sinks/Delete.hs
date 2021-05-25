@@ -23,7 +23,7 @@
 -- Deletes a sink. If the sink has a unique writer_identity, then that
 -- service account is also deleted.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.sinks.delete@.
 module Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
     , basdCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.sinks.delete@ method which the
 -- 'BillingAccountsSinksDelete' request conforms to.
@@ -63,12 +63,12 @@ type BillingAccountsSinksDeleteResource =
 -- /See:/ 'billingAccountsSinksDelete' smart constructor.
 data BillingAccountsSinksDelete =
   BillingAccountsSinksDelete'
-    { _basdXgafv          :: !(Maybe Xgafv)
+    { _basdXgafv :: !(Maybe Xgafv)
     , _basdUploadProtocol :: !(Maybe Text)
-    , _basdAccessToken    :: !(Maybe Text)
-    , _basdUploadType     :: !(Maybe Text)
-    , _basdSinkName       :: !Text
-    , _basdCallback       :: !(Maybe Text)
+    , _basdAccessToken :: !(Maybe Text)
+    , _basdUploadType :: !(Maybe Text)
+    , _basdSinkName :: !Text
+    , _basdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

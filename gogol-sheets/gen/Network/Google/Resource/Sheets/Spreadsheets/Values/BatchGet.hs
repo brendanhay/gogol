@@ -46,8 +46,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
     , svbgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchGet@ method which the
 -- 'SpreadsheetsValuesBatchGet' request conforms to.
@@ -57,13 +57,19 @@ type SpreadsheetsValuesBatchGetResource =
          Capture "spreadsheetId" Text :>
            "values:batchGet" :>
              QueryParam "$.xgafv" Xgafv :>
-               QueryParam "valueRenderOption" Text :>
+               QueryParam "valueRenderOption"
+                 SpreadsheetsValuesBatchGetValueRenderOption
+                 :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParams "ranges" Text :>
-                         QueryParam "dateTimeRenderOption" Text :>
-                           QueryParam "majorDimension" Text :>
+                         QueryParam "dateTimeRenderOption"
+                           SpreadsheetsValuesBatchGetDateTimeRenderOption
+                           :>
+                           QueryParam "majorDimension"
+                             SpreadsheetsValuesBatchGetMajorDimension
+                             :>
                              QueryParam "callback" Text :>
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] BatchGetValuesResponse
@@ -74,16 +80,16 @@ type SpreadsheetsValuesBatchGetResource =
 -- /See:/ 'spreadsheetsValuesBatchGet' smart constructor.
 data SpreadsheetsValuesBatchGet =
   SpreadsheetsValuesBatchGet'
-    { _svbgXgafv                :: !(Maybe Xgafv)
-    , _svbgValueRenderOption    :: !(Maybe Text)
-    , _svbgUploadProtocol       :: !(Maybe Text)
-    , _svbgAccessToken          :: !(Maybe Text)
-    , _svbgSpreadsheetId        :: !Text
-    , _svbgUploadType           :: !(Maybe Text)
-    , _svbgRanges               :: !(Maybe [Text])
-    , _svbgDateTimeRenderOption :: !(Maybe Text)
-    , _svbgMajorDimension       :: !(Maybe Text)
-    , _svbgCallback             :: !(Maybe Text)
+    { _svbgXgafv :: !(Maybe Xgafv)
+    , _svbgValueRenderOption :: !(Maybe SpreadsheetsValuesBatchGetValueRenderOption)
+    , _svbgUploadProtocol :: !(Maybe Text)
+    , _svbgAccessToken :: !(Maybe Text)
+    , _svbgSpreadsheetId :: !Text
+    , _svbgUploadType :: !(Maybe Text)
+    , _svbgRanges :: !(Maybe [Text])
+    , _svbgDateTimeRenderOption :: !(Maybe SpreadsheetsValuesBatchGetDateTimeRenderOption)
+    , _svbgMajorDimension :: !(Maybe SpreadsheetsValuesBatchGetMajorDimension)
+    , _svbgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,7 +142,7 @@ svbgXgafv
 
 -- | How values should be represented in the output. The default render
 -- option is ValueRenderOption.FORMATTED_VALUE.
-svbgValueRenderOption :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
+svbgValueRenderOption :: Lens' SpreadsheetsValuesBatchGet (Maybe SpreadsheetsValuesBatchGetValueRenderOption)
 svbgValueRenderOption
   = lens _svbgValueRenderOption
       (\ s a -> s{_svbgValueRenderOption = a})
@@ -165,7 +171,7 @@ svbgUploadType
   = lens _svbgUploadType
       (\ s a -> s{_svbgUploadType = a})
 
--- | The A1 notation of the values to retrieve.
+-- | The A1 notation or R1C1 notation of the range to retrieve values from.
 svbgRanges :: Lens' SpreadsheetsValuesBatchGet [Text]
 svbgRanges
   = lens _svbgRanges (\ s a -> s{_svbgRanges = a}) .
@@ -174,18 +180,18 @@ svbgRanges
 
 -- | How dates, times, and durations should be represented in the output.
 -- This is ignored if value_render_option is FORMATTED_VALUE. The default
--- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
-svbgDateTimeRenderOption :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
+-- dateTime render option is SERIAL_NUMBER.
+svbgDateTimeRenderOption :: Lens' SpreadsheetsValuesBatchGet (Maybe SpreadsheetsValuesBatchGetDateTimeRenderOption)
 svbgDateTimeRenderOption
   = lens _svbgDateTimeRenderOption
       (\ s a -> s{_svbgDateTimeRenderOption = a})
 
 -- | The major dimension that results should use. For example, if the
 -- spreadsheet data is: \`A1=1,B1=2,A2=3,B2=4\`, then requesting
--- \`range=A1:B2,majorDimension=ROWS\` will return \`[[1,2],[3,4]]\`,
--- whereas requesting \`range=A1:B2,majorDimension=COLUMNS\` will return
+-- \`range=A1:B2,majorDimension=ROWS\` returns \`[[1,2],[3,4]]\`, whereas
+-- requesting \`range=A1:B2,majorDimension=COLUMNS\` returns
 -- \`[[1,3],[2,4]]\`.
-svbgMajorDimension :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
+svbgMajorDimension :: Lens' SpreadsheetsValuesBatchGet (Maybe SpreadsheetsValuesBatchGetMajorDimension)
 svbgMajorDimension
   = lens _svbgMajorDimension
       (\ s a -> s{_svbgMajorDimension = a})

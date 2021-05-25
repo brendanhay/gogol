@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Get
     , plrggipCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.groups.getIamPolicy@ method which the
 -- 'ProjectsLocationsRegistriesGroupsGetIAMPolicy' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsLocationsRegistriesGroupsGetIAMPolicyResource
 -- /See:/ 'projectsLocationsRegistriesGroupsGetIAMPolicy' smart constructor.
 data ProjectsLocationsRegistriesGroupsGetIAMPolicy =
   ProjectsLocationsRegistriesGroupsGetIAMPolicy'
-    { _plrggipXgafv          :: !(Maybe Xgafv)
+    { _plrggipXgafv :: !(Maybe Xgafv)
     , _plrggipUploadProtocol :: !(Maybe Text)
-    , _plrggipAccessToken    :: !(Maybe Text)
-    , _plrggipUploadType     :: !(Maybe Text)
-    , _plrggipPayload        :: !GetIAMPolicyRequest
-    , _plrggipResource       :: !Text
-    , _plrggipCallback       :: !(Maybe Text)
+    , _plrggipAccessToken :: !(Maybe Text)
+    , _plrggipUploadType :: !(Maybe Text)
+    , _plrggipPayload :: !GetIAMPolicyRequest
+    , _plrggipResource :: !Text
+    , _plrggipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

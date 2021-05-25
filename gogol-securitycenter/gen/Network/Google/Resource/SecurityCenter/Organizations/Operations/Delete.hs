@@ -25,7 +25,7 @@
 -- operation. If the server doesn\'t support this method, it returns
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.operations.delete@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.operations.delete@.
 module Network.Google.Resource.SecurityCenter.Organizations.Operations.Delete
     (
     -- * REST Resource
@@ -44,13 +44,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Operations.Delete
     , oodCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.operations.delete@ method which the
 -- 'OrganizationsOperationsDelete' request conforms to.
 type OrganizationsOperationsDeleteResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,12 +67,12 @@ type OrganizationsOperationsDeleteResource =
 -- /See:/ 'organizationsOperationsDelete' smart constructor.
 data OrganizationsOperationsDelete =
   OrganizationsOperationsDelete'
-    { _oodXgafv          :: !(Maybe Xgafv)
+    { _oodXgafv :: !(Maybe Xgafv)
     , _oodUploadProtocol :: !(Maybe Text)
-    , _oodAccessToken    :: !(Maybe Text)
-    , _oodUploadType     :: !(Maybe Text)
-    , _oodName           :: !Text
-    , _oodCallback       :: !(Maybe Text)
+    , _oodAccessToken :: !(Maybe Text)
+    , _oodUploadType :: !(Maybe Text)
+    , _oodName :: !Text
+    , _oodCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

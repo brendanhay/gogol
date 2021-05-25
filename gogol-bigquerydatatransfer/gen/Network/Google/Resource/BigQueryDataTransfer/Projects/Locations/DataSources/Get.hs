@@ -23,7 +23,7 @@
 -- Retrieves a supported data source and returns its settings, which can be
 -- used for UI rendering.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.get@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.dataSources.get@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSources.Get
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.DataSourc
     , pldsgCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.dataSources.get@ method which the
 -- 'ProjectsLocationsDataSourcesGet' request conforms to.
@@ -63,12 +63,12 @@ type ProjectsLocationsDataSourcesGetResource =
 -- /See:/ 'projectsLocationsDataSourcesGet' smart constructor.
 data ProjectsLocationsDataSourcesGet =
   ProjectsLocationsDataSourcesGet'
-    { _pldsgXgafv          :: !(Maybe Xgafv)
+    { _pldsgXgafv :: !(Maybe Xgafv)
     , _pldsgUploadProtocol :: !(Maybe Text)
-    , _pldsgAccessToken    :: !(Maybe Text)
-    , _pldsgUploadType     :: !(Maybe Text)
-    , _pldsgName           :: !Text
-    , _pldsgCallback       :: !(Maybe Text)
+    , _pldsgAccessToken :: !(Maybe Text)
+    , _pldsgUploadType :: !(Maybe Text)
+    , _pldsgName :: !Text
+    , _pldsgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,8 +125,9 @@ pldsgUploadType
   = lens _pldsgUploadType
       (\ s a -> s{_pldsgUploadType = a})
 
--- | The field will contain name of the resource requested, for example:
--- \`projects\/{project_id}\/dataSources\/{data_source_id}\`
+-- | Required. The field will contain name of the resource requested, for
+-- example: \`projects\/{project_id}\/dataSources\/{data_source_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/dataSources\/{data_source_id}\`
 pldsgName :: Lens' ProjectsLocationsDataSourcesGet Text
 pldsgName
   = lens _pldsgName (\ s a -> s{_pldsgName = a})

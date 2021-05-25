@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Search Console URL Testing Tools.
+A client library for the Google Search Console.
 
 
 ## Contribute

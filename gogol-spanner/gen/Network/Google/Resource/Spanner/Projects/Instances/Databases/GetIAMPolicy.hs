@@ -20,10 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a database resource. Returns an empty
--- policy if a database exists but does not have a policy set.
--- Authorization requires \`spanner.databases.getIamPolicy\` permission on
--- resource.
+-- Gets the access control policy for a database or backup resource.
+-- Returns an empty policy if a database or backup exists but does not have
+-- a policy set. Authorization requires \`spanner.databases.getIamPolicy\`
+-- permission on resource. For backups, authorization requires
+-- \`spanner.backups.getIamPolicy\` permission on resource.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.getIamPolicy@.
 module Network.Google.Resource.Spanner.Projects.Instances.Databases.GetIAMPolicy
@@ -45,8 +46,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.GetIAMPolicy
     , pidgipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.getIamPolicy@ method which the
 -- 'ProjectsInstancesDatabasesGetIAMPolicy' request conforms to.
@@ -62,21 +63,22 @@ type ProjectsInstancesDatabasesGetIAMPolicyResource =
                      ReqBody '[JSON] GetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Gets the access control policy for a database resource. Returns an empty
--- policy if a database exists but does not have a policy set.
--- Authorization requires \`spanner.databases.getIamPolicy\` permission on
--- resource.
+-- | Gets the access control policy for a database or backup resource.
+-- Returns an empty policy if a database or backup exists but does not have
+-- a policy set. Authorization requires \`spanner.databases.getIamPolicy\`
+-- permission on resource. For backups, authorization requires
+-- \`spanner.backups.getIamPolicy\` permission on resource.
 --
 -- /See:/ 'projectsInstancesDatabasesGetIAMPolicy' smart constructor.
 data ProjectsInstancesDatabasesGetIAMPolicy =
   ProjectsInstancesDatabasesGetIAMPolicy'
-    { _pidgipXgafv          :: !(Maybe Xgafv)
+    { _pidgipXgafv :: !(Maybe Xgafv)
     , _pidgipUploadProtocol :: !(Maybe Text)
-    , _pidgipAccessToken    :: !(Maybe Text)
-    , _pidgipUploadType     :: !(Maybe Text)
-    , _pidgipPayload        :: !GetIAMPolicyRequest
-    , _pidgipResource       :: !Text
-    , _pidgipCallback       :: !(Maybe Text)
+    , _pidgipAccessToken :: !(Maybe Text)
+    , _pidgipUploadType :: !(Maybe Text)
+    , _pidgipPayload :: !GetIAMPolicyRequest
+    , _pidgipResource :: !Text
+    , _pidgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

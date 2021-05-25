@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQuery.Tables.Get
     , tgTableId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.get@ method which the
 -- 'TablesGet' request conforms to.
@@ -65,10 +65,10 @@ type TablesGetResource =
 -- /See:/ 'tablesGet' smart constructor.
 data TablesGet =
   TablesGet'
-    { _tgDataSetId      :: !Text
-    , _tgProjectId      :: !Text
+    { _tgDataSetId :: !Text
+    , _tgProjectId :: !Text
     , _tgSelectedFields :: !(Maybe Text)
-    , _tgTableId        :: !Text
+    , _tgTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Delet
     , plfdCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.delete@ method which the
 -- 'ProjectsLocationsFunctionsDelete' request conforms to.
@@ -65,12 +65,12 @@ type ProjectsLocationsFunctionsDeleteResource =
 -- /See:/ 'projectsLocationsFunctionsDelete' smart constructor.
 data ProjectsLocationsFunctionsDelete =
   ProjectsLocationsFunctionsDelete'
-    { _plfdXgafv          :: !(Maybe Xgafv)
+    { _plfdXgafv :: !(Maybe Xgafv)
     , _plfdUploadProtocol :: !(Maybe Text)
-    , _plfdAccessToken    :: !(Maybe Text)
-    , _plfdUploadType     :: !(Maybe Text)
-    , _plfdName           :: !Text
-    , _plfdCallback       :: !(Maybe Text)
+    , _plfdAccessToken :: !(Maybe Text)
+    , _plfdUploadType :: !(Maybe Text)
+    , _plfdName :: !Text
+    , _plfdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,7 +127,7 @@ plfdUploadType
   = lens _plfdUploadType
       (\ s a -> s{_plfdUploadType = a})
 
--- | The name of the function which should be deleted.
+-- | Required. The name of the function which should be deleted.
 plfdName :: Lens' ProjectsLocationsFunctionsDelete Text
 plfdName = lens _plfdName (\ s a -> s{_plfdName = a})
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
     , mragRemarketingAudienceId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.remarketingAudience.get@ method which the
 -- 'ManagementRemarketingAudienceGet' request conforms to.
@@ -61,8 +61,8 @@ type ManagementRemarketingAudienceGetResource =
 -- /See:/ 'managementRemarketingAudienceGet' smart constructor.
 data ManagementRemarketingAudienceGet =
   ManagementRemarketingAudienceGet'
-    { _mragWebPropertyId         :: !Text
-    , _mragAccountId             :: !Text
+    { _mragWebPropertyId :: !Text
+    , _mragAccountId :: !Text
     , _mragRemarketingAudienceId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

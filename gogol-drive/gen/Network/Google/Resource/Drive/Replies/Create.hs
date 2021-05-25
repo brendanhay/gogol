@@ -38,8 +38,8 @@ module Network.Google.Resource.Drive.Replies.Create
     , rcCommentId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.create@ method which the
 -- 'RepliesCreate' request conforms to.
@@ -59,8 +59,8 @@ type RepliesCreateResource =
 -- /See:/ 'repliesCreate' smart constructor.
 data RepliesCreate =
   RepliesCreate'
-    { _rcPayload   :: !Reply
-    , _rcFileId    :: !Text
+    { _rcPayload :: !Reply
+    , _rcFileId :: !Text
     , _rcCommentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

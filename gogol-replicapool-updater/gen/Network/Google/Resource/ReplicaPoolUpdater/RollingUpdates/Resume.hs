@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
     , rZone
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.resume@ method which the
 -- 'RollingUpdatesResume' request conforms to.
@@ -63,8 +63,8 @@ type RollingUpdatesResumeResource =
 data RollingUpdatesResume =
   RollingUpdatesResume'
     { _rRollingUpdate :: !Text
-    , _rProject       :: !Text
-    , _rZone          :: !Text
+    , _rProject :: !Text
+    , _rZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

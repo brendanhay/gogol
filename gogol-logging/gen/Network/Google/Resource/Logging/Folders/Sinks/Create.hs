@@ -25,7 +25,7 @@
 -- sink\'s writer_identity is not permitted to write to the destination. A
 -- sink can export log entries only from the resource owning the sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.sinks.create@.
 module Network.Google.Resource.Logging.Folders.Sinks.Create
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Logging.Folders.Sinks.Create
     , fscCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.sinks.create@ method which the
 -- 'FoldersSinksCreate' request conforms to.
@@ -72,14 +72,14 @@ type FoldersSinksCreateResource =
 -- /See:/ 'foldersSinksCreate' smart constructor.
 data FoldersSinksCreate =
   FoldersSinksCreate'
-    { _fscParent               :: !Text
-    , _fscXgafv                :: !(Maybe Xgafv)
+    { _fscParent :: !Text
+    , _fscXgafv :: !(Maybe Xgafv)
     , _fscUniqueWriterIdentity :: !(Maybe Bool)
-    , _fscUploadProtocol       :: !(Maybe Text)
-    , _fscAccessToken          :: !(Maybe Text)
-    , _fscUploadType           :: !(Maybe Text)
-    , _fscPayload              :: !LogSink
-    , _fscCallback             :: !(Maybe Text)
+    , _fscUploadProtocol :: !(Maybe Text)
+    , _fscAccessToken :: !(Maybe Text)
+    , _fscUploadType :: !(Maybe Text)
+    , _fscPayload :: !LogSink
+    , _fscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

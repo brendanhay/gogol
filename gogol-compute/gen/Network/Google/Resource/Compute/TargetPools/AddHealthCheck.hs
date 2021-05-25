@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
     , tpahcRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.addHealthCheck@ method which the
 -- 'TargetPoolsAddHealthCheck' request conforms to.
@@ -65,11 +65,11 @@ type TargetPoolsAddHealthCheckResource =
 -- /See:/ 'targetPoolsAddHealthCheck' smart constructor.
 data TargetPoolsAddHealthCheck =
   TargetPoolsAddHealthCheck'
-    { _tpahcRequestId  :: !(Maybe Text)
-    , _tpahcProject    :: !Text
+    { _tpahcRequestId :: !(Maybe Text)
+    , _tpahcProject :: !Text
     , _tpahcTargetPool :: !Text
-    , _tpahcPayload    :: !TargetPoolsAddHealthCheckRequest
-    , _tpahcRegion     :: !Text
+    , _tpahcPayload :: !TargetPoolsAddHealthCheckRequest
+    , _tpahcRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

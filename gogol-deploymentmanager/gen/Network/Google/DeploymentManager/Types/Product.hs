@@ -17,15 +17,15 @@
 --
 module Network.Google.DeploymentManager.Types.Product where
 
-import           Network.Google.DeploymentManager.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DeploymentManager.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
 data OperationWarningsItemDataItem =
   OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
-    , _owidiKey   :: !(Maybe Text)
+    , _owidiKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,7 +72,6 @@ instance ToJSON OperationWarningsItemDataItem where
                  [("value" .=) <$> _owidiValue,
                   ("key" .=) <$> _owidiKey])
 
--- |
 --
 -- /See:/ 'configFile' smart constructor.
 newtype ConfigFile =
@@ -114,22 +113,21 @@ instance ToJSON ConfigFile where
 -- service: the log_types specified in each AuditConfig are enabled, and
 -- the exempted_members in each AuditLogConfig are exempted. Example Policy
 -- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
--- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
--- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
--- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
--- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
--- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
--- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
--- DATA_WRITE logging.
+-- \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\":
+-- \"sampleservice.googleapis.com\", \"audit_log_configs\": [ {
+-- \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\",
+-- \"exempted_members\": [ \"user:aliya\'example.com\" ] } ] } ] } For
+-- sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+-- logging. It also exempts jose\'example.com from DATA_READ logging, and
+-- aliya\'example.com from DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig =
   AuditConfig'
-    { _acService         :: !(Maybe Text)
+    { _acService :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
-    , _acExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,16 +139,9 @@ data AuditConfig =
 -- * 'acService'
 --
 -- * 'acAuditLogConfigs'
---
--- * 'acExemptedMembers'
 auditConfig
     :: AuditConfig
-auditConfig =
-  AuditConfig'
-    { _acService = Nothing
-    , _acAuditLogConfigs = Nothing
-    , _acExemptedMembers = Nothing
-    }
+auditConfig = AuditConfig' {_acService = Nothing, _acAuditLogConfigs = Nothing}
 
 
 -- | Specifies a service that will be enabled for audit logging. For example,
@@ -168,41 +159,45 @@ acAuditLogConfigs
       . _Default
       . _Coerce
 
--- |
-acExemptedMembers :: Lens' AuditConfig [Text]
-acExemptedMembers
-  = lens _acExemptedMembers
-      (\ s a -> s{_acExemptedMembers = a})
-      . _Default
-      . _Coerce
-
 instance FromJSON AuditConfig where
         parseJSON
           = withObject "AuditConfig"
               (\ o ->
                  AuditConfig' <$>
                    (o .:? "service") <*>
-                     (o .:? "auditLogConfigs" .!= mempty)
-                     <*> (o .:? "exemptedMembers" .!= mempty))
+                     (o .:? "auditLogConfigs" .!= mempty))
 
 instance ToJSON AuditConfig where
         toJSON AuditConfig'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _acService,
-                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs,
-                  ("exemptedMembers" .=) <$> _acExemptedMembers])
+                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -230,26 +225,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -280,7 +274,7 @@ instance ToJSON Expr where
 data OperationsListResponse =
   OperationsListResponse'
     { _olrNextPageToken :: !(Maybe Text)
-    , _olrOperations    :: !(Maybe [Operation])
+    , _olrOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -333,7 +327,7 @@ instance ToJSON OperationsListResponse where
 data ResourceUpdateWarningsItemDataItem =
   ResourceUpdateWarningsItemDataItem'
     { _ruwidiValue :: !(Maybe Text)
-    , _ruwidiKey   :: !(Maybe Text)
+    , _ruwidiKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -390,7 +384,7 @@ instance ToJSON ResourceUpdateWarningsItemDataItem
 data TypesListResponse =
   TypesListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
-    , _tlrTypes         :: !(Maybe [Type])
+    , _tlrTypes :: !(Maybe [Type])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -436,101 +430,48 @@ instance ToJSON TypesListResponse where
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
                   ("types" .=) <$> _tlrTypes])
 
--- | Increment a streamz counter with the specified metric and field names.
--- Metric names should start with a \'\/\', generally be lowercase-only,
--- and end in \"_count\". Field names should not contain an initial slash.
--- The actual exported metric names will have \"\/iam\/policy\" prepended.
--- Field names correspond to IAM request parameters and field values are
--- their respective values. Supported field names: - \"authority\", which
--- is \"[token]\" if IAMContext.token is present, otherwise the value of
--- IAMContext.authority_selector if present, and otherwise a representation
--- of IAMContext.principal; or - \"iam_principal\", a representation of
--- IAMContext.principal even if a token or authority selector is present;
--- or - \"\" (empty string), resulting in a counter with no fields.
--- Examples: counter { metric: \"\/debug_access_count\" field:
--- \"iam_principal\" } ==> increment counter
--- \/iam\/policy\/backend_debug_access_count {iam_principal=[value of
--- IAMContext.principal]} At this time we do not support multiple field
--- names (though this may be supported in the future).
---
--- /See:/ 'logConfigCounterOptions' smart constructor.
-data LogConfigCounterOptions =
-  LogConfigCounterOptions'
-    { _lccoField  :: !(Maybe Text)
-    , _lccoMetric :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'LogConfigCounterOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lccoField'
---
--- * 'lccoMetric'
-logConfigCounterOptions
-    :: LogConfigCounterOptions
-logConfigCounterOptions =
-  LogConfigCounterOptions' {_lccoField = Nothing, _lccoMetric = Nothing}
-
-
--- | The field value to attribute.
-lccoField :: Lens' LogConfigCounterOptions (Maybe Text)
-lccoField
-  = lens _lccoField (\ s a -> s{_lccoField = a})
-
--- | The metric to update.
-lccoMetric :: Lens' LogConfigCounterOptions (Maybe Text)
-lccoMetric
-  = lens _lccoMetric (\ s a -> s{_lccoMetric = a})
-
-instance FromJSON LogConfigCounterOptions where
-        parseJSON
-          = withObject "LogConfigCounterOptions"
-              (\ o ->
-                 LogConfigCounterOptions' <$>
-                   (o .:? "field") <*> (o .:? "metric"))
-
-instance ToJSON LogConfigCounterOptions where
-        toJSON LogConfigCounterOptions'{..}
-          = object
-              (catMaybes
-                 [("field" .=) <$> _lccoField,
-                  ("metric" .=) <$> _lccoMetric])
-
--- | An Operation resource, used to manage asynchronous API requests. (==
--- resource_for v1.globalOperations ==) (== resource_for
--- beta.globalOperations ==) (== resource_for v1.regionOperations ==) (==
--- resource_for beta.regionOperations ==) (== resource_for
--- v1.zoneOperations ==) (== resource_for beta.zoneOperations ==)
+-- | Represents an Operation resource. Google Compute Engine has three
+-- Operation resources: *
+-- [Global](\/compute\/docs\/reference\/rest\/{$api_version}\/globalOperations)
+-- *
+-- [Regional](\/compute\/docs\/reference\/rest\/{$api_version}\/regionOperations)
+-- *
+-- [Zonal](\/compute\/docs\/reference\/rest\/{$api_version}\/zoneOperations)
+-- You can use an operation resource to manage asynchronous API requests.
+-- For more information, read Handling API responses. Operations can be
+-- global, regional or zonal. - For global operations, use the
+-- \`globalOperations\` resource. - For regional operations, use the
+-- \`regionOperations\` resource. - For zonal operations, use the
+-- \`zonalOperations\` resource. For more information, read Global,
+-- Regional, and Zonal Resources.
 --
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oTargetId            :: !(Maybe (Textual Word64))
-    , _oStatus              :: !(Maybe Text)
-    , _oInsertTime          :: !(Maybe Text)
-    , _oProgress            :: !(Maybe (Textual Int32))
-    , _oStartTime           :: !(Maybe Text)
-    , _oKind                :: !Text
-    , _oError               :: !(Maybe OperationError)
-    , _oHTTPErrorMessage    :: !(Maybe Text)
-    , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [OperationWarningsItem])
+    { _oTargetId :: !(Maybe (Textual Word64))
+    , _oStatus :: !(Maybe OperationStatus)
+    , _oOperationGroupId :: !(Maybe Text)
+    , _oInsertTime :: !(Maybe Text)
+    , _oProgress :: !(Maybe (Textual Int32))
+    , _oStartTime :: !(Maybe Text)
+    , _oKind :: !Text
+    , _oError :: !(Maybe OperationError)
+    , _oHTTPErrorMessage :: !(Maybe Text)
+    , _oZone :: !(Maybe Text)
+    , _oWarnings :: !(Maybe [OperationWarningsItem])
     , _oHTTPErrorStatusCode :: !(Maybe (Textual Int32))
-    , _oUser                :: !(Maybe Text)
-    , _oSelfLink            :: !(Maybe Text)
-    , _oName                :: !(Maybe Text)
-    , _oStatusMessage       :: !(Maybe Text)
-    , _oCreationTimestamp   :: !(Maybe Text)
-    , _oEndTime             :: !(Maybe Text)
-    , _oId                  :: !(Maybe (Textual Word64))
-    , _oOperationType       :: !(Maybe Text)
-    , _oRegion              :: !(Maybe Text)
-    , _oDescription         :: !(Maybe Text)
-    , _oTargetLink          :: !(Maybe Text)
-    , _oClientOperationId   :: !(Maybe Text)
+    , _oUser :: !(Maybe Text)
+    , _oSelfLink :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
+    , _oStatusMessage :: !(Maybe Text)
+    , _oCreationTimestamp :: !(Maybe Text)
+    , _oEndTime :: !(Maybe Text)
+    , _oId :: !(Maybe (Textual Word64))
+    , _oOperationType :: !(Maybe Text)
+    , _oRegion :: !(Maybe Text)
+    , _oDescription :: !(Maybe Text)
+    , _oTargetLink :: !(Maybe Text)
+    , _oClientOperationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -542,6 +483,8 @@ data Operation =
 -- * 'oTargetId'
 --
 -- * 'oStatus'
+--
+-- * 'oOperationGroupId'
 --
 -- * 'oInsertTime'
 --
@@ -590,6 +533,7 @@ operation =
   Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
+    , _oOperationGroupId = Nothing
     , _oInsertTime = Nothing
     , _oProgress = Nothing
     , _oStartTime = Nothing
@@ -622,9 +566,16 @@ oTargetId
       mapping _Coerce
 
 -- | [Output Only] The status of the operation, which can be one of the
--- following: PENDING, RUNNING, or DONE.
-oStatus :: Lens' Operation (Maybe Text)
+-- following: \`PENDING\`, \`RUNNING\`, or \`DONE\`.
+oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
+
+-- | [Output Only] An ID that represents a group of operations, such as when
+-- a group of operations results from a \`bulkInsert\` API request.
+oOperationGroupId :: Lens' Operation (Maybe Text)
+oOperationGroupId
+  = lens _oOperationGroupId
+      (\ s a -> s{_oOperationGroupId = a})
 
 -- | [Output Only] The time that this operation was requested. This value is
 -- in RFC3339 text format.
@@ -648,7 +599,7 @@ oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
--- | [Output Only] Type of the resource. Always compute#operation for
+-- | [Output Only] Type of the resource. Always \`compute#operation\` for
 -- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
@@ -659,16 +610,14 @@ oError :: Lens' Operation (Maybe OperationError)
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
--- message that was returned, such as NOT FOUND.
+-- message that was returned, such as \`NOT FOUND\`.
 oHTTPErrorMessage :: Lens' Operation (Maybe Text)
 oHTTPErrorMessage
   = lens _oHTTPErrorMessage
       (\ s a -> s{_oHTTPErrorMessage = a})
 
 -- | [Output Only] The URL of the zone where the operation resides. Only
--- available when performing per-zone operations. You must specify this
--- field as part of the HTTP request URL. It is not settable as a field in
--- the request body.
+-- applicable when performing per-zone operations.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
@@ -681,8 +630,8 @@ oWarnings
       . _Coerce
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
--- status code that was returned. For example, a 404 means the resource was
--- not found.
+-- status code that was returned. For example, a \`404\` means the resource
+-- was not found.
 oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
@@ -690,7 +639,7 @@ oHTTPErrorStatusCode
       . mapping _Coerce
 
 -- | [Output Only] User who requested the operation, for example:
--- user\'example.com.
+-- \`user\'example.com\`.
 oUser :: Lens' Operation (Maybe Text)
 oUser = lens _oUser (\ s a -> s{_oUser = a})
 
@@ -699,7 +648,7 @@ oSelfLink :: Lens' Operation (Maybe Text)
 oSelfLink
   = lens _oSelfLink (\ s a -> s{_oSelfLink = a})
 
--- | [Output Only] Name of the resource.
+-- | [Output Only] Name of the operation.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -721,23 +670,21 @@ oCreationTimestamp
 oEndTime :: Lens' Operation (Maybe Text)
 oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
--- | [Output Only] The unique identifier for the resource. This identifier is
--- defined by the server.
+-- | [Output Only] The unique identifier for the operation. This identifier
+-- is defined by the server.
 oId :: Lens' Operation (Maybe Word64)
 oId
   = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
--- | [Output Only] The type of operation, such as insert, update, or delete,
--- and so on.
+-- | [Output Only] The type of operation, such as \`insert\`, \`update\`, or
+-- \`delete\`, and so on.
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
 
 -- | [Output Only] The URL of the region where the operation resides. Only
--- available when performing regional operations. You must specify this
--- field as part of the HTTP request URL. It is not settable as a field in
--- the request body.
+-- applicable when performing regional operations.
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
@@ -767,7 +714,8 @@ instance FromJSON Operation where
               (\ o ->
                  Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
-                     (o .:? "insertTime")
+                     (o .:? "operationGroupId")
+                     <*> (o .:? "insertTime")
                      <*> (o .:? "progress")
                      <*> (o .:? "startTime")
                      <*> (o .:? "kind" .!= "deploymentmanager#operation")
@@ -795,6 +743,7 @@ instance ToJSON Operation where
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
                   ("status" .=) <$> _oStatus,
+                  ("operationGroupId" .=) <$> _oOperationGroupId,
                   ("insertTime" .=) <$> _oInsertTime,
                   ("progress" .=) <$> _oProgress,
                   ("startTime" .=) <$> _oStartTime,
@@ -862,7 +811,7 @@ instance ToJSON TestPermissionsResponse where
 data ResourcesListResponse =
   ResourcesListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
-    , _rlrResources     :: !(Maybe [Resource])
+    , _rlrResources :: !(Maybe [Resource])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -908,13 +857,12 @@ instance ToJSON ResourcesListResponse where
                  [("nextPageToken" .=) <$> _rlrNextPageToken,
                   ("resources" .=) <$> _rlrResources])
 
--- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
 data DeploymentUpdate =
   DeploymentUpdate'
-    { _duManifest    :: !(Maybe Text)
-    , _duLabels      :: !(Maybe [DeploymentUpdateLabelEntry])
+    { _duManifest :: !(Maybe Text)
+    , _duLabels :: !(Maybe [DeploymentUpdateLabelEntry])
     , _duDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -942,12 +890,12 @@ duManifest :: Lens' DeploymentUpdate (Maybe Text)
 duManifest
   = lens _duManifest (\ s a -> s{_duManifest = a})
 
--- | Output only. Map of labels; provided by the client when the resource is
+-- | Map of One Platform labels; provided by the client when the resource is
 -- created or updated. Specifically: Label keys must be between 1 and 63
 -- characters long and must conform to the following regular expression:
--- [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63
+-- \`[a-z]([-a-z0-9]*[a-z0-9])?\` Label values must be between 0 and 63
 -- characters long and must conform to the regular expression
--- ([a-z]([-a-z0-9]*[a-z0-9])?)?
+-- \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`.
 duLabels :: Lens' DeploymentUpdate [DeploymentUpdateLabelEntry]
 duLabels
   = lens _duLabels (\ s a -> s{_duLabels = a}) .
@@ -977,19 +925,18 @@ instance ToJSON DeploymentUpdate where
                   ("labels" .=) <$> _duLabels,
                   ("description" .=) <$> _duDescription])
 
--- |
 --
 -- /See:/ 'resourceUpdate' smart constructor.
 data ResourceUpdate =
   ResourceUpdate'
-    { _ruState           :: !(Maybe Text)
-    , _ruError           :: !(Maybe ResourceUpdateError)
-    , _ruAccessControl   :: !(Maybe ResourceAccessControl)
-    , _ruWarnings        :: !(Maybe [ResourceUpdateWarningsItem])
-    , _ruIntent          :: !(Maybe Text)
-    , _ruManifest        :: !(Maybe Text)
+    { _ruState :: !(Maybe ResourceUpdateState)
+    , _ruError :: !(Maybe ResourceUpdateError)
+    , _ruAccessControl :: !(Maybe ResourceAccessControl)
+    , _ruWarnings :: !(Maybe [ResourceUpdateWarningsItem])
+    , _ruIntent :: !(Maybe ResourceUpdateIntent)
+    , _ruManifest :: !(Maybe Text)
     , _ruFinalProperties :: !(Maybe Text)
-    , _ruProperties      :: !(Maybe Text)
+    , _ruProperties :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1029,7 +976,7 @@ resourceUpdate =
 
 
 -- | Output only. The state of the resource.
-ruState :: Lens' ResourceUpdate (Maybe Text)
+ruState :: Lens' ResourceUpdate (Maybe ResourceUpdateState)
 ruState = lens _ruState (\ s a -> s{_ruState = a})
 
 -- | Output only. If errors are generated during update of the resource, this
@@ -1052,8 +999,9 @@ ruWarnings
       _Default
       . _Coerce
 
--- | Output only. The intent of the resource: PREVIEW, UPDATE, or CANCEL.
-ruIntent :: Lens' ResourceUpdate (Maybe Text)
+-- | Output only. The intent of the resource: \`PREVIEW\`, \`UPDATE\`, or
+-- \`CANCEL\`.
+ruIntent :: Lens' ResourceUpdate (Maybe ResourceUpdateIntent)
 ruIntent = lens _ruIntent (\ s a -> s{_ruIntent = a})
 
 -- | Output only. URL of the manifest representing the update configuration
@@ -1101,12 +1049,13 @@ instance ToJSON ResourceUpdate where
                   ("finalProperties" .=) <$> _ruFinalProperties,
                   ("properties" .=) <$> _ruProperties])
 
+-- | Label object for Deployments
 --
 -- /See:/ 'deploymentLabelEntry' smart constructor.
 data DeploymentLabelEntry =
   DeploymentLabelEntry'
     { _dleValue :: !(Maybe Text)
-    , _dleKey   :: !(Maybe Text)
+    , _dleKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1124,9 +1073,11 @@ deploymentLabelEntry =
   DeploymentLabelEntry' {_dleValue = Nothing, _dleKey = Nothing}
 
 
+-- | Value of the label
 dleValue :: Lens' DeploymentLabelEntry (Maybe Text)
 dleValue = lens _dleValue (\ s a -> s{_dleValue = a})
 
+-- | Key of the label
 dleKey :: Lens' DeploymentLabelEntry (Maybe Text)
 dleKey = lens _dleKey (\ s a -> s{_dleKey = a})
 
@@ -1142,124 +1093,6 @@ instance ToJSON DeploymentLabelEntry where
           = object
               (catMaybes
                  [("value" .=) <$> _dleValue, ("key" .=) <$> _dleKey])
-
--- | A rule to be applied in a Policy.
---
--- /See:/ 'rule' smart constructor.
-data Rule =
-  Rule'
-    { _rAction      :: !(Maybe Text)
-    , _rNotIns      :: !(Maybe [Text])
-    , _rIns         :: !(Maybe [Text])
-    , _rLogConfigs  :: !(Maybe [LogConfig])
-    , _rConditions  :: !(Maybe [Condition])
-    , _rPermissions :: !(Maybe [Text])
-    , _rDescription :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Rule' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rAction'
---
--- * 'rNotIns'
---
--- * 'rIns'
---
--- * 'rLogConfigs'
---
--- * 'rConditions'
---
--- * 'rPermissions'
---
--- * 'rDescription'
-rule
-    :: Rule
-rule =
-  Rule'
-    { _rAction = Nothing
-    , _rNotIns = Nothing
-    , _rIns = Nothing
-    , _rLogConfigs = Nothing
-    , _rConditions = Nothing
-    , _rPermissions = Nothing
-    , _rDescription = Nothing
-    }
-
-
--- | Required
-rAction :: Lens' Rule (Maybe Text)
-rAction = lens _rAction (\ s a -> s{_rAction = a})
-
--- | If one or more \'not_in\' clauses are specified, the rule matches if the
--- PRINCIPAL\/AUTHORITY_SELECTOR is in none of the entries.
-rNotIns :: Lens' Rule [Text]
-rNotIns
-  = lens _rNotIns (\ s a -> s{_rNotIns = a}) . _Default
-      . _Coerce
-
--- | If one or more \'in\' clauses are specified, the rule matches if the
--- PRINCIPAL\/AUTHORITY_SELECTOR is in at least one of these entries.
-rIns :: Lens' Rule [Text]
-rIns
-  = lens _rIns (\ s a -> s{_rIns = a}) . _Default .
-      _Coerce
-
--- | The config returned to callers of tech.iam.IAM.CheckPolicy for any
--- entries that match the LOG action.
-rLogConfigs :: Lens' Rule [LogConfig]
-rLogConfigs
-  = lens _rLogConfigs (\ s a -> s{_rLogConfigs = a}) .
-      _Default
-      . _Coerce
-
--- | Additional restrictions that must be met. All conditions must pass for
--- the rule to match.
-rConditions :: Lens' Rule [Condition]
-rConditions
-  = lens _rConditions (\ s a -> s{_rConditions = a}) .
-      _Default
-      . _Coerce
-
--- | A permission is a string of form \'..\' (e.g.,
--- \'storage.buckets.list\'). A value of \'*\' matches all permissions, and
--- a verb part of \'*\' (e.g., \'storage.buckets.*\') matches all verbs.
-rPermissions :: Lens' Rule [Text]
-rPermissions
-  = lens _rPermissions (\ s a -> s{_rPermissions = a})
-      . _Default
-      . _Coerce
-
--- | Human-readable description of the rule.
-rDescription :: Lens' Rule (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
-
-instance FromJSON Rule where
-        parseJSON
-          = withObject "Rule"
-              (\ o ->
-                 Rule' <$>
-                   (o .:? "action") <*> (o .:? "notIns" .!= mempty) <*>
-                     (o .:? "ins" .!= mempty)
-                     <*> (o .:? "logConfigs" .!= mempty)
-                     <*> (o .:? "conditions" .!= mempty)
-                     <*> (o .:? "permissions" .!= mempty)
-                     <*> (o .:? "description"))
-
-instance ToJSON Rule where
-        toJSON Rule'{..}
-          = object
-              (catMaybes
-                 [("action" .=) <$> _rAction,
-                  ("notIns" .=) <$> _rNotIns, ("ins" .=) <$> _rIns,
-                  ("logConfigs" .=) <$> _rLogConfigs,
-                  ("conditions" .=) <$> _rConditions,
-                  ("permissions" .=) <$> _rPermissions,
-                  ("description" .=) <$> _rDescription])
 
 --
 -- /See:/ 'testPermissionsRequest' smart constructor.
@@ -1300,19 +1133,20 @@ instance ToJSON TestPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tPermissions])
 
--- |
 --
 -- /See:/ 'manifest' smart constructor.
 data Manifest =
   Manifest'
-    { _mInsertTime     :: !(Maybe Text)
-    , _mLayout         :: !(Maybe Text)
-    , _mConfig         :: !(Maybe ConfigFile)
+    { _mInsertTime :: !(Maybe Text)
+    , _mLayout :: !(Maybe Text)
+    , _mConfig :: !(Maybe ConfigFile)
     , _mExpandedConfig :: !(Maybe Text)
-    , _mImports        :: !(Maybe [ImportFile])
-    , _mSelfLink       :: !(Maybe Text)
-    , _mName           :: !(Maybe Text)
-    , _mId             :: !(Maybe (Textual Word64))
+    , _mManifestSizeBytes :: !(Maybe (Textual Int64))
+    , _mImports :: !(Maybe [ImportFile])
+    , _mSelfLink :: !(Maybe Text)
+    , _mName :: !(Maybe Text)
+    , _mId :: !(Maybe (Textual Word64))
+    , _mManifestSizeLimitBytes :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1329,6 +1163,8 @@ data Manifest =
 --
 -- * 'mExpandedConfig'
 --
+-- * 'mManifestSizeBytes'
+--
 -- * 'mImports'
 --
 -- * 'mSelfLink'
@@ -1336,6 +1172,8 @@ data Manifest =
 -- * 'mName'
 --
 -- * 'mId'
+--
+-- * 'mManifestSizeLimitBytes'
 manifest
     :: Manifest
 manifest =
@@ -1344,10 +1182,12 @@ manifest =
     , _mLayout = Nothing
     , _mConfig = Nothing
     , _mExpandedConfig = Nothing
+    , _mManifestSizeBytes = Nothing
     , _mImports = Nothing
     , _mSelfLink = Nothing
     , _mName = Nothing
     , _mId = Nothing
+    , _mManifestSizeLimitBytes = Nothing
     }
 
 
@@ -1371,6 +1211,13 @@ mExpandedConfig
   = lens _mExpandedConfig
       (\ s a -> s{_mExpandedConfig = a})
 
+-- | Output only. The computed size of the fully expanded manifest.
+mManifestSizeBytes :: Lens' Manifest (Maybe Int64)
+mManifestSizeBytes
+  = lens _mManifestSizeBytes
+      (\ s a -> s{_mManifestSizeBytes = a})
+      . mapping _Coerce
+
 -- | Output only. The imported files for this manifest.
 mImports :: Lens' Manifest [ImportFile]
 mImports
@@ -1391,6 +1238,13 @@ mId :: Lens' Manifest (Maybe Word64)
 mId
   = lens _mId (\ s a -> s{_mId = a}) . mapping _Coerce
 
+-- | Output only. The size limit for expanded manifests in the project.
+mManifestSizeLimitBytes :: Lens' Manifest (Maybe Int64)
+mManifestSizeLimitBytes
+  = lens _mManifestSizeLimitBytes
+      (\ s a -> s{_mManifestSizeLimitBytes = a})
+      . mapping _Coerce
+
 instance FromJSON Manifest where
         parseJSON
           = withObject "Manifest"
@@ -1399,10 +1253,12 @@ instance FromJSON Manifest where
                    (o .:? "insertTime") <*> (o .:? "layout") <*>
                      (o .:? "config")
                      <*> (o .:? "expandedConfig")
+                     <*> (o .:? "manifestSizeBytes")
                      <*> (o .:? "imports" .!= mempty)
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
-                     <*> (o .:? "id"))
+                     <*> (o .:? "id")
+                     <*> (o .:? "manifestSizeLimitBytes"))
 
 instance ToJSON Manifest where
         toJSON Manifest'{..}
@@ -1412,16 +1268,19 @@ instance ToJSON Manifest where
                   ("layout" .=) <$> _mLayout,
                   ("config" .=) <$> _mConfig,
                   ("expandedConfig" .=) <$> _mExpandedConfig,
+                  ("manifestSizeBytes" .=) <$> _mManifestSizeBytes,
                   ("imports" .=) <$> _mImports,
                   ("selfLink" .=) <$> _mSelfLink,
-                  ("name" .=) <$> _mName, ("id" .=) <$> _mId])
+                  ("name" .=) <$> _mName, ("id" .=) <$> _mId,
+                  ("manifestSizeLimitBytes" .=) <$>
+                    _mManifestSizeLimitBytes])
 
 --
 -- /See:/ 'resourceUpdateWarningsItem' smart constructor.
 data ResourceUpdateWarningsItem =
   ResourceUpdateWarningsItem'
-    { _ruwiData    :: !(Maybe [ResourceUpdateWarningsItemDataItem])
-    , _ruwiCode    :: !(Maybe Text)
+    { _ruwiData :: !(Maybe [ResourceUpdateWarningsItemDataItem])
+    , _ruwiCode :: !(Maybe ResourceUpdateWarningsItemCode)
     , _ruwiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1454,7 +1313,7 @@ ruwiData
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
-ruwiCode :: Lens' ResourceUpdateWarningsItem (Maybe Text)
+ruwiCode :: Lens' ResourceUpdateWarningsItem (Maybe ResourceUpdateWarningsItemCode)
 ruwiCode = lens _ruwiCode (\ s a -> s{_ruwiCode = a})
 
 -- | [Output Only] A human-readable description of the warning code.
@@ -1478,7 +1337,6 @@ instance ToJSON ResourceUpdateWarningsItem where
                   ("code" .=) <$> _ruwiCode,
                   ("message" .=) <$> _ruwiMessage])
 
--- |
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
 newtype DeploymentsCancelPreviewRequest =
@@ -1499,15 +1357,15 @@ deploymentsCancelPreviewRequest =
   DeploymentsCancelPreviewRequest' {_dcprFingerprint = Nothing}
 
 
--- | Specifies a fingerprint for cancelPreview() requests. A fingerprint is a
--- randomly generated value that must be provided in cancelPreview()
--- requests to perform optimistic locking. This ensures optimistic
--- concurrency so that the deployment does not have conflicting requests
--- (e.g. if someone attempts to make a new update request while another
--- user attempts to cancel a preview, this would prevent one of the
+-- | Specifies a fingerprint for \`cancelPreview()\` requests. A fingerprint
+-- is a randomly generated value that must be provided in
+-- \`cancelPreview()\` requests to perform optimistic locking. This ensures
+-- optimistic concurrency so that the deployment does not have conflicting
+-- requests (e.g. if someone attempts to make a new update request while
+-- another user attempts to cancel a preview, this would prevent one of the
 -- requests). The fingerprint is initially generated by Deployment Manager
 -- and changes after every request to modify a deployment. To get the
--- latest fingerprint value, perform a get() request on the deployment.
+-- latest fingerprint value, perform a \`get()\` request on the deployment.
 dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe ByteString)
 dcprFingerprint
   = lens _dcprFingerprint
@@ -1527,75 +1385,22 @@ instance ToJSON DeploymentsCancelPreviewRequest where
           = object
               (catMaybes [("fingerprint" .=) <$> _dcprFingerprint])
 
--- | Write a Cloud Audit log
---
--- /See:/ 'logConfigCloudAuditOptions' smart constructor.
-data LogConfigCloudAuditOptions =
-  LogConfigCloudAuditOptions'
-    { _lccaoAuthorizationLoggingOptions :: !(Maybe AuthorizationLoggingOptions)
-    , _lccaoLogName                     :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'LogConfigCloudAuditOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lccaoAuthorizationLoggingOptions'
---
--- * 'lccaoLogName'
-logConfigCloudAuditOptions
-    :: LogConfigCloudAuditOptions
-logConfigCloudAuditOptions =
-  LogConfigCloudAuditOptions'
-    {_lccaoAuthorizationLoggingOptions = Nothing, _lccaoLogName = Nothing}
-
-
--- | Information used by the Cloud Audit Logging pipeline.
-lccaoAuthorizationLoggingOptions :: Lens' LogConfigCloudAuditOptions (Maybe AuthorizationLoggingOptions)
-lccaoAuthorizationLoggingOptions
-  = lens _lccaoAuthorizationLoggingOptions
-      (\ s a -> s{_lccaoAuthorizationLoggingOptions = a})
-
--- | The log_name to populate in the Cloud Audit Record.
-lccaoLogName :: Lens' LogConfigCloudAuditOptions (Maybe Text)
-lccaoLogName
-  = lens _lccaoLogName (\ s a -> s{_lccaoLogName = a})
-
-instance FromJSON LogConfigCloudAuditOptions where
-        parseJSON
-          = withObject "LogConfigCloudAuditOptions"
-              (\ o ->
-                 LogConfigCloudAuditOptions' <$>
-                   (o .:? "authorizationLoggingOptions") <*>
-                     (o .:? "logName"))
-
-instance ToJSON LogConfigCloudAuditOptions where
-        toJSON LogConfigCloudAuditOptions'{..}
-          = object
-              (catMaybes
-                 [("authorizationLoggingOptions" .=) <$>
-                    _lccaoAuthorizationLoggingOptions,
-                  ("logName" .=) <$> _lccaoLogName])
-
--- |
 --
 -- /See:/ 'resource' smart constructor.
 data Resource =
   Resource'
-    { _rInsertTime      :: !(Maybe Text)
-    , _rAccessControl   :: !(Maybe ResourceAccessControl)
-    , _rURL             :: !(Maybe Text)
-    , _rWarnings        :: !(Maybe [ResourceWarningsItem])
-    , _rUpdateTime      :: !(Maybe Text)
-    , _rName            :: !(Maybe Text)
-    , _rManifest        :: !(Maybe Text)
+    { _rInsertTime :: !(Maybe Text)
+    , _rAccessControl :: !(Maybe ResourceAccessControl)
+    , _rURL :: !(Maybe Text)
+    , _rWarnings :: !(Maybe [ResourceWarningsItem])
+    , _rUpdateTime :: !(Maybe Text)
+    , _rName :: !(Maybe Text)
+    , _rManifest :: !(Maybe Text)
     , _rFinalProperties :: !(Maybe Text)
-    , _rId              :: !(Maybe (Textual Word64))
-    , _rType            :: !(Maybe Text)
-    , _rUpdate          :: !(Maybe ResourceUpdate)
-    , _rProperties      :: !(Maybe Text)
+    , _rId :: !(Maybe (Textual Word64))
+    , _rType :: !(Maybe Text)
+    , _rUpdate :: !(Maybe ResourceUpdate)
+    , _rProperties :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1695,8 +1500,8 @@ rId :: Lens' Resource (Maybe Word64)
 rId
   = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
 
--- | Output only. The type of the resource, for example compute.v1.instance,
--- or cloudfunctions.v1beta1.function.
+-- | Output only. The type of the resource, for example
+-- \`compute.v1.instance\`, or \`cloudfunctions.v1beta1.function\`.
 rType :: Lens' Resource (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
 
@@ -1743,54 +1548,13 @@ instance ToJSON Resource where
                   ("update" .=) <$> _rUpdate,
                   ("properties" .=) <$> _rProperties])
 
--- | Write a Data Access (Gin) log
---
--- /See:/ 'logConfigDataAccessOptions' smart constructor.
-newtype LogConfigDataAccessOptions =
-  LogConfigDataAccessOptions'
-    { _lcdaoLogMode :: Maybe Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'LogConfigDataAccessOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcdaoLogMode'
-logConfigDataAccessOptions
-    :: LogConfigDataAccessOptions
-logConfigDataAccessOptions =
-  LogConfigDataAccessOptions' {_lcdaoLogMode = Nothing}
-
-
--- | Whether Gin logging should happen in a fail-closed manner at the caller.
--- This is relevant only in the LocalIAM implementation, for now. NOTE:
--- Logging to Gin in a fail-closed manner is currently unsupported while
--- work is being done to satisfy the requirements of go\/345. Currently,
--- setting LOG_FAIL_CLOSED mode will have no effect, but still exists
--- because there is active work being done to support it (b\/115874152).
-lcdaoLogMode :: Lens' LogConfigDataAccessOptions (Maybe Text)
-lcdaoLogMode
-  = lens _lcdaoLogMode (\ s a -> s{_lcdaoLogMode = a})
-
-instance FromJSON LogConfigDataAccessOptions where
-        parseJSON
-          = withObject "LogConfigDataAccessOptions"
-              (\ o ->
-                 LogConfigDataAccessOptions' <$> (o .:? "logMode"))
-
-instance ToJSON LogConfigDataAccessOptions where
-        toJSON LogConfigDataAccessOptions'{..}
-          = object
-              (catMaybes [("logMode" .=) <$> _lcdaoLogMode])
-
+-- | Label object for DeploymentUpdate
 --
 -- /See:/ 'deploymentUpdateLabelEntry' smart constructor.
 data DeploymentUpdateLabelEntry =
   DeploymentUpdateLabelEntry'
     { _duleValue :: !(Maybe Text)
-    , _duleKey   :: !(Maybe Text)
+    , _duleKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1808,10 +1572,12 @@ deploymentUpdateLabelEntry =
   DeploymentUpdateLabelEntry' {_duleValue = Nothing, _duleKey = Nothing}
 
 
+-- | Value of the label
 duleValue :: Lens' DeploymentUpdateLabelEntry (Maybe Text)
 duleValue
   = lens _duleValue (\ s a -> s{_duleValue = a})
 
+-- | Key of the label
 duleKey :: Lens' DeploymentUpdateLabelEntry (Maybe Text)
 duleKey = lens _duleKey (\ s a -> s{_duleKey = a})
 
@@ -1834,8 +1600,8 @@ instance ToJSON DeploymentUpdateLabelEntry where
 data ResourceUpdateErrorErrorsItem =
   ResourceUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
-    , _rueeiCode     :: !(Maybe Text)
-    , _rueeiMessage  :: !(Maybe Text)
+    , _rueeiCode :: !(Maybe Text)
+    , _rueeiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1896,7 +1662,7 @@ instance ToJSON ResourceUpdateErrorErrorsItem where
 data ManifestsListResponse =
   ManifestsListResponse'
     { _mlrNextPageToken :: !(Maybe Text)
-    , _mlrManifests     :: !(Maybe [Manifest])
+    , _mlrManifests :: !(Maybe [Manifest])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1985,9 +1751,9 @@ instance ToJSON OperationError where
 -- /See:/ 'globalSetPolicyRequest' smart constructor.
 data GlobalSetPolicyRequest =
   GlobalSetPolicyRequest'
-    { _gsprEtag     :: !(Maybe Bytes)
+    { _gsprEtag :: !(Maybe Bytes)
     , _gsprBindings :: !(Maybe [Binding])
-    , _gsprPolicy   :: !(Maybe Policy)
+    , _gsprPolicy :: !(Maybe Policy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2047,73 +1813,48 @@ instance ToJSON GlobalSetPolicyRequest where
                   ("bindings" .=) <$> _gsprBindings,
                   ("policy" .=) <$> _gsprPolicy])
 
--- | Authorization-related information used by Cloud Audit Logging.
---
--- /See:/ 'authorizationLoggingOptions' smart constructor.
-newtype AuthorizationLoggingOptions =
-  AuthorizationLoggingOptions'
-    { _aloPermissionType :: Maybe Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AuthorizationLoggingOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aloPermissionType'
-authorizationLoggingOptions
-    :: AuthorizationLoggingOptions
-authorizationLoggingOptions =
-  AuthorizationLoggingOptions' {_aloPermissionType = Nothing}
-
-
--- | The type of the permission that was checked.
-aloPermissionType :: Lens' AuthorizationLoggingOptions (Maybe Text)
-aloPermissionType
-  = lens _aloPermissionType
-      (\ s a -> s{_aloPermissionType = a})
-
-instance FromJSON AuthorizationLoggingOptions where
-        parseJSON
-          = withObject "AuthorizationLoggingOptions"
-              (\ o ->
-                 AuthorizationLoggingOptions' <$>
-                   (o .:? "permissionType"))
-
-instance ToJSON AuthorizationLoggingOptions where
-        toJSON AuthorizationLoggingOptions'{..}
-          = object
-              (catMaybes
-                 [("permissionType" .=) <$> _aloPermissionType])
-
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Bytes)
-    , _pRules        :: !(Maybe [Rule])
-    , _pVersion      :: !(Maybe (Textual Int32))
-    , _pBindings     :: !(Maybe [Binding])
-    , _pIAMOwned     :: !(Maybe Bool)
+    , _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2126,23 +1867,17 @@ data Policy =
 --
 -- * 'pEtag'
 --
--- * 'pRules'
---
 -- * 'pVersion'
 --
 -- * 'pBindings'
---
--- * 'pIAMOwned'
 policy
     :: Policy
 policy =
   Policy'
     { _pAuditConfigs = Nothing
     , _pEtag = Nothing
-    , _pRules = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
-    , _pIAMOwned = Nothing
     }
 
 
@@ -2161,43 +1896,45 @@ pAuditConfigs
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | If more than one rule is specified, the rules are applied in the
--- following manner: - All matching LOG rules are always applied. - If any
--- DENY\/DENY_WITH_LOG rule matches, permission is denied. Logging will be
--- applied if one or more matching rule requires logging. - Otherwise, if
--- any ALLOW\/ALLOW_WITH_LOG rule matches, permission is granted. Logging
--- will be applied if one or more matching rule requires logging. -
--- Otherwise, if no rule applies, permission is denied.
-pRules :: Lens' Policy [Rule]
-pRules
-  = lens _pRules (\ s a -> s{_pRules = a}) . _Default .
-      _Coerce
-
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
       _Default
       . _Coerce
-
--- |
-pIAMOwned :: Lens' Policy (Maybe Bool)
-pIAMOwned
-  = lens _pIAMOwned (\ s a -> s{_pIAMOwned = a})
 
 instance FromJSON Policy where
         parseJSON
@@ -2205,20 +1942,16 @@ instance FromJSON Policy where
               (\ o ->
                  Policy' <$>
                    (o .:? "auditConfigs" .!= mempty) <*> (o .:? "etag")
-                     <*> (o .:? "rules" .!= mempty)
                      <*> (o .:? "version")
-                     <*> (o .:? "bindings" .!= mempty)
-                     <*> (o .:? "iamOwned"))
+                     <*> (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
         toJSON Policy'{..}
           = object
               (catMaybes
                  [("auditConfigs" .=) <$> _pAuditConfigs,
-                  ("etag" .=) <$> _pEtag, ("rules" .=) <$> _pRules,
-                  ("version" .=) <$> _pVersion,
-                  ("bindings" .=) <$> _pBindings,
-                  ("iamOwned" .=) <$> _pIAMOwned])
+                  ("etag" .=) <$> _pEtag, ("version" .=) <$> _pVersion,
+                  ("bindings" .=) <$> _pBindings])
 
 -- | A resource type supported by Deployment Manager.
 --
@@ -2226,10 +1959,10 @@ instance ToJSON Policy where
 data Type =
   Type'
     { _tInsertTime :: !(Maybe Text)
-    , _tOperation  :: !(Maybe Operation)
-    , _tSelfLink   :: !(Maybe Text)
-    , _tName       :: !(Maybe Text)
-    , _tId         :: !(Maybe (Textual Word64))
+    , _tOperation :: !(Maybe Operation)
+    , _tSelfLink :: !(Maybe Text)
+    , _tName :: !(Maybe Text)
+    , _tId :: !(Maybe (Textual Word64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2302,13 +2035,12 @@ instance ToJSON Type where
                   ("selfLink" .=) <$> _tSelfLink,
                   ("name" .=) <$> _tName, ("id" .=) <$> _tId])
 
--- |
 --
 -- /See:/ 'importFile' smart constructor.
 data ImportFile =
   ImportFile'
     { _ifContent :: !(Maybe Text)
-    , _ifName    :: !(Maybe Text)
+    , _ifName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2352,8 +2084,8 @@ instance ToJSON ImportFile where
 data OperationErrorErrorsItem =
   OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
-    , _oeeiCode     :: !(Maybe Text)
-    , _oeeiMessage  :: !(Maybe Text)
+    , _oeeiCode :: !(Maybe Text)
+    , _oeeiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2405,7 +2137,6 @@ instance ToJSON OperationErrorErrorsItem where
                   ("code" .=) <$> _oeeiCode,
                   ("message" .=) <$> _oeeiMessage])
 
--- |
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
 newtype DeploymentsStopRequest =
@@ -2425,15 +2156,15 @@ deploymentsStopRequest
 deploymentsStopRequest = DeploymentsStopRequest' {_dsrFingerprint = Nothing}
 
 
--- | Specifies a fingerprint for stop() requests. A fingerprint is a randomly
--- generated value that must be provided in stop() requests to perform
--- optimistic locking. This ensures optimistic concurrency so that the
--- deployment does not have conflicting requests (e.g. if someone attempts
--- to make a new update request while another user attempts to stop an
--- ongoing update request, this would prevent a collision). The fingerprint
--- is initially generated by Deployment Manager and changes after every
--- request to modify a deployment. To get the latest fingerprint value,
--- perform a get() request on the deployment.
+-- | Specifies a fingerprint for \`stop()\` requests. A fingerprint is a
+-- randomly generated value that must be provided in \`stop()\` requests to
+-- perform optimistic locking. This ensures optimistic concurrency so that
+-- the deployment does not have conflicting requests (e.g. if someone
+-- attempts to make a new update request while another user attempts to
+-- stop an ongoing update request, this would prevent a collision). The
+-- fingerprint is initially generated by Deployment Manager and changes
+-- after every request to modify a deployment. To get the latest
+-- fingerprint value, perform a \`get()\` request on the deployment.
 dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe ByteString)
 dsrFingerprint
   = lens _dsrFingerprint
@@ -2456,7 +2187,7 @@ instance ToJSON DeploymentsStopRequest where
 data ResourceWarningsItemDataItem =
   ResourceWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
-    , _rwidiKey   :: !(Maybe Text)
+    , _rwidiKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2505,14 +2236,14 @@ instance ToJSON ResourceWarningsItemDataItem where
 
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
--- logging, while exempting foo\'gmail.com from DATA_READ logging.
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting jose\'example.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
 data AuditLogConfig =
   AuditLogConfig'
-    { _alcLogType         :: !(Maybe Text)
+    { _alcLogType :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2532,12 +2263,12 @@ auditLogConfig =
 
 
 -- | The log type that this config enables.
-alcLogType :: Lens' AuditLogConfig (Maybe Text)
+alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
 alcLogType
   = lens _alcLogType (\ s a -> s{_alcLogType = a})
 
 -- | Specifies the identities that do not cause logging for this type of
--- permission. Follows the same format of [Binding.members][].
+-- permission. Follows the same format of Binding.members.
 alcExemptedMembers :: Lens' AuditLogConfig [Text]
 alcExemptedMembers
   = lens _alcExemptedMembers
@@ -2599,95 +2330,6 @@ instance ToJSON ResourceUpdateError where
         toJSON ResourceUpdateError'{..}
           = object (catMaybes [("errors" .=) <$> _rueErrors])
 
--- | A condition to be met.
---
--- /See:/ 'condition' smart constructor.
-data Condition =
-  Condition'
-    { _cOp     :: !(Maybe Text)
-    , _cIAM    :: !(Maybe Text)
-    , _cValues :: !(Maybe [Text])
-    , _cValue  :: !(Maybe Text)
-    , _cSys    :: !(Maybe Text)
-    , _cSvc    :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Condition' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cOp'
---
--- * 'cIAM'
---
--- * 'cValues'
---
--- * 'cValue'
---
--- * 'cSys'
---
--- * 'cSvc'
-condition
-    :: Condition
-condition =
-  Condition'
-    { _cOp = Nothing
-    , _cIAM = Nothing
-    , _cValues = Nothing
-    , _cValue = Nothing
-    , _cSys = Nothing
-    , _cSvc = Nothing
-    }
-
-
--- | An operator to apply the subject with.
-cOp :: Lens' Condition (Maybe Text)
-cOp = lens _cOp (\ s a -> s{_cOp = a})
-
--- | Trusted attributes supplied by the IAM system.
-cIAM :: Lens' Condition (Maybe Text)
-cIAM = lens _cIAM (\ s a -> s{_cIAM = a})
-
--- | The objects of the condition. This is mutually exclusive with \'value\'.
-cValues :: Lens' Condition [Text]
-cValues
-  = lens _cValues (\ s a -> s{_cValues = a}) . _Default
-      . _Coerce
-
--- | DEPRECATED. Use \'values\' instead.
-cValue :: Lens' Condition (Maybe Text)
-cValue = lens _cValue (\ s a -> s{_cValue = a})
-
--- | Trusted attributes supplied by any service that owns resources and uses
--- the IAM system for access control.
-cSys :: Lens' Condition (Maybe Text)
-cSys = lens _cSys (\ s a -> s{_cSys = a})
-
--- | Trusted attributes discharged by the service.
-cSvc :: Lens' Condition (Maybe Text)
-cSvc = lens _cSvc (\ s a -> s{_cSvc = a})
-
-instance FromJSON Condition where
-        parseJSON
-          = withObject "Condition"
-              (\ o ->
-                 Condition' <$>
-                   (o .:? "op") <*> (o .:? "iam") <*>
-                     (o .:? "values" .!= mempty)
-                     <*> (o .:? "value")
-                     <*> (o .:? "sys")
-                     <*> (o .:? "svc"))
-
-instance ToJSON Condition where
-        toJSON Condition'{..}
-          = object
-              (catMaybes
-                 [("op" .=) <$> _cOp, ("iam" .=) <$> _cIAM,
-                  ("values" .=) <$> _cValues, ("value" .=) <$> _cValue,
-                  ("sys" .=) <$> _cSys, ("svc" .=) <$> _cSvc])
-
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
 --
@@ -2695,7 +2337,7 @@ instance ToJSON Condition where
 data DeploymentsListResponse =
   DeploymentsListResponse'
     { _dlrNextPageToken :: !(Maybe Text)
-    , _dlrDeployments   :: !(Maybe [Deployment])
+    , _dlrDeployments :: !(Maybe [Deployment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2747,8 +2389,8 @@ instance ToJSON DeploymentsListResponse where
 -- /See:/ 'resourceWarningsItem' smart constructor.
 data ResourceWarningsItem =
   ResourceWarningsItem'
-    { _rwiData    :: !(Maybe [ResourceWarningsItemDataItem])
-    , _rwiCode    :: !(Maybe Text)
+    { _rwiData :: !(Maybe [ResourceWarningsItemDataItem])
+    , _rwiCode :: !(Maybe ResourceWarningsItemCode)
     , _rwiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2780,7 +2422,7 @@ rwiData
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
-rwiCode :: Lens' ResourceWarningsItem (Maybe Text)
+rwiCode :: Lens' ResourceWarningsItem (Maybe ResourceWarningsItemCode)
 rwiCode = lens _rwiCode (\ s a -> s{_rwiCode = a})
 
 -- | [Output Only] A human-readable description of the warning code.
@@ -2802,65 +2444,6 @@ instance ToJSON ResourceWarningsItem where
               (catMaybes
                  [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
                   ("message" .=) <$> _rwiMessage])
-
--- | Specifies what kind of log the caller must write
---
--- /See:/ 'logConfig' smart constructor.
-data LogConfig =
-  LogConfig'
-    { _lcCloudAudit :: !(Maybe LogConfigCloudAuditOptions)
-    , _lcDataAccess :: !(Maybe LogConfigDataAccessOptions)
-    , _lcCounter    :: !(Maybe LogConfigCounterOptions)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcCloudAudit'
---
--- * 'lcDataAccess'
---
--- * 'lcCounter'
-logConfig
-    :: LogConfig
-logConfig =
-  LogConfig'
-    {_lcCloudAudit = Nothing, _lcDataAccess = Nothing, _lcCounter = Nothing}
-
-
--- | Cloud audit options.
-lcCloudAudit :: Lens' LogConfig (Maybe LogConfigCloudAuditOptions)
-lcCloudAudit
-  = lens _lcCloudAudit (\ s a -> s{_lcCloudAudit = a})
-
--- | Data access options.
-lcDataAccess :: Lens' LogConfig (Maybe LogConfigDataAccessOptions)
-lcDataAccess
-  = lens _lcDataAccess (\ s a -> s{_lcDataAccess = a})
-
--- | Counter options.
-lcCounter :: Lens' LogConfig (Maybe LogConfigCounterOptions)
-lcCounter
-  = lens _lcCounter (\ s a -> s{_lcCounter = a})
-
-instance FromJSON LogConfig where
-        parseJSON
-          = withObject "LogConfig"
-              (\ o ->
-                 LogConfig' <$>
-                   (o .:? "cloudAudit") <*> (o .:? "dataAccess") <*>
-                     (o .:? "counter"))
-
-instance ToJSON LogConfig where
-        toJSON LogConfig'{..}
-          = object
-              (catMaybes
-                 [("cloudAudit" .=) <$> _lcCloudAudit,
-                  ("dataAccess" .=) <$> _lcDataAccess,
-                  ("counter" .=) <$> _lcCounter])
 
 -- | The access controls set on the resource.
 --
@@ -2900,12 +2483,11 @@ instance ToJSON ResourceAccessControl where
               (catMaybes
                  [("gcpIamPolicy" .=) <$> _racGcpIAMPolicy])
 
--- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
 data TargetConfiguration =
   TargetConfiguration'
-    { _tcConfig  :: !(Maybe ConfigFile)
+    { _tcConfig :: !(Maybe ConfigFile)
     , _tcImports :: !(Maybe [ImportFile])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2955,8 +2537,8 @@ instance ToJSON TargetConfiguration where
 -- /See:/ 'operationWarningsItem' smart constructor.
 data OperationWarningsItem =
   OperationWarningsItem'
-    { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
-    , _owiCode    :: !(Maybe Text)
+    { _owiData :: !(Maybe [OperationWarningsItemDataItem])
+    , _owiCode :: !(Maybe OperationWarningsItemCode)
     , _owiMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2988,7 +2570,7 @@ owiData
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
-owiCode :: Lens' OperationWarningsItem (Maybe Text)
+owiCode :: Lens' OperationWarningsItem (Maybe OperationWarningsItemCode)
 owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
 
 -- | [Output Only] A human-readable description of the warning code.
@@ -3016,8 +2598,8 @@ instance ToJSON OperationWarningsItem where
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3045,13 +2627,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: A Google Apps domain
--- name that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -3063,10 +2662,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | Unimplemented. The condition that is associated with this binding. NOTE:
--- an unsatisfied condition will not allow user access via current binding.
--- Different bindings, including their conditions, are examined
--- independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -3087,23 +2690,22 @@ instance ToJSON Binding where
                   ("role" .=) <$> _bRole,
                   ("condition" .=) <$> _bCondition])
 
--- |
 --
 -- /See:/ 'deployment' smart constructor.
 data Deployment =
   Deployment'
-    { _dInsertTime  :: !(Maybe Text)
-    , _dOperation   :: !(Maybe Operation)
+    { _dInsertTime :: !(Maybe Text)
+    , _dOperation :: !(Maybe Operation)
     , _dFingerprint :: !(Maybe Bytes)
-    , _dUpdateTime  :: !(Maybe Text)
-    , _dSelfLink    :: !(Maybe Text)
-    , _dName        :: !(Maybe Text)
-    , _dManifest    :: !(Maybe Text)
-    , _dId          :: !(Maybe (Textual Word64))
-    , _dLabels      :: !(Maybe [DeploymentLabelEntry])
+    , _dUpdateTime :: !(Maybe Text)
+    , _dSelfLink :: !(Maybe Text)
+    , _dName :: !(Maybe Text)
+    , _dManifest :: !(Maybe Text)
+    , _dId :: !(Maybe (Textual Word64))
+    , _dLabels :: !(Maybe [DeploymentLabelEntry])
     , _dDescription :: !(Maybe Text)
-    , _dUpdate      :: !(Maybe DeploymentUpdate)
-    , _dTarget      :: !(Maybe TargetConfiguration)
+    , _dUpdate :: !(Maybe DeploymentUpdate)
+    , _dTarget :: !(Maybe TargetConfiguration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3166,13 +2768,14 @@ dOperation
   = lens _dOperation (\ s a -> s{_dOperation = a})
 
 -- | Provides a fingerprint to use in requests to modify a deployment, such
--- as update(), stop(), and cancelPreview() requests. A fingerprint is a
--- randomly generated value that must be provided with update(), stop(),
--- and cancelPreview() requests to perform optimistic locking. This ensures
--- optimistic concurrency so that only one request happens at a time. The
--- fingerprint is initially generated by Deployment Manager and changes
--- after every request to modify data. To get the latest fingerprint value,
--- perform a get() request to a deployment.
+-- as \`update()\`, \`stop()\`, and \`cancelPreview()\` requests. A
+-- fingerprint is a randomly generated value that must be provided with
+-- \`update()\`, \`stop()\`, and \`cancelPreview()\` requests to perform
+-- optimistic locking. This ensures optimistic concurrency so that only one
+-- request happens at a time. The fingerprint is initially generated by
+-- Deployment Manager and changes after every request to modify data. To
+-- get the latest fingerprint value, perform a \`get()\` request to a
+-- deployment.
 dFingerprint :: Lens' Deployment (Maybe ByteString)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
@@ -3191,7 +2794,7 @@ dSelfLink
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
--- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- regular expression \`[a-z]([-a-z0-9]*[a-z0-9])?\` which means the first
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
@@ -3199,7 +2802,8 @@ dName :: Lens' Deployment (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
 -- | Output only. URL of the manifest representing the last manifest that was
--- successfully deployed.
+-- successfully deployed. If no manifest has been successfully deployed,
+-- this field will be absent.
 dManifest :: Lens' Deployment (Maybe Text)
 dManifest
   = lens _dManifest (\ s a -> s{_dManifest = a})
@@ -3208,12 +2812,12 @@ dId :: Lens' Deployment (Maybe Word64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
--- | Map of labels; provided by the client when the resource is created or
--- updated. Specifically: Label keys must be between 1 and 63 characters
--- long and must conform to the following regular expression:
--- [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63
+-- | Map of One Platform labels; provided by the client when the resource is
+-- created or updated. Specifically: Label keys must be between 1 and 63
+-- characters long and must conform to the following regular expression:
+-- \`[a-z]([-a-z0-9]*[a-z0-9])?\` Label values must be between 0 and 63
 -- characters long and must conform to the regular expression
--- ([a-z]([-a-z0-9]*[a-z0-9])?)?
+-- \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`.
 dLabels :: Lens' Deployment [DeploymentLabelEntry]
 dLabels
   = lens _dLabels (\ s a -> s{_dLabels = a}) . _Default

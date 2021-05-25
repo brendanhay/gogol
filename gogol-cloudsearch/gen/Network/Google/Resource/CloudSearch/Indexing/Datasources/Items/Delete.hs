@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes Item resource for the specified resource name.
+-- Deletes Item resource for the specified resource name. This API requires
+-- an admin or service account to execute. The service account used is the
+-- one whitelisted in the corresponding data source.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.delete@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.delete@.
 module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Delete
     (
     -- * REST Resource
@@ -45,8 +47,8 @@ module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Delete
     , ididCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.indexing.datasources.items.delete@ method which the
 -- 'IndexingDatasourcesItemsDelete' request conforms to.
@@ -57,7 +59,8 @@ type IndexingDatasourcesItemsDeleteResource =
            QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
-                 QueryParam "mode" Text :>
+                 QueryParam "mode" IndexingDatasourcesItemsDeleteMode
+                   :>
                    QueryParam "uploadType" Text :>
                      QueryParam "connectorName" Text :>
                        QueryParam "version" Bytes :>
@@ -66,21 +69,23 @@ type IndexingDatasourcesItemsDeleteResource =
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
 
--- | Deletes Item resource for the specified resource name.
+-- | Deletes Item resource for the specified resource name. This API requires
+-- an admin or service account to execute. The service account used is the
+-- one whitelisted in the corresponding data source.
 --
 -- /See:/ 'indexingDatasourcesItemsDelete' smart constructor.
 data IndexingDatasourcesItemsDelete =
   IndexingDatasourcesItemsDelete'
-    { _ididXgafv                       :: !(Maybe Xgafv)
-    , _ididUploadProtocol              :: !(Maybe Text)
-    , _ididAccessToken                 :: !(Maybe Text)
-    , _ididMode                        :: !(Maybe Text)
-    , _ididUploadType                  :: !(Maybe Text)
-    , _ididConnectorName               :: !(Maybe Text)
-    , _ididName                        :: !Text
-    , _ididVersion                     :: !(Maybe Bytes)
+    { _ididXgafv :: !(Maybe Xgafv)
+    , _ididUploadProtocol :: !(Maybe Text)
+    , _ididAccessToken :: !(Maybe Text)
+    , _ididMode :: !(Maybe IndexingDatasourcesItemsDeleteMode)
+    , _ididUploadType :: !(Maybe Text)
+    , _ididConnectorName :: !(Maybe Text)
+    , _ididName :: !Text
+    , _ididVersion :: !(Maybe Bytes)
     , _ididDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _ididCallback                    :: !(Maybe Text)
+    , _ididCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,7 +149,7 @@ ididAccessToken
       (\ s a -> s{_ididAccessToken = a})
 
 -- | Required. The RequestMode for this request.
-ididMode :: Lens' IndexingDatasourcesItemsDelete (Maybe Text)
+ididMode :: Lens' IndexingDatasourcesItemsDelete (Maybe IndexingDatasourcesItemsDeleteMode)
 ididMode = lens _ididMode (\ s a -> s{_ididMode = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -153,8 +158,8 @@ ididUploadType
   = lens _ididUploadType
       (\ s a -> s{_ididUploadType = a})
 
--- | Name of connector making this call.
--- Format: datasources\/{source_id}\/connectors\/{ID}
+-- | Name of connector making this call. Format:
+-- datasources\/{source_id}\/connectors\/{ID}
 ididConnectorName :: Lens' IndexingDatasourcesItemsDelete (Maybe Text)
 ididConnectorName
   = lens _ididConnectorName
@@ -168,10 +173,10 @@ ididName = lens _ididName (\ s a -> s{_ididName = a})
 -- | Required. The incremented version of the item to delete from the index.
 -- The indexing system stores the version from the datasource as a byte
 -- string and compares the Item version in the index to the version of the
--- queued Item using lexical ordering.
--- Cloud Search Indexing won\'t delete any queued item with a version value
--- that is less than or equal to the version of the currently indexed item.
--- The maximum length for this field is 1024 bytes.
+-- queued Item using lexical ordering. Cloud Search Indexing won\'t delete
+-- any queued item with a version value that is less than or equal to the
+-- version of the currently indexed item. The maximum length for this field
+-- is 1024 bytes.
 ididVersion :: Lens' IndexingDatasourcesItemsDelete (Maybe ByteString)
 ididVersion
   = lens _ididVersion (\ s a -> s{_ididVersion = a}) .

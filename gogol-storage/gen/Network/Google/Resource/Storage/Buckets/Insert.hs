@@ -39,10 +39,11 @@ module Network.Google.Resource.Storage.Buckets.Insert
     , biPredefinedDefaultObjectACL
     , biUserProject
     , biProjection
+    , biProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.insert@ method which the
 -- 'BucketsInsert' request conforms to.
@@ -58,20 +59,22 @@ type BucketsInsertResource =
                  :>
                  QueryParam "userProject" Text :>
                    QueryParam "projection" BucketsInsertProjection :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
+                     QueryParam "provisionalUserProject" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --
 -- /See:/ 'bucketsInsert' smart constructor.
 data BucketsInsert =
   BucketsInsert'
-    { _biProject                    :: !Text
-    , _biPredefinedACL              :: !(Maybe BucketsInsertPredefinedACL)
-    , _biPayload                    :: !Bucket
+    { _biProject :: !Text
+    , _biPredefinedACL :: !(Maybe BucketsInsertPredefinedACL)
+    , _biPayload :: !Bucket
     , _biPredefinedDefaultObjectACL :: !(Maybe BucketsInsertPredefinedDefaultObjectACL)
-    , _biUserProject                :: !(Maybe Text)
-    , _biProjection                 :: !(Maybe BucketsInsertProjection)
+    , _biUserProject :: !(Maybe Text)
+    , _biProjection :: !(Maybe BucketsInsertProjection)
+    , _biProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,6 +94,8 @@ data BucketsInsert =
 -- * 'biUserProject'
 --
 -- * 'biProjection'
+--
+-- * 'biProvisionalUserProject'
 bucketsInsert
     :: Text -- ^ 'biProject'
     -> Bucket -- ^ 'biPayload'
@@ -103,6 +108,7 @@ bucketsInsert pBiProject_ pBiPayload_ =
     , _biPredefinedDefaultObjectACL = Nothing
     , _biUserProject = Nothing
     , _biProjection = Nothing
+    , _biProvisionalUserProject = Nothing
     }
 
 
@@ -141,6 +147,13 @@ biProjection :: Lens' BucketsInsert (Maybe BucketsInsertProjection)
 biProjection
   = lens _biProjection (\ s a -> s{_biProjection = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+biProvisionalUserProject :: Lens' BucketsInsert (Maybe Text)
+biProvisionalUserProject
+  = lens _biProvisionalUserProject
+      (\ s a -> s{_biProvisionalUserProject = a})
+
 instance GoogleRequest BucketsInsert where
         type Rs BucketsInsert = Bucket
         type Scopes BucketsInsert =
@@ -152,6 +165,7 @@ instance GoogleRequest BucketsInsert where
               _biPredefinedDefaultObjectACL
               _biUserProject
               _biProjection
+              _biProvisionalUserProject
               (Just AltJSON)
               _biPayload
               storageService

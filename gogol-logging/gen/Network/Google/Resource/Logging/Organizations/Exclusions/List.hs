@@ -22,7 +22,7 @@
 --
 -- Lists all the exclusions in a parent resource.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.exclusions.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.exclusions.list@.
 module Network.Google.Resource.Logging.Organizations.Exclusions.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.Organizations.Exclusions.List
     , oelCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.organizations.exclusions.list@ method which the
 -- 'OrganizationsExclusionsList' request conforms to.
@@ -67,14 +67,14 @@ type OrganizationsExclusionsListResource =
 -- /See:/ 'organizationsExclusionsList' smart constructor.
 data OrganizationsExclusionsList =
   OrganizationsExclusionsList'
-    { _oelParent         :: !Text
-    , _oelXgafv          :: !(Maybe Xgafv)
+    { _oelParent :: !Text
+    , _oelXgafv :: !(Maybe Xgafv)
     , _oelUploadProtocol :: !(Maybe Text)
-    , _oelAccessToken    :: !(Maybe Text)
-    , _oelUploadType     :: !(Maybe Text)
-    , _oelPageToken      :: !(Maybe Text)
-    , _oelPageSize       :: !(Maybe (Textual Int32))
-    , _oelCallback       :: !(Maybe Text)
+    , _oelAccessToken :: !(Maybe Text)
+    , _oelUploadType :: !(Maybe Text)
+    , _oelPageToken :: !(Maybe Text)
+    , _oelPageSize :: !(Maybe (Textual Int32))
+    , _oelCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

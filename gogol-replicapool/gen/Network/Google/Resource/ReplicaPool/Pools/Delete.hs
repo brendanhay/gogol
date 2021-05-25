@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPool.Pools.Delete
     , pdProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.delete@ method which the
 -- 'PoolsDelete' request conforms to.
@@ -61,9 +61,9 @@ type PoolsDeleteResource =
 -- /See:/ 'poolsDelete' smart constructor.
 data PoolsDelete =
   PoolsDelete'
-    { _pdPoolName    :: !Text
-    , _pdZone        :: !Text
-    , _pdPayload     :: !PoolsDeleteRequest
+    { _pdPoolName :: !Text
+    , _pdZone :: !Text
+    , _pdPayload :: !PoolsDeleteRequest
     , _pdProjectName :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

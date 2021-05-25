@@ -14,8 +14,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- The Firebase Hosting REST API enables programmatic and customizable
--- deployments to your Firebase-hosted sites. Use this REST API to deploy
--- new or updated hosting configurations and content files.
+-- management and deployments to your Firebase-hosted sites. Use this REST
+-- API to create and manage channels and sites as well as to deploy new or
+-- updated hosting configurations and content files.
 --
 -- /See:/ <https://firebase.google.com/docs/hosting/ Firebase Hosting API Reference>
 module Network.Google.FirebaseHosting
@@ -23,278 +24,76 @@ module Network.Google.FirebaseHosting
     -- * Service Configuration
       firebaseHostingService
 
-    -- * OAuth Scopes
-    , firebaseScope
-    , cloudPlatformReadOnlyScope
-    , cloudPlatformScope
-    , firebaseReadOnlyScope
-
     -- * API Declaration
     , FirebaseHostingAPI
 
     -- * Resources
 
-    -- ** firebasehosting.sites.domains.create
-    , module Network.Google.Resource.FirebaseHosting.Sites.Domains.Create
+    -- ** firebasehosting.operations.cancel
+    , module Network.Google.Resource.FirebaseHosting.Operations.Cancel
 
-    -- ** firebasehosting.sites.domains.delete
-    , module Network.Google.Resource.FirebaseHosting.Sites.Domains.Delete
+    -- ** firebasehosting.operations.delete
+    , module Network.Google.Resource.FirebaseHosting.Operations.Delete
 
-    -- ** firebasehosting.sites.domains.get
-    , module Network.Google.Resource.FirebaseHosting.Sites.Domains.Get
-
-    -- ** firebasehosting.sites.domains.list
-    , module Network.Google.Resource.FirebaseHosting.Sites.Domains.List
-
-    -- ** firebasehosting.sites.domains.update
-    , module Network.Google.Resource.FirebaseHosting.Sites.Domains.Update
-
-    -- ** firebasehosting.sites.getConfig
-    , module Network.Google.Resource.FirebaseHosting.Sites.GetConfig
-
-    -- ** firebasehosting.sites.releases.create
-    , module Network.Google.Resource.FirebaseHosting.Sites.Releases.Create
-
-    -- ** firebasehosting.sites.releases.list
-    , module Network.Google.Resource.FirebaseHosting.Sites.Releases.List
-
-    -- ** firebasehosting.sites.updateConfig
-    , module Network.Google.Resource.FirebaseHosting.Sites.UpdateConfig
-
-    -- ** firebasehosting.sites.versions.create
-    , module Network.Google.Resource.FirebaseHosting.Sites.Versions.Create
-
-    -- ** firebasehosting.sites.versions.delete
-    , module Network.Google.Resource.FirebaseHosting.Sites.Versions.Delete
-
-    -- ** firebasehosting.sites.versions.files.list
-    , module Network.Google.Resource.FirebaseHosting.Sites.Versions.Files.List
-
-    -- ** firebasehosting.sites.versions.patch
-    , module Network.Google.Resource.FirebaseHosting.Sites.Versions.Patch
-
-    -- ** firebasehosting.sites.versions.populateFiles
-    , module Network.Google.Resource.FirebaseHosting.Sites.Versions.PopulateFiles
+    -- ** firebasehosting.operations.list
+    , module Network.Google.Resource.FirebaseHosting.Operations.List
 
     -- * Types
 
-    -- ** DomainStatus
-    , DomainStatus (..)
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
-    -- ** DomainProvisioningDNSStatus
-    , DomainProvisioningDNSStatus (..)
+    -- ** ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
 
-    -- ** VersionLabels
-    , VersionLabels
-    , versionLabels
-    , vlAddtional
+    -- ** CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
-    -- ** PopulateVersionFilesResponse
-    , PopulateVersionFilesResponse
-    , populateVersionFilesResponse
-    , pvfrUploadURL
-    , pvfrUploadRequiredHashes
-
-    -- ** DomainRedirectType
-    , DomainRedirectType (..)
-
-    -- ** CertDNSChallenge
-    , CertDNSChallenge
-    , certDNSChallenge
-    , cdcToken
-    , cdcDomainName
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
 
     -- ** Empty
     , Empty
     , empty
 
-    -- ** PopulateVersionFilesRequest
-    , PopulateVersionFilesRequest
-    , populateVersionFilesRequest
-    , pvfrFiles
-
-    -- ** ServingConfigAppAssociation
-    , ServingConfigAppAssociation (..)
-
-    -- ** ServingConfig
-    , ServingConfig
-    , servingConfig
-    , scCleanURLs
-    , scAppAssociation
-    , scRewrites
-    , scRedirects
-    , scHeaders
-    , scTrailingSlashBehavior
-
-    -- ** Domain
-    , Domain
-    , domain
-    , dStatus
-    , dProvisioning
-    , dUpdateTime
-    , dDomainName
-    , dDomainRedirect
-    , dSite
-
-    -- ** ListReleasesResponse
-    , ListReleasesResponse
-    , listReleasesResponse
-    , lrrNextPageToken
-    , lrrReleases
-
-    -- ** VersionStatus
-    , VersionStatus (..)
-
-    -- ** DomainProvisioning
-    , DomainProvisioning
-    , domainProvisioning
-    , dpExpectedIPs
-    , dpCertChallengeDNS
-    , dpDNSFetchTime
-    , dpCertStatus
-    , dpDNSStatus
-    , dpDiscoveredIPs
-    , dpCertChallengeHTTP
-    , dpCertChallengeDiscoveredTxt
-
-    -- ** Release
-    , Release
-    , release
-    , rReleaseTime
-    , rReleaseUser
-    , rName
-    , rVersion
-    , rType
-    , rMessage
-
-    -- ** VersionFile
-    , VersionFile
-    , versionFile
-    , vfStatus
-    , vfHash
-    , vfPath
-
-    -- ** Header
-    , Header
-    , header
-    , hHeaders
-    , hGlob
-
-    -- ** ActingUser
-    , ActingUser
-    , actingUser
-    , auEmail
-    , auImageURL
-
-    -- ** Version
-    , Version
-    , version
-    , vStatus
-    , vFinalizeTime
-    , vConfig
-    , vFileCount
-    , vFinalizeUser
-    , vVersionBytes
-    , vDeleteTime
-    , vName
-    , vLabels
-    , vCreateUser
-    , vDeleteUser
-    , vCreateTime
-
-    -- ** ListDomainsResponse
-    , ListDomainsResponse
-    , listDomainsResponse
-    , ldrNextPageToken
-    , ldrDomains
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
 
     -- ** Xgafv
     , Xgafv (..)
 
-    -- ** Redirect
-    , Redirect
-    , redirect
-    , rLocation
-    , rGlob
-    , rStatusCode
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
 
-    -- ** CloudRunRewrite
-    , CloudRunRewrite
-    , cloudRunRewrite
-    , crrServiceId
-    , crrRegion
-
-    -- ** DomainRedirect
-    , DomainRedirect
-    , domainRedirect
-    , drDomainName
-    , drType
-
-    -- ** Rewrite
-    , Rewrite
-    , rewrite
-    , rewFunction
-    , rewPath
-    , rewRun
-    , rewGlob
-    , rewDynamicLinks
-
-    -- ** DomainProvisioningCertStatus
-    , DomainProvisioningCertStatus (..)
-
-    -- ** PopulateVersionFilesRequestFiles
-    , PopulateVersionFilesRequestFiles
-    , populateVersionFilesRequestFiles
-    , pvfrfAddtional
-
-    -- ** VersionFileStatus
-    , VersionFileStatus (..)
-
-    -- ** HeaderHeaders
-    , HeaderHeaders
-    , headerHeaders
-    , hhAddtional
-
-    -- ** CertHTTPChallenge
-    , CertHTTPChallenge
-    , certHTTPChallenge
-    , chttpcPath
-    , chttpcToken
-
-    -- ** ServingConfigTrailingSlashBehavior
-    , ServingConfigTrailingSlashBehavior (..)
-
-    -- ** ListVersionFilesResponse
-    , ListVersionFilesResponse
-    , listVersionFilesResponse
-    , lvfrNextPageToken
-    , lvfrFiles
-
-    -- ** ReleaseType
-    , ReleaseType (..)
-
-    -- ** SiteConfig
-    , SiteConfig
-    , siteConfig
-    , scMaxVersions
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
     ) where
 
-import           Network.Google.FirebaseHosting.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.FirebaseHosting.Sites.Domains.Create
-import           Network.Google.Resource.FirebaseHosting.Sites.Domains.Delete
-import           Network.Google.Resource.FirebaseHosting.Sites.Domains.Get
-import           Network.Google.Resource.FirebaseHosting.Sites.Domains.List
-import           Network.Google.Resource.FirebaseHosting.Sites.Domains.Update
-import           Network.Google.Resource.FirebaseHosting.Sites.GetConfig
-import           Network.Google.Resource.FirebaseHosting.Sites.Releases.Create
-import           Network.Google.Resource.FirebaseHosting.Sites.Releases.List
-import           Network.Google.Resource.FirebaseHosting.Sites.UpdateConfig
-import           Network.Google.Resource.FirebaseHosting.Sites.Versions.Create
-import           Network.Google.Resource.FirebaseHosting.Sites.Versions.Delete
-import           Network.Google.Resource.FirebaseHosting.Sites.Versions.Files.List
-import           Network.Google.Resource.FirebaseHosting.Sites.Versions.Patch
-import           Network.Google.Resource.FirebaseHosting.Sites.Versions.PopulateFiles
+import Network.Google.Prelude
+import Network.Google.FirebaseHosting.Types
+import Network.Google.Resource.FirebaseHosting.Operations.Cancel
+import Network.Google.Resource.FirebaseHosting.Operations.Delete
+import Network.Google.Resource.FirebaseHosting.Operations.List
 
 {- $resources
 TODO
@@ -302,17 +101,5 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Firebase Hosting API service.
 type FirebaseHostingAPI =
-     SitesReleasesListResource :<|>
-       SitesReleasesCreateResource
-       :<|> SitesVersionsFilesListResource
-       :<|> SitesVersionsPatchResource
-       :<|> SitesVersionsCreateResource
-       :<|> SitesVersionsPopulateFilesResource
-       :<|> SitesVersionsDeleteResource
-       :<|> SitesDomainsListResource
-       :<|> SitesDomainsGetResource
-       :<|> SitesDomainsCreateResource
-       :<|> SitesDomainsDeleteResource
-       :<|> SitesDomainsUpdateResource
-       :<|> SitesGetConfigResource
-       :<|> SitesUpdateConfigResource
+     OperationsListResource :<|> OperationsCancelResource
+       :<|> OperationsDeleteResource

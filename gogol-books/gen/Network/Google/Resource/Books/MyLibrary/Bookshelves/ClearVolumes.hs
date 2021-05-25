@@ -22,7 +22,7 @@
 --
 -- Clears all volumes from a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.clearVolumes@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.bookshelves.clearVolumes@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
     , MyLibraryBookshelvesClearVolumes
 
     -- * Request Lenses
+    , mlbcvXgafv
+    , mlbcvUploadProtocol
+    , mlbcvAccessToken
+    , mlbcvUploadType
     , mlbcvShelf
     , mlbcvSource
+    , mlbcvCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.clearVolumes@ method which the
 -- 'MyLibraryBookshelvesClearVolumes' request conforms to.
@@ -49,16 +54,26 @@ type MyLibraryBookshelvesClearVolumesResource =
            "bookshelves" :>
              Capture "shelf" Text :>
                "clearVolumes" :>
-                 QueryParam "source" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Clears all volumes from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesClearVolumes' smart constructor.
 data MyLibraryBookshelvesClearVolumes =
   MyLibraryBookshelvesClearVolumes'
-    { _mlbcvShelf  :: !Text
+    { _mlbcvXgafv :: !(Maybe Xgafv)
+    , _mlbcvUploadProtocol :: !(Maybe Text)
+    , _mlbcvAccessToken :: !(Maybe Text)
+    , _mlbcvUploadType :: !(Maybe Text)
+    , _mlbcvShelf :: !Text
     , _mlbcvSource :: !(Maybe Text)
+    , _mlbcvCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,16 +82,56 @@ data MyLibraryBookshelvesClearVolumes =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlbcvXgafv'
+--
+-- * 'mlbcvUploadProtocol'
+--
+-- * 'mlbcvAccessToken'
+--
+-- * 'mlbcvUploadType'
+--
 -- * 'mlbcvShelf'
 --
 -- * 'mlbcvSource'
+--
+-- * 'mlbcvCallback'
 myLibraryBookshelvesClearVolumes
     :: Text -- ^ 'mlbcvShelf'
     -> MyLibraryBookshelvesClearVolumes
 myLibraryBookshelvesClearVolumes pMlbcvShelf_ =
   MyLibraryBookshelvesClearVolumes'
-    {_mlbcvShelf = pMlbcvShelf_, _mlbcvSource = Nothing}
+    { _mlbcvXgafv = Nothing
+    , _mlbcvUploadProtocol = Nothing
+    , _mlbcvAccessToken = Nothing
+    , _mlbcvUploadType = Nothing
+    , _mlbcvShelf = pMlbcvShelf_
+    , _mlbcvSource = Nothing
+    , _mlbcvCallback = Nothing
+    }
 
+
+-- | V1 error format.
+mlbcvXgafv :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Xgafv)
+mlbcvXgafv
+  = lens _mlbcvXgafv (\ s a -> s{_mlbcvXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlbcvUploadProtocol :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Text)
+mlbcvUploadProtocol
+  = lens _mlbcvUploadProtocol
+      (\ s a -> s{_mlbcvUploadProtocol = a})
+
+-- | OAuth access token.
+mlbcvAccessToken :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Text)
+mlbcvAccessToken
+  = lens _mlbcvAccessToken
+      (\ s a -> s{_mlbcvAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlbcvUploadType :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Text)
+mlbcvUploadType
+  = lens _mlbcvUploadType
+      (\ s a -> s{_mlbcvUploadType = a})
 
 -- | ID of bookshelf from which to remove a volume.
 mlbcvShelf :: Lens' MyLibraryBookshelvesClearVolumes Text
@@ -88,14 +143,25 @@ mlbcvSource :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Text)
 mlbcvSource
   = lens _mlbcvSource (\ s a -> s{_mlbcvSource = a})
 
+-- | JSONP
+mlbcvCallback :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Text)
+mlbcvCallback
+  = lens _mlbcvCallback
+      (\ s a -> s{_mlbcvCallback = a})
+
 instance GoogleRequest
            MyLibraryBookshelvesClearVolumes
          where
-        type Rs MyLibraryBookshelvesClearVolumes = ()
+        type Rs MyLibraryBookshelvesClearVolumes = Empty
         type Scopes MyLibraryBookshelvesClearVolumes =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryBookshelvesClearVolumes'{..}
-          = go _mlbcvShelf _mlbcvSource (Just AltJSON)
+          = go _mlbcvShelf _mlbcvXgafv _mlbcvUploadProtocol
+              _mlbcvAccessToken
+              _mlbcvUploadType
+              _mlbcvSource
+              _mlbcvCallback
+              (Just AltJSON)
               booksService
           where go
                   = buildClient

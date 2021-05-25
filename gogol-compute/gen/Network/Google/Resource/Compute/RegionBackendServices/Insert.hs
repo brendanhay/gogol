@@ -21,9 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a regional BackendService resource in the specified project
--- using the data included in the request. There are several restrictions
--- and guidelines to keep in mind when creating a regional backend service.
--- Read Restrictions and Guidelines for more information.
+-- using the data included in the request. For more information, see
+-- Backend services overview.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionBackendServices.insert@.
 module Network.Google.Resource.Compute.RegionBackendServices.Insert
@@ -42,8 +41,8 @@ module Network.Google.Resource.Compute.RegionBackendServices.Insert
     , rbsiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionBackendServices.insert@ method which the
 -- 'RegionBackendServicesInsert' request conforms to.
@@ -61,17 +60,16 @@ type RegionBackendServicesInsertResource =
                          Post '[JSON] Operation
 
 -- | Creates a regional BackendService resource in the specified project
--- using the data included in the request. There are several restrictions
--- and guidelines to keep in mind when creating a regional backend service.
--- Read Restrictions and Guidelines for more information.
+-- using the data included in the request. For more information, see
+-- Backend services overview.
 --
 -- /See:/ 'regionBackendServicesInsert' smart constructor.
 data RegionBackendServicesInsert =
   RegionBackendServicesInsert'
     { _rbsiRequestId :: !(Maybe Text)
-    , _rbsiProject   :: !Text
-    , _rbsiPayload   :: !BackendService
-    , _rbsiRegion    :: !Text
+    , _rbsiProject :: !Text
+    , _rbsiPayload :: !BackendService
+    , _rbsiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

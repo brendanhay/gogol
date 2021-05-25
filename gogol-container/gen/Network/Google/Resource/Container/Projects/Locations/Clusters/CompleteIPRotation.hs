@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.CompleteIPR
     , plccirCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.completeIpRotation@ method which the
 -- 'ProjectsLocationsClustersCompleteIPRotation' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsLocationsClustersCompleteIPRotationResource
 -- /See:/ 'projectsLocationsClustersCompleteIPRotation' smart constructor.
 data ProjectsLocationsClustersCompleteIPRotation =
   ProjectsLocationsClustersCompleteIPRotation'
-    { _plccirXgafv          :: !(Maybe Xgafv)
+    { _plccirXgafv :: !(Maybe Xgafv)
     , _plccirUploadProtocol :: !(Maybe Text)
-    , _plccirAccessToken    :: !(Maybe Text)
-    , _plccirUploadType     :: !(Maybe Text)
-    , _plccirPayload        :: !CompleteIPRotationRequest
-    , _plccirName           :: !Text
-    , _plccirCallback       :: !(Maybe Text)
+    , _plccirAccessToken :: !(Maybe Text)
+    , _plccirUploadType :: !(Maybe Text)
+    , _plccirPayload :: !CompleteIPRotationRequest
+    , _plccirName :: !Text
+    , _plccirCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +140,7 @@ plccirPayload
 
 -- | The name (project, location, cluster id) of the cluster to complete IP
 -- rotation. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\`.
 plccirName :: Lens' ProjectsLocationsClustersCompleteIPRotation Text
 plccirName
   = lens _plccirName (\ s a -> s{_plccirName = a})

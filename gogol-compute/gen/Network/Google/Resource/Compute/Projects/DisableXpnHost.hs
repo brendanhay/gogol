@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.Projects.DisableXpnHost
     , pdxhProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.disableXpnHost@ method which the
 -- 'ProjectsDisableXpnHost' request conforms to.
@@ -57,7 +57,7 @@ type ProjectsDisableXpnHostResource =
 data ProjectsDisableXpnHost =
   ProjectsDisableXpnHost'
     { _pdxhRequestId :: !(Maybe Text)
-    , _pdxhProject   :: !Text
+    , _pdxhProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

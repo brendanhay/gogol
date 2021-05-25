@@ -83,11 +83,11 @@ module Network.Google.ServiceBroker
     , giamvtiamprPermissions
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.ServiceBroker.GetIAMPolicy
-import           Network.Google.Resource.ServiceBroker.SetIAMPolicy
-import           Network.Google.Resource.ServiceBroker.TestIAMPermissions
-import           Network.Google.ServiceBroker.Types
+import Network.Google.Prelude
+import Network.Google.Resource.ServiceBroker.GetIAMPolicy
+import Network.Google.Resource.ServiceBroker.SetIAMPolicy
+import Network.Google.Resource.ServiceBroker.TestIAMPermissions
+import Network.Google.ServiceBroker.Types
 
 {- $resources
 TODO

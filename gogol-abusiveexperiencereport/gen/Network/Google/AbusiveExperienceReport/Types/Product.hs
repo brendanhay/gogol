@@ -17,21 +17,21 @@
 --
 module Network.Google.AbusiveExperienceReport.Types.Product where
 
-import           Network.Google.AbusiveExperienceReport.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AbusiveExperienceReport.Types.Sum
+import Network.Google.Prelude
 
 -- | Response message for GetSiteSummary.
 --
 -- /See:/ 'siteSummaryResponse' smart constructor.
 data SiteSummaryResponse =
   SiteSummaryResponse'
-    { _ssrAbusiveStatus   :: !(Maybe SiteSummaryResponseAbusiveStatus)
+    { _ssrAbusiveStatus :: !(Maybe SiteSummaryResponseAbusiveStatus)
     , _ssrEnforcementTime :: !(Maybe DateTime')
-    , _ssrLastChangeTime  :: !(Maybe DateTime')
-    , _ssrFilterStatus    :: !(Maybe SiteSummaryResponseFilterStatus)
-    , _ssrUnderReview     :: !(Maybe Bool)
-    , _ssrReportURL       :: !(Maybe Text)
-    , _ssrReviewedSite    :: !(Maybe Text)
+    , _ssrLastChangeTime :: !(Maybe DateTime')
+    , _ssrFilterStatus :: !(Maybe SiteSummaryResponseFilterStatus)
+    , _ssrUnderReview :: !(Maybe Bool)
+    , _ssrReportURL :: !(Maybe Text)
+    , _ssrReviewedSite :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,27 +67,31 @@ siteSummaryResponse =
     }
 
 
--- | The status of the site reviewed for the abusive experiences.
+-- | The site\'s Abusive Experience Report status.
 ssrAbusiveStatus :: Lens' SiteSummaryResponse (Maybe SiteSummaryResponseAbusiveStatus)
 ssrAbusiveStatus
   = lens _ssrAbusiveStatus
       (\ s a -> s{_ssrAbusiveStatus = a})
 
--- | The date on which enforcement begins.
+-- | The time at which
+-- [enforcement](https:\/\/support.google.com\/webtools\/answer\/7538608)
+-- against the site began or will begin. Not set when the filter_status is
+-- OFF.
 ssrEnforcementTime :: Lens' SiteSummaryResponse (Maybe UTCTime)
 ssrEnforcementTime
   = lens _ssrEnforcementTime
       (\ s a -> s{_ssrEnforcementTime = a})
       . mapping _DateTime
 
--- | The last time that the site changed status.
+-- | The time at which the site\'s status last changed.
 ssrLastChangeTime :: Lens' SiteSummaryResponse (Maybe UTCTime)
 ssrLastChangeTime
   = lens _ssrLastChangeTime
       (\ s a -> s{_ssrLastChangeTime = a})
       . mapping _DateTime
 
--- | The abusive experience enforcement status of the site.
+-- | The site\'s [enforcement
+-- status](https:\/\/support.google.com\/webtools\/answer\/7538608).
 ssrFilterStatus :: Lens' SiteSummaryResponse (Maybe SiteSummaryResponseFilterStatus)
 ssrFilterStatus
   = lens _ssrFilterStatus
@@ -99,12 +103,16 @@ ssrUnderReview
   = lens _ssrUnderReview
       (\ s a -> s{_ssrUnderReview = a})
 
--- | A link that leads to a full abusive experience report.
+-- | A link to the full Abusive Experience Report for the site. Not set in
+-- ViolatingSitesResponse. Note that you must complete the [Search Console
+-- verification
+-- process](https:\/\/support.google.com\/webmasters\/answer\/9008080) for
+-- the site before you can access the full report.
 ssrReportURL :: Lens' SiteSummaryResponse (Maybe Text)
 ssrReportURL
   = lens _ssrReportURL (\ s a -> s{_ssrReportURL = a})
 
--- | The name of the site reviewed.
+-- | The name of the reviewed site, e.g. \`google.com\`.
 ssrReviewedSite :: Lens' SiteSummaryResponse (Maybe Text)
 ssrReviewedSite
   = lens _ssrReviewedSite
@@ -154,7 +162,7 @@ violatingSitesResponse
 violatingSitesResponse = ViolatingSitesResponse' {_vsrViolatingSites = Nothing}
 
 
--- | A list of summaries of violating sites.
+-- | The list of violating sites.
 vsrViolatingSites :: Lens' ViolatingSitesResponse [SiteSummaryResponse]
 vsrViolatingSites
   = lens _vsrViolatingSites

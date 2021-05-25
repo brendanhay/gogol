@@ -46,13 +46,13 @@ module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Dismiss
     , pardCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.projects.approvalRequests.dismiss@ method which the
 -- 'ProjectsApprovalRequestsDismiss' request conforms to.
 type ProjectsApprovalRequestsDismissResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "dismiss" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -72,13 +72,13 @@ type ProjectsApprovalRequestsDismissResource =
 -- /See:/ 'projectsApprovalRequestsDismiss' smart constructor.
 data ProjectsApprovalRequestsDismiss =
   ProjectsApprovalRequestsDismiss'
-    { _pardXgafv          :: !(Maybe Xgafv)
+    { _pardXgafv :: !(Maybe Xgafv)
     , _pardUploadProtocol :: !(Maybe Text)
-    , _pardAccessToken    :: !(Maybe Text)
-    , _pardUploadType     :: !(Maybe Text)
-    , _pardPayload        :: !DismissApprovalRequestMessage
-    , _pardName           :: !Text
-    , _pardCallback       :: !(Maybe Text)
+    , _pardAccessToken :: !(Maybe Text)
+    , _pardUploadType :: !(Maybe Text)
+    , _pardPayload :: !DismissApprovalRequestMessage
+    , _pardName :: !Text
+    , _pardCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

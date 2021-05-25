@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a tenancy unit with no tenant resources.
+-- Creates a tenancy unit with no tenant resources. If tenancy unit already
+-- exists, it will be returned, however, in this case, returned TenancyUnit
+-- does not have tenant_resources field set and ListTenancyUnits has to be
+-- used to get a complete TenancyUnit with all fields populated.
 --
 -- /See:/ <https://cloud.google.com/service-consumer-management/docs/overview Service Consumer Management API Reference> for @serviceconsumermanagement.services.tenancyUnits.create@.
 module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.Create
@@ -42,8 +45,8 @@ module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.C
     , stucCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.create@ method which the
 -- 'ServicesTenancyUnitsCreate' request conforms to.
@@ -60,18 +63,21 @@ type ServicesTenancyUnitsCreateResource =
                        ReqBody '[JSON] CreateTenancyUnitRequest :>
                          Post '[JSON] TenancyUnit
 
--- | Creates a tenancy unit with no tenant resources.
+-- | Creates a tenancy unit with no tenant resources. If tenancy unit already
+-- exists, it will be returned, however, in this case, returned TenancyUnit
+-- does not have tenant_resources field set and ListTenancyUnits has to be
+-- used to get a complete TenancyUnit with all fields populated.
 --
 -- /See:/ 'servicesTenancyUnitsCreate' smart constructor.
 data ServicesTenancyUnitsCreate =
   ServicesTenancyUnitsCreate'
-    { _stucParent         :: !Text
-    , _stucXgafv          :: !(Maybe Xgafv)
+    { _stucParent :: !Text
+    , _stucXgafv :: !(Maybe Xgafv)
     , _stucUploadProtocol :: !(Maybe Text)
-    , _stucAccessToken    :: !(Maybe Text)
-    , _stucUploadType     :: !(Maybe Text)
-    , _stucPayload        :: !CreateTenancyUnitRequest
-    , _stucCallback       :: !(Maybe Text)
+    , _stucAccessToken :: !(Maybe Text)
+    , _stucUploadType :: !(Maybe Text)
+    , _stucPayload :: !CreateTenancyUnitRequest
+    , _stucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,12 +115,13 @@ servicesTenancyUnitsCreate pStucParent_ pStucPayload_ =
     }
 
 
--- | services\/{service}\/{collection id}\/{resource id} {collection id} is
--- the cloud resource collection type representing the service consumer,
--- for example \'projects\', or \'organizations\'. {resource id} is the
--- consumer numeric id, such as project number: \'123456\'. {service} the
--- name of a managed service, such as \'service.googleapis.com\'. Enables
--- service binding using the new tenancy unit.
+-- | Required. services\/{service}\/{collection id}\/{resource id}
+-- {collection id} is the cloud resource collection type representing the
+-- service consumer, for example \'projects\', or \'organizations\'.
+-- {resource id} is the consumer numeric id, such as project number:
+-- \'123456\'. {service} the name of a managed service, such as
+-- \'service.googleapis.com\'. Enables service binding using the new
+-- tenancy unit.
 stucParent :: Lens' ServicesTenancyUnitsCreate Text
 stucParent
   = lens _stucParent (\ s a -> s{_stucParent = a})

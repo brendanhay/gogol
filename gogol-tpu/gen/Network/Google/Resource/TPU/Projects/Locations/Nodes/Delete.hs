@@ -41,8 +41,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.Delete
     , plndCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.delete@ method which the
 -- 'ProjectsLocationsNodesDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsNodesDeleteResource =
 -- /See:/ 'projectsLocationsNodesDelete' smart constructor.
 data ProjectsLocationsNodesDelete =
   ProjectsLocationsNodesDelete'
-    { _plndXgafv          :: !(Maybe Xgafv)
+    { _plndXgafv :: !(Maybe Xgafv)
     , _plndUploadProtocol :: !(Maybe Text)
-    , _plndAccessToken    :: !(Maybe Text)
-    , _plndUploadType     :: !(Maybe Text)
-    , _plndName           :: !Text
-    , _plndCallback       :: !(Maybe Text)
+    , _plndAccessToken :: !(Maybe Text)
+    , _plndUploadType :: !(Maybe Text)
+    , _plndName :: !Text
+    , _plndCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ plndUploadType
   = lens _plndUploadType
       (\ s a -> s{_plndUploadType = a})
 
--- | The resource name.
+-- | Required. The resource name.
 plndName :: Lens' ProjectsLocationsNodesDelete Text
 plndName = lens _plndName (\ s a -> s{_plndName = a})
 

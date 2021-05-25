@@ -43,8 +43,8 @@ module Network.Google.Resource.AppEngine.Apps.DomainMAppings.List
     , admalCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.domainMappings.list@ method which the
 -- 'AppsDomainMAppingsList' request conforms to.
@@ -68,14 +68,14 @@ type AppsDomainMAppingsListResource =
 -- /See:/ 'appsDomainMAppingsList' smart constructor.
 data AppsDomainMAppingsList =
   AppsDomainMAppingsList'
-    { _admalXgafv          :: !(Maybe Xgafv)
+    { _admalXgafv :: !(Maybe Xgafv)
     , _admalUploadProtocol :: !(Maybe Text)
-    , _admalAccessToken    :: !(Maybe Text)
-    , _admalUploadType     :: !(Maybe Text)
-    , _admalAppsId         :: !Text
-    , _admalPageToken      :: !(Maybe Text)
-    , _admalPageSize       :: !(Maybe (Textual Int32))
-    , _admalCallback       :: !(Maybe Text)
+    , _admalAccessToken :: !(Maybe Text)
+    , _admalUploadType :: !(Maybe Text)
+    , _admalAppsId :: !Text
+    , _admalPageToken :: !(Maybe Text)
+    , _admalPageSize :: !(Maybe (Textual Int32))
+    , _admalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

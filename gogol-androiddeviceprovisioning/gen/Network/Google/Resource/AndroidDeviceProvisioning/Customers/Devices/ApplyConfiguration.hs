@@ -45,8 +45,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.Apply
     , cdacCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.devices.applyConfiguration@ method which the
 -- 'CustomersDevicesApplyConfiguration' request conforms to.
@@ -71,13 +71,13 @@ type CustomersDevicesApplyConfigurationResource =
 -- /See:/ 'customersDevicesApplyConfiguration' smart constructor.
 data CustomersDevicesApplyConfiguration =
   CustomersDevicesApplyConfiguration'
-    { _cdacParent         :: !Text
-    , _cdacXgafv          :: !(Maybe Xgafv)
+    { _cdacParent :: !Text
+    , _cdacXgafv :: !(Maybe Xgafv)
     , _cdacUploadProtocol :: !(Maybe Text)
-    , _cdacAccessToken    :: !(Maybe Text)
-    , _cdacUploadType     :: !(Maybe Text)
-    , _cdacPayload        :: !CustomerApplyConfigurationRequest
-    , _cdacCallback       :: !(Maybe Text)
+    , _cdacAccessToken :: !(Maybe Text)
+    , _cdacUploadType :: !(Maybe Text)
+    , _cdacPayload :: !CustomerApplyConfigurationRequest
+    , _cdacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

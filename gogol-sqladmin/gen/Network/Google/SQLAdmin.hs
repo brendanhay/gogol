@@ -13,10 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates and manages Cloud SQL instances, which provide fully managed
--- MySQL or PostgreSQL databases.
+-- API for Cloud SQL database instance management
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference>
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference>
 module Network.Google.SQLAdmin
     (
     -- * Service Configuration
@@ -42,6 +41,12 @@ module Network.Google.SQLAdmin
 
     -- ** sql.backupRuns.list
     , module Network.Google.Resource.SQL.BackupRuns.List
+
+    -- ** sql.connect.generateEphemeral
+    , module Network.Google.Resource.SQL.Connect.GenerateEphemeral
+
+    -- ** sql.connect.get
+    , module Network.Google.Resource.SQL.Connect.Get
 
     -- ** sql.databases.delete
     , module Network.Google.Resource.SQL.Databases.Delete
@@ -133,6 +138,15 @@ module Network.Google.SQLAdmin
     -- ** sql.operations.list
     , module Network.Google.Resource.SQL.Operations.List
 
+    -- ** sql.projects.instances.rescheduleMaintenance
+    , module Network.Google.Resource.SQL.Projects.Instances.RescheduleMaintenance
+
+    -- ** sql.projects.instances.startExternalSync
+    , module Network.Google.Resource.SQL.Projects.Instances.StartExternalSync
+
+    -- ** sql.projects.instances.verifyExternalSyncSettings
+    , module Network.Google.Resource.SQL.Projects.Instances.VerifyExternalSyncSettings
+
     -- ** sql.sslCerts.createEphemeral
     , module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
 
@@ -165,6 +179,12 @@ module Network.Google.SQLAdmin
 
     -- * Types
 
+    -- ** SQLServerDatabaseDetails
+    , SQLServerDatabaseDetails
+    , sQLServerDatabaseDetails
+    , sqlsddRecoveryModel
+    , sqlsddCompatibilityLevel
+
     -- ** DemoteMasterMySQLReplicaConfiguration
     , DemoteMasterMySQLReplicaConfiguration
     , demoteMasterMySQLReplicaConfiguration
@@ -188,6 +208,12 @@ module Network.Google.SQLAdmin
     , scCreateTime
     , scInstance
 
+    -- ** ConnectSettingsDatabaseVersion
+    , ConnectSettingsDatabaseVersion (..)
+
+    -- ** FlagType
+    , FlagType (..)
+
     -- ** DatabasesListResponse
     , DatabasesListResponse
     , databasesListResponse
@@ -198,6 +224,19 @@ module Network.Google.SQLAdmin
     , InstancesExportRequest
     , instancesExportRequest
     , ierExportContext
+
+    -- ** SQLInstancesVerifyExternalSyncSettingsResponse
+    , SQLInstancesVerifyExternalSyncSettingsResponse
+    , sQLInstancesVerifyExternalSyncSettingsResponse
+    , sqlivessrKind
+    , sqlivessrWarnings
+    , sqlivessrErrors
+
+    -- ** BackupRunType
+    , BackupRunType (..)
+
+    -- ** ConnectSettingsBackendType
+    , ConnectSettingsBackendType (..)
 
     -- ** InstancesListServerCasResponse
     , InstancesListServerCasResponse
@@ -215,7 +254,22 @@ module Network.Google.SQLAdmin
     , OnPremisesConfiguration
     , onPremisesConfiguration
     , opcKind
+    , opcClientKey
+    , opcUsername
     , opcHostPort
+    , opcClientCertificate
+    , opcCaCertificate
+    , opcDumpFilePath
+    , opcPassword
+
+    -- ** InsightsConfig
+    , InsightsConfig
+    , insightsConfig
+    , icQueryInsightsEnabled
+    , icQueryPlansPerMinute
+    , icRecordApplicationTags
+    , icRecordClientAddress
+    , icQueryStringLength
 
     -- ** OperationsListResponse
     , OperationsListResponse
@@ -228,6 +282,7 @@ module Network.Google.SQLAdmin
     , APIWarning
     , apiWarning
     , awCode
+    , awRegion
     , awMessage
 
     -- ** DiskEncryptionConfiguration
@@ -235,6 +290,19 @@ module Network.Google.SQLAdmin
     , diskEncryptionConfiguration
     , decKind
     , decKmsKeyName
+
+    -- ** SQLExternalSyncSettingError
+    , SQLExternalSyncSettingError
+    , sQLExternalSyncSettingError
+    , sqlesseKind
+    , sqlesseType
+    , sqlesseDetail
+
+    -- ** Reschedule
+    , Reschedule
+    , reschedule
+    , rScheduleTime
+    , rRescheduleType
 
     -- ** ImportContext
     , ImportContext
@@ -245,6 +313,17 @@ module Network.Google.SQLAdmin
     , icURI
     , icFileType
     , icImportUser
+    , icBakImportOptions
+
+    -- ** GenerateEphemeralCertRequest
+    , GenerateEphemeralCertRequest
+    , generateEphemeralCertRequest
+    , gecrReadTime
+    , gecrAccessToken
+    , gecrPublicKey
+
+    -- ** BackupRetentionSettingsRetentionUnit
+    , BackupRetentionSettingsRetentionUnit (..)
 
     -- ** Operation
     , Operation
@@ -264,6 +343,7 @@ module Network.Google.SQLAdmin
     , oEndTime
     , oOperationType
     , oTargetLink
+    , oBackupContext
 
     -- ** Settings
     , Settings
@@ -272,17 +352,21 @@ module Network.Google.SQLAdmin
     , sReplicationType
     , sActivationPolicy
     , sSettingsVersion
+    , sInsightsConfig
+    , sActiveDirectoryConfig
     , sDataDiskSizeGb
     , sAuthorizedGaeApplications
     , sKind
     , sPricingPlan
     , sIPConfiguration
+    , sCollation
     , sMaintenanceWindow
     , sDatabaseReplicationEnabled
     , sUserLabels
     , sTier
     , sDatabaseFlags
     , sDataDiskType
+    , sDenyMaintenancePeriods
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
@@ -304,6 +388,7 @@ module Network.Google.SQLAdmin
     -- ** Database
     , Database
     , database
+    , dSQLserverDatabaseDetails
     , dEtag
     , dProject
     , dKind
@@ -316,6 +401,7 @@ module Network.Google.SQLAdmin
     -- ** SSLCertsCreateEphemeralRequest
     , SSLCertsCreateEphemeralRequest
     , sslCertsCreateEphemeralRequest
+    , sccerAccessToken
     , sccerPublicKey
 
     -- ** BinLogCoordinates
@@ -325,17 +411,29 @@ module Network.Google.SQLAdmin
     , blcKind
     , blcBinLogFileName
 
+    -- ** FlagAppliesToItem
+    , FlagAppliesToItem (..)
+
     -- ** DatabaseInstanceFailoverReplica
     , DatabaseInstanceFailoverReplica
     , databaseInstanceFailoverReplica
     , difrName
     , difrAvailable
 
+    -- ** SQLServerUserDetails
+    , SQLServerUserDetails
+    , sQLServerUserDetails
+    , sqlsudServerRoles
+    , sqlsudDisabled
+
     -- ** TiersListResponse
     , TiersListResponse
     , tiersListResponse
     , tlrKind
     , tlrItems
+
+    -- ** OperationOperationType
+    , OperationOperationType (..)
 
     -- ** UsersListResponse
     , UsersListResponse
@@ -351,6 +449,7 @@ module Network.Google.SQLAdmin
     , ecKind
     , ecURI
     , ecFileType
+    , ecOffLoad
     , ecSQLExportOptions
     , ecDatabases
 
@@ -366,11 +465,26 @@ module Network.Google.SQLAdmin
     , sclrKind
     , sclrItems
 
+    -- ** SettingsPricingPlan
+    , SettingsPricingPlan (..)
+
     -- ** DiskEncryptionStatus
     , DiskEncryptionStatus
     , diskEncryptionStatus
     , desKmsKeyVersionName
     , desKind
+
+    -- ** BackupRunBackupKind
+    , BackupRunBackupKind (..)
+
+    -- ** OperationStatus
+    , OperationStatus (..)
+
+    -- ** SQLActiveDirectoryConfig
+    , SQLActiveDirectoryConfig
+    , sQLActiveDirectoryConfig
+    , sqladcKind
+    , sqladcDomain
 
     -- ** SSLCertsInsertRequest
     , SSLCertsInsertRequest
@@ -410,21 +524,27 @@ module Network.Google.SQLAdmin
     , exportContextCSVExportOptions
     , ecceoSelectQuery
 
+    -- ** SettingsActivationPolicy
+    , SettingsActivationPolicy (..)
+
     -- ** User
     , User
     , user
     , uEtag
     , uProject
     , uKind
+    , uSQLserverUserDetails
     , uName
     , uPassword
     , uHost
+    , uType
     , uInstance
 
     -- ** DatabaseInstance
     , DatabaseInstance
     , databaseInstance
     , datBackendType
+    , datSatisfiesPzs
     , datMaxDiskSize
     , datOnPremisesConfiguration
     , datGceZone
@@ -436,15 +556,18 @@ module Network.Google.SQLAdmin
     , datDiskEncryptionConfiguration
     , datProject
     , datSettings
+    , datSecondaryGceZone
     , datKind
     , datDiskEncryptionStatus
     , datConnectionName
     , datCurrentDiskSize
     , datInstanceType
     , datRootPassword
+    , datOutOfDiskReport
     , datReplicaNames
     , datSelfLink
     , datFailoverReplica
+    , datScheduledMaintenance
     , datName
     , datMasterInstanceName
     , datReplicaConfiguration
@@ -460,6 +583,10 @@ module Network.Google.SQLAdmin
     , ccDestinationInstanceName
     , ccBinLogCoordinates
     , ccKind
+    , ccPointInTime
+
+    -- ** ImportContextFileType
+    , ImportContextFileType (..)
 
     -- ** Flag
     , Flag
@@ -467,6 +594,7 @@ module Network.Google.SQLAdmin
     , fMaxValue
     , fInBeta
     , fKind
+    , fAllowedIntValues
     , fAppliesTo
     , fName
     , fAllowedStringValues
@@ -474,18 +602,42 @@ module Network.Google.SQLAdmin
     , fMinValue
     , fRequiresRestart
 
+    -- ** SettingsAvailabilityType
+    , SettingsAvailabilityType (..)
+
+    -- ** BackupRetentionSettings
+    , BackupRetentionSettings
+    , backupRetentionSettings
+    , brsRetentionUnit
+    , brsRetainedBackups
+
+    -- ** MaintenanceWindowUpdateTrack
+    , MaintenanceWindowUpdateTrack (..)
+
     -- ** InstancesFailoverRequest
     , InstancesFailoverRequest
     , instancesFailoverRequest
     , ifrFailoverContext
 
+    -- ** APIWarningCode
+    , APIWarningCode (..)
+
+    -- ** GenerateEphemeralCertResponse
+    , GenerateEphemeralCertResponse
+    , generateEphemeralCertResponse
+    , gecrEphemeralCert
+
     -- ** BackupRun
     , BackupRun
     , backupRun
     , brStatus
+    , brDiskEncryptionConfiguration
+    , brLocation
     , brStartTime
     , brKind
     , brError
+    , brDiskEncryptionStatus
+    , brBackupKind
     , brWindowStartTime
     , brSelfLink
     , brEndTime
@@ -495,6 +647,14 @@ module Network.Google.SQLAdmin
     , brDescription
     , brInstance
 
+    -- ** ImportContextBakImportOptions
+    , ImportContextBakImportOptions
+    , importContextBakImportOptions
+    , icbioEncryptionOptions
+
+    -- ** ProjectsInstancesStartExternalSyncSyncMode
+    , ProjectsInstancesStartExternalSyncSyncMode (..)
+
     -- ** ACLEntry
     , ACLEntry
     , aclEntry
@@ -503,11 +663,22 @@ module Network.Google.SQLAdmin
     , aeName
     , aeExpirationTime
 
+    -- ** SQLInstancesRescheduleMaintenanceRequestBody
+    , SQLInstancesRescheduleMaintenanceRequestBody
+    , sQLInstancesRescheduleMaintenanceRequestBody
+    , sqlirmrbReschedule
+
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** DatabaseFlags
     , DatabaseFlags
     , databaseFlags
     , dfValue
     , dfName
+
+    -- ** SQLExternalSyncSettingErrorType
+    , SQLExternalSyncSettingErrorType (..)
 
     -- ** Tier
     , Tier
@@ -533,11 +704,28 @@ module Network.Google.SQLAdmin
     , msqlrcDumpFilePath
     , msqlrcPassword
 
+    -- ** SQLOutOfDiskReport
+    , SQLOutOfDiskReport
+    , sQLOutOfDiskReport
+    , sqloodrSQLOutOfDiskState
+    , sqloodrSQLMinRecommendedIncreaseSizeGb
+
+    -- ** SQLScheduledMaintenance
+    , SQLScheduledMaintenance
+    , sQLScheduledMaintenance
+    , sqlsmStartTime
+    , sqlsmCanReschedule
+    , sqlsmCanDefer
+    , sqlsmScheduleDeadlineTime
+
     -- ** SSLCertDetail
     , SSLCertDetail
     , sslCertDetail
     , scdCertInfo
     , scdCertPrivateKey
+
+    -- ** DatabaseInstanceInstanceType
+    , DatabaseInstanceInstanceType (..)
 
     -- ** InstancesRestoreBackupRequest
     , InstancesRestoreBackupRequest
@@ -563,16 +751,41 @@ module Network.Google.SQLAdmin
     , opeCode
     , opeMessage
 
+    -- ** IPMAppingType
+    , IPMAppingType (..)
+
     -- ** TruncateLogContext
     , TruncateLogContext
     , truncateLogContext
     , tlcKind
     , tlcLogType
 
+    -- ** ExportContextFileType
+    , ExportContextFileType (..)
+
     -- ** InstancesCloneRequest
     , InstancesCloneRequest
     , instancesCloneRequest
     , icrCloneContext
+
+    -- ** RescheduleRescheduleType
+    , RescheduleRescheduleType (..)
+
+    -- ** ImportContextBakImportOptionsEncryptionOptions
+    , ImportContextBakImportOptionsEncryptionOptions
+    , importContextBakImportOptionsEncryptionOptions
+    , icbioeoPvkPath
+    , icbioeoPvkPassword
+    , icbioeoCertPath
+
+    -- ** ProjectsInstancesVerifyExternalSyncSettingsSyncMode
+    , ProjectsInstancesVerifyExternalSyncSettingsSyncMode (..)
+
+    -- ** UsersListBodyType
+    , UsersListBodyType (..)
+
+    -- ** SettingsDataDiskType
+    , SettingsDataDiskType (..)
 
     -- ** ReplicaConfiguration
     , ReplicaConfiguration
@@ -581,11 +794,23 @@ module Network.Google.SQLAdmin
     , rcKind
     , rcMysqlReplicaConfiguration
 
+    -- ** DatabaseInstanceBackendType
+    , DatabaseInstanceBackendType (..)
+
+    -- ** DatabaseInstanceSuspensionReasonItem
+    , DatabaseInstanceSuspensionReasonItem (..)
+
     -- ** FailoverContext
     , FailoverContext
     , failoverContext
     , fcSettingsVersion
     , fcKind
+
+    -- ** BackupRunStatus
+    , BackupRunStatus (..)
+
+    -- ** DatabaseInstanceState
+    , DatabaseInstanceState (..)
 
     -- ** SSLCertsInsertResponse
     , SSLCertsInsertResponse
@@ -594,6 +819,18 @@ module Network.Google.SQLAdmin
     , scirOperation
     , scirKind
     , scirClientCert
+
+    -- ** ConnectSettings
+    , ConnectSettings
+    , connectSettings
+    , csBackendType
+    , csServerCaCert
+    , csDatabaseVersion
+    , csKind
+    , csIPAddresses
+
+    -- ** DatabaseInstanceDatabaseVersion
+    , DatabaseInstanceDatabaseVersion (..)
 
     -- ** InstancesListResponse
     , InstancesListResponse
@@ -613,10 +850,21 @@ module Network.Google.SQLAdmin
     , BackupConfiguration
     , backupConfiguration
     , bcReplicationLogArchivingEnabled
+    , bcLocation
     , bcEnabled
     , bcStartTime
     , bcKind
     , bcBinaryLogEnabled
+    , bcBackupRetentionSettings
+    , bcPointInTimeRecoveryEnabled
+    , bcTransactionLogRetentionDays
+
+    -- ** DenyMaintenancePeriod
+    , DenyMaintenancePeriod
+    , denyMaintenancePeriod
+    , dmpTime
+    , dmpEndDate
+    , dmpStartDate
 
     -- ** InstancesImportRequest
     , InstancesImportRequest
@@ -629,6 +877,7 @@ module Network.Google.SQLAdmin
     , lpKind
     , lpFollowGaeApplication
     , lpZone
+    , lpSecondaryZone
 
     -- ** FlagsListResponse
     , FlagsListResponse
@@ -641,6 +890,9 @@ module Network.Google.SQLAdmin
     , instancesTruncateLogRequest
     , itlrTruncateLogContext
 
+    -- ** UserType
+    , UserType (..)
+
     -- ** ExportContextSQLExportOptions
     , ExportContextSQLExportOptions
     , exportContextSQLExportOptions
@@ -648,12 +900,25 @@ module Network.Google.SQLAdmin
     , ecsqleoMysqlExportOptions
     , ecsqleoTables
 
+    -- ** BackupContext
+    , BackupContext
+    , backupContext
+    , bKind
+    , bBackupId
+
+    -- ** SettingsReplicationType
+    , SettingsReplicationType (..)
+
     -- ** RestoreBackupContext
     , RestoreBackupContext
     , restoreBackupContext
     , rbcInstanceId
     , rbcBackupRunId
+    , rbcProject
     , rbcKind
+
+    -- ** SQLOutOfDiskReportSQLOutOfDiskState
+    , SQLOutOfDiskReportSQLOutOfDiskState (..)
 
     -- ** DemoteMasterContext
     , DemoteMasterContext
@@ -669,52 +934,57 @@ module Network.Google.SQLAdmin
     , sulAddtional
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.SQL.BackupRuns.Delete
-import           Network.Google.Resource.SQL.BackupRuns.Get
-import           Network.Google.Resource.SQL.BackupRuns.Insert
-import           Network.Google.Resource.SQL.BackupRuns.List
-import           Network.Google.Resource.SQL.Databases.Delete
-import           Network.Google.Resource.SQL.Databases.Get
-import           Network.Google.Resource.SQL.Databases.Insert
-import           Network.Google.Resource.SQL.Databases.List
-import           Network.Google.Resource.SQL.Databases.Patch
-import           Network.Google.Resource.SQL.Databases.Update
-import           Network.Google.Resource.SQL.Flags.List
-import           Network.Google.Resource.SQL.Instances.AddServerCa
-import           Network.Google.Resource.SQL.Instances.Clone
-import           Network.Google.Resource.SQL.Instances.Delete
-import           Network.Google.Resource.SQL.Instances.DemoteMaster
-import           Network.Google.Resource.SQL.Instances.Export
-import           Network.Google.Resource.SQL.Instances.Failover
-import           Network.Google.Resource.SQL.Instances.Get
-import           Network.Google.Resource.SQL.Instances.Import
-import           Network.Google.Resource.SQL.Instances.Insert
-import           Network.Google.Resource.SQL.Instances.List
-import           Network.Google.Resource.SQL.Instances.ListServerCas
-import           Network.Google.Resource.SQL.Instances.Patch
-import           Network.Google.Resource.SQL.Instances.PromoteReplica
-import           Network.Google.Resource.SQL.Instances.ResetSSLConfig
-import           Network.Google.Resource.SQL.Instances.Restart
-import           Network.Google.Resource.SQL.Instances.RestoreBackup
-import           Network.Google.Resource.SQL.Instances.RotateServerCa
-import           Network.Google.Resource.SQL.Instances.StartReplica
-import           Network.Google.Resource.SQL.Instances.StopReplica
-import           Network.Google.Resource.SQL.Instances.TruncateLog
-import           Network.Google.Resource.SQL.Instances.Update
-import           Network.Google.Resource.SQL.Operations.Get
-import           Network.Google.Resource.SQL.Operations.List
-import           Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
-import           Network.Google.Resource.SQL.SSLCerts.Delete
-import           Network.Google.Resource.SQL.SSLCerts.Get
-import           Network.Google.Resource.SQL.SSLCerts.Insert
-import           Network.Google.Resource.SQL.SSLCerts.List
-import           Network.Google.Resource.SQL.Tiers.List
-import           Network.Google.Resource.SQL.Users.Delete
-import           Network.Google.Resource.SQL.Users.Insert
-import           Network.Google.Resource.SQL.Users.List
-import           Network.Google.Resource.SQL.Users.Update
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.Resource.SQL.BackupRuns.Delete
+import Network.Google.Resource.SQL.BackupRuns.Get
+import Network.Google.Resource.SQL.BackupRuns.Insert
+import Network.Google.Resource.SQL.BackupRuns.List
+import Network.Google.Resource.SQL.Connect.GenerateEphemeral
+import Network.Google.Resource.SQL.Connect.Get
+import Network.Google.Resource.SQL.Databases.Delete
+import Network.Google.Resource.SQL.Databases.Get
+import Network.Google.Resource.SQL.Databases.Insert
+import Network.Google.Resource.SQL.Databases.List
+import Network.Google.Resource.SQL.Databases.Patch
+import Network.Google.Resource.SQL.Databases.Update
+import Network.Google.Resource.SQL.Flags.List
+import Network.Google.Resource.SQL.Instances.AddServerCa
+import Network.Google.Resource.SQL.Instances.Clone
+import Network.Google.Resource.SQL.Instances.Delete
+import Network.Google.Resource.SQL.Instances.DemoteMaster
+import Network.Google.Resource.SQL.Instances.Export
+import Network.Google.Resource.SQL.Instances.Failover
+import Network.Google.Resource.SQL.Instances.Get
+import Network.Google.Resource.SQL.Instances.Import
+import Network.Google.Resource.SQL.Instances.Insert
+import Network.Google.Resource.SQL.Instances.List
+import Network.Google.Resource.SQL.Instances.ListServerCas
+import Network.Google.Resource.SQL.Instances.Patch
+import Network.Google.Resource.SQL.Instances.PromoteReplica
+import Network.Google.Resource.SQL.Instances.ResetSSLConfig
+import Network.Google.Resource.SQL.Instances.Restart
+import Network.Google.Resource.SQL.Instances.RestoreBackup
+import Network.Google.Resource.SQL.Instances.RotateServerCa
+import Network.Google.Resource.SQL.Instances.StartReplica
+import Network.Google.Resource.SQL.Instances.StopReplica
+import Network.Google.Resource.SQL.Instances.TruncateLog
+import Network.Google.Resource.SQL.Instances.Update
+import Network.Google.Resource.SQL.Operations.Get
+import Network.Google.Resource.SQL.Operations.List
+import Network.Google.Resource.SQL.Projects.Instances.RescheduleMaintenance
+import Network.Google.Resource.SQL.Projects.Instances.StartExternalSync
+import Network.Google.Resource.SQL.Projects.Instances.VerifyExternalSyncSettings
+import Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
+import Network.Google.Resource.SQL.SSLCerts.Delete
+import Network.Google.Resource.SQL.SSLCerts.Get
+import Network.Google.Resource.SQL.SSLCerts.Insert
+import Network.Google.Resource.SQL.SSLCerts.List
+import Network.Google.Resource.SQL.Tiers.List
+import Network.Google.Resource.SQL.Users.Delete
+import Network.Google.Resource.SQL.Users.Insert
+import Network.Google.Resource.SQL.Users.List
+import Network.Google.Resource.SQL.Users.Update
+import Network.Google.SQLAdmin.Types
 
 {- $resources
 TODO
@@ -726,6 +996,8 @@ type SQLAdminAPI =
        UsersListResource
        :<|> UsersDeleteResource
        :<|> UsersUpdateResource
+       :<|> ConnectGetResource
+       :<|> ConnectGenerateEphemeralResource
        :<|> TiersListResource
        :<|> BackupRunsInsertResource
        :<|> BackupRunsListResource
@@ -759,6 +1031,10 @@ type SQLAdminAPI =
        :<|> InstancesUpdateResource
        :<|> OperationsListResource
        :<|> OperationsGetResource
+       :<|> ProjectsInstancesRescheduleMaintenanceResource
+       :<|> ProjectsInstancesStartExternalSyncResource
+       :<|>
+       ProjectsInstancesVerifyExternalSyncSettingsResource
        :<|> DatabasesInsertResource
        :<|> DatabasesListResource
        :<|> DatabasesPatchResource

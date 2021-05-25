@@ -27,7 +27,7 @@
 -- different resources (projects, organizations, billing accounts or
 -- folders)
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.entries.write@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.entries.write@.
 module Network.Google.Resource.Logging.Entries.Write
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Logging.Entries.Write
     , ewCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.entries.write@ method which the
 -- 'EntriesWrite' request conforms to.
@@ -73,12 +73,12 @@ type EntriesWriteResource =
 -- /See:/ 'entriesWrite' smart constructor.
 data EntriesWrite =
   EntriesWrite'
-    { _ewXgafv          :: !(Maybe Xgafv)
+    { _ewXgafv :: !(Maybe Xgafv)
     , _ewUploadProtocol :: !(Maybe Text)
-    , _ewAccessToken    :: !(Maybe Text)
-    , _ewUploadType     :: !(Maybe Text)
-    , _ewPayload        :: !WriteLogEntriesRequest
-    , _ewCallback       :: !(Maybe Text)
+    , _ewAccessToken :: !(Maybe Text)
+    , _ewUploadType :: !(Maybe Text)
+    , _ewPayload :: !WriteLogEntriesRequest
+    , _ewCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

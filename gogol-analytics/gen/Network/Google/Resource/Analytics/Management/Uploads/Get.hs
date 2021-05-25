@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.Get
     , mugUploadId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.uploads.get@ method which the
 -- 'ManagementUploadsGet' request conforms to.
@@ -63,10 +63,10 @@ type ManagementUploadsGetResource =
 -- /See:/ 'managementUploadsGet' smart constructor.
 data ManagementUploadsGet =
   ManagementUploadsGet'
-    { _mugWebPropertyId      :: !Text
+    { _mugWebPropertyId :: !Text
     , _mugCustomDataSourceId :: !Text
-    , _mugAccountId          :: !Text
-    , _mugUploadId           :: !Text
+    , _mugAccountId :: !Text
+    , _mugUploadId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

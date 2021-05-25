@@ -42,13 +42,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Update
     , pauCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.attestors.update@ method which the
 -- 'ProjectsAttestorsUpdate' request conforms to.
 type ProjectsAttestorsUpdateResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,13 +63,13 @@ type ProjectsAttestorsUpdateResource =
 -- /See:/ 'projectsAttestorsUpdate' smart constructor.
 data ProjectsAttestorsUpdate =
   ProjectsAttestorsUpdate'
-    { _pauXgafv          :: !(Maybe Xgafv)
+    { _pauXgafv :: !(Maybe Xgafv)
     , _pauUploadProtocol :: !(Maybe Text)
-    , _pauAccessToken    :: !(Maybe Text)
-    , _pauUploadType     :: !(Maybe Text)
-    , _pauPayload        :: !Attestor
-    , _pauName           :: !Text
-    , _pauCallback       :: !(Maybe Text)
+    , _pauAccessToken :: !(Maybe Text)
+    , _pauUploadType :: !(Maybe Text)
+    , _pauPayload :: !Attestor
+    , _pauName :: !Text
+    , _pauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

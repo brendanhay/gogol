@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Timeline.Get
     , tgId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.get@ method which the
 -- 'TimelineGet' request conforms to.

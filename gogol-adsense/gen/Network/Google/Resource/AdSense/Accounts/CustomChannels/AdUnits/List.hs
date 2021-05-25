@@ -41,8 +41,8 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
     , accaulMaxResults
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.customchannels.adunits.list@ method which the
 -- 'AccountsCustomChannelsAdUnitsList' request conforms to.
@@ -68,10 +68,10 @@ data AccountsCustomChannelsAdUnitsList =
   AccountsCustomChannelsAdUnitsList'
     { _accaulIncludeInactive :: !(Maybe Bool)
     , _accaulCustomChannelId :: !Text
-    , _accaulAdClientId      :: !Text
-    , _accaulAccountId       :: !Text
-    , _accaulPageToken       :: !(Maybe Text)
-    , _accaulMaxResults      :: !(Maybe (Textual Int32))
+    , _accaulAdClientId :: !Text
+    , _accaulAccountId :: !Text
+    , _accaulPageToken :: !(Maybe Text)
+    , _accaulMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Retrieves a role.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.roles.get@.
 module Network.Google.Resource.Directory.Roles.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Roles.Get
     , RolesGet
 
     -- * Request Lenses
+    , rgXgafv
+    , rgUploadProtocol
+    , rgAccessToken
+    , rgUploadType
     , rgRoleId
     , rgCustomer
+    , rgCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.get@ method which the
 -- 'RolesGet' request conforms to.
@@ -50,15 +55,25 @@ type RolesGetResource =
              Capture "customer" Text :>
                "roles" :>
                  Capture "roleId" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Role
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] Role
 
 -- | Retrieves a role.
 --
 -- /See:/ 'rolesGet' smart constructor.
 data RolesGet =
   RolesGet'
-    { _rgRoleId   :: !Text
+    { _rgXgafv :: !(Maybe Xgafv)
+    , _rgUploadProtocol :: !(Maybe Text)
+    , _rgAccessToken :: !(Maybe Text)
+    , _rgUploadType :: !(Maybe Text)
+    , _rgRoleId :: !Text
     , _rgCustomer :: !Text
+    , _rgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,25 +82,69 @@ data RolesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rgXgafv'
+--
+-- * 'rgUploadProtocol'
+--
+-- * 'rgAccessToken'
+--
+-- * 'rgUploadType'
+--
 -- * 'rgRoleId'
 --
 -- * 'rgCustomer'
+--
+-- * 'rgCallback'
 rolesGet
     :: Text -- ^ 'rgRoleId'
     -> Text -- ^ 'rgCustomer'
     -> RolesGet
 rolesGet pRgRoleId_ pRgCustomer_ =
-  RolesGet' {_rgRoleId = pRgRoleId_, _rgCustomer = pRgCustomer_}
+  RolesGet'
+    { _rgXgafv = Nothing
+    , _rgUploadProtocol = Nothing
+    , _rgAccessToken = Nothing
+    , _rgUploadType = Nothing
+    , _rgRoleId = pRgRoleId_
+    , _rgCustomer = pRgCustomer_
+    , _rgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rgXgafv :: Lens' RolesGet (Maybe Xgafv)
+rgXgafv = lens _rgXgafv (\ s a -> s{_rgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rgUploadProtocol :: Lens' RolesGet (Maybe Text)
+rgUploadProtocol
+  = lens _rgUploadProtocol
+      (\ s a -> s{_rgUploadProtocol = a})
+
+-- | OAuth access token.
+rgAccessToken :: Lens' RolesGet (Maybe Text)
+rgAccessToken
+  = lens _rgAccessToken
+      (\ s a -> s{_rgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rgUploadType :: Lens' RolesGet (Maybe Text)
+rgUploadType
+  = lens _rgUploadType (\ s a -> s{_rgUploadType = a})
 
 -- | Immutable ID of the role.
 rgRoleId :: Lens' RolesGet Text
 rgRoleId = lens _rgRoleId (\ s a -> s{_rgRoleId = a})
 
--- | Immutable ID of the G Suite account.
+-- | Immutable ID of the Google Workspace account.
 rgCustomer :: Lens' RolesGet Text
 rgCustomer
   = lens _rgCustomer (\ s a -> s{_rgCustomer = a})
+
+-- | JSONP
+rgCallback :: Lens' RolesGet (Maybe Text)
+rgCallback
+  = lens _rgCallback (\ s a -> s{_rgCallback = a})
 
 instance GoogleRequest RolesGet where
         type Rs RolesGet = Role
@@ -93,7 +152,11 @@ instance GoogleRequest RolesGet where
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RolesGet'{..}
-          = go _rgCustomer _rgRoleId (Just AltJSON)
+          = go _rgCustomer _rgRoleId _rgXgafv _rgUploadProtocol
+              _rgAccessToken
+              _rgUploadType
+              _rgCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy RolesGetResource)

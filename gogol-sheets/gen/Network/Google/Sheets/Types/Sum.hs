@@ -16,7 +16,45 @@
 --
 module Network.Google.Sheets.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+-- | The major dimension that results should use. For example, if the
+-- spreadsheet data is: \`A1=1,B1=2,A2=3,B2=4\`, then requesting
+-- \`range=A1:B2,majorDimension=ROWS\` returns \`[[1,2],[3,4]]\`, whereas
+-- requesting \`range=A1:B2,majorDimension=COLUMNS\` returns
+-- \`[[1,3],[2,4]]\`.
+data SpreadsheetsValuesBatchGetMajorDimension
+    = DimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | Rows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | Columns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesBatchGetMajorDimension
+
+instance FromHttpApiData SpreadsheetsValuesBatchGetMajorDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right DimensionUnspecified
+        "ROWS" -> Right Rows
+        "COLUMNS" -> Right Columns
+        x -> Left ("Unable to parse SpreadsheetsValuesBatchGetMajorDimension from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesBatchGetMajorDimension where
+    toQueryParam = \case
+        DimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        Rows -> "ROWS"
+        Columns -> "COLUMNS"
+
+instance FromJSON SpreadsheetsValuesBatchGetMajorDimension where
+    parseJSON = parseJSONText "SpreadsheetsValuesBatchGetMajorDimension"
+
+instance ToJSON SpreadsheetsValuesBatchGetMajorDimension where
+    toJSON = toJSONText
 
 -- | The stacked type for charts that support vertical stacking. Applies to
 -- Area, Bar, Column, Combo, and Stepped Area charts.
@@ -73,7 +111,7 @@ data CopyPasteRequestPasteType
       -- Paste the format and data validation only.
     | PasteNoBOrders
       -- ^ @PASTE_NO_BORDERS@
-      -- Like PASTE_NORMAL but without borders.
+      -- Like \`PASTE_NORMAL\` but without borders.
     | PasteFormula
       -- ^ @PASTE_FORMULA@
       -- Paste the formulas only.
@@ -165,8 +203,7 @@ instance ToJSON DeveloperMetadataLookupLocationMatchingStrategy where
 
 -- | Determines how dates, times, and durations in the response should be
 -- rendered. This is ignored if response_value_render_option is
--- FORMATTED_VALUE. The default dateTime render option is
--- DateTimeRenderOption.SERIAL_NUMBER.
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
 data BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOption
     = SerialNumber
       -- ^ @SERIAL_NUMBER@
@@ -246,18 +283,62 @@ instance FromJSON BasicChartAxisPosition where
 instance ToJSON BasicChartAxisPosition where
     toJSON = toJSONText
 
+-- | The view window\'s mode.
+data ChartAxisViewWindowOptionsViewWindowMode
+    = DefaultViewWindowMode
+      -- ^ @DEFAULT_VIEW_WINDOW_MODE@
+      -- The default view window mode used in the Sheets editor for this chart
+      -- type. In most cases, if set, the default mode is equivalent to
+      -- \`PRETTY\`.
+    | ViewWindowModeUnsupported
+      -- ^ @VIEW_WINDOW_MODE_UNSUPPORTED@
+      -- Do not use. Represents that the currently set mode is not supported by
+      -- the API.
+    | Explicit
+      -- ^ @EXPLICIT@
+      -- Follows the min and max exactly if specified. If a value is unspecified,
+      -- it will fall back to the \`PRETTY\` value.
+    | Pretty
+      -- ^ @PRETTY@
+      -- Chooses a min and max that make the chart look good. Both min and max
+      -- are ignored in this mode.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ChartAxisViewWindowOptionsViewWindowMode
+
+instance FromHttpApiData ChartAxisViewWindowOptionsViewWindowMode where
+    parseQueryParam = \case
+        "DEFAULT_VIEW_WINDOW_MODE" -> Right DefaultViewWindowMode
+        "VIEW_WINDOW_MODE_UNSUPPORTED" -> Right ViewWindowModeUnsupported
+        "EXPLICIT" -> Right Explicit
+        "PRETTY" -> Right Pretty
+        x -> Left ("Unable to parse ChartAxisViewWindowOptionsViewWindowMode from: " <> x)
+
+instance ToHttpApiData ChartAxisViewWindowOptionsViewWindowMode where
+    toQueryParam = \case
+        DefaultViewWindowMode -> "DEFAULT_VIEW_WINDOW_MODE"
+        ViewWindowModeUnsupported -> "VIEW_WINDOW_MODE_UNSUPPORTED"
+        Explicit -> "EXPLICIT"
+        Pretty -> "PRETTY"
+
+instance FromJSON ChartAxisViewWindowOptionsViewWindowMode where
+    parseJSON = parseJSONText "ChartAxisViewWindowOptionsViewWindowMode"
+
+instance ToJSON ChartAxisViewWindowOptionsViewWindowMode where
+    toJSON = toJSONText
+
 -- | The dimension from which deleted cells will be replaced with. If ROWS,
 -- existing cells will be shifted upward to replace the deleted cells. If
 -- COLUMNS, existing cells will be shifted left to replace the deleted
 -- cells.
 data DeleteRangeRequestShiftDimension
-    = DimensionUnspecified
+    = DRRSDDimensionUnspecified
       -- ^ @DIMENSION_UNSPECIFIED@
       -- The default value, do not use.
-    | Rows
+    | DRRSDRows
       -- ^ @ROWS@
       -- Operates on the rows of a sheet.
-    | Columns
+    | DRRSDColumns
       -- ^ @COLUMNS@
       -- Operates on the columns of a sheet.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -266,21 +347,61 @@ instance Hashable DeleteRangeRequestShiftDimension
 
 instance FromHttpApiData DeleteRangeRequestShiftDimension where
     parseQueryParam = \case
-        "DIMENSION_UNSPECIFIED" -> Right DimensionUnspecified
-        "ROWS" -> Right Rows
-        "COLUMNS" -> Right Columns
+        "DIMENSION_UNSPECIFIED" -> Right DRRSDDimensionUnspecified
+        "ROWS" -> Right DRRSDRows
+        "COLUMNS" -> Right DRRSDColumns
         x -> Left ("Unable to parse DeleteRangeRequestShiftDimension from: " <> x)
 
 instance ToHttpApiData DeleteRangeRequestShiftDimension where
     toQueryParam = \case
-        DimensionUnspecified -> "DIMENSION_UNSPECIFIED"
-        Rows -> "ROWS"
-        Columns -> "COLUMNS"
+        DRRSDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        DRRSDRows -> "ROWS"
+        DRRSDColumns -> "COLUMNS"
 
 instance FromJSON DeleteRangeRequestShiftDimension where
     parseJSON = parseJSONText "DeleteRangeRequestShiftDimension"
 
 instance ToJSON DeleteRangeRequestShiftDimension where
+    toJSON = toJSONText
+
+-- | How dates, times, and durations should be represented in the output.
+-- This is ignored if value_render_option is FORMATTED_VALUE. The default
+-- dateTime render option is SERIAL_NUMBER.
+data SpreadsheetsValuesBatchGetDateTimeRenderOption
+    = SVBGDTROSerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | SVBGDTROFormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesBatchGetDateTimeRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesBatchGetDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right SVBGDTROSerialNumber
+        "FORMATTED_STRING" -> Right SVBGDTROFormattedString
+        x -> Left ("Unable to parse SpreadsheetsValuesBatchGetDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesBatchGetDateTimeRenderOption where
+    toQueryParam = \case
+        SVBGDTROSerialNumber -> "SERIAL_NUMBER"
+        SVBGDTROFormattedString -> "FORMATTED_STRING"
+
+instance FromJSON SpreadsheetsValuesBatchGetDateTimeRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesBatchGetDateTimeRenderOption"
+
+instance ToJSON SpreadsheetsValuesBatchGetDateTimeRenderOption where
     toJSON = toJSONText
 
 -- | The minor axis that will specify the range of values for this series.
@@ -420,8 +541,7 @@ instance ToJSON BubbleChartSpecLegendPosition where
 
 -- | Determines how dates, times, and durations in the response should be
 -- rendered. This is ignored if response_value_render_option is
--- FORMATTED_VALUE. The default dateTime render option is
--- DateTimeRenderOption.SERIAL_NUMBER.
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
 data BatchUpdateValuesRequestResponseDateTimeRenderOption
     = BUVRRDTROSerialNumber
       -- ^ @SERIAL_NUMBER@
@@ -493,6 +613,46 @@ instance FromJSON AppendDimensionRequestDimension where
 instance ToJSON AppendDimensionRequestDimension where
     toJSON = toJSONText
 
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
+data SpreadsheetsValuesUpdateResponseDateTimeRenderOption
+    = SVURDTROSerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | SVURDTROFormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesUpdateResponseDateTimeRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesUpdateResponseDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right SVURDTROSerialNumber
+        "FORMATTED_STRING" -> Right SVURDTROFormattedString
+        x -> Left ("Unable to parse SpreadsheetsValuesUpdateResponseDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesUpdateResponseDateTimeRenderOption where
+    toQueryParam = \case
+        SVURDTROSerialNumber -> "SERIAL_NUMBER"
+        SVURDTROFormattedString -> "FORMATTED_STRING"
+
+instance FromJSON SpreadsheetsValuesUpdateResponseDateTimeRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesUpdateResponseDateTimeRenderOption"
+
+instance ToJSON SpreadsheetsValuesUpdateResponseDateTimeRenderOption where
+    toJSON = toJSONText
+
 -- | The dimension of the span.
 data DimensionRangeDimension
     = DRDDimensionUnspecified
@@ -528,7 +688,7 @@ instance ToJSON DimensionRangeDimension where
     toJSON = toJSONText
 
 -- | How values should be represented in the output. The default render
--- option is ValueRenderOption.FORMATTED_VALUE.
+-- option is FORMATTED_VALUE.
 data BatchGetValuesByDataFilterRequestValueRenderOption
     = FormattedValue
       -- ^ @FORMATTED_VALUE@
@@ -604,6 +764,44 @@ instance FromJSON SourceAndDestinationDimension where
 instance ToJSON SourceAndDestinationDimension where
     toJSON = toJSONText
 
+-- | How the input data should be interpreted.
+data SpreadsheetsValuesUpdateValueInputOption
+    = InputValueOptionUnspecified
+      -- ^ @INPUT_VALUE_OPTION_UNSPECIFIED@
+      -- Default input value. This value must not be used.
+    | Raw
+      -- ^ @RAW@
+      -- The values the user has entered will not be parsed and will be stored
+      -- as-is.
+    | UserEntered
+      -- ^ @USER_ENTERED@
+      -- The values will be parsed as if the user typed them into the UI. Numbers
+      -- will stay as numbers, but strings may be converted to numbers, dates,
+      -- etc. following the same rules that are applied when entering text into a
+      -- cell via the Google Sheets UI.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesUpdateValueInputOption
+
+instance FromHttpApiData SpreadsheetsValuesUpdateValueInputOption where
+    parseQueryParam = \case
+        "INPUT_VALUE_OPTION_UNSPECIFIED" -> Right InputValueOptionUnspecified
+        "RAW" -> Right Raw
+        "USER_ENTERED" -> Right UserEntered
+        x -> Left ("Unable to parse SpreadsheetsValuesUpdateValueInputOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesUpdateValueInputOption where
+    toQueryParam = \case
+        InputValueOptionUnspecified -> "INPUT_VALUE_OPTION_UNSPECIFIED"
+        Raw -> "RAW"
+        UserEntered -> "USER_ENTERED"
+
+instance FromJSON SpreadsheetsValuesUpdateValueInputOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesUpdateValueInputOption"
+
+instance ToJSON SpreadsheetsValuesUpdateValueInputOption where
+    toJSON = toJSONText
+
 -- | The wrap strategy for the value in the cell.
 data CellFormatWrapStrategy
     = WrapStrategyUnspecified
@@ -613,8 +811,8 @@ data CellFormatWrapStrategy
       -- ^ @OVERFLOW_CELL@
       -- Lines that are longer than the cell width will be written in the next
       -- cell over, so long as that cell is empty. If the next cell over is
-      -- non-empty, this behaves the same as CLIP. The text will never wrap to
-      -- the next line unless the user manually inserts a new line. Example: |
+      -- non-empty, this behaves the same as \`CLIP\`. The text will never wrap
+      -- to the next line unless the user manually inserts a new line. Example: |
       -- First sentence. | | Manual newline that is very long. \<- Text continues
       -- into next cell | Next newline. |
     | LegacyWrap
@@ -661,16 +859,89 @@ instance FromJSON CellFormatWrapStrategy where
 instance ToJSON CellFormatWrapStrategy where
     toJSON = toJSONText
 
+-- | The scope of the refresh. Must be ALL_DATA_SOURCES.
+data DataSourceRefreshScheduleRefreshScope
+    = DataSourceRefreshScopeUnspecified
+      -- ^ @DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | AllDataSources
+      -- ^ @ALL_DATA_SOURCES@
+      -- Refreshes all data sources and their associated data source objects in
+      -- the spreadsheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataSourceRefreshScheduleRefreshScope
+
+instance FromHttpApiData DataSourceRefreshScheduleRefreshScope where
+    parseQueryParam = \case
+        "DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED" -> Right DataSourceRefreshScopeUnspecified
+        "ALL_DATA_SOURCES" -> Right AllDataSources
+        x -> Left ("Unable to parse DataSourceRefreshScheduleRefreshScope from: " <> x)
+
+instance ToHttpApiData DataSourceRefreshScheduleRefreshScope where
+    toQueryParam = \case
+        DataSourceRefreshScopeUnspecified -> "DATA_SOURCE_REFRESH_SCOPE_UNSPECIFIED"
+        AllDataSources -> "ALL_DATA_SOURCES"
+
+instance FromJSON DataSourceRefreshScheduleRefreshScope where
+    parseJSON = parseJSONText "DataSourceRefreshScheduleRefreshScope"
+
+instance ToJSON DataSourceRefreshScheduleRefreshScope where
+    toJSON = toJSONText
+
+-- | Determines how values in the response should be rendered. The default
+-- render option is FORMATTED_VALUE.
+data SpreadsheetsValuesAppendResponseValueRenderOption
+    = SVARVROFormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | SVARVROUnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | SVARVROFormula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesAppendResponseValueRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesAppendResponseValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right SVARVROFormattedValue
+        "UNFORMATTED_VALUE" -> Right SVARVROUnformattedValue
+        "FORMULA" -> Right SVARVROFormula
+        x -> Left ("Unable to parse SpreadsheetsValuesAppendResponseValueRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesAppendResponseValueRenderOption where
+    toQueryParam = \case
+        SVARVROFormattedValue -> "FORMATTED_VALUE"
+        SVARVROUnformattedValue -> "UNFORMATTED_VALUE"
+        SVARVROFormula -> "FORMULA"
+
+instance FromJSON SpreadsheetsValuesAppendResponseValueRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesAppendResponseValueRenderOption"
+
+instance ToJSON SpreadsheetsValuesAppendResponseValueRenderOption where
+    toJSON = toJSONText
+
 -- | How the input data should be interpreted.
 data BatchUpdateValuesRequestValueInputOption
-    = InputValueOptionUnspecified
+    = BUVRVIOInputValueOptionUnspecified
       -- ^ @INPUT_VALUE_OPTION_UNSPECIFIED@
       -- Default input value. This value must not be used.
-    | Raw
+    | BUVRVIORaw
       -- ^ @RAW@
       -- The values the user has entered will not be parsed and will be stored
       -- as-is.
-    | UserEntered
+    | BUVRVIOUserEntered
       -- ^ @USER_ENTERED@
       -- The values will be parsed as if the user typed them into the UI. Numbers
       -- will stay as numbers, but strings may be converted to numbers, dates,
@@ -682,21 +953,64 @@ instance Hashable BatchUpdateValuesRequestValueInputOption
 
 instance FromHttpApiData BatchUpdateValuesRequestValueInputOption where
     parseQueryParam = \case
-        "INPUT_VALUE_OPTION_UNSPECIFIED" -> Right InputValueOptionUnspecified
-        "RAW" -> Right Raw
-        "USER_ENTERED" -> Right UserEntered
+        "INPUT_VALUE_OPTION_UNSPECIFIED" -> Right BUVRVIOInputValueOptionUnspecified
+        "RAW" -> Right BUVRVIORaw
+        "USER_ENTERED" -> Right BUVRVIOUserEntered
         x -> Left ("Unable to parse BatchUpdateValuesRequestValueInputOption from: " <> x)
 
 instance ToHttpApiData BatchUpdateValuesRequestValueInputOption where
     toQueryParam = \case
-        InputValueOptionUnspecified -> "INPUT_VALUE_OPTION_UNSPECIFIED"
-        Raw -> "RAW"
-        UserEntered -> "USER_ENTERED"
+        BUVRVIOInputValueOptionUnspecified -> "INPUT_VALUE_OPTION_UNSPECIFIED"
+        BUVRVIORaw -> "RAW"
+        BUVRVIOUserEntered -> "USER_ENTERED"
 
 instance FromJSON BatchUpdateValuesRequestValueInputOption where
     parseJSON = parseJSONText "BatchUpdateValuesRequestValueInputOption"
 
 instance ToJSON BatchUpdateValuesRequestValueInputOption where
+    toJSON = toJSONText
+
+-- | Determines how values in the response should be rendered. The default
+-- render option is FORMATTED_VALUE.
+data SpreadsheetsValuesUpdateResponseValueRenderOption
+    = SVURVROFormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | SVURVROUnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | SVURVROFormula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesUpdateResponseValueRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesUpdateResponseValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right SVURVROFormattedValue
+        "UNFORMATTED_VALUE" -> Right SVURVROUnformattedValue
+        "FORMULA" -> Right SVURVROFormula
+        x -> Left ("Unable to parse SpreadsheetsValuesUpdateResponseValueRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesUpdateResponseValueRenderOption where
+    toQueryParam = \case
+        SVURVROFormattedValue -> "FORMATTED_VALUE"
+        SVURVROUnformattedValue -> "UNFORMATTED_VALUE"
+        SVURVROFormula -> "FORMULA"
+
+instance FromJSON SpreadsheetsValuesUpdateResponseValueRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesUpdateResponseValueRenderOption"
+
+instance ToJSON SpreadsheetsValuesUpdateResponseValueRenderOption where
     toJSON = toJSONText
 
 -- | Horizontal alignment setting for the piece of text.
@@ -776,7 +1090,7 @@ instance ToJSON DeveloperMetadataVisibility where
     toJSON = toJSONText
 
 -- | Determines how values in the response should be rendered. The default
--- render option is ValueRenderOption.FORMATTED_VALUE.
+-- render option is FORMATTED_VALUE.
 data BatchUpdateValuesRequestResponseValueRenderOption
     = BUVRRVROFormattedValue
       -- ^ @FORMATTED_VALUE@
@@ -816,6 +1130,49 @@ instance FromJSON BatchUpdateValuesRequestResponseValueRenderOption where
     parseJSON = parseJSONText "BatchUpdateValuesRequestResponseValueRenderOption"
 
 instance ToJSON BatchUpdateValuesRequestResponseValueRenderOption where
+    toJSON = toJSONText
+
+-- | How values should be represented in the output. The default render
+-- option is ValueRenderOption.FORMATTED_VALUE.
+data SpreadsheetsValuesBatchGetValueRenderOption
+    = SVBGVROFormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | SVBGVROUnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | SVBGVROFormula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesBatchGetValueRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesBatchGetValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right SVBGVROFormattedValue
+        "UNFORMATTED_VALUE" -> Right SVBGVROUnformattedValue
+        "FORMULA" -> Right SVBGVROFormula
+        x -> Left ("Unable to parse SpreadsheetsValuesBatchGetValueRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesBatchGetValueRenderOption where
+    toQueryParam = \case
+        SVBGVROFormattedValue -> "FORMATTED_VALUE"
+        SVBGVROUnformattedValue -> "UNFORMATTED_VALUE"
+        SVBGVROFormula -> "FORMULA"
+
+instance FromJSON SpreadsheetsValuesBatchGetValueRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesBatchGetValueRenderOption"
+
+instance ToJSON SpreadsheetsValuesBatchGetValueRenderOption where
     toJSON = toJSONText
 
 -- | Where the legend of the pie chart should be drawn.
@@ -935,7 +1292,7 @@ data NumberFormatType
     | Time
       -- ^ @TIME@
       -- Time formatting, e.g \`3:59:00 PM\`
-    | DateTime
+    | DateTime''
       -- ^ @DATE_TIME@
       -- Date+Time formatting, e.g \`9\/26\/08 15:59:00\`
     | Scientific
@@ -954,7 +1311,7 @@ instance FromHttpApiData NumberFormatType where
         "CURRENCY" -> Right Currency
         "DATE" -> Right Date
         "TIME" -> Right Time
-        "DATE_TIME" -> Right DateTime
+        "DATE_TIME" -> Right DateTime''
         "SCIENTIFIC" -> Right Scientific
         x -> Left ("Unable to parse NumberFormatType from: " <> x)
 
@@ -967,7 +1324,7 @@ instance ToHttpApiData NumberFormatType where
         Currency -> "CURRENCY"
         Date -> "DATE"
         Time -> "TIME"
-        DateTime -> "DATE_TIME"
+        DateTime'' -> "DATE_TIME"
         Scientific -> "SCIENTIFIC"
 
 instance FromJSON NumberFormatType where
@@ -1033,6 +1390,75 @@ instance FromJSON ConditionValueRelativeDate where
 instance ToJSON ConditionValueRelativeDate where
     toJSON = toJSONText
 
+-- | The type of the spreadsheet theme color.
+data ThemeColorPairColorType
+    = TCPCTThemeColorTypeUnspecified
+      -- ^ @THEME_COLOR_TYPE_UNSPECIFIED@
+      -- Unspecified theme color
+    | TCPCTText
+      -- ^ @TEXT@
+      -- Represents the primary text color
+    | TCPCTBackgRound
+      -- ^ @BACKGROUND@
+      -- Represents the primary background color
+    | TCPCTACCENT1
+      -- ^ @ACCENT1@
+      -- Represents the first accent color
+    | TCPCTACCENT2
+      -- ^ @ACCENT2@
+      -- Represents the second accent color
+    | TCPCTACCENT3
+      -- ^ @ACCENT3@
+      -- Represents the third accent color
+    | TCPCTACCENT4
+      -- ^ @ACCENT4@
+      -- Represents the fourth accent color
+    | TCPCTACCENT5
+      -- ^ @ACCENT5@
+      -- Represents the fifth accent color
+    | TCPCTACCENT6
+      -- ^ @ACCENT6@
+      -- Represents the sixth accent color
+    | TCPCTLink
+      -- ^ @LINK@
+      -- Represents the color to use for hyperlinks
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ThemeColorPairColorType
+
+instance FromHttpApiData ThemeColorPairColorType where
+    parseQueryParam = \case
+        "THEME_COLOR_TYPE_UNSPECIFIED" -> Right TCPCTThemeColorTypeUnspecified
+        "TEXT" -> Right TCPCTText
+        "BACKGROUND" -> Right TCPCTBackgRound
+        "ACCENT1" -> Right TCPCTACCENT1
+        "ACCENT2" -> Right TCPCTACCENT2
+        "ACCENT3" -> Right TCPCTACCENT3
+        "ACCENT4" -> Right TCPCTACCENT4
+        "ACCENT5" -> Right TCPCTACCENT5
+        "ACCENT6" -> Right TCPCTACCENT6
+        "LINK" -> Right TCPCTLink
+        x -> Left ("Unable to parse ThemeColorPairColorType from: " <> x)
+
+instance ToHttpApiData ThemeColorPairColorType where
+    toQueryParam = \case
+        TCPCTThemeColorTypeUnspecified -> "THEME_COLOR_TYPE_UNSPECIFIED"
+        TCPCTText -> "TEXT"
+        TCPCTBackgRound -> "BACKGROUND"
+        TCPCTACCENT1 -> "ACCENT1"
+        TCPCTACCENT2 -> "ACCENT2"
+        TCPCTACCENT3 -> "ACCENT3"
+        TCPCTACCENT4 -> "ACCENT4"
+        TCPCTACCENT5 -> "ACCENT5"
+        TCPCTACCENT6 -> "ACCENT6"
+        TCPCTLink -> "LINK"
+
+instance FromJSON ThemeColorPairColorType where
+    parseJSON = parseJSONText "ThemeColorPairColorType"
+
+instance ToJSON ThemeColorPairColorType where
+    toJSON = toJSONText
+
 -- | The type of location this object represents. This field is read-only.
 data DeveloperMetadataLocationLocationType
     = DMLLTDeveloperMetadataLocationTypeUnspecified
@@ -1077,6 +1503,178 @@ instance FromJSON DeveloperMetadataLocationLocationType where
 instance ToJSON DeveloperMetadataLocationLocationType where
     toJSON = toJSONText
 
+-- | The error code.
+data DataExecutionStatusErrorCode
+    = DataExecutionErrorCodeUnspecified
+      -- ^ @DATA_EXECUTION_ERROR_CODE_UNSPECIFIED@
+      -- Default value, do not use.
+    | TimedOut
+      -- ^ @TIMED_OUT@
+      -- The data execution timed out.
+    | TooManyRows
+      -- ^ @TOO_MANY_ROWS@
+      -- The data execution returns more rows than the limit.
+    | TooManyCells
+      -- ^ @TOO_MANY_CELLS@
+      -- The data execution returns more cells than the limit.
+    | Engine
+      -- ^ @ENGINE@
+      -- Error is received from the backend data execution engine (e.g.
+      -- BigQuery). Check error_message for details.
+    | ParameterInvalid
+      -- ^ @PARAMETER_INVALID@
+      -- One or some of the provided data source parameters are invalid.
+    | UnsupportedDataType
+      -- ^ @UNSUPPORTED_DATA_TYPE@
+      -- The data execution returns an unsupported data type.
+    | DuplicateColumnNames
+      -- ^ @DUPLICATE_COLUMN_NAMES@
+      -- The data execution returns duplicate column names or aliases.
+    | Interrupted
+      -- ^ @INTERRUPTED@
+      -- The data execution is interrupted. Please refresh later.
+    | ConcurrentQuery
+      -- ^ @CONCURRENT_QUERY@
+      -- The data execution is currently in progress, can not be refreshed until
+      -- it completes.
+    | Other
+      -- ^ @OTHER@
+      -- Other errors.
+    | TooManyCharsPerCell
+      -- ^ @TOO_MANY_CHARS_PER_CELL@
+      -- The data execution returns values that exceed the maximum characters
+      -- allowed in a single cell.
+    | DataNotFound
+      -- ^ @DATA_NOT_FOUND@
+      -- The database referenced by the data source is not found. *\/
+    | PermissionDenied
+      -- ^ @PERMISSION_DENIED@
+      -- The user does not have access to the database referenced by the data
+      -- source.
+    | MissingColumnAlias
+      -- ^ @MISSING_COLUMN_ALIAS@
+      -- The data execution returns columns with missing aliases.
+    | ObjectNotFound
+      -- ^ @OBJECT_NOT_FOUND@
+      -- The data source object does not exist.
+    | ObjectInErrorState
+      -- ^ @OBJECT_IN_ERROR_STATE@
+      -- The data source object is currently in error state. To force refresh,
+      -- set force in RefreshDataSourceRequest.
+    | ObjectSpecInvalid
+      -- ^ @OBJECT_SPEC_INVALID@
+      -- The data source object specification is invalid.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataExecutionStatusErrorCode
+
+instance FromHttpApiData DataExecutionStatusErrorCode where
+    parseQueryParam = \case
+        "DATA_EXECUTION_ERROR_CODE_UNSPECIFIED" -> Right DataExecutionErrorCodeUnspecified
+        "TIMED_OUT" -> Right TimedOut
+        "TOO_MANY_ROWS" -> Right TooManyRows
+        "TOO_MANY_CELLS" -> Right TooManyCells
+        "ENGINE" -> Right Engine
+        "PARAMETER_INVALID" -> Right ParameterInvalid
+        "UNSUPPORTED_DATA_TYPE" -> Right UnsupportedDataType
+        "DUPLICATE_COLUMN_NAMES" -> Right DuplicateColumnNames
+        "INTERRUPTED" -> Right Interrupted
+        "CONCURRENT_QUERY" -> Right ConcurrentQuery
+        "OTHER" -> Right Other
+        "TOO_MANY_CHARS_PER_CELL" -> Right TooManyCharsPerCell
+        "DATA_NOT_FOUND" -> Right DataNotFound
+        "PERMISSION_DENIED" -> Right PermissionDenied
+        "MISSING_COLUMN_ALIAS" -> Right MissingColumnAlias
+        "OBJECT_NOT_FOUND" -> Right ObjectNotFound
+        "OBJECT_IN_ERROR_STATE" -> Right ObjectInErrorState
+        "OBJECT_SPEC_INVALID" -> Right ObjectSpecInvalid
+        x -> Left ("Unable to parse DataExecutionStatusErrorCode from: " <> x)
+
+instance ToHttpApiData DataExecutionStatusErrorCode where
+    toQueryParam = \case
+        DataExecutionErrorCodeUnspecified -> "DATA_EXECUTION_ERROR_CODE_UNSPECIFIED"
+        TimedOut -> "TIMED_OUT"
+        TooManyRows -> "TOO_MANY_ROWS"
+        TooManyCells -> "TOO_MANY_CELLS"
+        Engine -> "ENGINE"
+        ParameterInvalid -> "PARAMETER_INVALID"
+        UnsupportedDataType -> "UNSUPPORTED_DATA_TYPE"
+        DuplicateColumnNames -> "DUPLICATE_COLUMN_NAMES"
+        Interrupted -> "INTERRUPTED"
+        ConcurrentQuery -> "CONCURRENT_QUERY"
+        Other -> "OTHER"
+        TooManyCharsPerCell -> "TOO_MANY_CHARS_PER_CELL"
+        DataNotFound -> "DATA_NOT_FOUND"
+        PermissionDenied -> "PERMISSION_DENIED"
+        MissingColumnAlias -> "MISSING_COLUMN_ALIAS"
+        ObjectNotFound -> "OBJECT_NOT_FOUND"
+        ObjectInErrorState -> "OBJECT_IN_ERROR_STATE"
+        ObjectSpecInvalid -> "OBJECT_SPEC_INVALID"
+
+instance FromJSON DataExecutionStatusErrorCode where
+    parseJSON = parseJSONText "DataExecutionStatusErrorCode"
+
+instance ToJSON DataExecutionStatusErrorCode where
+    toJSON = toJSONText
+
+data DataSourceRefreshWeeklyScheduleDaysOfWeekItem
+    = DayOfWeekUnspecified
+      -- ^ @DAY_OF_WEEK_UNSPECIFIED@
+      -- The day of the week is unspecified.
+    | Monday
+      -- ^ @MONDAY@
+      -- Monday
+    | Tuesday
+      -- ^ @TUESDAY@
+      -- Tuesday
+    | Wednesday
+      -- ^ @WEDNESDAY@
+      -- Wednesday
+    | Thursday
+      -- ^ @THURSDAY@
+      -- Thursday
+    | Friday
+      -- ^ @FRIDAY@
+      -- Friday
+    | Saturday
+      -- ^ @SATURDAY@
+      -- Saturday
+    | Sunday
+      -- ^ @SUNDAY@
+      -- Sunday
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataSourceRefreshWeeklyScheduleDaysOfWeekItem
+
+instance FromHttpApiData DataSourceRefreshWeeklyScheduleDaysOfWeekItem where
+    parseQueryParam = \case
+        "DAY_OF_WEEK_UNSPECIFIED" -> Right DayOfWeekUnspecified
+        "MONDAY" -> Right Monday
+        "TUESDAY" -> Right Tuesday
+        "WEDNESDAY" -> Right Wednesday
+        "THURSDAY" -> Right Thursday
+        "FRIDAY" -> Right Friday
+        "SATURDAY" -> Right Saturday
+        "SUNDAY" -> Right Sunday
+        x -> Left ("Unable to parse DataSourceRefreshWeeklyScheduleDaysOfWeekItem from: " <> x)
+
+instance ToHttpApiData DataSourceRefreshWeeklyScheduleDaysOfWeekItem where
+    toQueryParam = \case
+        DayOfWeekUnspecified -> "DAY_OF_WEEK_UNSPECIFIED"
+        Monday -> "MONDAY"
+        Tuesday -> "TUESDAY"
+        Wednesday -> "WEDNESDAY"
+        Thursday -> "THURSDAY"
+        Friday -> "FRIDAY"
+        Saturday -> "SATURDAY"
+        Sunday -> "SUNDAY"
+
+instance FromJSON DataSourceRefreshWeeklyScheduleDaysOfWeekItem where
+    parseJSON = parseJSONText "DataSourceRefreshWeeklyScheduleDaysOfWeekItem"
+
+instance ToJSON DataSourceRefreshWeeklyScheduleDaysOfWeekItem where
+    toJSON = toJSONText
+
 -- | The order data should be sorted.
 data SortSpecSortOrder
     = SortOrderUnspecified
@@ -1109,6 +1707,115 @@ instance FromJSON SortSpecSortOrder where
     parseJSON = parseJSONText "SortSpecSortOrder"
 
 instance ToJSON SortSpecSortOrder where
+    toJSON = toJSONText
+
+-- | The horizontal alignment of title in the slicer. If unspecified,
+-- defaults to \`LEFT\`
+data SlicerSpecHorizontalAlignment
+    = SSHAHorizontalAlignUnspecified
+      -- ^ @HORIZONTAL_ALIGN_UNSPECIFIED@
+      -- The horizontal alignment is not specified. Do not use this.
+    | SSHALeft'
+      -- ^ @LEFT@
+      -- The text is explicitly aligned to the left of the cell.
+    | SSHACenter
+      -- ^ @CENTER@
+      -- The text is explicitly aligned to the center of the cell.
+    | SSHARight'
+      -- ^ @RIGHT@
+      -- The text is explicitly aligned to the right of the cell.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SlicerSpecHorizontalAlignment
+
+instance FromHttpApiData SlicerSpecHorizontalAlignment where
+    parseQueryParam = \case
+        "HORIZONTAL_ALIGN_UNSPECIFIED" -> Right SSHAHorizontalAlignUnspecified
+        "LEFT" -> Right SSHALeft'
+        "CENTER" -> Right SSHACenter
+        "RIGHT" -> Right SSHARight'
+        x -> Left ("Unable to parse SlicerSpecHorizontalAlignment from: " <> x)
+
+instance ToHttpApiData SlicerSpecHorizontalAlignment where
+    toQueryParam = \case
+        SSHAHorizontalAlignUnspecified -> "HORIZONTAL_ALIGN_UNSPECIFIED"
+        SSHALeft' -> "LEFT"
+        SSHACenter -> "CENTER"
+        SSHARight' -> "RIGHT"
+
+instance FromJSON SlicerSpecHorizontalAlignment where
+    parseJSON = parseJSONText "SlicerSpecHorizontalAlignment"
+
+instance ToJSON SlicerSpecHorizontalAlignment where
+    toJSON = toJSONText
+
+-- | Theme color.
+data ColorStyleThemeColor
+    = CSTCThemeColorTypeUnspecified
+      -- ^ @THEME_COLOR_TYPE_UNSPECIFIED@
+      -- Unspecified theme color
+    | CSTCText
+      -- ^ @TEXT@
+      -- Represents the primary text color
+    | CSTCBackgRound
+      -- ^ @BACKGROUND@
+      -- Represents the primary background color
+    | CSTCACCENT1
+      -- ^ @ACCENT1@
+      -- Represents the first accent color
+    | CSTCACCENT2
+      -- ^ @ACCENT2@
+      -- Represents the second accent color
+    | CSTCACCENT3
+      -- ^ @ACCENT3@
+      -- Represents the third accent color
+    | CSTCACCENT4
+      -- ^ @ACCENT4@
+      -- Represents the fourth accent color
+    | CSTCACCENT5
+      -- ^ @ACCENT5@
+      -- Represents the fifth accent color
+    | CSTCACCENT6
+      -- ^ @ACCENT6@
+      -- Represents the sixth accent color
+    | CSTCLink
+      -- ^ @LINK@
+      -- Represents the color to use for hyperlinks
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ColorStyleThemeColor
+
+instance FromHttpApiData ColorStyleThemeColor where
+    parseQueryParam = \case
+        "THEME_COLOR_TYPE_UNSPECIFIED" -> Right CSTCThemeColorTypeUnspecified
+        "TEXT" -> Right CSTCText
+        "BACKGROUND" -> Right CSTCBackgRound
+        "ACCENT1" -> Right CSTCACCENT1
+        "ACCENT2" -> Right CSTCACCENT2
+        "ACCENT3" -> Right CSTCACCENT3
+        "ACCENT4" -> Right CSTCACCENT4
+        "ACCENT5" -> Right CSTCACCENT5
+        "ACCENT6" -> Right CSTCACCENT6
+        "LINK" -> Right CSTCLink
+        x -> Left ("Unable to parse ColorStyleThemeColor from: " <> x)
+
+instance ToHttpApiData ColorStyleThemeColor where
+    toQueryParam = \case
+        CSTCThemeColorTypeUnspecified -> "THEME_COLOR_TYPE_UNSPECIFIED"
+        CSTCText -> "TEXT"
+        CSTCBackgRound -> "BACKGROUND"
+        CSTCACCENT1 -> "ACCENT1"
+        CSTCACCENT2 -> "ACCENT2"
+        CSTCACCENT3 -> "ACCENT3"
+        CSTCACCENT4 -> "ACCENT4"
+        CSTCACCENT5 -> "ACCENT5"
+        CSTCACCENT6 -> "ACCENT6"
+        CSTCLink -> "LINK"
+
+instance FromJSON ColorStyleThemeColor where
+    parseJSON = parseJSONText "ColorStyleThemeColor"
+
+instance ToJSON ColorStyleThemeColor where
     toJSON = toJSONText
 
 -- | A function to summarize the value. If formula is set, the only supported
@@ -1248,7 +1955,7 @@ instance ToJSON OrgChartSpecNodeSize where
     toJSON = toJSONText
 
 -- | Determines how values in the response should be rendered. The default
--- render option is ValueRenderOption.FORMATTED_VALUE.
+-- render option is FORMATTED_VALUE.
 data BatchUpdateValuesByDataFilterRequestResponseValueRenderOption
     = BUVBDFRRVROFormattedValue
       -- ^ @FORMATTED_VALUE@
@@ -1288,6 +1995,47 @@ instance FromJSON BatchUpdateValuesByDataFilterRequestResponseValueRenderOption 
     parseJSON = parseJSONText "BatchUpdateValuesByDataFilterRequestResponseValueRenderOption"
 
 instance ToJSON BatchUpdateValuesByDataFilterRequestResponseValueRenderOption where
+    toJSON = toJSONText
+
+-- | The type of the data label.
+data DataLabelType
+    = DLTDataLabelTypeUnspecified
+      -- ^ @DATA_LABEL_TYPE_UNSPECIFIED@
+      -- The data label type is not specified and will be interpreted depending
+      -- on the context of the data label within the chart.
+    | DLTNone
+      -- ^ @NONE@
+      -- The data label is not displayed.
+    | DLTData'
+      -- ^ @DATA@
+      -- The data label is displayed using values from the series data.
+    | DLTCustom
+      -- ^ @CUSTOM@
+      -- The data label is displayed using values from a custom data source
+      -- indicated by customLabelData.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataLabelType
+
+instance FromHttpApiData DataLabelType where
+    parseQueryParam = \case
+        "DATA_LABEL_TYPE_UNSPECIFIED" -> Right DLTDataLabelTypeUnspecified
+        "NONE" -> Right DLTNone
+        "DATA" -> Right DLTData'
+        "CUSTOM" -> Right DLTCustom
+        x -> Left ("Unable to parse DataLabelType from: " <> x)
+
+instance ToHttpApiData DataLabelType where
+    toQueryParam = \case
+        DLTDataLabelTypeUnspecified -> "DATA_LABEL_TYPE_UNSPECIFIED"
+        DLTNone -> "NONE"
+        DLTData' -> "DATA"
+        DLTCustom -> "CUSTOM"
+
+instance FromJSON DataLabelType where
+    parseJSON = parseJSONText "DataLabelType"
+
+instance ToJSON DataLabelType where
     toJSON = toJSONText
 
 -- | The dash type of the line.
@@ -1484,31 +2232,37 @@ instance ToJSON HistogramChartSpecLegendPosition where
 -- | The type of sheet. Defaults to GRID. This field cannot be changed once
 -- set.
 data SheetPropertiesSheetType
-    = SheetTypeUnspecified
+    = SPSTSheetTypeUnspecified
       -- ^ @SHEET_TYPE_UNSPECIFIED@
       -- Default value, do not use.
-    | Grid
+    | SPSTGrid
       -- ^ @GRID@
       -- The sheet is a grid.
-    | Object
+    | SPSTObject
       -- ^ @OBJECT@
       -- The sheet has no grid and instead has an object like a chart or image.
+    | SPSTDataSource
+      -- ^ @DATA_SOURCE@
+      -- The sheet connects with an external DataSource and shows the preview of
+      -- data.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SheetPropertiesSheetType
 
 instance FromHttpApiData SheetPropertiesSheetType where
     parseQueryParam = \case
-        "SHEET_TYPE_UNSPECIFIED" -> Right SheetTypeUnspecified
-        "GRID" -> Right Grid
-        "OBJECT" -> Right Object
+        "SHEET_TYPE_UNSPECIFIED" -> Right SPSTSheetTypeUnspecified
+        "GRID" -> Right SPSTGrid
+        "OBJECT" -> Right SPSTObject
+        "DATA_SOURCE" -> Right SPSTDataSource
         x -> Left ("Unable to parse SheetPropertiesSheetType from: " <> x)
 
 instance ToHttpApiData SheetPropertiesSheetType where
     toQueryParam = \case
-        SheetTypeUnspecified -> "SHEET_TYPE_UNSPECIFIED"
-        Grid -> "GRID"
-        Object -> "OBJECT"
+        SPSTSheetTypeUnspecified -> "SHEET_TYPE_UNSPECIFIED"
+        SPSTGrid -> "GRID"
+        SPSTObject -> "OBJECT"
+        SPSTDataSource -> "DATA_SOURCE"
 
 instance FromJSON SheetPropertiesSheetType where
     parseJSON = parseJSONText "SheetPropertiesSheetType"
@@ -1567,6 +2321,128 @@ instance FromJSON DeveloperMetadataLookupLocationType where
     parseJSON = parseJSONText "DeveloperMetadataLookupLocationType"
 
 instance ToJSON DeveloperMetadataLookupLocationType where
+    toJSON = toJSONText
+
+-- | The point shape. If empty or unspecified, a default shape is used.
+data PointStyleShape
+    = PointShapeUnspecified
+      -- ^ @POINT_SHAPE_UNSPECIFIED@
+      -- Default value.
+    | Circle
+      -- ^ @CIRCLE@
+      -- A circle shape.
+    | Diamond
+      -- ^ @DIAMOND@
+      -- A diamond shape.
+    | Hexagon
+      -- ^ @HEXAGON@
+      -- A hexagon shape.
+    | Pentagon
+      -- ^ @PENTAGON@
+      -- A pentagon shape.
+    | Square
+      -- ^ @SQUARE@
+      -- A square shape.
+    | Star
+      -- ^ @STAR@
+      -- A star shape.
+    | Triangle
+      -- ^ @TRIANGLE@
+      -- A triangle shape.
+    | XMark
+      -- ^ @X_MARK@
+      -- An x-mark shape.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PointStyleShape
+
+instance FromHttpApiData PointStyleShape where
+    parseQueryParam = \case
+        "POINT_SHAPE_UNSPECIFIED" -> Right PointShapeUnspecified
+        "CIRCLE" -> Right Circle
+        "DIAMOND" -> Right Diamond
+        "HEXAGON" -> Right Hexagon
+        "PENTAGON" -> Right Pentagon
+        "SQUARE" -> Right Square
+        "STAR" -> Right Star
+        "TRIANGLE" -> Right Triangle
+        "X_MARK" -> Right XMark
+        x -> Left ("Unable to parse PointStyleShape from: " <> x)
+
+instance ToHttpApiData PointStyleShape where
+    toQueryParam = \case
+        PointShapeUnspecified -> "POINT_SHAPE_UNSPECIFIED"
+        Circle -> "CIRCLE"
+        Diamond -> "DIAMOND"
+        Hexagon -> "HEXAGON"
+        Pentagon -> "PENTAGON"
+        Square -> "SQUARE"
+        Star -> "STAR"
+        Triangle -> "TRIANGLE"
+        XMark -> "X_MARK"
+
+instance FromJSON PointStyleShape where
+    parseJSON = parseJSONText "PointStyleShape"
+
+instance ToJSON PointStyleShape where
+    toJSON = toJSONText
+
+-- | The aggregation type for key and baseline chart data in scorecard chart.
+-- This field is not supported for data source charts. Use the
+-- ChartData.aggregateType field of the key_value_data or
+-- baseline_value_data instead for data source charts. This field is
+-- optional.
+data ScorecardChartSpecAggregateType
+    = SCSATChartAggregateTypeUnspecified
+      -- ^ @CHART_AGGREGATE_TYPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | SCSATAverage
+      -- ^ @AVERAGE@
+      -- Average aggregate function.
+    | SCSATCount
+      -- ^ @COUNT@
+      -- Count aggregate function.
+    | SCSATMax
+      -- ^ @MAX@
+      -- Maximum aggregate function.
+    | SCSATMedian
+      -- ^ @MEDIAN@
+      -- Median aggregate function.
+    | SCSATMin
+      -- ^ @MIN@
+      -- Minimum aggregate function.
+    | SCSATSum
+      -- ^ @SUM@
+      -- Sum aggregate function.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ScorecardChartSpecAggregateType
+
+instance FromHttpApiData ScorecardChartSpecAggregateType where
+    parseQueryParam = \case
+        "CHART_AGGREGATE_TYPE_UNSPECIFIED" -> Right SCSATChartAggregateTypeUnspecified
+        "AVERAGE" -> Right SCSATAverage
+        "COUNT" -> Right SCSATCount
+        "MAX" -> Right SCSATMax
+        "MEDIAN" -> Right SCSATMedian
+        "MIN" -> Right SCSATMin
+        "SUM" -> Right SCSATSum
+        x -> Left ("Unable to parse ScorecardChartSpecAggregateType from: " <> x)
+
+instance ToHttpApiData ScorecardChartSpecAggregateType where
+    toQueryParam = \case
+        SCSATChartAggregateTypeUnspecified -> "CHART_AGGREGATE_TYPE_UNSPECIFIED"
+        SCSATAverage -> "AVERAGE"
+        SCSATCount -> "COUNT"
+        SCSATMax -> "MAX"
+        SCSATMedian -> "MEDIAN"
+        SCSATMin -> "MIN"
+        SCSATSum -> "SUM"
+
+instance FromJSON ScorecardChartSpecAggregateType where
+    parseJSON = parseJSONText "ScorecardChartSpecAggregateType"
+
+instance ToJSON ScorecardChartSpecAggregateType where
     toJSON = toJSONText
 
 -- | How the cells should be merged.
@@ -1822,6 +2698,70 @@ instance FromJSON DeveloperMetadataLookupVisibility where
 instance ToJSON DeveloperMetadataLookupVisibility where
     toJSON = toJSONText
 
+-- | The placement of the data label relative to the labeled data.
+data DataLabelPlacement
+    = DLPDataLabelPlacementUnspecified
+      -- ^ @DATA_LABEL_PLACEMENT_UNSPECIFIED@
+      -- The positioning is determined automatically by the renderer.
+    | DLPCenter
+      -- ^ @CENTER@
+      -- Center within a bar or column, both horizontally and vertically.
+    | DLPLeft'
+      -- ^ @LEFT@
+      -- To the left of a data point.
+    | DLPRight'
+      -- ^ @RIGHT@
+      -- To the right of a data point.
+    | DLPAbove
+      -- ^ @ABOVE@
+      -- Above a data point.
+    | DLPBelow
+      -- ^ @BELOW@
+      -- Below a data point.
+    | DLPInsideEnd
+      -- ^ @INSIDE_END@
+      -- Inside a bar or column at the end (top if positive, bottom if negative).
+    | DLPInsideBase
+      -- ^ @INSIDE_BASE@
+      -- Inside a bar or column at the base.
+    | DLPOutsideEnd
+      -- ^ @OUTSIDE_END@
+      -- Outside a bar or column at the end.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataLabelPlacement
+
+instance FromHttpApiData DataLabelPlacement where
+    parseQueryParam = \case
+        "DATA_LABEL_PLACEMENT_UNSPECIFIED" -> Right DLPDataLabelPlacementUnspecified
+        "CENTER" -> Right DLPCenter
+        "LEFT" -> Right DLPLeft'
+        "RIGHT" -> Right DLPRight'
+        "ABOVE" -> Right DLPAbove
+        "BELOW" -> Right DLPBelow
+        "INSIDE_END" -> Right DLPInsideEnd
+        "INSIDE_BASE" -> Right DLPInsideBase
+        "OUTSIDE_END" -> Right DLPOutsideEnd
+        x -> Left ("Unable to parse DataLabelPlacement from: " <> x)
+
+instance ToHttpApiData DataLabelPlacement where
+    toQueryParam = \case
+        DLPDataLabelPlacementUnspecified -> "DATA_LABEL_PLACEMENT_UNSPECIFIED"
+        DLPCenter -> "CENTER"
+        DLPLeft' -> "LEFT"
+        DLPRight' -> "RIGHT"
+        DLPAbove -> "ABOVE"
+        DLPBelow -> "BELOW"
+        DLPInsideEnd -> "INSIDE_END"
+        DLPInsideBase -> "INSIDE_BASE"
+        DLPOutsideEnd -> "OUTSIDE_END"
+
+instance FromJSON DataLabelPlacement where
+    parseJSON = parseJSONText "DataLabelPlacement"
+
+instance ToJSON DataLabelPlacement where
+    toJSON = toJSONText
+
 -- | The behavior of tooltips and data highlighting when hovering on data and
 -- chart area.
 data BasicChartSpecCompareMode
@@ -1887,12 +2827,16 @@ data BooleanConditionType
       -- ^ @NUMBER_EQ@
       -- The cell\'s value must be equal to the condition\'s value. Supported by
       -- data validation, conditional formatting and filters. Requires a single
-      -- ConditionValue.
+      -- ConditionValue for data validation, conditional formatting, and filters
+      -- on non-data source objects and at least one ConditionValue for filters
+      -- on data source objects.
     | NumberNotEQ
       -- ^ @NUMBER_NOT_EQ@
       -- The cell\'s value must be not equal to the condition\'s value. Supported
       -- by data validation, conditional formatting and filters. Requires a
-      -- single ConditionValue.
+      -- single ConditionValue for data validation, conditional formatting, and
+      -- filters on non-data source objects and at least one ConditionValue for
+      -- filters on data source objects.
     | NumberBetween
       -- ^ @NUMBER_BETWEEN@
       -- The cell\'s value must be between the two condition values. Supported by
@@ -1925,7 +2869,9 @@ data BooleanConditionType
       -- ^ @TEXT_EQ@
       -- The cell\'s value must be exactly the condition\'s value. Supported by
       -- data validation, conditional formatting and filters. Requires a single
-      -- ConditionValue.
+      -- ConditionValue for data validation, conditional formatting, and filters
+      -- on non-data source objects and at least one ConditionValue for filters
+      -- on data source objects.
     | TextIsEmail
       -- ^ @TEXT_IS_EMAIL@
       -- The cell\'s value must be a valid email address. Supported by data
@@ -1938,7 +2884,9 @@ data BooleanConditionType
       -- ^ @DATE_EQ@
       -- The cell\'s value must be the same date as the condition\'s value.
       -- Supported by data validation, conditional formatting and filters.
-      -- Requires a single ConditionValue.
+      -- Requires a single ConditionValue for data validation, conditional
+      -- formatting, and filters on non-data source objects and at least one
+      -- ConditionValue for filters on data source objects.
     | DateBefore
       -- ^ @DATE_BEFORE@
       -- The cell\'s value must be before the date of the condition\'s value.
@@ -1992,8 +2940,8 @@ data BooleanConditionType
     | CustomFormula
       -- ^ @CUSTOM_FORMULA@
       -- The condition\'s formula must evaluate to true. Supported by data
-      -- validation, conditional formatting and filters. Requires a single
-      -- ConditionValue.
+      -- validation, conditional formatting and filters. Not supported by data
+      -- source sheet filters. Requires a single ConditionValue.
     | Boolean
       -- ^ @BOOLEAN@
       -- The cell\'s value must be TRUE\/FALSE or in the list of condition
@@ -2007,6 +2955,14 @@ data BooleanConditionType
       -- [\"Yes\",\"No\"] indicates that the cell will render a checked box when
       -- it has the value \"Yes\" and an unchecked box when it has the value
       -- \"No\".
+    | TextNotEQ
+      -- ^ @TEXT_NOT_EQ@
+      -- The cell\'s value must be exactly not the condition\'s value. Supported
+      -- by filters on data source objects. Requires at least one ConditionValue.
+    | DateNotEQ
+      -- ^ @DATE_NOT_EQ@
+      -- The cell\'s value must be exactly not the condition\'s value. Supported
+      -- by filters on data source objects. Requires at least one ConditionValue.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BooleanConditionType
@@ -2043,6 +2999,8 @@ instance FromHttpApiData BooleanConditionType where
         "NOT_BLANK" -> Right NotBlank
         "CUSTOM_FORMULA" -> Right CustomFormula
         "BOOLEAN" -> Right Boolean
+        "TEXT_NOT_EQ" -> Right TextNotEQ
+        "DATE_NOT_EQ" -> Right DateNotEQ
         x -> Left ("Unable to parse BooleanConditionType from: " <> x)
 
 instance ToHttpApiData BooleanConditionType where
@@ -2077,6 +3035,8 @@ instance ToHttpApiData BooleanConditionType where
         NotBlank -> "NOT_BLANK"
         CustomFormula -> "CUSTOM_FORMULA"
         Boolean -> "BOOLEAN"
+        TextNotEQ -> "TEXT_NOT_EQ"
+        DateNotEQ -> "DATE_NOT_EQ"
 
 instance FromJSON BooleanConditionType where
     parseJSON = parseJSONText "BooleanConditionType"
@@ -2160,6 +3120,37 @@ instance FromJSON PivotGroupSortOrder where
 instance ToJSON PivotGroupSortOrder where
     toJSON = toJSONText
 
+-- | How the input data should be inserted.
+data SpreadsheetsValuesAppendInsertDataOption
+    = Overwrite
+      -- ^ @OVERWRITE@
+      -- The new data overwrites existing data in the areas it is written. (Note:
+      -- adding data to the end of the sheet will still insert new rows or
+      -- columns so the data can be written.)
+    | InsertRows
+      -- ^ @INSERT_ROWS@
+      -- Rows are inserted for the new data.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesAppendInsertDataOption
+
+instance FromHttpApiData SpreadsheetsValuesAppendInsertDataOption where
+    parseQueryParam = \case
+        "OVERWRITE" -> Right Overwrite
+        "INSERT_ROWS" -> Right InsertRows
+        x -> Left ("Unable to parse SpreadsheetsValuesAppendInsertDataOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesAppendInsertDataOption where
+    toQueryParam = \case
+        Overwrite -> "OVERWRITE"
+        InsertRows -> "INSERT_ROWS"
+
+instance FromJSON SpreadsheetsValuesAppendInsertDataOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesAppendInsertDataOption"
+
+instance ToJSON SpreadsheetsValuesAppendInsertDataOption where
+    toJSON = toJSONText
+
 -- | The type of the chart.
 data BasicChartSpecChartType
     = BasicChartTypeUnspecified
@@ -2167,25 +3158,25 @@ data BasicChartSpecChartType
       -- Default value, do not use.
     | Bar
       -- ^ @BAR@
-      -- A </chart/interactive/docs/gallery/barchart bar chart>.
+      -- A bar chart.
     | Line
       -- ^ @LINE@
-      -- A </chart/interactive/docs/gallery/linechart line chart>.
+      -- A line chart.
     | Area
       -- ^ @AREA@
-      -- An </chart/interactive/docs/gallery/areachart area chart>.
+      -- An area chart.
     | Column
       -- ^ @COLUMN@
-      -- A </chart/interactive/docs/gallery/columnchart column chart>.
+      -- A column chart.
     | Scatter
       -- ^ @SCATTER@
-      -- A </chart/interactive/docs/gallery/scatterchart scatter chart>.
+      -- A scatter chart.
     | Combo
       -- ^ @COMBO@
-      -- A </chart/interactive/docs/gallery/combochart combo chart>.
+      -- A combo chart.
     | SteppedArea
       -- ^ @STEPPED_AREA@
-      -- A </chart/interactive/docs/gallery/steppedareachart stepped area chart>.
+      -- A stepped area chart.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BasicChartSpecChartType
@@ -2217,6 +3208,40 @@ instance FromJSON BasicChartSpecChartType where
     parseJSON = parseJSONText "BasicChartSpecChartType"
 
 instance ToJSON BasicChartSpecChartType where
+    toJSON = toJSONText
+
+-- | The comparison type of key value with baseline value.
+data BaselineValueFormatComparisonType
+    = ComparisonTypeUndefined
+      -- ^ @COMPARISON_TYPE_UNDEFINED@
+      -- Default value, do not use.
+    | AbsoluteDifference
+      -- ^ @ABSOLUTE_DIFFERENCE@
+      -- Use absolute difference between key and baseline value.
+    | PercentageDifference
+      -- ^ @PERCENTAGE_DIFFERENCE@
+      -- Use percentage difference between key and baseline value.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BaselineValueFormatComparisonType
+
+instance FromHttpApiData BaselineValueFormatComparisonType where
+    parseQueryParam = \case
+        "COMPARISON_TYPE_UNDEFINED" -> Right ComparisonTypeUndefined
+        "ABSOLUTE_DIFFERENCE" -> Right AbsoluteDifference
+        "PERCENTAGE_DIFFERENCE" -> Right PercentageDifference
+        x -> Left ("Unable to parse BaselineValueFormatComparisonType from: " <> x)
+
+instance ToHttpApiData BaselineValueFormatComparisonType where
+    toQueryParam = \case
+        ComparisonTypeUndefined -> "COMPARISON_TYPE_UNDEFINED"
+        AbsoluteDifference -> "ABSOLUTE_DIFFERENCE"
+        PercentageDifference -> "PERCENTAGE_DIFFERENCE"
+
+instance FromJSON BaselineValueFormatComparisonType where
+    parseJSON = parseJSONText "BaselineValueFormatComparisonType"
+
+instance ToJSON BaselineValueFormatComparisonType where
     toJSON = toJSONText
 
 -- | V1 error format.
@@ -2329,7 +3354,7 @@ data PasteDataRequestType
       -- Paste the format and data validation only.
     | PDRTPasteNoBOrders
       -- ^ @PASTE_NO_BORDERS@
-      -- Like PASTE_NORMAL but without borders.
+      -- Like \`PASTE_NORMAL\` but without borders.
     | PDRTPasteFormula
       -- ^ @PASTE_FORMULA@
       -- Paste the formulas only.
@@ -2370,6 +3395,44 @@ instance FromJSON PasteDataRequestType where
 instance ToJSON PasteDataRequestType where
     toJSON = toJSONText
 
+-- | How the input data should be interpreted.
+data SpreadsheetsValuesAppendValueInputOption
+    = SVAVIOInputValueOptionUnspecified
+      -- ^ @INPUT_VALUE_OPTION_UNSPECIFIED@
+      -- Default input value. This value must not be used.
+    | SVAVIORaw
+      -- ^ @RAW@
+      -- The values the user has entered will not be parsed and will be stored
+      -- as-is.
+    | SVAVIOUserEntered
+      -- ^ @USER_ENTERED@
+      -- The values will be parsed as if the user typed them into the UI. Numbers
+      -- will stay as numbers, but strings may be converted to numbers, dates,
+      -- etc. following the same rules that are applied when entering text into a
+      -- cell via the Google Sheets UI.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesAppendValueInputOption
+
+instance FromHttpApiData SpreadsheetsValuesAppendValueInputOption where
+    parseQueryParam = \case
+        "INPUT_VALUE_OPTION_UNSPECIFIED" -> Right SVAVIOInputValueOptionUnspecified
+        "RAW" -> Right SVAVIORaw
+        "USER_ENTERED" -> Right SVAVIOUserEntered
+        x -> Left ("Unable to parse SpreadsheetsValuesAppendValueInputOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesAppendValueInputOption where
+    toQueryParam = \case
+        SVAVIOInputValueOptionUnspecified -> "INPUT_VALUE_OPTION_UNSPECIFIED"
+        SVAVIORaw -> "RAW"
+        SVAVIOUserEntered -> "USER_ENTERED"
+
+instance FromJSON SpreadsheetsValuesAppendValueInputOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesAppendValueInputOption"
+
+instance ToJSON SpreadsheetsValuesAppendValueInputOption where
+    toJSON = toJSONText
+
 -- | The direction of the text in the cell.
 data CellFormatTextDirection
     = TextDirectionUnspecified
@@ -2404,6 +3467,43 @@ instance FromJSON CellFormatTextDirection where
 instance ToJSON CellFormatTextDirection where
     toJSON = toJSONText
 
+-- | The type to select columns for the data source table. Defaults to
+-- SELECTED.
+data DataSourceTableColumnSelectionType
+    = DataSourceTableColumnSelectionTypeUnspecified
+      -- ^ @DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED@
+      -- The default column selection type, do not use.
+    | Selected
+      -- ^ @SELECTED@
+      -- Select columns specified by columns field.
+    | SyncAll
+      -- ^ @SYNC_ALL@
+      -- Sync all current and future columns in the data source. If set, the data
+      -- source table fetches all the columns in the data source at the time of
+      -- refresh.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataSourceTableColumnSelectionType
+
+instance FromHttpApiData DataSourceTableColumnSelectionType where
+    parseQueryParam = \case
+        "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED" -> Right DataSourceTableColumnSelectionTypeUnspecified
+        "SELECTED" -> Right Selected
+        "SYNC_ALL" -> Right SyncAll
+        x -> Left ("Unable to parse DataSourceTableColumnSelectionType from: " <> x)
+
+instance ToHttpApiData DataSourceTableColumnSelectionType where
+    toQueryParam = \case
+        DataSourceTableColumnSelectionTypeUnspecified -> "DATA_SOURCE_TABLE_COLUMN_SELECTION_TYPE_UNSPECIFIED"
+        Selected -> "SELECTED"
+        SyncAll -> "SYNC_ALL"
+
+instance FromJSON DataSourceTableColumnSelectionType where
+    parseJSON = parseJSONText "DataSourceTableColumnSelectionType"
+
+instance ToJSON DataSourceTableColumnSelectionType where
+    toJSON = toJSONText
+
 -- | The type of this series. Valid only if the chartType is COMBO. Different
 -- types will change the way the series is visualized. Only LINE, AREA, and
 -- COLUMN are supported.
@@ -2413,25 +3513,25 @@ data BasicChartSeriesType
       -- Default value, do not use.
     | BCSTBar
       -- ^ @BAR@
-      -- A </chart/interactive/docs/gallery/barchart bar chart>.
+      -- A bar chart.
     | BCSTLine
       -- ^ @LINE@
-      -- A </chart/interactive/docs/gallery/linechart line chart>.
+      -- A line chart.
     | BCSTArea
       -- ^ @AREA@
-      -- An </chart/interactive/docs/gallery/areachart area chart>.
+      -- An area chart.
     | BCSTColumn
       -- ^ @COLUMN@
-      -- A </chart/interactive/docs/gallery/columnchart column chart>.
+      -- A column chart.
     | BCSTScatter
       -- ^ @SCATTER@
-      -- A </chart/interactive/docs/gallery/scatterchart scatter chart>.
+      -- A scatter chart.
     | BCSTCombo
       -- ^ @COMBO@
-      -- A </chart/interactive/docs/gallery/combochart combo chart>.
+      -- A combo chart.
     | BCSTSteppedArea
       -- ^ @STEPPED_AREA@
-      -- A </chart/interactive/docs/gallery/steppedareachart stepped area chart>.
+      -- A stepped area chart.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BasicChartSeriesType
@@ -2469,8 +3569,8 @@ instance ToJSON BasicChartSeriesType where
 -- result of a calculation with another pivot value. For example, if
 -- calculated_display_type is specified as PERCENT_OF_GRAND_TOTAL, all the
 -- pivot values are displayed as the percentage of the grand total. In the
--- Sheets UI, this is referred to as \"Show As\" in the value section of a
--- pivot table.
+-- Sheets editor, this is referred to as \"Show As\" in the value section
+-- of a pivot table.
 data PivotValueCalculatedDisplayType
     = PivotValueCalculatedDisplayTypeUnspecified
       -- ^ @PIVOT_VALUE_CALCULATED_DISPLAY_TYPE_UNSPECIFIED@
@@ -2509,9 +3609,177 @@ instance FromJSON PivotValueCalculatedDisplayType where
 instance ToJSON PivotValueCalculatedDisplayType where
     toJSON = toJSONText
 
+-- | The aggregation type for the series of a data source chart. Only
+-- supported for data source charts.
+data ChartDataAggregateType
+    = CDATChartAggregateTypeUnspecified
+      -- ^ @CHART_AGGREGATE_TYPE_UNSPECIFIED@
+      -- Default value, do not use.
+    | CDATAverage
+      -- ^ @AVERAGE@
+      -- Average aggregate function.
+    | CDATCount
+      -- ^ @COUNT@
+      -- Count aggregate function.
+    | CDATMax
+      -- ^ @MAX@
+      -- Maximum aggregate function.
+    | CDATMedian
+      -- ^ @MEDIAN@
+      -- Median aggregate function.
+    | CDATMin
+      -- ^ @MIN@
+      -- Minimum aggregate function.
+    | CDATSum
+      -- ^ @SUM@
+      -- Sum aggregate function.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ChartDataAggregateType
+
+instance FromHttpApiData ChartDataAggregateType where
+    parseQueryParam = \case
+        "CHART_AGGREGATE_TYPE_UNSPECIFIED" -> Right CDATChartAggregateTypeUnspecified
+        "AVERAGE" -> Right CDATAverage
+        "COUNT" -> Right CDATCount
+        "MAX" -> Right CDATMax
+        "MEDIAN" -> Right CDATMedian
+        "MIN" -> Right CDATMin
+        "SUM" -> Right CDATSum
+        x -> Left ("Unable to parse ChartDataAggregateType from: " <> x)
+
+instance ToHttpApiData ChartDataAggregateType where
+    toQueryParam = \case
+        CDATChartAggregateTypeUnspecified -> "CHART_AGGREGATE_TYPE_UNSPECIFIED"
+        CDATAverage -> "AVERAGE"
+        CDATCount -> "COUNT"
+        CDATMax -> "MAX"
+        CDATMedian -> "MEDIAN"
+        CDATMin -> "MIN"
+        CDATSum -> "SUM"
+
+instance FromJSON ChartDataAggregateType where
+    parseJSON = parseJSONText "ChartDataAggregateType"
+
+instance ToJSON ChartDataAggregateType where
+    toJSON = toJSONText
+
+-- | The major dimension that results should use. For example, if the
+-- spreadsheet data is: \`A1=1,B1=2,A2=3,B2=4\`, then requesting
+-- \`range=A1:B2,majorDimension=ROWS\` returns \`[[1,2],[3,4]]\`, whereas
+-- requesting \`range=A1:B2,majorDimension=COLUMNS\` returns
+-- \`[[1,3],[2,4]]\`.
+data SpreadsheetsValuesGetMajorDimension
+    = SVGMDDimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | SVGMDRows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | SVGMDColumns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesGetMajorDimension
+
+instance FromHttpApiData SpreadsheetsValuesGetMajorDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right SVGMDDimensionUnspecified
+        "ROWS" -> Right SVGMDRows
+        "COLUMNS" -> Right SVGMDColumns
+        x -> Left ("Unable to parse SpreadsheetsValuesGetMajorDimension from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesGetMajorDimension where
+    toQueryParam = \case
+        SVGMDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        SVGMDRows -> "ROWS"
+        SVGMDColumns -> "COLUMNS"
+
+instance FromJSON SpreadsheetsValuesGetMajorDimension where
+    parseJSON = parseJSONText "SpreadsheetsValuesGetMajorDimension"
+
+instance ToJSON SpreadsheetsValuesGetMajorDimension where
+    toJSON = toJSONText
+
+-- | The number format source used in the scorecard chart. This field is
+-- optional.
+data ScorecardChartSpecNumberFormatSource
+    = SCSNFSChartNumberFormatSourceUndefined
+      -- ^ @CHART_NUMBER_FORMAT_SOURCE_UNDEFINED@
+      -- Default value, do not use.
+    | SCSNFSFromData
+      -- ^ @FROM_DATA@
+      -- Inherit number formatting from data.
+    | SCSNFSCustom
+      -- ^ @CUSTOM@
+      -- Apply custom formatting as specified by ChartCustomNumberFormatOptions.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ScorecardChartSpecNumberFormatSource
+
+instance FromHttpApiData ScorecardChartSpecNumberFormatSource where
+    parseQueryParam = \case
+        "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED" -> Right SCSNFSChartNumberFormatSourceUndefined
+        "FROM_DATA" -> Right SCSNFSFromData
+        "CUSTOM" -> Right SCSNFSCustom
+        x -> Left ("Unable to parse ScorecardChartSpecNumberFormatSource from: " <> x)
+
+instance ToHttpApiData ScorecardChartSpecNumberFormatSource where
+    toQueryParam = \case
+        SCSNFSChartNumberFormatSourceUndefined -> "CHART_NUMBER_FORMAT_SOURCE_UNDEFINED"
+        SCSNFSFromData -> "FROM_DATA"
+        SCSNFSCustom -> "CUSTOM"
+
+instance FromJSON ScorecardChartSpecNumberFormatSource where
+    parseJSON = parseJSONText "ScorecardChartSpecNumberFormatSource"
+
+instance ToJSON ScorecardChartSpecNumberFormatSource where
+    toJSON = toJSONText
+
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER.
+data SpreadsheetsValuesAppendResponseDateTimeRenderOption
+    = SVARDTROSerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | SVARDTROFormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesAppendResponseDateTimeRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesAppendResponseDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right SVARDTROSerialNumber
+        "FORMATTED_STRING" -> Right SVARDTROFormattedString
+        x -> Left ("Unable to parse SpreadsheetsValuesAppendResponseDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesAppendResponseDateTimeRenderOption where
+    toQueryParam = \case
+        SVARDTROSerialNumber -> "SERIAL_NUMBER"
+        SVARDTROFormattedString -> "FORMATTED_STRING"
+
+instance FromJSON SpreadsheetsValuesAppendResponseDateTimeRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesAppendResponseDateTimeRenderOption"
+
+instance ToJSON SpreadsheetsValuesAppendResponseDateTimeRenderOption where
+    toJSON = toJSONText
+
 -- | How dates, times, and durations should be represented in the output.
 -- This is ignored if value_render_option is FORMATTED_VALUE. The default
--- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+-- dateTime render option is SERIAL_NUMBER.
 data BatchGetValuesByDataFilterRequestDateTimeRenderOption
     = BGVBDFRDTROSerialNumber
       -- ^ @SERIAL_NUMBER@
@@ -2666,7 +3934,7 @@ data CutPasteRequestPasteType
       -- Paste the format and data validation only.
     | CPRPTPasteNoBOrders
       -- ^ @PASTE_NO_BORDERS@
-      -- Like PASTE_NORMAL but without borders.
+      -- Like \`PASTE_NORMAL\` but without borders.
     | CPRPTPasteFormula
       -- ^ @PASTE_FORMULA@
       -- Paste the formulas only.
@@ -2781,7 +4049,7 @@ data ErrorValueType
       -- Corresponds to the \`#NAME?\` error.
     | Num
       -- ^ @NUM@
-      -- Corresponds to the \`#NUM\`! error.
+      -- Corresponds to the \`#NUM!\` error.
     | NA
       -- ^ @N_A@
       -- Corresponds to the \`#N\/A\` error.
@@ -2827,9 +4095,9 @@ instance ToJSON ErrorValueType where
 
 -- | The major dimension that results should use. For example, if the
 -- spreadsheet data is: \`A1=1,B1=2,A2=3,B2=4\`, then a request that
--- selects that range and sets \`majorDimension=ROWS\` will return
+-- selects that range and sets \`majorDimension=ROWS\` returns
 -- \`[[1,2],[3,4]]\`, whereas a request that sets
--- \`majorDimension=COLUMNS\` will return \`[[1,3],[2,4]]\`.
+-- \`majorDimension=COLUMNS\` returns \`[[1,3],[2,4]]\`.
 data BatchGetValuesByDataFilterRequestMajorDimension
     = BGVBDFRMDDimensionUnspecified
       -- ^ @DIMENSION_UNSPECIFIED@
@@ -2863,6 +4131,113 @@ instance FromJSON BatchGetValuesByDataFilterRequestMajorDimension where
 instance ToJSON BatchGetValuesByDataFilterRequestMajorDimension where
     toJSON = toJSONText
 
+-- | The type of date-time grouping to apply.
+data ChartDateTimeRuleType
+    = CDTRTChartDateTimeRuleTypeUnspecified
+      -- ^ @CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED@
+      -- The default type, do not use.
+    | CDTRTSecond
+      -- ^ @SECOND@
+      -- Group dates by second, from 0 to 59.
+    | CDTRTMinute
+      -- ^ @MINUTE@
+      -- Group dates by minute, from 0 to 59.
+    | CDTRTHour
+      -- ^ @HOUR@
+      -- Group dates by hour using a 24-hour system, from 0 to 23.
+    | CDTRTHourMinute
+      -- ^ @HOUR_MINUTE@
+      -- Group dates by hour and minute using a 24-hour system, for example
+      -- 19:45.
+    | CDTRTHourMinuteAmpm
+      -- ^ @HOUR_MINUTE_AMPM@
+      -- Group dates by hour and minute using a 12-hour system, for example 7:45
+      -- PM. The AM\/PM designation is translated based on the spreadsheet
+      -- locale.
+    | CDTRTDayOfWeek
+      -- ^ @DAY_OF_WEEK@
+      -- Group dates by day of week, for example Sunday. The days of the week
+      -- will be translated based on the spreadsheet locale.
+    | CDTRTDayOfYear
+      -- ^ @DAY_OF_YEAR@
+      -- Group dates by day of year, from 1 to 366. Note that dates after Feb. 29
+      -- fall in different buckets in leap years than in non-leap years.
+    | CDTRTDayOfMonth
+      -- ^ @DAY_OF_MONTH@
+      -- Group dates by day of month, from 1 to 31.
+    | CDTRTDayMonth
+      -- ^ @DAY_MONTH@
+      -- Group dates by day and month, for example 22-Nov. The month is
+      -- translated based on the spreadsheet locale.
+    | CDTRTMonth
+      -- ^ @MONTH@
+      -- Group dates by month, for example Nov. The month is translated based on
+      -- the spreadsheet locale.
+    | CDTRTQuarter
+      -- ^ @QUARTER@
+      -- Group dates by quarter, for example Q1 (which represents Jan-Mar).
+    | CDTRTYear
+      -- ^ @YEAR@
+      -- Group dates by year, for example 2008.
+    | CDTRTYearMonth
+      -- ^ @YEAR_MONTH@
+      -- Group dates by year and month, for example 2008-Nov. The month is
+      -- translated based on the spreadsheet locale.
+    | CDTRTYearQuarter
+      -- ^ @YEAR_QUARTER@
+      -- Group dates by year and quarter, for example 2008 Q4.
+    | CDTRTYearMonthDay
+      -- ^ @YEAR_MONTH_DAY@
+      -- Group dates by year, month, and day, for example 2008-11-22.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ChartDateTimeRuleType
+
+instance FromHttpApiData ChartDateTimeRuleType where
+    parseQueryParam = \case
+        "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED" -> Right CDTRTChartDateTimeRuleTypeUnspecified
+        "SECOND" -> Right CDTRTSecond
+        "MINUTE" -> Right CDTRTMinute
+        "HOUR" -> Right CDTRTHour
+        "HOUR_MINUTE" -> Right CDTRTHourMinute
+        "HOUR_MINUTE_AMPM" -> Right CDTRTHourMinuteAmpm
+        "DAY_OF_WEEK" -> Right CDTRTDayOfWeek
+        "DAY_OF_YEAR" -> Right CDTRTDayOfYear
+        "DAY_OF_MONTH" -> Right CDTRTDayOfMonth
+        "DAY_MONTH" -> Right CDTRTDayMonth
+        "MONTH" -> Right CDTRTMonth
+        "QUARTER" -> Right CDTRTQuarter
+        "YEAR" -> Right CDTRTYear
+        "YEAR_MONTH" -> Right CDTRTYearMonth
+        "YEAR_QUARTER" -> Right CDTRTYearQuarter
+        "YEAR_MONTH_DAY" -> Right CDTRTYearMonthDay
+        x -> Left ("Unable to parse ChartDateTimeRuleType from: " <> x)
+
+instance ToHttpApiData ChartDateTimeRuleType where
+    toQueryParam = \case
+        CDTRTChartDateTimeRuleTypeUnspecified -> "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED"
+        CDTRTSecond -> "SECOND"
+        CDTRTMinute -> "MINUTE"
+        CDTRTHour -> "HOUR"
+        CDTRTHourMinute -> "HOUR_MINUTE"
+        CDTRTHourMinuteAmpm -> "HOUR_MINUTE_AMPM"
+        CDTRTDayOfWeek -> "DAY_OF_WEEK"
+        CDTRTDayOfYear -> "DAY_OF_YEAR"
+        CDTRTDayOfMonth -> "DAY_OF_MONTH"
+        CDTRTDayMonth -> "DAY_MONTH"
+        CDTRTMonth -> "MONTH"
+        CDTRTQuarter -> "QUARTER"
+        CDTRTYear -> "YEAR"
+        CDTRTYearMonth -> "YEAR_MONTH"
+        CDTRTYearQuarter -> "YEAR_QUARTER"
+        CDTRTYearMonthDay -> "YEAR_MONTH_DAY"
+
+instance FromJSON ChartDateTimeRuleType where
+    parseJSON = parseJSONText "ChartDateTimeRuleType"
+
+instance ToJSON ChartDateTimeRuleType where
+    toJSON = toJSONText
+
 -- | Whether values should be listed horizontally (as columns) or vertically
 -- (as rows).
 data PivotTableValueLayout
@@ -2893,6 +4268,46 @@ instance FromJSON PivotTableValueLayout where
 instance ToJSON PivotTableValueLayout where
     toJSON = toJSONText
 
+-- | How dates, times, and durations should be represented in the output.
+-- This is ignored if value_render_option is FORMATTED_VALUE. The default
+-- dateTime render option is SERIAL_NUMBER.
+data SpreadsheetsValuesGetDateTimeRenderOption
+    = SVGDTROSerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The
+      -- whole number portion of the value (left of the decimal) counts the days
+      -- since December 30th 1899. The fractional portion (right of the decimal)
+      -- counts the time as a fraction of the day. For example, January 1st 1900
+      -- at noon would be 2.5, 2 because it\'s 2 days after December 30st 1899,
+      -- and .5 because noon is half a day. February 1st 1900 at 3pm would be
+      -- 33.625. This correctly treats the year 1900 as not a leap year.
+    | SVGDTROFormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesGetDateTimeRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesGetDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right SVGDTROSerialNumber
+        "FORMATTED_STRING" -> Right SVGDTROFormattedString
+        x -> Left ("Unable to parse SpreadsheetsValuesGetDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesGetDateTimeRenderOption where
+    toQueryParam = \case
+        SVGDTROSerialNumber -> "SERIAL_NUMBER"
+        SVGDTROFormattedString -> "FORMATTED_STRING"
+
+instance FromJSON SpreadsheetsValuesGetDateTimeRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesGetDateTimeRenderOption"
+
+instance ToJSON SpreadsheetsValuesGetDateTimeRenderOption where
+    toJSON = toJSONText
+
 -- | How the value should be interpreted.
 data InterpolationPointType
     = IPTInterpolationPointTypeUnspecified
@@ -2913,16 +4328,16 @@ data InterpolationPointType
     | IPTPercent
       -- ^ @PERCENT@
       -- The interpolation point is the given percentage over all the cells in
-      -- the range of the conditional format. This is equivalent to NUMBER if the
-      -- value was: \`=(MAX(FLATTEN(range)) * (value \/ 100)) +
+      -- the range of the conditional format. This is equivalent to \`NUMBER\` if
+      -- the value was: \`=(MAX(FLATTEN(range)) * (value \/ 100)) +
       -- (MIN(FLATTEN(range)) * (1 - (value \/ 100)))\` (where errors in the
       -- range are ignored when flattening).
     | IPTPercentile
       -- ^ @PERCENTILE@
       -- The interpolation point is the given percentile over all the cells in
-      -- the range of the conditional format. This is equivalent to NUMBER if the
-      -- value was: \`=PERCENTILE(FLATTEN(range), value \/ 100)\` (where errors
-      -- in the range are ignored when flattening).
+      -- the range of the conditional format. This is equivalent to \`NUMBER\` if
+      -- the value was: \`=PERCENTILE(FLATTEN(range), value \/ 100)\` (where
+      -- errors in the range are ignored when flattening).
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InterpolationPointType
@@ -3040,4 +4455,91 @@ instance FromJSON InsertRangeRequestShiftDimension where
     parseJSON = parseJSONText "InsertRangeRequestShiftDimension"
 
 instance ToJSON InsertRangeRequestShiftDimension where
+    toJSON = toJSONText
+
+-- | The state of the data execution.
+data DataExecutionStatusState
+    = DataExecutionStateUnspecified
+      -- ^ @DATA_EXECUTION_STATE_UNSPECIFIED@
+      -- Default value, do not use.
+    | NotStarted
+      -- ^ @NOT_STARTED@
+      -- The data execution has not started.
+    | Running
+      -- ^ @RUNNING@
+      -- The data execution has started and is running.
+    | Succeeded
+      -- ^ @SUCCEEDED@
+      -- The data execution has completed successfully.
+    | Failed
+      -- ^ @FAILED@
+      -- The data execution has completed with errors.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataExecutionStatusState
+
+instance FromHttpApiData DataExecutionStatusState where
+    parseQueryParam = \case
+        "DATA_EXECUTION_STATE_UNSPECIFIED" -> Right DataExecutionStateUnspecified
+        "NOT_STARTED" -> Right NotStarted
+        "RUNNING" -> Right Running
+        "SUCCEEDED" -> Right Succeeded
+        "FAILED" -> Right Failed
+        x -> Left ("Unable to parse DataExecutionStatusState from: " <> x)
+
+instance ToHttpApiData DataExecutionStatusState where
+    toQueryParam = \case
+        DataExecutionStateUnspecified -> "DATA_EXECUTION_STATE_UNSPECIFIED"
+        NotStarted -> "NOT_STARTED"
+        Running -> "RUNNING"
+        Succeeded -> "SUCCEEDED"
+        Failed -> "FAILED"
+
+instance FromJSON DataExecutionStatusState where
+    parseJSON = parseJSONText "DataExecutionStatusState"
+
+instance ToJSON DataExecutionStatusState where
+    toJSON = toJSONText
+
+-- | How values should be represented in the output. The default render
+-- option is FORMATTED_VALUE.
+data SpreadsheetsValuesGetValueRenderOption
+    = SVGVROFormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | SVGVROUnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | SVGVROFormula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SpreadsheetsValuesGetValueRenderOption
+
+instance FromHttpApiData SpreadsheetsValuesGetValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right SVGVROFormattedValue
+        "UNFORMATTED_VALUE" -> Right SVGVROUnformattedValue
+        "FORMULA" -> Right SVGVROFormula
+        x -> Left ("Unable to parse SpreadsheetsValuesGetValueRenderOption from: " <> x)
+
+instance ToHttpApiData SpreadsheetsValuesGetValueRenderOption where
+    toQueryParam = \case
+        SVGVROFormattedValue -> "FORMATTED_VALUE"
+        SVGVROUnformattedValue -> "UNFORMATTED_VALUE"
+        SVGVROFormula -> "FORMULA"
+
+instance FromJSON SpreadsheetsValuesGetValueRenderOption where
+    parseJSON = parseJSONText "SpreadsheetsValuesGetValueRenderOption"
+
+instance ToJSON SpreadsheetsValuesGetValueRenderOption where
     toJSON = toJSONText

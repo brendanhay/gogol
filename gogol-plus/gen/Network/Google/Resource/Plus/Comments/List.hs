@@ -40,8 +40,8 @@ module Network.Google.Resource.Plus.Comments.List
     , clMaxResults
     ) where
 
-import           Network.Google.Plus.Types
-import           Network.Google.Prelude
+import Network.Google.Plus.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @plus.comments.list@ method which the
 -- 'CommentsList' request conforms to.
@@ -63,8 +63,8 @@ type CommentsListResource =
 data CommentsList =
   CommentsList'
     { _clActivityId :: !Text
-    , _clSortOrder  :: !CommentsListSortOrder
-    , _clPageToken  :: !(Maybe Text)
+    , _clSortOrder :: !CommentsListSortOrder
+    , _clPageToken :: !(Maybe Text)
     , _clMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a resource to a playlist.
+-- Inserts a new resource into this collection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlistItems.insert@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.playlistItems.insert@.
 module Network.Google.Resource.YouTube.PlayListItems.Insert
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.YouTube.PlayListItems.Insert
     , PlayListItemsInsert
 
     -- * Request Lenses
+    , pliiXgafv
     , pliiPart
+    , pliiUploadProtocol
+    , pliiAccessToken
+    , pliiUploadType
     , pliiPayload
     , pliiOnBehalfOfContentOwner
+    , pliiCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.insert@ method which the
 -- 'PlayListItemsInsert' request conforms to.
@@ -47,20 +52,30 @@ type PlayListItemsInsertResource =
      "youtube" :>
        "v3" :>
          "playlistItems" :>
-           QueryParam "part" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] PlayListItem :>
-                   Post '[JSON] PlayListItem
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] PlayListItem :>
+                             Post '[JSON] PlayListItem
 
--- | Adds a resource to a playlist.
+-- | Inserts a new resource into this collection.
 --
 -- /See:/ 'playListItemsInsert' smart constructor.
 data PlayListItemsInsert =
   PlayListItemsInsert'
-    { _pliiPart                   :: !Text
-    , _pliiPayload                :: !PlayListItem
+    { _pliiXgafv :: !(Maybe Xgafv)
+    , _pliiPart :: ![Text]
+    , _pliiUploadProtocol :: !(Maybe Text)
+    , _pliiAccessToken :: !(Maybe Text)
+    , _pliiUploadType :: !(Maybe Text)
+    , _pliiPayload :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
+    , _pliiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,36 +84,76 @@ data PlayListItemsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pliiXgafv'
+--
 -- * 'pliiPart'
+--
+-- * 'pliiUploadProtocol'
+--
+-- * 'pliiAccessToken'
+--
+-- * 'pliiUploadType'
 --
 -- * 'pliiPayload'
 --
 -- * 'pliiOnBehalfOfContentOwner'
+--
+-- * 'pliiCallback'
 playListItemsInsert
-    :: Text -- ^ 'pliiPart'
+    :: [Text] -- ^ 'pliiPart'
     -> PlayListItem -- ^ 'pliiPayload'
     -> PlayListItemsInsert
 playListItemsInsert pPliiPart_ pPliiPayload_ =
   PlayListItemsInsert'
-    { _pliiPart = pPliiPart_
+    { _pliiXgafv = Nothing
+    , _pliiPart = _Coerce # pPliiPart_
+    , _pliiUploadProtocol = Nothing
+    , _pliiAccessToken = Nothing
+    , _pliiUploadType = Nothing
     , _pliiPayload = pPliiPayload_
     , _pliiOnBehalfOfContentOwner = Nothing
+    , _pliiCallback = Nothing
     }
 
 
--- | The part parameter serves two purposes in this operation. It identifies
--- the properties that the write operation will set as well as the
--- properties that the API response will include.
-pliiPart :: Lens' PlayListItemsInsert Text
-pliiPart = lens _pliiPart (\ s a -> s{_pliiPart = a})
+-- | V1 error format.
+pliiXgafv :: Lens' PlayListItemsInsert (Maybe Xgafv)
+pliiXgafv
+  = lens _pliiXgafv (\ s a -> s{_pliiXgafv = a})
+
+-- | The *part* parameter serves two purposes in this operation. It
+-- identifies the properties that the write operation will set as well as
+-- the properties that the API response will include.
+pliiPart :: Lens' PlayListItemsInsert [Text]
+pliiPart
+  = lens _pliiPart (\ s a -> s{_pliiPart = a}) .
+      _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pliiUploadProtocol :: Lens' PlayListItemsInsert (Maybe Text)
+pliiUploadProtocol
+  = lens _pliiUploadProtocol
+      (\ s a -> s{_pliiUploadProtocol = a})
+
+-- | OAuth access token.
+pliiAccessToken :: Lens' PlayListItemsInsert (Maybe Text)
+pliiAccessToken
+  = lens _pliiAccessToken
+      (\ s a -> s{_pliiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pliiUploadType :: Lens' PlayListItemsInsert (Maybe Text)
+pliiUploadType
+  = lens _pliiUploadType
+      (\ s a -> s{_pliiUploadType = a})
 
 -- | Multipart request metadata.
 pliiPayload :: Lens' PlayListItemsInsert PlayListItem
 pliiPayload
   = lens _pliiPayload (\ s a -> s{_pliiPayload = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -112,6 +167,11 @@ pliiOnBehalfOfContentOwner
   = lens _pliiOnBehalfOfContentOwner
       (\ s a -> s{_pliiOnBehalfOfContentOwner = a})
 
+-- | JSONP
+pliiCallback :: Lens' PlayListItemsInsert (Maybe Text)
+pliiCallback
+  = lens _pliiCallback (\ s a -> s{_pliiCallback = a})
+
 instance GoogleRequest PlayListItemsInsert where
         type Rs PlayListItemsInsert = PlayListItem
         type Scopes PlayListItemsInsert =
@@ -119,7 +179,11 @@ instance GoogleRequest PlayListItemsInsert where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient PlayListItemsInsert'{..}
-          = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
+          = go _pliiPart _pliiXgafv _pliiUploadProtocol
+              _pliiAccessToken
+              _pliiUploadType
+              _pliiOnBehalfOfContentOwner
+              _pliiCallback
               (Just AltJSON)
               _pliiPayload
               youTubeService

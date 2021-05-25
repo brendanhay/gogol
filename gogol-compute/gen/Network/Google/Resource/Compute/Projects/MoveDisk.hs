@@ -33,13 +33,13 @@ module Network.Google.Resource.Compute.Projects.MoveDisk
     , ProjectsMoveDisk
 
     -- * Request Lenses
-    , pmdRequestId
-    , pmdProject
-    , pmdPayload
+    , pRequestId
+    , pProject
+    , pPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.moveDisk@ method which the
 -- 'ProjectsMoveDisk' request conforms to.
@@ -59,9 +59,9 @@ type ProjectsMoveDiskResource =
 -- /See:/ 'projectsMoveDisk' smart constructor.
 data ProjectsMoveDisk =
   ProjectsMoveDisk'
-    { _pmdRequestId :: !(Maybe Text)
-    , _pmdProject   :: !Text
-    , _pmdPayload   :: !DiskMoveRequest
+    { _pRequestId :: !(Maybe Text)
+    , _pProject :: !Text
+    , _pPayload :: !DiskMoveRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,21 +70,18 @@ data ProjectsMoveDisk =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pmdRequestId'
+-- * 'pRequestId'
 --
--- * 'pmdProject'
+-- * 'pProject'
 --
--- * 'pmdPayload'
+-- * 'pPayload'
 projectsMoveDisk
-    :: Text -- ^ 'pmdProject'
-    -> DiskMoveRequest -- ^ 'pmdPayload'
+    :: Text -- ^ 'pProject'
+    -> DiskMoveRequest -- ^ 'pPayload'
     -> ProjectsMoveDisk
-projectsMoveDisk pPmdProject_ pPmdPayload_ =
+projectsMoveDisk pPProject_ pPPayload_ =
   ProjectsMoveDisk'
-    { _pmdRequestId = Nothing
-    , _pmdProject = pPmdProject_
-    , _pmdPayload = pPmdPayload_
-    }
+    {_pRequestId = Nothing, _pProject = pPProject_, _pPayload = pPPayload_}
 
 
 -- | An optional request ID to identify requests. Specify a unique request ID
@@ -97,19 +94,17 @@ projectsMoveDisk pPmdProject_ pPmdPayload_ =
 -- accidentally creating duplicate commitments. The request ID must be a
 -- valid UUID with the exception that zero UUID is not supported
 -- (00000000-0000-0000-0000-000000000000).
-pmdRequestId :: Lens' ProjectsMoveDisk (Maybe Text)
-pmdRequestId
-  = lens _pmdRequestId (\ s a -> s{_pmdRequestId = a})
+pRequestId :: Lens' ProjectsMoveDisk (Maybe Text)
+pRequestId
+  = lens _pRequestId (\ s a -> s{_pRequestId = a})
 
 -- | Project ID for this request.
-pmdProject :: Lens' ProjectsMoveDisk Text
-pmdProject
-  = lens _pmdProject (\ s a -> s{_pmdProject = a})
+pProject :: Lens' ProjectsMoveDisk Text
+pProject = lens _pProject (\ s a -> s{_pProject = a})
 
 -- | Multipart request metadata.
-pmdPayload :: Lens' ProjectsMoveDisk DiskMoveRequest
-pmdPayload
-  = lens _pmdPayload (\ s a -> s{_pmdPayload = a})
+pPayload :: Lens' ProjectsMoveDisk DiskMoveRequest
+pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
 instance GoogleRequest ProjectsMoveDisk where
         type Rs ProjectsMoveDisk = Operation
@@ -117,8 +112,7 @@ instance GoogleRequest ProjectsMoveDisk where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient ProjectsMoveDisk'{..}
-          = go _pmdProject _pmdRequestId (Just AltJSON)
-              _pmdPayload
+          = go _pProject _pRequestId (Just AltJSON) _pPayload
               computeService
           where go
                   = buildClient

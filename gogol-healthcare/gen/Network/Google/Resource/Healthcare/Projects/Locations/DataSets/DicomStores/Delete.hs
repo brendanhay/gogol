@@ -34,22 +34,22 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , ProjectsLocationsDataSetsDicomStoresDelete
 
     -- * Request Lenses
-    , pldsdsdXgafv
-    , pldsdsdUploadProtocol
-    , pldsdsdAccessToken
-    , pldsdsdUploadType
-    , pldsdsdName
-    , pldsdsdCallback
+    , pXgafv
+    , pUploadProtocol
+    , pAccessToken
+    , pUploadType
+    , pName
+    , pCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.delete@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresDelete' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresDeleteResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,12 +64,12 @@ type ProjectsLocationsDataSetsDicomStoresDeleteResource
 -- /See:/ 'projectsLocationsDataSetsDicomStoresDelete' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresDelete =
   ProjectsLocationsDataSetsDicomStoresDelete'
-    { _pldsdsdXgafv          :: !(Maybe Xgafv)
-    , _pldsdsdUploadProtocol :: !(Maybe Text)
-    , _pldsdsdAccessToken    :: !(Maybe Text)
-    , _pldsdsdUploadType     :: !(Maybe Text)
-    , _pldsdsdName           :: !Text
-    , _pldsdsdCallback       :: !(Maybe Text)
+    { _pXgafv :: !(Maybe Xgafv)
+    , _pUploadProtocol :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,64 +78,59 @@ data ProjectsLocationsDataSetsDicomStoresDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pldsdsdXgafv'
+-- * 'pXgafv'
 --
--- * 'pldsdsdUploadProtocol'
+-- * 'pUploadProtocol'
 --
--- * 'pldsdsdAccessToken'
+-- * 'pAccessToken'
 --
--- * 'pldsdsdUploadType'
+-- * 'pUploadType'
 --
--- * 'pldsdsdName'
+-- * 'pName'
 --
--- * 'pldsdsdCallback'
+-- * 'pCallback'
 projectsLocationsDataSetsDicomStoresDelete
-    :: Text -- ^ 'pldsdsdName'
+    :: Text -- ^ 'pName'
     -> ProjectsLocationsDataSetsDicomStoresDelete
-projectsLocationsDataSetsDicomStoresDelete pPldsdsdName_ =
+projectsLocationsDataSetsDicomStoresDelete pPName_ =
   ProjectsLocationsDataSetsDicomStoresDelete'
-    { _pldsdsdXgafv = Nothing
-    , _pldsdsdUploadProtocol = Nothing
-    , _pldsdsdAccessToken = Nothing
-    , _pldsdsdUploadType = Nothing
-    , _pldsdsdName = pPldsdsdName_
-    , _pldsdsdCallback = Nothing
+    { _pXgafv = Nothing
+    , _pUploadProtocol = Nothing
+    , _pAccessToken = Nothing
+    , _pUploadType = Nothing
+    , _pName = pPName_
+    , _pCallback = Nothing
     }
 
 
 -- | V1 error format.
-pldsdsdXgafv :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Xgafv)
-pldsdsdXgafv
-  = lens _pldsdsdXgafv (\ s a -> s{_pldsdsdXgafv = a})
+pXgafv :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Xgafv)
+pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pldsdsdUploadProtocol :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
-pldsdsdUploadProtocol
-  = lens _pldsdsdUploadProtocol
-      (\ s a -> s{_pldsdsdUploadProtocol = a})
+pUploadProtocol :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
+pUploadProtocol
+  = lens _pUploadProtocol
+      (\ s a -> s{_pUploadProtocol = a})
 
 -- | OAuth access token.
-pldsdsdAccessToken :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
-pldsdsdAccessToken
-  = lens _pldsdsdAccessToken
-      (\ s a -> s{_pldsdsdAccessToken = a})
+pAccessToken :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
+pAccessToken
+  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pldsdsdUploadType :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
-pldsdsdUploadType
-  = lens _pldsdsdUploadType
-      (\ s a -> s{_pldsdsdUploadType = a})
+pUploadType :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
+pUploadType
+  = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
 -- | The resource name of the DICOM store to delete.
-pldsdsdName :: Lens' ProjectsLocationsDataSetsDicomStoresDelete Text
-pldsdsdName
-  = lens _pldsdsdName (\ s a -> s{_pldsdsdName = a})
+pName :: Lens' ProjectsLocationsDataSetsDicomStoresDelete Text
+pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | JSONP
-pldsdsdCallback :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
-pldsdsdCallback
-  = lens _pldsdsdCallback
-      (\ s a -> s{_pldsdsdCallback = a})
+pCallback :: Lens' ProjectsLocationsDataSetsDicomStoresDelete (Maybe Text)
+pCallback
+  = lens _pCallback (\ s a -> s{_pCallback = a})
 
 instance GoogleRequest
            ProjectsLocationsDataSetsDicomStoresDelete
@@ -147,11 +142,9 @@ instance GoogleRequest
              = '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient
           ProjectsLocationsDataSetsDicomStoresDelete'{..}
-          = go _pldsdsdName _pldsdsdXgafv
-              _pldsdsdUploadProtocol
-              _pldsdsdAccessToken
-              _pldsdsdUploadType
-              _pldsdsdCallback
+          = go _pName _pXgafv _pUploadProtocol _pAccessToken
+              _pUploadType
+              _pCallback
               (Just AltJSON)
               healthcareService
           where go

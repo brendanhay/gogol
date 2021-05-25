@@ -22,7 +22,7 @@
 --
 -- Changes one or more properties of an existing exclusion.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.exclusions.patch@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.exclusions.patch@.
 module Network.Google.Resource.Logging.Exclusions.Patch
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.Exclusions.Patch
     , epCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.exclusions.patch@ method which the
 -- 'ExclusionsPatch' request conforms to.
@@ -66,14 +66,14 @@ type ExclusionsPatchResource =
 -- /See:/ 'exclusionsPatch' smart constructor.
 data ExclusionsPatch =
   ExclusionsPatch'
-    { _epXgafv          :: !(Maybe Xgafv)
+    { _epXgafv :: !(Maybe Xgafv)
     , _epUploadProtocol :: !(Maybe Text)
-    , _epUpdateMask     :: !(Maybe GFieldMask)
-    , _epAccessToken    :: !(Maybe Text)
-    , _epUploadType     :: !(Maybe Text)
-    , _epPayload        :: !LogExclusion
-    , _epName           :: !Text
-    , _epCallback       :: !(Maybe Text)
+    , _epUpdateMask :: !(Maybe GFieldMask)
+    , _epAccessToken :: !(Maybe Text)
+    , _epUploadType :: !(Maybe Text)
+    , _epPayload :: !LogExclusion
+    , _epName :: !Text
+    , _epCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,12 +124,12 @@ epUploadProtocol
   = lens _epUploadProtocol
       (\ s a -> s{_epUploadProtocol = a})
 
--- | Required. A nonempty list of fields to change in the existing exclusion.
--- New values for the fields are taken from the corresponding fields in the
--- LogExclusion included in this request. Fields not mentioned in
--- update_mask are not changed and are ignored in the request.For example,
--- to change the filter and description of an exclusion, specify an
--- update_mask of \"filter,description\".
+-- | Required. A non-empty list of fields to change in the existing
+-- exclusion. New values for the fields are taken from the corresponding
+-- fields in the LogExclusion included in this request. Fields not
+-- mentioned in update_mask are not changed and are ignored in the
+-- request.For example, to change the filter and description of an
+-- exclusion, specify an update_mask of \"filter,description\".
 epUpdateMask :: Lens' ExclusionsPatch (Maybe GFieldMask)
 epUpdateMask
   = lens _epUpdateMask (\ s a -> s{_epUpdateMask = a})

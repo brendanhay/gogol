@@ -47,8 +47,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.TestIAMPer
     , potipCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.testIamPermissions@ method which the
 -- 'ProjectsOccurrencesTestIAMPermissions' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsOccurrencesTestIAMPermissionsResource =
 -- /See:/ 'projectsOccurrencesTestIAMPermissions' smart constructor.
 data ProjectsOccurrencesTestIAMPermissions =
   ProjectsOccurrencesTestIAMPermissions'
-    { _potipXgafv          :: !(Maybe Xgafv)
+    { _potipXgafv :: !(Maybe Xgafv)
     , _potipUploadProtocol :: !(Maybe Text)
-    , _potipAccessToken    :: !(Maybe Text)
-    , _potipUploadType     :: !(Maybe Text)
-    , _potipPayload        :: !TestIAMPermissionsRequest
-    , _potipResource       :: !Text
-    , _potipCallback       :: !(Maybe Text)
+    , _potipAccessToken :: !(Maybe Text)
+    , _potipUploadType :: !(Maybe Text)
+    , _potipPayload :: !TestIAMPermissionsRequest
+    , _potipResource :: !Text
+    , _potipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

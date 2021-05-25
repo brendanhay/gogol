@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.HealthChecks.Insert
     , hciPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.healthChecks.insert@ method which the
 -- 'HealthChecksInsert' request conforms to.
@@ -62,8 +62,8 @@ type HealthChecksInsertResource =
 data HealthChecksInsert =
   HealthChecksInsert'
     { _hciRequestId :: !(Maybe Text)
-    , _hciProject   :: !Text
-    , _hciPayload   :: !HealthCheck
+    , _hciProject :: !Text
+    , _hciPayload :: !HealthCheck
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -14,13 +14,13 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Provides control plane functionality to managed services, such as
-    logging, monitoring, and status checks.
+    Provides admission control and telemetry reporting for services
+    integrated with Service Infrastructure.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1@
+    This library is compatible with version @v2@
     of the API.
 
 source-repository head
@@ -34,8 +34,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.ServiceControl.Services.AllocateQuota
-        , Network.Google.Resource.ServiceControl.Services.Check
+          Network.Google.Resource.ServiceControl.Services.Check
         , Network.Google.Resource.ServiceControl.Services.Report
         , Network.Google.ServiceControl
         , Network.Google.ServiceControl.Types

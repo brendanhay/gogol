@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Images.Insert
     , iiForceCreate
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.insert@ method which the
 -- 'ImagesInsert' request conforms to.
@@ -63,9 +63,9 @@ type ImagesInsertResource =
 -- /See:/ 'imagesInsert' smart constructor.
 data ImagesInsert =
   ImagesInsert'
-    { _iiRequestId   :: !(Maybe Text)
-    , _iiProject     :: !Text
-    , _iiPayload     :: !Image
+    { _iiRequestId :: !(Maybe Text)
+    , _iiProject :: !Text
+    , _iiPayload :: !Image
     , _iiForceCreate :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

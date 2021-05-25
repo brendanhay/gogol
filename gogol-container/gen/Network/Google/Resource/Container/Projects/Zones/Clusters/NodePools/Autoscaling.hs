@@ -45,8 +45,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Autos
     , pzcnpaCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.autoscaling@ method which the
 -- 'ProjectsZonesClustersNodePoolsAutoscaling' request conforms to.
@@ -77,16 +77,16 @@ type ProjectsZonesClustersNodePoolsAutoscalingResource
 -- /See:/ 'projectsZonesClustersNodePoolsAutoscaling' smart constructor.
 data ProjectsZonesClustersNodePoolsAutoscaling =
   ProjectsZonesClustersNodePoolsAutoscaling'
-    { _pzcnpaXgafv          :: !(Maybe Xgafv)
+    { _pzcnpaXgafv :: !(Maybe Xgafv)
     , _pzcnpaUploadProtocol :: !(Maybe Text)
-    , _pzcnpaAccessToken    :: !(Maybe Text)
-    , _pzcnpaUploadType     :: !(Maybe Text)
-    , _pzcnpaZone           :: !Text
-    , _pzcnpaPayload        :: !SetNodePoolAutoscalingRequest
-    , _pzcnpaNodePoolId     :: !Text
-    , _pzcnpaClusterId      :: !Text
-    , _pzcnpaProjectId      :: !Text
-    , _pzcnpaCallback       :: !(Maybe Text)
+    , _pzcnpaAccessToken :: !(Maybe Text)
+    , _pzcnpaUploadType :: !(Maybe Text)
+    , _pzcnpaZone :: !Text
+    , _pzcnpaPayload :: !SetNodePoolAutoscalingRequest
+    , _pzcnpaNodePoolId :: !Text
+    , _pzcnpaClusterId :: !Text
+    , _pzcnpaProjectId :: !Text
+    , _pzcnpaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,8 +160,9 @@ pzcnpaUploadType
       (\ s a -> s{_pzcnpaUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcnpaZone :: Lens' ProjectsZonesClustersNodePoolsAutoscaling Text
 pzcnpaZone
   = lens _pzcnpaZone (\ s a -> s{_pzcnpaZone = a})

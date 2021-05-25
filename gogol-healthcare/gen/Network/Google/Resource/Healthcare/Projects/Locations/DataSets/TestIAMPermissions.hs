@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,14 +47,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.TestIAMPer
     , pldstipCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.testIamPermissions@ method which the
 -- 'ProjectsLocationsDataSetsTestIAMPermissions' request conforms to.
 type ProjectsLocationsDataSetsTestIAMPermissionsResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,21 +67,21 @@ type ProjectsLocationsDataSetsTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsLocationsDataSetsTestIAMPermissions' smart constructor.
 data ProjectsLocationsDataSetsTestIAMPermissions =
   ProjectsLocationsDataSetsTestIAMPermissions'
-    { _pldstipXgafv          :: !(Maybe Xgafv)
+    { _pldstipXgafv :: !(Maybe Xgafv)
     , _pldstipUploadProtocol :: !(Maybe Text)
-    , _pldstipAccessToken    :: !(Maybe Text)
-    , _pldstipUploadType     :: !(Maybe Text)
-    , _pldstipPayload        :: !TestIAMPermissionsRequest
-    , _pldstipResource       :: !Text
-    , _pldstipCallback       :: !(Maybe Text)
+    , _pldstipAccessToken :: !(Maybe Text)
+    , _pldstipUploadType :: !(Maybe Text)
+    , _pldstipPayload :: !TestIAMPermissionsRequest
+    , _pldstipResource :: !Text
+    , _pldstipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

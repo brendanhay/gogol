@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.RemarketingAudience.Delete
     , mradRemarketingAudienceId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.remarketingAudience.delete@ method which the
 -- 'ManagementRemarketingAudienceDelete' request conforms to.
@@ -60,8 +60,8 @@ type ManagementRemarketingAudienceDeleteResource =
 -- /See:/ 'managementRemarketingAudienceDelete' smart constructor.
 data ManagementRemarketingAudienceDelete =
   ManagementRemarketingAudienceDelete'
-    { _mradWebPropertyId         :: !Text
-    , _mradAccountId             :: !Text
+    { _mradWebPropertyId :: !Text
+    , _mradAccountId :: !Text
     , _mradRemarketingAudienceId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

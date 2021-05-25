@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -37,6 +37,20 @@ module Network.Google.Logging.Types
     , mrdLabels
     , mrdType
     , mrdDescription
+    , mrdLaunchStage
+
+    -- * ListBucketsResponse
+    , ListBucketsResponse
+    , listBucketsResponse
+    , lbrNextPageToken
+    , lbrBuckets
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
     -- * ListLogEntriesResponse
     , ListLogEntriesResponse
@@ -47,6 +61,7 @@ module Network.Google.Logging.Types
     -- * MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
+    , mdMonitoredResourceTypes
     , mdMetricKind
     , mdName
     , mdMetadata
@@ -56,11 +71,35 @@ module Network.Google.Logging.Types
     , mdValueType
     , mdDescription
     , mdUnit
+    , mdLaunchStage
+
+    -- * ListLocationsResponse
+    , ListLocationsResponse
+    , listLocationsResponse
+    , llrNextPageToken
+    , llrLocations
+
+    -- * ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- * TailLogEntriesRequest
+    , TailLogEntriesRequest
+    , tailLogEntriesRequest
+    , tlerBufferWindow
+    , tlerFilter
+    , tlerResourceNames
 
     -- * MonitoredResourceLabels
     , MonitoredResourceLabels
     , monitoredResourceLabels
     , mrlAddtional
+
+    -- * CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
     -- * LogMetricVersion
     , LogMetricVersion (..)
@@ -87,10 +126,46 @@ module Network.Google.Logging.Types
     , wlerLogName
     , wlerDryRun
 
+    -- * CopyLogEntriesRequest
+    , CopyLogEntriesRequest
+    , copyLogEntriesRequest
+    , clerDestination
+    , clerName
+    , clerFilter
+
+    -- * UndeleteBucketRequest
+    , UndeleteBucketRequest
+    , undeleteBucketRequest
+
+    -- * CmekSettings
+    , CmekSettings
+    , cmekSettings
+    , csServiceAccountId
+    , csName
+    , csKmsKeyName
+
     -- * LogMetricLabelExtractors
     , LogMetricLabelExtractors
     , logMetricLabelExtractors
     , lmleAddtional
+
+    -- * Location
+    , Location
+    , location
+    , lName
+    , lMetadata
+    , lDisplayName
+    , lLabels
+    , lLocationId
+
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
 
     -- * LogSinkOutputVersionFormat
     , LogSinkOutputVersionFormat (..)
@@ -173,6 +248,11 @@ module Network.Google.Logging.Types
     , WriteLogEntriesResponse
     , writeLogEntriesResponse
 
+    -- * CopyLogEntriesResponse
+    , CopyLogEntriesResponse
+    , copyLogEntriesResponse
+    , clerLogEntriesCopiedCount
+
     -- * MetricDescriptorMetadataLaunchStage
     , MetricDescriptorMetadataLaunchStage (..)
 
@@ -181,12 +261,27 @@ module Network.Google.Logging.Types
     , logSink
     , lsDestination
     , lsIncludeChildren
+    , lsDisabled
     , lsOutputVersionFormat
+    , lsBigQueryOptions
     , lsWriterIdentity
     , lsUpdateTime
     , lsName
+    , lsExclusions
     , lsFilter
+    , lsDescription
     , lsCreateTime
+
+    -- * LogBucketLifecycleState
+    , LogBucketLifecycleState (..)
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- * SuppressionInfoReason
+    , SuppressionInfoReason (..)
 
     -- * MonitoredResourceMetadataUserLabels
     , MonitoredResourceMetadataUserLabels
@@ -202,14 +297,31 @@ module Network.Google.Logging.Types
     -- * ListLogsResponse
     , ListLogsResponse
     , listLogsResponse
-    , llrNextPageToken
-    , llrLogNames
+    , lNextPageToken
+    , lLogNames
+
+    -- * CopyLogEntriesMetadata
+    , CopyLogEntriesMetadata
+    , copyLogEntriesMetadata
+    , clemState
+    , clemCancellationRequested
+    , clemProgress
+    , clemStartTime
+    , clemWriterIdentity
+    , clemEndTime
+    , clemRequest
 
     -- * ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
     , listMonitoredResourceDescriptorsResponse
     , lmrdrNextPageToken
     , lmrdrResourceDescriptors
+
+    -- * BigQueryOptions
+    , BigQueryOptions
+    , bigQueryOptions
+    , bqoUsePartitionedTables
+    , bqoUsesTimestampColumnPartitioning
 
     -- * LabelDescriptorValueType
     , LabelDescriptorValueType (..)
@@ -250,6 +362,18 @@ module Network.Google.Logging.Types
     , writeLogEntriesRequestLabels
     , wlerlAddtional
 
+    -- * SuppressionInfo
+    , SuppressionInfo
+    , suppressionInfo
+    , siReason
+    , siSuppressedCount
+
+    -- * ListViewsResponse
+    , ListViewsResponse
+    , listViewsResponse
+    , lvrNextPageToken
+    , lvrViews
+
     -- * MonitoredResource
     , MonitoredResource
     , monitoredResource
@@ -258,6 +382,18 @@ module Network.Google.Logging.Types
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * LogBucket
+    , LogBucket
+    , logBucket
+    , lbRestrictedFields
+    , lbLocked
+    , lbRetentionDays
+    , lbUpdateTime
+    , lbName
+    , lbDescription
+    , lbLifecycleState
+    , lbCreateTime
 
     -- * LogLine
     , LogLine
@@ -303,6 +439,15 @@ module Network.Google.Logging.Types
     , llerPageSize
     , llerResourceNames
 
+    -- * MonitoredResourceDescriptorLaunchStage
+    , MonitoredResourceDescriptorLaunchStage (..)
+
+    -- * TailLogEntriesResponse
+    , TailLogEntriesResponse
+    , tailLogEntriesResponse
+    , tlerEntries
+    , tlerSuppressionInfo
+
     -- * LogEntryOperation
     , LogEntryOperation
     , logEntryOperation
@@ -315,6 +460,7 @@ module Network.Google.Logging.Types
     , LogMetric
     , logMetric
     , lmMetricDescriptor
+    , lmDisabled
     , lmUpdateTime
     , lmName
     , lmVersion
@@ -346,12 +492,27 @@ module Network.Google.Logging.Types
     , leTrace
     , leSpanId
 
+    -- * LocationLabels
+    , LocationLabels
+    , locationLabels
+    , llAddtional
+
     -- * SourceLocation
     , SourceLocation
     , sourceLocation
     , slLine
     , slFunctionName
     , slFile
+
+    -- * LocationMetadata
+    , LocationMetadata
+    , locationMetadata
+    , lmAddtional
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
 
     -- * MetricDescriptorMetricKind
     , MetricDescriptorMetricKind (..)
@@ -377,15 +538,35 @@ module Network.Google.Logging.Types
     , logEntryJSONPayload
     , lejpAddtional
 
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
+
+    -- * MetricDescriptorLaunchStage
+    , MetricDescriptorLaunchStage (..)
+
+    -- * LogView
+    , LogView
+    , logView
+    , lvUpdateTime
+    , lvName
+    , lvFilter
+    , lvDescription
+    , lvCreateTime
+
     -- * LogLineSeverity
     , LogLineSeverity (..)
+
+    -- * CopyLogEntriesMetadataState
+    , CopyLogEntriesMetadataState (..)
     ) where
 
-import           Network.Google.Logging.Types.Product
-import           Network.Google.Logging.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Logging.Types.Product
+import Network.Google.Logging.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v2' of the Stackdriver Logging API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
 loggingService :: ServiceConfig
 loggingService
   = defaultService (ServiceId "logging:v2")
@@ -407,6 +588,6 @@ loggingWriteScope = Proxy
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
 cloudPlatformReadOnlyScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

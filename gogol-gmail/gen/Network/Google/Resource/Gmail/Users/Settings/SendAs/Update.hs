@@ -36,13 +36,18 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
     , UsersSettingsSendAsUpdate
 
     -- * Request Lenses
+    , ussauXgafv
+    , ussauUploadProtocol
+    , ussauAccessToken
+    , ussauUploadType
     , ussauPayload
     , ussauUserId
     , ussauSendAsEmail
+    , ussauCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.update@ method which the
 -- 'UsersSettingsSendAsUpdate' request conforms to.
@@ -54,8 +59,13 @@ type UsersSettingsSendAsUpdateResource =
              "settings" :>
                "sendAs" :>
                  Capture "sendAsEmail" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] SendAs :> Put '[JSON] SendAs
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] SendAs :> Put '[JSON] SendAs
 
 -- | Updates a send-as alias. If a signature is provided, Gmail will sanitize
 -- the HTML before saving it with the alias. Addresses other than the
@@ -65,9 +75,14 @@ type UsersSettingsSendAsUpdateResource =
 -- /See:/ 'usersSettingsSendAsUpdate' smart constructor.
 data UsersSettingsSendAsUpdate =
   UsersSettingsSendAsUpdate'
-    { _ussauPayload     :: !SendAs
-    , _ussauUserId      :: !Text
+    { _ussauXgafv :: !(Maybe Xgafv)
+    , _ussauUploadProtocol :: !(Maybe Text)
+    , _ussauAccessToken :: !(Maybe Text)
+    , _ussauUploadType :: !(Maybe Text)
+    , _ussauPayload :: !SendAs
+    , _ussauUserId :: !Text
     , _ussauSendAsEmail :: !Text
+    , _ussauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,22 +91,60 @@ data UsersSettingsSendAsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussauXgafv'
+--
+-- * 'ussauUploadProtocol'
+--
+-- * 'ussauAccessToken'
+--
+-- * 'ussauUploadType'
+--
 -- * 'ussauPayload'
 --
 -- * 'ussauUserId'
 --
 -- * 'ussauSendAsEmail'
+--
+-- * 'ussauCallback'
 usersSettingsSendAsUpdate
     :: SendAs -- ^ 'ussauPayload'
     -> Text -- ^ 'ussauSendAsEmail'
     -> UsersSettingsSendAsUpdate
 usersSettingsSendAsUpdate pUssauPayload_ pUssauSendAsEmail_ =
   UsersSettingsSendAsUpdate'
-    { _ussauPayload = pUssauPayload_
+    { _ussauXgafv = Nothing
+    , _ussauUploadProtocol = Nothing
+    , _ussauAccessToken = Nothing
+    , _ussauUploadType = Nothing
+    , _ussauPayload = pUssauPayload_
     , _ussauUserId = "me"
     , _ussauSendAsEmail = pUssauSendAsEmail_
+    , _ussauCallback = Nothing
     }
 
+
+-- | V1 error format.
+ussauXgafv :: Lens' UsersSettingsSendAsUpdate (Maybe Xgafv)
+ussauXgafv
+  = lens _ussauXgafv (\ s a -> s{_ussauXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussauUploadProtocol :: Lens' UsersSettingsSendAsUpdate (Maybe Text)
+ussauUploadProtocol
+  = lens _ussauUploadProtocol
+      (\ s a -> s{_ussauUploadProtocol = a})
+
+-- | OAuth access token.
+ussauAccessToken :: Lens' UsersSettingsSendAsUpdate (Maybe Text)
+ussauAccessToken
+  = lens _ussauAccessToken
+      (\ s a -> s{_ussauAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussauUploadType :: Lens' UsersSettingsSendAsUpdate (Maybe Text)
+ussauUploadType
+  = lens _ussauUploadType
+      (\ s a -> s{_ussauUploadType = a})
 
 -- | Multipart request metadata.
 ussauPayload :: Lens' UsersSettingsSendAsUpdate SendAs
@@ -110,6 +163,12 @@ ussauSendAsEmail
   = lens _ussauSendAsEmail
       (\ s a -> s{_ussauSendAsEmail = a})
 
+-- | JSONP
+ussauCallback :: Lens' UsersSettingsSendAsUpdate (Maybe Text)
+ussauCallback
+  = lens _ussauCallback
+      (\ s a -> s{_ussauCallback = a})
+
 instance GoogleRequest UsersSettingsSendAsUpdate
          where
         type Rs UsersSettingsSendAsUpdate = SendAs
@@ -117,7 +176,12 @@ instance GoogleRequest UsersSettingsSendAsUpdate
              '["https://www.googleapis.com/auth/gmail.settings.basic",
                "https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsSendAsUpdate'{..}
-          = go _ussauUserId _ussauSendAsEmail (Just AltJSON)
+          = go _ussauUserId _ussauSendAsEmail _ussauXgafv
+              _ussauUploadProtocol
+              _ussauAccessToken
+              _ussauUploadType
+              _ussauCallback
+              (Just AltJSON)
               _ussauPayload
               gmailService
           where go

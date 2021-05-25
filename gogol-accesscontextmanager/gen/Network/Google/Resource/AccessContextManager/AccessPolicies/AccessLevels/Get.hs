@@ -42,8 +42,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.
     , apalgCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.get@ method which the
 -- 'AccessPoliciesAccessLevelsGet' request conforms to.
@@ -54,7 +54,9 @@ type AccessPoliciesAccessLevelsGetResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "accessLevelFormat" Text :>
+                 QueryParam "accessLevelFormat"
+                   AccessPoliciesAccessLevelsGetAccessLevelFormat
+                   :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] AccessLevel
 
@@ -63,13 +65,13 @@ type AccessPoliciesAccessLevelsGetResource =
 -- /See:/ 'accessPoliciesAccessLevelsGet' smart constructor.
 data AccessPoliciesAccessLevelsGet =
   AccessPoliciesAccessLevelsGet'
-    { _apalgXgafv             :: !(Maybe Xgafv)
-    , _apalgUploadProtocol    :: !(Maybe Text)
-    , _apalgAccessToken       :: !(Maybe Text)
-    , _apalgUploadType        :: !(Maybe Text)
-    , _apalgAccessLevelFormat :: !(Maybe Text)
-    , _apalgName              :: !Text
-    , _apalgCallback          :: !(Maybe Text)
+    { _apalgXgafv :: !(Maybe Xgafv)
+    , _apalgUploadProtocol :: !(Maybe Text)
+    , _apalgAccessToken :: !(Maybe Text)
+    , _apalgUploadType :: !(Maybe Text)
+    , _apalgAccessLevelFormat :: !(Maybe AccessPoliciesAccessLevelsGetAccessLevelFormat)
+    , _apalgName :: !Text
+    , _apalgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,7 +137,7 @@ apalgUploadType
 -- on how they were created. If set to CEL, all Access Levels are returned
 -- as \`CustomLevels\`. In the CEL case, \`BasicLevels\` are translated to
 -- equivalent \`CustomLevels\`.
-apalgAccessLevelFormat :: Lens' AccessPoliciesAccessLevelsGet (Maybe Text)
+apalgAccessLevelFormat :: Lens' AccessPoliciesAccessLevelsGet (Maybe AccessPoliciesAccessLevelsGetAccessLevelFormat)
 apalgAccessLevelFormat
   = lens _apalgAccessLevelFormat
       (\ s a -> s{_apalgAccessLevelFormat = a})

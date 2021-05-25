@@ -45,8 +45,8 @@ module Network.Google.Resource.DLP.Projects.StoredInfoTypes.Patch
     , psitpCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.storedInfoTypes.patch@ method which the
 -- 'ProjectsStoredInfoTypesPatch' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsStoredInfoTypesPatchResource =
 -- /See:/ 'projectsStoredInfoTypesPatch' smart constructor.
 data ProjectsStoredInfoTypesPatch =
   ProjectsStoredInfoTypesPatch'
-    { _psitpXgafv          :: !(Maybe Xgafv)
+    { _psitpXgafv :: !(Maybe Xgafv)
     , _psitpUploadProtocol :: !(Maybe Text)
-    , _psitpAccessToken    :: !(Maybe Text)
-    , _psitpUploadType     :: !(Maybe Text)
-    , _psitpPayload        :: !GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
-    , _psitpName           :: !Text
-    , _psitpCallback       :: !(Maybe Text)
+    , _psitpAccessToken :: !(Maybe Text)
+    , _psitpUploadType :: !(Maybe Text)
+    , _psitpPayload :: !GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
+    , _psitpName :: !Text
+    , _psitpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,8 +143,9 @@ psitpPayload :: Lens' ProjectsStoredInfoTypesPatch GooglePrivacyDlpV2UpdateStore
 psitpPayload
   = lens _psitpPayload (\ s a -> s{_psitpPayload = a})
 
--- | Resource name of organization and storedInfoType to be updated, for
--- example \`organizations\/433245324\/storedInfoTypes\/432452342\` or
+-- | Required. Resource name of organization and storedInfoType to be
+-- updated, for example
+-- \`organizations\/433245324\/storedInfoTypes\/432452342\` or
 -- projects\/project-id\/storedInfoTypes\/432452342.
 psitpName :: Lens' ProjectsStoredInfoTypesPatch Text
 psitpName

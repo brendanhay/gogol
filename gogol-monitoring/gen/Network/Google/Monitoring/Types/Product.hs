@@ -17,8 +17,8 @@
 --
 module Network.Google.Monitoring.Types.Product where
 
-import           Network.Google.Monitoring.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types.Sum
+import Network.Google.Prelude
 
 -- | An object that describes the schema of a MonitoredResource object using
 -- a type name and a set of labels. For example, the monitored resource
@@ -31,11 +31,12 @@ import           Network.Google.Prelude
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
 data MonitoredResourceDescriptor =
   MonitoredResourceDescriptor'
-    { _mrdName        :: !(Maybe Text)
+    { _mrdName :: !(Maybe Text)
     , _mrdDisplayName :: !(Maybe Text)
-    , _mrdLabels      :: !(Maybe [LabelDescriptor])
-    , _mrdType        :: !(Maybe Text)
+    , _mrdLabels :: !(Maybe [LabelDescriptor])
+    , _mrdType :: !(Maybe Text)
     , _mrdDescription :: !(Maybe Text)
+    , _mrdLaunchStage :: !(Maybe MonitoredResourceDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -53,6 +54,8 @@ data MonitoredResourceDescriptor =
 -- * 'mrdType'
 --
 -- * 'mrdDescription'
+--
+-- * 'mrdLaunchStage'
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
@@ -62,6 +65,7 @@ monitoredResourceDescriptor =
     , _mrdLabels = Nothing
     , _mrdType = Nothing
     , _mrdDescription = Nothing
+    , _mrdLaunchStage = Nothing
     }
 
 
@@ -93,8 +97,7 @@ mrdLabels
       . _Coerce
 
 -- | Required. The monitored resource type. For example, the type
--- \"cloudsql_database\" represents databases in Google Cloud SQL. The
--- maximum length of this value is 256 characters.
+-- \"cloudsql_database\" represents databases in Google Cloud SQL.
 mrdType :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdType = lens _mrdType (\ s a -> s{_mrdType = a})
 
@@ -105,6 +108,12 @@ mrdDescription
   = lens _mrdDescription
       (\ s a -> s{_mrdDescription = a})
 
+-- | Optional. The launch stage of the monitored resource definition.
+mrdLaunchStage :: Lens' MonitoredResourceDescriptor (Maybe MonitoredResourceDescriptorLaunchStage)
+mrdLaunchStage
+  = lens _mrdLaunchStage
+      (\ s a -> s{_mrdLaunchStage = a})
+
 instance FromJSON MonitoredResourceDescriptor where
         parseJSON
           = withObject "MonitoredResourceDescriptor"
@@ -113,7 +122,8 @@ instance FromJSON MonitoredResourceDescriptor where
                    (o .:? "name") <*> (o .:? "displayName") <*>
                      (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "description")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON MonitoredResourceDescriptor where
         toJSON MonitoredResourceDescriptor'{..}
@@ -123,48 +133,132 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("displayName" .=) <$> _mrdDisplayName,
                   ("labels" .=) <$> _mrdLabels,
                   ("type" .=) <$> _mrdType,
-                  ("description" .=) <$> _mrdDescription])
+                  ("description" .=) <$> _mrdDescription,
+                  ("launchStage" .=) <$> _mrdLaunchStage])
+
+-- | An SLI measuring performance on a well-known service type. Performance
+-- will be computed on the basis of pre-defined metrics. The type of the
+-- service_resource determines the metrics to use and the
+-- service_resource.labels and metric_labels are used to construct a
+-- monitoring filter to filter that metric down to just the data relevant
+-- to this service.
+--
+-- /See:/ 'basicSli' smart constructor.
+data BasicSli =
+  BasicSli'
+    { _bsLocation :: !(Maybe [Text])
+    , _bsLatency :: !(Maybe LatencyCriteria)
+    , _bsAvailability :: !(Maybe AvailabilityCriteria)
+    , _bsMethod :: !(Maybe [Text])
+    , _bsVersion :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BasicSli' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsLocation'
+--
+-- * 'bsLatency'
+--
+-- * 'bsAvailability'
+--
+-- * 'bsMethod'
+--
+-- * 'bsVersion'
+basicSli
+    :: BasicSli
+basicSli =
+  BasicSli'
+    { _bsLocation = Nothing
+    , _bsLatency = Nothing
+    , _bsAvailability = Nothing
+    , _bsMethod = Nothing
+    , _bsVersion = Nothing
+    }
+
+
+-- | OPTIONAL: The set of locations to which this SLI is relevant. Telemetry
+-- from other locations will not be used to calculate performance for this
+-- SLI. If omitted, this SLI applies to all locations in which the Service
+-- has activity. For service types that don\'t support breaking down by
+-- location, setting this field will result in an error.
+bsLocation :: Lens' BasicSli [Text]
+bsLocation
+  = lens _bsLocation (\ s a -> s{_bsLocation = a}) .
+      _Default
+      . _Coerce
+
+-- | Good service is defined to be the count of requests made to this service
+-- that are fast enough with respect to latency.threshold.
+bsLatency :: Lens' BasicSli (Maybe LatencyCriteria)
+bsLatency
+  = lens _bsLatency (\ s a -> s{_bsLatency = a})
+
+-- | Good service is defined to be the count of requests made to this service
+-- that return successfully.
+bsAvailability :: Lens' BasicSli (Maybe AvailabilityCriteria)
+bsAvailability
+  = lens _bsAvailability
+      (\ s a -> s{_bsAvailability = a})
+
+-- | OPTIONAL: The set of RPCs to which this SLI is relevant. Telemetry from
+-- other methods will not be used to calculate performance for this SLI. If
+-- omitted, this SLI applies to all the Service\'s methods. For service
+-- types that don\'t support breaking down by method, setting this field
+-- will result in an error.
+bsMethod :: Lens' BasicSli [Text]
+bsMethod
+  = lens _bsMethod (\ s a -> s{_bsMethod = a}) .
+      _Default
+      . _Coerce
+
+-- | OPTIONAL: The set of API versions to which this SLI is relevant.
+-- Telemetry from other API versions will not be used to calculate
+-- performance for this SLI. If omitted, this SLI applies to all API
+-- versions. For service types that don\'t support breaking down by
+-- version, setting this field will result in an error.
+bsVersion :: Lens' BasicSli [Text]
+bsVersion
+  = lens _bsVersion (\ s a -> s{_bsVersion = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON BasicSli where
+        parseJSON
+          = withObject "BasicSli"
+              (\ o ->
+                 BasicSli' <$>
+                   (o .:? "location" .!= mempty) <*> (o .:? "latency")
+                     <*> (o .:? "availability")
+                     <*> (o .:? "method" .!= mempty)
+                     <*> (o .:? "version" .!= mempty))
+
+instance ToJSON BasicSli where
+        toJSON BasicSli'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _bsLocation,
+                  ("latency" .=) <$> _bsLatency,
+                  ("availability" .=) <$> _bsAvailability,
+                  ("method" .=) <$> _bsMethod,
+                  ("version" .=) <$> _bsVersion])
 
 -- | The Status type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by gRPC (https:\/\/github.com\/grpc). The error model is
--- designed to be: Simple to use and understand for most users Flexible
--- enough to meet unexpected needsOverviewThe Status message contains three
--- pieces of data: error code, error message, and error details. The error
--- code should be an enum value of google.rpc.Code, but it may accept
--- additional error codes if needed. The error message should be a
--- developer-facing English message that helps developers understand and
--- resolve the error. If a localized user-facing error message is needed,
--- put the localized message in the error details or localize it in the
--- client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package google.rpc that can be used for common error conditions.Language
--- mappingThe Status message is the logical representation of the error
--- model, but it is not necessarily the actual wire format. When the Status
--- message is exposed in different client libraries and different wire
--- protocols, it can be mapped differently. For example, it will likely be
--- mapped to some exceptions in Java, but more likely mapped to some error
--- codes in C.Other usesThe error model and the Status message can be used
--- in a variety of environments, either with or without APIs, to provide a
--- consistent developer experience across different environments.Example
--- uses of this error model include: Partial errors. If a service needs to
--- return partial errors to the client, it may embed the Status in the
--- normal response to indicate the partial errors. Workflow errors. A
--- typical workflow has multiple steps. Each step may have a Status message
--- for error reporting. Batch operations. If a client uses batch request
--- and batch response, the Status message should be used directly inside
--- batch response, one for each error sub-response. Asynchronous
--- operations. If an API call embeds asynchronous operation results in its
--- response, the status of those operations should be represented directly
--- using the Status message. Logging. If some API errors are stored in
--- logs, the message Status could be used directly after any stripping
--- needed for security\/privacy reasons.
+-- is used by gRPC (https:\/\/github.com\/grpc). Each Status message
+-- contains three pieces of data: error code, error message, and error
+-- details.You can find out more about this error model and how to work
+-- with it in the API Design Guide
+-- (https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -220,13 +314,145 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | A Service-Level Objective (SLO) describes a level of desired good
+-- service. It consists of a service-level indicator (SLI), a performance
+-- goal, and a period over which the objective is to be evaluated against
+-- that goal. The SLO can use SLIs defined in a number of different
+-- manners. Typical SLOs might include \"99% of requests in each rolling
+-- week have latency below 200 milliseconds\" or \"99.5% of requests in
+-- each calendar month return successfully.\"
+--
+-- /See:/ 'serviceLevelObjective' smart constructor.
+data ServiceLevelObjective =
+  ServiceLevelObjective'
+    { _sloUserLabels :: !(Maybe ServiceLevelObjectiveUserLabels)
+    , _sloName :: !(Maybe Text)
+    , _sloCalendarPeriod :: !(Maybe ServiceLevelObjectiveCalendarPeriod)
+    , _sloServiceLevelIndicator :: !(Maybe ServiceLevelIndicator)
+    , _sloGoal :: !(Maybe (Textual Double))
+    , _sloDisplayName :: !(Maybe Text)
+    , _sloRollingPeriod :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ServiceLevelObjective' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sloUserLabels'
+--
+-- * 'sloName'
+--
+-- * 'sloCalendarPeriod'
+--
+-- * 'sloServiceLevelIndicator'
+--
+-- * 'sloGoal'
+--
+-- * 'sloDisplayName'
+--
+-- * 'sloRollingPeriod'
+serviceLevelObjective
+    :: ServiceLevelObjective
+serviceLevelObjective =
+  ServiceLevelObjective'
+    { _sloUserLabels = Nothing
+    , _sloName = Nothing
+    , _sloCalendarPeriod = Nothing
+    , _sloServiceLevelIndicator = Nothing
+    , _sloGoal = Nothing
+    , _sloDisplayName = Nothing
+    , _sloRollingPeriod = Nothing
+    }
+
+
+-- | Labels which have been used to annotate the service-level objective.
+-- Label keys must start with a letter. Label keys and values may contain
+-- lowercase letters, numbers, underscores, and dashes. Label keys and
+-- values have a maximum length of 63 characters, and must be less than 128
+-- bytes in size. Up to 64 label entries may be stored. For labels which do
+-- not have a semantic value, the empty string may be supplied for the
+-- label value.
+sloUserLabels :: Lens' ServiceLevelObjective (Maybe ServiceLevelObjectiveUserLabels)
+sloUserLabels
+  = lens _sloUserLabels
+      (\ s a -> s{_sloUserLabels = a})
+
+-- | Resource name for this ServiceLevelObjective. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/services\/[SERVICE_ID]\/serviceLevelObjectives\/[SLO_NAME]
+sloName :: Lens' ServiceLevelObjective (Maybe Text)
+sloName = lens _sloName (\ s a -> s{_sloName = a})
+
+-- | A calendar period, semantically \"since the start of the current \". At
+-- this time, only DAY, WEEK, FORTNIGHT, and MONTH are supported.
+sloCalendarPeriod :: Lens' ServiceLevelObjective (Maybe ServiceLevelObjectiveCalendarPeriod)
+sloCalendarPeriod
+  = lens _sloCalendarPeriod
+      (\ s a -> s{_sloCalendarPeriod = a})
+
+-- | The definition of good service, used to measure and calculate the
+-- quality of the Service\'s performance with respect to a single aspect of
+-- service quality.
+sloServiceLevelIndicator :: Lens' ServiceLevelObjective (Maybe ServiceLevelIndicator)
+sloServiceLevelIndicator
+  = lens _sloServiceLevelIndicator
+      (\ s a -> s{_sloServiceLevelIndicator = a})
+
+-- | The fraction of service that must be good in order for this objective to
+-- be met. 0 \< goal \<= 0.999.
+sloGoal :: Lens' ServiceLevelObjective (Maybe Double)
+sloGoal
+  = lens _sloGoal (\ s a -> s{_sloGoal = a}) .
+      mapping _Coerce
+
+-- | Name used for UI elements listing this SLO.
+sloDisplayName :: Lens' ServiceLevelObjective (Maybe Text)
+sloDisplayName
+  = lens _sloDisplayName
+      (\ s a -> s{_sloDisplayName = a})
+
+-- | A rolling time period, semantically \"in the past \". Must be an integer
+-- multiple of 1 day no larger than 30 days.
+sloRollingPeriod :: Lens' ServiceLevelObjective (Maybe Scientific)
+sloRollingPeriod
+  = lens _sloRollingPeriod
+      (\ s a -> s{_sloRollingPeriod = a})
+      . mapping _GDuration
+
+instance FromJSON ServiceLevelObjective where
+        parseJSON
+          = withObject "ServiceLevelObjective"
+              (\ o ->
+                 ServiceLevelObjective' <$>
+                   (o .:? "userLabels") <*> (o .:? "name") <*>
+                     (o .:? "calendarPeriod")
+                     <*> (o .:? "serviceLevelIndicator")
+                     <*> (o .:? "goal")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "rollingPeriod"))
+
+instance ToJSON ServiceLevelObjective where
+        toJSON ServiceLevelObjective'{..}
+          = object
+              (catMaybes
+                 [("userLabels" .=) <$> _sloUserLabels,
+                  ("name" .=) <$> _sloName,
+                  ("calendarPeriod" .=) <$> _sloCalendarPeriod,
+                  ("serviceLevelIndicator" .=) <$>
+                    _sloServiceLevelIndicator,
+                  ("goal" .=) <$> _sloGoal,
+                  ("displayName" .=) <$> _sloDisplayName,
+                  ("rollingPeriod" .=) <$> _sloRollingPeriod])
+
 -- | The ListNotificationChannels response.
 --
 -- /See:/ 'listNotificationChannelsResponse' smart constructor.
 data ListNotificationChannelsResponse =
   ListNotificationChannelsResponse'
-    { _lncrNextPageToken        :: !(Maybe Text)
+    { _lncrNextPageToken :: !(Maybe Text)
     , _lncrNotificationChannels :: !(Maybe [NotificationChannel])
+    , _lncrTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -238,11 +464,16 @@ data ListNotificationChannelsResponse =
 -- * 'lncrNextPageToken'
 --
 -- * 'lncrNotificationChannels'
+--
+-- * 'lncrTotalSize'
 listNotificationChannelsResponse
     :: ListNotificationChannelsResponse
 listNotificationChannelsResponse =
   ListNotificationChannelsResponse'
-    {_lncrNextPageToken = Nothing, _lncrNotificationChannels = Nothing}
+    { _lncrNextPageToken = Nothing
+    , _lncrNotificationChannels = Nothing
+    , _lncrTotalSize = Nothing
+    }
 
 
 -- | If not empty, indicates that there may be more results that match the
@@ -262,6 +493,15 @@ lncrNotificationChannels
       . _Default
       . _Coerce
 
+-- | The total number of notification channels in all pages. This number is
+-- only an estimate, and may change in subsequent pages.
+-- https:\/\/aip.dev\/158
+lncrTotalSize :: Lens' ListNotificationChannelsResponse (Maybe Int32)
+lncrTotalSize
+  = lens _lncrTotalSize
+      (\ s a -> s{_lncrTotalSize = a})
+      . mapping _Coerce
+
 instance FromJSON ListNotificationChannelsResponse
          where
         parseJSON
@@ -269,7 +509,8 @@ instance FromJSON ListNotificationChannelsResponse
               (\ o ->
                  ListNotificationChannelsResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "notificationChannels" .!= mempty))
+                     (o .:? "notificationChannels" .!= mempty)
+                     <*> (o .:? "totalSize"))
 
 instance ToJSON ListNotificationChannelsResponse
          where
@@ -278,16 +519,18 @@ instance ToJSON ListNotificationChannelsResponse
               (catMaybes
                  [("nextPageToken" .=) <$> _lncrNextPageToken,
                   ("notificationChannels" .=) <$>
-                    _lncrNotificationChannels])
+                    _lncrNotificationChannels,
+                  ("totalSize" .=) <$> _lncrTotalSize])
 
 -- | The ListTimeSeries response.
 --
 -- /See:/ 'listTimeSeriesResponse' smart constructor.
 data ListTimeSeriesResponse =
   ListTimeSeriesResponse'
-    { _ltsrNextPageToken   :: !(Maybe Text)
+    { _ltsrNextPageToken :: !(Maybe Text)
     , _ltsrExecutionErrors :: !(Maybe [Status])
-    , _ltsrTimeSeries      :: !(Maybe [TimeSeries])
+    , _ltsrUnit :: !(Maybe Text)
+    , _ltsrTimeSeries :: !(Maybe [TimeSeries])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -300,6 +543,8 @@ data ListTimeSeriesResponse =
 --
 -- * 'ltsrExecutionErrors'
 --
+-- * 'ltsrUnit'
+--
 -- * 'ltsrTimeSeries'
 listTimeSeriesResponse
     :: ListTimeSeriesResponse
@@ -307,13 +552,14 @@ listTimeSeriesResponse =
   ListTimeSeriesResponse'
     { _ltsrNextPageToken = Nothing
     , _ltsrExecutionErrors = Nothing
+    , _ltsrUnit = Nothing
     , _ltsrTimeSeries = Nothing
     }
 
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as pageToken in the next call to this method.
+-- as page_token in the next call to this method.
 ltsrNextPageToken :: Lens' ListTimeSeriesResponse (Maybe Text)
 ltsrNextPageToken
   = lens _ltsrNextPageToken
@@ -327,6 +573,14 @@ ltsrExecutionErrors
       (\ s a -> s{_ltsrExecutionErrors = a})
       . _Default
       . _Coerce
+
+-- | The unit in which all time_series point values are reported. unit
+-- follows the UCUM format for units as seen in
+-- https:\/\/unitsofmeasure.org\/ucum.html. If different time_series have
+-- different units (for example, because they come from different metric
+-- types, or a unit is absent), then unit will be \"{not_a_unit}\".
+ltsrUnit :: Lens' ListTimeSeriesResponse (Maybe Text)
+ltsrUnit = lens _ltsrUnit (\ s a -> s{_ltsrUnit = a})
 
 -- | One or more time series that match the filter included in the request.
 ltsrTimeSeries :: Lens' ListTimeSeriesResponse [TimeSeries]
@@ -343,6 +597,7 @@ instance FromJSON ListTimeSeriesResponse where
                  ListTimeSeriesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "executionErrors" .!= mempty)
+                     <*> (o .:? "unit")
                      <*> (o .:? "timeSeries" .!= mempty))
 
 instance ToJSON ListTimeSeriesResponse where
@@ -351,6 +606,7 @@ instance ToJSON ListTimeSeriesResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _ltsrNextPageToken,
                   ("executionErrors" .=) <$> _ltsrExecutionErrors,
+                  ("unit" .=) <$> _ltsrUnit,
                   ("timeSeries" .=) <$> _ltsrTimeSeries])
 
 -- | The GetNotificationChannelVerificationCode request.
@@ -358,7 +614,7 @@ instance ToJSON ListTimeSeriesResponse where
 -- /See:/ 'getNotificationChannelVerificationCodeResponse' smart constructor.
 data GetNotificationChannelVerificationCodeResponse =
   GetNotificationChannelVerificationCodeResponse'
-    { _gncvcrCode       :: !(Maybe Text)
+    { _gncvcrCode :: !(Maybe Text)
     , _gncvcrExpireTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -415,12 +671,179 @@ instance ToJSON
                  [("code" .=) <$> _gncvcrCode,
                   ("expireTime" .=) <$> _gncvcrExpireTime])
 
+-- | Configuration for how to query telemetry on a Service.
+--
+-- /See:/ 'telemetry' smart constructor.
+newtype Telemetry =
+  Telemetry'
+    { _tResourceName :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Telemetry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tResourceName'
+telemetry
+    :: Telemetry
+telemetry = Telemetry' {_tResourceName = Nothing}
+
+
+-- | The full name of the resource that defines this service. Formatted as
+-- described in https:\/\/cloud.google.com\/apis\/design\/resource_names.
+tResourceName :: Lens' Telemetry (Maybe Text)
+tResourceName
+  = lens _tResourceName
+      (\ s a -> s{_tResourceName = a})
+
+instance FromJSON Telemetry where
+        parseJSON
+          = withObject "Telemetry"
+              (\ o -> Telemetry' <$> (o .:? "resourceName"))
+
+instance ToJSON Telemetry where
+        toJSON Telemetry'{..}
+          = object
+              (catMaybes [("resourceName" .=) <$> _tResourceName])
+
+-- | A condition type that allows alert policies to be defined using
+-- Monitoring Query Language (https:\/\/cloud.google.com\/monitoring\/mql).
+--
+-- /See:/ 'monitoringQueryLanguageCondition' smart constructor.
+data MonitoringQueryLanguageCondition =
+  MonitoringQueryLanguageCondition'
+    { _mqlcQuery :: !(Maybe Text)
+    , _mqlcTrigger :: !(Maybe Trigger)
+    , _mqlcDuration :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MonitoringQueryLanguageCondition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mqlcQuery'
+--
+-- * 'mqlcTrigger'
+--
+-- * 'mqlcDuration'
+monitoringQueryLanguageCondition
+    :: MonitoringQueryLanguageCondition
+monitoringQueryLanguageCondition =
+  MonitoringQueryLanguageCondition'
+    {_mqlcQuery = Nothing, _mqlcTrigger = Nothing, _mqlcDuration = Nothing}
+
+
+-- | Monitoring Query Language (https:\/\/cloud.google.com\/monitoring\/mql)
+-- query that outputs a boolean stream.
+mqlcQuery :: Lens' MonitoringQueryLanguageCondition (Maybe Text)
+mqlcQuery
+  = lens _mqlcQuery (\ s a -> s{_mqlcQuery = a})
+
+-- | The number\/percent of time series for which the comparison must hold in
+-- order for the condition to trigger. If unspecified, then the condition
+-- will trigger if the comparison is true for any of the time series that
+-- have been identified by filter and aggregations, or by the ratio, if
+-- denominator_filter and denominator_aggregations are specified.
+mqlcTrigger :: Lens' MonitoringQueryLanguageCondition (Maybe Trigger)
+mqlcTrigger
+  = lens _mqlcTrigger (\ s a -> s{_mqlcTrigger = a})
+
+-- | The amount of time that a time series must violate the threshold to be
+-- considered failing. Currently, only values that are a multiple of a
+-- minute--e.g., 0, 60, 120, or 300 seconds--are supported. If an invalid
+-- value is given, an error will be returned. When choosing a duration, it
+-- is useful to keep in mind the frequency of the underlying time series
+-- data (which may also be affected by any alignments specified in the
+-- aggregations field); a good duration is long enough so that a single
+-- outlier does not generate spurious alerts, but short enough that
+-- unhealthy states are detected and alerted on quickly.
+mqlcDuration :: Lens' MonitoringQueryLanguageCondition (Maybe Scientific)
+mqlcDuration
+  = lens _mqlcDuration (\ s a -> s{_mqlcDuration = a})
+      . mapping _GDuration
+
+instance FromJSON MonitoringQueryLanguageCondition
+         where
+        parseJSON
+          = withObject "MonitoringQueryLanguageCondition"
+              (\ o ->
+                 MonitoringQueryLanguageCondition' <$>
+                   (o .:? "query") <*> (o .:? "trigger") <*>
+                     (o .:? "duration"))
+
+instance ToJSON MonitoringQueryLanguageCondition
+         where
+        toJSON MonitoringQueryLanguageCondition'{..}
+          = object
+              (catMaybes
+                 [("query" .=) <$> _mqlcQuery,
+                  ("trigger" .=) <$> _mqlcTrigger,
+                  ("duration" .=) <$> _mqlcDuration])
+
+-- | The ListServices response.
+--
+-- /See:/ 'listServicesResponse' smart constructor.
+data ListServicesResponse =
+  ListServicesResponse'
+    { _lsrNextPageToken :: !(Maybe Text)
+    , _lsrServices :: !(Maybe [Service])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrNextPageToken'
+--
+-- * 'lsrServices'
+listServicesResponse
+    :: ListServicesResponse
+listServicesResponse =
+  ListServicesResponse' {_lsrNextPageToken = Nothing, _lsrServices = Nothing}
+
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as page_token in the next call to this method.
+lsrNextPageToken :: Lens' ListServicesResponse (Maybe Text)
+lsrNextPageToken
+  = lens _lsrNextPageToken
+      (\ s a -> s{_lsrNextPageToken = a})
+
+-- | The Services matching the specified filter.
+lsrServices :: Lens' ListServicesResponse [Service]
+lsrServices
+  = lens _lsrServices (\ s a -> s{_lsrServices = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListServicesResponse where
+        parseJSON
+          = withObject "ListServicesResponse"
+              (\ o ->
+                 ListServicesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "services" .!= mempty))
+
+instance ToJSON ListServicesResponse where
+        toJSON ListServicesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("services" .=) <$> _lsrServices])
+
 -- | The ListNotificationChannelDescriptors response.
 --
 -- /See:/ 'listNotificationChannelDescriptorsResponse' smart constructor.
 data ListNotificationChannelDescriptorsResponse =
   ListNotificationChannelDescriptorsResponse'
-    { _lncdrNextPageToken      :: !(Maybe Text)
+    { _lncdrNextPageToken :: !(Maybe Text)
     , _lncdrChannelDescriptors :: !(Maybe [NotificationChannelDescriptor])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -480,6 +903,91 @@ instance ToJSON
                   ("channelDescriptors" .=) <$>
                     _lncdrChannelDescriptors])
 
+-- | A TimeSeriesRatio specifies two TimeSeries to use for computing the
+-- good_service \/ total_service ratio. The specified TimeSeries must have
+-- ValueType = DOUBLE or ValueType = INT64 and must have MetricKind = DELTA
+-- or MetricKind = CUMULATIVE. The TimeSeriesRatio must specify exactly two
+-- of good, bad, and total, and the relationship good_service + bad_service
+-- = total_service will be assumed.
+--
+-- /See:/ 'timeSeriesRatio' smart constructor.
+data TimeSeriesRatio =
+  TimeSeriesRatio'
+    { _tsrTotalServiceFilter :: !(Maybe Text)
+    , _tsrGoodServiceFilter :: !(Maybe Text)
+    , _tsrBadServiceFilter :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeSeriesRatio' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsrTotalServiceFilter'
+--
+-- * 'tsrGoodServiceFilter'
+--
+-- * 'tsrBadServiceFilter'
+timeSeriesRatio
+    :: TimeSeriesRatio
+timeSeriesRatio =
+  TimeSeriesRatio'
+    { _tsrTotalServiceFilter = Nothing
+    , _tsrGoodServiceFilter = Nothing
+    , _tsrBadServiceFilter = Nothing
+    }
+
+
+-- | A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifying a
+-- TimeSeries quantifying total demanded service. Must have ValueType =
+-- DOUBLE or ValueType = INT64 and must have MetricKind = DELTA or
+-- MetricKind = CUMULATIVE.
+tsrTotalServiceFilter :: Lens' TimeSeriesRatio (Maybe Text)
+tsrTotalServiceFilter
+  = lens _tsrTotalServiceFilter
+      (\ s a -> s{_tsrTotalServiceFilter = a})
+
+-- | A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifying a
+-- TimeSeries quantifying good service provided. Must have ValueType =
+-- DOUBLE or ValueType = INT64 and must have MetricKind = DELTA or
+-- MetricKind = CUMULATIVE.
+tsrGoodServiceFilter :: Lens' TimeSeriesRatio (Maybe Text)
+tsrGoodServiceFilter
+  = lens _tsrGoodServiceFilter
+      (\ s a -> s{_tsrGoodServiceFilter = a})
+
+-- | A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifying a
+-- TimeSeries quantifying bad service, either demanded service that was not
+-- provided or demanded service that was of inadequate quality. Must have
+-- ValueType = DOUBLE or ValueType = INT64 and must have MetricKind = DELTA
+-- or MetricKind = CUMULATIVE.
+tsrBadServiceFilter :: Lens' TimeSeriesRatio (Maybe Text)
+tsrBadServiceFilter
+  = lens _tsrBadServiceFilter
+      (\ s a -> s{_tsrBadServiceFilter = a})
+
+instance FromJSON TimeSeriesRatio where
+        parseJSON
+          = withObject "TimeSeriesRatio"
+              (\ o ->
+                 TimeSeriesRatio' <$>
+                   (o .:? "totalServiceFilter") <*>
+                     (o .:? "goodServiceFilter")
+                     <*> (o .:? "badServiceFilter"))
+
+instance ToJSON TimeSeriesRatio where
+        toJSON TimeSeriesRatio'{..}
+          = object
+              (catMaybes
+                 [("totalServiceFilter" .=) <$>
+                    _tsrTotalServiceFilter,
+                  ("goodServiceFilter" .=) <$> _tsrGoodServiceFilter,
+                  ("badServiceFilter" .=) <$> _tsrBadServiceFilter])
+
 -- | Defines a metric type and its schema. Once a metric descriptor is
 -- created, deleting or altering it stops data collection and makes the
 -- metric type\'s existing data unusable.
@@ -487,15 +995,17 @@ instance ToJSON
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor =
   MetricDescriptor'
-    { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
-    , _mdName        :: !(Maybe Text)
-    , _mdMetadata    :: !(Maybe MetricDescriptorMetadata)
+    { _mdMonitoredResourceTypes :: !(Maybe [Text])
+    , _mdMetricKind :: !(Maybe MetricDescriptorMetricKind)
+    , _mdName :: !(Maybe Text)
+    , _mdMetadata :: !(Maybe MetricDescriptorMetadata)
     , _mdDisplayName :: !(Maybe Text)
-    , _mdLabels      :: !(Maybe [LabelDescriptor])
-    , _mdType        :: !(Maybe Text)
-    , _mdValueType   :: !(Maybe MetricDescriptorValueType)
+    , _mdLabels :: !(Maybe [LabelDescriptor])
+    , _mdType :: !(Maybe Text)
+    , _mdValueType :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
-    , _mdUnit        :: !(Maybe Text)
+    , _mdUnit :: !(Maybe Text)
+    , _mdLaunchStage :: !(Maybe MetricDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -503,6 +1013,8 @@ data MetricDescriptor =
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdMonitoredResourceTypes'
 --
 -- * 'mdMetricKind'
 --
@@ -521,11 +1033,14 @@ data MetricDescriptor =
 -- * 'mdDescription'
 --
 -- * 'mdUnit'
+--
+-- * 'mdLaunchStage'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
   MetricDescriptor'
-    { _mdMetricKind = Nothing
+    { _mdMonitoredResourceTypes = Nothing
+    , _mdMetricKind = Nothing
     , _mdName = Nothing
     , _mdMetadata = Nothing
     , _mdDisplayName = Nothing
@@ -534,8 +1049,20 @@ metricDescriptor =
     , _mdValueType = Nothing
     , _mdDescription = Nothing
     , _mdUnit = Nothing
+    , _mdLaunchStage = Nothing
     }
 
+
+-- | Read-only. If present, then a time series, which is identified partially
+-- by a metric type and a MonitoredResourceDescriptor, that is associated
+-- with this metric type can only be associated with one of the monitored
+-- resource types listed here.
+mdMonitoredResourceTypes :: Lens' MetricDescriptor [Text]
+mdMonitoredResourceTypes
+  = lens _mdMonitoredResourceTypes
+      (\ s a -> s{_mdMonitoredResourceTypes = a})
+      . _Default
+      . _Coerce
 
 -- | Whether the metric records instantaneous values, changes to a value,
 -- etc. Some combinations of metric_kind and value_type might not be
@@ -597,56 +1124,146 @@ mdDescription
   = lens _mdDescription
       (\ s a -> s{_mdDescription = a})
 
--- | The unit in which the metric value is reported. It is only applicable if
--- the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units
--- are a subset of The Unified Code for Units of Measure
--- (http:\/\/unitsofmeasure.org\/ucum.html) standard:Basic units (UNIT) bit
--- bit By byte s second min minute h hour d dayPrefixes (PREFIX) k kilo
--- (10**3) M mega (10**6) G giga (10**9) T tera (10**12) P peta (10**15) E
--- exa (10**18) Z zetta (10**21) Y yotta (10**24) m milli (10**-3) u micro
--- (10**-6) n nano (10**-9) p pico (10**-12) f femto (10**-15) a atto
--- (10**-18) z zepto (10**-21) y yocto (10**-24) Ki kibi (2**10) Mi mebi
--- (2**20) Gi gibi (2**30) Ti tebi (2**40)GrammarThe grammar also includes
--- these connectors: \/ division (as an infix operator, e.g. 1\/s). .
--- multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit
--- is as follows: Expression = Component { \".\" Component } { \"\/\"
--- Component } ; Component = ( [ PREFIX ] UNIT | \"%\" ) [ Annotation ] |
--- Annotation | \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: Annotation
--- is just a comment if it follows a UNIT and is equivalent to 1 if it is
--- used alone. For examples, {requests}\/s == 1\/s, By{transmitted}\/s ==
--- By\/s. NAME is a sequence of non-blank printable ASCII characters not
--- containing \'{\' or \'}\'. 1 represents dimensionless value 1, such as
--- in 1\/s. % represents dimensionless value 1\/100, and annotates values
--- giving a percentage.
+-- | The units in which the metric value is reported. It is only applicable
+-- if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines
+-- the representation of the stored metric values.Different systems might
+-- scale the values to be more easily displayed (so a value of 0.02kBy
+-- might be displayed as 20By, and a value of 3523kBy might be displayed as
+-- 3.5MBy). However, if the unit is kBy, then the value of the metric is
+-- always in thousands of bytes, no matter how it might be displayed.If you
+-- want a custom metric to record the exact number of CPU-seconds used by a
+-- job, you can create an INT64 CUMULATIVE metric whose unit is s{CPU} (or
+-- equivalently 1s{CPU} or just s). If the job uses 12,005 CPU-seconds,
+-- then the value is written as 12005.Alternatively, if you want a custom
+-- metric to record data in a more granular way, you can create a DOUBLE
+-- CUMULATIVE metric whose unit is ks{CPU}, and then write the value 12.005
+-- (which is 12005\/1000), or use Kis{CPU} and write 11.723 (which is
+-- 12005\/1024).The supported units are a subset of The Unified Code for
+-- Units of Measure (https:\/\/unitsofmeasure.org\/ucum.html)
+-- standard:Basic units (UNIT) bit bit By byte s second min minute h hour d
+-- day 1 dimensionlessPrefixes (PREFIX) k kilo (10^3) M mega (10^6) G giga
+-- (10^9) T tera (10^12) P peta (10^15) E exa (10^18) Z zetta (10^21) Y
+-- yotta (10^24) m milli (10^-3) u micro (10^-6) n nano (10^-9) p pico
+-- (10^-12) f femto (10^-15) a atto (10^-18) z zepto (10^-21) y yocto
+-- (10^-24) Ki kibi (2^10) Mi mebi (2^20) Gi gibi (2^30) Ti tebi (2^40) Pi
+-- pebi (2^50)GrammarThe grammar also includes these connectors: \/
+-- division or ratio (as an infix operator). For examples, kBy\/{email} or
+-- MiBy\/10ms (although you should almost never have \/s in a metric unit;
+-- rates should always be computed at query time from the underlying
+-- cumulative or delta value). . multiplication or composition (as an infix
+-- operator). For examples, GBy.d or k{watt}.h.The grammar for a unit is as
+-- follows: Expression = Component { \".\" Component } { \"\/\" Component }
+-- ; Component = ( [ PREFIX ] UNIT | \"%\" ) [ Annotation ] | Annotation |
+-- \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: Annotation is just a
+-- comment if it follows a UNIT. If the annotation is used alone, then the
+-- unit is equivalent to 1. For examples, {request}\/s == 1\/s,
+-- By{transmitted}\/s == By\/s. NAME is a sequence of non-blank printable
+-- ASCII characters not containing { or }. 1 represents a unitary
+-- dimensionless unit
+-- (https:\/\/en.wikipedia.org\/wiki\/Dimensionless_quantity) of 1, such as
+-- in 1\/s. It is typically used when none of the basic units are
+-- appropriate. For example, \"new users per day\" can be represented as
+-- 1\/d or {new-users}\/d (and a metric value 5 would mean \"5 new users).
+-- Alternatively, \"thousands of page views per day\" would be represented
+-- as 1000\/d or k1\/d or k{page_views}\/d (and a metric value of 5.3 would
+-- mean \"5300 page views per day\"). % represents dimensionless value of
+-- 1\/100, and annotates values giving a percentage (so the metric values
+-- are typically in the range of 0..100, and a metric value 3 means \"3
+-- percent\"). 10^2.% indicates a metric contains a ratio, typically in the
+-- range 0..1, that will be multiplied by 100 and displayed as a percentage
+-- (so a metric value 0.03 means \"3 percent\").
 mdUnit :: Lens' MetricDescriptor (Maybe Text)
 mdUnit = lens _mdUnit (\ s a -> s{_mdUnit = a})
+
+-- | Optional. The launch stage of the metric definition.
+mdLaunchStage :: Lens' MetricDescriptor (Maybe MetricDescriptorLaunchStage)
+mdLaunchStage
+  = lens _mdLaunchStage
+      (\ s a -> s{_mdLaunchStage = a})
 
 instance FromJSON MetricDescriptor where
         parseJSON
           = withObject "MetricDescriptor"
               (\ o ->
                  MetricDescriptor' <$>
-                   (o .:? "metricKind") <*> (o .:? "name") <*>
-                     (o .:? "metadata")
+                   (o .:? "monitoredResourceTypes" .!= mempty) <*>
+                     (o .:? "metricKind")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata")
                      <*> (o .:? "displayName")
                      <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
                      <*> (o .:? "valueType")
                      <*> (o .:? "description")
-                     <*> (o .:? "unit"))
+                     <*> (o .:? "unit")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON MetricDescriptor where
         toJSON MetricDescriptor'{..}
           = object
               (catMaybes
-                 [("metricKind" .=) <$> _mdMetricKind,
+                 [("monitoredResourceTypes" .=) <$>
+                    _mdMonitoredResourceTypes,
+                  ("metricKind" .=) <$> _mdMetricKind,
                   ("name" .=) <$> _mdName,
                   ("metadata" .=) <$> _mdMetadata,
                   ("displayName" .=) <$> _mdDisplayName,
                   ("labels" .=) <$> _mdLabels, ("type" .=) <$> _mdType,
                   ("valueType" .=) <$> _mdValueType,
                   ("description" .=) <$> _mdDescription,
-                  ("unit" .=) <$> _mdUnit])
+                  ("unit" .=) <$> _mdUnit,
+                  ("launchStage" .=) <$> _mdLaunchStage])
+
+-- | Range of numerical values within min and max. If the open range \"\<
+-- range.max\" is desired, set range.min = -infinity. If the open range
+-- \">= range.min\" is desired, set range.max = infinity.
+--
+-- /See:/ 'googleMonitoringV3Range' smart constructor.
+data GoogleMonitoringV3Range =
+  GoogleMonitoringV3Range'
+    { _gmvrMax :: !(Maybe (Textual Double))
+    , _gmvrMin :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleMonitoringV3Range' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gmvrMax'
+--
+-- * 'gmvrMin'
+googleMonitoringV3Range
+    :: GoogleMonitoringV3Range
+googleMonitoringV3Range =
+  GoogleMonitoringV3Range' {_gmvrMax = Nothing, _gmvrMin = Nothing}
+
+
+-- | Range maximum.
+gmvrMax :: Lens' GoogleMonitoringV3Range (Maybe Double)
+gmvrMax
+  = lens _gmvrMax (\ s a -> s{_gmvrMax = a}) .
+      mapping _Coerce
+
+-- | Range minimum.
+gmvrMin :: Lens' GoogleMonitoringV3Range (Maybe Double)
+gmvrMin
+  = lens _gmvrMin (\ s a -> s{_gmvrMin = a}) .
+      mapping _Coerce
+
+instance FromJSON GoogleMonitoringV3Range where
+        parseJSON
+          = withObject "GoogleMonitoringV3Range"
+              (\ o ->
+                 GoogleMonitoringV3Range' <$>
+                   (o .:? "max") <*> (o .:? "min"))
+
+instance ToJSON GoogleMonitoringV3Range where
+        toJSON GoogleMonitoringV3Range'{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _gmvrMax, ("min" .=) <$> _gmvrMin])
 
 -- | The description of a dynamic collection of monitored resources. Each
 -- group has a filter that is matched against monitored resources and their
@@ -674,11 +1291,11 @@ instance ToJSON MetricDescriptor where
 -- /See:/ 'group'' smart constructor.
 data Group =
   Group'
-    { _gName        :: !(Maybe Text)
+    { _gName :: !(Maybe Text)
     , _gDisplayName :: !(Maybe Text)
-    , _gFilter      :: !(Maybe Text)
-    , _gIsCluster   :: !(Maybe Bool)
-    , _gParentName  :: !(Maybe Text)
+    , _gFilter :: !(Maybe Text)
+    , _gIsCluster :: !(Maybe Bool)
+    , _gParentName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -708,10 +1325,10 @@ group' =
     }
 
 
--- | Output only. The name of this group. The format is
--- \"projects\/{project_id_or_number}\/groups\/{group_id}\". When creating
--- a group, this field is ignored and a new name is created consisting of
--- the project specified in the call to CreateGroup and a unique {group_id}
+-- | Output only. The name of this group. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID] When creating a
+-- group, this field is ignored and a new name is created consisting of the
+-- project specified in the call to CreateGroup and a unique [GROUP_ID]
 -- that is generated automatically.
 gName :: Lens' Group (Maybe Text)
 gName = lens _gName (\ s a -> s{_gName = a})
@@ -732,9 +1349,9 @@ gIsCluster :: Lens' Group (Maybe Bool)
 gIsCluster
   = lens _gIsCluster (\ s a -> s{_gIsCluster = a})
 
--- | The name of the group\'s parent, if it has one. The format is
--- \"projects\/{project_id_or_number}\/groups\/{group_id}\". For groups
--- with no parent, parentName is the empty string, \"\".
+-- | The name of the group\'s parent, if it has one. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID] For groups with no
+-- parent, parent_name is the empty string, \"\".
 gParentName :: Lens' Group (Maybe Text)
 gParentName
   = lens _gParentName (\ s a -> s{_gParentName = a})
@@ -764,11 +1381,11 @@ instance ToJSON Group where
 -- /See:/ 'typedValue' smart constructor.
 data TypedValue =
   TypedValue'
-    { _tvBoolValue         :: !(Maybe Bool)
-    , _tvDoubleValue       :: !(Maybe (Textual Double))
-    , _tvStringValue       :: !(Maybe Text)
+    { _tvBoolValue :: !(Maybe Bool)
+    , _tvDoubleValue :: !(Maybe (Textual Double))
+    , _tvStringValue :: !(Maybe Text)
     , _tvDistributionValue :: !(Maybe Distribution)
-    , _tvInt64Value        :: !(Maybe (Textual Int64))
+    , _tvInt64Value :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -897,7 +1514,7 @@ instance ToJSON MonitoredResourceLabels where
 -- /See:/ 'monitoredResourceMetadata' smart constructor.
 data MonitoredResourceMetadata =
   MonitoredResourceMetadata'
-    { _mrmUserLabels   :: !(Maybe MonitoredResourceMetadataUserLabels)
+    { _mrmUserLabels :: !(Maybe MonitoredResourceMetadataUserLabels)
     , _mrmSystemLabels :: !(Maybe MonitoredResourceMetadataSystemLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1031,9 +1648,10 @@ instance ToJSON SourceContext where
           = object
               (catMaybes [("fileName" .=) <$> _scFileName])
 
--- | A type of authentication to perform against the specified resource or
--- URL that uses username and password. Currently, only Basic
--- authentication is supported in Uptime Monitoring.
+-- | The authentication parameters to provide to the specified resource or
+-- URL that requires a username and password. Currently, only Basic HTTP
+-- authentication (https:\/\/tools.ietf.org\/html\/rfc7617) is supported in
+-- Uptime checks.
 --
 -- /See:/ 'basicAuthentication' smart constructor.
 data BasicAuthentication =
@@ -1057,12 +1675,12 @@ basicAuthentication =
   BasicAuthentication' {_baUsername = Nothing, _baPassword = Nothing}
 
 
--- | The username to authenticate.
+-- | The username to use when authenticating with the HTTP server.
 baUsername :: Lens' BasicAuthentication (Maybe Text)
 baUsername
   = lens _baUsername (\ s a -> s{_baUsername = a})
 
--- | The password to authenticate.
+-- | The password to use when authenticating with the HTTP server.
 baPassword :: Lens' BasicAuthentication (Maybe Text)
 baPassword
   = lens _baPassword (\ s a -> s{_baPassword = a})
@@ -1098,12 +1716,12 @@ instance ToJSON BasicAuthentication where
 data Distribution =
   Distribution'
     { _dSumOfSquaredDeviation :: !(Maybe (Textual Double))
-    , _dMean                  :: !(Maybe (Textual Double))
-    , _dCount                 :: !(Maybe (Textual Int64))
-    , _dBucketCounts          :: !(Maybe [Textual Int64])
-    , _dExemplars             :: !(Maybe [Exemplar])
-    , _dRange                 :: !(Maybe Range)
-    , _dBucketOptions         :: !(Maybe BucketOptions)
+    , _dMean :: !(Maybe (Textual Double))
+    , _dCount :: !(Maybe (Textual Int64))
+    , _dBucketCounts :: !(Maybe [Textual Int64])
+    , _dExemplars :: !(Maybe [Exemplar])
+    , _dRange :: !(Maybe Range)
+    , _dBucketOptions :: !(Maybe BucketOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1141,7 +1759,7 @@ distribution =
 
 -- | The sum of squared deviations from the mean of the values in the
 -- population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth,
--- \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition
+-- \"The Art of Computer Programming\", Vol. 2, page 232, 3rd edition
 -- describes Welford\'s method for accumulating this sum in one pass.If
 -- count is zero then this field must be zero.
 dSumOfSquaredDeviation :: Lens' Distribution (Maybe Double)
@@ -1165,15 +1783,15 @@ dCount
   = lens _dCount (\ s a -> s{_dCount = a}) .
       mapping _Coerce
 
--- | Required in the Stackdriver Monitoring API v3. The values for each
--- bucket specified in bucket_options. The sum of the values in
--- bucketCounts must equal the value in the count field of the Distribution
--- object. The order of the bucket counts follows the numbering schemes
--- described for the three bucket types. The underflow bucket has number 0;
--- the finite buckets, if any, have numbers 1 through N-2; and the overflow
--- bucket has number N-1. The size of bucket_counts must not be greater
--- than N. If the size is less than N, then the remaining buckets are
--- assigned values of zero.
+-- | Required in the Cloud Monitoring API v3. The values for each bucket
+-- specified in bucket_options. The sum of the values in bucketCounts must
+-- equal the value in the count field of the Distribution object. The order
+-- of the bucket counts follows the numbering schemes described for the
+-- three bucket types. The underflow bucket has number 0; the finite
+-- buckets, if any, have numbers 1 through N-2; and the overflow bucket has
+-- number N-1. The size of bucket_counts must not be greater than N. If the
+-- size is less than N, then the remaining buckets are assigned values of
+-- zero.
 dBucketCounts :: Lens' Distribution [Int64]
 dBucketCounts
   = lens _dBucketCounts
@@ -1190,12 +1808,12 @@ dExemplars
 
 -- | If specified, contains the range of the population values. The field
 -- must not be present if the count is zero. This field is presently
--- ignored by the Stackdriver Monitoring API v3.
+-- ignored by the Cloud Monitoring API v3.
 dRange :: Lens' Distribution (Maybe Range)
 dRange = lens _dRange (\ s a -> s{_dRange = a})
 
--- | Required in the Stackdriver Monitoring API v3. Defines the histogram
--- bucket boundaries.
+-- | Required in the Cloud Monitoring API v3. Defines the histogram bucket
+-- boundaries.
 dBucketOptions :: Lens' Distribution (Maybe BucketOptions)
 dBucketOptions
   = lens _dBucketOptions
@@ -1230,16 +1848,16 @@ instance ToJSON Distribution where
 -- /See:/ 'field' smart constructor.
 data Field =
   Field'
-    { _fKind         :: !(Maybe FieldKind)
-    , _fOneofIndex   :: !(Maybe (Textual Int32))
-    , _fName         :: !(Maybe Text)
-    , _fJSONName     :: !(Maybe Text)
-    , _fCardinality  :: !(Maybe FieldCardinality)
-    , _fOptions      :: !(Maybe [Option])
-    , _fPacked       :: !(Maybe Bool)
+    { _fKind :: !(Maybe FieldKind)
+    , _fOneofIndex :: !(Maybe (Textual Int32))
+    , _fName :: !(Maybe Text)
+    , _fJSONName :: !(Maybe Text)
+    , _fCardinality :: !(Maybe FieldCardinality)
+    , _fOptions :: !(Maybe [Option])
+    , _fPacked :: !(Maybe Bool)
     , _fDefaultValue :: !(Maybe Text)
-    , _fNumber       :: !(Maybe (Textual Int32))
-    , _fTypeURL      :: !(Maybe Text)
+    , _fNumber :: !(Maybe (Textual Int32))
+    , _fTypeURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1404,6 +2022,225 @@ instance FromJSON ExemplarAttachmentsItem where
 instance ToJSON ExemplarAttachmentsItem where
         toJSON = toJSON . _eaiAddtional
 
+-- | A Service is a discrete, autonomous, and network-accessible unit,
+-- designed to solve an individual concern (Wikipedia
+-- (https:\/\/en.wikipedia.org\/wiki\/Service-orientation)). In Cloud
+-- Monitoring, a Service acts as the root resource under which operational
+-- aspects of the service are accessible.
+--
+-- /See:/ 'service' smart constructor.
+data Service =
+  Service'
+    { _sTelemetry :: !(Maybe Telemetry)
+    , _sCustom :: !(Maybe Custom)
+    , _sUserLabels :: !(Maybe ServiceUserLabels)
+    , _sIstioCanonicalService :: !(Maybe IstioCanonicalService)
+    , _sName :: !(Maybe Text)
+    , _sAppEngine :: !(Maybe AppEngine)
+    , _sClusterIstio :: !(Maybe ClusterIstio)
+    , _sDisplayName :: !(Maybe Text)
+    , _sMeshIstio :: !(Maybe MeshIstio)
+    , _sCloudEndpoints :: !(Maybe CloudEndpoints)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Service' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sTelemetry'
+--
+-- * 'sCustom'
+--
+-- * 'sUserLabels'
+--
+-- * 'sIstioCanonicalService'
+--
+-- * 'sName'
+--
+-- * 'sAppEngine'
+--
+-- * 'sClusterIstio'
+--
+-- * 'sDisplayName'
+--
+-- * 'sMeshIstio'
+--
+-- * 'sCloudEndpoints'
+service
+    :: Service
+service =
+  Service'
+    { _sTelemetry = Nothing
+    , _sCustom = Nothing
+    , _sUserLabels = Nothing
+    , _sIstioCanonicalService = Nothing
+    , _sName = Nothing
+    , _sAppEngine = Nothing
+    , _sClusterIstio = Nothing
+    , _sDisplayName = Nothing
+    , _sMeshIstio = Nothing
+    , _sCloudEndpoints = Nothing
+    }
+
+
+-- | Configuration for how to query telemetry on a Service.
+sTelemetry :: Lens' Service (Maybe Telemetry)
+sTelemetry
+  = lens _sTelemetry (\ s a -> s{_sTelemetry = a})
+
+-- | Custom service type.
+sCustom :: Lens' Service (Maybe Custom)
+sCustom = lens _sCustom (\ s a -> s{_sCustom = a})
+
+-- | Labels which have been used to annotate the service. Label keys must
+-- start with a letter. Label keys and values may contain lowercase
+-- letters, numbers, underscores, and dashes. Label keys and values have a
+-- maximum length of 63 characters, and must be less than 128 bytes in
+-- size. Up to 64 label entries may be stored. For labels which do not have
+-- a semantic value, the empty string may be supplied for the label value.
+sUserLabels :: Lens' Service (Maybe ServiceUserLabels)
+sUserLabels
+  = lens _sUserLabels (\ s a -> s{_sUserLabels = a})
+
+-- | Type used for canonical services scoped to an Istio mesh. Metrics for
+-- Istio are documented here
+-- (https:\/\/istio.io\/latest\/docs\/reference\/config\/metrics\/)
+sIstioCanonicalService :: Lens' Service (Maybe IstioCanonicalService)
+sIstioCanonicalService
+  = lens _sIstioCanonicalService
+      (\ s a -> s{_sIstioCanonicalService = a})
+
+-- | Resource name for this Service. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/services\/[SERVICE_ID]
+sName :: Lens' Service (Maybe Text)
+sName = lens _sName (\ s a -> s{_sName = a})
+
+-- | Type used for App Engine services.
+sAppEngine :: Lens' Service (Maybe AppEngine)
+sAppEngine
+  = lens _sAppEngine (\ s a -> s{_sAppEngine = a})
+
+-- | Type used for Istio services that live in a Kubernetes cluster.
+sClusterIstio :: Lens' Service (Maybe ClusterIstio)
+sClusterIstio
+  = lens _sClusterIstio
+      (\ s a -> s{_sClusterIstio = a})
+
+-- | Name used for UI elements listing this Service.
+sDisplayName :: Lens' Service (Maybe Text)
+sDisplayName
+  = lens _sDisplayName (\ s a -> s{_sDisplayName = a})
+
+-- | Type used for Istio services scoped to an Istio mesh.
+sMeshIstio :: Lens' Service (Maybe MeshIstio)
+sMeshIstio
+  = lens _sMeshIstio (\ s a -> s{_sMeshIstio = a})
+
+-- | Type used for Cloud Endpoints services.
+sCloudEndpoints :: Lens' Service (Maybe CloudEndpoints)
+sCloudEndpoints
+  = lens _sCloudEndpoints
+      (\ s a -> s{_sCloudEndpoints = a})
+
+instance FromJSON Service where
+        parseJSON
+          = withObject "Service"
+              (\ o ->
+                 Service' <$>
+                   (o .:? "telemetry") <*> (o .:? "custom") <*>
+                     (o .:? "userLabels")
+                     <*> (o .:? "istioCanonicalService")
+                     <*> (o .:? "name")
+                     <*> (o .:? "appEngine")
+                     <*> (o .:? "clusterIstio")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "meshIstio")
+                     <*> (o .:? "cloudEndpoints"))
+
+instance ToJSON Service where
+        toJSON Service'{..}
+          = object
+              (catMaybes
+                 [("telemetry" .=) <$> _sTelemetry,
+                  ("custom" .=) <$> _sCustom,
+                  ("userLabels" .=) <$> _sUserLabels,
+                  ("istioCanonicalService" .=) <$>
+                    _sIstioCanonicalService,
+                  ("name" .=) <$> _sName,
+                  ("appEngine" .=) <$> _sAppEngine,
+                  ("clusterIstio" .=) <$> _sClusterIstio,
+                  ("displayName" .=) <$> _sDisplayName,
+                  ("meshIstio" .=) <$> _sMeshIstio,
+                  ("cloudEndpoints" .=) <$> _sCloudEndpoints])
+
+-- | The QueryTimeSeries request.
+--
+-- /See:/ 'queryTimeSeriesRequest' smart constructor.
+data QueryTimeSeriesRequest =
+  QueryTimeSeriesRequest'
+    { _qtsrQuery :: !(Maybe Text)
+    , _qtsrPageToken :: !(Maybe Text)
+    , _qtsrPageSize :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'QueryTimeSeriesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qtsrQuery'
+--
+-- * 'qtsrPageToken'
+--
+-- * 'qtsrPageSize'
+queryTimeSeriesRequest
+    :: QueryTimeSeriesRequest
+queryTimeSeriesRequest =
+  QueryTimeSeriesRequest'
+    {_qtsrQuery = Nothing, _qtsrPageToken = Nothing, _qtsrPageSize = Nothing}
+
+
+-- | Required. The query in the Monitoring Query Language
+-- (https:\/\/cloud.google.com\/monitoring\/mql\/reference) format. The
+-- default time zone is in UTC.
+qtsrQuery :: Lens' QueryTimeSeriesRequest (Maybe Text)
+qtsrQuery
+  = lens _qtsrQuery (\ s a -> s{_qtsrQuery = a})
+
+-- | If this field is not empty then it must contain the nextPageToken value
+-- returned by a previous call to this method. Using this field causes the
+-- method to return additional results from the previous method call.
+qtsrPageToken :: Lens' QueryTimeSeriesRequest (Maybe Text)
+qtsrPageToken
+  = lens _qtsrPageToken
+      (\ s a -> s{_qtsrPageToken = a})
+
+-- | A positive number that is the maximum number of time_series_data to
+-- return.
+qtsrPageSize :: Lens' QueryTimeSeriesRequest (Maybe Int32)
+qtsrPageSize
+  = lens _qtsrPageSize (\ s a -> s{_qtsrPageSize = a})
+      . mapping _Coerce
+
+instance FromJSON QueryTimeSeriesRequest where
+        parseJSON
+          = withObject "QueryTimeSeriesRequest"
+              (\ o ->
+                 QueryTimeSeriesRequest' <$>
+                   (o .:? "query") <*> (o .:? "pageToken") <*>
+                     (o .:? "pageSize"))
+
+instance ToJSON QueryTimeSeriesRequest where
+        toJSON QueryTimeSeriesRequest'{..}
+          = object
+              (catMaybes
+                 [("query" .=) <$> _qtsrQuery,
+                  ("pageToken" .=) <$> _qtsrPageToken,
+                  ("pageSize" .=) <$> _qtsrPageSize])
+
 -- | A description of a notification channel. The descriptor includes the
 -- properties of the channel and the set of labels or fields that must be
 -- specified to configure channels of a given type.
@@ -1411,12 +2248,12 @@ instance ToJSON ExemplarAttachmentsItem where
 -- /See:/ 'notificationChannelDescriptor' smart constructor.
 data NotificationChannelDescriptor =
   NotificationChannelDescriptor'
-    { _ncdName           :: !(Maybe Text)
-    , _ncdSupportedTiers :: !(Maybe [Text])
-    , _ncdDisplayName    :: !(Maybe Text)
-    , _ncdLabels         :: !(Maybe [LabelDescriptor])
-    , _ncdType           :: !(Maybe Text)
-    , _ncdDescription    :: !(Maybe Text)
+    { _ncdName :: !(Maybe Text)
+    , _ncdDisplayName :: !(Maybe Text)
+    , _ncdLabels :: !(Maybe [LabelDescriptor])
+    , _ncdType :: !(Maybe Text)
+    , _ncdDescription :: !(Maybe Text)
+    , _ncdLaunchStage :: !(Maybe NotificationChannelDescriptorLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1427,8 +2264,6 @@ data NotificationChannelDescriptor =
 --
 -- * 'ncdName'
 --
--- * 'ncdSupportedTiers'
---
 -- * 'ncdDisplayName'
 --
 -- * 'ncdLabels'
@@ -1436,33 +2271,26 @@ data NotificationChannelDescriptor =
 -- * 'ncdType'
 --
 -- * 'ncdDescription'
+--
+-- * 'ncdLaunchStage'
 notificationChannelDescriptor
     :: NotificationChannelDescriptor
 notificationChannelDescriptor =
   NotificationChannelDescriptor'
     { _ncdName = Nothing
-    , _ncdSupportedTiers = Nothing
     , _ncdDisplayName = Nothing
     , _ncdLabels = Nothing
     , _ncdType = Nothing
     , _ncdDescription = Nothing
+    , _ncdLaunchStage = Nothing
     }
 
 
--- | The full REST resource name for this descriptor. The syntax is:
--- projects\/[PROJECT_ID]\/notificationChannelDescriptors\/[TYPE] In the
--- above, [TYPE] is the value of the type field.
+-- | The full REST resource name for this descriptor. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/notificationChannelDescriptors\/[TYPE]
+-- In the above, [TYPE] is the value of the type field.
 ncdName :: Lens' NotificationChannelDescriptor (Maybe Text)
 ncdName = lens _ncdName (\ s a -> s{_ncdName = a})
-
--- | The tiers that support this notification channel; the project service
--- tier must be one of the supported_tiers.
-ncdSupportedTiers :: Lens' NotificationChannelDescriptor [Text]
-ncdSupportedTiers
-  = lens _ncdSupportedTiers
-      (\ s a -> s{_ncdSupportedTiers = a})
-      . _Default
-      . _Coerce
 
 -- | A human-readable name for the notification channel type. This form of
 -- the name is suitable for a user interface.
@@ -1480,7 +2308,9 @@ ncdLabels
       _Default
       . _Coerce
 
--- | The type of notification channel, such as \"email\", \"sms\", etc.
+-- | The type of notification channel, such as \"email\" and \"sms\". To view
+-- the full list of channels, see Channel descriptors
+-- (https:\/\/cloud.google.com\/monitoring\/alerts\/using-channels-api#ncd).
 -- Notification channel types are globally unique.
 ncdType :: Lens' NotificationChannelDescriptor (Maybe Text)
 ncdType = lens _ncdType (\ s a -> s{_ncdType = a})
@@ -1493,28 +2323,94 @@ ncdDescription
   = lens _ncdDescription
       (\ s a -> s{_ncdDescription = a})
 
+-- | The product launch stage for channels of this type.
+ncdLaunchStage :: Lens' NotificationChannelDescriptor (Maybe NotificationChannelDescriptorLaunchStage)
+ncdLaunchStage
+  = lens _ncdLaunchStage
+      (\ s a -> s{_ncdLaunchStage = a})
+
 instance FromJSON NotificationChannelDescriptor where
         parseJSON
           = withObject "NotificationChannelDescriptor"
               (\ o ->
                  NotificationChannelDescriptor' <$>
-                   (o .:? "name") <*>
-                     (o .:? "supportedTiers" .!= mempty)
-                     <*> (o .:? "displayName")
-                     <*> (o .:? "labels" .!= mempty)
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
-                     <*> (o .:? "description"))
+                     <*> (o .:? "description")
+                     <*> (o .:? "launchStage"))
 
 instance ToJSON NotificationChannelDescriptor where
         toJSON NotificationChannelDescriptor'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _ncdName,
-                  ("supportedTiers" .=) <$> _ncdSupportedTiers,
                   ("displayName" .=) <$> _ncdDisplayName,
                   ("labels" .=) <$> _ncdLabels,
                   ("type" .=) <$> _ncdType,
-                  ("description" .=) <$> _ncdDescription])
+                  ("description" .=) <$> _ncdDescription,
+                  ("launchStage" .=) <$> _ncdLaunchStage])
+
+-- | A label value.
+--
+-- /See:/ 'labelValue' smart constructor.
+data LabelValue =
+  LabelValue'
+    { _lvBoolValue :: !(Maybe Bool)
+    , _lvStringValue :: !(Maybe Text)
+    , _lvInt64Value :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LabelValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lvBoolValue'
+--
+-- * 'lvStringValue'
+--
+-- * 'lvInt64Value'
+labelValue
+    :: LabelValue
+labelValue =
+  LabelValue'
+    {_lvBoolValue = Nothing, _lvStringValue = Nothing, _lvInt64Value = Nothing}
+
+
+-- | A bool label value.
+lvBoolValue :: Lens' LabelValue (Maybe Bool)
+lvBoolValue
+  = lens _lvBoolValue (\ s a -> s{_lvBoolValue = a})
+
+-- | A string label value.
+lvStringValue :: Lens' LabelValue (Maybe Text)
+lvStringValue
+  = lens _lvStringValue
+      (\ s a -> s{_lvStringValue = a})
+
+-- | An int64 label value.
+lvInt64Value :: Lens' LabelValue (Maybe Int64)
+lvInt64Value
+  = lens _lvInt64Value (\ s a -> s{_lvInt64Value = a})
+      . mapping _Coerce
+
+instance FromJSON LabelValue where
+        parseJSON
+          = withObject "LabelValue"
+              (\ o ->
+                 LabelValue' <$>
+                   (o .:? "boolValue") <*> (o .:? "stringValue") <*>
+                     (o .:? "int64Value"))
+
+instance ToJSON LabelValue where
+        toJSON LabelValue'{..}
+          = object
+              (catMaybes
+                 [("boolValue" .=) <$> _lvBoolValue,
+                  ("stringValue" .=) <$> _lvStringValue,
+                  ("int64Value" .=) <$> _lvInt64Value])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -1547,7 +2443,7 @@ instance ToJSON Empty where
 data ListGroupsResponse =
   ListGroupsResponse'
     { _lgrNextPageToken :: !(Maybe Text)
-    , _lgrGroup         :: !(Maybe [Group])
+    , _lgrGroup :: !(Maybe [Group])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1567,7 +2463,7 @@ listGroupsResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as pageToken in the next call to this method.
+-- as page_token in the next call to this method.
 lgrNextPageToken :: Lens' ListGroupsResponse (Maybe Text)
 lgrNextPageToken
   = lens _lgrNextPageToken
@@ -1601,7 +2497,7 @@ instance ToJSON ListGroupsResponse where
 data ListMetricDescriptorsResponse =
   ListMetricDescriptorsResponse'
     { _lmdrMetricDescriptors :: !(Maybe [MetricDescriptor])
-    , _lmdrNextPageToken     :: !(Maybe Text)
+    , _lmdrNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1631,7 +2527,7 @@ lmdrMetricDescriptors
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as pageToken in the next call to this method.
+-- as page_token in the next call to this method.
 lmdrNextPageToken :: Lens' ListMetricDescriptorsResponse (Maybe Text)
 lmdrNextPageToken
   = lens _lmdrNextPageToken
@@ -1651,6 +2547,153 @@ instance ToJSON ListMetricDescriptorsResponse where
               (catMaybes
                  [("metricDescriptors" .=) <$> _lmdrMetricDescriptors,
                   ("nextPageToken" .=) <$> _lmdrNextPageToken])
+
+-- | A WindowsBasedSli defines good_service as the count of time windows for
+-- which the provided service was of good quality. Criteria for determining
+-- if service was good are embedded in the window_criterion.
+--
+-- /See:/ 'windowsBasedSli' smart constructor.
+data WindowsBasedSli =
+  WindowsBasedSli'
+    { _wbsMetricSumInRange :: !(Maybe MetricRange)
+    , _wbsWindowPeriod :: !(Maybe GDuration)
+    , _wbsGoodTotalRatioThreshold :: !(Maybe PerformanceThreshold)
+    , _wbsGoodBadMetricFilter :: !(Maybe Text)
+    , _wbsMetricMeanInRange :: !(Maybe MetricRange)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WindowsBasedSli' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wbsMetricSumInRange'
+--
+-- * 'wbsWindowPeriod'
+--
+-- * 'wbsGoodTotalRatioThreshold'
+--
+-- * 'wbsGoodBadMetricFilter'
+--
+-- * 'wbsMetricMeanInRange'
+windowsBasedSli
+    :: WindowsBasedSli
+windowsBasedSli =
+  WindowsBasedSli'
+    { _wbsMetricSumInRange = Nothing
+    , _wbsWindowPeriod = Nothing
+    , _wbsGoodTotalRatioThreshold = Nothing
+    , _wbsGoodBadMetricFilter = Nothing
+    , _wbsMetricMeanInRange = Nothing
+    }
+
+
+-- | A window is good if the metric\'s value is in a good range, summed
+-- across returned streams.
+wbsMetricSumInRange :: Lens' WindowsBasedSli (Maybe MetricRange)
+wbsMetricSumInRange
+  = lens _wbsMetricSumInRange
+      (\ s a -> s{_wbsMetricSumInRange = a})
+
+-- | Duration over which window quality is evaluated. Must be an integer
+-- fraction of a day and at least 60s.
+wbsWindowPeriod :: Lens' WindowsBasedSli (Maybe Scientific)
+wbsWindowPeriod
+  = lens _wbsWindowPeriod
+      (\ s a -> s{_wbsWindowPeriod = a})
+      . mapping _GDuration
+
+-- | A window is good if its performance is high enough.
+wbsGoodTotalRatioThreshold :: Lens' WindowsBasedSli (Maybe PerformanceThreshold)
+wbsGoodTotalRatioThreshold
+  = lens _wbsGoodTotalRatioThreshold
+      (\ s a -> s{_wbsGoodTotalRatioThreshold = a})
+
+-- | A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifying a
+-- TimeSeries with ValueType = BOOL. The window is good if any true values
+-- appear in the window.
+wbsGoodBadMetricFilter :: Lens' WindowsBasedSli (Maybe Text)
+wbsGoodBadMetricFilter
+  = lens _wbsGoodBadMetricFilter
+      (\ s a -> s{_wbsGoodBadMetricFilter = a})
+
+-- | A window is good if the metric\'s value is in a good range, averaged
+-- across returned streams.
+wbsMetricMeanInRange :: Lens' WindowsBasedSli (Maybe MetricRange)
+wbsMetricMeanInRange
+  = lens _wbsMetricMeanInRange
+      (\ s a -> s{_wbsMetricMeanInRange = a})
+
+instance FromJSON WindowsBasedSli where
+        parseJSON
+          = withObject "WindowsBasedSli"
+              (\ o ->
+                 WindowsBasedSli' <$>
+                   (o .:? "metricSumInRange") <*> (o .:? "windowPeriod")
+                     <*> (o .:? "goodTotalRatioThreshold")
+                     <*> (o .:? "goodBadMetricFilter")
+                     <*> (o .:? "metricMeanInRange"))
+
+instance ToJSON WindowsBasedSli where
+        toJSON WindowsBasedSli'{..}
+          = object
+              (catMaybes
+                 [("metricSumInRange" .=) <$> _wbsMetricSumInRange,
+                  ("windowPeriod" .=) <$> _wbsWindowPeriod,
+                  ("goodTotalRatioThreshold" .=) <$>
+                    _wbsGoodTotalRatioThreshold,
+                  ("goodBadMetricFilter" .=) <$>
+                    _wbsGoodBadMetricFilter,
+                  ("metricMeanInRange" .=) <$> _wbsMetricMeanInRange])
+
+-- | Detailed information about an error category.
+--
+-- /See:/ 'error'' smart constructor.
+data Error' =
+  Error''
+    { _eStatus :: !(Maybe Status)
+    , _ePointCount :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Error' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eStatus'
+--
+-- * 'ePointCount'
+error'
+    :: Error'
+error' = Error'' {_eStatus = Nothing, _ePointCount = Nothing}
+
+
+-- | The status of the requested write operation.
+eStatus :: Lens' Error' (Maybe Status)
+eStatus = lens _eStatus (\ s a -> s{_eStatus = a})
+
+-- | The number of points that couldn\'t be written because of status.
+ePointCount :: Lens' Error' (Maybe Int32)
+ePointCount
+  = lens _ePointCount (\ s a -> s{_ePointCount = a}) .
+      mapping _Coerce
+
+instance FromJSON Error' where
+        parseJSON
+          = withObject "Error"
+              (\ o ->
+                 Error'' <$>
+                   (o .:? "status") <*> (o .:? "pointCount"))
+
+instance ToJSON Error' where
+        toJSON Error''{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _eStatus,
+                  ("pointCount" .=) <$> _ePointCount])
 
 -- | The VerifyNotificationChannel request.
 --
@@ -1673,9 +2716,9 @@ verifyNotificationChannelRequest =
   VerifyNotificationChannelRequest' {_vncrCode = Nothing}
 
 
--- | The verification code that was delivered to the channel as a result of
--- invoking the SendNotificationChannelVerificationCode API method or that
--- was retrieved from a verified channel via
+-- | Required. The verification code that was delivered to the channel as a
+-- result of invoking the SendNotificationChannelVerificationCode API
+-- method or that was retrieved from a verified channel via
 -- GetNotificationChannelVerificationCode. For example, one might have
 -- \"G-123456\" or \"TKNZGhhd2EyN3I1MnRnMjRv\" (in general, one is only
 -- guaranteed that the code is valid UTF-8; one should not make any
@@ -1734,6 +2777,114 @@ instance FromJSON OptionValue where
 
 instance ToJSON OptionValue where
         toJSON = toJSON . _ovAddtional
+
+-- | A DistributionCut defines a TimeSeries and thresholds used for measuring
+-- good service and total service. The TimeSeries must have ValueType =
+-- DISTRIBUTION and MetricKind = DELTA or MetricKind = CUMULATIVE. The
+-- computed good_service will be the estimated count of values in the
+-- Distribution that fall within the specified min and max.
+--
+-- /See:/ 'distributionCut' smart constructor.
+data DistributionCut =
+  DistributionCut'
+    { _dcRange :: !(Maybe GoogleMonitoringV3Range)
+    , _dcDistributionFilter :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DistributionCut' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcRange'
+--
+-- * 'dcDistributionFilter'
+distributionCut
+    :: DistributionCut
+distributionCut =
+  DistributionCut' {_dcRange = Nothing, _dcDistributionFilter = Nothing}
+
+
+-- | Range of values considered \"good.\" For a one-sided range, set one
+-- bound to an infinite value.
+dcRange :: Lens' DistributionCut (Maybe GoogleMonitoringV3Range)
+dcRange = lens _dcRange (\ s a -> s{_dcRange = a})
+
+-- | A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifying a
+-- TimeSeries aggregating values. Must have ValueType = DISTRIBUTION and
+-- MetricKind = DELTA or MetricKind = CUMULATIVE.
+dcDistributionFilter :: Lens' DistributionCut (Maybe Text)
+dcDistributionFilter
+  = lens _dcDistributionFilter
+      (\ s a -> s{_dcDistributionFilter = a})
+
+instance FromJSON DistributionCut where
+        parseJSON
+          = withObject "DistributionCut"
+              (\ o ->
+                 DistributionCut' <$>
+                   (o .:? "range") <*> (o .:? "distributionFilter"))
+
+instance ToJSON DistributionCut where
+        toJSON DistributionCut'{..}
+          = object
+              (catMaybes
+                 [("range" .=) <$> _dcRange,
+                  ("distributionFilter" .=) <$> _dcDistributionFilter])
+
+-- | A MetricRange is used when each window is good when the value x of a
+-- single TimeSeries satisfies range.min \<= x \<= range.max. The provided
+-- TimeSeries must have ValueType = INT64 or ValueType = DOUBLE and
+-- MetricKind = GAUGE.
+--
+-- /See:/ 'metricRange' smart constructor.
+data MetricRange =
+  MetricRange'
+    { _mrRange :: !(Maybe GoogleMonitoringV3Range)
+    , _mrTimeSeries :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MetricRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mrRange'
+--
+-- * 'mrTimeSeries'
+metricRange
+    :: MetricRange
+metricRange = MetricRange' {_mrRange = Nothing, _mrTimeSeries = Nothing}
+
+
+-- | Range of values considered \"good.\" For a one-sided range, set one
+-- bound to an infinite value.
+mrRange :: Lens' MetricRange (Maybe GoogleMonitoringV3Range)
+mrRange = lens _mrRange (\ s a -> s{_mrRange = a})
+
+-- | A monitoring filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) specifying
+-- the TimeSeries to use for evaluating window quality.
+mrTimeSeries :: Lens' MetricRange (Maybe Text)
+mrTimeSeries
+  = lens _mrTimeSeries (\ s a -> s{_mrTimeSeries = a})
+
+instance FromJSON MetricRange where
+        parseJSON
+          = withObject "MetricRange"
+              (\ o ->
+                 MetricRange' <$>
+                   (o .:? "range") <*> (o .:? "timeSeries"))
+
+instance ToJSON MetricRange where
+        toJSON MetricRange'{..}
+          = object
+              (catMaybes
+                 [("range" .=) <$> _mrRange,
+                  ("timeSeries" .=) <$> _mrTimeSeries])
 
 -- | Configuration fields that define the channel and its behavior. The
 -- permissible and required labels are specified in the
@@ -1794,12 +2945,12 @@ createTimeSeriesRequest
 createTimeSeriesRequest = CreateTimeSeriesRequest' {_ctsrTimeSeries = Nothing}
 
 
--- | The new data to be added to a list of time series. Adds at most one data
--- point to each of several time series. The new data point must be more
--- recent than any other point in its time series. Each TimeSeries value
--- must fully specify a unique time series by supplying all label values
--- for the metric and the monitored resource.The maximum number of
--- TimeSeries objects per Create request is 200.
+-- | Required. The new data to be added to a list of time series. Adds at
+-- most one data point to each of several time series. The new data point
+-- must be more recent than any other point in its time series. Each
+-- TimeSeries value must fully specify a unique time series by supplying
+-- all label values for the metric and the monitored resource.The maximum
+-- number of TimeSeries objects per Create request is 200.
 ctsrTimeSeries :: Lens' CreateTimeSeriesRequest [TimeSeries]
 ctsrTimeSeries
   = lens _ctsrTimeSeries
@@ -1818,6 +2969,28 @@ instance ToJSON CreateTimeSeriesRequest where
         toJSON CreateTimeSeriesRequest'{..}
           = object
               (catMaybes [("timeSeries" .=) <$> _ctsrTimeSeries])
+
+-- | Custom view of service telemetry. Currently a place-holder pending final
+-- design.
+--
+-- /See:/ 'custom' smart constructor.
+data Custom =
+  Custom'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Custom' with the minimum fields required to make a request.
+--
+custom
+    :: Custom
+custom = Custom'
+
+
+instance FromJSON Custom where
+        parseJSON = withObject "Custom" (\ o -> pure Custom')
+
+instance ToJSON Custom where
+        toJSON = const emptyObject
 
 -- | Map from label to its value, for all labels dropped in any aggregation.
 --
@@ -1860,14 +3033,14 @@ instance ToJSON DroppedLabelsLabel where
 -- /See:/ 'metricThreshold' smart constructor.
 data MetricThreshold =
   MetricThreshold'
-    { _mtThresholdValue          :: !(Maybe (Textual Double))
-    , _mtAggregations            :: !(Maybe [Aggregation])
+    { _mtThresholdValue :: !(Maybe (Textual Double))
+    , _mtAggregations :: !(Maybe [Aggregation])
     , _mtDenominatorAggregations :: !(Maybe [Aggregation])
-    , _mtComparison              :: !(Maybe MetricThresholdComparison)
-    , _mtDenominatorFilter       :: !(Maybe Text)
-    , _mtFilter                  :: !(Maybe Text)
-    , _mtTrigger                 :: !(Maybe Trigger)
-    , _mtDuration                :: !(Maybe GDuration)
+    , _mtComparison :: !(Maybe MetricThresholdComparison)
+    , _mtDenominatorFilter :: !(Maybe Text)
+    , _mtFilter :: !(Maybe Text)
+    , _mtTrigger :: !(Maybe Trigger)
+    , _mtDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1918,9 +3091,10 @@ mtThresholdValue
 -- aggregating multiple streams on each resource to a single stream for
 -- each resource or when aggregating streams across all members of a group
 -- of resrouces). Multiple aggregations are applied in the order
--- specified.This field is similar to the one in the
--- MetricService.ListTimeSeries request. It is advisable to use the
--- ListTimeSeries method when debugging this field.
+-- specified.This field is similar to the one in the ListTimeSeries request
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list).
+-- It is advisable to use the ListTimeSeries method when debugging this
+-- field.
 mtAggregations :: Lens' MetricThreshold [Aggregation]
 mtAggregations
   = lens _mtAggregations
@@ -1935,9 +3109,7 @@ mtAggregations
 -- streams across all members of a group of resources).When computing
 -- ratios, the aggregations and denominator_aggregations fields must use
 -- the same alignment period and produce time series that have the same
--- periodicity and labels.This field is similar to the one in the
--- MetricService.ListTimeSeries request. It is advisable to use the
--- ListTimeSeries method when debugging this field.
+-- periodicity and labels.
 mtDenominatorAggregations :: Lens' MetricThreshold [Aggregation]
 mtDenominatorAggregations
   = lens _mtDenominatorAggregations
@@ -1954,27 +3126,28 @@ mtComparison :: Lens' MetricThreshold (Maybe MetricThresholdComparison)
 mtComparison
   = lens _mtComparison (\ s a -> s{_mtComparison = a})
 
--- | A filter that identifies a time series that should be used as the
--- denominator of a ratio that will be compared with the threshold. If a
--- denominator_filter is specified, the time series specified by the filter
--- field will be used as the numerator.The filter is similar to the one
--- that is specified in the MetricService.ListTimeSeries request (that call
--- is useful to verify the time series that will be retrieved \/ processed)
--- and must specify the metric type and optionally may contain restrictions
--- on resource type, resource labels, and metric labels. This field may not
--- exceed 2048 Unicode characters in length.
+-- | A filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that
+-- identifies a time series that should be used as the denominator of a
+-- ratio that will be compared with the threshold. If a denominator_filter
+-- is specified, the time series specified by the filter field will be used
+-- as the numerator.The filter must specify the metric type and optionally
+-- may contain restrictions on resource type, resource labels, and metric
+-- labels. This field may not exceed 2048 Unicode characters in length.
 mtDenominatorFilter :: Lens' MetricThreshold (Maybe Text)
 mtDenominatorFilter
   = lens _mtDenominatorFilter
       (\ s a -> s{_mtDenominatorFilter = a})
 
--- | A filter that identifies which time series should be compared with the
--- threshold.The filter is similar to the one that is specified in the
--- MetricService.ListTimeSeries request (that call is useful to verify the
--- time series that will be retrieved \/ processed) and must specify the
--- metric type and optionally may contain restrictions on resource type,
--- resource labels, and metric labels. This field may not exceed 2048
--- Unicode characters in length.
+-- | Required. A filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that
+-- identifies which time series should be compared with the threshold.The
+-- filter is similar to the one that is specified in the ListTimeSeries
+-- request
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list)
+-- (that call is useful to verify the time series that will be retrieved \/
+-- processed). The filter must specify the metric type and the resource
+-- type. Optionally, it can specify resource labels and metric labels. This
+-- field must not exceed 2048 Unicode characters in length.
 mtFilter :: Lens' MetricThreshold (Maybe Text)
 mtFilter = lens _mtFilter (\ s a -> s{_mtFilter = a})
 
@@ -2029,10 +3202,9 @@ instance ToJSON MetricThreshold where
                   ("trigger" .=) <$> _mtTrigger,
                   ("duration" .=) <$> _mtDuration])
 
--- | The context of a span, attached to google.api.Distribution.Exemplars in
--- google.api.Distribution values during aggregation.It contains the name
--- of a span with format:
--- projects\/PROJECT_ID\/traces\/TRACE_ID\/spans\/SPAN_ID
+-- | The context of a span. This is attached to an Exemplar in Distribution
+-- values during aggregation.It contains the name of a span with format:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/traces\/[TRACE_ID]\/spans\/[SPAN_ID]
 --
 -- /See:/ 'spanContext' smart constructor.
 newtype SpanContext =
@@ -2052,12 +3224,12 @@ spanContext
 spanContext = SpanContext' {_scSpanName = Nothing}
 
 
--- | The resource name of the span in the following format:
--- projects\/[PROJECT_ID]\/traces\/[TRACE_ID]\/spans\/[SPAN_ID] TRACE_ID is
--- a unique identifier for a trace within a project; it is a 32-character
--- hexadecimal encoding of a 16-byte array.SPAN_ID is a unique identifier
--- for a span within a trace; it is a 16-character hexadecimal encoding of
--- an 8-byte array.
+-- | The resource name of the span. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/traces\/[TRACE_ID]\/spans\/[SPAN_ID]
+-- [TRACE_ID] is a unique identifier for a trace within a project; it is a
+-- 32-character hexadecimal encoding of a 16-byte array.[SPAN_ID] is a
+-- unique identifier for a span within a trace; it is a 16-character
+-- hexadecimal encoding of an 8-byte array.
 scSpanName :: Lens' SpanContext (Maybe Text)
 scSpanName
   = lens _scSpanName (\ s a -> s{_scSpanName = a})
@@ -2107,6 +3279,76 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
+-- | Summary of the result of a failed request to write data to a time
+-- series.
+--
+-- /See:/ 'createTimeSeriesSummary' smart constructor.
+data CreateTimeSeriesSummary =
+  CreateTimeSeriesSummary'
+    { _ctssTotalPointCount :: !(Maybe (Textual Int32))
+    , _ctssSuccessPointCount :: !(Maybe (Textual Int32))
+    , _ctssErrors :: !(Maybe [Error'])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CreateTimeSeriesSummary' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ctssTotalPointCount'
+--
+-- * 'ctssSuccessPointCount'
+--
+-- * 'ctssErrors'
+createTimeSeriesSummary
+    :: CreateTimeSeriesSummary
+createTimeSeriesSummary =
+  CreateTimeSeriesSummary'
+    { _ctssTotalPointCount = Nothing
+    , _ctssSuccessPointCount = Nothing
+    , _ctssErrors = Nothing
+    }
+
+
+-- | The number of points in the request.
+ctssTotalPointCount :: Lens' CreateTimeSeriesSummary (Maybe Int32)
+ctssTotalPointCount
+  = lens _ctssTotalPointCount
+      (\ s a -> s{_ctssTotalPointCount = a})
+      . mapping _Coerce
+
+-- | The number of points that were successfully written.
+ctssSuccessPointCount :: Lens' CreateTimeSeriesSummary (Maybe Int32)
+ctssSuccessPointCount
+  = lens _ctssSuccessPointCount
+      (\ s a -> s{_ctssSuccessPointCount = a})
+      . mapping _Coerce
+
+-- | The number of points that failed to be written. Order is not guaranteed.
+ctssErrors :: Lens' CreateTimeSeriesSummary [Error']
+ctssErrors
+  = lens _ctssErrors (\ s a -> s{_ctssErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON CreateTimeSeriesSummary where
+        parseJSON
+          = withObject "CreateTimeSeriesSummary"
+              (\ o ->
+                 CreateTimeSeriesSummary' <$>
+                   (o .:? "totalPointCount") <*>
+                     (o .:? "successPointCount")
+                     <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON CreateTimeSeriesSummary where
+        toJSON CreateTimeSeriesSummary'{..}
+          = object
+              (catMaybes
+                 [("totalPointCount" .=) <$> _ctssTotalPointCount,
+                  ("successPointCount" .=) <$> _ctssSuccessPointCount,
+                  ("errors" .=) <$> _ctssErrors])
+
 -- | Output only. A map of user-defined metadata labels.
 --
 -- /See:/ 'monitoredResourceMetadataUserLabels' smart constructor.
@@ -2148,18 +3390,18 @@ instance ToJSON MonitoredResourceMetadataUserLabels
          where
         toJSON = toJSON . _mrmulAddtional
 
--- | An internal checker allows uptime checks to run on private\/internal GCP
+-- | An internal checker allows Uptime checks to run on private\/internal GCP
 -- resources.
 --
 -- /See:/ 'internalChecker' smart constructor.
 data InternalChecker =
   InternalChecker'
-    { _icState         :: !(Maybe InternalCheckerState)
-    , _icNetwork       :: !(Maybe Text)
-    , _icName          :: !(Maybe Text)
+    { _icState :: !(Maybe InternalCheckerState)
+    , _icNetwork :: !(Maybe Text)
+    , _icName :: !(Maybe Text)
     , _icPeerProjectId :: !(Maybe Text)
-    , _icGcpZone       :: !(Maybe Text)
-    , _icDisplayName   :: !(Maybe Text)
+    , _icGcpZone :: !(Maybe Text)
+    , _icDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2202,22 +3444,22 @@ icNetwork :: Lens' InternalChecker (Maybe Text)
 icNetwork
   = lens _icNetwork (\ s a -> s{_icNetwork = a})
 
--- | A unique resource name for this InternalChecker. The format
--- is:projects\/[PROJECT_ID]\/internalCheckers\/[INTERNAL_CHECKER_ID].PROJECT_ID
--- is the stackdriver workspace project for the uptime check config
--- associated with the internal checker.
+-- | A unique resource name for this InternalChecker. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/internalCheckers\/[INTERNAL_CHECKER_ID]
+-- [PROJECT_ID_OR_NUMBER] is the Stackdriver Workspace project for the
+-- Uptime check config associated with the internal checker.
 icName :: Lens' InternalChecker (Maybe Text)
 icName = lens _icName (\ s a -> s{_icName = a})
 
--- | The GCP project_id where the internal checker lives. Not necessary the
--- same as the workspace project.
+-- | The GCP project ID where the internal checker lives. Not necessary the
+-- same as the Workspace project.
 icPeerProjectId :: Lens' InternalChecker (Maybe Text)
 icPeerProjectId
   = lens _icPeerProjectId
       (\ s a -> s{_icPeerProjectId = a})
 
--- | The GCP zone the uptime check should egress from. Only respected for
--- internal uptime checks, where internal_network is specified.
+-- | The GCP zone the Uptime check should egress from. Only respected for
+-- internal Uptime checks, where internal_network is specified.
 icGcpZone :: Lens' InternalChecker (Maybe Text)
 icGcpZone
   = lens _icGcpZone (\ s a -> s{_icGcpZone = a})
@@ -2261,14 +3503,16 @@ instance ToJSON InternalChecker where
 -- /See:/ 'notificationChannel' smart constructor.
 data NotificationChannel =
   NotificationChannel'
-    { _ncEnabled            :: !(Maybe Bool)
-    , _ncUserLabels         :: !(Maybe NotificationChannelUserLabels)
-    , _ncName               :: !(Maybe Text)
-    , _ncDisplayName        :: !(Maybe Text)
+    { _ncMutationRecords :: !(Maybe [MutationRecord])
+    , _ncEnabled :: !(Maybe Bool)
+    , _ncCreationRecord :: !(Maybe MutationRecord)
+    , _ncUserLabels :: !(Maybe NotificationChannelUserLabels)
+    , _ncName :: !(Maybe Text)
+    , _ncDisplayName :: !(Maybe Text)
     , _ncVerificationStatus :: !(Maybe NotificationChannelVerificationStatus)
-    , _ncLabels             :: !(Maybe NotificationChannelLabels)
-    , _ncType               :: !(Maybe Text)
-    , _ncDescription        :: !(Maybe Text)
+    , _ncLabels :: !(Maybe NotificationChannelLabels)
+    , _ncType :: !(Maybe Text)
+    , _ncDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2277,7 +3521,11 @@ data NotificationChannel =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ncMutationRecords'
+--
 -- * 'ncEnabled'
+--
+-- * 'ncCreationRecord'
 --
 -- * 'ncUserLabels'
 --
@@ -2296,7 +3544,9 @@ notificationChannel
     :: NotificationChannel
 notificationChannel =
   NotificationChannel'
-    { _ncEnabled = Nothing
+    { _ncMutationRecords = Nothing
+    , _ncEnabled = Nothing
+    , _ncCreationRecord = Nothing
     , _ncUserLabels = Nothing
     , _ncName = Nothing
     , _ncDisplayName = Nothing
@@ -2307,6 +3557,14 @@ notificationChannel =
     }
 
 
+-- | Records of the modification of this channel.
+ncMutationRecords :: Lens' NotificationChannel [MutationRecord]
+ncMutationRecords
+  = lens _ncMutationRecords
+      (\ s a -> s{_ncMutationRecords = a})
+      . _Default
+      . _Coerce
+
 -- | Whether notifications are forwarded to the described channel. This makes
 -- it possible to disable delivery of notifications to a particular channel
 -- without removing the channel from all alerting policies that reference
@@ -2316,6 +3574,12 @@ notificationChannel =
 ncEnabled :: Lens' NotificationChannel (Maybe Bool)
 ncEnabled
   = lens _ncEnabled (\ s a -> s{_ncEnabled = a})
+
+-- | Record of the creation of this channel.
+ncCreationRecord :: Lens' NotificationChannel (Maybe MutationRecord)
+ncCreationRecord
+  = lens _ncCreationRecord
+      (\ s a -> s{_ncCreationRecord = a})
 
 -- | User-supplied key\/value data that does not need to conform to the
 -- corresponding NotificationChannelDescriptor\'s schema, unlike the labels
@@ -2329,8 +3593,8 @@ ncUserLabels :: Lens' NotificationChannel (Maybe NotificationChannelUserLabels)
 ncUserLabels
   = lens _ncUserLabels (\ s a -> s{_ncUserLabels = a})
 
--- | The full REST resource name for this channel. The syntax is:
--- projects\/[PROJECT_ID]\/notificationChannels\/[CHANNEL_ID] The
+-- | The full REST resource name for this channel. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/notificationChannels\/[CHANNEL_ID] The
 -- [CHANNEL_ID] is automatically assigned by the server on creation.
 ncName :: Lens' NotificationChannel (Maybe Text)
 ncName = lens _ncName (\ s a -> s{_ncName = a})
@@ -2386,8 +3650,11 @@ instance FromJSON NotificationChannel where
           = withObject "NotificationChannel"
               (\ o ->
                  NotificationChannel' <$>
-                   (o .:? "enabled") <*> (o .:? "userLabels") <*>
-                     (o .:? "name")
+                   (o .:? "mutationRecords" .!= mempty) <*>
+                     (o .:? "enabled")
+                     <*> (o .:? "creationRecord")
+                     <*> (o .:? "userLabels")
+                     <*> (o .:? "name")
                      <*> (o .:? "displayName")
                      <*> (o .:? "verificationStatus")
                      <*> (o .:? "labels")
@@ -2398,7 +3665,9 @@ instance ToJSON NotificationChannel where
         toJSON NotificationChannel'{..}
           = object
               (catMaybes
-                 [("enabled" .=) <$> _ncEnabled,
+                 [("mutationRecords" .=) <$> _ncMutationRecords,
+                  ("enabled" .=) <$> _ncEnabled,
+                  ("creationRecord" .=) <$> _ncCreationRecord,
                   ("userLabels" .=) <$> _ncUserLabels,
                   ("name" .=) <$> _ncName,
                   ("displayName" .=) <$> _ncDisplayName,
@@ -2406,12 +3675,71 @@ instance ToJSON NotificationChannel where
                   ("labels" .=) <$> _ncLabels, ("type" .=) <$> _ncType,
                   ("description" .=) <$> _ncDescription])
 
+-- | The ListServiceLevelObjectives response.
+--
+-- /See:/ 'listServiceLevelObjectivesResponse' smart constructor.
+data ListServiceLevelObjectivesResponse =
+  ListServiceLevelObjectivesResponse'
+    { _lslorNextPageToken :: !(Maybe Text)
+    , _lslorServiceLevelObjectives :: !(Maybe [ServiceLevelObjective])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListServiceLevelObjectivesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lslorNextPageToken'
+--
+-- * 'lslorServiceLevelObjectives'
+listServiceLevelObjectivesResponse
+    :: ListServiceLevelObjectivesResponse
+listServiceLevelObjectivesResponse =
+  ListServiceLevelObjectivesResponse'
+    {_lslorNextPageToken = Nothing, _lslorServiceLevelObjectives = Nothing}
+
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as page_token in the next call to this method.
+lslorNextPageToken :: Lens' ListServiceLevelObjectivesResponse (Maybe Text)
+lslorNextPageToken
+  = lens _lslorNextPageToken
+      (\ s a -> s{_lslorNextPageToken = a})
+
+-- | The ServiceLevelObjectives matching the specified filter.
+lslorServiceLevelObjectives :: Lens' ListServiceLevelObjectivesResponse [ServiceLevelObjective]
+lslorServiceLevelObjectives
+  = lens _lslorServiceLevelObjectives
+      (\ s a -> s{_lslorServiceLevelObjectives = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListServiceLevelObjectivesResponse
+         where
+        parseJSON
+          = withObject "ListServiceLevelObjectivesResponse"
+              (\ o ->
+                 ListServiceLevelObjectivesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "serviceLevelObjectives" .!= mempty))
+
+instance ToJSON ListServiceLevelObjectivesResponse
+         where
+        toJSON ListServiceLevelObjectivesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lslorNextPageToken,
+                  ("serviceLevelObjectives" .=) <$>
+                    _lslorServiceLevelObjectives])
+
 -- | The ListMonitoredResourceDescriptors response.
 --
 -- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
 data ListMonitoredResourceDescriptorsResponse =
   ListMonitoredResourceDescriptorsResponse'
-    { _lmrdrNextPageToken       :: !(Maybe Text)
+    { _lmrdrNextPageToken :: !(Maybe Text)
     , _lmrdrResourceDescriptors :: !(Maybe [MonitoredResourceDescriptor])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2433,7 +3761,7 @@ listMonitoredResourceDescriptorsResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as pageToken in the next call to this method.
+-- as page_token in the next call to this method.
 lmrdrNextPageToken :: Lens' ListMonitoredResourceDescriptorsResponse (Maybe Text)
 lmrdrNextPageToken
   = lens _lmrdrNextPageToken
@@ -2588,7 +3916,7 @@ data CollectdValue =
   CollectdValue'
     { _cvDataSourceName :: !(Maybe Text)
     , _cvDataSourceType :: !(Maybe CollectdValueDataSourceType)
-    , _cvValue          :: !(Maybe TypedValue)
+    , _cvValue :: !(Maybe TypedValue)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2612,7 +3940,7 @@ collectdValue =
     }
 
 
--- | The data source for the collectd value. For example there are two data
+-- | The data source for the collectd value. For example, there are two data
 -- sources for network measurements: \"rx\" and \"tx\".
 cvDataSourceName :: Lens' CollectdValue (Maybe Text)
 cvDataSourceName
@@ -2651,8 +3979,8 @@ instance ToJSON CollectdValue where
 data CreateCollectdTimeSeriesRequest =
   CreateCollectdTimeSeriesRequest'
     { _cctsrCollectdPayloads :: !(Maybe [CollectdPayload])
-    , _cctsrResource         :: !(Maybe MonitoredResource)
-    , _cctsrCollectdVersion  :: !(Maybe Text)
+    , _cctsrResource :: !(Maybe MonitoredResource)
+    , _cctsrCollectdVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2718,20 +4046,90 @@ instance ToJSON CreateCollectdTimeSeriesRequest where
                   ("resource" .=) <$> _cctsrResource,
                   ("collectdVersion" .=) <$> _cctsrCollectdVersion])
 
--- | Describes how to combine multiple time series to provide different views
--- of the data. Aggregation consists of an alignment step on individual
--- time series (alignment_period and per_series_aligner) followed by an
--- optional reduction step of the data across the aligned time series
--- (cross_series_reducer and group_by_fields). For more details, see
--- Aggregation.
+-- | A point\'s value columns and time interval. Each point has one or more
+-- point values corresponding to the entries in point_descriptors field in
+-- the TimeSeriesDescriptor associated with this object.
+--
+-- /See:/ 'pointData' smart constructor.
+data PointData =
+  PointData'
+    { _pdValues :: !(Maybe [TypedValue])
+    , _pdTimeInterval :: !(Maybe TimeInterval)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PointData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdValues'
+--
+-- * 'pdTimeInterval'
+pointData
+    :: PointData
+pointData = PointData' {_pdValues = Nothing, _pdTimeInterval = Nothing}
+
+
+-- | The values that make up the point.
+pdValues :: Lens' PointData [TypedValue]
+pdValues
+  = lens _pdValues (\ s a -> s{_pdValues = a}) .
+      _Default
+      . _Coerce
+
+-- | The time interval associated with the point.
+pdTimeInterval :: Lens' PointData (Maybe TimeInterval)
+pdTimeInterval
+  = lens _pdTimeInterval
+      (\ s a -> s{_pdTimeInterval = a})
+
+instance FromJSON PointData where
+        parseJSON
+          = withObject "PointData"
+              (\ o ->
+                 PointData' <$>
+                   (o .:? "values" .!= mempty) <*>
+                     (o .:? "timeInterval"))
+
+instance ToJSON PointData where
+        toJSON PointData'{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _pdValues,
+                  ("timeInterval" .=) <$> _pdTimeInterval])
+
+-- | Describes how to combine multiple time series to provide a different
+-- view of the data. Aggregation of time series is done in two steps.
+-- First, each time series in the set is aligned to the same time interval
+-- boundaries, then the set of time series is optionally reduced in
+-- number.Alignment consists of applying the per_series_aligner operation
+-- to each time series after its data has been divided into regular
+-- alignment_period time intervals. This process takes all of the data
+-- points in an alignment period, applies a mathematical transformation
+-- such as averaging, minimum, maximum, delta, etc., and converts them into
+-- a single data point per period.Reduction is when the aligned and
+-- transformed time series can optionally be combined, reducing the number
+-- of time series through similar mathematical transformations. Reduction
+-- involves applying a cross_series_reducer to all the time series,
+-- optionally sorting the time series into subsets with group_by_fields,
+-- and applying the reducer to each subset.The raw time series data can
+-- contain a huge amount of information from multiple sources. Alignment
+-- and reduction transforms this mass of data into a more manageable and
+-- representative collection of data, for example \"the 95% latency across
+-- the average of all tasks in a cluster\". This representative data can be
+-- more easily graphed and comprehended, and the individual time series
+-- data is still available for later drilldown. For more details, see
+-- Filtering and aggregation
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/aggregation).
 --
 -- /See:/ 'aggregation' smart constructor.
 data Aggregation =
   Aggregation'
-    { _aPerSeriesAligner   :: !(Maybe AggregationPerSeriesAligner)
+    { _aPerSeriesAligner :: !(Maybe AggregationPerSeriesAligner)
     , _aCrossSeriesReducer :: !(Maybe AggregationCrossSeriesReducer)
-    , _aAlignmentPeriod    :: !(Maybe GDuration)
-    , _aGroupByFields      :: !(Maybe [Text])
+    , _aAlignmentPeriod :: !(Maybe GDuration)
+    , _aGroupByFields :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2758,57 +4156,67 @@ aggregation =
     }
 
 
--- | The approach to be used to align individual time series. Not all
--- alignment functions may be applied to all time series, depending on the
--- metric type and value type of the original time series. Alignment may
--- change the metric type or the value type of the time series.Time series
--- data must be aligned in order to perform cross-time series reduction. If
--- crossSeriesReducer is specified, then perSeriesAligner must be specified
--- and not equal ALIGN_NONE and alignmentPeriod must be specified;
--- otherwise, an error is returned.
+-- | An Aligner describes how to bring the data points in a single time
+-- series into temporal alignment. Except for ALIGN_NONE, all alignments
+-- cause all the data points in an alignment_period to be mathematically
+-- grouped together, resulting in a single data point for each
+-- alignment_period with end timestamp at the end of the period.Not all
+-- alignment operations may be applied to all time series. The valid
+-- choices depend on the metric_kind and value_type of the original time
+-- series. Alignment can change the metric_kind or the value_type of the
+-- time series.Time series data must be aligned in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified and not equal to ALIGN_NONE and
+-- alignment_period must be specified; otherwise, an error is returned.
 aPerSeriesAligner :: Lens' Aggregation (Maybe AggregationPerSeriesAligner)
 aPerSeriesAligner
   = lens _aPerSeriesAligner
       (\ s a -> s{_aPerSeriesAligner = a})
 
--- | The approach to be used to combine time series. Not all reducer
--- functions may be applied to all time series, depending on the metric
--- type and the value type of the original time series. Reduction may
--- change the metric type of value type of the time series.Time series data
--- must be aligned in order to perform cross-time series reduction. If
--- crossSeriesReducer is specified, then perSeriesAligner must be specified
--- and not equal ALIGN_NONE and alignmentPeriod must be specified;
--- otherwise, an error is returned.
+-- | The reduction operation to be used to combine time series into a single
+-- time series, where the value of each data point in the resulting series
+-- is a function of all the already aligned values in the input time
+-- series.Not all reducer operations can be applied to all time series. The
+-- valid choices depend on the metric_kind and the value_type of the
+-- original time series. Reduction can yield a time series with a different
+-- metric_kind or value_type than the input time series.Time series data
+-- must first be aligned (see per_series_aligner) in order to perform
+-- cross-time series reduction. If cross_series_reducer is specified, then
+-- per_series_aligner must be specified, and must not be ALIGN_NONE. An
+-- alignment_period must also be specified; otherwise, an error is
+-- returned.
 aCrossSeriesReducer :: Lens' Aggregation (Maybe AggregationCrossSeriesReducer)
 aCrossSeriesReducer
   = lens _aCrossSeriesReducer
       (\ s a -> s{_aCrossSeriesReducer = a})
 
--- | The alignment period for per-time series alignment. If present,
--- alignmentPeriod must be at least 60 seconds. After per-time series
--- alignment, each time series will contain data points only on the period
--- boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE,
--- then this field is ignored. If perSeriesAligner is specified and does
--- not equal ALIGN_NONE, then this field must be defined; otherwise an
--- error is returned.
+-- | The alignment_period specifies a time interval, in seconds, that is used
+-- to divide the data in all the time series into consistent blocks of
+-- time. This will be done before the per-series aligner can be applied to
+-- the data.The value must be at least 60 seconds. If a per-series aligner
+-- other than ALIGN_NONE is specified, this field is required or an error
+-- is returned. If no per-series aligner is specified, or the aligner
+-- ALIGN_NONE is specified, then this field is ignored.The maximum value of
+-- the alignment_period is 104 weeks (2 years) for charts, and 90,000
+-- seconds (25 hours) for alerting policies.
 aAlignmentPeriod :: Lens' Aggregation (Maybe Scientific)
 aAlignmentPeriod
   = lens _aAlignmentPeriod
       (\ s a -> s{_aAlignmentPeriod = a})
       . mapping _GDuration
 
--- | The set of fields to preserve when crossSeriesReducer is specified. The
--- groupByFields determine how the time series are partitioned into subsets
--- prior to applying the aggregation function. Each subset contains time
--- series that have the same value for each of the grouping fields. Each
--- individual time series is a member of exactly one subset. The
--- crossSeriesReducer is applied to each subset of time series. It is not
--- possible to reduce across different resource types, so this field
--- implicitly contains resource.type. Fields not specified in groupByFields
--- are aggregated away. If groupByFields is not specified and all the time
--- series have the same resource type, then the time series are aggregated
--- into a single output time series. If crossSeriesReducer is not defined,
--- this field is ignored.
+-- | The set of fields to preserve when cross_series_reducer is specified.
+-- The group_by_fields determine how the time series are partitioned into
+-- subsets prior to applying the aggregation operation. Each subset
+-- contains time series that have the same value for each of the grouping
+-- fields. Each individual time series is a member of exactly one subset.
+-- The cross_series_reducer is applied to each subset of time series. It is
+-- not possible to reduce across different resource types, so this field
+-- implicitly contains resource.type. Fields not specified in
+-- group_by_fields are aggregated away. If group_by_fields is not specified
+-- and all the time series have the same resource type, then the time
+-- series are aggregated into a single output time series. If
+-- cross_series_reducer is not defined, this field is ignored.
 aGroupByFields :: Lens' Aggregation [Text]
 aGroupByFields
   = lens _aGroupByFields
@@ -2841,17 +4249,18 @@ instance ToJSON Aggregation where
 -- /See:/ 'uptimeCheckConfig' smart constructor.
 data UptimeCheckConfig =
   UptimeCheckConfig'
-    { _uccInternalCheckers  :: !(Maybe [InternalChecker])
-    , _uccPeriod            :: !(Maybe GDuration)
-    , _uccContentMatchers   :: !(Maybe [ContentMatcher])
-    , _uccName              :: !(Maybe Text)
+    { _uccInternalCheckers :: !(Maybe [InternalChecker])
+    , _uccPeriod :: !(Maybe GDuration)
+    , _uccContentMatchers :: !(Maybe [ContentMatcher])
+    , _uccName :: !(Maybe Text)
     , _uccMonitoredResource :: !(Maybe MonitoredResource)
-    , _uccSelectedRegions   :: !(Maybe [Text])
-    , _uccDisplayName       :: !(Maybe Text)
-    , _uccResourceGroup     :: !(Maybe ResourceGroup)
-    , _uccTimeout           :: !(Maybe GDuration)
-    , _uccHTTPCheck         :: !(Maybe HTTPCheck)
-    , _uccTCPCheck          :: !(Maybe TCPCheck)
+    , _uccSelectedRegions :: !(Maybe [UptimeCheckConfigSelectedRegionsItem])
+    , _uccIsInternal :: !(Maybe Bool)
+    , _uccDisplayName :: !(Maybe Text)
+    , _uccResourceGroup :: !(Maybe ResourceGroup)
+    , _uccTimeout :: !(Maybe GDuration)
+    , _uccHTTPCheck :: !(Maybe HTTPCheck)
+    , _uccTCPCheck :: !(Maybe TCPCheck)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2872,6 +4281,8 @@ data UptimeCheckConfig =
 --
 -- * 'uccSelectedRegions'
 --
+-- * 'uccIsInternal'
+--
 -- * 'uccDisplayName'
 --
 -- * 'uccResourceGroup'
@@ -2891,6 +4302,7 @@ uptimeCheckConfig =
     , _uccName = Nothing
     , _uccMonitoredResource = Nothing
     , _uccSelectedRegions = Nothing
+    , _uccIsInternal = Nothing
     , _uccDisplayName = Nothing
     , _uccResourceGroup = Nothing
     , _uccTimeout = Nothing
@@ -2901,7 +4313,8 @@ uptimeCheckConfig =
 
 -- | The internal checkers that this check will egress from. If is_internal
 -- is true and this list is empty, the check will egress from all the
--- InternalCheckers configured for the project that owns this CheckConfig.
+-- InternalCheckers configured for the project that owns this
+-- UptimeCheckConfig.
 uccInternalCheckers :: Lens' UptimeCheckConfig [InternalChecker]
 uccInternalCheckers
   = lens _uccInternalCheckers
@@ -2909,7 +4322,7 @@ uccInternalCheckers
       . _Default
       . _Coerce
 
--- | How often, in seconds, the uptime check is performed. Currently, the
+-- | How often, in seconds, the Uptime check is performed. Currently, the
 -- only supported values are 60s (1 minute), 300s (5 minutes), 600s (10
 -- minutes), and 900s (15 minutes). Optional, defaults to 60s.
 uccPeriod :: Lens' UptimeCheckConfig (Maybe Scientific)
@@ -2917,11 +4330,11 @@ uccPeriod
   = lens _uccPeriod (\ s a -> s{_uccPeriod = a}) .
       mapping _GDuration
 
--- | The expected content on the page the check is run against. Currently,
--- only the first entry in the list is supported, and other entries will be
--- ignored. The server will look for an exact match of the string in the
--- page response\'s content. This field is optional and should only be
--- specified if a content match is required.
+-- | The content that is expected to appear in the data returned by the
+-- target server against which the check is run. Currently, only the first
+-- entry in the content_matchers list is supported, and additional entries
+-- will be ignored. This field is optional and should only be specified if
+-- a content match is required as part of the\/ Uptime check.
 uccContentMatchers :: Lens' UptimeCheckConfig [ContentMatcher]
 uccContentMatchers
   = lens _uccContentMatchers
@@ -2929,18 +4342,20 @@ uccContentMatchers
       . _Default
       . _Coerce
 
--- | A unique resource name for this UptimeCheckConfig. The format
--- is:projects\/[PROJECT_ID]\/uptimeCheckConfigs\/[UPTIME_CHECK_ID].This
--- field should be omitted when creating the uptime check configuration; on
--- create, the resource name is assigned by the server and included in the
--- response.
+-- | A unique resource name for this Uptime check configuration. The format
+-- is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/uptimeCheckConfigs\/[UPTIME_CHECK_ID]
+-- [PROJECT_ID_OR_NUMBER] is the Workspace host project associated with the
+-- Uptime check.This field should be omitted when creating the Uptime check
+-- configuration; on create, the resource name is assigned by the server
+-- and included in the response.
 uccName :: Lens' UptimeCheckConfig (Maybe Text)
 uccName = lens _uccName (\ s a -> s{_uccName = a})
 
 -- | The monitored resource
 -- (https:\/\/cloud.google.com\/monitoring\/api\/resources) associated with
--- the configuration. The following monitored resource types are supported
--- for uptime checks: uptime_url gce_instance gae_app aws_ec2_instance
+-- the configuration. The following monitored resource types are valid for
+-- this field: uptime_url, gce_instance, gae_app, aws_ec2_instance,
 -- aws_elb_load_balancer
 uccMonitoredResource :: Lens' UptimeCheckConfig (Maybe MonitoredResource)
 uccMonitoredResource
@@ -2949,17 +4364,27 @@ uccMonitoredResource
 
 -- | The list of regions from which the check will be run. Some regions
 -- contain one location, and others contain more than one. If this field is
--- specified, enough regions to include a minimum of 3 locations must be
--- provided, or an error message is returned. Not specifying this field
--- will result in uptime checks running from all regions.
-uccSelectedRegions :: Lens' UptimeCheckConfig [Text]
+-- specified, enough regions must be provided to include a minimum of 3
+-- locations. Not specifying this field will result in Uptime checks
+-- running from all available regions.
+uccSelectedRegions :: Lens' UptimeCheckConfig [UptimeCheckConfigSelectedRegionsItem]
 uccSelectedRegions
   = lens _uccSelectedRegions
       (\ s a -> s{_uccSelectedRegions = a})
       . _Default
       . _Coerce
 
--- | A human-friendly name for the uptime check configuration. The display
+-- | If this is true, then checks are made only from the
+-- \'internal_checkers\'. If it is false, then checks are made only from
+-- the \'selected_regions\'. It is an error to provide \'selected_regions\'
+-- when is_internal is true, or to provide \'internal_checkers\' when
+-- is_internal is false.
+uccIsInternal :: Lens' UptimeCheckConfig (Maybe Bool)
+uccIsInternal
+  = lens _uccIsInternal
+      (\ s a -> s{_uccIsInternal = a})
+
+-- | A human-friendly name for the Uptime check configuration. The display
 -- name should be unique within a Stackdriver Workspace in order to make it
 -- easier to identify; however, uniqueness is not enforced. Required.
 uccDisplayName :: Lens' UptimeCheckConfig (Maybe Text)
@@ -3001,6 +4426,7 @@ instance FromJSON UptimeCheckConfig where
                      <*> (o .:? "name")
                      <*> (o .:? "monitoredResource")
                      <*> (o .:? "selectedRegions" .!= mempty)
+                     <*> (o .:? "isInternal")
                      <*> (o .:? "displayName")
                      <*> (o .:? "resourceGroup")
                      <*> (o .:? "timeout")
@@ -3017,6 +4443,7 @@ instance ToJSON UptimeCheckConfig where
                   ("name" .=) <$> _uccName,
                   ("monitoredResource" .=) <$> _uccMonitoredResource,
                   ("selectedRegions" .=) <$> _uccSelectedRegions,
+                  ("isInternal" .=) <$> _uccIsInternal,
                   ("displayName" .=) <$> _uccDisplayName,
                   ("resourceGroup" .=) <$> _uccResourceGroup,
                   ("timeout" .=) <$> _uccTimeout,
@@ -3028,7 +4455,7 @@ instance ToJSON UptimeCheckConfig where
 -- /See:/ 'point' smart constructor.
 data Point =
   Point'
-    { _pValue    :: !(Maybe TypedValue)
+    { _pValue :: !(Maybe TypedValue)
     , _pInterval :: !(Maybe TimeInterval)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3051,13 +4478,14 @@ pValue :: Lens' Point (Maybe TypedValue)
 pValue = lens _pValue (\ s a -> s{_pValue = a})
 
 -- | The time interval to which the data point applies. For GAUGE metrics,
--- only the end time of the interval is used. For DELTA metrics, the start
--- and end time should specify a non-zero interval, with subsequent points
--- specifying contiguous and non-overlapping intervals. For CUMULATIVE
--- metrics, the start and end time should specify a non-zero interval, with
--- subsequent points specifying the same start time and increasing end
--- times, until an event resets the cumulative value to zero and sets a new
--- start time for the following points.
+-- the start time is optional, but if it is supplied, it must equal the end
+-- time. For DELTA metrics, the start and end time should specify a
+-- non-zero interval, with subsequent points specifying contiguous and
+-- non-overlapping intervals. For CUMULATIVE metrics, the start and end
+-- time should specify a non-zero interval, with subsequent points
+-- specifying the same start time and increasing end times, until an event
+-- resets the cumulative value to zero and sets a new start time for the
+-- following points.
 pInterval :: Lens' Point (Maybe TimeInterval)
 pInterval
   = lens _pInterval (\ s a -> s{_pInterval = a})
@@ -3081,14 +4509,14 @@ instance ToJSON Point where
 -- /See:/ 'collectdPayload' smart constructor.
 data CollectdPayload =
   CollectdPayload'
-    { _cpStartTime      :: !(Maybe DateTime')
+    { _cpStartTime :: !(Maybe DateTime')
     , _cpPluginInstance :: !(Maybe Text)
-    , _cpValues         :: !(Maybe [CollectdValue])
-    , _cpTypeInstance   :: !(Maybe Text)
-    , _cpEndTime        :: !(Maybe DateTime')
-    , _cpMetadata       :: !(Maybe CollectdPayloadMetadata)
-    , _cpType           :: !(Maybe Text)
-    , _cpPlugin         :: !(Maybe Text)
+    , _cpValues :: !(Maybe [CollectdValue])
+    , _cpTypeInstance :: !(Maybe Text)
+    , _cpEndTime :: !(Maybe DateTime')
+    , _cpMetadata :: !(Maybe CollectdPayloadMetadata)
+    , _cpType :: !(Maybe Text)
+    , _cpPlugin :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3140,7 +4568,7 @@ cpPluginInstance
       (\ s a -> s{_cpPluginInstance = a})
 
 -- | The measured values during this time interval. Each value must have a
--- different dataSourceName.
+-- different data_source_name.
 cpValues :: Lens' CollectdPayload [CollectdValue]
 cpValues
   = lens _cpValues (\ s a -> s{_cpValues = a}) .
@@ -3203,7 +4631,7 @@ instance ToJSON CollectdPayload where
 -- /See:/ 'mutationRecord' smart constructor.
 data MutationRecord =
   MutationRecord'
-    { _mrMutatedBy  :: !(Maybe Text)
+    { _mrMutatedBy :: !(Maybe Text)
     , _mrMutateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3254,7 +4682,7 @@ instance ToJSON MutationRecord where
 data Metric =
   Metric'
     { _mLabels :: !(Maybe MetricLabels)
-    , _mType   :: !(Maybe Text)
+    , _mType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3298,9 +4726,9 @@ instance ToJSON Metric where
 -- /See:/ 'collectdPayloadError' smart constructor.
 data CollectdPayloadError =
   CollectdPayloadError'
-    { _cpeError       :: !(Maybe Status)
+    { _cpeError :: !(Maybe Status)
     , _cpeValueErrors :: !(Maybe [CollectdValueError])
-    , _cpeIndex       :: !(Maybe (Textual Int32))
+    , _cpeIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3399,8 +4827,8 @@ instance ToJSON
 -- /See:/ 'exponential' smart constructor.
 data Exponential =
   Exponential'
-    { _eGrowthFactor     :: !(Maybe (Textual Double))
-    , _eScale            :: !(Maybe (Textual Double))
+    { _eGrowthFactor :: !(Maybe (Textual Double))
+    , _eScale :: !(Maybe (Textual Double))
     , _eNumFiniteBuckets :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3458,6 +4886,132 @@ instance ToJSON Exponential where
                   ("scale" .=) <$> _eScale,
                   ("numFiniteBuckets" .=) <$> _eNumFiniteBuckets])
 
+-- | A PerformanceThreshold is used when each window is good when that window
+-- has a sufficiently high performance.
+--
+-- /See:/ 'performanceThreshold' smart constructor.
+data PerformanceThreshold =
+  PerformanceThreshold'
+    { _ptBasicSliPerformance :: !(Maybe BasicSli)
+    , _ptPerformance :: !(Maybe RequestBasedSli)
+    , _ptThreshold :: !(Maybe (Textual Double))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PerformanceThreshold' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptBasicSliPerformance'
+--
+-- * 'ptPerformance'
+--
+-- * 'ptThreshold'
+performanceThreshold
+    :: PerformanceThreshold
+performanceThreshold =
+  PerformanceThreshold'
+    { _ptBasicSliPerformance = Nothing
+    , _ptPerformance = Nothing
+    , _ptThreshold = Nothing
+    }
+
+
+-- | BasicSli to evaluate to judge window quality.
+ptBasicSliPerformance :: Lens' PerformanceThreshold (Maybe BasicSli)
+ptBasicSliPerformance
+  = lens _ptBasicSliPerformance
+      (\ s a -> s{_ptBasicSliPerformance = a})
+
+-- | RequestBasedSli to evaluate to judge window quality.
+ptPerformance :: Lens' PerformanceThreshold (Maybe RequestBasedSli)
+ptPerformance
+  = lens _ptPerformance
+      (\ s a -> s{_ptPerformance = a})
+
+-- | If window performance >= threshold, the window is counted as good.
+ptThreshold :: Lens' PerformanceThreshold (Maybe Double)
+ptThreshold
+  = lens _ptThreshold (\ s a -> s{_ptThreshold = a}) .
+      mapping _Coerce
+
+instance FromJSON PerformanceThreshold where
+        parseJSON
+          = withObject "PerformanceThreshold"
+              (\ o ->
+                 PerformanceThreshold' <$>
+                   (o .:? "basicSliPerformance") <*>
+                     (o .:? "performance")
+                     <*> (o .:? "threshold"))
+
+instance ToJSON PerformanceThreshold where
+        toJSON PerformanceThreshold'{..}
+          = object
+              (catMaybes
+                 [("basicSliPerformance" .=) <$>
+                    _ptBasicSliPerformance,
+                  ("performance" .=) <$> _ptPerformance,
+                  ("threshold" .=) <$> _ptThreshold])
+
+-- | A condition type that checks whether a log message in the scoping
+-- project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project_name)
+-- satisfies the given filter. Logs from other projects in the metrics
+-- scope are not evaluated.
+--
+-- /See:/ 'logMatch' smart constructor.
+data LogMatch =
+  LogMatch'
+    { _lmLabelExtractors :: !(Maybe LogMatchLabelExtractors)
+    , _lmFilter :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LogMatch' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmLabelExtractors'
+--
+-- * 'lmFilter'
+logMatch
+    :: LogMatch
+logMatch = LogMatch' {_lmLabelExtractors = Nothing, _lmFilter = Nothing}
+
+
+-- | Optional. A map from a label key to an extractor expression, which is
+-- used to extract the value for this label key. Each entry in this map is
+-- a specification for how data should be extracted from log entries that
+-- match filter. Each combination of extracted values is treated as a
+-- separate rule for the purposes of triggering notifications. Label keys
+-- and corresponding values can be used in notifications generated by this
+-- condition.Please see the documentation on logs-based metric
+-- valueExtractors for syntax and examples.
+lmLabelExtractors :: Lens' LogMatch (Maybe LogMatchLabelExtractors)
+lmLabelExtractors
+  = lens _lmLabelExtractors
+      (\ s a -> s{_lmLabelExtractors = a})
+
+-- | Required. A logs-based filter. See Advanced Logs Queries for how this
+-- filter should be constructed.
+lmFilter :: Lens' LogMatch (Maybe Text)
+lmFilter = lens _lmFilter (\ s a -> s{_lmFilter = a})
+
+instance FromJSON LogMatch where
+        parseJSON
+          = withObject "LogMatch"
+              (\ o ->
+                 LogMatch' <$>
+                   (o .:? "labelExtractors") <*> (o .:? "filter"))
+
+instance ToJSON LogMatch where
+        toJSON LogMatch'{..}
+          = object
+              (catMaybes
+                 [("labelExtractors" .=) <$> _lmLabelExtractors,
+                  ("filter" .=) <$> _lmFilter])
+
 -- | The range of the population values.
 --
 -- /See:/ 'range' smart constructor.
@@ -3504,6 +5058,203 @@ instance ToJSON Range where
               (catMaybes
                  [("max" .=) <$> _rMax, ("min" .=) <$> _rMin])
 
+-- | Canonical service scoped to an Istio mesh. Anthos clusters running ASM
+-- >= 1.6.8 will have their services ingested as this type.
+--
+-- /See:/ 'istioCanonicalService' smart constructor.
+data IstioCanonicalService =
+  IstioCanonicalService'
+    { _icsCanonicalService :: !(Maybe Text)
+    , _icsMeshUid :: !(Maybe Text)
+    , _icsCanonicalServiceNamespace :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IstioCanonicalService' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'icsCanonicalService'
+--
+-- * 'icsMeshUid'
+--
+-- * 'icsCanonicalServiceNamespace'
+istioCanonicalService
+    :: IstioCanonicalService
+istioCanonicalService =
+  IstioCanonicalService'
+    { _icsCanonicalService = Nothing
+    , _icsMeshUid = Nothing
+    , _icsCanonicalServiceNamespace = Nothing
+    }
+
+
+-- | The name of the canonical service underlying this service. Corresponds
+-- to the destination_canonical_service_name metric label in label in Istio
+-- metrics (https:\/\/cloud.google.com\/monitoring\/api\/metrics_istio).
+icsCanonicalService :: Lens' IstioCanonicalService (Maybe Text)
+icsCanonicalService
+  = lens _icsCanonicalService
+      (\ s a -> s{_icsCanonicalService = a})
+
+-- | Identifier for the Istio mesh in which this canonical service is
+-- defined. Corresponds to the mesh_uid metric label in Istio metrics
+-- (https:\/\/cloud.google.com\/monitoring\/api\/metrics_istio).
+icsMeshUid :: Lens' IstioCanonicalService (Maybe Text)
+icsMeshUid
+  = lens _icsMeshUid (\ s a -> s{_icsMeshUid = a})
+
+-- | The namespace of the canonical service underlying this service.
+-- Corresponds to the destination_canonical_service_namespace metric label
+-- in Istio metrics
+-- (https:\/\/cloud.google.com\/monitoring\/api\/metrics_istio).
+icsCanonicalServiceNamespace :: Lens' IstioCanonicalService (Maybe Text)
+icsCanonicalServiceNamespace
+  = lens _icsCanonicalServiceNamespace
+      (\ s a -> s{_icsCanonicalServiceNamespace = a})
+
+instance FromJSON IstioCanonicalService where
+        parseJSON
+          = withObject "IstioCanonicalService"
+              (\ o ->
+                 IstioCanonicalService' <$>
+                   (o .:? "canonicalService") <*> (o .:? "meshUid") <*>
+                     (o .:? "canonicalServiceNamespace"))
+
+instance ToJSON IstioCanonicalService where
+        toJSON IstioCanonicalService'{..}
+          = object
+              (catMaybes
+                 [("canonicalService" .=) <$> _icsCanonicalService,
+                  ("meshUid" .=) <$> _icsMeshUid,
+                  ("canonicalServiceNamespace" .=) <$>
+                    _icsCanonicalServiceNamespace])
+
+-- | App Engine service. Learn more at https:\/\/cloud.google.com\/appengine.
+--
+-- /See:/ 'appEngine' smart constructor.
+newtype AppEngine =
+  AppEngine'
+    { _aeModuleId :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AppEngine' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aeModuleId'
+appEngine
+    :: AppEngine
+appEngine = AppEngine' {_aeModuleId = Nothing}
+
+
+-- | The ID of the App Engine module underlying this service. Corresponds to
+-- the module_id resource label in the gae_app monitored resource:
+-- https:\/\/cloud.google.com\/monitoring\/api\/resources#tag_gae_app
+aeModuleId :: Lens' AppEngine (Maybe Text)
+aeModuleId
+  = lens _aeModuleId (\ s a -> s{_aeModuleId = a})
+
+instance FromJSON AppEngine where
+        parseJSON
+          = withObject "AppEngine"
+              (\ o -> AppEngine' <$> (o .:? "moduleId"))
+
+instance ToJSON AppEngine where
+        toJSON AppEngine'{..}
+          = object
+              (catMaybes [("moduleId" .=) <$> _aeModuleId])
+
+-- | The QueryTimeSeries response.
+--
+-- /See:/ 'queryTimeSeriesResponse' smart constructor.
+data QueryTimeSeriesResponse =
+  QueryTimeSeriesResponse'
+    { _qtsrNextPageToken :: !(Maybe Text)
+    , _qtsrPartialErrors :: !(Maybe [Status])
+    , _qtsrTimeSeriesDescriptor :: !(Maybe TimeSeriesDescriptor)
+    , _qtsrTimeSeriesData :: !(Maybe [TimeSeriesData])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'QueryTimeSeriesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qtsrNextPageToken'
+--
+-- * 'qtsrPartialErrors'
+--
+-- * 'qtsrTimeSeriesDescriptor'
+--
+-- * 'qtsrTimeSeriesData'
+queryTimeSeriesResponse
+    :: QueryTimeSeriesResponse
+queryTimeSeriesResponse =
+  QueryTimeSeriesResponse'
+    { _qtsrNextPageToken = Nothing
+    , _qtsrPartialErrors = Nothing
+    , _qtsrTimeSeriesDescriptor = Nothing
+    , _qtsrTimeSeriesData = Nothing
+    }
+
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as page_token in the next call to this method.
+qtsrNextPageToken :: Lens' QueryTimeSeriesResponse (Maybe Text)
+qtsrNextPageToken
+  = lens _qtsrNextPageToken
+      (\ s a -> s{_qtsrNextPageToken = a})
+
+-- | Query execution errors that may have caused the time series data
+-- returned to be incomplete. The available data will be available in the
+-- response.
+qtsrPartialErrors :: Lens' QueryTimeSeriesResponse [Status]
+qtsrPartialErrors
+  = lens _qtsrPartialErrors
+      (\ s a -> s{_qtsrPartialErrors = a})
+      . _Default
+      . _Coerce
+
+-- | The descriptor for the time series data.
+qtsrTimeSeriesDescriptor :: Lens' QueryTimeSeriesResponse (Maybe TimeSeriesDescriptor)
+qtsrTimeSeriesDescriptor
+  = lens _qtsrTimeSeriesDescriptor
+      (\ s a -> s{_qtsrTimeSeriesDescriptor = a})
+
+-- | The time series data.
+qtsrTimeSeriesData :: Lens' QueryTimeSeriesResponse [TimeSeriesData]
+qtsrTimeSeriesData
+  = lens _qtsrTimeSeriesData
+      (\ s a -> s{_qtsrTimeSeriesData = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON QueryTimeSeriesResponse where
+        parseJSON
+          = withObject "QueryTimeSeriesResponse"
+              (\ o ->
+                 QueryTimeSeriesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "partialErrors" .!= mempty)
+                     <*> (o .:? "timeSeriesDescriptor")
+                     <*> (o .:? "timeSeriesData" .!= mempty))
+
+instance ToJSON QueryTimeSeriesResponse where
+        toJSON QueryTimeSeriesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _qtsrNextPageToken,
+                  ("partialErrors" .=) <$> _qtsrPartialErrors,
+                  ("timeSeriesDescriptor" .=) <$>
+                    _qtsrTimeSeriesDescriptor,
+                  ("timeSeriesData" .=) <$> _qtsrTimeSeriesData])
+
 -- | An object representing a resource that can be used for monitoring,
 -- logging, billing, or other purposes. Examples include virtual machine
 -- instances, databases, and storage devices such as disks. The type field
@@ -3520,7 +5271,7 @@ instance ToJSON Range where
 data MonitoredResource =
   MonitoredResource'
     { _mrLabels :: !(Maybe MonitoredResourceLabels)
-    , _mrType   :: !(Maybe Text)
+    , _mrType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3546,7 +5297,10 @@ mrLabels = lens _mrLabels (\ s a -> s{_mrLabels = a})
 -- | Required. The monitored resource type. This field must match the type
 -- field of a MonitoredResourceDescriptor object. For example, the type of
 -- a Compute Engine VM instance is gce_instance. For a list of types, see
--- Monitoring resource types and Logging resource types.
+-- Monitoring resource types
+-- (https:\/\/cloud.google.com\/monitoring\/api\/resources) and Logging
+-- resource types
+-- (https:\/\/cloud.google.com\/logging\/docs\/api\/v2\/resource-list).
 mrType :: Lens' MonitoredResource (Maybe Text)
 mrType = lens _mrType (\ s a -> s{_mrType = a})
 
@@ -3571,8 +5325,8 @@ instance ToJSON MonitoredResource where
 data UptimeCheckIP =
   UptimeCheckIP'
     { _uciIPAddress :: !(Maybe Text)
-    , _uciLocation  :: !(Maybe Text)
-    , _uciRegion    :: !(Maybe UptimeCheckIPRegion)
+    , _uciLocation :: !(Maybe Text)
+    , _uciRegion :: !(Maybe UptimeCheckIPRegion)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3593,10 +5347,10 @@ uptimeCheckIP =
     {_uciIPAddress = Nothing, _uciLocation = Nothing, _uciRegion = Nothing}
 
 
--- | The IP address from which the uptime check originates. This is a full IP
--- address (not an IP address range). Most IP addresses, as of this
--- publication, are in IPv4 format; however, one should not rely on the IP
--- addresses being in IPv4 format indefinitely and should support
+-- | The IP address from which the Uptime check originates. This is a fully
+-- specified IP address (not an IP address range). Most IP addresses, as of
+-- this publication, are in IPv4 format; however, one should not rely on
+-- the IP addresses being in IPv4 format indefinitely, and should support
 -- interpreting this field in either IPv4 or IPv6 format.
 uciIPAddress :: Lens' UptimeCheckIP (Maybe Text)
 uciIPAddress
@@ -3629,6 +5383,90 @@ instance ToJSON UptimeCheckIP where
                  [("ipAddress" .=) <$> _uciIPAddress,
                   ("location" .=) <$> _uciLocation,
                   ("region" .=) <$> _uciRegion])
+
+-- | Istio service scoped to a single Kubernetes cluster. Learn more at
+-- https:\/\/istio.io. Clusters running OSS Istio will have their services
+-- ingested as this type.
+--
+-- /See:/ 'clusterIstio' smart constructor.
+data ClusterIstio =
+  ClusterIstio'
+    { _ciLocation :: !(Maybe Text)
+    , _ciServiceNamespace :: !(Maybe Text)
+    , _ciServiceName :: !(Maybe Text)
+    , _ciClusterName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ClusterIstio' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciLocation'
+--
+-- * 'ciServiceNamespace'
+--
+-- * 'ciServiceName'
+--
+-- * 'ciClusterName'
+clusterIstio
+    :: ClusterIstio
+clusterIstio =
+  ClusterIstio'
+    { _ciLocation = Nothing
+    , _ciServiceNamespace = Nothing
+    , _ciServiceName = Nothing
+    , _ciClusterName = Nothing
+    }
+
+
+-- | The location of the Kubernetes cluster in which this Istio service is
+-- defined. Corresponds to the location resource label in k8s_cluster
+-- resources.
+ciLocation :: Lens' ClusterIstio (Maybe Text)
+ciLocation
+  = lens _ciLocation (\ s a -> s{_ciLocation = a})
+
+-- | The namespace of the Istio service underlying this service. Corresponds
+-- to the destination_service_namespace metric label in Istio metrics.
+ciServiceNamespace :: Lens' ClusterIstio (Maybe Text)
+ciServiceNamespace
+  = lens _ciServiceNamespace
+      (\ s a -> s{_ciServiceNamespace = a})
+
+-- | The name of the Istio service underlying this service. Corresponds to
+-- the destination_service_name metric label in Istio metrics.
+ciServiceName :: Lens' ClusterIstio (Maybe Text)
+ciServiceName
+  = lens _ciServiceName
+      (\ s a -> s{_ciServiceName = a})
+
+-- | The name of the Kubernetes cluster in which this Istio service is
+-- defined. Corresponds to the cluster_name resource label in k8s_cluster
+-- resources.
+ciClusterName :: Lens' ClusterIstio (Maybe Text)
+ciClusterName
+  = lens _ciClusterName
+      (\ s a -> s{_ciClusterName = a})
+
+instance FromJSON ClusterIstio where
+        parseJSON
+          = withObject "ClusterIstio"
+              (\ o ->
+                 ClusterIstio' <$>
+                   (o .:? "location") <*> (o .:? "serviceNamespace") <*>
+                     (o .:? "serviceName")
+                     <*> (o .:? "clusterName"))
+
+instance ToJSON ClusterIstio where
+        toJSON ClusterIstio'{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _ciLocation,
+                  ("serviceNamespace" .=) <$> _ciServiceNamespace,
+                  ("serviceName" .=) <$> _ciServiceName,
+                  ("clusterName" .=) <$> _ciClusterName])
 
 -- | User-supplied key\/value data to be used for organizing and identifying
 -- the AlertPolicy objects.The field can contain up to 64 entries. Each key
@@ -3677,7 +5515,7 @@ instance ToJSON AlertPolicyUserLabels where
 -- /See:/ 'documentation' smart constructor.
 data Documentation =
   Documentation'
-    { _dContent  :: !(Maybe Text)
+    { _dContent :: !(Maybe Text)
     , _dMimeType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3722,6 +5560,73 @@ instance ToJSON Documentation where
                  [("content" .=) <$> _dContent,
                   ("mimeType" .=) <$> _dMimeType])
 
+-- | Optional. A map from a label key to an extractor expression, which is
+-- used to extract the value for this label key. Each entry in this map is
+-- a specification for how data should be extracted from log entries that
+-- match filter. Each combination of extracted values is treated as a
+-- separate rule for the purposes of triggering notifications. Label keys
+-- and corresponding values can be used in notifications generated by this
+-- condition.Please see the documentation on logs-based metric
+-- valueExtractors for syntax and examples.
+--
+-- /See:/ 'logMatchLabelExtractors' smart constructor.
+newtype LogMatchLabelExtractors =
+  LogMatchLabelExtractors'
+    { _lmleAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LogMatchLabelExtractors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmleAddtional'
+logMatchLabelExtractors
+    :: HashMap Text Text -- ^ 'lmleAddtional'
+    -> LogMatchLabelExtractors
+logMatchLabelExtractors pLmleAddtional_ =
+  LogMatchLabelExtractors' {_lmleAddtional = _Coerce # pLmleAddtional_}
+
+
+lmleAddtional :: Lens' LogMatchLabelExtractors (HashMap Text Text)
+lmleAddtional
+  = lens _lmleAddtional
+      (\ s a -> s{_lmleAddtional = a})
+      . _Coerce
+
+instance FromJSON LogMatchLabelExtractors where
+        parseJSON
+          = withObject "LogMatchLabelExtractors"
+              (\ o ->
+                 LogMatchLabelExtractors' <$> (parseJSONObject o))
+
+instance ToJSON LogMatchLabelExtractors where
+        toJSON = toJSON . _lmleAddtional
+
+-- | Future parameters for the availability SLI.
+--
+-- /See:/ 'availabilityCriteria' smart constructor.
+data AvailabilityCriteria =
+  AvailabilityCriteria'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AvailabilityCriteria' with the minimum fields required to make a request.
+--
+availabilityCriteria
+    :: AvailabilityCriteria
+availabilityCriteria = AvailabilityCriteria'
+
+
+instance FromJSON AvailabilityCriteria where
+        parseJSON
+          = withObject "AvailabilityCriteria"
+              (\ o -> pure AvailabilityCriteria')
+
+instance ToJSON AvailabilityCriteria where
+        toJSON = const emptyObject
+
 -- | Exemplars are example points that may be used to annotate aggregated
 -- distribution values. They are metadata that gives information about a
 -- particular value added to a Distribution bucket, such as a trace ID that
@@ -3732,8 +5637,8 @@ instance ToJSON Documentation where
 data Exemplar =
   Exemplar'
     { _eAttachments :: !(Maybe [ExemplarAttachmentsItem])
-    , _eValue       :: !(Maybe (Textual Double))
-    , _eTimestamp   :: !(Maybe DateTime')
+    , _eValue :: !(Maybe (Textual Double))
+    , _eTimestamp :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3795,14 +5700,50 @@ instance ToJSON Exemplar where
                   ("value" .=) <$> _eValue,
                   ("timestamp" .=) <$> _eTimestamp])
 
+-- | Control over the rate of notifications sent to this alert policy\'s
+-- notification channels.
+--
+-- /See:/ 'notificationRateLimit' smart constructor.
+newtype NotificationRateLimit =
+  NotificationRateLimit'
+    { _nrlPeriod :: Maybe GDuration
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NotificationRateLimit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nrlPeriod'
+notificationRateLimit
+    :: NotificationRateLimit
+notificationRateLimit = NotificationRateLimit' {_nrlPeriod = Nothing}
+
+
+-- | Not more than one notification per period.
+nrlPeriod :: Lens' NotificationRateLimit (Maybe Scientific)
+nrlPeriod
+  = lens _nrlPeriod (\ s a -> s{_nrlPeriod = a}) .
+      mapping _GDuration
+
+instance FromJSON NotificationRateLimit where
+        parseJSON
+          = withObject "NotificationRateLimit"
+              (\ o -> NotificationRateLimit' <$> (o .:? "period"))
+
+instance ToJSON NotificationRateLimit where
+        toJSON NotificationRateLimit'{..}
+          = object (catMaybes [("period" .=) <$> _nrlPeriod])
+
 -- | Additional annotations that can be used to guide the usage of a metric.
 --
 -- /See:/ 'metricDescriptorMetadata' smart constructor.
 data MetricDescriptorMetadata =
   MetricDescriptorMetadata'
     { _mdmSamplePeriod :: !(Maybe GDuration)
-    , _mdmIngestDelay  :: !(Maybe GDuration)
-    , _mdmLaunchStage  :: !(Maybe MetricDescriptorMetadataLaunchStage)
+    , _mdmIngestDelay :: !(Maybe GDuration)
+    , _mdmLaunchStage :: !(Maybe MetricDescriptorMetadataLaunchStage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3845,7 +5786,7 @@ mdmIngestDelay
       (\ s a -> s{_mdmIngestDelay = a})
       . mapping _GDuration
 
--- | The launch stage of the metric definition.
+-- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
 mdmLaunchStage :: Lens' MetricDescriptorMetadata (Maybe MetricDescriptorMetadataLaunchStage)
 mdmLaunchStage
   = lens _mdmLaunchStage
@@ -3867,19 +5808,117 @@ instance ToJSON MetricDescriptorMetadata where
                   ("ingestDelay" .=) <$> _mdmIngestDelay,
                   ("launchStage" .=) <$> _mdmLaunchStage])
 
--- | A time interval extending just after a start time through an end time.
--- The start time must not be later than the end time. The default start
--- time is the end time, making the startTime value technically optional.
--- Whether this is useful depends on the MetricKind. If the start and end
--- times are the same, the interval represents a point in time. This is
--- appropriate for GAUGE metrics, but not for DELTA and CUMULATIVE metrics,
--- which cover a span of time.
+-- | A Service-Level Indicator (SLI) describes the \"performance\" of a
+-- service. For some services, the SLI is well-defined. In such cases, the
+-- SLI can be described easily by referencing the well-known SLI and
+-- providing the needed parameters. Alternatively, a \"custom\" SLI can be
+-- defined with a query to the underlying metric store. An SLI is defined
+-- to be good_service \/ total_service over any queried time interval. The
+-- value of performance always falls into the range 0 \<= performance \<=
+-- 1. A custom SLI describes how to compute this ratio, whether this is by
+-- dividing values from a pair of time series, cutting a Distribution into
+-- good and bad counts, or counting time windows in which the service
+-- complies with a criterion. For separation of concerns, a single
+-- Service-Level Indicator measures performance for only one aspect of
+-- service quality, such as fraction of successful queries or fast-enough
+-- queries.
+--
+-- /See:/ 'serviceLevelIndicator' smart constructor.
+data ServiceLevelIndicator =
+  ServiceLevelIndicator'
+    { _sliBasicSli :: !(Maybe BasicSli)
+    , _sliRequestBased :: !(Maybe RequestBasedSli)
+    , _sliWindowsBased :: !(Maybe WindowsBasedSli)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ServiceLevelIndicator' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sliBasicSli'
+--
+-- * 'sliRequestBased'
+--
+-- * 'sliWindowsBased'
+serviceLevelIndicator
+    :: ServiceLevelIndicator
+serviceLevelIndicator =
+  ServiceLevelIndicator'
+    { _sliBasicSli = Nothing
+    , _sliRequestBased = Nothing
+    , _sliWindowsBased = Nothing
+    }
+
+
+-- | Basic SLI on a well-known service type.
+sliBasicSli :: Lens' ServiceLevelIndicator (Maybe BasicSli)
+sliBasicSli
+  = lens _sliBasicSli (\ s a -> s{_sliBasicSli = a})
+
+-- | Request-based SLIs
+sliRequestBased :: Lens' ServiceLevelIndicator (Maybe RequestBasedSli)
+sliRequestBased
+  = lens _sliRequestBased
+      (\ s a -> s{_sliRequestBased = a})
+
+-- | Windows-based SLIs
+sliWindowsBased :: Lens' ServiceLevelIndicator (Maybe WindowsBasedSli)
+sliWindowsBased
+  = lens _sliWindowsBased
+      (\ s a -> s{_sliWindowsBased = a})
+
+instance FromJSON ServiceLevelIndicator where
+        parseJSON
+          = withObject "ServiceLevelIndicator"
+              (\ o ->
+                 ServiceLevelIndicator' <$>
+                   (o .:? "basicSli") <*> (o .:? "requestBased") <*>
+                     (o .:? "windowsBased"))
+
+instance ToJSON ServiceLevelIndicator where
+        toJSON ServiceLevelIndicator'{..}
+          = object
+              (catMaybes
+                 [("basicSli" .=) <$> _sliBasicSli,
+                  ("requestBased" .=) <$> _sliRequestBased,
+                  ("windowsBased" .=) <$> _sliWindowsBased])
+
+-- | A closed time interval. It extends from the start time to the end time,
+-- and includes both: [startTime, endTime]. Valid time intervals depend on
+-- the MetricKind
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.metricDescriptors#MetricKind)
+-- of the metric value. The end time must not be earlier than the start
+-- time. When writing data points, the start time must not be more than 25
+-- hours in the past and the end time must not be more than five minutes in
+-- the future. For GAUGE metrics, the startTime value is technically
+-- optional; if no value is specified, the start time defaults to the value
+-- of the end time, and the interval represents a single point in time. If
+-- both start and end times are specified, they must be identical. Such an
+-- interval is valid only for GAUGE metrics, which are point-in-time
+-- measurements. The end time of a new interval must be at least a
+-- millisecond after the end time of the previous interval. For DELTA
+-- metrics, the start time and end time must specify a non-zero interval,
+-- with subsequent points specifying contiguous and non-overlapping
+-- intervals. For DELTA metrics, the start time of the next interval must
+-- be at least a millisecond after the end time of the previous interval.
+-- For CUMULATIVE metrics, the start time and end time must specify a a
+-- non-zero interval, with subsequent points specifying the same start time
+-- and increasing end times, until an event resets the cumulative value to
+-- zero and sets a new start time for the following points. The new start
+-- time must be at least a millisecond after the end time of the previous
+-- interval. The start time of a new interval must be at least a
+-- millisecond after the end time of the previous interval because
+-- intervals are closed. If the start time of a new interval is the same as
+-- the end time of the previous interval, then data written at the new
+-- start time could overwrite data written at the previous end time.
 --
 -- /See:/ 'timeInterval' smart constructor.
 data TimeInterval =
   TimeInterval'
     { _tiStartTime :: !(Maybe DateTime')
-    , _tiEndTime   :: !(Maybe DateTime')
+    , _tiEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3924,7 +5963,7 @@ instance ToJSON TimeInterval where
                  [("startTime" .=) <$> _tiStartTime,
                   ("endTime" .=) <$> _tiEndTime])
 
--- | The list of headers to send as part of the uptime check request. If two
+-- | The list of headers to send as part of the Uptime check request. If two
 -- headers have the same key and different values, they should be entered
 -- as a single header, with the value being a comma-separated list of all
 -- the desired values as described at
@@ -4015,13 +6054,17 @@ instance ToJSON MonitoredResourceMetadataSystemLabels
          where
         toJSON = toJSON . _mrmslAddtional
 
--- | Used to perform string matching. It allows substring and regular
--- expressions, together with their negations.
+-- | Optional. Used to perform content matching. This allows matching based
+-- on substrings and regular expressions, together with their negations.
+-- Only the first 4 MB of an HTTP or HTTPS check\'s response (and the first
+-- 1 MB of a TCP check\'s response) are examined for purposes of content
+-- matching.
 --
 -- /See:/ 'contentMatcher' smart constructor.
-newtype ContentMatcher =
+data ContentMatcher =
   ContentMatcher'
-    { _cmContent :: Maybe Text
+    { _cmMatcher :: !(Maybe ContentMatcherMatcher)
+    , _cmContent :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4030,13 +6073,22 @@ newtype ContentMatcher =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cmMatcher'
+--
 -- * 'cmContent'
 contentMatcher
     :: ContentMatcher
-contentMatcher = ContentMatcher' {_cmContent = Nothing}
+contentMatcher = ContentMatcher' {_cmMatcher = Nothing, _cmContent = Nothing}
 
 
--- | String or regex content to match (max 1024 bytes)
+-- | The type of content matcher that will be applied to the server output,
+-- compared to the content string when the check is run.
+cmMatcher :: Lens' ContentMatcher (Maybe ContentMatcherMatcher)
+cmMatcher
+  = lens _cmMatcher (\ s a -> s{_cmMatcher = a})
+
+-- | String or regex content to match. Maximum 1024 bytes. An empty content
+-- string indicates no content matching is to be performed.
 cmContent :: Lens' ContentMatcher (Maybe Text)
 cmContent
   = lens _cmContent (\ s a -> s{_cmContent = a})
@@ -4044,11 +6096,16 @@ cmContent
 instance FromJSON ContentMatcher where
         parseJSON
           = withObject "ContentMatcher"
-              (\ o -> ContentMatcher' <$> (o .:? "content"))
+              (\ o ->
+                 ContentMatcher' <$>
+                   (o .:? "matcher") <*> (o .:? "content"))
 
 instance ToJSON ContentMatcher where
         toJSON ContentMatcher'{..}
-          = object (catMaybes [("content" .=) <$> _cmContent])
+          = object
+              (catMaybes
+                 [("matcher" .=) <$> _cmMatcher,
+                  ("content" .=) <$> _cmContent])
 
 -- | The ListGroupMembers response.
 --
@@ -4056,8 +6113,8 @@ instance ToJSON ContentMatcher where
 data ListGroupMembersResponse =
   ListGroupMembersResponse'
     { _lgmrNextPageToken :: !(Maybe Text)
-    , _lgmrMembers       :: !(Maybe [MonitoredResource])
-    , _lgmrTotalSize     :: !(Maybe (Textual Int32))
+    , _lgmrMembers :: !(Maybe [MonitoredResource])
+    , _lgmrTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4083,7 +6140,7 @@ listGroupMembersResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as pageToken in the next call to this method.
+-- as page_token in the next call to this method.
 lgmrNextPageToken :: Lens' ListGroupMembersResponse (Maybe Text)
 lgmrNextPageToken
   = lens _lgmrNextPageToken
@@ -4120,13 +6177,54 @@ instance ToJSON ListGroupMembersResponse where
                   ("members" .=) <$> _lgmrMembers,
                   ("totalSize" .=) <$> _lgmrTotalSize])
 
+-- | Control over how the notification channels in notification_channels are
+-- notified when this alert fires.
+--
+-- /See:/ 'alertStrategy' smart constructor.
+newtype AlertStrategy =
+  AlertStrategy'
+    { _asNotificationRateLimit :: Maybe NotificationRateLimit
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AlertStrategy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asNotificationRateLimit'
+alertStrategy
+    :: AlertStrategy
+alertStrategy = AlertStrategy' {_asNotificationRateLimit = Nothing}
+
+
+-- | Required for alert policies with a LogMatch condition.This limit is not
+-- implemented for alert policies that are not log-based.
+asNotificationRateLimit :: Lens' AlertStrategy (Maybe NotificationRateLimit)
+asNotificationRateLimit
+  = lens _asNotificationRateLimit
+      (\ s a -> s{_asNotificationRateLimit = a})
+
+instance FromJSON AlertStrategy where
+        parseJSON
+          = withObject "AlertStrategy"
+              (\ o ->
+                 AlertStrategy' <$> (o .:? "notificationRateLimit"))
+
+instance ToJSON AlertStrategy where
+        toJSON AlertStrategy'{..}
+          = object
+              (catMaybes
+                 [("notificationRateLimit" .=) <$>
+                    _asNotificationRateLimit])
+
 -- | A description of a label.
 --
 -- /See:/ 'labelDescriptor' smart constructor.
 data LabelDescriptor =
   LabelDescriptor'
-    { _ldKey         :: !(Maybe Text)
-    , _ldValueType   :: !(Maybe LabelDescriptorValueType)
+    { _ldKey :: !(Maybe Text)
+    , _ldValueType :: !(Maybe LabelDescriptorValueType)
     , _ldDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4148,7 +6246,11 @@ labelDescriptor =
     {_ldKey = Nothing, _ldValueType = Nothing, _ldDescription = Nothing}
 
 
--- | The label key.
+-- | The key for this label. The key must meet the following criteria: Does
+-- not exceed 100 characters. Matches the following regular expression:
+-- [a-zA-Z][a-zA-Z0-9_]* The first character must be an upper- or
+-- lower-case letter. The remaining characters must be letters, digits, or
+-- underscores.
 ldKey :: Lens' LabelDescriptor (Maybe Text)
 ldKey = lens _ldKey (\ s a -> s{_ldKey = a})
 
@@ -4189,8 +6291,8 @@ instance ToJSON LabelDescriptor where
 -- /See:/ 'linear' smart constructor.
 data Linear =
   Linear'
-    { _lOffSet           :: !(Maybe (Textual Double))
-    , _lWidth            :: !(Maybe (Textual Double))
+    { _lOffSet :: !(Maybe (Textual Double))
+    , _lWidth :: !(Maybe (Textual Double))
     , _lNumFiniteBuckets :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4251,7 +6353,7 @@ instance ToJSON Linear where
 -- /See:/ 'listUptimeCheckIPsResponse' smart constructor.
 data ListUptimeCheckIPsResponse =
   ListUptimeCheckIPsResponse'
-    { _lucirNextPageToken  :: !(Maybe Text)
+    { _lucirNextPageToken :: !(Maybe Text)
     , _lucirUptimeCheckIPs :: !(Maybe [UptimeCheckIP])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4366,7 +6468,7 @@ instance ToJSON
 data ResourceGroup =
   ResourceGroup'
     { _rgResourceType :: !(Maybe ResourceGroupResourceType)
-    , _rgGroupId      :: !(Maybe Text)
+    , _rgGroupId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4389,8 +6491,9 @@ rgResourceType
   = lens _rgResourceType
       (\ s a -> s{_rgResourceType = a})
 
--- | The group of resources being monitored. Should be only the group_id, not
--- projects\/\/groups\/.
+-- | The group of resources being monitored. Should be only the [GROUP_ID],
+-- and not the full-path
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID].
 rgGroupId :: Lens' ResourceGroup (Maybe Text)
 rgGroupId
   = lens _rgGroupId (\ s a -> s{_rgGroupId = a})
@@ -4409,18 +6512,19 @@ instance ToJSON ResourceGroup where
                  [("resourceType" .=) <$> _rgResourceType,
                   ("groupId" .=) <$> _rgGroupId])
 
--- | A set of (label, value) pairs which were dropped during aggregation,
--- attached to google.api.Distribution.Exemplars in google.api.Distribution
--- values during aggregation.These values are used in combination with the
--- label values that remain on the aggregated Distribution timeseries to
--- construct the full label set for the exemplar values. The resulting full
--- label set may be used to identify the specific task\/job\/instance (for
--- example) which may be contributing to a long-tail, while allowing the
--- storage savings of only storing aggregated distribution values for a
--- large group.Note that there are no guarantees on ordering of the labels
--- from exemplar-to-exemplar and from distribution-to-distribution in the
--- same stream, and there may be duplicates. It is up to clients to resolve
--- any ambiguities.
+-- | A set of (label, value) pairs that were removed from a Distribution time
+-- series during aggregation and then added as an attachment to a
+-- Distribution.Exemplar.The full label set for the exemplars is
+-- constructed by using the dropped pairs in combination with the label
+-- values that remain on the aggregated Distribution time series. The
+-- constructed full label set can be used to identify the specific entity,
+-- such as the instance or job, which might be contributing to a long-tail.
+-- However, with dropped labels, the storage requirements are reduced
+-- because only the aggregated distribution values for a large group of
+-- time series are stored.Note that there are no guarantees on ordering of
+-- the labels from exemplar-to-exemplar and from
+-- distribution-to-distribution in the same stream, and there may be
+-- duplicates. It is up to clients to resolve any ambiguities.
 --
 -- /See:/ 'droppedLabels' smart constructor.
 newtype DroppedLabels =
@@ -4453,6 +6557,62 @@ instance ToJSON DroppedLabels where
         toJSON DroppedLabels'{..}
           = object (catMaybes [("label" .=) <$> _dlLabel])
 
+-- | A descriptor for the labels and points in a time series.
+--
+-- /See:/ 'timeSeriesDescriptor' smart constructor.
+data TimeSeriesDescriptor =
+  TimeSeriesDescriptor'
+    { _tsdPointDescriptors :: !(Maybe [ValueDescriptor])
+    , _tsdLabelDescriptors :: !(Maybe [LabelDescriptor])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeSeriesDescriptor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsdPointDescriptors'
+--
+-- * 'tsdLabelDescriptors'
+timeSeriesDescriptor
+    :: TimeSeriesDescriptor
+timeSeriesDescriptor =
+  TimeSeriesDescriptor'
+    {_tsdPointDescriptors = Nothing, _tsdLabelDescriptors = Nothing}
+
+
+-- | Descriptors for the point data value columns.
+tsdPointDescriptors :: Lens' TimeSeriesDescriptor [ValueDescriptor]
+tsdPointDescriptors
+  = lens _tsdPointDescriptors
+      (\ s a -> s{_tsdPointDescriptors = a})
+      . _Default
+      . _Coerce
+
+-- | Descriptors for the labels.
+tsdLabelDescriptors :: Lens' TimeSeriesDescriptor [LabelDescriptor]
+tsdLabelDescriptors
+  = lens _tsdLabelDescriptors
+      (\ s a -> s{_tsdLabelDescriptors = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TimeSeriesDescriptor where
+        parseJSON
+          = withObject "TimeSeriesDescriptor"
+              (\ o ->
+                 TimeSeriesDescriptor' <$>
+                   (o .:? "pointDescriptors" .!= mempty) <*>
+                     (o .:? "labelDescriptors" .!= mempty))
+
+instance ToJSON TimeSeriesDescriptor where
+        toJSON TimeSeriesDescriptor'{..}
+          = object
+              (catMaybes
+                 [("pointDescriptors" .=) <$> _tsdPointDescriptors,
+                  ("labelDescriptors" .=) <$> _tsdLabelDescriptors])
+
 -- | Specifies how many time series must fail a predicate to trigger a
 -- condition. If not specified, then a {count: 1} trigger is used.
 --
@@ -4460,7 +6620,7 @@ instance ToJSON DroppedLabels where
 data Trigger =
   Trigger'
     { _tPercent :: !(Maybe (Textual Double))
-    , _tCount   :: !(Maybe (Textual Int32))
+    , _tCount :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4504,17 +6664,137 @@ instance ToJSON Trigger where
                  [("percent" .=) <$> _tPercent,
                   ("count" .=) <$> _tCount])
 
+-- | Labels which have been used to annotate the service-level objective.
+-- Label keys must start with a letter. Label keys and values may contain
+-- lowercase letters, numbers, underscores, and dashes. Label keys and
+-- values have a maximum length of 63 characters, and must be less than 128
+-- bytes in size. Up to 64 label entries may be stored. For labels which do
+-- not have a semantic value, the empty string may be supplied for the
+-- label value.
+--
+-- /See:/ 'serviceLevelObjectiveUserLabels' smart constructor.
+newtype ServiceLevelObjectiveUserLabels =
+  ServiceLevelObjectiveUserLabels'
+    { _sloulAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ServiceLevelObjectiveUserLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sloulAddtional'
+serviceLevelObjectiveUserLabels
+    :: HashMap Text Text -- ^ 'sloulAddtional'
+    -> ServiceLevelObjectiveUserLabels
+serviceLevelObjectiveUserLabels pSloulAddtional_ =
+  ServiceLevelObjectiveUserLabels'
+    {_sloulAddtional = _Coerce # pSloulAddtional_}
+
+
+sloulAddtional :: Lens' ServiceLevelObjectiveUserLabels (HashMap Text Text)
+sloulAddtional
+  = lens _sloulAddtional
+      (\ s a -> s{_sloulAddtional = a})
+      . _Coerce
+
+instance FromJSON ServiceLevelObjectiveUserLabels
+         where
+        parseJSON
+          = withObject "ServiceLevelObjectiveUserLabels"
+              (\ o ->
+                 ServiceLevelObjectiveUserLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON ServiceLevelObjectiveUserLabels where
+        toJSON = toJSON . _sloulAddtional
+
+-- | A descriptor for the value columns in a data point.
+--
+-- /See:/ 'valueDescriptor' smart constructor.
+data ValueDescriptor =
+  ValueDescriptor'
+    { _vdMetricKind :: !(Maybe ValueDescriptorMetricKind)
+    , _vdKey :: !(Maybe Text)
+    , _vdValueType :: !(Maybe ValueDescriptorValueType)
+    , _vdUnit :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValueDescriptor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vdMetricKind'
+--
+-- * 'vdKey'
+--
+-- * 'vdValueType'
+--
+-- * 'vdUnit'
+valueDescriptor
+    :: ValueDescriptor
+valueDescriptor =
+  ValueDescriptor'
+    { _vdMetricKind = Nothing
+    , _vdKey = Nothing
+    , _vdValueType = Nothing
+    , _vdUnit = Nothing
+    }
+
+
+-- | The value stream kind.
+vdMetricKind :: Lens' ValueDescriptor (Maybe ValueDescriptorMetricKind)
+vdMetricKind
+  = lens _vdMetricKind (\ s a -> s{_vdMetricKind = a})
+
+-- | The value key.
+vdKey :: Lens' ValueDescriptor (Maybe Text)
+vdKey = lens _vdKey (\ s a -> s{_vdKey = a})
+
+-- | The value type.
+vdValueType :: Lens' ValueDescriptor (Maybe ValueDescriptorValueType)
+vdValueType
+  = lens _vdValueType (\ s a -> s{_vdValueType = a})
+
+-- | The unit in which time_series point values are reported. unit follows
+-- the UCUM format for units as seen in
+-- https:\/\/unitsofmeasure.org\/ucum.html. unit is only valid if
+-- value_type is INTEGER, DOUBLE, DISTRIBUTION.
+vdUnit :: Lens' ValueDescriptor (Maybe Text)
+vdUnit = lens _vdUnit (\ s a -> s{_vdUnit = a})
+
+instance FromJSON ValueDescriptor where
+        parseJSON
+          = withObject "ValueDescriptor"
+              (\ o ->
+                 ValueDescriptor' <$>
+                   (o .:? "metricKind") <*> (o .:? "key") <*>
+                     (o .:? "valueType")
+                     <*> (o .:? "unit"))
+
+instance ToJSON ValueDescriptor where
+        toJSON ValueDescriptor'{..}
+          = object
+              (catMaybes
+                 [("metricKind" .=) <$> _vdMetricKind,
+                  ("key" .=) <$> _vdKey,
+                  ("valueType" .=) <$> _vdValueType,
+                  ("unit" .=) <$> _vdUnit])
+
 -- | A protocol buffer message type.
 --
 -- /See:/ 'type'' smart constructor.
 data Type =
   Type'
     { _tSourceContext :: !(Maybe SourceContext)
-    , _tOneofs        :: !(Maybe [Text])
-    , _tName          :: !(Maybe Text)
-    , _tOptions       :: !(Maybe [Option])
-    , _tFields        :: !(Maybe [Field])
-    , _tSyntax        :: !(Maybe TypeSyntax)
+    , _tOneofs :: !(Maybe [Text])
+    , _tName :: !(Maybe Text)
+    , _tOptions :: !(Maybe [Option])
+    , _tFields :: !(Maybe [Field])
+    , _tSyntax :: !(Maybe TypeSyntax)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4602,12 +6882,74 @@ instance ToJSON Type where
                   ("fields" .=) <$> _tFields,
                   ("syntax" .=) <$> _tSyntax])
 
+-- | Contains metadata for longrunning operation for the edit Metrics Scope
+-- endpoints.
+--
+-- /See:/ 'operationMetadata' smart constructor.
+data OperationMetadata =
+  OperationMetadata'
+    { _omState :: !(Maybe OperationMetadataState)
+    , _omUpdateTime :: !(Maybe DateTime')
+    , _omCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omState'
+--
+-- * 'omUpdateTime'
+--
+-- * 'omCreateTime'
+operationMetadata
+    :: OperationMetadata
+operationMetadata =
+  OperationMetadata'
+    {_omState = Nothing, _omUpdateTime = Nothing, _omCreateTime = Nothing}
+
+
+-- | Current state of the batch operation.
+omState :: Lens' OperationMetadata (Maybe OperationMetadataState)
+omState = lens _omState (\ s a -> s{_omState = a})
+
+-- | The time when the operation result was last updated.
+omUpdateTime :: Lens' OperationMetadata (Maybe UTCTime)
+omUpdateTime
+  = lens _omUpdateTime (\ s a -> s{_omUpdateTime = a})
+      . mapping _DateTime
+
+-- | The time when the batch request was received.
+omCreateTime :: Lens' OperationMetadata (Maybe UTCTime)
+omCreateTime
+  = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o ->
+                 OperationMetadata' <$>
+                   (o .:? "state") <*> (o .:? "updateTime") <*>
+                     (o .:? "createTime"))
+
+instance ToJSON OperationMetadata where
+        toJSON OperationMetadata'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _omState,
+                  ("updateTime" .=) <$> _omUpdateTime,
+                  ("createTime" .=) <$> _omCreateTime])
+
 -- | The CreateCollectdTimeSeries response.
 --
 -- /See:/ 'createCollectdTimeSeriesResponse' smart constructor.
-newtype CreateCollectdTimeSeriesResponse =
+data CreateCollectdTimeSeriesResponse =
   CreateCollectdTimeSeriesResponse'
-    { _cctsrPayloadErrors :: Maybe [CollectdPayloadError]
+    { _cctsrSummary :: !(Maybe CreateTimeSeriesSummary)
+    , _cctsrPayloadErrors :: !(Maybe [CollectdPayloadError])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4616,16 +6958,28 @@ newtype CreateCollectdTimeSeriesResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cctsrSummary'
+--
 -- * 'cctsrPayloadErrors'
 createCollectdTimeSeriesResponse
     :: CreateCollectdTimeSeriesResponse
 createCollectdTimeSeriesResponse =
-  CreateCollectdTimeSeriesResponse' {_cctsrPayloadErrors = Nothing}
+  CreateCollectdTimeSeriesResponse'
+    {_cctsrSummary = Nothing, _cctsrPayloadErrors = Nothing}
 
+
+-- | Aggregate statistics from writing the payloads. This field is omitted if
+-- all points were successfully written, so that the response is empty.
+-- This is for backwards compatibility with clients that log errors on any
+-- non-empty response.
+cctsrSummary :: Lens' CreateCollectdTimeSeriesResponse (Maybe CreateTimeSeriesSummary)
+cctsrSummary
+  = lens _cctsrSummary (\ s a -> s{_cctsrSummary = a})
 
 -- | Records the error status for points that were not written due to an
--- error.Failed requests for which nothing is written will return an error
--- response instead.
+-- error in the request.Failed requests for which nothing is written will
+-- return an error response instead. Requests where data points were
+-- rejected by the backend will set summary instead.
 cctsrPayloadErrors :: Lens' CreateCollectdTimeSeriesResponse [CollectdPayloadError]
 cctsrPayloadErrors
   = lens _cctsrPayloadErrors
@@ -4639,14 +6993,121 @@ instance FromJSON CreateCollectdTimeSeriesResponse
           = withObject "CreateCollectdTimeSeriesResponse"
               (\ o ->
                  CreateCollectdTimeSeriesResponse' <$>
-                   (o .:? "payloadErrors" .!= mempty))
+                   (o .:? "summary") <*>
+                     (o .:? "payloadErrors" .!= mempty))
 
 instance ToJSON CreateCollectdTimeSeriesResponse
          where
         toJSON CreateCollectdTimeSeriesResponse'{..}
           = object
               (catMaybes
-                 [("payloadErrors" .=) <$> _cctsrPayloadErrors])
+                 [("summary" .=) <$> _cctsrSummary,
+                  ("payloadErrors" .=) <$> _cctsrPayloadErrors])
+
+-- | Parameters for a latency threshold SLI.
+--
+-- /See:/ 'latencyCriteria' smart constructor.
+newtype LatencyCriteria =
+  LatencyCriteria'
+    { _lcThreshold :: Maybe GDuration
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LatencyCriteria' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcThreshold'
+latencyCriteria
+    :: LatencyCriteria
+latencyCriteria = LatencyCriteria' {_lcThreshold = Nothing}
+
+
+-- | Good service is defined to be the count of requests made to this service
+-- that return in no more than threshold.
+lcThreshold :: Lens' LatencyCriteria (Maybe Scientific)
+lcThreshold
+  = lens _lcThreshold (\ s a -> s{_lcThreshold = a}) .
+      mapping _GDuration
+
+instance FromJSON LatencyCriteria where
+        parseJSON
+          = withObject "LatencyCriteria"
+              (\ o -> LatencyCriteria' <$> (o .:? "threshold"))
+
+instance ToJSON LatencyCriteria where
+        toJSON LatencyCriteria'{..}
+          = object
+              (catMaybes [("threshold" .=) <$> _lcThreshold])
+
+-- | Istio service scoped to an Istio mesh. Anthos clusters running ASM \<
+-- 1.6.8 will have their services ingested as this type.
+--
+-- /See:/ 'meshIstio' smart constructor.
+data MeshIstio =
+  MeshIstio'
+    { _miMeshUid :: !(Maybe Text)
+    , _miServiceNamespace :: !(Maybe Text)
+    , _miServiceName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MeshIstio' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'miMeshUid'
+--
+-- * 'miServiceNamespace'
+--
+-- * 'miServiceName'
+meshIstio
+    :: MeshIstio
+meshIstio =
+  MeshIstio'
+    { _miMeshUid = Nothing
+    , _miServiceNamespace = Nothing
+    , _miServiceName = Nothing
+    }
+
+
+-- | Identifier for the mesh in which this Istio service is defined.
+-- Corresponds to the mesh_uid metric label in Istio metrics.
+miMeshUid :: Lens' MeshIstio (Maybe Text)
+miMeshUid
+  = lens _miMeshUid (\ s a -> s{_miMeshUid = a})
+
+-- | The namespace of the Istio service underlying this service. Corresponds
+-- to the destination_service_namespace metric label in Istio metrics.
+miServiceNamespace :: Lens' MeshIstio (Maybe Text)
+miServiceNamespace
+  = lens _miServiceNamespace
+      (\ s a -> s{_miServiceNamespace = a})
+
+-- | The name of the Istio service underlying this service. Corresponds to
+-- the destination_service_name metric label in Istio metrics.
+miServiceName :: Lens' MeshIstio (Maybe Text)
+miServiceName
+  = lens _miServiceName
+      (\ s a -> s{_miServiceName = a})
+
+instance FromJSON MeshIstio where
+        parseJSON
+          = withObject "MeshIstio"
+              (\ o ->
+                 MeshIstio' <$>
+                   (o .:? "meshUid") <*> (o .:? "serviceNamespace") <*>
+                     (o .:? "serviceName"))
+
+instance ToJSON MeshIstio where
+        toJSON MeshIstio'{..}
+          = object
+              (catMaybes
+                 [("meshUid" .=) <$> _miMeshUid,
+                  ("serviceNamespace" .=) <$> _miServiceNamespace,
+                  ("serviceName" .=) <$> _miServiceName])
 
 -- | A protocol buffer option, which can be attached to a message, field,
 -- enumeration, etc.
@@ -4655,7 +7116,7 @@ instance ToJSON CreateCollectdTimeSeriesResponse
 data Option =
   Option'
     { _oValue :: !(Maybe OptionValue)
-    , _oName  :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4706,10 +7167,12 @@ instance ToJSON Option where
 -- /See:/ 'condition' smart constructor.
 data Condition =
   Condition'
-    { _cConditionAbsent    :: !(Maybe MetricAbsence)
+    { _cConditionAbsent :: !(Maybe MetricAbsence)
     , _cConditionThreshold :: !(Maybe MetricThreshold)
-    , _cName               :: !(Maybe Text)
-    , _cDisplayName        :: !(Maybe Text)
+    , _cName :: !(Maybe Text)
+    , _cConditionMonitoringQueryLanguage :: !(Maybe MonitoringQueryLanguageCondition)
+    , _cConditionMatchedLog :: !(Maybe LogMatch)
+    , _cDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4724,6 +7187,10 @@ data Condition =
 --
 -- * 'cName'
 --
+-- * 'cConditionMonitoringQueryLanguage'
+--
+-- * 'cConditionMatchedLog'
+--
 -- * 'cDisplayName'
 condition
     :: Condition
@@ -4732,6 +7199,8 @@ condition =
     { _cConditionAbsent = Nothing
     , _cConditionThreshold = Nothing
     , _cName = Nothing
+    , _cConditionMonitoringQueryLanguage = Nothing
+    , _cConditionMatchedLog = Nothing
     , _cDisplayName = Nothing
     }
 
@@ -4750,8 +7219,8 @@ cConditionThreshold
       (\ s a -> s{_cConditionThreshold = a})
 
 -- | Required if the condition exists. The unique resource name for this
--- condition. Its syntax is:
--- projects\/[PROJECT_ID]\/alertPolicies\/[POLICY_ID]\/conditions\/[CONDITION_ID]
+-- condition. Its format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/alertPolicies\/[POLICY_ID]\/conditions\/[CONDITION_ID]
 -- [CONDITION_ID] is assigned by Stackdriver Monitoring when the condition
 -- is created as part of a new or updated alerting policy.When calling the
 -- alertPolicies.create method, do not include the name field in the
@@ -4766,6 +7235,19 @@ cConditionThreshold
 -- change as a new condition and let the existing condition be deleted.
 cName :: Lens' Condition (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | A condition that uses the Monitoring Query Language to define alerts.
+cConditionMonitoringQueryLanguage :: Lens' Condition (Maybe MonitoringQueryLanguageCondition)
+cConditionMonitoringQueryLanguage
+  = lens _cConditionMonitoringQueryLanguage
+      (\ s a -> s{_cConditionMonitoringQueryLanguage = a})
+
+-- | A condition that checks for log messages matching given constraints. If
+-- set, no other conditions can be present.
+cConditionMatchedLog :: Lens' Condition (Maybe LogMatch)
+cConditionMatchedLog
+  = lens _cConditionMatchedLog
+      (\ s a -> s{_cConditionMatchedLog = a})
 
 -- | A short name or phrase used to identify the condition in dashboards,
 -- notifications, and incidents. To avoid confusion, don\'t use the same
@@ -4782,6 +7264,8 @@ instance FromJSON Condition where
                    (o .:? "conditionAbsent") <*>
                      (o .:? "conditionThreshold")
                      <*> (o .:? "name")
+                     <*> (o .:? "conditionMonitoringQueryLanguage")
+                     <*> (o .:? "conditionMatchedLog")
                      <*> (o .:? "displayName"))
 
 instance ToJSON Condition where
@@ -4791,7 +7275,68 @@ instance ToJSON Condition where
                  [("conditionAbsent" .=) <$> _cConditionAbsent,
                   ("conditionThreshold" .=) <$> _cConditionThreshold,
                   ("name" .=) <$> _cName,
+                  ("conditionMonitoringQueryLanguage" .=) <$>
+                    _cConditionMonitoringQueryLanguage,
+                  ("conditionMatchedLog" .=) <$> _cConditionMatchedLog,
                   ("displayName" .=) <$> _cDisplayName])
+
+-- | Represents the values of a time series associated with a
+-- TimeSeriesDescriptor.
+--
+-- /See:/ 'timeSeriesData' smart constructor.
+data TimeSeriesData =
+  TimeSeriesData'
+    { _tsdPointData :: !(Maybe [PointData])
+    , _tsdLabelValues :: !(Maybe [LabelValue])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeSeriesData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsdPointData'
+--
+-- * 'tsdLabelValues'
+timeSeriesData
+    :: TimeSeriesData
+timeSeriesData =
+  TimeSeriesData' {_tsdPointData = Nothing, _tsdLabelValues = Nothing}
+
+
+-- | The points in the time series.
+tsdPointData :: Lens' TimeSeriesData [PointData]
+tsdPointData
+  = lens _tsdPointData (\ s a -> s{_tsdPointData = a})
+      . _Default
+      . _Coerce
+
+-- | The values of the labels in the time series identifier, given in the
+-- same order as the label_descriptors field of the TimeSeriesDescriptor
+-- associated with this object. Each value must have a value of the type
+-- given in the corresponding entry of label_descriptors.
+tsdLabelValues :: Lens' TimeSeriesData [LabelValue]
+tsdLabelValues
+  = lens _tsdLabelValues
+      (\ s a -> s{_tsdLabelValues = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TimeSeriesData where
+        parseJSON
+          = withObject "TimeSeriesData"
+              (\ o ->
+                 TimeSeriesData' <$>
+                   (o .:? "pointData" .!= mempty) <*>
+                     (o .:? "labelValues" .!= mempty))
+
+instance ToJSON TimeSeriesData where
+        toJSON TimeSeriesData'{..}
+          = object
+              (catMaybes
+                 [("pointData" .=) <$> _tsdPointData,
+                  ("labelValues" .=) <$> _tsdLabelValues])
 
 -- | BucketOptions describes the bucket boundaries used to create a histogram
 -- for the distribution. The buckets can be in a linear sequence, an
@@ -4812,8 +7357,8 @@ instance ToJSON Condition where
 data BucketOptions =
   BucketOptions'
     { _boExponentialBuckets :: !(Maybe Exponential)
-    , _boLinearBuckets      :: !(Maybe Linear)
-    , _boExplicitBuckets    :: !(Maybe Explicit)
+    , _boLinearBuckets :: !(Maybe Linear)
+    , _boExplicitBuckets :: !(Maybe Explicit)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4878,8 +7423,8 @@ instance ToJSON BucketOptions where
 data ListUptimeCheckConfigsResponse =
   ListUptimeCheckConfigsResponse'
     { _luccrUptimeCheckConfigs :: !(Maybe [UptimeCheckConfig])
-    , _luccrNextPageToken      :: !(Maybe Text)
-    , _luccrTotalSize          :: !(Maybe (Textual Int32))
+    , _luccrNextPageToken :: !(Maybe Text)
+    , _luccrTotalSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4903,7 +7448,7 @@ listUptimeCheckConfigsResponse =
     }
 
 
--- | The returned uptime check configurations.
+-- | The returned Uptime check configurations.
 luccrUptimeCheckConfigs :: Lens' ListUptimeCheckConfigsResponse [UptimeCheckConfig]
 luccrUptimeCheckConfigs
   = lens _luccrUptimeCheckConfigs
@@ -4921,7 +7466,7 @@ luccrNextPageToken
   = lens _luccrNextPageToken
       (\ s a -> s{_luccrNextPageToken = a})
 
--- | The total number of uptime check configurations for the project,
+-- | The total number of Uptime check configurations for the project,
 -- irrespective of any pagination.
 luccrTotalSize :: Lens' ListUptimeCheckConfigsResponse (Maybe Int32)
 luccrTotalSize
@@ -4948,17 +7493,21 @@ instance ToJSON ListUptimeCheckConfigsResponse where
                   ("nextPageToken" .=) <$> _luccrNextPageToken,
                   ("totalSize" .=) <$> _luccrTotalSize])
 
--- | Information involved in an HTTP\/HTTPS uptime check request.
+-- | Information involved in an HTTP\/HTTPS Uptime check request.
 --
 -- /See:/ 'hTTPCheck' smart constructor.
 data HTTPCheck =
   HTTPCheck'
-    { _httpcUseSSL      :: !(Maybe Bool)
-    , _httpcPath        :: !(Maybe Text)
+    { _httpcUseSSL :: !(Maybe Bool)
+    , _httpcPath :: !(Maybe Text)
+    , _httpcBody :: !(Maybe Bytes)
     , _httpcMaskHeaders :: !(Maybe Bool)
-    , _httpcHeaders     :: !(Maybe HTTPCheckHeaders)
-    , _httpcAuthInfo    :: !(Maybe BasicAuthentication)
-    , _httpcPort        :: !(Maybe (Textual Int32))
+    , _httpcHeaders :: !(Maybe HTTPCheckHeaders)
+    , _httpcValidateSSL :: !(Maybe Bool)
+    , _httpcRequestMethod :: !(Maybe HTTPCheckRequestMethod)
+    , _httpcAuthInfo :: !(Maybe BasicAuthentication)
+    , _httpcContentType :: !(Maybe HTTPCheckContentType)
+    , _httpcPort :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4971,11 +7520,19 @@ data HTTPCheck =
 --
 -- * 'httpcPath'
 --
+-- * 'httpcBody'
+--
 -- * 'httpcMaskHeaders'
 --
 -- * 'httpcHeaders'
 --
+-- * 'httpcValidateSSL'
+--
+-- * 'httpcRequestMethod'
+--
 -- * 'httpcAuthInfo'
+--
+-- * 'httpcContentType'
 --
 -- * 'httpcPort'
 hTTPCheck
@@ -4984,9 +7541,13 @@ hTTPCheck =
   HTTPCheck'
     { _httpcUseSSL = Nothing
     , _httpcPath = Nothing
+    , _httpcBody = Nothing
     , _httpcMaskHeaders = Nothing
     , _httpcHeaders = Nothing
+    , _httpcValidateSSL = Nothing
+    , _httpcRequestMethod = Nothing
     , _httpcAuthInfo = Nothing
+    , _httpcContentType = Nothing
     , _httpcPort = Nothing
     }
 
@@ -4996,26 +7557,40 @@ httpcUseSSL :: Lens' HTTPCheck (Maybe Bool)
 httpcUseSSL
   = lens _httpcUseSSL (\ s a -> s{_httpcUseSSL = a})
 
--- | The path to the page to run the check against. Will be combined with the
--- host (specified within the MonitoredResource) and port to construct the
--- full URL. Optional (defaults to \"\/\"). If the provided path does not
--- begin with \"\/\", it will be prepended automatically.
+-- | Optional (defaults to \"\/\"). The path to the page against which to run
+-- the check. Will be combined with the host (specified within the
+-- monitored_resource) and port to construct the full URL. If the provided
+-- path does not begin with \"\/\", a \"\/\" will be prepended
+-- automatically.
 httpcPath :: Lens' HTTPCheck (Maybe Text)
 httpcPath
   = lens _httpcPath (\ s a -> s{_httpcPath = a})
 
--- | Boolean specifiying whether to encrypt the header information.
--- Encryption should be specified for any headers related to authentication
--- that you do not wish to be seen when retrieving the configuration. The
--- server will be responsible for encrypting the headers. On Get\/List
--- calls, if mask_headers is set to True then the headers will be obscured
--- with ******.
+-- | The request body associated with the HTTP POST request. If content_type
+-- is URL_ENCODED, the body passed in must be URL-encoded. Users can
+-- provide a Content-Length header via the headers field or the API will do
+-- so. If the request_method is GET and body is not empty, the API will
+-- return an error. The maximum byte size is 1 megabyte. Note: As with all
+-- bytes fields, JSON representations are base64 encoded. e.g.: \"foo=bar\"
+-- in URL-encoded form is \"foo%3Dbar\" and in base64 encoding is
+-- \"Zm9vJTI1M0RiYXI=\".
+httpcBody :: Lens' HTTPCheck (Maybe ByteString)
+httpcBody
+  = lens _httpcBody (\ s a -> s{_httpcBody = a}) .
+      mapping _Bytes
+
+-- | Boolean specifying whether to encrypt the header information. Encryption
+-- should be specified for any headers related to authentication that you
+-- do not wish to be seen when retrieving the configuration. The server
+-- will be responsible for encrypting the headers. On Get\/List calls, if
+-- mask_headers is set to true then the headers will be obscured with
+-- ******.
 httpcMaskHeaders :: Lens' HTTPCheck (Maybe Bool)
 httpcMaskHeaders
   = lens _httpcMaskHeaders
       (\ s a -> s{_httpcMaskHeaders = a})
 
--- | The list of headers to send as part of the uptime check request. If two
+-- | The list of headers to send as part of the Uptime check request. If two
 -- headers have the same key and different values, they should be entered
 -- as a single header, with the value being a comma-separated list of all
 -- the desired values as described at
@@ -5027,6 +7602,22 @@ httpcHeaders :: Lens' HTTPCheck (Maybe HTTPCheckHeaders)
 httpcHeaders
   = lens _httpcHeaders (\ s a -> s{_httpcHeaders = a})
 
+-- | Boolean specifying whether to include SSL certificate validation as a
+-- part of the Uptime check. Only applies to checks where
+-- monitored_resource is set to uptime_url. If use_ssl is false, setting
+-- validate_ssl to true has no effect.
+httpcValidateSSL :: Lens' HTTPCheck (Maybe Bool)
+httpcValidateSSL
+  = lens _httpcValidateSSL
+      (\ s a -> s{_httpcValidateSSL = a})
+
+-- | The HTTP request method to use for the check. If set to
+-- METHOD_UNSPECIFIED then request_method defaults to GET.
+httpcRequestMethod :: Lens' HTTPCheck (Maybe HTTPCheckRequestMethod)
+httpcRequestMethod
+  = lens _httpcRequestMethod
+      (\ s a -> s{_httpcRequestMethod = a})
+
 -- | The authentication information. Optional when creating an HTTP check;
 -- defaults to empty.
 httpcAuthInfo :: Lens' HTTPCheck (Maybe BasicAuthentication)
@@ -5034,9 +7625,22 @@ httpcAuthInfo
   = lens _httpcAuthInfo
       (\ s a -> s{_httpcAuthInfo = a})
 
--- | The port to the page to run the check against. Will be combined with
--- host (specified within the MonitoredResource) and path to construct the
--- full URL. Optional (defaults to 80 without SSL, or 443 with SSL).
+-- | The content type header to use for the check. The following
+-- configurations result in errors: 1. Content type is specified in both
+-- the headers field and the content_type field. 2. Request method is GET
+-- and content_type is not TYPE_UNSPECIFIED 3. Request method is POST and
+-- content_type is TYPE_UNSPECIFIED. 4. Request method is POST and a
+-- \"Content-Type\" header is provided via headers field. The content_type
+-- field should be used instead.
+httpcContentType :: Lens' HTTPCheck (Maybe HTTPCheckContentType)
+httpcContentType
+  = lens _httpcContentType
+      (\ s a -> s{_httpcContentType = a})
+
+-- | Optional (defaults to 80 when use_ssl is false, and 443 when use_ssl is
+-- true). The TCP port on the HTTP server against which to run the check.
+-- Will be combined with host (specified within the monitored_resource) and
+-- path to construct the full URL.
 httpcPort :: Lens' HTTPCheck (Maybe Int32)
 httpcPort
   = lens _httpcPort (\ s a -> s{_httpcPort = a}) .
@@ -5048,9 +7652,13 @@ instance FromJSON HTTPCheck where
               (\ o ->
                  HTTPCheck' <$>
                    (o .:? "useSsl") <*> (o .:? "path") <*>
-                     (o .:? "maskHeaders")
+                     (o .:? "body")
+                     <*> (o .:? "maskHeaders")
                      <*> (o .:? "headers")
+                     <*> (o .:? "validateSsl")
+                     <*> (o .:? "requestMethod")
                      <*> (o .:? "authInfo")
+                     <*> (o .:? "contentType")
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPCheck where
@@ -5059,9 +7667,13 @@ instance ToJSON HTTPCheck where
               (catMaybes
                  [("useSsl" .=) <$> _httpcUseSSL,
                   ("path" .=) <$> _httpcPath,
+                  ("body" .=) <$> _httpcBody,
                   ("maskHeaders" .=) <$> _httpcMaskHeaders,
                   ("headers" .=) <$> _httpcHeaders,
+                  ("validateSsl" .=) <$> _httpcValidateSSL,
+                  ("requestMethod" .=) <$> _httpcRequestMethod,
                   ("authInfo" .=) <$> _httpcAuthInfo,
+                  ("contentType" .=) <$> _httpcContentType,
                   ("port" .=) <$> _httpcPort])
 
 -- | A collection of data points that describes the time-varying values of a
@@ -5072,12 +7684,13 @@ instance ToJSON HTTPCheck where
 -- /See:/ 'timeSeries' smart constructor.
 data TimeSeries =
   TimeSeries'
-    { _tsPoints     :: !(Maybe [Point])
+    { _tsPoints :: !(Maybe [Point])
     , _tsMetricKind :: !(Maybe TimeSeriesMetricKind)
-    , _tsMetric     :: !(Maybe Metric)
-    , _tsResource   :: !(Maybe MonitoredResource)
-    , _tsMetadata   :: !(Maybe MonitoredResourceMetadata)
-    , _tsValueType  :: !(Maybe TimeSeriesValueType)
+    , _tsMetric :: !(Maybe Metric)
+    , _tsResource :: !(Maybe MonitoredResource)
+    , _tsMetadata :: !(Maybe MonitoredResourceMetadata)
+    , _tsValueType :: !(Maybe TimeSeriesValueType)
+    , _tsUnit :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5097,6 +7710,8 @@ data TimeSeries =
 -- * 'tsMetadata'
 --
 -- * 'tsValueType'
+--
+-- * 'tsUnit'
 timeSeries
     :: TimeSeries
 timeSeries =
@@ -5107,6 +7722,7 @@ timeSeries =
     , _tsResource = Nothing
     , _tsMetadata = Nothing
     , _tsValueType = Nothing
+    , _tsUnit = Nothing
     }
 
 
@@ -5141,15 +7757,17 @@ tsMetric :: Lens' TimeSeries (Maybe Metric)
 tsMetric = lens _tsMetric (\ s a -> s{_tsMetric = a})
 
 -- | The associated monitored resource. Custom metrics can use only certain
--- monitored resource types in their time series data.
+-- monitored resource types in their time series data. For more
+-- information, see Monitored resources for custom metrics
+-- (https:\/\/cloud.google.com\/monitoring\/custom-metrics\/creating-metrics#custom-metric-resources).
 tsResource :: Lens' TimeSeries (Maybe MonitoredResource)
 tsResource
   = lens _tsResource (\ s a -> s{_tsResource = a})
 
 -- | Output only. The associated monitored resource metadata. When reading a
--- a timeseries, this field will include metadata labels that are
--- explicitly named in the reduction. When creating a timeseries, this
--- field is ignored.
+-- time series, this field will include metadata labels that are explicitly
+-- named in the reduction. When creating a time series, this field is
+-- ignored.
 tsMetadata :: Lens' TimeSeries (Maybe MonitoredResourceMetadata)
 tsMetadata
   = lens _tsMetadata (\ s a -> s{_tsMetadata = a})
@@ -5163,6 +7781,12 @@ tsValueType :: Lens' TimeSeries (Maybe TimeSeriesValueType)
 tsValueType
   = lens _tsValueType (\ s a -> s{_tsValueType = a})
 
+-- | The units in which the metric value is reported. It is only applicable
+-- if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines
+-- the representation of the stored metric values.
+tsUnit :: Lens' TimeSeries (Maybe Text)
+tsUnit = lens _tsUnit (\ s a -> s{_tsUnit = a})
+
 instance FromJSON TimeSeries where
         parseJSON
           = withObject "TimeSeries"
@@ -5172,7 +7796,8 @@ instance FromJSON TimeSeries where
                      <*> (o .:? "metric")
                      <*> (o .:? "resource")
                      <*> (o .:? "metadata")
-                     <*> (o .:? "valueType"))
+                     <*> (o .:? "valueType")
+                     <*> (o .:? "unit"))
 
 instance ToJSON TimeSeries where
         toJSON TimeSeries'{..}
@@ -5183,26 +7808,30 @@ instance ToJSON TimeSeries where
                   ("metric" .=) <$> _tsMetric,
                   ("resource" .=) <$> _tsResource,
                   ("metadata" .=) <$> _tsMetadata,
-                  ("valueType" .=) <$> _tsValueType])
+                  ("valueType" .=) <$> _tsValueType,
+                  ("unit" .=) <$> _tsUnit])
 
 -- | A description of the conditions under which some aspect of your system
 -- is considered to be \"unhealthy\" and the ways to notify people or
 -- services about this state. For an overview of alert policies, see
--- Introduction to Alerting.
+-- Introduction to Alerting
+-- (https:\/\/cloud.google.com\/monitoring\/alerts\/).
 --
 -- /See:/ 'alertPolicy' smart constructor.
 data AlertPolicy =
   AlertPolicy'
-    { _apEnabled              :: !(Maybe Bool)
+    { _apEnabled :: !(Maybe Bool)
     , _apNotificationChannels :: !(Maybe [Text])
-    , _apMutationRecord       :: !(Maybe MutationRecord)
-    , _apCreationRecord       :: !(Maybe MutationRecord)
-    , _apUserLabels           :: !(Maybe AlertPolicyUserLabels)
-    , _apName                 :: !(Maybe Text)
-    , _apDocumentation        :: !(Maybe Documentation)
-    , _apDisplayName          :: !(Maybe Text)
-    , _apConditions           :: !(Maybe [Condition])
-    , _apCombiner             :: !(Maybe AlertPolicyCombiner)
+    , _apMutationRecord :: !(Maybe MutationRecord)
+    , _apCreationRecord :: !(Maybe MutationRecord)
+    , _apUserLabels :: !(Maybe AlertPolicyUserLabels)
+    , _apName :: !(Maybe Text)
+    , _apDocumentation :: !(Maybe Documentation)
+    , _apValidity :: !(Maybe Status)
+    , _apDisplayName :: !(Maybe Text)
+    , _apAlertStrategy :: !(Maybe AlertStrategy)
+    , _apConditions :: !(Maybe [Condition])
+    , _apCombiner :: !(Maybe AlertPolicyCombiner)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5225,7 +7854,11 @@ data AlertPolicy =
 --
 -- * 'apDocumentation'
 --
+-- * 'apValidity'
+--
 -- * 'apDisplayName'
+--
+-- * 'apAlertStrategy'
 --
 -- * 'apConditions'
 --
@@ -5241,7 +7874,9 @@ alertPolicy =
     , _apUserLabels = Nothing
     , _apName = Nothing
     , _apDocumentation = Nothing
+    , _apValidity = Nothing
     , _apDisplayName = Nothing
+    , _apAlertStrategy = Nothing
     , _apConditions = Nothing
     , _apCombiner = Nothing
     }
@@ -5261,9 +7896,9 @@ apEnabled
 -- sent when incidents are opened or closed or when new violations occur on
 -- an already opened incident. Each element of this array corresponds to
 -- the name field in each of the NotificationChannel objects that are
--- returned from the ListNotificationChannels method. The syntax of the
+-- returned from the ListNotificationChannels method. The format of the
 -- entries in this field is:
--- projects\/[PROJECT_ID]\/notificationChannels\/[CHANNEL_ID]
+-- projects\/[PROJECT_ID_OR_NUMBER]\/notificationChannels\/[CHANNEL_ID]
 apNotificationChannels :: Lens' AlertPolicy [Text]
 apNotificationChannels
   = lens _apNotificationChannels
@@ -5295,7 +7930,8 @@ apUserLabels
   = lens _apUserLabels (\ s a -> s{_apUserLabels = a})
 
 -- | Required if the policy exists. The resource name for this policy. The
--- syntax is: projects\/[PROJECT_ID]\/alertPolicies\/[ALERT_POLICY_ID]
+-- format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/alertPolicies\/[ALERT_POLICY_ID]
 -- [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy
 -- is created. When calling the alertPolicies.create method, do not include
 -- the name field in the alerting policy passed as part of the request.
@@ -5313,6 +7949,13 @@ apDocumentation
   = lens _apDocumentation
       (\ s a -> s{_apDocumentation = a})
 
+-- | Read-only description of how the alert policy is invalid. OK if the
+-- alert policy is valid. If not OK, the alert policy will not generate
+-- incidents.
+apValidity :: Lens' AlertPolicy (Maybe Status)
+apValidity
+  = lens _apValidity (\ s a -> s{_apValidity = a})
+
 -- | A short name or phrase used to identify the policy in dashboards,
 -- notifications, and incidents. To avoid confusion, don\'t use the same
 -- display name for multiple policies in the same project. The name is
@@ -5322,10 +7965,18 @@ apDisplayName
   = lens _apDisplayName
       (\ s a -> s{_apDisplayName = a})
 
+-- | Control over how this alert policy\'s notification channels are
+-- notified.
+apAlertStrategy :: Lens' AlertPolicy (Maybe AlertStrategy)
+apAlertStrategy
+  = lens _apAlertStrategy
+      (\ s a -> s{_apAlertStrategy = a})
+
 -- | A list of conditions for the policy. The conditions are combined by AND
 -- or OR according to the combiner field. If the combined conditions
 -- evaluate to true, then an incident is created. A policy can have from
--- one to six conditions.
+-- one to six conditions. If condition_time_series_query_language is
+-- present, it must be the only condition.
 apConditions :: Lens' AlertPolicy [Condition]
 apConditions
   = lens _apConditions (\ s a -> s{_apConditions = a})
@@ -5333,7 +7984,8 @@ apConditions
       . _Coerce
 
 -- | How to combine the results of multiple conditions to determine if an
--- incident should be opened.
+-- incident should be opened. If condition_time_series_query_language is
+-- present, this must be COMBINE_UNSPECIFIED.
 apCombiner :: Lens' AlertPolicy (Maybe AlertPolicyCombiner)
 apCombiner
   = lens _apCombiner (\ s a -> s{_apCombiner = a})
@@ -5350,7 +8002,9 @@ instance FromJSON AlertPolicy where
                      <*> (o .:? "userLabels")
                      <*> (o .:? "name")
                      <*> (o .:? "documentation")
+                     <*> (o .:? "validity")
                      <*> (o .:? "displayName")
+                     <*> (o .:? "alertStrategy")
                      <*> (o .:? "conditions" .!= mempty)
                      <*> (o .:? "combiner"))
 
@@ -5366,9 +8020,104 @@ instance ToJSON AlertPolicy where
                   ("userLabels" .=) <$> _apUserLabels,
                   ("name" .=) <$> _apName,
                   ("documentation" .=) <$> _apDocumentation,
+                  ("validity" .=) <$> _apValidity,
                   ("displayName" .=) <$> _apDisplayName,
+                  ("alertStrategy" .=) <$> _apAlertStrategy,
                   ("conditions" .=) <$> _apConditions,
                   ("combiner" .=) <$> _apCombiner])
+
+-- | Service Level Indicators for which atomic units of service are counted
+-- directly.
+--
+-- /See:/ 'requestBasedSli' smart constructor.
+data RequestBasedSli =
+  RequestBasedSli'
+    { _rbsGoodTotalRatio :: !(Maybe TimeSeriesRatio)
+    , _rbsDistributionCut :: !(Maybe DistributionCut)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RequestBasedSli' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rbsGoodTotalRatio'
+--
+-- * 'rbsDistributionCut'
+requestBasedSli
+    :: RequestBasedSli
+requestBasedSli =
+  RequestBasedSli' {_rbsGoodTotalRatio = Nothing, _rbsDistributionCut = Nothing}
+
+
+-- | good_total_ratio is used when the ratio of good_service to total_service
+-- is computed from two TimeSeries.
+rbsGoodTotalRatio :: Lens' RequestBasedSli (Maybe TimeSeriesRatio)
+rbsGoodTotalRatio
+  = lens _rbsGoodTotalRatio
+      (\ s a -> s{_rbsGoodTotalRatio = a})
+
+-- | distribution_cut is used when good_service is a count of values
+-- aggregated in a Distribution that fall into a good range. The
+-- total_service is the total count of all values aggregated in the
+-- Distribution.
+rbsDistributionCut :: Lens' RequestBasedSli (Maybe DistributionCut)
+rbsDistributionCut
+  = lens _rbsDistributionCut
+      (\ s a -> s{_rbsDistributionCut = a})
+
+instance FromJSON RequestBasedSli where
+        parseJSON
+          = withObject "RequestBasedSli"
+              (\ o ->
+                 RequestBasedSli' <$>
+                   (o .:? "goodTotalRatio") <*>
+                     (o .:? "distributionCut"))
+
+instance ToJSON RequestBasedSli where
+        toJSON RequestBasedSli'{..}
+          = object
+              (catMaybes
+                 [("goodTotalRatio" .=) <$> _rbsGoodTotalRatio,
+                  ("distributionCut" .=) <$> _rbsDistributionCut])
+
+-- | Cloud Endpoints service. Learn more at
+-- https:\/\/cloud.google.com\/endpoints.
+--
+-- /See:/ 'cloudEndpoints' smart constructor.
+newtype CloudEndpoints =
+  CloudEndpoints'
+    { _ceService :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CloudEndpoints' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ceService'
+cloudEndpoints
+    :: CloudEndpoints
+cloudEndpoints = CloudEndpoints' {_ceService = Nothing}
+
+
+-- | The name of the Cloud Endpoints service underlying this service.
+-- Corresponds to the service resource label in the api monitored resource:
+-- https:\/\/cloud.google.com\/monitoring\/api\/resources#tag_api
+ceService :: Lens' CloudEndpoints (Maybe Text)
+ceService
+  = lens _ceService (\ s a -> s{_ceService = a})
+
+instance FromJSON CloudEndpoints where
+        parseJSON
+          = withObject "CloudEndpoints"
+              (\ o -> CloudEndpoints' <$> (o .:? "service"))
+
+instance ToJSON CloudEndpoints where
+        toJSON CloudEndpoints'{..}
+          = object (catMaybes [("service" .=) <$> _ceService])
 
 -- | The protocol for the ListAlertPolicies response.
 --
@@ -5376,6 +8125,7 @@ instance ToJSON AlertPolicy where
 data ListAlertPoliciesResponse =
   ListAlertPoliciesResponse'
     { _laprNextPageToken :: !(Maybe Text)
+    , _laprTotalSize :: !(Maybe (Textual Int32))
     , _laprAlertPolicies :: !(Maybe [AlertPolicy])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5387,21 +8137,34 @@ data ListAlertPoliciesResponse =
 --
 -- * 'laprNextPageToken'
 --
+-- * 'laprTotalSize'
+--
 -- * 'laprAlertPolicies'
 listAlertPoliciesResponse
     :: ListAlertPoliciesResponse
 listAlertPoliciesResponse =
   ListAlertPoliciesResponse'
-    {_laprNextPageToken = Nothing, _laprAlertPolicies = Nothing}
+    { _laprNextPageToken = Nothing
+    , _laprTotalSize = Nothing
+    , _laprAlertPolicies = Nothing
+    }
 
 
 -- | If there might be more results than were returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as pageToken in the next call to this method.
+-- as page_token in the next call to this method.
 laprNextPageToken :: Lens' ListAlertPoliciesResponse (Maybe Text)
 laprNextPageToken
   = lens _laprNextPageToken
       (\ s a -> s{_laprNextPageToken = a})
+
+-- | The total number of alert policies in all pages. This number is only an
+-- estimate, and may change in subsequent pages. https:\/\/aip.dev\/158
+laprTotalSize :: Lens' ListAlertPoliciesResponse (Maybe Int32)
+laprTotalSize
+  = lens _laprTotalSize
+      (\ s a -> s{_laprTotalSize = a})
+      . mapping _Coerce
 
 -- | The returned alert policies.
 laprAlertPolicies :: Lens' ListAlertPoliciesResponse [AlertPolicy]
@@ -5416,7 +8179,7 @@ instance FromJSON ListAlertPoliciesResponse where
           = withObject "ListAlertPoliciesResponse"
               (\ o ->
                  ListAlertPoliciesResponse' <$>
-                   (o .:? "nextPageToken") <*>
+                   (o .:? "nextPageToken") <*> (o .:? "totalSize") <*>
                      (o .:? "alertPolicies" .!= mempty))
 
 instance ToJSON ListAlertPoliciesResponse where
@@ -5424,9 +8187,10 @@ instance ToJSON ListAlertPoliciesResponse where
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _laprNextPageToken,
+                  ("totalSize" .=) <$> _laprTotalSize,
                   ("alertPolicies" .=) <$> _laprAlertPolicies])
 
--- | Information required for a TCP uptime check request.
+-- | Information required for a TCP Uptime check request.
 --
 -- /See:/ 'tcpCheck' smart constructor.
 newtype TCPCheck =
@@ -5446,9 +8210,9 @@ tcpCheck
 tcpCheck = TCPCheck' {_tcPort = Nothing}
 
 
--- | The port to the page to run the check against. Will be combined with
--- host (specified within the MonitoredResource) to construct the full URL.
--- Required.
+-- | The TCP port on the server against which to run the check. Will be
+-- combined with host (specified within the monitored_resource) to
+-- construct the full URL. Required.
 tcPort :: Lens' TCPCheck (Maybe Int32)
 tcPort
   = lens _tcPort (\ s a -> s{_tcPort = a}) .
@@ -5463,6 +8227,46 @@ instance ToJSON TCPCheck where
         toJSON TCPCheck'{..}
           = object (catMaybes [("port" .=) <$> _tcPort])
 
+-- | Labels which have been used to annotate the service. Label keys must
+-- start with a letter. Label keys and values may contain lowercase
+-- letters, numbers, underscores, and dashes. Label keys and values have a
+-- maximum length of 63 characters, and must be less than 128 bytes in
+-- size. Up to 64 label entries may be stored. For labels which do not have
+-- a semantic value, the empty string may be supplied for the label value.
+--
+-- /See:/ 'serviceUserLabels' smart constructor.
+newtype ServiceUserLabels =
+  ServiceUserLabels'
+    { _sulAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ServiceUserLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sulAddtional'
+serviceUserLabels
+    :: HashMap Text Text -- ^ 'sulAddtional'
+    -> ServiceUserLabels
+serviceUserLabels pSulAddtional_ =
+  ServiceUserLabels' {_sulAddtional = _Coerce # pSulAddtional_}
+
+
+sulAddtional :: Lens' ServiceUserLabels (HashMap Text Text)
+sulAddtional
+  = lens _sulAddtional (\ s a -> s{_sulAddtional = a})
+      . _Coerce
+
+instance FromJSON ServiceUserLabels where
+        parseJSON
+          = withObject "ServiceUserLabels"
+              (\ o -> ServiceUserLabels' <$> (parseJSONObject o))
+
+instance ToJSON ServiceUserLabels where
+        toJSON = toJSON . _sulAddtional
+
 -- | A condition type that checks that monitored resources are reporting
 -- data. The configuration defines a metric and a set of monitored
 -- resources. The predicate is considered in violation when a time series
@@ -5473,9 +8277,9 @@ instance ToJSON TCPCheck where
 data MetricAbsence =
   MetricAbsence'
     { _maAggregations :: !(Maybe [Aggregation])
-    , _maFilter       :: !(Maybe Text)
-    , _maTrigger      :: !(Maybe Trigger)
-    , _maDuration     :: !(Maybe GDuration)
+    , _maFilter :: !(Maybe Text)
+    , _maTrigger :: !(Maybe Trigger)
+    , _maDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5507,9 +8311,10 @@ metricAbsence =
 -- aggregating multiple streams on each resource to a single stream for
 -- each resource or when aggregating streams across all members of a group
 -- of resrouces). Multiple aggregations are applied in the order
--- specified.This field is similar to the one in the
--- MetricService.ListTimeSeries request. It is advisable to use the
--- ListTimeSeries method when debugging this field.
+-- specified.This field is similar to the one in the ListTimeSeries request
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list).
+-- It is advisable to use the ListTimeSeries method when debugging this
+-- field.
 maAggregations :: Lens' MetricAbsence [Aggregation]
 maAggregations
   = lens _maAggregations
@@ -5517,13 +8322,16 @@ maAggregations
       . _Default
       . _Coerce
 
--- | A filter that identifies which time series should be compared with the
--- threshold.The filter is similar to the one that is specified in the
--- MetricService.ListTimeSeries request (that call is useful to verify the
--- time series that will be retrieved \/ processed) and must specify the
--- metric type and optionally may contain restrictions on resource type,
--- resource labels, and metric labels. This field may not exceed 2048
--- Unicode characters in length.
+-- | Required. A filter
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that
+-- identifies which time series should be compared with the threshold.The
+-- filter is similar to the one that is specified in the ListTimeSeries
+-- request
+-- (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list)
+-- (that call is useful to verify the time series that will be retrieved \/
+-- processed). The filter must specify the metric type and the resource
+-- type. Optionally, it can specify resource labels and metric labels. This
+-- field must not exceed 2048 Unicode characters in length.
 maFilter :: Lens' MetricAbsence (Maybe Text)
 maFilter = lens _maFilter (\ s a -> s{_maFilter = a})
 
@@ -5536,10 +8344,10 @@ maTrigger
   = lens _maTrigger (\ s a -> s{_maTrigger = a})
 
 -- | The amount of time that a time series must fail to report new data to be
--- considered failing. Currently, only values that are a multiple of a
--- minute--e.g. 60, 120, or 300 seconds--are supported. If an invalid value
--- is given, an error will be returned. The Duration.nanos field is
--- ignored.
+-- considered failing. The minimum value of this field is 120 seconds.
+-- Larger values that are a multiple of a minute--for example, 240 or 300
+-- seconds--are supported. If an invalid value is given, an error will be
+-- returned. The Duration.nanos field is ignored.
 maDuration :: Lens' MetricAbsence (Maybe Scientific)
 maDuration
   = lens _maDuration (\ s a -> s{_maDuration = a}) .

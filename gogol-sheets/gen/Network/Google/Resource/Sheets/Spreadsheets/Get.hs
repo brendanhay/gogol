@@ -53,8 +53,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Get
     , sgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.get@ method which the
 -- 'SpreadsheetsGet' request conforms to.
@@ -86,14 +86,14 @@ type SpreadsheetsGetResource =
 -- /See:/ 'spreadsheetsGet' smart constructor.
 data SpreadsheetsGet =
   SpreadsheetsGet'
-    { _sgXgafv           :: !(Maybe Xgafv)
-    , _sgUploadProtocol  :: !(Maybe Text)
-    , _sgAccessToken     :: !(Maybe Text)
-    , _sgSpreadsheetId   :: !Text
-    , _sgUploadType      :: !(Maybe Text)
-    , _sgRanges          :: !(Maybe [Text])
+    { _sgXgafv :: !(Maybe Xgafv)
+    , _sgUploadProtocol :: !(Maybe Text)
+    , _sgAccessToken :: !(Maybe Text)
+    , _sgSpreadsheetId :: !Text
+    , _sgUploadType :: !(Maybe Text)
+    , _sgRanges :: !(Maybe [Text])
     , _sgIncludeGridData :: !(Maybe Bool)
-    , _sgCallback        :: !(Maybe Text)
+    , _sgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

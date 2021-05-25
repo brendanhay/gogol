@@ -36,6 +36,15 @@ library
     exposed-modules:
           Network.Google.PubSub
         , Network.Google.PubSub.Types
+        , Network.Google.Resource.PubSub.Projects.Schemas.Create
+        , Network.Google.Resource.PubSub.Projects.Schemas.Delete
+        , Network.Google.Resource.PubSub.Projects.Schemas.Get
+        , Network.Google.Resource.PubSub.Projects.Schemas.GetIAMPolicy
+        , Network.Google.Resource.PubSub.Projects.Schemas.List
+        , Network.Google.Resource.PubSub.Projects.Schemas.SetIAMPolicy
+        , Network.Google.Resource.PubSub.Projects.Schemas.TestIAMPermissions
+        , Network.Google.Resource.PubSub.Projects.Schemas.Validate
+        , Network.Google.Resource.PubSub.Projects.Schemas.ValidateMessage
         , Network.Google.Resource.PubSub.Projects.Snapshots.Create
         , Network.Google.Resource.PubSub.Projects.Snapshots.Delete
         , Network.Google.Resource.PubSub.Projects.Snapshots.Get
@@ -47,6 +56,7 @@ library
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Create
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
+        , Network.Google.Resource.PubSub.Projects.Subscriptions.Detach
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Get
         , Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
         , Network.Google.Resource.PubSub.Projects.Subscriptions.List

@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
     , tprhcRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.removeHealthCheck@ method which the
 -- 'TargetPoolsRemoveHealthCheck' request conforms to.
@@ -65,11 +65,11 @@ type TargetPoolsRemoveHealthCheckResource =
 -- /See:/ 'targetPoolsRemoveHealthCheck' smart constructor.
 data TargetPoolsRemoveHealthCheck =
   TargetPoolsRemoveHealthCheck'
-    { _tprhcRequestId  :: !(Maybe Text)
-    , _tprhcProject    :: !Text
+    { _tprhcRequestId :: !(Maybe Text)
+    , _tprhcProject :: !Text
     , _tprhcTargetPool :: !Text
-    , _tprhcPayload    :: !TargetPoolsRemoveHealthCheckRequest
-    , _tprhcRegion     :: !Text
+    , _tprhcPayload :: !TargetPoolsRemoveHealthCheckRequest
+    , _tprhcRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

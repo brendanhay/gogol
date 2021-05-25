@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NodeGroups.Delete
     , ngdZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.delete@ method which the
 -- 'NodeGroupsDelete' request conforms to.
@@ -63,8 +63,8 @@ data NodeGroupsDelete =
   NodeGroupsDelete'
     { _ngdRequestId :: !(Maybe Text)
     , _ngdNodeGroup :: !Text
-    , _ngdProject   :: !Text
-    , _ngdZone      :: !Text
+    , _ngdProject :: !Text
+    , _ngdZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

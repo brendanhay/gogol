@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Patch
     , mfpAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.patch@ method which the
 -- 'ManagementFiltersPatch' request conforms to.
@@ -59,8 +59,8 @@ type ManagementFiltersPatchResource =
 -- /See:/ 'managementFiltersPatch' smart constructor.
 data ManagementFiltersPatch =
   ManagementFiltersPatch'
-    { _mfpFilterId  :: !Text
-    , _mfpPayload   :: !Filter
+    { _mfpFilterId :: !Text
+    , _mfpPayload :: !Filter
     , _mfpAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

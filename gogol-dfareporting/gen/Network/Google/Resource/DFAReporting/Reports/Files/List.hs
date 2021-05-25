@@ -22,7 +22,7 @@
 --
 -- Lists files for a report.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.files.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.reports.files.list@.
 module Network.Google.Resource.DFAReporting.Reports.Files.List
     (
     -- * REST Resource
@@ -33,44 +33,61 @@ module Network.Google.Resource.DFAReporting.Reports.Files.List
     , ReportsFilesList
 
     -- * Request Lenses
+    , rflXgafv
+    , rflUploadProtocol
+    , rflAccessToken
     , rflReportId
+    , rflUploadType
     , rflProFileId
     , rflSortOrder
     , rflPageToken
     , rflSortField
     , rflMaxResults
+    , rflCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.files.list@ method which the
 -- 'ReportsFilesList' request conforms to.
 type ReportsFilesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
                Capture "reportId" (Textual Int64) :>
                  "files" :>
-                   QueryParam "sortOrder" ReportsFilesListSortOrder :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" ReportsFilesListSortField :>
-                         QueryParam "maxResults" (Textual Int32) :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] FileList
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "sortOrder" ReportsFilesListSortOrder :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" ReportsFilesListSortField
+                                 :>
+                                 QueryParam "maxResults" (Textual Int32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] FileList
 
 -- | Lists files for a report.
 --
 -- /See:/ 'reportsFilesList' smart constructor.
 data ReportsFilesList =
   ReportsFilesList'
-    { _rflReportId   :: !(Textual Int64)
-    , _rflProFileId  :: !(Textual Int64)
-    , _rflSortOrder  :: !ReportsFilesListSortOrder
-    , _rflPageToken  :: !(Maybe Text)
-    , _rflSortField  :: !ReportsFilesListSortField
+    { _rflXgafv :: !(Maybe Xgafv)
+    , _rflUploadProtocol :: !(Maybe Text)
+    , _rflAccessToken :: !(Maybe Text)
+    , _rflReportId :: !(Textual Int64)
+    , _rflUploadType :: !(Maybe Text)
+    , _rflProFileId :: !(Textual Int64)
+    , _rflSortOrder :: !ReportsFilesListSortOrder
+    , _rflPageToken :: !(Maybe Text)
+    , _rflSortField :: !ReportsFilesListSortField
     , _rflMaxResults :: !(Textual Int32)
+    , _rflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,7 +96,15 @@ data ReportsFilesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rflXgafv'
+--
+-- * 'rflUploadProtocol'
+--
+-- * 'rflAccessToken'
+--
 -- * 'rflReportId'
+--
+-- * 'rflUploadType'
 --
 -- * 'rflProFileId'
 --
@@ -90,20 +115,43 @@ data ReportsFilesList =
 -- * 'rflSortField'
 --
 -- * 'rflMaxResults'
+--
+-- * 'rflCallback'
 reportsFilesList
     :: Int64 -- ^ 'rflReportId'
     -> Int64 -- ^ 'rflProFileId'
     -> ReportsFilesList
 reportsFilesList pRflReportId_ pRflProFileId_ =
   ReportsFilesList'
-    { _rflReportId = _Coerce # pRflReportId_
+    { _rflXgafv = Nothing
+    , _rflUploadProtocol = Nothing
+    , _rflAccessToken = Nothing
+    , _rflReportId = _Coerce # pRflReportId_
+    , _rflUploadType = Nothing
     , _rflProFileId = _Coerce # pRflProFileId_
     , _rflSortOrder = RFLSODescending
     , _rflPageToken = Nothing
     , _rflSortField = RFLSFLastModifiedTime
     , _rflMaxResults = 10
+    , _rflCallback = Nothing
     }
 
+
+-- | V1 error format.
+rflXgafv :: Lens' ReportsFilesList (Maybe Xgafv)
+rflXgafv = lens _rflXgafv (\ s a -> s{_rflXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rflUploadProtocol :: Lens' ReportsFilesList (Maybe Text)
+rflUploadProtocol
+  = lens _rflUploadProtocol
+      (\ s a -> s{_rflUploadProtocol = a})
+
+-- | OAuth access token.
+rflAccessToken :: Lens' ReportsFilesList (Maybe Text)
+rflAccessToken
+  = lens _rflAccessToken
+      (\ s a -> s{_rflAccessToken = a})
 
 -- | The ID of the parent report.
 rflReportId :: Lens' ReportsFilesList Int64
@@ -111,7 +159,13 @@ rflReportId
   = lens _rflReportId (\ s a -> s{_rflReportId = a}) .
       _Coerce
 
--- | The DFA profile ID.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rflUploadType :: Lens' ReportsFilesList (Maybe Text)
+rflUploadType
+  = lens _rflUploadType
+      (\ s a -> s{_rflUploadType = a})
+
+-- | The Campaign Manager 360 user profile ID.
 rflProFileId :: Lens' ReportsFilesList Int64
 rflProFileId
   = lens _rflProFileId (\ s a -> s{_rflProFileId = a})
@@ -139,15 +193,25 @@ rflMaxResults
       (\ s a -> s{_rflMaxResults = a})
       . _Coerce
 
+-- | JSONP
+rflCallback :: Lens' ReportsFilesList (Maybe Text)
+rflCallback
+  = lens _rflCallback (\ s a -> s{_rflCallback = a})
+
 instance GoogleRequest ReportsFilesList where
         type Rs ReportsFilesList = FileList
         type Scopes ReportsFilesList =
              '["https://www.googleapis.com/auth/dfareporting"]
         requestClient ReportsFilesList'{..}
-          = go _rflProFileId _rflReportId (Just _rflSortOrder)
+          = go _rflProFileId _rflReportId _rflXgafv
+              _rflUploadProtocol
+              _rflAccessToken
+              _rflUploadType
+              (Just _rflSortOrder)
               _rflPageToken
               (Just _rflSortField)
               (Just _rflMaxResults)
+              _rflCallback
               (Just AltJSON)
               dFAReportingService
           where go

@@ -22,7 +22,7 @@
 --
 -- Lists all the exclusions in a parent resource.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.exclusions.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.exclusions.list@.
 module Network.Google.Resource.Logging.BillingAccounts.Exclusions.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Exclusions.List
     , baelCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.exclusions.list@ method which the
 -- 'BillingAccountsExclusionsList' request conforms to.
@@ -67,14 +67,14 @@ type BillingAccountsExclusionsListResource =
 -- /See:/ 'billingAccountsExclusionsList' smart constructor.
 data BillingAccountsExclusionsList =
   BillingAccountsExclusionsList'
-    { _baelParent         :: !Text
-    , _baelXgafv          :: !(Maybe Xgafv)
+    { _baelParent :: !Text
+    , _baelXgafv :: !(Maybe Xgafv)
     , _baelUploadProtocol :: !(Maybe Text)
-    , _baelAccessToken    :: !(Maybe Text)
-    , _baelUploadType     :: !(Maybe Text)
-    , _baelPageToken      :: !(Maybe Text)
-    , _baelPageSize       :: !(Maybe (Textual Int32))
-    , _baelCallback       :: !(Maybe Text)
+    , _baelAccessToken :: !(Maybe Text)
+    , _baelUploadType :: !(Maybe Text)
+    , _baelPageToken :: !(Maybe Text)
+    , _baelPageSize :: !(Maybe (Textual Int32))
+    , _baelCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

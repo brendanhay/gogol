@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the ServiceAccountKey by key id.
+-- Gets a ServiceAccountKey.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.get@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
@@ -42,8 +42,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
     , psakgCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.keys.get@ method which the
 -- 'ProjectsServiceAccountsKeysGet' request conforms to.
@@ -54,23 +54,25 @@ type ProjectsServiceAccountsKeysGetResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
-                 QueryParam "publicKeyType" Text :>
+                 QueryParam "publicKeyType"
+                   ProjectsServiceAccountsKeysGetPublicKeyType
+                   :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] ServiceAccountKey
 
--- | Gets the ServiceAccountKey by key id.
+-- | Gets a ServiceAccountKey.
 --
 -- /See:/ 'projectsServiceAccountsKeysGet' smart constructor.
 data ProjectsServiceAccountsKeysGet =
   ProjectsServiceAccountsKeysGet'
-    { _psakgXgafv          :: !(Maybe Xgafv)
+    { _psakgXgafv :: !(Maybe Xgafv)
     , _psakgUploadProtocol :: !(Maybe Text)
-    , _psakgAccessToken    :: !(Maybe Text)
-    , _psakgUploadType     :: !(Maybe Text)
-    , _psakgName           :: !Text
-    , _psakgPublicKeyType  :: !(Maybe Text)
-    , _psakgCallback       :: !(Maybe Text)
+    , _psakgAccessToken :: !(Maybe Text)
+    , _psakgUploadType :: !(Maybe Text)
+    , _psakgName :: !Text
+    , _psakgPublicKeyType :: !(Maybe ProjectsServiceAccountsKeysGetPublicKeyType)
+    , _psakgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,7 +132,8 @@ psakgUploadType
   = lens _psakgUploadType
       (\ s a -> s{_psakgUploadType = a})
 
--- | The resource name of the service account key in the following format:
+-- | Required. The resource name of the service account key in the following
+-- format:
 -- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}\`.
 -- Using \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project
 -- from the account. The \`ACCOUNT\` value can be the \`email\` address or
@@ -141,7 +144,7 @@ psakgName
 
 -- | The output format of the public key requested. X509_PEM is the default
 -- output format.
-psakgPublicKeyType :: Lens' ProjectsServiceAccountsKeysGet (Maybe Text)
+psakgPublicKeyType :: Lens' ProjectsServiceAccountsKeysGet (Maybe ProjectsServiceAccountsKeysGetPublicKeyType)
 psakgPublicKeyType
   = lens _psakgPublicKeyType
       (\ s a -> s{_psakgPublicKeyType = a})

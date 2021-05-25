@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Addresses.Get
     , addRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.get@ method which the
 -- 'AddressesGet' request conforms to.
@@ -61,7 +61,7 @@ data AddressesGet =
   AddressesGet'
     { _addProject :: !Text
     , _addAddress :: !Text
-    , _addRegion  :: !Text
+    , _addRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

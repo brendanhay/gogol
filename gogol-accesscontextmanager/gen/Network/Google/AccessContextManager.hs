@@ -45,6 +45,9 @@ module Network.Google.AccessContextManager
     -- ** accesscontextmanager.accessPolicies.accessLevels.patch
     , module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Patch
 
+    -- ** accesscontextmanager.accessPolicies.accessLevels.replaceAll
+    , module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
+
     -- ** accesscontextmanager.accessPolicies.create
     , module Network.Google.Resource.AccessContextManager.AccessPolicies.Create
 
@@ -59,6 +62,9 @@ module Network.Google.AccessContextManager
 
     -- ** accesscontextmanager.accessPolicies.patch
     , module Network.Google.Resource.AccessContextManager.AccessPolicies.Patch
+
+    -- ** accesscontextmanager.accessPolicies.servicePerimeters.commit
+    , module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.create
     , module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Create
@@ -75,6 +81,9 @@ module Network.Google.AccessContextManager
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.patch
     , module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
 
+    -- ** accesscontextmanager.accessPolicies.servicePerimeters.replaceAll
+    , module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
+
     -- ** accesscontextmanager.operations.cancel
     , module Network.Google.Resource.AccessContextManager.Operations.Cancel
 
@@ -86,6 +95,21 @@ module Network.Google.AccessContextManager
 
     -- ** accesscontextmanager.operations.list
     , module Network.Google.Resource.AccessContextManager.Operations.List
+
+    -- ** accesscontextmanager.organizations.gcpUserAccessBindings.create
+    , module Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Create
+
+    -- ** accesscontextmanager.organizations.gcpUserAccessBindings.delete
+    , module Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
+
+    -- ** accesscontextmanager.organizations.gcpUserAccessBindings.get
+    , module Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Get
+
+    -- ** accesscontextmanager.organizations.gcpUserAccessBindings.list
+    , module Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.List
+
+    -- ** accesscontextmanager.organizations.gcpUserAccessBindings.patch
+    , module Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
 
     -- * Types
 
@@ -102,6 +126,23 @@ module Network.Google.AccessContextManager
     , blConditions
     , blCombiningFunction
 
+    -- ** AccessPoliciesAccessLevelsGetAccessLevelFormat
+    , AccessPoliciesAccessLevelsGetAccessLevelFormat (..)
+
+    -- ** IngressPolicy
+    , IngressPolicy
+    , ingressPolicy
+    , ipIngressFrom
+    , ipIngressTo
+
+    -- ** Expr
+    , Expr
+    , expr
+    , eLocation
+    , eExpression
+    , eTitle
+    , eDescription
+
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
@@ -116,21 +157,29 @@ module Network.Google.AccessContextManager
     , AccessLevel
     , accessLevel
     , alBasic
-    , alUpdateTime
+    , alCustom
     , alName
     , alTitle
     , alDescription
-    , alCreateTime
 
     -- ** BasicLevelCombiningFunction
     , BasicLevelCombiningFunction (..)
+
+    -- ** IngressSource
+    , IngressSource
+    , ingressSource
+    , isAccessLevel
+    , isResource
 
     -- ** ServicePerimeterConfig
     , ServicePerimeterConfig
     , servicePerimeterConfig
     , spcResources
+    , spcVPCAccessibleServices
     , spcRestrictedServices
+    , spcEgressPolicies
     , spcAccessLevels
+    , spcIngressPolicies
 
     -- ** Operation
     , Operation
@@ -140,6 +189,12 @@ module Network.Google.AccessContextManager
     , oResponse
     , oName
     , oMetadata
+
+    -- ** EgressPolicy
+    , EgressPolicy
+    , egressPolicy
+    , epEgressFrom
+    , epEgressTo
 
     -- ** ServicePerimeterPerimeterType
     , ServicePerimeterPerimeterType (..)
@@ -151,16 +206,31 @@ module Network.Google.AccessContextManager
     -- ** OSConstraintOSType
     , OSConstraintOSType (..)
 
+    -- ** GcpUserAccessBinding
+    , GcpUserAccessBinding
+    , gcpUserAccessBinding
+    , guabGroupKey
+    , guabName
+    , guabAccessLevels
+
     -- ** ServicePerimeter
     , ServicePerimeter
     , servicePerimeter
     , spStatus
     , spPerimeterType
-    , spUpdateTime
     , spName
+    , spSpec
     , spTitle
+    , spUseExplicitDryRunSpec
     , spDescription
-    , spCreateTime
+
+    -- ** AccessPoliciesAccessLevelsListAccessLevelFormat
+    , AccessPoliciesAccessLevelsListAccessLevelFormat (..)
+
+    -- ** CommitServicePerimetersRequest
+    , CommitServicePerimetersRequest
+    , commitServicePerimetersRequest
+    , csprEtag
 
     -- ** ListAccessPoliciesResponse
     , ListAccessPoliciesResponse
@@ -168,10 +238,36 @@ module Network.Google.AccessContextManager
     , laprNextPageToken
     , laprAccessPolicies
 
+    -- ** DevicePolicyAllowedDeviceManagementLevelsItem
+    , DevicePolicyAllowedDeviceManagementLevelsItem (..)
+
+    -- ** EgressFrom
+    , EgressFrom
+    , egressFrom
+    , efIdentityType
+    , efIdentities
+
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** ReplaceServicePerimetersRequest
+    , ReplaceServicePerimetersRequest
+    , replaceServicePerimetersRequest
+    , rsprEtag
+    , rsprServicePerimeters
+
+    -- ** ReplaceAccessLevelsResponse
+    , ReplaceAccessLevelsResponse
+    , replaceAccessLevelsResponse
+    , ralrAccessLevels
+
+    -- ** EgressTo
+    , EgressTo
+    , egressTo
+    , etResources
+    , etOperations
 
     -- ** OSConstraint
     , OSConstraint
@@ -180,14 +276,52 @@ module Network.Google.AccessContextManager
     , ocMinimumVersion
     , ocRequireVerifiedChromeOS
 
+    -- ** IngressFrom
+    , IngressFrom
+    , ingressFrom
+    , ifIdentityType
+    , ifSources
+    , ifIdentities
+
+    -- ** ReplaceServicePerimetersResponse
+    , ReplaceServicePerimetersResponse
+    , replaceServicePerimetersResponse
+    , rServicePerimeters
+
     -- ** AccessPolicy
     , AccessPolicy
     , accessPolicy
     , apParent
-    , apUpdateTime
+    , apEtag
     , apName
     , apTitle
-    , apCreateTime
+
+    -- ** ReplaceAccessLevelsRequest
+    , ReplaceAccessLevelsRequest
+    , replaceAccessLevelsRequest
+    , rEtag
+    , rAccessLevels
+
+    -- ** IngressTo
+    , IngressTo
+    , ingressTo
+    , itResources
+    , itOperations
+
+    -- ** IngressFromIdentityType
+    , IngressFromIdentityType (..)
+
+    -- ** MethodSelector
+    , MethodSelector
+    , methodSelector
+    , msMethod
+    , msPermission
+
+    -- ** ListGcpUserAccessBindingsResponse
+    , ListGcpUserAccessBindingsResponse
+    , listGcpUserAccessBindingsResponse
+    , lguabrNextPageToken
+    , lguabrGcpUserAccessBindings
 
     -- ** Xgafv
     , Xgafv (..)
@@ -198,11 +332,34 @@ module Network.Google.AccessContextManager
     , lsprNextPageToken
     , lsprServicePerimeters
 
+    -- ** VPCAccessibleServices
+    , VPCAccessibleServices
+    , vpcAccessibleServices
+    , vasAllowedServices
+    , vasEnableRestriction
+
+    -- ** CustomLevel
+    , CustomLevel
+    , customLevel
+    , clExpr
+
+    -- ** APIOperation
+    , APIOperation
+    , apiOperation
+    , aoMethodSelectors
+    , aoServiceName
+
+    -- ** EgressFromIdentityType
+    , EgressFromIdentityType (..)
+
     -- ** ListAccessLevelsResponse
     , ListAccessLevelsResponse
     , listAccessLevelsResponse
     , lalrNextPageToken
     , lalrAccessLevels
+
+    -- ** DevicePolicyAllowedEncryptionStatusesItem
+    , DevicePolicyAllowedEncryptionStatusesItem (..)
 
     -- ** OperationMetadata
     , OperationMetadata
@@ -233,29 +390,42 @@ module Network.Google.AccessContextManager
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- ** CommitServicePerimetersResponse
+    , CommitServicePerimetersResponse
+    , commitServicePerimetersResponse
+    , csprServicePerimeters
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Create
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Delete
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Get
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.List
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Patch
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.Create
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.Delete
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.Get
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.List
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.Patch
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Create
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Get
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.List
-import           Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
-import           Network.Google.Resource.AccessContextManager.Operations.Cancel
-import           Network.Google.Resource.AccessContextManager.Operations.Delete
-import           Network.Google.Resource.AccessContextManager.Operations.Get
-import           Network.Google.Resource.AccessContextManager.Operations.List
+import Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Create
+import Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Delete
+import Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Get
+import Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.List
+import Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Patch
+import Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
+import Network.Google.Resource.AccessContextManager.AccessPolicies.Create
+import Network.Google.Resource.AccessContextManager.AccessPolicies.Delete
+import Network.Google.Resource.AccessContextManager.AccessPolicies.Get
+import Network.Google.Resource.AccessContextManager.AccessPolicies.List
+import Network.Google.Resource.AccessContextManager.AccessPolicies.Patch
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Create
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Get
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.List
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+import Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
+import Network.Google.Resource.AccessContextManager.Operations.Cancel
+import Network.Google.Resource.AccessContextManager.Operations.Delete
+import Network.Google.Resource.AccessContextManager.Operations.Get
+import Network.Google.Resource.AccessContextManager.Operations.List
+import Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Create
+import Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
+import Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Get
+import Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.List
+import Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
 
 {- $resources
 TODO
@@ -264,11 +434,14 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Access Context Manager API service.
 type AccessContextManagerAPI =
      AccessPoliciesServicePerimetersListResource :<|>
-       AccessPoliciesServicePerimetersPatchResource
+       AccessPoliciesServicePerimetersReplaceAllResource
+       :<|> AccessPoliciesServicePerimetersPatchResource
        :<|> AccessPoliciesServicePerimetersGetResource
        :<|> AccessPoliciesServicePerimetersCreateResource
        :<|> AccessPoliciesServicePerimetersDeleteResource
+       :<|> AccessPoliciesServicePerimetersCommitResource
        :<|> AccessPoliciesAccessLevelsListResource
+       :<|> AccessPoliciesAccessLevelsReplaceAllResource
        :<|> AccessPoliciesAccessLevelsPatchResource
        :<|> AccessPoliciesAccessLevelsGetResource
        :<|> AccessPoliciesAccessLevelsCreateResource
@@ -278,6 +451,11 @@ type AccessContextManagerAPI =
        :<|> AccessPoliciesGetResource
        :<|> AccessPoliciesCreateResource
        :<|> AccessPoliciesDeleteResource
+       :<|> OrganizationsGcpUserAccessBindingsListResource
+       :<|> OrganizationsGcpUserAccessBindingsPatchResource
+       :<|> OrganizationsGcpUserAccessBindingsGetResource
+       :<|> OrganizationsGcpUserAccessBindingsCreateResource
+       :<|> OrganizationsGcpUserAccessBindingsDeleteResource
        :<|> OperationsListResource
        :<|> OperationsGetResource
        :<|> OperationsCancelResource

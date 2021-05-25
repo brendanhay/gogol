@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,14 +47,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfstipCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.testIamPermissions@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresTestIAMPermissions' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresTestIAMPermissionsResource
      =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,21 +67,21 @@ type ProjectsLocationsDataSetsFhirStoresTestIAMPermissionsResource
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresTestIAMPermissions' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresTestIAMPermissions =
   ProjectsLocationsDataSetsFhirStoresTestIAMPermissions'
-    { _pldsfstipXgafv          :: !(Maybe Xgafv)
+    { _pldsfstipXgafv :: !(Maybe Xgafv)
     , _pldsfstipUploadProtocol :: !(Maybe Text)
-    , _pldsfstipAccessToken    :: !(Maybe Text)
-    , _pldsfstipUploadType     :: !(Maybe Text)
-    , _pldsfstipPayload        :: !TestIAMPermissionsRequest
-    , _pldsfstipResource       :: !Text
-    , _pldsfstipCallback       :: !(Maybe Text)
+    , _pldsfstipAccessToken :: !(Maybe Text)
+    , _pldsfstipUploadType :: !(Maybe Text)
+    , _pldsfstipPayload :: !TestIAMPermissionsRequest
+    , _pldsfstipResource :: !Text
+    , _pldsfstipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

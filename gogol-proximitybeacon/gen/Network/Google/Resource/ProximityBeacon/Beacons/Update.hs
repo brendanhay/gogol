@@ -52,8 +52,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     , buCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.update@ method which the
 -- 'BeaconsUpdate' request conforms to.
@@ -83,14 +83,14 @@ type BeaconsUpdateResource =
 -- /See:/ 'beaconsUpdate' smart constructor.
 data BeaconsUpdate =
   BeaconsUpdate'
-    { _buXgafv          :: !(Maybe Xgafv)
+    { _buXgafv :: !(Maybe Xgafv)
     , _buUploadProtocol :: !(Maybe Text)
-    , _buAccessToken    :: !(Maybe Text)
-    , _buBeaconName     :: !Text
-    , _buUploadType     :: !(Maybe Text)
-    , _buPayload        :: !Beacon
-    , _buProjectId      :: !(Maybe Text)
-    , _buCallback       :: !(Maybe Text)
+    , _buAccessToken :: !(Maybe Text)
+    , _buBeaconName :: !Text
+    , _buUploadType :: !(Maybe Text)
+    , _buPayload :: !Beacon
+    , _buProjectId :: !(Maybe Text)
+    , _buCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -39,8 +39,8 @@ module Network.Google.Resource.FusionTables.Query.SQL
     , qsqlSQL
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.query.sql@ method which the
 -- 'QuerySQL' request conforms to.
@@ -69,8 +69,8 @@ type QuerySQLResource =
 data QuerySQL =
   QuerySQL'
     { _qsqlTyped :: !(Maybe Bool)
-    , _qsqlHdrs  :: !(Maybe Bool)
-    , _qsqlSQL   :: !Text
+    , _qsqlHdrs :: !(Maybe Bool)
+    , _qsqlSQL :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

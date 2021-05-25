@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Routers.Insert
     , riRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.insert@ method which the
 -- 'RoutersInsert' request conforms to.
@@ -64,9 +64,9 @@ type RoutersInsertResource =
 data RoutersInsert =
   RoutersInsert'
     { _riRequestId :: !(Maybe Text)
-    , _riProject   :: !Text
-    , _riPayload   :: !Router
-    , _riRegion    :: !Text
+    , _riProject :: !Text
+    , _riPayload :: !Router
+    , _riRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

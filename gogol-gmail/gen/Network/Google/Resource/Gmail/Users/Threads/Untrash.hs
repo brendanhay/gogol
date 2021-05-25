@@ -33,12 +33,17 @@ module Network.Google.Resource.Gmail.Users.Threads.Untrash
     , UsersThreadsUntrash
 
     -- * Request Lenses
+    , utuXgafv
+    , utuUploadProtocol
+    , utuAccessToken
+    , utuUploadType
     , utuUserId
     , utuId
+    , utuCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.untrash@ method which the
 -- 'UsersThreadsUntrash' request conforms to.
@@ -50,15 +55,25 @@ type UsersThreadsUntrashResource =
              "threads" :>
                Capture "id" Text :>
                  "untrash" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Thread
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Thread
 
 -- | Removes the specified thread from the trash.
 --
 -- /See:/ 'usersThreadsUntrash' smart constructor.
 data UsersThreadsUntrash =
   UsersThreadsUntrash'
-    { _utuUserId :: !Text
-    , _utuId     :: !Text
+    { _utuXgafv :: !(Maybe Xgafv)
+    , _utuUploadProtocol :: !(Maybe Text)
+    , _utuAccessToken :: !(Maybe Text)
+    , _utuUploadType :: !(Maybe Text)
+    , _utuUserId :: !Text
+    , _utuId :: !Text
+    , _utuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,18 +82,58 @@ data UsersThreadsUntrash =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'utuXgafv'
+--
+-- * 'utuUploadProtocol'
+--
+-- * 'utuAccessToken'
+--
+-- * 'utuUploadType'
+--
 -- * 'utuUserId'
 --
 -- * 'utuId'
+--
+-- * 'utuCallback'
 usersThreadsUntrash
     :: Text -- ^ 'utuId'
     -> UsersThreadsUntrash
 usersThreadsUntrash pUtuId_ =
-  UsersThreadsUntrash' {_utuUserId = "me", _utuId = pUtuId_}
+  UsersThreadsUntrash'
+    { _utuXgafv = Nothing
+    , _utuUploadProtocol = Nothing
+    , _utuAccessToken = Nothing
+    , _utuUploadType = Nothing
+    , _utuUserId = "me"
+    , _utuId = pUtuId_
+    , _utuCallback = Nothing
+    }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+utuXgafv :: Lens' UsersThreadsUntrash (Maybe Xgafv)
+utuXgafv = lens _utuXgafv (\ s a -> s{_utuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+utuUploadProtocol :: Lens' UsersThreadsUntrash (Maybe Text)
+utuUploadProtocol
+  = lens _utuUploadProtocol
+      (\ s a -> s{_utuUploadProtocol = a})
+
+-- | OAuth access token.
+utuAccessToken :: Lens' UsersThreadsUntrash (Maybe Text)
+utuAccessToken
+  = lens _utuAccessToken
+      (\ s a -> s{_utuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+utuUploadType :: Lens' UsersThreadsUntrash (Maybe Text)
+utuUploadType
+  = lens _utuUploadType
+      (\ s a -> s{_utuUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 utuUserId :: Lens' UsersThreadsUntrash Text
 utuUserId
   = lens _utuUserId (\ s a -> s{_utuUserId = a})
@@ -87,13 +142,23 @@ utuUserId
 utuId :: Lens' UsersThreadsUntrash Text
 utuId = lens _utuId (\ s a -> s{_utuId = a})
 
+-- | JSONP
+utuCallback :: Lens' UsersThreadsUntrash (Maybe Text)
+utuCallback
+  = lens _utuCallback (\ s a -> s{_utuCallback = a})
+
 instance GoogleRequest UsersThreadsUntrash where
         type Rs UsersThreadsUntrash = Thread
         type Scopes UsersThreadsUntrash =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersThreadsUntrash'{..}
-          = go _utuUserId _utuId (Just AltJSON) gmailService
+          = go _utuUserId _utuId _utuXgafv _utuUploadProtocol
+              _utuAccessToken
+              _utuUploadType
+              _utuCallback
+              (Just AltJSON)
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersThreadsUntrashResource)

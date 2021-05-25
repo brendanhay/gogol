@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.RegionOperations.Delete
     , rodRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionOperations.delete@ method which the
 -- 'RegionOperationsDelete' request conforms to.
@@ -59,9 +59,9 @@ type RegionOperationsDeleteResource =
 -- /See:/ 'regionOperationsDelete' smart constructor.
 data RegionOperationsDelete =
   RegionOperationsDelete'
-    { _rodProject   :: !Text
+    { _rodProject :: !Text
     , _rodOperation :: !Text
-    , _rodRegion    :: !Text
+    , _rodRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,7 +23,7 @@
 -- Replace the data for the specified group. Fails if the group does not
 -- exist.
 --
--- /See:/ <https://cloud.google.com/error-reporting/ Stackdriver Error Reporting API Reference> for @clouderrorreporting.projects.groups.update@.
+-- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.groups.update@.
 module Network.Google.Resource.CloudErrorReporting.Projects.Groups.Update
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudErrorReporting.Projects.Groups.Update
     , pguCallback
     ) where
 
-import           Network.Google.CloudErrorReporting.Types
-import           Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouderrorreporting.projects.groups.update@ method which the
 -- 'ProjectsGroupsUpdate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsGroupsUpdateResource =
 -- /See:/ 'projectsGroupsUpdate' smart constructor.
 data ProjectsGroupsUpdate =
   ProjectsGroupsUpdate'
-    { _pguXgafv          :: !(Maybe Xgafv)
+    { _pguXgafv :: !(Maybe Xgafv)
     , _pguUploadProtocol :: !(Maybe Text)
-    , _pguAccessToken    :: !(Maybe Text)
-    , _pguUploadType     :: !(Maybe Text)
-    , _pguPayload        :: !ErrorGroup
-    , _pguName           :: !Text
-    , _pguCallback       :: !(Maybe Text)
+    , _pguAccessToken :: !(Maybe Text)
+    , _pguUploadType :: !(Maybe Text)
+    , _pguPayload :: !ErrorGroup
+    , _pguName :: !Text
+    , _pguCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,7 +137,7 @@ pguPayload
   = lens _pguPayload (\ s a -> s{_pguPayload = a})
 
 -- | The group resource name. Example:
--- 'projects\/my-project-123\/groups\/my-groupid'
+-- projects\/my-project-123\/groups\/CNSgkpnppqKCUw
 pguName :: Lens' ProjectsGroupsUpdate Text
 pguName = lens _pguName (\ s a -> s{_pguName = a})
 

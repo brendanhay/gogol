@@ -23,7 +23,7 @@
 -- Retrieves a list of placements, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.placements.list@.
 module Network.Google.Resource.DFAReporting.Placements.List
     (
     -- * REST Resource
@@ -35,12 +35,16 @@ module Network.Google.Resource.DFAReporting.Placements.List
 
     -- * Request Lenses
     , pPlacementStrategyIds
+    , pXgafv
     , pContentCategoryIds
     , pMaxEndDate
+    , pUploadProtocol
+    , pAccessToken
     , pCampaignIds
     , pPricingTypes
     , pSearchString
     , pSizeIds
+    , pUploadType
     , pIds
     , pProFileId
     , pGroupIds
@@ -57,65 +61,89 @@ module Network.Google.Resource.DFAReporting.Placements.List
     , pArchived
     , pMaxResults
     , pMinEndDate
+    , pCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placements.list@ method which the
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
                QueryParams "placementStrategyIds" (Textual Int64) :>
-                 QueryParams "contentCategoryIds" (Textual Int64) :>
-                   QueryParam "maxEndDate" Text :>
-                     QueryParams "campaignIds" (Textual Int64) :>
-                       QueryParams "pricingTypes" PlacementsListPricingTypes
-                         :>
-                         QueryParam "searchString" Text :>
-                           QueryParams "sizeIds" (Textual Int64) :>
-                             QueryParams "ids" (Textual Int64) :>
-                               QueryParams "groupIds" (Textual Int64) :>
-                                 QueryParams "directorySiteIds" (Textual Int64)
-                                   :>
-                                   QueryParam "sortOrder"
-                                     PlacementsListSortOrder
-                                     :>
-                                     QueryParam "paymentSource"
-                                       PlacementsListPaymentSource
-                                       :>
-                                       QueryParams "siteIds" (Textual Int64) :>
-                                         QueryParam "pageToken" Text :>
-                                           QueryParam "sortField"
-                                             PlacementsListSortField
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParams "contentCategoryIds" (Textual Int64) :>
+                     QueryParam "maxEndDate" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParams "campaignIds" (Textual Int64) :>
+                             QueryParams "pricingTypes"
+                               PlacementsListPricingTypes
+                               :>
+                               QueryParam "searchString" Text :>
+                                 QueryParams "sizeIds" (Textual Int64) :>
+                                   QueryParam "uploadType" Text :>
+                                     QueryParams "ids" (Textual Int64) :>
+                                       QueryParams "groupIds" (Textual Int64) :>
+                                         QueryParams "directorySiteIds"
+                                           (Textual Int64)
+                                           :>
+                                           QueryParam "sortOrder"
+                                             PlacementsListSortOrder
                                              :>
-                                             QueryParams "compatibilities"
-                                               PlacementsListCompatibilities
+                                             QueryParam "paymentSource"
+                                               PlacementsListPaymentSource
                                                :>
-                                               QueryParam "maxStartDate" Text :>
-                                                 QueryParams "advertiserIds"
-                                                   (Textual Int64)
-                                                   :>
-                                                   QueryParam "minStartDate"
-                                                     Text
+                                               QueryParams "siteIds"
+                                                 (Textual Int64)
+                                                 :>
+                                                 QueryParam "pageToken" Text :>
+                                                   QueryParam "sortField"
+                                                     PlacementsListSortField
                                                      :>
-                                                     QueryParam "archived" Bool
+                                                     QueryParams
+                                                       "compatibilities"
+                                                       PlacementsListCompatibilities
                                                        :>
-                                                       QueryParam "maxResults"
-                                                         (Textual Int32)
+                                                       QueryParam "maxStartDate"
+                                                         Text
                                                          :>
-                                                         QueryParam "minEndDate"
-                                                           Text
+                                                         QueryParams
+                                                           "advertiserIds"
+                                                           (Textual Int64)
                                                            :>
-                                                           QueryParam "alt"
-                                                             AltJSON
+                                                           QueryParam
+                                                             "minStartDate"
+                                                             Text
                                                              :>
-                                                             Get '[JSON]
-                                                               PlacementsListResponse
+                                                             QueryParam
+                                                               "archived"
+                                                               Bool
+                                                               :>
+                                                               QueryParam
+                                                                 "maxResults"
+                                                                 (Textual Int32)
+                                                                 :>
+                                                                 QueryParam
+                                                                   "minEndDate"
+                                                                   Text
+                                                                   :>
+                                                                   QueryParam
+                                                                     "callback"
+                                                                     Text
+                                                                     :>
+                                                                     QueryParam
+                                                                       "alt"
+                                                                       AltJSON
+                                                                       :>
+                                                                       Get
+                                                                         '[JSON]
+                                                                         PlacementsListResponse
 
 -- | Retrieves a list of placements, possibly filtered. This method supports
 -- paging.
@@ -124,28 +152,33 @@ type PlacementsListResource =
 data PlacementsList =
   PlacementsList'
     { _pPlacementStrategyIds :: !(Maybe [Textual Int64])
-    , _pContentCategoryIds   :: !(Maybe [Textual Int64])
-    , _pMaxEndDate           :: !(Maybe Text)
-    , _pCampaignIds          :: !(Maybe [Textual Int64])
-    , _pPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
-    , _pSearchString         :: !(Maybe Text)
-    , _pSizeIds              :: !(Maybe [Textual Int64])
-    , _pIds                  :: !(Maybe [Textual Int64])
-    , _pProFileId            :: !(Textual Int64)
-    , _pGroupIds             :: !(Maybe [Textual Int64])
-    , _pDirectorySiteIds     :: !(Maybe [Textual Int64])
-    , _pSortOrder            :: !PlacementsListSortOrder
-    , _pPaymentSource        :: !(Maybe PlacementsListPaymentSource)
-    , _pSiteIds              :: !(Maybe [Textual Int64])
-    , _pPageToken            :: !(Maybe Text)
-    , _pSortField            :: !PlacementsListSortField
-    , _pCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
-    , _pMaxStartDate         :: !(Maybe Text)
-    , _pAdvertiserIds        :: !(Maybe [Textual Int64])
-    , _pMinStartDate         :: !(Maybe Text)
-    , _pArchived             :: !(Maybe Bool)
-    , _pMaxResults           :: !(Textual Int32)
-    , _pMinEndDate           :: !(Maybe Text)
+    , _pXgafv :: !(Maybe Xgafv)
+    , _pContentCategoryIds :: !(Maybe [Textual Int64])
+    , _pMaxEndDate :: !(Maybe Text)
+    , _pUploadProtocol :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pCampaignIds :: !(Maybe [Textual Int64])
+    , _pPricingTypes :: !(Maybe [PlacementsListPricingTypes])
+    , _pSearchString :: !(Maybe Text)
+    , _pSizeIds :: !(Maybe [Textual Int64])
+    , _pUploadType :: !(Maybe Text)
+    , _pIds :: !(Maybe [Textual Int64])
+    , _pProFileId :: !(Textual Int64)
+    , _pGroupIds :: !(Maybe [Textual Int64])
+    , _pDirectorySiteIds :: !(Maybe [Textual Int64])
+    , _pSortOrder :: !PlacementsListSortOrder
+    , _pPaymentSource :: !(Maybe PlacementsListPaymentSource)
+    , _pSiteIds :: !(Maybe [Textual Int64])
+    , _pPageToken :: !(Maybe Text)
+    , _pSortField :: !PlacementsListSortField
+    , _pCompatibilities :: !(Maybe [PlacementsListCompatibilities])
+    , _pMaxStartDate :: !(Maybe Text)
+    , _pAdvertiserIds :: !(Maybe [Textual Int64])
+    , _pMinStartDate :: !(Maybe Text)
+    , _pArchived :: !(Maybe Bool)
+    , _pMaxResults :: !(Textual Int32)
+    , _pMinEndDate :: !(Maybe Text)
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -156,9 +189,15 @@ data PlacementsList =
 --
 -- * 'pPlacementStrategyIds'
 --
+-- * 'pXgafv'
+--
 -- * 'pContentCategoryIds'
 --
 -- * 'pMaxEndDate'
+--
+-- * 'pUploadProtocol'
+--
+-- * 'pAccessToken'
 --
 -- * 'pCampaignIds'
 --
@@ -167,6 +206,8 @@ data PlacementsList =
 -- * 'pSearchString'
 --
 -- * 'pSizeIds'
+--
+-- * 'pUploadType'
 --
 -- * 'pIds'
 --
@@ -199,18 +240,24 @@ data PlacementsList =
 -- * 'pMaxResults'
 --
 -- * 'pMinEndDate'
+--
+-- * 'pCallback'
 placementsList
     :: Int64 -- ^ 'pProFileId'
     -> PlacementsList
 placementsList pPProFileId_ =
   PlacementsList'
     { _pPlacementStrategyIds = Nothing
+    , _pXgafv = Nothing
     , _pContentCategoryIds = Nothing
     , _pMaxEndDate = Nothing
+    , _pUploadProtocol = Nothing
+    , _pAccessToken = Nothing
     , _pCampaignIds = Nothing
     , _pPricingTypes = Nothing
     , _pSearchString = Nothing
     , _pSizeIds = Nothing
+    , _pUploadType = Nothing
     , _pIds = Nothing
     , _pProFileId = _Coerce # pPProFileId_
     , _pGroupIds = Nothing
@@ -227,6 +274,7 @@ placementsList pPProFileId_ =
     , _pArchived = Nothing
     , _pMaxResults = 1000
     , _pMinEndDate = Nothing
+    , _pCallback = Nothing
     }
 
 
@@ -238,6 +286,10 @@ pPlacementStrategyIds
       (\ s a -> s{_pPlacementStrategyIds = a})
       . _Default
       . _Coerce
+
+-- | V1 error format.
+pXgafv :: Lens' PlacementsList (Maybe Xgafv)
+pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
 
 -- | Select only placements that are associated with these content
 -- categories.
@@ -254,6 +306,17 @@ pContentCategoryIds
 pMaxEndDate :: Lens' PlacementsList (Maybe Text)
 pMaxEndDate
   = lens _pMaxEndDate (\ s a -> s{_pMaxEndDate = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pUploadProtocol :: Lens' PlacementsList (Maybe Text)
+pUploadProtocol
+  = lens _pUploadProtocol
+      (\ s a -> s{_pUploadProtocol = a})
+
+-- | OAuth access token.
+pAccessToken :: Lens' PlacementsList (Maybe Text)
+pAccessToken
+  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
 
 -- | Select only placements that belong to these campaigns.
 pCampaignIds :: Lens' PlacementsList [Int64]
@@ -276,7 +339,7 @@ pPricingTypes
 -- \"placements 2015\". Most of the searches also add wildcards implicitly
 -- at the start and the end of the search string. For example, a search
 -- string of \"placement\" will match placements with name \"my
--- placement\", \"placement 2015\", or simply \"placement\".
+-- placement\", \"placement 2015\", or simply \"placement\" .
 pSearchString :: Lens' PlacementsList (Maybe Text)
 pSearchString
   = lens _pSearchString
@@ -288,6 +351,11 @@ pSizeIds
   = lens _pSizeIds (\ s a -> s{_pSizeIds = a}) .
       _Default
       . _Coerce
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pUploadType :: Lens' PlacementsList (Maybe Text)
+pUploadType
+  = lens _pUploadType (\ s a -> s{_pUploadType = a})
 
 -- | Select only placements with these IDs.
 pIds :: Lens' PlacementsList [Int64]
@@ -400,18 +468,27 @@ pMinEndDate :: Lens' PlacementsList (Maybe Text)
 pMinEndDate
   = lens _pMinEndDate (\ s a -> s{_pMinEndDate = a})
 
+-- | JSONP
+pCallback :: Lens' PlacementsList (Maybe Text)
+pCallback
+  = lens _pCallback (\ s a -> s{_pCallback = a})
+
 instance GoogleRequest PlacementsList where
         type Rs PlacementsList = PlacementsListResponse
         type Scopes PlacementsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient PlacementsList'{..}
           = go _pProFileId (_pPlacementStrategyIds ^. _Default)
+              _pXgafv
               (_pContentCategoryIds ^. _Default)
               _pMaxEndDate
+              _pUploadProtocol
+              _pAccessToken
               (_pCampaignIds ^. _Default)
               (_pPricingTypes ^. _Default)
               _pSearchString
               (_pSizeIds ^. _Default)
+              _pUploadType
               (_pIds ^. _Default)
               (_pGroupIds ^. _Default)
               (_pDirectorySiteIds ^. _Default)
@@ -427,6 +504,7 @@ instance GoogleRequest PlacementsList where
               _pArchived
               (Just _pMaxResults)
               _pMinEndDate
+              _pCallback
               (Just AltJSON)
               dFAReportingService
           where go

@@ -48,8 +48,8 @@ module Network.Google.Resource.Partners.GetPartnersstatus
     , gpCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.getPartnersstatus@ method which the
 -- 'GetPartnersstatus' request conforms to.
@@ -88,18 +88,18 @@ type GetPartnersstatusResource =
 -- /See:/ 'getPartnersstatus' smart constructor.
 data GetPartnersstatus =
   GetPartnersstatus'
-    { _gpXgafv                                       :: !(Maybe Xgafv)
-    , _gpUploadProtocol                              :: !(Maybe Text)
-    , _gpAccessToken                                 :: !(Maybe Text)
-    , _gpUploadType                                  :: !(Maybe Text)
-    , _gpRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _gpRequestMetadataLocale                       :: !(Maybe Text)
-    , _gpRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _gpRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _gpRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _gpRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _gpXgafv :: !(Maybe Xgafv)
+    , _gpUploadProtocol :: !(Maybe Text)
+    , _gpAccessToken :: !(Maybe Text)
+    , _gpUploadType :: !(Maybe Text)
+    , _gpRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _gpRequestMetadataLocale :: !(Maybe Text)
+    , _gpRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _gpRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _gpRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _gpRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _gpRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _gpCallback                                    :: !(Maybe Text)
+    , _gpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

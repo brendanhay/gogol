@@ -36,10 +36,11 @@ module Network.Google.Resource.Storage.Notifications.Delete
     , ndNotification
     , ndBucket
     , ndUserProject
+    , ndProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.notifications.delete@ method which the
 -- 'NotificationsDelete' request conforms to.
@@ -51,7 +52,8 @@ type NotificationsDeleteResource =
              "notificationConfigs" :>
                Capture "notification" Text :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes a notification subscription.
 --
@@ -59,8 +61,9 @@ type NotificationsDeleteResource =
 data NotificationsDelete =
   NotificationsDelete'
     { _ndNotification :: !Text
-    , _ndBucket       :: !Text
-    , _ndUserProject  :: !(Maybe Text)
+    , _ndBucket :: !Text
+    , _ndUserProject :: !(Maybe Text)
+    , _ndProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,6 +77,8 @@ data NotificationsDelete =
 -- * 'ndBucket'
 --
 -- * 'ndUserProject'
+--
+-- * 'ndProvisionalUserProject'
 notificationsDelete
     :: Text -- ^ 'ndNotification'
     -> Text -- ^ 'ndBucket'
@@ -83,6 +88,7 @@ notificationsDelete pNdNotification_ pNdBucket_ =
     { _ndNotification = pNdNotification_
     , _ndBucket = pNdBucket_
     , _ndUserProject = Nothing
+    , _ndProvisionalUserProject = Nothing
     }
 
 
@@ -103,6 +109,13 @@ ndUserProject
   = lens _ndUserProject
       (\ s a -> s{_ndUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+ndProvisionalUserProject :: Lens' NotificationsDelete (Maybe Text)
+ndProvisionalUserProject
+  = lens _ndProvisionalUserProject
+      (\ s a -> s{_ndProvisionalUserProject = a})
+
 instance GoogleRequest NotificationsDelete where
         type Rs NotificationsDelete = ()
         type Scopes NotificationsDelete =
@@ -111,6 +124,7 @@ instance GoogleRequest NotificationsDelete where
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient NotificationsDelete'{..}
           = go _ndBucket _ndNotification _ndUserProject
+              _ndProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

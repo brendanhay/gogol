@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Stackdriver Debugger.
+A client library for the Google Cloud Debugger.
 
 
 ## Contribute

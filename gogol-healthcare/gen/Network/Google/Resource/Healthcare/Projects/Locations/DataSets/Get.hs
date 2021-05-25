@@ -41,13 +41,13 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Get
     , pldsgCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.get@ method which the
 -- 'ProjectsLocationsDataSetsGet' request conforms to.
 type ProjectsLocationsDataSetsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsLocationsDataSetsGetResource =
 -- /See:/ 'projectsLocationsDataSetsGet' smart constructor.
 data ProjectsLocationsDataSetsGet =
   ProjectsLocationsDataSetsGet'
-    { _pldsgXgafv          :: !(Maybe Xgafv)
+    { _pldsgXgafv :: !(Maybe Xgafv)
     , _pldsgUploadProtocol :: !(Maybe Text)
-    , _pldsgAccessToken    :: !(Maybe Text)
-    , _pldsgUploadType     :: !(Maybe Text)
-    , _pldsgName           :: !Text
-    , _pldsgCallback       :: !(Maybe Text)
+    , _pldsgAccessToken :: !(Maybe Text)
+    , _pldsgUploadType :: !(Maybe Text)
+    , _pldsgName :: !Text
+    , _pldsgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,8 +123,8 @@ pldsgUploadType
   = lens _pldsgUploadType
       (\ s a -> s{_pldsgUploadType = a})
 
--- | The name of the dataset to read (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\`).
+-- | The name of the dataset to read. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\`.
 pldsgName :: Lens' ProjectsLocationsDataSetsGet Text
 pldsgName
   = lens _pldsgName (\ s a -> s{_pldsgName = a})

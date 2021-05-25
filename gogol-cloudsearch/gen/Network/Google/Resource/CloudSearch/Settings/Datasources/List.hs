@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists datasources.
+-- Lists datasources. **Note:** This API requires an admin account to
+-- execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.list@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.datasources.list@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.List
     (
     -- * REST Resource
@@ -43,8 +44,8 @@ module Network.Google.Resource.CloudSearch.Settings.Datasources.List
     , sdlCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.datasources.list@ method which the
 -- 'SettingsDatasourcesList' request conforms to.
@@ -63,19 +64,20 @@ type SettingsDatasourcesListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListDataSourceResponse
 
--- | Lists datasources.
+-- | Lists datasources. **Note:** This API requires an admin account to
+-- execute.
 --
 -- /See:/ 'settingsDatasourcesList' smart constructor.
 data SettingsDatasourcesList =
   SettingsDatasourcesList'
-    { _sdlXgafv                       :: !(Maybe Xgafv)
-    , _sdlUploadProtocol              :: !(Maybe Text)
-    , _sdlAccessToken                 :: !(Maybe Text)
-    , _sdlUploadType                  :: !(Maybe Text)
+    { _sdlXgafv :: !(Maybe Xgafv)
+    , _sdlUploadProtocol :: !(Maybe Text)
+    , _sdlAccessToken :: !(Maybe Text)
+    , _sdlUploadType :: !(Maybe Text)
     , _sdlDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _sdlPageToken                   :: !(Maybe Text)
-    , _sdlPageSize                    :: !(Maybe (Textual Int32))
-    , _sdlCallback                    :: !(Maybe Text)
+    , _sdlPageToken :: !(Maybe Text)
+    , _sdlPageSize :: !(Maybe (Textual Int32))
+    , _sdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,8 +151,7 @@ sdlPageToken
   = lens _sdlPageToken (\ s a -> s{_sdlPageToken = a})
 
 -- | Maximum number of datasources to fetch in a request. The max value is
--- 100.
--- The default value is 10
+-- 100. The default value is 10
 sdlPageSize :: Lens' SettingsDatasourcesList (Maybe Int32)
 sdlPageSize
   = lens _sdlPageSize (\ s a -> s{_sdlPageSize = a}) .

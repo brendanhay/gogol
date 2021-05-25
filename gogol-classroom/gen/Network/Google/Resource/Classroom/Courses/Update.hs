@@ -46,8 +46,8 @@ module Network.Google.Resource.Classroom.Courses.Update
     , cuCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.update@ method which the
 -- 'CoursesUpdate' request conforms to.
@@ -72,13 +72,13 @@ type CoursesUpdateResource =
 -- /See:/ 'coursesUpdate' smart constructor.
 data CoursesUpdate =
   CoursesUpdate'
-    { _cuXgafv          :: !(Maybe Xgafv)
+    { _cuXgafv :: !(Maybe Xgafv)
     , _cuUploadProtocol :: !(Maybe Text)
-    , _cuAccessToken    :: !(Maybe Text)
-    , _cuUploadType     :: !(Maybe Text)
-    , _cuPayload        :: !Course
-    , _cuId             :: !Text
-    , _cuCallback       :: !(Maybe Text)
+    , _cuAccessToken :: !(Maybe Text)
+    , _cuUploadType :: !(Maybe Text)
+    , _cuPayload :: !Course
+    , _cuId :: !Text
+    , _cuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

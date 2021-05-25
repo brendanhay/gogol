@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Insert
     , raiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionAutoscalers.insert@ method which the
 -- 'RegionAutoscalersInsert' request conforms to.
@@ -64,9 +64,9 @@ type RegionAutoscalersInsertResource =
 data RegionAutoscalersInsert =
   RegionAutoscalersInsert'
     { _raiRequestId :: !(Maybe Text)
-    , _raiProject   :: !Text
-    , _raiPayload   :: !Autoscaler
-    , _raiRegion    :: !Text
+    , _raiProject :: !Text
+    , _raiPayload :: !Autoscaler
+    , _raiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

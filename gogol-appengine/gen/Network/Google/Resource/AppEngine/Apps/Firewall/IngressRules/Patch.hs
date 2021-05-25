@@ -44,8 +44,8 @@ module Network.Google.Resource.AppEngine.Apps.Firewall.IngressRules.Patch
     , afirpCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.patch@ method which the
 -- 'AppsFirewallIngressRulesPatch' request conforms to.
@@ -71,15 +71,15 @@ type AppsFirewallIngressRulesPatchResource =
 -- /See:/ 'appsFirewallIngressRulesPatch' smart constructor.
 data AppsFirewallIngressRulesPatch =
   AppsFirewallIngressRulesPatch'
-    { _afirpXgafv          :: !(Maybe Xgafv)
+    { _afirpXgafv :: !(Maybe Xgafv)
     , _afirpUploadProtocol :: !(Maybe Text)
-    , _afirpUpdateMask     :: !(Maybe GFieldMask)
-    , _afirpAccessToken    :: !(Maybe Text)
-    , _afirpUploadType     :: !(Maybe Text)
-    , _afirpPayload        :: !FirewallRule
+    , _afirpUpdateMask :: !(Maybe GFieldMask)
+    , _afirpAccessToken :: !(Maybe Text)
+    , _afirpUploadType :: !(Maybe Text)
+    , _afirpPayload :: !FirewallRule
     , _afirpIngressRulesId :: !Text
-    , _afirpAppsId         :: !Text
-    , _afirpCallback       :: !(Maybe Text)
+    , _afirpAppsId :: !Text
+    , _afirpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

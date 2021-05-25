@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -27,6 +27,11 @@ module Network.Google.BigQueryDataTransfer.Types
     -- * DataSourceParameterType
     , DataSourceParameterType (..)
 
+    -- * EmailPreferences
+    , EmailPreferences
+    , emailPreferences
+    , epEnableFailureEmail
+
     -- * Status
     , Status
     , status
@@ -50,7 +55,9 @@ module Network.Google.BigQueryDataTransfer.Types
     , TransferRun
     , transferRun
     , tRunTime
+    , tEmailPreferences
     , tErrorStatus
+    , tNotificationPubsubTopic
     , tState
     , tSchedule
     , tStartTime
@@ -120,6 +127,12 @@ module Network.Google.BigQueryDataTransfer.Types
     -- * DataSourceTransferType
     , DataSourceTransferType (..)
 
+    -- * ProjectsLocationsTransferConfigsRunsListStates
+    , ProjectsLocationsTransferConfigsRunsListStates (..)
+
+    -- * ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes
+    , ProjectsLocationsTransferConfigsRunsTransferLogsListMessageTypes (..)
+
     -- * DataSourceAuthorizationType
     , DataSourceAuthorizationType (..)
 
@@ -127,6 +140,9 @@ module Network.Google.BigQueryDataTransfer.Types
     , TransferRunParams
     , transferRunParams
     , trpAddtional
+
+    -- * ProjectsLocationsTransferConfigsRunsListRunAttempt
+    , ProjectsLocationsTransferConfigsRunsListRunAttempt (..)
 
     -- * DataSourceParameter
     , DataSourceParameter
@@ -146,6 +162,7 @@ module Network.Google.BigQueryDataTransfer.Types
     , dspMinValue
     , dspValidationHelpURL
     , dspFields
+    , dspDeprecated
 
     -- * ScheduleTransferRunsResponse
     , ScheduleTransferRunsResponse
@@ -205,6 +222,12 @@ module Network.Google.BigQueryDataTransfer.Types
     , tmMessageTime
     , tmMessageText
 
+    -- * ProjectsTransferConfigsRunsTransferLogsListMessageTypes
+    , ProjectsTransferConfigsRunsTransferLogsListMessageTypes (..)
+
+    -- * ProjectsTransferConfigsRunsListStates
+    , ProjectsTransferConfigsRunsListStates (..)
+
     -- * LocationLabels
     , LocationLabels
     , locationLabels
@@ -214,6 +237,9 @@ module Network.Google.BigQueryDataTransfer.Types
     , StartManualTransferRunsResponse
     , startManualTransferRunsResponse
     , smtrrRuns
+
+    -- * ProjectsTransferConfigsRunsListRunAttempt
+    , ProjectsTransferConfigsRunsListRunAttempt (..)
 
     -- * LocationMetadata
     , LocationMetadata
@@ -235,6 +261,8 @@ module Network.Google.BigQueryDataTransfer.Types
     -- * TransferConfig
     , TransferConfig
     , transferConfig
+    , tcEmailPreferences
+    , tcNotificationPubsubTopic
     , tcState
     , tcSchedule
     , tcScheduleOptions
@@ -251,9 +279,9 @@ module Network.Google.BigQueryDataTransfer.Types
     , tcDataRefreshWindowDays
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types.Product
-import           Network.Google.BigQueryDataTransfer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types.Product
+import Network.Google.BigQueryDataTransfer.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the BigQuery Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 bigQueryDataTransferService :: ServiceConfig
@@ -266,7 +294,7 @@ bigQueryDataTransferService
 cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
 cloudPlatformReadOnlyScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

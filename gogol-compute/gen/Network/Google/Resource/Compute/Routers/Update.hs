@@ -21,7 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the specified Router resource with the data included in the
--- request.
+-- request. This method conforms to PUT semantics, which requests that the
+-- state of the target resource be created or replaced with the state
+-- defined by the representation enclosed in the request message payload.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routers.update@.
 module Network.Google.Resource.Compute.Routers.Update
@@ -41,8 +43,8 @@ module Network.Google.Resource.Compute.Routers.Update
     , ruRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.update@ method which the
 -- 'RoutersUpdate' request conforms to.
@@ -60,16 +62,18 @@ type RoutersUpdateResource =
                          ReqBody '[JSON] Router :> Put '[JSON] Operation
 
 -- | Updates the specified Router resource with the data included in the
--- request.
+-- request. This method conforms to PUT semantics, which requests that the
+-- state of the target resource be created or replaced with the state
+-- defined by the representation enclosed in the request message payload.
 --
 -- /See:/ 'routersUpdate' smart constructor.
 data RoutersUpdate =
   RoutersUpdate'
     { _ruRequestId :: !(Maybe Text)
-    , _ruProject   :: !Text
-    , _ruRouter    :: !Text
-    , _ruPayload   :: !Router
-    , _ruRegion    :: !Text
+    , _ruProject :: !Text
+    , _ruRouter :: !Text
+    , _ruPayload :: !Router
+    , _ruRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,13 +43,13 @@ module Network.Google.Resource.Speech.Projects.Locations.Operations.Get
     , plogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Speech.Types
+import Network.Google.Prelude
+import Network.Google.Speech.Types
 
 -- | A resource alias for @speech.projects.locations.operations.get@ method which the
 -- 'ProjectsLocationsOperationsGet' request conforms to.
 type ProjectsLocationsOperationsGetResource =
-     "v1p1beta1" :>
+     "v2beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,12 +65,12 @@ type ProjectsLocationsOperationsGetResource =
 -- /See:/ 'projectsLocationsOperationsGet' smart constructor.
 data ProjectsLocationsOperationsGet =
   ProjectsLocationsOperationsGet'
-    { _plogXgafv          :: !(Maybe Xgafv)
+    { _plogXgafv :: !(Maybe Xgafv)
     , _plogUploadProtocol :: !(Maybe Text)
-    , _plogAccessToken    :: !(Maybe Text)
-    , _plogUploadType     :: !(Maybe Text)
-    , _plogName           :: !Text
-    , _plogCallback       :: !(Maybe Text)
+    , _plogAccessToken :: !(Maybe Text)
+    , _plogUploadType :: !(Maybe Text)
+    , _plogName :: !Text
+    , _plogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

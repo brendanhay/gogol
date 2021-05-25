@@ -23,7 +23,7 @@
 -- Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.logs.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.logs.list@.
 module Network.Google.Resource.Logging.Organizations.Logs.List
     (
     -- * REST Resource
@@ -41,11 +41,12 @@ module Network.Google.Resource.Logging.Organizations.Logs.List
     , ollUploadType
     , ollPageToken
     , ollPageSize
+    , ollResourceNames
     , ollCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.organizations.logs.list@ method which the
 -- 'OrganizationsLogsList' request conforms to.
@@ -59,9 +60,10 @@ type OrganizationsLogsListResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "pageToken" Text :>
                      QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListLogsResponse
+                       QueryParams "resourceNames" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in projects, organizations, folders, or billing accounts.
 -- Only logs that have entries are listed.
@@ -69,14 +71,15 @@ type OrganizationsLogsListResource =
 -- /See:/ 'organizationsLogsList' smart constructor.
 data OrganizationsLogsList =
   OrganizationsLogsList'
-    { _ollParent         :: !Text
-    , _ollXgafv          :: !(Maybe Xgafv)
+    { _ollParent :: !Text
+    , _ollXgafv :: !(Maybe Xgafv)
     , _ollUploadProtocol :: !(Maybe Text)
-    , _ollAccessToken    :: !(Maybe Text)
-    , _ollUploadType     :: !(Maybe Text)
-    , _ollPageToken      :: !(Maybe Text)
-    , _ollPageSize       :: !(Maybe (Textual Int32))
-    , _ollCallback       :: !(Maybe Text)
+    , _ollAccessToken :: !(Maybe Text)
+    , _ollUploadType :: !(Maybe Text)
+    , _ollPageToken :: !(Maybe Text)
+    , _ollPageSize :: !(Maybe (Textual Int32))
+    , _ollResourceNames :: !(Maybe [Text])
+    , _ollCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,6 +102,8 @@ data OrganizationsLogsList =
 --
 -- * 'ollPageSize'
 --
+-- * 'ollResourceNames'
+--
 -- * 'ollCallback'
 organizationsLogsList
     :: Text -- ^ 'ollParent'
@@ -112,13 +117,14 @@ organizationsLogsList pOllParent_ =
     , _ollUploadType = Nothing
     , _ollPageToken = Nothing
     , _ollPageSize = Nothing
+    , _ollResourceNames = Nothing
     , _ollCallback = Nothing
     }
 
 
--- | Required. The resource name that owns the logs:
--- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\" \"folders\/[FOLDER_ID]\"
+-- | Required. The resource name that owns the logs: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
 ollParent :: Lens' OrganizationsLogsList Text
 ollParent
   = lens _ollParent (\ s a -> s{_ollParent = a})
@@ -161,6 +167,21 @@ ollPageSize
   = lens _ollPageSize (\ s a -> s{_ollPageSize = a}) .
       mapping _Coerce
 
+-- | Optional. The resource name that owns the logs:
+-- projects\/[PROJECT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- organizations\/[ORGANIZATION_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]
+-- folders\/[FOLDER_ID]\/locations\/[LOCATION_ID]\/buckets\/[BUCKET_ID]\/views\/[VIEW_ID]To
+-- support legacy queries, it could also be: projects\/[PROJECT_ID]
+-- organizations\/[ORGANIZATION_ID] billingAccounts\/[BILLING_ACCOUNT_ID]
+-- folders\/[FOLDER_ID]
+ollResourceNames :: Lens' OrganizationsLogsList [Text]
+ollResourceNames
+  = lens _ollResourceNames
+      (\ s a -> s{_ollResourceNames = a})
+      . _Default
+      . _Coerce
+
 -- | JSONP
 ollCallback :: Lens' OrganizationsLogsList (Maybe Text)
 ollCallback
@@ -179,6 +200,7 @@ instance GoogleRequest OrganizationsLogsList where
               _ollUploadType
               _ollPageToken
               _ollPageSize
+              (_ollResourceNames ^. _Default)
               _ollCallback
               (Just AltJSON)
               loggingService

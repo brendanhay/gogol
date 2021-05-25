@@ -40,6 +40,11 @@ library
         , Network.Google.Resource.CloudShell.Operations.Delete
         , Network.Google.Resource.CloudShell.Operations.Get
         , Network.Google.Resource.CloudShell.Operations.List
+        , Network.Google.Resource.CloudShell.Users.Environments.AddPublicKey
+        , Network.Google.Resource.CloudShell.Users.Environments.Authorize
+        , Network.Google.Resource.CloudShell.Users.Environments.Get
+        , Network.Google.Resource.CloudShell.Users.Environments.RemovePublicKey
+        , Network.Google.Resource.CloudShell.Users.Environments.Start
 
     other-modules:
           Network.Google.CloudShell.Types.Product

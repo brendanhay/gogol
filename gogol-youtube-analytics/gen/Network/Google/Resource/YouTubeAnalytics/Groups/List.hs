@@ -46,8 +46,8 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.List
     , glCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groups.list@ method which the
 -- 'GroupsList' request conforms to.
@@ -73,15 +73,15 @@ type GroupsListResource =
 -- /See:/ 'groupsList' smart constructor.
 data GroupsList =
   GroupsList'
-    { _glXgafv                  :: !(Maybe Xgafv)
-    , _glMine                   :: !(Maybe Bool)
-    , _glUploadProtocol         :: !(Maybe Text)
-    , _glAccessToken            :: !(Maybe Text)
-    , _glUploadType             :: !(Maybe Text)
+    { _glXgafv :: !(Maybe Xgafv)
+    , _glMine :: !(Maybe Bool)
+    , _glUploadProtocol :: !(Maybe Text)
+    , _glAccessToken :: !(Maybe Text)
+    , _glUploadType :: !(Maybe Text)
     , _glOnBehalfOfContentOwner :: !(Maybe Text)
-    , _glId                     :: !(Maybe Text)
-    , _glPageToken              :: !(Maybe Text)
-    , _glCallback               :: !(Maybe Text)
+    , _glId :: !(Maybe Text)
+    , _glPageToken :: !(Maybe Text)
+    , _glCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

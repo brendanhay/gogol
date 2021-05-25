@@ -43,13 +43,13 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Instances.Restart
     , plirCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.instances.restart@ method which the
 -- 'ProjectsLocationsInstancesRestart' request conforms to.
 type ProjectsLocationsInstancesRestartResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "restart" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -66,13 +66,13 @@ type ProjectsLocationsInstancesRestartResource =
 -- /See:/ 'projectsLocationsInstancesRestart' smart constructor.
 data ProjectsLocationsInstancesRestart =
   ProjectsLocationsInstancesRestart'
-    { _plirXgafv          :: !(Maybe Xgafv)
+    { _plirXgafv :: !(Maybe Xgafv)
     , _plirUploadProtocol :: !(Maybe Text)
-    , _plirAccessToken    :: !(Maybe Text)
-    , _plirUploadType     :: !(Maybe Text)
-    , _plirPayload        :: !RestartInstanceRequest
-    , _plirName           :: !Text
-    , _plirCallback       :: !(Maybe Text)
+    , _plirAccessToken :: !(Maybe Text)
+    , _plirUploadType :: !(Maybe Text)
+    , _plirPayload :: !RestartInstanceRequest
+    , _plirName :: !Text
+    , _plirCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

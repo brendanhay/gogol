@@ -38,8 +38,8 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
     , aslMaxResults
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.savedadstyles.list@ method which the
 -- 'AccountsSavedadstylesList' request conforms to.
@@ -58,8 +58,8 @@ type AccountsSavedadstylesListResource =
 -- /See:/ 'accountsSavedadstylesList' smart constructor.
 data AccountsSavedadstylesList =
   AccountsSavedadstylesList'
-    { _aslAccountId  :: !Text
-    , _aslPageToken  :: !(Maybe Text)
+    { _aslAccountId :: !Text
+    , _aslPageToken :: !(Maybe Text)
     , _aslMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Patch
     , mwppAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.patch@ method which the
 -- 'ManagementWebPropertiesPatch' request conforms to.
@@ -61,8 +61,8 @@ type ManagementWebPropertiesPatchResource =
 data ManagementWebPropertiesPatch =
   ManagementWebPropertiesPatch'
     { _mwppWebPropertyId :: !Text
-    , _mwppPayload       :: !WebProperty
-    , _mwppAccountId     :: !Text
+    , _mwppPayload :: !WebProperty
+    , _mwppAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

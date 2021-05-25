@@ -43,8 +43,8 @@ module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
     , pzgscCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.getServerconfig@ method which the
 -- 'ProjectsZonesGetServerConfig' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsZonesGetServerConfigResource =
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
 data ProjectsZonesGetServerConfig =
   ProjectsZonesGetServerConfig'
-    { _pzgscXgafv          :: !(Maybe Xgafv)
+    { _pzgscXgafv :: !(Maybe Xgafv)
     , _pzgscUploadProtocol :: !(Maybe Text)
-    , _pzgscAccessToken    :: !(Maybe Text)
-    , _pzgscUploadType     :: !(Maybe Text)
-    , _pzgscZone           :: !Text
-    , _pzgscName           :: !(Maybe Text)
-    , _pzgscProjectId      :: !Text
-    , _pzgscCallback       :: !(Maybe Text)
+    , _pzgscAccessToken :: !(Maybe Text)
+    , _pzgscUploadType :: !(Maybe Text)
+    , _pzgscZone :: !Text
+    , _pzgscName :: !(Maybe Text)
+    , _pzgscProjectId :: !Text
+    , _pzgscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,14 +141,15 @@ pzgscUploadType
       (\ s a -> s{_pzgscUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) to return operations for. This
--- field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) to
+-- return operations for. This field has been deprecated and replaced by
+-- the name field.
 pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
 
 -- | The name (project and location) of the server config to get, specified
--- in the format \'projects\/*\/locations\/*\'.
+-- in the format \`projects\/*\/locations\/*\`.
 pzgscName :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscName
   = lens _pzgscName (\ s a -> s{_pzgscName = a})

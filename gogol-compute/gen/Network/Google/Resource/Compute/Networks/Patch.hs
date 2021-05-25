@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Networks.Patch
     , npPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.patch@ method which the
 -- 'NetworksPatch' request conforms to.
@@ -64,9 +64,9 @@ type NetworksPatchResource =
 data NetworksPatch =
   NetworksPatch'
     { _npRequestId :: !(Maybe Text)
-    , _npProject   :: !Text
-    , _npNetwork   :: !Text
-    , _npPayload   :: !Network
+    , _npProject :: !Text
+    , _npNetwork :: !Text
+    , _npPayload :: !Network
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

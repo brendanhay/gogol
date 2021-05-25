@@ -16,7 +16,7 @@
 --
 module Network.Google.YouTubeReporting.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | gdata
 data GDataCompositeMediaReferenceType

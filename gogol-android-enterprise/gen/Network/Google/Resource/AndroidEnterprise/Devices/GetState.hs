@@ -37,13 +37,18 @@ module Network.Google.Resource.AndroidEnterprise.Devices.GetState
     , DevicesGetState
 
     -- * Request Lenses
+    , dgsXgafv
+    , dgsUploadProtocol
     , dgsEnterpriseId
+    , dgsAccessToken
+    , dgsUploadType
     , dgsUserId
     , dgsDeviceId
+    , dgsCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.devices.getState@ method which the
 -- 'DevicesGetState' request conforms to.
@@ -57,7 +62,13 @@ type DevicesGetStateResource =
                  "devices" :>
                    Capture "deviceId" Text :>
                      "state" :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] DeviceState
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] DeviceState
 
 -- | Retrieves whether a device\'s access to Google services is enabled or
 -- disabled. The device state takes effect only if enforcing EMM policies
@@ -68,9 +79,14 @@ type DevicesGetStateResource =
 -- /See:/ 'devicesGetState' smart constructor.
 data DevicesGetState =
   DevicesGetState'
-    { _dgsEnterpriseId :: !Text
-    , _dgsUserId       :: !Text
-    , _dgsDeviceId     :: !Text
+    { _dgsXgafv :: !(Maybe Xgafv)
+    , _dgsUploadProtocol :: !(Maybe Text)
+    , _dgsEnterpriseId :: !Text
+    , _dgsAccessToken :: !(Maybe Text)
+    , _dgsUploadType :: !(Maybe Text)
+    , _dgsUserId :: !Text
+    , _dgsDeviceId :: !Text
+    , _dgsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,11 +95,21 @@ data DevicesGetState =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dgsXgafv'
+--
+-- * 'dgsUploadProtocol'
+--
 -- * 'dgsEnterpriseId'
+--
+-- * 'dgsAccessToken'
+--
+-- * 'dgsUploadType'
 --
 -- * 'dgsUserId'
 --
 -- * 'dgsDeviceId'
+--
+-- * 'dgsCallback'
 devicesGetState
     :: Text -- ^ 'dgsEnterpriseId'
     -> Text -- ^ 'dgsUserId'
@@ -91,17 +117,44 @@ devicesGetState
     -> DevicesGetState
 devicesGetState pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
   DevicesGetState'
-    { _dgsEnterpriseId = pDgsEnterpriseId_
+    { _dgsXgafv = Nothing
+    , _dgsUploadProtocol = Nothing
+    , _dgsEnterpriseId = pDgsEnterpriseId_
+    , _dgsAccessToken = Nothing
+    , _dgsUploadType = Nothing
     , _dgsUserId = pDgsUserId_
     , _dgsDeviceId = pDgsDeviceId_
+    , _dgsCallback = Nothing
     }
 
+
+-- | V1 error format.
+dgsXgafv :: Lens' DevicesGetState (Maybe Xgafv)
+dgsXgafv = lens _dgsXgafv (\ s a -> s{_dgsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dgsUploadProtocol :: Lens' DevicesGetState (Maybe Text)
+dgsUploadProtocol
+  = lens _dgsUploadProtocol
+      (\ s a -> s{_dgsUploadProtocol = a})
 
 -- | The ID of the enterprise.
 dgsEnterpriseId :: Lens' DevicesGetState Text
 dgsEnterpriseId
   = lens _dgsEnterpriseId
       (\ s a -> s{_dgsEnterpriseId = a})
+
+-- | OAuth access token.
+dgsAccessToken :: Lens' DevicesGetState (Maybe Text)
+dgsAccessToken
+  = lens _dgsAccessToken
+      (\ s a -> s{_dgsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dgsUploadType :: Lens' DevicesGetState (Maybe Text)
+dgsUploadType
+  = lens _dgsUploadType
+      (\ s a -> s{_dgsUploadType = a})
 
 -- | The ID of the user.
 dgsUserId :: Lens' DevicesGetState Text
@@ -113,12 +166,22 @@ dgsDeviceId :: Lens' DevicesGetState Text
 dgsDeviceId
   = lens _dgsDeviceId (\ s a -> s{_dgsDeviceId = a})
 
+-- | JSONP
+dgsCallback :: Lens' DevicesGetState (Maybe Text)
+dgsCallback
+  = lens _dgsCallback (\ s a -> s{_dgsCallback = a})
+
 instance GoogleRequest DevicesGetState where
         type Rs DevicesGetState = DeviceState
         type Scopes DevicesGetState =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient DevicesGetState'{..}
           = go _dgsEnterpriseId _dgsUserId _dgsDeviceId
+              _dgsXgafv
+              _dgsUploadProtocol
+              _dgsAccessToken
+              _dgsUploadType
+              _dgsCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

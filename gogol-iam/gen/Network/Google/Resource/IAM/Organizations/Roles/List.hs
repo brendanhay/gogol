@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the Roles defined on a resource.
+-- Lists every predefined Role that IAM supports, or every custom role that
+-- is defined for an organization or project.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.organizations.roles.list@.
 module Network.Google.Resource.IAM.Organizations.Roles.List
@@ -45,8 +46,8 @@ module Network.Google.Resource.IAM.Organizations.Roles.List
     , orlCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.organizations.roles.list@ method which the
 -- 'OrganizationsRolesList' request conforms to.
@@ -59,28 +60,29 @@ type OrganizationsRolesListResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "showDeleted" Bool :>
-                     QueryParam "view" Text :>
+                     QueryParam "view" OrganizationsRolesListView :>
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListRolesResponse
 
--- | Lists the Roles defined on a resource.
+-- | Lists every predefined Role that IAM supports, or every custom role that
+-- is defined for an organization or project.
 --
 -- /See:/ 'organizationsRolesList' smart constructor.
 data OrganizationsRolesList =
   OrganizationsRolesList'
-    { _orlParent         :: !Text
-    , _orlXgafv          :: !(Maybe Xgafv)
+    { _orlParent :: !Text
+    , _orlXgafv :: !(Maybe Xgafv)
     , _orlUploadProtocol :: !(Maybe Text)
-    , _orlAccessToken    :: !(Maybe Text)
-    , _orlUploadType     :: !(Maybe Text)
-    , _orlShowDeleted    :: !(Maybe Bool)
-    , _orlView           :: !(Maybe Text)
-    , _orlPageToken      :: !(Maybe Text)
-    , _orlPageSize       :: !(Maybe (Textual Int32))
-    , _orlCallback       :: !(Maybe Text)
+    , _orlAccessToken :: !(Maybe Text)
+    , _orlUploadType :: !(Maybe Text)
+    , _orlShowDeleted :: !(Maybe Bool)
+    , _orlView :: !(Maybe OrganizationsRolesListView)
+    , _orlPageToken :: !(Maybe Text)
+    , _orlPageSize :: !(Maybe (Textual Int32))
+    , _orlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,9 +128,27 @@ organizationsRolesList pOrlParent_ =
     }
 
 
--- | The resource name of the parent resource in one of the following
--- formats: \`\` (empty string) -- this refers to curated roles.
--- \`organizations\/{ORGANIZATION_ID}\` \`projects\/{PROJECT_ID}\`
+-- | The \`parent\` parameter\'s value depends on the target resource for the
+-- request, namely [\`roles\`](\/iam\/reference\/rest\/v1\/roles),
+-- [\`projects\`](\/iam\/reference\/rest\/v1\/projects.roles), or
+-- [\`organizations\`](\/iam\/reference\/rest\/v1\/organizations.roles).
+-- Each resource type\'s \`parent\` value format is described below: *
+-- [\`roles.list()\`](\/iam\/reference\/rest\/v1\/roles\/list): An empty
+-- string. This method doesn\'t require a resource; it simply returns all
+-- [predefined roles](\/iam\/docs\/understanding-roles#predefined_roles) in
+-- Cloud IAM. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/roles\` *
+-- [\`projects.roles.list()\`](\/iam\/reference\/rest\/v1\/projects.roles\/list):
+-- \`projects\/{PROJECT_ID}\`. This method lists all project-level [custom
+-- roles](\/iam\/docs\/understanding-custom-roles). Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\` *
+-- [\`organizations.roles.list()\`](\/iam\/reference\/rest\/v1\/organizations.roles\/list):
+-- \`organizations\/{ORGANIZATION_ID}\`. This method lists all
+-- organization-level [custom
+-- roles](\/iam\/docs\/understanding-custom-roles). Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\`
+-- Note: Wildcard (*) values are invalid; you must specify a complete
+-- project ID or organization ID.
 orlParent :: Lens' OrganizationsRolesList Text
 orlParent
   = lens _orlParent (\ s a -> s{_orlParent = a})
@@ -165,7 +185,7 @@ orlShowDeleted
 -- the \`includedPermissions\` field is returned, which includes a list of
 -- all permissions in the role. The default value is \`BASIC\`, which does
 -- not return the \`includedPermissions\` field.
-orlView :: Lens' OrganizationsRolesList (Maybe Text)
+orlView :: Lens' OrganizationsRolesList (Maybe OrganizationsRolesListView)
 orlView = lens _orlView (\ s a -> s{_orlView = a})
 
 -- | Optional pagination token returned in an earlier ListRolesResponse.
@@ -173,7 +193,8 @@ orlPageToken :: Lens' OrganizationsRolesList (Maybe Text)
 orlPageToken
   = lens _orlPageToken (\ s a -> s{_orlPageToken = a})
 
--- | Optional limit on the number of roles to include in the response.
+-- | Optional limit on the number of roles to include in the response. The
+-- default is 300, and the maximum is 1,000.
 orlPageSize :: Lens' OrganizationsRolesList (Maybe Int32)
 orlPageSize
   = lens _orlPageSize (\ s a -> s{_orlPageSize = a}) .

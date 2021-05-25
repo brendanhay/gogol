@@ -49,8 +49,8 @@ module Network.Google.Resource.Classroom.Invitations.Create
     , icCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.create@ method which the
 -- 'InvitationsCreate' request conforms to.
@@ -78,12 +78,12 @@ type InvitationsCreateResource =
 -- /See:/ 'invitationsCreate' smart constructor.
 data InvitationsCreate =
   InvitationsCreate'
-    { _icXgafv          :: !(Maybe Xgafv)
+    { _icXgafv :: !(Maybe Xgafv)
     , _icUploadProtocol :: !(Maybe Text)
-    , _icAccessToken    :: !(Maybe Text)
-    , _icUploadType     :: !(Maybe Text)
-    , _icPayload        :: !Invitation
-    , _icCallback       :: !(Maybe Text)
+    , _icAccessToken :: !(Maybe Text)
+    , _icUploadType :: !(Maybe Text)
+    , _icPayload :: !Invitation
+    , _icCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

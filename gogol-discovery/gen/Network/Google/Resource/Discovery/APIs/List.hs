@@ -37,8 +37,8 @@ module Network.Google.Resource.Discovery.APIs.List
     , alName
     ) where
 
-import           Network.Google.Discovery.Types
-import           Network.Google.Prelude
+import Network.Google.Discovery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @discovery.apis.list@ method which the
 -- 'APIsList' request conforms to.
@@ -56,7 +56,7 @@ type APIsListResource =
 data APIsList =
   APIsList'
     { _alPreferred :: !Bool
-    , _alName      :: !(Maybe Text)
+    , _alName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

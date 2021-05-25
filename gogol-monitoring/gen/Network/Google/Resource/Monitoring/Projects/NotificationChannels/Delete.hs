@@ -22,7 +22,7 @@
 --
 -- Deletes a notification channel.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.notificationChannels.delete@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.delete@.
 module Network.Google.Resource.Monitoring.Projects.NotificationChannels.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Monitoring.Projects.NotificationChannels.Delete
     , pncdCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.notificationChannels.delete@ method which the
 -- 'ProjectsNotificationChannelsDelete' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsNotificationChannelsDeleteResource =
 -- /See:/ 'projectsNotificationChannelsDelete' smart constructor.
 data ProjectsNotificationChannelsDelete =
   ProjectsNotificationChannelsDelete'
-    { _pncdXgafv          :: !(Maybe Xgafv)
+    { _pncdXgafv :: !(Maybe Xgafv)
     , _pncdUploadProtocol :: !(Maybe Text)
-    , _pncdForce          :: !(Maybe Bool)
-    , _pncdAccessToken    :: !(Maybe Text)
-    , _pncdUploadType     :: !(Maybe Text)
-    , _pncdName           :: !Text
-    , _pncdCallback       :: !(Maybe Text)
+    , _pncdForce :: !(Maybe Bool)
+    , _pncdAccessToken :: !(Maybe Text)
+    , _pncdUploadType :: !(Maybe Text)
+    , _pncdName :: !Text
+    , _pncdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,8 +137,8 @@ pncdUploadType
   = lens _pncdUploadType
       (\ s a -> s{_pncdUploadType = a})
 
--- | The channel for which to execute the request. The format is
--- projects\/[PROJECT_ID]\/notificationChannels\/[CHANNEL_ID].
+-- | Required. The channel for which to execute the request. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/notificationChannels\/[CHANNEL_ID]
 pncdName :: Lens' ProjectsNotificationChannelsDelete Text
 pncdName = lens _pncdName (\ s a -> s{_pncdName = a})
 

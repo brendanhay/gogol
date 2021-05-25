@@ -23,7 +23,7 @@
 -- Initiates sharing of the content with the user\'s family. Empty response
 -- indicates success.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.familysharing.share@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.familysharing.share@.
 module Network.Google.Resource.Books.Familysharing.Share
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.Books.Familysharing.Share
     , FamilysharingShare
 
     -- * Request Lenses
+    , fsXgafv
+    , fsUploadProtocol
+    , fsAccessToken
+    , fsUploadType
     , fsVolumeId
     , fsSource
     , fsDocId
+    , fsCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.familysharing.share@ method which the
 -- 'FamilysharingShare' request conforms to.
@@ -49,10 +54,15 @@ type FamilysharingShareResource =
        "v1" :>
          "familysharing" :>
            "share" :>
-             QueryParam "volumeId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "docId" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "volumeId" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "docId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Initiates sharing of the content with the user\'s family. Empty response
 -- indicates success.
@@ -60,9 +70,14 @@ type FamilysharingShareResource =
 -- /See:/ 'familysharingShare' smart constructor.
 data FamilysharingShare =
   FamilysharingShare'
-    { _fsVolumeId :: !(Maybe Text)
-    , _fsSource   :: !(Maybe Text)
-    , _fsDocId    :: !(Maybe Text)
+    { _fsXgafv :: !(Maybe Xgafv)
+    , _fsUploadProtocol :: !(Maybe Text)
+    , _fsAccessToken :: !(Maybe Text)
+    , _fsUploadType :: !(Maybe Text)
+    , _fsVolumeId :: !(Maybe Text)
+    , _fsSource :: !(Maybe Text)
+    , _fsDocId :: !(Maybe Text)
+    , _fsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,17 +86,56 @@ data FamilysharingShare =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fsXgafv'
+--
+-- * 'fsUploadProtocol'
+--
+-- * 'fsAccessToken'
+--
+-- * 'fsUploadType'
+--
 -- * 'fsVolumeId'
 --
 -- * 'fsSource'
 --
 -- * 'fsDocId'
+--
+-- * 'fsCallback'
 familysharingShare
     :: FamilysharingShare
 familysharingShare =
   FamilysharingShare'
-    {_fsVolumeId = Nothing, _fsSource = Nothing, _fsDocId = Nothing}
+    { _fsXgafv = Nothing
+    , _fsUploadProtocol = Nothing
+    , _fsAccessToken = Nothing
+    , _fsUploadType = Nothing
+    , _fsVolumeId = Nothing
+    , _fsSource = Nothing
+    , _fsDocId = Nothing
+    , _fsCallback = Nothing
+    }
 
+
+-- | V1 error format.
+fsXgafv :: Lens' FamilysharingShare (Maybe Xgafv)
+fsXgafv = lens _fsXgafv (\ s a -> s{_fsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+fsUploadProtocol :: Lens' FamilysharingShare (Maybe Text)
+fsUploadProtocol
+  = lens _fsUploadProtocol
+      (\ s a -> s{_fsUploadProtocol = a})
+
+-- | OAuth access token.
+fsAccessToken :: Lens' FamilysharingShare (Maybe Text)
+fsAccessToken
+  = lens _fsAccessToken
+      (\ s a -> s{_fsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+fsUploadType :: Lens' FamilysharingShare (Maybe Text)
+fsUploadType
+  = lens _fsUploadType (\ s a -> s{_fsUploadType = a})
 
 -- | The volume to share.
 fsVolumeId :: Lens' FamilysharingShare (Maybe Text)
@@ -96,12 +150,23 @@ fsSource = lens _fsSource (\ s a -> s{_fsSource = a})
 fsDocId :: Lens' FamilysharingShare (Maybe Text)
 fsDocId = lens _fsDocId (\ s a -> s{_fsDocId = a})
 
+-- | JSONP
+fsCallback :: Lens' FamilysharingShare (Maybe Text)
+fsCallback
+  = lens _fsCallback (\ s a -> s{_fsCallback = a})
+
 instance GoogleRequest FamilysharingShare where
-        type Rs FamilysharingShare = ()
+        type Rs FamilysharingShare = Empty
         type Scopes FamilysharingShare =
              '["https://www.googleapis.com/auth/books"]
         requestClient FamilysharingShare'{..}
-          = go _fsVolumeId _fsSource _fsDocId (Just AltJSON)
+          = go _fsXgafv _fsUploadProtocol _fsAccessToken
+              _fsUploadType
+              _fsVolumeId
+              _fsSource
+              _fsDocId
+              _fsCallback
+              (Just AltJSON)
               booksService
           where go
                   = buildClient

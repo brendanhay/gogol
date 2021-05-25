@@ -23,7 +23,7 @@
 -- Retrieves the metadata of the leaderboard configuration with the given
 -- ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.get@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.get@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
     (
     -- * REST Resource
@@ -34,11 +34,16 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
     , LeaderboardConfigurationsGet
 
     -- * Request Lenses
+    , lcgXgafv
+    , lcgUploadProtocol
+    , lcgAccessToken
+    , lcgUploadType
     , lcgLeaderboardId
+    , lcgCallback
     ) where
 
-import           Network.Google.GamesConfiguration.Types
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.get@ method which the
 -- 'LeaderboardConfigurationsGet' request conforms to.
@@ -47,16 +52,26 @@ type LeaderboardConfigurationsGetResource =
        "v1configuration" :>
          "leaderboards" :>
            Capture "leaderboardId" Text :>
-             QueryParam "alt" AltJSON :>
-               Get '[JSON] LeaderboardConfiguration
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] LeaderboardConfiguration
 
 -- | Retrieves the metadata of the leaderboard configuration with the given
 -- ID.
 --
 -- /See:/ 'leaderboardConfigurationsGet' smart constructor.
-newtype LeaderboardConfigurationsGet =
+data LeaderboardConfigurationsGet =
   LeaderboardConfigurationsGet'
-    { _lcgLeaderboardId :: Text
+    { _lcgXgafv :: !(Maybe Xgafv)
+    , _lcgUploadProtocol :: !(Maybe Text)
+    , _lcgAccessToken :: !(Maybe Text)
+    , _lcgUploadType :: !(Maybe Text)
+    , _lcgLeaderboardId :: !Text
+    , _lcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,19 +80,63 @@ newtype LeaderboardConfigurationsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcgXgafv'
+--
+-- * 'lcgUploadProtocol'
+--
+-- * 'lcgAccessToken'
+--
+-- * 'lcgUploadType'
+--
 -- * 'lcgLeaderboardId'
+--
+-- * 'lcgCallback'
 leaderboardConfigurationsGet
     :: Text -- ^ 'lcgLeaderboardId'
     -> LeaderboardConfigurationsGet
 leaderboardConfigurationsGet pLcgLeaderboardId_ =
-  LeaderboardConfigurationsGet' {_lcgLeaderboardId = pLcgLeaderboardId_}
+  LeaderboardConfigurationsGet'
+    { _lcgXgafv = Nothing
+    , _lcgUploadProtocol = Nothing
+    , _lcgAccessToken = Nothing
+    , _lcgUploadType = Nothing
+    , _lcgLeaderboardId = pLcgLeaderboardId_
+    , _lcgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+lcgXgafv :: Lens' LeaderboardConfigurationsGet (Maybe Xgafv)
+lcgXgafv = lens _lcgXgafv (\ s a -> s{_lcgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lcgUploadProtocol :: Lens' LeaderboardConfigurationsGet (Maybe Text)
+lcgUploadProtocol
+  = lens _lcgUploadProtocol
+      (\ s a -> s{_lcgUploadProtocol = a})
+
+-- | OAuth access token.
+lcgAccessToken :: Lens' LeaderboardConfigurationsGet (Maybe Text)
+lcgAccessToken
+  = lens _lcgAccessToken
+      (\ s a -> s{_lcgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lcgUploadType :: Lens' LeaderboardConfigurationsGet (Maybe Text)
+lcgUploadType
+  = lens _lcgUploadType
+      (\ s a -> s{_lcgUploadType = a})
 
 -- | The ID of the leaderboard.
 lcgLeaderboardId :: Lens' LeaderboardConfigurationsGet Text
 lcgLeaderboardId
   = lens _lcgLeaderboardId
       (\ s a -> s{_lcgLeaderboardId = a})
+
+-- | JSONP
+lcgCallback :: Lens' LeaderboardConfigurationsGet (Maybe Text)
+lcgCallback
+  = lens _lcgCallback (\ s a -> s{_lcgCallback = a})
 
 instance GoogleRequest LeaderboardConfigurationsGet
          where
@@ -86,7 +145,11 @@ instance GoogleRequest LeaderboardConfigurationsGet
         type Scopes LeaderboardConfigurationsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsGet'{..}
-          = go _lcgLeaderboardId (Just AltJSON)
+          = go _lcgLeaderboardId _lcgXgafv _lcgUploadProtocol
+              _lcgAccessToken
+              _lcgUploadType
+              _lcgCallback
+              (Just AltJSON)
               gamesConfigurationService
           where go
                   = buildClient

@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Devices.List
     , cCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.devices.list@ method which the
 -- 'CustomersDevicesList' request conforms to.
@@ -67,14 +67,14 @@ type CustomersDevicesListResource =
 -- /See:/ 'customersDevicesList' smart constructor.
 data CustomersDevicesList =
   CustomersDevicesList'
-    { _cParent         :: !Text
-    , _cXgafv          :: !(Maybe Xgafv)
+    { _cParent :: !Text
+    , _cXgafv :: !(Maybe Xgafv)
     , _cUploadProtocol :: !(Maybe Text)
-    , _cAccessToken    :: !(Maybe Text)
-    , _cUploadType     :: !(Maybe Text)
-    , _cPageToken      :: !(Maybe Text)
-    , _cPageSize       :: !(Maybe (Textual Int64))
-    , _cCallback       :: !(Maybe Text)
+    , _cAccessToken :: !(Maybe Text)
+    , _cUploadType :: !(Maybe Text)
+    , _cPageToken :: !(Maybe Text)
+    , _cPageSize :: !(Maybe (Textual Int64))
+    , _cCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

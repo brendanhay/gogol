@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -23,6 +23,9 @@ module Network.Google.Reports.Types
     , adminReportsUsageReadOnlyScope
     , adminReportsAuditReadOnlyScope
 
+    -- * ActivitiesListApplicationName
+    , ActivitiesListApplicationName (..)
+
     -- * UsageReportParametersItem
     , UsageReportParametersItem
     , usageReportParametersItem
@@ -32,6 +35,22 @@ module Network.Google.Reports.Types
     , urpiStringValue
     , urpiName
     , urpiMsgValue
+
+    -- * ActivityEventsItemParametersItemMultiMessageValueItem
+    , ActivityEventsItemParametersItemMultiMessageValueItem
+    , activityEventsItemParametersItemMultiMessageValueItem
+    , aeipimmviParameter
+
+    -- * NestedParameter
+    , NestedParameter
+    , nestedParameter
+    , npBoolValue
+    , npIntValue
+    , npValue
+    , npMultiIntValue
+    , npMultiBoolValue
+    , npName
+    , npMultiValue
 
     -- * ActivityId
     , ActivityId
@@ -86,6 +105,9 @@ module Network.Google.Reports.Types
     , uParameters
     , uEntity
 
+    -- * EntityUsageReportsGetEntityType
+    , EntityUsageReportsGetEntityType (..)
+
     -- * UsageReportsWarningsItemDataItem
     , UsageReportsWarningsItemDataItem
     , usageReportsWarningsItemDataItem
@@ -106,10 +128,16 @@ module Network.Google.Reports.Types
     , aeiParameters
     , aeiType
 
+    -- * ActivitiesWatchApplicationName
+    , ActivitiesWatchApplicationName (..)
+
     -- * ChannelParams
     , ChannelParams
     , channelParams
     , cpAddtional
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * Activity
     , Activity
@@ -135,11 +163,18 @@ module Network.Google.Reports.Types
     , ActivityEventsItemParametersItem
     , activityEventsItemParametersItem
     , aeipiBoolValue
+    , aeipiMessageValue
     , aeipiIntValue
     , aeipiValue
     , aeipiMultiIntValue
+    , aeipiMultiMessageValue
     , aeipiName
     , aeipiMultiValue
+
+    -- * ActivityEventsItemParametersItemMessageValue
+    , ActivityEventsItemParametersItemMessageValue
+    , activityEventsItemParametersItemMessageValue
+    , aeipimvParameter
 
     -- * ActivityActor
     , ActivityActor
@@ -148,17 +183,20 @@ module Network.Google.Reports.Types
     , aaCallerType
     , aaProFileId
     , aaKey
+
+    -- * EntityUsageReportsGetEntityKey
+    , EntityUsageReportsGetEntityKey (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Reports.Types.Product
-import           Network.Google.Reports.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Reports.Types.Product
+import Network.Google.Reports.Types.Sum
 
--- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'reports_v1' of the Admin SDK API. This contains the host and root path used as a starting point for constructing service requests.
 reportsService :: ServiceConfig
 reportsService
   = defaultService (ServiceId "admin:reports_v1")
-      "www.googleapis.com"
+      "admin.googleapis.com"
 
 -- | View usage reports for your G Suite domain
 adminReportsUsageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]

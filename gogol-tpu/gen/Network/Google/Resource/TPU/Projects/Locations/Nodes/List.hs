@@ -43,8 +43,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.List
     , plnlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.list@ method which the
 -- 'ProjectsLocationsNodesList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsNodesListResource =
 -- /See:/ 'projectsLocationsNodesList' smart constructor.
 data ProjectsLocationsNodesList =
   ProjectsLocationsNodesList'
-    { _plnlParent         :: !Text
-    , _plnlXgafv          :: !(Maybe Xgafv)
+    { _plnlParent :: !Text
+    , _plnlXgafv :: !(Maybe Xgafv)
     , _plnlUploadProtocol :: !(Maybe Text)
-    , _plnlAccessToken    :: !(Maybe Text)
-    , _plnlUploadType     :: !(Maybe Text)
-    , _plnlPageToken      :: !(Maybe Text)
-    , _plnlPageSize       :: !(Maybe (Textual Int32))
-    , _plnlCallback       :: !(Maybe Text)
+    , _plnlAccessToken :: !(Maybe Text)
+    , _plnlUploadType :: !(Maybe Text)
+    , _plnlPageToken :: !(Maybe Text)
+    , _plnlPageSize :: !(Maybe (Textual Int32))
+    , _plnlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,7 +114,7 @@ projectsLocationsNodesList pPlnlParent_ =
     }
 
 
--- | The parent resource name.
+-- | Required. The parent resource name.
 plnlParent :: Lens' ProjectsLocationsNodesList Text
 plnlParent
   = lens _plnlParent (\ s a -> s{_plnlParent = a})

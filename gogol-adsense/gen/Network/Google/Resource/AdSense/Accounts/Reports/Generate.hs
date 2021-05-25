@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generate an AdSense report based on the report request sent in the query
--- parameters. Returns the result as JSON; to retrieve output in CSV format
--- specify \"alt=csv\" as a query parameter.
+-- Generates an ad hoc report.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.reports.generate@.
+-- /See:/ <http://code.google.com/apis/adsense/management/ AdSense Management API Reference> for @adsense.accounts.reports.generate@.
 module Network.Google.Resource.AdSense.Accounts.Reports.Generate
     (
     -- * REST Resource
@@ -35,84 +33,100 @@ module Network.Google.Resource.AdSense.Accounts.Reports.Generate
     , AccountsReportsGenerate
 
     -- * Request Lenses
-    , argDimension
-    , argLocale
-    , argEndDate
-    , argStartDate
-    , argAccountId
-    , argMetric
-    , argCurrency
-    , argSort
-    , argFilter
-    , argStartIndex
-    , argUseTimezoneReporting
-    , argMaxResults
+    , argXgafv
+    , argLanguageCode
+    , argMetrics
+    , argCurrencyCode
+    , argUploadProtocol
+    , argOrderBy
+    , argReportingTimeZone
+    , argEndDateMonth
+    , argAccessToken
+    , argDateRange
+    , argFilters
+    , argUploadType
+    , argStartDateDay
+    , argAccount
+    , argEndDateDay
+    , argEndDateYear
+    , argStartDateMonth
+    , argStartDateYear
+    , argLimit
+    , argDimensions
+    , argCallback
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.reports.generate@ method which the
 -- 'AccountsReportsGenerate' request conforms to.
 type AccountsReportsGenerateResource =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "reports" :>
-               QueryParam "startDate" Text :>
-                 QueryParam "endDate" Text :>
-                   QueryParams "dimension" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParams "metric" Text :>
-                         QueryParam "currency" Text :>
-                           QueryParams "sort" Text :>
-                             QueryParams "filter" Text :>
-                               QueryParam "startIndex" (Textual Int32) :>
-                                 QueryParam "useTimezoneReporting" Bool :>
-                                   QueryParam "maxResults" (Textual Int32) :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON]
-                                         AdsenseReportsGenerateResponse
-       :<|>
-       "adsense" :>
-         "v1.4" :>
-           "accounts" :>
-             Capture "accountId" Text :>
-               "reports" :>
-                 QueryParam "startDate" Text :>
-                   QueryParam "endDate" Text :>
-                     QueryParams "dimension" Text :>
-                       QueryParam "locale" Text :>
-                         QueryParams "metric" Text :>
-                           QueryParam "currency" Text :>
-                             QueryParams "sort" Text :>
-                               QueryParams "filter" Text :>
-                                 QueryParam "startIndex" (Textual Int32) :>
-                                   QueryParam "useTimezoneReporting" Bool :>
-                                     QueryParam "maxResults" (Textual Int32) :>
-                                       QueryParam "alt" AltMedia :>
-                                         Get '[OctetStream] Stream
+     "v2" :>
+       Capture "account" Text :>
+         "reports:generate" :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "languageCode" Text :>
+               QueryParams "metrics" AccountsReportsGenerateMetrics
+                 :>
+                 QueryParam "currencyCode" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParams "orderBy" Text :>
+                       QueryParam "reportingTimeZone"
+                         AccountsReportsGenerateReportingTimeZone
+                         :>
+                         QueryParam "endDate.month" (Textual Int32) :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "dateRange"
+                               AccountsReportsGenerateDateRange
+                               :>
+                               QueryParams "filters" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "startDate.day" (Textual Int32) :>
+                                     QueryParam "endDate.day" (Textual Int32) :>
+                                       QueryParam "endDate.year" (Textual Int32)
+                                         :>
+                                         QueryParam "startDate.month"
+                                           (Textual Int32)
+                                           :>
+                                           QueryParam "startDate.year"
+                                             (Textual Int32)
+                                             :>
+                                             QueryParam "limit" (Textual Int32)
+                                               :>
+                                               QueryParams "dimensions"
+                                                 AccountsReportsGenerateDimensions
+                                                 :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" AltJSON :>
+                                                     Get '[JSON] ReportResult
 
--- | Generate an AdSense report based on the report request sent in the query
--- parameters. Returns the result as JSON; to retrieve output in CSV format
--- specify \"alt=csv\" as a query parameter.
+-- | Generates an ad hoc report.
 --
 -- /See:/ 'accountsReportsGenerate' smart constructor.
 data AccountsReportsGenerate =
   AccountsReportsGenerate'
-    { _argDimension            :: !(Maybe [Text])
-    , _argLocale               :: !(Maybe Text)
-    , _argEndDate              :: !Text
-    , _argStartDate            :: !Text
-    , _argAccountId            :: !Text
-    , _argMetric               :: !(Maybe [Text])
-    , _argCurrency             :: !(Maybe Text)
-    , _argSort                 :: !(Maybe [Text])
-    , _argFilter               :: !(Maybe [Text])
-    , _argStartIndex           :: !(Maybe (Textual Int32))
-    , _argUseTimezoneReporting :: !(Maybe Bool)
-    , _argMaxResults           :: !(Maybe (Textual Int32))
+    { _argXgafv :: !(Maybe Xgafv)
+    , _argLanguageCode :: !(Maybe Text)
+    , _argMetrics :: !(Maybe [AccountsReportsGenerateMetrics])
+    , _argCurrencyCode :: !(Maybe Text)
+    , _argUploadProtocol :: !(Maybe Text)
+    , _argOrderBy :: !(Maybe [Text])
+    , _argReportingTimeZone :: !(Maybe AccountsReportsGenerateReportingTimeZone)
+    , _argEndDateMonth :: !(Maybe (Textual Int32))
+    , _argAccessToken :: !(Maybe Text)
+    , _argDateRange :: !(Maybe AccountsReportsGenerateDateRange)
+    , _argFilters :: !(Maybe [Text])
+    , _argUploadType :: !(Maybe Text)
+    , _argStartDateDay :: !(Maybe (Textual Int32))
+    , _argAccount :: !Text
+    , _argEndDateDay :: !(Maybe (Textual Int32))
+    , _argEndDateYear :: !(Maybe (Textual Int32))
+    , _argStartDateMonth :: !(Maybe (Textual Int32))
+    , _argStartDateYear :: !(Maybe (Textual Int32))
+    , _argLimit :: !(Maybe (Textual Int32))
+    , _argDimensions :: !(Maybe [AccountsReportsGenerateDimensions])
+    , _argCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -121,177 +135,262 @@ data AccountsReportsGenerate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'argDimension'
+-- * 'argXgafv'
 --
--- * 'argLocale'
+-- * 'argLanguageCode'
 --
--- * 'argEndDate'
+-- * 'argMetrics'
 --
--- * 'argStartDate'
+-- * 'argCurrencyCode'
 --
--- * 'argAccountId'
+-- * 'argUploadProtocol'
 --
--- * 'argMetric'
+-- * 'argOrderBy'
 --
--- * 'argCurrency'
+-- * 'argReportingTimeZone'
 --
--- * 'argSort'
+-- * 'argEndDateMonth'
 --
--- * 'argFilter'
+-- * 'argAccessToken'
 --
--- * 'argStartIndex'
+-- * 'argDateRange'
 --
--- * 'argUseTimezoneReporting'
+-- * 'argFilters'
 --
--- * 'argMaxResults'
+-- * 'argUploadType'
+--
+-- * 'argStartDateDay'
+--
+-- * 'argAccount'
+--
+-- * 'argEndDateDay'
+--
+-- * 'argEndDateYear'
+--
+-- * 'argStartDateMonth'
+--
+-- * 'argStartDateYear'
+--
+-- * 'argLimit'
+--
+-- * 'argDimensions'
+--
+-- * 'argCallback'
 accountsReportsGenerate
-    :: Text -- ^ 'argEndDate'
-    -> Text -- ^ 'argStartDate'
-    -> Text -- ^ 'argAccountId'
+    :: Text -- ^ 'argAccount'
     -> AccountsReportsGenerate
-accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
+accountsReportsGenerate pArgAccount_ =
   AccountsReportsGenerate'
-    { _argDimension = Nothing
-    , _argLocale = Nothing
-    , _argEndDate = pArgEndDate_
-    , _argStartDate = pArgStartDate_
-    , _argAccountId = pArgAccountId_
-    , _argMetric = Nothing
-    , _argCurrency = Nothing
-    , _argSort = Nothing
-    , _argFilter = Nothing
-    , _argStartIndex = Nothing
-    , _argUseTimezoneReporting = Nothing
-    , _argMaxResults = Nothing
+    { _argXgafv = Nothing
+    , _argLanguageCode = Nothing
+    , _argMetrics = Nothing
+    , _argCurrencyCode = Nothing
+    , _argUploadProtocol = Nothing
+    , _argOrderBy = Nothing
+    , _argReportingTimeZone = Nothing
+    , _argEndDateMonth = Nothing
+    , _argAccessToken = Nothing
+    , _argDateRange = Nothing
+    , _argFilters = Nothing
+    , _argUploadType = Nothing
+    , _argStartDateDay = Nothing
+    , _argAccount = pArgAccount_
+    , _argEndDateDay = Nothing
+    , _argEndDateYear = Nothing
+    , _argStartDateMonth = Nothing
+    , _argStartDateYear = Nothing
+    , _argLimit = Nothing
+    , _argDimensions = Nothing
+    , _argCallback = Nothing
     }
 
 
+-- | V1 error format.
+argXgafv :: Lens' AccountsReportsGenerate (Maybe Xgafv)
+argXgafv = lens _argXgafv (\ s a -> s{_argXgafv = a})
+
+-- | The language to use for translating report output. If unspecified, this
+-- defaults to English (\"en\"). If the given language is not supported,
+-- report output will be returned in English. The language is specified as
+-- an [IETF BCP-47 language
+-- code](https:\/\/en.wikipedia.org\/wiki\/IETF_language_tag).
+argLanguageCode :: Lens' AccountsReportsGenerate (Maybe Text)
+argLanguageCode
+  = lens _argLanguageCode
+      (\ s a -> s{_argLanguageCode = a})
+
+-- | Required. Reporting metrics.
+argMetrics :: Lens' AccountsReportsGenerate [AccountsReportsGenerateMetrics]
+argMetrics
+  = lens _argMetrics (\ s a -> s{_argMetrics = a}) .
+      _Default
+      . _Coerce
+
+-- | The [ISO-4217 currency code](https:\/\/en.wikipedia.org\/wiki\/ISO_4217)
+-- to use when reporting on monetary metrics. Defaults to the account\'s
+-- currency if not set.
+argCurrencyCode :: Lens' AccountsReportsGenerate (Maybe Text)
+argCurrencyCode
+  = lens _argCurrencyCode
+      (\ s a -> s{_argCurrencyCode = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+argUploadProtocol :: Lens' AccountsReportsGenerate (Maybe Text)
+argUploadProtocol
+  = lens _argUploadProtocol
+      (\ s a -> s{_argUploadProtocol = a})
+
+-- | The name of a dimension or metric to sort the resulting report on, can
+-- be prefixed with \"+\" to sort ascending or \"-\" to sort descending. If
+-- no prefix is specified, the column is sorted ascending.
+argOrderBy :: Lens' AccountsReportsGenerate [Text]
+argOrderBy
+  = lens _argOrderBy (\ s a -> s{_argOrderBy = a}) .
+      _Default
+      . _Coerce
+
+-- | Timezone in which to generate the report. If unspecified, this defaults
+-- to the account timezone. For more information, see [changing the time
+-- zone of your
+-- reports](https:\/\/support.google.com\/adsense\/answer\/9830725).
+argReportingTimeZone :: Lens' AccountsReportsGenerate (Maybe AccountsReportsGenerateReportingTimeZone)
+argReportingTimeZone
+  = lens _argReportingTimeZone
+      (\ s a -> s{_argReportingTimeZone = a})
+
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+-- month and day.
+argEndDateMonth :: Lens' AccountsReportsGenerate (Maybe Int32)
+argEndDateMonth
+  = lens _argEndDateMonth
+      (\ s a -> s{_argEndDateMonth = a})
+      . mapping _Coerce
+
+-- | OAuth access token.
+argAccessToken :: Lens' AccountsReportsGenerate (Maybe Text)
+argAccessToken
+  = lens _argAccessToken
+      (\ s a -> s{_argAccessToken = a})
+
+-- | Date range of the report, if unset the range will be considered CUSTOM.
+argDateRange :: Lens' AccountsReportsGenerate (Maybe AccountsReportsGenerateDateRange)
+argDateRange
+  = lens _argDateRange (\ s a -> s{_argDateRange = a})
+
+-- | Filters to be run on the report.
+argFilters :: Lens' AccountsReportsGenerate [Text]
+argFilters
+  = lens _argFilters (\ s a -> s{_argFilters = a}) .
+      _Default
+      . _Coerce
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+argUploadType :: Lens' AccountsReportsGenerate (Maybe Text)
+argUploadType
+  = lens _argUploadType
+      (\ s a -> s{_argUploadType = a})
+
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
+argStartDateDay :: Lens' AccountsReportsGenerate (Maybe Int32)
+argStartDateDay
+  = lens _argStartDateDay
+      (\ s a -> s{_argStartDateDay = a})
+      . mapping _Coerce
+
+-- | Required. The account which owns the collection of reports. Format:
+-- accounts\/{account}
+argAccount :: Lens' AccountsReportsGenerate Text
+argAccount
+  = lens _argAccount (\ s a -> s{_argAccount = a})
+
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
+argEndDateDay :: Lens' AccountsReportsGenerate (Maybe Int32)
+argEndDateDay
+  = lens _argEndDateDay
+      (\ s a -> s{_argEndDateDay = a})
+      . mapping _Coerce
+
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+-- a year.
+argEndDateYear :: Lens' AccountsReportsGenerate (Maybe Int32)
+argEndDateYear
+  = lens _argEndDateYear
+      (\ s a -> s{_argEndDateYear = a})
+      . mapping _Coerce
+
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+-- month and day.
+argStartDateMonth :: Lens' AccountsReportsGenerate (Maybe Int32)
+argStartDateMonth
+  = lens _argStartDateMonth
+      (\ s a -> s{_argStartDateMonth = a})
+      . mapping _Coerce
+
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+-- a year.
+argStartDateYear :: Lens' AccountsReportsGenerate (Maybe Int32)
+argStartDateYear
+  = lens _argStartDateYear
+      (\ s a -> s{_argStartDateYear = a})
+      . mapping _Coerce
+
+-- | The maximum number of rows of report data to return. Reports producing
+-- more rows than the requested limit will be truncated. If unset, this
+-- defaults to 100,000 rows for \`Reports.GenerateReport\` and 1,000,000
+-- rows for \`Reports.GenerateCsvReport\`, which are also the maximum
+-- values permitted here. Report truncation can be identified (for
+-- \`Reports.GenerateReport\` only) by comparing the number of rows
+-- returned to the value returned in \`total_matched_rows\`.
+argLimit :: Lens' AccountsReportsGenerate (Maybe Int32)
+argLimit
+  = lens _argLimit (\ s a -> s{_argLimit = a}) .
+      mapping _Coerce
+
 -- | Dimensions to base the report on.
-argDimension :: Lens' AccountsReportsGenerate [Text]
-argDimension
-  = lens _argDimension (\ s a -> s{_argDimension = a})
+argDimensions :: Lens' AccountsReportsGenerate [AccountsReportsGenerateDimensions]
+argDimensions
+  = lens _argDimensions
+      (\ s a -> s{_argDimensions = a})
       . _Default
       . _Coerce
 
--- | Optional locale to use for translating report output to a local
--- language. Defaults to \"en_US\" if not specified.
-argLocale :: Lens' AccountsReportsGenerate (Maybe Text)
-argLocale
-  = lens _argLocale (\ s a -> s{_argLocale = a})
-
--- | End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.
-argEndDate :: Lens' AccountsReportsGenerate Text
-argEndDate
-  = lens _argEndDate (\ s a -> s{_argEndDate = a})
-
--- | Start of the date range to report on in \"YYYY-MM-DD\" format,
--- inclusive.
-argStartDate :: Lens' AccountsReportsGenerate Text
-argStartDate
-  = lens _argStartDate (\ s a -> s{_argStartDate = a})
-
--- | Account upon which to report.
-argAccountId :: Lens' AccountsReportsGenerate Text
-argAccountId
-  = lens _argAccountId (\ s a -> s{_argAccountId = a})
-
--- | Numeric columns to include in the report.
-argMetric :: Lens' AccountsReportsGenerate [Text]
-argMetric
-  = lens _argMetric (\ s a -> s{_argMetric = a}) .
-      _Default
-      . _Coerce
-
--- | Optional currency to use when reporting on monetary metrics. Defaults to
--- the account\'s currency if not set.
-argCurrency :: Lens' AccountsReportsGenerate (Maybe Text)
-argCurrency
-  = lens _argCurrency (\ s a -> s{_argCurrency = a})
-
--- | The name of a dimension or metric to sort the resulting report on,
--- optionally prefixed with \"+\" to sort ascending or \"-\" to sort
--- descending. If no prefix is specified, the column is sorted ascending.
-argSort :: Lens' AccountsReportsGenerate [Text]
-argSort
-  = lens _argSort (\ s a -> s{_argSort = a}) . _Default
-      . _Coerce
-
--- | Filters to be run on the report.
-argFilter :: Lens' AccountsReportsGenerate [Text]
-argFilter
-  = lens _argFilter (\ s a -> s{_argFilter = a}) .
-      _Default
-      . _Coerce
-
--- | Index of the first row of report data to return.
-argStartIndex :: Lens' AccountsReportsGenerate (Maybe Int32)
-argStartIndex
-  = lens _argStartIndex
-      (\ s a -> s{_argStartIndex = a})
-      . mapping _Coerce
-
--- | Whether the report should be generated in the AdSense account\'s local
--- timezone. If false default PST\/PDT timezone will be used.
-argUseTimezoneReporting :: Lens' AccountsReportsGenerate (Maybe Bool)
-argUseTimezoneReporting
-  = lens _argUseTimezoneReporting
-      (\ s a -> s{_argUseTimezoneReporting = a})
-
--- | The maximum number of rows of report data to return.
-argMaxResults :: Lens' AccountsReportsGenerate (Maybe Int32)
-argMaxResults
-  = lens _argMaxResults
-      (\ s a -> s{_argMaxResults = a})
-      . mapping _Coerce
+-- | JSONP
+argCallback :: Lens' AccountsReportsGenerate (Maybe Text)
+argCallback
+  = lens _argCallback (\ s a -> s{_argCallback = a})
 
 instance GoogleRequest AccountsReportsGenerate where
-        type Rs AccountsReportsGenerate =
-             AdsenseReportsGenerateResponse
+        type Rs AccountsReportsGenerate = ReportResult
         type Scopes AccountsReportsGenerate =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
         requestClient AccountsReportsGenerate'{..}
-          = go _argAccountId (Just _argStartDate)
-              (Just _argEndDate)
-              (_argDimension ^. _Default)
-              _argLocale
-              (_argMetric ^. _Default)
-              _argCurrency
-              (_argSort ^. _Default)
-              (_argFilter ^. _Default)
-              _argStartIndex
-              _argUseTimezoneReporting
-              _argMaxResults
+          = go _argAccount _argXgafv _argLanguageCode
+              (_argMetrics ^. _Default)
+              _argCurrencyCode
+              _argUploadProtocol
+              (_argOrderBy ^. _Default)
+              _argReportingTimeZone
+              _argEndDateMonth
+              _argAccessToken
+              _argDateRange
+              (_argFilters ^. _Default)
+              _argUploadType
+              _argStartDateDay
+              _argEndDateDay
+              _argEndDateYear
+              _argStartDateMonth
+              _argStartDateYear
+              _argLimit
+              (_argDimensions ^. _Default)
+              _argCallback
               (Just AltJSON)
               adSenseService
-          where go :<|> _
-                  = buildClient
-                      (Proxy :: Proxy AccountsReportsGenerateResource)
-                      mempty
-
-instance GoogleRequest
-           (MediaDownload AccountsReportsGenerate)
-         where
-        type Rs (MediaDownload AccountsReportsGenerate) =
-             Stream
-        type Scopes (MediaDownload AccountsReportsGenerate) =
-             Scopes AccountsReportsGenerate
-        requestClient
-          (MediaDownload AccountsReportsGenerate'{..})
-          = go _argAccountId (Just _argStartDate)
-              (Just _argEndDate)
-              (_argDimension ^. _Default)
-              _argLocale
-              (_argMetric ^. _Default)
-              _argCurrency
-              (_argSort ^. _Default)
-              (_argFilter ^. _Default)
-              _argStartIndex
-              _argUseTimezoneReporting
-              _argMaxResults
-              (Just AltMedia)
-              adSenseService
-          where _ :<|> go
+          where go
                   = buildClient
                       (Proxy :: Proxy AccountsReportsGenerateResource)
                       mempty

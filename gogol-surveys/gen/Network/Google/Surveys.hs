@@ -192,16 +192,16 @@ module Network.Google.Surveys
     , sqLowValueLabel
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Surveys.Results.Get
-import           Network.Google.Resource.Surveys.Surveys.Delete
-import           Network.Google.Resource.Surveys.Surveys.Get
-import           Network.Google.Resource.Surveys.Surveys.Insert
-import           Network.Google.Resource.Surveys.Surveys.List
-import           Network.Google.Resource.Surveys.Surveys.Start
-import           Network.Google.Resource.Surveys.Surveys.Stop
-import           Network.Google.Resource.Surveys.Surveys.Update
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Surveys.Results.Get
+import Network.Google.Resource.Surveys.Surveys.Delete
+import Network.Google.Resource.Surveys.Surveys.Get
+import Network.Google.Resource.Surveys.Surveys.Insert
+import Network.Google.Resource.Surveys.Surveys.List
+import Network.Google.Resource.Surveys.Surveys.Start
+import Network.Google.Resource.Surveys.Surveys.Stop
+import Network.Google.Resource.Surveys.Surveys.Update
+import Network.Google.Surveys.Types
 
 {- $resources
 TODO

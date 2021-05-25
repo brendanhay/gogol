@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.E
     , plkrckeCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.encrypt@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysEncrypt' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsLocationsKeyRingsCryptoKeysEncryptResource
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysEncrypt' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysEncrypt =
   ProjectsLocationsKeyRingsCryptoKeysEncrypt'
-    { _plkrckeXgafv          :: !(Maybe Xgafv)
+    { _plkrckeXgafv :: !(Maybe Xgafv)
     , _plkrckeUploadProtocol :: !(Maybe Text)
-    , _plkrckeAccessToken    :: !(Maybe Text)
-    , _plkrckeUploadType     :: !(Maybe Text)
-    , _plkrckePayload        :: !EncryptRequest
-    , _plkrckeName           :: !Text
-    , _plkrckeCallback       :: !(Maybe Text)
+    , _plkrckeAccessToken :: !(Maybe Text)
+    , _plkrckeUploadType :: !(Maybe Text)
+    , _plkrckePayload :: !EncryptRequest
+    , _plkrckeName :: !Text
+    , _plkrckeCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

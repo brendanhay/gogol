@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.testers.update@.
+-- Updates testers.
+--
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.testers.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
     (
     -- * REST Resource
@@ -31,14 +33,19 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
     , EditsTestersUpdate
 
     -- * Request Lenses
+    , etutXgafv
     , etutTrack
+    , etutUploadProtocol
     , etutPackageName
+    , etutAccessToken
+    , etutUploadType
     , etutPayload
     , etutEditId
+    , etutCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.testers.update@ method which the
 -- 'EditsTestersUpdate' request conforms to.
@@ -51,17 +58,28 @@ type EditsTestersUpdateResource =
                Capture "editId" Text :>
                  "testers" :>
                    Capture "track" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Testers :> Put '[JSON] Testers
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Testers :> Put '[JSON] Testers
 
+-- | Updates testers.
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.
 data EditsTestersUpdate =
   EditsTestersUpdate'
-    { _etutTrack       :: !Text
+    { _etutXgafv :: !(Maybe Xgafv)
+    , _etutTrack :: !Text
+    , _etutUploadProtocol :: !(Maybe Text)
     , _etutPackageName :: !Text
-    , _etutPayload     :: !Testers
-    , _etutEditId      :: !Text
+    , _etutAccessToken :: !(Maybe Text)
+    , _etutUploadType :: !(Maybe Text)
+    , _etutPayload :: !Testers
+    , _etutEditId :: !Text
+    , _etutCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,13 +88,23 @@ data EditsTestersUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'etutXgafv'
+--
 -- * 'etutTrack'
 --
+-- * 'etutUploadProtocol'
+--
 -- * 'etutPackageName'
+--
+-- * 'etutAccessToken'
+--
+-- * 'etutUploadType'
 --
 -- * 'etutPayload'
 --
 -- * 'etutEditId'
+--
+-- * 'etutCallback'
 editsTestersUpdate
     :: Text -- ^ 'etutTrack'
     -> Text -- ^ 'etutPackageName'
@@ -85,34 +113,66 @@ editsTestersUpdate
     -> EditsTestersUpdate
 editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
   EditsTestersUpdate'
-    { _etutTrack = pEtutTrack_
+    { _etutXgafv = Nothing
+    , _etutTrack = pEtutTrack_
+    , _etutUploadProtocol = Nothing
     , _etutPackageName = pEtutPackageName_
+    , _etutAccessToken = Nothing
+    , _etutUploadType = Nothing
     , _etutPayload = pEtutPayload_
     , _etutEditId = pEtutEditId_
+    , _etutCallback = Nothing
     }
 
 
--- | The track to read or modify.
+-- | V1 error format.
+etutXgafv :: Lens' EditsTestersUpdate (Maybe Xgafv)
+etutXgafv
+  = lens _etutXgafv (\ s a -> s{_etutXgafv = a})
+
+-- | The track to update.
 etutTrack :: Lens' EditsTestersUpdate Text
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+etutUploadProtocol :: Lens' EditsTestersUpdate (Maybe Text)
+etutUploadProtocol
+  = lens _etutUploadProtocol
+      (\ s a -> s{_etutUploadProtocol = a})
+
+-- | Package name of the app.
 etutPackageName :: Lens' EditsTestersUpdate Text
 etutPackageName
   = lens _etutPackageName
       (\ s a -> s{_etutPackageName = a})
+
+-- | OAuth access token.
+etutAccessToken :: Lens' EditsTestersUpdate (Maybe Text)
+etutAccessToken
+  = lens _etutAccessToken
+      (\ s a -> s{_etutAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+etutUploadType :: Lens' EditsTestersUpdate (Maybe Text)
+etutUploadType
+  = lens _etutUploadType
+      (\ s a -> s{_etutUploadType = a})
 
 -- | Multipart request metadata.
 etutPayload :: Lens' EditsTestersUpdate Testers
 etutPayload
   = lens _etutPayload (\ s a -> s{_etutPayload = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 etutEditId :: Lens' EditsTestersUpdate Text
 etutEditId
   = lens _etutEditId (\ s a -> s{_etutEditId = a})
+
+-- | JSONP
+etutCallback :: Lens' EditsTestersUpdate (Maybe Text)
+etutCallback
+  = lens _etutCallback (\ s a -> s{_etutCallback = a})
 
 instance GoogleRequest EditsTestersUpdate where
         type Rs EditsTestersUpdate = Testers
@@ -120,6 +180,11 @@ instance GoogleRequest EditsTestersUpdate where
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTestersUpdate'{..}
           = go _etutPackageName _etutEditId _etutTrack
+              _etutXgafv
+              _etutUploadProtocol
+              _etutAccessToken
+              _etutUploadType
+              _etutCallback
               (Just AltJSON)
               _etutPayload
               androidPublisherService

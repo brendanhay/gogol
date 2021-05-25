@@ -22,7 +22,7 @@
 --
 -- Gets one order document by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.orderDocuments.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.orderDocuments.get@.
 module Network.Google.Resource.DFAReporting.OrderDocuments.Get
     (
     -- * REST Resource
@@ -33,35 +33,51 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.Get
     , OrderDocumentsGet
 
     -- * Request Lenses
+    , odgXgafv
+    , odgUploadProtocol
+    , odgAccessToken
+    , odgUploadType
     , odgProFileId
     , odgId
     , odgProjectId
+    , odgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.orderDocuments.get@ method which the
 -- 'OrderDocumentsGet' request conforms to.
 type OrderDocumentsGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
                Capture "projectId" (Textual Int64) :>
                  "orderDocuments" :>
                    Capture "id" (Textual Int64) :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] OrderDocument
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] OrderDocument
 
 -- | Gets one order document by ID.
 --
 -- /See:/ 'orderDocumentsGet' smart constructor.
 data OrderDocumentsGet =
   OrderDocumentsGet'
-    { _odgProFileId :: !(Textual Int64)
-    , _odgId        :: !(Textual Int64)
+    { _odgXgafv :: !(Maybe Xgafv)
+    , _odgUploadProtocol :: !(Maybe Text)
+    , _odgAccessToken :: !(Maybe Text)
+    , _odgUploadType :: !(Maybe Text)
+    , _odgProFileId :: !(Textual Int64)
+    , _odgId :: !(Textual Int64)
     , _odgProjectId :: !(Textual Int64)
+    , _odgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +86,21 @@ data OrderDocumentsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'odgXgafv'
+--
+-- * 'odgUploadProtocol'
+--
+-- * 'odgAccessToken'
+--
+-- * 'odgUploadType'
+--
 -- * 'odgProFileId'
 --
 -- * 'odgId'
 --
 -- * 'odgProjectId'
+--
+-- * 'odgCallback'
 orderDocumentsGet
     :: Int64 -- ^ 'odgProFileId'
     -> Int64 -- ^ 'odgId'
@@ -82,11 +108,38 @@ orderDocumentsGet
     -> OrderDocumentsGet
 orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
   OrderDocumentsGet'
-    { _odgProFileId = _Coerce # pOdgProFileId_
+    { _odgXgafv = Nothing
+    , _odgUploadProtocol = Nothing
+    , _odgAccessToken = Nothing
+    , _odgUploadType = Nothing
+    , _odgProFileId = _Coerce # pOdgProFileId_
     , _odgId = _Coerce # pOdgId_
     , _odgProjectId = _Coerce # pOdgProjectId_
+    , _odgCallback = Nothing
     }
 
+
+-- | V1 error format.
+odgXgafv :: Lens' OrderDocumentsGet (Maybe Xgafv)
+odgXgafv = lens _odgXgafv (\ s a -> s{_odgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+odgUploadProtocol :: Lens' OrderDocumentsGet (Maybe Text)
+odgUploadProtocol
+  = lens _odgUploadProtocol
+      (\ s a -> s{_odgUploadProtocol = a})
+
+-- | OAuth access token.
+odgAccessToken :: Lens' OrderDocumentsGet (Maybe Text)
+odgAccessToken
+  = lens _odgAccessToken
+      (\ s a -> s{_odgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+odgUploadType :: Lens' OrderDocumentsGet (Maybe Text)
+odgUploadType
+  = lens _odgUploadType
+      (\ s a -> s{_odgUploadType = a})
 
 -- | User profile ID associated with this request.
 odgProFileId :: Lens' OrderDocumentsGet Int64
@@ -105,12 +158,21 @@ odgProjectId
   = lens _odgProjectId (\ s a -> s{_odgProjectId = a})
       . _Coerce
 
+-- | JSONP
+odgCallback :: Lens' OrderDocumentsGet (Maybe Text)
+odgCallback
+  = lens _odgCallback (\ s a -> s{_odgCallback = a})
+
 instance GoogleRequest OrderDocumentsGet where
         type Rs OrderDocumentsGet = OrderDocument
         type Scopes OrderDocumentsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrderDocumentsGet'{..}
-          = go _odgProFileId _odgProjectId _odgId
+          = go _odgProFileId _odgProjectId _odgId _odgXgafv
+              _odgUploadProtocol
+              _odgAccessToken
+              _odgUploadType
+              _odgCallback
               (Just AltJSON)
               dFAReportingService
           where go

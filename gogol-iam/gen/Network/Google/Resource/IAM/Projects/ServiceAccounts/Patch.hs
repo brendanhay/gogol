@@ -20,10 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches a ServiceAccount. Currently, only the following fields are
--- updatable: \`display_name\` and \`description\`. Only fields specified
--- in the request are guaranteed to be returned in the response. Other
--- fields in the response may be empty. Note: The field mask is required.
+-- Patches a ServiceAccount.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.patch@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
@@ -45,8 +42,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
     , psapCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.patch@ method which the
 -- 'ProjectsServiceAccountsPatch' request conforms to.
@@ -62,21 +59,18 @@ type ProjectsServiceAccountsPatchResource =
                      ReqBody '[JSON] PatchServiceAccountRequest :>
                        Patch '[JSON] ServiceAccount
 
--- | Patches a ServiceAccount. Currently, only the following fields are
--- updatable: \`display_name\` and \`description\`. Only fields specified
--- in the request are guaranteed to be returned in the response. Other
--- fields in the response may be empty. Note: The field mask is required.
+-- | Patches a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsPatch' smart constructor.
 data ProjectsServiceAccountsPatch =
   ProjectsServiceAccountsPatch'
-    { _psapXgafv          :: !(Maybe Xgafv)
+    { _psapXgafv :: !(Maybe Xgafv)
     , _psapUploadProtocol :: !(Maybe Text)
-    , _psapAccessToken    :: !(Maybe Text)
-    , _psapUploadType     :: !(Maybe Text)
-    , _psapPayload        :: !PatchServiceAccountRequest
-    , _psapName           :: !Text
-    , _psapCallback       :: !(Maybe Text)
+    , _psapAccessToken :: !(Maybe Text)
+    , _psapUploadType :: !(Maybe Text)
+    , _psapPayload :: !PatchServiceAccountRequest
+    , _psapName :: !Text
+    , _psapCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -142,13 +136,17 @@ psapPayload :: Lens' ProjectsServiceAccountsPatch PatchServiceAccountRequest
 psapPayload
   = lens _psapPayload (\ s a -> s{_psapPayload = a})
 
--- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Requests using
--- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
--- the \`account\` and the \`ACCOUNT\` value can be the \`email\` address
--- or the \`unique_id\` of the service account. In responses the resource
--- name will always be in the format
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`.
+-- | The resource name of the service account. Use one of the following
+-- formats: * \`projects\/{PROJECT_ID}\/serviceAccounts\/{EMAIL_ADDRESS}\`
+-- * \`projects\/{PROJECT_ID}\/serviceAccounts\/{UNIQUE_ID}\` As an
+-- alternative, you can use the \`-\` wildcard character instead of the
+-- project ID: * \`projects\/-\/serviceAccounts\/{EMAIL_ADDRESS}\` *
+-- \`projects\/-\/serviceAccounts\/{UNIQUE_ID}\` When possible, avoid using
+-- the \`-\` wildcard character, because it can cause response messages to
+-- contain misleading error codes. For example, if you try to get the
+-- service account \`projects\/-\/serviceAccounts\/fake\'example.com\`,
+-- which does not exist, the response contains an HTTP \`403 Forbidden\`
+-- error instead of a \`404 Not Found\` error.
 psapName :: Lens' ProjectsServiceAccountsPatch Text
 psapName = lens _psapName (\ s a -> s{_psapName = a})
 

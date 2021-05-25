@@ -37,8 +37,8 @@ module Network.Google.Resource.Analytics.Management.Segments.List
     , mslMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.segments.list@ method which the
 -- 'ManagementSegmentsList' request conforms to.

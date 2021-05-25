@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.BackendBuckets.Update
     , bbuPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendBuckets.update@ method which the
 -- 'BackendBucketsUpdate' request conforms to.
@@ -64,10 +64,10 @@ type BackendBucketsUpdateResource =
 -- /See:/ 'backendBucketsUpdate' smart constructor.
 data BackendBucketsUpdate =
   BackendBucketsUpdate'
-    { _bbuRequestId     :: !(Maybe Text)
+    { _bbuRequestId :: !(Maybe Text)
     , _bbuBackendBucket :: !Text
-    , _bbuProject       :: !Text
-    , _bbuPayload       :: !BackendBucket
+    , _bbuProject :: !Text
+    , _bbuPayload :: !BackendBucket
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

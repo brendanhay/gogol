@@ -21,7 +21,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v3p1beta1@
+    This library is compatible with version @v4@
     of the API.
 
 source-repository head
@@ -37,22 +37,29 @@ library
     exposed-modules:
           Network.Google.Jobs
         , Network.Google.Jobs.Types
-        , Network.Google.Resource.Jobs.Projects.ClientEvents.Create
-        , Network.Google.Resource.Jobs.Projects.Companies.Create
-        , Network.Google.Resource.Jobs.Projects.Companies.Delete
-        , Network.Google.Resource.Jobs.Projects.Companies.Get
-        , Network.Google.Resource.Jobs.Projects.Companies.List
-        , Network.Google.Resource.Jobs.Projects.Companies.Patch
-        , Network.Google.Resource.Jobs.Projects.Complete
-        , Network.Google.Resource.Jobs.Projects.Jobs.BatchDelete
-        , Network.Google.Resource.Jobs.Projects.Jobs.Create
-        , Network.Google.Resource.Jobs.Projects.Jobs.Delete
-        , Network.Google.Resource.Jobs.Projects.Jobs.Get
-        , Network.Google.Resource.Jobs.Projects.Jobs.List
-        , Network.Google.Resource.Jobs.Projects.Jobs.Patch
-        , Network.Google.Resource.Jobs.Projects.Jobs.Search
-        , Network.Google.Resource.Jobs.Projects.Jobs.SearchForAlert
         , Network.Google.Resource.Jobs.Projects.Operations.Get
+        , Network.Google.Resource.Jobs.Projects.Tenants.ClientEvents.Create
+        , Network.Google.Resource.Jobs.Projects.Tenants.Companies.Create
+        , Network.Google.Resource.Jobs.Projects.Tenants.Companies.Delete
+        , Network.Google.Resource.Jobs.Projects.Tenants.Companies.Get
+        , Network.Google.Resource.Jobs.Projects.Tenants.Companies.List
+        , Network.Google.Resource.Jobs.Projects.Tenants.Companies.Patch
+        , Network.Google.Resource.Jobs.Projects.Tenants.CompleteQuery
+        , Network.Google.Resource.Jobs.Projects.Tenants.Create
+        , Network.Google.Resource.Jobs.Projects.Tenants.Delete
+        , Network.Google.Resource.Jobs.Projects.Tenants.Get
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchCreate
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchDelete
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchUpdate
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Create
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Delete
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Get
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.List
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Patch
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Search
+        , Network.Google.Resource.Jobs.Projects.Tenants.Jobs.SearchForAlert
+        , Network.Google.Resource.Jobs.Projects.Tenants.List
+        , Network.Google.Resource.Jobs.Projects.Tenants.Patch
 
     other-modules:
           Network.Google.Jobs.Types.Product

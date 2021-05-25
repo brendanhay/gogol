@@ -25,7 +25,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -51,12 +51,12 @@ library
         , Network.Google.Resource.DataFusion.Projects.Locations.Instances.Restart
         , Network.Google.Resource.DataFusion.Projects.Locations.Instances.SetIAMPolicy
         , Network.Google.Resource.DataFusion.Projects.Locations.Instances.TestIAMPermissions
-        , Network.Google.Resource.DataFusion.Projects.Locations.Instances.Upgrade
         , Network.Google.Resource.DataFusion.Projects.Locations.List
         , Network.Google.Resource.DataFusion.Projects.Locations.Operations.Cancel
         , Network.Google.Resource.DataFusion.Projects.Locations.Operations.Delete
         , Network.Google.Resource.DataFusion.Projects.Locations.Operations.Get
         , Network.Google.Resource.DataFusion.Projects.Locations.Operations.List
+        , Network.Google.Resource.DataFusion.Projects.Locations.Versions.List
 
     other-modules:
           Network.Google.DataFusion.Types.Product

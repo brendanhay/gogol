@@ -37,8 +37,8 @@ module Network.Google.Resource.URLShortener.URL.Get
     , ugShortURL
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.URLShortener.Types
+import Network.Google.Prelude
+import Network.Google.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.get@ method which the
 -- 'URLGet' request conforms to.
@@ -56,7 +56,7 @@ type URLGetResource =
 data URLGet =
   URLGet'
     { _ugProjection :: !(Maybe URLGetProjection)
-    , _ugShortURL   :: !Text
+    , _ugShortURL :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

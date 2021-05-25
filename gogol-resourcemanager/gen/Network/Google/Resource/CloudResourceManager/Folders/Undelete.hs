@@ -20,13 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels the deletion request for a Folder. This method may only be
--- called on a Folder in the DELETE_REQUESTED state. In order to succeed,
--- the Folder\'s parent must be in the ACTIVE state. In addition,
--- reintroducing the folder into the tree must not violate folder naming,
--- height and fanout constraints described in the CreateFolder
--- documentation. The caller must have \`resourcemanager.folders.undelete\`
--- permission on the identified folder.
+-- Cancels the deletion request for a folder. This method may be called on
+-- a folder in any state. If the folder is in the ACTIVE state the result
+-- will be a no-op success. In order to succeed, the folder\'s parent must
+-- be in the ACTIVE state. In addition, reintroducing the folder into the
+-- tree must not violate folder naming, height, and fanout constraints
+-- described in the CreateFolder documentation. The caller must have
+-- \`resourcemanager.folders.undelete\` permission on the identified
+-- folder.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.folders.undelete@.
 module Network.Google.Resource.CloudResourceManager.Folders.Undelete
@@ -48,13 +49,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.Undelete
     , fuCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.undelete@ method which the
 -- 'FoldersUndelete' request conforms to.
 type FoldersUndeleteResource =
-     "v2" :>
+     "v3" :>
        CaptureMode "name" "undelete" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,26 +64,27 @@ type FoldersUndeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] UndeleteFolderRequest :>
-                       Post '[JSON] Folder
+                       Post '[JSON] Operation
 
--- | Cancels the deletion request for a Folder. This method may only be
--- called on a Folder in the DELETE_REQUESTED state. In order to succeed,
--- the Folder\'s parent must be in the ACTIVE state. In addition,
--- reintroducing the folder into the tree must not violate folder naming,
--- height and fanout constraints described in the CreateFolder
--- documentation. The caller must have \`resourcemanager.folders.undelete\`
--- permission on the identified folder.
+-- | Cancels the deletion request for a folder. This method may be called on
+-- a folder in any state. If the folder is in the ACTIVE state the result
+-- will be a no-op success. In order to succeed, the folder\'s parent must
+-- be in the ACTIVE state. In addition, reintroducing the folder into the
+-- tree must not violate folder naming, height, and fanout constraints
+-- described in the CreateFolder documentation. The caller must have
+-- \`resourcemanager.folders.undelete\` permission on the identified
+-- folder.
 --
 -- /See:/ 'foldersUndelete' smart constructor.
 data FoldersUndelete =
   FoldersUndelete'
-    { _fuXgafv          :: !(Maybe Xgafv)
+    { _fuXgafv :: !(Maybe Xgafv)
     , _fuUploadProtocol :: !(Maybe Text)
-    , _fuAccessToken    :: !(Maybe Text)
-    , _fuUploadType     :: !(Maybe Text)
-    , _fuPayload        :: !UndeleteFolderRequest
-    , _fuName           :: !Text
-    , _fuCallback       :: !(Maybe Text)
+    , _fuAccessToken :: !(Maybe Text)
+    , _fuUploadType :: !(Maybe Text)
+    , _fuPayload :: !UndeleteFolderRequest
+    , _fuName :: !Text
+    , _fuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,8 +148,8 @@ fuPayload :: Lens' FoldersUndelete UndeleteFolderRequest
 fuPayload
   = lens _fuPayload (\ s a -> s{_fuPayload = a})
 
--- | The resource name of the Folder to undelete. Must be of the form
--- \`folders\/{folder_id}\`.
+-- | Required. The resource name of the folder to undelete. Must be of the
+-- form \`folders\/{folder_id}\`.
 fuName :: Lens' FoldersUndelete Text
 fuName = lens _fuName (\ s a -> s{_fuName = a})
 
@@ -157,7 +159,7 @@ fuCallback
   = lens _fuCallback (\ s a -> s{_fuCallback = a})
 
 instance GoogleRequest FoldersUndelete where
-        type Rs FoldersUndelete = Folder
+        type Rs FoldersUndelete = Operation
         type Scopes FoldersUndelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient FoldersUndelete'{..}

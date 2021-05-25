@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -128,6 +128,9 @@ module Network.Google.AnalyticsReporting.Types
     , dimension
     , dName
     , dHistogramBuckets
+
+    -- * SearchUserActivityRequestActivityTypesItem
+    , SearchUserActivityRequestActivityTypesItem (..)
 
     -- * DateRangeValues
     , DateRangeValues
@@ -462,9 +465,9 @@ module Network.Google.AnalyticsReporting.Types
     , sdScreenName
     ) where
 
-import           Network.Google.AnalyticsReporting.Types.Product
-import           Network.Google.AnalyticsReporting.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AnalyticsReporting.Types.Product
+import Network.Google.AnalyticsReporting.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v4' of the Analytics Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsReportingService :: ServiceConfig
@@ -476,6 +479,6 @@ analyticsReportingService
 analyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
 analyticsScope = Proxy
 
--- | View your Google Analytics data
+-- | See and download your Google Analytics data
 analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
 analyticsReadOnlyScope = Proxy

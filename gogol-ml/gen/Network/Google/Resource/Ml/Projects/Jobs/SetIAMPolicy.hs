@@ -21,9 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.jobs.setIamPolicy@.
 module Network.Google.Resource.Ml.Projects.Jobs.SetIAMPolicy
     (
     -- * REST Resource
@@ -43,8 +44,8 @@ module Network.Google.Resource.Ml.Projects.Jobs.SetIAMPolicy
     , pjsipCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.jobs.setIamPolicy@ method which the
 -- 'ProjectsJobsSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ProjectsJobsSetIAMPolicyResource =
                        Post '[JSON] GoogleIAMV1__Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsJobsSetIAMPolicy' smart constructor.
 data ProjectsJobsSetIAMPolicy =
   ProjectsJobsSetIAMPolicy'
-    { _pjsipXgafv          :: !(Maybe Xgafv)
+    { _pjsipXgafv :: !(Maybe Xgafv)
     , _pjsipUploadProtocol :: !(Maybe Text)
-    , _pjsipAccessToken    :: !(Maybe Text)
-    , _pjsipUploadType     :: !(Maybe Text)
-    , _pjsipPayload        :: !GoogleIAMV1__SetIAMPolicyRequest
-    , _pjsipResource       :: !Text
-    , _pjsipCallback       :: !(Maybe Text)
+    , _pjsipAccessToken :: !(Maybe Text)
+    , _pjsipUploadType :: !(Maybe Text)
+    , _pjsipPayload :: !GoogleIAMV1__SetIAMPolicyRequest
+    , _pjsipResource :: !Text
+    , _pjsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

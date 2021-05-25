@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.URLMaps.Update
     , umuPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.update@ method which the
 -- 'URLMapsUpdate' request conforms to.
@@ -64,9 +64,9 @@ type URLMapsUpdateResource =
 data URLMapsUpdate =
   URLMapsUpdate'
     { _umuRequestId :: !(Maybe Text)
-    , _umuURLMap    :: !Text
-    , _umuProject   :: !Text
-    , _umuPayload   :: !URLMap
+    , _umuURLMap :: !Text
+    , _umuProject :: !Text
+    , _umuPayload :: !URLMap
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

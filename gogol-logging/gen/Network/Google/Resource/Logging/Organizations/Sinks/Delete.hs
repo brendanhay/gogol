@@ -23,7 +23,7 @@
 -- Deletes a sink. If the sink has a unique writer_identity, then that
 -- service account is also deleted.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.sinks.delete@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Delete
     , osdCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.organizations.sinks.delete@ method which the
 -- 'OrganizationsSinksDelete' request conforms to.
@@ -63,12 +63,12 @@ type OrganizationsSinksDeleteResource =
 -- /See:/ 'organizationsSinksDelete' smart constructor.
 data OrganizationsSinksDelete =
   OrganizationsSinksDelete'
-    { _osdXgafv          :: !(Maybe Xgafv)
+    { _osdXgafv :: !(Maybe Xgafv)
     , _osdUploadProtocol :: !(Maybe Text)
-    , _osdAccessToken    :: !(Maybe Text)
-    , _osdUploadType     :: !(Maybe Text)
-    , _osdSinkName       :: !Text
-    , _osdCallback       :: !(Maybe Text)
+    , _osdAccessToken :: !(Maybe Text)
+    , _osdUploadType :: !(Maybe Text)
+    , _osdSinkName :: !Text
+    , _osdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

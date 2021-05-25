@@ -20,8 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets cluster diagnostic information. After the operation completes, the
--- Operation.response field contains DiagnoseClusterOutputLocation.
+-- Gets cluster diagnostic information. The returned Operation.metadata
+-- will be ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
+-- After the operation completes, Operation.response contains
+-- DiagnoseClusterResults
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#diagnoseclusterresults).
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.diagnose@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
@@ -34,19 +38,19 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
     , ProjectsRegionsClustersDiagnose
 
     -- * Request Lenses
-    , pXgafv
-    , pUploadProtocol
-    , pAccessToken
-    , pUploadType
-    , pPayload
-    , pClusterName
-    , pRegion
-    , pProjectId
-    , pCallback
+    , proXgafv
+    , proUploadProtocol
+    , proAccessToken
+    , proUploadType
+    , proPayload
+    , proClusterName
+    , proRegion
+    , proProjectId
+    , proCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.clusters.diagnose@ method which the
 -- 'ProjectsRegionsClustersDiagnose' request conforms to.
@@ -67,21 +71,25 @@ type ProjectsRegionsClustersDiagnoseResource =
                                ReqBody '[JSON] DiagnoseClusterRequest :>
                                  Post '[JSON] Operation
 
--- | Gets cluster diagnostic information. After the operation completes, the
--- Operation.response field contains DiagnoseClusterOutputLocation.
+-- | Gets cluster diagnostic information. The returned Operation.metadata
+-- will be ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
+-- After the operation completes, Operation.response contains
+-- DiagnoseClusterResults
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#diagnoseclusterresults).
 --
 -- /See:/ 'projectsRegionsClustersDiagnose' smart constructor.
 data ProjectsRegionsClustersDiagnose =
   ProjectsRegionsClustersDiagnose'
-    { _pXgafv          :: !(Maybe Xgafv)
-    , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !DiagnoseClusterRequest
-    , _pClusterName    :: !Text
-    , _pRegion         :: !Text
-    , _pProjectId      :: !Text
-    , _pCallback       :: !(Maybe Text)
+    { _proXgafv :: !(Maybe Xgafv)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proPayload :: !DiagnoseClusterRequest
+    , _proClusterName :: !Text
+    , _proRegion :: !Text
+    , _proProjectId :: !Text
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,86 +98,91 @@ data ProjectsRegionsClustersDiagnose =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pXgafv'
+-- * 'proXgafv'
 --
--- * 'pUploadProtocol'
+-- * 'proUploadProtocol'
 --
--- * 'pAccessToken'
+-- * 'proAccessToken'
 --
--- * 'pUploadType'
+-- * 'proUploadType'
 --
--- * 'pPayload'
+-- * 'proPayload'
 --
--- * 'pClusterName'
+-- * 'proClusterName'
 --
--- * 'pRegion'
+-- * 'proRegion'
 --
--- * 'pProjectId'
+-- * 'proProjectId'
 --
--- * 'pCallback'
+-- * 'proCallback'
 projectsRegionsClustersDiagnose
-    :: DiagnoseClusterRequest -- ^ 'pPayload'
-    -> Text -- ^ 'pClusterName'
-    -> Text -- ^ 'pRegion'
-    -> Text -- ^ 'pProjectId'
+    :: DiagnoseClusterRequest -- ^ 'proPayload'
+    -> Text -- ^ 'proClusterName'
+    -> Text -- ^ 'proRegion'
+    -> Text -- ^ 'proProjectId'
     -> ProjectsRegionsClustersDiagnose
-projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_ =
+projectsRegionsClustersDiagnose pProPayload_ pProClusterName_ pProRegion_ pProProjectId_ =
   ProjectsRegionsClustersDiagnose'
-    { _pXgafv = Nothing
-    , _pUploadProtocol = Nothing
-    , _pAccessToken = Nothing
-    , _pUploadType = Nothing
-    , _pPayload = pPPayload_
-    , _pClusterName = pPClusterName_
-    , _pRegion = pPRegion_
-    , _pProjectId = pPProjectId_
-    , _pCallback = Nothing
+    { _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proPayload = pProPayload_
+    , _proClusterName = pProClusterName_
+    , _proRegion = pProRegion_
+    , _proProjectId = pProProjectId_
+    , _proCallback = Nothing
     }
 
 
 -- | V1 error format.
-pXgafv :: Lens' ProjectsRegionsClustersDiagnose (Maybe Xgafv)
-pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
+proXgafv :: Lens' ProjectsRegionsClustersDiagnose (Maybe Xgafv)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pUploadProtocol :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
-pUploadProtocol
-  = lens _pUploadProtocol
-      (\ s a -> s{_pUploadProtocol = a})
+proUploadProtocol :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | OAuth access token.
-pAccessToken :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
-pAccessToken
-  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
+proAccessToken :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pUploadType :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
-pUploadType
-  = lens _pUploadType (\ s a -> s{_pUploadType = a})
+proUploadType :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
 -- | Multipart request metadata.
-pPayload :: Lens' ProjectsRegionsClustersDiagnose DiagnoseClusterRequest
-pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
+proPayload :: Lens' ProjectsRegionsClustersDiagnose DiagnoseClusterRequest
+proPayload
+  = lens _proPayload (\ s a -> s{_proPayload = a})
 
 -- | Required. The cluster name.
-pClusterName :: Lens' ProjectsRegionsClustersDiagnose Text
-pClusterName
-  = lens _pClusterName (\ s a -> s{_pClusterName = a})
+proClusterName :: Lens' ProjectsRegionsClustersDiagnose Text
+proClusterName
+  = lens _proClusterName
+      (\ s a -> s{_proClusterName = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
-pRegion :: Lens' ProjectsRegionsClustersDiagnose Text
-pRegion = lens _pRegion (\ s a -> s{_pRegion = a})
+-- | Required. The Dataproc region in which to handle the request.
+proRegion :: Lens' ProjectsRegionsClustersDiagnose Text
+proRegion
+  = lens _proRegion (\ s a -> s{_proRegion = a})
 
 -- | Required. The ID of the Google Cloud Platform project that the cluster
 -- belongs to.
-pProjectId :: Lens' ProjectsRegionsClustersDiagnose Text
-pProjectId
-  = lens _pProjectId (\ s a -> s{_pProjectId = a})
+proProjectId :: Lens' ProjectsRegionsClustersDiagnose Text
+proProjectId
+  = lens _proProjectId (\ s a -> s{_proProjectId = a})
 
 -- | JSONP
-pCallback :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
-pCallback
-  = lens _pCallback (\ s a -> s{_pCallback = a})
+proCallback :: Lens' ProjectsRegionsClustersDiagnose (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleRequest
            ProjectsRegionsClustersDiagnose
@@ -178,13 +191,14 @@ instance GoogleRequest
         type Scopes ProjectsRegionsClustersDiagnose =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsRegionsClustersDiagnose'{..}
-          = go _pProjectId _pRegion _pClusterName _pXgafv
-              _pUploadProtocol
-              _pAccessToken
-              _pUploadType
-              _pCallback
+          = go _proProjectId _proRegion _proClusterName
+              _proXgafv
+              _proUploadProtocol
+              _proAccessToken
+              _proUploadType
+              _proCallback
               (Just AltJSON)
-              _pPayload
+              _proPayload
               dataprocService
           where go
                   = buildClient

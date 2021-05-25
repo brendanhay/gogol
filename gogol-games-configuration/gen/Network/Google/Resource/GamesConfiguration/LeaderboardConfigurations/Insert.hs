@@ -22,7 +22,7 @@
 --
 -- Insert a new leaderboard configuration in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.insert@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.insert@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Inse
     , LeaderboardConfigurationsInsert
 
     -- * Request Lenses
+    , lciXgafv
+    , lciUploadProtocol
+    , lciAccessToken
+    , lciUploadType
     , lciPayload
     , lciApplicationId
+    , lciCallback
     ) where
 
-import           Network.Google.GamesConfiguration.Types
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
 -- 'LeaderboardConfigurationsInsert' request conforms to.
@@ -48,17 +53,27 @@ type LeaderboardConfigurationsInsertResource =
          "applications" :>
            Capture "applicationId" Text :>
              "leaderboards" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] LeaderboardConfiguration :>
-                   Post '[JSON] LeaderboardConfiguration
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LeaderboardConfiguration :>
+                             Post '[JSON] LeaderboardConfiguration
 
 -- | Insert a new leaderboard configuration in this application.
 --
 -- /See:/ 'leaderboardConfigurationsInsert' smart constructor.
 data LeaderboardConfigurationsInsert =
   LeaderboardConfigurationsInsert'
-    { _lciPayload       :: !LeaderboardConfiguration
+    { _lciXgafv :: !(Maybe Xgafv)
+    , _lciUploadProtocol :: !(Maybe Text)
+    , _lciAccessToken :: !(Maybe Text)
+    , _lciUploadType :: !(Maybe Text)
+    , _lciPayload :: !LeaderboardConfiguration
     , _lciApplicationId :: !Text
+    , _lciCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data LeaderboardConfigurationsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lciXgafv'
+--
+-- * 'lciUploadProtocol'
+--
+-- * 'lciAccessToken'
+--
+-- * 'lciUploadType'
+--
 -- * 'lciPayload'
 --
 -- * 'lciApplicationId'
+--
+-- * 'lciCallback'
 leaderboardConfigurationsInsert
     :: LeaderboardConfiguration -- ^ 'lciPayload'
     -> Text -- ^ 'lciApplicationId'
     -> LeaderboardConfigurationsInsert
 leaderboardConfigurationsInsert pLciPayload_ pLciApplicationId_ =
   LeaderboardConfigurationsInsert'
-    {_lciPayload = pLciPayload_, _lciApplicationId = pLciApplicationId_}
+    { _lciXgafv = Nothing
+    , _lciUploadProtocol = Nothing
+    , _lciAccessToken = Nothing
+    , _lciUploadType = Nothing
+    , _lciPayload = pLciPayload_
+    , _lciApplicationId = pLciApplicationId_
+    , _lciCallback = Nothing
+    }
 
+
+-- | V1 error format.
+lciXgafv :: Lens' LeaderboardConfigurationsInsert (Maybe Xgafv)
+lciXgafv = lens _lciXgafv (\ s a -> s{_lciXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lciUploadProtocol :: Lens' LeaderboardConfigurationsInsert (Maybe Text)
+lciUploadProtocol
+  = lens _lciUploadProtocol
+      (\ s a -> s{_lciUploadProtocol = a})
+
+-- | OAuth access token.
+lciAccessToken :: Lens' LeaderboardConfigurationsInsert (Maybe Text)
+lciAccessToken
+  = lens _lciAccessToken
+      (\ s a -> s{_lciAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lciUploadType :: Lens' LeaderboardConfigurationsInsert (Maybe Text)
+lciUploadType
+  = lens _lciUploadType
+      (\ s a -> s{_lciUploadType = a})
 
 -- | Multipart request metadata.
 lciPayload :: Lens' LeaderboardConfigurationsInsert LeaderboardConfiguration
@@ -90,6 +144,11 @@ lciApplicationId
   = lens _lciApplicationId
       (\ s a -> s{_lciApplicationId = a})
 
+-- | JSONP
+lciCallback :: Lens' LeaderboardConfigurationsInsert (Maybe Text)
+lciCallback
+  = lens _lciCallback (\ s a -> s{_lciCallback = a})
+
 instance GoogleRequest
            LeaderboardConfigurationsInsert
          where
@@ -98,7 +157,12 @@ instance GoogleRequest
         type Scopes LeaderboardConfigurationsInsert =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient LeaderboardConfigurationsInsert'{..}
-          = go _lciApplicationId (Just AltJSON) _lciPayload
+          = go _lciApplicationId _lciXgafv _lciUploadProtocol
+              _lciAccessToken
+              _lciUploadType
+              _lciCallback
+              (Just AltJSON)
+              _lciPayload
               gamesConfigurationService
           where go
                   = buildClient

@@ -23,7 +23,7 @@
 -- Gets the specified alert. Attempting to get a nonexistent alert returns
 -- \`NOT_FOUND\` error.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.get@.
 module Network.Google.Resource.AlertCenter.Alerts.Get
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.AlertCenter.Alerts.Get
     , agCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.alerts.get@ method which the
 -- 'AlertsGet' request conforms to.
@@ -66,13 +66,13 @@ type AlertsGetResource =
 -- /See:/ 'alertsGet' smart constructor.
 data AlertsGet =
   AlertsGet'
-    { _agXgafv          :: !(Maybe Xgafv)
+    { _agXgafv :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
-    , _agAccessToken    :: !(Maybe Text)
-    , _agAlertId        :: !Text
-    , _agUploadType     :: !(Maybe Text)
-    , _agCustomerId     :: !(Maybe Text)
-    , _agCallback       :: !(Maybe Text)
+    , _agAccessToken :: !(Maybe Text)
+    , _agAlertId :: !Text
+    , _agUploadType :: !(Maybe Text)
+    , _agCustomerId :: !(Maybe Text)
+    , _agCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,9 +135,9 @@ agUploadType :: Lens' AlertsGet (Maybe Text)
 agUploadType
   = lens _agUploadType (\ s a -> s{_agUploadType = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alert is associated with. Inferred from the caller
--- identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alert is associated with. Inferred from the
+-- caller identity if not provided.
 agCustomerId :: Lens' AlertsGet (Maybe Text)
 agCustomerId
   = lens _agCustomerId (\ s a -> s{_agCustomerId = a})

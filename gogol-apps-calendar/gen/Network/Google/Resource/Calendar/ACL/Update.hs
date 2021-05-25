@@ -39,8 +39,8 @@ module Network.Google.Resource.Calendar.ACL.Update
     , auSendNotifications
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.update@ method which the
 -- 'ACLUpdate' request conforms to.
@@ -60,9 +60,9 @@ type ACLUpdateResource =
 -- /See:/ 'aclUpdate' smart constructor.
 data ACLUpdate =
   ACLUpdate'
-    { _auCalendarId        :: !Text
-    , _auRuleId            :: !Text
-    , _auPayload           :: !ACLRule
+    { _auCalendarId :: !Text
+    , _auRuleId :: !Text
+    , _auPayload :: !ACLRule
     , _auSendNotifications :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

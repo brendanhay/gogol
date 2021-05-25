@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Snapshots.TestIAMPermissions
     , stipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.testIamPermissions@ method which the
 -- 'SnapshotsTestIAMPermissions' request conforms to.
@@ -61,8 +61,8 @@ type SnapshotsTestIAMPermissionsResource =
 -- /See:/ 'snapshotsTestIAMPermissions' smart constructor.
 data SnapshotsTestIAMPermissions =
   SnapshotsTestIAMPermissions'
-    { _stipProject  :: !Text
-    , _stipPayload  :: !TestPermissionsRequest
+    { _stipProject :: !Text
+    , _stipPayload :: !TestPermissionsRequest
     , _stipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

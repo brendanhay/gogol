@@ -36,8 +36,8 @@ module Network.Google.Resource.Storage.Channels.Stop
     , csPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.channels.stop@ method which the
 -- 'ChannelsStop' request conforms to.

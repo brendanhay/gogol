@@ -41,8 +41,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Ind
     , pdcgigCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.indexes.get@ method which the
 -- 'ProjectsDatabasesCollectionGroupsIndexesGet' request conforms to.
@@ -63,12 +63,12 @@ type ProjectsDatabasesCollectionGroupsIndexesGetResource
 -- /See:/ 'projectsDatabasesCollectionGroupsIndexesGet' smart constructor.
 data ProjectsDatabasesCollectionGroupsIndexesGet =
   ProjectsDatabasesCollectionGroupsIndexesGet'
-    { _pdcgigXgafv          :: !(Maybe Xgafv)
+    { _pdcgigXgafv :: !(Maybe Xgafv)
     , _pdcgigUploadProtocol :: !(Maybe Text)
-    , _pdcgigAccessToken    :: !(Maybe Text)
-    , _pdcgigUploadType     :: !(Maybe Text)
-    , _pdcgigName           :: !Text
-    , _pdcgigCallback       :: !(Maybe Text)
+    , _pdcgigAccessToken :: !(Maybe Text)
+    , _pdcgigUploadType :: !(Maybe Text)
+    , _pdcgigName :: !Text
+    , _pdcgigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,7 +125,7 @@ pdcgigUploadType
   = lens _pdcgigUploadType
       (\ s a -> s{_pdcgigUploadType = a})
 
--- | A name of the form
+-- | Required. A name of the form
 -- \`projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/indexes\/{index_id}\`
 pdcgigName :: Lens' ProjectsDatabasesCollectionGroupsIndexesGet Text
 pdcgigName

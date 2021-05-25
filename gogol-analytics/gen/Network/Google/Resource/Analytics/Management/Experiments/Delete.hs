@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
     , medExperimentId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.delete@ method which the
 -- 'ManagementExperimentsDelete' request conforms to.
@@ -64,9 +64,9 @@ type ManagementExperimentsDeleteResource =
 data ManagementExperimentsDelete =
   ManagementExperimentsDelete'
     { _medWebPropertyId :: !Text
-    , _medProFileId     :: !Text
-    , _medAccountId     :: !Text
-    , _medExperimentId  :: !Text
+    , _medProFileId :: !Text
+    , _medAccountId :: !Text
+    , _medExperimentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -17,8 +17,8 @@
 --
 module Network.Google.Testing.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Testing.Types.Sum
 
 -- | Additional details about the progress of the running test.
 --
@@ -26,7 +26,7 @@ import           Network.Google.Testing.Types.Sum
 data TestDetails =
   TestDetails'
     { _tdProgressMessages :: !(Maybe [Text])
-    , _tdErrorMessage     :: !(Maybe Text)
+    , _tdErrorMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,8 +83,8 @@ instance ToJSON TestDetails where
 -- /See:/ 'intentFilter' smart constructor.
 data IntentFilter =
   IntentFilter'
-    { _ifActionNames   :: !(Maybe [Text])
-    , _ifMimeType      :: !(Maybe Text)
+    { _ifActionNames :: !(Maybe [Text])
+    , _ifMimeType :: !(Maybe Text)
     , _ifCategoryNames :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -147,12 +147,15 @@ instance ToJSON IntentFilter where
                   ("mimeType" .=) <$> _ifMimeType,
                   ("categoryNames" .=) <$> _ifCategoryNames])
 
--- | A description of how to set up an iOS device prior to a test.
+-- | A description of how to set up an iOS device prior to running the test.
 --
 -- /See:/ 'iosTestSetup' smart constructor.
-newtype IosTestSetup =
+data IosTestSetup =
   IosTestSetup'
-    { _itsNetworkProFile :: Maybe Text
+    { _itsAdditionalIPas :: !(Maybe [FileReference])
+    , _itsPullDirectories :: !(Maybe [IosDeviceFile])
+    , _itsNetworkProFile :: !(Maybe Text)
+    , _itsPushFiles :: !(Maybe [IosDeviceFile])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -161,11 +164,42 @@ newtype IosTestSetup =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'itsAdditionalIPas'
+--
+-- * 'itsPullDirectories'
+--
 -- * 'itsNetworkProFile'
+--
+-- * 'itsPushFiles'
 iosTestSetup
     :: IosTestSetup
-iosTestSetup = IosTestSetup' {_itsNetworkProFile = Nothing}
+iosTestSetup =
+  IosTestSetup'
+    { _itsAdditionalIPas = Nothing
+    , _itsPullDirectories = Nothing
+    , _itsNetworkProFile = Nothing
+    , _itsPushFiles = Nothing
+    }
 
+
+-- | iOS apps to install in addition to those being directly tested.
+itsAdditionalIPas :: Lens' IosTestSetup [FileReference]
+itsAdditionalIPas
+  = lens _itsAdditionalIPas
+      (\ s a -> s{_itsAdditionalIPas = a})
+      . _Default
+      . _Coerce
+
+-- | List of directories on the device to upload to Cloud Storage at the end
+-- of the test. Directories should either be in a shared directory (e.g.
+-- \/private\/var\/mobile\/Media) or within an accessible directory inside
+-- the app\'s filesystem (e.g. \/Documents) by specifying the bundle id.
+itsPullDirectories :: Lens' IosTestSetup [IosDeviceFile]
+itsPullDirectories
+  = lens _itsPullDirectories
+      (\ s a -> s{_itsPullDirectories = a})
+      . _Default
+      . _Coerce
 
 -- | The network traffic profile used for running the test. Available network
 -- profiles can be queried by using the NETWORK_CONFIGURATION environment
@@ -176,31 +210,113 @@ itsNetworkProFile
   = lens _itsNetworkProFile
       (\ s a -> s{_itsNetworkProFile = a})
 
+-- | List of files to push to the device before starting the test.
+itsPushFiles :: Lens' IosTestSetup [IosDeviceFile]
+itsPushFiles
+  = lens _itsPushFiles (\ s a -> s{_itsPushFiles = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON IosTestSetup where
         parseJSON
           = withObject "IosTestSetup"
-              (\ o -> IosTestSetup' <$> (o .:? "networkProfile"))
+              (\ o ->
+                 IosTestSetup' <$>
+                   (o .:? "additionalIpas" .!= mempty) <*>
+                     (o .:? "pullDirectories" .!= mempty)
+                     <*> (o .:? "networkProfile")
+                     <*> (o .:? "pushFiles" .!= mempty))
 
 instance ToJSON IosTestSetup where
         toJSON IosTestSetup'{..}
           = object
               (catMaybes
-                 [("networkProfile" .=) <$> _itsNetworkProFile])
+                 [("additionalIpas" .=) <$> _itsAdditionalIPas,
+                  ("pullDirectories" .=) <$> _itsPullDirectories,
+                  ("networkProfile" .=) <$> _itsNetworkProFile,
+                  ("pushFiles" .=) <$> _itsPushFiles])
 
--- | Specifies a single test to be executed in a single environment.
+-- | Output only. Details about the shard.
+--
+-- /See:/ 'shard' smart constructor.
+data Shard =
+  Shard'
+    { _sShardIndex :: !(Maybe (Textual Int32))
+    , _sTestTargetsForShard :: !(Maybe TestTargetsForShard)
+    , _sNumShards :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Shard' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sShardIndex'
+--
+-- * 'sTestTargetsForShard'
+--
+-- * 'sNumShards'
+shard
+    :: Shard
+shard =
+  Shard'
+    { _sShardIndex = Nothing
+    , _sTestTargetsForShard = Nothing
+    , _sNumShards = Nothing
+    }
+
+
+-- | Output only. The index of the shard among all the shards.
+sShardIndex :: Lens' Shard (Maybe Int32)
+sShardIndex
+  = lens _sShardIndex (\ s a -> s{_sShardIndex = a}) .
+      mapping _Coerce
+
+-- | Output only. Test targets for each shard.
+sTestTargetsForShard :: Lens' Shard (Maybe TestTargetsForShard)
+sTestTargetsForShard
+  = lens _sTestTargetsForShard
+      (\ s a -> s{_sTestTargetsForShard = a})
+
+-- | Output only. The total number of shards.
+sNumShards :: Lens' Shard (Maybe Int32)
+sNumShards
+  = lens _sNumShards (\ s a -> s{_sNumShards = a}) .
+      mapping _Coerce
+
+instance FromJSON Shard where
+        parseJSON
+          = withObject "Shard"
+              (\ o ->
+                 Shard' <$>
+                   (o .:? "shardIndex") <*>
+                     (o .:? "testTargetsForShard")
+                     <*> (o .:? "numShards"))
+
+instance ToJSON Shard where
+        toJSON Shard'{..}
+          = object
+              (catMaybes
+                 [("shardIndex" .=) <$> _sShardIndex,
+                  ("testTargetsForShard" .=) <$> _sTestTargetsForShard,
+                  ("numShards" .=) <$> _sNumShards])
+
+-- | A single test executed in a single environment.
 --
 -- /See:/ 'testExecution' smart constructor.
 data TestExecution =
   TestExecution'
-    { _teTestDetails       :: !(Maybe TestDetails)
-    , _teState             :: !(Maybe TestExecutionState)
-    , _teEnvironment       :: !(Maybe Environment)
+    { _teTestDetails :: !(Maybe TestDetails)
+    , _teShard :: !(Maybe Shard)
+    , _teState :: !(Maybe TestExecutionState)
+    , _teEnvironment :: !(Maybe Environment)
     , _teTestSpecification :: !(Maybe TestSpecification)
-    , _teMatrixId          :: !(Maybe Text)
-    , _teId                :: !(Maybe Text)
-    , _teProjectId         :: !(Maybe Text)
-    , _teToolResultsStep   :: !(Maybe ToolResultsStep)
-    , _teTimestamp         :: !(Maybe DateTime')
+    , _teMatrixId :: !(Maybe Text)
+    , _teId :: !(Maybe Text)
+    , _teProjectId :: !(Maybe Text)
+    , _teToolResultsStep :: !(Maybe ToolResultsStep)
+    , _teTimestamp :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -210,6 +326,8 @@ data TestExecution =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'teTestDetails'
+--
+-- * 'teShard'
 --
 -- * 'teState'
 --
@@ -231,6 +349,7 @@ testExecution
 testExecution =
   TestExecution'
     { _teTestDetails = Nothing
+    , _teShard = Nothing
     , _teState = Nothing
     , _teEnvironment = Nothing
     , _teTestSpecification = Nothing
@@ -247,6 +366,10 @@ teTestDetails :: Lens' TestExecution (Maybe TestDetails)
 teTestDetails
   = lens _teTestDetails
       (\ s a -> s{_teTestDetails = a})
+
+-- | Output only. Details about the shard.
+teShard :: Lens' TestExecution (Maybe Shard)
+teShard = lens _teShard (\ s a -> s{_teShard = a})
 
 -- | Output only. Indicates the current progress of the test execution (e.g.,
 -- FINISHED).
@@ -270,7 +393,7 @@ teMatrixId :: Lens' TestExecution (Maybe Text)
 teMatrixId
   = lens _teMatrixId (\ s a -> s{_teMatrixId = a})
 
--- | Output only. Unique id set by the backend.
+-- | Output only. Unique id set by the service.
 teId :: Lens' TestExecution (Maybe Text)
 teId = lens _teId (\ s a -> s{_teId = a})
 
@@ -296,8 +419,9 @@ instance FromJSON TestExecution where
           = withObject "TestExecution"
               (\ o ->
                  TestExecution' <$>
-                   (o .:? "testDetails") <*> (o .:? "state") <*>
-                     (o .:? "environment")
+                   (o .:? "testDetails") <*> (o .:? "shard") <*>
+                     (o .:? "state")
+                     <*> (o .:? "environment")
                      <*> (o .:? "testSpecification")
                      <*> (o .:? "matrixId")
                      <*> (o .:? "id")
@@ -310,7 +434,7 @@ instance ToJSON TestExecution where
           = object
               (catMaybes
                  [("testDetails" .=) <$> _teTestDetails,
-                  ("state" .=) <$> _teState,
+                  ("shard" .=) <$> _teShard, ("state" .=) <$> _teState,
                   ("environment" .=) <$> _teEnvironment,
                   ("testSpecification" .=) <$> _teTestSpecification,
                   ("matrixId" .=) <$> _teMatrixId, ("id" .=) <$> _teId,
@@ -318,16 +442,83 @@ instance ToJSON TestExecution where
                   ("toolResultsStep" .=) <$> _teToolResultsStep,
                   ("timestamp" .=) <$> _teTimestamp])
 
+-- | A test of an iOS application that implements one or more game loop
+-- scenarios. This test type accepts an archived application (.ipa file)
+-- and a list of integer scenarios that will be executed on the app
+-- sequentially.
+--
+-- /See:/ 'iosTestLoop' smart constructor.
+data IosTestLoop =
+  IosTestLoop'
+    { _itlScenarios :: !(Maybe [Textual Int32])
+    , _itlAppBundleId :: !(Maybe Text)
+    , _itlAppIPa :: !(Maybe FileReference)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IosTestLoop' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itlScenarios'
+--
+-- * 'itlAppBundleId'
+--
+-- * 'itlAppIPa'
+iosTestLoop
+    :: IosTestLoop
+iosTestLoop =
+  IosTestLoop'
+    {_itlScenarios = Nothing, _itlAppBundleId = Nothing, _itlAppIPa = Nothing}
+
+
+-- | The list of scenarios that should be run during the test. Defaults to
+-- the single scenario 0 if unspecified.
+itlScenarios :: Lens' IosTestLoop [Int32]
+itlScenarios
+  = lens _itlScenarios (\ s a -> s{_itlScenarios = a})
+      . _Default
+      . _Coerce
+
+-- | Output only. The bundle id for the application under test.
+itlAppBundleId :: Lens' IosTestLoop (Maybe Text)
+itlAppBundleId
+  = lens _itlAppBundleId
+      (\ s a -> s{_itlAppBundleId = a})
+
+-- | Required. The .ipa of the application to test.
+itlAppIPa :: Lens' IosTestLoop (Maybe FileReference)
+itlAppIPa
+  = lens _itlAppIPa (\ s a -> s{_itlAppIPa = a})
+
+instance FromJSON IosTestLoop where
+        parseJSON
+          = withObject "IosTestLoop"
+              (\ o ->
+                 IosTestLoop' <$>
+                   (o .:? "scenarios" .!= mempty) <*>
+                     (o .:? "appBundleId")
+                     <*> (o .:? "appIpa"))
+
+instance ToJSON IosTestLoop where
+        toJSON IosTestLoop'{..}
+          = object
+              (catMaybes
+                 [("scenarios" .=) <$> _itlScenarios,
+                  ("appBundleId" .=) <$> _itlAppBundleId,
+                  ("appIpa" .=) <$> _itlAppIPa])
+
 -- | An iOS version.
 --
 -- /See:/ 'iosVersion' smart constructor.
 data IosVersion =
   IosVersion'
-    { _ivMinorVersion             :: !(Maybe (Textual Int32))
-    , _ivMajorVersion             :: !(Maybe (Textual Int32))
+    { _ivMinorVersion :: !(Maybe (Textual Int32))
+    , _ivMajorVersion :: !(Maybe (Textual Int32))
     , _ivSupportedXcodeVersionIds :: !(Maybe [Text])
-    , _ivId                       :: !(Maybe Text)
-    , _ivTags                     :: !(Maybe [Text])
+    , _ivId :: !(Maybe Text)
+    , _ivTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -458,8 +649,8 @@ instance ToJSON IosDeviceList where
 data RoboDirective =
   RoboDirective'
     { _rdResourceName :: !(Maybe Text)
-    , _rdInputText    :: !(Maybe Text)
-    , _rdActionType   :: !(Maybe RoboDirectiveActionType)
+    , _rdInputText :: !(Maybe Text)
+    , _rdActionType :: !(Maybe RoboDirectiveActionType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -523,7 +714,7 @@ instance ToJSON RoboDirective where
 data AndroidRuntimeConfiguration =
   AndroidRuntimeConfiguration'
     { _arcOrientations :: !(Maybe [Orientation])
-    , _arcLocales      :: !(Maybe [Locale])
+    , _arcLocales :: !(Maybe [Locale])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -578,7 +769,7 @@ instance ToJSON AndroidRuntimeConfiguration where
 data XcodeVersion =
   XcodeVersion'
     { _xvVersion :: !(Maybe Text)
-    , _xvTags    :: !(Maybe [Text])
+    , _xvTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -620,6 +811,44 @@ instance ToJSON XcodeVersion where
                  [("version" .=) <$> _xvVersion,
                   ("tags" .=) <$> _xvTags])
 
+--
+-- /See:/ 'systraceSetup' smart constructor.
+newtype SystraceSetup =
+  SystraceSetup'
+    { _ssDurationSeconds :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SystraceSetup' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssDurationSeconds'
+systraceSetup
+    :: SystraceSetup
+systraceSetup = SystraceSetup' {_ssDurationSeconds = Nothing}
+
+
+-- | Systrace duration in seconds. Should be between 1 and 30 seconds. 0
+-- disables systrace.
+ssDurationSeconds :: Lens' SystraceSetup (Maybe Int32)
+ssDurationSeconds
+  = lens _ssDurationSeconds
+      (\ s a -> s{_ssDurationSeconds = a})
+      . mapping _Coerce
+
+instance FromJSON SystraceSetup where
+        parseJSON
+          = withObject "SystraceSetup"
+              (\ o -> SystraceSetup' <$> (o .:? "durationSeconds"))
+
+instance ToJSON SystraceSetup where
+        toJSON SystraceSetup'{..}
+          = object
+              (catMaybes
+                 [("durationSeconds" .=) <$> _ssDurationSeconds])
+
 -- | Data about the relative number of devices running a given configuration
 -- of the Android platform.
 --
@@ -627,7 +856,7 @@ instance ToJSON XcodeVersion where
 data Distribution =
   Distribution'
     { _dMeasurementTime :: !(Maybe DateTime')
-    , _dMarketShare     :: !(Maybe (Textual Double))
+    , _dMarketShare :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -678,12 +907,15 @@ instance ToJSON Distribution where
 -- /See:/ 'iosModel' smart constructor.
 data IosModel =
   IosModel'
-    { _imFormFactor          :: !(Maybe IosModelFormFactor)
-    , _imName                :: !(Maybe Text)
+    { _imFormFactor :: !(Maybe IosModelFormFactor)
+    , _imScreenX :: !(Maybe (Textual Int32))
+    , _imScreenDensity :: !(Maybe (Textual Int32))
+    , _imName :: !(Maybe Text)
     , _imSupportedVersionIds :: !(Maybe [Text])
-    , _imId                  :: !(Maybe Text)
-    , _imDeviceCapabilities  :: !(Maybe [Text])
-    , _imTags                :: !(Maybe [Text])
+    , _imScreenY :: !(Maybe (Textual Int32))
+    , _imId :: !(Maybe Text)
+    , _imDeviceCapabilities :: !(Maybe [Text])
+    , _imTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -694,9 +926,15 @@ data IosModel =
 --
 -- * 'imFormFactor'
 --
+-- * 'imScreenX'
+--
+-- * 'imScreenDensity'
+--
 -- * 'imName'
 --
 -- * 'imSupportedVersionIds'
+--
+-- * 'imScreenY'
 --
 -- * 'imId'
 --
@@ -708,8 +946,11 @@ iosModel
 iosModel =
   IosModel'
     { _imFormFactor = Nothing
+    , _imScreenX = Nothing
+    , _imScreenDensity = Nothing
     , _imName = Nothing
     , _imSupportedVersionIds = Nothing
+    , _imScreenY = Nothing
     , _imId = Nothing
     , _imDeviceCapabilities = Nothing
     , _imTags = Nothing
@@ -720,6 +961,19 @@ iosModel =
 imFormFactor :: Lens' IosModel (Maybe IosModelFormFactor)
 imFormFactor
   = lens _imFormFactor (\ s a -> s{_imFormFactor = a})
+
+-- | Screen size in the horizontal (X) dimension measured in pixels.
+imScreenX :: Lens' IosModel (Maybe Int32)
+imScreenX
+  = lens _imScreenX (\ s a -> s{_imScreenX = a}) .
+      mapping _Coerce
+
+-- | Screen density in DPI.
+imScreenDensity :: Lens' IosModel (Maybe Int32)
+imScreenDensity
+  = lens _imScreenDensity
+      (\ s a -> s{_imScreenDensity = a})
+      . mapping _Coerce
 
 -- | The human-readable name for this device model. Examples: \"iPhone 4s\",
 -- \"iPad Mini 2\".
@@ -733,6 +987,12 @@ imSupportedVersionIds
       (\ s a -> s{_imSupportedVersionIds = a})
       . _Default
       . _Coerce
+
+-- | Screen size in the vertical (Y) dimension measured in pixels.
+imScreenY :: Lens' IosModel (Maybe Int32)
+imScreenY
+  = lens _imScreenY (\ s a -> s{_imScreenY = a}) .
+      mapping _Coerce
 
 -- | The unique opaque id for this model. Use this for invoking the
 -- TestExecutionService.
@@ -760,8 +1020,11 @@ instance FromJSON IosModel where
           = withObject "IosModel"
               (\ o ->
                  IosModel' <$>
-                   (o .:? "formFactor") <*> (o .:? "name") <*>
-                     (o .:? "supportedVersionIds" .!= mempty)
+                   (o .:? "formFactor") <*> (o .:? "screenX") <*>
+                     (o .:? "screenDensity")
+                     <*> (o .:? "name")
+                     <*> (o .:? "supportedVersionIds" .!= mempty)
+                     <*> (o .:? "screenY")
                      <*> (o .:? "id")
                      <*> (o .:? "deviceCapabilities" .!= mempty)
                      <*> (o .:? "tags" .!= mempty))
@@ -771,10 +1034,12 @@ instance ToJSON IosModel where
           = object
               (catMaybes
                  [("formFactor" .=) <$> _imFormFactor,
+                  ("screenX" .=) <$> _imScreenX,
+                  ("screenDensity" .=) <$> _imScreenDensity,
                   ("name" .=) <$> _imName,
                   ("supportedVersionIds" .=) <$>
                     _imSupportedVersionIds,
-                  ("id" .=) <$> _imId,
+                  ("screenY" .=) <$> _imScreenY, ("id" .=) <$> _imId,
                   ("deviceCapabilities" .=) <$> _imDeviceCapabilities,
                   ("tags" .=) <$> _imTags])
 
@@ -784,7 +1049,7 @@ instance ToJSON IosModel where
 data APK =
   APK'
     { _aPackageName :: !(Maybe Text)
-    , _aLocation    :: !(Maybe FileReference)
+    , _aLocation :: !(Maybe FileReference)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -871,10 +1136,10 @@ instance ToJSON NetworkConfigurationCatalog where
 -- /See:/ 'iosDevice' smart constructor.
 data IosDevice =
   IosDevice'
-    { _idLocale       :: !(Maybe Text)
-    , _idIosModelId   :: !(Maybe Text)
+    { _idLocale :: !(Maybe Text)
+    , _idIosModelId :: !(Maybe Text)
     , _idIosVersionId :: !(Maybe Text)
-    , _idOrientation  :: !(Maybe Text)
+    , _idOrientation :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -984,20 +1249,21 @@ instance ToJSON GetAPKDetailsResponse where
 
 -- | A test of an android application that explores the application on a
 -- virtual or physical Android Device, finding culprits and crashes as it
--- goes.
+-- goes. Next tag: 30
 --
 -- /See:/ 'androidRoboTest' smart constructor.
 data AndroidRoboTest =
   AndroidRoboTest'
-    { _artRoboDirectives     :: !(Maybe [RoboDirective])
-    , _artRoboScript         :: !(Maybe FileReference)
-    , _artStartingIntents    :: !(Maybe [RoboStartingIntent])
+    { _artRoboDirectives :: !(Maybe [RoboDirective])
+    , _artRoboScript :: !(Maybe FileReference)
+    , _artStartingIntents :: !(Maybe [RoboStartingIntent])
     , _artAppInitialActivity :: !(Maybe Text)
-    , _artMaxSteps           :: !(Maybe (Textual Int32))
-    , _artAppPackageId       :: !(Maybe Text)
-    , _artAppBundle          :: !(Maybe AppBundle)
-    , _artAppAPK             :: !(Maybe FileReference)
-    , _artMaxDepth           :: !(Maybe (Textual Int32))
+    , _artMaxSteps :: !(Maybe (Textual Int32))
+    , _artRoboMode :: !(Maybe AndroidRoboTestRoboMode)
+    , _artAppPackageId :: !(Maybe Text)
+    , _artAppBundle :: !(Maybe AppBundle)
+    , _artAppAPK :: !(Maybe FileReference)
+    , _artMaxDepth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1016,6 +1282,8 @@ data AndroidRoboTest =
 --
 -- * 'artMaxSteps'
 --
+-- * 'artRoboMode'
+--
 -- * 'artAppPackageId'
 --
 -- * 'artAppBundle'
@@ -1032,6 +1300,7 @@ androidRoboTest =
     , _artStartingIntents = Nothing
     , _artAppInitialActivity = Nothing
     , _artMaxSteps = Nothing
+    , _artRoboMode = Nothing
     , _artAppPackageId = Nothing
     , _artAppBundle = Nothing
     , _artAppAPK = Nothing
@@ -1079,6 +1348,12 @@ artMaxSteps
   = lens _artMaxSteps (\ s a -> s{_artMaxSteps = a}) .
       mapping _Coerce
 
+-- | The mode in which Robo should run. Most clients should allow the server
+-- to populate this field automatically.
+artRoboMode :: Lens' AndroidRoboTest (Maybe AndroidRoboTestRoboMode)
+artRoboMode
+  = lens _artRoboMode (\ s a -> s{_artRoboMode = a})
+
 -- | The java package for the application under test. The default value is
 -- determined by examining the application\'s manifest.
 artAppPackageId :: Lens' AndroidRoboTest (Maybe Text)
@@ -1114,6 +1389,7 @@ instance FromJSON AndroidRoboTest where
                      <*> (o .:? "startingIntents" .!= mempty)
                      <*> (o .:? "appInitialActivity")
                      <*> (o .:? "maxSteps")
+                     <*> (o .:? "roboMode")
                      <*> (o .:? "appPackageId")
                      <*> (o .:? "appBundle")
                      <*> (o .:? "appApk")
@@ -1128,6 +1404,7 @@ instance ToJSON AndroidRoboTest where
                   ("startingIntents" .=) <$> _artStartingIntents,
                   ("appInitialActivity" .=) <$> _artAppInitialActivity,
                   ("maxSteps" .=) <$> _artMaxSteps,
+                  ("roboMode" .=) <$> _artRoboMode,
                   ("appPackageId" .=) <$> _artAppPackageId,
                   ("appBundle" .=) <$> _artAppBundle,
                   ("appApk" .=) <$> _artAppAPK,
@@ -1154,7 +1431,8 @@ fileReference = FileReference' {_frGcsPath = Nothing}
 
 
 -- | A path to a file in Google Cloud Storage. Example:
--- gs:\/\/build-app-1414623860166\/app-debug-unaligned.apk
+-- gs:\/\/build-app-1414623860166\/app%40debug-unaligned.apk These paths
+-- are expected to be url encoded (percent encoding)
 frGcsPath :: Lens' FileReference (Maybe Text)
 frGcsPath
   = lens _frGcsPath (\ s a -> s{_frGcsPath = a})
@@ -1173,7 +1451,7 @@ instance ToJSON FileReference where
 -- /See:/ 'environment' smart constructor.
 data Environment =
   Environment'
-    { _eIosDevice     :: !(Maybe IosDevice)
+    { _eIosDevice :: !(Maybe IosDevice)
     , _eAndroidDevice :: !(Maybe AndroidDevice)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1269,10 +1547,11 @@ instance ToJSON ToolResultsHistory where
 -- /See:/ 'testEnvironmentCatalog' smart constructor.
 data TestEnvironmentCatalog =
   TestEnvironmentCatalog'
-    { _tecSoftwareCatalog             :: !(Maybe ProvidedSoftwareCatalog)
+    { _tecSoftwareCatalog :: !(Maybe ProvidedSoftwareCatalog)
     , _tecNetworkConfigurationCatalog :: !(Maybe NetworkConfigurationCatalog)
-    , _tecAndroidDeviceCatalog        :: !(Maybe AndroidDeviceCatalog)
-    , _tecIosDeviceCatalog            :: !(Maybe IosDeviceCatalog)
+    , _tecAndroidDeviceCatalog :: !(Maybe AndroidDeviceCatalog)
+    , _tecIosDeviceCatalog :: !(Maybe IosDeviceCatalog)
+    , _tecDeviceIPBlockCatalog :: !(Maybe DeviceIPBlockCatalog)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1288,6 +1567,8 @@ data TestEnvironmentCatalog =
 -- * 'tecAndroidDeviceCatalog'
 --
 -- * 'tecIosDeviceCatalog'
+--
+-- * 'tecDeviceIPBlockCatalog'
 testEnvironmentCatalog
     :: TestEnvironmentCatalog
 testEnvironmentCatalog =
@@ -1296,6 +1577,7 @@ testEnvironmentCatalog =
     , _tecNetworkConfigurationCatalog = Nothing
     , _tecAndroidDeviceCatalog = Nothing
     , _tecIosDeviceCatalog = Nothing
+    , _tecDeviceIPBlockCatalog = Nothing
     }
 
 
@@ -1323,6 +1605,12 @@ tecIosDeviceCatalog
   = lens _tecIosDeviceCatalog
       (\ s a -> s{_tecIosDeviceCatalog = a})
 
+-- | The IP blocks used by devices in the test environment.
+tecDeviceIPBlockCatalog :: Lens' TestEnvironmentCatalog (Maybe DeviceIPBlockCatalog)
+tecDeviceIPBlockCatalog
+  = lens _tecDeviceIPBlockCatalog
+      (\ s a -> s{_tecDeviceIPBlockCatalog = a})
+
 instance FromJSON TestEnvironmentCatalog where
         parseJSON
           = withObject "TestEnvironmentCatalog"
@@ -1331,7 +1619,8 @@ instance FromJSON TestEnvironmentCatalog where
                    (o .:? "softwareCatalog") <*>
                      (o .:? "networkConfigurationCatalog")
                      <*> (o .:? "androidDeviceCatalog")
-                     <*> (o .:? "iosDeviceCatalog"))
+                     <*> (o .:? "iosDeviceCatalog")
+                     <*> (o .:? "deviceIpBlockCatalog"))
 
 instance ToJSON TestEnvironmentCatalog where
         toJSON TestEnvironmentCatalog'{..}
@@ -1342,17 +1631,19 @@ instance ToJSON TestEnvironmentCatalog where
                     _tecNetworkConfigurationCatalog,
                   ("androidDeviceCatalog" .=) <$>
                     _tecAndroidDeviceCatalog,
-                  ("iosDeviceCatalog" .=) <$> _tecIosDeviceCatalog])
+                  ("iosDeviceCatalog" .=) <$> _tecIosDeviceCatalog,
+                  ("deviceIpBlockCatalog" .=) <$>
+                    _tecDeviceIPBlockCatalog])
 
 -- | A location\/region designation for language.
 --
 -- /See:/ 'locale' smart constructor.
 data Locale =
   Locale'
-    { _lName   :: !(Maybe Text)
-    , _lId     :: !(Maybe Text)
+    { _lName :: !(Maybe Text)
+    , _lId :: !(Maybe Text)
     , _lRegion :: !(Maybe Text)
-    , _lTags   :: !(Maybe [Text])
+    , _lTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1414,8 +1705,8 @@ instance ToJSON Locale where
 -- /See:/ 'androidDeviceCatalog' smart constructor.
 data AndroidDeviceCatalog =
   AndroidDeviceCatalog'
-    { _adcVersions             :: !(Maybe [AndroidVersion])
-    , _adcModels               :: !(Maybe [AndroidModel])
+    { _adcVersions :: !(Maybe [AndroidVersion])
+    , _adcModels :: !(Maybe [AndroidModel])
     , _adcRuntimeConfiguration :: !(Maybe AndroidRuntimeConfiguration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1478,20 +1769,84 @@ instance ToJSON AndroidDeviceCatalog where
                   ("runtimeConfiguration" .=) <$>
                     _adcRuntimeConfiguration])
 
+-- | A file or directory to install on the device before the test starts.
+--
+-- /See:/ 'iosDeviceFile' smart constructor.
+data IosDeviceFile =
+  IosDeviceFile'
+    { _idfDevicePath :: !(Maybe Text)
+    , _idfBundleId :: !(Maybe Text)
+    , _idfContent :: !(Maybe FileReference)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IosDeviceFile' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'idfDevicePath'
+--
+-- * 'idfBundleId'
+--
+-- * 'idfContent'
+iosDeviceFile
+    :: IosDeviceFile
+iosDeviceFile =
+  IosDeviceFile'
+    {_idfDevicePath = Nothing, _idfBundleId = Nothing, _idfContent = Nothing}
+
+
+-- | Location of the file on the device, inside the app\'s sandboxed
+-- filesystem
+idfDevicePath :: Lens' IosDeviceFile (Maybe Text)
+idfDevicePath
+  = lens _idfDevicePath
+      (\ s a -> s{_idfDevicePath = a})
+
+-- | The bundle id of the app where this file lives. iOS apps sandbox their
+-- own filesystem, so app files must specify which app installed on the
+-- device.
+idfBundleId :: Lens' IosDeviceFile (Maybe Text)
+idfBundleId
+  = lens _idfBundleId (\ s a -> s{_idfBundleId = a})
+
+-- | The source file
+idfContent :: Lens' IosDeviceFile (Maybe FileReference)
+idfContent
+  = lens _idfContent (\ s a -> s{_idfContent = a})
+
+instance FromJSON IosDeviceFile where
+        parseJSON
+          = withObject "IosDeviceFile"
+              (\ o ->
+                 IosDeviceFile' <$>
+                   (o .:? "devicePath") <*> (o .:? "bundleId") <*>
+                     (o .:? "content"))
+
+instance ToJSON IosDeviceFile where
+        toJSON IosDeviceFile'{..}
+          = object
+              (catMaybes
+                 [("devicePath" .=) <$> _idfDevicePath,
+                  ("bundleId" .=) <$> _idfBundleId,
+                  ("content" .=) <$> _idfContent])
+
 -- | A description of how to run the test.
 --
 -- /See:/ 'testSpecification' smart constructor.
 data TestSpecification =
   TestSpecification'
-    { _tsIosTestSetup               :: !(Maybe IosTestSetup)
-    , _tsTestTimeout                :: !(Maybe GDuration)
-    , _tsAndroidRoboTest            :: !(Maybe AndroidRoboTest)
-    , _tsDisableVideoRecording      :: !(Maybe Bool)
+    { _tsIosTestSetup :: !(Maybe IosTestSetup)
+    , _tsIosTestLoop :: !(Maybe IosTestLoop)
+    , _tsTestTimeout :: !(Maybe GDuration)
+    , _tsAndroidRoboTest :: !(Maybe AndroidRoboTest)
+    , _tsDisableVideoRecording :: !(Maybe Bool)
     , _tsAndroidInstrumentationTest :: !(Maybe AndroidInstrumentationTest)
-    , _tsIosXcTest                  :: !(Maybe IosXcTest)
-    , _tsDisablePerformanceMetrics  :: !(Maybe Bool)
-    , _tsTestSetup                  :: !(Maybe TestSetup)
-    , _tsAndroidTestLoop            :: !(Maybe AndroidTestLoop)
+    , _tsIosXcTest :: !(Maybe IosXcTest)
+    , _tsDisablePerformanceMetrics :: !(Maybe Bool)
+    , _tsTestSetup :: !(Maybe TestSetup)
+    , _tsAndroidTestLoop :: !(Maybe AndroidTestLoop)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1501,6 +1856,8 @@ data TestSpecification =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tsIosTestSetup'
+--
+-- * 'tsIosTestLoop'
 --
 -- * 'tsTestTimeout'
 --
@@ -1522,6 +1879,7 @@ testSpecification
 testSpecification =
   TestSpecification'
     { _tsIosTestSetup = Nothing
+    , _tsIosTestLoop = Nothing
     , _tsTestTimeout = Nothing
     , _tsAndroidRoboTest = Nothing
     , _tsDisableVideoRecording = Nothing
@@ -1539,6 +1897,12 @@ tsIosTestSetup
   = lens _tsIosTestSetup
       (\ s a -> s{_tsIosTestSetup = a})
 
+-- | An iOS application with a test loop.
+tsIosTestLoop :: Lens' TestSpecification (Maybe IosTestLoop)
+tsIosTestLoop
+  = lens _tsIosTestLoop
+      (\ s a -> s{_tsIosTestLoop = a})
+
 -- | Max time a test execution is allowed to run before it is automatically
 -- cancelled. The default value is 5 min.
 tsTestTimeout :: Lens' TestSpecification (Maybe Scientific)
@@ -1553,7 +1917,7 @@ tsAndroidRoboTest
   = lens _tsAndroidRoboTest
       (\ s a -> s{_tsAndroidRoboTest = a})
 
--- | Disables video recording; may reduce test latency.
+-- | Disables video recording. May reduce test latency.
 tsDisableVideoRecording :: Lens' TestSpecification (Maybe Bool)
 tsDisableVideoRecording
   = lens _tsDisableVideoRecording
@@ -1570,7 +1934,7 @@ tsIosXcTest :: Lens' TestSpecification (Maybe IosXcTest)
 tsIosXcTest
   = lens _tsIosXcTest (\ s a -> s{_tsIosXcTest = a})
 
--- | Disables performance metrics recording; may reduce test latency.
+-- | Disables performance metrics recording. May reduce test latency.
 tsDisablePerformanceMetrics :: Lens' TestSpecification (Maybe Bool)
 tsDisablePerformanceMetrics
   = lens _tsDisablePerformanceMetrics
@@ -1593,8 +1957,9 @@ instance FromJSON TestSpecification where
           = withObject "TestSpecification"
               (\ o ->
                  TestSpecification' <$>
-                   (o .:? "iosTestSetup") <*> (o .:? "testTimeout") <*>
-                     (o .:? "androidRoboTest")
+                   (o .:? "iosTestSetup") <*> (o .:? "iosTestLoop") <*>
+                     (o .:? "testTimeout")
+                     <*> (o .:? "androidRoboTest")
                      <*> (o .:? "disableVideoRecording")
                      <*> (o .:? "androidInstrumentationTest")
                      <*> (o .:? "iosXcTest")
@@ -1607,6 +1972,7 @@ instance ToJSON TestSpecification where
           = object
               (catMaybes
                  [("iosTestSetup" .=) <$> _tsIosTestSetup,
+                  ("iosTestLoop" .=) <$> _tsIosTestLoop,
                   ("testTimeout" .=) <$> _tsTestTimeout,
                   ("androidRoboTest" .=) <$> _tsAndroidRoboTest,
                   ("disableVideoRecording" .=) <$>
@@ -1619,12 +1985,57 @@ instance ToJSON TestSpecification where
                   ("testSetup" .=) <$> _tsTestSetup,
                   ("androidTestLoop" .=) <$> _tsAndroidTestLoop])
 
+-- | Test targets for a shard.
+--
+-- /See:/ 'testTargetsForShard' smart constructor.
+newtype TestTargetsForShard =
+  TestTargetsForShard'
+    { _ttfsTestTargets :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TestTargetsForShard' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ttfsTestTargets'
+testTargetsForShard
+    :: TestTargetsForShard
+testTargetsForShard = TestTargetsForShard' {_ttfsTestTargets = Nothing}
+
+
+-- | Group of packages, classes, and\/or test methods to be run for each
+-- shard. The targets need to be specified in AndroidJUnitRunner argument
+-- format. For example, \"package com.my.packages\" \"class
+-- com.my.package.MyClass\". The number of shard_test_targets must be
+-- greater than 0.
+ttfsTestTargets :: Lens' TestTargetsForShard [Text]
+ttfsTestTargets
+  = lens _ttfsTestTargets
+      (\ s a -> s{_ttfsTestTargets = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestTargetsForShard where
+        parseJSON
+          = withObject "TestTargetsForShard"
+              (\ o ->
+                 TestTargetsForShard' <$>
+                   (o .:? "testTargets" .!= mempty))
+
+instance ToJSON TestTargetsForShard where
+        toJSON TestTargetsForShard'{..}
+          = object
+              (catMaybes [("testTargets" .=) <$> _ttfsTestTargets])
+
 -- | The currently provided software environment on the devices under test.
 --
 -- /See:/ 'providedSoftwareCatalog' smart constructor.
-newtype ProvidedSoftwareCatalog =
+data ProvidedSoftwareCatalog =
   ProvidedSoftwareCatalog'
-    { _pscOrchestratorVersion :: Maybe Text
+    { _pscOrchestratorVersion :: !(Maybe Text)
+    , _pscAndroidxOrchestratorVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1634,43 +2045,60 @@ newtype ProvidedSoftwareCatalog =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pscOrchestratorVersion'
+--
+-- * 'pscAndroidxOrchestratorVersion'
 providedSoftwareCatalog
     :: ProvidedSoftwareCatalog
 providedSoftwareCatalog =
-  ProvidedSoftwareCatalog' {_pscOrchestratorVersion = Nothing}
+  ProvidedSoftwareCatalog'
+    { _pscOrchestratorVersion = Nothing
+    , _pscAndroidxOrchestratorVersion = Nothing
+    }
 
 
 -- | A string representing the current version of Android Test Orchestrator
--- that is provided by TestExecutionService. Example: \"1.0.2 beta\".
+-- that is used in the environment. The package is available at
+-- https:\/\/maven.google.com\/web\/index.html#com.android.support.test:orchestrator.
 pscOrchestratorVersion :: Lens' ProvidedSoftwareCatalog (Maybe Text)
 pscOrchestratorVersion
   = lens _pscOrchestratorVersion
       (\ s a -> s{_pscOrchestratorVersion = a})
+
+-- | A string representing the current version of AndroidX Test Orchestrator
+-- that is used in the environment. The package is available at
+-- https:\/\/maven.google.com\/web\/index.html#androidx.test:orchestrator.
+pscAndroidxOrchestratorVersion :: Lens' ProvidedSoftwareCatalog (Maybe Text)
+pscAndroidxOrchestratorVersion
+  = lens _pscAndroidxOrchestratorVersion
+      (\ s a -> s{_pscAndroidxOrchestratorVersion = a})
 
 instance FromJSON ProvidedSoftwareCatalog where
         parseJSON
           = withObject "ProvidedSoftwareCatalog"
               (\ o ->
                  ProvidedSoftwareCatalog' <$>
-                   (o .:? "orchestratorVersion"))
+                   (o .:? "orchestratorVersion") <*>
+                     (o .:? "androidxOrchestratorVersion"))
 
 instance ToJSON ProvidedSoftwareCatalog where
         toJSON ProvidedSoftwareCatalog'{..}
           = object
               (catMaybes
                  [("orchestratorVersion" .=) <$>
-                    _pscOrchestratorVersion])
+                    _pscOrchestratorVersion,
+                  ("androidxOrchestratorVersion" .=) <$>
+                    _pscAndroidxOrchestratorVersion])
 
 -- | Network emulation parameters.
 --
 -- /See:/ 'trafficRule' smart constructor.
 data TrafficRule =
   TrafficRule'
-    { _trPacketLossRatio        :: !(Maybe (Textual Double))
+    { _trPacketLossRatio :: !(Maybe (Textual Double))
     , _trPacketDuplicationRatio :: !(Maybe (Textual Double))
-    , _trBandwidth              :: !(Maybe (Textual Double))
-    , _trBurst                  :: !(Maybe (Textual Double))
-    , _trDelay                  :: !(Maybe GDuration)
+    , _trBandwidth :: !(Maybe (Textual Double))
+    , _trBurst :: !(Maybe (Textual Double))
+    , _trDelay :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1759,9 +2187,9 @@ instance ToJSON TrafficRule where
 -- /See:/ 'iosDeviceCatalog' smart constructor.
 data IosDeviceCatalog =
   IosDeviceCatalog'
-    { _idcXcodeVersions        :: !(Maybe [XcodeVersion])
-    , _idcVersions             :: !(Maybe [IosVersion])
-    , _idcModels               :: !(Maybe [IosModel])
+    { _idcXcodeVersions :: !(Maybe [XcodeVersion])
+    , _idcVersions :: !(Maybe [IosVersion])
+    , _idcModels :: !(Maybe [IosModel])
     , _idcRuntimeConfiguration :: !(Maybe IosRuntimeConfiguration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1837,8 +2265,8 @@ instance ToJSON IosDeviceCatalog where
                   ("runtimeConfiguration" .=) <$>
                     _idcRuntimeConfiguration])
 
--- | Enables automatic Google account login. If set, the service will
--- automatically generate a Google test account and add it to the device,
+-- | Enables automatic Google account login. If set, the service
+-- automatically generates a Google test account and adds it to the device,
 -- before executing the test. Note that test accounts might be reused. Many
 -- applications show their full set of functionalities when an account is
 -- present on the device. Logging into the device with these generated
@@ -1904,9 +2332,9 @@ instance ToJSON Account where
 -- /See:/ 'startActivityIntent' smart constructor.
 data StartActivityIntent =
   StartActivityIntent'
-    { _saiURI        :: !(Maybe Text)
+    { _saiURI :: !(Maybe Text)
     , _saiCategories :: !(Maybe [Text])
-    , _saiAction     :: !(Maybe Text)
+    , _saiAction :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1966,8 +2394,8 @@ instance ToJSON StartActivityIntent where
 data RoboStartingIntent =
   RoboStartingIntent'
     { _rsiLauncherActivity :: !(Maybe LauncherActivityIntent)
-    , _rsiStartActivity    :: !(Maybe StartActivityIntent)
-    , _rsiTimeout          :: !(Maybe GDuration)
+    , _rsiStartActivity :: !(Maybe StartActivityIntent)
+    , _rsiTimeout :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1991,11 +2419,13 @@ roboStartingIntent =
     }
 
 
+-- | An intent that starts the main launcher activity.
 rsiLauncherActivity :: Lens' RoboStartingIntent (Maybe LauncherActivityIntent)
 rsiLauncherActivity
   = lens _rsiLauncherActivity
       (\ s a -> s{_rsiLauncherActivity = a})
 
+-- | An intent that starts an activity with specific details.
 rsiStartActivity :: Lens' RoboStartingIntent (Maybe StartActivityIntent)
 rsiStartActivity
   = lens _rsiStartActivity
@@ -2024,20 +2454,21 @@ instance ToJSON RoboStartingIntent where
                   ("startActivity" .=) <$> _rsiStartActivity,
                   ("timeout" .=) <$> _rsiTimeout])
 
--- | Represents a whole or partial calendar date, e.g. a birthday. The time
--- of day and time zone are either specified elsewhere or are not
--- significant. The date is relative to the Proleptic Gregorian Calendar.
--- This can represent: * A full date, with non-zero year, month and day
--- values * A month and day value, with a zero year, e.g. an anniversary *
--- A year on its own, with zero month and day values * A year and month
--- value, with a zero day, e.g. a credit card expiration date Related types
--- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: * A full date, with non-zero year,
+-- month, and day values * A month and day value, with a zero year, such as
+-- an anniversary * A year on its own, with zero month and day values * A
+-- year and month value, with a zero day, such as a credit card expiration
+-- date Related types are google.type.TimeOfDay and
+-- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
 data Date =
   Date'
-    { _dDay   :: !(Maybe (Textual Int32))
-    , _dYear  :: !(Maybe (Textual Int32))
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2057,22 +2488,22 @@ date
 date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
 
 
--- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year by itself or a year and month where the day is
--- not significant.
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
 dDay :: Lens' Date (Maybe Int32)
 dDay
   = lens _dDay (\ s a -> s{_dDay = a}) .
       mapping _Coerce
 
--- | Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
 -- a year.
 dYear :: Lens' Date (Maybe Int32)
 dYear
   = lens _dYear (\ s a -> s{_dYear = a}) .
       mapping _Coerce
 
--- | Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
 -- month and day.
 dMonth :: Lens' Date (Maybe Int32)
 dMonth
@@ -2099,7 +2530,7 @@ instance ToJSON Date where
 data RegularFile =
   RegularFile'
     { _rfDevicePath :: !(Maybe Text)
-    , _rfContent    :: !(Maybe FileReference)
+    , _rfContent :: !(Maybe FileReference)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2117,23 +2548,16 @@ regularFile = RegularFile' {_rfDevicePath = Nothing, _rfContent = Nothing}
 
 
 -- | Required. Where to put the content on the device. Must be an absolute,
--- whitelisted path. If the file exists, it will be replaced. The following
--- device-side directories and any of their subdirectories are whitelisted:
---
--- ${EXTERNAL_STORAGE}, or \/sdcard
---
--- ${ANDROID_DATA}\/local\/tmp, or \/data\/local\/tmp
---
--- Specifying a path outside of these directory trees is invalid.
---
--- The paths \/sdcard and \/data will be made available and treated as
--- implicit path substitutions. E.g. if \/sdcard on a particular device
--- does not map to external storage, the system will replace it with the
--- external storage path prefix for that device and copy the file there.
---
--- It is strongly advised to use the
--- <http://developer.android.com/reference/android/os/Environment.html Environment API>
--- in app and test code to access files on the device in a portable way.
+-- allowlisted path. If the file exists, it will be replaced. The following
+-- device-side directories and any of their subdirectories are allowlisted:
+-- ${EXTERNAL_STORAGE}, \/sdcard, or \/storage ${ANDROID_DATA}\/local\/tmp,
+-- or \/data\/local\/tmp Specifying a path outside of these directory trees
+-- is invalid. The paths \/sdcard and \/data will be made available and
+-- treated as implicit path substitutions. E.g. if \/sdcard on a particular
+-- device does not map to external storage, the system will replace it with
+-- the external storage path prefix for that device and copy the file
+-- there. It is strongly advised to use the Environment API in app and test
+-- code to access files on the device in a portable way.
 rfDevicePath :: Lens' RegularFile (Maybe Text)
 rfDevicePath
   = lens _rfDevicePath (\ s a -> s{_rfDevicePath = a})
@@ -2162,20 +2586,21 @@ instance ToJSON RegularFile where
 -- /See:/ 'androidModel' smart constructor.
 data AndroidModel =
   AndroidModel'
-    { _amSupportedAbis        :: !(Maybe [Text])
-    , _amManufacturer         :: !(Maybe Text)
-    , _amCodename             :: !(Maybe Text)
+    { _amThumbnailURL :: !(Maybe Text)
+    , _amSupportedAbis :: !(Maybe [Text])
+    , _amManufacturer :: !(Maybe Text)
+    , _amCodename :: !(Maybe Text)
     , _amLowFpsVideoRecording :: !(Maybe Bool)
-    , _amFormFactor           :: !(Maybe AndroidModelFormFactor)
-    , _amBrand                :: !(Maybe Text)
-    , _amScreenX              :: !(Maybe (Textual Int32))
-    , _amScreenDensity        :: !(Maybe (Textual Int32))
-    , _amName                 :: !(Maybe Text)
-    , _amSupportedVersionIds  :: !(Maybe [Text])
-    , _amScreenY              :: !(Maybe (Textual Int32))
-    , _amId                   :: !(Maybe Text)
-    , _amForm                 :: !(Maybe AndroidModelForm)
-    , _amTags                 :: !(Maybe [Text])
+    , _amFormFactor :: !(Maybe AndroidModelFormFactor)
+    , _amBrand :: !(Maybe Text)
+    , _amScreenX :: !(Maybe (Textual Int32))
+    , _amScreenDensity :: !(Maybe (Textual Int32))
+    , _amName :: !(Maybe Text)
+    , _amSupportedVersionIds :: !(Maybe [Text])
+    , _amScreenY :: !(Maybe (Textual Int32))
+    , _amId :: !(Maybe Text)
+    , _amForm :: !(Maybe AndroidModelForm)
+    , _amTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2183,6 +2608,8 @@ data AndroidModel =
 -- | Creates a value of 'AndroidModel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'amThumbnailURL'
 --
 -- * 'amSupportedAbis'
 --
@@ -2215,7 +2642,8 @@ androidModel
     :: AndroidModel
 androidModel =
   AndroidModel'
-    { _amSupportedAbis = Nothing
+    { _amThumbnailURL = Nothing
+    , _amSupportedAbis = Nothing
     , _amManufacturer = Nothing
     , _amCodename = Nothing
     , _amLowFpsVideoRecording = Nothing
@@ -2231,6 +2659,13 @@ androidModel =
     , _amTags = Nothing
     }
 
+
+-- | URL of a thumbnail image (photo) of the device. e.g.
+-- https:\/\/lh3.googleusercontent.com\/90WcauuJiCYABEl8U0lcZeuS5STUbf2yW...
+amThumbnailURL :: Lens' AndroidModel (Maybe Text)
+amThumbnailURL
+  = lens _amThumbnailURL
+      (\ s a -> s{_amThumbnailURL = a})
 
 -- | The list of supported ABIs for this device. This corresponds to either
 -- android.os.Build.SUPPORTED_ABIS (for API level 21 and above) or
@@ -2327,8 +2762,9 @@ instance FromJSON AndroidModel where
           = withObject "AndroidModel"
               (\ o ->
                  AndroidModel' <$>
-                   (o .:? "supportedAbis" .!= mempty) <*>
-                     (o .:? "manufacturer")
+                   (o .:? "thumbnailUrl") <*>
+                     (o .:? "supportedAbis" .!= mempty)
+                     <*> (o .:? "manufacturer")
                      <*> (o .:? "codename")
                      <*> (o .:? "lowFpsVideoRecording")
                      <*> (o .:? "formFactor")
@@ -2346,7 +2782,8 @@ instance ToJSON AndroidModel where
         toJSON AndroidModel'{..}
           = object
               (catMaybes
-                 [("supportedAbis" .=) <$> _amSupportedAbis,
+                 [("thumbnailUrl" .=) <$> _amThumbnailURL,
+                  ("supportedAbis" .=) <$> _amSupportedAbis,
                   ("manufacturer" .=) <$> _amManufacturer,
                   ("codename" .=) <$> _amCodename,
                   ("lowFpsVideoRecording" .=) <$>
@@ -2366,7 +2803,7 @@ instance ToJSON AndroidModel where
 -- /See:/ 'clientInfo' smart constructor.
 data ClientInfo =
   ClientInfo'
-    { _ciName              :: !(Maybe Text)
+    { _ciName :: !(Maybe Text)
     , _ciClientInfoDetails :: !(Maybe [ClientInfoDetail])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2411,6 +2848,58 @@ instance ToJSON ClientInfo where
                  [("name" .=) <$> _ciName,
                   ("clientInfoDetails" .=) <$> _ciClientInfoDetails])
 
+-- | Options for enabling sharding.
+--
+-- /See:/ 'shardingOption' smart constructor.
+data ShardingOption =
+  ShardingOption'
+    { _soUniformSharding :: !(Maybe UniformSharding)
+    , _soManualSharding :: !(Maybe ManualSharding)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ShardingOption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'soUniformSharding'
+--
+-- * 'soManualSharding'
+shardingOption
+    :: ShardingOption
+shardingOption =
+  ShardingOption' {_soUniformSharding = Nothing, _soManualSharding = Nothing}
+
+
+-- | Uniformly shards test cases given a total number of shards.
+soUniformSharding :: Lens' ShardingOption (Maybe UniformSharding)
+soUniformSharding
+  = lens _soUniformSharding
+      (\ s a -> s{_soUniformSharding = a})
+
+-- | Shards test cases into the specified groups of packages, classes,
+-- and\/or methods.
+soManualSharding :: Lens' ShardingOption (Maybe ManualSharding)
+soManualSharding
+  = lens _soManualSharding
+      (\ s a -> s{_soManualSharding = a})
+
+instance FromJSON ShardingOption where
+        parseJSON
+          = withObject "ShardingOption"
+              (\ o ->
+                 ShardingOption' <$>
+                   (o .:? "uniformSharding") <*>
+                     (o .:? "manualSharding"))
+
+instance ToJSON ShardingOption where
+        toJSON ShardingOption'{..}
+          = object
+              (catMaybes
+                 [("uniformSharding" .=) <$> _soUniformSharding,
+                  ("manualSharding" .=) <$> _soManualSharding])
+
 -- | An Android app manifest. See
 -- http:\/\/developer.android.com\/guide\/topics\/manifest\/manifest-intro.html
 --
@@ -2418,11 +2907,12 @@ instance ToJSON ClientInfo where
 data APKManifest =
   APKManifest'
     { _apkmApplicationLabel :: !(Maybe Text)
-    , _apkmMinSdkVersion    :: !(Maybe (Textual Int32))
+    , _apkmMinSdkVersion :: !(Maybe (Textual Int32))
     , _apkmTargetSdkVersion :: !(Maybe (Textual Int32))
-    , _apkmPackageName      :: !(Maybe Text)
-    , _apkmIntentFilters    :: !(Maybe [IntentFilter])
-    , _apkmMaxSdkVersion    :: !(Maybe (Textual Int32))
+    , _apkmPackageName :: !(Maybe Text)
+    , _apkmIntentFilters :: !(Maybe [IntentFilter])
+    , _apkmMaxSdkVersion :: !(Maybe (Textual Int32))
+    , _apkmUsesPermission :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2442,6 +2932,8 @@ data APKManifest =
 -- * 'apkmIntentFilters'
 --
 -- * 'apkmMaxSdkVersion'
+--
+-- * 'apkmUsesPermission'
 aPKManifest
     :: APKManifest
 aPKManifest =
@@ -2452,6 +2944,7 @@ aPKManifest =
     , _apkmPackageName = Nothing
     , _apkmIntentFilters = Nothing
     , _apkmMaxSdkVersion = Nothing
+    , _apkmUsesPermission = Nothing
     }
 
 
@@ -2496,6 +2989,14 @@ apkmMaxSdkVersion
       (\ s a -> s{_apkmMaxSdkVersion = a})
       . mapping _Coerce
 
+-- | Permissions declared to be used by the application
+apkmUsesPermission :: Lens' APKManifest [Text]
+apkmUsesPermission
+  = lens _apkmUsesPermission
+      (\ s a -> s{_apkmUsesPermission = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON APKManifest where
         parseJSON
           = withObject "APKManifest"
@@ -2506,7 +3007,8 @@ instance FromJSON APKManifest where
                      <*> (o .:? "targetSdkVersion")
                      <*> (o .:? "packageName")
                      <*> (o .:? "intentFilters" .!= mempty)
-                     <*> (o .:? "maxSdkVersion"))
+                     <*> (o .:? "maxSdkVersion")
+                     <*> (o .:? "usesPermission" .!= mempty))
 
 instance ToJSON APKManifest where
         toJSON APKManifest'{..}
@@ -2517,11 +3019,11 @@ instance ToJSON APKManifest where
                   ("targetSdkVersion" .=) <$> _apkmTargetSdkVersion,
                   ("packageName" .=) <$> _apkmPackageName,
                   ("intentFilters" .=) <$> _apkmIntentFilters,
-                  ("maxSdkVersion" .=) <$> _apkmMaxSdkVersion])
+                  ("maxSdkVersion" .=) <$> _apkmMaxSdkVersion,
+                  ("usesPermission" .=) <$> _apkmUsesPermission])
 
 -- | An Android App Bundle file format, containing a BundleConfig.pb file, a
 -- base module directory, zero or more dynamic feature module directories.
---
 -- See https:\/\/developer.android.com\/guide\/app-bundle\/build for
 -- guidance on building App Bundles.
 --
@@ -2571,14 +3073,15 @@ instance ToJSON AppBundle where
 -- /See:/ 'androidInstrumentationTest' smart constructor.
 data AndroidInstrumentationTest =
   AndroidInstrumentationTest'
-    { _aitTestTargets        :: !(Maybe [Text])
-    , _aitTestRunnerClass    :: !(Maybe Text)
-    , _aitAppPackageId       :: !(Maybe Text)
-    , _aitTestAPK            :: !(Maybe FileReference)
+    { _aitTestTargets :: !(Maybe [Text])
+    , _aitTestRunnerClass :: !(Maybe Text)
+    , _aitAppPackageId :: !(Maybe Text)
+    , _aitTestAPK :: !(Maybe FileReference)
+    , _aitShardingOption :: !(Maybe ShardingOption)
     , _aitOrchestratorOption :: !(Maybe AndroidInstrumentationTestOrchestratorOption)
-    , _aitAppBundle          :: !(Maybe AppBundle)
-    , _aitAppAPK             :: !(Maybe FileReference)
-    , _aitTestPackageId      :: !(Maybe Text)
+    , _aitAppBundle :: !(Maybe AppBundle)
+    , _aitAppAPK :: !(Maybe FileReference)
+    , _aitTestPackageId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2595,6 +3098,8 @@ data AndroidInstrumentationTest =
 --
 -- * 'aitTestAPK'
 --
+-- * 'aitShardingOption'
+--
 -- * 'aitOrchestratorOption'
 --
 -- * 'aitAppBundle'
@@ -2610,6 +3115,7 @@ androidInstrumentationTest =
     , _aitTestRunnerClass = Nothing
     , _aitAppPackageId = Nothing
     , _aitTestAPK = Nothing
+    , _aitShardingOption = Nothing
     , _aitOrchestratorOption = Nothing
     , _aitAppBundle = Nothing
     , _aitAppAPK = Nothing
@@ -2647,6 +3153,12 @@ aitAppPackageId
 aitTestAPK :: Lens' AndroidInstrumentationTest (Maybe FileReference)
 aitTestAPK
   = lens _aitTestAPK (\ s a -> s{_aitTestAPK = a})
+
+-- | The option to run tests in multiple shards in parallel.
+aitShardingOption :: Lens' AndroidInstrumentationTest (Maybe ShardingOption)
+aitShardingOption
+  = lens _aitShardingOption
+      (\ s a -> s{_aitShardingOption = a})
 
 -- | The option of whether running each test within its own invocation of
 -- instrumentation with Android Test Orchestrator or not. ** Orchestrator
@@ -2686,6 +3198,7 @@ instance FromJSON AndroidInstrumentationTest where
                      (o .:? "testRunnerClass")
                      <*> (o .:? "appPackageId")
                      <*> (o .:? "testApk")
+                     <*> (o .:? "shardingOption")
                      <*> (o .:? "orchestratorOption")
                      <*> (o .:? "appBundle")
                      <*> (o .:? "appApk")
@@ -2699,28 +3212,32 @@ instance ToJSON AndroidInstrumentationTest where
                   ("testRunnerClass" .=) <$> _aitTestRunnerClass,
                   ("appPackageId" .=) <$> _aitAppPackageId,
                   ("testApk" .=) <$> _aitTestAPK,
+                  ("shardingOption" .=) <$> _aitShardingOption,
                   ("orchestratorOption" .=) <$> _aitOrchestratorOption,
                   ("appBundle" .=) <$> _aitAppBundle,
                   ("appApk" .=) <$> _aitAppAPK,
                   ("testPackageId" .=) <$> _aitTestPackageId])
 
--- | A group of one or more TestExecutions, built by taking a product of
--- values over a pre-defined set of axes.
+-- | TestMatrix captures all details about a test. It contains the
+-- environment configuration, test specification, test executions and
+-- overall state and outcome.
 --
 -- /See:/ 'testMatrix' smart constructor.
 data TestMatrix =
   TestMatrix'
-    { _tmState                :: !(Maybe TestMatrixState)
-    , _tmTestMatrixId         :: !(Maybe Text)
-    , _tmTestSpecification    :: !(Maybe TestSpecification)
-    , _tmFlakyTestAttempts    :: !(Maybe (Textual Int32))
-    , _tmClientInfo           :: !(Maybe ClientInfo)
-    , _tmTestExecutions       :: !(Maybe [TestExecution])
-    , _tmResultStorage        :: !(Maybe ResultStorage)
+    { _tmState :: !(Maybe TestMatrixState)
+    , _tmTestMatrixId :: !(Maybe Text)
+    , _tmTestSpecification :: !(Maybe TestSpecification)
+    , _tmOutcomeSummary :: !(Maybe TestMatrixOutcomeSummary)
+    , _tmFlakyTestAttempts :: !(Maybe (Textual Int32))
+    , _tmClientInfo :: !(Maybe ClientInfo)
+    , _tmTestExecutions :: !(Maybe [TestExecution])
+    , _tmFailFast :: !(Maybe Bool)
+    , _tmResultStorage :: !(Maybe ResultStorage)
     , _tmInvalidMatrixDetails :: !(Maybe TestMatrixInvalidMatrixDetails)
-    , _tmProjectId            :: !(Maybe Text)
-    , _tmEnvironmentMatrix    :: !(Maybe EnvironmentMatrix)
-    , _tmTimestamp            :: !(Maybe DateTime')
+    , _tmProjectId :: !(Maybe Text)
+    , _tmEnvironmentMatrix :: !(Maybe EnvironmentMatrix)
+    , _tmTimestamp :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2735,11 +3252,15 @@ data TestMatrix =
 --
 -- * 'tmTestSpecification'
 --
+-- * 'tmOutcomeSummary'
+--
 -- * 'tmFlakyTestAttempts'
 --
 -- * 'tmClientInfo'
 --
 -- * 'tmTestExecutions'
+--
+-- * 'tmFailFast'
 --
 -- * 'tmResultStorage'
 --
@@ -2757,9 +3278,11 @@ testMatrix =
     { _tmState = Nothing
     , _tmTestMatrixId = Nothing
     , _tmTestSpecification = Nothing
+    , _tmOutcomeSummary = Nothing
     , _tmFlakyTestAttempts = Nothing
     , _tmClientInfo = Nothing
     , _tmTestExecutions = Nothing
+    , _tmFailFast = Nothing
     , _tmResultStorage = Nothing
     , _tmInvalidMatrixDetails = Nothing
     , _tmProjectId = Nothing
@@ -2768,8 +3291,7 @@ testMatrix =
     }
 
 
--- | Output only. Indicates the current progress of the test matrix (e.g.,
--- FINISHED).
+-- | Output only. Indicates the current progress of the test matrix.
 tmState :: Lens' TestMatrix (Maybe TestMatrixState)
 tmState = lens _tmState (\ s a -> s{_tmState = a})
 
@@ -2784,6 +3306,13 @@ tmTestSpecification :: Lens' TestMatrix (Maybe TestSpecification)
 tmTestSpecification
   = lens _tmTestSpecification
       (\ s a -> s{_tmTestSpecification = a})
+
+-- | Output Only. The overall outcome of the test. Only set when the test
+-- matrix state is FINISHED.
+tmOutcomeSummary :: Lens' TestMatrix (Maybe TestMatrixOutcomeSummary)
+tmOutcomeSummary
+  = lens _tmOutcomeSummary
+      (\ s a -> s{_tmOutcomeSummary = a})
 
 -- | The number of times a TestExecution should be re-attempted if one or
 -- more of its test cases fail for any reason. The maximum number of reruns
@@ -2808,6 +3337,17 @@ tmTestExecutions
       . _Default
       . _Coerce
 
+-- | If true, only a single attempt at most will be made to run each
+-- execution\/shard in the matrix. Flaky test attempts are not affected.
+-- Normally, 2 or more attempts are made if a potential infrastructure
+-- issue is detected. This feature is for latency sensitive workloads. The
+-- incidence of execution failures may be significantly greater for
+-- fail-fast matrices and support is more limited because of that
+-- expectation.
+tmFailFast :: Lens' TestMatrix (Maybe Bool)
+tmFailFast
+  = lens _tmFailFast (\ s a -> s{_tmFailFast = a})
+
 -- | Required. Where the results for the matrix are written.
 tmResultStorage :: Lens' TestMatrix (Maybe ResultStorage)
 tmResultStorage
@@ -2826,7 +3366,7 @@ tmProjectId :: Lens' TestMatrix (Maybe Text)
 tmProjectId
   = lens _tmProjectId (\ s a -> s{_tmProjectId = a})
 
--- | Required. How the host machine(s) are configured.
+-- | Required. The devices the tests are being executed on.
 tmEnvironmentMatrix :: Lens' TestMatrix (Maybe EnvironmentMatrix)
 tmEnvironmentMatrix
   = lens _tmEnvironmentMatrix
@@ -2845,9 +3385,11 @@ instance FromJSON TestMatrix where
                  TestMatrix' <$>
                    (o .:? "state") <*> (o .:? "testMatrixId") <*>
                      (o .:? "testSpecification")
+                     <*> (o .:? "outcomeSummary")
                      <*> (o .:? "flakyTestAttempts")
                      <*> (o .:? "clientInfo")
                      <*> (o .:? "testExecutions" .!= mempty)
+                     <*> (o .:? "failFast")
                      <*> (o .:? "resultStorage")
                      <*> (o .:? "invalidMatrixDetails")
                      <*> (o .:? "projectId")
@@ -2861,9 +3403,11 @@ instance ToJSON TestMatrix where
                  [("state" .=) <$> _tmState,
                   ("testMatrixId" .=) <$> _tmTestMatrixId,
                   ("testSpecification" .=) <$> _tmTestSpecification,
+                  ("outcomeSummary" .=) <$> _tmOutcomeSummary,
                   ("flakyTestAttempts" .=) <$> _tmFlakyTestAttempts,
                   ("clientInfo" .=) <$> _tmClientInfo,
                   ("testExecutions" .=) <$> _tmTestExecutions,
+                  ("failFast" .=) <$> _tmFailFast,
                   ("resultStorage" .=) <$> _tmResultStorage,
                   ("invalidMatrixDetails" .=) <$>
                     _tmInvalidMatrixDetails,
@@ -2916,8 +3460,8 @@ instance ToJSON CancelTestMatrixResponse where
 data ToolResultsExecution =
   ToolResultsExecution'
     { _treExecutionId :: !(Maybe Text)
-    , _treHistoryId   :: !(Maybe Text)
-    , _treProjectId   :: !(Maybe Text)
+    , _treHistoryId :: !(Maybe Text)
+    , _treProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2973,6 +3517,48 @@ instance ToJSON ToolResultsExecution where
                   ("historyId" .=) <$> _treHistoryId,
                   ("projectId" .=) <$> _treProjectId])
 
+-- | Uniformly shards test cases given a total number of shards. For
+-- Instrumentation test, it will be translated to \"-e numShard\" \"-e
+-- shardIndex\" AndroidJUnitRunner arguments. With uniform sharding
+-- enabled, specifying these sharding arguments via environment_variables
+-- is invalid.
+--
+-- /See:/ 'uniformSharding' smart constructor.
+newtype UniformSharding =
+  UniformSharding'
+    { _usNumShards :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UniformSharding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usNumShards'
+uniformSharding
+    :: UniformSharding
+uniformSharding = UniformSharding' {_usNumShards = Nothing}
+
+
+-- | Required. Total number of shards. When any physical devices are
+-- selected, the number must be >= 1 and \<= 50. When no physical devices
+-- are selected, the number must be >= 1 and \<= 500.
+usNumShards :: Lens' UniformSharding (Maybe Int32)
+usNumShards
+  = lens _usNumShards (\ s a -> s{_usNumShards = a}) .
+      mapping _Coerce
+
+instance FromJSON UniformSharding where
+        parseJSON
+          = withObject "UniformSharding"
+              (\ o -> UniformSharding' <$> (o .:? "numShards"))
+
+instance ToJSON UniformSharding where
+        toJSON UniformSharding'{..}
+          = object
+              (catMaybes [("numShards" .=) <$> _usNumShards])
+
 -- | A test of an iOS application that uses the XCTest framework. Xcode
 -- supports the option to \"build for testing\", which generates an
 -- .xctestrun file that contains a test specification (arguments, test
@@ -2983,10 +3569,11 @@ instance ToJSON ToolResultsExecution where
 -- /See:/ 'iosXcTest' smart constructor.
 data IosXcTest =
   IosXcTest'
-    { _ixtXctestrun    :: !(Maybe FileReference)
+    { _ixtXctestrun :: !(Maybe FileReference)
     , _ixtXcodeVersion :: !(Maybe Text)
-    , _ixtAppBundleId  :: !(Maybe Text)
-    , _ixtTestsZip     :: !(Maybe FileReference)
+    , _ixtTestSpecialEntitlements :: !(Maybe Bool)
+    , _ixtAppBundleId :: !(Maybe Text)
+    , _ixtTestsZip :: !(Maybe FileReference)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2999,6 +3586,8 @@ data IosXcTest =
 --
 -- * 'ixtXcodeVersion'
 --
+-- * 'ixtTestSpecialEntitlements'
+--
 -- * 'ixtAppBundleId'
 --
 -- * 'ixtTestsZip'
@@ -3008,6 +3597,7 @@ iosXcTest =
   IosXcTest'
     { _ixtXctestrun = Nothing
     , _ixtXcodeVersion = Nothing
+    , _ixtTestSpecialEntitlements = Nothing
     , _ixtAppBundleId = Nothing
     , _ixtTestsZip = Nothing
     }
@@ -3029,6 +3619,15 @@ ixtXcodeVersion
   = lens _ixtXcodeVersion
       (\ s a -> s{_ixtXcodeVersion = a})
 
+-- | The option to test special app entitlements. Setting this would re-sign
+-- the app having special entitlements with an explicit
+-- application-identifier. Currently supports testing aps-environment
+-- entitlement.
+ixtTestSpecialEntitlements :: Lens' IosXcTest (Maybe Bool)
+ixtTestSpecialEntitlements
+  = lens _ixtTestSpecialEntitlements
+      (\ s a -> s{_ixtTestSpecialEntitlements = a})
+
 -- | Output only. The bundle id for the application under test.
 ixtAppBundleId :: Lens' IosXcTest (Maybe Text)
 ixtAppBundleId
@@ -3048,7 +3647,8 @@ instance FromJSON IosXcTest where
               (\ o ->
                  IosXcTest' <$>
                    (o .:? "xctestrun") <*> (o .:? "xcodeVersion") <*>
-                     (o .:? "appBundleId")
+                     (o .:? "testSpecialEntitlements")
+                     <*> (o .:? "appBundleId")
                      <*> (o .:? "testsZip"))
 
 instance ToJSON IosXcTest where
@@ -3057,6 +3657,8 @@ instance ToJSON IosXcTest where
               (catMaybes
                  [("xctestrun" .=) <$> _ixtXctestrun,
                   ("xcodeVersion" .=) <$> _ixtXcodeVersion,
+                  ("testSpecialEntitlements" .=) <$>
+                    _ixtTestSpecialEntitlements,
                   ("appBundleId" .=) <$> _ixtAppBundleId,
                   ("testsZip" .=) <$> _ixtTestsZip])
 
@@ -3065,9 +3667,10 @@ instance ToJSON IosXcTest where
 -- /See:/ 'resultStorage' smart constructor.
 data ResultStorage =
   ResultStorage'
-    { _rsToolResultsHistory   :: !(Maybe ToolResultsHistory)
+    { _rsToolResultsHistory :: !(Maybe ToolResultsHistory)
+    , _rsResultsURL :: !(Maybe Text)
     , _rsToolResultsExecution :: !(Maybe ToolResultsExecution)
-    , _rsGoogleCloudStorage   :: !(Maybe GoogleCloudStorage)
+    , _rsGoogleCloudStorage :: !(Maybe GoogleCloudStorage)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3078,6 +3681,8 @@ data ResultStorage =
 --
 -- * 'rsToolResultsHistory'
 --
+-- * 'rsResultsURL'
+--
 -- * 'rsToolResultsExecution'
 --
 -- * 'rsGoogleCloudStorage'
@@ -3086,6 +3691,7 @@ resultStorage
 resultStorage =
   ResultStorage'
     { _rsToolResultsHistory = Nothing
+    , _rsResultsURL = Nothing
     , _rsToolResultsExecution = Nothing
     , _rsGoogleCloudStorage = Nothing
     }
@@ -3098,6 +3704,11 @@ rsToolResultsHistory :: Lens' ResultStorage (Maybe ToolResultsHistory)
 rsToolResultsHistory
   = lens _rsToolResultsHistory
       (\ s a -> s{_rsToolResultsHistory = a})
+
+-- | Output only. URL to the results in the Firebase Web Console.
+rsResultsURL :: Lens' ResultStorage (Maybe Text)
+rsResultsURL
+  = lens _rsResultsURL (\ s a -> s{_rsResultsURL = a})
 
 -- | Output only. The tool results execution that results are written to.
 rsToolResultsExecution :: Lens' ResultStorage (Maybe ToolResultsExecution)
@@ -3116,8 +3727,8 @@ instance FromJSON ResultStorage where
           = withObject "ResultStorage"
               (\ o ->
                  ResultStorage' <$>
-                   (o .:? "toolResultsHistory") <*>
-                     (o .:? "toolResultsExecution")
+                   (o .:? "toolResultsHistory") <*> (o .:? "resultsUrl")
+                     <*> (o .:? "toolResultsExecution")
                      <*> (o .:? "googleCloudStorage"))
 
 instance ToJSON ResultStorage where
@@ -3125,6 +3736,7 @@ instance ToJSON ResultStorage where
           = object
               (catMaybes
                  [("toolResultsHistory" .=) <$> _rsToolResultsHistory,
+                  ("resultsUrl" .=) <$> _rsResultsURL,
                   ("toolResultsExecution" .=) <$>
                     _rsToolResultsExecution,
                   ("googleCloudStorage" .=) <$> _rsGoogleCloudStorage])
@@ -3138,10 +3750,10 @@ instance ToJSON ResultStorage where
 -- /See:/ 'androidMatrix' smart constructor.
 data AndroidMatrix =
   AndroidMatrix'
-    { _amAndroidModelIds   :: !(Maybe [Text])
+    { _amAndroidModelIds :: !(Maybe [Text])
     , _amAndroidVersionIds :: !(Maybe [Text])
-    , _amOrientations      :: !(Maybe [Text])
-    , _amLocales           :: !(Maybe [Text])
+    , _amOrientations :: !(Maybe [Text])
+    , _amLocales :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3229,9 +3841,9 @@ instance ToJSON AndroidMatrix where
 data ToolResultsStep =
   ToolResultsStep'
     { _trsExecutionId :: !(Maybe Text)
-    , _trsStepId      :: !(Maybe Text)
-    , _trsHistoryId   :: !(Maybe Text)
-    , _trsProjectId   :: !(Maybe Text)
+    , _trsStepId :: !(Maybe Text)
+    , _trsHistoryId :: !(Maybe Text)
+    , _trsProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3296,6 +3908,63 @@ instance ToJSON ToolResultsStep where
                   ("stepId" .=) <$> _trsStepId,
                   ("historyId" .=) <$> _trsHistoryId,
                   ("projectId" .=) <$> _trsProjectId])
+
+-- | A single device IP block
+--
+-- /See:/ 'deviceIPBlock' smart constructor.
+data DeviceIPBlock =
+  DeviceIPBlock'
+    { _dibAddedDate :: !(Maybe Date)
+    , _dibBlock :: !(Maybe Text)
+    , _dibForm :: !(Maybe DeviceIPBlockForm)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeviceIPBlock' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dibAddedDate'
+--
+-- * 'dibBlock'
+--
+-- * 'dibForm'
+deviceIPBlock
+    :: DeviceIPBlock
+deviceIPBlock =
+  DeviceIPBlock'
+    {_dibAddedDate = Nothing, _dibBlock = Nothing, _dibForm = Nothing}
+
+
+-- | The date this block was added to Firebase Test Lab
+dibAddedDate :: Lens' DeviceIPBlock (Maybe Date)
+dibAddedDate
+  = lens _dibAddedDate (\ s a -> s{_dibAddedDate = a})
+
+-- | An IP address block in CIDR notation eg: 34.68.194.64\/29
+dibBlock :: Lens' DeviceIPBlock (Maybe Text)
+dibBlock = lens _dibBlock (\ s a -> s{_dibBlock = a})
+
+-- | Whether this block is used by physical or virtual devices
+dibForm :: Lens' DeviceIPBlock (Maybe DeviceIPBlockForm)
+dibForm = lens _dibForm (\ s a -> s{_dibForm = a})
+
+instance FromJSON DeviceIPBlock where
+        parseJSON
+          = withObject "DeviceIPBlock"
+              (\ o ->
+                 DeviceIPBlock' <$>
+                   (o .:? "addedDate") <*> (o .:? "block") <*>
+                     (o .:? "form"))
+
+instance ToJSON DeviceIPBlock where
+        toJSON DeviceIPBlock'{..}
+          = object
+              (catMaybes
+                 [("addedDate" .=) <$> _dibAddedDate,
+                  ("block" .=) <$> _dibBlock,
+                  ("form" .=) <$> _dibForm])
 
 -- | Specifies an intent that starts the main launcher activity.
 --
@@ -3362,9 +4031,9 @@ instance ToJSON APKDetail where
 data AndroidDevice =
   AndroidDevice'
     { _adAndroidVersionId :: !(Maybe Text)
-    , _adLocale           :: !(Maybe Text)
-    , _adAndroidModelId   :: !(Maybe Text)
-    , _adOrientation      :: !(Maybe Text)
+    , _adLocale :: !(Maybe Text)
+    , _adAndroidModelId :: !(Maybe Text)
+    , _adOrientation :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3441,7 +4110,7 @@ instance ToJSON AndroidDevice where
 data EnvironmentVariable =
   EnvironmentVariable'
     { _evValue :: !(Maybe Text)
-    , _evKey   :: !(Maybe Text)
+    , _evKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3480,13 +4149,52 @@ instance ToJSON EnvironmentVariable where
               (catMaybes
                  [("value" .=) <$> _evValue, ("key" .=) <$> _evKey])
 
+-- | List of IP blocks used by the Firebase Test Lab
+--
+-- /See:/ 'deviceIPBlockCatalog' smart constructor.
+newtype DeviceIPBlockCatalog =
+  DeviceIPBlockCatalog'
+    { _dibcIPBlocks :: Maybe [DeviceIPBlock]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeviceIPBlockCatalog' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dibcIPBlocks'
+deviceIPBlockCatalog
+    :: DeviceIPBlockCatalog
+deviceIPBlockCatalog = DeviceIPBlockCatalog' {_dibcIPBlocks = Nothing}
+
+
+-- | The device IP blocks used by Firebase Test Lab
+dibcIPBlocks :: Lens' DeviceIPBlockCatalog [DeviceIPBlock]
+dibcIPBlocks
+  = lens _dibcIPBlocks (\ s a -> s{_dibcIPBlocks = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DeviceIPBlockCatalog where
+        parseJSON
+          = withObject "DeviceIPBlockCatalog"
+              (\ o ->
+                 DeviceIPBlockCatalog' <$>
+                   (o .:? "ipBlocks" .!= mempty))
+
+instance ToJSON DeviceIPBlockCatalog where
+        toJSON DeviceIPBlockCatalog'{..}
+          = object
+              (catMaybes [("ipBlocks" .=) <$> _dibcIPBlocks])
+
 -- | Screen orientation of the device.
 --
 -- /See:/ 'orientation' smart constructor.
 data Orientation =
   Orientation'
     { _oName :: !(Maybe Text)
-    , _oId   :: !(Maybe Text)
+    , _oId :: !(Maybe Text)
     , _oTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3540,8 +4248,8 @@ instance ToJSON Orientation where
 -- /See:/ 'environmentMatrix' smart constructor.
 data EnvironmentMatrix =
   EnvironmentMatrix'
-    { _emIosDeviceList     :: !(Maybe IosDeviceList)
-    , _emAndroidMatrix     :: !(Maybe AndroidMatrix)
+    { _emIosDeviceList :: !(Maybe IosDeviceList)
+    , _emAndroidMatrix :: !(Maybe AndroidMatrix)
     , _emAndroidDeviceList :: !(Maybe AndroidDeviceList)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3607,7 +4315,7 @@ instance ToJSON EnvironmentMatrix where
 data DeviceFile =
   DeviceFile'
     { _dfRegularFile :: !(Maybe RegularFile)
-    , _dfObbFile     :: !(Maybe ObbFile)
+    , _dfObbFile :: !(Maybe ObbFile)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3624,13 +4332,13 @@ deviceFile
 deviceFile = DeviceFile' {_dfRegularFile = Nothing, _dfObbFile = Nothing}
 
 
--- | A reference to a regular file
+-- | A reference to a regular file.
 dfRegularFile :: Lens' DeviceFile (Maybe RegularFile)
 dfRegularFile
   = lens _dfRegularFile
       (\ s a -> s{_dfRegularFile = a})
 
--- | A reference to an opaque binary blob file
+-- | A reference to an opaque binary blob file.
 dfObbFile :: Lens' DeviceFile (Maybe ObbFile)
 dfObbFile
   = lens _dfObbFile (\ s a -> s{_dfObbFile = a})
@@ -3649,6 +4357,53 @@ instance ToJSON DeviceFile where
                  [("regularFile" .=) <$> _dfRegularFile,
                   ("obbFile" .=) <$> _dfObbFile])
 
+-- | Shards test cases into the specified groups of packages, classes,
+-- and\/or methods. With manual sharding enabled, specifying test targets
+-- via environment_variables or in InstrumentationTest is invalid.
+--
+-- /See:/ 'manualSharding' smart constructor.
+newtype ManualSharding =
+  ManualSharding'
+    { _msTestTargetsForShard :: Maybe [TestTargetsForShard]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ManualSharding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'msTestTargetsForShard'
+manualSharding
+    :: ManualSharding
+manualSharding = ManualSharding' {_msTestTargetsForShard = Nothing}
+
+
+-- | Required. Group of packages, classes, and\/or test methods to be run for
+-- each shard. When any physical devices are selected, the number of
+-- test_targets_for_shard must be >= 1 and \<= 50. When no physical devices
+-- are selected, the number must be >= 1 and \<= 500.
+msTestTargetsForShard :: Lens' ManualSharding [TestTargetsForShard]
+msTestTargetsForShard
+  = lens _msTestTargetsForShard
+      (\ s a -> s{_msTestTargetsForShard = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ManualSharding where
+        parseJSON
+          = withObject "ManualSharding"
+              (\ o ->
+                 ManualSharding' <$>
+                   (o .:? "testTargetsForShard" .!= mempty))
+
+instance ToJSON ManualSharding where
+        toJSON ManualSharding'{..}
+          = object
+              (catMaybes
+                 [("testTargetsForShard" .=) <$>
+                    _msTestTargetsForShard])
+
 -- | Key-value pair of detailed information about the client which invoked
 -- the test. Examples: {\'Version\', \'1.0\'}, {\'Release Track\',
 -- \'BETA\'}.
@@ -3657,7 +4412,7 @@ instance ToJSON DeviceFile where
 data ClientInfoDetail =
   ClientInfoDetail'
     { _cidValue :: !(Maybe Text)
-    , _cidKey   :: !(Maybe Text)
+    , _cidKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3700,8 +4455,8 @@ instance ToJSON ClientInfoDetail where
 data NetworkConfiguration =
   NetworkConfiguration'
     { _ncDownRule :: !(Maybe TrafficRule)
-    , _ncId       :: !(Maybe Text)
-    , _ncUpRule   :: !(Maybe TrafficRule)
+    , _ncId :: !(Maybe Text)
+    , _ncUpRule :: !(Maybe TrafficRule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3756,7 +4511,7 @@ instance ToJSON NetworkConfiguration where
 data IosRuntimeConfiguration =
   IosRuntimeConfiguration'
     { _ircOrientations :: !(Maybe [Orientation])
-    , _ircLocales      :: !(Maybe [Locale])
+    , _ircLocales :: !(Maybe [Locale])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3845,13 +4600,13 @@ instance ToJSON GoogleCloudStorage where
 -- /See:/ 'androidVersion' smart constructor.
 data AndroidVersion =
   AndroidVersion'
-    { _avCodeName      :: !(Maybe Text)
-    , _avDistribution  :: !(Maybe Distribution)
-    , _avAPILevel      :: !(Maybe (Textual Int32))
+    { _avCodeName :: !(Maybe Text)
+    , _avDistribution :: !(Maybe Distribution)
+    , _avAPILevel :: !(Maybe (Textual Int32))
     , _avVersionString :: !(Maybe Text)
-    , _avId            :: !(Maybe Text)
-    , _avReleaseDate   :: !(Maybe Date)
-    , _avTags          :: !(Maybe [Text])
+    , _avId :: !(Maybe Text)
+    , _avReleaseDate :: !(Maybe Date)
+    , _avTags :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3960,7 +4715,7 @@ instance ToJSON AndroidVersion where
 -- /See:/ 'obbFile' smart constructor.
 data ObbFile =
   ObbFile'
-    { _ofObb         :: !(Maybe FileReference)
+    { _ofObb :: !(Maybe FileReference)
     , _ofObbFileName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4010,11 +4765,11 @@ instance ToJSON ObbFile where
 -- /See:/ 'androidTestLoop' smart constructor.
 data AndroidTestLoop =
   AndroidTestLoop'
-    { _atlScenarios      :: !(Maybe [Textual Int32])
+    { _atlScenarios :: !(Maybe [Textual Int32])
     , _atlScenarioLabels :: !(Maybe [Text])
-    , _atlAppPackageId   :: !(Maybe Text)
-    , _atlAppBundle      :: !(Maybe AppBundle)
-    , _atlAppAPK         :: !(Maybe FileReference)
+    , _atlAppPackageId :: !(Maybe Text)
+    , _atlAppBundle :: !(Maybe AppBundle)
+    , _atlAppAPK :: !(Maybe FileReference)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4151,12 +4906,14 @@ instance ToJSON AndroidDeviceList where
 -- /See:/ 'testSetup' smart constructor.
 data TestSetup =
   TestSetup'
-    { _tsAccount              :: !(Maybe Account)
-    , _tsNetworkProFile       :: !(Maybe Text)
+    { _tsDontAutograntPermissions :: !(Maybe Bool)
+    , _tsSystrace :: !(Maybe SystraceSetup)
+    , _tsAccount :: !(Maybe Account)
+    , _tsNetworkProFile :: !(Maybe Text)
     , _tsEnvironmentVariables :: !(Maybe [EnvironmentVariable])
-    , _tsAdditionalAPKs       :: !(Maybe [APK])
-    , _tsFilesToPush          :: !(Maybe [DeviceFile])
-    , _tsDirectoriesToPull    :: !(Maybe [Text])
+    , _tsAdditionalAPKs :: !(Maybe [APK])
+    , _tsFilesToPush :: !(Maybe [DeviceFile])
+    , _tsDirectoriesToPull :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4164,6 +4921,10 @@ data TestSetup =
 -- | Creates a value of 'TestSetup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsDontAutograntPermissions'
+--
+-- * 'tsSystrace'
 --
 -- * 'tsAccount'
 --
@@ -4180,7 +4941,9 @@ testSetup
     :: TestSetup
 testSetup =
   TestSetup'
-    { _tsAccount = Nothing
+    { _tsDontAutograntPermissions = Nothing
+    , _tsSystrace = Nothing
+    , _tsAccount = Nothing
     , _tsNetworkProFile = Nothing
     , _tsEnvironmentVariables = Nothing
     , _tsAdditionalAPKs = Nothing
@@ -4188,6 +4951,22 @@ testSetup =
     , _tsDirectoriesToPull = Nothing
     }
 
+
+-- | Whether to prevent all runtime permissions to be granted at app install
+tsDontAutograntPermissions :: Lens' TestSetup (Maybe Bool)
+tsDontAutograntPermissions
+  = lens _tsDontAutograntPermissions
+      (\ s a -> s{_tsDontAutograntPermissions = a})
+
+-- | Deprecated: Systrace uses Python 2 which has been sunset 2020-01-01.
+-- Support of Systrace may stop at any time, at which point no Systrace
+-- file will be provided in the results. Systrace configuration for the
+-- run. If set a systrace will be taken, starting on test start and lasting
+-- for the configured duration. The systrace file thus obtained is put in
+-- the results bucket together with the other artifacts from the run.
+tsSystrace :: Lens' TestSetup (Maybe SystraceSetup)
+tsSystrace
+  = lens _tsSystrace (\ s a -> s{_tsSystrace = a})
 
 -- | The device will be logged in on this account for the duration of the
 -- test.
@@ -4231,12 +5010,12 @@ tsFilesToPush
       . _Coerce
 
 -- | List of directories on the device to upload to GCS at the end of the
--- test; they must be absolute paths under \/sdcard or \/data\/local\/tmp.
--- Path names are restricted to characters a-z A-Z 0-9 _ - . + and \/ Note:
--- The paths \/sdcard and \/data will be made available and treated as
--- implicit path substitutions. E.g. if \/sdcard on a particular device
--- does not map to external storage, the system will replace it with the
--- external storage path prefix for that device.
+-- test; they must be absolute paths under \/sdcard, \/storage or
+-- \/data\/local\/tmp. Path names are restricted to characters a-z A-Z 0-9
+-- _ - . + and \/ Note: The paths \/sdcard and \/data will be made
+-- available and treated as implicit path substitutions. E.g. if \/sdcard
+-- on a particular device does not map to external storage, the system will
+-- replace it with the external storage path prefix for that device.
 tsDirectoriesToPull :: Lens' TestSetup [Text]
 tsDirectoriesToPull
   = lens _tsDirectoriesToPull
@@ -4249,8 +5028,11 @@ instance FromJSON TestSetup where
           = withObject "TestSetup"
               (\ o ->
                  TestSetup' <$>
-                   (o .:? "account") <*> (o .:? "networkProfile") <*>
-                     (o .:? "environmentVariables" .!= mempty)
+                   (o .:? "dontAutograntPermissions") <*>
+                     (o .:? "systrace")
+                     <*> (o .:? "account")
+                     <*> (o .:? "networkProfile")
+                     <*> (o .:? "environmentVariables" .!= mempty)
                      <*> (o .:? "additionalApks" .!= mempty)
                      <*> (o .:? "filesToPush" .!= mempty)
                      <*> (o .:? "directoriesToPull" .!= mempty))
@@ -4259,7 +5041,10 @@ instance ToJSON TestSetup where
         toJSON TestSetup'{..}
           = object
               (catMaybes
-                 [("account" .=) <$> _tsAccount,
+                 [("dontAutograntPermissions" .=) <$>
+                    _tsDontAutograntPermissions,
+                  ("systrace" .=) <$> _tsSystrace,
+                  ("account" .=) <$> _tsAccount,
                   ("networkProfile" .=) <$> _tsNetworkProFile,
                   ("environmentVariables" .=) <$>
                     _tsEnvironmentVariables,

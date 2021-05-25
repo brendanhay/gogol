@@ -41,8 +41,8 @@ module Network.Google.Resource.SafeBrowsing.ThreatMatches.Find
     , tmfCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SafeBrowsing.Types
+import Network.Google.Prelude
+import Network.Google.SafeBrowsing.Types
 
 -- | A resource alias for @safebrowsing.threatMatches.find@ method which the
 -- 'ThreatMatchesFind' request conforms to.
@@ -55,20 +55,23 @@ type ThreatMatchesFindResource =
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] FindThreatMatchesRequest :>
-                       Post '[JSON] FindThreatMatchesResponse
+                     ReqBody '[JSON]
+                       GoogleSecuritySafebrowsingV4FindThreatMatchesRequest
+                       :>
+                       Post '[JSON]
+                         GoogleSecuritySafebrowsingV4FindThreatMatchesResponse
 
 -- | Finds the threat entries that match the Safe Browsing lists.
 --
 -- /See:/ 'threatMatchesFind' smart constructor.
 data ThreatMatchesFind =
   ThreatMatchesFind'
-    { _tmfXgafv          :: !(Maybe Xgafv)
+    { _tmfXgafv :: !(Maybe Xgafv)
     , _tmfUploadProtocol :: !(Maybe Text)
-    , _tmfAccessToken    :: !(Maybe Text)
-    , _tmfUploadType     :: !(Maybe Text)
-    , _tmfPayload        :: !FindThreatMatchesRequest
-    , _tmfCallback       :: !(Maybe Text)
+    , _tmfAccessToken :: !(Maybe Text)
+    , _tmfUploadType :: !(Maybe Text)
+    , _tmfPayload :: !GoogleSecuritySafebrowsingV4FindThreatMatchesRequest
+    , _tmfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -89,7 +92,7 @@ data ThreatMatchesFind =
 --
 -- * 'tmfCallback'
 threatMatchesFind
-    :: FindThreatMatchesRequest -- ^ 'tmfPayload'
+    :: GoogleSecuritySafebrowsingV4FindThreatMatchesRequest -- ^ 'tmfPayload'
     -> ThreatMatchesFind
 threatMatchesFind pTmfPayload_ =
   ThreatMatchesFind'
@@ -125,7 +128,7 @@ tmfUploadType
       (\ s a -> s{_tmfUploadType = a})
 
 -- | Multipart request metadata.
-tmfPayload :: Lens' ThreatMatchesFind FindThreatMatchesRequest
+tmfPayload :: Lens' ThreatMatchesFind GoogleSecuritySafebrowsingV4FindThreatMatchesRequest
 tmfPayload
   = lens _tmfPayload (\ s a -> s{_tmfPayload = a})
 
@@ -135,7 +138,8 @@ tmfCallback
   = lens _tmfCallback (\ s a -> s{_tmfCallback = a})
 
 instance GoogleRequest ThreatMatchesFind where
-        type Rs ThreatMatchesFind = FindThreatMatchesResponse
+        type Rs ThreatMatchesFind =
+             GoogleSecuritySafebrowsingV4FindThreatMatchesResponse
         type Scopes ThreatMatchesFind = '[]
         requestClient ThreatMatchesFind'{..}
           = go _tmfXgafv _tmfUploadProtocol _tmfAccessToken

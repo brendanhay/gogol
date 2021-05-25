@@ -42,8 +42,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.List
     , clMaxResults
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.creatives.list@ method which the
 -- 'CreativesList'' request conforms to.
@@ -69,12 +69,12 @@ type CreativesListResource =
 -- /See:/ 'creativesList'' smart constructor.
 data CreativesList' =
   CreativesList''
-    { _clBuyerCreativeId         :: !(Maybe [Text])
+    { _clBuyerCreativeId :: !(Maybe [Text])
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
-    , _clAccountId               :: !(Maybe [Textual Int32])
-    , _clPageToken               :: !(Maybe Text)
-    , _clDealsStatusFilter       :: !(Maybe CreativesListDealsStatusFilter)
-    , _clMaxResults              :: !(Maybe (Textual Word32))
+    , _clAccountId :: !(Maybe [Textual Int32])
+    , _clPageToken :: !(Maybe Text)
+    , _clDealsStatusFilter :: !(Maybe CreativesListDealsStatusFilter)
+    , _clMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

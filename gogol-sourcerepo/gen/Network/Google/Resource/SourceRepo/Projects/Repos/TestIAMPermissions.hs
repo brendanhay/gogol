@@ -44,8 +44,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.TestIAMPermissions
     , prtipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.testIamPermissions@ method which the
 -- 'ProjectsReposTestIAMPermissions' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsReposTestIAMPermissionsResource =
 -- /See:/ 'projectsReposTestIAMPermissions' smart constructor.
 data ProjectsReposTestIAMPermissions =
   ProjectsReposTestIAMPermissions'
-    { _prtipXgafv          :: !(Maybe Xgafv)
+    { _prtipXgafv :: !(Maybe Xgafv)
     , _prtipUploadProtocol :: !(Maybe Text)
-    , _prtipAccessToken    :: !(Maybe Text)
-    , _prtipUploadType     :: !(Maybe Text)
-    , _prtipPayload        :: !TestIAMPermissionsRequest
-    , _prtipResource       :: !Text
-    , _prtipCallback       :: !(Maybe Text)
+    , _prtipAccessToken :: !(Maybe Text)
+    , _prtipUploadType :: !(Maybe Text)
+    , _prtipPayload :: !TestIAMPermissionsRequest
+    , _prtipResource :: !Text
+    , _prtipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

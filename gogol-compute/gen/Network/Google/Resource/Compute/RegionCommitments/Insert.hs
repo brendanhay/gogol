@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionCommitments.Insert
     , rciRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionCommitments.insert@ method which the
 -- 'RegionCommitmentsInsert' request conforms to.
@@ -64,9 +64,9 @@ type RegionCommitmentsInsertResource =
 data RegionCommitmentsInsert =
   RegionCommitmentsInsert'
     { _rciRequestId :: !(Maybe Text)
-    , _rciProject   :: !Text
-    , _rciPayload   :: !Commitment
-    , _rciRegion    :: !Text
+    , _rciProject :: !Text
+    , _rciPayload :: !Commitment
+    , _rciRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

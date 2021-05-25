@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of floodlight configurations, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.floodlightConfigurations.list@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
     , FloodlightConfigurationsList
 
     -- * Request Lenses
+    , fclXgafv
+    , fclUploadProtocol
+    , fclAccessToken
+    , fclUploadType
     , fclIds
     , fclProFileId
+    , fclCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightConfigurations.list@ method which the
 -- 'FloodlightConfigurationsList' request conforms to.
 type FloodlightConfigurationsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
-               QueryParams "ids" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] FloodlightConfigurationsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParams "ids" (Textual Int64) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] FloodlightConfigurationsListResponse
 
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 --
 -- /See:/ 'floodlightConfigurationsList' smart constructor.
 data FloodlightConfigurationsList =
   FloodlightConfigurationsList'
-    { _fclIds       :: !(Maybe [Textual Int64])
+    { _fclXgafv :: !(Maybe Xgafv)
+    , _fclUploadProtocol :: !(Maybe Text)
+    , _fclAccessToken :: !(Maybe Text)
+    , _fclUploadType :: !(Maybe Text)
+    , _fclIds :: !(Maybe [Textual Int64])
     , _fclProFileId :: !(Textual Int64)
+    , _fclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,16 +82,55 @@ data FloodlightConfigurationsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fclXgafv'
+--
+-- * 'fclUploadProtocol'
+--
+-- * 'fclAccessToken'
+--
+-- * 'fclUploadType'
+--
 -- * 'fclIds'
 --
 -- * 'fclProFileId'
+--
+-- * 'fclCallback'
 floodlightConfigurationsList
     :: Int64 -- ^ 'fclProFileId'
     -> FloodlightConfigurationsList
 floodlightConfigurationsList pFclProFileId_ =
   FloodlightConfigurationsList'
-    {_fclIds = Nothing, _fclProFileId = _Coerce # pFclProFileId_}
+    { _fclXgafv = Nothing
+    , _fclUploadProtocol = Nothing
+    , _fclAccessToken = Nothing
+    , _fclUploadType = Nothing
+    , _fclIds = Nothing
+    , _fclProFileId = _Coerce # pFclProFileId_
+    , _fclCallback = Nothing
+    }
 
+
+-- | V1 error format.
+fclXgafv :: Lens' FloodlightConfigurationsList (Maybe Xgafv)
+fclXgafv = lens _fclXgafv (\ s a -> s{_fclXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+fclUploadProtocol :: Lens' FloodlightConfigurationsList (Maybe Text)
+fclUploadProtocol
+  = lens _fclUploadProtocol
+      (\ s a -> s{_fclUploadProtocol = a})
+
+-- | OAuth access token.
+fclAccessToken :: Lens' FloodlightConfigurationsList (Maybe Text)
+fclAccessToken
+  = lens _fclAccessToken
+      (\ s a -> s{_fclAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+fclUploadType :: Lens' FloodlightConfigurationsList (Maybe Text)
+fclUploadType
+  = lens _fclUploadType
+      (\ s a -> s{_fclUploadType = a})
 
 -- | Set of IDs of floodlight configurations to retrieve. Required field;
 -- otherwise an empty list will be returned.
@@ -91,6 +145,11 @@ fclProFileId
   = lens _fclProFileId (\ s a -> s{_fclProFileId = a})
       . _Coerce
 
+-- | JSONP
+fclCallback :: Lens' FloodlightConfigurationsList (Maybe Text)
+fclCallback
+  = lens _fclCallback (\ s a -> s{_fclCallback = a})
+
 instance GoogleRequest FloodlightConfigurationsList
          where
         type Rs FloodlightConfigurationsList =
@@ -98,7 +157,11 @@ instance GoogleRequest FloodlightConfigurationsList
         type Scopes FloodlightConfigurationsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightConfigurationsList'{..}
-          = go _fclProFileId (_fclIds ^. _Default)
+          = go _fclProFileId _fclXgafv _fclUploadProtocol
+              _fclAccessToken
+              _fclUploadType
+              (_fclIds ^. _Default)
+              _fclCallback
               (Just AltJSON)
               dFAReportingService
           where go

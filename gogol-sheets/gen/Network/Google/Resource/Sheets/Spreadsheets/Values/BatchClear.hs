@@ -45,8 +45,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
     , svbcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchClear@ method which the
 -- 'SpreadsheetsValuesBatchClear' request conforms to.
@@ -72,13 +72,13 @@ type SpreadsheetsValuesBatchClearResource =
 -- /See:/ 'spreadsheetsValuesBatchClear' smart constructor.
 data SpreadsheetsValuesBatchClear =
   SpreadsheetsValuesBatchClear'
-    { _svbcXgafv          :: !(Maybe Xgafv)
+    { _svbcXgafv :: !(Maybe Xgafv)
     , _svbcUploadProtocol :: !(Maybe Text)
-    , _svbcAccessToken    :: !(Maybe Text)
-    , _svbcSpreadsheetId  :: !Text
-    , _svbcUploadType     :: !(Maybe Text)
-    , _svbcPayload        :: !BatchClearValuesRequest
-    , _svbcCallback       :: !(Maybe Text)
+    , _svbcAccessToken :: !(Maybe Text)
+    , _svbcSpreadsheetId :: !Text
+    , _svbcUploadType :: !(Maybe Text)
+    , _svbcPayload :: !BatchClearValuesRequest
+    , _svbcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

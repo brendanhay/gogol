@@ -44,14 +44,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvslCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.list@ method which the
 -- 'ProjectsLocationsDataSetsHl7V2StoresList' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresListResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "hl7V2Stores" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -70,15 +70,15 @@ type ProjectsLocationsDataSetsHl7V2StoresListResource
 -- /See:/ 'projectsLocationsDataSetsHl7V2StoresList' smart constructor.
 data ProjectsLocationsDataSetsHl7V2StoresList =
   ProjectsLocationsDataSetsHl7V2StoresList'
-    { _pldshvslParent         :: !Text
-    , _pldshvslXgafv          :: !(Maybe Xgafv)
+    { _pldshvslParent :: !Text
+    , _pldshvslXgafv :: !(Maybe Xgafv)
     , _pldshvslUploadProtocol :: !(Maybe Text)
-    , _pldshvslAccessToken    :: !(Maybe Text)
-    , _pldshvslUploadType     :: !(Maybe Text)
-    , _pldshvslFilter         :: !(Maybe Text)
-    , _pldshvslPageToken      :: !(Maybe Text)
-    , _pldshvslPageSize       :: !(Maybe (Textual Int32))
-    , _pldshvslCallback       :: !(Maybe Text)
+    , _pldshvslAccessToken :: !(Maybe Text)
+    , _pldshvslUploadType :: !(Maybe Text)
+    , _pldshvslFilter :: !(Maybe Text)
+    , _pldshvslPageToken :: !(Maybe Text)
+    , _pldshvslPageSize :: !(Maybe (Textual Int32))
+    , _pldshvslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -151,9 +151,30 @@ pldshvslUploadType
   = lens _pldshvslUploadType
       (\ s a -> s{_pldshvslUploadType = a})
 
--- | Restricts stores returned to those matching a filter. Syntax:
--- https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search\/query_strings
--- Only filtering on labels is supported, for example \`labels.key=value\`.
+-- | Restricts stores returned to those matching a filter. The following
+-- syntax is available: * A string field value can be written as text
+-- inside quotation marks, for example \`\"query text\"\`. The only valid
+-- relational operation for text fields is equality (\`=\`), where text is
+-- searched within the field, rather than having the field be equal to the
+-- text. For example, \`\"Comment = great\"\` returns messages with
+-- \`great\` in the comment field. * A number field value can be written as
+-- an integer, a decimal, or an exponential. The valid relational operators
+-- for number fields are the equality operator (\`=\`), along with the less
+-- than\/greater than operators (\`\<\`, \`\<=\`, \`>\`, \`>=\`). Note that
+-- there is no inequality (\`!=\`) operator. You can prepend the \`NOT\`
+-- operator to an expression to negate it. * A date field value must be
+-- written in \`yyyy-mm-dd\` form. Fields with date and time use the
+-- RFC3339 time format. Leading zeros are required for one-digit months and
+-- days. The valid relational operators for date fields are the equality
+-- operator (\`=\`) , along with the less than\/greater than operators
+-- (\`\<\`, \`\<=\`, \`>\`, \`>=\`). Note that there is no inequality
+-- (\`!=\`) operator. You can prepend the \`NOT\` operator to an expression
+-- to negate it. * Multiple field query expressions can be combined in one
+-- query by adding \`AND\` or \`OR\` operators between the expressions. If
+-- a boolean operator appears within a quoted string, it is not treated as
+-- special, it\'s just another part of the character string to be matched.
+-- You can prepend the \`NOT\` operator to an expression to negate it. Only
+-- filtering on labels is supported. For example, \`labels.key=value\`.
 pldshvslFilter :: Lens' ProjectsLocationsDataSetsHl7V2StoresList (Maybe Text)
 pldshvslFilter
   = lens _pldshvslFilter
@@ -167,7 +188,7 @@ pldshvslPageToken
       (\ s a -> s{_pldshvslPageToken = a})
 
 -- | Limit on the number of HL7v2 stores to return in a single response. If
--- zero the default page size of 100 is used.
+-- not specified, 100 is used. May not be larger than 1000.
 pldshvslPageSize :: Lens' ProjectsLocationsDataSetsHl7V2StoresList (Maybe Int32)
 pldshvslPageSize
   = lens _pldshvslPageSize

@@ -16,7 +16,7 @@
 --
 module Network.Google.ServiceNetworking.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Whether the measurement is an integer, a floating-point number, etc.
 -- Some combinations of \`metric_kind\` and \`value_type\` might not be
@@ -272,11 +272,18 @@ instance FromJSON EnumSyntax where
 instance ToJSON EnumSyntax where
     toJSON = toJSONText
 
--- | The launch stage of the metric definition.
+-- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
 data MetricDescriptorMetadataLaunchStage
     = LaunchStageUnspecified
       -- ^ @LAUNCH_STAGE_UNSPECIFIED@
       -- Do not use this default value.
+    | Unimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | Prelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
     | EarlyAccess
       -- ^ @EARLY_ACCESS@
       -- Early Access features are limited to a closed group of testers. To use
@@ -290,7 +297,7 @@ data MetricDescriptorMetadataLaunchStage
       -- cleared for widespread use. By Alpha, all significant design issues are
       -- resolved and we are in the process of verifying functionality. Alpha
       -- customers need to apply for access, agree to applicable terms, and have
-      -- their projects whitelisted. Alpha releases don’t have to be feature
+      -- their projects allowlisted. Alpha releases don’t have to be feature
       -- complete, no SLAs are provided, and there are no technical support
       -- obligations, but they will be far enough along that customers can
       -- actually use them in test environments or for limited-use tests -- just
@@ -320,6 +327,8 @@ instance Hashable MetricDescriptorMetadataLaunchStage
 instance FromHttpApiData MetricDescriptorMetadataLaunchStage where
     parseQueryParam = \case
         "LAUNCH_STAGE_UNSPECIFIED" -> Right LaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right Unimplemented
+        "PRELAUNCH" -> Right Prelaunch
         "EARLY_ACCESS" -> Right EarlyAccess
         "ALPHA" -> Right Alpha
         "BETA" -> Right Beta
@@ -330,6 +339,8 @@ instance FromHttpApiData MetricDescriptorMetadataLaunchStage where
 instance ToHttpApiData MetricDescriptorMetadataLaunchStage where
     toQueryParam = \case
         LaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        Unimplemented -> "UNIMPLEMENTED"
+        Prelaunch -> "PRELAUNCH"
         EarlyAccess -> "EARLY_ACCESS"
         Alpha -> "ALPHA"
         Beta -> "BETA"
@@ -463,6 +474,178 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
+-- | The first validation which failed.
+data ValidateConsumerConfigResponseValidationError
+    = ValidationErrorUnspecified
+      -- ^ @VALIDATION_ERROR_UNSPECIFIED@
+    | ValidationNotRequested
+      -- ^ @VALIDATION_NOT_REQUESTED@
+      -- In case none of the validations are requested.
+    | ServiceNetworkingNotEnabled
+      -- ^ @SERVICE_NETWORKING_NOT_ENABLED@
+    | NetworkNotFound
+      -- ^ @NETWORK_NOT_FOUND@
+      -- The network provided by the consumer does not exist.
+    | NetworkNotPeered
+      -- ^ @NETWORK_NOT_PEERED@
+      -- The network has not been peered with the producer org.
+    | NetworkPeeringDeleted
+      -- ^ @NETWORK_PEERING_DELETED@
+      -- The peering was created and later deleted.
+    | NetworkNotInConsumersProject
+      -- ^ @NETWORK_NOT_IN_CONSUMERS_PROJECT@
+      -- The network is a regular VPC but the network is not in the consumer\'s
+      -- project.
+    | NetworkNotInConsumersHostProject
+      -- ^ @NETWORK_NOT_IN_CONSUMERS_HOST_PROJECT@
+      -- The consumer project is a service project, and network is a shared VPC,
+      -- but the network is not in the host project of this consumer project.
+    | HostProjectNotFound
+      -- ^ @HOST_PROJECT_NOT_FOUND@
+      -- The host project associated with the consumer project was not found.
+    | ConsumerProjectNotServiceProject
+      -- ^ @CONSUMER_PROJECT_NOT_SERVICE_PROJECT@
+      -- The consumer project is not a service project for the specified host
+      -- project.
+    | RangesExhausted
+      -- ^ @RANGES_EXHAUSTED@
+      -- The reserved IP ranges do not have enough space to create a subnet of
+      -- desired size.
+    | RangesNotReserved
+      -- ^ @RANGES_NOT_RESERVED@
+      -- The IP ranges were not reserved.
+    | RangesDeletedLater
+      -- ^ @RANGES_DELETED_LATER@
+      -- The IP ranges were reserved but deleted later.
+    | ComputeAPINotEnabled
+      -- ^ @COMPUTE_API_NOT_ENABLED@
+      -- The consumer project does not have the compute api enabled.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ValidateConsumerConfigResponseValidationError
+
+instance FromHttpApiData ValidateConsumerConfigResponseValidationError where
+    parseQueryParam = \case
+        "VALIDATION_ERROR_UNSPECIFIED" -> Right ValidationErrorUnspecified
+        "VALIDATION_NOT_REQUESTED" -> Right ValidationNotRequested
+        "SERVICE_NETWORKING_NOT_ENABLED" -> Right ServiceNetworkingNotEnabled
+        "NETWORK_NOT_FOUND" -> Right NetworkNotFound
+        "NETWORK_NOT_PEERED" -> Right NetworkNotPeered
+        "NETWORK_PEERING_DELETED" -> Right NetworkPeeringDeleted
+        "NETWORK_NOT_IN_CONSUMERS_PROJECT" -> Right NetworkNotInConsumersProject
+        "NETWORK_NOT_IN_CONSUMERS_HOST_PROJECT" -> Right NetworkNotInConsumersHostProject
+        "HOST_PROJECT_NOT_FOUND" -> Right HostProjectNotFound
+        "CONSUMER_PROJECT_NOT_SERVICE_PROJECT" -> Right ConsumerProjectNotServiceProject
+        "RANGES_EXHAUSTED" -> Right RangesExhausted
+        "RANGES_NOT_RESERVED" -> Right RangesNotReserved
+        "RANGES_DELETED_LATER" -> Right RangesDeletedLater
+        "COMPUTE_API_NOT_ENABLED" -> Right ComputeAPINotEnabled
+        x -> Left ("Unable to parse ValidateConsumerConfigResponseValidationError from: " <> x)
+
+instance ToHttpApiData ValidateConsumerConfigResponseValidationError where
+    toQueryParam = \case
+        ValidationErrorUnspecified -> "VALIDATION_ERROR_UNSPECIFIED"
+        ValidationNotRequested -> "VALIDATION_NOT_REQUESTED"
+        ServiceNetworkingNotEnabled -> "SERVICE_NETWORKING_NOT_ENABLED"
+        NetworkNotFound -> "NETWORK_NOT_FOUND"
+        NetworkNotPeered -> "NETWORK_NOT_PEERED"
+        NetworkPeeringDeleted -> "NETWORK_PEERING_DELETED"
+        NetworkNotInConsumersProject -> "NETWORK_NOT_IN_CONSUMERS_PROJECT"
+        NetworkNotInConsumersHostProject -> "NETWORK_NOT_IN_CONSUMERS_HOST_PROJECT"
+        HostProjectNotFound -> "HOST_PROJECT_NOT_FOUND"
+        ConsumerProjectNotServiceProject -> "CONSUMER_PROJECT_NOT_SERVICE_PROJECT"
+        RangesExhausted -> "RANGES_EXHAUSTED"
+        RangesNotReserved -> "RANGES_NOT_RESERVED"
+        RangesDeletedLater -> "RANGES_DELETED_LATER"
+        ComputeAPINotEnabled -> "COMPUTE_API_NOT_ENABLED"
+
+instance FromJSON ValidateConsumerConfigResponseValidationError where
+    parseJSON = parseJSONText "ValidateConsumerConfigResponseValidationError"
+
+instance ToJSON ValidateConsumerConfigResponseValidationError where
+    toJSON = toJSONText
+
+-- | Optional. The launch stage of the monitored resource definition.
+data MonitoredResourceDescriptorLaunchStage
+    = MRDLSLaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | MRDLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MRDLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MRDLSEarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | MRDLSAlpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | MRDLSBeta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | MRDLSGA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | MRDLSDeprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our [Terms of
+      -- Service](https:\/\/cloud.google.com\/terms\/) and the [Google Cloud
+      -- Platform Subject to the Deprecation
+      -- Policy](https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MonitoredResourceDescriptorLaunchStage
+
+instance FromHttpApiData MonitoredResourceDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MRDLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MRDLSUnimplemented
+        "PRELAUNCH" -> Right MRDLSPrelaunch
+        "EARLY_ACCESS" -> Right MRDLSEarlyAccess
+        "ALPHA" -> Right MRDLSAlpha
+        "BETA" -> Right MRDLSBeta
+        "GA" -> Right MRDLSGA
+        "DEPRECATED" -> Right MRDLSDeprecated
+        x -> Left ("Unable to parse MonitoredResourceDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData MonitoredResourceDescriptorLaunchStage where
+    toQueryParam = \case
+        MRDLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MRDLSUnimplemented -> "UNIMPLEMENTED"
+        MRDLSPrelaunch -> "PRELAUNCH"
+        MRDLSEarlyAccess -> "EARLY_ACCESS"
+        MRDLSAlpha -> "ALPHA"
+        MRDLSBeta -> "BETA"
+        MRDLSGA -> "GA"
+        MRDLSDeprecated -> "DEPRECATED"
+
+instance FromJSON MonitoredResourceDescriptorLaunchStage where
+    parseJSON = parseJSONText "MonitoredResourceDescriptorLaunchStage"
+
+instance ToJSON MonitoredResourceDescriptorLaunchStage where
+    toJSON = toJSONText
+
 -- | The field cardinality.
 data FieldCardinality
     = CardinalityUnknown
@@ -573,4 +756,85 @@ instance FromJSON MethodSyntax where
     parseJSON = parseJSONText "MethodSyntax"
 
 instance ToJSON MethodSyntax where
+    toJSON = toJSONText
+
+-- | Optional. The launch stage of the metric definition.
+data MetricDescriptorLaunchStage
+    = MDLSLaunchStageUnspecified
+      -- ^ @LAUNCH_STAGE_UNSPECIFIED@
+      -- Do not use this default value.
+    | MDLSUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The feature is not yet implemented. Users can not use it.
+    | MDLSPrelaunch
+      -- ^ @PRELAUNCH@
+      -- Prelaunch features are hidden from users and are only visible
+      -- internally.
+    | MDLSEarlyAccess
+      -- ^ @EARLY_ACCESS@
+      -- Early Access features are limited to a closed group of testers. To use
+      -- these features, you must sign up in advance and sign a Trusted Tester
+      -- agreement (which includes confidentiality provisions). These features
+      -- may be unstable, changed in backward-incompatible ways, and are not
+      -- guaranteed to be released.
+    | MDLSAlpha
+      -- ^ @ALPHA@
+      -- Alpha is a limited availability test for releases before they are
+      -- cleared for widespread use. By Alpha, all significant design issues are
+      -- resolved and we are in the process of verifying functionality. Alpha
+      -- customers need to apply for access, agree to applicable terms, and have
+      -- their projects allowlisted. Alpha releases don’t have to be feature
+      -- complete, no SLAs are provided, and there are no technical support
+      -- obligations, but they will be far enough along that customers can
+      -- actually use them in test environments or for limited-use tests -- just
+      -- like they would in normal production cases.
+    | MDLSBeta
+      -- ^ @BETA@
+      -- Beta is the point at which we are ready to open a release for any
+      -- customer to use. There are no SLA or technical support obligations in a
+      -- Beta release. Products will be complete from a feature perspective, but
+      -- may have some open outstanding issues. Beta releases are suitable for
+      -- limited production use cases.
+    | MDLSGA
+      -- ^ @GA@
+      -- GA features are open to all developers and are considered stable and
+      -- fully qualified for production use.
+    | MDLSDeprecated
+      -- ^ @DEPRECATED@
+      -- Deprecated features are scheduled to be shut down and removed. For more
+      -- information, see the “Deprecation Policy” section of our [Terms of
+      -- Service](https:\/\/cloud.google.com\/terms\/) and the [Google Cloud
+      -- Platform Subject to the Deprecation
+      -- Policy](https:\/\/cloud.google.com\/terms\/deprecation) documentation.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable MetricDescriptorLaunchStage
+
+instance FromHttpApiData MetricDescriptorLaunchStage where
+    parseQueryParam = \case
+        "LAUNCH_STAGE_UNSPECIFIED" -> Right MDLSLaunchStageUnspecified
+        "UNIMPLEMENTED" -> Right MDLSUnimplemented
+        "PRELAUNCH" -> Right MDLSPrelaunch
+        "EARLY_ACCESS" -> Right MDLSEarlyAccess
+        "ALPHA" -> Right MDLSAlpha
+        "BETA" -> Right MDLSBeta
+        "GA" -> Right MDLSGA
+        "DEPRECATED" -> Right MDLSDeprecated
+        x -> Left ("Unable to parse MetricDescriptorLaunchStage from: " <> x)
+
+instance ToHttpApiData MetricDescriptorLaunchStage where
+    toQueryParam = \case
+        MDLSLaunchStageUnspecified -> "LAUNCH_STAGE_UNSPECIFIED"
+        MDLSUnimplemented -> "UNIMPLEMENTED"
+        MDLSPrelaunch -> "PRELAUNCH"
+        MDLSEarlyAccess -> "EARLY_ACCESS"
+        MDLSAlpha -> "ALPHA"
+        MDLSBeta -> "BETA"
+        MDLSGA -> "GA"
+        MDLSDeprecated -> "DEPRECATED"
+
+instance FromJSON MetricDescriptorLaunchStage where
+    parseJSON = parseJSONText "MetricDescriptorLaunchStage"
+
+instance ToJSON MetricDescriptorLaunchStage where
     toJSON = toJSONText

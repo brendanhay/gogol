@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.List
     , pljlCallback
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.list@ method which the
 -- 'ProjectsLocationsJobsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsJobsListResource =
 -- /See:/ 'projectsLocationsJobsList' smart constructor.
 data ProjectsLocationsJobsList =
   ProjectsLocationsJobsList'
-    { _pljlParent         :: !Text
-    , _pljlXgafv          :: !(Maybe Xgafv)
+    { _pljlParent :: !Text
+    , _pljlXgafv :: !(Maybe Xgafv)
     , _pljlUploadProtocol :: !(Maybe Text)
-    , _pljlAccessToken    :: !(Maybe Text)
-    , _pljlUploadType     :: !(Maybe Text)
-    , _pljlPageToken      :: !(Maybe Text)
-    , _pljlPageSize       :: !(Maybe (Textual Int32))
-    , _pljlCallback       :: !(Maybe Text)
+    , _pljlAccessToken :: !(Maybe Text)
+    , _pljlUploadType :: !(Maybe Text)
+    , _pljlPageToken :: !(Maybe Text)
+    , _pljlPageSize :: !(Maybe (Textual Int32))
+    , _pljlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

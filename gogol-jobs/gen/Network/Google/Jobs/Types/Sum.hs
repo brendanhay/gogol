@@ -16,7 +16,7 @@
 --
 module Network.Google.Jobs.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Required. Type of filter.
 data CompensationFilterType
@@ -34,8 +34,8 @@ data CompensationFilterType
       -- ^ @UNIT_AND_AMOUNT@
       -- Filter by \`base compensation entry\'s\` unit and amount \/ range. A job
       -- is a match if and only if the job contains a base CompensationEntry, and
-      -- the base entry\'s unit matches provided compensation_units and amount or
-      -- range overlaps with provided compensation_range. See
+      -- the base entry\'s unit matches provided CompensationUnit and amount or
+      -- range overlaps with provided CompensationRange. See
       -- CompensationInfo.CompensationEntry for definition of base compensation
       -- entry. Set exactly one units and populate range.
     | AnnualizedBaseAmount
@@ -73,145 +73,19 @@ instance FromJSON CompensationFilterType where
 instance ToJSON CompensationFilterType where
     toJSON = toJSONText
 
--- | The Histogram search filters.
-data HistogramResultSearchType
-    = SearchTypeUnspecified
-      -- ^ @SEARCH_TYPE_UNSPECIFIED@
-      -- The default value if search type is not specified.
-    | CompanyId
-      -- ^ @COMPANY_ID@
-      -- Filter by the company id field.
-    | EmploymentType
-      -- ^ @EMPLOYMENT_TYPE@
-      -- Filter by the employment type field, such as \`FULL_TIME\` or
-      -- \`PART_TIME\`.
-    | CompanySize
-      -- ^ @COMPANY_SIZE@
-      -- Filter by the company size type field, such as \`BIG\`, \`SMALL\` or
-      -- \`BIGGER\`.
-    | DatePublished
-      -- ^ @DATE_PUBLISHED@
-      -- Filter by the date published field. Possible return values are: *
-      -- PAST_24_HOURS (The past 24 hours) * PAST_3_DAYS (The past 3 days) *
-      -- PAST_WEEK (The past 7 days) * PAST_MONTH (The past 30 days) * PAST_YEAR
-      -- (The past 365 days)
-    | EducationLevel
-      -- ^ @EDUCATION_LEVEL@
-      -- Filter by the required education level of the job.
-    | ExperienceLevel
-      -- ^ @EXPERIENCE_LEVEL@
-      -- Filter by the required experience level of the job.
-    | Admin1
-      -- ^ @ADMIN_1@
-      -- Filter by Admin1, which is a global placeholder for referring to state,
-      -- province, or the particular term a country uses to define the geographic
-      -- structure below the country level. Examples include states codes such as
-      -- \"CA\", \"IL\", \"NY\", and provinces, such as \"BC\".
-    | Country
-      -- ^ @COUNTRY@
-      -- Filter by the country code of job, such as US, JP, FR.
-    | City
-      -- ^ @CITY@
-      -- Filter by the \"city name\", \"Admin1 code\", for example, \"Mountain
-      -- View, CA\" or \"New York, NY\".
-    | Locale
-      -- ^ @LOCALE@
-      -- Filter by the locale field of a job, such as \"en-US\", \"fr-FR\". This
-      -- is the BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
-      -- information, see [Tags for Identifying
-      -- Languages](https:\/\/tools.ietf.org\/html\/bcp47).
-    | Language
-      -- ^ @LANGUAGE@
-      -- Filter by the language code portion of the locale field, such as \"en\"
-      -- or \"fr\".
-    | Category
-      -- ^ @CATEGORY@
-      -- Filter by the Category.
-    | CityCoordinate
-      -- ^ @CITY_COORDINATE@
-      -- Filter by the city center GPS coordinate (latitude and longitude), for
-      -- example, 37.4038522,-122.0987765. Since the coordinates of a city center
-      -- can change, clients may need to refresh them periodically.
-    | Admin1Country
-      -- ^ @ADMIN_1_COUNTRY@
-      -- A combination of state or province code with a country code. This field
-      -- differs from \`JOB_ADMIN1\`, which can be used in multiple countries.
-    | CompanyDisplayName
-      -- ^ @COMPANY_DISPLAY_NAME@
-      -- Company display name.
-    | BaseCompensationUnit
-      -- ^ @BASE_COMPENSATION_UNIT@
-      -- Base compensation unit.
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable HistogramResultSearchType
-
-instance FromHttpApiData HistogramResultSearchType where
-    parseQueryParam = \case
-        "SEARCH_TYPE_UNSPECIFIED" -> Right SearchTypeUnspecified
-        "COMPANY_ID" -> Right CompanyId
-        "EMPLOYMENT_TYPE" -> Right EmploymentType
-        "COMPANY_SIZE" -> Right CompanySize
-        "DATE_PUBLISHED" -> Right DatePublished
-        "EDUCATION_LEVEL" -> Right EducationLevel
-        "EXPERIENCE_LEVEL" -> Right ExperienceLevel
-        "ADMIN_1" -> Right Admin1
-        "COUNTRY" -> Right Country
-        "CITY" -> Right City
-        "LOCALE" -> Right Locale
-        "LANGUAGE" -> Right Language
-        "CATEGORY" -> Right Category
-        "CITY_COORDINATE" -> Right CityCoordinate
-        "ADMIN_1_COUNTRY" -> Right Admin1Country
-        "COMPANY_DISPLAY_NAME" -> Right CompanyDisplayName
-        "BASE_COMPENSATION_UNIT" -> Right BaseCompensationUnit
-        x -> Left ("Unable to parse HistogramResultSearchType from: " <> x)
-
-instance ToHttpApiData HistogramResultSearchType where
-    toQueryParam = \case
-        SearchTypeUnspecified -> "SEARCH_TYPE_UNSPECIFIED"
-        CompanyId -> "COMPANY_ID"
-        EmploymentType -> "EMPLOYMENT_TYPE"
-        CompanySize -> "COMPANY_SIZE"
-        DatePublished -> "DATE_PUBLISHED"
-        EducationLevel -> "EDUCATION_LEVEL"
-        ExperienceLevel -> "EXPERIENCE_LEVEL"
-        Admin1 -> "ADMIN_1"
-        Country -> "COUNTRY"
-        City -> "CITY"
-        Locale -> "LOCALE"
-        Language -> "LANGUAGE"
-        Category -> "CATEGORY"
-        CityCoordinate -> "CITY_COORDINATE"
-        Admin1Country -> "ADMIN_1_COUNTRY"
-        CompanyDisplayName -> "COMPANY_DISPLAY_NAME"
-        BaseCompensationUnit -> "BASE_COMPENSATION_UNIT"
-
-instance FromJSON HistogramResultSearchType where
-    parseJSON = parseJSONText "HistogramResultSearchType"
-
-instance ToJSON HistogramResultSearchType where
-    toJSON = toJSONText
-
--- | Required. The method of transportation for which to calculate the
--- commute time.
+-- | Required. The method of transportation to calculate the commute time
+-- for.
 data CommuteFilterCommuteMethod
     = CommuteMethodUnspecified
       -- ^ @COMMUTE_METHOD_UNSPECIFIED@
-      -- Commute method is not specified.
+      -- Commute method isn\'t specified.
     | Driving
       -- ^ @DRIVING@
       -- Commute time is calculated based on driving time.
     | Transit
       -- ^ @TRANSIT@
       -- Commute time is calculated based on public transit including bus, metro,
-      -- subway, etc.
-    | Walking
-      -- ^ @WALKING@
-      -- Commute time is calculated based on walking time.
-    | Cycling
-      -- ^ @CYCLING@
-      -- Commute time is calculated based on biking time.
+      -- subway, and so on.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommuteFilterCommuteMethod
@@ -221,8 +95,6 @@ instance FromHttpApiData CommuteFilterCommuteMethod where
         "COMMUTE_METHOD_UNSPECIFIED" -> Right CommuteMethodUnspecified
         "DRIVING" -> Right Driving
         "TRANSIT" -> Right Transit
-        "WALKING" -> Right Walking
-        "CYCLING" -> Right Cycling
         x -> Left ("Unable to parse CommuteFilterCommuteMethod from: " <> x)
 
 instance ToHttpApiData CommuteFilterCommuteMethod where
@@ -230,8 +102,6 @@ instance ToHttpApiData CommuteFilterCommuteMethod where
         CommuteMethodUnspecified -> "COMMUTE_METHOD_UNSPECIFIED"
         Driving -> "DRIVING"
         Transit -> "TRANSIT"
-        Walking -> "WALKING"
-        Cycling -> "CYCLING"
 
 instance FromJSON CommuteFilterCommuteMethod where
     parseJSON = parseJSONText "CommuteFilterCommuteMethod"
@@ -239,10 +109,10 @@ instance FromJSON CommuteFilterCommuteMethod where
 instance ToJSON CommuteFilterCommuteMethod where
     toJSON = toJSONText
 
--- | Optional. Controls whether highly similar jobs are returned next to each
--- other in the search results. Jobs are identified as highly similar based
--- on their titles, job categories, and locations. Highly similar results
--- are clustered so that only one representative job of the cluster is
+-- | Controls whether highly similar jobs are returned next to each other in
+-- the search results. Jobs are identified as highly similar based on their
+-- titles, job categories, and locations. Highly similar results are
+-- clustered so that only one representative job of the cluster is
 -- displayed to the job seeker higher up in the results, with the other
 -- jobs being displayed lower down in the results. Defaults to
 -- DiversificationLevel.SIMPLE if no value is specified.
@@ -259,7 +129,10 @@ data SearchJobsRequestDiversificationLevel
       -- ^ @SIMPLE@
       -- Default diversifying behavior. The result list is ordered so that highly
       -- similar results are pushed to the end of the last page of search
-      -- results.
+      -- results. If you are using pageToken to page through the result set,
+      -- latency might be lower but we can\'t guarantee that all results are
+      -- returned. If you are using page offset, latency might be higher but all
+      -- results are returned.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchJobsRequestDiversificationLevel
@@ -283,79 +156,345 @@ instance FromJSON SearchJobsRequestDiversificationLevel where
 instance ToJSON SearchJobsRequestDiversificationLevel where
     toJSON = toJSONText
 
--- | Type of the request, corresponding to CompensationHistogramRequest.type.
-data CompensationHistogramResultType
-    = CompensationHistogramRequestTypeUnspecified
-      -- ^ @COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED@
-      -- Default value. Invalid.
-    | Base
-      -- ^ @BASE@
-      -- Histogram by job\'s base compensation. See CompensationEntry for
-      -- definition of base compensation.
-    | AnnualizedBase
-      -- ^ @ANNUALIZED_BASE@
-      -- Histogram by job\'s annualized base compensation. See CompensationEntry
-      -- for definition of annualized base compensation.
-    | AnnualizedTotal
-      -- ^ @ANNUALIZED_TOTAL@
-      -- Histogram by job\'s annualized total compensation. See CompensationEntry
-      -- for definition of annualized total compensation.
+data JobDegreeTypesItem
+    = DegreeTypeUnspecified
+      -- ^ @DEGREE_TYPE_UNSPECIFIED@
+      -- Default value. Represents no degree, or early childhood education. Maps
+      -- to ISCED code 0. Ex) Kindergarten
+    | PrimaryEducation
+      -- ^ @PRIMARY_EDUCATION@
+      -- Primary education which is typically the first stage of compulsory
+      -- education. ISCED code 1. Ex) Elementary school
+    | LowerSecondaryEducation
+      -- ^ @LOWER_SECONDARY_EDUCATION@
+      -- Lower secondary education; First stage of secondary education building
+      -- on primary education, typically with a more subject-oriented curriculum.
+      -- ISCED code 2. Ex) Middle school
+    | UpperSecondaryEducation
+      -- ^ @UPPER_SECONDARY_EDUCATION@
+      -- Middle education; Second\/final stage of secondary education preparing
+      -- for tertiary education and\/or providing skills relevant to employment.
+      -- Usually with an increased range of subject options and streams. ISCED
+      -- code 3. Ex) High school
+    | AdultRemedialEducation
+      -- ^ @ADULT_REMEDIAL_EDUCATION@
+      -- Adult Remedial Education; Programmes providing learning experiences that
+      -- build on secondary education and prepare for labour market entry and\/or
+      -- tertiary education. The content is broader than secondary but not as
+      -- complex as tertiary education. ISCED code 4.
+    | AssociatesOrEquivalent
+      -- ^ @ASSOCIATES_OR_EQUIVALENT@
+      -- Associate\'s or equivalent; Short first tertiary programmes that are
+      -- typically practically-based, occupationally-specific and prepare for
+      -- labour market entry. These programmes may also provide a pathway to
+      -- other tertiary programmes. ISCED code 5.
+    | BachelorsOrEquivalent
+      -- ^ @BACHELORS_OR_EQUIVALENT@
+      -- Bachelor\'s or equivalent; Programmes designed to provide intermediate
+      -- academic and\/or professional knowledge, skills and competencies leading
+      -- to a first tertiary degree or equivalent qualification. ISCED code 6.
+    | MastersOrEquivalent
+      -- ^ @MASTERS_OR_EQUIVALENT@
+      -- Master\'s or equivalent; Programmes designed to provide advanced
+      -- academic and\/or professional knowledge, skills and competencies leading
+      -- to a second tertiary degree or equivalent qualification. ISCED code 7.
+    | DoctoralOrEquivalent
+      -- ^ @DOCTORAL_OR_EQUIVALENT@
+      -- Doctoral or equivalent; Programmes designed primarily to lead to an
+      -- advanced research qualification, usually concluding with the submission
+      -- and defense of a substantive dissertation of publishable quality based
+      -- on original research. ISCED code 8.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable CompensationHistogramResultType
+instance Hashable JobDegreeTypesItem
 
-instance FromHttpApiData CompensationHistogramResultType where
+instance FromHttpApiData JobDegreeTypesItem where
     parseQueryParam = \case
-        "COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED" -> Right CompensationHistogramRequestTypeUnspecified
-        "BASE" -> Right Base
-        "ANNUALIZED_BASE" -> Right AnnualizedBase
-        "ANNUALIZED_TOTAL" -> Right AnnualizedTotal
-        x -> Left ("Unable to parse CompensationHistogramResultType from: " <> x)
+        "DEGREE_TYPE_UNSPECIFIED" -> Right DegreeTypeUnspecified
+        "PRIMARY_EDUCATION" -> Right PrimaryEducation
+        "LOWER_SECONDARY_EDUCATION" -> Right LowerSecondaryEducation
+        "UPPER_SECONDARY_EDUCATION" -> Right UpperSecondaryEducation
+        "ADULT_REMEDIAL_EDUCATION" -> Right AdultRemedialEducation
+        "ASSOCIATES_OR_EQUIVALENT" -> Right AssociatesOrEquivalent
+        "BACHELORS_OR_EQUIVALENT" -> Right BachelorsOrEquivalent
+        "MASTERS_OR_EQUIVALENT" -> Right MastersOrEquivalent
+        "DOCTORAL_OR_EQUIVALENT" -> Right DoctoralOrEquivalent
+        x -> Left ("Unable to parse JobDegreeTypesItem from: " <> x)
 
-instance ToHttpApiData CompensationHistogramResultType where
+instance ToHttpApiData JobDegreeTypesItem where
     toQueryParam = \case
-        CompensationHistogramRequestTypeUnspecified -> "COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED"
-        Base -> "BASE"
-        AnnualizedBase -> "ANNUALIZED_BASE"
-        AnnualizedTotal -> "ANNUALIZED_TOTAL"
+        DegreeTypeUnspecified -> "DEGREE_TYPE_UNSPECIFIED"
+        PrimaryEducation -> "PRIMARY_EDUCATION"
+        LowerSecondaryEducation -> "LOWER_SECONDARY_EDUCATION"
+        UpperSecondaryEducation -> "UPPER_SECONDARY_EDUCATION"
+        AdultRemedialEducation -> "ADULT_REMEDIAL_EDUCATION"
+        AssociatesOrEquivalent -> "ASSOCIATES_OR_EQUIVALENT"
+        BachelorsOrEquivalent -> "BACHELORS_OR_EQUIVALENT"
+        MastersOrEquivalent -> "MASTERS_OR_EQUIVALENT"
+        DoctoralOrEquivalent -> "DOCTORAL_OR_EQUIVALENT"
 
-instance FromJSON CompensationHistogramResultType where
-    parseJSON = parseJSONText "CompensationHistogramResultType"
+instance FromJSON JobDegreeTypesItem where
+    parseJSON = parseJSONText "JobDegreeTypesItem"
 
-instance ToJSON CompensationHistogramResultType where
+instance ToJSON JobDegreeTypesItem where
     toJSON = toJSONText
 
--- | Optional. Compensation type. Default is
--- CompensationUnit.OTHER_COMPENSATION_TYPE.
+-- | The desired job attributes returned for jobs in the search response.
+-- Defaults to JobView.JOB_VIEW_FULL if no value is specified.
+data ProjectsTenantsJobsListJobView
+    = JobViewUnspecified
+      -- ^ @JOB_VIEW_UNSPECIFIED@
+      -- Default value.
+    | JobViewIdOnly
+      -- ^ @JOB_VIEW_ID_ONLY@
+      -- A ID only view of job, with following attributes: Job.name,
+      -- Job.requisition_id, Job.language_code.
+    | JobViewMinimal
+      -- ^ @JOB_VIEW_MINIMAL@
+      -- A minimal view of the job, with the following attributes: Job.name,
+      -- Job.requisition_id, Job.title, Job.company, Job.DerivedInfo.locations,
+      -- Job.language_code.
+    | JobViewSmall
+      -- ^ @JOB_VIEW_SMALL@
+      -- A small view of the job, with the following attributes in the search
+      -- results: Job.name, Job.requisition_id, Job.title, Job.company,
+      -- Job.DerivedInfo.locations, Job.visibility, Job.language_code,
+      -- Job.description.
+    | JobViewFull
+      -- ^ @JOB_VIEW_FULL@
+      -- All available attributes are included in the search results.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTenantsJobsListJobView
+
+instance FromHttpApiData ProjectsTenantsJobsListJobView where
+    parseQueryParam = \case
+        "JOB_VIEW_UNSPECIFIED" -> Right JobViewUnspecified
+        "JOB_VIEW_ID_ONLY" -> Right JobViewIdOnly
+        "JOB_VIEW_MINIMAL" -> Right JobViewMinimal
+        "JOB_VIEW_SMALL" -> Right JobViewSmall
+        "JOB_VIEW_FULL" -> Right JobViewFull
+        x -> Left ("Unable to parse ProjectsTenantsJobsListJobView from: " <> x)
+
+instance ToHttpApiData ProjectsTenantsJobsListJobView where
+    toQueryParam = \case
+        JobViewUnspecified -> "JOB_VIEW_UNSPECIFIED"
+        JobViewIdOnly -> "JOB_VIEW_ID_ONLY"
+        JobViewMinimal -> "JOB_VIEW_MINIMAL"
+        JobViewSmall -> "JOB_VIEW_SMALL"
+        JobViewFull -> "JOB_VIEW_FULL"
+
+instance FromJSON ProjectsTenantsJobsListJobView where
+    parseJSON = parseJSONText "ProjectsTenantsJobsListJobView"
+
+instance ToJSON ProjectsTenantsJobsListJobView where
+    toJSON = toJSONText
+
+data JobDerivedInfoJobCategoriesItem
+    = JobCategoryUnspecified
+      -- ^ @JOB_CATEGORY_UNSPECIFIED@
+      -- The default value if the category isn\'t specified.
+    | AccountingAndFinance
+      -- ^ @ACCOUNTING_AND_FINANCE@
+      -- An accounting and finance job, such as an Accountant.
+    | AdministrativeAndOffice
+      -- ^ @ADMINISTRATIVE_AND_OFFICE@
+      -- An administrative and office job, such as an Administrative Assistant.
+    | AdvertisingAndMarketing
+      -- ^ @ADVERTISING_AND_MARKETING@
+      -- An advertising and marketing job, such as Marketing Manager.
+    | AnimalCare
+      -- ^ @ANIMAL_CARE@
+      -- An animal care job, such as Veterinarian.
+    | ArtFashionAndDesign
+      -- ^ @ART_FASHION_AND_DESIGN@
+      -- An art, fashion, or design job, such as Designer.
+    | BusinessOperations
+      -- ^ @BUSINESS_OPERATIONS@
+      -- A business operations job, such as Business Operations Manager.
+    | CleaningAndFacilities
+      -- ^ @CLEANING_AND_FACILITIES@
+      -- A cleaning and facilities job, such as Custodial Staff.
+    | ComputerAndIt
+      -- ^ @COMPUTER_AND_IT@
+      -- A computer and IT job, such as Systems Administrator.
+    | Construction
+      -- ^ @CONSTRUCTION@
+      -- A construction job, such as General Laborer.
+    | CustomerService
+      -- ^ @CUSTOMER_SERVICE@
+      -- A customer service job, such s Cashier.
+    | Education
+      -- ^ @EDUCATION@
+      -- An education job, such as School Teacher.
+    | EntertainmentAndTravel
+      -- ^ @ENTERTAINMENT_AND_TRAVEL@
+      -- An entertainment and travel job, such as Flight Attendant.
+    | FarmingAndOutdoors
+      -- ^ @FARMING_AND_OUTDOORS@
+      -- A farming or outdoor job, such as Park Ranger.
+    | Healthcare
+      -- ^ @HEALTHCARE@
+      -- A healthcare job, such as Registered Nurse.
+    | HumanResources
+      -- ^ @HUMAN_RESOURCES@
+      -- A human resources job, such as Human Resources Director.
+    | InstallationMaintenanceAndRepair
+      -- ^ @INSTALLATION_MAINTENANCE_AND_REPAIR@
+      -- An installation, maintenance, or repair job, such as Electrician.
+    | Legal
+      -- ^ @LEGAL@
+      -- A legal job, such as Law Clerk.
+    | Management
+      -- ^ @MANAGEMENT@
+      -- A management job, often used in conjunction with another category, such
+      -- as Store Manager.
+    | ManufacturingAndWarehouse
+      -- ^ @MANUFACTURING_AND_WAREHOUSE@
+      -- A manufacturing or warehouse job, such as Assembly Technician.
+    | MediaCommunicationsAndWriting
+      -- ^ @MEDIA_COMMUNICATIONS_AND_WRITING@
+      -- A media, communications, or writing job, such as Media Relations.
+    | OilGasAndMining
+      -- ^ @OIL_GAS_AND_MINING@
+      -- An oil, gas or mining job, such as Offshore Driller.
+    | PersonalCareAndServices
+      -- ^ @PERSONAL_CARE_AND_SERVICES@
+      -- A personal care and services job, such as Hair Stylist.
+    | ProtectiveServices
+      -- ^ @PROTECTIVE_SERVICES@
+      -- A protective services job, such as Security Guard.
+    | RealEState
+      -- ^ @REAL_ESTATE@
+      -- A real estate job, such as Buyer\'s Agent.
+    | RestaurantAndHospitality
+      -- ^ @RESTAURANT_AND_HOSPITALITY@
+      -- A restaurant and hospitality job, such as Restaurant Server.
+    | SalesAndRetail
+      -- ^ @SALES_AND_RETAIL@
+      -- A sales and\/or retail job, such Sales Associate.
+    | ScienceAndEngineering
+      -- ^ @SCIENCE_AND_ENGINEERING@
+      -- A science and engineering job, such as Lab Technician.
+    | SocialServicesAndNonProfit
+      -- ^ @SOCIAL_SERVICES_AND_NON_PROFIT@
+      -- A social services or non-profit job, such as Case Worker.
+    | SportsFitnessAndRecreation
+      -- ^ @SPORTS_FITNESS_AND_RECREATION@
+      -- A sports, fitness, or recreation job, such as Personal Trainer.
+    | TransportationAndLogistics
+      -- ^ @TRANSPORTATION_AND_LOGISTICS@
+      -- A transportation or logistics job, such as Truck Driver.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable JobDerivedInfoJobCategoriesItem
+
+instance FromHttpApiData JobDerivedInfoJobCategoriesItem where
+    parseQueryParam = \case
+        "JOB_CATEGORY_UNSPECIFIED" -> Right JobCategoryUnspecified
+        "ACCOUNTING_AND_FINANCE" -> Right AccountingAndFinance
+        "ADMINISTRATIVE_AND_OFFICE" -> Right AdministrativeAndOffice
+        "ADVERTISING_AND_MARKETING" -> Right AdvertisingAndMarketing
+        "ANIMAL_CARE" -> Right AnimalCare
+        "ART_FASHION_AND_DESIGN" -> Right ArtFashionAndDesign
+        "BUSINESS_OPERATIONS" -> Right BusinessOperations
+        "CLEANING_AND_FACILITIES" -> Right CleaningAndFacilities
+        "COMPUTER_AND_IT" -> Right ComputerAndIt
+        "CONSTRUCTION" -> Right Construction
+        "CUSTOMER_SERVICE" -> Right CustomerService
+        "EDUCATION" -> Right Education
+        "ENTERTAINMENT_AND_TRAVEL" -> Right EntertainmentAndTravel
+        "FARMING_AND_OUTDOORS" -> Right FarmingAndOutdoors
+        "HEALTHCARE" -> Right Healthcare
+        "HUMAN_RESOURCES" -> Right HumanResources
+        "INSTALLATION_MAINTENANCE_AND_REPAIR" -> Right InstallationMaintenanceAndRepair
+        "LEGAL" -> Right Legal
+        "MANAGEMENT" -> Right Management
+        "MANUFACTURING_AND_WAREHOUSE" -> Right ManufacturingAndWarehouse
+        "MEDIA_COMMUNICATIONS_AND_WRITING" -> Right MediaCommunicationsAndWriting
+        "OIL_GAS_AND_MINING" -> Right OilGasAndMining
+        "PERSONAL_CARE_AND_SERVICES" -> Right PersonalCareAndServices
+        "PROTECTIVE_SERVICES" -> Right ProtectiveServices
+        "REAL_ESTATE" -> Right RealEState
+        "RESTAURANT_AND_HOSPITALITY" -> Right RestaurantAndHospitality
+        "SALES_AND_RETAIL" -> Right SalesAndRetail
+        "SCIENCE_AND_ENGINEERING" -> Right ScienceAndEngineering
+        "SOCIAL_SERVICES_AND_NON_PROFIT" -> Right SocialServicesAndNonProfit
+        "SPORTS_FITNESS_AND_RECREATION" -> Right SportsFitnessAndRecreation
+        "TRANSPORTATION_AND_LOGISTICS" -> Right TransportationAndLogistics
+        x -> Left ("Unable to parse JobDerivedInfoJobCategoriesItem from: " <> x)
+
+instance ToHttpApiData JobDerivedInfoJobCategoriesItem where
+    toQueryParam = \case
+        JobCategoryUnspecified -> "JOB_CATEGORY_UNSPECIFIED"
+        AccountingAndFinance -> "ACCOUNTING_AND_FINANCE"
+        AdministrativeAndOffice -> "ADMINISTRATIVE_AND_OFFICE"
+        AdvertisingAndMarketing -> "ADVERTISING_AND_MARKETING"
+        AnimalCare -> "ANIMAL_CARE"
+        ArtFashionAndDesign -> "ART_FASHION_AND_DESIGN"
+        BusinessOperations -> "BUSINESS_OPERATIONS"
+        CleaningAndFacilities -> "CLEANING_AND_FACILITIES"
+        ComputerAndIt -> "COMPUTER_AND_IT"
+        Construction -> "CONSTRUCTION"
+        CustomerService -> "CUSTOMER_SERVICE"
+        Education -> "EDUCATION"
+        EntertainmentAndTravel -> "ENTERTAINMENT_AND_TRAVEL"
+        FarmingAndOutdoors -> "FARMING_AND_OUTDOORS"
+        Healthcare -> "HEALTHCARE"
+        HumanResources -> "HUMAN_RESOURCES"
+        InstallationMaintenanceAndRepair -> "INSTALLATION_MAINTENANCE_AND_REPAIR"
+        Legal -> "LEGAL"
+        Management -> "MANAGEMENT"
+        ManufacturingAndWarehouse -> "MANUFACTURING_AND_WAREHOUSE"
+        MediaCommunicationsAndWriting -> "MEDIA_COMMUNICATIONS_AND_WRITING"
+        OilGasAndMining -> "OIL_GAS_AND_MINING"
+        PersonalCareAndServices -> "PERSONAL_CARE_AND_SERVICES"
+        ProtectiveServices -> "PROTECTIVE_SERVICES"
+        RealEState -> "REAL_ESTATE"
+        RestaurantAndHospitality -> "RESTAURANT_AND_HOSPITALITY"
+        SalesAndRetail -> "SALES_AND_RETAIL"
+        ScienceAndEngineering -> "SCIENCE_AND_ENGINEERING"
+        SocialServicesAndNonProfit -> "SOCIAL_SERVICES_AND_NON_PROFIT"
+        SportsFitnessAndRecreation -> "SPORTS_FITNESS_AND_RECREATION"
+        TransportationAndLogistics -> "TRANSPORTATION_AND_LOGISTICS"
+
+instance FromJSON JobDerivedInfoJobCategoriesItem where
+    parseJSON = parseJSONText "JobDerivedInfoJobCategoriesItem"
+
+instance ToJSON JobDerivedInfoJobCategoriesItem where
+    toJSON = toJSONText
+
+-- | Compensation type. Default is
+-- CompensationType.COMPENSATION_TYPE_UNSPECIFIED.
 data CompensationEntryType
-    = CETCompensationTypeUnspecified
+    = CompensationTypeUnspecified
       -- ^ @COMPENSATION_TYPE_UNSPECIFIED@
       -- Default value.
-    | CETBase
+    | Base
       -- ^ @BASE@
       -- Base compensation: Refers to the fixed amount of money paid to an
       -- employee by an employer in return for work performed. Base compensation
       -- does not include benefits, bonuses or any other potential compensation
       -- from an employer.
-    | CETBonus
+    | Bonus
       -- ^ @BONUS@
       -- Bonus.
-    | CETSigningBonus
+    | SigningBonus
       -- ^ @SIGNING_BONUS@
       -- Signing bonus.
-    | CETEquity
+    | Equity
       -- ^ @EQUITY@
       -- Equity.
-    | CETProfitSharing
+    | ProfitSharing
       -- ^ @PROFIT_SHARING@
       -- Profit sharing.
-    | CETCommissions
+    | Commissions
       -- ^ @COMMISSIONS@
       -- Commission.
-    | CETTips
+    | Tips
       -- ^ @TIPS@
       -- Tips.
-    | CETOtherCompensationType
+    | OtherCompensationType
       -- ^ @OTHER_COMPENSATION_TYPE@
       -- Other compensation type.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -364,28 +503,28 @@ instance Hashable CompensationEntryType
 
 instance FromHttpApiData CompensationEntryType where
     parseQueryParam = \case
-        "COMPENSATION_TYPE_UNSPECIFIED" -> Right CETCompensationTypeUnspecified
-        "BASE" -> Right CETBase
-        "BONUS" -> Right CETBonus
-        "SIGNING_BONUS" -> Right CETSigningBonus
-        "EQUITY" -> Right CETEquity
-        "PROFIT_SHARING" -> Right CETProfitSharing
-        "COMMISSIONS" -> Right CETCommissions
-        "TIPS" -> Right CETTips
-        "OTHER_COMPENSATION_TYPE" -> Right CETOtherCompensationType
+        "COMPENSATION_TYPE_UNSPECIFIED" -> Right CompensationTypeUnspecified
+        "BASE" -> Right Base
+        "BONUS" -> Right Bonus
+        "SIGNING_BONUS" -> Right SigningBonus
+        "EQUITY" -> Right Equity
+        "PROFIT_SHARING" -> Right ProfitSharing
+        "COMMISSIONS" -> Right Commissions
+        "TIPS" -> Right Tips
+        "OTHER_COMPENSATION_TYPE" -> Right OtherCompensationType
         x -> Left ("Unable to parse CompensationEntryType from: " <> x)
 
 instance ToHttpApiData CompensationEntryType where
     toQueryParam = \case
-        CETCompensationTypeUnspecified -> "COMPENSATION_TYPE_UNSPECIFIED"
-        CETBase -> "BASE"
-        CETBonus -> "BONUS"
-        CETSigningBonus -> "SIGNING_BONUS"
-        CETEquity -> "EQUITY"
-        CETProfitSharing -> "PROFIT_SHARING"
-        CETCommissions -> "COMMISSIONS"
-        CETTips -> "TIPS"
-        CETOtherCompensationType -> "OTHER_COMPENSATION_TYPE"
+        CompensationTypeUnspecified -> "COMPENSATION_TYPE_UNSPECIFIED"
+        Base -> "BASE"
+        Bonus -> "BONUS"
+        SigningBonus -> "SIGNING_BONUS"
+        Equity -> "EQUITY"
+        ProfitSharing -> "PROFIT_SHARING"
+        Commissions -> "COMMISSIONS"
+        Tips -> "TIPS"
+        OtherCompensationType -> "OTHER_COMPENSATION_TYPE"
 
 instance FromJSON CompensationEntryType where
     parseJSON = parseJSONText "CompensationEntryType"
@@ -393,7 +532,93 @@ instance FromJSON CompensationEntryType where
 instance ToJSON CompensationEntryType where
     toJSON = toJSONText
 
--- | Optional. Type of the device.
+data JobQueryEmploymentTypesItem
+    = EmploymentTypeUnspecified
+      -- ^ @EMPLOYMENT_TYPE_UNSPECIFIED@
+      -- The default value if the employment type isn\'t specified.
+    | FullTime
+      -- ^ @FULL_TIME@
+      -- The job requires working a number of hours that constitute full time
+      -- employment, typically 40 or more hours per week.
+    | PartTime
+      -- ^ @PART_TIME@
+      -- The job entails working fewer hours than a full time job, typically less
+      -- than 40 hours a week.
+    | Contractor
+      -- ^ @CONTRACTOR@
+      -- The job is offered as a contracted, as opposed to a salaried employee,
+      -- position.
+    | ContractToHire
+      -- ^ @CONTRACT_TO_HIRE@
+      -- The job is offered as a contracted position with the understanding that
+      -- it\'s converted into a full-time position at the end of the contract.
+      -- Jobs of this type are also returned by a search for
+      -- EmploymentType.CONTRACTOR jobs.
+    | Temporary
+      -- ^ @TEMPORARY@
+      -- The job is offered as a temporary employment opportunity, usually a
+      -- short-term engagement.
+    | Intern
+      -- ^ @INTERN@
+      -- The job is a fixed-term opportunity for students or entry-level job
+      -- seekers to obtain on-the-job training, typically offered as a summer
+      -- position.
+    | Volunteer
+      -- ^ @VOLUNTEER@
+      -- The is an opportunity for an individual to volunteer, where there\'s no
+      -- expectation of compensation for the provided services.
+    | PerDiem
+      -- ^ @PER_DIEM@
+      -- The job requires an employee to work on an as-needed basis with a
+      -- flexible schedule.
+    | FlyInFlyOut
+      -- ^ @FLY_IN_FLY_OUT@
+      -- The job involves employing people in remote areas and flying them
+      -- temporarily to the work site instead of relocating employees and their
+      -- families permanently.
+    | OtherEmploymentType
+      -- ^ @OTHER_EMPLOYMENT_TYPE@
+      -- The job does not fit any of the other listed types.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable JobQueryEmploymentTypesItem
+
+instance FromHttpApiData JobQueryEmploymentTypesItem where
+    parseQueryParam = \case
+        "EMPLOYMENT_TYPE_UNSPECIFIED" -> Right EmploymentTypeUnspecified
+        "FULL_TIME" -> Right FullTime
+        "PART_TIME" -> Right PartTime
+        "CONTRACTOR" -> Right Contractor
+        "CONTRACT_TO_HIRE" -> Right ContractToHire
+        "TEMPORARY" -> Right Temporary
+        "INTERN" -> Right Intern
+        "VOLUNTEER" -> Right Volunteer
+        "PER_DIEM" -> Right PerDiem
+        "FLY_IN_FLY_OUT" -> Right FlyInFlyOut
+        "OTHER_EMPLOYMENT_TYPE" -> Right OtherEmploymentType
+        x -> Left ("Unable to parse JobQueryEmploymentTypesItem from: " <> x)
+
+instance ToHttpApiData JobQueryEmploymentTypesItem where
+    toQueryParam = \case
+        EmploymentTypeUnspecified -> "EMPLOYMENT_TYPE_UNSPECIFIED"
+        FullTime -> "FULL_TIME"
+        PartTime -> "PART_TIME"
+        Contractor -> "CONTRACTOR"
+        ContractToHire -> "CONTRACT_TO_HIRE"
+        Temporary -> "TEMPORARY"
+        Intern -> "INTERN"
+        Volunteer -> "VOLUNTEER"
+        PerDiem -> "PER_DIEM"
+        FlyInFlyOut -> "FLY_IN_FLY_OUT"
+        OtherEmploymentType -> "OTHER_EMPLOYMENT_TYPE"
+
+instance FromJSON JobQueryEmploymentTypesItem where
+    parseJSON = parseJSONText "JobQueryEmploymentTypesItem"
+
+instance ToJSON JobQueryEmploymentTypesItem where
+    toJSON = toJSONText
+
+-- | Type of the device.
 data DeviceInfoDeviceType
     = DeviceTypeUnspecified
       -- ^ @DEVICE_TYPE_UNSPECIFIED@
@@ -450,8 +675,8 @@ instance FromJSON DeviceInfoDeviceType where
 instance ToJSON DeviceInfoDeviceType where
     toJSON = toJSONText
 
--- | Optional. Frequency of the specified amount. Default is
--- CompensationUnit.OTHER_COMPENSATION_UNIT.
+-- | Frequency of the specified amount. Default is
+-- CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED.
 data CompensationEntryUnit
     = CompensationUnitUnspecified
       -- ^ @COMPENSATION_UNIT_UNSPECIFIED@
@@ -510,12 +735,11 @@ instance FromJSON CompensationEntryUnit where
 instance ToJSON CompensationEntryUnit where
     toJSON = toJSONText
 
--- | Optional. The experience level associated with the job, such as \"Entry
--- Level\".
+-- | The experience level associated with the job, such as \"Entry Level\".
 data JobJobLevel
     = JobLevelUnspecified
       -- ^ @JOB_LEVEL_UNSPECIFIED@
-      -- The default value if the level is not specified.
+      -- The default value if the level isn\'t specified.
     | EntryLevel
       -- ^ @ENTRY_LEVEL@
       -- Entry-level individual contributors, typically with less than 2 years of
@@ -562,8 +786,8 @@ instance FromJSON JobJobLevel where
 instance ToJSON JobJobLevel where
     toJSON = toJSONText
 
--- | Optional. The visibility of the job. Defaults to Visibility.ACCOUNT_ONLY
--- if not specified.
+-- | Deprecated. The job is only visible to the owner. The visibility of the
+-- job. Defaults to Visibility.ACCOUNT_ONLY if not specified.
 data JobVisibility
     = VisibilityUnspecified
       -- ^ @VISIBILITY_UNSPECIFIED@
@@ -604,13 +828,99 @@ instance FromJSON JobVisibility where
 instance ToJSON JobVisibility where
     toJSON = toJSONText
 
+data JobEmploymentTypesItem
+    = JETIEmploymentTypeUnspecified
+      -- ^ @EMPLOYMENT_TYPE_UNSPECIFIED@
+      -- The default value if the employment type isn\'t specified.
+    | JETIFullTime
+      -- ^ @FULL_TIME@
+      -- The job requires working a number of hours that constitute full time
+      -- employment, typically 40 or more hours per week.
+    | JETIPartTime
+      -- ^ @PART_TIME@
+      -- The job entails working fewer hours than a full time job, typically less
+      -- than 40 hours a week.
+    | JETIContractor
+      -- ^ @CONTRACTOR@
+      -- The job is offered as a contracted, as opposed to a salaried employee,
+      -- position.
+    | JETIContractToHire
+      -- ^ @CONTRACT_TO_HIRE@
+      -- The job is offered as a contracted position with the understanding that
+      -- it\'s converted into a full-time position at the end of the contract.
+      -- Jobs of this type are also returned by a search for
+      -- EmploymentType.CONTRACTOR jobs.
+    | JETITemporary
+      -- ^ @TEMPORARY@
+      -- The job is offered as a temporary employment opportunity, usually a
+      -- short-term engagement.
+    | JETIIntern
+      -- ^ @INTERN@
+      -- The job is a fixed-term opportunity for students or entry-level job
+      -- seekers to obtain on-the-job training, typically offered as a summer
+      -- position.
+    | JETIVolunteer
+      -- ^ @VOLUNTEER@
+      -- The is an opportunity for an individual to volunteer, where there\'s no
+      -- expectation of compensation for the provided services.
+    | JETIPerDiem
+      -- ^ @PER_DIEM@
+      -- The job requires an employee to work on an as-needed basis with a
+      -- flexible schedule.
+    | JETIFlyInFlyOut
+      -- ^ @FLY_IN_FLY_OUT@
+      -- The job involves employing people in remote areas and flying them
+      -- temporarily to the work site instead of relocating employees and their
+      -- families permanently.
+    | JETIOtherEmploymentType
+      -- ^ @OTHER_EMPLOYMENT_TYPE@
+      -- The job does not fit any of the other listed types.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable JobEmploymentTypesItem
+
+instance FromHttpApiData JobEmploymentTypesItem where
+    parseQueryParam = \case
+        "EMPLOYMENT_TYPE_UNSPECIFIED" -> Right JETIEmploymentTypeUnspecified
+        "FULL_TIME" -> Right JETIFullTime
+        "PART_TIME" -> Right JETIPartTime
+        "CONTRACTOR" -> Right JETIContractor
+        "CONTRACT_TO_HIRE" -> Right JETIContractToHire
+        "TEMPORARY" -> Right JETITemporary
+        "INTERN" -> Right JETIIntern
+        "VOLUNTEER" -> Right JETIVolunteer
+        "PER_DIEM" -> Right JETIPerDiem
+        "FLY_IN_FLY_OUT" -> Right JETIFlyInFlyOut
+        "OTHER_EMPLOYMENT_TYPE" -> Right JETIOtherEmploymentType
+        x -> Left ("Unable to parse JobEmploymentTypesItem from: " <> x)
+
+instance ToHttpApiData JobEmploymentTypesItem where
+    toQueryParam = \case
+        JETIEmploymentTypeUnspecified -> "EMPLOYMENT_TYPE_UNSPECIFIED"
+        JETIFullTime -> "FULL_TIME"
+        JETIPartTime -> "PART_TIME"
+        JETIContractor -> "CONTRACTOR"
+        JETIContractToHire -> "CONTRACT_TO_HIRE"
+        JETITemporary -> "TEMPORARY"
+        JETIIntern -> "INTERN"
+        JETIVolunteer -> "VOLUNTEER"
+        JETIPerDiem -> "PER_DIEM"
+        JETIFlyInFlyOut -> "FLY_IN_FLY_OUT"
+        JETIOtherEmploymentType -> "OTHER_EMPLOYMENT_TYPE"
+
+instance FromJSON JobEmploymentTypesItem where
+    parseJSON = parseJSONText "JobEmploymentTypesItem"
+
+instance ToJSON JobEmploymentTypesItem where
+    toJSON = toJSONText
+
 -- | Required. Controls over how important the score of
 -- CustomRankingInfo.ranking_expression gets applied to job\'s final
 -- ranking position. An error is thrown if not specified.
 data CustomRankingInfoImportanceLevel
     = ImportanceLevelUnspecified
       -- ^ @IMPORTANCE_LEVEL_UNSPECIFIED@
-      -- Default value if the importance level is not specified.
+      -- Default value if the importance level isn\'t specified.
     | None
       -- ^ @NONE@
       -- The given ranking expression is of None importance, existing relevance
@@ -672,13 +982,70 @@ instance FromJSON CustomRankingInfoImportanceLevel where
 instance ToJSON CustomRankingInfoImportanceLevel where
     toJSON = toJSONText
 
--- | Optional. The job PostingRegion (for example, state, country) throughout
--- which the job is available. If this field is set, a LocationFilter in a
--- search query within the job region finds this job posting if an exact
--- location match isn\'t specified. If this field is set to
--- PostingRegion.NATION or PostingRegion.ADMINISTRATIVE_AREA, setting job
--- Job.addresses to the same location level as this field is strongly
--- recommended.
+data CompensationFilterUnitsItem
+    = CFUICompensationUnitUnspecified
+      -- ^ @COMPENSATION_UNIT_UNSPECIFIED@
+      -- Default value.
+    | CFUIHourly
+      -- ^ @HOURLY@
+      -- Hourly.
+    | CFUIDaily
+      -- ^ @DAILY@
+      -- Daily.
+    | CFUIWeekly
+      -- ^ @WEEKLY@
+      -- Weekly
+    | CFUIMonthly
+      -- ^ @MONTHLY@
+      -- Monthly.
+    | CFUIYearly
+      -- ^ @YEARLY@
+      -- Yearly.
+    | CFUIOneTime
+      -- ^ @ONE_TIME@
+      -- One time.
+    | CFUIOtherCompensationUnit
+      -- ^ @OTHER_COMPENSATION_UNIT@
+      -- Other compensation units.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CompensationFilterUnitsItem
+
+instance FromHttpApiData CompensationFilterUnitsItem where
+    parseQueryParam = \case
+        "COMPENSATION_UNIT_UNSPECIFIED" -> Right CFUICompensationUnitUnspecified
+        "HOURLY" -> Right CFUIHourly
+        "DAILY" -> Right CFUIDaily
+        "WEEKLY" -> Right CFUIWeekly
+        "MONTHLY" -> Right CFUIMonthly
+        "YEARLY" -> Right CFUIYearly
+        "ONE_TIME" -> Right CFUIOneTime
+        "OTHER_COMPENSATION_UNIT" -> Right CFUIOtherCompensationUnit
+        x -> Left ("Unable to parse CompensationFilterUnitsItem from: " <> x)
+
+instance ToHttpApiData CompensationFilterUnitsItem where
+    toQueryParam = \case
+        CFUICompensationUnitUnspecified -> "COMPENSATION_UNIT_UNSPECIFIED"
+        CFUIHourly -> "HOURLY"
+        CFUIDaily -> "DAILY"
+        CFUIWeekly -> "WEEKLY"
+        CFUIMonthly -> "MONTHLY"
+        CFUIYearly -> "YEARLY"
+        CFUIOneTime -> "ONE_TIME"
+        CFUIOtherCompensationUnit -> "OTHER_COMPENSATION_UNIT"
+
+instance FromJSON CompensationFilterUnitsItem where
+    parseJSON = parseJSONText "CompensationFilterUnitsItem"
+
+instance ToJSON CompensationFilterUnitsItem where
+    toJSON = toJSONText
+
+-- | The job PostingRegion (for example, state, country) throughout which the
+-- job is available. If this field is set, a LocationFilter in a search
+-- query within the job region finds this job posting if an exact location
+-- match isn\'t specified. If this field is set to PostingRegion.NATION or
+-- PostingRegion.ADMINISTRATIVE_AREA, setting job Job.addresses to the same
+-- location level as this field is strongly recommended.
 data JobPostingRegion
     = PostingRegionUnspecified
       -- ^ @POSTING_REGION_UNSPECIFIED@
@@ -729,11 +1096,11 @@ instance FromJSON JobPostingRegion where
 instance ToJSON JobPostingRegion where
     toJSON = toJSONText
 
--- | Optional. The employer\'s company size.
+-- | The employer\'s company size.
 data CompanySize
     = CSCompanySizeUnspecified
       -- ^ @COMPANY_SIZE_UNSPECIFIED@
-      -- Default value if the size is not specified.
+      -- Default value if the size isn\'t specified.
     | CSMini
       -- ^ @MINI@
       -- The company has less than 50 employees.
@@ -788,6 +1155,51 @@ instance FromJSON CompanySize where
 instance ToJSON CompanySize where
     toJSON = toJSONText
 
+-- | The completion topic. The default is CompletionType.COMBINED.
+data ProjectsTenantsCompleteQueryType
+    = CompletionTypeUnspecified
+      -- ^ @COMPLETION_TYPE_UNSPECIFIED@
+      -- Default value.
+    | JobTitle
+      -- ^ @JOB_TITLE@
+      -- Suggest job titles for jobs autocomplete. For CompletionType.JOB_TITLE
+      -- type, only open jobs with the same language_codes are returned.
+    | CompanyName
+      -- ^ @COMPANY_NAME@
+      -- Suggest company names for jobs autocomplete. For
+      -- CompletionType.COMPANY_NAME type, only companies having open jobs with
+      -- the same language_codes are returned.
+    | Combined
+      -- ^ @COMBINED@
+      -- Suggest both job titles and company names for jobs autocomplete. For
+      -- CompletionType.COMBINED type, only open jobs with the same
+      -- language_codes or companies having open jobs with the same
+      -- language_codes are returned.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTenantsCompleteQueryType
+
+instance FromHttpApiData ProjectsTenantsCompleteQueryType where
+    parseQueryParam = \case
+        "COMPLETION_TYPE_UNSPECIFIED" -> Right CompletionTypeUnspecified
+        "JOB_TITLE" -> Right JobTitle
+        "COMPANY_NAME" -> Right CompanyName
+        "COMBINED" -> Right Combined
+        x -> Left ("Unable to parse ProjectsTenantsCompleteQueryType from: " <> x)
+
+instance ToHttpApiData ProjectsTenantsCompleteQueryType where
+    toQueryParam = \case
+        CompletionTypeUnspecified -> "COMPLETION_TYPE_UNSPECIFIED"
+        JobTitle -> "JOB_TITLE"
+        CompanyName -> "COMPANY_NAME"
+        Combined -> "COMBINED"
+
+instance FromJSON ProjectsTenantsCompleteQueryType where
+    parseJSON = parseJSONText "ProjectsTenantsCompleteQueryType"
+
+instance ToJSON ProjectsTenantsCompleteQueryType where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1
@@ -817,12 +1229,11 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
--- | Optional. Specifies the traffic density to use when calculating commute
--- time.
+-- | Specifies the traffic density to use when calculating commute time.
 data CommuteFilterRoadTraffic
     = RoadTrafficUnspecified
       -- ^ @ROAD_TRAFFIC_UNSPECIFIED@
-      -- Road traffic situation is not specified.
+      -- Road traffic situation isn\'t specified.
     | TrafficFree
       -- ^ @TRAFFIC_FREE@
       -- Optimal commute time without considering any traffic impact.
@@ -852,82 +1263,44 @@ instance FromJSON CommuteFilterRoadTraffic where
 instance ToJSON CommuteFilterRoadTraffic where
     toJSON = toJSONText
 
--- | Required. Type of the request, representing which field the
--- histogramming should be performed over. A single request can only
--- specify one histogram of each \`CompensationHistogramRequestType\`.
-data CompensationHistogramRequestType
-    = CHRTCompensationHistogramRequestTypeUnspecified
-      -- ^ @COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED@
-      -- Default value. Invalid.
-    | CHRTBase
-      -- ^ @BASE@
-      -- Histogram by job\'s base compensation. See CompensationEntry for
-      -- definition of base compensation.
-    | CHRTAnnualizedBase
-      -- ^ @ANNUALIZED_BASE@
-      -- Histogram by job\'s annualized base compensation. See CompensationEntry
-      -- for definition of annualized base compensation.
-    | CHRTAnnualizedTotal
-      -- ^ @ANNUALIZED_TOTAL@
-      -- Histogram by job\'s annualized total compensation. See CompensationEntry
-      -- for definition of annualized total compensation.
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable CompensationHistogramRequestType
-
-instance FromHttpApiData CompensationHistogramRequestType where
-    parseQueryParam = \case
-        "COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED" -> Right CHRTCompensationHistogramRequestTypeUnspecified
-        "BASE" -> Right CHRTBase
-        "ANNUALIZED_BASE" -> Right CHRTAnnualizedBase
-        "ANNUALIZED_TOTAL" -> Right CHRTAnnualizedTotal
-        x -> Left ("Unable to parse CompensationHistogramRequestType from: " <> x)
-
-instance ToHttpApiData CompensationHistogramRequestType where
-    toQueryParam = \case
-        CHRTCompensationHistogramRequestTypeUnspecified -> "COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED"
-        CHRTBase -> "BASE"
-        CHRTAnnualizedBase -> "ANNUALIZED_BASE"
-        CHRTAnnualizedTotal -> "ANNUALIZED_TOTAL"
-
-instance FromJSON CompensationHistogramRequestType where
-    parseJSON = parseJSONText "CompensationHistogramRequestType"
-
-instance ToJSON CompensationHistogramRequestType where
-    toJSON = toJSONText
-
 -- | The completion topic.
 data CompletionResultType
-    = CompletionTypeUnspecified
+    = CRTCompletionTypeUnspecified
       -- ^ @COMPLETION_TYPE_UNSPECIFIED@
       -- Default value.
-    | JobTitle
+    | CRTJobTitle
       -- ^ @JOB_TITLE@
-      -- Only suggest job titles.
-    | CompanyName
+      -- Suggest job titles for jobs autocomplete. For CompletionType.JOB_TITLE
+      -- type, only open jobs with the same language_codes are returned.
+    | CRTCompanyName
       -- ^ @COMPANY_NAME@
-      -- Only suggest company names.
-    | Combined
+      -- Suggest company names for jobs autocomplete. For
+      -- CompletionType.COMPANY_NAME type, only companies having open jobs with
+      -- the same language_codes are returned.
+    | CRTCombined
       -- ^ @COMBINED@
-      -- Suggest both job titles and company names.
+      -- Suggest both job titles and company names for jobs autocomplete. For
+      -- CompletionType.COMBINED type, only open jobs with the same
+      -- language_codes or companies having open jobs with the same
+      -- language_codes are returned.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CompletionResultType
 
 instance FromHttpApiData CompletionResultType where
     parseQueryParam = \case
-        "COMPLETION_TYPE_UNSPECIFIED" -> Right CompletionTypeUnspecified
-        "JOB_TITLE" -> Right JobTitle
-        "COMPANY_NAME" -> Right CompanyName
-        "COMBINED" -> Right Combined
+        "COMPLETION_TYPE_UNSPECIFIED" -> Right CRTCompletionTypeUnspecified
+        "JOB_TITLE" -> Right CRTJobTitle
+        "COMPANY_NAME" -> Right CRTCompanyName
+        "COMBINED" -> Right CRTCombined
         x -> Left ("Unable to parse CompletionResultType from: " <> x)
 
 instance ToHttpApiData CompletionResultType where
     toQueryParam = \case
-        CompletionTypeUnspecified -> "COMPLETION_TYPE_UNSPECIFIED"
-        JobTitle -> "JOB_TITLE"
-        CompanyName -> "COMPANY_NAME"
-        Combined -> "COMBINED"
+        CRTCompletionTypeUnspecified -> "COMPLETION_TYPE_UNSPECIFIED"
+        CRTJobTitle -> "JOB_TITLE"
+        CRTCompanyName -> "COMPANY_NAME"
+        CRTCombined -> "COMBINED"
 
 instance FromJSON CompletionResultType where
     parseJSON = parseJSONText "CompletionResultType"
@@ -935,14 +1308,49 @@ instance FromJSON CompletionResultType where
 instance ToJSON CompletionResultType where
     toJSON = toJSONText
 
+-- | The scope of the completion. The defaults is CompletionScope.PUBLIC.
+data ProjectsTenantsCompleteQueryScope
+    = PTCQSCompletionScopeUnspecified
+      -- ^ @COMPLETION_SCOPE_UNSPECIFIED@
+      -- Default value.
+    | PTCQSTenant
+      -- ^ @TENANT@
+      -- Suggestions are based only on the data provided by the client.
+    | PTCQSPublic
+      -- ^ @PUBLIC@
+      -- Suggestions are based on all jobs data in the system that\'s visible to
+      -- the client
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsTenantsCompleteQueryScope
+
+instance FromHttpApiData ProjectsTenantsCompleteQueryScope where
+    parseQueryParam = \case
+        "COMPLETION_SCOPE_UNSPECIFIED" -> Right PTCQSCompletionScopeUnspecified
+        "TENANT" -> Right PTCQSTenant
+        "PUBLIC" -> Right PTCQSPublic
+        x -> Left ("Unable to parse ProjectsTenantsCompleteQueryScope from: " <> x)
+
+instance ToHttpApiData ProjectsTenantsCompleteQueryScope where
+    toQueryParam = \case
+        PTCQSCompletionScopeUnspecified -> "COMPLETION_SCOPE_UNSPECIFIED"
+        PTCQSTenant -> "TENANT"
+        PTCQSPublic -> "PUBLIC"
+
+instance FromJSON ProjectsTenantsCompleteQueryScope where
+    parseJSON = parseJSONText "ProjectsTenantsCompleteQueryScope"
+
+instance ToJSON ProjectsTenantsCompleteQueryScope where
+    toJSON = toJSONText
+
 -- | The type of a location, which corresponds to the address lines field of
--- PostalAddress. For example, \"Downtown, Atlanta, GA, USA\" has a type of
--- LocationType#NEIGHBORHOOD, and \"Kansas City, KS, USA\" has a type of
--- LocationType#LOCALITY.
+-- google.type.PostalAddress. For example, \"Downtown, Atlanta, GA, USA\"
+-- has a type of LocationType.NEIGHBORHOOD, and \"Kansas City, KS, USA\"
+-- has a type of LocationType.LOCALITY.
 data LocationLocationType
     = LLTLocationTypeUnspecified
       -- ^ @LOCATION_TYPE_UNSPECIFIED@
-      -- Default value if the type is not specified.
+      -- Default value if the type isn\'t specified.
     | LLTCountry
       -- ^ @COUNTRY@
       -- A country level location.
@@ -1105,10 +1513,6 @@ data JobEventType
       -- event should only be sent if the job seeker was granted an interview as
       -- part of an application that was initiated by a search conducted through
       -- \/ recommendation provided by the Cloud Talent Solution service.
-    | NotInterested
-      -- ^ @NOT_INTERESTED@
-      -- The job seeker or other entity interacting with the service showed no
-      -- interest in the job.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobEventType
@@ -1131,7 +1535,6 @@ instance FromHttpApiData JobEventType where
         "HIRED" -> Right Hired
         "SENT_CV" -> Right SentCv
         "INTERVIEW_GRANTED" -> Right InterviewGranted
-        "NOT_INTERESTED" -> Right NotInterested
         x -> Left ("Unable to parse JobEventType from: " <> x)
 
 instance ToHttpApiData JobEventType where
@@ -1152,7 +1555,6 @@ instance ToHttpApiData JobEventType where
         Hired -> "HIRED"
         SentCv -> "SENT_CV"
         InterviewGranted -> "INTERVIEW_GRANTED"
-        NotInterested -> "NOT_INTERESTED"
 
 instance FromJSON JobEventType where
     parseJSON = parseJSONText "JobEventType"
@@ -1160,11 +1562,70 @@ instance FromJSON JobEventType where
 instance ToJSON JobEventType where
     toJSON = toJSONText
 
--- | Optional. Mode of a search. Defaults to SearchMode.JOB_SEARCH.
+-- | The state of a long running operation.
+data BatchOperationMetadataState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Default value.
+    | Initializing
+      -- ^ @INITIALIZING@
+      -- The batch operation is being prepared for processing.
+    | Processing
+      -- ^ @PROCESSING@
+      -- The batch operation is actively being processed.
+    | Succeeded
+      -- ^ @SUCCEEDED@
+      -- The batch operation is processed, and at least one item has been
+      -- successfully processed.
+    | Failed
+      -- ^ @FAILED@
+      -- The batch operation is done and no item has been successfully processed.
+    | Cancelling
+      -- ^ @CANCELLING@
+      -- The batch operation is in the process of cancelling after
+      -- google.longrunning.Operations.CancelOperation is called.
+    | Cancelled
+      -- ^ @CANCELLED@
+      -- The batch operation is done after
+      -- google.longrunning.Operations.CancelOperation is called. Any items
+      -- processed before cancelling are returned in the response.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchOperationMetadataState
+
+instance FromHttpApiData BatchOperationMetadataState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "INITIALIZING" -> Right Initializing
+        "PROCESSING" -> Right Processing
+        "SUCCEEDED" -> Right Succeeded
+        "FAILED" -> Right Failed
+        "CANCELLING" -> Right Cancelling
+        "CANCELLED" -> Right Cancelled
+        x -> Left ("Unable to parse BatchOperationMetadataState from: " <> x)
+
+instance ToHttpApiData BatchOperationMetadataState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Initializing -> "INITIALIZING"
+        Processing -> "PROCESSING"
+        Succeeded -> "SUCCEEDED"
+        Failed -> "FAILED"
+        Cancelling -> "CANCELLING"
+        Cancelled -> "CANCELLED"
+
+instance FromJSON BatchOperationMetadataState where
+    parseJSON = parseJSONText "BatchOperationMetadataState"
+
+instance ToJSON BatchOperationMetadataState where
+    toJSON = toJSONText
+
+-- | Mode of a search. Defaults to SearchMode.JOB_SEARCH.
 data SearchJobsRequestSearchMode
     = SearchModeUnspecified
       -- ^ @SEARCH_MODE_UNSPECIFIED@
-      -- The mode of the search method isn\'t specified.
+      -- The mode of the search method isn\'t specified. The default search
+      -- behavior is identical to JOB_SEARCH search behavior.
     | JobSearch
       -- ^ @JOB_SEARCH@
       -- The job search matches against all jobs, and featured jobs (jobs with
@@ -1199,10 +1660,10 @@ instance FromJSON SearchJobsRequestSearchMode where
 instance ToJSON SearchJobsRequestSearchMode where
     toJSON = toJSONText
 
--- | Optional. Allows the client to return jobs without a set location,
--- specifically, telecommuting jobs (telecomuting is considered by the
--- service as a special location. Job.posting_region indicates if a job
--- permits telecommuting. If this field is set to
+-- | Allows the client to return jobs without a set location, specifically,
+-- telecommuting jobs (telecommuting is considered by the service as a
+-- special location. Job.posting_region indicates if a job permits
+-- telecommuting. If this field is set to
 -- TelecommutePreference.TELECOMMUTE_ALLOWED, telecommuting jobs are
 -- searched, and address and lat_lng are ignored. If not set or set to
 -- TelecommutePreference.TELECOMMUTE_EXCLUDED, telecommute job are not
@@ -1211,11 +1672,12 @@ instance ToJSON SearchJobsRequestSearchMode where
 -- to search for a combination of job locations, such as \"Mountain View\"
 -- or \"telecommuting\" jobs. However, when used in combination with other
 -- location filters, telecommuting jobs can be treated as less relevant
--- than other jobs in the search response.
+-- than other jobs in the search response. This field is only used for job
+-- search requests.
 data LocationFilterTelecommutePreference
     = TelecommutePreferenceUnspecified
       -- ^ @TELECOMMUTE_PREFERENCE_UNSPECIFIED@
-      -- Default value if the telecommute preference is not specified.
+      -- Default value if the telecommute preference isn\'t specified.
     | TelecommuteExcluded
       -- ^ @TELECOMMUTE_EXCLUDED@
       -- Exclude telecommute jobs.
@@ -1245,10 +1707,10 @@ instance FromJSON LocationFilterTelecommutePreference where
 instance ToJSON LocationFilterTelecommutePreference where
     toJSON = toJSONText
 
--- | Optional. Option for job HTML content sanitization. Applied fields are:
--- * description * applicationInfo.instruction * incentives *
--- qualifications * responsibilities HTML tags in these fields may be
--- stripped if sanitiazation is not disabled. Defaults to
+-- | Option for job HTML content sanitization. Applied fields are: *
+-- description * applicationInfo.instruction * incentives * qualifications
+-- * responsibilities HTML tags in these fields may be stripped if
+-- sanitiazation isn\'t disabled. Defaults to
 -- HtmlSanitization.SIMPLE_FORMATTING_ONLY.
 data ProcessingOptionsHTMLSanitization
     = HTMLSanitizationUnspecified
@@ -1284,28 +1746,284 @@ instance FromJSON ProcessingOptionsHTMLSanitization where
 instance ToJSON ProcessingOptionsHTMLSanitization where
     toJSON = toJSONText
 
--- | Optional. The desired job attributes returned for jobs in the search
--- response. Defaults to JobView.SMALL if no value is specified.
+data JobQueryJobCategoriesItem
+    = JQJCIJobCategoryUnspecified
+      -- ^ @JOB_CATEGORY_UNSPECIFIED@
+      -- The default value if the category isn\'t specified.
+    | JQJCIAccountingAndFinance
+      -- ^ @ACCOUNTING_AND_FINANCE@
+      -- An accounting and finance job, such as an Accountant.
+    | JQJCIAdministrativeAndOffice
+      -- ^ @ADMINISTRATIVE_AND_OFFICE@
+      -- An administrative and office job, such as an Administrative Assistant.
+    | JQJCIAdvertisingAndMarketing
+      -- ^ @ADVERTISING_AND_MARKETING@
+      -- An advertising and marketing job, such as Marketing Manager.
+    | JQJCIAnimalCare
+      -- ^ @ANIMAL_CARE@
+      -- An animal care job, such as Veterinarian.
+    | JQJCIArtFashionAndDesign
+      -- ^ @ART_FASHION_AND_DESIGN@
+      -- An art, fashion, or design job, such as Designer.
+    | JQJCIBusinessOperations
+      -- ^ @BUSINESS_OPERATIONS@
+      -- A business operations job, such as Business Operations Manager.
+    | JQJCICleaningAndFacilities
+      -- ^ @CLEANING_AND_FACILITIES@
+      -- A cleaning and facilities job, such as Custodial Staff.
+    | JQJCIComputerAndIt
+      -- ^ @COMPUTER_AND_IT@
+      -- A computer and IT job, such as Systems Administrator.
+    | JQJCIConstruction
+      -- ^ @CONSTRUCTION@
+      -- A construction job, such as General Laborer.
+    | JQJCICustomerService
+      -- ^ @CUSTOMER_SERVICE@
+      -- A customer service job, such s Cashier.
+    | JQJCIEducation
+      -- ^ @EDUCATION@
+      -- An education job, such as School Teacher.
+    | JQJCIEntertainmentAndTravel
+      -- ^ @ENTERTAINMENT_AND_TRAVEL@
+      -- An entertainment and travel job, such as Flight Attendant.
+    | JQJCIFarmingAndOutdoors
+      -- ^ @FARMING_AND_OUTDOORS@
+      -- A farming or outdoor job, such as Park Ranger.
+    | JQJCIHealthcare
+      -- ^ @HEALTHCARE@
+      -- A healthcare job, such as Registered Nurse.
+    | JQJCIHumanResources
+      -- ^ @HUMAN_RESOURCES@
+      -- A human resources job, such as Human Resources Director.
+    | JQJCIInstallationMaintenanceAndRepair
+      -- ^ @INSTALLATION_MAINTENANCE_AND_REPAIR@
+      -- An installation, maintenance, or repair job, such as Electrician.
+    | JQJCILegal
+      -- ^ @LEGAL@
+      -- A legal job, such as Law Clerk.
+    | JQJCIManagement
+      -- ^ @MANAGEMENT@
+      -- A management job, often used in conjunction with another category, such
+      -- as Store Manager.
+    | JQJCIManufacturingAndWarehouse
+      -- ^ @MANUFACTURING_AND_WAREHOUSE@
+      -- A manufacturing or warehouse job, such as Assembly Technician.
+    | JQJCIMediaCommunicationsAndWriting
+      -- ^ @MEDIA_COMMUNICATIONS_AND_WRITING@
+      -- A media, communications, or writing job, such as Media Relations.
+    | JQJCIOilGasAndMining
+      -- ^ @OIL_GAS_AND_MINING@
+      -- An oil, gas or mining job, such as Offshore Driller.
+    | JQJCIPersonalCareAndServices
+      -- ^ @PERSONAL_CARE_AND_SERVICES@
+      -- A personal care and services job, such as Hair Stylist.
+    | JQJCIProtectiveServices
+      -- ^ @PROTECTIVE_SERVICES@
+      -- A protective services job, such as Security Guard.
+    | JQJCIRealEState
+      -- ^ @REAL_ESTATE@
+      -- A real estate job, such as Buyer\'s Agent.
+    | JQJCIRestaurantAndHospitality
+      -- ^ @RESTAURANT_AND_HOSPITALITY@
+      -- A restaurant and hospitality job, such as Restaurant Server.
+    | JQJCISalesAndRetail
+      -- ^ @SALES_AND_RETAIL@
+      -- A sales and\/or retail job, such Sales Associate.
+    | JQJCIScienceAndEngineering
+      -- ^ @SCIENCE_AND_ENGINEERING@
+      -- A science and engineering job, such as Lab Technician.
+    | JQJCISocialServicesAndNonProfit
+      -- ^ @SOCIAL_SERVICES_AND_NON_PROFIT@
+      -- A social services or non-profit job, such as Case Worker.
+    | JQJCISportsFitnessAndRecreation
+      -- ^ @SPORTS_FITNESS_AND_RECREATION@
+      -- A sports, fitness, or recreation job, such as Personal Trainer.
+    | JQJCITransportationAndLogistics
+      -- ^ @TRANSPORTATION_AND_LOGISTICS@
+      -- A transportation or logistics job, such as Truck Driver.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable JobQueryJobCategoriesItem
+
+instance FromHttpApiData JobQueryJobCategoriesItem where
+    parseQueryParam = \case
+        "JOB_CATEGORY_UNSPECIFIED" -> Right JQJCIJobCategoryUnspecified
+        "ACCOUNTING_AND_FINANCE" -> Right JQJCIAccountingAndFinance
+        "ADMINISTRATIVE_AND_OFFICE" -> Right JQJCIAdministrativeAndOffice
+        "ADVERTISING_AND_MARKETING" -> Right JQJCIAdvertisingAndMarketing
+        "ANIMAL_CARE" -> Right JQJCIAnimalCare
+        "ART_FASHION_AND_DESIGN" -> Right JQJCIArtFashionAndDesign
+        "BUSINESS_OPERATIONS" -> Right JQJCIBusinessOperations
+        "CLEANING_AND_FACILITIES" -> Right JQJCICleaningAndFacilities
+        "COMPUTER_AND_IT" -> Right JQJCIComputerAndIt
+        "CONSTRUCTION" -> Right JQJCIConstruction
+        "CUSTOMER_SERVICE" -> Right JQJCICustomerService
+        "EDUCATION" -> Right JQJCIEducation
+        "ENTERTAINMENT_AND_TRAVEL" -> Right JQJCIEntertainmentAndTravel
+        "FARMING_AND_OUTDOORS" -> Right JQJCIFarmingAndOutdoors
+        "HEALTHCARE" -> Right JQJCIHealthcare
+        "HUMAN_RESOURCES" -> Right JQJCIHumanResources
+        "INSTALLATION_MAINTENANCE_AND_REPAIR" -> Right JQJCIInstallationMaintenanceAndRepair
+        "LEGAL" -> Right JQJCILegal
+        "MANAGEMENT" -> Right JQJCIManagement
+        "MANUFACTURING_AND_WAREHOUSE" -> Right JQJCIManufacturingAndWarehouse
+        "MEDIA_COMMUNICATIONS_AND_WRITING" -> Right JQJCIMediaCommunicationsAndWriting
+        "OIL_GAS_AND_MINING" -> Right JQJCIOilGasAndMining
+        "PERSONAL_CARE_AND_SERVICES" -> Right JQJCIPersonalCareAndServices
+        "PROTECTIVE_SERVICES" -> Right JQJCIProtectiveServices
+        "REAL_ESTATE" -> Right JQJCIRealEState
+        "RESTAURANT_AND_HOSPITALITY" -> Right JQJCIRestaurantAndHospitality
+        "SALES_AND_RETAIL" -> Right JQJCISalesAndRetail
+        "SCIENCE_AND_ENGINEERING" -> Right JQJCIScienceAndEngineering
+        "SOCIAL_SERVICES_AND_NON_PROFIT" -> Right JQJCISocialServicesAndNonProfit
+        "SPORTS_FITNESS_AND_RECREATION" -> Right JQJCISportsFitnessAndRecreation
+        "TRANSPORTATION_AND_LOGISTICS" -> Right JQJCITransportationAndLogistics
+        x -> Left ("Unable to parse JobQueryJobCategoriesItem from: " <> x)
+
+instance ToHttpApiData JobQueryJobCategoriesItem where
+    toQueryParam = \case
+        JQJCIJobCategoryUnspecified -> "JOB_CATEGORY_UNSPECIFIED"
+        JQJCIAccountingAndFinance -> "ACCOUNTING_AND_FINANCE"
+        JQJCIAdministrativeAndOffice -> "ADMINISTRATIVE_AND_OFFICE"
+        JQJCIAdvertisingAndMarketing -> "ADVERTISING_AND_MARKETING"
+        JQJCIAnimalCare -> "ANIMAL_CARE"
+        JQJCIArtFashionAndDesign -> "ART_FASHION_AND_DESIGN"
+        JQJCIBusinessOperations -> "BUSINESS_OPERATIONS"
+        JQJCICleaningAndFacilities -> "CLEANING_AND_FACILITIES"
+        JQJCIComputerAndIt -> "COMPUTER_AND_IT"
+        JQJCIConstruction -> "CONSTRUCTION"
+        JQJCICustomerService -> "CUSTOMER_SERVICE"
+        JQJCIEducation -> "EDUCATION"
+        JQJCIEntertainmentAndTravel -> "ENTERTAINMENT_AND_TRAVEL"
+        JQJCIFarmingAndOutdoors -> "FARMING_AND_OUTDOORS"
+        JQJCIHealthcare -> "HEALTHCARE"
+        JQJCIHumanResources -> "HUMAN_RESOURCES"
+        JQJCIInstallationMaintenanceAndRepair -> "INSTALLATION_MAINTENANCE_AND_REPAIR"
+        JQJCILegal -> "LEGAL"
+        JQJCIManagement -> "MANAGEMENT"
+        JQJCIManufacturingAndWarehouse -> "MANUFACTURING_AND_WAREHOUSE"
+        JQJCIMediaCommunicationsAndWriting -> "MEDIA_COMMUNICATIONS_AND_WRITING"
+        JQJCIOilGasAndMining -> "OIL_GAS_AND_MINING"
+        JQJCIPersonalCareAndServices -> "PERSONAL_CARE_AND_SERVICES"
+        JQJCIProtectiveServices -> "PROTECTIVE_SERVICES"
+        JQJCIRealEState -> "REAL_ESTATE"
+        JQJCIRestaurantAndHospitality -> "RESTAURANT_AND_HOSPITALITY"
+        JQJCISalesAndRetail -> "SALES_AND_RETAIL"
+        JQJCIScienceAndEngineering -> "SCIENCE_AND_ENGINEERING"
+        JQJCISocialServicesAndNonProfit -> "SOCIAL_SERVICES_AND_NON_PROFIT"
+        JQJCISportsFitnessAndRecreation -> "SPORTS_FITNESS_AND_RECREATION"
+        JQJCITransportationAndLogistics -> "TRANSPORTATION_AND_LOGISTICS"
+
+instance FromJSON JobQueryJobCategoriesItem where
+    parseJSON = parseJSONText "JobQueryJobCategoriesItem"
+
+instance ToJSON JobQueryJobCategoriesItem where
+    toJSON = toJSONText
+
+data JobJobBenefitsItem
+    = JobBenefitUnspecified
+      -- ^ @JOB_BENEFIT_UNSPECIFIED@
+      -- Default value if the type isn\'t specified.
+    | ChildCare
+      -- ^ @CHILD_CARE@
+      -- The job includes access to programs that support child care, such as
+      -- daycare.
+    | Dental
+      -- ^ @DENTAL@
+      -- The job includes dental services covered by a dental insurance plan.
+    | DomesticPartner
+      -- ^ @DOMESTIC_PARTNER@
+      -- The job offers specific benefits to domestic partners.
+    | FlexibleHours
+      -- ^ @FLEXIBLE_HOURS@
+      -- The job allows for a flexible work schedule.
+    | Medical
+      -- ^ @MEDICAL@
+      -- The job includes health services covered by a medical insurance plan.
+    | LifeInsurance
+      -- ^ @LIFE_INSURANCE@
+      -- The job includes a life insurance plan provided by the employer or
+      -- available for purchase by the employee.
+    | ParentalLeave
+      -- ^ @PARENTAL_LEAVE@
+      -- The job allows for a leave of absence to a parent to care for a newborn
+      -- child.
+    | RetirementPlan
+      -- ^ @RETIREMENT_PLAN@
+      -- The job includes a workplace retirement plan provided by the employer or
+      -- available for purchase by the employee.
+    | SickDays
+      -- ^ @SICK_DAYS@
+      -- The job allows for paid time off due to illness.
+    | Vacation
+      -- ^ @VACATION@
+      -- The job includes paid time off for vacation.
+    | Vision
+      -- ^ @VISION@
+      -- The job includes vision services covered by a vision insurance plan.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable JobJobBenefitsItem
+
+instance FromHttpApiData JobJobBenefitsItem where
+    parseQueryParam = \case
+        "JOB_BENEFIT_UNSPECIFIED" -> Right JobBenefitUnspecified
+        "CHILD_CARE" -> Right ChildCare
+        "DENTAL" -> Right Dental
+        "DOMESTIC_PARTNER" -> Right DomesticPartner
+        "FLEXIBLE_HOURS" -> Right FlexibleHours
+        "MEDICAL" -> Right Medical
+        "LIFE_INSURANCE" -> Right LifeInsurance
+        "PARENTAL_LEAVE" -> Right ParentalLeave
+        "RETIREMENT_PLAN" -> Right RetirementPlan
+        "SICK_DAYS" -> Right SickDays
+        "VACATION" -> Right Vacation
+        "VISION" -> Right Vision
+        x -> Left ("Unable to parse JobJobBenefitsItem from: " <> x)
+
+instance ToHttpApiData JobJobBenefitsItem where
+    toQueryParam = \case
+        JobBenefitUnspecified -> "JOB_BENEFIT_UNSPECIFIED"
+        ChildCare -> "CHILD_CARE"
+        Dental -> "DENTAL"
+        DomesticPartner -> "DOMESTIC_PARTNER"
+        FlexibleHours -> "FLEXIBLE_HOURS"
+        Medical -> "MEDICAL"
+        LifeInsurance -> "LIFE_INSURANCE"
+        ParentalLeave -> "PARENTAL_LEAVE"
+        RetirementPlan -> "RETIREMENT_PLAN"
+        SickDays -> "SICK_DAYS"
+        Vacation -> "VACATION"
+        Vision -> "VISION"
+
+instance FromJSON JobJobBenefitsItem where
+    parseJSON = parseJSONText "JobJobBenefitsItem"
+
+instance ToJSON JobJobBenefitsItem where
+    toJSON = toJSONText
+
+-- | The desired job attributes returned for jobs in the search response.
+-- Defaults to JobView.JOB_VIEW_SMALL if no value is specified.
 data SearchJobsRequestJobView
-    = JobViewUnspecified
+    = SJRJVJobViewUnspecified
       -- ^ @JOB_VIEW_UNSPECIFIED@
       -- Default value.
-    | JobViewIdOnly
+    | SJRJVJobViewIdOnly
       -- ^ @JOB_VIEW_ID_ONLY@
       -- A ID only view of job, with following attributes: Job.name,
       -- Job.requisition_id, Job.language_code.
-    | JobViewMinimal
+    | SJRJVJobViewMinimal
       -- ^ @JOB_VIEW_MINIMAL@
       -- A minimal view of the job, with the following attributes: Job.name,
-      -- Job.requisition_id, Job.title, Job.company_name,
-      -- Job.DerivedInfo.locations, Job.language_code.
-    | JobViewSmall
+      -- Job.requisition_id, Job.title, Job.company, Job.DerivedInfo.locations,
+      -- Job.language_code.
+    | SJRJVJobViewSmall
       -- ^ @JOB_VIEW_SMALL@
       -- A small view of the job, with the following attributes in the search
-      -- results: Job.name, Job.requisition_id, Job.title, Job.company_name,
+      -- results: Job.name, Job.requisition_id, Job.title, Job.company,
       -- Job.DerivedInfo.locations, Job.visibility, Job.language_code,
       -- Job.description.
-    | JobViewFull
+    | SJRJVJobViewFull
       -- ^ @JOB_VIEW_FULL@
       -- All available attributes are included in the search results.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1314,20 +2032,20 @@ instance Hashable SearchJobsRequestJobView
 
 instance FromHttpApiData SearchJobsRequestJobView where
     parseQueryParam = \case
-        "JOB_VIEW_UNSPECIFIED" -> Right JobViewUnspecified
-        "JOB_VIEW_ID_ONLY" -> Right JobViewIdOnly
-        "JOB_VIEW_MINIMAL" -> Right JobViewMinimal
-        "JOB_VIEW_SMALL" -> Right JobViewSmall
-        "JOB_VIEW_FULL" -> Right JobViewFull
+        "JOB_VIEW_UNSPECIFIED" -> Right SJRJVJobViewUnspecified
+        "JOB_VIEW_ID_ONLY" -> Right SJRJVJobViewIdOnly
+        "JOB_VIEW_MINIMAL" -> Right SJRJVJobViewMinimal
+        "JOB_VIEW_SMALL" -> Right SJRJVJobViewSmall
+        "JOB_VIEW_FULL" -> Right SJRJVJobViewFull
         x -> Left ("Unable to parse SearchJobsRequestJobView from: " <> x)
 
 instance ToHttpApiData SearchJobsRequestJobView where
     toQueryParam = \case
-        JobViewUnspecified -> "JOB_VIEW_UNSPECIFIED"
-        JobViewIdOnly -> "JOB_VIEW_ID_ONLY"
-        JobViewMinimal -> "JOB_VIEW_MINIMAL"
-        JobViewSmall -> "JOB_VIEW_SMALL"
-        JobViewFull -> "JOB_VIEW_FULL"
+        SJRJVJobViewUnspecified -> "JOB_VIEW_UNSPECIFIED"
+        SJRJVJobViewIdOnly -> "JOB_VIEW_ID_ONLY"
+        SJRJVJobViewMinimal -> "JOB_VIEW_MINIMAL"
+        SJRJVJobViewSmall -> "JOB_VIEW_SMALL"
+        SJRJVJobViewFull -> "JOB_VIEW_FULL"
 
 instance FromJSON SearchJobsRequestJobView where
     parseJSON = parseJSONText "SearchJobsRequestJobView"

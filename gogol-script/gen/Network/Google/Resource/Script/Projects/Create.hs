@@ -42,8 +42,8 @@ module Network.Google.Resource.Script.Projects.Create
     , pcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.create@ method which the
 -- 'ProjectsCreate' request conforms to.
@@ -65,12 +65,12 @@ type ProjectsCreateResource =
 -- /See:/ 'projectsCreate' smart constructor.
 data ProjectsCreate =
   ProjectsCreate'
-    { _pcXgafv          :: !(Maybe Xgafv)
+    { _pcXgafv :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
-    , _pcAccessToken    :: !(Maybe Text)
-    , _pcUploadType     :: !(Maybe Text)
-    , _pcPayload        :: !CreateProjectRequest
-    , _pcCallback       :: !(Maybe Text)
+    , _pcAccessToken :: !(Maybe Text)
+    , _pcUploadType :: !(Maybe Text)
+    , _pcPayload :: !CreateProjectRequest
+    , _pcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

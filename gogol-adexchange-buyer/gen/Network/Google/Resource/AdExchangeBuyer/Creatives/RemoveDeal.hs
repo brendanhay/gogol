@@ -38,8 +38,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.RemoveDeal
     , crdAccountId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.creatives.removeDeal@ method which the
 -- 'CreativesRemoveDeal' request conforms to.
@@ -59,8 +59,8 @@ type CreativesRemoveDealResource =
 data CreativesRemoveDeal =
   CreativesRemoveDeal'
     { _crdBuyerCreativeId :: !Text
-    , _crdDealId          :: !(Textual Int64)
-    , _crdAccountId       :: !(Textual Int32)
+    , _crdDealId :: !(Textual Int64)
+    , _crdAccountId :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

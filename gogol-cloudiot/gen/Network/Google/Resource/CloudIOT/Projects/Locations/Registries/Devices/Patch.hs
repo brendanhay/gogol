@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.Pa
     , plrdpCallback
     ) where
 
-import           Network.Google.CloudIOT.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudiot.projects.locations.registries.devices.patch@ method which the
 -- 'ProjectsLocationsRegistriesDevicesPatch' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsLocationsRegistriesDevicesPatchResource
 -- /See:/ 'projectsLocationsRegistriesDevicesPatch' smart constructor.
 data ProjectsLocationsRegistriesDevicesPatch =
   ProjectsLocationsRegistriesDevicesPatch'
-    { _plrdpXgafv          :: !(Maybe Xgafv)
+    { _plrdpXgafv :: !(Maybe Xgafv)
     , _plrdpUploadProtocol :: !(Maybe Text)
-    , _plrdpUpdateMask     :: !(Maybe GFieldMask)
-    , _plrdpAccessToken    :: !(Maybe Text)
-    , _plrdpUploadType     :: !(Maybe Text)
-    , _plrdpPayload        :: !Device
-    , _plrdpName           :: !Text
-    , _plrdpCallback       :: !(Maybe Text)
+    , _plrdpUpdateMask :: !(Maybe GFieldMask)
+    , _plrdpAccessToken :: !(Maybe Text)
+    , _plrdpUploadType :: !(Maybe Text)
+    , _plrdpPayload :: !Device
+    , _plrdpName :: !Text
+    , _plrdpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,8 +125,8 @@ plrdpUploadProtocol
   = lens _plrdpUploadProtocol
       (\ s a -> s{_plrdpUploadProtocol = a})
 
--- | Only updates the \`device\` fields indicated by this mask. The field
--- mask must not be empty, and it must not contain fields that are
+-- | Required. Only updates the \`device\` fields indicated by this mask. The
+-- field mask must not be empty, and it must not contain fields that are
 -- immutable or only set by the server. Mutable top-level fields:
 -- \`credentials\`, \`blocked\`, and \`metadata\`
 plrdpUpdateMask :: Lens' ProjectsLocationsRegistriesDevicesPatch (Maybe GFieldMask)

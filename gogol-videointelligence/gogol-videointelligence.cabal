@@ -16,11 +16,12 @@ extra-source-files:    README.md src/.gitkeep
 description:
     Detects objects, explicit content, and scene changes in videos. It also
     specifies the region for annotation and transcribes speech to text.
+    Supports both asynchronous API and streaming API.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1p2beta1@
+    This library is compatible with version @v1p3beta1@
     of the API.
 
 source-repository head

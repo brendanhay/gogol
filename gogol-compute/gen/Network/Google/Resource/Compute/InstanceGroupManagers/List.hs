@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.List
     , InstanceGroupManagersList
 
     -- * Request Lenses
+    , igmlReturnPartialSuccess
     , igmlOrderBy
     , igmlProject
     , igmlZone
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.List
     , igmlMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.list@ method which the
 -- 'InstanceGroupManagersList' request conforms to.
@@ -55,12 +56,13 @@ type InstanceGroupManagersListResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroupManagers" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] InstanceGroupManagerList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] InstanceGroupManagerList
 
 -- | Retrieves a list of managed instance groups that are contained within
 -- the specified project and zone.
@@ -68,11 +70,12 @@ type InstanceGroupManagersListResource =
 -- /See:/ 'instanceGroupManagersList' smart constructor.
 data InstanceGroupManagersList =
   InstanceGroupManagersList'
-    { _igmlOrderBy    :: !(Maybe Text)
-    , _igmlProject    :: !Text
-    , _igmlZone       :: !Text
-    , _igmlFilter     :: !(Maybe Text)
-    , _igmlPageToken  :: !(Maybe Text)
+    { _igmlReturnPartialSuccess :: !(Maybe Bool)
+    , _igmlOrderBy :: !(Maybe Text)
+    , _igmlProject :: !Text
+    , _igmlZone :: !Text
+    , _igmlFilter :: !(Maybe Text)
+    , _igmlPageToken :: !(Maybe Text)
     , _igmlMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,6 +84,8 @@ data InstanceGroupManagersList =
 -- | Creates a value of 'InstanceGroupManagersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmlReturnPartialSuccess'
 --
 -- * 'igmlOrderBy'
 --
@@ -99,7 +104,8 @@ instanceGroupManagersList
     -> InstanceGroupManagersList
 instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
   InstanceGroupManagersList'
-    { _igmlOrderBy = Nothing
+    { _igmlReturnPartialSuccess = Nothing
+    , _igmlOrderBy = Nothing
     , _igmlProject = pIgmlProject_
     , _igmlZone = pIgmlZone_
     , _igmlFilter = Nothing
@@ -108,14 +114,21 @@ instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+igmlReturnPartialSuccess :: Lens' InstanceGroupManagersList (Maybe Bool)
+igmlReturnPartialSuccess
+  = lens _igmlReturnPartialSuccess
+      (\ s a -> s{_igmlReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 igmlOrderBy :: Lens' InstanceGroupManagersList (Maybe Text)
 igmlOrderBy
   = lens _igmlOrderBy (\ s a -> s{_igmlOrderBy = a})
@@ -132,35 +145,37 @@ igmlZone = lens _igmlZone (\ s a -> s{_igmlZone = a})
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 igmlFilter :: Lens' InstanceGroupManagersList (Maybe Text)
 igmlFilter
   = lens _igmlFilter (\ s a -> s{_igmlFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 igmlPageToken :: Lens' InstanceGroupManagersList (Maybe Text)
 igmlPageToken
   = lens _igmlPageToken
       (\ s a -> s{_igmlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 igmlMaxResults :: Lens' InstanceGroupManagersList Word32
 igmlMaxResults
   = lens _igmlMaxResults
@@ -176,7 +191,9 @@ instance GoogleRequest InstanceGroupManagersList
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupManagersList'{..}
-          = go _igmlProject _igmlZone _igmlOrderBy _igmlFilter
+          = go _igmlProject _igmlZone _igmlReturnPartialSuccess
+              _igmlOrderBy
+              _igmlFilter
               _igmlPageToken
               (Just _igmlMaxResults)
               (Just AltJSON)

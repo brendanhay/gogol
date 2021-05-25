@@ -23,7 +23,7 @@
 -- Updates a specific job resource. Currently the only supported fields to
 -- update are \`labels\`.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.jobs.patch@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.jobs.patch@.
 module Network.Google.Resource.Ml.Projects.Jobs.Patch
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.Ml.Projects.Jobs.Patch
     , pjpCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.jobs.patch@ method which the
 -- 'ProjectsJobsPatch' request conforms to.
@@ -68,14 +68,14 @@ type ProjectsJobsPatchResource =
 -- /See:/ 'projectsJobsPatch' smart constructor.
 data ProjectsJobsPatch =
   ProjectsJobsPatch'
-    { _pjpXgafv          :: !(Maybe Xgafv)
+    { _pjpXgafv :: !(Maybe Xgafv)
     , _pjpUploadProtocol :: !(Maybe Text)
-    , _pjpUpdateMask     :: !(Maybe GFieldMask)
-    , _pjpAccessToken    :: !(Maybe Text)
-    , _pjpUploadType     :: !(Maybe Text)
-    , _pjpPayload        :: !GoogleCloudMlV1__Job
-    , _pjpName           :: !Text
-    , _pjpCallback       :: !(Maybe Text)
+    , _pjpUpdateMask :: !(Maybe GFieldMask)
+    , _pjpAccessToken :: !(Maybe Text)
+    , _pjpUploadType :: !(Maybe Text)
+    , _pjpPayload :: !GoogleCloudMlV1__Job
+    , _pjpName :: !Text
+    , _pjpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

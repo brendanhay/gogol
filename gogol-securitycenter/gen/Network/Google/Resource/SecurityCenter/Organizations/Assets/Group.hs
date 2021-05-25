@@ -23,7 +23,7 @@
 -- Filters an organization\'s assets and groups them by their specified
 -- properties.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.assets.group@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.assets.group@.
 module Network.Google.Resource.SecurityCenter.Organizations.Assets.Group
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Assets.Group
     , oagCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.assets.group@ method which the
 -- 'OrganizationsAssetsGroup' request conforms to.
 type OrganizationsAssetsGroupResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "parent" Text :>
          "assets:group" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,13 +67,13 @@ type OrganizationsAssetsGroupResource =
 -- /See:/ 'organizationsAssetsGroup' smart constructor.
 data OrganizationsAssetsGroup =
   OrganizationsAssetsGroup'
-    { _oagParent         :: !Text
-    , _oagXgafv          :: !(Maybe Xgafv)
+    { _oagParent :: !Text
+    , _oagXgafv :: !(Maybe Xgafv)
     , _oagUploadProtocol :: !(Maybe Text)
-    , _oagAccessToken    :: !(Maybe Text)
-    , _oagUploadType     :: !(Maybe Text)
-    , _oagPayload        :: !GroupAssetsRequest
-    , _oagCallback       :: !(Maybe Text)
+    , _oagAccessToken :: !(Maybe Text)
+    , _oagUploadType :: !(Maybe Text)
+    , _oagPayload :: !GroupAssetsRequest
+    , _oagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -111,7 +111,7 @@ organizationsAssetsGroup pOagParent_ pOagPayload_ =
     }
 
 
--- | Name of the organization to groupBy. Its format is
+-- | Required. Name of the organization to groupBy. Its format is
 -- \"organizations\/[organization_id]\".
 oagParent :: Lens' OrganizationsAssetsGroup Text
 oagParent

@@ -22,7 +22,7 @@
 --
 -- Deletes a logs-based metric.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.metrics.delete@.
 module Network.Google.Resource.Logging.Projects.Metrics.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.Projects.Metrics.Delete
     , pmdCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.projects.metrics.delete@ method which the
 -- 'ProjectsMetricsDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsMetricsDeleteResource =
 -- /See:/ 'projectsMetricsDelete' smart constructor.
 data ProjectsMetricsDelete =
   ProjectsMetricsDelete'
-    { _pmdXgafv          :: !(Maybe Xgafv)
+    { _pmdXgafv :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
-    , _pmdAccessToken    :: !(Maybe Text)
-    , _pmdMetricName     :: !Text
-    , _pmdUploadType     :: !(Maybe Text)
-    , _pmdCallback       :: !(Maybe Text)
+    , _pmdAccessToken :: !(Maybe Text)
+    , _pmdMetricName :: !Text
+    , _pmdUploadType :: !(Maybe Text)
+    , _pmdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,7 +116,7 @@ pmdAccessToken
   = lens _pmdAccessToken
       (\ s a -> s{_pmdAccessToken = a})
 
--- | The resource name of the metric to delete:
+-- | Required. The resource name of the metric to delete:
 -- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\"
 pmdMetricName :: Lens' ProjectsMetricsDelete Text
 pmdMetricName

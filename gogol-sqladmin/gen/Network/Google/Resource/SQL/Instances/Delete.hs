@@ -22,7 +22,7 @@
 --
 -- Deletes a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.delete@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.instances.delete@.
 module Network.Google.Resource.SQL.Instances.Delete
     (
     -- * REST Resource
@@ -33,30 +33,44 @@ module Network.Google.Resource.SQL.Instances.Delete
     , InstancesDelete
 
     -- * Request Lenses
+    , idXgafv
+    , idUploadProtocol
     , idProject
+    , idAccessToken
+    , idUploadType
+    , idCallback
     , idInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.delete@ method which the
 -- 'InstancesDelete' request conforms to.
 type InstancesDeleteResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a Cloud SQL instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
 data InstancesDelete =
   InstancesDelete'
-    { _idProject  :: !Text
+    { _idXgafv :: !(Maybe Xgafv)
+    , _idUploadProtocol :: !(Maybe Text)
+    , _idProject :: !Text
+    , _idAccessToken :: !(Maybe Text)
+    , _idUploadType :: !(Maybe Text)
+    , _idCallback :: !(Maybe Text)
     , _idInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -66,7 +80,17 @@ data InstancesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'idXgafv'
+--
+-- * 'idUploadProtocol'
+--
 -- * 'idProject'
+--
+-- * 'idAccessToken'
+--
+-- * 'idUploadType'
+--
+-- * 'idCallback'
 --
 -- * 'idInstance'
 instancesDelete
@@ -74,13 +98,47 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdInstance_ =
-  InstancesDelete' {_idProject = pIdProject_, _idInstance = pIdInstance_}
+  InstancesDelete'
+    { _idXgafv = Nothing
+    , _idUploadProtocol = Nothing
+    , _idProject = pIdProject_
+    , _idAccessToken = Nothing
+    , _idUploadType = Nothing
+    , _idCallback = Nothing
+    , _idInstance = pIdInstance_
+    }
 
+
+-- | V1 error format.
+idXgafv :: Lens' InstancesDelete (Maybe Xgafv)
+idXgafv = lens _idXgafv (\ s a -> s{_idXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+idUploadProtocol :: Lens' InstancesDelete (Maybe Text)
+idUploadProtocol
+  = lens _idUploadProtocol
+      (\ s a -> s{_idUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance to be deleted.
 idProject :: Lens' InstancesDelete Text
 idProject
   = lens _idProject (\ s a -> s{_idProject = a})
+
+-- | OAuth access token.
+idAccessToken :: Lens' InstancesDelete (Maybe Text)
+idAccessToken
+  = lens _idAccessToken
+      (\ s a -> s{_idAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+idUploadType :: Lens' InstancesDelete (Maybe Text)
+idUploadType
+  = lens _idUploadType (\ s a -> s{_idUploadType = a})
+
+-- | JSONP
+idCallback :: Lens' InstancesDelete (Maybe Text)
+idCallback
+  = lens _idCallback (\ s a -> s{_idCallback = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 idInstance :: Lens' InstancesDelete Text
@@ -93,7 +151,12 @@ instance GoogleRequest InstancesDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesDelete'{..}
-          = go _idProject _idInstance (Just AltJSON)
+          = go _idProject _idInstance _idXgafv
+              _idUploadProtocol
+              _idAccessToken
+              _idUploadType
+              _idCallback
+              (Just AltJSON)
               sQLAdminService
           where go
                   = buildClient

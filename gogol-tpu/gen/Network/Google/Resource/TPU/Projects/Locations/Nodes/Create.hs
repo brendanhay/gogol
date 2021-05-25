@@ -43,8 +43,8 @@ module Network.Google.Resource.TPU.Projects.Locations.Nodes.Create
     , plncCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TPU.Types
+import Network.Google.Prelude
+import Network.Google.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.create@ method which the
 -- 'ProjectsLocationsNodesCreate' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsLocationsNodesCreateResource =
 -- /See:/ 'projectsLocationsNodesCreate' smart constructor.
 data ProjectsLocationsNodesCreate =
   ProjectsLocationsNodesCreate'
-    { _plncParent         :: !Text
-    , _plncXgafv          :: !(Maybe Xgafv)
+    { _plncParent :: !Text
+    , _plncXgafv :: !(Maybe Xgafv)
     , _plncUploadProtocol :: !(Maybe Text)
-    , _plncAccessToken    :: !(Maybe Text)
-    , _plncUploadType     :: !(Maybe Text)
-    , _plncPayload        :: !Node
-    , _plncNodeId         :: !(Maybe Text)
-    , _plncCallback       :: !(Maybe Text)
+    , _plncAccessToken :: !(Maybe Text)
+    , _plncUploadType :: !(Maybe Text)
+    , _plncPayload :: !Node
+    , _plncNodeId :: !(Maybe Text)
+    , _plncCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,7 +114,7 @@ projectsLocationsNodesCreate pPlncParent_ pPlncPayload_ =
     }
 
 
--- | The parent resource name.
+-- | Required. The parent resource name.
 plncParent :: Lens' ProjectsLocationsNodesCreate Text
 plncParent
   = lens _plncParent (\ s a -> s{_plncParent = a})

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the existing alerting policies for the project.
+-- Lists the existing alerting policies for the workspace.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.alertPolicies.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.list@.
 module Network.Google.Resource.Monitoring.Projects.AlertPolicies.List
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.Monitoring.Projects.AlertPolicies.List
     , paplCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.alertPolicies.list@ method which the
 -- 'ProjectsAlertPoliciesList' request conforms to.
@@ -66,21 +66,21 @@ type ProjectsAlertPoliciesListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListAlertPoliciesResponse
 
--- | Lists the existing alerting policies for the project.
+-- | Lists the existing alerting policies for the workspace.
 --
 -- /See:/ 'projectsAlertPoliciesList' smart constructor.
 data ProjectsAlertPoliciesList =
   ProjectsAlertPoliciesList'
-    { _paplXgafv          :: !(Maybe Xgafv)
+    { _paplXgafv :: !(Maybe Xgafv)
     , _paplUploadProtocol :: !(Maybe Text)
-    , _paplOrderBy        :: !(Maybe Text)
-    , _paplAccessToken    :: !(Maybe Text)
-    , _paplUploadType     :: !(Maybe Text)
-    , _paplName           :: !Text
-    , _paplFilter         :: !(Maybe Text)
-    , _paplPageToken      :: !(Maybe Text)
-    , _paplPageSize       :: !(Maybe (Textual Int32))
-    , _paplCallback       :: !(Maybe Text)
+    , _paplOrderBy :: !(Maybe Text)
+    , _paplAccessToken :: !(Maybe Text)
+    , _paplUploadType :: !(Maybe Text)
+    , _paplName :: !Text
+    , _paplFilter :: !(Maybe Text)
+    , _paplPageToken :: !(Maybe Text)
+    , _paplPageSize :: !(Maybe (Textual Int32))
+    , _paplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,7 +140,8 @@ paplUploadProtocol
 -- | A comma-separated list of fields by which to sort the result. Supports
 -- the same set of field references as the filter field. Entries can be
 -- prefixed with a minus sign to sort by the field in descending order.For
--- more details, see sorting and filtering.
+-- more details, see sorting and filtering
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/sorting-and-filtering).
 paplOrderBy :: Lens' ProjectsAlertPoliciesList (Maybe Text)
 paplOrderBy
   = lens _paplOrderBy (\ s a -> s{_paplOrderBy = a})
@@ -157,17 +158,20 @@ paplUploadType
   = lens _paplUploadType
       (\ s a -> s{_paplUploadType = a})
 
--- | The project whose alert policies are to be listed. The format is
--- projects\/[PROJECT_ID] Note that this field names the parent container
--- in which the alerting policies to be listed are stored. To retrieve a
--- single alerting policy by name, use the GetAlertPolicy operation,
--- instead.
+-- | Required. The project
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3#project_name) whose
+-- alert policies are to be listed. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER] Note that this field names the parent
+-- container in which the alerting policies to be listed are stored. To
+-- retrieve a single alerting policy by name, use the GetAlertPolicy
+-- operation, instead.
 paplName :: Lens' ProjectsAlertPoliciesList Text
 paplName = lens _paplName (\ s a -> s{_paplName = a})
 
 -- | If provided, this field specifies the criteria that must be met by alert
 -- policies to be included in the response.For more details, see sorting
--- and filtering.
+-- and filtering
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3\/sorting-and-filtering).
 paplFilter :: Lens' ProjectsAlertPoliciesList (Maybe Text)
 paplFilter
   = lens _paplFilter (\ s a -> s{_paplFilter = a})

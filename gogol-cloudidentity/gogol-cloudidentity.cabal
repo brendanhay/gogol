@@ -35,16 +35,38 @@ library
     exposed-modules:
           Network.Google.CloudIdentity
         , Network.Google.CloudIdentity.Types
+        , Network.Google.Resource.CloudIdentity.Devices.CancelWipe
+        , Network.Google.Resource.CloudIdentity.Devices.Create
+        , Network.Google.Resource.CloudIdentity.Devices.Delete
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Approve
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Block
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.CancelWipe
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Get
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.List
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Delete
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Get
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.List
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Lookup
+        , Network.Google.Resource.CloudIdentity.Devices.DeviceUsers.Wipe
+        , Network.Google.Resource.CloudIdentity.Devices.Get
+        , Network.Google.Resource.CloudIdentity.Devices.List
+        , Network.Google.Resource.CloudIdentity.Devices.Wipe
         , Network.Google.Resource.CloudIdentity.Groups.Create
         , Network.Google.Resource.CloudIdentity.Groups.Delete
         , Network.Google.Resource.CloudIdentity.Groups.Get
         , Network.Google.Resource.CloudIdentity.Groups.List
         , Network.Google.Resource.CloudIdentity.Groups.Lookup
+        , Network.Google.Resource.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
         , Network.Google.Resource.CloudIdentity.Groups.Memberships.Create
         , Network.Google.Resource.CloudIdentity.Groups.Memberships.Delete
         , Network.Google.Resource.CloudIdentity.Groups.Memberships.Get
+        , Network.Google.Resource.CloudIdentity.Groups.Memberships.GetMembershipGraph
         , Network.Google.Resource.CloudIdentity.Groups.Memberships.List
         , Network.Google.Resource.CloudIdentity.Groups.Memberships.Lookup
+        , Network.Google.Resource.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
+        , Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
+        , Network.Google.Resource.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
         , Network.Google.Resource.CloudIdentity.Groups.Patch
         , Network.Google.Resource.CloudIdentity.Groups.Search
 

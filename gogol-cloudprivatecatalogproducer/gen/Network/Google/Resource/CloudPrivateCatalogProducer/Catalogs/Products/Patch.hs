@@ -22,7 +22,7 @@
 --
 -- Updates a specific Product resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.patch@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.patch@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Patch
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Pat
     , cppCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.patch@ method which the
 -- 'CatalogsProductsPatch' request conforms to.
@@ -69,14 +69,14 @@ type CatalogsProductsPatchResource =
 -- /See:/ 'catalogsProductsPatch' smart constructor.
 data CatalogsProductsPatch =
   CatalogsProductsPatch'
-    { _cppXgafv          :: !(Maybe Xgafv)
+    { _cppXgafv :: !(Maybe Xgafv)
     , _cppUploadProtocol :: !(Maybe Text)
-    , _cppUpdateMask     :: !(Maybe GFieldMask)
-    , _cppAccessToken    :: !(Maybe Text)
-    , _cppUploadType     :: !(Maybe Text)
-    , _cppPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1Product
-    , _cppName           :: !Text
-    , _cppCallback       :: !(Maybe Text)
+    , _cppUpdateMask :: !(Maybe GFieldMask)
+    , _cppAccessToken :: !(Maybe Text)
+    , _cppUploadType :: !(Maybe Text)
+    , _cppPayload :: !GoogleCloudPrivatecatalogproducerV1beta1Product
+    , _cppName :: !Text
+    , _cppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

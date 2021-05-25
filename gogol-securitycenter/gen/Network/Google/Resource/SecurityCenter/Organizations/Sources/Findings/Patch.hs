@@ -23,7 +23,7 @@
 -- Creates or updates a finding. The corresponding source must exist for a
 -- finding creation to succeed.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.findings.patch@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.findings.patch@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Patch
     (
     -- * REST Resource
@@ -44,13 +44,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Pat
     , osfpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.findings.patch@ method which the
 -- 'OrganizationsSourcesFindingsPatch' request conforms to.
 type OrganizationsSourcesFindingsPatchResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -59,7 +59,11 @@ type OrganizationsSourcesFindingsPatchResource =
                  QueryParam "uploadType" Text :>
                    QueryParam "callback" Text :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Finding :> Patch '[JSON] Finding
+                       ReqBody '[JSON]
+                         GoogleCloudSecuritycenterV1p1beta1Finding
+                         :>
+                         Patch '[JSON]
+                           GoogleCloudSecuritycenterV1p1beta1Finding
 
 -- | Creates or updates a finding. The corresponding source must exist for a
 -- finding creation to succeed.
@@ -67,14 +71,14 @@ type OrganizationsSourcesFindingsPatchResource =
 -- /See:/ 'organizationsSourcesFindingsPatch' smart constructor.
 data OrganizationsSourcesFindingsPatch =
   OrganizationsSourcesFindingsPatch'
-    { _osfpXgafv          :: !(Maybe Xgafv)
+    { _osfpXgafv :: !(Maybe Xgafv)
     , _osfpUploadProtocol :: !(Maybe Text)
-    , _osfpUpdateMask     :: !(Maybe GFieldMask)
-    , _osfpAccessToken    :: !(Maybe Text)
-    , _osfpUploadType     :: !(Maybe Text)
-    , _osfpPayload        :: !Finding
-    , _osfpName           :: !Text
-    , _osfpCallback       :: !(Maybe Text)
+    , _osfpUpdateMask :: !(Maybe GFieldMask)
+    , _osfpAccessToken :: !(Maybe Text)
+    , _osfpUploadType :: !(Maybe Text)
+    , _osfpPayload :: !GoogleCloudSecuritycenterV1p1beta1Finding
+    , _osfpName :: !Text
+    , _osfpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,7 +103,7 @@ data OrganizationsSourcesFindingsPatch =
 --
 -- * 'osfpCallback'
 organizationsSourcesFindingsPatch
-    :: Finding -- ^ 'osfpPayload'
+    :: GoogleCloudSecuritycenterV1p1beta1Finding -- ^ 'osfpPayload'
     -> Text -- ^ 'osfpName'
     -> OrganizationsSourcesFindingsPatch
 organizationsSourcesFindingsPatch pOsfpPayload_ pOsfpName_ =
@@ -149,13 +153,14 @@ osfpUploadType
       (\ s a -> s{_osfpUploadType = a})
 
 -- | Multipart request metadata.
-osfpPayload :: Lens' OrganizationsSourcesFindingsPatch Finding
+osfpPayload :: Lens' OrganizationsSourcesFindingsPatch GoogleCloudSecuritycenterV1p1beta1Finding
 osfpPayload
   = lens _osfpPayload (\ s a -> s{_osfpPayload = a})
 
 -- | The relative resource name of this finding. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/sources\/456\/findings\/789\"
+-- Example:
+-- \"organizations\/{organization_id}\/sources\/{source_id}\/findings\/{finding_id}\"
 osfpName :: Lens' OrganizationsSourcesFindingsPatch Text
 osfpName = lens _osfpName (\ s a -> s{_osfpName = a})
 
@@ -167,7 +172,8 @@ osfpCallback
 instance GoogleRequest
            OrganizationsSourcesFindingsPatch
          where
-        type Rs OrganizationsSourcesFindingsPatch = Finding
+        type Rs OrganizationsSourcesFindingsPatch =
+             GoogleCloudSecuritycenterV1p1beta1Finding
         type Scopes OrganizationsSourcesFindingsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient OrganizationsSourcesFindingsPatch'{..}

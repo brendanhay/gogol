@@ -22,7 +22,7 @@
 --
 -- Creates a new task on the specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.insert@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.insert@.
 module Network.Google.Resource.Tasks.Tasks.Insert
     (
     -- * REST Resource
@@ -34,13 +34,18 @@ module Network.Google.Resource.Tasks.Tasks.Insert
 
     -- * Request Lenses
     , tiParent
+    , tiXgafv
+    , tiUploadProtocol
+    , tiAccessToken
+    , tiUploadType
     , tiPayload
     , tiTaskList
+    , tiCallback
     , tiPrevious
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.insert@ method which the
 -- 'TasksInsert' request conforms to.
@@ -51,18 +56,28 @@ type TasksInsertResource =
            Capture "tasklist" Text :>
              "tasks" :>
                QueryParam "parent" Text :>
-                 QueryParam "previous" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Task :> Post '[JSON] Task
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "previous" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Creates a new task on the specified task list.
 --
 -- /See:/ 'tasksInsert' smart constructor.
 data TasksInsert =
   TasksInsert'
-    { _tiParent   :: !(Maybe Text)
-    , _tiPayload  :: !Task
+    { _tiParent :: !(Maybe Text)
+    , _tiXgafv :: !(Maybe Xgafv)
+    , _tiUploadProtocol :: !(Maybe Text)
+    , _tiAccessToken :: !(Maybe Text)
+    , _tiUploadType :: !(Maybe Text)
+    , _tiPayload :: !Task
     , _tiTaskList :: !Text
+    , _tiCallback :: !(Maybe Text)
     , _tiPrevious :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -74,9 +89,19 @@ data TasksInsert =
 --
 -- * 'tiParent'
 --
+-- * 'tiXgafv'
+--
+-- * 'tiUploadProtocol'
+--
+-- * 'tiAccessToken'
+--
+-- * 'tiUploadType'
+--
 -- * 'tiPayload'
 --
 -- * 'tiTaskList'
+--
+-- * 'tiCallback'
 --
 -- * 'tiPrevious'
 tasksInsert
@@ -86,8 +111,13 @@ tasksInsert
 tasksInsert pTiPayload_ pTiTaskList_ =
   TasksInsert'
     { _tiParent = Nothing
+    , _tiXgafv = Nothing
+    , _tiUploadProtocol = Nothing
+    , _tiAccessToken = Nothing
+    , _tiUploadType = Nothing
     , _tiPayload = pTiPayload_
     , _tiTaskList = pTiTaskList_
+    , _tiCallback = Nothing
     , _tiPrevious = Nothing
     }
 
@@ -96,6 +126,27 @@ tasksInsert pTiPayload_ pTiTaskList_ =
 -- parameter is omitted. Optional.
 tiParent :: Lens' TasksInsert (Maybe Text)
 tiParent = lens _tiParent (\ s a -> s{_tiParent = a})
+
+-- | V1 error format.
+tiXgafv :: Lens' TasksInsert (Maybe Xgafv)
+tiXgafv = lens _tiXgafv (\ s a -> s{_tiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tiUploadProtocol :: Lens' TasksInsert (Maybe Text)
+tiUploadProtocol
+  = lens _tiUploadProtocol
+      (\ s a -> s{_tiUploadProtocol = a})
+
+-- | OAuth access token.
+tiAccessToken :: Lens' TasksInsert (Maybe Text)
+tiAccessToken
+  = lens _tiAccessToken
+      (\ s a -> s{_tiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tiUploadType :: Lens' TasksInsert (Maybe Text)
+tiUploadType
+  = lens _tiUploadType (\ s a -> s{_tiUploadType = a})
 
 -- | Multipart request metadata.
 tiPayload :: Lens' TasksInsert Task
@@ -106,6 +157,11 @@ tiPayload
 tiTaskList :: Lens' TasksInsert Text
 tiTaskList
   = lens _tiTaskList (\ s a -> s{_tiTaskList = a})
+
+-- | JSONP
+tiCallback :: Lens' TasksInsert (Maybe Text)
+tiCallback
+  = lens _tiCallback (\ s a -> s{_tiCallback = a})
 
 -- | Previous sibling task identifier. If the task is created at the first
 -- position among its siblings, this parameter is omitted. Optional.
@@ -118,7 +174,12 @@ instance GoogleRequest TasksInsert where
         type Scopes TasksInsert =
              '["https://www.googleapis.com/auth/tasks"]
         requestClient TasksInsert'{..}
-          = go _tiTaskList _tiParent _tiPrevious (Just AltJSON)
+          = go _tiTaskList _tiParent _tiXgafv _tiUploadProtocol
+              _tiAccessToken
+              _tiUploadType
+              _tiCallback
+              _tiPrevious
+              (Just AltJSON)
               _tiPayload
               appsTasksService
           where go

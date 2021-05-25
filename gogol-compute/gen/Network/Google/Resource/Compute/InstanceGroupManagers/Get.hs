@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Get
     , igmgZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.get@ method which the
 -- 'InstanceGroupManagersGet' request conforms to.
@@ -64,9 +64,9 @@ type InstanceGroupManagersGetResource =
 -- /See:/ 'instanceGroupManagersGet' smart constructor.
 data InstanceGroupManagersGet =
   InstanceGroupManagersGet'
-    { _igmgProject              :: !Text
+    { _igmgProject :: !Text
     , _igmgInstanceGroupManager :: !Text
-    , _igmgZone                 :: !Text
+    , _igmgZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

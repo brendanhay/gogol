@@ -16,7 +16,7 @@
 --
 module Network.Google.AcceleratedMobilePageURL.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The error code of an API call.
 data AmpURLErrorErrorCode

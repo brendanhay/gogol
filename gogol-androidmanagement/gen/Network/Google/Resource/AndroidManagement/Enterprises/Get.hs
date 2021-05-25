@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Get
     , egCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.get@ method which the
 -- 'EnterprisesGet' request conforms to.
@@ -61,12 +61,12 @@ type EnterprisesGetResource =
 -- /See:/ 'enterprisesGet' smart constructor.
 data EnterprisesGet =
   EnterprisesGet'
-    { _egXgafv          :: !(Maybe Xgafv)
+    { _egXgafv :: !(Maybe Xgafv)
     , _egUploadProtocol :: !(Maybe Text)
-    , _egAccessToken    :: !(Maybe Text)
-    , _egUploadType     :: !(Maybe Text)
-    , _egName           :: !Text
-    , _egCallback       :: !(Maybe Text)
+    , _egAccessToken :: !(Maybe Text)
+    , _egUploadType :: !(Maybe Text)
+    , _egName :: !Text
+    , _egCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

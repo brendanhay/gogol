@@ -45,8 +45,8 @@ module Network.Google.Resource.DLP.Projects.DlpJobs.Delete
     , pdjdCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.dlpJobs.delete@ method which the
 -- 'ProjectsDlpJobsDelete' request conforms to.
@@ -70,12 +70,12 @@ type ProjectsDlpJobsDeleteResource =
 -- /See:/ 'projectsDlpJobsDelete' smart constructor.
 data ProjectsDlpJobsDelete =
   ProjectsDlpJobsDelete'
-    { _pdjdXgafv          :: !(Maybe Xgafv)
+    { _pdjdXgafv :: !(Maybe Xgafv)
     , _pdjdUploadProtocol :: !(Maybe Text)
-    , _pdjdAccessToken    :: !(Maybe Text)
-    , _pdjdUploadType     :: !(Maybe Text)
-    , _pdjdName           :: !Text
-    , _pdjdCallback       :: !(Maybe Text)
+    , _pdjdAccessToken :: !(Maybe Text)
+    , _pdjdUploadType :: !(Maybe Text)
+    , _pdjdName :: !Text
+    , _pdjdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -132,7 +132,7 @@ pdjdUploadType
   = lens _pdjdUploadType
       (\ s a -> s{_pdjdUploadType = a})
 
--- | The name of the DlpJob resource to be deleted.
+-- | Required. The name of the DlpJob resource to be deleted.
 pdjdName :: Lens' ProjectsDlpJobsDelete Text
 pdjdName = lens _pdjdName (\ s a -> s{_pdjdName = a})
 

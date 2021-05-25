@@ -45,8 +45,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
     , aogCallback
     ) where
 
-import           Network.Google.PlayMoviesPartner.Types
-import           Network.Google.Prelude
+import Network.Google.PlayMoviesPartner.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.orders.get@ method which the
 -- 'AccountsOrdersGet' request conforms to.
@@ -71,15 +71,15 @@ type AccountsOrdersGetResource =
 -- /See:/ 'accountsOrdersGet' smart constructor.
 data AccountsOrdersGet =
   AccountsOrdersGet'
-    { _aogXgafv          :: !(Maybe Xgafv)
+    { _aogXgafv :: !(Maybe Xgafv)
     , _aogUploadProtocol :: !(Maybe Text)
-    , _aogPp             :: !Bool
-    , _aogAccessToken    :: !(Maybe Text)
-    , _aogUploadType     :: !(Maybe Text)
-    , _aogAccountId      :: !Text
-    , _aogBearerToken    :: !(Maybe Text)
-    , _aogOrderId        :: !Text
-    , _aogCallback       :: !(Maybe Text)
+    , _aogPp :: !Bool
+    , _aogAccessToken :: !(Maybe Text)
+    , _aogUploadType :: !(Maybe Text)
+    , _aogAccountId :: !Text
+    , _aogBearerToken :: !(Maybe Text)
+    , _aogOrderId :: !Text
+    , _aogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

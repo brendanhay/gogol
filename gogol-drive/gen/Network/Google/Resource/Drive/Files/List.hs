@@ -41,6 +41,7 @@ module Network.Google.Resource.Drive.Files.List
     , flSpaces
     , flIncludeItemsFromAllDrives
     , flSupportsAllDrives
+    , flIncludePermissionsForView
     , flCorpus
     , flPageToken
     , flPageSize
@@ -48,8 +49,8 @@ module Network.Google.Resource.Drive.Files.List
     , flDriveId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.list@ method which the
 -- 'FilesList' request conforms to.
@@ -65,32 +66,34 @@ type FilesListResource =
                      QueryParam "spaces" Text :>
                        QueryParam "includeItemsFromAllDrives" Bool :>
                          QueryParam "supportsAllDrives" Bool :>
-                           QueryParam "corpus" FilesListCorpus :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" (Textual Int32) :>
-                                 QueryParam "supportsTeamDrives" Bool :>
-                                   QueryParam "driveId" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] FileList
+                           QueryParam "includePermissionsForView" Text :>
+                             QueryParam "corpus" FilesListCorpus :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "pageSize" (Textual Int32) :>
+                                   QueryParam "supportsTeamDrives" Bool :>
+                                     QueryParam "driveId" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] FileList
 
 -- | Lists or searches files.
 --
 -- /See:/ 'filesList' smart constructor.
 data FilesList =
   FilesList'
-    { _flCorpora                   :: !(Maybe Text)
-    , _flOrderBy                   :: !(Maybe Text)
-    , _flIncludeTeamDriveItems     :: !Bool
-    , _flQ                         :: !(Maybe Text)
-    , _flTeamDriveId               :: !(Maybe Text)
-    , _flSpaces                    :: !Text
+    { _flCorpora :: !(Maybe Text)
+    , _flOrderBy :: !(Maybe Text)
+    , _flIncludeTeamDriveItems :: !Bool
+    , _flQ :: !(Maybe Text)
+    , _flTeamDriveId :: !(Maybe Text)
+    , _flSpaces :: !Text
     , _flIncludeItemsFromAllDrives :: !Bool
-    , _flSupportsAllDrives         :: !Bool
-    , _flCorpus                    :: !(Maybe FilesListCorpus)
-    , _flPageToken                 :: !(Maybe Text)
-    , _flPageSize                  :: !(Textual Int32)
-    , _flSupportsTeamDrives        :: !Bool
-    , _flDriveId                   :: !(Maybe Text)
+    , _flSupportsAllDrives :: !Bool
+    , _flIncludePermissionsForView :: !(Maybe Text)
+    , _flCorpus :: !(Maybe FilesListCorpus)
+    , _flPageToken :: !(Maybe Text)
+    , _flPageSize :: !(Textual Int32)
+    , _flSupportsTeamDrives :: !Bool
+    , _flDriveId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,6 +118,8 @@ data FilesList =
 --
 -- * 'flSupportsAllDrives'
 --
+-- * 'flIncludePermissionsForView'
+--
 -- * 'flCorpus'
 --
 -- * 'flPageToken'
@@ -136,6 +141,7 @@ filesList =
     , _flSpaces = "drive"
     , _flIncludeItemsFromAllDrives = False
     , _flSupportsAllDrives = False
+    , _flIncludePermissionsForView = Nothing
     , _flCorpus = Nothing
     , _flPageToken = Nothing
     , _flPageSize = 100
@@ -144,9 +150,13 @@ filesList =
     }
 
 
--- | Bodies of items (files\/documents) to which the query applies. Supported
--- bodies are \'user\', \'domain\', \'drive\' and \'allDrives\'. Prefer
--- \'user\' or \'drive\' to \'allDrives\' for efficiency.
+-- | Groupings of files to which the query applies. Supported groupings are:
+-- \'user\' (files created by, opened by, or shared directly with the
+-- user), \'drive\' (files in the specified shared drive as indicated by
+-- the \'driveId\'), \'domain\' (files shared to the user\'s domain), and
+-- \'allDrives\' (A combination of \'user\' and \'drive\' for all drives
+-- where the user is a member). When able, use \'user\' or \'drive\',
+-- instead of \'allDrives\', for efficiency.
 flCorpora :: Lens' FilesList (Maybe Text)
 flCorpora
   = lens _flCorpora (\ s a -> s{_flCorpora = a})
@@ -199,6 +209,13 @@ flSupportsAllDrives
   = lens _flSupportsAllDrives
       (\ s a -> s{_flSupportsAllDrives = a})
 
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+flIncludePermissionsForView :: Lens' FilesList (Maybe Text)
+flIncludePermissionsForView
+  = lens _flIncludePermissionsForView
+      (\ s a -> s{_flIncludePermissionsForView = a})
+
 -- | The source of files to list. Deprecated: use \'corpora\' instead.
 flCorpus :: Lens' FilesList (Maybe FilesListCorpus)
 flCorpus = lens _flCorpus (\ s a -> s{_flCorpus = a})
@@ -247,6 +264,7 @@ instance GoogleRequest FilesList where
               (Just _flSpaces)
               (Just _flIncludeItemsFromAllDrives)
               (Just _flSupportsAllDrives)
+              _flIncludePermissionsForView
               _flCorpus
               _flPageToken
               (Just _flPageSize)

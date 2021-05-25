@@ -35,12 +35,17 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
     , UsersSettingsSendAsDelete
 
     -- * Request Lenses
+    , ussadXgafv
+    , ussadUploadProtocol
+    , ussadAccessToken
+    , ussadUploadType
     , ussadUserId
     , ussadSendAsEmail
+    , ussadCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.delete@ method which the
 -- 'UsersSettingsSendAsDelete' request conforms to.
@@ -52,7 +57,12 @@ type UsersSettingsSendAsDeleteResource =
              "settings" :>
                "sendAs" :>
                  Capture "sendAsEmail" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified send-as alias. Revokes any verification that may
 -- have been required for using it. This method is only available to
@@ -61,8 +71,13 @@ type UsersSettingsSendAsDeleteResource =
 -- /See:/ 'usersSettingsSendAsDelete' smart constructor.
 data UsersSettingsSendAsDelete =
   UsersSettingsSendAsDelete'
-    { _ussadUserId      :: !Text
+    { _ussadXgafv :: !(Maybe Xgafv)
+    , _ussadUploadProtocol :: !(Maybe Text)
+    , _ussadAccessToken :: !(Maybe Text)
+    , _ussadUploadType :: !(Maybe Text)
+    , _ussadUserId :: !Text
     , _ussadSendAsEmail :: !Text
+    , _ussadCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,16 +86,56 @@ data UsersSettingsSendAsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussadXgafv'
+--
+-- * 'ussadUploadProtocol'
+--
+-- * 'ussadAccessToken'
+--
+-- * 'ussadUploadType'
+--
 -- * 'ussadUserId'
 --
 -- * 'ussadSendAsEmail'
+--
+-- * 'ussadCallback'
 usersSettingsSendAsDelete
     :: Text -- ^ 'ussadSendAsEmail'
     -> UsersSettingsSendAsDelete
 usersSettingsSendAsDelete pUssadSendAsEmail_ =
   UsersSettingsSendAsDelete'
-    {_ussadUserId = "me", _ussadSendAsEmail = pUssadSendAsEmail_}
+    { _ussadXgafv = Nothing
+    , _ussadUploadProtocol = Nothing
+    , _ussadAccessToken = Nothing
+    , _ussadUploadType = Nothing
+    , _ussadUserId = "me"
+    , _ussadSendAsEmail = pUssadSendAsEmail_
+    , _ussadCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ussadXgafv :: Lens' UsersSettingsSendAsDelete (Maybe Xgafv)
+ussadXgafv
+  = lens _ussadXgafv (\ s a -> s{_ussadXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussadUploadProtocol :: Lens' UsersSettingsSendAsDelete (Maybe Text)
+ussadUploadProtocol
+  = lens _ussadUploadProtocol
+      (\ s a -> s{_ussadUploadProtocol = a})
+
+-- | OAuth access token.
+ussadAccessToken :: Lens' UsersSettingsSendAsDelete (Maybe Text)
+ussadAccessToken
+  = lens _ussadAccessToken
+      (\ s a -> s{_ussadAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussadUploadType :: Lens' UsersSettingsSendAsDelete (Maybe Text)
+ussadUploadType
+  = lens _ussadUploadType
+      (\ s a -> s{_ussadUploadType = a})
 
 -- | User\'s email address. The special value \"me\" can be used to indicate
 -- the authenticated user.
@@ -94,13 +149,24 @@ ussadSendAsEmail
   = lens _ussadSendAsEmail
       (\ s a -> s{_ussadSendAsEmail = a})
 
+-- | JSONP
+ussadCallback :: Lens' UsersSettingsSendAsDelete (Maybe Text)
+ussadCallback
+  = lens _ussadCallback
+      (\ s a -> s{_ussadCallback = a})
+
 instance GoogleRequest UsersSettingsSendAsDelete
          where
         type Rs UsersSettingsSendAsDelete = ()
         type Scopes UsersSettingsSendAsDelete =
              '["https://www.googleapis.com/auth/gmail.settings.sharing"]
         requestClient UsersSettingsSendAsDelete'{..}
-          = go _ussadUserId _ussadSendAsEmail (Just AltJSON)
+          = go _ussadUserId _ussadSendAsEmail _ussadXgafv
+              _ussadUploadProtocol
+              _ussadAccessToken
+              _ussadUploadType
+              _ussadCallback
+              (Just AltJSON)
               gmailService
           where go
                   = buildClient

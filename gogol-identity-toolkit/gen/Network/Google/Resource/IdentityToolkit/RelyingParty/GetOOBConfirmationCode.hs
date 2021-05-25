@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCo
     , rpgoobccPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getOobConfirmationCode@ method which the
 -- 'RelyingPartyGetOOBConfirmationCode' request conforms to.

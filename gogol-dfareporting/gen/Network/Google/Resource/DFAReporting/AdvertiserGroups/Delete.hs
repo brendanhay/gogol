@@ -22,7 +22,7 @@
 --
 -- Deletes an existing advertiser group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.delete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.advertiserGroups.delete@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
     , AdvertiserGroupsDelete
 
     -- * Request Lenses
+    , agdXgafv
+    , agdUploadProtocol
+    , agdAccessToken
+    , agdUploadType
     , agdProFileId
     , agdId
+    , agdCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserGroups.delete@ method which the
 -- 'AdvertiserGroupsDelete' request conforms to.
 type AdvertiserGroupsDeleteResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
                Capture "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsDelete' smart constructor.
 data AdvertiserGroupsDelete =
   AdvertiserGroupsDelete'
-    { _agdProFileId :: !(Textual Int64)
-    , _agdId        :: !(Textual Int64)
+    { _agdXgafv :: !(Maybe Xgafv)
+    , _agdUploadProtocol :: !(Maybe Text)
+    , _agdAccessToken :: !(Maybe Text)
+    , _agdUploadType :: !(Maybe Text)
+    , _agdProFileId :: !(Textual Int64)
+    , _agdId :: !(Textual Int64)
+    , _agdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,56 @@ data AdvertiserGroupsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'agdXgafv'
+--
+-- * 'agdUploadProtocol'
+--
+-- * 'agdAccessToken'
+--
+-- * 'agdUploadType'
+--
 -- * 'agdProFileId'
 --
 -- * 'agdId'
+--
+-- * 'agdCallback'
 advertiserGroupsDelete
     :: Int64 -- ^ 'agdProFileId'
     -> Int64 -- ^ 'agdId'
     -> AdvertiserGroupsDelete
 advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
   AdvertiserGroupsDelete'
-    {_agdProFileId = _Coerce # pAgdProFileId_, _agdId = _Coerce # pAgdId_}
+    { _agdXgafv = Nothing
+    , _agdUploadProtocol = Nothing
+    , _agdAccessToken = Nothing
+    , _agdUploadType = Nothing
+    , _agdProFileId = _Coerce # pAgdProFileId_
+    , _agdId = _Coerce # pAgdId_
+    , _agdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+agdXgafv :: Lens' AdvertiserGroupsDelete (Maybe Xgafv)
+agdXgafv = lens _agdXgafv (\ s a -> s{_agdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+agdUploadProtocol :: Lens' AdvertiserGroupsDelete (Maybe Text)
+agdUploadProtocol
+  = lens _agdUploadProtocol
+      (\ s a -> s{_agdUploadProtocol = a})
+
+-- | OAuth access token.
+agdAccessToken :: Lens' AdvertiserGroupsDelete (Maybe Text)
+agdAccessToken
+  = lens _agdAccessToken
+      (\ s a -> s{_agdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+agdUploadType :: Lens' AdvertiserGroupsDelete (Maybe Text)
+agdUploadType
+  = lens _agdUploadType
+      (\ s a -> s{_agdUploadType = a})
 
 -- | User profile ID associated with this request.
 agdProFileId :: Lens' AdvertiserGroupsDelete Int64
@@ -89,12 +143,22 @@ agdId :: Lens' AdvertiserGroupsDelete Int64
 agdId
   = lens _agdId (\ s a -> s{_agdId = a}) . _Coerce
 
+-- | JSONP
+agdCallback :: Lens' AdvertiserGroupsDelete (Maybe Text)
+agdCallback
+  = lens _agdCallback (\ s a -> s{_agdCallback = a})
+
 instance GoogleRequest AdvertiserGroupsDelete where
         type Rs AdvertiserGroupsDelete = ()
         type Scopes AdvertiserGroupsDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdvertiserGroupsDelete'{..}
-          = go _agdProFileId _agdId (Just AltJSON)
+          = go _agdProFileId _agdId _agdXgafv
+              _agdUploadProtocol
+              _agdAccessToken
+              _agdUploadType
+              _agdCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

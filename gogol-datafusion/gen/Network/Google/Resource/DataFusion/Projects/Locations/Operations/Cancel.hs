@@ -50,13 +50,13 @@ module Network.Google.Resource.DataFusion.Projects.Locations.Operations.Cancel
     , plocCallback
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.operations.cancel@ method which the
 -- 'ProjectsLocationsOperationsCancel' request conforms to.
 type ProjectsLocationsOperationsCancelResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "cancel" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -80,13 +80,13 @@ type ProjectsLocationsOperationsCancelResource =
 -- /See:/ 'projectsLocationsOperationsCancel' smart constructor.
 data ProjectsLocationsOperationsCancel =
   ProjectsLocationsOperationsCancel'
-    { _plocXgafv          :: !(Maybe Xgafv)
+    { _plocXgafv :: !(Maybe Xgafv)
     , _plocUploadProtocol :: !(Maybe Text)
-    , _plocAccessToken    :: !(Maybe Text)
-    , _plocUploadType     :: !(Maybe Text)
-    , _plocPayload        :: !CancelOperationRequest
-    , _plocName           :: !Text
-    , _plocCallback       :: !(Maybe Text)
+    , _plocAccessToken :: !(Maybe Text)
+    , _plocUploadType :: !(Maybe Text)
+    , _plocPayload :: !CancelOperationRequest
+    , _plocName :: !Text
+    , _plocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -50,8 +50,8 @@ module Network.Google.Resource.Partners.Analytics.List
     , alCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.analytics.list@ method which the
 -- 'AnalyticsList' request conforms to.
@@ -92,20 +92,20 @@ type AnalyticsListResource =
 -- /See:/ 'analyticsList' smart constructor.
 data AnalyticsList =
   AnalyticsList'
-    { _alXgafv                                       :: !(Maybe Xgafv)
-    , _alUploadProtocol                              :: !(Maybe Text)
-    , _alAccessToken                                 :: !(Maybe Text)
-    , _alUploadType                                  :: !(Maybe Text)
-    , _alRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _alRequestMetadataLocale                       :: !(Maybe Text)
-    , _alRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _alRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _alPageToken                                   :: !(Maybe Text)
-    , _alRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _alPageSize                                    :: !(Maybe (Textual Int32))
-    , _alRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _alXgafv :: !(Maybe Xgafv)
+    , _alUploadProtocol :: !(Maybe Text)
+    , _alAccessToken :: !(Maybe Text)
+    , _alUploadType :: !(Maybe Text)
+    , _alRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _alRequestMetadataLocale :: !(Maybe Text)
+    , _alRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _alRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _alPageToken :: !(Maybe Text)
+    , _alRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _alPageSize :: !(Maybe (Textual Int32))
+    , _alRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _alRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _alCallback                                    :: !(Maybe Text)
+    , _alCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

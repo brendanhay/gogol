@@ -22,7 +22,7 @@
 --
 -- Returns Series metadata for the given series ids.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.series.get@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.series.get@.
 module Network.Google.Resource.Books.Series.Get
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Books.Series.Get
     , SeriesGet
 
     -- * Request Lenses
+    , sgXgafv
+    , sgUploadProtocol
+    , sgAccessToken
+    , sgUploadType
+    , sgCallback
     , sgSeriesId
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.series.get@ method which the
 -- 'SeriesGet' request conforms to.
@@ -47,14 +52,24 @@ type SeriesGetResource =
          "series" :>
            "get" :>
              QueryParams "series_id" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Series
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Series
 
 -- | Returns Series metadata for the given series ids.
 --
 -- /See:/ 'seriesGet' smart constructor.
-newtype SeriesGet =
+data SeriesGet =
   SeriesGet'
-    { _sgSeriesId :: [Text]
+    { _sgXgafv :: !(Maybe Xgafv)
+    , _sgUploadProtocol :: !(Maybe Text)
+    , _sgAccessToken :: !(Maybe Text)
+    , _sgUploadType :: !(Maybe Text)
+    , _sgCallback :: !(Maybe Text)
+    , _sgSeriesId :: ![Text]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,12 +78,56 @@ newtype SeriesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sgXgafv'
+--
+-- * 'sgUploadProtocol'
+--
+-- * 'sgAccessToken'
+--
+-- * 'sgUploadType'
+--
+-- * 'sgCallback'
+--
 -- * 'sgSeriesId'
 seriesGet
     :: [Text] -- ^ 'sgSeriesId'
     -> SeriesGet
-seriesGet pSgSeriesId_ = SeriesGet' {_sgSeriesId = _Coerce # pSgSeriesId_}
+seriesGet pSgSeriesId_ =
+  SeriesGet'
+    { _sgXgafv = Nothing
+    , _sgUploadProtocol = Nothing
+    , _sgAccessToken = Nothing
+    , _sgUploadType = Nothing
+    , _sgCallback = Nothing
+    , _sgSeriesId = _Coerce # pSgSeriesId_
+    }
 
+
+-- | V1 error format.
+sgXgafv :: Lens' SeriesGet (Maybe Xgafv)
+sgXgafv = lens _sgXgafv (\ s a -> s{_sgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+sgUploadProtocol :: Lens' SeriesGet (Maybe Text)
+sgUploadProtocol
+  = lens _sgUploadProtocol
+      (\ s a -> s{_sgUploadProtocol = a})
+
+-- | OAuth access token.
+sgAccessToken :: Lens' SeriesGet (Maybe Text)
+sgAccessToken
+  = lens _sgAccessToken
+      (\ s a -> s{_sgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+sgUploadType :: Lens' SeriesGet (Maybe Text)
+sgUploadType
+  = lens _sgUploadType (\ s a -> s{_sgUploadType = a})
+
+-- | JSONP
+sgCallback :: Lens' SeriesGet (Maybe Text)
+sgCallback
+  = lens _sgCallback (\ s a -> s{_sgCallback = a})
 
 -- | String that identifies the series
 sgSeriesId :: Lens' SeriesGet [Text]
@@ -81,7 +140,12 @@ instance GoogleRequest SeriesGet where
         type Scopes SeriesGet =
              '["https://www.googleapis.com/auth/books"]
         requestClient SeriesGet'{..}
-          = go _sgSeriesId (Just AltJSON) booksService
+          = go _sgSeriesId _sgXgafv _sgUploadProtocol
+              _sgAccessToken
+              _sgUploadType
+              _sgCallback
+              (Just AltJSON)
+              booksService
           where go
                   = buildClient (Proxy :: Proxy SeriesGetResource)
                       mempty

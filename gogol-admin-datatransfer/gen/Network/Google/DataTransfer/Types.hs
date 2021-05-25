@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -38,6 +38,9 @@ module Network.Google.DataTransfer.Types
     , atpValue
     , atpKey
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * ApplicationsListResponse
     , ApplicationsListResponse
     , applicationsListResponse
@@ -74,15 +77,15 @@ module Network.Google.DataTransfer.Types
     , adtApplicationTransferStatus
     ) where
 
-import           Network.Google.DataTransfer.Types.Product
-import           Network.Google.DataTransfer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DataTransfer.Types.Product
+import Network.Google.DataTransfer.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'datatransfer_v1' of the Admin SDK API. This contains the host and root path used as a starting point for constructing service requests.
 dataTransferService :: ServiceConfig
 dataTransferService
   = defaultService (ServiceId "admin:datatransfer_v1")
-      "www.googleapis.com"
+      "admin.googleapis.com"
 
 -- | View data transfers between users in your organization
 adminDataTransferReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]

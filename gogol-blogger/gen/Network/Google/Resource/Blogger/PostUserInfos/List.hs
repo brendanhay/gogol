@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of post and post user info pairs, possibly filtered.
--- The post user info contains per-user information about the post, such as
--- access rights, specific to the user.
+-- Lists post and user info pairs.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.postUserInfos.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.postUserInfos.list@.
 module Network.Google.Resource.Blogger.PostUserInfos.List
     (
     -- * REST Resource
@@ -36,8 +34,12 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
 
     -- * Request Lenses
     , puilStatus
+    , puilXgafv
+    , puilUploadProtocol
     , puilOrderBy
+    , puilAccessToken
     , puilEndDate
+    , puilUploadType
     , puilBlogId
     , puilUserId
     , puilStartDate
@@ -46,51 +48,61 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
     , puilLabels
     , puilPageToken
     , puilMaxResults
+    , puilCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.postUserInfos.list@ method which the
 -- 'PostUserInfosList'' request conforms to.
 type PostUserInfosListResource =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               Capture "blogId" Text :>
-                 "posts" :>
-                   QueryParams "status" PostUserInfosListStatus :>
-                     QueryParam "orderBy" PostUserInfosListOrderBy :>
-                       QueryParam "endDate" DateTime' :>
-                         QueryParam "startDate" DateTime' :>
-                           QueryParam "fetchBodies" Bool :>
-                             QueryParam "view" PostUserInfosListView :>
-                               QueryParam "labels" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "maxResults" (Textual Word32) :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] PostUserInfosList
+     "v3" :>
+       "users" :>
+         Capture "userId" Text :>
+           "blogs" :>
+             Capture "blogId" Text :>
+               "posts" :>
+                 QueryParams "status" PostUserInfosListStatus :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "orderBy" PostUserInfosListOrderBy :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "endDate" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "startDate" Text :>
+                                 QueryParam "fetchBodies" Bool :>
+                                   QueryParam "view" PostUserInfosListView :>
+                                     QueryParam "labels" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "maxResults"
+                                           (Textual Word32)
+                                           :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON] PostUserInfosList
 
--- | Retrieves a list of post and post user info pairs, possibly filtered.
--- The post user info contains per-user information about the post, such as
--- access rights, specific to the user.
+-- | Lists post and user info pairs.
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
 data PostUserInfosList' =
   PostUserInfosList''
-    { _puilStatus      :: !(Maybe [PostUserInfosListStatus])
-    , _puilOrderBy     :: !PostUserInfosListOrderBy
-    , _puilEndDate     :: !(Maybe DateTime')
-    , _puilBlogId      :: !Text
-    , _puilUserId      :: !Text
-    , _puilStartDate   :: !(Maybe DateTime')
+    { _puilStatus :: !(Maybe [PostUserInfosListStatus])
+    , _puilXgafv :: !(Maybe Xgafv)
+    , _puilUploadProtocol :: !(Maybe Text)
+    , _puilOrderBy :: !PostUserInfosListOrderBy
+    , _puilAccessToken :: !(Maybe Text)
+    , _puilEndDate :: !(Maybe Text)
+    , _puilUploadType :: !(Maybe Text)
+    , _puilBlogId :: !Text
+    , _puilUserId :: !Text
+    , _puilStartDate :: !(Maybe Text)
     , _puilFetchBodies :: !Bool
-    , _puilView        :: !(Maybe PostUserInfosListView)
-    , _puilLabels      :: !(Maybe Text)
-    , _puilPageToken   :: !(Maybe Text)
-    , _puilMaxResults  :: !(Maybe (Textual Word32))
+    , _puilView :: !(Maybe PostUserInfosListView)
+    , _puilLabels :: !(Maybe Text)
+    , _puilPageToken :: !(Maybe Text)
+    , _puilMaxResults :: !(Maybe (Textual Word32))
+    , _puilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -101,9 +113,17 @@ data PostUserInfosList' =
 --
 -- * 'puilStatus'
 --
+-- * 'puilXgafv'
+--
+-- * 'puilUploadProtocol'
+--
 -- * 'puilOrderBy'
 --
+-- * 'puilAccessToken'
+--
 -- * 'puilEndDate'
+--
+-- * 'puilUploadType'
 --
 -- * 'puilBlogId'
 --
@@ -120,6 +140,8 @@ data PostUserInfosList' =
 -- * 'puilPageToken'
 --
 -- * 'puilMaxResults'
+--
+-- * 'puilCallback'
 postUserInfosList'
     :: Text -- ^ 'puilBlogId'
     -> Text -- ^ 'puilUserId'
@@ -127,8 +149,12 @@ postUserInfosList'
 postUserInfosList' pPuilBlogId_ pPuilUserId_ =
   PostUserInfosList''
     { _puilStatus = Nothing
+    , _puilXgafv = Nothing
+    , _puilUploadProtocol = Nothing
     , _puilOrderBy = PUILOBPublished
+    , _puilAccessToken = Nothing
     , _puilEndDate = Nothing
+    , _puilUploadType = Nothing
     , _puilBlogId = pPuilBlogId_
     , _puilUserId = pPuilUserId_
     , _puilStartDate = Nothing
@@ -137,6 +163,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilLabels = Nothing
     , _puilPageToken = Nothing
     , _puilMaxResults = Nothing
+    , _puilCallback = Nothing
     }
 
 
@@ -146,63 +173,77 @@ puilStatus
       _Default
       . _Coerce
 
--- | Sort order applied to search results. Default is published.
+-- | V1 error format.
+puilXgafv :: Lens' PostUserInfosList' (Maybe Xgafv)
+puilXgafv
+  = lens _puilXgafv (\ s a -> s{_puilXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+puilUploadProtocol :: Lens' PostUserInfosList' (Maybe Text)
+puilUploadProtocol
+  = lens _puilUploadProtocol
+      (\ s a -> s{_puilUploadProtocol = a})
+
 puilOrderBy :: Lens' PostUserInfosList' PostUserInfosListOrderBy
 puilOrderBy
   = lens _puilOrderBy (\ s a -> s{_puilOrderBy = a})
 
--- | Latest post date to fetch, a date-time with RFC 3339 formatting.
-puilEndDate :: Lens' PostUserInfosList' (Maybe UTCTime)
-puilEndDate
-  = lens _puilEndDate (\ s a -> s{_puilEndDate = a}) .
-      mapping _DateTime
+-- | OAuth access token.
+puilAccessToken :: Lens' PostUserInfosList' (Maybe Text)
+puilAccessToken
+  = lens _puilAccessToken
+      (\ s a -> s{_puilAccessToken = a})
 
--- | ID of the blog to fetch posts from.
+puilEndDate :: Lens' PostUserInfosList' (Maybe Text)
+puilEndDate
+  = lens _puilEndDate (\ s a -> s{_puilEndDate = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+puilUploadType :: Lens' PostUserInfosList' (Maybe Text)
+puilUploadType
+  = lens _puilUploadType
+      (\ s a -> s{_puilUploadType = a})
+
 puilBlogId :: Lens' PostUserInfosList' Text
 puilBlogId
   = lens _puilBlogId (\ s a -> s{_puilBlogId = a})
 
--- | ID of the user for the per-user information to be fetched. Either the
--- word \'self\' (sans quote marks) or the user\'s profile identifier.
 puilUserId :: Lens' PostUserInfosList' Text
 puilUserId
   = lens _puilUserId (\ s a -> s{_puilUserId = a})
 
--- | Earliest post date to fetch, a date-time with RFC 3339 formatting.
-puilStartDate :: Lens' PostUserInfosList' (Maybe UTCTime)
+puilStartDate :: Lens' PostUserInfosList' (Maybe Text)
 puilStartDate
   = lens _puilStartDate
       (\ s a -> s{_puilStartDate = a})
-      . mapping _DateTime
 
--- | Whether the body content of posts is included. Default is false.
 puilFetchBodies :: Lens' PostUserInfosList' Bool
 puilFetchBodies
   = lens _puilFetchBodies
       (\ s a -> s{_puilFetchBodies = a})
 
--- | Access level with which to view the returned result. Note that some
--- fields require elevated access.
 puilView :: Lens' PostUserInfosList' (Maybe PostUserInfosListView)
 puilView = lens _puilView (\ s a -> s{_puilView = a})
 
--- | Comma-separated list of labels to search for.
 puilLabels :: Lens' PostUserInfosList' (Maybe Text)
 puilLabels
   = lens _puilLabels (\ s a -> s{_puilLabels = a})
 
--- | Continuation token if the request is paged.
 puilPageToken :: Lens' PostUserInfosList' (Maybe Text)
 puilPageToken
   = lens _puilPageToken
       (\ s a -> s{_puilPageToken = a})
 
--- | Maximum number of posts to fetch.
 puilMaxResults :: Lens' PostUserInfosList' (Maybe Word32)
 puilMaxResults
   = lens _puilMaxResults
       (\ s a -> s{_puilMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+puilCallback :: Lens' PostUserInfosList' (Maybe Text)
+puilCallback
+  = lens _puilCallback (\ s a -> s{_puilCallback = a})
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
@@ -212,14 +253,19 @@ instance GoogleRequest PostUserInfosList' where
         requestClient PostUserInfosList''{..}
           = go _puilUserId _puilBlogId
               (_puilStatus ^. _Default)
+              _puilXgafv
+              _puilUploadProtocol
               (Just _puilOrderBy)
+              _puilAccessToken
               _puilEndDate
+              _puilUploadType
               _puilStartDate
               (Just _puilFetchBodies)
               _puilView
               _puilLabels
               _puilPageToken
               _puilMaxResults
+              _puilCallback
               (Just AltJSON)
               bloggerService
           where go

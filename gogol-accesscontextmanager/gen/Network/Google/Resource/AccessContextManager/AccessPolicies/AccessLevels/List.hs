@@ -44,8 +44,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.
     , apallCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.list@ method which the
 -- 'AccessPoliciesAccessLevelsList' request conforms to.
@@ -57,7 +57,9 @@ type AccessPoliciesAccessLevelsListResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "accessLevelFormat" Text :>
+                   QueryParam "accessLevelFormat"
+                     AccessPoliciesAccessLevelsListAccessLevelFormat
+                     :>
                      QueryParam "pageToken" Text :>
                        QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
@@ -69,15 +71,15 @@ type AccessPoliciesAccessLevelsListResource =
 -- /See:/ 'accessPoliciesAccessLevelsList' smart constructor.
 data AccessPoliciesAccessLevelsList =
   AccessPoliciesAccessLevelsList'
-    { _apallParent            :: !Text
-    , _apallXgafv             :: !(Maybe Xgafv)
-    , _apallUploadProtocol    :: !(Maybe Text)
-    , _apallAccessToken       :: !(Maybe Text)
-    , _apallUploadType        :: !(Maybe Text)
-    , _apallAccessLevelFormat :: !(Maybe Text)
-    , _apallPageToken         :: !(Maybe Text)
-    , _apallPageSize          :: !(Maybe (Textual Int32))
-    , _apallCallback          :: !(Maybe Text)
+    { _apallParent :: !Text
+    , _apallXgafv :: !(Maybe Xgafv)
+    , _apallUploadProtocol :: !(Maybe Text)
+    , _apallAccessToken :: !(Maybe Text)
+    , _apallUploadType :: !(Maybe Text)
+    , _apallAccessLevelFormat :: !(Maybe AccessPoliciesAccessLevelsListAccessLevelFormat)
+    , _apallPageToken :: !(Maybe Text)
+    , _apallPageSize :: !(Maybe (Textual Int32))
+    , _apallCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -152,7 +154,7 @@ apallUploadType
 -- | Whether to return \`BasicLevels\` in the Cloud Common Expression
 -- language, as \`CustomLevels\`, rather than as \`BasicLevels\`. Defaults
 -- to returning \`AccessLevels\` in the format they were defined.
-apallAccessLevelFormat :: Lens' AccessPoliciesAccessLevelsList (Maybe Text)
+apallAccessLevelFormat :: Lens' AccessPoliciesAccessLevelsList (Maybe AccessPoliciesAccessLevelsListAccessLevelFormat)
 apallAccessLevelFormat
   = lens _apallAccessLevelFormat
       (\ s a -> s{_apallAccessLevelFormat = a})

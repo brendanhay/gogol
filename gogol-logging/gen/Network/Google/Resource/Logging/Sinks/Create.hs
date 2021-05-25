@@ -25,7 +25,7 @@
 -- sink\'s writer_identity is not permitted to write to the destination. A
 -- sink can export log entries only from the resource owning the sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.sinks.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.sinks.create@.
 module Network.Google.Resource.Logging.Sinks.Create
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Logging.Sinks.Create
     , scCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.sinks.create@ method which the
 -- 'SinksCreate' request conforms to.
@@ -72,14 +72,14 @@ type SinksCreateResource =
 -- /See:/ 'sinksCreate' smart constructor.
 data SinksCreate =
   SinksCreate'
-    { _scParent               :: !Text
-    , _scXgafv                :: !(Maybe Xgafv)
+    { _scParent :: !Text
+    , _scXgafv :: !(Maybe Xgafv)
     , _scUniqueWriterIdentity :: !(Maybe Bool)
-    , _scUploadProtocol       :: !(Maybe Text)
-    , _scAccessToken          :: !(Maybe Text)
-    , _scUploadType           :: !(Maybe Text)
-    , _scPayload              :: !LogSink
-    , _scCallback             :: !(Maybe Text)
+    , _scUploadProtocol :: !(Maybe Text)
+    , _scAccessToken :: !(Maybe Text)
+    , _scUploadType :: !(Maybe Text)
+    , _scPayload :: !LogSink
+    , _scCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

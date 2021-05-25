@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -51,6 +51,13 @@ module Network.Google.DLP.Types
     , grsCode
     , grsMessage
 
+    -- * GooglePrivacyDlpV2HybridInspectStatistics
+    , GooglePrivacyDlpV2HybridInspectStatistics
+    , googlePrivacyDlpV2HybridInspectStatistics
+    , gpdvhisAbortedCount
+    , gpdvhisPendingCount
+    , gpdvhisProcessedCount
+
     -- * GooglePrivacyDlpV2FixedSizeBucketingConfig
     , GooglePrivacyDlpV2FixedSizeBucketingConfig
     , googlePrivacyDlpV2FixedSizeBucketingConfig
@@ -67,8 +74,10 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2StoredInfoTypeConfig
     , GooglePrivacyDlpV2StoredInfoTypeConfig
     , googlePrivacyDlpV2StoredInfoTypeConfig
+    , gpdvsitcRegex
     , gpdvsitcLargeCustomDictionary
     , gpdvsitcDisplayName
+    , gpdvsitcDictionary
     , gpdvsitcDescription
 
     -- * GooglePrivacyDlpV2InfoTypeTransformation
@@ -81,6 +90,17 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2FieldId
     , googlePrivacyDlpV2FieldId
     , gpdvfiName
+
+    -- * GooglePrivacyDlpV2Container
+    , GooglePrivacyDlpV2Container
+    , googlePrivacyDlpV2Container
+    , gpdvcFullPath
+    , gpdvcUpdateTime
+    , gpdvcVersion
+    , gpdvcProjectId
+    , gpdvcType
+    , gpdvcRootPath
+    , gpdvcRelativePath
 
     -- * GooglePrivacyDlpV2DlpJob
     , GooglePrivacyDlpV2DlpJob
@@ -138,10 +158,20 @@ module Network.Google.DLP.Types
     , gpdvrajcActions
     , gpdvrajcSourceTable
 
+    -- * GooglePrivacyDlpV2HybridInspectDlpJobRequest
+    , GooglePrivacyDlpV2HybridInspectDlpJobRequest
+    , googlePrivacyDlpV2HybridInspectDlpJobRequest
+    , gpdvhidjrHybridItem
+
     -- * GooglePrivacyDlpV2QuoteInfo
     , GooglePrivacyDlpV2QuoteInfo
     , googlePrivacyDlpV2QuoteInfo
     , gpdvqiDateTime
+
+    -- * GooglePrivacyDlpV2StoredInfoTypeStats
+    , GooglePrivacyDlpV2StoredInfoTypeStats
+    , googlePrivacyDlpV2StoredInfoTypeStats
+    , gpdvsitsLargeCustomDictionary
 
     -- * GooglePrivacyDlpV2RecordSuppression
     , GooglePrivacyDlpV2RecordSuppression
@@ -188,7 +218,13 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2Result
     , gpdvrProcessedBytes
     , gpdvrInfoTypeStats
+    , gpdvrHybridStats
     , gpdvrTotalEstimatedBytes
+
+    -- * GooglePrivacyDlpV2HybridOptionsLabels
+    , GooglePrivacyDlpV2HybridOptionsLabels
+    , googlePrivacyDlpV2HybridOptionsLabels
+    , gpdvholAddtional
 
     -- * GooglePrivacyDlpV2InspectDataSourceDetails
     , GooglePrivacyDlpV2InspectDataSourceDetails
@@ -246,6 +282,7 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2InspectContentRequest
     , gpdvicrInspectConfig
     , gpdvicrItem
+    , gpdvicrLocationId
     , gpdvicrInspectTemplateName
 
     -- * GooglePrivacyDlpV2CategoricalStatsResult
@@ -259,6 +296,12 @@ module Network.Google.DLP.Types
     , gpdvnsrMaxValue
     , gpdvnsrQuantileValues
     , gpdvnsrMinValue
+
+    -- * GooglePrivacyDlpV2TransformationErrorHandling
+    , GooglePrivacyDlpV2TransformationErrorHandling
+    , googlePrivacyDlpV2TransformationErrorHandling
+    , gpdvtehThrowError
+    , gpdvtehLeaveUntransformed
 
     -- * GooglePrivacyDlpV2PublishSummaryToCscc
     , GooglePrivacyDlpV2PublishSummaryToCscc
@@ -274,6 +317,11 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2EntityId
     , googlePrivacyDlpV2EntityId
     , gpdveiField
+
+    -- * GooglePrivacyDlpV2HybridFindingDetailsLabels
+    , GooglePrivacyDlpV2HybridFindingDetailsLabels
+    , googlePrivacyDlpV2HybridFindingDetailsLabels
+    , gpdvhfdlAddtional
 
     -- * GooglePrivacyDlpV2ByteContentItem
     , GooglePrivacyDlpV2ByteContentItem
@@ -299,6 +347,10 @@ module Network.Google.DLP.Types
     , gpdvbqoExcludedFields
     , gpdvbqoSampleMethod
 
+    -- * GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+    , GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+    , googlePrivacyDlpV2PublishFindingsToCloudDataCatalog
+
     -- * GooglePrivacyDlpV2KMapEstimationQuasiIdValues
     , GooglePrivacyDlpV2KMapEstimationQuasiIdValues
     , googlePrivacyDlpV2KMapEstimationQuasiIdValues
@@ -314,6 +366,7 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2CreateInspectTemplateRequest
     , googlePrivacyDlpV2CreateInspectTemplateRequest
     , gpdvcitrTemplateId
+    , gpdvcitrLocationId
     , gpdvcitrInspectTemplate
 
     -- * GooglePrivacyDlpV2PathElement
@@ -353,6 +406,9 @@ module Network.Google.DLP.Types
     , gpdvftCondition
     , gpdvftFields
 
+    -- * OrganizationsLocationsDlpJobsListType
+    , OrganizationsLocationsDlpJobsListType (..)
+
     -- * GooglePrivacyDlpV2HotwordRule
     , GooglePrivacyDlpV2HotwordRule
     , googlePrivacyDlpV2HotwordRule
@@ -366,7 +422,11 @@ module Network.Google.DLP.Types
     , gpdvrirIncludeFindings
     , gpdvrirInspectConfig
     , gpdvrirByteItem
+    , gpdvrirLocationId
     , gpdvrirImageRedactionConfigs
+
+    -- * ProjectsJobTriggersListType
+    , ProjectsJobTriggersListType (..)
 
     -- * GooglePrivacyDlpV2FindingLimits
     , GooglePrivacyDlpV2FindingLimits
@@ -390,6 +450,9 @@ module Network.Google.DLP.Types
     , gpdvtcEnableAutoPopulationOfTimespanConfig
     , gpdvtcEndTime
 
+    -- * GooglePrivacyDlpV2MetadataLocationType
+    , GooglePrivacyDlpV2MetadataLocationType (..)
+
     -- * GooglePrivacyDlpV2DateTimeDayOfWeek
     , GooglePrivacyDlpV2DateTimeDayOfWeek (..)
 
@@ -398,6 +461,10 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2CreateDeidentifyTemplateRequest
     , gpdvcdtrTemplateId
     , gpdvcdtrDeidentifyTemplate
+    , gpdvcdtrLocationId
+
+    -- * GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem
+    , GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem (..)
 
     -- * GooglePrivacyDlpV2TransientCryptoKey
     , GooglePrivacyDlpV2TransientCryptoKey
@@ -434,6 +501,7 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Trigger
     , GooglePrivacyDlpV2Trigger
     , googlePrivacyDlpV2Trigger
+    , gpdvtManual
     , gpdvtSchedule
 
     -- * GooglePrivacyDlpV2CloudStorageOptions
@@ -460,6 +528,7 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2CreateStoredInfoTypeRequest
     , googlePrivacyDlpV2CreateStoredInfoTypeRequest
     , gpdvcsitrConfig
+    , gpdvcsitrLocationId
     , gpdvcsitrStoredInfoTypeId
 
     -- * GooglePrivacyDlpV2QuasiIdField
@@ -472,6 +541,11 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2TimePartConfig
     , googlePrivacyDlpV2TimePartConfig
     , gpdvtpcPartToExtract
+
+    -- * GooglePrivacyDlpV2FindingLabels
+    , GooglePrivacyDlpV2FindingLabels
+    , googlePrivacyDlpV2FindingLabels
+    , gpdvflAddtional
 
     -- * GooglePrivacyDlpV2InspectionRule
     , GooglePrivacyDlpV2InspectionRule
@@ -525,6 +599,10 @@ module Network.Google.DLP.Types
     , gpdvusitrConfig
     , gpdvusitrUpdateMask
 
+    -- * GooglePrivacyDlpV2LeaveUntransformed
+    , GooglePrivacyDlpV2LeaveUntransformed
+    , googlePrivacyDlpV2LeaveUntransformed
+
     -- * GooglePrivacyDlpV2KAnonymityEquivalenceClass
     , GooglePrivacyDlpV2KAnonymityEquivalenceClass
     , googlePrivacyDlpV2KAnonymityEquivalenceClass
@@ -547,6 +625,9 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2JobNotificationEmails
     , googlePrivacyDlpV2JobNotificationEmails
 
+    -- * ProjectsLocationsDlpJobsListType
+    , ProjectsLocationsDlpJobsListType (..)
+
     -- * GooglePrivacyDlpV2DeidentifyContentRequest
     , GooglePrivacyDlpV2DeidentifyContentRequest
     , googlePrivacyDlpV2DeidentifyContentRequest
@@ -554,6 +635,7 @@ module Network.Google.DLP.Types
     , gpdvdcrDeidentifyConfig
     , gpdvdcrDeidentifyTemplateName
     , gpdvdcrItem
+    , gpdvdcrLocationId
     , gpdvdcrInspectTemplateName
 
     -- * GooglePrivacyDlpV2Color
@@ -578,11 +660,18 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Finding
     , GooglePrivacyDlpV2Finding
     , googlePrivacyDlpV2Finding
+    , gpdvfTriggerName
+    , gpdvfResourceName
     , gpdvfLocation
+    , gpdvfJobName
     , gpdvfInfoType
     , gpdvfQuoteInfo
+    , gpdvfName
     , gpdvfLikelihood
     , gpdvfQuote
+    , gpdvfLabels
+    , gpdvfFindingId
+    , gpdvfJobCreateTime
     , gpdvfCreateTime
 
     -- * GooglePrivacyDlpV2SummaryResult
@@ -596,6 +685,14 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2Row
     , googlePrivacyDlpV2Row
     , gpdvrValues
+
+    -- * GooglePrivacyDlpV2Manual
+    , GooglePrivacyDlpV2Manual
+    , googlePrivacyDlpV2Manual
+
+    -- * GooglePrivacyDlpV2PublishToStackdriver
+    , GooglePrivacyDlpV2PublishToStackdriver
+    , googlePrivacyDlpV2PublishToStackdriver
 
     -- * GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
     , GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
@@ -626,6 +723,7 @@ module Network.Google.DLP.Types
     , gpdvcdjrRiskJob
     , gpdvcdjrJobId
     , gpdvcdjrInspectJob
+    , gpdvcdjrLocationId
 
     -- * GooglePrivacyDlpV2RecordKey
     , GooglePrivacyDlpV2RecordKey
@@ -642,6 +740,11 @@ module Network.Google.DLP.Types
     , gpdvkmehbMinAnonymity
     , gpdvkmehbBucketSize
     , gpdvkmehbBucketValueCount
+
+    -- * GooglePrivacyDlpV2LargeCustomDictionaryStats
+    , GooglePrivacyDlpV2LargeCustomDictionaryStats
+    , googlePrivacyDlpV2LargeCustomDictionaryStats
+    , gpdvlcdsApproxNumPhrases
 
     -- * GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
     , GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
@@ -703,6 +806,7 @@ module Network.Google.DLP.Types
     , GooglePrivacyDlpV2DeidentifyConfig
     , googlePrivacyDlpV2DeidentifyConfig
     , gpdvdcInfoTypeTransformations
+    , gpdvdcTransformationErrorHandling
     , gpdvdcRecordTransformations
 
     -- * GooglePrivacyDlpV2CharacterMaskConfig
@@ -749,6 +853,7 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2StoredInfoTypeVersion
     , gpdvsitvState
     , gpdvsitvConfig
+    , gpdvsitvStats
     , gpdvsitvErrors
     , gpdvsitvCreateTime
 
@@ -766,6 +871,7 @@ module Network.Google.DLP.Types
     , gpdvclDocumentLocation
     , gpdvclContainerVersion
     , gpdvclRecordLocation
+    , gpdvclMetadataLocation
 
     -- * GooglePrivacyDlpV2AuxiliaryTable
     , GooglePrivacyDlpV2AuxiliaryTable
@@ -792,6 +898,14 @@ module Network.Google.DLP.Types
     , gpdvfsURL
     , gpdvfsRegexFileSet
 
+    -- * GooglePrivacyDlpV2HybridOptions
+    , GooglePrivacyDlpV2HybridOptions
+    , googlePrivacyDlpV2HybridOptions
+    , gpdvhoTableOptions
+    , gpdvhoLabels
+    , gpdvhoRequiredFindingLabelKeys
+    , gpdvhoDescription
+
     -- * GooglePrivacyDlpV2ListInspectTemplatesResponse
     , GooglePrivacyDlpV2ListInspectTemplatesResponse
     , googlePrivacyDlpV2ListInspectTemplatesResponse
@@ -811,6 +925,11 @@ module Network.Google.DLP.Types
 
     -- * GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore
     , GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore (..)
+
+    -- * GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+    , GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+    , googlePrivacyDlpV2HybridInspectJobTriggerRequest
+    , gpdvhijtrHybridItem
 
     -- * GooglePrivacyDlpV2OutputStorageConfig
     , GooglePrivacyDlpV2OutputStorageConfig
@@ -857,6 +976,10 @@ module Network.Google.DLP.Types
     , gpdvrcrOverview
     , gpdvrcrItem
 
+    -- * GooglePrivacyDlpV2HybridInspectResponse
+    , GooglePrivacyDlpV2HybridInspectResponse
+    , googlePrivacyDlpV2HybridInspectResponse
+
     -- * GooglePrivacyDlpV2Expressions
     , GooglePrivacyDlpV2Expressions
     , googlePrivacyDlpV2Expressions
@@ -884,11 +1007,20 @@ module Network.Google.DLP.Types
     , gpdvcsrfsBucketName
     , gpdvcsrfsIncludeRegex
 
+    -- * GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+    , GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+    , googlePrivacyDlpV2RequestedRiskAnalysisOptions
+    , gpdvrraoJobConfig
+
     -- * GooglePrivacyDlpV2ExclusionRuleMatchingType
     , GooglePrivacyDlpV2ExclusionRuleMatchingType (..)
 
     -- * GooglePrivacyDlpV2ValueDayOfWeekValue
     , GooglePrivacyDlpV2ValueDayOfWeekValue (..)
+
+    -- * GooglePrivacyDlpV2ThrowError
+    , GooglePrivacyDlpV2ThrowError
+    , googlePrivacyDlpV2ThrowError
 
     -- * GooglePrivacyDlpV2Bucket
     , GooglePrivacyDlpV2Bucket
@@ -900,8 +1032,10 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2Action
     , GooglePrivacyDlpV2Action
     , googlePrivacyDlpV2Action
+    , gpdvaPublishToStackdriver
     , gpdvaJobNotificationEmails
     , gpdvaPubSub
+    , gpdvaPublishFindingsToCloudDataCatalog
     , gpdvaSaveFindings
     , gpdvaPublishSummaryToCscc
 
@@ -911,6 +1045,11 @@ module Network.Google.DLP.Types
     , gtdDay
     , gtdYear
     , gtdMonth
+
+    -- * GooglePrivacyDlpV2TableOptions
+    , GooglePrivacyDlpV2TableOptions
+    , googlePrivacyDlpV2TableOptions
+    , gpdvtoIdentifyingFields
 
     -- * GooglePrivacyDlpV2SurrogateType
     , GooglePrivacyDlpV2SurrogateType
@@ -983,6 +1122,7 @@ module Network.Google.DLP.Types
     , gooInspectConfig
     , gooReidentifyTemplateName
     , gooItem
+    , gooLocationId
     , gooInspectTemplateName
     , gooReidentifyConfig
 
@@ -1010,13 +1150,29 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2JobTriggerStatus
     , GooglePrivacyDlpV2JobTriggerStatus (..)
 
+    -- * ProjectsDlpJobsListType
+    , ProjectsDlpJobsListType (..)
+
     -- * GooglePrivacyDlpV2StorageConfig
     , GooglePrivacyDlpV2StorageConfig
     , googlePrivacyDlpV2StorageConfig
+    , gpdvscHybridOptions
     , gpdvscTimespanConfig
     , gpdvscBigQueryOptions
     , gpdvscDatastoreOptions
     , gpdvscCloudStorageOptions
+
+    -- * OrganizationsLocationsJobTriggersListType
+    , OrganizationsLocationsJobTriggersListType (..)
+
+    -- * GooglePrivacyDlpV2HybridFindingDetails
+    , GooglePrivacyDlpV2HybridFindingDetails
+    , googlePrivacyDlpV2HybridFindingDetails
+    , gpdvhfdFileOffSet
+    , gpdvhfdTableOptions
+    , gpdvhfdRowOffSet
+    , gpdvhfdContainerDetails
+    , gpdvhfdLabels
 
     -- * GooglePrivacyDlpV2Value
     , GooglePrivacyDlpV2Value
@@ -1036,6 +1192,9 @@ module Network.Google.DLP.Types
     , gpdvdWordList
     , gpdvdCloudStoragePath
 
+    -- * GooglePrivacyDlpV2InspectConfigContentOptionsItem
+    , GooglePrivacyDlpV2InspectConfigContentOptionsItem (..)
+
     -- * GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
     , GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
     , googlePrivacyDlpV2AnalyzeDataSourceRiskDetails
@@ -1044,6 +1203,7 @@ module Network.Google.DLP.Types
     , gpdvadsrdLDiversityResult
     , gpdvadsrdKAnonymityResult
     , gpdvadsrdKMapEstimationResult
+    , gpdvadsrdRequestedOptions
     , gpdvadsrdDeltaPresenceEstimationResult
     , gpdvadsrdNumericalStatsResult
     , gpdvadsrdCategoricalStatsResult
@@ -1077,6 +1237,12 @@ module Network.Google.DLP.Types
     , gpdvbqtProjectId
     , gpdvbqtTableId
 
+    -- * GooglePrivacyDlpV2MetadataLocation
+    , GooglePrivacyDlpV2MetadataLocation
+    , googlePrivacyDlpV2MetadataLocation
+    , gpdvmlStorageLabel
+    , gpdvmlType
+
     -- * GooglePrivacyDlpV2RequestedOptions
     , GooglePrivacyDlpV2RequestedOptions
     , googlePrivacyDlpV2RequestedOptions
@@ -1101,6 +1267,15 @@ module Network.Google.DLP.Types
     -- * GooglePrivacyDlpV2CancelDlpJobRequest
     , GooglePrivacyDlpV2CancelDlpJobRequest
     , googlePrivacyDlpV2CancelDlpJobRequest
+
+    -- * GooglePrivacyDlpV2HybridContentItem
+    , GooglePrivacyDlpV2HybridContentItem
+    , googlePrivacyDlpV2HybridContentItem
+    , gpdvhciFindingDetails
+    , gpdvhciItem
+
+    -- * GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem
+    , GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem (..)
 
     -- * GooglePrivacyDlpV2RecordLocation
     , GooglePrivacyDlpV2RecordLocation
@@ -1139,6 +1314,9 @@ module Network.Google.DLP.Types
     , gpdvstTable
     , gpdvstQuasiIds
 
+    -- * ProjectsLocationsJobTriggersListType
+    , ProjectsLocationsJobTriggersListType (..)
+
     -- * GooglePrivacyDlpV2DeidentifyTemplate
     , GooglePrivacyDlpV2DeidentifyTemplate
     , googlePrivacyDlpV2DeidentifyTemplate
@@ -1175,10 +1353,15 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2CloudStoragePath
     , gpdvcspPath
 
+    -- * GooglePrivacyDlpV2FinishDlpJobRequest
+    , GooglePrivacyDlpV2FinishDlpJobRequest
+    , googlePrivacyDlpV2FinishDlpJobRequest
+
     -- * GooglePrivacyDlpV2Location
     , GooglePrivacyDlpV2Location
     , googlePrivacyDlpV2Location
     , gpdvlCodepointRange
+    , gpdvlContainer
     , gpdvlContentLocations
     , gpdvlByteRange
 
@@ -1195,12 +1378,18 @@ module Network.Google.DLP.Types
     , googlePrivacyDlpV2CreateJobTriggerRequest
     , gpdvcjtrTriggerId
     , gpdvcjtrJobTrigger
+    , gpdvcjtrLocationId
 
     -- * GooglePrivacyDlpV2TransformationOverview
     , GooglePrivacyDlpV2TransformationOverview
     , googlePrivacyDlpV2TransformationOverview
     , gpdvtoTransformedBytes
     , gpdvtoTransformationSummaries
+
+    -- * GooglePrivacyDlpV2StorageMetadataLabel
+    , GooglePrivacyDlpV2StorageMetadataLabel
+    , googlePrivacyDlpV2StorageMetadataLabel
+    , gpdvsmlKey
 
     -- * GooglePrivacyDlpV2ImageLocation
     , GooglePrivacyDlpV2ImageLocation
@@ -1247,9 +1436,9 @@ module Network.Google.DLP.Types
     , gpdvdlFileOffSet
     ) where
 
-import           Network.Google.DLP.Types.Product
-import           Network.Google.DLP.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DLP.Types.Product
+import Network.Google.DLP.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Cloud Data Loss Prevention (DLP) API. This contains the host and root path used as a starting point for constructing service requests.
 dLPService :: ServiceConfig
@@ -1257,6 +1446,6 @@ dLPService
   = defaultService (ServiceId "dlp:v2")
       "dlp.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionDisks.SetLabels
     , rdslRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.setLabels@ method which the
 -- 'RegionDisksSetLabels' request conforms to.
@@ -66,10 +66,10 @@ type RegionDisksSetLabelsResource =
 data RegionDisksSetLabels =
   RegionDisksSetLabels'
     { _rdslRequestId :: !(Maybe Text)
-    , _rdslProject   :: !Text
-    , _rdslPayload   :: !RegionSetLabelsRequest
-    , _rdslResource  :: !Text
-    , _rdslRegion    :: !Text
+    , _rdslProject :: !Text
+    , _rdslPayload :: !RegionSetLabelsRequest
+    , _rdslResource :: !Text
+    , _rdslRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

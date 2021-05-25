@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create an Service Perimeter. The longrunning operation from this RPC
--- will have a successful status once the Service Perimeter has propagated
--- to long-lasting storage. Service Perimeters containing errors will
--- result in an error response for the first error encountered.
+-- Create a Service Perimeter. The longrunning operation from this RPC will
+-- have a successful status once the Service Perimeter has propagated to
+-- long-lasting storage. Service Perimeters containing errors will result
+-- in an error response for the first error encountered.
 --
 -- /See:/ <https://cloud.google.com/access-context-manager/docs/reference/rest/ Access Context Manager API Reference> for @accesscontextmanager.accessPolicies.servicePerimeters.create@.
 module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Create
@@ -45,8 +45,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerime
     , apspcCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.create@ method which the
 -- 'AccessPoliciesServicePerimetersCreate' request conforms to.
@@ -63,21 +63,21 @@ type AccessPoliciesServicePerimetersCreateResource =
                        ReqBody '[JSON] ServicePerimeter :>
                          Post '[JSON] Operation
 
--- | Create an Service Perimeter. The longrunning operation from this RPC
--- will have a successful status once the Service Perimeter has propagated
--- to long-lasting storage. Service Perimeters containing errors will
--- result in an error response for the first error encountered.
+-- | Create a Service Perimeter. The longrunning operation from this RPC will
+-- have a successful status once the Service Perimeter has propagated to
+-- long-lasting storage. Service Perimeters containing errors will result
+-- in an error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesServicePerimetersCreate' smart constructor.
 data AccessPoliciesServicePerimetersCreate =
   AccessPoliciesServicePerimetersCreate'
-    { _apspcParent         :: !Text
-    , _apspcXgafv          :: !(Maybe Xgafv)
+    { _apspcParent :: !Text
+    , _apspcXgafv :: !(Maybe Xgafv)
     , _apspcUploadProtocol :: !(Maybe Text)
-    , _apspcAccessToken    :: !(Maybe Text)
-    , _apspcUploadType     :: !(Maybe Text)
-    , _apspcPayload        :: !ServicePerimeter
-    , _apspcCallback       :: !(Maybe Text)
+    , _apspcAccessToken :: !(Maybe Text)
+    , _apspcUploadType :: !(Maybe Text)
+    , _apspcPayload :: !ServicePerimeter
+    , _apspcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

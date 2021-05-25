@@ -45,8 +45,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Updat
     , pzcnpuCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.update@ method which the
 -- 'ProjectsZonesClustersNodePoolsUpdate' request conforms to.
@@ -75,16 +75,16 @@ type ProjectsZonesClustersNodePoolsUpdateResource =
 -- /See:/ 'projectsZonesClustersNodePoolsUpdate' smart constructor.
 data ProjectsZonesClustersNodePoolsUpdate =
   ProjectsZonesClustersNodePoolsUpdate'
-    { _pzcnpuXgafv          :: !(Maybe Xgafv)
+    { _pzcnpuXgafv :: !(Maybe Xgafv)
     , _pzcnpuUploadProtocol :: !(Maybe Text)
-    , _pzcnpuAccessToken    :: !(Maybe Text)
-    , _pzcnpuUploadType     :: !(Maybe Text)
-    , _pzcnpuZone           :: !Text
-    , _pzcnpuPayload        :: !UpdateNodePoolRequest
-    , _pzcnpuNodePoolId     :: !Text
-    , _pzcnpuClusterId      :: !Text
-    , _pzcnpuProjectId      :: !Text
-    , _pzcnpuCallback       :: !(Maybe Text)
+    , _pzcnpuAccessToken :: !(Maybe Text)
+    , _pzcnpuUploadType :: !(Maybe Text)
+    , _pzcnpuZone :: !Text
+    , _pzcnpuPayload :: !UpdateNodePoolRequest
+    , _pzcnpuNodePoolId :: !Text
+    , _pzcnpuClusterId :: !Text
+    , _pzcnpuProjectId :: !Text
+    , _pzcnpuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,8 +158,9 @@ pzcnpuUploadType
       (\ s a -> s{_pzcnpuUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcnpuZone :: Lens' ProjectsZonesClustersNodePoolsUpdate Text
 pzcnpuZone
   = lens _pzcnpuZone (\ s a -> s{_pzcnpuZone = a})

@@ -16,7 +16,7 @@
 --
 module Network.Google.Billing.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 data AggregationInfoAggregationLevel
     = AggregationLevelUnspecified
@@ -85,6 +85,47 @@ instance FromJSON AuditLogConfigLogType where
     parseJSON = parseJSONText "AuditLogConfigLogType"
 
 instance ToJSON AuditLogConfigLogType where
+    toJSON = toJSONText
+
+-- | The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
+data GeoTaxonomyType
+    = TypeUnspecified
+      -- ^ @TYPE_UNSPECIFIED@
+      -- The type is not specified.
+    | Global
+      -- ^ @GLOBAL@
+      -- The sku is global in nature, e.g. a license sku. Global skus are
+      -- available in all regions, and so have an empty region list.
+    | Regional
+      -- ^ @REGIONAL@
+      -- The sku is available in a specific region, e.g. \"us-west2\".
+    | MultiRegional
+      -- ^ @MULTI_REGIONAL@
+      -- The sku is associated with multiple regions, e.g. \"us-west2\" and
+      -- \"us-east1\".
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GeoTaxonomyType
+
+instance FromHttpApiData GeoTaxonomyType where
+    parseQueryParam = \case
+        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
+        "GLOBAL" -> Right Global
+        "REGIONAL" -> Right Regional
+        "MULTI_REGIONAL" -> Right MultiRegional
+        x -> Left ("Unable to parse GeoTaxonomyType from: " <> x)
+
+instance ToHttpApiData GeoTaxonomyType where
+    toQueryParam = \case
+        TypeUnspecified -> "TYPE_UNSPECIFIED"
+        Global -> "GLOBAL"
+        Regional -> "REGIONAL"
+        MultiRegional -> "MULTI_REGIONAL"
+
+instance FromJSON GeoTaxonomyType where
+    parseJSON = parseJSONText "GeoTaxonomyType"
+
+instance ToJSON GeoTaxonomyType where
     toJSON = toJSONText
 
 -- | V1 error format.

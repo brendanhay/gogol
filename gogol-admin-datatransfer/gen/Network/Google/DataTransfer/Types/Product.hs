@@ -17,19 +17,20 @@
 --
 module Network.Google.DataTransfer.Types.Product where
 
-import           Network.Google.DataTransfer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DataTransfer.Types.Sum
+import Network.Google.Prelude
 
--- | The JSON template for an Application resource.
+-- | Applications resources represent applications installed on the domain
+-- that support transferring ownership of user data.
 --
 -- /See:/ 'application' smart constructor.
 data Application =
   Application'
     { _aTransferParams :: !(Maybe [ApplicationTransferParam])
-    , _aEtag           :: !(Maybe Text)
-    , _aKind           :: !Text
-    , _aName           :: !(Maybe Text)
-    , _aId             :: !(Maybe (Textual Int64))
+    , _aEtag :: !(Maybe Text)
+    , _aKind :: !Text
+    , _aName :: !(Maybe Text)
+    , _aId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -61,7 +62,7 @@ application =
 
 -- | The list of all possible transfer parameters for this application. These
 -- parameters can be used to select the data of the user in this
--- application to be transfered.
+-- application to be transferred.
 aTransferParams :: Lens' Application [ApplicationTransferParam]
 aTransferParams
   = lens _aTransferParams
@@ -113,7 +114,7 @@ instance ToJSON Application where
 data ApplicationTransferParam =
   ApplicationTransferParam'
     { _atpValue :: !(Maybe [Text])
-    , _atpKey   :: !(Maybe Text)
+    , _atpKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,7 +132,7 @@ applicationTransferParam =
   ApplicationTransferParam' {_atpValue = Nothing, _atpKey = Nothing}
 
 
--- | The value of the coressponding transfer parameter. eg: \'PRIVATE\' or
+-- | The value of the corresponding transfer parameter. eg: \'PRIVATE\' or
 -- \'SHARED\'
 atpValue :: Lens' ApplicationTransferParam [Text]
 atpValue
@@ -161,10 +162,10 @@ instance ToJSON ApplicationTransferParam where
 -- /See:/ 'applicationsListResponse' smart constructor.
 data ApplicationsListResponse =
   ApplicationsListResponse'
-    { _alrEtag          :: !(Maybe Text)
+    { _alrEtag :: !(Maybe Text)
     , _alrNextPageToken :: !(Maybe Text)
-    , _alrKind          :: !Text
-    , _alrApplications  :: !(Maybe [Application])
+    , _alrKind :: !Text
+    , _alrApplications :: !(Maybe [Application])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -233,18 +234,19 @@ instance ToJSON ApplicationsListResponse where
                   Just ("kind" .= _alrKind),
                   ("applications" .=) <$> _alrApplications])
 
--- | The JSON template for a DataTransfer resource.
+-- | A Transfer resource represents the transfer of the ownership of user
+-- data between users.
 --
 -- /See:/ 'dataTransfer' smart constructor.
 data DataTransfer =
   DataTransfer'
-    { _dtEtag                      :: !(Maybe Text)
-    , _dtOldOwnerUserId            :: !(Maybe Text)
-    , _dtKind                      :: !Text
-    , _dtNewOwnerUserId            :: !(Maybe Text)
-    , _dtRequestTime               :: !(Maybe DateTime')
-    , _dtApplicationDataTransfers  :: !(Maybe [ApplicationDataTransfer])
-    , _dtId                        :: !(Maybe Text)
+    { _dtEtag :: !(Maybe Text)
+    , _dtOldOwnerUserId :: !(Maybe Text)
+    , _dtKind :: !Text
+    , _dtNewOwnerUserId :: !(Maybe Text)
+    , _dtRequestTime :: !(Maybe DateTime')
+    , _dtApplicationDataTransfers :: !(Maybe [ApplicationDataTransfer])
+    , _dtId :: !(Maybe Text)
     , _dtOverallTransferStatusCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -288,7 +290,7 @@ dataTransfer =
 dtEtag :: Lens' DataTransfer (Maybe Text)
 dtEtag = lens _dtEtag (\ s a -> s{_dtEtag = a})
 
--- | ID of the user whose data is being transfered.
+-- | ID of the user whose data is being transferred.
 dtOldOwnerUserId :: Lens' DataTransfer (Maybe Text)
 dtOldOwnerUserId
   = lens _dtOldOwnerUserId
@@ -298,7 +300,7 @@ dtOldOwnerUserId
 dtKind :: Lens' DataTransfer Text
 dtKind = lens _dtKind (\ s a -> s{_dtKind = a})
 
--- | ID of the user to whom the data is being transfered.
+-- | ID of the user to whom the data is being transferred.
 dtNewOwnerUserId :: Lens' DataTransfer (Maybe Text)
 dtNewOwnerUserId
   = lens _dtNewOwnerUserId
@@ -366,9 +368,9 @@ instance ToJSON DataTransfer where
 -- /See:/ 'dataTransfersListResponse' smart constructor.
 data DataTransfersListResponse =
   DataTransfersListResponse'
-    { _dtlrEtag          :: !(Maybe Text)
+    { _dtlrEtag :: !(Maybe Text)
     , _dtlrNextPageToken :: !(Maybe Text)
-    , _dtlrKind          :: !Text
+    , _dtlrKind :: !Text
     , _dtlrDataTransfers :: !(Maybe [DataTransfer])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -443,7 +445,7 @@ instance ToJSON DataTransfersListResponse where
 data ApplicationDataTransfer =
   ApplicationDataTransfer'
     { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
-    , _adtApplicationId             :: !(Maybe (Textual Int64))
+    , _adtApplicationId :: !(Maybe (Textual Int64))
     , _adtApplicationTransferStatus :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -469,7 +471,7 @@ applicationDataTransfer =
 
 
 -- | The transfer parameters for the application. These parameters are used
--- to select the data which will get transfered in context of this
+-- to select the data which will get transferred in context of this
 -- application.
 adtApplicationTransferParams :: Lens' ApplicationDataTransfer [ApplicationTransferParam]
 adtApplicationTransferParams

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -30,6 +30,7 @@ module Network.Google.Classroom.Types
     , classroomCourseworkMeScope
     , classroomAnnouncementsReadOnlyScope
     , classroomGuardianlinksStudentsScope
+    , classroomCourseworkmaterialsScope
     , classroomStudentSubmissionsStudentsReadOnlyScope
     , classroomGuardianlinksMeReadOnlyScope
     , classroomRostersScope
@@ -39,6 +40,7 @@ module Network.Google.Classroom.Types
     , classroomAnnouncementsScope
     , classroomCourseworkMeReadOnlyScope
     , classroomStudentSubmissionsMeReadOnlyScope
+    , classroomCourseworkmaterialsReadOnlyScope
     , classroomGuardianlinksStudentsReadOnlyScope
 
     -- * ListCourseAliasesResponse
@@ -89,6 +91,24 @@ module Network.Google.Classroom.Types
     , CourseWorkChangesInfo
     , courseWorkChangesInfo
     , cwciCourseId
+
+    -- * CourseWorkMaterial
+    , CourseWorkMaterial
+    , courseWorkMaterial
+    , cwmCreationTime
+    , cwmScheduledTime
+    , cwmState
+    , cwmAssigneeMode
+    , cwmMaterials
+    , cwmCourseId
+    , cwmIndividualStudentsOptions
+    , cwmUpdateTime
+    , cwmTopicId
+    , cwmId
+    , cwmCreatorUserId
+    , cwmTitle
+    , cwmAlternateLink
+    , cwmDescription
 
     -- * ModifyCourseWorkAssigneesRequest
     , ModifyCourseWorkAssigneesRequest
@@ -152,6 +172,12 @@ module Network.Google.Classroom.Types
     -- * Empty
     , Empty
     , empty
+
+    -- * CourseWorkMaterialAssigneeMode
+    , CourseWorkMaterialAssigneeMode (..)
+
+    -- * CoursesListCourseStates
+    , CoursesListCourseStates (..)
 
     -- * ModifyCourseWorkAssigneesRequestAssigneeMode
     , ModifyCourseWorkAssigneesRequestAssigneeMode (..)
@@ -258,6 +284,12 @@ module Network.Google.Classroom.Types
     , ShortAnswerSubmission
     , shortAnswerSubmission
     , sasAnswer
+
+    -- * CoursesCourseWorkStudentSubmissionsListLate
+    , CoursesCourseWorkStudentSubmissionsListLate (..)
+
+    -- * CoursesCourseWorkStudentSubmissionsListStates
+    , CoursesCourseWorkStudentSubmissionsListStates (..)
 
     -- * AnnouncementState
     , AnnouncementState (..)
@@ -440,6 +472,9 @@ module Network.Google.Classroom.Types
     -- * StudentSubmissionCourseWorkType
     , StudentSubmissionCourseWorkType (..)
 
+    -- * CourseWorkMaterialState
+    , CourseWorkMaterialState (..)
+
     -- * TimeOfDay'
     , TimeOfDay'
     , timeOfDay
@@ -451,11 +486,17 @@ module Network.Google.Classroom.Types
     -- * FeedFeedType
     , FeedFeedType (..)
 
+    -- * CoursesCourseWorkListCourseWorkStates
+    , CoursesCourseWorkListCourseWorkStates (..)
+
     -- * ListGuardianInvitationsResponse
     , ListGuardianInvitationsResponse
     , listGuardianInvitationsResponse
     , lgirNextPageToken
     , lgirGuardianInvitations
+
+    -- * CoursesAnnouncementsListAnnouncementStates
+    , CoursesAnnouncementsListAnnouncementStates (..)
 
     -- * Assignment
     , Assignment
@@ -473,6 +514,9 @@ module Network.Google.Classroom.Types
     , sharedDriveFile
     , sdfDriveFile
     , sdfShareMode
+
+    -- * CoursesCourseWorkMaterialsListCourseWorkMaterialStates
+    , CoursesCourseWorkMaterialsListCourseWorkMaterialStates (..)
 
     -- * CourseAlias
     , CourseAlias
@@ -515,6 +559,15 @@ module Network.Google.Classroom.Types
     , lNextPageToken
     , lTeachers
 
+    -- * ListCourseWorkMaterialResponse
+    , ListCourseWorkMaterialResponse
+    , listCourseWorkMaterialResponse
+    , lcwmrCourseWorkMaterial
+    , lcwmrNextPageToken
+
+    -- * UserProFilesGuardianInvitationsListStates
+    , UserProFilesGuardianInvitationsListStates (..)
+
     -- * Student
     , Student
     , student
@@ -535,9 +588,9 @@ module Network.Google.Classroom.Types
     , rCloudPubsubTopic
     ) where
 
-import           Network.Google.Classroom.Types.Product
-import           Network.Google.Classroom.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types.Product
+import Network.Google.Classroom.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
 classroomService :: ServiceConfig
@@ -549,7 +602,7 @@ classroomService
 classroomRostersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters.readonly"]
 classroomRostersReadOnlyScope = Proxy
 
--- | Manage your Google Classroom classes
+-- | See, edit, create, and permanently delete your Google Classroom classes
 classroomCoursesScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses"]
 classroomCoursesScope = Proxy
 
@@ -574,7 +627,8 @@ classroomProFileEmailsScope = Proxy
 classroomProFilePhotosScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.photos"]
 classroomProFilePhotosScope = Proxy
 
--- | Manage your course work and view your grades in Google Classroom
+-- | See, create and edit coursework items including assignments, questions,
+-- and grades
 classroomCourseworkMeScope :: Proxy '["https://www.googleapis.com/auth/classroom.coursework.me"]
 classroomCourseworkMeScope = Proxy
 
@@ -585,6 +639,10 @@ classroomAnnouncementsReadOnlyScope = Proxy
 -- | View and manage guardians for students in your Google Classroom classes
 classroomGuardianlinksStudentsScope :: Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.students"]
 classroomGuardianlinksStudentsScope = Proxy
+
+-- | See, edit, and create classwork materials in Google Classroom
+classroomCourseworkmaterialsScope :: Proxy '["https://www.googleapis.com/auth/classroom.courseworkmaterials"]
+classroomCourseworkmaterialsScope = Proxy
 
 -- | View course work and grades for students in the Google Classroom classes
 -- you teach or administer
@@ -624,6 +682,10 @@ classroomCourseworkMeReadOnlyScope = Proxy
 -- | View your course work and grades in Google Classroom
 classroomStudentSubmissionsMeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"]
 classroomStudentSubmissionsMeReadOnlyScope = Proxy
+
+-- | See all classwork materials for your Google Classroom classes
+classroomCourseworkmaterialsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"]
+classroomCourseworkmaterialsReadOnlyScope = Proxy
 
 -- | View guardians for students in your Google Classroom classes
 classroomGuardianlinksStudentsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"]

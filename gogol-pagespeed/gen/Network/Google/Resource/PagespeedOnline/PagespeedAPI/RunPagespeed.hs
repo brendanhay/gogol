@@ -24,7 +24,7 @@
 -- PageSpeed scores, a list of suggestions to make that page faster, and
 -- other information.
 --
--- /See:/ <https://developers.google.com/speed/docs/insights/v5/get-started PageSpeed Insights API Reference> for @pagespeedonline.pagespeedapi.runpagespeed@.
+-- /See:/ <https://developers.google.com/speed/docs/insights/v5/about PageSpeed Insights API Reference> for @pagespeedonline.pagespeedapi.runpagespeed@.
 module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
     (
     -- * REST Resource
@@ -35,16 +35,22 @@ module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
     , PagespeedAPIRunPagespeed
 
     -- * Request Lenses
+    , parpXgafv
+    , parpUploadProtocol
     , parpUtmCampaign
     , parpLocale
     , parpCategory
+    , parpAccessToken
     , parpURL
+    , parpUploadType
     , parpStrategy
+    , parpCaptchaToken
     , parpUtmSource
+    , parpCallback
     ) where
 
-import           Network.Google.PageSpeed.Types
-import           Network.Google.Prelude
+import Network.Google.PageSpeed.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @pagespeedonline.pagespeedapi.runpagespeed@ method which the
 -- 'PagespeedAPIRunPagespeed' request conforms to.
@@ -53,17 +59,23 @@ type PagespeedAPIRunPagespeedResource =
        "v5" :>
          "runPagespeed" :>
            QueryParam "url" Text :>
-             QueryParam "utm_campaign" Text :>
-               QueryParam "locale" Text :>
-                 QueryParams "category"
-                   PagespeedAPIRunPagespeedCategory
-                   :>
-                   QueryParam "strategy"
-                     PagespeedAPIRunPagespeedStrategy
-                     :>
-                     QueryParam "utm_source" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] PagespeedAPIPagespeedResponseV5
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "utm_campaign" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParams "category"
+                       PagespeedAPIRunPagespeedCategory
+                       :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "strategy"
+                             PagespeedAPIRunPagespeedStrategy
+                             :>
+                             QueryParam "captchaToken" Text :>
+                               QueryParam "utm_source" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] PagespeedAPIPagespeedResponseV5
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns
 -- PageSpeed scores, a list of suggestions to make that page faster, and
@@ -72,12 +84,18 @@ type PagespeedAPIRunPagespeedResource =
 -- /See:/ 'pagespeedAPIRunPagespeed' smart constructor.
 data PagespeedAPIRunPagespeed =
   PagespeedAPIRunPagespeed'
-    { _parpUtmCampaign :: !(Maybe Text)
-    , _parpLocale      :: !(Maybe Text)
-    , _parpCategory    :: !(Maybe [PagespeedAPIRunPagespeedCategory])
-    , _parpURL         :: !Text
-    , _parpStrategy    :: !(Maybe PagespeedAPIRunPagespeedStrategy)
-    , _parpUtmSource   :: !(Maybe Text)
+    { _parpXgafv :: !(Maybe Xgafv)
+    , _parpUploadProtocol :: !(Maybe Text)
+    , _parpUtmCampaign :: !(Maybe Text)
+    , _parpLocale :: !(Maybe Text)
+    , _parpCategory :: !(Maybe [PagespeedAPIRunPagespeedCategory])
+    , _parpAccessToken :: !(Maybe Text)
+    , _parpURL :: !Text
+    , _parpUploadType :: !(Maybe Text)
+    , _parpStrategy :: !(Maybe PagespeedAPIRunPagespeedStrategy)
+    , _parpCaptchaToken :: !(Maybe Text)
+    , _parpUtmSource :: !(Maybe Text)
+    , _parpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -86,30 +104,59 @@ data PagespeedAPIRunPagespeed =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'parpXgafv'
+--
+-- * 'parpUploadProtocol'
+--
 -- * 'parpUtmCampaign'
 --
 -- * 'parpLocale'
 --
 -- * 'parpCategory'
 --
+-- * 'parpAccessToken'
+--
 -- * 'parpURL'
+--
+-- * 'parpUploadType'
 --
 -- * 'parpStrategy'
 --
+-- * 'parpCaptchaToken'
+--
 -- * 'parpUtmSource'
+--
+-- * 'parpCallback'
 pagespeedAPIRunPagespeed
     :: Text -- ^ 'parpURL'
     -> PagespeedAPIRunPagespeed
 pagespeedAPIRunPagespeed pParpURL_ =
   PagespeedAPIRunPagespeed'
-    { _parpUtmCampaign = Nothing
+    { _parpXgafv = Nothing
+    , _parpUploadProtocol = Nothing
+    , _parpUtmCampaign = Nothing
     , _parpLocale = Nothing
     , _parpCategory = Nothing
+    , _parpAccessToken = Nothing
     , _parpURL = pParpURL_
+    , _parpUploadType = Nothing
     , _parpStrategy = Nothing
+    , _parpCaptchaToken = Nothing
     , _parpUtmSource = Nothing
+    , _parpCallback = Nothing
     }
 
+
+-- | V1 error format.
+parpXgafv :: Lens' PagespeedAPIRunPagespeed (Maybe Xgafv)
+parpXgafv
+  = lens _parpXgafv (\ s a -> s{_parpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+parpUploadProtocol :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpUploadProtocol
+  = lens _parpUploadProtocol
+      (\ s a -> s{_parpUploadProtocol = a})
 
 -- | Campaign name for analytics.
 parpUtmCampaign :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
@@ -130,9 +177,21 @@ parpCategory
       . _Default
       . _Coerce
 
--- | The URL to fetch and analyze
+-- | OAuth access token.
+parpAccessToken :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpAccessToken
+  = lens _parpAccessToken
+      (\ s a -> s{_parpAccessToken = a})
+
+-- | Required. The URL to fetch and analyze
 parpURL :: Lens' PagespeedAPIRunPagespeed Text
 parpURL = lens _parpURL (\ s a -> s{_parpURL = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+parpUploadType :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpUploadType
+  = lens _parpUploadType
+      (\ s a -> s{_parpUploadType = a})
 
 -- | The analysis strategy (desktop or mobile) to use, and desktop is the
 -- default
@@ -140,21 +199,38 @@ parpStrategy :: Lens' PagespeedAPIRunPagespeed (Maybe PagespeedAPIRunPagespeedSt
 parpStrategy
   = lens _parpStrategy (\ s a -> s{_parpStrategy = a})
 
+-- | The captcha token passed when filling out a captcha.
+parpCaptchaToken :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpCaptchaToken
+  = lens _parpCaptchaToken
+      (\ s a -> s{_parpCaptchaToken = a})
+
 -- | Campaign source for analytics.
 parpUtmSource :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
 parpUtmSource
   = lens _parpUtmSource
       (\ s a -> s{_parpUtmSource = a})
 
+-- | JSONP
+parpCallback :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
+parpCallback
+  = lens _parpCallback (\ s a -> s{_parpCallback = a})
+
 instance GoogleRequest PagespeedAPIRunPagespeed where
         type Rs PagespeedAPIRunPagespeed =
              PagespeedAPIPagespeedResponseV5
-        type Scopes PagespeedAPIRunPagespeed = '[]
+        type Scopes PagespeedAPIRunPagespeed = '["openid"]
         requestClient PagespeedAPIRunPagespeed'{..}
-          = go (Just _parpURL) _parpUtmCampaign _parpLocale
+          = go (Just _parpURL) _parpXgafv _parpUploadProtocol
+              _parpUtmCampaign
+              _parpLocale
               (_parpCategory ^. _Default)
+              _parpAccessToken
+              _parpUploadType
               _parpStrategy
+              _parpCaptchaToken
               _parpUtmSource
+              _parpCallback
               (Just AltJSON)
               pageSpeedService
           where go

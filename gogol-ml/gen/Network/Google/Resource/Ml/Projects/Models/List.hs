@@ -25,7 +25,7 @@
 -- match the request parameters, the list request returns an empty response
 -- body: {}.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.list@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.list@.
 module Network.Google.Resource.Ml.Projects.Models.List
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Ml.Projects.Models.List
     , pmlCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.list@ method which the
 -- 'ProjectsModelsList' request conforms to.
@@ -75,15 +75,15 @@ type ProjectsModelsListResource =
 -- /See:/ 'projectsModelsList' smart constructor.
 data ProjectsModelsList =
   ProjectsModelsList'
-    { _pmlParent         :: !Text
-    , _pmlXgafv          :: !(Maybe Xgafv)
+    { _pmlParent :: !Text
+    , _pmlXgafv :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
-    , _pmlAccessToken    :: !(Maybe Text)
-    , _pmlUploadType     :: !(Maybe Text)
-    , _pmlFilter         :: !(Maybe Text)
-    , _pmlPageToken      :: !(Maybe Text)
-    , _pmlPageSize       :: !(Maybe (Textual Int32))
-    , _pmlCallback       :: !(Maybe Text)
+    , _pmlAccessToken :: !(Maybe Text)
+    , _pmlUploadType :: !(Maybe Text)
+    , _pmlFilter :: !(Maybe Text)
+    , _pmlPageToken :: !(Maybe Text)
+    , _pmlPageSize :: !(Maybe (Textual Int32))
+    , _pmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -183,7 +183,8 @@ instance GoogleRequest ProjectsModelsList where
         type Rs ProjectsModelsList =
              GoogleCloudMlV1__ListModelsResponse
         type Scopes ProjectsModelsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsModelsList'{..}
           = go _pmlParent _pmlXgafv _pmlUploadProtocol
               _pmlAccessToken

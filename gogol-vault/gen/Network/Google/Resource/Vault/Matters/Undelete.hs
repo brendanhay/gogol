@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Undeletes the specified matter. Returns matter with updated state.
+-- Undeletes the specified matter. Returns the matter with updated state.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.undelete@.
 module Network.Google.Resource.Vault.Matters.Undelete
@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.Undelete
     , muCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.undelete@ method which the
 -- 'MattersUndelete' request conforms to.
@@ -60,18 +60,18 @@ type MattersUndeleteResource =
                        ReqBody '[JSON] UndeleteMatterRequest :>
                          Post '[JSON] Matter
 
--- | Undeletes the specified matter. Returns matter with updated state.
+-- | Undeletes the specified matter. Returns the matter with updated state.
 --
 -- /See:/ 'mattersUndelete' smart constructor.
 data MattersUndelete =
   MattersUndelete'
-    { _muXgafv          :: !(Maybe Xgafv)
+    { _muXgafv :: !(Maybe Xgafv)
     , _muUploadProtocol :: !(Maybe Text)
-    , _muAccessToken    :: !(Maybe Text)
-    , _muUploadType     :: !(Maybe Text)
-    , _muPayload        :: !UndeleteMatterRequest
-    , _muMatterId       :: !Text
-    , _muCallback       :: !(Maybe Text)
+    , _muAccessToken :: !(Maybe Text)
+    , _muUploadType :: !(Maybe Text)
+    , _muPayload :: !UndeleteMatterRequest
+    , _muMatterId :: !Text
+    , _muCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

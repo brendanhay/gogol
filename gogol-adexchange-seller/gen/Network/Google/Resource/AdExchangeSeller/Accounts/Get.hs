@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Get
     , agAccountId
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.get@ method which the
 -- 'AccountsGet' request conforms to.

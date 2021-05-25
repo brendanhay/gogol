@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetInstances.Get
     , tigZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetInstances.get@ method which the
 -- 'TargetInstancesGet' request conforms to.
@@ -62,9 +62,9 @@ type TargetInstancesGetResource =
 -- /See:/ 'targetInstancesGet' smart constructor.
 data TargetInstancesGet =
   TargetInstancesGet'
-    { _tigProject        :: !Text
+    { _tigProject :: !Text
     , _tigTargetInstance :: !Text
-    , _tigZone           :: !Text
+    , _tigZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

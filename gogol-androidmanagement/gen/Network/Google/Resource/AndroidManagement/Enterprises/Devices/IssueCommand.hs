@@ -44,8 +44,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.IssueComman
     , edicCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.issueCommand@ method which the
 -- 'EnterprisesDevicesIssueCommand' request conforms to.
@@ -67,13 +67,13 @@ type EnterprisesDevicesIssueCommandResource =
 -- /See:/ 'enterprisesDevicesIssueCommand' smart constructor.
 data EnterprisesDevicesIssueCommand =
   EnterprisesDevicesIssueCommand'
-    { _edicXgafv          :: !(Maybe Xgafv)
+    { _edicXgafv :: !(Maybe Xgafv)
     , _edicUploadProtocol :: !(Maybe Text)
-    , _edicAccessToken    :: !(Maybe Text)
-    , _edicUploadType     :: !(Maybe Text)
-    , _edicPayload        :: !Command
-    , _edicName           :: !Text
-    , _edicCallback       :: !(Maybe Text)
+    , _edicAccessToken :: !(Maybe Text)
+    , _edicUploadType :: !(Maybe Text)
+    , _edicPayload :: !Command
+    , _edicName :: !Text
+    , _edicCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Deletes an existing group.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.delete@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.groups.delete@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Monitoring.Projects.Groups.Delete
     , pgdCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.groups.delete@ method which the
 -- 'ProjectsGroupsDelete' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsGroupsDeleteResource =
 -- /See:/ 'projectsGroupsDelete' smart constructor.
 data ProjectsGroupsDelete =
   ProjectsGroupsDelete'
-    { _pgdXgafv          :: !(Maybe Xgafv)
+    { _pgdXgafv :: !(Maybe Xgafv)
     , _pgdUploadProtocol :: !(Maybe Text)
-    , _pgdAccessToken    :: !(Maybe Text)
-    , _pgdUploadType     :: !(Maybe Text)
-    , _pgdName           :: !Text
-    , _pgdRecursive      :: !(Maybe Bool)
-    , _pgdCallback       :: !(Maybe Text)
+    , _pgdAccessToken :: !(Maybe Text)
+    , _pgdUploadType :: !(Maybe Text)
+    , _pgdName :: !Text
+    , _pgdRecursive :: !(Maybe Bool)
+    , _pgdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,8 +128,8 @@ pgdUploadType
   = lens _pgdUploadType
       (\ s a -> s{_pgdUploadType = a})
 
--- | The group to delete. The format is
--- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
+-- | Required. The group to delete. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/groups\/[GROUP_ID]
 pgdName :: Lens' ProjectsGroupsDelete Text
 pgdName = lens _pgdName (\ s a -> s{_pgdName = a})
 

@@ -46,8 +46,8 @@ module Network.Google.Resource.ProximityBeacon.GetEidparams
     , geCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.getEidparams@ method which the
 -- 'GetEidparams' request conforms to.
@@ -73,11 +73,11 @@ type GetEidparamsResource =
 -- /See:/ 'getEidparams' smart constructor.
 data GetEidparams =
   GetEidparams'
-    { _geXgafv          :: !(Maybe Xgafv)
+    { _geXgafv :: !(Maybe Xgafv)
     , _geUploadProtocol :: !(Maybe Text)
-    , _geAccessToken    :: !(Maybe Text)
-    , _geUploadType     :: !(Maybe Text)
-    , _geCallback       :: !(Maybe Text)
+    , _geAccessToken :: !(Maybe Text)
+    , _geUploadType :: !(Maybe Text)
+    , _geCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

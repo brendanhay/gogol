@@ -22,9 +22,10 @@
 --
 -- Gets indexed item statistics aggreggated across all data sources. This
 -- API only returns statistics for previous dates; it doesn\'t return
--- statistics for the current day.
+-- statistics for the current day. **Note:** This API requires a standard
+-- end user account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.stats.getIndex@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.stats.getIndex@.
 module Network.Google.Resource.CloudSearch.Stats.GetIndex
     (
     -- * REST Resource
@@ -48,8 +49,8 @@ module Network.Google.Resource.CloudSearch.Stats.GetIndex
     , sgiCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.stats.getIndex@ method which the
 -- 'StatsGetIndex' request conforms to.
@@ -73,22 +74,23 @@ type StatsGetIndexResource =
 
 -- | Gets indexed item statistics aggreggated across all data sources. This
 -- API only returns statistics for previous dates; it doesn\'t return
--- statistics for the current day.
+-- statistics for the current day. **Note:** This API requires a standard
+-- end user account to execute.
 --
 -- /See:/ 'statsGetIndex' smart constructor.
 data StatsGetIndex =
   StatsGetIndex'
-    { _sgiFromDateMonth  :: !(Maybe (Textual Int32))
-    , _sgiXgafv          :: !(Maybe Xgafv)
+    { _sgiFromDateMonth :: !(Maybe (Textual Int32))
+    , _sgiXgafv :: !(Maybe Xgafv)
     , _sgiUploadProtocol :: !(Maybe Text)
-    , _sgiFromDateDay    :: !(Maybe (Textual Int32))
-    , _sgiAccessToken    :: !(Maybe Text)
-    , _sgiUploadType     :: !(Maybe Text)
-    , _sgiFromDateYear   :: !(Maybe (Textual Int32))
-    , _sgiToDateDay      :: !(Maybe (Textual Int32))
-    , _sgiToDateYear     :: !(Maybe (Textual Int32))
-    , _sgiToDateMonth    :: !(Maybe (Textual Int32))
-    , _sgiCallback       :: !(Maybe Text)
+    , _sgiFromDateDay :: !(Maybe (Textual Int32))
+    , _sgiAccessToken :: !(Maybe Text)
+    , _sgiUploadType :: !(Maybe Text)
+    , _sgiFromDateYear :: !(Maybe (Textual Int32))
+    , _sgiToDateDay :: !(Maybe (Textual Int32))
+    , _sgiToDateYear :: !(Maybe (Textual Int32))
+    , _sgiToDateMonth :: !(Maybe (Textual Int32))
+    , _sgiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -17,21 +17,22 @@
 --
 module Network.Google.Fonts.Types.Product where
 
-import           Network.Google.Fonts.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Fonts.Types.Sum
+import Network.Google.Prelude
 
+-- | Metadata describing a family of fonts.
 --
 -- /See:/ 'webfont' smart constructor.
 data Webfont =
   Webfont'
-    { _wVariants     :: !(Maybe [Text])
-    , _wKind         :: !Text
-    , _wCategory     :: !(Maybe Text)
-    , _wFamily       :: !(Maybe Text)
-    , _wVersion      :: !(Maybe Text)
-    , _wFiles        :: !(Maybe WebfontFiles)
-    , _wSubSets      :: !(Maybe [Text])
-    , _wLastModified :: !(Maybe Date')
+    { _wVariants :: !(Maybe [Text])
+    , _wKind :: !(Maybe Text)
+    , _wCategory :: !(Maybe Text)
+    , _wFamily :: !(Maybe Text)
+    , _wVersion :: !(Maybe Text)
+    , _wFiles :: !(Maybe WebfontFiles)
+    , _wSubSets :: !(Maybe [Text])
+    , _wLastModified :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -60,7 +61,7 @@ webfont
 webfont =
   Webfont'
     { _wVariants = Nothing
-    , _wKind = "webfonts#webfont"
+    , _wKind = Nothing
     , _wCategory = Nothing
     , _wFamily = Nothing
     , _wVersion = Nothing
@@ -78,7 +79,7 @@ wVariants
       . _Coerce
 
 -- | This kind represents a webfont object in the webfonts service.
-wKind :: Lens' Webfont Text
+wKind :: Lens' Webfont (Maybe Text)
 wKind = lens _wKind (\ s a -> s{_wKind = a})
 
 -- | The category of the font.
@@ -108,20 +109,18 @@ wSubSets
 
 -- | The date (format \"yyyy-MM-dd\") the font was modified for the last
 -- time.
-wLastModified :: Lens' Webfont (Maybe Day)
+wLastModified :: Lens' Webfont (Maybe Text)
 wLastModified
   = lens _wLastModified
       (\ s a -> s{_wLastModified = a})
-      . mapping _Date
 
 instance FromJSON Webfont where
         parseJSON
           = withObject "Webfont"
               (\ o ->
                  Webfont' <$>
-                   (o .:? "variants" .!= mempty) <*>
-                     (o .:? "kind" .!= "webfonts#webfont")
-                     <*> (o .:? "category")
+                   (o .:? "variants" .!= mempty) <*> (o .:? "kind") <*>
+                     (o .:? "category")
                      <*> (o .:? "family")
                      <*> (o .:? "version")
                      <*> (o .:? "files")
@@ -133,7 +132,7 @@ instance ToJSON Webfont where
           = object
               (catMaybes
                  [("variants" .=) <$> _wVariants,
-                  Just ("kind" .= _wKind),
+                  ("kind" .=) <$> _wKind,
                   ("category" .=) <$> _wCategory,
                   ("family" .=) <$> _wFamily,
                   ("version" .=) <$> _wVersion,
@@ -141,11 +140,13 @@ instance ToJSON Webfont where
                   ("subsets" .=) <$> _wSubSets,
                   ("lastModified" .=) <$> _wLastModified])
 
+-- | Response containing the list of fonts currently served by the Google
+-- Fonts API.
 --
 -- /See:/ 'webfontList' smart constructor.
 data WebfontList =
   WebfontList'
-    { _wlKind  :: !Text
+    { _wlKind :: !(Maybe Text)
     , _wlItems :: !(Maybe [Webfont])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -160,12 +161,11 @@ data WebfontList =
 -- * 'wlItems'
 webfontList
     :: WebfontList
-webfontList =
-  WebfontList' {_wlKind = "webfonts#webfontList", _wlItems = Nothing}
+webfontList = WebfontList' {_wlKind = Nothing, _wlItems = Nothing}
 
 
 -- | This kind represents a list of webfont objects in the webfonts service.
-wlKind :: Lens' WebfontList Text
+wlKind :: Lens' WebfontList (Maybe Text)
 wlKind = lens _wlKind (\ s a -> s{_wlKind = a})
 
 -- | The list of fonts currently served by the Google Fonts API.
@@ -179,15 +179,13 @@ instance FromJSON WebfontList where
           = withObject "WebfontList"
               (\ o ->
                  WebfontList' <$>
-                   (o .:? "kind" .!= "webfonts#webfontList") <*>
-                     (o .:? "items" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON WebfontList where
         toJSON WebfontList'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _wlKind),
-                  ("items" .=) <$> _wlItems])
+                 [("kind" .=) <$> _wlKind, ("items" .=) <$> _wlItems])
 
 -- | The font files (with all supported scripts) for each one of the
 -- available variants, as a key : value map.
@@ -212,7 +210,6 @@ webfontFiles pWfAddtional_ =
   WebfontFiles' {_wfAddtional = _Coerce # pWfAddtional_}
 
 
--- | The font file URL (value) for an specific variant (key).
 wfAddtional :: Lens' WebfontFiles (HashMap Text Text)
 wfAddtional
   = lens _wfAddtional (\ s a -> s{_wfAddtional = a}) .

@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.List
     , balCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.list@ method which the
 -- 'BillingAccountsList' request conforms to.
@@ -71,14 +71,14 @@ type BillingAccountsListResource =
 -- /See:/ 'billingAccountsList' smart constructor.
 data BillingAccountsList =
   BillingAccountsList'
-    { _balXgafv          :: !(Maybe Xgafv)
+    { _balXgafv :: !(Maybe Xgafv)
     , _balUploadProtocol :: !(Maybe Text)
-    , _balAccessToken    :: !(Maybe Text)
-    , _balUploadType     :: !(Maybe Text)
-    , _balFilter         :: !(Maybe Text)
-    , _balPageToken      :: !(Maybe Text)
-    , _balPageSize       :: !(Maybe (Textual Int32))
-    , _balCallback       :: !(Maybe Text)
+    , _balAccessToken :: !(Maybe Text)
+    , _balUploadType :: !(Maybe Text)
+    , _balFilter :: !(Maybe Text)
+    , _balPageToken :: !(Maybe Text)
+    , _balPageSize :: !(Maybe (Textual Int32))
+    , _balCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -173,7 +173,9 @@ instance GoogleRequest BillingAccountsList where
         type Rs BillingAccountsList =
              ListBillingAccountsResponse
         type Scopes BillingAccountsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsList'{..}
           = go _balXgafv _balUploadProtocol _balAccessToken
               _balUploadType

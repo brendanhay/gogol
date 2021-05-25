@@ -45,8 +45,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.DealAssociati
     , acdalCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.dealAssociations.list@ method which the
 -- 'AccountsCreativesDealAssociationsList' request conforms to.
@@ -73,16 +73,16 @@ type AccountsCreativesDealAssociationsListResource =
 -- /See:/ 'accountsCreativesDealAssociationsList' smart constructor.
 data AccountsCreativesDealAssociationsList =
   AccountsCreativesDealAssociationsList'
-    { _acdalXgafv          :: !(Maybe Xgafv)
+    { _acdalXgafv :: !(Maybe Xgafv)
     , _acdalUploadProtocol :: !(Maybe Text)
-    , _acdalAccessToken    :: !(Maybe Text)
-    , _acdalUploadType     :: !(Maybe Text)
-    , _acdalCreativeId     :: !Text
-    , _acdalAccountId      :: !Text
-    , _acdalQuery          :: !(Maybe Text)
-    , _acdalPageToken      :: !(Maybe Text)
-    , _acdalPageSize       :: !(Maybe (Textual Int32))
-    , _acdalCallback       :: !(Maybe Text)
+    , _acdalAccessToken :: !(Maybe Text)
+    , _acdalUploadType :: !(Maybe Text)
+    , _acdalCreativeId :: !Text
+    , _acdalAccountId :: !Text
+    , _acdalQuery :: !(Maybe Text)
+    , _acdalPageToken :: !(Maybe Text)
+    , _acdalPageSize :: !(Maybe (Textual Int32))
+    , _acdalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -167,17 +167,12 @@ acdalAccountId
       (\ s a -> s{_acdalAccountId = a})
 
 -- | An optional query string to filter deal associations. If no filter is
--- specified, all associations will be returned. Supported queries are:
---
--- -   accountId=/account_id_string/
--- -   creativeId=/creative_id_string/
--- -   dealsId=/deals_id_string/
--- -   dealsStatus:{approved, conditionally_approved, disapproved,
---     not_checked}
--- -   openAuctionStatus:{approved, conditionally_approved, disapproved,
---     not_checked}
---
--- Example: \'dealsId=12345 AND dealsStatus:disapproved\'
+-- specified, all associations will be returned. Supported queries are: -
+-- accountId=*account_id_string* - creativeId=*creative_id_string* -
+-- dealsId=*deals_id_string* - dealsStatus:{approved,
+-- conditionally_approved, disapproved, not_checked} -
+-- openAuctionStatus:{approved, conditionally_approved, disapproved,
+-- not_checked} Example: \'dealsId=12345 AND dealsStatus:disapproved\'
 acdalQuery :: Lens' AccountsCreativesDealAssociationsList (Maybe Text)
 acdalQuery
   = lens _acdalQuery (\ s a -> s{_acdalQuery = a})

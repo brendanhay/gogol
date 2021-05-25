@@ -20,8 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new managed service. Please note one producer project can own
--- no more than 20 services. Operation
+-- Creates a new managed service. A managed service is immutable, and is
+-- subject to mandatory 30-day data retention. You cannot move a service or
+-- recreate it within 30 days after deletion. One producer project can own
+-- no more than 500 services. For security and reliability purposes, a
+-- production service should be hosted in a dedicated producer project.
+-- Operation
 --
 -- /See:/ <https://cloud.google.com/service-management/ Service Management API Reference> for @servicemanagement.services.create@.
 module Network.Google.Resource.ServiceManagement.Services.Create
@@ -42,8 +46,8 @@ module Network.Google.Resource.ServiceManagement.Services.Create
     , scCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.create@ method which the
 -- 'ServicesCreate' request conforms to.
@@ -59,18 +63,22 @@ type ServicesCreateResource =
                      ReqBody '[JSON] ManagedService :>
                        Post '[JSON] Operation
 
--- | Creates a new managed service. Please note one producer project can own
--- no more than 20 services. Operation
+-- | Creates a new managed service. A managed service is immutable, and is
+-- subject to mandatory 30-day data retention. You cannot move a service or
+-- recreate it within 30 days after deletion. One producer project can own
+-- no more than 500 services. For security and reliability purposes, a
+-- production service should be hosted in a dedicated producer project.
+-- Operation
 --
 -- /See:/ 'servicesCreate' smart constructor.
 data ServicesCreate =
   ServicesCreate'
-    { _scXgafv          :: !(Maybe Xgafv)
+    { _scXgafv :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
-    , _scAccessToken    :: !(Maybe Text)
-    , _scUploadType     :: !(Maybe Text)
-    , _scPayload        :: !ManagedService
-    , _scCallback       :: !(Maybe Text)
+    , _scAccessToken :: !(Maybe Text)
+    , _scUploadType :: !(Maybe Text)
+    , _scPayload :: !ManagedService
+    , _scCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

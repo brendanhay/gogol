@@ -20,9 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides suggestions for autocompleting the query.
+-- Provides suggestions for autocompleting the query. **Note:** This API
+-- requires a standard end user account to execute. A service account
+-- can\'t perform Query API requests directly; to use a service account to
+-- perform queries, set up [Google Workspace domain-wide delegation of
+-- authority](https:\/\/developers.google.com\/cloud-search\/docs\/guides\/delegation\/).
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.query.suggest@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.query.suggest@.
 module Network.Google.Resource.CloudSearch.Query.Suggest
     (
     -- * REST Resource
@@ -41,8 +45,8 @@ module Network.Google.Resource.CloudSearch.Query.Suggest
     , qsCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.query.suggest@ method which the
 -- 'QuerySuggest' request conforms to.
@@ -59,17 +63,21 @@ type QuerySuggestResource =
                        ReqBody '[JSON] SuggestRequest :>
                          Post '[JSON] SuggestResponse
 
--- | Provides suggestions for autocompleting the query.
+-- | Provides suggestions for autocompleting the query. **Note:** This API
+-- requires a standard end user account to execute. A service account
+-- can\'t perform Query API requests directly; to use a service account to
+-- perform queries, set up [Google Workspace domain-wide delegation of
+-- authority](https:\/\/developers.google.com\/cloud-search\/docs\/guides\/delegation\/).
 --
 -- /See:/ 'querySuggest' smart constructor.
 data QuerySuggest =
   QuerySuggest'
-    { _qsXgafv          :: !(Maybe Xgafv)
+    { _qsXgafv :: !(Maybe Xgafv)
     , _qsUploadProtocol :: !(Maybe Text)
-    , _qsAccessToken    :: !(Maybe Text)
-    , _qsUploadType     :: !(Maybe Text)
-    , _qsPayload        :: !SuggestRequest
-    , _qsCallback       :: !(Maybe Text)
+    , _qsAccessToken :: !(Maybe Text)
+    , _qsUploadType :: !(Maybe Text)
+    , _qsPayload :: !SuggestRequest
+    , _qsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

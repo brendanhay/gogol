@@ -16,14 +16,13 @@
 --
 module Network.Google.TextToSpeech.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | The preferred gender of the voice. Optional; if not set, the service
--- will choose a voice based on the other parameters such as language_code
--- and name. Note that this is only a preference, not requirement; if a
--- voice of the appropriate gender is not available, the synthesizer should
--- substitute a voice with a different gender rather than failing the
--- request.
+-- | The preferred gender of the voice. If not set, the service will choose a
+-- voice based on the other parameters such as language_code and name. Note
+-- that this is only a preference, not requirement; if a voice of the
+-- appropriate gender is not available, the synthesizer should substitute a
+-- voice with a different gender rather than failing the request.
 data VoiceSelectionParamsSsmlGender
     = SsmlVoiceGenderUnspecified
       -- ^ @SSML_VOICE_GENDER_UNSPECIFIED@
@@ -40,7 +39,7 @@ data VoiceSelectionParamsSsmlGender
       -- A female voice.
     | Neutral
       -- ^ @NEUTRAL@
-      -- A gender-neutral voice.
+      -- A gender-neutral voice. This voice is not yet supported.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VoiceSelectionParamsSsmlGender
@@ -112,7 +111,7 @@ data VoiceSsmlGender
       -- A female voice.
     | VSGNeutral
       -- ^ @NEUTRAL@
-      -- A gender-neutral voice.
+      -- A gender-neutral voice. This voice is not yet supported.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VoiceSsmlGender
@@ -138,7 +137,7 @@ instance FromJSON VoiceSsmlGender where
 instance ToJSON VoiceSsmlGender where
     toJSON = toJSONText
 
--- | Required. The format of the requested audio byte stream.
+-- | Required. The format of the audio byte stream.
 data AudioConfigAudioEncoding
     = AudioEncodingUnspecified
       -- ^ @AUDIO_ENCODING_UNSPECIFIED@

@@ -21,8 +21,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- RetrieveFrames returns instances associated with the given study,
--- series, SOP Instance UID and frame numbers. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.4.
+-- series, SOP Instance UID and frame numbers. See [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4}.
+-- For details on the implementation of RetrieveFrames, see [DICOM
+-- frames](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#dicom_frames)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveFrames, see [Retrieving DICOM
+-- data](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_dicom_data).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.Frames.RetrieveFrames
@@ -44,14 +49,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsssifrfDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFramesResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -63,19 +68,24 @@ type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFra
                        QueryParam "alt" AltJSON :> Get '[JSON] HTTPBody
 
 -- | RetrieveFrames returns instances associated with the given study,
--- series, SOP Instance UID and frame numbers. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.4.
+-- series, SOP Instance UID and frame numbers. See [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4}.
+-- For details on the implementation of RetrieveFrames, see [DICOM
+-- frames](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#dicom_frames)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveFrames, see [Retrieving DICOM
+-- data](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_dicom_data).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames =
   ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames'
-    { _pldsdsssifrfParent         :: !Text
-    , _pldsdsssifrfXgafv          :: !(Maybe Xgafv)
+    { _pldsdsssifrfParent :: !Text
+    , _pldsdsssifrfXgafv :: !(Maybe Xgafv)
     , _pldsdsssifrfUploadProtocol :: !(Maybe Text)
-    , _pldsdsssifrfAccessToken    :: !(Maybe Text)
-    , _pldsdsssifrfUploadType     :: !(Maybe Text)
-    , _pldsdsssifrfCallback       :: !(Maybe Text)
-    , _pldsdsssifrfDicomWebPath   :: !Text
+    , _pldsdsssifrfAccessToken :: !(Maybe Text)
+    , _pldsdsssifrfUploadType :: !(Maybe Text)
+    , _pldsdsssifrfCallback :: !(Maybe Text)
+    , _pldsdsssifrfDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,8 +123,8 @@ projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames p
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsssifrfParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames Text
 pldsdsssifrfParent
   = lens _pldsdsssifrfParent
@@ -150,9 +160,8 @@ pldsdsssifrfCallback
   = lens _pldsdsssifrfCallback
       (\ s a -> s{_pldsdsssifrfCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g.,
--- \`studies\/{study_id}\/series\/{series_id}\/instance\/{instance_id}\/frames\/{frame_list}\`).
+-- | The path of the RetrieveFrames DICOMweb request. For example,
+-- \`studies\/{study_uid}\/series\/{series_uid}\/instances\/{instance_uid}\/frames\/{frame_list}\`.
 pldsdsssifrfDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames Text
 pldsdsssifrfDicomWebPath
   = lens _pldsdsssifrfDicomWebPath

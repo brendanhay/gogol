@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a customer. This method supports patch semantics.
+-- Patches a customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.customers.patch@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.customers.patch@.
 module Network.Google.Resource.Directory.Customers.Patch
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Customers.Patch
     , CustomersPatch
 
     -- * Request Lenses
+    , cpXgafv
+    , cpUploadProtocol
+    , cpAccessToken
     , cpCustomerKey
+    , cpUploadType
     , cpPayload
+    , cpCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.customers.patch@ method which the
 -- 'CustomersPatch' request conforms to.
@@ -48,16 +53,26 @@ type CustomersPatchResource =
          "v1" :>
            "customers" :>
              Capture "customerKey" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Customer :> Patch '[JSON] Customer
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Customer :> Patch '[JSON] Customer
 
--- | Updates a customer. This method supports patch semantics.
+-- | Patches a customer.
 --
 -- /See:/ 'customersPatch' smart constructor.
 data CustomersPatch =
   CustomersPatch'
-    { _cpCustomerKey :: !Text
-    , _cpPayload     :: !Customer
+    { _cpXgafv :: !(Maybe Xgafv)
+    , _cpUploadProtocol :: !(Maybe Text)
+    , _cpAccessToken :: !(Maybe Text)
+    , _cpCustomerKey :: !Text
+    , _cpUploadType :: !(Maybe Text)
+    , _cpPayload :: !Customer
+    , _cpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,16 +81,50 @@ data CustomersPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cpXgafv'
+--
+-- * 'cpUploadProtocol'
+--
+-- * 'cpAccessToken'
+--
 -- * 'cpCustomerKey'
 --
+-- * 'cpUploadType'
+--
 -- * 'cpPayload'
+--
+-- * 'cpCallback'
 customersPatch
     :: Text -- ^ 'cpCustomerKey'
     -> Customer -- ^ 'cpPayload'
     -> CustomersPatch
 customersPatch pCpCustomerKey_ pCpPayload_ =
-  CustomersPatch' {_cpCustomerKey = pCpCustomerKey_, _cpPayload = pCpPayload_}
+  CustomersPatch'
+    { _cpXgafv = Nothing
+    , _cpUploadProtocol = Nothing
+    , _cpAccessToken = Nothing
+    , _cpCustomerKey = pCpCustomerKey_
+    , _cpUploadType = Nothing
+    , _cpPayload = pCpPayload_
+    , _cpCallback = Nothing
+    }
 
+
+-- | V1 error format.
+cpXgafv :: Lens' CustomersPatch (Maybe Xgafv)
+cpXgafv = lens _cpXgafv (\ s a -> s{_cpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cpUploadProtocol :: Lens' CustomersPatch (Maybe Text)
+cpUploadProtocol
+  = lens _cpUploadProtocol
+      (\ s a -> s{_cpUploadProtocol = a})
+
+-- | OAuth access token.
+cpAccessToken :: Lens' CustomersPatch (Maybe Text)
+cpAccessToken
+  = lens _cpAccessToken
+      (\ s a -> s{_cpAccessToken = a})
 
 -- | Id of the customer to be updated
 cpCustomerKey :: Lens' CustomersPatch Text
@@ -83,17 +132,32 @@ cpCustomerKey
   = lens _cpCustomerKey
       (\ s a -> s{_cpCustomerKey = a})
 
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cpUploadType :: Lens' CustomersPatch (Maybe Text)
+cpUploadType
+  = lens _cpUploadType (\ s a -> s{_cpUploadType = a})
+
 -- | Multipart request metadata.
 cpPayload :: Lens' CustomersPatch Customer
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
+
+-- | JSONP
+cpCallback :: Lens' CustomersPatch (Maybe Text)
+cpCallback
+  = lens _cpCallback (\ s a -> s{_cpCallback = a})
 
 instance GoogleRequest CustomersPatch where
         type Rs CustomersPatch = Customer
         type Scopes CustomersPatch =
              '["https://www.googleapis.com/auth/admin.directory.customer"]
         requestClient CustomersPatch'{..}
-          = go _cpCustomerKey (Just AltJSON) _cpPayload
+          = go _cpCustomerKey _cpXgafv _cpUploadProtocol
+              _cpAccessToken
+              _cpUploadType
+              _cpCallback
+              (Just AltJSON)
+              _cpPayload
               directoryService
           where go
                   = buildClient (Proxy :: Proxy CustomersPatchResource)

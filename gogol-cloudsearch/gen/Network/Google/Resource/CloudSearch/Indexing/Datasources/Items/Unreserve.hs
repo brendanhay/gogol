@@ -22,9 +22,11 @@
 --
 -- Unreserves all items from a queue, making them all eligible to be
 -- polled. This method is useful for resetting the indexing queue after a
--- connector has been restarted.
+-- connector has been restarted. This API requires an admin or service
+-- account to execute. The service account used is the one whitelisted in
+-- the corresponding data source.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.unreserve@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.unreserve@.
 module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Unreserve
     (
     -- * REST Resource
@@ -44,8 +46,8 @@ module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Unreserve
     , idiuCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.indexing.datasources.items.unreserve@ method which the
 -- 'IndexingDatasourcesItemsUnreserve' request conforms to.
@@ -65,18 +67,20 @@ type IndexingDatasourcesItemsUnreserveResource =
 
 -- | Unreserves all items from a queue, making them all eligible to be
 -- polled. This method is useful for resetting the indexing queue after a
--- connector has been restarted.
+-- connector has been restarted. This API requires an admin or service
+-- account to execute. The service account used is the one whitelisted in
+-- the corresponding data source.
 --
 -- /See:/ 'indexingDatasourcesItemsUnreserve' smart constructor.
 data IndexingDatasourcesItemsUnreserve =
   IndexingDatasourcesItemsUnreserve'
-    { _idiuXgafv          :: !(Maybe Xgafv)
+    { _idiuXgafv :: !(Maybe Xgafv)
     , _idiuUploadProtocol :: !(Maybe Text)
-    , _idiuAccessToken    :: !(Maybe Text)
-    , _idiuUploadType     :: !(Maybe Text)
-    , _idiuPayload        :: !UnreserveItemsRequest
-    , _idiuName           :: !Text
-    , _idiuCallback       :: !(Maybe Text)
+    , _idiuAccessToken :: !(Maybe Text)
+    , _idiuUploadType :: !(Maybe Text)
+    , _idiuPayload :: !UnreserveItemsRequest
+    , _idiuName :: !Text
+    , _idiuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

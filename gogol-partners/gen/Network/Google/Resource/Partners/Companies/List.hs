@@ -65,8 +65,8 @@ module Network.Google.Resource.Partners.Companies.List
     , clCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.companies.list@ method which the
 -- 'CompaniesList' request conforms to.
@@ -157,36 +157,36 @@ type CompaniesListResource =
 -- /See:/ 'companiesList' smart constructor.
 data CompaniesList =
   CompaniesList'
-    { _clLanguageCodes                               :: !(Maybe [Text])
-    , _clXgafv                                       :: !(Maybe Xgafv)
-    , _clMaxMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
-    , _clUploadProtocol                              :: !(Maybe Text)
-    , _clOrderBy                                     :: !(Maybe Text)
-    , _clCompanyName                                 :: !(Maybe Text)
-    , _clAccessToken                                 :: !(Maybe Text)
-    , _clUploadType                                  :: !(Maybe Text)
-    , _clAddress                                     :: !(Maybe Text)
-    , _clMinMonthlyBudgetNanos                       :: !(Maybe (Textual Int32))
-    , _clIndustries                                  :: !(Maybe [Text])
-    , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _clSpecializations                             :: !(Maybe [Text])
-    , _clMaxMonthlyBudgetNanos                       :: !(Maybe (Textual Int32))
-    , _clRequestMetadataLocale                       :: !(Maybe Text)
-    , _clView                                        :: !(Maybe Text)
-    , _clRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _clRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _clMaxMonthlyBudgetCurrencyCode                :: !(Maybe Text)
-    , _clWebsiteURL                                  :: !(Maybe Text)
-    , _clPageToken                                   :: !(Maybe Text)
-    , _clRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _clGpsMotivations                              :: !(Maybe [Text])
-    , _clPageSize                                    :: !(Maybe (Textual Int32))
-    , _clMinMonthlyBudgetCurrencyCode                :: !(Maybe Text)
-    , _clServices                                    :: !(Maybe [Text])
-    , _clRequestMetadataUserOverridesUserId          :: !(Maybe Text)
-    , _clMinMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
+    { _clLanguageCodes :: !(Maybe [Text])
+    , _clXgafv :: !(Maybe Xgafv)
+    , _clMaxMonthlyBudgetUnits :: !(Maybe (Textual Int64))
+    , _clUploadProtocol :: !(Maybe Text)
+    , _clOrderBy :: !(Maybe Text)
+    , _clCompanyName :: !(Maybe Text)
+    , _clAccessToken :: !(Maybe Text)
+    , _clUploadType :: !(Maybe Text)
+    , _clAddress :: !(Maybe Text)
+    , _clMinMonthlyBudgetNanos :: !(Maybe (Textual Int32))
+    , _clIndustries :: !(Maybe [Text])
+    , _clRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _clSpecializations :: !(Maybe [Text])
+    , _clMaxMonthlyBudgetNanos :: !(Maybe (Textual Int32))
+    , _clRequestMetadataLocale :: !(Maybe Text)
+    , _clView :: !(Maybe Text)
+    , _clRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _clRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _clMaxMonthlyBudgetCurrencyCode :: !(Maybe Text)
+    , _clWebsiteURL :: !(Maybe Text)
+    , _clPageToken :: !(Maybe Text)
+    , _clRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _clGpsMotivations :: !(Maybe [Text])
+    , _clPageSize :: !(Maybe (Textual Int32))
+    , _clMinMonthlyBudgetCurrencyCode :: !(Maybe Text)
+    , _clServices :: !(Maybe [Text])
+    , _clRequestMetadataUserOverridesUserId :: !(Maybe Text)
+    , _clMinMonthlyBudgetUnits :: !(Maybe (Textual Int64))
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _clCallback                                    :: !(Maybe Text)
+    , _clCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

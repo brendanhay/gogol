@@ -23,7 +23,7 @@
 -- Retrieves a list of floodlight activities, possibly filtered. This
 -- method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.floodlightActivities.list@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.List
     (
     -- * REST Resource
@@ -34,11 +34,15 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.List
     , FloodlightActivitiesList
 
     -- * Request Lenses
+    , falXgafv
     , falTagString
+    , falUploadProtocol
     , falFloodlightActivityGroupTagString
     , falFloodlightConfigurationId
+    , falAccessToken
     , falAdvertiserId
     , falSearchString
+    , falUploadType
     , falIds
     , falProFileId
     , falFloodlightActivityGroupIds
@@ -48,47 +52,56 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.List
     , falPageToken
     , falSortField
     , falMaxResults
+    , falCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.list@ method which the
 -- 'FloodlightActivitiesList' request conforms to.
 type FloodlightActivitiesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
-               QueryParam "tagString" Text :>
-                 QueryParam "floodlightActivityGroupTagString" Text :>
-                   QueryParam "floodlightConfigurationId"
-                     (Textual Int64)
-                     :>
-                     QueryParam "advertiserId" (Textual Int64) :>
-                       QueryParam "searchString" Text :>
-                         QueryParams "ids" (Textual Int64) :>
-                           QueryParams "floodlightActivityGroupIds"
-                             (Textual Int64)
-                             :>
-                             QueryParam "sortOrder"
-                               FloodlightActivitiesListSortOrder
-                               :>
-                               QueryParam "floodlightActivityGroupType"
-                                 FloodlightActivitiesListFloodlightActivityGroupType
-                                 :>
-                                 QueryParam "floodlightActivityGroupName" Text
-                                   :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "sortField"
-                                       FloodlightActivitiesListSortField
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "tagString" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "floodlightActivityGroupTagString" Text :>
+                       QueryParam "floodlightConfigurationId"
+                         (Textual Int64)
+                         :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "advertiserId" (Textual Int64) :>
+                             QueryParam "searchString" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParams "ids" (Textual Int64) :>
+                                   QueryParams "floodlightActivityGroupIds"
+                                     (Textual Int64)
+                                     :>
+                                     QueryParam "sortOrder"
+                                       FloodlightActivitiesListSortOrder
                                        :>
-                                       QueryParam "maxResults" (Textual Int32)
+                                       QueryParam "floodlightActivityGroupType"
+                                         FloodlightActivitiesListFloodlightActivityGroupType
                                          :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON]
-                                             FloodlightActivitiesListResponse
+                                         QueryParam
+                                           "floodlightActivityGroupName"
+                                           Text
+                                           :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "sortField"
+                                               FloodlightActivitiesListSortField
+                                               :>
+                                               QueryParam "maxResults"
+                                                 (Textual Int32)
+                                                 :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" AltJSON :>
+                                                     Get '[JSON]
+                                                       FloodlightActivitiesListResponse
 
 -- | Retrieves a list of floodlight activities, possibly filtered. This
 -- method supports paging.
@@ -96,20 +109,25 @@ type FloodlightActivitiesListResource =
 -- /See:/ 'floodlightActivitiesList' smart constructor.
 data FloodlightActivitiesList =
   FloodlightActivitiesList'
-    { _falTagString                        :: !(Maybe Text)
+    { _falXgafv :: !(Maybe Xgafv)
+    , _falTagString :: !(Maybe Text)
+    , _falUploadProtocol :: !(Maybe Text)
     , _falFloodlightActivityGroupTagString :: !(Maybe Text)
-    , _falFloodlightConfigurationId        :: !(Maybe (Textual Int64))
-    , _falAdvertiserId                     :: !(Maybe (Textual Int64))
-    , _falSearchString                     :: !(Maybe Text)
-    , _falIds                              :: !(Maybe [Textual Int64])
-    , _falProFileId                        :: !(Textual Int64)
-    , _falFloodlightActivityGroupIds       :: !(Maybe [Textual Int64])
-    , _falSortOrder                        :: !FloodlightActivitiesListSortOrder
-    , _falFloodlightActivityGroupType      :: !(Maybe FloodlightActivitiesListFloodlightActivityGroupType)
-    , _falFloodlightActivityGroupName      :: !(Maybe Text)
-    , _falPageToken                        :: !(Maybe Text)
-    , _falSortField                        :: !FloodlightActivitiesListSortField
-    , _falMaxResults                       :: !(Textual Int32)
+    , _falFloodlightConfigurationId :: !(Maybe (Textual Int64))
+    , _falAccessToken :: !(Maybe Text)
+    , _falAdvertiserId :: !(Maybe (Textual Int64))
+    , _falSearchString :: !(Maybe Text)
+    , _falUploadType :: !(Maybe Text)
+    , _falIds :: !(Maybe [Textual Int64])
+    , _falProFileId :: !(Textual Int64)
+    , _falFloodlightActivityGroupIds :: !(Maybe [Textual Int64])
+    , _falSortOrder :: !FloodlightActivitiesListSortOrder
+    , _falFloodlightActivityGroupType :: !(Maybe FloodlightActivitiesListFloodlightActivityGroupType)
+    , _falFloodlightActivityGroupName :: !(Maybe Text)
+    , _falPageToken :: !(Maybe Text)
+    , _falSortField :: !FloodlightActivitiesListSortField
+    , _falMaxResults :: !(Textual Int32)
+    , _falCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,15 +136,23 @@ data FloodlightActivitiesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'falXgafv'
+--
 -- * 'falTagString'
+--
+-- * 'falUploadProtocol'
 --
 -- * 'falFloodlightActivityGroupTagString'
 --
 -- * 'falFloodlightConfigurationId'
 --
+-- * 'falAccessToken'
+--
 -- * 'falAdvertiserId'
 --
 -- * 'falSearchString'
+--
+-- * 'falUploadType'
 --
 -- * 'falIds'
 --
@@ -145,16 +171,22 @@ data FloodlightActivitiesList =
 -- * 'falSortField'
 --
 -- * 'falMaxResults'
+--
+-- * 'falCallback'
 floodlightActivitiesList
     :: Int64 -- ^ 'falProFileId'
     -> FloodlightActivitiesList
 floodlightActivitiesList pFalProFileId_ =
   FloodlightActivitiesList'
-    { _falTagString = Nothing
+    { _falXgafv = Nothing
+    , _falTagString = Nothing
+    , _falUploadProtocol = Nothing
     , _falFloodlightActivityGroupTagString = Nothing
     , _falFloodlightConfigurationId = Nothing
+    , _falAccessToken = Nothing
     , _falAdvertiserId = Nothing
     , _falSearchString = Nothing
+    , _falUploadType = Nothing
     , _falIds = Nothing
     , _falProFileId = _Coerce # pFalProFileId_
     , _falFloodlightActivityGroupIds = Nothing
@@ -164,13 +196,24 @@ floodlightActivitiesList pFalProFileId_ =
     , _falPageToken = Nothing
     , _falSortField = FALSFID
     , _falMaxResults = 1000
+    , _falCallback = Nothing
     }
 
+
+-- | V1 error format.
+falXgafv :: Lens' FloodlightActivitiesList (Maybe Xgafv)
+falXgafv = lens _falXgafv (\ s a -> s{_falXgafv = a})
 
 -- | Select only floodlight activities with the specified tag string.
 falTagString :: Lens' FloodlightActivitiesList (Maybe Text)
 falTagString
   = lens _falTagString (\ s a -> s{_falTagString = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+falUploadProtocol :: Lens' FloodlightActivitiesList (Maybe Text)
+falUploadProtocol
+  = lens _falUploadProtocol
+      (\ s a -> s{_falUploadProtocol = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group tag string.
@@ -188,6 +231,12 @@ falFloodlightConfigurationId
   = lens _falFloodlightConfigurationId
       (\ s a -> s{_falFloodlightConfigurationId = a})
       . mapping _Coerce
+
+-- | OAuth access token.
+falAccessToken :: Lens' FloodlightActivitiesList (Maybe Text)
+falAccessToken
+  = lens _falAccessToken
+      (\ s a -> s{_falAccessToken = a})
 
 -- | Select only floodlight activities for the specified advertiser ID. Must
 -- specify either ids, advertiserId, or floodlightConfigurationId for a
@@ -210,6 +259,12 @@ falSearchString :: Lens' FloodlightActivitiesList (Maybe Text)
 falSearchString
   = lens _falSearchString
       (\ s a -> s{_falSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+falUploadType :: Lens' FloodlightActivitiesList (Maybe Text)
+falUploadType
+  = lens _falUploadType
+      (\ s a -> s{_falUploadType = a})
 
 -- | Select only floodlight activities with the specified IDs. Must specify
 -- either ids, advertiserId, or floodlightConfigurationId for a non-empty
@@ -270,17 +325,25 @@ falMaxResults
       (\ s a -> s{_falMaxResults = a})
       . _Coerce
 
+-- | JSONP
+falCallback :: Lens' FloodlightActivitiesList (Maybe Text)
+falCallback
+  = lens _falCallback (\ s a -> s{_falCallback = a})
+
 instance GoogleRequest FloodlightActivitiesList where
         type Rs FloodlightActivitiesList =
              FloodlightActivitiesListResponse
         type Scopes FloodlightActivitiesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightActivitiesList'{..}
-          = go _falProFileId _falTagString
+          = go _falProFileId _falXgafv _falTagString
+              _falUploadProtocol
               _falFloodlightActivityGroupTagString
               _falFloodlightConfigurationId
+              _falAccessToken
               _falAdvertiserId
               _falSearchString
+              _falUploadType
               (_falIds ^. _Default)
               (_falFloodlightActivityGroupIds ^. _Default)
               (Just _falSortOrder)
@@ -289,6 +352,7 @@ instance GoogleRequest FloodlightActivitiesList where
               _falPageToken
               (Just _falSortField)
               (Just _falMaxResults)
+              _falCallback
               (Just AltJSON)
               dFAReportingService
           where go

@@ -22,7 +22,7 @@
 --
 -- Lists the specified events.
 --
--- /See:/ <https://cloud.google.com/error-reporting/ Stackdriver Error Reporting API Reference> for @clouderrorreporting.projects.events.list@.
+-- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.events.list@.
 module Network.Google.Resource.CloudErrorReporting.Projects.Events.List
     (
     -- * REST Resource
@@ -48,8 +48,8 @@ module Network.Google.Resource.CloudErrorReporting.Projects.Events.List
     , pelTimeRangePeriod
     ) where
 
-import           Network.Google.CloudErrorReporting.Types
-import           Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouderrorreporting.projects.events.list@ method which the
 -- 'ProjectsEventsList' request conforms to.
@@ -68,7 +68,9 @@ type ProjectsEventsListResource =
                            QueryParam "serviceFilter.resourceType" Text :>
                              QueryParam "callback" Text :>
                                QueryParam "serviceFilter.version" Text :>
-                                 QueryParam "timeRange.period" Text :>
+                                 QueryParam "timeRange.period"
+                                   ProjectsEventsListTimeRangePeriod
+                                   :>
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListEventsResponse
 
@@ -77,19 +79,19 @@ type ProjectsEventsListResource =
 -- /See:/ 'projectsEventsList' smart constructor.
 data ProjectsEventsList =
   ProjectsEventsList'
-    { _pelXgafv                     :: !(Maybe Xgafv)
-    , _pelUploadProtocol            :: !(Maybe Text)
-    , _pelAccessToken               :: !(Maybe Text)
-    , _pelUploadType                :: !(Maybe Text)
-    , _pelProjectName               :: !Text
-    , _pelGroupId                   :: !(Maybe Text)
-    , _pelPageToken                 :: !(Maybe Text)
-    , _pelPageSize                  :: !(Maybe (Textual Int32))
-    , _pelServiceFilterService      :: !(Maybe Text)
+    { _pelXgafv :: !(Maybe Xgafv)
+    , _pelUploadProtocol :: !(Maybe Text)
+    , _pelAccessToken :: !(Maybe Text)
+    , _pelUploadType :: !(Maybe Text)
+    , _pelProjectName :: !Text
+    , _pelGroupId :: !(Maybe Text)
+    , _pelPageToken :: !(Maybe Text)
+    , _pelPageSize :: !(Maybe (Textual Int32))
+    , _pelServiceFilterService :: !(Maybe Text)
     , _pelServiceFilterResourceType :: !(Maybe Text)
-    , _pelCallback                  :: !(Maybe Text)
-    , _pelServiceFilterVersion      :: !(Maybe Text)
-    , _pelTimeRangePeriod           :: !(Maybe Text)
+    , _pelCallback :: !(Maybe Text)
+    , _pelServiceFilterVersion :: !(Maybe Text)
+    , _pelTimeRangePeriod :: !(Maybe ProjectsEventsListTimeRangePeriod)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -166,8 +168,9 @@ pelUploadType
   = lens _pelUploadType
       (\ s a -> s{_pelUploadType = a})
 
--- | [Required] The resource name of the Google Cloud Platform project.
--- Written as \`projects\/\` plus the [Google Cloud Platform project
+-- | Required. The resource name of the Google Cloud Platform project.
+-- Written as \`projects\/{projectID}\`, where \`{projectID}\` is the
+-- [Google Cloud Platform project
 -- ID](https:\/\/support.google.com\/cloud\/answer\/6158840). Example:
 -- \`projects\/my-project-123\`.
 pelProjectName :: Lens' ProjectsEventsList Text
@@ -175,30 +178,30 @@ pelProjectName
   = lens _pelProjectName
       (\ s a -> s{_pelProjectName = a})
 
--- | [Required] The group for which events shall be returned.
+-- | Required. The group for which events shall be returned.
 pelGroupId :: Lens' ProjectsEventsList (Maybe Text)
 pelGroupId
   = lens _pelGroupId (\ s a -> s{_pelGroupId = a})
 
--- | [Optional] A \`next_page_token\` provided by a previous response.
+-- | Optional. A \`next_page_token\` provided by a previous response.
 pelPageToken :: Lens' ProjectsEventsList (Maybe Text)
 pelPageToken
   = lens _pelPageToken (\ s a -> s{_pelPageToken = a})
 
--- | [Optional] The maximum number of results to return per response.
+-- | Optional. The maximum number of results to return per response.
 pelPageSize :: Lens' ProjectsEventsList (Maybe Int32)
 pelPageSize
   = lens _pelPageSize (\ s a -> s{_pelPageSize = a}) .
       mapping _Coerce
 
--- | [Optional] The exact value to match against
+-- | Optional. The exact value to match against
 -- [\`ServiceContext.service\`](\/error-reporting\/reference\/rest\/v1beta1\/ServiceContext#FIELDS.service).
 pelServiceFilterService :: Lens' ProjectsEventsList (Maybe Text)
 pelServiceFilterService
   = lens _pelServiceFilterService
       (\ s a -> s{_pelServiceFilterService = a})
 
--- | [Optional] The exact value to match against
+-- | Optional. The exact value to match against
 -- [\`ServiceContext.resource_type\`](\/error-reporting\/reference\/rest\/v1beta1\/ServiceContext#FIELDS.resource_type).
 pelServiceFilterResourceType :: Lens' ProjectsEventsList (Maybe Text)
 pelServiceFilterResourceType
@@ -210,7 +213,7 @@ pelCallback :: Lens' ProjectsEventsList (Maybe Text)
 pelCallback
   = lens _pelCallback (\ s a -> s{_pelCallback = a})
 
--- | [Optional] The exact value to match against
+-- | Optional. The exact value to match against
 -- [\`ServiceContext.version\`](\/error-reporting\/reference\/rest\/v1beta1\/ServiceContext#FIELDS.version).
 pelServiceFilterVersion :: Lens' ProjectsEventsList (Maybe Text)
 pelServiceFilterVersion
@@ -218,7 +221,7 @@ pelServiceFilterVersion
       (\ s a -> s{_pelServiceFilterVersion = a})
 
 -- | Restricts the query to the specified time range.
-pelTimeRangePeriod :: Lens' ProjectsEventsList (Maybe Text)
+pelTimeRangePeriod :: Lens' ProjectsEventsList (Maybe ProjectsEventsListTimeRangePeriod)
 pelTimeRangePeriod
   = lens _pelTimeRangePeriod
       (\ s a -> s{_pelTimeRangePeriod = a})

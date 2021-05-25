@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create a new contact group owned by the authenticated user.
+-- Create a new contact group owned by the authenticated user. Created
+-- contact group names must be unique to the users contact groups.
+-- Attempting to create a group with a duplicate name will return a HTTP
+-- 409 error.
 --
 -- /See:/ <https://developers.google.com/people/ People API Reference> for @people.contactGroups.create@.
 module Network.Google.Resource.People.ContactGroups.Create
@@ -41,8 +44,8 @@ module Network.Google.Resource.People.ContactGroups.Create
     , cgcCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.contactGroups.create@ method which the
 -- 'ContactGroupsCreate' request conforms to.
@@ -58,17 +61,20 @@ type ContactGroupsCreateResource =
                      ReqBody '[JSON] CreateContactGroupRequest :>
                        Post '[JSON] ContactGroup
 
--- | Create a new contact group owned by the authenticated user.
+-- | Create a new contact group owned by the authenticated user. Created
+-- contact group names must be unique to the users contact groups.
+-- Attempting to create a group with a duplicate name will return a HTTP
+-- 409 error.
 --
 -- /See:/ 'contactGroupsCreate' smart constructor.
 data ContactGroupsCreate =
   ContactGroupsCreate'
-    { _cgcXgafv          :: !(Maybe Xgafv)
+    { _cgcXgafv :: !(Maybe Xgafv)
     , _cgcUploadProtocol :: !(Maybe Text)
-    , _cgcAccessToken    :: !(Maybe Text)
-    , _cgcUploadType     :: !(Maybe Text)
-    , _cgcPayload        :: !CreateContactGroupRequest
-    , _cgcCallback       :: !(Maybe Text)
+    , _cgcAccessToken :: !(Maybe Text)
+    , _cgcUploadType :: !(Maybe Text)
+    , _cgcPayload :: !CreateContactGroupRequest
+    , _cgcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

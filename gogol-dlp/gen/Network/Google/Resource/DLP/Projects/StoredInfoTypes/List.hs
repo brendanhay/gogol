@@ -42,12 +42,13 @@ module Network.Google.Resource.DLP.Projects.StoredInfoTypes.List
     , psitlAccessToken
     , psitlUploadType
     , psitlPageToken
+    , psitlLocationId
     , psitlPageSize
     , psitlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.storedInfoTypes.list@ method which the
 -- 'ProjectsStoredInfoTypesList' request conforms to.
@@ -61,11 +62,12 @@ type ProjectsStoredInfoTypesListResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" (Textual Int32) :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON]
-                               GooglePrivacyDlpV2ListStoredInfoTypesResponse
+                       QueryParam "locationId" Text :>
+                         QueryParam "pageSize" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON]
+                                 GooglePrivacyDlpV2ListStoredInfoTypesResponse
 
 -- | Lists stored infoTypes. See
 -- https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to
@@ -74,15 +76,16 @@ type ProjectsStoredInfoTypesListResource =
 -- /See:/ 'projectsStoredInfoTypesList' smart constructor.
 data ProjectsStoredInfoTypesList =
   ProjectsStoredInfoTypesList'
-    { _psitlParent         :: !Text
-    , _psitlXgafv          :: !(Maybe Xgafv)
+    { _psitlParent :: !Text
+    , _psitlXgafv :: !(Maybe Xgafv)
     , _psitlUploadProtocol :: !(Maybe Text)
-    , _psitlOrderBy        :: !(Maybe Text)
-    , _psitlAccessToken    :: !(Maybe Text)
-    , _psitlUploadType     :: !(Maybe Text)
-    , _psitlPageToken      :: !(Maybe Text)
-    , _psitlPageSize       :: !(Maybe (Textual Int32))
-    , _psitlCallback       :: !(Maybe Text)
+    , _psitlOrderBy :: !(Maybe Text)
+    , _psitlAccessToken :: !(Maybe Text)
+    , _psitlUploadType :: !(Maybe Text)
+    , _psitlPageToken :: !(Maybe Text)
+    , _psitlLocationId :: !(Maybe Text)
+    , _psitlPageSize :: !(Maybe (Textual Int32))
+    , _psitlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,6 +108,8 @@ data ProjectsStoredInfoTypesList =
 --
 -- * 'psitlPageToken'
 --
+-- * 'psitlLocationId'
+--
 -- * 'psitlPageSize'
 --
 -- * 'psitlCallback'
@@ -120,13 +125,26 @@ projectsStoredInfoTypesList pPsitlParent_ =
     , _psitlAccessToken = Nothing
     , _psitlUploadType = Nothing
     , _psitlPageToken = Nothing
+    , _psitlLocationId = Nothing
     , _psitlPageSize = Nothing
     , _psitlCallback = Nothing
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 psitlParent :: Lens' ProjectsStoredInfoTypesList Text
 psitlParent
   = lens _psitlParent (\ s a -> s{_psitlParent = a})
@@ -142,12 +160,12 @@ psitlUploadProtocol
   = lens _psitlUploadProtocol
       (\ s a -> s{_psitlUploadProtocol = a})
 
--- | Optional comma separated list of fields to order by, followed by \`asc\`
--- or \`desc\` postfix. This list is case-insensitive, default sorting
--- order is ascending, redundant space characters are insignificant.
--- Example: \`name asc, display_name, create_time desc\` Supported fields
--- are: - \`create_time\`: corresponds to time the most recent version of
--- the resource was created. - \`state\`: corresponds to the state of the
+-- | Comma separated list of fields to order by, followed by \`asc\` or
+-- \`desc\` postfix. This list is case-insensitive, default sorting order
+-- is ascending, redundant space characters are insignificant. Example:
+-- \`name asc, display_name, create_time desc\` Supported fields are: -
+-- \`create_time\`: corresponds to time the most recent version of the
+-- resource was created. - \`state\`: corresponds to the state of the
 -- resource. - \`name\`: corresponds to resource name. - \`display_name\`:
 -- corresponds to info type\'s display name.
 psitlOrderBy :: Lens' ProjectsStoredInfoTypesList (Maybe Text)
@@ -166,15 +184,21 @@ psitlUploadType
   = lens _psitlUploadType
       (\ s a -> s{_psitlUploadType = a})
 
--- | Optional page token to continue retrieval. Comes from previous call to
+-- | Page token to continue retrieval. Comes from previous call to
 -- \`ListStoredInfoTypes\`.
 psitlPageToken :: Lens' ProjectsStoredInfoTypesList (Maybe Text)
 psitlPageToken
   = lens _psitlPageToken
       (\ s a -> s{_psitlPageToken = a})
 
--- | Optional size of the page, can be limited by server. If zero server
--- returns a page of max size 100.
+-- | Deprecated. This field has no effect.
+psitlLocationId :: Lens' ProjectsStoredInfoTypesList (Maybe Text)
+psitlLocationId
+  = lens _psitlLocationId
+      (\ s a -> s{_psitlLocationId = a})
+
+-- | Size of the page, can be limited by server. If zero server returns a
+-- page of max size 100.
 psitlPageSize :: Lens' ProjectsStoredInfoTypesList (Maybe Int32)
 psitlPageSize
   = lens _psitlPageSize
@@ -199,6 +223,7 @@ instance GoogleRequest ProjectsStoredInfoTypesList
               _psitlAccessToken
               _psitlUploadType
               _psitlPageToken
+              _psitlLocationId
               _psitlPageSize
               _psitlCallback
               (Just AltJSON)

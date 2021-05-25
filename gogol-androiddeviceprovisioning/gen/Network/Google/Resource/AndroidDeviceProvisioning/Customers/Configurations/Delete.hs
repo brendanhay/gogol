@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configuration
     , ccdCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.configurations.delete@ method which the
 -- 'CustomersConfigurationsDelete' request conforms to.
@@ -63,12 +63,12 @@ type CustomersConfigurationsDeleteResource =
 -- /See:/ 'customersConfigurationsDelete' smart constructor.
 data CustomersConfigurationsDelete =
   CustomersConfigurationsDelete'
-    { _ccdXgafv          :: !(Maybe Xgafv)
+    { _ccdXgafv :: !(Maybe Xgafv)
     , _ccdUploadProtocol :: !(Maybe Text)
-    , _ccdAccessToken    :: !(Maybe Text)
-    , _ccdUploadType     :: !(Maybe Text)
-    , _ccdName           :: !Text
-    , _ccdCallback       :: !(Maybe Text)
+    , _ccdAccessToken :: !(Maybe Text)
+    , _ccdUploadType :: !(Maybe Text)
+    , _ccdName :: !Text
+    , _ccdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

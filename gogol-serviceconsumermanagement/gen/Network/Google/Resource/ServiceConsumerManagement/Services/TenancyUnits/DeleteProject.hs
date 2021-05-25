@@ -49,8 +49,8 @@ module Network.Google.Resource.ServiceConsumerManagement.Services.TenancyUnits.D
     , studpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceConsumerManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceConsumerManagement.Types
 
 -- | A resource alias for @serviceconsumermanagement.services.tenancyUnits.deleteProject@ method which the
 -- 'ServicesTenancyUnitsDeleteProject' request conforms to.
@@ -78,13 +78,13 @@ type ServicesTenancyUnitsDeleteProjectResource =
 -- /See:/ 'servicesTenancyUnitsDeleteProject' smart constructor.
 data ServicesTenancyUnitsDeleteProject =
   ServicesTenancyUnitsDeleteProject'
-    { _studpXgafv          :: !(Maybe Xgafv)
+    { _studpXgafv :: !(Maybe Xgafv)
     , _studpUploadProtocol :: !(Maybe Text)
-    , _studpAccessToken    :: !(Maybe Text)
-    , _studpUploadType     :: !(Maybe Text)
-    , _studpPayload        :: !DeleteTenantProjectRequest
-    , _studpName           :: !Text
-    , _studpCallback       :: !(Maybe Text)
+    , _studpAccessToken :: !(Maybe Text)
+    , _studpUploadType :: !(Maybe Text)
+    , _studpPayload :: !DeleteTenantProjectRequest
+    , _studpName :: !Text
+    , _studpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,7 +150,7 @@ studpPayload :: Lens' ServicesTenancyUnitsDeleteProject DeleteTenantProjectReque
 studpPayload
   = lens _studpPayload (\ s a -> s{_studpPayload = a})
 
--- | Name of the tenancy unit. Such as
+-- | Required. Name of the tenancy unit. Such as
 -- \'services\/service.googleapis.com\/projects\/12345\/tenancyUnits\/abcd\'.
 studpName :: Lens' ServicesTenancyUnitsDeleteProject Text
 studpName

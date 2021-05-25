@@ -41,8 +41,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Delete
     , pidCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.delete@ method which the
 -- 'ProjectsInstancesDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsInstancesDeleteResource =
 -- /See:/ 'projectsInstancesDelete' smart constructor.
 data ProjectsInstancesDelete =
   ProjectsInstancesDelete'
-    { _pidXgafv          :: !(Maybe Xgafv)
+    { _pidXgafv :: !(Maybe Xgafv)
     , _pidUploadProtocol :: !(Maybe Text)
-    , _pidAccessToken    :: !(Maybe Text)
-    , _pidUploadType     :: !(Maybe Text)
-    , _pidName           :: !Text
-    , _pidCallback       :: !(Maybe Text)
+    , _pidAccessToken :: !(Maybe Text)
+    , _pidUploadType :: !(Maybe Text)
+    , _pidName :: !Text
+    , _pidCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,8 +122,8 @@ pidUploadType
   = lens _pidUploadType
       (\ s a -> s{_pidUploadType = a})
 
--- | The unique name of the instance to be deleted. Values are of the form
--- \`projects\/\/instances\/\`.
+-- | Required. The unique name of the instance to be deleted. Values are of
+-- the form \`projects\/{project}\/instances\/{instance}\`.
 pidName :: Lens' ProjectsInstancesDelete Text
 pidName = lens _pidName (\ s a -> s{_pidName = a})
 

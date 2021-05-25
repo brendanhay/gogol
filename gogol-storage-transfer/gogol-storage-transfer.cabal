@@ -39,8 +39,8 @@ library
         , Network.Google.Resource.StorageTransfer.TransferJobs.Get
         , Network.Google.Resource.StorageTransfer.TransferJobs.List
         , Network.Google.Resource.StorageTransfer.TransferJobs.Patch
+        , Network.Google.Resource.StorageTransfer.TransferJobs.Run
         , Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
-        , Network.Google.Resource.StorageTransfer.TransferOperations.Delete
         , Network.Google.Resource.StorageTransfer.TransferOperations.Get
         , Network.Google.Resource.StorageTransfer.TransferOperations.List
         , Network.Google.Resource.StorageTransfer.TransferOperations.Pause

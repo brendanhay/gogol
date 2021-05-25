@@ -36,8 +36,8 @@ module Network.Google.Resource.Surveys.Surveys.Stop
     , sResourceId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.stop@ method which the
 -- 'SurveysStop' request conforms to.

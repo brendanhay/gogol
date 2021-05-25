@@ -42,11 +42,12 @@ module Network.Google.Resource.Storage.Objects.Delete
     , odUserProject
     , odIfMetagenerationNotMatch
     , odObject
+    , odProvisionalUserProject
     , odGeneration
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.delete@ method which the
 -- 'ObjectsDelete' request conforms to.
@@ -63,8 +64,9 @@ type ObjectsDeleteResource =
                        QueryParam "userProject" Text :>
                          QueryParam "ifMetagenerationNotMatch" (Textual Int64)
                            :>
-                           QueryParam "generation" (Textual Int64) :>
-                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                           QueryParam "provisionalUserProject" Text :>
+                             QueryParam "generation" (Textual Int64) :>
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an object and its metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter
@@ -73,14 +75,15 @@ type ObjectsDeleteResource =
 -- /See:/ 'objectsDelete' smart constructor.
 data ObjectsDelete =
   ObjectsDelete'
-    { _odIfMetagenerationMatch    :: !(Maybe (Textual Int64))
-    , _odIfGenerationNotMatch     :: !(Maybe (Textual Int64))
-    , _odIfGenerationMatch        :: !(Maybe (Textual Int64))
-    , _odBucket                   :: !Text
-    , _odUserProject              :: !(Maybe Text)
+    { _odIfMetagenerationMatch :: !(Maybe (Textual Int64))
+    , _odIfGenerationNotMatch :: !(Maybe (Textual Int64))
+    , _odIfGenerationMatch :: !(Maybe (Textual Int64))
+    , _odBucket :: !Text
+    , _odUserProject :: !(Maybe Text)
     , _odIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
-    , _odObject                   :: !Text
-    , _odGeneration               :: !(Maybe (Textual Int64))
+    , _odObject :: !Text
+    , _odProvisionalUserProject :: !(Maybe Text)
+    , _odGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -103,6 +106,8 @@ data ObjectsDelete =
 --
 -- * 'odObject'
 --
+-- * 'odProvisionalUserProject'
+--
 -- * 'odGeneration'
 objectsDelete
     :: Text -- ^ 'odBucket'
@@ -117,6 +122,7 @@ objectsDelete pOdBucket_ pOdObject_ =
     , _odUserProject = Nothing
     , _odIfMetagenerationNotMatch = Nothing
     , _odObject = pOdObject_
+    , _odProvisionalUserProject = Nothing
     , _odGeneration = Nothing
     }
 
@@ -172,6 +178,13 @@ odIfMetagenerationNotMatch
 odObject :: Lens' ObjectsDelete Text
 odObject = lens _odObject (\ s a -> s{_odObject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+odProvisionalUserProject :: Lens' ObjectsDelete (Maybe Text)
+odProvisionalUserProject
+  = lens _odProvisionalUserProject
+      (\ s a -> s{_odProvisionalUserProject = a})
+
 -- | If present, permanently deletes a specific revision of this object (as
 -- opposed to the latest version, the default).
 odGeneration :: Lens' ObjectsDelete (Maybe Int64)
@@ -191,6 +204,7 @@ instance GoogleRequest ObjectsDelete where
               _odIfGenerationMatch
               _odUserProject
               _odIfMetagenerationNotMatch
+              _odProvisionalUserProject
               _odGeneration
               (Just AltJSON)
               storageService

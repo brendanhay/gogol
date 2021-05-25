@@ -47,8 +47,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
     , argMaxResults
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.reports.generate@ method which the
 -- 'AccountsReportsGenerate' request conforms to.
@@ -93,14 +93,14 @@ type AccountsReportsGenerateResource =
 -- /See:/ 'accountsReportsGenerate' smart constructor.
 data AccountsReportsGenerate =
   AccountsReportsGenerate'
-    { _argDimension  :: !(Maybe [Text])
-    , _argLocale     :: !(Maybe Text)
-    , _argEndDate    :: !Text
-    , _argStartDate  :: !Text
-    , _argAccountId  :: !Text
-    , _argMetric     :: !(Maybe [Text])
-    , _argSort       :: !(Maybe [Text])
-    , _argFilter     :: !(Maybe [Text])
+    { _argDimension :: !(Maybe [Text])
+    , _argLocale :: !(Maybe Text)
+    , _argEndDate :: !Text
+    , _argStartDate :: !Text
+    , _argAccountId :: !Text
+    , _argMetric :: !(Maybe [Text])
+    , _argSort :: !(Maybe [Text])
+    , _argFilter :: !(Maybe [Text])
     , _argStartIndex :: !(Maybe (Textual Word32))
     , _argMaxResults :: !(Maybe (Textual Word32))
     }

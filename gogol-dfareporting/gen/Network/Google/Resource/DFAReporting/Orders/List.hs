@@ -23,7 +23,7 @@
 -- Retrieves a list of orders, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.orders.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.orders.list@.
 module Network.Google.Resource.DFAReporting.Orders.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.Orders.List
     , OrdersList
 
     -- * Request Lenses
+    , olXgafv
+    , olUploadProtocol
+    , olAccessToken
     , olSearchString
+    , olUploadType
     , olIds
     , olProFileId
     , olSortOrder
@@ -43,30 +47,37 @@ module Network.Google.Resource.DFAReporting.Orders.List
     , olSortField
     , olSiteId
     , olMaxResults
+    , olCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.orders.list@ method which the
 -- 'OrdersList' request conforms to.
 type OrdersListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
                Capture "projectId" (Textual Int64) :>
                  "orders" :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "sortOrder" OrdersListSortOrder :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" OrdersListSortField :>
-                             QueryParams "siteId" (Textual Int64) :>
-                               QueryParam "maxResults" (Textual Int32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] OrdersListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "sortOrder" OrdersListSortOrder :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField" OrdersListSortField :>
+                                     QueryParams "siteId" (Textual Int64) :>
+                                       QueryParam "maxResults" (Textual Int32)
+                                         :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] OrdersListResponse
 
 -- | Retrieves a list of orders, possibly filtered. This method supports
 -- paging.
@@ -74,15 +85,20 @@ type OrdersListResource =
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList =
   OrdersList'
-    { _olSearchString :: !(Maybe Text)
-    , _olIds          :: !(Maybe [Textual Int64])
-    , _olProFileId    :: !(Textual Int64)
-    , _olSortOrder    :: !OrdersListSortOrder
-    , _olPageToken    :: !(Maybe Text)
-    , _olProjectId    :: !(Textual Int64)
-    , _olSortField    :: !OrdersListSortField
-    , _olSiteId       :: !(Maybe [Textual Int64])
-    , _olMaxResults   :: !(Textual Int32)
+    { _olXgafv :: !(Maybe Xgafv)
+    , _olUploadProtocol :: !(Maybe Text)
+    , _olAccessToken :: !(Maybe Text)
+    , _olSearchString :: !(Maybe Text)
+    , _olUploadType :: !(Maybe Text)
+    , _olIds :: !(Maybe [Textual Int64])
+    , _olProFileId :: !(Textual Int64)
+    , _olSortOrder :: !OrdersListSortOrder
+    , _olPageToken :: !(Maybe Text)
+    , _olProjectId :: !(Textual Int64)
+    , _olSortField :: !OrdersListSortField
+    , _olSiteId :: !(Maybe [Textual Int64])
+    , _olMaxResults :: !(Textual Int32)
+    , _olCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,7 +107,15 @@ data OrdersList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'olXgafv'
+--
+-- * 'olUploadProtocol'
+--
+-- * 'olAccessToken'
+--
 -- * 'olSearchString'
+--
+-- * 'olUploadType'
 --
 -- * 'olIds'
 --
@@ -108,13 +132,19 @@ data OrdersList =
 -- * 'olSiteId'
 --
 -- * 'olMaxResults'
+--
+-- * 'olCallback'
 ordersList
     :: Int64 -- ^ 'olProFileId'
     -> Int64 -- ^ 'olProjectId'
     -> OrdersList
 ordersList pOlProFileId_ pOlProjectId_ =
   OrdersList'
-    { _olSearchString = Nothing
+    { _olXgafv = Nothing
+    , _olUploadProtocol = Nothing
+    , _olAccessToken = Nothing
+    , _olSearchString = Nothing
+    , _olUploadType = Nothing
     , _olIds = Nothing
     , _olProFileId = _Coerce # pOlProFileId_
     , _olSortOrder = OLSOAscending
@@ -123,8 +153,25 @@ ordersList pOlProFileId_ pOlProjectId_ =
     , _olSortField = OLSFID
     , _olSiteId = Nothing
     , _olMaxResults = 1000
+    , _olCallback = Nothing
     }
 
+
+-- | V1 error format.
+olXgafv :: Lens' OrdersList (Maybe Xgafv)
+olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+olUploadProtocol :: Lens' OrdersList (Maybe Text)
+olUploadProtocol
+  = lens _olUploadProtocol
+      (\ s a -> s{_olUploadProtocol = a})
+
+-- | OAuth access token.
+olAccessToken :: Lens' OrdersList (Maybe Text)
+olAccessToken
+  = lens _olAccessToken
+      (\ s a -> s{_olAccessToken = a})
 
 -- | Allows searching for orders by name or ID. Wildcards (*) are allowed.
 -- For example, \"order*2015\" will return orders with names like \"order
@@ -136,6 +183,11 @@ olSearchString :: Lens' OrdersList (Maybe Text)
 olSearchString
   = lens _olSearchString
       (\ s a -> s{_olSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+olUploadType :: Lens' OrdersList (Maybe Text)
+olUploadType
+  = lens _olUploadType (\ s a -> s{_olUploadType = a})
 
 -- | Select only orders with these IDs.
 olIds :: Lens' OrdersList [Int64]
@@ -183,18 +235,28 @@ olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
       . _Coerce
 
+-- | JSONP
+olCallback :: Lens' OrdersList (Maybe Text)
+olCallback
+  = lens _olCallback (\ s a -> s{_olCallback = a})
+
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse
         type Scopes OrdersList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OrdersList'{..}
-          = go _olProFileId _olProjectId _olSearchString
+          = go _olProFileId _olProjectId _olXgafv
+              _olUploadProtocol
+              _olAccessToken
+              _olSearchString
+              _olUploadType
               (_olIds ^. _Default)
               (Just _olSortOrder)
               _olPageToken
               (Just _olSortField)
               (_olSiteId ^. _Default)
               (Just _olMaxResults)
+              _olCallback
               (Just AltJSON)
               dFAReportingService
           where go

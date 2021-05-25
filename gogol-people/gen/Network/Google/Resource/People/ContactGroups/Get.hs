@@ -40,11 +40,12 @@ module Network.Google.Resource.People.ContactGroups.Get
     , cggResourceName
     , cggAccessToken
     , cggUploadType
+    , cggGroupFields
     , cggCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.contactGroups.get@ method which the
 -- 'ContactGroupsGet' request conforms to.
@@ -56,8 +57,9 @@ type ContactGroupsGetResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] ContactGroup
+                   QueryParam "groupFields" GFieldMask :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ContactGroup
 
 -- | Get a specific contact group owned by the authenticated user by
 -- specifying a contact group resource name.
@@ -65,13 +67,14 @@ type ContactGroupsGetResource =
 -- /See:/ 'contactGroupsGet' smart constructor.
 data ContactGroupsGet =
   ContactGroupsGet'
-    { _cggXgafv          :: !(Maybe Xgafv)
-    , _cggMaxMembers     :: !(Maybe (Textual Int32))
+    { _cggXgafv :: !(Maybe Xgafv)
+    , _cggMaxMembers :: !(Maybe (Textual Int32))
     , _cggUploadProtocol :: !(Maybe Text)
-    , _cggResourceName   :: !Text
-    , _cggAccessToken    :: !(Maybe Text)
-    , _cggUploadType     :: !(Maybe Text)
-    , _cggCallback       :: !(Maybe Text)
+    , _cggResourceName :: !Text
+    , _cggAccessToken :: !(Maybe Text)
+    , _cggUploadType :: !(Maybe Text)
+    , _cggGroupFields :: !(Maybe GFieldMask)
+    , _cggCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,6 +95,8 @@ data ContactGroupsGet =
 --
 -- * 'cggUploadType'
 --
+-- * 'cggGroupFields'
+--
 -- * 'cggCallback'
 contactGroupsGet
     :: Text -- ^ 'cggResourceName'
@@ -104,6 +109,7 @@ contactGroupsGet pCggResourceName_ =
     , _cggResourceName = pCggResourceName_
     , _cggAccessToken = Nothing
     , _cggUploadType = Nothing
+    , _cggGroupFields = Nothing
     , _cggCallback = Nothing
     }
 
@@ -112,7 +118,8 @@ contactGroupsGet pCggResourceName_ =
 cggXgafv :: Lens' ContactGroupsGet (Maybe Xgafv)
 cggXgafv = lens _cggXgafv (\ s a -> s{_cggXgafv = a})
 
--- | Specifies the maximum number of members to return.
+-- | Optional. Specifies the maximum number of members to return. Defaults to
+-- 0 if not set, which will return zero members.
 cggMaxMembers :: Lens' ContactGroupsGet (Maybe Int32)
 cggMaxMembers
   = lens _cggMaxMembers
@@ -125,7 +132,7 @@ cggUploadProtocol
   = lens _cggUploadProtocol
       (\ s a -> s{_cggUploadProtocol = a})
 
--- | The resource name of the contact group to get.
+-- | Required. The resource name of the contact group to get.
 cggResourceName :: Lens' ContactGroupsGet Text
 cggResourceName
   = lens _cggResourceName
@@ -143,6 +150,15 @@ cggUploadType
   = lens _cggUploadType
       (\ s a -> s{_cggUploadType = a})
 
+-- | Optional. A field mask to restrict which fields on the group are
+-- returned. Defaults to \`metadata\`, \`groupType\`, \`memberCount\`, and
+-- \`name\` if not set or set to empty. Valid fields are: * clientData *
+-- groupType * memberCount * metadata * name
+cggGroupFields :: Lens' ContactGroupsGet (Maybe GFieldMask)
+cggGroupFields
+  = lens _cggGroupFields
+      (\ s a -> s{_cggGroupFields = a})
+
 -- | JSONP
 cggCallback :: Lens' ContactGroupsGet (Maybe Text)
 cggCallback
@@ -158,6 +174,7 @@ instance GoogleRequest ContactGroupsGet where
               _cggUploadProtocol
               _cggAccessToken
               _cggUploadType
+              _cggGroupFields
               _cggCallback
               (Just AltJSON)
               peopleService

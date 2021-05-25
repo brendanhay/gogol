@@ -42,8 +42,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Get
     , pidsgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.get@ method which the
 -- 'ProjectsInstancesDatabasesSessionsGet' request conforms to.
@@ -63,12 +63,12 @@ type ProjectsInstancesDatabasesSessionsGetResource =
 -- /See:/ 'projectsInstancesDatabasesSessionsGet' smart constructor.
 data ProjectsInstancesDatabasesSessionsGet =
   ProjectsInstancesDatabasesSessionsGet'
-    { _pidsgXgafv          :: !(Maybe Xgafv)
+    { _pidsgXgafv :: !(Maybe Xgafv)
     , _pidsgUploadProtocol :: !(Maybe Text)
-    , _pidsgAccessToken    :: !(Maybe Text)
-    , _pidsgUploadType     :: !(Maybe Text)
-    , _pidsgName           :: !Text
-    , _pidsgCallback       :: !(Maybe Text)
+    , _pidsgAccessToken :: !(Maybe Text)
+    , _pidsgUploadType :: !(Maybe Text)
+    , _pidsgName :: !Text
+    , _pidsgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

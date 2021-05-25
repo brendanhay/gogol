@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the track configurations for this edit.
+-- Lists all tracks.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.list@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.tracks.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
     , EditsTracksList
 
     -- * Request Lenses
+    , etlXgafv
+    , etlUploadProtocol
     , etlPackageName
+    , etlAccessToken
+    , etlUploadType
     , etlEditId
+    , etlCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.tracks.list@ method which the
 -- 'EditsTracksList' request conforms to.
@@ -50,16 +55,26 @@ type EditsTracksListResource =
              "edits" :>
                Capture "editId" Text :>
                  "tracks" :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] TracksListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] TracksListResponse
 
--- | Lists all the track configurations for this edit.
+-- | Lists all tracks.
 --
 -- /See:/ 'editsTracksList' smart constructor.
 data EditsTracksList =
   EditsTracksList'
-    { _etlPackageName :: !Text
-    , _etlEditId      :: !Text
+    { _etlXgafv :: !(Maybe Xgafv)
+    , _etlUploadProtocol :: !(Maybe Text)
+    , _etlPackageName :: !Text
+    , _etlAccessToken :: !(Maybe Text)
+    , _etlUploadType :: !(Maybe Text)
+    , _etlEditId :: !Text
+    , _etlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,36 +83,84 @@ data EditsTracksList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'etlXgafv'
+--
+-- * 'etlUploadProtocol'
+--
 -- * 'etlPackageName'
 --
+-- * 'etlAccessToken'
+--
+-- * 'etlUploadType'
+--
 -- * 'etlEditId'
+--
+-- * 'etlCallback'
 editsTracksList
     :: Text -- ^ 'etlPackageName'
     -> Text -- ^ 'etlEditId'
     -> EditsTracksList
 editsTracksList pEtlPackageName_ pEtlEditId_ =
   EditsTracksList'
-    {_etlPackageName = pEtlPackageName_, _etlEditId = pEtlEditId_}
+    { _etlXgafv = Nothing
+    , _etlUploadProtocol = Nothing
+    , _etlPackageName = pEtlPackageName_
+    , _etlAccessToken = Nothing
+    , _etlUploadType = Nothing
+    , _etlEditId = pEtlEditId_
+    , _etlCallback = Nothing
+    }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+etlXgafv :: Lens' EditsTracksList (Maybe Xgafv)
+etlXgafv = lens _etlXgafv (\ s a -> s{_etlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+etlUploadProtocol :: Lens' EditsTracksList (Maybe Text)
+etlUploadProtocol
+  = lens _etlUploadProtocol
+      (\ s a -> s{_etlUploadProtocol = a})
+
+-- | Package name of the app.
 etlPackageName :: Lens' EditsTracksList Text
 etlPackageName
   = lens _etlPackageName
       (\ s a -> s{_etlPackageName = a})
 
--- | Unique identifier for this edit.
+-- | OAuth access token.
+etlAccessToken :: Lens' EditsTracksList (Maybe Text)
+etlAccessToken
+  = lens _etlAccessToken
+      (\ s a -> s{_etlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+etlUploadType :: Lens' EditsTracksList (Maybe Text)
+etlUploadType
+  = lens _etlUploadType
+      (\ s a -> s{_etlUploadType = a})
+
+-- | Identifier of the edit.
 etlEditId :: Lens' EditsTracksList Text
 etlEditId
   = lens _etlEditId (\ s a -> s{_etlEditId = a})
+
+-- | JSONP
+etlCallback :: Lens' EditsTracksList (Maybe Text)
+etlCallback
+  = lens _etlCallback (\ s a -> s{_etlCallback = a})
 
 instance GoogleRequest EditsTracksList where
         type Rs EditsTracksList = TracksListResponse
         type Scopes EditsTracksList =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsTracksList'{..}
-          = go _etlPackageName _etlEditId (Just AltJSON)
+          = go _etlPackageName _etlEditId _etlXgafv
+              _etlUploadProtocol
+              _etlAccessToken
+              _etlUploadType
+              _etlCallback
+              (Just AltJSON)
               androidPublisherService
           where go
                   = buildClient

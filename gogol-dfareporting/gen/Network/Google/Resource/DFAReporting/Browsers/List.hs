@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of browsers.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.browsers.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.browsers.list@.
 module Network.Google.Resource.DFAReporting.Browsers.List
     (
     -- * REST Resource
@@ -33,29 +33,44 @@ module Network.Google.Resource.DFAReporting.Browsers.List
     , BrowsersList
 
     -- * Request Lenses
+    , blXgafv
+    , blUploadProtocol
+    , blAccessToken
+    , blUploadType
     , blProFileId
+    , blCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.browsers.list@ method which the
 -- 'BrowsersList' request conforms to.
 type BrowsersListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "browsers" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] BrowsersListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] BrowsersListResponse
 
 -- | Retrieves a list of browsers.
 --
 -- /See:/ 'browsersList' smart constructor.
-newtype BrowsersList =
+data BrowsersList =
   BrowsersList'
-    { _blProFileId :: Textual Int64
+    { _blXgafv :: !(Maybe Xgafv)
+    , _blUploadProtocol :: !(Maybe Text)
+    , _blAccessToken :: !(Maybe Text)
+    , _blUploadType :: !(Maybe Text)
+    , _blProFileId :: !(Textual Int64)
+    , _blCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,13 +79,51 @@ newtype BrowsersList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'blXgafv'
+--
+-- * 'blUploadProtocol'
+--
+-- * 'blAccessToken'
+--
+-- * 'blUploadType'
+--
 -- * 'blProFileId'
+--
+-- * 'blCallback'
 browsersList
     :: Int64 -- ^ 'blProFileId'
     -> BrowsersList
 browsersList pBlProFileId_ =
-  BrowsersList' {_blProFileId = _Coerce # pBlProFileId_}
+  BrowsersList'
+    { _blXgafv = Nothing
+    , _blUploadProtocol = Nothing
+    , _blAccessToken = Nothing
+    , _blUploadType = Nothing
+    , _blProFileId = _Coerce # pBlProFileId_
+    , _blCallback = Nothing
+    }
 
+
+-- | V1 error format.
+blXgafv :: Lens' BrowsersList (Maybe Xgafv)
+blXgafv = lens _blXgafv (\ s a -> s{_blXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+blUploadProtocol :: Lens' BrowsersList (Maybe Text)
+blUploadProtocol
+  = lens _blUploadProtocol
+      (\ s a -> s{_blUploadProtocol = a})
+
+-- | OAuth access token.
+blAccessToken :: Lens' BrowsersList (Maybe Text)
+blAccessToken
+  = lens _blAccessToken
+      (\ s a -> s{_blAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+blUploadType :: Lens' BrowsersList (Maybe Text)
+blUploadType
+  = lens _blUploadType (\ s a -> s{_blUploadType = a})
 
 -- | User profile ID associated with this request.
 blProFileId :: Lens' BrowsersList Int64
@@ -78,12 +131,22 @@ blProFileId
   = lens _blProFileId (\ s a -> s{_blProFileId = a}) .
       _Coerce
 
+-- | JSONP
+blCallback :: Lens' BrowsersList (Maybe Text)
+blCallback
+  = lens _blCallback (\ s a -> s{_blCallback = a})
+
 instance GoogleRequest BrowsersList where
         type Rs BrowsersList = BrowsersListResponse
         type Scopes BrowsersList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient BrowsersList'{..}
-          = go _blProFileId (Just AltJSON) dFAReportingService
+          = go _blProFileId _blXgafv _blUploadProtocol
+              _blAccessToken
+              _blUploadType
+              _blCallback
+              (Just AltJSON)
+              dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy BrowsersListResource)
                       mempty

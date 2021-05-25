@@ -52,8 +52,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
     , igmaiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.abandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances' request conforms to.
@@ -90,11 +90,11 @@ type InstanceGroupManagersAbandonInstancesResource =
 -- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
 data InstanceGroupManagersAbandonInstances =
   InstanceGroupManagersAbandonInstances'
-    { _igmaiRequestId            :: !(Maybe Text)
-    , _igmaiProject              :: !Text
+    { _igmaiRequestId :: !(Maybe Text)
+    , _igmaiProject :: !Text
     , _igmaiInstanceGroupManager :: !Text
-    , _igmaiZone                 :: !Text
-    , _igmaiPayload              :: !InstanceGroupManagersAbandonInstancesRequest
+    , _igmaiZone :: !Text
+    , _igmaiPayload :: !InstanceGroupManagersAbandonInstancesRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

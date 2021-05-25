@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -56,6 +56,9 @@ module Network.Google.AppsTasks.Types
     , tasUpdated
     , tasTitle
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * Task
     , Task
     , task
@@ -76,15 +79,15 @@ module Network.Google.AppsTasks.Types
     , ttPosition
     ) where
 
-import           Network.Google.AppsTasks.Types.Product
-import           Network.Google.AppsTasks.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types.Product
+import Network.Google.AppsTasks.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 appsTasksService :: ServiceConfig
 appsTasksService
   = defaultService (ServiceId "tasks:v1")
-      "www.googleapis.com"
+      "tasks.googleapis.com"
 
 -- | View your tasks
 tasksReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]

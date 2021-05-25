@@ -22,7 +22,7 @@
 --
 -- Gets a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.get@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Trigger
     , AccountsContainersWorkspacesTriggersGet
 
     -- * Request Lenses
-    , accPath
+    , acwtgcXgafv
+    , acwtgcUploadProtocol
+    , acwtgcPath
+    , acwtgcAccessToken
+    , acwtgcUploadType
+    , acwtgcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.triggers.get@ method which the
 -- 'AccountsContainersWorkspacesTriggersGet' request conforms to.
@@ -46,14 +51,24 @@ type AccountsContainersWorkspacesTriggersGetResource
      "tagmanager" :>
        "v2" :>
          Capture "path" Text :>
-           QueryParam "alt" AltJSON :> Get '[JSON] Trigger
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Trigger
 
 -- | Gets a GTM Trigger.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersGet' smart constructor.
-newtype AccountsContainersWorkspacesTriggersGet =
+data AccountsContainersWorkspacesTriggersGet =
   AccountsContainersWorkspacesTriggersGet'
-    { _accPath :: Text
+    { _acwtgcXgafv :: !(Maybe Xgafv)
+    , _acwtgcUploadProtocol :: !(Maybe Text)
+    , _acwtgcPath :: !Text
+    , _acwtgcAccessToken :: !(Maybe Text)
+    , _acwtgcUploadType :: !(Maybe Text)
+    , _acwtgcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,18 +77,65 @@ newtype AccountsContainersWorkspacesTriggersGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accPath'
+-- * 'acwtgcXgafv'
+--
+-- * 'acwtgcUploadProtocol'
+--
+-- * 'acwtgcPath'
+--
+-- * 'acwtgcAccessToken'
+--
+-- * 'acwtgcUploadType'
+--
+-- * 'acwtgcCallback'
 accountsContainersWorkspacesTriggersGet
-    :: Text -- ^ 'accPath'
+    :: Text -- ^ 'acwtgcPath'
     -> AccountsContainersWorkspacesTriggersGet
-accountsContainersWorkspacesTriggersGet pAccPath_ =
-  AccountsContainersWorkspacesTriggersGet' {_accPath = pAccPath_}
+accountsContainersWorkspacesTriggersGet pAcwtgcPath_ =
+  AccountsContainersWorkspacesTriggersGet'
+    { _acwtgcXgafv = Nothing
+    , _acwtgcUploadProtocol = Nothing
+    , _acwtgcPath = pAcwtgcPath_
+    , _acwtgcAccessToken = Nothing
+    , _acwtgcUploadType = Nothing
+    , _acwtgcCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acwtgcXgafv :: Lens' AccountsContainersWorkspacesTriggersGet (Maybe Xgafv)
+acwtgcXgafv
+  = lens _acwtgcXgafv (\ s a -> s{_acwtgcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwtgcUploadProtocol :: Lens' AccountsContainersWorkspacesTriggersGet (Maybe Text)
+acwtgcUploadProtocol
+  = lens _acwtgcUploadProtocol
+      (\ s a -> s{_acwtgcUploadProtocol = a})
 
 -- | GTM Trigger\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/triggers\/{trigger_id}
-accPath :: Lens' AccountsContainersWorkspacesTriggersGet Text
-accPath = lens _accPath (\ s a -> s{_accPath = a})
+acwtgcPath :: Lens' AccountsContainersWorkspacesTriggersGet Text
+acwtgcPath
+  = lens _acwtgcPath (\ s a -> s{_acwtgcPath = a})
+
+-- | OAuth access token.
+acwtgcAccessToken :: Lens' AccountsContainersWorkspacesTriggersGet (Maybe Text)
+acwtgcAccessToken
+  = lens _acwtgcAccessToken
+      (\ s a -> s{_acwtgcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwtgcUploadType :: Lens' AccountsContainersWorkspacesTriggersGet (Maybe Text)
+acwtgcUploadType
+  = lens _acwtgcUploadType
+      (\ s a -> s{_acwtgcUploadType = a})
+
+-- | JSONP
+acwtgcCallback :: Lens' AccountsContainersWorkspacesTriggersGet (Maybe Text)
+acwtgcCallback
+  = lens _acwtgcCallback
+      (\ s a -> s{_acwtgcCallback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesTriggersGet
@@ -85,7 +147,12 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient
           AccountsContainersWorkspacesTriggersGet'{..}
-          = go _accPath (Just AltJSON) tagManagerService
+          = go _acwtgcPath _acwtgcXgafv _acwtgcUploadProtocol
+              _acwtgcAccessToken
+              _acwtgcUploadType
+              _acwtgcCallback
+              (Just AltJSON)
+              tagManagerService
           where go
                   = buildClient
                       (Proxy ::

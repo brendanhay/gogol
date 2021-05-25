@@ -26,7 +26,11 @@
 -- concurrent transactions. However, it can also happen for a variety of
 -- other reasons. If \`Commit\` returns \`ABORTED\`, the caller should
 -- re-attempt the transaction from the beginning, re-using the same
--- session.
+-- session. On very rare occasions, \`Commit\` might return \`UNKNOWN\`.
+-- This can happen, for example, if the client job experiences a 1+ hour
+-- networking failure. At that point, Cloud Spanner has lost track of the
+-- transaction outcome and we recommend that you perform another read from
+-- the database to see the state of things as they are now.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.sessions.commit@.
 module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Commit
@@ -48,8 +52,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Com
     , pidscCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.commit@ method which the
 -- 'ProjectsInstancesDatabasesSessionsCommit' request conforms to.
@@ -72,18 +76,22 @@ type ProjectsInstancesDatabasesSessionsCommitResource
 -- concurrent transactions. However, it can also happen for a variety of
 -- other reasons. If \`Commit\` returns \`ABORTED\`, the caller should
 -- re-attempt the transaction from the beginning, re-using the same
--- session.
+-- session. On very rare occasions, \`Commit\` might return \`UNKNOWN\`.
+-- This can happen, for example, if the client job experiences a 1+ hour
+-- networking failure. At that point, Cloud Spanner has lost track of the
+-- transaction outcome and we recommend that you perform another read from
+-- the database to see the state of things as they are now.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsCommit' smart constructor.
 data ProjectsInstancesDatabasesSessionsCommit =
   ProjectsInstancesDatabasesSessionsCommit'
-    { _pidscXgafv          :: !(Maybe Xgafv)
+    { _pidscXgafv :: !(Maybe Xgafv)
     , _pidscUploadProtocol :: !(Maybe Text)
-    , _pidscAccessToken    :: !(Maybe Text)
-    , _pidscUploadType     :: !(Maybe Text)
-    , _pidscPayload        :: !CommitRequest
-    , _pidscSession        :: !Text
-    , _pidscCallback       :: !(Maybe Text)
+    , _pidscAccessToken :: !(Maybe Text)
+    , _pidscUploadType :: !(Maybe Text)
+    , _pidscPayload :: !CommitRequest
+    , _pidscSession :: !Text
+    , _pidscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

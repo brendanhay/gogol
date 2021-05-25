@@ -24,7 +24,7 @@
 -- authenticated player. This method is only accessible to whitelisted
 -- tester accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.scores.reset@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.scores.reset@.
 module Network.Google.Resource.GamesManagement.Scores.Reset
     (
     -- * REST Resource
@@ -35,11 +35,16 @@ module Network.Google.Resource.GamesManagement.Scores.Reset
     , ScoresReset
 
     -- * Request Lenses
+    , srXgafv
+    , srUploadProtocol
+    , srAccessToken
+    , srUploadType
     , srLeaderboardId
+    , srCallback
     ) where
 
-import           Network.Google.GamesManagement.Types
-import           Network.Google.Prelude
+import Network.Google.GamesManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.scores.reset@ method which the
 -- 'ScoresReset' request conforms to.
@@ -50,17 +55,27 @@ type ScoresResetResource =
            Capture "leaderboardId" Text :>
              "scores" :>
                "reset" :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] PlayerScoreResetResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Post '[JSON] PlayerScoreResetResponse
 
 -- | Resets scores for the leaderboard with the given ID for the currently
 -- authenticated player. This method is only accessible to whitelisted
 -- tester accounts for your application.
 --
 -- /See:/ 'scoresReset' smart constructor.
-newtype ScoresReset =
+data ScoresReset =
   ScoresReset'
-    { _srLeaderboardId :: Text
+    { _srXgafv :: !(Maybe Xgafv)
+    , _srUploadProtocol :: !(Maybe Text)
+    , _srAccessToken :: !(Maybe Text)
+    , _srUploadType :: !(Maybe Text)
+    , _srLeaderboardId :: !Text
+    , _srCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,13 +84,51 @@ newtype ScoresReset =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'srXgafv'
+--
+-- * 'srUploadProtocol'
+--
+-- * 'srAccessToken'
+--
+-- * 'srUploadType'
+--
 -- * 'srLeaderboardId'
+--
+-- * 'srCallback'
 scoresReset
     :: Text -- ^ 'srLeaderboardId'
     -> ScoresReset
 scoresReset pSrLeaderboardId_ =
-  ScoresReset' {_srLeaderboardId = pSrLeaderboardId_}
+  ScoresReset'
+    { _srXgafv = Nothing
+    , _srUploadProtocol = Nothing
+    , _srAccessToken = Nothing
+    , _srUploadType = Nothing
+    , _srLeaderboardId = pSrLeaderboardId_
+    , _srCallback = Nothing
+    }
 
+
+-- | V1 error format.
+srXgafv :: Lens' ScoresReset (Maybe Xgafv)
+srXgafv = lens _srXgafv (\ s a -> s{_srXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+srUploadProtocol :: Lens' ScoresReset (Maybe Text)
+srUploadProtocol
+  = lens _srUploadProtocol
+      (\ s a -> s{_srUploadProtocol = a})
+
+-- | OAuth access token.
+srAccessToken :: Lens' ScoresReset (Maybe Text)
+srAccessToken
+  = lens _srAccessToken
+      (\ s a -> s{_srAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+srUploadType :: Lens' ScoresReset (Maybe Text)
+srUploadType
+  = lens _srUploadType (\ s a -> s{_srUploadType = a})
 
 -- | The ID of the leaderboard.
 srLeaderboardId :: Lens' ScoresReset Text
@@ -83,12 +136,21 @@ srLeaderboardId
   = lens _srLeaderboardId
       (\ s a -> s{_srLeaderboardId = a})
 
+-- | JSONP
+srCallback :: Lens' ScoresReset (Maybe Text)
+srCallback
+  = lens _srCallback (\ s a -> s{_srCallback = a})
+
 instance GoogleRequest ScoresReset where
         type Rs ScoresReset = PlayerScoreResetResponse
         type Scopes ScoresReset =
              '["https://www.googleapis.com/auth/games"]
         requestClient ScoresReset'{..}
-          = go _srLeaderboardId (Just AltJSON)
+          = go _srLeaderboardId _srXgafv _srUploadProtocol
+              _srAccessToken
+              _srUploadType
+              _srCallback
+              (Just AltJSON)
               gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy ScoresResetResource)

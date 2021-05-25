@@ -23,7 +23,7 @@
 -- Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.patch@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.patch@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
     (
     -- * REST Resource
@@ -38,6 +38,7 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcpUploadProtocol
     , pltcpUpdateMask
     , pltcpAccessToken
+    , pltcpServiceAccountName
     , pltcpUploadType
     , pltcpAuthorizationCode
     , pltcpPayload
@@ -46,8 +47,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcpCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.patch@ method which the
 -- 'ProjectsLocationsTransferConfigsPatch' request conforms to.
@@ -58,13 +59,14 @@ type ProjectsLocationsTransferConfigsPatchResource =
            QueryParam "upload_protocol" Text :>
              QueryParam "updateMask" GFieldMask :>
                QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "authorizationCode" Text :>
-                     QueryParam "versionInfo" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] TransferConfig :>
-                             Patch '[JSON] TransferConfig
+                 QueryParam "serviceAccountName" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "authorizationCode" Text :>
+                       QueryParam "versionInfo" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] TransferConfig :>
+                               Patch '[JSON] TransferConfig
 
 -- | Updates a data transfer configuration. All fields must be set, even if
 -- they are not updated.
@@ -72,16 +74,17 @@ type ProjectsLocationsTransferConfigsPatchResource =
 -- /See:/ 'projectsLocationsTransferConfigsPatch' smart constructor.
 data ProjectsLocationsTransferConfigsPatch =
   ProjectsLocationsTransferConfigsPatch'
-    { _pltcpXgafv             :: !(Maybe Xgafv)
-    , _pltcpUploadProtocol    :: !(Maybe Text)
-    , _pltcpUpdateMask        :: !(Maybe GFieldMask)
-    , _pltcpAccessToken       :: !(Maybe Text)
-    , _pltcpUploadType        :: !(Maybe Text)
+    { _pltcpXgafv :: !(Maybe Xgafv)
+    , _pltcpUploadProtocol :: !(Maybe Text)
+    , _pltcpUpdateMask :: !(Maybe GFieldMask)
+    , _pltcpAccessToken :: !(Maybe Text)
+    , _pltcpServiceAccountName :: !(Maybe Text)
+    , _pltcpUploadType :: !(Maybe Text)
     , _pltcpAuthorizationCode :: !(Maybe Text)
-    , _pltcpPayload           :: !TransferConfig
-    , _pltcpVersionInfo       :: !(Maybe Text)
-    , _pltcpName              :: !Text
-    , _pltcpCallback          :: !(Maybe Text)
+    , _pltcpPayload :: !TransferConfig
+    , _pltcpVersionInfo :: !(Maybe Text)
+    , _pltcpName :: !Text
+    , _pltcpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -97,6 +100,8 @@ data ProjectsLocationsTransferConfigsPatch =
 -- * 'pltcpUpdateMask'
 --
 -- * 'pltcpAccessToken'
+--
+-- * 'pltcpServiceAccountName'
 --
 -- * 'pltcpUploadType'
 --
@@ -119,6 +124,7 @@ projectsLocationsTransferConfigsPatch pPltcpPayload_ pPltcpName_ =
     , _pltcpUploadProtocol = Nothing
     , _pltcpUpdateMask = Nothing
     , _pltcpAccessToken = Nothing
+    , _pltcpServiceAccountName = Nothing
     , _pltcpUploadType = Nothing
     , _pltcpAuthorizationCode = Nothing
     , _pltcpPayload = pPltcpPayload_
@@ -139,7 +145,7 @@ pltcpUploadProtocol
   = lens _pltcpUploadProtocol
       (\ s a -> s{_pltcpUploadProtocol = a})
 
--- | Required list of fields to be updated in this request.
+-- | Required. Required list of fields to be updated in this request.
 pltcpUpdateMask :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe GFieldMask)
 pltcpUpdateMask
   = lens _pltcpUpdateMask
@@ -150,6 +156,16 @@ pltcpAccessToken :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Text)
 pltcpAccessToken
   = lens _pltcpAccessToken
       (\ s a -> s{_pltcpAccessToken = a})
+
+-- | Optional service account name. If this field is set and
+-- \"service_account_name\" is set in update_mask, transfer config will be
+-- updated to use this service account credentials. It requires that
+-- requesting user calling this API has permissions to act as this service
+-- account.
+pltcpServiceAccountName :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Text)
+pltcpServiceAccountName
+  = lens _pltcpServiceAccountName
+      (\ s a -> s{_pltcpServiceAccountName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 pltcpUploadType :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Text)
@@ -184,7 +200,7 @@ pltcpPayload
 -- | Optional version info. If users want to find a very recent access token,
 -- that is, immediately after approving access, users have to set the
 -- version_info claim in the token request. To obtain the version_info,
--- users must use the “none+gsession” response type. which be return a
+-- users must use the \"none+gsession\" response type. which be return a
 -- version_info back in the authorization response which be be put in a JWT
 -- claim in the token request.
 pltcpVersionInfo :: Lens' ProjectsLocationsTransferConfigsPatch (Maybe Text)
@@ -193,12 +209,10 @@ pltcpVersionInfo
       (\ s a -> s{_pltcpVersionInfo = a})
 
 -- | The resource name of the transfer config. Transfer config names have the
--- form of
+-- form
 -- \`projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}\`.
--- The name is automatically generated based on the config_id specified in
--- CreateTransferConfigRequest along with project_id and region. If
--- config_id is not provided, usually a uuid, even though it is not
--- guaranteed or required, will be generated for config_id.
+-- Where \`config_id\` is usually a uuid, even though it is not guaranteed
+-- or required. The name is ignored when creating a transfer config.
 pltcpName :: Lens' ProjectsLocationsTransferConfigsPatch Text
 pltcpName
   = lens _pltcpName (\ s a -> s{_pltcpName = a})
@@ -221,6 +235,7 @@ instance GoogleRequest
           = go _pltcpName _pltcpXgafv _pltcpUploadProtocol
               _pltcpUpdateMask
               _pltcpAccessToken
+              _pltcpServiceAccountName
               _pltcpUploadType
               _pltcpAuthorizationCode
               _pltcpVersionInfo

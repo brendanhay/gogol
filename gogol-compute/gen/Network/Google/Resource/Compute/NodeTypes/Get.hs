@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.NodeTypes.Get
     , ntgNodeType
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTypes.get@ method which the
 -- 'NodeTypesGet' request conforms to.
@@ -61,8 +61,8 @@ type NodeTypesGetResource =
 -- /See:/ 'nodeTypesGet' smart constructor.
 data NodeTypesGet =
   NodeTypesGet'
-    { _ntgProject  :: !Text
-    , _ntgZone     :: !Text
+    { _ntgProject :: !Text
+    , _ntgZone :: !Text
     , _ntgNodeType :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -44,8 +44,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.Get
     , pddgCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.get@ method which the
 -- 'ProjectsDatabasesDocumentsGet' request conforms to.
@@ -67,15 +67,15 @@ type ProjectsDatabasesDocumentsGetResource =
 -- /See:/ 'projectsDatabasesDocumentsGet' smart constructor.
 data ProjectsDatabasesDocumentsGet =
   ProjectsDatabasesDocumentsGet'
-    { _pddgXgafv          :: !(Maybe Xgafv)
-    , _pddgReadTime       :: !(Maybe DateTime')
+    { _pddgXgafv :: !(Maybe Xgafv)
+    , _pddgReadTime :: !(Maybe DateTime')
     , _pddgUploadProtocol :: !(Maybe Text)
-    , _pddgAccessToken    :: !(Maybe Text)
-    , _pddgUploadType     :: !(Maybe Text)
-    , _pddgTransaction    :: !(Maybe Bytes)
-    , _pddgName           :: !Text
+    , _pddgAccessToken :: !(Maybe Text)
+    , _pddgUploadType :: !(Maybe Text)
+    , _pddgTransaction :: !(Maybe Bytes)
+    , _pddgName :: !Text
     , _pddgMaskFieldPaths :: !(Maybe [Text])
-    , _pddgCallback       :: !(Maybe Text)
+    , _pddgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,7 +124,7 @@ pddgXgafv
   = lens _pddgXgafv (\ s a -> s{_pddgXgafv = a})
 
 -- | Reads the version of the document at the given time. This may not be
--- older than 60 seconds.
+-- older than 270 seconds.
 pddgReadTime :: Lens' ProjectsDatabasesDocumentsGet (Maybe UTCTime)
 pddgReadTime
   = lens _pddgReadTime (\ s a -> s{_pddgReadTime = a})
@@ -155,7 +155,7 @@ pddgTransaction
       (\ s a -> s{_pddgTransaction = a})
       . mapping _Bytes
 
--- | The resource name of the Document to get. In the format:
+-- | Required. The resource name of the Document to get. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
 pddgName :: Lens' ProjectsDatabasesDocumentsGet Text
 pddgName = lens _pddgName (\ s a -> s{_pddgName = a})

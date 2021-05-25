@@ -23,7 +23,7 @@
 -- Updates an existing remarketing list share. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingListShares.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.remarketingListShares.patch@.
 module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     (
     -- * REST Resource
@@ -34,26 +34,36 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     , RemarketingListSharesPatch
 
     -- * Request Lenses
+    , rlspXgafv
+    , rlspUploadProtocol
+    , rlspAccessToken
+    , rlspUploadType
     , rlspProFileId
     , rlspPayload
-    , rlspRemarketingListId
+    , rlspId
+    , rlspCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingListShares.patch@ method which the
 -- 'RemarketingListSharesPatch' request conforms to.
 type RemarketingListSharesPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
-               QueryParam "remarketingListId" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] RemarketingListShare :>
-                     Patch '[JSON] RemarketingListShare
+               QueryParam "id" (Textual Int64) :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] RemarketingListShare :>
+                               Patch '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.
@@ -61,9 +71,14 @@ type RemarketingListSharesPatchResource =
 -- /See:/ 'remarketingListSharesPatch' smart constructor.
 data RemarketingListSharesPatch =
   RemarketingListSharesPatch'
-    { _rlspProFileId         :: !(Textual Int64)
-    , _rlspPayload           :: !RemarketingListShare
-    , _rlspRemarketingListId :: !(Textual Int64)
+    { _rlspXgafv :: !(Maybe Xgafv)
+    , _rlspUploadProtocol :: !(Maybe Text)
+    , _rlspAccessToken :: !(Maybe Text)
+    , _rlspUploadType :: !(Maybe Text)
+    , _rlspProFileId :: !(Textual Int64)
+    , _rlspPayload :: !RemarketingListShare
+    , _rlspId :: !(Textual Int64)
+    , _rlspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,23 +87,61 @@ data RemarketingListSharesPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rlspXgafv'
+--
+-- * 'rlspUploadProtocol'
+--
+-- * 'rlspAccessToken'
+--
+-- * 'rlspUploadType'
+--
 -- * 'rlspProFileId'
 --
 -- * 'rlspPayload'
 --
--- * 'rlspRemarketingListId'
+-- * 'rlspId'
+--
+-- * 'rlspCallback'
 remarketingListSharesPatch
     :: Int64 -- ^ 'rlspProFileId'
     -> RemarketingListShare -- ^ 'rlspPayload'
-    -> Int64 -- ^ 'rlspRemarketingListId'
+    -> Int64 -- ^ 'rlspId'
     -> RemarketingListSharesPatch
-remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
+remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspId_ =
   RemarketingListSharesPatch'
-    { _rlspProFileId = _Coerce # pRlspProFileId_
+    { _rlspXgafv = Nothing
+    , _rlspUploadProtocol = Nothing
+    , _rlspAccessToken = Nothing
+    , _rlspUploadType = Nothing
+    , _rlspProFileId = _Coerce # pRlspProFileId_
     , _rlspPayload = pRlspPayload_
-    , _rlspRemarketingListId = _Coerce # pRlspRemarketingListId_
+    , _rlspId = _Coerce # pRlspId_
+    , _rlspCallback = Nothing
     }
 
+
+-- | V1 error format.
+rlspXgafv :: Lens' RemarketingListSharesPatch (Maybe Xgafv)
+rlspXgafv
+  = lens _rlspXgafv (\ s a -> s{_rlspXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rlspUploadProtocol :: Lens' RemarketingListSharesPatch (Maybe Text)
+rlspUploadProtocol
+  = lens _rlspUploadProtocol
+      (\ s a -> s{_rlspUploadProtocol = a})
+
+-- | OAuth access token.
+rlspAccessToken :: Lens' RemarketingListSharesPatch (Maybe Text)
+rlspAccessToken
+  = lens _rlspAccessToken
+      (\ s a -> s{_rlspAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rlspUploadType :: Lens' RemarketingListSharesPatch (Maybe Text)
+rlspUploadType
+  = lens _rlspUploadType
+      (\ s a -> s{_rlspUploadType = a})
 
 -- | User profile ID associated with this request.
 rlspProFileId :: Lens' RemarketingListSharesPatch Int64
@@ -102,12 +155,15 @@ rlspPayload :: Lens' RemarketingListSharesPatch RemarketingListShare
 rlspPayload
   = lens _rlspPayload (\ s a -> s{_rlspPayload = a})
 
--- | Remarketing list ID.
-rlspRemarketingListId :: Lens' RemarketingListSharesPatch Int64
-rlspRemarketingListId
-  = lens _rlspRemarketingListId
-      (\ s a -> s{_rlspRemarketingListId = a})
-      . _Coerce
+-- | RemarketingList ID.
+rlspId :: Lens' RemarketingListSharesPatch Int64
+rlspId
+  = lens _rlspId (\ s a -> s{_rlspId = a}) . _Coerce
+
+-- | JSONP
+rlspCallback :: Lens' RemarketingListSharesPatch (Maybe Text)
+rlspCallback
+  = lens _rlspCallback (\ s a -> s{_rlspCallback = a})
 
 instance GoogleRequest RemarketingListSharesPatch
          where
@@ -116,7 +172,11 @@ instance GoogleRequest RemarketingListSharesPatch
         type Scopes RemarketingListSharesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListSharesPatch'{..}
-          = go _rlspProFileId (Just _rlspRemarketingListId)
+          = go _rlspProFileId (Just _rlspId) _rlspXgafv
+              _rlspUploadProtocol
+              _rlspAccessToken
+              _rlspUploadType
+              _rlspCallback
               (Just AltJSON)
               _rlspPayload
               dFAReportingService

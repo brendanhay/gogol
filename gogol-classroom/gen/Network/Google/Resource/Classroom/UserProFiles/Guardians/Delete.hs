@@ -53,8 +53,8 @@ module Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
     , upfgdCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.guardians.delete@ method which the
 -- 'UserProFilesGuardiansDelete' request conforms to.
@@ -87,13 +87,13 @@ type UserProFilesGuardiansDeleteResource =
 -- /See:/ 'userProFilesGuardiansDelete' smart constructor.
 data UserProFilesGuardiansDelete =
   UserProFilesGuardiansDelete'
-    { _upfgdStudentId      :: !Text
-    , _upfgdXgafv          :: !(Maybe Xgafv)
+    { _upfgdStudentId :: !Text
+    , _upfgdXgafv :: !(Maybe Xgafv)
     , _upfgdUploadProtocol :: !(Maybe Text)
-    , _upfgdAccessToken    :: !(Maybe Text)
-    , _upfgdUploadType     :: !(Maybe Text)
-    , _upfgdGuardianId     :: !Text
-    , _upfgdCallback       :: !(Maybe Text)
+    , _upfgdAccessToken :: !(Maybe Text)
+    , _upfgdUploadType :: !(Maybe Text)
+    , _upfgdGuardianId :: !Text
+    , _upfgdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

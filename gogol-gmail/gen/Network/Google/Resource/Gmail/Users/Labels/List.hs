@@ -33,11 +33,16 @@ module Network.Google.Resource.Gmail.Users.Labels.List
     , UsersLabelsList
 
     -- * Request Lenses
+    , ullXgafv
+    , ullUploadProtocol
+    , ullAccessToken
+    , ullUploadType
     , ullUserId
+    , ullCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.labels.list@ method which the
 -- 'UsersLabelsList' request conforms to.
@@ -47,15 +52,25 @@ type UsersLabelsListResource =
          "users" :>
            Capture "userId" Text :>
              "labels" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListLabelsResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListLabelsResponse
 
 -- | Lists all labels in the user\'s mailbox.
 --
 -- /See:/ 'usersLabelsList' smart constructor.
-newtype UsersLabelsList =
+data UsersLabelsList =
   UsersLabelsList'
-    { _ullUserId :: Text
+    { _ullXgafv :: !(Maybe Xgafv)
+    , _ullUploadProtocol :: !(Maybe Text)
+    , _ullAccessToken :: !(Maybe Text)
+    , _ullUploadType :: !(Maybe Text)
+    , _ullUserId :: !Text
+    , _ullCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,17 +79,62 @@ newtype UsersLabelsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ullXgafv'
+--
+-- * 'ullUploadProtocol'
+--
+-- * 'ullAccessToken'
+--
+-- * 'ullUploadType'
+--
 -- * 'ullUserId'
+--
+-- * 'ullCallback'
 usersLabelsList
     :: UsersLabelsList
-usersLabelsList = UsersLabelsList' {_ullUserId = "me"}
+usersLabelsList =
+  UsersLabelsList'
+    { _ullXgafv = Nothing
+    , _ullUploadProtocol = Nothing
+    , _ullAccessToken = Nothing
+    , _ullUploadType = Nothing
+    , _ullUserId = "me"
+    , _ullCallback = Nothing
+    }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+ullXgafv :: Lens' UsersLabelsList (Maybe Xgafv)
+ullXgafv = lens _ullXgafv (\ s a -> s{_ullXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ullUploadProtocol :: Lens' UsersLabelsList (Maybe Text)
+ullUploadProtocol
+  = lens _ullUploadProtocol
+      (\ s a -> s{_ullUploadProtocol = a})
+
+-- | OAuth access token.
+ullAccessToken :: Lens' UsersLabelsList (Maybe Text)
+ullAccessToken
+  = lens _ullAccessToken
+      (\ s a -> s{_ullAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ullUploadType :: Lens' UsersLabelsList (Maybe Text)
+ullUploadType
+  = lens _ullUploadType
+      (\ s a -> s{_ullUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 ullUserId :: Lens' UsersLabelsList Text
 ullUserId
   = lens _ullUserId (\ s a -> s{_ullUserId = a})
+
+-- | JSONP
+ullCallback :: Lens' UsersLabelsList (Maybe Text)
+ullCallback
+  = lens _ullCallback (\ s a -> s{_ullCallback = a})
 
 instance GoogleRequest UsersLabelsList where
         type Rs UsersLabelsList = ListLabelsResponse
@@ -85,7 +145,12 @@ instance GoogleRequest UsersLabelsList where
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersLabelsList'{..}
-          = go _ullUserId (Just AltJSON) gmailService
+          = go _ullUserId _ullXgafv _ullUploadProtocol
+              _ullAccessToken
+              _ullUploadType
+              _ullCallback
+              (Just AltJSON)
+              gmailService
           where go
                   = buildClient
                       (Proxy :: Proxy UsersLabelsListResource)

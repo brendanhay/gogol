@@ -22,7 +22,7 @@
 --
 -- Retrieves a paginated list of all the roles in a domain.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.list@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.roles.list@.
 module Network.Google.Resource.Directory.Roles.List
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Directory.Roles.List
     , RolesList
 
     -- * Request Lenses
+    , rlXgafv
+    , rlUploadProtocol
+    , rlAccessToken
+    , rlUploadType
     , rlCustomer
     , rlPageToken
     , rlMaxResults
+    , rlCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.list@ method which the
 -- 'RolesList' request conforms to.
@@ -50,18 +55,28 @@ type RolesListResource =
            "customer" :>
              Capture "customer" Text :>
                "roles" :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Roles
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Roles
 
 -- | Retrieves a paginated list of all the roles in a domain.
 --
 -- /See:/ 'rolesList' smart constructor.
 data RolesList =
   RolesList'
-    { _rlCustomer   :: !Text
-    , _rlPageToken  :: !(Maybe Text)
+    { _rlXgafv :: !(Maybe Xgafv)
+    , _rlUploadProtocol :: !(Maybe Text)
+    , _rlAccessToken :: !(Maybe Text)
+    , _rlUploadType :: !(Maybe Text)
+    , _rlCustomer :: !Text
+    , _rlPageToken :: !(Maybe Text)
     , _rlMaxResults :: !(Maybe (Textual Int32))
+    , _rlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,23 +85,59 @@ data RolesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rlXgafv'
+--
+-- * 'rlUploadProtocol'
+--
+-- * 'rlAccessToken'
+--
+-- * 'rlUploadType'
+--
 -- * 'rlCustomer'
 --
 -- * 'rlPageToken'
 --
 -- * 'rlMaxResults'
+--
+-- * 'rlCallback'
 rolesList
     :: Text -- ^ 'rlCustomer'
     -> RolesList
 rolesList pRlCustomer_ =
   RolesList'
-    { _rlCustomer = pRlCustomer_
+    { _rlXgafv = Nothing
+    , _rlUploadProtocol = Nothing
+    , _rlAccessToken = Nothing
+    , _rlUploadType = Nothing
+    , _rlCustomer = pRlCustomer_
     , _rlPageToken = Nothing
     , _rlMaxResults = Nothing
+    , _rlCallback = Nothing
     }
 
 
--- | Immutable ID of the G Suite account.
+-- | V1 error format.
+rlXgafv :: Lens' RolesList (Maybe Xgafv)
+rlXgafv = lens _rlXgafv (\ s a -> s{_rlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rlUploadProtocol :: Lens' RolesList (Maybe Text)
+rlUploadProtocol
+  = lens _rlUploadProtocol
+      (\ s a -> s{_rlUploadProtocol = a})
+
+-- | OAuth access token.
+rlAccessToken :: Lens' RolesList (Maybe Text)
+rlAccessToken
+  = lens _rlAccessToken
+      (\ s a -> s{_rlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rlUploadType :: Lens' RolesList (Maybe Text)
+rlUploadType
+  = lens _rlUploadType (\ s a -> s{_rlUploadType = a})
+
+-- | Immutable ID of the Google Workspace account.
 rlCustomer :: Lens' RolesList Text
 rlCustomer
   = lens _rlCustomer (\ s a -> s{_rlCustomer = a})
@@ -102,13 +153,23 @@ rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+rlCallback :: Lens' RolesList (Maybe Text)
+rlCallback
+  = lens _rlCallback (\ s a -> s{_rlCallback = a})
+
 instance GoogleRequest RolesList where
         type Rs RolesList = Roles
         type Scopes RolesList =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
         requestClient RolesList'{..}
-          = go _rlCustomer _rlPageToken _rlMaxResults
+          = go _rlCustomer _rlXgafv _rlUploadProtocol
+              _rlAccessToken
+              _rlUploadType
+              _rlPageToken
+              _rlMaxResults
+              _rlCallback
               (Just AltJSON)
               directoryService
           where go

@@ -34,6 +34,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
     , ProjectsTopicsGetIAMPolicy
 
     -- * Request Lenses
+    , ptgipOptionsRequestedPolicyVersion
     , ptgipXgafv
     , ptgipUploadProtocol
     , ptgipAccessToken
@@ -42,20 +43,23 @@ module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
     , ptgipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.getIamPolicy@ method which the
 -- 'ProjectsTopicsGetIAMPolicy' request conforms to.
 type ProjectsTopicsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -63,12 +67,13 @@ type ProjectsTopicsGetIAMPolicyResource =
 -- /See:/ 'projectsTopicsGetIAMPolicy' smart constructor.
 data ProjectsTopicsGetIAMPolicy =
   ProjectsTopicsGetIAMPolicy'
-    { _ptgipXgafv          :: !(Maybe Xgafv)
+    { _ptgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _ptgipXgafv :: !(Maybe Xgafv)
     , _ptgipUploadProtocol :: !(Maybe Text)
-    , _ptgipAccessToken    :: !(Maybe Text)
-    , _ptgipUploadType     :: !(Maybe Text)
-    , _ptgipResource       :: !Text
-    , _ptgipCallback       :: !(Maybe Text)
+    , _ptgipAccessToken :: !(Maybe Text)
+    , _ptgipUploadType :: !(Maybe Text)
+    , _ptgipResource :: !Text
+    , _ptgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,6 +81,8 @@ data ProjectsTopicsGetIAMPolicy =
 -- | Creates a value of 'ProjectsTopicsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptgipOptionsRequestedPolicyVersion'
 --
 -- * 'ptgipXgafv'
 --
@@ -93,7 +100,8 @@ projectsTopicsGetIAMPolicy
     -> ProjectsTopicsGetIAMPolicy
 projectsTopicsGetIAMPolicy pPtgipResource_ =
   ProjectsTopicsGetIAMPolicy'
-    { _ptgipXgafv = Nothing
+    { _ptgipOptionsRequestedPolicyVersion = Nothing
+    , _ptgipXgafv = Nothing
     , _ptgipUploadProtocol = Nothing
     , _ptgipAccessToken = Nothing
     , _ptgipUploadType = Nothing
@@ -101,6 +109,19 @@ projectsTopicsGetIAMPolicy pPtgipResource_ =
     , _ptgipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+ptgipOptionsRequestedPolicyVersion :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Int32)
+ptgipOptionsRequestedPolicyVersion
+  = lens _ptgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_ptgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 ptgipXgafv :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Xgafv)
@@ -145,7 +166,10 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsTopicsGetIAMPolicy'{..}
-          = go _ptgipResource _ptgipXgafv _ptgipUploadProtocol
+          = go _ptgipResource
+              _ptgipOptionsRequestedPolicyVersion
+              _ptgipXgafv
+              _ptgipUploadProtocol
               _ptgipAccessToken
               _ptgipUploadType
               _ptgipCallback

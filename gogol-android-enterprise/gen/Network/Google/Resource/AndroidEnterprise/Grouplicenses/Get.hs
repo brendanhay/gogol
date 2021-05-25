@@ -33,12 +33,17 @@ module Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
     , GrouplicensesGet
 
     -- * Request Lenses
+    , ggXgafv
+    , ggUploadProtocol
     , ggEnterpriseId
+    , ggAccessToken
+    , ggUploadType
     , ggGroupLicenseId
+    , ggCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.grouplicenses.get@ method which the
 -- 'GrouplicensesGet' request conforms to.
@@ -49,15 +54,25 @@ type GrouplicensesGetResource =
            Capture "enterpriseId" Text :>
              "groupLicenses" :>
                Capture "groupLicenseId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] GroupLicense
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] GroupLicense
 
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ 'grouplicensesGet' smart constructor.
 data GrouplicensesGet =
   GrouplicensesGet'
-    { _ggEnterpriseId   :: !Text
+    { _ggXgafv :: !(Maybe Xgafv)
+    , _ggUploadProtocol :: !(Maybe Text)
+    , _ggEnterpriseId :: !Text
+    , _ggAccessToken :: !(Maybe Text)
+    , _ggUploadType :: !(Maybe Text)
     , _ggGroupLicenseId :: !Text
+    , _ggCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,23 +81,61 @@ data GrouplicensesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ggXgafv'
+--
+-- * 'ggUploadProtocol'
+--
 -- * 'ggEnterpriseId'
 --
+-- * 'ggAccessToken'
+--
+-- * 'ggUploadType'
+--
 -- * 'ggGroupLicenseId'
+--
+-- * 'ggCallback'
 grouplicensesGet
     :: Text -- ^ 'ggEnterpriseId'
     -> Text -- ^ 'ggGroupLicenseId'
     -> GrouplicensesGet
 grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
   GrouplicensesGet'
-    {_ggEnterpriseId = pGgEnterpriseId_, _ggGroupLicenseId = pGgGroupLicenseId_}
+    { _ggXgafv = Nothing
+    , _ggUploadProtocol = Nothing
+    , _ggEnterpriseId = pGgEnterpriseId_
+    , _ggAccessToken = Nothing
+    , _ggUploadType = Nothing
+    , _ggGroupLicenseId = pGgGroupLicenseId_
+    , _ggCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ggXgafv :: Lens' GrouplicensesGet (Maybe Xgafv)
+ggXgafv = lens _ggXgafv (\ s a -> s{_ggXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ggUploadProtocol :: Lens' GrouplicensesGet (Maybe Text)
+ggUploadProtocol
+  = lens _ggUploadProtocol
+      (\ s a -> s{_ggUploadProtocol = a})
 
 -- | The ID of the enterprise.
 ggEnterpriseId :: Lens' GrouplicensesGet Text
 ggEnterpriseId
   = lens _ggEnterpriseId
       (\ s a -> s{_ggEnterpriseId = a})
+
+-- | OAuth access token.
+ggAccessToken :: Lens' GrouplicensesGet (Maybe Text)
+ggAccessToken
+  = lens _ggAccessToken
+      (\ s a -> s{_ggAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ggUploadType :: Lens' GrouplicensesGet (Maybe Text)
+ggUploadType
+  = lens _ggUploadType (\ s a -> s{_ggUploadType = a})
 
 -- | The ID of the product the group license is for, e.g.
 -- \"app:com.google.android.gm\".
@@ -91,12 +144,22 @@ ggGroupLicenseId
   = lens _ggGroupLicenseId
       (\ s a -> s{_ggGroupLicenseId = a})
 
+-- | JSONP
+ggCallback :: Lens' GrouplicensesGet (Maybe Text)
+ggCallback
+  = lens _ggCallback (\ s a -> s{_ggCallback = a})
+
 instance GoogleRequest GrouplicensesGet where
         type Rs GrouplicensesGet = GroupLicense
         type Scopes GrouplicensesGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient GrouplicensesGet'{..}
-          = go _ggEnterpriseId _ggGroupLicenseId (Just AltJSON)
+          = go _ggEnterpriseId _ggGroupLicenseId _ggXgafv
+              _ggUploadProtocol
+              _ggAccessToken
+              _ggUploadType
+              _ggCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

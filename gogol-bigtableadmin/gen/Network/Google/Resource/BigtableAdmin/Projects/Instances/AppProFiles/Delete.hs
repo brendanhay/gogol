@@ -42,8 +42,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Dele
     , piapfdCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.appProfiles.delete@ method which the
 -- 'ProjectsInstancesAppProFilesDelete' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsInstancesAppProFilesDeleteResource =
 -- /See:/ 'projectsInstancesAppProFilesDelete' smart constructor.
 data ProjectsInstancesAppProFilesDelete =
   ProjectsInstancesAppProFilesDelete'
-    { _piapfdXgafv          :: !(Maybe Xgafv)
+    { _piapfdXgafv :: !(Maybe Xgafv)
     , _piapfdUploadProtocol :: !(Maybe Text)
-    , _piapfdAccessToken    :: !(Maybe Text)
-    , _piapfdUploadType     :: !(Maybe Text)
+    , _piapfdAccessToken :: !(Maybe Text)
+    , _piapfdUploadType :: !(Maybe Text)
     , _piapfdIgnoreWarnings :: !(Maybe Bool)
-    , _piapfdName           :: !Text
-    , _piapfdCallback       :: !(Maybe Text)
+    , _piapfdName :: !Text
+    , _piapfdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -129,14 +129,15 @@ piapfdUploadType
   = lens _piapfdUploadType
       (\ s a -> s{_piapfdUploadType = a})
 
--- | If true, ignore safety checks when deleting the app profile.
+-- | Required. If true, ignore safety checks when deleting the app profile.
 piapfdIgnoreWarnings :: Lens' ProjectsInstancesAppProFilesDelete (Maybe Bool)
 piapfdIgnoreWarnings
   = lens _piapfdIgnoreWarnings
       (\ s a -> s{_piapfdIgnoreWarnings = a})
 
--- | The unique name of the app profile to be deleted. Values are of the form
--- \`projects\/\/instances\/\/appProfiles\/\`.
+-- | Required. The unique name of the app profile to be deleted. Values are
+-- of the form
+-- \`projects\/{project}\/instances\/{instance}\/appProfiles\/{app_profile}\`.
 piapfdName :: Lens' ProjectsInstancesAppProFilesDelete Text
 piapfdName
   = lens _piapfdName (\ s a -> s{_piapfdName = a})

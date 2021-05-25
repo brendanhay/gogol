@@ -34,6 +34,9 @@ module Network.Google.DLP
     -- ** dlp.infoTypes.list
     , module Network.Google.Resource.DLP.InfoTypes.List
 
+    -- ** dlp.locations.infoTypes.list
+    , module Network.Google.Resource.DLP.Locations.InfoTypes.List
+
     -- ** dlp.organizations.deidentifyTemplates.create
     , module Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Create
 
@@ -63,6 +66,69 @@ module Network.Google.DLP
 
     -- ** dlp.organizations.inspectTemplates.patch
     , module Network.Google.Resource.DLP.Organizations.InspectTemplates.Patch
+
+    -- ** dlp.organizations.locations.deidentifyTemplates.create
+    , module Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Create
+
+    -- ** dlp.organizations.locations.deidentifyTemplates.delete
+    , module Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Delete
+
+    -- ** dlp.organizations.locations.deidentifyTemplates.get
+    , module Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Get
+
+    -- ** dlp.organizations.locations.deidentifyTemplates.list
+    , module Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.List
+
+    -- ** dlp.organizations.locations.deidentifyTemplates.patch
+    , module Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Patch
+
+    -- ** dlp.organizations.locations.dlpJobs.list
+    , module Network.Google.Resource.DLP.Organizations.Locations.DlpJobs.List
+
+    -- ** dlp.organizations.locations.inspectTemplates.create
+    , module Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Create
+
+    -- ** dlp.organizations.locations.inspectTemplates.delete
+    , module Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Delete
+
+    -- ** dlp.organizations.locations.inspectTemplates.get
+    , module Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Get
+
+    -- ** dlp.organizations.locations.inspectTemplates.list
+    , module Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.List
+
+    -- ** dlp.organizations.locations.inspectTemplates.patch
+    , module Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Patch
+
+    -- ** dlp.organizations.locations.jobTriggers.create
+    , module Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Create
+
+    -- ** dlp.organizations.locations.jobTriggers.delete
+    , module Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Delete
+
+    -- ** dlp.organizations.locations.jobTriggers.get
+    , module Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Get
+
+    -- ** dlp.organizations.locations.jobTriggers.list
+    , module Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.List
+
+    -- ** dlp.organizations.locations.jobTriggers.patch
+    , module Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Patch
+
+    -- ** dlp.organizations.locations.storedInfoTypes.create
+    , module Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Create
+
+    -- ** dlp.organizations.locations.storedInfoTypes.delete
+    , module Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Delete
+
+    -- ** dlp.organizations.locations.storedInfoTypes.get
+    , module Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Get
+
+    -- ** dlp.organizations.locations.storedInfoTypes.list
+    , module Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.List
+
+    -- ** dlp.organizations.locations.storedInfoTypes.patch
+    , module Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Patch
 
     -- ** dlp.organizations.storedInfoTypes.create
     , module Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Create
@@ -154,6 +220,105 @@ module Network.Google.DLP
     -- ** dlp.projects.jobTriggers.patch
     , module Network.Google.Resource.DLP.Projects.JobTriggers.Patch
 
+    -- ** dlp.projects.locations.content.deidentify
+    , module Network.Google.Resource.DLP.Projects.Locations.Content.Deidentify
+
+    -- ** dlp.projects.locations.content.inspect
+    , module Network.Google.Resource.DLP.Projects.Locations.Content.Inspect
+
+    -- ** dlp.projects.locations.content.reidentify
+    , module Network.Google.Resource.DLP.Projects.Locations.Content.Reidentify
+
+    -- ** dlp.projects.locations.deidentifyTemplates.create
+    , module Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Create
+
+    -- ** dlp.projects.locations.deidentifyTemplates.delete
+    , module Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Delete
+
+    -- ** dlp.projects.locations.deidentifyTemplates.get
+    , module Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Get
+
+    -- ** dlp.projects.locations.deidentifyTemplates.list
+    , module Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.List
+
+    -- ** dlp.projects.locations.deidentifyTemplates.patch
+    , module Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Patch
+
+    -- ** dlp.projects.locations.dlpJobs.cancel
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Cancel
+
+    -- ** dlp.projects.locations.dlpJobs.create
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Create
+
+    -- ** dlp.projects.locations.dlpJobs.delete
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Delete
+
+    -- ** dlp.projects.locations.dlpJobs.finish
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Finish
+
+    -- ** dlp.projects.locations.dlpJobs.get
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Get
+
+    -- ** dlp.projects.locations.dlpJobs.hybridInspect
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.HybridInspect
+
+    -- ** dlp.projects.locations.dlpJobs.list
+    , module Network.Google.Resource.DLP.Projects.Locations.DlpJobs.List
+
+    -- ** dlp.projects.locations.image.redact
+    , module Network.Google.Resource.DLP.Projects.Locations.Image.Redact
+
+    -- ** dlp.projects.locations.inspectTemplates.create
+    , module Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Create
+
+    -- ** dlp.projects.locations.inspectTemplates.delete
+    , module Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Delete
+
+    -- ** dlp.projects.locations.inspectTemplates.get
+    , module Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Get
+
+    -- ** dlp.projects.locations.inspectTemplates.list
+    , module Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.List
+
+    -- ** dlp.projects.locations.inspectTemplates.patch
+    , module Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Patch
+
+    -- ** dlp.projects.locations.jobTriggers.activate
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Activate
+
+    -- ** dlp.projects.locations.jobTriggers.create
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Create
+
+    -- ** dlp.projects.locations.jobTriggers.delete
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Delete
+
+    -- ** dlp.projects.locations.jobTriggers.get
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Get
+
+    -- ** dlp.projects.locations.jobTriggers.hybridInspect
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.HybridInspect
+
+    -- ** dlp.projects.locations.jobTriggers.list
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.List
+
+    -- ** dlp.projects.locations.jobTriggers.patch
+    , module Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Patch
+
+    -- ** dlp.projects.locations.storedInfoTypes.create
+    , module Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Create
+
+    -- ** dlp.projects.locations.storedInfoTypes.delete
+    , module Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Delete
+
+    -- ** dlp.projects.locations.storedInfoTypes.get
+    , module Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Get
+
+    -- ** dlp.projects.locations.storedInfoTypes.list
+    , module Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.List
+
+    -- ** dlp.projects.locations.storedInfoTypes.patch
+    , module Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Patch
+
     -- ** dlp.projects.storedInfoTypes.create
     , module Network.Google.Resource.DLP.Projects.StoredInfoTypes.Create
 
@@ -200,6 +365,13 @@ module Network.Google.DLP
     , grsCode
     , grsMessage
 
+    -- ** GooglePrivacyDlpV2HybridInspectStatistics
+    , GooglePrivacyDlpV2HybridInspectStatistics
+    , googlePrivacyDlpV2HybridInspectStatistics
+    , gpdvhisAbortedCount
+    , gpdvhisPendingCount
+    , gpdvhisProcessedCount
+
     -- ** GooglePrivacyDlpV2FixedSizeBucketingConfig
     , GooglePrivacyDlpV2FixedSizeBucketingConfig
     , googlePrivacyDlpV2FixedSizeBucketingConfig
@@ -216,8 +388,10 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2StoredInfoTypeConfig
     , GooglePrivacyDlpV2StoredInfoTypeConfig
     , googlePrivacyDlpV2StoredInfoTypeConfig
+    , gpdvsitcRegex
     , gpdvsitcLargeCustomDictionary
     , gpdvsitcDisplayName
+    , gpdvsitcDictionary
     , gpdvsitcDescription
 
     -- ** GooglePrivacyDlpV2InfoTypeTransformation
@@ -230,6 +404,17 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2FieldId
     , googlePrivacyDlpV2FieldId
     , gpdvfiName
+
+    -- ** GooglePrivacyDlpV2Container
+    , GooglePrivacyDlpV2Container
+    , googlePrivacyDlpV2Container
+    , gpdvcFullPath
+    , gpdvcUpdateTime
+    , gpdvcVersion
+    , gpdvcProjectId
+    , gpdvcType
+    , gpdvcRootPath
+    , gpdvcRelativePath
 
     -- ** GooglePrivacyDlpV2DlpJob
     , GooglePrivacyDlpV2DlpJob
@@ -287,10 +472,20 @@ module Network.Google.DLP
     , gpdvrajcActions
     , gpdvrajcSourceTable
 
+    -- ** GooglePrivacyDlpV2HybridInspectDlpJobRequest
+    , GooglePrivacyDlpV2HybridInspectDlpJobRequest
+    , googlePrivacyDlpV2HybridInspectDlpJobRequest
+    , gpdvhidjrHybridItem
+
     -- ** GooglePrivacyDlpV2QuoteInfo
     , GooglePrivacyDlpV2QuoteInfo
     , googlePrivacyDlpV2QuoteInfo
     , gpdvqiDateTime
+
+    -- ** GooglePrivacyDlpV2StoredInfoTypeStats
+    , GooglePrivacyDlpV2StoredInfoTypeStats
+    , googlePrivacyDlpV2StoredInfoTypeStats
+    , gpdvsitsLargeCustomDictionary
 
     -- ** GooglePrivacyDlpV2RecordSuppression
     , GooglePrivacyDlpV2RecordSuppression
@@ -337,7 +532,13 @@ module Network.Google.DLP
     , googlePrivacyDlpV2Result
     , gpdvrProcessedBytes
     , gpdvrInfoTypeStats
+    , gpdvrHybridStats
     , gpdvrTotalEstimatedBytes
+
+    -- ** GooglePrivacyDlpV2HybridOptionsLabels
+    , GooglePrivacyDlpV2HybridOptionsLabels
+    , googlePrivacyDlpV2HybridOptionsLabels
+    , gpdvholAddtional
 
     -- ** GooglePrivacyDlpV2InspectDataSourceDetails
     , GooglePrivacyDlpV2InspectDataSourceDetails
@@ -395,6 +596,7 @@ module Network.Google.DLP
     , googlePrivacyDlpV2InspectContentRequest
     , gpdvicrInspectConfig
     , gpdvicrItem
+    , gpdvicrLocationId
     , gpdvicrInspectTemplateName
 
     -- ** GooglePrivacyDlpV2CategoricalStatsResult
@@ -408,6 +610,12 @@ module Network.Google.DLP
     , gpdvnsrMaxValue
     , gpdvnsrQuantileValues
     , gpdvnsrMinValue
+
+    -- ** GooglePrivacyDlpV2TransformationErrorHandling
+    , GooglePrivacyDlpV2TransformationErrorHandling
+    , googlePrivacyDlpV2TransformationErrorHandling
+    , gpdvtehThrowError
+    , gpdvtehLeaveUntransformed
 
     -- ** GooglePrivacyDlpV2PublishSummaryToCscc
     , GooglePrivacyDlpV2PublishSummaryToCscc
@@ -423,6 +631,11 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2EntityId
     , googlePrivacyDlpV2EntityId
     , gpdveiField
+
+    -- ** GooglePrivacyDlpV2HybridFindingDetailsLabels
+    , GooglePrivacyDlpV2HybridFindingDetailsLabels
+    , googlePrivacyDlpV2HybridFindingDetailsLabels
+    , gpdvhfdlAddtional
 
     -- ** GooglePrivacyDlpV2ByteContentItem
     , GooglePrivacyDlpV2ByteContentItem
@@ -448,6 +661,10 @@ module Network.Google.DLP
     , gpdvbqoExcludedFields
     , gpdvbqoSampleMethod
 
+    -- ** GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+    , GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+    , googlePrivacyDlpV2PublishFindingsToCloudDataCatalog
+
     -- ** GooglePrivacyDlpV2KMapEstimationQuasiIdValues
     , GooglePrivacyDlpV2KMapEstimationQuasiIdValues
     , googlePrivacyDlpV2KMapEstimationQuasiIdValues
@@ -463,6 +680,7 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2CreateInspectTemplateRequest
     , googlePrivacyDlpV2CreateInspectTemplateRequest
     , gpdvcitrTemplateId
+    , gpdvcitrLocationId
     , gpdvcitrInspectTemplate
 
     -- ** GooglePrivacyDlpV2PathElement
@@ -502,6 +720,9 @@ module Network.Google.DLP
     , gpdvftCondition
     , gpdvftFields
 
+    -- ** OrganizationsLocationsDlpJobsListType
+    , OrganizationsLocationsDlpJobsListType (..)
+
     -- ** GooglePrivacyDlpV2HotwordRule
     , GooglePrivacyDlpV2HotwordRule
     , googlePrivacyDlpV2HotwordRule
@@ -515,7 +736,11 @@ module Network.Google.DLP
     , gpdvrirIncludeFindings
     , gpdvrirInspectConfig
     , gpdvrirByteItem
+    , gpdvrirLocationId
     , gpdvrirImageRedactionConfigs
+
+    -- ** ProjectsJobTriggersListType
+    , ProjectsJobTriggersListType (..)
 
     -- ** GooglePrivacyDlpV2FindingLimits
     , GooglePrivacyDlpV2FindingLimits
@@ -539,6 +764,9 @@ module Network.Google.DLP
     , gpdvtcEnableAutoPopulationOfTimespanConfig
     , gpdvtcEndTime
 
+    -- ** GooglePrivacyDlpV2MetadataLocationType
+    , GooglePrivacyDlpV2MetadataLocationType (..)
+
     -- ** GooglePrivacyDlpV2DateTimeDayOfWeek
     , GooglePrivacyDlpV2DateTimeDayOfWeek (..)
 
@@ -547,6 +775,10 @@ module Network.Google.DLP
     , googlePrivacyDlpV2CreateDeidentifyTemplateRequest
     , gpdvcdtrTemplateId
     , gpdvcdtrDeidentifyTemplate
+    , gpdvcdtrLocationId
+
+    -- ** GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem
+    , GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem (..)
 
     -- ** GooglePrivacyDlpV2TransientCryptoKey
     , GooglePrivacyDlpV2TransientCryptoKey
@@ -583,6 +815,7 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2Trigger
     , GooglePrivacyDlpV2Trigger
     , googlePrivacyDlpV2Trigger
+    , gpdvtManual
     , gpdvtSchedule
 
     -- ** GooglePrivacyDlpV2CloudStorageOptions
@@ -609,6 +842,7 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2CreateStoredInfoTypeRequest
     , googlePrivacyDlpV2CreateStoredInfoTypeRequest
     , gpdvcsitrConfig
+    , gpdvcsitrLocationId
     , gpdvcsitrStoredInfoTypeId
 
     -- ** GooglePrivacyDlpV2QuasiIdField
@@ -621,6 +855,11 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2TimePartConfig
     , googlePrivacyDlpV2TimePartConfig
     , gpdvtpcPartToExtract
+
+    -- ** GooglePrivacyDlpV2FindingLabels
+    , GooglePrivacyDlpV2FindingLabels
+    , googlePrivacyDlpV2FindingLabels
+    , gpdvflAddtional
 
     -- ** GooglePrivacyDlpV2InspectionRule
     , GooglePrivacyDlpV2InspectionRule
@@ -674,6 +913,10 @@ module Network.Google.DLP
     , gpdvusitrConfig
     , gpdvusitrUpdateMask
 
+    -- ** GooglePrivacyDlpV2LeaveUntransformed
+    , GooglePrivacyDlpV2LeaveUntransformed
+    , googlePrivacyDlpV2LeaveUntransformed
+
     -- ** GooglePrivacyDlpV2KAnonymityEquivalenceClass
     , GooglePrivacyDlpV2KAnonymityEquivalenceClass
     , googlePrivacyDlpV2KAnonymityEquivalenceClass
@@ -696,6 +939,9 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2JobNotificationEmails
     , googlePrivacyDlpV2JobNotificationEmails
 
+    -- ** ProjectsLocationsDlpJobsListType
+    , ProjectsLocationsDlpJobsListType (..)
+
     -- ** GooglePrivacyDlpV2DeidentifyContentRequest
     , GooglePrivacyDlpV2DeidentifyContentRequest
     , googlePrivacyDlpV2DeidentifyContentRequest
@@ -703,6 +949,7 @@ module Network.Google.DLP
     , gpdvdcrDeidentifyConfig
     , gpdvdcrDeidentifyTemplateName
     , gpdvdcrItem
+    , gpdvdcrLocationId
     , gpdvdcrInspectTemplateName
 
     -- ** GooglePrivacyDlpV2Color
@@ -727,11 +974,18 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2Finding
     , GooglePrivacyDlpV2Finding
     , googlePrivacyDlpV2Finding
+    , gpdvfTriggerName
+    , gpdvfResourceName
     , gpdvfLocation
+    , gpdvfJobName
     , gpdvfInfoType
     , gpdvfQuoteInfo
+    , gpdvfName
     , gpdvfLikelihood
     , gpdvfQuote
+    , gpdvfLabels
+    , gpdvfFindingId
+    , gpdvfJobCreateTime
     , gpdvfCreateTime
 
     -- ** GooglePrivacyDlpV2SummaryResult
@@ -745,6 +999,14 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2Row
     , googlePrivacyDlpV2Row
     , gpdvrValues
+
+    -- ** GooglePrivacyDlpV2Manual
+    , GooglePrivacyDlpV2Manual
+    , googlePrivacyDlpV2Manual
+
+    -- ** GooglePrivacyDlpV2PublishToStackdriver
+    , GooglePrivacyDlpV2PublishToStackdriver
+    , googlePrivacyDlpV2PublishToStackdriver
 
     -- ** GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
     , GooglePrivacyDlpV2ReplaceWithInfoTypeConfig
@@ -775,6 +1037,7 @@ module Network.Google.DLP
     , gpdvcdjrRiskJob
     , gpdvcdjrJobId
     , gpdvcdjrInspectJob
+    , gpdvcdjrLocationId
 
     -- ** GooglePrivacyDlpV2RecordKey
     , GooglePrivacyDlpV2RecordKey
@@ -791,6 +1054,11 @@ module Network.Google.DLP
     , gpdvkmehbMinAnonymity
     , gpdvkmehbBucketSize
     , gpdvkmehbBucketValueCount
+
+    -- ** GooglePrivacyDlpV2LargeCustomDictionaryStats
+    , GooglePrivacyDlpV2LargeCustomDictionaryStats
+    , googlePrivacyDlpV2LargeCustomDictionaryStats
+    , gpdvlcdsApproxNumPhrases
 
     -- ** GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
     , GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
@@ -852,6 +1120,7 @@ module Network.Google.DLP
     , GooglePrivacyDlpV2DeidentifyConfig
     , googlePrivacyDlpV2DeidentifyConfig
     , gpdvdcInfoTypeTransformations
+    , gpdvdcTransformationErrorHandling
     , gpdvdcRecordTransformations
 
     -- ** GooglePrivacyDlpV2CharacterMaskConfig
@@ -898,6 +1167,7 @@ module Network.Google.DLP
     , googlePrivacyDlpV2StoredInfoTypeVersion
     , gpdvsitvState
     , gpdvsitvConfig
+    , gpdvsitvStats
     , gpdvsitvErrors
     , gpdvsitvCreateTime
 
@@ -915,6 +1185,7 @@ module Network.Google.DLP
     , gpdvclDocumentLocation
     , gpdvclContainerVersion
     , gpdvclRecordLocation
+    , gpdvclMetadataLocation
 
     -- ** GooglePrivacyDlpV2AuxiliaryTable
     , GooglePrivacyDlpV2AuxiliaryTable
@@ -941,6 +1212,14 @@ module Network.Google.DLP
     , gpdvfsURL
     , gpdvfsRegexFileSet
 
+    -- ** GooglePrivacyDlpV2HybridOptions
+    , GooglePrivacyDlpV2HybridOptions
+    , googlePrivacyDlpV2HybridOptions
+    , gpdvhoTableOptions
+    , gpdvhoLabels
+    , gpdvhoRequiredFindingLabelKeys
+    , gpdvhoDescription
+
     -- ** GooglePrivacyDlpV2ListInspectTemplatesResponse
     , GooglePrivacyDlpV2ListInspectTemplatesResponse
     , googlePrivacyDlpV2ListInspectTemplatesResponse
@@ -960,6 +1239,11 @@ module Network.Google.DLP
 
     -- ** GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore
     , GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore (..)
+
+    -- ** GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+    , GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+    , googlePrivacyDlpV2HybridInspectJobTriggerRequest
+    , gpdvhijtrHybridItem
 
     -- ** GooglePrivacyDlpV2OutputStorageConfig
     , GooglePrivacyDlpV2OutputStorageConfig
@@ -1006,6 +1290,10 @@ module Network.Google.DLP
     , gpdvrcrOverview
     , gpdvrcrItem
 
+    -- ** GooglePrivacyDlpV2HybridInspectResponse
+    , GooglePrivacyDlpV2HybridInspectResponse
+    , googlePrivacyDlpV2HybridInspectResponse
+
     -- ** GooglePrivacyDlpV2Expressions
     , GooglePrivacyDlpV2Expressions
     , googlePrivacyDlpV2Expressions
@@ -1033,11 +1321,20 @@ module Network.Google.DLP
     , gpdvcsrfsBucketName
     , gpdvcsrfsIncludeRegex
 
+    -- ** GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+    , GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+    , googlePrivacyDlpV2RequestedRiskAnalysisOptions
+    , gpdvrraoJobConfig
+
     -- ** GooglePrivacyDlpV2ExclusionRuleMatchingType
     , GooglePrivacyDlpV2ExclusionRuleMatchingType (..)
 
     -- ** GooglePrivacyDlpV2ValueDayOfWeekValue
     , GooglePrivacyDlpV2ValueDayOfWeekValue (..)
+
+    -- ** GooglePrivacyDlpV2ThrowError
+    , GooglePrivacyDlpV2ThrowError
+    , googlePrivacyDlpV2ThrowError
 
     -- ** GooglePrivacyDlpV2Bucket
     , GooglePrivacyDlpV2Bucket
@@ -1049,8 +1346,10 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2Action
     , GooglePrivacyDlpV2Action
     , googlePrivacyDlpV2Action
+    , gpdvaPublishToStackdriver
     , gpdvaJobNotificationEmails
     , gpdvaPubSub
+    , gpdvaPublishFindingsToCloudDataCatalog
     , gpdvaSaveFindings
     , gpdvaPublishSummaryToCscc
 
@@ -1060,6 +1359,11 @@ module Network.Google.DLP
     , gtdDay
     , gtdYear
     , gtdMonth
+
+    -- ** GooglePrivacyDlpV2TableOptions
+    , GooglePrivacyDlpV2TableOptions
+    , googlePrivacyDlpV2TableOptions
+    , gpdvtoIdentifyingFields
 
     -- ** GooglePrivacyDlpV2SurrogateType
     , GooglePrivacyDlpV2SurrogateType
@@ -1132,6 +1436,7 @@ module Network.Google.DLP
     , gooInspectConfig
     , gooReidentifyTemplateName
     , gooItem
+    , gooLocationId
     , gooInspectTemplateName
     , gooReidentifyConfig
 
@@ -1159,13 +1464,29 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2JobTriggerStatus
     , GooglePrivacyDlpV2JobTriggerStatus (..)
 
+    -- ** ProjectsDlpJobsListType
+    , ProjectsDlpJobsListType (..)
+
     -- ** GooglePrivacyDlpV2StorageConfig
     , GooglePrivacyDlpV2StorageConfig
     , googlePrivacyDlpV2StorageConfig
+    , gpdvscHybridOptions
     , gpdvscTimespanConfig
     , gpdvscBigQueryOptions
     , gpdvscDatastoreOptions
     , gpdvscCloudStorageOptions
+
+    -- ** OrganizationsLocationsJobTriggersListType
+    , OrganizationsLocationsJobTriggersListType (..)
+
+    -- ** GooglePrivacyDlpV2HybridFindingDetails
+    , GooglePrivacyDlpV2HybridFindingDetails
+    , googlePrivacyDlpV2HybridFindingDetails
+    , gpdvhfdFileOffSet
+    , gpdvhfdTableOptions
+    , gpdvhfdRowOffSet
+    , gpdvhfdContainerDetails
+    , gpdvhfdLabels
 
     -- ** GooglePrivacyDlpV2Value
     , GooglePrivacyDlpV2Value
@@ -1185,6 +1506,9 @@ module Network.Google.DLP
     , gpdvdWordList
     , gpdvdCloudStoragePath
 
+    -- ** GooglePrivacyDlpV2InspectConfigContentOptionsItem
+    , GooglePrivacyDlpV2InspectConfigContentOptionsItem (..)
+
     -- ** GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
     , GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
     , googlePrivacyDlpV2AnalyzeDataSourceRiskDetails
@@ -1193,6 +1517,7 @@ module Network.Google.DLP
     , gpdvadsrdLDiversityResult
     , gpdvadsrdKAnonymityResult
     , gpdvadsrdKMapEstimationResult
+    , gpdvadsrdRequestedOptions
     , gpdvadsrdDeltaPresenceEstimationResult
     , gpdvadsrdNumericalStatsResult
     , gpdvadsrdCategoricalStatsResult
@@ -1226,6 +1551,12 @@ module Network.Google.DLP
     , gpdvbqtProjectId
     , gpdvbqtTableId
 
+    -- ** GooglePrivacyDlpV2MetadataLocation
+    , GooglePrivacyDlpV2MetadataLocation
+    , googlePrivacyDlpV2MetadataLocation
+    , gpdvmlStorageLabel
+    , gpdvmlType
+
     -- ** GooglePrivacyDlpV2RequestedOptions
     , GooglePrivacyDlpV2RequestedOptions
     , googlePrivacyDlpV2RequestedOptions
@@ -1250,6 +1581,15 @@ module Network.Google.DLP
     -- ** GooglePrivacyDlpV2CancelDlpJobRequest
     , GooglePrivacyDlpV2CancelDlpJobRequest
     , googlePrivacyDlpV2CancelDlpJobRequest
+
+    -- ** GooglePrivacyDlpV2HybridContentItem
+    , GooglePrivacyDlpV2HybridContentItem
+    , googlePrivacyDlpV2HybridContentItem
+    , gpdvhciFindingDetails
+    , gpdvhciItem
+
+    -- ** GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem
+    , GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem (..)
 
     -- ** GooglePrivacyDlpV2RecordLocation
     , GooglePrivacyDlpV2RecordLocation
@@ -1288,6 +1628,9 @@ module Network.Google.DLP
     , gpdvstTable
     , gpdvstQuasiIds
 
+    -- ** ProjectsLocationsJobTriggersListType
+    , ProjectsLocationsJobTriggersListType (..)
+
     -- ** GooglePrivacyDlpV2DeidentifyTemplate
     , GooglePrivacyDlpV2DeidentifyTemplate
     , googlePrivacyDlpV2DeidentifyTemplate
@@ -1324,10 +1667,15 @@ module Network.Google.DLP
     , googlePrivacyDlpV2CloudStoragePath
     , gpdvcspPath
 
+    -- ** GooglePrivacyDlpV2FinishDlpJobRequest
+    , GooglePrivacyDlpV2FinishDlpJobRequest
+    , googlePrivacyDlpV2FinishDlpJobRequest
+
     -- ** GooglePrivacyDlpV2Location
     , GooglePrivacyDlpV2Location
     , googlePrivacyDlpV2Location
     , gpdvlCodepointRange
+    , gpdvlContainer
     , gpdvlContentLocations
     , gpdvlByteRange
 
@@ -1344,12 +1692,18 @@ module Network.Google.DLP
     , googlePrivacyDlpV2CreateJobTriggerRequest
     , gpdvcjtrTriggerId
     , gpdvcjtrJobTrigger
+    , gpdvcjtrLocationId
 
     -- ** GooglePrivacyDlpV2TransformationOverview
     , GooglePrivacyDlpV2TransformationOverview
     , googlePrivacyDlpV2TransformationOverview
     , gpdvtoTransformedBytes
     , gpdvtoTransformationSummaries
+
+    -- ** GooglePrivacyDlpV2StorageMetadataLabel
+    , GooglePrivacyDlpV2StorageMetadataLabel
+    , googlePrivacyDlpV2StorageMetadataLabel
+    , gpdvsmlKey
 
     -- ** GooglePrivacyDlpV2ImageLocation
     , GooglePrivacyDlpV2ImageLocation
@@ -1396,54 +1750,109 @@ module Network.Google.DLP
     , gpdvdlFileOffSet
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DLP.InfoTypes.List
-import           Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Create
-import           Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Delete
-import           Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Get
-import           Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.List
-import           Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Patch
-import           Network.Google.Resource.DLP.Organizations.InspectTemplates.Create
-import           Network.Google.Resource.DLP.Organizations.InspectTemplates.Delete
-import           Network.Google.Resource.DLP.Organizations.InspectTemplates.Get
-import           Network.Google.Resource.DLP.Organizations.InspectTemplates.List
-import           Network.Google.Resource.DLP.Organizations.InspectTemplates.Patch
-import           Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Create
-import           Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Delete
-import           Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Get
-import           Network.Google.Resource.DLP.Organizations.StoredInfoTypes.List
-import           Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Patch
-import           Network.Google.Resource.DLP.Projects.Content.Deidentify
-import           Network.Google.Resource.DLP.Projects.Content.Inspect
-import           Network.Google.Resource.DLP.Projects.Content.Reidentify
-import           Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Create
-import           Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Delete
-import           Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Get
-import           Network.Google.Resource.DLP.Projects.DeidentifyTemplates.List
-import           Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Patch
-import           Network.Google.Resource.DLP.Projects.DlpJobs.Cancel
-import           Network.Google.Resource.DLP.Projects.DlpJobs.Create
-import           Network.Google.Resource.DLP.Projects.DlpJobs.Delete
-import           Network.Google.Resource.DLP.Projects.DlpJobs.Get
-import           Network.Google.Resource.DLP.Projects.DlpJobs.List
-import           Network.Google.Resource.DLP.Projects.Image.Redact
-import           Network.Google.Resource.DLP.Projects.InspectTemplates.Create
-import           Network.Google.Resource.DLP.Projects.InspectTemplates.Delete
-import           Network.Google.Resource.DLP.Projects.InspectTemplates.Get
-import           Network.Google.Resource.DLP.Projects.InspectTemplates.List
-import           Network.Google.Resource.DLP.Projects.InspectTemplates.Patch
-import           Network.Google.Resource.DLP.Projects.JobTriggers.Activate
-import           Network.Google.Resource.DLP.Projects.JobTriggers.Create
-import           Network.Google.Resource.DLP.Projects.JobTriggers.Delete
-import           Network.Google.Resource.DLP.Projects.JobTriggers.Get
-import           Network.Google.Resource.DLP.Projects.JobTriggers.List
-import           Network.Google.Resource.DLP.Projects.JobTriggers.Patch
-import           Network.Google.Resource.DLP.Projects.StoredInfoTypes.Create
-import           Network.Google.Resource.DLP.Projects.StoredInfoTypes.Delete
-import           Network.Google.Resource.DLP.Projects.StoredInfoTypes.Get
-import           Network.Google.Resource.DLP.Projects.StoredInfoTypes.List
-import           Network.Google.Resource.DLP.Projects.StoredInfoTypes.Patch
+import Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Resource.DLP.InfoTypes.List
+import Network.Google.Resource.DLP.Locations.InfoTypes.List
+import Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Create
+import Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Delete
+import Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Get
+import Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.List
+import Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Patch
+import Network.Google.Resource.DLP.Organizations.InspectTemplates.Create
+import Network.Google.Resource.DLP.Organizations.InspectTemplates.Delete
+import Network.Google.Resource.DLP.Organizations.InspectTemplates.Get
+import Network.Google.Resource.DLP.Organizations.InspectTemplates.List
+import Network.Google.Resource.DLP.Organizations.InspectTemplates.Patch
+import Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Create
+import Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Delete
+import Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Get
+import Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.List
+import Network.Google.Resource.DLP.Organizations.Locations.DeidentifyTemplates.Patch
+import Network.Google.Resource.DLP.Organizations.Locations.DlpJobs.List
+import Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Create
+import Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Delete
+import Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Get
+import Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.List
+import Network.Google.Resource.DLP.Organizations.Locations.InspectTemplates.Patch
+import Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Create
+import Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Delete
+import Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Get
+import Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.List
+import Network.Google.Resource.DLP.Organizations.Locations.JobTriggers.Patch
+import Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Create
+import Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Delete
+import Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Get
+import Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.List
+import Network.Google.Resource.DLP.Organizations.Locations.StoredInfoTypes.Patch
+import Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Create
+import Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Delete
+import Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Get
+import Network.Google.Resource.DLP.Organizations.StoredInfoTypes.List
+import Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Patch
+import Network.Google.Resource.DLP.Projects.Content.Deidentify
+import Network.Google.Resource.DLP.Projects.Content.Inspect
+import Network.Google.Resource.DLP.Projects.Content.Reidentify
+import Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Create
+import Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Delete
+import Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Get
+import Network.Google.Resource.DLP.Projects.DeidentifyTemplates.List
+import Network.Google.Resource.DLP.Projects.DeidentifyTemplates.Patch
+import Network.Google.Resource.DLP.Projects.DlpJobs.Cancel
+import Network.Google.Resource.DLP.Projects.DlpJobs.Create
+import Network.Google.Resource.DLP.Projects.DlpJobs.Delete
+import Network.Google.Resource.DLP.Projects.DlpJobs.Get
+import Network.Google.Resource.DLP.Projects.DlpJobs.List
+import Network.Google.Resource.DLP.Projects.Image.Redact
+import Network.Google.Resource.DLP.Projects.InspectTemplates.Create
+import Network.Google.Resource.DLP.Projects.InspectTemplates.Delete
+import Network.Google.Resource.DLP.Projects.InspectTemplates.Get
+import Network.Google.Resource.DLP.Projects.InspectTemplates.List
+import Network.Google.Resource.DLP.Projects.InspectTemplates.Patch
+import Network.Google.Resource.DLP.Projects.JobTriggers.Activate
+import Network.Google.Resource.DLP.Projects.JobTriggers.Create
+import Network.Google.Resource.DLP.Projects.JobTriggers.Delete
+import Network.Google.Resource.DLP.Projects.JobTriggers.Get
+import Network.Google.Resource.DLP.Projects.JobTriggers.List
+import Network.Google.Resource.DLP.Projects.JobTriggers.Patch
+import Network.Google.Resource.DLP.Projects.Locations.Content.Deidentify
+import Network.Google.Resource.DLP.Projects.Locations.Content.Inspect
+import Network.Google.Resource.DLP.Projects.Locations.Content.Reidentify
+import Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Create
+import Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Delete
+import Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Get
+import Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.List
+import Network.Google.Resource.DLP.Projects.Locations.DeidentifyTemplates.Patch
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Cancel
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Create
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Delete
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Finish
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.Get
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.HybridInspect
+import Network.Google.Resource.DLP.Projects.Locations.DlpJobs.List
+import Network.Google.Resource.DLP.Projects.Locations.Image.Redact
+import Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Create
+import Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Delete
+import Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Get
+import Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.List
+import Network.Google.Resource.DLP.Projects.Locations.InspectTemplates.Patch
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Activate
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Create
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Delete
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Get
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.HybridInspect
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.List
+import Network.Google.Resource.DLP.Projects.Locations.JobTriggers.Patch
+import Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Create
+import Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Delete
+import Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Get
+import Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.List
+import Network.Google.Resource.DLP.Projects.Locations.StoredInfoTypes.Patch
+import Network.Google.Resource.DLP.Projects.StoredInfoTypes.Create
+import Network.Google.Resource.DLP.Projects.StoredInfoTypes.Delete
+import Network.Google.Resource.DLP.Projects.StoredInfoTypes.Get
+import Network.Google.Resource.DLP.Projects.StoredInfoTypes.List
+import Network.Google.Resource.DLP.Projects.StoredInfoTypes.Patch
 
 {- $resources
 TODO
@@ -1462,6 +1871,41 @@ type DLPAPI =
        :<|> OrganizationsStoredInfoTypesGetResource
        :<|> OrganizationsStoredInfoTypesCreateResource
        :<|> OrganizationsStoredInfoTypesDeleteResource
+       :<|> OrganizationsLocationsDlpJobsListResource
+       :<|> OrganizationsLocationsJobTriggersListResource
+       :<|> OrganizationsLocationsJobTriggersPatchResource
+       :<|> OrganizationsLocationsJobTriggersGetResource
+       :<|> OrganizationsLocationsJobTriggersCreateResource
+       :<|> OrganizationsLocationsJobTriggersDeleteResource
+       :<|>
+       OrganizationsLocationsInspectTemplatesListResource
+       :<|>
+       OrganizationsLocationsInspectTemplatesPatchResource
+       :<|>
+       OrganizationsLocationsInspectTemplatesGetResource
+       :<|>
+       OrganizationsLocationsInspectTemplatesCreateResource
+       :<|>
+       OrganizationsLocationsInspectTemplatesDeleteResource
+       :<|>
+       OrganizationsLocationsStoredInfoTypesListResource
+       :<|>
+       OrganizationsLocationsStoredInfoTypesPatchResource
+       :<|> OrganizationsLocationsStoredInfoTypesGetResource
+       :<|>
+       OrganizationsLocationsStoredInfoTypesCreateResource
+       :<|>
+       OrganizationsLocationsStoredInfoTypesDeleteResource
+       :<|>
+       OrganizationsLocationsDeidentifyTemplatesListResource
+       :<|>
+       OrganizationsLocationsDeidentifyTemplatesPatchResource
+       :<|>
+       OrganizationsLocationsDeidentifyTemplatesGetResource
+       :<|>
+       OrganizationsLocationsDeidentifyTemplatesCreateResource
+       :<|>
+       OrganizationsLocationsDeidentifyTemplatesDeleteResource
        :<|> OrganizationsDeidentifyTemplatesListResource
        :<|> OrganizationsDeidentifyTemplatesPatchResource
        :<|> OrganizationsDeidentifyTemplatesGetResource
@@ -1492,8 +1936,46 @@ type DLPAPI =
        :<|> ProjectsStoredInfoTypesGetResource
        :<|> ProjectsStoredInfoTypesCreateResource
        :<|> ProjectsStoredInfoTypesDeleteResource
+       :<|> ProjectsLocationsDlpJobsHybridInspectResource
+       :<|> ProjectsLocationsDlpJobsListResource
+       :<|> ProjectsLocationsDlpJobsFinishResource
+       :<|> ProjectsLocationsDlpJobsGetResource
+       :<|> ProjectsLocationsDlpJobsCreateResource
+       :<|> ProjectsLocationsDlpJobsCancelResource
+       :<|> ProjectsLocationsDlpJobsDeleteResource
+       :<|> ProjectsLocationsImageRedactResource
+       :<|> ProjectsLocationsContentInspectResource
+       :<|> ProjectsLocationsContentDeidentifyResource
+       :<|> ProjectsLocationsContentReidentifyResource
+       :<|>
+       ProjectsLocationsJobTriggersHybridInspectResource
+       :<|> ProjectsLocationsJobTriggersListResource
+       :<|> ProjectsLocationsJobTriggersPatchResource
+       :<|> ProjectsLocationsJobTriggersGetResource
+       :<|> ProjectsLocationsJobTriggersActivateResource
+       :<|> ProjectsLocationsJobTriggersCreateResource
+       :<|> ProjectsLocationsJobTriggersDeleteResource
+       :<|> ProjectsLocationsInspectTemplatesListResource
+       :<|> ProjectsLocationsInspectTemplatesPatchResource
+       :<|> ProjectsLocationsInspectTemplatesGetResource
+       :<|> ProjectsLocationsInspectTemplatesCreateResource
+       :<|> ProjectsLocationsInspectTemplatesDeleteResource
+       :<|> ProjectsLocationsStoredInfoTypesListResource
+       :<|> ProjectsLocationsStoredInfoTypesPatchResource
+       :<|> ProjectsLocationsStoredInfoTypesGetResource
+       :<|> ProjectsLocationsStoredInfoTypesCreateResource
+       :<|> ProjectsLocationsStoredInfoTypesDeleteResource
+       :<|> ProjectsLocationsDeidentifyTemplatesListResource
+       :<|>
+       ProjectsLocationsDeidentifyTemplatesPatchResource
+       :<|> ProjectsLocationsDeidentifyTemplatesGetResource
+       :<|>
+       ProjectsLocationsDeidentifyTemplatesCreateResource
+       :<|>
+       ProjectsLocationsDeidentifyTemplatesDeleteResource
        :<|> ProjectsDeidentifyTemplatesListResource
        :<|> ProjectsDeidentifyTemplatesPatchResource
        :<|> ProjectsDeidentifyTemplatesGetResource
        :<|> ProjectsDeidentifyTemplatesCreateResource
        :<|> ProjectsDeidentifyTemplatesDeleteResource
+       :<|> LocationsInfoTypesListResource

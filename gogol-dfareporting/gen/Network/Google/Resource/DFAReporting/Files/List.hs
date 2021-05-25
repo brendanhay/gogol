@@ -22,7 +22,7 @@
 --
 -- Lists files for a user profile.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.files.list@.
 module Network.Google.Resource.DFAReporting.Files.List
     (
     -- * REST Resource
@@ -33,43 +33,59 @@ module Network.Google.Resource.DFAReporting.Files.List
     , FilesList
 
     -- * Request Lenses
+    , flXgafv
+    , flUploadProtocol
+    , flAccessToken
+    , flUploadType
     , flProFileId
     , flSortOrder
     , flScope
     , flPageToken
     , flSortField
     , flMaxResults
+    , flCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.files.list@ method which the
 -- 'FilesList' request conforms to.
 type FilesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "files" :>
-               QueryParam "sortOrder" FilesListSortOrder :>
-                 QueryParam "scope" FilesListScope :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" FilesListSortField :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] FileList
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "sortOrder" FilesListSortOrder :>
+                         QueryParam "scope" FilesListScope :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField" FilesListSortField :>
+                               QueryParam "maxResults" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] FileList
 
 -- | Lists files for a user profile.
 --
 -- /See:/ 'filesList' smart constructor.
 data FilesList =
   FilesList'
-    { _flProFileId  :: !(Textual Int64)
-    , _flSortOrder  :: !FilesListSortOrder
-    , _flScope      :: !FilesListScope
-    , _flPageToken  :: !(Maybe Text)
-    , _flSortField  :: !FilesListSortField
+    { _flXgafv :: !(Maybe Xgafv)
+    , _flUploadProtocol :: !(Maybe Text)
+    , _flAccessToken :: !(Maybe Text)
+    , _flUploadType :: !(Maybe Text)
+    , _flProFileId :: !(Textual Int64)
+    , _flSortOrder :: !FilesListSortOrder
+    , _flScope :: !FilesListScope
+    , _flPageToken :: !(Maybe Text)
+    , _flSortField :: !FilesListSortField
     , _flMaxResults :: !(Textual Int32)
+    , _flCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +93,14 @@ data FilesList =
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'flXgafv'
+--
+-- * 'flUploadProtocol'
+--
+-- * 'flAccessToken'
+--
+-- * 'flUploadType'
 --
 -- * 'flProFileId'
 --
@@ -89,21 +113,49 @@ data FilesList =
 -- * 'flSortField'
 --
 -- * 'flMaxResults'
+--
+-- * 'flCallback'
 filesList
     :: Int64 -- ^ 'flProFileId'
     -> FilesList
 filesList pFlProFileId_ =
   FilesList'
-    { _flProFileId = _Coerce # pFlProFileId_
+    { _flXgafv = Nothing
+    , _flUploadProtocol = Nothing
+    , _flAccessToken = Nothing
+    , _flUploadType = Nothing
+    , _flProFileId = _Coerce # pFlProFileId_
     , _flSortOrder = FLSODescending
     , _flScope = FLSMine
     , _flPageToken = Nothing
     , _flSortField = FLSFLastModifiedTime
     , _flMaxResults = 10
+    , _flCallback = Nothing
     }
 
 
--- | The DFA profile ID.
+-- | V1 error format.
+flXgafv :: Lens' FilesList (Maybe Xgafv)
+flXgafv = lens _flXgafv (\ s a -> s{_flXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+flUploadProtocol :: Lens' FilesList (Maybe Text)
+flUploadProtocol
+  = lens _flUploadProtocol
+      (\ s a -> s{_flUploadProtocol = a})
+
+-- | OAuth access token.
+flAccessToken :: Lens' FilesList (Maybe Text)
+flAccessToken
+  = lens _flAccessToken
+      (\ s a -> s{_flAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+flUploadType :: Lens' FilesList (Maybe Text)
+flUploadType
+  = lens _flUploadType (\ s a -> s{_flUploadType = a})
+
+-- | The Campaign Manager 360 user profile ID.
 flProFileId :: Lens' FilesList Int64
 flProFileId
   = lens _flProFileId (\ s a -> s{_flProFileId = a}) .
@@ -134,15 +186,25 @@ flMaxResults
   = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
       . _Coerce
 
+-- | JSONP
+flCallback :: Lens' FilesList (Maybe Text)
+flCallback
+  = lens _flCallback (\ s a -> s{_flCallback = a})
+
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList
         type Scopes FilesList =
              '["https://www.googleapis.com/auth/dfareporting"]
         requestClient FilesList'{..}
-          = go _flProFileId (Just _flSortOrder) (Just _flScope)
+          = go _flProFileId _flXgafv _flUploadProtocol
+              _flAccessToken
+              _flUploadType
+              (Just _flSortOrder)
+              (Just _flScope)
               _flPageToken
               (Just _flSortField)
               (Just _flMaxResults)
+              _flCallback
               (Just AltJSON)
               dFAReportingService
           where go

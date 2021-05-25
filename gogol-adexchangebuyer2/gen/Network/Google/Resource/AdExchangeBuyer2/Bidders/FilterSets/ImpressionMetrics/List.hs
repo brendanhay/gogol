@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Bidders.FilterSets.ImpressionMet
     , bfsimlCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.impressionMetrics.list@ method which the
 -- 'BiddersFilterSetsImpressionMetricsList' request conforms to.
@@ -67,14 +67,14 @@ type BiddersFilterSetsImpressionMetricsListResource =
 -- /See:/ 'biddersFilterSetsImpressionMetricsList' smart constructor.
 data BiddersFilterSetsImpressionMetricsList =
   BiddersFilterSetsImpressionMetricsList'
-    { _bfsimlXgafv          :: !(Maybe Xgafv)
+    { _bfsimlXgafv :: !(Maybe Xgafv)
     , _bfsimlUploadProtocol :: !(Maybe Text)
-    , _bfsimlFilterSetName  :: !Text
-    , _bfsimlAccessToken    :: !(Maybe Text)
-    , _bfsimlUploadType     :: !(Maybe Text)
-    , _bfsimlPageToken      :: !(Maybe Text)
-    , _bfsimlPageSize       :: !(Maybe (Textual Int32))
-    , _bfsimlCallback       :: !(Maybe Text)
+    , _bfsimlFilterSetName :: !Text
+    , _bfsimlAccessToken :: !(Maybe Text)
+    , _bfsimlUploadType :: !(Maybe Text)
+    , _bfsimlPageToken :: !(Maybe Text)
+    , _bfsimlPageSize :: !(Maybe (Textual Int32))
+    , _bfsimlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Lists information about the supported locations for this service.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.list@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.list@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.List
     (
     -- * REST Resource
@@ -44,8 +44,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.List
     , pllCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
@@ -69,15 +69,15 @@ type ProjectsLocationsListResource =
 -- /See:/ 'projectsLocationsList' smart constructor.
 data ProjectsLocationsList =
   ProjectsLocationsList'
-    { _pllXgafv          :: !(Maybe Xgafv)
+    { _pllXgafv :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
-    , _pllAccessToken    :: !(Maybe Text)
-    , _pllUploadType     :: !(Maybe Text)
-    , _pllName           :: !Text
-    , _pllFilter         :: !(Maybe Text)
-    , _pllPageToken      :: !(Maybe Text)
-    , _pllPageSize       :: !(Maybe (Textual Int32))
-    , _pllCallback       :: !(Maybe Text)
+    , _pllAccessToken :: !(Maybe Text)
+    , _pllUploadType :: !(Maybe Text)
+    , _pllName :: !Text
+    , _pllFilter :: !(Maybe Text)
+    , _pllPageToken :: !(Maybe Text)
+    , _pllPageSize :: !(Maybe (Textual Int32))
+    , _pllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,17 +146,21 @@ pllUploadType
 pllName :: Lens' ProjectsLocationsList Text
 pllName = lens _pllName (\ s a -> s{_pllName = a})
 
--- | The standard list filter.
+-- | A filter to narrow down results to a preferred subset. The filtering
+-- language accepts strings like \"displayName=tokyo\", and is documented
+-- in more detail in [AIP-160](https:\/\/google.aip.dev\/160).
 pllFilter :: Lens' ProjectsLocationsList (Maybe Text)
 pllFilter
   = lens _pllFilter (\ s a -> s{_pllFilter = a})
 
--- | The standard list page token.
+-- | A page token received from the \`next_page_token\` field in the
+-- response. Send that page token to receive the subsequent page.
 pllPageToken :: Lens' ProjectsLocationsList (Maybe Text)
 pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
--- | The standard list page size.
+-- | The maximum number of results to return. If not set, the service selects
+-- a default.
 pllPageSize :: Lens' ProjectsLocationsList (Maybe Int32)
 pllPageSize
   = lens _pllPageSize (\ s a -> s{_pllPageSize = a}) .

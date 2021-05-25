@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NodeTemplates.Insert
     , ntiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTemplates.insert@ method which the
 -- 'NodeTemplatesInsert' request conforms to.
@@ -65,9 +65,9 @@ type NodeTemplatesInsertResource =
 data NodeTemplatesInsert =
   NodeTemplatesInsert'
     { _ntiRequestId :: !(Maybe Text)
-    , _ntiProject   :: !Text
-    , _ntiPayload   :: !NodeTemplate
-    , _ntiRegion    :: !Text
+    , _ntiProject :: !Text
+    , _ntiPayload :: !NodeTemplate
+    , _ntiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

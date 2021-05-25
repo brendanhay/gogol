@@ -22,10 +22,10 @@
 --
 -- Aggregates data of a certain type or stream into buckets divided by a
 -- given type of boundary. Multiple data sets of multiple types and from
--- multiple sources can be aggreated into exactly one bucket type per
+-- multiple sources can be aggregated into exactly one bucket type per
 -- request.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataset.aggregate@.
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataset.aggregate@.
 module Network.Google.Resource.Fitness.Users.DataSet.Aggregate
     (
     -- * REST Resource
@@ -36,12 +36,17 @@ module Network.Google.Resource.Fitness.Users.DataSet.Aggregate
     , UsersDataSetAggregate
 
     -- * Request Lenses
+    , udsaXgafv
+    , udsaUploadProtocol
+    , udsaAccessToken
+    , udsaUploadType
     , udsaPayload
     , udsaUserId
+    , udsaCallback
     ) where
 
-import           Network.Google.Fitness.Types
-import           Network.Google.Prelude
+import Network.Google.Fitness.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataset.aggregate@ method which the
 -- 'UsersDataSetAggregate' request conforms to.
@@ -51,20 +56,30 @@ type UsersDataSetAggregateResource =
          "users" :>
            Capture "userId" Text :>
              "dataset:aggregate" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] AggregateRequest :>
-                   Post '[JSON] AggregateResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AggregateRequest :>
+                             Post '[JSON] AggregateResponse
 
 -- | Aggregates data of a certain type or stream into buckets divided by a
 -- given type of boundary. Multiple data sets of multiple types and from
--- multiple sources can be aggreated into exactly one bucket type per
+-- multiple sources can be aggregated into exactly one bucket type per
 -- request.
 --
 -- /See:/ 'usersDataSetAggregate' smart constructor.
 data UsersDataSetAggregate =
   UsersDataSetAggregate'
-    { _udsaPayload :: !AggregateRequest
-    , _udsaUserId  :: !Text
+    { _udsaXgafv :: !(Maybe Xgafv)
+    , _udsaUploadProtocol :: !(Maybe Text)
+    , _udsaAccessToken :: !(Maybe Text)
+    , _udsaUploadType :: !(Maybe Text)
+    , _udsaPayload :: !AggregateRequest
+    , _udsaUserId :: !Text
+    , _udsaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,17 +88,57 @@ data UsersDataSetAggregate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'udsaXgafv'
+--
+-- * 'udsaUploadProtocol'
+--
+-- * 'udsaAccessToken'
+--
+-- * 'udsaUploadType'
+--
 -- * 'udsaPayload'
 --
 -- * 'udsaUserId'
+--
+-- * 'udsaCallback'
 usersDataSetAggregate
     :: AggregateRequest -- ^ 'udsaPayload'
     -> Text -- ^ 'udsaUserId'
     -> UsersDataSetAggregate
 usersDataSetAggregate pUdsaPayload_ pUdsaUserId_ =
   UsersDataSetAggregate'
-    {_udsaPayload = pUdsaPayload_, _udsaUserId = pUdsaUserId_}
+    { _udsaXgafv = Nothing
+    , _udsaUploadProtocol = Nothing
+    , _udsaAccessToken = Nothing
+    , _udsaUploadType = Nothing
+    , _udsaPayload = pUdsaPayload_
+    , _udsaUserId = pUdsaUserId_
+    , _udsaCallback = Nothing
+    }
 
+
+-- | V1 error format.
+udsaXgafv :: Lens' UsersDataSetAggregate (Maybe Xgafv)
+udsaXgafv
+  = lens _udsaXgafv (\ s a -> s{_udsaXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+udsaUploadProtocol :: Lens' UsersDataSetAggregate (Maybe Text)
+udsaUploadProtocol
+  = lens _udsaUploadProtocol
+      (\ s a -> s{_udsaUploadProtocol = a})
+
+-- | OAuth access token.
+udsaAccessToken :: Lens' UsersDataSetAggregate (Maybe Text)
+udsaAccessToken
+  = lens _udsaAccessToken
+      (\ s a -> s{_udsaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+udsaUploadType :: Lens' UsersDataSetAggregate (Maybe Text)
+udsaUploadType
+  = lens _udsaUploadType
+      (\ s a -> s{_udsaUploadType = a})
 
 -- | Multipart request metadata.
 udsaPayload :: Lens' UsersDataSetAggregate AggregateRequest
@@ -95,6 +150,11 @@ udsaPayload
 udsaUserId :: Lens' UsersDataSetAggregate Text
 udsaUserId
   = lens _udsaUserId (\ s a -> s{_udsaUserId = a})
+
+-- | JSONP
+udsaCallback :: Lens' UsersDataSetAggregate (Maybe Text)
+udsaCallback
+  = lens _udsaCallback (\ s a -> s{_udsaCallback = a})
 
 instance GoogleRequest UsersDataSetAggregate where
         type Rs UsersDataSetAggregate = AggregateResponse
@@ -109,6 +169,8 @@ instance GoogleRequest UsersDataSetAggregate where
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.body_temperature.read",
                "https://www.googleapis.com/auth/fitness.body_temperature.write",
+               "https://www.googleapis.com/auth/fitness.heart_rate.read",
+               "https://www.googleapis.com/auth/fitness.heart_rate.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write",
                "https://www.googleapis.com/auth/fitness.nutrition.read",
@@ -116,9 +178,16 @@ instance GoogleRequest UsersDataSetAggregate where
                "https://www.googleapis.com/auth/fitness.oxygen_saturation.read",
                "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
                "https://www.googleapis.com/auth/fitness.reproductive_health.read",
-               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write",
+               "https://www.googleapis.com/auth/fitness.sleep.read",
+               "https://www.googleapis.com/auth/fitness.sleep.write"]
         requestClient UsersDataSetAggregate'{..}
-          = go _udsaUserId (Just AltJSON) _udsaPayload
+          = go _udsaUserId _udsaXgafv _udsaUploadProtocol
+              _udsaAccessToken
+              _udsaUploadType
+              _udsaCallback
+              (Just AltJSON)
+              _udsaPayload
               fitnessService
           where go
                   = buildClient

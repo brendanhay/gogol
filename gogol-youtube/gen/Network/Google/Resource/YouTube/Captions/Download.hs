@@ -20,12 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Downloads a caption track. The caption track is returned in its original
--- format unless the request specifies a value for the tfmt parameter and
--- in its original language unless the request specifies a value for the
--- tlang parameter.
+-- Downloads a caption track.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.download@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.captions.download@.
 module Network.Google.Resource.YouTube.Captions.Download
     (
     -- * REST Resource
@@ -37,14 +34,19 @@ module Network.Google.Resource.YouTube.Captions.Download
 
     -- * Request Lenses
     , capaOnBehalfOf
+    , capaXgafv
+    , capaUploadProtocol
+    , capaAccessToken
     , capaTlang
+    , capaUploadType
     , capaOnBehalfOfContentOwner
     , capaId
     , capaTfmt
+    , capaCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.download@ method which the
 -- 'CaptionsDownload' request conforms to.
@@ -54,35 +56,47 @@ type CaptionsDownloadResource =
          "captions" :>
            Capture "id" Text :>
              QueryParam "onBehalfOf" Text :>
-               QueryParam "tlang" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "tfmt" CaptionsDownloadTfmt :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "tlang" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "onBehalfOfContentOwner" Text :>
+                           QueryParam "tfmt" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] ()
        :<|>
        "youtube" :>
          "v3" :>
            "captions" :>
              Capture "id" Text :>
                QueryParam "onBehalfOf" Text :>
-                 QueryParam "tlang" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "tfmt" CaptionsDownloadTfmt :>
-                       QueryParam "alt" AltMedia :>
-                         Get '[OctetStream] Stream
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "tlang" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "onBehalfOfContentOwner" Text :>
+                             QueryParam "tfmt" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltMedia :>
+                                   Get '[OctetStream] Stream
 
--- | Downloads a caption track. The caption track is returned in its original
--- format unless the request specifies a value for the tfmt parameter and
--- in its original language unless the request specifies a value for the
--- tlang parameter.
+-- | Downloads a caption track.
 --
 -- /See:/ 'captionsDownload' smart constructor.
 data CaptionsDownload =
   CaptionsDownload'
-    { _capaOnBehalfOf             :: !(Maybe Text)
-    , _capaTlang                  :: !(Maybe Text)
+    { _capaOnBehalfOf :: !(Maybe Text)
+    , _capaXgafv :: !(Maybe Xgafv)
+    , _capaUploadProtocol :: !(Maybe Text)
+    , _capaAccessToken :: !(Maybe Text)
+    , _capaTlang :: !(Maybe Text)
+    , _capaUploadType :: !(Maybe Text)
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
-    , _capaId                     :: !Text
-    , _capaTfmt                   :: !(Maybe CaptionsDownloadTfmt)
+    , _capaId :: !Text
+    , _capaTfmt :: !(Maybe Text)
+    , _capaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -93,23 +107,38 @@ data CaptionsDownload =
 --
 -- * 'capaOnBehalfOf'
 --
+-- * 'capaXgafv'
+--
+-- * 'capaUploadProtocol'
+--
+-- * 'capaAccessToken'
+--
 -- * 'capaTlang'
+--
+-- * 'capaUploadType'
 --
 -- * 'capaOnBehalfOfContentOwner'
 --
 -- * 'capaId'
 --
 -- * 'capaTfmt'
+--
+-- * 'capaCallback'
 captionsDownload
     :: Text -- ^ 'capaId'
     -> CaptionsDownload
 captionsDownload pCapaId_ =
   CaptionsDownload'
     { _capaOnBehalfOf = Nothing
+    , _capaXgafv = Nothing
+    , _capaUploadProtocol = Nothing
+    , _capaAccessToken = Nothing
     , _capaTlang = Nothing
+    , _capaUploadType = Nothing
     , _capaOnBehalfOfContentOwner = Nothing
     , _capaId = pCapaId_
     , _capaTfmt = Nothing
+    , _capaCallback = Nothing
     }
 
 
@@ -120,17 +149,37 @@ capaOnBehalfOf
   = lens _capaOnBehalfOf
       (\ s a -> s{_capaOnBehalfOf = a})
 
--- | The tlang parameter specifies that the API response should return a
--- translation of the specified caption track. The parameter value is an
--- ISO 639-1 two-letter language code that identifies the desired caption
--- language. The translation is generated by using machine translation,
--- such as Google Translate.
+-- | V1 error format.
+capaXgafv :: Lens' CaptionsDownload (Maybe Xgafv)
+capaXgafv
+  = lens _capaXgafv (\ s a -> s{_capaXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+capaUploadProtocol :: Lens' CaptionsDownload (Maybe Text)
+capaUploadProtocol
+  = lens _capaUploadProtocol
+      (\ s a -> s{_capaUploadProtocol = a})
+
+-- | OAuth access token.
+capaAccessToken :: Lens' CaptionsDownload (Maybe Text)
+capaAccessToken
+  = lens _capaAccessToken
+      (\ s a -> s{_capaAccessToken = a})
+
+-- | tlang is the language code; machine translate the captions into this
+-- language.
 capaTlang :: Lens' CaptionsDownload (Maybe Text)
 capaTlang
   = lens _capaTlang (\ s a -> s{_capaTlang = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+capaUploadType :: Lens' CaptionsDownload (Maybe Text)
+capaUploadType
+  = lens _capaUploadType
+      (\ s a -> s{_capaUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -144,17 +193,19 @@ capaOnBehalfOfContentOwner
   = lens _capaOnBehalfOfContentOwner
       (\ s a -> s{_capaOnBehalfOfContentOwner = a})
 
--- | The id parameter identifies the caption track that is being retrieved.
--- The value is a caption track ID as identified by the id property in a
--- caption resource.
+-- | The ID of the caption track to download, required for One Platform.
 capaId :: Lens' CaptionsDownload Text
 capaId = lens _capaId (\ s a -> s{_capaId = a})
 
--- | The tfmt parameter specifies that the caption track should be returned
--- in a specific format. If the parameter is not included in the request,
--- the track is returned in its original format.
-capaTfmt :: Lens' CaptionsDownload (Maybe CaptionsDownloadTfmt)
+-- | Convert the captions into this format. Supported options are sbv, srt,
+-- and vtt.
+capaTfmt :: Lens' CaptionsDownload (Maybe Text)
 capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
+
+-- | JSONP
+capaCallback :: Lens' CaptionsDownload (Maybe Text)
+capaCallback
+  = lens _capaCallback (\ s a -> s{_capaCallback = a})
 
 instance GoogleRequest CaptionsDownload where
         type Rs CaptionsDownload = ()
@@ -162,9 +213,14 @@ instance GoogleRequest CaptionsDownload where
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient CaptionsDownload'{..}
-          = go _capaId _capaOnBehalfOf _capaTlang
+          = go _capaId _capaOnBehalfOf _capaXgafv
+              _capaUploadProtocol
+              _capaAccessToken
+              _capaTlang
+              _capaUploadType
               _capaOnBehalfOfContentOwner
               _capaTfmt
+              _capaCallback
               (Just AltJSON)
               youTubeService
           where go :<|> _
@@ -179,9 +235,14 @@ instance GoogleRequest
         type Scopes (MediaDownload CaptionsDownload) =
              Scopes CaptionsDownload
         requestClient (MediaDownload CaptionsDownload'{..})
-          = go _capaId _capaOnBehalfOf _capaTlang
+          = go _capaId _capaOnBehalfOf _capaXgafv
+              _capaUploadProtocol
+              _capaAccessToken
+              _capaTlang
+              _capaUploadType
               _capaOnBehalfOfContentOwner
               _capaTfmt
+              _capaCallback
               (Just AltMedia)
               youTubeService
           where _ :<|> go

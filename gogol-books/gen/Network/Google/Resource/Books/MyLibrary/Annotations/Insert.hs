@@ -22,7 +22,7 @@
 --
 -- Inserts a new annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.insert@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.mylibrary.annotations.insert@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
     (
     -- * REST Resource
@@ -33,15 +33,20 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
     , MyLibraryAnnotationsInsert
 
     -- * Request Lenses
+    , mlaiXgafv
+    , mlaiUploadProtocol
     , mlaiCountry
+    , mlaiAccessToken
+    , mlaiUploadType
     , mlaiPayload
     , mlaiShowOnlySummaryInResponse
     , mlaiAnnotationId
     , mlaiSource
+    , mlaiCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.insert@ method which the
 -- 'MyLibraryAnnotationsInsert' request conforms to.
@@ -50,23 +55,34 @@ type MyLibraryAnnotationsInsertResource =
        "v1" :>
          "mylibrary" :>
            "annotations" :>
-             QueryParam "country" Text :>
-               QueryParam "showOnlySummaryInResponse" Bool :>
-                 QueryParam "annotationId" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "country" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "showOnlySummaryInResponse" Bool :>
+                         QueryParam "annotationId" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Annotation :>
+                                   Post '[JSON] Annotation
 
 -- | Inserts a new annotation.
 --
 -- /See:/ 'myLibraryAnnotationsInsert' smart constructor.
 data MyLibraryAnnotationsInsert =
   MyLibraryAnnotationsInsert'
-    { _mlaiCountry                   :: !(Maybe Text)
-    , _mlaiPayload                   :: !Annotation
+    { _mlaiXgafv :: !(Maybe Xgafv)
+    , _mlaiUploadProtocol :: !(Maybe Text)
+    , _mlaiCountry :: !(Maybe Text)
+    , _mlaiAccessToken :: !(Maybe Text)
+    , _mlaiUploadType :: !(Maybe Text)
+    , _mlaiPayload :: !Annotation
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
-    , _mlaiAnnotationId              :: !(Maybe Text)
-    , _mlaiSource                    :: !(Maybe Text)
+    , _mlaiAnnotationId :: !(Maybe Text)
+    , _mlaiSource :: !(Maybe Text)
+    , _mlaiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,7 +91,15 @@ data MyLibraryAnnotationsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mlaiXgafv'
+--
+-- * 'mlaiUploadProtocol'
+--
 -- * 'mlaiCountry'
+--
+-- * 'mlaiAccessToken'
+--
+-- * 'mlaiUploadType'
 --
 -- * 'mlaiPayload'
 --
@@ -84,23 +108,53 @@ data MyLibraryAnnotationsInsert =
 -- * 'mlaiAnnotationId'
 --
 -- * 'mlaiSource'
+--
+-- * 'mlaiCallback'
 myLibraryAnnotationsInsert
     :: Annotation -- ^ 'mlaiPayload'
     -> MyLibraryAnnotationsInsert
 myLibraryAnnotationsInsert pMlaiPayload_ =
   MyLibraryAnnotationsInsert'
-    { _mlaiCountry = Nothing
+    { _mlaiXgafv = Nothing
+    , _mlaiUploadProtocol = Nothing
+    , _mlaiCountry = Nothing
+    , _mlaiAccessToken = Nothing
+    , _mlaiUploadType = Nothing
     , _mlaiPayload = pMlaiPayload_
     , _mlaiShowOnlySummaryInResponse = Nothing
     , _mlaiAnnotationId = Nothing
     , _mlaiSource = Nothing
+    , _mlaiCallback = Nothing
     }
 
+
+-- | V1 error format.
+mlaiXgafv :: Lens' MyLibraryAnnotationsInsert (Maybe Xgafv)
+mlaiXgafv
+  = lens _mlaiXgafv (\ s a -> s{_mlaiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mlaiUploadProtocol :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
+mlaiUploadProtocol
+  = lens _mlaiUploadProtocol
+      (\ s a -> s{_mlaiUploadProtocol = a})
 
 -- | ISO-3166-1 code to override the IP-based location.
 mlaiCountry :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
 mlaiCountry
   = lens _mlaiCountry (\ s a -> s{_mlaiCountry = a})
+
+-- | OAuth access token.
+mlaiAccessToken :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
+mlaiAccessToken
+  = lens _mlaiAccessToken
+      (\ s a -> s{_mlaiAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mlaiUploadType :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
+mlaiUploadType
+  = lens _mlaiUploadType
+      (\ s a -> s{_mlaiUploadType = a})
 
 -- | Multipart request metadata.
 mlaiPayload :: Lens' MyLibraryAnnotationsInsert Annotation
@@ -125,15 +179,24 @@ mlaiSource :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
 mlaiSource
   = lens _mlaiSource (\ s a -> s{_mlaiSource = a})
 
+-- | JSONP
+mlaiCallback :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
+mlaiCallback
+  = lens _mlaiCallback (\ s a -> s{_mlaiCallback = a})
+
 instance GoogleRequest MyLibraryAnnotationsInsert
          where
         type Rs MyLibraryAnnotationsInsert = Annotation
         type Scopes MyLibraryAnnotationsInsert =
              '["https://www.googleapis.com/auth/books"]
         requestClient MyLibraryAnnotationsInsert'{..}
-          = go _mlaiCountry _mlaiShowOnlySummaryInResponse
+          = go _mlaiXgafv _mlaiUploadProtocol _mlaiCountry
+              _mlaiAccessToken
+              _mlaiUploadType
+              _mlaiShowOnlySummaryInResponse
               _mlaiAnnotationId
               _mlaiSource
+              _mlaiCallback
               (Just AltJSON)
               _mlaiPayload
               booksService

@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Promotes the read replica instance to be a stand-alone Cloud SQL
--- instance.
+-- instance. Using this operation might cause your instance to restart.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.instances.promoteReplica@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.instances.promoteReplica@.
 module Network.Google.Resource.SQL.Instances.PromoteReplica
     (
     -- * REST Resource
@@ -34,32 +34,46 @@ module Network.Google.Resource.SQL.Instances.PromoteReplica
     , InstancesPromoteReplica
 
     -- * Request Lenses
+    , iprXgafv
+    , iprUploadProtocol
     , iprProject
+    , iprAccessToken
+    , iprUploadType
+    , iprCallback
     , iprInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.promoteReplica@ method which the
 -- 'InstancesPromoteReplica' request conforms to.
 type InstancesPromoteReplicaResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "promoteReplica" :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "promoteReplica" :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Promotes the read replica instance to be a stand-alone Cloud SQL
--- instance.
+-- instance. Using this operation might cause your instance to restart.
 --
 -- /See:/ 'instancesPromoteReplica' smart constructor.
 data InstancesPromoteReplica =
   InstancesPromoteReplica'
-    { _iprProject  :: !Text
+    { _iprXgafv :: !(Maybe Xgafv)
+    , _iprUploadProtocol :: !(Maybe Text)
+    , _iprProject :: !Text
+    , _iprAccessToken :: !(Maybe Text)
+    , _iprUploadType :: !(Maybe Text)
+    , _iprCallback :: !(Maybe Text)
     , _iprInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -69,7 +83,17 @@ data InstancesPromoteReplica =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'iprXgafv'
+--
+-- * 'iprUploadProtocol'
+--
 -- * 'iprProject'
+--
+-- * 'iprAccessToken'
+--
+-- * 'iprUploadType'
+--
+-- * 'iprCallback'
 --
 -- * 'iprInstance'
 instancesPromoteReplica
@@ -78,13 +102,47 @@ instancesPromoteReplica
     -> InstancesPromoteReplica
 instancesPromoteReplica pIprProject_ pIprInstance_ =
   InstancesPromoteReplica'
-    {_iprProject = pIprProject_, _iprInstance = pIprInstance_}
+    { _iprXgafv = Nothing
+    , _iprUploadProtocol = Nothing
+    , _iprProject = pIprProject_
+    , _iprAccessToken = Nothing
+    , _iprUploadType = Nothing
+    , _iprCallback = Nothing
+    , _iprInstance = pIprInstance_
+    }
 
+
+-- | V1 error format.
+iprXgafv :: Lens' InstancesPromoteReplica (Maybe Xgafv)
+iprXgafv = lens _iprXgafv (\ s a -> s{_iprXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+iprUploadProtocol :: Lens' InstancesPromoteReplica (Maybe Text)
+iprUploadProtocol
+  = lens _iprUploadProtocol
+      (\ s a -> s{_iprUploadProtocol = a})
 
 -- | ID of the project that contains the read replica.
 iprProject :: Lens' InstancesPromoteReplica Text
 iprProject
   = lens _iprProject (\ s a -> s{_iprProject = a})
+
+-- | OAuth access token.
+iprAccessToken :: Lens' InstancesPromoteReplica (Maybe Text)
+iprAccessToken
+  = lens _iprAccessToken
+      (\ s a -> s{_iprAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+iprUploadType :: Lens' InstancesPromoteReplica (Maybe Text)
+iprUploadType
+  = lens _iprUploadType
+      (\ s a -> s{_iprUploadType = a})
+
+-- | JSONP
+iprCallback :: Lens' InstancesPromoteReplica (Maybe Text)
+iprCallback
+  = lens _iprCallback (\ s a -> s{_iprCallback = a})
 
 -- | Cloud SQL read replica instance name.
 iprInstance :: Lens' InstancesPromoteReplica Text
@@ -97,7 +155,12 @@ instance GoogleRequest InstancesPromoteReplica where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient InstancesPromoteReplica'{..}
-          = go _iprProject _iprInstance (Just AltJSON)
+          = go _iprProject _iprInstance _iprXgafv
+              _iprUploadProtocol
+              _iprAccessToken
+              _iprUploadType
+              _iprCallback
+              (Just AltJSON)
               sQLAdminService
           where go
                   = buildClient

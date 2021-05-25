@@ -39,8 +39,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
     , pcpConfigId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.patch@ method which the
 -- 'PretargetingConfigPatch' request conforms to.
@@ -60,9 +60,9 @@ type PretargetingConfigPatchResource =
 -- /See:/ 'pretargetingConfigPatch' smart constructor.
 data PretargetingConfigPatch =
   PretargetingConfigPatch'
-    { _pcpPayload   :: !PretargetingConfig
+    { _pcpPayload :: !PretargetingConfig
     , _pcpAccountId :: !(Textual Int64)
-    , _pcpConfigId  :: !(Textual Int64)
+    , _pcpConfigId :: !(Textual Int64)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

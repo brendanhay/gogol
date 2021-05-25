@@ -16,40 +16,40 @@
 --
 module Network.Google.DNS.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | String mnemonic specifying the DNSSEC algorithm of this key.
 data DNSKeySpecAlgorithm
-    = ECDSAP256SHA256
-      -- ^ @ECDSAP256SHA256@
-    | ECDSAP384SHA384
-      -- ^ @ECDSAP384SHA384@
-    | RSASHA1
+    = RSASHA1
       -- ^ @RSASHA1@
     | RSASHA256
       -- ^ @RSASHA256@
     | RSASHA512
       -- ^ @RSASHA512@
+    | ECDSAP256SHA256
+      -- ^ @ECDSAP256SHA256@
+    | ECDSAP384SHA384
+      -- ^ @ECDSAP384SHA384@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DNSKeySpecAlgorithm
 
 instance FromHttpApiData DNSKeySpecAlgorithm where
     parseQueryParam = \case
-        "ECDSAP256SHA256" -> Right ECDSAP256SHA256
-        "ECDSAP384SHA384" -> Right ECDSAP384SHA384
         "RSASHA1" -> Right RSASHA1
         "RSASHA256" -> Right RSASHA256
         "RSASHA512" -> Right RSASHA512
+        "ECDSAP256SHA256" -> Right ECDSAP256SHA256
+        "ECDSAP384SHA384" -> Right ECDSAP384SHA384
         x -> Left ("Unable to parse DNSKeySpecAlgorithm from: " <> x)
 
 instance ToHttpApiData DNSKeySpecAlgorithm where
     toQueryParam = \case
-        ECDSAP256SHA256 -> "ECDSAP256SHA256"
-        ECDSAP384SHA384 -> "ECDSAP384SHA384"
         RSASHA1 -> "RSASHA1"
         RSASHA256 -> "RSASHA256"
         RSASHA512 -> "RSASHA512"
+        ECDSAP256SHA256 -> "ECDSAP256SHA256"
+        ECDSAP384SHA384 -> "ECDSAP384SHA384"
 
 instance FromJSON DNSKeySpecAlgorithm where
     parseJSON = parseJSONText "DNSKeySpecAlgorithm"
@@ -57,8 +57,8 @@ instance FromJSON DNSKeySpecAlgorithm where
 instance ToJSON DNSKeySpecAlgorithm where
     toJSON = toJSONText
 
--- | Specifies the mechanism used to provide authenticated
--- denial-of-existence responses. Output only while state is not OFF.
+-- | Specifies the mechanism for authenticated denial-of-existence responses.
+-- Can only be changed while the state is OFF.
 data ManagedZoneDNSSecConfigNonExistence
     = Nsec
       -- ^ @NSEC@
@@ -85,14 +85,52 @@ instance FromJSON ManagedZoneDNSSecConfigNonExistence where
 instance ToJSON ManagedZoneDNSSecConfigNonExistence where
     toJSON = toJSONText
 
+-- | Forwarding path for this NameServerTarget. If unset or set to DEFAULT,
+-- Cloud DNS will make forwarding decision based on address ranges, i.e.
+-- RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the
+-- Internet. When set to PRIVATE, Cloud DNS will always send queries
+-- through VPC for this target.
+data ManagedZoneForwardingConfigNameServerTargetForwardingPath
+    = Default
+      -- ^ @DEFAULT@
+      -- Cloud DNS will make forwarding decision based on address ranges, i.e.
+      -- RFC1918 addresses forward to the target through the VPC and non-RFC1918
+      -- addresses will forward to the target through the Internet
+    | Private
+      -- ^ @PRIVATE@
+      -- Cloud DNS will always forward to this target through the VPC.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ManagedZoneForwardingConfigNameServerTargetForwardingPath
+
+instance FromHttpApiData ManagedZoneForwardingConfigNameServerTargetForwardingPath where
+    parseQueryParam = \case
+        "DEFAULT" -> Right Default
+        "PRIVATE" -> Right Private
+        x -> Left ("Unable to parse ManagedZoneForwardingConfigNameServerTargetForwardingPath from: " <> x)
+
+instance ToHttpApiData ManagedZoneForwardingConfigNameServerTargetForwardingPath where
+    toQueryParam = \case
+        Default -> "DEFAULT"
+        Private -> "PRIVATE"
+
+instance FromJSON ManagedZoneForwardingConfigNameServerTargetForwardingPath where
+    parseJSON = parseJSONText "ManagedZoneForwardingConfigNameServerTargetForwardingPath"
+
+instance ToJSON ManagedZoneForwardingConfigNameServerTargetForwardingPath where
+    toJSON = toJSONText
+
 -- | Specifies whether DNSSEC is enabled, and what mode it is in.
 data ManagedZoneDNSSecConfigState
     = Off
       -- ^ @OFF@
+      -- DNSSEC is disabled; the zone is not signed.
     | ON
       -- ^ @ON@
+      -- DNSSEC is enabled; the zone is signed and fully managed.
     | Transfer
       -- ^ @TRANSFER@
+      -- DNSSEC is enabled, but in a \"transfer\" mode.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ManagedZoneDNSSecConfigState
@@ -119,24 +157,24 @@ instance ToJSON ManagedZoneDNSSecConfigState where
 -- | The zone\'s visibility: public zones are exposed to the Internet, while
 -- private zones are visible only to Virtual Private Cloud resources.
 data ManagedZoneVisibility
-    = Private
-      -- ^ @PRIVATE@
-    | Public
+    = MZVPublic
       -- ^ @PUBLIC@
+    | MZVPrivate
+      -- ^ @PRIVATE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ManagedZoneVisibility
 
 instance FromHttpApiData ManagedZoneVisibility where
     parseQueryParam = \case
-        "PRIVATE" -> Right Private
-        "PUBLIC" -> Right Public
+        "PUBLIC" -> Right MZVPublic
+        "PRIVATE" -> Right MZVPrivate
         x -> Left ("Unable to parse ManagedZoneVisibility from: " <> x)
 
 instance ToHttpApiData ManagedZoneVisibility where
     toQueryParam = \case
-        Private -> "PRIVATE"
-        Public -> "PUBLIC"
+        MZVPublic -> "PUBLIC"
+        MZVPrivate -> "PRIVATE"
 
 instance FromJSON ManagedZoneVisibility where
     parseJSON = parseJSONText "ManagedZoneVisibility"
@@ -203,24 +241,24 @@ instance ToJSON DNSKeyDigestType where
 -- update the authoritative servers has been sent, but the servers might
 -- not be updated yet.
 data OperationStatus
-    = Done
-      -- ^ @DONE@
-    | Pending
+    = Pending
       -- ^ @PENDING@
+    | Done
+      -- ^ @DONE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationStatus
 
 instance FromHttpApiData OperationStatus where
     parseQueryParam = \case
-        "DONE" -> Right Done
         "PENDING" -> Right Pending
+        "DONE" -> Right Done
         x -> Left ("Unable to parse OperationStatus from: " <> x)
 
 instance ToHttpApiData OperationStatus where
     toQueryParam = \case
-        Done -> "DONE"
         Pending -> "PENDING"
+        Done -> "DONE"
 
 instance FromJSON OperationStatus where
     parseJSON = parseJSONText "OperationStatus"
@@ -231,36 +269,36 @@ instance ToJSON OperationStatus where
 -- | String mnemonic specifying the DNSSEC algorithm of this key. Immutable
 -- after creation time.
 data DNSKeyAlgorithm
-    = DKAECDSAP256SHA256
-      -- ^ @ECDSAP256SHA256@
-    | DKAECDSAP384SHA384
-      -- ^ @ECDSAP384SHA384@
-    | DKARSASHA1
+    = DKARSASHA1
       -- ^ @RSASHA1@
     | DKARSASHA256
       -- ^ @RSASHA256@
     | DKARSASHA512
       -- ^ @RSASHA512@
+    | DKAECDSAP256SHA256
+      -- ^ @ECDSAP256SHA256@
+    | DKAECDSAP384SHA384
+      -- ^ @ECDSAP384SHA384@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DNSKeyAlgorithm
 
 instance FromHttpApiData DNSKeyAlgorithm where
     parseQueryParam = \case
-        "ECDSAP256SHA256" -> Right DKAECDSAP256SHA256
-        "ECDSAP384SHA384" -> Right DKAECDSAP384SHA384
         "RSASHA1" -> Right DKARSASHA1
         "RSASHA256" -> Right DKARSASHA256
         "RSASHA512" -> Right DKARSASHA512
+        "ECDSAP256SHA256" -> Right DKAECDSAP256SHA256
+        "ECDSAP384SHA384" -> Right DKAECDSAP384SHA384
         x -> Left ("Unable to parse DNSKeyAlgorithm from: " <> x)
 
 instance ToHttpApiData DNSKeyAlgorithm where
     toQueryParam = \case
-        DKAECDSAP256SHA256 -> "ECDSAP256SHA256"
-        DKAECDSAP384SHA384 -> "ECDSAP384SHA384"
         DKARSASHA1 -> "RSASHA1"
         DKARSASHA256 -> "RSASHA256"
         DKARSASHA512 -> "RSASHA512"
+        DKAECDSAP256SHA256 -> "ECDSAP256SHA256"
+        DKAECDSAP384SHA384 -> "ECDSAP384SHA384"
 
 instance FromJSON DNSKeyAlgorithm where
     parseJSON = parseJSONText "DNSKeyAlgorithm"
@@ -300,32 +338,96 @@ instance ToJSON DNSKeySpecKeyType where
     toJSON = toJSONText
 
 -- | Status of the operation (output only). A status of \"done\" means that
--- the request to update the authoritative servers has been sent, but the
+-- the request to update the authoritative servers has been sent but the
 -- servers might not be updated yet.
 data ChangeStatus
-    = CSDone
-      -- ^ @DONE@
-    | CSPending
+    = CSPending
       -- ^ @PENDING@
+    | CSDone
+      -- ^ @DONE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeStatus
 
 instance FromHttpApiData ChangeStatus where
     parseQueryParam = \case
-        "DONE" -> Right CSDone
         "PENDING" -> Right CSPending
+        "DONE" -> Right CSDone
         x -> Left ("Unable to parse ChangeStatus from: " <> x)
 
 instance ToHttpApiData ChangeStatus where
     toQueryParam = \case
-        CSDone -> "DONE"
         CSPending -> "PENDING"
+        CSDone -> "DONE"
 
 instance FromJSON ChangeStatus where
     parseJSON = parseJSONText "ChangeStatus"
 
 instance ToJSON ChangeStatus where
+    toJSON = toJSONText
+
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | Forwarding path for this TargetNameServer. If unset or set to DEFAULT,
+-- Cloud DNS will make forwarding decision based on address ranges, i.e.
+-- RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the
+-- Internet. When set to PRIVATE, Cloud DNS will always send queries
+-- through VPC for this target.
+data PolicyAlternativeNameServerConfigTargetNameServerForwardingPath
+    = PANSCTNSFPDefault
+      -- ^ @DEFAULT@
+      -- Cloud DNS will make forwarding decision based on address ranges, i.e.
+      -- RFC1918 addresses forward to the target through the VPC and non-RFC1918
+      -- addresses will forward to the target through the Internet
+    | PANSCTNSFPPrivate
+      -- ^ @PRIVATE@
+      -- Cloud DNS will always forward to this target through the VPC.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PolicyAlternativeNameServerConfigTargetNameServerForwardingPath
+
+instance FromHttpApiData PolicyAlternativeNameServerConfigTargetNameServerForwardingPath where
+    parseQueryParam = \case
+        "DEFAULT" -> Right PANSCTNSFPDefault
+        "PRIVATE" -> Right PANSCTNSFPPrivate
+        x -> Left ("Unable to parse PolicyAlternativeNameServerConfigTargetNameServerForwardingPath from: " <> x)
+
+instance ToHttpApiData PolicyAlternativeNameServerConfigTargetNameServerForwardingPath where
+    toQueryParam = \case
+        PANSCTNSFPDefault -> "DEFAULT"
+        PANSCTNSFPPrivate -> "PRIVATE"
+
+instance FromJSON PolicyAlternativeNameServerConfigTargetNameServerForwardingPath where
+    parseJSON = parseJSONText "PolicyAlternativeNameServerConfigTargetNameServerForwardingPath"
+
+instance ToJSON PolicyAlternativeNameServerConfigTargetNameServerForwardingPath where
     toJSON = toJSONText
 
 -- | One of \"KEY_SIGNING\" or \"ZONE_SIGNING\". Keys of type KEY_SIGNING
@@ -361,24 +463,24 @@ instance ToJSON DNSKeyType where
 
 -- | Sorting criterion. The only supported values are START_TIME and ID.
 data ManagedZoneOperationsListSortBy
-    = ID
-      -- ^ @ID@
-    | StartTime
+    = StartTime
       -- ^ @START_TIME@
+    | ID
+      -- ^ @ID@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ManagedZoneOperationsListSortBy
 
 instance FromHttpApiData ManagedZoneOperationsListSortBy where
     parseQueryParam = \case
-        "ID" -> Right ID
         "START_TIME" -> Right StartTime
+        "ID" -> Right ID
         x -> Left ("Unable to parse ManagedZoneOperationsListSortBy from: " <> x)
 
 instance ToHttpApiData ManagedZoneOperationsListSortBy where
     toQueryParam = \case
-        ID -> "ID"
         StartTime -> "START_TIME"
+        ID -> "ID"
 
 instance FromJSON ManagedZoneOperationsListSortBy where
     parseJSON = parseJSONText "ManagedZoneOperationsListSortBy"

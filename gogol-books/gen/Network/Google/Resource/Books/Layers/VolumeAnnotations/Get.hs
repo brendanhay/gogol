@@ -22,7 +22,7 @@
 --
 -- Gets the volume annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.volumeAnnotations.get@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.layers.volumeAnnotations.get@.
 module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
     (
     -- * REST Resource
@@ -33,15 +33,20 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
     , LayersVolumeAnnotationsGet
 
     -- * Request Lenses
+    , lvagXgafv
+    , lvagUploadProtocol
     , lvagLocale
+    , lvagAccessToken
+    , lvagUploadType
     , lvagAnnotationId
     , lvagVolumeId
     , lvagSource
     , lvagLayerId
+    , lvagCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.layers.volumeAnnotations.get@ method which the
 -- 'LayersVolumeAnnotationsGet' request conforms to.
@@ -54,21 +59,31 @@ type LayersVolumeAnnotationsGetResource =
                Capture "layerId" Text :>
                  "annotations" :>
                    Capture "annotationId" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "source" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] Volumeannotation
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "locale" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "source" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Volumeannotation
 
 -- | Gets the volume annotation.
 --
 -- /See:/ 'layersVolumeAnnotationsGet' smart constructor.
 data LayersVolumeAnnotationsGet =
   LayersVolumeAnnotationsGet'
-    { _lvagLocale       :: !(Maybe Text)
+    { _lvagXgafv :: !(Maybe Xgafv)
+    , _lvagUploadProtocol :: !(Maybe Text)
+    , _lvagLocale :: !(Maybe Text)
+    , _lvagAccessToken :: !(Maybe Text)
+    , _lvagUploadType :: !(Maybe Text)
     , _lvagAnnotationId :: !Text
-    , _lvagVolumeId     :: !Text
-    , _lvagSource       :: !(Maybe Text)
-    , _lvagLayerId      :: !Text
+    , _lvagVolumeId :: !Text
+    , _lvagSource :: !(Maybe Text)
+    , _lvagLayerId :: !Text
+    , _lvagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,7 +92,15 @@ data LayersVolumeAnnotationsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lvagXgafv'
+--
+-- * 'lvagUploadProtocol'
+--
 -- * 'lvagLocale'
+--
+-- * 'lvagAccessToken'
+--
+-- * 'lvagUploadType'
 --
 -- * 'lvagAnnotationId'
 --
@@ -86,6 +109,8 @@ data LayersVolumeAnnotationsGet =
 -- * 'lvagSource'
 --
 -- * 'lvagLayerId'
+--
+-- * 'lvagCallback'
 layersVolumeAnnotationsGet
     :: Text -- ^ 'lvagAnnotationId'
     -> Text -- ^ 'lvagVolumeId'
@@ -93,19 +118,47 @@ layersVolumeAnnotationsGet
     -> LayersVolumeAnnotationsGet
 layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
   LayersVolumeAnnotationsGet'
-    { _lvagLocale = Nothing
+    { _lvagXgafv = Nothing
+    , _lvagUploadProtocol = Nothing
+    , _lvagLocale = Nothing
+    , _lvagAccessToken = Nothing
+    , _lvagUploadType = Nothing
     , _lvagAnnotationId = pLvagAnnotationId_
     , _lvagVolumeId = pLvagVolumeId_
     , _lvagSource = Nothing
     , _lvagLayerId = pLvagLayerId_
+    , _lvagCallback = Nothing
     }
 
+
+-- | V1 error format.
+lvagXgafv :: Lens' LayersVolumeAnnotationsGet (Maybe Xgafv)
+lvagXgafv
+  = lens _lvagXgafv (\ s a -> s{_lvagXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lvagUploadProtocol :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
+lvagUploadProtocol
+  = lens _lvagUploadProtocol
+      (\ s a -> s{_lvagUploadProtocol = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
 lvagLocale :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
 lvagLocale
   = lens _lvagLocale (\ s a -> s{_lvagLocale = a})
+
+-- | OAuth access token.
+lvagAccessToken :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
+lvagAccessToken
+  = lens _lvagAccessToken
+      (\ s a -> s{_lvagAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lvagUploadType :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
+lvagUploadType
+  = lens _lvagUploadType
+      (\ s a -> s{_lvagUploadType = a})
 
 -- | The ID of the volume annotation to retrieve.
 lvagAnnotationId :: Lens' LayersVolumeAnnotationsGet Text
@@ -128,6 +181,11 @@ lvagLayerId :: Lens' LayersVolumeAnnotationsGet Text
 lvagLayerId
   = lens _lvagLayerId (\ s a -> s{_lvagLayerId = a})
 
+-- | JSONP
+lvagCallback :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
+lvagCallback
+  = lens _lvagCallback (\ s a -> s{_lvagCallback = a})
+
 instance GoogleRequest LayersVolumeAnnotationsGet
          where
         type Rs LayersVolumeAnnotationsGet = Volumeannotation
@@ -135,8 +193,13 @@ instance GoogleRequest LayersVolumeAnnotationsGet
              '["https://www.googleapis.com/auth/books"]
         requestClient LayersVolumeAnnotationsGet'{..}
           = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
+              _lvagXgafv
+              _lvagUploadProtocol
               _lvagLocale
+              _lvagAccessToken
+              _lvagUploadType
               _lvagSource
+              _lvagCallback
               (Just AltJSON)
               booksService
           where go

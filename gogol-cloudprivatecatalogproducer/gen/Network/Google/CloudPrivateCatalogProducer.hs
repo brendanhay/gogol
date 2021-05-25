@@ -16,7 +16,7 @@
 -- Enables cloud users to manage and share enterprise catalogs intheir
 -- organizations.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference>
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference>
 module Network.Google.CloudPrivateCatalogProducer
     (
     -- * Service Configuration
@@ -317,37 +317,37 @@ module Network.Google.CloudPrivateCatalogProducer
     , gcpvlarAssociations
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Create
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Get
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.List
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Get
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Patch
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Copy
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Create
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Delete
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.List
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Patch
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.SetIAMPolicy
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermissions
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Delete
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Get
-import           Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
+import Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Create
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Delete
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.Get
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.List
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Delete
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Get
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.GetIAMPolicy
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.List
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Patch
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Copy
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Create
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Delete
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Get
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.List
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Patch
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Create
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Delete
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Get
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.List
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.SetIAMPolicy
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.TestIAMPermissions
+import Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Undelete
+import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Cancel
+import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Delete
+import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.Get
+import Network.Google.Resource.CloudPrivateCatalogProducer.Operations.List
 
 {- $resources
 TODO

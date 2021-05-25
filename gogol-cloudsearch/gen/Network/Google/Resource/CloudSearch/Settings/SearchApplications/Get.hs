@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the specified search application.
+-- Gets the specified search application. **Note:** This API requires an
+-- admin account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.get@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.get@.
 module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Get
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Get
     , ssagCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.searchapplications.get@ method which the
 -- 'SettingsSearchApplicationsGet' request conforms to.
@@ -60,18 +61,19 @@ type SettingsSearchApplicationsGetResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] SearchApplication
 
--- | Gets the specified search application.
+-- | Gets the specified search application. **Note:** This API requires an
+-- admin account to execute.
 --
 -- /See:/ 'settingsSearchApplicationsGet' smart constructor.
 data SettingsSearchApplicationsGet =
   SettingsSearchApplicationsGet'
-    { _ssagXgafv                       :: !(Maybe Xgafv)
-    , _ssagUploadProtocol              :: !(Maybe Text)
-    , _ssagAccessToken                 :: !(Maybe Text)
-    , _ssagUploadType                  :: !(Maybe Text)
-    , _ssagName                        :: !Text
+    { _ssagXgafv :: !(Maybe Xgafv)
+    , _ssagUploadProtocol :: !(Maybe Text)
+    , _ssagAccessToken :: !(Maybe Text)
+    , _ssagUploadType :: !(Maybe Text)
+    , _ssagName :: !Text
     , _ssagDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _ssagCallback                    :: !(Maybe Text)
+    , _ssagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,8 +133,8 @@ ssagUploadType
   = lens _ssagUploadType
       (\ s a -> s{_ssagUploadType = a})
 
--- | Name of the search application.
--- Format: applications\/{application_id}.
+-- | Name of the search application. Format:
+-- searchapplications\/{application_id}.
 ssagName :: Lens' SettingsSearchApplicationsGet Text
 ssagName = lens _ssagName (\ s a -> s{_ssagName = a})
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
     , aacgAccountId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adclients.get@ method which the
 -- 'AccountsAdClientsGet' request conforms to.
@@ -59,7 +59,7 @@ type AccountsAdClientsGetResource =
 data AccountsAdClientsGet =
   AccountsAdClientsGet'
     { _aacgAdClientId :: !Text
-    , _aacgAccountId  :: !Text
+    , _aacgAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

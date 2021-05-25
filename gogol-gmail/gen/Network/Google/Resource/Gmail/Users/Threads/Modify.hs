@@ -34,13 +34,18 @@ module Network.Google.Resource.Gmail.Users.Threads.Modify
     , UsersThreadsModify
 
     -- * Request Lenses
+    , utmXgafv
+    , utmUploadProtocol
+    , utmAccessToken
+    , utmUploadType
     , utmPayload
     , utmUserId
     , utmId
+    , utmCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.modify@ method which the
 -- 'UsersThreadsModify' request conforms to.
@@ -52,9 +57,14 @@ type UsersThreadsModifyResource =
              "threads" :>
                Capture "id" Text :>
                  "modify" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] ModifyThreadRequest :>
-                       Post '[JSON] Thread
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] ModifyThreadRequest :>
+                                 Post '[JSON] Thread
 
 -- | Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.
@@ -62,9 +72,14 @@ type UsersThreadsModifyResource =
 -- /See:/ 'usersThreadsModify' smart constructor.
 data UsersThreadsModify =
   UsersThreadsModify'
-    { _utmPayload :: !ModifyThreadRequest
-    , _utmUserId  :: !Text
-    , _utmId      :: !Text
+    { _utmXgafv :: !(Maybe Xgafv)
+    , _utmUploadProtocol :: !(Maybe Text)
+    , _utmAccessToken :: !(Maybe Text)
+    , _utmUploadType :: !(Maybe Text)
+    , _utmPayload :: !ModifyThreadRequest
+    , _utmUserId :: !Text
+    , _utmId :: !Text
+    , _utmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,27 +88,67 @@ data UsersThreadsModify =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'utmXgafv'
+--
+-- * 'utmUploadProtocol'
+--
+-- * 'utmAccessToken'
+--
+-- * 'utmUploadType'
+--
 -- * 'utmPayload'
 --
 -- * 'utmUserId'
 --
 -- * 'utmId'
+--
+-- * 'utmCallback'
 usersThreadsModify
     :: ModifyThreadRequest -- ^ 'utmPayload'
     -> Text -- ^ 'utmId'
     -> UsersThreadsModify
 usersThreadsModify pUtmPayload_ pUtmId_ =
   UsersThreadsModify'
-    {_utmPayload = pUtmPayload_, _utmUserId = "me", _utmId = pUtmId_}
+    { _utmXgafv = Nothing
+    , _utmUploadProtocol = Nothing
+    , _utmAccessToken = Nothing
+    , _utmUploadType = Nothing
+    , _utmPayload = pUtmPayload_
+    , _utmUserId = "me"
+    , _utmId = pUtmId_
+    , _utmCallback = Nothing
+    }
 
+
+-- | V1 error format.
+utmXgafv :: Lens' UsersThreadsModify (Maybe Xgafv)
+utmXgafv = lens _utmXgafv (\ s a -> s{_utmXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+utmUploadProtocol :: Lens' UsersThreadsModify (Maybe Text)
+utmUploadProtocol
+  = lens _utmUploadProtocol
+      (\ s a -> s{_utmUploadProtocol = a})
+
+-- | OAuth access token.
+utmAccessToken :: Lens' UsersThreadsModify (Maybe Text)
+utmAccessToken
+  = lens _utmAccessToken
+      (\ s a -> s{_utmAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+utmUploadType :: Lens' UsersThreadsModify (Maybe Text)
+utmUploadType
+  = lens _utmUploadType
+      (\ s a -> s{_utmUploadType = a})
 
 -- | Multipart request metadata.
 utmPayload :: Lens' UsersThreadsModify ModifyThreadRequest
 utmPayload
   = lens _utmPayload (\ s a -> s{_utmPayload = a})
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 utmUserId :: Lens' UsersThreadsModify Text
 utmUserId
   = lens _utmUserId (\ s a -> s{_utmUserId = a})
@@ -102,13 +157,23 @@ utmUserId
 utmId :: Lens' UsersThreadsModify Text
 utmId = lens _utmId (\ s a -> s{_utmId = a})
 
+-- | JSONP
+utmCallback :: Lens' UsersThreadsModify (Maybe Text)
+utmCallback
+  = lens _utmCallback (\ s a -> s{_utmCallback = a})
+
 instance GoogleRequest UsersThreadsModify where
         type Rs UsersThreadsModify = Thread
         type Scopes UsersThreadsModify =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
         requestClient UsersThreadsModify'{..}
-          = go _utmUserId _utmId (Just AltJSON) _utmPayload
+          = go _utmUserId _utmId _utmXgafv _utmUploadProtocol
+              _utmAccessToken
+              _utmUploadType
+              _utmCallback
+              (Just AltJSON)
+              _utmPayload
               gmailService
           where go
                   = buildClient

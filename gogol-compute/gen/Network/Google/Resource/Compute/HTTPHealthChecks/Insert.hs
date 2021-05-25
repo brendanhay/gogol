@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
     , httphciPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.httpHealthChecks.insert@ method which the
 -- 'HTTPHealthChecksInsert' request conforms to.
@@ -63,8 +63,8 @@ type HTTPHealthChecksInsertResource =
 data HTTPHealthChecksInsert =
   HTTPHealthChecksInsert'
     { _httphciRequestId :: !(Maybe Text)
-    , _httphciProject   :: !Text
-    , _httphciPayload   :: !HTTPHealthCheck
+    , _httphciProject :: !Text
+    , _httphciPayload :: !HTTPHealthCheck
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

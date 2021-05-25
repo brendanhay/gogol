@@ -22,7 +22,7 @@
 --
 -- List available volumes under categories for onboarding experience.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.onboarding.listCategoryVolumes@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.onboarding.listCategoryVolumes@.
 module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
     (
     -- * REST Resource
@@ -33,15 +33,20 @@ module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
     , OnboardingListCategoryVolumes
 
     -- * Request Lenses
+    , olcvXgafv
+    , olcvUploadProtocol
     , olcvLocale
+    , olcvAccessToken
     , olcvMaxAllowedMaturityRating
+    , olcvUploadType
     , olcvCategoryId
     , olcvPageToken
     , olcvPageSize
+    , olcvCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.onboarding.listCategoryVolumes@ method which the
 -- 'OnboardingListCategoryVolumes' request conforms to.
@@ -50,25 +55,35 @@ type OnboardingListCategoryVolumesResource =
        "v1" :>
          "onboarding" :>
            "listCategoryVolumes" :>
-             QueryParam "locale" Text :>
-               QueryParam "maxAllowedMaturityRating"
-                 OnboardingListCategoryVolumesMaxAllowedMaturityRating
-                 :>
-                 QueryParams "categoryId" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Volume2
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "maxAllowedMaturityRating"
+                       OnboardingListCategoryVolumesMaxAllowedMaturityRating
+                       :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "categoryId" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "pageSize" (Textual Word32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Volume2
 
 -- | List available volumes under categories for onboarding experience.
 --
 -- /See:/ 'onboardingListCategoryVolumes' smart constructor.
 data OnboardingListCategoryVolumes =
   OnboardingListCategoryVolumes'
-    { _olcvLocale                   :: !(Maybe Text)
+    { _olcvXgafv :: !(Maybe Xgafv)
+    , _olcvUploadProtocol :: !(Maybe Text)
+    , _olcvLocale :: !(Maybe Text)
+    , _olcvAccessToken :: !(Maybe Text)
     , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
-    , _olcvCategoryId               :: !(Maybe [Text])
-    , _olcvPageToken                :: !(Maybe Text)
-    , _olcvPageSize                 :: !(Maybe (Textual Word32))
+    , _olcvUploadType :: !(Maybe Text)
+    , _olcvCategoryId :: !(Maybe [Text])
+    , _olcvPageToken :: !(Maybe Text)
+    , _olcvPageSize :: !(Maybe (Textual Word32))
+    , _olcvCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,26 +92,52 @@ data OnboardingListCategoryVolumes =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'olcvXgafv'
+--
+-- * 'olcvUploadProtocol'
+--
 -- * 'olcvLocale'
 --
+-- * 'olcvAccessToken'
+--
 -- * 'olcvMaxAllowedMaturityRating'
+--
+-- * 'olcvUploadType'
 --
 -- * 'olcvCategoryId'
 --
 -- * 'olcvPageToken'
 --
 -- * 'olcvPageSize'
+--
+-- * 'olcvCallback'
 onboardingListCategoryVolumes
     :: OnboardingListCategoryVolumes
 onboardingListCategoryVolumes =
   OnboardingListCategoryVolumes'
-    { _olcvLocale = Nothing
+    { _olcvXgafv = Nothing
+    , _olcvUploadProtocol = Nothing
+    , _olcvLocale = Nothing
+    , _olcvAccessToken = Nothing
     , _olcvMaxAllowedMaturityRating = Nothing
+    , _olcvUploadType = Nothing
     , _olcvCategoryId = Nothing
     , _olcvPageToken = Nothing
     , _olcvPageSize = Nothing
+    , _olcvCallback = Nothing
     }
 
+
+-- | V1 error format.
+olcvXgafv :: Lens' OnboardingListCategoryVolumes (Maybe Xgafv)
+olcvXgafv
+  = lens _olcvXgafv (\ s a -> s{_olcvXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+olcvUploadProtocol :: Lens' OnboardingListCategoryVolumes (Maybe Text)
+olcvUploadProtocol
+  = lens _olcvUploadProtocol
+      (\ s a -> s{_olcvUploadProtocol = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.
@@ -104,12 +145,24 @@ olcvLocale :: Lens' OnboardingListCategoryVolumes (Maybe Text)
 olcvLocale
   = lens _olcvLocale (\ s a -> s{_olcvLocale = a})
 
+-- | OAuth access token.
+olcvAccessToken :: Lens' OnboardingListCategoryVolumes (Maybe Text)
+olcvAccessToken
+  = lens _olcvAccessToken
+      (\ s a -> s{_olcvAccessToken = a})
+
 -- | The maximum allowed maturity rating of returned volumes. Books with a
 -- higher maturity rating are filtered out.
 olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes (Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
 olcvMaxAllowedMaturityRating
   = lens _olcvMaxAllowedMaturityRating
       (\ s a -> s{_olcvMaxAllowedMaturityRating = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+olcvUploadType :: Lens' OnboardingListCategoryVolumes (Maybe Text)
+olcvUploadType
+  = lens _olcvUploadType
+      (\ s a -> s{_olcvUploadType = a})
 
 -- | List of category ids requested.
 olcvCategoryId :: Lens' OnboardingListCategoryVolumes [Text]
@@ -131,16 +184,25 @@ olcvPageSize
   = lens _olcvPageSize (\ s a -> s{_olcvPageSize = a})
       . mapping _Coerce
 
+-- | JSONP
+olcvCallback :: Lens' OnboardingListCategoryVolumes (Maybe Text)
+olcvCallback
+  = lens _olcvCallback (\ s a -> s{_olcvCallback = a})
+
 instance GoogleRequest OnboardingListCategoryVolumes
          where
         type Rs OnboardingListCategoryVolumes = Volume2
         type Scopes OnboardingListCategoryVolumes =
              '["https://www.googleapis.com/auth/books"]
         requestClient OnboardingListCategoryVolumes'{..}
-          = go _olcvLocale _olcvMaxAllowedMaturityRating
+          = go _olcvXgafv _olcvUploadProtocol _olcvLocale
+              _olcvAccessToken
+              _olcvMaxAllowedMaturityRating
+              _olcvUploadType
               (_olcvCategoryId ^. _Default)
               _olcvPageToken
               _olcvPageSize
+              _olcvCallback
               (Just AltJSON)
               booksService
           where go

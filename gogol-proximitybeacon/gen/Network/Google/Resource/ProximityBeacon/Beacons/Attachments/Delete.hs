@@ -49,8 +49,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     , badCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.attachments.delete@ method which the
 -- 'BeaconsAttachmentsDelete' request conforms to.
@@ -77,13 +77,13 @@ type BeaconsAttachmentsDeleteResource =
 -- /See:/ 'beaconsAttachmentsDelete' smart constructor.
 data BeaconsAttachmentsDelete =
   BeaconsAttachmentsDelete'
-    { _badXgafv          :: !(Maybe Xgafv)
+    { _badXgafv :: !(Maybe Xgafv)
     , _badUploadProtocol :: !(Maybe Text)
-    , _badAccessToken    :: !(Maybe Text)
-    , _badUploadType     :: !(Maybe Text)
+    , _badAccessToken :: !(Maybe Text)
+    , _badUploadType :: !(Maybe Text)
     , _badAttachmentName :: !Text
-    , _badProjectId      :: !(Maybe Text)
-    , _badCallback       :: !(Maybe Text)
+    , _badProjectId :: !(Maybe Text)
+    , _badCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

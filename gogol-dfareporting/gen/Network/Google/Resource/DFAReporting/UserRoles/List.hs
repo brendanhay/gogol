@@ -23,7 +23,7 @@
 -- Retrieves a list of user roles, possibly filtered. This method supports
 -- paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.userRoles.list@.
 module Network.Google.Resource.DFAReporting.UserRoles.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.UserRoles.List
     , UserRolesList
 
     -- * Request Lenses
+    , urlXgafv
+    , urlUploadProtocol
+    , urlAccessToken
     , urlSearchString
+    , urlUploadType
     , urlIds
     , urlProFileId
     , urlSortOrder
@@ -43,29 +47,36 @@ module Network.Google.Resource.DFAReporting.UserRoles.List
     , urlSortField
     , urlSubAccountId
     , urlMaxResults
+    , urlCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRoles.list@ method which the
 -- 'UserRolesList' request conforms to.
 type UserRolesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" (Textual Int64) :>
-                   QueryParam "sortOrder" UserRolesListSortOrder :>
-                     QueryParam "accountUserRoleOnly" Bool :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField" UserRolesListSortField :>
-                           QueryParam "subaccountId" (Textual Int64) :>
-                             QueryParam "maxResults" (Textual Int32) :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] UserRolesListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParam "sortOrder" UserRolesListSortOrder :>
+                             QueryParam "accountUserRoleOnly" Bool :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField" UserRolesListSortField
+                                   :>
+                                   QueryParam "subaccountId" (Textual Int64) :>
+                                     QueryParam "maxResults" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] UserRolesListResponse
 
 -- | Retrieves a list of user roles, possibly filtered. This method supports
 -- paging.
@@ -73,15 +84,20 @@ type UserRolesListResource =
 -- /See:/ 'userRolesList' smart constructor.
 data UserRolesList =
   UserRolesList'
-    { _urlSearchString        :: !(Maybe Text)
-    , _urlIds                 :: !(Maybe [Textual Int64])
-    , _urlProFileId           :: !(Textual Int64)
-    , _urlSortOrder           :: !UserRolesListSortOrder
+    { _urlXgafv :: !(Maybe Xgafv)
+    , _urlUploadProtocol :: !(Maybe Text)
+    , _urlAccessToken :: !(Maybe Text)
+    , _urlSearchString :: !(Maybe Text)
+    , _urlUploadType :: !(Maybe Text)
+    , _urlIds :: !(Maybe [Textual Int64])
+    , _urlProFileId :: !(Textual Int64)
+    , _urlSortOrder :: !UserRolesListSortOrder
     , _urlAccountUserRoleOnly :: !(Maybe Bool)
-    , _urlPageToken           :: !(Maybe Text)
-    , _urlSortField           :: !UserRolesListSortField
-    , _urlSubAccountId        :: !(Maybe (Textual Int64))
-    , _urlMaxResults          :: !(Textual Int32)
+    , _urlPageToken :: !(Maybe Text)
+    , _urlSortField :: !UserRolesListSortField
+    , _urlSubAccountId :: !(Maybe (Textual Int64))
+    , _urlMaxResults :: !(Textual Int32)
+    , _urlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -90,7 +106,15 @@ data UserRolesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'urlXgafv'
+--
+-- * 'urlUploadProtocol'
+--
+-- * 'urlAccessToken'
+--
 -- * 'urlSearchString'
+--
+-- * 'urlUploadType'
 --
 -- * 'urlIds'
 --
@@ -107,12 +131,18 @@ data UserRolesList =
 -- * 'urlSubAccountId'
 --
 -- * 'urlMaxResults'
+--
+-- * 'urlCallback'
 userRolesList
     :: Int64 -- ^ 'urlProFileId'
     -> UserRolesList
 userRolesList pUrlProFileId_ =
   UserRolesList'
-    { _urlSearchString = Nothing
+    { _urlXgafv = Nothing
+    , _urlUploadProtocol = Nothing
+    , _urlAccessToken = Nothing
+    , _urlSearchString = Nothing
+    , _urlUploadType = Nothing
     , _urlIds = Nothing
     , _urlProFileId = _Coerce # pUrlProFileId_
     , _urlSortOrder = URLSOAscending
@@ -121,8 +151,25 @@ userRolesList pUrlProFileId_ =
     , _urlSortField = URLSFID
     , _urlSubAccountId = Nothing
     , _urlMaxResults = 1000
+    , _urlCallback = Nothing
     }
 
+
+-- | V1 error format.
+urlXgafv :: Lens' UserRolesList (Maybe Xgafv)
+urlXgafv = lens _urlXgafv (\ s a -> s{_urlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+urlUploadProtocol :: Lens' UserRolesList (Maybe Text)
+urlUploadProtocol
+  = lens _urlUploadProtocol
+      (\ s a -> s{_urlUploadProtocol = a})
+
+-- | OAuth access token.
+urlAccessToken :: Lens' UserRolesList (Maybe Text)
+urlAccessToken
+  = lens _urlAccessToken
+      (\ s a -> s{_urlAccessToken = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"userrole*2015\" will return objects with names like
@@ -135,6 +182,12 @@ urlSearchString :: Lens' UserRolesList (Maybe Text)
 urlSearchString
   = lens _urlSearchString
       (\ s a -> s{_urlSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+urlUploadType :: Lens' UserRolesList (Maybe Text)
+urlUploadType
+  = lens _urlUploadType
+      (\ s a -> s{_urlUploadType = a})
 
 -- | Select only user roles with the specified IDs.
 urlIds :: Lens' UserRolesList [Int64]
@@ -184,12 +237,20 @@ urlMaxResults
       (\ s a -> s{_urlMaxResults = a})
       . _Coerce
 
+-- | JSONP
+urlCallback :: Lens' UserRolesList (Maybe Text)
+urlCallback
+  = lens _urlCallback (\ s a -> s{_urlCallback = a})
+
 instance GoogleRequest UserRolesList where
         type Rs UserRolesList = UserRolesListResponse
         type Scopes UserRolesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient UserRolesList'{..}
-          = go _urlProFileId _urlSearchString
+          = go _urlProFileId _urlXgafv _urlUploadProtocol
+              _urlAccessToken
+              _urlSearchString
+              _urlUploadType
               (_urlIds ^. _Default)
               (Just _urlSortOrder)
               _urlAccountUserRoleOnly
@@ -197,6 +258,7 @@ instance GoogleRequest UserRolesList where
               (Just _urlSortField)
               _urlSubAccountId
               (Just _urlMaxResults)
+              _urlCallback
               (Just AltJSON)
               dFAReportingService
           where go

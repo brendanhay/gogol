@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Projects.SetDefaultNetworkTier
     , psdntPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.setDefaultNetworkTier@ method which the
 -- 'ProjectsSetDefaultNetworkTier' request conforms to.
@@ -64,8 +64,8 @@ type ProjectsSetDefaultNetworkTierResource =
 data ProjectsSetDefaultNetworkTier =
   ProjectsSetDefaultNetworkTier'
     { _psdntRequestId :: !(Maybe Text)
-    , _psdntProject   :: !Text
-    , _psdntPayload   :: !ProjectsSetDefaultNetworkTierRequest
+    , _psdntProject :: !Text
+    , _psdntPayload :: !ProjectsSetDefaultNetworkTierRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

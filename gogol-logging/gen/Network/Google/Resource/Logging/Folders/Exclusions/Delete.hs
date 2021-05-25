@@ -22,7 +22,7 @@
 --
 -- Deletes an exclusion.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.exclusions.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.exclusions.delete@.
 module Network.Google.Resource.Logging.Folders.Exclusions.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.Folders.Exclusions.Delete
     , fedCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.exclusions.delete@ method which the
 -- 'FoldersExclusionsDelete' request conforms to.
@@ -61,12 +61,12 @@ type FoldersExclusionsDeleteResource =
 -- /See:/ 'foldersExclusionsDelete' smart constructor.
 data FoldersExclusionsDelete =
   FoldersExclusionsDelete'
-    { _fedXgafv          :: !(Maybe Xgafv)
+    { _fedXgafv :: !(Maybe Xgafv)
     , _fedUploadProtocol :: !(Maybe Text)
-    , _fedAccessToken    :: !(Maybe Text)
-    , _fedUploadType     :: !(Maybe Text)
-    , _fedName           :: !Text
-    , _fedCallback       :: !(Maybe Text)
+    , _fedAccessToken :: !(Maybe Text)
+    , _fedUploadType :: !(Maybe Text)
+    , _fedName :: !Text
+    , _fedCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

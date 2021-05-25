@@ -38,8 +38,8 @@ module Network.Google.Resource.ConsumerSurveys.MobileApppanels.List
     , malMaxResults
     ) where
 
-import           Network.Google.ConsumerSurveys.Types
-import           Network.Google.Prelude
+import Network.Google.ConsumerSurveys.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @consumersurveys.mobileapppanels.list@ method which the
 -- 'MobileApppanelsList' request conforms to.
@@ -58,7 +58,7 @@ type MobileApppanelsListResource =
 -- /See:/ 'mobileApppanelsList' smart constructor.
 data MobileApppanelsList =
   MobileApppanelsList'
-    { _malToken      :: !(Maybe Text)
+    { _malToken :: !(Maybe Text)
     , _malStartIndex :: !(Maybe (Textual Word32))
     , _malMaxResults :: !(Maybe (Textual Word32))
     }

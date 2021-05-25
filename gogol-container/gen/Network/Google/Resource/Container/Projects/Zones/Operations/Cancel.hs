@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Cancel
     , pzocCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.operations.cancel@ method which the
 -- 'ProjectsZonesOperationsCancel' request conforms to.
@@ -71,15 +71,15 @@ type ProjectsZonesOperationsCancelResource =
 -- /See:/ 'projectsZonesOperationsCancel' smart constructor.
 data ProjectsZonesOperationsCancel =
   ProjectsZonesOperationsCancel'
-    { _pzocXgafv          :: !(Maybe Xgafv)
+    { _pzocXgafv :: !(Maybe Xgafv)
     , _pzocUploadProtocol :: !(Maybe Text)
-    , _pzocAccessToken    :: !(Maybe Text)
-    , _pzocUploadType     :: !(Maybe Text)
-    , _pzocZone           :: !Text
-    , _pzocPayload        :: !CancelOperationRequest
-    , _pzocProjectId      :: !Text
-    , _pzocOperationId    :: !Text
-    , _pzocCallback       :: !(Maybe Text)
+    , _pzocAccessToken :: !(Maybe Text)
+    , _pzocUploadType :: !(Maybe Text)
+    , _pzocZone :: !Text
+    , _pzocPayload :: !CancelOperationRequest
+    , _pzocProjectId :: !Text
+    , _pzocOperationId :: !Text
+    , _pzocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,8 +149,9 @@ pzocUploadType
       (\ s a -> s{_pzocUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the operation resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the operation resides. This field has been deprecated and replaced
+-- by the name field.
 pzocZone :: Lens' ProjectsZonesOperationsCancel Text
 pzocZone = lens _pzocZone (\ s a -> s{_pzocZone = a})
 

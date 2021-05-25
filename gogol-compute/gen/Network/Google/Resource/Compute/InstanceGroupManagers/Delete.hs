@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
     , igmdZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.delete@ method which the
 -- 'InstanceGroupManagersDelete' request conforms to.
@@ -65,10 +65,10 @@ type InstanceGroupManagersDeleteResource =
 -- /See:/ 'instanceGroupManagersDelete' smart constructor.
 data InstanceGroupManagersDelete =
   InstanceGroupManagersDelete'
-    { _igmdRequestId            :: !(Maybe Text)
-    , _igmdProject              :: !Text
+    { _igmdRequestId :: !(Maybe Text)
+    , _igmdProject :: !Text
     , _igmdInstanceGroupManager :: !Text
-    , _igmdZone                 :: !Text
+    , _igmdZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -46,8 +46,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Partners.Customers.Crea
     , pccCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.partners.customers.create@ method which the
 -- 'PartnersCustomersCreate' request conforms to.
@@ -73,13 +73,13 @@ type PartnersCustomersCreateResource =
 -- /See:/ 'partnersCustomersCreate' smart constructor.
 data PartnersCustomersCreate =
   PartnersCustomersCreate'
-    { _pccParent         :: !Text
-    , _pccXgafv          :: !(Maybe Xgafv)
+    { _pccParent :: !Text
+    , _pccXgafv :: !(Maybe Xgafv)
     , _pccUploadProtocol :: !(Maybe Text)
-    , _pccAccessToken    :: !(Maybe Text)
-    , _pccUploadType     :: !(Maybe Text)
-    , _pccPayload        :: !CreateCustomerRequest
-    , _pccCallback       :: !(Maybe Text)
+    , _pccAccessToken :: !(Maybe Text)
+    , _pccUploadType :: !(Maybe Text)
+    , _pccPayload :: !CreateCustomerRequest
+    , _pccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

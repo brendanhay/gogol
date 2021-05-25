@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Interconnects.Delete
     , intInterconnect
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnects.delete@ method which the
 -- 'InterconnectsDelete' request conforms to.
@@ -59,8 +59,8 @@ type InterconnectsDeleteResource =
 -- /See:/ 'interconnectsDelete' smart constructor.
 data InterconnectsDelete =
   InterconnectsDelete'
-    { _intRequestId    :: !(Maybe Text)
-    , _intProject      :: !Text
+    { _intRequestId :: !(Maybe Text)
+    , _intProject :: !Text
     , _intInterconnect :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

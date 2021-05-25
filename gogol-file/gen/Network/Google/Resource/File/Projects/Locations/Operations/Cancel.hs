@@ -50,8 +50,8 @@ module Network.Google.Resource.File.Projects.Locations.Operations.Cancel
     , plocCallback
     ) where
 
-import           Network.Google.File.Types
-import           Network.Google.Prelude
+import Network.Google.File.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @file.projects.locations.operations.cancel@ method which the
 -- 'ProjectsLocationsOperationsCancel' request conforms to.
@@ -80,13 +80,13 @@ type ProjectsLocationsOperationsCancelResource =
 -- /See:/ 'projectsLocationsOperationsCancel' smart constructor.
 data ProjectsLocationsOperationsCancel =
   ProjectsLocationsOperationsCancel'
-    { _plocXgafv          :: !(Maybe Xgafv)
+    { _plocXgafv :: !(Maybe Xgafv)
     , _plocUploadProtocol :: !(Maybe Text)
-    , _plocAccessToken    :: !(Maybe Text)
-    , _plocUploadType     :: !(Maybe Text)
-    , _plocPayload        :: !CancelOperationRequest
-    , _plocName           :: !Text
-    , _plocCallback       :: !(Maybe Text)
+    , _plocAccessToken :: !(Maybe Text)
+    , _plocUploadType :: !(Maybe Text)
+    , _plocPayload :: !CancelOperationRequest
+    , _plocName :: !Text
+    , _plocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

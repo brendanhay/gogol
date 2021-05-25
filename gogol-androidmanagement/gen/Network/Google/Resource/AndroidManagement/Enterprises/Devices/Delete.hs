@@ -34,6 +34,7 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Delete
 
     -- * Request Lenses
     , eddXgafv
+    , eddWipeReasonMessage
     , eddWipeDataFlags
     , eddUploadProtocol
     , eddAccessToken
@@ -42,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Delete
     , eddCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.delete@ method which the
 -- 'EnterprisesDevicesDelete' request conforms to.
@@ -51,25 +52,29 @@ type EnterprisesDevicesDeleteResource =
      "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
-           QueryParams "wipeDataFlags" Text :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "callback" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+           QueryParam "wipeReasonMessage" Text :>
+             QueryParams "wipeDataFlags"
+               EnterprisesDevicesDeleteWipeDataFlags
+               :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes a device. This operation wipes the device.
 --
 -- /See:/ 'enterprisesDevicesDelete' smart constructor.
 data EnterprisesDevicesDelete =
   EnterprisesDevicesDelete'
-    { _eddXgafv          :: !(Maybe Xgafv)
-    , _eddWipeDataFlags  :: !(Maybe [Text])
+    { _eddXgafv :: !(Maybe Xgafv)
+    , _eddWipeReasonMessage :: !(Maybe Text)
+    , _eddWipeDataFlags :: !(Maybe [EnterprisesDevicesDeleteWipeDataFlags])
     , _eddUploadProtocol :: !(Maybe Text)
-    , _eddAccessToken    :: !(Maybe Text)
-    , _eddUploadType     :: !(Maybe Text)
-    , _eddName           :: !Text
-    , _eddCallback       :: !(Maybe Text)
+    , _eddAccessToken :: !(Maybe Text)
+    , _eddUploadType :: !(Maybe Text)
+    , _eddName :: !Text
+    , _eddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,6 +84,8 @@ data EnterprisesDevicesDelete =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'eddXgafv'
+--
+-- * 'eddWipeReasonMessage'
 --
 -- * 'eddWipeDataFlags'
 --
@@ -97,6 +104,7 @@ enterprisesDevicesDelete
 enterprisesDevicesDelete pEddName_ =
   EnterprisesDevicesDelete'
     { _eddXgafv = Nothing
+    , _eddWipeReasonMessage = Nothing
     , _eddWipeDataFlags = Nothing
     , _eddUploadProtocol = Nothing
     , _eddAccessToken = Nothing
@@ -110,8 +118,16 @@ enterprisesDevicesDelete pEddName_ =
 eddXgafv :: Lens' EnterprisesDevicesDelete (Maybe Xgafv)
 eddXgafv = lens _eddXgafv (\ s a -> s{_eddXgafv = a})
 
+-- | Optional. A short message displayed to the user before wiping the work
+-- profile on personal devices. This has no effect on company owned
+-- devices. The maximum message length is 200 characters.
+eddWipeReasonMessage :: Lens' EnterprisesDevicesDelete (Maybe Text)
+eddWipeReasonMessage
+  = lens _eddWipeReasonMessage
+      (\ s a -> s{_eddWipeReasonMessage = a})
+
 -- | Optional flags that control the device wiping behavior.
-eddWipeDataFlags :: Lens' EnterprisesDevicesDelete [Text]
+eddWipeDataFlags :: Lens' EnterprisesDevicesDelete [EnterprisesDevicesDeleteWipeDataFlags]
 eddWipeDataFlags
   = lens _eddWipeDataFlags
       (\ s a -> s{_eddWipeDataFlags = a})
@@ -151,7 +167,7 @@ instance GoogleRequest EnterprisesDevicesDelete where
         type Scopes EnterprisesDevicesDelete =
              '["https://www.googleapis.com/auth/androidmanagement"]
         requestClient EnterprisesDevicesDelete'{..}
-          = go _eddName _eddXgafv
+          = go _eddName _eddXgafv _eddWipeReasonMessage
               (_eddWipeDataFlags ^. _Default)
               _eddUploadProtocol
               _eddAccessToken

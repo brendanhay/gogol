@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Disks.CreateSnapshot
     , dcsPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.createSnapshot@ method which the
 -- 'DisksCreateSnapshot' request conforms to.
@@ -67,11 +67,11 @@ type DisksCreateSnapshotResource =
 data DisksCreateSnapshot =
   DisksCreateSnapshot'
     { _dcsGuestFlush :: !(Maybe Bool)
-    , _dcsRequestId  :: !(Maybe Text)
-    , _dcsProject    :: !Text
-    , _dcsDisk       :: !Text
-    , _dcsZone       :: !Text
-    , _dcsPayload    :: !Snapshot
+    , _dcsRequestId :: !(Maybe Text)
+    , _dcsProject :: !Text
+    , _dcsDisk :: !Text
+    , _dcsZone :: !Text
+    , _dcsPayload :: !Snapshot
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,6 +108,10 @@ disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
     }
 
 
+-- | [Input Only] Whether to attempt an application consistent snapshot by
+-- informing the OS to prepare for the snapshot process. Currently only
+-- supported on Windows instances using the Volume Shadow Copy Service
+-- (VSS).
 dcsGuestFlush :: Lens' DisksCreateSnapshot (Maybe Bool)
 dcsGuestFlush
   = lens _dcsGuestFlush

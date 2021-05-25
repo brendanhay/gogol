@@ -47,8 +47,8 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
     , nlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.namespaces.list@ method which the
 -- 'NamespacesList' request conforms to.
@@ -75,12 +75,12 @@ type NamespacesListResource =
 -- /See:/ 'namespacesList' smart constructor.
 data NamespacesList =
   NamespacesList'
-    { _nlXgafv          :: !(Maybe Xgafv)
+    { _nlXgafv :: !(Maybe Xgafv)
     , _nlUploadProtocol :: !(Maybe Text)
-    , _nlAccessToken    :: !(Maybe Text)
-    , _nlUploadType     :: !(Maybe Text)
-    , _nlProjectId      :: !(Maybe Text)
-    , _nlCallback       :: !(Maybe Text)
+    , _nlAccessToken :: !(Maybe Text)
+    , _nlUploadType :: !(Maybe Text)
+    , _nlProjectId :: !(Maybe Text)
+    , _nlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

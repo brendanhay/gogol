@@ -17,8 +17,8 @@
 --
 module Network.Google.AppEngine.Types.Product where
 
-import           Network.Google.AppEngine.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types.Sum
+import Network.Google.Prelude
 
 -- | Target scaling by network usage. Only applicable in the App Engine
 -- flexible environment.
@@ -26,10 +26,10 @@ import           Network.Google.Prelude
 -- /See:/ 'networkUtilization' smart constructor.
 data NetworkUtilization =
   NetworkUtilization'
-    { _nuTargetReceivedBytesPerSecond   :: !(Maybe (Textual Int32))
-    , _nuTargetSentPacketsPerSecond     :: !(Maybe (Textual Int32))
+    { _nuTargetReceivedBytesPerSecond :: !(Maybe (Textual Int32))
+    , _nuTargetSentPacketsPerSecond :: !(Maybe (Textual Int32))
     , _nuTargetReceivedPacketsPerSecond :: !(Maybe (Textual Int32))
-    , _nuTargetSentBytesPerSecond       :: !(Maybe (Textual Int32))
+    , _nuTargetSentBytesPerSecond :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,44 +109,17 @@ instance ToJSON NetworkUtilization where
 
 -- | The Status type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by gRPC (https:\/\/github.com\/grpc). The error model is
--- designed to be: Simple to use and understand for most users Flexible
--- enough to meet unexpected needsOverviewThe Status message contains three
--- pieces of data: error code, error message, and error details. The error
--- code should be an enum value of google.rpc.Code, but it may accept
--- additional error codes if needed. The error message should be a
--- developer-facing English message that helps developers understand and
--- resolve the error. If a localized user-facing error message is needed,
--- put the localized message in the error details or localize it in the
--- client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package google.rpc that can be used for common error conditions.Language
--- mappingThe Status message is the logical representation of the error
--- model, but it is not necessarily the actual wire format. When the Status
--- message is exposed in different client libraries and different wire
--- protocols, it can be mapped differently. For example, it will likely be
--- mapped to some exceptions in Java, but more likely mapped to some error
--- codes in C.Other usesThe error model and the Status message can be used
--- in a variety of environments, either with or without APIs, to provide a
--- consistent developer experience across different environments.Example
--- uses of this error model include: Partial errors. If a service needs to
--- return partial errors to the client, it may embed the Status in the
--- normal response to indicate the partial errors. Workflow errors. A
--- typical workflow has multiple steps. Each step may have a Status message
--- for error reporting. Batch operations. If a client uses batch request
--- and batch response, the Status message should be used directly inside
--- batch response, one for each error sub-response. Asynchronous
--- operations. If an API call embeds asynchronous operation results in its
--- response, the status of those operations should be represented directly
--- using the Status message. Logging. If some API errors are stored in
--- logs, the message Status could be used directly after any stripping
--- needed for security\/privacy reasons.
+-- is used by gRPC (https:\/\/github.com\/grpc). Each Status message
+-- contains three pieces of data: error code, error message, and error
+-- details.You can find out more about this error model and how to work
+-- with it in the API Design Guide
+-- (https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -247,7 +220,7 @@ instance ToJSON LocationSchema where
 data AuthorizedDomain =
   AuthorizedDomain'
     { _adName :: !(Maybe Text)
-    , _adId   :: !(Maybe Text)
+    , _adId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -294,7 +267,7 @@ instance ToJSON AuthorizedDomain where
 -- /See:/ 'trafficSplit' smart constructor.
 data TrafficSplit =
   TrafficSplit'
-    { _tsShardBy     :: !(Maybe TrafficSplitShardBy)
+    { _tsShardBy :: !(Maybe TrafficSplitShardBy)
     , _tsAllocations :: !(Maybe TrafficSplitAllocations)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -387,7 +360,7 @@ instance ToJSON ScriptHandler where
 data ListServicesResponse =
   ListServicesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrServices      :: !(Maybe [Service])
+    , _lsrServices :: !(Maybe [Service])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -440,14 +413,14 @@ instance ToJSON ListServicesResponse where
 -- /See:/ 'urlMap' smart constructor.
 data URLMap =
   URLMap'
-    { _umScript                   :: !(Maybe ScriptHandler)
-    , _umSecurityLevel            :: !(Maybe URLMapSecurityLevel)
-    , _umAPIEndpoint              :: !(Maybe APIEndpointHandler)
-    , _umURLRegex                 :: !(Maybe Text)
+    { _umScript :: !(Maybe ScriptHandler)
+    , _umSecurityLevel :: !(Maybe URLMapSecurityLevel)
+    , _umAPIEndpoint :: !(Maybe APIEndpointHandler)
+    , _umURLRegex :: !(Maybe Text)
     , _umRedirectHTTPResponseCode :: !(Maybe URLMapRedirectHTTPResponseCode)
-    , _umAuthFailAction           :: !(Maybe URLMapAuthFailAction)
-    , _umStaticFiles              :: !(Maybe StaticFilesHandler)
-    , _umLogin                    :: !(Maybe URLMapLogin)
+    , _umAuthFailAction :: !(Maybe URLMapAuthFailAction)
+    , _umStaticFiles :: !(Maybe StaticFilesHandler)
+    , _umLogin :: !(Maybe URLMapLogin)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -569,7 +542,7 @@ instance ToJSON URLMap where
 -- /See:/ 'library' smart constructor.
 data Library =
   Library'
-    { _lName    :: !(Maybe Text)
+    { _lName :: !(Maybe Text)
     , _lVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -614,8 +587,8 @@ instance ToJSON Library where
 data ResourceRecord =
   ResourceRecord'
     { _rrRrData :: !(Maybe Text)
-    , _rrName   :: !(Maybe Text)
-    , _rrType   :: !(Maybe ResourceRecordType)
+    , _rrName :: !(Maybe Text)
+    , _rrType :: !(Maybe ResourceRecordType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -670,7 +643,7 @@ instance ToJSON ResourceRecord where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -722,9 +695,9 @@ instance ToJSON ListLocationsResponse where
 -- /See:/ 'diskUtilization' smart constructor.
 data DiskUtilization =
   DiskUtilization'
-    { _duTargetReadBytesPerSecond  :: !(Maybe (Textual Int32))
-    , _duTargetReadOpsPerSecond    :: !(Maybe (Textual Int32))
-    , _duTargetWriteOpsPerSecond   :: !(Maybe (Textual Int32))
+    { _duTargetReadBytesPerSecond :: !(Maybe (Textual Int32))
+    , _duTargetReadOpsPerSecond :: !(Maybe (Textual Int32))
+    , _duTargetWriteOpsPerSecond :: !(Maybe (Textual Int32))
     , _duTargetWriteBytesPerSecond :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -809,7 +782,7 @@ instance ToJSON DiskUtilization where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -864,12 +837,12 @@ instance ToJSON ListOperationsResponse where
 -- /See:/ 'healthCheck' smart constructor.
 data HealthCheck =
   HealthCheck'
-    { _hcHealthyThreshold   :: !(Maybe (Textual Word32))
+    { _hcHealthyThreshold :: !(Maybe (Textual Word32))
     , _hcDisableHealthCheck :: !(Maybe Bool)
-    , _hcCheckInterval      :: !(Maybe GDuration)
-    , _hcRestartThreshold   :: !(Maybe (Textual Word32))
-    , _hcHost               :: !(Maybe Text)
-    , _hcTimeout            :: !(Maybe GDuration)
+    , _hcCheckInterval :: !(Maybe GDuration)
+    , _hcRestartThreshold :: !(Maybe (Textual Word32))
+    , _hcHost :: !(Maybe Text)
+    , _hcTimeout :: !(Maybe GDuration)
     , _hcUnhealthyThreshold :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -986,14 +959,14 @@ instance ToJSON HealthCheck where
 -- /See:/ 'authorizedCertificate' smart constructor.
 data AuthorizedCertificate =
   AuthorizedCertificate'
-    { _acManagedCertificate    :: !(Maybe ManagedCertificate)
-    , _acCertificateRawData    :: !(Maybe CertificateRawData)
-    , _acDomainNames           :: !(Maybe [Text])
-    , _acDomainMAppingsCount   :: !(Maybe (Textual Int32))
-    , _acName                  :: !(Maybe Text)
-    , _acDisplayName           :: !(Maybe Text)
-    , _acId                    :: !(Maybe Text)
-    , _acExpireTime            :: !(Maybe DateTime')
+    { _acManagedCertificate :: !(Maybe ManagedCertificate)
+    , _acCertificateRawData :: !(Maybe CertificateRawData)
+    , _acDomainNames :: !(Maybe [Text])
+    , _acDomainMAppingsCount :: !(Maybe (Textual Int32))
+    , _acName :: !(Maybe Text)
+    , _acDisplayName :: !(Maybe Text)
+    , _acId :: !(Maybe Text)
+    , _acExpireTime :: !(Maybe DateTime')
     , _acVisibleDomainMAppings :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1148,9 +1121,10 @@ instance ToJSON AuthorizedCertificate where
 -- | VPC access connector specification.
 --
 -- /See:/ 'vpcAccessConnector' smart constructor.
-newtype VPCAccessConnector =
+data VPCAccessConnector =
   VPCAccessConnector'
-    { _vacName :: Maybe Text
+    { _vacName :: !(Maybe Text)
+    , _vacEgressSetting :: !(Maybe VPCAccessConnectorEgressSetting)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1160,9 +1134,12 @@ newtype VPCAccessConnector =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vacName'
+--
+-- * 'vacEgressSetting'
 vpcAccessConnector
     :: VPCAccessConnector
-vpcAccessConnector = VPCAccessConnector' {_vacName = Nothing}
+vpcAccessConnector =
+  VPCAccessConnector' {_vacName = Nothing, _vacEgressSetting = Nothing}
 
 
 -- | Full Serverless VPC Access Connector name e.g.
@@ -1170,14 +1147,26 @@ vpcAccessConnector = VPCAccessConnector' {_vacName = Nothing}
 vacName :: Lens' VPCAccessConnector (Maybe Text)
 vacName = lens _vacName (\ s a -> s{_vacName = a})
 
+-- | The egress setting for the connector, controlling what traffic is
+-- diverted through it.
+vacEgressSetting :: Lens' VPCAccessConnector (Maybe VPCAccessConnectorEgressSetting)
+vacEgressSetting
+  = lens _vacEgressSetting
+      (\ s a -> s{_vacEgressSetting = a})
+
 instance FromJSON VPCAccessConnector where
         parseJSON
           = withObject "VPCAccessConnector"
-              (\ o -> VPCAccessConnector' <$> (o .:? "name"))
+              (\ o ->
+                 VPCAccessConnector' <$>
+                   (o .:? "name") <*> (o .:? "egressSetting"))
 
 instance ToJSON VPCAccessConnector where
         toJSON VPCAccessConnector'{..}
-          = object (catMaybes [("name" .=) <$> _vacName])
+          = object
+              (catMaybes
+                 [("name" .=) <$> _vacName,
+                  ("egressSetting" .=) <$> _vacEgressSetting])
 
 -- | Google Cloud Endpoints
 -- (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/)
@@ -1186,11 +1175,11 @@ instance ToJSON VPCAccessConnector where
 -- /See:/ 'apiConfigHandler' smart constructor.
 data APIConfigHandler =
   APIConfigHandler'
-    { _achScript         :: !(Maybe Text)
-    , _achSecurityLevel  :: !(Maybe APIConfigHandlerSecurityLevel)
-    , _achURL            :: !(Maybe Text)
+    { _achScript :: !(Maybe Text)
+    , _achSecurityLevel :: !(Maybe APIConfigHandlerSecurityLevel)
+    , _achURL :: !(Maybe Text)
     , _achAuthFailAction :: !(Maybe APIConfigHandlerAuthFailAction)
-    , _achLogin          :: !(Maybe APIConfigHandlerLogin)
+    , _achLogin :: !(Maybe APIConfigHandlerLogin)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1308,19 +1297,20 @@ instance ToJSON VersionEnvVariables where
 -- /See:/ 'application' smart constructor.
 data Application =
   Application'
-    { _aDefaultHostname         :: !(Maybe Text)
+    { _aDefaultHostname :: !(Maybe Text)
     , _aDefaultCookieExpiration :: !(Maybe GDuration)
-    , _aIap                     :: !(Maybe IdentityAwareProxy)
-    , _aAuthDomain              :: !(Maybe Text)
-    , _aCodeBucket              :: !(Maybe Text)
-    , _aGcrDomain               :: !(Maybe Text)
-    , _aFeatureSettings         :: !(Maybe FeatureSettings)
-    , _aName                    :: !(Maybe Text)
-    , _aDispatchRules           :: !(Maybe [URLDispatchRule])
-    , _aDefaultBucket           :: !(Maybe Text)
-    , _aId                      :: !(Maybe Text)
-    , _aLocationId              :: !(Maybe Text)
-    , _aServingStatus           :: !(Maybe ApplicationServingStatus)
+    , _aIap :: !(Maybe IdentityAwareProxy)
+    , _aAuthDomain :: !(Maybe Text)
+    , _aCodeBucket :: !(Maybe Text)
+    , _aGcrDomain :: !(Maybe Text)
+    , _aFeatureSettings :: !(Maybe FeatureSettings)
+    , _aName :: !(Maybe Text)
+    , _aDatabaseType :: !(Maybe ApplicationDatabaseType)
+    , _aDispatchRules :: !(Maybe [URLDispatchRule])
+    , _aDefaultBucket :: !(Maybe Text)
+    , _aId :: !(Maybe Text)
+    , _aLocationId :: !(Maybe Text)
+    , _aServingStatus :: !(Maybe ApplicationServingStatus)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1345,6 +1335,8 @@ data Application =
 --
 -- * 'aName'
 --
+-- * 'aDatabaseType'
+--
 -- * 'aDispatchRules'
 --
 -- * 'aDefaultBucket'
@@ -1366,6 +1358,7 @@ application =
     , _aGcrDomain = Nothing
     , _aFeatureSettings = Nothing
     , _aName = Nothing
+    , _aDatabaseType = Nothing
     , _aDispatchRules = Nothing
     , _aDefaultBucket = Nothing
     , _aId = Nothing
@@ -1422,6 +1415,13 @@ aFeatureSettings
 aName :: Lens' Application (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
+-- | The type of the Cloud Firestore or Cloud Datastore database associated
+-- with this application.
+aDatabaseType :: Lens' Application (Maybe ApplicationDatabaseType)
+aDatabaseType
+  = lens _aDatabaseType
+      (\ s a -> s{_aDatabaseType = a})
+
 -- | HTTP path dispatch rules for requests to the application that do not
 -- explicitly target a service or version. Rules are order-dependent. Up to
 -- 20 dispatch rules can be supported.
@@ -1473,6 +1473,7 @@ instance FromJSON Application where
                      <*> (o .:? "gcrDomain")
                      <*> (o .:? "featureSettings")
                      <*> (o .:? "name")
+                     <*> (o .:? "databaseType")
                      <*> (o .:? "dispatchRules" .!= mempty)
                      <*> (o .:? "defaultBucket")
                      <*> (o .:? "id")
@@ -1492,6 +1493,7 @@ instance ToJSON Application where
                   ("gcrDomain" .=) <$> _aGcrDomain,
                   ("featureSettings" .=) <$> _aFeatureSettings,
                   ("name" .=) <$> _aName,
+                  ("databaseType" .=) <$> _aDatabaseType,
                   ("dispatchRules" .=) <$> _aDispatchRules,
                   ("defaultBucket" .=) <$> _aDefaultBucket,
                   ("id" .=) <$> _aId,
@@ -1546,8 +1548,9 @@ instance ToJSON VersionBetaSettings where
 data Service =
   Service'
     { _sSplit :: !(Maybe TrafficSplit)
-    , _sName  :: !(Maybe Text)
-    , _sId    :: !(Maybe Text)
+    , _sName :: !(Maybe Text)
+    , _sId :: !(Maybe Text)
+    , _sNetworkSettings :: !(Maybe NetworkSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1561,9 +1564,17 @@ data Service =
 -- * 'sName'
 --
 -- * 'sId'
+--
+-- * 'sNetworkSettings'
 service
     :: Service
-service = Service' {_sSplit = Nothing, _sName = Nothing, _sId = Nothing}
+service =
+  Service'
+    { _sSplit = Nothing
+    , _sName = Nothing
+    , _sId = Nothing
+    , _sNetworkSettings = Nothing
+    }
 
 
 -- | Mapping that defines fractional HTTP traffic diversion to different
@@ -1581,19 +1592,27 @@ sName = lens _sName (\ s a -> s{_sName = a})
 sId :: Lens' Service (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
+-- | Ingress settings for this service. Will apply to all versions.
+sNetworkSettings :: Lens' Service (Maybe NetworkSettings)
+sNetworkSettings
+  = lens _sNetworkSettings
+      (\ s a -> s{_sNetworkSettings = a})
+
 instance FromJSON Service where
         parseJSON
           = withObject "Service"
               (\ o ->
                  Service' <$>
-                   (o .:? "split") <*> (o .:? "name") <*> (o .:? "id"))
+                   (o .:? "split") <*> (o .:? "name") <*> (o .:? "id")
+                     <*> (o .:? "networkSettings"))
 
 instance ToJSON Service where
         toJSON Service'{..}
           = object
               (catMaybes
                  [("split" .=) <$> _sSplit, ("name" .=) <$> _sName,
-                  ("id" .=) <$> _sId])
+                  ("id" .=) <$> _sId,
+                  ("networkSettings" .=) <$> _sNetworkSettings])
 
 -- | Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration.
 -- The Endpoints API Service provides tooling for serving Open API and gRPC
@@ -1606,9 +1625,9 @@ instance ToJSON Service where
 data EndpointsAPIService =
   EndpointsAPIService'
     { _easDisableTraceSampling :: !(Maybe Bool)
-    , _easName                 :: !(Maybe Text)
-    , _easConfigId             :: !(Maybe Text)
-    , _easRolloutStrategy      :: !(Maybe EndpointsAPIServiceRolloutStrategy)
+    , _easName :: !(Maybe Text)
+    , _easConfigId :: !(Maybe Text)
+    , _easRolloutStrategy :: !(Maybe EndpointsAPIServiceRolloutStrategy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1693,11 +1712,11 @@ instance ToJSON EndpointsAPIService where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _locName        :: !(Maybe Text)
-    , _locMetadata    :: !(Maybe LocationSchema)
+    { _locName :: !(Maybe Text)
+    , _locMetadata :: !(Maybe LocationSchema)
     , _locDisplayName :: !(Maybe Text)
-    , _locLabels      :: !(Maybe LocationLabels)
-    , _locLocationId  :: !(Maybe Text)
+    , _locLabels :: !(Maybe LocationLabels)
+    , _locLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1783,10 +1802,10 @@ instance ToJSON Location where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1840,7 +1859,7 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- name should have the format of operations\/some\/unique\/name.
+-- name should be a resource name ending with operations\/{unique_id}.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1877,7 +1896,7 @@ instance ToJSON Operation where
 data ZipInfo =
   ZipInfo'
     { _ziFilesCount :: !(Maybe (Textual Int32))
-    , _ziSourceURL  :: !(Maybe Text)
+    , _ziSourceURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1904,8 +1923,7 @@ ziFilesCount
 
 -- | URL of the zip file to deploy from. Must be a URL to a resource in
 -- Google Cloud Storage in the form
--- \'http(s):\/\/storage.googleapis.com\/\/
--- \'.
+-- \'http(s):\/\/storage.googleapis.com\/\/\'.
 ziSourceURL :: Lens' ZipInfo (Maybe Text)
 ziSourceURL
   = lens _ziSourceURL (\ s a -> s{_ziSourceURL = a})
@@ -1954,9 +1972,9 @@ instance ToJSON Empty where
 -- /See:/ 'urlDispatchRule' smart constructor.
 data URLDispatchRule =
   URLDispatchRule'
-    { _udrPath    :: !(Maybe Text)
+    { _udrPath :: !(Maybe Text)
     , _udrService :: !(Maybe Text)
-    , _udrDomain  :: !(Maybe Text)
+    , _udrDomain :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2017,14 +2035,14 @@ instance ToJSON URLDispatchRule where
 -- /See:/ 'operationMetadataV1Beta' smart constructor.
 data OperationMetadataV1Beta =
   OperationMetadataV1Beta'
-    { _omvbEphemeralMessage      :: !(Maybe Text)
-    , _omvbInsertTime            :: !(Maybe DateTime')
-    , _omvbUser                  :: !(Maybe Text)
-    , _omvbMethod                :: !(Maybe Text)
-    , _omvbEndTime               :: !(Maybe DateTime')
-    , _omvbWarning               :: !(Maybe [Text])
+    { _omvbEphemeralMessage :: !(Maybe Text)
+    , _omvbInsertTime :: !(Maybe DateTime')
+    , _omvbUser :: !(Maybe Text)
+    , _omvbMethod :: !(Maybe Text)
+    , _omvbEndTime :: !(Maybe DateTime')
+    , _omvbWarning :: !(Maybe [Text])
     , _omvbCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1Beta)
-    , _omvbTarget                :: !(Maybe Text)
+    , _omvbTarget :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2144,7 +2162,7 @@ instance ToJSON OperationMetadataV1Beta where
 data ListAuthorizedDomainsResponse =
   ListAuthorizedDomainsResponse'
     { _ladrNextPageToken :: !(Maybe Text)
-    , _ladrDomains       :: !(Maybe [AuthorizedDomain])
+    , _ladrDomains :: !(Maybe [AuthorizedDomain])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2230,7 +2248,7 @@ instance ToJSON Entrypoint where
 data ListVersionsResponse =
   ListVersionsResponse'
     { _lvrNextPageToken :: !(Maybe Text)
-    , _lvrVersions      :: !(Maybe [Version])
+    , _lvrVersions :: !(Maybe [Version])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2281,7 +2299,7 @@ instance ToJSON ListVersionsResponse where
 -- /See:/ 'managedCertificate' smart constructor.
 data ManagedCertificate =
   ManagedCertificate'
-    { _mcStatus          :: !(Maybe ManagedCertificateStatus)
+    { _mcStatus :: !(Maybe ManagedCertificateStatus)
     , _mcLastRenewalTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2377,8 +2395,8 @@ instance ToJSON CreateVersionMetadataV1Alpha where
 -- /See:/ 'fileInfo' smart constructor.
 data FileInfo =
   FileInfo'
-    { _fiSha1Sum   :: !(Maybe Text)
-    , _fiMimeType  :: !(Maybe Text)
+    { _fiSha1Sum :: !(Maybe Text)
+    , _fiMimeType :: !(Maybe Text)
     , _fiSourceURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2413,8 +2431,7 @@ fiMimeType
 
 -- | URL source to use to fetch this file. Must be a URL to a resource in
 -- Google Cloud Storage in the form
--- \'http(s):\/\/storage.googleapis.com\/\/
--- \'.
+-- \'http(s):\/\/storage.googleapis.com\/\/\'.
 fiSourceURL :: Lens' FileInfo (Maybe Text)
 fiSourceURL
   = lens _fiSourceURL (\ s a -> s{_fiSourceURL = a})
@@ -2441,18 +2458,18 @@ instance ToJSON FileInfo where
 -- /See:/ 'automaticScaling' smart constructor.
 data AutomaticScaling =
   AutomaticScaling'
-    { _asNetworkUtilization        :: !(Maybe NetworkUtilization)
-    , _asMaxTotalInstances         :: !(Maybe (Textual Int32))
-    , _asMinIdleInstances          :: !(Maybe (Textual Int32))
-    , _asDiskUtilization           :: !(Maybe DiskUtilization)
-    , _asMinPendingLatency         :: !(Maybe GDuration)
-    , _asCPUUtilization            :: !(Maybe CPUUtilization)
-    , _asMaxIdleInstances          :: !(Maybe (Textual Int32))
-    , _asMinTotalInstances         :: !(Maybe (Textual Int32))
-    , _asMaxConcurrentRequests     :: !(Maybe (Textual Int32))
-    , _asCoolDownPeriod            :: !(Maybe GDuration)
-    , _asRequestUtilization        :: !(Maybe RequestUtilization)
-    , _asMaxPendingLatency         :: !(Maybe GDuration)
+    { _asNetworkUtilization :: !(Maybe NetworkUtilization)
+    , _asMaxTotalInstances :: !(Maybe (Textual Int32))
+    , _asMinIdleInstances :: !(Maybe (Textual Int32))
+    , _asDiskUtilization :: !(Maybe DiskUtilization)
+    , _asMinPendingLatency :: !(Maybe GDuration)
+    , _asCPUUtilization :: !(Maybe CPUUtilization)
+    , _asMaxIdleInstances :: !(Maybe (Textual Int32))
+    , _asMinTotalInstances :: !(Maybe (Textual Int32))
+    , _asMaxConcurrentRequests :: !(Maybe (Textual Int32))
+    , _asCoolDownPeriod :: !(Maybe GDuration)
+    , _asRequestUtilization :: !(Maybe RequestUtilization)
+    , _asMaxPendingLatency :: !(Maybe GDuration)
     , _asStandardSchedulerSettings :: !(Maybe StandardSchedulerSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2651,8 +2668,8 @@ instance ToJSON AutomaticScaling where
 -- /See:/ 'volume' smart constructor.
 data Volume =
   Volume'
-    { _vSizeGb     :: !(Maybe (Textual Double))
-    , _vName       :: !(Maybe Text)
+    { _vSizeGb :: !(Maybe (Textual Double))
+    , _vName :: !(Maybe Text)
     , _vVolumeType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2779,7 +2796,7 @@ instance ToJSON StatusDetailsItem where
 data ListIngressRulesResponse =
   ListIngressRulesResponse'
     { _lirrNextPageToken :: !(Maybe Text)
-    , _lirrIngressRules  :: !(Maybe [FirewallRule])
+    , _lirrIngressRules :: !(Maybe [FirewallRule])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2834,10 +2851,10 @@ instance ToJSON ListIngressRulesResponse where
 data Network =
   Network'
     { _nSessionAffinity :: !(Maybe Bool)
-    , _nSubnetworkName  :: !(Maybe Text)
-    , _nForwardedPorts  :: !(Maybe [Text])
-    , _nInstanceTag     :: !(Maybe Text)
-    , _nName            :: !(Maybe Text)
+    , _nSubnetworkName :: !(Maybe Text)
+    , _nForwardedPorts :: !(Maybe [Text])
+    , _nInstanceTag :: !(Maybe Text)
+    , _nName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2943,11 +2960,11 @@ data ReadinessCheck =
   ReadinessCheck'
     { _rcSuccessThreshold :: !(Maybe (Textual Word32))
     , _rcFailureThreshold :: !(Maybe (Textual Word32))
-    , _rcPath             :: !(Maybe Text)
-    , _rcCheckInterval    :: !(Maybe GDuration)
-    , _rcAppStartTimeout  :: !(Maybe GDuration)
-    , _rcHost             :: !(Maybe Text)
-    , _rcTimeout          :: !(Maybe GDuration)
+    , _rcPath :: !(Maybe Text)
+    , _rcCheckInterval :: !(Maybe GDuration)
+    , _rcAppStartTimeout :: !(Maybe GDuration)
+    , _rcHost :: !(Maybe Text)
+    , _rcTimeout :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3180,9 +3197,10 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 data Resources =
   Resources'
     { _rMemoryGb :: !(Maybe (Textual Double))
-    , _rDiskGb   :: !(Maybe (Textual Double))
-    , _rVolumes  :: !(Maybe [Volume])
-    , _rCPU      :: !(Maybe (Textual Double))
+    , _rDiskGb :: !(Maybe (Textual Double))
+    , _rKmsKeyReference :: !(Maybe Text)
+    , _rVolumes :: !(Maybe [Volume])
+    , _rCPU :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3195,6 +3213,8 @@ data Resources =
 --
 -- * 'rDiskGb'
 --
+-- * 'rKmsKeyReference'
+--
 -- * 'rVolumes'
 --
 -- * 'rCPU'
@@ -3204,6 +3224,7 @@ resources =
   Resources'
     { _rMemoryGb = Nothing
     , _rDiskGb = Nothing
+    , _rKmsKeyReference = Nothing
     , _rVolumes = Nothing
     , _rCPU = Nothing
     }
@@ -3220,6 +3241,13 @@ rDiskGb :: Lens' Resources (Maybe Double)
 rDiskGb
   = lens _rDiskGb (\ s a -> s{_rDiskGb = a}) .
       mapping _Coerce
+
+-- | The name of the encryption key that is stored in Google Cloud KMS. Only
+-- should be used by Cloud Composer to encrypt the vm disk
+rKmsKeyReference :: Lens' Resources (Maybe Text)
+rKmsKeyReference
+  = lens _rKmsKeyReference
+      (\ s a -> s{_rKmsKeyReference = a})
 
 -- | User specified volumes.
 rVolumes :: Lens' Resources [Volume]
@@ -3240,7 +3268,8 @@ instance FromJSON Resources where
               (\ o ->
                  Resources' <$>
                    (o .:? "memoryGb") <*> (o .:? "diskGb") <*>
-                     (o .:? "volumes" .!= mempty)
+                     (o .:? "kmsKeyReference")
+                     <*> (o .:? "volumes" .!= mempty)
                      <*> (o .:? "cpu"))
 
 instance ToJSON Resources where
@@ -3249,6 +3278,7 @@ instance ToJSON Resources where
               (catMaybes
                  [("memoryGb" .=) <$> _rMemoryGb,
                   ("diskGb" .=) <$> _rDiskGb,
+                  ("kmsKeyReference" .=) <$> _rKmsKeyReference,
                   ("volumes" .=) <$> _rVolumes, ("cpu" .=) <$> _rCPU])
 
 -- | The feature specific settings to be used in the application. These
@@ -3258,7 +3288,7 @@ instance ToJSON Resources where
 data FeatureSettings =
   FeatureSettings'
     { _fsUseContainerOptimizedOS :: !(Maybe Bool)
-    , _fsSplitHealthChecks       :: !(Maybe Bool)
+    , _fsSplitHealthChecks :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3316,7 +3346,7 @@ instance ToJSON FeatureSettings where
 -- /See:/ 'certificateRawData' smart constructor.
 data CertificateRawData =
   CertificateRawData'
-    { _crdPrivateKey        :: !(Maybe Text)
+    { _crdPrivateKey :: !(Maybe Text)
     , _crdPublicCertificate :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3338,11 +3368,8 @@ certificateRawData =
 
 -- | Unencrypted PEM encoded RSA private key. This field is set once on
 -- certificate creation and then encrypted. The key size must be 2048 bits
--- or fewer. Must include the header and footer. Example:
---
--- >  -----BEGIN RSA PRIVATE KEY-----  -----END RSA PRIVATE KEY-----
---
--- \'InputOnly
+-- or fewer. Must include the header and footer. Example: -----BEGIN RSA
+-- PRIVATE KEY----- -----END RSA PRIVATE KEY----- \'InputOnly
 crdPrivateKey :: Lens' CertificateRawData (Maybe Text)
 crdPrivateKey
   = lens _crdPrivateKey
@@ -3350,8 +3377,7 @@ crdPrivateKey
 
 -- | PEM encoded x.509 public key certificate. This field is set once on
 -- certificate creation. Must include the header and footer. Example:
---
--- >  -----BEGIN CERTIFICATE-----  -----END CERTIFICATE-----
+-- -----BEGIN CERTIFICATE----- -----END CERTIFICATE-----
 crdPublicCertificate :: Lens' CertificateRawData (Maybe Text)
 crdPublicCertificate
   = lens _crdPublicCertificate
@@ -3377,9 +3403,9 @@ instance ToJSON CertificateRawData where
 data DomainMApping =
   DomainMApping'
     { _dmaResourceRecords :: !(Maybe [ResourceRecord])
-    , _dmaName            :: !(Maybe Text)
-    , _dmaId              :: !(Maybe Text)
-    , _dmaSSLSettings     :: !(Maybe SSLSettings)
+    , _dmaName :: !(Maybe Text)
+    , _dmaId :: !(Maybe Text)
+    , _dmaSSLSettings :: !(Maybe SSLSettings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3536,7 +3562,7 @@ instance ToJSON BatchUpdateIngressRulesResponse where
 data CPUUtilization =
   CPUUtilization'
     { _cuAggregationWindowLength :: !(Maybe GDuration)
-    , _cuTargetUtilization       :: !(Maybe (Textual Double))
+    , _cuTargetUtilization :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3585,6 +3611,44 @@ instance ToJSON CPUUtilization where
                  [("aggregationWindowLength" .=) <$>
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
+
+-- | Environment variables available to the build environment.Only returned
+-- in GET requests if view=FULL is set.
+--
+-- /See:/ 'versionBuildEnvVariables' smart constructor.
+newtype VersionBuildEnvVariables =
+  VersionBuildEnvVariables'
+    { _vbevAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VersionBuildEnvVariables' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vbevAddtional'
+versionBuildEnvVariables
+    :: HashMap Text Text -- ^ 'vbevAddtional'
+    -> VersionBuildEnvVariables
+versionBuildEnvVariables pVbevAddtional_ =
+  VersionBuildEnvVariables' {_vbevAddtional = _Coerce # pVbevAddtional_}
+
+
+vbevAddtional :: Lens' VersionBuildEnvVariables (HashMap Text Text)
+vbevAddtional
+  = lens _vbevAddtional
+      (\ s a -> s{_vbevAddtional = a})
+      . _Coerce
+
+instance FromJSON VersionBuildEnvVariables where
+        parseJSON
+          = withObject "VersionBuildEnvVariables"
+              (\ o ->
+                 VersionBuildEnvVariables' <$> (parseJSONObject o))
+
+instance ToJSON VersionBuildEnvVariables where
+        toJSON = toJSON . _vbevAddtional
 
 -- | Metadata for the given google.longrunning.Operation during a
 -- google.appengine.v1.CreateVersionRequest.
@@ -3677,7 +3741,7 @@ instance ToJSON TrafficSplitAllocations where
 data CloudBuildOptions =
   CloudBuildOptions'
     { _cboCloudBuildTimeout :: !(Maybe GDuration)
-    , _cboAppYamlPath       :: !(Maybe Text)
+    , _cboAppYamlPath :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3777,7 +3841,7 @@ instance ToJSON ManualScaling where
 data BasicScaling =
   BasicScaling'
     { _bsMaxInstances :: !(Maybe (Textual Int32))
-    , _bsIdleTimeout  :: !(Maybe GDuration)
+    , _bsIdleTimeout :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3829,14 +3893,14 @@ instance ToJSON BasicScaling where
 -- /See:/ 'operationMetadataV1' smart constructor.
 data OperationMetadataV1 =
   OperationMetadataV1'
-    { _omvEphemeralMessage      :: !(Maybe Text)
-    , _omvInsertTime            :: !(Maybe DateTime')
-    , _omvUser                  :: !(Maybe Text)
-    , _omvMethod                :: !(Maybe Text)
-    , _omvEndTime               :: !(Maybe DateTime')
-    , _omvWarning               :: !(Maybe [Text])
+    { _omvEphemeralMessage :: !(Maybe Text)
+    , _omvInsertTime :: !(Maybe DateTime')
+    , _omvUser :: !(Maybe Text)
+    , _omvMethod :: !(Maybe Text)
+    , _omvEndTime :: !(Maybe DateTime')
+    , _omvWarning :: !(Maybe [Text])
     , _omvCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1)
-    , _omvTarget                :: !(Maybe Text)
+    , _omvTarget :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3956,43 +4020,45 @@ instance ToJSON OperationMetadataV1 where
 -- /See:/ 'version' smart constructor.
 data Version =
   Version'
-    { _verRuntime                   :: !(Maybe Text)
-    , _verNobuildFilesRegex         :: !(Maybe Text)
-    , _verInstanceClass             :: !(Maybe Text)
-    , _verRuntimeChannel            :: !(Maybe Text)
+    { _verRuntime :: !(Maybe Text)
+    , _verNobuildFilesRegex :: !(Maybe Text)
+    , _verInstanceClass :: !(Maybe Text)
+    , _verRuntimeChannel :: !(Maybe Text)
     , _verRuntimeMainExecutablePath :: !(Maybe Text)
-    , _verVPCAccessConnector        :: !(Maybe VPCAccessConnector)
-    , _verHealthCheck               :: !(Maybe HealthCheck)
-    , _verEndpointsAPIService       :: !(Maybe EndpointsAPIService)
-    , _verEnv                       :: !(Maybe Text)
-    , _verZones                     :: !(Maybe [Text])
-    , _verEntrypoint                :: !(Maybe Entrypoint)
-    , _verDefaultExpiration         :: !(Maybe GDuration)
-    , _verAutomaticScaling          :: !(Maybe AutomaticScaling)
-    , _verErrorHandlers             :: !(Maybe [ErrorHandler])
-    , _verCreatedBy                 :: !(Maybe Text)
-    , _verVM                        :: !(Maybe Bool)
-    , _verHandlers                  :: !(Maybe [URLMap])
-    , _verInboundServices           :: !(Maybe [Text])
-    , _verReadinessCheck            :: !(Maybe ReadinessCheck)
-    , _verNetwork                   :: !(Maybe Network)
-    , _verResources                 :: !(Maybe Resources)
-    , _verName                      :: !(Maybe Text)
-    , _verThreadsafe                :: !(Maybe Bool)
-    , _verBetaSettings              :: !(Maybe VersionBetaSettings)
-    , _verBasicScaling              :: !(Maybe BasicScaling)
-    , _verManualScaling             :: !(Maybe ManualScaling)
-    , _verAPIConfig                 :: !(Maybe APIConfigHandler)
-    , _verId                        :: !(Maybe Text)
-    , _verEnvVariables              :: !(Maybe VersionEnvVariables)
-    , _verLivenessCheck             :: !(Maybe LivenessCheck)
-    , _verRuntimeAPIVersion         :: !(Maybe Text)
-    , _verServingStatus             :: !(Maybe VersionServingStatus)
-    , _verDiskUsageBytes            :: !(Maybe (Textual Int64))
-    , _verCreateTime                :: !(Maybe DateTime')
-    , _verLibraries                 :: !(Maybe [Library])
-    , _verVersionURL                :: !(Maybe Text)
-    , _verDeployment                :: !(Maybe Deployment)
+    , _verVPCAccessConnector :: !(Maybe VPCAccessConnector)
+    , _verHealthCheck :: !(Maybe HealthCheck)
+    , _verEndpointsAPIService :: !(Maybe EndpointsAPIService)
+    , _verEnv :: !(Maybe Text)
+    , _verZones :: !(Maybe [Text])
+    , _verEntrypoint :: !(Maybe Entrypoint)
+    , _verDefaultExpiration :: !(Maybe GDuration)
+    , _verAutomaticScaling :: !(Maybe AutomaticScaling)
+    , _verErrorHandlers :: !(Maybe [ErrorHandler])
+    , _verCreatedBy :: !(Maybe Text)
+    , _verVM :: !(Maybe Bool)
+    , _verHandlers :: !(Maybe [URLMap])
+    , _verInboundServices :: !(Maybe [VersionInboundServicesItem])
+    , _verReadinessCheck :: !(Maybe ReadinessCheck)
+    , _verNetwork :: !(Maybe Network)
+    , _verResources :: !(Maybe Resources)
+    , _verServiceAccount :: !(Maybe Text)
+    , _verName :: !(Maybe Text)
+    , _verThreadsafe :: !(Maybe Bool)
+    , _verBetaSettings :: !(Maybe VersionBetaSettings)
+    , _verBasicScaling :: !(Maybe BasicScaling)
+    , _verManualScaling :: !(Maybe ManualScaling)
+    , _verAPIConfig :: !(Maybe APIConfigHandler)
+    , _verId :: !(Maybe Text)
+    , _verEnvVariables :: !(Maybe VersionEnvVariables)
+    , _verLivenessCheck :: !(Maybe LivenessCheck)
+    , _verBuildEnvVariables :: !(Maybe VersionBuildEnvVariables)
+    , _verRuntimeAPIVersion :: !(Maybe Text)
+    , _verServingStatus :: !(Maybe VersionServingStatus)
+    , _verDiskUsageBytes :: !(Maybe (Textual Int64))
+    , _verCreateTime :: !(Maybe DateTime')
+    , _verLibraries :: !(Maybe [Library])
+    , _verVersionURL :: !(Maybe Text)
+    , _verDeployment :: !(Maybe Deployment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4043,6 +4109,8 @@ data Version =
 --
 -- * 'verResources'
 --
+-- * 'verServiceAccount'
+--
 -- * 'verName'
 --
 -- * 'verThreadsafe'
@@ -4060,6 +4128,8 @@ data Version =
 -- * 'verEnvVariables'
 --
 -- * 'verLivenessCheck'
+--
+-- * 'verBuildEnvVariables'
 --
 -- * 'verRuntimeAPIVersion'
 --
@@ -4099,6 +4169,7 @@ version =
     , _verReadinessCheck = Nothing
     , _verNetwork = Nothing
     , _verResources = Nothing
+    , _verServiceAccount = Nothing
     , _verName = Nothing
     , _verThreadsafe = Nothing
     , _verBetaSettings = Nothing
@@ -4108,6 +4179,7 @@ version =
     , _verId = Nothing
     , _verEnvVariables = Nothing
     , _verLivenessCheck = Nothing
+    , _verBuildEnvVariables = Nothing
     , _verRuntimeAPIVersion = Nothing
     , _verServingStatus = Nothing
     , _verDiskUsageBytes = Nothing
@@ -4206,7 +4278,8 @@ verDefaultExpiration
       . mapping _GDuration
 
 -- | Automatic scaling is based on request rate, response latencies, and
--- other application metrics.
+-- other application metrics. Instances are dynamically created and
+-- destroyed as needed in order to handle traffic.
 verAutomaticScaling :: Lens' Version (Maybe AutomaticScaling)
 verAutomaticScaling
   = lens _verAutomaticScaling
@@ -4242,7 +4315,7 @@ verHandlers
 
 -- | Before an application can receive email or XMPP messages, the
 -- application must be configured to enable the service.
-verInboundServices :: Lens' Version [Text]
+verInboundServices :: Lens' Version [VersionInboundServicesItem]
 verInboundServices
   = lens _verInboundServices
       (\ s a -> s{_verInboundServices = a})
@@ -4268,6 +4341,14 @@ verNetwork
 verResources :: Lens' Version (Maybe Resources)
 verResources
   = lens _verResources (\ s a -> s{_verResources = a})
+
+-- | The identity that the deployed version will run as. Admin API will use
+-- the App Engine Appspot service account as default if this field is
+-- neither provided in app.yaml file nor through CLI flag.
+verServiceAccount :: Lens' Version (Maybe Text)
+verServiceAccount
+  = lens _verServiceAccount
+      (\ s a -> s{_verServiceAccount = a})
 
 -- | Full path to the Version resource in the API. Example:
 -- apps\/myapp\/services\/default\/versions\/v1.\'OutputOnly
@@ -4298,6 +4379,7 @@ verBasicScaling
 
 -- | A service with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
+-- Manually scaled versions are sometimes referred to as \"backends\".
 verManualScaling :: Lens' Version (Maybe ManualScaling)
 verManualScaling
   = lens _verManualScaling
@@ -4330,6 +4412,13 @@ verLivenessCheck :: Lens' Version (Maybe LivenessCheck)
 verLivenessCheck
   = lens _verLivenessCheck
       (\ s a -> s{_verLivenessCheck = a})
+
+-- | Environment variables available to the build environment.Only returned
+-- in GET requests if view=FULL is set.
+verBuildEnvVariables :: Lens' Version (Maybe VersionBuildEnvVariables)
+verBuildEnvVariables
+  = lens _verBuildEnvVariables
+      (\ s a -> s{_verBuildEnvVariables = a})
 
 -- | The version of the API in the given runtime environment. Please see the
 -- app.yaml reference for valid values at
@@ -4409,6 +4498,7 @@ instance FromJSON Version where
                      <*> (o .:? "readinessCheck")
                      <*> (o .:? "network")
                      <*> (o .:? "resources")
+                     <*> (o .:? "serviceAccount")
                      <*> (o .:? "name")
                      <*> (o .:? "threadsafe")
                      <*> (o .:? "betaSettings")
@@ -4418,6 +4508,7 @@ instance FromJSON Version where
                      <*> (o .:? "id")
                      <*> (o .:? "envVariables")
                      <*> (o .:? "livenessCheck")
+                     <*> (o .:? "buildEnvVariables")
                      <*> (o .:? "runtimeApiVersion")
                      <*> (o .:? "servingStatus")
                      <*> (o .:? "diskUsageBytes")
@@ -4452,6 +4543,7 @@ instance ToJSON Version where
                   ("readinessCheck" .=) <$> _verReadinessCheck,
                   ("network" .=) <$> _verNetwork,
                   ("resources" .=) <$> _verResources,
+                  ("serviceAccount" .=) <$> _verServiceAccount,
                   ("name" .=) <$> _verName,
                   ("threadsafe" .=) <$> _verThreadsafe,
                   ("betaSettings" .=) <$> _verBetaSettings,
@@ -4461,6 +4553,7 @@ instance ToJSON Version where
                   ("id" .=) <$> _verId,
                   ("envVariables" .=) <$> _verEnvVariables,
                   ("livenessCheck" .=) <$> _verLivenessCheck,
+                  ("buildEnvVariables" .=) <$> _verBuildEnvVariables,
                   ("runtimeApiVersion" .=) <$> _verRuntimeAPIVersion,
                   ("servingStatus" .=) <$> _verServingStatus,
                   ("diskUsageBytes" .=) <$> _verDiskUsageBytes,
@@ -4474,10 +4567,10 @@ instance ToJSON Version where
 -- /See:/ 'identityAwareProxy' smart constructor.
 data IdentityAwareProxy =
   IdentityAwareProxy'
-    { _iapEnabled                  :: !(Maybe Bool)
+    { _iapEnabled :: !(Maybe Bool)
     , _iapOAuth2ClientSecretSha256 :: !(Maybe Text)
-    , _iapOAuth2ClientSecret       :: !(Maybe Text)
-    , _iapOAuth2ClientId           :: !(Maybe Text)
+    , _iapOAuth2ClientSecret :: !(Maybe Text)
+    , _iapOAuth2ClientId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4560,13 +4653,13 @@ instance ToJSON IdentityAwareProxy where
 -- /See:/ 'staticFilesHandler' smart constructor.
 data StaticFilesHandler =
   StaticFilesHandler'
-    { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
-    , _sfhPath                :: !(Maybe Text)
+    { _sfhHTTPHeaders :: !(Maybe StaticFilesHandlerHTTPHeaders)
+    , _sfhPath :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
-    , _sfhExpiration          :: !(Maybe GDuration)
-    , _sfhMimeType            :: !(Maybe Text)
+    , _sfhExpiration :: !(Maybe GDuration)
+    , _sfhMimeType :: !(Maybe Text)
     , _sfhApplicationReadable :: !(Maybe Bool)
-    , _sfhUploadPathRegex     :: !(Maybe Text)
+    , _sfhUploadPathRegex :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4684,8 +4777,8 @@ instance ToJSON StaticFilesHandler where
 -- /See:/ 'errorHandler' smart constructor.
 data ErrorHandler =
   ErrorHandler'
-    { _ehMimeType   :: !(Maybe Text)
-    , _ehErrorCode  :: !(Maybe ErrorHandlerErrorCode)
+    { _ehMimeType :: !(Maybe Text)
+    , _ehErrorCode :: !(Maybe ErrorHandlerErrorCode)
     , _ehStaticFile :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4780,7 +4873,7 @@ instance ToJSON LocationLabels where
 data ListAuthorizedCertificatesResponse =
   ListAuthorizedCertificatesResponse'
     { _lacrNextPageToken :: !(Maybe Text)
-    , _lacrCertificates  :: !(Maybe [AuthorizedCertificate])
+    , _lacrCertificates :: !(Maybe [AuthorizedCertificate])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4836,8 +4929,8 @@ instance ToJSON ListAuthorizedCertificatesResponse
 -- /See:/ 'firewallRule' smart constructor.
 data FirewallRule =
   FirewallRule'
-    { _frPriority    :: !(Maybe (Textual Int32))
-    , _frAction      :: !(Maybe FirewallRuleAction)
+    { _frPriority :: !(Maybe (Textual Int32))
+    , _frAction :: !(Maybe FirewallRuleAction)
     , _frSourceRange :: !(Maybe Text)
     , _frDescription :: !(Maybe Text)
     }
@@ -4884,12 +4977,11 @@ frAction = lens _frAction (\ s a -> s{_frAction = a})
 -- rule applies to. You can use the wildcard character \"*\" to match all
 -- IPs equivalent to \"0\/0\" and \"::\/0\" together. Examples: 192.168.1.1
 -- or 192.168.0.0\/16 or 2001:db8::\/32 or
--- 2001:0db8:0000:0042:0000:8a2e:0370:7334.
---
--- Truncation will be silently performed on addresses which are not
--- properly truncated. For example, 1.2.3.4\/24 is accepted as the same
--- address as 1.2.3.0\/24. Similarly, for IPv6, 2001:db8::1\/32 is accepted
--- as the same address as 2001:db8::\/32.
+-- 2001:0db8:0000:0042:0000:8a2e:0370:7334. Truncation will be silently
+-- performed on addresses which are not properly truncated. For example,
+-- 1.2.3.4\/24 is accepted as the same address as 1.2.3.0\/24. Similarly,
+-- for IPv6, 2001:db8::1\/32 is accepted as the same address as
+-- 2001:db8::\/32.
 frSourceRange :: Lens' FirewallRule (Maybe Text)
 frSourceRange
   = lens _frSourceRange
@@ -4926,6 +5018,7 @@ instance ToJSON FirewallRule where
 data LocationMetadata =
   LocationMetadata'
     { _lmStandardEnvironmentAvailable :: !(Maybe Bool)
+    , _lmSearchAPIAvailable :: !(Maybe Bool)
     , _lmFlexibleEnvironmentAvailable :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4937,12 +5030,15 @@ data LocationMetadata =
 --
 -- * 'lmStandardEnvironmentAvailable'
 --
+-- * 'lmSearchAPIAvailable'
+--
 -- * 'lmFlexibleEnvironmentAvailable'
 locationMetadata
     :: LocationMetadata
 locationMetadata =
   LocationMetadata'
     { _lmStandardEnvironmentAvailable = Nothing
+    , _lmSearchAPIAvailable = Nothing
     , _lmFlexibleEnvironmentAvailable = Nothing
     }
 
@@ -4953,6 +5049,14 @@ lmStandardEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
 lmStandardEnvironmentAvailable
   = lens _lmStandardEnvironmentAvailable
       (\ s a -> s{_lmStandardEnvironmentAvailable = a})
+
+-- | Output only. Search API
+-- (https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search)
+-- is available in the given location.
+lmSearchAPIAvailable :: Lens' LocationMetadata (Maybe Bool)
+lmSearchAPIAvailable
+  = lens _lmSearchAPIAvailable
+      (\ s a -> s{_lmSearchAPIAvailable = a})
 
 -- | App Engine flexible environment is available in the given
 -- location.\'OutputOnly
@@ -4967,7 +5071,8 @@ instance FromJSON LocationMetadata where
               (\ o ->
                  LocationMetadata' <$>
                    (o .:? "standardEnvironmentAvailable") <*>
-                     (o .:? "flexibleEnvironmentAvailable"))
+                     (o .:? "searchApiAvailable")
+                     <*> (o .:? "flexibleEnvironmentAvailable"))
 
 instance ToJSON LocationMetadata where
         toJSON LocationMetadata'{..}
@@ -4975,6 +5080,7 @@ instance ToJSON LocationMetadata where
               (catMaybes
                  [("standardEnvironmentAvailable" .=) <$>
                     _lmStandardEnvironmentAvailable,
+                  ("searchApiAvailable" .=) <$> _lmSearchAPIAvailable,
                   ("flexibleEnvironmentAvailable" .=) <$>
                     _lmFlexibleEnvironmentAvailable])
 
@@ -5017,13 +5123,89 @@ instance FromJSON OperationMetadata where
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
 
+-- | Metadata for the given google.cloud.location.Location.
+--
+-- /See:/ 'googleAppEngineV1betaLocationMetadata' smart constructor.
+data GoogleAppEngineV1betaLocationMetadata =
+  GoogleAppEngineV1betaLocationMetadata'
+    { _gaevlmStandardEnvironmentAvailable :: !(Maybe Bool)
+    , _gaevlmSearchAPIAvailable :: !(Maybe Bool)
+    , _gaevlmFlexibleEnvironmentAvailable :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleAppEngineV1betaLocationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gaevlmStandardEnvironmentAvailable'
+--
+-- * 'gaevlmSearchAPIAvailable'
+--
+-- * 'gaevlmFlexibleEnvironmentAvailable'
+googleAppEngineV1betaLocationMetadata
+    :: GoogleAppEngineV1betaLocationMetadata
+googleAppEngineV1betaLocationMetadata =
+  GoogleAppEngineV1betaLocationMetadata'
+    { _gaevlmStandardEnvironmentAvailable = Nothing
+    , _gaevlmSearchAPIAvailable = Nothing
+    , _gaevlmFlexibleEnvironmentAvailable = Nothing
+    }
+
+
+-- | App Engine standard environment is available in the given
+-- location.\'OutputOnly
+gaevlmStandardEnvironmentAvailable :: Lens' GoogleAppEngineV1betaLocationMetadata (Maybe Bool)
+gaevlmStandardEnvironmentAvailable
+  = lens _gaevlmStandardEnvironmentAvailable
+      (\ s a -> s{_gaevlmStandardEnvironmentAvailable = a})
+
+-- | Output only. Search API
+-- (https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search)
+-- is available in the given location.
+gaevlmSearchAPIAvailable :: Lens' GoogleAppEngineV1betaLocationMetadata (Maybe Bool)
+gaevlmSearchAPIAvailable
+  = lens _gaevlmSearchAPIAvailable
+      (\ s a -> s{_gaevlmSearchAPIAvailable = a})
+
+-- | App Engine flexible environment is available in the given
+-- location.\'OutputOnly
+gaevlmFlexibleEnvironmentAvailable :: Lens' GoogleAppEngineV1betaLocationMetadata (Maybe Bool)
+gaevlmFlexibleEnvironmentAvailable
+  = lens _gaevlmFlexibleEnvironmentAvailable
+      (\ s a -> s{_gaevlmFlexibleEnvironmentAvailable = a})
+
+instance FromJSON
+           GoogleAppEngineV1betaLocationMetadata
+         where
+        parseJSON
+          = withObject "GoogleAppEngineV1betaLocationMetadata"
+              (\ o ->
+                 GoogleAppEngineV1betaLocationMetadata' <$>
+                   (o .:? "standardEnvironmentAvailable") <*>
+                     (o .:? "searchApiAvailable")
+                     <*> (o .:? "flexibleEnvironmentAvailable"))
+
+instance ToJSON GoogleAppEngineV1betaLocationMetadata
+         where
+        toJSON GoogleAppEngineV1betaLocationMetadata'{..}
+          = object
+              (catMaybes
+                 [("standardEnvironmentAvailable" .=) <$>
+                    _gaevlmStandardEnvironmentAvailable,
+                  ("searchApiAvailable" .=) <$>
+                    _gaevlmSearchAPIAvailable,
+                  ("flexibleEnvironmentAvailable" .=) <$>
+                    _gaevlmFlexibleEnvironmentAvailable])
+
 -- | Response message for Instances.ListInstances.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
 data ListInstancesResponse =
   ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
-    , _lirInstances     :: !(Maybe [Instance])
+    , _lirInstances :: !(Maybe [Instance])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5074,14 +5256,14 @@ instance ToJSON ListInstancesResponse where
 -- /See:/ 'operationMetadataV1Alpha' smart constructor.
 data OperationMetadataV1Alpha =
   OperationMetadataV1Alpha'
-    { _omvaEphemeralMessage      :: !(Maybe Text)
-    , _omvaInsertTime            :: !(Maybe DateTime')
-    , _omvaUser                  :: !(Maybe Text)
-    , _omvaMethod                :: !(Maybe Text)
-    , _omvaEndTime               :: !(Maybe DateTime')
-    , _omvaWarning               :: !(Maybe [Text])
+    { _omvaEphemeralMessage :: !(Maybe Text)
+    , _omvaInsertTime :: !(Maybe DateTime')
+    , _omvaUser :: !(Maybe Text)
+    , _omvaMethod :: !(Maybe Text)
+    , _omvaEndTime :: !(Maybe DateTime')
+    , _omvaWarning :: !(Maybe [Text])
     , _omvaCreateVersionMetadata :: !(Maybe CreateVersionMetadataV1Alpha)
-    , _omvaTarget                :: !(Maybe Text)
+    , _omvaTarget :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5203,11 +5385,11 @@ data LivenessCheck =
   LivenessCheck'
     { _lcSuccessThreshold :: !(Maybe (Textual Word32))
     , _lcFailureThreshold :: !(Maybe (Textual Word32))
-    , _lcPath             :: !(Maybe Text)
-    , _lcCheckInterval    :: !(Maybe GDuration)
-    , _lcHost             :: !(Maybe Text)
-    , _lcInitialDelay     :: !(Maybe GDuration)
-    , _lcTimeout          :: !(Maybe GDuration)
+    , _lcPath :: !(Maybe Text)
+    , _lcCheckInterval :: !(Maybe GDuration)
+    , _lcHost :: !(Maybe Text)
+    , _lcInitialDelay :: !(Maybe GDuration)
+    , _lcTimeout :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5313,13 +5495,53 @@ instance ToJSON LivenessCheck where
                   ("initialDelay" .=) <$> _lcInitialDelay,
                   ("timeout" .=) <$> _lcTimeout])
 
+-- | A NetworkSettings resource is a container for ingress settings for a
+-- version or service.
+--
+-- /See:/ 'networkSettings' smart constructor.
+newtype NetworkSettings =
+  NetworkSettings'
+    { _nsIngressTrafficAllowed :: Maybe NetworkSettingsIngressTrafficAllowed
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NetworkSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nsIngressTrafficAllowed'
+networkSettings
+    :: NetworkSettings
+networkSettings = NetworkSettings' {_nsIngressTrafficAllowed = Nothing}
+
+
+-- | The ingress settings for version or service.
+nsIngressTrafficAllowed :: Lens' NetworkSettings (Maybe NetworkSettingsIngressTrafficAllowed)
+nsIngressTrafficAllowed
+  = lens _nsIngressTrafficAllowed
+      (\ s a -> s{_nsIngressTrafficAllowed = a})
+
+instance FromJSON NetworkSettings where
+        parseJSON
+          = withObject "NetworkSettings"
+              (\ o ->
+                 NetworkSettings' <$> (o .:? "ingressTrafficAllowed"))
+
+instance ToJSON NetworkSettings where
+        toJSON NetworkSettings'{..}
+          = object
+              (catMaybes
+                 [("ingressTrafficAllowed" .=) <$>
+                    _nsIngressTrafficAllowed])
+
 -- | Target scaling by request utilization. Only applicable in the App Engine
 -- flexible environment.
 --
 -- /See:/ 'requestUtilization' smart constructor.
 data RequestUtilization =
   RequestUtilization'
-    { _ruTargetConcurrentRequests    :: !(Maybe (Textual Int32))
+    { _ruTargetConcurrentRequests :: !(Maybe (Textual Int32))
     , _ruTargetRequestCountPerSecond :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5485,7 +5707,7 @@ instance ToJSON CreateVersionMetadataV1Beta where
 data ListDomainMAppingsResponse =
   ListDomainMAppingsResponse'
     { _ldmarDomainMAppings :: !(Maybe [DomainMApping])
-    , _ldmarNextPageToken  :: !(Maybe Text)
+    , _ldmarNextPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5538,9 +5760,9 @@ instance ToJSON ListDomainMAppingsResponse where
 -- /See:/ 'standardSchedulerSettings' smart constructor.
 data StandardSchedulerSettings =
   StandardSchedulerSettings'
-    { _sssTargetCPUUtilization        :: !(Maybe (Textual Double))
-    , _sssMinInstances                :: !(Maybe (Textual Int32))
-    , _sssMaxInstances                :: !(Maybe (Textual Int32))
+    { _sssTargetCPUUtilization :: !(Maybe (Textual Double))
+    , _sssMinInstances :: !(Maybe (Textual Int32))
+    , _sssMaxInstances :: !(Maybe (Textual Int32))
     , _sssTargetThroughputUtilization :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5663,21 +5885,22 @@ instance ToJSON ContainerInfo where
 -- /See:/ 'instance'' smart constructor.
 data Instance =
   Instance'
-    { _iMemoryUsage      :: !(Maybe (Textual Int64))
-    , _iVMStatus         :: !(Maybe Text)
-    , _iVMZoneName       :: !(Maybe Text)
-    , _iVMIP             :: !(Maybe Text)
-    , _iStartTime        :: !(Maybe DateTime')
-    , _iVMId             :: !(Maybe Text)
-    , _iAvailability     :: !(Maybe InstanceAvailability)
-    , _iVMName           :: !(Maybe Text)
-    , _iName             :: !(Maybe Text)
-    , _iVMDebugEnabled   :: !(Maybe Bool)
-    , _iRequests         :: !(Maybe (Textual Int32))
-    , _iQps              :: !(Maybe (Textual Double))
-    , _iId               :: !(Maybe Text)
-    , _iErrors           :: !(Maybe (Textual Int32))
-    , _iAverageLatency   :: !(Maybe (Textual Int32))
+    { _iMemoryUsage :: !(Maybe (Textual Int64))
+    , _iVMStatus :: !(Maybe Text)
+    , _iVMZoneName :: !(Maybe Text)
+    , _iVMIP :: !(Maybe Text)
+    , _iStartTime :: !(Maybe DateTime')
+    , _iVMId :: !(Maybe Text)
+    , _iVMLiveness :: !(Maybe InstanceVMLiveness)
+    , _iAvailability :: !(Maybe InstanceAvailability)
+    , _iVMName :: !(Maybe Text)
+    , _iName :: !(Maybe Text)
+    , _iVMDebugEnabled :: !(Maybe Bool)
+    , _iRequests :: !(Maybe (Textual Int32))
+    , _iQps :: !(Maybe (Textual Double))
+    , _iId :: !(Maybe Text)
+    , _iErrors :: !(Maybe (Textual Int32))
+    , _iAverageLatency :: !(Maybe (Textual Int32))
     , _iAppEngineRelease :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5698,6 +5921,8 @@ data Instance =
 -- * 'iStartTime'
 --
 -- * 'iVMId'
+--
+-- * 'iVMLiveness'
 --
 -- * 'iAvailability'
 --
@@ -5728,6 +5953,7 @@ instance' =
     , _iVMIP = Nothing
     , _iStartTime = Nothing
     , _iVMId = Nothing
+    , _iVMLiveness = Nothing
     , _iAvailability = Nothing
     , _iVMName = Nothing
     , _iName = Nothing
@@ -5741,94 +5967,100 @@ instance' =
     }
 
 
--- | Total memory in use (bytes).\'OutputOnly
+-- | Output only. Total memory in use (bytes).
 iMemoryUsage :: Lens' Instance (Maybe Int64)
 iMemoryUsage
   = lens _iMemoryUsage (\ s a -> s{_iMemoryUsage = a})
       . mapping _Coerce
 
--- | Status of the virtual machine where this instance lives. Only applicable
--- for instances in App Engine flexible environment.\'OutputOnly
+-- | Output only. Status of the virtual machine where this instance lives.
+-- Only applicable for instances in App Engine flexible environment.
 iVMStatus :: Lens' Instance (Maybe Text)
 iVMStatus
   = lens _iVMStatus (\ s a -> s{_iVMStatus = a})
 
--- | Zone where the virtual machine is located. Only applicable for instances
--- in App Engine flexible environment.\'OutputOnly
+-- | Output only. Zone where the virtual machine is located. Only applicable
+-- for instances in App Engine flexible environment.
 iVMZoneName :: Lens' Instance (Maybe Text)
 iVMZoneName
   = lens _iVMZoneName (\ s a -> s{_iVMZoneName = a})
 
--- | The IP address of this instance. Only applicable for instances in App
--- Engine flexible environment.\'OutputOnly
+-- | Output only. The IP address of this instance. Only applicable for
+-- instances in App Engine flexible environment.
 iVMIP :: Lens' Instance (Maybe Text)
 iVMIP = lens _iVMIP (\ s a -> s{_iVMIP = a})
 
--- | Time that this instance was started.\'OutputOnly
+-- | Output only. Time that this instance was started.\'OutputOnly
 iStartTime :: Lens' Instance (Maybe UTCTime)
 iStartTime
   = lens _iStartTime (\ s a -> s{_iStartTime = a}) .
       mapping _DateTime
 
--- | Virtual machine ID of this instance. Only applicable for instances in
--- App Engine flexible environment.\'OutputOnly
+-- | Output only. Virtual machine ID of this instance. Only applicable for
+-- instances in App Engine flexible environment.
 iVMId :: Lens' Instance (Maybe Text)
 iVMId = lens _iVMId (\ s a -> s{_iVMId = a})
 
--- | Availability of the instance.\'OutputOnly
+-- | Output only. The liveness health check of this instance. Only applicable
+-- for instances in App Engine flexible environment.
+iVMLiveness :: Lens' Instance (Maybe InstanceVMLiveness)
+iVMLiveness
+  = lens _iVMLiveness (\ s a -> s{_iVMLiveness = a})
+
+-- | Output only. Availability of the instance.
 iAvailability :: Lens' Instance (Maybe InstanceAvailability)
 iAvailability
   = lens _iAvailability
       (\ s a -> s{_iAvailability = a})
 
--- | Name of the virtual machine where this instance lives. Only applicable
--- for instances in App Engine flexible environment.\'OutputOnly
+-- | Output only. Name of the virtual machine where this instance lives. Only
+-- applicable for instances in App Engine flexible environment.
 iVMName :: Lens' Instance (Maybe Text)
 iVMName = lens _iVMName (\ s a -> s{_iVMName = a})
 
--- | Full path to the Instance resource in the API. Example:
--- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.\'OutputOnly
+-- | Output only. Full path to the Instance resource in the API. Example:
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
--- | Whether this instance is in debug mode. Only applicable for instances in
--- App Engine flexible environment.\'OutputOnly
+-- | Output only. Whether this instance is in debug mode. Only applicable for
+-- instances in App Engine flexible environment.
 iVMDebugEnabled :: Lens' Instance (Maybe Bool)
 iVMDebugEnabled
   = lens _iVMDebugEnabled
       (\ s a -> s{_iVMDebugEnabled = a})
 
--- | Number of requests since this instance was started.\'OutputOnly
+-- | Output only. Number of requests since this instance was started.
 iRequests :: Lens' Instance (Maybe Int32)
 iRequests
   = lens _iRequests (\ s a -> s{_iRequests = a}) .
       mapping _Coerce
 
--- | Average queries per second (QPS) over the last minute.\'OutputOnly
+-- | Output only. Average queries per second (QPS) over the last minute.
 iQps :: Lens' Instance (Maybe Double)
 iQps
   = lens _iQps (\ s a -> s{_iQps = a}) .
       mapping _Coerce
 
--- | Relative name of the instance within the version. Example:
--- instance-1.\'OutputOnly
+-- | Output only. Relative name of the instance within the version. Example:
+-- instance-1.
 iId :: Lens' Instance (Maybe Text)
 iId = lens _iId (\ s a -> s{_iId = a})
 
--- | Number of errors since this instance was started.\'OutputOnly
+-- | Output only. Number of errors since this instance was started.
 iErrors :: Lens' Instance (Maybe Int32)
 iErrors
   = lens _iErrors (\ s a -> s{_iErrors = a}) .
       mapping _Coerce
 
--- | Average latency (ms) over the last minute.\'OutputOnly
+-- | Output only. Average latency (ms) over the last minute.
 iAverageLatency :: Lens' Instance (Maybe Int32)
 iAverageLatency
   = lens _iAverageLatency
       (\ s a -> s{_iAverageLatency = a})
       . mapping _Coerce
 
--- | App Engine release this instance is running on.\'OutputOnly
+-- | Output only. App Engine release this instance is running on.
 iAppEngineRelease :: Lens' Instance (Maybe Text)
 iAppEngineRelease
   = lens _iAppEngineRelease
@@ -5844,6 +6076,7 @@ instance FromJSON Instance where
                      <*> (o .:? "vmIp")
                      <*> (o .:? "startTime")
                      <*> (o .:? "vmId")
+                     <*> (o .:? "vmLiveness")
                      <*> (o .:? "availability")
                      <*> (o .:? "vmName")
                      <*> (o .:? "name")
@@ -5865,6 +6098,7 @@ instance ToJSON Instance where
                   ("vmIp" .=) <$> _iVMIP,
                   ("startTime" .=) <$> _iStartTime,
                   ("vmId" .=) <$> _iVMId,
+                  ("vmLiveness" .=) <$> _iVMLiveness,
                   ("availability" .=) <$> _iAvailability,
                   ("vmName" .=) <$> _iVMName, ("name" .=) <$> _iName,
                   ("vmDebugEnabled" .=) <$> _iVMDebugEnabled,
@@ -5878,8 +6112,8 @@ instance ToJSON Instance where
 -- /See:/ 'sslSettings' smart constructor.
 data SSLSettings =
   SSLSettings'
-    { _ssSSLManagementType           :: !(Maybe SSLSettingsSSLManagementType)
-    , _ssCertificateId               :: !(Maybe Text)
+    { _ssSSLManagementType :: !(Maybe SSLSettingsSSLManagementType)
+    , _ssCertificateId :: !(Maybe Text)
     , _ssPendingManagedCertificateId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5960,10 +6194,10 @@ instance ToJSON SSLSettings where
 -- /See:/ 'deployment' smart constructor.
 data Deployment =
   Deployment'
-    { _dZip               :: !(Maybe ZipInfo)
+    { _dZip :: !(Maybe ZipInfo)
     , _dCloudBuildOptions :: !(Maybe CloudBuildOptions)
-    , _dContainer         :: !(Maybe ContainerInfo)
-    , _dFiles             :: !(Maybe DeploymentFiles)
+    , _dContainer :: !(Maybe ContainerInfo)
+    , _dFiles :: !(Maybe DeploymentFiles)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

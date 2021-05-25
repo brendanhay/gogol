@@ -37,8 +37,8 @@ module Network.Google.Resource.Webmasters.Sitemaps.Submit
     , ssSiteURL
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebmasterTools.Types
+import Network.Google.Prelude
+import Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sitemaps.submit@ method which the
 -- 'SitemapsSubmit' request conforms to.
@@ -57,7 +57,7 @@ type SitemapsSubmitResource =
 data SitemapsSubmit =
   SitemapsSubmit'
     { _ssFeedpath :: !Text
-    , _ssSiteURL  :: !Text
+    , _ssSiteURL :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

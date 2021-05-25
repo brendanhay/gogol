@@ -37,18 +37,37 @@ library
         , Network.Google.ContainerBuilder.Types
         , Network.Google.Resource.Cloudbuild.Operations.Cancel
         , Network.Google.Resource.Cloudbuild.Operations.Get
-        , Network.Google.Resource.Cloudbuild.Operations.List
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Create
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Get
         , Network.Google.Resource.Cloudbuild.Projects.Builds.List
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Retry
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Builds.Cancel
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Builds.Create
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Builds.Get
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Builds.List
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Builds.Retry
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Operations.Cancel
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Operations.Get
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.Create
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.Delete
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.Get
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.List
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.Patch
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.Run
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.Triggers.Webhook
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.WorkerPools.Create
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.WorkerPools.Delete
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.WorkerPools.Get
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.WorkerPools.List
+        , Network.Google.Resource.Cloudbuild.Projects.Locations.WorkerPools.Patch
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Create
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Delete
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Get
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.List
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Patch
         , Network.Google.Resource.Cloudbuild.Projects.Triggers.Run
+        , Network.Google.Resource.Cloudbuild.Projects.Triggers.Webhook
 
     other-modules:
           Network.Google.ContainerBuilder.Types.Product

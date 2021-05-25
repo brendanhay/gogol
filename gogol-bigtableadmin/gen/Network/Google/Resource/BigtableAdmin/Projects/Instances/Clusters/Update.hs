@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a cluster within an instance.
+-- Updates a cluster within an instance. UpdateCluster is deprecated.
+-- Please use PartialUpdateCluster instead.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.clusters.update@.
 module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Update
@@ -42,8 +43,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Clusters.Update
     , picuCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.clusters.update@ method which the
 -- 'ProjectsInstancesClustersUpdate' request conforms to.
@@ -58,18 +59,19 @@ type ProjectsInstancesClustersUpdateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Cluster :> Put '[JSON] Operation
 
--- | Updates a cluster within an instance.
+-- | Updates a cluster within an instance. UpdateCluster is deprecated.
+-- Please use PartialUpdateCluster instead.
 --
 -- /See:/ 'projectsInstancesClustersUpdate' smart constructor.
 data ProjectsInstancesClustersUpdate =
   ProjectsInstancesClustersUpdate'
-    { _picuXgafv          :: !(Maybe Xgafv)
+    { _picuXgafv :: !(Maybe Xgafv)
     , _picuUploadProtocol :: !(Maybe Text)
-    , _picuAccessToken    :: !(Maybe Text)
-    , _picuUploadType     :: !(Maybe Text)
-    , _picuPayload        :: !Cluster
-    , _picuName           :: !Text
-    , _picuCallback       :: !(Maybe Text)
+    , _picuAccessToken :: !(Maybe Text)
+    , _picuUploadType :: !(Maybe Text)
+    , _picuPayload :: !Cluster
+    , _picuName :: !Text
+    , _picuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,8 +137,8 @@ picuPayload :: Lens' ProjectsInstancesClustersUpdate Cluster
 picuPayload
   = lens _picuPayload (\ s a -> s{_picuPayload = a})
 
--- | (\`OutputOnly\`) The unique name of the cluster. Values are of the form
--- \`projects\/\/instances\/\/clusters\/a-z*\`.
+-- | The unique name of the cluster. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/clusters\/a-z*\`.
 picuName :: Lens' ProjectsInstancesClustersUpdate Text
 picuName = lens _picuName (\ s a -> s{_picuName = a})
 

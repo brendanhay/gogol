@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Inse
     , mwpawliAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.insert@ method which the
 -- 'ManagementWebPropertyAdWordsLinksInsert' request conforms to.
@@ -63,8 +63,8 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 data ManagementWebPropertyAdWordsLinksInsert =
   ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId :: !Text
-    , _mwpawliPayload       :: !EntityAdWordsLink
-    , _mwpawliAccountId     :: !Text
+    , _mwpawliPayload :: !EntityAdWordsLink
+    , _mwpawliAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

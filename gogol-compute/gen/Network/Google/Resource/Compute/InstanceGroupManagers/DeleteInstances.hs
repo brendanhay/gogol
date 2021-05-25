@@ -50,8 +50,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
     , igmdiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.deleteInstances@ method which the
 -- 'InstanceGroupManagersDeleteInstances' request conforms to.
@@ -86,11 +86,11 @@ type InstanceGroupManagersDeleteInstancesResource =
 -- /See:/ 'instanceGroupManagersDeleteInstances' smart constructor.
 data InstanceGroupManagersDeleteInstances =
   InstanceGroupManagersDeleteInstances'
-    { _igmdiRequestId            :: !(Maybe Text)
-    , _igmdiProject              :: !Text
+    { _igmdiRequestId :: !(Maybe Text)
+    , _igmdiProject :: !Text
     , _igmdiInstanceGroupManager :: !Text
-    , _igmdiZone                 :: !Text
-    , _igmdiPayload              :: !InstanceGroupManagersDeleteInstancesRequest
+    , _igmdiZone :: !Text
+    , _igmdiPayload :: !InstanceGroupManagersDeleteInstancesRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

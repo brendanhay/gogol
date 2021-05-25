@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a datasource.
+-- Creates a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.create@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.datasources.create@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Create
     (
     -- * REST Resource
@@ -41,8 +42,8 @@ module Network.Google.Resource.CloudSearch.Settings.Datasources.Create
     , sdcCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.datasources.create@ method which the
 -- 'SettingsDatasourcesCreate' request conforms to.
@@ -58,17 +59,18 @@ type SettingsDatasourcesCreateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] DataSource :> Post '[JSON] Operation
 
--- | Creates a datasource.
+-- | Creates a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
 -- /See:/ 'settingsDatasourcesCreate' smart constructor.
 data SettingsDatasourcesCreate =
   SettingsDatasourcesCreate'
-    { _sdcXgafv          :: !(Maybe Xgafv)
+    { _sdcXgafv :: !(Maybe Xgafv)
     , _sdcUploadProtocol :: !(Maybe Text)
-    , _sdcAccessToken    :: !(Maybe Text)
-    , _sdcUploadType     :: !(Maybe Text)
-    , _sdcPayload        :: !DataSource
-    , _sdcCallback       :: !(Maybe Text)
+    , _sdcAccessToken :: !(Maybe Text)
+    , _sdcUploadType :: !(Maybe Text)
+    , _sdcPayload :: !DataSource
+    , _sdcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

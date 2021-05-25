@@ -56,8 +56,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.P
     , ccwsspCourseWorkId
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.patch@ method which the
 -- 'CoursesCourseWorkStudentSubmissionsPatch' request conforms to.
@@ -96,16 +96,16 @@ type CoursesCourseWorkStudentSubmissionsPatchResource
 -- /See:/ 'coursesCourseWorkStudentSubmissionsPatch' smart constructor.
 data CoursesCourseWorkStudentSubmissionsPatch =
   CoursesCourseWorkStudentSubmissionsPatch'
-    { _ccwsspXgafv          :: !(Maybe Xgafv)
+    { _ccwsspXgafv :: !(Maybe Xgafv)
     , _ccwsspUploadProtocol :: !(Maybe Text)
-    , _ccwsspUpdateMask     :: !(Maybe GFieldMask)
-    , _ccwsspCourseId       :: !Text
-    , _ccwsspAccessToken    :: !(Maybe Text)
-    , _ccwsspUploadType     :: !(Maybe Text)
-    , _ccwsspPayload        :: !StudentSubmission
-    , _ccwsspId             :: !Text
-    , _ccwsspCallback       :: !(Maybe Text)
-    , _ccwsspCourseWorkId   :: !Text
+    , _ccwsspUpdateMask :: !(Maybe GFieldMask)
+    , _ccwsspCourseId :: !Text
+    , _ccwsspAccessToken :: !(Maybe Text)
+    , _ccwsspUploadType :: !(Maybe Text)
+    , _ccwsspPayload :: !StudentSubmission
+    , _ccwsspId :: !Text
+    , _ccwsspCallback :: !(Maybe Text)
+    , _ccwsspCourseWorkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

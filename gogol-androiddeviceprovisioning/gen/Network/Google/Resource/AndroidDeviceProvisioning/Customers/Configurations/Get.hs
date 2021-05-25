@@ -41,8 +41,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configuration
     , ccgCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.configurations.get@ method which the
 -- 'CustomersConfigurationsGet' request conforms to.
@@ -61,12 +61,12 @@ type CustomersConfigurationsGetResource =
 -- /See:/ 'customersConfigurationsGet' smart constructor.
 data CustomersConfigurationsGet =
   CustomersConfigurationsGet'
-    { _ccgXgafv          :: !(Maybe Xgafv)
+    { _ccgXgafv :: !(Maybe Xgafv)
     , _ccgUploadProtocol :: !(Maybe Text)
-    , _ccgAccessToken    :: !(Maybe Text)
-    , _ccgUploadType     :: !(Maybe Text)
-    , _ccgName           :: !Text
-    , _ccgCallback       :: !(Maybe Text)
+    , _ccgAccessToken :: !(Maybe Text)
+    , _ccgUploadType :: !(Maybe Text)
+    , _ccgName :: !Text
+    , _ccgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

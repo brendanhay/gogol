@@ -23,7 +23,7 @@
 -- Retrieves a list of targeting templates, optionally filtered. This
 -- method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetingTemplates.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.targetingTemplates.list@.
 module Network.Google.Resource.DFAReporting.TargetingTemplates.List
     (
     -- * REST Resource
@@ -34,40 +34,51 @@ module Network.Google.Resource.DFAReporting.TargetingTemplates.List
     , TargetingTemplatesList
 
     -- * Request Lenses
+    , ttlXgafv
+    , ttlUploadProtocol
+    , ttlAccessToken
     , ttlAdvertiserId
     , ttlSearchString
+    , ttlUploadType
     , ttlIds
     , ttlProFileId
     , ttlSortOrder
     , ttlPageToken
     , ttlSortField
     , ttlMaxResults
+    , ttlCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.targetingTemplates.list@ method which the
 -- 'TargetingTemplatesList' request conforms to.
 type TargetingTemplatesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
-               QueryParam "advertiserId" (Textual Int64) :>
-                 QueryParam "searchString" Text :>
-                   QueryParams "ids" (Textual Int64) :>
-                     QueryParam "sortOrder"
-                       TargetingTemplatesListSortOrder
-                       :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "sortField"
-                           TargetingTemplatesListSortField
-                           :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] TargetingTemplatesListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "advertiserId" (Textual Int64) :>
+                       QueryParam "searchString" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "ids" (Textual Int64) :>
+                             QueryParam "sortOrder"
+                               TargetingTemplatesListSortOrder
+                               :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "sortField"
+                                   TargetingTemplatesListSortField
+                                   :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON]
+                                           TargetingTemplatesListResponse
 
 -- | Retrieves a list of targeting templates, optionally filtered. This
 -- method supports paging.
@@ -75,14 +86,19 @@ type TargetingTemplatesListResource =
 -- /See:/ 'targetingTemplatesList' smart constructor.
 data TargetingTemplatesList =
   TargetingTemplatesList'
-    { _ttlAdvertiserId :: !(Maybe (Textual Int64))
+    { _ttlXgafv :: !(Maybe Xgafv)
+    , _ttlUploadProtocol :: !(Maybe Text)
+    , _ttlAccessToken :: !(Maybe Text)
+    , _ttlAdvertiserId :: !(Maybe (Textual Int64))
     , _ttlSearchString :: !(Maybe Text)
-    , _ttlIds          :: !(Maybe [Textual Int64])
-    , _ttlProFileId    :: !(Textual Int64)
-    , _ttlSortOrder    :: !TargetingTemplatesListSortOrder
-    , _ttlPageToken    :: !(Maybe Text)
-    , _ttlSortField    :: !TargetingTemplatesListSortField
-    , _ttlMaxResults   :: !(Textual Int32)
+    , _ttlUploadType :: !(Maybe Text)
+    , _ttlIds :: !(Maybe [Textual Int64])
+    , _ttlProFileId :: !(Textual Int64)
+    , _ttlSortOrder :: !TargetingTemplatesListSortOrder
+    , _ttlPageToken :: !(Maybe Text)
+    , _ttlSortField :: !TargetingTemplatesListSortField
+    , _ttlMaxResults :: !(Textual Int32)
+    , _ttlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,9 +107,17 @@ data TargetingTemplatesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ttlXgafv'
+--
+-- * 'ttlUploadProtocol'
+--
+-- * 'ttlAccessToken'
+--
 -- * 'ttlAdvertiserId'
 --
 -- * 'ttlSearchString'
+--
+-- * 'ttlUploadType'
 --
 -- * 'ttlIds'
 --
@@ -106,21 +130,44 @@ data TargetingTemplatesList =
 -- * 'ttlSortField'
 --
 -- * 'ttlMaxResults'
+--
+-- * 'ttlCallback'
 targetingTemplatesList
     :: Int64 -- ^ 'ttlProFileId'
     -> TargetingTemplatesList
 targetingTemplatesList pTtlProFileId_ =
   TargetingTemplatesList'
-    { _ttlAdvertiserId = Nothing
+    { _ttlXgafv = Nothing
+    , _ttlUploadProtocol = Nothing
+    , _ttlAccessToken = Nothing
+    , _ttlAdvertiserId = Nothing
     , _ttlSearchString = Nothing
+    , _ttlUploadType = Nothing
     , _ttlIds = Nothing
     , _ttlProFileId = _Coerce # pTtlProFileId_
     , _ttlSortOrder = TTLSOAscending
     , _ttlPageToken = Nothing
     , _ttlSortField = TTLSFID
     , _ttlMaxResults = 1000
+    , _ttlCallback = Nothing
     }
 
+
+-- | V1 error format.
+ttlXgafv :: Lens' TargetingTemplatesList (Maybe Xgafv)
+ttlXgafv = lens _ttlXgafv (\ s a -> s{_ttlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ttlUploadProtocol :: Lens' TargetingTemplatesList (Maybe Text)
+ttlUploadProtocol
+  = lens _ttlUploadProtocol
+      (\ s a -> s{_ttlUploadProtocol = a})
+
+-- | OAuth access token.
+ttlAccessToken :: Lens' TargetingTemplatesList (Maybe Text)
+ttlAccessToken
+  = lens _ttlAccessToken
+      (\ s a -> s{_ttlAccessToken = a})
 
 -- | Select only targeting templates with this advertiser ID.
 ttlAdvertiserId :: Lens' TargetingTemplatesList (Maybe Int64)
@@ -140,6 +187,12 @@ ttlSearchString :: Lens' TargetingTemplatesList (Maybe Text)
 ttlSearchString
   = lens _ttlSearchString
       (\ s a -> s{_ttlSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ttlUploadType :: Lens' TargetingTemplatesList (Maybe Text)
+ttlUploadType
+  = lens _ttlUploadType
+      (\ s a -> s{_ttlUploadType = a})
 
 -- | Select only targeting templates with these IDs.
 ttlIds :: Lens' TargetingTemplatesList [Int64]
@@ -175,18 +228,28 @@ ttlMaxResults
       (\ s a -> s{_ttlMaxResults = a})
       . _Coerce
 
+-- | JSONP
+ttlCallback :: Lens' TargetingTemplatesList (Maybe Text)
+ttlCallback
+  = lens _ttlCallback (\ s a -> s{_ttlCallback = a})
+
 instance GoogleRequest TargetingTemplatesList where
         type Rs TargetingTemplatesList =
              TargetingTemplatesListResponse
         type Scopes TargetingTemplatesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient TargetingTemplatesList'{..}
-          = go _ttlProFileId _ttlAdvertiserId _ttlSearchString
+          = go _ttlProFileId _ttlXgafv _ttlUploadProtocol
+              _ttlAccessToken
+              _ttlAdvertiserId
+              _ttlSearchString
+              _ttlUploadType
               (_ttlIds ^. _Default)
               (Just _ttlSortOrder)
               _ttlPageToken
               (Just _ttlSortField)
               (Just _ttlMaxResults)
+              _ttlCallback
               (Just AltJSON)
               dFAReportingService
           where go

@@ -42,8 +42,8 @@ module Network.Google.Resource.Language.Documents.AnalyzeEntitySentiment
     , daesCallback
     ) where
 
-import           Network.Google.Language.Types
-import           Network.Google.Prelude
+import Network.Google.Language.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @language.documents.analyzeEntitySentiment@ method which the
 -- 'DocumentsAnalyzeEntitySentiment' request conforms to.
@@ -65,12 +65,12 @@ type DocumentsAnalyzeEntitySentimentResource =
 -- /See:/ 'documentsAnalyzeEntitySentiment' smart constructor.
 data DocumentsAnalyzeEntitySentiment =
   DocumentsAnalyzeEntitySentiment'
-    { _daesXgafv          :: !(Maybe Xgafv)
+    { _daesXgafv :: !(Maybe Xgafv)
     , _daesUploadProtocol :: !(Maybe Text)
-    , _daesAccessToken    :: !(Maybe Text)
-    , _daesUploadType     :: !(Maybe Text)
-    , _daesPayload        :: !AnalyzeEntitySentimentRequest
-    , _daesCallback       :: !(Maybe Text)
+    , _daesAccessToken :: !(Maybe Text)
+    , _daesUploadType :: !(Maybe Text)
+    , _daesPayload :: !AnalyzeEntitySentimentRequest
+    , _daesCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

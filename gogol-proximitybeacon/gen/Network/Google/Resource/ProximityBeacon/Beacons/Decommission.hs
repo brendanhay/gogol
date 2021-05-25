@@ -48,8 +48,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
     , bddCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.decommission@ method which the
 -- 'BeaconsDecommission' request conforms to.
@@ -75,13 +75,13 @@ type BeaconsDecommissionResource =
 -- /See:/ 'beaconsDecommission' smart constructor.
 data BeaconsDecommission =
   BeaconsDecommission'
-    { _bddXgafv          :: !(Maybe Xgafv)
+    { _bddXgafv :: !(Maybe Xgafv)
     , _bddUploadProtocol :: !(Maybe Text)
-    , _bddAccessToken    :: !(Maybe Text)
-    , _bddBeaconName     :: !Text
-    , _bddUploadType     :: !(Maybe Text)
-    , _bddProjectId      :: !(Maybe Text)
-    , _bddCallback       :: !(Maybe Text)
+    , _bddAccessToken :: !(Maybe Text)
+    , _bddBeaconName :: !Text
+    , _bddUploadType :: !(Maybe Text)
+    , _bddProjectId :: !(Maybe Text)
+    , _bddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

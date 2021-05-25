@@ -20,11 +20,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Ingests a new HL7v2 message from the hospital and sends a notification
--- to the Cloud Pub\/Sub topic. Return is an HL7v2 ACK message if the
--- message was successfully stored. Otherwise an error is returned. If an
--- identical HL7v2 message is created twice only one resource is created on
--- the server and no error is reported.
+-- Parses and stores an HL7v2 message. This method triggers an asynchronous
+-- notification to any Pub\/Sub topic configured in
+-- Hl7V2Store.Hl7V2NotificationConfig, if the filtering matches the
+-- message. If an MLLP adapter is configured to listen to a Pub\/Sub topic,
+-- the adapter transmits the message when a notification is received. If
+-- the method is successful, it generates a response containing an HL7v2
+-- acknowledgment (\`ACK\`) message. If the method encounters an error, it
+-- returns a negative acknowledgment (\`NACK\`) message. This behavior is
+-- suitable for replying to HL7v2 interface systems that expect these
+-- acknowledgments.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Stores.Messages.Ingest
@@ -46,14 +51,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Hl7V2Store
     , pldshvsmiCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest@ method which the
 -- 'ProjectsLocationsDataSetsHl7V2StoresMessagesIngest' request conforms to.
 type ProjectsLocationsDataSetsHl7V2StoresMessagesIngestResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "messages:ingest" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -65,22 +70,27 @@ type ProjectsLocationsDataSetsHl7V2StoresMessagesIngestResource
                        ReqBody '[JSON] IngestMessageRequest :>
                          Post '[JSON] IngestMessageResponse
 
--- | Ingests a new HL7v2 message from the hospital and sends a notification
--- to the Cloud Pub\/Sub topic. Return is an HL7v2 ACK message if the
--- message was successfully stored. Otherwise an error is returned. If an
--- identical HL7v2 message is created twice only one resource is created on
--- the server and no error is reported.
+-- | Parses and stores an HL7v2 message. This method triggers an asynchronous
+-- notification to any Pub\/Sub topic configured in
+-- Hl7V2Store.Hl7V2NotificationConfig, if the filtering matches the
+-- message. If an MLLP adapter is configured to listen to a Pub\/Sub topic,
+-- the adapter transmits the message when a notification is received. If
+-- the method is successful, it generates a response containing an HL7v2
+-- acknowledgment (\`ACK\`) message. If the method encounters an error, it
+-- returns a negative acknowledgment (\`NACK\`) message. This behavior is
+-- suitable for replying to HL7v2 interface systems that expect these
+-- acknowledgments.
 --
 -- /See:/ 'projectsLocationsDataSetsHl7V2StoresMessagesIngest' smart constructor.
 data ProjectsLocationsDataSetsHl7V2StoresMessagesIngest =
   ProjectsLocationsDataSetsHl7V2StoresMessagesIngest'
-    { _pldshvsmiParent         :: !Text
-    , _pldshvsmiXgafv          :: !(Maybe Xgafv)
+    { _pldshvsmiParent :: !Text
+    , _pldshvsmiXgafv :: !(Maybe Xgafv)
     , _pldshvsmiUploadProtocol :: !(Maybe Text)
-    , _pldshvsmiAccessToken    :: !(Maybe Text)
-    , _pldshvsmiUploadType     :: !(Maybe Text)
-    , _pldshvsmiPayload        :: !IngestMessageRequest
-    , _pldshvsmiCallback       :: !(Maybe Text)
+    , _pldshvsmiAccessToken :: !(Maybe Text)
+    , _pldshvsmiUploadType :: !(Maybe Text)
+    , _pldshvsmiPayload :: !IngestMessageRequest
+    , _pldshvsmiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

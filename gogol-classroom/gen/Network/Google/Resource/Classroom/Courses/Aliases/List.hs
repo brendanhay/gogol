@@ -46,8 +46,8 @@ module Network.Google.Resource.Classroom.Courses.Aliases.List
     , calaCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.aliases.list@ method which the
 -- 'CoursesAliasesList' request conforms to.
@@ -74,14 +74,14 @@ type CoursesAliasesListResource =
 -- /See:/ 'coursesAliasesList' smart constructor.
 data CoursesAliasesList =
   CoursesAliasesList'
-    { _calaXgafv          :: !(Maybe Xgafv)
+    { _calaXgafv :: !(Maybe Xgafv)
     , _calaUploadProtocol :: !(Maybe Text)
-    , _calaCourseId       :: !Text
-    , _calaAccessToken    :: !(Maybe Text)
-    , _calaUploadType     :: !(Maybe Text)
-    , _calaPageToken      :: !(Maybe Text)
-    , _calaPageSize       :: !(Maybe (Textual Int32))
-    , _calaCallback       :: !(Maybe Text)
+    , _calaCourseId :: !Text
+    , _calaAccessToken :: !(Maybe Text)
+    , _calaUploadType :: !(Maybe Text)
+    , _calaPageToken :: !(Maybe Text)
+    , _calaPageSize :: !(Maybe (Textual Int32))
+    , _calaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

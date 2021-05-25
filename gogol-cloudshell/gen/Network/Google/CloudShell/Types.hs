@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,6 +22,21 @@ module Network.Google.CloudShell.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * AddPublicKeyResponse
+    , AddPublicKeyResponse
+    , addPublicKeyResponse
+    , apkrKey
+
+    -- * CreateEnvironmentMetadata
+    , CreateEnvironmentMetadata
+    , createEnvironmentMetadata
+
+    -- * StartEnvironmentRequest
+    , StartEnvironmentRequest
+    , startEnvironmentRequest
+    , serAccessToken
+    , serPublicKeys
+
     -- * Status
     , Status
     , status
@@ -34,6 +49,13 @@ module Network.Google.CloudShell.Types
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
+
+    -- * AuthorizeEnvironmentRequest
+    , AuthorizeEnvironmentRequest
+    , authorizeEnvironmentRequest
+    , aerAccessToken
+    , aerExpireTime
+    , aerIdToken
 
     -- * CancelOperationRequest
     , CancelOperationRequest
@@ -57,6 +79,7 @@ module Network.Google.CloudShell.Types
     , environment
     , eState
     , ePublicKeys
+    , eWebHost
     , eSSHUsername
     , eName
     , eId
@@ -64,17 +87,18 @@ module Network.Google.CloudShell.Types
     , eDockerImage
     , eSSHPort
 
+    -- * AuthorizeEnvironmentMetadata
+    , AuthorizeEnvironmentMetadata
+    , authorizeEnvironmentMetadata
+
+    -- * RemovePublicKeyResponse
+    , RemovePublicKeyResponse
+    , removePublicKeyResponse
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
-
-    -- * PublicKey
-    , PublicKey
-    , publicKey
-    , pkFormat
-    , pkKey
-    , pkName
 
     -- * StartEnvironmentMetadataState
     , StartEnvironmentMetadataState (..)
@@ -82,11 +106,20 @@ module Network.Google.CloudShell.Types
     -- * EnvironmentState
     , EnvironmentState (..)
 
+    -- * AddPublicKeyMetadata
+    , AddPublicKeyMetadata
+    , addPublicKeyMetadata
+
     -- * Xgafv
     , Xgafv (..)
 
-    -- * PublicKeyFormat
-    , PublicKeyFormat (..)
+    -- * AuthorizeEnvironmentResponse
+    , AuthorizeEnvironmentResponse
+    , authorizeEnvironmentResponse
+
+    -- * RemovePublicKeyMetadata
+    , RemovePublicKeyMetadata
+    , removePublicKeyMetadata
 
     -- * StartEnvironmentMetadata
     , StartEnvironmentMetadata
@@ -98,6 +131,11 @@ module Network.Google.CloudShell.Types
     , operationMetadata
     , omAddtional
 
+    -- * AddPublicKeyRequest
+    , AddPublicKeyRequest
+    , addPublicKeyRequest
+    , aKey
+
     -- * StartEnvironmentResponse
     , StartEnvironmentResponse
     , startEnvironmentResponse
@@ -107,11 +145,20 @@ module Network.Google.CloudShell.Types
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- * RemovePublicKeyRequest
+    , RemovePublicKeyRequest
+    , removePublicKeyRequest
+    , rpkrKey
+
+    -- * DeleteEnvironmentMetadata
+    , DeleteEnvironmentMetadata
+    , deleteEnvironmentMetadata
     ) where
 
-import           Network.Google.CloudShell.Types.Product
-import           Network.Google.CloudShell.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudShell.Types.Product
+import Network.Google.CloudShell.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Shell API. This contains the host and root path used as a starting point for constructing service requests.
 cloudShellService :: ServiceConfig
@@ -119,6 +166,6 @@ cloudShellService
   = defaultService (ServiceId "cloudshell:v1")
       "cloudshell.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

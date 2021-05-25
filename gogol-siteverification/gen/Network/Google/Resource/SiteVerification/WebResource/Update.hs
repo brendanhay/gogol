@@ -37,8 +37,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Update
     , wruId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.update@ method which the
 -- 'WebResourceUpdate' request conforms to.
@@ -57,7 +57,7 @@ type WebResourceUpdateResource =
 data WebResourceUpdate =
   WebResourceUpdate'
     { _wruPayload :: !SiteVerificationWebResourceResource
-    , _wruId      :: !Text
+    , _wruId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

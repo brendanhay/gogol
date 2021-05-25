@@ -62,7 +62,11 @@
 -- send a PreconditionFailure error detail where, for each requested blob
 -- not present in the CAS, there is a \`Violation\` with a \`type\` of
 -- \`MISSING\` and a \`subject\` of \`\"blobs\/{hash}\/{size}\"\`
--- indicating the digest of the missing blob.
+-- indicating the digest of the missing blob. The server does not need to
+-- guarantee that a call to this method leads to at most one execution of
+-- the action. The server MAY execute the action multiple times,
+-- potentially in parallel. These redundant executions MAY continue to run,
+-- even if the operation is completed.
 --
 -- /See:/ <https://cloud.google.com/remote-build-execution/docs/ Remote Build Execution API Reference> for @remotebuildexecution.actions.execute@.
 module Network.Google.Resource.RemoteBuildExecution.Actions.Execute
@@ -84,8 +88,8 @@ module Network.Google.Resource.RemoteBuildExecution.Actions.Execute
     , aeCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actions.execute@ method which the
 -- 'ActionsExecute' request conforms to.
@@ -145,18 +149,22 @@ type ActionsExecuteResource =
 -- send a PreconditionFailure error detail where, for each requested blob
 -- not present in the CAS, there is a \`Violation\` with a \`type\` of
 -- \`MISSING\` and a \`subject\` of \`\"blobs\/{hash}\/{size}\"\`
--- indicating the digest of the missing blob.
+-- indicating the digest of the missing blob. The server does not need to
+-- guarantee that a call to this method leads to at most one execution of
+-- the action. The server MAY execute the action multiple times,
+-- potentially in parallel. These redundant executions MAY continue to run,
+-- even if the operation is completed.
 --
 -- /See:/ 'actionsExecute' smart constructor.
 data ActionsExecute =
   ActionsExecute'
-    { _aeXgafv          :: !(Maybe Xgafv)
+    { _aeXgafv :: !(Maybe Xgafv)
     , _aeUploadProtocol :: !(Maybe Text)
-    , _aeAccessToken    :: !(Maybe Text)
-    , _aeUploadType     :: !(Maybe Text)
-    , _aePayload        :: !BuildBazelRemoteExecutionV2ExecuteRequest
-    , _aeInstanceName   :: !Text
-    , _aeCallback       :: !(Maybe Text)
+    , _aeAccessToken :: !(Maybe Text)
+    , _aeUploadType :: !(Maybe Text)
+    , _aePayload :: !BuildBazelRemoteExecutionV2ExecuteRequest
+    , _aeInstanceName :: !Text
+    , _aeCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

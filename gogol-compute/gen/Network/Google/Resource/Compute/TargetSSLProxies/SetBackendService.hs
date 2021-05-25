@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetSSLProxies.SetBackendService
     , tspsbsTargetSSLProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetSslProxies.setBackendService@ method which the
 -- 'TargetSSLProxiesSetBackendService' request conforms to.
@@ -64,9 +64,9 @@ type TargetSSLProxiesSetBackendServiceResource =
 -- /See:/ 'targetSSLProxiesSetBackendService' smart constructor.
 data TargetSSLProxiesSetBackendService =
   TargetSSLProxiesSetBackendService'
-    { _tspsbsRequestId      :: !(Maybe Text)
-    , _tspsbsProject        :: !Text
-    , _tspsbsPayload        :: !TargetSSLProxiesSetBackendServiceRequest
+    { _tspsbsRequestId :: !(Maybe Text)
+    , _tspsbsProject :: !Text
+    , _tspsbsPayload :: !TargetSSLProxiesSetBackendServiceRequest
     , _tspsbsTargetSSLProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

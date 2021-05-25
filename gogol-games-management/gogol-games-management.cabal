@@ -1,6 +1,6 @@
 name:                  gogol-games-management
 version:               0.5.0
-synopsis:              Google Play Game Services Management SDK.
+synopsis:              Google Play Game Management SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Management API for Google Play Game Services.
+    The Google Play Game Management API allows developers to manage
+    resources from the Google Play Game service.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -48,20 +49,11 @@ library
         , Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
         , Network.Google.Resource.GamesManagement.Players.Hide
         , Network.Google.Resource.GamesManagement.Players.Unhide
-        , Network.Google.Resource.GamesManagement.Quests.Reset
-        , Network.Google.Resource.GamesManagement.Quests.ResetAll
-        , Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
-        , Network.Google.Resource.GamesManagement.Quests.ResetForAllPlayers
-        , Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
-        , Network.Google.Resource.GamesManagement.Rooms.Reset
-        , Network.Google.Resource.GamesManagement.Rooms.ResetForAllPlayers
         , Network.Google.Resource.GamesManagement.Scores.Reset
         , Network.Google.Resource.GamesManagement.Scores.ResetAll
         , Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
         , Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
         , Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
-        , Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
-        , Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetForAllPlayers
 
     other-modules:
           Network.Google.GamesManagement.Types.Product

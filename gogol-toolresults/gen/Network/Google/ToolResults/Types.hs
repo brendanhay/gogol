@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -19,499 +19,183 @@ module Network.Google.ToolResults.Types
     -- * Service Configuration
       toolResultsService
 
-    -- * OAuth Scopes
-    , cloudPlatformScope
+    -- * LauncherActivityNotFound
+    , LauncherActivityNotFound
+    , launcherActivityNotFound
 
-    -- * ListStepThumbnailsResponse
-    , ListStepThumbnailsResponse
-    , listStepThumbnailsResponse
-    , lstrNextPageToken
-    , lstrThumbnails
+    -- * NATiveCrash
+    , NATiveCrash
+    , nATiveCrash
+    , natcStackTrace
 
-    -- * Screen
-    , Screen
-    , screen
-    , sFileReference
-    , sLocale
-    , sModel
-    , sVersion
+    -- * OverlAppingUIElements
+    , OverlAppingUIElements
+    , overlAppingUIElements
+    , oauieResourceName
+    , oauieScreenId
 
-    -- * TestIssueSeverity
-    , TestIssueSeverity (..)
+    -- * RoboScriptExecution
+    , RoboScriptExecution
+    , roboScriptExecution
+    , rseTotalActions
+    , rseSuccessfulActions
 
-    -- * Thumbnail
-    , Thumbnail
-    , thumbnail
-    , tData
-    , tHeightPx
-    , tWidthPx
-    , tContentType
+    -- * ANR
+    , ANR
+    , aNR
+    , aStackTrace
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- * InAppPurchasesFound
+    , InAppPurchasesFound
+    , inAppPurchasesFound
+    , iapfInAppPurchasesFlowsExplored
+    , iapfInAppPurchasesFlowsStarted
 
-    -- * ToolOutputReference
-    , ToolOutputReference
-    , toolOutputReference
-    , torCreationTime
-    , torTestCase
-    , torOutput
+    -- * EncounteredNonAndroidUiWidgetScreen
+    , EncounteredNonAndroidUiWidgetScreen
+    , encounteredNonAndroidUiWidgetScreen
+    , enauwsDistinctScreens
+    , enauwsScreenIds
 
-    -- * PerfSampleSeries
-    , PerfSampleSeries
-    , perfSampleSeries
-    , pssExecutionId
-    , pssStepId
-    , pssHistoryId
-    , pssProjectId
-    , pssSampleSeriesId
-    , pssBasicPerfSampleSeries
+    -- * StartActivityNotFound
+    , StartActivityNotFound
+    , startActivityNotFound
+    , sanfURI
+    , sanfAction
 
-    -- * AndroidAppInfo
-    , AndroidAppInfo
-    , androidAppInfo
-    , aaiVersionCode
-    , aaiVersionName
-    , aaiPackageName
-    , aaiName
+    -- * AvailableDeepLinks
+    , AvailableDeepLinks
+    , availableDeepLinks
 
-    -- * PerfSample
-    , PerfSample
-    , perfSample
-    , psValue
-    , psSampleTime
+    -- * IosAppCrashed
+    , IosAppCrashed
+    , iosAppCrashed
+    , iacStackTrace
 
-    -- * TestIssue
-    , TestIssue
-    , testIssue
-    , tiCategory
-    , tiSeverity
-    , tiStackTrace
-    , tiWarning
-    , tiType
-    , tiErrorMessage
+    -- * UpgradeInsight
+    , UpgradeInsight
+    , upgradeInsight
+    , uiPackageName
+    , uiUpgradeToVersion
 
-    -- * MemoryInfo
-    , MemoryInfo
-    , memoryInfo
-    , miMemoryCapInKibibyte
-    , miMemoryTotalInKibibyte
+    -- * PerformedMonkeyActions
+    , PerformedMonkeyActions
+    , performedMonkeyActions
+    , pmaTotalActions
 
-    -- * Image
-    , Image
-    , image
-    , iThumbnail
-    , iStepId
-    , iSourceImage
-    , iError
+    -- * NonSdkAPIUsageViolationReport
+    , NonSdkAPIUsageViolationReport
+    , nonSdkAPIUsageViolationReport
+    , nsauvrMinSdkVersion
+    , nsauvrTargetSdkVersion
+    , nsauvrUniqueAPIs
+    , nsauvrExampleAPIs
 
-    -- * InconclusiveDetail
-    , InconclusiveDetail
-    , inconclusiveDetail
-    , idInfrastructureFailure
-    , idAbortedByUser
-
-    -- * TestIssueCategory
-    , TestIssueCategory (..)
-
-    -- * TestCase
-    , TestCase
-    , testCase
-    , tcStatus
-    , tcStartTime
-    , tcTestCaseReference
-    , tcToolOutputs
-    , tcStackTraces
-    , tcTestCaseId
-    , tcEndTime
-    , tcSkippedMessage
-
-    -- * GraphicsStatsBucket
-    , GraphicsStatsBucket
-    , graphicsStatsBucket
-    , gsbRenderMillis
-    , gsbFrameCount
-
-    -- * History
-    , History
-    , history
-    , hName
-    , hHistoryId
-    , hDisplayName
-
-    -- * BatchCreatePerfSamplesRequest
-    , BatchCreatePerfSamplesRequest
-    , batchCreatePerfSamplesRequest
-    , bcpsrPerfSamples
-
-    -- * ListPerfSampleSeriesResponse
-    , ListPerfSampleSeriesResponse
-    , listPerfSampleSeriesResponse
-    , lpssrPerfSampleSeries
-
-    -- * ListPerfSamplesResponse
-    , ListPerfSamplesResponse
-    , listPerfSamplesResponse
-    , lpsrPerfSamples
-    , lpsrNextPageToken
-
-    -- * AndroidTest
-    , AndroidTest
-    , androidTest
-    , atAndroidAppInfo
-    , atTestTimeout
-    , atAndroidRoboTest
-    , atAndroidInstrumentationTest
-
-    -- * AndroidRoboTest
-    , AndroidRoboTest
-    , androidRoboTest
-    , artBootstrapRunnerClass
-    , artAppInitialActivity
-    , artMaxSteps
-    , artBootstrapPackageId
-    , artMaxDepth
-
-    -- * FileReference
-    , FileReference
-    , fileReference
-    , frFileURI
-
-    -- * IndividualOutcomeOutcomeSummary
-    , IndividualOutcomeOutcomeSummary (..)
-
-    -- * CPUInfo
-    , CPUInfo
-    , cpuInfo
-    , ciNumberOfCores
-    , ciCPUProcessor
-    , ciCPUSpeedInGhz
-
-    -- * ListExecutionsResponse
-    , ListExecutionsResponse
-    , listExecutionsResponse
-    , lerNextPageToken
-    , lerExecutions
-
-    -- * ListStepsResponse
-    , ListStepsResponse
-    , listStepsResponse
-    , lsrNextPageToken
-    , lsrSteps
-
-    -- * ProjectSettings
-    , ProjectSettings
-    , projectSettings
-    , psName
-    , psDefaultBucket
-
-    -- * ToolExecutionStep
-    , ToolExecutionStep
-    , toolExecutionStep
-    , tesToolExecution
-
-    -- * BasicPerfSampleSeriesPerfMetricType
-    , BasicPerfSampleSeriesPerfMetricType (..)
-
-    -- * StepLabelsEntry
-    , StepLabelsEntry
-    , stepLabelsEntry
-    , sleValue
-    , sleKey
-
-    -- * OutcomeSummary
-    , OutcomeSummary (..)
-
-    -- * TestExecutionStep
-    , TestExecutionStep
-    , testExecutionStep
-    , tTestIssues
-    , tToolExecution
-    , tTestSuiteOverviews
-    , tTestTiming
-
-    -- * TestCaseReference
-    , TestCaseReference
-    , testCaseReference
-    , tcrTestSuiteName
-    , tcrName
-    , tcrClassName
-
-    -- * BasicPerfSampleSeriesPerfUnit
-    , BasicPerfSampleSeriesPerfUnit (..)
-
-    -- * FailureDetail
-    , FailureDetail
-    , failureDetail
-    , fdCrashed
-    , fdNotInstalled
-    , fdTimedOut
-    , fdOtherNATiveCrash
-    , fdUnableToCrawl
-
-    -- * ProjectsHistoriesExecutionsStepsPerfSampleSeriesListFilter
-    , ProjectsHistoriesExecutionsStepsPerfSampleSeriesListFilter (..)
-
-    -- * PerfEnvironment
-    , PerfEnvironment
-    , perfEnvironment
-    , peMemoryInfo
-    , peCPUInfo
-
-    -- * ListScreenshotClustersResponse
-    , ListScreenshotClustersResponse
-    , listScreenshotClustersResponse
-    , lscrClusters
-
-    -- * AppStartTime
-    , AppStartTime
-    , appStartTime
-    , astInitialDisplayTime
-    , astFullyDrawnTime
-
-    -- * GraphicsStats
-    , GraphicsStats
-    , graphicsStats
-    , gsSlowDrawCount
-    , gsTotalFrames
-    , gsSlowBitmapUploadCount
-    , gsMissedVsyncCount
-    , gsP95Millis
-    , gsBuckets
-    , gsP90Millis
-    , gsP50Millis
-    , gsHighInputLatencyCount
-    , gsP99Millis
-    , gsSlowUiThreadCount
-    , gsJankyFrames
+    -- * PendingGoogleUpdateInsight
+    , PendingGoogleUpdateInsight
+    , pendingGoogleUpdateInsight
+    , pguiNameOfGoogleLibrary
 
     -- * StackTrace
     , StackTrace
     , stackTrace
     , stException
 
-    -- * BatchCreatePerfSamplesResponse
-    , BatchCreatePerfSamplesResponse
-    , batchCreatePerfSamplesResponse
-    , bPerfSamples
+    -- * NonSdkAPIUsageViolation
+    , NonSdkAPIUsageViolation
+    , nonSdkAPIUsageViolation
+    , nsauvAPISignatures
+    , nsauvUniqueAPIs
 
-    -- * TestIssueType
-    , TestIssueType (..)
+    -- * UIElementTooDeep
+    , UIElementTooDeep
+    , uIElementTooDeep
+    , uietdScreenStateId
+    , uietdDepth
+    , uietdScreenId
 
-    -- * Execution
-    , Execution
-    , execution
-    , eCreationTime
-    , eExecutionId
-    , eState
-    , eCompletionTime
-    , eTestExecutionMatrixId
-    , eOutcome
-    , eSpecification
+    -- * PerformedGoogleLogin
+    , PerformedGoogleLogin
+    , performedGoogleLogin
 
-    -- * Outcome
-    , Outcome
-    , outcome
-    , oSummary
-    , oInconclusiveDetail
-    , oFailureDetail
-    , oSuccessDetail
-    , oSkippedDetail
+    -- * Xgafv
+    , Xgafv (..)
 
-    -- * Step
-    , Step
-    , step
-    , sCreationTime
-    , sRunDuration
-    , sState
-    , sStepId
-    , sToolExecutionStep
-    , sDimensionValue
-    , sHasImages
-    , sTestExecutionStep
-    , sCompletionTime
-    , sName
-    , sOutcome
-    , sLabels
-    , sMultiStep
-    , sDeviceUsageDuration
-    , sDescription
+    -- * NonSdkAPIInsight
+    , NonSdkAPIInsight
+    , nonSdkAPIInsight
+    , nsaiUpgradeInsight
+    , nsaiPendingGoogleUpdateInsight
+    , nsaiExampleTraceMessages
+    , nsaiMatcherId
 
-    -- * SuccessDetail
-    , SuccessDetail
-    , successDetail
-    , sdOtherNATiveCrash
+    -- * UsedRoboIgnoreDirective
+    , UsedRoboIgnoreDirective
+    , usedRoboIgnoreDirective
+    , uridResourceName
 
-    -- * ToolExecution
-    , ToolExecution
-    , toolExecution
-    , teCommandLineArguments
-    , teToolOutputs
-    , teToolLogs
-    , teExitCode
+    -- * UsedRoboDirective
+    , UsedRoboDirective
+    , usedRoboDirective
+    , urdResourceName
 
-    -- * PublishXUnitXMLFilesRequest
-    , PublishXUnitXMLFilesRequest
-    , publishXUnitXMLFilesRequest
-    , pxuxfrXUnitXMLFiles
+    -- * UnspecifiedWarning
+    , UnspecifiedWarning
+    , unspecifiedWarning
 
-    -- * PerfMetricsSummary
-    , PerfMetricsSummary
-    , perfMetricsSummary
-    , pmsExecutionId
-    , pmsStepId
-    , pmsPerfMetrics
-    , pmsPerfEnvironment
-    , pmsGraphicsStats
-    , pmsAppStartTime
-    , pmsHistoryId
-    , pmsProjectId
+    -- * UnusedRoboDirective
+    , UnusedRoboDirective
+    , unusedRoboDirective
+    , uResourceName
 
-    -- * StepState
-    , StepState (..)
+    -- * CrashDialogError
+    , CrashDialogError
+    , crashDialogError
+    , cdeCrashPackage
 
-    -- * ListHistoriesResponse
-    , ListHistoriesResponse
-    , listHistoriesResponse
-    , lhrNextPageToken
-    , lhrHistories
+    -- * NonSdkAPI
+    , NonSdkAPI
+    , nonSdkAPI
+    , nsaList
+    , nsaInsights
+    , nsaAPISignature
+    , nsaExampleStackTraces
+    , nsaInvocationCount
 
-    -- * ToolExitCode
-    , ToolExitCode
-    , toolExitCode
-    , tecNumber
+    -- * InsufficientCoverage
+    , InsufficientCoverage
+    , insufficientCoverage
 
-    -- * ExecutionState
-    , ExecutionState (..)
+    -- * BlankScreen
+    , BlankScreen
+    , blankScreen
+    , bsScreenId
 
-    -- * AndroidInstrumentationTest
-    , AndroidInstrumentationTest
-    , androidInstrumentationTest
-    , aitTestTargets
-    , aitUseOrchestrator
-    , aitTestRunnerClass
-    , aitTestPackageId
+    -- * FailedToInstall
+    , FailedToInstall
+    , failedToInstall
 
-    -- * StepDimensionValueEntry
-    , StepDimensionValueEntry
-    , stepDimensionValueEntry
-    , sdveValue
-    , sdveKey
+    -- * FatalException
+    , FatalException
+    , fatalException
+    , feStackTrace
 
-    -- * Specification
-    , Specification
-    , specification
-    , sAndroidTest
+    -- * NonSdkAPIList
+    , NonSdkAPIList (..)
 
-    -- * BasicPerfSampleSeriesSampleSeriesLabel
-    , BasicPerfSampleSeriesSampleSeriesLabel (..)
-
-    -- * ListTestCasesResponse
-    , ListTestCasesResponse
-    , listTestCasesResponse
-    , ltcrNextPageToken
-    , ltcrTestCases
-
-    -- * IndividualOutcome
-    , IndividualOutcome
-    , individualOutcome
-    , ioRunDuration
-    , ioStepId
-    , ioMultistepNumber
-    , ioOutcomeSummary
-
-    -- * TestSuiteOverview
-    , TestSuiteOverview
-    , testSuiteOverview
-    , tsoSkippedCount
-    , tsoErrorCount
-    , tsoXMLSource
-    , tsoName
-    , tsoFailureCount
-    , tsoTotalCount
-
-    -- * MultiStep
-    , MultiStep
-    , multiStep
-    , msMultistepNumber
-    , msPrimaryStepId
-    , msPrimaryStep
-
-    -- * Duration
-    , Duration
-    , duration
-    , dNanos
-    , dSeconds
-
-    -- * Timestamp
-    , Timestamp
-    , timestamp
-    , tNanos
-    , tSeconds
-
-    -- * Any
-    , Any
-    , any
-    , aValue
-    , aTypeURL
-
-    -- * TestTiming
-    , TestTiming
-    , testTiming
-    , ttTestProcessDuration
-
-    -- * ScreenshotCluster
-    , ScreenshotCluster
-    , screenshotCluster
-    , scClusterId
-    , scScreens
-    , scActivity
-    , scKeyScreen
-
-    -- * BasicPerfSampleSeries
-    , BasicPerfSampleSeries
-    , basicPerfSampleSeries
-    , bpssPerfUnit
-    , bpssPerfMetricType
-    , bpssSampleSeriesLabel
-
-    -- * TestCaseStatus
-    , TestCaseStatus (..)
-
-    -- * PrimaryStepRollUp
-    , PrimaryStepRollUp (..)
-
-    -- * PrimaryStep
-    , PrimaryStep
-    , primaryStep
-    , psRollUp
-    , psIndividualOutcome
-
-    -- * PerfMetricsSummaryPerfMetricsItem
-    , PerfMetricsSummaryPerfMetricsItem (..)
-
-    -- * SkippedDetail
-    , SkippedDetail
-    , skippedDetail
-    , sdIncompatibleArchitecture
-    , sdIncompatibleAppVersion
-    , sdIncompatibleDevice
+    -- * EncounteredLoginScreen
+    , EncounteredLoginScreen
+    , encounteredLoginScreen
+    , elsDistinctScreens
+    , elsScreenIds
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ToolResults.Types.Product
-import           Network.Google.ToolResults.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ToolResults.Types.Product
+import Network.Google.ToolResults.Types.Sum
 
--- | Default request referring to version 'v1beta3' of the Cloud Tool Results API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Cloud Tool Results API. This contains the host and root path used as a starting point for constructing service requests.
 toolResultsService :: ServiceConfig
 toolResultsService
-  = defaultService (ServiceId "toolresults:v1beta3")
+  = defaultService (ServiceId "toolresults:v1")
       "www.googleapis.com"
-
--- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Proxy

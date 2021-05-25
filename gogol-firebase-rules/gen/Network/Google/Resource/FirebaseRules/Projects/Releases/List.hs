@@ -46,8 +46,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Releases.List
     , prlrCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.releases.list@ method which the
 -- 'ProjectsReleasesList' request conforms to.
@@ -73,15 +73,15 @@ type ProjectsReleasesListResource =
 -- /See:/ 'projectsReleasesList' smart constructor.
 data ProjectsReleasesList =
   ProjectsReleasesList'
-    { _prlrXgafv          :: !(Maybe Xgafv)
+    { _prlrXgafv :: !(Maybe Xgafv)
     , _prlrUploadProtocol :: !(Maybe Text)
-    , _prlrAccessToken    :: !(Maybe Text)
-    , _prlrUploadType     :: !(Maybe Text)
-    , _prlrName           :: !Text
-    , _prlrFilter         :: !(Maybe Text)
-    , _prlrPageToken      :: !(Maybe Text)
-    , _prlrPageSize       :: !(Maybe (Textual Int32))
-    , _prlrCallback       :: !(Maybe Text)
+    , _prlrAccessToken :: !(Maybe Text)
+    , _prlrUploadType :: !(Maybe Text)
+    , _prlrName :: !Text
+    , _prlrFilter :: !(Maybe Text)
+    , _prlrPageToken :: !(Maybe Text)
+    , _prlrPageSize :: !(Maybe (Textual Int32))
+    , _prlrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,28 +147,26 @@ prlrUploadType
   = lens _prlrUploadType
       (\ s a -> s{_prlrUploadType = a})
 
--- | Resource name for the project. Format: \`projects\/{project_id}\`
+-- | Required. Resource name for the project. Format:
+-- \`projects\/{project_id}\`
 prlrName :: Lens' ProjectsReleasesList Text
 prlrName = lens _prlrName (\ s a -> s{_prlrName = a})
 
 -- | \`Release\` filter. The list method supports filters with restrictions
--- on the \`Release.name\`, \`Release.ruleset_name\`, and
--- \`Release.test_suite_name\`. Example 1: A filter of \'name=prod*\' might
--- return \`Release\`s with names within \'projects\/foo\' prefixed with
--- \'prod\': Name | Ruleset Name
--- ------------------------------|-------------
--- projects\/foo\/releases\/prod | projects\/foo\/rulesets\/uuid1234
--- projects\/foo\/releases\/prod\/v1 | projects\/foo\/rulesets\/uuid1234
--- projects\/foo\/releases\/prod\/v2 | projects\/foo\/rulesets\/uuid8888
+-- on the \`Release.name\`, and \`Release.ruleset_name\`. Example 1: A
+-- filter of \'name=prod*\' might return \`Release\`s with names within
+-- \'projects\/foo\' prefixed with \'prod\': Name -> Ruleset Name: *
+-- projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/uuid1234 *
+-- projects\/foo\/releases\/prod\/v1 -> projects\/foo\/rulesets\/uuid1234 *
+-- projects\/foo\/releases\/prod\/v2 -> projects\/foo\/rulesets\/uuid8888
 -- Example 2: A filter of \`name=prod* ruleset_name=uuid1234\` would return
 -- only \`Release\` instances for \'projects\/foo\' with names prefixed
 -- with \'prod\' referring to the same \`Ruleset\` name of \'uuid1234\':
--- Name | Ruleset Name ------------------------------|-------------
--- projects\/foo\/releases\/prod | projects\/foo\/rulesets\/1234
--- projects\/foo\/releases\/prod\/v1 | projects\/foo\/rulesets\/1234 In the
--- examples, the filter parameters refer to the search filters are relative
--- to the project. Fully qualified prefixed may also be used. e.g.
--- \`test_suite_name=projects\/foo\/testsuites\/uuid1\`
+-- Name -> Ruleset Name: * projects\/foo\/releases\/prod ->
+-- projects\/foo\/rulesets\/1234 * projects\/foo\/releases\/prod\/v1 ->
+-- projects\/foo\/rulesets\/1234 In the examples, the filter parameters
+-- refer to the search filters are relative to the project. Fully qualified
+-- prefixed may also be used.
 prlrFilter :: Lens' ProjectsReleasesList (Maybe Text)
 prlrFilter
   = lens _prlrFilter (\ s a -> s{_prlrFilter = a})

@@ -23,7 +23,7 @@
 -- Sends new spans to new or existing traces. You cannot update existing
 -- spans.
 --
--- /See:/ <https://cloud.google.com/trace Stackdriver Trace API Reference> for @cloudtrace.projects.traces.batchWrite@.
+-- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference> for @cloudtrace.projects.traces.batchWrite@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudTrace.Projects.Traces.BatchWrite
     , ptbwCallback
     ) where
 
-import           Network.Google.CloudTrace.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTrace.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtrace.projects.traces.batchWrite@ method which the
 -- 'ProjectsTracesBatchWrite' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsTracesBatchWriteResource =
 -- /See:/ 'projectsTracesBatchWrite' smart constructor.
 data ProjectsTracesBatchWrite =
   ProjectsTracesBatchWrite'
-    { _ptbwXgafv          :: !(Maybe Xgafv)
+    { _ptbwXgafv :: !(Maybe Xgafv)
     , _ptbwUploadProtocol :: !(Maybe Text)
-    , _ptbwAccessToken    :: !(Maybe Text)
-    , _ptbwUploadType     :: !(Maybe Text)
-    , _ptbwPayload        :: !BatchWriteSpansRequest
-    , _ptbwName           :: !Text
-    , _ptbwCallback       :: !(Maybe Text)
+    , _ptbwAccessToken :: !(Maybe Text)
+    , _ptbwUploadType :: !(Maybe Text)
+    , _ptbwPayload :: !BatchWriteSpansRequest
+    , _ptbwName :: !Text
+    , _ptbwCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

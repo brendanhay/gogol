@@ -24,11 +24,11 @@
 -- deployed for use with the Apps Script API and the calling application
 -- must share the same Cloud Platform project. This method requires
 -- authorization with an OAuth 2.0 token that includes at least one of the
--- scopes listed in the [Authorization](#authorization) section; script
--- projects that do not require authorization cannot be executed through
--- this API. To find the correct scopes to include in the authentication
--- token, open the project in the script editor, then select **File >
--- Project properties** and click the **Scopes** tab. The error \`403,
+-- scopes listed in the [Authorization](#authorization-scopes) section;
+-- script projects that do not require authorization cannot be executed
+-- through this API. To find the correct scopes to include in the
+-- authentication token, open the script project **Overview** page and
+-- scroll down to \"Project OAuth Scopes.\" The error \`403,
 -- PERMISSION_DENIED: The caller does not have permission\` indicates that
 -- the Cloud Platform project used to authorize the request is not the same
 -- as the one used by the script.
@@ -53,8 +53,8 @@ module Network.Google.Resource.Script.Scripts.Run
     , srCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.scripts.run@ method which the
 -- 'ScriptsRun' request conforms to.
@@ -75,11 +75,11 @@ type ScriptsRunResource =
 -- deployed for use with the Apps Script API and the calling application
 -- must share the same Cloud Platform project. This method requires
 -- authorization with an OAuth 2.0 token that includes at least one of the
--- scopes listed in the [Authorization](#authorization) section; script
--- projects that do not require authorization cannot be executed through
--- this API. To find the correct scopes to include in the authentication
--- token, open the project in the script editor, then select **File >
--- Project properties** and click the **Scopes** tab. The error \`403,
+-- scopes listed in the [Authorization](#authorization-scopes) section;
+-- script projects that do not require authorization cannot be executed
+-- through this API. To find the correct scopes to include in the
+-- authentication token, open the script project **Overview** page and
+-- scroll down to \"Project OAuth Scopes.\" The error \`403,
 -- PERMISSION_DENIED: The caller does not have permission\` indicates that
 -- the Cloud Platform project used to authorize the request is not the same
 -- as the one used by the script.
@@ -87,13 +87,13 @@ type ScriptsRunResource =
 -- /See:/ 'scriptsRun' smart constructor.
 data ScriptsRun =
   ScriptsRun'
-    { _srXgafv          :: !(Maybe Xgafv)
+    { _srXgafv :: !(Maybe Xgafv)
     , _srUploadProtocol :: !(Maybe Text)
-    , _srAccessToken    :: !(Maybe Text)
-    , _srUploadType     :: !(Maybe Text)
-    , _srPayload        :: !ExecutionRequest
-    , _srScriptId       :: !Text
-    , _srCallback       :: !(Maybe Text)
+    , _srAccessToken :: !(Maybe Text)
+    , _srUploadType :: !(Maybe Text)
+    , _srPayload :: !ExecutionRequest
+    , _srScriptId :: !Text
+    , _srCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -157,9 +157,8 @@ srPayload :: Lens' ScriptsRun ExecutionRequest
 srPayload
   = lens _srPayload (\ s a -> s{_srPayload = a})
 
--- | The script ID of the script to be executed. To find the script ID, open
--- the project in the script editor and select **File > Project
--- properties**.
+-- | The script ID of the script to be executed. Find the script ID on the
+-- **Project settings** page under \"IDs.\"
 srScriptId :: Lens' ScriptsRun Text
 srScriptId
   = lens _srScriptId (\ s a -> s{_srScriptId = a})

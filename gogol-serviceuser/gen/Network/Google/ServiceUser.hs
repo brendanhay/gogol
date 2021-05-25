@@ -574,12 +574,12 @@ module Network.Google.ServiceUser
     , crAllowedResponseExtensions
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.ServiceUser.Projects.Services.Disable
-import           Network.Google.Resource.ServiceUser.Projects.Services.Enable
-import           Network.Google.Resource.ServiceUser.Projects.Services.List
-import           Network.Google.Resource.ServiceUser.Services.Search
-import           Network.Google.ServiceUser.Types
+import Network.Google.Prelude
+import Network.Google.Resource.ServiceUser.Projects.Services.Disable
+import Network.Google.Resource.ServiceUser.Projects.Services.Enable
+import Network.Google.Resource.ServiceUser.Projects.Services.List
+import Network.Google.Resource.ServiceUser.Services.Search
+import Network.Google.ServiceUser.Types
 
 {- $resources
 TODO

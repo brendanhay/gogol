@@ -44,8 +44,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Delete
     , prodCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.operations.delete@ method which the
 -- 'ProjectsRegionsOperationsDelete' request conforms to.
@@ -67,12 +67,12 @@ type ProjectsRegionsOperationsDeleteResource =
 -- /See:/ 'projectsRegionsOperationsDelete' smart constructor.
 data ProjectsRegionsOperationsDelete =
   ProjectsRegionsOperationsDelete'
-    { _prodXgafv          :: !(Maybe Xgafv)
+    { _prodXgafv :: !(Maybe Xgafv)
     , _prodUploadProtocol :: !(Maybe Text)
-    , _prodAccessToken    :: !(Maybe Text)
-    , _prodUploadType     :: !(Maybe Text)
-    , _prodName           :: !Text
-    , _prodCallback       :: !(Maybe Text)
+    , _prodAccessToken :: !(Maybe Text)
+    , _prodUploadType :: !(Maybe Text)
+    , _prodName :: !Text
+    , _prodCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

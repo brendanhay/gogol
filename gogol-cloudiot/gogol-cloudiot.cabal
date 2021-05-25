@@ -50,18 +50,10 @@ library
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Devices.States.List
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Get
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.GetIAMPolicy
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.BindDeviceToGateway
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.ConfigVersions.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.Get
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.List
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.ModifyCloudToDeviceConfig
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.Patch
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.SendCommandToDevice
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.Devices.States.List
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.GetIAMPolicy
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.SetIAMPolicy
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.TestIAMPermissions
-        , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Groups.UnbindDeviceFromGateway
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.List
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.Patch
         , Network.Google.Resource.CloudIOT.Projects.Locations.Registries.SetIAMPolicy

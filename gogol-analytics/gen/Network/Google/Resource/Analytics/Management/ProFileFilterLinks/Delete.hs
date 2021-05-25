@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
     , mpffldLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.delete@ method which the
 -- 'ManagementProFileFilterLinksDelete' request conforms to.
@@ -64,9 +64,9 @@ type ManagementProFileFilterLinksDeleteResource =
 data ManagementProFileFilterLinksDelete =
   ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId :: !Text
-    , _mpffldProFileId     :: !Text
-    , _mpffldAccountId     :: !Text
-    , _mpffldLinkId        :: !Text
+    , _mpffldProFileId :: !Text
+    , _mpffldAccountId :: !Text
+    , _mpffldLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

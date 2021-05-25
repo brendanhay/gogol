@@ -45,8 +45,8 @@ module Network.Google.Resource.Testing.Projects.TestMatrices.Get
     , ptmgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Testing.Types
+import Network.Google.Prelude
+import Network.Google.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.get@ method which the
 -- 'ProjectsTestMatricesGet' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsTestMatricesGetResource =
 -- /See:/ 'projectsTestMatricesGet' smart constructor.
 data ProjectsTestMatricesGet =
   ProjectsTestMatricesGet'
-    { _ptmgXgafv          :: !(Maybe Xgafv)
+    { _ptmgXgafv :: !(Maybe Xgafv)
     , _ptmgUploadProtocol :: !(Maybe Text)
-    , _ptmgTestMatrixId   :: !Text
-    , _ptmgAccessToken    :: !(Maybe Text)
-    , _ptmgUploadType     :: !(Maybe Text)
-    , _ptmgProjectId      :: !Text
-    , _ptmgCallback       :: !(Maybe Text)
+    , _ptmgTestMatrixId :: !Text
+    , _ptmgAccessToken :: !(Maybe Text)
+    , _ptmgUploadType :: !(Maybe Text)
+    , _ptmgProjectId :: !Text
+    , _ptmgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

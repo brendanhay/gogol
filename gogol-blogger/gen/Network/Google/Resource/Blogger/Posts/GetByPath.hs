@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve a Post by Path.
+-- Gets a post by path.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.getByPath@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.getByPath@.
 module Network.Google.Resource.Blogger.Posts.GetByPath
     (
     -- * REST Resource
@@ -33,38 +33,52 @@ module Network.Google.Resource.Blogger.Posts.GetByPath
     , PostsGetByPath
 
     -- * Request Lenses
+    , pgbpXgafv
+    , pgbpUploadProtocol
     , pgbpPath
+    , pgbpAccessToken
+    , pgbpUploadType
     , pgbpBlogId
     , pgbpMaxComments
     , pgbpView
+    , pgbpCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.getByPath@ method which the
 -- 'PostsGetByPath' request conforms to.
 type PostsGetByPathResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               "bypath" :>
-                 QueryParam "path" Text :>
-                   QueryParam "maxComments" (Textual Word32) :>
-                     QueryParam "view" PostsGetByPathView :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Post'
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             "bypath" :>
+               QueryParam "path" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "maxComments" (Textual Word32) :>
+                           QueryParam "view" PostsGetByPathView :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Post'
 
--- | Retrieve a Post by Path.
+-- | Gets a post by path.
 --
 -- /See:/ 'postsGetByPath' smart constructor.
 data PostsGetByPath =
   PostsGetByPath'
-    { _pgbpPath        :: !Text
-    , _pgbpBlogId      :: !Text
+    { _pgbpXgafv :: !(Maybe Xgafv)
+    , _pgbpUploadProtocol :: !(Maybe Text)
+    , _pgbpPath :: !Text
+    , _pgbpAccessToken :: !(Maybe Text)
+    , _pgbpUploadType :: !(Maybe Text)
+    , _pgbpBlogId :: !Text
     , _pgbpMaxComments :: !(Maybe (Textual Word32))
-    , _pgbpView        :: !(Maybe PostsGetByPathView)
+    , _pgbpView :: !(Maybe PostsGetByPathView)
+    , _pgbpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,46 +87,84 @@ data PostsGetByPath =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pgbpXgafv'
+--
+-- * 'pgbpUploadProtocol'
+--
 -- * 'pgbpPath'
+--
+-- * 'pgbpAccessToken'
+--
+-- * 'pgbpUploadType'
 --
 -- * 'pgbpBlogId'
 --
 -- * 'pgbpMaxComments'
 --
 -- * 'pgbpView'
+--
+-- * 'pgbpCallback'
 postsGetByPath
     :: Text -- ^ 'pgbpPath'
     -> Text -- ^ 'pgbpBlogId'
     -> PostsGetByPath
 postsGetByPath pPgbpPath_ pPgbpBlogId_ =
   PostsGetByPath'
-    { _pgbpPath = pPgbpPath_
+    { _pgbpXgafv = Nothing
+    , _pgbpUploadProtocol = Nothing
+    , _pgbpPath = pPgbpPath_
+    , _pgbpAccessToken = Nothing
+    , _pgbpUploadType = Nothing
     , _pgbpBlogId = pPgbpBlogId_
     , _pgbpMaxComments = Nothing
     , _pgbpView = Nothing
+    , _pgbpCallback = Nothing
     }
 
 
--- | Path of the Post to retrieve.
+-- | V1 error format.
+pgbpXgafv :: Lens' PostsGetByPath (Maybe Xgafv)
+pgbpXgafv
+  = lens _pgbpXgafv (\ s a -> s{_pgbpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pgbpUploadProtocol :: Lens' PostsGetByPath (Maybe Text)
+pgbpUploadProtocol
+  = lens _pgbpUploadProtocol
+      (\ s a -> s{_pgbpUploadProtocol = a})
+
 pgbpPath :: Lens' PostsGetByPath Text
 pgbpPath = lens _pgbpPath (\ s a -> s{_pgbpPath = a})
 
--- | ID of the blog to fetch the post from.
+-- | OAuth access token.
+pgbpAccessToken :: Lens' PostsGetByPath (Maybe Text)
+pgbpAccessToken
+  = lens _pgbpAccessToken
+      (\ s a -> s{_pgbpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pgbpUploadType :: Lens' PostsGetByPath (Maybe Text)
+pgbpUploadType
+  = lens _pgbpUploadType
+      (\ s a -> s{_pgbpUploadType = a})
+
 pgbpBlogId :: Lens' PostsGetByPath Text
 pgbpBlogId
   = lens _pgbpBlogId (\ s a -> s{_pgbpBlogId = a})
 
--- | Maximum number of comments to pull back on a post.
 pgbpMaxComments :: Lens' PostsGetByPath (Maybe Word32)
 pgbpMaxComments
   = lens _pgbpMaxComments
       (\ s a -> s{_pgbpMaxComments = a})
       . mapping _Coerce
 
--- | Access level with which to view the returned result. Note that some
--- fields require elevated access.
 pgbpView :: Lens' PostsGetByPath (Maybe PostsGetByPathView)
 pgbpView = lens _pgbpView (\ s a -> s{_pgbpView = a})
+
+-- | JSONP
+pgbpCallback :: Lens' PostsGetByPath (Maybe Text)
+pgbpCallback
+  = lens _pgbpCallback (\ s a -> s{_pgbpCallback = a})
 
 instance GoogleRequest PostsGetByPath where
         type Rs PostsGetByPath = Post'
@@ -120,8 +172,13 @@ instance GoogleRequest PostsGetByPath where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsGetByPath'{..}
-          = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
+          = go _pgbpBlogId (Just _pgbpPath) _pgbpXgafv
+              _pgbpUploadProtocol
+              _pgbpAccessToken
+              _pgbpUploadType
+              _pgbpMaxComments
               _pgbpView
+              _pgbpCallback
               (Just AltJSON)
               bloggerService
           where go

@@ -14,9 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    The Poly API provides read access to assets hosted on
-    <https://poly.google.com poly.google.com> to all, and upload access to
-    <https://poly.google.com poly.google.com> for whitelisted accounts.
+    The Poly API provides read access to assets hosted on poly.google.com to
+    all, and upload access to poly.google.com for whitelisted accounts.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

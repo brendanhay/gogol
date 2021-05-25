@@ -44,8 +44,8 @@ module Network.Google.Resource.DLP.Organizations.DeidentifyTemplates.Patch
     , odtpCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.deidentifyTemplates.patch@ method which the
 -- 'OrganizationsDeidentifyTemplatesPatch' request conforms to.
@@ -69,13 +69,13 @@ type OrganizationsDeidentifyTemplatesPatchResource =
 -- /See:/ 'organizationsDeidentifyTemplatesPatch' smart constructor.
 data OrganizationsDeidentifyTemplatesPatch =
   OrganizationsDeidentifyTemplatesPatch'
-    { _odtpXgafv          :: !(Maybe Xgafv)
+    { _odtpXgafv :: !(Maybe Xgafv)
     , _odtpUploadProtocol :: !(Maybe Text)
-    , _odtpAccessToken    :: !(Maybe Text)
-    , _odtpUploadType     :: !(Maybe Text)
-    , _odtpPayload        :: !GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
-    , _odtpName           :: !Text
-    , _odtpCallback       :: !(Maybe Text)
+    , _odtpAccessToken :: !(Maybe Text)
+    , _odtpUploadType :: !(Maybe Text)
+    , _odtpPayload :: !GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
+    , _odtpName :: !Text
+    , _odtpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,8 +141,9 @@ odtpPayload :: Lens' OrganizationsDeidentifyTemplatesPatch GooglePrivacyDlpV2Upd
 odtpPayload
   = lens _odtpPayload (\ s a -> s{_odtpPayload = a})
 
--- | Resource name of organization and deidentify template to be updated, for
--- example \`organizations\/433245324\/deidentifyTemplates\/432452342\` or
+-- | Required. Resource name of organization and deidentify template to be
+-- updated, for example
+-- \`organizations\/433245324\/deidentifyTemplates\/432452342\` or
 -- projects\/project-id\/deidentifyTemplates\/432452342.
 odtpName :: Lens' OrganizationsDeidentifyTemplatesPatch Text
 odtpName = lens _odtpName (\ s a -> s{_odtpName = a})

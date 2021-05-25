@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a Folder. The returned policy may be
+-- Gets the access control policy for a folder. The returned policy may be
 -- empty if no such policy or resource exists. The \`resource\` field
--- should be the Folder\'s resource name, e.g. \"folders\/1234\". The
--- caller must have \`resourcemanager.folders.getIamPolicy\` permission on
--- the identified folder.
+-- should be the folder\'s resource name, for example: \"folders\/1234\".
+-- The caller must have \`resourcemanager.folders.getIamPolicy\` permission
+-- on the identified folder.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.folders.getIamPolicy@.
 module Network.Google.Resource.CloudResourceManager.Folders.GetIAMPolicy
@@ -46,13 +46,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.GetIAMPolicy
     , fgipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.getIamPolicy@ method which the
 -- 'FoldersGetIAMPolicy' request conforms to.
 type FoldersGetIAMPolicyResource =
-     "v2" :>
+     "v3" :>
        CaptureMode "resource" "getIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,22 +63,22 @@ type FoldersGetIAMPolicyResource =
                      ReqBody '[JSON] GetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Gets the access control policy for a Folder. The returned policy may be
+-- | Gets the access control policy for a folder. The returned policy may be
 -- empty if no such policy or resource exists. The \`resource\` field
--- should be the Folder\'s resource name, e.g. \"folders\/1234\". The
--- caller must have \`resourcemanager.folders.getIamPolicy\` permission on
--- the identified folder.
+-- should be the folder\'s resource name, for example: \"folders\/1234\".
+-- The caller must have \`resourcemanager.folders.getIamPolicy\` permission
+-- on the identified folder.
 --
 -- /See:/ 'foldersGetIAMPolicy' smart constructor.
 data FoldersGetIAMPolicy =
   FoldersGetIAMPolicy'
-    { _fgipXgafv          :: !(Maybe Xgafv)
+    { _fgipXgafv :: !(Maybe Xgafv)
     , _fgipUploadProtocol :: !(Maybe Text)
-    , _fgipAccessToken    :: !(Maybe Text)
-    , _fgipUploadType     :: !(Maybe Text)
-    , _fgipPayload        :: !GetIAMPolicyRequest
-    , _fgipResource       :: !Text
-    , _fgipCallback       :: !(Maybe Text)
+    , _fgipAccessToken :: !(Maybe Text)
+    , _fgipUploadType :: !(Maybe Text)
+    , _fgipPayload :: !GetIAMPolicyRequest
+    , _fgipResource :: !Text
+    , _fgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

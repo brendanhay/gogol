@@ -44,8 +44,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Report
     , pljwirsCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.jobs.workItems.reportStatus@ method which the
 -- 'ProjectsLocationsJobsWorkItemsReportStatus' request conforms to.
@@ -73,15 +73,15 @@ type ProjectsLocationsJobsWorkItemsReportStatusResource
 -- /See:/ 'projectsLocationsJobsWorkItemsReportStatus' smart constructor.
 data ProjectsLocationsJobsWorkItemsReportStatus =
   ProjectsLocationsJobsWorkItemsReportStatus'
-    { _pljwirsXgafv          :: !(Maybe Xgafv)
-    , _pljwirsJobId          :: !Text
+    { _pljwirsXgafv :: !(Maybe Xgafv)
+    , _pljwirsJobId :: !Text
     , _pljwirsUploadProtocol :: !(Maybe Text)
-    , _pljwirsLocation       :: !Text
-    , _pljwirsAccessToken    :: !(Maybe Text)
-    , _pljwirsUploadType     :: !(Maybe Text)
-    , _pljwirsPayload        :: !ReportWorkItemStatusRequest
-    , _pljwirsProjectId      :: !Text
-    , _pljwirsCallback       :: !(Maybe Text)
+    , _pljwirsLocation :: !Text
+    , _pljwirsAccessToken :: !(Maybe Text)
+    , _pljwirsUploadType :: !(Maybe Text)
+    , _pljwirsPayload :: !ReportWorkItemStatusRequest
+    , _pljwirsProjectId :: !Text
+    , _pljwirsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

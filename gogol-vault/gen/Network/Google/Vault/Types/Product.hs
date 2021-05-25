@@ -17,20 +17,24 @@
 --
 module Network.Google.Vault.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Vault.Types.Sum
 
--- | An account being held in a particular hold. This structure is immutable.
--- This can be either a single user or a google group, depending on the
--- corpus.
+-- | An account covered by a hold. This structure is immutable. It can be an
+-- individual account or a Google Group, depending on the service. To work
+-- with Vault resources, the account must have the [required Vault
+-- privileges] (https:\/\/support.google.com\/vault\/answer\/2799699) and
+-- access to the matter. To access a matter, the account must have created
+-- the matter, have the matter shared with them, or have the **View All
+-- Matters** privilege.
 --
 -- /See:/ 'heldAccount' smart constructor.
 data HeldAccount =
   HeldAccount'
-    { _haEmail     :: !(Maybe Text)
-    , _haLastName  :: !(Maybe Text)
+    { _haEmail :: !(Maybe Text)
+    , _haLastName :: !(Maybe Text)
     , _haAccountId :: !(Maybe Text)
-    , _haHoldTime  :: !(Maybe DateTime')
+    , _haHoldTime :: !(Maybe DateTime')
     , _haFirstName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -62,7 +66,7 @@ heldAccount =
 
 
 -- | The primary email address of the account. If used as an input, this
--- takes precedence over account ID.
+-- takes precedence over **accountId**.
 haEmail :: Lens' HeldAccount (Maybe Text)
 haEmail = lens _haEmail (\ s a -> s{_haEmail = a})
 
@@ -71,8 +75,8 @@ haLastName :: Lens' HeldAccount (Maybe Text)
 haLastName
   = lens _haLastName (\ s a -> s{_haLastName = a})
 
--- | The account\'s ID as provided by the
--- <https://developers.google.com/admin-sdk/ Admin SDK>.
+-- | The account ID, as provided by the [Admin
+-- SDK](https:\/\/developers.google.com\/admin-sdk\/).
 haAccountId :: Lens' HeldAccount (Maybe Text)
 haAccountId
   = lens _haAccountId (\ s a -> s{_haAccountId = a})
@@ -108,7 +112,7 @@ instance ToJSON HeldAccount where
                   ("holdTime" .=) <$> _haHoldTime,
                   ("firstName" .=) <$> _haFirstName])
 
--- | Query options for hangouts chat holds.
+-- | Options for Chat holds.
 --
 -- /See:/ 'heldHangoutsChatQuery' smart constructor.
 newtype HeldHangoutsChatQuery =
@@ -128,7 +132,8 @@ heldHangoutsChatQuery
 heldHangoutsChatQuery = HeldHangoutsChatQuery' {_hhcqIncludeRooms = Nothing}
 
 
--- | If true, include rooms the user has participated in.
+-- | To include messages in Chat spaces the user was a member of, set to
+-- **true**.
 hhcqIncludeRooms :: Lens' HeldHangoutsChatQuery (Maybe Bool)
 hhcqIncludeRooms
   = lens _hhcqIncludeRooms
@@ -146,21 +151,26 @@ instance ToJSON HeldHangoutsChatQuery where
               (catMaybes
                  [("includeRooms" .=) <$> _hhcqIncludeRooms])
 
--- | An export
+-- | An export. To work with Vault resources, the account must have the
+-- [required Vault
+-- privileges](https:\/\/support.google.com\/vault\/answer\/2799699) and
+-- access to the matter. To access a matter, the account must have created
+-- the matter, have the matter shared with them, or have the **View All
+-- Matters** privilege.
 --
 -- /See:/ 'export'' smart constructor.
 data Export =
   Export'
-    { _eStatus           :: !(Maybe ExportStatus)
+    { _eStatus :: !(Maybe ExportStatus)
     , _eCloudStorageSink :: !(Maybe CloudStorageSink)
-    , _eMatterId         :: !(Maybe Text)
-    , _eStats            :: !(Maybe ExportStats)
-    , _eExportOptions    :: !(Maybe ExportOptions)
-    , _eName             :: !(Maybe Text)
-    , _eQuery            :: !(Maybe Query)
-    , _eId               :: !(Maybe Text)
-    , _eRequester        :: !(Maybe UserInfo)
-    , _eCreateTime       :: !(Maybe DateTime')
+    , _eMatterId :: !(Maybe Text)
+    , _eStats :: !(Maybe ExportStats)
+    , _eExportOptions :: !(Maybe ExportOptions)
+    , _eName :: !(Maybe Text)
+    , _eQuery :: !(Maybe Query)
+    , _eId :: !(Maybe Text)
+    , _eRequester :: !(Maybe UserInfo)
+    , _eCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -205,11 +215,11 @@ export' =
     }
 
 
--- | Output only. The export status.
+-- | Output only. The status of the export.
 eStatus :: Lens' Export (Maybe ExportStatus)
 eStatus = lens _eStatus (\ s a -> s{_eStatus = a})
 
--- | Output only. Export sink for cloud storage files.
+-- | Output only. The sink for export files in Cloud Storage.
 eCloudStorageSink :: Lens' Export (Maybe CloudStorageSink)
 eCloudStorageSink
   = lens _eCloudStorageSink
@@ -220,11 +230,11 @@ eMatterId :: Lens' Export (Maybe Text)
 eMatterId
   = lens _eMatterId (\ s a -> s{_eMatterId = a})
 
--- | Output only. Export statistics.
+-- | Output only. Details about the export progress and size.
 eStats :: Lens' Export (Maybe ExportStats)
 eStats = lens _eStats (\ s a -> s{_eStats = a})
 
--- | Advanced options of the export.
+-- | Additional export options.
 eExportOptions :: Lens' Export (Maybe ExportOptions)
 eExportOptions
   = lens _eExportOptions
@@ -234,7 +244,7 @@ eExportOptions
 eName :: Lens' Export (Maybe Text)
 eName = lens _eName (\ s a -> s{_eName = a})
 
--- | The search query being exported.
+-- | The query parameters used to create the export.
 eQuery :: Lens' Export (Maybe Query)
 eQuery = lens _eQuery (\ s a -> s{_eQuery = a})
 
@@ -283,45 +293,17 @@ instance ToJSON Export where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -377,7 +359,7 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | Accounts to search
+-- | The accounts to search
 --
 -- /See:/ 'accountInfo' smart constructor.
 newtype AccountInfo =
@@ -413,7 +395,7 @@ instance ToJSON AccountInfo where
         toJSON AccountInfo'{..}
           = object (catMaybes [("emails" .=) <$> _aiEmails])
 
--- | Export sink for cloud storage files.
+-- | Export sink for Cloud Storage files.
 --
 -- /See:/ 'cloudStorageSink' smart constructor.
 newtype CloudStorageSink =
@@ -433,7 +415,7 @@ cloudStorageSink
 cloudStorageSink = CloudStorageSink' {_cssFiles = Nothing}
 
 
--- | Output only. The exported files on cloud storage.
+-- | Output only. The exported files in Cloud Storage.
 cssFiles :: Lens' CloudStorageSink [CloudStorageFile]
 cssFiles
   = lens _cssFiles (\ s a -> s{_cssFiles = a}) .
@@ -450,7 +432,7 @@ instance ToJSON CloudStorageSink where
         toJSON CloudStorageSink'{..}
           = object (catMaybes [("files" .=) <$> _cssFiles])
 
--- | The options for hangouts chat export.
+-- | Options for Chat exports.
 --
 -- /See:/ 'hangoutsChatExportOptions' smart constructor.
 newtype HangoutsChatExportOptions =
@@ -471,7 +453,7 @@ hangoutsChatExportOptions =
   HangoutsChatExportOptions' {_hceoExportFormat = Nothing}
 
 
--- | The export format for hangouts chat export.
+-- | The file format for exported messages.
 hceoExportFormat :: Lens' HangoutsChatExportOptions (Maybe HangoutsChatExportOptionsExportFormat)
 hceoExportFormat
   = lens _hceoExportFormat
@@ -490,12 +472,58 @@ instance ToJSON HangoutsChatExportOptions where
               (catMaybes
                  [("exportFormat" .=) <$> _hceoExportFormat])
 
+-- | Count artifacts request.
+--
+-- /See:/ 'countArtifactsRequest' smart constructor.
+data CountArtifactsRequest =
+  CountArtifactsRequest'
+    { _carQuery :: !(Maybe Query)
+    , _carView :: !(Maybe CountArtifactsRequestView)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CountArtifactsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'carQuery'
+--
+-- * 'carView'
+countArtifactsRequest
+    :: CountArtifactsRequest
+countArtifactsRequest =
+  CountArtifactsRequest' {_carQuery = Nothing, _carView = Nothing}
+
+
+-- | The search query.
+carQuery :: Lens' CountArtifactsRequest (Maybe Query)
+carQuery = lens _carQuery (\ s a -> s{_carQuery = a})
+
+-- | Sets the granularity of the count results.
+carView :: Lens' CountArtifactsRequest (Maybe CountArtifactsRequestView)
+carView = lens _carView (\ s a -> s{_carView = a})
+
+instance FromJSON CountArtifactsRequest where
+        parseJSON
+          = withObject "CountArtifactsRequest"
+              (\ o ->
+                 CountArtifactsRequest' <$>
+                   (o .:? "query") <*> (o .:? "view"))
+
+instance ToJSON CountArtifactsRequest where
+        toJSON CountArtifactsRequest'{..}
+          = object
+              (catMaybes
+                 [("query" .=) <$> _carQuery,
+                  ("view" .=) <$> _carView])
+
 -- | User\'s information.
 --
 -- /See:/ 'userInfo' smart constructor.
 data UserInfo =
   UserInfo'
-    { _uiEmail       :: !(Maybe Text)
+    { _uiEmail :: !(Maybe Text)
     , _uiDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -537,6 +565,60 @@ instance ToJSON UserInfo where
                  [("email" .=) <$> _uiEmail,
                   ("displayName" .=) <$> _uiDisplayName])
 
+-- | The response message for Operations.ListOperations.
+--
+-- /See:/ 'listOperationsResponse' smart constructor.
+data ListOperationsResponse =
+  ListOperationsResponse'
+    { _lorNextPageToken :: !(Maybe Text)
+    , _lorOperations :: !(Maybe [Operation])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lorNextPageToken'
+--
+-- * 'lorOperations'
+listOperationsResponse
+    :: ListOperationsResponse
+listOperationsResponse =
+  ListOperationsResponse'
+    {_lorNextPageToken = Nothing, _lorOperations = Nothing}
+
+
+-- | The standard List next-page token.
+lorNextPageToken :: Lens' ListOperationsResponse (Maybe Text)
+lorNextPageToken
+  = lens _lorNextPageToken
+      (\ s a -> s{_lorNextPageToken = a})
+
+-- | A list of operations that matches the specified filter in the request.
+lorOperations :: Lens' ListOperationsResponse [Operation]
+lorOperations
+  = lens _lorOperations
+      (\ s a -> s{_lorOperations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListOperationsResponse where
+        parseJSON
+          = withObject "ListOperationsResponse"
+              (\ o ->
+                 ListOperationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "operations" .!= mempty))
+
+instance ToJSON ListOperationsResponse where
+        toJSON ListOperationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lorNextPageToken,
+                  ("operations" .=) <$> _lorOperations])
+
 -- | Team Drives to search
 --
 -- /See:/ 'teamDriveInfo' smart constructor.
@@ -557,8 +639,8 @@ teamDriveInfo
 teamDriveInfo = TeamDriveInfo' {_tdiTeamDriveIds = Nothing}
 
 
--- | List of Team Drive ids, as provided by
--- <https://developers.google.com/drive Drive API>.
+-- | List of Team Drive IDs, as provided by the [Drive
+-- API](https:\/\/developers.google.com\/drive).
 tdiTeamDriveIds :: Lens' TeamDriveInfo [Text]
 tdiTeamDriveIds
   = lens _tdiTeamDriveIds
@@ -584,7 +666,7 @@ instance ToJSON TeamDriveInfo where
 data AddHeldAccountsRequest =
   AddHeldAccountsRequest'
     { _aharAccountIds :: !(Maybe [Text])
-    , _aharEmails     :: !(Maybe [Text])
+    , _aharEmails :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -602,8 +684,8 @@ addHeldAccountsRequest =
   AddHeldAccountsRequest' {_aharAccountIds = Nothing, _aharEmails = Nothing}
 
 
--- | Account ids to identify which accounts to add. Only account_ids or only
--- emails should be specified, but not both.
+-- | A comma-separated list of the account IDs of the accounts to add to the
+-- hold. Specify either **emails** or **account_ids**, but not both.
 aharAccountIds :: Lens' AddHeldAccountsRequest [Text]
 aharAccountIds
   = lens _aharAccountIds
@@ -611,8 +693,8 @@ aharAccountIds
       . _Default
       . _Coerce
 
--- | Emails to identify which accounts to add. Only emails or only
--- account_ids should be specified, but not both.
+-- | A comma-separated list of the emails of the accounts to add to the hold.
+-- Specify either **emails** or **account_ids**, but not both.
 aharEmails :: Lens' AddHeldAccountsRequest [Text]
 aharEmails
   = lens _aharEmails (\ s a -> s{_aharEmails = a}) .
@@ -634,15 +716,16 @@ instance ToJSON AddHeldAccountsRequest where
                  [("accountIds" .=) <$> _aharAccountIds,
                   ("emails" .=) <$> _aharEmails])
 
--- | Corpus specific queries.
+-- | Service-specific options for holds.
 --
 -- /See:/ 'corpusQuery' smart constructor.
 data CorpusQuery =
   CorpusQuery'
-    { _cqGroupsQuery       :: !(Maybe HeldGroupsQuery)
-    , _cqDriveQuery        :: !(Maybe HeldDriveQuery)
+    { _cqGroupsQuery :: !(Maybe HeldGroupsQuery)
+    , _cqDriveQuery :: !(Maybe HeldDriveQuery)
     , _cqHangoutsChatQuery :: !(Maybe HeldHangoutsChatQuery)
-    , _cqMailQuery         :: !(Maybe HeldMailQuery)
+    , _cqVoiceQuery :: !(Maybe HeldVoiceQuery)
+    , _cqMailQuery :: !(Maybe HeldMailQuery)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -657,6 +740,8 @@ data CorpusQuery =
 --
 -- * 'cqHangoutsChatQuery'
 --
+-- * 'cqVoiceQuery'
+--
 -- * 'cqMailQuery'
 corpusQuery
     :: CorpusQuery
@@ -665,29 +750,39 @@ corpusQuery =
     { _cqGroupsQuery = Nothing
     , _cqDriveQuery = Nothing
     , _cqHangoutsChatQuery = Nothing
+    , _cqVoiceQuery = Nothing
     , _cqMailQuery = Nothing
     }
 
 
--- | Details pertaining to Groups holds. If set, corpus must be Groups.
+-- | Service-specific options for Groups holds. If set, **CorpusType** must
+-- be **GROUPS**.
 cqGroupsQuery :: Lens' CorpusQuery (Maybe HeldGroupsQuery)
 cqGroupsQuery
   = lens _cqGroupsQuery
       (\ s a -> s{_cqGroupsQuery = a})
 
--- | Details pertaining to Drive holds. If set, corpus must be Drive.
+-- | Service-specific options for Drive holds. If set, **CorpusType** must be
+-- **DRIVE**.
 cqDriveQuery :: Lens' CorpusQuery (Maybe HeldDriveQuery)
 cqDriveQuery
   = lens _cqDriveQuery (\ s a -> s{_cqDriveQuery = a})
 
--- | Details pertaining to Hangouts Chat holds. If set, corpus must be
--- Hangouts Chat.
+-- | Service-specific options for Chat holds. If set, **CorpusType** must be
+-- **HANGOUTS_CHAT**.
 cqHangoutsChatQuery :: Lens' CorpusQuery (Maybe HeldHangoutsChatQuery)
 cqHangoutsChatQuery
   = lens _cqHangoutsChatQuery
       (\ s a -> s{_cqHangoutsChatQuery = a})
 
--- | Details pertaining to mail holds. If set, corpus must be mail.
+-- | Service-specific options for Voice holds. If set, **CorpusType** must be
+-- **VOICE**.
+cqVoiceQuery :: Lens' CorpusQuery (Maybe HeldVoiceQuery)
+cqVoiceQuery
+  = lens _cqVoiceQuery (\ s a -> s{_cqVoiceQuery = a})
+
+-- | Service-specific options for Gmail holds. If set, **CorpusType** must be
+-- **MAIL**.
 cqMailQuery :: Lens' CorpusQuery (Maybe HeldMailQuery)
 cqMailQuery
   = lens _cqMailQuery (\ s a -> s{_cqMailQuery = a})
@@ -699,6 +794,7 @@ instance FromJSON CorpusQuery where
                  CorpusQuery' <$>
                    (o .:? "groupsQuery") <*> (o .:? "driveQuery") <*>
                      (o .:? "hangoutsChatQuery")
+                     <*> (o .:? "voiceQuery")
                      <*> (o .:? "mailQuery"))
 
 instance ToJSON CorpusQuery where
@@ -708,9 +804,33 @@ instance ToJSON CorpusQuery where
                  [("groupsQuery" .=) <$> _cqGroupsQuery,
                   ("driveQuery" .=) <$> _cqDriveQuery,
                   ("hangoutsChatQuery" .=) <$> _cqHangoutsChatQuery,
+                  ("voiceQuery" .=) <$> _cqVoiceQuery,
                   ("mailQuery" .=) <$> _cqMailQuery])
 
--- | Org Unit to search
+-- | The request message for Operations.CancelOperation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+  CancelOperationRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
+
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest')
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
+
+-- | The organizational unit to search
 --
 -- /See:/ 'orgUnitInfo' smart constructor.
 newtype OrgUnitInfo =
@@ -730,8 +850,9 @@ orgUnitInfo
 orgUnitInfo = OrgUnitInfo' {_ouiOrgUnitId = Nothing}
 
 
--- | Org unit to search, as provided by the
--- <https://developers.google.com/admin-sdk/directory/ Admin SDK Directory API>.
+-- | The name of the organizational unit to search, as provided by the [Admin
+-- SDK Directory
+-- API](https:\/\/developers.google.com\/admin-sdk\/directory\/).
 ouiOrgUnitId :: Lens' OrgUnitInfo (Maybe Text)
 ouiOrgUnitId
   = lens _ouiOrgUnitId (\ s a -> s{_ouiOrgUnitId = a})
@@ -767,8 +888,8 @@ removeHeldAccountsResponse =
   RemoveHeldAccountsResponse' {_rharStatuses = Nothing}
 
 
--- | A list of statuses for deleted accounts. Results have the same order as
--- the request.
+-- | A list of statuses for the deleted accounts. Results have the same order
+-- as the request.
 rharStatuses :: Lens' RemoveHeldAccountsResponse [Status]
 rharStatuses
   = lens _rharStatuses (\ s a -> s{_rharStatuses = a})
@@ -786,6 +907,102 @@ instance ToJSON RemoveHeldAccountsResponse where
         toJSON RemoveHeldAccountsResponse'{..}
           = object
               (catMaybes [("statuses" .=) <$> _rharStatuses])
+
+-- | This resource represents a long-running operation that is the result of
+-- a network API call.
+--
+-- /See:/ 'operation' smart constructor.
+data Operation =
+  Operation'
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
+    , _oResponse :: !(Maybe OperationResponse)
+    , _oName :: !(Maybe Text)
+    , _oMetadata :: !(Maybe OperationMetadata)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Operation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oDone'
+--
+-- * 'oError'
+--
+-- * 'oResponse'
+--
+-- * 'oName'
+--
+-- * 'oMetadata'
+operation
+    :: Operation
+operation =
+  Operation'
+    { _oDone = Nothing
+    , _oError = Nothing
+    , _oResponse = Nothing
+    , _oName = Nothing
+    , _oMetadata = Nothing
+    }
+
+
+-- | If the value is \`false\`, it means the operation is still in progress.
+-- If \`true\`, the operation is completed, and either \`error\` or
+-- \`response\` is available.
+oDone :: Lens' Operation (Maybe Bool)
+oDone = lens _oDone (\ s a -> s{_oDone = a})
+
+-- | The error result of the operation in case of failure or cancellation.
+oError :: Lens' Operation (Maybe Status)
+oError = lens _oError (\ s a -> s{_oError = a})
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+oResponse :: Lens' Operation (Maybe OperationResponse)
+oResponse
+  = lens _oResponse (\ s a -> s{_oResponse = a})
+
+-- | The server-assigned name, which is only unique within the same service
+-- that originally returns it. If you use the default HTTP mapping, the
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
+oName :: Lens' Operation (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+oMetadata :: Lens' Operation (Maybe OperationMetadata)
+oMetadata
+  = lens _oMetadata (\ s a -> s{_oMetadata = a})
+
+instance FromJSON Operation where
+        parseJSON
+          = withObject "Operation"
+              (\ o ->
+                 Operation' <$>
+                   (o .:? "done") <*> (o .:? "error") <*>
+                     (o .:? "response")
+                     <*> (o .:? "name")
+                     <*> (o .:? "metadata"))
+
+instance ToJSON Operation where
+        toJSON Operation'{..}
+          = object
+              (catMaybes
+                 [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
+                  ("response" .=) <$> _oResponse,
+                  ("name" .=) <$> _oName,
+                  ("metadata" .=) <$> _oMetadata])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -812,13 +1029,13 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | Stats of an export.
+-- | Progress information for an export.
 --
 -- /See:/ 'exportStats' smart constructor.
 data ExportStats =
   ExportStats'
-    { _esTotalArtifactCount    :: !(Maybe (Textual Int64))
-    , _esSizeInBytes           :: !(Maybe (Textual Int64))
+    { _esTotalArtifactCount :: !(Maybe (Textual Int64))
+    , _esSizeInBytes :: !(Maybe (Textual Int64))
     , _esExportedArtifactCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -843,7 +1060,7 @@ exportStats =
     }
 
 
--- | The number of documents to be exported.
+-- | The number of messages or files to be exported.
 esTotalArtifactCount :: Lens' ExportStats (Maybe Int64)
 esTotalArtifactCount
   = lens _esTotalArtifactCount
@@ -857,7 +1074,7 @@ esSizeInBytes
       (\ s a -> s{_esSizeInBytes = a})
       . mapping _Coerce
 
--- | The number of documents already processed by the export.
+-- | The number of messages or files already processed for export.
 esExportedArtifactCount :: Lens' ExportStats (Maybe Int64)
 esExportedArtifactCount
   = lens _esExportedArtifactCount
@@ -882,7 +1099,7 @@ instance ToJSON ExportStats where
                   ("exportedArtifactCount" .=) <$>
                     _esExportedArtifactCount])
 
--- | Accounts to search
+-- | The Chat spaces to search
 --
 -- /See:/ 'hangoutsChatInfo' smart constructor.
 newtype HangoutsChatInfo =
@@ -902,7 +1119,8 @@ hangoutsChatInfo
 hangoutsChatInfo = HangoutsChatInfo' {_hciRoomId = Nothing}
 
 
--- | A set of rooms to search.
+-- | A list of Chat spaces IDs, as provided by the [Chat
+-- API](https:\/\/developers.google.com\/hangouts\/chat).
 hciRoomId :: Lens' HangoutsChatInfo [Text]
 hciRoomId
   = lens _hciRoomId (\ s a -> s{_hciRoomId = a}) .
@@ -940,7 +1158,7 @@ removeHeldAccountsRequest =
   RemoveHeldAccountsRequest' {_rharAccountIds = Nothing}
 
 
--- | Account ids to identify HeldAccounts to remove.
+-- | The account IDs of the accounts to remove from the hold.
 rharAccountIds :: Lens' RemoveHeldAccountsRequest [Text]
 rharAccountIds
   = lens _rharAccountIds
@@ -966,7 +1184,7 @@ instance ToJSON RemoveHeldAccountsRequest where
 data ListSavedQueriesResponse =
   ListSavedQueriesResponse'
     { _lsqrNextPageToken :: !(Maybe Text)
-    , _lsqrSavedQueries  :: !(Maybe [SavedQuery])
+    , _lsqrSavedQueries :: !(Maybe [SavedQuery])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -992,7 +1210,7 @@ lsqrNextPageToken
   = lens _lsqrNextPageToken
       (\ s a -> s{_lsqrNextPageToken = a})
 
--- | List of output saved queries.
+-- | List of saved queries.
 lsqrSavedQueries :: Lens' ListSavedQueriesResponse [SavedQuery]
 lsqrSavedQueries
   = lens _lsqrSavedQueries
@@ -1038,12 +1256,13 @@ instance FromJSON UndeleteMatterRequest where
 instance ToJSON UndeleteMatterRequest where
         toJSON = const emptyObject
 
--- | Query options for Drive holds.
+-- | Options for Drive holds.
 --
 -- /See:/ 'heldDriveQuery' smart constructor.
-newtype HeldDriveQuery =
+data HeldDriveQuery =
   HeldDriveQuery'
-    { _hdqIncludeTeamDriveFiles :: Maybe Bool
+    { _hdqIncludeTeamDriveFiles :: !(Maybe Bool)
+    , _hdqIncludeSharedDriveFiles :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1053,31 +1272,45 @@ newtype HeldDriveQuery =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'hdqIncludeTeamDriveFiles'
+--
+-- * 'hdqIncludeSharedDriveFiles'
 heldDriveQuery
     :: HeldDriveQuery
-heldDriveQuery = HeldDriveQuery' {_hdqIncludeTeamDriveFiles = Nothing}
+heldDriveQuery =
+  HeldDriveQuery'
+    {_hdqIncludeTeamDriveFiles = Nothing, _hdqIncludeSharedDriveFiles = Nothing}
 
 
--- | If true, include files in Team Drives in the hold.
+-- | To include files in Team Drives in the hold, set to **true**.
 hdqIncludeTeamDriveFiles :: Lens' HeldDriveQuery (Maybe Bool)
 hdqIncludeTeamDriveFiles
   = lens _hdqIncludeTeamDriveFiles
       (\ s a -> s{_hdqIncludeTeamDriveFiles = a})
 
+-- | To include files in shared drives in the hold, set to **true**.
+hdqIncludeSharedDriveFiles :: Lens' HeldDriveQuery (Maybe Bool)
+hdqIncludeSharedDriveFiles
+  = lens _hdqIncludeSharedDriveFiles
+      (\ s a -> s{_hdqIncludeSharedDriveFiles = a})
+
 instance FromJSON HeldDriveQuery where
         parseJSON
           = withObject "HeldDriveQuery"
               (\ o ->
-                 HeldDriveQuery' <$> (o .:? "includeTeamDriveFiles"))
+                 HeldDriveQuery' <$>
+                   (o .:? "includeTeamDriveFiles") <*>
+                     (o .:? "includeSharedDriveFiles"))
 
 instance ToJSON HeldDriveQuery where
         toJSON HeldDriveQuery'{..}
           = object
               (catMaybes
                  [("includeTeamDriveFiles" .=) <$>
-                    _hdqIncludeTeamDriveFiles])
+                    _hdqIncludeTeamDriveFiles,
+                  ("includeSharedDriveFiles" .=) <$>
+                    _hdqIncludeSharedDriveFiles])
 
--- | Hangouts chat search advanced options
+-- | Additional options for Google Chat search
 --
 -- /See:/ 'hangoutsChatOptions' smart constructor.
 newtype HangoutsChatOptions =
@@ -1097,7 +1330,8 @@ hangoutsChatOptions
 hangoutsChatOptions = HangoutsChatOptions' {_hcoIncludeRooms = Nothing}
 
 
--- | Set to true to include rooms.
+-- | For searches by account or organizational unit, set to **true** to
+-- include rooms.
 hcoIncludeRooms :: Lens' HangoutsChatOptions (Maybe Bool)
 hcoIncludeRooms
   = lens _hcoIncludeRooms
@@ -1115,14 +1349,193 @@ instance ToJSON HangoutsChatOptions where
               (catMaybes
                  [("includeRooms" .=) <$> _hcoIncludeRooms])
 
+-- | Gmail and classic Hangouts-specific count metrics.
+--
+-- /See:/ 'mailCountResult' smart constructor.
+data MailCountResult =
+  MailCountResult'
+    { _mcrAccountCounts :: !(Maybe [AccountCount])
+    , _mcrAccountCountErrors :: !(Maybe [AccountCountError])
+    , _mcrMatchingAccountsCount :: !(Maybe (Textual Int64))
+    , _mcrQueriedAccountsCount :: !(Maybe (Textual Int64))
+    , _mcrNonQueryableAccounts :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MailCountResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcrAccountCounts'
+--
+-- * 'mcrAccountCountErrors'
+--
+-- * 'mcrMatchingAccountsCount'
+--
+-- * 'mcrQueriedAccountsCount'
+--
+-- * 'mcrNonQueryableAccounts'
+mailCountResult
+    :: MailCountResult
+mailCountResult =
+  MailCountResult'
+    { _mcrAccountCounts = Nothing
+    , _mcrAccountCountErrors = Nothing
+    , _mcrMatchingAccountsCount = Nothing
+    , _mcrQueriedAccountsCount = Nothing
+    , _mcrNonQueryableAccounts = Nothing
+    }
+
+
+-- | Subtotal count per matching account that have more than zero messages.
+mcrAccountCounts :: Lens' MailCountResult [AccountCount]
+mcrAccountCounts
+  = lens _mcrAccountCounts
+      (\ s a -> s{_mcrAccountCounts = a})
+      . _Default
+      . _Coerce
+
+-- | Errors occurred when querying these accounts.
+mcrAccountCountErrors :: Lens' MailCountResult [AccountCountError]
+mcrAccountCountErrors
+  = lens _mcrAccountCountErrors
+      (\ s a -> s{_mcrAccountCountErrors = a})
+      . _Default
+      . _Coerce
+
+-- | Total number of accounts that can be queried and have more than zero
+-- messages.
+mcrMatchingAccountsCount :: Lens' MailCountResult (Maybe Int64)
+mcrMatchingAccountsCount
+  = lens _mcrMatchingAccountsCount
+      (\ s a -> s{_mcrMatchingAccountsCount = a})
+      . mapping _Coerce
+
+-- | Total number of accounts involved in this count operation.
+mcrQueriedAccountsCount :: Lens' MailCountResult (Maybe Int64)
+mcrQueriedAccountsCount
+  = lens _mcrQueriedAccountsCount
+      (\ s a -> s{_mcrQueriedAccountsCount = a})
+      . mapping _Coerce
+
+-- | When **DataScope** is **HELD_DATA**, the number of accounts in the
+-- request that are not queried because they are not on hold. For other
+-- data scopes, this field is not set.
+mcrNonQueryableAccounts :: Lens' MailCountResult [Text]
+mcrNonQueryableAccounts
+  = lens _mcrNonQueryableAccounts
+      (\ s a -> s{_mcrNonQueryableAccounts = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON MailCountResult where
+        parseJSON
+          = withObject "MailCountResult"
+              (\ o ->
+                 MailCountResult' <$>
+                   (o .:? "accountCounts" .!= mempty) <*>
+                     (o .:? "accountCountErrors" .!= mempty)
+                     <*> (o .:? "matchingAccountsCount")
+                     <*> (o .:? "queriedAccountsCount")
+                     <*> (o .:? "nonQueryableAccounts" .!= mempty))
+
+instance ToJSON MailCountResult where
+        toJSON MailCountResult'{..}
+          = object
+              (catMaybes
+                 [("accountCounts" .=) <$> _mcrAccountCounts,
+                  ("accountCountErrors" .=) <$> _mcrAccountCountErrors,
+                  ("matchingAccountsCount" .=) <$>
+                    _mcrMatchingAccountsCount,
+                  ("queriedAccountsCount" .=) <$>
+                    _mcrQueriedAccountsCount,
+                  ("nonQueryableAccounts" .=) <$>
+                    _mcrNonQueryableAccounts])
+
+-- | Long running operation metadata for CountArtifacts.
+--
+-- /See:/ 'countArtifactsMetadata' smart constructor.
+data CountArtifactsMetadata =
+  CountArtifactsMetadata'
+    { _camStartTime :: !(Maybe DateTime')
+    , _camMatterId :: !(Maybe Text)
+    , _camEndTime :: !(Maybe DateTime')
+    , _camQuery :: !(Maybe Query)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CountArtifactsMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'camStartTime'
+--
+-- * 'camMatterId'
+--
+-- * 'camEndTime'
+--
+-- * 'camQuery'
+countArtifactsMetadata
+    :: CountArtifactsMetadata
+countArtifactsMetadata =
+  CountArtifactsMetadata'
+    { _camStartTime = Nothing
+    , _camMatterId = Nothing
+    , _camEndTime = Nothing
+    , _camQuery = Nothing
+    }
+
+
+-- | Creation time of count operation.
+camStartTime :: Lens' CountArtifactsMetadata (Maybe UTCTime)
+camStartTime
+  = lens _camStartTime (\ s a -> s{_camStartTime = a})
+      . mapping _DateTime
+
+-- | The matter ID of the associated matter.
+camMatterId :: Lens' CountArtifactsMetadata (Maybe Text)
+camMatterId
+  = lens _camMatterId (\ s a -> s{_camMatterId = a})
+
+-- | End time of count operation. Available when operation is done.
+camEndTime :: Lens' CountArtifactsMetadata (Maybe UTCTime)
+camEndTime
+  = lens _camEndTime (\ s a -> s{_camEndTime = a}) .
+      mapping _DateTime
+
+-- | The search query from the request.
+camQuery :: Lens' CountArtifactsMetadata (Maybe Query)
+camQuery = lens _camQuery (\ s a -> s{_camQuery = a})
+
+instance FromJSON CountArtifactsMetadata where
+        parseJSON
+          = withObject "CountArtifactsMetadata"
+              (\ o ->
+                 CountArtifactsMetadata' <$>
+                   (o .:? "startTime") <*> (o .:? "matterId") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "query"))
+
+instance ToJSON CountArtifactsMetadata where
+        toJSON CountArtifactsMetadata'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _camStartTime,
+                  ("matterId" .=) <$> _camMatterId,
+                  ("endTime" .=) <$> _camEndTime,
+                  ("query" .=) <$> _camQuery])
+
 -- | Add an account with the permission specified. The role cannot be owner.
--- If an account already has a role in the matter, it will be overwritten.
+-- If an account already has a role in the matter, the existing role is
+-- overwritten.
 --
 -- /See:/ 'addMatterPermissionsRequest' smart constructor.
 data AddMatterPermissionsRequest =
   AddMatterPermissionsRequest'
-    { _amprSendEmails       :: !(Maybe Bool)
-    , _amprCcMe             :: !(Maybe Bool)
+    { _amprSendEmails :: !(Maybe Bool)
+    , _amprCcMe :: !(Maybe Bool)
     , _amprMatterPermission :: !(Maybe MatterPermission)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1147,19 +1560,19 @@ addMatterPermissionsRequest =
     }
 
 
--- | True to send notification email to the added account. False to not send
--- notification email.
+-- | To send a notification email to the added account, set to **true**. To
+-- not send a notification email, set to **false**.
 amprSendEmails :: Lens' AddMatterPermissionsRequest (Maybe Bool)
 amprSendEmails
   = lens _amprSendEmails
       (\ s a -> s{_amprSendEmails = a})
 
--- | Only relevant if send_emails is true. True to CC requestor in the email
--- message. False to not CC requestor.
+-- | Only relevant if **sendEmails** is **true**. To CC the requestor in the
+-- email message, set to **true**. To not CC requestor, set to **false**.
 amprCcMe :: Lens' AddMatterPermissionsRequest (Maybe Bool)
 amprCcMe = lens _amprCcMe (\ s a -> s{_amprCcMe = a})
 
--- | The MatterPermission to add.
+-- | The account and its role to add.
 amprMatterPermission :: Lens' AddMatterPermissionsRequest (Maybe MatterPermission)
 amprMatterPermission
   = lens _amprMatterPermission
@@ -1216,16 +1629,21 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | Represents a matter.
+-- | Represents a matter. To work with Vault resources, the account must have
+-- the [required Vault privileges]
+-- (https:\/\/support.google.com\/vault\/answer\/2799699) and access to the
+-- matter. To access a matter, the account must have created the matter,
+-- have the matter shared with them, or have the **View All Matters**
+-- privilege.
 --
 -- /See:/ 'matter' smart constructor.
 data Matter =
   Matter'
-    { _mState             :: !(Maybe MatterState)
+    { _mState :: !(Maybe MatterState)
     , _mMatterPermissions :: !(Maybe [MatterPermission])
-    , _mMatterId          :: !(Maybe Text)
-    , _mName              :: !(Maybe Text)
-    , _mDescription       :: !(Maybe Text)
+    , _mMatterId :: !(Maybe Text)
+    , _mName :: !(Maybe Text)
+    , _mDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1259,8 +1677,9 @@ matter =
 mState :: Lens' Matter (Maybe MatterState)
 mState = lens _mState (\ s a -> s{_mState = a})
 
--- | List of users and access to the matter. Currently there is no programmer
--- defined limit on the number of permissions a matter can have.
+-- | Lists the users and their permission for the matter. Currently there is
+-- no programmer defined limit on the number of permissions a matter can
+-- have.
 mMatterPermissions :: Lens' Matter [MatterPermission]
 mMatterPermissions
   = lens _mMatterPermissions
@@ -1268,8 +1687,8 @@ mMatterPermissions
       . _Default
       . _Coerce
 
--- | The matter ID which is generated by the server. Should be blank when
--- creating a new matter.
+-- | The matter ID, which is generated by the server. Leave blank when
+-- creating a matter.
 mMatterId :: Lens' Matter (Maybe Text)
 mMatterId
   = lens _mMatterId (\ s a -> s{_mMatterId = a})
@@ -1278,7 +1697,7 @@ mMatterId
 mName :: Lens' Matter (Maybe Text)
 mName = lens _mName (\ s a -> s{_mName = a})
 
--- | The description of the matter.
+-- | An optional description for the matter.
 mDescription :: Lens' Matter (Maybe Text)
 mDescription
   = lens _mDescription (\ s a -> s{_mDescription = a})
@@ -1324,7 +1743,7 @@ closeMatterResponse
 closeMatterResponse = CloseMatterResponse' {_cmrMatter = Nothing}
 
 
--- | The updated matter, with state CLOSED.
+-- | The updated matter, with state **CLOSED**.
 cmrMatter :: Lens' CloseMatterResponse (Maybe Matter)
 cmrMatter
   = lens _cmrMatter (\ s a -> s{_cmrMatter = a})
@@ -1338,14 +1757,14 @@ instance ToJSON CloseMatterResponse where
         toJSON CloseMatterResponse'{..}
           = object (catMaybes [("matter" .=) <$> _cmrMatter])
 
--- | Query options for mail holds.
+-- | Query options for Gmail holds.
 --
 -- /See:/ 'heldMailQuery' smart constructor.
 data HeldMailQuery =
   HeldMailQuery'
     { _hmqStartTime :: !(Maybe DateTime')
-    , _hmqTerms     :: !(Maybe Text)
-    , _hmqEndTime   :: !(Maybe DateTime')
+    , _hmqTerms :: !(Maybe Text)
+    , _hmqEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1366,19 +1785,21 @@ heldMailQuery =
     {_hmqStartTime = Nothing, _hmqTerms = Nothing, _hmqEndTime = Nothing}
 
 
--- | The start time range for the search query. These timestamps are in GMT
--- and rounded down to the start of the given date.
+-- | The start time for the query. Specify in GMT. The value is rounded to 12
+-- AM on the specified date.
 hmqStartTime :: Lens' HeldMailQuery (Maybe UTCTime)
 hmqStartTime
   = lens _hmqStartTime (\ s a -> s{_hmqStartTime = a})
       . mapping _DateTime
 
--- | The search terms for the hold.
+-- | The [search
+-- operators](https:\/\/support.google.com\/vault\/answer\/2474474) used to
+-- refine the messages covered by the hold.
 hmqTerms :: Lens' HeldMailQuery (Maybe Text)
 hmqTerms = lens _hmqTerms (\ s a -> s{_hmqTerms = a})
 
--- | The end time range for the search query. These timestamps are in GMT and
--- rounded down to the start of the given date.
+-- | The end time for the query. Specify in GMT. The value is rounded to 12
+-- AM on the specified date.
 hmqEndTime :: Lens' HeldMailQuery (Maybe UTCTime)
 hmqEndTime
   = lens _hmqEndTime (\ s a -> s{_hmqEndTime = a}) .
@@ -1400,7 +1821,7 @@ instance ToJSON HeldMailQuery where
                   ("terms" .=) <$> _hmqTerms,
                   ("endTime" .=) <$> _hmqEndTime])
 
--- | Returns a list of held accounts for a hold.
+-- | Returns a list of the accounts covered by a hold.
 --
 -- /See:/ 'listHeldAccountsResponse' smart constructor.
 newtype ListHeldAccountsResponse =
@@ -1439,13 +1860,13 @@ instance ToJSON ListHeldAccountsResponse where
           = object
               (catMaybes [("accounts" .=) <$> _lharAccounts])
 
--- | The holds for a matter.
+-- | The exports for a matter.
 --
 -- /See:/ 'listExportsResponse' smart constructor.
 data ListExportsResponse =
   ListExportsResponse'
     { _lerNextPageToken :: !(Maybe Text)
-    , _lerExports       :: !(Maybe [Export])
+    , _lerExports :: !(Maybe [Export])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1491,13 +1912,51 @@ instance ToJSON ListExportsResponse where
                  [("nextPageToken" .=) <$> _lerNextPageToken,
                   ("exports" .=) <$> _lerExports])
 
--- | A organizational unit being held in a particular hold. This structure is
--- immutable.
+-- | Additional options for Voice search
+--
+-- /See:/ 'voiceOptions' smart constructor.
+newtype VoiceOptions =
+  VoiceOptions'
+    { _voCoveredData :: Maybe [VoiceOptionsCoveredDataItem]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VoiceOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'voCoveredData'
+voiceOptions
+    :: VoiceOptions
+voiceOptions = VoiceOptions' {_voCoveredData = Nothing}
+
+
+-- | Datatypes to search
+voCoveredData :: Lens' VoiceOptions [VoiceOptionsCoveredDataItem]
+voCoveredData
+  = lens _voCoveredData
+      (\ s a -> s{_voCoveredData = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON VoiceOptions where
+        parseJSON
+          = withObject "VoiceOptions"
+              (\ o ->
+                 VoiceOptions' <$> (o .:? "coveredData" .!= mempty))
+
+instance ToJSON VoiceOptions where
+        toJSON VoiceOptions'{..}
+          = object
+              (catMaybes [("coveredData" .=) <$> _voCoveredData])
+
+-- | The organizational unit covered by a hold. This structure is immutable.
 --
 -- /See:/ 'heldOrgUnit' smart constructor.
 data HeldOrgUnit =
   HeldOrgUnit'
-    { _houHoldTime  :: !(Maybe DateTime')
+    { _houHoldTime :: !(Maybe DateTime')
     , _houOrgUnitId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1515,13 +1974,15 @@ heldOrgUnit
 heldOrgUnit = HeldOrgUnit' {_houHoldTime = Nothing, _houOrgUnitId = Nothing}
 
 
--- | When the org unit was put on hold. This property is immutable.
+-- | When the organizational unit was put on hold. This property is
+-- immutable.
 houHoldTime :: Lens' HeldOrgUnit (Maybe UTCTime)
 houHoldTime
   = lens _houHoldTime (\ s a -> s{_houHoldTime = a}) .
       mapping _DateTime
 
--- | The org unit\'s immutable ID as provided by the Admin SDK.
+-- | The organizational unit\'s immutable ID as provided by the [Admin
+-- SDK](https:\/\/developers.google.com\/admin-sdk\/).
 houOrgUnitId :: Lens' HeldOrgUnit (Maybe Text)
 houOrgUnitId
   = lens _houOrgUnitId (\ s a -> s{_houOrgUnitId = a})
@@ -1546,7 +2007,7 @@ instance ToJSON HeldOrgUnit where
 data ListMattersResponse =
   ListMattersResponse'
     { _lmrNextPageToken :: !(Maybe Text)
-    , _lmrMatters       :: !(Maybe [Matter])
+    , _lmrMatters :: !(Maybe [Matter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1615,6 +2076,46 @@ instance FromJSON ReopenMatterRequest where
 instance ToJSON ReopenMatterRequest where
         toJSON = const emptyObject
 
+-- | Options for Voice holds.
+--
+-- /See:/ 'heldVoiceQuery' smart constructor.
+newtype HeldVoiceQuery =
+  HeldVoiceQuery'
+    { _hvqCoveredData :: Maybe [HeldVoiceQueryCoveredDataItem]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HeldVoiceQuery' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hvqCoveredData'
+heldVoiceQuery
+    :: HeldVoiceQuery
+heldVoiceQuery = HeldVoiceQuery' {_hvqCoveredData = Nothing}
+
+
+-- | A list of data types covered by the hold. Should be non-empty. Order
+-- does not matter and duplicates are ignored.
+hvqCoveredData :: Lens' HeldVoiceQuery [HeldVoiceQueryCoveredDataItem]
+hvqCoveredData
+  = lens _hvqCoveredData
+      (\ s a -> s{_hvqCoveredData = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON HeldVoiceQuery where
+        parseJSON
+          = withObject "HeldVoiceQuery"
+              (\ o ->
+                 HeldVoiceQuery' <$> (o .:? "coveredData" .!= mempty))
+
+instance ToJSON HeldVoiceQuery where
+        toJSON HeldVoiceQuery'{..}
+          = object
+              (catMaybes [("coveredData" .=) <$> _hvqCoveredData])
+
 -- | Remove an account as a matter collaborator.
 --
 -- /See:/ 'removeMatterPermissionsRequest' smart constructor.
@@ -1655,16 +2156,17 @@ instance ToJSON RemoveMatterPermissionsRequest where
           = object
               (catMaybes [("accountId" .=) <$> _rmprAccountId])
 
--- | Export advanced options
+-- | Additional options for exports
 --
 -- /See:/ 'exportOptions' smart constructor.
 data ExportOptions =
   ExportOptions'
     { _eoHangoutsChatOptions :: !(Maybe HangoutsChatExportOptions)
-    , _eoDriveOptions        :: !(Maybe DriveExportOptions)
-    , _eoGroupsOptions       :: !(Maybe GroupsExportOptions)
-    , _eoRegion              :: !(Maybe ExportOptionsRegion)
-    , _eoMailOptions         :: !(Maybe MailExportOptions)
+    , _eoVoiceOptions :: !(Maybe VoiceExportOptions)
+    , _eoDriveOptions :: !(Maybe DriveExportOptions)
+    , _eoGroupsOptions :: !(Maybe GroupsExportOptions)
+    , _eoRegion :: !(Maybe ExportOptionsRegion)
+    , _eoMailOptions :: !(Maybe MailExportOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1674,6 +2176,8 @@ data ExportOptions =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'eoHangoutsChatOptions'
+--
+-- * 'eoVoiceOptions'
 --
 -- * 'eoDriveOptions'
 --
@@ -1687,6 +2191,7 @@ exportOptions
 exportOptions =
   ExportOptions'
     { _eoHangoutsChatOptions = Nothing
+    , _eoVoiceOptions = Nothing
     , _eoDriveOptions = Nothing
     , _eoGroupsOptions = Nothing
     , _eoRegion = Nothing
@@ -1694,29 +2199,35 @@ exportOptions =
     }
 
 
--- | Option available for hangouts chat export.
+-- | Options for Chat exports.
 eoHangoutsChatOptions :: Lens' ExportOptions (Maybe HangoutsChatExportOptions)
 eoHangoutsChatOptions
   = lens _eoHangoutsChatOptions
       (\ s a -> s{_eoHangoutsChatOptions = a})
 
--- | Option available for Drive export.
+-- | Options for Voice exports.
+eoVoiceOptions :: Lens' ExportOptions (Maybe VoiceExportOptions)
+eoVoiceOptions
+  = lens _eoVoiceOptions
+      (\ s a -> s{_eoVoiceOptions = a})
+
+-- | Options for Drive exports.
 eoDriveOptions :: Lens' ExportOptions (Maybe DriveExportOptions)
 eoDriveOptions
   = lens _eoDriveOptions
       (\ s a -> s{_eoDriveOptions = a})
 
--- | Option available for groups export.
+-- | Options for Groups exports.
 eoGroupsOptions :: Lens' ExportOptions (Maybe GroupsExportOptions)
 eoGroupsOptions
   = lens _eoGroupsOptions
       (\ s a -> s{_eoGroupsOptions = a})
 
--- | The requested export location.
+-- | The requested data region for the export.
 eoRegion :: Lens' ExportOptions (Maybe ExportOptionsRegion)
 eoRegion = lens _eoRegion (\ s a -> s{_eoRegion = a})
 
--- | Option available for mail export.
+-- | Options for Gmail exports.
 eoMailOptions :: Lens' ExportOptions (Maybe MailExportOptions)
 eoMailOptions
   = lens _eoMailOptions
@@ -1728,7 +2239,8 @@ instance FromJSON ExportOptions where
               (\ o ->
                  ExportOptions' <$>
                    (o .:? "hangoutsChatOptions") <*>
-                     (o .:? "driveOptions")
+                     (o .:? "voiceOptions")
+                     <*> (o .:? "driveOptions")
                      <*> (o .:? "groupsOptions")
                      <*> (o .:? "region")
                      <*> (o .:? "mailOptions"))
@@ -1739,6 +2251,7 @@ instance ToJSON ExportOptions where
               (catMaybes
                  [("hangoutsChatOptions" .=) <$>
                     _eoHangoutsChatOptions,
+                  ("voiceOptions" .=) <$> _eoVoiceOptions,
                   ("driveOptions" .=) <$> _eoDriveOptions,
                   ("groupsOptions" .=) <$> _eoGroupsOptions,
                   ("region" .=) <$> _eoRegion,
@@ -1767,13 +2280,14 @@ instance FromJSON CloseMatterRequest where
 instance ToJSON CloseMatterRequest where
         toJSON = const emptyObject
 
--- | Drive search advanced options
+-- | Additional options for Drive search
 --
 -- /See:/ 'driveOptions' smart constructor.
 data DriveOptions =
   DriveOptions'
-    { _doIncludeTeamDrives :: !(Maybe Bool)
-    , _doVersionDate       :: !(Maybe DateTime')
+    { _doIncludeSharedDrives :: !(Maybe Bool)
+    , _doIncludeTeamDrives :: !(Maybe Bool)
+    , _doVersionDate :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1782,14 +2296,26 @@ data DriveOptions =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'doIncludeSharedDrives'
+--
 -- * 'doIncludeTeamDrives'
 --
 -- * 'doVersionDate'
 driveOptions
     :: DriveOptions
 driveOptions =
-  DriveOptions' {_doIncludeTeamDrives = Nothing, _doVersionDate = Nothing}
+  DriveOptions'
+    { _doIncludeSharedDrives = Nothing
+    , _doIncludeTeamDrives = Nothing
+    , _doVersionDate = Nothing
+    }
 
+
+-- | Set to **true** to include shared drives.
+doIncludeSharedDrives :: Lens' DriveOptions (Maybe Bool)
+doIncludeSharedDrives
+  = lens _doIncludeSharedDrives
+      (\ s a -> s{_doIncludeSharedDrives = a})
 
 -- | Set to true to include Team Drive.
 doIncludeTeamDrives :: Lens' DriveOptions (Maybe Bool)
@@ -1797,8 +2323,9 @@ doIncludeTeamDrives
   = lens _doIncludeTeamDrives
       (\ s a -> s{_doIncludeTeamDrives = a})
 
--- | Search the versions of the Drive file as of the reference date. These
--- timestamps are in GMT and rounded down to the given date.
+-- | Search the current version of the Drive file, but export the contents of
+-- the last version saved before 12:00 AM UTC on the specified date. Enter
+-- the date in UTC.
 doVersionDate :: Lens' DriveOptions (Maybe UTCTime)
 doVersionDate
   = lens _doVersionDate
@@ -1810,23 +2337,26 @@ instance FromJSON DriveOptions where
           = withObject "DriveOptions"
               (\ o ->
                  DriveOptions' <$>
-                   (o .:? "includeTeamDrives") <*>
-                     (o .:? "versionDate"))
+                   (o .:? "includeSharedDrives") <*>
+                     (o .:? "includeTeamDrives")
+                     <*> (o .:? "versionDate"))
 
 instance ToJSON DriveOptions where
         toJSON DriveOptions'{..}
           = object
               (catMaybes
-                 [("includeTeamDrives" .=) <$> _doIncludeTeamDrives,
+                 [("includeSharedDrives" .=) <$>
+                    _doIncludeSharedDrives,
+                  ("includeTeamDrives" .=) <$> _doIncludeTeamDrives,
                   ("versionDate" .=) <$> _doVersionDate])
 
--- | A status detailing the status of each account creation, and the
--- HeldAccount, if successful.
+-- | The status of each account creation, and the **HeldAccount**, if
+-- successful.
 --
 -- /See:/ 'addHeldAccountResult' smart constructor.
 data AddHeldAccountResult =
   AddHeldAccountResult'
-    { _aharStatus  :: !(Maybe Status)
+    { _aharStatus :: !(Maybe Status)
     , _aharAccount :: !(Maybe HeldAccount)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1845,12 +2375,12 @@ addHeldAccountResult =
   AddHeldAccountResult' {_aharStatus = Nothing, _aharAccount = Nothing}
 
 
--- | This represents the success status. If failed, check message.
+-- | Reports the request status. If it failed, returns an error message.
 aharStatus :: Lens' AddHeldAccountResult (Maybe Status)
 aharStatus
   = lens _aharStatus (\ s a -> s{_aharStatus = a})
 
--- | If present, this account was successfully created.
+-- | Returned when the account was successfully created.
 aharAccount :: Lens' AddHeldAccountResult (Maybe HeldAccount)
 aharAccount
   = lens _aharAccount (\ s a -> s{_aharAccount = a})
@@ -1869,16 +2399,21 @@ instance ToJSON AddHeldAccountResult where
                  [("status" .=) <$> _aharStatus,
                   ("account" .=) <$> _aharAccount])
 
--- | Definition of the saved query.
+-- | The definition of a saved query. To work with Vault resources, the
+-- account must have the [required Vault
+-- privileges](https:\/\/support.google.com\/vault\/answer\/2799699) and
+-- access to the matter. To access a matter, the account must have created
+-- the matter, have the matter shared with them, or have the **View All
+-- Matters** privilege.
 --
 -- /See:/ 'savedQuery' smart constructor.
 data SavedQuery =
   SavedQuery'
     { _sqSavedQueryId :: !(Maybe Text)
-    , _sqMatterId     :: !(Maybe Text)
-    , _sqQuery        :: !(Maybe Query)
-    , _sqDisplayName  :: !(Maybe Text)
-    , _sqCreateTime   :: !(Maybe DateTime')
+    , _sqMatterId :: !(Maybe Text)
+    , _sqQuery :: !(Maybe Query)
+    , _sqDisplayName :: !(Maybe Text)
+    , _sqCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1914,24 +2449,24 @@ sqSavedQueryId
   = lens _sqSavedQueryId
       (\ s a -> s{_sqSavedQueryId = a})
 
--- | Output only. The matter id of the associated matter. The server does not
--- look at this field during create and always uses matter id in the URL.
+-- | Output only. The matter ID of the matter the saved query is saved in.
+-- The server does not use this field during create and always uses matter
+-- ID in the URL.
 sqMatterId :: Lens' SavedQuery (Maybe Text)
 sqMatterId
   = lens _sqMatterId (\ s a -> s{_sqMatterId = a})
 
--- | The underlying Query object which contains all the information of the
--- saved query.
+-- | The search parameters of the saved query.
 sqQuery :: Lens' SavedQuery (Maybe Query)
 sqQuery = lens _sqQuery (\ s a -> s{_sqQuery = a})
 
--- | Name of the saved query.
+-- | The name of the saved query.
 sqDisplayName :: Lens' SavedQuery (Maybe Text)
 sqDisplayName
   = lens _sqDisplayName
       (\ s a -> s{_sqDisplayName = a})
 
--- | Output only. The server generated timestamp at which saved query was
+-- | Output only. The server-generated timestamp when the saved query was
 -- created.
 sqCreateTime :: Lens' SavedQuery (Maybe UTCTime)
 sqCreateTime
@@ -1958,21 +2493,24 @@ instance ToJSON SavedQuery where
                   ("displayName" .=) <$> _sqDisplayName,
                   ("createTime" .=) <$> _sqCreateTime])
 
--- | Represents a hold within Vault. A hold restricts purging of artifacts
--- based on the combination of the query and accounts restrictions. A hold
--- can be configured to either apply to an explicitly configured set of
--- accounts, or can be applied to all members of an organizational unit.
+-- | A hold. A hold prevents the specified Google Workspace service from
+-- purging data for specific accounts or all members of an organizational
+-- unit. To work with Vault resources, the account must have the [required
+-- Vault privileges] (https:\/\/support.google.com\/vault\/answer\/2799699)
+-- and access to the matter. To access a matter, the account must have
+-- created the matter, have the matter shared with them, or have the **View
+-- All Matters** privilege.
 --
 -- /See:/ 'hold' smart constructor.
 data Hold =
   Hold'
-    { _hOrgUnit    :: !(Maybe HeldOrgUnit)
-    , _hHoldId     :: !(Maybe Text)
-    , _hAccounts   :: !(Maybe [HeldAccount])
+    { _hOrgUnit :: !(Maybe HeldOrgUnit)
+    , _hHoldId :: !(Maybe Text)
+    , _hAccounts :: !(Maybe [HeldAccount])
     , _hUpdateTime :: !(Maybe DateTime')
-    , _hName       :: !(Maybe Text)
-    , _hQuery      :: !(Maybe CorpusQuery)
-    , _hCorpus     :: !(Maybe HoldCorpus)
+    , _hName :: !(Maybe Text)
+    , _hQuery :: !(Maybe CorpusQuery)
+    , _hCorpus :: !(Maybe HoldCorpus)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2009,8 +2547,8 @@ hold =
 
 
 -- | If set, the hold applies to all members of the organizational unit and
--- accounts must be empty. This property is mutable. For groups holds, set
--- the accounts field.
+-- **accounts** must be empty. This property is mutable. For Groups holds,
+-- set **accounts**.
 hOrgUnit :: Lens' Hold (Maybe HeldOrgUnit)
 hOrgUnit = lens _hOrgUnit (\ s a -> s{_hOrgUnit = a})
 
@@ -2018,8 +2556,8 @@ hOrgUnit = lens _hOrgUnit (\ s a -> s{_hOrgUnit = a})
 hHoldId :: Lens' Hold (Maybe Text)
 hHoldId = lens _hHoldId (\ s a -> s{_hHoldId = a})
 
--- | If set, the hold applies to the enumerated accounts and org_unit must be
--- empty.
+-- | If set, the hold applies to the specified accounts and **orgUnit** must
+-- be empty.
 hAccounts :: Lens' Hold [HeldAccount]
 hAccounts
   = lens _hAccounts (\ s a -> s{_hAccounts = a}) .
@@ -2036,12 +2574,12 @@ hUpdateTime
 hName :: Lens' Hold (Maybe Text)
 hName = lens _hName (\ s a -> s{_hName = a})
 
--- | The corpus-specific query. If set, the corpusQuery must match corpus
--- type.
+-- | Service-specific options. If set, **CorpusQuery** must match
+-- **CorpusType**.
 hQuery :: Lens' Hold (Maybe CorpusQuery)
 hQuery = lens _hQuery (\ s a -> s{_hQuery = a})
 
--- | The corpus to be searched.
+-- | The service to be searched.
 hCorpus :: Lens' Hold (Maybe HoldCorpus)
 hCorpus = lens _hCorpus (\ s a -> s{_hCorpus = a})
 
@@ -2068,25 +2606,28 @@ instance ToJSON Hold where
                   ("name" .=) <$> _hName, ("query" .=) <$> _hQuery,
                   ("corpus" .=) <$> _hCorpus])
 
--- | A query definition relevant for search & export.
+-- | The query definition used for search and export.
 --
 -- /See:/ 'query' smart constructor.
 data Query =
   Query'
-    { _qAccountInfo         :: !(Maybe AccountInfo)
-    , _qTeamDriveInfo       :: !(Maybe TeamDriveInfo)
-    , _qOrgUnitInfo         :: !(Maybe OrgUnitInfo)
-    , _qStartTime           :: !(Maybe DateTime')
-    , _qTerms               :: !(Maybe Text)
-    , _qHangoutsChatInfo    :: !(Maybe HangoutsChatInfo)
+    { _qAccountInfo :: !(Maybe AccountInfo)
+    , _qTeamDriveInfo :: !(Maybe TeamDriveInfo)
+    , _qOrgUnitInfo :: !(Maybe OrgUnitInfo)
+    , _qStartTime :: !(Maybe DateTime')
+    , _qTerms :: !(Maybe Text)
+    , _qHangoutsChatInfo :: !(Maybe HangoutsChatInfo)
     , _qHangoutsChatOptions :: !(Maybe HangoutsChatOptions)
-    , _qDriveOptions        :: !(Maybe DriveOptions)
-    , _qEndTime             :: !(Maybe DateTime')
-    , _qDataScope           :: !(Maybe QueryDataScope)
-    , _qCorpus              :: !(Maybe QueryCorpus)
-    , _qTimeZone            :: !(Maybe Text)
-    , _qMailOptions         :: !(Maybe MailOptions)
-    , _qSearchMethod        :: !(Maybe QuerySearchMethod)
+    , _qVoiceOptions :: !(Maybe VoiceOptions)
+    , _qDriveOptions :: !(Maybe DriveOptions)
+    , _qMethod :: !(Maybe QueryMethod)
+    , _qEndTime :: !(Maybe DateTime')
+    , _qDataScope :: !(Maybe QueryDataScope)
+    , _qCorpus :: !(Maybe QueryCorpus)
+    , _qTimeZone :: !(Maybe Text)
+    , _qSharedDriveInfo :: !(Maybe SharedDriveInfo)
+    , _qMailOptions :: !(Maybe MailOptions)
+    , _qSearchMethod :: !(Maybe QuerySearchMethod)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2109,7 +2650,11 @@ data Query =
 --
 -- * 'qHangoutsChatOptions'
 --
+-- * 'qVoiceOptions'
+--
 -- * 'qDriveOptions'
+--
+-- * 'qMethod'
 --
 -- * 'qEndTime'
 --
@@ -2118,6 +2663,8 @@ data Query =
 -- * 'qCorpus'
 --
 -- * 'qTimeZone'
+--
+-- * 'qSharedDriveInfo'
 --
 -- * 'qMailOptions'
 --
@@ -2133,92 +2680,110 @@ query =
     , _qTerms = Nothing
     , _qHangoutsChatInfo = Nothing
     , _qHangoutsChatOptions = Nothing
+    , _qVoiceOptions = Nothing
     , _qDriveOptions = Nothing
+    , _qMethod = Nothing
     , _qEndTime = Nothing
     , _qDataScope = Nothing
     , _qCorpus = Nothing
     , _qTimeZone = Nothing
+    , _qSharedDriveInfo = Nothing
     , _qMailOptions = Nothing
     , _qSearchMethod = Nothing
     }
 
 
--- | When \'ACCOUNT\' is chosen as search method, account_info needs to be
--- specified.
+-- | Required when **SearchMethod** is **ACCOUNT**.
 qAccountInfo :: Lens' Query (Maybe AccountInfo)
 qAccountInfo
   = lens _qAccountInfo (\ s a -> s{_qAccountInfo = a})
 
--- | When \'TEAM_DRIVE\' is chosen as search method, team_drive_info needs to
--- be specified.
+-- | Required when **SearchMethod** is **TEAM_DRIVE**.
 qTeamDriveInfo :: Lens' Query (Maybe TeamDriveInfo)
 qTeamDriveInfo
   = lens _qTeamDriveInfo
       (\ s a -> s{_qTeamDriveInfo = a})
 
--- | When \'ORG_UNIT\' is chosen as as search method, org_unit_info needs to
--- be specified.
+-- | Required when **SearchMethod** is **ORG_UNIT**.
 qOrgUnitInfo :: Lens' Query (Maybe OrgUnitInfo)
 qOrgUnitInfo
   = lens _qOrgUnitInfo (\ s a -> s{_qOrgUnitInfo = a})
 
--- | The start time range for the search query. These timestamps are in GMT
--- and rounded down to the start of the given date.
+-- | The start time for the search query. Specify in GMT. The value is
+-- rounded to 12 AM on the specified date.
 qStartTime :: Lens' Query (Maybe UTCTime)
 qStartTime
   = lens _qStartTime (\ s a -> s{_qStartTime = a}) .
       mapping _DateTime
 
--- | The corpus-specific
--- <https://support.google.com/vault/answer/2474474 search operators> used
--- to generate search results.
+-- | Service-specific [search
+-- operators](https:\/\/support.google.com\/vault\/answer\/2474474) to
+-- filter search results.
 qTerms :: Lens' Query (Maybe Text)
 qTerms = lens _qTerms (\ s a -> s{_qTerms = a})
 
--- | When \'ROOM\' is chosen as search method, hangout_chats_info needs to be
--- specified. (read-only)
+-- | Required when **SearchMethod** is **ROOM**. (read-only)
 qHangoutsChatInfo :: Lens' Query (Maybe HangoutsChatInfo)
 qHangoutsChatInfo
   = lens _qHangoutsChatInfo
       (\ s a -> s{_qHangoutsChatInfo = a})
 
--- | For hangouts chat search, specify more options in this field.
--- (read-only)
+-- | Set Chat search-specific options. (read-only)
 qHangoutsChatOptions :: Lens' Query (Maybe HangoutsChatOptions)
 qHangoutsChatOptions
   = lens _qHangoutsChatOptions
       (\ s a -> s{_qHangoutsChatOptions = a})
 
--- | For Drive search, specify more options in this field.
+-- | Set Voice search-specific options.
+qVoiceOptions :: Lens' Query (Maybe VoiceOptions)
+qVoiceOptions
+  = lens _qVoiceOptions
+      (\ s a -> s{_qVoiceOptions = a})
+
+-- | Set Drive search-specific options.
 qDriveOptions :: Lens' Query (Maybe DriveOptions)
 qDriveOptions
   = lens _qDriveOptions
       (\ s a -> s{_qDriveOptions = a})
 
--- | The end time range for the search query. These timestamps are in GMT and
--- rounded down to the start of the given date.
+-- | The entity to search. This field replaces **searchMethod** to support
+-- shared drives. When **searchMethod** is **TEAM_DRIVE**, the response of
+-- this field is **SHARED_DRIVE**.
+qMethod :: Lens' Query (Maybe QueryMethod)
+qMethod = lens _qMethod (\ s a -> s{_qMethod = a})
+
+-- | The end time for the search query. Specify in GMT. The value is rounded
+-- to 12 AM on the specified date.
 qEndTime :: Lens' Query (Maybe UTCTime)
 qEndTime
   = lens _qEndTime (\ s a -> s{_qEndTime = a}) .
       mapping _DateTime
 
--- | The data source to search from.
+-- | The data source to search.
 qDataScope :: Lens' Query (Maybe QueryDataScope)
 qDataScope
   = lens _qDataScope (\ s a -> s{_qDataScope = a})
 
--- | The corpus to search.
+-- | The Google Workspace service to search.
 qCorpus :: Lens' Query (Maybe QueryCorpus)
 qCorpus = lens _qCorpus (\ s a -> s{_qCorpus = a})
 
 -- | The time zone name. It should be an IANA TZ name, such as
--- \"America\/Los_Angeles\". For more information, see
--- <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones Time Zone>.
+-- \"America\/Los_Angeles\". For a list of time zone names, see [Time
+-- Zone](https:\/\/en.wikipedia.org\/wiki\/List_of_tz_database_time_zones).
+-- For more information about how Vault uses time zones, see [the Vault
+-- help center](https:\/\/support.google.com\/vault\/answer\/6092995#time).
 qTimeZone :: Lens' Query (Maybe Text)
 qTimeZone
   = lens _qTimeZone (\ s a -> s{_qTimeZone = a})
 
--- | For mail search, specify more options in this field.
+-- | Required when **SearchMethod** is **SHARED_DRIVE**.
+qSharedDriveInfo :: Lens' Query (Maybe SharedDriveInfo)
+qSharedDriveInfo
+  = lens _qSharedDriveInfo
+      (\ s a -> s{_qSharedDriveInfo = a})
+
+-- | Set Gmail search-specific options.
 qMailOptions :: Lens' Query (Maybe MailOptions)
 qMailOptions
   = lens _qMailOptions (\ s a -> s{_qMailOptions = a})
@@ -2240,11 +2805,14 @@ instance FromJSON Query where
                      <*> (o .:? "terms")
                      <*> (o .:? "hangoutsChatInfo")
                      <*> (o .:? "hangoutsChatOptions")
+                     <*> (o .:? "voiceOptions")
                      <*> (o .:? "driveOptions")
+                     <*> (o .:? "method")
                      <*> (o .:? "endTime")
                      <*> (o .:? "dataScope")
                      <*> (o .:? "corpus")
                      <*> (o .:? "timeZone")
+                     <*> (o .:? "sharedDriveInfo")
                      <*> (o .:? "mailOptions")
                      <*> (o .:? "searchMethod"))
 
@@ -2259,13 +2827,150 @@ instance ToJSON Query where
                   ("terms" .=) <$> _qTerms,
                   ("hangoutsChatInfo" .=) <$> _qHangoutsChatInfo,
                   ("hangoutsChatOptions" .=) <$> _qHangoutsChatOptions,
+                  ("voiceOptions" .=) <$> _qVoiceOptions,
                   ("driveOptions" .=) <$> _qDriveOptions,
+                  ("method" .=) <$> _qMethod,
                   ("endTime" .=) <$> _qEndTime,
                   ("dataScope" .=) <$> _qDataScope,
                   ("corpus" .=) <$> _qCorpus,
                   ("timeZone" .=) <$> _qTimeZone,
+                  ("sharedDriveInfo" .=) <$> _qSharedDriveInfo,
                   ("mailOptions" .=) <$> _qMailOptions,
                   ("searchMethod" .=) <$> _qSearchMethod])
+
+-- | An error that occurred when querying a specific account
+--
+-- /See:/ 'accountCountError' smart constructor.
+data AccountCountError =
+  AccountCountError'
+    { _aceAccount :: !(Maybe UserInfo)
+    , _aceErrorType :: !(Maybe AccountCountErrorErrorType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AccountCountError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aceAccount'
+--
+-- * 'aceErrorType'
+accountCountError
+    :: AccountCountError
+accountCountError =
+  AccountCountError' {_aceAccount = Nothing, _aceErrorType = Nothing}
+
+
+-- | Account owner.
+aceAccount :: Lens' AccountCountError (Maybe UserInfo)
+aceAccount
+  = lens _aceAccount (\ s a -> s{_aceAccount = a})
+
+-- | Account query error.
+aceErrorType :: Lens' AccountCountError (Maybe AccountCountErrorErrorType)
+aceErrorType
+  = lens _aceErrorType (\ s a -> s{_aceErrorType = a})
+
+instance FromJSON AccountCountError where
+        parseJSON
+          = withObject "AccountCountError"
+              (\ o ->
+                 AccountCountError' <$>
+                   (o .:? "account") <*> (o .:? "errorType"))
+
+instance ToJSON AccountCountError where
+        toJSON AccountCountError'{..}
+          = object
+              (catMaybes
+                 [("account" .=) <$> _aceAccount,
+                  ("errorType" .=) <$> _aceErrorType])
+
+-- | The results count for each account.
+--
+-- /See:/ 'accountCount' smart constructor.
+data AccountCount =
+  AccountCount'
+    { _acCount :: !(Maybe (Textual Int64))
+    , _acAccount :: !(Maybe UserInfo)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AccountCount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acCount'
+--
+-- * 'acAccount'
+accountCount
+    :: AccountCount
+accountCount = AccountCount' {_acCount = Nothing, _acAccount = Nothing}
+
+
+-- | The number of results (messages or files) found for this account.
+acCount :: Lens' AccountCount (Maybe Int64)
+acCount
+  = lens _acCount (\ s a -> s{_acCount = a}) .
+      mapping _Coerce
+
+-- | Account owner.
+acAccount :: Lens' AccountCount (Maybe UserInfo)
+acAccount
+  = lens _acAccount (\ s a -> s{_acAccount = a})
+
+instance FromJSON AccountCount where
+        parseJSON
+          = withObject "AccountCount"
+              (\ o ->
+                 AccountCount' <$>
+                   (o .:? "count") <*> (o .:? "account"))
+
+instance ToJSON AccountCount where
+        toJSON AccountCount'{..}
+          = object
+              (catMaybes
+                 [("count" .=) <$> _acCount,
+                  ("account" .=) <$> _acAccount])
+
+-- | The options for Voice exports.
+--
+-- /See:/ 'voiceExportOptions' smart constructor.
+newtype VoiceExportOptions =
+  VoiceExportOptions'
+    { _veoExportFormat :: Maybe VoiceExportOptionsExportFormat
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'VoiceExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'veoExportFormat'
+voiceExportOptions
+    :: VoiceExportOptions
+voiceExportOptions = VoiceExportOptions' {_veoExportFormat = Nothing}
+
+
+-- | The file format for exported text messages.
+veoExportFormat :: Lens' VoiceExportOptions (Maybe VoiceExportOptionsExportFormat)
+veoExportFormat
+  = lens _veoExportFormat
+      (\ s a -> s{_veoExportFormat = a})
+
+instance FromJSON VoiceExportOptions where
+        parseJSON
+          = withObject "VoiceExportOptions"
+              (\ o ->
+                 VoiceExportOptions' <$> (o .:? "exportFormat"))
+
+instance ToJSON VoiceExportOptions where
+        toJSON VoiceExportOptions'{..}
+          = object
+              (catMaybes
+                 [("exportFormat" .=) <$> _veoExportFormat])
 
 -- | Response for batch create held accounts.
 --
@@ -2307,12 +3012,12 @@ instance ToJSON AddHeldAccountsResponse where
           = object
               (catMaybes [("responses" .=) <$> _aharResponses])
 
--- | The options for mail export.
+-- | Options for Gmail exports.
 --
 -- /See:/ 'mailExportOptions' smart constructor.
 data MailExportOptions =
   MailExportOptions'
-    { _meoExportFormat                :: !(Maybe MailExportOptionsExportFormat)
+    { _meoExportFormat :: !(Maybe MailExportOptionsExportFormat)
     , _meoShowConfidentialModeContent :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2332,13 +3037,13 @@ mailExportOptions =
     {_meoExportFormat = Nothing, _meoShowConfidentialModeContent = Nothing}
 
 
--- | The export file format.
+-- | The file format for exported messages.
 meoExportFormat :: Lens' MailExportOptions (Maybe MailExportOptionsExportFormat)
 meoExportFormat
   = lens _meoExportFormat
       (\ s a -> s{_meoExportFormat = a})
 
--- | Set to true to export confidential mode content.
+-- | To export confidential mode content, set to **true**.
 meoShowConfidentialModeContent :: Lens' MailExportOptions (Maybe Bool)
 meoShowConfidentialModeContent
   = lens _meoShowConfidentialModeContent
@@ -2360,13 +3065,80 @@ instance ToJSON MailExportOptions where
                   ("showConfidentialModeContent" .=) <$>
                     _meoShowConfidentialModeContent])
 
+-- | Definition of the response for method CountArtifacts.
+--
+-- /See:/ 'countArtifactsResponse' smart constructor.
+data CountArtifactsResponse =
+  CountArtifactsResponse'
+    { _carMailCountResult :: !(Maybe MailCountResult)
+    , _carGroupsCountResult :: !(Maybe GroupsCountResult)
+    , _carTotalCount :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CountArtifactsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'carMailCountResult'
+--
+-- * 'carGroupsCountResult'
+--
+-- * 'carTotalCount'
+countArtifactsResponse
+    :: CountArtifactsResponse
+countArtifactsResponse =
+  CountArtifactsResponse'
+    { _carMailCountResult = Nothing
+    , _carGroupsCountResult = Nothing
+    , _carTotalCount = Nothing
+    }
+
+
+-- | Count metrics for Gmail and classic Hangouts.
+carMailCountResult :: Lens' CountArtifactsResponse (Maybe MailCountResult)
+carMailCountResult
+  = lens _carMailCountResult
+      (\ s a -> s{_carMailCountResult = a})
+
+-- | Count metrics for Groups.
+carGroupsCountResult :: Lens' CountArtifactsResponse (Maybe GroupsCountResult)
+carGroupsCountResult
+  = lens _carGroupsCountResult
+      (\ s a -> s{_carGroupsCountResult = a})
+
+-- | Total count of messages.
+carTotalCount :: Lens' CountArtifactsResponse (Maybe Int64)
+carTotalCount
+  = lens _carTotalCount
+      (\ s a -> s{_carTotalCount = a})
+      . mapping _Coerce
+
+instance FromJSON CountArtifactsResponse where
+        parseJSON
+          = withObject "CountArtifactsResponse"
+              (\ o ->
+                 CountArtifactsResponse' <$>
+                   (o .:? "mailCountResult") <*>
+                     (o .:? "groupsCountResult")
+                     <*> (o .:? "totalCount"))
+
+instance ToJSON CountArtifactsResponse where
+        toJSON CountArtifactsResponse'{..}
+          = object
+              (catMaybes
+                 [("mailCountResult" .=) <$> _carMailCountResult,
+                  ("groupsCountResult" .=) <$> _carGroupsCountResult,
+                  ("totalCount" .=) <$> _carTotalCount])
+
 -- | The holds for a matter.
 --
 -- /See:/ 'listHoldsResponse' smart constructor.
 data ListHoldsResponse =
   ListHoldsResponse'
     { _lhrNextPageToken :: !(Maybe Text)
-    , _lhrHolds         :: !(Maybe [Hold])
+    , _lhrHolds :: !(Maybe [Hold])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2413,7 +3185,7 @@ instance ToJSON ListHoldsResponse where
                  [("nextPageToken" .=) <$> _lhrNextPageToken,
                   ("holds" .=) <$> _lhrHolds])
 
--- | The options for groups export.
+-- | Options for Groups exports.
 --
 -- /See:/ 'groupsExportOptions' smart constructor.
 newtype GroupsExportOptions =
@@ -2433,7 +3205,7 @@ groupsExportOptions
 groupsExportOptions = GroupsExportOptions' {_geoExportFormat = Nothing}
 
 
--- | The export format for groups export.
+-- | The file format for exported messages.
 geoExportFormat :: Lens' GroupsExportOptions (Maybe GroupsExportOptionsExportFormat)
 geoExportFormat
   = lens _geoExportFormat
@@ -2451,14 +3223,15 @@ instance ToJSON GroupsExportOptions where
               (catMaybes
                  [("exportFormat" .=) <$> _geoExportFormat])
 
--- | Currently each matter only has one owner, and all others are
--- collaborators. When an account is purged, its corresponding
--- MatterPermission resources cease to exist.
+-- | Users can be matter owners or collaborators. Each matter has only one
+-- owner. All others users who can access the matter are collaborators.
+-- When an account is purged, its corresponding MatterPermission resources
+-- cease to exist.
 --
 -- /See:/ 'matterPermission' smart constructor.
 data MatterPermission =
   MatterPermission'
-    { _mpRole      :: !(Maybe MatterPermissionRole)
+    { _mpRole :: !(Maybe MatterPermissionRole)
     , _mpAccountId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2476,12 +3249,12 @@ matterPermission
 matterPermission = MatterPermission' {_mpRole = Nothing, _mpAccountId = Nothing}
 
 
--- | The user\'s role in this matter.
+-- | The user\'s role for the matter.
 mpRole :: Lens' MatterPermission (Maybe MatterPermissionRole)
 mpRole = lens _mpRole (\ s a -> s{_mpRole = a})
 
--- | The account id, as provided by
--- <https://developers.google.com/admin-sdk/ Admin SDK>.
+-- | The account ID, as provided by the [Admin
+-- SDK](https:\/\/developers.google.com\/admin-sdk\/).
 mpAccountId :: Lens' MatterPermission (Maybe Text)
 mpAccountId
   = lens _mpAccountId (\ s a -> s{_mpAccountId = a})
@@ -2500,7 +3273,7 @@ instance ToJSON MatterPermission where
                  [("role" .=) <$> _mpRole,
                   ("accountId" .=) <$> _mpAccountId])
 
--- | The options for Drive export.
+-- | Options for Drive exports.
 --
 -- /See:/ 'driveExportOptions' smart constructor.
 newtype DriveExportOptions =
@@ -2520,9 +3293,9 @@ driveExportOptions
 driveExportOptions = DriveExportOptions' {_deoIncludeAccessInfo = Nothing}
 
 
--- | Set to true to include access level information for users with
--- <https://support.google.com/vault/answer/6099459#metadata indirect access>
--- to files.
+-- | To include access level information for users with [indirect
+-- access](https:\/\/support.google.com\/vault\/answer\/6099459#metadata)
+-- to files, set to **true**.
 deoIncludeAccessInfo :: Lens' DriveExportOptions (Maybe Bool)
 deoIncludeAccessInfo
   = lens _deoIncludeAccessInfo
@@ -2540,14 +3313,53 @@ instance ToJSON DriveExportOptions where
               (catMaybes
                  [("includeAccessInfo" .=) <$> _deoIncludeAccessInfo])
 
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'operationMetadata' smart constructor.
+newtype OperationMetadata =
+  OperationMetadata'
+    { _omAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omAddtional'
+operationMetadata
+    :: HashMap Text JSONValue -- ^ 'omAddtional'
+    -> OperationMetadata
+operationMetadata pOmAddtional_ =
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
+omAddtional
+  = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
+      _Coerce
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> OperationMetadata' <$> (parseJSONObject o))
+
+instance ToJSON OperationMetadata where
+        toJSON = toJSON . _omAddtional
+
 -- | Query options for group holds.
 --
 -- /See:/ 'heldGroupsQuery' smart constructor.
 data HeldGroupsQuery =
   HeldGroupsQuery'
     { _hgqStartTime :: !(Maybe DateTime')
-    , _hgqTerms     :: !(Maybe Text)
-    , _hgqEndTime   :: !(Maybe DateTime')
+    , _hgqTerms :: !(Maybe Text)
+    , _hgqEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2568,19 +3380,21 @@ heldGroupsQuery =
     {_hgqStartTime = Nothing, _hgqTerms = Nothing, _hgqEndTime = Nothing}
 
 
--- | The start time range for the search query. These timestamps are in GMT
--- and rounded down to the start of the given date.
+-- | The start time for the query. Specify in GMT. The value is rounded to 12
+-- AM on the specified date.
 hgqStartTime :: Lens' HeldGroupsQuery (Maybe UTCTime)
 hgqStartTime
   = lens _hgqStartTime (\ s a -> s{_hgqStartTime = a})
       . mapping _DateTime
 
--- | The search terms for the hold.
+-- | The [search
+-- operators](https:\/\/support.google.com\/vault\/answer\/2474474) used to
+-- refine the messages covered by the hold.
 hgqTerms :: Lens' HeldGroupsQuery (Maybe Text)
 hgqTerms = lens _hgqTerms (\ s a -> s{_hgqTerms = a})
 
--- | The end time range for the search query. These timestamps are in GMT and
--- rounded down to the start of the given date.
+-- | The end time for the query. Specify in GMT. The value is rounded to 12
+-- AM on the specified date.
 hgqEndTime :: Lens' HeldGroupsQuery (Maybe UTCTime)
 hgqEndTime
   = lens _hgqEndTime (\ s a -> s{_hgqEndTime = a}) .
@@ -2602,6 +3416,48 @@ instance ToJSON HeldGroupsQuery where
                   ("terms" .=) <$> _hgqTerms,
                   ("endTime" .=) <$> _hgqEndTime])
 
+-- | The shared drives to search
+--
+-- /See:/ 'sharedDriveInfo' smart constructor.
+newtype SharedDriveInfo =
+  SharedDriveInfo'
+    { _sdiSharedDriveIds :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SharedDriveInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sdiSharedDriveIds'
+sharedDriveInfo
+    :: SharedDriveInfo
+sharedDriveInfo = SharedDriveInfo' {_sdiSharedDriveIds = Nothing}
+
+
+-- | A list of shared drive IDs, as provided by the [Drive
+-- API](https:\/\/developers.google.com\/drive).
+sdiSharedDriveIds :: Lens' SharedDriveInfo [Text]
+sdiSharedDriveIds
+  = lens _sdiSharedDriveIds
+      (\ s a -> s{_sdiSharedDriveIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON SharedDriveInfo where
+        parseJSON
+          = withObject "SharedDriveInfo"
+              (\ o ->
+                 SharedDriveInfo' <$>
+                   (o .:? "sharedDriveIds" .!= mempty))
+
+instance ToJSON SharedDriveInfo where
+        toJSON SharedDriveInfo'{..}
+          = object
+              (catMaybes
+                 [("sharedDriveIds" .=) <$> _sdiSharedDriveIds])
+
 -- | Response to a ReopenMatterRequest.
 --
 -- /See:/ 'reopenMatterResponse' smart constructor.
@@ -2622,7 +3478,7 @@ reopenMatterResponse
 reopenMatterResponse = ReopenMatterResponse' {_rmrMatter = Nothing}
 
 
--- | The updated matter, with state OPEN.
+-- | The updated matter, with state **OPEN**.
 rmrMatter :: Lens' ReopenMatterResponse (Maybe Matter)
 rmrMatter
   = lens _rmrMatter (\ s a -> s{_rmrMatter = a})
@@ -2636,15 +3492,15 @@ instance ToJSON ReopenMatterResponse where
         toJSON ReopenMatterResponse'{..}
           = object (catMaybes [("matter" .=) <$> _rmrMatter])
 
--- | An export file on cloud storage
+-- | The export file in Cloud Storage
 --
 -- /See:/ 'cloudStorageFile' smart constructor.
 data CloudStorageFile =
   CloudStorageFile'
     { _csfObjectName :: !(Maybe Text)
-    , _csfSize       :: !(Maybe (Textual Int64))
+    , _csfSize :: !(Maybe (Textual Int64))
     , _csfBucketName :: !(Maybe Text)
-    , _csfMD5Hash    :: !(Maybe Text)
+    , _csfMD5Hash :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2671,21 +3527,26 @@ cloudStorageFile =
     }
 
 
--- | The cloud storage object name of this export file. Can be used in cloud
--- storage JSON\/XML API.
+-- | The name of the Cloud Storage object for the export file. You can use
+-- this value in the [Cloud Storage JSON or XML
+-- APIs](https:\/\/cloud.google.com\/storage\/docs\/apis).
 csfObjectName :: Lens' CloudStorageFile (Maybe Text)
 csfObjectName
   = lens _csfObjectName
       (\ s a -> s{_csfObjectName = a})
 
--- | The size of the export file.
+-- | The export file size.
 csfSize :: Lens' CloudStorageFile (Maybe Int64)
 csfSize
   = lens _csfSize (\ s a -> s{_csfSize = a}) .
       mapping _Coerce
 
--- | The cloud storage bucket name of this export file. Can be used in cloud
--- storage JSON\/XML API.
+-- | The name of the Cloud Storage bucket for the export file. You can use
+-- this value in the [Cloud Storage JSON or XML
+-- APIs](https:\/\/cloud.google.com\/storage\/docs\/apis), but not to list
+-- the bucket contents. Instead, you can [get individual export
+-- files](https:\/\/cloud.google.com\/storage\/docs\/json_api\/v1\/objects\/get)
+-- by object name.
 csfBucketName :: Lens' CloudStorageFile (Maybe Text)
 csfBucketName
   = lens _csfBucketName
@@ -2714,7 +3575,154 @@ instance ToJSON CloudStorageFile where
                   ("bucketName" .=) <$> _csfBucketName,
                   ("md5Hash" .=) <$> _csfMD5Hash])
 
--- | Mail search advanced options
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'operationResponse' smart constructor.
+newtype OperationResponse =
+  OperationResponse'
+    { _orAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'orAddtional'
+operationResponse
+    :: HashMap Text JSONValue -- ^ 'orAddtional'
+    -> OperationResponse
+operationResponse pOrAddtional_ =
+  OperationResponse' {_orAddtional = _Coerce # pOrAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
+orAddtional
+  = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
+      _Coerce
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
+
+instance ToJSON OperationResponse where
+        toJSON = toJSON . _orAddtional
+
+-- | Groups specific count metrics.
+--
+-- /See:/ 'groupsCountResult' smart constructor.
+data GroupsCountResult =
+  GroupsCountResult'
+    { _gcrAccountCounts :: !(Maybe [AccountCount])
+    , _gcrAccountCountErrors :: !(Maybe [AccountCountError])
+    , _gcrMatchingAccountsCount :: !(Maybe (Textual Int64))
+    , _gcrQueriedAccountsCount :: !(Maybe (Textual Int64))
+    , _gcrNonQueryableAccounts :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GroupsCountResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcrAccountCounts'
+--
+-- * 'gcrAccountCountErrors'
+--
+-- * 'gcrMatchingAccountsCount'
+--
+-- * 'gcrQueriedAccountsCount'
+--
+-- * 'gcrNonQueryableAccounts'
+groupsCountResult
+    :: GroupsCountResult
+groupsCountResult =
+  GroupsCountResult'
+    { _gcrAccountCounts = Nothing
+    , _gcrAccountCountErrors = Nothing
+    , _gcrMatchingAccountsCount = Nothing
+    , _gcrQueriedAccountsCount = Nothing
+    , _gcrNonQueryableAccounts = Nothing
+    }
+
+
+-- | Subtotal count per matching account that have more than zero messages.
+gcrAccountCounts :: Lens' GroupsCountResult [AccountCount]
+gcrAccountCounts
+  = lens _gcrAccountCounts
+      (\ s a -> s{_gcrAccountCounts = a})
+      . _Default
+      . _Coerce
+
+-- | Error occurred when querying these accounts.
+gcrAccountCountErrors :: Lens' GroupsCountResult [AccountCountError]
+gcrAccountCountErrors
+  = lens _gcrAccountCountErrors
+      (\ s a -> s{_gcrAccountCountErrors = a})
+      . _Default
+      . _Coerce
+
+-- | Total number of accounts that can be queried and have more than zero
+-- messages.
+gcrMatchingAccountsCount :: Lens' GroupsCountResult (Maybe Int64)
+gcrMatchingAccountsCount
+  = lens _gcrMatchingAccountsCount
+      (\ s a -> s{_gcrMatchingAccountsCount = a})
+      . mapping _Coerce
+
+-- | Total number of accounts involved in this count operation.
+gcrQueriedAccountsCount :: Lens' GroupsCountResult (Maybe Int64)
+gcrQueriedAccountsCount
+  = lens _gcrQueriedAccountsCount
+      (\ s a -> s{_gcrQueriedAccountsCount = a})
+      . mapping _Coerce
+
+-- | When **DataScope** is **HELD_DATA**, these accounts in the request are
+-- not queried because they are not on hold. For other data scope, this
+-- field is not set.
+gcrNonQueryableAccounts :: Lens' GroupsCountResult [Text]
+gcrNonQueryableAccounts
+  = lens _gcrNonQueryableAccounts
+      (\ s a -> s{_gcrNonQueryableAccounts = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GroupsCountResult where
+        parseJSON
+          = withObject "GroupsCountResult"
+              (\ o ->
+                 GroupsCountResult' <$>
+                   (o .:? "accountCounts" .!= mempty) <*>
+                     (o .:? "accountCountErrors" .!= mempty)
+                     <*> (o .:? "matchingAccountsCount")
+                     <*> (o .:? "queriedAccountsCount")
+                     <*> (o .:? "nonQueryableAccounts" .!= mempty))
+
+instance ToJSON GroupsCountResult where
+        toJSON GroupsCountResult'{..}
+          = object
+              (catMaybes
+                 [("accountCounts" .=) <$> _gcrAccountCounts,
+                  ("accountCountErrors" .=) <$> _gcrAccountCountErrors,
+                  ("matchingAccountsCount" .=) <$>
+                    _gcrMatchingAccountsCount,
+                  ("queriedAccountsCount" .=) <$>
+                    _gcrQueriedAccountsCount,
+                  ("nonQueryableAccounts" .=) <$>
+                    _gcrNonQueryableAccounts])
+
+-- | Additional options for Gmail search
 --
 -- /See:/ 'mailOptions' smart constructor.
 newtype MailOptions =
@@ -2734,7 +3742,7 @@ mailOptions
 mailOptions = MailOptions' {_moExcludeDrafts = Nothing}
 
 
--- | Set to true to exclude drafts.
+-- | Set to **true** to exclude drafts.
 moExcludeDrafts :: Lens' MailOptions (Maybe Bool)
 moExcludeDrafts
   = lens _moExcludeDrafts

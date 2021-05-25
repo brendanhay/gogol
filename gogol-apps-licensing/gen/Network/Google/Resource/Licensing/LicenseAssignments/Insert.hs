@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Assign License.
+-- Assign a license.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.insert@.
+-- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.insert@.
 module Network.Google.Resource.Licensing.LicenseAssignments.Insert
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Insert
     , LicenseAssignmentsInsert
 
     -- * Request Lenses
+    , laiXgafv
+    , laiUploadProtocol
+    , laiAccessToken
     , laiSKUId
+    , laiUploadType
     , laiPayload
     , laiProductId
+    , laiCallback
     ) where
 
-import           Network.Google.AppsLicensing.Types
-import           Network.Google.Prelude
+import Network.Google.AppsLicensing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.insert@ method which the
 -- 'LicenseAssignmentsInsert' request conforms to.
@@ -52,18 +57,28 @@ type LicenseAssignmentsInsertResource =
                "sku" :>
                  Capture "skuId" Text :>
                    "user" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] LicenseAssignmentInsert :>
-                         Post '[JSON] LicenseAssignment
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] LicenseAssignmentInsert :>
+                                   Post '[JSON] LicenseAssignment
 
--- | Assign License.
+-- | Assign a license.
 --
 -- /See:/ 'licenseAssignmentsInsert' smart constructor.
 data LicenseAssignmentsInsert =
   LicenseAssignmentsInsert'
-    { _laiSKUId     :: !Text
-    , _laiPayload   :: !LicenseAssignmentInsert
+    { _laiXgafv :: !(Maybe Xgafv)
+    , _laiUploadProtocol :: !(Maybe Text)
+    , _laiAccessToken :: !(Maybe Text)
+    , _laiSKUId :: !Text
+    , _laiUploadType :: !(Maybe Text)
+    , _laiPayload :: !LicenseAssignmentInsert
     , _laiProductId :: !Text
+    , _laiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,11 +87,21 @@ data LicenseAssignmentsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'laiXgafv'
+--
+-- * 'laiUploadProtocol'
+--
+-- * 'laiAccessToken'
+--
 -- * 'laiSKUId'
+--
+-- * 'laiUploadType'
 --
 -- * 'laiPayload'
 --
 -- * 'laiProductId'
+--
+-- * 'laiCallback'
 licenseAssignmentsInsert
     :: Text -- ^ 'laiSKUId'
     -> LicenseAssignmentInsert -- ^ 'laiPayload'
@@ -84,32 +109,71 @@ licenseAssignmentsInsert
     -> LicenseAssignmentsInsert
 licenseAssignmentsInsert pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
   LicenseAssignmentsInsert'
-    { _laiSKUId = pLaiSKUId_
+    { _laiXgafv = Nothing
+    , _laiUploadProtocol = Nothing
+    , _laiAccessToken = Nothing
+    , _laiSKUId = pLaiSKUId_
+    , _laiUploadType = Nothing
     , _laiPayload = pLaiPayload_
     , _laiProductId = pLaiProductId_
+    , _laiCallback = Nothing
     }
 
 
--- | Name for sku
+-- | V1 error format.
+laiXgafv :: Lens' LicenseAssignmentsInsert (Maybe Xgafv)
+laiXgafv = lens _laiXgafv (\ s a -> s{_laiXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+laiUploadProtocol :: Lens' LicenseAssignmentsInsert (Maybe Text)
+laiUploadProtocol
+  = lens _laiUploadProtocol
+      (\ s a -> s{_laiUploadProtocol = a})
+
+-- | OAuth access token.
+laiAccessToken :: Lens' LicenseAssignmentsInsert (Maybe Text)
+laiAccessToken
+  = lens _laiAccessToken
+      (\ s a -> s{_laiAccessToken = a})
+
+-- | A product SKU\'s unique identifier. For more information about available
+-- SKUs in this version of the API, see Products and SKUs.
 laiSKUId :: Lens' LicenseAssignmentsInsert Text
 laiSKUId = lens _laiSKUId (\ s a -> s{_laiSKUId = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+laiUploadType :: Lens' LicenseAssignmentsInsert (Maybe Text)
+laiUploadType
+  = lens _laiUploadType
+      (\ s a -> s{_laiUploadType = a})
 
 -- | Multipart request metadata.
 laiPayload :: Lens' LicenseAssignmentsInsert LicenseAssignmentInsert
 laiPayload
   = lens _laiPayload (\ s a -> s{_laiPayload = a})
 
--- | Name for product
+-- | A product\'s unique identifier. For more information about products in
+-- this version of the API, see Products and SKUs.
 laiProductId :: Lens' LicenseAssignmentsInsert Text
 laiProductId
   = lens _laiProductId (\ s a -> s{_laiProductId = a})
+
+-- | JSONP
+laiCallback :: Lens' LicenseAssignmentsInsert (Maybe Text)
+laiCallback
+  = lens _laiCallback (\ s a -> s{_laiCallback = a})
 
 instance GoogleRequest LicenseAssignmentsInsert where
         type Rs LicenseAssignmentsInsert = LicenseAssignment
         type Scopes LicenseAssignmentsInsert =
              '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsInsert'{..}
-          = go _laiProductId _laiSKUId (Just AltJSON)
+          = go _laiProductId _laiSKUId _laiXgafv
+              _laiUploadProtocol
+              _laiAccessToken
+              _laiUploadType
+              _laiCallback
+              (Just AltJSON)
               _laiPayload
               appsLicensingService
           where go

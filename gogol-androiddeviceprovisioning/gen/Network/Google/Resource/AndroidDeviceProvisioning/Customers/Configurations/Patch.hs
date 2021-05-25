@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidDeviceProvisioning.Customers.Configuration
     , ccpCallback
     ) where
 
-import           Network.Google.AndroidDeviceProvisioning.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidDeviceProvisioning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androiddeviceprovisioning.customers.configurations.patch@ method which the
 -- 'CustomersConfigurationsPatch' request conforms to.
@@ -66,14 +66,14 @@ type CustomersConfigurationsPatchResource =
 -- /See:/ 'customersConfigurationsPatch' smart constructor.
 data CustomersConfigurationsPatch =
   CustomersConfigurationsPatch'
-    { _ccpXgafv          :: !(Maybe Xgafv)
+    { _ccpXgafv :: !(Maybe Xgafv)
     , _ccpUploadProtocol :: !(Maybe Text)
-    , _ccpUpdateMask     :: !(Maybe GFieldMask)
-    , _ccpAccessToken    :: !(Maybe Text)
-    , _ccpUploadType     :: !(Maybe Text)
-    , _ccpPayload        :: !Configuration
-    , _ccpName           :: !Text
-    , _ccpCallback       :: !(Maybe Text)
+    , _ccpUpdateMask :: !(Maybe GFieldMask)
+    , _ccpAccessToken :: !(Maybe Text)
+    , _ccpUploadType :: !(Maybe Text)
+    , _ccpPayload :: !Configuration
+    , _ccpName :: !Text
+    , _ccpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

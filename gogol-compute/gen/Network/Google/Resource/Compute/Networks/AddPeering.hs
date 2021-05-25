@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Networks.AddPeering
     , napPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.addPeering@ method which the
 -- 'NetworksAddPeering' request conforms to.
@@ -64,9 +64,9 @@ type NetworksAddPeeringResource =
 data NetworksAddPeering =
   NetworksAddPeering'
     { _napRequestId :: !(Maybe Text)
-    , _napProject   :: !Text
-    , _napNetwork   :: !Text
-    , _napPayload   :: !NetworksAddPeeringRequest
+    , _napProject :: !Text
+    , _napNetwork :: !Text
+    , _napPayload :: !NetworksAddPeeringRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

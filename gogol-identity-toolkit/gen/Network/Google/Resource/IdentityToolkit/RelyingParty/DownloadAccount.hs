@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
     , rpdaPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.downloadAccount@ method which the
 -- 'RelyingPartyDownloadAccount' request conforms to.

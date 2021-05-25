@@ -17,50 +17,80 @@
 --
 module Network.Google.CloudScheduler.Types.Product where
 
-import           Network.Google.CloudScheduler.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types.Sum
+import Network.Google.Prelude
+
+-- | Contains information needed for generating an [OAuth
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2).
+-- This type of authorization should generally only be used when calling
+-- Google APIs hosted on *.googleapis.com.
+--
+-- /See:/ 'oAuthToken' smart constructor.
+data OAuthToken =
+  OAuthToken'
+    { _oatScope :: !(Maybe Text)
+    , _oatServiceAccountEmail :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OAuthToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oatScope'
+--
+-- * 'oatServiceAccountEmail'
+oAuthToken
+    :: OAuthToken
+oAuthToken =
+  OAuthToken' {_oatScope = Nothing, _oatServiceAccountEmail = Nothing}
+
+
+-- | OAuth scope to be used for generating OAuth access token. If not
+-- specified, \"https:\/\/www.googleapis.com\/auth\/cloud-platform\" will
+-- be used.
+oatScope :: Lens' OAuthToken (Maybe Text)
+oatScope = lens _oatScope (\ s a -> s{_oatScope = a})
+
+-- | [Service account
+-- email](https:\/\/cloud.google.com\/iam\/docs\/service-accounts) to be
+-- used for generating OAuth token. The service account must be within the
+-- same project as the job. The caller must have iam.serviceAccounts.actAs
+-- permission for the service account.
+oatServiceAccountEmail :: Lens' OAuthToken (Maybe Text)
+oatServiceAccountEmail
+  = lens _oatServiceAccountEmail
+      (\ s a -> s{_oatServiceAccountEmail = a})
+
+instance FromJSON OAuthToken where
+        parseJSON
+          = withObject "OAuthToken"
+              (\ o ->
+                 OAuthToken' <$>
+                   (o .:? "scope") <*> (o .:? "serviceAccountEmail"))
+
+instance ToJSON OAuthToken where
+        toJSON OAuthToken'{..}
+          = object
+              (catMaybes
+                 [("scope" .=) <$> _oatScope,
+                  ("serviceAccountEmail" .=) <$>
+                    _oatServiceAccountEmail])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -145,7 +175,7 @@ instance ToJSON PauseJobRequest where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -214,6 +244,64 @@ instance FromJSON ResumeJobRequest where
 instance ToJSON ResumeJobRequest where
         toJSON = const emptyObject
 
+-- | Contains information needed for generating an [OpenID Connect
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect).
+-- This type of authorization can be used for many scenarios, including
+-- calling Cloud Run, or endpoints where you intend to validate the token
+-- yourself.
+--
+-- /See:/ 'oidcToken' smart constructor.
+data OidcToken =
+  OidcToken'
+    { _otAudience :: !(Maybe Text)
+    , _otServiceAccountEmail :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'OidcToken' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'otAudience'
+--
+-- * 'otServiceAccountEmail'
+oidcToken
+    :: OidcToken
+oidcToken = OidcToken' {_otAudience = Nothing, _otServiceAccountEmail = Nothing}
+
+
+-- | Audience to be used when generating OIDC token. If not specified, the
+-- URI specified in target will be used.
+otAudience :: Lens' OidcToken (Maybe Text)
+otAudience
+  = lens _otAudience (\ s a -> s{_otAudience = a})
+
+-- | [Service account
+-- email](https:\/\/cloud.google.com\/iam\/docs\/service-accounts) to be
+-- used for generating OIDC token. The service account must be within the
+-- same project as the job. The caller must have iam.serviceAccounts.actAs
+-- permission for the service account.
+otServiceAccountEmail :: Lens' OidcToken (Maybe Text)
+otServiceAccountEmail
+  = lens _otServiceAccountEmail
+      (\ s a -> s{_otServiceAccountEmail = a})
+
+instance FromJSON OidcToken where
+        parseJSON
+          = withObject "OidcToken"
+              (\ o ->
+                 OidcToken' <$>
+                   (o .:? "audience") <*> (o .:? "serviceAccountEmail"))
+
+instance ToJSON OidcToken where
+        toJSON OidcToken'{..}
+          = object
+              (catMaybes
+                 [("audience" .=) <$> _otAudience,
+                  ("serviceAccountEmail" .=) <$>
+                    _otServiceAccountEmail])
+
 -- | HTTP request headers. This map contains the header field names and
 -- values. Headers can be set when the job is created. Cloud Scheduler sets
 -- some headers to default values: * \`User-Agent\`: By default, this
@@ -278,10 +366,10 @@ instance ToJSON AppEngineHTTPTargetHeaders where
 -- /See:/ 'retryConfig' smart constructor.
 data RetryConfig =
   RetryConfig'
-    { _rcMaxDoublings       :: !(Maybe (Textual Int32))
-    , _rcMaxRetryDuration   :: !(Maybe GDuration)
+    { _rcMaxDoublings :: !(Maybe (Textual Int32))
+    , _rcMaxRetryDuration :: !(Maybe GDuration)
     , _rcMinBackoffDuration :: !(Maybe GDuration)
-    , _rcRetryCount         :: !(Maybe (Textual Int32))
+    , _rcRetryCount :: !(Maybe (Textual Int32))
     , _rcMaxBackoffDuration :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -314,12 +402,12 @@ retryConfig =
 
 -- | The time between retries will double \`max_doublings\` times. A job\'s
 -- retry interval starts at min_backoff_duration, then doubles
--- \`max_doublings\` times, then increases linearly, and finally retries
--- retries at intervals of max_backoff_duration up to retry_count times.
--- For example, if min_backoff_duration is 10s, max_backoff_duration is
--- 300s, and \`max_doublings\` is 3, then the a job will first be retried
--- in 10s. The retry interval will double three times, and then increase
--- linearly by 2^3 * 10s. Finally, the job will retry at intervals of
+-- \`max_doublings\` times, then increases linearly, and finally retries at
+-- intervals of max_backoff_duration up to retry_count times. For example,
+-- if min_backoff_duration is 10s, max_backoff_duration is 300s, and
+-- \`max_doublings\` is 3, then the a job will first be retried in 10s. The
+-- retry interval will double three times, and then increase linearly by
+-- 2^3 * 10s. Finally, the job will retry at intervals of
 -- max_backoff_duration until the job has been attempted retry_count times.
 -- Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s,
 -- 300s, .... The default value of this field is 5.
@@ -394,11 +482,11 @@ instance ToJSON RetryConfig where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -586,19 +674,20 @@ instance ToJSON HTTPTargetHeaders where
 -- | A message that is published by publishers and consumed by subscribers.
 -- The message must contain either a non-empty data field or at least one
 -- attribute. Note that client libraries represent this object differently
--- depending on the language. See the corresponding
--- <https://cloud.google.com/pubsub/docs/reference/libraries client library documentation>
--- for more information. See
--- <https://cloud.google.com/pubsub/quotas Quotas and limits> for more
--- information about message limits.
+-- depending on the language. See the corresponding [client library
+-- documentation](https:\/\/cloud.google.com\/pubsub\/docs\/reference\/libraries)
+-- for more information. See [quotas and limits]
+-- (https:\/\/cloud.google.com\/pubsub\/quotas) for more information about
+-- message limits.
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage =
   PubsubMessage'
-    { _pmData        :: !(Maybe Bytes)
+    { _pmData :: !(Maybe Bytes)
     , _pmPublishTime :: !(Maybe DateTime')
-    , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
-    , _pmMessageId   :: !(Maybe Text)
+    , _pmAttributes :: !(Maybe PubsubMessageAttributes)
+    , _pmMessageId :: !(Maybe Text)
+    , _pmOrderingKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -614,6 +703,8 @@ data PubsubMessage =
 -- * 'pmAttributes'
 --
 -- * 'pmMessageId'
+--
+-- * 'pmOrderingKey'
 pubsubMessage
     :: PubsubMessage
 pubsubMessage =
@@ -622,6 +713,7 @@ pubsubMessage =
     , _pmPublishTime = Nothing
     , _pmAttributes = Nothing
     , _pmMessageId = Nothing
+    , _pmOrderingKey = Nothing
     }
 
 
@@ -641,7 +733,9 @@ pmPublishTime
       (\ s a -> s{_pmPublishTime = a})
       . mapping _DateTime
 
--- | Optional attributes for this message.
+-- | Attributes for this message. If this field is empty, the message must
+-- contain non-empty data. This can be used to filter messages on the
+-- subscription.
 pmAttributes :: Lens' PubsubMessage (Maybe PubsubMessageAttributes)
 pmAttributes
   = lens _pmAttributes (\ s a -> s{_pmAttributes = a})
@@ -655,6 +749,17 @@ pmMessageId :: Lens' PubsubMessage (Maybe Text)
 pmMessageId
   = lens _pmMessageId (\ s a -> s{_pmMessageId = a})
 
+-- | If non-empty, identifies related messages for which publish order should
+-- be respected. If a \`Subscription\` has \`enable_message_ordering\` set
+-- to \`true\`, messages published with the same non-empty \`ordering_key\`
+-- value will be delivered to subscribers in the order in which they are
+-- received by the Pub\/Sub system. All \`PubsubMessage\`s published in a
+-- given \`PublishRequest\` must specify the same \`ordering_key\` value.
+pmOrderingKey :: Lens' PubsubMessage (Maybe Text)
+pmOrderingKey
+  = lens _pmOrderingKey
+      (\ s a -> s{_pmOrderingKey = a})
+
 instance FromJSON PubsubMessage where
         parseJSON
           = withObject "PubsubMessage"
@@ -662,7 +767,8 @@ instance FromJSON PubsubMessage where
                  PubsubMessage' <$>
                    (o .:? "data") <*> (o .:? "publishTime") <*>
                      (o .:? "attributes")
-                     <*> (o .:? "messageId"))
+                     <*> (o .:? "messageId")
+                     <*> (o .:? "orderingKey"))
 
 instance ToJSON PubsubMessage where
         toJSON PubsubMessage'{..}
@@ -671,7 +777,8 @@ instance ToJSON PubsubMessage where
                  [("data" .=) <$> _pmData,
                   ("publishTime" .=) <$> _pmPublishTime,
                   ("attributes" .=) <$> _pmAttributes,
-                  ("messageId" .=) <$> _pmMessageId])
+                  ("messageId" .=) <$> _pmMessageId,
+                  ("orderingKey" .=) <$> _pmOrderingKey])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -720,10 +827,10 @@ instance ToJSON StatusDetailsItem where
 -- /See:/ 'appEngineHTTPTarget' smart constructor.
 data AppEngineHTTPTarget =
   AppEngineHTTPTarget'
-    { _aehttptHTTPMethod       :: !(Maybe AppEngineHTTPTargetHTTPMethod)
-    , _aehttptRelativeURI      :: !(Maybe Text)
-    , _aehttptBody             :: !(Maybe Bytes)
-    , _aehttptHeaders          :: !(Maybe AppEngineHTTPTargetHeaders)
+    { _aehttptHTTPMethod :: !(Maybe AppEngineHTTPTargetHTTPMethod)
+    , _aehttptRelativeURI :: !(Maybe Text)
+    , _aehttptBody :: !(Maybe Bytes)
+    , _aehttptHeaders :: !(Maybe AppEngineHTTPTargetHeaders)
     , _aehttptAppEngineRouting :: !(Maybe AppEngineRouting)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -840,10 +947,12 @@ instance ToJSON AppEngineHTTPTarget where
 -- /See:/ 'hTTPTarget' smart constructor.
 data HTTPTarget =
   HTTPTarget'
-    { _httptHTTPMethod :: !(Maybe HTTPTargetHTTPMethod)
-    , _httptBody       :: !(Maybe Bytes)
-    , _httptURI        :: !(Maybe Text)
-    , _httptHeaders    :: !(Maybe HTTPTargetHeaders)
+    { _httptOAuthToken :: !(Maybe OAuthToken)
+    , _httptHTTPMethod :: !(Maybe HTTPTargetHTTPMethod)
+    , _httptOidcToken :: !(Maybe OidcToken)
+    , _httptBody :: !(Maybe Bytes)
+    , _httptURI :: !(Maybe Text)
+    , _httptHeaders :: !(Maybe HTTPTargetHeaders)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -852,7 +961,11 @@ data HTTPTarget =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'httptOAuthToken'
+--
 -- * 'httptHTTPMethod'
+--
+-- * 'httptOidcToken'
 --
 -- * 'httptBody'
 --
@@ -863,18 +976,41 @@ hTTPTarget
     :: HTTPTarget
 hTTPTarget =
   HTTPTarget'
-    { _httptHTTPMethod = Nothing
+    { _httptOAuthToken = Nothing
+    , _httptHTTPMethod = Nothing
+    , _httptOidcToken = Nothing
     , _httptBody = Nothing
     , _httptURI = Nothing
     , _httptHeaders = Nothing
     }
 
 
+-- | If specified, an [OAuth
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- will be generated and attached as an \`Authorization\` header in the
+-- HTTP request. This type of authorization should generally only be used
+-- when calling Google APIs hosted on *.googleapis.com.
+httptOAuthToken :: Lens' HTTPTarget (Maybe OAuthToken)
+httptOAuthToken
+  = lens _httptOAuthToken
+      (\ s a -> s{_httptOAuthToken = a})
+
 -- | Which HTTP method to use for the request.
 httptHTTPMethod :: Lens' HTTPTarget (Maybe HTTPTargetHTTPMethod)
 httptHTTPMethod
   = lens _httptHTTPMethod
       (\ s a -> s{_httptHTTPMethod = a})
+
+-- | If specified, an
+-- [OIDC](https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect)
+-- token will be generated and attached as an \`Authorization\` header in
+-- the HTTP request. This type of authorization can be used for many
+-- scenarios, including calling Cloud Run, or endpoints where you intend to
+-- validate the token yourself.
+httptOidcToken :: Lens' HTTPTarget (Maybe OidcToken)
+httptOidcToken
+  = lens _httptOidcToken
+      (\ s a -> s{_httptOidcToken = a})
 
 -- | HTTP request body. A request body is allowed only if the HTTP method is
 -- POST, PUT, or PATCH. It is an error to set body on a job with an
@@ -913,15 +1049,19 @@ instance FromJSON HTTPTarget where
           = withObject "HTTPTarget"
               (\ o ->
                  HTTPTarget' <$>
-                   (o .:? "httpMethod") <*> (o .:? "body") <*>
-                     (o .:? "uri")
+                   (o .:? "oauthToken") <*> (o .:? "httpMethod") <*>
+                     (o .:? "oidcToken")
+                     <*> (o .:? "body")
+                     <*> (o .:? "uri")
                      <*> (o .:? "headers"))
 
 instance ToJSON HTTPTarget where
         toJSON HTTPTarget'{..}
           = object
               (catMaybes
-                 [("httpMethod" .=) <$> _httptHTTPMethod,
+                 [("oauthToken" .=) <$> _httptOAuthToken,
+                  ("httpMethod" .=) <$> _httptHTTPMethod,
+                  ("oidcToken" .=) <$> _httptOidcToken,
                   ("body" .=) <$> _httptBody, ("uri" .=) <$> _httptURI,
                   ("headers" .=) <$> _httptHeaders])
 
@@ -953,19 +1093,20 @@ instance ToJSON RunJobRequest where
 -- /See:/ 'job' smart constructor.
 data Job =
   Job'
-    { _jStatus              :: !(Maybe Status)
-    , _jState               :: !(Maybe JobState)
-    , _jLastAttemptTime     :: !(Maybe DateTime')
-    , _jRetryConfig         :: !(Maybe RetryConfig)
-    , _jSchedule            :: !(Maybe Text)
-    , _jScheduleTime        :: !(Maybe DateTime')
+    { _jStatus :: !(Maybe Status)
+    , _jAttemptDeadline :: !(Maybe GDuration)
+    , _jState :: !(Maybe JobState)
+    , _jLastAttemptTime :: !(Maybe DateTime')
+    , _jRetryConfig :: !(Maybe RetryConfig)
+    , _jSchedule :: !(Maybe Text)
+    , _jScheduleTime :: !(Maybe DateTime')
     , _jAppEngineHTTPTarget :: !(Maybe AppEngineHTTPTarget)
-    , _jHTTPTarget          :: !(Maybe HTTPTarget)
-    , _jName                :: !(Maybe Text)
-    , _jPubsubTarget        :: !(Maybe PubsubTarget)
-    , _jUserUpdateTime      :: !(Maybe DateTime')
-    , _jTimeZone            :: !(Maybe Text)
-    , _jDescription         :: !(Maybe Text)
+    , _jHTTPTarget :: !(Maybe HTTPTarget)
+    , _jName :: !(Maybe Text)
+    , _jPubsubTarget :: !(Maybe PubsubTarget)
+    , _jUserUpdateTime :: !(Maybe DateTime')
+    , _jTimeZone :: !(Maybe Text)
+    , _jDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -975,6 +1116,8 @@ data Job =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jStatus'
+--
+-- * 'jAttemptDeadline'
 --
 -- * 'jState'
 --
@@ -1004,6 +1147,7 @@ job
 job =
   Job'
     { _jStatus = Nothing
+    , _jAttemptDeadline = Nothing
     , _jState = Nothing
     , _jLastAttemptTime = Nothing
     , _jRetryConfig = Nothing
@@ -1023,6 +1167,19 @@ job =
 -- execution.
 jStatus :: Lens' Job (Maybe Status)
 jStatus = lens _jStatus (\ s a -> s{_jStatus = a})
+
+-- | The deadline for job attempts. If the request handler does not respond
+-- by this deadline then the request is cancelled and the attempt is marked
+-- as a \`DEADLINE_EXCEEDED\` failure. The failed attempt can be viewed in
+-- execution logs. Cloud Scheduler will retry the job according to the
+-- RetryConfig. The allowed duration for this deadline is: * For HTTP
+-- targets, between 15 seconds and 30 minutes. * For App Engine HTTP
+-- targets, between 15 seconds and 24 hours.
+jAttemptDeadline :: Lens' Job (Maybe Scientific)
+jAttemptDeadline
+  = lens _jAttemptDeadline
+      (\ s a -> s{_jAttemptDeadline = a})
+      . mapping _GDuration
 
 -- | Output only. State of the job.
 jState :: Lens' Job (Maybe JobState)
@@ -1128,8 +1285,9 @@ instance FromJSON Job where
           = withObject "Job"
               (\ o ->
                  Job' <$>
-                   (o .:? "status") <*> (o .:? "state") <*>
-                     (o .:? "lastAttemptTime")
+                   (o .:? "status") <*> (o .:? "attemptDeadline") <*>
+                     (o .:? "state")
+                     <*> (o .:? "lastAttemptTime")
                      <*> (o .:? "retryConfig")
                      <*> (o .:? "schedule")
                      <*> (o .:? "scheduleTime")
@@ -1146,6 +1304,7 @@ instance ToJSON Job where
           = object
               (catMaybes
                  [("status" .=) <$> _jStatus,
+                  ("attemptDeadline" .=) <$> _jAttemptDeadline,
                   ("state" .=) <$> _jState,
                   ("lastAttemptTime" .=) <$> _jLastAttemptTime,
                   ("retryConfig" .=) <$> _jRetryConfig,
@@ -1159,7 +1318,9 @@ instance ToJSON Job where
                   ("timeZone" .=) <$> _jTimeZone,
                   ("description" .=) <$> _jDescription])
 
--- | Optional attributes for this message.
+-- | Attributes for this message. If this field is empty, the message must
+-- contain non-empty data. This can be used to filter messages on the
+-- subscription.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
 newtype PubsubMessageAttributes =
@@ -1201,8 +1362,8 @@ instance ToJSON PubsubMessageAttributes where
 -- /See:/ 'pubsubTarget' smart constructor.
 data PubsubTarget =
   PubsubTarget'
-    { _ptData       :: !(Maybe Bytes)
-    , _ptTopicName  :: !(Maybe Text)
+    { _ptData :: !(Maybe Bytes)
+    , _ptTopicName :: !(Maybe Text)
     , _ptAttributes :: !(Maybe PubsubTargetAttributes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1269,7 +1430,7 @@ instance ToJSON PubsubTarget where
 data ListJobsResponse =
   ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
-    , _ljrJobs          :: !(Maybe [Job])
+    , _ljrJobs :: !(Maybe [Job])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1404,9 +1565,9 @@ instance ToJSON LocationMetadata where
 -- /See:/ 'appEngineRouting' smart constructor.
 data AppEngineRouting =
   AppEngineRouting'
-    { _aerService  :: !(Maybe Text)
-    , _aerVersion  :: !(Maybe Text)
-    , _aerHost     :: !(Maybe Text)
+    { _aerService :: !(Maybe Text)
+    , _aerVersion :: !(Maybe Text)
+    , _aerHost :: !(Maybe Text)
     , _aerInstance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

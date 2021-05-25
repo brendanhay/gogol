@@ -22,7 +22,7 @@
 --
 -- Reverts changes to a GTM Variable in a GTM Workspace.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.variables.revert@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.variables.revert@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variabl
     , AccountsContainersWorkspacesVariablesRevert
 
     -- * Request Lenses
+    , acwvrXgafv
+    , acwvrUploadProtocol
     , acwvrPath
     , acwvrFingerprint
+    , acwvrAccessToken
+    , acwvrUploadType
+    , acwvrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.variables.revert@ method which the
 -- 'AccountsContainersWorkspacesVariablesRevert' request conforms to.
@@ -47,17 +52,27 @@ type AccountsContainersWorkspacesVariablesRevertResource
      "tagmanager" :>
        "v2" :>
          CaptureMode "path" "revert" Text :>
-           QueryParam "fingerprint" Text :>
-             QueryParam "alt" AltJSON :>
-               Post '[JSON] RevertVariableResponse
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] RevertVariableResponse
 
 -- | Reverts changes to a GTM Variable in a GTM Workspace.
 --
 -- /See:/ 'accountsContainersWorkspacesVariablesRevert' smart constructor.
 data AccountsContainersWorkspacesVariablesRevert =
   AccountsContainersWorkspacesVariablesRevert'
-    { _acwvrPath        :: !Text
+    { _acwvrXgafv :: !(Maybe Xgafv)
+    , _acwvrUploadProtocol :: !(Maybe Text)
+    , _acwvrPath :: !Text
     , _acwvrFingerprint :: !(Maybe Text)
+    , _acwvrAccessToken :: !(Maybe Text)
+    , _acwvrUploadType :: !(Maybe Text)
+    , _acwvrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,16 +81,44 @@ data AccountsContainersWorkspacesVariablesRevert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acwvrXgafv'
+--
+-- * 'acwvrUploadProtocol'
+--
 -- * 'acwvrPath'
 --
 -- * 'acwvrFingerprint'
+--
+-- * 'acwvrAccessToken'
+--
+-- * 'acwvrUploadType'
+--
+-- * 'acwvrCallback'
 accountsContainersWorkspacesVariablesRevert
     :: Text -- ^ 'acwvrPath'
     -> AccountsContainersWorkspacesVariablesRevert
 accountsContainersWorkspacesVariablesRevert pAcwvrPath_ =
   AccountsContainersWorkspacesVariablesRevert'
-    {_acwvrPath = pAcwvrPath_, _acwvrFingerprint = Nothing}
+    { _acwvrXgafv = Nothing
+    , _acwvrUploadProtocol = Nothing
+    , _acwvrPath = pAcwvrPath_
+    , _acwvrFingerprint = Nothing
+    , _acwvrAccessToken = Nothing
+    , _acwvrUploadType = Nothing
+    , _acwvrCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acwvrXgafv :: Lens' AccountsContainersWorkspacesVariablesRevert (Maybe Xgafv)
+acwvrXgafv
+  = lens _acwvrXgafv (\ s a -> s{_acwvrXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwvrUploadProtocol :: Lens' AccountsContainersWorkspacesVariablesRevert (Maybe Text)
+acwvrUploadProtocol
+  = lens _acwvrUploadProtocol
+      (\ s a -> s{_acwvrUploadProtocol = a})
 
 -- | GTM Variable\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}\/variables\/{variable_id}
@@ -90,6 +133,24 @@ acwvrFingerprint
   = lens _acwvrFingerprint
       (\ s a -> s{_acwvrFingerprint = a})
 
+-- | OAuth access token.
+acwvrAccessToken :: Lens' AccountsContainersWorkspacesVariablesRevert (Maybe Text)
+acwvrAccessToken
+  = lens _acwvrAccessToken
+      (\ s a -> s{_acwvrAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwvrUploadType :: Lens' AccountsContainersWorkspacesVariablesRevert (Maybe Text)
+acwvrUploadType
+  = lens _acwvrUploadType
+      (\ s a -> s{_acwvrUploadType = a})
+
+-- | JSONP
+acwvrCallback :: Lens' AccountsContainersWorkspacesVariablesRevert (Maybe Text)
+acwvrCallback
+  = lens _acwvrCallback
+      (\ s a -> s{_acwvrCallback = a})
+
 instance GoogleRequest
            AccountsContainersWorkspacesVariablesRevert
          where
@@ -101,7 +162,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
           AccountsContainersWorkspacesVariablesRevert'{..}
-          = go _acwvrPath _acwvrFingerprint (Just AltJSON)
+          = go _acwvrPath _acwvrXgafv _acwvrUploadProtocol
+              _acwvrFingerprint
+              _acwvrAccessToken
+              _acwvrUploadType
+              _acwvrCallback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

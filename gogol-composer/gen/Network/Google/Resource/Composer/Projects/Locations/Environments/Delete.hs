@@ -41,8 +41,8 @@ module Network.Google.Resource.Composer.Projects.Locations.Environments.Delete
     , pledCallback
     ) where
 
-import           Network.Google.Composer.Types
-import           Network.Google.Prelude
+import Network.Google.Composer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @composer.projects.locations.environments.delete@ method which the
 -- 'ProjectsLocationsEnvironmentsDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsEnvironmentsDeleteResource =
 -- /See:/ 'projectsLocationsEnvironmentsDelete' smart constructor.
 data ProjectsLocationsEnvironmentsDelete =
   ProjectsLocationsEnvironmentsDelete'
-    { _pledXgafv          :: !(Maybe Xgafv)
+    { _pledXgafv :: !(Maybe Xgafv)
     , _pledUploadProtocol :: !(Maybe Text)
-    , _pledAccessToken    :: !(Maybe Text)
-    , _pledUploadType     :: !(Maybe Text)
-    , _pledName           :: !Text
-    , _pledCallback       :: !(Maybe Text)
+    , _pledAccessToken :: !(Maybe Text)
+    , _pledUploadType :: !(Maybe Text)
+    , _pledName :: !Text
+    , _pledCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

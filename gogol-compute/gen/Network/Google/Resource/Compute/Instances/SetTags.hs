@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Instances.SetTags
     , istInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setTags@ method which the
 -- 'InstancesSetTags' request conforms to.
@@ -67,10 +67,10 @@ type InstancesSetTagsResource =
 data InstancesSetTags =
   InstancesSetTags'
     { _istRequestId :: !(Maybe Text)
-    , _istProject   :: !Text
-    , _istZone      :: !Text
-    , _istPayload   :: !Tags
-    , _istInstance  :: !Text
+    , _istProject :: !Text
+    , _istZone :: !Text
+    , _istPayload :: !Tags
+    , _istInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

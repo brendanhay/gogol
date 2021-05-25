@@ -20,8 +20,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- SearchForSeries returns a list of matching series. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.7
+-- SearchForSeries returns a list of matching series. See [Search
+-- Transaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6).
+-- For details on the implementation of SearchForSeries, see [Search
+-- transaction](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#search_transaction)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call SearchForSeries, see [Searching for studies, series,
+-- instances, and
+-- frames](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#searching_for_studies_series_instances_and_frames).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.searchForSeries@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.SearchForSeries
@@ -43,14 +50,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsssfsDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.searchForSeries@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeries' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeriesResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -61,19 +68,26 @@ type ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeriesResource
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] HTTPBody
 
--- | SearchForSeries returns a list of matching series. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.7
+-- | SearchForSeries returns a list of matching series. See [Search
+-- Transaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6).
+-- For details on the implementation of SearchForSeries, see [Search
+-- transaction](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#search_transaction)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call SearchForSeries, see [Searching for studies, series,
+-- instances, and
+-- frames](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#searching_for_studies_series_instances_and_frames).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesSearchForSeries' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeries =
   ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeries'
-    { _pldsdsssfsParent         :: !Text
-    , _pldsdsssfsXgafv          :: !(Maybe Xgafv)
+    { _pldsdsssfsParent :: !Text
+    , _pldsdsssfsXgafv :: !(Maybe Xgafv)
     , _pldsdsssfsUploadProtocol :: !(Maybe Text)
-    , _pldsdsssfsAccessToken    :: !(Maybe Text)
-    , _pldsdsssfsUploadType     :: !(Maybe Text)
-    , _pldsdsssfsCallback       :: !(Maybe Text)
-    , _pldsdsssfsDicomWebPath   :: !Text
+    , _pldsdsssfsAccessToken :: !(Maybe Text)
+    , _pldsdsssfsUploadType :: !(Maybe Text)
+    , _pldsdsssfsCallback :: !(Maybe Text)
+    , _pldsdsssfsDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -111,8 +125,8 @@ projectsLocationsDataSetsDicomStoresStudiesSearchForSeries pPldsdsssfsParent_ pP
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsssfsParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeries Text
 pldsdsssfsParent
   = lens _pldsdsssfsParent
@@ -148,8 +162,8 @@ pldsdsssfsCallback
   = lens _pldsdsssfsCallback
       (\ s a -> s{_pldsdsssfsCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g., \`series\`).
+-- | The path of the SearchForSeries DICOMweb request. For example,
+-- \`series\` or \`studies\/{study_uid}\/series\`.
 pldsdsssfsDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSearchForSeries Text
 pldsdsssfsDicomWebPath
   = lens _pldsdsssfsDicomWebPath

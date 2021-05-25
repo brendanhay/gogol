@@ -34,6 +34,7 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.GetIAMPolicy
     , ProjectsLocationsKeyRingsGetIAMPolicy
 
     -- * Request Lenses
+    , plkrgipOptionsRequestedPolicyVersion
     , plkrgipXgafv
     , plkrgipUploadProtocol
     , plkrgipAccessToken
@@ -42,20 +43,23 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.GetIAMPolicy
     , plkrgipCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.getIamPolicy@ method which the
 -- 'ProjectsLocationsKeyRingsGetIAMPolicy' request conforms to.
 type ProjectsLocationsKeyRingsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -63,12 +67,13 @@ type ProjectsLocationsKeyRingsGetIAMPolicyResource =
 -- /See:/ 'projectsLocationsKeyRingsGetIAMPolicy' smart constructor.
 data ProjectsLocationsKeyRingsGetIAMPolicy =
   ProjectsLocationsKeyRingsGetIAMPolicy'
-    { _plkrgipXgafv          :: !(Maybe Xgafv)
+    { _plkrgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _plkrgipXgafv :: !(Maybe Xgafv)
     , _plkrgipUploadProtocol :: !(Maybe Text)
-    , _plkrgipAccessToken    :: !(Maybe Text)
-    , _plkrgipUploadType     :: !(Maybe Text)
-    , _plkrgipResource       :: !Text
-    , _plkrgipCallback       :: !(Maybe Text)
+    , _plkrgipAccessToken :: !(Maybe Text)
+    , _plkrgipUploadType :: !(Maybe Text)
+    , _plkrgipResource :: !Text
+    , _plkrgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,6 +81,8 @@ data ProjectsLocationsKeyRingsGetIAMPolicy =
 -- | Creates a value of 'ProjectsLocationsKeyRingsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plkrgipOptionsRequestedPolicyVersion'
 --
 -- * 'plkrgipXgafv'
 --
@@ -93,7 +100,8 @@ projectsLocationsKeyRingsGetIAMPolicy
     -> ProjectsLocationsKeyRingsGetIAMPolicy
 projectsLocationsKeyRingsGetIAMPolicy pPlkrgipResource_ =
   ProjectsLocationsKeyRingsGetIAMPolicy'
-    { _plkrgipXgafv = Nothing
+    { _plkrgipOptionsRequestedPolicyVersion = Nothing
+    , _plkrgipXgafv = Nothing
     , _plkrgipUploadProtocol = Nothing
     , _plkrgipAccessToken = Nothing
     , _plkrgipUploadType = Nothing
@@ -101,6 +109,20 @@ projectsLocationsKeyRingsGetIAMPolicy pPlkrgipResource_ =
     , _plkrgipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+plkrgipOptionsRequestedPolicyVersion :: Lens' ProjectsLocationsKeyRingsGetIAMPolicy (Maybe Int32)
+plkrgipOptionsRequestedPolicyVersion
+  = lens _plkrgipOptionsRequestedPolicyVersion
+      (\ s a ->
+         s{_plkrgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 plkrgipXgafv :: Lens' ProjectsLocationsKeyRingsGetIAMPolicy (Maybe Xgafv)
@@ -148,7 +170,9 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/cloudkms"]
         requestClient
           ProjectsLocationsKeyRingsGetIAMPolicy'{..}
-          = go _plkrgipResource _plkrgipXgafv
+          = go _plkrgipResource
+              _plkrgipOptionsRequestedPolicyVersion
+              _plkrgipXgafv
               _plkrgipUploadProtocol
               _plkrgipAccessToken
               _plkrgipUploadType

@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.operations.get@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.operations.get@.
 module Network.Google.Resource.SecurityCenter.Organizations.Operations.Get
     (
     -- * REST Resource
@@ -43,13 +43,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Operations.Get
     , oogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.operations.get@ method which the
 -- 'OrganizationsOperationsGet' request conforms to.
 type OrganizationsOperationsGetResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -65,12 +65,12 @@ type OrganizationsOperationsGetResource =
 -- /See:/ 'organizationsOperationsGet' smart constructor.
 data OrganizationsOperationsGet =
   OrganizationsOperationsGet'
-    { _oogXgafv          :: !(Maybe Xgafv)
+    { _oogXgafv :: !(Maybe Xgafv)
     , _oogUploadProtocol :: !(Maybe Text)
-    , _oogAccessToken    :: !(Maybe Text)
-    , _oogUploadType     :: !(Maybe Text)
-    , _oogName           :: !Text
-    , _oogCallback       :: !(Maybe Text)
+    , _oogAccessToken :: !(Maybe Text)
+    , _oogUploadType :: !(Maybe Text)
+    , _oogName :: !Text
+    , _oogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
     , mcmiAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customMetrics.insert@ method which the
 -- 'ManagementCustomMetricsInsert' request conforms to.
@@ -62,8 +62,8 @@ type ManagementCustomMetricsInsertResource =
 data ManagementCustomMetricsInsert =
   ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId :: !Text
-    , _mcmiPayload       :: !CustomMetric
-    , _mcmiAccountId     :: !Text
+    , _mcmiPayload :: !CustomMetric
+    , _mcmiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

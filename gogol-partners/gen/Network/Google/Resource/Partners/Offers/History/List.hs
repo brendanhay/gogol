@@ -52,8 +52,8 @@ module Network.Google.Resource.Partners.Offers.History.List
     , ohlCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.offers.history.list@ method which the
 -- 'OffersHistoryList' request conforms to.
@@ -100,22 +100,22 @@ type OffersHistoryListResource =
 -- /See:/ 'offersHistoryList' smart constructor.
 data OffersHistoryList =
   OffersHistoryList'
-    { _ohlXgafv                                       :: !(Maybe Xgafv)
-    , _ohlUploadProtocol                              :: !(Maybe Text)
-    , _ohlOrderBy                                     :: !(Maybe Text)
-    , _ohlAccessToken                                 :: !(Maybe Text)
-    , _ohlUploadType                                  :: !(Maybe Text)
-    , _ohlEntireCompany                               :: !(Maybe Bool)
-    , _ohlRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _ohlRequestMetadataLocale                       :: !(Maybe Text)
-    , _ohlRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _ohlRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _ohlPageToken                                   :: !(Maybe Text)
-    , _ohlRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _ohlPageSize                                    :: !(Maybe (Textual Int32))
-    , _ohlRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _ohlXgafv :: !(Maybe Xgafv)
+    , _ohlUploadProtocol :: !(Maybe Text)
+    , _ohlOrderBy :: !(Maybe Text)
+    , _ohlAccessToken :: !(Maybe Text)
+    , _ohlUploadType :: !(Maybe Text)
+    , _ohlEntireCompany :: !(Maybe Bool)
+    , _ohlRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _ohlRequestMetadataLocale :: !(Maybe Text)
+    , _ohlRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _ohlRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _ohlPageToken :: !(Maybe Text)
+    , _ohlRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _ohlPageSize :: !(Maybe (Textual Int32))
+    , _ohlRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _ohlRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _ohlCallback                                    :: !(Maybe Text)
+    , _ohlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

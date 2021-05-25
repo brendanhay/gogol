@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a chat ban.
+-- Deletes a chat ban.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveChatBans.delete@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveChatBans.delete@.
 module Network.Google.Resource.YouTube.LiveChatBans.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.YouTube.LiveChatBans.Delete
     , LiveChatBansDelete
 
     -- * Request Lenses
+    , lcbdXgafv
+    , lcbdUploadProtocol
+    , lcbdAccessToken
+    , lcbdUploadType
     , lcbdId
+    , lcbdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatBans.delete@ method which the
 -- 'LiveChatBansDelete' request conforms to.
@@ -47,14 +52,24 @@ type LiveChatBansDeleteResource =
          "liveChat" :>
            "bans" :>
              QueryParam "id" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Removes a chat ban.
+-- | Deletes a chat ban.
 --
 -- /See:/ 'liveChatBansDelete' smart constructor.
-newtype LiveChatBansDelete =
+data LiveChatBansDelete =
   LiveChatBansDelete'
-    { _lcbdId :: Text
+    { _lcbdXgafv :: !(Maybe Xgafv)
+    , _lcbdUploadProtocol :: !(Maybe Text)
+    , _lcbdAccessToken :: !(Maybe Text)
+    , _lcbdUploadType :: !(Maybe Text)
+    , _lcbdId :: !Text
+    , _lcbdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,17 +78,61 @@ newtype LiveChatBansDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcbdXgafv'
+--
+-- * 'lcbdUploadProtocol'
+--
+-- * 'lcbdAccessToken'
+--
+-- * 'lcbdUploadType'
+--
 -- * 'lcbdId'
+--
+-- * 'lcbdCallback'
 liveChatBansDelete
     :: Text -- ^ 'lcbdId'
     -> LiveChatBansDelete
-liveChatBansDelete pLcbdId_ = LiveChatBansDelete' {_lcbdId = pLcbdId_}
+liveChatBansDelete pLcbdId_ =
+  LiveChatBansDelete'
+    { _lcbdXgafv = Nothing
+    , _lcbdUploadProtocol = Nothing
+    , _lcbdAccessToken = Nothing
+    , _lcbdUploadType = Nothing
+    , _lcbdId = pLcbdId_
+    , _lcbdCallback = Nothing
+    }
 
 
--- | The id parameter identifies the chat ban to remove. The value uniquely
--- identifies both the ban and the chat.
+-- | V1 error format.
+lcbdXgafv :: Lens' LiveChatBansDelete (Maybe Xgafv)
+lcbdXgafv
+  = lens _lcbdXgafv (\ s a -> s{_lcbdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lcbdUploadProtocol :: Lens' LiveChatBansDelete (Maybe Text)
+lcbdUploadProtocol
+  = lens _lcbdUploadProtocol
+      (\ s a -> s{_lcbdUploadProtocol = a})
+
+-- | OAuth access token.
+lcbdAccessToken :: Lens' LiveChatBansDelete (Maybe Text)
+lcbdAccessToken
+  = lens _lcbdAccessToken
+      (\ s a -> s{_lcbdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lcbdUploadType :: Lens' LiveChatBansDelete (Maybe Text)
+lcbdUploadType
+  = lens _lcbdUploadType
+      (\ s a -> s{_lcbdUploadType = a})
+
 lcbdId :: Lens' LiveChatBansDelete Text
 lcbdId = lens _lcbdId (\ s a -> s{_lcbdId = a})
+
+-- | JSONP
+lcbdCallback :: Lens' LiveChatBansDelete (Maybe Text)
+lcbdCallback
+  = lens _lcbdCallback (\ s a -> s{_lcbdCallback = a})
 
 instance GoogleRequest LiveChatBansDelete where
         type Rs LiveChatBansDelete = ()
@@ -81,7 +140,12 @@ instance GoogleRequest LiveChatBansDelete where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatBansDelete'{..}
-          = go (Just _lcbdId) (Just AltJSON) youTubeService
+          = go (Just _lcbdId) _lcbdXgafv _lcbdUploadProtocol
+              _lcbdAccessToken
+              _lcbdUploadType
+              _lcbdCallback
+              (Just AltJSON)
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy LiveChatBansDeleteResource)

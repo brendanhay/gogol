@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Locations.WorkflowTemplates.Get
     , plwtgCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.locations.workflowTemplates.get@ method which the
 -- 'ProjectsLocationsWorkflowTemplatesGet' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsLocationsWorkflowTemplatesGetResource =
 -- /See:/ 'projectsLocationsWorkflowTemplatesGet' smart constructor.
 data ProjectsLocationsWorkflowTemplatesGet =
   ProjectsLocationsWorkflowTemplatesGet'
-    { _plwtgXgafv          :: !(Maybe Xgafv)
+    { _plwtgXgafv :: !(Maybe Xgafv)
     , _plwtgUploadProtocol :: !(Maybe Text)
-    , _plwtgAccessToken    :: !(Maybe Text)
-    , _plwtgUploadType     :: !(Maybe Text)
-    , _plwtgName           :: !Text
-    , _plwtgVersion        :: !(Maybe (Textual Int32))
-    , _plwtgCallback       :: !(Maybe Text)
+    , _plwtgAccessToken :: !(Maybe Text)
+    , _plwtgUploadType :: !(Maybe Text)
+    , _plwtgName :: !Text
+    , _plwtgVersion :: !(Maybe (Textual Int32))
+    , _plwtgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -132,15 +132,20 @@ plwtgUploadType
   = lens _plwtgUploadType
       (\ s a -> s{_plwtgUploadType = a})
 
--- | Required. The \"resource name\" of the workflow template, as described
--- in https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
+-- | Required. The resource name of the workflow template, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates.get, the resource name of the
+-- template has the following format:
 -- projects\/{project_id}\/regions\/{region}\/workflowTemplates\/{template_id}
+-- For projects.locations.workflowTemplates.get, the resource name of the
+-- template has the following format:
+-- projects\/{project_id}\/locations\/{location}\/workflowTemplates\/{template_id}
 plwtgName :: Lens' ProjectsLocationsWorkflowTemplatesGet Text
 plwtgName
   = lens _plwtgName (\ s a -> s{_plwtgName = a})
 
 -- | Optional. The version of workflow template to retrieve. Only previously
--- instatiated versions can be retrieved.If unspecified, retrieves the
+-- instantiated versions can be retrieved.If unspecified, retrieves the
 -- current version.
 plwtgVersion :: Lens' ProjectsLocationsWorkflowTemplatesGet (Maybe Int32)
 plwtgVersion

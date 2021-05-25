@@ -44,8 +44,8 @@ module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
     , igriInstanceGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.removeInstances@ method which the
 -- 'InstanceGroupsRemoveInstances' request conforms to.
@@ -73,10 +73,10 @@ type InstanceGroupsRemoveInstancesResource =
 -- /See:/ 'instanceGroupsRemoveInstances' smart constructor.
 data InstanceGroupsRemoveInstances =
   InstanceGroupsRemoveInstances'
-    { _igriRequestId     :: !(Maybe Text)
-    , _igriProject       :: !Text
-    , _igriZone          :: !Text
-    , _igriPayload       :: !InstanceGroupsRemoveInstancesRequest
+    { _igriRequestId :: !(Maybe Text)
+    , _igriProject :: !Text
+    , _igriZone :: !Text
+    , _igriPayload :: !InstanceGroupsRemoveInstancesRequest
     , _igriInstanceGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

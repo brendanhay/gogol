@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.RegionBackendServices.Delete
     , rbsdBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionBackendServices.delete@ method which the
 -- 'RegionBackendServicesDelete' request conforms to.
@@ -61,9 +61,9 @@ type RegionBackendServicesDeleteResource =
 -- /See:/ 'regionBackendServicesDelete' smart constructor.
 data RegionBackendServicesDelete =
   RegionBackendServicesDelete'
-    { _rbsdRequestId      :: !(Maybe Text)
-    , _rbsdProject        :: !Text
-    , _rbsdRegion         :: !Text
+    { _rbsdRequestId :: !(Maybe Text)
+    , _rbsdProject :: !Text
+    , _rbsdRegion :: !Text
     , _rbsdBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

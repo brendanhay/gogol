@@ -42,8 +42,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.Create
     , pocCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.create@ method which the
 -- 'ProjectsOccurrencesCreate' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsOccurrencesCreateResource =
 -- /See:/ 'projectsOccurrencesCreate' smart constructor.
 data ProjectsOccurrencesCreate =
   ProjectsOccurrencesCreate'
-    { _pocParent         :: !Text
-    , _pocXgafv          :: !(Maybe Xgafv)
+    { _pocParent :: !Text
+    , _pocXgafv :: !(Maybe Xgafv)
     , _pocUploadProtocol :: !(Maybe Text)
-    , _pocAccessToken    :: !(Maybe Text)
-    , _pocUploadType     :: !(Maybe Text)
-    , _pocPayload        :: !Occurrence
-    , _pocCallback       :: !(Maybe Text)
+    , _pocAccessToken :: !(Maybe Text)
+    , _pocUploadType :: !(Maybe Text)
+    , _pocPayload :: !Occurrence
+    , _pocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,8 +108,8 @@ projectsOccurrencesCreate pPocParent_ pPocPayload_ =
     }
 
 
--- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
--- which the occurrence is to be created.
+-- | Required. The name of the project in the form of
+-- \`projects\/[PROJECT_ID]\`, under which the occurrence is to be created.
 pocParent :: Lens' ProjectsOccurrencesCreate Text
 pocParent
   = lens _pocParent (\ s a -> s{_pocParent = a})

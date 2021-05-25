@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google DoubleClick Search.
+A client library for the Google Search Ads 360.
 
 
 ## Contribute

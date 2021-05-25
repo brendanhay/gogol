@@ -25,7 +25,7 @@
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.sslCerts.createEphemeral@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.sslCerts.createEphemeral@.
 module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
     (
     -- * REST Resource
@@ -36,27 +36,36 @@ module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
     , SSLCertsCreateEphemeral
 
     -- * Request Lenses
+    , scceXgafv
+    , scceUploadProtocol
     , scceProject
+    , scceAccessToken
+    , scceUploadType
     , sccePayload
+    , scceCallback
     , scceInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.createEphemeral@ method which the
 -- 'SSLCertsCreateEphemeral' request conforms to.
 type SSLCertsCreateEphemeralResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "createEphemeral" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] SSLCertsCreateEphemeralRequest :>
-                       Post '[JSON] SSLCert
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "createEphemeral" :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] SSLCertsCreateEphemeralRequest :>
+                               Post '[JSON] SSLCert
 
 -- | Generates a short-lived X509 certificate containing the provided public
 -- key and signed by a private key specific to the target instance. Users
@@ -66,8 +75,13 @@ type SSLCertsCreateEphemeralResource =
 -- /See:/ 'sslCertsCreateEphemeral' smart constructor.
 data SSLCertsCreateEphemeral =
   SSLCertsCreateEphemeral'
-    { _scceProject  :: !Text
-    , _sccePayload  :: !SSLCertsCreateEphemeralRequest
+    { _scceXgafv :: !(Maybe Xgafv)
+    , _scceUploadProtocol :: !(Maybe Text)
+    , _scceProject :: !Text
+    , _scceAccessToken :: !(Maybe Text)
+    , _scceUploadType :: !(Maybe Text)
+    , _sccePayload :: !SSLCertsCreateEphemeralRequest
+    , _scceCallback :: !(Maybe Text)
     , _scceInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -77,9 +91,19 @@ data SSLCertsCreateEphemeral =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'scceXgafv'
+--
+-- * 'scceUploadProtocol'
+--
 -- * 'scceProject'
 --
+-- * 'scceAccessToken'
+--
+-- * 'scceUploadType'
+--
 -- * 'sccePayload'
+--
+-- * 'scceCallback'
 --
 -- * 'scceInstance'
 sslCertsCreateEphemeral
@@ -89,21 +113,54 @@ sslCertsCreateEphemeral
     -> SSLCertsCreateEphemeral
 sslCertsCreateEphemeral pScceProject_ pSccePayload_ pScceInstance_ =
   SSLCertsCreateEphemeral'
-    { _scceProject = pScceProject_
+    { _scceXgafv = Nothing
+    , _scceUploadProtocol = Nothing
+    , _scceProject = pScceProject_
+    , _scceAccessToken = Nothing
+    , _scceUploadType = Nothing
     , _sccePayload = pSccePayload_
+    , _scceCallback = Nothing
     , _scceInstance = pScceInstance_
     }
 
+
+-- | V1 error format.
+scceXgafv :: Lens' SSLCertsCreateEphemeral (Maybe Xgafv)
+scceXgafv
+  = lens _scceXgafv (\ s a -> s{_scceXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+scceUploadProtocol :: Lens' SSLCertsCreateEphemeral (Maybe Text)
+scceUploadProtocol
+  = lens _scceUploadProtocol
+      (\ s a -> s{_scceUploadProtocol = a})
 
 -- | Project ID of the Cloud SQL project.
 scceProject :: Lens' SSLCertsCreateEphemeral Text
 scceProject
   = lens _scceProject (\ s a -> s{_scceProject = a})
 
+-- | OAuth access token.
+scceAccessToken :: Lens' SSLCertsCreateEphemeral (Maybe Text)
+scceAccessToken
+  = lens _scceAccessToken
+      (\ s a -> s{_scceAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+scceUploadType :: Lens' SSLCertsCreateEphemeral (Maybe Text)
+scceUploadType
+  = lens _scceUploadType
+      (\ s a -> s{_scceUploadType = a})
+
 -- | Multipart request metadata.
 sccePayload :: Lens' SSLCertsCreateEphemeral SSLCertsCreateEphemeralRequest
 sccePayload
   = lens _sccePayload (\ s a -> s{_sccePayload = a})
+
+-- | JSONP
+scceCallback :: Lens' SSLCertsCreateEphemeral (Maybe Text)
+scceCallback
+  = lens _scceCallback (\ s a -> s{_scceCallback = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
 scceInstance :: Lens' SSLCertsCreateEphemeral Text
@@ -116,7 +173,12 @@ instance GoogleRequest SSLCertsCreateEphemeral where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient SSLCertsCreateEphemeral'{..}
-          = go _scceProject _scceInstance (Just AltJSON)
+          = go _scceProject _scceInstance _scceXgafv
+              _scceUploadProtocol
+              _scceAccessToken
+              _scceUploadType
+              _scceCallback
+              (Just AltJSON)
               _sccePayload
               sQLAdminService
           where go

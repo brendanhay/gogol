@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Gener
     , plfgduCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.generateDownloadUrl@ method which the
 -- 'ProjectsLocationsFunctionsGenerateDownloadURL' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsLocationsFunctionsGenerateDownloadURLResource
 -- /See:/ 'projectsLocationsFunctionsGenerateDownloadURL' smart constructor.
 data ProjectsLocationsFunctionsGenerateDownloadURL =
   ProjectsLocationsFunctionsGenerateDownloadURL'
-    { _plfgduXgafv          :: !(Maybe Xgafv)
+    { _plfgduXgafv :: !(Maybe Xgafv)
     , _plfgduUploadProtocol :: !(Maybe Text)
-    , _plfgduAccessToken    :: !(Maybe Text)
-    , _plfgduUploadType     :: !(Maybe Text)
-    , _plfgduPayload        :: !GenerateDownloadURLRequest
-    , _plfgduName           :: !Text
-    , _plfgduCallback       :: !(Maybe Text)
+    , _plfgduAccessToken :: !(Maybe Text)
+    , _plfgduUploadType :: !(Maybe Text)
+    , _plfgduPayload :: !GenerateDownloadURLRequest
+    , _plfgduName :: !Text
+    , _plfgduCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

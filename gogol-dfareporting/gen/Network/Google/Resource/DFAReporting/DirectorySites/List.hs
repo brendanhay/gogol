@@ -23,7 +23,7 @@
 -- Retrieves a list of directory sites, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySites.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.directorySites.list@.
 module Network.Google.Resource.DFAReporting.DirectorySites.List
     (
     -- * REST Resource
@@ -34,9 +34,13 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
     , DirectorySitesList
 
     -- * Request Lenses
+    , dslXgafv
+    , dslUploadProtocol
+    , dslAccessToken
     , dslSearchString
     , dslAcceptsInterstitialPlacements
     , dslAcceptsPublisherPaidPlacements
+    , dslUploadType
     , dslIds
     , dslProFileId
     , dslSortOrder
@@ -46,34 +50,47 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
     , dslAcceptsInStreamVideoPlacements
     , dslMaxResults
     , dslDfpNetworkCode
+    , dslCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.directorySites.list@ method which the
 -- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
-               QueryParam "searchString" Text :>
-                 QueryParam "acceptsInterstitialPlacements" Bool :>
-                   QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "sortOrder" DirectorySitesListSortOrder :>
-                         QueryParam "active" Bool :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField" DirectorySitesListSortField
-                               :>
-                               QueryParam "acceptsInStreamVideoPlacements" Bool
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "acceptsInterstitialPlacements" Bool :>
+                         QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "sortOrder"
+                                 DirectorySitesListSortOrder
                                  :>
-                                 QueryParam "maxResults" (Textual Int32) :>
-                                   QueryParam "dfpNetworkCode" Text :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] DirectorySitesListResponse
+                                 QueryParam "active" Bool :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "sortField"
+                                       DirectorySitesListSortField
+                                       :>
+                                       QueryParam
+                                         "acceptsInStreamVideoPlacements"
+                                         Bool
+                                         :>
+                                         QueryParam "maxResults" (Textual Int32)
+                                           :>
+                                           QueryParam "dfpNetworkCode" Text :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON]
+                                                   DirectorySitesListResponse
 
 -- | Retrieves a list of directory sites, possibly filtered. This method
 -- supports paging.
@@ -81,18 +98,23 @@ type DirectorySitesListResource =
 -- /See:/ 'directorySitesList' smart constructor.
 data DirectorySitesList =
   DirectorySitesList'
-    { _dslSearchString                   :: !(Maybe Text)
-    , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
+    { _dslXgafv :: !(Maybe Xgafv)
+    , _dslUploadProtocol :: !(Maybe Text)
+    , _dslAccessToken :: !(Maybe Text)
+    , _dslSearchString :: !(Maybe Text)
+    , _dslAcceptsInterstitialPlacements :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _dslIds                            :: !(Maybe [Textual Int64])
-    , _dslProFileId                      :: !(Textual Int64)
-    , _dslSortOrder                      :: !DirectorySitesListSortOrder
-    , _dslActive                         :: !(Maybe Bool)
-    , _dslPageToken                      :: !(Maybe Text)
-    , _dslSortField                      :: !DirectorySitesListSortField
+    , _dslUploadType :: !(Maybe Text)
+    , _dslIds :: !(Maybe [Textual Int64])
+    , _dslProFileId :: !(Textual Int64)
+    , _dslSortOrder :: !DirectorySitesListSortOrder
+    , _dslActive :: !(Maybe Bool)
+    , _dslPageToken :: !(Maybe Text)
+    , _dslSortField :: !DirectorySitesListSortField
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _dslMaxResults                     :: !(Textual Int32)
-    , _dslDfpNetworkCode                 :: !(Maybe Text)
+    , _dslMaxResults :: !(Textual Int32)
+    , _dslDfpNetworkCode :: !(Maybe Text)
+    , _dslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -101,11 +123,19 @@ data DirectorySitesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dslXgafv'
+--
+-- * 'dslUploadProtocol'
+--
+-- * 'dslAccessToken'
+--
 -- * 'dslSearchString'
 --
 -- * 'dslAcceptsInterstitialPlacements'
 --
 -- * 'dslAcceptsPublisherPaidPlacements'
+--
+-- * 'dslUploadType'
 --
 -- * 'dslIds'
 --
@@ -124,14 +154,20 @@ data DirectorySitesList =
 -- * 'dslMaxResults'
 --
 -- * 'dslDfpNetworkCode'
+--
+-- * 'dslCallback'
 directorySitesList
     :: Int64 -- ^ 'dslProFileId'
     -> DirectorySitesList
 directorySitesList pDslProFileId_ =
   DirectorySitesList'
-    { _dslSearchString = Nothing
+    { _dslXgafv = Nothing
+    , _dslUploadProtocol = Nothing
+    , _dslAccessToken = Nothing
+    , _dslSearchString = Nothing
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
+    , _dslUploadType = Nothing
     , _dslIds = Nothing
     , _dslProFileId = _Coerce # pDslProFileId_
     , _dslSortOrder = DSLSOAscending
@@ -141,8 +177,25 @@ directorySitesList pDslProFileId_ =
     , _dslAcceptsInStreamVideoPlacements = Nothing
     , _dslMaxResults = 1000
     , _dslDfpNetworkCode = Nothing
+    , _dslCallback = Nothing
     }
 
+
+-- | V1 error format.
+dslXgafv :: Lens' DirectorySitesList (Maybe Xgafv)
+dslXgafv = lens _dslXgafv (\ s a -> s{_dslXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dslUploadProtocol :: Lens' DirectorySitesList (Maybe Text)
+dslUploadProtocol
+  = lens _dslUploadProtocol
+      (\ s a -> s{_dslUploadProtocol = a})
+
+-- | OAuth access token.
+dslAccessToken :: Lens' DirectorySitesList (Maybe Text)
+dslAccessToken
+  = lens _dslAccessToken
+      (\ s a -> s{_dslAccessToken = a})
 
 -- | Allows searching for objects by name, ID or URL. Wildcards (*) are
 -- allowed. For example, \"directory site*2015\" will return objects with
@@ -170,6 +223,12 @@ dslAcceptsPublisherPaidPlacements :: Lens' DirectorySitesList (Maybe Bool)
 dslAcceptsPublisherPaidPlacements
   = lens _dslAcceptsPublisherPaidPlacements
       (\ s a -> s{_dslAcceptsPublisherPaidPlacements = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dslUploadType :: Lens' DirectorySitesList (Maybe Text)
+dslUploadType
+  = lens _dslUploadType
+      (\ s a -> s{_dslUploadType = a})
 
 -- | Select only directory sites with these IDs.
 dslIds :: Lens' DirectorySitesList [Int64]
@@ -224,15 +283,23 @@ dslDfpNetworkCode
   = lens _dslDfpNetworkCode
       (\ s a -> s{_dslDfpNetworkCode = a})
 
+-- | JSONP
+dslCallback :: Lens' DirectorySitesList (Maybe Text)
+dslCallback
+  = lens _dslCallback (\ s a -> s{_dslCallback = a})
+
 instance GoogleRequest DirectorySitesList where
         type Rs DirectorySitesList =
              DirectorySitesListResponse
         type Scopes DirectorySitesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient DirectorySitesList'{..}
-          = go _dslProFileId _dslSearchString
+          = go _dslProFileId _dslXgafv _dslUploadProtocol
+              _dslAccessToken
+              _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
+              _dslUploadType
               (_dslIds ^. _Default)
               (Just _dslSortOrder)
               _dslActive
@@ -241,6 +308,7 @@ instance GoogleRequest DirectorySitesList where
               _dslAcceptsInStreamVideoPlacements
               (Just _dslMaxResults)
               _dslDfpNetworkCode
+              _dslCallback
               (Just AltJSON)
               dFAReportingService
           where go

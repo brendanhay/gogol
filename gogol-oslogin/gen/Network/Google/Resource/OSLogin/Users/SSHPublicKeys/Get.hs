@@ -41,8 +41,8 @@ module Network.Google.Resource.OSLogin.Users.SSHPublicKeys.Get
     , uspkgCallback
     ) where
 
-import           Network.Google.OSLogin.Types
-import           Network.Google.Prelude
+import Network.Google.OSLogin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @oslogin.users.sshPublicKeys.get@ method which the
 -- 'UsersSSHPublicKeysGet' request conforms to.
@@ -61,12 +61,12 @@ type UsersSSHPublicKeysGetResource =
 -- /See:/ 'usersSSHPublicKeysGet' smart constructor.
 data UsersSSHPublicKeysGet =
   UsersSSHPublicKeysGet'
-    { _uspkgXgafv          :: !(Maybe Xgafv)
+    { _uspkgXgafv :: !(Maybe Xgafv)
     , _uspkgUploadProtocol :: !(Maybe Text)
-    , _uspkgAccessToken    :: !(Maybe Text)
-    , _uspkgUploadType     :: !(Maybe Text)
-    , _uspkgName           :: !Text
-    , _uspkgCallback       :: !(Maybe Text)
+    , _uspkgAccessToken :: !(Maybe Text)
+    , _uspkgUploadType :: !(Maybe Text)
+    , _uspkgName :: !Text
+    , _uspkgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,7 @@ uspkgUploadType
   = lens _uspkgUploadType
       (\ s a -> s{_uspkgUploadType = a})
 
--- | The fingerprint of the public key to retrieve. Public keys are
+-- | Required. The fingerprint of the public key to retrieve. Public keys are
 -- identified by their SHA-256 fingerprint. The fingerprint of the public
 -- key is in format \`users\/{user}\/sshPublicKeys\/{fingerprint}\`.
 uspkgName :: Lens' UsersSSHPublicKeysGet Text

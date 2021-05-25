@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns channelSection resources that match the API request criteria.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channelSections.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.channelSections.list@.
 module Network.Google.Resource.YouTube.ChannelSections.List
     (
     -- * REST Resource
@@ -33,16 +33,21 @@ module Network.Google.Resource.YouTube.ChannelSections.List
     , ChannelSectionsList
 
     -- * Request Lenses
+    , cslXgafv
     , cslPart
     , cslMine
+    , cslUploadProtocol
+    , cslAccessToken
+    , cslUploadType
     , cslChannelId
     , cslHl
     , cslOnBehalfOfContentOwner
     , cslId
+    , cslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channelSections.list@ method which the
 -- 'ChannelSectionsList' request conforms to.
@@ -50,26 +55,36 @@ type ChannelSectionsListResource =
      "youtube" :>
        "v3" :>
          "channelSections" :>
-           QueryParam "part" Text :>
-             QueryParam "mine" Bool :>
-               QueryParam "channelId" Text :>
-                 QueryParam "hl" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "id" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ChannelSectionListResponse
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "mine" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "channelId" Text :>
+                         QueryParam "hl" Text :>
+                           QueryParam "onBehalfOfContentOwner" Text :>
+                             QueryParams "id" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ChannelSectionListResponse
 
--- | Returns channelSection resources that match the API request criteria.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'channelSectionsList' smart constructor.
 data ChannelSectionsList =
   ChannelSectionsList'
-    { _cslPart                   :: !Text
-    , _cslMine                   :: !(Maybe Bool)
-    , _cslChannelId              :: !(Maybe Text)
-    , _cslHl                     :: !(Maybe Text)
+    { _cslXgafv :: !(Maybe Xgafv)
+    , _cslPart :: ![Text]
+    , _cslMine :: !(Maybe Bool)
+    , _cslUploadProtocol :: !(Maybe Text)
+    , _cslAccessToken :: !(Maybe Text)
+    , _cslUploadType :: !(Maybe Text)
+    , _cslChannelId :: !(Maybe Text)
+    , _cslHl :: !(Maybe Text)
     , _cslOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cslId                     :: !(Maybe Text)
+    , _cslId :: !(Maybe [Text])
+    , _cslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,9 +93,17 @@ data ChannelSectionsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cslXgafv'
+--
 -- * 'cslPart'
 --
 -- * 'cslMine'
+--
+-- * 'cslUploadProtocol'
+--
+-- * 'cslAccessToken'
+--
+-- * 'cslUploadType'
 --
 -- * 'cslChannelId'
 --
@@ -89,56 +112,77 @@ data ChannelSectionsList =
 -- * 'cslOnBehalfOfContentOwner'
 --
 -- * 'cslId'
+--
+-- * 'cslCallback'
 channelSectionsList
-    :: Text -- ^ 'cslPart'
+    :: [Text] -- ^ 'cslPart'
     -> ChannelSectionsList
 channelSectionsList pCslPart_ =
   ChannelSectionsList'
-    { _cslPart = pCslPart_
+    { _cslXgafv = Nothing
+    , _cslPart = _Coerce # pCslPart_
     , _cslMine = Nothing
+    , _cslUploadProtocol = Nothing
+    , _cslAccessToken = Nothing
+    , _cslUploadType = Nothing
     , _cslChannelId = Nothing
     , _cslHl = Nothing
     , _cslOnBehalfOfContentOwner = Nothing
     , _cslId = Nothing
+    , _cslCallback = Nothing
     }
 
 
--- | The part parameter specifies a comma-separated list of one or more
+-- | V1 error format.
+cslXgafv :: Lens' ChannelSectionsList (Maybe Xgafv)
+cslXgafv = lens _cslXgafv (\ s a -> s{_cslXgafv = a})
+
+-- | The *part* parameter specifies a comma-separated list of one or more
 -- channelSection resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, and contentDetails. If the parameter identifies a property that
 -- contains child properties, the child properties will be included in the
 -- response. For example, in a channelSection resource, the snippet
 -- property contains other properties, such as a display title for the
--- channelSection. If you set part=snippet, the API response will also
+-- channelSection. If you set *part=snippet*, the API response will also
 -- contain all of those nested properties.
-cslPart :: Lens' ChannelSectionsList Text
-cslPart = lens _cslPart (\ s a -> s{_cslPart = a})
+cslPart :: Lens' ChannelSectionsList [Text]
+cslPart
+  = lens _cslPart (\ s a -> s{_cslPart = a}) . _Coerce
 
--- | Set this parameter\'s value to true to retrieve a feed of the
--- authenticated user\'s channelSections.
+-- | Return the ChannelSections owned by the authenticated user.
 cslMine :: Lens' ChannelSectionsList (Maybe Bool)
 cslMine = lens _cslMine (\ s a -> s{_cslMine = a})
 
--- | The channelId parameter specifies a YouTube channel ID. The API will
--- only return that channel\'s channelSections.
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cslUploadProtocol :: Lens' ChannelSectionsList (Maybe Text)
+cslUploadProtocol
+  = lens _cslUploadProtocol
+      (\ s a -> s{_cslUploadProtocol = a})
+
+-- | OAuth access token.
+cslAccessToken :: Lens' ChannelSectionsList (Maybe Text)
+cslAccessToken
+  = lens _cslAccessToken
+      (\ s a -> s{_cslAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cslUploadType :: Lens' ChannelSectionsList (Maybe Text)
+cslUploadType
+  = lens _cslUploadType
+      (\ s a -> s{_cslUploadType = a})
+
+-- | Return the ChannelSections owned by the specified channel ID.
 cslChannelId :: Lens' ChannelSectionsList (Maybe Text)
 cslChannelId
   = lens _cslChannelId (\ s a -> s{_cslChannelId = a})
 
--- | The hl parameter indicates that the snippet.localized property values in
--- the returned channelSection resources should be in the specified
--- language if localized values for that language are available. For
--- example, if the API request specifies hl=de, the snippet.localized
--- properties in the API response will contain German titles if German
--- titles are available. Channel owners can provide localized channel
--- section titles using either the channelSections.insert or
--- channelSections.update method.
+-- | Return content in specified language
 cslHl :: Lens' ChannelSectionsList (Maybe Text)
 cslHl = lens _cslHl (\ s a -> s{_cslHl = a})
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -152,12 +196,16 @@ cslOnBehalfOfContentOwner
   = lens _cslOnBehalfOfContentOwner
       (\ s a -> s{_cslOnBehalfOfContentOwner = a})
 
--- | The id parameter specifies a comma-separated list of the YouTube
--- channelSection ID(s) for the resource(s) that are being retrieved. In a
--- channelSection resource, the id property specifies the YouTube
--- channelSection ID.
-cslId :: Lens' ChannelSectionsList (Maybe Text)
-cslId = lens _cslId (\ s a -> s{_cslId = a})
+-- | Return the ChannelSections with the given IDs for Stubby or Apiary.
+cslId :: Lens' ChannelSectionsList [Text]
+cslId
+  = lens _cslId (\ s a -> s{_cslId = a}) . _Default .
+      _Coerce
+
+-- | JSONP
+cslCallback :: Lens' ChannelSectionsList (Maybe Text)
+cslCallback
+  = lens _cslCallback (\ s a -> s{_cslCallback = a})
 
 instance GoogleRequest ChannelSectionsList where
         type Rs ChannelSectionsList =
@@ -168,9 +216,14 @@ instance GoogleRequest ChannelSectionsList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient ChannelSectionsList'{..}
-          = go (Just _cslPart) _cslMine _cslChannelId _cslHl
+          = go _cslPart _cslXgafv _cslMine _cslUploadProtocol
+              _cslAccessToken
+              _cslUploadType
+              _cslChannelId
+              _cslHl
               _cslOnBehalfOfContentOwner
-              _cslId
+              (_cslId ^. _Default)
+              _cslCallback
               (Just AltJSON)
               youTubeService
           where go

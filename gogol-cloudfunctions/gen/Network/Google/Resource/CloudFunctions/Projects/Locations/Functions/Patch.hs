@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Patch
     , plfpCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.patch@ method which the
 -- 'ProjectsLocationsFunctionsPatch' request conforms to.
@@ -66,14 +66,14 @@ type ProjectsLocationsFunctionsPatchResource =
 -- /See:/ 'projectsLocationsFunctionsPatch' smart constructor.
 data ProjectsLocationsFunctionsPatch =
   ProjectsLocationsFunctionsPatch'
-    { _plfpXgafv          :: !(Maybe Xgafv)
+    { _plfpXgafv :: !(Maybe Xgafv)
     , _plfpUploadProtocol :: !(Maybe Text)
-    , _plfpUpdateMask     :: !(Maybe GFieldMask)
-    , _plfpAccessToken    :: !(Maybe Text)
-    , _plfpUploadType     :: !(Maybe Text)
-    , _plfpPayload        :: !CloudFunction
-    , _plfpName           :: !Text
-    , _plfpCallback       :: !(Maybe Text)
+    , _plfpUpdateMask :: !(Maybe GFieldMask)
+    , _plfpAccessToken :: !(Maybe Text)
+    , _plfpUploadType :: !(Maybe Text)
+    , _plfpPayload :: !CloudFunction
+    , _plfpName :: !Text
+    , _plfpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

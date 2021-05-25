@@ -13,9 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Poly API provides read access to assets hosted on
--- <https://poly.google.com poly.google.com> to all, and upload access to
--- <https://poly.google.com poly.google.com> for whitelisted accounts.
+-- The Poly API provides read access to assets hosted on poly.google.com to
+-- all, and upload access to poly.google.com for whitelisted accounts.
 --
 -- /See:/ <https://developers.google.com/poly/ Poly API Reference>
 module Network.Google.Poly
@@ -68,6 +67,9 @@ module Network.Google.Poly
     , llarNextPageToken
     , llarTotalSize
     , llarAssets
+
+    -- ** UsersAssetsListVisibility
+    , UsersAssetsListVisibility (..)
 
     -- ** RemixInfo
     , RemixInfo
@@ -175,18 +177,21 @@ module Network.Google.Poly
     , fRelativePath
     , fContentType
 
+    -- ** AssetsListMaxComplexity
+    , AssetsListMaxComplexity (..)
+
     -- ** UserAsset
     , UserAsset
     , userAsset
     , uaAsset
     ) where
 
-import           Network.Google.Poly.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Poly.Assets.Get
-import           Network.Google.Resource.Poly.Assets.List
-import           Network.Google.Resource.Poly.Users.Assets.List
-import           Network.Google.Resource.Poly.Users.Likedassets.List
+import Network.Google.Prelude
+import Network.Google.Poly.Types
+import Network.Google.Resource.Poly.Assets.Get
+import Network.Google.Resource.Poly.Assets.List
+import Network.Google.Resource.Poly.Users.Assets.List
+import Network.Google.Resource.Poly.Users.Likedassets.List
 
 {- $resources
 TODO

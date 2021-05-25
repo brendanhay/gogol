@@ -25,7 +25,7 @@
 -- policy by specifying the fields to be updated via updateMask. Returns
 -- the updated alerting policy.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.alertPolicies.patch@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.patch@.
 module Network.Google.Resource.Monitoring.Projects.AlertPolicies.Patch
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.Monitoring.Projects.AlertPolicies.Patch
     , pAppCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.alertPolicies.patch@ method which the
 -- 'ProjectsAlertPoliciesPatch' request conforms to.
@@ -72,14 +72,14 @@ type ProjectsAlertPoliciesPatchResource =
 -- /See:/ 'projectsAlertPoliciesPatch' smart constructor.
 data ProjectsAlertPoliciesPatch =
   ProjectsAlertPoliciesPatch'
-    { _pAppXgafv          :: !(Maybe Xgafv)
+    { _pAppXgafv :: !(Maybe Xgafv)
     , _pAppUploadProtocol :: !(Maybe Text)
-    , _pAppUpdateMask     :: !(Maybe GFieldMask)
-    , _pAppAccessToken    :: !(Maybe Text)
-    , _pAppUploadType     :: !(Maybe Text)
-    , _pAppPayload        :: !AlertPolicy
-    , _pAppName           :: !Text
-    , _pAppCallback       :: !(Maybe Text)
+    , _pAppUpdateMask :: !(Maybe GFieldMask)
+    , _pAppAccessToken :: !(Maybe Text)
+    , _pAppUploadType :: !(Maybe Text)
+    , _pAppPayload :: !AlertPolicy
+    , _pAppName :: !Text
+    , _pAppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -171,7 +171,8 @@ pAppPayload
   = lens _pAppPayload (\ s a -> s{_pAppPayload = a})
 
 -- | Required if the policy exists. The resource name for this policy. The
--- syntax is: projects\/[PROJECT_ID]\/alertPolicies\/[ALERT_POLICY_ID]
+-- format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/alertPolicies\/[ALERT_POLICY_ID]
 -- [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy
 -- is created. When calling the alertPolicies.create method, do not include
 -- the name field in the alerting policy passed as part of the request.

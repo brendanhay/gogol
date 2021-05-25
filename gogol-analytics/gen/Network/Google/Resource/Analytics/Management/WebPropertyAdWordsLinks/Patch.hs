@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patc
     , mwpawlpWebPropertyAdWordsLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.patch@ method which the
 -- 'ManagementWebPropertyAdWordsLinksPatch' request conforms to.
@@ -65,9 +65,9 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
 -- /See:/ 'managementWebPropertyAdWordsLinksPatch' smart constructor.
 data ManagementWebPropertyAdWordsLinksPatch =
   ManagementWebPropertyAdWordsLinksPatch'
-    { _mwpawlpWebPropertyId            :: !Text
-    , _mwpawlpPayload                  :: !EntityAdWordsLink
-    , _mwpawlpAccountId                :: !Text
+    { _mwpawlpWebPropertyId :: !Text
+    , _mwpawlpPayload :: !EntityAdWordsLink
+    , _mwpawlpAccountId :: !Text
     , _mwpawlpWebPropertyAdWordsLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

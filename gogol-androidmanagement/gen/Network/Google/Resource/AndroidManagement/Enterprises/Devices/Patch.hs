@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Patch
     , edpCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.patch@ method which the
 -- 'EnterprisesDevicesPatch' request conforms to.
@@ -65,14 +65,14 @@ type EnterprisesDevicesPatchResource =
 -- /See:/ 'enterprisesDevicesPatch' smart constructor.
 data EnterprisesDevicesPatch =
   EnterprisesDevicesPatch'
-    { _edpXgafv          :: !(Maybe Xgafv)
+    { _edpXgafv :: !(Maybe Xgafv)
     , _edpUploadProtocol :: !(Maybe Text)
-    , _edpUpdateMask     :: !(Maybe GFieldMask)
-    , _edpAccessToken    :: !(Maybe Text)
-    , _edpUploadType     :: !(Maybe Text)
-    , _edpPayload        :: !Device
-    , _edpName           :: !Text
-    , _edpCallback       :: !(Maybe Text)
+    , _edpUpdateMask :: !(Maybe GFieldMask)
+    , _edpAccessToken :: !(Maybe Text)
+    , _edpUploadType :: !(Maybe Text)
+    , _edpPayload :: !Device
+    , _edpName :: !Text
+    , _edpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

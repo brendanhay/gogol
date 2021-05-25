@@ -36,6 +36,7 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.GetIAMPolicy
     , BillingAccountsGetIAMPolicy
 
     -- * Request Lenses
+    , bagipOptionsRequestedPolicyVersion
     , bagipXgafv
     , bagipUploadProtocol
     , bagipAccessToken
@@ -44,20 +45,23 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.GetIAMPolicy
     , bagipCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.getIamPolicy@ method which the
 -- 'BillingAccountsGetIAMPolicy' request conforms to.
 type BillingAccountsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a billing account. The caller must
 -- have the \`billing.accounts.getIamPolicy\` permission on the account,
@@ -67,12 +71,13 @@ type BillingAccountsGetIAMPolicyResource =
 -- /See:/ 'billingAccountsGetIAMPolicy' smart constructor.
 data BillingAccountsGetIAMPolicy =
   BillingAccountsGetIAMPolicy'
-    { _bagipXgafv          :: !(Maybe Xgafv)
+    { _bagipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _bagipXgafv :: !(Maybe Xgafv)
     , _bagipUploadProtocol :: !(Maybe Text)
-    , _bagipAccessToken    :: !(Maybe Text)
-    , _bagipUploadType     :: !(Maybe Text)
-    , _bagipResource       :: !Text
-    , _bagipCallback       :: !(Maybe Text)
+    , _bagipAccessToken :: !(Maybe Text)
+    , _bagipUploadType :: !(Maybe Text)
+    , _bagipResource :: !Text
+    , _bagipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,6 +85,8 @@ data BillingAccountsGetIAMPolicy =
 -- | Creates a value of 'BillingAccountsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bagipOptionsRequestedPolicyVersion'
 --
 -- * 'bagipXgafv'
 --
@@ -97,7 +104,8 @@ billingAccountsGetIAMPolicy
     -> BillingAccountsGetIAMPolicy
 billingAccountsGetIAMPolicy pBagipResource_ =
   BillingAccountsGetIAMPolicy'
-    { _bagipXgafv = Nothing
+    { _bagipOptionsRequestedPolicyVersion = Nothing
+    , _bagipXgafv = Nothing
     , _bagipUploadProtocol = Nothing
     , _bagipAccessToken = Nothing
     , _bagipUploadType = Nothing
@@ -105,6 +113,19 @@ billingAccountsGetIAMPolicy pBagipResource_ =
     , _bagipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+bagipOptionsRequestedPolicyVersion :: Lens' BillingAccountsGetIAMPolicy (Maybe Int32)
+bagipOptionsRequestedPolicyVersion
+  = lens _bagipOptionsRequestedPolicyVersion
+      (\ s a -> s{_bagipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 bagipXgafv :: Lens' BillingAccountsGetIAMPolicy (Maybe Xgafv)
@@ -146,9 +167,14 @@ instance GoogleRequest BillingAccountsGetIAMPolicy
          where
         type Rs BillingAccountsGetIAMPolicy = Policy
         type Scopes BillingAccountsGetIAMPolicy =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsGetIAMPolicy'{..}
-          = go _bagipResource _bagipXgafv _bagipUploadProtocol
+          = go _bagipResource
+              _bagipOptionsRequestedPolicyVersion
+              _bagipXgafv
+              _bagipUploadProtocol
               _bagipAccessToken
               _bagipUploadType
               _bagipCallback

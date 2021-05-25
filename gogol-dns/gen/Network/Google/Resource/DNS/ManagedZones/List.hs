@@ -22,7 +22,7 @@
 --
 -- Enumerate ManagedZones that have been created but not yet deleted.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.list@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.managedZones.list@.
 module Network.Google.Resource.DNS.ManagedZones.List
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.DNS.ManagedZones.List
     , ManagedZonesList
 
     -- * Request Lenses
+    , mzlXgafv
+    , mzlUploadProtocol
     , mzlProject
+    , mzlAccessToken
+    , mzlUploadType
     , mzlPageToken
     , mzlDNSName
     , mzlMaxResults
+    , mzlCallback
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.managedZones.list@ method which the
 -- 'ManagedZonesList' request conforms to.
@@ -50,21 +55,31 @@ type ManagedZonesListResource =
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "dnsName" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ManagedZonesListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "dnsName" Text :>
+                           QueryParam "maxResults" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ManagedZonesListResponse
 
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --
 -- /See:/ 'managedZonesList' smart constructor.
 data ManagedZonesList =
   ManagedZonesList'
-    { _mzlProject    :: !Text
-    , _mzlPageToken  :: !(Maybe Text)
-    , _mzlDNSName    :: !(Maybe Text)
+    { _mzlXgafv :: !(Maybe Xgafv)
+    , _mzlUploadProtocol :: !(Maybe Text)
+    , _mzlProject :: !Text
+    , _mzlAccessToken :: !(Maybe Text)
+    , _mzlUploadType :: !(Maybe Text)
+    , _mzlPageToken :: !(Maybe Text)
+    , _mzlDNSName :: !(Maybe Text)
     , _mzlMaxResults :: !(Maybe (Textual Int32))
+    , _mzlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,29 +88,66 @@ data ManagedZonesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mzlXgafv'
+--
+-- * 'mzlUploadProtocol'
+--
 -- * 'mzlProject'
+--
+-- * 'mzlAccessToken'
+--
+-- * 'mzlUploadType'
 --
 -- * 'mzlPageToken'
 --
 -- * 'mzlDNSName'
 --
 -- * 'mzlMaxResults'
+--
+-- * 'mzlCallback'
 managedZonesList
     :: Text -- ^ 'mzlProject'
     -> ManagedZonesList
 managedZonesList pMzlProject_ =
   ManagedZonesList'
-    { _mzlProject = pMzlProject_
+    { _mzlXgafv = Nothing
+    , _mzlUploadProtocol = Nothing
+    , _mzlProject = pMzlProject_
+    , _mzlAccessToken = Nothing
+    , _mzlUploadType = Nothing
     , _mzlPageToken = Nothing
     , _mzlDNSName = Nothing
     , _mzlMaxResults = Nothing
+    , _mzlCallback = Nothing
     }
 
+
+-- | V1 error format.
+mzlXgafv :: Lens' ManagedZonesList (Maybe Xgafv)
+mzlXgafv = lens _mzlXgafv (\ s a -> s{_mzlXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mzlUploadProtocol :: Lens' ManagedZonesList (Maybe Text)
+mzlUploadProtocol
+  = lens _mzlUploadProtocol
+      (\ s a -> s{_mzlUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 mzlProject :: Lens' ManagedZonesList Text
 mzlProject
   = lens _mzlProject (\ s a -> s{_mzlProject = a})
+
+-- | OAuth access token.
+mzlAccessToken :: Lens' ManagedZonesList (Maybe Text)
+mzlAccessToken
+  = lens _mzlAccessToken
+      (\ s a -> s{_mzlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mzlUploadType :: Lens' ManagedZonesList (Maybe Text)
+mzlUploadType
+  = lens _mzlUploadType
+      (\ s a -> s{_mzlUploadType = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
 -- Use this parameter to continue a previous list request.
@@ -116,6 +168,11 @@ mzlMaxResults
       (\ s a -> s{_mzlMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+mzlCallback :: Lens' ManagedZonesList (Maybe Text)
+mzlCallback
+  = lens _mzlCallback (\ s a -> s{_mzlCallback = a})
+
 instance GoogleRequest ManagedZonesList where
         type Rs ManagedZonesList = ManagedZonesListResponse
         type Scopes ManagedZonesList =
@@ -124,8 +181,13 @@ instance GoogleRequest ManagedZonesList where
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesList'{..}
-          = go _mzlProject _mzlPageToken _mzlDNSName
+          = go _mzlProject _mzlXgafv _mzlUploadProtocol
+              _mzlAccessToken
+              _mzlUploadType
+              _mzlPageToken
+              _mzlDNSName
               _mzlMaxResults
+              _mzlCallback
               (Just AltJSON)
               dNSService
           where go

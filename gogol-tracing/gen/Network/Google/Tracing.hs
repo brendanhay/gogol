@@ -202,12 +202,12 @@ module Network.Google.Tracing
     , tName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Tracing.Projects.Traces.BatchWrite
-import           Network.Google.Resource.Tracing.Projects.Traces.List
-import           Network.Google.Resource.Tracing.Projects.Traces.ListSpans
-import           Network.Google.Resource.Tracing.Projects.Traces.Spans.Create
-import           Network.Google.Tracing.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Tracing.Projects.Traces.BatchWrite
+import Network.Google.Resource.Tracing.Projects.Traces.List
+import Network.Google.Resource.Tracing.Projects.Traces.ListSpans
+import Network.Google.Resource.Tracing.Projects.Traces.Spans.Create
+import Network.Google.Tracing.Types
 
 {- $resources
 TODO

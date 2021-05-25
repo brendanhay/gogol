@@ -16,7 +16,7 @@
 --
 module Network.Google.ProximityBeacon.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Expected location stability. This is set when the beacon is registered
 -- or updated, not automatically detected in any way. Optional.

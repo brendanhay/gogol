@@ -20,11 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes all the log entries in a log. The log reappears if it receives
--- new entries. Log entries written shortly before the delete operation
--- might not be deleted.
+-- Deletes all the log entries in a log for the _Default Log Bucket. The
+-- log reappears if it receives new entries. Log entries written shortly
+-- before the delete operation might not be deleted. Entries received after
+-- the delete operation with a timestamp before the operation will be
+-- deleted.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.logs.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.logs.delete@.
 module Network.Google.Resource.Logging.Folders.Logs.Delete
     (
     -- * REST Resource
@@ -43,8 +45,8 @@ module Network.Google.Resource.Logging.Folders.Logs.Delete
     , fldCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.logs.delete@ method which the
 -- 'FoldersLogsDelete' request conforms to.
@@ -58,19 +60,21 @@ type FoldersLogsDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes all the log entries in a log. The log reappears if it receives
--- new entries. Log entries written shortly before the delete operation
--- might not be deleted.
+-- | Deletes all the log entries in a log for the _Default Log Bucket. The
+-- log reappears if it receives new entries. Log entries written shortly
+-- before the delete operation might not be deleted. Entries received after
+-- the delete operation with a timestamp before the operation will be
+-- deleted.
 --
 -- /See:/ 'foldersLogsDelete' smart constructor.
 data FoldersLogsDelete =
   FoldersLogsDelete'
-    { _fldXgafv          :: !(Maybe Xgafv)
+    { _fldXgafv :: !(Maybe Xgafv)
     , _fldUploadProtocol :: !(Maybe Text)
-    , _fldAccessToken    :: !(Maybe Text)
-    , _fldUploadType     :: !(Maybe Text)
-    , _fldLogName        :: !Text
-    , _fldCallback       :: !(Maybe Text)
+    , _fldAccessToken :: !(Maybe Text)
+    , _fldUploadType :: !(Maybe Text)
+    , _fldLogName :: !Text
+    , _fldCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,13 +131,13 @@ fldUploadType
       (\ s a -> s{_fldUploadType = a})
 
 -- | Required. The resource name of the log to delete:
--- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
--- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\"
--- \"billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]\"
--- \"folders\/[FOLDER_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be URL-encoded.
--- For example, \"projects\/my-project-id\/logs\/syslog\",
--- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
--- For more information about log names, see LogEntry.
+-- projects\/[PROJECT_ID]\/logs\/[LOG_ID]
+-- organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]
+-- billingAccounts\/[BILLING_ACCOUNT_ID]\/logs\/[LOG_ID]
+-- folders\/[FOLDER_ID]\/logs\/[LOG_ID][LOG_ID] must be URL-encoded. For
+-- example, \"projects\/my-project-id\/logs\/syslog\",
+-- \"organizations\/123\/logs\/cloudaudit.googleapis.com%2Factivity\".For
+-- more information about log names, see LogEntry.
 fldLogName :: Lens' FoldersLogsDelete Text
 fldLogName
   = lens _fldLogName (\ s a -> s{_fldLogName = a})

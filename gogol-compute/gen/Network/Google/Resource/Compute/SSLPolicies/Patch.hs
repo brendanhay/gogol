@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.SSLPolicies.Patch
     , sppPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslPolicies.patch@ method which the
 -- 'SSLPoliciesPatch' request conforms to.
@@ -63,8 +63,8 @@ data SSLPoliciesPatch =
   SSLPoliciesPatch'
     { _sppSSLPolicy :: !Text
     , _sppRequestId :: !(Maybe Text)
-    , _sppProject   :: !Text
-    , _sppPayload   :: !SSLPolicy
+    , _sppProject :: !Text
+    , _sppPayload :: !SSLPolicy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

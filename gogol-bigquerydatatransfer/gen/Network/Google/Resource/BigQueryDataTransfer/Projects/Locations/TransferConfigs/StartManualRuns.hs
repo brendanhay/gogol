@@ -25,7 +25,7 @@
 -- the run_time is between start_time (inclusive) and end_time (exclusive),
 -- or for a specific run_time.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcsmrCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns@ method which the
 -- 'ProjectsLocationsTransferConfigsStartManualRuns' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsLocationsTransferConfigsStartManualRunsResource
 -- /See:/ 'projectsLocationsTransferConfigsStartManualRuns' smart constructor.
 data ProjectsLocationsTransferConfigsStartManualRuns =
   ProjectsLocationsTransferConfigsStartManualRuns'
-    { _pltcsmrParent         :: !Text
-    , _pltcsmrXgafv          :: !(Maybe Xgafv)
+    { _pltcsmrParent :: !Text
+    , _pltcsmrXgafv :: !(Maybe Xgafv)
     , _pltcsmrUploadProtocol :: !(Maybe Text)
-    , _pltcsmrAccessToken    :: !(Maybe Text)
-    , _pltcsmrUploadType     :: !(Maybe Text)
-    , _pltcsmrPayload        :: !StartManualTransferRunsRequest
-    , _pltcsmrCallback       :: !(Maybe Text)
+    , _pltcsmrAccessToken :: !(Maybe Text)
+    , _pltcsmrUploadType :: !(Maybe Text)
+    , _pltcsmrPayload :: !StartManualTransferRunsRequest
+    , _pltcsmrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -116,7 +116,8 @@ projectsLocationsTransferConfigsStartManualRuns pPltcsmrParent_ pPltcsmrPayload_
 
 
 -- | Transfer configuration name in the form:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`.
+-- \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`.
 pltcsmrParent :: Lens' ProjectsLocationsTransferConfigsStartManualRuns Text
 pltcsmrParent
   = lens _pltcsmrParent

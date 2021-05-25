@@ -20,11 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List of subscriptions managed by the reseller. The list can be all
+-- Lists of subscriptions managed by the reseller. The list can be all
 -- subscriptions, all of a customer\'s subscriptions, or all of a
--- customer\'s transferable subscriptions.
+-- customer\'s transferable subscriptions. Optionally, this method can
+-- filter the response by a \`customerNamePrefix\`. For more information,
+-- see [manage
+-- subscriptions](\/admin-sdk\/reseller\/v1\/how-tos\/manage_subscriptions).
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.list@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.list@.
 module Network.Google.Resource.Reseller.Subscriptions.List
     (
     -- * REST Resource
@@ -35,15 +38,20 @@ module Network.Google.Resource.Reseller.Subscriptions.List
     , SubscriptionsList
 
     -- * Request Lenses
+    , slXgafv
+    , slUploadProtocol
+    , slAccessToken
     , slCustomerNamePrefix
+    , slUploadType
     , slCustomerId
     , slCustomerAuthToken
     , slPageToken
     , slMaxResults
+    , slCallback
     ) where
 
-import           Network.Google.AppsReseller.Types
-import           Network.Google.Prelude
+import Network.Google.AppsReseller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.list@ method which the
 -- 'SubscriptionsList' request conforms to.
@@ -52,25 +60,39 @@ type SubscriptionsListResource =
        "reseller" :>
          "v1" :>
            "subscriptions" :>
-             QueryParam "customerNamePrefix" Text :>
-               QueryParam "customerId" Text :>
-                 QueryParam "customerAuthToken" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Subscriptions
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "customerNamePrefix" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "customerId" Text :>
+                         QueryParam "customerAuthToken" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Subscriptions
 
--- | List of subscriptions managed by the reseller. The list can be all
+-- | Lists of subscriptions managed by the reseller. The list can be all
 -- subscriptions, all of a customer\'s subscriptions, or all of a
--- customer\'s transferable subscriptions.
+-- customer\'s transferable subscriptions. Optionally, this method can
+-- filter the response by a \`customerNamePrefix\`. For more information,
+-- see [manage
+-- subscriptions](\/admin-sdk\/reseller\/v1\/how-tos\/manage_subscriptions).
 --
 -- /See:/ 'subscriptionsList' smart constructor.
 data SubscriptionsList =
   SubscriptionsList'
-    { _slCustomerNamePrefix :: !(Maybe Text)
-    , _slCustomerId         :: !(Maybe Text)
-    , _slCustomerAuthToken  :: !(Maybe Text)
-    , _slPageToken          :: !(Maybe Text)
-    , _slMaxResults         :: !(Maybe (Textual Word32))
+    { _slXgafv :: !(Maybe Xgafv)
+    , _slUploadProtocol :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slCustomerNamePrefix :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slCustomerId :: !(Maybe Text)
+    , _slCustomerAuthToken :: !(Maybe Text)
+    , _slPageToken :: !(Maybe Text)
+    , _slMaxResults :: !(Maybe (Textual Word32))
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,7 +101,15 @@ data SubscriptionsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'slXgafv'
+--
+-- * 'slUploadProtocol'
+--
+-- * 'slAccessToken'
+--
 -- * 'slCustomerNamePrefix'
+--
+-- * 'slUploadType'
 --
 -- * 'slCustomerId'
 --
@@ -88,44 +118,73 @@ data SubscriptionsList =
 -- * 'slPageToken'
 --
 -- * 'slMaxResults'
+--
+-- * 'slCallback'
 subscriptionsList
     :: SubscriptionsList
 subscriptionsList =
   SubscriptionsList'
-    { _slCustomerNamePrefix = Nothing
+    { _slXgafv = Nothing
+    , _slUploadProtocol = Nothing
+    , _slAccessToken = Nothing
+    , _slCustomerNamePrefix = Nothing
+    , _slUploadType = Nothing
     , _slCustomerId = Nothing
     , _slCustomerAuthToken = Nothing
     , _slPageToken = Nothing
     , _slMaxResults = Nothing
+    , _slCallback = Nothing
     }
 
 
+-- | V1 error format.
+slXgafv :: Lens' SubscriptionsList (Maybe Xgafv)
+slXgafv = lens _slXgafv (\ s a -> s{_slXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+slUploadProtocol :: Lens' SubscriptionsList (Maybe Text)
+slUploadProtocol
+  = lens _slUploadProtocol
+      (\ s a -> s{_slUploadProtocol = a})
+
+-- | OAuth access token.
+slAccessToken :: Lens' SubscriptionsList (Maybe Text)
+slAccessToken
+  = lens _slAccessToken
+      (\ s a -> s{_slAccessToken = a})
+
 -- | When retrieving all of your subscriptions and filtering for specific
 -- customers, you can enter a prefix for a customer name. Using an example
--- customer group that includes exam.com, example20.com and example.com: -
--- exa -- Returns all customer names that start with \'exa\' which could
--- include exam.com, example20.com, and example.com. A name prefix is
--- similar to using a regular expression\'s asterisk, exa*. - example --
--- Returns example20.com and example.com.
+-- customer group that includes \`exam.com\`, \`example20.com\` and
+-- \`example.com\`: - \`exa\` -- Returns all customer names that start with
+-- \'exa\' which could include \`exam.com\`, \`example20.com\`, and
+-- \`example.com\`. A name prefix is similar to using a regular
+-- expression\'s asterisk, exa*. - \`example\` -- Returns \`example20.com\`
+-- and \`example.com\`.
 slCustomerNamePrefix :: Lens' SubscriptionsList (Maybe Text)
 slCustomerNamePrefix
   = lens _slCustomerNamePrefix
       (\ s a -> s{_slCustomerNamePrefix = a})
 
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+slUploadType :: Lens' SubscriptionsList (Maybe Text)
+slUploadType
+  = lens _slUploadType (\ s a -> s{_slUploadType = a})
+
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a
--- customerId as a key for persistent data. If the domain name for a
--- customerId is changed, the Google system automatically updates.
+-- \`customerId\` as a key for persistent data. If the domain name for a
+-- \`customerId\` is changed, the Google system automatically updates.
 slCustomerId :: Lens' SubscriptionsList (Maybe Text)
 slCustomerId
   = lens _slCustomerId (\ s a -> s{_slCustomerId = a})
 
--- | The customerAuthToken query string is required when creating a resold
--- account that transfers a direct customer\'s subscription or transfers
--- another reseller customer\'s subscription to your reseller management.
--- This is a hexadecimal authentication token needed to complete the
--- subscription transfer. For more information, see the administrator help
--- center.
+-- | The \`customerAuthToken\` query string is required when creating a
+-- resold account that transfers a direct customer\'s subscription or
+-- transfers another reseller customer\'s subscription to your reseller
+-- management. This is a hexadecimal authentication token needed to
+-- complete the subscription transfer. For more information, see the
+-- administrator help center.
 slCustomerAuthToken :: Lens' SubscriptionsList (Maybe Text)
 slCustomerAuthToken
   = lens _slCustomerAuthToken
@@ -136,13 +195,18 @@ slPageToken :: Lens' SubscriptionsList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
--- | When retrieving a large list, the maxResults is the maximum number of
--- results per page. The nextPageToken value takes you to the next page.
--- The default is 20.
+-- | When retrieving a large list, the \`maxResults\` is the maximum number
+-- of results per page. The \`nextPageToken\` value takes you to the next
+-- page. The default is 20.
 slMaxResults :: Lens' SubscriptionsList (Maybe Word32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+slCallback :: Lens' SubscriptionsList (Maybe Text)
+slCallback
+  = lens _slCallback (\ s a -> s{_slCallback = a})
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = Subscriptions
@@ -150,10 +214,14 @@ instance GoogleRequest SubscriptionsList where
              '["https://www.googleapis.com/auth/apps.order",
                "https://www.googleapis.com/auth/apps.order.readonly"]
         requestClient SubscriptionsList'{..}
-          = go _slCustomerNamePrefix _slCustomerId
+          = go _slXgafv _slUploadProtocol _slAccessToken
+              _slCustomerNamePrefix
+              _slUploadType
+              _slCustomerId
               _slCustomerAuthToken
               _slPageToken
               _slMaxResults
+              _slCallback
               (Just AltJSON)
               appsResellerService
           where go

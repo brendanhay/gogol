@@ -91,11 +91,11 @@ module Network.Google.URLShortener
     , uhItems
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.URLShortener.URL.Get
-import           Network.Google.Resource.URLShortener.URL.Insert
-import           Network.Google.Resource.URLShortener.URL.List
-import           Network.Google.URLShortener.Types
+import Network.Google.Prelude
+import Network.Google.Resource.URLShortener.URL.Get
+import Network.Google.Resource.URLShortener.URL.Insert
+import Network.Google.Resource.URLShortener.URL.List
+import Network.Google.URLShortener.Types
 
 {- $resources
 TODO

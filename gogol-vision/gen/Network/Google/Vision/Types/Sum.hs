@@ -16,33 +16,33 @@
 --
 module Network.Google.Vision.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | Under-exposed likelihood.
-data FaceAnnotationUnderExposedLikelihood
+-- | Sorrow likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood
     = Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
     | VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable FaceAnnotationUnderExposedLikelihood
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood
 
-instance FromHttpApiData FaceAnnotationUnderExposedLikelihood where
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood where
     parseQueryParam = \case
         "UNKNOWN" -> Right Unknown
         "VERY_UNLIKELY" -> Right VeryUnlikely
@@ -50,9 +50,9 @@ instance FromHttpApiData FaceAnnotationUnderExposedLikelihood where
         "POSSIBLE" -> Right Possible
         "LIKELY" -> Right Likely
         "VERY_LIKELY" -> Right VeryLikely
-        x -> Left ("Unable to parse FaceAnnotationUnderExposedLikelihood from: " <> x)
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood from: " <> x)
 
-instance ToHttpApiData FaceAnnotationUnderExposedLikelihood where
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood where
     toQueryParam = \case
         Unknown -> "UNKNOWN"
         VeryUnlikely -> "VERY_UNLIKELY"
@@ -61,10 +61,108 @@ instance ToHttpApiData FaceAnnotationUnderExposedLikelihood where
         Likely -> "LIKELY"
         VeryLikely -> "VERY_LIKELY"
 
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationSorrowLikelihood where
+    toJSON = toJSONText
+
+-- | Under-exposed likelihood.
+data FaceAnnotationUnderExposedLikelihood
+    = FAUELUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | FAUELVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | FAUELUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | FAUELPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | FAUELLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | FAUELVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FaceAnnotationUnderExposedLikelihood
+
+instance FromHttpApiData FaceAnnotationUnderExposedLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FAUELUnknown
+        "VERY_UNLIKELY" -> Right FAUELVeryUnlikely
+        "UNLIKELY" -> Right FAUELUnlikely
+        "POSSIBLE" -> Right FAUELPossible
+        "LIKELY" -> Right FAUELLikely
+        "VERY_LIKELY" -> Right FAUELVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationUnderExposedLikelihood from: " <> x)
+
+instance ToHttpApiData FaceAnnotationUnderExposedLikelihood where
+    toQueryParam = \case
+        FAUELUnknown -> "UNKNOWN"
+        FAUELVeryUnlikely -> "VERY_UNLIKELY"
+        FAUELUnlikely -> "UNLIKELY"
+        FAUELPossible -> "POSSIBLE"
+        FAUELLikely -> "LIKELY"
+        FAUELVeryLikely -> "VERY_LIKELY"
+
 instance FromJSON FaceAnnotationUnderExposedLikelihood where
     parseJSON = parseJSONText "FaceAnnotationUnderExposedLikelihood"
 
 instance ToJSON FaceAnnotationUnderExposedLikelihood where
+    toJSON = toJSONText
+
+-- | Joy likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood
+    = GCVVFAJLUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVFAJLVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVFAJLUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVFAJLPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVFAJLLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVFAJLVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVFAJLUnknown
+        "VERY_UNLIKELY" -> Right GCVVFAJLVeryUnlikely
+        "UNLIKELY" -> Right GCVVFAJLUnlikely
+        "POSSIBLE" -> Right GCVVFAJLPossible
+        "LIKELY" -> Right GCVVFAJLLikely
+        "VERY_LIKELY" -> Right GCVVFAJLVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood where
+    toQueryParam = \case
+        GCVVFAJLUnknown -> "UNKNOWN"
+        GCVVFAJLVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAJLUnlikely -> "UNLIKELY"
+        GCVVFAJLPossible -> "POSSIBLE"
+        GCVVFAJLLikely -> "LIKELY"
+        GCVVFAJLVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationJoyLikelihood where
     toJSON = toJSONText
 
 -- | Surprise likelihood.
@@ -74,19 +172,19 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihood
       -- Unknown likelihood.
     | GCVVFASLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFASLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFASLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFASLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFASLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationSurpriseLikelihood
@@ -123,19 +221,19 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationBlurredLikelihood
       -- Unknown likelihood.
     | GCVVFABLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFABLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFABLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFABLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFABLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationBlurredLikelihood
@@ -272,6 +370,12 @@ data GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType
     | ChinRightGonion
       -- ^ @CHIN_RIGHT_GONION@
       -- Chin right gonion.
+    | LeftCheekCenter
+      -- ^ @LEFT_CHEEK_CENTER@
+      -- Left cheek center.
+    | RightCheekCenter
+      -- ^ @RIGHT_CHEEK_CENTER@
+      -- Right cheek center.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType
@@ -313,6 +417,8 @@ instance FromHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType wh
         "CHIN_GNATHION" -> Right ChinGnathion
         "CHIN_LEFT_GONION" -> Right ChinLeftGonion
         "CHIN_RIGHT_GONION" -> Right ChinRightGonion
+        "LEFT_CHEEK_CENTER" -> Right LeftCheekCenter
+        "RIGHT_CHEEK_CENTER" -> Right RightCheekCenter
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType where
@@ -352,11 +458,63 @@ instance ToHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType wher
         ChinGnathion -> "CHIN_GNATHION"
         ChinLeftGonion -> "CHIN_LEFT_GONION"
         ChinRightGonion -> "CHIN_RIGHT_GONION"
+        LeftCheekCenter -> "LEFT_CHEEK_CENTER"
+        RightCheekCenter -> "RIGHT_CHEEK_CENTER"
 
 instance FromJSON GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType"
 
 instance ToJSON GoogleCloudVisionV1p3beta1FaceAnnotationLandmarkType where
+    toJSON = toJSONText
+
+-- | Detected break type.
+data GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType
+    = GCVVTADBTUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown break label type.
+    | GCVVTADBTSpace
+      -- ^ @SPACE@
+      -- Regular space.
+    | GCVVTADBTSureSpace
+      -- ^ @SURE_SPACE@
+      -- Sure space (very wide).
+    | GCVVTADBTEolSureSpace
+      -- ^ @EOL_SURE_SPACE@
+      -- Line-wrapping break.
+    | GCVVTADBTHyphen
+      -- ^ @HYPHEN@
+      -- End-line hyphen that is not present in text; does not co-occur with
+      -- \`SPACE\`, \`LEADER_SPACE\`, or \`LINE_BREAK\`.
+    | GCVVTADBTLineBreak
+      -- ^ @LINE_BREAK@
+      -- Line break that ends a paragraph.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVTADBTUnknown
+        "SPACE" -> Right GCVVTADBTSpace
+        "SURE_SPACE" -> Right GCVVTADBTSureSpace
+        "EOL_SURE_SPACE" -> Right GCVVTADBTEolSureSpace
+        "HYPHEN" -> Right GCVVTADBTHyphen
+        "LINE_BREAK" -> Right GCVVTADBTLineBreak
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType where
+    toQueryParam = \case
+        GCVVTADBTUnknown -> "UNKNOWN"
+        GCVVTADBTSpace -> "SPACE"
+        GCVVTADBTSureSpace -> "SURE_SPACE"
+        GCVVTADBTEolSureSpace -> "EOL_SURE_SPACE"
+        GCVVTADBTHyphen -> "HYPHEN"
+        GCVVTADBTLineBreak -> "LINE_BREAK"
+
+instance FromJSON GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType"
+
+instance ToJSON GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreakType where
     toJSON = toJSONText
 
 -- | Under-exposed likelihood.
@@ -366,19 +524,19 @@ data GoogleCloudVisionV1p3beta1FaceAnnotationUnderExposedLikelihood
       -- Unknown likelihood.
     | GCVVFAUELVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAUELUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAUELPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAUELLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAUELVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationUnderExposedLikelihood
@@ -415,19 +573,19 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationSurpriseLikelihood
       -- Unknown likelihood.
     | GVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationSurpriseLikelihood
@@ -465,19 +623,19 @@ data GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoof
       -- Unknown likelihood.
     | GCVVSSASVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVSSASUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVSSASPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVSSASLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVSSASVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoof
@@ -507,6 +665,53 @@ instance FromJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoof where
 instance ToJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoof where
     toJSON = toJSONText
 
+-- | The current state of the batch operation.
+data GoogleCloudVisionV1p4beta1BatchOperationMetadataState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Invalid.
+    | Processing
+      -- ^ @PROCESSING@
+      -- Request is actively being processed.
+    | Successful
+      -- ^ @SUCCESSFUL@
+      -- The request is done and at least one item has been successfully
+      -- processed.
+    | Failed
+      -- ^ @FAILED@
+      -- The request is done and no item has been successfully processed.
+    | Cancelled
+      -- ^ @CANCELLED@
+      -- The request is done after the longrunning.Operations.CancelOperation has
+      -- been called by the user. Any records that were processed before the
+      -- cancel command are output as specified in the request.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1BatchOperationMetadataState
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1BatchOperationMetadataState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "PROCESSING" -> Right Processing
+        "SUCCESSFUL" -> Right Successful
+        "FAILED" -> Right Failed
+        "CANCELLED" -> Right Cancelled
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1BatchOperationMetadataState from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1BatchOperationMetadataState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Processing -> "PROCESSING"
+        Successful -> "SUCCESSFUL"
+        Failed -> "FAILED"
+        Cancelled -> "CANCELLED"
+
+instance FromJSON GoogleCloudVisionV1p4beta1BatchOperationMetadataState where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1BatchOperationMetadataState"
+
+instance ToJSON GoogleCloudVisionV1p4beta1BatchOperationMetadataState where
+    toJSON = toJSONText
+
 -- | Anger likelihood.
 data GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihood
     = GCVVFAALUnknown
@@ -514,19 +719,19 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihood
       -- Unknown likelihood.
     | GCVVFAALVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAALUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAALPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAALLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAALVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationAngerLikelihood
@@ -563,19 +768,19 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationSorrowLikelihood
       -- Unknown likelihood.
     | GOOVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GOOUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GOOPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GOOLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GOOVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationSorrowLikelihood
@@ -607,46 +812,46 @@ instance ToJSON GoogleCloudVisionV1p2beta1FaceAnnotationSorrowLikelihood where
 
 -- | Joy likelihood.
 data GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood
-    = GCVVFAJLUnknown
+    = GCVVFAJLCUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFAJLVeryUnlikely
+    | GCVVFAJLCVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFAJLUnlikely
+      -- It is very unlikely.
+    | GCVVFAJLCUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFAJLPossible
+      -- It is unlikely.
+    | GCVVFAJLCPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFAJLLikely
+      -- It is possible.
+    | GCVVFAJLCLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFAJLVeryLikely
+      -- It is likely.
+    | GCVVFAJLCVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFAJLUnknown
-        "VERY_UNLIKELY" -> Right GCVVFAJLVeryUnlikely
-        "UNLIKELY" -> Right GCVVFAJLUnlikely
-        "POSSIBLE" -> Right GCVVFAJLPossible
-        "LIKELY" -> Right GCVVFAJLLikely
-        "VERY_LIKELY" -> Right GCVVFAJLVeryLikely
+        "UNKNOWN" -> Right GCVVFAJLCUnknown
+        "VERY_UNLIKELY" -> Right GCVVFAJLCVeryUnlikely
+        "UNLIKELY" -> Right GCVVFAJLCUnlikely
+        "POSSIBLE" -> Right GCVVFAJLCPossible
+        "LIKELY" -> Right GCVVFAJLCLikely
+        "VERY_LIKELY" -> Right GCVVFAJLCVeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood where
     toQueryParam = \case
-        GCVVFAJLUnknown -> "UNKNOWN"
-        GCVVFAJLVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFAJLUnlikely -> "UNLIKELY"
-        GCVVFAJLPossible -> "POSSIBLE"
-        GCVVFAJLLikely -> "LIKELY"
-        GCVVFAJLVeryLikely -> "VERY_LIKELY"
+        GCVVFAJLCUnknown -> "UNKNOWN"
+        GCVVFAJLCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAJLCUnlikely -> "UNLIKELY"
+        GCVVFAJLCPossible -> "POSSIBLE"
+        GCVVFAJLCLikely -> "LIKELY"
+        GCVVFAJLCVeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1FaceAnnotationJoyLikelihood"
@@ -661,19 +866,19 @@ data GoogleCloudVisionV1p3beta1SafeSearchAnnotationViolence
       -- Unknown likelihood.
     | GCVVSSAVVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVSSAVUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVSSAVPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVSSAVLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVSSAVVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1SafeSearchAnnotationViolence
@@ -710,19 +915,19 @@ data GoogleCloudVisionV1p1beta1SafeSearchAnnotationMedical
       -- Unknown likelihood.
     | GCVVSSAMVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVSSAMUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVSSAMPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVSSAMLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVSSAMVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1SafeSearchAnnotationMedical
@@ -752,21 +957,122 @@ instance FromJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationMedical where
 instance ToJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationMedical where
     toJSON = toJSONText
 
+-- | Blurred likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood
+    = GCVVFABLCUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVFABLCVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVFABLCUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVFABLCPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVFABLCLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVFABLCVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVFABLCUnknown
+        "VERY_UNLIKELY" -> Right GCVVFABLCVeryUnlikely
+        "UNLIKELY" -> Right GCVVFABLCUnlikely
+        "POSSIBLE" -> Right GCVVFABLCPossible
+        "LIKELY" -> Right GCVVFABLCLikely
+        "VERY_LIKELY" -> Right GCVVFABLCVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood where
+    toQueryParam = \case
+        GCVVFABLCUnknown -> "UNKNOWN"
+        GCVVFABLCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFABLCUnlikely -> "UNLIKELY"
+        GCVVFABLCPossible -> "POSSIBLE"
+        GCVVFABLCLikely -> "LIKELY"
+        GCVVFABLCVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationBlurredLikelihood where
+    toJSON = toJSONText
+
+-- | Likelihood that the request image contains racy content. Racy content
+-- may include (but is not limited to) skimpy or sheer clothing,
+-- strategically covered nudity, lewd or provocative poses, or close-ups of
+-- sensitive body areas.
+data GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy
+    = GCVVSSARUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVSSARVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVSSARUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVSSARPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVSSARLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVSSARVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVSSARUnknown
+        "VERY_UNLIKELY" -> Right GCVVSSARVeryUnlikely
+        "UNLIKELY" -> Right GCVVSSARUnlikely
+        "POSSIBLE" -> Right GCVVSSARPossible
+        "LIKELY" -> Right GCVVSSARLikely
+        "VERY_LIKELY" -> Right GCVVSSARVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy where
+    toQueryParam = \case
+        GCVVSSARUnknown -> "UNKNOWN"
+        GCVVSSARVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSARUnlikely -> "UNLIKELY"
+        GCVVSSARPossible -> "POSSIBLE"
+        GCVVSSARLikely -> "LIKELY"
+        GCVVSSARVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy"
+
+instance ToJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationRacy where
+    toJSON = toJSONText
+
 -- | Current state of the batch operation.
 data GoogleCloudVisionV1p2beta1OperationMetadataState
-    = StateUnspecified
+    = GCVVOMSStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- Invalid.
-    | Created
+    | GCVVOMSCreated
       -- ^ @CREATED@
       -- Request is received.
-    | Running
+    | GCVVOMSRunning
       -- ^ @RUNNING@
       -- Request is actively being processed.
-    | Done
+    | GCVVOMSDone
       -- ^ @DONE@
       -- The batch processing is done.
-    | Cancelled
+    | GCVVOMSCancelled
       -- ^ @CANCELLED@
       -- The batch processing was cancelled.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -775,20 +1081,20 @@ instance Hashable GoogleCloudVisionV1p2beta1OperationMetadataState
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1OperationMetadataState where
     parseQueryParam = \case
-        "STATE_UNSPECIFIED" -> Right StateUnspecified
-        "CREATED" -> Right Created
-        "RUNNING" -> Right Running
-        "DONE" -> Right Done
-        "CANCELLED" -> Right Cancelled
+        "STATE_UNSPECIFIED" -> Right GCVVOMSStateUnspecified
+        "CREATED" -> Right GCVVOMSCreated
+        "RUNNING" -> Right GCVVOMSRunning
+        "DONE" -> Right GCVVOMSDone
+        "CANCELLED" -> Right GCVVOMSCancelled
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1OperationMetadataState from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1OperationMetadataState where
     toQueryParam = \case
-        StateUnspecified -> "STATE_UNSPECIFIED"
-        Created -> "CREATED"
-        Running -> "RUNNING"
-        Done -> "DONE"
-        Cancelled -> "CANCELLED"
+        GCVVOMSStateUnspecified -> "STATE_UNSPECIFIED"
+        GCVVOMSCreated -> "CREATED"
+        GCVVOMSRunning -> "RUNNING"
+        GCVVOMSDone -> "DONE"
+        GCVVOMSCancelled -> "CANCELLED"
 
 instance FromJSON GoogleCloudVisionV1p2beta1OperationMetadataState where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1OperationMetadataState"
@@ -798,46 +1104,46 @@ instance ToJSON GoogleCloudVisionV1p2beta1OperationMetadataState where
 
 -- | Blurred likelihood.
 data GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood
-    = GCVVFABLCUnknown
+    = GGUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFABLCVeryUnlikely
+    | GGVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFABLCUnlikely
+      -- It is very unlikely.
+    | GGUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFABLCPossible
+      -- It is unlikely.
+    | GGPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFABLCLikely
+      -- It is possible.
+    | GGLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFABLCVeryLikely
+      -- It is likely.
+    | GGVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFABLCUnknown
-        "VERY_UNLIKELY" -> Right GCVVFABLCVeryUnlikely
-        "UNLIKELY" -> Right GCVVFABLCUnlikely
-        "POSSIBLE" -> Right GCVVFABLCPossible
-        "LIKELY" -> Right GCVVFABLCLikely
-        "VERY_LIKELY" -> Right GCVVFABLCVeryLikely
+        "UNKNOWN" -> Right GGUnknown
+        "VERY_UNLIKELY" -> Right GGVeryUnlikely
+        "UNLIKELY" -> Right GGUnlikely
+        "POSSIBLE" -> Right GGPossible
+        "LIKELY" -> Right GGLikely
+        "VERY_LIKELY" -> Right GGVeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood where
     toQueryParam = \case
-        GCVVFABLCUnknown -> "UNKNOWN"
-        GCVVFABLCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFABLCUnlikely -> "UNLIKELY"
-        GCVVFABLCPossible -> "POSSIBLE"
-        GCVVFABLCLikely -> "LIKELY"
-        GCVVFABLCVeryLikely -> "VERY_LIKELY"
+        GGUnknown -> "UNKNOWN"
+        GGVeryUnlikely -> "VERY_UNLIKELY"
+        GGUnlikely -> "UNLIKELY"
+        GGPossible -> "POSSIBLE"
+        GGLikely -> "LIKELY"
+        GGVeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1FaceAnnotationBlurredLikelihood"
@@ -852,19 +1158,19 @@ data FaceAnnotationHeadwearLikelihood
       -- Unknown likelihood.
     | FAHLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | FAHLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | FAHLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | FAHLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | FAHLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationHeadwearLikelihood
@@ -914,9 +1220,6 @@ data BlockBlockType
     | BBTBarcode
       -- ^ @BARCODE@
       -- Barcode block.
-    | BBTKeyValuePair
-      -- ^ @KEY_VALUE_PAIR@
-      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlockBlockType
@@ -929,7 +1232,6 @@ instance FromHttpApiData BlockBlockType where
         "PICTURE" -> Right BBTPicture
         "RULER" -> Right BBTRuler
         "BARCODE" -> Right BBTBarcode
-        "KEY_VALUE_PAIR" -> Right BBTKeyValuePair
         x -> Left ("Unable to parse BlockBlockType from: " <> x)
 
 instance ToHttpApiData BlockBlockType where
@@ -940,7 +1242,6 @@ instance ToHttpApiData BlockBlockType where
         BBTPicture -> "PICTURE"
         BBTRuler -> "RULER"
         BBTBarcode -> "BARCODE"
-        BBTKeyValuePair -> "KEY_VALUE_PAIR"
 
 instance FromJSON BlockBlockType where
     parseJSON = parseJSONText "BlockBlockType"
@@ -1000,46 +1301,46 @@ instance ToJSON GoogleCloudVisionV1p3beta1BatchOperationMetadataState where
 -- strategically covered nudity, lewd or provocative poses, or close-ups of
 -- sensitive body areas.
 data GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy
-    = GCVVSSARUnknown
+    = GCVVSSARCUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSARVeryUnlikely
+    | GCVVSSARCVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSARUnlikely
+      -- It is very unlikely.
+    | GCVVSSARCUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSARPossible
+      -- It is unlikely.
+    | GCVVSSARCPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSARLikely
+      -- It is possible.
+    | GCVVSSARCLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSARVeryLikely
+      -- It is likely.
+    | GCVVSSARCVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSARUnknown
-        "VERY_UNLIKELY" -> Right GCVVSSARVeryUnlikely
-        "UNLIKELY" -> Right GCVVSSARUnlikely
-        "POSSIBLE" -> Right GCVVSSARPossible
-        "LIKELY" -> Right GCVVSSARLikely
-        "VERY_LIKELY" -> Right GCVVSSARVeryLikely
+        "UNKNOWN" -> Right GCVVSSARCUnknown
+        "VERY_UNLIKELY" -> Right GCVVSSARCVeryUnlikely
+        "UNLIKELY" -> Right GCVVSSARCUnlikely
+        "POSSIBLE" -> Right GCVVSSARCPossible
+        "LIKELY" -> Right GCVVSSARCLikely
+        "VERY_LIKELY" -> Right GCVVSSARCVeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy where
     toQueryParam = \case
-        GCVVSSARUnknown -> "UNKNOWN"
-        GCVVSSARVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSARUnlikely -> "UNLIKELY"
-        GCVVSSARPossible -> "POSSIBLE"
-        GCVVSSARLikely -> "LIKELY"
-        GCVVSSARVeryLikely -> "VERY_LIKELY"
+        GCVVSSARCUnknown -> "UNKNOWN"
+        GCVVSSARCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSARCUnlikely -> "UNLIKELY"
+        GCVVSSARCPossible -> "POSSIBLE"
+        GCVVSSARCLikely -> "LIKELY"
+        GCVVSSARCVeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1SafeSearchAnnotationRacy"
@@ -1056,19 +1357,19 @@ data SafeSearchAnnotationAdult
       -- Unknown likelihood.
     | SSAAVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | SSAAUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | SSAAPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | SSAALikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | SSAAVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationAdult
@@ -1100,23 +1401,23 @@ instance ToJSON SafeSearchAnnotationAdult where
 
 -- | Detected break type.
 data GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType
-    = GCVVTADBTUnknown
+    = GCVVTADBTCUnknown
       -- ^ @UNKNOWN@
       -- Unknown break label type.
-    | GCVVTADBTSpace
+    | GCVVTADBTCSpace
       -- ^ @SPACE@
       -- Regular space.
-    | GCVVTADBTSureSpace
+    | GCVVTADBTCSureSpace
       -- ^ @SURE_SPACE@
       -- Sure space (very wide).
-    | GCVVTADBTEolSureSpace
+    | GCVVTADBTCEolSureSpace
       -- ^ @EOL_SURE_SPACE@
       -- Line-wrapping break.
-    | GCVVTADBTHyphen
+    | GCVVTADBTCHyphen
       -- ^ @HYPHEN@
       -- End-line hyphen that is not present in text; does not co-occur with
       -- \`SPACE\`, \`LEADER_SPACE\`, or \`LINE_BREAK\`.
-    | GCVVTADBTLineBreak
+    | GCVVTADBTCLineBreak
       -- ^ @LINE_BREAK@
       -- Line break that ends a paragraph.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1125,22 +1426,22 @@ instance Hashable GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVTADBTUnknown
-        "SPACE" -> Right GCVVTADBTSpace
-        "SURE_SPACE" -> Right GCVVTADBTSureSpace
-        "EOL_SURE_SPACE" -> Right GCVVTADBTEolSureSpace
-        "HYPHEN" -> Right GCVVTADBTHyphen
-        "LINE_BREAK" -> Right GCVVTADBTLineBreak
+        "UNKNOWN" -> Right GCVVTADBTCUnknown
+        "SPACE" -> Right GCVVTADBTCSpace
+        "SURE_SPACE" -> Right GCVVTADBTCSureSpace
+        "EOL_SURE_SPACE" -> Right GCVVTADBTCEolSureSpace
+        "HYPHEN" -> Right GCVVTADBTCHyphen
+        "LINE_BREAK" -> Right GCVVTADBTCLineBreak
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType where
     toQueryParam = \case
-        GCVVTADBTUnknown -> "UNKNOWN"
-        GCVVTADBTSpace -> "SPACE"
-        GCVVTADBTSureSpace -> "SURE_SPACE"
-        GCVVTADBTEolSureSpace -> "EOL_SURE_SPACE"
-        GCVVTADBTHyphen -> "HYPHEN"
-        GCVVTADBTLineBreak -> "LINE_BREAK"
+        GCVVTADBTCUnknown -> "UNKNOWN"
+        GCVVTADBTCSpace -> "SPACE"
+        GCVVTADBTCSureSpace -> "SURE_SPACE"
+        GCVVTADBTCEolSureSpace -> "EOL_SURE_SPACE"
+        GCVVTADBTCHyphen -> "HYPHEN"
+        GCVVTADBTCLineBreak -> "LINE_BREAK"
 
 instance FromJSON GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType"
@@ -1153,46 +1454,46 @@ instance ToJSON GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreakType where
 -- strategically covered nudity, lewd or provocative poses, or close-ups of
 -- sensitive body areas.
 data GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy
-    = GCVVSSARCUnknown
+    = GOOOUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSARCVeryUnlikely
+    | GOOOVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSARCUnlikely
+      -- It is very unlikely.
+    | GOOOUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSARCPossible
+      -- It is unlikely.
+    | GOOOPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSARCLikely
+      -- It is possible.
+    | GOOOLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSARCVeryLikely
+      -- It is likely.
+    | GOOOVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSARCUnknown
-        "VERY_UNLIKELY" -> Right GCVVSSARCVeryUnlikely
-        "UNLIKELY" -> Right GCVVSSARCUnlikely
-        "POSSIBLE" -> Right GCVVSSARCPossible
-        "LIKELY" -> Right GCVVSSARCLikely
-        "VERY_LIKELY" -> Right GCVVSSARCVeryLikely
+        "UNKNOWN" -> Right GOOOUnknown
+        "VERY_UNLIKELY" -> Right GOOOVeryUnlikely
+        "UNLIKELY" -> Right GOOOUnlikely
+        "POSSIBLE" -> Right GOOOPossible
+        "LIKELY" -> Right GOOOLikely
+        "VERY_LIKELY" -> Right GOOOVeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy where
     toQueryParam = \case
-        GCVVSSARCUnknown -> "UNKNOWN"
-        GCVVSSARCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSARCUnlikely -> "UNLIKELY"
-        GCVVSSARCPossible -> "POSSIBLE"
-        GCVVSSARCLikely -> "LIKELY"
-        GCVVSSARCVeryLikely -> "VERY_LIKELY"
+        GOOOUnknown -> "UNKNOWN"
+        GOOOVeryUnlikely -> "VERY_UNLIKELY"
+        GOOOUnlikely -> "UNLIKELY"
+        GOOOPossible -> "POSSIBLE"
+        GOOOLikely -> "LIKELY"
+        GOOOVeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacy"
@@ -1220,9 +1521,6 @@ data GoogleCloudVisionV1p3beta1BlockBlockType
     | GCVVBBTBarcode
       -- ^ @BARCODE@
       -- Barcode block.
-    | GCVVBBTKeyValuePair
-      -- ^ @KEY_VALUE_PAIR@
-      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1BlockBlockType
@@ -1235,7 +1533,6 @@ instance FromHttpApiData GoogleCloudVisionV1p3beta1BlockBlockType where
         "PICTURE" -> Right GCVVBBTPicture
         "RULER" -> Right GCVVBBTRuler
         "BARCODE" -> Right GCVVBBTBarcode
-        "KEY_VALUE_PAIR" -> Right GCVVBBTKeyValuePair
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1BlockBlockType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1BlockBlockType where
@@ -1246,7 +1543,6 @@ instance ToHttpApiData GoogleCloudVisionV1p3beta1BlockBlockType where
         GCVVBBTPicture -> "PICTURE"
         GCVVBBTRuler -> "RULER"
         GCVVBBTBarcode -> "BARCODE"
-        GCVVBBTKeyValuePair -> "KEY_VALUE_PAIR"
 
 instance FromJSON GoogleCloudVisionV1p3beta1BlockBlockType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1BlockBlockType"
@@ -1261,19 +1557,19 @@ data FaceAnnotationAngerLikelihood
       -- Unknown likelihood.
     | FAALVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | FAALUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | FAALPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | FAALLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | FAALVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationAngerLikelihood
@@ -1305,51 +1601,95 @@ instance ToJSON FaceAnnotationAngerLikelihood where
 
 -- | Joy likelihood.
 data GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood
-    = GCVVFAJLCUnknown
+    = GCVVFAJL1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFAJLCVeryUnlikely
+    | GCVVFAJL1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFAJLCUnlikely
+      -- It is very unlikely.
+    | GCVVFAJL1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFAJLCPossible
+      -- It is unlikely.
+    | GCVVFAJL1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFAJLCLikely
+      -- It is possible.
+    | GCVVFAJL1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFAJLCVeryLikely
+      -- It is likely.
+    | GCVVFAJL1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFAJLCUnknown
-        "VERY_UNLIKELY" -> Right GCVVFAJLCVeryUnlikely
-        "UNLIKELY" -> Right GCVVFAJLCUnlikely
-        "POSSIBLE" -> Right GCVVFAJLCPossible
-        "LIKELY" -> Right GCVVFAJLCLikely
-        "VERY_LIKELY" -> Right GCVVFAJLCVeryLikely
+        "UNKNOWN" -> Right GCVVFAJL1Unknown
+        "VERY_UNLIKELY" -> Right GCVVFAJL1VeryUnlikely
+        "UNLIKELY" -> Right GCVVFAJL1Unlikely
+        "POSSIBLE" -> Right GCVVFAJL1Possible
+        "LIKELY" -> Right GCVVFAJL1Likely
+        "VERY_LIKELY" -> Right GCVVFAJL1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood where
     toQueryParam = \case
-        GCVVFAJLCUnknown -> "UNKNOWN"
-        GCVVFAJLCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFAJLCUnlikely -> "UNLIKELY"
-        GCVVFAJLCPossible -> "POSSIBLE"
-        GCVVFAJLCLikely -> "LIKELY"
-        GCVVFAJLCVeryLikely -> "VERY_LIKELY"
+        GCVVFAJL1Unknown -> "UNKNOWN"
+        GCVVFAJL1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAJL1Unlikely -> "UNLIKELY"
+        GCVVFAJL1Possible -> "POSSIBLE"
+        GCVVFAJL1Likely -> "LIKELY"
+        GCVVFAJL1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood"
 
 instance ToJSON GoogleCloudVisionV1p3beta1FaceAnnotationJoyLikelihood where
+    toJSON = toJSONText
+
+-- | Current state of the batch operation.
+data GoogleCloudVisionV1p4beta1OperationMetadataState
+    = GStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Invalid.
+    | GCreated
+      -- ^ @CREATED@
+      -- Request is received.
+    | GRunning
+      -- ^ @RUNNING@
+      -- Request is actively being processed.
+    | GDone
+      -- ^ @DONE@
+      -- The batch processing is done.
+    | GCancelled
+      -- ^ @CANCELLED@
+      -- The batch processing was cancelled.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1OperationMetadataState
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1OperationMetadataState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right GStateUnspecified
+        "CREATED" -> Right GCreated
+        "RUNNING" -> Right GRunning
+        "DONE" -> Right GDone
+        "CANCELLED" -> Right GCancelled
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1OperationMetadataState from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1OperationMetadataState where
+    toQueryParam = \case
+        GStateUnspecified -> "STATE_UNSPECIFIED"
+        GCreated -> "CREATED"
+        GRunning -> "RUNNING"
+        GDone -> "DONE"
+        GCancelled -> "CANCELLED"
+
+instance FromJSON GoogleCloudVisionV1p4beta1OperationMetadataState where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1OperationMetadataState"
+
+instance ToJSON GoogleCloudVisionV1p4beta1OperationMetadataState where
     toJSON = toJSONText
 
 -- | Likelihood that this is a medical image.
@@ -1359,19 +1699,19 @@ data SafeSearchAnnotationMedical
       -- Unknown likelihood.
     | SSAMVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | SSAMUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | SSAMPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | SSAMLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | SSAMVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationMedical
@@ -1408,19 +1748,19 @@ data FaceAnnotationBlurredLikelihood
       -- Unknown likelihood.
     | FABLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | FABLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | FABLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | FABLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | FABLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationBlurredLikelihood
@@ -1557,6 +1897,12 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType
     | GCVVFALTChinRightGonion
       -- ^ @CHIN_RIGHT_GONION@
       -- Chin right gonion.
+    | GCVVFALTLeftCheekCenter
+      -- ^ @LEFT_CHEEK_CENTER@
+      -- Left cheek center.
+    | GCVVFALTRightCheekCenter
+      -- ^ @RIGHT_CHEEK_CENTER@
+      -- Right cheek center.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType
@@ -1598,6 +1944,8 @@ instance FromHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType wh
         "CHIN_GNATHION" -> Right GCVVFALTChinGnathion
         "CHIN_LEFT_GONION" -> Right GCVVFALTChinLeftGonion
         "CHIN_RIGHT_GONION" -> Right GCVVFALTChinRightGonion
+        "LEFT_CHEEK_CENTER" -> Right GCVVFALTLeftCheekCenter
+        "RIGHT_CHEEK_CENTER" -> Right GCVVFALTRightCheekCenter
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType where
@@ -1637,6 +1985,8 @@ instance ToHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType wher
         GCVVFALTChinGnathion -> "CHIN_GNATHION"
         GCVVFALTChinLeftGonion -> "CHIN_LEFT_GONION"
         GCVVFALTChinRightGonion -> "CHIN_RIGHT_GONION"
+        GCVVFALTLeftCheekCenter -> "LEFT_CHEEK_CENTER"
+        GCVVFALTRightCheekCenter -> "RIGHT_CHEEK_CENTER"
 
 instance FromJSON GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkType"
@@ -1651,19 +2001,19 @@ data GoogleCloudVisionV1p3beta1FaceAnnotationSurpriseLikelihood
       -- Unknown likelihood.
     | GCVVFASLCVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFASLCUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFASLCPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFASLCLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFASLCVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationSurpriseLikelihood
@@ -1700,19 +2050,19 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationUnderExposedLikelihood
       -- Unknown likelihood.
     | GCVVFAUELCVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAUELCUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAUELCPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAUELCLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAUELCVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationUnderExposedLikelihood
@@ -1742,48 +2092,97 @@ instance FromJSON GoogleCloudVisionV1p2beta1FaceAnnotationUnderExposedLikelihood
 instance ToJSON GoogleCloudVisionV1p2beta1FaceAnnotationUnderExposedLikelihood where
     toJSON = toJSONText
 
--- | Sorrow likelihood.
-data GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood
-    = GGUnknown
+-- | Surprise likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood
+    = GCVVFASL1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GGVeryUnlikely
+    | GCVVFASL1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GGUnlikely
+      -- It is very unlikely.
+    | GCVVFASL1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GGPossible
+      -- It is unlikely.
+    | GCVVFASL1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GGLikely
+      -- It is possible.
+    | GCVVFASL1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GGVeryLikely
+      -- It is likely.
+    | GCVVFASL1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVFASL1Unknown
+        "VERY_UNLIKELY" -> Right GCVVFASL1VeryUnlikely
+        "UNLIKELY" -> Right GCVVFASL1Unlikely
+        "POSSIBLE" -> Right GCVVFASL1Possible
+        "LIKELY" -> Right GCVVFASL1Likely
+        "VERY_LIKELY" -> Right GCVVFASL1VeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood where
+    toQueryParam = \case
+        GCVVFASL1Unknown -> "UNKNOWN"
+        GCVVFASL1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFASL1Unlikely -> "UNLIKELY"
+        GCVVFASL1Possible -> "POSSIBLE"
+        GCVVFASL1Likely -> "LIKELY"
+        GCVVFASL1VeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationSurpriseLikelihood where
+    toJSON = toJSONText
+
+-- | Sorrow likelihood.
+data GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood
+    = G1Unknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | G1VeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | G1Unlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | G1Possible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | G1Likely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | G1VeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GGUnknown
-        "VERY_UNLIKELY" -> Right GGVeryUnlikely
-        "UNLIKELY" -> Right GGUnlikely
-        "POSSIBLE" -> Right GGPossible
-        "LIKELY" -> Right GGLikely
-        "VERY_LIKELY" -> Right GGVeryLikely
+        "UNKNOWN" -> Right G1Unknown
+        "VERY_UNLIKELY" -> Right G1VeryUnlikely
+        "UNLIKELY" -> Right G1Unlikely
+        "POSSIBLE" -> Right G1Possible
+        "LIKELY" -> Right G1Likely
+        "VERY_LIKELY" -> Right G1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood where
     toQueryParam = \case
-        GGUnknown -> "UNKNOWN"
-        GGVeryUnlikely -> "VERY_UNLIKELY"
-        GGUnlikely -> "UNLIKELY"
-        GGPossible -> "POSSIBLE"
-        GGLikely -> "LIKELY"
-        GGVeryLikely -> "VERY_LIKELY"
+        G1Unknown -> "UNKNOWN"
+        G1VeryUnlikely -> "VERY_UNLIKELY"
+        G1Unlikely -> "UNLIKELY"
+        G1Possible -> "POSSIBLE"
+        G1Likely -> "LIKELY"
+        G1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood"
@@ -1793,23 +2192,23 @@ instance ToJSON GoogleCloudVisionV1p1beta1FaceAnnotationSorrowLikelihood where
 
 -- | Detected break type.
 data GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType
-    = GCVVTADBTCUnknown
+    = GCVVTADBT1Unknown
       -- ^ @UNKNOWN@
       -- Unknown break label type.
-    | GCVVTADBTCSpace
+    | GCVVTADBT1Space
       -- ^ @SPACE@
       -- Regular space.
-    | GCVVTADBTCSureSpace
+    | GCVVTADBT1SureSpace
       -- ^ @SURE_SPACE@
       -- Sure space (very wide).
-    | GCVVTADBTCEolSureSpace
+    | GCVVTADBT1EolSureSpace
       -- ^ @EOL_SURE_SPACE@
       -- Line-wrapping break.
-    | GCVVTADBTCHyphen
+    | GCVVTADBT1Hyphen
       -- ^ @HYPHEN@
       -- End-line hyphen that is not present in text; does not co-occur with
       -- \`SPACE\`, \`LEADER_SPACE\`, or \`LINE_BREAK\`.
-    | GCVVTADBTCLineBreak
+    | GCVVTADBT1LineBreak
       -- ^ @LINE_BREAK@
       -- Line break that ends a paragraph.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1818,27 +2217,77 @@ instance Hashable GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVTADBTCUnknown
-        "SPACE" -> Right GCVVTADBTCSpace
-        "SURE_SPACE" -> Right GCVVTADBTCSureSpace
-        "EOL_SURE_SPACE" -> Right GCVVTADBTCEolSureSpace
-        "HYPHEN" -> Right GCVVTADBTCHyphen
-        "LINE_BREAK" -> Right GCVVTADBTCLineBreak
+        "UNKNOWN" -> Right GCVVTADBT1Unknown
+        "SPACE" -> Right GCVVTADBT1Space
+        "SURE_SPACE" -> Right GCVVTADBT1SureSpace
+        "EOL_SURE_SPACE" -> Right GCVVTADBT1EolSureSpace
+        "HYPHEN" -> Right GCVVTADBT1Hyphen
+        "LINE_BREAK" -> Right GCVVTADBT1LineBreak
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType where
     toQueryParam = \case
-        GCVVTADBTCUnknown -> "UNKNOWN"
-        GCVVTADBTCSpace -> "SPACE"
-        GCVVTADBTCSureSpace -> "SURE_SPACE"
-        GCVVTADBTCEolSureSpace -> "EOL_SURE_SPACE"
-        GCVVTADBTCHyphen -> "HYPHEN"
-        GCVVTADBTCLineBreak -> "LINE_BREAK"
+        GCVVTADBT1Unknown -> "UNKNOWN"
+        GCVVTADBT1Space -> "SPACE"
+        GCVVTADBT1SureSpace -> "SURE_SPACE"
+        GCVVTADBT1EolSureSpace -> "EOL_SURE_SPACE"
+        GCVVTADBT1Hyphen -> "HYPHEN"
+        GCVVTADBT1LineBreak -> "LINE_BREAK"
 
 instance FromJSON GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType"
 
 instance ToJSON GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakType where
+    toJSON = toJSONText
+
+-- | Spoof likelihood. The likelihood that an modification was made to the
+-- image\'s canonical version to make it appear funny or offensive.
+data GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof
+    = GCVVSSASCUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVSSASCVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVSSASCUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVSSASCPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVSSASCLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVSSASCVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVSSASCUnknown
+        "VERY_UNLIKELY" -> Right GCVVSSASCVeryUnlikely
+        "UNLIKELY" -> Right GCVVSSASCUnlikely
+        "POSSIBLE" -> Right GCVVSSASCPossible
+        "LIKELY" -> Right GCVVSSASCLikely
+        "VERY_LIKELY" -> Right GCVVSSASCVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof where
+    toQueryParam = \case
+        GCVVSSASCUnknown -> "UNKNOWN"
+        GCVVSSASCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSASCUnlikely -> "UNLIKELY"
+        GCVVSSASCPossible -> "POSSIBLE"
+        GCVVSSASCLikely -> "LIKELY"
+        GCVVSSASCVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof"
+
+instance ToJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationSpoof where
     toJSON = toJSONText
 
 -- | Likelihood that this image contains violent content.
@@ -1848,19 +2297,19 @@ data SafeSearchAnnotationViolence
       -- Unknown likelihood.
     | SSAVVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | SSAVUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | SSAVPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | SSAVLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | SSAVVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationViolence
@@ -1899,19 +2348,19 @@ data GoogleCloudVisionV1p1beta1SafeSearchAnnotationAdult
       -- Unknown likelihood.
     | GCVVSSAAVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVSSAAUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVSSAAPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVSSAALikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVSSAAVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1SafeSearchAnnotationAdult
@@ -1943,19 +2392,19 @@ instance ToJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationAdult where
 
 -- | Current state of the batch operation.
 data GoogleCloudVisionV1p3beta1OperationMetadataState
-    = GCVVOMSStateUnspecified
+    = GOOStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- Invalid.
-    | GCVVOMSCreated
+    | GOOCreated
       -- ^ @CREATED@
       -- Request is received.
-    | GCVVOMSRunning
+    | GOORunning
       -- ^ @RUNNING@
       -- Request is actively being processed.
-    | GCVVOMSDone
+    | GOODone
       -- ^ @DONE@
       -- The batch processing is done.
-    | GCVVOMSCancelled
+    | GOOCancelled
       -- ^ @CANCELLED@
       -- The batch processing was cancelled.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -1964,20 +2413,20 @@ instance Hashable GoogleCloudVisionV1p3beta1OperationMetadataState
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1OperationMetadataState where
     parseQueryParam = \case
-        "STATE_UNSPECIFIED" -> Right GCVVOMSStateUnspecified
-        "CREATED" -> Right GCVVOMSCreated
-        "RUNNING" -> Right GCVVOMSRunning
-        "DONE" -> Right GCVVOMSDone
-        "CANCELLED" -> Right GCVVOMSCancelled
+        "STATE_UNSPECIFIED" -> Right GOOStateUnspecified
+        "CREATED" -> Right GOOCreated
+        "RUNNING" -> Right GOORunning
+        "DONE" -> Right GOODone
+        "CANCELLED" -> Right GOOCancelled
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1OperationMetadataState from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1OperationMetadataState where
     toQueryParam = \case
-        GCVVOMSStateUnspecified -> "STATE_UNSPECIFIED"
-        GCVVOMSCreated -> "CREATED"
-        GCVVOMSRunning -> "RUNNING"
-        GCVVOMSDone -> "DONE"
-        GCVVOMSCancelled -> "CANCELLED"
+        GOOStateUnspecified -> "STATE_UNSPECIFIED"
+        GOOCreated -> "CREATED"
+        GOORunning -> "RUNNING"
+        GOODone -> "DONE"
+        GOOCancelled -> "CANCELLED"
 
 instance FromJSON GoogleCloudVisionV1p3beta1OperationMetadataState where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1OperationMetadataState"
@@ -1985,49 +2434,98 @@ instance FromJSON GoogleCloudVisionV1p3beta1OperationMetadataState where
 instance ToJSON GoogleCloudVisionV1p3beta1OperationMetadataState where
     toJSON = toJSONText
 
+-- | Detected block type (text, image etc) for this block.
+data GoogleCloudVisionV1p4beta1BlockBlockType
+    = GCVVBBTCUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown block type.
+    | GCVVBBTCText
+      -- ^ @TEXT@
+      -- Regular text block.
+    | GCVVBBTCTable
+      -- ^ @TABLE@
+      -- Table block.
+    | GCVVBBTCPicture
+      -- ^ @PICTURE@
+      -- Image block.
+    | GCVVBBTCRuler
+      -- ^ @RULER@
+      -- Horizontal\/vertical line box.
+    | GCVVBBTCBarcode
+      -- ^ @BARCODE@
+      -- Barcode block.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1BlockBlockType
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1BlockBlockType where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVBBTCUnknown
+        "TEXT" -> Right GCVVBBTCText
+        "TABLE" -> Right GCVVBBTCTable
+        "PICTURE" -> Right GCVVBBTCPicture
+        "RULER" -> Right GCVVBBTCRuler
+        "BARCODE" -> Right GCVVBBTCBarcode
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1BlockBlockType from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1BlockBlockType where
+    toQueryParam = \case
+        GCVVBBTCUnknown -> "UNKNOWN"
+        GCVVBBTCText -> "TEXT"
+        GCVVBBTCTable -> "TABLE"
+        GCVVBBTCPicture -> "PICTURE"
+        GCVVBBTCRuler -> "RULER"
+        GCVVBBTCBarcode -> "BARCODE"
+
+instance FromJSON GoogleCloudVisionV1p4beta1BlockBlockType where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1BlockBlockType"
+
+instance ToJSON GoogleCloudVisionV1p4beta1BlockBlockType where
+    toJSON = toJSONText
+
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
 data GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof
-    = GCVVSSASCUnknown
+    = GCVVSSAS1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSASCVeryUnlikely
+    | GCVVSSAS1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSASCUnlikely
+      -- It is very unlikely.
+    | GCVVSSAS1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSASCPossible
+      -- It is unlikely.
+    | GCVVSSAS1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSASCLikely
+      -- It is possible.
+    | GCVVSSAS1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSASCVeryLikely
+      -- It is likely.
+    | GCVVSSAS1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSASCUnknown
-        "VERY_UNLIKELY" -> Right GCVVSSASCVeryUnlikely
-        "UNLIKELY" -> Right GCVVSSASCUnlikely
-        "POSSIBLE" -> Right GCVVSSASCPossible
-        "LIKELY" -> Right GCVVSSASCLikely
-        "VERY_LIKELY" -> Right GCVVSSASCVeryLikely
+        "UNKNOWN" -> Right GCVVSSAS1Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAS1VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAS1Unlikely
+        "POSSIBLE" -> Right GCVVSSAS1Possible
+        "LIKELY" -> Right GCVVSSAS1Likely
+        "VERY_LIKELY" -> Right GCVVSSAS1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof where
     toQueryParam = \case
-        GCVVSSASCUnknown -> "UNKNOWN"
-        GCVVSSASCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSASCUnlikely -> "UNLIKELY"
-        GCVVSSASCPossible -> "POSSIBLE"
-        GCVVSSASCLikely -> "LIKELY"
-        GCVVSSASCVeryLikely -> "VERY_LIKELY"
+        GCVVSSAS1Unknown -> "UNKNOWN"
+        GCVVSSAS1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAS1Unlikely -> "UNLIKELY"
+        GCVVSSAS1Possible -> "POSSIBLE"
+        GCVVSSAS1Likely -> "LIKELY"
+        GCVVSSAS1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1SafeSearchAnnotationSpoof"
@@ -2042,19 +2540,19 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihood
       -- Unknown likelihood.
     | GCVVFAHLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAHLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAHLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAHLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAHLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihood
@@ -2082,6 +2580,106 @@ instance FromJSON GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihood whe
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihood"
 
 instance ToJSON GoogleCloudVisionV1p1beta1FaceAnnotationHeadwearLikelihood where
+    toJSON = toJSONText
+
+-- | Represents the adult content likelihood for the image. Adult content may
+-- contain elements such as nudity, pornographic images or cartoons, or
+-- sexual activities.
+data GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult
+    = GCVVSSAACUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVSSAACVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVSSAACUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVSSAACPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVSSAACLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVSSAACVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVSSAACUnknown
+        "VERY_UNLIKELY" -> Right GCVVSSAACVeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAACUnlikely
+        "POSSIBLE" -> Right GCVVSSAACPossible
+        "LIKELY" -> Right GCVVSSAACLikely
+        "VERY_LIKELY" -> Right GCVVSSAACVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult where
+    toQueryParam = \case
+        GCVVSSAACUnknown -> "UNKNOWN"
+        GCVVSSAACVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAACUnlikely -> "UNLIKELY"
+        GCVVSSAACPossible -> "POSSIBLE"
+        GCVVSSAACLikely -> "LIKELY"
+        GCVVSSAACVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult"
+
+instance ToJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationAdult where
+    toJSON = toJSONText
+
+-- | Anger likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood
+    = GCVVFAALCUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVFAALCVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVFAALCUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVFAALCPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVFAALCLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVFAALCVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVFAALCUnknown
+        "VERY_UNLIKELY" -> Right GCVVFAALCVeryUnlikely
+        "UNLIKELY" -> Right GCVVFAALCUnlikely
+        "POSSIBLE" -> Right GCVVFAALCPossible
+        "LIKELY" -> Right GCVVFAALCLikely
+        "VERY_LIKELY" -> Right GCVVFAALCVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood where
+    toQueryParam = \case
+        GCVVFAALCUnknown -> "UNKNOWN"
+        GCVVFAALCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAALCUnlikely -> "UNLIKELY"
+        GCVVFAALCPossible -> "POSSIBLE"
+        GCVVFAALCLikely -> "LIKELY"
+        GCVVFAALCVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationAngerLikelihood where
     toJSON = toJSONText
 
 -- | Current state of the batch operation.
@@ -2130,46 +2728,46 @@ instance ToJSON OperationMetadataState where
 
 -- | Blurred likelihood.
 data GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood
-    = GOOOUnknown
+    = GCVVFABL1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GOOOVeryUnlikely
+    | GCVVFABL1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GOOOUnlikely
+      -- It is very unlikely.
+    | GCVVFABL1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GOOOPossible
+      -- It is unlikely.
+    | GCVVFABL1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GOOOLikely
+      -- It is possible.
+    | GCVVFABL1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GOOOVeryLikely
+      -- It is likely.
+    | GCVVFABL1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GOOOUnknown
-        "VERY_UNLIKELY" -> Right GOOOVeryUnlikely
-        "UNLIKELY" -> Right GOOOUnlikely
-        "POSSIBLE" -> Right GOOOPossible
-        "LIKELY" -> Right GOOOLikely
-        "VERY_LIKELY" -> Right GOOOVeryLikely
+        "UNKNOWN" -> Right GCVVFABL1Unknown
+        "VERY_UNLIKELY" -> Right GCVVFABL1VeryUnlikely
+        "UNLIKELY" -> Right GCVVFABL1Unlikely
+        "POSSIBLE" -> Right GCVVFABL1Possible
+        "LIKELY" -> Right GCVVFABL1Likely
+        "VERY_LIKELY" -> Right GCVVFABL1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood where
     toQueryParam = \case
-        GOOOUnknown -> "UNKNOWN"
-        GOOOVeryUnlikely -> "VERY_UNLIKELY"
-        GOOOUnlikely -> "UNLIKELY"
-        GOOOPossible -> "POSSIBLE"
-        GOOOLikely -> "LIKELY"
-        GOOOVeryLikely -> "VERY_LIKELY"
+        GCVVFABL1Unknown -> "UNKNOWN"
+        GCVVFABL1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFABL1Unlikely -> "UNLIKELY"
+        GCVVFABL1Possible -> "POSSIBLE"
+        GCVVFABL1Likely -> "LIKELY"
+        GCVVFABL1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1FaceAnnotationBlurredLikelihood"
@@ -2184,19 +2782,19 @@ data GoogleCloudVisionV1p2beta1FaceAnnotationHeadwearLikelihood
       -- Unknown likelihood.
     | GCVVFAHLCVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAHLCUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAHLCPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAHLCLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAHLCVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationHeadwearLikelihood
@@ -2226,50 +2824,99 @@ instance FromJSON GoogleCloudVisionV1p2beta1FaceAnnotationHeadwearLikelihood whe
 instance ToJSON GoogleCloudVisionV1p2beta1FaceAnnotationHeadwearLikelihood where
     toJSON = toJSONText
 
+-- | Likelihood that this is a medical image.
+data GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical
+    = GCVVSSAMCUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVSSAMCVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVSSAMCUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVSSAMCPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVSSAMCLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVSSAMCVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVSSAMCUnknown
+        "VERY_UNLIKELY" -> Right GCVVSSAMCVeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAMCUnlikely
+        "POSSIBLE" -> Right GCVVSSAMCPossible
+        "LIKELY" -> Right GCVVSSAMCLikely
+        "VERY_LIKELY" -> Right GCVVSSAMCVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical where
+    toQueryParam = \case
+        GCVVSSAMCUnknown -> "UNKNOWN"
+        GCVVSSAMCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAMCUnlikely -> "UNLIKELY"
+        GCVVSSAMCPossible -> "POSSIBLE"
+        GCVVSSAMCLikely -> "LIKELY"
+        GCVVSSAMCVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical"
+
+instance ToJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationMedical where
+    toJSON = toJSONText
+
 -- | Represents the adult content likelihood for the image. Adult content may
 -- contain elements such as nudity, pornographic images or cartoons, or
 -- sexual activities.
 data GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult
-    = GCVVSSAACUnknown
+    = GCVVSSAA1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAACVeryUnlikely
+    | GCVVSSAA1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAACUnlikely
+      -- It is very unlikely.
+    | GCVVSSAA1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAACPossible
+      -- It is unlikely.
+    | GCVVSSAA1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAACLikely
+      -- It is possible.
+    | GCVVSSAA1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAACVeryLikely
+      -- It is likely.
+    | GCVVSSAA1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAACUnknown
-        "VERY_UNLIKELY" -> Right GCVVSSAACVeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAACUnlikely
-        "POSSIBLE" -> Right GCVVSSAACPossible
-        "LIKELY" -> Right GCVVSSAACLikely
-        "VERY_LIKELY" -> Right GCVVSSAACVeryLikely
+        "UNKNOWN" -> Right GCVVSSAA1Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAA1VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAA1Unlikely
+        "POSSIBLE" -> Right GCVVSSAA1Possible
+        "LIKELY" -> Right GCVVSSAA1Likely
+        "VERY_LIKELY" -> Right GCVVSSAA1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult where
     toQueryParam = \case
-        GCVVSSAACUnknown -> "UNKNOWN"
-        GCVVSSAACVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAACUnlikely -> "UNLIKELY"
-        GCVVSSAACPossible -> "POSSIBLE"
-        GCVVSSAACLikely -> "LIKELY"
-        GCVVSSAACVeryLikely -> "VERY_LIKELY"
+        GCVVSSAA1Unknown -> "UNKNOWN"
+        GCVVSSAA1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAA1Unlikely -> "UNLIKELY"
+        GCVVSSAA1Possible -> "POSSIBLE"
+        GCVVSSAA1Likely -> "LIKELY"
+        GCVVSSAA1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdult"
@@ -2384,6 +3031,12 @@ data LandmarkType
     | LTChinRightGonion
       -- ^ @CHIN_RIGHT_GONION@
       -- Chin right gonion.
+    | LTLeftCheekCenter
+      -- ^ @LEFT_CHEEK_CENTER@
+      -- Left cheek center.
+    | LTRightCheekCenter
+      -- ^ @RIGHT_CHEEK_CENTER@
+      -- Right cheek center.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LandmarkType
@@ -2425,6 +3078,8 @@ instance FromHttpApiData LandmarkType where
         "CHIN_GNATHION" -> Right LTChinGnathion
         "CHIN_LEFT_GONION" -> Right LTChinLeftGonion
         "CHIN_RIGHT_GONION" -> Right LTChinRightGonion
+        "LEFT_CHEEK_CENTER" -> Right LTLeftCheekCenter
+        "RIGHT_CHEEK_CENTER" -> Right LTRightCheekCenter
         x -> Left ("Unable to parse LandmarkType from: " <> x)
 
 instance ToHttpApiData LandmarkType where
@@ -2464,6 +3119,8 @@ instance ToHttpApiData LandmarkType where
         LTChinGnathion -> "CHIN_GNATHION"
         LTChinLeftGonion -> "CHIN_LEFT_GONION"
         LTChinRightGonion -> "CHIN_RIGHT_GONION"
+        LTLeftCheekCenter -> "LEFT_CHEEK_CENTER"
+        LTRightCheekCenter -> "RIGHT_CHEEK_CENTER"
 
 instance FromJSON LandmarkType where
     parseJSON = parseJSONText "LandmarkType"
@@ -2473,23 +3130,23 @@ instance ToJSON LandmarkType where
 
 -- | Detected break type.
 data GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType
-    = GCVVTADBT1Unknown
+    = GOO1Unknown
       -- ^ @UNKNOWN@
       -- Unknown break label type.
-    | GCVVTADBT1Space
+    | GOO1Space
       -- ^ @SPACE@
       -- Regular space.
-    | GCVVTADBT1SureSpace
+    | GOO1SureSpace
       -- ^ @SURE_SPACE@
       -- Sure space (very wide).
-    | GCVVTADBT1EolSureSpace
+    | GOO1EolSureSpace
       -- ^ @EOL_SURE_SPACE@
       -- Line-wrapping break.
-    | GCVVTADBT1Hyphen
+    | GOO1Hyphen
       -- ^ @HYPHEN@
       -- End-line hyphen that is not present in text; does not co-occur with
       -- \`SPACE\`, \`LEADER_SPACE\`, or \`LINE_BREAK\`.
-    | GCVVTADBT1LineBreak
+    | GOO1LineBreak
       -- ^ @LINE_BREAK@
       -- Line break that ends a paragraph.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -2498,22 +3155,22 @@ instance Hashable GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVTADBT1Unknown
-        "SPACE" -> Right GCVVTADBT1Space
-        "SURE_SPACE" -> Right GCVVTADBT1SureSpace
-        "EOL_SURE_SPACE" -> Right GCVVTADBT1EolSureSpace
-        "HYPHEN" -> Right GCVVTADBT1Hyphen
-        "LINE_BREAK" -> Right GCVVTADBT1LineBreak
+        "UNKNOWN" -> Right GOO1Unknown
+        "SPACE" -> Right GOO1Space
+        "SURE_SPACE" -> Right GOO1SureSpace
+        "EOL_SURE_SPACE" -> Right GOO1EolSureSpace
+        "HYPHEN" -> Right GOO1Hyphen
+        "LINE_BREAK" -> Right GOO1LineBreak
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType where
     toQueryParam = \case
-        GCVVTADBT1Unknown -> "UNKNOWN"
-        GCVVTADBT1Space -> "SPACE"
-        GCVVTADBT1SureSpace -> "SURE_SPACE"
-        GCVVTADBT1EolSureSpace -> "EOL_SURE_SPACE"
-        GCVVTADBT1Hyphen -> "HYPHEN"
-        GCVVTADBT1LineBreak -> "LINE_BREAK"
+        GOO1Unknown -> "UNKNOWN"
+        GOO1Space -> "SPACE"
+        GOO1SureSpace -> "SURE_SPACE"
+        GOO1EolSureSpace -> "EOL_SURE_SPACE"
+        GOO1Hyphen -> "HYPHEN"
+        GOO1LineBreak -> "LINE_BREAK"
 
 instance FromJSON GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakType"
@@ -2552,51 +3209,46 @@ instance ToJSON Xgafv where
 
 -- | Detected block type (text, image etc) for this block.
 data GoogleCloudVisionV1p2beta1BlockBlockType
-    = GCVVBBTCUnknown
+    = GCVVBBT1Unknown
       -- ^ @UNKNOWN@
       -- Unknown block type.
-    | GCVVBBTCText
+    | GCVVBBT1Text
       -- ^ @TEXT@
       -- Regular text block.
-    | GCVVBBTCTable
+    | GCVVBBT1Table
       -- ^ @TABLE@
       -- Table block.
-    | GCVVBBTCPicture
+    | GCVVBBT1Picture
       -- ^ @PICTURE@
       -- Image block.
-    | GCVVBBTCRuler
+    | GCVVBBT1Ruler
       -- ^ @RULER@
       -- Horizontal\/vertical line box.
-    | GCVVBBTCBarcode
+    | GCVVBBT1Barcode
       -- ^ @BARCODE@
       -- Barcode block.
-    | GCVVBBTCKeyValuePair
-      -- ^ @KEY_VALUE_PAIR@
-      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1BlockBlockType
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1BlockBlockType where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVBBTCUnknown
-        "TEXT" -> Right GCVVBBTCText
-        "TABLE" -> Right GCVVBBTCTable
-        "PICTURE" -> Right GCVVBBTCPicture
-        "RULER" -> Right GCVVBBTCRuler
-        "BARCODE" -> Right GCVVBBTCBarcode
-        "KEY_VALUE_PAIR" -> Right GCVVBBTCKeyValuePair
+        "UNKNOWN" -> Right GCVVBBT1Unknown
+        "TEXT" -> Right GCVVBBT1Text
+        "TABLE" -> Right GCVVBBT1Table
+        "PICTURE" -> Right GCVVBBT1Picture
+        "RULER" -> Right GCVVBBT1Ruler
+        "BARCODE" -> Right GCVVBBT1Barcode
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1BlockBlockType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1BlockBlockType where
     toQueryParam = \case
-        GCVVBBTCUnknown -> "UNKNOWN"
-        GCVVBBTCText -> "TEXT"
-        GCVVBBTCTable -> "TABLE"
-        GCVVBBTCPicture -> "PICTURE"
-        GCVVBBTCRuler -> "RULER"
-        GCVVBBTCBarcode -> "BARCODE"
-        GCVVBBTCKeyValuePair -> "KEY_VALUE_PAIR"
+        GCVVBBT1Unknown -> "UNKNOWN"
+        GCVVBBT1Text -> "TEXT"
+        GCVVBBT1Table -> "TABLE"
+        GCVVBBT1Picture -> "PICTURE"
+        GCVVBBT1Ruler -> "RULER"
+        GCVVBBT1Barcode -> "BARCODE"
 
 instance FromJSON GoogleCloudVisionV1p2beta1BlockBlockType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1BlockBlockType"
@@ -2614,19 +3266,19 @@ data GoogleCloudVisionV1p3beta1SafeSearchAnnotationRacy
       -- Unknown likelihood.
     | GCVVSSAR1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVSSAR1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVSSAR1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVSSAR1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVSSAR1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1SafeSearchAnnotationRacy
@@ -2656,6 +3308,55 @@ instance FromJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotationRacy where
 instance ToJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotationRacy where
     toJSON = toJSONText
 
+-- | Likelihood that this image contains violent content.
+data GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence
+    = GCVVSSAVCUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVSSAVCVeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVSSAVCUnlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVSSAVCPossible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVSSAVCLikely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVSSAVCVeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVSSAVCUnknown
+        "VERY_UNLIKELY" -> Right GCVVSSAVCVeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAVCUnlikely
+        "POSSIBLE" -> Right GCVVSSAVCPossible
+        "LIKELY" -> Right GCVVSSAVCLikely
+        "VERY_LIKELY" -> Right GCVVSSAVCVeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence where
+    toQueryParam = \case
+        GCVVSSAVCUnknown -> "UNKNOWN"
+        GCVVSSAVCVeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAVCUnlikely -> "UNLIKELY"
+        GCVVSSAVCPossible -> "POSSIBLE"
+        GCVVSSAVCLikely -> "LIKELY"
+        GCVVSSAVCVeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence"
+
+instance ToJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotationViolence where
+    toJSON = toJSONText
+
 -- | Under-exposed likelihood.
 data GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihood
     = GCVVFAUEL1Unknown
@@ -2663,19 +3364,19 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihood
       -- Unknown likelihood.
     | GCVVFAUEL1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAUEL1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAUEL1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAUEL1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAUEL1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationUnderExposedLikelihood
@@ -2713,19 +3414,19 @@ data SafeSearchAnnotationSpoof
       -- Unknown likelihood.
     | SSASVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | SSASUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | SSASPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | SSASLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | SSASVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationSpoof
@@ -2862,6 +3563,12 @@ data GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType
     | GChinRightGonion
       -- ^ @CHIN_RIGHT_GONION@
       -- Chin right gonion.
+    | GLeftCheekCenter
+      -- ^ @LEFT_CHEEK_CENTER@
+      -- Left cheek center.
+    | GRightCheekCenter
+      -- ^ @RIGHT_CHEEK_CENTER@
+      -- Right cheek center.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType
@@ -2903,6 +3610,8 @@ instance FromHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType wh
         "CHIN_GNATHION" -> Right GChinGnathion
         "CHIN_LEFT_GONION" -> Right GChinLeftGonion
         "CHIN_RIGHT_GONION" -> Right GChinRightGonion
+        "LEFT_CHEEK_CENTER" -> Right GLeftCheekCenter
+        "RIGHT_CHEEK_CENTER" -> Right GRightCheekCenter
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType where
@@ -2942,6 +3651,8 @@ instance ToHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType wher
         GChinGnathion -> "CHIN_GNATHION"
         GChinLeftGonion -> "CHIN_LEFT_GONION"
         GChinRightGonion -> "CHIN_RIGHT_GONION"
+        GLeftCheekCenter -> "LEFT_CHEEK_CENTER"
+        GRightCheekCenter -> "RIGHT_CHEEK_CENTER"
 
 instance FromJSON GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1FaceAnnotationLandmarkType"
@@ -2956,19 +3667,19 @@ data FaceAnnotationSurpriseLikelihood
       -- Unknown likelihood.
     | FASLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | FASLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | FASLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | FASLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | FASLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationSurpriseLikelihood
@@ -3000,46 +3711,46 @@ instance ToJSON FaceAnnotationSurpriseLikelihood where
 
 -- | Likelihood that this is a medical image.
 data GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical
-    = GCVVSSAMCUnknown
+    = GCVVSSAM1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAMCVeryUnlikely
+    | GCVVSSAM1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAMCUnlikely
+      -- It is very unlikely.
+    | GCVVSSAM1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAMCPossible
+      -- It is unlikely.
+    | GCVVSSAM1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAMCLikely
+      -- It is possible.
+    | GCVVSSAM1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAMCVeryLikely
+      -- It is likely.
+    | GCVVSSAM1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAMCUnknown
-        "VERY_UNLIKELY" -> Right GCVVSSAMCVeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAMCUnlikely
-        "POSSIBLE" -> Right GCVVSSAMCPossible
-        "LIKELY" -> Right GCVVSSAMCLikely
-        "VERY_LIKELY" -> Right GCVVSSAMCVeryLikely
+        "UNKNOWN" -> Right GCVVSSAM1Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAM1VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAM1Unlikely
+        "POSSIBLE" -> Right GCVVSSAM1Possible
+        "LIKELY" -> Right GCVVSSAM1Likely
+        "VERY_LIKELY" -> Right GCVVSSAM1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical where
     toQueryParam = \case
-        GCVVSSAMCUnknown -> "UNKNOWN"
-        GCVVSSAMCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAMCUnlikely -> "UNLIKELY"
-        GCVVSSAMCPossible -> "POSSIBLE"
-        GCVVSSAMCLikely -> "LIKELY"
-        GCVVSSAMCVeryLikely -> "VERY_LIKELY"
+        GCVVSSAM1Unknown -> "UNKNOWN"
+        GCVVSSAM1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAM1Unlikely -> "UNLIKELY"
+        GCVVSSAM1Possible -> "POSSIBLE"
+        GCVVSSAM1Likely -> "LIKELY"
+        GCVVSSAM1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1SafeSearchAnnotationMedical"
@@ -3054,19 +3765,19 @@ data FaceAnnotationSorrowLikelihood
       -- Unknown likelihood.
     | FVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | FUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | FPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | FLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | FVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationSorrowLikelihood
@@ -3098,51 +3809,255 @@ instance ToJSON FaceAnnotationSorrowLikelihood where
 
 -- | Anger likelihood.
 data GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood
-    = GCVVFAALCUnknown
+    = GCVVFAAL1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFAALCVeryUnlikely
+    | GCVVFAAL1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFAALCUnlikely
+      -- It is very unlikely.
+    | GCVVFAAL1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFAALCPossible
+      -- It is unlikely.
+    | GCVVFAAL1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFAALCLikely
+      -- It is possible.
+    | GCVVFAAL1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFAALCVeryLikely
+      -- It is likely.
+    | GCVVFAAL1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFAALCUnknown
-        "VERY_UNLIKELY" -> Right GCVVFAALCVeryUnlikely
-        "UNLIKELY" -> Right GCVVFAALCUnlikely
-        "POSSIBLE" -> Right GCVVFAALCPossible
-        "LIKELY" -> Right GCVVFAALCLikely
-        "VERY_LIKELY" -> Right GCVVFAALCVeryLikely
+        "UNKNOWN" -> Right GCVVFAAL1Unknown
+        "VERY_UNLIKELY" -> Right GCVVFAAL1VeryUnlikely
+        "UNLIKELY" -> Right GCVVFAAL1Unlikely
+        "POSSIBLE" -> Right GCVVFAAL1Possible
+        "LIKELY" -> Right GCVVFAAL1Likely
+        "VERY_LIKELY" -> Right GCVVFAAL1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood where
     toQueryParam = \case
-        GCVVFAALCUnknown -> "UNKNOWN"
-        GCVVFAALCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFAALCUnlikely -> "UNLIKELY"
-        GCVVFAALCPossible -> "POSSIBLE"
-        GCVVFAALCLikely -> "LIKELY"
-        GCVVFAALCVeryLikely -> "VERY_LIKELY"
+        GCVVFAAL1Unknown -> "UNKNOWN"
+        GCVVFAAL1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAAL1Unlikely -> "UNLIKELY"
+        GCVVFAAL1Possible -> "POSSIBLE"
+        GCVVFAAL1Likely -> "LIKELY"
+        GCVVFAAL1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood"
 
 instance ToJSON GoogleCloudVisionV1p3beta1FaceAnnotationAngerLikelihood where
+    toJSON = toJSONText
+
+-- | Face landmark type.
+data GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType
+    = GOOUnknownLandmark
+      -- ^ @UNKNOWN_LANDMARK@
+      -- Unknown face landmark detected. Should not be filled.
+    | GOOLeftEye
+      -- ^ @LEFT_EYE@
+      -- Left eye.
+    | GOORightEye
+      -- ^ @RIGHT_EYE@
+      -- Right eye.
+    | GOOLeftOfLeftEyebrow
+      -- ^ @LEFT_OF_LEFT_EYEBROW@
+      -- Left of left eyebrow.
+    | GOORightOfLeftEyebrow
+      -- ^ @RIGHT_OF_LEFT_EYEBROW@
+      -- Right of left eyebrow.
+    | GOOLeftOfRightEyebrow
+      -- ^ @LEFT_OF_RIGHT_EYEBROW@
+      -- Left of right eyebrow.
+    | GOORightOfRightEyebrow
+      -- ^ @RIGHT_OF_RIGHT_EYEBROW@
+      -- Right of right eyebrow.
+    | GOOMidpointBetweenEyes
+      -- ^ @MIDPOINT_BETWEEN_EYES@
+      -- Midpoint between eyes.
+    | GOONoseTip
+      -- ^ @NOSE_TIP@
+      -- Nose tip.
+    | GOOUpperLip
+      -- ^ @UPPER_LIP@
+      -- Upper lip.
+    | GOOLowerLip
+      -- ^ @LOWER_LIP@
+      -- Lower lip.
+    | GOOMouthLeft
+      -- ^ @MOUTH_LEFT@
+      -- Mouth left.
+    | GOOMouthRight
+      -- ^ @MOUTH_RIGHT@
+      -- Mouth right.
+    | GOOMouthCenter
+      -- ^ @MOUTH_CENTER@
+      -- Mouth center.
+    | GOONoseBottomRight
+      -- ^ @NOSE_BOTTOM_RIGHT@
+      -- Nose, bottom right.
+    | GOONoseBottomLeft
+      -- ^ @NOSE_BOTTOM_LEFT@
+      -- Nose, bottom left.
+    | GOONoseBottomCenter
+      -- ^ @NOSE_BOTTOM_CENTER@
+      -- Nose, bottom center.
+    | GOOLeftEyeTopBoundary
+      -- ^ @LEFT_EYE_TOP_BOUNDARY@
+      -- Left eye, top boundary.
+    | GOOLeftEyeRightCorner
+      -- ^ @LEFT_EYE_RIGHT_CORNER@
+      -- Left eye, right corner.
+    | GOOLeftEyeBottomBoundary
+      -- ^ @LEFT_EYE_BOTTOM_BOUNDARY@
+      -- Left eye, bottom boundary.
+    | GOOLeftEyeLeftCorner
+      -- ^ @LEFT_EYE_LEFT_CORNER@
+      -- Left eye, left corner.
+    | GOORightEyeTopBoundary
+      -- ^ @RIGHT_EYE_TOP_BOUNDARY@
+      -- Right eye, top boundary.
+    | GOORightEyeRightCorner
+      -- ^ @RIGHT_EYE_RIGHT_CORNER@
+      -- Right eye, right corner.
+    | GOORightEyeBottomBoundary
+      -- ^ @RIGHT_EYE_BOTTOM_BOUNDARY@
+      -- Right eye, bottom boundary.
+    | GOORightEyeLeftCorner
+      -- ^ @RIGHT_EYE_LEFT_CORNER@
+      -- Right eye, left corner.
+    | GOOLeftEyebrowUpperMidpoint
+      -- ^ @LEFT_EYEBROW_UPPER_MIDPOINT@
+      -- Left eyebrow, upper midpoint.
+    | GOORightEyebrowUpperMidpoint
+      -- ^ @RIGHT_EYEBROW_UPPER_MIDPOINT@
+      -- Right eyebrow, upper midpoint.
+    | GOOLeftEarTragion
+      -- ^ @LEFT_EAR_TRAGION@
+      -- Left ear tragion.
+    | GOORightEarTragion
+      -- ^ @RIGHT_EAR_TRAGION@
+      -- Right ear tragion.
+    | GOOLeftEyePupil
+      -- ^ @LEFT_EYE_PUPIL@
+      -- Left eye pupil.
+    | GOORightEyePupil
+      -- ^ @RIGHT_EYE_PUPIL@
+      -- Right eye pupil.
+    | GOOForeheadGlabella
+      -- ^ @FOREHEAD_GLABELLA@
+      -- Forehead glabella.
+    | GOOChinGnathion
+      -- ^ @CHIN_GNATHION@
+      -- Chin gnathion.
+    | GOOChinLeftGonion
+      -- ^ @CHIN_LEFT_GONION@
+      -- Chin left gonion.
+    | GOOChinRightGonion
+      -- ^ @CHIN_RIGHT_GONION@
+      -- Chin right gonion.
+    | GOOLeftCheekCenter
+      -- ^ @LEFT_CHEEK_CENTER@
+      -- Left cheek center.
+    | GOORightCheekCenter
+      -- ^ @RIGHT_CHEEK_CENTER@
+      -- Right cheek center.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType where
+    parseQueryParam = \case
+        "UNKNOWN_LANDMARK" -> Right GOOUnknownLandmark
+        "LEFT_EYE" -> Right GOOLeftEye
+        "RIGHT_EYE" -> Right GOORightEye
+        "LEFT_OF_LEFT_EYEBROW" -> Right GOOLeftOfLeftEyebrow
+        "RIGHT_OF_LEFT_EYEBROW" -> Right GOORightOfLeftEyebrow
+        "LEFT_OF_RIGHT_EYEBROW" -> Right GOOLeftOfRightEyebrow
+        "RIGHT_OF_RIGHT_EYEBROW" -> Right GOORightOfRightEyebrow
+        "MIDPOINT_BETWEEN_EYES" -> Right GOOMidpointBetweenEyes
+        "NOSE_TIP" -> Right GOONoseTip
+        "UPPER_LIP" -> Right GOOUpperLip
+        "LOWER_LIP" -> Right GOOLowerLip
+        "MOUTH_LEFT" -> Right GOOMouthLeft
+        "MOUTH_RIGHT" -> Right GOOMouthRight
+        "MOUTH_CENTER" -> Right GOOMouthCenter
+        "NOSE_BOTTOM_RIGHT" -> Right GOONoseBottomRight
+        "NOSE_BOTTOM_LEFT" -> Right GOONoseBottomLeft
+        "NOSE_BOTTOM_CENTER" -> Right GOONoseBottomCenter
+        "LEFT_EYE_TOP_BOUNDARY" -> Right GOOLeftEyeTopBoundary
+        "LEFT_EYE_RIGHT_CORNER" -> Right GOOLeftEyeRightCorner
+        "LEFT_EYE_BOTTOM_BOUNDARY" -> Right GOOLeftEyeBottomBoundary
+        "LEFT_EYE_LEFT_CORNER" -> Right GOOLeftEyeLeftCorner
+        "RIGHT_EYE_TOP_BOUNDARY" -> Right GOORightEyeTopBoundary
+        "RIGHT_EYE_RIGHT_CORNER" -> Right GOORightEyeRightCorner
+        "RIGHT_EYE_BOTTOM_BOUNDARY" -> Right GOORightEyeBottomBoundary
+        "RIGHT_EYE_LEFT_CORNER" -> Right GOORightEyeLeftCorner
+        "LEFT_EYEBROW_UPPER_MIDPOINT" -> Right GOOLeftEyebrowUpperMidpoint
+        "RIGHT_EYEBROW_UPPER_MIDPOINT" -> Right GOORightEyebrowUpperMidpoint
+        "LEFT_EAR_TRAGION" -> Right GOOLeftEarTragion
+        "RIGHT_EAR_TRAGION" -> Right GOORightEarTragion
+        "LEFT_EYE_PUPIL" -> Right GOOLeftEyePupil
+        "RIGHT_EYE_PUPIL" -> Right GOORightEyePupil
+        "FOREHEAD_GLABELLA" -> Right GOOForeheadGlabella
+        "CHIN_GNATHION" -> Right GOOChinGnathion
+        "CHIN_LEFT_GONION" -> Right GOOChinLeftGonion
+        "CHIN_RIGHT_GONION" -> Right GOOChinRightGonion
+        "LEFT_CHEEK_CENTER" -> Right GOOLeftCheekCenter
+        "RIGHT_CHEEK_CENTER" -> Right GOORightCheekCenter
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType where
+    toQueryParam = \case
+        GOOUnknownLandmark -> "UNKNOWN_LANDMARK"
+        GOOLeftEye -> "LEFT_EYE"
+        GOORightEye -> "RIGHT_EYE"
+        GOOLeftOfLeftEyebrow -> "LEFT_OF_LEFT_EYEBROW"
+        GOORightOfLeftEyebrow -> "RIGHT_OF_LEFT_EYEBROW"
+        GOOLeftOfRightEyebrow -> "LEFT_OF_RIGHT_EYEBROW"
+        GOORightOfRightEyebrow -> "RIGHT_OF_RIGHT_EYEBROW"
+        GOOMidpointBetweenEyes -> "MIDPOINT_BETWEEN_EYES"
+        GOONoseTip -> "NOSE_TIP"
+        GOOUpperLip -> "UPPER_LIP"
+        GOOLowerLip -> "LOWER_LIP"
+        GOOMouthLeft -> "MOUTH_LEFT"
+        GOOMouthRight -> "MOUTH_RIGHT"
+        GOOMouthCenter -> "MOUTH_CENTER"
+        GOONoseBottomRight -> "NOSE_BOTTOM_RIGHT"
+        GOONoseBottomLeft -> "NOSE_BOTTOM_LEFT"
+        GOONoseBottomCenter -> "NOSE_BOTTOM_CENTER"
+        GOOLeftEyeTopBoundary -> "LEFT_EYE_TOP_BOUNDARY"
+        GOOLeftEyeRightCorner -> "LEFT_EYE_RIGHT_CORNER"
+        GOOLeftEyeBottomBoundary -> "LEFT_EYE_BOTTOM_BOUNDARY"
+        GOOLeftEyeLeftCorner -> "LEFT_EYE_LEFT_CORNER"
+        GOORightEyeTopBoundary -> "RIGHT_EYE_TOP_BOUNDARY"
+        GOORightEyeRightCorner -> "RIGHT_EYE_RIGHT_CORNER"
+        GOORightEyeBottomBoundary -> "RIGHT_EYE_BOTTOM_BOUNDARY"
+        GOORightEyeLeftCorner -> "RIGHT_EYE_LEFT_CORNER"
+        GOOLeftEyebrowUpperMidpoint -> "LEFT_EYEBROW_UPPER_MIDPOINT"
+        GOORightEyebrowUpperMidpoint -> "RIGHT_EYEBROW_UPPER_MIDPOINT"
+        GOOLeftEarTragion -> "LEFT_EAR_TRAGION"
+        GOORightEarTragion -> "RIGHT_EAR_TRAGION"
+        GOOLeftEyePupil -> "LEFT_EYE_PUPIL"
+        GOORightEyePupil -> "RIGHT_EYE_PUPIL"
+        GOOForeheadGlabella -> "FOREHEAD_GLABELLA"
+        GOOChinGnathion -> "CHIN_GNATHION"
+        GOOChinLeftGonion -> "CHIN_LEFT_GONION"
+        GOOChinRightGonion -> "CHIN_RIGHT_GONION"
+        GOOLeftCheekCenter -> "LEFT_CHEEK_CENTER"
+        GOORightCheekCenter -> "RIGHT_CHEEK_CENTER"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationLandmarkType where
     toJSON = toJSONText
 
 -- | Joy likelihood.
@@ -3152,19 +4067,19 @@ data FaceAnnotationJoyLikelihood
       -- Unknown likelihood.
     | FAJLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | FAJLUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | FAJLPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | FAJLLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | FAJLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationJoyLikelihood
@@ -3196,46 +4111,46 @@ instance ToJSON FaceAnnotationJoyLikelihood where
 
 -- | Likelihood that this image contains violent content.
 data GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence
-    = GCVVSSAVCUnknown
+    = GCVVSSAV1Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAVCVeryUnlikely
+    | GCVVSSAV1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAVCUnlikely
+      -- It is very unlikely.
+    | GCVVSSAV1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAVCPossible
+      -- It is unlikely.
+    | GCVVSSAV1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAVCLikely
+      -- It is possible.
+    | GCVVSSAV1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAVCVeryLikely
+      -- It is likely.
+    | GCVVSSAV1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAVCUnknown
-        "VERY_UNLIKELY" -> Right GCVVSSAVCVeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAVCUnlikely
-        "POSSIBLE" -> Right GCVVSSAVCPossible
-        "LIKELY" -> Right GCVVSSAVCLikely
-        "VERY_LIKELY" -> Right GCVVSSAVCVeryLikely
+        "UNKNOWN" -> Right GCVVSSAV1Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAV1VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAV1Unlikely
+        "POSSIBLE" -> Right GCVVSSAV1Possible
+        "LIKELY" -> Right GCVVSSAV1Likely
+        "VERY_LIKELY" -> Right GCVVSSAV1VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence where
     toQueryParam = \case
-        GCVVSSAVCUnknown -> "UNKNOWN"
-        GCVVSSAVCVeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAVCUnlikely -> "UNLIKELY"
-        GCVVSSAVCPossible -> "POSSIBLE"
-        GCVVSSAVCLikely -> "LIKELY"
-        GCVVSSAVCVeryLikely -> "VERY_LIKELY"
+        GCVVSSAV1Unknown -> "UNKNOWN"
+        GCVVSSAV1VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAV1Unlikely -> "UNLIKELY"
+        GCVVSSAV1Possible -> "POSSIBLE"
+        GCVVSSAV1Likely -> "LIKELY"
+        GCVVSSAV1VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence"
@@ -3243,50 +4158,99 @@ instance FromJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence where
 instance ToJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotationViolence where
     toJSON = toJSONText
 
+-- | Under-exposed likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood
+    = GCVVFAUEL2Unknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVFAUEL2VeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVFAUEL2Unlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVFAUEL2Possible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVFAUEL2Likely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVFAUEL2VeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVFAUEL2Unknown
+        "VERY_UNLIKELY" -> Right GCVVFAUEL2VeryUnlikely
+        "UNLIKELY" -> Right GCVVFAUEL2Unlikely
+        "POSSIBLE" -> Right GCVVFAUEL2Possible
+        "LIKELY" -> Right GCVVFAUEL2Likely
+        "VERY_LIKELY" -> Right GCVVFAUEL2VeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood where
+    toQueryParam = \case
+        GCVVFAUEL2Unknown -> "UNKNOWN"
+        GCVVFAUEL2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAUEL2Unlikely -> "UNLIKELY"
+        GCVVFAUEL2Possible -> "POSSIBLE"
+        GCVVFAUEL2Likely -> "LIKELY"
+        GCVVFAUEL2VeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationUnderExposedLikelihood where
+    toJSON = toJSONText
+
 -- | Represents the adult content likelihood for the image. Adult content may
 -- contain elements such as nudity, pornographic images or cartoons, or
 -- sexual activities.
 data GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult
-    = GCVVSSAA1Unknown
+    = GCVVSSAA2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAA1VeryUnlikely
+    | GCVVSSAA2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAA1Unlikely
+      -- It is very unlikely.
+    | GCVVSSAA2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAA1Possible
+      -- It is unlikely.
+    | GCVVSSAA2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAA1Likely
+      -- It is possible.
+    | GCVVSSAA2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAA1VeryLikely
+      -- It is likely.
+    | GCVVSSAA2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAA1Unknown
-        "VERY_UNLIKELY" -> Right GCVVSSAA1VeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAA1Unlikely
-        "POSSIBLE" -> Right GCVVSSAA1Possible
-        "LIKELY" -> Right GCVVSSAA1Likely
-        "VERY_LIKELY" -> Right GCVVSSAA1VeryLikely
+        "UNKNOWN" -> Right GCVVSSAA2Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAA2VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAA2Unlikely
+        "POSSIBLE" -> Right GCVVSSAA2Possible
+        "LIKELY" -> Right GCVVSSAA2Likely
+        "VERY_LIKELY" -> Right GCVVSSAA2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult where
     toQueryParam = \case
-        GCVVSSAA1Unknown -> "UNKNOWN"
-        GCVVSSAA1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAA1Unlikely -> "UNLIKELY"
-        GCVVSSAA1Possible -> "POSSIBLE"
-        GCVVSSAA1Likely -> "LIKELY"
-        GCVVSSAA1VeryLikely -> "VERY_LIKELY"
+        GCVVSSAA2Unknown -> "UNKNOWN"
+        GCVVSSAA2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAA2Unlikely -> "UNLIKELY"
+        GCVVSSAA2Possible -> "POSSIBLE"
+        GCVVSSAA2Likely -> "LIKELY"
+        GCVVSSAA2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1SafeSearchAnnotationAdult"
@@ -3343,46 +4307,46 @@ instance ToJSON BatchOperationMetadataState where
 
 -- | Likelihood that this image contains violent content.
 data GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence
-    = GCVVSSAV1Unknown
+    = GCVVSSAV2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAV1VeryUnlikely
+    | GCVVSSAV2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAV1Unlikely
+      -- It is very unlikely.
+    | GCVVSSAV2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAV1Possible
+      -- It is unlikely.
+    | GCVVSSAV2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAV1Likely
+      -- It is possible.
+    | GCVVSSAV2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAV1VeryLikely
+      -- It is likely.
+    | GCVVSSAV2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAV1Unknown
-        "VERY_UNLIKELY" -> Right GCVVSSAV1VeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAV1Unlikely
-        "POSSIBLE" -> Right GCVVSSAV1Possible
-        "LIKELY" -> Right GCVVSSAV1Likely
-        "VERY_LIKELY" -> Right GCVVSSAV1VeryLikely
+        "UNKNOWN" -> Right GCVVSSAV2Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAV2VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAV2Unlikely
+        "POSSIBLE" -> Right GCVVSSAV2Possible
+        "LIKELY" -> Right GCVVSSAV2Likely
+        "VERY_LIKELY" -> Right GCVVSSAV2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence where
     toQueryParam = \case
-        GCVVSSAV1Unknown -> "UNKNOWN"
-        GCVVSSAV1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAV1Unlikely -> "UNLIKELY"
-        GCVVSSAV1Possible -> "POSSIBLE"
-        GCVVSSAV1Likely -> "LIKELY"
-        GCVVSSAV1VeryLikely -> "VERY_LIKELY"
+        GCVVSSAV2Unknown -> "UNKNOWN"
+        GCVVSSAV2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAV2Unlikely -> "UNLIKELY"
+        GCVVSSAV2Possible -> "POSSIBLE"
+        GCVVSSAV2Likely -> "LIKELY"
+        GCVVSSAV2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence"
@@ -3392,46 +4356,46 @@ instance ToJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolence where
 
 -- | Sorrow likelihood.
 data GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood
-    = GCVVFASL1Unknown
+    = GCVVFASL2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFASL1VeryUnlikely
+    | GCVVFASL2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFASL1Unlikely
+      -- It is very unlikely.
+    | GCVVFASL2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFASL1Possible
+      -- It is unlikely.
+    | GCVVFASL2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFASL1Likely
+      -- It is possible.
+    | GCVVFASL2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFASL1VeryLikely
+      -- It is likely.
+    | GCVVFASL2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFASL1Unknown
-        "VERY_UNLIKELY" -> Right GCVVFASL1VeryUnlikely
-        "UNLIKELY" -> Right GCVVFASL1Unlikely
-        "POSSIBLE" -> Right GCVVFASL1Possible
-        "LIKELY" -> Right GCVVFASL1Likely
-        "VERY_LIKELY" -> Right GCVVFASL1VeryLikely
+        "UNKNOWN" -> Right GCVVFASL2Unknown
+        "VERY_UNLIKELY" -> Right GCVVFASL2VeryUnlikely
+        "UNLIKELY" -> Right GCVVFASL2Unlikely
+        "POSSIBLE" -> Right GCVVFASL2Possible
+        "LIKELY" -> Right GCVVFASL2Likely
+        "VERY_LIKELY" -> Right GCVVFASL2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood where
     toQueryParam = \case
-        GCVVFASL1Unknown -> "UNKNOWN"
-        GCVVFASL1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFASL1Unlikely -> "UNLIKELY"
-        GCVVFASL1Possible -> "POSSIBLE"
-        GCVVFASL1Likely -> "LIKELY"
-        GCVVFASL1VeryLikely -> "VERY_LIKELY"
+        GCVVFASL2Unknown -> "UNKNOWN"
+        GCVVFASL2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFASL2Unlikely -> "UNLIKELY"
+        GCVVFASL2Possible -> "POSSIBLE"
+        GCVVFASL2Likely -> "LIKELY"
+        GCVVFASL2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood"
@@ -3442,46 +4406,46 @@ instance ToJSON GoogleCloudVisionV1p3beta1FaceAnnotationSorrowLikelihood where
 -- | Spoof likelihood. The likelihood that an modification was made to the
 -- image\'s canonical version to make it appear funny or offensive.
 data GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof
-    = GCVVSSAS1Unknown
+    = GCVVSSAS2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAS1VeryUnlikely
+    | GCVVSSAS2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAS1Unlikely
+      -- It is very unlikely.
+    | GCVVSSAS2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAS1Possible
+      -- It is unlikely.
+    | GCVVSSAS2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAS1Likely
+      -- It is possible.
+    | GCVVSSAS2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAS1VeryLikely
+      -- It is likely.
+    | GCVVSSAS2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof
 
 instance FromHttpApiData GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAS1Unknown
-        "VERY_UNLIKELY" -> Right GCVVSSAS1VeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAS1Unlikely
-        "POSSIBLE" -> Right GCVVSSAS1Possible
-        "LIKELY" -> Right GCVVSSAS1Likely
-        "VERY_LIKELY" -> Right GCVVSSAS1VeryLikely
+        "UNKNOWN" -> Right GCVVSSAS2Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAS2VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAS2Unlikely
+        "POSSIBLE" -> Right GCVVSSAS2Possible
+        "LIKELY" -> Right GCVVSSAS2Likely
+        "VERY_LIKELY" -> Right GCVVSSAS2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof where
     toQueryParam = \case
-        GCVVSSAS1Unknown -> "UNKNOWN"
-        GCVVSSAS1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAS1Unlikely -> "UNLIKELY"
-        GCVVSSAS1Possible -> "POSSIBLE"
-        GCVVSSAS1Likely -> "LIKELY"
-        GCVVSSAS1VeryLikely -> "VERY_LIKELY"
+        GCVVSSAS2Unknown -> "UNKNOWN"
+        GCVVSSAS2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAS2Unlikely -> "UNLIKELY"
+        GCVVSSAS2Possible -> "POSSIBLE"
+        GCVVSSAS2Likely -> "LIKELY"
+        GCVVSSAS2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof where
     parseJSON = parseJSONText "GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof"
@@ -3491,19 +4455,19 @@ instance ToJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotationSpoof where
 
 -- | Current state of the batch operation.
 data GoogleCloudVisionV1p1beta1OperationMetadataState
-    = GStateUnspecified
+    = GCVVOMSCStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- Invalid.
-    | GCreated
+    | GCVVOMSCCreated
       -- ^ @CREATED@
       -- Request is received.
-    | GRunning
+    | GCVVOMSCRunning
       -- ^ @RUNNING@
       -- Request is actively being processed.
-    | GDone
+    | GCVVOMSCDone
       -- ^ @DONE@
       -- The batch processing is done.
-    | GCancelled
+    | GCVVOMSCCancelled
       -- ^ @CANCELLED@
       -- The batch processing was cancelled.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3512,20 +4476,20 @@ instance Hashable GoogleCloudVisionV1p1beta1OperationMetadataState
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1OperationMetadataState where
     parseQueryParam = \case
-        "STATE_UNSPECIFIED" -> Right GStateUnspecified
-        "CREATED" -> Right GCreated
-        "RUNNING" -> Right GRunning
-        "DONE" -> Right GDone
-        "CANCELLED" -> Right GCancelled
+        "STATE_UNSPECIFIED" -> Right GCVVOMSCStateUnspecified
+        "CREATED" -> Right GCVVOMSCCreated
+        "RUNNING" -> Right GCVVOMSCRunning
+        "DONE" -> Right GCVVOMSCDone
+        "CANCELLED" -> Right GCVVOMSCCancelled
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1OperationMetadataState from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1OperationMetadataState where
     toQueryParam = \case
-        GStateUnspecified -> "STATE_UNSPECIFIED"
-        GCreated -> "CREATED"
-        GRunning -> "RUNNING"
-        GDone -> "DONE"
-        GCancelled -> "CANCELLED"
+        GCVVOMSCStateUnspecified -> "STATE_UNSPECIFIED"
+        GCVVOMSCCreated -> "CREATED"
+        GCVVOMSCRunning -> "RUNNING"
+        GCVVOMSCDone -> "DONE"
+        GCVVOMSCCancelled -> "CANCELLED"
 
 instance FromJSON GoogleCloudVisionV1p1beta1OperationMetadataState where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1OperationMetadataState"
@@ -3540,19 +4504,19 @@ data GoogleCloudVisionV1p3beta1FaceAnnotationHeadwearLikelihood
       -- Unknown likelihood.
     | GCVVFAHL1VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | GCVVFAHL1Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | GCVVFAHL1Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | GCVVFAHL1Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | GCVVFAHL1VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p3beta1FaceAnnotationHeadwearLikelihood
@@ -3584,46 +4548,46 @@ instance ToJSON GoogleCloudVisionV1p3beta1FaceAnnotationHeadwearLikelihood where
 
 -- | The feature type.
 data GoogleCloudVisionV1p2beta1FeatureType
-    = TypeUnspecified
+    = GCVVFTTypeUnspecified
       -- ^ @TYPE_UNSPECIFIED@
       -- Unspecified feature type.
-    | FaceDetection
+    | GCVVFTFaceDetection
       -- ^ @FACE_DETECTION@
       -- Run face detection.
-    | LandmarkDetection
+    | GCVVFTLandmarkDetection
       -- ^ @LANDMARK_DETECTION@
       -- Run landmark detection.
-    | LogoDetection
+    | GCVVFTLogoDetection
       -- ^ @LOGO_DETECTION@
       -- Run logo detection.
-    | LabelDetection
+    | GCVVFTLabelDetection
       -- ^ @LABEL_DETECTION@
       -- Run label detection.
-    | TextDetection
+    | GCVVFTTextDetection
       -- ^ @TEXT_DETECTION@
       -- Run text detection \/ optical character recognition (OCR). Text
       -- detection is optimized for areas of text within a larger image; if the
       -- image is a document, use \`DOCUMENT_TEXT_DETECTION\` instead.
-    | DocumentTextDetection
+    | GCVVFTDocumentTextDetection
       -- ^ @DOCUMENT_TEXT_DETECTION@
       -- Run dense text document OCR. Takes precedence when both
       -- \`DOCUMENT_TEXT_DETECTION\` and \`TEXT_DETECTION\` are present.
-    | SafeSearchDetection
+    | GCVVFTSafeSearchDetection
       -- ^ @SAFE_SEARCH_DETECTION@
       -- Run Safe Search to detect potentially unsafe or undesirable content.
-    | ImageProperties
+    | GCVVFTImageProperties
       -- ^ @IMAGE_PROPERTIES@
       -- Compute a set of image properties, such as the image\'s dominant colors.
-    | CropHints
+    | GCVVFTCropHints
       -- ^ @CROP_HINTS@
       -- Run crop hints.
-    | WebDetection
+    | GCVVFTWebDetection
       -- ^ @WEB_DETECTION@
       -- Run web detection.
-    | ProductSearch
+    | GCVVFTProductSearch
       -- ^ @PRODUCT_SEARCH@
       -- Run Product Search.
-    | ObjectLocalization
+    | GCVVFTObjectLocalization
       -- ^ @OBJECT_LOCALIZATION@
       -- Run localizer for object detection.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3632,36 +4596,36 @@ instance Hashable GoogleCloudVisionV1p2beta1FeatureType
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1FeatureType where
     parseQueryParam = \case
-        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
-        "FACE_DETECTION" -> Right FaceDetection
-        "LANDMARK_DETECTION" -> Right LandmarkDetection
-        "LOGO_DETECTION" -> Right LogoDetection
-        "LABEL_DETECTION" -> Right LabelDetection
-        "TEXT_DETECTION" -> Right TextDetection
-        "DOCUMENT_TEXT_DETECTION" -> Right DocumentTextDetection
-        "SAFE_SEARCH_DETECTION" -> Right SafeSearchDetection
-        "IMAGE_PROPERTIES" -> Right ImageProperties
-        "CROP_HINTS" -> Right CropHints
-        "WEB_DETECTION" -> Right WebDetection
-        "PRODUCT_SEARCH" -> Right ProductSearch
-        "OBJECT_LOCALIZATION" -> Right ObjectLocalization
+        "TYPE_UNSPECIFIED" -> Right GCVVFTTypeUnspecified
+        "FACE_DETECTION" -> Right GCVVFTFaceDetection
+        "LANDMARK_DETECTION" -> Right GCVVFTLandmarkDetection
+        "LOGO_DETECTION" -> Right GCVVFTLogoDetection
+        "LABEL_DETECTION" -> Right GCVVFTLabelDetection
+        "TEXT_DETECTION" -> Right GCVVFTTextDetection
+        "DOCUMENT_TEXT_DETECTION" -> Right GCVVFTDocumentTextDetection
+        "SAFE_SEARCH_DETECTION" -> Right GCVVFTSafeSearchDetection
+        "IMAGE_PROPERTIES" -> Right GCVVFTImageProperties
+        "CROP_HINTS" -> Right GCVVFTCropHints
+        "WEB_DETECTION" -> Right GCVVFTWebDetection
+        "PRODUCT_SEARCH" -> Right GCVVFTProductSearch
+        "OBJECT_LOCALIZATION" -> Right GCVVFTObjectLocalization
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1FeatureType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1FeatureType where
     toQueryParam = \case
-        TypeUnspecified -> "TYPE_UNSPECIFIED"
-        FaceDetection -> "FACE_DETECTION"
-        LandmarkDetection -> "LANDMARK_DETECTION"
-        LogoDetection -> "LOGO_DETECTION"
-        LabelDetection -> "LABEL_DETECTION"
-        TextDetection -> "TEXT_DETECTION"
-        DocumentTextDetection -> "DOCUMENT_TEXT_DETECTION"
-        SafeSearchDetection -> "SAFE_SEARCH_DETECTION"
-        ImageProperties -> "IMAGE_PROPERTIES"
-        CropHints -> "CROP_HINTS"
-        WebDetection -> "WEB_DETECTION"
-        ProductSearch -> "PRODUCT_SEARCH"
-        ObjectLocalization -> "OBJECT_LOCALIZATION"
+        GCVVFTTypeUnspecified -> "TYPE_UNSPECIFIED"
+        GCVVFTFaceDetection -> "FACE_DETECTION"
+        GCVVFTLandmarkDetection -> "LANDMARK_DETECTION"
+        GCVVFTLogoDetection -> "LOGO_DETECTION"
+        GCVVFTLabelDetection -> "LABEL_DETECTION"
+        GCVVFTTextDetection -> "TEXT_DETECTION"
+        GCVVFTDocumentTextDetection -> "DOCUMENT_TEXT_DETECTION"
+        GCVVFTSafeSearchDetection -> "SAFE_SEARCH_DETECTION"
+        GCVVFTImageProperties -> "IMAGE_PROPERTIES"
+        GCVVFTCropHints -> "CROP_HINTS"
+        GCVVFTWebDetection -> "WEB_DETECTION"
+        GCVVFTProductSearch -> "PRODUCT_SEARCH"
+        GCVVFTObjectLocalization -> "OBJECT_LOCALIZATION"
 
 instance FromJSON GoogleCloudVisionV1p2beta1FeatureType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1FeatureType"
@@ -3721,46 +4685,46 @@ instance ToJSON DetectedBreakType where
 
 -- | Anger likelihood.
 data GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood
-    = GCVVFAAL1Unknown
+    = GCVVFAAL2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFAAL1VeryUnlikely
+    | GCVVFAAL2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFAAL1Unlikely
+      -- It is very unlikely.
+    | GCVVFAAL2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFAAL1Possible
+      -- It is unlikely.
+    | GCVVFAAL2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFAAL1Likely
+      -- It is possible.
+    | GCVVFAAL2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFAAL1VeryLikely
+      -- It is likely.
+    | GCVVFAAL2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFAAL1Unknown
-        "VERY_UNLIKELY" -> Right GCVVFAAL1VeryUnlikely
-        "UNLIKELY" -> Right GCVVFAAL1Unlikely
-        "POSSIBLE" -> Right GCVVFAAL1Possible
-        "LIKELY" -> Right GCVVFAAL1Likely
-        "VERY_LIKELY" -> Right GCVVFAAL1VeryLikely
+        "UNKNOWN" -> Right GCVVFAAL2Unknown
+        "VERY_UNLIKELY" -> Right GCVVFAAL2VeryUnlikely
+        "UNLIKELY" -> Right GCVVFAAL2Unlikely
+        "POSSIBLE" -> Right GCVVFAAL2Possible
+        "LIKELY" -> Right GCVVFAAL2Likely
+        "VERY_LIKELY" -> Right GCVVFAAL2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood where
     toQueryParam = \case
-        GCVVFAAL1Unknown -> "UNKNOWN"
-        GCVVFAAL1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFAAL1Unlikely -> "UNLIKELY"
-        GCVVFAAL1Possible -> "POSSIBLE"
-        GCVVFAAL1Likely -> "LIKELY"
-        GCVVFAAL1VeryLikely -> "VERY_LIKELY"
+        GCVVFAAL2Unknown -> "UNKNOWN"
+        GCVVFAAL2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAAL2Unlikely -> "UNLIKELY"
+        GCVVFAAL2Possible -> "POSSIBLE"
+        GCVVFAAL2Likely -> "LIKELY"
+        GCVVFAAL2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood"
@@ -3770,46 +4734,46 @@ instance ToJSON GoogleCloudVisionV1p2beta1FaceAnnotationAngerLikelihood where
 
 -- | Likelihood that this is a medical image.
 data GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical
-    = GCVVSSAM1Unknown
+    = GCVVSSAM2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVSSAM1VeryUnlikely
+    | GCVVSSAM2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVSSAM1Unlikely
+      -- It is very unlikely.
+    | GCVVSSAM2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVSSAM1Possible
+      -- It is unlikely.
+    | GCVVSSAM2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVSSAM1Likely
+      -- It is possible.
+    | GCVVSSAM2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVSSAM1VeryLikely
+      -- It is likely.
+    | GCVVSSAM2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical
 
 instance FromHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVSSAM1Unknown
-        "VERY_UNLIKELY" -> Right GCVVSSAM1VeryUnlikely
-        "UNLIKELY" -> Right GCVVSSAM1Unlikely
-        "POSSIBLE" -> Right GCVVSSAM1Possible
-        "LIKELY" -> Right GCVVSSAM1Likely
-        "VERY_LIKELY" -> Right GCVVSSAM1VeryLikely
+        "UNKNOWN" -> Right GCVVSSAM2Unknown
+        "VERY_UNLIKELY" -> Right GCVVSSAM2VeryUnlikely
+        "UNLIKELY" -> Right GCVVSSAM2Unlikely
+        "POSSIBLE" -> Right GCVVSSAM2Possible
+        "LIKELY" -> Right GCVVSSAM2Likely
+        "VERY_LIKELY" -> Right GCVVSSAM2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical where
     toQueryParam = \case
-        GCVVSSAM1Unknown -> "UNKNOWN"
-        GCVVSSAM1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVSSAM1Unlikely -> "UNLIKELY"
-        GCVVSSAM1Possible -> "POSSIBLE"
-        GCVVSSAM1Likely -> "LIKELY"
-        GCVVSSAM1VeryLikely -> "VERY_LIKELY"
+        GCVVSSAM2Unknown -> "UNKNOWN"
+        GCVVSSAM2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVSSAM2Unlikely -> "UNLIKELY"
+        GCVVSSAM2Possible -> "POSSIBLE"
+        GCVVSSAM2Likely -> "LIKELY"
+        GCVVSSAM2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical where
     parseJSON = parseJSONText "GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical"
@@ -3819,51 +4783,46 @@ instance ToJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedical where
 
 -- | Detected block type (text, image etc) for this block.
 data GoogleCloudVisionV1p1beta1BlockBlockType
-    = GCVVBBT1Unknown
+    = GCVVBBT2Unknown
       -- ^ @UNKNOWN@
       -- Unknown block type.
-    | GCVVBBT1Text
+    | GCVVBBT2Text
       -- ^ @TEXT@
       -- Regular text block.
-    | GCVVBBT1Table
+    | GCVVBBT2Table
       -- ^ @TABLE@
       -- Table block.
-    | GCVVBBT1Picture
+    | GCVVBBT2Picture
       -- ^ @PICTURE@
       -- Image block.
-    | GCVVBBT1Ruler
+    | GCVVBBT2Ruler
       -- ^ @RULER@
       -- Horizontal\/vertical line box.
-    | GCVVBBT1Barcode
+    | GCVVBBT2Barcode
       -- ^ @BARCODE@
       -- Barcode block.
-    | GCVVBBT1KeyValuePair
-      -- ^ @KEY_VALUE_PAIR@
-      -- A key-value pair block.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1BlockBlockType
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1BlockBlockType where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVBBT1Unknown
-        "TEXT" -> Right GCVVBBT1Text
-        "TABLE" -> Right GCVVBBT1Table
-        "PICTURE" -> Right GCVVBBT1Picture
-        "RULER" -> Right GCVVBBT1Ruler
-        "BARCODE" -> Right GCVVBBT1Barcode
-        "KEY_VALUE_PAIR" -> Right GCVVBBT1KeyValuePair
+        "UNKNOWN" -> Right GCVVBBT2Unknown
+        "TEXT" -> Right GCVVBBT2Text
+        "TABLE" -> Right GCVVBBT2Table
+        "PICTURE" -> Right GCVVBBT2Picture
+        "RULER" -> Right GCVVBBT2Ruler
+        "BARCODE" -> Right GCVVBBT2Barcode
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1BlockBlockType from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1BlockBlockType where
     toQueryParam = \case
-        GCVVBBT1Unknown -> "UNKNOWN"
-        GCVVBBT1Text -> "TEXT"
-        GCVVBBT1Table -> "TABLE"
-        GCVVBBT1Picture -> "PICTURE"
-        GCVVBBT1Ruler -> "RULER"
-        GCVVBBT1Barcode -> "BARCODE"
-        GCVVBBT1KeyValuePair -> "KEY_VALUE_PAIR"
+        GCVVBBT2Unknown -> "UNKNOWN"
+        GCVVBBT2Text -> "TEXT"
+        GCVVBBT2Table -> "TABLE"
+        GCVVBBT2Picture -> "PICTURE"
+        GCVVBBT2Ruler -> "RULER"
+        GCVVBBT2Barcode -> "BARCODE"
 
 instance FromJSON GoogleCloudVisionV1p1beta1BlockBlockType where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1BlockBlockType"
@@ -3881,19 +4840,19 @@ data SafeSearchAnnotationRacy
       -- Unknown likelihood.
     | SSARVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
+      -- It is very unlikely.
     | SSARUnlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
+      -- It is unlikely.
     | SSARPossible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
+      -- It is possible.
     | SSARLikely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
+      -- It is likely.
     | SSARVeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationRacy
@@ -3925,49 +4884,98 @@ instance ToJSON SafeSearchAnnotationRacy where
 
 -- | Joy likelihood.
 data GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood
-    = GCVVFAJL1Unknown
+    = GCVVFAJL2Unknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
-    | GCVVFAJL1VeryUnlikely
+    | GCVVFAJL2VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- It is very unlikely that the image belongs to the specified vertical.
-    | GCVVFAJL1Unlikely
+      -- It is very unlikely.
+    | GCVVFAJL2Unlikely
       -- ^ @UNLIKELY@
-      -- It is unlikely that the image belongs to the specified vertical.
-    | GCVVFAJL1Possible
+      -- It is unlikely.
+    | GCVVFAJL2Possible
       -- ^ @POSSIBLE@
-      -- It is possible that the image belongs to the specified vertical.
-    | GCVVFAJL1Likely
+      -- It is possible.
+    | GCVVFAJL2Likely
       -- ^ @LIKELY@
-      -- It is likely that the image belongs to the specified vertical.
-    | GCVVFAJL1VeryLikely
+      -- It is likely.
+    | GCVVFAJL2VeryLikely
       -- ^ @VERY_LIKELY@
-      -- It is very likely that the image belongs to the specified vertical.
+      -- It is very likely.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood
 
 instance FromHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood where
     parseQueryParam = \case
-        "UNKNOWN" -> Right GCVVFAJL1Unknown
-        "VERY_UNLIKELY" -> Right GCVVFAJL1VeryUnlikely
-        "UNLIKELY" -> Right GCVVFAJL1Unlikely
-        "POSSIBLE" -> Right GCVVFAJL1Possible
-        "LIKELY" -> Right GCVVFAJL1Likely
-        "VERY_LIKELY" -> Right GCVVFAJL1VeryLikely
+        "UNKNOWN" -> Right GCVVFAJL2Unknown
+        "VERY_UNLIKELY" -> Right GCVVFAJL2VeryUnlikely
+        "UNLIKELY" -> Right GCVVFAJL2Unlikely
+        "POSSIBLE" -> Right GCVVFAJL2Possible
+        "LIKELY" -> Right GCVVFAJL2Likely
+        "VERY_LIKELY" -> Right GCVVFAJL2VeryLikely
         x -> Left ("Unable to parse GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood from: " <> x)
 
 instance ToHttpApiData GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood where
     toQueryParam = \case
-        GCVVFAJL1Unknown -> "UNKNOWN"
-        GCVVFAJL1VeryUnlikely -> "VERY_UNLIKELY"
-        GCVVFAJL1Unlikely -> "UNLIKELY"
-        GCVVFAJL1Possible -> "POSSIBLE"
-        GCVVFAJL1Likely -> "LIKELY"
-        GCVVFAJL1VeryLikely -> "VERY_LIKELY"
+        GCVVFAJL2Unknown -> "UNKNOWN"
+        GCVVFAJL2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAJL2Unlikely -> "UNLIKELY"
+        GCVVFAJL2Possible -> "POSSIBLE"
+        GCVVFAJL2Likely -> "LIKELY"
+        GCVVFAJL2VeryLikely -> "VERY_LIKELY"
 
 instance FromJSON GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood where
     parseJSON = parseJSONText "GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood"
 
 instance ToJSON GoogleCloudVisionV1p1beta1FaceAnnotationJoyLikelihood where
+    toJSON = toJSONText
+
+-- | Headwear likelihood.
+data GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood
+    = GCVVFAHL2Unknown
+      -- ^ @UNKNOWN@
+      -- Unknown likelihood.
+    | GCVVFAHL2VeryUnlikely
+      -- ^ @VERY_UNLIKELY@
+      -- It is very unlikely.
+    | GCVVFAHL2Unlikely
+      -- ^ @UNLIKELY@
+      -- It is unlikely.
+    | GCVVFAHL2Possible
+      -- ^ @POSSIBLE@
+      -- It is possible.
+    | GCVVFAHL2Likely
+      -- ^ @LIKELY@
+      -- It is likely.
+    | GCVVFAHL2VeryLikely
+      -- ^ @VERY_LIKELY@
+      -- It is very likely.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood
+
+instance FromHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right GCVVFAHL2Unknown
+        "VERY_UNLIKELY" -> Right GCVVFAHL2VeryUnlikely
+        "UNLIKELY" -> Right GCVVFAHL2Unlikely
+        "POSSIBLE" -> Right GCVVFAHL2Possible
+        "LIKELY" -> Right GCVVFAHL2Likely
+        "VERY_LIKELY" -> Right GCVVFAHL2VeryLikely
+        x -> Left ("Unable to parse GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood from: " <> x)
+
+instance ToHttpApiData GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood where
+    toQueryParam = \case
+        GCVVFAHL2Unknown -> "UNKNOWN"
+        GCVVFAHL2VeryUnlikely -> "VERY_UNLIKELY"
+        GCVVFAHL2Unlikely -> "UNLIKELY"
+        GCVVFAHL2Possible -> "POSSIBLE"
+        GCVVFAHL2Likely -> "LIKELY"
+        GCVVFAHL2VeryLikely -> "VERY_LIKELY"
+
+instance FromJSON GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood where
+    parseJSON = parseJSONText "GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood"
+
+instance ToJSON GoogleCloudVisionV1p4beta1FaceAnnotationHeadwearLikelihood where
     toJSON = toJSONText

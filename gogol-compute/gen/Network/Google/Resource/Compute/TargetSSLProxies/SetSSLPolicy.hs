@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.TargetSSLProxies.SetSSLPolicy
     , tspsspTargetSSLProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetSslProxies.setSslPolicy@ method which the
 -- 'TargetSSLProxiesSetSSLPolicy' request conforms to.
@@ -69,9 +69,9 @@ type TargetSSLProxiesSetSSLPolicyResource =
 -- /See:/ 'targetSSLProxiesSetSSLPolicy' smart constructor.
 data TargetSSLProxiesSetSSLPolicy =
   TargetSSLProxiesSetSSLPolicy'
-    { _tspsspRequestId      :: !(Maybe Text)
-    , _tspsspProject        :: !Text
-    , _tspsspPayload        :: !SSLPolicyReference
+    { _tspsspRequestId :: !(Maybe Text)
+    , _tspsspProject :: !Text
+    , _tspsspPayload :: !SSLPolicyReference
     , _tspsspTargetSSLProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

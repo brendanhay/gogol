@@ -44,8 +44,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.GetIAMPolicy
     , pigipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.getIamPolicy@ method which the
 -- 'ProjectsInstancesGetIAMPolicy' request conforms to.
@@ -68,13 +68,13 @@ type ProjectsInstancesGetIAMPolicyResource =
 -- /See:/ 'projectsInstancesGetIAMPolicy' smart constructor.
 data ProjectsInstancesGetIAMPolicy =
   ProjectsInstancesGetIAMPolicy'
-    { _pigipXgafv          :: !(Maybe Xgafv)
+    { _pigipXgafv :: !(Maybe Xgafv)
     , _pigipUploadProtocol :: !(Maybe Text)
-    , _pigipAccessToken    :: !(Maybe Text)
-    , _pigipUploadType     :: !(Maybe Text)
-    , _pigipPayload        :: !GetIAMPolicyRequest
-    , _pigipResource       :: !Text
-    , _pigipCallback       :: !(Maybe Text)
+    , _pigipAccessToken :: !(Maybe Text)
+    , _pigipUploadType :: !(Maybe Text)
+    , _pigipPayload :: !GetIAMPolicyRequest
+    , _pigipResource :: !Text
+    , _pigipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

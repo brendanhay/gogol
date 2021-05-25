@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Undelete a Role, bringing it back in its previous state.
+-- Undeletes a custom Role.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.organizations.roles.undelete@.
 module Network.Google.Resource.IAM.Organizations.Roles.Undelete
@@ -42,8 +42,8 @@ module Network.Google.Resource.IAM.Organizations.Roles.Undelete
     , oruCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.organizations.roles.undelete@ method which the
 -- 'OrganizationsRolesUndelete' request conforms to.
@@ -59,18 +59,18 @@ type OrganizationsRolesUndeleteResource =
                      ReqBody '[JSON] UndeleteRoleRequest :>
                        Post '[JSON] Role
 
--- | Undelete a Role, bringing it back in its previous state.
+-- | Undeletes a custom Role.
 --
 -- /See:/ 'organizationsRolesUndelete' smart constructor.
 data OrganizationsRolesUndelete =
   OrganizationsRolesUndelete'
-    { _oruXgafv          :: !(Maybe Xgafv)
+    { _oruXgafv :: !(Maybe Xgafv)
     , _oruUploadProtocol :: !(Maybe Text)
-    , _oruAccessToken    :: !(Maybe Text)
-    , _oruUploadType     :: !(Maybe Text)
-    , _oruPayload        :: !UndeleteRoleRequest
-    , _oruName           :: !Text
-    , _oruCallback       :: !(Maybe Text)
+    , _oruAccessToken :: !(Maybe Text)
+    , _oruUploadType :: !(Maybe Text)
+    , _oruPayload :: !UndeleteRoleRequest
+    , _oruName :: !Text
+    , _oruCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,9 +135,25 @@ oruPayload :: Lens' OrganizationsRolesUndelete UndeleteRoleRequest
 oruPayload
   = lens _oruPayload (\ s a -> s{_oruPayload = a})
 
--- | The resource name of the role in one of the following formats:
--- \`organizations\/{ORGANIZATION_ID}\/roles\/{ROLE_NAME}\`
--- \`projects\/{PROJECT_ID}\/roles\/{ROLE_NAME}\`
+-- | The \`name\` parameter\'s value depends on the target resource for the
+-- request, namely
+-- [\`projects\`](\/iam\/reference\/rest\/v1\/projects.roles) or
+-- [\`organizations\`](\/iam\/reference\/rest\/v1\/organizations.roles).
+-- Each resource type\'s \`name\` value format is described below: *
+-- [\`projects.roles.undelete()\`](\/iam\/reference\/rest\/v1\/projects.roles\/undelete):
+-- \`projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This method
+-- undeletes only [custom roles](\/iam\/docs\/understanding-custom-roles)
+-- that have been created at the project level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/projects\/{PROJECT_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- *
+-- [\`organizations.roles.undelete()\`](\/iam\/reference\/rest\/v1\/organizations.roles\/undelete):
+-- \`organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`. This
+-- method undeletes only [custom
+-- roles](\/iam\/docs\/understanding-custom-roles) that have been created
+-- at the organization level. Example request URL:
+-- \`https:\/\/iam.googleapis.com\/v1\/organizations\/{ORGANIZATION_ID}\/roles\/{CUSTOM_ROLE_ID}\`
+-- Note: Wildcard (*) values are invalid; you must specify a complete
+-- project ID or organization ID.
 oruName :: Lens' OrganizationsRolesUndelete Text
 oruName = lens _oruName (\ s a -> s{_oruName = a})
 

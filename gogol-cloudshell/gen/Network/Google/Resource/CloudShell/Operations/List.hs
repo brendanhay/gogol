@@ -53,8 +53,8 @@ module Network.Google.Resource.CloudShell.Operations.List
     , olCallback
     ) where
 
-import           Network.Google.CloudShell.Types
-import           Network.Google.Prelude
+import Network.Google.CloudShell.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudshell.operations.list@ method which the
 -- 'OperationsList' request conforms to.
@@ -86,15 +86,15 @@ type OperationsListResource =
 -- /See:/ 'operationsList' smart constructor.
 data OperationsList =
   OperationsList'
-    { _olXgafv          :: !(Maybe Xgafv)
+    { _olXgafv :: !(Maybe Xgafv)
     , _olUploadProtocol :: !(Maybe Text)
-    , _olAccessToken    :: !(Maybe Text)
-    , _olUploadType     :: !(Maybe Text)
-    , _olName           :: !Text
-    , _olFilter         :: !(Maybe Text)
-    , _olPageToken      :: !(Maybe Text)
-    , _olPageSize       :: !(Maybe (Textual Int32))
-    , _olCallback       :: !(Maybe Text)
+    , _olAccessToken :: !(Maybe Text)
+    , _olUploadType :: !(Maybe Text)
+    , _olName :: !Text
+    , _olFilter :: !(Maybe Text)
+    , _olPageToken :: !(Maybe Text)
+    , _olPageSize :: !(Maybe (Textual Int32))
+    , _olCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,7 +23,9 @@
 -- Deletes all the historical versions of a resource (excluding the current
 -- version) from the FHIR store. To remove all versions of a resource,
 -- first delete the current version and then call this method. This is not
--- a FHIR standard operation.
+-- a FHIR standard operation. For samples that show how to call
+-- \`Resource-purge\`, see [Deleting historical versions of a FHIR
+-- resource](\/healthcare\/docs\/how-tos\/fhir-resources#deleting_historical_versions_of_a_fhir_resource).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.fhir.Resource-purge@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.ResourcePurge
@@ -44,14 +46,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfsfrpCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.Resource-purge@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresFhirResourcePurge' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresFhirResourcePurgeResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "$purge" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -64,17 +66,19 @@ type ProjectsLocationsDataSetsFhirStoresFhirResourcePurgeResource
 -- | Deletes all the historical versions of a resource (excluding the current
 -- version) from the FHIR store. To remove all versions of a resource,
 -- first delete the current version and then call this method. This is not
--- a FHIR standard operation.
+-- a FHIR standard operation. For samples that show how to call
+-- \`Resource-purge\`, see [Deleting historical versions of a FHIR
+-- resource](\/healthcare\/docs\/how-tos\/fhir-resources#deleting_historical_versions_of_a_fhir_resource).
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresFhirResourcePurge' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresFhirResourcePurge =
   ProjectsLocationsDataSetsFhirStoresFhirResourcePurge'
-    { _pldsfsfrpXgafv          :: !(Maybe Xgafv)
+    { _pldsfsfrpXgafv :: !(Maybe Xgafv)
     , _pldsfsfrpUploadProtocol :: !(Maybe Text)
-    , _pldsfsfrpAccessToken    :: !(Maybe Text)
-    , _pldsfsfrpUploadType     :: !(Maybe Text)
-    , _pldsfsfrpName           :: !Text
-    , _pldsfsfrpCallback       :: !(Maybe Text)
+    , _pldsfsfrpAccessToken :: !(Maybe Text)
+    , _pldsfsfrpUploadType :: !(Maybe Text)
+    , _pldsfsfrpName :: !Text
+    , _pldsfsfrpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

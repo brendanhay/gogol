@@ -22,7 +22,7 @@
 --
 -- Unlocks this achievement for the currently authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.unlock@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference> for @games.achievements.unlock@.
 module Network.Google.Resource.Games.Achievements.Unlock
     (
     -- * REST Resource
@@ -33,12 +33,16 @@ module Network.Google.Resource.Games.Achievements.Unlock
     , AchievementsUnlock
 
     -- * Request Lenses
-    , auBuiltinGameId
+    , auXgafv
+    , auUploadProtocol
     , auAchievementId
+    , auAccessToken
+    , auUploadType
+    , auCallback
     ) where
 
-import           Network.Google.Games.Types
-import           Network.Google.Prelude
+import Network.Google.Games.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @games.achievements.unlock@ method which the
 -- 'AchievementsUnlock' request conforms to.
@@ -48,17 +52,25 @@ type AchievementsUnlockResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "unlock" :>
-               QueryParam "builtinGameId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] AchievementUnlockResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Post '[JSON] AchievementUnlockResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ 'achievementsUnlock' smart constructor.
 data AchievementsUnlock =
   AchievementsUnlock'
-    { _auBuiltinGameId :: !(Maybe Text)
+    { _auXgafv :: !(Maybe Xgafv)
+    , _auUploadProtocol :: !(Maybe Text)
     , _auAchievementId :: !Text
+    , _auAccessToken :: !(Maybe Text)
+    , _auUploadType :: !(Maybe Text)
+    , _auCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,22 +79,40 @@ data AchievementsUnlock =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auBuiltinGameId'
+-- * 'auXgafv'
+--
+-- * 'auUploadProtocol'
 --
 -- * 'auAchievementId'
+--
+-- * 'auAccessToken'
+--
+-- * 'auUploadType'
+--
+-- * 'auCallback'
 achievementsUnlock
     :: Text -- ^ 'auAchievementId'
     -> AchievementsUnlock
 achievementsUnlock pAuAchievementId_ =
   AchievementsUnlock'
-    {_auBuiltinGameId = Nothing, _auAchievementId = pAuAchievementId_}
+    { _auXgafv = Nothing
+    , _auUploadProtocol = Nothing
+    , _auAchievementId = pAuAchievementId_
+    , _auAccessToken = Nothing
+    , _auUploadType = Nothing
+    , _auCallback = Nothing
+    }
 
 
--- | Override used only by built-in games in Play Games application.
-auBuiltinGameId :: Lens' AchievementsUnlock (Maybe Text)
-auBuiltinGameId
-  = lens _auBuiltinGameId
-      (\ s a -> s{_auBuiltinGameId = a})
+-- | V1 error format.
+auXgafv :: Lens' AchievementsUnlock (Maybe Xgafv)
+auXgafv = lens _auXgafv (\ s a -> s{_auXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+auUploadProtocol :: Lens' AchievementsUnlock (Maybe Text)
+auUploadProtocol
+  = lens _auUploadProtocol
+      (\ s a -> s{_auUploadProtocol = a})
 
 -- | The ID of the achievement used by this method.
 auAchievementId :: Lens' AchievementsUnlock Text
@@ -90,14 +120,33 @@ auAchievementId
   = lens _auAchievementId
       (\ s a -> s{_auAchievementId = a})
 
+-- | OAuth access token.
+auAccessToken :: Lens' AchievementsUnlock (Maybe Text)
+auAccessToken
+  = lens _auAccessToken
+      (\ s a -> s{_auAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+auUploadType :: Lens' AchievementsUnlock (Maybe Text)
+auUploadType
+  = lens _auUploadType (\ s a -> s{_auUploadType = a})
+
+-- | JSONP
+auCallback :: Lens' AchievementsUnlock (Maybe Text)
+auCallback
+  = lens _auCallback (\ s a -> s{_auCallback = a})
+
 instance GoogleRequest AchievementsUnlock where
         type Rs AchievementsUnlock =
              AchievementUnlockResponse
         type Scopes AchievementsUnlock =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.me"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient AchievementsUnlock'{..}
-          = go _auAchievementId _auBuiltinGameId (Just AltJSON)
+          = go _auAchievementId _auXgafv _auUploadProtocol
+              _auAccessToken
+              _auUploadType
+              _auCallback
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient

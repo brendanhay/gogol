@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds HeldAccounts to a hold. Returns a list of accounts that have been
--- successfully added. Accounts can only be added to an existing
+-- Adds accounts to a hold. Returns a list of accounts that have been
+-- successfully added. Accounts can be added only to an existing
 -- account-based hold.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.holds.addHeldAccounts@.
@@ -45,8 +45,8 @@ module Network.Google.Resource.Vault.Matters.Holds.AddHeldAccounts
     , mhahaCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.holds.addHeldAccounts@ method which the
 -- 'MattersHoldsAddHeldAccounts' request conforms to.
@@ -65,21 +65,21 @@ type MattersHoldsAddHeldAccountsResource =
                            ReqBody '[JSON] AddHeldAccountsRequest :>
                              Post '[JSON] AddHeldAccountsResponse
 
--- | Adds HeldAccounts to a hold. Returns a list of accounts that have been
--- successfully added. Accounts can only be added to an existing
+-- | Adds accounts to a hold. Returns a list of accounts that have been
+-- successfully added. Accounts can be added only to an existing
 -- account-based hold.
 --
 -- /See:/ 'mattersHoldsAddHeldAccounts' smart constructor.
 data MattersHoldsAddHeldAccounts =
   MattersHoldsAddHeldAccounts'
-    { _mhahaXgafv          :: !(Maybe Xgafv)
+    { _mhahaXgafv :: !(Maybe Xgafv)
     , _mhahaUploadProtocol :: !(Maybe Text)
-    , _mhahaHoldId         :: !Text
-    , _mhahaAccessToken    :: !(Maybe Text)
-    , _mhahaUploadType     :: !(Maybe Text)
-    , _mhahaPayload        :: !AddHeldAccountsRequest
-    , _mhahaMatterId       :: !Text
-    , _mhahaCallback       :: !(Maybe Text)
+    , _mhahaHoldId :: !Text
+    , _mhahaAccessToken :: !(Maybe Text)
+    , _mhahaUploadType :: !(Maybe Text)
+    , _mhahaPayload :: !AddHeldAccountsRequest
+    , _mhahaMatterId :: !Text
+    , _mhahaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

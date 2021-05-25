@@ -16,7 +16,7 @@
 --
 module Network.Google.AnalyticsReporting.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Is the metric \`EQUAL\`, \`LESS_THAN\` or \`GREATER_THAN\` the
 -- comparisonValue, the default is \`EQUAL\`. If the operator is
@@ -130,6 +130,56 @@ instance FromJSON CohortType where
     parseJSON = parseJSONText "CohortType"
 
 instance ToJSON CohortType where
+    toJSON = toJSONText
+
+data SearchUserActivityRequestActivityTypesItem
+    = ActivityTypeUnspecified
+      -- ^ @ACTIVITY_TYPE_UNSPECIFIED@
+      -- ActivityType will never have this value in the response. Using this type
+      -- in the request will result in an error.
+    | Pageview
+      -- ^ @PAGEVIEW@
+      -- Used when the activity resulted out of a visitor viewing a page.
+    | Screenview
+      -- ^ @SCREENVIEW@
+      -- Used when the activity resulted out of a visitor using an application on
+      -- a mobile device.
+    | Goal
+      -- ^ @GOAL@
+      -- Used to denote that a goal type activity.
+    | Ecommerce
+      -- ^ @ECOMMERCE@
+      -- An e-commerce transaction was performed by the visitor on the page.
+    | Event
+      -- ^ @EVENT@
+      -- Used when the activity is an event.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SearchUserActivityRequestActivityTypesItem
+
+instance FromHttpApiData SearchUserActivityRequestActivityTypesItem where
+    parseQueryParam = \case
+        "ACTIVITY_TYPE_UNSPECIFIED" -> Right ActivityTypeUnspecified
+        "PAGEVIEW" -> Right Pageview
+        "SCREENVIEW" -> Right Screenview
+        "GOAL" -> Right Goal
+        "ECOMMERCE" -> Right Ecommerce
+        "EVENT" -> Right Event
+        x -> Left ("Unable to parse SearchUserActivityRequestActivityTypesItem from: " <> x)
+
+instance ToHttpApiData SearchUserActivityRequestActivityTypesItem where
+    toQueryParam = \case
+        ActivityTypeUnspecified -> "ACTIVITY_TYPE_UNSPECIFIED"
+        Pageview -> "PAGEVIEW"
+        Screenview -> "SCREENVIEW"
+        Goal -> "GOAL"
+        Ecommerce -> "ECOMMERCE"
+        Event -> "EVENT"
+
+instance FromJSON SearchUserActivityRequestActivityTypesItem where
+    parseJSON = parseJSONText "SearchUserActivityRequestActivityTypesItem"
+
+instance ToJSON SearchUserActivityRequestActivityTypesItem where
     toJSON = toJSONText
 
 -- | The order type. The default orderType is \`VALUE\`.
@@ -663,24 +713,24 @@ instance ToJSON DimensionFilterOperator where
 
 -- | Type of this activity.
 data ActivityActivityType
-    = ActivityTypeUnspecified
+    = AATActivityTypeUnspecified
       -- ^ @ACTIVITY_TYPE_UNSPECIFIED@
       -- ActivityType will never have this value in the response. Using this type
       -- in the request will result in an error.
-    | Pageview
+    | AATPageview
       -- ^ @PAGEVIEW@
       -- Used when the activity resulted out of a visitor viewing a page.
-    | Screenview
+    | AATScreenview
       -- ^ @SCREENVIEW@
       -- Used when the activity resulted out of a visitor using an application on
       -- a mobile device.
-    | Goal
+    | AATGoal
       -- ^ @GOAL@
       -- Used to denote that a goal type activity.
-    | Ecommerce
+    | AATEcommerce
       -- ^ @ECOMMERCE@
       -- An e-commerce transaction was performed by the visitor on the page.
-    | Event
+    | AATEvent
       -- ^ @EVENT@
       -- Used when the activity is an event.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -689,22 +739,22 @@ instance Hashable ActivityActivityType
 
 instance FromHttpApiData ActivityActivityType where
     parseQueryParam = \case
-        "ACTIVITY_TYPE_UNSPECIFIED" -> Right ActivityTypeUnspecified
-        "PAGEVIEW" -> Right Pageview
-        "SCREENVIEW" -> Right Screenview
-        "GOAL" -> Right Goal
-        "ECOMMERCE" -> Right Ecommerce
-        "EVENT" -> Right Event
+        "ACTIVITY_TYPE_UNSPECIFIED" -> Right AATActivityTypeUnspecified
+        "PAGEVIEW" -> Right AATPageview
+        "SCREENVIEW" -> Right AATScreenview
+        "GOAL" -> Right AATGoal
+        "ECOMMERCE" -> Right AATEcommerce
+        "EVENT" -> Right AATEvent
         x -> Left ("Unable to parse ActivityActivityType from: " <> x)
 
 instance ToHttpApiData ActivityActivityType where
     toQueryParam = \case
-        ActivityTypeUnspecified -> "ACTIVITY_TYPE_UNSPECIFIED"
-        Pageview -> "PAGEVIEW"
-        Screenview -> "SCREENVIEW"
-        Goal -> "GOAL"
-        Ecommerce -> "ECOMMERCE"
-        Event -> "EVENT"
+        AATActivityTypeUnspecified -> "ACTIVITY_TYPE_UNSPECIFIED"
+        AATPageview -> "PAGEVIEW"
+        AATScreenview -> "SCREENVIEW"
+        AATGoal -> "GOAL"
+        AATEcommerce -> "ECOMMERCE"
+        AATEvent -> "EVENT"
 
 instance FromJSON ActivityActivityType where
     parseJSON = parseJSONText "ActivityActivityType"

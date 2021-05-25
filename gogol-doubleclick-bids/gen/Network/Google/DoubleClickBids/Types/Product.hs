@@ -17,16 +17,17 @@
 --
 module Network.Google.DoubleClickBids.Types.Product where
 
-import           Network.Google.DoubleClickBids.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DoubleClickBids.Types.Sum
+import Network.Google.Prelude
 
 -- | List reports response.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
 data ListReportsResponse =
   ListReportsResponse'
-    { _lrrReports :: !(Maybe [Report])
-    , _lrrKind    :: !Text
+    { _lrrNextPageToken :: !(Maybe Text)
+    , _lrrReports :: !(Maybe [Report])
+    , _lrrKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -35,6 +36,8 @@ data ListReportsResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lrrNextPageToken'
+--
 -- * 'lrrReports'
 --
 -- * 'lrrKind'
@@ -42,10 +45,14 @@ listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
   ListReportsResponse'
-    { _lrrReports = Nothing
-    , _lrrKind = "doubleclickbidmanager#listReportsResponse"
-    }
+    {_lrrNextPageToken = Nothing, _lrrReports = Nothing, _lrrKind = Nothing}
 
+
+-- | Next page\'s pagination token if one exists.
+lrrNextPageToken :: Lens' ListReportsResponse (Maybe Text)
+lrrNextPageToken
+  = lens _lrrNextPageToken
+      (\ s a -> s{_lrrNextPageToken = a})
 
 -- | Retrieved reports.
 lrrReports :: Lens' ListReportsResponse [Report]
@@ -56,7 +63,7 @@ lrrReports
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"doubleclickbidmanager#listReportsResponse\".
-lrrKind :: Lens' ListReportsResponse Text
+lrrKind :: Lens' ListReportsResponse (Maybe Text)
 lrrKind = lens _lrrKind (\ s a -> s{_lrrKind = a})
 
 instance FromJSON ListReportsResponse where
@@ -64,16 +71,60 @@ instance FromJSON ListReportsResponse where
           = withObject "ListReportsResponse"
               (\ o ->
                  ListReportsResponse' <$>
-                   (o .:? "reports" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "doubleclickbidmanager#listReportsResponse"))
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "reports" .!= mempty)
+                     <*> (o .:? "kind"))
 
 instance ToJSON ListReportsResponse where
         toJSON ListReportsResponse'{..}
           = object
               (catMaybes
-                 [("reports" .=) <$> _lrrReports,
-                  Just ("kind" .= _lrrKind)])
+                 [("nextPageToken" .=) <$> _lrrNextPageToken,
+                  ("reports" .=) <$> _lrrReports,
+                  ("kind" .=) <$> _lrrKind])
+
+-- | DisjunctiveMatchStatement that OR\'s all contained filters.
+--
+-- /See:/ 'disjunctiveMatchStatement' smart constructor.
+newtype DisjunctiveMatchStatement =
+  DisjunctiveMatchStatement'
+    { _dmsEventFilters :: Maybe [EventFilter]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DisjunctiveMatchStatement' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dmsEventFilters'
+disjunctiveMatchStatement
+    :: DisjunctiveMatchStatement
+disjunctiveMatchStatement =
+  DisjunctiveMatchStatement' {_dmsEventFilters = Nothing}
+
+
+-- | Filters. There is a limit of 100 filters that can be set per disjunctive
+-- match statement.
+dmsEventFilters :: Lens' DisjunctiveMatchStatement [EventFilter]
+dmsEventFilters
+  = lens _dmsEventFilters
+      (\ s a -> s{_dmsEventFilters = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DisjunctiveMatchStatement where
+        parseJSON
+          = withObject "DisjunctiveMatchStatement"
+              (\ o ->
+                 DisjunctiveMatchStatement' <$>
+                   (o .:? "eventFilters" .!= mempty))
+
+instance ToJSON DisjunctiveMatchStatement where
+        toJSON DisjunctiveMatchStatement'{..}
+          = object
+              (catMaybes
+                 [("eventFilters" .=) <$> _dmsEventFilters])
 
 -- | Query metadata.
 --
@@ -81,16 +132,16 @@ instance ToJSON ListReportsResponse where
 data QueryMetadata =
   QueryMetadata'
     { _qmGoogleCloudStoragePathForLatestReport :: !(Maybe Text)
-    , _qmLocale                                :: !(Maybe Text)
-    , _qmFormat                                :: !(Maybe QueryMetadataFormat)
-    , _qmGoogleDrivePathForLatestReport        :: !(Maybe Text)
-    , _qmShareEmailAddress                     :: !(Maybe [Text])
-    , _qmRunning                               :: !(Maybe Bool)
-    , _qmDataRange                             :: !(Maybe QueryMetadataDataRange)
-    , _qmLatestReportRunTimeMs                 :: !(Maybe (Textual Int64))
-    , _qmReportCount                           :: !(Maybe (Textual Int32))
-    , _qmTitle                                 :: !(Maybe Text)
-    , _qmSendNotification                      :: !(Maybe Bool)
+    , _qmLocale :: !(Maybe Text)
+    , _qmFormat :: !(Maybe QueryMetadataFormat)
+    , _qmGoogleDrivePathForLatestReport :: !(Maybe Text)
+    , _qmShareEmailAddress :: !(Maybe [Text])
+    , _qmRunning :: !(Maybe Bool)
+    , _qmDataRange :: !(Maybe QueryMetadataDataRange)
+    , _qmLatestReportRunTimeMs :: !(Maybe (Textual Int64))
+    , _qmReportCount :: !(Maybe (Textual Int32))
+    , _qmTitle :: !(Maybe Text)
+    , _qmSendNotification :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -244,15 +295,69 @@ instance ToJSON QueryMetadata where
                   ("title" .=) <$> _qmTitle,
                   ("sendNotification" .=) <$> _qmSendNotification])
 
+-- | Path Query Options for Report Options.
+--
+-- /See:/ 'pathQueryOptions' smart constructor.
+data PathQueryOptions =
+  PathQueryOptions'
+    { _pqoPathFilters :: !(Maybe [PathFilter])
+    , _pqoChannelGrouping :: !(Maybe ChannelGrouping)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PathQueryOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pqoPathFilters'
+--
+-- * 'pqoChannelGrouping'
+pathQueryOptions
+    :: PathQueryOptions
+pathQueryOptions =
+  PathQueryOptions' {_pqoPathFilters = Nothing, _pqoChannelGrouping = Nothing}
+
+
+-- | Path Filters. There is a limit of 100 path filters that can be set per
+-- report.
+pqoPathFilters :: Lens' PathQueryOptions [PathFilter]
+pqoPathFilters
+  = lens _pqoPathFilters
+      (\ s a -> s{_pqoPathFilters = a})
+      . _Default
+      . _Coerce
+
+-- | Custom Channel Groupings.
+pqoChannelGrouping :: Lens' PathQueryOptions (Maybe ChannelGrouping)
+pqoChannelGrouping
+  = lens _pqoChannelGrouping
+      (\ s a -> s{_pqoChannelGrouping = a})
+
+instance FromJSON PathQueryOptions where
+        parseJSON
+          = withObject "PathQueryOptions"
+              (\ o ->
+                 PathQueryOptions' <$>
+                   (o .:? "pathFilters" .!= mempty) <*>
+                     (o .:? "channelGrouping"))
+
+instance ToJSON PathQueryOptions where
+        toJSON PathQueryOptions'{..}
+          = object
+              (catMaybes
+                 [("pathFilters" .=) <$> _pqoPathFilters,
+                  ("channelGrouping" .=) <$> _pqoChannelGrouping])
+
 -- | Request to run a stored query to generate a report.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
 data RunQueryRequest =
   RunQueryRequest'
-    { _rqrReportDataEndTimeMs   :: !(Maybe (Textual Int64))
-    , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
+    { _rqrReportDataEndTimeMs :: !(Maybe (Textual Int64))
+    , _rqrDataRange :: !(Maybe RunQueryRequestDataRange)
     , _rqrReportDataStartTimeMs :: !(Maybe (Textual Int64))
-    , _rqrTimezoneCode          :: !(Maybe Text)
+    , _rqrTimezoneCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -335,7 +440,7 @@ instance ToJSON RunQueryRequest where
 data FilterPair =
   FilterPair'
     { _fpValue :: !(Maybe Text)
-    , _fpType  :: !(Maybe FilterPairType)
+    , _fpType :: !(Maybe FilterPairType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -372,239 +477,14 @@ instance ToJSON FilterPair where
               (catMaybes
                  [("value" .=) <$> _fpValue, ("type" .=) <$> _fpType])
 
--- | Request to upload line items.
---
--- /See:/ 'uploadLineItemsRequest' smart constructor.
-data UploadLineItemsRequest =
-  UploadLineItemsRequest'
-    { _ulirLineItems :: !(Maybe Text)
-    , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
-    , _ulirDryRun    :: !(Maybe Bool)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'UploadLineItemsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ulirLineItems'
---
--- * 'ulirFormat'
---
--- * 'ulirDryRun'
-uploadLineItemsRequest
-    :: UploadLineItemsRequest
-uploadLineItemsRequest =
-  UploadLineItemsRequest'
-    {_ulirLineItems = Nothing, _ulirFormat = Nothing, _ulirDryRun = Nothing}
-
-
--- | Line items in CSV to upload. Refer to Entity Write File Format for more
--- information on file format.
-ulirLineItems :: Lens' UploadLineItemsRequest (Maybe Text)
-ulirLineItems
-  = lens _ulirLineItems
-      (\ s a -> s{_ulirLineItems = a})
-
--- | Format the line items are in. Default to CSV.
-ulirFormat :: Lens' UploadLineItemsRequest (Maybe UploadLineItemsRequestFormat)
-ulirFormat
-  = lens _ulirFormat (\ s a -> s{_ulirFormat = a})
-
--- | Set to true to get upload status without actually persisting the line
--- items.
-ulirDryRun :: Lens' UploadLineItemsRequest (Maybe Bool)
-ulirDryRun
-  = lens _ulirDryRun (\ s a -> s{_ulirDryRun = a})
-
-instance FromJSON UploadLineItemsRequest where
-        parseJSON
-          = withObject "UploadLineItemsRequest"
-              (\ o ->
-                 UploadLineItemsRequest' <$>
-                   (o .:? "lineItems") <*> (o .:? "format") <*>
-                     (o .:? "dryRun"))
-
-instance ToJSON UploadLineItemsRequest where
-        toJSON UploadLineItemsRequest'{..}
-          = object
-              (catMaybes
-                 [("lineItems" .=) <$> _ulirLineItems,
-                  ("format" .=) <$> _ulirFormat,
-                  ("dryRun" .=) <$> _ulirDryRun])
-
--- | Request to fetch stored line items.
---
--- /See:/ 'downloadLineItemsRequest' smart constructor.
-data DownloadLineItemsRequest =
-  DownloadLineItemsRequest'
-    { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
-    , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
-    , _dlirFileSpec   :: !(Maybe DownloadLineItemsRequestFileSpec)
-    , _dlirFilterIds  :: !(Maybe [Textual Int64])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'DownloadLineItemsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlirFilterType'
---
--- * 'dlirFormat'
---
--- * 'dlirFileSpec'
---
--- * 'dlirFilterIds'
-downloadLineItemsRequest
-    :: DownloadLineItemsRequest
-downloadLineItemsRequest =
-  DownloadLineItemsRequest'
-    { _dlirFilterType = Nothing
-    , _dlirFormat = Nothing
-    , _dlirFileSpec = Nothing
-    , _dlirFilterIds = Nothing
-    }
-
-
--- | Filter type used to filter line items to fetch.
-dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFilterType)
-dlirFilterType
-  = lens _dlirFilterType
-      (\ s a -> s{_dlirFilterType = a})
-
--- | Format in which the line items will be returned. Default to CSV.
-dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
-dlirFormat
-  = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
-
--- | File specification (column names, types, order) in which the line items
--- will be returned. Default to EWF.
-dlirFileSpec :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFileSpec)
-dlirFileSpec
-  = lens _dlirFileSpec (\ s a -> s{_dlirFileSpec = a})
-
--- | Ids of the specified filter type used to filter line items to fetch. If
--- omitted, all the line items will be returned.
-dlirFilterIds :: Lens' DownloadLineItemsRequest [Int64]
-dlirFilterIds
-  = lens _dlirFilterIds
-      (\ s a -> s{_dlirFilterIds = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON DownloadLineItemsRequest where
-        parseJSON
-          = withObject "DownloadLineItemsRequest"
-              (\ o ->
-                 DownloadLineItemsRequest' <$>
-                   (o .:? "filterType") <*> (o .:? "format") <*>
-                     (o .:? "fileSpec")
-                     <*> (o .:? "filterIds" .!= mempty))
-
-instance ToJSON DownloadLineItemsRequest where
-        toJSON DownloadLineItemsRequest'{..}
-          = object
-              (catMaybes
-                 [("filterType" .=) <$> _dlirFilterType,
-                  ("format" .=) <$> _dlirFormat,
-                  ("fileSpec" .=) <$> _dlirFileSpec,
-                  ("filterIds" .=) <$> _dlirFilterIds])
-
--- | Request to fetch stored inventory sources, campaigns, insertion orders,
--- line items, TrueView ad groups and ads.
---
--- /See:/ 'downloadRequest' smart constructor.
-data DownloadRequest =
-  DownloadRequest'
-    { _drFileTypes  :: !(Maybe [DownloadRequestFileTypesItem])
-    , _drFilterType :: !(Maybe DownloadRequestFilterType)
-    , _drVersion    :: !(Maybe Text)
-    , _drFilterIds  :: !(Maybe [Textual Int64])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'DownloadRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'drFileTypes'
---
--- * 'drFilterType'
---
--- * 'drVersion'
---
--- * 'drFilterIds'
-downloadRequest
-    :: DownloadRequest
-downloadRequest =
-  DownloadRequest'
-    { _drFileTypes = Nothing
-    , _drFilterType = Nothing
-    , _drVersion = Nothing
-    , _drFilterIds = Nothing
-    }
-
-
--- | File types that will be returned. If INVENTORY_SOURCE is requested, no
--- other file types may be requested. Acceptable values are: - \"AD\" -
--- \"AD_GROUP\" - \"CAMPAIGN\" - \"INSERTION_ORDER\" - \"INVENTORY_SOURCE\"
--- - \"LINE_ITEM\"
-drFileTypes :: Lens' DownloadRequest [DownloadRequestFileTypesItem]
-drFileTypes
-  = lens _drFileTypes (\ s a -> s{_drFileTypes = a}) .
-      _Default
-      . _Coerce
-
--- | Filter type used to filter entities to fetch. PARTNER_ID and
--- INVENTORY_SOURCE_ID may only be used when downloading inventory sources.
-drFilterType :: Lens' DownloadRequest (Maybe DownloadRequestFilterType)
-drFilterType
-  = lens _drFilterType (\ s a -> s{_drFilterType = a})
-
--- | SDF Version (column names, types, order) in which the entities will be
--- returned. Default to 3.1.
-drVersion :: Lens' DownloadRequest (Maybe Text)
-drVersion
-  = lens _drVersion (\ s a -> s{_drVersion = a})
-
--- | The IDs of the specified filter type. This is used to filter entities to
--- fetch. At least one ID must be specified.
-drFilterIds :: Lens' DownloadRequest [Int64]
-drFilterIds
-  = lens _drFilterIds (\ s a -> s{_drFilterIds = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON DownloadRequest where
-        parseJSON
-          = withObject "DownloadRequest"
-              (\ o ->
-                 DownloadRequest' <$>
-                   (o .:? "fileTypes" .!= mempty) <*>
-                     (o .:? "filterType")
-                     <*> (o .:? "version")
-                     <*> (o .:? "filterIds" .!= mempty))
-
-instance ToJSON DownloadRequest where
-        toJSON DownloadRequest'{..}
-          = object
-              (catMaybes
-                 [("fileTypes" .=) <$> _drFileTypes,
-                  ("filterType" .=) <$> _drFilterType,
-                  ("version" .=) <$> _drVersion,
-                  ("filterIds" .=) <$> _drFilterIds])
-
 -- | List queries response.
 --
 -- /See:/ 'listQueriesResponse' smart constructor.
 data ListQueriesResponse =
   ListQueriesResponse'
     { _lqrQueries :: !(Maybe [Query])
-    , _lqrKind    :: !Text
+    , _lqrNextPageToken :: !(Maybe Text)
+    , _lqrKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -615,14 +495,14 @@ data ListQueriesResponse =
 --
 -- * 'lqrQueries'
 --
+-- * 'lqrNextPageToken'
+--
 -- * 'lqrKind'
 listQueriesResponse
     :: ListQueriesResponse
 listQueriesResponse =
   ListQueriesResponse'
-    { _lqrQueries = Nothing
-    , _lqrKind = "doubleclickbidmanager#listQueriesResponse"
-    }
+    {_lqrQueries = Nothing, _lqrNextPageToken = Nothing, _lqrKind = Nothing}
 
 
 -- | Retrieved queries.
@@ -632,9 +512,15 @@ lqrQueries
       _Default
       . _Coerce
 
+-- | Next page\'s pagination token if one exists.
+lqrNextPageToken :: Lens' ListQueriesResponse (Maybe Text)
+lqrNextPageToken
+  = lens _lqrNextPageToken
+      (\ s a -> s{_lqrNextPageToken = a})
+
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"doubleclickbidmanager#listQueriesResponse\".
-lqrKind :: Lens' ListQueriesResponse Text
+lqrKind :: Lens' ListQueriesResponse (Maybe Text)
 lqrKind = lens _lqrKind (\ s a -> s{_lqrKind = a})
 
 instance FromJSON ListQueriesResponse where
@@ -643,63 +529,26 @@ instance FromJSON ListQueriesResponse where
               (\ o ->
                  ListQueriesResponse' <$>
                    (o .:? "queries" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "doubleclickbidmanager#listQueriesResponse"))
+                     (o .:? "nextPageToken")
+                     <*> (o .:? "kind"))
 
 instance ToJSON ListQueriesResponse where
         toJSON ListQueriesResponse'{..}
           = object
               (catMaybes
                  [("queries" .=) <$> _lqrQueries,
-                  Just ("kind" .= _lqrKind)])
-
--- | Upload line items response.
---
--- /See:/ 'uploadLineItemsResponse' smart constructor.
-newtype UploadLineItemsResponse =
-  UploadLineItemsResponse'
-    { _ulirUploadStatus :: Maybe UploadStatus
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'UploadLineItemsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ulirUploadStatus'
-uploadLineItemsResponse
-    :: UploadLineItemsResponse
-uploadLineItemsResponse = UploadLineItemsResponse' {_ulirUploadStatus = Nothing}
-
-
--- | Status of upload.
-ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe UploadStatus)
-ulirUploadStatus
-  = lens _ulirUploadStatus
-      (\ s a -> s{_ulirUploadStatus = a})
-
-instance FromJSON UploadLineItemsResponse where
-        parseJSON
-          = withObject "UploadLineItemsResponse"
-              (\ o ->
-                 UploadLineItemsResponse' <$> (o .:? "uploadStatus"))
-
-instance ToJSON UploadLineItemsResponse where
-        toJSON UploadLineItemsResponse'{..}
-          = object
-              (catMaybes
-                 [("uploadStatus" .=) <$> _ulirUploadStatus])
+                  ("nextPageToken" .=) <$> _lqrNextPageToken,
+                  ("kind" .=) <$> _lqrKind])
 
 -- | Report metadata.
 --
 -- /See:/ 'reportMetadata' smart constructor.
 data ReportMetadata =
   ReportMetadata'
-    { _rmStatus                 :: !(Maybe ReportStatus)
-    , _rmReportDataEndTimeMs    :: !(Maybe (Textual Int64))
+    { _rmStatus :: !(Maybe ReportStatus)
+    , _rmReportDataEndTimeMs :: !(Maybe (Textual Int64))
     , _rmGoogleCloudStoragePath :: !(Maybe Text)
-    , _rmReportDataStartTimeMs  :: !(Maybe (Textual Int64))
+    , _rmReportDataStartTimeMs :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -777,8 +626,8 @@ instance ToJSON ReportMetadata where
 -- /See:/ 'report' smart constructor.
 data Report =
   Report'
-    { _rParams   :: !(Maybe Parameters)
-    , _rKey      :: !(Maybe ReportKey)
+    { _rParams :: !(Maybe Parameters)
+    , _rKey :: !(Maybe ReportKey)
     , _rMetadata :: !(Maybe ReportMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -826,111 +675,66 @@ instance ToJSON Report where
                  [("params" .=) <$> _rParams, ("key" .=) <$> _rKey,
                   ("metadata" .=) <$> _rMetadata])
 
--- | Represents the upload status of a row in the request.
+-- | A Rule defines a name, and a boolean expression in [conjunctive normal
+-- form](http:
+-- \/\/mathworld.wolfram.com\/ConjunctiveNormalForm.html){.external} that
+-- can be \/\/ applied to a path event to determine if that name should be
+-- applied.
 --
--- /See:/ 'rowStatus' smart constructor.
-data RowStatus =
-  RowStatus'
-    { _rsEntityName :: !(Maybe Text)
-    , _rsChanged    :: !(Maybe Bool)
-    , _rsPersisted  :: !(Maybe Bool)
-    , _rsRowNumber  :: !(Maybe (Textual Int32))
-    , _rsErrors     :: !(Maybe [Text])
-    , _rsEntityId   :: !(Maybe (Textual Int64))
+-- /See:/ 'rule' smart constructor.
+data Rule =
+  Rule'
+    { _rName :: !(Maybe Text)
+    , _rDisjunctiveMatchStatements :: !(Maybe [DisjunctiveMatchStatement])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'RowStatus' with the minimum fields required to make a request.
+-- | Creates a value of 'Rule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rsEntityName'
+-- * 'rName'
 --
--- * 'rsChanged'
---
--- * 'rsPersisted'
---
--- * 'rsRowNumber'
---
--- * 'rsErrors'
---
--- * 'rsEntityId'
-rowStatus
-    :: RowStatus
-rowStatus =
-  RowStatus'
-    { _rsEntityName = Nothing
-    , _rsChanged = Nothing
-    , _rsPersisted = Nothing
-    , _rsRowNumber = Nothing
-    , _rsErrors = Nothing
-    , _rsEntityId = Nothing
-    }
+-- * 'rDisjunctiveMatchStatements'
+rule
+    :: Rule
+rule = Rule' {_rName = Nothing, _rDisjunctiveMatchStatements = Nothing}
 
 
--- | Entity name.
-rsEntityName :: Lens' RowStatus (Maybe Text)
-rsEntityName
-  = lens _rsEntityName (\ s a -> s{_rsEntityName = a})
+-- | Rule name.
+rName :: Lens' Rule (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
 
--- | Whether the stored entity is changed as a result of upload.
-rsChanged :: Lens' RowStatus (Maybe Bool)
-rsChanged
-  = lens _rsChanged (\ s a -> s{_rsChanged = a})
-
--- | Whether the entity is persisted.
-rsPersisted :: Lens' RowStatus (Maybe Bool)
-rsPersisted
-  = lens _rsPersisted (\ s a -> s{_rsPersisted = a})
-
--- | Row number.
-rsRowNumber :: Lens' RowStatus (Maybe Int32)
-rsRowNumber
-  = lens _rsRowNumber (\ s a -> s{_rsRowNumber = a}) .
-      mapping _Coerce
-
--- | Reasons why the entity can\'t be uploaded.
-rsErrors :: Lens' RowStatus [Text]
-rsErrors
-  = lens _rsErrors (\ s a -> s{_rsErrors = a}) .
-      _Default
+rDisjunctiveMatchStatements :: Lens' Rule [DisjunctiveMatchStatement]
+rDisjunctiveMatchStatements
+  = lens _rDisjunctiveMatchStatements
+      (\ s a -> s{_rDisjunctiveMatchStatements = a})
+      . _Default
       . _Coerce
 
--- | Entity Id.
-rsEntityId :: Lens' RowStatus (Maybe Int64)
-rsEntityId
-  = lens _rsEntityId (\ s a -> s{_rsEntityId = a}) .
-      mapping _Coerce
-
-instance FromJSON RowStatus where
+instance FromJSON Rule where
         parseJSON
-          = withObject "RowStatus"
+          = withObject "Rule"
               (\ o ->
-                 RowStatus' <$>
-                   (o .:? "entityName") <*> (o .:? "changed") <*>
-                     (o .:? "persisted")
-                     <*> (o .:? "rowNumber")
-                     <*> (o .:? "errors" .!= mempty)
-                     <*> (o .:? "entityId"))
+                 Rule' <$>
+                   (o .:? "name") <*>
+                     (o .:? "disjunctiveMatchStatements" .!= mempty))
 
-instance ToJSON RowStatus where
-        toJSON RowStatus'{..}
+instance ToJSON Rule where
+        toJSON Rule'{..}
           = object
               (catMaybes
-                 [("entityName" .=) <$> _rsEntityName,
-                  ("changed" .=) <$> _rsChanged,
-                  ("persisted" .=) <$> _rsPersisted,
-                  ("rowNumber" .=) <$> _rsRowNumber,
-                  ("errors" .=) <$> _rsErrors,
-                  ("entityId" .=) <$> _rsEntityId])
+                 [("name" .=) <$> _rName,
+                  ("disjunctiveMatchStatements" .=) <$>
+                    _rDisjunctiveMatchStatements])
 
 -- | Key used to identify a report.
 --
 -- /See:/ 'reportKey' smart constructor.
 data ReportKey =
   ReportKey'
-    { _rkQueryId  :: !(Maybe (Textual Int64))
+    { _rkQueryId :: !(Maybe (Textual Int64))
     , _rkReportId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -974,66 +778,177 @@ instance ToJSON ReportKey where
                  [("queryId" .=) <$> _rkQueryId,
                   ("reportId" .=) <$> _rkReportId])
 
--- | Represents the status of upload.
+-- | Defines the type of filter to be applied to the path, a DV360 event
+-- dimension filter.
 --
--- /See:/ 'uploadStatus' smart constructor.
-data UploadStatus =
-  UploadStatus'
-    { _usRowStatus :: !(Maybe [RowStatus])
-    , _usErrors    :: !(Maybe [Text])
+-- /See:/ 'eventFilter' smart constructor.
+newtype EventFilter =
+  EventFilter'
+    { _efDimensionFilter :: Maybe PathQueryOptionsFilter
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'UploadStatus' with the minimum fields required to make a request.
+-- | Creates a value of 'EventFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usRowStatus'
---
--- * 'usErrors'
-uploadStatus
-    :: UploadStatus
-uploadStatus = UploadStatus' {_usRowStatus = Nothing, _usErrors = Nothing}
+-- * 'efDimensionFilter'
+eventFilter
+    :: EventFilter
+eventFilter = EventFilter' {_efDimensionFilter = Nothing}
 
 
--- | Per-row upload status.
-usRowStatus :: Lens' UploadStatus [RowStatus]
-usRowStatus
-  = lens _usRowStatus (\ s a -> s{_usRowStatus = a}) .
-      _Default
-      . _Coerce
+-- | Filter on a dimension.
+efDimensionFilter :: Lens' EventFilter (Maybe PathQueryOptionsFilter)
+efDimensionFilter
+  = lens _efDimensionFilter
+      (\ s a -> s{_efDimensionFilter = a})
 
--- | Reasons why upload can\'t be completed.
-usErrors :: Lens' UploadStatus [Text]
-usErrors
-  = lens _usErrors (\ s a -> s{_usErrors = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON UploadStatus where
+instance FromJSON EventFilter where
         parseJSON
-          = withObject "UploadStatus"
-              (\ o ->
-                 UploadStatus' <$>
-                   (o .:? "rowStatus" .!= mempty) <*>
-                     (o .:? "errors" .!= mempty))
+          = withObject "EventFilter"
+              (\ o -> EventFilter' <$> (o .:? "dimensionFilter"))
 
-instance ToJSON UploadStatus where
-        toJSON UploadStatus'{..}
+instance ToJSON EventFilter where
+        toJSON EventFilter'{..}
           = object
               (catMaybes
-                 [("rowStatus" .=) <$> _usRowStatus,
-                  ("errors" .=) <$> _usErrors])
+                 [("dimensionFilter" .=) <$> _efDimensionFilter])
+
+-- | A channel grouping defines a set of rules that can be used to categorize
+-- events in a path report.
+--
+-- /See:/ 'channelGrouping' smart constructor.
+data ChannelGrouping =
+  ChannelGrouping'
+    { _cgRules :: !(Maybe [Rule])
+    , _cgFallbackName :: !(Maybe Text)
+    , _cgName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ChannelGrouping' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cgRules'
+--
+-- * 'cgFallbackName'
+--
+-- * 'cgName'
+channelGrouping
+    :: ChannelGrouping
+channelGrouping =
+  ChannelGrouping'
+    {_cgRules = Nothing, _cgFallbackName = Nothing, _cgName = Nothing}
+
+
+-- | Rules within Channel Grouping. There is a limit of 100 rules that can be
+-- set per channel grouping.
+cgRules :: Lens' ChannelGrouping [Rule]
+cgRules
+  = lens _cgRules (\ s a -> s{_cgRules = a}) . _Default
+      . _Coerce
+
+-- | The name to apply to an event that does not match any of the rules in
+-- the channel grouping.
+cgFallbackName :: Lens' ChannelGrouping (Maybe Text)
+cgFallbackName
+  = lens _cgFallbackName
+      (\ s a -> s{_cgFallbackName = a})
+
+-- | Channel Grouping name.
+cgName :: Lens' ChannelGrouping (Maybe Text)
+cgName = lens _cgName (\ s a -> s{_cgName = a})
+
+instance FromJSON ChannelGrouping where
+        parseJSON
+          = withObject "ChannelGrouping"
+              (\ o ->
+                 ChannelGrouping' <$>
+                   (o .:? "rules" .!= mempty) <*> (o .:? "fallbackName")
+                     <*> (o .:? "name"))
+
+instance ToJSON ChannelGrouping where
+        toJSON ChannelGrouping'{..}
+          = object
+              (catMaybes
+                 [("rules" .=) <$> _cgRules,
+                  ("fallbackName" .=) <$> _cgFallbackName,
+                  ("name" .=) <$> _cgName])
+
+-- | Dimension Filter on path events.
+--
+-- /See:/ 'pathQueryOptionsFilter' smart constructor.
+data PathQueryOptionsFilter =
+  PathQueryOptionsFilter'
+    { _pqofValues :: !(Maybe [Text])
+    , _pqofFilter :: !(Maybe PathQueryOptionsFilterFilter)
+    , _pqofMatch :: !(Maybe PathQueryOptionsFilterMatch)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PathQueryOptionsFilter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pqofValues'
+--
+-- * 'pqofFilter'
+--
+-- * 'pqofMatch'
+pathQueryOptionsFilter
+    :: PathQueryOptionsFilter
+pathQueryOptionsFilter =
+  PathQueryOptionsFilter'
+    {_pqofValues = Nothing, _pqofFilter = Nothing, _pqofMatch = Nothing}
+
+
+-- | Value to filter on.
+pqofValues :: Lens' PathQueryOptionsFilter [Text]
+pqofValues
+  = lens _pqofValues (\ s a -> s{_pqofValues = a}) .
+      _Default
+      . _Coerce
+
+-- | Dimension the filter is applied to.
+pqofFilter :: Lens' PathQueryOptionsFilter (Maybe PathQueryOptionsFilterFilter)
+pqofFilter
+  = lens _pqofFilter (\ s a -> s{_pqofFilter = a})
+
+-- | Indicates how the filter should be matched to the value.
+pqofMatch :: Lens' PathQueryOptionsFilter (Maybe PathQueryOptionsFilterMatch)
+pqofMatch
+  = lens _pqofMatch (\ s a -> s{_pqofMatch = a})
+
+instance FromJSON PathQueryOptionsFilter where
+        parseJSON
+          = withObject "PathQueryOptionsFilter"
+              (\ o ->
+                 PathQueryOptionsFilter' <$>
+                   (o .:? "values" .!= mempty) <*> (o .:? "filter") <*>
+                     (o .:? "match"))
+
+instance ToJSON PathQueryOptionsFilter where
+        toJSON PathQueryOptionsFilter'{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _pqofValues,
+                  ("filter" .=) <$> _pqofFilter,
+                  ("match" .=) <$> _pqofMatch])
 
 -- | Information on how frequently and when to run a query.
 --
 -- /See:/ 'querySchedule' smart constructor.
 data QuerySchedule =
   QuerySchedule'
-    { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
-    , _qsEndTimeMs           :: !(Maybe (Textual Int64))
-    , _qsNextRunMinuteOfDay  :: !(Maybe (Textual Int32))
+    { _qsFrequency :: !(Maybe QueryScheduleFrequency)
+    , _qsStartTimeMs :: !(Maybe (Textual Int64))
+    , _qsEndTimeMs :: !(Maybe (Textual Int64))
+    , _qsNextRunMinuteOfDay :: !(Maybe (Textual Int32))
     , _qsNextRunTimezoneCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1045,6 +960,8 @@ data QuerySchedule =
 --
 -- * 'qsFrequency'
 --
+-- * 'qsStartTimeMs'
+--
 -- * 'qsEndTimeMs'
 --
 -- * 'qsNextRunMinuteOfDay'
@@ -1055,6 +972,7 @@ querySchedule
 querySchedule =
   QuerySchedule'
     { _qsFrequency = Nothing
+    , _qsStartTimeMs = Nothing
     , _qsEndTimeMs = Nothing
     , _qsNextRunMinuteOfDay = Nothing
     , _qsNextRunTimezoneCode = Nothing
@@ -1065,6 +983,14 @@ querySchedule =
 qsFrequency :: Lens' QuerySchedule (Maybe QueryScheduleFrequency)
 qsFrequency
   = lens _qsFrequency (\ s a -> s{_qsFrequency = a})
+
+-- | When to start running the query. Not applicable to \`ONE_TIME\`
+-- frequency.
+qsStartTimeMs :: Lens' QuerySchedule (Maybe Int64)
+qsStartTimeMs
+  = lens _qsStartTimeMs
+      (\ s a -> s{_qsStartTimeMs = a})
+      . mapping _Coerce
 
 -- | Datetime to periodically run the query until.
 qsEndTimeMs :: Lens' QuerySchedule (Maybe Int64)
@@ -1093,8 +1019,9 @@ instance FromJSON QuerySchedule where
           = withObject "QuerySchedule"
               (\ o ->
                  QuerySchedule' <$>
-                   (o .:? "frequency") <*> (o .:? "endTimeMs") <*>
-                     (o .:? "nextRunMinuteOfDay")
+                   (o .:? "frequency") <*> (o .:? "startTimeMs") <*>
+                     (o .:? "endTimeMs")
+                     <*> (o .:? "nextRunMinuteOfDay")
                      <*> (o .:? "nextRunTimezoneCode"))
 
 instance ToJSON QuerySchedule where
@@ -1102,155 +1029,21 @@ instance ToJSON QuerySchedule where
           = object
               (catMaybes
                  [("frequency" .=) <$> _qsFrequency,
+                  ("startTimeMs" .=) <$> _qsStartTimeMs,
                   ("endTimeMs" .=) <$> _qsEndTimeMs,
                   ("nextRunMinuteOfDay" .=) <$> _qsNextRunMinuteOfDay,
                   ("nextRunTimezoneCode" .=) <$>
                     _qsNextRunTimezoneCode])
-
--- | Download line items response.
---
--- /See:/ 'downloadLineItemsResponse' smart constructor.
-newtype DownloadLineItemsResponse =
-  DownloadLineItemsResponse'
-    { _dlirLineItems :: Maybe Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'DownloadLineItemsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'dlirLineItems'
-downloadLineItemsResponse
-    :: DownloadLineItemsResponse
-downloadLineItemsResponse =
-  DownloadLineItemsResponse' {_dlirLineItems = Nothing}
-
-
--- | Retrieved line items in CSV format. For more information about file
--- formats, see Entity Write File Format.
-dlirLineItems :: Lens' DownloadLineItemsResponse (Maybe Text)
-dlirLineItems
-  = lens _dlirLineItems
-      (\ s a -> s{_dlirLineItems = a})
-
-instance FromJSON DownloadLineItemsResponse where
-        parseJSON
-          = withObject "DownloadLineItemsResponse"
-              (\ o ->
-                 DownloadLineItemsResponse' <$> (o .:? "lineItems"))
-
-instance ToJSON DownloadLineItemsResponse where
-        toJSON DownloadLineItemsResponse'{..}
-          = object
-              (catMaybes [("lineItems" .=) <$> _dlirLineItems])
-
--- | Download response.
---
--- /See:/ 'downloadResponse' smart constructor.
-data DownloadResponse =
-  DownloadResponse'
-    { _drInventorySources :: !(Maybe Text)
-    , _drInsertionOrders  :: !(Maybe Text)
-    , _drCampaigns        :: !(Maybe Text)
-    , _drLineItems        :: !(Maybe Text)
-    , _drAdGroups         :: !(Maybe Text)
-    , _drAds              :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'DownloadResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'drInventorySources'
---
--- * 'drInsertionOrders'
---
--- * 'drCampaigns'
---
--- * 'drLineItems'
---
--- * 'drAdGroups'
---
--- * 'drAds'
-downloadResponse
-    :: DownloadResponse
-downloadResponse =
-  DownloadResponse'
-    { _drInventorySources = Nothing
-    , _drInsertionOrders = Nothing
-    , _drCampaigns = Nothing
-    , _drLineItems = Nothing
-    , _drAdGroups = Nothing
-    , _drAds = Nothing
-    }
-
-
-drInventorySources :: Lens' DownloadResponse (Maybe Text)
-drInventorySources
-  = lens _drInventorySources
-      (\ s a -> s{_drInventorySources = a})
-
--- | Retrieved insertion orders in SDF format.
-drInsertionOrders :: Lens' DownloadResponse (Maybe Text)
-drInsertionOrders
-  = lens _drInsertionOrders
-      (\ s a -> s{_drInsertionOrders = a})
-
--- | Retrieved campaigns in SDF format.
-drCampaigns :: Lens' DownloadResponse (Maybe Text)
-drCampaigns
-  = lens _drCampaigns (\ s a -> s{_drCampaigns = a})
-
--- | Retrieved line items in SDF format.
-drLineItems :: Lens' DownloadResponse (Maybe Text)
-drLineItems
-  = lens _drLineItems (\ s a -> s{_drLineItems = a})
-
--- | Retrieved ad groups in SDF format.
-drAdGroups :: Lens' DownloadResponse (Maybe Text)
-drAdGroups
-  = lens _drAdGroups (\ s a -> s{_drAdGroups = a})
-
--- | Retrieved ads in SDF format.
-drAds :: Lens' DownloadResponse (Maybe Text)
-drAds = lens _drAds (\ s a -> s{_drAds = a})
-
-instance FromJSON DownloadResponse where
-        parseJSON
-          = withObject "DownloadResponse"
-              (\ o ->
-                 DownloadResponse' <$>
-                   (o .:? "inventorySources") <*>
-                     (o .:? "insertionOrders")
-                     <*> (o .:? "campaigns")
-                     <*> (o .:? "lineItems")
-                     <*> (o .:? "adGroups")
-                     <*> (o .:? "ads"))
-
-instance ToJSON DownloadResponse where
-        toJSON DownloadResponse'{..}
-          = object
-              (catMaybes
-                 [("inventorySources" .=) <$> _drInventorySources,
-                  ("insertionOrders" .=) <$> _drInsertionOrders,
-                  ("campaigns" .=) <$> _drCampaigns,
-                  ("lineItems" .=) <$> _drLineItems,
-                  ("adGroups" .=) <$> _drAdGroups,
-                  ("ads" .=) <$> _drAds])
 
 -- | Report status.
 --
 -- /See:/ 'reportStatus' smart constructor.
 data ReportStatus =
   ReportStatus'
-    { _rsState        :: !(Maybe ReportStatusState)
+    { _rsState :: !(Maybe ReportStatusState)
     , _rsFinishTimeMs :: !(Maybe (Textual Int64))
-    , _rsFormat       :: !(Maybe ReportStatusFormat)
-    , _rsFailure      :: !(Maybe ReportFailure)
+    , _rsFormat :: !(Maybe ReportStatusFormat)
+    , _rsFailure :: !(Maybe ReportFailure)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1320,14 +1113,14 @@ instance ToJSON ReportStatus where
 -- /See:/ 'query' smart constructor.
 data Query =
   Query'
-    { _qQueryId               :: !(Maybe (Textual Int64))
-    , _qReportDataEndTimeMs   :: !(Maybe (Textual Int64))
-    , _qSchedule              :: !(Maybe QuerySchedule)
-    , _qKind                  :: !Text
-    , _qParams                :: !(Maybe Parameters)
-    , _qMetadata              :: !(Maybe QueryMetadata)
+    { _qQueryId :: !(Maybe (Textual Int64))
+    , _qReportDataEndTimeMs :: !(Maybe (Textual Int64))
+    , _qSchedule :: !(Maybe QuerySchedule)
+    , _qKind :: !(Maybe Text)
+    , _qParams :: !(Maybe Parameters)
+    , _qMetadata :: !(Maybe QueryMetadata)
     , _qReportDataStartTimeMs :: !(Maybe (Textual Int64))
-    , _qTimezoneCode          :: !(Maybe Text)
+    , _qTimezoneCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1358,7 +1151,7 @@ query =
     { _qQueryId = Nothing
     , _qReportDataEndTimeMs = Nothing
     , _qSchedule = Nothing
-    , _qKind = "doubleclickbidmanager#query"
+    , _qKind = Nothing
     , _qParams = Nothing
     , _qMetadata = Nothing
     , _qReportDataStartTimeMs = Nothing
@@ -1388,7 +1181,7 @@ qSchedule
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"doubleclickbidmanager#query\".
-qKind :: Lens' Query Text
+qKind :: Lens' Query (Maybe Text)
 qKind = lens _qKind (\ s a -> s{_qKind = a})
 
 -- | Query parameters.
@@ -1423,7 +1216,7 @@ instance FromJSON Query where
                  Query' <$>
                    (o .:? "queryId") <*> (o .:? "reportDataEndTimeMs")
                      <*> (o .:? "schedule")
-                     <*> (o .:? "kind" .!= "doubleclickbidmanager#query")
+                     <*> (o .:? "kind")
                      <*> (o .:? "params")
                      <*> (o .:? "metadata")
                      <*> (o .:? "reportDataStartTimeMs")
@@ -1436,7 +1229,7 @@ instance ToJSON Query where
                  [("queryId" .=) <$> _qQueryId,
                   ("reportDataEndTimeMs" .=) <$> _qReportDataEndTimeMs,
                   ("schedule" .=) <$> _qSchedule,
-                  Just ("kind" .= _qKind), ("params" .=) <$> _qParams,
+                  ("kind" .=) <$> _qKind, ("params" .=) <$> _qParams,
                   ("metadata" .=) <$> _qMetadata,
                   ("reportDataStartTimeMs" .=) <$>
                     _qReportDataStartTimeMs,
@@ -1447,11 +1240,12 @@ instance ToJSON Query where
 -- /See:/ 'parameters' smart constructor.
 data Parameters =
   Parameters'
-    { _pMetrics           :: !(Maybe [ParametersMetricsItem])
+    { _pMetrics :: !(Maybe [ParametersMetricsItem])
     , _pIncludeInviteData :: !(Maybe Bool)
-    , _pFilters           :: !(Maybe [FilterPair])
-    , _pGroupBys          :: !(Maybe [ParametersGroupBysItem])
-    , _pType              :: !(Maybe ParametersType)
+    , _pFilters :: !(Maybe [FilterPair])
+    , _pGroupBys :: !(Maybe [ParametersGroupBysItem])
+    , _pOptions :: !(Maybe Options)
+    , _pType :: !(Maybe ParametersType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1468,6 +1262,8 @@ data Parameters =
 --
 -- * 'pGroupBys'
 --
+-- * 'pOptions'
+--
 -- * 'pType'
 parameters
     :: Parameters
@@ -1477,6 +1273,7 @@ parameters =
     , _pIncludeInviteData = Nothing
     , _pFilters = Nothing
     , _pGroupBys = Nothing
+    , _pOptions = Nothing
     , _pType = Nothing
     }
 
@@ -1508,6 +1305,10 @@ pGroupBys
       _Default
       . _Coerce
 
+-- | Additional query options.
+pOptions :: Lens' Parameters (Maybe Options)
+pOptions = lens _pOptions (\ s a -> s{_pOptions = a})
+
 -- | Report type.
 pType :: Lens' Parameters (Maybe ParametersType)
 pType = lens _pType (\ s a -> s{_pType = a})
@@ -1521,6 +1322,7 @@ instance FromJSON Parameters where
                      (o .:? "includeInviteData")
                      <*> (o .:? "filters" .!= mempty)
                      <*> (o .:? "groupBys" .!= mempty)
+                     <*> (o .:? "options")
                      <*> (o .:? "type"))
 
 instance ToJSON Parameters where
@@ -1531,7 +1333,121 @@ instance ToJSON Parameters where
                   ("includeInviteData" .=) <$> _pIncludeInviteData,
                   ("filters" .=) <$> _pFilters,
                   ("groupBys" .=) <$> _pGroupBys,
+                  ("options" .=) <$> _pOptions,
                   ("type" .=) <$> _pType])
+
+-- | Path filters specify which paths to include in a report. A path is the
+-- result of combining DV360 events based on User ID to create a workflow
+-- of users\' actions. When a path filter is set, the resulting report will
+-- only include paths that match the specified event at the specified
+-- position. All other paths will be excluded.
+--
+-- /See:/ 'pathFilter' smart constructor.
+data PathFilter =
+  PathFilter'
+    { _pfEventFilters :: !(Maybe [EventFilter])
+    , _pfPathMatchPosition :: !(Maybe PathFilterPathMatchPosition)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PathFilter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pfEventFilters'
+--
+-- * 'pfPathMatchPosition'
+pathFilter
+    :: PathFilter
+pathFilter =
+  PathFilter' {_pfEventFilters = Nothing, _pfPathMatchPosition = Nothing}
+
+
+-- | Filter on an event to be applied to some part of the path.
+pfEventFilters :: Lens' PathFilter [EventFilter]
+pfEventFilters
+  = lens _pfEventFilters
+      (\ s a -> s{_pfEventFilters = a})
+      . _Default
+      . _Coerce
+
+-- | Indicates the position of the path the filter should match to (first,
+-- last, or any event in path).
+pfPathMatchPosition :: Lens' PathFilter (Maybe PathFilterPathMatchPosition)
+pfPathMatchPosition
+  = lens _pfPathMatchPosition
+      (\ s a -> s{_pfPathMatchPosition = a})
+
+instance FromJSON PathFilter where
+        parseJSON
+          = withObject "PathFilter"
+              (\ o ->
+                 PathFilter' <$>
+                   (o .:? "eventFilters" .!= mempty) <*>
+                     (o .:? "pathMatchPosition"))
+
+instance ToJSON PathFilter where
+        toJSON PathFilter'{..}
+          = object
+              (catMaybes
+                 [("eventFilters" .=) <$> _pfEventFilters,
+                  ("pathMatchPosition" .=) <$> _pfPathMatchPosition])
+
+-- | Additional query options.
+--
+-- /See:/ 'options' smart constructor.
+data Options =
+  Options'
+    { _oPathQueryOptions :: !(Maybe PathQueryOptions)
+    , _oIncludeOnlyTargetedUserLists :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Options' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oPathQueryOptions'
+--
+-- * 'oIncludeOnlyTargetedUserLists'
+options
+    :: Options
+options =
+  Options'
+    {_oPathQueryOptions = Nothing, _oIncludeOnlyTargetedUserLists = Nothing}
+
+
+-- | Options that contain Path Filters and Custom Channel Groupings.
+oPathQueryOptions :: Lens' Options (Maybe PathQueryOptions)
+oPathQueryOptions
+  = lens _oPathQueryOptions
+      (\ s a -> s{_oPathQueryOptions = a})
+
+-- | Set to true and filter your report by \`FILTER_INSERTION_ORDER\` or
+-- \`FILTER_LINE_ITEM\` to include data for audience lists specifically
+-- targeted by those items.
+oIncludeOnlyTargetedUserLists :: Lens' Options (Maybe Bool)
+oIncludeOnlyTargetedUserLists
+  = lens _oIncludeOnlyTargetedUserLists
+      (\ s a -> s{_oIncludeOnlyTargetedUserLists = a})
+
+instance FromJSON Options where
+        parseJSON
+          = withObject "Options"
+              (\ o ->
+                 Options' <$>
+                   (o .:? "pathQueryOptions") <*>
+                     (o .:? "includeOnlyTargetedUserLists"))
+
+instance ToJSON Options where
+        toJSON Options'{..}
+          = object
+              (catMaybes
+                 [("pathQueryOptions" .=) <$> _oPathQueryOptions,
+                  ("includeOnlyTargetedUserLists" .=) <$>
+                    _oIncludeOnlyTargetedUserLists])
 
 -- | An explanation of a report failure.
 --

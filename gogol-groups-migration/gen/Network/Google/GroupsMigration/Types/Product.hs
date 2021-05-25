@@ -17,15 +17,15 @@
 --
 module Network.Google.GroupsMigration.Types.Product where
 
-import           Network.Google.GroupsMigration.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.GroupsMigration.Types.Sum
+import Network.Google.Prelude
 
 -- | JSON response template for groups migration API.
 --
 -- /See:/ 'groups' smart constructor.
 data Groups =
   Groups'
-    { _gKind         :: !Text
+    { _gKind :: !(Maybe Text)
     , _gResponseCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -40,11 +40,11 @@ data Groups =
 -- * 'gResponseCode'
 groups
     :: Groups
-groups = Groups' {_gKind = "groupsmigration#groups", _gResponseCode = Nothing}
+groups = Groups' {_gKind = Nothing, _gResponseCode = Nothing}
 
 
 -- | The kind of insert resource this is.
-gKind :: Lens' Groups Text
+gKind :: Lens' Groups (Maybe Text)
 gKind = lens _gKind (\ s a -> s{_gKind = a})
 
 -- | The status of the insert request.
@@ -58,12 +58,11 @@ instance FromJSON Groups where
           = withObject "Groups"
               (\ o ->
                  Groups' <$>
-                   (o .:? "kind" .!= "groupsmigration#groups") <*>
-                     (o .:? "responseCode"))
+                   (o .:? "kind") <*> (o .:? "responseCode"))
 
 instance ToJSON Groups where
         toJSON Groups'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _gKind),
+                 [("kind" .=) <$> _gKind,
                   ("responseCode" .=) <$> _gResponseCode])

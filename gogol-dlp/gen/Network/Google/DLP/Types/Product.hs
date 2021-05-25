@@ -17,15 +17,15 @@
 --
 module Network.Google.DLP.Types.Product where
 
-import           Network.Google.DLP.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DLP.Types.Sum
+import Network.Google.Prelude
 
 -- | Statistics regarding a specific InfoType.
 --
 -- /See:/ 'googlePrivacyDlpV2InfoTypeStats' smart constructor.
 data GooglePrivacyDlpV2InfoTypeStats =
   GooglePrivacyDlpV2InfoTypeStats'
-    { _gpdvitsCount    :: !(Maybe (Textual Int64))
+    { _gpdvitsCount :: !(Maybe (Textual Int64))
     , _gpdvitsInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -161,7 +161,7 @@ instance ToJSON
 data GooglePrivacyDlpV2Range =
   GooglePrivacyDlpV2Range'
     { _gpdvrStart :: !(Maybe (Textual Int64))
-    , _gpdvrEnd   :: !(Maybe (Textual Int64))
+    , _gpdvrEnd :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -207,45 +207,17 @@ instance ToJSON GooglePrivacyDlpV2Range where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'googleRpcStatus' smart constructor.
 data GoogleRpcStatus =
   GoogleRpcStatus'
     { _grsDetails :: !(Maybe [GoogleRpcStatusDetailsItem])
-    , _grsCode    :: !(Maybe (Textual Int32))
+    , _grsCode :: !(Maybe (Textual Int32))
     , _grsMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -304,17 +276,95 @@ instance ToJSON GoogleRpcStatus where
                   ("code" .=) <$> _grsCode,
                   ("message" .=) <$> _grsMessage])
 
+-- | Statistics related to processing hybrid inspect requests.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridInspectStatistics' smart constructor.
+data GooglePrivacyDlpV2HybridInspectStatistics =
+  GooglePrivacyDlpV2HybridInspectStatistics'
+    { _gpdvhisAbortedCount :: !(Maybe (Textual Int64))
+    , _gpdvhisPendingCount :: !(Maybe (Textual Int64))
+    , _gpdvhisProcessedCount :: !(Maybe (Textual Int64))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridInspectStatistics' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhisAbortedCount'
+--
+-- * 'gpdvhisPendingCount'
+--
+-- * 'gpdvhisProcessedCount'
+googlePrivacyDlpV2HybridInspectStatistics
+    :: GooglePrivacyDlpV2HybridInspectStatistics
+googlePrivacyDlpV2HybridInspectStatistics =
+  GooglePrivacyDlpV2HybridInspectStatistics'
+    { _gpdvhisAbortedCount = Nothing
+    , _gpdvhisPendingCount = Nothing
+    , _gpdvhisProcessedCount = Nothing
+    }
+
+
+-- | The number of hybrid inspection requests aborted because the job ran out
+-- of quota or was ended before they could be processed.
+gpdvhisAbortedCount :: Lens' GooglePrivacyDlpV2HybridInspectStatistics (Maybe Int64)
+gpdvhisAbortedCount
+  = lens _gpdvhisAbortedCount
+      (\ s a -> s{_gpdvhisAbortedCount = a})
+      . mapping _Coerce
+
+-- | The number of hybrid requests currently being processed. Only populated
+-- when called via method \`getDlpJob\`. A burst of traffic may cause
+-- hybrid inspect requests to be enqueued. Processing will take place as
+-- quickly as possible, but resource limitations may impact how long a
+-- request is enqueued for.
+gpdvhisPendingCount :: Lens' GooglePrivacyDlpV2HybridInspectStatistics (Maybe Int64)
+gpdvhisPendingCount
+  = lens _gpdvhisPendingCount
+      (\ s a -> s{_gpdvhisPendingCount = a})
+      . mapping _Coerce
+
+-- | The number of hybrid inspection requests processed within this job.
+gpdvhisProcessedCount :: Lens' GooglePrivacyDlpV2HybridInspectStatistics (Maybe Int64)
+gpdvhisProcessedCount
+  = lens _gpdvhisProcessedCount
+      (\ s a -> s{_gpdvhisProcessedCount = a})
+      . mapping _Coerce
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridInspectStatistics
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2HybridInspectStatistics"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridInspectStatistics' <$>
+                   (o .:? "abortedCount") <*> (o .:? "pendingCount") <*>
+                     (o .:? "processedCount"))
+
+instance ToJSON
+           GooglePrivacyDlpV2HybridInspectStatistics
+         where
+        toJSON GooglePrivacyDlpV2HybridInspectStatistics'{..}
+          = object
+              (catMaybes
+                 [("abortedCount" .=) <$> _gpdvhisAbortedCount,
+                  ("pendingCount" .=) <$> _gpdvhisPendingCount,
+                  ("processedCount" .=) <$> _gpdvhisProcessedCount])
+
 -- | Buckets values based on fixed size ranges. The Bucketing transformation
 -- can provide all of this functionality, but requires more configuration.
 -- This message is provided as a convenience to the user for simple
 -- bucketing strategies. The transformed value will be a hyphenated string
--- of -, i.e if lower_bound = 10 and upper_bound = 20 all values that are
--- within this bucket will be replaced with \"10-20\". This can be used on
--- data of type: double, long. If the bound Value type differs from the
--- type of data being transformed, we will first attempt converting the
--- type of the data to be transformed to match the type of the bound before
--- comparing. See https:\/\/cloud.google.com\/dlp\/docs\/concepts-bucketing
--- to learn more.
+-- of {lower_bound}-{upper_bound}. For example, if lower_bound = 10 and
+-- upper_bound = 20, all values that are within this bucket will be
+-- replaced with \"10-20\". This can be used on data of type: double, long.
+-- If the bound Value type differs from the type of data being transformed,
+-- we will first attempt converting the type of the data to be transformed
+-- to match the type of the bound before comparing. See
+-- https:\/\/cloud.google.com\/dlp\/docs\/concepts-bucketing to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2FixedSizeBucketingConfig' smart constructor.
 data GooglePrivacyDlpV2FixedSizeBucketingConfig =
@@ -345,29 +395,29 @@ googlePrivacyDlpV2FixedSizeBucketingConfig =
     }
 
 
--- | Upper bound value of buckets. All values greater than upper_bound are
--- grouped together into a single bucket; for example if \`upper_bound\` =
--- 89, then all values greater than 89 are replaced with the value “89+”.
--- [Required].
+-- | Required. Upper bound value of buckets. All values greater than
+-- upper_bound are grouped together into a single bucket; for example if
+-- \`upper_bound\` = 89, then all values greater than 89 are replaced with
+-- the value \"89+\".
 gpdvfsbcUpperBound :: Lens' GooglePrivacyDlpV2FixedSizeBucketingConfig (Maybe GooglePrivacyDlpV2Value)
 gpdvfsbcUpperBound
   = lens _gpdvfsbcUpperBound
       (\ s a -> s{_gpdvfsbcUpperBound = a})
 
--- | Lower bound value of buckets. All values less than \`lower_bound\` are
--- grouped together into a single bucket; for example if \`lower_bound\` =
--- 10, then all values less than 10 are replaced with the value “-10”.
--- [Required].
+-- | Required. Lower bound value of buckets. All values less than
+-- \`lower_bound\` are grouped together into a single bucket; for example
+-- if \`lower_bound\` = 10, then all values less than 10 are replaced with
+-- the value \"-10\".
 gpdvfsbcLowerBound :: Lens' GooglePrivacyDlpV2FixedSizeBucketingConfig (Maybe GooglePrivacyDlpV2Value)
 gpdvfsbcLowerBound
   = lens _gpdvfsbcLowerBound
       (\ s a -> s{_gpdvfsbcLowerBound = a})
 
--- | Size of each bucket (except for minimum and maximum buckets). So if
--- \`lower_bound\` = 10, \`upper_bound\` = 89, and \`bucket_size\` = 10,
--- then the following buckets would be used: -10, 10-20, 20-30, 30-40,
+-- | Required. Size of each bucket (except for minimum and maximum buckets).
+-- So if \`lower_bound\` = 10, \`upper_bound\` = 89, and \`bucket_size\` =
+-- 10, then the following buckets would be used: -10, 10-20, 20-30, 30-40,
 -- 40-50, 50-60, 60-70, 70-80, 80-89, 89+. Precision up to 2 decimals
--- works. [Required].
+-- works.
 gpdvfsbcBucketSize :: Lens' GooglePrivacyDlpV2FixedSizeBucketingConfig (Maybe Double)
 gpdvfsbcBucketSize
   = lens _gpdvfsbcBucketSize
@@ -402,7 +452,7 @@ instance ToJSON
 data GooglePrivacyDlpV2InspectResult =
   GooglePrivacyDlpV2InspectResult'
     { _gpdvirFindingsTruncated :: !(Maybe Bool)
-    , _gpdvirFindings          :: !(Maybe [GooglePrivacyDlpV2Finding])
+    , _gpdvirFindings :: !(Maybe [GooglePrivacyDlpV2Finding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -457,14 +507,18 @@ instance ToJSON GooglePrivacyDlpV2InspectResult where
                     _gpdvirFindingsTruncated,
                   ("findings" .=) <$> _gpdvirFindings])
 
--- | Configuration for a StoredInfoType.
+-- | Configuration for stored infoTypes. All fields and subfield are provided
+-- by the user. For more information, see
+-- https:\/\/cloud.google.com\/dlp\/docs\/creating-custom-infotypes.
 --
 -- /See:/ 'googlePrivacyDlpV2StoredInfoTypeConfig' smart constructor.
 data GooglePrivacyDlpV2StoredInfoTypeConfig =
   GooglePrivacyDlpV2StoredInfoTypeConfig'
-    { _gpdvsitcLargeCustomDictionary :: !(Maybe GooglePrivacyDlpV2LargeCustomDictionaryConfig)
-    , _gpdvsitcDisplayName           :: !(Maybe Text)
-    , _gpdvsitcDescription           :: !(Maybe Text)
+    { _gpdvsitcRegex :: !(Maybe GooglePrivacyDlpV2Regex)
+    , _gpdvsitcLargeCustomDictionary :: !(Maybe GooglePrivacyDlpV2LargeCustomDictionaryConfig)
+    , _gpdvsitcDisplayName :: !(Maybe Text)
+    , _gpdvsitcDictionary :: !(Maybe GooglePrivacyDlpV2Dictionary)
+    , _gpdvsitcDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -473,20 +527,32 @@ data GooglePrivacyDlpV2StoredInfoTypeConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gpdvsitcRegex'
+--
 -- * 'gpdvsitcLargeCustomDictionary'
 --
 -- * 'gpdvsitcDisplayName'
+--
+-- * 'gpdvsitcDictionary'
 --
 -- * 'gpdvsitcDescription'
 googlePrivacyDlpV2StoredInfoTypeConfig
     :: GooglePrivacyDlpV2StoredInfoTypeConfig
 googlePrivacyDlpV2StoredInfoTypeConfig =
   GooglePrivacyDlpV2StoredInfoTypeConfig'
-    { _gpdvsitcLargeCustomDictionary = Nothing
+    { _gpdvsitcRegex = Nothing
+    , _gpdvsitcLargeCustomDictionary = Nothing
     , _gpdvsitcDisplayName = Nothing
+    , _gpdvsitcDictionary = Nothing
     , _gpdvsitcDescription = Nothing
     }
 
+
+-- | Store regular expression-based StoredInfoType.
+gpdvsitcRegex :: Lens' GooglePrivacyDlpV2StoredInfoTypeConfig (Maybe GooglePrivacyDlpV2Regex)
+gpdvsitcRegex
+  = lens _gpdvsitcRegex
+      (\ s a -> s{_gpdvsitcRegex = a})
 
 -- | StoredInfoType where findings are defined by a dictionary of phrases.
 gpdvsitcLargeCustomDictionary :: Lens' GooglePrivacyDlpV2StoredInfoTypeConfig (Maybe GooglePrivacyDlpV2LargeCustomDictionaryConfig)
@@ -499,6 +565,12 @@ gpdvsitcDisplayName :: Lens' GooglePrivacyDlpV2StoredInfoTypeConfig (Maybe Text)
 gpdvsitcDisplayName
   = lens _gpdvsitcDisplayName
       (\ s a -> s{_gpdvsitcDisplayName = a})
+
+-- | Store dictionary-based CustomInfoType.
+gpdvsitcDictionary :: Lens' GooglePrivacyDlpV2StoredInfoTypeConfig (Maybe GooglePrivacyDlpV2Dictionary)
+gpdvsitcDictionary
+  = lens _gpdvsitcDictionary
+      (\ s a -> s{_gpdvsitcDictionary = a})
 
 -- | Description of the StoredInfoType (max 256 characters).
 gpdvsitcDescription :: Lens' GooglePrivacyDlpV2StoredInfoTypeConfig (Maybe Text)
@@ -513,8 +585,9 @@ instance FromJSON
           = withObject "GooglePrivacyDlpV2StoredInfoTypeConfig"
               (\ o ->
                  GooglePrivacyDlpV2StoredInfoTypeConfig' <$>
-                   (o .:? "largeCustomDictionary") <*>
-                     (o .:? "displayName")
+                   (o .:? "regex") <*> (o .:? "largeCustomDictionary")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "dictionary")
                      <*> (o .:? "description"))
 
 instance ToJSON
@@ -523,9 +596,11 @@ instance ToJSON
         toJSON GooglePrivacyDlpV2StoredInfoTypeConfig'{..}
           = object
               (catMaybes
-                 [("largeCustomDictionary" .=) <$>
+                 [("regex" .=) <$> _gpdvsitcRegex,
+                  ("largeCustomDictionary" .=) <$>
                     _gpdvsitcLargeCustomDictionary,
                   ("displayName" .=) <$> _gpdvsitcDisplayName,
+                  ("dictionary" .=) <$> _gpdvsitcDictionary,
                   ("description" .=) <$> _gpdvsitcDescription])
 
 -- | A transformation to apply to text that is identified as a specific
@@ -534,7 +609,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2InfoTypeTransformation' smart constructor.
 data GooglePrivacyDlpV2InfoTypeTransformation =
   GooglePrivacyDlpV2InfoTypeTransformation'
-    { _gpdvittInfoTypes               :: !(Maybe [GooglePrivacyDlpV2InfoType])
+    { _gpdvittInfoTypes :: !(Maybe [GooglePrivacyDlpV2InfoType])
     , _gpdvittPrimitiveTransformation :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -564,7 +639,7 @@ gpdvittInfoTypes
       . _Default
       . _Coerce
 
--- | Primitive transformation to apply to the infoType. [required]
+-- | Required. Primitive transformation to apply to the infoType.
 gpdvittPrimitiveTransformation :: Lens' GooglePrivacyDlpV2InfoTypeTransformation (Maybe GooglePrivacyDlpV2PrimitiveTransformation)
 gpdvittPrimitiveTransformation
   = lens _gpdvittPrimitiveTransformation
@@ -626,21 +701,147 @@ instance ToJSON GooglePrivacyDlpV2FieldId where
         toJSON GooglePrivacyDlpV2FieldId'{..}
           = object (catMaybes [("name" .=) <$> _gpdvfiName])
 
+-- | Represents a container that may contain DLP findings. Examples of a
+-- container include a file, table, or database record.
+--
+-- /See:/ 'googlePrivacyDlpV2Container' smart constructor.
+data GooglePrivacyDlpV2Container =
+  GooglePrivacyDlpV2Container'
+    { _gpdvcFullPath :: !(Maybe Text)
+    , _gpdvcUpdateTime :: !(Maybe DateTime')
+    , _gpdvcVersion :: !(Maybe Text)
+    , _gpdvcProjectId :: !(Maybe Text)
+    , _gpdvcType :: !(Maybe Text)
+    , _gpdvcRootPath :: !(Maybe Text)
+    , _gpdvcRelativePath :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2Container' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvcFullPath'
+--
+-- * 'gpdvcUpdateTime'
+--
+-- * 'gpdvcVersion'
+--
+-- * 'gpdvcProjectId'
+--
+-- * 'gpdvcType'
+--
+-- * 'gpdvcRootPath'
+--
+-- * 'gpdvcRelativePath'
+googlePrivacyDlpV2Container
+    :: GooglePrivacyDlpV2Container
+googlePrivacyDlpV2Container =
+  GooglePrivacyDlpV2Container'
+    { _gpdvcFullPath = Nothing
+    , _gpdvcUpdateTime = Nothing
+    , _gpdvcVersion = Nothing
+    , _gpdvcProjectId = Nothing
+    , _gpdvcType = Nothing
+    , _gpdvcRootPath = Nothing
+    , _gpdvcRelativePath = Nothing
+    }
+
+
+-- | A string representation of the full container name. Examples: -
+-- BigQuery: \'Project:DataSetId.TableId\' - Google Cloud Storage:
+-- \'gs:\/\/Bucket\/folders\/filename.txt\'
+gpdvcFullPath :: Lens' GooglePrivacyDlpV2Container (Maybe Text)
+gpdvcFullPath
+  = lens _gpdvcFullPath
+      (\ s a -> s{_gpdvcFullPath = a})
+
+-- | Findings container modification timestamp, if applicable. For Google
+-- Cloud Storage contains last file modification timestamp. For BigQuery
+-- table contains last_modified_time property. For Datastore - not
+-- populated.
+gpdvcUpdateTime :: Lens' GooglePrivacyDlpV2Container (Maybe UTCTime)
+gpdvcUpdateTime
+  = lens _gpdvcUpdateTime
+      (\ s a -> s{_gpdvcUpdateTime = a})
+      . mapping _DateTime
+
+-- | Findings container version, if available (\"generation\" for Google
+-- Cloud Storage).
+gpdvcVersion :: Lens' GooglePrivacyDlpV2Container (Maybe Text)
+gpdvcVersion
+  = lens _gpdvcVersion (\ s a -> s{_gpdvcVersion = a})
+
+-- | Project where the finding was found. Can be different from the project
+-- that owns the finding.
+gpdvcProjectId :: Lens' GooglePrivacyDlpV2Container (Maybe Text)
+gpdvcProjectId
+  = lens _gpdvcProjectId
+      (\ s a -> s{_gpdvcProjectId = a})
+
+-- | Container type, for example BigQuery or Google Cloud Storage.
+gpdvcType :: Lens' GooglePrivacyDlpV2Container (Maybe Text)
+gpdvcType
+  = lens _gpdvcType (\ s a -> s{_gpdvcType = a})
+
+-- | The root of the container. Examples: - For BigQuery table
+-- \`project_id:dataset_id.table_id\`, the root is \`dataset_id\` - For
+-- Google Cloud Storage file \`gs:\/\/bucket\/folder\/filename.txt\`, the
+-- root is \`gs:\/\/bucket\`
+gpdvcRootPath :: Lens' GooglePrivacyDlpV2Container (Maybe Text)
+gpdvcRootPath
+  = lens _gpdvcRootPath
+      (\ s a -> s{_gpdvcRootPath = a})
+
+-- | The rest of the path after the root. Examples: - For BigQuery table
+-- \`project_id:dataset_id.table_id\`, the relative path is \`table_id\` -
+-- Google Cloud Storage file \`gs:\/\/bucket\/folder\/filename.txt\`, the
+-- relative path is \`folder\/filename.txt\`
+gpdvcRelativePath :: Lens' GooglePrivacyDlpV2Container (Maybe Text)
+gpdvcRelativePath
+  = lens _gpdvcRelativePath
+      (\ s a -> s{_gpdvcRelativePath = a})
+
+instance FromJSON GooglePrivacyDlpV2Container where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2Container"
+              (\ o ->
+                 GooglePrivacyDlpV2Container' <$>
+                   (o .:? "fullPath") <*> (o .:? "updateTime") <*>
+                     (o .:? "version")
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "type")
+                     <*> (o .:? "rootPath")
+                     <*> (o .:? "relativePath"))
+
+instance ToJSON GooglePrivacyDlpV2Container where
+        toJSON GooglePrivacyDlpV2Container'{..}
+          = object
+              (catMaybes
+                 [("fullPath" .=) <$> _gpdvcFullPath,
+                  ("updateTime" .=) <$> _gpdvcUpdateTime,
+                  ("version" .=) <$> _gpdvcVersion,
+                  ("projectId" .=) <$> _gpdvcProjectId,
+                  ("type" .=) <$> _gpdvcType,
+                  ("rootPath" .=) <$> _gpdvcRootPath,
+                  ("relativePath" .=) <$> _gpdvcRelativePath])
+
 -- | Combines all of the information about a DLP job.
 --
 -- /See:/ 'googlePrivacyDlpV2DlpJob' smart constructor.
 data GooglePrivacyDlpV2DlpJob =
   GooglePrivacyDlpV2DlpJob'
     { _gpdvdjInspectDetails :: !(Maybe GooglePrivacyDlpV2InspectDataSourceDetails)
-    , _gpdvdjState          :: !(Maybe GooglePrivacyDlpV2DlpJobState)
-    , _gpdvdjStartTime      :: !(Maybe DateTime')
+    , _gpdvdjState :: !(Maybe GooglePrivacyDlpV2DlpJobState)
+    , _gpdvdjStartTime :: !(Maybe DateTime')
     , _gpdvdjJobTriggerName :: !(Maybe Text)
-    , _gpdvdjRiskDetails    :: !(Maybe GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails)
-    , _gpdvdjName           :: !(Maybe Text)
-    , _gpdvdjEndTime        :: !(Maybe DateTime')
-    , _gpdvdjType           :: !(Maybe GooglePrivacyDlpV2DlpJobType)
-    , _gpdvdjErrors         :: !(Maybe [GooglePrivacyDlpV2Error])
-    , _gpdvdjCreateTime     :: !(Maybe DateTime')
+    , _gpdvdjRiskDetails :: !(Maybe GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails)
+    , _gpdvdjName :: !(Maybe Text)
+    , _gpdvdjEndTime :: !(Maybe DateTime')
+    , _gpdvdjType :: !(Maybe GooglePrivacyDlpV2DlpJobType)
+    , _gpdvdjErrors :: !(Maybe [GooglePrivacyDlpV2Error])
+    , _gpdvdjCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -783,7 +984,7 @@ instance ToJSON GooglePrivacyDlpV2DlpJob where
 -- /See:/ 'googlePrivacyDlpV2RecordTransformations' smart constructor.
 data GooglePrivacyDlpV2RecordTransformations =
   GooglePrivacyDlpV2RecordTransformations'
-    { _gpdvrtRecordSuppressions   :: !(Maybe [GooglePrivacyDlpV2RecordSuppression])
+    { _gpdvrtRecordSuppressions :: !(Maybe [GooglePrivacyDlpV2RecordSuppression])
     , _gpdvrtFieldTransformations :: !(Maybe [GooglePrivacyDlpV2FieldTransformation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -804,7 +1005,7 @@ googlePrivacyDlpV2RecordTransformations =
 
 
 -- | Configuration defining which records get suppressed entirely. Records
--- that match any suppression rule are omitted from the output [optional].
+-- that match any suppression rule are omitted from the output.
 gpdvrtRecordSuppressions :: Lens' GooglePrivacyDlpV2RecordTransformations [GooglePrivacyDlpV2RecordSuppression]
 gpdvrtRecordSuppressions
   = lens _gpdvrtRecordSuppressions
@@ -851,7 +1052,7 @@ instance ToJSON
 data GooglePrivacyDlpV2Key =
   GooglePrivacyDlpV2Key'
     { _gpdvkPartitionId :: !(Maybe GooglePrivacyDlpV2PartitionId)
-    , _gpdvkPath        :: !(Maybe [GooglePrivacyDlpV2PathElement])
+    , _gpdvkPath :: !(Maybe [GooglePrivacyDlpV2PathElement])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -960,14 +1161,14 @@ instance ToJSON GooglePrivacyDlpV2BucketingConfig
 -- /See:/ 'googlePrivacyDlpV2InspectConfig' smart constructor.
 data GooglePrivacyDlpV2InspectConfig =
   GooglePrivacyDlpV2InspectConfig'
-    { _gpdvicInfoTypes        :: !(Maybe [GooglePrivacyDlpV2InfoType])
-    , _gpdvicMinLikelihood    :: !(Maybe GooglePrivacyDlpV2InspectConfigMinLikelihood)
+    { _gpdvicInfoTypes :: !(Maybe [GooglePrivacyDlpV2InfoType])
+    , _gpdvicMinLikelihood :: !(Maybe GooglePrivacyDlpV2InspectConfigMinLikelihood)
     , _gpdvicExcludeInfoTypes :: !(Maybe Bool)
-    , _gpdvicIncludeQuote     :: !(Maybe Bool)
-    , _gpdvicCustomInfoTypes  :: !(Maybe [GooglePrivacyDlpV2CustomInfoType])
-    , _gpdvicLimits           :: !(Maybe GooglePrivacyDlpV2FindingLimits)
-    , _gpdvicContentOptions   :: !(Maybe [Text])
-    , _gpdvicRuleSet          :: !(Maybe [GooglePrivacyDlpV2InspectionRuleSet])
+    , _gpdvicIncludeQuote :: !(Maybe Bool)
+    , _gpdvicCustomInfoTypes :: !(Maybe [GooglePrivacyDlpV2CustomInfoType])
+    , _gpdvicLimits :: !(Maybe GooglePrivacyDlpV2FindingLimits)
+    , _gpdvicContentOptions :: !(Maybe [GooglePrivacyDlpV2InspectConfigContentOptionsItem])
+    , _gpdvicRuleSet :: !(Maybe [GooglePrivacyDlpV2InspectionRuleSet])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1011,11 +1212,10 @@ googlePrivacyDlpV2InspectConfig =
 -- https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference. When no
 -- InfoTypes or CustomInfoTypes are specified in a request, the system may
 -- automatically choose what detectors to run. By default this may be all
--- types, but may change over time as detectors are updated. The special
--- InfoType name \"ALL_BASIC\" can be used to trigger all detectors, but
--- may change over time as new InfoTypes are added. If you need precise
--- control and predictability as to what detectors are run you should
--- specify specific InfoTypes listed in the reference.
+-- types, but may change over time as detectors are updated. If you need
+-- precise control and predictability as to what detectors are run you
+-- should specify specific InfoTypes listed in the reference, otherwise a
+-- default list will be used, which may change over time.
 gpdvicInfoTypes :: Lens' GooglePrivacyDlpV2InspectConfig [GooglePrivacyDlpV2InfoType]
 gpdvicInfoTypes
   = lens _gpdvicInfoTypes
@@ -1054,13 +1254,14 @@ gpdvicCustomInfoTypes
       . _Default
       . _Coerce
 
+-- | Configuration to control the number of findings returned.
 gpdvicLimits :: Lens' GooglePrivacyDlpV2InspectConfig (Maybe GooglePrivacyDlpV2FindingLimits)
 gpdvicLimits
   = lens _gpdvicLimits (\ s a -> s{_gpdvicLimits = a})
 
 -- | List of options defining data content to scan. If empty, text, images,
 -- and other content will be included.
-gpdvicContentOptions :: Lens' GooglePrivacyDlpV2InspectConfig [Text]
+gpdvicContentOptions :: Lens' GooglePrivacyDlpV2InspectConfig [GooglePrivacyDlpV2InspectConfigContentOptionsItem]
 gpdvicContentOptions
   = lens _gpdvicContentOptions
       (\ s a -> s{_gpdvicContentOptions = a})
@@ -1113,8 +1314,8 @@ instance ToJSON GooglePrivacyDlpV2InspectConfig where
 data GooglePrivacyDlpV2RiskAnalysisJobConfig =
   GooglePrivacyDlpV2RiskAnalysisJobConfig'
     { _gpdvrajcPrivacyMetric :: !(Maybe GooglePrivacyDlpV2PrivacyMetric)
-    , _gpdvrajcActions       :: !(Maybe [GooglePrivacyDlpV2Action])
-    , _gpdvrajcSourceTable   :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
+    , _gpdvrajcActions :: !(Maybe [GooglePrivacyDlpV2Action])
+    , _gpdvrajcSourceTable :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1181,6 +1382,52 @@ instance ToJSON
                   ("actions" .=) <$> _gpdvrajcActions,
                   ("sourceTable" .=) <$> _gpdvrajcSourceTable])
 
+-- | Request to search for potentially sensitive info in a custom location.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridInspectDlpJobRequest' smart constructor.
+newtype GooglePrivacyDlpV2HybridInspectDlpJobRequest =
+  GooglePrivacyDlpV2HybridInspectDlpJobRequest'
+    { _gpdvhidjrHybridItem :: Maybe GooglePrivacyDlpV2HybridContentItem
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridInspectDlpJobRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhidjrHybridItem'
+googlePrivacyDlpV2HybridInspectDlpJobRequest
+    :: GooglePrivacyDlpV2HybridInspectDlpJobRequest
+googlePrivacyDlpV2HybridInspectDlpJobRequest =
+  GooglePrivacyDlpV2HybridInspectDlpJobRequest' {_gpdvhidjrHybridItem = Nothing}
+
+
+-- | The item to inspect.
+gpdvhidjrHybridItem :: Lens' GooglePrivacyDlpV2HybridInspectDlpJobRequest (Maybe GooglePrivacyDlpV2HybridContentItem)
+gpdvhidjrHybridItem
+  = lens _gpdvhidjrHybridItem
+      (\ s a -> s{_gpdvhidjrHybridItem = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridInspectDlpJobRequest
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2HybridInspectDlpJobRequest"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridInspectDlpJobRequest' <$>
+                   (o .:? "hybridItem"))
+
+instance ToJSON
+           GooglePrivacyDlpV2HybridInspectDlpJobRequest
+         where
+        toJSON
+          GooglePrivacyDlpV2HybridInspectDlpJobRequest'{..}
+          = object
+              (catMaybes
+                 [("hybridItem" .=) <$> _gpdvhidjrHybridItem])
+
 -- | Message for infoType-dependent details parsed from quote.
 --
 -- /See:/ 'googlePrivacyDlpV2QuoteInfo' smart constructor.
@@ -1218,6 +1465,51 @@ instance ToJSON GooglePrivacyDlpV2QuoteInfo where
         toJSON GooglePrivacyDlpV2QuoteInfo'{..}
           = object
               (catMaybes [("dateTime" .=) <$> _gpdvqiDateTime])
+
+-- | Statistics for a StoredInfoType.
+--
+-- /See:/ 'googlePrivacyDlpV2StoredInfoTypeStats' smart constructor.
+newtype GooglePrivacyDlpV2StoredInfoTypeStats =
+  GooglePrivacyDlpV2StoredInfoTypeStats'
+    { _gpdvsitsLargeCustomDictionary :: Maybe GooglePrivacyDlpV2LargeCustomDictionaryStats
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2StoredInfoTypeStats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvsitsLargeCustomDictionary'
+googlePrivacyDlpV2StoredInfoTypeStats
+    :: GooglePrivacyDlpV2StoredInfoTypeStats
+googlePrivacyDlpV2StoredInfoTypeStats =
+  GooglePrivacyDlpV2StoredInfoTypeStats'
+    {_gpdvsitsLargeCustomDictionary = Nothing}
+
+
+-- | StoredInfoType where findings are defined by a dictionary of phrases.
+gpdvsitsLargeCustomDictionary :: Lens' GooglePrivacyDlpV2StoredInfoTypeStats (Maybe GooglePrivacyDlpV2LargeCustomDictionaryStats)
+gpdvsitsLargeCustomDictionary
+  = lens _gpdvsitsLargeCustomDictionary
+      (\ s a -> s{_gpdvsitsLargeCustomDictionary = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2StoredInfoTypeStats
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2StoredInfoTypeStats"
+              (\ o ->
+                 GooglePrivacyDlpV2StoredInfoTypeStats' <$>
+                   (o .:? "largeCustomDictionary"))
+
+instance ToJSON GooglePrivacyDlpV2StoredInfoTypeStats
+         where
+        toJSON GooglePrivacyDlpV2StoredInfoTypeStats'{..}
+          = object
+              (catMaybes
+                 [("largeCustomDictionary" .=) <$>
+                    _gpdvsitsLargeCustomDictionary])
 
 -- | Configuration to suppress records whose suppression conditions evaluate
 -- to true.
@@ -1270,9 +1562,9 @@ instance ToJSON GooglePrivacyDlpV2RecordSuppression
 -- /See:/ 'googlePrivacyDlpV2CryptoKey' smart constructor.
 data GooglePrivacyDlpV2CryptoKey =
   GooglePrivacyDlpV2CryptoKey'
-    { _gpdvckTransient  :: !(Maybe GooglePrivacyDlpV2TransientCryptoKey)
+    { _gpdvckTransient :: !(Maybe GooglePrivacyDlpV2TransientCryptoKey)
     , _gpdvckKmsWrApped :: !(Maybe GooglePrivacyDlpV2KmsWrAppedCryptoKey)
-    , _gpdvckUnwrApped  :: !(Maybe GooglePrivacyDlpV2UnwrAppedCryptoKey)
+    , _gpdvckUnwrApped :: !(Maybe GooglePrivacyDlpV2UnwrAppedCryptoKey)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1296,16 +1588,19 @@ googlePrivacyDlpV2CryptoKey =
     }
 
 
+-- | Transient crypto key
 gpdvckTransient :: Lens' GooglePrivacyDlpV2CryptoKey (Maybe GooglePrivacyDlpV2TransientCryptoKey)
 gpdvckTransient
   = lens _gpdvckTransient
       (\ s a -> s{_gpdvckTransient = a})
 
+-- | Kms wrapped key
 gpdvckKmsWrApped :: Lens' GooglePrivacyDlpV2CryptoKey (Maybe GooglePrivacyDlpV2KmsWrAppedCryptoKey)
 gpdvckKmsWrApped
   = lens _gpdvckKmsWrApped
       (\ s a -> s{_gpdvckKmsWrApped = a})
 
+-- | Unwrapped crypto key
 gpdvckUnwrApped :: Lens' GooglePrivacyDlpV2CryptoKey (Maybe GooglePrivacyDlpV2UnwrAppedCryptoKey)
 gpdvckUnwrApped
   = lens _gpdvckUnwrApped
@@ -1337,9 +1632,9 @@ instance ToJSON GooglePrivacyDlpV2CryptoKey where
 -- /See:/ 'googlePrivacyDlpV2LargeCustomDictionaryConfig' smart constructor.
 data GooglePrivacyDlpV2LargeCustomDictionaryConfig =
   GooglePrivacyDlpV2LargeCustomDictionaryConfig'
-    { _gpdvlcdcBigQueryField       :: !(Maybe GooglePrivacyDlpV2BigQueryField)
+    { _gpdvlcdcBigQueryField :: !(Maybe GooglePrivacyDlpV2BigQueryField)
     , _gpdvlcdcCloudStorageFileSet :: !(Maybe GooglePrivacyDlpV2CloudStorageFileSet)
-    , _gpdvlcdcOutputPath          :: !(Maybe GooglePrivacyDlpV2CloudStoragePath)
+    , _gpdvlcdcOutputPath :: !(Maybe GooglePrivacyDlpV2CloudStoragePath)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1455,9 +1750,9 @@ instance ToJSON GooglePrivacyDlpV2WordList where
 -- /See:/ 'googlePrivacyDlpV2ContentItem' smart constructor.
 data GooglePrivacyDlpV2ContentItem =
   GooglePrivacyDlpV2ContentItem'
-    { _gpdvciValue    :: !(Maybe Text)
+    { _gpdvciValue :: !(Maybe Text)
     , _gpdvciByteItem :: !(Maybe GooglePrivacyDlpV2ByteContentItem)
-    , _gpdvciTable    :: !(Maybe GooglePrivacyDlpV2Table)
+    , _gpdvciTable :: !(Maybe GooglePrivacyDlpV2Table)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1512,15 +1807,16 @@ instance ToJSON GooglePrivacyDlpV2ContentItem where
                   ("byteItem" .=) <$> _gpdvciByteItem,
                   ("table" .=) <$> _gpdvciTable])
 
+-- | Histogram of value frequencies in the column.
 --
 -- /See:/ 'googlePrivacyDlpV2CategoricalStatsHistogramBucket' smart constructor.
 data GooglePrivacyDlpV2CategoricalStatsHistogramBucket =
   GooglePrivacyDlpV2CategoricalStatsHistogramBucket'
     { _gpdvcshbValueFrequencyLowerBound :: !(Maybe (Textual Int64))
-    , _gpdvcshbBucketValues             :: !(Maybe [GooglePrivacyDlpV2ValueFrequency])
+    , _gpdvcshbBucketValues :: !(Maybe [GooglePrivacyDlpV2ValueFrequency])
     , _gpdvcshbValueFrequencyUpperBound :: !(Maybe (Textual Int64))
-    , _gpdvcshbBucketSize               :: !(Maybe (Textual Int64))
-    , _gpdvcshbBucketValueCount         :: !(Maybe (Textual Int64))
+    , _gpdvcshbBucketSize :: !(Maybe (Textual Int64))
+    , _gpdvcshbBucketValueCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1624,8 +1920,9 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2Result' smart constructor.
 data GooglePrivacyDlpV2Result =
   GooglePrivacyDlpV2Result'
-    { _gpdvrProcessedBytes      :: !(Maybe (Textual Int64))
-    , _gpdvrInfoTypeStats       :: !(Maybe [GooglePrivacyDlpV2InfoTypeStats])
+    { _gpdvrProcessedBytes :: !(Maybe (Textual Int64))
+    , _gpdvrInfoTypeStats :: !(Maybe [GooglePrivacyDlpV2InfoTypeStats])
+    , _gpdvrHybridStats :: !(Maybe GooglePrivacyDlpV2HybridInspectStatistics)
     , _gpdvrTotalEstimatedBytes :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1639,6 +1936,8 @@ data GooglePrivacyDlpV2Result =
 --
 -- * 'gpdvrInfoTypeStats'
 --
+-- * 'gpdvrHybridStats'
+--
 -- * 'gpdvrTotalEstimatedBytes'
 googlePrivacyDlpV2Result
     :: GooglePrivacyDlpV2Result
@@ -1646,6 +1945,7 @@ googlePrivacyDlpV2Result =
   GooglePrivacyDlpV2Result'
     { _gpdvrProcessedBytes = Nothing
     , _gpdvrInfoTypeStats = Nothing
+    , _gpdvrHybridStats = Nothing
     , _gpdvrTotalEstimatedBytes = Nothing
     }
 
@@ -1666,6 +1966,12 @@ gpdvrInfoTypeStats
       . _Default
       . _Coerce
 
+-- | Statistics related to the processing of hybrid inspect.
+gpdvrHybridStats :: Lens' GooglePrivacyDlpV2Result (Maybe GooglePrivacyDlpV2HybridInspectStatistics)
+gpdvrHybridStats
+  = lens _gpdvrHybridStats
+      (\ s a -> s{_gpdvrHybridStats = a})
+
 -- | Estimate of the number of bytes to process.
 gpdvrTotalEstimatedBytes :: Lens' GooglePrivacyDlpV2Result (Maybe Int64)
 gpdvrTotalEstimatedBytes
@@ -1680,6 +1986,7 @@ instance FromJSON GooglePrivacyDlpV2Result where
                  GooglePrivacyDlpV2Result' <$>
                    (o .:? "processedBytes") <*>
                      (o .:? "infoTypeStats" .!= mempty)
+                     <*> (o .:? "hybridStats")
                      <*> (o .:? "totalEstimatedBytes"))
 
 instance ToJSON GooglePrivacyDlpV2Result where
@@ -1688,15 +1995,64 @@ instance ToJSON GooglePrivacyDlpV2Result where
               (catMaybes
                  [("processedBytes" .=) <$> _gpdvrProcessedBytes,
                   ("infoTypeStats" .=) <$> _gpdvrInfoTypeStats,
+                  ("hybridStats" .=) <$> _gpdvrHybridStats,
                   ("totalEstimatedBytes" .=) <$>
                     _gpdvrTotalEstimatedBytes])
+
+-- | To organize findings, these labels will be added to each finding. Label
+-- keys must be between 1 and 63 characters long and must conform to the
+-- following regular expression: \`[a-z]([-a-z0-9]*[a-z0-9])?\`. Label
+-- values must be between 0 and 63 characters long and must conform to the
+-- regular expression \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`. No more than 10
+-- labels can be associated with a given finding. Examples: *
+-- \`\"environment\" : \"production\"\` * \`\"pipeline\" : \"etl\"\`
+--
+-- /See:/ 'googlePrivacyDlpV2HybridOptionsLabels' smart constructor.
+newtype GooglePrivacyDlpV2HybridOptionsLabels =
+  GooglePrivacyDlpV2HybridOptionsLabels'
+    { _gpdvholAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridOptionsLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvholAddtional'
+googlePrivacyDlpV2HybridOptionsLabels
+    :: HashMap Text Text -- ^ 'gpdvholAddtional'
+    -> GooglePrivacyDlpV2HybridOptionsLabels
+googlePrivacyDlpV2HybridOptionsLabels pGpdvholAddtional_ =
+  GooglePrivacyDlpV2HybridOptionsLabels'
+    {_gpdvholAddtional = _Coerce # pGpdvholAddtional_}
+
+
+gpdvholAddtional :: Lens' GooglePrivacyDlpV2HybridOptionsLabels (HashMap Text Text)
+gpdvholAddtional
+  = lens _gpdvholAddtional
+      (\ s a -> s{_gpdvholAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridOptionsLabels
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2HybridOptionsLabels"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridOptionsLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON GooglePrivacyDlpV2HybridOptionsLabels
+         where
+        toJSON = toJSON . _gpdvholAddtional
 
 -- | The results of an inspect DataSource job.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectDataSourceDetails' smart constructor.
 data GooglePrivacyDlpV2InspectDataSourceDetails =
   GooglePrivacyDlpV2InspectDataSourceDetails'
-    { _gpdvidsdResult           :: !(Maybe GooglePrivacyDlpV2Result)
+    { _gpdvidsdResult :: !(Maybe GooglePrivacyDlpV2Result)
     , _gpdvidsdRequestedOptions :: !(Maybe GooglePrivacyDlpV2RequestedOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1716,7 +2072,7 @@ googlePrivacyDlpV2InspectDataSourceDetails =
     {_gpdvidsdResult = Nothing, _gpdvidsdRequestedOptions = Nothing}
 
 
--- | A summary of the outcome of this inspect job.
+-- | A summary of the outcome of this inspection job.
 gpdvidsdResult :: Lens' GooglePrivacyDlpV2InspectDataSourceDetails (Maybe GooglePrivacyDlpV2Result)
 gpdvidsdResult
   = lens _gpdvidsdResult
@@ -1820,8 +2176,11 @@ instance ToJSON GooglePrivacyDlpV2RedactImageResponse
                   ("inspectResult" .=) <$> _gpdvrirInspectResult,
                   ("redactedImage" .=) <$> _gpdvrirRedactedImage])
 
--- | Publish the results of a DlpJob to a pub sub channel. Compatible with:
--- Inspect, Risk
+-- | Publish a message into given Pub\/Sub topic when DlpJob has completed.
+-- The message contains a single field, \`DlpJobName\`, which is equal to
+-- the finished job\'s
+-- [\`DlpJob.name\`](https:\/\/cloud.google.com\/dlp\/docs\/reference\/rest\/v2\/projects.dlpJobs#DlpJob).
+-- Compatible with: Inspect, Risk
 --
 -- /See:/ 'googlePrivacyDlpV2PublishToPubSub' smart constructor.
 newtype GooglePrivacyDlpV2PublishToPubSub =
@@ -1871,7 +2230,7 @@ instance ToJSON GooglePrivacyDlpV2PublishToPubSub
 data GooglePrivacyDlpV2BigQueryKey =
   GooglePrivacyDlpV2BigQueryKey'
     { _gpdvbqkTableReference :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    , _gpdvbqkRowNumber      :: !(Maybe (Textual Int64))
+    , _gpdvbqkRowNumber :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1896,8 +2255,11 @@ gpdvbqkTableReference
   = lens _gpdvbqkTableReference
       (\ s a -> s{_gpdvbqkTableReference = a})
 
--- | Absolute number of the row from the beginning of the table at the time
--- of scanning.
+-- | Row number inferred at the time the table was scanned. This value is
+-- nondeterministic, cannot be queried, and may be null for inspection
+-- jobs. To locate findings within a table, specify
+-- \`inspect_job.storage_config.big_query_options.identifying_fields\` in
+-- \`CreateDlpJobRequest\`.
 gpdvbqkRowNumber :: Lens' GooglePrivacyDlpV2BigQueryKey (Maybe Int64)
 gpdvbqkRowNumber
   = lens _gpdvbqkRowNumber
@@ -1918,9 +2280,10 @@ instance ToJSON GooglePrivacyDlpV2BigQueryKey where
                  [("tableReference" .=) <$> _gpdvbqkTableReference,
                   ("rowNumber" .=) <$> _gpdvbqkRowNumber])
 
--- | Rule for modifying a CustomInfoType to alter behavior under certain
--- circumstances, depending on the specific details of the rule. Not
--- supported for the \`surrogate_type\` custom info type.
+-- | Deprecated; use \`InspectionRuleSet\` instead. Rule for modifying a
+-- \`CustomInfoType\` to alter behavior under certain circumstances,
+-- depending on the specific details of the rule. Not supported for the
+-- \`surrogate_type\` custom infoType.
 --
 -- /See:/ 'googlePrivacyDlpV2DetectionRule' smart constructor.
 newtype GooglePrivacyDlpV2DetectionRule =
@@ -2012,9 +2375,9 @@ instance ToJSON GooglePrivacyDlpV2RecordCondition
 -- /See:/ 'googlePrivacyDlpV2DateShiftConfig' smart constructor.
 data GooglePrivacyDlpV2DateShiftConfig =
   GooglePrivacyDlpV2DateShiftConfig'
-    { _gpdvdscContext        :: !(Maybe GooglePrivacyDlpV2FieldId)
+    { _gpdvdscContext :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvdscUpperBoundDays :: !(Maybe (Textual Int32))
-    , _gpdvdscCryptoKey      :: !(Maybe GooglePrivacyDlpV2CryptoKey)
+    , _gpdvdscCryptoKey :: !(Maybe GooglePrivacyDlpV2CryptoKey)
     , _gpdvdscLowerBoundDays :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2043,18 +2406,18 @@ googlePrivacyDlpV2DateShiftConfig =
 
 
 -- | Points to the field that contains the context, for example, an entity
--- id. If set, must also set method. If set, shift will be consistent for
--- the given context.
+-- id. If set, must also set cryptoKey. If set, shift will be consistent
+-- for the given context.
 gpdvdscContext :: Lens' GooglePrivacyDlpV2DateShiftConfig (Maybe GooglePrivacyDlpV2FieldId)
 gpdvdscContext
   = lens _gpdvdscContext
       (\ s a -> s{_gpdvdscContext = a})
 
--- | Range of shift in days. Actual shift will be selected at random within
--- this range (inclusive ends). Negative means shift to earlier in time.
--- Must not be more than 365250 days (1000 years) each direction. For
--- example, 3 means shift date to at most 3 days into the future.
--- [Required]
+-- | Required. Range of shift in days. Actual shift will be selected at
+-- random within this range (inclusive ends). Negative means shift to
+-- earlier in time. Must not be more than 365250 days (1000 years) each
+-- direction. For example, 3 means shift date to at most 3 days into the
+-- future.
 gpdvdscUpperBoundDays :: Lens' GooglePrivacyDlpV2DateShiftConfig (Maybe Int32)
 gpdvdscUpperBoundDays
   = lens _gpdvdscUpperBoundDays
@@ -2062,14 +2425,15 @@ gpdvdscUpperBoundDays
       . mapping _Coerce
 
 -- | Causes the shift to be computed based on this key and the context. This
--- results in the same shift for the same context and crypto_key.
+-- results in the same shift for the same context and crypto_key. If set,
+-- must also set context. Can only be applied to table items.
 gpdvdscCryptoKey :: Lens' GooglePrivacyDlpV2DateShiftConfig (Maybe GooglePrivacyDlpV2CryptoKey)
 gpdvdscCryptoKey
   = lens _gpdvdscCryptoKey
       (\ s a -> s{_gpdvdscCryptoKey = a})
 
--- | For example, -5 means shift date to at most 5 days back in the past.
--- [Required]
+-- | Required. For example, -5 means shift date to at most 5 days back in the
+-- past.
 gpdvdscLowerBoundDays :: Lens' GooglePrivacyDlpV2DateShiftConfig (Maybe Int32)
 gpdvdscLowerBoundDays
   = lens _gpdvdscLowerBoundDays
@@ -2101,8 +2465,9 @@ instance ToJSON GooglePrivacyDlpV2DateShiftConfig
 -- /See:/ 'googlePrivacyDlpV2InspectContentRequest' smart constructor.
 data GooglePrivacyDlpV2InspectContentRequest =
   GooglePrivacyDlpV2InspectContentRequest'
-    { _gpdvicrInspectConfig       :: !(Maybe GooglePrivacyDlpV2InspectConfig)
-    , _gpdvicrItem                :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    { _gpdvicrInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
+    , _gpdvicrItem :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    , _gpdvicrLocationId :: !(Maybe Text)
     , _gpdvicrInspectTemplateName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2116,6 +2481,8 @@ data GooglePrivacyDlpV2InspectContentRequest =
 --
 -- * 'gpdvicrItem'
 --
+-- * 'gpdvicrLocationId'
+--
 -- * 'gpdvicrInspectTemplateName'
 googlePrivacyDlpV2InspectContentRequest
     :: GooglePrivacyDlpV2InspectContentRequest
@@ -2123,6 +2490,7 @@ googlePrivacyDlpV2InspectContentRequest =
   GooglePrivacyDlpV2InspectContentRequest'
     { _gpdvicrInspectConfig = Nothing
     , _gpdvicrItem = Nothing
+    , _gpdvicrLocationId = Nothing
     , _gpdvicrInspectTemplateName = Nothing
     }
 
@@ -2139,11 +2507,17 @@ gpdvicrItem :: Lens' GooglePrivacyDlpV2InspectContentRequest (Maybe GooglePrivac
 gpdvicrItem
   = lens _gpdvicrItem (\ s a -> s{_gpdvicrItem = a})
 
--- | Optional template to use. Any configuration directly specified in
--- inspect_config will override those set in the template. Singular fields
--- that are set in this request will replace their corresponding fields in
--- the template. Repeated fields are appended. Singular sub-messages and
--- groups are recursively merged.
+-- | Deprecated. This field has no effect.
+gpdvicrLocationId :: Lens' GooglePrivacyDlpV2InspectContentRequest (Maybe Text)
+gpdvicrLocationId
+  = lens _gpdvicrLocationId
+      (\ s a -> s{_gpdvicrLocationId = a})
+
+-- | Template to use. Any configuration directly specified in inspect_config
+-- will override those set in the template. Singular fields that are set in
+-- this request will replace their corresponding fields in the template.
+-- Repeated fields are appended. Singular sub-messages and groups are
+-- recursively merged.
 gpdvicrInspectTemplateName :: Lens' GooglePrivacyDlpV2InspectContentRequest (Maybe Text)
 gpdvicrInspectTemplateName
   = lens _gpdvicrInspectTemplateName
@@ -2158,7 +2532,8 @@ instance FromJSON
               (\ o ->
                  GooglePrivacyDlpV2InspectContentRequest' <$>
                    (o .:? "inspectConfig") <*> (o .:? "item") <*>
-                     (o .:? "inspectTemplateName"))
+                     (o .:? "locationId")
+                     <*> (o .:? "inspectTemplateName"))
 
 instance ToJSON
            GooglePrivacyDlpV2InspectContentRequest
@@ -2168,6 +2543,7 @@ instance ToJSON
               (catMaybes
                  [("inspectConfig" .=) <$> _gpdvicrInspectConfig,
                   ("item" .=) <$> _gpdvicrItem,
+                  ("locationId" .=) <$> _gpdvicrLocationId,
                   ("inspectTemplateName" .=) <$>
                     _gpdvicrInspectTemplateName])
 
@@ -2226,9 +2602,9 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2NumericalStatsResult' smart constructor.
 data GooglePrivacyDlpV2NumericalStatsResult =
   GooglePrivacyDlpV2NumericalStatsResult'
-    { _gpdvnsrMaxValue       :: !(Maybe GooglePrivacyDlpV2Value)
+    { _gpdvnsrMaxValue :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvnsrQuantileValues :: !(Maybe [GooglePrivacyDlpV2Value])
-    , _gpdvnsrMinValue       :: !(Maybe GooglePrivacyDlpV2Value)
+    , _gpdvnsrMinValue :: !(Maybe GooglePrivacyDlpV2Value)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2294,6 +2670,72 @@ instance ToJSON
                   ("quantileValues" .=) <$> _gpdvnsrQuantileValues,
                   ("minValue" .=) <$> _gpdvnsrMinValue])
 
+-- | How to handle transformation errors during de-identification. A
+-- transformation error occurs when the requested transformation is
+-- incompatible with the data. For example, trying to de-identify an IP
+-- address using a \`DateShift\` transformation would result in a
+-- transformation error, since date info cannot be extracted from an IP
+-- address. Information about any incompatible transformations, and how
+-- they were handled, is returned in the response as part of the
+-- \`TransformationOverviews\`.
+--
+-- /See:/ 'googlePrivacyDlpV2TransformationErrorHandling' smart constructor.
+data GooglePrivacyDlpV2TransformationErrorHandling =
+  GooglePrivacyDlpV2TransformationErrorHandling'
+    { _gpdvtehThrowError :: !(Maybe GooglePrivacyDlpV2ThrowError)
+    , _gpdvtehLeaveUntransformed :: !(Maybe GooglePrivacyDlpV2LeaveUntransformed)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2TransformationErrorHandling' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvtehThrowError'
+--
+-- * 'gpdvtehLeaveUntransformed'
+googlePrivacyDlpV2TransformationErrorHandling
+    :: GooglePrivacyDlpV2TransformationErrorHandling
+googlePrivacyDlpV2TransformationErrorHandling =
+  GooglePrivacyDlpV2TransformationErrorHandling'
+    {_gpdvtehThrowError = Nothing, _gpdvtehLeaveUntransformed = Nothing}
+
+
+-- | Throw an error
+gpdvtehThrowError :: Lens' GooglePrivacyDlpV2TransformationErrorHandling (Maybe GooglePrivacyDlpV2ThrowError)
+gpdvtehThrowError
+  = lens _gpdvtehThrowError
+      (\ s a -> s{_gpdvtehThrowError = a})
+
+-- | Ignore errors
+gpdvtehLeaveUntransformed :: Lens' GooglePrivacyDlpV2TransformationErrorHandling (Maybe GooglePrivacyDlpV2LeaveUntransformed)
+gpdvtehLeaveUntransformed
+  = lens _gpdvtehLeaveUntransformed
+      (\ s a -> s{_gpdvtehLeaveUntransformed = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2TransformationErrorHandling
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2TransformationErrorHandling"
+              (\ o ->
+                 GooglePrivacyDlpV2TransformationErrorHandling' <$>
+                   (o .:? "throwError") <*>
+                     (o .:? "leaveUntransformed"))
+
+instance ToJSON
+           GooglePrivacyDlpV2TransformationErrorHandling
+         where
+        toJSON
+          GooglePrivacyDlpV2TransformationErrorHandling'{..}
+          = object
+              (catMaybes
+                 [("throwError" .=) <$> _gpdvtehThrowError,
+                  ("leaveUntransformed" .=) <$>
+                    _gpdvtehLeaveUntransformed])
+
 -- | Publish the result summary of a DlpJob to the Cloud Security Command
 -- Center (CSCC Alpha). This action is only available for projects which
 -- are parts of an organization and whitelisted for the alpha Cloud
@@ -2333,7 +2775,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2UpdateInspectTemplateRequest' smart constructor.
 data GooglePrivacyDlpV2UpdateInspectTemplateRequest =
   GooglePrivacyDlpV2UpdateInspectTemplateRequest'
-    { _gpdvuitrUpdateMask      :: !(Maybe GFieldMask)
+    { _gpdvuitrUpdateMask :: !(Maybe GFieldMask)
     , _gpdvuitrInspectTemplate :: !(Maybe GooglePrivacyDlpV2InspectTemplate)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2425,6 +2867,58 @@ instance ToJSON GooglePrivacyDlpV2EntityId where
         toJSON GooglePrivacyDlpV2EntityId'{..}
           = object (catMaybes [("field" .=) <$> _gpdveiField])
 
+-- | Labels to represent user provided metadata about the data being
+-- inspected. If configured by the job, some key values may be required.
+-- The labels associated with \`Finding\`\'s produced by hybrid inspection.
+-- Label keys must be between 1 and 63 characters long and must conform to
+-- the following regular expression: \`[a-z]([-a-z0-9]*[a-z0-9])?\`. Label
+-- values must be between 0 and 63 characters long and must conform to the
+-- regular expression \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`. No more than 10
+-- labels can be associated with a given finding. Examples: *
+-- \`\"environment\" : \"production\"\` * \`\"pipeline\" : \"etl\"\`
+--
+-- /See:/ 'googlePrivacyDlpV2HybridFindingDetailsLabels' smart constructor.
+newtype GooglePrivacyDlpV2HybridFindingDetailsLabels =
+  GooglePrivacyDlpV2HybridFindingDetailsLabels'
+    { _gpdvhfdlAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridFindingDetailsLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhfdlAddtional'
+googlePrivacyDlpV2HybridFindingDetailsLabels
+    :: HashMap Text Text -- ^ 'gpdvhfdlAddtional'
+    -> GooglePrivacyDlpV2HybridFindingDetailsLabels
+googlePrivacyDlpV2HybridFindingDetailsLabels pGpdvhfdlAddtional_ =
+  GooglePrivacyDlpV2HybridFindingDetailsLabels'
+    {_gpdvhfdlAddtional = _Coerce # pGpdvhfdlAddtional_}
+
+
+gpdvhfdlAddtional :: Lens' GooglePrivacyDlpV2HybridFindingDetailsLabels (HashMap Text Text)
+gpdvhfdlAddtional
+  = lens _gpdvhfdlAddtional
+      (\ s a -> s{_gpdvhfdlAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridFindingDetailsLabels
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2HybridFindingDetailsLabels"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridFindingDetailsLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           GooglePrivacyDlpV2HybridFindingDetailsLabels
+         where
+        toJSON = toJSON . _gpdvhfdlAddtional
+
 -- | Container for bytes to inspect or redact.
 --
 -- /See:/ 'googlePrivacyDlpV2ByteContentItem' smart constructor.
@@ -2477,13 +2971,14 @@ instance ToJSON GooglePrivacyDlpV2ByteContentItem
                  [("data" .=) <$> _gpdvbciData,
                   ("type" .=) <$> _gpdvbciType])
 
+-- | A column with a semantic tag attached.
 --
 -- /See:/ 'googlePrivacyDlpV2TaggedField' smart constructor.
 data GooglePrivacyDlpV2TaggedField =
   GooglePrivacyDlpV2TaggedField'
-    { _gpdvtfField     :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvtfInfoType  :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvtfInferred  :: !(Maybe GoogleProtobufEmpty)
+    { _gpdvtfField :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvtfInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvtfInferred :: !(Maybe GoogleProtobufEmpty)
     , _gpdvtfCustomTag :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2511,7 +3006,7 @@ googlePrivacyDlpV2TaggedField =
     }
 
 
--- | Identifies the column. [required]
+-- | Required. Identifies the column.
 gpdvtfField :: Lens' GooglePrivacyDlpV2TaggedField (Maybe GooglePrivacyDlpV2FieldId)
 gpdvtfField
   = lens _gpdvtfField (\ s a -> s{_gpdvtfField = a})
@@ -2564,12 +3059,12 @@ instance ToJSON GooglePrivacyDlpV2TaggedField where
 -- /See:/ 'googlePrivacyDlpV2BigQueryOptions' smart constructor.
 data GooglePrivacyDlpV2BigQueryOptions =
   GooglePrivacyDlpV2BigQueryOptions'
-    { _gpdvbqoRowsLimit         :: !(Maybe (Textual Int64))
-    , _gpdvbqoRowsLimitPercent  :: !(Maybe (Textual Int32))
-    , _gpdvbqoTableReference    :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
+    { _gpdvbqoRowsLimit :: !(Maybe (Textual Int64))
+    , _gpdvbqoRowsLimitPercent :: !(Maybe (Textual Int32))
+    , _gpdvbqoTableReference :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     , _gpdvbqoIdentifyingFields :: !(Maybe [GooglePrivacyDlpV2FieldId])
-    , _gpdvbqoExcludedFields    :: !(Maybe [GooglePrivacyDlpV2FieldId])
-    , _gpdvbqoSampleMethod      :: !(Maybe GooglePrivacyDlpV2BigQueryOptionsSampleMethod)
+    , _gpdvbqoExcludedFields :: !(Maybe [GooglePrivacyDlpV2FieldId])
+    , _gpdvbqoSampleMethod :: !(Maybe GooglePrivacyDlpV2BigQueryOptionsSampleMethod)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2629,8 +3124,11 @@ gpdvbqoTableReference
   = lens _gpdvbqoTableReference
       (\ s a -> s{_gpdvbqoTableReference = a})
 
--- | References to fields uniquely identifying rows within the table. Nested
--- fields in the format, like \`person.birthdate.year\`, are allowed.
+-- | Table fields that may uniquely identify a row within the table. When
+-- \`actions.saveFindings.outputConfig.table\` is specified, the values of
+-- columns specified here are available in the output table under
+-- \`location.content_locations.record_location.record_key.id_values\`.
+-- Nested fields such as \`person.birthdate.year\` are allowed.
 gpdvbqoIdentifyingFields :: Lens' GooglePrivacyDlpV2BigQueryOptions [GooglePrivacyDlpV2FieldId]
 gpdvbqoIdentifyingFields
   = lens _gpdvbqoIdentifyingFields
@@ -2677,13 +3175,53 @@ instance ToJSON GooglePrivacyDlpV2BigQueryOptions
                   ("excludedFields" .=) <$> _gpdvbqoExcludedFields,
                   ("sampleMethod" .=) <$> _gpdvbqoSampleMethod])
 
+-- | Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing
+-- the results of the DlpJob will be applied to the entry for the resource
+-- scanned in Cloud Data Catalog. Any labels previously written by another
+-- DlpJob will be deleted. InfoType naming patterns are strictly enforced
+-- when using this feature. Note that the findings will be persisted in
+-- Cloud Data Catalog storage and are governed by Data Catalog
+-- service-specific policy, see
+-- https:\/\/cloud.google.com\/terms\/service-terms Only a single instance
+-- of this action can be specified and only allowed if all resources being
+-- scanned are BigQuery tables. Compatible with: Inspect
+--
+-- /See:/ 'googlePrivacyDlpV2PublishFindingsToCloudDataCatalog' smart constructor.
+data GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog =
+  GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2PublishFindingsToCloudDataCatalog
+    :: GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+googlePrivacyDlpV2PublishFindingsToCloudDataCatalog =
+  GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog'
+
+
+instance FromJSON
+           GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog"
+              (\ o ->
+                 pure
+                   GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog')
+
+instance ToJSON
+           GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
+         where
+        toJSON = const emptyObject
+
 -- | A tuple of values for the quasi-identifier columns.
 --
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationQuasiIdValues' smart constructor.
 data GooglePrivacyDlpV2KMapEstimationQuasiIdValues =
   GooglePrivacyDlpV2KMapEstimationQuasiIdValues'
     { _gpdvkmeqivEstimatedAnonymity :: !(Maybe (Textual Int64))
-    , _gpdvkmeqivQuasiIdsValues     :: !(Maybe [GooglePrivacyDlpV2Value])
+    , _gpdvkmeqivQuasiIdsValues :: !(Maybe [GooglePrivacyDlpV2Value])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2796,7 +3334,8 @@ instance ToJSON GooglePrivacyDlpV2ExcludeInfoTypes
 -- /See:/ 'googlePrivacyDlpV2CreateInspectTemplateRequest' smart constructor.
 data GooglePrivacyDlpV2CreateInspectTemplateRequest =
   GooglePrivacyDlpV2CreateInspectTemplateRequest'
-    { _gpdvcitrTemplateId      :: !(Maybe Text)
+    { _gpdvcitrTemplateId :: !(Maybe Text)
+    , _gpdvcitrLocationId :: !(Maybe Text)
     , _gpdvcitrInspectTemplate :: !(Maybe GooglePrivacyDlpV2InspectTemplate)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2808,24 +3347,35 @@ data GooglePrivacyDlpV2CreateInspectTemplateRequest =
 --
 -- * 'gpdvcitrTemplateId'
 --
+-- * 'gpdvcitrLocationId'
+--
 -- * 'gpdvcitrInspectTemplate'
 googlePrivacyDlpV2CreateInspectTemplateRequest
     :: GooglePrivacyDlpV2CreateInspectTemplateRequest
 googlePrivacyDlpV2CreateInspectTemplateRequest =
   GooglePrivacyDlpV2CreateInspectTemplateRequest'
-    {_gpdvcitrTemplateId = Nothing, _gpdvcitrInspectTemplate = Nothing}
+    { _gpdvcitrTemplateId = Nothing
+    , _gpdvcitrLocationId = Nothing
+    , _gpdvcitrInspectTemplate = Nothing
+    }
 
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcitrTemplateId :: Lens' GooglePrivacyDlpV2CreateInspectTemplateRequest (Maybe Text)
 gpdvcitrTemplateId
   = lens _gpdvcitrTemplateId
       (\ s a -> s{_gpdvcitrTemplateId = a})
 
--- | The InspectTemplate to create.
+-- | Deprecated. This field has no effect.
+gpdvcitrLocationId :: Lens' GooglePrivacyDlpV2CreateInspectTemplateRequest (Maybe Text)
+gpdvcitrLocationId
+  = lens _gpdvcitrLocationId
+      (\ s a -> s{_gpdvcitrLocationId = a})
+
+-- | Required. The InspectTemplate to create.
 gpdvcitrInspectTemplate :: Lens' GooglePrivacyDlpV2CreateInspectTemplateRequest (Maybe GooglePrivacyDlpV2InspectTemplate)
 gpdvcitrInspectTemplate
   = lens _gpdvcitrInspectTemplate
@@ -2839,7 +3389,8 @@ instance FromJSON
               "GooglePrivacyDlpV2CreateInspectTemplateRequest"
               (\ o ->
                  GooglePrivacyDlpV2CreateInspectTemplateRequest' <$>
-                   (o .:? "templateId") <*> (o .:? "inspectTemplate"))
+                   (o .:? "templateId") <*> (o .:? "locationId") <*>
+                     (o .:? "inspectTemplate"))
 
 instance ToJSON
            GooglePrivacyDlpV2CreateInspectTemplateRequest
@@ -2849,6 +3400,7 @@ instance ToJSON
           = object
               (catMaybes
                  [("templateId" .=) <$> _gpdvcitrTemplateId,
+                  ("locationId" .=) <$> _gpdvcitrLocationId,
                   ("inspectTemplate" .=) <$> _gpdvcitrInspectTemplate])
 
 -- | A (kind, ID\/name) pair used to construct a key path. If either name or
@@ -2860,7 +3412,7 @@ data GooglePrivacyDlpV2PathElement =
   GooglePrivacyDlpV2PathElement'
     { _gpdvpeKind :: !(Maybe Text)
     , _gpdvpeName :: !(Maybe Text)
-    , _gpdvpeId   :: !(Maybe (Textual Int64))
+    , _gpdvpeId :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2976,13 +3528,14 @@ instance ToJSON
                  [("deltaPresenceEstimationHistogram" .=) <$>
                     _gpdvdperDeltaPresenceEstimationHistogram])
 
+-- | Controls what and how to inspect for findings.
 --
 -- /See:/ 'googlePrivacyDlpV2InspectJobConfig' smart constructor.
 data GooglePrivacyDlpV2InspectJobConfig =
   GooglePrivacyDlpV2InspectJobConfig'
-    { _gpdvijcActions             :: !(Maybe [GooglePrivacyDlpV2Action])
-    , _gpdvijcStorageConfig       :: !(Maybe GooglePrivacyDlpV2StorageConfig)
-    , _gpdvijcInspectConfig       :: !(Maybe GooglePrivacyDlpV2InspectConfig)
+    { _gpdvijcActions :: !(Maybe [GooglePrivacyDlpV2Action])
+    , _gpdvijcStorageConfig :: !(Maybe GooglePrivacyDlpV2StorageConfig)
+    , _gpdvijcInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gpdvijcInspectTemplateName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3065,7 +3618,7 @@ instance ToJSON GooglePrivacyDlpV2InspectJobConfig
 -- /See:/ 'googlePrivacyDlpV2StoredType' smart constructor.
 data GooglePrivacyDlpV2StoredType =
   GooglePrivacyDlpV2StoredType'
-    { _gpdvstName       :: !(Maybe Text)
+    { _gpdvstName :: !(Maybe Text)
     , _gpdvstCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3121,8 +3674,8 @@ data GooglePrivacyDlpV2FieldTransformation =
   GooglePrivacyDlpV2FieldTransformation'
     { _gpdvftInfoTypeTransformations :: !(Maybe GooglePrivacyDlpV2InfoTypeTransformations)
     , _gpdvftPrimitiveTransformation :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
-    , _gpdvftCondition               :: !(Maybe GooglePrivacyDlpV2RecordCondition)
-    , _gpdvftFields                  :: !(Maybe [GooglePrivacyDlpV2FieldId])
+    , _gpdvftCondition :: !(Maybe GooglePrivacyDlpV2RecordCondition)
+    , _gpdvftFields :: !(Maybe [GooglePrivacyDlpV2FieldId])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3164,16 +3717,19 @@ gpdvftPrimitiveTransformation
 
 -- | Only apply the transformation if the condition evaluates to true for the
 -- given \`RecordCondition\`. The conditions are allowed to reference
--- fields that are not used in the actual transformation. [optional]
--- Example Use Cases: - Apply a different bucket transformation to an age
--- column if the zip code column for the same record is within a specific
--- range. - Redact a field if the date of birth field is greater than 85.
+-- fields that are not used in the actual transformation. Example Use
+-- Cases: - Apply a different bucket transformation to an age column if the
+-- zip code column for the same record is within a specific range. - Redact
+-- a field if the date of birth field is greater than 85.
 gpdvftCondition :: Lens' GooglePrivacyDlpV2FieldTransformation (Maybe GooglePrivacyDlpV2RecordCondition)
 gpdvftCondition
   = lens _gpdvftCondition
       (\ s a -> s{_gpdvftCondition = a})
 
--- | Input field(s) to apply the transformation to. [required]
+-- | Required. Input field(s) to apply the transformation to. When you have
+-- columns that reference their position within a list, omit the index from
+-- the FieldId. FieldId name matching ignores the index. For example,
+-- instead of \"contact.nums[0].type\", use \"contact.nums.type\".
 gpdvftFields :: Lens' GooglePrivacyDlpV2FieldTransformation [GooglePrivacyDlpV2FieldId]
 gpdvftFields
   = lens _gpdvftFields (\ s a -> s{_gpdvftFields = a})
@@ -3210,9 +3766,9 @@ instance ToJSON GooglePrivacyDlpV2FieldTransformation
 -- /See:/ 'googlePrivacyDlpV2HotwordRule' smart constructor.
 data GooglePrivacyDlpV2HotwordRule =
   GooglePrivacyDlpV2HotwordRule'
-    { _gpdvhrProximity            :: !(Maybe GooglePrivacyDlpV2Proximity)
+    { _gpdvhrProximity :: !(Maybe GooglePrivacyDlpV2Proximity)
     , _gpdvhrLikelihoodAdjustment :: !(Maybe GooglePrivacyDlpV2LikelihoodAdjustment)
-    , _gpdvhrHotwordRegex         :: !(Maybe GooglePrivacyDlpV2Regex)
+    , _gpdvhrHotwordRegex :: !(Maybe GooglePrivacyDlpV2Regex)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3285,9 +3841,10 @@ instance ToJSON GooglePrivacyDlpV2HotwordRule where
 -- /See:/ 'googlePrivacyDlpV2RedactImageRequest' smart constructor.
 data GooglePrivacyDlpV2RedactImageRequest =
   GooglePrivacyDlpV2RedactImageRequest'
-    { _gpdvrirIncludeFindings       :: !(Maybe Bool)
-    , _gpdvrirInspectConfig         :: !(Maybe GooglePrivacyDlpV2InspectConfig)
-    , _gpdvrirByteItem              :: !(Maybe GooglePrivacyDlpV2ByteContentItem)
+    { _gpdvrirIncludeFindings :: !(Maybe Bool)
+    , _gpdvrirInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
+    , _gpdvrirByteItem :: !(Maybe GooglePrivacyDlpV2ByteContentItem)
+    , _gpdvrirLocationId :: !(Maybe Text)
     , _gpdvrirImageRedactionConfigs :: !(Maybe [GooglePrivacyDlpV2ImageRedactionConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3303,6 +3860,8 @@ data GooglePrivacyDlpV2RedactImageRequest =
 --
 -- * 'gpdvrirByteItem'
 --
+-- * 'gpdvrirLocationId'
+--
 -- * 'gpdvrirImageRedactionConfigs'
 googlePrivacyDlpV2RedactImageRequest
     :: GooglePrivacyDlpV2RedactImageRequest
@@ -3311,6 +3870,7 @@ googlePrivacyDlpV2RedactImageRequest =
     { _gpdvrirIncludeFindings = Nothing
     , _gpdvrirInspectConfig = Nothing
     , _gpdvrirByteItem = Nothing
+    , _gpdvrirLocationId = Nothing
     , _gpdvrirImageRedactionConfigs = Nothing
     }
 
@@ -3334,6 +3894,12 @@ gpdvrirByteItem
   = lens _gpdvrirByteItem
       (\ s a -> s{_gpdvrirByteItem = a})
 
+-- | Deprecated. This field has no effect.
+gpdvrirLocationId :: Lens' GooglePrivacyDlpV2RedactImageRequest (Maybe Text)
+gpdvrirLocationId
+  = lens _gpdvrirLocationId
+      (\ s a -> s{_gpdvrirLocationId = a})
+
 -- | The configuration for specifying what content to redact from images.
 gpdvrirImageRedactionConfigs :: Lens' GooglePrivacyDlpV2RedactImageRequest [GooglePrivacyDlpV2ImageRedactionConfig]
 gpdvrirImageRedactionConfigs
@@ -3351,6 +3917,7 @@ instance FromJSON
                  GooglePrivacyDlpV2RedactImageRequest' <$>
                    (o .:? "includeFindings") <*> (o .:? "inspectConfig")
                      <*> (o .:? "byteItem")
+                     <*> (o .:? "locationId")
                      <*> (o .:? "imageRedactionConfigs" .!= mempty))
 
 instance ToJSON GooglePrivacyDlpV2RedactImageRequest
@@ -3361,16 +3928,19 @@ instance ToJSON GooglePrivacyDlpV2RedactImageRequest
                  [("includeFindings" .=) <$> _gpdvrirIncludeFindings,
                   ("inspectConfig" .=) <$> _gpdvrirInspectConfig,
                   ("byteItem" .=) <$> _gpdvrirByteItem,
+                  ("locationId" .=) <$> _gpdvrirLocationId,
                   ("imageRedactionConfigs" .=) <$>
                     _gpdvrirImageRedactionConfigs])
 
+-- | Configuration to control the number of findings returned. Cannot be set
+-- if de-identification is requested.
 --
 -- /See:/ 'googlePrivacyDlpV2FindingLimits' smart constructor.
 data GooglePrivacyDlpV2FindingLimits =
   GooglePrivacyDlpV2FindingLimits'
-    { _gpdvflMaxFindingsPerItem     :: !(Maybe (Textual Int32))
+    { _gpdvflMaxFindingsPerItem :: !(Maybe (Textual Int32))
     , _gpdvflMaxFindingsPerInfoType :: !(Maybe [GooglePrivacyDlpV2InfoTypeLimit])
-    , _gpdvflMaxFindingsPerRequest  :: !(Maybe (Textual Int32))
+    , _gpdvflMaxFindingsPerRequest :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3395,9 +3965,9 @@ googlePrivacyDlpV2FindingLimits =
 
 
 -- | Max number of findings that will be returned for each item scanned. When
--- set within \`InspectDataSourceRequest\`, the maximum returned is 2000
--- regardless if this is set higher. When set within
--- \`InspectContentRequest\`, this field is ignored.
+-- set within \`InspectJobConfig\`, the maximum returned is 2000 regardless
+-- if this is set higher. When set within \`InspectContentRequest\`, this
+-- field is ignored.
 gpdvflMaxFindingsPerItem :: Lens' GooglePrivacyDlpV2FindingLimits (Maybe Int32)
 gpdvflMaxFindingsPerItem
   = lens _gpdvflMaxFindingsPerItem
@@ -3459,9 +4029,9 @@ instance ToJSON GooglePrivacyDlpV2FindingLimits where
 -- /See:/ 'googlePrivacyDlpV2Condition' smart constructor.
 data GooglePrivacyDlpV2Condition =
   GooglePrivacyDlpV2Condition'
-    { _gpdvcField    :: !(Maybe GooglePrivacyDlpV2FieldId)
+    { _gpdvcField :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvcOperator :: !(Maybe GooglePrivacyDlpV2ConditionOperator)
-    , _gpdvcValue    :: !(Maybe GooglePrivacyDlpV2Value)
+    , _gpdvcValue :: !(Maybe GooglePrivacyDlpV2Value)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3482,18 +4052,18 @@ googlePrivacyDlpV2Condition =
     {_gpdvcField = Nothing, _gpdvcOperator = Nothing, _gpdvcValue = Nothing}
 
 
--- | Field within the record this condition is evaluated against. [required]
+-- | Required. Field within the record this condition is evaluated against.
 gpdvcField :: Lens' GooglePrivacyDlpV2Condition (Maybe GooglePrivacyDlpV2FieldId)
 gpdvcField
   = lens _gpdvcField (\ s a -> s{_gpdvcField = a})
 
--- | Operator used to compare the field or infoType to the value. [required]
+-- | Required. Operator used to compare the field or infoType to the value.
 gpdvcOperator :: Lens' GooglePrivacyDlpV2Condition (Maybe GooglePrivacyDlpV2ConditionOperator)
 gpdvcOperator
   = lens _gpdvcOperator
       (\ s a -> s{_gpdvcOperator = a})
 
--- | Value to compare against. [Required, except for \`EXISTS\` tests.]
+-- | Value to compare against. [Mandatory, except for \`EXISTS\` tests.]
 gpdvcValue :: Lens' GooglePrivacyDlpV2Condition (Maybe GooglePrivacyDlpV2Value)
 gpdvcValue
   = lens _gpdvcValue (\ s a -> s{_gpdvcValue = a})
@@ -3521,10 +4091,10 @@ instance ToJSON GooglePrivacyDlpV2Condition where
 -- /See:/ 'googlePrivacyDlpV2TimespanConfig' smart constructor.
 data GooglePrivacyDlpV2TimespanConfig =
   GooglePrivacyDlpV2TimespanConfig'
-    { _gpdvtcTimestampField                       :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvtcStartTime                            :: !(Maybe DateTime')
+    { _gpdvtcTimestampField :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvtcStartTime :: !(Maybe DateTime')
     , _gpdvtcEnableAutoPopulationOfTimespanConfig :: !(Maybe Bool)
-    , _gpdvtcEndTime                              :: !(Maybe DateTime')
+    , _gpdvtcEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3552,18 +4122,25 @@ googlePrivacyDlpV2TimespanConfig =
 
 
 -- | Specification of the field containing the timestamp of scanned items.
--- Used for data sources like Datastore or BigQuery. If not specified for
--- BigQuery, table last modification timestamp is checked against given
--- time span. The valid data types of the timestamp field are: for BigQuery
--- - timestamp, date, datetime; for Datastore - timestamp. Datastore entity
--- will be scanned if the timestamp property does not exist or its value is
--- empty or invalid.
+-- Used for data sources like Datastore and BigQuery. For BigQuery: If this
+-- value is not specified and the table was modified between the given
+-- start and end times, the entire table will be scanned. If this value is
+-- specified, then rows are filtered based on the given start and end
+-- times. Rows with a \`NULL\` value in the provided BigQuery column are
+-- skipped. Valid data types of the provided BigQuery column are:
+-- \`INTEGER\`, \`DATE\`, \`TIMESTAMP\`, and \`DATETIME\`. For Datastore:
+-- If this value is specified, then entities are filtered based on the
+-- given start and end times. If an entity does not contain the provided
+-- timestamp property or contains empty or invalid values, then it is
+-- included. Valid data types of the provided timestamp property are:
+-- \`TIMESTAMP\`.
 gpdvtcTimestampField :: Lens' GooglePrivacyDlpV2TimespanConfig (Maybe GooglePrivacyDlpV2FieldId)
 gpdvtcTimestampField
   = lens _gpdvtcTimestampField
       (\ s a -> s{_gpdvtcTimestampField = a})
 
--- | Exclude files or rows older than this value.
+-- | Exclude files, tables, or rows older than this value. If not set, no
+-- lower time limit is applied.
 gpdvtcStartTime :: Lens' GooglePrivacyDlpV2TimespanConfig (Maybe UTCTime)
 gpdvtcStartTime
   = lens _gpdvtcStartTime
@@ -3580,8 +4157,8 @@ gpdvtcEnableAutoPopulationOfTimespanConfig
       (\ s a ->
          s{_gpdvtcEnableAutoPopulationOfTimespanConfig = a})
 
--- | Exclude files or rows newer than this value. If set to zero, no upper
--- time limit is applied.
+-- | Exclude files, tables, or rows newer than this value. If not set, no
+-- upper time limit is applied.
 gpdvtcEndTime :: Lens' GooglePrivacyDlpV2TimespanConfig (Maybe UTCTime)
 gpdvtcEndTime
   = lens _gpdvtcEndTime
@@ -3614,8 +4191,9 @@ instance ToJSON GooglePrivacyDlpV2TimespanConfig
 -- /See:/ 'googlePrivacyDlpV2CreateDeidentifyTemplateRequest' smart constructor.
 data GooglePrivacyDlpV2CreateDeidentifyTemplateRequest =
   GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
-    { _gpdvcdtrTemplateId         :: !(Maybe Text)
+    { _gpdvcdtrTemplateId :: !(Maybe Text)
     , _gpdvcdtrDeidentifyTemplate :: !(Maybe GooglePrivacyDlpV2DeidentifyTemplate)
+    , _gpdvcdtrLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3627,27 +4205,38 @@ data GooglePrivacyDlpV2CreateDeidentifyTemplateRequest =
 -- * 'gpdvcdtrTemplateId'
 --
 -- * 'gpdvcdtrDeidentifyTemplate'
+--
+-- * 'gpdvcdtrLocationId'
 googlePrivacyDlpV2CreateDeidentifyTemplateRequest
     :: GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
 googlePrivacyDlpV2CreateDeidentifyTemplateRequest =
   GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
-    {_gpdvcdtrTemplateId = Nothing, _gpdvcdtrDeidentifyTemplate = Nothing}
+    { _gpdvcdtrTemplateId = Nothing
+    , _gpdvcdtrDeidentifyTemplate = Nothing
+    , _gpdvcdtrLocationId = Nothing
+    }
 
 
 -- | The template id can contain uppercase and lowercase letters, numbers,
 -- and hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcdtrTemplateId :: Lens' GooglePrivacyDlpV2CreateDeidentifyTemplateRequest (Maybe Text)
 gpdvcdtrTemplateId
   = lens _gpdvcdtrTemplateId
       (\ s a -> s{_gpdvcdtrTemplateId = a})
 
--- | The DeidentifyTemplate to create.
+-- | Required. The DeidentifyTemplate to create.
 gpdvcdtrDeidentifyTemplate :: Lens' GooglePrivacyDlpV2CreateDeidentifyTemplateRequest (Maybe GooglePrivacyDlpV2DeidentifyTemplate)
 gpdvcdtrDeidentifyTemplate
   = lens _gpdvcdtrDeidentifyTemplate
       (\ s a -> s{_gpdvcdtrDeidentifyTemplate = a})
+
+-- | Deprecated. This field has no effect.
+gpdvcdtrLocationId :: Lens' GooglePrivacyDlpV2CreateDeidentifyTemplateRequest (Maybe Text)
+gpdvcdtrLocationId
+  = lens _gpdvcdtrLocationId
+      (\ s a -> s{_gpdvcdtrLocationId = a})
 
 instance FromJSON
            GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
@@ -3658,8 +4247,8 @@ instance FromJSON
               (\ o ->
                  GooglePrivacyDlpV2CreateDeidentifyTemplateRequest'
                    <$>
-                   (o .:? "templateId") <*>
-                     (o .:? "deidentifyTemplate"))
+                   (o .:? "templateId") <*> (o .:? "deidentifyTemplate")
+                     <*> (o .:? "locationId"))
 
 instance ToJSON
            GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
@@ -3670,7 +4259,8 @@ instance ToJSON
               (catMaybes
                  [("templateId" .=) <$> _gpdvcdtrTemplateId,
                   ("deidentifyTemplate" .=) <$>
-                    _gpdvcdtrDeidentifyTemplate])
+                    _gpdvcdtrDeidentifyTemplate,
+                  ("locationId" .=) <$> _gpdvcdtrLocationId])
 
 -- | Use this to have a random data crypto key generated. It will be
 -- discarded after the request finishes.
@@ -3694,7 +4284,7 @@ googlePrivacyDlpV2TransientCryptoKey =
   GooglePrivacyDlpV2TransientCryptoKey' {_gpdvtckName = Nothing}
 
 
--- | Name of the key. [required] This is an arbitrary string used to
+-- | Required. Name of the key. This is an arbitrary string used to
 -- differentiate different keys. A unique key is generated per name: two
 -- separate \`TransientCryptoKey\` protos share the same generated key if
 -- their names are the same. When the data crypto key is generated, this
@@ -3723,9 +4313,9 @@ instance ToJSON GooglePrivacyDlpV2TransientCryptoKey
 -- /See:/ 'googlePrivacyDlpV2InfoTypeDescription' smart constructor.
 data GooglePrivacyDlpV2InfoTypeDescription =
   GooglePrivacyDlpV2InfoTypeDescription'
-    { _gpdvitdName        :: !(Maybe Text)
+    { _gpdvitdName :: !(Maybe Text)
     , _gpdvitdDisplayName :: !(Maybe Text)
-    , _gpdvitdSupportedBy :: !(Maybe [Text])
+    , _gpdvitdSupportedBy :: !(Maybe [GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem])
     , _gpdvitdDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3765,7 +4355,7 @@ gpdvitdDisplayName
       (\ s a -> s{_gpdvitdDisplayName = a})
 
 -- | Which parts of the API supports this InfoType.
-gpdvitdSupportedBy :: Lens' GooglePrivacyDlpV2InfoTypeDescription [Text]
+gpdvitdSupportedBy :: Lens' GooglePrivacyDlpV2InfoTypeDescription [GooglePrivacyDlpV2InfoTypeDescriptionSupportedByItem]
 gpdvitdSupportedBy
   = lens _gpdvitdSupportedBy
       (\ s a -> s{_gpdvitdSupportedBy = a})
@@ -3870,8 +4460,8 @@ instance ToJSON GoogleRpcStatusDetailsItem where
 data GooglePrivacyDlpV2ImageRedactionConfig =
   GooglePrivacyDlpV2ImageRedactionConfig'
     { _gpdvircRedactionColor :: !(Maybe GooglePrivacyDlpV2Color)
-    , _gpdvircInfoType       :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvircRedactAllText  :: !(Maybe Bool)
+    , _gpdvircInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvircRedactAllText :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3941,9 +4531,10 @@ instance ToJSON
 -- | What event needs to occur for a new job to be started.
 --
 -- /See:/ 'googlePrivacyDlpV2Trigger' smart constructor.
-newtype GooglePrivacyDlpV2Trigger =
+data GooglePrivacyDlpV2Trigger =
   GooglePrivacyDlpV2Trigger'
-    { _gpdvtSchedule :: Maybe GooglePrivacyDlpV2Schedule
+    { _gpdvtManual :: !(Maybe GooglePrivacyDlpV2Manual)
+    , _gpdvtSchedule :: !(Maybe GooglePrivacyDlpV2Schedule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3952,12 +4543,19 @@ newtype GooglePrivacyDlpV2Trigger =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gpdvtManual'
+--
 -- * 'gpdvtSchedule'
 googlePrivacyDlpV2Trigger
     :: GooglePrivacyDlpV2Trigger
 googlePrivacyDlpV2Trigger =
-  GooglePrivacyDlpV2Trigger' {_gpdvtSchedule = Nothing}
+  GooglePrivacyDlpV2Trigger' {_gpdvtManual = Nothing, _gpdvtSchedule = Nothing}
 
+
+-- | For use with hybrid jobs. Jobs must be manually created and finished.
+gpdvtManual :: Lens' GooglePrivacyDlpV2Trigger (Maybe GooglePrivacyDlpV2Manual)
+gpdvtManual
+  = lens _gpdvtManual (\ s a -> s{_gpdvtManual = a})
 
 -- | Create a job on a repeating basis based on the elapse of time.
 gpdvtSchedule :: Lens' GooglePrivacyDlpV2Trigger (Maybe GooglePrivacyDlpV2Schedule)
@@ -3969,12 +4567,15 @@ instance FromJSON GooglePrivacyDlpV2Trigger where
         parseJSON
           = withObject "GooglePrivacyDlpV2Trigger"
               (\ o ->
-                 GooglePrivacyDlpV2Trigger' <$> (o .:? "schedule"))
+                 GooglePrivacyDlpV2Trigger' <$>
+                   (o .:? "manual") <*> (o .:? "schedule"))
 
 instance ToJSON GooglePrivacyDlpV2Trigger where
         toJSON GooglePrivacyDlpV2Trigger'{..}
           = object
-              (catMaybes [("schedule" .=) <$> _gpdvtSchedule])
+              (catMaybes
+                 [("manual" .=) <$> _gpdvtManual,
+                  ("schedule" .=) <$> _gpdvtSchedule])
 
 -- | Options defining a file or a set of files within a Google Cloud Storage
 -- bucket.
@@ -3982,12 +4583,12 @@ instance ToJSON GooglePrivacyDlpV2Trigger where
 -- /See:/ 'googlePrivacyDlpV2CloudStorageOptions' smart constructor.
 data GooglePrivacyDlpV2CloudStorageOptions =
   GooglePrivacyDlpV2CloudStorageOptions'
-    { _gpdvcsoFileSet                  :: !(Maybe GooglePrivacyDlpV2FileSet)
-    , _gpdvcsoBytesLimitPerFile        :: !(Maybe (Textual Int64))
-    , _gpdvcsoFileTypes                :: !(Maybe [Text])
+    { _gpdvcsoFileSet :: !(Maybe GooglePrivacyDlpV2FileSet)
+    , _gpdvcsoBytesLimitPerFile :: !(Maybe (Textual Int64))
+    , _gpdvcsoFileTypes :: !(Maybe [GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem])
     , _gpdvcsoBytesLimitPerFilePercent :: !(Maybe (Textual Int32))
-    , _gpdvcsoFilesLimitPercent        :: !(Maybe (Textual Int32))
-    , _gpdvcsoSampleMethod             :: !(Maybe GooglePrivacyDlpV2CloudStorageOptionsSampleMethod)
+    , _gpdvcsoFilesLimitPercent :: !(Maybe (Textual Int32))
+    , _gpdvcsoSampleMethod :: !(Maybe GooglePrivacyDlpV2CloudStorageOptionsSampleMethod)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4029,7 +4630,7 @@ gpdvcsoFileSet
 -- | Max number of bytes to scan from a file. If a scanned file\'s size is
 -- bigger than this value then the rest of the bytes are omitted. Only one
 -- of bytes_limit_per_file and bytes_limit_per_file_percent can be
--- specified.
+-- specified. Cannot be set if de-identification is requested.
 gpdvcsoBytesLimitPerFile :: Lens' GooglePrivacyDlpV2CloudStorageOptions (Maybe Int64)
 gpdvcsoBytesLimitPerFile
   = lens _gpdvcsoBytesLimitPerFile
@@ -4039,7 +4640,11 @@ gpdvcsoBytesLimitPerFile
 -- | List of file type groups to include in the scan. If empty, all files are
 -- scanned and available data format processors are applied. In addition,
 -- the binary content of the selected files is always scanned as well.
-gpdvcsoFileTypes :: Lens' GooglePrivacyDlpV2CloudStorageOptions [Text]
+-- Images are scanned only as binary if the specified region does not
+-- support image inspection and no file_types were specified. Image
+-- inspection is restricted to \'global\', \'us\', \'asia\', and
+-- \'europe\'.
+gpdvcsoFileTypes :: Lens' GooglePrivacyDlpV2CloudStorageOptions [GooglePrivacyDlpV2CloudStorageOptionsFileTypesItem]
 gpdvcsoFileTypes
   = lens _gpdvcsoFileTypes
       (\ s a -> s{_gpdvcsoFileTypes = a})
@@ -4050,6 +4655,7 @@ gpdvcsoFileTypes
 -- number of bytes scanned is rounded down. Must be between 0 and 100,
 -- inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one of
 -- bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+-- Cannot be set if de-identification is requested.
 gpdvcsoBytesLimitPerFilePercent :: Lens' GooglePrivacyDlpV2CloudStorageOptions (Maybe Int32)
 gpdvcsoBytesLimitPerFilePercent
   = lens _gpdvcsoBytesLimitPerFilePercent
@@ -4108,8 +4714,8 @@ instance ToJSON GooglePrivacyDlpV2CloudStorageOptions
 data GooglePrivacyDlpV2DeltaPresenceEstimationConfig =
   GooglePrivacyDlpV2DeltaPresenceEstimationConfig'
     { _gpdvdpecAuxiliaryTables :: !(Maybe [GooglePrivacyDlpV2StatisticalTable])
-    , _gpdvdpecRegionCode      :: !(Maybe Text)
-    , _gpdvdpecQuasiIds        :: !(Maybe [GooglePrivacyDlpV2QuasiId])
+    , _gpdvdpecRegionCode :: !(Maybe Text)
+    , _gpdvdpecQuasiIds :: !(Maybe [GooglePrivacyDlpV2QuasiId])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4143,16 +4749,16 @@ gpdvdpecAuxiliaryTables
       . _Default
       . _Coerce
 
--- | ISO 3166-1 alpha-2 region code to use in the statistical modeling.
--- Required if no column is tagged with a region-specific InfoType (like
--- US_ZIP_5) or a region code.
+-- | ISO 3166-1 alpha-2 region code to use in the statistical modeling. Set
+-- if no column is tagged with a region-specific InfoType (like US_ZIP_5)
+-- or a region code.
 gpdvdpecRegionCode :: Lens' GooglePrivacyDlpV2DeltaPresenceEstimationConfig (Maybe Text)
 gpdvdpecRegionCode
   = lens _gpdvdpecRegionCode
       (\ s a -> s{_gpdvdpecRegionCode = a})
 
--- | Fields considered to be quasi-identifiers. No two fields can have the
--- same tag. [required]
+-- | Required. Fields considered to be quasi-identifiers. No two fields can
+-- have the same tag.
 gpdvdpecQuasiIds :: Lens' GooglePrivacyDlpV2DeltaPresenceEstimationConfig [GooglePrivacyDlpV2QuasiId]
 gpdvdpecQuasiIds
   = lens _gpdvdpecQuasiIds
@@ -4188,7 +4794,8 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2CreateStoredInfoTypeRequest' smart constructor.
 data GooglePrivacyDlpV2CreateStoredInfoTypeRequest =
   GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
-    { _gpdvcsitrConfig           :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
+    { _gpdvcsitrConfig :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
+    , _gpdvcsitrLocationId :: !(Maybe Text)
     , _gpdvcsitrStoredInfoTypeId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4200,23 +4807,34 @@ data GooglePrivacyDlpV2CreateStoredInfoTypeRequest =
 --
 -- * 'gpdvcsitrConfig'
 --
+-- * 'gpdvcsitrLocationId'
+--
 -- * 'gpdvcsitrStoredInfoTypeId'
 googlePrivacyDlpV2CreateStoredInfoTypeRequest
     :: GooglePrivacyDlpV2CreateStoredInfoTypeRequest
 googlePrivacyDlpV2CreateStoredInfoTypeRequest =
   GooglePrivacyDlpV2CreateStoredInfoTypeRequest'
-    {_gpdvcsitrConfig = Nothing, _gpdvcsitrStoredInfoTypeId = Nothing}
+    { _gpdvcsitrConfig = Nothing
+    , _gpdvcsitrLocationId = Nothing
+    , _gpdvcsitrStoredInfoTypeId = Nothing
+    }
 
 
--- | Configuration of the storedInfoType to create.
+-- | Required. Configuration of the storedInfoType to create.
 gpdvcsitrConfig :: Lens' GooglePrivacyDlpV2CreateStoredInfoTypeRequest (Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
 gpdvcsitrConfig
   = lens _gpdvcsitrConfig
       (\ s a -> s{_gpdvcsitrConfig = a})
 
+-- | Deprecated. This field has no effect.
+gpdvcsitrLocationId :: Lens' GooglePrivacyDlpV2CreateStoredInfoTypeRequest (Maybe Text)
+gpdvcsitrLocationId
+  = lens _gpdvcsitrLocationId
+      (\ s a -> s{_gpdvcsitrLocationId = a})
+
 -- | The storedInfoType ID can contain uppercase and lowercase letters,
 -- numbers, and hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcsitrStoredInfoTypeId :: Lens' GooglePrivacyDlpV2CreateStoredInfoTypeRequest (Maybe Text)
 gpdvcsitrStoredInfoTypeId
@@ -4231,7 +4849,8 @@ instance FromJSON
               "GooglePrivacyDlpV2CreateStoredInfoTypeRequest"
               (\ o ->
                  GooglePrivacyDlpV2CreateStoredInfoTypeRequest' <$>
-                   (o .:? "config") <*> (o .:? "storedInfoTypeId"))
+                   (o .:? "config") <*> (o .:? "locationId") <*>
+                     (o .:? "storedInfoTypeId"))
 
 instance ToJSON
            GooglePrivacyDlpV2CreateStoredInfoTypeRequest
@@ -4241,6 +4860,7 @@ instance ToJSON
           = object
               (catMaybes
                  [("config" .=) <$> _gpdvcsitrConfig,
+                  ("locationId" .=) <$> _gpdvcsitrLocationId,
                   ("storedInfoTypeId" .=) <$>
                     _gpdvcsitrStoredInfoTypeId])
 
@@ -4250,7 +4870,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2QuasiIdField' smart constructor.
 data GooglePrivacyDlpV2QuasiIdField =
   GooglePrivacyDlpV2QuasiIdField'
-    { _gpdvqifField     :: !(Maybe GooglePrivacyDlpV2FieldId)
+    { _gpdvqifField :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvqifCustomTag :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4270,10 +4890,12 @@ googlePrivacyDlpV2QuasiIdField =
     {_gpdvqifField = Nothing, _gpdvqifCustomTag = Nothing}
 
 
+-- | Identifies the column.
 gpdvqifField :: Lens' GooglePrivacyDlpV2QuasiIdField (Maybe GooglePrivacyDlpV2FieldId)
 gpdvqifField
   = lens _gpdvqifField (\ s a -> s{_gpdvqifField = a})
 
+-- | A auxiliary field.
 gpdvqifCustomTag :: Lens' GooglePrivacyDlpV2QuasiIdField (Maybe Text)
 gpdvqifCustomTag
   = lens _gpdvqifCustomTag
@@ -4316,6 +4938,7 @@ googlePrivacyDlpV2TimePartConfig =
   GooglePrivacyDlpV2TimePartConfig' {_gpdvtpcPartToExtract = Nothing}
 
 
+-- | The part of the time to keep.
 gpdvtpcPartToExtract :: Lens' GooglePrivacyDlpV2TimePartConfig (Maybe GooglePrivacyDlpV2TimePartConfigPartToExtract)
 gpdvtpcPartToExtract
   = lens _gpdvtpcPartToExtract
@@ -4336,6 +4959,52 @@ instance ToJSON GooglePrivacyDlpV2TimePartConfig
               (catMaybes
                  [("partToExtract" .=) <$> _gpdvtpcPartToExtract])
 
+-- | The labels associated with this \`Finding\`. Label keys must be between
+-- 1 and 63 characters long and must conform to the following regular
+-- expression: \`[a-z]([-a-z0-9]*[a-z0-9])?\`. Label values must be between
+-- 0 and 63 characters long and must conform to the regular expression
+-- \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`. No more than 10 labels can be
+-- associated with a given finding. Examples: * \`\"environment\" :
+-- \"production\"\` * \`\"pipeline\" : \"etl\"\`
+--
+-- /See:/ 'googlePrivacyDlpV2FindingLabels' smart constructor.
+newtype GooglePrivacyDlpV2FindingLabels =
+  GooglePrivacyDlpV2FindingLabels'
+    { _gpdvflAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2FindingLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvflAddtional'
+googlePrivacyDlpV2FindingLabels
+    :: HashMap Text Text -- ^ 'gpdvflAddtional'
+    -> GooglePrivacyDlpV2FindingLabels
+googlePrivacyDlpV2FindingLabels pGpdvflAddtional_ =
+  GooglePrivacyDlpV2FindingLabels'
+    {_gpdvflAddtional = _Coerce # pGpdvflAddtional_}
+
+
+gpdvflAddtional :: Lens' GooglePrivacyDlpV2FindingLabels (HashMap Text Text)
+gpdvflAddtional
+  = lens _gpdvflAddtional
+      (\ s a -> s{_gpdvflAddtional = a})
+      . _Coerce
+
+instance FromJSON GooglePrivacyDlpV2FindingLabels
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2FindingLabels"
+              (\ o ->
+                 GooglePrivacyDlpV2FindingLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON GooglePrivacyDlpV2FindingLabels where
+        toJSON = toJSON . _gpdvflAddtional
+
 -- | A single inspection rule to be applied to infoTypes, specified in
 -- \`InspectionRuleSet\`.
 --
@@ -4343,7 +5012,7 @@ instance ToJSON GooglePrivacyDlpV2TimePartConfig
 data GooglePrivacyDlpV2InspectionRule =
   GooglePrivacyDlpV2InspectionRule'
     { _gpdvirExclusionRule :: !(Maybe GooglePrivacyDlpV2ExclusionRule)
-    , _gpdvirHotwordRule   :: !(Maybe GooglePrivacyDlpV2HotwordRule)
+    , _gpdvirHotwordRule :: !(Maybe GooglePrivacyDlpV2HotwordRule)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4397,14 +5066,14 @@ instance ToJSON GooglePrivacyDlpV2InspectionRule
 -- /See:/ 'googlePrivacyDlpV2CustomInfoType' smart constructor.
 data GooglePrivacyDlpV2CustomInfoType =
   GooglePrivacyDlpV2CustomInfoType'
-    { _gpdvcitRegex          :: !(Maybe GooglePrivacyDlpV2Regex)
-    , _gpdvcitStoredType     :: !(Maybe GooglePrivacyDlpV2StoredType)
-    , _gpdvcitInfoType       :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvcitExclusionType  :: !(Maybe GooglePrivacyDlpV2CustomInfoTypeExclusionType)
-    , _gpdvcitLikelihood     :: !(Maybe GooglePrivacyDlpV2CustomInfoTypeLikelihood)
+    { _gpdvcitRegex :: !(Maybe GooglePrivacyDlpV2Regex)
+    , _gpdvcitStoredType :: !(Maybe GooglePrivacyDlpV2StoredType)
+    , _gpdvcitInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvcitExclusionType :: !(Maybe GooglePrivacyDlpV2CustomInfoTypeExclusionType)
+    , _gpdvcitLikelihood :: !(Maybe GooglePrivacyDlpV2CustomInfoTypeLikelihood)
     , _gpdvcitDetectionRules :: !(Maybe [GooglePrivacyDlpV2DetectionRule])
-    , _gpdvcitDictionary     :: !(Maybe GooglePrivacyDlpV2Dictionary)
-    , _gpdvcitSurrogateType  :: !(Maybe GooglePrivacyDlpV2SurrogateType)
+    , _gpdvcitDictionary :: !(Maybe GooglePrivacyDlpV2Dictionary)
+    , _gpdvcitSurrogateType :: !(Maybe GooglePrivacyDlpV2SurrogateType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4593,13 +5262,13 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2TransformationSummary' smart constructor.
 data GooglePrivacyDlpV2TransformationSummary =
   GooglePrivacyDlpV2TransformationSummary'
-    { _gpdvtsResults              :: !(Maybe [GooglePrivacyDlpV2SummaryResult])
-    , _gpdvtsField                :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvtsInfoType             :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvtsRecordSuppress       :: !(Maybe GooglePrivacyDlpV2RecordSuppression)
-    , _gpdvtsTransformedBytes     :: !(Maybe (Textual Int64))
+    { _gpdvtsResults :: !(Maybe [GooglePrivacyDlpV2SummaryResult])
+    , _gpdvtsField :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvtsInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvtsRecordSuppress :: !(Maybe GooglePrivacyDlpV2RecordSuppression)
+    , _gpdvtsTransformedBytes :: !(Maybe (Textual Int64))
     , _gpdvtsFieldTransformations :: !(Maybe [GooglePrivacyDlpV2FieldTransformation])
-    , _gpdvtsTransformation       :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
+    , _gpdvtsTransformation :: !(Maybe GooglePrivacyDlpV2PrimitiveTransformation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4635,6 +5304,7 @@ googlePrivacyDlpV2TransformationSummary =
     }
 
 
+-- | Collection of all transformations that took place or had an error.
 gpdvtsResults :: Lens' GooglePrivacyDlpV2TransformationSummary [GooglePrivacyDlpV2SummaryResult]
 gpdvtsResults
   = lens _gpdvtsResults
@@ -4718,7 +5388,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2LikelihoodAdjustment' smart constructor.
 data GooglePrivacyDlpV2LikelihoodAdjustment =
   GooglePrivacyDlpV2LikelihoodAdjustment'
-    { _gpdvlaFixedLikelihood    :: !(Maybe GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood)
+    { _gpdvlaFixedLikelihood :: !(Maybe GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihood)
     , _gpdvlaRelativeLikelihood :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4784,7 +5454,7 @@ instance ToJSON
 data GooglePrivacyDlpV2Regex =
   GooglePrivacyDlpV2Regex'
     { _gpdvrGroupIndexes :: !(Maybe [Textual Int32])
-    , _gpdvrPattern      :: !(Maybe Text)
+    , _gpdvrPattern :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4839,7 +5509,7 @@ instance ToJSON GooglePrivacyDlpV2Regex where
 -- /See:/ 'googlePrivacyDlpV2UpdateStoredInfoTypeRequest' smart constructor.
 data GooglePrivacyDlpV2UpdateStoredInfoTypeRequest =
   GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
-    { _gpdvusitrConfig     :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
+    { _gpdvusitrConfig :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
     , _gpdvusitrUpdateMask :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4893,13 +5563,42 @@ instance ToJSON
                  [("config" .=) <$> _gpdvusitrConfig,
                   ("updateMask" .=) <$> _gpdvusitrUpdateMask])
 
+-- | Skips the data without modifying it if the requested transformation
+-- would cause an error. For example, if a \`DateShift\` transformation
+-- were applied an an IP address, this mode would leave the IP address
+-- unchanged in the response.
+--
+-- /See:/ 'googlePrivacyDlpV2LeaveUntransformed' smart constructor.
+data GooglePrivacyDlpV2LeaveUntransformed =
+  GooglePrivacyDlpV2LeaveUntransformed'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2LeaveUntransformed' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2LeaveUntransformed
+    :: GooglePrivacyDlpV2LeaveUntransformed
+googlePrivacyDlpV2LeaveUntransformed = GooglePrivacyDlpV2LeaveUntransformed'
+
+
+instance FromJSON
+           GooglePrivacyDlpV2LeaveUntransformed
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2LeaveUntransformed"
+              (\ o -> pure GooglePrivacyDlpV2LeaveUntransformed')
+
+instance ToJSON GooglePrivacyDlpV2LeaveUntransformed
+         where
+        toJSON = const emptyObject
+
 -- | The set of columns\' values that share the same ldiversity value
 --
 -- /See:/ 'googlePrivacyDlpV2KAnonymityEquivalenceClass' smart constructor.
 data GooglePrivacyDlpV2KAnonymityEquivalenceClass =
   GooglePrivacyDlpV2KAnonymityEquivalenceClass'
     { _gpdvkaecEquivalenceClassSize :: !(Maybe (Textual Int64))
-    , _gpdvkaecQuasiIdsValues       :: !(Maybe [GooglePrivacyDlpV2Value])
+    , _gpdvkaecQuasiIdsValues :: !(Maybe [GooglePrivacyDlpV2Value])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4963,7 +5662,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2UpdateDeidentifyTemplateRequest' smart constructor.
 data GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest =
   GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
-    { _gpdvudtrUpdateMask         :: !(Maybe GFieldMask)
+    { _gpdvudtrUpdateMask :: !(Maybe GFieldMask)
     , _gpdvudtrDeidentifyTemplate :: !(Maybe GooglePrivacyDlpV2DeidentifyTemplate)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5024,7 +5723,7 @@ instance ToJSON
 data GooglePrivacyDlpV2LDiversityConfig =
   GooglePrivacyDlpV2LDiversityConfig'
     { _gpdvldcSensitiveAttribute :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvldcQuasiIds           :: !(Maybe [GooglePrivacyDlpV2FieldId])
+    , _gpdvldcQuasiIds :: !(Maybe [GooglePrivacyDlpV2FieldId])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5113,11 +5812,12 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2DeidentifyContentRequest' smart constructor.
 data GooglePrivacyDlpV2DeidentifyContentRequest =
   GooglePrivacyDlpV2DeidentifyContentRequest'
-    { _gpdvdcrInspectConfig          :: !(Maybe GooglePrivacyDlpV2InspectConfig)
-    , _gpdvdcrDeidentifyConfig       :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
+    { _gpdvdcrInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
+    , _gpdvdcrDeidentifyConfig :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
     , _gpdvdcrDeidentifyTemplateName :: !(Maybe Text)
-    , _gpdvdcrItem                   :: !(Maybe GooglePrivacyDlpV2ContentItem)
-    , _gpdvdcrInspectTemplateName    :: !(Maybe Text)
+    , _gpdvdcrItem :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    , _gpdvdcrLocationId :: !(Maybe Text)
+    , _gpdvdcrInspectTemplateName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5134,6 +5834,8 @@ data GooglePrivacyDlpV2DeidentifyContentRequest =
 --
 -- * 'gpdvdcrItem'
 --
+-- * 'gpdvdcrLocationId'
+--
 -- * 'gpdvdcrInspectTemplateName'
 googlePrivacyDlpV2DeidentifyContentRequest
     :: GooglePrivacyDlpV2DeidentifyContentRequest
@@ -5143,6 +5845,7 @@ googlePrivacyDlpV2DeidentifyContentRequest =
     , _gpdvdcrDeidentifyConfig = Nothing
     , _gpdvdcrDeidentifyTemplateName = Nothing
     , _gpdvdcrItem = Nothing
+    , _gpdvdcrLocationId = Nothing
     , _gpdvdcrInspectTemplateName = Nothing
     }
 
@@ -5162,7 +5865,7 @@ gpdvdcrDeidentifyConfig
   = lens _gpdvdcrDeidentifyConfig
       (\ s a -> s{_gpdvdcrDeidentifyConfig = a})
 
--- | Optional template to use. Any configuration directly specified in
+-- | Template to use. Any configuration directly specified in
 -- deidentify_config will override those set in the template. Singular
 -- fields that are set in this request will replace their corresponding
 -- fields in the template. Repeated fields are appended. Singular
@@ -5177,11 +5880,17 @@ gpdvdcrItem :: Lens' GooglePrivacyDlpV2DeidentifyContentRequest (Maybe GooglePri
 gpdvdcrItem
   = lens _gpdvdcrItem (\ s a -> s{_gpdvdcrItem = a})
 
--- | Optional template to use. Any configuration directly specified in
--- inspect_config will override those set in the template. Singular fields
--- that are set in this request will replace their corresponding fields in
--- the template. Repeated fields are appended. Singular sub-messages and
--- groups are recursively merged.
+-- | Deprecated. This field has no effect.
+gpdvdcrLocationId :: Lens' GooglePrivacyDlpV2DeidentifyContentRequest (Maybe Text)
+gpdvdcrLocationId
+  = lens _gpdvdcrLocationId
+      (\ s a -> s{_gpdvdcrLocationId = a})
+
+-- | Template to use. Any configuration directly specified in inspect_config
+-- will override those set in the template. Singular fields that are set in
+-- this request will replace their corresponding fields in the template.
+-- Repeated fields are appended. Singular sub-messages and groups are
+-- recursively merged.
 gpdvdcrInspectTemplateName :: Lens' GooglePrivacyDlpV2DeidentifyContentRequest (Maybe Text)
 gpdvdcrInspectTemplateName
   = lens _gpdvdcrInspectTemplateName
@@ -5199,6 +5908,7 @@ instance FromJSON
                      (o .:? "deidentifyConfig")
                      <*> (o .:? "deidentifyTemplateName")
                      <*> (o .:? "item")
+                     <*> (o .:? "locationId")
                      <*> (o .:? "inspectTemplateName"))
 
 instance ToJSON
@@ -5213,6 +5923,7 @@ instance ToJSON
                   ("deidentifyTemplateName" .=) <$>
                     _gpdvdcrDeidentifyTemplateName,
                   ("item" .=) <$> _gpdvdcrItem,
+                  ("locationId" .=) <$> _gpdvdcrLocationId,
                   ("inspectTemplateName" .=) <$>
                     _gpdvdcrInspectTemplateName])
 
@@ -5221,9 +5932,9 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2Color' smart constructor.
 data GooglePrivacyDlpV2Color =
   GooglePrivacyDlpV2Color'
-    { _gpdvcRed   :: !(Maybe (Textual Double))
+    { _gpdvcRed :: !(Maybe (Textual Double))
     , _gpdvcGreen :: !(Maybe (Textual Double))
-    , _gpdvcBlue  :: !(Maybe (Textual Double))
+    , _gpdvcBlue :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5283,7 +5994,7 @@ instance ToJSON GooglePrivacyDlpV2Color where
 data GooglePrivacyDlpV2ListDlpJobsResponse =
   GooglePrivacyDlpV2ListDlpJobsResponse'
     { _gpdvldjrNextPageToken :: !(Maybe Text)
-    , _gpdvldjrJobs          :: !(Maybe [GooglePrivacyDlpV2DlpJob])
+    , _gpdvldjrJobs :: !(Maybe [GooglePrivacyDlpV2DlpJob])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5339,7 +6050,7 @@ instance ToJSON GooglePrivacyDlpV2ListDlpJobsResponse
 -- /See:/ 'googlePrivacyDlpV2Proximity' smart constructor.
 data GooglePrivacyDlpV2Proximity =
   GooglePrivacyDlpV2Proximity'
-    { _gpdvpWindowAfter  :: !(Maybe (Textual Int32))
+    { _gpdvpWindowAfter :: !(Maybe (Textual Int32))
     , _gpdvpWindowBefore :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5392,11 +6103,18 @@ instance ToJSON GooglePrivacyDlpV2Proximity where
 -- /See:/ 'googlePrivacyDlpV2Finding' smart constructor.
 data GooglePrivacyDlpV2Finding =
   GooglePrivacyDlpV2Finding'
-    { _gpdvfLocation   :: !(Maybe GooglePrivacyDlpV2Location)
-    , _gpdvfInfoType   :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvfQuoteInfo  :: !(Maybe GooglePrivacyDlpV2QuoteInfo)
+    { _gpdvfTriggerName :: !(Maybe Text)
+    , _gpdvfResourceName :: !(Maybe Text)
+    , _gpdvfLocation :: !(Maybe GooglePrivacyDlpV2Location)
+    , _gpdvfJobName :: !(Maybe Text)
+    , _gpdvfInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvfQuoteInfo :: !(Maybe GooglePrivacyDlpV2QuoteInfo)
+    , _gpdvfName :: !(Maybe Text)
     , _gpdvfLikelihood :: !(Maybe GooglePrivacyDlpV2FindingLikelihood)
-    , _gpdvfQuote      :: !(Maybe Text)
+    , _gpdvfQuote :: !(Maybe Text)
+    , _gpdvfLabels :: !(Maybe GooglePrivacyDlpV2FindingLabels)
+    , _gpdvfFindingId :: !(Maybe Text)
+    , _gpdvfJobCreateTime :: !(Maybe DateTime')
     , _gpdvfCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5406,35 +6124,73 @@ data GooglePrivacyDlpV2Finding =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gpdvfTriggerName'
+--
+-- * 'gpdvfResourceName'
+--
 -- * 'gpdvfLocation'
+--
+-- * 'gpdvfJobName'
 --
 -- * 'gpdvfInfoType'
 --
 -- * 'gpdvfQuoteInfo'
 --
+-- * 'gpdvfName'
+--
 -- * 'gpdvfLikelihood'
 --
 -- * 'gpdvfQuote'
+--
+-- * 'gpdvfLabels'
+--
+-- * 'gpdvfFindingId'
+--
+-- * 'gpdvfJobCreateTime'
 --
 -- * 'gpdvfCreateTime'
 googlePrivacyDlpV2Finding
     :: GooglePrivacyDlpV2Finding
 googlePrivacyDlpV2Finding =
   GooglePrivacyDlpV2Finding'
-    { _gpdvfLocation = Nothing
+    { _gpdvfTriggerName = Nothing
+    , _gpdvfResourceName = Nothing
+    , _gpdvfLocation = Nothing
+    , _gpdvfJobName = Nothing
     , _gpdvfInfoType = Nothing
     , _gpdvfQuoteInfo = Nothing
+    , _gpdvfName = Nothing
     , _gpdvfLikelihood = Nothing
     , _gpdvfQuote = Nothing
+    , _gpdvfLabels = Nothing
+    , _gpdvfFindingId = Nothing
+    , _gpdvfJobCreateTime = Nothing
     , _gpdvfCreateTime = Nothing
     }
 
+
+-- | Job trigger name, if applicable, for this finding.
+gpdvfTriggerName :: Lens' GooglePrivacyDlpV2Finding (Maybe Text)
+gpdvfTriggerName
+  = lens _gpdvfTriggerName
+      (\ s a -> s{_gpdvfTriggerName = a})
+
+-- | The job that stored the finding.
+gpdvfResourceName :: Lens' GooglePrivacyDlpV2Finding (Maybe Text)
+gpdvfResourceName
+  = lens _gpdvfResourceName
+      (\ s a -> s{_gpdvfResourceName = a})
 
 -- | Where the content was found.
 gpdvfLocation :: Lens' GooglePrivacyDlpV2Finding (Maybe GooglePrivacyDlpV2Location)
 gpdvfLocation
   = lens _gpdvfLocation
       (\ s a -> s{_gpdvfLocation = a})
+
+-- | The job that stored the finding.
+gpdvfJobName :: Lens' GooglePrivacyDlpV2Finding (Maybe Text)
+gpdvfJobName
+  = lens _gpdvfJobName (\ s a -> s{_gpdvfJobName = a})
 
 -- | The type of content that might have been found. Provided if
 -- \`excluded_types\` is false.
@@ -5451,6 +6207,13 @@ gpdvfQuoteInfo
   = lens _gpdvfQuoteInfo
       (\ s a -> s{_gpdvfQuoteInfo = a})
 
+-- | Resource name in format
+-- projects\/{project}\/locations\/{location}\/findings\/{finding}
+-- Populated only when viewing persisted findings.
+gpdvfName :: Lens' GooglePrivacyDlpV2Finding (Maybe Text)
+gpdvfName
+  = lens _gpdvfName (\ s a -> s{_gpdvfName = a})
+
 -- | Confidence of how likely it is that the \`info_type\` is correct.
 gpdvfLikelihood :: Lens' GooglePrivacyDlpV2Finding (Maybe GooglePrivacyDlpV2FindingLikelihood)
 gpdvfLikelihood
@@ -5466,6 +6229,30 @@ gpdvfQuote :: Lens' GooglePrivacyDlpV2Finding (Maybe Text)
 gpdvfQuote
   = lens _gpdvfQuote (\ s a -> s{_gpdvfQuote = a})
 
+-- | The labels associated with this \`Finding\`. Label keys must be between
+-- 1 and 63 characters long and must conform to the following regular
+-- expression: \`[a-z]([-a-z0-9]*[a-z0-9])?\`. Label values must be between
+-- 0 and 63 characters long and must conform to the regular expression
+-- \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`. No more than 10 labels can be
+-- associated with a given finding. Examples: * \`\"environment\" :
+-- \"production\"\` * \`\"pipeline\" : \"etl\"\`
+gpdvfLabels :: Lens' GooglePrivacyDlpV2Finding (Maybe GooglePrivacyDlpV2FindingLabels)
+gpdvfLabels
+  = lens _gpdvfLabels (\ s a -> s{_gpdvfLabels = a})
+
+-- | The unique finding id.
+gpdvfFindingId :: Lens' GooglePrivacyDlpV2Finding (Maybe Text)
+gpdvfFindingId
+  = lens _gpdvfFindingId
+      (\ s a -> s{_gpdvfFindingId = a})
+
+-- | Time the job started that produced this finding.
+gpdvfJobCreateTime :: Lens' GooglePrivacyDlpV2Finding (Maybe UTCTime)
+gpdvfJobCreateTime
+  = lens _gpdvfJobCreateTime
+      (\ s a -> s{_gpdvfJobCreateTime = a})
+      . mapping _DateTime
+
 -- | Timestamp when finding was detected.
 gpdvfCreateTime :: Lens' GooglePrivacyDlpV2Finding (Maybe UTCTime)
 gpdvfCreateTime
@@ -5478,21 +6265,35 @@ instance FromJSON GooglePrivacyDlpV2Finding where
           = withObject "GooglePrivacyDlpV2Finding"
               (\ o ->
                  GooglePrivacyDlpV2Finding' <$>
-                   (o .:? "location") <*> (o .:? "infoType") <*>
-                     (o .:? "quoteInfo")
+                   (o .:? "triggerName") <*> (o .:? "resourceName") <*>
+                     (o .:? "location")
+                     <*> (o .:? "jobName")
+                     <*> (o .:? "infoType")
+                     <*> (o .:? "quoteInfo")
+                     <*> (o .:? "name")
                      <*> (o .:? "likelihood")
                      <*> (o .:? "quote")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "findingId")
+                     <*> (o .:? "jobCreateTime")
                      <*> (o .:? "createTime"))
 
 instance ToJSON GooglePrivacyDlpV2Finding where
         toJSON GooglePrivacyDlpV2Finding'{..}
           = object
               (catMaybes
-                 [("location" .=) <$> _gpdvfLocation,
+                 [("triggerName" .=) <$> _gpdvfTriggerName,
+                  ("resourceName" .=) <$> _gpdvfResourceName,
+                  ("location" .=) <$> _gpdvfLocation,
+                  ("jobName" .=) <$> _gpdvfJobName,
                   ("infoType" .=) <$> _gpdvfInfoType,
                   ("quoteInfo" .=) <$> _gpdvfQuoteInfo,
+                  ("name" .=) <$> _gpdvfName,
                   ("likelihood" .=) <$> _gpdvfLikelihood,
                   ("quote" .=) <$> _gpdvfQuote,
+                  ("labels" .=) <$> _gpdvfLabels,
+                  ("findingId" .=) <$> _gpdvfFindingId,
+                  ("jobCreateTime" .=) <$> _gpdvfJobCreateTime,
                   ("createTime" .=) <$> _gpdvfCreateTime])
 
 -- | A collection that informs the user the number of times a particular
@@ -5501,9 +6302,9 @@ instance ToJSON GooglePrivacyDlpV2Finding where
 -- /See:/ 'googlePrivacyDlpV2SummaryResult' smart constructor.
 data GooglePrivacyDlpV2SummaryResult =
   GooglePrivacyDlpV2SummaryResult'
-    { _gpdvsrCount   :: !(Maybe (Textual Int64))
+    { _gpdvsrCount :: !(Maybe (Textual Int64))
     , _gpdvsrDetails :: !(Maybe Text)
-    , _gpdvsrCode    :: !(Maybe GooglePrivacyDlpV2SummaryResultCode)
+    , _gpdvsrCode :: !(Maybe GooglePrivacyDlpV2SummaryResultCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5524,6 +6325,7 @@ googlePrivacyDlpV2SummaryResult =
     {_gpdvsrCount = Nothing, _gpdvsrDetails = Nothing, _gpdvsrCode = Nothing}
 
 
+-- | Number of transformations counted by this result.
 gpdvsrCount :: Lens' GooglePrivacyDlpV2SummaryResult (Maybe Int64)
 gpdvsrCount
   = lens _gpdvsrCount (\ s a -> s{_gpdvsrCount = a}) .
@@ -5536,6 +6338,7 @@ gpdvsrDetails
   = lens _gpdvsrDetails
       (\ s a -> s{_gpdvsrDetails = a})
 
+-- | Outcome of the transformation.
 gpdvsrCode :: Lens' GooglePrivacyDlpV2SummaryResult (Maybe GooglePrivacyDlpV2SummaryResultCode)
 gpdvsrCode
   = lens _gpdvsrCode (\ s a -> s{_gpdvsrCode = a})
@@ -5557,6 +6360,7 @@ instance ToJSON GooglePrivacyDlpV2SummaryResult where
                   ("details" .=) <$> _gpdvsrDetails,
                   ("code" .=) <$> _gpdvsrCode])
 
+-- | Values of the row.
 --
 -- /See:/ 'googlePrivacyDlpV2Row' smart constructor.
 newtype GooglePrivacyDlpV2Row =
@@ -5576,6 +6380,7 @@ googlePrivacyDlpV2Row
 googlePrivacyDlpV2Row = GooglePrivacyDlpV2Row' {_gpdvrValues = Nothing}
 
 
+-- | Individual cells.
 gpdvrValues :: Lens' GooglePrivacyDlpV2Row [GooglePrivacyDlpV2Value]
 gpdvrValues
   = lens _gpdvrValues (\ s a -> s{_gpdvrValues = a}) .
@@ -5592,6 +6397,60 @@ instance FromJSON GooglePrivacyDlpV2Row where
 instance ToJSON GooglePrivacyDlpV2Row where
         toJSON GooglePrivacyDlpV2Row'{..}
           = object (catMaybes [("values" .=) <$> _gpdvrValues])
+
+-- | Job trigger option for hybrid jobs. Jobs must be manually created and
+-- finished.
+--
+-- /See:/ 'googlePrivacyDlpV2Manual' smart constructor.
+data GooglePrivacyDlpV2Manual =
+  GooglePrivacyDlpV2Manual'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2Manual' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2Manual
+    :: GooglePrivacyDlpV2Manual
+googlePrivacyDlpV2Manual = GooglePrivacyDlpV2Manual'
+
+
+instance FromJSON GooglePrivacyDlpV2Manual where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2Manual"
+              (\ o -> pure GooglePrivacyDlpV2Manual')
+
+instance ToJSON GooglePrivacyDlpV2Manual where
+        toJSON = const emptyObject
+
+-- | Enable Stackdriver metric dlp.googleapis.com\/finding_count. This will
+-- publish a metric to stack driver on each infotype requested and how many
+-- findings were found for it. CustomDetectors will be bucketed as
+-- \'Custom\' under the Stackdriver label \'info_type\'.
+--
+-- /See:/ 'googlePrivacyDlpV2PublishToStackdriver' smart constructor.
+data GooglePrivacyDlpV2PublishToStackdriver =
+  GooglePrivacyDlpV2PublishToStackdriver'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2PublishToStackdriver' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2PublishToStackdriver
+    :: GooglePrivacyDlpV2PublishToStackdriver
+googlePrivacyDlpV2PublishToStackdriver = GooglePrivacyDlpV2PublishToStackdriver'
+
+
+instance FromJSON
+           GooglePrivacyDlpV2PublishToStackdriver
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2PublishToStackdriver"
+              (\ o -> pure GooglePrivacyDlpV2PublishToStackdriver')
+
+instance ToJSON
+           GooglePrivacyDlpV2PublishToStackdriver
+         where
+        toJSON = const emptyObject
 
 -- | Replace each matching finding with the name of the info_type.
 --
@@ -5631,8 +6490,8 @@ instance ToJSON
 -- /See:/ 'googleTypeTimeOfDay' smart constructor.
 data GoogleTypeTimeOfDay =
   GoogleTypeTimeOfDay'
-    { _gttodNanos   :: !(Maybe (Textual Int32))
-    , _gttodHours   :: !(Maybe (Textual Int32))
+    { _gttodNanos :: !(Maybe (Textual Int32))
+    , _gttodHours :: !(Maybe (Textual Int32))
     , _gttodMinutes :: !(Maybe (Textual Int32))
     , _gttodSeconds :: !(Maybe (Textual Int32))
     }
@@ -5712,10 +6571,10 @@ instance ToJSON GoogleTypeTimeOfDay where
 -- /See:/ 'googlePrivacyDlpV2ExclusionRule' smart constructor.
 data GooglePrivacyDlpV2ExclusionRule =
   GooglePrivacyDlpV2ExclusionRule'
-    { _gpdverRegex            :: !(Maybe GooglePrivacyDlpV2Regex)
+    { _gpdverRegex :: !(Maybe GooglePrivacyDlpV2Regex)
     , _gpdverExcludeInfoTypes :: !(Maybe GooglePrivacyDlpV2ExcludeInfoTypes)
-    , _gpdverDictionary       :: !(Maybe GooglePrivacyDlpV2Dictionary)
-    , _gpdverMatchingType     :: !(Maybe GooglePrivacyDlpV2ExclusionRuleMatchingType)
+    , _gpdverDictionary :: !(Maybe GooglePrivacyDlpV2Dictionary)
+    , _gpdverMatchingType :: !(Maybe GooglePrivacyDlpV2ExclusionRuleMatchingType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5791,9 +6650,10 @@ instance ToJSON GooglePrivacyDlpV2ExclusionRule where
 -- /See:/ 'googlePrivacyDlpV2CreateDlpJobRequest' smart constructor.
 data GooglePrivacyDlpV2CreateDlpJobRequest =
   GooglePrivacyDlpV2CreateDlpJobRequest'
-    { _gpdvcdjrRiskJob    :: !(Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig)
-    , _gpdvcdjrJobId      :: !(Maybe Text)
+    { _gpdvcdjrRiskJob :: !(Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig)
+    , _gpdvcdjrJobId :: !(Maybe Text)
     , _gpdvcdjrInspectJob :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
+    , _gpdvcdjrLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5807,6 +6667,8 @@ data GooglePrivacyDlpV2CreateDlpJobRequest =
 -- * 'gpdvcdjrJobId'
 --
 -- * 'gpdvcdjrInspectJob'
+--
+-- * 'gpdvcdjrLocationId'
 googlePrivacyDlpV2CreateDlpJobRequest
     :: GooglePrivacyDlpV2CreateDlpJobRequest
 googlePrivacyDlpV2CreateDlpJobRequest =
@@ -5814,9 +6676,12 @@ googlePrivacyDlpV2CreateDlpJobRequest =
     { _gpdvcdjrRiskJob = Nothing
     , _gpdvcdjrJobId = Nothing
     , _gpdvcdjrInspectJob = Nothing
+    , _gpdvcdjrLocationId = Nothing
     }
 
 
+-- | A risk analysis job calculates re-identification risk metrics for a
+-- BigQuery table.
 gpdvcdjrRiskJob :: Lens' GooglePrivacyDlpV2CreateDlpJobRequest (Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig)
 gpdvcdjrRiskJob
   = lens _gpdvcdjrRiskJob
@@ -5824,17 +6689,24 @@ gpdvcdjrRiskJob
 
 -- | The job id can contain uppercase and lowercase letters, numbers, and
 -- hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcdjrJobId :: Lens' GooglePrivacyDlpV2CreateDlpJobRequest (Maybe Text)
 gpdvcdjrJobId
   = lens _gpdvcdjrJobId
       (\ s a -> s{_gpdvcdjrJobId = a})
 
+-- | An inspection job scans a storage repository for InfoTypes.
 gpdvcdjrInspectJob :: Lens' GooglePrivacyDlpV2CreateDlpJobRequest (Maybe GooglePrivacyDlpV2InspectJobConfig)
 gpdvcdjrInspectJob
   = lens _gpdvcdjrInspectJob
       (\ s a -> s{_gpdvcdjrInspectJob = a})
+
+-- | Deprecated. This field has no effect.
+gpdvcdjrLocationId :: Lens' GooglePrivacyDlpV2CreateDlpJobRequest (Maybe Text)
+gpdvcdjrLocationId
+  = lens _gpdvcdjrLocationId
+      (\ s a -> s{_gpdvcdjrLocationId = a})
 
 instance FromJSON
            GooglePrivacyDlpV2CreateDlpJobRequest
@@ -5844,7 +6716,8 @@ instance FromJSON
               (\ o ->
                  GooglePrivacyDlpV2CreateDlpJobRequest' <$>
                    (o .:? "riskJob") <*> (o .:? "jobId") <*>
-                     (o .:? "inspectJob"))
+                     (o .:? "inspectJob")
+                     <*> (o .:? "locationId"))
 
 instance ToJSON GooglePrivacyDlpV2CreateDlpJobRequest
          where
@@ -5853,16 +6726,17 @@ instance ToJSON GooglePrivacyDlpV2CreateDlpJobRequest
               (catMaybes
                  [("riskJob" .=) <$> _gpdvcdjrRiskJob,
                   ("jobId" .=) <$> _gpdvcdjrJobId,
-                  ("inspectJob" .=) <$> _gpdvcdjrInspectJob])
+                  ("inspectJob" .=) <$> _gpdvcdjrInspectJob,
+                  ("locationId" .=) <$> _gpdvcdjrLocationId])
 
 -- | Message for a unique key indicating a record that contains a finding.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordKey' smart constructor.
 data GooglePrivacyDlpV2RecordKey =
   GooglePrivacyDlpV2RecordKey'
-    { _gpdvrkIdValues     :: !(Maybe [Text])
+    { _gpdvrkIdValues :: !(Maybe [Text])
     , _gpdvrkDatastoreKey :: !(Maybe GooglePrivacyDlpV2DatastoreKey)
-    , _gpdvrkBigQueryKey  :: !(Maybe GooglePrivacyDlpV2BigQueryKey)
+    , _gpdvrkBigQueryKey :: !(Maybe GooglePrivacyDlpV2BigQueryKey)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5887,7 +6761,7 @@ googlePrivacyDlpV2RecordKey =
 
 
 -- | Values of identifying columns in the given row. Order of values matches
--- the order of field identifiers specified in the scanning request.
+-- the order of \`identifying_fields\` specified in the scanning request.
 gpdvrkIdValues :: Lens' GooglePrivacyDlpV2RecordKey [Text]
 gpdvrkIdValues
   = lens _gpdvrkIdValues
@@ -5932,10 +6806,10 @@ instance ToJSON GooglePrivacyDlpV2RecordKey where
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationHistogramBucket' smart constructor.
 data GooglePrivacyDlpV2KMapEstimationHistogramBucket =
   GooglePrivacyDlpV2KMapEstimationHistogramBucket'
-    { _gpdvkmehbMaxAnonymity     :: !(Maybe (Textual Int64))
-    , _gpdvkmehbBucketValues     :: !(Maybe [GooglePrivacyDlpV2KMapEstimationQuasiIdValues])
-    , _gpdvkmehbMinAnonymity     :: !(Maybe (Textual Int64))
-    , _gpdvkmehbBucketSize       :: !(Maybe (Textual Int64))
+    { _gpdvkmehbMaxAnonymity :: !(Maybe (Textual Int64))
+    , _gpdvkmehbBucketValues :: !(Maybe [GooglePrivacyDlpV2KMapEstimationQuasiIdValues])
+    , _gpdvkmehbMinAnonymity :: !(Maybe (Textual Int64))
+    , _gpdvkmehbBucketSize :: !(Maybe (Textual Int64))
     , _gpdvkmehbBucketValueCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6031,12 +6905,61 @@ instance ToJSON
                   ("bucketValueCount" .=) <$>
                     _gpdvkmehbBucketValueCount])
 
+-- | Summary statistics of a custom dictionary.
+--
+-- /See:/ 'googlePrivacyDlpV2LargeCustomDictionaryStats' smart constructor.
+newtype GooglePrivacyDlpV2LargeCustomDictionaryStats =
+  GooglePrivacyDlpV2LargeCustomDictionaryStats'
+    { _gpdvlcdsApproxNumPhrases :: Maybe (Textual Int64)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2LargeCustomDictionaryStats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvlcdsApproxNumPhrases'
+googlePrivacyDlpV2LargeCustomDictionaryStats
+    :: GooglePrivacyDlpV2LargeCustomDictionaryStats
+googlePrivacyDlpV2LargeCustomDictionaryStats =
+  GooglePrivacyDlpV2LargeCustomDictionaryStats'
+    {_gpdvlcdsApproxNumPhrases = Nothing}
+
+
+-- | Approximate number of distinct phrases in the dictionary.
+gpdvlcdsApproxNumPhrases :: Lens' GooglePrivacyDlpV2LargeCustomDictionaryStats (Maybe Int64)
+gpdvlcdsApproxNumPhrases
+  = lens _gpdvlcdsApproxNumPhrases
+      (\ s a -> s{_gpdvlcdsApproxNumPhrases = a})
+      . mapping _Coerce
+
+instance FromJSON
+           GooglePrivacyDlpV2LargeCustomDictionaryStats
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2LargeCustomDictionaryStats"
+              (\ o ->
+                 GooglePrivacyDlpV2LargeCustomDictionaryStats' <$>
+                   (o .:? "approxNumPhrases"))
+
+instance ToJSON
+           GooglePrivacyDlpV2LargeCustomDictionaryStats
+         where
+        toJSON
+          GooglePrivacyDlpV2LargeCustomDictionaryStats'{..}
+          = object
+              (catMaybes
+                 [("approxNumPhrases" .=) <$>
+                    _gpdvlcdsApproxNumPhrases])
+
 -- | Response message for ListDeidentifyTemplates.
 --
 -- /See:/ 'googlePrivacyDlpV2ListDeidentifyTemplatesResponse' smart constructor.
 data GooglePrivacyDlpV2ListDeidentifyTemplatesResponse =
   GooglePrivacyDlpV2ListDeidentifyTemplatesResponse'
-    { _gpdvldtrNextPageToken       :: !(Maybe Text)
+    { _gpdvldtrNextPageToken :: !(Maybe Text)
     , _gpdvldtrDeidentifyTemplates :: !(Maybe [GooglePrivacyDlpV2DeidentifyTemplate])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6120,8 +7043,8 @@ googlePrivacyDlpV2KAnonymityConfig =
     {_gpdvkacEntityId = Nothing, _gpdvkacQuasiIds = Nothing}
 
 
--- | Optional message indicating that multiple rows might be associated to a
--- single individual. If the same entity_id is associated to multiple
+-- | Message indicating that multiple rows might be associated to a single
+-- individual. If the same entity_id is associated to multiple
 -- quasi-identifier tuples over distinct rows, we consider the entire
 -- collection of tuples as the composite quasi-identifier. This collection
 -- is a multiset: the order in which the different tuples appear in the
@@ -6167,7 +7090,7 @@ instance ToJSON GooglePrivacyDlpV2KAnonymityConfig
 data GooglePrivacyDlpV2DeidentifyContentResponse =
   GooglePrivacyDlpV2DeidentifyContentResponse'
     { _gOverview :: !(Maybe GooglePrivacyDlpV2TransformationOverview)
-    , _gItem     :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    , _gItem :: !(Maybe GooglePrivacyDlpV2ContentItem)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6222,16 +7145,16 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2JobTrigger' smart constructor.
 data GooglePrivacyDlpV2JobTrigger =
   GooglePrivacyDlpV2JobTrigger'
-    { _gpdvjtStatus      :: !(Maybe GooglePrivacyDlpV2JobTriggerStatus)
-    , _gpdvjtTriggers    :: !(Maybe [GooglePrivacyDlpV2Trigger])
+    { _gpdvjtStatus :: !(Maybe GooglePrivacyDlpV2JobTriggerStatus)
+    , _gpdvjtTriggers :: !(Maybe [GooglePrivacyDlpV2Trigger])
     , _gpdvjtLastRunTime :: !(Maybe DateTime')
-    , _gpdvjtInspectJob  :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
-    , _gpdvjtUpdateTime  :: !(Maybe DateTime')
-    , _gpdvjtName        :: !(Maybe Text)
+    , _gpdvjtInspectJob :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
+    , _gpdvjtUpdateTime :: !(Maybe DateTime')
+    , _gpdvjtName :: !(Maybe Text)
     , _gpdvjtDisplayName :: !(Maybe Text)
-    , _gpdvjtErrors      :: !(Maybe [GooglePrivacyDlpV2Error])
+    , _gpdvjtErrors :: !(Maybe [GooglePrivacyDlpV2Error])
     , _gpdvjtDescription :: !(Maybe Text)
-    , _gpdvjtCreateTime  :: !(Maybe DateTime')
+    , _gpdvjtCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6276,7 +7199,7 @@ googlePrivacyDlpV2JobTrigger =
     }
 
 
--- | A status for this trigger. [required]
+-- | Required. A status for this trigger.
 gpdvjtStatus :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe GooglePrivacyDlpV2JobTriggerStatus)
 gpdvjtStatus
   = lens _gpdvjtStatus (\ s a -> s{_gpdvjtStatus = a})
@@ -6291,19 +7214,20 @@ gpdvjtTriggers
       . _Default
       . _Coerce
 
--- | The timestamp of the last time this trigger executed, output only field.
+-- | Output only. The timestamp of the last time this trigger executed.
 gpdvjtLastRunTime :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe UTCTime)
 gpdvjtLastRunTime
   = lens _gpdvjtLastRunTime
       (\ s a -> s{_gpdvjtLastRunTime = a})
       . mapping _DateTime
 
+-- | For inspect jobs, a snapshot of the configuration.
 gpdvjtInspectJob :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe GooglePrivacyDlpV2InspectJobConfig)
 gpdvjtInspectJob
   = lens _gpdvjtInspectJob
       (\ s a -> s{_gpdvjtInspectJob = a})
 
--- | The last update timestamp of a triggeredJob, output only field.
+-- | Output only. The last update timestamp of a triggeredJob.
 gpdvjtUpdateTime :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe UTCTime)
 gpdvjtUpdateTime
   = lens _gpdvjtUpdateTime
@@ -6312,7 +7236,7 @@ gpdvjtUpdateTime
 
 -- | Unique resource name for the triggeredJob, assigned by the service when
 -- the triggeredJob is created, for example
--- \`projects\/dlp-test-project\/triggeredJobs\/53234423\`.
+-- \`projects\/dlp-test-project\/jobTriggers\/53234423\`.
 gpdvjtName :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe Text)
 gpdvjtName
   = lens _gpdvjtName (\ s a -> s{_gpdvjtName = a})
@@ -6323,10 +7247,10 @@ gpdvjtDisplayName
   = lens _gpdvjtDisplayName
       (\ s a -> s{_gpdvjtDisplayName = a})
 
--- | A stream of errors encountered when the trigger was activated. Repeated
--- errors may result in the JobTrigger automatically being paused. Will
--- return the last 100 errors. Whenever the JobTrigger is modified this
--- list will be cleared. Output only field.
+-- | Output only. A stream of errors encountered when the trigger was
+-- activated. Repeated errors may result in the JobTrigger automatically
+-- being paused. Will return the last 100 errors. Whenever the JobTrigger
+-- is modified this list will be cleared.
 gpdvjtErrors :: Lens' GooglePrivacyDlpV2JobTrigger [GooglePrivacyDlpV2Error]
 gpdvjtErrors
   = lens _gpdvjtErrors (\ s a -> s{_gpdvjtErrors = a})
@@ -6339,7 +7263,7 @@ gpdvjtDescription
   = lens _gpdvjtDescription
       (\ s a -> s{_gpdvjtDescription = a})
 
--- | The creation timestamp of a triggeredJob, output only field.
+-- | Output only. The creation timestamp of a triggeredJob.
 gpdvjtCreateTime :: Lens' GooglePrivacyDlpV2JobTrigger (Maybe UTCTime)
 gpdvjtCreateTime
   = lens _gpdvjtCreateTime
@@ -6381,7 +7305,7 @@ instance ToJSON GooglePrivacyDlpV2JobTrigger where
 -- /See:/ 'googlePrivacyDlpV2ListStoredInfoTypesResponse' smart constructor.
 data GooglePrivacyDlpV2ListStoredInfoTypesResponse =
   GooglePrivacyDlpV2ListStoredInfoTypesResponse'
-    { _gpdvlsitrNextPageToken   :: !(Maybe Text)
+    { _gpdvlsitrNextPageToken :: !(Maybe Text)
     , _gpdvlsitrStoredInfoTypes :: !(Maybe [GooglePrivacyDlpV2StoredInfoType])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6443,10 +7367,10 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2LDiversityEquivalenceClass' smart constructor.
 data GooglePrivacyDlpV2LDiversityEquivalenceClass =
   GooglePrivacyDlpV2LDiversityEquivalenceClass'
-    { _gpdvldecTopSensitiveValues         :: !(Maybe [GooglePrivacyDlpV2ValueFrequency])
-    , _gpdvldecEquivalenceClassSize       :: !(Maybe (Textual Int64))
+    { _gpdvldecTopSensitiveValues :: !(Maybe [GooglePrivacyDlpV2ValueFrequency])
+    , _gpdvldecEquivalenceClassSize :: !(Maybe (Textual Int64))
     , _gpdvldecNumDistinctSensitiveValues :: !(Maybe (Textual Int64))
-    , _gpdvldecQuasiIdsValues             :: !(Maybe [GooglePrivacyDlpV2Value])
+    , _gpdvldecQuasiIdsValues :: !(Maybe [GooglePrivacyDlpV2Value])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6568,7 +7492,8 @@ instance ToJSON
 data GooglePrivacyDlpV2DeidentifyConfig =
   GooglePrivacyDlpV2DeidentifyConfig'
     { _gpdvdcInfoTypeTransformations :: !(Maybe GooglePrivacyDlpV2InfoTypeTransformations)
-    , _gpdvdcRecordTransformations   :: !(Maybe GooglePrivacyDlpV2RecordTransformations)
+    , _gpdvdcTransformationErrorHandling :: !(Maybe GooglePrivacyDlpV2TransformationErrorHandling)
+    , _gpdvdcRecordTransformations :: !(Maybe GooglePrivacyDlpV2RecordTransformations)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6579,12 +7504,15 @@ data GooglePrivacyDlpV2DeidentifyConfig =
 --
 -- * 'gpdvdcInfoTypeTransformations'
 --
+-- * 'gpdvdcTransformationErrorHandling'
+--
 -- * 'gpdvdcRecordTransformations'
 googlePrivacyDlpV2DeidentifyConfig
     :: GooglePrivacyDlpV2DeidentifyConfig
 googlePrivacyDlpV2DeidentifyConfig =
   GooglePrivacyDlpV2DeidentifyConfig'
     { _gpdvdcInfoTypeTransformations = Nothing
+    , _gpdvdcTransformationErrorHandling = Nothing
     , _gpdvdcRecordTransformations = Nothing
     }
 
@@ -6595,6 +7523,13 @@ gpdvdcInfoTypeTransformations :: Lens' GooglePrivacyDlpV2DeidentifyConfig (Maybe
 gpdvdcInfoTypeTransformations
   = lens _gpdvdcInfoTypeTransformations
       (\ s a -> s{_gpdvdcInfoTypeTransformations = a})
+
+-- | Mode for handling transformation errors. If left unspecified, the
+-- default mode is \`TransformationErrorHandling.ThrowError\`.
+gpdvdcTransformationErrorHandling :: Lens' GooglePrivacyDlpV2DeidentifyConfig (Maybe GooglePrivacyDlpV2TransformationErrorHandling)
+gpdvdcTransformationErrorHandling
+  = lens _gpdvdcTransformationErrorHandling
+      (\ s a -> s{_gpdvdcTransformationErrorHandling = a})
 
 -- | Treat the dataset as structured. Transformations can be applied to
 -- specific locations within structured datasets, such as transforming a
@@ -6611,7 +7546,8 @@ instance FromJSON GooglePrivacyDlpV2DeidentifyConfig
               (\ o ->
                  GooglePrivacyDlpV2DeidentifyConfig' <$>
                    (o .:? "infoTypeTransformations") <*>
-                     (o .:? "recordTransformations"))
+                     (o .:? "transformationErrorHandling")
+                     <*> (o .:? "recordTransformations"))
 
 instance ToJSON GooglePrivacyDlpV2DeidentifyConfig
          where
@@ -6620,6 +7556,8 @@ instance ToJSON GooglePrivacyDlpV2DeidentifyConfig
               (catMaybes
                  [("infoTypeTransformations" .=) <$>
                     _gpdvdcInfoTypeTransformations,
+                  ("transformationErrorHandling" .=) <$>
+                    _gpdvdcTransformationErrorHandling,
                   ("recordTransformations" .=) <$>
                     _gpdvdcRecordTransformations])
 
@@ -6633,9 +7571,9 @@ instance ToJSON GooglePrivacyDlpV2DeidentifyConfig
 -- /See:/ 'googlePrivacyDlpV2CharacterMaskConfig' smart constructor.
 data GooglePrivacyDlpV2CharacterMaskConfig =
   GooglePrivacyDlpV2CharacterMaskConfig'
-    { _gpdvcmcNumberToMask       :: !(Maybe (Textual Int32))
-    , _gpdvcmcMaskingCharacter   :: !(Maybe Text)
-    , _gpdvcmcReverseOrder       :: !(Maybe Bool)
+    { _gpdvcmcNumberToMask :: !(Maybe (Textual Int32))
+    , _gpdvcmcMaskingCharacter :: !(Maybe Text)
+    , _gpdvcmcReverseOrder :: !(Maybe Bool)
     , _gpdvcmcCharactersToIgnore :: !(Maybe [GooglePrivacyDlpV2CharsToIgnore])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -6671,28 +7609,31 @@ gpdvcmcNumberToMask
       (\ s a -> s{_gpdvcmcNumberToMask = a})
       . mapping _Coerce
 
--- | Character to mask the sensitive values—for example, \"*\" for an
--- alphabetic string such as name, or \"0\" for a numeric string such as
--- ZIP code or credit card number. String must have length 1. If not
--- supplied, we will default to \"*\" for strings, 0 for digits.
+-- | Character to use to mask the sensitive values—for example, \`*\` for an
+-- alphabetic string such as a name, or \`0\` for a numeric string such as
+-- ZIP code or credit card number. This string must have a length of 1. If
+-- not supplied, this value defaults to \`*\` for strings, and \`0\` for
+-- digits.
 gpdvcmcMaskingCharacter :: Lens' GooglePrivacyDlpV2CharacterMaskConfig (Maybe Text)
 gpdvcmcMaskingCharacter
   = lens _gpdvcmcMaskingCharacter
       (\ s a -> s{_gpdvcmcMaskingCharacter = a})
 
 -- | Mask characters in reverse order. For example, if \`masking_character\`
--- is \'0\', number_to_mask is 14, and \`reverse_order\` is false, then
--- 1234-5678-9012-3456 -> 00000000000000-3456 If \`masking_character\` is
--- \'*\', \`number_to_mask\` is 3, and \`reverse_order\` is true, then
--- 12345 -> 12***
+-- is \`0\`, \`number_to_mask\` is \`14\`, and \`reverse_order\` is
+-- \`false\`, then the input string \`1234-5678-9012-3456\` is masked as
+-- \`00000000000000-3456\`. If \`masking_character\` is \`*\`,
+-- \`number_to_mask\` is \`3\`, and \`reverse_order\` is \`true\`, then the
+-- string \`12345\` is masked as \`12***\`.
 gpdvcmcReverseOrder :: Lens' GooglePrivacyDlpV2CharacterMaskConfig (Maybe Bool)
 gpdvcmcReverseOrder
   = lens _gpdvcmcReverseOrder
       (\ s a -> s{_gpdvcmcReverseOrder = a})
 
--- | When masking a string, items in this list will be skipped when
--- replacing. For example, if your string is 555-555-5555 and you ask us to
--- skip \`-\` and mask 5 chars with * we would produce ***-*55-5555.
+-- | When masking a string, items in this list will be skipped when replacing
+-- characters. For example, if the input string is \`555-555-5555\` and you
+-- instruct Cloud DLP to skip \`-\` and mask 5 characters with \`*\`, Cloud
+-- DLP returns \`***-**5-5555\`.
 gpdvcmcCharactersToIgnore :: Lens' GooglePrivacyDlpV2CharacterMaskConfig [GooglePrivacyDlpV2CharsToIgnore]
 gpdvcmcCharactersToIgnore
   = lens _gpdvcmcCharactersToIgnore
@@ -6728,7 +7669,7 @@ instance ToJSON GooglePrivacyDlpV2CharacterMaskConfig
 data GooglePrivacyDlpV2DatastoreOptions =
   GooglePrivacyDlpV2DatastoreOptions'
     { _gpdvdoPartitionId :: !(Maybe GooglePrivacyDlpV2PartitionId)
-    , _gpdvdoKind        :: !(Maybe GooglePrivacyDlpV2KindExpression)
+    , _gpdvdoKind :: !(Maybe GooglePrivacyDlpV2KindExpression)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6833,9 +7774,9 @@ instance ToJSON GooglePrivacyDlpV2ValueFrequency
 data GooglePrivacyDlpV2BoundingBox =
   GooglePrivacyDlpV2BoundingBox'
     { _gpdvbbHeight :: !(Maybe (Textual Int32))
-    , _gpdvbbLeft   :: !(Maybe (Textual Int32))
-    , _gpdvbbWidth  :: !(Maybe (Textual Int32))
-    , _gpdvbbTop    :: !(Maybe (Textual Int32))
+    , _gpdvbbLeft :: !(Maybe (Textual Int32))
+    , _gpdvbbWidth :: !(Maybe (Textual Int32))
+    , _gpdvbbTop :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6913,7 +7854,7 @@ instance ToJSON GooglePrivacyDlpV2BoundingBox where
 data GooglePrivacyDlpV2PartitionId =
   GooglePrivacyDlpV2PartitionId'
     { _gpdvpiNamespaceId :: !(Maybe Text)
-    , _gpdvpiProjectId   :: !(Maybe Text)
+    , _gpdvpiProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -6981,6 +7922,7 @@ googlePrivacyDlpV2SaveFindings =
   GooglePrivacyDlpV2SaveFindings' {_gpdvsfOutputConfig = Nothing}
 
 
+-- | Location to store findings outside of DLP.
 gpdvsfOutputConfig :: Lens' GooglePrivacyDlpV2SaveFindings (Maybe GooglePrivacyDlpV2OutputStorageConfig)
 gpdvsfOutputConfig
   = lens _gpdvsfOutputConfig
@@ -7006,9 +7948,10 @@ instance ToJSON GooglePrivacyDlpV2SaveFindings where
 -- /See:/ 'googlePrivacyDlpV2StoredInfoTypeVersion' smart constructor.
 data GooglePrivacyDlpV2StoredInfoTypeVersion =
   GooglePrivacyDlpV2StoredInfoTypeVersion'
-    { _gpdvsitvState      :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeVersionState)
-    , _gpdvsitvConfig     :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
-    , _gpdvsitvErrors     :: !(Maybe [GooglePrivacyDlpV2Error])
+    { _gpdvsitvState :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeVersionState)
+    , _gpdvsitvConfig :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeConfig)
+    , _gpdvsitvStats :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeStats)
+    , _gpdvsitvErrors :: !(Maybe [GooglePrivacyDlpV2Error])
     , _gpdvsitvCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7022,6 +7965,8 @@ data GooglePrivacyDlpV2StoredInfoTypeVersion =
 --
 -- * 'gpdvsitvConfig'
 --
+-- * 'gpdvsitvStats'
+--
 -- * 'gpdvsitvErrors'
 --
 -- * 'gpdvsitvCreateTime'
@@ -7031,6 +7976,7 @@ googlePrivacyDlpV2StoredInfoTypeVersion =
   GooglePrivacyDlpV2StoredInfoTypeVersion'
     { _gpdvsitvState = Nothing
     , _gpdvsitvConfig = Nothing
+    , _gpdvsitvStats = Nothing
     , _gpdvsitvErrors = Nothing
     , _gpdvsitvCreateTime = Nothing
     }
@@ -7049,19 +7995,22 @@ gpdvsitvConfig
   = lens _gpdvsitvConfig
       (\ s a -> s{_gpdvsitvConfig = a})
 
+-- | Statistics about this storedInfoType version.
+gpdvsitvStats :: Lens' GooglePrivacyDlpV2StoredInfoTypeVersion (Maybe GooglePrivacyDlpV2StoredInfoTypeStats)
+gpdvsitvStats
+  = lens _gpdvsitvStats
+      (\ s a -> s{_gpdvsitvStats = a})
+
 -- | Errors that occurred when creating this storedInfoType version, or
 -- anomalies detected in the storedInfoType data that render it unusable.
 -- Only the five most recent errors will be displayed, with the most recent
--- error appearing first.
---
--- For example, some of the data for stored custom dictionaries is put in
--- the user\'s Google Cloud Storage bucket, and if this data is modified or
--- deleted by the user or another system, the dictionary becomes invalid.
---
--- If any errors occur, fix the problem indicated by the error message and
--- use the UpdateStoredInfoType API method to create another version of the
--- storedInfoType to continue using it, reusing the same \`config\` if it
--- was not the source of the error.
+-- error appearing first. For example, some of the data for stored custom
+-- dictionaries is put in the user\'s Google Cloud Storage bucket, and if
+-- this data is modified or deleted by the user or another system, the
+-- dictionary becomes invalid. If any errors occur, fix the problem
+-- indicated by the error message and use the UpdateStoredInfoType API
+-- method to create another version of the storedInfoType to continue using
+-- it, reusing the same \`config\` if it was not the source of the error.
 gpdvsitvErrors :: Lens' GooglePrivacyDlpV2StoredInfoTypeVersion [GooglePrivacyDlpV2Error]
 gpdvsitvErrors
   = lens _gpdvsitvErrors
@@ -7086,7 +8035,8 @@ instance FromJSON
               (\ o ->
                  GooglePrivacyDlpV2StoredInfoTypeVersion' <$>
                    (o .:? "state") <*> (o .:? "config") <*>
-                     (o .:? "errors" .!= mempty)
+                     (o .:? "stats")
+                     <*> (o .:? "errors" .!= mempty)
                      <*> (o .:? "createTime"))
 
 instance ToJSON
@@ -7097,6 +8047,7 @@ instance ToJSON
               (catMaybes
                  [("state" .=) <$> _gpdvsitvState,
                   ("config" .=) <$> _gpdvsitvConfig,
+                  ("stats" .=) <$> _gpdvsitvStats,
                   ("errors" .=) <$> _gpdvsitvErrors,
                   ("createTime" .=) <$> _gpdvsitvCreateTime])
 
@@ -7146,17 +8097,19 @@ instance ToJSON
           = object
               (catMaybes [("infoTypes" .=) <$> _gpdvlitrInfoTypes])
 
--- | Findings container location data.
+-- | Precise location of the finding within a document, record, image, or
+-- metadata container.
 --
 -- /See:/ 'googlePrivacyDlpV2ContentLocation' smart constructor.
 data GooglePrivacyDlpV2ContentLocation =
   GooglePrivacyDlpV2ContentLocation'
-    { _gpdvclImageLocation      :: !(Maybe GooglePrivacyDlpV2ImageLocation)
-    , _gpdvclContainerName      :: !(Maybe Text)
+    { _gpdvclImageLocation :: !(Maybe GooglePrivacyDlpV2ImageLocation)
+    , _gpdvclContainerName :: !(Maybe Text)
     , _gpdvclContainerTimestamp :: !(Maybe DateTime')
-    , _gpdvclDocumentLocation   :: !(Maybe GooglePrivacyDlpV2DocumentLocation)
-    , _gpdvclContainerVersion   :: !(Maybe Text)
-    , _gpdvclRecordLocation     :: !(Maybe GooglePrivacyDlpV2RecordLocation)
+    , _gpdvclDocumentLocation :: !(Maybe GooglePrivacyDlpV2DocumentLocation)
+    , _gpdvclContainerVersion :: !(Maybe Text)
+    , _gpdvclRecordLocation :: !(Maybe GooglePrivacyDlpV2RecordLocation)
+    , _gpdvclMetadataLocation :: !(Maybe GooglePrivacyDlpV2MetadataLocation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7176,6 +8129,8 @@ data GooglePrivacyDlpV2ContentLocation =
 -- * 'gpdvclContainerVersion'
 --
 -- * 'gpdvclRecordLocation'
+--
+-- * 'gpdvclMetadataLocation'
 googlePrivacyDlpV2ContentLocation
     :: GooglePrivacyDlpV2ContentLocation
 googlePrivacyDlpV2ContentLocation =
@@ -7186,6 +8141,7 @@ googlePrivacyDlpV2ContentLocation =
     , _gpdvclDocumentLocation = Nothing
     , _gpdvclContainerVersion = Nothing
     , _gpdvclRecordLocation = Nothing
+    , _gpdvclMetadataLocation = Nothing
     }
 
 
@@ -7197,10 +8153,11 @@ gpdvclImageLocation
 
 -- | Name of the container where the finding is located. The top level name
 -- is the source file name or table name. Names of some common storage
--- containers are formatted as follows: * BigQuery tables: \`:.\` * Cloud
--- Storage files: \`gs:\/\/\/\` * Datastore namespace: Nested names could
--- be absent if the embedded object has no string identifier (for an
--- example an image contained within a document).
+-- containers are formatted as follows: * BigQuery tables:
+-- \`{project_id}:{dataset_id}.{table_id}\` * Cloud Storage files:
+-- \`gs:\/\/{bucket}\/{path}\` * Datastore namespace: {namespace} Nested
+-- names could be absent if the embedded object has no string identifier
+-- (for an example an image contained within a document).
 gpdvclContainerName :: Lens' GooglePrivacyDlpV2ContentLocation (Maybe Text)
 gpdvclContainerName
   = lens _gpdvclContainerName
@@ -7235,6 +8192,12 @@ gpdvclRecordLocation
   = lens _gpdvclRecordLocation
       (\ s a -> s{_gpdvclRecordLocation = a})
 
+-- | Location within the metadata for inspected content.
+gpdvclMetadataLocation :: Lens' GooglePrivacyDlpV2ContentLocation (Maybe GooglePrivacyDlpV2MetadataLocation)
+gpdvclMetadataLocation
+  = lens _gpdvclMetadataLocation
+      (\ s a -> s{_gpdvclMetadataLocation = a})
+
 instance FromJSON GooglePrivacyDlpV2ContentLocation
          where
         parseJSON
@@ -7245,7 +8208,8 @@ instance FromJSON GooglePrivacyDlpV2ContentLocation
                      <*> (o .:? "containerTimestamp")
                      <*> (o .:? "documentLocation")
                      <*> (o .:? "containerVersion")
-                     <*> (o .:? "recordLocation"))
+                     <*> (o .:? "recordLocation")
+                     <*> (o .:? "metadataLocation"))
 
 instance ToJSON GooglePrivacyDlpV2ContentLocation
          where
@@ -7258,7 +8222,8 @@ instance ToJSON GooglePrivacyDlpV2ContentLocation
                     _gpdvclContainerTimestamp,
                   ("documentLocation" .=) <$> _gpdvclDocumentLocation,
                   ("containerVersion" .=) <$> _gpdvclContainerVersion,
-                  ("recordLocation" .=) <$> _gpdvclRecordLocation])
+                  ("recordLocation" .=) <$> _gpdvclRecordLocation,
+                  ("metadataLocation" .=) <$> _gpdvclMetadataLocation])
 
 -- | An auxiliary table contains statistical information on the relative
 -- frequency of different quasi-identifiers values. It has one or several
@@ -7272,8 +8237,8 @@ instance ToJSON GooglePrivacyDlpV2ContentLocation
 data GooglePrivacyDlpV2AuxiliaryTable =
   GooglePrivacyDlpV2AuxiliaryTable'
     { _gpdvatRelativeFrequency :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvatTable             :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    , _gpdvatQuasiIds          :: !(Maybe [GooglePrivacyDlpV2QuasiIdField])
+    , _gpdvatTable :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
+    , _gpdvatQuasiIds :: !(Maybe [GooglePrivacyDlpV2QuasiIdField])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7297,20 +8262,19 @@ googlePrivacyDlpV2AuxiliaryTable =
     }
 
 
--- | The relative frequency column must contain a floating-point number
--- between 0 and 1 (inclusive). Null values are assumed to be zero.
--- [required]
+-- | Required. The relative frequency column must contain a floating-point
+-- number between 0 and 1 (inclusive). Null values are assumed to be zero.
 gpdvatRelativeFrequency :: Lens' GooglePrivacyDlpV2AuxiliaryTable (Maybe GooglePrivacyDlpV2FieldId)
 gpdvatRelativeFrequency
   = lens _gpdvatRelativeFrequency
       (\ s a -> s{_gpdvatRelativeFrequency = a})
 
--- | Auxiliary table location. [required]
+-- | Required. Auxiliary table location.
 gpdvatTable :: Lens' GooglePrivacyDlpV2AuxiliaryTable (Maybe GooglePrivacyDlpV2BigQueryTable)
 gpdvatTable
   = lens _gpdvatTable (\ s a -> s{_gpdvatTable = a})
 
--- | Quasi-identifier columns. [required]
+-- | Required. Quasi-identifier columns.
 gpdvatQuasiIds :: Lens' GooglePrivacyDlpV2AuxiliaryTable [GooglePrivacyDlpV2QuasiIdField]
 gpdvatQuasiIds
   = lens _gpdvatQuasiIds
@@ -7347,10 +8311,10 @@ instance ToJSON GooglePrivacyDlpV2AuxiliaryTable
 -- /See:/ 'googlePrivacyDlpV2DeltaPresenceEstimationHistogramBucket' smart constructor.
 data GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket =
   GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket'
-    { _gpdvdpehbBucketValues     :: !(Maybe [GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues])
-    , _gpdvdpehbMaxProbability   :: !(Maybe (Textual Double))
-    , _gpdvdpehbMinProbability   :: !(Maybe (Textual Double))
-    , _gpdvdpehbBucketSize       :: !(Maybe (Textual Int64))
+    { _gpdvdpehbBucketValues :: !(Maybe [GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues])
+    , _gpdvdpehbMaxProbability :: !(Maybe (Textual Double))
+    , _gpdvdpehbMinProbability :: !(Maybe (Textual Double))
+    , _gpdvdpehbBucketSize :: !(Maybe (Textual Int64))
     , _gpdvdpehbBucketValueCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7452,7 +8416,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2FileSet' smart constructor.
 data GooglePrivacyDlpV2FileSet =
   GooglePrivacyDlpV2FileSet'
-    { _gpdvfsURL          :: !(Maybe Text)
+    { _gpdvfsURL :: !(Maybe Text)
     , _gpdvfsRegexFileSet :: !(Maybe GooglePrivacyDlpV2CloudStorageRegexFileSet)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7505,12 +8469,105 @@ instance ToJSON GooglePrivacyDlpV2FileSet where
                  [("url" .=) <$> _gpdvfsURL,
                   ("regexFileSet" .=) <$> _gpdvfsRegexFileSet])
 
+-- | Configuration to control jobs where the content being inspected is
+-- outside of Google Cloud Platform.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridOptions' smart constructor.
+data GooglePrivacyDlpV2HybridOptions =
+  GooglePrivacyDlpV2HybridOptions'
+    { _gpdvhoTableOptions :: !(Maybe GooglePrivacyDlpV2TableOptions)
+    , _gpdvhoLabels :: !(Maybe GooglePrivacyDlpV2HybridOptionsLabels)
+    , _gpdvhoRequiredFindingLabelKeys :: !(Maybe [Text])
+    , _gpdvhoDescription :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhoTableOptions'
+--
+-- * 'gpdvhoLabels'
+--
+-- * 'gpdvhoRequiredFindingLabelKeys'
+--
+-- * 'gpdvhoDescription'
+googlePrivacyDlpV2HybridOptions
+    :: GooglePrivacyDlpV2HybridOptions
+googlePrivacyDlpV2HybridOptions =
+  GooglePrivacyDlpV2HybridOptions'
+    { _gpdvhoTableOptions = Nothing
+    , _gpdvhoLabels = Nothing
+    , _gpdvhoRequiredFindingLabelKeys = Nothing
+    , _gpdvhoDescription = Nothing
+    }
+
+
+-- | If the container is a table, additional information to make findings
+-- meaningful such as the columns that are primary keys.
+gpdvhoTableOptions :: Lens' GooglePrivacyDlpV2HybridOptions (Maybe GooglePrivacyDlpV2TableOptions)
+gpdvhoTableOptions
+  = lens _gpdvhoTableOptions
+      (\ s a -> s{_gpdvhoTableOptions = a})
+
+-- | To organize findings, these labels will be added to each finding. Label
+-- keys must be between 1 and 63 characters long and must conform to the
+-- following regular expression: \`[a-z]([-a-z0-9]*[a-z0-9])?\`. Label
+-- values must be between 0 and 63 characters long and must conform to the
+-- regular expression \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`. No more than 10
+-- labels can be associated with a given finding. Examples: *
+-- \`\"environment\" : \"production\"\` * \`\"pipeline\" : \"etl\"\`
+gpdvhoLabels :: Lens' GooglePrivacyDlpV2HybridOptions (Maybe GooglePrivacyDlpV2HybridOptionsLabels)
+gpdvhoLabels
+  = lens _gpdvhoLabels (\ s a -> s{_gpdvhoLabels = a})
+
+-- | These are labels that each inspection request must include within their
+-- \'finding_labels\' map. Request may contain others, but any missing one
+-- of these will be rejected. Label keys must be between 1 and 63
+-- characters long and must conform to the following regular expression:
+-- \`[a-z]([-a-z0-9]*[a-z0-9])?\`. No more than 10 keys can be required.
+gpdvhoRequiredFindingLabelKeys :: Lens' GooglePrivacyDlpV2HybridOptions [Text]
+gpdvhoRequiredFindingLabelKeys
+  = lens _gpdvhoRequiredFindingLabelKeys
+      (\ s a -> s{_gpdvhoRequiredFindingLabelKeys = a})
+      . _Default
+      . _Coerce
+
+-- | A short description of where the data is coming from. Will be stored
+-- once in the job. 256 max length.
+gpdvhoDescription :: Lens' GooglePrivacyDlpV2HybridOptions (Maybe Text)
+gpdvhoDescription
+  = lens _gpdvhoDescription
+      (\ s a -> s{_gpdvhoDescription = a})
+
+instance FromJSON GooglePrivacyDlpV2HybridOptions
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2HybridOptions"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridOptions' <$>
+                   (o .:? "tableOptions") <*> (o .:? "labels") <*>
+                     (o .:? "requiredFindingLabelKeys" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON GooglePrivacyDlpV2HybridOptions where
+        toJSON GooglePrivacyDlpV2HybridOptions'{..}
+          = object
+              (catMaybes
+                 [("tableOptions" .=) <$> _gpdvhoTableOptions,
+                  ("labels" .=) <$> _gpdvhoLabels,
+                  ("requiredFindingLabelKeys" .=) <$>
+                    _gpdvhoRequiredFindingLabelKeys,
+                  ("description" .=) <$> _gpdvhoDescription])
+
 -- | Response message for ListInspectTemplates.
 --
 -- /See:/ 'googlePrivacyDlpV2ListInspectTemplatesResponse' smart constructor.
 data GooglePrivacyDlpV2ListInspectTemplatesResponse =
   GooglePrivacyDlpV2ListInspectTemplatesResponse'
-    { _gpdvlitrNextPageToken    :: !(Maybe Text)
+    { _gpdvlitrNextPageToken :: !(Maybe Text)
     , _gpdvlitrInspectTemplates :: !(Maybe [GooglePrivacyDlpV2InspectTemplate])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7666,13 +8723,60 @@ instance ToJSON GooglePrivacyDlpV2BigQueryField where
                  [("field" .=) <$> _gpdvbqfField,
                   ("table" .=) <$> _gpdvbqfTable])
 
+-- | Request to search for potentially sensitive info in a custom location.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridInspectJobTriggerRequest' smart constructor.
+newtype GooglePrivacyDlpV2HybridInspectJobTriggerRequest =
+  GooglePrivacyDlpV2HybridInspectJobTriggerRequest'
+    { _gpdvhijtrHybridItem :: Maybe GooglePrivacyDlpV2HybridContentItem
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridInspectJobTriggerRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhijtrHybridItem'
+googlePrivacyDlpV2HybridInspectJobTriggerRequest
+    :: GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+googlePrivacyDlpV2HybridInspectJobTriggerRequest =
+  GooglePrivacyDlpV2HybridInspectJobTriggerRequest'
+    {_gpdvhijtrHybridItem = Nothing}
+
+
+-- | The item to inspect.
+gpdvhijtrHybridItem :: Lens' GooglePrivacyDlpV2HybridInspectJobTriggerRequest (Maybe GooglePrivacyDlpV2HybridContentItem)
+gpdvhijtrHybridItem
+  = lens _gpdvhijtrHybridItem
+      (\ s a -> s{_gpdvhijtrHybridItem = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2HybridInspectJobTriggerRequest"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridInspectJobTriggerRequest' <$>
+                   (o .:? "hybridItem"))
+
+instance ToJSON
+           GooglePrivacyDlpV2HybridInspectJobTriggerRequest
+         where
+        toJSON
+          GooglePrivacyDlpV2HybridInspectJobTriggerRequest'{..}
+          = object
+              (catMaybes
+                 [("hybridItem" .=) <$> _gpdvhijtrHybridItem])
+
 -- | Cloud repository for storing output.
 --
 -- /See:/ 'googlePrivacyDlpV2OutputStorageConfig' smart constructor.
 data GooglePrivacyDlpV2OutputStorageConfig =
   GooglePrivacyDlpV2OutputStorageConfig'
     { _gpdvoscOutputSchema :: !(Maybe GooglePrivacyDlpV2OutputStorageConfigOutputSchema)
-    , _gpdvoscTable        :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
+    , _gpdvoscTable :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -7698,7 +8802,7 @@ googlePrivacyDlpV2OutputStorageConfig =
 -- No columns in the existing table will be deleted. If unspecified, then
 -- all available columns will be used for a new table or an (existing)
 -- table with no schema, and no changes will be made to an existing table
--- that has a schema.
+-- that has a schema. Only for use with external storage.
 gpdvoscOutputSchema :: Lens' GooglePrivacyDlpV2OutputStorageConfig (Maybe GooglePrivacyDlpV2OutputStorageConfigOutputSchema)
 gpdvoscOutputSchema
   = lens _gpdvoscOutputSchema
@@ -7801,8 +8905,8 @@ googlePrivacyDlpV2InfoTypeTransformations =
   GooglePrivacyDlpV2InfoTypeTransformations' {_gpdvittTransformations = Nothing}
 
 
--- | Transformation for each infoType. Cannot specify more than one for a
--- given infoType. [required]
+-- | Required. Transformation for each infoType. Cannot specify more than one
+-- for a given infoType.
 gpdvittTransformations :: Lens' GooglePrivacyDlpV2InfoTypeTransformations [GooglePrivacyDlpV2InfoTypeTransformation]
 gpdvittTransformations
   = lens _gpdvittTransformations
@@ -7829,14 +8933,16 @@ instance ToJSON
                  [("transformations" .=) <$> _gpdvittTransformations])
 
 -- | Include to use an existing data crypto key wrapped by KMS. The wrapped
--- key must be a 128\/192\/256 bit key. Authorization requires the
+-- key must be a 128-, 192-, or 256-bit key. Authorization requires the
 -- following IAM permissions when sending a request to perform a crypto
--- transformation using a kms-wrapped crypto key: dlp.kms.encrypt
+-- transformation using a KMS-wrapped crypto key: dlp.kms.encrypt For more
+-- information, see [Creating a wrapped key]
+-- (https:\/\/cloud.google.com\/dlp\/docs\/create-wrapped-key).
 --
 -- /See:/ 'googlePrivacyDlpV2KmsWrAppedCryptoKey' smart constructor.
 data GooglePrivacyDlpV2KmsWrAppedCryptoKey =
   GooglePrivacyDlpV2KmsWrAppedCryptoKey'
-    { _gpdvkwackWrAppedKey    :: !(Maybe Bytes)
+    { _gpdvkwackWrAppedKey :: !(Maybe Bytes)
     , _gpdvkwackCryptoKeyName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -7856,14 +8962,14 @@ googlePrivacyDlpV2KmsWrAppedCryptoKey =
     {_gpdvkwackWrAppedKey = Nothing, _gpdvkwackCryptoKeyName = Nothing}
 
 
--- | The wrapped data crypto key. [required]
+-- | Required. The wrapped data crypto key.
 gpdvkwackWrAppedKey :: Lens' GooglePrivacyDlpV2KmsWrAppedCryptoKey (Maybe ByteString)
 gpdvkwackWrAppedKey
   = lens _gpdvkwackWrAppedKey
       (\ s a -> s{_gpdvkwackWrAppedKey = a})
       . mapping _Bytes
 
--- | The resource name of the KMS CryptoKey to use for unwrapping. [required]
+-- | Required. The resource name of the KMS CryptoKey to use for unwrapping.
 gpdvkwackCryptoKeyName :: Lens' GooglePrivacyDlpV2KmsWrAppedCryptoKey (Maybe Text)
 gpdvkwackCryptoKeyName
   = lens _gpdvkwackCryptoKeyName
@@ -7930,15 +9036,16 @@ instance ToJSON
           = object
               (catMaybes [("result" .=) <$> _gpdvicrResult])
 
+-- | Histogram of l-diversity equivalence class sensitive value frequencies.
 --
 -- /See:/ 'googlePrivacyDlpV2LDiversityHistogramBucket' smart constructor.
 data GooglePrivacyDlpV2LDiversityHistogramBucket =
   GooglePrivacyDlpV2LDiversityHistogramBucket'
-    { _gpdvldhbBucketValues                      :: !(Maybe [GooglePrivacyDlpV2LDiversityEquivalenceClass])
+    { _gpdvldhbBucketValues :: !(Maybe [GooglePrivacyDlpV2LDiversityEquivalenceClass])
     , _gpdvldhbSensitiveValueFrequencyLowerBound :: !(Maybe (Textual Int64))
     , _gpdvldhbSensitiveValueFrequencyUpperBound :: !(Maybe (Textual Int64))
-    , _gpdvldhbBucketSize                        :: !(Maybe (Textual Int64))
-    , _gpdvldhbBucketValueCount                  :: !(Maybe (Textual Int64))
+    , _gpdvldhbBucketSize :: !(Maybe (Textual Int64))
+    , _gpdvldhbBucketValueCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8045,7 +9152,7 @@ instance ToJSON
 data GooglePrivacyDlpV2ReidentifyContentResponse =
   GooglePrivacyDlpV2ReidentifyContentResponse'
     { _gpdvrcrOverview :: !(Maybe GooglePrivacyDlpV2TransformationOverview)
-    , _gpdvrcrItem     :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    , _gpdvrcrItem :: !(Maybe GooglePrivacyDlpV2ContentItem)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8095,13 +9202,43 @@ instance ToJSON
                  [("overview" .=) <$> _gpdvrcrOverview,
                   ("item" .=) <$> _gpdvrcrItem])
 
+-- | Quota exceeded errors will be thrown once quota has been met.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridInspectResponse' smart constructor.
+data GooglePrivacyDlpV2HybridInspectResponse =
+  GooglePrivacyDlpV2HybridInspectResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridInspectResponse' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2HybridInspectResponse
+    :: GooglePrivacyDlpV2HybridInspectResponse
+googlePrivacyDlpV2HybridInspectResponse =
+  GooglePrivacyDlpV2HybridInspectResponse'
+
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridInspectResponse
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2HybridInspectResponse"
+              (\ o ->
+                 pure GooglePrivacyDlpV2HybridInspectResponse')
+
+instance ToJSON
+           GooglePrivacyDlpV2HybridInspectResponse
+         where
+        toJSON = const emptyObject
+
 -- | An expression, consisting or an operator and conditions.
 --
 -- /See:/ 'googlePrivacyDlpV2Expressions' smart constructor.
 data GooglePrivacyDlpV2Expressions =
   GooglePrivacyDlpV2Expressions'
     { _gpdveLogicalOperator :: !(Maybe GooglePrivacyDlpV2ExpressionsLogicalOperator)
-    , _gpdveConditions      :: !(Maybe GooglePrivacyDlpV2Conditions)
+    , _gpdveConditions :: !(Maybe GooglePrivacyDlpV2Conditions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8127,6 +9264,7 @@ gpdveLogicalOperator
   = lens _gpdveLogicalOperator
       (\ s a -> s{_gpdveLogicalOperator = a})
 
+-- | Conditions to apply to the expression.
 gpdveConditions :: Lens' GooglePrivacyDlpV2Expressions (Maybe GooglePrivacyDlpV2Conditions)
 gpdveConditions
   = lens _gpdveConditions
@@ -8151,9 +9289,9 @@ instance ToJSON GooglePrivacyDlpV2Expressions where
 -- /See:/ 'googlePrivacyDlpV2DateTime' smart constructor.
 data GooglePrivacyDlpV2DateTime =
   GooglePrivacyDlpV2DateTime'
-    { _gpdvdtTime      :: !(Maybe GoogleTypeTimeOfDay)
-    , _gpdvdtDate      :: !(Maybe GoogleTypeDate)
-    , _gpdvdtTimeZone  :: !(Maybe GooglePrivacyDlpV2TimeZone)
+    { _gpdvdtTime :: !(Maybe GoogleTypeTimeOfDay)
+    , _gpdvdtDate :: !(Maybe GoogleTypeDate)
+    , _gpdvdtTimeZone :: !(Maybe GooglePrivacyDlpV2TimeZone)
     , _gpdvdtDayOfWeek :: !(Maybe GooglePrivacyDlpV2DateTimeDayOfWeek)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8181,21 +9319,24 @@ googlePrivacyDlpV2DateTime =
     }
 
 
+-- | Time of day
 gpdvdtTime :: Lens' GooglePrivacyDlpV2DateTime (Maybe GoogleTypeTimeOfDay)
 gpdvdtTime
   = lens _gpdvdtTime (\ s a -> s{_gpdvdtTime = a})
 
--- | One or more of the following must be set. All fields are optional, but
--- when set must be valid date or time values.
+-- | One or more of the following must be set. Must be a valid date or time
+-- value.
 gpdvdtDate :: Lens' GooglePrivacyDlpV2DateTime (Maybe GoogleTypeDate)
 gpdvdtDate
   = lens _gpdvdtDate (\ s a -> s{_gpdvdtDate = a})
 
+-- | Time zone
 gpdvdtTimeZone :: Lens' GooglePrivacyDlpV2DateTime (Maybe GooglePrivacyDlpV2TimeZone)
 gpdvdtTimeZone
   = lens _gpdvdtTimeZone
       (\ s a -> s{_gpdvdtTimeZone = a})
 
+-- | Day of week
 gpdvdtDayOfWeek :: Lens' GooglePrivacyDlpV2DateTime (Maybe GooglePrivacyDlpV2DateTimeDayOfWeek)
 gpdvdtDayOfWeek
   = lens _gpdvdtDayOfWeek
@@ -8248,7 +9389,7 @@ instance ToJSON GooglePrivacyDlpV2DateTime where
 data GooglePrivacyDlpV2CloudStorageRegexFileSet =
   GooglePrivacyDlpV2CloudStorageRegexFileSet'
     { _gpdvcsrfsExcludeRegex :: !(Maybe [Text])
-    , _gpdvcsrfsBucketName   :: !(Maybe Text)
+    , _gpdvcsrfsBucketName :: !(Maybe Text)
     , _gpdvcsrfsIncludeRegex :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8329,14 +9470,82 @@ instance ToJSON
                   ("bucketName" .=) <$> _gpdvcsrfsBucketName,
                   ("includeRegex" .=) <$> _gpdvcsrfsIncludeRegex])
 
+-- | Risk analysis options.
+--
+-- /See:/ 'googlePrivacyDlpV2RequestedRiskAnalysisOptions' smart constructor.
+newtype GooglePrivacyDlpV2RequestedRiskAnalysisOptions =
+  GooglePrivacyDlpV2RequestedRiskAnalysisOptions'
+    { _gpdvrraoJobConfig :: Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2RequestedRiskAnalysisOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvrraoJobConfig'
+googlePrivacyDlpV2RequestedRiskAnalysisOptions
+    :: GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+googlePrivacyDlpV2RequestedRiskAnalysisOptions =
+  GooglePrivacyDlpV2RequestedRiskAnalysisOptions' {_gpdvrraoJobConfig = Nothing}
+
+
+-- | The job config for the risk job.
+gpdvrraoJobConfig :: Lens' GooglePrivacyDlpV2RequestedRiskAnalysisOptions (Maybe GooglePrivacyDlpV2RiskAnalysisJobConfig)
+gpdvrraoJobConfig
+  = lens _gpdvrraoJobConfig
+      (\ s a -> s{_gpdvrraoJobConfig = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+         where
+        parseJSON
+          = withObject
+              "GooglePrivacyDlpV2RequestedRiskAnalysisOptions"
+              (\ o ->
+                 GooglePrivacyDlpV2RequestedRiskAnalysisOptions' <$>
+                   (o .:? "jobConfig"))
+
+instance ToJSON
+           GooglePrivacyDlpV2RequestedRiskAnalysisOptions
+         where
+        toJSON
+          GooglePrivacyDlpV2RequestedRiskAnalysisOptions'{..}
+          = object
+              (catMaybes [("jobConfig" .=) <$> _gpdvrraoJobConfig])
+
+-- | Throw an error and fail the request when a transformation error occurs.
+--
+-- /See:/ 'googlePrivacyDlpV2ThrowError' smart constructor.
+data GooglePrivacyDlpV2ThrowError =
+  GooglePrivacyDlpV2ThrowError'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2ThrowError' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2ThrowError
+    :: GooglePrivacyDlpV2ThrowError
+googlePrivacyDlpV2ThrowError = GooglePrivacyDlpV2ThrowError'
+
+
+instance FromJSON GooglePrivacyDlpV2ThrowError where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2ThrowError"
+              (\ o -> pure GooglePrivacyDlpV2ThrowError')
+
+instance ToJSON GooglePrivacyDlpV2ThrowError where
+        toJSON = const emptyObject
+
 -- | Bucket is represented as a range, along with replacement values.
 --
 -- /See:/ 'googlePrivacyDlpV2Bucket' smart constructor.
 data GooglePrivacyDlpV2Bucket =
   GooglePrivacyDlpV2Bucket'
-    { _gpdvbMax              :: !(Maybe GooglePrivacyDlpV2Value)
+    { _gpdvbMax :: !(Maybe GooglePrivacyDlpV2Value)
     , _gpdvbReplacementValue :: !(Maybe GooglePrivacyDlpV2Value)
-    , _gpdvbMin              :: !(Maybe GooglePrivacyDlpV2Value)
+    , _gpdvbMin :: !(Maybe GooglePrivacyDlpV2Value)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8361,8 +9570,7 @@ googlePrivacyDlpV2Bucket =
 gpdvbMax :: Lens' GooglePrivacyDlpV2Bucket (Maybe GooglePrivacyDlpV2Value)
 gpdvbMax = lens _gpdvbMax (\ s a -> s{_gpdvbMax = a})
 
--- | Replacement value for this bucket. If not provided the default behavior
--- will be to hyphenate the min-max range.
+-- | Required. Replacement value for this bucket.
 gpdvbReplacementValue :: Lens' GooglePrivacyDlpV2Bucket (Maybe GooglePrivacyDlpV2Value)
 gpdvbReplacementValue
   = lens _gpdvbReplacementValue
@@ -8395,10 +9603,12 @@ instance ToJSON GooglePrivacyDlpV2Bucket where
 -- /See:/ 'googlePrivacyDlpV2Action' smart constructor.
 data GooglePrivacyDlpV2Action =
   GooglePrivacyDlpV2Action'
-    { _gpdvaJobNotificationEmails :: !(Maybe GooglePrivacyDlpV2JobNotificationEmails)
-    , _gpdvaPubSub                :: !(Maybe GooglePrivacyDlpV2PublishToPubSub)
-    , _gpdvaSaveFindings          :: !(Maybe GooglePrivacyDlpV2SaveFindings)
-    , _gpdvaPublishSummaryToCscc  :: !(Maybe GooglePrivacyDlpV2PublishSummaryToCscc)
+    { _gpdvaPublishToStackdriver :: !(Maybe GooglePrivacyDlpV2PublishToStackdriver)
+    , _gpdvaJobNotificationEmails :: !(Maybe GooglePrivacyDlpV2JobNotificationEmails)
+    , _gpdvaPubSub :: !(Maybe GooglePrivacyDlpV2PublishToPubSub)
+    , _gpdvaPublishFindingsToCloudDataCatalog :: !(Maybe GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog)
+    , _gpdvaSaveFindings :: !(Maybe GooglePrivacyDlpV2SaveFindings)
+    , _gpdvaPublishSummaryToCscc :: !(Maybe GooglePrivacyDlpV2PublishSummaryToCscc)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8407,9 +9617,13 @@ data GooglePrivacyDlpV2Action =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gpdvaPublishToStackdriver'
+--
 -- * 'gpdvaJobNotificationEmails'
 --
 -- * 'gpdvaPubSub'
+--
+-- * 'gpdvaPublishFindingsToCloudDataCatalog'
 --
 -- * 'gpdvaSaveFindings'
 --
@@ -8418,14 +9632,22 @@ googlePrivacyDlpV2Action
     :: GooglePrivacyDlpV2Action
 googlePrivacyDlpV2Action =
   GooglePrivacyDlpV2Action'
-    { _gpdvaJobNotificationEmails = Nothing
+    { _gpdvaPublishToStackdriver = Nothing
+    , _gpdvaJobNotificationEmails = Nothing
     , _gpdvaPubSub = Nothing
+    , _gpdvaPublishFindingsToCloudDataCatalog = Nothing
     , _gpdvaSaveFindings = Nothing
     , _gpdvaPublishSummaryToCscc = Nothing
     }
 
 
--- | Enable email notification to project owners and editors on job\'s
+-- | Enable Stackdriver metric dlp.googleapis.com\/finding_count.
+gpdvaPublishToStackdriver :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2PublishToStackdriver)
+gpdvaPublishToStackdriver
+  = lens _gpdvaPublishToStackdriver
+      (\ s a -> s{_gpdvaPublishToStackdriver = a})
+
+-- | Enable email notification for project owners and editors on job\'s
 -- completion\/failure.
 gpdvaJobNotificationEmails :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2JobNotificationEmails)
 gpdvaJobNotificationEmails
@@ -8436,6 +9658,13 @@ gpdvaJobNotificationEmails
 gpdvaPubSub :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2PublishToPubSub)
 gpdvaPubSub
   = lens _gpdvaPubSub (\ s a -> s{_gpdvaPubSub = a})
+
+-- | Publish findings to Cloud Datahub.
+gpdvaPublishFindingsToCloudDataCatalog :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog)
+gpdvaPublishFindingsToCloudDataCatalog
+  = lens _gpdvaPublishFindingsToCloudDataCatalog
+      (\ s a ->
+         s{_gpdvaPublishFindingsToCloudDataCatalog = a})
 
 -- | Save resulting findings in a provided location.
 gpdvaSaveFindings :: Lens' GooglePrivacyDlpV2Action (Maybe GooglePrivacyDlpV2SaveFindings)
@@ -8454,7 +9683,10 @@ instance FromJSON GooglePrivacyDlpV2Action where
           = withObject "GooglePrivacyDlpV2Action"
               (\ o ->
                  GooglePrivacyDlpV2Action' <$>
-                   (o .:? "jobNotificationEmails") <*> (o .:? "pubSub")
+                   (o .:? "publishToStackdriver") <*>
+                     (o .:? "jobNotificationEmails")
+                     <*> (o .:? "pubSub")
+                     <*> (o .:? "publishFindingsToCloudDataCatalog")
                      <*> (o .:? "saveFindings")
                      <*> (o .:? "publishSummaryToCscc"))
 
@@ -8462,27 +9694,32 @@ instance ToJSON GooglePrivacyDlpV2Action where
         toJSON GooglePrivacyDlpV2Action'{..}
           = object
               (catMaybes
-                 [("jobNotificationEmails" .=) <$>
+                 [("publishToStackdriver" .=) <$>
+                    _gpdvaPublishToStackdriver,
+                  ("jobNotificationEmails" .=) <$>
                     _gpdvaJobNotificationEmails,
                   ("pubSub" .=) <$> _gpdvaPubSub,
+                  ("publishFindingsToCloudDataCatalog" .=) <$>
+                    _gpdvaPublishFindingsToCloudDataCatalog,
                   ("saveFindings" .=) <$> _gpdvaSaveFindings,
                   ("publishSummaryToCscc" .=) <$>
                     _gpdvaPublishSummaryToCscc])
 
--- | Represents a whole or partial calendar date, e.g. a birthday. The time
--- of day and time zone are either specified elsewhere or are not
--- significant. The date is relative to the Proleptic Gregorian Calendar.
--- This can represent: * A full date, with non-zero year, month and day
--- values * A month and day value, with a zero year, e.g. an anniversary *
--- A year on its own, with zero month and day values * A year and month
--- value, with a zero day, e.g. a credit card expiration date Related types
--- are google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: * A full date, with non-zero year,
+-- month, and day values * A month and day value, with a zero year, such as
+-- an anniversary * A year on its own, with zero month and day values * A
+-- year and month value, with a zero day, such as a credit card expiration
+-- date Related types are google.type.TimeOfDay and
+-- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'googleTypeDate' smart constructor.
 data GoogleTypeDate =
   GoogleTypeDate'
-    { _gtdDay   :: !(Maybe (Textual Int32))
-    , _gtdYear  :: !(Maybe (Textual Int32))
+    { _gtdDay :: !(Maybe (Textual Int32))
+    , _gtdYear :: !(Maybe (Textual Int32))
     , _gtdMonth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8503,22 +9740,22 @@ googleTypeDate =
   GoogleTypeDate' {_gtdDay = Nothing, _gtdYear = Nothing, _gtdMonth = Nothing}
 
 
--- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year by itself or a year and month where the day is
--- not significant.
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
 gtdDay :: Lens' GoogleTypeDate (Maybe Int32)
 gtdDay
   = lens _gtdDay (\ s a -> s{_gtdDay = a}) .
       mapping _Coerce
 
--- | Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
 -- a year.
 gtdYear :: Lens' GoogleTypeDate (Maybe Int32)
 gtdYear
   = lens _gtdYear (\ s a -> s{_gtdYear = a}) .
       mapping _Coerce
 
--- | Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
 -- month and day.
 gtdMonth :: Lens' GoogleTypeDate (Maybe Int32)
 gtdMonth
@@ -8539,9 +9776,56 @@ instance ToJSON GoogleTypeDate where
                  [("day" .=) <$> _gtdDay, ("year" .=) <$> _gtdYear,
                   ("month" .=) <$> _gtdMonth])
 
+-- | Instructions regarding the table content being inspected.
+--
+-- /See:/ 'googlePrivacyDlpV2TableOptions' smart constructor.
+newtype GooglePrivacyDlpV2TableOptions =
+  GooglePrivacyDlpV2TableOptions'
+    { _gpdvtoIdentifyingFields :: Maybe [GooglePrivacyDlpV2FieldId]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2TableOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvtoIdentifyingFields'
+googlePrivacyDlpV2TableOptions
+    :: GooglePrivacyDlpV2TableOptions
+googlePrivacyDlpV2TableOptions =
+  GooglePrivacyDlpV2TableOptions' {_gpdvtoIdentifyingFields = Nothing}
+
+
+-- | The columns that are the primary keys for table objects included in
+-- ContentItem. A copy of this cell\'s value will stored alongside
+-- alongside each finding so that the finding can be traced to the specific
+-- row it came from. No more than 3 may be provided.
+gpdvtoIdentifyingFields :: Lens' GooglePrivacyDlpV2TableOptions [GooglePrivacyDlpV2FieldId]
+gpdvtoIdentifyingFields
+  = lens _gpdvtoIdentifyingFields
+      (\ s a -> s{_gpdvtoIdentifyingFields = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GooglePrivacyDlpV2TableOptions
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2TableOptions"
+              (\ o ->
+                 GooglePrivacyDlpV2TableOptions' <$>
+                   (o .:? "identifyingFields" .!= mempty))
+
+instance ToJSON GooglePrivacyDlpV2TableOptions where
+        toJSON GooglePrivacyDlpV2TableOptions'{..}
+          = object
+              (catMaybes
+                 [("identifyingFields" .=) <$>
+                    _gpdvtoIdentifyingFields])
+
 -- | Message for detecting output from deidentification transformations such
 -- as
--- [\`CryptoReplaceFfxFpeConfig\`](\/dlp\/docs\/reference\/rest\/v2\/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+-- [\`CryptoReplaceFfxFpeConfig\`](https:\/\/cloud.google.com\/dlp\/docs\/reference\/rest\/v2\/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 -- These types of transformations are those that perform pseudonymization,
 -- thereby producing a \"surrogate\" as output. This should be used in
 -- conjunction with a field on the transformation such as
@@ -8572,13 +9856,13 @@ instance ToJSON GooglePrivacyDlpV2SurrogateType where
 
 -- | Structured content to inspect. Up to 50,000 \`Value\`s per request
 -- allowed. See
--- https:\/\/cloud.google.com\/dlp\/docs\/inspecting-text#inspecting_a_table
+-- https:\/\/cloud.google.com\/dlp\/docs\/inspecting-structured-text#inspecting_a_table
 -- to learn more.
 --
 -- /See:/ 'googlePrivacyDlpV2Table' smart constructor.
 data GooglePrivacyDlpV2Table =
   GooglePrivacyDlpV2Table'
-    { _gpdvtRows    :: !(Maybe [GooglePrivacyDlpV2Row])
+    { _gpdvtRows :: !(Maybe [GooglePrivacyDlpV2Row])
     , _gpdvtHeaders :: !(Maybe [GooglePrivacyDlpV2FieldId])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8597,12 +9881,14 @@ googlePrivacyDlpV2Table =
   GooglePrivacyDlpV2Table' {_gpdvtRows = Nothing, _gpdvtHeaders = Nothing}
 
 
+-- | Rows of the table.
 gpdvtRows :: Lens' GooglePrivacyDlpV2Table [GooglePrivacyDlpV2Row]
 gpdvtRows
   = lens _gpdvtRows (\ s a -> s{_gpdvtRows = a}) .
       _Default
       . _Coerce
 
+-- | Headers of the table.
 gpdvtHeaders :: Lens' GooglePrivacyDlpV2Table [GooglePrivacyDlpV2FieldId]
 gpdvtHeaders
   = lens _gpdvtHeaders (\ s a -> s{_gpdvtHeaders = a})
@@ -8680,14 +9966,14 @@ instance ToJSON GooglePrivacyDlpV2LDiversityResult
 -- can be done using publicly available data (like the US Census), or using
 -- a custom statistical model (indicated as one or several BigQuery
 -- tables), or by extrapolating from the distribution of values in the
--- input dataset. A column with a semantic tag attached.
+-- input dataset.
 --
 -- /See:/ 'googlePrivacyDlpV2KMapEstimationConfig' smart constructor.
 data GooglePrivacyDlpV2KMapEstimationConfig =
   GooglePrivacyDlpV2KMapEstimationConfig'
     { _gpdvkmecAuxiliaryTables :: !(Maybe [GooglePrivacyDlpV2AuxiliaryTable])
-    , _gpdvkmecRegionCode      :: !(Maybe Text)
-    , _gpdvkmecQuasiIds        :: !(Maybe [GooglePrivacyDlpV2TaggedField])
+    , _gpdvkmecRegionCode :: !(Maybe Text)
+    , _gpdvkmecQuasiIds :: !(Maybe [GooglePrivacyDlpV2TaggedField])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8721,16 +10007,16 @@ gpdvkmecAuxiliaryTables
       . _Default
       . _Coerce
 
--- | ISO 3166-1 alpha-2 region code to use in the statistical modeling.
--- Required if no column is tagged with a region-specific InfoType (like
--- US_ZIP_5) or a region code.
+-- | ISO 3166-1 alpha-2 region code to use in the statistical modeling. Set
+-- if no column is tagged with a region-specific InfoType (like US_ZIP_5)
+-- or a region code.
 gpdvkmecRegionCode :: Lens' GooglePrivacyDlpV2KMapEstimationConfig (Maybe Text)
 gpdvkmecRegionCode
   = lens _gpdvkmecRegionCode
       (\ s a -> s{_gpdvkmecRegionCode = a})
 
--- | Fields considered to be quasi-identifiers. No two columns can have the
--- same tag. [required]
+-- | Required. Fields considered to be quasi-identifiers. No two columns can
+-- have the same tag.
 gpdvkmecQuasiIds :: Lens' GooglePrivacyDlpV2KMapEstimationConfig [GooglePrivacyDlpV2TaggedField]
 gpdvkmecQuasiIds
   = lens _gpdvkmecQuasiIds
@@ -8775,12 +10061,12 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2CryptoReplaceFfxFpeConfig' smart constructor.
 data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig =
   GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'
-    { _gpdvcrffcContext           :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvcrffcCommonAlphabet    :: !(Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabet)
+    { _gpdvcrffcContext :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvcrffcCommonAlphabet :: !(Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabet)
     , _gpdvcrffcSurrogateInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvcrffcCustomAlphabet    :: !(Maybe Text)
-    , _gpdvcrffcCryptoKey         :: !(Maybe GooglePrivacyDlpV2CryptoKey)
-    , _gpdvcrffcRadix             :: !(Maybe (Textual Int32))
+    , _gpdvcrffcCustomAlphabet :: !(Maybe Text)
+    , _gpdvcrffcCryptoKey :: !(Maybe GooglePrivacyDlpV2CryptoKey)
+    , _gpdvcrffcRadix :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -8830,6 +10116,7 @@ gpdvcrffcContext
   = lens _gpdvcrffcContext
       (\ s a -> s{_gpdvcrffcContext = a})
 
+-- | Common alphabets.
 gpdvcrffcCommonAlphabet :: Lens' GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig (Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfigCommonAlphabet)
 gpdvcrffcCommonAlphabet
   = lens _gpdvcrffcCommonAlphabet
@@ -8844,7 +10131,7 @@ gpdvcrffcCommonAlphabet
 -- \'abc\', the full replacement value will be:
 -- \'MY_TOKEN_INFO_TYPE(3):abc\' This annotation identifies the surrogate
 -- when inspecting content using the custom infoType
--- [\`SurrogateType\`](\/dlp\/docs\/reference\/rest\/v2\/InspectConfig#surrogatetype).
+-- [\`SurrogateType\`](https:\/\/cloud.google.com\/dlp\/docs\/reference\/rest\/v2\/InspectConfig#surrogatetype).
 -- This facilitates reversal of the surrogate when it occurs in free text.
 -- In order for inspection to work properly, the name of this infoType must
 -- not occur naturally anywhere in your data; otherwise, inspection may
@@ -8864,20 +10151,23 @@ gpdvcrffcSurrogateInfoType
 -- | This is supported by mapping these to the alphanumeric characters that
 -- the FFX mode natively supports. This happens before\/after
 -- encryption\/decryption. Each character listed must appear only once.
--- Number of characters must be in the range [2, 62]. This must be encoded
--- as ASCII. The order of characters does not matter.
+-- Number of characters must be in the range [2, 95]. This must be encoded
+-- as ASCII. The order of characters does not matter. The full list of
+-- allowed characters is:
+-- 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+-- ~\`!\'#$%^&*()_-+={[}]|\\:;\"\'\<,>.?\/
 gpdvcrffcCustomAlphabet :: Lens' GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig (Maybe Text)
 gpdvcrffcCustomAlphabet
   = lens _gpdvcrffcCustomAlphabet
       (\ s a -> s{_gpdvcrffcCustomAlphabet = a})
 
--- | The key used by the encryption algorithm. [required]
+-- | Required. The key used by the encryption algorithm.
 gpdvcrffcCryptoKey :: Lens' GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig (Maybe GooglePrivacyDlpV2CryptoKey)
 gpdvcrffcCryptoKey
   = lens _gpdvcrffcCryptoKey
       (\ s a -> s{_gpdvcrffcCryptoKey = a})
 
--- | The native way to select the alphabet. Must be in the range [2, 62].
+-- | The native way to select the alphabet. Must be in the range [2, 95].
 gpdvcrffcRadix :: Lens' GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig (Maybe Int32)
 gpdvcrffcRadix
   = lens _gpdvcrffcRadix
@@ -8919,7 +10209,7 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2QuasiIdentifierField' smart constructor.
 data GooglePrivacyDlpV2QuasiIdentifierField =
   GooglePrivacyDlpV2QuasiIdentifierField'
-    { _gField     :: !(Maybe GooglePrivacyDlpV2FieldId)
+    { _gField :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gCustomTag :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -8939,9 +10229,13 @@ googlePrivacyDlpV2QuasiIdentifierField =
     {_gField = Nothing, _gCustomTag = Nothing}
 
 
+-- | Identifies the column.
 gField :: Lens' GooglePrivacyDlpV2QuasiIdentifierField (Maybe GooglePrivacyDlpV2FieldId)
 gField = lens _gField (\ s a -> s{_gField = a})
 
+-- | A column can be tagged with a custom tag. In this case, the user must
+-- indicate an auxiliary table that contains statistical information on the
+-- possible values of this column (below).
 gCustomTag :: Lens' GooglePrivacyDlpV2QuasiIdentifierField (Maybe Text)
 gCustomTag
   = lens _gCustomTag (\ s a -> s{_gCustomTag = a})
@@ -8987,8 +10281,9 @@ googlePrivacyDlpV2InfoType = GooglePrivacyDlpV2InfoType' {_gpdvitName = Nothing}
 -- | Name of the information type. Either a name of your choosing when
 -- creating a CustomInfoType, or one of the names listed at
 -- https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference when
--- specifying a built-in type. InfoType names should conform to the pattern
--- [a-zA-Z0-9_]{1,64}.
+-- specifying a built-in type. When sending Cloud DLP results to Data
+-- Catalog, infoType names should conform to the pattern
+-- \`[A-Za-z0-9$-_]{1,64}\`.
 gpdvitName :: Lens' GooglePrivacyDlpV2InfoType (Maybe Text)
 gpdvitName
   = lens _gpdvitName (\ s a -> s{_gpdvitName = a})
@@ -9012,11 +10307,11 @@ instance ToJSON GooglePrivacyDlpV2InfoType where
 data GooglePrivacyDlpV2InspectTemplate =
   GooglePrivacyDlpV2InspectTemplate'
     { _gInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
-    , _gUpdateTime    :: !(Maybe DateTime')
-    , _gName          :: !(Maybe Text)
-    , _gDisplayName   :: !(Maybe Text)
-    , _gDescription   :: !(Maybe Text)
-    , _gCreateTime    :: !(Maybe DateTime')
+    , _gUpdateTime :: !(Maybe DateTime')
+    , _gName :: !(Maybe Text)
+    , _gDisplayName :: !(Maybe Text)
+    , _gDescription :: !(Maybe Text)
+    , _gCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9055,16 +10350,16 @@ gInspectConfig
   = lens _gInspectConfig
       (\ s a -> s{_gInspectConfig = a})
 
--- | The last update timestamp of a inspectTemplate, output only field.
+-- | Output only. The last update timestamp of an inspectTemplate.
 gUpdateTime :: Lens' GooglePrivacyDlpV2InspectTemplate (Maybe UTCTime)
 gUpdateTime
   = lens _gUpdateTime (\ s a -> s{_gUpdateTime = a}) .
       mapping _DateTime
 
--- | The template name. Output only. The template will have one of the
+-- | Output only. The template name. The template will have one of the
 -- following formats:
 -- \`projects\/PROJECT_ID\/inspectTemplates\/TEMPLATE_ID\` OR
--- \`organizations\/ORGANIZATION_ID\/inspectTemplates\/TEMPLATE_ID\`
+-- \`organizations\/ORGANIZATION_ID\/inspectTemplates\/TEMPLATE_ID\`;
 gName :: Lens' GooglePrivacyDlpV2InspectTemplate (Maybe Text)
 gName = lens _gName (\ s a -> s{_gName = a})
 
@@ -9078,7 +10373,7 @@ gDescription :: Lens' GooglePrivacyDlpV2InspectTemplate (Maybe Text)
 gDescription
   = lens _gDescription (\ s a -> s{_gDescription = a})
 
--- | The creation timestamp of a inspectTemplate, output only field.
+-- | Output only. The creation timestamp of an inspectTemplate.
 gCreateTime :: Lens' GooglePrivacyDlpV2InspectTemplate (Maybe UTCTime)
 gCreateTime
   = lens _gCreateTime (\ s a -> s{_gCreateTime = a}) .
@@ -9108,15 +10403,16 @@ instance ToJSON GooglePrivacyDlpV2InspectTemplate
                   ("description" .=) <$> _gDescription,
                   ("createTime" .=) <$> _gCreateTime])
 
+-- | Histogram of k-anonymity equivalence classes.
 --
 -- /See:/ 'googlePrivacyDlpV2KAnonymityHistogramBucket' smart constructor.
 data GooglePrivacyDlpV2KAnonymityHistogramBucket =
   GooglePrivacyDlpV2KAnonymityHistogramBucket'
     { _gpdvkahbEquivalenceClassSizeLowerBound :: !(Maybe (Textual Int64))
     , _gpdvkahbEquivalenceClassSizeUpperBound :: !(Maybe (Textual Int64))
-    , _gpdvkahbBucketValues                   :: !(Maybe [GooglePrivacyDlpV2KAnonymityEquivalenceClass])
-    , _gpdvkahbBucketSize                     :: !(Maybe (Textual Int64))
-    , _gpdvkahbBucketValueCount               :: !(Maybe (Textual Int64))
+    , _gpdvkahbBucketValues :: !(Maybe [GooglePrivacyDlpV2KAnonymityEquivalenceClass])
+    , _gpdvkahbBucketSize :: !(Maybe (Textual Int64))
+    , _gpdvkahbBucketValueCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9220,11 +10516,12 @@ instance ToJSON
 -- /See:/ 'googlePrivacyDlpV2ReidentifyContentRequest' smart constructor.
 data GooglePrivacyDlpV2ReidentifyContentRequest =
   GooglePrivacyDlpV2ReidentifyContentRequest'
-    { _gooInspectConfig          :: !(Maybe GooglePrivacyDlpV2InspectConfig)
+    { _gooInspectConfig :: !(Maybe GooglePrivacyDlpV2InspectConfig)
     , _gooReidentifyTemplateName :: !(Maybe Text)
-    , _gooItem                   :: !(Maybe GooglePrivacyDlpV2ContentItem)
-    , _gooInspectTemplateName    :: !(Maybe Text)
-    , _gooReidentifyConfig       :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
+    , _gooItem :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    , _gooLocationId :: !(Maybe Text)
+    , _gooInspectTemplateName :: !(Maybe Text)
+    , _gooReidentifyConfig :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9239,6 +10536,8 @@ data GooglePrivacyDlpV2ReidentifyContentRequest =
 --
 -- * 'gooItem'
 --
+-- * 'gooLocationId'
+--
 -- * 'gooInspectTemplateName'
 --
 -- * 'gooReidentifyConfig'
@@ -9249,6 +10548,7 @@ googlePrivacyDlpV2ReidentifyContentRequest =
     { _gooInspectConfig = Nothing
     , _gooReidentifyTemplateName = Nothing
     , _gooItem = Nothing
+    , _gooLocationId = Nothing
     , _gooInspectTemplateName = Nothing
     , _gooReidentifyConfig = Nothing
     }
@@ -9260,11 +10560,12 @@ gooInspectConfig
   = lens _gooInspectConfig
       (\ s a -> s{_gooInspectConfig = a})
 
--- | Optional template to use. References an instance of
--- \`DeidentifyTemplate\`. Any configuration directly specified in
--- \`reidentify_config\` or \`inspect_config\` will override those set in
--- the template. Singular fields that are set in this request will replace
--- their corresponding fields in the template. Repeated fields are
+-- | Template to use. References an instance of \`DeidentifyTemplate\`. Any
+-- configuration directly specified in \`reidentify_config\` or
+-- \`inspect_config\` will override those set in the template. The
+-- \`DeidentifyTemplate\` used must include only reversible
+-- transformations. Singular fields that are set in this request will
+-- replace their corresponding fields in the template. Repeated fields are
 -- appended. Singular sub-messages and groups are recursively merged.
 gooReidentifyTemplateName :: Lens' GooglePrivacyDlpV2ReidentifyContentRequest (Maybe Text)
 gooReidentifyTemplateName
@@ -9275,7 +10576,13 @@ gooReidentifyTemplateName
 gooItem :: Lens' GooglePrivacyDlpV2ReidentifyContentRequest (Maybe GooglePrivacyDlpV2ContentItem)
 gooItem = lens _gooItem (\ s a -> s{_gooItem = a})
 
--- | Optional template to use. Any configuration directly specified in
+-- | Deprecated. This field has no effect.
+gooLocationId :: Lens' GooglePrivacyDlpV2ReidentifyContentRequest (Maybe Text)
+gooLocationId
+  = lens _gooLocationId
+      (\ s a -> s{_gooLocationId = a})
+
+-- | Template to use. Any configuration directly specified in
 -- \`inspect_config\` will override those set in the template. Singular
 -- fields that are set in this request will replace their corresponding
 -- fields in the template. Repeated fields are appended. Singular
@@ -9291,7 +10598,8 @@ gooInspectTemplateName
 -- de-identification. Re-identification is performed by examining the
 -- transformations used to de-identify the items and executing the reverse.
 -- This requires that only reversible transformations be provided here. The
--- reversible transformations are: - \`CryptoReplaceFfxFpeConfig\`
+-- reversible transformations are: - \`CryptoDeterministicConfig\` -
+-- \`CryptoReplaceFfxFpeConfig\`
 gooReidentifyConfig :: Lens' GooglePrivacyDlpV2ReidentifyContentRequest (Maybe GooglePrivacyDlpV2DeidentifyConfig)
 gooReidentifyConfig
   = lens _gooReidentifyConfig
@@ -9308,6 +10616,7 @@ instance FromJSON
                    (o .:? "inspectConfig") <*>
                      (o .:? "reidentifyTemplateName")
                      <*> (o .:? "item")
+                     <*> (o .:? "locationId")
                      <*> (o .:? "inspectTemplateName")
                      <*> (o .:? "reidentifyConfig"))
 
@@ -9322,6 +10631,7 @@ instance ToJSON
                   ("reidentifyTemplateName" .=) <$>
                     _gooReidentifyTemplateName,
                   ("item" .=) <$> _gooItem,
+                  ("locationId" .=) <$> _gooLocationId,
                   ("inspectTemplateName" .=) <$>
                     _gooInspectTemplateName,
                   ("reidentifyConfig" .=) <$> _gooReidentifyConfig])
@@ -9379,7 +10689,7 @@ instance ToJSON GooglePrivacyDlpV2CryptoHashConfig
 data GooglePrivacyDlpV2InfoTypeLimit =
   GooglePrivacyDlpV2InfoTypeLimit'
     { _gpdvitlMaxFindings :: !(Maybe (Textual Int32))
-    , _gpdvitlInfoType    :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvitlInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9450,7 +10760,12 @@ googlePrivacyDlpV2TableLocation =
   GooglePrivacyDlpV2TableLocation' {_gpdvtlRowIndex = Nothing}
 
 
--- | The zero-based index of the row where the finding is located.
+-- | The zero-based index of the row where the finding is located. Only
+-- populated for resources that have a natural ordering, not BigQuery. In
+-- BigQuery, to identify the row a finding came from, populate
+-- BigQueryOptions.identifying_fields with your primary key column names
+-- and when you store the findings the value of those columns will be
+-- stored inside of Finding.
 gpdvtlRowIndex :: Lens' GooglePrivacyDlpV2TableLocation (Maybe Int64)
 gpdvtlRowIndex
   = lens _gpdvtlRowIndex
@@ -9470,6 +10785,7 @@ instance ToJSON GooglePrivacyDlpV2TableLocation where
           = object
               (catMaybes [("rowIndex" .=) <$> _gpdvtlRowIndex])
 
+-- | Time zone of the date time object.
 --
 -- /See:/ 'googlePrivacyDlpV2TimeZone' smart constructor.
 newtype GooglePrivacyDlpV2TimeZone =
@@ -9516,9 +10832,10 @@ instance ToJSON GooglePrivacyDlpV2TimeZone where
 -- /See:/ 'googlePrivacyDlpV2StorageConfig' smart constructor.
 data GooglePrivacyDlpV2StorageConfig =
   GooglePrivacyDlpV2StorageConfig'
-    { _gpdvscTimespanConfig      :: !(Maybe GooglePrivacyDlpV2TimespanConfig)
-    , _gpdvscBigQueryOptions     :: !(Maybe GooglePrivacyDlpV2BigQueryOptions)
-    , _gpdvscDatastoreOptions    :: !(Maybe GooglePrivacyDlpV2DatastoreOptions)
+    { _gpdvscHybridOptions :: !(Maybe GooglePrivacyDlpV2HybridOptions)
+    , _gpdvscTimespanConfig :: !(Maybe GooglePrivacyDlpV2TimespanConfig)
+    , _gpdvscBigQueryOptions :: !(Maybe GooglePrivacyDlpV2BigQueryOptions)
+    , _gpdvscDatastoreOptions :: !(Maybe GooglePrivacyDlpV2DatastoreOptions)
     , _gpdvscCloudStorageOptions :: !(Maybe GooglePrivacyDlpV2CloudStorageOptions)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9527,6 +10844,8 @@ data GooglePrivacyDlpV2StorageConfig =
 -- | Creates a value of 'GooglePrivacyDlpV2StorageConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvscHybridOptions'
 --
 -- * 'gpdvscTimespanConfig'
 --
@@ -9539,31 +10858,38 @@ googlePrivacyDlpV2StorageConfig
     :: GooglePrivacyDlpV2StorageConfig
 googlePrivacyDlpV2StorageConfig =
   GooglePrivacyDlpV2StorageConfig'
-    { _gpdvscTimespanConfig = Nothing
+    { _gpdvscHybridOptions = Nothing
+    , _gpdvscTimespanConfig = Nothing
     , _gpdvscBigQueryOptions = Nothing
     , _gpdvscDatastoreOptions = Nothing
     , _gpdvscCloudStorageOptions = Nothing
     }
 
 
+-- | Hybrid inspection options.
+gpdvscHybridOptions :: Lens' GooglePrivacyDlpV2StorageConfig (Maybe GooglePrivacyDlpV2HybridOptions)
+gpdvscHybridOptions
+  = lens _gpdvscHybridOptions
+      (\ s a -> s{_gpdvscHybridOptions = a})
+
 gpdvscTimespanConfig :: Lens' GooglePrivacyDlpV2StorageConfig (Maybe GooglePrivacyDlpV2TimespanConfig)
 gpdvscTimespanConfig
   = lens _gpdvscTimespanConfig
       (\ s a -> s{_gpdvscTimespanConfig = a})
 
--- | BigQuery options specification.
+-- | BigQuery options.
 gpdvscBigQueryOptions :: Lens' GooglePrivacyDlpV2StorageConfig (Maybe GooglePrivacyDlpV2BigQueryOptions)
 gpdvscBigQueryOptions
   = lens _gpdvscBigQueryOptions
       (\ s a -> s{_gpdvscBigQueryOptions = a})
 
--- | Google Cloud Datastore options specification.
+-- | Google Cloud Datastore options.
 gpdvscDatastoreOptions :: Lens' GooglePrivacyDlpV2StorageConfig (Maybe GooglePrivacyDlpV2DatastoreOptions)
 gpdvscDatastoreOptions
   = lens _gpdvscDatastoreOptions
       (\ s a -> s{_gpdvscDatastoreOptions = a})
 
--- | Google Cloud Storage options specification.
+-- | Google Cloud Storage options.
 gpdvscCloudStorageOptions :: Lens' GooglePrivacyDlpV2StorageConfig (Maybe GooglePrivacyDlpV2CloudStorageOptions)
 gpdvscCloudStorageOptions
   = lens _gpdvscCloudStorageOptions
@@ -9575,8 +10901,8 @@ instance FromJSON GooglePrivacyDlpV2StorageConfig
           = withObject "GooglePrivacyDlpV2StorageConfig"
               (\ o ->
                  GooglePrivacyDlpV2StorageConfig' <$>
-                   (o .:? "timespanConfig") <*>
-                     (o .:? "bigQueryOptions")
+                   (o .:? "hybridOptions") <*> (o .:? "timespanConfig")
+                     <*> (o .:? "bigQueryOptions")
                      <*> (o .:? "datastoreOptions")
                      <*> (o .:? "cloudStorageOptions"))
 
@@ -9584,11 +10910,124 @@ instance ToJSON GooglePrivacyDlpV2StorageConfig where
         toJSON GooglePrivacyDlpV2StorageConfig'{..}
           = object
               (catMaybes
-                 [("timespanConfig" .=) <$> _gpdvscTimespanConfig,
+                 [("hybridOptions" .=) <$> _gpdvscHybridOptions,
+                  ("timespanConfig" .=) <$> _gpdvscTimespanConfig,
                   ("bigQueryOptions" .=) <$> _gpdvscBigQueryOptions,
                   ("datastoreOptions" .=) <$> _gpdvscDatastoreOptions,
                   ("cloudStorageOptions" .=) <$>
                     _gpdvscCloudStorageOptions])
+
+-- | Populate to associate additional data with each finding.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridFindingDetails' smart constructor.
+data GooglePrivacyDlpV2HybridFindingDetails =
+  GooglePrivacyDlpV2HybridFindingDetails'
+    { _gpdvhfdFileOffSet :: !(Maybe (Textual Int64))
+    , _gpdvhfdTableOptions :: !(Maybe GooglePrivacyDlpV2TableOptions)
+    , _gpdvhfdRowOffSet :: !(Maybe (Textual Int64))
+    , _gpdvhfdContainerDetails :: !(Maybe GooglePrivacyDlpV2Container)
+    , _gpdvhfdLabels :: !(Maybe GooglePrivacyDlpV2HybridFindingDetailsLabels)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridFindingDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhfdFileOffSet'
+--
+-- * 'gpdvhfdTableOptions'
+--
+-- * 'gpdvhfdRowOffSet'
+--
+-- * 'gpdvhfdContainerDetails'
+--
+-- * 'gpdvhfdLabels'
+googlePrivacyDlpV2HybridFindingDetails
+    :: GooglePrivacyDlpV2HybridFindingDetails
+googlePrivacyDlpV2HybridFindingDetails =
+  GooglePrivacyDlpV2HybridFindingDetails'
+    { _gpdvhfdFileOffSet = Nothing
+    , _gpdvhfdTableOptions = Nothing
+    , _gpdvhfdRowOffSet = Nothing
+    , _gpdvhfdContainerDetails = Nothing
+    , _gpdvhfdLabels = Nothing
+    }
+
+
+-- | Offset in bytes of the line, from the beginning of the file, where the
+-- finding is located. Populate if the item being scanned is only part of a
+-- bigger item, such as a shard of a file and you want to track the
+-- absolute position of the finding.
+gpdvhfdFileOffSet :: Lens' GooglePrivacyDlpV2HybridFindingDetails (Maybe Int64)
+gpdvhfdFileOffSet
+  = lens _gpdvhfdFileOffSet
+      (\ s a -> s{_gpdvhfdFileOffSet = a})
+      . mapping _Coerce
+
+-- | If the container is a table, additional information to make findings
+-- meaningful such as the columns that are primary keys. If not known ahead
+-- of time, can also be set within each inspect hybrid call and the two
+-- will be merged. Note that identifying_fields will only be stored to
+-- BigQuery, and only if the BigQuery action has been included.
+gpdvhfdTableOptions :: Lens' GooglePrivacyDlpV2HybridFindingDetails (Maybe GooglePrivacyDlpV2TableOptions)
+gpdvhfdTableOptions
+  = lens _gpdvhfdTableOptions
+      (\ s a -> s{_gpdvhfdTableOptions = a})
+
+-- | Offset of the row for tables. Populate if the row(s) being scanned are
+-- part of a bigger dataset and you want to keep track of their absolute
+-- position.
+gpdvhfdRowOffSet :: Lens' GooglePrivacyDlpV2HybridFindingDetails (Maybe Int64)
+gpdvhfdRowOffSet
+  = lens _gpdvhfdRowOffSet
+      (\ s a -> s{_gpdvhfdRowOffSet = a})
+      . mapping _Coerce
+
+-- | Details about the container where the content being inspected is from.
+gpdvhfdContainerDetails :: Lens' GooglePrivacyDlpV2HybridFindingDetails (Maybe GooglePrivacyDlpV2Container)
+gpdvhfdContainerDetails
+  = lens _gpdvhfdContainerDetails
+      (\ s a -> s{_gpdvhfdContainerDetails = a})
+
+-- | Labels to represent user provided metadata about the data being
+-- inspected. If configured by the job, some key values may be required.
+-- The labels associated with \`Finding\`\'s produced by hybrid inspection.
+-- Label keys must be between 1 and 63 characters long and must conform to
+-- the following regular expression: \`[a-z]([-a-z0-9]*[a-z0-9])?\`. Label
+-- values must be between 0 and 63 characters long and must conform to the
+-- regular expression \`([a-z]([-a-z0-9]*[a-z0-9])?)?\`. No more than 10
+-- labels can be associated with a given finding. Examples: *
+-- \`\"environment\" : \"production\"\` * \`\"pipeline\" : \"etl\"\`
+gpdvhfdLabels :: Lens' GooglePrivacyDlpV2HybridFindingDetails (Maybe GooglePrivacyDlpV2HybridFindingDetailsLabels)
+gpdvhfdLabels
+  = lens _gpdvhfdLabels
+      (\ s a -> s{_gpdvhfdLabels = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2HybridFindingDetails
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2HybridFindingDetails"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridFindingDetails' <$>
+                   (o .:? "fileOffset") <*> (o .:? "tableOptions") <*>
+                     (o .:? "rowOffset")
+                     <*> (o .:? "containerDetails")
+                     <*> (o .:? "labels"))
+
+instance ToJSON
+           GooglePrivacyDlpV2HybridFindingDetails
+         where
+        toJSON GooglePrivacyDlpV2HybridFindingDetails'{..}
+          = object
+              (catMaybes
+                 [("fileOffset" .=) <$> _gpdvhfdFileOffSet,
+                  ("tableOptions" .=) <$> _gpdvhfdTableOptions,
+                  ("rowOffset" .=) <$> _gpdvhfdRowOffSet,
+                  ("containerDetails" .=) <$> _gpdvhfdContainerDetails,
+                  ("labels" .=) <$> _gpdvhfdLabels])
 
 -- | Set of primitive values supported by the system. Note that for the
 -- purposes of inspection or transformation, the number of bytes considered
@@ -9601,13 +11040,13 @@ instance ToJSON GooglePrivacyDlpV2StorageConfig where
 data GooglePrivacyDlpV2Value =
   GooglePrivacyDlpV2Value'
     { _gpdvvDayOfWeekValue :: !(Maybe GooglePrivacyDlpV2ValueDayOfWeekValue)
-    , _gpdvvIntegerValue   :: !(Maybe (Textual Int64))
+    , _gpdvvIntegerValue :: !(Maybe (Textual Int64))
     , _gpdvvTimestampValue :: !(Maybe DateTime')
-    , _gpdvvTimeValue      :: !(Maybe GoogleTypeTimeOfDay)
-    , _gpdvvStringValue    :: !(Maybe Text)
-    , _gpdvvDateValue      :: !(Maybe GoogleTypeDate)
-    , _gpdvvBooleanValue   :: !(Maybe Bool)
-    , _gpdvvFloatValue     :: !(Maybe (Textual Double))
+    , _gpdvvTimeValue :: !(Maybe GoogleTypeTimeOfDay)
+    , _gpdvvStringValue :: !(Maybe Text)
+    , _gpdvvDateValue :: !(Maybe GoogleTypeDate)
+    , _gpdvvBooleanValue :: !(Maybe Bool)
+    , _gpdvvFloatValue :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9646,43 +11085,51 @@ googlePrivacyDlpV2Value =
     }
 
 
+-- | day of week
 gpdvvDayOfWeekValue :: Lens' GooglePrivacyDlpV2Value (Maybe GooglePrivacyDlpV2ValueDayOfWeekValue)
 gpdvvDayOfWeekValue
   = lens _gpdvvDayOfWeekValue
       (\ s a -> s{_gpdvvDayOfWeekValue = a})
 
+-- | integer
 gpdvvIntegerValue :: Lens' GooglePrivacyDlpV2Value (Maybe Int64)
 gpdvvIntegerValue
   = lens _gpdvvIntegerValue
       (\ s a -> s{_gpdvvIntegerValue = a})
       . mapping _Coerce
 
+-- | timestamp
 gpdvvTimestampValue :: Lens' GooglePrivacyDlpV2Value (Maybe UTCTime)
 gpdvvTimestampValue
   = lens _gpdvvTimestampValue
       (\ s a -> s{_gpdvvTimestampValue = a})
       . mapping _DateTime
 
+-- | time of day
 gpdvvTimeValue :: Lens' GooglePrivacyDlpV2Value (Maybe GoogleTypeTimeOfDay)
 gpdvvTimeValue
   = lens _gpdvvTimeValue
       (\ s a -> s{_gpdvvTimeValue = a})
 
+-- | string
 gpdvvStringValue :: Lens' GooglePrivacyDlpV2Value (Maybe Text)
 gpdvvStringValue
   = lens _gpdvvStringValue
       (\ s a -> s{_gpdvvStringValue = a})
 
+-- | date
 gpdvvDateValue :: Lens' GooglePrivacyDlpV2Value (Maybe GoogleTypeDate)
 gpdvvDateValue
   = lens _gpdvvDateValue
       (\ s a -> s{_gpdvvDateValue = a})
 
+-- | boolean
 gpdvvBooleanValue :: Lens' GooglePrivacyDlpV2Value (Maybe Bool)
 gpdvvBooleanValue
   = lens _gpdvvBooleanValue
       (\ s a -> s{_gpdvvBooleanValue = a})
 
+-- | float
 gpdvvFloatValue :: Lens' GooglePrivacyDlpV2Value (Maybe Double)
 gpdvvFloatValue
   = lens _gpdvvFloatValue
@@ -9739,7 +11186,7 @@ instance ToJSON GooglePrivacyDlpV2Value where
 -- /See:/ 'googlePrivacyDlpV2Dictionary' smart constructor.
 data GooglePrivacyDlpV2Dictionary =
   GooglePrivacyDlpV2Dictionary'
-    { _gpdvdWordList         :: !(Maybe GooglePrivacyDlpV2WordList)
+    { _gpdvdWordList :: !(Maybe GooglePrivacyDlpV2WordList)
     , _gpdvdCloudStoragePath :: !(Maybe GooglePrivacyDlpV2CloudStoragePath)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -9791,14 +11238,15 @@ instance ToJSON GooglePrivacyDlpV2Dictionary where
 -- /See:/ 'googlePrivacyDlpV2AnalyzeDataSourceRiskDetails' smart constructor.
 data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails =
   GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails'
-    { _gpdvadsrdRequestedPrivacyMetric        :: !(Maybe GooglePrivacyDlpV2PrivacyMetric)
-    , _gpdvadsrdRequestedSourceTable          :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    , _gpdvadsrdLDiversityResult              :: !(Maybe GooglePrivacyDlpV2LDiversityResult)
-    , _gpdvadsrdKAnonymityResult              :: !(Maybe GooglePrivacyDlpV2KAnonymityResult)
-    , _gpdvadsrdKMapEstimationResult          :: !(Maybe GooglePrivacyDlpV2KMapEstimationResult)
+    { _gpdvadsrdRequestedPrivacyMetric :: !(Maybe GooglePrivacyDlpV2PrivacyMetric)
+    , _gpdvadsrdRequestedSourceTable :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
+    , _gpdvadsrdLDiversityResult :: !(Maybe GooglePrivacyDlpV2LDiversityResult)
+    , _gpdvadsrdKAnonymityResult :: !(Maybe GooglePrivacyDlpV2KAnonymityResult)
+    , _gpdvadsrdKMapEstimationResult :: !(Maybe GooglePrivacyDlpV2KMapEstimationResult)
+    , _gpdvadsrdRequestedOptions :: !(Maybe GooglePrivacyDlpV2RequestedRiskAnalysisOptions)
     , _gpdvadsrdDeltaPresenceEstimationResult :: !(Maybe GooglePrivacyDlpV2DeltaPresenceEstimationResult)
-    , _gpdvadsrdNumericalStatsResult          :: !(Maybe GooglePrivacyDlpV2NumericalStatsResult)
-    , _gpdvadsrdCategoricalStatsResult        :: !(Maybe GooglePrivacyDlpV2CategoricalStatsResult)
+    , _gpdvadsrdNumericalStatsResult :: !(Maybe GooglePrivacyDlpV2NumericalStatsResult)
+    , _gpdvadsrdCategoricalStatsResult :: !(Maybe GooglePrivacyDlpV2CategoricalStatsResult)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -9817,6 +11265,8 @@ data GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails =
 --
 -- * 'gpdvadsrdKMapEstimationResult'
 --
+-- * 'gpdvadsrdRequestedOptions'
+--
 -- * 'gpdvadsrdDeltaPresenceEstimationResult'
 --
 -- * 'gpdvadsrdNumericalStatsResult'
@@ -9831,6 +11281,7 @@ googlePrivacyDlpV2AnalyzeDataSourceRiskDetails =
     , _gpdvadsrdLDiversityResult = Nothing
     , _gpdvadsrdKAnonymityResult = Nothing
     , _gpdvadsrdKMapEstimationResult = Nothing
+    , _gpdvadsrdRequestedOptions = Nothing
     , _gpdvadsrdDeltaPresenceEstimationResult = Nothing
     , _gpdvadsrdNumericalStatsResult = Nothing
     , _gpdvadsrdCategoricalStatsResult = Nothing
@@ -9849,32 +11300,44 @@ gpdvadsrdRequestedSourceTable
   = lens _gpdvadsrdRequestedSourceTable
       (\ s a -> s{_gpdvadsrdRequestedSourceTable = a})
 
+-- | L-divesity result
 gpdvadsrdLDiversityResult :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2LDiversityResult)
 gpdvadsrdLDiversityResult
   = lens _gpdvadsrdLDiversityResult
       (\ s a -> s{_gpdvadsrdLDiversityResult = a})
 
+-- | K-anonymity result
 gpdvadsrdKAnonymityResult :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2KAnonymityResult)
 gpdvadsrdKAnonymityResult
   = lens _gpdvadsrdKAnonymityResult
       (\ s a -> s{_gpdvadsrdKAnonymityResult = a})
 
+-- | K-map result
 gpdvadsrdKMapEstimationResult :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2KMapEstimationResult)
 gpdvadsrdKMapEstimationResult
   = lens _gpdvadsrdKMapEstimationResult
       (\ s a -> s{_gpdvadsrdKMapEstimationResult = a})
 
+-- | The configuration used for this job.
+gpdvadsrdRequestedOptions :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2RequestedRiskAnalysisOptions)
+gpdvadsrdRequestedOptions
+  = lens _gpdvadsrdRequestedOptions
+      (\ s a -> s{_gpdvadsrdRequestedOptions = a})
+
+-- | Delta-presence result
 gpdvadsrdDeltaPresenceEstimationResult :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2DeltaPresenceEstimationResult)
 gpdvadsrdDeltaPresenceEstimationResult
   = lens _gpdvadsrdDeltaPresenceEstimationResult
       (\ s a ->
          s{_gpdvadsrdDeltaPresenceEstimationResult = a})
 
+-- | Numerical stats result
 gpdvadsrdNumericalStatsResult :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2NumericalStatsResult)
 gpdvadsrdNumericalStatsResult
   = lens _gpdvadsrdNumericalStatsResult
       (\ s a -> s{_gpdvadsrdNumericalStatsResult = a})
 
+-- | Categorical stats result
 gpdvadsrdCategoricalStatsResult :: Lens' GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (Maybe GooglePrivacyDlpV2CategoricalStatsResult)
 gpdvadsrdCategoricalStatsResult
   = lens _gpdvadsrdCategoricalStatsResult
@@ -9893,6 +11356,7 @@ instance FromJSON
                      <*> (o .:? "lDiversityResult")
                      <*> (o .:? "kAnonymityResult")
                      <*> (o .:? "kMapEstimationResult")
+                     <*> (o .:? "requestedOptions")
                      <*> (o .:? "deltaPresenceEstimationResult")
                      <*> (o .:? "numericalStatsResult")
                      <*> (o .:? "categoricalStatsResult"))
@@ -9914,6 +11378,8 @@ instance ToJSON
                     _gpdvadsrdKAnonymityResult,
                   ("kMapEstimationResult" .=) <$>
                     _gpdvadsrdKMapEstimationResult,
+                  ("requestedOptions" .=) <$>
+                    _gpdvadsrdRequestedOptions,
                   ("deltaPresenceEstimationResult" .=) <$>
                     _gpdvadsrdDeltaPresenceEstimationResult,
                   ("numericalStatsResult" .=) <$>
@@ -9942,6 +11408,7 @@ googlePrivacyDlpV2Conditions =
   GooglePrivacyDlpV2Conditions' {_gpdvcConditions = Nothing}
 
 
+-- | A collection of conditions.
 gpdvcConditions :: Lens' GooglePrivacyDlpV2Conditions [GooglePrivacyDlpV2Condition]
 gpdvcConditions
   = lens _gpdvcConditions
@@ -10007,7 +11474,7 @@ instance ToJSON GooglePrivacyDlpV2DatastoreKey where
 data GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues =
   GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues'
     { _gpdvdpeqivEstimatedProbability :: !(Maybe (Textual Double))
-    , _gpdvdpeqivQuasiIdsValues       :: !(Maybe [GooglePrivacyDlpV2Value])
+    , _gpdvdpeqivQuasiIdsValues :: !(Maybe [GooglePrivacyDlpV2Value])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10080,7 +11547,7 @@ instance ToJSON
 data GooglePrivacyDlpV2CharsToIgnore =
   GooglePrivacyDlpV2CharsToIgnore'
     { _gpdvctiCommonCharactersToIgnore :: !(Maybe GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore)
-    , _gpdvctiCharactersToSkip         :: !(Maybe Text)
+    , _gpdvctiCharactersToSkip :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10101,11 +11568,14 @@ googlePrivacyDlpV2CharsToIgnore =
     }
 
 
+-- | Common characters to not transform when masking. Useful to avoid
+-- removing punctuation.
 gpdvctiCommonCharactersToIgnore :: Lens' GooglePrivacyDlpV2CharsToIgnore (Maybe GooglePrivacyDlpV2CharsToIgnoreCommonCharactersToIgnore)
 gpdvctiCommonCharactersToIgnore
   = lens _gpdvctiCommonCharactersToIgnore
       (\ s a -> s{_gpdvctiCommonCharactersToIgnore = a})
 
+-- | Characters to not transform when masking.
 gpdvctiCharactersToSkip :: Lens' GooglePrivacyDlpV2CharsToIgnore (Maybe Text)
 gpdvctiCharactersToSkip
   = lens _gpdvctiCharactersToSkip
@@ -10139,7 +11609,7 @@ data GooglePrivacyDlpV2BigQueryTable =
   GooglePrivacyDlpV2BigQueryTable'
     { _gpdvbqtDataSetId :: !(Maybe Text)
     , _gpdvbqtProjectId :: !(Maybe Text)
-    , _gpdvbqtTableId   :: !(Maybe Text)
+    , _gpdvbqtTableId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10199,12 +11669,65 @@ instance ToJSON GooglePrivacyDlpV2BigQueryTable where
                   ("projectId" .=) <$> _gpdvbqtProjectId,
                   ("tableId" .=) <$> _gpdvbqtTableId])
 
+-- | Metadata Location
+--
+-- /See:/ 'googlePrivacyDlpV2MetadataLocation' smart constructor.
+data GooglePrivacyDlpV2MetadataLocation =
+  GooglePrivacyDlpV2MetadataLocation'
+    { _gpdvmlStorageLabel :: !(Maybe GooglePrivacyDlpV2StorageMetadataLabel)
+    , _gpdvmlType :: !(Maybe GooglePrivacyDlpV2MetadataLocationType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2MetadataLocation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvmlStorageLabel'
+--
+-- * 'gpdvmlType'
+googlePrivacyDlpV2MetadataLocation
+    :: GooglePrivacyDlpV2MetadataLocation
+googlePrivacyDlpV2MetadataLocation =
+  GooglePrivacyDlpV2MetadataLocation'
+    {_gpdvmlStorageLabel = Nothing, _gpdvmlType = Nothing}
+
+
+-- | Storage metadata.
+gpdvmlStorageLabel :: Lens' GooglePrivacyDlpV2MetadataLocation (Maybe GooglePrivacyDlpV2StorageMetadataLabel)
+gpdvmlStorageLabel
+  = lens _gpdvmlStorageLabel
+      (\ s a -> s{_gpdvmlStorageLabel = a})
+
+-- | Type of metadata containing the finding.
+gpdvmlType :: Lens' GooglePrivacyDlpV2MetadataLocation (Maybe GooglePrivacyDlpV2MetadataLocationType)
+gpdvmlType
+  = lens _gpdvmlType (\ s a -> s{_gpdvmlType = a})
+
+instance FromJSON GooglePrivacyDlpV2MetadataLocation
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2MetadataLocation"
+              (\ o ->
+                 GooglePrivacyDlpV2MetadataLocation' <$>
+                   (o .:? "storageLabel") <*> (o .:? "type"))
+
+instance ToJSON GooglePrivacyDlpV2MetadataLocation
+         where
+        toJSON GooglePrivacyDlpV2MetadataLocation'{..}
+          = object
+              (catMaybes
+                 [("storageLabel" .=) <$> _gpdvmlStorageLabel,
+                  ("type" .=) <$> _gpdvmlType])
+
+-- | Snapshot of the inspection configuration.
 --
 -- /See:/ 'googlePrivacyDlpV2RequestedOptions' smart constructor.
 data GooglePrivacyDlpV2RequestedOptions =
   GooglePrivacyDlpV2RequestedOptions'
     { _gpdvroSnapshotInspectTemplate :: !(Maybe GooglePrivacyDlpV2InspectTemplate)
-    , _gpdvroJobConfig               :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
+    , _gpdvroJobConfig :: !(Maybe GooglePrivacyDlpV2InspectJobConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10230,6 +11753,7 @@ gpdvroSnapshotInspectTemplate
   = lens _gpdvroSnapshotInspectTemplate
       (\ s a -> s{_gpdvroSnapshotInspectTemplate = a})
 
+-- | Inspect config.
 gpdvroJobConfig :: Lens' GooglePrivacyDlpV2RequestedOptions (Maybe GooglePrivacyDlpV2InspectJobConfig)
 gpdvroJobConfig
   = lens _gpdvroJobConfig
@@ -10258,16 +11782,16 @@ instance ToJSON GooglePrivacyDlpV2RequestedOptions
 -- /See:/ 'googlePrivacyDlpV2PrimitiveTransformation' smart constructor.
 data GooglePrivacyDlpV2PrimitiveTransformation =
   GooglePrivacyDlpV2PrimitiveTransformation'
-    { _gpdvptFixedSizeBucketingConfig  :: !(Maybe GooglePrivacyDlpV2FixedSizeBucketingConfig)
-    , _gpdvptRedactConfig              :: !(Maybe GooglePrivacyDlpV2RedactConfig)
-    , _gpdvptCharacterMaskConfig       :: !(Maybe GooglePrivacyDlpV2CharacterMaskConfig)
-    , _gpdvptTimePartConfig            :: !(Maybe GooglePrivacyDlpV2TimePartConfig)
-    , _gpdvptDateShiftConfig           :: !(Maybe GooglePrivacyDlpV2DateShiftConfig)
-    , _gpdvptBucketingConfig           :: !(Maybe GooglePrivacyDlpV2BucketingConfig)
+    { _gpdvptFixedSizeBucketingConfig :: !(Maybe GooglePrivacyDlpV2FixedSizeBucketingConfig)
+    , _gpdvptRedactConfig :: !(Maybe GooglePrivacyDlpV2RedactConfig)
+    , _gpdvptCharacterMaskConfig :: !(Maybe GooglePrivacyDlpV2CharacterMaskConfig)
+    , _gpdvptTimePartConfig :: !(Maybe GooglePrivacyDlpV2TimePartConfig)
+    , _gpdvptDateShiftConfig :: !(Maybe GooglePrivacyDlpV2DateShiftConfig)
+    , _gpdvptBucketingConfig :: !(Maybe GooglePrivacyDlpV2BucketingConfig)
     , _gpdvptReplaceWithInfoTypeConfig :: !(Maybe GooglePrivacyDlpV2ReplaceWithInfoTypeConfig)
     , _gpdvptCryptoDeterministicConfig :: !(Maybe GooglePrivacyDlpV2CryptoDeterministicConfig)
-    , _gpdvptCryptoHashConfig          :: !(Maybe GooglePrivacyDlpV2CryptoHashConfig)
-    , _gpdvptReplaceConfig             :: !(Maybe GooglePrivacyDlpV2ReplaceValueConfig)
+    , _gpdvptCryptoHashConfig :: !(Maybe GooglePrivacyDlpV2CryptoHashConfig)
+    , _gpdvptReplaceConfig :: !(Maybe GooglePrivacyDlpV2ReplaceValueConfig)
     , _gpdvptCryptoReplaceFfxFpeConfig :: !(Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10316,56 +11840,67 @@ googlePrivacyDlpV2PrimitiveTransformation =
     }
 
 
+-- | Fixed size bucketing
 gpdvptFixedSizeBucketingConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2FixedSizeBucketingConfig)
 gpdvptFixedSizeBucketingConfig
   = lens _gpdvptFixedSizeBucketingConfig
       (\ s a -> s{_gpdvptFixedSizeBucketingConfig = a})
 
+-- | Redact
 gpdvptRedactConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2RedactConfig)
 gpdvptRedactConfig
   = lens _gpdvptRedactConfig
       (\ s a -> s{_gpdvptRedactConfig = a})
 
+-- | Mask
 gpdvptCharacterMaskConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2CharacterMaskConfig)
 gpdvptCharacterMaskConfig
   = lens _gpdvptCharacterMaskConfig
       (\ s a -> s{_gpdvptCharacterMaskConfig = a})
 
+-- | Time extraction
 gpdvptTimePartConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2TimePartConfig)
 gpdvptTimePartConfig
   = lens _gpdvptTimePartConfig
       (\ s a -> s{_gpdvptTimePartConfig = a})
 
+-- | Date Shift
 gpdvptDateShiftConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2DateShiftConfig)
 gpdvptDateShiftConfig
   = lens _gpdvptDateShiftConfig
       (\ s a -> s{_gpdvptDateShiftConfig = a})
 
+-- | Bucketing
 gpdvptBucketingConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2BucketingConfig)
 gpdvptBucketingConfig
   = lens _gpdvptBucketingConfig
       (\ s a -> s{_gpdvptBucketingConfig = a})
 
+-- | Replace with infotype
 gpdvptReplaceWithInfoTypeConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2ReplaceWithInfoTypeConfig)
 gpdvptReplaceWithInfoTypeConfig
   = lens _gpdvptReplaceWithInfoTypeConfig
       (\ s a -> s{_gpdvptReplaceWithInfoTypeConfig = a})
 
+-- | Deterministic Crypto
 gpdvptCryptoDeterministicConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2CryptoDeterministicConfig)
 gpdvptCryptoDeterministicConfig
   = lens _gpdvptCryptoDeterministicConfig
       (\ s a -> s{_gpdvptCryptoDeterministicConfig = a})
 
+-- | Crypto
 gpdvptCryptoHashConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2CryptoHashConfig)
 gpdvptCryptoHashConfig
   = lens _gpdvptCryptoHashConfig
       (\ s a -> s{_gpdvptCryptoHashConfig = a})
 
+-- | Replace
 gpdvptReplaceConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2ReplaceValueConfig)
 gpdvptReplaceConfig
   = lens _gpdvptReplaceConfig
       (\ s a -> s{_gpdvptReplaceConfig = a})
 
+-- | Ffx-Fpe
 gpdvptCryptoReplaceFfxFpeConfig :: Lens' GooglePrivacyDlpV2PrimitiveTransformation (Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig)
 gpdvptCryptoReplaceFfxFpeConfig
   = lens _gpdvptCryptoReplaceFfxFpeConfig
@@ -10440,14 +11975,67 @@ instance ToJSON GooglePrivacyDlpV2CancelDlpJobRequest
          where
         toJSON = const emptyObject
 
+-- | An individual hybrid item to inspect. Will be stored temporarily during
+-- processing.
+--
+-- /See:/ 'googlePrivacyDlpV2HybridContentItem' smart constructor.
+data GooglePrivacyDlpV2HybridContentItem =
+  GooglePrivacyDlpV2HybridContentItem'
+    { _gpdvhciFindingDetails :: !(Maybe GooglePrivacyDlpV2HybridFindingDetails)
+    , _gpdvhciItem :: !(Maybe GooglePrivacyDlpV2ContentItem)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2HybridContentItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvhciFindingDetails'
+--
+-- * 'gpdvhciItem'
+googlePrivacyDlpV2HybridContentItem
+    :: GooglePrivacyDlpV2HybridContentItem
+googlePrivacyDlpV2HybridContentItem =
+  GooglePrivacyDlpV2HybridContentItem'
+    {_gpdvhciFindingDetails = Nothing, _gpdvhciItem = Nothing}
+
+
+-- | Supplementary information that will be added to each finding.
+gpdvhciFindingDetails :: Lens' GooglePrivacyDlpV2HybridContentItem (Maybe GooglePrivacyDlpV2HybridFindingDetails)
+gpdvhciFindingDetails
+  = lens _gpdvhciFindingDetails
+      (\ s a -> s{_gpdvhciFindingDetails = a})
+
+-- | The item to inspect.
+gpdvhciItem :: Lens' GooglePrivacyDlpV2HybridContentItem (Maybe GooglePrivacyDlpV2ContentItem)
+gpdvhciItem
+  = lens _gpdvhciItem (\ s a -> s{_gpdvhciItem = a})
+
+instance FromJSON GooglePrivacyDlpV2HybridContentItem
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2HybridContentItem"
+              (\ o ->
+                 GooglePrivacyDlpV2HybridContentItem' <$>
+                   (o .:? "findingDetails") <*> (o .:? "item"))
+
+instance ToJSON GooglePrivacyDlpV2HybridContentItem
+         where
+        toJSON GooglePrivacyDlpV2HybridContentItem'{..}
+          = object
+              (catMaybes
+                 [("findingDetails" .=) <$> _gpdvhciFindingDetails,
+                  ("item" .=) <$> _gpdvhciItem])
+
 -- | Location of a finding within a row or record.
 --
 -- /See:/ 'googlePrivacyDlpV2RecordLocation' smart constructor.
 data GooglePrivacyDlpV2RecordLocation =
   GooglePrivacyDlpV2RecordLocation'
     { _gpdvrlTableLocation :: !(Maybe GooglePrivacyDlpV2TableLocation)
-    , _gpdvrlFieldId       :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvrlRecordKey     :: !(Maybe GooglePrivacyDlpV2RecordKey)
+    , _gpdvrlFieldId :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvrlRecordKey :: !(Maybe GooglePrivacyDlpV2RecordKey)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10508,13 +12096,12 @@ instance ToJSON GooglePrivacyDlpV2RecordLocation
                   ("recordKey" .=) <$> _gpdvrlRecordKey])
 
 -- | Details information about an error encountered during job execution or
--- the results of an unsuccessful activation of the JobTrigger. Output only
--- field.
+-- the results of an unsuccessful activation of the JobTrigger.
 --
 -- /See:/ 'googlePrivacyDlpV2Error' smart constructor.
 data GooglePrivacyDlpV2Error =
   GooglePrivacyDlpV2Error'
-    { _gpdveDetails    :: !(Maybe GoogleRpcStatus)
+    { _gpdveDetails :: !(Maybe GoogleRpcStatus)
     , _gpdveTimestamps :: !(Maybe [DateTime'])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10533,6 +12120,7 @@ googlePrivacyDlpV2Error =
   GooglePrivacyDlpV2Error' {_gpdveDetails = Nothing, _gpdveTimestamps = Nothing}
 
 
+-- | Detailed error codes and messages.
 gpdveDetails :: Lens' GooglePrivacyDlpV2Error (Maybe GoogleRpcStatus)
 gpdveDetails
   = lens _gpdveDetails (\ s a -> s{_gpdveDetails = a})
@@ -10566,8 +12154,8 @@ instance ToJSON GooglePrivacyDlpV2Error where
 -- /See:/ 'googlePrivacyDlpV2StoredInfoType' smart constructor.
 data GooglePrivacyDlpV2StoredInfoType =
   GooglePrivacyDlpV2StoredInfoType'
-    { _gpdvsitCurrentVersion  :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeVersion)
-    , _gpdvsitName            :: !(Maybe Text)
+    { _gpdvsitCurrentVersion :: !(Maybe GooglePrivacyDlpV2StoredInfoTypeVersion)
+    , _gpdvsitName :: !(Maybe Text)
     , _gpdvsitPendingVersions :: !(Maybe [GooglePrivacyDlpV2StoredInfoTypeVersion])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -10638,9 +12226,9 @@ instance ToJSON GooglePrivacyDlpV2StoredInfoType
 -- /See:/ 'googlePrivacyDlpV2CryptoDeterministicConfig' smart constructor.
 data GooglePrivacyDlpV2CryptoDeterministicConfig =
   GooglePrivacyDlpV2CryptoDeterministicConfig'
-    { _gpdvcdcContext           :: !(Maybe GooglePrivacyDlpV2FieldId)
+    { _gpdvcdcContext :: !(Maybe GooglePrivacyDlpV2FieldId)
     , _gpdvcdcSurrogateInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvcdcCryptoKey         :: !(Maybe GooglePrivacyDlpV2CryptoKey)
+    , _gpdvcdcCryptoKey :: !(Maybe GooglePrivacyDlpV2CryptoKey)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10664,16 +12252,16 @@ googlePrivacyDlpV2CryptoDeterministicConfig =
     }
 
 
--- | Optional. A context may be used for higher security and maintaining
--- referential integrity such that the same identifier in two different
--- contexts will be given a distinct surrogate. The context is appended to
--- plaintext value being encrypted. On decryption the provided context is
--- validated against the value used during encryption. If a context was
--- provided during encryption, same context must be provided during
--- decryption as well. If the context is not set, plaintext would be used
--- as is for encryption. If the context is set but: 1. there is no record
--- present when transforming a given value or 2. the field is not present
--- when transforming a given value, plaintext would be used as is for
+-- | A context may be used for higher security and maintaining referential
+-- integrity such that the same identifier in two different contexts will
+-- be given a distinct surrogate. The context is appended to plaintext
+-- value being encrypted. On decryption the provided context is validated
+-- against the value used during encryption. If a context was provided
+-- during encryption, same context must be provided during decryption as
+-- well. If the context is not set, plaintext would be used as is for
+-- encryption. If the context is set but: 1. there is no record present
+-- when transforming a given value or 2. the field is not present when
+-- transforming a given value, plaintext would be used as is for
 -- encryption. Note that case (1) is expected when an
 -- \`InfoTypeTransformation\` is applied to both structured and
 -- non-structured \`ContentItem\`s.
@@ -10685,29 +12273,35 @@ gpdvcdcContext
 -- | The custom info type to annotate the surrogate with. This annotation
 -- will be applied to the surrogate by prefixing it with the name of the
 -- custom info type followed by the number of characters comprising the
--- surrogate. The following scheme defines the format: (): For example, if
--- the name of custom info type is \'MY_TOKEN_INFO_TYPE\' and the surrogate
--- is \'abc\', the full replacement value will be:
+-- surrogate. The following scheme defines the format: {info type
+-- name}({surrogate character count}):{surrogate} For example, if the name
+-- of custom info type is \'MY_TOKEN_INFO_TYPE\' and the surrogate is
+-- \'abc\', the full replacement value will be:
 -- \'MY_TOKEN_INFO_TYPE(3):abc\' This annotation identifies the surrogate
 -- when inspecting content using the custom info type \'Surrogate\'. This
--- facilitates reversal of the surrogate when it occurs in free text. In
--- order for inspection to work properly, the name of this info type must
--- not occur naturally anywhere in your data; otherwise, inspection may
--- either - reverse a surrogate that does not correspond to an actual
--- identifier - be unable to parse the surrogate and result in an error
--- Therefore, choose your custom info type name carefully after considering
--- what your data looks like. One way to select a name that has a high
--- chance of yielding reliable detection is to include one or more unicode
--- characters that are highly improbable to exist in your data. For
--- example, assuming your data is entered from a regular ASCII keyboard,
--- the symbol with the hex code point 29DD might be used like so:
--- ⧝MY_TOKEN_TYPE
+-- facilitates reversal of the surrogate when it occurs in free text. Note:
+-- For record transformations where the entire cell in a table is being
+-- transformed, surrogates are not mandatory. Surrogates are used to denote
+-- the location of the token and are necessary for re-identification in
+-- free form text. In order for inspection to work properly, the name of
+-- this info type must not occur naturally anywhere in your data;
+-- otherwise, inspection may either - reverse a surrogate that does not
+-- correspond to an actual identifier - be unable to parse the surrogate
+-- and result in an error Therefore, choose your custom info type name
+-- carefully after considering what your data looks like. One way to select
+-- a name that has a high chance of yielding reliable detection is to
+-- include one or more unicode characters that are highly improbable to
+-- exist in your data. For example, assuming your data is entered from a
+-- regular ASCII keyboard, the symbol with the hex code point 29DD might be
+-- used like so: ⧝MY_TOKEN_TYPE.
 gpdvcdcSurrogateInfoType :: Lens' GooglePrivacyDlpV2CryptoDeterministicConfig (Maybe GooglePrivacyDlpV2InfoType)
 gpdvcdcSurrogateInfoType
   = lens _gpdvcdcSurrogateInfoType
       (\ s a -> s{_gpdvcdcSurrogateInfoType = a})
 
--- | The key used by the encryption function.
+-- | The key used by the encryption function. For deterministic encryption
+-- using AES-SIV, the provided key is internally expanded to 64 bytes prior
+-- to use.
 gpdvcdcCryptoKey :: Lens' GooglePrivacyDlpV2CryptoDeterministicConfig (Maybe GooglePrivacyDlpV2CryptoKey)
 gpdvcdcCryptoKey
   = lens _gpdvcdcCryptoKey
@@ -10748,8 +12342,8 @@ instance ToJSON
 data GooglePrivacyDlpV2StatisticalTable =
   GooglePrivacyDlpV2StatisticalTable'
     { _gpdvstRelativeFrequency :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvstTable             :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
-    , _gpdvstQuasiIds          :: !(Maybe [GooglePrivacyDlpV2QuasiIdentifierField])
+    , _gpdvstTable :: !(Maybe GooglePrivacyDlpV2BigQueryTable)
+    , _gpdvstQuasiIds :: !(Maybe [GooglePrivacyDlpV2QuasiIdentifierField])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10773,20 +12367,19 @@ googlePrivacyDlpV2StatisticalTable =
     }
 
 
--- | The relative frequency column must contain a floating-point number
--- between 0 and 1 (inclusive). Null values are assumed to be zero.
--- [required]
+-- | Required. The relative frequency column must contain a floating-point
+-- number between 0 and 1 (inclusive). Null values are assumed to be zero.
 gpdvstRelativeFrequency :: Lens' GooglePrivacyDlpV2StatisticalTable (Maybe GooglePrivacyDlpV2FieldId)
 gpdvstRelativeFrequency
   = lens _gpdvstRelativeFrequency
       (\ s a -> s{_gpdvstRelativeFrequency = a})
 
--- | Auxiliary table location. [required]
+-- | Required. Auxiliary table location.
 gpdvstTable :: Lens' GooglePrivacyDlpV2StatisticalTable (Maybe GooglePrivacyDlpV2BigQueryTable)
 gpdvstTable
   = lens _gpdvstTable (\ s a -> s{_gpdvstTable = a})
 
--- | Quasi-identifier columns. [required]
+-- | Required. Quasi-identifier columns.
 gpdvstQuasiIds :: Lens' GooglePrivacyDlpV2StatisticalTable [GooglePrivacyDlpV2QuasiIdentifierField]
 gpdvstQuasiIds
   = lens _gpdvstQuasiIds
@@ -10813,19 +12406,19 @@ instance ToJSON GooglePrivacyDlpV2StatisticalTable
                   ("table" .=) <$> _gpdvstTable,
                   ("quasiIds" .=) <$> _gpdvstQuasiIds])
 
--- | The DeidentifyTemplates contains instructions on how to deidentify
--- content. See https:\/\/cloud.google.com\/dlp\/docs\/concepts-templates
--- to learn more.
+-- | DeidentifyTemplates contains instructions on how to de-identify content.
+-- See https:\/\/cloud.google.com\/dlp\/docs\/concepts-templates to learn
+-- more.
 --
 -- /See:/ 'googlePrivacyDlpV2DeidentifyTemplate' smart constructor.
 data GooglePrivacyDlpV2DeidentifyTemplate =
   GooglePrivacyDlpV2DeidentifyTemplate'
-    { _gpdvdtUpdateTime       :: !(Maybe DateTime')
-    , _gpdvdtName             :: !(Maybe Text)
+    { _gpdvdtUpdateTime :: !(Maybe DateTime')
+    , _gpdvdtName :: !(Maybe Text)
     , _gpdvdtDeidentifyConfig :: !(Maybe GooglePrivacyDlpV2DeidentifyConfig)
-    , _gpdvdtDisplayName      :: !(Maybe Text)
-    , _gpdvdtDescription      :: !(Maybe Text)
-    , _gpdvdtCreateTime       :: !(Maybe DateTime')
+    , _gpdvdtDisplayName :: !(Maybe Text)
+    , _gpdvdtDescription :: !(Maybe Text)
+    , _gpdvdtCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -10858,14 +12451,14 @@ googlePrivacyDlpV2DeidentifyTemplate =
     }
 
 
--- | The last update timestamp of a inspectTemplate, output only field.
+-- | Output only. The last update timestamp of an inspectTemplate.
 gpdvdtUpdateTime :: Lens' GooglePrivacyDlpV2DeidentifyTemplate (Maybe UTCTime)
 gpdvdtUpdateTime
   = lens _gpdvdtUpdateTime
       (\ s a -> s{_gpdvdtUpdateTime = a})
       . mapping _DateTime
 
--- | The template name. Output only. The template will have one of the
+-- | Output only. The template name. The template will have one of the
 -- following formats:
 -- \`projects\/PROJECT_ID\/deidentifyTemplates\/TEMPLATE_ID\` OR
 -- \`organizations\/ORGANIZATION_ID\/deidentifyTemplates\/TEMPLATE_ID\`
@@ -10873,8 +12466,7 @@ gpdvdtName :: Lens' GooglePrivacyDlpV2DeidentifyTemplate (Maybe Text)
 gpdvdtName
   = lens _gpdvdtName (\ s a -> s{_gpdvdtName = a})
 
--- | \/\/\/\/\/\/\/\/\/\/\/\/\/ \/\/ The core content of the template \/\/
--- \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+-- | The core content of the template.
 gpdvdtDeidentifyConfig :: Lens' GooglePrivacyDlpV2DeidentifyTemplate (Maybe GooglePrivacyDlpV2DeidentifyConfig)
 gpdvdtDeidentifyConfig
   = lens _gpdvdtDeidentifyConfig
@@ -10892,7 +12484,7 @@ gpdvdtDescription
   = lens _gpdvdtDescription
       (\ s a -> s{_gpdvdtDescription = a})
 
--- | The creation timestamp of a inspectTemplate, output only field.
+-- | Output only. The creation timestamp of an inspectTemplate.
 gpdvdtCreateTime :: Lens' GooglePrivacyDlpV2DeidentifyTemplate (Maybe UTCTime)
 gpdvdtCreateTime
   = lens _gpdvdtCreateTime
@@ -11061,7 +12653,7 @@ instance ToJSON
 data GooglePrivacyDlpV2ListJobTriggersResponse =
   GooglePrivacyDlpV2ListJobTriggersResponse'
     { _gpdvljtrNextPageToken :: !(Maybe Text)
-    , _gpdvljtrJobTriggers   :: !(Maybe [GooglePrivacyDlpV2JobTrigger])
+    , _gpdvljtrJobTriggers :: !(Maybe [GooglePrivacyDlpV2JobTrigger])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11155,14 +12747,41 @@ instance ToJSON GooglePrivacyDlpV2CloudStoragePath
         toJSON GooglePrivacyDlpV2CloudStoragePath'{..}
           = object (catMaybes [("path" .=) <$> _gpdvcspPath])
 
+-- | The request message for finishing a DLP hybrid job.
+--
+-- /See:/ 'googlePrivacyDlpV2FinishDlpJobRequest' smart constructor.
+data GooglePrivacyDlpV2FinishDlpJobRequest =
+  GooglePrivacyDlpV2FinishDlpJobRequest'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2FinishDlpJobRequest' with the minimum fields required to make a request.
+--
+googlePrivacyDlpV2FinishDlpJobRequest
+    :: GooglePrivacyDlpV2FinishDlpJobRequest
+googlePrivacyDlpV2FinishDlpJobRequest = GooglePrivacyDlpV2FinishDlpJobRequest'
+
+
+instance FromJSON
+           GooglePrivacyDlpV2FinishDlpJobRequest
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2FinishDlpJobRequest"
+              (\ o -> pure GooglePrivacyDlpV2FinishDlpJobRequest')
+
+instance ToJSON GooglePrivacyDlpV2FinishDlpJobRequest
+         where
+        toJSON = const emptyObject
+
 -- | Specifies the location of the finding.
 --
 -- /See:/ 'googlePrivacyDlpV2Location' smart constructor.
 data GooglePrivacyDlpV2Location =
   GooglePrivacyDlpV2Location'
-    { _gpdvlCodepointRange   :: !(Maybe GooglePrivacyDlpV2Range)
+    { _gpdvlCodepointRange :: !(Maybe GooglePrivacyDlpV2Range)
+    , _gpdvlContainer :: !(Maybe GooglePrivacyDlpV2Container)
     , _gpdvlContentLocations :: !(Maybe [GooglePrivacyDlpV2ContentLocation])
-    , _gpdvlByteRange        :: !(Maybe GooglePrivacyDlpV2Range)
+    , _gpdvlByteRange :: !(Maybe GooglePrivacyDlpV2Range)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11173,6 +12792,8 @@ data GooglePrivacyDlpV2Location =
 --
 -- * 'gpdvlCodepointRange'
 --
+-- * 'gpdvlContainer'
+--
 -- * 'gpdvlContentLocations'
 --
 -- * 'gpdvlByteRange'
@@ -11181,6 +12802,7 @@ googlePrivacyDlpV2Location
 googlePrivacyDlpV2Location =
   GooglePrivacyDlpV2Location'
     { _gpdvlCodepointRange = Nothing
+    , _gpdvlContainer = Nothing
     , _gpdvlContentLocations = Nothing
     , _gpdvlByteRange = Nothing
     }
@@ -11192,6 +12814,13 @@ gpdvlCodepointRange :: Lens' GooglePrivacyDlpV2Location (Maybe GooglePrivacyDlpV
 gpdvlCodepointRange
   = lens _gpdvlCodepointRange
       (\ s a -> s{_gpdvlCodepointRange = a})
+
+-- | Information about the container where this finding occurred, if
+-- available.
+gpdvlContainer :: Lens' GooglePrivacyDlpV2Location (Maybe GooglePrivacyDlpV2Container)
+gpdvlContainer
+  = lens _gpdvlContainer
+      (\ s a -> s{_gpdvlContainer = a})
 
 -- | List of nested objects pointing to the precise location of the finding
 -- within the file or record.
@@ -11216,7 +12845,7 @@ instance FromJSON GooglePrivacyDlpV2Location where
           = withObject "GooglePrivacyDlpV2Location"
               (\ o ->
                  GooglePrivacyDlpV2Location' <$>
-                   (o .:? "codepointRange") <*>
+                   (o .:? "codepointRange") <*> (o .:? "container") <*>
                      (o .:? "contentLocations" .!= mempty)
                      <*> (o .:? "byteRange"))
 
@@ -11225,10 +12854,11 @@ instance ToJSON GooglePrivacyDlpV2Location where
           = object
               (catMaybes
                  [("codepointRange" .=) <$> _gpdvlCodepointRange,
+                  ("container" .=) <$> _gpdvlContainer,
                   ("contentLocations" .=) <$> _gpdvlContentLocations,
                   ("byteRange" .=) <$> _gpdvlByteRange])
 
--- | Schedule for triggeredJobs.
+-- | Schedule for inspect job triggers.
 --
 -- /See:/ 'googlePrivacyDlpV2Schedule' smart constructor.
 newtype GooglePrivacyDlpV2Schedule =
@@ -11279,8 +12909,9 @@ instance ToJSON GooglePrivacyDlpV2Schedule where
 -- /See:/ 'googlePrivacyDlpV2CreateJobTriggerRequest' smart constructor.
 data GooglePrivacyDlpV2CreateJobTriggerRequest =
   GooglePrivacyDlpV2CreateJobTriggerRequest'
-    { _gpdvcjtrTriggerId  :: !(Maybe Text)
+    { _gpdvcjtrTriggerId :: !(Maybe Text)
     , _gpdvcjtrJobTrigger :: !(Maybe GooglePrivacyDlpV2JobTrigger)
+    , _gpdvcjtrLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -11292,27 +12923,38 @@ data GooglePrivacyDlpV2CreateJobTriggerRequest =
 -- * 'gpdvcjtrTriggerId'
 --
 -- * 'gpdvcjtrJobTrigger'
+--
+-- * 'gpdvcjtrLocationId'
 googlePrivacyDlpV2CreateJobTriggerRequest
     :: GooglePrivacyDlpV2CreateJobTriggerRequest
 googlePrivacyDlpV2CreateJobTriggerRequest =
   GooglePrivacyDlpV2CreateJobTriggerRequest'
-    {_gpdvcjtrTriggerId = Nothing, _gpdvcjtrJobTrigger = Nothing}
+    { _gpdvcjtrTriggerId = Nothing
+    , _gpdvcjtrJobTrigger = Nothing
+    , _gpdvcjtrLocationId = Nothing
+    }
 
 
 -- | The trigger id can contain uppercase and lowercase letters, numbers, and
 -- hyphens; that is, it must match the regular expression:
--- \`[a-zA-Z\\\\d-_]+\`. The maximum length is 100 characters. Can be empty
+-- \`[a-zA-Z\\d-_]+\`. The maximum length is 100 characters. Can be empty
 -- to allow the system to generate one.
 gpdvcjtrTriggerId :: Lens' GooglePrivacyDlpV2CreateJobTriggerRequest (Maybe Text)
 gpdvcjtrTriggerId
   = lens _gpdvcjtrTriggerId
       (\ s a -> s{_gpdvcjtrTriggerId = a})
 
--- | The JobTrigger to create.
+-- | Required. The JobTrigger to create.
 gpdvcjtrJobTrigger :: Lens' GooglePrivacyDlpV2CreateJobTriggerRequest (Maybe GooglePrivacyDlpV2JobTrigger)
 gpdvcjtrJobTrigger
   = lens _gpdvcjtrJobTrigger
       (\ s a -> s{_gpdvcjtrJobTrigger = a})
+
+-- | Deprecated. This field has no effect.
+gpdvcjtrLocationId :: Lens' GooglePrivacyDlpV2CreateJobTriggerRequest (Maybe Text)
+gpdvcjtrLocationId
+  = lens _gpdvcjtrLocationId
+      (\ s a -> s{_gpdvcjtrLocationId = a})
 
 instance FromJSON
            GooglePrivacyDlpV2CreateJobTriggerRequest
@@ -11322,7 +12964,8 @@ instance FromJSON
               "GooglePrivacyDlpV2CreateJobTriggerRequest"
               (\ o ->
                  GooglePrivacyDlpV2CreateJobTriggerRequest' <$>
-                   (o .:? "triggerId") <*> (o .:? "jobTrigger"))
+                   (o .:? "triggerId") <*> (o .:? "jobTrigger") <*>
+                     (o .:? "locationId"))
 
 instance ToJSON
            GooglePrivacyDlpV2CreateJobTriggerRequest
@@ -11331,14 +12974,15 @@ instance ToJSON
           = object
               (catMaybes
                  [("triggerId" .=) <$> _gpdvcjtrTriggerId,
-                  ("jobTrigger" .=) <$> _gpdvcjtrJobTrigger])
+                  ("jobTrigger" .=) <$> _gpdvcjtrJobTrigger,
+                  ("locationId" .=) <$> _gpdvcjtrLocationId])
 
 -- | Overview of the modifications that occurred.
 --
 -- /See:/ 'googlePrivacyDlpV2TransformationOverview' smart constructor.
 data GooglePrivacyDlpV2TransformationOverview =
   GooglePrivacyDlpV2TransformationOverview'
-    { _gpdvtoTransformedBytes        :: !(Maybe (Textual Int64))
+    { _gpdvtoTransformedBytes :: !(Maybe (Textual Int64))
     , _gpdvtoTransformationSummaries :: !(Maybe [GooglePrivacyDlpV2TransformationSummary])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11395,6 +13039,47 @@ instance ToJSON
                  [("transformedBytes" .=) <$> _gpdvtoTransformedBytes,
                   ("transformationSummaries" .=) <$>
                     _gpdvtoTransformationSummaries])
+
+-- | Storage metadata label to indicate which metadata entry contains
+-- findings.
+--
+-- /See:/ 'googlePrivacyDlpV2StorageMetadataLabel' smart constructor.
+newtype GooglePrivacyDlpV2StorageMetadataLabel =
+  GooglePrivacyDlpV2StorageMetadataLabel'
+    { _gpdvsmlKey :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GooglePrivacyDlpV2StorageMetadataLabel' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpdvsmlKey'
+googlePrivacyDlpV2StorageMetadataLabel
+    :: GooglePrivacyDlpV2StorageMetadataLabel
+googlePrivacyDlpV2StorageMetadataLabel =
+  GooglePrivacyDlpV2StorageMetadataLabel' {_gpdvsmlKey = Nothing}
+
+
+gpdvsmlKey :: Lens' GooglePrivacyDlpV2StorageMetadataLabel (Maybe Text)
+gpdvsmlKey
+  = lens _gpdvsmlKey (\ s a -> s{_gpdvsmlKey = a})
+
+instance FromJSON
+           GooglePrivacyDlpV2StorageMetadataLabel
+         where
+        parseJSON
+          = withObject "GooglePrivacyDlpV2StorageMetadataLabel"
+              (\ o ->
+                 GooglePrivacyDlpV2StorageMetadataLabel' <$>
+                   (o .:? "key"))
+
+instance ToJSON
+           GooglePrivacyDlpV2StorageMetadataLabel
+         where
+        toJSON GooglePrivacyDlpV2StorageMetadataLabel'{..}
+          = object (catMaybes [("key" .=) <$> _gpdvsmlKey])
 
 -- | Location of the finding within an image.
 --
@@ -11483,11 +13168,11 @@ instance ToJSON GooglePrivacyDlpV2KindExpression
 -- /See:/ 'googlePrivacyDlpV2PrivacyMetric' smart constructor.
 data GooglePrivacyDlpV2PrivacyMetric =
   GooglePrivacyDlpV2PrivacyMetric'
-    { _gpdvpmNumericalStatsConfig          :: !(Maybe GooglePrivacyDlpV2NumericalStatsConfig)
-    , _gpdvpmCategoricalStatsConfig        :: !(Maybe GooglePrivacyDlpV2CategoricalStatsConfig)
-    , _gpdvpmKMapEstimationConfig          :: !(Maybe GooglePrivacyDlpV2KMapEstimationConfig)
-    , _gpdvpmKAnonymityConfig              :: !(Maybe GooglePrivacyDlpV2KAnonymityConfig)
-    , _gpdvpmLDiversityConfig              :: !(Maybe GooglePrivacyDlpV2LDiversityConfig)
+    { _gpdvpmNumericalStatsConfig :: !(Maybe GooglePrivacyDlpV2NumericalStatsConfig)
+    , _gpdvpmCategoricalStatsConfig :: !(Maybe GooglePrivacyDlpV2CategoricalStatsConfig)
+    , _gpdvpmKMapEstimationConfig :: !(Maybe GooglePrivacyDlpV2KMapEstimationConfig)
+    , _gpdvpmKAnonymityConfig :: !(Maybe GooglePrivacyDlpV2KAnonymityConfig)
+    , _gpdvpmLDiversityConfig :: !(Maybe GooglePrivacyDlpV2LDiversityConfig)
     , _gpdvpmDeltaPresenceEstimationConfig :: !(Maybe GooglePrivacyDlpV2DeltaPresenceEstimationConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11521,31 +13206,37 @@ googlePrivacyDlpV2PrivacyMetric =
     }
 
 
+-- | Numerical stats
 gpdvpmNumericalStatsConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2NumericalStatsConfig)
 gpdvpmNumericalStatsConfig
   = lens _gpdvpmNumericalStatsConfig
       (\ s a -> s{_gpdvpmNumericalStatsConfig = a})
 
+-- | Categorical stats
 gpdvpmCategoricalStatsConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2CategoricalStatsConfig)
 gpdvpmCategoricalStatsConfig
   = lens _gpdvpmCategoricalStatsConfig
       (\ s a -> s{_gpdvpmCategoricalStatsConfig = a})
 
+-- | k-map
 gpdvpmKMapEstimationConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2KMapEstimationConfig)
 gpdvpmKMapEstimationConfig
   = lens _gpdvpmKMapEstimationConfig
       (\ s a -> s{_gpdvpmKMapEstimationConfig = a})
 
+-- | K-anonymity
 gpdvpmKAnonymityConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2KAnonymityConfig)
 gpdvpmKAnonymityConfig
   = lens _gpdvpmKAnonymityConfig
       (\ s a -> s{_gpdvpmKAnonymityConfig = a})
 
+-- | l-diversity
 gpdvpmLDiversityConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2LDiversityConfig)
 gpdvpmLDiversityConfig
   = lens _gpdvpmLDiversityConfig
       (\ s a -> s{_gpdvpmLDiversityConfig = a})
 
+-- | delta-presence
 gpdvpmDeltaPresenceEstimationConfig :: Lens' GooglePrivacyDlpV2PrivacyMetric (Maybe GooglePrivacyDlpV2DeltaPresenceEstimationConfig)
 gpdvpmDeltaPresenceEstimationConfig
   = lens _gpdvpmDeltaPresenceEstimationConfig
@@ -11602,7 +13293,7 @@ googlePrivacyDlpV2UnwrAppedCryptoKey =
   GooglePrivacyDlpV2UnwrAppedCryptoKey' {_gpdvuackKey = Nothing}
 
 
--- | A 128\/192\/256 bit key. [required]
+-- | Required. A 128\/192\/256 bit key.
 gpdvuackKey :: Lens' GooglePrivacyDlpV2UnwrAppedCryptoKey (Maybe ByteString)
 gpdvuackKey
   = lens _gpdvuackKey (\ s a -> s{_gpdvuackKey = a}) .
@@ -11629,7 +13320,7 @@ instance ToJSON GooglePrivacyDlpV2UnwrAppedCryptoKey
 -- /See:/ 'googlePrivacyDlpV2InspectionRuleSet' smart constructor.
 data GooglePrivacyDlpV2InspectionRuleSet =
   GooglePrivacyDlpV2InspectionRuleSet'
-    { _gpdvirsRules     :: !(Maybe [GooglePrivacyDlpV2InspectionRule])
+    { _gpdvirsRules :: !(Maybe [GooglePrivacyDlpV2InspectionRule])
     , _gpdvirsInfoTypes :: !(Maybe [GooglePrivacyDlpV2InfoType])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11686,9 +13377,9 @@ instance ToJSON GooglePrivacyDlpV2InspectionRuleSet
 -- /See:/ 'googlePrivacyDlpV2QuasiId' smart constructor.
 data GooglePrivacyDlpV2QuasiId =
   GooglePrivacyDlpV2QuasiId'
-    { _gpdvqiField     :: !(Maybe GooglePrivacyDlpV2FieldId)
-    , _gpdvqiInfoType  :: !(Maybe GooglePrivacyDlpV2InfoType)
-    , _gpdvqiInferred  :: !(Maybe GoogleProtobufEmpty)
+    { _gpdvqiField :: !(Maybe GooglePrivacyDlpV2FieldId)
+    , _gpdvqiInfoType :: !(Maybe GooglePrivacyDlpV2InfoType)
+    , _gpdvqiInferred :: !(Maybe GoogleProtobufEmpty)
     , _gpdvqiCustomTag :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -11716,7 +13407,7 @@ googlePrivacyDlpV2QuasiId =
     }
 
 
--- | Identifies the column. [required]
+-- | Required. Identifies the column.
 gpdvqiField :: Lens' GooglePrivacyDlpV2QuasiId (Maybe GooglePrivacyDlpV2FieldId)
 gpdvqiField
   = lens _gpdvqiField (\ s a -> s{_gpdvqiField = a})

@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
     , pciAccountId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.insert@ method which the
 -- 'PretargetingConfigInsert' request conforms to.
@@ -56,7 +56,7 @@ type PretargetingConfigInsertResource =
 -- /See:/ 'pretargetingConfigInsert' smart constructor.
 data PretargetingConfigInsert =
   PretargetingConfigInsert'
-    { _pciPayload   :: !PretargetingConfig
+    { _pciPayload :: !PretargetingConfig
     , _pciAccountId :: !(Textual Int64)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

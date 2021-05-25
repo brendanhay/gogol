@@ -17,15 +17,15 @@
 --
 module Network.Google.YouTubeAnalytics.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types.Sum
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | A group\'s content details.
 --
 -- /See:/ 'groupContentDetails' smart constructor.
 data GroupContentDetails =
   GroupContentDetails'
-    { _gcdItemType  :: !(Maybe Text)
+    { _gcdItemType :: !(Maybe Text)
     , _gcdItemCount :: !(Maybe (Textual Word64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -76,12 +76,12 @@ instance ToJSON GroupContentDetails where
 -- /See:/ 'group'' smart constructor.
 data Group =
   Group'
-    { _gEtag           :: !(Maybe Text)
-    , _gSnippet        :: !(Maybe GroupSnippet)
-    , _gKind           :: !(Maybe Text)
+    { _gEtag :: !(Maybe Text)
+    , _gSnippet :: !(Maybe GroupSnippet)
+    , _gKind :: !(Maybe Text)
     , _gContentDetails :: !(Maybe GroupContentDetails)
-    , _gId             :: !(Maybe Text)
-    , _gErrors         :: !(Maybe Errors)
+    , _gId :: !(Maybe Text)
+    , _gErrors :: !(Maybe Errors)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -168,11 +168,11 @@ instance ToJSON Group where
 -- /See:/ 'listGroupsResponse' smart constructor.
 data ListGroupsResponse =
   ListGroupsResponse'
-    { _lgrEtag          :: !(Maybe Text)
+    { _lgrEtag :: !(Maybe Text)
     , _lgrNextPageToken :: !(Maybe Text)
-    , _lgrKind          :: !(Maybe Text)
-    , _lgrItems         :: !(Maybe [Group])
-    , _lgrErrors        :: !(Maybe Errors)
+    , _lgrKind :: !(Maybe Text)
+    , _lgrItems :: !(Maybe [Group])
+    , _lgrErrors :: !(Maybe Errors)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -255,9 +255,9 @@ instance ToJSON ListGroupsResponse where
 -- /See:/ 'listGroupItemsResponse' smart constructor.
 data ListGroupItemsResponse =
   ListGroupItemsResponse'
-    { _lgirEtag   :: !(Maybe Text)
-    , _lgirKind   :: !(Maybe Text)
-    , _lgirItems  :: !(Maybe [GroupItem])
+    { _lgirEtag :: !(Maybe Text)
+    , _lgirKind :: !(Maybe Text)
+    , _lgirItems :: !(Maybe [GroupItem])
     , _lgirErrors :: !(Maybe Errors)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -330,7 +330,7 @@ instance ToJSON ListGroupItemsResponse where
 data GroupItemResource =
   GroupItemResource'
     { _girKind :: !(Maybe Text)
-    , _girId   :: !(Maybe Text)
+    , _girId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -377,7 +377,7 @@ instance ToJSON GroupItemResource where
 data GroupSnippet =
   GroupSnippet'
     { _gsPublishedAt :: !(Maybe DateTime')
-    , _gsTitle       :: !(Maybe Text)
+    , _gsTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -425,12 +425,12 @@ instance ToJSON GroupSnippet where
 -- /See:/ 'groupItem' smart constructor.
 data GroupItem =
   GroupItem'
-    { _giEtag     :: !(Maybe Text)
-    , _giKind     :: !(Maybe Text)
+    { _giEtag :: !(Maybe Text)
+    , _giKind :: !(Maybe Text)
     , _giResource :: !(Maybe GroupItemResource)
-    , _giGroupId  :: !(Maybe Text)
-    , _giId       :: !(Maybe Text)
-    , _giErrors   :: !(Maybe Errors)
+    , _giGroupId :: !(Maybe Text)
+    , _giId :: !(Maybe Text)
+    , _giErrors :: !(Maybe Errors)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -525,8 +525,8 @@ instance ToJSON GroupItem where
 data Errors =
   Errors'
     { _eRequestId :: !(Maybe Text)
-    , _eError     :: !(Maybe [ErrorProto])
-    , _eCode      :: !(Maybe ErrorsCode)
+    , _eError :: !(Maybe [ErrorProto])
+    , _eCode :: !(Maybe ErrorsCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -583,8 +583,8 @@ instance ToJSON Errors where
 data ResultTableColumnHeader =
   ResultTableColumnHeader'
     { _rtchColumnType :: !(Maybe Text)
-    , _rtchName       :: !(Maybe Text)
-    , _rtchDataType   :: !(Maybe Text)
+    , _rtchName :: !(Maybe Text)
+    , _rtchDataType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -642,13 +642,13 @@ instance ToJSON ResultTableColumnHeader where
 -- /See:/ 'errorProto' smart constructor.
 data ErrorProto =
   ErrorProto'
-    { _epDebugInfo            :: !(Maybe Text)
-    , _epLocation             :: !(Maybe Text)
-    , _epDomain               :: !(Maybe Text)
-    , _epArgument             :: !(Maybe [Text])
+    { _epDebugInfo :: !(Maybe Text)
+    , _epLocation :: !(Maybe Text)
+    , _epDomain :: !(Maybe Text)
+    , _epArgument :: !(Maybe [Text])
     , _epExternalErrorMessage :: !(Maybe Text)
-    , _epCode                 :: !(Maybe Text)
-    , _epLocationType         :: !(Maybe ErrorProtoLocationType)
+    , _epCode :: !(Maybe Text)
+    , _epLocationType :: !(Maybe ErrorProtoLocationType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -799,10 +799,10 @@ instance ToJSON EmptyResponse where
 -- /See:/ 'queryResponse' smart constructor.
 data QueryResponse =
   QueryResponse'
-    { _qrKind          :: !(Maybe Text)
-    , _qrRows          :: !(Maybe [[JSONValue]])
+    { _qrKind :: !(Maybe Text)
+    , _qrRows :: !(Maybe [[JSONValue]])
     , _qrColumnHeaders :: !(Maybe [ResultTableColumnHeader])
-    , _qrErrors        :: !(Maybe Errors)
+    , _qrErrors :: !(Maybe Errors)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

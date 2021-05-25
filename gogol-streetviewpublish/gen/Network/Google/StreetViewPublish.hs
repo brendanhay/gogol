@@ -95,6 +95,9 @@ module Network.Google.StreetViewPublish
     , sCode
     , sMessage
 
+    -- ** PhotoGetView
+    , PhotoGetView (..)
+
     -- ** PhotoResponse
     , PhotoResponse
     , photoResponse
@@ -113,6 +116,9 @@ module Network.Google.StreetViewPublish
     -- ** Empty
     , Empty
     , empty
+
+    -- ** PhotosListView
+    , PhotosListView (..)
 
     -- ** StatusDetailsItem
     , StatusDetailsItem
@@ -158,6 +164,9 @@ module Network.Google.StreetViewPublish
 
     -- ** Xgafv
     , Xgafv (..)
+
+    -- ** PhotosBatchGetView
+    , PhotosBatchGetView (..)
 
     -- ** OperationMetadata
     , OperationMetadata
@@ -209,17 +218,17 @@ module Network.Google.StreetViewPublish
     , piId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.StreetViewPublish.Photo.Create
-import           Network.Google.Resource.StreetViewPublish.Photo.Delete
-import           Network.Google.Resource.StreetViewPublish.Photo.Get
-import           Network.Google.Resource.StreetViewPublish.Photo.StartUpload
-import           Network.Google.Resource.StreetViewPublish.Photo.Update
-import           Network.Google.Resource.StreetViewPublish.Photos.BatchDelete
-import           Network.Google.Resource.StreetViewPublish.Photos.BatchGet
-import           Network.Google.Resource.StreetViewPublish.Photos.BatchUpdate
-import           Network.Google.Resource.StreetViewPublish.Photos.List
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.Resource.StreetViewPublish.Photo.Create
+import Network.Google.Resource.StreetViewPublish.Photo.Delete
+import Network.Google.Resource.StreetViewPublish.Photo.Get
+import Network.Google.Resource.StreetViewPublish.Photo.StartUpload
+import Network.Google.Resource.StreetViewPublish.Photo.Update
+import Network.Google.Resource.StreetViewPublish.Photos.BatchDelete
+import Network.Google.Resource.StreetViewPublish.Photos.BatchGet
+import Network.Google.Resource.StreetViewPublish.Photos.BatchUpdate
+import Network.Google.Resource.StreetViewPublish.Photos.List
+import Network.Google.StreetViewPublish.Types
 
 {- $resources
 TODO

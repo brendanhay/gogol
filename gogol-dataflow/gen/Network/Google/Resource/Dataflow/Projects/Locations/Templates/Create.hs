@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Templates.Create
     , pltcCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.templates.create@ method which the
 -- 'ProjectsLocationsTemplatesCreate' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsLocationsTemplatesCreateResource =
 -- /See:/ 'projectsLocationsTemplatesCreate' smart constructor.
 data ProjectsLocationsTemplatesCreate =
   ProjectsLocationsTemplatesCreate'
-    { _pltcXgafv          :: !(Maybe Xgafv)
+    { _pltcXgafv :: !(Maybe Xgafv)
     , _pltcUploadProtocol :: !(Maybe Text)
-    , _pltcLocation       :: !Text
-    , _pltcAccessToken    :: !(Maybe Text)
-    , _pltcUploadType     :: !(Maybe Text)
-    , _pltcPayload        :: !CreateJobFromTemplateRequest
-    , _pltcProjectId      :: !Text
-    , _pltcCallback       :: !(Maybe Text)
+    , _pltcLocation :: !Text
+    , _pltcAccessToken :: !(Maybe Text)
+    , _pltcUploadType :: !(Maybe Text)
+    , _pltcPayload :: !CreateJobFromTemplateRequest
+    , _pltcProjectId :: !Text
+    , _pltcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

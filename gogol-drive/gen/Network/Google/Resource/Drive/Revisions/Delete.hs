@@ -40,8 +40,8 @@ module Network.Google.Resource.Drive.Revisions.Delete
     , rRevisionId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.delete@ method which the
 -- 'RevisionsDelete' request conforms to.
@@ -62,7 +62,7 @@ type RevisionsDeleteResource =
 -- /See:/ 'revisionsDelete' smart constructor.
 data RevisionsDelete =
   RevisionsDelete'
-    { _rFileId     :: !Text
+    { _rFileId :: !Text
     , _rRevisionId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

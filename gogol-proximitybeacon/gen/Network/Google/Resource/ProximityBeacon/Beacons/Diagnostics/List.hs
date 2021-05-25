@@ -51,8 +51,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     , bdlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.diagnostics.list@ method which the
 -- 'BeaconsDiagnosticsList' request conforms to.
@@ -83,16 +83,16 @@ type BeaconsDiagnosticsListResource =
 -- /See:/ 'beaconsDiagnosticsList' smart constructor.
 data BeaconsDiagnosticsList =
   BeaconsDiagnosticsList'
-    { _bdlXgafv          :: !(Maybe Xgafv)
+    { _bdlXgafv :: !(Maybe Xgafv)
     , _bdlUploadProtocol :: !(Maybe Text)
-    , _bdlAccessToken    :: !(Maybe Text)
-    , _bdlBeaconName     :: !Text
-    , _bdlUploadType     :: !(Maybe Text)
-    , _bdlPageToken      :: !(Maybe Text)
-    , _bdlProjectId      :: !(Maybe Text)
-    , _bdlPageSize       :: !(Maybe (Textual Int32))
-    , _bdlAlertFilter    :: !(Maybe Text)
-    , _bdlCallback       :: !(Maybe Text)
+    , _bdlAccessToken :: !(Maybe Text)
+    , _bdlBeaconName :: !Text
+    , _bdlUploadType :: !(Maybe Text)
+    , _bdlPageToken :: !(Maybe Text)
+    , _bdlProjectId :: !(Maybe Text)
+    , _bdlPageSize :: !(Maybe (Textual Int32))
+    , _bdlAlertFilter :: !(Maybe Text)
+    , _bdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.Language.Documents.ClassifyText
     , dctCallback
     ) where
 
-import           Network.Google.Language.Types
-import           Network.Google.Prelude
+import Network.Google.Language.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @language.documents.classifyText@ method which the
 -- 'DocumentsClassifyText' request conforms to.
@@ -63,12 +63,12 @@ type DocumentsClassifyTextResource =
 -- /See:/ 'documentsClassifyText' smart constructor.
 data DocumentsClassifyText =
   DocumentsClassifyText'
-    { _dctXgafv          :: !(Maybe Xgafv)
+    { _dctXgafv :: !(Maybe Xgafv)
     , _dctUploadProtocol :: !(Maybe Text)
-    , _dctAccessToken    :: !(Maybe Text)
-    , _dctUploadType     :: !(Maybe Text)
-    , _dctPayload        :: !ClassifyTextRequest
-    , _dctCallback       :: !(Maybe Text)
+    , _dctAccessToken :: !(Maybe Text)
+    , _dctUploadType :: !(Maybe Text)
+    , _dctPayload :: !ClassifyTextRequest
+    , _dctCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,8 +43,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.List
     , ptlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.list@ method which the
 -- 'ProjectsTopicsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsTopicsListResource =
 -- /See:/ 'projectsTopicsList' smart constructor.
 data ProjectsTopicsList =
   ProjectsTopicsList'
-    { _ptlXgafv          :: !(Maybe Xgafv)
+    { _ptlXgafv :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
-    , _ptlProject        :: !Text
-    , _ptlAccessToken    :: !(Maybe Text)
-    , _ptlUploadType     :: !(Maybe Text)
-    , _ptlPageToken      :: !(Maybe Text)
-    , _ptlPageSize       :: !(Maybe (Textual Int32))
-    , _ptlCallback       :: !(Maybe Text)
+    , _ptlProject :: !Text
+    , _ptlAccessToken :: !(Maybe Text)
+    , _ptlUploadType :: !(Maybe Text)
+    , _ptlPageToken :: !(Maybe Text)
+    , _ptlPageSize :: !(Maybe (Textual Int32))
+    , _ptlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,7 +124,7 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | The name of the project in which to list topics. Format is
+-- | Required. The name of the project in which to list topics. Format is
 -- \`projects\/{project-id}\`.
 ptlProject :: Lens' ProjectsTopicsList Text
 ptlProject

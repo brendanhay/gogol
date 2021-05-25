@@ -51,8 +51,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     , babdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.attachments.batchDelete@ method which the
 -- 'BeaconsAttachmentsBatchDelete' request conforms to.
@@ -83,14 +83,14 @@ type BeaconsAttachmentsBatchDeleteResource =
 -- /See:/ 'beaconsAttachmentsBatchDelete' smart constructor.
 data BeaconsAttachmentsBatchDelete =
   BeaconsAttachmentsBatchDelete'
-    { _babdXgafv          :: !(Maybe Xgafv)
+    { _babdXgafv :: !(Maybe Xgafv)
     , _babdUploadProtocol :: !(Maybe Text)
-    , _babdAccessToken    :: !(Maybe Text)
-    , _babdBeaconName     :: !Text
-    , _babdUploadType     :: !(Maybe Text)
+    , _babdAccessToken :: !(Maybe Text)
+    , _babdBeaconName :: !Text
+    , _babdUploadType :: !(Maybe Text)
     , _babdNamespacedType :: !(Maybe Text)
-    , _babdProjectId      :: !(Maybe Text)
-    , _babdCallback       :: !(Maybe Text)
+    , _babdProjectId :: !(Maybe Text)
+    , _babdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

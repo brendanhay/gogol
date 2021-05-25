@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Update
     , mguAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.update@ method which the
 -- 'ManagementGoalsUpdate' request conforms to.
@@ -66,10 +66,10 @@ type ManagementGoalsUpdateResource =
 data ManagementGoalsUpdate =
   ManagementGoalsUpdate'
     { _mguWebPropertyId :: !Text
-    , _mguGoalId        :: !Text
-    , _mguProFileId     :: !Text
-    , _mguPayload       :: !Goal
-    , _mguAccountId     :: !Text
+    , _mguGoalId :: !Text
+    , _mguProFileId :: !Text
+    , _mguPayload :: !Goal
+    , _mguAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

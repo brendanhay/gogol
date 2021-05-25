@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -46,13 +46,28 @@ module Network.Google.Composer.Types
     , lerNextPageToken
     , lerEnvironments
 
+    -- * WebServerConfig
+    , WebServerConfig
+    , webServerConfig
+    , wscMachineType
+
+    -- * DatabaseConfig
+    , DatabaseConfig
+    , databaseConfig
+    , dcMachineType
+
     -- * EnvironmentConfig
     , EnvironmentConfig
     , environmentConfig
+    , ecDatabaseConfig
+    , ecWebServerConfig
     , ecNodeConfig
     , ecNodeCount
+    , ecPrivateEnvironmentConfig
+    , ecEncryptionConfig
     , ecSoftwareConfig
     , ecDagGcsPrefix
+    , ecWebServerNetworkAccessControl
     , ecGkeCluster
     , ecAirflowURI
 
@@ -69,6 +84,7 @@ module Network.Google.Composer.Types
     , ncLocation
     , ncNetwork
     , ncOAuthScopes
+    , ncIPAllocationPolicy
     , ncServiceAccount
     , ncSubnetwork
     , ncMachineType
@@ -98,6 +114,9 @@ module Network.Google.Composer.Types
     -- * ImageVersion
     , ImageVersion
     , imageVersion
+    , ivUpgradeDisabled
+    , ivCreationDisabled
+    , ivReleaseDate
     , ivImageVersionId
     , ivSupportedPythonVersions
     , ivIsDefault
@@ -123,6 +142,36 @@ module Network.Google.Composer.Types
     , statusDetailsItem
     , sdiAddtional
 
+    -- * AllowedIPRange
+    , AllowedIPRange
+    , allowedIPRange
+    , airValue
+    , airDescription
+
+    -- * IPAllocationPolicy
+    , IPAllocationPolicy
+    , ipAllocationPolicy
+    , iapServicesSecondaryRangeName
+    , iapUseIPAliases
+    , iapClusterSecondaryRangeName
+    , iapClusterIPv4CIdRBlock
+    , iapServicesIPv4CIdRBlock
+
+    -- * CheckUpgradeResponseContainsPypiModulesConflict
+    , CheckUpgradeResponseContainsPypiModulesConflict (..)
+
+    -- * Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
+
+    -- * CheckUpgradeResponsePypiDependencies
+    , CheckUpgradeResponsePypiDependencies
+    , checkUpgradeResponsePypiDependencies
+    , curpdAddtional
+
     -- * SoftwareConfigPypiPackages
     , SoftwareConfigPypiPackages
     , softwareConfigPypiPackages
@@ -137,6 +186,15 @@ module Network.Google.Composer.Types
     -- * Xgafv
     , Xgafv (..)
 
+    -- * PrivateEnvironmentConfig
+    , PrivateEnvironmentConfig
+    , privateEnvironmentConfig
+    , pecWebServerIPv4CIdRBlock
+    , pecCloudSQLIPv4CIdRBlock
+    , pecWebServerIPv4ReservedRange
+    , pecPrivateClusterConfig
+    , pecEnablePrivateEnvironment
+
     -- * SoftwareConfig
     , SoftwareConfig
     , softwareConfig
@@ -145,6 +203,32 @@ module Network.Google.Composer.Types
     , scPypiPackages
     , scAirflowConfigOverrides
     , scEnvVariables
+
+    -- * PrivateClusterConfig
+    , PrivateClusterConfig
+    , privateClusterConfig
+    , pccEnablePrivateEndpoint
+    , pccMasterIPv4CIdRBlock
+    , pccMasterIPv4ReservedRange
+
+    -- * EncryptionConfig
+    , EncryptionConfig
+    , encryptionConfig
+    , ecKmsKeyName
+
+    -- * CheckUpgradeResponse
+    , CheckUpgradeResponse
+    , checkUpgradeResponse
+    , curContainsPypiModulesConflict
+    , curBuildLogURI
+    , curImageVersion
+    , curPypiDependencies
+    , curPypiConflictBuildLogExtract
+
+    -- * WebServerNetworkAccessControl
+    , WebServerNetworkAccessControl
+    , webServerNetworkAccessControl
+    , wsnacAllowedIPRanges
 
     -- * EnvironmentLabels
     , EnvironmentLabels
@@ -167,9 +251,9 @@ module Network.Google.Composer.Types
     , orAddtional
     ) where
 
-import           Network.Google.Composer.Types.Product
-import           Network.Google.Composer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Composer.Types.Product
+import Network.Google.Composer.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
 composerService :: ServiceConfig
@@ -177,6 +261,6 @@ composerService
   = defaultService (ServiceId "composer:v1")
       "composer.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

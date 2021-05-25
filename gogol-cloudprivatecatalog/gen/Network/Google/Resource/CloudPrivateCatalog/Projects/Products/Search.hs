@@ -23,7 +23,7 @@
 -- Search Product resources that consumers have access to, within the scope
 -- of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference> for @cloudprivatecatalog.projects.products.search@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.projects.products.search@.
 module Network.Google.Resource.CloudPrivateCatalog.Projects.Products.Search
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalog.Projects.Products.Search
     , ppsCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalog.projects.products.search@ method which the
 -- 'ProjectsProductsSearch' request conforms to.
@@ -72,15 +72,15 @@ type ProjectsProductsSearchResource =
 -- /See:/ 'projectsProductsSearch' smart constructor.
 data ProjectsProductsSearch =
   ProjectsProductsSearch'
-    { _ppsXgafv          :: !(Maybe Xgafv)
+    { _ppsXgafv :: !(Maybe Xgafv)
     , _ppsUploadProtocol :: !(Maybe Text)
-    , _ppsAccessToken    :: !(Maybe Text)
-    , _ppsUploadType     :: !(Maybe Text)
-    , _ppsResource       :: !Text
-    , _ppsQuery          :: !(Maybe Text)
-    , _ppsPageToken      :: !(Maybe Text)
-    , _ppsPageSize       :: !(Maybe (Textual Int32))
-    , _ppsCallback       :: !(Maybe Text)
+    , _ppsAccessToken :: !(Maybe Text)
+    , _ppsUploadType :: !(Maybe Text)
+    , _ppsResource :: !Text
+    , _ppsQuery :: !(Maybe Text)
+    , _ppsPageToken :: !(Maybe Text)
+    , _ppsPageSize :: !(Maybe (Textual Int32))
+    , _ppsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -42,8 +42,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.Rollback
     , pddrCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.rollback@ method which the
 -- 'ProjectsDatabasesDocumentsRollback' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsDatabasesDocumentsRollbackResource =
 -- /See:/ 'projectsDatabasesDocumentsRollback' smart constructor.
 data ProjectsDatabasesDocumentsRollback =
   ProjectsDatabasesDocumentsRollback'
-    { _pddrXgafv          :: !(Maybe Xgafv)
+    { _pddrXgafv :: !(Maybe Xgafv)
     , _pddrUploadProtocol :: !(Maybe Text)
-    , _pddrDatabase       :: !Text
-    , _pddrAccessToken    :: !(Maybe Text)
-    , _pddrUploadType     :: !(Maybe Text)
-    , _pddrPayload        :: !RollbackRequest
-    , _pddrCallback       :: !(Maybe Text)
+    , _pddrDatabase :: !Text
+    , _pddrAccessToken :: !(Maybe Text)
+    , _pddrUploadType :: !(Maybe Text)
+    , _pddrPayload :: !RollbackRequest
+    , _pddrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -119,7 +119,7 @@ pddrUploadProtocol
   = lens _pddrUploadProtocol
       (\ s a -> s{_pddrUploadProtocol = a})
 
--- | The database name. In the format:
+-- | Required. The database name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\`.
 pddrDatabase :: Lens' ProjectsDatabasesDocumentsRollback Text
 pddrDatabase

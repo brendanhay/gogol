@@ -44,8 +44,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Lis
     , pidslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.list@ method which the
 -- 'ProjectsInstancesDatabasesSessionsList' request conforms to.
@@ -69,15 +69,15 @@ type ProjectsInstancesDatabasesSessionsListResource =
 -- /See:/ 'projectsInstancesDatabasesSessionsList' smart constructor.
 data ProjectsInstancesDatabasesSessionsList =
   ProjectsInstancesDatabasesSessionsList'
-    { _pidslXgafv          :: !(Maybe Xgafv)
+    { _pidslXgafv :: !(Maybe Xgafv)
     , _pidslUploadProtocol :: !(Maybe Text)
-    , _pidslDatabase       :: !Text
-    , _pidslAccessToken    :: !(Maybe Text)
-    , _pidslUploadType     :: !(Maybe Text)
-    , _pidslFilter         :: !(Maybe Text)
-    , _pidslPageToken      :: !(Maybe Text)
-    , _pidslPageSize       :: !(Maybe (Textual Int32))
-    , _pidslCallback       :: !(Maybe Text)
+    , _pidslDatabase :: !Text
+    , _pidslAccessToken :: !(Maybe Text)
+    , _pidslUploadType :: !(Maybe Text)
+    , _pidslFilter :: !(Maybe Text)
+    , _pidslPageToken :: !(Maybe Text)
+    , _pidslPageSize :: !(Maybe (Textual Int32))
+    , _pidslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

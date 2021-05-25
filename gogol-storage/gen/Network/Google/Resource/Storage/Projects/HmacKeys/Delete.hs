@@ -33,12 +33,13 @@ module Network.Google.Resource.Storage.Projects.HmacKeys.Delete
     , ProjectsHmacKeysDelete
 
     -- * Request Lenses
+    , phkdUserProject
     , phkdProjectId
     , phkdAccessId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.projects.hmacKeys.delete@ method which the
 -- 'ProjectsHmacKeysDelete' request conforms to.
@@ -49,15 +50,17 @@ type ProjectsHmacKeysDeleteResource =
            Capture "projectId" Text :>
              "hmacKeys" :>
                Capture "accessId" Text :>
-                 QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "userProject" Text :>
+                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an HMAC key.
 --
 -- /See:/ 'projectsHmacKeysDelete' smart constructor.
 data ProjectsHmacKeysDelete =
   ProjectsHmacKeysDelete'
-    { _phkdProjectId :: !Text
-    , _phkdAccessId  :: !Text
+    { _phkdUserProject :: !(Maybe Text)
+    , _phkdProjectId :: !Text
+    , _phkdAccessId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,6 +68,8 @@ data ProjectsHmacKeysDelete =
 -- | Creates a value of 'ProjectsHmacKeysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'phkdUserProject'
 --
 -- * 'phkdProjectId'
 --
@@ -75,8 +80,17 @@ projectsHmacKeysDelete
     -> ProjectsHmacKeysDelete
 projectsHmacKeysDelete pPhkdProjectId_ pPhkdAccessId_ =
   ProjectsHmacKeysDelete'
-    {_phkdProjectId = pPhkdProjectId_, _phkdAccessId = pPhkdAccessId_}
+    { _phkdUserProject = Nothing
+    , _phkdProjectId = pPhkdProjectId_
+    , _phkdAccessId = pPhkdAccessId_
+    }
 
+
+-- | The project to be billed for this request.
+phkdUserProject :: Lens' ProjectsHmacKeysDelete (Maybe Text)
+phkdUserProject
+  = lens _phkdUserProject
+      (\ s a -> s{_phkdUserProject = a})
 
 -- | Project ID owning the requested key
 phkdProjectId :: Lens' ProjectsHmacKeysDelete Text
@@ -96,7 +110,8 @@ instance GoogleRequest ProjectsHmacKeysDelete where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ProjectsHmacKeysDelete'{..}
-          = go _phkdProjectId _phkdAccessId (Just AltJSON)
+          = go _phkdProjectId _phkdAccessId _phkdUserProject
+              (Just AltJSON)
               storageService
           where go
                   = buildClient

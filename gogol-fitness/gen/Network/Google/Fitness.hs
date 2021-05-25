@@ -13,10 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stores and accesses user data in the fitness store from apps on any
--- platform.
+-- The Fitness API for managing users\' fitness tracking data.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference>
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference>
 module Network.Google.Fitness
     (
     -- * Service Configuration
@@ -25,12 +24,16 @@ module Network.Google.Fitness
     -- * OAuth Scopes
     , fitnessBodyTemperatureReadScope
     , fitnessBodyReadScope
+    , fitnessHeartRateWriteScope
+    , fitnessSleepWriteScope
     , fitnessNutritionReadScope
     , fitnessReProductiveHealthReadScope
     , fitnessActivityReadScope
     , fitnessReProductiveHealthWriteScope
     , fitnessActivityWriteScope
     , fitnessBloodPressureWriteScope
+    , fitnessSleepReadScope
+    , fitnessHeartRateReadScope
     , fitnessBodyTemperatureWriteScope
     , fitnessOxygenSaturationReadScope
     , fitnessBloodGlucoseWriteScope
@@ -205,6 +208,9 @@ module Network.Google.Fitness
     , listDataSourcesResponse
     , ldsrDataSource
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** DataTypeField
     , DataTypeField
     , dataTypeField
@@ -283,27 +289,27 @@ module Network.Google.Fitness
     , DataTypeFieldFormat (..)
     ) where
 
-import           Network.Google.Fitness.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Fitness.Users.DataSet.Aggregate
-import           Network.Google.Resource.Fitness.Users.DataSources.Create
-import           Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
-import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
-import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
-import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
-import           Network.Google.Resource.Fitness.Users.DataSources.Delete
-import           Network.Google.Resource.Fitness.Users.DataSources.Get
-import           Network.Google.Resource.Fitness.Users.DataSources.List
-import           Network.Google.Resource.Fitness.Users.DataSources.Update
-import           Network.Google.Resource.Fitness.Users.Sessions.Delete
-import           Network.Google.Resource.Fitness.Users.Sessions.List
-import           Network.Google.Resource.Fitness.Users.Sessions.Update
+import Network.Google.Prelude
+import Network.Google.Fitness.Types
+import Network.Google.Resource.Fitness.Users.DataSet.Aggregate
+import Network.Google.Resource.Fitness.Users.DataSources.Create
+import Network.Google.Resource.Fitness.Users.DataSources.DataPointChanges.List
+import Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
+import Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
+import Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
+import Network.Google.Resource.Fitness.Users.DataSources.Delete
+import Network.Google.Resource.Fitness.Users.DataSources.Get
+import Network.Google.Resource.Fitness.Users.DataSources.List
+import Network.Google.Resource.Fitness.Users.DataSources.Update
+import Network.Google.Resource.Fitness.Users.Sessions.Delete
+import Network.Google.Resource.Fitness.Users.Sessions.List
+import Network.Google.Resource.Fitness.Users.Sessions.Update
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Fitness service.
+-- | Represents the entirety of the methods and resources available for the Fitness API service.
 type FitnessAPI =
      UsersDataSetAggregateResource :<|>
        UsersDataSourcesDataSetsPatchResource

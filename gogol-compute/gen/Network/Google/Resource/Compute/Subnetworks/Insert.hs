@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Subnetworks.Insert
     , siRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.insert@ method which the
 -- 'SubnetworksInsert' request conforms to.
@@ -64,9 +64,9 @@ type SubnetworksInsertResource =
 data SubnetworksInsert =
   SubnetworksInsert'
     { _siRequestId :: !(Maybe Text)
-    , _siProject   :: !Text
-    , _siPayload   :: !Subnetwork
-    , _siRegion    :: !Text
+    , _siProject :: !Text
+    , _siPayload :: !Subnetwork
+    , _siRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

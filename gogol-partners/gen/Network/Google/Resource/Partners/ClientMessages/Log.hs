@@ -43,8 +43,8 @@ module Network.Google.Resource.Partners.ClientMessages.Log
     , cmlCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.clientMessages.log@ method which the
 -- 'ClientMessagesLog' request conforms to.
@@ -67,12 +67,12 @@ type ClientMessagesLogResource =
 -- /See:/ 'clientMessagesLog' smart constructor.
 data ClientMessagesLog =
   ClientMessagesLog'
-    { _cmlXgafv          :: !(Maybe Xgafv)
+    { _cmlXgafv :: !(Maybe Xgafv)
     , _cmlUploadProtocol :: !(Maybe Text)
-    , _cmlAccessToken    :: !(Maybe Text)
-    , _cmlUploadType     :: !(Maybe Text)
-    , _cmlPayload        :: !LogMessageRequest
-    , _cmlCallback       :: !(Maybe Text)
+    , _cmlAccessToken :: !(Maybe Text)
+    , _cmlUploadType :: !(Maybe Text)
+    , _cmlPayload :: !LogMessageRequest
+    , _cmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

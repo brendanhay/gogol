@@ -22,7 +22,7 @@
 --
 -- Lists all GTM Triggers of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.list@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.workspaces.triggers.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.List
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Trigger
     , AccountsContainersWorkspacesTriggersList
 
     -- * Request Lenses
-    , acwtlcParent
-    , acwtlcPageToken
+    , acwtl1Parent
+    , acwtl1Xgafv
+    , acwtl1UploadProtocol
+    , acwtl1AccessToken
+    , acwtl1UploadType
+    , acwtl1PageToken
+    , acwtl1Callback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.triggers.list@ method which the
 -- 'AccountsContainersWorkspacesTriggersList' request conforms to.
@@ -48,17 +53,27 @@ type AccountsContainersWorkspacesTriggersListResource
        "v2" :>
          Capture "parent" Text :>
            "triggers" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListTriggersResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListTriggersResponse
 
 -- | Lists all GTM Triggers of a Container.
 --
 -- /See:/ 'accountsContainersWorkspacesTriggersList' smart constructor.
 data AccountsContainersWorkspacesTriggersList =
   AccountsContainersWorkspacesTriggersList'
-    { _acwtlcParent    :: !Text
-    , _acwtlcPageToken :: !(Maybe Text)
+    { _acwtl1Parent :: !Text
+    , _acwtl1Xgafv :: !(Maybe Xgafv)
+    , _acwtl1UploadProtocol :: !(Maybe Text)
+    , _acwtl1AccessToken :: !(Maybe Text)
+    , _acwtl1UploadType :: !(Maybe Text)
+    , _acwtl1PageToken :: !(Maybe Text)
+    , _acwtl1Callback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,28 +82,74 @@ data AccountsContainersWorkspacesTriggersList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acwtlcParent'
+-- * 'acwtl1Parent'
 --
--- * 'acwtlcPageToken'
+-- * 'acwtl1Xgafv'
+--
+-- * 'acwtl1UploadProtocol'
+--
+-- * 'acwtl1AccessToken'
+--
+-- * 'acwtl1UploadType'
+--
+-- * 'acwtl1PageToken'
+--
+-- * 'acwtl1Callback'
 accountsContainersWorkspacesTriggersList
-    :: Text -- ^ 'acwtlcParent'
+    :: Text -- ^ 'acwtl1Parent'
     -> AccountsContainersWorkspacesTriggersList
-accountsContainersWorkspacesTriggersList pAcwtlcParent_ =
+accountsContainersWorkspacesTriggersList pAcwtl1Parent_ =
   AccountsContainersWorkspacesTriggersList'
-    {_acwtlcParent = pAcwtlcParent_, _acwtlcPageToken = Nothing}
+    { _acwtl1Parent = pAcwtl1Parent_
+    , _acwtl1Xgafv = Nothing
+    , _acwtl1UploadProtocol = Nothing
+    , _acwtl1AccessToken = Nothing
+    , _acwtl1UploadType = Nothing
+    , _acwtl1PageToken = Nothing
+    , _acwtl1Callback = Nothing
+    }
 
 
 -- | GTM Workspaces\'s API relative path. Example:
 -- accounts\/{account_id}\/containers\/{container_id}\/workspaces\/{workspace_id}
-acwtlcParent :: Lens' AccountsContainersWorkspacesTriggersList Text
-acwtlcParent
-  = lens _acwtlcParent (\ s a -> s{_acwtlcParent = a})
+acwtl1Parent :: Lens' AccountsContainersWorkspacesTriggersList Text
+acwtl1Parent
+  = lens _acwtl1Parent (\ s a -> s{_acwtl1Parent = a})
+
+-- | V1 error format.
+acwtl1Xgafv :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Xgafv)
+acwtl1Xgafv
+  = lens _acwtl1Xgafv (\ s a -> s{_acwtl1Xgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acwtl1UploadProtocol :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Text)
+acwtl1UploadProtocol
+  = lens _acwtl1UploadProtocol
+      (\ s a -> s{_acwtl1UploadProtocol = a})
+
+-- | OAuth access token.
+acwtl1AccessToken :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Text)
+acwtl1AccessToken
+  = lens _acwtl1AccessToken
+      (\ s a -> s{_acwtl1AccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acwtl1UploadType :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Text)
+acwtl1UploadType
+  = lens _acwtl1UploadType
+      (\ s a -> s{_acwtl1UploadType = a})
 
 -- | Continuation token for fetching the next page of results.
-acwtlcPageToken :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Text)
-acwtlcPageToken
-  = lens _acwtlcPageToken
-      (\ s a -> s{_acwtlcPageToken = a})
+acwtl1PageToken :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Text)
+acwtl1PageToken
+  = lens _acwtl1PageToken
+      (\ s a -> s{_acwtl1PageToken = a})
+
+-- | JSONP
+acwtl1Callback :: Lens' AccountsContainersWorkspacesTriggersList (Maybe Text)
+acwtl1Callback
+  = lens _acwtl1Callback
+      (\ s a -> s{_acwtl1Callback = a})
 
 instance GoogleRequest
            AccountsContainersWorkspacesTriggersList
@@ -101,7 +162,12 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient
           AccountsContainersWorkspacesTriggersList'{..}
-          = go _acwtlcParent _acwtlcPageToken (Just AltJSON)
+          = go _acwtl1Parent _acwtl1Xgafv _acwtl1UploadProtocol
+              _acwtl1AccessToken
+              _acwtl1UploadType
+              _acwtl1PageToken
+              _acwtl1Callback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

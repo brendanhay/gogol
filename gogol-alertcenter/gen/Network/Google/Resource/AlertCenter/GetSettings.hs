@@ -22,7 +22,7 @@
 --
 -- Returns customer-level settings.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.getSettings@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.getSettings@.
 module Network.Google.Resource.AlertCenter.GetSettings
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.AlertCenter.GetSettings
     , gsCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.getSettings@ method which the
 -- 'GetSettings' request conforms to.
@@ -62,12 +62,12 @@ type GetSettingsResource =
 -- /See:/ 'getSettings' smart constructor.
 data GetSettings =
   GetSettings'
-    { _gsXgafv          :: !(Maybe Xgafv)
+    { _gsXgafv :: !(Maybe Xgafv)
     , _gsUploadProtocol :: !(Maybe Text)
-    , _gsAccessToken    :: !(Maybe Text)
-    , _gsUploadType     :: !(Maybe Text)
-    , _gsCustomerId     :: !(Maybe Text)
-    , _gsCallback       :: !(Maybe Text)
+    , _gsAccessToken :: !(Maybe Text)
+    , _gsUploadType :: !(Maybe Text)
+    , _gsCustomerId :: !(Maybe Text)
+    , _gsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -121,9 +121,9 @@ gsUploadType :: Lens' GetSettings (Maybe Text)
 gsUploadType
   = lens _gsUploadType (\ s a -> s{_gsUploadType = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alert settings are associated with. Inferred from the
--- caller identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alert settings are associated with. Inferred
+-- from the caller identity if not provided.
 gsCustomerId :: Lens' GetSettings (Maybe Text)
 gsCustomerId
   = lens _gsCustomerId (\ s a -> s{_gsCustomerId = a})

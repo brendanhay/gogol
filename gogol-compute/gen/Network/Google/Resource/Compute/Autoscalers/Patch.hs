@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.Autoscalers.Patch
     , apAutoscaler
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.autoscalers.patch@ method which the
 -- 'AutoscalersPatch' request conforms to.
@@ -67,10 +67,10 @@ type AutoscalersPatchResource =
 -- /See:/ 'autoscalersPatch' smart constructor.
 data AutoscalersPatch =
   AutoscalersPatch'
-    { _apRequestId  :: !(Maybe Text)
-    , _apProject    :: !Text
-    , _apZone       :: !Text
-    , _apPayload    :: !Autoscaler
+    { _apRequestId :: !(Maybe Text)
+    , _apProject :: !Text
+    , _apZone :: !Text
+    , _apPayload :: !Autoscaler
     , _apAutoscaler :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

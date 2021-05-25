@@ -16,7 +16,7 @@
 --
 module Network.Google.CloudShell.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Current state of the environment being started.
 data StartEnvironmentMetadataState
@@ -32,10 +32,17 @@ data StartEnvironmentMetadataState
       -- Startup is waiting for the user\'s disk to be unarchived. This can
       -- happen when the user returns to Cloud Shell after not having used it for
       -- a while, and suggests that startup will take longer than normal.
+    | AwaitingComputeResources
+      -- ^ @AWAITING_COMPUTE_RESOURCES@
+      -- Startup is waiting for compute resources to be assigned to the
+      -- environment. This should normally happen very quickly, but an
+      -- environment might stay in this state for an extended period of time if
+      -- the system is experiencing heavy load.
     | Finished
       -- ^ @FINISHED@
-      -- Startup is complete and the user should be able to establish an SSH
-      -- connection to their environment.
+      -- Startup has completed. If the start operation was successful, the user
+      -- should be able to establish an SSH connection to their environment.
+      -- Otherwise, the operation will contain details of the failure.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable StartEnvironmentMetadataState
@@ -45,6 +52,7 @@ instance FromHttpApiData StartEnvironmentMetadataState where
         "STATE_UNSPECIFIED" -> Right StateUnspecified
         "STARTING" -> Right Starting
         "UNARCHIVING_DISK" -> Right UnarchivingDisk
+        "AWAITING_COMPUTE_RESOURCES" -> Right AwaitingComputeResources
         "FINISHED" -> Right Finished
         x -> Left ("Unable to parse StartEnvironmentMetadataState from: " <> x)
 
@@ -53,6 +61,7 @@ instance ToHttpApiData StartEnvironmentMetadataState where
         StateUnspecified -> "STATE_UNSPECIFIED"
         Starting -> "STARTING"
         UnarchivingDisk -> "UNARCHIVING_DISK"
+        AwaitingComputeResources -> "AWAITING_COMPUTE_RESOURCES"
         Finished -> "FINISHED"
 
 instance FromJSON StartEnvironmentMetadataState where
@@ -66,12 +75,12 @@ data EnvironmentState
     = ESStateUnspecified
       -- ^ @STATE_UNSPECIFIED@
       -- The environment\'s states is unknown.
-    | ESDisabled
-      -- ^ @DISABLED@
+    | ESSuspended
+      -- ^ @SUSPENDED@
       -- The environment is not running and can\'t be connected to. Starting the
-      -- environment will transition it to the STARTING state.
-    | ESStarting
-      -- ^ @STARTING@
+      -- environment will transition it to the PENDING state.
+    | ESPending
+      -- ^ @PENDING@
       -- The environment is being started but is not yet ready to accept
       -- connections.
     | ESRunning
@@ -79,6 +88,9 @@ data EnvironmentState
       -- The environment is running and ready to accept connections. It will
       -- automatically transition back to DISABLED after a period of inactivity
       -- or if another environment is started.
+    | ESDeleting
+      -- ^ @DELETING@
+      -- The environment is being deleted and can\'t be connected to.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EnvironmentState
@@ -86,17 +98,19 @@ instance Hashable EnvironmentState
 instance FromHttpApiData EnvironmentState where
     parseQueryParam = \case
         "STATE_UNSPECIFIED" -> Right ESStateUnspecified
-        "DISABLED" -> Right ESDisabled
-        "STARTING" -> Right ESStarting
+        "SUSPENDED" -> Right ESSuspended
+        "PENDING" -> Right ESPending
         "RUNNING" -> Right ESRunning
+        "DELETING" -> Right ESDeleting
         x -> Left ("Unable to parse EnvironmentState from: " <> x)
 
 instance ToHttpApiData EnvironmentState where
     toQueryParam = \case
         ESStateUnspecified -> "STATE_UNSPECIFIED"
-        ESDisabled -> "DISABLED"
-        ESStarting -> "STARTING"
+        ESSuspended -> "SUSPENDED"
+        ESPending -> "PENDING"
         ESRunning -> "RUNNING"
+        ESDeleting -> "DELETING"
 
 instance FromJSON EnvironmentState where
     parseJSON = parseJSONText "EnvironmentState"
@@ -131,53 +145,4 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
-    toJSON = toJSONText
-
--- | Required. Format of this key\'s content.
-data PublicKeyFormat
-    = FormatUnspecified
-      -- ^ @FORMAT_UNSPECIFIED@
-      -- Unknown format. Do not use.
-    | SSHDss
-      -- ^ @SSH_DSS@
-      -- \`ssh-dss\` key format (see RFC4253).
-    | SSHRsa
-      -- ^ @SSH_RSA@
-      -- \`ssh-rsa\` key format (see RFC4253).
-    | EcdsaSHA2NISTP256
-      -- ^ @ECDSA_SHA2_NISTP256@
-      -- \`ecdsa-sha2-nistp256\` key format (see RFC5656).
-    | EcdsaSHA2NISTP384
-      -- ^ @ECDSA_SHA2_NISTP384@
-      -- \`ecdsa-sha2-nistp384\` key format (see RFC5656).
-    | EcdsaSHA2NISTP521
-      -- ^ @ECDSA_SHA2_NISTP521@
-      -- \`ecdsa-sha2-nistp521\` key format (see RFC5656).
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable PublicKeyFormat
-
-instance FromHttpApiData PublicKeyFormat where
-    parseQueryParam = \case
-        "FORMAT_UNSPECIFIED" -> Right FormatUnspecified
-        "SSH_DSS" -> Right SSHDss
-        "SSH_RSA" -> Right SSHRsa
-        "ECDSA_SHA2_NISTP256" -> Right EcdsaSHA2NISTP256
-        "ECDSA_SHA2_NISTP384" -> Right EcdsaSHA2NISTP384
-        "ECDSA_SHA2_NISTP521" -> Right EcdsaSHA2NISTP521
-        x -> Left ("Unable to parse PublicKeyFormat from: " <> x)
-
-instance ToHttpApiData PublicKeyFormat where
-    toQueryParam = \case
-        FormatUnspecified -> "FORMAT_UNSPECIFIED"
-        SSHDss -> "SSH_DSS"
-        SSHRsa -> "SSH_RSA"
-        EcdsaSHA2NISTP256 -> "ECDSA_SHA2_NISTP256"
-        EcdsaSHA2NISTP384 -> "ECDSA_SHA2_NISTP384"
-        EcdsaSHA2NISTP521 -> "ECDSA_SHA2_NISTP521"
-
-instance FromJSON PublicKeyFormat where
-    parseJSON = parseJSONText "PublicKeyFormat"
-
-instance ToJSON PublicKeyFormat where
     toJSON = toJSONText

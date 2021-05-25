@@ -51,8 +51,8 @@ module Network.Google.Resource.CloudProFiler.Projects.ProFiles.Create
     , ppfcCallback
     ) where
 
-import           Network.Google.CloudProFiler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudProFiler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprofiler.projects.profiles.create@ method which the
 -- 'ProjectsProFilesCreate' request conforms to.
@@ -83,13 +83,13 @@ type ProjectsProFilesCreateResource =
 -- /See:/ 'projectsProFilesCreate' smart constructor.
 data ProjectsProFilesCreate =
   ProjectsProFilesCreate'
-    { _ppfcParent         :: !Text
-    , _ppfcXgafv          :: !(Maybe Xgafv)
+    { _ppfcParent :: !Text
+    , _ppfcXgafv :: !(Maybe Xgafv)
     , _ppfcUploadProtocol :: !(Maybe Text)
-    , _ppfcAccessToken    :: !(Maybe Text)
-    , _ppfcUploadType     :: !(Maybe Text)
-    , _ppfcPayload        :: !CreateProFileRequest
-    , _ppfcCallback       :: !(Maybe Text)
+    , _ppfcAccessToken :: !(Maybe Text)
+    , _ppfcUploadType :: !(Maybe Text)
+    , _ppfcPayload :: !CreateProFileRequest
+    , _ppfcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -42,8 +42,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.BatchCreate
     , pnbcCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.batchCreate@ method which the
 -- 'ProjectsNotesBatchCreate' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsNotesBatchCreateResource =
 -- /See:/ 'projectsNotesBatchCreate' smart constructor.
 data ProjectsNotesBatchCreate =
   ProjectsNotesBatchCreate'
-    { _pnbcParent         :: !Text
-    , _pnbcXgafv          :: !(Maybe Xgafv)
+    { _pnbcParent :: !Text
+    , _pnbcXgafv :: !(Maybe Xgafv)
     , _pnbcUploadProtocol :: !(Maybe Text)
-    , _pnbcAccessToken    :: !(Maybe Text)
-    , _pnbcUploadType     :: !(Maybe Text)
-    , _pnbcPayload        :: !BatchCreateNotesRequest
-    , _pnbcCallback       :: !(Maybe Text)
+    , _pnbcAccessToken :: !(Maybe Text)
+    , _pnbcUploadType :: !(Maybe Text)
+    , _pnbcPayload :: !BatchCreateNotesRequest
+    , _pnbcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,8 +109,8 @@ projectsNotesBatchCreate pPnbcParent_ pPnbcPayload_ =
     }
 
 
--- | The name of the project in the form of \`projects\/[PROJECT_ID]\`, under
--- which the notes are to be created.
+-- | Required. The name of the project in the form of
+-- \`projects\/[PROJECT_ID]\`, under which the notes are to be created.
 pnbcParent :: Lens' ProjectsNotesBatchCreate Text
 pnbcParent
   = lens _pnbcParent (\ s a -> s{_pnbcParent = a})

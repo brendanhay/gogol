@@ -22,7 +22,7 @@
 --
 -- Gets multiple Merchant Center datafeed statuses in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.custombatch@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.datafeedstatuses.custombatch@.
 module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
     , DatafeedstatusesCustombatch
 
     -- * Request Lenses
+    , dcXgafv
+    , dcUploadProtocol
+    , dcAccessToken
+    , dcUploadType
     , dcPayload
+    , dcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeedstatuses.custombatch@ method which the
 -- 'DatafeedstatusesCustombatch' request conforms to.
@@ -46,16 +51,26 @@ type DatafeedstatusesCustombatchResource =
        "v2.1" :>
          "datafeedstatuses" :>
            "batch" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] DatafeedstatusesCustomBatchRequest :>
-                 Post '[JSON] DatafeedstatusesCustomBatchResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DatafeedstatusesCustomBatchRequest :>
+                           Post '[JSON] DatafeedstatusesCustomBatchResponse
 
 -- | Gets multiple Merchant Center datafeed statuses in a single request.
 --
 -- /See:/ 'datafeedstatusesCustombatch' smart constructor.
-newtype DatafeedstatusesCustombatch =
+data DatafeedstatusesCustombatch =
   DatafeedstatusesCustombatch'
-    { _dcPayload :: DatafeedstatusesCustomBatchRequest
+    { _dcXgafv :: !(Maybe Xgafv)
+    , _dcUploadProtocol :: !(Maybe Text)
+    , _dcAccessToken :: !(Maybe Text)
+    , _dcUploadType :: !(Maybe Text)
+    , _dcPayload :: !DatafeedstatusesCustomBatchRequest
+    , _dcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,18 +79,61 @@ newtype DatafeedstatusesCustombatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dcXgafv'
+--
+-- * 'dcUploadProtocol'
+--
+-- * 'dcAccessToken'
+--
+-- * 'dcUploadType'
+--
 -- * 'dcPayload'
+--
+-- * 'dcCallback'
 datafeedstatusesCustombatch
     :: DatafeedstatusesCustomBatchRequest -- ^ 'dcPayload'
     -> DatafeedstatusesCustombatch
 datafeedstatusesCustombatch pDcPayload_ =
-  DatafeedstatusesCustombatch' {_dcPayload = pDcPayload_}
+  DatafeedstatusesCustombatch'
+    { _dcXgafv = Nothing
+    , _dcUploadProtocol = Nothing
+    , _dcAccessToken = Nothing
+    , _dcUploadType = Nothing
+    , _dcPayload = pDcPayload_
+    , _dcCallback = Nothing
+    }
 
+
+-- | V1 error format.
+dcXgafv :: Lens' DatafeedstatusesCustombatch (Maybe Xgafv)
+dcXgafv = lens _dcXgafv (\ s a -> s{_dcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dcUploadProtocol :: Lens' DatafeedstatusesCustombatch (Maybe Text)
+dcUploadProtocol
+  = lens _dcUploadProtocol
+      (\ s a -> s{_dcUploadProtocol = a})
+
+-- | OAuth access token.
+dcAccessToken :: Lens' DatafeedstatusesCustombatch (Maybe Text)
+dcAccessToken
+  = lens _dcAccessToken
+      (\ s a -> s{_dcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dcUploadType :: Lens' DatafeedstatusesCustombatch (Maybe Text)
+dcUploadType
+  = lens _dcUploadType (\ s a -> s{_dcUploadType = a})
 
 -- | Multipart request metadata.
 dcPayload :: Lens' DatafeedstatusesCustombatch DatafeedstatusesCustomBatchRequest
 dcPayload
   = lens _dcPayload (\ s a -> s{_dcPayload = a})
+
+-- | JSONP
+dcCallback :: Lens' DatafeedstatusesCustombatch (Maybe Text)
+dcCallback
+  = lens _dcCallback (\ s a -> s{_dcCallback = a})
 
 instance GoogleRequest DatafeedstatusesCustombatch
          where
@@ -84,7 +142,12 @@ instance GoogleRequest DatafeedstatusesCustombatch
         type Scopes DatafeedstatusesCustombatch =
              '["https://www.googleapis.com/auth/content"]
         requestClient DatafeedstatusesCustombatch'{..}
-          = go (Just AltJSON) _dcPayload shoppingContentService
+          = go _dcXgafv _dcUploadProtocol _dcAccessToken
+              _dcUploadType
+              _dcCallback
+              (Just AltJSON)
+              _dcPayload
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy DatafeedstatusesCustombatchResource)

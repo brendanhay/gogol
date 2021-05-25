@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -272,9 +272,9 @@ module Network.Google.Language.Types
     , sText
     ) where
 
-import           Network.Google.Language.Types.Product
-import           Network.Google.Language.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Language.Types.Product
+import Network.Google.Language.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Natural Language API. This contains the host and root path used as a starting point for constructing service requests.
 languageService :: ServiceConfig
@@ -287,6 +287,6 @@ languageService
 cloudLanguageScope :: Proxy '["https://www.googleapis.com/auth/cloud-language"]
 cloudLanguageScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

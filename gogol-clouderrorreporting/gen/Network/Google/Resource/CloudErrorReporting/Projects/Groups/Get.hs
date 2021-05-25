@@ -22,7 +22,7 @@
 --
 -- Get the specified group.
 --
--- /See:/ <https://cloud.google.com/error-reporting/ Stackdriver Error Reporting API Reference> for @clouderrorreporting.projects.groups.get@.
+-- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.groups.get@.
 module Network.Google.Resource.CloudErrorReporting.Projects.Groups.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudErrorReporting.Projects.Groups.Get
     , pggCallback
     ) where
 
-import           Network.Google.CloudErrorReporting.Types
-import           Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouderrorreporting.projects.groups.get@ method which the
 -- 'ProjectsGroupsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsGroupsGetResource =
 -- /See:/ 'projectsGroupsGet' smart constructor.
 data ProjectsGroupsGet =
   ProjectsGroupsGet'
-    { _pggXgafv          :: !(Maybe Xgafv)
+    { _pggXgafv :: !(Maybe Xgafv)
     , _pggUploadProtocol :: !(Maybe Text)
-    , _pggAccessToken    :: !(Maybe Text)
-    , _pggUploadType     :: !(Maybe Text)
-    , _pggGroupName      :: !Text
-    , _pggCallback       :: !(Maybe Text)
+    , _pggAccessToken :: !(Maybe Text)
+    , _pggUploadType :: !(Maybe Text)
+    , _pggGroupName :: !Text
+    , _pggCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,11 +122,11 @@ pggUploadType
   = lens _pggUploadType
       (\ s a -> s{_pggUploadType = a})
 
--- | [Required] The group resource name. Written as
--- 'projects\/projectID\/groups\/group_name'. Call
--- </error-reporting/reference/rest/v1beta1/projects.groupStats/list groupStats.list>
+-- | Required. The group resource name. Written as
+-- \`projects\/{projectID}\/groups\/{group_name}\`. Call
+-- [\`groupStats.list\`](https:\/\/cloud.google.com\/error-reporting\/reference\/rest\/v1beta1\/projects.groupStats\/list)
 -- to return a list of groups belonging to this project. Example:
--- 'projects\/my-project-123\/groups\/my-group'
+-- \`projects\/my-project-123\/groups\/my-group\`
 pggGroupName :: Lens' ProjectsGroupsGet Text
 pggGroupName
   = lens _pggGroupName (\ s a -> s{_pggGroupName = a})

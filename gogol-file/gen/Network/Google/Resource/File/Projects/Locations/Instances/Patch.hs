@@ -43,8 +43,8 @@ module Network.Google.Resource.File.Projects.Locations.Instances.Patch
     , plipCallback
     ) where
 
-import           Network.Google.File.Types
-import           Network.Google.Prelude
+import Network.Google.File.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @file.projects.locations.instances.patch@ method which the
 -- 'ProjectsLocationsInstancesPatch' request conforms to.
@@ -65,14 +65,14 @@ type ProjectsLocationsInstancesPatchResource =
 -- /See:/ 'projectsLocationsInstancesPatch' smart constructor.
 data ProjectsLocationsInstancesPatch =
   ProjectsLocationsInstancesPatch'
-    { _plipXgafv          :: !(Maybe Xgafv)
+    { _plipXgafv :: !(Maybe Xgafv)
     , _plipUploadProtocol :: !(Maybe Text)
-    , _plipUpdateMask     :: !(Maybe GFieldMask)
-    , _plipAccessToken    :: !(Maybe Text)
-    , _plipUploadType     :: !(Maybe Text)
-    , _plipPayload        :: !Instance
-    , _plipName           :: !Text
-    , _plipCallback       :: !(Maybe Text)
+    , _plipUpdateMask :: !(Maybe GFieldMask)
+    , _plipAccessToken :: !(Maybe Text)
+    , _plipUploadType :: !(Maybe Text)
+    , _plipPayload :: !Instance
+    , _plipName :: !Text
+    , _plipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,7 +126,7 @@ plipUploadProtocol
 
 -- | Mask of fields to update. At least one path must be supplied in this
 -- field. The elements of the repeated paths field may only include these
--- fields: \"description\"
+-- fields: * \"description\" * \"file_shares\" * \"labels\"
 plipUpdateMask :: Lens' ProjectsLocationsInstancesPatch (Maybe GFieldMask)
 plipUpdateMask
   = lens _plipUpdateMask
@@ -150,7 +150,7 @@ plipPayload
   = lens _plipPayload (\ s a -> s{_plipPayload = a})
 
 -- | Output only. The resource name of the instance, in the format
--- projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}.
+-- projects\/{project}\/locations\/{location}\/instances\/{instance}.
 plipName :: Lens' ProjectsLocationsInstancesPatch Text
 plipName = lens _plipName (\ s a -> s{_plipName = a})
 

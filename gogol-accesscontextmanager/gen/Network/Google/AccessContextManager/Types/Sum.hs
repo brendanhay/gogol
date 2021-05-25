@@ -16,7 +16,48 @@
 --
 module Network.Google.AccessContextManager.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+-- | Whether to return \`BasicLevels\` in the Cloud Common Expression
+-- Language rather than as \`BasicLevels\`. Defaults to AS_DEFINED, where
+-- Access Levels are returned as \`BasicLevels\` or \`CustomLevels\` based
+-- on how they were created. If set to CEL, all Access Levels are returned
+-- as \`CustomLevels\`. In the CEL case, \`BasicLevels\` are translated to
+-- equivalent \`CustomLevels\`.
+data AccessPoliciesAccessLevelsGetAccessLevelFormat
+    = LevelFormatUnspecified
+      -- ^ @LEVEL_FORMAT_UNSPECIFIED@
+      -- The format was not specified.
+    | AsDefined
+      -- ^ @AS_DEFINED@
+      -- Uses the format the resource was defined in. BasicLevels are returned as
+      -- BasicLevels, CustomLevels are returned as CustomLevels.
+    | Cel
+      -- ^ @CEL@
+      -- Use Cloud Common Expression Language when returning the resource. Both
+      -- BasicLevels and CustomLevels are returned as CustomLevels.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccessPoliciesAccessLevelsGetAccessLevelFormat
+
+instance FromHttpApiData AccessPoliciesAccessLevelsGetAccessLevelFormat where
+    parseQueryParam = \case
+        "LEVEL_FORMAT_UNSPECIFIED" -> Right LevelFormatUnspecified
+        "AS_DEFINED" -> Right AsDefined
+        "CEL" -> Right Cel
+        x -> Left ("Unable to parse AccessPoliciesAccessLevelsGetAccessLevelFormat from: " <> x)
+
+instance ToHttpApiData AccessPoliciesAccessLevelsGetAccessLevelFormat where
+    toQueryParam = \case
+        LevelFormatUnspecified -> "LEVEL_FORMAT_UNSPECIFIED"
+        AsDefined -> "AS_DEFINED"
+        Cel -> "CEL"
+
+instance FromJSON AccessPoliciesAccessLevelsGetAccessLevelFormat where
+    parseJSON = parseJSONText "AccessPoliciesAccessLevelsGetAccessLevelFormat"
+
+instance ToJSON AccessPoliciesAccessLevelsGetAccessLevelFormat where
+    toJSON = toJSONText
 
 -- | How the \`conditions\` list should be combined to determine if a request
 -- is granted this \`AccessLevel\`. If AND is used, each \`Condition\` in
@@ -102,6 +143,12 @@ data OSConstraintOSType
     | DesktopChromeOS
       -- ^ @DESKTOP_CHROME_OS@
       -- A desktop ChromeOS operating system.
+    | Android
+      -- ^ @ANDROID@
+      -- An Android operating system.
+    | Ios
+      -- ^ @IOS@
+      -- An iOS operating system.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OSConstraintOSType
@@ -113,6 +160,8 @@ instance FromHttpApiData OSConstraintOSType where
         "DESKTOP_WINDOWS" -> Right DesktopWindows
         "DESKTOP_LINUX" -> Right DesktopLinux
         "DESKTOP_CHROME_OS" -> Right DesktopChromeOS
+        "ANDROID" -> Right Android
+        "IOS" -> Right Ios
         x -> Left ("Unable to parse OSConstraintOSType from: " <> x)
 
 instance ToHttpApiData OSConstraintOSType where
@@ -122,11 +171,133 @@ instance ToHttpApiData OSConstraintOSType where
         DesktopWindows -> "DESKTOP_WINDOWS"
         DesktopLinux -> "DESKTOP_LINUX"
         DesktopChromeOS -> "DESKTOP_CHROME_OS"
+        Android -> "ANDROID"
+        Ios -> "IOS"
 
 instance FromJSON OSConstraintOSType where
     parseJSON = parseJSONText "OSConstraintOSType"
 
 instance ToJSON OSConstraintOSType where
+    toJSON = toJSONText
+
+-- | Whether to return \`BasicLevels\` in the Cloud Common Expression
+-- language, as \`CustomLevels\`, rather than as \`BasicLevels\`. Defaults
+-- to returning \`AccessLevels\` in the format they were defined.
+data AccessPoliciesAccessLevelsListAccessLevelFormat
+    = APALLALFLevelFormatUnspecified
+      -- ^ @LEVEL_FORMAT_UNSPECIFIED@
+      -- The format was not specified.
+    | APALLALFAsDefined
+      -- ^ @AS_DEFINED@
+      -- Uses the format the resource was defined in. BasicLevels are returned as
+      -- BasicLevels, CustomLevels are returned as CustomLevels.
+    | APALLALFCel
+      -- ^ @CEL@
+      -- Use Cloud Common Expression Language when returning the resource. Both
+      -- BasicLevels and CustomLevels are returned as CustomLevels.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AccessPoliciesAccessLevelsListAccessLevelFormat
+
+instance FromHttpApiData AccessPoliciesAccessLevelsListAccessLevelFormat where
+    parseQueryParam = \case
+        "LEVEL_FORMAT_UNSPECIFIED" -> Right APALLALFLevelFormatUnspecified
+        "AS_DEFINED" -> Right APALLALFAsDefined
+        "CEL" -> Right APALLALFCel
+        x -> Left ("Unable to parse AccessPoliciesAccessLevelsListAccessLevelFormat from: " <> x)
+
+instance ToHttpApiData AccessPoliciesAccessLevelsListAccessLevelFormat where
+    toQueryParam = \case
+        APALLALFLevelFormatUnspecified -> "LEVEL_FORMAT_UNSPECIFIED"
+        APALLALFAsDefined -> "AS_DEFINED"
+        APALLALFCel -> "CEL"
+
+instance FromJSON AccessPoliciesAccessLevelsListAccessLevelFormat where
+    parseJSON = parseJSONText "AccessPoliciesAccessLevelsListAccessLevelFormat"
+
+instance ToJSON AccessPoliciesAccessLevelsListAccessLevelFormat where
+    toJSON = toJSONText
+
+data DevicePolicyAllowedDeviceManagementLevelsItem
+    = ManagementUnspecified
+      -- ^ @MANAGEMENT_UNSPECIFIED@
+      -- The device\'s management level is not specified or not known.
+    | None
+      -- ^ @NONE@
+      -- The device is not managed.
+    | Basic
+      -- ^ @BASIC@
+      -- Basic management is enabled, which is generally limited to monitoring
+      -- and wiping the corporate account.
+    | Complete
+      -- ^ @COMPLETE@
+      -- Complete device management. This includes more thorough monitoring and
+      -- the ability to directly manage the device (such as remote wiping). This
+      -- can be enabled through the Android Enterprise Platform.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DevicePolicyAllowedDeviceManagementLevelsItem
+
+instance FromHttpApiData DevicePolicyAllowedDeviceManagementLevelsItem where
+    parseQueryParam = \case
+        "MANAGEMENT_UNSPECIFIED" -> Right ManagementUnspecified
+        "NONE" -> Right None
+        "BASIC" -> Right Basic
+        "COMPLETE" -> Right Complete
+        x -> Left ("Unable to parse DevicePolicyAllowedDeviceManagementLevelsItem from: " <> x)
+
+instance ToHttpApiData DevicePolicyAllowedDeviceManagementLevelsItem where
+    toQueryParam = \case
+        ManagementUnspecified -> "MANAGEMENT_UNSPECIFIED"
+        None -> "NONE"
+        Basic -> "BASIC"
+        Complete -> "COMPLETE"
+
+instance FromJSON DevicePolicyAllowedDeviceManagementLevelsItem where
+    parseJSON = parseJSONText "DevicePolicyAllowedDeviceManagementLevelsItem"
+
+instance ToJSON DevicePolicyAllowedDeviceManagementLevelsItem where
+    toJSON = toJSONText
+
+-- | Specifies the type of identities that are allowed access from outside
+-- the perimeter. If left unspecified, then members of \`identities\` field
+-- will be allowed access.
+data IngressFromIdentityType
+    = IdentityTypeUnspecified
+      -- ^ @IDENTITY_TYPE_UNSPECIFIED@
+      -- No blanket identity group specified.
+    | AnyIdentity
+      -- ^ @ANY_IDENTITY@
+      -- Authorize access from all identities outside the perimeter.
+    | AnyUserAccount
+      -- ^ @ANY_USER_ACCOUNT@
+      -- Authorize access from all human users outside the perimeter.
+    | AnyServiceAccount
+      -- ^ @ANY_SERVICE_ACCOUNT@
+      -- Authorize access from all service accounts outside the perimeter.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable IngressFromIdentityType
+
+instance FromHttpApiData IngressFromIdentityType where
+    parseQueryParam = \case
+        "IDENTITY_TYPE_UNSPECIFIED" -> Right IdentityTypeUnspecified
+        "ANY_IDENTITY" -> Right AnyIdentity
+        "ANY_USER_ACCOUNT" -> Right AnyUserAccount
+        "ANY_SERVICE_ACCOUNT" -> Right AnyServiceAccount
+        x -> Left ("Unable to parse IngressFromIdentityType from: " <> x)
+
+instance ToHttpApiData IngressFromIdentityType where
+    toQueryParam = \case
+        IdentityTypeUnspecified -> "IDENTITY_TYPE_UNSPECIFIED"
+        AnyIdentity -> "ANY_IDENTITY"
+        AnyUserAccount -> "ANY_USER_ACCOUNT"
+        AnyServiceAccount -> "ANY_SERVICE_ACCOUNT"
+
+instance FromJSON IngressFromIdentityType where
+    parseJSON = parseJSONText "IngressFromIdentityType"
+
+instance ToJSON IngressFromIdentityType where
     toJSON = toJSONText
 
 -- | V1 error format.
@@ -156,4 +327,83 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | Specifies the type of identities that are allowed access to outside the
+-- perimeter. If left unspecified, then members of \`identities\` field
+-- will be allowed access.
+data EgressFromIdentityType
+    = EFITIdentityTypeUnspecified
+      -- ^ @IDENTITY_TYPE_UNSPECIFIED@
+      -- No blanket identity group specified.
+    | EFITAnyIdentity
+      -- ^ @ANY_IDENTITY@
+      -- Authorize access from all identities outside the perimeter.
+    | EFITAnyUserAccount
+      -- ^ @ANY_USER_ACCOUNT@
+      -- Authorize access from all human users outside the perimeter.
+    | EFITAnyServiceAccount
+      -- ^ @ANY_SERVICE_ACCOUNT@
+      -- Authorize access from all service accounts outside the perimeter.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EgressFromIdentityType
+
+instance FromHttpApiData EgressFromIdentityType where
+    parseQueryParam = \case
+        "IDENTITY_TYPE_UNSPECIFIED" -> Right EFITIdentityTypeUnspecified
+        "ANY_IDENTITY" -> Right EFITAnyIdentity
+        "ANY_USER_ACCOUNT" -> Right EFITAnyUserAccount
+        "ANY_SERVICE_ACCOUNT" -> Right EFITAnyServiceAccount
+        x -> Left ("Unable to parse EgressFromIdentityType from: " <> x)
+
+instance ToHttpApiData EgressFromIdentityType where
+    toQueryParam = \case
+        EFITIdentityTypeUnspecified -> "IDENTITY_TYPE_UNSPECIFIED"
+        EFITAnyIdentity -> "ANY_IDENTITY"
+        EFITAnyUserAccount -> "ANY_USER_ACCOUNT"
+        EFITAnyServiceAccount -> "ANY_SERVICE_ACCOUNT"
+
+instance FromJSON EgressFromIdentityType where
+    parseJSON = parseJSONText "EgressFromIdentityType"
+
+instance ToJSON EgressFromIdentityType where
+    toJSON = toJSONText
+
+data DevicePolicyAllowedEncryptionStatusesItem
+    = EncryptionUnspecified
+      -- ^ @ENCRYPTION_UNSPECIFIED@
+      -- The encryption status of the device is not specified or not known.
+    | EncryptionUnsupported
+      -- ^ @ENCRYPTION_UNSUPPORTED@
+      -- The device does not support encryption.
+    | Unencrypted
+      -- ^ @UNENCRYPTED@
+      -- The device supports encryption, but is currently unencrypted.
+    | Encrypted
+      -- ^ @ENCRYPTED@
+      -- The device is encrypted.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DevicePolicyAllowedEncryptionStatusesItem
+
+instance FromHttpApiData DevicePolicyAllowedEncryptionStatusesItem where
+    parseQueryParam = \case
+        "ENCRYPTION_UNSPECIFIED" -> Right EncryptionUnspecified
+        "ENCRYPTION_UNSUPPORTED" -> Right EncryptionUnsupported
+        "UNENCRYPTED" -> Right Unencrypted
+        "ENCRYPTED" -> Right Encrypted
+        x -> Left ("Unable to parse DevicePolicyAllowedEncryptionStatusesItem from: " <> x)
+
+instance ToHttpApiData DevicePolicyAllowedEncryptionStatusesItem where
+    toQueryParam = \case
+        EncryptionUnspecified -> "ENCRYPTION_UNSPECIFIED"
+        EncryptionUnsupported -> "ENCRYPTION_UNSUPPORTED"
+        Unencrypted -> "UNENCRYPTED"
+        Encrypted -> "ENCRYPTED"
+
+instance FromJSON DevicePolicyAllowedEncryptionStatusesItem where
+    parseJSON = parseJSONText "DevicePolicyAllowedEncryptionStatusesItem"
+
+instance ToJSON DevicePolicyAllowedEncryptionStatusesItem where
     toJSON = toJSONText

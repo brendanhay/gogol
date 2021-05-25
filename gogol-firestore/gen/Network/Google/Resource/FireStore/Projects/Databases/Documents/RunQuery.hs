@@ -42,8 +42,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.RunQuery
     , pddrqCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.runQuery@ method which the
 -- 'ProjectsDatabasesDocumentsRunQuery' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsDatabasesDocumentsRunQueryResource =
 -- /See:/ 'projectsDatabasesDocumentsRunQuery' smart constructor.
 data ProjectsDatabasesDocumentsRunQuery =
   ProjectsDatabasesDocumentsRunQuery'
-    { _pddrqParent         :: !Text
-    , _pddrqXgafv          :: !(Maybe Xgafv)
+    { _pddrqParent :: !Text
+    , _pddrqXgafv :: !(Maybe Xgafv)
     , _pddrqUploadProtocol :: !(Maybe Text)
-    , _pddrqAccessToken    :: !(Maybe Text)
-    , _pddrqUploadType     :: !(Maybe Text)
-    , _pddrqPayload        :: !RunQueryRequest
-    , _pddrqCallback       :: !(Maybe Text)
+    , _pddrqAccessToken :: !(Maybe Text)
+    , _pddrqUploadType :: !(Maybe Text)
+    , _pddrqPayload :: !RunQueryRequest
+    , _pddrqCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -108,7 +108,7 @@ projectsDatabasesDocumentsRunQuery pPddrqParent_ pPddrqPayload_ =
     }
 
 
--- | The parent resource name. In the format:
+-- | Required. The parent resource name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\` or
 -- \`projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}\`.
 -- For example: \`projects\/my-project\/databases\/my-database\/documents\`

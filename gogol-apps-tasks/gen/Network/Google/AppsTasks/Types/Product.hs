@@ -17,15 +17,15 @@
 --
 module Network.Google.AppsTasks.Types.Product where
 
-import           Network.Google.AppsTasks.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types.Sum
+import Network.Google.Prelude
 
 --
 -- /See:/ 'taskLinksItem' smart constructor.
 data TaskLinksItem =
   TaskLinksItem'
-    { _tliLink        :: !(Maybe Text)
-    , _tliType        :: !(Maybe Text)
+    { _tliLink :: !(Maybe Text)
+    , _tliType :: !(Maybe Text)
     , _tliDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -80,10 +80,10 @@ instance ToJSON TaskLinksItem where
 -- /See:/ 'tasks' smart constructor.
 data Tasks =
   Tasks'
-    { _tEtag          :: !(Maybe Text)
+    { _tEtag :: !(Maybe Text)
     , _tNextPageToken :: !(Maybe Text)
-    , _tKind          :: !Text
-    , _tItems         :: !(Maybe [Task])
+    , _tKind :: !(Maybe Text)
+    , _tItems :: !(Maybe [Task])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,7 +105,7 @@ tasks =
   Tasks'
     { _tEtag = Nothing
     , _tNextPageToken = Nothing
-    , _tKind = "tasks#tasks"
+    , _tKind = Nothing
     , _tItems = Nothing
     }
 
@@ -121,7 +121,7 @@ tNextPageToken
       (\ s a -> s{_tNextPageToken = a})
 
 -- | Type of the resource. This is always \"tasks#tasks\".
-tKind :: Lens' Tasks Text
+tKind :: Lens' Tasks (Maybe Text)
 tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | Collection of tasks.
@@ -136,7 +136,7 @@ instance FromJSON Tasks where
               (\ o ->
                  Tasks' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "tasks#tasks")
+                     (o .:? "kind")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Tasks where
@@ -145,16 +145,16 @@ instance ToJSON Tasks where
               (catMaybes
                  [("etag" .=) <$> _tEtag,
                   ("nextPageToken" .=) <$> _tNextPageToken,
-                  Just ("kind" .= _tKind), ("items" .=) <$> _tItems])
+                  ("kind" .=) <$> _tKind, ("items" .=) <$> _tItems])
 
 --
 -- /See:/ 'taskLists' smart constructor.
 data TaskLists =
   TaskLists'
-    { _tlEtag          :: !(Maybe Text)
+    { _tlEtag :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
-    , _tlKind          :: !Text
-    , _tlItems         :: !(Maybe [TaskList])
+    , _tlKind :: !(Maybe Text)
+    , _tlItems :: !(Maybe [TaskList])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -176,7 +176,7 @@ taskLists =
   TaskLists'
     { _tlEtag = Nothing
     , _tlNextPageToken = Nothing
-    , _tlKind = "tasks#taskLists"
+    , _tlKind = Nothing
     , _tlItems = Nothing
     }
 
@@ -192,7 +192,7 @@ tlNextPageToken
       (\ s a -> s{_tlNextPageToken = a})
 
 -- | Type of the resource. This is always \"tasks#taskLists\".
-tlKind :: Lens' TaskLists Text
+tlKind :: Lens' TaskLists (Maybe Text)
 tlKind = lens _tlKind (\ s a -> s{_tlKind = a})
 
 -- | Collection of task lists.
@@ -207,7 +207,7 @@ instance FromJSON TaskLists where
               (\ o ->
                  TaskLists' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "tasks#taskLists")
+                     (o .:? "kind")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TaskLists where
@@ -216,18 +216,18 @@ instance ToJSON TaskLists where
               (catMaybes
                  [("etag" .=) <$> _tlEtag,
                   ("nextPageToken" .=) <$> _tlNextPageToken,
-                  Just ("kind" .= _tlKind), ("items" .=) <$> _tlItems])
+                  ("kind" .=) <$> _tlKind, ("items" .=) <$> _tlItems])
 
 --
 -- /See:/ 'taskList' smart constructor.
 data TaskList =
   TaskList'
-    { _tasEtag     :: !(Maybe Text)
-    , _tasKind     :: !Text
+    { _tasEtag :: !(Maybe Text)
+    , _tasKind :: !(Maybe Text)
     , _tasSelfLink :: !(Maybe Text)
-    , _tasId       :: !(Maybe Text)
-    , _tasUpdated  :: !(Maybe DateTime')
-    , _tasTitle    :: !(Maybe Text)
+    , _tasId :: !(Maybe Text)
+    , _tasUpdated :: !(Maybe Text)
+    , _tasTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -252,7 +252,7 @@ taskList
 taskList =
   TaskList'
     { _tasEtag = Nothing
-    , _tasKind = "tasks#taskList"
+    , _tasKind = Nothing
     , _tasSelfLink = Nothing
     , _tasId = Nothing
     , _tasUpdated = Nothing
@@ -265,7 +265,7 @@ tasEtag :: Lens' TaskList (Maybe Text)
 tasEtag = lens _tasEtag (\ s a -> s{_tasEtag = a})
 
 -- | Type of the resource. This is always \"tasks#taskList\".
-tasKind :: Lens' TaskList Text
+tasKind :: Lens' TaskList (Maybe Text)
 tasKind = lens _tasKind (\ s a -> s{_tasKind = a})
 
 -- | URL pointing to this task list. Used to retrieve, update, or delete this
@@ -279,10 +279,9 @@ tasId :: Lens' TaskList (Maybe Text)
 tasId = lens _tasId (\ s a -> s{_tasId = a})
 
 -- | Last modification time of the task list (as a RFC 3339 timestamp).
-tasUpdated :: Lens' TaskList (Maybe UTCTime)
+tasUpdated :: Lens' TaskList (Maybe Text)
 tasUpdated
-  = lens _tasUpdated (\ s a -> s{_tasUpdated = a}) .
-      mapping _DateTime
+  = lens _tasUpdated (\ s a -> s{_tasUpdated = a})
 
 -- | Title of the task list.
 tasTitle :: Lens' TaskList (Maybe Text)
@@ -293,9 +292,8 @@ instance FromJSON TaskList where
           = withObject "TaskList"
               (\ o ->
                  TaskList' <$>
-                   (o .:? "etag") <*>
-                     (o .:? "kind" .!= "tasks#taskList")
-                     <*> (o .:? "selfLink")
+                   (o .:? "etag") <*> (o .:? "kind") <*>
+                     (o .:? "selfLink")
                      <*> (o .:? "id")
                      <*> (o .:? "updated")
                      <*> (o .:? "title"))
@@ -304,7 +302,7 @@ instance ToJSON TaskList where
         toJSON TaskList'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _tasEtag, Just ("kind" .= _tasKind),
+                 [("etag" .=) <$> _tasEtag, ("kind" .=) <$> _tasKind,
                   ("selfLink" .=) <$> _tasSelfLink,
                   ("id" .=) <$> _tasId, ("updated" .=) <$> _tasUpdated,
                   ("title" .=) <$> _tasTitle])
@@ -313,21 +311,21 @@ instance ToJSON TaskList where
 -- /See:/ 'task' smart constructor.
 data Task =
   Task'
-    { _ttParent    :: !(Maybe Text)
-    , _ttStatus    :: !(Maybe Text)
-    , _ttDue       :: !(Maybe DateTime')
-    , _ttEtag      :: !(Maybe Text)
-    , _ttKind      :: !Text
-    , _ttSelfLink  :: !(Maybe Text)
-    , _ttHidden    :: !(Maybe Bool)
-    , _ttCompleted :: !(Maybe DateTime')
-    , _ttId        :: !(Maybe Text)
-    , _ttDeleted   :: !(Maybe Bool)
-    , _ttUpdated   :: !(Maybe DateTime')
-    , _ttTitle     :: !(Maybe Text)
-    , _ttLinks     :: !(Maybe [TaskLinksItem])
-    , _ttNotes     :: !(Maybe Text)
-    , _ttPosition  :: !(Maybe Text)
+    { _ttParent :: !(Maybe Text)
+    , _ttStatus :: !(Maybe Text)
+    , _ttDue :: !(Maybe Text)
+    , _ttEtag :: !(Maybe Text)
+    , _ttKind :: !(Maybe Text)
+    , _ttSelfLink :: !(Maybe Text)
+    , _ttHidden :: !(Maybe Bool)
+    , _ttCompleted :: !(Maybe Text)
+    , _ttId :: !(Maybe Text)
+    , _ttDeleted :: !(Maybe Bool)
+    , _ttUpdated :: !(Maybe Text)
+    , _ttTitle :: !(Maybe Text)
+    , _ttLinks :: !(Maybe [TaskLinksItem])
+    , _ttNotes :: !(Maybe Text)
+    , _ttPosition :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -373,7 +371,7 @@ task =
     , _ttStatus = Nothing
     , _ttDue = Nothing
     , _ttEtag = Nothing
-    , _ttKind = "tasks#task"
+    , _ttKind = Nothing
     , _ttSelfLink = Nothing
     , _ttHidden = Nothing
     , _ttCompleted = Nothing
@@ -397,18 +395,19 @@ ttParent = lens _ttParent (\ s a -> s{_ttParent = a})
 ttStatus :: Lens' Task (Maybe Text)
 ttStatus = lens _ttStatus (\ s a -> s{_ttStatus = a})
 
--- | Due date of the task (as a RFC 3339 timestamp). Optional.
-ttDue :: Lens' Task (Maybe UTCTime)
-ttDue
-  = lens _ttDue (\ s a -> s{_ttDue = a}) .
-      mapping _DateTime
+-- | Due date of the task (as a RFC 3339 timestamp). Optional. The due date
+-- only records date information; the time portion of the timestamp is
+-- discarded when setting the due date. It isn\'t possible to read or write
+-- the time that a task is due via the API.
+ttDue :: Lens' Task (Maybe Text)
+ttDue = lens _ttDue (\ s a -> s{_ttDue = a})
 
 -- | ETag of the resource.
 ttEtag :: Lens' Task (Maybe Text)
 ttEtag = lens _ttEtag (\ s a -> s{_ttEtag = a})
 
 -- | Type of the resource. This is always \"tasks#task\".
-ttKind :: Lens' Task Text
+ttKind :: Lens' Task (Maybe Text)
 ttKind = lens _ttKind (\ s a -> s{_ttKind = a})
 
 -- | URL pointing to this task. Used to retrieve, update, or delete this
@@ -425,25 +424,23 @@ ttHidden = lens _ttHidden (\ s a -> s{_ttHidden = a})
 
 -- | Completion date of the task (as a RFC 3339 timestamp). This field is
 -- omitted if the task has not been completed.
-ttCompleted :: Lens' Task (Maybe UTCTime)
+ttCompleted :: Lens' Task (Maybe Text)
 ttCompleted
-  = lens _ttCompleted (\ s a -> s{_ttCompleted = a}) .
-      mapping _DateTime
+  = lens _ttCompleted (\ s a -> s{_ttCompleted = a})
 
 -- | Task identifier.
 ttId :: Lens' Task (Maybe Text)
 ttId = lens _ttId (\ s a -> s{_ttId = a})
 
--- | Flag indicating whether the task has been deleted. The default if False.
+-- | Flag indicating whether the task has been deleted. The default is False.
 ttDeleted :: Lens' Task (Maybe Bool)
 ttDeleted
   = lens _ttDeleted (\ s a -> s{_ttDeleted = a})
 
 -- | Last modification time of the task (as a RFC 3339 timestamp).
-ttUpdated :: Lens' Task (Maybe UTCTime)
+ttUpdated :: Lens' Task (Maybe Text)
 ttUpdated
-  = lens _ttUpdated (\ s a -> s{_ttUpdated = a}) .
-      mapping _DateTime
+  = lens _ttUpdated (\ s a -> s{_ttUpdated = a})
 
 -- | Title of the task.
 ttTitle :: Lens' Task (Maybe Text)
@@ -477,7 +474,7 @@ instance FromJSON Task where
                    (o .:? "parent") <*> (o .:? "status") <*>
                      (o .:? "due")
                      <*> (o .:? "etag")
-                     <*> (o .:? "kind" .!= "tasks#task")
+                     <*> (o .:? "kind")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "hidden")
                      <*> (o .:? "completed")
@@ -495,7 +492,7 @@ instance ToJSON Task where
               (catMaybes
                  [("parent" .=) <$> _ttParent,
                   ("status" .=) <$> _ttStatus, ("due" .=) <$> _ttDue,
-                  ("etag" .=) <$> _ttEtag, Just ("kind" .= _ttKind),
+                  ("etag" .=) <$> _ttEtag, ("kind" .=) <$> _ttKind,
                   ("selfLink" .=) <$> _ttSelfLink,
                   ("hidden" .=) <$> _ttHidden,
                   ("completed" .=) <$> _ttCompleted,

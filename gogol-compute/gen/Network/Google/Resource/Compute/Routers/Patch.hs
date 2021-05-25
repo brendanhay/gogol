@@ -35,15 +35,15 @@ module Network.Google.Resource.Compute.Routers.Patch
     , RoutersPatch
 
     -- * Request Lenses
-    , rpRequestId
-    , rpProject
-    , rpRouter
-    , rpPayload
-    , rpRegion
+    , rppRequestId
+    , rppProject
+    , rppRouter
+    , rppPayload
+    , rppRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.patch@ method which the
 -- 'RoutersPatch' request conforms to.
@@ -67,11 +67,11 @@ type RoutersPatchResource =
 -- /See:/ 'routersPatch' smart constructor.
 data RoutersPatch =
   RoutersPatch'
-    { _rpRequestId :: !(Maybe Text)
-    , _rpProject   :: !Text
-    , _rpRouter    :: !Text
-    , _rpPayload   :: !Router
-    , _rpRegion    :: !Text
+    { _rppRequestId :: !(Maybe Text)
+    , _rppProject :: !Text
+    , _rppRouter :: !Text
+    , _rppPayload :: !Router
+    , _rppRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,28 +80,28 @@ data RoutersPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpRequestId'
+-- * 'rppRequestId'
 --
--- * 'rpProject'
+-- * 'rppProject'
 --
--- * 'rpRouter'
+-- * 'rppRouter'
 --
--- * 'rpPayload'
+-- * 'rppPayload'
 --
--- * 'rpRegion'
+-- * 'rppRegion'
 routersPatch
-    :: Text -- ^ 'rpProject'
-    -> Text -- ^ 'rpRouter'
-    -> Router -- ^ 'rpPayload'
-    -> Text -- ^ 'rpRegion'
+    :: Text -- ^ 'rppProject'
+    -> Text -- ^ 'rppRouter'
+    -> Router -- ^ 'rppPayload'
+    -> Text -- ^ 'rppRegion'
     -> RoutersPatch
-routersPatch pRpProject_ pRpRouter_ pRpPayload_ pRpRegion_ =
+routersPatch pRppProject_ pRppRouter_ pRppPayload_ pRppRegion_ =
   RoutersPatch'
-    { _rpRequestId = Nothing
-    , _rpProject = pRpProject_
-    , _rpRouter = pRpRouter_
-    , _rpPayload = pRpPayload_
-    , _rpRegion = pRpRegion_
+    { _rppRequestId = Nothing
+    , _rppProject = pRppProject_
+    , _rppRouter = pRppRouter_
+    , _rppPayload = pRppPayload_
+    , _rppRegion = pRppRegion_
     }
 
 
@@ -115,27 +115,29 @@ routersPatch pRpProject_ pRpRouter_ pRpPayload_ pRpRegion_ =
 -- accidentally creating duplicate commitments. The request ID must be a
 -- valid UUID with the exception that zero UUID is not supported
 -- (00000000-0000-0000-0000-000000000000).
-rpRequestId :: Lens' RoutersPatch (Maybe Text)
-rpRequestId
-  = lens _rpRequestId (\ s a -> s{_rpRequestId = a})
+rppRequestId :: Lens' RoutersPatch (Maybe Text)
+rppRequestId
+  = lens _rppRequestId (\ s a -> s{_rppRequestId = a})
 
 -- | Project ID for this request.
-rpProject :: Lens' RoutersPatch Text
-rpProject
-  = lens _rpProject (\ s a -> s{_rpProject = a})
+rppProject :: Lens' RoutersPatch Text
+rppProject
+  = lens _rppProject (\ s a -> s{_rppProject = a})
 
 -- | Name of the Router resource to patch.
-rpRouter :: Lens' RoutersPatch Text
-rpRouter = lens _rpRouter (\ s a -> s{_rpRouter = a})
+rppRouter :: Lens' RoutersPatch Text
+rppRouter
+  = lens _rppRouter (\ s a -> s{_rppRouter = a})
 
 -- | Multipart request metadata.
-rpPayload :: Lens' RoutersPatch Router
-rpPayload
-  = lens _rpPayload (\ s a -> s{_rpPayload = a})
+rppPayload :: Lens' RoutersPatch Router
+rppPayload
+  = lens _rppPayload (\ s a -> s{_rppPayload = a})
 
 -- | Name of the region for this request.
-rpRegion :: Lens' RoutersPatch Text
-rpRegion = lens _rpRegion (\ s a -> s{_rpRegion = a})
+rppRegion :: Lens' RoutersPatch Text
+rppRegion
+  = lens _rppRegion (\ s a -> s{_rppRegion = a})
 
 instance GoogleRequest RoutersPatch where
         type Rs RoutersPatch = Operation
@@ -143,9 +145,9 @@ instance GoogleRequest RoutersPatch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutersPatch'{..}
-          = go _rpProject _rpRegion _rpRouter _rpRequestId
+          = go _rppProject _rppRegion _rppRouter _rppRequestId
               (Just AltJSON)
-              _rpPayload
+              _rppPayload
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutersPatchResource)

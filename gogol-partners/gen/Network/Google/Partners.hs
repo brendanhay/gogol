@@ -604,25 +604,25 @@ module Network.Google.Partners
     , cLead
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Partners.Analytics.List
-import           Network.Google.Resource.Partners.ClientMessages.Log
-import           Network.Google.Resource.Partners.Companies.Get
-import           Network.Google.Resource.Partners.Companies.Leads.Create
-import           Network.Google.Resource.Partners.Companies.List
-import           Network.Google.Resource.Partners.GetPartnersstatus
-import           Network.Google.Resource.Partners.Leads.List
-import           Network.Google.Resource.Partners.Offers.History.List
-import           Network.Google.Resource.Partners.Offers.List
-import           Network.Google.Resource.Partners.UpdateCompanies
-import           Network.Google.Resource.Partners.UpdateLeads
-import           Network.Google.Resource.Partners.UserEvents.Log
-import           Network.Google.Resource.Partners.Users.CreateCompanyRelation
-import           Network.Google.Resource.Partners.Users.DeleteCompanyRelation
-import           Network.Google.Resource.Partners.Users.Get
-import           Network.Google.Resource.Partners.Users.UpdateProFile
-import           Network.Google.Resource.Partners.UserStates.List
+import Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Resource.Partners.Analytics.List
+import Network.Google.Resource.Partners.ClientMessages.Log
+import Network.Google.Resource.Partners.Companies.Get
+import Network.Google.Resource.Partners.Companies.Leads.Create
+import Network.Google.Resource.Partners.Companies.List
+import Network.Google.Resource.Partners.GetPartnersstatus
+import Network.Google.Resource.Partners.Leads.List
+import Network.Google.Resource.Partners.Offers.History.List
+import Network.Google.Resource.Partners.Offers.List
+import Network.Google.Resource.Partners.UpdateCompanies
+import Network.Google.Resource.Partners.UpdateLeads
+import Network.Google.Resource.Partners.UserEvents.Log
+import Network.Google.Resource.Partners.UserStates.List
+import Network.Google.Resource.Partners.Users.CreateCompanyRelation
+import Network.Google.Resource.Partners.Users.DeleteCompanyRelation
+import Network.Google.Resource.Partners.Users.Get
+import Network.Google.Resource.Partners.Users.UpdateProFile
 
 {- $resources
 TODO

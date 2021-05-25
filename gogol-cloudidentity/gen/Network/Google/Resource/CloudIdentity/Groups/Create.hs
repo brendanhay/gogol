@@ -36,13 +36,14 @@ module Network.Google.Resource.CloudIdentity.Groups.Create
     , gcXgafv
     , gcUploadProtocol
     , gcAccessToken
+    , gcInitialGroupConfig
     , gcUploadType
     , gcPayload
     , gcCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.create@ method which the
 -- 'GroupsCreate' request conforms to.
@@ -52,22 +53,26 @@ type GroupsCreateResource =
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Group :> Post '[JSON] Operation
+               QueryParam "initialGroupConfig"
+                 GroupsCreateInitialGroupConfig
+                 :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Group :> Post '[JSON] Operation
 
 -- | Creates a Group.
 --
 -- /See:/ 'groupsCreate' smart constructor.
 data GroupsCreate =
   GroupsCreate'
-    { _gcXgafv          :: !(Maybe Xgafv)
+    { _gcXgafv :: !(Maybe Xgafv)
     , _gcUploadProtocol :: !(Maybe Text)
-    , _gcAccessToken    :: !(Maybe Text)
-    , _gcUploadType     :: !(Maybe Text)
-    , _gcPayload        :: !Group
-    , _gcCallback       :: !(Maybe Text)
+    , _gcAccessToken :: !(Maybe Text)
+    , _gcInitialGroupConfig :: !(Maybe GroupsCreateInitialGroupConfig)
+    , _gcUploadType :: !(Maybe Text)
+    , _gcPayload :: !Group
+    , _gcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -82,6 +87,8 @@ data GroupsCreate =
 --
 -- * 'gcAccessToken'
 --
+-- * 'gcInitialGroupConfig'
+--
 -- * 'gcUploadType'
 --
 -- * 'gcPayload'
@@ -95,6 +102,7 @@ groupsCreate pGcPayload_ =
     { _gcXgafv = Nothing
     , _gcUploadProtocol = Nothing
     , _gcAccessToken = Nothing
+    , _gcInitialGroupConfig = Nothing
     , _gcUploadType = Nothing
     , _gcPayload = pGcPayload_
     , _gcCallback = Nothing
@@ -117,6 +125,12 @@ gcAccessToken
   = lens _gcAccessToken
       (\ s a -> s{_gcAccessToken = a})
 
+-- | Optional. The initial configuration option for the \`Group\`.
+gcInitialGroupConfig :: Lens' GroupsCreate (Maybe GroupsCreateInitialGroupConfig)
+gcInitialGroupConfig
+  = lens _gcInitialGroupConfig
+      (\ s a -> s{_gcInitialGroupConfig = a})
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 gcUploadType :: Lens' GroupsCreate (Maybe Text)
 gcUploadType
@@ -135,9 +149,11 @@ gcCallback
 instance GoogleRequest GroupsCreate where
         type Rs GroupsCreate = Operation
         type Scopes GroupsCreate =
-             '["https://www.googleapis.com/auth/cloud-identity.groups"]
+             '["https://www.googleapis.com/auth/cloud-identity.groups",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsCreate'{..}
           = go _gcXgafv _gcUploadProtocol _gcAccessToken
+              _gcInitialGroupConfig
               _gcUploadType
               _gcCallback
               (Just AltJSON)

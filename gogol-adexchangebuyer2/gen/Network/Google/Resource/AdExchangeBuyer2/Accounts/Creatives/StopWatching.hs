@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.StopWatching
     , acswCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.stopWatching@ method which the
 -- 'AccountsCreativesStopWatching' request conforms to.
@@ -70,14 +70,14 @@ type AccountsCreativesStopWatchingResource =
 -- /See:/ 'accountsCreativesStopWatching' smart constructor.
 data AccountsCreativesStopWatching =
   AccountsCreativesStopWatching'
-    { _acswXgafv          :: !(Maybe Xgafv)
+    { _acswXgafv :: !(Maybe Xgafv)
     , _acswUploadProtocol :: !(Maybe Text)
-    , _acswAccessToken    :: !(Maybe Text)
-    , _acswUploadType     :: !(Maybe Text)
-    , _acswCreativeId     :: !Text
-    , _acswPayload        :: !StopWatchingCreativeRequest
-    , _acswAccountId      :: !Text
-    , _acswCallback       :: !(Maybe Text)
+    , _acswAccessToken :: !(Maybe Text)
+    , _acswUploadType :: !(Maybe Text)
+    , _acswCreativeId :: !Text
+    , _acswPayload :: !StopWatchingCreativeRequest
+    , _acswAccountId :: !Text
+    , _acswCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

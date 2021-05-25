@@ -17,15 +17,67 @@
 --
 module Network.Google.Dataproc.Types.Product where
 
-import           Network.Google.Dataproc.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types.Sum
+import Network.Google.Prelude
+
+-- | Security related configuration, including encryption, Kerberos, etc.
+--
+-- /See:/ 'securityConfig' smart constructor.
+data SecurityConfig =
+  SecurityConfig'
+    { _scIdentityConfig :: !(Maybe IdentityConfig)
+    , _scKerberosConfig :: !(Maybe KerberosConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SecurityConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scIdentityConfig'
+--
+-- * 'scKerberosConfig'
+securityConfig
+    :: SecurityConfig
+securityConfig =
+  SecurityConfig' {_scIdentityConfig = Nothing, _scKerberosConfig = Nothing}
+
+
+-- | Optional. Identity related configuration, including service account
+-- based secure multi-tenancy user mappings.
+scIdentityConfig :: Lens' SecurityConfig (Maybe IdentityConfig)
+scIdentityConfig
+  = lens _scIdentityConfig
+      (\ s a -> s{_scIdentityConfig = a})
+
+-- | Optional. Kerberos related configuration.
+scKerberosConfig :: Lens' SecurityConfig (Maybe KerberosConfig)
+scKerberosConfig
+  = lens _scKerberosConfig
+      (\ s a -> s{_scKerberosConfig = a})
+
+instance FromJSON SecurityConfig where
+        parseJSON
+          = withObject "SecurityConfig"
+              (\ o ->
+                 SecurityConfig' <$>
+                   (o .:? "identityConfig") <*>
+                     (o .:? "kerberosConfig"))
+
+instance ToJSON SecurityConfig where
+        toJSON SecurityConfig'{..}
+          = object
+              (catMaybes
+                 [("identityConfig" .=) <$> _scIdentityConfig,
+                  ("kerberosConfig" .=) <$> _scKerberosConfig])
 
 -- | Encapsulates the full scoping used to reference a job.
 --
 -- /See:/ 'jobReference' smart constructor.
 data JobReference =
   JobReference'
-    { _jrJobId     :: !(Maybe Text)
+    { _jrJobId :: !(Maybe Text)
     , _jrProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -50,8 +102,8 @@ jobReference = JobReference' {_jrJobId = Nothing, _jrProjectId = Nothing}
 jrJobId :: Lens' JobReference (Maybe Text)
 jrJobId = lens _jrJobId (\ s a -> s{_jrJobId = a})
 
--- | Required. The ID of the Google Cloud Platform project that the job
--- belongs to.
+-- | Optional. The ID of the Google Cloud Platform project that the job
+-- belongs to. If specified, must match the request project ID.
 jrProjectId :: Lens' JobReference (Maybe Text)
 jrProjectId
   = lens _jrProjectId (\ s a -> s{_jrProjectId = a})
@@ -72,44 +124,17 @@ instance ToJSON JobReference where
 
 -- | The Status type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by gRPC (https:\/\/github.com\/grpc). The error model is
--- designed to be: Simple to use and understand for most users Flexible
--- enough to meet unexpected needsOverviewThe Status message contains three
--- pieces of data: error code, error message, and error details. The error
--- code should be an enum value of google.rpc.Code, but it may accept
--- additional error codes if needed. The error message should be a
--- developer-facing English message that helps developers understand and
--- resolve the error. If a localized user-facing error message is needed,
--- put the localized message in the error details or localize it in the
--- client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package google.rpc that can be used for common error conditions.Language
--- mappingThe Status message is the logical representation of the error
--- model, but it is not necessarily the actual wire format. When the Status
--- message is exposed in different client libraries and different wire
--- protocols, it can be mapped differently. For example, it will likely be
--- mapped to some exceptions in Java, but more likely mapped to some error
--- codes in C.Other usesThe error model and the Status message can be used
--- in a variety of environments, either with or without APIs, to provide a
--- consistent developer experience across different environments.Example
--- uses of this error model include: Partial errors. If a service needs to
--- return partial errors to the client, it may embed the Status in the
--- normal response to indicate the partial errors. Workflow errors. A
--- typical workflow has multiple steps. Each step may have a Status message
--- for error reporting. Batch operations. If a client uses batch request
--- and batch response, the Status message should be used directly inside
--- batch response, one for each error sub-response. Asynchronous
--- operations. If an API call embeds asynchronous operation results in its
--- response, the status of those operations should be represented directly
--- using the Status message. Logging. If some API errors are stored in
--- logs, the message Status could be used directly after any stripping
--- needed for security\/privacy reasons.
+-- is used by gRPC (https:\/\/github.com\/grpc). Each Status message
+-- contains three pieces of data: error code, error message, and error
+-- details.You can find out more about this error model and how to work
+-- with it in the API Design Guide
+-- (https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -166,8 +191,8 @@ instance ToJSON Status where
                   ("message" .=) <$> _sMessage])
 
 -- | Optional. A mapping of property names to values, used to configure
--- PySpark. Properties that conflict with values set by the Cloud Dataproc
--- API may be overwritten. Can include properties set in
+-- PySpark. Properties that conflict with values set by the Dataproc API
+-- may be overwritten. Can include properties set in
 -- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
 --
 -- /See:/ 'pySparkJobProperties' smart constructor.
@@ -242,20 +267,23 @@ instance ToJSON DiagnoseClusterResults where
           = object
               (catMaybes [("outputUri" .=) <$> _dcrOutputURI])
 
--- | Optional. The config settings for Compute Engine resources in an
--- instance group, such as a master or worker group.
+-- | The config settings for Compute Engine resources in an instance group,
+-- such as a master or worker group.
 --
 -- /See:/ 'instanceGroupConfig' smart constructor.
 data InstanceGroupConfig =
   InstanceGroupConfig'
-    { _igcNumInstances       :: !(Maybe (Textual Int32))
-    , _igcDiskConfig         :: !(Maybe DiskConfig)
-    , _igcIsPreemptible      :: !(Maybe Bool)
-    , _igcImageURI           :: !(Maybe Text)
-    , _igcAccelerators       :: !(Maybe [AcceleratorConfig])
-    , _igcInstanceNames      :: !(Maybe [Text])
+    { _igcNumInstances :: !(Maybe (Textual Int32))
+    , _igcDiskConfig :: !(Maybe DiskConfig)
+    , _igcIsPreemptible :: !(Maybe Bool)
+    , _igcPreemptibility :: !(Maybe InstanceGroupConfigPreemptibility)
+    , _igcImageURI :: !(Maybe Text)
+    , _igcAccelerators :: !(Maybe [AcceleratorConfig])
+    , _igcInstanceNames :: !(Maybe [Text])
     , _igcManagedGroupConfig :: !(Maybe ManagedGroupConfig)
-    , _igcMachineTypeURI     :: !(Maybe Text)
+    , _igcMachineTypeURI :: !(Maybe Text)
+    , _igcMinCPUPlatform :: !(Maybe Text)
+    , _igcInstanceReferences :: !(Maybe [InstanceReference])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -270,6 +298,8 @@ data InstanceGroupConfig =
 --
 -- * 'igcIsPreemptible'
 --
+-- * 'igcPreemptibility'
+--
 -- * 'igcImageURI'
 --
 -- * 'igcAccelerators'
@@ -279,6 +309,10 @@ data InstanceGroupConfig =
 -- * 'igcManagedGroupConfig'
 --
 -- * 'igcMachineTypeURI'
+--
+-- * 'igcMinCPUPlatform'
+--
+-- * 'igcInstanceReferences'
 instanceGroupConfig
     :: InstanceGroupConfig
 instanceGroupConfig =
@@ -286,16 +320,20 @@ instanceGroupConfig =
     { _igcNumInstances = Nothing
     , _igcDiskConfig = Nothing
     , _igcIsPreemptible = Nothing
+    , _igcPreemptibility = Nothing
     , _igcImageURI = Nothing
     , _igcAccelerators = Nothing
     , _igcInstanceNames = Nothing
     , _igcManagedGroupConfig = Nothing
     , _igcMachineTypeURI = Nothing
+    , _igcMinCPUPlatform = Nothing
+    , _igcInstanceReferences = Nothing
     }
 
 
--- | Optional. The number of VM instances in the instance group. For master
--- instance groups, must be set to 1.
+-- | Optional. The number of VM instances in the instance group. For HA
+-- cluster master_config groups, must be set to 3. For standard cluster
+-- master_config groups, must be set to 1.
 igcNumInstances :: Lens' InstanceGroupConfig (Maybe Int32)
 igcNumInstances
   = lens _igcNumInstances
@@ -308,23 +346,37 @@ igcDiskConfig
   = lens _igcDiskConfig
       (\ s a -> s{_igcDiskConfig = a})
 
--- | Optional. Specifies that this instance group contains preemptible
+-- | Output only. Specifies that this instance group contains preemptible
 -- instances.
 igcIsPreemptible :: Lens' InstanceGroupConfig (Maybe Bool)
 igcIsPreemptible
   = lens _igcIsPreemptible
       (\ s a -> s{_igcIsPreemptible = a})
 
--- | Optional. The Compute Engine image resource used for cluster instances.
--- It can be specified or may be inferred from
--- SoftwareConfig.image_version.
+-- | Optional. Specifies the preemptibility of the instance group.The default
+-- value for master and worker groups is NON_PREEMPTIBLE. This default
+-- cannot be changed.The default value for secondary instances is
+-- PREEMPTIBLE.
+igcPreemptibility :: Lens' InstanceGroupConfig (Maybe InstanceGroupConfigPreemptibility)
+igcPreemptibility
+  = lens _igcPreemptibility
+      (\ s a -> s{_igcPreemptibility = a})
+
+-- | Optional. The Compute Engine image resource used for cluster
+-- instances.The URI can represent an image or image family.Image examples:
+-- https:\/\/www.googleapis.com\/compute\/beta\/projects\/[project_id]\/global\/images\/[image-id]
+-- projects\/[project_id]\/global\/images\/[image-id] image-idImage family
+-- examples. Dataproc will use the most recent image from the family:
+-- https:\/\/www.googleapis.com\/compute\/beta\/projects\/[project_id]\/global\/images\/family\/[custom-image-family-name]
+-- projects\/[project_id]\/global\/images\/family\/[custom-image-family-name]If
+-- the URI is unspecified, it will be inferred from
+-- SoftwareConfig.image_version or the system default.
 igcImageURI :: Lens' InstanceGroupConfig (Maybe Text)
 igcImageURI
   = lens _igcImageURI (\ s a -> s{_igcImageURI = a})
 
 -- | Optional. The Compute Engine accelerator configuration for these
--- instances.Beta Feature: This feature is still under development. It may
--- be changed before final release.
+-- instances.
 igcAccelerators :: Lens' InstanceGroupConfig [AcceleratorConfig]
 igcAccelerators
   = lens _igcAccelerators
@@ -332,8 +384,8 @@ igcAccelerators
       . _Default
       . _Coerce
 
--- | Output only. The list of instance names. Cloud Dataproc derives the
--- names from cluster_name, num_instances, and the instance group.
+-- | Output only. The list of instance names. Dataproc derives the names from
+-- cluster_name, num_instances, and the instance group.
 igcInstanceNames :: Lens' InstanceGroupConfig [Text]
 igcInstanceNames
   = lens _igcInstanceNames
@@ -352,13 +404,31 @@ igcManagedGroupConfig
 -- full URL, partial URI, or short name are valid. Examples:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project_id]\/zones\/us-east1-a\/machineTypes\/n1-standard-2
 -- projects\/[project_id]\/zones\/us-east1-a\/machineTypes\/n1-standard-2
--- n1-standard-2Auto Zone Exception: If you are using the Cloud Dataproc
--- Auto Zone Placement feature, you must use the short name of the machine
--- type resource, for example, n1-standard-2.
+-- n1-standard-2Auto Zone Exception: If you are using the Dataproc Auto
+-- Zone Placement
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/auto-zone#using_auto_zone_placement)
+-- feature, you must use the short name of the machine type resource, for
+-- example, n1-standard-2.
 igcMachineTypeURI :: Lens' InstanceGroupConfig (Maybe Text)
 igcMachineTypeURI
   = lens _igcMachineTypeURI
       (\ s a -> s{_igcMachineTypeURI = a})
+
+-- | Optional. Specifies the minimum cpu platform for the Instance Group. See
+-- Dataproc -> Minimum CPU Platform
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/compute\/dataproc-min-cpu).
+igcMinCPUPlatform :: Lens' InstanceGroupConfig (Maybe Text)
+igcMinCPUPlatform
+  = lens _igcMinCPUPlatform
+      (\ s a -> s{_igcMinCPUPlatform = a})
+
+-- | Output only. List of references to Compute Engine instances.
+igcInstanceReferences :: Lens' InstanceGroupConfig [InstanceReference]
+igcInstanceReferences
+  = lens _igcInstanceReferences
+      (\ s a -> s{_igcInstanceReferences = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON InstanceGroupConfig where
         parseJSON
@@ -367,11 +437,14 @@ instance FromJSON InstanceGroupConfig where
                  InstanceGroupConfig' <$>
                    (o .:? "numInstances") <*> (o .:? "diskConfig") <*>
                      (o .:? "isPreemptible")
+                     <*> (o .:? "preemptibility")
                      <*> (o .:? "imageUri")
                      <*> (o .:? "accelerators" .!= mempty)
                      <*> (o .:? "instanceNames" .!= mempty)
                      <*> (o .:? "managedGroupConfig")
-                     <*> (o .:? "machineTypeUri"))
+                     <*> (o .:? "machineTypeUri")
+                     <*> (o .:? "minCpuPlatform")
+                     <*> (o .:? "instanceReferences" .!= mempty))
 
 instance ToJSON InstanceGroupConfig where
         toJSON InstanceGroupConfig'{..}
@@ -380,26 +453,71 @@ instance ToJSON InstanceGroupConfig where
                  [("numInstances" .=) <$> _igcNumInstances,
                   ("diskConfig" .=) <$> _igcDiskConfig,
                   ("isPreemptible" .=) <$> _igcIsPreemptible,
+                  ("preemptibility" .=) <$> _igcPreemptibility,
                   ("imageUri" .=) <$> _igcImageURI,
                   ("accelerators" .=) <$> _igcAccelerators,
                   ("instanceNames" .=) <$> _igcInstanceNames,
                   ("managedGroupConfig" .=) <$> _igcManagedGroupConfig,
-                  ("machineTypeUri" .=) <$> _igcMachineTypeURI])
+                  ("machineTypeUri" .=) <$> _igcMachineTypeURI,
+                  ("minCpuPlatform" .=) <$> _igcMinCPUPlatform,
+                  ("instanceReferences" .=) <$>
+                    _igcInstanceReferences])
 
--- | A Cloud Dataproc job for running Apache Spark
--- (http:\/\/spark.apache.org\/) applications on YARN.
+-- | Identity related configuration, including service account based secure
+-- multi-tenancy user mappings.
+--
+-- /See:/ 'identityConfig' smart constructor.
+newtype IdentityConfig =
+  IdentityConfig'
+    { _icUserServiceAccountMApping :: Maybe IdentityConfigUserServiceAccountMApping
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IdentityConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'icUserServiceAccountMApping'
+identityConfig
+    :: IdentityConfig
+identityConfig = IdentityConfig' {_icUserServiceAccountMApping = Nothing}
+
+
+-- | Required. Map of user to service account.
+icUserServiceAccountMApping :: Lens' IdentityConfig (Maybe IdentityConfigUserServiceAccountMApping)
+icUserServiceAccountMApping
+  = lens _icUserServiceAccountMApping
+      (\ s a -> s{_icUserServiceAccountMApping = a})
+
+instance FromJSON IdentityConfig where
+        parseJSON
+          = withObject "IdentityConfig"
+              (\ o ->
+                 IdentityConfig' <$>
+                   (o .:? "userServiceAccountMapping"))
+
+instance ToJSON IdentityConfig where
+        toJSON IdentityConfig'{..}
+          = object
+              (catMaybes
+                 [("userServiceAccountMapping" .=) <$>
+                    _icUserServiceAccountMApping])
+
+-- | A Dataproc job for running Apache Spark (http:\/\/spark.apache.org\/)
+-- applications on YARN.
 --
 -- /See:/ 'sparkJob' smart constructor.
 data SparkJob =
   SparkJob'
-    { _sjArgs           :: !(Maybe [Text])
+    { _sjArgs :: !(Maybe [Text])
     , _sjMainJarFileURI :: !(Maybe Text)
-    , _sjJarFileURIs    :: !(Maybe [Text])
-    , _sjFileURIs       :: !(Maybe [Text])
-    , _sjArchiveURIs    :: !(Maybe [Text])
-    , _sjMainClass      :: !(Maybe Text)
-    , _sjLoggingConfig  :: !(Maybe LoggingConfig)
-    , _sjProperties     :: !(Maybe SparkJobProperties)
+    , _sjJarFileURIs :: !(Maybe [Text])
+    , _sjFileURIs :: !(Maybe [Text])
+    , _sjArchiveURIs :: !(Maybe [Text])
+    , _sjMainClass :: !(Maybe Text)
+    , _sjLoggingConfig :: !(Maybe LoggingConfig)
+    , _sjProperties :: !(Maybe SparkJobProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -461,16 +579,16 @@ sjJarFileURIs
       . _Default
       . _Coerce
 
--- | Optional. HCFS URIs of files to be copied to the working directory of
--- Spark drivers and distributed tasks. Useful for naively parallel tasks.
+-- | Optional. HCFS URIs of files to be placed in the working directory of
+-- each executor. Useful for naively parallel tasks.
 sjFileURIs :: Lens' SparkJob [Text]
 sjFileURIs
   = lens _sjFileURIs (\ s a -> s{_sjFileURIs = a}) .
       _Default
       . _Coerce
 
--- | Optional. HCFS URIs of archives to be extracted in the working directory
--- of Spark drivers and tasks. Supported file types: .jar, .tar, .tar.gz,
+-- | Optional. HCFS URIs of archives to be extracted into the working
+-- directory of each executor. Supported file types: .jar, .tar, .tar.gz,
 -- .tgz, and .zip.
 sjArchiveURIs :: Lens' SparkJob [Text]
 sjArchiveURIs
@@ -492,8 +610,8 @@ sjLoggingConfig
       (\ s a -> s{_sjLoggingConfig = a})
 
 -- | Optional. A mapping of property names to values, used to configure
--- Spark. Properties that conflict with values set by the Cloud Dataproc
--- API may be overwritten. Can include properties set in
+-- Spark. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
 -- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
 sjProperties :: Lens' SparkJob (Maybe SparkJobProperties)
 sjProperties
@@ -532,7 +650,8 @@ instance ToJSON SparkJob where
 -- capacity-scheduler: capacity-scheduler.xml core: core-site.xml distcp:
 -- distcp-default.xml hdfs: hdfs-site.xml hive: hive-site.xml mapred:
 -- mapred-site.xml pig: pig.properties spark: spark-defaults.conf yarn:
--- yarn-site.xmlFor more information, see Cluster properties.
+-- yarn-site.xmlFor more information, see Cluster properties
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/cluster-properties).
 --
 -- /See:/ 'softwareConfigProperties' smart constructor.
 newtype SoftwareConfigProperties =
@@ -609,8 +728,8 @@ instance ToJSON WorkflowGraph where
 -- /See:/ 'clusterOperation' smart constructor.
 data ClusterOperation =
   ClusterOperation'
-    { _coDone        :: !(Maybe Bool)
-    , _coError       :: !(Maybe Text)
+    { _coDone :: !(Maybe Bool)
+    , _coError :: !(Maybe Text)
     , _coOperationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -666,7 +785,7 @@ instance ToJSON ClusterOperation where
 -- /See:/ 'clusterSelector' smart constructor.
 data ClusterSelector =
   ClusterSelector'
-    { _csZone          :: !(Maybe Text)
+    { _csZone :: !(Maybe Text)
     , _csClusterLabels :: !(Maybe ClusterSelectorClusterLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -711,12 +830,248 @@ instance ToJSON ClusterSelector where
                  [("zone" .=) <$> _csZone,
                   ("clusterLabels" .=) <$> _csClusterLabels])
 
+-- | Specifies Kerberos related configuration.
+--
+-- /See:/ 'kerberosConfig' smart constructor.
+data KerberosConfig =
+  KerberosConfig'
+    { _kcEnableKerberos :: !(Maybe Bool)
+    , _kcCrossRealmTrustAdminServer :: !(Maybe Text)
+    , _kcCrossRealmTrustRealm :: !(Maybe Text)
+    , _kcKeyPasswordURI :: !(Maybe Text)
+    , _kcKeystorePasswordURI :: !(Maybe Text)
+    , _kcKmsKeyURI :: !(Maybe Text)
+    , _kcRealm :: !(Maybe Text)
+    , _kcTgtLifetimeHours :: !(Maybe (Textual Int32))
+    , _kcTruststorePasswordURI :: !(Maybe Text)
+    , _kcTruststoreURI :: !(Maybe Text)
+    , _kcCrossRealmTrustSharedPasswordURI :: !(Maybe Text)
+    , _kcRootPrincipalPasswordURI :: !(Maybe Text)
+    , _kcKdcDBKeyURI :: !(Maybe Text)
+    , _kcKeystoreURI :: !(Maybe Text)
+    , _kcCrossRealmTrustKdc :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KerberosConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'kcEnableKerberos'
+--
+-- * 'kcCrossRealmTrustAdminServer'
+--
+-- * 'kcCrossRealmTrustRealm'
+--
+-- * 'kcKeyPasswordURI'
+--
+-- * 'kcKeystorePasswordURI'
+--
+-- * 'kcKmsKeyURI'
+--
+-- * 'kcRealm'
+--
+-- * 'kcTgtLifetimeHours'
+--
+-- * 'kcTruststorePasswordURI'
+--
+-- * 'kcTruststoreURI'
+--
+-- * 'kcCrossRealmTrustSharedPasswordURI'
+--
+-- * 'kcRootPrincipalPasswordURI'
+--
+-- * 'kcKdcDBKeyURI'
+--
+-- * 'kcKeystoreURI'
+--
+-- * 'kcCrossRealmTrustKdc'
+kerberosConfig
+    :: KerberosConfig
+kerberosConfig =
+  KerberosConfig'
+    { _kcEnableKerberos = Nothing
+    , _kcCrossRealmTrustAdminServer = Nothing
+    , _kcCrossRealmTrustRealm = Nothing
+    , _kcKeyPasswordURI = Nothing
+    , _kcKeystorePasswordURI = Nothing
+    , _kcKmsKeyURI = Nothing
+    , _kcRealm = Nothing
+    , _kcTgtLifetimeHours = Nothing
+    , _kcTruststorePasswordURI = Nothing
+    , _kcTruststoreURI = Nothing
+    , _kcCrossRealmTrustSharedPasswordURI = Nothing
+    , _kcRootPrincipalPasswordURI = Nothing
+    , _kcKdcDBKeyURI = Nothing
+    , _kcKeystoreURI = Nothing
+    , _kcCrossRealmTrustKdc = Nothing
+    }
+
+
+-- | Optional. Flag to indicate whether to Kerberize the cluster (default:
+-- false). Set this field to true to enable Kerberos on a cluster.
+kcEnableKerberos :: Lens' KerberosConfig (Maybe Bool)
+kcEnableKerberos
+  = lens _kcEnableKerberos
+      (\ s a -> s{_kcEnableKerberos = a})
+
+-- | Optional. The admin server (IP or hostname) for the remote trusted realm
+-- in a cross realm trust relationship.
+kcCrossRealmTrustAdminServer :: Lens' KerberosConfig (Maybe Text)
+kcCrossRealmTrustAdminServer
+  = lens _kcCrossRealmTrustAdminServer
+      (\ s a -> s{_kcCrossRealmTrustAdminServer = a})
+
+-- | Optional. The remote realm the Dataproc on-cluster KDC will trust,
+-- should the user enable cross realm trust.
+kcCrossRealmTrustRealm :: Lens' KerberosConfig (Maybe Text)
+kcCrossRealmTrustRealm
+  = lens _kcCrossRealmTrustRealm
+      (\ s a -> s{_kcCrossRealmTrustRealm = a})
+
+-- | Optional. The Cloud Storage URI of a KMS encrypted file containing the
+-- password to the user provided key. For the self-signed certificate, this
+-- password is generated by Dataproc.
+kcKeyPasswordURI :: Lens' KerberosConfig (Maybe Text)
+kcKeyPasswordURI
+  = lens _kcKeyPasswordURI
+      (\ s a -> s{_kcKeyPasswordURI = a})
+
+-- | Optional. The Cloud Storage URI of a KMS encrypted file containing the
+-- password to the user provided keystore. For the self-signed certificate,
+-- this password is generated by Dataproc.
+kcKeystorePasswordURI :: Lens' KerberosConfig (Maybe Text)
+kcKeystorePasswordURI
+  = lens _kcKeystorePasswordURI
+      (\ s a -> s{_kcKeystorePasswordURI = a})
+
+-- | Optional. The uri of the KMS key used to encrypt various sensitive
+-- files.
+kcKmsKeyURI :: Lens' KerberosConfig (Maybe Text)
+kcKmsKeyURI
+  = lens _kcKmsKeyURI (\ s a -> s{_kcKmsKeyURI = a})
+
+-- | Optional. The name of the on-cluster Kerberos realm. If not specified,
+-- the uppercased domain of hostnames will be the realm.
+kcRealm :: Lens' KerberosConfig (Maybe Text)
+kcRealm = lens _kcRealm (\ s a -> s{_kcRealm = a})
+
+-- | Optional. The lifetime of the ticket granting ticket, in hours. If not
+-- specified, or user specifies 0, then default value 10 will be used.
+kcTgtLifetimeHours :: Lens' KerberosConfig (Maybe Int32)
+kcTgtLifetimeHours
+  = lens _kcTgtLifetimeHours
+      (\ s a -> s{_kcTgtLifetimeHours = a})
+      . mapping _Coerce
+
+-- | Optional. The Cloud Storage URI of a KMS encrypted file containing the
+-- password to the user provided truststore. For the self-signed
+-- certificate, this password is generated by Dataproc.
+kcTruststorePasswordURI :: Lens' KerberosConfig (Maybe Text)
+kcTruststorePasswordURI
+  = lens _kcTruststorePasswordURI
+      (\ s a -> s{_kcTruststorePasswordURI = a})
+
+-- | Optional. The Cloud Storage URI of the truststore file used for SSL
+-- encryption. If not provided, Dataproc will provide a self-signed
+-- certificate.
+kcTruststoreURI :: Lens' KerberosConfig (Maybe Text)
+kcTruststoreURI
+  = lens _kcTruststoreURI
+      (\ s a -> s{_kcTruststoreURI = a})
+
+-- | Optional. The Cloud Storage URI of a KMS encrypted file containing the
+-- shared password between the on-cluster Kerberos realm and the remote
+-- trusted realm, in a cross realm trust relationship.
+kcCrossRealmTrustSharedPasswordURI :: Lens' KerberosConfig (Maybe Text)
+kcCrossRealmTrustSharedPasswordURI
+  = lens _kcCrossRealmTrustSharedPasswordURI
+      (\ s a -> s{_kcCrossRealmTrustSharedPasswordURI = a})
+
+-- | Optional. The Cloud Storage URI of a KMS encrypted file containing the
+-- root principal password.
+kcRootPrincipalPasswordURI :: Lens' KerberosConfig (Maybe Text)
+kcRootPrincipalPasswordURI
+  = lens _kcRootPrincipalPasswordURI
+      (\ s a -> s{_kcRootPrincipalPasswordURI = a})
+
+-- | Optional. The Cloud Storage URI of a KMS encrypted file containing the
+-- master key of the KDC database.
+kcKdcDBKeyURI :: Lens' KerberosConfig (Maybe Text)
+kcKdcDBKeyURI
+  = lens _kcKdcDBKeyURI
+      (\ s a -> s{_kcKdcDBKeyURI = a})
+
+-- | Optional. The Cloud Storage URI of the keystore file used for SSL
+-- encryption. If not provided, Dataproc will provide a self-signed
+-- certificate.
+kcKeystoreURI :: Lens' KerberosConfig (Maybe Text)
+kcKeystoreURI
+  = lens _kcKeystoreURI
+      (\ s a -> s{_kcKeystoreURI = a})
+
+-- | Optional. The KDC (IP or hostname) for the remote trusted realm in a
+-- cross realm trust relationship.
+kcCrossRealmTrustKdc :: Lens' KerberosConfig (Maybe Text)
+kcCrossRealmTrustKdc
+  = lens _kcCrossRealmTrustKdc
+      (\ s a -> s{_kcCrossRealmTrustKdc = a})
+
+instance FromJSON KerberosConfig where
+        parseJSON
+          = withObject "KerberosConfig"
+              (\ o ->
+                 KerberosConfig' <$>
+                   (o .:? "enableKerberos") <*>
+                     (o .:? "crossRealmTrustAdminServer")
+                     <*> (o .:? "crossRealmTrustRealm")
+                     <*> (o .:? "keyPasswordUri")
+                     <*> (o .:? "keystorePasswordUri")
+                     <*> (o .:? "kmsKeyUri")
+                     <*> (o .:? "realm")
+                     <*> (o .:? "tgtLifetimeHours")
+                     <*> (o .:? "truststorePasswordUri")
+                     <*> (o .:? "truststoreUri")
+                     <*> (o .:? "crossRealmTrustSharedPasswordUri")
+                     <*> (o .:? "rootPrincipalPasswordUri")
+                     <*> (o .:? "kdcDbKeyUri")
+                     <*> (o .:? "keystoreUri")
+                     <*> (o .:? "crossRealmTrustKdc"))
+
+instance ToJSON KerberosConfig where
+        toJSON KerberosConfig'{..}
+          = object
+              (catMaybes
+                 [("enableKerberos" .=) <$> _kcEnableKerberos,
+                  ("crossRealmTrustAdminServer" .=) <$>
+                    _kcCrossRealmTrustAdminServer,
+                  ("crossRealmTrustRealm" .=) <$>
+                    _kcCrossRealmTrustRealm,
+                  ("keyPasswordUri" .=) <$> _kcKeyPasswordURI,
+                  ("keystorePasswordUri" .=) <$>
+                    _kcKeystorePasswordURI,
+                  ("kmsKeyUri" .=) <$> _kcKmsKeyURI,
+                  ("realm" .=) <$> _kcRealm,
+                  ("tgtLifetimeHours" .=) <$> _kcTgtLifetimeHours,
+                  ("truststorePasswordUri" .=) <$>
+                    _kcTruststorePasswordURI,
+                  ("truststoreUri" .=) <$> _kcTruststoreURI,
+                  ("crossRealmTrustSharedPasswordUri" .=) <$>
+                    _kcCrossRealmTrustSharedPasswordURI,
+                  ("rootPrincipalPasswordUri" .=) <$>
+                    _kcRootPrincipalPasswordURI,
+                  ("kdcDbKeyUri" .=) <$> _kcKdcDBKeyURI,
+                  ("keystoreUri" .=) <$> _kcKeystoreURI,
+                  ("crossRealmTrustKdc" .=) <$> _kcCrossRealmTrustKdc])
+
 -- | Job scheduling options.
 --
 -- /See:/ 'jobScheduling' smart constructor.
-newtype JobScheduling =
+data JobScheduling =
   JobScheduling'
-    { _jsMaxFailuresPerHour :: Maybe (Textual Int32)
+    { _jsMaxFailuresTotal :: !(Maybe (Textual Int32))
+    , _jsMaxFailuresPerHour :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -725,14 +1080,27 @@ newtype JobScheduling =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'jsMaxFailuresTotal'
+--
 -- * 'jsMaxFailuresPerHour'
 jobScheduling
     :: JobScheduling
-jobScheduling = JobScheduling' {_jsMaxFailuresPerHour = Nothing}
+jobScheduling =
+  JobScheduling'
+    {_jsMaxFailuresTotal = Nothing, _jsMaxFailuresPerHour = Nothing}
 
+
+-- | Optional. Maximum number of times in total a driver may be restarted as
+-- a result of driver exiting with non-zero code before job is reported
+-- failed. Maximum value is 240.
+jsMaxFailuresTotal :: Lens' JobScheduling (Maybe Int32)
+jsMaxFailuresTotal
+  = lens _jsMaxFailuresTotal
+      (\ s a -> s{_jsMaxFailuresTotal = a})
+      . mapping _Coerce
 
 -- | Optional. Maximum number of times per hour a driver may be restarted as
--- a result of driver terminating with non-zero code before job is reported
+-- a result of driver exiting with non-zero code before job is reported
 -- failed.A job may be reported as thrashing if driver exits with non-zero
 -- code 4 times within 10 minute window.Maximum value is 10.
 jsMaxFailuresPerHour :: Lens' JobScheduling (Maybe Int32)
@@ -745,22 +1113,24 @@ instance FromJSON JobScheduling where
         parseJSON
           = withObject "JobScheduling"
               (\ o ->
-                 JobScheduling' <$> (o .:? "maxFailuresPerHour"))
+                 JobScheduling' <$>
+                   (o .:? "maxFailuresTotal") <*>
+                     (o .:? "maxFailuresPerHour"))
 
 instance ToJSON JobScheduling where
         toJSON JobScheduling'{..}
           = object
               (catMaybes
-                 [("maxFailuresPerHour" .=) <$>
-                    _jsMaxFailuresPerHour])
+                 [("maxFailuresTotal" .=) <$> _jsMaxFailuresTotal,
+                  ("maxFailuresPerHour" .=) <$> _jsMaxFailuresPerHour])
 
 -- | Specifies the config of disk options for a group of VM instances.
 --
 -- /See:/ 'diskConfig' smart constructor.
 data DiskConfig =
   DiskConfig'
-    { _dcNumLocalSsds   :: !(Maybe (Textual Int32))
-    , _dcBootDiskType   :: !(Maybe Text)
+    { _dcNumLocalSsds :: !(Maybe (Textual Int32))
+    , _dcBootDiskType :: !(Maybe Text)
     , _dcBootDiskSizeGb :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -798,8 +1168,10 @@ dcNumLocalSsds
       . mapping _Coerce
 
 -- | Optional. Type of the boot disk (default is \"pd-standard\"). Valid
--- values: \"pd-ssd\" (Persistent Disk Solid State Drive) or
--- \"pd-standard\" (Persistent Disk Hard Disk Drive).
+-- values: \"pd-balanced\" (Persistent Disk Balanced Solid State Drive),
+-- \"pd-ssd\" (Persistent Disk Solid State Drive), or \"pd-standard\"
+-- (Persistent Disk Hard Disk Drive). See Disk types
+-- (https:\/\/cloud.google.com\/compute\/docs\/disks#disk-types).
 dcBootDiskType :: Lens' DiskConfig (Maybe Text)
 dcBootDiskType
   = lens _dcBootDiskType
@@ -867,16 +1239,30 @@ instance FromJSON ClusterOperationMetadataLabels
 instance ToJSON ClusterOperationMetadataLabels where
         toJSON = toJSON . _comlAddtional
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec.Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -904,26 +1290,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax.The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -953,7 +1338,7 @@ instance ToJSON Expr where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1042,25 +1427,38 @@ instance ToJSON HiveJobScriptVariables where
 -- | Request message for GetIamPolicy method.
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
-data GetIAMPolicyRequest =
+newtype GetIAMPolicyRequest =
   GetIAMPolicyRequest'
+    { _giprOptions :: Maybe GetPolicyOptions
+    }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giprOptions'
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest'
+getIAMPolicyRequest = GetIAMPolicyRequest' {_giprOptions = Nothing}
 
+
+-- | OPTIONAL: A GetPolicyOptions object for specifying options to
+-- GetIamPolicy.
+giprOptions :: Lens' GetIAMPolicyRequest (Maybe GetPolicyOptions)
+giprOptions
+  = lens _giprOptions (\ s a -> s{_giprOptions = a})
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest')
+              (\ o -> GetIAMPolicyRequest' <$> (o .:? "options"))
 
 instance ToJSON GetIAMPolicyRequest where
-        toJSON = const emptyObject
+        toJSON GetIAMPolicyRequest'{..}
+          = object
+              (catMaybes [("options" .=) <$> _giprOptions])
 
 -- | Specifies workflow execution target.Either managed_cluster or
 -- cluster_selector is required.
@@ -1069,7 +1467,7 @@ instance ToJSON GetIAMPolicyRequest where
 data WorkflowTemplatePlacement =
   WorkflowTemplatePlacement'
     { _wtpClusterSelector :: !(Maybe ClusterSelector)
-    , _wtpManagedCluster  :: !(Maybe ManagedCluster)
+    , _wtpManagedCluster :: !(Maybe ManagedCluster)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1095,7 +1493,7 @@ wtpClusterSelector
   = lens _wtpClusterSelector
       (\ s a -> s{_wtpClusterSelector = a})
 
--- | Optional. A cluster that is managed by the workflow.
+-- | A cluster that is managed by the workflow.
 wtpManagedCluster :: Lens' WorkflowTemplatePlacement (Maybe ManagedCluster)
 wtpManagedCluster
   = lens _wtpManagedCluster
@@ -1122,13 +1520,13 @@ instance ToJSON WorkflowTemplatePlacement where
 -- /See:/ 'cluster' smart constructor.
 data Cluster =
   Cluster'
-    { _cStatus        :: !(Maybe ClusterStatus)
-    , _cMetrics       :: !(Maybe ClusterMetrics)
-    , _cClusterUuid   :: !(Maybe Text)
-    , _cConfig        :: !(Maybe ClusterConfig)
-    , _cClusterName   :: !(Maybe Text)
-    , _cLabels        :: !(Maybe ClusterLabels)
-    , _cProjectId     :: !(Maybe Text)
+    { _cStatus :: !(Maybe ClusterStatus)
+    , _cMetrics :: !(Maybe ClusterMetrics)
+    , _cClusterUuid :: !(Maybe Text)
+    , _cConfig :: !(Maybe ClusterConfig)
+    , _cClusterName :: !(Maybe Text)
+    , _cLabels :: !(Maybe ClusterLabels)
+    , _cProjectId :: !(Maybe Text)
     , _cStatusHistory :: !(Maybe [ClusterStatus])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1172,20 +1570,20 @@ cluster =
 cStatus :: Lens' Cluster (Maybe ClusterStatus)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
--- | Contains cluster daemon metrics such as HDFS and YARN stats.Beta
--- Feature: This report is available for testing purposes only. It may be
--- changed before final release.
+-- | Output only. Contains cluster daemon metrics such as HDFS and YARN
+-- stats.Beta Feature: This report is available for testing purposes only.
+-- It may be changed before final release.
 cMetrics :: Lens' Cluster (Maybe ClusterMetrics)
 cMetrics = lens _cMetrics (\ s a -> s{_cMetrics = a})
 
--- | Output only. A cluster UUID (Unique Universal Identifier). Cloud
--- Dataproc generates this value when it creates the cluster.
+-- | Output only. A cluster UUID (Unique Universal Identifier). Dataproc
+-- generates this value when it creates the cluster.
 cClusterUuid :: Lens' Cluster (Maybe Text)
 cClusterUuid
   = lens _cClusterUuid (\ s a -> s{_cClusterUuid = a})
 
--- | Required. The cluster config. Note that Cloud Dataproc may set default
--- values, and values may change when clusters are updated.
+-- | Required. The cluster config. Note that Dataproc may set default values,
+-- and values may change when clusters are updated.
 cConfig :: Lens' Cluster (Maybe ClusterConfig)
 cConfig = lens _cConfig (\ s a -> s{_cConfig = a})
 
@@ -1290,7 +1688,7 @@ instance ToJSON ManagedClusterLabels where
 -- /See:/ 'parameterValidation' smart constructor.
 data ParameterValidation =
   ParameterValidation'
-    { _pvRegex  :: !(Maybe RegexValidation)
+    { _pvRegex :: !(Maybe RegexValidation)
     , _pvValues :: !(Maybe ValueValidation)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1330,6 +1728,81 @@ instance ToJSON ParameterValidation where
               (catMaybes
                  [("regex" .=) <$> _pvRegex,
                   ("values" .=) <$> _pvValues])
+
+-- | A reference to a Compute Engine instance.
+--
+-- /See:/ 'instanceReference' smart constructor.
+data InstanceReference =
+  InstanceReference'
+    { _irInstanceId :: !(Maybe Text)
+    , _irPublicEciesKey :: !(Maybe Text)
+    , _irPublicKey :: !(Maybe Text)
+    , _irInstanceName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InstanceReference' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irInstanceId'
+--
+-- * 'irPublicEciesKey'
+--
+-- * 'irPublicKey'
+--
+-- * 'irInstanceName'
+instanceReference
+    :: InstanceReference
+instanceReference =
+  InstanceReference'
+    { _irInstanceId = Nothing
+    , _irPublicEciesKey = Nothing
+    , _irPublicKey = Nothing
+    , _irInstanceName = Nothing
+    }
+
+
+-- | The unique identifier of the Compute Engine instance.
+irInstanceId :: Lens' InstanceReference (Maybe Text)
+irInstanceId
+  = lens _irInstanceId (\ s a -> s{_irInstanceId = a})
+
+-- | The public ECIES key used for sharing data with this instance.
+irPublicEciesKey :: Lens' InstanceReference (Maybe Text)
+irPublicEciesKey
+  = lens _irPublicEciesKey
+      (\ s a -> s{_irPublicEciesKey = a})
+
+-- | The public RSA key used for sharing data with this instance.
+irPublicKey :: Lens' InstanceReference (Maybe Text)
+irPublicKey
+  = lens _irPublicKey (\ s a -> s{_irPublicKey = a})
+
+-- | The user-friendly name of the Compute Engine instance.
+irInstanceName :: Lens' InstanceReference (Maybe Text)
+irInstanceName
+  = lens _irInstanceName
+      (\ s a -> s{_irInstanceName = a})
+
+instance FromJSON InstanceReference where
+        parseJSON
+          = withObject "InstanceReference"
+              (\ o ->
+                 InstanceReference' <$>
+                   (o .:? "instanceId") <*> (o .:? "publicEciesKey") <*>
+                     (o .:? "publicKey")
+                     <*> (o .:? "instanceName"))
+
+instance ToJSON InstanceReference where
+        toJSON InstanceReference'{..}
+          = object
+              (catMaybes
+                 [("instanceId" .=) <$> _irInstanceId,
+                  ("publicEciesKey" .=) <$> _irPublicEciesKey,
+                  ("publicKey" .=) <$> _irPublicKey,
+                  ("instanceName" .=) <$> _irInstanceName])
 
 -- | Optional. The labels to associate with this job. Label keys must contain
 -- 1 to 63 characters, and must conform to RFC 1035
@@ -1376,7 +1849,7 @@ instance ToJSON JobLabels where
 data SubmitJobRequest =
   SubmitJobRequest'
     { _sjrRequestId :: !(Maybe Text)
-    , _sjrJob       :: !(Maybe Job)
+    , _sjrJob :: !(Maybe Job)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1395,9 +1868,11 @@ submitJobRequest =
 
 
 -- | Optional. A unique id used to identify the request. If the server
--- receives two SubmitJobRequest requests with the same id, then the second
--- request will be ignored and the first Job created and stored in the
--- backend is returned.It is recommended to always set this value to a UUID
+-- receives two SubmitJobRequest
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
+-- with the same id, then the second request will be ignored and the first
+-- Job created and stored in the backend is returned.It is recommended to
+-- always set this value to a UUID
 -- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The id
 -- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
 -- and hyphens (-). The maximum length is 40 characters.
@@ -1422,6 +1897,141 @@ instance ToJSON SubmitJobRequest where
               (catMaybes
                  [("requestId" .=) <$> _sjrRequestId,
                   ("job" .=) <$> _sjrJob])
+
+-- | Reservation Affinity for consuming Zonal reservation.
+--
+-- /See:/ 'reservationAffinity' smart constructor.
+data ReservationAffinity =
+  ReservationAffinity'
+    { _raConsumeReservationType :: !(Maybe ReservationAffinityConsumeReservationType)
+    , _raValues :: !(Maybe [Text])
+    , _raKey :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ReservationAffinity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raConsumeReservationType'
+--
+-- * 'raValues'
+--
+-- * 'raKey'
+reservationAffinity
+    :: ReservationAffinity
+reservationAffinity =
+  ReservationAffinity'
+    {_raConsumeReservationType = Nothing, _raValues = Nothing, _raKey = Nothing}
+
+
+-- | Optional. Type of reservation to consume
+raConsumeReservationType :: Lens' ReservationAffinity (Maybe ReservationAffinityConsumeReservationType)
+raConsumeReservationType
+  = lens _raConsumeReservationType
+      (\ s a -> s{_raConsumeReservationType = a})
+
+-- | Optional. Corresponds to the label values of reservation resource.
+raValues :: Lens' ReservationAffinity [Text]
+raValues
+  = lens _raValues (\ s a -> s{_raValues = a}) .
+      _Default
+      . _Coerce
+
+-- | Optional. Corresponds to the label key of reservation resource.
+raKey :: Lens' ReservationAffinity (Maybe Text)
+raKey = lens _raKey (\ s a -> s{_raKey = a})
+
+instance FromJSON ReservationAffinity where
+        parseJSON
+          = withObject "ReservationAffinity"
+              (\ o ->
+                 ReservationAffinity' <$>
+                   (o .:? "consumeReservationType") <*>
+                     (o .:? "values" .!= mempty)
+                     <*> (o .:? "key"))
+
+instance ToJSON ReservationAffinity where
+        toJSON ReservationAffinity'{..}
+          = object
+              (catMaybes
+                 [("consumeReservationType" .=) <$>
+                    _raConsumeReservationType,
+                  ("values" .=) <$> _raValues, ("key" .=) <$> _raKey])
+
+-- | Job Operation metadata.
+--
+-- /See:/ 'jobMetadata' smart constructor.
+data JobMetadata =
+  JobMetadata'
+    { _jmStatus :: !(Maybe JobStatus)
+    , _jmJobId :: !(Maybe Text)
+    , _jmStartTime :: !(Maybe DateTime')
+    , _jmOperationType :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'JobMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jmStatus'
+--
+-- * 'jmJobId'
+--
+-- * 'jmStartTime'
+--
+-- * 'jmOperationType'
+jobMetadata
+    :: JobMetadata
+jobMetadata =
+  JobMetadata'
+    { _jmStatus = Nothing
+    , _jmJobId = Nothing
+    , _jmStartTime = Nothing
+    , _jmOperationType = Nothing
+    }
+
+
+-- | Output only. Most recent job status.
+jmStatus :: Lens' JobMetadata (Maybe JobStatus)
+jmStatus = lens _jmStatus (\ s a -> s{_jmStatus = a})
+
+-- | Output only. The job id.
+jmJobId :: Lens' JobMetadata (Maybe Text)
+jmJobId = lens _jmJobId (\ s a -> s{_jmJobId = a})
+
+-- | Output only. Job submission time.
+jmStartTime :: Lens' JobMetadata (Maybe UTCTime)
+jmStartTime
+  = lens _jmStartTime (\ s a -> s{_jmStartTime = a}) .
+      mapping _DateTime
+
+-- | Output only. Operation type.
+jmOperationType :: Lens' JobMetadata (Maybe Text)
+jmOperationType
+  = lens _jmOperationType
+      (\ s a -> s{_jmOperationType = a})
+
+instance FromJSON JobMetadata where
+        parseJSON
+          = withObject "JobMetadata"
+              (\ o ->
+                 JobMetadata' <$>
+                   (o .:? "status") <*> (o .:? "jobId") <*>
+                     (o .:? "startTime")
+                     <*> (o .:? "operationType"))
+
+instance ToJSON JobMetadata where
+        toJSON JobMetadata'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _jmStatus,
+                  ("jobId" .=) <$> _jmJobId,
+                  ("startTime" .=) <$> _jmStartTime,
+                  ("operationType" .=) <$> _jmOperationType])
 
 -- | Contains cluster daemon metrics, such as HDFS and YARN stats.Beta
 -- Feature: This report is available for testing purposes only. It may be
@@ -1475,16 +2085,60 @@ instance ToJSON ClusterMetrics where
                  [("yarnMetrics" .=) <$> _cmYarnMetrics,
                   ("hdfsMetrics" .=) <$> _cmHdfsMetrics])
 
+-- | Node Group Affinity for clusters using sole-tenant node groups.
+--
+-- /See:/ 'nodeGroupAffinity' smart constructor.
+newtype NodeGroupAffinity =
+  NodeGroupAffinity'
+    { _ngaNodeGroupURI :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NodeGroupAffinity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ngaNodeGroupURI'
+nodeGroupAffinity
+    :: NodeGroupAffinity
+nodeGroupAffinity = NodeGroupAffinity' {_ngaNodeGroupURI = Nothing}
+
+
+-- | Required. The URI of a sole-tenant node group resource
+-- (https:\/\/cloud.google.com\/compute\/docs\/reference\/rest\/v1\/nodeGroups)
+-- that the cluster will be created on.A full URL, partial URI, or node
+-- group name are valid. Examples:
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project_id]\/zones\/us-central1-a\/nodeGroups\/node-group-1
+-- projects\/[project_id]\/zones\/us-central1-a\/nodeGroups\/node-group-1
+-- node-group-1
+ngaNodeGroupURI :: Lens' NodeGroupAffinity (Maybe Text)
+ngaNodeGroupURI
+  = lens _ngaNodeGroupURI
+      (\ s a -> s{_ngaNodeGroupURI = a})
+
+instance FromJSON NodeGroupAffinity where
+        parseJSON
+          = withObject "NodeGroupAffinity"
+              (\ o ->
+                 NodeGroupAffinity' <$> (o .:? "nodeGroupUri"))
+
+instance ToJSON NodeGroupAffinity where
+        toJSON NodeGroupAffinity'{..}
+          = object
+              (catMaybes
+                 [("nodeGroupUri" .=) <$> _ngaNodeGroupURI])
+
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1538,7 +2192,7 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- name should have the format of operations\/some\/unique\/name.
+-- name should be a resource name ending with operations\/{unique_id}.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1594,18 +2248,18 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | A Cloud Dataproc job for running Apache Hive
--- (https:\/\/hive.apache.org\/) queries on YARN.
+-- | A Dataproc job for running Apache Hive (https:\/\/hive.apache.org\/)
+-- queries on YARN.
 --
 -- /See:/ 'hiveJob' smart constructor.
 data HiveJob =
   HiveJob'
-    { _hjQueryFileURI      :: !(Maybe Text)
-    , _hjJarFileURIs       :: !(Maybe [Text])
-    , _hjScriptVariables   :: !(Maybe HiveJobScriptVariables)
-    , _hjQueryList         :: !(Maybe QueryList)
+    { _hjQueryFileURI :: !(Maybe Text)
+    , _hjJarFileURIs :: !(Maybe [Text])
+    , _hjScriptVariables :: !(Maybe HiveJobScriptVariables)
+    , _hjQueryList :: !(Maybe QueryList)
     , _hjContinueOnFailure :: !(Maybe Bool)
-    , _hjProperties        :: !(Maybe HiveJobProperties)
+    , _hjProperties :: !(Maybe HiveJobProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1675,8 +2329,8 @@ hjContinueOnFailure
       (\ s a -> s{_hjContinueOnFailure = a})
 
 -- | Optional. A mapping of property names and values, used to configure
--- Hive. Properties that conflict with values set by the Cloud Dataproc API
--- may be overwritten. Can include properties set in
+-- Hive. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
 -- \/etc\/hadoop\/conf\/*-site.xml, \/etc\/hive\/conf\/hive-site.xml, and
 -- classes in user code.
 hjProperties :: Lens' HiveJob (Maybe HiveJobProperties)
@@ -1705,6 +2359,61 @@ instance ToJSON HiveJob where
                   ("queryList" .=) <$> _hjQueryList,
                   ("continueOnFailure" .=) <$> _hjContinueOnFailure,
                   ("properties" .=) <$> _hjProperties])
+
+-- | A response to a request to list autoscaling policies in a project.
+--
+-- /See:/ 'listAutoscalingPoliciesResponse' smart constructor.
+data ListAutoscalingPoliciesResponse =
+  ListAutoscalingPoliciesResponse'
+    { _laprNextPageToken :: !(Maybe Text)
+    , _laprPolicies :: !(Maybe [AutoscalingPolicy])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListAutoscalingPoliciesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'laprNextPageToken'
+--
+-- * 'laprPolicies'
+listAutoscalingPoliciesResponse
+    :: ListAutoscalingPoliciesResponse
+listAutoscalingPoliciesResponse =
+  ListAutoscalingPoliciesResponse'
+    {_laprNextPageToken = Nothing, _laprPolicies = Nothing}
+
+
+-- | Output only. This token is included in the response if there are more
+-- results to fetch.
+laprNextPageToken :: Lens' ListAutoscalingPoliciesResponse (Maybe Text)
+laprNextPageToken
+  = lens _laprNextPageToken
+      (\ s a -> s{_laprNextPageToken = a})
+
+-- | Output only. Autoscaling policies list.
+laprPolicies :: Lens' ListAutoscalingPoliciesResponse [AutoscalingPolicy]
+laprPolicies
+  = lens _laprPolicies (\ s a -> s{_laprPolicies = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListAutoscalingPoliciesResponse
+         where
+        parseJSON
+          = withObject "ListAutoscalingPoliciesResponse"
+              (\ o ->
+                 ListAutoscalingPoliciesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "policies" .!= mempty))
+
+instance ToJSON ListAutoscalingPoliciesResponse where
+        toJSON ListAutoscalingPoliciesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _laprNextPageToken,
+                  ("policies" .=) <$> _laprPolicies])
 
 -- | Optional. The labels to associate with this job.Label keys must be
 -- between 1 and 63 characters long, and must conform to the following
@@ -1745,6 +2454,45 @@ instance FromJSON OrderedJobLabels where
 
 instance ToJSON OrderedJobLabels where
         toJSON = toJSON . _ojlAddtional
+
+-- | Autoscaling Policy config associated with the cluster.
+--
+-- /See:/ 'autoscalingConfig' smart constructor.
+newtype AutoscalingConfig =
+  AutoscalingConfig'
+    { _acPolicyURI :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AutoscalingConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acPolicyURI'
+autoscalingConfig
+    :: AutoscalingConfig
+autoscalingConfig = AutoscalingConfig' {_acPolicyURI = Nothing}
+
+
+-- | Optional. The autoscaling policy used by the cluster.Only resource names
+-- including projectid and location (region) are valid. Examples:
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project_id]\/locations\/[dataproc_region]\/autoscalingPolicies\/[policy_id]
+-- projects\/[project_id]\/locations\/[dataproc_region]\/autoscalingPolicies\/[policy_id]Note
+-- that the policy must be in the same project and Dataproc region.
+acPolicyURI :: Lens' AutoscalingConfig (Maybe Text)
+acPolicyURI
+  = lens _acPolicyURI (\ s a -> s{_acPolicyURI = a})
+
+instance FromJSON AutoscalingConfig where
+        parseJSON
+          = withObject "AutoscalingConfig"
+              (\ o -> AutoscalingConfig' <$> (o .:? "policyUri"))
+
+instance ToJSON AutoscalingConfig where
+        toJSON AutoscalingConfig'{..}
+          = object
+              (catMaybes [("policyUri" .=) <$> _acPolicyURI])
 
 -- | Required. The cluster labels. Cluster must have all labels to match.
 --
@@ -1823,8 +2571,8 @@ instance ToJSON SparkSQLJobScriptVariables where
         toJSON = toJSON . _ssqljsvAddtional
 
 -- | Optional. A mapping of property names to values, used to configure Pig.
--- Properties that conflict with values set by the Cloud Dataproc API may
--- be overwritten. Can include properties set in
+-- Properties that conflict with values set by the Dataproc API may be
+-- overwritten. Can include properties set in
 -- \/etc\/hadoop\/conf\/*-site.xml, \/etc\/pig\/conf\/pig.properties, and
 -- classes in user code.
 --
@@ -1861,19 +2609,149 @@ instance FromJSON PigJobProperties where
 instance ToJSON PigJobProperties where
         toJSON = toJSON . _pjpAddtional
 
+-- | A Dataproc job for running Presto (https:\/\/prestosql.io\/) queries.
+-- IMPORTANT: The Dataproc Presto Optional Component
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/components\/presto)
+-- must be enabled when the cluster is created to submit a Presto job to
+-- the cluster.
+--
+-- /See:/ 'prestoJob' smart constructor.
+data PrestoJob =
+  PrestoJob'
+    { _pjQueryFileURI :: !(Maybe Text)
+    , _pjClientTags :: !(Maybe [Text])
+    , _pjOutputFormat :: !(Maybe Text)
+    , _pjQueryList :: !(Maybe QueryList)
+    , _pjContinueOnFailure :: !(Maybe Bool)
+    , _pjLoggingConfig :: !(Maybe LoggingConfig)
+    , _pjProperties :: !(Maybe PrestoJobProperties)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PrestoJob' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pjQueryFileURI'
+--
+-- * 'pjClientTags'
+--
+-- * 'pjOutputFormat'
+--
+-- * 'pjQueryList'
+--
+-- * 'pjContinueOnFailure'
+--
+-- * 'pjLoggingConfig'
+--
+-- * 'pjProperties'
+prestoJob
+    :: PrestoJob
+prestoJob =
+  PrestoJob'
+    { _pjQueryFileURI = Nothing
+    , _pjClientTags = Nothing
+    , _pjOutputFormat = Nothing
+    , _pjQueryList = Nothing
+    , _pjContinueOnFailure = Nothing
+    , _pjLoggingConfig = Nothing
+    , _pjProperties = Nothing
+    }
+
+
+-- | The HCFS URI of the script that contains SQL queries.
+pjQueryFileURI :: Lens' PrestoJob (Maybe Text)
+pjQueryFileURI
+  = lens _pjQueryFileURI
+      (\ s a -> s{_pjQueryFileURI = a})
+
+-- | Optional. Presto client tags to attach to this query
+pjClientTags :: Lens' PrestoJob [Text]
+pjClientTags
+  = lens _pjClientTags (\ s a -> s{_pjClientTags = a})
+      . _Default
+      . _Coerce
+
+-- | Optional. The format in which query output will be displayed. See the
+-- Presto documentation for supported output formats
+pjOutputFormat :: Lens' PrestoJob (Maybe Text)
+pjOutputFormat
+  = lens _pjOutputFormat
+      (\ s a -> s{_pjOutputFormat = a})
+
+-- | A list of queries.
+pjQueryList :: Lens' PrestoJob (Maybe QueryList)
+pjQueryList
+  = lens _pjQueryList (\ s a -> s{_pjQueryList = a})
+
+-- | Optional. Whether to continue executing queries if a query fails. The
+-- default value is false. Setting to true can be useful when executing
+-- independent parallel queries.
+pjContinueOnFailure :: Lens' PrestoJob (Maybe Bool)
+pjContinueOnFailure
+  = lens _pjContinueOnFailure
+      (\ s a -> s{_pjContinueOnFailure = a})
+
+-- | Optional. The runtime log config for job execution.
+pjLoggingConfig :: Lens' PrestoJob (Maybe LoggingConfig)
+pjLoggingConfig
+  = lens _pjLoggingConfig
+      (\ s a -> s{_pjLoggingConfig = a})
+
+-- | Optional. A mapping of property names to values. Used to set Presto
+-- session properties
+-- (https:\/\/prestodb.io\/docs\/current\/sql\/set-session.html) Equivalent
+-- to using the --session flag in the Presto CLI
+pjProperties :: Lens' PrestoJob (Maybe PrestoJobProperties)
+pjProperties
+  = lens _pjProperties (\ s a -> s{_pjProperties = a})
+
+instance FromJSON PrestoJob where
+        parseJSON
+          = withObject "PrestoJob"
+              (\ o ->
+                 PrestoJob' <$>
+                   (o .:? "queryFileUri") <*>
+                     (o .:? "clientTags" .!= mempty)
+                     <*> (o .:? "outputFormat")
+                     <*> (o .:? "queryList")
+                     <*> (o .:? "continueOnFailure")
+                     <*> (o .:? "loggingConfig")
+                     <*> (o .:? "properties"))
+
+instance ToJSON PrestoJob where
+        toJSON PrestoJob'{..}
+          = object
+              (catMaybes
+                 [("queryFileUri" .=) <$> _pjQueryFileURI,
+                  ("clientTags" .=) <$> _pjClientTags,
+                  ("outputFormat" .=) <$> _pjOutputFormat,
+                  ("queryList" .=) <$> _pjQueryList,
+                  ("continueOnFailure" .=) <$> _pjContinueOnFailure,
+                  ("loggingConfig" .=) <$> _pjLoggingConfig,
+                  ("properties" .=) <$> _pjProperties])
+
 -- | The cluster config.
 --
 -- /See:/ 'clusterConfig' smart constructor.
 data ClusterConfig =
   ClusterConfig'
-    { _ccWorkerConfig          :: !(Maybe InstanceGroupConfig)
+    { _ccSecurityConfig :: !(Maybe SecurityConfig)
+    , _ccWorkerConfig :: !(Maybe InstanceGroupConfig)
+    , _ccTempBucket :: !(Maybe Text)
     , _ccInitializationActions :: !(Maybe [NodeInitializationAction])
-    , _ccMasterConfig          :: !(Maybe InstanceGroupConfig)
-    , _ccGceClusterConfig      :: !(Maybe GceClusterConfig)
-    , _ccConfigBucket          :: !(Maybe Text)
-    , _ccEncryptionConfig      :: !(Maybe EncryptionConfig)
-    , _ccSoftwareConfig        :: !(Maybe SoftwareConfig)
+    , _ccAutoscalingConfig :: !(Maybe AutoscalingConfig)
+    , _ccMasterConfig :: !(Maybe InstanceGroupConfig)
+    , _ccGceClusterConfig :: !(Maybe GceClusterConfig)
+    , _ccLifecycleConfig :: !(Maybe LifecycleConfig)
+    , _ccConfigBucket :: !(Maybe Text)
+    , _ccEncryptionConfig :: !(Maybe EncryptionConfig)
+    , _ccSoftwareConfig :: !(Maybe SoftwareConfig)
+    , _ccMetastoreConfig :: !(Maybe MetastoreConfig)
     , _ccSecondaryWorkerConfig :: !(Maybe InstanceGroupConfig)
+    , _ccGkeClusterConfig :: !(Maybe GkeClusterConfig)
+    , _ccEndpointConfig :: !(Maybe EndpointConfig)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1882,13 +2760,21 @@ data ClusterConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ccSecurityConfig'
+--
 -- * 'ccWorkerConfig'
 --
+-- * 'ccTempBucket'
+--
 -- * 'ccInitializationActions'
+--
+-- * 'ccAutoscalingConfig'
 --
 -- * 'ccMasterConfig'
 --
 -- * 'ccGceClusterConfig'
+--
+-- * 'ccLifecycleConfig'
 --
 -- * 'ccConfigBucket'
 --
@@ -1896,21 +2782,40 @@ data ClusterConfig =
 --
 -- * 'ccSoftwareConfig'
 --
+-- * 'ccMetastoreConfig'
+--
 -- * 'ccSecondaryWorkerConfig'
+--
+-- * 'ccGkeClusterConfig'
+--
+-- * 'ccEndpointConfig'
 clusterConfig
     :: ClusterConfig
 clusterConfig =
   ClusterConfig'
-    { _ccWorkerConfig = Nothing
+    { _ccSecurityConfig = Nothing
+    , _ccWorkerConfig = Nothing
+    , _ccTempBucket = Nothing
     , _ccInitializationActions = Nothing
+    , _ccAutoscalingConfig = Nothing
     , _ccMasterConfig = Nothing
     , _ccGceClusterConfig = Nothing
+    , _ccLifecycleConfig = Nothing
     , _ccConfigBucket = Nothing
     , _ccEncryptionConfig = Nothing
     , _ccSoftwareConfig = Nothing
+    , _ccMetastoreConfig = Nothing
     , _ccSecondaryWorkerConfig = Nothing
+    , _ccGkeClusterConfig = Nothing
+    , _ccEndpointConfig = Nothing
     }
 
+
+-- | Optional. Security settings for the cluster.
+ccSecurityConfig :: Lens' ClusterConfig (Maybe SecurityConfig)
+ccSecurityConfig
+  = lens _ccSecurityConfig
+      (\ s a -> s{_ccSecurityConfig = a})
 
 -- | Optional. The Compute Engine config settings for worker instances in a
 -- cluster.
@@ -1918,6 +2823,19 @@ ccWorkerConfig :: Lens' ClusterConfig (Maybe InstanceGroupConfig)
 ccWorkerConfig
   = lens _ccWorkerConfig
       (\ s a -> s{_ccWorkerConfig = a})
+
+-- | Optional. A Cloud Storage bucket used to store ephemeral cluster and
+-- jobs data, such as Spark and MapReduce history files. If you do not
+-- specify a temp bucket, Dataproc will determine a Cloud Storage location
+-- (US, ASIA, or EU) for your cluster\'s temp bucket according to the
+-- Compute Engine zone where your cluster is deployed, and then create and
+-- manage this project-level, per-location bucket. The default bucket has a
+-- TTL of 90 days, but you can use any TTL (or none) if you specify a
+-- bucket. This field requires a Cloud Storage bucket name, not a URI to a
+-- Cloud Storage bucket.
+ccTempBucket :: Lens' ClusterConfig (Maybe Text)
+ccTempBucket
+  = lens _ccTempBucket (\ s a -> s{_ccTempBucket = a})
 
 -- | Optional. Commands to execute on each node after config is completed. By
 -- default, executables are run on master and all worker nodes. You can
@@ -1934,6 +2852,13 @@ ccInitializationActions
       . _Default
       . _Coerce
 
+-- | Optional. Autoscaling config for the policy associated with the cluster.
+-- Cluster does not autoscale if this field is unset.
+ccAutoscalingConfig :: Lens' ClusterConfig (Maybe AutoscalingConfig)
+ccAutoscalingConfig
+  = lens _ccAutoscalingConfig
+      (\ s a -> s{_ccAutoscalingConfig = a})
+
 -- | Optional. The Compute Engine config settings for the master instance in
 -- a cluster.
 ccMasterConfig :: Lens' ClusterConfig (Maybe InstanceGroupConfig)
@@ -1948,13 +2873,21 @@ ccGceClusterConfig
   = lens _ccGceClusterConfig
       (\ s a -> s{_ccGceClusterConfig = a})
 
--- | Optional. A Google Cloud Storage bucket used to stage job dependencies,
--- config files, and job driver console output. If you do not specify a
--- staging bucket, Cloud Dataproc will determine a Cloud Storage location
--- (US, ASIA, or EU) for your cluster\'s staging bucket according to the
--- Google Compute Engine zone where your cluster is deployed, and then
--- create and manage this project-level, per-location bucket (see Cloud
--- Dataproc staging bucket).
+-- | Optional. Lifecycle setting for the cluster.
+ccLifecycleConfig :: Lens' ClusterConfig (Maybe LifecycleConfig)
+ccLifecycleConfig
+  = lens _ccLifecycleConfig
+      (\ s a -> s{_ccLifecycleConfig = a})
+
+-- | Optional. A Cloud Storage bucket used to stage job dependencies, config
+-- files, and job driver console output. If you do not specify a staging
+-- bucket, Cloud Dataproc will determine a Cloud Storage location (US,
+-- ASIA, or EU) for your cluster\'s staging bucket according to the Compute
+-- Engine zone where your cluster is deployed, and then create and manage
+-- this project-level, per-location bucket (see Dataproc staging bucket
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/staging-bucket)).
+-- This field requires a Cloud Storage bucket name, not a URI to a Cloud
+-- Storage bucket.
 ccConfigBucket :: Lens' ClusterConfig (Maybe Text)
 ccConfigBucket
   = lens _ccConfigBucket
@@ -1972,6 +2905,12 @@ ccSoftwareConfig
   = lens _ccSoftwareConfig
       (\ s a -> s{_ccSoftwareConfig = a})
 
+-- | Optional. Metastore configuration.
+ccMetastoreConfig :: Lens' ClusterConfig (Maybe MetastoreConfig)
+ccMetastoreConfig
+  = lens _ccMetastoreConfig
+      (\ s a -> s{_ccMetastoreConfig = a})
+
 -- | Optional. The Compute Engine config settings for additional worker
 -- instances in a cluster.
 ccSecondaryWorkerConfig :: Lens' ClusterConfig (Maybe InstanceGroupConfig)
@@ -1979,42 +2918,71 @@ ccSecondaryWorkerConfig
   = lens _ccSecondaryWorkerConfig
       (\ s a -> s{_ccSecondaryWorkerConfig = a})
 
+-- | Optional. BETA. The Kubernetes Engine config for Dataproc clusters
+-- deployed to Kubernetes. Setting this is considered mutually exclusive
+-- with Compute Engine-based options such as gce_cluster_config,
+-- master_config, worker_config, secondary_worker_config, and
+-- autoscaling_config.
+ccGkeClusterConfig :: Lens' ClusterConfig (Maybe GkeClusterConfig)
+ccGkeClusterConfig
+  = lens _ccGkeClusterConfig
+      (\ s a -> s{_ccGkeClusterConfig = a})
+
+-- | Optional. Port\/endpoint configuration for this cluster
+ccEndpointConfig :: Lens' ClusterConfig (Maybe EndpointConfig)
+ccEndpointConfig
+  = lens _ccEndpointConfig
+      (\ s a -> s{_ccEndpointConfig = a})
+
 instance FromJSON ClusterConfig where
         parseJSON
           = withObject "ClusterConfig"
               (\ o ->
                  ClusterConfig' <$>
-                   (o .:? "workerConfig") <*>
-                     (o .:? "initializationActions" .!= mempty)
+                   (o .:? "securityConfig") <*> (o .:? "workerConfig")
+                     <*> (o .:? "tempBucket")
+                     <*> (o .:? "initializationActions" .!= mempty)
+                     <*> (o .:? "autoscalingConfig")
                      <*> (o .:? "masterConfig")
                      <*> (o .:? "gceClusterConfig")
+                     <*> (o .:? "lifecycleConfig")
                      <*> (o .:? "configBucket")
                      <*> (o .:? "encryptionConfig")
                      <*> (o .:? "softwareConfig")
-                     <*> (o .:? "secondaryWorkerConfig"))
+                     <*> (o .:? "metastoreConfig")
+                     <*> (o .:? "secondaryWorkerConfig")
+                     <*> (o .:? "gkeClusterConfig")
+                     <*> (o .:? "endpointConfig"))
 
 instance ToJSON ClusterConfig where
         toJSON ClusterConfig'{..}
           = object
               (catMaybes
-                 [("workerConfig" .=) <$> _ccWorkerConfig,
+                 [("securityConfig" .=) <$> _ccSecurityConfig,
+                  ("workerConfig" .=) <$> _ccWorkerConfig,
+                  ("tempBucket" .=) <$> _ccTempBucket,
                   ("initializationActions" .=) <$>
                     _ccInitializationActions,
+                  ("autoscalingConfig" .=) <$> _ccAutoscalingConfig,
                   ("masterConfig" .=) <$> _ccMasterConfig,
                   ("gceClusterConfig" .=) <$> _ccGceClusterConfig,
+                  ("lifecycleConfig" .=) <$> _ccLifecycleConfig,
                   ("configBucket" .=) <$> _ccConfigBucket,
                   ("encryptionConfig" .=) <$> _ccEncryptionConfig,
                   ("softwareConfig" .=) <$> _ccSoftwareConfig,
+                  ("metastoreConfig" .=) <$> _ccMetastoreConfig,
                   ("secondaryWorkerConfig" .=) <$>
-                    _ccSecondaryWorkerConfig])
+                    _ccSecondaryWorkerConfig,
+                  ("gkeClusterConfig" .=) <$> _ccGkeClusterConfig,
+                  ("endpointConfig" .=) <$> _ccEndpointConfig])
 
 -- | A request to instantiate a workflow template.
 --
 -- /See:/ 'instantiateWorkflowTemplateRequest' smart constructor.
 data InstantiateWorkflowTemplateRequest =
   InstantiateWorkflowTemplateRequest'
-    { _iwtrRequestId  :: !(Maybe Text)
-    , _iwtrVersion    :: !(Maybe (Textual Int32))
+    { _iwtrRequestId :: !(Maybe Text)
+    , _iwtrVersion :: !(Maybe (Textual Int32))
     , _iwtrParameters :: !(Maybe InstantiateWorkflowTemplateRequestParameters)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2061,7 +3029,7 @@ iwtrVersion
       mapping _Coerce
 
 -- | Optional. Map from parameter names to values that should be used for
--- those parameters. Values may not exceed 100 characters.
+-- those parameters. Values may not exceed 1000 characters.
 iwtrParameters :: Lens' InstantiateWorkflowTemplateRequest (Maybe InstantiateWorkflowTemplateRequestParameters)
 iwtrParameters
   = lens _iwtrParameters
@@ -2086,8 +3054,8 @@ instance ToJSON InstantiateWorkflowTemplateRequest
                   ("parameters" .=) <$> _iwtrParameters])
 
 -- | Optional. A mapping of property names to values, used to configure
--- Hadoop. Properties that conflict with values set by the Cloud Dataproc
--- API may be overwritten. Can include properties set in
+-- Hadoop. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
 -- \/etc\/hadoop\/conf\/*-site and classes in user code.
 --
 -- /See:/ 'hadoopJobProperties' smart constructor.
@@ -2123,20 +3091,117 @@ instance FromJSON HadoopJobProperties where
 instance ToJSON HadoopJobProperties where
         toJSON = toJSON . _hjpAddtional
 
--- | A Cloud Dataproc workflow template resource.
+-- | A request to stop a cluster.
+--
+-- /See:/ 'stopClusterRequest' smart constructor.
+data StopClusterRequest =
+  StopClusterRequest'
+    { _scrRequestId :: !(Maybe Text)
+    , _scrClusterUuid :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StopClusterRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scrRequestId'
+--
+-- * 'scrClusterUuid'
+stopClusterRequest
+    :: StopClusterRequest
+stopClusterRequest =
+  StopClusterRequest' {_scrRequestId = Nothing, _scrClusterUuid = Nothing}
+
+
+-- | Optional. A unique ID used to identify the request. If the server
+-- receives two StopClusterRequest
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
+-- with the same id, then the second request will be ignored and the first
+-- google.longrunning.Operation created and stored in the backend is
+-- returned.Recommendation: Set this value to a UUID
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The ID
+-- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
+-- and hyphens (-). The maximum length is 40 characters.
+scrRequestId :: Lens' StopClusterRequest (Maybe Text)
+scrRequestId
+  = lens _scrRequestId (\ s a -> s{_scrRequestId = a})
+
+-- | Optional. Specifying the cluster_uuid means the RPC will fail (with
+-- error NOT_FOUND) if a cluster with the specified UUID does not exist.
+scrClusterUuid :: Lens' StopClusterRequest (Maybe Text)
+scrClusterUuid
+  = lens _scrClusterUuid
+      (\ s a -> s{_scrClusterUuid = a})
+
+instance FromJSON StopClusterRequest where
+        parseJSON
+          = withObject "StopClusterRequest"
+              (\ o ->
+                 StopClusterRequest' <$>
+                   (o .:? "requestId") <*> (o .:? "clusterUuid"))
+
+instance ToJSON StopClusterRequest where
+        toJSON StopClusterRequest'{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _scrRequestId,
+                  ("clusterUuid" .=) <$> _scrClusterUuid])
+
+-- | Output only. The map of port descriptions to URLs. Will only be
+-- populated if enable_http_port_access is true.
+--
+-- /See:/ 'endpointConfigHTTPPorts' smart constructor.
+newtype EndpointConfigHTTPPorts =
+  EndpointConfigHTTPPorts'
+    { _echttppAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EndpointConfigHTTPPorts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'echttppAddtional'
+endpointConfigHTTPPorts
+    :: HashMap Text Text -- ^ 'echttppAddtional'
+    -> EndpointConfigHTTPPorts
+endpointConfigHTTPPorts pEchttppAddtional_ =
+  EndpointConfigHTTPPorts' {_echttppAddtional = _Coerce # pEchttppAddtional_}
+
+
+echttppAddtional :: Lens' EndpointConfigHTTPPorts (HashMap Text Text)
+echttppAddtional
+  = lens _echttppAddtional
+      (\ s a -> s{_echttppAddtional = a})
+      . _Coerce
+
+instance FromJSON EndpointConfigHTTPPorts where
+        parseJSON
+          = withObject "EndpointConfigHTTPPorts"
+              (\ o ->
+                 EndpointConfigHTTPPorts' <$> (parseJSONObject o))
+
+instance ToJSON EndpointConfigHTTPPorts where
+        toJSON = toJSON . _echttppAddtional
+
+-- | A Dataproc workflow template resource.
 --
 -- /See:/ 'workflowTemplate' smart constructor.
 data WorkflowTemplate =
   WorkflowTemplate'
-    { _wtJobs       :: !(Maybe [OrderedJob])
+    { _wtJobs :: !(Maybe [OrderedJob])
     , _wtUpdateTime :: !(Maybe DateTime')
-    , _wtName       :: !(Maybe Text)
-    , _wtVersion    :: !(Maybe (Textual Int32))
+    , _wtName :: !(Maybe Text)
+    , _wtVersion :: !(Maybe (Textual Int32))
     , _wtParameters :: !(Maybe [TemplateParameter])
-    , _wtId         :: !(Maybe Text)
-    , _wtLabels     :: !(Maybe WorkflowTemplateLabels)
+    , _wtId :: !(Maybe Text)
+    , _wtLabels :: !(Maybe WorkflowTemplateLabels)
     , _wtCreateTime :: !(Maybe DateTime')
-    , _wtPlacement  :: !(Maybe WorkflowTemplatePlacement)
+    , _wtDagTimeout :: !(Maybe GDuration)
+    , _wtPlacement :: !(Maybe WorkflowTemplatePlacement)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2161,6 +3226,8 @@ data WorkflowTemplate =
 --
 -- * 'wtCreateTime'
 --
+-- * 'wtDagTimeout'
+--
 -- * 'wtPlacement'
 workflowTemplate
     :: WorkflowTemplate
@@ -2174,6 +3241,7 @@ workflowTemplate =
     , _wtId = Nothing
     , _wtLabels = Nothing
     , _wtCreateTime = Nothing
+    , _wtDagTimeout = Nothing
     , _wtPlacement = Nothing
     }
 
@@ -2190,9 +3258,14 @@ wtUpdateTime
   = lens _wtUpdateTime (\ s a -> s{_wtUpdateTime = a})
       . mapping _DateTime
 
--- | Output only. The \"resource name\" of the template, as described in
--- https:\/\/cloud.google.com\/apis\/design\/resource_names of the form
+-- | Output only. The resource name of the workflow template, as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates, the resource name of the template
+-- has the following format:
 -- projects\/{project_id}\/regions\/{region}\/workflowTemplates\/{template_id}
+-- For projects.locations.workflowTemplates, the resource name of the
+-- template has the following format:
+-- projects\/{project_id}\/locations\/{location}\/workflowTemplates\/{template_id}
 wtName :: Lens' WorkflowTemplate (Maybe Text)
 wtName = lens _wtName (\ s a -> s{_wtName = a})
 
@@ -2218,9 +3291,6 @@ wtParameters
       . _Default
       . _Coerce
 
--- | Required. The template id.The id must contain only letters (a-z, A-Z),
--- numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end
--- with underscore or hyphen. Must consist of between 3 and 50 characters.
 wtId :: Lens' WorkflowTemplate (Maybe Text)
 wtId = lens _wtId (\ s a -> s{_wtId = a})
 
@@ -2240,6 +3310,19 @@ wtCreateTime
   = lens _wtCreateTime (\ s a -> s{_wtCreateTime = a})
       . mapping _DateTime
 
+-- | Optional. Timeout duration for the DAG of jobs, expressed in seconds
+-- (see JSON representation of duration
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
+-- The timeout duration must be from 10 minutes (\"600s\") to 24 hours
+-- (\"86400s\"). The timer begins when the first job is submitted. If the
+-- workflow is running at the end of the timeout period, any remaining jobs
+-- are cancelled, the workflow is ended, and if the workflow was running on
+-- a managed cluster, the cluster is deleted.
+wtDagTimeout :: Lens' WorkflowTemplate (Maybe Scientific)
+wtDagTimeout
+  = lens _wtDagTimeout (\ s a -> s{_wtDagTimeout = a})
+      . mapping _GDuration
+
 -- | Required. WorkflowTemplate scheduling information.
 wtPlacement :: Lens' WorkflowTemplate (Maybe WorkflowTemplatePlacement)
 wtPlacement
@@ -2257,6 +3340,7 @@ instance FromJSON WorkflowTemplate where
                      <*> (o .:? "id")
                      <*> (o .:? "labels")
                      <*> (o .:? "createTime")
+                     <*> (o .:? "dagTimeout")
                      <*> (o .:? "placement"))
 
 instance ToJSON WorkflowTemplate where
@@ -2270,6 +3354,7 @@ instance ToJSON WorkflowTemplate where
                   ("parameters" .=) <$> _wtParameters,
                   ("id" .=) <$> _wtId, ("labels" .=) <$> _wtLabels,
                   ("createTime" .=) <$> _wtCreateTime,
+                  ("dagTimeout" .=) <$> _wtDagTimeout,
                   ("placement" .=) <$> _wtPlacement])
 
 -- | The status of the operation.
@@ -2277,10 +3362,10 @@ instance ToJSON WorkflowTemplate where
 -- /See:/ 'clusterOperationStatus' smart constructor.
 data ClusterOperationStatus =
   ClusterOperationStatus'
-    { _cosState          :: !(Maybe ClusterOperationStatusState)
-    , _cosInnerState     :: !(Maybe Text)
+    { _cosState :: !(Maybe ClusterOperationStatusState)
+    , _cosInnerState :: !(Maybe Text)
     , _cosStateStartTime :: !(Maybe DateTime')
-    , _cosDetails        :: !(Maybe Text)
+    , _cosDetails :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2383,7 +3468,7 @@ instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
 -- | Optional. A mapping of property names to values, used to configure Spark
--- SQL\'s SparkConf. Properties that conflict with values set by the Cloud
+-- SQL\'s SparkConf. Properties that conflict with values set by the
 -- Dataproc API may be overwritten.
 --
 -- /See:/ 'sparkSQLJobProperties' smart constructor.
@@ -2470,7 +3555,7 @@ instance ToJSON WorkflowTemplateLabels where
 data NodeInitializationAction =
   NodeInitializationAction'
     { _niaExecutionTimeout :: !(Maybe GDuration)
-    , _niaExecutableFile   :: !(Maybe Text)
+    , _niaExecutableFile :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2490,9 +3575,11 @@ nodeInitializationAction =
 
 
 -- | Optional. Amount of time executable has to complete. Default is 10
--- minutes. Cluster creation fails with an explanatory error message (the
--- name of the executable that caused the error and the exceeded timeout
--- period) if the executable is not completed at end of the timeout period.
+-- minutes (see JSON representation of Duration
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).Cluster
+-- creation fails with an explanatory error message (the name of the
+-- executable that caused the error and the exceeded timeout period) if the
+-- executable is not completed at end of the timeout period.
 niaExecutionTimeout :: Lens' NodeInitializationAction (Maybe Scientific)
 niaExecutionTimeout
   = lens _niaExecutionTimeout
@@ -2557,6 +3644,53 @@ instance FromJSON ClusterMetricsYarnMetrics where
 instance ToJSON ClusterMetricsYarnMetrics where
         toJSON = toJSON . _cmymAddtional
 
+-- | Encapsulates settings provided to GetIamPolicy.
+--
+-- /See:/ 'getPolicyOptions' smart constructor.
+newtype GetPolicyOptions =
+  GetPolicyOptions'
+    { _gpoRequestedPolicyVersion :: Maybe (Textual Int32)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gpoRequestedPolicyVersion'
+getPolicyOptions
+    :: GetPolicyOptions
+getPolicyOptions = GetPolicyOptions' {_gpoRequestedPolicyVersion = Nothing}
+
+
+-- | Optional. The policy format version to be returned.Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.Requests
+-- for policies with any conditional bindings must specify version 3.
+-- Policies without any conditional bindings may specify any valid value or
+-- leave the field unset.To learn which resources support conditions in
+-- their IAM policies, see the IAM documentation
+-- (https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+gpoRequestedPolicyVersion :: Lens' GetPolicyOptions (Maybe Int32)
+gpoRequestedPolicyVersion
+  = lens _gpoRequestedPolicyVersion
+      (\ s a -> s{_gpoRequestedPolicyVersion = a})
+      . mapping _Coerce
+
+instance FromJSON GetPolicyOptions where
+        parseJSON
+          = withObject "GetPolicyOptions"
+              (\ o ->
+                 GetPolicyOptions' <$>
+                   (o .:? "requestedPolicyVersion"))
+
+instance ToJSON GetPolicyOptions where
+        toJSON GetPolicyOptions'{..}
+          = object
+              (catMaybes
+                 [("requestedPolicyVersion" .=) <$>
+                    _gpoRequestedPolicyVersion])
+
 -- | Validation based on regular expressions.
 --
 -- /See:/ 'regexValidation' smart constructor.
@@ -2596,12 +3730,13 @@ instance ToJSON RegexValidation where
         toJSON RegexValidation'{..}
           = object (catMaybes [("regexes" .=) <$> _rvRegexes])
 
--- | Cloud Dataproc job config.
+-- | Dataproc job config.
 --
 -- /See:/ 'jobPlacement' smart constructor.
 data JobPlacement =
   JobPlacement'
     { _jpClusterUuid :: !(Maybe Text)
+    , _jpClusterLabels :: !(Maybe JobPlacementClusterLabels)
     , _jpClusterName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2613,19 +3748,32 @@ data JobPlacement =
 --
 -- * 'jpClusterUuid'
 --
+-- * 'jpClusterLabels'
+--
 -- * 'jpClusterName'
 jobPlacement
     :: JobPlacement
 jobPlacement =
-  JobPlacement' {_jpClusterUuid = Nothing, _jpClusterName = Nothing}
+  JobPlacement'
+    { _jpClusterUuid = Nothing
+    , _jpClusterLabels = Nothing
+    , _jpClusterName = Nothing
+    }
 
 
--- | Output only. A cluster UUID generated by the Cloud Dataproc service when
--- the job is submitted.
+-- | Output only. A cluster UUID generated by the Dataproc service when the
+-- job is submitted.
 jpClusterUuid :: Lens' JobPlacement (Maybe Text)
 jpClusterUuid
   = lens _jpClusterUuid
       (\ s a -> s{_jpClusterUuid = a})
+
+-- | Optional. Cluster labels to identify a cluster where the job will be
+-- submitted.
+jpClusterLabels :: Lens' JobPlacement (Maybe JobPlacementClusterLabels)
+jpClusterLabels
+  = lens _jpClusterLabels
+      (\ s a -> s{_jpClusterLabels = a})
 
 -- | Required. The name of the cluster where the job will be submitted.
 jpClusterName :: Lens' JobPlacement (Maybe Text)
@@ -2638,14 +3786,70 @@ instance FromJSON JobPlacement where
           = withObject "JobPlacement"
               (\ o ->
                  JobPlacement' <$>
-                   (o .:? "clusterUuid") <*> (o .:? "clusterName"))
+                   (o .:? "clusterUuid") <*> (o .:? "clusterLabels") <*>
+                     (o .:? "clusterName"))
 
 instance ToJSON JobPlacement where
         toJSON JobPlacement'{..}
           = object
               (catMaybes
                  [("clusterUuid" .=) <$> _jpClusterUuid,
+                  ("clusterLabels" .=) <$> _jpClusterLabels,
                   ("clusterName" .=) <$> _jpClusterName])
+
+-- | A full, namespace-isolated deployment target for an existing GKE
+-- cluster.
+--
+-- /See:/ 'namespacedGkeDeploymentTarget' smart constructor.
+data NamespacedGkeDeploymentTarget =
+  NamespacedGkeDeploymentTarget'
+    { _ngdtTargetGkeCluster :: !(Maybe Text)
+    , _ngdtClusterNamespace :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NamespacedGkeDeploymentTarget' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ngdtTargetGkeCluster'
+--
+-- * 'ngdtClusterNamespace'
+namespacedGkeDeploymentTarget
+    :: NamespacedGkeDeploymentTarget
+namespacedGkeDeploymentTarget =
+  NamespacedGkeDeploymentTarget'
+    {_ngdtTargetGkeCluster = Nothing, _ngdtClusterNamespace = Nothing}
+
+
+-- | Optional. The target GKE cluster to deploy to. Format:
+-- \'projects\/{project}\/locations\/{location}\/clusters\/{cluster_id}\'
+ngdtTargetGkeCluster :: Lens' NamespacedGkeDeploymentTarget (Maybe Text)
+ngdtTargetGkeCluster
+  = lens _ngdtTargetGkeCluster
+      (\ s a -> s{_ngdtTargetGkeCluster = a})
+
+-- | Optional. A namespace within the GKE cluster to deploy into.
+ngdtClusterNamespace :: Lens' NamespacedGkeDeploymentTarget (Maybe Text)
+ngdtClusterNamespace
+  = lens _ngdtClusterNamespace
+      (\ s a -> s{_ngdtClusterNamespace = a})
+
+instance FromJSON NamespacedGkeDeploymentTarget where
+        parseJSON
+          = withObject "NamespacedGkeDeploymentTarget"
+              (\ o ->
+                 NamespacedGkeDeploymentTarget' <$>
+                   (o .:? "targetGkeCluster") <*>
+                     (o .:? "clusterNamespace"))
+
+instance ToJSON NamespacedGkeDeploymentTarget where
+        toJSON NamespacedGkeDeploymentTarget'{..}
+          = object
+              (catMaybes
+                 [("targetGkeCluster" .=) <$> _ngdtTargetGkeCluster,
+                  ("clusterNamespace" .=) <$> _ngdtClusterNamespace])
 
 -- | Request message for SetIamPolicy method.
 --
@@ -2684,6 +3888,140 @@ instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
+-- | Configuration for the size bounds of an instance group, including its
+-- proportional size to other groups.
+--
+-- /See:/ 'instanceGroupAutoscalingPolicyConfig' smart constructor.
+data InstanceGroupAutoscalingPolicyConfig =
+  InstanceGroupAutoscalingPolicyConfig'
+    { _igapcWeight :: !(Maybe (Textual Int32))
+    , _igapcMinInstances :: !(Maybe (Textual Int32))
+    , _igapcMaxInstances :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InstanceGroupAutoscalingPolicyConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igapcWeight'
+--
+-- * 'igapcMinInstances'
+--
+-- * 'igapcMaxInstances'
+instanceGroupAutoscalingPolicyConfig
+    :: InstanceGroupAutoscalingPolicyConfig
+instanceGroupAutoscalingPolicyConfig =
+  InstanceGroupAutoscalingPolicyConfig'
+    { _igapcWeight = Nothing
+    , _igapcMinInstances = Nothing
+    , _igapcMaxInstances = Nothing
+    }
+
+
+-- | Optional. Weight for the instance group, which is used to determine the
+-- fraction of total workers in the cluster from this instance group. For
+-- example, if primary workers have weight 2, and secondary workers have
+-- weight 1, the cluster will have approximately 2 primary workers for each
+-- secondary worker.The cluster may not reach the specified balance if
+-- constrained by min\/max bounds or other autoscaling settings. For
+-- example, if max_instances for secondary workers is 0, then only primary
+-- workers will be added. The cluster can also be out of balance when
+-- created.If weight is not set on any instance group, the cluster will
+-- default to equal weight for all groups: the cluster will attempt to
+-- maintain an equal number of workers in each group within the configured
+-- size bounds for each group. If weight is set for one group only, the
+-- cluster will default to zero weight on the unset group. For example if
+-- weight is set only on primary workers, the cluster will use primary
+-- workers only and no secondary workers.
+igapcWeight :: Lens' InstanceGroupAutoscalingPolicyConfig (Maybe Int32)
+igapcWeight
+  = lens _igapcWeight (\ s a -> s{_igapcWeight = a}) .
+      mapping _Coerce
+
+-- | Optional. Minimum number of instances for this group.Primary workers -
+-- Bounds: 2, max_instances. Default: 2. Secondary workers - Bounds: 0,
+-- max_instances. Default: 0.
+igapcMinInstances :: Lens' InstanceGroupAutoscalingPolicyConfig (Maybe Int32)
+igapcMinInstances
+  = lens _igapcMinInstances
+      (\ s a -> s{_igapcMinInstances = a})
+      . mapping _Coerce
+
+-- | Required. Maximum number of instances for this group. Required for
+-- primary workers. Note that by default, clusters will not use secondary
+-- workers. Required for secondary workers if the minimum secondary
+-- instances is set.Primary workers - Bounds: [min_instances, ). Secondary
+-- workers - Bounds: [min_instances, ). Default: 0.
+igapcMaxInstances :: Lens' InstanceGroupAutoscalingPolicyConfig (Maybe Int32)
+igapcMaxInstances
+  = lens _igapcMaxInstances
+      (\ s a -> s{_igapcMaxInstances = a})
+      . mapping _Coerce
+
+instance FromJSON
+           InstanceGroupAutoscalingPolicyConfig
+         where
+        parseJSON
+          = withObject "InstanceGroupAutoscalingPolicyConfig"
+              (\ o ->
+                 InstanceGroupAutoscalingPolicyConfig' <$>
+                   (o .:? "weight") <*> (o .:? "minInstances") <*>
+                     (o .:? "maxInstances"))
+
+instance ToJSON InstanceGroupAutoscalingPolicyConfig
+         where
+        toJSON InstanceGroupAutoscalingPolicyConfig'{..}
+          = object
+              (catMaybes
+                 [("weight" .=) <$> _igapcWeight,
+                  ("minInstances" .=) <$> _igapcMinInstances,
+                  ("maxInstances" .=) <$> _igapcMaxInstances])
+
+-- | Confidential Instance Config for clusters using Confidential VMs
+-- (https:\/\/cloud.google.com\/compute\/confidential-vm\/docs)
+--
+-- /See:/ 'confidentialInstanceConfig' smart constructor.
+newtype ConfidentialInstanceConfig =
+  ConfidentialInstanceConfig'
+    { _cicEnableConfidentialCompute :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ConfidentialInstanceConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cicEnableConfidentialCompute'
+confidentialInstanceConfig
+    :: ConfidentialInstanceConfig
+confidentialInstanceConfig =
+  ConfidentialInstanceConfig' {_cicEnableConfidentialCompute = Nothing}
+
+
+-- | Optional. Defines whether the instance should have confidential compute
+-- enabled.
+cicEnableConfidentialCompute :: Lens' ConfidentialInstanceConfig (Maybe Bool)
+cicEnableConfidentialCompute
+  = lens _cicEnableConfidentialCompute
+      (\ s a -> s{_cicEnableConfidentialCompute = a})
+
+instance FromJSON ConfidentialInstanceConfig where
+        parseJSON
+          = withObject "ConfidentialInstanceConfig"
+              (\ o ->
+                 ConfidentialInstanceConfig' <$>
+                   (o .:? "enableConfidentialCompute"))
+
+instance ToJSON ConfidentialInstanceConfig where
+        toJSON ConfidentialInstanceConfig'{..}
+          = object
+              (catMaybes
+                 [("enableConfidentialCompute" .=) <$>
+                    _cicEnableConfidentialCompute])
+
 -- | A configurable parameter that replaces one or more fields in the
 -- template. Parameterizable fields: - Labels - File uris - Job properties
 -- - Job arguments - Script variables - Main class (in HadoopJob and
@@ -2692,10 +4030,10 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'templateParameter' smart constructor.
 data TemplateParameter =
   TemplateParameter'
-    { _tpName        :: !(Maybe Text)
-    , _tpValidation  :: !(Maybe ParameterValidation)
+    { _tpName :: !(Maybe Text)
+    , _tpValidation :: !(Maybe ParameterValidation)
     , _tpDescription :: !(Maybe Text)
-    , _tpFields      :: !(Maybe [Text])
+    , _tpFields :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2800,14 +4138,19 @@ instance ToJSON TemplateParameter where
 -- /See:/ 'gceClusterConfig' smart constructor.
 data GceClusterConfig =
   GceClusterConfig'
-    { _gccSubnetworkURI        :: !(Maybe Text)
-    , _gccInternalIPOnly       :: !(Maybe Bool)
-    , _gccNetworkURI           :: !(Maybe Text)
-    , _gccZoneURI              :: !(Maybe Text)
-    , _gccServiceAccount       :: !(Maybe Text)
-    , _gccMetadata             :: !(Maybe GceClusterConfigMetadata)
+    { _gccSubnetworkURI :: !(Maybe Text)
+    , _gccReservationAffinity :: !(Maybe ReservationAffinity)
+    , _gccInternalIPOnly :: !(Maybe Bool)
+    , _gccNodeGroupAffinity :: !(Maybe NodeGroupAffinity)
+    , _gccNetworkURI :: !(Maybe Text)
+    , _gccZoneURI :: !(Maybe Text)
+    , _gccConfidentialInstanceConfig :: !(Maybe ConfidentialInstanceConfig)
+    , _gccServiceAccount :: !(Maybe Text)
+    , _gccMetadata :: !(Maybe GceClusterConfigMetadata)
     , _gccServiceAccountScopes :: !(Maybe [Text])
-    , _gccTags                 :: !(Maybe [Text])
+    , _gccShieldedInstanceConfig :: !(Maybe ShieldedInstanceConfig)
+    , _gccTags :: !(Maybe [Text])
+    , _gccPrivateIPv6GoogleAccess :: !(Maybe GceClusterConfigPrivateIPv6GoogleAccess)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2818,11 +4161,17 @@ data GceClusterConfig =
 --
 -- * 'gccSubnetworkURI'
 --
+-- * 'gccReservationAffinity'
+--
 -- * 'gccInternalIPOnly'
+--
+-- * 'gccNodeGroupAffinity'
 --
 -- * 'gccNetworkURI'
 --
 -- * 'gccZoneURI'
+--
+-- * 'gccConfidentialInstanceConfig'
 --
 -- * 'gccServiceAccount'
 --
@@ -2830,19 +4179,28 @@ data GceClusterConfig =
 --
 -- * 'gccServiceAccountScopes'
 --
+-- * 'gccShieldedInstanceConfig'
+--
 -- * 'gccTags'
+--
+-- * 'gccPrivateIPv6GoogleAccess'
 gceClusterConfig
     :: GceClusterConfig
 gceClusterConfig =
   GceClusterConfig'
     { _gccSubnetworkURI = Nothing
+    , _gccReservationAffinity = Nothing
     , _gccInternalIPOnly = Nothing
+    , _gccNodeGroupAffinity = Nothing
     , _gccNetworkURI = Nothing
     , _gccZoneURI = Nothing
+    , _gccConfidentialInstanceConfig = Nothing
     , _gccServiceAccount = Nothing
     , _gccMetadata = Nothing
     , _gccServiceAccountScopes = Nothing
+    , _gccShieldedInstanceConfig = Nothing
     , _gccTags = Nothing
+    , _gccPrivateIPv6GoogleAccess = Nothing
     }
 
 
@@ -2856,6 +4214,12 @@ gccSubnetworkURI
   = lens _gccSubnetworkURI
       (\ s a -> s{_gccSubnetworkURI = a})
 
+-- | Optional. Reservation Affinity for consuming Zonal reservation.
+gccReservationAffinity :: Lens' GceClusterConfig (Maybe ReservationAffinity)
+gccReservationAffinity
+  = lens _gccReservationAffinity
+      (\ s a -> s{_gccReservationAffinity = a})
+
 -- | Optional. If true, all instances in the cluster will only have internal
 -- IP addresses. By default, clusters are not restricted to internal IP
 -- addresses, and will have ephemeral external IP addresses assigned to
@@ -2867,12 +4231,19 @@ gccInternalIPOnly
   = lens _gccInternalIPOnly
       (\ s a -> s{_gccInternalIPOnly = a})
 
+-- | Optional. Node Group Affinity for sole-tenant clusters.
+gccNodeGroupAffinity :: Lens' GceClusterConfig (Maybe NodeGroupAffinity)
+gccNodeGroupAffinity
+  = lens _gccNodeGroupAffinity
+      (\ s a -> s{_gccNodeGroupAffinity = a})
+
 -- | Optional. The Compute Engine network to be used for machine
 -- communications. Cannot be specified with subnetwork_uri. If neither
 -- network_uri nor subnetwork_uri is specified, the \"default\" network of
 -- the project is used, if it exists. Cannot be a \"Custom Subnet Network\"
--- (see Using Subnetworks for more information).A full URL, partial URI, or
--- short name are valid. Examples:
+-- (see Using Subnetworks
+-- (https:\/\/cloud.google.com\/compute\/docs\/subnetworks) for more
+-- information).A full URL, partial URI, or short name are valid. Examples:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project_id]\/regions\/global\/default
 -- projects\/[project_id]\/regions\/global\/default default
 gccNetworkURI :: Lens' GceClusterConfig (Maybe Text)
@@ -2882,7 +4253,7 @@ gccNetworkURI
 
 -- | Optional. The zone where the Compute Engine cluster will be located. On
 -- a create request, it is required in the \"global\" region. If omitted in
--- a non-global Cloud Dataproc region, the service will pick a zone in the
+-- a non-global Dataproc region, the service will pick a zone in the
 -- corresponding Compute Engine region. On a get request, zone will always
 -- be present.A full URL, partial URI, or short name are valid. Examples:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/[project_id]\/zones\/[zone]
@@ -2891,13 +4262,21 @@ gccZoneURI :: Lens' GceClusterConfig (Maybe Text)
 gccZoneURI
   = lens _gccZoneURI (\ s a -> s{_gccZoneURI = a})
 
--- | Optional. The service account of the instances. Defaults to the default
--- Compute Engine service account. Custom service accounts need permissions
--- equivalent to the following IAM roles: roles\/logging.logWriter
--- roles\/storage.objectAdmin(see
--- https:\/\/cloud.google.com\/compute\/docs\/access\/service-accounts#custom_service_accounts
--- for more information). Example:
--- [account_id]\'[project_id].iam.gserviceaccount.com
+-- | Optional. Confidential Instance Config for clusters using Confidential
+-- VMs (https:\/\/cloud.google.com\/compute\/confidential-vm\/docs).
+gccConfidentialInstanceConfig :: Lens' GceClusterConfig (Maybe ConfidentialInstanceConfig)
+gccConfidentialInstanceConfig
+  = lens _gccConfidentialInstanceConfig
+      (\ s a -> s{_gccConfidentialInstanceConfig = a})
+
+-- | Optional. The Dataproc service account
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/service-accounts#service_accounts_in_dataproc)
+-- (also see VM Data Plane identity
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/iam\/dataproc-principals#vm_service_account_data_plane_identity))
+-- used by Dataproc cluster VM instances to access Google Cloud Platform
+-- services.If not specified, the Compute Engine default service account
+-- (https:\/\/cloud.google.com\/compute\/docs\/access\/service-accounts#default_service_account)
+-- is used.
 gccServiceAccount :: Lens' GceClusterConfig (Maybe Text)
 gccServiceAccount
   = lens _gccServiceAccount
@@ -2927,38 +4306,144 @@ gccServiceAccountScopes
       . _Default
       . _Coerce
 
--- | The Compute Engine tags to add to all instances (see Tagging instances).
+-- | Optional. Shielded Instance Config for clusters using Compute Engine
+-- Shielded VMs
+-- (https:\/\/cloud.google.com\/security\/shielded-cloud\/shielded-vm).
+gccShieldedInstanceConfig :: Lens' GceClusterConfig (Maybe ShieldedInstanceConfig)
+gccShieldedInstanceConfig
+  = lens _gccShieldedInstanceConfig
+      (\ s a -> s{_gccShieldedInstanceConfig = a})
+
+-- | The Compute Engine tags to add to all instances (see Tagging instances
+-- (https:\/\/cloud.google.com\/compute\/docs\/label-or-tag-resources#tags)).
 gccTags :: Lens' GceClusterConfig [Text]
 gccTags
   = lens _gccTags (\ s a -> s{_gccTags = a}) . _Default
       . _Coerce
+
+-- | Optional. The type of IPv6 access for a cluster.
+gccPrivateIPv6GoogleAccess :: Lens' GceClusterConfig (Maybe GceClusterConfigPrivateIPv6GoogleAccess)
+gccPrivateIPv6GoogleAccess
+  = lens _gccPrivateIPv6GoogleAccess
+      (\ s a -> s{_gccPrivateIPv6GoogleAccess = a})
 
 instance FromJSON GceClusterConfig where
         parseJSON
           = withObject "GceClusterConfig"
               (\ o ->
                  GceClusterConfig' <$>
-                   (o .:? "subnetworkUri") <*> (o .:? "internalIpOnly")
+                   (o .:? "subnetworkUri") <*>
+                     (o .:? "reservationAffinity")
+                     <*> (o .:? "internalIpOnly")
+                     <*> (o .:? "nodeGroupAffinity")
                      <*> (o .:? "networkUri")
                      <*> (o .:? "zoneUri")
+                     <*> (o .:? "confidentialInstanceConfig")
                      <*> (o .:? "serviceAccount")
                      <*> (o .:? "metadata")
                      <*> (o .:? "serviceAccountScopes" .!= mempty)
-                     <*> (o .:? "tags" .!= mempty))
+                     <*> (o .:? "shieldedInstanceConfig")
+                     <*> (o .:? "tags" .!= mempty)
+                     <*> (o .:? "privateIpv6GoogleAccess"))
 
 instance ToJSON GceClusterConfig where
         toJSON GceClusterConfig'{..}
           = object
               (catMaybes
                  [("subnetworkUri" .=) <$> _gccSubnetworkURI,
+                  ("reservationAffinity" .=) <$>
+                    _gccReservationAffinity,
                   ("internalIpOnly" .=) <$> _gccInternalIPOnly,
+                  ("nodeGroupAffinity" .=) <$> _gccNodeGroupAffinity,
                   ("networkUri" .=) <$> _gccNetworkURI,
                   ("zoneUri" .=) <$> _gccZoneURI,
+                  ("confidentialInstanceConfig" .=) <$>
+                    _gccConfidentialInstanceConfig,
                   ("serviceAccount" .=) <$> _gccServiceAccount,
                   ("metadata" .=) <$> _gccMetadata,
                   ("serviceAccountScopes" .=) <$>
                     _gccServiceAccountScopes,
-                  ("tags" .=) <$> _gccTags])
+                  ("shieldedInstanceConfig" .=) <$>
+                    _gccShieldedInstanceConfig,
+                  ("tags" .=) <$> _gccTags,
+                  ("privateIpv6GoogleAccess" .=) <$>
+                    _gccPrivateIPv6GoogleAccess])
+
+-- | Optional. Cluster labels to identify a cluster where the job will be
+-- submitted.
+--
+-- /See:/ 'jobPlacementClusterLabels' smart constructor.
+newtype JobPlacementClusterLabels =
+  JobPlacementClusterLabels'
+    { _jpclAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'JobPlacementClusterLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jpclAddtional'
+jobPlacementClusterLabels
+    :: HashMap Text Text -- ^ 'jpclAddtional'
+    -> JobPlacementClusterLabels
+jobPlacementClusterLabels pJpclAddtional_ =
+  JobPlacementClusterLabels' {_jpclAddtional = _Coerce # pJpclAddtional_}
+
+
+jpclAddtional :: Lens' JobPlacementClusterLabels (HashMap Text Text)
+jpclAddtional
+  = lens _jpclAddtional
+      (\ s a -> s{_jpclAddtional = a})
+      . _Coerce
+
+instance FromJSON JobPlacementClusterLabels where
+        parseJSON
+          = withObject "JobPlacementClusterLabels"
+              (\ o ->
+                 JobPlacementClusterLabels' <$> (parseJSONObject o))
+
+instance ToJSON JobPlacementClusterLabels where
+        toJSON = toJSON . _jpclAddtional
+
+-- | Labels associated with the operation.
+--
+-- /See:/ 'batchOperationMetadataLabels' smart constructor.
+newtype BatchOperationMetadataLabels =
+  BatchOperationMetadataLabels'
+    { _bomlAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchOperationMetadataLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bomlAddtional'
+batchOperationMetadataLabels
+    :: HashMap Text Text -- ^ 'bomlAddtional'
+    -> BatchOperationMetadataLabels
+batchOperationMetadataLabels pBomlAddtional_ =
+  BatchOperationMetadataLabels' {_bomlAddtional = _Coerce # pBomlAddtional_}
+
+
+bomlAddtional :: Lens' BatchOperationMetadataLabels (HashMap Text Text)
+bomlAddtional
+  = lens _bomlAddtional
+      (\ s a -> s{_bomlAddtional = a})
+      . _Coerce
+
+instance FromJSON BatchOperationMetadataLabels where
+        parseJSON
+          = withObject "BatchOperationMetadataLabels"
+              (\ o ->
+                 BatchOperationMetadataLabels' <$>
+                   (parseJSONObject o))
+
+instance ToJSON BatchOperationMetadataLabels where
+        toJSON = toJSON . _bomlAddtional
 
 -- | A response to a request to list workflow templates in a project.
 --
@@ -2966,7 +4451,7 @@ instance ToJSON GceClusterConfig where
 data ListWorkflowTemplatesResponse =
   ListWorkflowTemplatesResponse'
     { _lwtrNextPageToken :: !(Maybe Text)
-    , _lwtrTemplates     :: !(Maybe [WorkflowTemplate])
+    , _lwtrTemplates :: !(Maybe [WorkflowTemplate])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2987,7 +4472,7 @@ listWorkflowTemplatesResponse =
 
 -- | Output only. This token is included in the response if there are more
 -- results to fetch. To fetch additional results, provide this value as the
--- page_token in a subsequent 'ListWorkflowTemplatesRequest'.
+-- page_token in a subsequent ListWorkflowTemplatesRequest.
 lwtrNextPageToken :: Lens' ListWorkflowTemplatesResponse (Maybe Text)
 lwtrNextPageToken
   = lens _lwtrNextPageToken
@@ -3056,8 +4541,8 @@ instance ToJSON GceClusterConfigMetadata where
         toJSON = toJSON . _gccmAddtional
 
 -- | Optional. A mapping of property names and values, used to configure
--- Hive. Properties that conflict with values set by the Cloud Dataproc API
--- may be overwritten. Can include properties set in
+-- Hive. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
 -- \/etc\/hadoop\/conf\/*-site.xml, \/etc\/hive\/conf\/hive-site.xml, and
 -- classes in user code.
 --
@@ -3093,6 +4578,129 @@ instance FromJSON HiveJobProperties where
 
 instance ToJSON HiveJobProperties where
         toJSON = toJSON . _hAddtional
+
+-- | Metadata describing the Batch operation.
+--
+-- /See:/ 'batchOperationMetadata' smart constructor.
+data BatchOperationMetadata =
+  BatchOperationMetadata'
+    { _bomBatch :: !(Maybe Text)
+    , _bomDoneTime :: !(Maybe DateTime')
+    , _bomWarnings :: !(Maybe [Text])
+    , _bomBatchUuid :: !(Maybe Text)
+    , _bomLabels :: !(Maybe BatchOperationMetadataLabels)
+    , _bomOperationType :: !(Maybe BatchOperationMetadataOperationType)
+    , _bomDescription :: !(Maybe Text)
+    , _bomCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchOperationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bomBatch'
+--
+-- * 'bomDoneTime'
+--
+-- * 'bomWarnings'
+--
+-- * 'bomBatchUuid'
+--
+-- * 'bomLabels'
+--
+-- * 'bomOperationType'
+--
+-- * 'bomDescription'
+--
+-- * 'bomCreateTime'
+batchOperationMetadata
+    :: BatchOperationMetadata
+batchOperationMetadata =
+  BatchOperationMetadata'
+    { _bomBatch = Nothing
+    , _bomDoneTime = Nothing
+    , _bomWarnings = Nothing
+    , _bomBatchUuid = Nothing
+    , _bomLabels = Nothing
+    , _bomOperationType = Nothing
+    , _bomDescription = Nothing
+    , _bomCreateTime = Nothing
+    }
+
+
+-- | Name of the batch for the operation.
+bomBatch :: Lens' BatchOperationMetadata (Maybe Text)
+bomBatch = lens _bomBatch (\ s a -> s{_bomBatch = a})
+
+-- | The time when the operation finished.
+bomDoneTime :: Lens' BatchOperationMetadata (Maybe UTCTime)
+bomDoneTime
+  = lens _bomDoneTime (\ s a -> s{_bomDoneTime = a}) .
+      mapping _DateTime
+
+-- | Warnings encountered during operation execution.
+bomWarnings :: Lens' BatchOperationMetadata [Text]
+bomWarnings
+  = lens _bomWarnings (\ s a -> s{_bomWarnings = a}) .
+      _Default
+      . _Coerce
+
+-- | Batch UUID for the operation.
+bomBatchUuid :: Lens' BatchOperationMetadata (Maybe Text)
+bomBatchUuid
+  = lens _bomBatchUuid (\ s a -> s{_bomBatchUuid = a})
+
+-- | Labels associated with the operation.
+bomLabels :: Lens' BatchOperationMetadata (Maybe BatchOperationMetadataLabels)
+bomLabels
+  = lens _bomLabels (\ s a -> s{_bomLabels = a})
+
+-- | The operation type.
+bomOperationType :: Lens' BatchOperationMetadata (Maybe BatchOperationMetadataOperationType)
+bomOperationType
+  = lens _bomOperationType
+      (\ s a -> s{_bomOperationType = a})
+
+-- | Short description of the operation.
+bomDescription :: Lens' BatchOperationMetadata (Maybe Text)
+bomDescription
+  = lens _bomDescription
+      (\ s a -> s{_bomDescription = a})
+
+-- | The time when the operation was created.
+bomCreateTime :: Lens' BatchOperationMetadata (Maybe UTCTime)
+bomCreateTime
+  = lens _bomCreateTime
+      (\ s a -> s{_bomCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON BatchOperationMetadata where
+        parseJSON
+          = withObject "BatchOperationMetadata"
+              (\ o ->
+                 BatchOperationMetadata' <$>
+                   (o .:? "batch") <*> (o .:? "doneTime") <*>
+                     (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "batchUuid")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "operationType")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON BatchOperationMetadata where
+        toJSON BatchOperationMetadata'{..}
+          = object
+              (catMaybes
+                 [("batch" .=) <$> _bomBatch,
+                  ("doneTime" .=) <$> _bomDoneTime,
+                  ("warnings" .=) <$> _bomWarnings,
+                  ("batchUuid" .=) <$> _bomBatchUuid,
+                  ("labels" .=) <$> _bomLabels,
+                  ("operationType" .=) <$> _bomOperationType,
+                  ("description" .=) <$> _bomDescription,
+                  ("createTime" .=) <$> _bomCreateTime])
 
 -- | Map from parameter names to values that were used for those parameters.
 --
@@ -3130,14 +4738,107 @@ instance FromJSON WorkflowMetadataParameters where
 instance ToJSON WorkflowMetadataParameters where
         toJSON = toJSON . _wmpAddtional
 
+-- | Specifies the cluster auto-delete schedule configuration.
+--
+-- /See:/ 'lifecycleConfig' smart constructor.
+data LifecycleConfig =
+  LifecycleConfig'
+    { _lcIdleStartTime :: !(Maybe DateTime')
+    , _lcIdleDeleteTtl :: !(Maybe GDuration)
+    , _lcAutoDeleteTtl :: !(Maybe GDuration)
+    , _lcAutoDeleteTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LifecycleConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcIdleStartTime'
+--
+-- * 'lcIdleDeleteTtl'
+--
+-- * 'lcAutoDeleteTtl'
+--
+-- * 'lcAutoDeleteTime'
+lifecycleConfig
+    :: LifecycleConfig
+lifecycleConfig =
+  LifecycleConfig'
+    { _lcIdleStartTime = Nothing
+    , _lcIdleDeleteTtl = Nothing
+    , _lcAutoDeleteTtl = Nothing
+    , _lcAutoDeleteTime = Nothing
+    }
+
+
+-- | Output only. The time when cluster became idle (most recent job
+-- finished) and became eligible for deletion due to idleness (see JSON
+-- representation of Timestamp
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
+lcIdleStartTime :: Lens' LifecycleConfig (Maybe UTCTime)
+lcIdleStartTime
+  = lens _lcIdleStartTime
+      (\ s a -> s{_lcIdleStartTime = a})
+      . mapping _DateTime
+
+-- | Optional. The duration to keep the cluster alive while idling (when no
+-- jobs are running). Passing this threshold will cause the cluster to be
+-- deleted. Minimum value is 5 minutes; maximum value is 14 days (see JSON
+-- representation of Duration
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
+lcIdleDeleteTtl :: Lens' LifecycleConfig (Maybe Scientific)
+lcIdleDeleteTtl
+  = lens _lcIdleDeleteTtl
+      (\ s a -> s{_lcIdleDeleteTtl = a})
+      . mapping _GDuration
+
+-- | Optional. The lifetime duration of cluster. The cluster will be
+-- auto-deleted at the end of this period. Minimum value is 10 minutes;
+-- maximum value is 14 days (see JSON representation of Duration
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
+lcAutoDeleteTtl :: Lens' LifecycleConfig (Maybe Scientific)
+lcAutoDeleteTtl
+  = lens _lcAutoDeleteTtl
+      (\ s a -> s{_lcAutoDeleteTtl = a})
+      . mapping _GDuration
+
+-- | Optional. The time when cluster will be auto-deleted (see JSON
+-- representation of Timestamp
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
+lcAutoDeleteTime :: Lens' LifecycleConfig (Maybe UTCTime)
+lcAutoDeleteTime
+  = lens _lcAutoDeleteTime
+      (\ s a -> s{_lcAutoDeleteTime = a})
+      . mapping _DateTime
+
+instance FromJSON LifecycleConfig where
+        parseJSON
+          = withObject "LifecycleConfig"
+              (\ o ->
+                 LifecycleConfig' <$>
+                   (o .:? "idleStartTime") <*> (o .:? "idleDeleteTtl")
+                     <*> (o .:? "autoDeleteTtl")
+                     <*> (o .:? "autoDeleteTime"))
+
+instance ToJSON LifecycleConfig where
+        toJSON LifecycleConfig'{..}
+          = object
+              (catMaybes
+                 [("idleStartTime" .=) <$> _lcIdleStartTime,
+                  ("idleDeleteTtl" .=) <$> _lcIdleDeleteTtl,
+                  ("autoDeleteTtl" .=) <$> _lcAutoDeleteTtl,
+                  ("autoDeleteTime" .=) <$> _lcAutoDeleteTime])
+
 -- | Cluster that is managed by the workflow.
 --
 -- /See:/ 'managedCluster' smart constructor.
 data ManagedCluster =
   ManagedCluster'
-    { _mcConfig      :: !(Maybe ClusterConfig)
+    { _mcConfig :: !(Maybe ClusterConfig)
     , _mcClusterName :: !(Maybe Text)
-    , _mcLabels      :: !(Maybe ManagedClusterLabels)
+    , _mcLabels :: !(Maybe ManagedClusterLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3197,6 +4898,60 @@ instance ToJSON ManagedCluster where
                   ("clusterName" .=) <$> _mcClusterName,
                   ("labels" .=) <$> _mcLabels])
 
+-- | Basic algorithm for autoscaling.
+--
+-- /See:/ 'basicAutoscalingAlgorithm' smart constructor.
+data BasicAutoscalingAlgorithm =
+  BasicAutoscalingAlgorithm'
+    { _baaCooldownPeriod :: !(Maybe GDuration)
+    , _baaYarnConfig :: !(Maybe BasicYarnAutoscalingConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BasicAutoscalingAlgorithm' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'baaCooldownPeriod'
+--
+-- * 'baaYarnConfig'
+basicAutoscalingAlgorithm
+    :: BasicAutoscalingAlgorithm
+basicAutoscalingAlgorithm =
+  BasicAutoscalingAlgorithm'
+    {_baaCooldownPeriod = Nothing, _baaYarnConfig = Nothing}
+
+
+-- | Optional. Duration between scaling events. A scaling period starts after
+-- the update operation from the previous event has completed.Bounds: 2m,
+-- 1d. Default: 2m.
+baaCooldownPeriod :: Lens' BasicAutoscalingAlgorithm (Maybe Scientific)
+baaCooldownPeriod
+  = lens _baaCooldownPeriod
+      (\ s a -> s{_baaCooldownPeriod = a})
+      . mapping _GDuration
+
+-- | Optional. YARN autoscaling configuration.
+baaYarnConfig :: Lens' BasicAutoscalingAlgorithm (Maybe BasicYarnAutoscalingConfig)
+baaYarnConfig
+  = lens _baaYarnConfig
+      (\ s a -> s{_baaYarnConfig = a})
+
+instance FromJSON BasicAutoscalingAlgorithm where
+        parseJSON
+          = withObject "BasicAutoscalingAlgorithm"
+              (\ o ->
+                 BasicAutoscalingAlgorithm' <$>
+                   (o .:? "cooldownPeriod") <*> (o .:? "yarnConfig"))
+
+instance ToJSON BasicAutoscalingAlgorithm where
+        toJSON BasicAutoscalingAlgorithm'{..}
+          = object
+              (catMaybes
+                 [("cooldownPeriod" .=) <$> _baaCooldownPeriod,
+                  ("yarnConfig" .=) <$> _baaYarnConfig])
+
 -- | Optional. The labels to associate with this cluster. Label keys must
 -- contain 1 to 63 characters, and must conform to RFC 1035
 -- (https:\/\/www.ietf.org\/rfc\/rfc1035.txt). Label values may be empty,
@@ -3237,27 +4992,30 @@ instance FromJSON ClusterLabels where
 instance ToJSON ClusterLabels where
         toJSON = toJSON . _clAddtional
 
--- | A Cloud Dataproc job resource.
+-- | A Dataproc job resource.
 --
 -- /See:/ 'job' smart constructor.
 data Job =
   Job'
-    { _jSparkJob                :: !(Maybe SparkJob)
-    , _jStatus                  :: !(Maybe JobStatus)
-    , _jDriverControlFilesURI   :: !(Maybe Text)
-    , _jHiveJob                 :: !(Maybe HiveJob)
-    , _jReference               :: !(Maybe JobReference)
-    , _jSparkSQLJob             :: !(Maybe SparkSQLJob)
-    , _jHadoopJob               :: !(Maybe HadoopJob)
-    , _jJobUuid                 :: !(Maybe Text)
-    , _jYarnApplications        :: !(Maybe [YarnApplication])
-    , _jLabels                  :: !(Maybe JobLabels)
-    , _jPysparkJob              :: !(Maybe PySparkJob)
+    { _jSparkJob :: !(Maybe SparkJob)
+    , _jStatus :: !(Maybe JobStatus)
+    , _jDriverControlFilesURI :: !(Maybe Text)
+    , _jHiveJob :: !(Maybe HiveJob)
+    , _jDone :: !(Maybe Bool)
+    , _jPrestoJob :: !(Maybe PrestoJob)
+    , _jReference :: !(Maybe JobReference)
+    , _jSparkSQLJob :: !(Maybe SparkSQLJob)
+    , _jHadoopJob :: !(Maybe HadoopJob)
+    , _jJobUuid :: !(Maybe Text)
+    , _jYarnApplications :: !(Maybe [YarnApplication])
+    , _jLabels :: !(Maybe JobLabels)
+    , _jPysparkJob :: !(Maybe PySparkJob)
     , _jDriverOutputResourceURI :: !(Maybe Text)
-    , _jScheduling              :: !(Maybe JobScheduling)
-    , _jStatusHistory           :: !(Maybe [JobStatus])
-    , _jPlacement               :: !(Maybe JobPlacement)
-    , _jPigJob                  :: !(Maybe PigJob)
+    , _jScheduling :: !(Maybe JobScheduling)
+    , _jSparkRJob :: !(Maybe SparkRJob)
+    , _jStatusHistory :: !(Maybe [JobStatus])
+    , _jPlacement :: !(Maybe JobPlacement)
+    , _jPigJob :: !(Maybe PigJob)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3273,6 +5031,10 @@ data Job =
 -- * 'jDriverControlFilesURI'
 --
 -- * 'jHiveJob'
+--
+-- * 'jDone'
+--
+-- * 'jPrestoJob'
 --
 -- * 'jReference'
 --
@@ -3292,6 +5054,8 @@ data Job =
 --
 -- * 'jScheduling'
 --
+-- * 'jSparkRJob'
+--
 -- * 'jStatusHistory'
 --
 -- * 'jPlacement'
@@ -3305,6 +5069,8 @@ job =
     , _jStatus = Nothing
     , _jDriverControlFilesURI = Nothing
     , _jHiveJob = Nothing
+    , _jDone = Nothing
+    , _jPrestoJob = Nothing
     , _jReference = Nothing
     , _jSparkSQLJob = Nothing
     , _jHadoopJob = Nothing
@@ -3314,19 +5080,20 @@ job =
     , _jPysparkJob = Nothing
     , _jDriverOutputResourceURI = Nothing
     , _jScheduling = Nothing
+    , _jSparkRJob = Nothing
     , _jStatusHistory = Nothing
     , _jPlacement = Nothing
     , _jPigJob = Nothing
     }
 
 
--- | Job is a Spark job.
+-- | Optional. Job is a Spark job.
 jSparkJob :: Lens' Job (Maybe SparkJob)
 jSparkJob
   = lens _jSparkJob (\ s a -> s{_jSparkJob = a})
 
 -- | Output only. The job status. Additional application-specific status
--- information may be contained in the 'type_job' and 'yarn_applications'
+-- information may be contained in the type_job and yarn_applications
 -- fields.
 jStatus :: Lens' Job (Maybe JobStatus)
 jStatus = lens _jStatus (\ s a -> s{_jStatus = a})
@@ -3339,23 +5106,35 @@ jDriverControlFilesURI
   = lens _jDriverControlFilesURI
       (\ s a -> s{_jDriverControlFilesURI = a})
 
--- | Job is a Hive job.
+-- | Optional. Job is a Hive job.
 jHiveJob :: Lens' Job (Maybe HiveJob)
 jHiveJob = lens _jHiveJob (\ s a -> s{_jHiveJob = a})
 
+-- | Output only. Indicates whether the job is completed. If the value is
+-- false, the job is still in progress. If true, the job is completed, and
+-- status.state field will indicate if it was successful, failed, or
+-- cancelled.
+jDone :: Lens' Job (Maybe Bool)
+jDone = lens _jDone (\ s a -> s{_jDone = a})
+
+-- | Optional. Job is a Presto job.
+jPrestoJob :: Lens' Job (Maybe PrestoJob)
+jPrestoJob
+  = lens _jPrestoJob (\ s a -> s{_jPrestoJob = a})
+
 -- | Optional. The fully qualified reference to the job, which can be used to
 -- obtain the equivalent REST path of the job resource. If this property is
--- not specified when a job is created, the server generates a 'job_id'.
+-- not specified when a job is created, the server generates a job_id.
 jReference :: Lens' Job (Maybe JobReference)
 jReference
   = lens _jReference (\ s a -> s{_jReference = a})
 
--- | Job is a SparkSql job.
+-- | Optional. Job is a SparkSql job.
 jSparkSQLJob :: Lens' Job (Maybe SparkSQLJob)
 jSparkSQLJob
   = lens _jSparkSQLJob (\ s a -> s{_jSparkSQLJob = a})
 
--- | Job is a Hadoop job.
+-- | Optional. Job is a Hadoop job.
 jHadoopJob :: Lens' Job (Maybe HadoopJob)
 jHadoopJob
   = lens _jHadoopJob (\ s a -> s{_jHadoopJob = a})
@@ -3385,7 +5164,7 @@ jYarnApplications
 jLabels :: Lens' Job (Maybe JobLabels)
 jLabels = lens _jLabels (\ s a -> s{_jLabels = a})
 
--- | Job is a Pyspark job.
+-- | Optional. Job is a PySpark job.
 jPysparkJob :: Lens' Job (Maybe PySparkJob)
 jPysparkJob
   = lens _jPysparkJob (\ s a -> s{_jPysparkJob = a})
@@ -3402,6 +5181,11 @@ jScheduling :: Lens' Job (Maybe JobScheduling)
 jScheduling
   = lens _jScheduling (\ s a -> s{_jScheduling = a})
 
+-- | Optional. Job is a SparkR job.
+jSparkRJob :: Lens' Job (Maybe SparkRJob)
+jSparkRJob
+  = lens _jSparkRJob (\ s a -> s{_jSparkRJob = a})
+
 -- | Output only. The previous job status.
 jStatusHistory :: Lens' Job [JobStatus]
 jStatusHistory
@@ -3416,7 +5200,7 @@ jPlacement :: Lens' Job (Maybe JobPlacement)
 jPlacement
   = lens _jPlacement (\ s a -> s{_jPlacement = a})
 
--- | Job is a Pig job.
+-- | Optional. Job is a Pig job.
 jPigJob :: Lens' Job (Maybe PigJob)
 jPigJob = lens _jPigJob (\ s a -> s{_jPigJob = a})
 
@@ -3428,6 +5212,8 @@ instance FromJSON Job where
                    (o .:? "sparkJob") <*> (o .:? "status") <*>
                      (o .:? "driverControlFilesUri")
                      <*> (o .:? "hiveJob")
+                     <*> (o .:? "done")
+                     <*> (o .:? "prestoJob")
                      <*> (o .:? "reference")
                      <*> (o .:? "sparkSqlJob")
                      <*> (o .:? "hadoopJob")
@@ -3437,6 +5223,7 @@ instance FromJSON Job where
                      <*> (o .:? "pysparkJob")
                      <*> (o .:? "driverOutputResourceUri")
                      <*> (o .:? "scheduling")
+                     <*> (o .:? "sparkRJob")
                      <*> (o .:? "statusHistory" .!= mempty)
                      <*> (o .:? "placement")
                      <*> (o .:? "pigJob"))
@@ -3449,7 +5236,8 @@ instance ToJSON Job where
                   ("status" .=) <$> _jStatus,
                   ("driverControlFilesUri" .=) <$>
                     _jDriverControlFilesURI,
-                  ("hiveJob" .=) <$> _jHiveJob,
+                  ("hiveJob" .=) <$> _jHiveJob, ("done" .=) <$> _jDone,
+                  ("prestoJob" .=) <$> _jPrestoJob,
                   ("reference" .=) <$> _jReference,
                   ("sparkSqlJob" .=) <$> _jSparkSQLJob,
                   ("hadoopJob" .=) <$> _jHadoopJob,
@@ -3460,6 +5248,7 @@ instance ToJSON Job where
                   ("driverOutputResourceUri" .=) <$>
                     _jDriverOutputResourceURI,
                   ("scheduling" .=) <$> _jScheduling,
+                  ("sparkRJob" .=) <$> _jSparkRJob,
                   ("statusHistory" .=) <$> _jStatusHistory,
                   ("placement" .=) <$> _jPlacement,
                   ("pigJob" .=) <$> _jPigJob])
@@ -3487,7 +5276,46 @@ instance FromJSON DiagnoseClusterRequest where
 instance ToJSON DiagnoseClusterRequest where
         toJSON = const emptyObject
 
--- | A Cloud Dataproc job for running Apache Hadoop MapReduce
+-- | Optional. A mapping of property names to values, used to configure
+-- SparkR. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
+-- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
+--
+-- /See:/ 'sparkRJobProperties' smart constructor.
+newtype SparkRJobProperties =
+  SparkRJobProperties'
+    { _srjpAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SparkRJobProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srjpAddtional'
+sparkRJobProperties
+    :: HashMap Text Text -- ^ 'srjpAddtional'
+    -> SparkRJobProperties
+sparkRJobProperties pSrjpAddtional_ =
+  SparkRJobProperties' {_srjpAddtional = _Coerce # pSrjpAddtional_}
+
+
+srjpAddtional :: Lens' SparkRJobProperties (HashMap Text Text)
+srjpAddtional
+  = lens _srjpAddtional
+      (\ s a -> s{_srjpAddtional = a})
+      . _Coerce
+
+instance FromJSON SparkRJobProperties where
+        parseJSON
+          = withObject "SparkRJobProperties"
+              (\ o -> SparkRJobProperties' <$> (parseJSONObject o))
+
+instance ToJSON SparkRJobProperties where
+        toJSON = toJSON . _srjpAddtional
+
+-- | A Dataproc job for running Apache Hadoop MapReduce
 -- (https:\/\/hadoop.apache.org\/docs\/current\/hadoop-mapreduce-client\/hadoop-mapreduce-client-core\/MapReduceTutorial.html)
 -- jobs on Apache Hadoop YARN
 -- (https:\/\/hadoop.apache.org\/docs\/r2.7.1\/hadoop-yarn\/hadoop-yarn-site\/YARN.html).
@@ -3495,14 +5323,14 @@ instance ToJSON DiagnoseClusterRequest where
 -- /See:/ 'hadoopJob' smart constructor.
 data HadoopJob =
   HadoopJob'
-    { _hArgs           :: !(Maybe [Text])
+    { _hArgs :: !(Maybe [Text])
     , _hMainJarFileURI :: !(Maybe Text)
-    , _hJarFileURIs    :: !(Maybe [Text])
-    , _hFileURIs       :: !(Maybe [Text])
-    , _hArchiveURIs    :: !(Maybe [Text])
-    , _hMainClass      :: !(Maybe Text)
-    , _hLoggingConfig  :: !(Maybe LoggingConfig)
-    , _hProperties     :: !(Maybe HadoopJobProperties)
+    , _hJarFileURIs :: !(Maybe [Text])
+    , _hFileURIs :: !(Maybe [Text])
+    , _hArchiveURIs :: !(Maybe [Text])
+    , _hMainClass :: !(Maybe Text)
+    , _hLoggingConfig :: !(Maybe LoggingConfig)
+    , _hProperties :: !(Maybe HadoopJobProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3597,8 +5425,8 @@ hLoggingConfig
       (\ s a -> s{_hLoggingConfig = a})
 
 -- | Optional. A mapping of property names to values, used to configure
--- Hadoop. Properties that conflict with values set by the Cloud Dataproc
--- API may be overwritten. Can include properties set in
+-- Hadoop. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
 -- \/etc\/hadoop\/conf\/*-site and classes in user code.
 hProperties :: Lens' HadoopJob (Maybe HadoopJobProperties)
 hProperties
@@ -3632,7 +5460,7 @@ instance ToJSON HadoopJob where
                   ("properties" .=) <$> _hProperties])
 
 -- | Optional. Map from parameter names to values that should be used for
--- those parameters. Values may not exceed 100 characters.
+-- those parameters. Values may not exceed 1000 characters.
 --
 -- /See:/ 'instantiateWorkflowTemplateRequestParameters' smart constructor.
 newtype InstantiateWorkflowTemplateRequestParameters =
@@ -3681,14 +5509,14 @@ instance ToJSON
 -- /See:/ 'clusterOperationMetadata' smart constructor.
 data ClusterOperationMetadata =
   ClusterOperationMetadata'
-    { _comStatus        :: !(Maybe ClusterOperationStatus)
-    , _comClusterUuid   :: !(Maybe Text)
-    , _comWarnings      :: !(Maybe [Text])
-    , _comClusterName   :: !(Maybe Text)
-    , _comLabels        :: !(Maybe ClusterOperationMetadataLabels)
+    { _comStatus :: !(Maybe ClusterOperationStatus)
+    , _comClusterUuid :: !(Maybe Text)
+    , _comWarnings :: !(Maybe [Text])
+    , _comClusterName :: !(Maybe Text)
+    , _comLabels :: !(Maybe ClusterOperationMetadataLabels)
     , _comOperationType :: !(Maybe Text)
     , _comStatusHistory :: !(Maybe [ClusterOperationStatus])
-    , _comDescription   :: !(Maybe Text)
+    , _comDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3802,6 +5630,101 @@ instance ToJSON ClusterOperationMetadata where
                   ("statusHistory" .=) <$> _comStatusHistory,
                   ("description" .=) <$> _comDescription])
 
+-- | Describes an autoscaling policy for Dataproc cluster autoscaler.
+--
+-- /See:/ 'autoscalingPolicy' smart constructor.
+data AutoscalingPolicy =
+  AutoscalingPolicy'
+    { _apWorkerConfig :: !(Maybe InstanceGroupAutoscalingPolicyConfig)
+    , _apName :: !(Maybe Text)
+    , _apBasicAlgorithm :: !(Maybe BasicAutoscalingAlgorithm)
+    , _apId :: !(Maybe Text)
+    , _apSecondaryWorkerConfig :: !(Maybe InstanceGroupAutoscalingPolicyConfig)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AutoscalingPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apWorkerConfig'
+--
+-- * 'apName'
+--
+-- * 'apBasicAlgorithm'
+--
+-- * 'apId'
+--
+-- * 'apSecondaryWorkerConfig'
+autoscalingPolicy
+    :: AutoscalingPolicy
+autoscalingPolicy =
+  AutoscalingPolicy'
+    { _apWorkerConfig = Nothing
+    , _apName = Nothing
+    , _apBasicAlgorithm = Nothing
+    , _apId = Nothing
+    , _apSecondaryWorkerConfig = Nothing
+    }
+
+
+-- | Required. Describes how the autoscaler will operate for primary workers.
+apWorkerConfig :: Lens' AutoscalingPolicy (Maybe InstanceGroupAutoscalingPolicyConfig)
+apWorkerConfig
+  = lens _apWorkerConfig
+      (\ s a -> s{_apWorkerConfig = a})
+
+-- | Output only. The \"resource name\" of the autoscaling policy, as
+-- described in https:\/\/cloud.google.com\/apis\/design\/resource_names.
+-- For projects.regions.autoscalingPolicies, the resource name of the
+-- policy has the following format:
+-- projects\/{project_id}\/regions\/{region}\/autoscalingPolicies\/{policy_id}
+-- For projects.locations.autoscalingPolicies, the resource name of the
+-- policy has the following format:
+-- projects\/{project_id}\/locations\/{location}\/autoscalingPolicies\/{policy_id}
+apName :: Lens' AutoscalingPolicy (Maybe Text)
+apName = lens _apName (\ s a -> s{_apName = a})
+
+apBasicAlgorithm :: Lens' AutoscalingPolicy (Maybe BasicAutoscalingAlgorithm)
+apBasicAlgorithm
+  = lens _apBasicAlgorithm
+      (\ s a -> s{_apBasicAlgorithm = a})
+
+-- | Required. The policy id.The id must contain only letters (a-z, A-Z),
+-- numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end
+-- with underscore or hyphen. Must consist of between 3 and 50 characters.
+apId :: Lens' AutoscalingPolicy (Maybe Text)
+apId = lens _apId (\ s a -> s{_apId = a})
+
+-- | Optional. Describes how the autoscaler will operate for secondary
+-- workers.
+apSecondaryWorkerConfig :: Lens' AutoscalingPolicy (Maybe InstanceGroupAutoscalingPolicyConfig)
+apSecondaryWorkerConfig
+  = lens _apSecondaryWorkerConfig
+      (\ s a -> s{_apSecondaryWorkerConfig = a})
+
+instance FromJSON AutoscalingPolicy where
+        parseJSON
+          = withObject "AutoscalingPolicy"
+              (\ o ->
+                 AutoscalingPolicy' <$>
+                   (o .:? "workerConfig") <*> (o .:? "name") <*>
+                     (o .:? "basicAlgorithm")
+                     <*> (o .:? "id")
+                     <*> (o .:? "secondaryWorkerConfig"))
+
+instance ToJSON AutoscalingPolicy where
+        toJSON AutoscalingPolicy'{..}
+          = object
+              (catMaybes
+                 [("workerConfig" .=) <$> _apWorkerConfig,
+                  ("name" .=) <$> _apName,
+                  ("basicAlgorithm" .=) <$> _apBasicAlgorithm,
+                  ("id" .=) <$> _apId,
+                  ("secondaryWorkerConfig" .=) <$>
+                    _apSecondaryWorkerConfig])
+
 -- | Request message for TestIamPermissions method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
@@ -3846,18 +5769,18 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
--- | A Cloud Dataproc job for running Apache Spark SQL
+-- | A Dataproc job for running Apache Spark SQL
 -- (http:\/\/spark.apache.org\/sql\/) queries.
 --
 -- /See:/ 'sparkSQLJob' smart constructor.
 data SparkSQLJob =
   SparkSQLJob'
-    { _ssqljQueryFileURI    :: !(Maybe Text)
-    , _ssqljJarFileURIs     :: !(Maybe [Text])
+    { _ssqljQueryFileURI :: !(Maybe Text)
+    , _ssqljJarFileURIs :: !(Maybe [Text])
     , _ssqljScriptVariables :: !(Maybe SparkSQLJobScriptVariables)
-    , _ssqljQueryList       :: !(Maybe QueryList)
-    , _ssqljLoggingConfig   :: !(Maybe LoggingConfig)
-    , _ssqljProperties      :: !(Maybe SparkSQLJobProperties)
+    , _ssqljQueryList :: !(Maybe QueryList)
+    , _ssqljLoggingConfig :: !(Maybe LoggingConfig)
+    , _ssqljProperties :: !(Maybe SparkSQLJobProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3924,7 +5847,7 @@ ssqljLoggingConfig
       (\ s a -> s{_ssqljLoggingConfig = a})
 
 -- | Optional. A mapping of property names to values, used to configure Spark
--- SQL\'s SparkConf. Properties that conflict with values set by the Cloud
+-- SQL\'s SparkConf. Properties that conflict with values set by the
 -- Dataproc API may be overwritten.
 ssqljProperties :: Lens' SparkSQLJob (Maybe SparkSQLJobProperties)
 ssqljProperties
@@ -3959,9 +5882,9 @@ instance ToJSON SparkSQLJob where
 -- /See:/ 'softwareConfig' smart constructor.
 data SoftwareConfig =
   SoftwareConfig'
-    { _scOptionalComponents :: !(Maybe [Text])
-    , _scImageVersion       :: !(Maybe Text)
-    , _scProperties         :: !(Maybe SoftwareConfigProperties)
+    { _scOptionalComponents :: !(Maybe [SoftwareConfigOptionalComponentsItem])
+    , _scImageVersion :: !(Maybe Text)
+    , _scProperties :: !(Maybe SoftwareConfigProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3985,8 +5908,8 @@ softwareConfig =
     }
 
 
--- | The set of optional components to activate on the cluster.
-scOptionalComponents :: Lens' SoftwareConfig [Text]
+-- | Optional. The set of components to activate on the cluster.
+scOptionalComponents :: Lens' SoftwareConfig [SoftwareConfigOptionalComponentsItem]
 scOptionalComponents
   = lens _scOptionalComponents
       (\ s a -> s{_scOptionalComponents = a})
@@ -3994,9 +5917,12 @@ scOptionalComponents
       . _Coerce
 
 -- | Optional. The version of software inside the cluster. It must be one of
--- the supported Cloud Dataproc Versions, such as \"1.2\" (including a
--- subminor version, such as \"1.2.29\"), or the \"preview\" version. If
--- unspecified, it defaults to the latest Debian version.
+-- the supported Dataproc Versions
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/versioning\/dataproc-versions#supported_dataproc_versions),
+-- such as \"1.2\" (including a subminor version, such as \"1.2.29\"), or
+-- the \"preview\" version
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/versioning\/dataproc-versions#other_versions).
+-- If unspecified, it defaults to the latest Debian version.
 scImageVersion :: Lens' SoftwareConfig (Maybe Text)
 scImageVersion
   = lens _scImageVersion
@@ -4008,7 +5934,8 @@ scImageVersion
 -- capacity-scheduler: capacity-scheduler.xml core: core-site.xml distcp:
 -- distcp-default.xml hdfs: hdfs-site.xml hive: hive-site.xml mapred:
 -- mapred-site.xml pig: pig.properties spark: spark-defaults.conf yarn:
--- yarn-site.xmlFor more information, see Cluster properties.
+-- yarn-site.xmlFor more information, see Cluster properties
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/cluster-properties).
 scProperties :: Lens' SoftwareConfig (Maybe SoftwareConfigProperties)
 scProperties
   = lens _scProperties (\ s a -> s{_scProperties = a})
@@ -4036,7 +5963,7 @@ instance ToJSON SoftwareConfig where
 data ListJobsResponse =
   ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
-    , _ljrJobs          :: !(Maybe [Job])
+    , _ljrJobs :: !(Maybe [Job])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4056,7 +5983,7 @@ listJobsResponse =
 
 -- | Optional. This token is included in the response if there are more
 -- results to fetch. To fetch additional results, provide this value as the
--- page_token in a subsequent 'ListJobsRequest'.
+-- page_token in a subsequent ListJobsRequest.
 ljrNextPageToken :: Lens' ListJobsResponse (Maybe Text)
 ljrNextPageToken
   = lens _ljrNextPageToken
@@ -4083,13 +6010,126 @@ instance ToJSON ListJobsResponse where
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
                   ("jobs" .=) <$> _ljrJobs])
 
+-- | Required. Map of user to service account.
+--
+-- /See:/ 'identityConfigUserServiceAccountMApping' smart constructor.
+newtype IdentityConfigUserServiceAccountMApping =
+  IdentityConfigUserServiceAccountMApping'
+    { _icusamaAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IdentityConfigUserServiceAccountMApping' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'icusamaAddtional'
+identityConfigUserServiceAccountMApping
+    :: HashMap Text Text -- ^ 'icusamaAddtional'
+    -> IdentityConfigUserServiceAccountMApping
+identityConfigUserServiceAccountMApping pIcusamaAddtional_ =
+  IdentityConfigUserServiceAccountMApping'
+    {_icusamaAddtional = _Coerce # pIcusamaAddtional_}
+
+
+icusamaAddtional :: Lens' IdentityConfigUserServiceAccountMApping (HashMap Text Text)
+icusamaAddtional
+  = lens _icusamaAddtional
+      (\ s a -> s{_icusamaAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           IdentityConfigUserServiceAccountMApping
+         where
+        parseJSON
+          = withObject
+              "IdentityConfigUserServiceAccountMApping"
+              (\ o ->
+                 IdentityConfigUserServiceAccountMApping' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           IdentityConfigUserServiceAccountMApping
+         where
+        toJSON = toJSON . _icusamaAddtional
+
+-- | Shielded Instance Config for clusters using Compute Engine Shielded VMs
+-- (https:\/\/cloud.google.com\/security\/shielded-cloud\/shielded-vm).
+--
+-- /See:/ 'shieldedInstanceConfig' smart constructor.
+data ShieldedInstanceConfig =
+  ShieldedInstanceConfig'
+    { _sicEnableVtpm :: !(Maybe Bool)
+    , _sicEnableIntegrityMonitoring :: !(Maybe Bool)
+    , _sicEnableSecureBoot :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ShieldedInstanceConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sicEnableVtpm'
+--
+-- * 'sicEnableIntegrityMonitoring'
+--
+-- * 'sicEnableSecureBoot'
+shieldedInstanceConfig
+    :: ShieldedInstanceConfig
+shieldedInstanceConfig =
+  ShieldedInstanceConfig'
+    { _sicEnableVtpm = Nothing
+    , _sicEnableIntegrityMonitoring = Nothing
+    , _sicEnableSecureBoot = Nothing
+    }
+
+
+-- | Optional. Defines whether instances have the vTPM enabled.
+sicEnableVtpm :: Lens' ShieldedInstanceConfig (Maybe Bool)
+sicEnableVtpm
+  = lens _sicEnableVtpm
+      (\ s a -> s{_sicEnableVtpm = a})
+
+-- | Optional. Defines whether instances have integrity monitoring enabled.
+sicEnableIntegrityMonitoring :: Lens' ShieldedInstanceConfig (Maybe Bool)
+sicEnableIntegrityMonitoring
+  = lens _sicEnableIntegrityMonitoring
+      (\ s a -> s{_sicEnableIntegrityMonitoring = a})
+
+-- | Optional. Defines whether instances have Secure Boot enabled.
+sicEnableSecureBoot :: Lens' ShieldedInstanceConfig (Maybe Bool)
+sicEnableSecureBoot
+  = lens _sicEnableSecureBoot
+      (\ s a -> s{_sicEnableSecureBoot = a})
+
+instance FromJSON ShieldedInstanceConfig where
+        parseJSON
+          = withObject "ShieldedInstanceConfig"
+              (\ o ->
+                 ShieldedInstanceConfig' <$>
+                   (o .:? "enableVtpm") <*>
+                     (o .:? "enableIntegrityMonitoring")
+                     <*> (o .:? "enableSecureBoot"))
+
+instance ToJSON ShieldedInstanceConfig where
+        toJSON ShieldedInstanceConfig'{..}
+          = object
+              (catMaybes
+                 [("enableVtpm" .=) <$> _sicEnableVtpm,
+                  ("enableIntegrityMonitoring" .=) <$>
+                    _sicEnableIntegrityMonitoring,
+                  ("enableSecureBoot" .=) <$> _sicEnableSecureBoot])
+
 -- | Specifies the type and number of accelerator cards attached to the
--- instances of an instance. See GPUs on Compute Engine.
+-- instances of an instance. See GPUs on Compute Engine
+-- (https:\/\/cloud.google.com\/compute\/docs\/gpus\/).
 --
 -- /See:/ 'acceleratorConfig' smart constructor.
 data AcceleratorConfig =
   AcceleratorConfig'
-    { _acAcceleratorCount   :: !(Maybe (Textual Int32))
+    { _acAcceleratorCount :: !(Maybe (Textual Int32))
     , _acAcceleratorTypeURI :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4118,12 +6158,15 @@ acAcceleratorCount
       . mapping _Coerce
 
 -- | Full URL, partial URI, or short name of the accelerator type resource to
--- expose to this instance. See Compute Engine AcceleratorTypes.Examples:
+-- expose to this instance. See Compute Engine AcceleratorTypes
+-- (https:\/\/cloud.google.com\/compute\/docs\/reference\/beta\/acceleratorTypes).Examples:
 -- https:\/\/www.googleapis.com\/compute\/beta\/projects\/[project_id]\/zones\/us-east1-a\/acceleratorTypes\/nvidia-tesla-k80
 -- projects\/[project_id]\/zones\/us-east1-a\/acceleratorTypes\/nvidia-tesla-k80
--- nvidia-tesla-k80Auto Zone Exception: If you are using the Cloud Dataproc
--- Auto Zone Placement feature, you must use the short name of the
--- accelerator type resource, for example, nvidia-tesla-k80.
+-- nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto
+-- Zone Placement
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/auto-zone#using_auto_zone_placement)
+-- feature, you must use the short name of the accelerator type resource,
+-- for example, nvidia-tesla-k80.
 acAcceleratorTypeURI :: Lens' AcceleratorConfig (Maybe Text)
 acAcceleratorTypeURI
   = lens _acAcceleratorTypeURI
@@ -4145,8 +6188,8 @@ instance ToJSON AcceleratorConfig where
                   ("acceleratorTypeUri" .=) <$> _acAcceleratorTypeURI])
 
 -- | Optional. A mapping of property names to values, used to configure
--- Spark. Properties that conflict with values set by the Cloud Dataproc
--- API may be overwritten. Can include properties set in
+-- Spark. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
 -- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
 --
 -- /See:/ 'sparkJobProperties' smart constructor.
@@ -4221,21 +6264,21 @@ instance ToJSON EncryptionConfig where
               (catMaybes
                  [("gcePdKmsKeyName" .=) <$> _ecGcePdKmsKeyName])
 
--- | A Cloud Dataproc job for running Apache PySpark
+-- | A Dataproc job for running Apache PySpark
 -- (https:\/\/spark.apache.org\/docs\/0.9.0\/python-programming-guide.html)
 -- applications on YARN.
 --
 -- /See:/ 'pySparkJob' smart constructor.
 data PySparkJob =
   PySparkJob'
-    { _psjPythonFileURIs    :: !(Maybe [Text])
+    { _psjPythonFileURIs :: !(Maybe [Text])
     , _psjMainPythonFileURI :: !(Maybe Text)
-    , _psjArgs              :: !(Maybe [Text])
-    , _psjJarFileURIs       :: !(Maybe [Text])
-    , _psjFileURIs          :: !(Maybe [Text])
-    , _psjArchiveURIs       :: !(Maybe [Text])
-    , _psjLoggingConfig     :: !(Maybe LoggingConfig)
-    , _psjProperties        :: !(Maybe PySparkJobProperties)
+    , _psjArgs :: !(Maybe [Text])
+    , _psjJarFileURIs :: !(Maybe [Text])
+    , _psjFileURIs :: !(Maybe [Text])
+    , _psjArchiveURIs :: !(Maybe [Text])
+    , _psjLoggingConfig :: !(Maybe LoggingConfig)
+    , _psjProperties :: !(Maybe PySparkJobProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4307,16 +6350,17 @@ psjJarFileURIs
       . _Default
       . _Coerce
 
--- | Optional. HCFS URIs of files to be copied to the working directory of
--- Python drivers and distributed tasks. Useful for naively parallel tasks.
+-- | Optional. HCFS URIs of files to be placed in the working directory of
+-- each executor. Useful for naively parallel tasks.
 psjFileURIs :: Lens' PySparkJob [Text]
 psjFileURIs
   = lens _psjFileURIs (\ s a -> s{_psjFileURIs = a}) .
       _Default
       . _Coerce
 
--- | Optional. HCFS URIs of archives to be extracted in the working directory
--- of .jar, .tar, .tar.gz, .tgz, and .zip.
+-- | Optional. HCFS URIs of archives to be extracted into the working
+-- directory of each executor. Supported file types: .jar, .tar, .tar.gz,
+-- .tgz, and .zip.
 psjArchiveURIs :: Lens' PySparkJob [Text]
 psjArchiveURIs
   = lens _psjArchiveURIs
@@ -4331,8 +6375,8 @@ psjLoggingConfig
       (\ s a -> s{_psjLoggingConfig = a})
 
 -- | Optional. A mapping of property names to values, used to configure
--- PySpark. Properties that conflict with values set by the Cloud Dataproc
--- API may be overwritten. Can include properties set in
+-- PySpark. Properties that conflict with values set by the Dataproc API
+-- may be overwritten. Can include properties set in
 -- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
 psjProperties :: Lens' PySparkJob (Maybe PySparkJobProperties)
 psjProperties
@@ -4366,12 +6410,54 @@ instance ToJSON PySparkJob where
                   ("loggingConfig" .=) <$> _psjLoggingConfig,
                   ("properties" .=) <$> _psjProperties])
 
+-- | Specifies a Metastore configuration.
+--
+-- /See:/ 'metastoreConfig' smart constructor.
+newtype MetastoreConfig =
+  MetastoreConfig'
+    { _mcDataprocMetastoreService :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MetastoreConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mcDataprocMetastoreService'
+metastoreConfig
+    :: MetastoreConfig
+metastoreConfig = MetastoreConfig' {_mcDataprocMetastoreService = Nothing}
+
+
+-- | Required. Resource name of an existing Dataproc Metastore
+-- service.Example:
+-- projects\/[project_id]\/locations\/[dataproc_region]\/services\/[service-name]
+mcDataprocMetastoreService :: Lens' MetastoreConfig (Maybe Text)
+mcDataprocMetastoreService
+  = lens _mcDataprocMetastoreService
+      (\ s a -> s{_mcDataprocMetastoreService = a})
+
+instance FromJSON MetastoreConfig where
+        parseJSON
+          = withObject "MetastoreConfig"
+              (\ o ->
+                 MetastoreConfig' <$>
+                   (o .:? "dataprocMetastoreService"))
+
+instance ToJSON MetastoreConfig where
+        toJSON MetastoreConfig'{..}
+          = object
+              (catMaybes
+                 [("dataprocMetastoreService" .=) <$>
+                    _mcDataprocMetastoreService])
+
 -- | Specifies the resources used to actively manage an instance group.
 --
 -- /See:/ 'managedGroupConfig' smart constructor.
 data ManagedGroupConfig =
   ManagedGroupConfig'
-    { _mgcInstanceTemplateName     :: !(Maybe Text)
+    { _mgcInstanceTemplateName :: !(Maybe Text)
     , _mgcInstanceGroupManagerName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4470,7 +6556,7 @@ instance ToJSON TestIAMPermissionsResponse where
 data ListClustersResponse =
   ListClustersResponse'
     { _lcrNextPageToken :: !(Maybe Text)
-    , _lcrClusters      :: !(Maybe [Cluster])
+    , _lcrClusters :: !(Maybe [Cluster])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4555,28 +6641,45 @@ instance ToJSON ValueValidation where
         toJSON ValueValidation'{..}
           = object (catMaybes [("values" .=) <$> _vvValues])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources.A Policy
--- consists of a list of bindings. A binding binds a list of members to a
--- role, where the members can be user accounts, Google groups, Google
--- domains, and service accounts. A role is a named list of permissions
--- defined by IAM.JSON Example { \"bindings\": [ { \"role\":
--- \"roles\/owner\", \"members\": [ \"user:mike\'example.com\",
--- \"group:admins\'example.com\", \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } YAML Example bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the IAM developer\'s guide
--- (https:\/\/cloud.google.com\/iam\/docs).
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources.A Policy is a collection of
+-- bindings. A binding binds one or more members to a single role. Members
+-- can be user accounts, service accounts, Google groups, and domains (such
+-- as G Suite). A role is a named list of permissions; each role can be an
+-- IAM predefined role or a user-created custom role.For some types of
+-- Google Cloud resources, a binding can also specify a condition, which is
+-- a logical expression that allows access to a resource only if the
+-- expression evaluates to true. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the IAM
+-- documentation
+-- (https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).JSON
+-- example: { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
+-- \"user:mike\'example.com\", \"group:admins\'example.com\",
+-- \"domain:google.com\",
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } YAML example: bindings: - members: -
+-- user:mike\'example.com - group:admins\'example.com - domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the IAM documentation
+-- (https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pEtag     :: !(Maybe Bytes)
-    , _pVersion  :: !(Maybe (Textual Int32))
+    { _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -4603,21 +6706,38 @@ policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
 -- conditions: An etag is returned in the response to getIamPolicy, and
 -- systems are expected to put that etag in the request to setIamPolicy to
 -- ensure that their change will be applied to the same version of the
--- policy.If no etag is provided in the call to setIamPolicy, then the
--- existing policy is overwritten blindly.
+-- policy.Important: If you use IAM Conditions, you must include the etag
+-- field whenever you call setIamPolicy. If you omit this field, then IAM
+-- allows you to overwrite a version 3 policy with a version 1 policy, and
+-- all of the conditions in the version 3 policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy.Valid values are 0, 1, and 3.
+-- Requests that specify an invalid value are rejected.Any operation that
+-- affects conditional role bindings must specify version 3. This
+-- requirement applies to the following operations: Getting a policy that
+-- includes a conditional role binding Adding a conditional role binding to
+-- a policy Changing a conditional role binding in a policy Removing any
+-- role binding, with or without a condition, from a policy that includes
+-- conditionsImportant: If you use IAM Conditions, you must include the
+-- etag field whenever you call setIamPolicy. If you omit this field, then
+-- IAM allows you to overwrite a version 3 policy with a version 1 policy,
+-- and all of the conditions in the version 3 policy are lost.If a policy
+-- does not include any conditions, operations on that policy may specify
+-- any valid version or leave the field unset.To learn which resources
+-- support conditions in their IAM policies, see the IAM documentation
+-- (https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of members to a role. bindings with no members will
--- result in an error.
+-- | Associates a list of members to a role. Optionally, may specify a
+-- condition that determines how and when the bindings are applied. Each of
+-- the bindings must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -4645,16 +6765,18 @@ instance ToJSON Policy where
 -- /See:/ 'orderedJob' smart constructor.
 data OrderedJob =
   OrderedJob'
-    { _ojSparkJob            :: !(Maybe SparkJob)
-    , _ojStepId              :: !(Maybe Text)
+    { _ojSparkJob :: !(Maybe SparkJob)
+    , _ojStepId :: !(Maybe Text)
     , _ojPrerequisiteStepIds :: !(Maybe [Text])
-    , _ojHiveJob             :: !(Maybe HiveJob)
-    , _ojSparkSQLJob         :: !(Maybe SparkSQLJob)
-    , _ojHadoopJob           :: !(Maybe HadoopJob)
-    , _ojLabels              :: !(Maybe OrderedJobLabels)
-    , _ojPysparkJob          :: !(Maybe PySparkJob)
-    , _ojScheduling          :: !(Maybe JobScheduling)
-    , _ojPigJob              :: !(Maybe PigJob)
+    , _ojHiveJob :: !(Maybe HiveJob)
+    , _ojPrestoJob :: !(Maybe PrestoJob)
+    , _ojSparkSQLJob :: !(Maybe SparkSQLJob)
+    , _ojHadoopJob :: !(Maybe HadoopJob)
+    , _ojLabels :: !(Maybe OrderedJobLabels)
+    , _ojPysparkJob :: !(Maybe PySparkJob)
+    , _ojScheduling :: !(Maybe JobScheduling)
+    , _ojSparkRJob :: !(Maybe SparkRJob)
+    , _ojPigJob :: !(Maybe PigJob)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4671,6 +6793,8 @@ data OrderedJob =
 --
 -- * 'ojHiveJob'
 --
+-- * 'ojPrestoJob'
+--
 -- * 'ojSparkSQLJob'
 --
 -- * 'ojHadoopJob'
@@ -4681,6 +6805,8 @@ data OrderedJob =
 --
 -- * 'ojScheduling'
 --
+-- * 'ojSparkRJob'
+--
 -- * 'ojPigJob'
 orderedJob
     :: OrderedJob
@@ -4690,16 +6816,18 @@ orderedJob =
     , _ojStepId = Nothing
     , _ojPrerequisiteStepIds = Nothing
     , _ojHiveJob = Nothing
+    , _ojPrestoJob = Nothing
     , _ojSparkSQLJob = Nothing
     , _ojHadoopJob = Nothing
     , _ojLabels = Nothing
     , _ojPysparkJob = Nothing
     , _ojScheduling = Nothing
+    , _ojSparkRJob = Nothing
     , _ojPigJob = Nothing
     }
 
 
--- | Job is a Spark job.
+-- | Optional. Job is a Spark job.
 ojSparkJob :: Lens' OrderedJob (Maybe SparkJob)
 ojSparkJob
   = lens _ojSparkJob (\ s a -> s{_ojSparkJob = a})
@@ -4722,18 +6850,23 @@ ojPrerequisiteStepIds
       . _Default
       . _Coerce
 
--- | Job is a Hive job.
+-- | Optional. Job is a Hive job.
 ojHiveJob :: Lens' OrderedJob (Maybe HiveJob)
 ojHiveJob
   = lens _ojHiveJob (\ s a -> s{_ojHiveJob = a})
 
--- | Job is a SparkSql job.
+-- | Optional. Job is a Presto job.
+ojPrestoJob :: Lens' OrderedJob (Maybe PrestoJob)
+ojPrestoJob
+  = lens _ojPrestoJob (\ s a -> s{_ojPrestoJob = a})
+
+-- | Optional. Job is a SparkSql job.
 ojSparkSQLJob :: Lens' OrderedJob (Maybe SparkSQLJob)
 ojSparkSQLJob
   = lens _ojSparkSQLJob
       (\ s a -> s{_ojSparkSQLJob = a})
 
--- | Job is a Hadoop job.
+-- | Optional. Job is a Hadoop job.
 ojHadoopJob :: Lens' OrderedJob (Maybe HadoopJob)
 ojHadoopJob
   = lens _ojHadoopJob (\ s a -> s{_ojHadoopJob = a})
@@ -4747,7 +6880,7 @@ ojHadoopJob
 ojLabels :: Lens' OrderedJob (Maybe OrderedJobLabels)
 ojLabels = lens _ojLabels (\ s a -> s{_ojLabels = a})
 
--- | Job is a Pyspark job.
+-- | Optional. Job is a PySpark job.
 ojPysparkJob :: Lens' OrderedJob (Maybe PySparkJob)
 ojPysparkJob
   = lens _ojPysparkJob (\ s a -> s{_ojPysparkJob = a})
@@ -4757,7 +6890,12 @@ ojScheduling :: Lens' OrderedJob (Maybe JobScheduling)
 ojScheduling
   = lens _ojScheduling (\ s a -> s{_ojScheduling = a})
 
--- | Job is a Pig job.
+-- | Optional. Job is a SparkR job.
+ojSparkRJob :: Lens' OrderedJob (Maybe SparkRJob)
+ojSparkRJob
+  = lens _ojSparkRJob (\ s a -> s{_ojSparkRJob = a})
+
+-- | Optional. Job is a Pig job.
 ojPigJob :: Lens' OrderedJob (Maybe PigJob)
 ojPigJob = lens _ojPigJob (\ s a -> s{_ojPigJob = a})
 
@@ -4769,11 +6907,13 @@ instance FromJSON OrderedJob where
                    (o .:? "sparkJob") <*> (o .:? "stepId") <*>
                      (o .:? "prerequisiteStepIds" .!= mempty)
                      <*> (o .:? "hiveJob")
+                     <*> (o .:? "prestoJob")
                      <*> (o .:? "sparkSqlJob")
                      <*> (o .:? "hadoopJob")
                      <*> (o .:? "labels")
                      <*> (o .:? "pysparkJob")
                      <*> (o .:? "scheduling")
+                     <*> (o .:? "sparkRJob")
                      <*> (o .:? "pigJob"))
 
 instance ToJSON OrderedJob where
@@ -4785,11 +6925,13 @@ instance ToJSON OrderedJob where
                   ("prerequisiteStepIds" .=) <$>
                     _ojPrerequisiteStepIds,
                   ("hiveJob" .=) <$> _ojHiveJob,
+                  ("prestoJob" .=) <$> _ojPrestoJob,
                   ("sparkSqlJob" .=) <$> _ojSparkSQLJob,
                   ("hadoopJob" .=) <$> _ojHadoopJob,
                   ("labels" .=) <$> _ojLabels,
                   ("pysparkJob" .=) <$> _ojPysparkJob,
                   ("scheduling" .=) <$> _ojScheduling,
+                  ("sparkRJob" .=) <$> _ojSparkRJob,
                   ("pigJob" .=) <$> _ojPigJob])
 
 -- | A request to cancel a job.
@@ -4835,9 +6977,9 @@ queryList
 queryList = QueryList' {_qlQueries = Nothing}
 
 
--- | Required. The queries to execute. You do not need to terminate a query
--- with a semicolon. Multiple queries can be specified in one string by
--- separating each with a semicolon. Here is an example of an Cloud
+-- | Required. The queries to execute. You do not need to end a query
+-- expression with a semicolon. Multiple queries can be specified in one
+-- string by separating each with a semicolon. Here is an example of a
 -- Dataproc API snippet that uses a QueryList to specify a HiveJob:
 -- \"hiveJob\": { \"queryList\": { \"queries\": [ \"query1\", \"query2\",
 -- \"query3;query4\", ] } }
@@ -4895,15 +7037,15 @@ instance FromJSON OperationMetadata where
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
 
--- | Cloud Dataproc job status.
+-- | Dataproc job status.
 --
 -- /See:/ 'jobStatus' smart constructor.
 data JobStatus =
   JobStatus'
-    { _jsState          :: !(Maybe JobStatusState)
-    , _jsSubState       :: !(Maybe JobStatusSubState)
+    { _jsState :: !(Maybe JobStatusState)
+    , _jsSubState :: !(Maybe JobStatusSubState)
     , _jsStateStartTime :: !(Maybe DateTime')
-    , _jsDetails        :: !(Maybe Text)
+    , _jsDetails :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -4947,8 +7089,8 @@ jsStateStartTime
       (\ s a -> s{_jsStateStartTime = a})
       . mapping _DateTime
 
--- | Output only. Optional job state details, such as an error description if
--- the state is 'ERROR'.
+-- | Optional. Output only. Job state details, such as an error description
+-- if the state is ERROR.
 jsDetails :: Lens' JobStatus (Maybe Text)
 jsDetails
   = lens _jsDetails (\ s a -> s{_jsDetails = a})
@@ -4970,6 +7112,63 @@ instance ToJSON JobStatus where
                   ("substate" .=) <$> _jsSubState,
                   ("stateStartTime" .=) <$> _jsStateStartTime,
                   ("details" .=) <$> _jsDetails])
+
+-- | A request to start a cluster.
+--
+-- /See:/ 'startClusterRequest' smart constructor.
+data StartClusterRequest =
+  StartClusterRequest'
+    { _sRequestId :: !(Maybe Text)
+    , _sClusterUuid :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StartClusterRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sRequestId'
+--
+-- * 'sClusterUuid'
+startClusterRequest
+    :: StartClusterRequest
+startClusterRequest =
+  StartClusterRequest' {_sRequestId = Nothing, _sClusterUuid = Nothing}
+
+
+-- | Optional. A unique ID used to identify the request. If the server
+-- receives two StartClusterRequest
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
+-- with the same id, then the second request will be ignored and the first
+-- google.longrunning.Operation created and stored in the backend is
+-- returned.Recommendation: Set this value to a UUID
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The ID
+-- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
+-- and hyphens (-). The maximum length is 40 characters.
+sRequestId :: Lens' StartClusterRequest (Maybe Text)
+sRequestId
+  = lens _sRequestId (\ s a -> s{_sRequestId = a})
+
+-- | Optional. Specifying the cluster_uuid means the RPC will fail (with
+-- error NOT_FOUND) if a cluster with the specified UUID does not exist.
+sClusterUuid :: Lens' StartClusterRequest (Maybe Text)
+sClusterUuid
+  = lens _sClusterUuid (\ s a -> s{_sClusterUuid = a})
+
+instance FromJSON StartClusterRequest where
+        parseJSON
+          = withObject "StartClusterRequest"
+              (\ o ->
+                 StartClusterRequest' <$>
+                   (o .:? "requestId") <*> (o .:? "clusterUuid"))
+
+instance ToJSON StartClusterRequest where
+        toJSON StartClusterRequest'{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _sRequestId,
+                  ("clusterUuid" .=) <$> _sClusterUuid])
 
 -- | Optional. Mapping of query variable names to values (equivalent to the
 -- Pig command: name=[value]).
@@ -5051,11 +7250,11 @@ instance ToJSON ClusterMetricsHdfsMetrics where
 -- /See:/ 'workflowNode' smart constructor.
 data WorkflowNode =
   WorkflowNode'
-    { _wnState               :: !(Maybe WorkflowNodeState)
-    , _wnStepId              :: !(Maybe Text)
-    , _wnJobId               :: !(Maybe Text)
+    { _wnState :: !(Maybe WorkflowNodeState)
+    , _wnStepId :: !(Maybe Text)
+    , _wnJobId :: !(Maybe Text)
     , _wnPrerequisiteStepIds :: !(Maybe [Text])
-    , _wnError               :: !(Maybe Text)
+    , _wnError :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5130,22 +7329,82 @@ instance ToJSON WorkflowNode where
                     _wnPrerequisiteStepIds,
                   ("error" .=) <$> _wnError])
 
--- | A Cloud Dataproc workflow template resource.
+-- | A request to repair a cluster.
+--
+-- /See:/ 'repairClusterRequest' smart constructor.
+data RepairClusterRequest =
+  RepairClusterRequest'
+    { _rcrRequestId :: !(Maybe Text)
+    , _rcrClusterUuid :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RepairClusterRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcrRequestId'
+--
+-- * 'rcrClusterUuid'
+repairClusterRequest
+    :: RepairClusterRequest
+repairClusterRequest =
+  RepairClusterRequest' {_rcrRequestId = Nothing, _rcrClusterUuid = Nothing}
+
+
+-- | Optional. A unique ID used to identify the request. If the server
+-- receives two RepairClusterRequests with the same ID, the second request
+-- is ignored, and the first google.longrunning.Operation created and
+-- stored in the backend is returned.Recommendation: Set this value to a
+-- UUID
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The ID
+-- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
+-- and hyphens (-). The maximum length is 40 characters.
+rcrRequestId :: Lens' RepairClusterRequest (Maybe Text)
+rcrRequestId
+  = lens _rcrRequestId (\ s a -> s{_rcrRequestId = a})
+
+-- | Optional. Specifying the cluster_uuid means the RPC will fail (with
+-- error NOT_FOUND) if a cluster with the specified UUID does not exist.
+rcrClusterUuid :: Lens' RepairClusterRequest (Maybe Text)
+rcrClusterUuid
+  = lens _rcrClusterUuid
+      (\ s a -> s{_rcrClusterUuid = a})
+
+instance FromJSON RepairClusterRequest where
+        parseJSON
+          = withObject "RepairClusterRequest"
+              (\ o ->
+                 RepairClusterRequest' <$>
+                   (o .:? "requestId") <*> (o .:? "clusterUuid"))
+
+instance ToJSON RepairClusterRequest where
+        toJSON RepairClusterRequest'{..}
+          = object
+              (catMaybes
+                 [("requestId" .=) <$> _rcrRequestId,
+                  ("clusterUuid" .=) <$> _rcrClusterUuid])
+
+-- | A Dataproc workflow template resource.
 --
 -- /See:/ 'workflowMetadata' smart constructor.
 data WorkflowMetadata =
   WorkflowMetadata'
-    { _wmGraph         :: !(Maybe WorkflowGraph)
-    , _wmState         :: !(Maybe WorkflowMetadataState)
-    , _wmClusterUuid   :: !(Maybe Text)
-    , _wmStartTime     :: !(Maybe DateTime')
+    { _wmGraph :: !(Maybe WorkflowGraph)
+    , _wmState :: !(Maybe WorkflowMetadataState)
+    , _wmDagStartTime :: !(Maybe DateTime')
+    , _wmClusterUuid :: !(Maybe Text)
+    , _wmStartTime :: !(Maybe DateTime')
     , _wmDeleteCluster :: !(Maybe ClusterOperation)
     , _wmCreateCluster :: !(Maybe ClusterOperation)
-    , _wmVersion       :: !(Maybe (Textual Int32))
-    , _wmEndTime       :: !(Maybe DateTime')
-    , _wmParameters    :: !(Maybe WorkflowMetadataParameters)
-    , _wmClusterName   :: !(Maybe Text)
-    , _wmTemplate      :: !(Maybe Text)
+    , _wmVersion :: !(Maybe (Textual Int32))
+    , _wmEndTime :: !(Maybe DateTime')
+    , _wmParameters :: !(Maybe WorkflowMetadataParameters)
+    , _wmClusterName :: !(Maybe Text)
+    , _wmDagEndTime :: !(Maybe DateTime')
+    , _wmTemplate :: !(Maybe Text)
+    , _wmDagTimeout :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5157,6 +7416,8 @@ data WorkflowMetadata =
 -- * 'wmGraph'
 --
 -- * 'wmState'
+--
+-- * 'wmDagStartTime'
 --
 -- * 'wmClusterUuid'
 --
@@ -5174,13 +7435,18 @@ data WorkflowMetadata =
 --
 -- * 'wmClusterName'
 --
+-- * 'wmDagEndTime'
+--
 -- * 'wmTemplate'
+--
+-- * 'wmDagTimeout'
 workflowMetadata
     :: WorkflowMetadata
 workflowMetadata =
   WorkflowMetadata'
     { _wmGraph = Nothing
     , _wmState = Nothing
+    , _wmDagStartTime = Nothing
     , _wmClusterUuid = Nothing
     , _wmStartTime = Nothing
     , _wmDeleteCluster = Nothing
@@ -5189,7 +7455,9 @@ workflowMetadata =
     , _wmEndTime = Nothing
     , _wmParameters = Nothing
     , _wmClusterName = Nothing
+    , _wmDagEndTime = Nothing
     , _wmTemplate = Nothing
+    , _wmDagTimeout = Nothing
     }
 
 
@@ -5200,6 +7468,14 @@ wmGraph = lens _wmGraph (\ s a -> s{_wmGraph = a})
 -- | Output only. The workflow state.
 wmState :: Lens' WorkflowMetadata (Maybe WorkflowMetadataState)
 wmState = lens _wmState (\ s a -> s{_wmState = a})
+
+-- | Output only. DAG start time, only set for workflows with dag_timeout
+-- when DAG begins.
+wmDagStartTime :: Lens' WorkflowMetadata (Maybe UTCTime)
+wmDagStartTime
+  = lens _wmDagStartTime
+      (\ s a -> s{_wmDagStartTime = a})
+      . mapping _DateTime
 
 -- | Output only. The UUID of target cluster.
 wmClusterUuid :: Lens' WorkflowMetadata (Maybe Text)
@@ -5249,10 +7525,32 @@ wmClusterName
   = lens _wmClusterName
       (\ s a -> s{_wmClusterName = a})
 
--- | Output only. The \"resource name\" of the template.
+-- | Output only. DAG end time, only set for workflows with dag_timeout when
+-- DAG ends.
+wmDagEndTime :: Lens' WorkflowMetadata (Maybe UTCTime)
+wmDagEndTime
+  = lens _wmDagEndTime (\ s a -> s{_wmDagEndTime = a})
+      . mapping _DateTime
+
+-- | Output only. The resource name of the workflow template as described in
+-- https:\/\/cloud.google.com\/apis\/design\/resource_names. For
+-- projects.regions.workflowTemplates, the resource name of the template
+-- has the following format:
+-- projects\/{project_id}\/regions\/{region}\/workflowTemplates\/{template_id}
+-- For projects.locations.workflowTemplates, the resource name of the
+-- template has the following format:
+-- projects\/{project_id}\/locations\/{location}\/workflowTemplates\/{template_id}
 wmTemplate :: Lens' WorkflowMetadata (Maybe Text)
 wmTemplate
   = lens _wmTemplate (\ s a -> s{_wmTemplate = a})
+
+-- | Output only. The timeout duration for the DAG of jobs, expressed in
+-- seconds (see JSON representation of duration
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
+wmDagTimeout :: Lens' WorkflowMetadata (Maybe Scientific)
+wmDagTimeout
+  = lens _wmDagTimeout (\ s a -> s{_wmDagTimeout = a})
+      . mapping _GDuration
 
 instance FromJSON WorkflowMetadata where
         parseJSON
@@ -5260,7 +7558,8 @@ instance FromJSON WorkflowMetadata where
               (\ o ->
                  WorkflowMetadata' <$>
                    (o .:? "graph") <*> (o .:? "state") <*>
-                     (o .:? "clusterUuid")
+                     (o .:? "dagStartTime")
+                     <*> (o .:? "clusterUuid")
                      <*> (o .:? "startTime")
                      <*> (o .:? "deleteCluster")
                      <*> (o .:? "createCluster")
@@ -5268,7 +7567,9 @@ instance FromJSON WorkflowMetadata where
                      <*> (o .:? "endTime")
                      <*> (o .:? "parameters")
                      <*> (o .:? "clusterName")
-                     <*> (o .:? "template"))
+                     <*> (o .:? "dagEndTime")
+                     <*> (o .:? "template")
+                     <*> (o .:? "dagTimeout"))
 
 instance ToJSON WorkflowMetadata where
         toJSON WorkflowMetadata'{..}
@@ -5276,6 +7577,7 @@ instance ToJSON WorkflowMetadata where
               (catMaybes
                  [("graph" .=) <$> _wmGraph,
                   ("state" .=) <$> _wmState,
+                  ("dagStartTime" .=) <$> _wmDagStartTime,
                   ("clusterUuid" .=) <$> _wmClusterUuid,
                   ("startTime" .=) <$> _wmStartTime,
                   ("deleteCluster" .=) <$> _wmDeleteCluster,
@@ -5284,7 +7586,65 @@ instance ToJSON WorkflowMetadata where
                   ("endTime" .=) <$> _wmEndTime,
                   ("parameters" .=) <$> _wmParameters,
                   ("clusterName" .=) <$> _wmClusterName,
-                  ("template" .=) <$> _wmTemplate])
+                  ("dagEndTime" .=) <$> _wmDagEndTime,
+                  ("template" .=) <$> _wmTemplate,
+                  ("dagTimeout" .=) <$> _wmDagTimeout])
+
+-- | A request to inject credentials into a cluster.
+--
+-- /See:/ 'injectCredentialsRequest' smart constructor.
+data InjectCredentialsRequest =
+  InjectCredentialsRequest'
+    { _icrClusterUuid :: !(Maybe Text)
+    , _icrCredentialsCiphertext :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InjectCredentialsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'icrClusterUuid'
+--
+-- * 'icrCredentialsCiphertext'
+injectCredentialsRequest
+    :: InjectCredentialsRequest
+injectCredentialsRequest =
+  InjectCredentialsRequest'
+    {_icrClusterUuid = Nothing, _icrCredentialsCiphertext = Nothing}
+
+
+-- | Required. The cluster UUID.
+icrClusterUuid :: Lens' InjectCredentialsRequest (Maybe Text)
+icrClusterUuid
+  = lens _icrClusterUuid
+      (\ s a -> s{_icrClusterUuid = a})
+
+-- | Required. The encrypted credentials being injected in to the cluster.The
+-- client is responsible for encrypting the credentials in a way that is
+-- supported by the cluster.A wrapped value is used here so that the actual
+-- contents of the encrypted credentials are not written to audit logs.
+icrCredentialsCiphertext :: Lens' InjectCredentialsRequest (Maybe Text)
+icrCredentialsCiphertext
+  = lens _icrCredentialsCiphertext
+      (\ s a -> s{_icrCredentialsCiphertext = a})
+
+instance FromJSON InjectCredentialsRequest where
+        parseJSON
+          = withObject "InjectCredentialsRequest"
+              (\ o ->
+                 InjectCredentialsRequest' <$>
+                   (o .:? "clusterUuid") <*>
+                     (o .:? "credentialsCiphertext"))
+
+instance ToJSON InjectCredentialsRequest where
+        toJSON InjectCredentialsRequest'{..}
+          = object
+              (catMaybes
+                 [("clusterUuid" .=) <$> _icrClusterUuid,
+                  ("credentialsCiphertext" .=) <$>
+                    _icrCredentialsCiphertext])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as Delete, the response is
@@ -5335,7 +7695,7 @@ instance ToJSON OperationResponse where
 -- /See:/ 'loggingConfigDriverLogLevels' smart constructor.
 newtype LoggingConfigDriverLogLevels =
   LoggingConfigDriverLogLevels'
-    { _lcdllAddtional :: HashMap Text Text
+    { _lcdllAddtional :: HashMap Text LoggingConfigDriverLogLevelsAdditional
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5346,13 +7706,13 @@ newtype LoggingConfigDriverLogLevels =
 --
 -- * 'lcdllAddtional'
 loggingConfigDriverLogLevels
-    :: HashMap Text Text -- ^ 'lcdllAddtional'
+    :: HashMap Text LoggingConfigDriverLogLevelsAdditional -- ^ 'lcdllAddtional'
     -> LoggingConfigDriverLogLevels
 loggingConfigDriverLogLevels pLcdllAddtional_ =
   LoggingConfigDriverLogLevels' {_lcdllAddtional = _Coerce # pLcdllAddtional_}
 
 
-lcdllAddtional :: Lens' LoggingConfigDriverLogLevels (HashMap Text Text)
+lcdllAddtional :: Lens' LoggingConfigDriverLogLevels (HashMap Text LoggingConfigDriverLogLevelsAdditional)
 lcdllAddtional
   = lens _lcdllAddtional
       (\ s a -> s{_lcdllAddtional = a})
@@ -5368,15 +7728,138 @@ instance FromJSON LoggingConfigDriverLogLevels where
 instance ToJSON LoggingConfigDriverLogLevels where
         toJSON = toJSON . _lcdllAddtional
 
+-- | Basic autoscaling configurations for YARN.
+--
+-- /See:/ 'basicYarnAutoscalingConfig' smart constructor.
+data BasicYarnAutoscalingConfig =
+  BasicYarnAutoscalingConfig'
+    { _byacScaleDownFactor :: !(Maybe (Textual Double))
+    , _byacScaleUpFactor :: !(Maybe (Textual Double))
+    , _byacScaleUpMinWorkerFraction :: !(Maybe (Textual Double))
+    , _byacScaleDownMinWorkerFraction :: !(Maybe (Textual Double))
+    , _byacGracefulDecommissionTimeout :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BasicYarnAutoscalingConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'byacScaleDownFactor'
+--
+-- * 'byacScaleUpFactor'
+--
+-- * 'byacScaleUpMinWorkerFraction'
+--
+-- * 'byacScaleDownMinWorkerFraction'
+--
+-- * 'byacGracefulDecommissionTimeout'
+basicYarnAutoscalingConfig
+    :: BasicYarnAutoscalingConfig
+basicYarnAutoscalingConfig =
+  BasicYarnAutoscalingConfig'
+    { _byacScaleDownFactor = Nothing
+    , _byacScaleUpFactor = Nothing
+    , _byacScaleUpMinWorkerFraction = Nothing
+    , _byacScaleDownMinWorkerFraction = Nothing
+    , _byacGracefulDecommissionTimeout = Nothing
+    }
+
+
+-- | Required. Fraction of average YARN pending memory in the last cooldown
+-- period for which to remove workers. A scale-down factor of 1 will result
+-- in scaling down so that there is no available memory remaining after the
+-- update (more aggressive scaling). A scale-down factor of 0 disables
+-- removing workers, which can be beneficial for autoscaling a single job.
+-- See How autoscaling works
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/autoscaling#how_autoscaling_works)
+-- for more information.Bounds: 0.0, 1.0.
+byacScaleDownFactor :: Lens' BasicYarnAutoscalingConfig (Maybe Double)
+byacScaleDownFactor
+  = lens _byacScaleDownFactor
+      (\ s a -> s{_byacScaleDownFactor = a})
+      . mapping _Coerce
+
+-- | Required. Fraction of average YARN pending memory in the last cooldown
+-- period for which to add workers. A scale-up factor of 1.0 will result in
+-- scaling up so that there is no pending memory remaining after the update
+-- (more aggressive scaling). A scale-up factor closer to 0 will result in
+-- a smaller magnitude of scaling up (less aggressive scaling). See How
+-- autoscaling works
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/autoscaling#how_autoscaling_works)
+-- for more information.Bounds: 0.0, 1.0.
+byacScaleUpFactor :: Lens' BasicYarnAutoscalingConfig (Maybe Double)
+byacScaleUpFactor
+  = lens _byacScaleUpFactor
+      (\ s a -> s{_byacScaleUpFactor = a})
+      . mapping _Coerce
+
+-- | Optional. Minimum scale-up threshold as a fraction of total cluster size
+-- before scaling occurs. For example, in a 20-worker cluster, a threshold
+-- of 0.1 means the autoscaler must recommend at least a 2-worker scale-up
+-- for the cluster to scale. A threshold of 0 means the autoscaler will
+-- scale up on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.
+byacScaleUpMinWorkerFraction :: Lens' BasicYarnAutoscalingConfig (Maybe Double)
+byacScaleUpMinWorkerFraction
+  = lens _byacScaleUpMinWorkerFraction
+      (\ s a -> s{_byacScaleUpMinWorkerFraction = a})
+      . mapping _Coerce
+
+-- | Optional. Minimum scale-down threshold as a fraction of total cluster
+-- size before scaling occurs. For example, in a 20-worker cluster, a
+-- threshold of 0.1 means the autoscaler must recommend at least a 2 worker
+-- scale-down for the cluster to scale. A threshold of 0 means the
+-- autoscaler will scale down on any recommended change.Bounds: 0.0, 1.0.
+-- Default: 0.0.
+byacScaleDownMinWorkerFraction :: Lens' BasicYarnAutoscalingConfig (Maybe Double)
+byacScaleDownMinWorkerFraction
+  = lens _byacScaleDownMinWorkerFraction
+      (\ s a -> s{_byacScaleDownMinWorkerFraction = a})
+      . mapping _Coerce
+
+-- | Required. Timeout for YARN graceful decommissioning of Node Managers.
+-- Specifies the duration to wait for jobs to complete before forcefully
+-- removing workers (and potentially interrupting jobs). Only applicable to
+-- downscaling operations.Bounds: 0s, 1d.
+byacGracefulDecommissionTimeout :: Lens' BasicYarnAutoscalingConfig (Maybe Scientific)
+byacGracefulDecommissionTimeout
+  = lens _byacGracefulDecommissionTimeout
+      (\ s a -> s{_byacGracefulDecommissionTimeout = a})
+      . mapping _GDuration
+
+instance FromJSON BasicYarnAutoscalingConfig where
+        parseJSON
+          = withObject "BasicYarnAutoscalingConfig"
+              (\ o ->
+                 BasicYarnAutoscalingConfig' <$>
+                   (o .:? "scaleDownFactor") <*> (o .:? "scaleUpFactor")
+                     <*> (o .:? "scaleUpMinWorkerFraction")
+                     <*> (o .:? "scaleDownMinWorkerFraction")
+                     <*> (o .:? "gracefulDecommissionTimeout"))
+
+instance ToJSON BasicYarnAutoscalingConfig where
+        toJSON BasicYarnAutoscalingConfig'{..}
+          = object
+              (catMaybes
+                 [("scaleDownFactor" .=) <$> _byacScaleDownFactor,
+                  ("scaleUpFactor" .=) <$> _byacScaleUpFactor,
+                  ("scaleUpMinWorkerFraction" .=) <$>
+                    _byacScaleUpMinWorkerFraction,
+                  ("scaleDownMinWorkerFraction" .=) <$>
+                    _byacScaleDownMinWorkerFraction,
+                  ("gracefulDecommissionTimeout" .=) <$>
+                    _byacGracefulDecommissionTimeout])
+
 -- | The status of a cluster and its instances.
 --
 -- /See:/ 'clusterStatus' smart constructor.
 data ClusterStatus =
   ClusterStatus'
-    { _csState          :: !(Maybe ClusterStatusState)
-    , _csSubState       :: !(Maybe ClusterStatusSubState)
+    { _csState :: !(Maybe ClusterStatusState)
+    , _csSubState :: !(Maybe ClusterStatusSubState)
     , _csStateStartTime :: !(Maybe DateTime')
-    , _csDetail         :: !(Maybe Text)
+    , _csDetail :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5413,14 +7896,16 @@ csSubState :: Lens' ClusterStatus (Maybe ClusterStatusSubState)
 csSubState
   = lens _csSubState (\ s a -> s{_csSubState = a})
 
--- | Output only. Time when this state was entered.
+-- | Output only. Time when this state was entered (see JSON representation
+-- of Timestamp
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
 csStateStartTime :: Lens' ClusterStatus (Maybe UTCTime)
 csStateStartTime
   = lens _csStateStartTime
       (\ s a -> s{_csStateStartTime = a})
       . mapping _DateTime
 
--- | Output only. Optional details of cluster\'s state.
+-- | Optional. Output only. Details of cluster\'s state.
 csDetail :: Lens' ClusterStatus (Maybe Text)
 csDetail = lens _csDetail (\ s a -> s{_csDetail = a})
 
@@ -5443,7 +7928,7 @@ instance ToJSON ClusterStatus where
                   ("detail" .=) <$> _csDetail])
 
 -- | A YARN application created by a job. Application information is a subset
--- of 'org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto'.Beta
+-- of org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto.Beta
 -- Feature: This report is available for testing purposes only. It may be
 -- changed before final release.
 --
@@ -5451,9 +7936,9 @@ instance ToJSON ClusterStatus where
 data YarnApplication =
   YarnApplication'
     { _yaTrackingURL :: !(Maybe Text)
-    , _yaState       :: !(Maybe YarnApplicationState)
-    , _yaProgress    :: !(Maybe (Textual Double))
-    , _yaName        :: !(Maybe Text)
+    , _yaState :: !(Maybe YarnApplicationState)
+    , _yaProgress :: !(Maybe (Textual Double))
+    , _yaName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5521,19 +8006,188 @@ instance ToJSON YarnApplication where
                   ("progress" .=) <$> _yaProgress,
                   ("name" .=) <$> _yaName])
 
--- | A Cloud Dataproc job for running Apache Pig (https:\/\/pig.apache.org\/)
+-- | A Dataproc job for running Apache SparkR
+-- (https:\/\/spark.apache.org\/docs\/latest\/sparkr.html) applications on
+-- YARN.
+--
+-- /See:/ 'sparkRJob' smart constructor.
+data SparkRJob =
+  SparkRJob'
+    { _srjArgs :: !(Maybe [Text])
+    , _srjFileURIs :: !(Maybe [Text])
+    , _srjMainRFileURI :: !(Maybe Text)
+    , _srjArchiveURIs :: !(Maybe [Text])
+    , _srjLoggingConfig :: !(Maybe LoggingConfig)
+    , _srjProperties :: !(Maybe SparkRJobProperties)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SparkRJob' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'srjArgs'
+--
+-- * 'srjFileURIs'
+--
+-- * 'srjMainRFileURI'
+--
+-- * 'srjArchiveURIs'
+--
+-- * 'srjLoggingConfig'
+--
+-- * 'srjProperties'
+sparkRJob
+    :: SparkRJob
+sparkRJob =
+  SparkRJob'
+    { _srjArgs = Nothing
+    , _srjFileURIs = Nothing
+    , _srjMainRFileURI = Nothing
+    , _srjArchiveURIs = Nothing
+    , _srjLoggingConfig = Nothing
+    , _srjProperties = Nothing
+    }
+
+
+-- | Optional. The arguments to pass to the driver. Do not include arguments,
+-- such as --conf, that can be set as job properties, since a collision may
+-- occur that causes an incorrect job submission.
+srjArgs :: Lens' SparkRJob [Text]
+srjArgs
+  = lens _srjArgs (\ s a -> s{_srjArgs = a}) . _Default
+      . _Coerce
+
+-- | Optional. HCFS URIs of files to be placed in the working directory of
+-- each executor. Useful for naively parallel tasks.
+srjFileURIs :: Lens' SparkRJob [Text]
+srjFileURIs
+  = lens _srjFileURIs (\ s a -> s{_srjFileURIs = a}) .
+      _Default
+      . _Coerce
+
+-- | Required. The HCFS URI of the main R file to use as the driver. Must be
+-- a .R file.
+srjMainRFileURI :: Lens' SparkRJob (Maybe Text)
+srjMainRFileURI
+  = lens _srjMainRFileURI
+      (\ s a -> s{_srjMainRFileURI = a})
+
+-- | Optional. HCFS URIs of archives to be extracted into the working
+-- directory of each executor. Supported file types: .jar, .tar, .tar.gz,
+-- .tgz, and .zip.
+srjArchiveURIs :: Lens' SparkRJob [Text]
+srjArchiveURIs
+  = lens _srjArchiveURIs
+      (\ s a -> s{_srjArchiveURIs = a})
+      . _Default
+      . _Coerce
+
+-- | Optional. The runtime log config for job execution.
+srjLoggingConfig :: Lens' SparkRJob (Maybe LoggingConfig)
+srjLoggingConfig
+  = lens _srjLoggingConfig
+      (\ s a -> s{_srjLoggingConfig = a})
+
+-- | Optional. A mapping of property names to values, used to configure
+-- SparkR. Properties that conflict with values set by the Dataproc API may
+-- be overwritten. Can include properties set in
+-- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
+srjProperties :: Lens' SparkRJob (Maybe SparkRJobProperties)
+srjProperties
+  = lens _srjProperties
+      (\ s a -> s{_srjProperties = a})
+
+instance FromJSON SparkRJob where
+        parseJSON
+          = withObject "SparkRJob"
+              (\ o ->
+                 SparkRJob' <$>
+                   (o .:? "args" .!= mempty) <*>
+                     (o .:? "fileUris" .!= mempty)
+                     <*> (o .:? "mainRFileUri")
+                     <*> (o .:? "archiveUris" .!= mempty)
+                     <*> (o .:? "loggingConfig")
+                     <*> (o .:? "properties"))
+
+instance ToJSON SparkRJob where
+        toJSON SparkRJob'{..}
+          = object
+              (catMaybes
+                 [("args" .=) <$> _srjArgs,
+                  ("fileUris" .=) <$> _srjFileURIs,
+                  ("mainRFileUri" .=) <$> _srjMainRFileURI,
+                  ("archiveUris" .=) <$> _srjArchiveURIs,
+                  ("loggingConfig" .=) <$> _srjLoggingConfig,
+                  ("properties" .=) <$> _srjProperties])
+
+-- | Endpoint config for this cluster
+--
+-- /See:/ 'endpointConfig' smart constructor.
+data EndpointConfig =
+  EndpointConfig'
+    { _ecEnableHTTPPortAccess :: !(Maybe Bool)
+    , _ecHTTPPorts :: !(Maybe EndpointConfigHTTPPorts)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EndpointConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecEnableHTTPPortAccess'
+--
+-- * 'ecHTTPPorts'
+endpointConfig
+    :: EndpointConfig
+endpointConfig =
+  EndpointConfig' {_ecEnableHTTPPortAccess = Nothing, _ecHTTPPorts = Nothing}
+
+
+-- | Optional. If true, enable http access to specific ports on the cluster
+-- from external sources. Defaults to false.
+ecEnableHTTPPortAccess :: Lens' EndpointConfig (Maybe Bool)
+ecEnableHTTPPortAccess
+  = lens _ecEnableHTTPPortAccess
+      (\ s a -> s{_ecEnableHTTPPortAccess = a})
+
+-- | Output only. The map of port descriptions to URLs. Will only be
+-- populated if enable_http_port_access is true.
+ecHTTPPorts :: Lens' EndpointConfig (Maybe EndpointConfigHTTPPorts)
+ecHTTPPorts
+  = lens _ecHTTPPorts (\ s a -> s{_ecHTTPPorts = a})
+
+instance FromJSON EndpointConfig where
+        parseJSON
+          = withObject "EndpointConfig"
+              (\ o ->
+                 EndpointConfig' <$>
+                   (o .:? "enableHttpPortAccess") <*>
+                     (o .:? "httpPorts"))
+
+instance ToJSON EndpointConfig where
+        toJSON EndpointConfig'{..}
+          = object
+              (catMaybes
+                 [("enableHttpPortAccess" .=) <$>
+                    _ecEnableHTTPPortAccess,
+                  ("httpPorts" .=) <$> _ecHTTPPorts])
+
+-- | A Dataproc job for running Apache Pig (https:\/\/pig.apache.org\/)
 -- queries on YARN.
 --
 -- /See:/ 'pigJob' smart constructor.
 data PigJob =
   PigJob'
-    { _pjQueryFileURI      :: !(Maybe Text)
-    , _pjJarFileURIs       :: !(Maybe [Text])
-    , _pjScriptVariables   :: !(Maybe PigJobScriptVariables)
-    , _pjQueryList         :: !(Maybe QueryList)
-    , _pjContinueOnFailure :: !(Maybe Bool)
-    , _pjLoggingConfig     :: !(Maybe LoggingConfig)
-    , _pjProperties        :: !(Maybe PigJobProperties)
+    { _pQueryFileURI :: !(Maybe Text)
+    , _pJarFileURIs :: !(Maybe [Text])
+    , _pScriptVariables :: !(Maybe PigJobScriptVariables)
+    , _pQueryList :: !(Maybe QueryList)
+    , _pContinueOnFailure :: !(Maybe Bool)
+    , _pLoggingConfig :: !(Maybe LoggingConfig)
+    , _pProperties :: !(Maybe PigJobProperties)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -5542,82 +8196,81 @@ data PigJob =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pjQueryFileURI'
+-- * 'pQueryFileURI'
 --
--- * 'pjJarFileURIs'
+-- * 'pJarFileURIs'
 --
--- * 'pjScriptVariables'
+-- * 'pScriptVariables'
 --
--- * 'pjQueryList'
+-- * 'pQueryList'
 --
--- * 'pjContinueOnFailure'
+-- * 'pContinueOnFailure'
 --
--- * 'pjLoggingConfig'
+-- * 'pLoggingConfig'
 --
--- * 'pjProperties'
+-- * 'pProperties'
 pigJob
     :: PigJob
 pigJob =
   PigJob'
-    { _pjQueryFileURI = Nothing
-    , _pjJarFileURIs = Nothing
-    , _pjScriptVariables = Nothing
-    , _pjQueryList = Nothing
-    , _pjContinueOnFailure = Nothing
-    , _pjLoggingConfig = Nothing
-    , _pjProperties = Nothing
+    { _pQueryFileURI = Nothing
+    , _pJarFileURIs = Nothing
+    , _pScriptVariables = Nothing
+    , _pQueryList = Nothing
+    , _pContinueOnFailure = Nothing
+    , _pLoggingConfig = Nothing
+    , _pProperties = Nothing
     }
 
 
 -- | The HCFS URI of the script that contains the Pig queries.
-pjQueryFileURI :: Lens' PigJob (Maybe Text)
-pjQueryFileURI
-  = lens _pjQueryFileURI
-      (\ s a -> s{_pjQueryFileURI = a})
+pQueryFileURI :: Lens' PigJob (Maybe Text)
+pQueryFileURI
+  = lens _pQueryFileURI
+      (\ s a -> s{_pQueryFileURI = a})
 
 -- | Optional. HCFS URIs of jar files to add to the CLASSPATH of the Pig
 -- Client and Hadoop MapReduce (MR) tasks. Can contain Pig UDFs.
-pjJarFileURIs :: Lens' PigJob [Text]
-pjJarFileURIs
-  = lens _pjJarFileURIs
-      (\ s a -> s{_pjJarFileURIs = a})
+pJarFileURIs :: Lens' PigJob [Text]
+pJarFileURIs
+  = lens _pJarFileURIs (\ s a -> s{_pJarFileURIs = a})
       . _Default
       . _Coerce
 
 -- | Optional. Mapping of query variable names to values (equivalent to the
 -- Pig command: name=[value]).
-pjScriptVariables :: Lens' PigJob (Maybe PigJobScriptVariables)
-pjScriptVariables
-  = lens _pjScriptVariables
-      (\ s a -> s{_pjScriptVariables = a})
+pScriptVariables :: Lens' PigJob (Maybe PigJobScriptVariables)
+pScriptVariables
+  = lens _pScriptVariables
+      (\ s a -> s{_pScriptVariables = a})
 
 -- | A list of queries.
-pjQueryList :: Lens' PigJob (Maybe QueryList)
-pjQueryList
-  = lens _pjQueryList (\ s a -> s{_pjQueryList = a})
+pQueryList :: Lens' PigJob (Maybe QueryList)
+pQueryList
+  = lens _pQueryList (\ s a -> s{_pQueryList = a})
 
 -- | Optional. Whether to continue executing queries if a query fails. The
 -- default value is false. Setting to true can be useful when executing
 -- independent parallel queries.
-pjContinueOnFailure :: Lens' PigJob (Maybe Bool)
-pjContinueOnFailure
-  = lens _pjContinueOnFailure
-      (\ s a -> s{_pjContinueOnFailure = a})
+pContinueOnFailure :: Lens' PigJob (Maybe Bool)
+pContinueOnFailure
+  = lens _pContinueOnFailure
+      (\ s a -> s{_pContinueOnFailure = a})
 
 -- | Optional. The runtime log config for job execution.
-pjLoggingConfig :: Lens' PigJob (Maybe LoggingConfig)
-pjLoggingConfig
-  = lens _pjLoggingConfig
-      (\ s a -> s{_pjLoggingConfig = a})
+pLoggingConfig :: Lens' PigJob (Maybe LoggingConfig)
+pLoggingConfig
+  = lens _pLoggingConfig
+      (\ s a -> s{_pLoggingConfig = a})
 
 -- | Optional. A mapping of property names to values, used to configure Pig.
--- Properties that conflict with values set by the Cloud Dataproc API may
--- be overwritten. Can include properties set in
+-- Properties that conflict with values set by the Dataproc API may be
+-- overwritten. Can include properties set in
 -- \/etc\/hadoop\/conf\/*-site.xml, \/etc\/pig\/conf\/pig.properties, and
 -- classes in user code.
-pjProperties :: Lens' PigJob (Maybe PigJobProperties)
-pjProperties
-  = lens _pjProperties (\ s a -> s{_pjProperties = a})
+pProperties :: Lens' PigJob (Maybe PigJobProperties)
+pProperties
+  = lens _pProperties (\ s a -> s{_pProperties = a})
 
 instance FromJSON PigJob where
         parseJSON
@@ -5636,13 +8289,51 @@ instance ToJSON PigJob where
         toJSON PigJob'{..}
           = object
               (catMaybes
-                 [("queryFileUri" .=) <$> _pjQueryFileURI,
-                  ("jarFileUris" .=) <$> _pjJarFileURIs,
-                  ("scriptVariables" .=) <$> _pjScriptVariables,
-                  ("queryList" .=) <$> _pjQueryList,
-                  ("continueOnFailure" .=) <$> _pjContinueOnFailure,
-                  ("loggingConfig" .=) <$> _pjLoggingConfig,
-                  ("properties" .=) <$> _pjProperties])
+                 [("queryFileUri" .=) <$> _pQueryFileURI,
+                  ("jarFileUris" .=) <$> _pJarFileURIs,
+                  ("scriptVariables" .=) <$> _pScriptVariables,
+                  ("queryList" .=) <$> _pQueryList,
+                  ("continueOnFailure" .=) <$> _pContinueOnFailure,
+                  ("loggingConfig" .=) <$> _pLoggingConfig,
+                  ("properties" .=) <$> _pProperties])
+
+-- | Optional. A mapping of property names to values. Used to set Presto
+-- session properties
+-- (https:\/\/prestodb.io\/docs\/current\/sql\/set-session.html) Equivalent
+-- to using the --session flag in the Presto CLI
+--
+-- /See:/ 'prestoJobProperties' smart constructor.
+newtype PrestoJobProperties =
+  PrestoJobProperties'
+    { _pAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PrestoJobProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pAddtional'
+prestoJobProperties
+    :: HashMap Text Text -- ^ 'pAddtional'
+    -> PrestoJobProperties
+prestoJobProperties pPAddtional_ =
+  PrestoJobProperties' {_pAddtional = _Coerce # pPAddtional_}
+
+
+pAddtional :: Lens' PrestoJobProperties (HashMap Text Text)
+pAddtional
+  = lens _pAddtional (\ s a -> s{_pAddtional = a}) .
+      _Coerce
+
+instance FromJSON PrestoJobProperties where
+        parseJSON
+          = withObject "PrestoJobProperties"
+              (\ o -> PrestoJobProperties' <$> (parseJSONObject o))
+
+instance ToJSON PrestoJobProperties where
+        toJSON = toJSON . _pAddtional
 
 -- | The runtime logging config of the job.
 --
@@ -5688,8 +8379,8 @@ instance ToJSON LoggingConfig where
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -5716,11 +8407,27 @@ binding =
 -- without a Google account. allAuthenticatedUsers: A special identifier
 -- that represents anyone who is authenticated with a Google account or a
 -- service account. user:{emailid}: An email address that represents a
--- specific Google account. For example, alice\'gmail.com .
+-- specific Google account. For example, alice\'example.com .
 -- serviceAccount:{emailid}: An email address that represents a service
 -- account. For example, my-other-app\'appspot.gserviceaccount.com.
 -- group:{emailid}: An email address that represents a Google group. For
--- example, admins\'example.com. domain:{domain}: The G Suite domain
+-- example, admins\'example.com. deleted:user:{emailid}?uid={uniqueid}: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- alice\'example.com?uid=123456789012345678901. If the user is recovered,
+-- this value reverts to user:{emailid} and the recovered user retains the
+-- role in the binding. deleted:serviceAccount:{emailid}?uid={uniqueid}: An
+-- email address (plus unique identifier) representing a service account
+-- that has been recently deleted. For example,
+-- my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901. If
+-- the service account is undeleted, this value reverts to
+-- serviceAccount:{emailid} and the undeleted service account retains the
+-- role in the binding. deleted:group:{emailid}?uid={uniqueid}: An email
+-- address (plus unique identifier) representing a Google group that has
+-- been recently deleted. For example,
+-- admins\'example.com?uid=123456789012345678901. If the group is
+-- recovered, this value reverts to group:{emailid} and the recovered group
+-- retains the role in the binding. domain:{domain}: The G Suite domain
 -- (primary) that represents all the users of that domain. For example,
 -- google.com or example.com.
 bMembers :: Lens' Binding [Text]
@@ -5734,9 +8441,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding.If the condition
+-- evaluates to true, then this binding applies to the current request.If
+-- the condition evaluates to false, then this binding does not apply to
+-- the current request. However, a different role binding might grant the
+-- same role to one or more of the members in this binding.To learn which
+-- resources support conditions in their IAM policies, see the IAM
+-- documentation
+-- (https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -5756,3 +8468,44 @@ instance ToJSON Binding where
                  [("members" .=) <$> _bMembers,
                   ("role" .=) <$> _bRole,
                   ("condition" .=) <$> _bCondition])
+
+-- | The GKE config for this cluster.
+--
+-- /See:/ 'gkeClusterConfig' smart constructor.
+newtype GkeClusterConfig =
+  GkeClusterConfig'
+    { _gccNamespacedGkeDeploymentTarget :: Maybe NamespacedGkeDeploymentTarget
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GkeClusterConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gccNamespacedGkeDeploymentTarget'
+gkeClusterConfig
+    :: GkeClusterConfig
+gkeClusterConfig =
+  GkeClusterConfig' {_gccNamespacedGkeDeploymentTarget = Nothing}
+
+
+-- | Optional. A target for the deployment.
+gccNamespacedGkeDeploymentTarget :: Lens' GkeClusterConfig (Maybe NamespacedGkeDeploymentTarget)
+gccNamespacedGkeDeploymentTarget
+  = lens _gccNamespacedGkeDeploymentTarget
+      (\ s a -> s{_gccNamespacedGkeDeploymentTarget = a})
+
+instance FromJSON GkeClusterConfig where
+        parseJSON
+          = withObject "GkeClusterConfig"
+              (\ o ->
+                 GkeClusterConfig' <$>
+                   (o .:? "namespacedGkeDeploymentTarget"))
+
+instance ToJSON GkeClusterConfig where
+        toJSON GkeClusterConfig'{..}
+          = object
+              (catMaybes
+                 [("namespacedGkeDeploymentTarget" .=) <$>
+                    _gccNamespacedGkeDeploymentTarget])

@@ -46,8 +46,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClearByDataFilter
     , svbcbdfCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchClearByDataFilter@ method which the
 -- 'SpreadsheetsValuesBatchClearByDataFilter' request conforms to.
@@ -75,13 +75,13 @@ type SpreadsheetsValuesBatchClearByDataFilterResource
 -- /See:/ 'spreadsheetsValuesBatchClearByDataFilter' smart constructor.
 data SpreadsheetsValuesBatchClearByDataFilter =
   SpreadsheetsValuesBatchClearByDataFilter'
-    { _svbcbdfXgafv          :: !(Maybe Xgafv)
+    { _svbcbdfXgafv :: !(Maybe Xgafv)
     , _svbcbdfUploadProtocol :: !(Maybe Text)
-    , _svbcbdfAccessToken    :: !(Maybe Text)
-    , _svbcbdfSpreadsheetId  :: !Text
-    , _svbcbdfUploadType     :: !(Maybe Text)
-    , _svbcbdfPayload        :: !BatchClearValuesByDataFilterRequest
-    , _svbcbdfCallback       :: !(Maybe Text)
+    , _svbcbdfAccessToken :: !(Maybe Text)
+    , _svbcbdfSpreadsheetId :: !Text
+    , _svbcbdfUploadType :: !(Maybe Text)
+    , _svbcbdfPayload :: !BatchClearValuesByDataFilterRequest
+    , _svbcbdfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

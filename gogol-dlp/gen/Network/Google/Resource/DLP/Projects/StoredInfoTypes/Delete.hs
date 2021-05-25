@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Projects.StoredInfoTypes.Delete
     , psitdCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.storedInfoTypes.delete@ method which the
 -- 'ProjectsStoredInfoTypesDelete' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsStoredInfoTypesDeleteResource =
 -- /See:/ 'projectsStoredInfoTypesDelete' smart constructor.
 data ProjectsStoredInfoTypesDelete =
   ProjectsStoredInfoTypesDelete'
-    { _psitdXgafv          :: !(Maybe Xgafv)
+    { _psitdXgafv :: !(Maybe Xgafv)
     , _psitdUploadProtocol :: !(Maybe Text)
-    , _psitdAccessToken    :: !(Maybe Text)
-    , _psitdUploadType     :: !(Maybe Text)
-    , _psitdName           :: !Text
-    , _psitdCallback       :: !(Maybe Text)
+    , _psitdAccessToken :: !(Maybe Text)
+    , _psitdUploadType :: !(Maybe Text)
+    , _psitdName :: !Text
+    , _psitdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,8 +128,9 @@ psitdUploadType
   = lens _psitdUploadType
       (\ s a -> s{_psitdUploadType = a})
 
--- | Resource name of the organization and storedInfoType to be deleted, for
--- example \`organizations\/433245324\/storedInfoTypes\/432452342\` or
+-- | Required. Resource name of the organization and storedInfoType to be
+-- deleted, for example
+-- \`organizations\/433245324\/storedInfoTypes\/432452342\` or
 -- projects\/project-id\/storedInfoTypes\/432452342.
 psitdName :: Lens' ProjectsStoredInfoTypesDelete Text
 psitdName

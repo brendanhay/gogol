@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Subnetworks.Delete
     , sdRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.delete@ method which the
 -- 'SubnetworksDelete' request conforms to.
@@ -61,10 +61,10 @@ type SubnetworksDeleteResource =
 -- /See:/ 'subnetworksDelete' smart constructor.
 data SubnetworksDelete =
   SubnetworksDelete'
-    { _sdRequestId  :: !(Maybe Text)
-    , _sdProject    :: !Text
+    { _sdRequestId :: !(Maybe Text)
+    , _sdProject :: !Text
     , _sdSubnetwork :: !Text
-    , _sdRegion     :: !Text
+    , _sdRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

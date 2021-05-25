@@ -34,6 +34,7 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.GetIAMPoli
     , ProjectsLocationsDataSetsGetIAMPolicy
 
     -- * Request Lenses
+    , pldsgipOptionsRequestedPolicyVersion
     , pldsgipXgafv
     , pldsgipUploadProtocol
     , pldsgipAccessToken
@@ -42,20 +43,23 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.GetIAMPoli
     , pldsgipCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.getIamPolicy@ method which the
 -- 'ProjectsLocationsDataSetsGetIAMPolicy' request conforms to.
 type ProjectsLocationsDataSetsGetIAMPolicyResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -63,12 +67,13 @@ type ProjectsLocationsDataSetsGetIAMPolicyResource =
 -- /See:/ 'projectsLocationsDataSetsGetIAMPolicy' smart constructor.
 data ProjectsLocationsDataSetsGetIAMPolicy =
   ProjectsLocationsDataSetsGetIAMPolicy'
-    { _pldsgipXgafv          :: !(Maybe Xgafv)
+    { _pldsgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _pldsgipXgafv :: !(Maybe Xgafv)
     , _pldsgipUploadProtocol :: !(Maybe Text)
-    , _pldsgipAccessToken    :: !(Maybe Text)
-    , _pldsgipUploadType     :: !(Maybe Text)
-    , _pldsgipResource       :: !Text
-    , _pldsgipCallback       :: !(Maybe Text)
+    , _pldsgipAccessToken :: !(Maybe Text)
+    , _pldsgipUploadType :: !(Maybe Text)
+    , _pldsgipResource :: !Text
+    , _pldsgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,6 +81,8 @@ data ProjectsLocationsDataSetsGetIAMPolicy =
 -- | Creates a value of 'ProjectsLocationsDataSetsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pldsgipOptionsRequestedPolicyVersion'
 --
 -- * 'pldsgipXgafv'
 --
@@ -93,7 +100,8 @@ projectsLocationsDataSetsGetIAMPolicy
     -> ProjectsLocationsDataSetsGetIAMPolicy
 projectsLocationsDataSetsGetIAMPolicy pPldsgipResource_ =
   ProjectsLocationsDataSetsGetIAMPolicy'
-    { _pldsgipXgafv = Nothing
+    { _pldsgipOptionsRequestedPolicyVersion = Nothing
+    , _pldsgipXgafv = Nothing
     , _pldsgipUploadProtocol = Nothing
     , _pldsgipAccessToken = Nothing
     , _pldsgipUploadType = Nothing
@@ -101,6 +109,20 @@ projectsLocationsDataSetsGetIAMPolicy pPldsgipResource_ =
     , _pldsgipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+pldsgipOptionsRequestedPolicyVersion :: Lens' ProjectsLocationsDataSetsGetIAMPolicy (Maybe Int32)
+pldsgipOptionsRequestedPolicyVersion
+  = lens _pldsgipOptionsRequestedPolicyVersion
+      (\ s a ->
+         s{_pldsgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 pldsgipXgafv :: Lens' ProjectsLocationsDataSetsGetIAMPolicy (Maybe Xgafv)
@@ -147,7 +169,9 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient
           ProjectsLocationsDataSetsGetIAMPolicy'{..}
-          = go _pldsgipResource _pldsgipXgafv
+          = go _pldsgipResource
+              _pldsgipOptionsRequestedPolicyVersion
+              _pldsgipXgafv
               _pldsgipUploadProtocol
               _pldsgipAccessToken
               _pldsgipUploadType

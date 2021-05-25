@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Contacts.Get
     , cgId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.get@ method which the
 -- 'ContactsGet' request conforms to.

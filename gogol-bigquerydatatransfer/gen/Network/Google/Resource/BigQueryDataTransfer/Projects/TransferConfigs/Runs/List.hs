@@ -22,7 +22,7 @@
 --
 -- Returns information about running and completed jobs.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.runs.list@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.runs.list@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Runs.List
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Run
     , ptcrlCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.runs.list@ method which the
 -- 'ProjectsTransferConfigsRunsList' request conforms to.
@@ -54,8 +54,12 @@ type ProjectsTransferConfigsRunsListResource =
      "v1" :>
        Capture "parent" Text :>
          "runs" :>
-           QueryParam "runAttempt" Text :>
-             QueryParams "states" Text :>
+           QueryParam "runAttempt"
+             ProjectsTransferConfigsRunsListRunAttempt
+             :>
+             QueryParams "states"
+               ProjectsTransferConfigsRunsListStates
+               :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
@@ -71,16 +75,16 @@ type ProjectsTransferConfigsRunsListResource =
 -- /See:/ 'projectsTransferConfigsRunsList' smart constructor.
 data ProjectsTransferConfigsRunsList =
   ProjectsTransferConfigsRunsList'
-    { _ptcrlRunAttempt     :: !(Maybe Text)
-    , _ptcrlParent         :: !Text
-    , _ptcrlStates         :: !(Maybe [Text])
-    , _ptcrlXgafv          :: !(Maybe Xgafv)
+    { _ptcrlRunAttempt :: !(Maybe ProjectsTransferConfigsRunsListRunAttempt)
+    , _ptcrlParent :: !Text
+    , _ptcrlStates :: !(Maybe [ProjectsTransferConfigsRunsListStates])
+    , _ptcrlXgafv :: !(Maybe Xgafv)
     , _ptcrlUploadProtocol :: !(Maybe Text)
-    , _ptcrlAccessToken    :: !(Maybe Text)
-    , _ptcrlUploadType     :: !(Maybe Text)
-    , _ptcrlPageToken      :: !(Maybe Text)
-    , _ptcrlPageSize       :: !(Maybe (Textual Int32))
-    , _ptcrlCallback       :: !(Maybe Text)
+    , _ptcrlAccessToken :: !(Maybe Text)
+    , _ptcrlUploadType :: !(Maybe Text)
+    , _ptcrlPageToken :: !(Maybe Text)
+    , _ptcrlPageSize :: !(Maybe (Textual Int32))
+    , _ptcrlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -127,20 +131,21 @@ projectsTransferConfigsRunsList pPtcrlParent_ =
 
 
 -- | Indicates how run attempts are to be pulled.
-ptcrlRunAttempt :: Lens' ProjectsTransferConfigsRunsList (Maybe Text)
+ptcrlRunAttempt :: Lens' ProjectsTransferConfigsRunsList (Maybe ProjectsTransferConfigsRunsListRunAttempt)
 ptcrlRunAttempt
   = lens _ptcrlRunAttempt
       (\ s a -> s{_ptcrlRunAttempt = a})
 
--- | Name of transfer configuration for which transfer runs should be
--- retrieved. Format of transfer configuration resource name is:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`.
+-- | Required. Name of transfer configuration for which transfer runs should
+-- be retrieved. Format of transfer configuration resource name is:
+-- \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`.
 ptcrlParent :: Lens' ProjectsTransferConfigsRunsList Text
 ptcrlParent
   = lens _ptcrlParent (\ s a -> s{_ptcrlParent = a})
 
 -- | When specified, only transfer runs with requested states are returned.
-ptcrlStates :: Lens' ProjectsTransferConfigsRunsList [Text]
+ptcrlStates :: Lens' ProjectsTransferConfigsRunsList [ProjectsTransferConfigsRunsListStates]
 ptcrlStates
   = lens _ptcrlStates (\ s a -> s{_ptcrlStates = a}) .
       _Default

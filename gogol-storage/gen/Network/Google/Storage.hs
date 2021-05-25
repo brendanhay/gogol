@@ -209,7 +209,6 @@ module Network.Google.Storage
     , Expr
     , expr
     , eLocation
-    , eKind
     , eExpression
     , eTitle
     , eDescription
@@ -286,9 +285,13 @@ module Network.Google.Storage
     -- ** BucketLifecycleRuleItemCondition
     , BucketLifecycleRuleItemCondition
     , bucketLifecycleRuleItemCondition
+    , blricNoncurrentTimeBefore
+    , blricDaysSinceCustomTime
     , blricAge
+    , blricDaysSinceNoncurrentTime
     , blricIsLive
     , blricNumNewerVersions
+    , blricCustomTimeBefore
     , blricMatchesStorageClass
     , blricMatchesPattern
     , blricCreatedBefore
@@ -352,6 +355,7 @@ module Network.Google.Storage
     -- ** Bucket
     , Bucket
     , bucket
+    , bucSatisfiesPZS
     , bucEtag
     , bucLocation
     , bucIAMConfiguration
@@ -361,6 +365,7 @@ module Network.Google.Storage
     , bucLifecycle
     , bucOwner
     , bucRetentionPolicy
+    , bucZoneAffinity
     , bucSelfLink
     , bucName
     , bucEncryption
@@ -370,6 +375,7 @@ module Network.Google.Storage
     , bucTimeCreated
     , bucId
     , bucLabels
+    , bucLocationType
     , bucUpdated
     , bucDefaultObjectACL
     , bucBilling
@@ -509,6 +515,7 @@ module Network.Google.Storage
     , objMetageneration
     , objGeneration
     , objACL
+    , objCustomTime
     , objContentDisPosition
     , objMD5Hash
     , objContentType
@@ -585,12 +592,21 @@ module Network.Google.Storage
     , pEtag
     , pResourceId
     , pKind
+    , pVersion
     , pBindings
+
+    -- ** BucketIAMConfigurationUniformBucketLevelAccess
+    , BucketIAMConfigurationUniformBucketLevelAccess
+    , bucketIAMConfigurationUniformBucketLevelAccess
+    , bicublaLockedTime
+    , bicublaEnabled
 
     -- ** BucketIAMConfiguration
     , BucketIAMConfiguration
     , bucketIAMConfiguration
     , bicBucketPolicyOnly
+    , bicUniformBucketLevelAccess
+    , bicPublicAccessPrevention
 
     -- ** BucketsPatchPredefinedACL
     , BucketsPatchPredefinedACL (..)
@@ -646,60 +662,60 @@ module Network.Google.Storage
     , ObjectsRewriteProjection (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.Storage.BucketAccessControls.Delete
-import           Network.Google.Resource.Storage.BucketAccessControls.Get
-import           Network.Google.Resource.Storage.BucketAccessControls.Insert
-import           Network.Google.Resource.Storage.BucketAccessControls.List
-import           Network.Google.Resource.Storage.BucketAccessControls.Patch
-import           Network.Google.Resource.Storage.BucketAccessControls.Update
-import           Network.Google.Resource.Storage.Buckets.Delete
-import           Network.Google.Resource.Storage.Buckets.Get
-import           Network.Google.Resource.Storage.Buckets.GetIAMPolicy
-import           Network.Google.Resource.Storage.Buckets.Insert
-import           Network.Google.Resource.Storage.Buckets.List
-import           Network.Google.Resource.Storage.Buckets.LockRetentionPolicy
-import           Network.Google.Resource.Storage.Buckets.Patch
-import           Network.Google.Resource.Storage.Buckets.SetIAMPolicy
-import           Network.Google.Resource.Storage.Buckets.TestIAMPermissions
-import           Network.Google.Resource.Storage.Buckets.Update
-import           Network.Google.Resource.Storage.Channels.Stop
-import           Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
-import           Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
-import           Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
-import           Network.Google.Resource.Storage.DefaultObjectAccessControls.List
-import           Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
-import           Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
-import           Network.Google.Resource.Storage.Notifications.Delete
-import           Network.Google.Resource.Storage.Notifications.Get
-import           Network.Google.Resource.Storage.Notifications.Insert
-import           Network.Google.Resource.Storage.Notifications.List
-import           Network.Google.Resource.Storage.ObjectAccessControls.Delete
-import           Network.Google.Resource.Storage.ObjectAccessControls.Get
-import           Network.Google.Resource.Storage.ObjectAccessControls.Insert
-import           Network.Google.Resource.Storage.ObjectAccessControls.List
-import           Network.Google.Resource.Storage.ObjectAccessControls.Patch
-import           Network.Google.Resource.Storage.ObjectAccessControls.Update
-import           Network.Google.Resource.Storage.Objects.Compose
-import           Network.Google.Resource.Storage.Objects.Copy
-import           Network.Google.Resource.Storage.Objects.Delete
-import           Network.Google.Resource.Storage.Objects.Get
-import           Network.Google.Resource.Storage.Objects.GetIAMPolicy
-import           Network.Google.Resource.Storage.Objects.Insert
-import           Network.Google.Resource.Storage.Objects.List
-import           Network.Google.Resource.Storage.Objects.Patch
-import           Network.Google.Resource.Storage.Objects.Rewrite
-import           Network.Google.Resource.Storage.Objects.SetIAMPolicy
-import           Network.Google.Resource.Storage.Objects.TestIAMPermissions
-import           Network.Google.Resource.Storage.Objects.Update
-import           Network.Google.Resource.Storage.Objects.WatchAll
-import           Network.Google.Resource.Storage.Projects.HmacKeys.Create
-import           Network.Google.Resource.Storage.Projects.HmacKeys.Delete
-import           Network.Google.Resource.Storage.Projects.HmacKeys.Get
-import           Network.Google.Resource.Storage.Projects.HmacKeys.List
-import           Network.Google.Resource.Storage.Projects.HmacKeys.Update
-import           Network.Google.Resource.Storage.Projects.ServiceAccount.Get
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Resource.Storage.BucketAccessControls.Delete
+import Network.Google.Resource.Storage.BucketAccessControls.Get
+import Network.Google.Resource.Storage.BucketAccessControls.Insert
+import Network.Google.Resource.Storage.BucketAccessControls.List
+import Network.Google.Resource.Storage.BucketAccessControls.Patch
+import Network.Google.Resource.Storage.BucketAccessControls.Update
+import Network.Google.Resource.Storage.Buckets.Delete
+import Network.Google.Resource.Storage.Buckets.Get
+import Network.Google.Resource.Storage.Buckets.GetIAMPolicy
+import Network.Google.Resource.Storage.Buckets.Insert
+import Network.Google.Resource.Storage.Buckets.List
+import Network.Google.Resource.Storage.Buckets.LockRetentionPolicy
+import Network.Google.Resource.Storage.Buckets.Patch
+import Network.Google.Resource.Storage.Buckets.SetIAMPolicy
+import Network.Google.Resource.Storage.Buckets.TestIAMPermissions
+import Network.Google.Resource.Storage.Buckets.Update
+import Network.Google.Resource.Storage.Channels.Stop
+import Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
+import Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
+import Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
+import Network.Google.Resource.Storage.DefaultObjectAccessControls.List
+import Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
+import Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
+import Network.Google.Resource.Storage.Notifications.Delete
+import Network.Google.Resource.Storage.Notifications.Get
+import Network.Google.Resource.Storage.Notifications.Insert
+import Network.Google.Resource.Storage.Notifications.List
+import Network.Google.Resource.Storage.ObjectAccessControls.Delete
+import Network.Google.Resource.Storage.ObjectAccessControls.Get
+import Network.Google.Resource.Storage.ObjectAccessControls.Insert
+import Network.Google.Resource.Storage.ObjectAccessControls.List
+import Network.Google.Resource.Storage.ObjectAccessControls.Patch
+import Network.Google.Resource.Storage.ObjectAccessControls.Update
+import Network.Google.Resource.Storage.Objects.Compose
+import Network.Google.Resource.Storage.Objects.Copy
+import Network.Google.Resource.Storage.Objects.Delete
+import Network.Google.Resource.Storage.Objects.Get
+import Network.Google.Resource.Storage.Objects.GetIAMPolicy
+import Network.Google.Resource.Storage.Objects.Insert
+import Network.Google.Resource.Storage.Objects.List
+import Network.Google.Resource.Storage.Objects.Patch
+import Network.Google.Resource.Storage.Objects.Rewrite
+import Network.Google.Resource.Storage.Objects.SetIAMPolicy
+import Network.Google.Resource.Storage.Objects.TestIAMPermissions
+import Network.Google.Resource.Storage.Objects.Update
+import Network.Google.Resource.Storage.Objects.WatchAll
+import Network.Google.Resource.Storage.Projects.HmacKeys.Create
+import Network.Google.Resource.Storage.Projects.HmacKeys.Delete
+import Network.Google.Resource.Storage.Projects.HmacKeys.Get
+import Network.Google.Resource.Storage.Projects.HmacKeys.List
+import Network.Google.Resource.Storage.Projects.HmacKeys.Update
+import Network.Google.Resource.Storage.Projects.ServiceAccount.Get
+import Network.Google.Storage.Types
 
 {- $resources
 TODO

@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Interconnects.Patch
     , ipInterconnect
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnects.patch@ method which the
 -- 'InterconnectsPatch' request conforms to.
@@ -66,9 +66,9 @@ type InterconnectsPatchResource =
 -- /See:/ 'interconnectsPatch' smart constructor.
 data InterconnectsPatch =
   InterconnectsPatch'
-    { _ipRequestId    :: !(Maybe Text)
-    , _ipProject      :: !Text
-    , _ipPayload      :: !Interconnect
+    { _ipRequestId :: !(Maybe Text)
+    , _ipProject :: !Text
+    , _ipPayload :: !Interconnect
     , _ipInterconnect :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

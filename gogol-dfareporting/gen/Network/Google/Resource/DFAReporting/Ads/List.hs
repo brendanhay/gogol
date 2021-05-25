@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of ads, possibly filtered. This method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.ads.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.ads.list@.
 module Network.Google.Resource.DFAReporting.Ads.List
     (
     -- * REST Resource
@@ -33,14 +33,18 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , AdsList
 
     -- * Request Lenses
+    , alXgafv
     , alRemarketingListIds
     , alLandingPageIds
+    , alUploadProtocol
     , alCreativeIds
+    , alAccessToken
     , alAdvertiserId
     , alCampaignIds
     , alSearchString
     , alSizeIds
     , alSSLCompliant
+    , alUploadType
     , alIds
     , alProFileId
     , alSortOrder
@@ -56,100 +60,126 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , alCompatibility
     , alArchived
     , alMaxResults
+    , alCallback
     , alAudienceSegmentIds
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.list@ method which the
 -- 'AdsList' request conforms to.
 type AdsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
-               QueryParams "remarketingListIds" (Textual Int64) :>
-                 QueryParams "landingPageIds" (Textual Int64) :>
-                   QueryParams "creativeIds" (Textual Int64) :>
-                     QueryParam "advertiserId" (Textual Int64) :>
-                       QueryParams "campaignIds" (Textual Int64) :>
-                         QueryParam "searchString" Text :>
-                           QueryParams "sizeIds" (Textual Int64) :>
-                             QueryParam "sslCompliant" Bool :>
-                               QueryParams "ids" (Textual Int64) :>
-                                 QueryParam "sortOrder" AdsListSortOrder :>
-                                   QueryParam "active" Bool :>
-                                     QueryParams
-                                       "creativeOptimizationConfigurationIds"
-                                       (Textual Int64)
-                                       :>
-                                       QueryParams "placementIds"
-                                         (Textual Int64)
-                                         :>
-                                         QueryParam "sslRequired" Bool :>
-                                           QueryParam "overriddenEventTagId"
-                                             (Textual Int64)
-                                             :>
-                                             QueryParam "pageToken" Text :>
-                                               QueryParam "sortField"
-                                                 AdsListSortField
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParams "remarketingListIds" (Textual Int64) :>
+                   QueryParams "landingPageIds" (Textual Int64) :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParams "creativeIds" (Textual Int64) :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "advertiserId" (Textual Int64) :>
+                             QueryParams "campaignIds" (Textual Int64) :>
+                               QueryParam "searchString" Text :>
+                                 QueryParams "sizeIds" (Textual Int64) :>
+                                   QueryParam "sslCompliant" Bool :>
+                                     QueryParam "uploadType" Text :>
+                                       QueryParams "ids" (Textual Int64) :>
+                                         QueryParam "sortOrder" AdsListSortOrder
+                                           :>
+                                           QueryParam "active" Bool :>
+                                             QueryParams
+                                               "creativeOptimizationConfigurationIds"
+                                               (Textual Int64)
+                                               :>
+                                               QueryParams "placementIds"
+                                                 (Textual Int64)
                                                  :>
-                                                 QueryParams "type" AdsListType
+                                                 QueryParam "sslRequired" Bool
                                                    :>
                                                    QueryParam
-                                                     "dynamicClickTracker"
-                                                     Bool
+                                                     "overriddenEventTagId"
+                                                     (Textual Int64)
                                                      :>
-                                                     QueryParam "compatibility"
-                                                       AdsListCompatibility
+                                                     QueryParam "pageToken" Text
                                                        :>
-                                                       QueryParam "archived"
-                                                         Bool
+                                                       QueryParam "sortField"
+                                                         AdsListSortField
                                                          :>
-                                                         QueryParam "maxResults"
-                                                           (Textual Int32)
+                                                         QueryParams "type"
+                                                           AdsListType
                                                            :>
-                                                           QueryParams
-                                                             "audienceSegmentIds"
-                                                             (Textual Int64)
+                                                           QueryParam
+                                                             "dynamicClickTracker"
+                                                             Bool
                                                              :>
-                                                             QueryParam "alt"
-                                                               AltJSON
+                                                             QueryParam
+                                                               "compatibility"
+                                                               AdsListCompatibility
                                                                :>
-                                                               Get '[JSON]
-                                                                 AdsListResponse
+                                                               QueryParam
+                                                                 "archived"
+                                                                 Bool
+                                                                 :>
+                                                                 QueryParam
+                                                                   "maxResults"
+                                                                   (Textual
+                                                                      Int32)
+                                                                   :>
+                                                                   QueryParam
+                                                                     "callback"
+                                                                     Text
+                                                                     :>
+                                                                     QueryParams
+                                                                       "audienceSegmentIds"
+                                                                       (Textual
+                                                                          Int64)
+                                                                       :>
+                                                                       QueryParam
+                                                                         "alt"
+                                                                         AltJSON
+                                                                         :>
+                                                                         Get
+                                                                           '[JSON]
+                                                                           AdsListResponse
 
 -- | Retrieves a list of ads, possibly filtered. This method supports paging.
 --
 -- /See:/ 'adsList' smart constructor.
 data AdsList =
   AdsList'
-    { _alRemarketingListIds                   :: !(Maybe [Textual Int64])
-    , _alLandingPageIds                       :: !(Maybe [Textual Int64])
-    , _alCreativeIds                          :: !(Maybe [Textual Int64])
-    , _alAdvertiserId                         :: !(Maybe (Textual Int64))
-    , _alCampaignIds                          :: !(Maybe [Textual Int64])
-    , _alSearchString                         :: !(Maybe Text)
-    , _alSizeIds                              :: !(Maybe [Textual Int64])
-    , _alSSLCompliant                         :: !(Maybe Bool)
-    , _alIds                                  :: !(Maybe [Textual Int64])
-    , _alProFileId                            :: !(Textual Int64)
-    , _alSortOrder                            :: !AdsListSortOrder
-    , _alActive                               :: !(Maybe Bool)
+    { _alXgafv :: !(Maybe Xgafv)
+    , _alRemarketingListIds :: !(Maybe [Textual Int64])
+    , _alLandingPageIds :: !(Maybe [Textual Int64])
+    , _alUploadProtocol :: !(Maybe Text)
+    , _alCreativeIds :: !(Maybe [Textual Int64])
+    , _alAccessToken :: !(Maybe Text)
+    , _alAdvertiserId :: !(Maybe (Textual Int64))
+    , _alCampaignIds :: !(Maybe [Textual Int64])
+    , _alSearchString :: !(Maybe Text)
+    , _alSizeIds :: !(Maybe [Textual Int64])
+    , _alSSLCompliant :: !(Maybe Bool)
+    , _alUploadType :: !(Maybe Text)
+    , _alIds :: !(Maybe [Textual Int64])
+    , _alProFileId :: !(Textual Int64)
+    , _alSortOrder :: !AdsListSortOrder
+    , _alActive :: !(Maybe Bool)
     , _alCreativeOptimizationConfigurationIds :: !(Maybe [Textual Int64])
-    , _alPlacementIds                         :: !(Maybe [Textual Int64])
-    , _alSSLRequired                          :: !(Maybe Bool)
-    , _alOverriddenEventTagId                 :: !(Maybe (Textual Int64))
-    , _alPageToken                            :: !(Maybe Text)
-    , _alSortField                            :: !AdsListSortField
-    , _alType                                 :: !(Maybe [AdsListType])
-    , _alDynamicClickTracker                  :: !(Maybe Bool)
-    , _alCompatibility                        :: !(Maybe AdsListCompatibility)
-    , _alArchived                             :: !(Maybe Bool)
-    , _alMaxResults                           :: !(Textual Int32)
-    , _alAudienceSegmentIds                   :: !(Maybe [Textual Int64])
+    , _alPlacementIds :: !(Maybe [Textual Int64])
+    , _alSSLRequired :: !(Maybe Bool)
+    , _alOverriddenEventTagId :: !(Maybe (Textual Int64))
+    , _alPageToken :: !(Maybe Text)
+    , _alSortField :: !AdsListSortField
+    , _alType :: !(Maybe [AdsListType])
+    , _alDynamicClickTracker :: !(Maybe Bool)
+    , _alCompatibility :: !(Maybe AdsListCompatibility)
+    , _alArchived :: !(Maybe Bool)
+    , _alMaxResults :: !(Textual Int32)
+    , _alCallback :: !(Maybe Text)
+    , _alAudienceSegmentIds :: !(Maybe [Textual Int64])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,11 +188,17 @@ data AdsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'alXgafv'
+--
 -- * 'alRemarketingListIds'
 --
 -- * 'alLandingPageIds'
 --
+-- * 'alUploadProtocol'
+--
 -- * 'alCreativeIds'
+--
+-- * 'alAccessToken'
 --
 -- * 'alAdvertiserId'
 --
@@ -173,6 +209,8 @@ data AdsList =
 -- * 'alSizeIds'
 --
 -- * 'alSSLCompliant'
+--
+-- * 'alUploadType'
 --
 -- * 'alIds'
 --
@@ -204,20 +242,26 @@ data AdsList =
 --
 -- * 'alMaxResults'
 --
+-- * 'alCallback'
+--
 -- * 'alAudienceSegmentIds'
 adsList
     :: Int64 -- ^ 'alProFileId'
     -> AdsList
 adsList pAlProFileId_ =
   AdsList'
-    { _alRemarketingListIds = Nothing
+    { _alXgafv = Nothing
+    , _alRemarketingListIds = Nothing
     , _alLandingPageIds = Nothing
+    , _alUploadProtocol = Nothing
     , _alCreativeIds = Nothing
+    , _alAccessToken = Nothing
     , _alAdvertiserId = Nothing
     , _alCampaignIds = Nothing
     , _alSearchString = Nothing
     , _alSizeIds = Nothing
     , _alSSLCompliant = Nothing
+    , _alUploadType = Nothing
     , _alIds = Nothing
     , _alProFileId = _Coerce # pAlProFileId_
     , _alSortOrder = ADSAscending
@@ -233,9 +277,14 @@ adsList pAlProFileId_ =
     , _alCompatibility = Nothing
     , _alArchived = Nothing
     , _alMaxResults = 1000
+    , _alCallback = Nothing
     , _alAudienceSegmentIds = Nothing
     }
 
+
+-- | V1 error format.
+alXgafv :: Lens' AdsList (Maybe Xgafv)
+alXgafv = lens _alXgafv (\ s a -> s{_alXgafv = a})
 
 -- | Select only ads whose list targeting expression use these remarketing
 -- list IDs.
@@ -254,6 +303,12 @@ alLandingPageIds
       . _Default
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+alUploadProtocol :: Lens' AdsList (Maybe Text)
+alUploadProtocol
+  = lens _alUploadProtocol
+      (\ s a -> s{_alUploadProtocol = a})
+
 -- | Select only ads with these creative IDs assigned.
 alCreativeIds :: Lens' AdsList [Int64]
 alCreativeIds
@@ -261,6 +316,12 @@ alCreativeIds
       (\ s a -> s{_alCreativeIds = a})
       . _Default
       . _Coerce
+
+-- | OAuth access token.
+alAccessToken :: Lens' AdsList (Maybe Text)
+alAccessToken
+  = lens _alAccessToken
+      (\ s a -> s{_alAccessToken = a})
 
 -- | Select only ads with this advertiser ID.
 alAdvertiserId :: Lens' AdsList (Maybe Int64)
@@ -300,6 +361,11 @@ alSSLCompliant :: Lens' AdsList (Maybe Bool)
 alSSLCompliant
   = lens _alSSLCompliant
       (\ s a -> s{_alSSLCompliant = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+alUploadType :: Lens' AdsList (Maybe Text)
+alUploadType
+  = lens _alUploadType (\ s a -> s{_alUploadType = a})
 
 -- | Select only ads with these IDs.
 alIds :: Lens' AdsList [Int64]
@@ -398,6 +464,11 @@ alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
       . _Coerce
 
+-- | JSONP
+alCallback :: Lens' AdsList (Maybe Text)
+alCallback
+  = lens _alCallback (\ s a -> s{_alCallback = a})
+
 -- | Select only ads with these audience segment IDs.
 alAudienceSegmentIds :: Lens' AdsList [Int64]
 alAudienceSegmentIds
@@ -411,14 +482,18 @@ instance GoogleRequest AdsList where
         type Scopes AdsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AdsList'{..}
-          = go _alProFileId (_alRemarketingListIds ^. _Default)
+          = go _alProFileId _alXgafv
+              (_alRemarketingListIds ^. _Default)
               (_alLandingPageIds ^. _Default)
+              _alUploadProtocol
               (_alCreativeIds ^. _Default)
+              _alAccessToken
               _alAdvertiserId
               (_alCampaignIds ^. _Default)
               _alSearchString
               (_alSizeIds ^. _Default)
               _alSSLCompliant
+              _alUploadType
               (_alIds ^. _Default)
               (Just _alSortOrder)
               _alActive
@@ -433,6 +508,7 @@ instance GoogleRequest AdsList where
               _alCompatibility
               _alArchived
               (Just _alMaxResults)
+              _alCallback
               (_alAudienceSegmentIds ^. _Default)
               (Just AltJSON)
               dFAReportingService

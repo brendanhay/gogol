@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of abuse reasons that can be used for reporting abusive
--- videos.
+-- Retrieves a list of resources, possibly filtered.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videoAbuseReportReasons.list@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videoAbuseReportReasons.list@.
 module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
     (
     -- * REST Resource
@@ -34,12 +33,17 @@ module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
     , VideoAbuseReportReasonsList
 
     -- * Request Lenses
+    , varrlXgafv
     , varrlPart
+    , varrlUploadProtocol
+    , varrlAccessToken
+    , varrlUploadType
     , varrlHl
+    , varrlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videoAbuseReportReasons.list@ method which the
 -- 'VideoAbuseReportReasonsList' request conforms to.
@@ -47,19 +51,28 @@ type VideoAbuseReportReasonsListResource =
      "youtube" :>
        "v3" :>
          "videoAbuseReportReasons" :>
-           QueryParam "part" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] VideoAbuseReportReasonListResponse
+           QueryParams "part" Text :>
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "hl" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] VideoAbuseReportReasonListResponse
 
--- | Returns a list of abuse reasons that can be used for reporting abusive
--- videos.
+-- | Retrieves a list of resources, possibly filtered.
 --
 -- /See:/ 'videoAbuseReportReasonsList' smart constructor.
 data VideoAbuseReportReasonsList =
   VideoAbuseReportReasonsList'
-    { _varrlPart :: !Text
-    , _varrlHl   :: !Text
+    { _varrlXgafv :: !(Maybe Xgafv)
+    , _varrlPart :: ![Text]
+    , _varrlUploadProtocol :: !(Maybe Text)
+    , _varrlAccessToken :: !(Maybe Text)
+    , _varrlUploadType :: !(Maybe Text)
+    , _varrlHl :: !Text
+    , _varrlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,26 +81,72 @@ data VideoAbuseReportReasonsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'varrlXgafv'
+--
 -- * 'varrlPart'
 --
+-- * 'varrlUploadProtocol'
+--
+-- * 'varrlAccessToken'
+--
+-- * 'varrlUploadType'
+--
 -- * 'varrlHl'
+--
+-- * 'varrlCallback'
 videoAbuseReportReasonsList
-    :: Text -- ^ 'varrlPart'
+    :: [Text] -- ^ 'varrlPart'
     -> VideoAbuseReportReasonsList
 videoAbuseReportReasonsList pVarrlPart_ =
-  VideoAbuseReportReasonsList' {_varrlPart = pVarrlPart_, _varrlHl = "en_US"}
+  VideoAbuseReportReasonsList'
+    { _varrlXgafv = Nothing
+    , _varrlPart = _Coerce # pVarrlPart_
+    , _varrlUploadProtocol = Nothing
+    , _varrlAccessToken = Nothing
+    , _varrlUploadType = Nothing
+    , _varrlHl = "en-US"
+    , _varrlCallback = Nothing
+    }
 
 
--- | The part parameter specifies the videoCategory resource parts that the
+-- | V1 error format.
+varrlXgafv :: Lens' VideoAbuseReportReasonsList (Maybe Xgafv)
+varrlXgafv
+  = lens _varrlXgafv (\ s a -> s{_varrlXgafv = a})
+
+-- | The *part* parameter specifies the videoCategory resource parts that the
 -- API response will include. Supported values are id and snippet.
-varrlPart :: Lens' VideoAbuseReportReasonsList Text
+varrlPart :: Lens' VideoAbuseReportReasonsList [Text]
 varrlPart
-  = lens _varrlPart (\ s a -> s{_varrlPart = a})
+  = lens _varrlPart (\ s a -> s{_varrlPart = a}) .
+      _Coerce
 
--- | The hl parameter specifies the language that should be used for text
--- values in the API response.
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+varrlUploadProtocol :: Lens' VideoAbuseReportReasonsList (Maybe Text)
+varrlUploadProtocol
+  = lens _varrlUploadProtocol
+      (\ s a -> s{_varrlUploadProtocol = a})
+
+-- | OAuth access token.
+varrlAccessToken :: Lens' VideoAbuseReportReasonsList (Maybe Text)
+varrlAccessToken
+  = lens _varrlAccessToken
+      (\ s a -> s{_varrlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+varrlUploadType :: Lens' VideoAbuseReportReasonsList (Maybe Text)
+varrlUploadType
+  = lens _varrlUploadType
+      (\ s a -> s{_varrlUploadType = a})
+
 varrlHl :: Lens' VideoAbuseReportReasonsList Text
 varrlHl = lens _varrlHl (\ s a -> s{_varrlHl = a})
+
+-- | JSONP
+varrlCallback :: Lens' VideoAbuseReportReasonsList (Maybe Text)
+varrlCallback
+  = lens _varrlCallback
+      (\ s a -> s{_varrlCallback = a})
 
 instance GoogleRequest VideoAbuseReportReasonsList
          where
@@ -98,7 +157,12 @@ instance GoogleRequest VideoAbuseReportReasonsList
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
         requestClient VideoAbuseReportReasonsList'{..}
-          = go (Just _varrlPart) (Just _varrlHl) (Just AltJSON)
+          = go _varrlPart _varrlXgafv _varrlUploadProtocol
+              _varrlAccessToken
+              _varrlUploadType
+              (Just _varrlHl)
+              _varrlCallback
+              (Just AltJSON)
               youTubeService
           where go
                   = buildClient

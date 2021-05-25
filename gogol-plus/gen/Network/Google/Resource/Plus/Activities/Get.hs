@@ -37,8 +37,8 @@ module Network.Google.Resource.Plus.Activities.Get
     , agActivityId
     ) where
 
-import           Network.Google.Plus.Types
-import           Network.Google.Prelude
+import Network.Google.Plus.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @plus.activities.get@ method which the
 -- 'ActivitiesGet' request conforms to.

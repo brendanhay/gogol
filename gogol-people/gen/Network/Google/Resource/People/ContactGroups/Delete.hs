@@ -43,8 +43,8 @@ module Network.Google.Resource.People.ContactGroups.Delete
     , cgdCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.contactGroups.delete@ method which the
 -- 'ContactGroupsDelete' request conforms to.
@@ -65,13 +65,13 @@ type ContactGroupsDeleteResource =
 -- /See:/ 'contactGroupsDelete' smart constructor.
 data ContactGroupsDelete =
   ContactGroupsDelete'
-    { _cgdXgafv          :: !(Maybe Xgafv)
+    { _cgdXgafv :: !(Maybe Xgafv)
     , _cgdUploadProtocol :: !(Maybe Text)
     , _cgdDeleteContacts :: !(Maybe Bool)
-    , _cgdResourceName   :: !Text
-    , _cgdAccessToken    :: !(Maybe Text)
-    , _cgdUploadType     :: !(Maybe Text)
-    , _cgdCallback       :: !(Maybe Text)
+    , _cgdResourceName :: !Text
+    , _cgdAccessToken :: !(Maybe Text)
+    , _cgdUploadType :: !(Maybe Text)
+    , _cgdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -118,13 +118,14 @@ cgdUploadProtocol
   = lens _cgdUploadProtocol
       (\ s a -> s{_cgdUploadProtocol = a})
 
--- | Set to true to also delete the contacts in the specified group.
+-- | Optional. Set to true to also delete the contacts in the specified
+-- group.
 cgdDeleteContacts :: Lens' ContactGroupsDelete (Maybe Bool)
 cgdDeleteContacts
   = lens _cgdDeleteContacts
       (\ s a -> s{_cgdDeleteContacts = a})
 
--- | The resource name of the contact group to delete.
+-- | Required. The resource name of the contact group to delete.
 cgdResourceName :: Lens' ContactGroupsDelete Text
 cgdResourceName
   = lens _cgdResourceName

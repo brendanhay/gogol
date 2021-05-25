@@ -53,8 +53,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Operations.L
     , pidolCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.operations.list@ method which the
 -- 'ProjectsInstancesDatabasesOperationsList' request conforms to.
@@ -87,15 +87,15 @@ type ProjectsInstancesDatabasesOperationsListResource
 -- /See:/ 'projectsInstancesDatabasesOperationsList' smart constructor.
 data ProjectsInstancesDatabasesOperationsList =
   ProjectsInstancesDatabasesOperationsList'
-    { _pidolXgafv          :: !(Maybe Xgafv)
+    { _pidolXgafv :: !(Maybe Xgafv)
     , _pidolUploadProtocol :: !(Maybe Text)
-    , _pidolAccessToken    :: !(Maybe Text)
-    , _pidolUploadType     :: !(Maybe Text)
-    , _pidolName           :: !Text
-    , _pidolFilter         :: !(Maybe Text)
-    , _pidolPageToken      :: !(Maybe Text)
-    , _pidolPageSize       :: !(Maybe (Textual Int32))
-    , _pidolCallback       :: !(Maybe Text)
+    , _pidolAccessToken :: !(Maybe Text)
+    , _pidolUploadType :: !(Maybe Text)
+    , _pidolName :: !Text
+    , _pidolFilter :: !(Maybe Text)
+    , _pidolPageToken :: !(Maybe Text)
+    , _pidolPageSize :: !(Maybe (Textual Int32))
+    , _pidolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -83,9 +83,9 @@ module Network.Google.TextToSpeech.Types
     , AudioConfigAudioEncoding (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TextToSpeech.Types.Product
-import           Network.Google.TextToSpeech.Types.Sum
+import Network.Google.Prelude
+import Network.Google.TextToSpeech.Types.Product
+import Network.Google.TextToSpeech.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Text-to-Speech API. This contains the host and root path used as a starting point for constructing service requests.
 textToSpeechService :: ServiceConfig
@@ -93,6 +93,6 @@ textToSpeechService
   = defaultService (ServiceId "texttospeech:v1")
       "texttospeech.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

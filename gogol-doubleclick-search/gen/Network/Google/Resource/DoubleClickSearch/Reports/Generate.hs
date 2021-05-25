@@ -22,7 +22,7 @@
 --
 -- Generates and returns a report immediately.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.reports.generate@.
+-- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference> for @doubleclicksearch.reports.generate@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Generate
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Generate
     , ReportsGenerate
 
     -- * Request Lenses
-    , rgPayload
+    , rXgafv
+    , rUploadProtocol
+    , rAccessToken
+    , rUploadType
+    , rPayload
+    , rCallback
     ) where
 
-import           Network.Google.DoubleClickSearch.Types
-import           Network.Google.Prelude
+import Network.Google.DoubleClickSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.reports.generate@ method which the
 -- 'ReportsGenerate' request conforms to.
@@ -46,15 +51,25 @@ type ReportsGenerateResource =
        "v2" :>
          "reports" :>
            "generate" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
 -- | Generates and returns a report immediately.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-newtype ReportsGenerate =
+data ReportsGenerate =
   ReportsGenerate'
-    { _rgPayload :: ReportRequest
+    { _rXgafv :: !(Maybe Xgafv)
+    , _rUploadProtocol :: !(Maybe Text)
+    , _rAccessToken :: !(Maybe Text)
+    , _rUploadType :: !(Maybe Text)
+    , _rPayload :: !ReportRequest
+    , _rCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,24 +78,70 @@ newtype ReportsGenerate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgPayload'
+-- * 'rXgafv'
+--
+-- * 'rUploadProtocol'
+--
+-- * 'rAccessToken'
+--
+-- * 'rUploadType'
+--
+-- * 'rPayload'
+--
+-- * 'rCallback'
 reportsGenerate
-    :: ReportRequest -- ^ 'rgPayload'
+    :: ReportRequest -- ^ 'rPayload'
     -> ReportsGenerate
-reportsGenerate pRgPayload_ = ReportsGenerate' {_rgPayload = pRgPayload_}
+reportsGenerate pRPayload_ =
+  ReportsGenerate'
+    { _rXgafv = Nothing
+    , _rUploadProtocol = Nothing
+    , _rAccessToken = Nothing
+    , _rUploadType = Nothing
+    , _rPayload = pRPayload_
+    , _rCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rXgafv :: Lens' ReportsGenerate (Maybe Xgafv)
+rXgafv = lens _rXgafv (\ s a -> s{_rXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rUploadProtocol :: Lens' ReportsGenerate (Maybe Text)
+rUploadProtocol
+  = lens _rUploadProtocol
+      (\ s a -> s{_rUploadProtocol = a})
+
+-- | OAuth access token.
+rAccessToken :: Lens' ReportsGenerate (Maybe Text)
+rAccessToken
+  = lens _rAccessToken (\ s a -> s{_rAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rUploadType :: Lens' ReportsGenerate (Maybe Text)
+rUploadType
+  = lens _rUploadType (\ s a -> s{_rUploadType = a})
 
 -- | Multipart request metadata.
-rgPayload :: Lens' ReportsGenerate ReportRequest
-rgPayload
-  = lens _rgPayload (\ s a -> s{_rgPayload = a})
+rPayload :: Lens' ReportsGenerate ReportRequest
+rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
+
+-- | JSONP
+rCallback :: Lens' ReportsGenerate (Maybe Text)
+rCallback
+  = lens _rCallback (\ s a -> s{_rCallback = a})
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
         type Scopes ReportsGenerate =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
         requestClient ReportsGenerate'{..}
-          = go (Just AltJSON) _rgPayload
+          = go _rXgafv _rUploadProtocol _rAccessToken
+              _rUploadType
+              _rCallback
+              (Just AltJSON)
+              _rPayload
               doubleClickSearchService
           where go
                   = buildClient

@@ -16,7 +16,7 @@
 --
 module Network.Google.TPU.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Output only. The current state for the TPU Node.
 data NodeState
@@ -28,7 +28,7 @@ data NodeState
       -- TPU node is being created.
     | Ready
       -- ^ @READY@
-      -- TPU node has been created and is fully usable.
+      -- TPU node has been created.
     | Restarting
       -- ^ @RESTARTING@
       -- TPU node is restarting.
@@ -112,6 +112,100 @@ instance FromJSON NodeState where
     parseJSON = parseJSONText "NodeState"
 
 instance ToJSON NodeState where
+    toJSON = toJSONText
+
+-- | Output only. The API version that created this Node.
+data NodeAPIVersion
+    = APIVersionUnspecified
+      -- ^ @API_VERSION_UNSPECIFIED@
+      -- API version is unknown.
+    | V1ALPHA1
+      -- ^ @V1_ALPHA1@
+      -- TPU API V1Alpha1 version.
+    | V1
+      -- ^ @V1@
+      -- TPU API V1 version.
+    | V2ALPHA1
+      -- ^ @V2_ALPHA1@
+      -- TPU API V2Alpha1 version.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NodeAPIVersion
+
+instance FromHttpApiData NodeAPIVersion where
+    parseQueryParam = \case
+        "API_VERSION_UNSPECIFIED" -> Right APIVersionUnspecified
+        "V1_ALPHA1" -> Right V1ALPHA1
+        "V1" -> Right V1
+        "V2_ALPHA1" -> Right V2ALPHA1
+        x -> Left ("Unable to parse NodeAPIVersion from: " <> x)
+
+instance ToHttpApiData NodeAPIVersion where
+    toQueryParam = \case
+        APIVersionUnspecified -> "API_VERSION_UNSPECIFIED"
+        V1ALPHA1 -> "V1_ALPHA1"
+        V1 -> "V1"
+        V2ALPHA1 -> "V2_ALPHA1"
+
+instance FromJSON NodeAPIVersion where
+    parseJSON = parseJSONText "NodeAPIVersion"
+
+instance ToJSON NodeAPIVersion where
+    toJSON = toJSONText
+
+-- | Type of the Symptom.
+data SymptomSymptomType
+    = SymptomTypeUnspecified
+      -- ^ @SYMPTOM_TYPE_UNSPECIFIED@
+      -- Unspecified symptom.
+    | LowMemory
+      -- ^ @LOW_MEMORY@
+      -- TPU VM memory is low.
+    | OutOfMemory
+      -- ^ @OUT_OF_MEMORY@
+      -- TPU runtime is out of memory.
+    | ExecuteTimedOut
+      -- ^ @EXECUTE_TIMED_OUT@
+      -- TPU runtime execution has timed out.
+    | MeshBuildFail
+      -- ^ @MESH_BUILD_FAIL@
+      -- TPU runtime fails to construct a mesh that recognizes each TPU device\'s
+      -- neighbors.
+    | HbmOutOfMemory
+      -- ^ @HBM_OUT_OF_MEMORY@
+      -- TPU HBM is out of memory.
+    | ProjectAbuse
+      -- ^ @PROJECT_ABUSE@
+      -- Abusive behaviors have been identified on the current project.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SymptomSymptomType
+
+instance FromHttpApiData SymptomSymptomType where
+    parseQueryParam = \case
+        "SYMPTOM_TYPE_UNSPECIFIED" -> Right SymptomTypeUnspecified
+        "LOW_MEMORY" -> Right LowMemory
+        "OUT_OF_MEMORY" -> Right OutOfMemory
+        "EXECUTE_TIMED_OUT" -> Right ExecuteTimedOut
+        "MESH_BUILD_FAIL" -> Right MeshBuildFail
+        "HBM_OUT_OF_MEMORY" -> Right HbmOutOfMemory
+        "PROJECT_ABUSE" -> Right ProjectAbuse
+        x -> Left ("Unable to parse SymptomSymptomType from: " <> x)
+
+instance ToHttpApiData SymptomSymptomType where
+    toQueryParam = \case
+        SymptomTypeUnspecified -> "SYMPTOM_TYPE_UNSPECIFIED"
+        LowMemory -> "LOW_MEMORY"
+        OutOfMemory -> "OUT_OF_MEMORY"
+        ExecuteTimedOut -> "EXECUTE_TIMED_OUT"
+        MeshBuildFail -> "MESH_BUILD_FAIL"
+        HbmOutOfMemory -> "HBM_OUT_OF_MEMORY"
+        ProjectAbuse -> "PROJECT_ABUSE"
+
+instance FromJSON SymptomSymptomType where
+    parseJSON = parseJSONText "SymptomSymptomType"
+
+instance ToJSON SymptomSymptomType where
     toJSON = toJSONText
 
 -- | The health status of the TPU node.

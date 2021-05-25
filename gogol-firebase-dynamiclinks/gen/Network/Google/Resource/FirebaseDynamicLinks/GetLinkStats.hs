@@ -45,8 +45,8 @@ module Network.Google.Resource.FirebaseDynamicLinks.GetLinkStats
     , glsCallback
     ) where
 
-import           Network.Google.FirebaseDynamicLinks.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebasedynamiclinks.getLinkStats@ method which the
 -- 'GetLinkStats' request conforms to.
@@ -71,14 +71,14 @@ type GetLinkStatsResource =
 -- /See:/ 'getLinkStats' smart constructor.
 data GetLinkStats =
   GetLinkStats'
-    { _glsXgafv          :: !(Maybe Xgafv)
+    { _glsXgafv :: !(Maybe Xgafv)
     , _glsUploadProtocol :: !(Maybe Text)
-    , _glsDynamicLink    :: !Text
-    , _glsAccessToken    :: !(Maybe Text)
-    , _glsUploadType     :: !(Maybe Text)
-    , _glsSdkVersion     :: !(Maybe Text)
-    , _glsDurationDays   :: !(Maybe (Textual Int64))
-    , _glsCallback       :: !(Maybe Text)
+    , _glsDynamicLink :: !Text
+    , _glsAccessToken :: !(Maybe Text)
+    , _glsUploadType :: !(Maybe Text)
+    , _glsSdkVersion :: !(Maybe Text)
+    , _glsDurationDays :: !(Maybe (Textual Int64))
+    , _glsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

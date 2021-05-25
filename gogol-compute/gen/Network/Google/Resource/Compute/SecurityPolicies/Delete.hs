@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.Delete
     , spdpSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.delete@ method which the
 -- 'SecurityPoliciesDelete' request conforms to.
@@ -59,8 +59,8 @@ type SecurityPoliciesDeleteResource =
 -- /See:/ 'securityPoliciesDelete' smart constructor.
 data SecurityPoliciesDelete =
   SecurityPoliciesDelete'
-    { _spdpRequestId      :: !(Maybe Text)
-    , _spdpProject        :: !Text
+    { _spdpRequestId :: !(Maybe Text)
+    , _spdpProject :: !Text
     , _spdpSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

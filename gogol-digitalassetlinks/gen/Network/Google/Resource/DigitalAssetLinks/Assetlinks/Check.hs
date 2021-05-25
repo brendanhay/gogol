@@ -65,8 +65,8 @@ module Network.Google.Resource.DigitalAssetLinks.Assetlinks.Check
     , acCallback
     ) where
 
-import           Network.Google.DigitalAssetLinks.Types
-import           Network.Google.Prelude
+import Network.Google.DigitalAssetLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @digitalassetlinks.assetlinks.check@ method which the
 -- 'AssetlinksCheck' request conforms to.
@@ -117,18 +117,18 @@ type AssetlinksCheckResource =
 -- /See:/ 'assetlinksCheck' smart constructor.
 data AssetlinksCheck =
   AssetlinksCheck'
-    { _acXgafv                                        :: !(Maybe Xgafv)
+    { _acXgafv :: !(Maybe Xgafv)
     , _acSourceAndroidAppCertificateSha256Fingerprint :: !(Maybe Text)
-    , _acSourceAndroidAppPackageName                  :: !(Maybe Text)
-    , _acTargetWebSite                                :: !(Maybe Text)
-    , _acUploadProtocol                               :: !(Maybe Text)
-    , _acAccessToken                                  :: !(Maybe Text)
+    , _acSourceAndroidAppPackageName :: !(Maybe Text)
+    , _acTargetWebSite :: !(Maybe Text)
+    , _acUploadProtocol :: !(Maybe Text)
+    , _acAccessToken :: !(Maybe Text)
     , _acTargetAndroidAppCertificateSha256Fingerprint :: !(Maybe Text)
-    , _acUploadType                                   :: !(Maybe Text)
-    , _acRelation                                     :: !(Maybe Text)
-    , _acTargetAndroidAppPackageName                  :: !(Maybe Text)
-    , _acSourceWebSite                                :: !(Maybe Text)
-    , _acCallback                                     :: !(Maybe Text)
+    , _acUploadType :: !(Maybe Text)
+    , _acRelation :: !(Maybe Text)
+    , _acTargetAndroidAppPackageName :: !(Maybe Text)
+    , _acSourceWebSite :: !(Maybe Text)
+    , _acCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

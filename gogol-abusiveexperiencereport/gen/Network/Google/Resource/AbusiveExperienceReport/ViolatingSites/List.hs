@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists sites with Abusive Experience Report statuses of \"Failing\".
+-- Lists sites that are failing in the Abusive Experience Report.
 --
 -- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference> for @abusiveexperiencereport.violatingSites.list@.
 module Network.Google.Resource.AbusiveExperienceReport.ViolatingSites.List
@@ -40,8 +40,8 @@ module Network.Google.Resource.AbusiveExperienceReport.ViolatingSites.List
     , vslCallback
     ) where
 
-import           Network.Google.AbusiveExperienceReport.Types
-import           Network.Google.Prelude
+import Network.Google.AbusiveExperienceReport.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @abusiveexperiencereport.violatingSites.list@ method which the
 -- 'ViolatingSitesList' request conforms to.
@@ -56,16 +56,16 @@ type ViolatingSitesListResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ViolatingSitesResponse
 
--- | Lists sites with Abusive Experience Report statuses of \"Failing\".
+-- | Lists sites that are failing in the Abusive Experience Report.
 --
 -- /See:/ 'violatingSitesList' smart constructor.
 data ViolatingSitesList =
   ViolatingSitesList'
-    { _vslXgafv          :: !(Maybe Xgafv)
+    { _vslXgafv :: !(Maybe Xgafv)
     , _vslUploadProtocol :: !(Maybe Text)
-    , _vslAccessToken    :: !(Maybe Text)
-    , _vslUploadType     :: !(Maybe Text)
-    , _vslCallback       :: !(Maybe Text)
+    , _vslAccessToken :: !(Maybe Text)
+    , _vslUploadType :: !(Maybe Text)
+    , _vslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,7 @@ vslCallback
 
 instance GoogleRequest ViolatingSitesList where
         type Rs ViolatingSitesList = ViolatingSitesResponse
-        type Scopes ViolatingSitesList =
-             '["https://www.googleapis.com/auth/xapi.zoo"]
+        type Scopes ViolatingSitesList = '[]
         requestClient ViolatingSitesList'{..}
           = go _vslXgafv _vslUploadProtocol _vslAccessToken
               _vslUploadType

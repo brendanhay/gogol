@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.RegionBackendServices.GetHealth
     , rbsghBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionBackendServices.getHealth@ method which the
 -- 'RegionBackendServicesGetHealth' request conforms to.
@@ -65,9 +65,9 @@ type RegionBackendServicesGetHealthResource =
 -- /See:/ 'regionBackendServicesGetHealth' smart constructor.
 data RegionBackendServicesGetHealth =
   RegionBackendServicesGetHealth'
-    { _rbsghProject        :: !Text
-    , _rbsghPayload        :: !ResourceGroupReference
-    , _rbsghRegion         :: !Text
+    { _rbsghProject :: !Text
+    , _rbsghPayload :: !ResourceGroupReference
+    , _rbsghRegion :: !Text
     , _rbsghBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

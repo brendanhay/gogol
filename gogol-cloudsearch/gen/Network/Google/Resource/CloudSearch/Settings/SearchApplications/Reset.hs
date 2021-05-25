@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Resets a search application to default settings. This will return an
--- empty response.
+-- empty response. **Note:** This API requires an admin account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.reset@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.reset@.
 module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Reset
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Reset
     , ssarCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.searchapplications.reset@ method which the
 -- 'SettingsSearchApplicationsReset' request conforms to.
@@ -62,18 +62,18 @@ type SettingsSearchApplicationsResetResource =
                          Post '[JSON] Operation
 
 -- | Resets a search application to default settings. This will return an
--- empty response.
+-- empty response. **Note:** This API requires an admin account to execute.
 --
 -- /See:/ 'settingsSearchApplicationsReset' smart constructor.
 data SettingsSearchApplicationsReset =
   SettingsSearchApplicationsReset'
-    { _ssarXgafv          :: !(Maybe Xgafv)
+    { _ssarXgafv :: !(Maybe Xgafv)
     , _ssarUploadProtocol :: !(Maybe Text)
-    , _ssarAccessToken    :: !(Maybe Text)
-    , _ssarUploadType     :: !(Maybe Text)
-    , _ssarPayload        :: !ResetSearchApplicationRequest
-    , _ssarName           :: !Text
-    , _ssarCallback       :: !(Maybe Text)
+    , _ssarAccessToken :: !(Maybe Text)
+    , _ssarUploadType :: !(Maybe Text)
+    , _ssarPayload :: !ResetSearchApplicationRequest
+    , _ssarName :: !Text
+    , _ssarCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,8 +139,8 @@ ssarPayload :: Lens' SettingsSearchApplicationsReset ResetSearchApplicationReque
 ssarPayload
   = lens _ssarPayload (\ s a -> s{_ssarPayload = a})
 
--- | The name of the search application to be reset.
--- Format: applications\/{application_id}.
+-- | The name of the search application to be reset. Format:
+-- applications\/{application_id}.
 ssarName :: Lens' SettingsSearchApplicationsReset Text
 ssarName = lens _ssarName (\ s a -> s{_ssarName = a})
 

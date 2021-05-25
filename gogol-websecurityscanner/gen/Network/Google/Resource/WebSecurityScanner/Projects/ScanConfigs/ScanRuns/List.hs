@@ -23,7 +23,7 @@
 -- Lists ScanRuns under a given ScanConfig, in descending order of ScanRun
 -- stop time.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.list@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.scanRuns.list@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.List
     (
     -- * REST Resource
@@ -44,13 +44,13 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.
     , pscsrlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.scanRuns.list@ method which the
 -- 'ProjectsScanConfigsScanRunsList' request conforms to.
 type ProjectsScanConfigsScanRunsListResource =
-     "v1beta" :>
+     "v1" :>
        Capture "parent" Text :>
          "scanRuns" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -69,14 +69,14 @@ type ProjectsScanConfigsScanRunsListResource =
 -- /See:/ 'projectsScanConfigsScanRunsList' smart constructor.
 data ProjectsScanConfigsScanRunsList =
   ProjectsScanConfigsScanRunsList'
-    { _pscsrlParent         :: !Text
-    , _pscsrlXgafv          :: !(Maybe Xgafv)
+    { _pscsrlParent :: !Text
+    , _pscsrlXgafv :: !(Maybe Xgafv)
     , _pscsrlUploadProtocol :: !(Maybe Text)
-    , _pscsrlAccessToken    :: !(Maybe Text)
-    , _pscsrlUploadType     :: !(Maybe Text)
-    , _pscsrlPageToken      :: !(Maybe Text)
-    , _pscsrlPageSize       :: !(Maybe (Textual Int32))
-    , _pscsrlCallback       :: !(Maybe Text)
+    , _pscsrlAccessToken :: !(Maybe Text)
+    , _pscsrlUploadType :: !(Maybe Text)
+    , _pscsrlPageToken :: !(Maybe Text)
+    , _pscsrlPageSize :: !(Maybe (Textual Int32))
+    , _pscsrlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

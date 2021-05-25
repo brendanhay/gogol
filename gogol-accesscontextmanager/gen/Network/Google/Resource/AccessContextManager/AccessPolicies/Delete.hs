@@ -43,8 +43,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.Delete
     , apdCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.delete@ method which the
 -- 'AccessPoliciesDelete' request conforms to.
@@ -65,12 +65,12 @@ type AccessPoliciesDeleteResource =
 -- /See:/ 'accessPoliciesDelete' smart constructor.
 data AccessPoliciesDelete =
   AccessPoliciesDelete'
-    { _apdXgafv          :: !(Maybe Xgafv)
+    { _apdXgafv :: !(Maybe Xgafv)
     , _apdUploadProtocol :: !(Maybe Text)
-    , _apdAccessToken    :: !(Maybe Text)
-    , _apdUploadType     :: !(Maybe Text)
-    , _apdName           :: !Text
-    , _apdCallback       :: !(Maybe Text)
+    , _apdAccessToken :: !(Maybe Text)
+    , _apdUploadType :: !(Maybe Text)
+    , _apdName :: !Text
+    , _apdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

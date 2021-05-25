@@ -246,18 +246,18 @@ module Network.Google.ReplicaPool
     , ndInitializeParams
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
-import           Network.Google.Resource.ReplicaPool.Pools.Delete
-import           Network.Google.Resource.ReplicaPool.Pools.Get
-import           Network.Google.Resource.ReplicaPool.Pools.Insert
-import           Network.Google.Resource.ReplicaPool.Pools.List
-import           Network.Google.Resource.ReplicaPool.Pools.Resize
-import           Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
-import           Network.Google.Resource.ReplicaPool.Replicas.Delete
-import           Network.Google.Resource.ReplicaPool.Replicas.Get
-import           Network.Google.Resource.ReplicaPool.Replicas.List
-import           Network.Google.Resource.ReplicaPool.Replicas.Restart
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
+import Network.Google.Resource.ReplicaPool.Pools.Delete
+import Network.Google.Resource.ReplicaPool.Pools.Get
+import Network.Google.Resource.ReplicaPool.Pools.Insert
+import Network.Google.Resource.ReplicaPool.Pools.List
+import Network.Google.Resource.ReplicaPool.Pools.Resize
+import Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
+import Network.Google.Resource.ReplicaPool.Replicas.Delete
+import Network.Google.Resource.ReplicaPool.Replicas.Get
+import Network.Google.Resource.ReplicaPool.Replicas.List
+import Network.Google.Resource.ReplicaPool.Replicas.Restart
 
 {- $resources
 TODO

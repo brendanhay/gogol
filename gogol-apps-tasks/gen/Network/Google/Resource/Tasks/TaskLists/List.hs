@@ -22,7 +22,7 @@
 --
 -- Returns all the authenticated user\'s task lists.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.list@.
+-- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.list@.
 module Network.Google.Resource.Tasks.TaskLists.List
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Tasks.TaskLists.List
     , TaskListsList
 
     -- * Request Lenses
+    , tllXgafv
+    , tllUploadProtocol
+    , tllAccessToken
+    , tllUploadType
     , tllPageToken
     , tllMaxResults
+    , tllCallback
     ) where
 
-import           Network.Google.AppsTasks.Types
-import           Network.Google.Prelude
+import Network.Google.AppsTasks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.list@ method which the
 -- 'TaskListsList' request conforms to.
@@ -48,17 +53,27 @@ type TaskListsListResource =
          "users" :>
            "@me" :>
              "lists" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Int64) :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] TaskLists
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Int32) :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] TaskLists
 
 -- | Returns all the authenticated user\'s task lists.
 --
 -- /See:/ 'taskListsList' smart constructor.
 data TaskListsList =
   TaskListsList'
-    { _tllPageToken  :: !(Maybe Text)
-    , _tllMaxResults :: !(Maybe (Textual Int64))
+    { _tllXgafv :: !(Maybe Xgafv)
+    , _tllUploadProtocol :: !(Maybe Text)
+    , _tllAccessToken :: !(Maybe Text)
+    , _tllUploadType :: !(Maybe Text)
+    , _tllPageToken :: !(Maybe Text)
+    , _tllMaxResults :: !(Maybe (Textual Int32))
+    , _tllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,14 +82,54 @@ data TaskListsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tllXgafv'
+--
+-- * 'tllUploadProtocol'
+--
+-- * 'tllAccessToken'
+--
+-- * 'tllUploadType'
+--
 -- * 'tllPageToken'
 --
 -- * 'tllMaxResults'
+--
+-- * 'tllCallback'
 taskListsList
     :: TaskListsList
 taskListsList =
-  TaskListsList' {_tllPageToken = Nothing, _tllMaxResults = Nothing}
+  TaskListsList'
+    { _tllXgafv = Nothing
+    , _tllUploadProtocol = Nothing
+    , _tllAccessToken = Nothing
+    , _tllUploadType = Nothing
+    , _tllPageToken = Nothing
+    , _tllMaxResults = Nothing
+    , _tllCallback = Nothing
+    }
 
+
+-- | V1 error format.
+tllXgafv :: Lens' TaskListsList (Maybe Xgafv)
+tllXgafv = lens _tllXgafv (\ s a -> s{_tllXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+tllUploadProtocol :: Lens' TaskListsList (Maybe Text)
+tllUploadProtocol
+  = lens _tllUploadProtocol
+      (\ s a -> s{_tllUploadProtocol = a})
+
+-- | OAuth access token.
+tllAccessToken :: Lens' TaskListsList (Maybe Text)
+tllAccessToken
+  = lens _tllAccessToken
+      (\ s a -> s{_tllAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+tllUploadType :: Lens' TaskListsList (Maybe Text)
+tllUploadType
+  = lens _tllUploadType
+      (\ s a -> s{_tllUploadType = a})
 
 -- | Token specifying the result page to return. Optional.
 tllPageToken :: Lens' TaskListsList (Maybe Text)
@@ -83,11 +138,16 @@ tllPageToken
 
 -- | Maximum number of task lists returned on one page. Optional. The default
 -- is 20 (max allowed: 100).
-tllMaxResults :: Lens' TaskListsList (Maybe Int64)
+tllMaxResults :: Lens' TaskListsList (Maybe Int32)
 tllMaxResults
   = lens _tllMaxResults
       (\ s a -> s{_tllMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+tllCallback :: Lens' TaskListsList (Maybe Text)
+tllCallback
+  = lens _tllCallback (\ s a -> s{_tllCallback = a})
 
 instance GoogleRequest TaskListsList where
         type Rs TaskListsList = TaskLists
@@ -95,7 +155,12 @@ instance GoogleRequest TaskListsList where
              '["https://www.googleapis.com/auth/tasks",
                "https://www.googleapis.com/auth/tasks.readonly"]
         requestClient TaskListsList'{..}
-          = go _tllPageToken _tllMaxResults (Just AltJSON)
+          = go _tllXgafv _tllUploadProtocol _tllAccessToken
+              _tllUploadType
+              _tllPageToken
+              _tllMaxResults
+              _tllCallback
+              (Just AltJSON)
               appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsListResource)

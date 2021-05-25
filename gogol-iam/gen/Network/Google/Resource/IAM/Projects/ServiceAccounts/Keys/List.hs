@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists ServiceAccountKeys.
+-- Lists every ServiceAccountKey for a service account.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.list@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
@@ -42,8 +42,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
     , psaklCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.keys.list@ method which the
 -- 'ProjectsServiceAccountsKeysList' request conforms to.
@@ -51,7 +51,9 @@ type ProjectsServiceAccountsKeysListResource =
      "v1" :>
        Capture "name" Text :>
          "keys" :>
-           QueryParams "keyTypes" Text :>
+           QueryParams "keyTypes"
+             ProjectsServiceAccountsKeysListKeyTypes
+             :>
              QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
@@ -60,18 +62,18 @@ type ProjectsServiceAccountsKeysListResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ListServiceAccountKeysResponse
 
--- | Lists ServiceAccountKeys.
+-- | Lists every ServiceAccountKey for a service account.
 --
 -- /See:/ 'projectsServiceAccountsKeysList' smart constructor.
 data ProjectsServiceAccountsKeysList =
   ProjectsServiceAccountsKeysList'
-    { _psaklKeyTypes       :: !(Maybe [Text])
-    , _psaklXgafv          :: !(Maybe Xgafv)
+    { _psaklKeyTypes :: !(Maybe [ProjectsServiceAccountsKeysListKeyTypes])
+    , _psaklXgafv :: !(Maybe Xgafv)
     , _psaklUploadProtocol :: !(Maybe Text)
-    , _psaklAccessToken    :: !(Maybe Text)
-    , _psaklUploadType     :: !(Maybe Text)
-    , _psaklName           :: !Text
-    , _psaklCallback       :: !(Maybe Text)
+    , _psaklAccessToken :: !(Maybe Text)
+    , _psaklUploadType :: !(Maybe Text)
+    , _psaklName :: !Text
+    , _psaklCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -111,7 +113,7 @@ projectsServiceAccountsKeysList pPsaklName_ =
 -- | Filters the types of keys the user wants to include in the list
 -- response. Duplicate key types are not allowed. If no key type is
 -- provided, all keys are returned.
-psaklKeyTypes :: Lens' ProjectsServiceAccountsKeysList [Text]
+psaklKeyTypes :: Lens' ProjectsServiceAccountsKeysList [ProjectsServiceAccountsKeysListKeyTypes]
 psaklKeyTypes
   = lens _psaklKeyTypes
       (\ s a -> s{_psaklKeyTypes = a})
@@ -141,10 +143,10 @@ psaklUploadType
   = lens _psaklUploadType
       (\ s a -> s{_psaklUploadType = a})
 
--- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
--- wildcard for the \`PROJECT_ID\`, will infer the project from the
--- account. The \`ACCOUNT\` value can be the \`email\` address or the
+-- | Required. The resource name of the service account in the following
+-- format: \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using
+-- \`-\` as a wildcard for the \`PROJECT_ID\`, will infer the project from
+-- the account. The \`ACCOUNT\` value can be the \`email\` address or the
 -- \`unique_id\` of the service account.
 psaklName :: Lens' ProjectsServiceAccountsKeysList Text
 psaklName

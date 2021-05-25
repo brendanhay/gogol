@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Style.List
     , slMaxResults
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.list@ method which the
 -- 'StyleList' request conforms to.
@@ -59,8 +59,8 @@ type StyleListResource =
 -- /See:/ 'styleList' smart constructor.
 data StyleList =
   StyleList'
-    { _slPageToken  :: !(Maybe Text)
-    , _slTableId    :: !Text
+    { _slPageToken :: !(Maybe Text)
+    , _slTableId :: !Text
     , _slMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

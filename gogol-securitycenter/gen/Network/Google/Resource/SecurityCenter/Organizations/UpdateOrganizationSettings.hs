@@ -22,7 +22,7 @@
 --
 -- Updates an organization\'s settings.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.updateOrganizationSettings@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.updateOrganizationSettings@.
 module Network.Google.Resource.SecurityCenter.Organizations.UpdateOrganizationSettings
     (
     -- * REST Resource
@@ -43,14 +43,14 @@ module Network.Google.Resource.SecurityCenter.Organizations.UpdateOrganizationSe
     , ouosCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.updateOrganizationSettings@ method which the
 -- 'OrganizationsUpdateOrganizationSettings' request conforms to.
 type OrganizationsUpdateOrganizationSettingsResource
      =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -67,14 +67,14 @@ type OrganizationsUpdateOrganizationSettingsResource
 -- /See:/ 'organizationsUpdateOrganizationSettings' smart constructor.
 data OrganizationsUpdateOrganizationSettings =
   OrganizationsUpdateOrganizationSettings'
-    { _ouosXgafv          :: !(Maybe Xgafv)
+    { _ouosXgafv :: !(Maybe Xgafv)
     , _ouosUploadProtocol :: !(Maybe Text)
-    , _ouosUpdateMask     :: !(Maybe GFieldMask)
-    , _ouosAccessToken    :: !(Maybe Text)
-    , _ouosUploadType     :: !(Maybe Text)
-    , _ouosPayload        :: !OrganizationSettings
-    , _ouosName           :: !Text
-    , _ouosCallback       :: !(Maybe Text)
+    , _ouosUpdateMask :: !(Maybe GFieldMask)
+    , _ouosAccessToken :: !(Maybe Text)
+    , _ouosUploadType :: !(Maybe Text)
+    , _ouosPayload :: !OrganizationSettings
+    , _ouosName :: !Text
+    , _ouosCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -152,7 +152,7 @@ ouosPayload
 
 -- | The relative resource name of the settings. See:
 -- https:\/\/cloud.google.com\/apis\/design\/resource_names#relative_resource_name
--- Example: \"organizations\/123\/organizationSettings\".
+-- Example: \"organizations\/{organization_id}\/organizationSettings\".
 ouosName :: Lens' OrganizationsUpdateOrganizationSettings Text
 ouosName = lens _ouosName (\ s a -> s{_ouosName = a})
 

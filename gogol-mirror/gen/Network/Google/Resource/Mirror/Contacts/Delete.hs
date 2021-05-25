@@ -36,8 +36,8 @@ module Network.Google.Resource.Mirror.Contacts.Delete
     , cdId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.delete@ method which the
 -- 'ContactsDelete' request conforms to.

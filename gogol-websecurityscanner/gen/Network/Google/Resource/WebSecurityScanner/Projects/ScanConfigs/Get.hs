@@ -22,7 +22,7 @@
 --
 -- Gets a ScanConfig.
 --
--- /See:/ <https://cloud.google.com/security-scanner/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.get@.
+-- /See:/ <https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/ Web Security Scanner API Reference> for @websecurityscanner.projects.scanConfigs.get@.
 module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.Get
     (
     -- * REST Resource
@@ -41,13 +41,13 @@ module Network.Google.Resource.WebSecurityScanner.Projects.ScanConfigs.Get
     , pscgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.WebSecurityScanner.Types
+import Network.Google.Prelude
+import Network.Google.WebSecurityScanner.Types
 
 -- | A resource alias for @websecurityscanner.projects.scanConfigs.get@ method which the
 -- 'ProjectsScanConfigsGet' request conforms to.
 type ProjectsScanConfigsGetResource =
-     "v1beta" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -61,12 +61,12 @@ type ProjectsScanConfigsGetResource =
 -- /See:/ 'projectsScanConfigsGet' smart constructor.
 data ProjectsScanConfigsGet =
   ProjectsScanConfigsGet'
-    { _pscgXgafv          :: !(Maybe Xgafv)
+    { _pscgXgafv :: !(Maybe Xgafv)
     , _pscgUploadProtocol :: !(Maybe Text)
-    , _pscgAccessToken    :: !(Maybe Text)
-    , _pscgUploadType     :: !(Maybe Text)
-    , _pscgName           :: !Text
-    , _pscgCallback       :: !(Maybe Text)
+    , _pscgAccessToken :: !(Maybe Text)
+    , _pscgUploadType :: !(Maybe Text)
+    , _pscgName :: !Text
+    , _pscgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

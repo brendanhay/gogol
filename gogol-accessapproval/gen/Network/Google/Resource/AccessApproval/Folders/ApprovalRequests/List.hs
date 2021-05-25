@@ -46,13 +46,13 @@ module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.List
     , farlCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.folders.approvalRequests.list@ method which the
 -- 'FoldersApprovalRequestsList' request conforms to.
 type FoldersApprovalRequestsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "approvalRequests" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -73,15 +73,15 @@ type FoldersApprovalRequestsListResource =
 -- /See:/ 'foldersApprovalRequestsList' smart constructor.
 data FoldersApprovalRequestsList =
   FoldersApprovalRequestsList'
-    { _farlParent         :: !Text
-    , _farlXgafv          :: !(Maybe Xgafv)
+    { _farlParent :: !Text
+    , _farlXgafv :: !(Maybe Xgafv)
     , _farlUploadProtocol :: !(Maybe Text)
-    , _farlAccessToken    :: !(Maybe Text)
-    , _farlUploadType     :: !(Maybe Text)
-    , _farlFilter         :: !(Maybe Text)
-    , _farlPageToken      :: !(Maybe Text)
-    , _farlPageSize       :: !(Maybe (Textual Int32))
-    , _farlCallback       :: !(Maybe Text)
+    , _farlAccessToken :: !(Maybe Text)
+    , _farlUploadType :: !(Maybe Text)
+    , _farlFilter :: !(Maybe Text)
+    , _farlPageToken :: !(Maybe Text)
+    , _farlPageSize :: !(Maybe (Textual Int32))
+    , _farlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ foldersApprovalRequestsList pFarlParent_ =
     }
 
 
--- | The parent resource. This may be \"projects\/{project_id}\",
--- \"folders\/{folder_id}\", or \"organizations\/{organization_id}\".
+-- | The parent resource. This may be \"projects\/{project}\",
+-- \"folders\/{folder}\", or \"organizations\/{organization}\".
 farlParent :: Lens' FoldersApprovalRequestsList Text
 farlParent
   = lens _farlParent (\ s a -> s{_farlParent = a})
@@ -154,13 +154,13 @@ farlUploadType
       (\ s a -> s{_farlUploadType = a})
 
 -- | A filter on the type of approval requests to retrieve. Must be one of
--- the following values:
---
--- 1.  [not set]: Requests that are pending or have active approvals.
--- 2.  ALL: All requests.
--- 3.  PENDING: Only pending requests.
--- 4.  ACTIVE: Only active (i.e. currently approved) requests.
--- 5.  DISMISSED: Only dismissed (including expired) requests.
+-- the following values: * [not set]: Requests that are pending or have
+-- active approvals. * ALL: All requests. * PENDING: Only pending requests.
+-- * ACTIVE: Only active (i.e. currently approved) requests. * DISMISSED:
+-- Only requests that have been dismissed, or requests that are not
+-- approved and past expiration. * EXPIRED: Only requests that have been
+-- approved, and the approval has expired. * HISTORY: Active, dismissed and
+-- expired requests.
 farlFilter :: Lens' FoldersApprovalRequestsList (Maybe Text)
 farlFilter
   = lens _farlFilter (\ s a -> s{_farlFilter = a})

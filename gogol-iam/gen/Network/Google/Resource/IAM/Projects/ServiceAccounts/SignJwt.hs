@@ -20,13 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- **Note**: This method is in the process of being deprecated. Call the
--- [\`signJwt()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signJwt)
--- method of the Cloud IAM Service Account Credentials API instead. Signs a
--- JWT using a service account\'s system-managed private key. If no expiry
--- time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an an
--- expiry time of one hour by default. If you request an expiry time of
--- more than one hour, the request will fail.
+-- **Note:** This method is deprecated. Use the
+-- [\`signJwt\`](https:\/\/cloud.google.com\/iam\/help\/rest-credentials\/v1\/projects.serviceAccounts\/signJwt)
+-- method in the IAM Service Account Credentials API instead. If you
+-- currently use this method, see the [migration
+-- guide](https:\/\/cloud.google.com\/iam\/help\/credentials\/migrate-api)
+-- for instructions. Signs a JSON Web Token (JWT) using the system-managed
+-- private key for a ServiceAccount.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.signJwt@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
@@ -48,8 +48,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
     , psasjCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.signJwt@ method which the
 -- 'ProjectsServiceAccountsSignJwt' request conforms to.
@@ -65,24 +65,24 @@ type ProjectsServiceAccountsSignJwtResource =
                      ReqBody '[JSON] SignJwtRequest :>
                        Post '[JSON] SignJwtResponse
 
--- | **Note**: This method is in the process of being deprecated. Call the
--- [\`signJwt()\`](\/iam\/credentials\/reference\/rest\/v1\/projects.serviceAccounts\/signJwt)
--- method of the Cloud IAM Service Account Credentials API instead. Signs a
--- JWT using a service account\'s system-managed private key. If no expiry
--- time (\`exp\`) is provided in the \`SignJwtRequest\`, IAM sets an an
--- expiry time of one hour by default. If you request an expiry time of
--- more than one hour, the request will fail.
+-- | **Note:** This method is deprecated. Use the
+-- [\`signJwt\`](https:\/\/cloud.google.com\/iam\/help\/rest-credentials\/v1\/projects.serviceAccounts\/signJwt)
+-- method in the IAM Service Account Credentials API instead. If you
+-- currently use this method, see the [migration
+-- guide](https:\/\/cloud.google.com\/iam\/help\/credentials\/migrate-api)
+-- for instructions. Signs a JSON Web Token (JWT) using the system-managed
+-- private key for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsSignJwt' smart constructor.
 data ProjectsServiceAccountsSignJwt =
   ProjectsServiceAccountsSignJwt'
-    { _psasjXgafv          :: !(Maybe Xgafv)
+    { _psasjXgafv :: !(Maybe Xgafv)
     , _psasjUploadProtocol :: !(Maybe Text)
-    , _psasjAccessToken    :: !(Maybe Text)
-    , _psasjUploadType     :: !(Maybe Text)
-    , _psasjPayload        :: !SignJwtRequest
-    , _psasjName           :: !Text
-    , _psasjCallback       :: !(Maybe Text)
+    , _psasjAccessToken :: !(Maybe Text)
+    , _psasjUploadType :: !(Maybe Text)
+    , _psasjPayload :: !SignJwtRequest
+    , _psasjName :: !Text
+    , _psasjCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -148,7 +148,9 @@ psasjPayload :: Lens' ProjectsServiceAccountsSignJwt SignJwtRequest
 psasjPayload
   = lens _psasjPayload (\ s a -> s{_psasjPayload = a})
 
--- | The resource name of the service account in the following format:
+-- | Required. Deprecated. [Migrate to Service Account Credentials
+-- API](https:\/\/cloud.google.com\/iam\/help\/credentials\/migrate-api).
+-- The resource name of the service account in the following format:
 -- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\`. Using \`-\` as a
 -- wildcard for the \`PROJECT_ID\` will infer the project from the account.
 -- The \`ACCOUNT\` value can be the \`email\` address or the \`unique_id\`

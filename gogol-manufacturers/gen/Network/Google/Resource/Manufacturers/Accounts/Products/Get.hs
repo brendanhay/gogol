@@ -47,8 +47,8 @@ module Network.Google.Resource.Manufacturers.Accounts.Products.Get
     , apgCallback
     ) where
 
-import           Network.Google.Manufacturers.Types
-import           Network.Google.Prelude
+import Network.Google.Manufacturers.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @manufacturers.accounts.products.get@ method which the
 -- 'AccountsProductsGet' request conforms to.
@@ -57,7 +57,7 @@ type AccountsProductsGetResource =
        Capture "parent" Text :>
          "products" :>
            Capture "name" Text :>
-             QueryParams "include" Text :>
+             QueryParams "include" AccountsProductsGetInclude :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
@@ -74,14 +74,14 @@ type AccountsProductsGetResource =
 -- /See:/ 'accountsProductsGet' smart constructor.
 data AccountsProductsGet =
   AccountsProductsGet'
-    { _apgParent         :: !Text
-    , _apgInclude        :: !(Maybe [Text])
-    , _apgXgafv          :: !(Maybe Xgafv)
+    { _apgParent :: !Text
+    , _apgInclude :: !(Maybe [AccountsProductsGetInclude])
+    , _apgXgafv :: !(Maybe Xgafv)
     , _apgUploadProtocol :: !(Maybe Text)
-    , _apgAccessToken    :: !(Maybe Text)
-    , _apgUploadType     :: !(Maybe Text)
-    , _apgName           :: !Text
-    , _apgCallback       :: !(Maybe Text)
+    , _apgAccessToken :: !(Maybe Text)
+    , _apgUploadType :: !(Maybe Text)
+    , _apgName :: !Text
+    , _apgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,7 +130,7 @@ apgParent
 
 -- | The information to be included in the response. Only sections listed
 -- here will be returned.
-apgInclude :: Lens' AccountsProductsGet [Text]
+apgInclude :: Lens' AccountsProductsGet [AccountsProductsGetInclude]
 apgInclude
   = lens _apgInclude (\ s a -> s{_apgInclude = a}) .
       _Default

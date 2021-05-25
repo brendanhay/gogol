@@ -36,6 +36,7 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.Create
     , ProjectsBuildsCreate
 
     -- * Request Lenses
+    , pParent
     , pXgafv
     , pUploadProtocol
     , pAccessToken
@@ -45,8 +46,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.Create
     , pCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.builds.create@ method which the
 -- 'ProjectsBuildsCreate' request conforms to.
@@ -55,13 +56,14 @@ type ProjectsBuildsCreateResource =
        "projects" :>
          Capture "projectId" Text :>
            "builds" :>
-             QueryParam "$.xgafv" Xgafv :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Build :> Post '[JSON] Operation
+             QueryParam "parent" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Build :> Post '[JSON] Operation
 
 -- | Starts a build with the specified configuration. This method returns a
 -- long-running \`Operation\`, which includes the build ID. Pass the build
@@ -71,13 +73,14 @@ type ProjectsBuildsCreateResource =
 -- /See:/ 'projectsBuildsCreate' smart constructor.
 data ProjectsBuildsCreate =
   ProjectsBuildsCreate'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pParent :: !(Maybe Text)
+    , _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !Build
-    , _pProjectId      :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !Build
+    , _pProjectId :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -85,6 +88,8 @@ data ProjectsBuildsCreate =
 -- | Creates a value of 'ProjectsBuildsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pParent'
 --
 -- * 'pXgafv'
 --
@@ -105,7 +110,8 @@ projectsBuildsCreate
     -> ProjectsBuildsCreate
 projectsBuildsCreate pPPayload_ pPProjectId_ =
   ProjectsBuildsCreate'
-    { _pXgafv = Nothing
+    { _pParent = Nothing
+    , _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pAccessToken = Nothing
     , _pUploadType = Nothing
@@ -114,6 +120,11 @@ projectsBuildsCreate pPPayload_ pPProjectId_ =
     , _pCallback = Nothing
     }
 
+
+-- | The parent resource where this build will be created. Format:
+-- \`projects\/{project}\/locations\/{location}\`
+pParent :: Lens' ProjectsBuildsCreate (Maybe Text)
+pParent = lens _pParent (\ s a -> s{_pParent = a})
 
 -- | V1 error format.
 pXgafv :: Lens' ProjectsBuildsCreate (Maybe Xgafv)
@@ -139,7 +150,7 @@ pUploadType
 pPayload :: Lens' ProjectsBuildsCreate Build
 pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
--- | ID of the project.
+-- | Required. ID of the project.
 pProjectId :: Lens' ProjectsBuildsCreate Text
 pProjectId
   = lens _pProjectId (\ s a -> s{_pProjectId = a})
@@ -154,7 +165,7 @@ instance GoogleRequest ProjectsBuildsCreate where
         type Scopes ProjectsBuildsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsBuildsCreate'{..}
-          = go _pProjectId _pXgafv _pUploadProtocol
+          = go _pProjectId _pParent _pXgafv _pUploadProtocol
               _pAccessToken
               _pUploadType
               _pCallback

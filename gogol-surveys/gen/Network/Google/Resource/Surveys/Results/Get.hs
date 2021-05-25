@@ -39,8 +39,8 @@ module Network.Google.Resource.Surveys.Results.Get
     , rgPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Surveys.Types
 
 -- | A resource alias for @surveys.results.get@ method which the
 -- 'ResultsGet' request conforms to.
@@ -70,7 +70,7 @@ type ResultsGetResource =
 data ResultsGet =
   ResultsGet'
     { _rgSurveyURLId :: !Text
-    , _rgPayload     :: !ResultsGetRequest
+    , _rgPayload :: !ResultsGetRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

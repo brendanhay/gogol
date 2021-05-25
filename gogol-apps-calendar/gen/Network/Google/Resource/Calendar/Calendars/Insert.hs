@@ -36,8 +36,8 @@ module Network.Google.Resource.Calendar.Calendars.Insert
     , ciPayload
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.insert@ method which the
 -- 'CalendarsInsert' request conforms to.

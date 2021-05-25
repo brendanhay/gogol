@@ -21,8 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a transfer job. Updating a job\'s transfer spec does not affect
--- transfer operations that are running already. Updating the scheduling of
--- a job is not allowed.
+-- transfer operations that are running already. **Note:** The job\'s
+-- status field can be modified using this RPC (for example, to set a
+-- job\'s status to DELETED, DISABLED, or ENABLED).
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
@@ -44,8 +45,8 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     , tjpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferJobs.patch@ method which the
 -- 'TransferJobsPatch' request conforms to.
@@ -62,19 +63,20 @@ type TransferJobsPatchResource =
                        Patch '[JSON] TransferJob
 
 -- | Updates a transfer job. Updating a job\'s transfer spec does not affect
--- transfer operations that are running already. Updating the scheduling of
--- a job is not allowed.
+-- transfer operations that are running already. **Note:** The job\'s
+-- status field can be modified using this RPC (for example, to set a
+-- job\'s status to DELETED, DISABLED, or ENABLED).
 --
 -- /See:/ 'transferJobsPatch' smart constructor.
 data TransferJobsPatch =
   TransferJobsPatch'
-    { _tjpXgafv          :: !(Maybe Xgafv)
+    { _tjpXgafv :: !(Maybe Xgafv)
     , _tjpUploadProtocol :: !(Maybe Text)
-    , _tjpAccessToken    :: !(Maybe Text)
-    , _tjpJobName        :: !Text
-    , _tjpUploadType     :: !(Maybe Text)
-    , _tjpPayload        :: !UpdateTransferJobRequest
-    , _tjpCallback       :: !(Maybe Text)
+    , _tjpAccessToken :: !(Maybe Text)
+    , _tjpJobName :: !Text
+    , _tjpUploadType :: !(Maybe Text)
+    , _tjpPayload :: !UpdateTransferJobRequest
+    , _tjpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,7 +130,7 @@ tjpAccessToken
   = lens _tjpAccessToken
       (\ s a -> s{_tjpAccessToken = a})
 
--- | The name of job to update. Required.
+-- | Required. The name of job to update.
 tjpJobName :: Lens' TransferJobsPatch Text
 tjpJobName
   = lens _tjpJobName (\ s a -> s{_tjpJobName = a})

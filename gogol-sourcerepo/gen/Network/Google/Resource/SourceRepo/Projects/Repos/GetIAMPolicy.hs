@@ -34,6 +34,7 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.GetIAMPolicy
     , ProjectsReposGetIAMPolicy
 
     -- * Request Lenses
+    , prgipOptionsRequestedPolicyVersion
     , prgipXgafv
     , prgipUploadProtocol
     , prgipAccessToken
@@ -42,20 +43,23 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.GetIAMPolicy
     , prgipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.getIamPolicy@ method which the
 -- 'ProjectsReposGetIAMPolicy' request conforms to.
 type ProjectsReposGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -63,12 +67,13 @@ type ProjectsReposGetIAMPolicyResource =
 -- /See:/ 'projectsReposGetIAMPolicy' smart constructor.
 data ProjectsReposGetIAMPolicy =
   ProjectsReposGetIAMPolicy'
-    { _prgipXgafv          :: !(Maybe Xgafv)
+    { _prgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _prgipXgafv :: !(Maybe Xgafv)
     , _prgipUploadProtocol :: !(Maybe Text)
-    , _prgipAccessToken    :: !(Maybe Text)
-    , _prgipUploadType     :: !(Maybe Text)
-    , _prgipResource       :: !Text
-    , _prgipCallback       :: !(Maybe Text)
+    , _prgipAccessToken :: !(Maybe Text)
+    , _prgipUploadType :: !(Maybe Text)
+    , _prgipResource :: !Text
+    , _prgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,6 +81,8 @@ data ProjectsReposGetIAMPolicy =
 -- | Creates a value of 'ProjectsReposGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prgipOptionsRequestedPolicyVersion'
 --
 -- * 'prgipXgafv'
 --
@@ -93,7 +100,8 @@ projectsReposGetIAMPolicy
     -> ProjectsReposGetIAMPolicy
 projectsReposGetIAMPolicy pPrgipResource_ =
   ProjectsReposGetIAMPolicy'
-    { _prgipXgafv = Nothing
+    { _prgipOptionsRequestedPolicyVersion = Nothing
+    , _prgipXgafv = Nothing
     , _prgipUploadProtocol = Nothing
     , _prgipAccessToken = Nothing
     , _prgipUploadType = Nothing
@@ -101,6 +109,19 @@ projectsReposGetIAMPolicy pPrgipResource_ =
     , _prgipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+prgipOptionsRequestedPolicyVersion :: Lens' ProjectsReposGetIAMPolicy (Maybe Int32)
+prgipOptionsRequestedPolicyVersion
+  = lens _prgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_prgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 prgipXgafv :: Lens' ProjectsReposGetIAMPolicy (Maybe Xgafv)
@@ -147,7 +168,10 @@ instance GoogleRequest ProjectsReposGetIAMPolicy
                "https://www.googleapis.com/auth/source.read_only",
                "https://www.googleapis.com/auth/source.read_write"]
         requestClient ProjectsReposGetIAMPolicy'{..}
-          = go _prgipResource _prgipXgafv _prgipUploadProtocol
+          = go _prgipResource
+              _prgipOptionsRequestedPolicyVersion
+              _prgipXgafv
+              _prgipUploadProtocol
               _prgipAccessToken
               _prgipUploadType
               _prgipCallback

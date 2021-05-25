@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Hangouts Chat.
+A client library for the Google Chat.
 
 
 ## Contribute

@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
     , pjwilCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.workItems.lease@ method which the
 -- 'ProjectsJobsWorkItemsLease' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsJobsWorkItemsLeaseResource =
 -- /See:/ 'projectsJobsWorkItemsLease' smart constructor.
 data ProjectsJobsWorkItemsLease =
   ProjectsJobsWorkItemsLease'
-    { _pjwilXgafv          :: !(Maybe Xgafv)
-    , _pjwilJobId          :: !Text
+    { _pjwilXgafv :: !(Maybe Xgafv)
+    , _pjwilJobId :: !Text
     , _pjwilUploadProtocol :: !(Maybe Text)
-    , _pjwilAccessToken    :: !(Maybe Text)
-    , _pjwilUploadType     :: !(Maybe Text)
-    , _pjwilPayload        :: !LeaseWorkItemRequest
-    , _pjwilProjectId      :: !Text
-    , _pjwilCallback       :: !(Maybe Text)
+    , _pjwilAccessToken :: !(Maybe Text)
+    , _pjwilUploadType :: !(Maybe Text)
+    , _pjwilPayload :: !LeaseWorkItemRequest
+    , _pjwilProjectId :: !Text
+    , _pjwilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

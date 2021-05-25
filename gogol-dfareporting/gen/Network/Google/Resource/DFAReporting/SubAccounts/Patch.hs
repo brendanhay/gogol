@@ -22,7 +22,7 @@
 --
 -- Updates an existing subaccount. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.subaccounts.patch@.
 module Network.Google.Resource.DFAReporting.SubAccounts.Patch
     (
     -- * REST Resource
@@ -33,35 +33,50 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Patch
     , SubAccountsPatch
 
     -- * Request Lenses
+    , sapXgafv
+    , sapUploadProtocol
+    , sapAccessToken
+    , sapUploadType
     , sapProFileId
     , sapPayload
     , sapId
+    , sapCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.subaccounts.patch@ method which the
 -- 'SubAccountsPatch' request conforms to.
 type SubAccountsPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
                QueryParam "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] SubAccount :>
-                     Patch '[JSON] SubAccount
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] SubAccount :>
+                               Patch '[JSON] SubAccount
 
 -- | Updates an existing subaccount. This method supports patch semantics.
 --
 -- /See:/ 'subAccountsPatch' smart constructor.
 data SubAccountsPatch =
   SubAccountsPatch'
-    { _sapProFileId :: !(Textual Int64)
-    , _sapPayload   :: !SubAccount
-    , _sapId        :: !(Textual Int64)
+    { _sapXgafv :: !(Maybe Xgafv)
+    , _sapUploadProtocol :: !(Maybe Text)
+    , _sapAccessToken :: !(Maybe Text)
+    , _sapUploadType :: !(Maybe Text)
+    , _sapProFileId :: !(Textual Int64)
+    , _sapPayload :: !SubAccount
+    , _sapId :: !(Textual Int64)
+    , _sapCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +85,21 @@ data SubAccountsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sapXgafv'
+--
+-- * 'sapUploadProtocol'
+--
+-- * 'sapAccessToken'
+--
+-- * 'sapUploadType'
+--
 -- * 'sapProFileId'
 --
 -- * 'sapPayload'
 --
 -- * 'sapId'
+--
+-- * 'sapCallback'
 subAccountsPatch
     :: Int64 -- ^ 'sapProFileId'
     -> SubAccount -- ^ 'sapPayload'
@@ -82,11 +107,38 @@ subAccountsPatch
     -> SubAccountsPatch
 subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
   SubAccountsPatch'
-    { _sapProFileId = _Coerce # pSapProFileId_
+    { _sapXgafv = Nothing
+    , _sapUploadProtocol = Nothing
+    , _sapAccessToken = Nothing
+    , _sapUploadType = Nothing
+    , _sapProFileId = _Coerce # pSapProFileId_
     , _sapPayload = pSapPayload_
     , _sapId = _Coerce # pSapId_
+    , _sapCallback = Nothing
     }
 
+
+-- | V1 error format.
+sapXgafv :: Lens' SubAccountsPatch (Maybe Xgafv)
+sapXgafv = lens _sapXgafv (\ s a -> s{_sapXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+sapUploadProtocol :: Lens' SubAccountsPatch (Maybe Text)
+sapUploadProtocol
+  = lens _sapUploadProtocol
+      (\ s a -> s{_sapUploadProtocol = a})
+
+-- | OAuth access token.
+sapAccessToken :: Lens' SubAccountsPatch (Maybe Text)
+sapAccessToken
+  = lens _sapAccessToken
+      (\ s a -> s{_sapAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+sapUploadType :: Lens' SubAccountsPatch (Maybe Text)
+sapUploadType
+  = lens _sapUploadType
+      (\ s a -> s{_sapUploadType = a})
 
 -- | User profile ID associated with this request.
 sapProFileId :: Lens' SubAccountsPatch Int64
@@ -104,12 +156,22 @@ sapId :: Lens' SubAccountsPatch Int64
 sapId
   = lens _sapId (\ s a -> s{_sapId = a}) . _Coerce
 
+-- | JSONP
+sapCallback :: Lens' SubAccountsPatch (Maybe Text)
+sapCallback
+  = lens _sapCallback (\ s a -> s{_sapCallback = a})
+
 instance GoogleRequest SubAccountsPatch where
         type Rs SubAccountsPatch = SubAccount
         type Scopes SubAccountsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SubAccountsPatch'{..}
-          = go _sapProFileId (Just _sapId) (Just AltJSON)
+          = go _sapProFileId (Just _sapId) _sapXgafv
+              _sapUploadProtocol
+              _sapAccessToken
+              _sapUploadType
+              _sapCallback
+              (Just AltJSON)
               _sapPayload
               dFAReportingService
           where go

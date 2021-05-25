@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
     , rupZone
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.pause@ method which the
 -- 'RollingUpdatesPause' request conforms to.
@@ -63,8 +63,8 @@ type RollingUpdatesPauseResource =
 data RollingUpdatesPause =
   RollingUpdatesPause'
     { _rupRollingUpdate :: !Text
-    , _rupProject       :: !Text
-    , _rupZone          :: !Text
+    , _rupProject :: !Text
+    , _rupZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

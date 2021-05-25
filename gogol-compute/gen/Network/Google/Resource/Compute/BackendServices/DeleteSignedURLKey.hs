@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.BackendServices.DeleteSignedURLKey
     , bsdsukBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.deleteSignedUrlKey@ method which the
 -- 'BackendServicesDeleteSignedURLKey' request conforms to.
@@ -64,9 +64,9 @@ type BackendServicesDeleteSignedURLKeyResource =
 -- /See:/ 'backendServicesDeleteSignedURLKey' smart constructor.
 data BackendServicesDeleteSignedURLKey =
   BackendServicesDeleteSignedURLKey'
-    { _bsdsukRequestId      :: !(Maybe Text)
-    , _bsdsukProject        :: !Text
-    , _bsdsukKeyName        :: !Text
+    { _bsdsukRequestId :: !(Maybe Text)
+    , _bsdsukProject :: !Text
+    , _bsdsukKeyName :: !Text
     , _bsdsukBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

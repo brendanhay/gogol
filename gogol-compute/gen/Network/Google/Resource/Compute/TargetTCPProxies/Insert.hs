@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetTCPProxies.Insert
     , ttpiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetTcpProxies.insert@ method which the
 -- 'TargetTCPProxiesInsert' request conforms to.
@@ -63,8 +63,8 @@ type TargetTCPProxiesInsertResource =
 data TargetTCPProxiesInsert =
   TargetTCPProxiesInsert'
     { _ttpiRequestId :: !(Maybe Text)
-    , _ttpiProject   :: !Text
-    , _ttpiPayload   :: !TargetTCPProxy
+    , _ttpiProject :: !Text
+    , _ttpiPayload :: !TargetTCPProxy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

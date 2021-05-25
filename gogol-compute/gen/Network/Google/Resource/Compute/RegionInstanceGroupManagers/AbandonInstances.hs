@@ -52,8 +52,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstan
     , rigmaiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.abandonInstances@ method which the
 -- 'RegionInstanceGroupManagersAbandonInstances' request conforms to.
@@ -91,11 +91,11 @@ type RegionInstanceGroupManagersAbandonInstancesResource
 -- /See:/ 'regionInstanceGroupManagersAbandonInstances' smart constructor.
 data RegionInstanceGroupManagersAbandonInstances =
   RegionInstanceGroupManagersAbandonInstances'
-    { _rigmaiRequestId            :: !(Maybe Text)
-    , _rigmaiProject              :: !Text
+    { _rigmaiRequestId :: !(Maybe Text)
+    , _rigmaiProject :: !Text
     , _rigmaiInstanceGroupManager :: !Text
-    , _rigmaiPayload              :: !RegionInstanceGroupManagersAbandonInstancesRequest
-    , _rigmaiRegion               :: !Text
+    , _rigmaiPayload :: !RegionInstanceGroupManagersAbandonInstancesRequest
+    , _rigmaiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a post.
+-- Updates a post by blog id and post id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.update@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.update@.
 module Network.Google.Resource.Blogger.Posts.Update
     (
     -- * REST Resource
@@ -34,48 +34,62 @@ module Network.Google.Resource.Blogger.Posts.Update
 
     -- * Request Lenses
     , puFetchBody
+    , puXgafv
+    , puUploadProtocol
+    , puAccessToken
     , puFetchImages
+    , puUploadType
     , puBlogId
     , puPayload
     , puMaxComments
     , puRevert
     , puPostId
     , puPublish
+    , puCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.update@ method which the
 -- 'PostsUpdate' request conforms to.
 type PostsUpdateResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 QueryParam "fetchBody" Bool :>
-                   QueryParam "fetchImages" Bool :>
-                     QueryParam "maxComments" (Textual Word32) :>
-                       QueryParam "revert" Bool :>
-                         QueryParam "publish" Bool :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Post' :> Put '[JSON] Post'
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               QueryParam "fetchBody" Bool :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "fetchImages" Bool :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "maxComments" (Textual Word32) :>
+                             QueryParam "revert" Bool :>
+                               QueryParam "publish" Bool :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Post' :> Put '[JSON] Post'
 
--- | Update a post.
+-- | Updates a post by blog id and post id.
 --
 -- /See:/ 'postsUpdate' smart constructor.
 data PostsUpdate =
   PostsUpdate'
-    { _puFetchBody   :: !Bool
+    { _puFetchBody :: !Bool
+    , _puXgafv :: !(Maybe Xgafv)
+    , _puUploadProtocol :: !(Maybe Text)
+    , _puAccessToken :: !(Maybe Text)
     , _puFetchImages :: !(Maybe Bool)
-    , _puBlogId      :: !Text
-    , _puPayload     :: !Post'
+    , _puUploadType :: !(Maybe Text)
+    , _puBlogId :: !Text
+    , _puPayload :: !Post'
     , _puMaxComments :: !(Maybe (Textual Word32))
-    , _puRevert      :: !(Maybe Bool)
-    , _puPostId      :: !Text
-    , _puPublish     :: !(Maybe Bool)
+    , _puRevert :: !(Maybe Bool)
+    , _puPostId :: !Text
+    , _puPublish :: !(Maybe Bool)
+    , _puCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -86,7 +100,15 @@ data PostsUpdate =
 --
 -- * 'puFetchBody'
 --
+-- * 'puXgafv'
+--
+-- * 'puUploadProtocol'
+--
+-- * 'puAccessToken'
+--
 -- * 'puFetchImages'
+--
+-- * 'puUploadType'
 --
 -- * 'puBlogId'
 --
@@ -99,6 +121,8 @@ data PostsUpdate =
 -- * 'puPostId'
 --
 -- * 'puPublish'
+--
+-- * 'puCallback'
 postsUpdate
     :: Text -- ^ 'puBlogId'
     -> Post' -- ^ 'puPayload'
@@ -107,30 +131,51 @@ postsUpdate
 postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
   PostsUpdate'
     { _puFetchBody = True
+    , _puXgafv = Nothing
+    , _puUploadProtocol = Nothing
+    , _puAccessToken = Nothing
     , _puFetchImages = Nothing
+    , _puUploadType = Nothing
     , _puBlogId = pPuBlogId_
     , _puPayload = pPuPayload_
     , _puMaxComments = Nothing
     , _puRevert = Nothing
     , _puPostId = pPuPostId_
     , _puPublish = Nothing
+    , _puCallback = Nothing
     }
 
 
--- | Whether the body content of the post is included with the result
--- (default: true).
 puFetchBody :: Lens' PostsUpdate Bool
 puFetchBody
   = lens _puFetchBody (\ s a -> s{_puFetchBody = a})
 
--- | Whether image URL metadata for each post is included in the returned
--- result (default: false).
+-- | V1 error format.
+puXgafv :: Lens' PostsUpdate (Maybe Xgafv)
+puXgafv = lens _puXgafv (\ s a -> s{_puXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+puUploadProtocol :: Lens' PostsUpdate (Maybe Text)
+puUploadProtocol
+  = lens _puUploadProtocol
+      (\ s a -> s{_puUploadProtocol = a})
+
+-- | OAuth access token.
+puAccessToken :: Lens' PostsUpdate (Maybe Text)
+puAccessToken
+  = lens _puAccessToken
+      (\ s a -> s{_puAccessToken = a})
+
 puFetchImages :: Lens' PostsUpdate (Maybe Bool)
 puFetchImages
   = lens _puFetchImages
       (\ s a -> s{_puFetchImages = a})
 
--- | The ID of the Blog.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+puUploadType :: Lens' PostsUpdate (Maybe Text)
+puUploadType
+  = lens _puUploadType (\ s a -> s{_puUploadType = a})
+
 puBlogId :: Lens' PostsUpdate Text
 puBlogId = lens _puBlogId (\ s a -> s{_puBlogId = a})
 
@@ -139,38 +184,41 @@ puPayload :: Lens' PostsUpdate Post'
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
--- | Maximum number of comments to retrieve with the returned post.
 puMaxComments :: Lens' PostsUpdate (Maybe Word32)
 puMaxComments
   = lens _puMaxComments
       (\ s a -> s{_puMaxComments = a})
       . mapping _Coerce
 
--- | Whether a revert action should be performed when the post is updated
--- (default: false).
 puRevert :: Lens' PostsUpdate (Maybe Bool)
 puRevert = lens _puRevert (\ s a -> s{_puRevert = a})
 
--- | The ID of the Post.
 puPostId :: Lens' PostsUpdate Text
 puPostId = lens _puPostId (\ s a -> s{_puPostId = a})
 
--- | Whether a publish action should be performed when the post is updated
--- (default: false).
 puPublish :: Lens' PostsUpdate (Maybe Bool)
 puPublish
   = lens _puPublish (\ s a -> s{_puPublish = a})
+
+-- | JSONP
+puCallback :: Lens' PostsUpdate (Maybe Text)
+puCallback
+  = lens _puCallback (\ s a -> s{_puCallback = a})
 
 instance GoogleRequest PostsUpdate where
         type Rs PostsUpdate = Post'
         type Scopes PostsUpdate =
              '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsUpdate'{..}
-          = go _puBlogId _puPostId (Just _puFetchBody)
+          = go _puBlogId _puPostId (Just _puFetchBody) _puXgafv
+              _puUploadProtocol
+              _puAccessToken
               _puFetchImages
+              _puUploadType
               _puMaxComments
               _puRevert
               _puPublish
+              _puCallback
               (Just AltJSON)
               _puPayload
               bloggerService

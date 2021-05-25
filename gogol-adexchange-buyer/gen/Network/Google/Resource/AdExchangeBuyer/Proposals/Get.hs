@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.Proposals.Get
     , pgProposalId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.proposals.get@ method which the
 -- 'ProposalsGet' request conforms to.

@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an Service Perimeter. The longrunning operation from this RPC
--- will have a successful status once the changes to the Service Perimeter
--- have propagated to long-lasting storage. Service Perimeter containing
--- errors will result in an error response for the first error encountered.
+-- Update a Service Perimeter. The longrunning operation from this RPC will
+-- have a successful status once the changes to the Service Perimeter have
+-- propagated to long-lasting storage. Service Perimeter containing errors
+-- will result in an error response for the first error encountered.
 --
 -- /See:/ <https://cloud.google.com/access-context-manager/docs/reference/rest/ Access Context Manager API Reference> for @accesscontextmanager.accessPolicies.servicePerimeters.patch@.
 module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
@@ -46,8 +46,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerime
     , apsppCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.patch@ method which the
 -- 'AccessPoliciesServicePerimetersPatch' request conforms to.
@@ -64,22 +64,22 @@ type AccessPoliciesServicePerimetersPatchResource =
                        ReqBody '[JSON] ServicePerimeter :>
                          Patch '[JSON] Operation
 
--- | Update an Service Perimeter. The longrunning operation from this RPC
--- will have a successful status once the changes to the Service Perimeter
--- have propagated to long-lasting storage. Service Perimeter containing
--- errors will result in an error response for the first error encountered.
+-- | Update a Service Perimeter. The longrunning operation from this RPC will
+-- have a successful status once the changes to the Service Perimeter have
+-- propagated to long-lasting storage. Service Perimeter containing errors
+-- will result in an error response for the first error encountered.
 --
 -- /See:/ 'accessPoliciesServicePerimetersPatch' smart constructor.
 data AccessPoliciesServicePerimetersPatch =
   AccessPoliciesServicePerimetersPatch'
-    { _apsppXgafv          :: !(Maybe Xgafv)
+    { _apsppXgafv :: !(Maybe Xgafv)
     , _apsppUploadProtocol :: !(Maybe Text)
-    , _apsppUpdateMask     :: !(Maybe GFieldMask)
-    , _apsppAccessToken    :: !(Maybe Text)
-    , _apsppUploadType     :: !(Maybe Text)
-    , _apsppPayload        :: !ServicePerimeter
-    , _apsppName           :: !Text
-    , _apsppCallback       :: !(Maybe Text)
+    , _apsppUpdateMask :: !(Maybe GFieldMask)
+    , _apsppAccessToken :: !(Maybe Text)
+    , _apsppUploadType :: !(Maybe Text)
+    , _apsppPayload :: !ServicePerimeter
+    , _apsppName :: !Text
+    , _apsppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

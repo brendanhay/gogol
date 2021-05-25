@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Routers.Get
     , rggRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.routers.get@ method which the
 -- 'RoutersGet' request conforms to.
@@ -62,8 +62,8 @@ type RoutersGetResource =
 data RoutersGet =
   RoutersGet'
     { _rggProject :: !Text
-    , _rggRouter  :: !Text
-    , _rggRegion  :: !Text
+    , _rggRouter :: !Text
+    , _rggRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Inserts a new content category.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.contentCategories.insert@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     , ContentCategoriesInsert
 
     -- * Request Lenses
+    , cciXgafv
+    , cciUploadProtocol
+    , cciAccessToken
+    , cciUploadType
     , cciProFileId
     , cciPayload
+    , cciCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.insert@ method which the
 -- 'ContentCategoriesInsert' request conforms to.
 type ContentCategoriesInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ContentCategory :>
-                   Post '[JSON] ContentCategory
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ContentCategory :>
+                             Post '[JSON] ContentCategory
 
 -- | Inserts a new content category.
 --
 -- /See:/ 'contentCategoriesInsert' smart constructor.
 data ContentCategoriesInsert =
   ContentCategoriesInsert'
-    { _cciProFileId :: !(Textual Int64)
-    , _cciPayload   :: !ContentCategory
+    { _cciXgafv :: !(Maybe Xgafv)
+    , _cciUploadProtocol :: !(Maybe Text)
+    , _cciAccessToken :: !(Maybe Text)
+    , _cciUploadType :: !(Maybe Text)
+    , _cciProFileId :: !(Textual Int64)
+    , _cciPayload :: !ContentCategory
+    , _cciCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data ContentCategoriesInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cciXgafv'
+--
+-- * 'cciUploadProtocol'
+--
+-- * 'cciAccessToken'
+--
+-- * 'cciUploadType'
+--
 -- * 'cciProFileId'
 --
 -- * 'cciPayload'
+--
+-- * 'cciCallback'
 contentCategoriesInsert
     :: Int64 -- ^ 'cciProFileId'
     -> ContentCategory -- ^ 'cciPayload'
     -> ContentCategoriesInsert
 contentCategoriesInsert pCciProFileId_ pCciPayload_ =
   ContentCategoriesInsert'
-    {_cciProFileId = _Coerce # pCciProFileId_, _cciPayload = pCciPayload_}
+    { _cciXgafv = Nothing
+    , _cciUploadProtocol = Nothing
+    , _cciAccessToken = Nothing
+    , _cciUploadType = Nothing
+    , _cciProFileId = _Coerce # pCciProFileId_
+    , _cciPayload = pCciPayload_
+    , _cciCallback = Nothing
+    }
 
+
+-- | V1 error format.
+cciXgafv :: Lens' ContentCategoriesInsert (Maybe Xgafv)
+cciXgafv = lens _cciXgafv (\ s a -> s{_cciXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cciUploadProtocol :: Lens' ContentCategoriesInsert (Maybe Text)
+cciUploadProtocol
+  = lens _cciUploadProtocol
+      (\ s a -> s{_cciUploadProtocol = a})
+
+-- | OAuth access token.
+cciAccessToken :: Lens' ContentCategoriesInsert (Maybe Text)
+cciAccessToken
+  = lens _cciAccessToken
+      (\ s a -> s{_cciAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cciUploadType :: Lens' ContentCategoriesInsert (Maybe Text)
+cciUploadType
+  = lens _cciUploadType
+      (\ s a -> s{_cciUploadType = a})
 
 -- | User profile ID associated with this request.
 cciProFileId :: Lens' ContentCategoriesInsert Int64
@@ -90,12 +144,22 @@ cciPayload :: Lens' ContentCategoriesInsert ContentCategory
 cciPayload
   = lens _cciPayload (\ s a -> s{_cciPayload = a})
 
+-- | JSONP
+cciCallback :: Lens' ContentCategoriesInsert (Maybe Text)
+cciCallback
+  = lens _cciCallback (\ s a -> s{_cciCallback = a})
+
 instance GoogleRequest ContentCategoriesInsert where
         type Rs ContentCategoriesInsert = ContentCategory
         type Scopes ContentCategoriesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ContentCategoriesInsert'{..}
-          = go _cciProFileId (Just AltJSON) _cciPayload
+          = go _cciProFileId _cciXgafv _cciUploadProtocol
+              _cciAccessToken
+              _cciUploadType
+              _cciCallback
+              (Just AltJSON)
+              _cciPayload
               dFAReportingService
           where go
                   = buildClient

@@ -37,8 +37,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Insert
     , wriVerificationMethod
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.insert@ method which the
 -- 'WebResourceInsert' request conforms to.
@@ -56,7 +56,7 @@ type WebResourceInsertResource =
 -- /See:/ 'webResourceInsert' smart constructor.
 data WebResourceInsert =
   WebResourceInsert'
-    { _wriPayload            :: !SiteVerificationWebResourceResource
+    { _wriPayload :: !SiteVerificationWebResourceResource
     , _wriVerificationMethod :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

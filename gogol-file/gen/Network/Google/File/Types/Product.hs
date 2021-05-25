@@ -17,8 +17,8 @@
 --
 module Network.Google.File.Types.Product where
 
-import           Network.Google.File.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.File.Types.Sum
+import Network.Google.Prelude
 
 -- | Resource labels to represent user provided metadata.
 --
@@ -55,47 +55,156 @@ instance FromJSON InstanceLabels where
 instance ToJSON InstanceLabels where
         toJSON = toJSON . _ilAddtional
 
+-- | ListBackupsResponse is the result of ListBackupsRequest.
+--
+-- /See:/ 'listBackupsResponse' smart constructor.
+data ListBackupsResponse =
+  ListBackupsResponse'
+    { _lbrNextPageToken :: !(Maybe Text)
+    , _lbrBackups :: !(Maybe [Backup])
+    , _lbrUnreachable :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListBackupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lbrNextPageToken'
+--
+-- * 'lbrBackups'
+--
+-- * 'lbrUnreachable'
+listBackupsResponse
+    :: ListBackupsResponse
+listBackupsResponse =
+  ListBackupsResponse'
+    { _lbrNextPageToken = Nothing
+    , _lbrBackups = Nothing
+    , _lbrUnreachable = Nothing
+    }
+
+
+-- | The token you can use to retrieve the next page of results. Not returned
+-- if there are no more results in the list.
+lbrNextPageToken :: Lens' ListBackupsResponse (Maybe Text)
+lbrNextPageToken
+  = lens _lbrNextPageToken
+      (\ s a -> s{_lbrNextPageToken = a})
+
+-- | A list of backups in the project for the specified location. If the
+-- {location} value in the request is \"-\", the response contains a list
+-- of backups from all locations. If any location is unreachable, the
+-- response will only return backups in reachable locations and the
+-- \"unreachable\" field will be populated with a list of unreachable
+-- locations.
+lbrBackups :: Lens' ListBackupsResponse [Backup]
+lbrBackups
+  = lens _lbrBackups (\ s a -> s{_lbrBackups = a}) .
+      _Default
+      . _Coerce
+
+-- | Locations that could not be reached.
+lbrUnreachable :: Lens' ListBackupsResponse [Text]
+lbrUnreachable
+  = lens _lbrUnreachable
+      (\ s a -> s{_lbrUnreachable = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListBackupsResponse where
+        parseJSON
+          = withObject "ListBackupsResponse"
+              (\ o ->
+                 ListBackupsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "backups" .!= mempty)
+                     <*> (o .:? "unreachable" .!= mempty))
+
+instance ToJSON ListBackupsResponse where
+        toJSON ListBackupsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lbrNextPageToken,
+                  ("backups" .=) <$> _lbrBackups,
+                  ("unreachable" .=) <$> _lbrUnreachable])
+
+-- | SloEligibility is a tuple containing eligibility value: true if an
+-- instance is eligible for SLO calculation or false if it should be
+-- excluded from all SLO-related calculations along with a user-defined
+-- reason.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1SloEligibility' smart constructor.
+data GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility =
+  GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility'
+    { _gcsmpvseEligible :: !(Maybe Bool)
+    , _gcsmpvseReason :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvseEligible'
+--
+-- * 'gcsmpvseReason'
+googleCloudSaasacceleratorManagementProvidersV1SloEligibility
+    :: GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
+googleCloudSaasacceleratorManagementProvidersV1SloEligibility =
+  GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility'
+    {_gcsmpvseEligible = Nothing, _gcsmpvseReason = Nothing}
+
+
+-- | Whether an instance is eligible or ineligible.
+gcsmpvseEligible :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility (Maybe Bool)
+gcsmpvseEligible
+  = lens _gcsmpvseEligible
+      (\ s a -> s{_gcsmpvseEligible = a})
+
+-- | User-defined reason for the current value of instance eligibility.
+-- Usually, this can be directly mapped to the internal state. An empty
+-- reason is allowed.
+gcsmpvseReason :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility (Maybe Text)
+gcsmpvseReason
+  = lens _gcsmpvseReason
+      (\ s a -> s{_gcsmpvseReason = a})
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility'
+                   <$> (o .:? "eligible") <*> (o .:? "reason"))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
+         where
+        toJSON
+          GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility'{..}
+          = object
+              (catMaybes
+                 [("eligible" .=) <$> _gcsmpvseEligible,
+                  ("reason" .=) <$> _gcsmpvseReason])
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -190,78 +299,110 @@ instance FromJSON OperationSchema where
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
 
--- | RolloutMetadata for an actuation instance. It maps to a single
--- RolloutType.
+-- | NFS export options specifications.
 --
--- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1RolloutMetadata' smart constructor.
-data GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata =
-  GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata'
-    { _gcsmpvrmRolloutName  :: !(Maybe Text)
-    , _gcsmpvrmNotification :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata)
-    , _gcsmpvrmReleaseName  :: !(Maybe Text)
+-- /See:/ 'nfsExportOptions' smart constructor.
+data NfsExportOptions =
+  NfsExportOptions'
+    { _neoAnonGid :: !(Maybe (Textual Int64))
+    , _neoAccessMode :: !(Maybe NfsExportOptionsAccessMode)
+    , _neoAnonUid :: !(Maybe (Textual Int64))
+    , _neoSquashMode :: !(Maybe NfsExportOptionsSquashMode)
+    , _neoIPRanges :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata' with the minimum fields required to make a request.
+-- | Creates a value of 'NfsExportOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcsmpvrmRolloutName'
+-- * 'neoAnonGid'
 --
--- * 'gcsmpvrmNotification'
+-- * 'neoAccessMode'
 --
--- * 'gcsmpvrmReleaseName'
-googleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-    :: GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-googleCloudSaasacceleratorManagementProvidersV1RolloutMetadata =
-  GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata'
-    { _gcsmpvrmRolloutName = Nothing
-    , _gcsmpvrmNotification = Nothing
-    , _gcsmpvrmReleaseName = Nothing
+-- * 'neoAnonUid'
+--
+-- * 'neoSquashMode'
+--
+-- * 'neoIPRanges'
+nfsExportOptions
+    :: NfsExportOptions
+nfsExportOptions =
+  NfsExportOptions'
+    { _neoAnonGid = Nothing
+    , _neoAccessMode = Nothing
+    , _neoAnonUid = Nothing
+    , _neoSquashMode = Nothing
+    , _neoIPRanges = Nothing
     }
 
 
--- | The last rollout that has been applied to the instance.
-gcsmpvrmRolloutName :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata (Maybe Text)
-gcsmpvrmRolloutName
-  = lens _gcsmpvrmRolloutName
-      (\ s a -> s{_gcsmpvrmRolloutName = a})
+-- | An integer representing the anonymous group id with a default value of
+-- 65534. Anon_gid may only be set with squash_mode of ROOT_SQUASH. An
+-- error will be returned if this field is specified for other squash_mode
+-- settings.
+neoAnonGid :: Lens' NfsExportOptions (Maybe Int64)
+neoAnonGid
+  = lens _neoAnonGid (\ s a -> s{_neoAnonGid = a}) .
+      mapping _Coerce
 
--- | Instance level notification metadata.
-gcsmpvrmNotification :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata (Maybe GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata)
-gcsmpvrmNotification
-  = lens _gcsmpvrmNotification
-      (\ s a -> s{_gcsmpvrmNotification = a})
+-- | Either READ_ONLY, for allowing only read requests on the exported
+-- directory, or READ_WRITE, for allowing both read and write requests. The
+-- default is READ_WRITE.
+neoAccessMode :: Lens' NfsExportOptions (Maybe NfsExportOptionsAccessMode)
+neoAccessMode
+  = lens _neoAccessMode
+      (\ s a -> s{_neoAccessMode = a})
 
--- | The last Release that has been applied to the instance.
-gcsmpvrmReleaseName :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata (Maybe Text)
-gcsmpvrmReleaseName
-  = lens _gcsmpvrmReleaseName
-      (\ s a -> s{_gcsmpvrmReleaseName = a})
+-- | An integer representing the anonymous user id with a default value of
+-- 65534. Anon_uid may only be set with squash_mode of ROOT_SQUASH. An
+-- error will be returned if this field is specified for other squash_mode
+-- settings.
+neoAnonUid :: Lens' NfsExportOptions (Maybe Int64)
+neoAnonUid
+  = lens _neoAnonUid (\ s a -> s{_neoAnonUid = a}) .
+      mapping _Coerce
 
-instance FromJSON
-           GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-         where
+-- | Either NO_ROOT_SQUASH, for allowing root access on the exported
+-- directory, or ROOT_SQUASH, for not allowing root access. The default is
+-- NO_ROOT_SQUASH.
+neoSquashMode :: Lens' NfsExportOptions (Maybe NfsExportOptionsSquashMode)
+neoSquashMode
+  = lens _neoSquashMode
+      (\ s a -> s{_neoSquashMode = a})
+
+-- | List of either an IPv4 addresses in the format {octet 1}.{octet
+-- 2}.{octet 3}.{octet 4} or CIDR ranges in the format {octet 1}.{octet
+-- 2}.{octet 3}.{octet 4}\/{mask size} which may mount the file share.
+-- Overlapping IP ranges are not allowed, both within and across
+-- NfsExportOptions. An error will be returned. The limit is 64 IP
+-- ranges\/addresses for each FileShareConfig among all NfsExportOptions.
+neoIPRanges :: Lens' NfsExportOptions [Text]
+neoIPRanges
+  = lens _neoIPRanges (\ s a -> s{_neoIPRanges = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON NfsExportOptions where
         parseJSON
-          = withObject
-              "GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata"
+          = withObject "NfsExportOptions"
               (\ o ->
-                 GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata'
-                   <$>
-                   (o .:? "rolloutName") <*> (o .:? "notification") <*>
-                     (o .:? "releaseName"))
+                 NfsExportOptions' <$>
+                   (o .:? "anonGid") <*> (o .:? "accessMode") <*>
+                     (o .:? "anonUid")
+                     <*> (o .:? "squashMode")
+                     <*> (o .:? "ipRanges" .!= mempty))
 
-instance ToJSON
-           GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
-         where
-        toJSON
-          GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata'{..}
+instance ToJSON NfsExportOptions where
+        toJSON NfsExportOptions'{..}
           = object
               (catMaybes
-                 [("rolloutName" .=) <$> _gcsmpvrmRolloutName,
-                  ("notification" .=) <$> _gcsmpvrmNotification,
-                  ("releaseName" .=) <$> _gcsmpvrmReleaseName])
+                 [("anonGid" .=) <$> _neoAnonGid,
+                  ("accessMode" .=) <$> _neoAccessMode,
+                  ("anonUid" .=) <$> _neoAnonUid,
+                  ("squashMode" .=) <$> _neoSquashMode,
+                  ("ipRanges" .=) <$> _neoIPRanges])
 
 -- | The response message for Locations.ListLocations.
 --
@@ -269,7 +410,7 @@ instance ToJSON
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -321,7 +462,7 @@ instance ToJSON ListLocationsResponse where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -392,16 +533,74 @@ instance FromJSON CancelOperationRequest where
 instance ToJSON CancelOperationRequest where
         toJSON = const emptyObject
 
+-- | Configure the schedule.
+--
+-- /See:/ 'schedule' smart constructor.
+data Schedule =
+  Schedule'
+    { _sStartTime :: !(Maybe TimeOfDay')
+    , _sDay :: !(Maybe ScheduleDay)
+    , _sDuration :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Schedule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sStartTime'
+--
+-- * 'sDay'
+--
+-- * 'sDuration'
+schedule
+    :: Schedule
+schedule =
+  Schedule' {_sStartTime = Nothing, _sDay = Nothing, _sDuration = Nothing}
+
+
+-- | Time within the window to start the operations.
+sStartTime :: Lens' Schedule (Maybe TimeOfDay')
+sStartTime
+  = lens _sStartTime (\ s a -> s{_sStartTime = a})
+
+-- | Allows to define schedule that runs specified day of the week.
+sDay :: Lens' Schedule (Maybe ScheduleDay)
+sDay = lens _sDay (\ s a -> s{_sDay = a})
+
+-- | Output only. Duration of the time window, set by service producer.
+sDuration :: Lens' Schedule (Maybe Scientific)
+sDuration
+  = lens _sDuration (\ s a -> s{_sDuration = a}) .
+      mapping _GDuration
+
+instance FromJSON Schedule where
+        parseJSON
+          = withObject "Schedule"
+              (\ o ->
+                 Schedule' <$>
+                   (o .:? "startTime") <*> (o .:? "day") <*>
+                     (o .:? "duration"))
+
+instance ToJSON Schedule where
+        toJSON Schedule'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _sStartTime,
+                  ("day" .=) <$> _sDay,
+                  ("duration" .=) <$> _sDuration])
+
 -- | A resource that represents Google Cloud Platform location.
 --
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -484,10 +683,10 @@ instance ToJSON Location where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationSchema)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -542,7 +741,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -598,49 +798,82 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | Instance represents the interface for SLM services to actuate the state
--- of control plane resources. Example Instance in JSON, where
--- consumer-project=snapchat, producer-project=cloud-sql: \`\`\`json
--- Instance: { \"name\":
--- \"projects\/snapchat\/locations\/us-east1\/instances\/prod-instance\",
--- \"create_time\": { \"seconds\": 1526406431, }, \"labels\": { \"env\":
--- \"prod\", \"foo\": \"bar\" }, \"state\": READY, \"software_version\":
--- \"cloud-sql-09-28-2018\", \"maintenance_policy_names\": {
--- \"UpdatePolicy\":
--- \"projects\/snapchat\/locations\/us-east1\/maintenancePolicies\/prod-update-policy\",
--- } \"rollout_metadata\": {
--- \"projects\/cloud-sql\/locations\/global\/rolloutTypes\/software_update\":
--- { \"release\":
--- \"projects\/cloud-sql\/locations\/global\/releases\/cloud-sql-09-28-2018\",
--- \"rollout\":
--- \"projects\/cloud-sql\/locations\/us-east1\/rollouts\/cloud-sql-09-28-2018-canary\",
--- }
--- \"projects\/cloud-sql\/locations\/global\/rolloutTypes\/instance_restart\":
--- { \"release\":
--- \"projects\/cloud-sql\/locations\/global\/releases\/cloud-sql-09-20-repair\",
--- \"rollout\":
--- \"projects\/cloud-sql\/locations\/us-east1\/rollouts\/cloud-sql-09-20-repair-100-percent\",
--- } } \"tenant_project_id\": \"cloud-sql-test-tenant\",
--- \"producer_metadata\": { \"cloud-sql-tier\": \"basic\",
--- \"cloud-sql-instance-size\": \"1G\", }, \"provisioned_resources\": [ {
--- \"resource-type\": \"compute-instance\", \"resource-url\":
--- \"https:\/\/www.googleapis.com\/compute\/v1\/projects\/cloud-sql\/zones\/us-east1-b\/instances\/vm-1\",
--- } ], } \`\`\`
+-- | PerSliSloEligibility is a mapping from an SLI name to eligibility.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility' smart constructor.
+newtype GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility =
+  GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility'
+    { _gcsmpvpsseEligibilities :: Maybe GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvpsseEligibilities'
+googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+    :: GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility =
+  GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility'
+    {_gcsmpvpsseEligibilities = Nothing}
+
+
+-- | An entry in the eligibilities map specifies an eligibility for a
+-- particular SLI for the given instance. The SLI key in the name must be a
+-- valid SLI name specified in the Eligibility Exporter binary flags
+-- otherwise an error will be emitted by Eligibility Exporter and the
+-- oncaller will be alerted. If an SLI has been defined in the binary flags
+-- but the eligibilities map does not contain it, the corresponding SLI
+-- time series will not be emitted by the Eligibility Exporter. This
+-- ensures a smooth rollout and compatibility between the data produced by
+-- different versions of the Eligibility Exporters. If eligibilities map
+-- contains a key for an SLI which has not been declared in the binary
+-- flags, there will be an error message emitted in the Eligibility
+-- Exporter log and the metric for the SLI in question will not be emitted.
+gcsmpvpsseEligibilities :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility (Maybe GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities)
+gcsmpvpsseEligibilities
+  = lens _gcsmpvpsseEligibilities
+      (\ s a -> s{_gcsmpvpsseEligibilities = a})
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility'
+                   <$> (o .:? "eligibilities"))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
+         where
+        toJSON
+          GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility'{..}
+          = object
+              (catMaybes
+                 [("eligibilities" .=) <$> _gcsmpvpsseEligibilities])
+
 --
 -- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1Instance' smart constructor.
 data GoogleCloudSaasacceleratorManagementProvidersV1Instance =
   GoogleCloudSaasacceleratorManagementProvidersV1Instance'
-    { _gcsmpviTenantProjectId        :: !(Maybe Text)
-    , _gcsmpviState                  :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceState)
-    , _gcsmpviSoftwareVersions       :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceSoftwareVersions)
-    , _gcsmpviProvisionedResources   :: !(Maybe [GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource])
-    , _gcsmpviUpdateTime             :: !(Maybe DateTime')
-    , _gcsmpviName                   :: !(Maybe Text)
-    , _gcsmpviLabels                 :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceLabels)
-    , _gcsmpviSloMetadata            :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata)
-    , _gcsmpviProducerMetadata       :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceProducerMetadata)
-    , _gcsmpviRolloutMetadata        :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata)
-    , _gcsmpviCreateTime             :: !(Maybe DateTime')
+    { _gcsmpviTenantProjectId :: !(Maybe Text)
+    , _gcsmpviState :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceState)
+    , _gcsmpviConsumerDefinedName :: !(Maybe Text)
+    , _gcsmpviMaintenanceSettings :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings)
+    , _gcsmpviSoftwareVersions :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceSoftwareVersions)
+    , _gcsmpviProvisionedResources :: !(Maybe [GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource])
+    , _gcsmpviUpdateTime :: !(Maybe DateTime')
+    , _gcsmpviName :: !(Maybe Text)
+    , _gcsmpviLabels :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceLabels)
+    , _gcsmpviSloMetadata :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata)
+    , _gcsmpviProducerMetadata :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceProducerMetadata)
+    , _gcsmpviSlmInstanceTemplate :: !(Maybe Text)
+    , _gcsmpviMaintenanceSchedules :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules)
+    , _gcsmpviCreateTime :: !(Maybe DateTime')
     , _gcsmpviMaintenancePolicyNames :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenancePolicyNames)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -653,6 +886,10 @@ data GoogleCloudSaasacceleratorManagementProvidersV1Instance =
 -- * 'gcsmpviTenantProjectId'
 --
 -- * 'gcsmpviState'
+--
+-- * 'gcsmpviConsumerDefinedName'
+--
+-- * 'gcsmpviMaintenanceSettings'
 --
 -- * 'gcsmpviSoftwareVersions'
 --
@@ -668,7 +905,9 @@ data GoogleCloudSaasacceleratorManagementProvidersV1Instance =
 --
 -- * 'gcsmpviProducerMetadata'
 --
--- * 'gcsmpviRolloutMetadata'
+-- * 'gcsmpviSlmInstanceTemplate'
+--
+-- * 'gcsmpviMaintenanceSchedules'
 --
 -- * 'gcsmpviCreateTime'
 --
@@ -679,6 +918,8 @@ googleCloudSaasacceleratorManagementProvidersV1Instance =
   GoogleCloudSaasacceleratorManagementProvidersV1Instance'
     { _gcsmpviTenantProjectId = Nothing
     , _gcsmpviState = Nothing
+    , _gcsmpviConsumerDefinedName = Nothing
+    , _gcsmpviMaintenanceSettings = Nothing
     , _gcsmpviSoftwareVersions = Nothing
     , _gcsmpviProvisionedResources = Nothing
     , _gcsmpviUpdateTime = Nothing
@@ -686,7 +927,8 @@ googleCloudSaasacceleratorManagementProvidersV1Instance =
     , _gcsmpviLabels = Nothing
     , _gcsmpviSloMetadata = Nothing
     , _gcsmpviProducerMetadata = Nothing
-    , _gcsmpviRolloutMetadata = Nothing
+    , _gcsmpviSlmInstanceTemplate = Nothing
+    , _gcsmpviMaintenanceSchedules = Nothing
     , _gcsmpviCreateTime = Nothing
     , _gcsmpviMaintenancePolicyNames = Nothing
     }
@@ -704,6 +946,21 @@ gcsmpviTenantProjectId
 gcsmpviState :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceState)
 gcsmpviState
   = lens _gcsmpviState (\ s a -> s{_gcsmpviState = a})
+
+-- | consumer_defined_name is the name that is set by the consumer. On the
+-- other hand Name field represents system-assigned id of an instance so
+-- consumers are not necessarily aware of it. consumer_defined_name is used
+-- for notification\/UI purposes for consumer to recognize their instances.
+gcsmpviConsumerDefinedName :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe Text)
+gcsmpviConsumerDefinedName
+  = lens _gcsmpviConsumerDefinedName
+      (\ s a -> s{_gcsmpviConsumerDefinedName = a})
+
+-- | Optional. The MaintenanceSettings associated with instance.
+gcsmpviMaintenanceSettings :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings)
+gcsmpviMaintenanceSettings
+  = lens _gcsmpviMaintenanceSettings
+      (\ s a -> s{_gcsmpviMaintenanceSettings = a})
 
 -- | Software versions that are used to deploy this instance. This can be
 -- mutated by rollout services.
@@ -729,7 +986,9 @@ gcsmpviUpdateTime
       . mapping _DateTime
 
 -- | Unique name of the resource. It uses the form:
--- \`projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}\`
+-- \`projects\/{project_id|project_number}\/locations\/{location_id}\/instances\/{instance_id}\`
+-- Note: Either project_id or project_number can be used, but keep it
+-- consistent with other APIs (e.g. RescheduleUpdate)
 gcsmpviName :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe Text)
 gcsmpviName
   = lens _gcsmpviName (\ s a -> s{_gcsmpviName = a})
@@ -758,15 +1017,21 @@ gcsmpviProducerMetadata
   = lens _gcsmpviProducerMetadata
       (\ s a -> s{_gcsmpviProducerMetadata = a})
 
--- | The map between RolloutType and the corresponding RolloutMetadata. This
--- is only mutated by rollout service. For actuation implementation, this
--- information is pass-through for Rollout management. Producer shall not
--- modify by itself. For update of a single entry in this map, the update
--- field mask shall follow this sementics: go\/advanced-field-masks
-gcsmpviRolloutMetadata :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata)
-gcsmpviRolloutMetadata
-  = lens _gcsmpviRolloutMetadata
-      (\ s a -> s{_gcsmpviRolloutMetadata = a})
+-- | Link to the SLM instance template. Only populated when updating SLM
+-- instances via SSA\'s Actuation service adaptor. Service producers with
+-- custom control plane (e.g. Cloud SQL) doesn\'t need to populate this
+-- field. Instead they should use software_versions.
+gcsmpviSlmInstanceTemplate :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe Text)
+gcsmpviSlmInstanceTemplate
+  = lens _gcsmpviSlmInstanceTemplate
+      (\ s a -> s{_gcsmpviSlmInstanceTemplate = a})
+
+-- | The MaintenanceSchedule contains the scheduling information of published
+-- maintenance schedule with same key as software_versions.
+gcsmpviMaintenanceSchedules :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules)
+gcsmpviMaintenanceSchedules
+  = lens _gcsmpviMaintenanceSchedules
+      (\ s a -> s{_gcsmpviMaintenanceSchedules = a})
 
 -- | Output only. Timestamp when the resource was created.
 gcsmpviCreateTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe UTCTime)
@@ -775,11 +1040,11 @@ gcsmpviCreateTime
       (\ s a -> s{_gcsmpviCreateTime = a})
       . mapping _DateTime
 
--- | The MaintenancePolicies that have been attached to the instance. The key
--- must be of the type name of the oneof policy name defined in
--- MaintenancePolicy, and the referenced policy must define the same policy
--- type. For complete details of MaintenancePolicy, please refer to
--- \/\/depot\/google3\/google\/cloud\/saasaccelerator\/maintenancepolicy\/api\/v1\/maintenance_policy_resources.proto
+-- | Deprecated. The MaintenancePolicies that have been attached to the
+-- instance. The key must be of the type name of the oneof policy name
+-- defined in MaintenancePolicy, and the referenced policy must define the
+-- same policy type. For complete details of MaintenancePolicy, please
+-- refer to go\/cloud-saas-mw-ug.
 gcsmpviMaintenancePolicyNames :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1Instance (Maybe GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenancePolicyNames)
 gcsmpviMaintenancePolicyNames
   = lens _gcsmpviMaintenancePolicyNames
@@ -795,14 +1060,17 @@ instance FromJSON
                  GoogleCloudSaasacceleratorManagementProvidersV1Instance'
                    <$>
                    (o .:? "tenantProjectId") <*> (o .:? "state") <*>
-                     (o .:? "softwareVersions")
+                     (o .:? "consumerDefinedName")
+                     <*> (o .:? "maintenanceSettings")
+                     <*> (o .:? "softwareVersions")
                      <*> (o .:? "provisionedResources" .!= mempty)
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
                      <*> (o .:? "labels")
                      <*> (o .:? "sloMetadata")
                      <*> (o .:? "producerMetadata")
-                     <*> (o .:? "rolloutMetadata")
+                     <*> (o .:? "slmInstanceTemplate")
+                     <*> (o .:? "maintenanceSchedules")
                      <*> (o .:? "createTime")
                      <*> (o .:? "maintenancePolicyNames"))
 
@@ -815,6 +1083,10 @@ instance ToJSON
               (catMaybes
                  [("tenantProjectId" .=) <$> _gcsmpviTenantProjectId,
                   ("state" .=) <$> _gcsmpviState,
+                  ("consumerDefinedName" .=) <$>
+                    _gcsmpviConsumerDefinedName,
+                  ("maintenanceSettings" .=) <$>
+                    _gcsmpviMaintenanceSettings,
                   ("softwareVersions" .=) <$> _gcsmpviSoftwareVersions,
                   ("provisionedResources" .=) <$>
                     _gcsmpviProvisionedResources,
@@ -823,10 +1095,86 @@ instance ToJSON
                   ("labels" .=) <$> _gcsmpviLabels,
                   ("sloMetadata" .=) <$> _gcsmpviSloMetadata,
                   ("producerMetadata" .=) <$> _gcsmpviProducerMetadata,
-                  ("rolloutMetadata" .=) <$> _gcsmpviRolloutMetadata,
+                  ("slmInstanceTemplate" .=) <$>
+                    _gcsmpviSlmInstanceTemplate,
+                  ("maintenanceSchedules" .=) <$>
+                    _gcsmpviMaintenanceSchedules,
                   ("createTime" .=) <$> _gcsmpviCreateTime,
                   ("maintenancePolicyNames" .=) <$>
                     _gcsmpviMaintenancePolicyNames])
+
+-- | Optional. Resource labels to represent user provided metadata. Each
+-- label is a key-value pair, where both the key and the value are
+-- arbitrary strings provided by the user.
+--
+-- /See:/ 'maintenancePolicyLabels' smart constructor.
+newtype MaintenancePolicyLabels =
+  MaintenancePolicyLabels'
+    { _mplAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MaintenancePolicyLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mplAddtional'
+maintenancePolicyLabels
+    :: HashMap Text Text -- ^ 'mplAddtional'
+    -> MaintenancePolicyLabels
+maintenancePolicyLabels pMplAddtional_ =
+  MaintenancePolicyLabels' {_mplAddtional = _Coerce # pMplAddtional_}
+
+
+mplAddtional :: Lens' MaintenancePolicyLabels (HashMap Text Text)
+mplAddtional
+  = lens _mplAddtional (\ s a -> s{_mplAddtional = a})
+      . _Coerce
+
+instance FromJSON MaintenancePolicyLabels where
+        parseJSON
+          = withObject "MaintenancePolicyLabels"
+              (\ o ->
+                 MaintenancePolicyLabels' <$> (parseJSONObject o))
+
+instance ToJSON MaintenancePolicyLabels where
+        toJSON = toJSON . _mplAddtional
+
+-- | Resource labels to represent user provided metadata.
+--
+-- /See:/ 'backupLabels' smart constructor.
+newtype BackupLabels =
+  BackupLabels'
+    { _blAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BackupLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'blAddtional'
+backupLabels
+    :: HashMap Text Text -- ^ 'blAddtional'
+    -> BackupLabels
+backupLabels pBlAddtional_ =
+  BackupLabels' {_blAddtional = _Coerce # pBlAddtional_}
+
+
+blAddtional :: Lens' BackupLabels (HashMap Text Text)
+blAddtional
+  = lens _blAddtional (\ s a -> s{_blAddtional = a}) .
+      _Coerce
+
+instance FromJSON BackupLabels where
+        parseJSON
+          = withObject "BackupLabels"
+              (\ o -> BackupLabels' <$> (parseJSONObject o))
+
+instance ToJSON BackupLabels where
+        toJSON = toJSON . _blAddtional
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -862,6 +1210,61 @@ instance FromJSON StatusDetailsItem where
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
+
+-- | An entry in the eligibilities map specifies an eligibility for a
+-- particular SLI for the given instance. The SLI key in the name must be a
+-- valid SLI name specified in the Eligibility Exporter binary flags
+-- otherwise an error will be emitted by Eligibility Exporter and the
+-- oncaller will be alerted. If an SLI has been defined in the binary flags
+-- but the eligibilities map does not contain it, the corresponding SLI
+-- time series will not be emitted by the Eligibility Exporter. This
+-- ensures a smooth rollout and compatibility between the data produced by
+-- different versions of the Eligibility Exporters. If eligibilities map
+-- contains a key for an SLI which has not been declared in the binary
+-- flags, there will be an error message emitted in the Eligibility
+-- Exporter log and the metric for the SLI in question will not be emitted.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities' smart constructor.
+newtype GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities =
+  GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities'
+    { _gcsmpvpsseeAddtional :: HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvpsseeAddtional'
+googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+    :: HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility -- ^ 'gcsmpvpsseeAddtional'
+    -> GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+googleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities pGcsmpvpsseeAddtional_ =
+  GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities'
+    {_gcsmpvpsseeAddtional = _Coerce # pGcsmpvpsseeAddtional_}
+
+
+gcsmpvpsseeAddtional :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities (HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility)
+gcsmpvpsseeAddtional
+  = lens _gcsmpvpsseeAddtional
+      (\ s a -> s{_gcsmpvpsseeAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibilityEligibilities
+         where
+        toJSON = toJSON . _gcsmpvpsseeAddtional
 
 -- | Software versions that are used to deploy this instance. This can be
 -- mutated by rollout services.
@@ -908,103 +1311,553 @@ instance ToJSON
          where
         toJSON = toJSON . _gcsmpvisvAddtional
 
--- | NotificationMetadata is the notification state for an instance.
+-- | A Cloud Filestore backup.
 --
--- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1NotificationMetadata' smart constructor.
-data GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata =
-  GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata'
-    { _gcsmpvnmTargetRelease      :: !(Maybe Text)
-    , _gcsmpvnmScheduledEndTime   :: !(Maybe DateTime')
-    , _gcsmpvnmRescheduled        :: !(Maybe Bool)
-    , _gcsmpvnmScheduledStartTime :: !(Maybe DateTime')
+-- /See:/ 'backup' smart constructor.
+data Backup =
+  Backup'
+    { _bSatisfiesPzs :: !(Maybe Bool)
+    , _bSourceInstance :: !(Maybe Text)
+    , _bState :: !(Maybe BackupState)
+    , _bDownloadBytes :: !(Maybe (Textual Int64))
+    , _bStorageBytes :: !(Maybe (Textual Int64))
+    , _bSourceInstanceTier :: !(Maybe BackupSourceInstanceTier)
+    , _bName :: !(Maybe Text)
+    , _bLabels :: !(Maybe BackupLabels)
+    , _bSourceFileShare :: !(Maybe Text)
+    , _bDescription :: !(Maybe Text)
+    , _bCreateTime :: !(Maybe DateTime')
+    , _bCapacityGb :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata' with the minimum fields required to make a request.
+-- | Creates a value of 'Backup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcsmpvnmTargetRelease'
+-- * 'bSatisfiesPzs'
 --
--- * 'gcsmpvnmScheduledEndTime'
+-- * 'bSourceInstance'
 --
--- * 'gcsmpvnmRescheduled'
+-- * 'bState'
 --
--- * 'gcsmpvnmScheduledStartTime'
-googleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
-    :: GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
-googleCloudSaasacceleratorManagementProvidersV1NotificationMetadata =
-  GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata'
-    { _gcsmpvnmTargetRelease = Nothing
-    , _gcsmpvnmScheduledEndTime = Nothing
-    , _gcsmpvnmRescheduled = Nothing
-    , _gcsmpvnmScheduledStartTime = Nothing
+-- * 'bDownloadBytes'
+--
+-- * 'bStorageBytes'
+--
+-- * 'bSourceInstanceTier'
+--
+-- * 'bName'
+--
+-- * 'bLabels'
+--
+-- * 'bSourceFileShare'
+--
+-- * 'bDescription'
+--
+-- * 'bCreateTime'
+--
+-- * 'bCapacityGb'
+backup
+    :: Backup
+backup =
+  Backup'
+    { _bSatisfiesPzs = Nothing
+    , _bSourceInstance = Nothing
+    , _bState = Nothing
+    , _bDownloadBytes = Nothing
+    , _bStorageBytes = Nothing
+    , _bSourceInstanceTier = Nothing
+    , _bName = Nothing
+    , _bLabels = Nothing
+    , _bSourceFileShare = Nothing
+    , _bDescription = Nothing
+    , _bCreateTime = Nothing
+    , _bCapacityGb = Nothing
     }
 
 
--- | The target release to be applied to the instance.
-gcsmpvnmTargetRelease :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata (Maybe Text)
-gcsmpvnmTargetRelease
-  = lens _gcsmpvnmTargetRelease
-      (\ s a -> s{_gcsmpvnmTargetRelease = a})
+-- | Output only. Reserved for future use.
+bSatisfiesPzs :: Lens' Backup (Maybe Bool)
+bSatisfiesPzs
+  = lens _bSatisfiesPzs
+      (\ s a -> s{_bSatisfiesPzs = a})
 
--- | The scheduled end time for the maintenance window during which update
--- can be performed on the instance.
-gcsmpvnmScheduledEndTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata (Maybe UTCTime)
-gcsmpvnmScheduledEndTime
-  = lens _gcsmpvnmScheduledEndTime
-      (\ s a -> s{_gcsmpvnmScheduledEndTime = a})
-      . mapping _DateTime
+-- | The resource name of the source Cloud Filestore instance, in the format
+-- projects\/{project_number}\/locations\/{location_id}\/instances\/{instance_id},
+-- used to create this backup.
+bSourceInstance :: Lens' Backup (Maybe Text)
+bSourceInstance
+  = lens _bSourceInstance
+      (\ s a -> s{_bSourceInstance = a})
 
--- | Whether the instance update has been rescheduled.
-gcsmpvnmRescheduled :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata (Maybe Bool)
-gcsmpvnmRescheduled
-  = lens _gcsmpvnmRescheduled
-      (\ s a -> s{_gcsmpvnmRescheduled = a})
+-- | Output only. The backup state.
+bState :: Lens' Backup (Maybe BackupState)
+bState = lens _bState (\ s a -> s{_bState = a})
 
--- | The scheduled start time for the maintenance window during which update
--- can be performed on the instance.
-gcsmpvnmScheduledStartTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata (Maybe UTCTime)
-gcsmpvnmScheduledStartTime
-  = lens _gcsmpvnmScheduledStartTime
-      (\ s a -> s{_gcsmpvnmScheduledStartTime = a})
-      . mapping _DateTime
+-- | Output only. Amount of bytes that will be downloaded if the backup is
+-- restored. This may be different than storage bytes, since sequential
+-- backups of the same disk will share storage.
+bDownloadBytes :: Lens' Backup (Maybe Int64)
+bDownloadBytes
+  = lens _bDownloadBytes
+      (\ s a -> s{_bDownloadBytes = a})
+      . mapping _Coerce
+
+-- | Output only. The size of the storage used by the backup. As backups
+-- share storage, this number is expected to change with backup
+-- creation\/deletion.
+bStorageBytes :: Lens' Backup (Maybe Int64)
+bStorageBytes
+  = lens _bStorageBytes
+      (\ s a -> s{_bStorageBytes = a})
+      . mapping _Coerce
+
+-- | Output only. The service tier of the source Cloud Filestore instance
+-- that this backup is created from.
+bSourceInstanceTier :: Lens' Backup (Maybe BackupSourceInstanceTier)
+bSourceInstanceTier
+  = lens _bSourceInstanceTier
+      (\ s a -> s{_bSourceInstanceTier = a})
+
+-- | Output only. The resource name of the backup, in the format
+-- projects\/{project_number}\/locations\/{location_id}\/backups\/{backup_id}.
+bName :: Lens' Backup (Maybe Text)
+bName = lens _bName (\ s a -> s{_bName = a})
+
+-- | Resource labels to represent user provided metadata.
+bLabels :: Lens' Backup (Maybe BackupLabels)
+bLabels = lens _bLabels (\ s a -> s{_bLabels = a})
+
+-- | Name of the file share in the source Cloud Filestore instance that the
+-- backup is created from.
+bSourceFileShare :: Lens' Backup (Maybe Text)
+bSourceFileShare
+  = lens _bSourceFileShare
+      (\ s a -> s{_bSourceFileShare = a})
+
+-- | A description of the backup with 2048 characters or less. Requests with
+-- longer descriptions will be rejected.
+bDescription :: Lens' Backup (Maybe Text)
+bDescription
+  = lens _bDescription (\ s a -> s{_bDescription = a})
+
+-- | Output only. The time when the backup was created.
+bCreateTime :: Lens' Backup (Maybe UTCTime)
+bCreateTime
+  = lens _bCreateTime (\ s a -> s{_bCreateTime = a}) .
+      mapping _DateTime
+
+-- | Output only. Capacity of the source file share when the backup was
+-- created.
+bCapacityGb :: Lens' Backup (Maybe Int64)
+bCapacityGb
+  = lens _bCapacityGb (\ s a -> s{_bCapacityGb = a}) .
+      mapping _Coerce
+
+instance FromJSON Backup where
+        parseJSON
+          = withObject "Backup"
+              (\ o ->
+                 Backup' <$>
+                   (o .:? "satisfiesPzs") <*> (o .:? "sourceInstance")
+                     <*> (o .:? "state")
+                     <*> (o .:? "downloadBytes")
+                     <*> (o .:? "storageBytes")
+                     <*> (o .:? "sourceInstanceTier")
+                     <*> (o .:? "name")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "sourceFileShare")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "capacityGb"))
+
+instance ToJSON Backup where
+        toJSON Backup'{..}
+          = object
+              (catMaybes
+                 [("satisfiesPzs" .=) <$> _bSatisfiesPzs,
+                  ("sourceInstance" .=) <$> _bSourceInstance,
+                  ("state" .=) <$> _bState,
+                  ("downloadBytes" .=) <$> _bDownloadBytes,
+                  ("storageBytes" .=) <$> _bStorageBytes,
+                  ("sourceInstanceTier" .=) <$> _bSourceInstanceTier,
+                  ("name" .=) <$> _bName, ("labels" .=) <$> _bLabels,
+                  ("sourceFileShare" .=) <$> _bSourceFileShare,
+                  ("description" .=) <$> _bDescription,
+                  ("createTime" .=) <$> _bCreateTime,
+                  ("capacityGb" .=) <$> _bCapacityGb])
+
+-- | Maintenance settings associated with instance. Allows service producers
+-- and end users to assign settings that controls maintenance on this
+-- instance.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings' smart constructor.
+data GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings =
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings'
+    { _gcsmpvmsIsRollback :: !(Maybe Bool)
+    , _gcsmpvmsMaintenancePolicies :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies)
+    , _gcsmpvmsExclude :: !(Maybe Bool)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvmsIsRollback'
+--
+-- * 'gcsmpvmsMaintenancePolicies'
+--
+-- * 'gcsmpvmsExclude'
+googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
+    :: GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
+googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings =
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings'
+    { _gcsmpvmsIsRollback = Nothing
+    , _gcsmpvmsMaintenancePolicies = Nothing
+    , _gcsmpvmsExclude = Nothing
+    }
+
+
+-- | Optional. If the update call is triggered from rollback, set the value
+-- as true.
+gcsmpvmsIsRollback :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings (Maybe Bool)
+gcsmpvmsIsRollback
+  = lens _gcsmpvmsIsRollback
+      (\ s a -> s{_gcsmpvmsIsRollback = a})
+
+-- | Optional. The MaintenancePolicies that have been attached to the
+-- instance. The key must be of the type name of the oneof policy name
+-- defined in MaintenancePolicy, and the embedded policy must define the
+-- same policy type. For complete details of MaintenancePolicy, please
+-- refer to go\/cloud-saas-mw-ug. If only the name is needed (like in the
+-- deprecated Instance.maintenance_policy_names field) then only populate
+-- MaintenancePolicy.name.
+gcsmpvmsMaintenancePolicies :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings (Maybe GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies)
+gcsmpvmsMaintenancePolicies
+  = lens _gcsmpvmsMaintenancePolicies
+      (\ s a -> s{_gcsmpvmsMaintenancePolicies = a})
+
+-- | Optional. Exclude instance from maintenance. When true, rollout service
+-- will not attempt maintenance on the instance. Rollout service will
+-- include the instance in reported rollout progress as not attempted.
+gcsmpvmsExclude :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings (Maybe Bool)
+gcsmpvmsExclude
+  = lens _gcsmpvmsExclude
+      (\ s a -> s{_gcsmpvmsExclude = a})
 
 instance FromJSON
-           GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
+           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
          where
         parseJSON
           = withObject
-              "GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata"
+              "GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings"
               (\ o ->
-                 GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata'
+                 GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings'
                    <$>
-                   (o .:? "targetRelease") <*>
-                     (o .:? "scheduledEndTime")
-                     <*> (o .:? "rescheduled")
-                     <*> (o .:? "scheduledStartTime"))
+                   (o .:? "isRollback") <*>
+                     (o .:? "maintenancePolicies")
+                     <*> (o .:? "exclude"))
 
 instance ToJSON
-           GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata
+           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
          where
         toJSON
-          GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata'{..}
+          GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings'{..}
           = object
               (catMaybes
-                 [("targetRelease" .=) <$> _gcsmpvnmTargetRelease,
-                  ("scheduledEndTime" .=) <$>
-                    _gcsmpvnmScheduledEndTime,
-                  ("rescheduled" .=) <$> _gcsmpvnmRescheduled,
-                  ("scheduledStartTime" .=) <$>
-                    _gcsmpvnmScheduledStartTime])
+                 [("isRollback" .=) <$> _gcsmpvmsIsRollback,
+                  ("maintenancePolicies" .=) <$>
+                    _gcsmpvmsMaintenancePolicies,
+                  ("exclude" .=) <$> _gcsmpvmsExclude])
+
+-- | Maintenance schedule which is exposed to customer and potentially end
+-- user, indicating published upcoming future maintenance schedule
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule' smart constructor.
+data GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule =
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule'
+    { _gcsmpvmsStartTime :: !(Maybe DateTime')
+    , _gcsmpvmsRolloutManagementPolicy :: !(Maybe Text)
+    , _gcsmpvmsCanReschedule :: !(Maybe Bool)
+    , _gcsmpvmsEndTime :: !(Maybe DateTime')
+    , _gcsmpvmsScheduleDeadlineTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvmsStartTime'
+--
+-- * 'gcsmpvmsRolloutManagementPolicy'
+--
+-- * 'gcsmpvmsCanReschedule'
+--
+-- * 'gcsmpvmsEndTime'
+--
+-- * 'gcsmpvmsScheduleDeadlineTime'
+googleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+    :: GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+googleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule =
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule'
+    { _gcsmpvmsStartTime = Nothing
+    , _gcsmpvmsRolloutManagementPolicy = Nothing
+    , _gcsmpvmsCanReschedule = Nothing
+    , _gcsmpvmsEndTime = Nothing
+    , _gcsmpvmsScheduleDeadlineTime = Nothing
+    }
+
+
+-- | The scheduled start time for the maintenance.
+gcsmpvmsStartTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (Maybe UTCTime)
+gcsmpvmsStartTime
+  = lens _gcsmpvmsStartTime
+      (\ s a -> s{_gcsmpvmsStartTime = a})
+      . mapping _DateTime
+
+-- | The rollout management policy this maintenance schedule is associated
+-- with. When doing reschedule update request, the reschedule should be
+-- against this given policy.
+gcsmpvmsRolloutManagementPolicy :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (Maybe Text)
+gcsmpvmsRolloutManagementPolicy
+  = lens _gcsmpvmsRolloutManagementPolicy
+      (\ s a -> s{_gcsmpvmsRolloutManagementPolicy = a})
+
+-- | This field is deprecated, and will be always set to true since
+-- reschedule can happen multiple times now. This field should not be
+-- removed until all service producers remove this for their customers.
+gcsmpvmsCanReschedule :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (Maybe Bool)
+gcsmpvmsCanReschedule
+  = lens _gcsmpvmsCanReschedule
+      (\ s a -> s{_gcsmpvmsCanReschedule = a})
+
+-- | The scheduled end time for the maintenance.
+gcsmpvmsEndTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (Maybe UTCTime)
+gcsmpvmsEndTime
+  = lens _gcsmpvmsEndTime
+      (\ s a -> s{_gcsmpvmsEndTime = a})
+      . mapping _DateTime
+
+-- | schedule_deadline_time is the time deadline any schedule start time
+-- cannot go beyond, including reschedule. It\'s normally the initial
+-- schedule start time plus maintenance window length (1 day or 1 week).
+-- Maintenance cannot be scheduled to start beyond this deadline.
+gcsmpvmsScheduleDeadlineTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule (Maybe UTCTime)
+gcsmpvmsScheduleDeadlineTime
+  = lens _gcsmpvmsScheduleDeadlineTime
+      (\ s a -> s{_gcsmpvmsScheduleDeadlineTime = a})
+      . mapping _DateTime
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule'
+                   <$>
+                   (o .:? "startTime") <*>
+                     (o .:? "rolloutManagementPolicy")
+                     <*> (o .:? "canReschedule")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "scheduleDeadlineTime"))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+         where
+        toJSON
+          GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _gcsmpvmsStartTime,
+                  ("rolloutManagementPolicy" .=) <$>
+                    _gcsmpvmsRolloutManagementPolicy,
+                  ("canReschedule" .=) <$> _gcsmpvmsCanReschedule,
+                  ("endTime" .=) <$> _gcsmpvmsEndTime,
+                  ("scheduleDeadlineTime" .=) <$>
+                    _gcsmpvmsScheduleDeadlineTime])
+
+-- | Maintenance policy applicable to instance updates.
+--
+-- /See:/ 'updatePolicy' smart constructor.
+data UpdatePolicy =
+  UpdatePolicy'
+    { _upWindow :: !(Maybe MaintenanceWindow)
+    , _upChannel :: !(Maybe UpdatePolicyChannel)
+    , _upDenyMaintenancePeriods :: !(Maybe [DenyMaintenancePeriod])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UpdatePolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upWindow'
+--
+-- * 'upChannel'
+--
+-- * 'upDenyMaintenancePeriods'
+updatePolicy
+    :: UpdatePolicy
+updatePolicy =
+  UpdatePolicy'
+    { _upWindow = Nothing
+    , _upChannel = Nothing
+    , _upDenyMaintenancePeriods = Nothing
+    }
+
+
+-- | Optional. Maintenance window that is applied to resources covered by
+-- this policy.
+upWindow :: Lens' UpdatePolicy (Maybe MaintenanceWindow)
+upWindow = lens _upWindow (\ s a -> s{_upWindow = a})
+
+-- | Optional. Relative scheduling channel applied to resource.
+upChannel :: Lens' UpdatePolicy (Maybe UpdatePolicyChannel)
+upChannel
+  = lens _upChannel (\ s a -> s{_upChannel = a})
+
+-- | Deny Maintenance Period that is applied to resource to indicate when
+-- maintenance is forbidden. User can specify zero or more non-overlapping
+-- deny periods. For V1, Maximum number of deny_maintenance_periods is
+-- expected to be one.
+upDenyMaintenancePeriods :: Lens' UpdatePolicy [DenyMaintenancePeriod]
+upDenyMaintenancePeriods
+  = lens _upDenyMaintenancePeriods
+      (\ s a -> s{_upDenyMaintenancePeriods = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON UpdatePolicy where
+        parseJSON
+          = withObject "UpdatePolicy"
+              (\ o ->
+                 UpdatePolicy' <$>
+                   (o .:? "window") <*> (o .:? "channel") <*>
+                     (o .:? "denyMaintenancePeriods" .!= mempty))
+
+instance ToJSON UpdatePolicy where
+        toJSON UpdatePolicy'{..}
+          = object
+              (catMaybes
+                 [("window" .=) <$> _upWindow,
+                  ("channel" .=) <$> _upChannel,
+                  ("denyMaintenancePeriods" .=) <$>
+                    _upDenyMaintenancePeriods])
+
+-- | MaintenanceWindow definition.
+--
+-- /See:/ 'maintenanceWindow' smart constructor.
+data MaintenanceWindow =
+  MaintenanceWindow'
+    { _mwDailyCycle :: !(Maybe DailyCycle)
+    , _mwWeeklyCycle :: !(Maybe WeeklyCycle)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mwDailyCycle'
+--
+-- * 'mwWeeklyCycle'
+maintenanceWindow
+    :: MaintenanceWindow
+maintenanceWindow =
+  MaintenanceWindow' {_mwDailyCycle = Nothing, _mwWeeklyCycle = Nothing}
+
+
+-- | Daily cycle.
+mwDailyCycle :: Lens' MaintenanceWindow (Maybe DailyCycle)
+mwDailyCycle
+  = lens _mwDailyCycle (\ s a -> s{_mwDailyCycle = a})
+
+-- | Weekly cycle.
+mwWeeklyCycle :: Lens' MaintenanceWindow (Maybe WeeklyCycle)
+mwWeeklyCycle
+  = lens _mwWeeklyCycle
+      (\ s a -> s{_mwWeeklyCycle = a})
+
+instance FromJSON MaintenanceWindow where
+        parseJSON
+          = withObject "MaintenanceWindow"
+              (\ o ->
+                 MaintenanceWindow' <$>
+                   (o .:? "dailyCycle") <*> (o .:? "weeklyCycle"))
+
+instance ToJSON MaintenanceWindow where
+        toJSON MaintenanceWindow'{..}
+          = object
+              (catMaybes
+                 [("dailyCycle" .=) <$> _mwDailyCycle,
+                  ("weeklyCycle" .=) <$> _mwWeeklyCycle])
+
+-- | Time window specified for daily operations.
+--
+-- /See:/ 'dailyCycle' smart constructor.
+data DailyCycle =
+  DailyCycle'
+    { _dcStartTime :: !(Maybe TimeOfDay')
+    , _dcDuration :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DailyCycle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcStartTime'
+--
+-- * 'dcDuration'
+dailyCycle
+    :: DailyCycle
+dailyCycle = DailyCycle' {_dcStartTime = Nothing, _dcDuration = Nothing}
+
+
+-- | Time within the day to start the operations.
+dcStartTime :: Lens' DailyCycle (Maybe TimeOfDay')
+dcStartTime
+  = lens _dcStartTime (\ s a -> s{_dcStartTime = a})
+
+-- | Output only. Duration of the time window, set by service producer.
+dcDuration :: Lens' DailyCycle (Maybe Scientific)
+dcDuration
+  = lens _dcDuration (\ s a -> s{_dcDuration = a}) .
+      mapping _GDuration
+
+instance FromJSON DailyCycle where
+        parseJSON
+          = withObject "DailyCycle"
+              (\ o ->
+                 DailyCycle' <$>
+                   (o .:? "startTime") <*> (o .:? "duration"))
+
+instance ToJSON DailyCycle where
+        toJSON DailyCycle'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _dcStartTime,
+                  ("duration" .=) <$> _dcDuration])
 
 -- | File share configuration for the instance.
 --
 -- /See:/ 'fileShareConfig' smart constructor.
 data FileShareConfig =
   FileShareConfig'
-    { _fscName       :: !(Maybe Text)
+    { _fscNfsExportOptions :: !(Maybe [NfsExportOptions])
+    , _fscSourceBackup :: !(Maybe Text)
+    , _fscName :: !(Maybe Text)
     , _fscCapacityGb :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1014,14 +1867,40 @@ data FileShareConfig =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fscNfsExportOptions'
+--
+-- * 'fscSourceBackup'
+--
 -- * 'fscName'
 --
 -- * 'fscCapacityGb'
 fileShareConfig
     :: FileShareConfig
 fileShareConfig =
-  FileShareConfig' {_fscName = Nothing, _fscCapacityGb = Nothing}
+  FileShareConfig'
+    { _fscNfsExportOptions = Nothing
+    , _fscSourceBackup = Nothing
+    , _fscName = Nothing
+    , _fscCapacityGb = Nothing
+    }
 
+
+-- | Nfs Export Options. There is a limit of 10 export options per file
+-- share.
+fscNfsExportOptions :: Lens' FileShareConfig [NfsExportOptions]
+fscNfsExportOptions
+  = lens _fscNfsExportOptions
+      (\ s a -> s{_fscNfsExportOptions = a})
+      . _Default
+      . _Coerce
+
+-- | The resource name of the backup, in the format
+-- projects\/{project_number}\/locations\/{location_id}\/backups\/{backup_id},
+-- that this file share has been restored from.
+fscSourceBackup :: Lens' FileShareConfig (Maybe Text)
+fscSourceBackup
+  = lens _fscSourceBackup
+      (\ s a -> s{_fscSourceBackup = a})
 
 -- | The name of the file share (must be 16 characters or less).
 fscName :: Lens' FileShareConfig (Maybe Text)
@@ -1040,13 +1919,18 @@ instance FromJSON FileShareConfig where
           = withObject "FileShareConfig"
               (\ o ->
                  FileShareConfig' <$>
-                   (o .:? "name") <*> (o .:? "capacityGb"))
+                   (o .:? "nfsExportOptions" .!= mempty) <*>
+                     (o .:? "sourceBackup")
+                     <*> (o .:? "name")
+                     <*> (o .:? "capacityGb"))
 
 instance ToJSON FileShareConfig where
         toJSON FileShareConfig'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _fscName,
+                 [("nfsExportOptions" .=) <$> _fscNfsExportOptions,
+                  ("sourceBackup" .=) <$> _fscSourceBackup,
+                  ("name" .=) <$> _fscName,
                   ("capacityGb" .=) <$> _fscCapacityGb])
 
 -- | Network configuration for the instance.
@@ -1054,10 +1938,10 @@ instance ToJSON FileShareConfig where
 -- /See:/ 'networkConfig' smart constructor.
 data NetworkConfig =
   NetworkConfig'
-    { _ncModes           :: !(Maybe [Text])
-    , _ncNetwork         :: !(Maybe Text)
+    { _ncModes :: !(Maybe [NetworkConfigModesItem])
+    , _ncNetwork :: !(Maybe Text)
     , _ncReservedIPRange :: !(Maybe Text)
-    , _ncIPAddresses     :: !(Maybe [Text])
+    , _ncIPAddresses :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1086,7 +1970,7 @@ networkConfig =
 
 -- | Internet protocol versions for which the instance has IP addresses
 -- assigned. For this version, only MODE_IPV4 is supported.
-ncModes :: Lens' NetworkConfig [Text]
+ncModes :: Lens' NetworkConfig [NetworkConfigModesItem]
 ncModes
   = lens _ncModes (\ s a -> s{_ncModes = a}) . _Default
       . _Coerce
@@ -1137,14 +2021,181 @@ instance ToJSON NetworkConfig where
                   ("reservedIpRange" .=) <$> _ncReservedIPRange,
                   ("ipAddresses" .=) <$> _ncIPAddresses])
 
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: * A full date, with non-zero year,
+-- month, and day values * A month and day value, with a zero year, such as
+-- an anniversary * A year on its own, with zero month and day values * A
+-- year and month value, with a zero day, such as a credit card expiration
+-- date Related types are google.type.TimeOfDay and
+-- \`google.protobuf.Timestamp\`.
+--
+-- /See:/ 'date' smart constructor.
+data Date =
+  Date'
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
+    , _dMonth :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dDay'
+--
+-- * 'dYear'
+--
+-- * 'dMonth'
+date
+    :: Date
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
+
+
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
+dDay :: Lens' Date (Maybe Int32)
+dDay
+  = lens _dDay (\ s a -> s{_dDay = a}) .
+      mapping _Coerce
+
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+-- a year.
+dYear :: Lens' Date (Maybe Int32)
+dYear
+  = lens _dYear (\ s a -> s{_dYear = a}) .
+      mapping _Coerce
+
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+-- month and day.
+dMonth :: Lens' Date (Maybe Int32)
+dMonth
+  = lens _dMonth (\ s a -> s{_dMonth = a}) .
+      mapping _Coerce
+
+instance FromJSON Date where
+        parseJSON
+          = withObject "Date"
+              (\ o ->
+                 Date' <$>
+                   (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
+
+instance ToJSON Date where
+        toJSON Date'{..}
+          = object
+              (catMaybes
+                 [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
+                  ("month" .=) <$> _dMonth])
+
+-- | Node information for custom per-node SLO implementations. SSA does not
+-- support per-node SLO, but producers can populate per-node information in
+-- SloMetadata for custom precomputations. SSA Eligibility Exporter will
+-- emit per-node metric based on this information.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata' smart constructor.
+data GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata =
+  GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata'
+    { _gcsmpvnsmPerSliEligibility :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility)
+    , _gcsmpvnsmLocation :: !(Maybe Text)
+    , _gcsmpvnsmExclusions :: !(Maybe [GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion])
+    , _gcsmpvnsmNodeId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvnsmPerSliEligibility'
+--
+-- * 'gcsmpvnsmLocation'
+--
+-- * 'gcsmpvnsmExclusions'
+--
+-- * 'gcsmpvnsmNodeId'
+googleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+    :: GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+googleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata =
+  GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata'
+    { _gcsmpvnsmPerSliEligibility = Nothing
+    , _gcsmpvnsmLocation = Nothing
+    , _gcsmpvnsmExclusions = Nothing
+    , _gcsmpvnsmNodeId = Nothing
+    }
+
+
+-- | If present, this will override eligibility for the node coming from
+-- instance or exclusions for specified SLIs.
+gcsmpvnsmPerSliEligibility :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (Maybe GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility)
+gcsmpvnsmPerSliEligibility
+  = lens _gcsmpvnsmPerSliEligibility
+      (\ s a -> s{_gcsmpvnsmPerSliEligibility = a})
+
+-- | The location of the node, if different from instance location.
+gcsmpvnsmLocation :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (Maybe Text)
+gcsmpvnsmLocation
+  = lens _gcsmpvnsmLocation
+      (\ s a -> s{_gcsmpvnsmLocation = a})
+
+-- | By default node is eligible if instance is eligible. But individual node
+-- might be excluded from SLO by adding entry here. For semantic see
+-- SloMetadata.exclusions. If both instance and node level exclusions are
+-- present for time period, the node level\'s reason will be reported by
+-- Eligibility Exporter.
+gcsmpvnsmExclusions :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata [GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion]
+gcsmpvnsmExclusions
+  = lens _gcsmpvnsmExclusions
+      (\ s a -> s{_gcsmpvnsmExclusions = a})
+      . _Default
+      . _Coerce
+
+-- | The id of the node. This should be equal to SaasInstanceNode.node_id.
+gcsmpvnsmNodeId :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (Maybe Text)
+gcsmpvnsmNodeId
+  = lens _gcsmpvnsmNodeId
+      (\ s a -> s{_gcsmpvnsmNodeId = a})
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata'
+                   <$>
+                   (o .:? "perSliEligibility") <*> (o .:? "location")
+                     <*> (o .:? "exclusions" .!= mempty)
+                     <*> (o .:? "nodeId"))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
+         where
+        toJSON
+          GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata'{..}
+          = object
+              (catMaybes
+                 [("perSliEligibility" .=) <$>
+                    _gcsmpvnsmPerSliEligibility,
+                  ("location" .=) <$> _gcsmpvnsmLocation,
+                  ("exclusions" .=) <$> _gcsmpvnsmExclusions,
+                  ("nodeId" .=) <$> _gcsmpvnsmNodeId])
+
 -- | SloMetadata contains resources required for proper SLO classification of
 -- the instance.
 --
 -- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1SloMetadata' smart constructor.
 data GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata =
   GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata'
-    { _gcsmpvsmExclusions :: !(Maybe [GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion])
-    , _gcsmpvsmTier       :: !(Maybe Text)
+    { _gcsmpvsmPerSliEligibility :: !(Maybe GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility)
+    , _gcsmpvsmExclusions :: !(Maybe [GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion])
+    , _gcsmpvsmTier :: !(Maybe Text)
+    , _gcsmpvsmNodes :: !(Maybe [GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1153,15 +2204,30 @@ data GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gcsmpvsmPerSliEligibility'
+--
 -- * 'gcsmpvsmExclusions'
 --
 -- * 'gcsmpvsmTier'
+--
+-- * 'gcsmpvsmNodes'
 googleCloudSaasacceleratorManagementProvidersV1SloMetadata
     :: GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
 googleCloudSaasacceleratorManagementProvidersV1SloMetadata =
   GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata'
-    {_gcsmpvsmExclusions = Nothing, _gcsmpvsmTier = Nothing}
+    { _gcsmpvsmPerSliEligibility = Nothing
+    , _gcsmpvsmExclusions = Nothing
+    , _gcsmpvsmTier = Nothing
+    , _gcsmpvsmNodes = Nothing
+    }
 
+
+-- | Optional. Multiple per-instance SLI eligibilities which apply for
+-- individual SLIs.
+gcsmpvsmPerSliEligibility :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata (Maybe GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility)
+gcsmpvsmPerSliEligibility
+  = lens _gcsmpvsmPerSliEligibility
+      (\ s a -> s{_gcsmpvsmPerSliEligibility = a})
 
 -- | List of SLO exclusion windows. When multiple entries in the list match
 -- (matching the exclusion time-window against current time point) the
@@ -1172,8 +2238,8 @@ googleCloudSaasacceleratorManagementProvidersV1SloMetadata =
 -- be reflected in the historically produced timeseries regardless of the
 -- current state). This field can be used to mark the instance as temporary
 -- ineligible for the purpose of SLO calculation. For permanent instance
--- SLO exclusion, a dedicated tier name can be used that does not have
--- targets specified in the service SLO configuration.
+-- SLO exclusion, use of custom instance eligibility is recommended. See
+-- \'eligibility\' field below.
 gcsmpvsmExclusions :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata [GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion]
 gcsmpvsmExclusions
   = lens _gcsmpvsmExclusions
@@ -1188,6 +2254,17 @@ gcsmpvsmTier :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
 gcsmpvsmTier
   = lens _gcsmpvsmTier (\ s a -> s{_gcsmpvsmTier = a})
 
+-- | Optional. List of nodes. Some producers need to use per-node metadata to
+-- calculate SLO. This field allows such producers to publish per-node SLO
+-- meta data, which will be consumed by SSA Eligibility Exporter and
+-- published in the form of per node metric to Monarch.
+gcsmpvsmNodes :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata [GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata]
+gcsmpvsmNodes
+  = lens _gcsmpvsmNodes
+      (\ s a -> s{_gcsmpvsmNodes = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON
            GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
          where
@@ -1197,7 +2274,10 @@ instance FromJSON
               (\ o ->
                  GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata'
                    <$>
-                   (o .:? "exclusions" .!= mempty) <*> (o .:? "tier"))
+                   (o .:? "perSliEligibility") <*>
+                     (o .:? "exclusions" .!= mempty)
+                     <*> (o .:? "tier")
+                     <*> (o .:? "nodes" .!= mempty))
 
 instance ToJSON
            GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
@@ -1206,8 +2286,175 @@ instance ToJSON
           GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata'{..}
           = object
               (catMaybes
-                 [("exclusions" .=) <$> _gcsmpvsmExclusions,
-                  ("tier" .=) <$> _gcsmpvsmTier])
+                 [("perSliEligibility" .=) <$>
+                    _gcsmpvsmPerSliEligibility,
+                  ("exclusions" .=) <$> _gcsmpvsmExclusions,
+                  ("tier" .=) <$> _gcsmpvsmTier,
+                  ("nodes" .=) <$> _gcsmpvsmNodes])
+
+-- | Optional. The MaintenancePolicies that have been attached to the
+-- instance. The key must be of the type name of the oneof policy name
+-- defined in MaintenancePolicy, and the embedded policy must define the
+-- same policy type. For complete details of MaintenancePolicy, please
+-- refer to go\/cloud-saas-mw-ug. If only the name is needed (like in the
+-- deprecated Instance.maintenance_policy_names field) then only populate
+-- MaintenancePolicy.name.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies' smart constructor.
+newtype GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies =
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies'
+    { _gcsmpvmsmpAddtional :: HashMap Text MaintenancePolicy
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvmsmpAddtional'
+googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+    :: HashMap Text MaintenancePolicy -- ^ 'gcsmpvmsmpAddtional'
+    -> GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+googleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies pGcsmpvmsmpAddtional_ =
+  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies'
+    {_gcsmpvmsmpAddtional = _Coerce # pGcsmpvmsmpAddtional_}
+
+
+gcsmpvmsmpAddtional :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies (HashMap Text MaintenancePolicy)
+gcsmpvmsmpAddtional
+  = lens _gcsmpvmsmpAddtional
+      (\ s a -> s{_gcsmpvmsmpAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettingsMaintenancePolicies
+         where
+        toJSON = toJSON . _gcsmpvmsmpAddtional
+
+-- | Defines policies to service maintenance events.
+--
+-- /See:/ 'maintenancePolicy' smart constructor.
+data MaintenancePolicy =
+  MaintenancePolicy'
+    { _mpState :: !(Maybe MaintenancePolicyState)
+    , _mpUpdatePolicy :: !(Maybe UpdatePolicy)
+    , _mpUpdateTime :: !(Maybe DateTime')
+    , _mpName :: !(Maybe Text)
+    , _mpLabels :: !(Maybe MaintenancePolicyLabels)
+    , _mpDescription :: !(Maybe Text)
+    , _mpCreateTime :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MaintenancePolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mpState'
+--
+-- * 'mpUpdatePolicy'
+--
+-- * 'mpUpdateTime'
+--
+-- * 'mpName'
+--
+-- * 'mpLabels'
+--
+-- * 'mpDescription'
+--
+-- * 'mpCreateTime'
+maintenancePolicy
+    :: MaintenancePolicy
+maintenancePolicy =
+  MaintenancePolicy'
+    { _mpState = Nothing
+    , _mpUpdatePolicy = Nothing
+    , _mpUpdateTime = Nothing
+    , _mpName = Nothing
+    , _mpLabels = Nothing
+    , _mpDescription = Nothing
+    , _mpCreateTime = Nothing
+    }
+
+
+-- | Optional. The state of the policy.
+mpState :: Lens' MaintenancePolicy (Maybe MaintenancePolicyState)
+mpState = lens _mpState (\ s a -> s{_mpState = a})
+
+-- | Maintenance policy applicable to instance update.
+mpUpdatePolicy :: Lens' MaintenancePolicy (Maybe UpdatePolicy)
+mpUpdatePolicy
+  = lens _mpUpdatePolicy
+      (\ s a -> s{_mpUpdatePolicy = a})
+
+-- | Output only. The time when the resource was updated.
+mpUpdateTime :: Lens' MaintenancePolicy (Maybe UTCTime)
+mpUpdateTime
+  = lens _mpUpdateTime (\ s a -> s{_mpUpdateTime = a})
+      . mapping _DateTime
+
+-- | Required. MaintenancePolicy name using the form:
+-- \`projects\/{project_id}\/locations\/{location_id}\/maintenancePolicies\/{maintenance_policy_id}\`
+-- where {project_id} refers to a GCP consumer project ID, {location_id}
+-- refers to a GCP region\/zone, {maintenance_policy_id} must be 1-63
+-- characters long and match the regular expression
+-- \`[a-z0-9]([-a-z0-9]*[a-z0-9])?\`.
+mpName :: Lens' MaintenancePolicy (Maybe Text)
+mpName = lens _mpName (\ s a -> s{_mpName = a})
+
+-- | Optional. Resource labels to represent user provided metadata. Each
+-- label is a key-value pair, where both the key and the value are
+-- arbitrary strings provided by the user.
+mpLabels :: Lens' MaintenancePolicy (Maybe MaintenancePolicyLabels)
+mpLabels = lens _mpLabels (\ s a -> s{_mpLabels = a})
+
+-- | Optional. Description of what this policy is for. Create\/Update methods
+-- return INVALID_ARGUMENT if the length is greater than 512.
+mpDescription :: Lens' MaintenancePolicy (Maybe Text)
+mpDescription
+  = lens _mpDescription
+      (\ s a -> s{_mpDescription = a})
+
+-- | Output only. The time when the resource was created.
+mpCreateTime :: Lens' MaintenancePolicy (Maybe UTCTime)
+mpCreateTime
+  = lens _mpCreateTime (\ s a -> s{_mpCreateTime = a})
+      . mapping _DateTime
+
+instance FromJSON MaintenancePolicy where
+        parseJSON
+          = withObject "MaintenancePolicy"
+              (\ o ->
+                 MaintenancePolicy' <$>
+                   (o .:? "state") <*> (o .:? "updatePolicy") <*>
+                     (o .:? "updateTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "description")
+                     <*> (o .:? "createTime"))
+
+instance ToJSON MaintenancePolicy where
+        toJSON MaintenancePolicy'{..}
+          = object
+              (catMaybes
+                 [("state" .=) <$> _mpState,
+                  ("updatePolicy" .=) <$> _mpUpdatePolicy,
+                  ("updateTime" .=) <$> _mpUpdateTime,
+                  ("name" .=) <$> _mpName, ("labels" .=) <$> _mpLabels,
+                  ("description" .=) <$> _mpDescription,
+                  ("createTime" .=) <$> _mpCreateTime])
 
 -- | Output only. Custom string attributes used primarily to expose
 -- producer-specific information in monitoring dashboards. See
@@ -1301,15 +2548,16 @@ instance ToJSON
          where
         toJSON = toJSON . _gcsmpvilAddtional
 
--- | A temporal SLO exclusion specification.
+-- | SloExclusion represents an exclusion in SLI calculation applies to all
+-- SLOs.
 --
 -- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1SloExclusion' smart constructor.
 data GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion =
   GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
-    { _gcsmpvseExclusionDuration  :: !(Maybe GDuration)
-    , _gcsmpvseExclusionStartTime :: !(Maybe DateTime')
-    , _gcsmpvseReason             :: !(Maybe Text)
-    , _gcsmpvseSloName            :: !(Maybe Text)
+    { _gStartTime :: !(Maybe DateTime')
+    , _gReason :: !(Maybe Text)
+    , _gDuration :: !(Maybe GDuration)
+    , _gSliName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1318,23 +2566,36 @@ data GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcsmpvseExclusionDuration'
+-- * 'gStartTime'
 --
--- * 'gcsmpvseExclusionStartTime'
+-- * 'gReason'
 --
--- * 'gcsmpvseReason'
+-- * 'gDuration'
 --
--- * 'gcsmpvseSloName'
+-- * 'gSliName'
 googleCloudSaasacceleratorManagementProvidersV1SloExclusion
     :: GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion
 googleCloudSaasacceleratorManagementProvidersV1SloExclusion =
   GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
-    { _gcsmpvseExclusionDuration = Nothing
-    , _gcsmpvseExclusionStartTime = Nothing
-    , _gcsmpvseReason = Nothing
-    , _gcsmpvseSloName = Nothing
+    { _gStartTime = Nothing
+    , _gReason = Nothing
+    , _gDuration = Nothing
+    , _gSliName = Nothing
     }
 
+
+-- | Start time of the exclusion. No alignment (e.g. to a full minute)
+-- needed.
+gStartTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe UTCTime)
+gStartTime
+  = lens _gStartTime (\ s a -> s{_gStartTime = a}) .
+      mapping _DateTime
+
+-- | Human-readable reason for the exclusion. This should be a static string
+-- (e.g. \"Disruptive update in progress\") and should not contain
+-- dynamically generated data (e.g. instance name). Can be left empty.
+gReason :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe Text)
+gReason = lens _gReason (\ s a -> s{_gReason = a})
 
 -- | Exclusion duration. No restrictions on the possible values. When an
 -- ongoing operation is taking longer than initially expected, an existing
@@ -1343,35 +2604,15 @@ googleCloudSaasacceleratorManagementProvidersV1SloExclusion =
 -- such extension is committed at least 10 minutes before the original
 -- exclusion expiration - otherwise it is possible that there will be
 -- \"gaps\" in the exclusion application in the exported timeseries.
-gcsmpvseExclusionDuration :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe Scientific)
-gcsmpvseExclusionDuration
-  = lens _gcsmpvseExclusionDuration
-      (\ s a -> s{_gcsmpvseExclusionDuration = a})
-      . mapping _GDuration
+gDuration :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe Scientific)
+gDuration
+  = lens _gDuration (\ s a -> s{_gDuration = a}) .
+      mapping _GDuration
 
--- | Start time of the exclusion. No alignment (e.g. to a full minute)
--- needed.
-gcsmpvseExclusionStartTime :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe UTCTime)
-gcsmpvseExclusionStartTime
-  = lens _gcsmpvseExclusionStartTime
-      (\ s a -> s{_gcsmpvseExclusionStartTime = a})
-      . mapping _DateTime
-
--- | Human-readable reason for the exclusion. This should be a static string
--- (e.g. \"Disruptive update in progress\") and should not contain
--- dynamically generated data (e.g. instance name). Can be left empty.
-gcsmpvseReason :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe Text)
-gcsmpvseReason
-  = lens _gcsmpvseReason
-      (\ s a -> s{_gcsmpvseReason = a})
-
--- | Name of an SLI\/SLO that this exclusion applies to. Can be left empty,
--- signaling that the instance should be excluded from all SLI\/SLOs
--- defined in the service SLO configuration.
-gcsmpvseSloName :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe Text)
-gcsmpvseSloName
-  = lens _gcsmpvseSloName
-      (\ s a -> s{_gcsmpvseSloName = a})
+-- | Name of an SLI that this exclusion applies to. Can be left empty,
+-- signaling that the instance should be excluded from all SLIs.
+gSliName :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion (Maybe Text)
+gSliName = lens _gSliName (\ s a -> s{_gSliName = a})
 
 instance FromJSON
            GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion
@@ -1382,10 +2623,9 @@ instance FromJSON
               (\ o ->
                  GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
                    <$>
-                   (o .:? "exclusionDuration") <*>
-                     (o .:? "exclusionStartTime")
-                     <*> (o .:? "reason")
-                     <*> (o .:? "sloName"))
+                   (o .:? "startTime") <*> (o .:? "reason") <*>
+                     (o .:? "duration")
+                     <*> (o .:? "sliName"))
 
 instance ToJSON
            GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion
@@ -1394,12 +2634,145 @@ instance ToJSON
           GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'{..}
           = object
               (catMaybes
-                 [("exclusionDuration" .=) <$>
-                    _gcsmpvseExclusionDuration,
-                  ("exclusionStartTime" .=) <$>
-                    _gcsmpvseExclusionStartTime,
-                  ("reason" .=) <$> _gcsmpvseReason,
-                  ("sloName" .=) <$> _gcsmpvseSloName])
+                 [("startTime" .=) <$> _gStartTime,
+                  ("reason" .=) <$> _gReason,
+                  ("duration" .=) <$> _gDuration,
+                  ("sliName" .=) <$> _gSliName])
+
+-- | RestoreInstanceRequest restores an existing instances\'s file share from
+-- a backup.
+--
+-- /See:/ 'restoreInstanceRequest' smart constructor.
+data RestoreInstanceRequest =
+  RestoreInstanceRequest'
+    { _rirSourceBackup :: !(Maybe Text)
+    , _rirFileShare :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RestoreInstanceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rirSourceBackup'
+--
+-- * 'rirFileShare'
+restoreInstanceRequest
+    :: RestoreInstanceRequest
+restoreInstanceRequest =
+  RestoreInstanceRequest' {_rirSourceBackup = Nothing, _rirFileShare = Nothing}
+
+
+-- | The resource name of the backup, in the format
+-- projects\/{project_number}\/locations\/{location_id}\/backups\/{backup_id}.
+rirSourceBackup :: Lens' RestoreInstanceRequest (Maybe Text)
+rirSourceBackup
+  = lens _rirSourceBackup
+      (\ s a -> s{_rirSourceBackup = a})
+
+-- | Required. Name of the file share in the Cloud Filestore instance that
+-- the backup is being restored to.
+rirFileShare :: Lens' RestoreInstanceRequest (Maybe Text)
+rirFileShare
+  = lens _rirFileShare (\ s a -> s{_rirFileShare = a})
+
+instance FromJSON RestoreInstanceRequest where
+        parseJSON
+          = withObject "RestoreInstanceRequest"
+              (\ o ->
+                 RestoreInstanceRequest' <$>
+                   (o .:? "sourceBackup") <*> (o .:? "fileShare"))
+
+instance ToJSON RestoreInstanceRequest where
+        toJSON RestoreInstanceRequest'{..}
+          = object
+              (catMaybes
+                 [("sourceBackup" .=) <$> _rirSourceBackup,
+                  ("fileShare" .=) <$> _rirFileShare])
+
+-- | Represents a time of day. The date and time zone are either not
+-- significant or are specified elsewhere. An API may choose to allow leap
+-- seconds. Related types are google.type.Date and
+-- \`google.protobuf.Timestamp\`.
+--
+-- /See:/ 'timeOfDay' smart constructor.
+data TimeOfDay' =
+  TimeOfDay''
+    { _todNanos :: !(Maybe (Textual Int32))
+    , _todHours :: !(Maybe (Textual Int32))
+    , _todMinutes :: !(Maybe (Textual Int32))
+    , _todSeconds :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'todNanos'
+--
+-- * 'todHours'
+--
+-- * 'todMinutes'
+--
+-- * 'todSeconds'
+timeOfDay
+    :: TimeOfDay'
+timeOfDay =
+  TimeOfDay''
+    { _todNanos = Nothing
+    , _todHours = Nothing
+    , _todMinutes = Nothing
+    , _todSeconds = Nothing
+    }
+
+
+-- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+todNanos :: Lens' TimeOfDay' (Maybe Int32)
+todNanos
+  = lens _todNanos (\ s a -> s{_todNanos = a}) .
+      mapping _Coerce
+
+-- | Hours of day in 24 hour format. Should be from 0 to 23. An API may
+-- choose to allow the value \"24:00:00\" for scenarios like business
+-- closing time.
+todHours :: Lens' TimeOfDay' (Maybe Int32)
+todHours
+  = lens _todHours (\ s a -> s{_todHours = a}) .
+      mapping _Coerce
+
+-- | Minutes of hour of day. Must be from 0 to 59.
+todMinutes :: Lens' TimeOfDay' (Maybe Int32)
+todMinutes
+  = lens _todMinutes (\ s a -> s{_todMinutes = a}) .
+      mapping _Coerce
+
+-- | Seconds of minutes of the time. Must normally be from 0 to 59. An API
+-- may allow the value 60 if it allows leap-seconds.
+todSeconds :: Lens' TimeOfDay' (Maybe Int32)
+todSeconds
+  = lens _todSeconds (\ s a -> s{_todSeconds = a}) .
+      mapping _Coerce
+
+instance FromJSON TimeOfDay' where
+        parseJSON
+          = withObject "TimeOfDay"
+              (\ o ->
+                 TimeOfDay'' <$>
+                   (o .:? "nanos") <*> (o .:? "hours") <*>
+                     (o .:? "minutes")
+                     <*> (o .:? "seconds"))
+
+instance ToJSON TimeOfDay' where
+        toJSON TimeOfDay''{..}
+          = object
+              (catMaybes
+                 [("nanos" .=) <$> _todNanos,
+                  ("hours" .=) <$> _todHours,
+                  ("minutes" .=) <$> _todMinutes,
+                  ("seconds" .=) <$> _todSeconds])
 
 -- | Cross-service attributes for the location. For example
 -- {\"cloud.googleapis.com\/region\": \"us-east1\"}
@@ -1479,13 +2852,13 @@ instance ToJSON LocationMetadata where
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata =
   OperationMetadata'
-    { _omAPIVersion      :: !(Maybe Text)
-    , _omEndTime         :: !(Maybe DateTime')
-    , _omStatusDetail    :: !(Maybe Text)
-    , _omVerb            :: !(Maybe Text)
+    { _omAPIVersion :: !(Maybe Text)
+    , _omEndTime :: !(Maybe DateTime')
+    , _omStatusDetail :: !(Maybe Text)
+    , _omVerb :: !(Maybe Text)
     , _omCancelRequested :: !(Maybe Bool)
-    , _omTarget          :: !(Maybe Text)
-    , _omCreateTime      :: !(Maybe DateTime')
+    , _omTarget :: !(Maybe Text)
+    , _omCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1521,28 +2894,28 @@ operationMetadata =
     }
 
 
--- | [Output only] API version used to start the operation.
+-- | Output only. API version used to start the operation.
 omAPIVersion :: Lens' OperationMetadata (Maybe Text)
 omAPIVersion
   = lens _omAPIVersion (\ s a -> s{_omAPIVersion = a})
 
--- | [Output only] The time the operation finished running.
+-- | Output only. The time the operation finished running.
 omEndTime :: Lens' OperationMetadata (Maybe UTCTime)
 omEndTime
   = lens _omEndTime (\ s a -> s{_omEndTime = a}) .
       mapping _DateTime
 
--- | [Output only] Human-readable status of the operation, if any.
+-- | Output only. Human-readable status of the operation, if any.
 omStatusDetail :: Lens' OperationMetadata (Maybe Text)
 omStatusDetail
   = lens _omStatusDetail
       (\ s a -> s{_omStatusDetail = a})
 
--- | [Output only] Name of the verb executed by the operation.
+-- | Output only. Name of the verb executed by the operation.
 omVerb :: Lens' OperationMetadata (Maybe Text)
 omVerb = lens _omVerb (\ s a -> s{_omVerb = a})
 
--- | [Output only] Identifies whether the user has requested cancellation of
+-- | Output only. Identifies whether the user has requested cancellation of
 -- the operation. Operations that have successfully been cancelled have
 -- Operation.error value with a google.rpc.Status.code of 1, corresponding
 -- to \`Code.CANCELLED\`.
@@ -1551,12 +2924,12 @@ omCancelRequested
   = lens _omCancelRequested
       (\ s a -> s{_omCancelRequested = a})
 
--- | [Output only] Server-defined resource path for the target of the
+-- | Output only. Server-defined resource path for the target of the
 -- operation.
 omTarget :: Lens' OperationMetadata (Maybe Text)
 omTarget = lens _omTarget (\ s a -> s{_omTarget = a})
 
--- | [Output only] The time the operation was created.
+-- | Output only. The time the operation was created.
 omCreateTime :: Lens' OperationMetadata (Maybe UTCTime)
 omCreateTime
   = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
@@ -1592,7 +2965,7 @@ instance ToJSON OperationMetadata where
 data GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource =
   GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource'
     { _gcsmpvprResourceType :: !(Maybe Text)
-    , _gcsmpvprResourceURL  :: !(Maybe Text)
+    , _gcsmpvprResourceURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1649,14 +3022,59 @@ instance ToJSON
                  [("resourceType" .=) <$> _gcsmpvprResourceType,
                   ("resourceUrl" .=) <$> _gcsmpvprResourceURL])
 
+-- | The MaintenanceSchedule contains the scheduling information of published
+-- maintenance schedule with same key as software_versions.
+--
+-- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules' smart constructor.
+newtype GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules =
+  GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules'
+    { _gcsmpvimsAddtional :: HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcsmpvimsAddtional'
+googleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+    :: HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule -- ^ 'gcsmpvimsAddtional'
+    -> GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+googleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules pGcsmpvimsAddtional_ =
+  GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules'
+    {_gcsmpvimsAddtional = _Coerce # pGcsmpvimsAddtional_}
+
+
+gcsmpvimsAddtional :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules (HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule)
+gcsmpvimsAddtional
+  = lens _gcsmpvimsAddtional
+      (\ s a -> s{_gcsmpvimsAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+         where
+        parseJSON
+          = withObject
+              "GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules"
+              (\ o ->
+                 GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules'
+                   <$> (parseJSONObject o))
+
+instance ToJSON
+           GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenanceSchedules
+         where
+        toJSON = toJSON . _gcsmpvimsAddtional
+
 -- | ListInstancesResponse is the result of ListInstancesRequest.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
 data ListInstancesResponse =
   ListInstancesResponse'
     { _lirNextPageToken :: !(Maybe Text)
-    , _lirUnreachable   :: !(Maybe [Text])
-    , _lirInstances     :: !(Maybe [Instance])
+    , _lirUnreachable :: !(Maybe [Text])
+    , _lirInstances :: !(Maybe [Instance])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1767,59 +3185,115 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | The map between RolloutType and the corresponding RolloutMetadata. This
--- is only mutated by rollout service. For actuation implementation, this
--- information is pass-through for Rollout management. Producer shall not
--- modify by itself. For update of a single entry in this map, the update
--- field mask shall follow this sementics: go\/advanced-field-masks
+-- | DenyMaintenancePeriod definition. Maintenance is forbidden within the
+-- deny period. The start_date must be less than the end_date.
 --
--- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata' smart constructor.
-newtype GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata =
-  GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata'
-    { _gcsmpvirmAddtional :: HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata
+-- /See:/ 'denyMaintenancePeriod' smart constructor.
+data DenyMaintenancePeriod =
+  DenyMaintenancePeriod'
+    { _dmpTime :: !(Maybe TimeOfDay')
+    , _dmpEndDate :: !(Maybe Date)
+    , _dmpStartDate :: !(Maybe Date)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata' with the minimum fields required to make a request.
+-- | Creates a value of 'DenyMaintenancePeriod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcsmpvirmAddtional'
-googleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-    :: HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata -- ^ 'gcsmpvirmAddtional'
-    -> GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-googleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata pGcsmpvirmAddtional_ =
-  GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata'
-    {_gcsmpvirmAddtional = _Coerce # pGcsmpvirmAddtional_}
+-- * 'dmpTime'
+--
+-- * 'dmpEndDate'
+--
+-- * 'dmpStartDate'
+denyMaintenancePeriod
+    :: DenyMaintenancePeriod
+denyMaintenancePeriod =
+  DenyMaintenancePeriod'
+    {_dmpTime = Nothing, _dmpEndDate = Nothing, _dmpStartDate = Nothing}
 
 
-gcsmpvirmAddtional :: Lens' GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata (HashMap Text GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata)
-gcsmpvirmAddtional
-  = lens _gcsmpvirmAddtional
-      (\ s a -> s{_gcsmpvirmAddtional = a})
+-- | Time in UTC when the Blackout period starts on start_date and ends on
+-- end_date. This can be: * Full time. * All zeros for 00:00:00 UTC
+dmpTime :: Lens' DenyMaintenancePeriod (Maybe TimeOfDay')
+dmpTime = lens _dmpTime (\ s a -> s{_dmpTime = a})
+
+-- | Deny period end date. This can be: * A full date, with non-zero year,
+-- month and day values. * A month and day value, with a zero year. Allows
+-- recurring deny periods each year. Date matching this period will have to
+-- be before the end.
+dmpEndDate :: Lens' DenyMaintenancePeriod (Maybe Date)
+dmpEndDate
+  = lens _dmpEndDate (\ s a -> s{_dmpEndDate = a})
+
+-- | Deny period start date. This can be: * A full date, with non-zero year,
+-- month and day values. * A month and day value, with a zero year. Allows
+-- recurring deny periods each year. Date matching this period will have to
+-- be the same or after the start.
+dmpStartDate :: Lens' DenyMaintenancePeriod (Maybe Date)
+dmpStartDate
+  = lens _dmpStartDate (\ s a -> s{_dmpStartDate = a})
+
+instance FromJSON DenyMaintenancePeriod where
+        parseJSON
+          = withObject "DenyMaintenancePeriod"
+              (\ o ->
+                 DenyMaintenancePeriod' <$>
+                   (o .:? "time") <*> (o .:? "endDate") <*>
+                     (o .:? "startDate"))
+
+instance ToJSON DenyMaintenancePeriod where
+        toJSON DenyMaintenancePeriod'{..}
+          = object
+              (catMaybes
+                 [("time" .=) <$> _dmpTime,
+                  ("endDate" .=) <$> _dmpEndDate,
+                  ("startDate" .=) <$> _dmpStartDate])
+
+-- | Time window specified for weekly operations.
+--
+-- /See:/ 'weeklyCycle' smart constructor.
+newtype WeeklyCycle =
+  WeeklyCycle'
+    { _wcSchedule :: Maybe [Schedule]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'WeeklyCycle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wcSchedule'
+weeklyCycle
+    :: WeeklyCycle
+weeklyCycle = WeeklyCycle' {_wcSchedule = Nothing}
+
+
+-- | User can specify multiple windows in a week. Minimum of 1 window.
+wcSchedule :: Lens' WeeklyCycle [Schedule]
+wcSchedule
+  = lens _wcSchedule (\ s a -> s{_wcSchedule = a}) .
+      _Default
       . _Coerce
 
-instance FromJSON
-           GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-         where
+instance FromJSON WeeklyCycle where
         parseJSON
-          = withObject
-              "GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata"
+          = withObject "WeeklyCycle"
               (\ o ->
-                 GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata'
-                   <$> (parseJSONObject o))
+                 WeeklyCycle' <$> (o .:? "schedule" .!= mempty))
 
-instance ToJSON
-           GoogleCloudSaasacceleratorManagementProvidersV1InstanceRolloutMetadata
-         where
-        toJSON = toJSON . _gcsmpvirmAddtional
+instance ToJSON WeeklyCycle where
+        toJSON WeeklyCycle'{..}
+          = object
+              (catMaybes [("schedule" .=) <$> _wcSchedule])
 
--- | The MaintenancePolicies that have been attached to the instance. The key
--- must be of the type name of the oneof policy name defined in
--- MaintenancePolicy, and the referenced policy must define the same policy
--- type. For complete details of MaintenancePolicy, please refer to
--- \/\/depot\/google3\/google\/cloud\/saasaccelerator\/maintenancepolicy\/api\/v1\/maintenance_policy_resources.proto
+-- | Deprecated. The MaintenancePolicies that have been attached to the
+-- instance. The key must be of the type name of the oneof policy name
+-- defined in MaintenancePolicy, and the referenced policy must define the
+-- same policy type. For complete details of MaintenancePolicy, please
+-- refer to go\/cloud-saas-mw-ug.
 --
 -- /See:/ 'googleCloudSaasacceleratorManagementProvidersV1InstanceMaintenancePolicyNames' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1InstanceMaintenancePolicyNames =
@@ -1868,16 +3342,17 @@ instance ToJSON
 -- /See:/ 'instance'' smart constructor.
 data Instance =
   Instance'
-    { _iEtag          :: !(Maybe Text)
-    , _iState         :: !(Maybe InstanceState)
-    , _iNetworks      :: !(Maybe [NetworkConfig])
-    , _iFileShares    :: !(Maybe [FileShareConfig])
-    , _iName          :: !(Maybe Text)
+    { _iSatisfiesPzs :: !(Maybe Bool)
+    , _iEtag :: !(Maybe Text)
+    , _iState :: !(Maybe InstanceState)
+    , _iNetworks :: !(Maybe [NetworkConfig])
+    , _iFileShares :: !(Maybe [FileShareConfig])
+    , _iName :: !(Maybe Text)
     , _iStatusMessage :: !(Maybe Text)
-    , _iTier          :: !(Maybe InstanceTier)
-    , _iLabels        :: !(Maybe InstanceLabels)
-    , _iDescription   :: !(Maybe Text)
-    , _iCreateTime    :: !(Maybe DateTime')
+    , _iTier :: !(Maybe InstanceTier)
+    , _iLabels :: !(Maybe InstanceLabels)
+    , _iDescription :: !(Maybe Text)
+    , _iCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1885,6 +3360,8 @@ data Instance =
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iSatisfiesPzs'
 --
 -- * 'iEtag'
 --
@@ -1909,7 +3386,8 @@ instance'
     :: Instance
 instance' =
   Instance'
-    { _iEtag = Nothing
+    { _iSatisfiesPzs = Nothing
+    , _iEtag = Nothing
     , _iState = Nothing
     , _iNetworks = Nothing
     , _iFileShares = Nothing
@@ -1921,6 +3399,12 @@ instance' =
     , _iCreateTime = Nothing
     }
 
+
+-- | Output only. Reserved for future use.
+iSatisfiesPzs :: Lens' Instance (Maybe Bool)
+iSatisfiesPzs
+  = lens _iSatisfiesPzs
+      (\ s a -> s{_iSatisfiesPzs = a})
 
 -- | Server-specified ETag for the instance resource to prevent simultaneous
 -- updates from overwriting each other.
@@ -1948,7 +3432,7 @@ iFileShares
       . _Coerce
 
 -- | Output only. The resource name of the instance, in the format
--- projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}.
+-- projects\/{project}\/locations\/{location}\/instances\/{instance}.
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
@@ -1967,7 +3451,7 @@ iTier = lens _iTier (\ s a -> s{_iTier = a})
 iLabels :: Lens' Instance (Maybe InstanceLabels)
 iLabels = lens _iLabels (\ s a -> s{_iLabels = a})
 
--- | Optional. A description of the instance (2048 characters or less).
+-- | The description of the instance (2048 characters or less).
 iDescription :: Lens' Instance (Maybe Text)
 iDescription
   = lens _iDescription (\ s a -> s{_iDescription = a})
@@ -1983,8 +3467,9 @@ instance FromJSON Instance where
           = withObject "Instance"
               (\ o ->
                  Instance' <$>
-                   (o .:? "etag") <*> (o .:? "state") <*>
-                     (o .:? "networks" .!= mempty)
+                   (o .:? "satisfiesPzs") <*> (o .:? "etag") <*>
+                     (o .:? "state")
+                     <*> (o .:? "networks" .!= mempty)
                      <*> (o .:? "fileShares" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "statusMessage")
@@ -1997,7 +3482,8 @@ instance ToJSON Instance where
         toJSON Instance'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _iEtag, ("state" .=) <$> _iState,
+                 [("satisfiesPzs" .=) <$> _iSatisfiesPzs,
+                  ("etag" .=) <$> _iEtag, ("state" .=) <$> _iState,
                   ("networks" .=) <$> _iNetworks,
                   ("fileShares" .=) <$> _iFileShares,
                   ("name" .=) <$> _iName,

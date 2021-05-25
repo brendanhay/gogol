@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.Get
     , secSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.get@ method which the
 -- 'SecurityPoliciesGet' request conforms to.
@@ -58,7 +58,7 @@ type SecurityPoliciesGetResource =
 -- /See:/ 'securityPoliciesGet' smart constructor.
 data SecurityPoliciesGet =
   SecurityPoliciesGet'
-    { _secProject        :: !Text
+    { _secProject :: !Text
     , _secSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

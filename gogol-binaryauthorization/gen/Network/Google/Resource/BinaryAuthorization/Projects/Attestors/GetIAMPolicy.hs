@@ -34,6 +34,7 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.GetIAMPoli
     , ProjectsAttestorsGetIAMPolicy
 
     -- * Request Lenses
+    , pagipOptionsRequestedPolicyVersion
     , pagipXgafv
     , pagipUploadProtocol
     , pagipAccessToken
@@ -42,20 +43,23 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Attestors.GetIAMPoli
     , pagipCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.attestors.getIamPolicy@ method which the
 -- 'ProjectsAttestorsGetIAMPolicy' request conforms to.
 type ProjectsAttestorsGetIAMPolicyResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] IAMPolicy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] IAMPolicy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -63,12 +67,13 @@ type ProjectsAttestorsGetIAMPolicyResource =
 -- /See:/ 'projectsAttestorsGetIAMPolicy' smart constructor.
 data ProjectsAttestorsGetIAMPolicy =
   ProjectsAttestorsGetIAMPolicy'
-    { _pagipXgafv          :: !(Maybe Xgafv)
+    { _pagipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _pagipXgafv :: !(Maybe Xgafv)
     , _pagipUploadProtocol :: !(Maybe Text)
-    , _pagipAccessToken    :: !(Maybe Text)
-    , _pagipUploadType     :: !(Maybe Text)
-    , _pagipResource       :: !Text
-    , _pagipCallback       :: !(Maybe Text)
+    , _pagipAccessToken :: !(Maybe Text)
+    , _pagipUploadType :: !(Maybe Text)
+    , _pagipResource :: !Text
+    , _pagipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,6 +81,8 @@ data ProjectsAttestorsGetIAMPolicy =
 -- | Creates a value of 'ProjectsAttestorsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pagipOptionsRequestedPolicyVersion'
 --
 -- * 'pagipXgafv'
 --
@@ -93,7 +100,8 @@ projectsAttestorsGetIAMPolicy
     -> ProjectsAttestorsGetIAMPolicy
 projectsAttestorsGetIAMPolicy pPagipResource_ =
   ProjectsAttestorsGetIAMPolicy'
-    { _pagipXgafv = Nothing
+    { _pagipOptionsRequestedPolicyVersion = Nothing
+    , _pagipXgafv = Nothing
     , _pagipUploadProtocol = Nothing
     , _pagipAccessToken = Nothing
     , _pagipUploadType = Nothing
@@ -101,6 +109,19 @@ projectsAttestorsGetIAMPolicy pPagipResource_ =
     , _pagipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+pagipOptionsRequestedPolicyVersion :: Lens' ProjectsAttestorsGetIAMPolicy (Maybe Int32)
+pagipOptionsRequestedPolicyVersion
+  = lens _pagipOptionsRequestedPolicyVersion
+      (\ s a -> s{_pagipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 pagipXgafv :: Lens' ProjectsAttestorsGetIAMPolicy (Maybe Xgafv)
@@ -144,7 +165,10 @@ instance GoogleRequest ProjectsAttestorsGetIAMPolicy
         type Scopes ProjectsAttestorsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsAttestorsGetIAMPolicy'{..}
-          = go _pagipResource _pagipXgafv _pagipUploadProtocol
+          = go _pagipResource
+              _pagipOptionsRequestedPolicyVersion
+              _pagipXgafv
+              _pagipUploadProtocol
               _pagipAccessToken
               _pagipUploadType
               _pagipCallback

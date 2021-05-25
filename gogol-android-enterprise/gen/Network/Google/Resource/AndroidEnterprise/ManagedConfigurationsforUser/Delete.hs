@@ -34,13 +34,18 @@ module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforUser.De
     , ManagedConfigurationsforUserDelete
 
     -- * Request Lenses
+    , mcudXgafv
+    , mcudUploadProtocol
     , mcudEnterpriseId
+    , mcudAccessToken
+    , mcudUploadType
     , mcudUserId
     , mcudManagedConfigurationForUserId
+    , mcudCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.managedconfigurationsforuser.delete@ method which the
 -- 'ManagedConfigurationsforUserDelete' request conforms to.
@@ -53,7 +58,12 @@ type ManagedConfigurationsforUserDeleteResource =
                Capture "userId" Text :>
                  "managedConfigurationsForUser" :>
                    Capture "managedConfigurationForUserId" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a per-user managed configuration for an app for the specified
 -- user.
@@ -61,9 +71,14 @@ type ManagedConfigurationsforUserDeleteResource =
 -- /See:/ 'managedConfigurationsforUserDelete' smart constructor.
 data ManagedConfigurationsforUserDelete =
   ManagedConfigurationsforUserDelete'
-    { _mcudEnterpriseId                  :: !Text
-    , _mcudUserId                        :: !Text
+    { _mcudXgafv :: !(Maybe Xgafv)
+    , _mcudUploadProtocol :: !(Maybe Text)
+    , _mcudEnterpriseId :: !Text
+    , _mcudAccessToken :: !(Maybe Text)
+    , _mcudUploadType :: !(Maybe Text)
+    , _mcudUserId :: !Text
     , _mcudManagedConfigurationForUserId :: !Text
+    , _mcudCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,11 +87,21 @@ data ManagedConfigurationsforUserDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mcudXgafv'
+--
+-- * 'mcudUploadProtocol'
+--
 -- * 'mcudEnterpriseId'
+--
+-- * 'mcudAccessToken'
+--
+-- * 'mcudUploadType'
 --
 -- * 'mcudUserId'
 --
 -- * 'mcudManagedConfigurationForUserId'
+--
+-- * 'mcudCallback'
 managedConfigurationsforUserDelete
     :: Text -- ^ 'mcudEnterpriseId'
     -> Text -- ^ 'mcudUserId'
@@ -84,17 +109,45 @@ managedConfigurationsforUserDelete
     -> ManagedConfigurationsforUserDelete
 managedConfigurationsforUserDelete pMcudEnterpriseId_ pMcudUserId_ pMcudManagedConfigurationForUserId_ =
   ManagedConfigurationsforUserDelete'
-    { _mcudEnterpriseId = pMcudEnterpriseId_
+    { _mcudXgafv = Nothing
+    , _mcudUploadProtocol = Nothing
+    , _mcudEnterpriseId = pMcudEnterpriseId_
+    , _mcudAccessToken = Nothing
+    , _mcudUploadType = Nothing
     , _mcudUserId = pMcudUserId_
     , _mcudManagedConfigurationForUserId = pMcudManagedConfigurationForUserId_
+    , _mcudCallback = Nothing
     }
 
+
+-- | V1 error format.
+mcudXgafv :: Lens' ManagedConfigurationsforUserDelete (Maybe Xgafv)
+mcudXgafv
+  = lens _mcudXgafv (\ s a -> s{_mcudXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mcudUploadProtocol :: Lens' ManagedConfigurationsforUserDelete (Maybe Text)
+mcudUploadProtocol
+  = lens _mcudUploadProtocol
+      (\ s a -> s{_mcudUploadProtocol = a})
 
 -- | The ID of the enterprise.
 mcudEnterpriseId :: Lens' ManagedConfigurationsforUserDelete Text
 mcudEnterpriseId
   = lens _mcudEnterpriseId
       (\ s a -> s{_mcudEnterpriseId = a})
+
+-- | OAuth access token.
+mcudAccessToken :: Lens' ManagedConfigurationsforUserDelete (Maybe Text)
+mcudAccessToken
+  = lens _mcudAccessToken
+      (\ s a -> s{_mcudAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mcudUploadType :: Lens' ManagedConfigurationsforUserDelete (Maybe Text)
+mcudUploadType
+  = lens _mcudUploadType
+      (\ s a -> s{_mcudUploadType = a})
 
 -- | The ID of the user.
 mcudUserId :: Lens' ManagedConfigurationsforUserDelete Text
@@ -108,6 +161,11 @@ mcudManagedConfigurationForUserId
   = lens _mcudManagedConfigurationForUserId
       (\ s a -> s{_mcudManagedConfigurationForUserId = a})
 
+-- | JSONP
+mcudCallback :: Lens' ManagedConfigurationsforUserDelete (Maybe Text)
+mcudCallback
+  = lens _mcudCallback (\ s a -> s{_mcudCallback = a})
+
 instance GoogleRequest
            ManagedConfigurationsforUserDelete
          where
@@ -117,6 +175,11 @@ instance GoogleRequest
         requestClient ManagedConfigurationsforUserDelete'{..}
           = go _mcudEnterpriseId _mcudUserId
               _mcudManagedConfigurationForUserId
+              _mcudXgafv
+              _mcudUploadProtocol
+              _mcudAccessToken
+              _mcudUploadType
+              _mcudCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

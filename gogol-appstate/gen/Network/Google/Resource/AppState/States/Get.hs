@@ -37,8 +37,8 @@ module Network.Google.Resource.AppState.States.Get
     , sgStateKey
     ) where
 
-import           Network.Google.AppState.Types
-import           Network.Google.Prelude
+import Network.Google.AppState.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.get@ method which the
 -- 'StatesGet' request conforms to.

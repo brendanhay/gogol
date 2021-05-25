@@ -57,6 +57,8 @@ library
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Update
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Watch
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.FinalizedProposals.List
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.FinalizedProposals.Pause
+        , Network.Google.Resource.AdExchangeBuyer2.Accounts.FinalizedProposals.Resume
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Products.Get
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Products.List
         , Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.Accept

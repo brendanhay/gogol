@@ -42,8 +42,8 @@ module Network.Google.Resource.AcceleratedMobilePageURL.AmpURLs.BatchGet
     , aubgCallback
     ) where
 
-import           Network.Google.AcceleratedMobilePageURL.Types
-import           Network.Google.Prelude
+import Network.Google.AcceleratedMobilePageURL.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @acceleratedmobilepageurl.ampUrls.batchGet@ method which the
 -- 'AmpURLsBatchGet' request conforms to.
@@ -65,12 +65,12 @@ type AmpURLsBatchGetResource =
 -- /See:/ 'ampURLsBatchGet' smart constructor.
 data AmpURLsBatchGet =
   AmpURLsBatchGet'
-    { _aubgXgafv          :: !(Maybe Xgafv)
+    { _aubgXgafv :: !(Maybe Xgafv)
     , _aubgUploadProtocol :: !(Maybe Text)
-    , _aubgAccessToken    :: !(Maybe Text)
-    , _aubgUploadType     :: !(Maybe Text)
-    , _aubgPayload        :: !BatchGetAmpURLsRequest
-    , _aubgCallback       :: !(Maybe Text)
+    , _aubgAccessToken :: !(Maybe Text)
+    , _aubgUploadType :: !(Maybe Text)
+    , _aubgPayload :: !BatchGetAmpURLsRequest
+    , _aubgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

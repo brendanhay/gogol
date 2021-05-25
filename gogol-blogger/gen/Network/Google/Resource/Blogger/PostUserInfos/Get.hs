@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets one post and user info pair, by post ID and user ID. The post user
--- info contains per-user information about the post, such as access
--- rights, specific to the user.
+-- Gets one post and user info pair, by post_id and user_id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.postUserInfos.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.postUserInfos.get@.
 module Network.Google.Resource.Blogger.PostUserInfos.Get
     (
     -- * REST Resource
@@ -35,40 +33,53 @@ module Network.Google.Resource.Blogger.PostUserInfos.Get
     , PostUserInfosGet
 
     -- * Request Lenses
+    , puigXgafv
+    , puigUploadProtocol
+    , puigAccessToken
+    , puigUploadType
     , puigBlogId
     , puigMaxComments
     , puigUserId
     , puigPostId
+    , puigCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.postUserInfos.get@ method which the
 -- 'PostUserInfosGet' request conforms to.
 type PostUserInfosGetResource =
-     "blogger" :>
-       "v3" :>
-         "users" :>
-           Capture "userId" Text :>
-             "blogs" :>
-               Capture "blogId" Text :>
-                 "posts" :>
-                   Capture "postId" Text :>
-                     QueryParam "maxComments" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] PostUserInfo
+     "v3" :>
+       "users" :>
+         Capture "userId" Text :>
+           "blogs" :>
+             Capture "blogId" Text :>
+               "posts" :>
+                 Capture "postId" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "maxComments" (Textual Word32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] PostUserInfo
 
--- | Gets one post and user info pair, by post ID and user ID. The post user
--- info contains per-user information about the post, such as access
--- rights, specific to the user.
+-- | Gets one post and user info pair, by post_id and user_id.
 --
 -- /See:/ 'postUserInfosGet' smart constructor.
 data PostUserInfosGet =
   PostUserInfosGet'
-    { _puigBlogId      :: !Text
+    { _puigXgafv :: !(Maybe Xgafv)
+    , _puigUploadProtocol :: !(Maybe Text)
+    , _puigAccessToken :: !(Maybe Text)
+    , _puigUploadType :: !(Maybe Text)
+    , _puigBlogId :: !Text
     , _puigMaxComments :: !(Maybe (Textual Word32))
-    , _puigUserId      :: !Text
-    , _puigPostId      :: !Text
+    , _puigUserId :: !Text
+    , _puigPostId :: !Text
+    , _puigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +88,14 @@ data PostUserInfosGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'puigXgafv'
+--
+-- * 'puigUploadProtocol'
+--
+-- * 'puigAccessToken'
+--
+-- * 'puigUploadType'
+--
 -- * 'puigBlogId'
 --
 -- * 'puigMaxComments'
@@ -84,6 +103,8 @@ data PostUserInfosGet =
 -- * 'puigUserId'
 --
 -- * 'puigPostId'
+--
+-- * 'puigCallback'
 postUserInfosGet
     :: Text -- ^ 'puigBlogId'
     -> Text -- ^ 'puigUserId'
@@ -91,35 +112,63 @@ postUserInfosGet
     -> PostUserInfosGet
 postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
   PostUserInfosGet'
-    { _puigBlogId = pPuigBlogId_
+    { _puigXgafv = Nothing
+    , _puigUploadProtocol = Nothing
+    , _puigAccessToken = Nothing
+    , _puigUploadType = Nothing
+    , _puigBlogId = pPuigBlogId_
     , _puigMaxComments = Nothing
     , _puigUserId = pPuigUserId_
     , _puigPostId = pPuigPostId_
+    , _puigCallback = Nothing
     }
 
 
--- | The ID of the blog.
+-- | V1 error format.
+puigXgafv :: Lens' PostUserInfosGet (Maybe Xgafv)
+puigXgafv
+  = lens _puigXgafv (\ s a -> s{_puigXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+puigUploadProtocol :: Lens' PostUserInfosGet (Maybe Text)
+puigUploadProtocol
+  = lens _puigUploadProtocol
+      (\ s a -> s{_puigUploadProtocol = a})
+
+-- | OAuth access token.
+puigAccessToken :: Lens' PostUserInfosGet (Maybe Text)
+puigAccessToken
+  = lens _puigAccessToken
+      (\ s a -> s{_puigAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+puigUploadType :: Lens' PostUserInfosGet (Maybe Text)
+puigUploadType
+  = lens _puigUploadType
+      (\ s a -> s{_puigUploadType = a})
+
 puigBlogId :: Lens' PostUserInfosGet Text
 puigBlogId
   = lens _puigBlogId (\ s a -> s{_puigBlogId = a})
 
--- | Maximum number of comments to pull back on a post.
 puigMaxComments :: Lens' PostUserInfosGet (Maybe Word32)
 puigMaxComments
   = lens _puigMaxComments
       (\ s a -> s{_puigMaxComments = a})
       . mapping _Coerce
 
--- | ID of the user for the per-user information to be fetched. Either the
--- word \'self\' (sans quote marks) or the user\'s profile identifier.
 puigUserId :: Lens' PostUserInfosGet Text
 puigUserId
   = lens _puigUserId (\ s a -> s{_puigUserId = a})
 
--- | The ID of the post to get.
 puigPostId :: Lens' PostUserInfosGet Text
 puigPostId
   = lens _puigPostId (\ s a -> s{_puigPostId = a})
+
+-- | JSONP
+puigCallback :: Lens' PostUserInfosGet (Maybe Text)
+puigCallback
+  = lens _puigCallback (\ s a -> s{_puigCallback = a})
 
 instance GoogleRequest PostUserInfosGet where
         type Rs PostUserInfosGet = PostUserInfo
@@ -127,8 +176,12 @@ instance GoogleRequest PostUserInfosGet where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostUserInfosGet'{..}
-          = go _puigUserId _puigBlogId _puigPostId
+          = go _puigUserId _puigBlogId _puigPostId _puigXgafv
+              _puigUploadProtocol
+              _puigAccessToken
+              _puigUploadType
               _puigMaxComments
+              _puigCallback
               (Just AltJSON)
               bloggerService
           where go

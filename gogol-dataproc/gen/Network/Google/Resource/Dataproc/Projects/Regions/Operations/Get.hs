@@ -43,8 +43,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Get
     , progCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.operations.get@ method which the
 -- 'ProjectsRegionsOperationsGet' request conforms to.
@@ -65,12 +65,12 @@ type ProjectsRegionsOperationsGetResource =
 -- /See:/ 'projectsRegionsOperationsGet' smart constructor.
 data ProjectsRegionsOperationsGet =
   ProjectsRegionsOperationsGet'
-    { _progXgafv          :: !(Maybe Xgafv)
+    { _progXgafv :: !(Maybe Xgafv)
     , _progUploadProtocol :: !(Maybe Text)
-    , _progAccessToken    :: !(Maybe Text)
-    , _progUploadType     :: !(Maybe Text)
-    , _progName           :: !Text
-    , _progCallback       :: !(Maybe Text)
+    , _progAccessToken :: !(Maybe Text)
+    , _progUploadType :: !(Maybe Text)
+    , _progName :: !Text
+    , _progCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

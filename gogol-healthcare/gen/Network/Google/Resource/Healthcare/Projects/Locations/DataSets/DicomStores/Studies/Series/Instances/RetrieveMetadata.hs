@@ -22,8 +22,14 @@
 --
 -- RetrieveInstanceMetadata returns instance associated with the given
 -- study, series, and SOP Instance UID presented as metadata with the bulk
--- data removed. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.6.
+-- data removed. See [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4).
+-- For details on the implementation of RetrieveInstanceMetadata, see
+-- [Metadata
+-- resources](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#metadata_resources)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveInstanceMetadata, see [Retrieving
+-- metadata](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_metadata).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveMetadata@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.RetrieveMetadata
@@ -45,14 +51,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsssirmDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveMetadata@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadataResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -65,19 +71,25 @@ type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadataR
 
 -- | RetrieveInstanceMetadata returns instance associated with the given
 -- study, series, and SOP Instance UID presented as metadata with the bulk
--- data removed. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.6.
+-- data removed. See [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4).
+-- For details on the implementation of RetrieveInstanceMetadata, see
+-- [Metadata
+-- resources](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#metadata_resources)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveInstanceMetadata, see [Retrieving
+-- metadata](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_metadata).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata =
   ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata'
-    { _pldsdsssirmParent         :: !Text
-    , _pldsdsssirmXgafv          :: !(Maybe Xgafv)
+    { _pldsdsssirmParent :: !Text
+    , _pldsdsssirmXgafv :: !(Maybe Xgafv)
     , _pldsdsssirmUploadProtocol :: !(Maybe Text)
-    , _pldsdsssirmAccessToken    :: !(Maybe Text)
-    , _pldsdsssirmUploadType     :: !(Maybe Text)
-    , _pldsdsssirmCallback       :: !(Maybe Text)
-    , _pldsdsssirmDicomWebPath   :: !Text
+    , _pldsdsssirmAccessToken :: !(Maybe Text)
+    , _pldsdsssirmUploadType :: !(Maybe Text)
+    , _pldsdsssirmCallback :: !(Maybe Text)
+    , _pldsdsssirmDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,8 +127,8 @@ projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata pPlds
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsssirmParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata Text
 pldsdsssirmParent
   = lens _pldsdsssirmParent
@@ -152,9 +164,8 @@ pldsdsssirmCallback
   = lens _pldsdsssirmCallback
       (\ s a -> s{_pldsdsssirmCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g.,
--- \`studies\/{study_id}\/series\/{series_id}\/instances\/{instance_id}\/metadata\`).
+-- | The path of the RetrieveInstanceMetadata DICOMweb request. For example,
+-- \`studies\/{study_uid}\/series\/{series_uid}\/instances\/{instance_uid}\/metadata\`.
 pldsdsssirmDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveMetadata Text
 pldsdsssirmDicomWebPath
   = lens _pldsdsssirmDicomWebPath

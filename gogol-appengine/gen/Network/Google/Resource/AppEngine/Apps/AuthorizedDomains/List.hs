@@ -43,8 +43,8 @@ module Network.Google.Resource.AppEngine.Apps.AuthorizedDomains.List
     , aadlCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.authorizedDomains.list@ method which the
 -- 'AppsAuthorizedDomainsList' request conforms to.
@@ -68,14 +68,14 @@ type AppsAuthorizedDomainsListResource =
 -- /See:/ 'appsAuthorizedDomainsList' smart constructor.
 data AppsAuthorizedDomainsList =
   AppsAuthorizedDomainsList'
-    { _aadlXgafv          :: !(Maybe Xgafv)
+    { _aadlXgafv :: !(Maybe Xgafv)
     , _aadlUploadProtocol :: !(Maybe Text)
-    , _aadlAccessToken    :: !(Maybe Text)
-    , _aadlUploadType     :: !(Maybe Text)
-    , _aadlAppsId         :: !Text
-    , _aadlPageToken      :: !(Maybe Text)
-    , _aadlPageSize       :: !(Maybe (Textual Int32))
-    , _aadlCallback       :: !(Maybe Text)
+    , _aadlAccessToken :: !(Maybe Text)
+    , _aadlUploadType :: !(Maybe Text)
+    , _aadlAppsId :: !Text
+    , _aadlPageToken :: !(Maybe Text)
+    , _aadlPageSize :: !(Maybe (Textual Int32))
+    , _aadlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

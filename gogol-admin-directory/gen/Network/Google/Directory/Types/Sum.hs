@@ -16,7 +16,7 @@
 --
 module Network.Google.Directory.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Event on which subscription is intended (if subscribing)
 data UsersListEvent
@@ -62,7 +62,7 @@ instance FromJSON UsersListEvent where
 instance ToJSON UsersListEvent where
     toJSON = toJSONText
 
--- | Event on which subscription is intended (if subscribing)
+-- | Events to watch for.
 data UsersAliasesListEvent
     = UALEAdd
       -- ^ @add@
@@ -91,7 +91,7 @@ instance FromJSON UsersAliasesListEvent where
 instance ToJSON UsersAliasesListEvent where
     toJSON = toJSONText
 
--- | Event on which subscription is intended (if subscribing)
+-- | Events to watch for.
 data UsersAliasesWatchEvent
     = UAWEAdd
       -- ^ @add@
@@ -120,7 +120,7 @@ instance FromJSON UsersAliasesWatchEvent where
 instance ToJSON UsersAliasesWatchEvent where
     toJSON = toJSONText
 
--- | Event on which subscription is intended (if subscribing)
+-- | Events to watch for.
 data UsersWatchEvent
     = UWEAdd
       -- ^ @add@
@@ -164,6 +164,64 @@ instance FromJSON UsersWatchEvent where
 instance ToJSON UsersWatchEvent where
     toJSON = toJSONText
 
+-- | The type of the command.
+data DirectoryChromeosDevicesCommandType
+    = CommandTypeUnspecified
+      -- ^ @COMMAND_TYPE_UNSPECIFIED@
+      -- The command type was unspecified.
+    | Reboot
+      -- ^ @REBOOT@
+      -- Reboot the device. Can only be issued to Kiosk and managed guest session
+      -- devices.
+    | TakeAScreenshot
+      -- ^ @TAKE_A_SCREENSHOT@
+      -- Take a screenshot of the device. Only available if the device is in
+      -- Kiosk Mode.
+    | SetVolume
+      -- ^ @SET_VOLUME@
+      -- Set the volume of the device. Can only be issued to Kiosk and managed
+      -- guest session devices.
+    | WipeUsers
+      -- ^ @WIPE_USERS@
+      -- Wipe all the users off of the device. Executing this command in the
+      -- device will remove all user profile data, but it will keep device policy
+      -- and enrollment.
+    | RemotePowerwash
+      -- ^ @REMOTE_POWERWASH@
+      -- Wipes the device by performing a power wash. Executing this command in
+      -- the device will remove all data including user policies, device policies
+      -- and enrollment policies. Warning: This will revert the device back to a
+      -- factory state with no enrollment unless the device is subject to forced
+      -- or auto enrollment. Use with caution, as this is an irreversible action!
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DirectoryChromeosDevicesCommandType
+
+instance FromHttpApiData DirectoryChromeosDevicesCommandType where
+    parseQueryParam = \case
+        "COMMAND_TYPE_UNSPECIFIED" -> Right CommandTypeUnspecified
+        "REBOOT" -> Right Reboot
+        "TAKE_A_SCREENSHOT" -> Right TakeAScreenshot
+        "SET_VOLUME" -> Right SetVolume
+        "WIPE_USERS" -> Right WipeUsers
+        "REMOTE_POWERWASH" -> Right RemotePowerwash
+        x -> Left ("Unable to parse DirectoryChromeosDevicesCommandType from: " <> x)
+
+instance ToHttpApiData DirectoryChromeosDevicesCommandType where
+    toQueryParam = \case
+        CommandTypeUnspecified -> "COMMAND_TYPE_UNSPECIFIED"
+        Reboot -> "REBOOT"
+        TakeAScreenshot -> "TAKE_A_SCREENSHOT"
+        SetVolume -> "SET_VOLUME"
+        WipeUsers -> "WIPE_USERS"
+        RemotePowerwash -> "REMOTE_POWERWASH"
+
+instance FromJSON DirectoryChromeosDevicesCommandType where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesCommandType"
+
+instance ToJSON DirectoryChromeosDevicesCommandType where
+    toJSON = toJSONText
+
 -- | Restrict information returned to a set of selected fields.
 data ChromeosDevicesPatchProjection
     = Basic
@@ -194,7 +252,8 @@ instance FromJSON ChromeosDevicesPatchProjection where
 instance ToJSON ChromeosDevicesPatchProjection where
     toJSON = toJSONText
 
--- | Restrict information returned to a set of selected fields.
+-- | Determines whether the response contains the full list of properties or
+-- only a subset.
 data ChromeosDevicesGetProjection
     = CDGPBasic
       -- ^ @BASIC@
@@ -224,14 +283,57 @@ instance FromJSON ChromeosDevicesGetProjection where
 instance ToJSON ChromeosDevicesGetProjection where
     toJSON = toJSONText
 
--- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+-- | Message severity
+data AuxiliaryMessageSeverity
+    = SeverityUnspecified
+      -- ^ @SEVERITY_UNSPECIFIED@
+      -- Message type unspecified.
+    | SeverityInfo
+      -- ^ @SEVERITY_INFO@
+      -- Message of severity: info.
+    | SeverityWarning
+      -- ^ @SEVERITY_WARNING@
+      -- Message of severity: warning.
+    | SeverityError
+      -- ^ @SEVERITY_ERROR@
+      -- Message of severity: error.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AuxiliaryMessageSeverity
+
+instance FromHttpApiData AuxiliaryMessageSeverity where
+    parseQueryParam = \case
+        "SEVERITY_UNSPECIFIED" -> Right SeverityUnspecified
+        "SEVERITY_INFO" -> Right SeverityInfo
+        "SEVERITY_WARNING" -> Right SeverityWarning
+        "SEVERITY_ERROR" -> Right SeverityError
+        x -> Left ("Unable to parse AuxiliaryMessageSeverity from: " <> x)
+
+instance ToHttpApiData AuxiliaryMessageSeverity where
+    toQueryParam = \case
+        SeverityUnspecified -> "SEVERITY_UNSPECIFIED"
+        SeverityInfo -> "SEVERITY_INFO"
+        SeverityWarning -> "SEVERITY_WARNING"
+        SeverityError -> "SEVERITY_ERROR"
+
+instance FromJSON AuxiliaryMessageSeverity where
+    parseJSON = parseJSONText "AuxiliaryMessageSeverity"
+
+instance ToJSON AuxiliaryMessageSeverity where
+    toJSON = toJSONText
+
+-- | Whether to fetch the administrator-only or domain-wide public view of
+-- the user. For more information, see [Retrieve a user as a
+-- non-administrator](\/admin-sdk\/directory\/v1\/guides\/manage-users#retrieve_users_non_admin).
 data UsersListViewType
     = AdminView
       -- ^ @admin_view@
-      -- Fetches the ADMIN_VIEW of the user.
+      -- Results include both administrator-only and domain-public fields for the
+      -- user.
     | DomainPublic
       -- ^ @domain_public@
-      -- Fetches the DOMAIN_PUBLIC view of the user.
+      -- Results only include fields for the user that are publicly visible to
+      -- other users in the domain.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersListViewType
@@ -253,7 +355,7 @@ instance FromJSON UsersListViewType where
 instance ToJSON UsersListViewType where
     toJSON = toJSONText
 
--- | Whether to return all sub-organizations or just immediate children
+-- | Whether to return all sub-organizations or just immediate children.
 data OrgUnitsListType
     = All
       -- ^ @all@
@@ -282,8 +384,8 @@ instance FromJSON OrgUnitsListType where
 instance ToJSON OrgUnitsListType where
     toJSON = toJSONText
 
--- | Whether to return results in ascending or descending order. Only of use
--- when orderBy is also used
+-- | Whether to return results in ascending or descending order. Must be used
+-- with the \`orderBy\` parameter.
 data MobileDevicesListSortOrder
     = Ascending
       -- ^ @ASCENDING@
@@ -312,7 +414,7 @@ instance FromJSON MobileDevicesListSortOrder where
 instance ToJSON MobileDevicesListSortOrder where
     toJSON = toJSONText
 
--- | Column to use for sorting results
+-- | Property to use for sorting results.
 data UsersListOrderBy
     = Email
       -- ^ @email@
@@ -346,6 +448,118 @@ instance FromJSON UsersListOrderBy where
 instance ToJSON UsersListOrderBy where
     toJSON = toJSONText
 
+-- | The type of command.
+data DirectoryChromeosDevicesIssueCommandRequestCommandType
+    = DCDICRCTCommandTypeUnspecified
+      -- ^ @COMMAND_TYPE_UNSPECIFIED@
+      -- The command type was unspecified.
+    | DCDICRCTReboot
+      -- ^ @REBOOT@
+      -- Reboot the device. Can only be issued to Kiosk and managed guest session
+      -- devices.
+    | DCDICRCTTakeAScreenshot
+      -- ^ @TAKE_A_SCREENSHOT@
+      -- Take a screenshot of the device. Only available if the device is in
+      -- Kiosk Mode.
+    | DCDICRCTSetVolume
+      -- ^ @SET_VOLUME@
+      -- Set the volume of the device. Can only be issued to Kiosk and managed
+      -- guest session devices.
+    | DCDICRCTWipeUsers
+      -- ^ @WIPE_USERS@
+      -- Wipe all the users off of the device. Executing this command in the
+      -- device will remove all user profile data, but it will keep device policy
+      -- and enrollment.
+    | DCDICRCTRemotePowerwash
+      -- ^ @REMOTE_POWERWASH@
+      -- Wipes the device by performing a power wash. Executing this command in
+      -- the device will remove all data including user policies, device policies
+      -- and enrollment policies. Warning: This will revert the device back to a
+      -- factory state with no enrollment unless the device is subject to forced
+      -- or auto enrollment. Use with caution, as this is an irreversible action!
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DirectoryChromeosDevicesIssueCommandRequestCommandType
+
+instance FromHttpApiData DirectoryChromeosDevicesIssueCommandRequestCommandType where
+    parseQueryParam = \case
+        "COMMAND_TYPE_UNSPECIFIED" -> Right DCDICRCTCommandTypeUnspecified
+        "REBOOT" -> Right DCDICRCTReboot
+        "TAKE_A_SCREENSHOT" -> Right DCDICRCTTakeAScreenshot
+        "SET_VOLUME" -> Right DCDICRCTSetVolume
+        "WIPE_USERS" -> Right DCDICRCTWipeUsers
+        "REMOTE_POWERWASH" -> Right DCDICRCTRemotePowerwash
+        x -> Left ("Unable to parse DirectoryChromeosDevicesIssueCommandRequestCommandType from: " <> x)
+
+instance ToHttpApiData DirectoryChromeosDevicesIssueCommandRequestCommandType where
+    toQueryParam = \case
+        DCDICRCTCommandTypeUnspecified -> "COMMAND_TYPE_UNSPECIFIED"
+        DCDICRCTReboot -> "REBOOT"
+        DCDICRCTTakeAScreenshot -> "TAKE_A_SCREENSHOT"
+        DCDICRCTSetVolume -> "SET_VOLUME"
+        DCDICRCTWipeUsers -> "WIPE_USERS"
+        DCDICRCTRemotePowerwash -> "REMOTE_POWERWASH"
+
+instance FromJSON DirectoryChromeosDevicesIssueCommandRequestCommandType where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesIssueCommandRequestCommandType"
+
+instance ToJSON DirectoryChromeosDevicesIssueCommandRequestCommandType where
+    toJSON = toJSONText
+
+-- | Indicates the command state.
+data DirectoryChromeosDevicesCommandState
+    = StateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- The command status was unspecified.
+    | Pending
+      -- ^ @PENDING@
+      -- An unexpired command not yet sent to the client.
+    | Expired
+      -- ^ @EXPIRED@
+      -- The command didn\'t get executed by the client within the expected time.
+    | Cancelled
+      -- ^ @CANCELLED@
+      -- The command is cancelled by admin while in PENDING.
+    | SentToClient
+      -- ^ @SENT_TO_CLIENT@
+      -- The command has been sent to the client.
+    | AckedByClient
+      -- ^ @ACKED_BY_CLIENT@
+      -- The client has responded that it received the command.
+    | ExecutedByClient
+      -- ^ @EXECUTED_BY_CLIENT@
+      -- The client has (un)successfully executed the command.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DirectoryChromeosDevicesCommandState
+
+instance FromHttpApiData DirectoryChromeosDevicesCommandState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right StateUnspecified
+        "PENDING" -> Right Pending
+        "EXPIRED" -> Right Expired
+        "CANCELLED" -> Right Cancelled
+        "SENT_TO_CLIENT" -> Right SentToClient
+        "ACKED_BY_CLIENT" -> Right AckedByClient
+        "EXECUTED_BY_CLIENT" -> Right ExecutedByClient
+        x -> Left ("Unable to parse DirectoryChromeosDevicesCommandState from: " <> x)
+
+instance ToHttpApiData DirectoryChromeosDevicesCommandState where
+    toQueryParam = \case
+        StateUnspecified -> "STATE_UNSPECIFIED"
+        Pending -> "PENDING"
+        Expired -> "EXPIRED"
+        Cancelled -> "CANCELLED"
+        SentToClient -> "SENT_TO_CLIENT"
+        AckedByClient -> "ACKED_BY_CLIENT"
+        ExecutedByClient -> "EXECUTED_BY_CLIENT"
+
+instance FromJSON DirectoryChromeosDevicesCommandState where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesCommandState"
+
+instance ToJSON DirectoryChromeosDevicesCommandState where
+    toJSON = toJSONText
+
 -- | Column to use for sorting results
 data GroupsListOrderBy
     = GLOBEmail
@@ -370,6 +584,172 @@ instance FromJSON GroupsListOrderBy where
 instance ToJSON GroupsListOrderBy where
     toJSON = toJSONText
 
+-- | Canonical code for why the update failed to apply.
+data FailureInfoErrorCode
+    = FIECOK
+      -- ^ @OK@
+      -- Not an error; returned on success HTTP Mapping: 200 OK
+    | FIECCancelled
+      -- ^ @CANCELLED@
+      -- The operation was cancelled, typically by the caller. HTTP Mapping: 499
+      -- Client Closed Request
+    | FIECUnknown
+      -- ^ @UNKNOWN@
+      -- Unknown error. For example, this error may be returned when a \`Status\`
+      -- value received from another address space belongs to an error space that
+      -- is not known in this address space. Also errors raised by APIs that do
+      -- not return enough error information may be converted to this error. HTTP
+      -- Mapping: 500 Internal Server Error
+    | FIECInvalidArgument
+      -- ^ @INVALID_ARGUMENT@
+      -- The client specified an invalid argument. Note that this differs from
+      -- \`FAILED_PRECONDITION\`. \`INVALID_ARGUMENT\` indicates arguments that
+      -- are problematic regardless of the state of the system (e.g., a malformed
+      -- file name). HTTP Mapping: 400 Bad Request
+    | FIECDeadlineExceeded
+      -- ^ @DEADLINE_EXCEEDED@
+      -- The deadline expired before the operation could complete. For operations
+      -- that change the state of the system, this error may be returned even if
+      -- the operation has completed successfully. For example, a successful
+      -- response from a server could have been delayed long enough for the
+      -- deadline to expire. HTTP Mapping: 504 Gateway Timeout
+    | FIECNotFound
+      -- ^ @NOT_FOUND@
+      -- Some requested entity (e.g., file or directory) was not found. Note to
+      -- server developers: if a request is denied for an entire class of users,
+      -- such as gradual feature rollout or undocumented allowlist, \`NOT_FOUND\`
+      -- may be used. If a request is denied for some users within a class of
+      -- users, such as user-based access control, \`PERMISSION_DENIED\` must be
+      -- used. HTTP Mapping: 404 Not Found
+    | FIECAlreadyExists
+      -- ^ @ALREADY_EXISTS@
+      -- The entity that a client attempted to create (e.g., file or directory)
+      -- already exists. HTTP Mapping: 409 Conflict
+    | FIECPermissionDenied
+      -- ^ @PERMISSION_DENIED@
+      -- The caller does not have permission to execute the specified operation.
+      -- \`PERMISSION_DENIED\` must not be used for rejections caused by
+      -- exhausting some resource (use \`RESOURCE_EXHAUSTED\` instead for those
+      -- errors). \`PERMISSION_DENIED\` must not be used if the caller can not be
+      -- identified (use \`UNAUTHENTICATED\` instead for those errors). This
+      -- error code does not imply the request is valid or the requested entity
+      -- exists or satisfies other pre-conditions. HTTP Mapping: 403 Forbidden
+    | FIECUnauthenticated
+      -- ^ @UNAUTHENTICATED@
+      -- The request does not have valid authentication credentials for the
+      -- operation. HTTP Mapping: 401 Unauthorized
+    | FIECResourceExhausted
+      -- ^ @RESOURCE_EXHAUSTED@
+      -- Some resource has been exhausted, perhaps a per-user quota, or perhaps
+      -- the entire file system is out of space. HTTP Mapping: 429 Too Many
+      -- Requests
+    | FIECFailedPrecondition
+      -- ^ @FAILED_PRECONDITION@
+      -- The operation was rejected because the system is not in a state required
+      -- for the operation\'s execution. For example, the directory to be deleted
+      -- is non-empty, an rmdir operation is applied to a non-directory, etc.
+      -- Service implementors can use the following guidelines to decide between
+      -- \`FAILED_PRECONDITION\`, \`ABORTED\`, and \`UNAVAILABLE\`: (a) Use
+      -- \`UNAVAILABLE\` if the client can retry just the failing call. (b) Use
+      -- \`ABORTED\` if the client should retry at a higher level. For example,
+      -- when a client-specified test-and-set fails, indicating the client should
+      -- restart a read-modify-write sequence. (c) Use \`FAILED_PRECONDITION\` if
+      -- the client should not retry until the system state has been explicitly
+      -- fixed. For example, if an \"rmdir\" fails because the directory is
+      -- non-empty, \`FAILED_PRECONDITION\` should be returned since the client
+      -- should not retry unless the files are deleted from the directory. HTTP
+      -- Mapping: 400 Bad Request
+    | FIECAborted
+      -- ^ @ABORTED@
+      -- The operation was aborted, typically due to a concurrency issue such as
+      -- a sequencer check failure or transaction abort. See the guidelines above
+      -- for deciding between \`FAILED_PRECONDITION\`, \`ABORTED\`, and
+      -- \`UNAVAILABLE\`. HTTP Mapping: 409 Conflict
+    | FIECOutOfRange
+      -- ^ @OUT_OF_RANGE@
+      -- The operation was attempted past the valid range. E.g., seeking or
+      -- reading past end-of-file. Unlike \`INVALID_ARGUMENT\`, this error
+      -- indicates a problem that may be fixed if the system state changes. For
+      -- example, a 32-bit file system will generate \`INVALID_ARGUMENT\` if
+      -- asked to read at an offset that is not in the range [0,2^32-1], but it
+      -- will generate \`OUT_OF_RANGE\` if asked to read from an offset past the
+      -- current file size. There is a fair bit of overlap between
+      -- \`FAILED_PRECONDITION\` and \`OUT_OF_RANGE\`. We recommend using
+      -- \`OUT_OF_RANGE\` (the more specific error) when it applies so that
+      -- callers who are iterating through a space can easily look for an
+      -- \`OUT_OF_RANGE\` error to detect when they are done. HTTP Mapping: 400
+      -- Bad Request
+    | FIECUnimplemented
+      -- ^ @UNIMPLEMENTED@
+      -- The operation is not implemented or is not supported\/enabled in this
+      -- service. HTTP Mapping: 501 Not Implemented
+    | FIECInternal
+      -- ^ @INTERNAL@
+      -- Internal errors. This means that some invariants expected by the
+      -- underlying system have been broken. This error code is reserved for
+      -- serious errors. HTTP Mapping: 500 Internal Server Error
+    | FIECUnavailable
+      -- ^ @UNAVAILABLE@
+      -- The service is currently unavailable. This is most likely a transient
+      -- condition, which can be corrected by retrying with a backoff. Note that
+      -- it is not always safe to retry non-idempotent operations. See the
+      -- guidelines above for deciding between \`FAILED_PRECONDITION\`,
+      -- \`ABORTED\`, and \`UNAVAILABLE\`. HTTP Mapping: 503 Service Unavailable
+    | FIECDataLoss
+      -- ^ @DATA_LOSS@
+      -- Unrecoverable data loss or corruption. HTTP Mapping: 500 Internal Server
+      -- Error
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FailureInfoErrorCode
+
+instance FromHttpApiData FailureInfoErrorCode where
+    parseQueryParam = \case
+        "OK" -> Right FIECOK
+        "CANCELLED" -> Right FIECCancelled
+        "UNKNOWN" -> Right FIECUnknown
+        "INVALID_ARGUMENT" -> Right FIECInvalidArgument
+        "DEADLINE_EXCEEDED" -> Right FIECDeadlineExceeded
+        "NOT_FOUND" -> Right FIECNotFound
+        "ALREADY_EXISTS" -> Right FIECAlreadyExists
+        "PERMISSION_DENIED" -> Right FIECPermissionDenied
+        "UNAUTHENTICATED" -> Right FIECUnauthenticated
+        "RESOURCE_EXHAUSTED" -> Right FIECResourceExhausted
+        "FAILED_PRECONDITION" -> Right FIECFailedPrecondition
+        "ABORTED" -> Right FIECAborted
+        "OUT_OF_RANGE" -> Right FIECOutOfRange
+        "UNIMPLEMENTED" -> Right FIECUnimplemented
+        "INTERNAL" -> Right FIECInternal
+        "UNAVAILABLE" -> Right FIECUnavailable
+        "DATA_LOSS" -> Right FIECDataLoss
+        x -> Left ("Unable to parse FailureInfoErrorCode from: " <> x)
+
+instance ToHttpApiData FailureInfoErrorCode where
+    toQueryParam = \case
+        FIECOK -> "OK"
+        FIECCancelled -> "CANCELLED"
+        FIECUnknown -> "UNKNOWN"
+        FIECInvalidArgument -> "INVALID_ARGUMENT"
+        FIECDeadlineExceeded -> "DEADLINE_EXCEEDED"
+        FIECNotFound -> "NOT_FOUND"
+        FIECAlreadyExists -> "ALREADY_EXISTS"
+        FIECPermissionDenied -> "PERMISSION_DENIED"
+        FIECUnauthenticated -> "UNAUTHENTICATED"
+        FIECResourceExhausted -> "RESOURCE_EXHAUSTED"
+        FIECFailedPrecondition -> "FAILED_PRECONDITION"
+        FIECAborted -> "ABORTED"
+        FIECOutOfRange -> "OUT_OF_RANGE"
+        FIECUnimplemented -> "UNIMPLEMENTED"
+        FIECInternal -> "INTERNAL"
+        FIECUnavailable -> "UNAVAILABLE"
+        FIECDataLoss -> "DATA_LOSS"
+
+instance FromJSON FailureInfoErrorCode where
+    parseJSON = parseJSONText "FailureInfoErrorCode"
+
+instance ToJSON FailureInfoErrorCode where
+    toJSON = toJSONText
+
 -- | Source from which Building.coordinates are derived.
 data ResourcesBuildingsPatchCoordinatesSource
     = ClientSpecified
@@ -381,8 +761,8 @@ data ResourcesBuildingsPatchCoordinatesSource
       -- address.
     | SourceUnspecified
       -- ^ @SOURCE_UNSPECIFIED@
-      -- Defaults to RESOLVED_FROM_ADDRESS if postal address is provided.
-      -- Otherwise, defaults to CLIENT_SPECIFIED if coordinates are provided.
+      -- Defaults to \`RESOLVED_FROM_ADDRESS\` if postal address is provided.
+      -- Otherwise, defaults to \`CLIENT_SPECIFIED\` if coordinates are provided.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ResourcesBuildingsPatchCoordinatesSource
@@ -406,14 +786,17 @@ instance FromJSON ResourcesBuildingsPatchCoordinatesSource where
 instance ToJSON ResourcesBuildingsPatchCoordinatesSource where
     toJSON = toJSONText
 
--- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+-- | Whether to fetch the administrator-only or domain-wide public view of
+-- the user. For more information, see [Retrieve a user as a
+-- non-administrator](\/admin-sdk\/directory\/v1\/guides\/manage-users#retrieve_users_non_admin).
 data UsersWatchViewType
     = UWVTAdminView
       -- ^ @admin_view@
-      -- Fetches the ADMIN_VIEW of the user.
+      -- Results include both administrator-only and domain-public fields.
     | UWVTDomainPublic
       -- ^ @domain_public@
-      -- Fetches the DOMAIN_PUBLIC view of the user.
+      -- Results only include fields for the user that are publicly visible to
+      -- other users in the domain.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersWatchViewType
@@ -442,7 +825,7 @@ data UsersGetProjection
       -- Do not include any custom fields for the user.
     | UGPCustom
       -- ^ @custom@
-      -- Include custom fields from schemas mentioned in customFieldMask.
+      -- Include custom fields from schemas requested in \`customFieldMask\`.
     | UGPFull
       -- ^ @full@
       -- Include all fields associated with this user.
@@ -480,8 +863,8 @@ data ResourcesBuildingsUpdateCoordinatesSource
       -- address.
     | RBUCSSourceUnspecified
       -- ^ @SOURCE_UNSPECIFIED@
-      -- Defaults to RESOLVED_FROM_ADDRESS if postal address is provided.
-      -- Otherwise, defaults to CLIENT_SPECIFIED if coordinates are provided.
+      -- Defaults to \`RESOLVED_FROM_ADDRESS\` if postal address is provided.
+      -- Otherwise, defaults to \`CLIENT_SPECIFIED\` if coordinates are provided.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ResourcesBuildingsUpdateCoordinatesSource
@@ -535,29 +918,30 @@ instance FromJSON MobileDevicesListProjection where
 instance ToJSON MobileDevicesListProjection where
     toJSON = toJSONText
 
--- | Column to use for sorting results
+-- | Device property to use for sorting results.
 data MobileDevicesListOrderBy
     = MDLOBDeviceId
       -- ^ @deviceId@
-      -- Mobile Device serial number.
+      -- The serial number for a Google Sync mobile device. For Android devices,
+      -- this is a software generated unique identifier.
     | MDLOBEmail
       -- ^ @email@
-      -- Owner user email.
+      -- The device owner\'s email address.
     | MDLOBLastSync
       -- ^ @lastSync@
       -- Last policy settings sync date time of the device.
     | MDLOBModel
       -- ^ @model@
-      -- Mobile Device model.
+      -- The mobile device\'s model.
     | MDLOBName
       -- ^ @name@
-      -- Owner user name.
+      -- The device owner\'s user name.
     | MDLOBOS
       -- ^ @os@
-      -- Mobile operating system.
+      -- The device\'s operating system.
     | MDLOBStatus
       -- ^ @status@
-      -- Status of the device.
+      -- The device status.
     | MDLOBType
       -- ^ @type@
       -- Type of the device.
@@ -634,8 +1018,8 @@ data ResourcesBuildingsInsertCoordinatesSource
       -- address.
     | RBICSSourceUnspecified
       -- ^ @SOURCE_UNSPECIFIED@
-      -- Defaults to RESOLVED_FROM_ADDRESS if postal address is provided.
-      -- Otherwise, defaults to CLIENT_SPECIFIED if coordinates are provided.
+      -- Defaults to \`RESOLVED_FROM_ADDRESS\` if postal address is provided.
+      -- Otherwise, defaults to \`CLIENT_SPECIFIED\` if coordinates are provided.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ResourcesBuildingsInsertCoordinatesSource
@@ -659,8 +1043,8 @@ instance FromJSON ResourcesBuildingsInsertCoordinatesSource where
 instance ToJSON ResourcesBuildingsInsertCoordinatesSource where
     toJSON = toJSONText
 
--- | Whether to return results in ascending or descending order. Only of use
--- when orderBy is also used
+-- | Whether to return results in ascending or descending order. Must be used
+-- with the \`orderBy\` parameter.
 data ChromeosDevicesListSortOrder
     = CDLSOAscending
       -- ^ @ASCENDING@
@@ -687,6 +1071,45 @@ instance FromJSON ChromeosDevicesListSortOrder where
     parseJSON = parseJSONText "ChromeosDevicesListSortOrder"
 
 instance ToJSON ChromeosDevicesListSortOrder where
+    toJSON = toJSONText
+
+-- | The result of the command.
+data DirectoryChromeosDevicesCommandResultResult
+    = CommandResultTypeUnspecified
+      -- ^ @COMMAND_RESULT_TYPE_UNSPECIFIED@
+      -- The command result was unspecified.
+    | Ignored
+      -- ^ @IGNORED@
+      -- The command was ignored as obsolete.
+    | Failure
+      -- ^ @FAILURE@
+      -- The command could not be executed successfully.
+    | Success
+      -- ^ @SUCCESS@
+      -- The command was successfully executed.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DirectoryChromeosDevicesCommandResultResult
+
+instance FromHttpApiData DirectoryChromeosDevicesCommandResultResult where
+    parseQueryParam = \case
+        "COMMAND_RESULT_TYPE_UNSPECIFIED" -> Right CommandResultTypeUnspecified
+        "IGNORED" -> Right Ignored
+        "FAILURE" -> Right Failure
+        "SUCCESS" -> Right Success
+        x -> Left ("Unable to parse DirectoryChromeosDevicesCommandResultResult from: " <> x)
+
+instance ToHttpApiData DirectoryChromeosDevicesCommandResultResult where
+    toQueryParam = \case
+        CommandResultTypeUnspecified -> "COMMAND_RESULT_TYPE_UNSPECIFIED"
+        Ignored -> "IGNORED"
+        Failure -> "FAILURE"
+        Success -> "SUCCESS"
+
+instance FromJSON DirectoryChromeosDevicesCommandResultResult where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesCommandResultResult"
+
+instance ToJSON DirectoryChromeosDevicesCommandResultResult where
     toJSON = toJSONText
 
 -- | Whether to return results in ascending or descending order.
@@ -748,6 +1171,35 @@ instance FromJSON GroupsListSortOrder where
 instance ToJSON GroupsListSortOrder where
     toJSON = toJSONText
 
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
 -- | What subset of fields to fetch for this user.
 data UsersListProjection
     = ULPBasic
@@ -755,7 +1207,7 @@ data UsersListProjection
       -- Do not include any custom fields for the user.
     | ULPCustom
       -- ^ @custom@
-      -- Include custom fields from schemas mentioned in customFieldMask.
+      -- Include custom fields from schemas requested in \`customFieldMask\`.
     | ULPFull
       -- ^ @full@
       -- Include all fields associated with this user.
@@ -842,29 +1294,31 @@ instance FromJSON MobileDevicesGetProjection where
 instance ToJSON MobileDevicesGetProjection where
     toJSON = toJSONText
 
--- | Column to use for sorting results
+-- | Device property to use for sorting results.
 data ChromeosDevicesListOrderBy
     = AnnotatedLocation
       -- ^ @annotatedLocation@
-      -- Chromebook location as annotated by the administrator.
+      -- Chrome device location as annotated by the administrator.
     | AnnotatedUser
       -- ^ @annotatedUser@
       -- Chromebook user as annotated by administrator.
     | LastSync
       -- ^ @lastSync@
-      -- Chromebook last sync.
+      -- The date and time the Chrome device was last synchronized with the
+      -- policy settings in the Admin console.
     | Notes
       -- ^ @notes@
-      -- Chromebook notes as annotated by the administrator.
+      -- Chrome device notes as annotated by the administrator.
     | SerialNumber
       -- ^ @serialNumber@
-      -- Chromebook Serial Number.
+      -- The Chrome device serial number entered when the device was enabled.
     | Status
       -- ^ @status@
-      -- Chromebook status.
+      -- Chrome device status. For more information, see the
     | SupportEndDate
       -- ^ @supportEndDate@
-      -- Chromebook support end date.
+      -- Chrome device support end date. This is applicable only for devices
+      -- purchased directly from Google.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesListOrderBy
@@ -994,14 +1448,18 @@ instance FromJSON ChromeosDevicesListProjection where
 instance ToJSON ChromeosDevicesListProjection where
     toJSON = toJSONText
 
--- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+-- | Whether to fetch the administrator-only or domain-wide public view of
+-- the user. For more information, see [Retrieve a user as a
+-- non-administrator](\/admin-sdk\/directory\/v1\/guides\/manage-users#retrieve_users_non_admin).
 data UsersGetViewType
     = UGVTAdminView
       -- ^ @admin_view@
-      -- Fetches the ADMIN_VIEW of the user.
+      -- Results include both administrator-only and domain-public fields for the
+      -- user.
     | UGVTDomainPublic
       -- ^ @domain_public@
-      -- Fetches the DOMAIN_PUBLIC view of the user.
+      -- Results only include fields for the user that are publicly visible to
+      -- other users in the domain.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersGetViewType

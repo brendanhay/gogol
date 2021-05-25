@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Instances.SimulateMaintenanceEvent
     , ismeInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.simulateMaintenanceEvent@ method which the
 -- 'InstancesSimulateMaintenanceEvent' request conforms to.
@@ -60,8 +60,8 @@ type InstancesSimulateMaintenanceEventResource =
 -- /See:/ 'instancesSimulateMaintenanceEvent' smart constructor.
 data InstancesSimulateMaintenanceEvent =
   InstancesSimulateMaintenanceEvent'
-    { _ismeProject  :: !Text
-    , _ismeZone     :: !Text
+    { _ismeProject :: !Text
+    , _ismeZone :: !Text
     , _ismeInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

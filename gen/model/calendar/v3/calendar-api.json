@@ -12,7 +12,7 @@
           "description": "View events on all your calendars"
         },
         "https://www.googleapis.com/auth/calendar.readonly": {
-          "description": "View your calendars"
+          "description": "See and download any calendar you can access using your Google Calendar"
         },
         "https://www.googleapis.com/auth/calendar.settings.readonly": {
           "description": "View your Calendar settings"
@@ -26,10 +26,9 @@
   "description": "Manipulates events and other calendar data.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/google-apps/calendar/firstapp",
-  "etag": "\"VPK3KBfpaEgZ16pozGOoMYfKc0U/K8LMZ9chM5kSVFHSd0_S-CEUrGk\"",
   "icons": {
-    "x16": "http://www.google.com/images/icons/product/calendar-16.png",
-    "x32": "http://www.google.com/images/icons/product/calendar-32.png"
+    "x16": "http://fonts.gstatic.com/s/i/productlogos/calendar_2020q4/v8/web-16dp/logo_calendar_2020q4_color_1x_web_16dp.png",
+    "x32": "http://fonts.gstatic.com/s/i/productlogos/calendar_2020q4/v8/web-32dp/logo_calendar_2020q4_color_1x_web_32dp.png"
   },
   "id": "calendar:v3",
   "kind": "discovery#restDescription",
@@ -815,7 +814,7 @@
               "enumDescriptions": [
                 "Notifications are sent to all guests.",
                 "Notifications are sent to non-Google Calendar guests only.",
-                "No notifications are sent. This value should only be used for migration use cases (note that in most migration cases the import method should be used)."
+                "No notifications are sent. For calendar migration tasks, consider using the Events.import method instead."
               ],
               "location": "query",
               "type": "string"
@@ -837,7 +836,7 @@
           ],
           "parameters": {
             "alwaysIncludeEmail": {
-              "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+              "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).",
               "location": "query",
               "type": "boolean"
             },
@@ -961,7 +960,7 @@
               "enumDescriptions": [
                 "Notifications are sent to all guests.",
                 "Notifications are sent to non-Google Calendar guests only.",
-                "No notifications are sent. This value should only be used for migration use cases (note that in most migration cases the import method should be used)."
+                "No notifications are sent. For calendar migration tasks, consider using the Events.import method instead."
               ],
               "location": "query",
               "type": "string"
@@ -994,7 +993,7 @@
           ],
           "parameters": {
             "alwaysIncludeEmail": {
-              "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+              "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).",
               "location": "query",
               "type": "boolean"
             },
@@ -1078,7 +1077,7 @@
           ],
           "parameters": {
             "alwaysIncludeEmail": {
-              "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+              "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).",
               "location": "query",
               "type": "boolean"
             },
@@ -1164,13 +1163,13 @@
               "type": "string"
             },
             "timeMax": {
-              "description": "Upper bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.",
+              "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.",
               "format": "date-time",
               "location": "query",
               "type": "string"
             },
             "timeMin": {
-              "description": "Lower bound (inclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.",
+              "description": "Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.",
               "format": "date-time",
               "location": "query",
               "type": "string"
@@ -1242,7 +1241,7 @@
               "enumDescriptions": [
                 "Notifications are sent to all guests.",
                 "Notifications are sent to non-Google Calendar guests only.",
-                "No notifications are sent. This value should only be used for migration use cases (note that in most migration cases the import method should be used)."
+                "No notifications are sent. For calendar migration tasks, consider using the Events.import method instead."
               ],
               "location": "query",
               "type": "string"
@@ -1267,7 +1266,7 @@
           ],
           "parameters": {
             "alwaysIncludeEmail": {
-              "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+              "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).",
               "location": "query",
               "type": "boolean"
             },
@@ -1313,7 +1312,7 @@
               "enumDescriptions": [
                 "Notifications are sent to all guests.",
                 "Notifications are sent to non-Google Calendar guests only.",
-                "No notifications are sent. This value should only be used for migration use cases (note that in most migration cases the import method should be used)."
+                "No notifications are sent. For calendar migration tasks, consider using the Events.import method instead."
               ],
               "location": "query",
               "type": "string"
@@ -1366,7 +1365,7 @@
               "enumDescriptions": [
                 "Notifications are sent to all guests.",
                 "Notifications are sent to non-Google Calendar guests only.",
-                "No notifications are sent. This value should only be used for migration use cases (note that in most migration cases the import method should be used)."
+                "No notifications are sent. For calendar migration tasks, consider using the Events.import method instead."
               ],
               "location": "query",
               "type": "string"
@@ -1397,7 +1396,7 @@
           ],
           "parameters": {
             "alwaysIncludeEmail": {
-              "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+              "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).",
               "location": "query",
               "type": "boolean"
             },
@@ -1443,7 +1442,7 @@
               "enumDescriptions": [
                 "Notifications are sent to all guests.",
                 "Notifications are sent to non-Google Calendar guests only.",
-                "No notifications are sent. This value should only be used for migration use cases (note that in most migration cases the import method should be used)."
+                "No notifications are sent. For calendar migration tasks, consider using the Events.import method instead."
               ],
               "location": "query",
               "type": "string"
@@ -1475,7 +1474,7 @@
           ],
           "parameters": {
             "alwaysIncludeEmail": {
-              "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+              "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).",
               "location": "query",
               "type": "boolean"
             },
@@ -1561,13 +1560,13 @@
               "type": "string"
             },
             "timeMax": {
-              "description": "Upper bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.",
+              "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.",
               "format": "date-time",
               "location": "query",
               "type": "string"
             },
             "timeMin": {
-              "description": "Lower bound (inclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.",
+              "description": "Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.",
               "format": "date-time",
               "location": "query",
               "type": "string"
@@ -1724,7 +1723,7 @@
       }
     }
   },
-  "revision": "20190331",
+  "revision": "20210710",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "Acl": {
@@ -1765,7 +1764,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Identifier of the ACL rule.",
+          "description": "Identifier of the Access Control List (ACL) rule. See Sharing calendars.",
           "type": "string"
         },
         "kind": {
@@ -1785,15 +1784,17 @@
         "scope": {
           "annotations": {
             "required": [
-              "calendar.acl.insert"
+              "calendar.acl.insert",
+              "calendar.acl.update"
             ]
           },
-          "description": "The scope of the rule.",
+          "description": "The extent to which calendar access is granted by this ACL rule.",
           "properties": {
             "type": {
               "annotations": {
                 "required": [
-                  "calendar.acl.insert"
+                  "calendar.acl.insert",
+                  "calendar.acl.update"
                 ]
               },
               "description": "The type of the scope. Possible values are:  \n- \"default\" - The public scope. This is the default value. \n- \"user\" - Limits the scope to a single user. \n- \"group\" - Limits the scope to a group. \n- \"domain\" - Limits the scope to a domain.  Note: The permissions granted to the \"default\", or public, scope apply to any user, authenticated or not.",
@@ -1928,7 +1929,7 @@
         },
         "hidden": {
           "default": "false",
-          "description": "Whether the calendar has been hidden from the list. Optional. The default is False.",
+          "description": "Whether the calendar has been hidden from the list. Optional. The attribute is only returned when the calendar is hidden, in which case the value is true.",
           "type": "boolean"
         },
         "id": {
@@ -1991,7 +1992,7 @@
       "id": "CalendarNotification",
       "properties": {
         "method": {
-          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Notifications are sent via email. \n- \"sms\" - Deprecated. Once this feature is shutdown, the API will no longer return notifications using this method. Any newly added SMS notifications will be ignored. See  Google Calendar SMS notifications to be removed for more information.\nNotifications are sent via SMS. This value is read-only and is ignored on inserts and updates. SMS notifications are only available for G Suite customers.  \nRequired when adding a notification.",
+          "description": "The method used to deliver the notification. The possible value is:  \n- \"email\" - Notifications are sent via email.  \nRequired when adding a notification.",
           "type": "string"
         },
         "type": {
@@ -2019,7 +2020,7 @@
         },
         "kind": {
           "default": "api#channel",
-          "description": "Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string \"api#channel\".",
+          "description": "Identifies this as a notification channel used to watch for changes to a resource, which is \"api#channel\".",
           "type": "string"
         },
         "params": {
@@ -2047,7 +2048,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The type of delivery mechanism used for this channel.",
+          "description": "The type of delivery mechanism used for this channel. Valid values are \"web_hook\" (or \"webhook\"). Both values refer to a channel where Http requests are used to deliver messages.",
           "type": "string"
         }
       },
@@ -2073,9 +2074,9 @@
         "calendar": {
           "additionalProperties": {
             "$ref": "ColorDefinition",
-            "description": "A calendar color defintion."
+            "description": "A calendar color definition."
           },
-          "description": "A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its color field. Read-only.",
+          "description": "A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.",
           "type": "object"
         },
         "event": {
@@ -2083,7 +2084,7 @@
             "$ref": "ColorDefinition",
             "description": "An event color definition."
           },
-          "description": "A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its color field. Read-only.",
+          "description": "A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.",
           "type": "object"
         },
         "kind": {
@@ -2103,12 +2104,12 @@
       "id": "ConferenceData",
       "properties": {
         "conferenceId": {
-          "description": "The ID of the conference.\nCan be used by developers to keep track of conferences, should not be displayed to users.\nValues for solution types:  \n- \"eventHangout\": unset.\n- \"eventNamedHangout\": the name of the Hangout.\n- \"hangoutsMeet\": the 10-letter meeting code, for example \"aaa-bbbb-ccc\".  Optional.",
+          "description": "The ID of the conference.\nCan be used by developers to keep track of conferences, should not be displayed to users.\nThe ID value is formed differently for each conference solution type:  \n- eventHangout: ID is not set.\n- eventNamedHangout: ID is the name of the Hangout.\n- hangoutsMeet: ID is the 10-letter meeting code, for example aaa-bbbb-ccc.\n- addOn: ID is defined by the third-party provider.  Optional.",
           "type": "string"
         },
         "conferenceSolution": {
           "$ref": "ConferenceSolution",
-          "description": "The conference solution, such as Hangouts or Hangouts Meet.\nUnset for a conference with a failed create request.\nEither conferenceSolution and at least one entryPoint, or createRequest is required."
+          "description": "The conference solution, such as Hangouts or Google Meet.\nUnset for a conference with a failed create request.\nEither conferenceSolution and at least one entryPoint, or createRequest is required."
         },
         "createRequest": {
           "$ref": "CreateConferenceRequest",
@@ -2130,7 +2131,7 @@
           "description": "Additional properties related to a conference. An example would be a solution-specific setting for enabling video streaming."
         },
         "signature": {
-          "description": "The signature of the conference data.\nGenereated on server side. Must be preserved while copying the conference data between events, otherwise the conference data will not be copied.\nUnset for a conference with a failed create request.\nOptional for a conference with a pending create request.",
+          "description": "The signature of the conference data.\nGenerated on server side. Must be preserved while copying the conference data between events, otherwise the conference data will not be copied.\nUnset for a conference with a failed create request.\nOptional for a conference with a pending create request.",
           "type": "string"
         }
       },
@@ -2203,7 +2204,7 @@
       "id": "ConferenceSolutionKey",
       "properties": {
         "type": {
-          "description": "The conference solution type.\nIf a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.\nThe possible values are:  \n- \"eventHangout\" for Hangouts for consumers (http://hangouts.google.com)\n- \"eventNamedHangout\" for classic Hangouts for G Suite users (http://hangouts.google.com)\n- \"hangoutsMeet\" for Hangouts Meet (http://meet.google.com)",
+          "description": "The conference solution type.\nIf a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.\nThe possible values are:  \n- \"eventHangout\" for Hangouts for consumers (http://hangouts.google.com)\n- \"eventNamedHangout\" for classic Hangouts for Google Workspace users (deprecated; http://hangouts.google.com)\n- \"hangoutsMeet\" for Google Meet (http://meet.google.com)\n- \"addOn\" for 3P conference providers",
           "type": "string"
         }
       },
@@ -2214,7 +2215,7 @@
       "properties": {
         "conferenceSolutionKey": {
           "$ref": "ConferenceSolutionKey",
-          "description": "The conference solution, such as Hangouts or Hangouts Meet."
+          "description": "The conference solution, such as Hangouts or Google Meet."
         },
         "requestId": {
           "description": "The client-generated unique ID for this request.\nClients should regenerate this ID for every new request. If an ID provided is the same as for the previous request, the request is ignored.",
@@ -2295,7 +2296,7 @@
       "properties": {
         "anyoneCanAddSelf": {
           "default": "false",
-          "description": "Whether anyone can invite themselves to the event (currently works for Google+ events only). Optional. The default is False.",
+          "description": "Whether anyone can invite themselves to the event (deprecated). Optional. The default is False.",
           "type": "boolean"
         },
         "attachments": {
@@ -2306,7 +2307,7 @@
           "type": "array"
         },
         "attendees": {
-          "description": "The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users.",
+          "description": "The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.",
           "items": {
             "$ref": "EventAttendee"
           },
@@ -2323,7 +2324,7 @@
         },
         "conferenceData": {
           "$ref": "ConferenceData",
-          "description": "The conference-related information, such as details of a Hangouts Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests."
+          "description": "The conference-related information, such as details of a Google Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests."
         },
         "created": {
           "description": "Creation time of the event (as a RFC3339 timestamp). Read-only.",
@@ -2342,7 +2343,7 @@
               "type": "string"
             },
             "id": {
-              "description": "The creator's Profile ID, if available. It corresponds to the id field in the People collection of the Google+ API",
+              "description": "The creator's Profile ID, if available.",
               "type": "string"
             },
             "self": {
@@ -2354,7 +2355,7 @@
           "type": "object"
         },
         "description": {
-          "description": "Description of the event. Optional.",
+          "description": "Description of the event. Can contain HTML. Optional.",
           "type": "string"
         },
         "end": {
@@ -2375,6 +2376,11 @@
         },
         "etag": {
           "description": "ETag of the resource.",
+          "type": "string"
+        },
+        "eventType": {
+          "default": "default",
+          "description": "Specific type of the event. Read-only. Possible values are:  \n- \"default\" - A regular event or not further specified. \n- \"outOfOffice\" - An out-of-office event.",
           "type": "string"
         },
         "extendedProperties": {
@@ -2400,23 +2406,23 @@
           "type": "object"
         },
         "gadget": {
-          "description": "A gadget that extends this event.",
+          "description": "A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.",
           "properties": {
             "display": {
-              "description": "The gadget's display mode. Optional. Possible values are:  \n- \"icon\" - The gadget displays next to the event's title in the calendar view. \n- \"chip\" - The gadget displays when the event is clicked.",
+              "description": "The gadget's display mode. Deprecated. Possible values are:  \n- \"icon\" - The gadget displays next to the event's title in the calendar view. \n- \"chip\" - The gadget displays when the event is clicked.",
               "type": "string"
             },
             "height": {
-              "description": "The gadget's height in pixels. The height must be an integer greater than 0. Optional.",
+              "description": "The gadget's height in pixels. The height must be an integer greater than 0. Optional. Deprecated.",
               "format": "int32",
               "type": "integer"
             },
             "iconLink": {
-              "description": "The gadget's icon URL. The URL scheme must be HTTPS.",
+              "description": "The gadget's icon URL. The URL scheme must be HTTPS. Deprecated.",
               "type": "string"
             },
             "link": {
-              "description": "The gadget's URL. The URL scheme must be HTTPS.",
+              "description": "The gadget's URL. The URL scheme must be HTTPS. Deprecated.",
               "type": "string"
             },
             "preferences": {
@@ -2428,15 +2434,15 @@
               "type": "object"
             },
             "title": {
-              "description": "The gadget's title.",
+              "description": "The gadget's title. Deprecated.",
               "type": "string"
             },
             "type": {
-              "description": "The gadget's type.",
+              "description": "The gadget's type. Deprecated.",
               "type": "string"
             },
             "width": {
-              "description": "The gadget's width in pixels. The width must be an integer greater than 0. Optional.",
+              "description": "The gadget's width in pixels. The width must be an integer greater than 0. Optional. Deprecated.",
               "format": "int32",
               "type": "integer"
             }
@@ -2459,7 +2465,7 @@
           "type": "boolean"
         },
         "hangoutLink": {
-          "description": "An absolute link to the Google+ hangout associated with this event. Read-only.",
+          "description": "An absolute link to the Google Hangout associated with this event. Read-only.",
           "type": "string"
         },
         "htmlLink": {
@@ -2505,7 +2511,7 @@
               "type": "string"
             },
             "id": {
-              "description": "The organizer's Profile ID, if available. It corresponds to the id field in the People collection of the Google+ API",
+              "description": "The organizer's Profile ID, if available.",
               "type": "string"
             },
             "self": {
@@ -2522,7 +2528,7 @@
         },
         "privateCopy": {
           "default": "false",
-          "description": "Whether this is a private event copy where changes are not shared with other copies on other calendars. Optional. Immutable. The default is False.",
+          "description": "If set to True, Event propagation is disabled. Note that it is not the same thing as Private event properties. Optional. Immutable. The default is False.",
           "type": "boolean"
         },
         "recurrence": {
@@ -2657,7 +2663,7 @@
           "type": "string"
         },
         "id": {
-          "description": "The attendee's Profile ID, if available. It corresponds to the id field in the People collection of the Google+ API",
+          "description": "The attendee's Profile ID, if available.",
           "type": "string"
         },
         "optional": {
@@ -2710,7 +2716,7 @@
       "id": "EventReminder",
       "properties": {
         "method": {
-          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Deprecated. Once this feature is shutdown, the API will no longer return reminders using this method. Any newly added SMS reminders will be ignored. See  Google Calendar SMS notifications to be removed for more information.\nReminders are sent via SMS. These are only available for G Suite customers. Requests to set SMS reminders for other account types are ignored. \n- \"popup\" - Reminders are sent via a UI popup.  \nRequired when adding a reminder.",
+          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"popup\" - Reminders are sent via a UI popup.  \nRequired when adding a reminder.",
           "type": "string"
         },
         "minutes": {

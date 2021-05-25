@@ -33,14 +33,19 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Get
     , InstallsGet
 
     -- * Request Lenses
+    , igXgafv
+    , igUploadProtocol
     , igEnterpriseId
+    , igAccessToken
+    , igUploadType
     , igUserId
     , igInstallId
     , igDeviceId
+    , igCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.get@ method which the
 -- 'InstallsGet' request conforms to.
@@ -55,17 +60,28 @@ type InstallsGetResource =
                    Capture "deviceId" Text :>
                      "installs" :>
                        Capture "installId" Text :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Install
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Install
 
 -- | Retrieves details of an installation of an app on a device.
 --
 -- /See:/ 'installsGet' smart constructor.
 data InstallsGet =
   InstallsGet'
-    { _igEnterpriseId :: !Text
-    , _igUserId       :: !Text
-    , _igInstallId    :: !Text
-    , _igDeviceId     :: !Text
+    { _igXgafv :: !(Maybe Xgafv)
+    , _igUploadProtocol :: !(Maybe Text)
+    , _igEnterpriseId :: !Text
+    , _igAccessToken :: !(Maybe Text)
+    , _igUploadType :: !(Maybe Text)
+    , _igUserId :: !Text
+    , _igInstallId :: !Text
+    , _igDeviceId :: !Text
+    , _igCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,13 +90,23 @@ data InstallsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'igXgafv'
+--
+-- * 'igUploadProtocol'
+--
 -- * 'igEnterpriseId'
+--
+-- * 'igAccessToken'
+--
+-- * 'igUploadType'
 --
 -- * 'igUserId'
 --
 -- * 'igInstallId'
 --
 -- * 'igDeviceId'
+--
+-- * 'igCallback'
 installsGet
     :: Text -- ^ 'igEnterpriseId'
     -> Text -- ^ 'igUserId'
@@ -89,18 +115,44 @@ installsGet
     -> InstallsGet
 installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
   InstallsGet'
-    { _igEnterpriseId = pIgEnterpriseId_
+    { _igXgafv = Nothing
+    , _igUploadProtocol = Nothing
+    , _igEnterpriseId = pIgEnterpriseId_
+    , _igAccessToken = Nothing
+    , _igUploadType = Nothing
     , _igUserId = pIgUserId_
     , _igInstallId = pIgInstallId_
     , _igDeviceId = pIgDeviceId_
+    , _igCallback = Nothing
     }
 
+
+-- | V1 error format.
+igXgafv :: Lens' InstallsGet (Maybe Xgafv)
+igXgafv = lens _igXgafv (\ s a -> s{_igXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+igUploadProtocol :: Lens' InstallsGet (Maybe Text)
+igUploadProtocol
+  = lens _igUploadProtocol
+      (\ s a -> s{_igUploadProtocol = a})
 
 -- | The ID of the enterprise.
 igEnterpriseId :: Lens' InstallsGet Text
 igEnterpriseId
   = lens _igEnterpriseId
       (\ s a -> s{_igEnterpriseId = a})
+
+-- | OAuth access token.
+igAccessToken :: Lens' InstallsGet (Maybe Text)
+igAccessToken
+  = lens _igAccessToken
+      (\ s a -> s{_igAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+igUploadType :: Lens' InstallsGet (Maybe Text)
+igUploadType
+  = lens _igUploadType (\ s a -> s{_igUploadType = a})
 
 -- | The ID of the user.
 igUserId :: Lens' InstallsGet Text
@@ -117,6 +169,11 @@ igDeviceId :: Lens' InstallsGet Text
 igDeviceId
   = lens _igDeviceId (\ s a -> s{_igDeviceId = a})
 
+-- | JSONP
+igCallback :: Lens' InstallsGet (Maybe Text)
+igCallback
+  = lens _igCallback (\ s a -> s{_igCallback = a})
+
 instance GoogleRequest InstallsGet where
         type Rs InstallsGet = Install
         type Scopes InstallsGet =
@@ -124,6 +181,11 @@ instance GoogleRequest InstallsGet where
         requestClient InstallsGet'{..}
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
+              _igXgafv
+              _igUploadProtocol
+              _igAccessToken
+              _igUploadType
+              _igCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -20,10 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a user license\'s renewal settings. This is applicable for
--- accounts with annual commitment plans only.
+-- Updates a user license\'s renewal settings. This is applicable for
+-- accounts with annual commitment plans only. For more information, see
+-- the description in [manage
+-- subscriptions](\/admin-sdk\/reseller\/v1\/how-tos\/manage_subscriptions#update_renewal).
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.changeRenewalSettings@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.changeRenewalSettings@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
     (
     -- * REST Resource
@@ -34,13 +36,18 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
     , SubscriptionsChangeRenewalSettings
 
     -- * Request Lenses
+    , scrsXgafv
+    , scrsUploadProtocol
+    , scrsAccessToken
+    , scrsUploadType
     , scrsPayload
     , scrsCustomerId
     , scrsSubscriptionId
+    , scrsCallback
     ) where
 
-import           Network.Google.AppsReseller.Types
-import           Network.Google.Prelude
+import Network.Google.AppsReseller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.changeRenewalSettings@ method which the
 -- 'SubscriptionsChangeRenewalSettings' request conforms to.
@@ -53,19 +60,31 @@ type SubscriptionsChangeRenewalSettingsResource =
                "subscriptions" :>
                  Capture "subscriptionId" Text :>
                    "changeRenewalSettings" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] RenewalSettings :>
-                         Post '[JSON] Subscription
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] RenewalSettings :>
+                                   Post '[JSON] Subscription
 
--- | Update a user license\'s renewal settings. This is applicable for
--- accounts with annual commitment plans only.
+-- | Updates a user license\'s renewal settings. This is applicable for
+-- accounts with annual commitment plans only. For more information, see
+-- the description in [manage
+-- subscriptions](\/admin-sdk\/reseller\/v1\/how-tos\/manage_subscriptions#update_renewal).
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings' smart constructor.
 data SubscriptionsChangeRenewalSettings =
   SubscriptionsChangeRenewalSettings'
-    { _scrsPayload        :: !RenewalSettings
-    , _scrsCustomerId     :: !Text
+    { _scrsXgafv :: !(Maybe Xgafv)
+    , _scrsUploadProtocol :: !(Maybe Text)
+    , _scrsAccessToken :: !(Maybe Text)
+    , _scrsUploadType :: !(Maybe Text)
+    , _scrsPayload :: !RenewalSettings
+    , _scrsCustomerId :: !Text
     , _scrsSubscriptionId :: !Text
+    , _scrsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,11 +93,21 @@ data SubscriptionsChangeRenewalSettings =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'scrsXgafv'
+--
+-- * 'scrsUploadProtocol'
+--
+-- * 'scrsAccessToken'
+--
+-- * 'scrsUploadType'
+--
 -- * 'scrsPayload'
 --
 -- * 'scrsCustomerId'
 --
 -- * 'scrsSubscriptionId'
+--
+-- * 'scrsCallback'
 subscriptionsChangeRenewalSettings
     :: RenewalSettings -- ^ 'scrsPayload'
     -> Text -- ^ 'scrsCustomerId'
@@ -86,11 +115,39 @@ subscriptionsChangeRenewalSettings
     -> SubscriptionsChangeRenewalSettings
 subscriptionsChangeRenewalSettings pScrsPayload_ pScrsCustomerId_ pScrsSubscriptionId_ =
   SubscriptionsChangeRenewalSettings'
-    { _scrsPayload = pScrsPayload_
+    { _scrsXgafv = Nothing
+    , _scrsUploadProtocol = Nothing
+    , _scrsAccessToken = Nothing
+    , _scrsUploadType = Nothing
+    , _scrsPayload = pScrsPayload_
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsSubscriptionId = pScrsSubscriptionId_
+    , _scrsCallback = Nothing
     }
 
+
+-- | V1 error format.
+scrsXgafv :: Lens' SubscriptionsChangeRenewalSettings (Maybe Xgafv)
+scrsXgafv
+  = lens _scrsXgafv (\ s a -> s{_scrsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+scrsUploadProtocol :: Lens' SubscriptionsChangeRenewalSettings (Maybe Text)
+scrsUploadProtocol
+  = lens _scrsUploadProtocol
+      (\ s a -> s{_scrsUploadProtocol = a})
+
+-- | OAuth access token.
+scrsAccessToken :: Lens' SubscriptionsChangeRenewalSettings (Maybe Text)
+scrsAccessToken
+  = lens _scrsAccessToken
+      (\ s a -> s{_scrsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+scrsUploadType :: Lens' SubscriptionsChangeRenewalSettings (Maybe Text)
+scrsUploadType
+  = lens _scrsUploadType
+      (\ s a -> s{_scrsUploadType = a})
 
 -- | Multipart request metadata.
 scrsPayload :: Lens' SubscriptionsChangeRenewalSettings RenewalSettings
@@ -99,22 +156,27 @@ scrsPayload
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a
--- customerId as a key for persistent data. If the domain name for a
--- customerId is changed, the Google system automatically updates.
+-- \`customerId\` as a key for persistent data. If the domain name for a
+-- \`customerId\` is changed, the Google system automatically updates.
 scrsCustomerId :: Lens' SubscriptionsChangeRenewalSettings Text
 scrsCustomerId
   = lens _scrsCustomerId
       (\ s a -> s{_scrsCustomerId = a})
 
--- | This is a required property. The subscriptionId is the subscription
--- identifier and is unique for each customer. Since a subscriptionId
+-- | This is a required property. The \`subscriptionId\` is the subscription
+-- identifier and is unique for each customer. Since a \`subscriptionId\`
 -- changes when a subscription is updated, we recommend to not use this ID
--- as a key for persistent data. And the subscriptionId can be found using
--- the retrieve all reseller subscriptions method.
+-- as a key for persistent data. And the \`subscriptionId\` can be found
+-- using the retrieve all reseller subscriptions method.
 scrsSubscriptionId :: Lens' SubscriptionsChangeRenewalSettings Text
 scrsSubscriptionId
   = lens _scrsSubscriptionId
       (\ s a -> s{_scrsSubscriptionId = a})
+
+-- | JSONP
+scrsCallback :: Lens' SubscriptionsChangeRenewalSettings (Maybe Text)
+scrsCallback
+  = lens _scrsCallback (\ s a -> s{_scrsCallback = a})
 
 instance GoogleRequest
            SubscriptionsChangeRenewalSettings
@@ -124,7 +186,11 @@ instance GoogleRequest
         type Scopes SubscriptionsChangeRenewalSettings =
              '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsChangeRenewalSettings'{..}
-          = go _scrsCustomerId _scrsSubscriptionId
+          = go _scrsCustomerId _scrsSubscriptionId _scrsXgafv
+              _scrsUploadProtocol
+              _scrsAccessToken
+              _scrsUploadType
+              _scrsCallback
               (Just AltJSON)
               _scrsPayload
               appsResellerService

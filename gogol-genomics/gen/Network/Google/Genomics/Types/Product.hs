@@ -17,8 +17,8 @@
 --
 module Network.Google.Genomics.Types.Product where
 
-import           Network.Google.Genomics.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types.Sum
+import Network.Google.Prelude
 
 -- | The container-to-host port mappings installed for this container. This
 -- set will contain any ports exposed using the \`PUBLISH_EXPOSED_PORTS\`
@@ -68,8 +68,8 @@ instance ToJSON ContainerStartedEventPortMAppings
 -- /See:/ 'event' smart constructor.
 data Event =
   Event'
-    { _eDetails     :: !(Maybe EventDetails)
-    , _eTimestamp   :: !(Maybe DateTime')
+    { _eDetails :: !(Maybe EventDetails)
+    , _eTimestamp :: !(Maybe DateTime')
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -162,45 +162,17 @@ instance ToJSON CheckInRequestEvent where
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -256,43 +228,6 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | An OperationMetadata or Metadata object. This will always be returned
--- with the Operation.
---
--- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema =
-  OperationSchema'
-    { _osAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationSchema' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'osAddtional'
-operationSchema
-    :: HashMap Text JSONValue -- ^ 'osAddtional'
-    -> OperationSchema
-operationSchema pOsAddtional_ =
-  OperationSchema' {_osAddtional = _Coerce # pOsAddtional_}
-
-
--- | Properties of the object. Contains field \'type with type URL.
-osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
-osAddtional
-  = lens _osAddtional (\ s a -> s{_osAddtional = a}) .
-      _Coerce
-
-instance FromJSON OperationSchema where
-        parseJSON
-          = withObject "OperationSchema"
-              (\ o -> OperationSchema' <$> (parseJSONObject o))
-
-instance ToJSON OperationSchema where
-        toJSON = toJSON . _osAddtional
-
 -- | User-defined labels to associate with the returned operation. These
 -- labels are not propagated to any Google Cloud Platform resources used by
 -- the operation, and can be modified at any time. To associate labels with
@@ -340,7 +275,7 @@ instance ToJSON RunPipelineRequestLabels where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -395,7 +330,7 @@ instance ToJSON ListOperationsResponse where
 data FailedEvent =
   FailedEvent'
     { _feCause :: !(Maybe Text)
-    , _feCode  :: !(Maybe FailedEventCode)
+    , _feCode :: !(Maybe FailedEventCode)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -463,8 +398,8 @@ data WorkerStatus =
     { _wsTotalRamBytes :: !(Maybe (Textual Word64))
     , _wsAttachedDisks :: !(Maybe WorkerStatusAttachedDisks)
     , _wsUptimeSeconds :: !(Maybe (Textual Int64))
-    , _wsBootDisk      :: !(Maybe DiskStatus)
-    , _wsFreeRamBytes  :: !(Maybe (Textual Word64))
+    , _wsBootDisk :: !(Maybe DiskStatus)
+    , _wsFreeRamBytes :: !(Maybe (Textual Word64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -552,8 +487,8 @@ instance ToJSON WorkerStatus where
 data ContainerStoppedEvent =
   ContainerStoppedEvent'
     { _cseExitStatus :: !(Maybe (Textual Int32))
-    , _cseActionId   :: !(Maybe (Textual Int32))
-    , _cseStderr     :: !(Maybe Text)
+    , _cseActionId :: !(Maybe (Textual Int32))
+    , _cseStderr :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -619,7 +554,8 @@ instance ToJSON ContainerStoppedEvent where
 -- /See:/ 'checkInResponse' smart constructor.
 data CheckInResponse =
   CheckInResponse'
-    { _cirDeadline :: !(Maybe DateTime')
+    { _cirFeatures :: !(Maybe CheckInResponseFeatures)
+    , _cirDeadline :: !(Maybe DateTime')
     , _cirMetadata :: !(Maybe CheckInResponseMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -629,14 +565,22 @@ data CheckInResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cirFeatures'
+--
 -- * 'cirDeadline'
 --
 -- * 'cirMetadata'
 checkInResponse
     :: CheckInResponse
 checkInResponse =
-  CheckInResponse' {_cirDeadline = Nothing, _cirMetadata = Nothing}
+  CheckInResponse'
+    {_cirFeatures = Nothing, _cirDeadline = Nothing, _cirMetadata = Nothing}
 
+
+-- | Feature configuration for the operation.
+cirFeatures :: Lens' CheckInResponse (Maybe CheckInResponseFeatures)
+cirFeatures
+  = lens _cirFeatures (\ s a -> s{_cirFeatures = a})
 
 -- | The deadline by which the worker must request an extension. The backend
 -- will allow for network transmission time and other delays, but the
@@ -657,13 +601,15 @@ instance FromJSON CheckInResponse where
           = withObject "CheckInResponse"
               (\ o ->
                  CheckInResponse' <$>
-                   (o .:? "deadline") <*> (o .:? "metadata"))
+                   (o .:? "features") <*> (o .:? "deadline") <*>
+                     (o .:? "metadata"))
 
 instance ToJSON CheckInResponse where
         toJSON CheckInResponse'{..}
           = object
               (catMaybes
-                 [("deadline" .=) <$> _cirDeadline,
+                 [("features" .=) <$> _cirFeatures,
+                  ("deadline" .=) <$> _cirDeadline,
                   ("metadata" .=) <$> _cirMetadata])
 
 -- | An event generated after a worker VM has been assigned to run the
@@ -672,7 +618,8 @@ instance ToJSON CheckInResponse where
 -- /See:/ 'workerAssignedEvent' smart constructor.
 data WorkerAssignedEvent =
   WorkerAssignedEvent'
-    { _waeZone     :: !(Maybe Text)
+    { _waeZone :: !(Maybe Text)
+    , _waeMachineType :: !(Maybe Text)
     , _waeInstance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -684,16 +631,25 @@ data WorkerAssignedEvent =
 --
 -- * 'waeZone'
 --
+-- * 'waeMachineType'
+--
 -- * 'waeInstance'
 workerAssignedEvent
     :: WorkerAssignedEvent
 workerAssignedEvent =
-  WorkerAssignedEvent' {_waeZone = Nothing, _waeInstance = Nothing}
+  WorkerAssignedEvent'
+    {_waeZone = Nothing, _waeMachineType = Nothing, _waeInstance = Nothing}
 
 
 -- | The zone the worker is running in.
 waeZone :: Lens' WorkerAssignedEvent (Maybe Text)
 waeZone = lens _waeZone (\ s a -> s{_waeZone = a})
+
+-- | The machine type that was assigned for the worker.
+waeMachineType :: Lens' WorkerAssignedEvent (Maybe Text)
+waeMachineType
+  = lens _waeMachineType
+      (\ s a -> s{_waeMachineType = a})
 
 -- | The worker\'s instance name.
 waeInstance :: Lens' WorkerAssignedEvent (Maybe Text)
@@ -705,51 +661,16 @@ instance FromJSON WorkerAssignedEvent where
           = withObject "WorkerAssignedEvent"
               (\ o ->
                  WorkerAssignedEvent' <$>
-                   (o .:? "zone") <*> (o .:? "instance"))
+                   (o .:? "zone") <*> (o .:? "machineType") <*>
+                     (o .:? "instance"))
 
 instance ToJSON WorkerAssignedEvent where
         toJSON WorkerAssignedEvent'{..}
           = object
               (catMaybes
                  [("zone" .=) <$> _waeZone,
+                  ("machineType" .=) <$> _waeMachineType,
                   ("instance" .=) <$> _waeInstance])
-
--- | Optionally provided by the caller when submitting the request that
--- creates the operation.
---
--- /See:/ 'operationMetadataLabels' smart constructor.
-newtype OperationMetadataLabels =
-  OperationMetadataLabels'
-    { _omlAddtional :: HashMap Text Text
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationMetadataLabels' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'omlAddtional'
-operationMetadataLabels
-    :: HashMap Text Text -- ^ 'omlAddtional'
-    -> OperationMetadataLabels
-operationMetadataLabels pOmlAddtional_ =
-  OperationMetadataLabels' {_omlAddtional = _Coerce # pOmlAddtional_}
-
-
-omlAddtional :: Lens' OperationMetadataLabels (HashMap Text Text)
-omlAddtional
-  = lens _omlAddtional (\ s a -> s{_omlAddtional = a})
-      . _Coerce
-
-instance FromJSON OperationMetadataLabels where
-        parseJSON
-          = withObject "OperationMetadataLabels"
-              (\ o ->
-                 OperationMetadataLabels' <$> (parseJSONObject o))
-
-instance ToJSON OperationMetadataLabels where
-        toJSON = toJSON . _omlAddtional
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -757,11 +678,11 @@ instance ToJSON OperationMetadataLabels where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
-    , _oMetadata :: !(Maybe OperationSchema)
+    , _oName :: !(Maybe Text)
+    , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -814,7 +735,7 @@ oName = lens _oName (\ s a -> s{_oName = a})
 
 -- | An OperationMetadata or Metadata object. This will always be returned
 -- with the Operation.
-oMetadata :: Lens' Operation (Maybe OperationSchema)
+oMetadata :: Lens' Operation (Maybe OperationMetadata)
 oMetadata
   = lens _oMetadata (\ s a -> s{_oMetadata = a})
 
@@ -865,14 +786,15 @@ instance ToJSON Empty where
 -- | Carries information about a disk that can be attached to a VM. See
 -- https:\/\/cloud.google.com\/compute\/docs\/disks\/performance for more
 -- information about disk type, size, and performance considerations.
+-- Specify either \`Volume\` or \`Disk\`, but not both.
 --
 -- /See:/ 'disk' smart constructor.
 data Disk =
   Disk'
     { _dSourceImage :: !(Maybe Text)
-    , _dSizeGb      :: !(Maybe (Textual Int32))
-    , _dName        :: !(Maybe Text)
-    , _dType        :: !(Maybe Text)
+    , _dSizeGb :: !(Maybe (Textual Int32))
+    , _dName :: !(Maybe Text)
+    , _dType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -917,7 +839,7 @@ dSizeGb
 
 -- | A user-supplied name for the disk. Used when mounting the disk into
 -- actions. The name must contain only upper and lowercase alphanumeric
--- characters and hypens and cannot start with a hypen.
+-- characters and hyphens and cannot start with a hyphen.
 dName :: Lens' Disk (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
@@ -951,7 +873,7 @@ instance ToJSON Disk where
 data UnexpectedExitStatusEvent =
   UnexpectedExitStatusEvent'
     { _ueseExitStatus :: !(Maybe (Textual Int32))
-    , _ueseActionId   :: !(Maybe (Textual Int32))
+    , _ueseActionId :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1004,7 +926,7 @@ instance ToJSON UnexpectedExitStatusEvent where
 data DelayedEvent =
   DelayedEvent'
     { _deMetrics :: !(Maybe [Text])
-    , _deCause   :: !(Maybe Text)
+    , _deCause :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1132,10 +1054,12 @@ instance ToJSON MetadataLabels where
 -- /See:/ 'checkInRequest' smart constructor.
 data CheckInRequest =
   CheckInRequest'
-    { _cirEvent           :: !(Maybe CheckInRequestEvent)
-    , _cirWorkerStatus    :: !(Maybe WorkerStatus)
-    , _cirResult          :: !(Maybe Status)
+    { _cirEvent :: !(Maybe CheckInRequestEvent)
+    , _cirWorkerStatus :: !(Maybe WorkerStatus)
+    , _cirResult :: !(Maybe Status)
+    , _cirEvents :: !(Maybe [TimestampedEvent])
     , _cirDeadlineExpired :: !(Maybe Empty)
+    , _cirSosReport :: !(Maybe Bytes)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1150,7 +1074,11 @@ data CheckInRequest =
 --
 -- * 'cirResult'
 --
+-- * 'cirEvents'
+--
 -- * 'cirDeadlineExpired'
+--
+-- * 'cirSosReport'
 checkInRequest
     :: CheckInRequest
 checkInRequest =
@@ -1158,7 +1086,9 @@ checkInRequest =
     { _cirEvent = Nothing
     , _cirWorkerStatus = Nothing
     , _cirResult = Nothing
+    , _cirEvents = Nothing
     , _cirDeadlineExpired = Nothing
+    , _cirSosReport = Nothing
     }
 
 
@@ -1177,11 +1107,24 @@ cirResult :: Lens' CheckInRequest (Maybe Status)
 cirResult
   = lens _cirResult (\ s a -> s{_cirResult = a})
 
+-- | A list of timestamped events.
+cirEvents :: Lens' CheckInRequest [TimestampedEvent]
+cirEvents
+  = lens _cirEvents (\ s a -> s{_cirEvents = a}) .
+      _Default
+      . _Coerce
+
 -- | The deadline has expired and the worker needs more time.
 cirDeadlineExpired :: Lens' CheckInRequest (Maybe Empty)
 cirDeadlineExpired
   = lens _cirDeadlineExpired
       (\ s a -> s{_cirDeadlineExpired = a})
+
+-- | An SOS report for an unexpected VM failure.
+cirSosReport :: Lens' CheckInRequest (Maybe ByteString)
+cirSosReport
+  = lens _cirSosReport (\ s a -> s{_cirSosReport = a})
+      . mapping _Bytes
 
 instance FromJSON CheckInRequest where
         parseJSON
@@ -1190,7 +1133,9 @@ instance FromJSON CheckInRequest where
                  CheckInRequest' <$>
                    (o .:? "event") <*> (o .:? "workerStatus") <*>
                      (o .:? "result")
-                     <*> (o .:? "deadlineExpired"))
+                     <*> (o .:? "events" .!= mempty)
+                     <*> (o .:? "deadlineExpired")
+                     <*> (o .:? "sosReport"))
 
 instance ToJSON CheckInRequest where
         toJSON CheckInRequest'{..}
@@ -1199,7 +1144,76 @@ instance ToJSON CheckInRequest where
                  [("event" .=) <$> _cirEvent,
                   ("workerStatus" .=) <$> _cirWorkerStatus,
                   ("result" .=) <$> _cirResult,
-                  ("deadlineExpired" .=) <$> _cirDeadlineExpired])
+                  ("events" .=) <$> _cirEvents,
+                  ("deadlineExpired" .=) <$> _cirDeadlineExpired,
+                  ("sosReport" .=) <$> _cirSosReport])
+
+-- | Configuration for a persistent disk to be attached to the VM. See
+-- https:\/\/cloud.google.com\/compute\/docs\/disks\/performance for more
+-- information about disk type, size, and performance considerations.
+--
+-- /See:/ 'persistentDisk' smart constructor.
+data PersistentDisk =
+  PersistentDisk'
+    { _pdSourceImage :: !(Maybe Text)
+    , _pdSizeGb :: !(Maybe (Textual Int32))
+    , _pdType :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PersistentDisk' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pdSourceImage'
+--
+-- * 'pdSizeGb'
+--
+-- * 'pdType'
+persistentDisk
+    :: PersistentDisk
+persistentDisk =
+  PersistentDisk'
+    {_pdSourceImage = Nothing, _pdSizeGb = Nothing, _pdType = Nothing}
+
+
+-- | An image to put on the disk before attaching it to the VM.
+pdSourceImage :: Lens' PersistentDisk (Maybe Text)
+pdSourceImage
+  = lens _pdSourceImage
+      (\ s a -> s{_pdSourceImage = a})
+
+-- | The size, in GB, of the disk to attach. If the size is not specified, a
+-- default is chosen to ensure reasonable I\/O performance. If the disk
+-- type is specified as \`local-ssd\`, multiple local drives are
+-- automatically combined to provide the requested size. Note, however,
+-- that each physical SSD is 375GB in size, and no more than 8 drives can
+-- be attached to a single instance.
+pdSizeGb :: Lens' PersistentDisk (Maybe Int32)
+pdSizeGb
+  = lens _pdSizeGb (\ s a -> s{_pdSizeGb = a}) .
+      mapping _Coerce
+
+-- | The Compute Engine disk type. If unspecified, \`pd-standard\` is used.
+pdType :: Lens' PersistentDisk (Maybe Text)
+pdType = lens _pdType (\ s a -> s{_pdType = a})
+
+instance FromJSON PersistentDisk where
+        parseJSON
+          = withObject "PersistentDisk"
+              (\ o ->
+                 PersistentDisk' <$>
+                   (o .:? "sourceImage") <*> (o .:? "sizeGb") <*>
+                     (o .:? "type"))
+
+instance ToJSON PersistentDisk where
+        toJSON PersistentDisk'{..}
+          = object
+              (catMaybes
+                 [("sourceImage" .=) <$> _pdSourceImage,
+                  ("sizeGb" .=) <$> _pdSizeGb,
+                  ("type" .=) <$> _pdType])
 
 -- | An event generated when a container is forcibly terminated by the
 -- worker. Currently, this only occurs when the container outlives the
@@ -1274,6 +1288,83 @@ instance ToJSON PullStoppedEvent where
           = object
               (catMaybes [("imageUri" .=) <$> _pseImageURI])
 
+-- | Carries information about storage that can be attached to a VM. Specify
+-- either \`Volume\` or \`Disk\`, but not both.
+--
+-- /See:/ 'volume' smart constructor.
+data Volume =
+  Volume'
+    { _vPersistentDisk :: !(Maybe PersistentDisk)
+    , _vVolume :: !(Maybe Text)
+    , _vExistingDisk :: !(Maybe ExistingDisk)
+    , _vNfsMount :: !(Maybe NFSMount)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Volume' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vPersistentDisk'
+--
+-- * 'vVolume'
+--
+-- * 'vExistingDisk'
+--
+-- * 'vNfsMount'
+volume
+    :: Volume
+volume =
+  Volume'
+    { _vPersistentDisk = Nothing
+    , _vVolume = Nothing
+    , _vExistingDisk = Nothing
+    , _vNfsMount = Nothing
+    }
+
+
+-- | Configuration for a persistent disk.
+vPersistentDisk :: Lens' Volume (Maybe PersistentDisk)
+vPersistentDisk
+  = lens _vPersistentDisk
+      (\ s a -> s{_vPersistentDisk = a})
+
+-- | A user-supplied name for the volume. Used when mounting the volume into
+-- \`Actions\`. The name must contain only upper and lowercase alphanumeric
+-- characters and hyphens and cannot start with a hyphen.
+vVolume :: Lens' Volume (Maybe Text)
+vVolume = lens _vVolume (\ s a -> s{_vVolume = a})
+
+-- | Configuration for a existing disk.
+vExistingDisk :: Lens' Volume (Maybe ExistingDisk)
+vExistingDisk
+  = lens _vExistingDisk
+      (\ s a -> s{_vExistingDisk = a})
+
+-- | Configuration for an NFS mount.
+vNfsMount :: Lens' Volume (Maybe NFSMount)
+vNfsMount
+  = lens _vNfsMount (\ s a -> s{_vNfsMount = a})
+
+instance FromJSON Volume where
+        parseJSON
+          = withObject "Volume"
+              (\ o ->
+                 Volume' <$>
+                   (o .:? "persistentDisk") <*> (o .:? "volume") <*>
+                     (o .:? "existingDisk")
+                     <*> (o .:? "nfsMount"))
+
+instance ToJSON Volume where
+        toJSON Volume'{..}
+          = object
+              (catMaybes
+                 [("persistentDisk" .=) <$> _vPersistentDisk,
+                  ("volume" .=) <$> _vVolume,
+                  ("existingDisk" .=) <$> _vExistingDisk,
+                  ("nfsMount" .=) <$> _vNfsMount])
+
 -- | Labels to associate with the action. This field is provided to assist
 -- workflow engine authors in identifying actions (for example, to indicate
 -- what sort of action they perform, such as localization or debugging).
@@ -1311,6 +1402,91 @@ instance FromJSON ActionLabels where
 
 instance ToJSON ActionLabels where
         toJSON = toJSON . _alAddtional
+
+-- | The event data.
+--
+-- /See:/ 'timestampedEventData' smart constructor.
+newtype TimestampedEventData =
+  TimestampedEventData'
+    { _tedAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimestampedEventData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tedAddtional'
+timestampedEventData
+    :: HashMap Text JSONValue -- ^ 'tedAddtional'
+    -> TimestampedEventData
+timestampedEventData pTedAddtional_ =
+  TimestampedEventData' {_tedAddtional = _Coerce # pTedAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+tedAddtional :: Lens' TimestampedEventData (HashMap Text JSONValue)
+tedAddtional
+  = lens _tedAddtional (\ s a -> s{_tedAddtional = a})
+      . _Coerce
+
+instance FromJSON TimestampedEventData where
+        parseJSON
+          = withObject "TimestampedEventData"
+              (\ o ->
+                 TimestampedEventData' <$> (parseJSONObject o))
+
+instance ToJSON TimestampedEventData where
+        toJSON = toJSON . _tedAddtional
+
+-- | An event that occured in the operation assigned to the worker and the
+-- time of occurance.
+--
+-- /See:/ 'timestampedEvent' smart constructor.
+data TimestampedEvent =
+  TimestampedEvent'
+    { _teData :: !(Maybe TimestampedEventData)
+    , _teTimestamp :: !(Maybe DateTime')
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'TimestampedEvent' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'teData'
+--
+-- * 'teTimestamp'
+timestampedEvent
+    :: TimestampedEvent
+timestampedEvent = TimestampedEvent' {_teData = Nothing, _teTimestamp = Nothing}
+
+
+-- | The event data.
+teData :: Lens' TimestampedEvent (Maybe TimestampedEventData)
+teData = lens _teData (\ s a -> s{_teData = a})
+
+-- | The time when the event happened.
+teTimestamp :: Lens' TimestampedEvent (Maybe UTCTime)
+teTimestamp
+  = lens _teTimestamp (\ s a -> s{_teTimestamp = a}) .
+      mapping _DateTime
+
+instance FromJSON TimestampedEvent where
+        parseJSON
+          = withObject "TimestampedEvent"
+              (\ o ->
+                 TimestampedEvent' <$>
+                   (o .:? "data") <*> (o .:? "timestamp"))
+
+instance ToJSON TimestampedEvent where
+        toJSON TimestampedEvent'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _teData,
+                  ("timestamp" .=) <$> _teTimestamp])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -1353,8 +1529,8 @@ instance ToJSON StatusDetailsItem where
 data Network =
   Network'
     { _nUsePrivateAddress :: !(Maybe Bool)
-    , _nName              :: !(Maybe Text)
-    , _nSubnetwork        :: !(Maybe Text)
+    , _nName :: !(Maybe Text)
+    , _nSubnetwork :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1455,22 +1631,64 @@ instance FromJSON EventDetails where
 instance ToJSON EventDetails where
         toJSON = toJSON . _edAddtional
 
+-- | Configuration for an existing disk to be attached to the VM.
+--
+-- /See:/ 'existingDisk' smart constructor.
+newtype ExistingDisk =
+  ExistingDisk'
+    { _edDisk :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExistingDisk' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edDisk'
+existingDisk
+    :: ExistingDisk
+existingDisk = ExistingDisk' {_edDisk = Nothing}
+
+
+-- | If \`disk\` contains slashes, the Cloud Life Sciences API assumes that
+-- it is a complete URL for the disk. If \`disk\` does not contain slashes,
+-- the Cloud Life Sciences API assumes that the disk is a zonal disk and a
+-- URL will be generated of the form \`zones\/\/disks\/\`, where \`\` is
+-- the zone in which the instance is allocated. The disk must be ext4
+-- formatted. If all \`Mount\` references to this disk have the
+-- \`read_only\` flag set to true, the disk will be attached in
+-- \`read-only\` mode and can be shared with other instances. Otherwise,
+-- the disk will be available for writing but cannot be shared.
+edDisk :: Lens' ExistingDisk (Maybe Text)
+edDisk = lens _edDisk (\ s a -> s{_edDisk = a})
+
+instance FromJSON ExistingDisk where
+        parseJSON
+          = withObject "ExistingDisk"
+              (\ o -> ExistingDisk' <$> (o .:? "disk"))
+
+instance ToJSON ExistingDisk where
+        toJSON ExistingDisk'{..}
+          = object (catMaybes [("disk" .=) <$> _edDisk])
+
 -- | Specifies a single action that runs a Docker container.
 --
 -- /See:/ 'action' smart constructor.
 data Action =
   Action'
-    { _aCommands     :: !(Maybe [Text])
-    , _aFlags        :: !(Maybe [Text])
-    , _aEnvironment  :: !(Maybe ActionEnvironment)
-    , _aCredentials  :: !(Maybe Secret)
-    , _aEntrypoint   :: !(Maybe Text)
+    { _aCommands :: !(Maybe [Text])
+    , _aFlags :: !(Maybe [ActionFlagsItem])
+    , _aEnvironment :: !(Maybe ActionEnvironment)
+    , _aCredentials :: !(Maybe Secret)
+    , _aEntrypoint :: !(Maybe Text)
     , _aPortMAppings :: !(Maybe ActionPortMAppings)
-    , _aMounts       :: !(Maybe [Mount])
-    , _aImageURI     :: !(Maybe Text)
-    , _aName         :: !(Maybe Text)
-    , _aLabels       :: !(Maybe ActionLabels)
-    , _aTimeout      :: !(Maybe GDuration)
+    , _aMounts :: !(Maybe [Mount])
+    , _aImageURI :: !(Maybe Text)
+    , _aName :: !(Maybe Text)
+    , _aLabels :: !(Maybe ActionLabels)
+    , _aEncryptedEnvironment :: !(Maybe Secret)
+    , _aTimeout :: !(Maybe GDuration)
     , _aPidNamespace :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1500,6 +1718,8 @@ data Action =
 --
 -- * 'aLabels'
 --
+-- * 'aEncryptedEnvironment'
+--
 -- * 'aTimeout'
 --
 -- * 'aPidNamespace'
@@ -1517,6 +1737,7 @@ action =
     , _aImageURI = Nothing
     , _aName = Nothing
     , _aLabels = Nothing
+    , _aEncryptedEnvironment = Nothing
     , _aTimeout = Nothing
     , _aPidNamespace = Nothing
     }
@@ -1533,24 +1754,23 @@ aCommands
       . _Coerce
 
 -- | The set of flags to apply to this action.
-aFlags :: Lens' Action [Text]
+aFlags :: Lens' Action [ActionFlagsItem]
 aFlags
   = lens _aFlags (\ s a -> s{_aFlags = a}) . _Default .
       _Coerce
 
 -- | The environment to pass into the container. This environment is merged
--- with any values specified in the \`Pipeline\` message. These values
--- overwrite any in the \`Pipeline\` message. In addition to the values
--- passed here, a few other values are automatically injected into the
--- environment. These cannot be hidden or overwritten.
--- \`GOOGLE_PIPELINE_FAILED\` will be set to \"1\" if the pipeline failed
--- because an action has exited with a non-zero status (and did not have
--- the \`IGNORE_EXIT_STATUS\` flag set). This can be used to determine if
--- additional debug or logging actions should execute.
--- \`GOOGLE_LAST_EXIT_STATUS\` will be set to the exit status of the last
--- non-background action that executed. This can be used by workflow engine
--- authors to determine whether an individual action has succeeded or
--- failed.
+-- with values specified in the google.genomics.v2alpha1.Pipeline message,
+-- overwriting any duplicate values. In addition to the values passed here,
+-- a few other values are automatically injected into the environment.
+-- These cannot be hidden or overwritten. \`GOOGLE_PIPELINE_FAILED\` will
+-- be set to \"1\" if the pipeline failed because an action has exited with
+-- a non-zero status (and did not have the \`IGNORE_EXIT_STATUS\` flag
+-- set). This can be used to determine if additional debug or logging
+-- actions should execute. \`GOOGLE_LAST_EXIT_STATUS\` will be set to the
+-- exit status of the last non-background action that executed. This can be
+-- used by workflow engine authors to determine whether an individual
+-- action has succeeded or failed.
 aEnvironment :: Lens' Action (Maybe ActionEnvironment)
 aEnvironment
   = lens _aEnvironment (\ s a -> s{_aEnvironment = a})
@@ -1583,25 +1803,30 @@ aPortMAppings
 -- | A list of mounts to make available to the action. In addition to the
 -- values specified here, every action has a special virtual disk mounted
 -- under \`\/google\` that contains log files and other operational
--- components.
---
--- -   '\/google\/logs' All logs written during the pipeline execution.
--- -   '\/google\/logs\/output' The combined standard output and standard
---     error of all actions run as part of the pipeline execution.
--- -   '\/google\/logs\/action\/*\/stdout' The complete contents of each
---     individual action\'s standard output.
--- -   '\/google\/logs\/action\/*\/stderr' The complete contents of each
---     individual action\'s standard error output.
+-- components. - \/google\/logs All logs written during the pipeline
+-- execution. - \/google\/logs\/output The combined standard output and
+-- standard error of all actions run as part of the pipeline execution. -
+-- \/google\/logs\/action\/*\/stdout The complete contents of each
+-- individual action\'s standard output. -
+-- \/google\/logs\/action\/*\/stderr The complete contents of each
+-- individual action\'s standard error output.
 aMounts :: Lens' Action [Mount]
 aMounts
   = lens _aMounts (\ s a -> s{_aMounts = a}) . _Default
       . _Coerce
 
--- | The URI to pull the container image from. Note that all images
+-- | Required. The URI to pull the container image from. Note that all images
 -- referenced by actions in the pipeline are pulled before the first action
 -- runs. If multiple actions reference the same image, it is only pulled
 -- once, ensuring that the same image is used for all actions in a single
--- pipeline.
+-- pipeline. The image URI can be either a complete host and image
+-- specification (e.g., quay.io\/biocontainers\/samtools), a library and
+-- image name (e.g., google\/cloud-sdk) or a bare image name (\'bash\') to
+-- pull from the default library. No schema is required in any of these
+-- cases. If the specified image is not public, the service account
+-- specified for the Virtual Machine must have access to pull the images
+-- from GCR, or appropriate credentials must be specified in the
+-- google.genomics.v2alpha1.Action.credentials field.
 aImageURI :: Lens' Action (Maybe Text)
 aImageURI
   = lens _aImageURI (\ s a -> s{_aImageURI = a})
@@ -1609,7 +1834,7 @@ aImageURI
 -- | An optional name for the container. The container hostname will be set
 -- to this name, making it useful for inter-container communication. The
 -- name must contain only upper and lowercase alphanumeric characters and
--- hypens and cannot start with a hypen.
+-- hyphens and cannot start with a hyphen.
 aName :: Lens' Action (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
@@ -1619,6 +1844,17 @@ aName = lens _aName (\ s a -> s{_aName = a})
 -- They are returned in the operation metadata, but are otherwise ignored.
 aLabels :: Lens' Action (Maybe ActionLabels)
 aLabels = lens _aLabels (\ s a -> s{_aLabels = a})
+
+-- | The encrypted environment to pass into the container. This environment
+-- is merged with values specified in the google.genomics.v2alpha1.Pipeline
+-- message, overwriting any duplicate values. The secret must decrypt to a
+-- JSON-encoded dictionary where key-value pairs serve as environment
+-- variable names and their values. The decoded environment variables can
+-- overwrite the values specified by the \`environment\` field.
+aEncryptedEnvironment :: Lens' Action (Maybe Secret)
+aEncryptedEnvironment
+  = lens _aEncryptedEnvironment
+      (\ s a -> s{_aEncryptedEnvironment = a})
 
 -- | The maximum amount of time to give the action to complete. If the action
 -- fails to complete before the timeout, it will be terminated and the exit
@@ -1653,6 +1889,7 @@ instance FromJSON Action where
                      <*> (o .:? "imageUri")
                      <*> (o .:? "name")
                      <*> (o .:? "labels")
+                     <*> (o .:? "encryptedEnvironment")
                      <*> (o .:? "timeout")
                      <*> (o .:? "pidNamespace"))
 
@@ -1669,6 +1906,8 @@ instance ToJSON Action where
                   ("mounts" .=) <$> _aMounts,
                   ("imageUri" .=) <$> _aImageURI,
                   ("name" .=) <$> _aName, ("labels" .=) <$> _aLabels,
+                  ("encryptedEnvironment" .=) <$>
+                    _aEncryptedEnvironment,
                   ("timeout" .=) <$> _aTimeout,
                   ("pidNamespace" .=) <$> _aPidNamespace])
 
@@ -1678,7 +1917,7 @@ instance ToJSON Action where
 -- /See:/ 'secret' smart constructor.
 data Secret =
   Secret'
-    { _sKeyName    :: !(Maybe Text)
+    { _sKeyName :: !(Maybe Text)
     , _sCipherText :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1760,56 +1999,16 @@ instance FromJSON WorkerStatusAttachedDisks where
 instance ToJSON WorkerStatusAttachedDisks where
         toJSON = toJSON . _wsadAddtional
 
--- | The original request that started the operation. Note that this will be
--- in current version of the API. If the operation was started with v1beta2
--- API and a GetOperation is performed on v1 API, a v1 request will be
--- returned.
---
--- /See:/ 'operationMetadataRequest' smart constructor.
-newtype OperationMetadataRequest =
-  OperationMetadataRequest'
-    { _omrAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationMetadataRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'omrAddtional'
-operationMetadataRequest
-    :: HashMap Text JSONValue -- ^ 'omrAddtional'
-    -> OperationMetadataRequest
-operationMetadataRequest pOmrAddtional_ =
-  OperationMetadataRequest' {_omrAddtional = _Coerce # pOmrAddtional_}
-
-
--- | Properties of the object. Contains field \'type with type URL.
-omrAddtional :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
-omrAddtional
-  = lens _omrAddtional (\ s a -> s{_omrAddtional = a})
-      . _Coerce
-
-instance FromJSON OperationMetadataRequest where
-        parseJSON
-          = withObject "OperationMetadataRequest"
-              (\ o ->
-                 OperationMetadataRequest' <$> (parseJSONObject o))
-
-instance ToJSON OperationMetadataRequest where
-        toJSON = toJSON . _omrAddtional
-
 -- | The system resources for the pipeline run. At least one zone or region
 -- must be specified or the pipeline run will fail.
 --
 -- /See:/ 'resources' smart constructor.
 data Resources =
   Resources'
-    { _rZones          :: !(Maybe [Text])
-    , _rRegions        :: !(Maybe [Text])
+    { _rZones :: !(Maybe [Text])
+    , _rRegions :: !(Maybe [Text])
     , _rVirtualMachine :: !(Maybe VirtualMachine)
-    , _rProjectId      :: !(Maybe Text)
+    , _rProjectId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1887,7 +2086,7 @@ instance ToJSON Resources where
 data DiskStatus =
   DiskStatus'
     { _dsTotalSpaceBytes :: !(Maybe (Textual Word64))
-    , _dsFreeSpaceBytes  :: !(Maybe (Textual Word64))
+    , _dsFreeSpaceBytes :: !(Maybe (Textual Word64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1935,10 +2134,12 @@ instance ToJSON DiskStatus where
                   ("freeSpaceBytes" .=) <$> _dsFreeSpaceBytes])
 
 -- | Optional set of labels to apply to the VM and any attached disk
--- resources. These labels must adhere to the name and value restrictions
--- on VM labels imposed by Compute Engine. Labels applied at creation time
--- to the VM. Applied on a best-effort basis to attached disk resources
--- shortly after VM creation.
+-- resources. These labels must adhere to the [name and value
+-- restrictions](https:\/\/cloud.google.com\/compute\/docs\/labeling-resources)
+-- on VM labels imposed by Compute Engine. Labels keys with the prefix
+-- \'google-\' are reserved for use by Google. Labels applied at creation
+-- time to the VM. Applied on a best-effort basis to attached disk
+-- resources shortly after VM creation.
 --
 -- /See:/ 'virtualMachineLabels' smart constructor.
 newtype VirtualMachineLabels =
@@ -1974,63 +2175,26 @@ instance FromJSON VirtualMachineLabels where
 instance ToJSON VirtualMachineLabels where
         toJSON = toJSON . _vmlAddtional
 
--- | Runtime metadata on this Operation.
---
--- /See:/ 'operationMetadataRuntimeMetadata' smart constructor.
-newtype OperationMetadataRuntimeMetadata =
-  OperationMetadataRuntimeMetadata'
-    { _omrmAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationMetadataRuntimeMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'omrmAddtional'
-operationMetadataRuntimeMetadata
-    :: HashMap Text JSONValue -- ^ 'omrmAddtional'
-    -> OperationMetadataRuntimeMetadata
-operationMetadataRuntimeMetadata pOmrmAddtional_ =
-  OperationMetadataRuntimeMetadata' {_omrmAddtional = _Coerce # pOmrmAddtional_}
-
-
--- | Properties of the object. Contains field \'type with type URL.
-omrmAddtional :: Lens' OperationMetadataRuntimeMetadata (HashMap Text JSONValue)
-omrmAddtional
-  = lens _omrmAddtional
-      (\ s a -> s{_omrmAddtional = a})
-      . _Coerce
-
-instance FromJSON OperationMetadataRuntimeMetadata
-         where
-        parseJSON
-          = withObject "OperationMetadataRuntimeMetadata"
-              (\ o ->
-                 OperationMetadataRuntimeMetadata' <$>
-                   (parseJSONObject o))
-
-instance ToJSON OperationMetadataRuntimeMetadata
-         where
-        toJSON = toJSON . _omrmAddtional
-
 -- | Carries information about a Compute Engine VM resource.
 --
 -- /See:/ 'virtualMachine' smart constructor.
 data VirtualMachine =
   VirtualMachine'
-    { _vmNetwork             :: !(Maybe Network)
-    , _vmCPUPlatform         :: !(Maybe Text)
-    , _vmServiceAccount      :: !(Maybe ServiceAccount)
-    , _vmAccelerators        :: !(Maybe [Accelerator])
-    , _vmMachineType         :: !(Maybe Text)
-    , _vmLabels              :: !(Maybe VirtualMachineLabels)
-    , _vmBootDiskSizeGb      :: !(Maybe (Textual Int32))
-    , _vmDisks               :: !(Maybe [Disk])
-    , _vmBootImage           :: !(Maybe Text)
+    { _vmDockerCacheImages :: !(Maybe [Text])
+    , _vmReservation :: !(Maybe Text)
+    , _vmNetwork :: !(Maybe Network)
+    , _vmCPUPlatform :: !(Maybe Text)
+    , _vmServiceAccount :: !(Maybe ServiceAccount)
+    , _vmAccelerators :: !(Maybe [Accelerator])
+    , _vmMachineType :: !(Maybe Text)
+    , _vmEnableStackdriverMonitoring :: !(Maybe Bool)
+    , _vmLabels :: !(Maybe VirtualMachineLabels)
+    , _vmVolumes :: !(Maybe [Volume])
+    , _vmBootDiskSizeGb :: !(Maybe (Textual Int32))
+    , _vmDisks :: !(Maybe [Disk])
+    , _vmBootImage :: !(Maybe Text)
     , _vmNvidiaDriverVersion :: !(Maybe Text)
-    , _vmPreemptible         :: !(Maybe Bool)
+    , _vmPreemptible :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2038,6 +2202,10 @@ data VirtualMachine =
 -- | Creates a value of 'VirtualMachine' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vmDockerCacheImages'
+--
+-- * 'vmReservation'
 --
 -- * 'vmNetwork'
 --
@@ -2049,7 +2217,11 @@ data VirtualMachine =
 --
 -- * 'vmMachineType'
 --
+-- * 'vmEnableStackdriverMonitoring'
+--
 -- * 'vmLabels'
+--
+-- * 'vmVolumes'
 --
 -- * 'vmBootDiskSizeGb'
 --
@@ -2064,12 +2236,16 @@ virtualMachine
     :: VirtualMachine
 virtualMachine =
   VirtualMachine'
-    { _vmNetwork = Nothing
+    { _vmDockerCacheImages = Nothing
+    , _vmReservation = Nothing
+    , _vmNetwork = Nothing
     , _vmCPUPlatform = Nothing
     , _vmServiceAccount = Nothing
     , _vmAccelerators = Nothing
     , _vmMachineType = Nothing
+    , _vmEnableStackdriverMonitoring = Nothing
     , _vmLabels = Nothing
+    , _vmVolumes = Nothing
     , _vmBootDiskSizeGb = Nothing
     , _vmDisks = Nothing
     , _vmBootImage = Nothing
@@ -2077,6 +2253,30 @@ virtualMachine =
     , _vmPreemptible = Nothing
     }
 
+
+-- | The Compute Engine Disk Images to use as a Docker cache. The disks will
+-- be mounted into the Docker folder in a way that the images present in
+-- the cache will not need to be pulled. The digests of the cached images
+-- must match those of the tags used or the latest version will still be
+-- pulled. The root directory of the ext4 image must contain \`image\` and
+-- \`overlay2\` directories copied from the Docker directory of a VM where
+-- the desired Docker images have already been pulled. Any images pulled
+-- that are not cached will be stored on the first cache disk instead of
+-- the boot disk. Only a single image is supported.
+vmDockerCacheImages :: Lens' VirtualMachine [Text]
+vmDockerCacheImages
+  = lens _vmDockerCacheImages
+      (\ s a -> s{_vmDockerCacheImages = a})
+      . _Default
+      . _Coerce
+
+-- | If specified, the VM will only be allocated inside the matching
+-- reservation. It will fail if the VM parameters don\'t match the
+-- reservation.
+vmReservation :: Lens' VirtualMachine (Maybe Text)
+vmReservation
+  = lens _vmReservation
+      (\ s a -> s{_vmReservation = a})
 
 -- | The VM network configuration.
 vmNetwork :: Lens' VirtualMachine (Maybe Network)
@@ -2110,11 +2310,11 @@ vmAccelerators
       . _Default
       . _Coerce
 
--- | The machine type of the virtual machine to create. Must be the short
--- name of a standard machine type (such as \"n1-standard-1\") or a custom
--- machine type (such as \"custom-1-4096\", where \"1\" indicates the
--- number of vCPUs and \"4096\" indicates the memory in MB). See [Creating
--- an instance with a custom machine
+-- | Required. The machine type of the virtual machine to create. Must be the
+-- short name of a standard machine type (such as \"n1-standard-1\") or a
+-- custom machine type (such as \"custom-1-4096\", where \"1\" indicates
+-- the number of vCPUs and \"4096\" indicates the memory in MB). See
+-- [Creating an instance with a custom machine
 -- type](https:\/\/cloud.google.com\/compute\/docs\/instances\/creating-instance-with-custom-machine-type#create)
 -- for more specifications on creating a custom machine type.
 vmMachineType :: Lens' VirtualMachine (Maybe Text)
@@ -2122,13 +2322,30 @@ vmMachineType
   = lens _vmMachineType
       (\ s a -> s{_vmMachineType = a})
 
+-- | Whether Stackdriver monitoring should be enabled on the VM.
+vmEnableStackdriverMonitoring :: Lens' VirtualMachine (Maybe Bool)
+vmEnableStackdriverMonitoring
+  = lens _vmEnableStackdriverMonitoring
+      (\ s a -> s{_vmEnableStackdriverMonitoring = a})
+
 -- | Optional set of labels to apply to the VM and any attached disk
--- resources. These labels must adhere to the name and value restrictions
--- on VM labels imposed by Compute Engine. Labels applied at creation time
--- to the VM. Applied on a best-effort basis to attached disk resources
--- shortly after VM creation.
+-- resources. These labels must adhere to the [name and value
+-- restrictions](https:\/\/cloud.google.com\/compute\/docs\/labeling-resources)
+-- on VM labels imposed by Compute Engine. Labels keys with the prefix
+-- \'google-\' are reserved for use by Google. Labels applied at creation
+-- time to the VM. Applied on a best-effort basis to attached disk
+-- resources shortly after VM creation.
 vmLabels :: Lens' VirtualMachine (Maybe VirtualMachineLabels)
 vmLabels = lens _vmLabels (\ s a -> s{_vmLabels = a})
+
+-- | The list of disks and other storage to create or attach to the VM.
+-- Specify either the \`volumes[]\` field or the \`disks[]\` field, but not
+-- both.
+vmVolumes :: Lens' VirtualMachine [Volume]
+vmVolumes
+  = lens _vmVolumes (\ s a -> s{_vmVolumes = a}) .
+      _Default
+      . _Coerce
 
 -- | The size of the boot disk, in GB. The boot disk must be large enough to
 -- accommodate all of the Docker images from each action in the pipeline at
@@ -2140,7 +2357,8 @@ vmBootDiskSizeGb
       (\ s a -> s{_vmBootDiskSizeGb = a})
       . mapping _Coerce
 
--- | The list of disks to create and attach to the VM.
+-- | The list of disks to create and attach to the VM. Specify either the
+-- \`volumes[]\` field or the \`disks[]\` field, but not both.
 vmDisks :: Lens' VirtualMachine [Disk]
 vmDisks
   = lens _vmDisks (\ s a -> s{_vmDisks = a}) . _Default
@@ -2180,11 +2398,16 @@ instance FromJSON VirtualMachine where
           = withObject "VirtualMachine"
               (\ o ->
                  VirtualMachine' <$>
-                   (o .:? "network") <*> (o .:? "cpuPlatform") <*>
-                     (o .:? "serviceAccount")
+                   (o .:? "dockerCacheImages" .!= mempty) <*>
+                     (o .:? "reservation")
+                     <*> (o .:? "network")
+                     <*> (o .:? "cpuPlatform")
+                     <*> (o .:? "serviceAccount")
                      <*> (o .:? "accelerators" .!= mempty)
                      <*> (o .:? "machineType")
+                     <*> (o .:? "enableStackdriverMonitoring")
                      <*> (o .:? "labels")
+                     <*> (o .:? "volumes" .!= mempty)
                      <*> (o .:? "bootDiskSizeGb")
                      <*> (o .:? "disks" .!= mempty)
                      <*> (o .:? "bootImage")
@@ -2195,12 +2418,17 @@ instance ToJSON VirtualMachine where
         toJSON VirtualMachine'{..}
           = object
               (catMaybes
-                 [("network" .=) <$> _vmNetwork,
+                 [("dockerCacheImages" .=) <$> _vmDockerCacheImages,
+                  ("reservation" .=) <$> _vmReservation,
+                  ("network" .=) <$> _vmNetwork,
                   ("cpuPlatform" .=) <$> _vmCPUPlatform,
                   ("serviceAccount" .=) <$> _vmServiceAccount,
                   ("accelerators" .=) <$> _vmAccelerators,
                   ("machineType" .=) <$> _vmMachineType,
+                  ("enableStackdriverMonitoring" .=) <$>
+                    _vmEnableStackdriverMonitoring,
                   ("labels" .=) <$> _vmLabels,
+                  ("volumes" .=) <$> _vmVolumes,
                   ("bootDiskSizeGb" .=) <$> _vmBootDiskSizeGb,
                   ("disks" .=) <$> _vmDisks,
                   ("bootImage" .=) <$> _vmBootImage,
@@ -2213,7 +2441,7 @@ instance ToJSON VirtualMachine where
 -- /See:/ 'serviceAccount' smart constructor.
 data ServiceAccount =
   ServiceAccount'
-    { _saEmail  :: !(Maybe Text)
+    { _saEmail :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2237,7 +2465,7 @@ saEmail :: Lens' ServiceAccount (Maybe Text)
 saEmail = lens _saEmail (\ s a -> s{_saEmail = a})
 
 -- | List of scopes to be enabled for this service account on the VM, in
--- addition to the Cloud Genomics API scope.
+-- addition to the cloud-platform API scope that will be added by default.
 saScopes :: Lens' ServiceAccount [Text]
 saScopes
   = lens _saScopes (\ s a -> s{_saScopes = a}) .
@@ -2302,7 +2530,7 @@ instance ToJSON CheckInResponseMetadata where
 data Accelerator =
   Accelerator'
     { _aCount :: !(Maybe (Textual Int64))
-    , _aType  :: !(Maybe Text)
+    , _aType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2390,7 +2618,7 @@ instance ToJSON PipelineEnvironment where
 -- /See:/ 'workerReleasedEvent' smart constructor.
 data WorkerReleasedEvent =
   WorkerReleasedEvent'
-    { _wreZone     :: !(Maybe Text)
+    { _wreZone :: !(Maybe Text)
     , _wreInstance :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2437,8 +2665,8 @@ instance ToJSON WorkerReleasedEvent where
 -- /See:/ 'containerStartedEvent' smart constructor.
 data ContainerStartedEvent =
   ContainerStartedEvent'
-    { _cIPAddress    :: !(Maybe Text)
-    , _cActionId     :: !(Maybe (Textual Int32))
+    { _cIPAddress :: !(Maybe Text)
+    , _cActionId :: !(Maybe (Textual Int32))
     , _cPortMAppings :: !(Maybe ContainerStartedEventPortMAppings)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2506,7 +2734,8 @@ instance ToJSON ContainerStartedEvent where
 data RunPipelineRequest =
   RunPipelineRequest'
     { _rprPipeline :: !(Maybe Pipeline)
-    , _rprLabels   :: !(Maybe RunPipelineRequestLabels)
+    , _rprPubSubTopic :: !(Maybe Text)
+    , _rprLabels :: !(Maybe RunPipelineRequestLabels)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2517,17 +2746,29 @@ data RunPipelineRequest =
 --
 -- * 'rprPipeline'
 --
+-- * 'rprPubSubTopic'
+--
 -- * 'rprLabels'
 runPipelineRequest
     :: RunPipelineRequest
 runPipelineRequest =
-  RunPipelineRequest' {_rprPipeline = Nothing, _rprLabels = Nothing}
+  RunPipelineRequest'
+    {_rprPipeline = Nothing, _rprPubSubTopic = Nothing, _rprLabels = Nothing}
 
 
--- | The description of the pipeline to run.
+-- | Required. The description of the pipeline to run.
 rprPipeline :: Lens' RunPipelineRequest (Maybe Pipeline)
 rprPipeline
   = lens _rprPipeline (\ s a -> s{_rprPipeline = a})
+
+-- | The name of an existing Pub\/Sub topic. The server will publish messages
+-- to this topic whenever the status of the operation changes. The Genomics
+-- Service Agent account must have publisher permissions to the specified
+-- topic or notifications will not be sent.
+rprPubSubTopic :: Lens' RunPipelineRequest (Maybe Text)
+rprPubSubTopic
+  = lens _rprPubSubTopic
+      (\ s a -> s{_rprPubSubTopic = a})
 
 -- | User-defined labels to associate with the returned operation. These
 -- labels are not propagated to any Google Cloud Platform resources used by
@@ -2543,13 +2784,15 @@ instance FromJSON RunPipelineRequest where
           = withObject "RunPipelineRequest"
               (\ o ->
                  RunPipelineRequest' <$>
-                   (o .:? "pipeline") <*> (o .:? "labels"))
+                   (o .:? "pipeline") <*> (o .:? "pubSubTopic") <*>
+                     (o .:? "labels"))
 
 instance ToJSON RunPipelineRequest where
         toJSON RunPipelineRequest'{..}
           = object
               (catMaybes
                  [("pipeline" .=) <$> _rprPipeline,
+                  ("pubSubTopic" .=) <$> _rprPubSubTopic,
                   ("labels" .=) <$> _rprLabels])
 
 -- | Specifies a series of actions to execute, expressed as Docker
@@ -2558,10 +2801,11 @@ instance ToJSON RunPipelineRequest where
 -- /See:/ 'pipeline' smart constructor.
 data Pipeline =
   Pipeline'
-    { _pActions     :: !(Maybe [Action])
+    { _pActions :: !(Maybe [Action])
     , _pEnvironment :: !(Maybe PipelineEnvironment)
-    , _pResources   :: !(Maybe Resources)
-    , _pTimeout     :: !(Maybe GDuration)
+    , _pResources :: !(Maybe Resources)
+    , _pEncryptedEnvironment :: !(Maybe Secret)
+    , _pTimeout :: !(Maybe GDuration)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2576,6 +2820,8 @@ data Pipeline =
 --
 -- * 'pResources'
 --
+-- * 'pEncryptedEnvironment'
+--
 -- * 'pTimeout'
 pipeline
     :: Pipeline
@@ -2584,6 +2830,7 @@ pipeline =
     { _pActions = Nothing
     , _pEnvironment = Nothing
     , _pResources = Nothing
+    , _pEncryptedEnvironment = Nothing
     , _pTimeout = Nothing
     }
 
@@ -2607,6 +2854,16 @@ pResources :: Lens' Pipeline (Maybe Resources)
 pResources
   = lens _pResources (\ s a -> s{_pResources = a})
 
+-- | The encrypted environment to pass into every action. Each action can
+-- also specify its own encrypted environment. The secret must decrypt to a
+-- JSON-encoded dictionary where key-value pairs serve as environment
+-- variable names and their values. The decoded environment variables can
+-- overwrite the values specified by the \`environment\` field.
+pEncryptedEnvironment :: Lens' Pipeline (Maybe Secret)
+pEncryptedEnvironment
+  = lens _pEncryptedEnvironment
+      (\ s a -> s{_pEncryptedEnvironment = a})
+
 -- | The maximum amount of time to give the pipeline to complete. This
 -- includes the time spent waiting for a worker to be allocated. If the
 -- pipeline fails to complete before the timeout, it will be cancelled and
@@ -2625,6 +2882,7 @@ instance FromJSON Pipeline where
                    (o .:? "actions" .!= mempty) <*>
                      (o .:? "environment")
                      <*> (o .:? "resources")
+                     <*> (o .:? "encryptedEnvironment")
                      <*> (o .:? "timeout"))
 
 instance ToJSON Pipeline where
@@ -2634,6 +2892,8 @@ instance ToJSON Pipeline where
                  [("actions" .=) <$> _pActions,
                   ("environment" .=) <$> _pEnvironment,
                   ("resources" .=) <$> _pResources,
+                  ("encryptedEnvironment" .=) <$>
+                    _pEncryptedEnvironment,
                   ("timeout" .=) <$> _pTimeout])
 
 -- | Carries information about the pipeline execution that is returned in the
@@ -2642,11 +2902,11 @@ instance ToJSON Pipeline where
 -- /See:/ 'metadata' smart constructor.
 data Metadata =
   Metadata'
-    { _mStartTime  :: !(Maybe DateTime')
-    , _mEvents     :: !(Maybe [Event])
-    , _mEndTime    :: !(Maybe DateTime')
-    , _mPipeline   :: !(Maybe Pipeline)
-    , _mLabels     :: !(Maybe MetadataLabels)
+    { _mStartTime :: !(Maybe DateTime')
+    , _mEvents :: !(Maybe [Event])
+    , _mEndTime :: !(Maybe DateTime')
+    , _mPipeline :: !(Maybe Pipeline)
+    , _mLabels :: !(Maybe MetadataLabels)
     , _mCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2737,13 +2997,51 @@ instance ToJSON Metadata where
                   ("labels" .=) <$> _mLabels,
                   ("createTime" .=) <$> _mCreateTime])
 
+-- | Feature configuration for the operation.
+--
+-- /See:/ 'checkInResponseFeatures' smart constructor.
+newtype CheckInResponseFeatures =
+  CheckInResponseFeatures'
+    { _cirfAddtional :: HashMap Text JSONValue
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CheckInResponseFeatures' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cirfAddtional'
+checkInResponseFeatures
+    :: HashMap Text JSONValue -- ^ 'cirfAddtional'
+    -> CheckInResponseFeatures
+checkInResponseFeatures pCirfAddtional_ =
+  CheckInResponseFeatures' {_cirfAddtional = _Coerce # pCirfAddtional_}
+
+
+-- | Properties of the object. Contains field \'type with type URL.
+cirfAddtional :: Lens' CheckInResponseFeatures (HashMap Text JSONValue)
+cirfAddtional
+  = lens _cirfAddtional
+      (\ s a -> s{_cirfAddtional = a})
+      . _Coerce
+
+instance FromJSON CheckInResponseFeatures where
+        parseJSON
+          = withObject "CheckInResponseFeatures"
+              (\ o ->
+                 CheckInResponseFeatures' <$> (parseJSONObject o))
+
+instance ToJSON CheckInResponseFeatures where
+        toJSON = toJSON . _cirfAddtional
+
 -- | Carries information about a particular disk mount inside a container.
 --
 -- /See:/ 'mount' smart constructor.
 data Mount =
   Mount'
-    { _mPath     :: !(Maybe Text)
-    , _mDisk     :: !(Maybe Text)
+    { _mPath :: !(Maybe Text)
+    , _mDisk :: !(Maybe Text)
     , _mReadOnly :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2849,20 +3147,13 @@ instance FromJSON RunPipelineResponse where
 instance ToJSON RunPipelineResponse where
         toJSON = const emptyObject
 
--- | Metadata describing an Operation.
+-- | An OperationMetadata or Metadata object. This will always be returned
+-- with the Operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata =
+newtype OperationMetadata =
   OperationMetadata'
-    { _omClientId        :: !(Maybe Text)
-    , _omStartTime       :: !(Maybe DateTime')
-    , _omEvents          :: !(Maybe [OperationEvent])
-    , _omEndTime         :: !(Maybe DateTime')
-    , _omLabels          :: !(Maybe OperationMetadataLabels)
-    , _omProjectId       :: !(Maybe Text)
-    , _omCreateTime      :: !(Maybe DateTime')
-    , _omRuntimeMetadata :: !(Maybe OperationMetadataRuntimeMetadata)
-    , _omRequest         :: !(Maybe OperationMetadataRequest)
+    { _omAddtional :: HashMap Text JSONValue
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2871,137 +3162,40 @@ data OperationMetadata =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'omClientId'
---
--- * 'omStartTime'
---
--- * 'omEvents'
---
--- * 'omEndTime'
---
--- * 'omLabels'
---
--- * 'omProjectId'
---
--- * 'omCreateTime'
---
--- * 'omRuntimeMetadata'
---
--- * 'omRequest'
+-- * 'omAddtional'
 operationMetadata
-    :: OperationMetadata
-operationMetadata =
-  OperationMetadata'
-    { _omClientId = Nothing
-    , _omStartTime = Nothing
-    , _omEvents = Nothing
-    , _omEndTime = Nothing
-    , _omLabels = Nothing
-    , _omProjectId = Nothing
-    , _omCreateTime = Nothing
-    , _omRuntimeMetadata = Nothing
-    , _omRequest = Nothing
-    }
+    :: HashMap Text JSONValue -- ^ 'omAddtional'
+    -> OperationMetadata
+operationMetadata pOmAddtional_ =
+  OperationMetadata' {_omAddtional = _Coerce # pOmAddtional_}
 
 
--- | This field is deprecated. Use \`labels\` instead. Optionally provided by
--- the caller when submitting the request that creates the operation.
-omClientId :: Lens' OperationMetadata (Maybe Text)
-omClientId
-  = lens _omClientId (\ s a -> s{_omClientId = a})
-
--- | The time at which the job began to run.
-omStartTime :: Lens' OperationMetadata (Maybe UTCTime)
-omStartTime
-  = lens _omStartTime (\ s a -> s{_omStartTime = a}) .
-      mapping _DateTime
-
--- | Optional event messages that were generated during the job\'s execution.
--- This also contains any warnings that were generated during import or
--- export.
-omEvents :: Lens' OperationMetadata [OperationEvent]
-omEvents
-  = lens _omEvents (\ s a -> s{_omEvents = a}) .
-      _Default
-      . _Coerce
-
--- | The time at which the job stopped running.
-omEndTime :: Lens' OperationMetadata (Maybe UTCTime)
-omEndTime
-  = lens _omEndTime (\ s a -> s{_omEndTime = a}) .
-      mapping _DateTime
-
--- | Optionally provided by the caller when submitting the request that
--- creates the operation.
-omLabels :: Lens' OperationMetadata (Maybe OperationMetadataLabels)
-omLabels = lens _omLabels (\ s a -> s{_omLabels = a})
-
--- | The Google Cloud Project in which the job is scoped.
-omProjectId :: Lens' OperationMetadata (Maybe Text)
-omProjectId
-  = lens _omProjectId (\ s a -> s{_omProjectId = a})
-
--- | The time at which the job was submitted to the Genomics service.
-omCreateTime :: Lens' OperationMetadata (Maybe UTCTime)
-omCreateTime
-  = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
-      . mapping _DateTime
-
--- | Runtime metadata on this Operation.
-omRuntimeMetadata :: Lens' OperationMetadata (Maybe OperationMetadataRuntimeMetadata)
-omRuntimeMetadata
-  = lens _omRuntimeMetadata
-      (\ s a -> s{_omRuntimeMetadata = a})
-
--- | The original request that started the operation. Note that this will be
--- in current version of the API. If the operation was started with v1beta2
--- API and a GetOperation is performed on v1 API, a v1 request will be
--- returned.
-omRequest :: Lens' OperationMetadata (Maybe OperationMetadataRequest)
-omRequest
-  = lens _omRequest (\ s a -> s{_omRequest = a})
+-- | Properties of the object. Contains field \'type with type URL.
+omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
+omAddtional
+  = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
+      _Coerce
 
 instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
-              (\ o ->
-                 OperationMetadata' <$>
-                   (o .:? "clientId") <*> (o .:? "startTime") <*>
-                     (o .:? "events" .!= mempty)
-                     <*> (o .:? "endTime")
-                     <*> (o .:? "labels")
-                     <*> (o .:? "projectId")
-                     <*> (o .:? "createTime")
-                     <*> (o .:? "runtimeMetadata")
-                     <*> (o .:? "request"))
+              (\ o -> OperationMetadata' <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadata where
-        toJSON OperationMetadata'{..}
-          = object
-              (catMaybes
-                 [("clientId" .=) <$> _omClientId,
-                  ("startTime" .=) <$> _omStartTime,
-                  ("events" .=) <$> _omEvents,
-                  ("endTime" .=) <$> _omEndTime,
-                  ("labels" .=) <$> _omLabels,
-                  ("projectId" .=) <$> _omProjectId,
-                  ("createTime" .=) <$> _omCreateTime,
-                  ("runtimeMetadata" .=) <$> _omRuntimeMetadata,
-                  ("request" .=) <$> _omRequest])
+        toJSON = toJSON . _omAddtional
 
 -- | The environment to pass into the container. This environment is merged
--- with any values specified in the \`Pipeline\` message. These values
--- overwrite any in the \`Pipeline\` message. In addition to the values
--- passed here, a few other values are automatically injected into the
--- environment. These cannot be hidden or overwritten.
--- \`GOOGLE_PIPELINE_FAILED\` will be set to \"1\" if the pipeline failed
--- because an action has exited with a non-zero status (and did not have
--- the \`IGNORE_EXIT_STATUS\` flag set). This can be used to determine if
--- additional debug or logging actions should execute.
--- \`GOOGLE_LAST_EXIT_STATUS\` will be set to the exit status of the last
--- non-background action that executed. This can be used by workflow engine
--- authors to determine whether an individual action has succeeded or
--- failed.
+-- with values specified in the google.genomics.v2alpha1.Pipeline message,
+-- overwriting any duplicate values. In addition to the values passed here,
+-- a few other values are automatically injected into the environment.
+-- These cannot be hidden or overwritten. \`GOOGLE_PIPELINE_FAILED\` will
+-- be set to \"1\" if the pipeline failed because an action has exited with
+-- a non-zero status (and did not have the \`IGNORE_EXIT_STATUS\` flag
+-- set). This can be used to determine if additional debug or logging
+-- actions should execute. \`GOOGLE_LAST_EXIT_STATUS\` will be set to the
+-- exit status of the last non-background action that executed. This can be
+-- used by workflow engine authors to determine whether an individual
+-- action has succeeded or failed.
 --
 -- /See:/ 'actionEnvironment' smart constructor.
 newtype ActionEnvironment =
@@ -3036,82 +3230,39 @@ instance FromJSON ActionEnvironment where
 instance ToJSON ActionEnvironment where
         toJSON = toJSON . _aeAddtional
 
--- | Describes a Compute Engine resource that is being managed by a running
--- pipeline.
+-- | Configuration for an \`NFSMount\` to be attached to the VM.
 --
--- /See:/ 'computeEngine' smart constructor.
-data ComputeEngine =
-  ComputeEngine'
-    { _ceZone         :: !(Maybe Text)
-    , _ceDiskNames    :: !(Maybe [Text])
-    , _ceMachineType  :: !(Maybe Text)
-    , _ceInstanceName :: !(Maybe Text)
+-- /See:/ 'nFSMount' smart constructor.
+newtype NFSMount =
+  NFSMount'
+    { _nfsmTarget :: Maybe Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'ComputeEngine' with the minimum fields required to make a request.
+-- | Creates a value of 'NFSMount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ceZone'
---
--- * 'ceDiskNames'
---
--- * 'ceMachineType'
---
--- * 'ceInstanceName'
-computeEngine
-    :: ComputeEngine
-computeEngine =
-  ComputeEngine'
-    { _ceZone = Nothing
-    , _ceDiskNames = Nothing
-    , _ceMachineType = Nothing
-    , _ceInstanceName = Nothing
-    }
+-- * 'nfsmTarget'
+nFSMount
+    :: NFSMount
+nFSMount = NFSMount' {_nfsmTarget = Nothing}
 
 
--- | The availability zone in which the instance resides.
-ceZone :: Lens' ComputeEngine (Maybe Text)
-ceZone = lens _ceZone (\ s a -> s{_ceZone = a})
+-- | A target NFS mount. The target must be specified as \`address:\/mount\".
+nfsmTarget :: Lens' NFSMount (Maybe Text)
+nfsmTarget
+  = lens _nfsmTarget (\ s a -> s{_nfsmTarget = a})
 
--- | The names of the disks that were created for this pipeline.
-ceDiskNames :: Lens' ComputeEngine [Text]
-ceDiskNames
-  = lens _ceDiskNames (\ s a -> s{_ceDiskNames = a}) .
-      _Default
-      . _Coerce
-
--- | The machine type of the instance.
-ceMachineType :: Lens' ComputeEngine (Maybe Text)
-ceMachineType
-  = lens _ceMachineType
-      (\ s a -> s{_ceMachineType = a})
-
--- | The instance on which the operation is running.
-ceInstanceName :: Lens' ComputeEngine (Maybe Text)
-ceInstanceName
-  = lens _ceInstanceName
-      (\ s a -> s{_ceInstanceName = a})
-
-instance FromJSON ComputeEngine where
+instance FromJSON NFSMount where
         parseJSON
-          = withObject "ComputeEngine"
-              (\ o ->
-                 ComputeEngine' <$>
-                   (o .:? "zone") <*> (o .:? "diskNames" .!= mempty) <*>
-                     (o .:? "machineType")
-                     <*> (o .:? "instanceName"))
+          = withObject "NFSMount"
+              (\ o -> NFSMount' <$> (o .:? "target"))
 
-instance ToJSON ComputeEngine where
-        toJSON ComputeEngine'{..}
-          = object
-              (catMaybes
-                 [("zone" .=) <$> _ceZone,
-                  ("diskNames" .=) <$> _ceDiskNames,
-                  ("machineType" .=) <$> _ceMachineType,
-                  ("instanceName" .=) <$> _ceInstanceName])
+instance ToJSON NFSMount where
+        toJSON NFSMount'{..}
+          = object (catMaybes [("target" .=) <$> _nfsmTarget])
 
 -- | An Empty object.
 --
@@ -3148,105 +3299,3 @@ instance FromJSON OperationResponse where
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
-
--- | An event that occurred during an Operation.
---
--- /See:/ 'operationEvent' smart constructor.
-data OperationEvent =
-  OperationEvent'
-    { _oeStartTime   :: !(Maybe DateTime')
-    , _oeEndTime     :: !(Maybe DateTime')
-    , _oeDescription :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationEvent' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'oeStartTime'
---
--- * 'oeEndTime'
---
--- * 'oeDescription'
-operationEvent
-    :: OperationEvent
-operationEvent =
-  OperationEvent'
-    {_oeStartTime = Nothing, _oeEndTime = Nothing, _oeDescription = Nothing}
-
-
--- | Optional time of when event started.
-oeStartTime :: Lens' OperationEvent (Maybe UTCTime)
-oeStartTime
-  = lens _oeStartTime (\ s a -> s{_oeStartTime = a}) .
-      mapping _DateTime
-
--- | Optional time of when event finished. An event can have a start time and
--- no finish time. If an event has a finish time, there must be a start
--- time.
-oeEndTime :: Lens' OperationEvent (Maybe UTCTime)
-oeEndTime
-  = lens _oeEndTime (\ s a -> s{_oeEndTime = a}) .
-      mapping _DateTime
-
--- | Required description of event.
-oeDescription :: Lens' OperationEvent (Maybe Text)
-oeDescription
-  = lens _oeDescription
-      (\ s a -> s{_oeDescription = a})
-
-instance FromJSON OperationEvent where
-        parseJSON
-          = withObject "OperationEvent"
-              (\ o ->
-                 OperationEvent' <$>
-                   (o .:? "startTime") <*> (o .:? "endTime") <*>
-                     (o .:? "description"))
-
-instance ToJSON OperationEvent where
-        toJSON OperationEvent'{..}
-          = object
-              (catMaybes
-                 [("startTime" .=) <$> _oeStartTime,
-                  ("endTime" .=) <$> _oeEndTime,
-                  ("description" .=) <$> _oeDescription])
-
--- | Runtime metadata that will be populated in the runtimeMetadata field of
--- the Operation associated with a RunPipeline execution.
---
--- /See:/ 'runtimeMetadata' smart constructor.
-newtype RuntimeMetadata =
-  RuntimeMetadata'
-    { _rmComputeEngine :: Maybe ComputeEngine
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'RuntimeMetadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rmComputeEngine'
-runtimeMetadata
-    :: RuntimeMetadata
-runtimeMetadata = RuntimeMetadata' {_rmComputeEngine = Nothing}
-
-
--- | Execution information specific to Google Compute Engine.
-rmComputeEngine :: Lens' RuntimeMetadata (Maybe ComputeEngine)
-rmComputeEngine
-  = lens _rmComputeEngine
-      (\ s a -> s{_rmComputeEngine = a})
-
-instance FromJSON RuntimeMetadata where
-        parseJSON
-          = withObject "RuntimeMetadata"
-              (\ o -> RuntimeMetadata' <$> (o .:? "computeEngine"))
-
-instance ToJSON RuntimeMetadata where
-        toJSON RuntimeMetadata'{..}
-          = object
-              (catMaybes
-                 [("computeEngine" .=) <$> _rmComputeEngine])

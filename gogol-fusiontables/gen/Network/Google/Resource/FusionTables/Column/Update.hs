@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Column.Update
     , cuColumnId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.column.update@ method which the
 -- 'ColumnUpdate' request conforms to.
@@ -58,8 +58,8 @@ type ColumnUpdateResource =
 -- /See:/ 'columnUpdate' smart constructor.
 data ColumnUpdate =
   ColumnUpdate'
-    { _cuPayload  :: !Column
-    , _cuTableId  :: !Text
+    { _cuPayload :: !Column
+    , _cuTableId :: !Text
     , _cuColumnId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

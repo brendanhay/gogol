@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -28,6 +28,13 @@ module Network.Google.DNS.Types
     -- * DNSKeySpecAlgorithm
     , DNSKeySpecAlgorithm (..)
 
+    -- * PolicyAlternativeNameServerConfigTargetNameServer
+    , PolicyAlternativeNameServerConfigTargetNameServer
+    , policyAlternativeNameServerConfigTargetNameServer
+    , pansctnsKind
+    , pansctnsForwardingPath
+    , pansctnsIPv4Address
+
     -- * ManagedZoneDNSSecConfigNonExistence
     , ManagedZoneDNSSecConfigNonExistence (..)
 
@@ -42,6 +49,13 @@ module Network.Google.DNS.Types
     , managedZonePrivateVisibilityConfigNetwork
     , mzpvcnKind
     , mzpvcnNetworkURL
+
+    -- * ManagedZonePeeringConfigTargetNetwork
+    , ManagedZonePeeringConfigTargetNetwork
+    , managedZonePeeringConfigTargetNetwork
+    , mzpctnDeactivateTime
+    , mzpctnKind
+    , mzpctnNetworkURL
 
     -- * DNSKeysListResponse
     , DNSKeysListResponse
@@ -59,8 +73,25 @@ module Network.Google.DNS.Types
     , clrKind
     , clrHeader
 
+    -- * PoliciesListResponse
+    , PoliciesListResponse
+    , policiesListResponse
+    , plrNextPageToken
+    , plrKind
+    , plrHeader
+    , plrPolicies
+
+    -- * ManagedZoneForwardingConfigNameServerTargetForwardingPath
+    , ManagedZoneForwardingConfigNameServerTargetForwardingPath (..)
+
     -- * ManagedZoneDNSSecConfigState
     , ManagedZoneDNSSecConfigState (..)
+
+    -- * ManagedZoneForwardingConfig
+    , ManagedZoneForwardingConfig
+    , managedZoneForwardingConfig
+    , mzfcKind
+    , mzfcTargetNameServers
 
     -- * ManagedZoneVisibility
     , ManagedZoneVisibility (..)
@@ -85,6 +116,12 @@ module Network.Google.DNS.Types
     , oZoneContext
     , oDNSKeyContext
 
+    -- * ManagedZonePeeringConfig
+    , ManagedZonePeeringConfig
+    , managedZonePeeringConfig
+    , mzpcKind
+    , mzpcTargetNetwork
+
     -- * DNSKeySpec
     , DNSKeySpec
     , dnsKeySpec
@@ -92,6 +129,11 @@ module Network.Google.DNS.Types
     , dksKind
     , dksAlgorithm
     , dksKeyLength
+
+    -- * ManagedZoneReverseLookupConfig
+    , ManagedZoneReverseLookupConfig
+    , managedZoneReverseLookupConfig
+    , mzrlcKind
 
     -- * ChangesListSortBy
     , ChangesListSortBy (..)
@@ -142,6 +184,12 @@ module Network.Google.DNS.Types
     , responseHeader
     , rhOperationId
 
+    -- * PoliciesUpdateResponse
+    , PoliciesUpdateResponse
+    , policiesUpdateResponse
+    , purHeader
+    , purPolicy
+
     -- * DNSKeySpecKeyType
     , DNSKeySpecKeyType (..)
 
@@ -161,14 +209,26 @@ module Network.Google.DNS.Types
     , rrslrHeader
     , rrslrRrSets
 
+    -- * PolicyAlternativeNameServerConfig
+    , PolicyAlternativeNameServerConfig
+    , policyAlternativeNameServerConfig
+    , panscKind
+    , panscTargetNameServers
+
     -- * ChangeStatus
     , ChangeStatus (..)
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * ManagedZonePrivateVisibilityConfig
     , ManagedZonePrivateVisibilityConfig
     , managedZonePrivateVisibilityConfig
     , mzpvcNetworks
     , mzpvcKind
+
+    -- * PolicyAlternativeNameServerConfigTargetNameServerForwardingPath
+    , PolicyAlternativeNameServerConfigTargetNameServerForwardingPath (..)
 
     -- * ManagedZoneDNSSecConfig
     , ManagedZoneDNSSecConfig
@@ -188,11 +248,25 @@ module Network.Google.DNS.Types
     , rrsType
     , rrsRrDatas
 
+    -- * Policy
+    , Policy
+    , policy
+    , polAlternativeNameServerConfig
+    , polEnableInboundForwarding
+    , polEnableLogging
+    , polNetworks
+    , polKind
+    , polName
+    , polId
+    , polDescription
+
     -- * ManagedZone
     , ManagedZone
     , managedZone
     , mzCreationTime
     , mzKind
+    , mzPeeringConfig
+    , mzReverseLookupConfig
     , mzNameServerSet
     , mzVisibility
     , mzName
@@ -203,6 +277,13 @@ module Network.Google.DNS.Types
     , mzDNSsecConfig
     , mzNameServers
     , mzPrivateVisibilityConfig
+    , mzForwardingConfig
+
+    -- * PoliciesPatchResponse
+    , PoliciesPatchResponse
+    , policiesPatchResponse
+    , pprHeader
+    , pprPolicy
 
     -- * ManagedZoneLabels
     , ManagedZoneLabels
@@ -213,14 +294,18 @@ module Network.Google.DNS.Types
     , Quota
     , quota
     , qRrSetDeletionsPerChange
+    , qTargetNameServersPerManagedZone
     , qWhiteListedKeySpecs
     , qRrSetsPerManagedZone
     , qKind
     , qResourceRecordsPerRrSet
     , qManagedZonesPerNetwork
     , qRrSetAdditionsPerChange
+    , qTargetNameServersPerPolicy
+    , qNetworksPerPolicy
     , qManagedZones
     , qTotalRrDataSizePerChange
+    , qPolicies
     , qDNSKeysPerManagedZone
     , qNetworksPerManagedZone
 
@@ -233,8 +318,21 @@ module Network.Google.DNS.Types
     , dkdDigest
     , dkdType
 
+    -- * PolicyNetwork
+    , PolicyNetwork
+    , policyNetwork
+    , pnKind
+    , pnNetworkURL
+
     -- * ManagedZoneOperationsListSortBy
     , ManagedZoneOperationsListSortBy (..)
+
+    -- * ManagedZoneForwardingConfigNameServerTarget
+    , ManagedZoneForwardingConfigNameServerTarget
+    , managedZoneForwardingConfigNameServerTarget
+    , mzfcnstKind
+    , mzfcnstForwardingPath
+    , mzfcnstIPv4Address
 
     -- * ManagedZonesListResponse
     , ManagedZonesListResponse
@@ -245,15 +343,15 @@ module Network.Google.DNS.Types
     , mzlrManagedZones
     ) where
 
-import           Network.Google.DNS.Types.Product
-import           Network.Google.DNS.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DNS.Types.Product
+import Network.Google.DNS.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v2beta1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2beta1' of the Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
 dNSService :: ServiceConfig
 dNSService
   = defaultService (ServiceId "dns:v2beta1")
-      "www.googleapis.com"
+      "dns.googleapis.com"
 
 -- | View your DNS records hosted by Google Cloud DNS
 ndevClouddnsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readonly"]

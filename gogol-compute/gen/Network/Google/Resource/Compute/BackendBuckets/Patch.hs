@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.BackendBuckets.Patch
     , bbpPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.backendBuckets.patch@ method which the
 -- 'BackendBucketsPatch' request conforms to.
@@ -66,10 +66,10 @@ type BackendBucketsPatchResource =
 -- /See:/ 'backendBucketsPatch' smart constructor.
 data BackendBucketsPatch =
   BackendBucketsPatch'
-    { _bbpRequestId     :: !(Maybe Text)
+    { _bbpRequestId :: !(Maybe Text)
     , _bbpBackendBucket :: !Text
-    , _bbpProject       :: !Text
-    , _bbpPayload       :: !BackendBucket
+    , _bbpProject :: !Text
+    , _bbpPayload :: !BackendBucket
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

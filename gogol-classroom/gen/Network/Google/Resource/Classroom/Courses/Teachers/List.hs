@@ -46,8 +46,8 @@ module Network.Google.Resource.Classroom.Courses.Teachers.List
     , ctltCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.teachers.list@ method which the
 -- 'CoursesTeachersList' request conforms to.
@@ -74,14 +74,14 @@ type CoursesTeachersListResource =
 -- /See:/ 'coursesTeachersList' smart constructor.
 data CoursesTeachersList =
   CoursesTeachersList'
-    { _ctltXgafv          :: !(Maybe Xgafv)
+    { _ctltXgafv :: !(Maybe Xgafv)
     , _ctltUploadProtocol :: !(Maybe Text)
-    , _ctltCourseId       :: !Text
-    , _ctltAccessToken    :: !(Maybe Text)
-    , _ctltUploadType     :: !(Maybe Text)
-    , _ctltPageToken      :: !(Maybe Text)
-    , _ctltPageSize       :: !(Maybe (Textual Int32))
-    , _ctltCallback       :: !(Maybe Text)
+    , _ctltCourseId :: !Text
+    , _ctltAccessToken :: !(Maybe Text)
+    , _ctltUploadType :: !(Maybe Text)
+    , _ctltPageToken :: !(Maybe Text)
+    , _ctltPageSize :: !(Maybe (Textual Int32))
+    , _ctltCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,8 +158,8 @@ ctltPageToken
   = lens _ctltPageToken
       (\ s a -> s{_ctltPageToken = a})
 
--- | Maximum number of items to return. Zero means no maximum. The server may
--- return fewer than the specified number of results.
+-- | Maximum number of items to return. The default is 30 if unspecified or
+-- \`0\`. The server may return fewer than the specified number of results.
 ctltPageSize :: Lens' CoursesTeachersList (Maybe Int32)
 ctltPageSize
   = lens _ctltPageSize (\ s a -> s{_ctltPageSize = a})

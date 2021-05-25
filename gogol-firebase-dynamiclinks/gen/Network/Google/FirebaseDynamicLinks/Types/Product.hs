@@ -17,8 +17,8 @@
 --
 module Network.Google.FirebaseDynamicLinks.Types.Product where
 
-import           Network.Google.FirebaseDynamicLinks.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types.Sum
+import Network.Google.Prelude
 
 -- | Information of navigation behavior.
 --
@@ -105,7 +105,7 @@ instance ToJSON DesktopInfo where
 data Suffix =
   Suffix'
     { _sCustomSuffix :: !(Maybe Text)
-    , _sOption       :: !(Maybe SuffixOption)
+    , _sOption :: !(Maybe SuffixOption)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -151,9 +151,9 @@ instance ToJSON Suffix where
 -- /See:/ 'dynamicLinkWarning' smart constructor.
 data DynamicLinkWarning =
   DynamicLinkWarning'
-    { _dlwWarningCode         :: !(Maybe DynamicLinkWarningWarningCode)
+    { _dlwWarningCode :: !(Maybe DynamicLinkWarningWarningCode)
     , _dlwWarningDocumentLink :: !(Maybe Text)
-    , _dlwWarningMessage      :: !(Maybe Text)
+    , _dlwWarningMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -218,12 +218,12 @@ instance ToJSON DynamicLinkWarning where
 -- /See:/ 'managedShortLink' smart constructor.
 data ManagedShortLink =
   ManagedShortLink'
-    { _mslCreationTime     :: !(Maybe DateTime')
-    , _mslLink             :: !(Maybe Text)
-    , _mslVisibility       :: !(Maybe ManagedShortLinkVisibility)
-    , _mslLinkName         :: !(Maybe Text)
-    , _mslFlaggedAttribute :: !(Maybe [Text])
-    , _mslInfo             :: !(Maybe DynamicLinkInfo)
+    { _mslCreationTime :: !(Maybe DateTime')
+    , _mslLink :: !(Maybe Text)
+    , _mslVisibility :: !(Maybe ManagedShortLinkVisibility)
+    , _mslLinkName :: !(Maybe Text)
+    , _mslFlaggedAttribute :: !(Maybe [ManagedShortLinkFlaggedAttributeItem])
+    , _mslInfo :: !(Maybe DynamicLinkInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -280,7 +280,7 @@ mslLinkName
   = lens _mslLinkName (\ s a -> s{_mslLinkName = a})
 
 -- | Attributes that have been flagged about this short url.
-mslFlaggedAttribute :: Lens' ManagedShortLink [Text]
+mslFlaggedAttribute :: Lens' ManagedShortLink [ManagedShortLinkFlaggedAttributeItem]
 mslFlaggedAttribute
   = lens _mslFlaggedAttribute
       (\ s a -> s{_mslFlaggedAttribute = a})
@@ -319,9 +319,9 @@ instance ToJSON ManagedShortLink where
 data CreateShortDynamicLinkRequest =
   CreateShortDynamicLinkRequest'
     { _csdlrLongDynamicLink :: !(Maybe Text)
-    , _csdlrSuffix          :: !(Maybe Suffix)
+    , _csdlrSuffix :: !(Maybe Suffix)
     , _csdlrDynamicLinkInfo :: !(Maybe DynamicLinkInfo)
-    , _csdlrSdkVersion      :: !(Maybe Text)
+    , _csdlrSdkVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -400,9 +400,9 @@ instance ToJSON CreateShortDynamicLinkRequest where
 -- /See:/ 'socialMetaTagInfo' smart constructor.
 data SocialMetaTagInfo =
   SocialMetaTagInfo'
-    { _smtiSocialImageLink   :: !(Maybe Text)
+    { _smtiSocialImageLink :: !(Maybe Text)
     , _smtiSocialDescription :: !(Maybe Text)
-    , _smtiSocialTitle       :: !(Maybe Text)
+    , _smtiSocialTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -467,8 +467,8 @@ instance ToJSON SocialMetaTagInfo where
 data CreateShortDynamicLinkResponse =
   CreateShortDynamicLinkResponse'
     { _csdlrPreviewLink :: !(Maybe Text)
-    , _csdlrWarning     :: !(Maybe [DynamicLinkWarning])
-    , _csdlrShortLink   :: !(Maybe Text)
+    , _csdlrWarning :: !(Maybe [DynamicLinkWarning])
+    , _csdlrShortLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -534,9 +534,9 @@ instance ToJSON CreateShortDynamicLinkResponse where
 -- /See:/ 'dynamicLinkEventStat' smart constructor.
 data DynamicLinkEventStat =
   DynamicLinkEventStat'
-    { _dlesEvent    :: !(Maybe DynamicLinkEventStatEvent)
+    { _dlesEvent :: !(Maybe DynamicLinkEventStatEvent)
     , _dlesPlatform :: !(Maybe DynamicLinkEventStatPlatform)
-    , _dlesCount    :: !(Maybe (Textual Int64))
+    , _dlesCount :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -594,13 +594,13 @@ instance ToJSON DynamicLinkEventStat where
 -- /See:/ 'iosInfo' smart constructor.
 data IosInfo =
   IosInfo'
-    { _iiIosBundleId         :: !(Maybe Text)
-    , _iiIosIPadBundleId     :: !(Maybe Text)
-    , _iiIosAppStoreId       :: !(Maybe Text)
-    , _iiIosMinimumVersion   :: !(Maybe Text)
+    { _iiIosBundleId :: !(Maybe Text)
+    , _iiIosIPadBundleId :: !(Maybe Text)
+    , _iiIosAppStoreId :: !(Maybe Text)
+    , _iiIosMinimumVersion :: !(Maybe Text)
     , _iiIosIPadFallbackLink :: !(Maybe Text)
-    , _iiIosCustomScheme     :: !(Maybe Text)
-    , _iiIosFallbackLink     :: !(Maybe Text)
+    , _iiIosCustomScheme :: !(Maybe Text)
+    , _iiIosFallbackLink :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -710,15 +710,15 @@ instance ToJSON IosInfo where
 -- /See:/ 'dynamicLinkInfo' smart constructor.
 data DynamicLinkInfo =
   DynamicLinkInfo'
-    { _dliNavigationInfo    :: !(Maybe NavigationInfo)
-    , _dliDesktopInfo       :: !(Maybe DesktopInfo)
+    { _dliNavigationInfo :: !(Maybe NavigationInfo)
+    , _dliDesktopInfo :: !(Maybe DesktopInfo)
     , _dliSocialMetaTagInfo :: !(Maybe SocialMetaTagInfo)
     , _dliDynamicLinkDomain :: !(Maybe Text)
-    , _dliLink              :: !(Maybe Text)
-    , _dliIosInfo           :: !(Maybe IosInfo)
-    , _dliDomainURIPrefix   :: !(Maybe Text)
-    , _dliAndroidInfo       :: !(Maybe AndroidInfo)
-    , _dliAnalyticsInfo     :: !(Maybe AnalyticsInfo)
+    , _dliLink :: !(Maybe Text)
+    , _dliIosInfo :: !(Maybe IosInfo)
+    , _dliDomainURIPrefix :: !(Maybe Text)
+    , _dliAndroidInfo :: !(Maybe AndroidInfo)
+    , _dliAnalyticsInfo :: !(Maybe AnalyticsInfo)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -902,10 +902,10 @@ instance ToJSON DynamicLinkStats where
 data CreateManagedShortLinkRequest =
   CreateManagedShortLinkRequest'
     { _cmslrLongDynamicLink :: !(Maybe Text)
-    , _cmslrSuffix          :: !(Maybe Suffix)
+    , _cmslrSuffix :: !(Maybe Suffix)
     , _cmslrDynamicLinkInfo :: !(Maybe DynamicLinkInfo)
-    , _cmslrSdkVersion      :: !(Maybe Text)
-    , _cmslrName            :: !(Maybe Text)
+    , _cmslrSdkVersion :: !(Maybe Text)
+    , _cmslrName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -998,14 +998,14 @@ instance ToJSON CreateManagedShortLinkRequest where
 data GetIosReopenAttributionResponse =
   GetIosReopenAttributionResponse'
     { _girarIosMinAppVersion :: !(Maybe Text)
-    , _girarDeepLink         :: !(Maybe Text)
-    , _girarUtmContent       :: !(Maybe Text)
-    , _girarResolvedLink     :: !(Maybe Text)
-    , _girarUtmMedium        :: !(Maybe Text)
-    , _girarInvitationId     :: !(Maybe Text)
-    , _girarUtmTerm          :: !(Maybe Text)
-    , _girarUtmCampaign      :: !(Maybe Text)
-    , _girarUtmSource        :: !(Maybe Text)
+    , _girarDeepLink :: !(Maybe Text)
+    , _girarUtmContent :: !(Maybe Text)
+    , _girarResolvedLink :: !(Maybe Text)
+    , _girarUtmMedium :: !(Maybe Text)
+    , _girarInvitationId :: !(Maybe Text)
+    , _girarUtmTerm :: !(Maybe Text)
+    , _girarUtmCampaign :: !(Maybe Text)
+    , _girarUtmSource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1139,14 +1139,14 @@ instance ToJSON GetIosReopenAttributionResponse where
 -- /See:/ 'getIosPostInstallAttributionRequest' smart constructor.
 data GetIosPostInstallAttributionRequest =
   GetIosPostInstallAttributionRequest'
-    { _gipiarIosVersion             :: !(Maybe Text)
+    { _gipiarIosVersion :: !(Maybe Text)
     , _gipiarUniqueMatchLinkToCheck :: !(Maybe Text)
-    , _gipiarAppInstallationTime    :: !(Maybe (Textual Int64))
-    , _gipiarDevice                 :: !(Maybe DeviceInfo)
-    , _gipiarSdkVersion             :: !(Maybe Text)
-    , _gipiarBundleId               :: !(Maybe Text)
-    , _gipiarRetrievalMethod        :: !(Maybe GetIosPostInstallAttributionRequestRetrievalMethod)
-    , _gipiarVisualStyle            :: !(Maybe GetIosPostInstallAttributionRequestVisualStyle)
+    , _gipiarAppInstallationTime :: !(Maybe (Textual Int64))
+    , _gipiarDevice :: !(Maybe DeviceInfo)
+    , _gipiarSdkVersion :: !(Maybe Text)
+    , _gipiarBundleId :: !(Maybe Text)
+    , _gipiarRetrievalMethod :: !(Maybe GetIosPostInstallAttributionRequestRetrievalMethod)
+    , _gipiarVisualStyle :: !(Maybe GetIosPostInstallAttributionRequestVisualStyle)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1277,9 +1277,9 @@ instance ToJSON GetIosPostInstallAttributionRequest
 data AndroidInfo =
   AndroidInfo'
     { _aiAndroidMinPackageVersionCode :: !(Maybe Text)
-    , _aiAndroidFallbackLink          :: !(Maybe Text)
-    , _aiAndroidLink                  :: !(Maybe Text)
-    , _aiAndroidPackageName           :: !(Maybe Text)
+    , _aiAndroidFallbackLink :: !(Maybe Text)
+    , _aiAndroidLink :: !(Maybe Text)
+    , _aiAndroidPackageName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1358,7 +1358,7 @@ instance ToJSON AndroidInfo where
 data AnalyticsInfo =
   AnalyticsInfo'
     { _aiItunesConnectAnalytics :: !(Maybe ITunesConnectAnalytics)
-    , _aiGooglePlayAnalytics    :: !(Maybe GooglePlayAnalytics)
+    , _aiGooglePlayAnalytics :: !(Maybe GooglePlayAnalytics)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1476,22 +1476,22 @@ instance ToJSON ITunesConnectAnalytics where
 -- /See:/ 'getIosPostInstallAttributionResponse' smart constructor.
 data GetIosPostInstallAttributionResponse =
   GetIosPostInstallAttributionResponse'
-    { _gipiarDeepLink                       :: !(Maybe Text)
-    , _gipiarRequestIPVersion               :: !(Maybe GetIosPostInstallAttributionResponseRequestIPVersion)
-    , _gipiarAppMinimumVersion              :: !(Maybe Text)
-    , _gipiarAttributionConfidence          :: !(Maybe GetIosPostInstallAttributionResponseAttributionConfidence)
+    { _gipiarDeepLink :: !(Maybe Text)
+    , _gipiarRequestIPVersion :: !(Maybe GetIosPostInstallAttributionResponseRequestIPVersion)
+    , _gipiarAppMinimumVersion :: !(Maybe Text)
+    , _gipiarAttributionConfidence :: !(Maybe GetIosPostInstallAttributionResponseAttributionConfidence)
     , _gipiarExternalBrowserDestinationLink :: !(Maybe Text)
-    , _gipiarUtmContent                     :: !(Maybe Text)
-    , _gipiarResolvedLink                   :: !(Maybe Text)
-    , _gipiarRequestedLink                  :: !(Maybe Text)
-    , _gipiarUtmMedium                      :: !(Maybe Text)
-    , _gipiarFallbackLink                   :: !(Maybe Text)
-    , _gipiarInvitationId                   :: !(Maybe Text)
-    , _gipiarIsStrongMatchExecutable        :: !(Maybe Bool)
-    , _gipiarUtmTerm                        :: !(Maybe Text)
-    , _gipiarUtmCampaign                    :: !(Maybe Text)
-    , _gipiarMatchMessage                   :: !(Maybe Text)
-    , _gipiarUtmSource                      :: !(Maybe Text)
+    , _gipiarUtmContent :: !(Maybe Text)
+    , _gipiarResolvedLink :: !(Maybe Text)
+    , _gipiarRequestedLink :: !(Maybe Text)
+    , _gipiarUtmMedium :: !(Maybe Text)
+    , _gipiarFallbackLink :: !(Maybe Text)
+    , _gipiarInvitationId :: !(Maybe Text)
+    , _gipiarIsStrongMatchExecutable :: !(Maybe Bool)
+    , _gipiarUtmTerm :: !(Maybe Text)
+    , _gipiarUtmCampaign :: !(Maybe Text)
+    , _gipiarMatchMessage :: !(Maybe Text)
+    , _gipiarUtmSource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1725,8 +1725,8 @@ instance ToJSON GetIosPostInstallAttributionResponse
 data CreateManagedShortLinkResponse =
   CreateManagedShortLinkResponse'
     { _cmslrManagedShortLink :: !(Maybe ManagedShortLink)
-    , _cmslrPreviewLink      :: !(Maybe Text)
-    , _cmslrWarning          :: !(Maybe [DynamicLinkWarning])
+    , _cmslrPreviewLink :: !(Maybe Text)
+    , _cmslrWarning :: !(Maybe [DynamicLinkWarning])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1793,8 +1793,8 @@ instance ToJSON CreateManagedShortLinkResponse where
 data GetIosReopenAttributionRequest =
   GetIosReopenAttributionRequest'
     { _girarRequestedLink :: !(Maybe Text)
-    , _girarSdkVersion    :: !(Maybe Text)
-    , _girarBundleId      :: !(Maybe Text)
+    , _girarSdkVersion :: !(Maybe Text)
+    , _girarBundleId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1861,12 +1861,12 @@ instance ToJSON GetIosReopenAttributionRequest where
 -- /See:/ 'googlePlayAnalytics' smart constructor.
 data GooglePlayAnalytics =
   GooglePlayAnalytics'
-    { _gpaUtmContent  :: !(Maybe Text)
-    , _gpaUtmMedium   :: !(Maybe Text)
-    , _gpaUtmTerm     :: !(Maybe Text)
+    { _gpaUtmContent :: !(Maybe Text)
+    , _gpaUtmMedium :: !(Maybe Text)
+    , _gpaUtmTerm :: !(Maybe Text)
     , _gpaUtmCampaign :: !(Maybe Text)
-    , _gpaGclid       :: !(Maybe Text)
-    , _gpaUtmSource   :: !(Maybe Text)
+    , _gpaGclid :: !(Maybe Text)
+    , _gpaUtmSource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1965,12 +1965,12 @@ instance ToJSON GooglePlayAnalytics where
 data DeviceInfo =
   DeviceInfo'
     { _diLanguageCodeFromWebview :: !(Maybe Text)
-    , _diScreenResolutionWidth   :: !(Maybe (Textual Int64))
-    , _diLanguageCode            :: !(Maybe Text)
-    , _diDeviceModelName         :: !(Maybe Text)
-    , _diScreenResolutionHeight  :: !(Maybe (Textual Int64))
-    , _diLanguageCodeRaw         :: !(Maybe Text)
-    , _diTimezone                :: !(Maybe Text)
+    , _diScreenResolutionWidth :: !(Maybe (Textual Int64))
+    , _diLanguageCode :: !(Maybe Text)
+    , _diDeviceModelName :: !(Maybe Text)
+    , _diScreenResolutionHeight :: !(Maybe (Textual Int64))
+    , _diLanguageCodeRaw :: !(Maybe Text)
+    , _diTimezone :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

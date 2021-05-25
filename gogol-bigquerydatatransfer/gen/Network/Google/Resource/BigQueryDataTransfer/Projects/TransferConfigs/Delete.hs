@@ -23,7 +23,7 @@
 -- Deletes a data transfer configuration, including any associated transfer
 -- runs and logs.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.delete@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.delete@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Delete
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Del
     , ptcdCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.delete@ method which the
 -- 'ProjectsTransferConfigsDelete' request conforms to.
@@ -63,12 +63,12 @@ type ProjectsTransferConfigsDeleteResource =
 -- /See:/ 'projectsTransferConfigsDelete' smart constructor.
 data ProjectsTransferConfigsDelete =
   ProjectsTransferConfigsDelete'
-    { _ptcdXgafv          :: !(Maybe Xgafv)
+    { _ptcdXgafv :: !(Maybe Xgafv)
     , _ptcdUploadProtocol :: !(Maybe Text)
-    , _ptcdAccessToken    :: !(Maybe Text)
-    , _ptcdUploadType     :: !(Maybe Text)
-    , _ptcdName           :: !Text
-    , _ptcdCallback       :: !(Maybe Text)
+    , _ptcdAccessToken :: !(Maybe Text)
+    , _ptcdUploadType :: !(Maybe Text)
+    , _ptcdName :: !Text
+    , _ptcdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,8 +125,9 @@ ptcdUploadType
   = lens _ptcdUploadType
       (\ s a -> s{_ptcdUploadType = a})
 
--- | The field will contain name of the resource requested, for example:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`
+-- | Required. The field will contain name of the resource requested, for
+-- example: \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`
 ptcdName :: Lens' ProjectsTransferConfigsDelete Text
 ptcdName = lens _ptcdName (\ s a -> s{_ptcdName = a})
 

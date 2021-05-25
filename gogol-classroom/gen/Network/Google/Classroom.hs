@@ -32,6 +32,7 @@ module Network.Google.Classroom
     , classroomCourseworkMeScope
     , classroomAnnouncementsReadOnlyScope
     , classroomGuardianlinksStudentsScope
+    , classroomCourseworkmaterialsScope
     , classroomStudentSubmissionsStudentsReadOnlyScope
     , classroomGuardianlinksMeReadOnlyScope
     , classroomRostersScope
@@ -41,6 +42,7 @@ module Network.Google.Classroom
     , classroomAnnouncementsScope
     , classroomCourseworkMeReadOnlyScope
     , classroomStudentSubmissionsMeReadOnlyScope
+    , classroomCourseworkmaterialsReadOnlyScope
     , classroomGuardianlinksStudentsReadOnlyScope
 
     -- * API Declaration
@@ -113,6 +115,21 @@ module Network.Google.Classroom
 
     -- ** classroom.courses.courseWork.studentSubmissions.turnIn
     , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+
+    -- ** classroom.courses.courseWorkMaterials.create
+    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Create
+
+    -- ** classroom.courses.courseWorkMaterials.delete
+    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Delete
+
+    -- ** classroom.courses.courseWorkMaterials.get
+    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Get
+
+    -- ** classroom.courses.courseWorkMaterials.list
+    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.List
+
+    -- ** classroom.courses.courseWorkMaterials.patch
+    , module Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Patch
 
     -- ** classroom.courses.create
     , module Network.Google.Resource.Classroom.Courses.Create
@@ -267,6 +284,24 @@ module Network.Google.Classroom
     , courseWorkChangesInfo
     , cwciCourseId
 
+    -- ** CourseWorkMaterial
+    , CourseWorkMaterial
+    , courseWorkMaterial
+    , cwmCreationTime
+    , cwmScheduledTime
+    , cwmState
+    , cwmAssigneeMode
+    , cwmMaterials
+    , cwmCourseId
+    , cwmIndividualStudentsOptions
+    , cwmUpdateTime
+    , cwmTopicId
+    , cwmId
+    , cwmCreatorUserId
+    , cwmTitle
+    , cwmAlternateLink
+    , cwmDescription
+
     -- ** ModifyCourseWorkAssigneesRequest
     , ModifyCourseWorkAssigneesRequest
     , modifyCourseWorkAssigneesRequest
@@ -329,6 +364,12 @@ module Network.Google.Classroom
     -- ** Empty
     , Empty
     , empty
+
+    -- ** CourseWorkMaterialAssigneeMode
+    , CourseWorkMaterialAssigneeMode (..)
+
+    -- ** CoursesListCourseStates
+    , CoursesListCourseStates (..)
 
     -- ** ModifyCourseWorkAssigneesRequestAssigneeMode
     , ModifyCourseWorkAssigneesRequestAssigneeMode (..)
@@ -435,6 +476,12 @@ module Network.Google.Classroom
     , ShortAnswerSubmission
     , shortAnswerSubmission
     , sasAnswer
+
+    -- ** CoursesCourseWorkStudentSubmissionsListLate
+    , CoursesCourseWorkStudentSubmissionsListLate (..)
+
+    -- ** CoursesCourseWorkStudentSubmissionsListStates
+    , CoursesCourseWorkStudentSubmissionsListStates (..)
 
     -- ** AnnouncementState
     , AnnouncementState (..)
@@ -617,6 +664,9 @@ module Network.Google.Classroom
     -- ** StudentSubmissionCourseWorkType
     , StudentSubmissionCourseWorkType (..)
 
+    -- ** CourseWorkMaterialState
+    , CourseWorkMaterialState (..)
+
     -- ** TimeOfDay'
     , TimeOfDay'
     , timeOfDay
@@ -628,11 +678,17 @@ module Network.Google.Classroom
     -- ** FeedFeedType
     , FeedFeedType (..)
 
+    -- ** CoursesCourseWorkListCourseWorkStates
+    , CoursesCourseWorkListCourseWorkStates (..)
+
     -- ** ListGuardianInvitationsResponse
     , ListGuardianInvitationsResponse
     , listGuardianInvitationsResponse
     , lgirNextPageToken
     , lgirGuardianInvitations
+
+    -- ** CoursesAnnouncementsListAnnouncementStates
+    , CoursesAnnouncementsListAnnouncementStates (..)
 
     -- ** Assignment
     , Assignment
@@ -650,6 +706,9 @@ module Network.Google.Classroom
     , sharedDriveFile
     , sdfDriveFile
     , sdfShareMode
+
+    -- ** CoursesCourseWorkMaterialsListCourseWorkMaterialStates
+    , CoursesCourseWorkMaterialsListCourseWorkMaterialStates (..)
 
     -- ** CourseAlias
     , CourseAlias
@@ -692,6 +751,15 @@ module Network.Google.Classroom
     , lNextPageToken
     , lTeachers
 
+    -- ** ListCourseWorkMaterialResponse
+    , ListCourseWorkMaterialResponse
+    , listCourseWorkMaterialResponse
+    , lcwmrCourseWorkMaterial
+    , lcwmrNextPageToken
+
+    -- ** UserProFilesGuardianInvitationsListStates
+    , UserProFilesGuardianInvitationsListStates (..)
+
     -- ** Student
     , Student
     , student
@@ -712,64 +780,69 @@ module Network.Google.Classroom
     , rCloudPubsubTopic
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Classroom.Courses.Aliases.Create
-import           Network.Google.Resource.Classroom.Courses.Aliases.Delete
-import           Network.Google.Resource.Classroom.Courses.Aliases.List
-import           Network.Google.Resource.Classroom.Courses.Announcements.Create
-import           Network.Google.Resource.Classroom.Courses.Announcements.Delete
-import           Network.Google.Resource.Classroom.Courses.Announcements.Get
-import           Network.Google.Resource.Classroom.Courses.Announcements.List
-import           Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
-import           Network.Google.Resource.Classroom.Courses.Announcements.Patch
-import           Network.Google.Resource.Classroom.Courses.CourseWork.Create
-import           Network.Google.Resource.Classroom.Courses.CourseWork.Delete
-import           Network.Google.Resource.Classroom.Courses.CourseWork.Get
-import           Network.Google.Resource.Classroom.Courses.CourseWork.List
-import           Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
-import           Network.Google.Resource.Classroom.Courses.CourseWork.Patch
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
-import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
-import           Network.Google.Resource.Classroom.Courses.Create
-import           Network.Google.Resource.Classroom.Courses.Delete
-import           Network.Google.Resource.Classroom.Courses.Get
-import           Network.Google.Resource.Classroom.Courses.List
-import           Network.Google.Resource.Classroom.Courses.Patch
-import           Network.Google.Resource.Classroom.Courses.Students.Create
-import           Network.Google.Resource.Classroom.Courses.Students.Delete
-import           Network.Google.Resource.Classroom.Courses.Students.Get
-import           Network.Google.Resource.Classroom.Courses.Students.List
-import           Network.Google.Resource.Classroom.Courses.Teachers.Create
-import           Network.Google.Resource.Classroom.Courses.Teachers.Delete
-import           Network.Google.Resource.Classroom.Courses.Teachers.Get
-import           Network.Google.Resource.Classroom.Courses.Teachers.List
-import           Network.Google.Resource.Classroom.Courses.Topics.Create
-import           Network.Google.Resource.Classroom.Courses.Topics.Delete
-import           Network.Google.Resource.Classroom.Courses.Topics.Get
-import           Network.Google.Resource.Classroom.Courses.Topics.List
-import           Network.Google.Resource.Classroom.Courses.Topics.Patch
-import           Network.Google.Resource.Classroom.Courses.Update
-import           Network.Google.Resource.Classroom.Invitations.Accept
-import           Network.Google.Resource.Classroom.Invitations.Create
-import           Network.Google.Resource.Classroom.Invitations.Delete
-import           Network.Google.Resource.Classroom.Invitations.Get
-import           Network.Google.Resource.Classroom.Invitations.List
-import           Network.Google.Resource.Classroom.Registrations.Create
-import           Network.Google.Resource.Classroom.Registrations.Delete
-import           Network.Google.Resource.Classroom.UserProFiles.Get
-import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
-import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
-import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
-import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
-import           Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
-import           Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
-import           Network.Google.Resource.Classroom.UserProFiles.Guardians.List
+import Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Resource.Classroom.Courses.Aliases.Create
+import Network.Google.Resource.Classroom.Courses.Aliases.Delete
+import Network.Google.Resource.Classroom.Courses.Aliases.List
+import Network.Google.Resource.Classroom.Courses.Announcements.Create
+import Network.Google.Resource.Classroom.Courses.Announcements.Delete
+import Network.Google.Resource.Classroom.Courses.Announcements.Get
+import Network.Google.Resource.Classroom.Courses.Announcements.List
+import Network.Google.Resource.Classroom.Courses.Announcements.ModifyAssignees
+import Network.Google.Resource.Classroom.Courses.Announcements.Patch
+import Network.Google.Resource.Classroom.Courses.CourseWork.Create
+import Network.Google.Resource.Classroom.Courses.CourseWork.Delete
+import Network.Google.Resource.Classroom.Courses.CourseWork.Get
+import Network.Google.Resource.Classroom.Courses.CourseWork.List
+import Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
+import Network.Google.Resource.Classroom.Courses.CourseWork.Patch
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
+import Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
+import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Create
+import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Delete
+import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Get
+import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.List
+import Network.Google.Resource.Classroom.Courses.CourseWorkMaterials.Patch
+import Network.Google.Resource.Classroom.Courses.Create
+import Network.Google.Resource.Classroom.Courses.Delete
+import Network.Google.Resource.Classroom.Courses.Get
+import Network.Google.Resource.Classroom.Courses.List
+import Network.Google.Resource.Classroom.Courses.Patch
+import Network.Google.Resource.Classroom.Courses.Students.Create
+import Network.Google.Resource.Classroom.Courses.Students.Delete
+import Network.Google.Resource.Classroom.Courses.Students.Get
+import Network.Google.Resource.Classroom.Courses.Students.List
+import Network.Google.Resource.Classroom.Courses.Teachers.Create
+import Network.Google.Resource.Classroom.Courses.Teachers.Delete
+import Network.Google.Resource.Classroom.Courses.Teachers.Get
+import Network.Google.Resource.Classroom.Courses.Teachers.List
+import Network.Google.Resource.Classroom.Courses.Topics.Create
+import Network.Google.Resource.Classroom.Courses.Topics.Delete
+import Network.Google.Resource.Classroom.Courses.Topics.Get
+import Network.Google.Resource.Classroom.Courses.Topics.List
+import Network.Google.Resource.Classroom.Courses.Topics.Patch
+import Network.Google.Resource.Classroom.Courses.Update
+import Network.Google.Resource.Classroom.Invitations.Accept
+import Network.Google.Resource.Classroom.Invitations.Create
+import Network.Google.Resource.Classroom.Invitations.Delete
+import Network.Google.Resource.Classroom.Invitations.Get
+import Network.Google.Resource.Classroom.Invitations.List
+import Network.Google.Resource.Classroom.Registrations.Create
+import Network.Google.Resource.Classroom.Registrations.Delete
+import Network.Google.Resource.Classroom.UserProFiles.Get
+import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
+import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
+import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
+import Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
+import Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
+import Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
+import Network.Google.Resource.Classroom.UserProFiles.Guardians.List
 
 {- $resources
 TODO
@@ -799,6 +872,11 @@ type ClassroomAPI =
        :<|> CoursesCourseWorkCreateResource
        :<|> CoursesCourseWorkModifyAssigneesResource
        :<|> CoursesCourseWorkDeleteResource
+       :<|> CoursesCourseWorkMaterialsListResource
+       :<|> CoursesCourseWorkMaterialsPatchResource
+       :<|> CoursesCourseWorkMaterialsGetResource
+       :<|> CoursesCourseWorkMaterialsCreateResource
+       :<|> CoursesCourseWorkMaterialsDeleteResource
        :<|> CoursesTeachersListResource
        :<|> CoursesTeachersGetResource
        :<|> CoursesTeachersCreateResource

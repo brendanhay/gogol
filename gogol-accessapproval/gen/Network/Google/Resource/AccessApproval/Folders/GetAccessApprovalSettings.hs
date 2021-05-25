@@ -41,13 +41,13 @@ module Network.Google.Resource.AccessApproval.Folders.GetAccessApprovalSettings
     , fgaasCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.folders.getAccessApprovalSettings@ method which the
 -- 'FoldersGetAccessApprovalSettings' request conforms to.
 type FoldersGetAccessApprovalSettingsResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,12 +62,12 @@ type FoldersGetAccessApprovalSettingsResource =
 -- /See:/ 'foldersGetAccessApprovalSettings' smart constructor.
 data FoldersGetAccessApprovalSettings =
   FoldersGetAccessApprovalSettings'
-    { _fgaasXgafv          :: !(Maybe Xgafv)
+    { _fgaasXgafv :: !(Maybe Xgafv)
     , _fgaasUploadProtocol :: !(Maybe Text)
-    , _fgaasAccessToken    :: !(Maybe Text)
-    , _fgaasUploadType     :: !(Maybe Text)
-    , _fgaasName           :: !Text
-    , _fgaasCallback       :: !(Maybe Text)
+    , _fgaasAccessToken :: !(Maybe Text)
+    , _fgaasUploadType :: !(Maybe Text)
+    , _fgaasName :: !Text
+    , _fgaasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

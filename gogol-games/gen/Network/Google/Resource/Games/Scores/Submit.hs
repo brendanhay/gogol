@@ -22,7 +22,7 @@
 --
 -- Submits a score to the specified leaderboard.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.submit@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference> for @games.scores.submit@.
 module Network.Google.Resource.Games.Scores.Submit
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.Games.Scores.Submit
     , ScoresSubmit
 
     -- * Request Lenses
+    , ssXgafv
+    , ssUploadProtocol
     , ssScoreTag
     , ssScore
+    , ssAccessToken
+    , ssUploadType
     , ssLeaderboardId
     , ssLanguage
+    , ssCallback
     ) where
 
-import           Network.Google.Games.Types
-import           Network.Google.Prelude
+import Network.Google.Games.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @games.scores.submit@ method which the
 -- 'ScoresSubmit' request conforms to.
@@ -51,20 +56,30 @@ type ScoresSubmitResource =
            Capture "leaderboardId" Text :>
              "scores" :>
                QueryParam "score" (Textual Int64) :>
-                 QueryParam "scoreTag" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] PlayerScoreResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "scoreTag" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "language" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Post '[JSON] PlayerScoreResponse
 
 -- | Submits a score to the specified leaderboard.
 --
 -- /See:/ 'scoresSubmit' smart constructor.
 data ScoresSubmit =
   ScoresSubmit'
-    { _ssScoreTag      :: !(Maybe Text)
-    , _ssScore         :: !(Textual Int64)
+    { _ssXgafv :: !(Maybe Xgafv)
+    , _ssUploadProtocol :: !(Maybe Text)
+    , _ssScoreTag :: !(Maybe Text)
+    , _ssScore :: !(Textual Int64)
+    , _ssAccessToken :: !(Maybe Text)
+    , _ssUploadType :: !(Maybe Text)
     , _ssLeaderboardId :: !Text
-    , _ssLanguage      :: !(Maybe Text)
+    , _ssLanguage :: !(Maybe Text)
+    , _ssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,25 +88,50 @@ data ScoresSubmit =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ssXgafv'
+--
+-- * 'ssUploadProtocol'
+--
 -- * 'ssScoreTag'
 --
 -- * 'ssScore'
 --
+-- * 'ssAccessToken'
+--
+-- * 'ssUploadType'
+--
 -- * 'ssLeaderboardId'
 --
 -- * 'ssLanguage'
+--
+-- * 'ssCallback'
 scoresSubmit
     :: Int64 -- ^ 'ssScore'
     -> Text -- ^ 'ssLeaderboardId'
     -> ScoresSubmit
 scoresSubmit pSsScore_ pSsLeaderboardId_ =
   ScoresSubmit'
-    { _ssScoreTag = Nothing
+    { _ssXgafv = Nothing
+    , _ssUploadProtocol = Nothing
+    , _ssScoreTag = Nothing
     , _ssScore = _Coerce # pSsScore_
+    , _ssAccessToken = Nothing
+    , _ssUploadType = Nothing
     , _ssLeaderboardId = pSsLeaderboardId_
     , _ssLanguage = Nothing
+    , _ssCallback = Nothing
     }
 
+
+-- | V1 error format.
+ssXgafv :: Lens' ScoresSubmit (Maybe Xgafv)
+ssXgafv = lens _ssXgafv (\ s a -> s{_ssXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ssUploadProtocol :: Lens' ScoresSubmit (Maybe Text)
+ssUploadProtocol
+  = lens _ssUploadProtocol
+      (\ s a -> s{_ssUploadProtocol = a})
 
 -- | Additional information about the score you\'re submitting. Values must
 -- contain no more than 64 URI-safe characters as defined by section 2.3 of
@@ -110,6 +150,17 @@ ssScore :: Lens' ScoresSubmit Int64
 ssScore
   = lens _ssScore (\ s a -> s{_ssScore = a}) . _Coerce
 
+-- | OAuth access token.
+ssAccessToken :: Lens' ScoresSubmit (Maybe Text)
+ssAccessToken
+  = lens _ssAccessToken
+      (\ s a -> s{_ssAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ssUploadType :: Lens' ScoresSubmit (Maybe Text)
+ssUploadType
+  = lens _ssUploadType (\ s a -> s{_ssUploadType = a})
+
 -- | The ID of the leaderboard.
 ssLeaderboardId :: Lens' ScoresSubmit Text
 ssLeaderboardId
@@ -121,14 +172,23 @@ ssLanguage :: Lens' ScoresSubmit (Maybe Text)
 ssLanguage
   = lens _ssLanguage (\ s a -> s{_ssLanguage = a})
 
+-- | JSONP
+ssCallback :: Lens' ScoresSubmit (Maybe Text)
+ssCallback
+  = lens _ssCallback (\ s a -> s{_ssCallback = a})
+
 instance GoogleRequest ScoresSubmit where
         type Rs ScoresSubmit = PlayerScoreResponse
         type Scopes ScoresSubmit =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.me"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ScoresSubmit'{..}
-          = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
+          = go _ssLeaderboardId (Just _ssScore) _ssXgafv
+              _ssUploadProtocol
+              _ssScoreTag
+              _ssAccessToken
+              _ssUploadType
               _ssLanguage
+              _ssCallback
               (Just AltJSON)
               gamesService
           where go

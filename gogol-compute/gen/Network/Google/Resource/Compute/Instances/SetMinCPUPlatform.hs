@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.Instances.SetMinCPUPlatform
     , ismcpInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setMinCpuPlatform@ method which the
 -- 'InstancesSetMinCPUPlatform' request conforms to.
@@ -70,10 +70,10 @@ type InstancesSetMinCPUPlatformResource =
 data InstancesSetMinCPUPlatform =
   InstancesSetMinCPUPlatform'
     { _ismcpRequestId :: !(Maybe Text)
-    , _ismcpProject   :: !Text
-    , _ismcpZone      :: !Text
-    , _ismcpPayload   :: !InstancesSetMinCPUPlatformRequest
-    , _ismcpInstance  :: !Text
+    , _ismcpProject :: !Text
+    , _ismcpZone :: !Text
+    , _ismcpPayload :: !InstancesSetMinCPUPlatformRequest
+    , _ismcpInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

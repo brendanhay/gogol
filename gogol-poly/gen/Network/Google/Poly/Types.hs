@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -45,6 +45,9 @@ module Network.Google.Poly.Types
     , llarNextPageToken
     , llarTotalSize
     , llarAssets
+
+    -- * UsersAssetsListVisibility
+    , UsersAssetsListVisibility (..)
 
     -- * RemixInfo
     , RemixInfo
@@ -152,15 +155,18 @@ module Network.Google.Poly.Types
     , fRelativePath
     , fContentType
 
+    -- * AssetsListMaxComplexity
+    , AssetsListMaxComplexity (..)
+
     -- * UserAsset
     , UserAsset
     , userAsset
     , uaAsset
     ) where
 
-import           Network.Google.Poly.Types.Product
-import           Network.Google.Poly.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Poly.Types.Product
+import Network.Google.Poly.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Poly API. This contains the host and root path used as a starting point for constructing service requests.
 polyService :: ServiceConfig

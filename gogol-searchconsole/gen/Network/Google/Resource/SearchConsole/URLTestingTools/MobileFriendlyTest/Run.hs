@@ -22,7 +22,7 @@
 --
 -- Runs Mobile-Friendly Test for a given URL.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console URL Testing Tools API Reference> for @searchconsole.urlTestingTools.mobileFriendlyTest.run@.
+-- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @searchconsole.urlTestingTools.mobileFriendlyTest.run@.
 module Network.Google.Resource.SearchConsole.URLTestingTools.MobileFriendlyTest.Run
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.SearchConsole.URLTestingTools.MobileFriendlyTest.
     , uttmftrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SearchConsole.Types
+import Network.Google.Prelude
+import Network.Google.SearchConsole.Types
 
 -- | A resource alias for @searchconsole.urlTestingTools.mobileFriendlyTest.run@ method which the
 -- 'URLTestingToolsMobileFriendlyTestRun' request conforms to.
@@ -64,12 +64,12 @@ type URLTestingToolsMobileFriendlyTestRunResource =
 -- /See:/ 'urlTestingToolsMobileFriendlyTestRun' smart constructor.
 data URLTestingToolsMobileFriendlyTestRun =
   URLTestingToolsMobileFriendlyTestRun'
-    { _uttmftrXgafv          :: !(Maybe Xgafv)
+    { _uttmftrXgafv :: !(Maybe Xgafv)
     , _uttmftrUploadProtocol :: !(Maybe Text)
-    , _uttmftrAccessToken    :: !(Maybe Text)
-    , _uttmftrUploadType     :: !(Maybe Text)
-    , _uttmftrPayload        :: !RunMobileFriendlyTestRequest
-    , _uttmftrCallback       :: !(Maybe Text)
+    , _uttmftrAccessToken :: !(Maybe Text)
+    , _uttmftrUploadType :: !(Maybe Text)
+    , _uttmftrPayload :: !RunMobileFriendlyTestRequest
+    , _uttmftrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

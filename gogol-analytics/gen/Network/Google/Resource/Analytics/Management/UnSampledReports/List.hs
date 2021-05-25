@@ -40,8 +40,8 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.List
     , musrlMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.unsampledReports.list@ method which the
 -- 'ManagementUnSampledReportsList' request conforms to.
@@ -67,10 +67,10 @@ type ManagementUnSampledReportsListResource =
 data ManagementUnSampledReportsList =
   ManagementUnSampledReportsList'
     { _musrlWebPropertyId :: !Text
-    , _musrlProFileId     :: !Text
-    , _musrlAccountId     :: !Text
-    , _musrlStartIndex    :: !(Maybe (Textual Int32))
-    , _musrlMaxResults    :: !(Maybe (Textual Int32))
+    , _musrlProFileId :: !Text
+    , _musrlAccountId :: !Text
+    , _musrlStartIndex :: !(Maybe (Textual Int32))
+    , _musrlMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

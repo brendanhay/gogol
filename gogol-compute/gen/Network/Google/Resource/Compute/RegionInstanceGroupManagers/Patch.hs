@@ -46,8 +46,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Patch
     , rigmpRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.patch@ method which the
 -- 'RegionInstanceGroupManagersPatch' request conforms to.
@@ -76,11 +76,11 @@ type RegionInstanceGroupManagersPatchResource =
 -- /See:/ 'regionInstanceGroupManagersPatch' smart constructor.
 data RegionInstanceGroupManagersPatch =
   RegionInstanceGroupManagersPatch'
-    { _rigmpRequestId            :: !(Maybe Text)
-    , _rigmpProject              :: !Text
+    { _rigmpRequestId :: !(Maybe Text)
+    , _rigmpProject :: !Text
     , _rigmpInstanceGroupManager :: !Text
-    , _rigmpPayload              :: !InstanceGroupManager
-    , _rigmpRegion               :: !Text
+    , _rigmpPayload :: !InstanceGroupManager
+    , _rigmpRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

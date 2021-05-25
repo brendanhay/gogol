@@ -41,20 +41,28 @@ library
         , Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Get
         , Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.List
         , Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.Patch
+        , Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.ReplaceAll
         , Network.Google.Resource.AccessContextManager.AccessPolicies.Create
         , Network.Google.Resource.AccessContextManager.AccessPolicies.Delete
         , Network.Google.Resource.AccessContextManager.AccessPolicies.Get
         , Network.Google.Resource.AccessContextManager.AccessPolicies.List
         , Network.Google.Resource.AccessContextManager.AccessPolicies.Patch
+        , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Create
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Get
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.List
         , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
+        , Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
         , Network.Google.Resource.AccessContextManager.Operations.Cancel
         , Network.Google.Resource.AccessContextManager.Operations.Delete
         , Network.Google.Resource.AccessContextManager.Operations.Get
         , Network.Google.Resource.AccessContextManager.Operations.List
+        , Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Create
+        , Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
+        , Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Get
+        , Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.List
+        , Network.Google.Resource.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
 
     other-modules:
           Network.Google.AccessContextManager.Types.Product

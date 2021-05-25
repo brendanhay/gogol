@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.GlobalOperations.List
     , GlobalOperationsList
 
     -- * Request Lenses
+    , golReturnPartialSuccess
     , golOrderBy
     , golProject
     , golFilter
@@ -41,8 +42,8 @@ module Network.Google.Resource.Compute.GlobalOperations.List
     , golMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalOperations.list@ method which the
 -- 'GlobalOperationsList' request conforms to.
@@ -53,11 +54,12 @@ type GlobalOperationsListResource =
            Capture "project" Text :>
              "global" :>
                "operations" :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] OperationList
+                 QueryParam "returnPartialSuccess" Bool :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves a list of Operation resources contained within the specified
 -- project.
@@ -65,10 +67,11 @@ type GlobalOperationsListResource =
 -- /See:/ 'globalOperationsList' smart constructor.
 data GlobalOperationsList =
   GlobalOperationsList'
-    { _golOrderBy    :: !(Maybe Text)
-    , _golProject    :: !Text
-    , _golFilter     :: !(Maybe Text)
-    , _golPageToken  :: !(Maybe Text)
+    { _golReturnPartialSuccess :: !(Maybe Bool)
+    , _golOrderBy :: !(Maybe Text)
+    , _golProject :: !Text
+    , _golFilter :: !(Maybe Text)
+    , _golPageToken :: !(Maybe Text)
     , _golMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -77,6 +80,8 @@ data GlobalOperationsList =
 -- | Creates a value of 'GlobalOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'golReturnPartialSuccess'
 --
 -- * 'golOrderBy'
 --
@@ -92,7 +97,8 @@ globalOperationsList
     -> GlobalOperationsList
 globalOperationsList pGolProject_ =
   GlobalOperationsList'
-    { _golOrderBy = Nothing
+    { _golReturnPartialSuccess = Nothing
+    , _golOrderBy = Nothing
     , _golProject = pGolProject_
     , _golFilter = Nothing
     , _golPageToken = Nothing
@@ -100,14 +106,21 @@ globalOperationsList pGolProject_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+golReturnPartialSuccess :: Lens' GlobalOperationsList (Maybe Bool)
+golReturnPartialSuccess
+  = lens _golReturnPartialSuccess
+      (\ s a -> s{_golReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 golOrderBy :: Lens' GlobalOperationsList (Maybe Text)
 golOrderBy
   = lens _golOrderBy (\ s a -> s{_golOrderBy = a})
@@ -120,34 +133,36 @@ golProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 golFilter :: Lens' GlobalOperationsList (Maybe Text)
 golFilter
   = lens _golFilter (\ s a -> s{_golFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 golPageToken :: Lens' GlobalOperationsList (Maybe Text)
 golPageToken
   = lens _golPageToken (\ s a -> s{_golPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 golMaxResults :: Lens' GlobalOperationsList Word32
 golMaxResults
   = lens _golMaxResults
@@ -161,7 +176,9 @@ instance GoogleRequest GlobalOperationsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalOperationsList'{..}
-          = go _golProject _golOrderBy _golFilter _golPageToken
+          = go _golProject _golReturnPartialSuccess _golOrderBy
+              _golFilter
+              _golPageToken
               (Just _golMaxResults)
               (Just AltJSON)
               computeService

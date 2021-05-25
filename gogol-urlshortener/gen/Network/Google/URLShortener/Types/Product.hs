@@ -17,19 +17,19 @@
 --
 module Network.Google.URLShortener.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.URLShortener.Types.Sum
+import Network.Google.Prelude
+import Network.Google.URLShortener.Types.Sum
 
 --
 -- /See:/ 'url' smart constructor.
 data URL =
   URL'
-    { _uStatus    :: !(Maybe Text)
-    , _uKind      :: !Text
-    , _uCreated   :: !(Maybe Text)
+    { _uStatus :: !(Maybe Text)
+    , _uKind :: !Text
+    , _uCreated :: !(Maybe Text)
     , _uAnalytics :: !(Maybe AnalyticsSummary)
-    , _uLongURL   :: !(Maybe Text)
-    , _uId        :: !(Maybe Text)
+    , _uLongURL :: !(Maybe Text)
+    , _uId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -119,7 +119,7 @@ instance ToJSON URL where
 data StringCount =
   StringCount'
     { _scCount :: !(Maybe (Textual Int64))
-    , _scId    :: !(Maybe Text)
+    , _scId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -163,12 +163,12 @@ instance ToJSON StringCount where
 -- /See:/ 'analyticsSnapshot' smart constructor.
 data AnalyticsSnapshot =
   AnalyticsSnapshot'
-    { _asPlatforms      :: !(Maybe [StringCount])
+    { _asPlatforms :: !(Maybe [StringCount])
     , _asShortURLClicks :: !(Maybe (Textual Int64))
-    , _asReferrers      :: !(Maybe [StringCount])
-    , _asCountries      :: !(Maybe [StringCount])
-    , _asLongURLClicks  :: !(Maybe (Textual Int64))
-    , _asBrowsers       :: !(Maybe [StringCount])
+    , _asReferrers :: !(Maybe [StringCount])
+    , _asCountries :: !(Maybe [StringCount])
+    , _asLongURLClicks :: !(Maybe (Textual Int64))
+    , _asBrowsers :: !(Maybe [StringCount])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -275,11 +275,11 @@ instance ToJSON AnalyticsSnapshot where
 -- /See:/ 'analyticsSummary' smart constructor.
 data AnalyticsSummary =
   AnalyticsSummary'
-    { _asWeek     :: !(Maybe AnalyticsSnapshot)
-    , _asAllTime  :: !(Maybe AnalyticsSnapshot)
-    , _asDay      :: !(Maybe AnalyticsSnapshot)
+    { _asWeek :: !(Maybe AnalyticsSnapshot)
+    , _asAllTime :: !(Maybe AnalyticsSnapshot)
+    , _asDay :: !(Maybe AnalyticsSnapshot)
     , _asTwoHours :: !(Maybe AnalyticsSnapshot)
-    , _asMonth    :: !(Maybe AnalyticsSnapshot)
+    , _asMonth :: !(Maybe AnalyticsSnapshot)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -354,11 +354,11 @@ instance ToJSON AnalyticsSummary where
 -- /See:/ 'urlHistory' smart constructor.
 data URLHistory =
   URLHistory'
-    { _uhTotalItems    :: !(Maybe (Textual Int32))
+    { _uhTotalItems :: !(Maybe (Textual Int32))
     , _uhNextPageToken :: !(Maybe Text)
-    , _uhItemsPerPage  :: !(Maybe (Textual Int32))
-    , _uhKind          :: !Text
-    , _uhItems         :: !(Maybe [URL])
+    , _uhItemsPerPage :: !(Maybe (Textual Int32))
+    , _uhKind :: !Text
+    , _uhItems :: !(Maybe [URL])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

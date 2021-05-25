@@ -49,8 +49,8 @@ module Network.Google.Resource.Partners.Users.Get
     , ugCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.users.get@ method which the
 -- 'UsersGet' request conforms to.
@@ -90,20 +90,20 @@ type UsersGetResource =
 -- /See:/ 'usersGet' smart constructor.
 data UsersGet =
   UsersGet'
-    { _ugXgafv                                       :: !(Maybe Xgafv)
-    , _ugUploadProtocol                              :: !(Maybe Text)
-    , _ugAccessToken                                 :: !(Maybe Text)
-    , _ugUploadType                                  :: !(Maybe Text)
-    , _ugUserId                                      :: !Text
-    , _ugRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _ugUserView                                    :: !(Maybe Text)
-    , _ugRequestMetadataLocale                       :: !(Maybe Text)
-    , _ugRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _ugRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _ugRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _ugRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _ugXgafv :: !(Maybe Xgafv)
+    , _ugUploadProtocol :: !(Maybe Text)
+    , _ugAccessToken :: !(Maybe Text)
+    , _ugUploadType :: !(Maybe Text)
+    , _ugUserId :: !Text
+    , _ugRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _ugUserView :: !(Maybe Text)
+    , _ugRequestMetadataLocale :: !(Maybe Text)
+    , _ugRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _ugRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _ugRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _ugRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _ugRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _ugCallback                                    :: !(Maybe Text)
+    , _ugCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

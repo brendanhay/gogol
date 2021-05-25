@@ -41,8 +41,8 @@ module Network.Google.Resource.AnalyticsReporting.Reports.BatchGet
     , rbgCallback
     ) where
 
-import           Network.Google.AnalyticsReporting.Types
-import           Network.Google.Prelude
+import Network.Google.AnalyticsReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analyticsreporting.reports.batchGet@ method which the
 -- 'ReportsBatchGet' request conforms to.
@@ -63,12 +63,12 @@ type ReportsBatchGetResource =
 -- /See:/ 'reportsBatchGet' smart constructor.
 data ReportsBatchGet =
   ReportsBatchGet'
-    { _rbgXgafv          :: !(Maybe Xgafv)
+    { _rbgXgafv :: !(Maybe Xgafv)
     , _rbgUploadProtocol :: !(Maybe Text)
-    , _rbgAccessToken    :: !(Maybe Text)
-    , _rbgUploadType     :: !(Maybe Text)
-    , _rbgPayload        :: !GetReportsRequest
-    , _rbgCallback       :: !(Maybe Text)
+    , _rbgAccessToken :: !(Maybe Text)
+    , _rbgUploadType :: !(Maybe Text)
+    , _rbgPayload :: !GetReportsRequest
+    , _rbgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

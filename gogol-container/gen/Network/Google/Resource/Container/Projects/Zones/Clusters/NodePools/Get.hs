@@ -45,8 +45,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
     , pzcnpgCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.get@ method which the
 -- 'ProjectsZonesClustersNodePoolsGet' request conforms to.
@@ -74,16 +74,16 @@ type ProjectsZonesClustersNodePoolsGetResource =
 -- /See:/ 'projectsZonesClustersNodePoolsGet' smart constructor.
 data ProjectsZonesClustersNodePoolsGet =
   ProjectsZonesClustersNodePoolsGet'
-    { _pzcnpgXgafv          :: !(Maybe Xgafv)
+    { _pzcnpgXgafv :: !(Maybe Xgafv)
     , _pzcnpgUploadProtocol :: !(Maybe Text)
-    , _pzcnpgAccessToken    :: !(Maybe Text)
-    , _pzcnpgUploadType     :: !(Maybe Text)
-    , _pzcnpgZone           :: !Text
-    , _pzcnpgNodePoolId     :: !Text
-    , _pzcnpgName           :: !(Maybe Text)
-    , _pzcnpgClusterId      :: !Text
-    , _pzcnpgProjectId      :: !Text
-    , _pzcnpgCallback       :: !(Maybe Text)
+    , _pzcnpgAccessToken :: !(Maybe Text)
+    , _pzcnpgUploadType :: !(Maybe Text)
+    , _pzcnpgZone :: !Text
+    , _pzcnpgNodePoolId :: !Text
+    , _pzcnpgName :: !(Maybe Text)
+    , _pzcnpgClusterId :: !Text
+    , _pzcnpgProjectId :: !Text
+    , _pzcnpgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -156,8 +156,9 @@ pzcnpgUploadType
       (\ s a -> s{_pzcnpgUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcnpgZone :: Lens' ProjectsZonesClustersNodePoolsGet Text
 pzcnpgZone
   = lens _pzcnpgZone (\ s a -> s{_pzcnpgZone = a})
@@ -171,7 +172,7 @@ pzcnpgNodePoolId
 
 -- | The name (project, location, cluster, node pool id) of the node pool to
 -- get. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\/nodePools\/*\`.
 pzcnpgName :: Lens' ProjectsZonesClustersNodePoolsGet (Maybe Text)
 pzcnpgName
   = lens _pzcnpgName (\ s a -> s{_pzcnpgName = a})

@@ -39,8 +39,8 @@ module Network.Google.Resource.AppState.States.Clear
     , scCurrentDataVersion
     ) where
 
-import           Network.Google.AppState.Types
-import           Network.Google.Prelude
+import Network.Google.AppState.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.clear@ method which the
 -- 'StatesClear' request conforms to.
@@ -60,7 +60,7 @@ type StatesClearResource =
 -- /See:/ 'statesClear' smart constructor.
 data StatesClear =
   StatesClear'
-    { _scStateKey           :: !(Textual Int32)
+    { _scStateKey :: !(Textual Int32)
     , _scCurrentDataVersion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

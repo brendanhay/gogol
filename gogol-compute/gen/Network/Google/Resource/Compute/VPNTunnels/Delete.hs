@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
     , vtdRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.delete@ method which the
 -- 'VPNTunnelsDelete' request conforms to.
@@ -62,9 +62,9 @@ type VPNTunnelsDeleteResource =
 data VPNTunnelsDelete =
   VPNTunnelsDelete'
     { _vtdRequestId :: !(Maybe Text)
-    , _vtdProject   :: !Text
+    , _vtdProject :: !Text
     , _vtdVPNTunnel :: !Text
-    , _vtdRegion    :: !Text
+    , _vtdRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

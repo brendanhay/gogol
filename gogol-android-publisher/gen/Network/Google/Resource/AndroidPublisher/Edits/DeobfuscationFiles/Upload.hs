@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uploads the deobfuscation file of the specified APK. If a deobfuscation
--- file already exists, it will be replaced.
+-- Uploads a new deobfuscation file and attaches to the specified APK.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.deobfuscationfiles.upload@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.deobfuscationfiles.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
     (
     -- * REST Resource
@@ -35,13 +34,18 @@ module Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
 
     -- * Request Lenses
     , edfuDeobfuscationFileType
+    , edfuXgafv
+    , edfuUploadProtocol
     , edfuPackageName
     , edfuAPKVersionCode
+    , edfuAccessToken
+    , edfuUploadType
     , edfuEditId
+    , edfuCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.deobfuscationfiles.upload@ method which the
 -- 'EditsDeobfuscationFilesUpload' request conforms to.
@@ -58,8 +62,14 @@ type EditsDeobfuscationFilesUploadResource =
                        Capture "deobfuscationFileType"
                          EditsDeobfuscationFilesUploadDeobfuscationFileType
                          :>
-                         QueryParam "alt" AltJSON :>
-                           Post '[JSON] DeobfuscationFilesUploadResponse
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Post '[JSON]
+                                       DeobfuscationFilesUploadResponse
        :<|>
        "upload" :>
          "androidpublisher" :>
@@ -74,21 +84,31 @@ type EditsDeobfuscationFilesUploadResource =
                            Capture "deobfuscationFileType"
                              EditsDeobfuscationFilesUploadDeobfuscationFileType
                              :>
-                             QueryParam "alt" AltJSON :>
-                               QueryParam "uploadType" AltMedia :>
-                                 AltMedia :>
-                                   Post '[JSON] DeobfuscationFilesUploadResponse
+                             QueryParam "$.xgafv" Xgafv :>
+                               QueryParam "upload_protocol" Text :>
+                                 QueryParam "access_token" Text :>
+                                   QueryParam "uploadType" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         QueryParam "uploadType" AltMedia :>
+                                           AltMedia :>
+                                             Post '[JSON]
+                                               DeobfuscationFilesUploadResponse
 
--- | Uploads the deobfuscation file of the specified APK. If a deobfuscation
--- file already exists, it will be replaced.
+-- | Uploads a new deobfuscation file and attaches to the specified APK.
 --
 -- /See:/ 'editsDeobfuscationFilesUpload' smart constructor.
 data EditsDeobfuscationFilesUpload =
   EditsDeobfuscationFilesUpload'
     { _edfuDeobfuscationFileType :: !EditsDeobfuscationFilesUploadDeobfuscationFileType
-    , _edfuPackageName           :: !Text
-    , _edfuAPKVersionCode        :: !(Textual Int32)
-    , _edfuEditId                :: !Text
+    , _edfuXgafv :: !(Maybe Xgafv)
+    , _edfuUploadProtocol :: !(Maybe Text)
+    , _edfuPackageName :: !Text
+    , _edfuAPKVersionCode :: !(Textual Int32)
+    , _edfuAccessToken :: !(Maybe Text)
+    , _edfuUploadType :: !(Maybe Text)
+    , _edfuEditId :: !Text
+    , _edfuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,11 +119,21 @@ data EditsDeobfuscationFilesUpload =
 --
 -- * 'edfuDeobfuscationFileType'
 --
+-- * 'edfuXgafv'
+--
+-- * 'edfuUploadProtocol'
+--
 -- * 'edfuPackageName'
 --
 -- * 'edfuAPKVersionCode'
 --
+-- * 'edfuAccessToken'
+--
+-- * 'edfuUploadType'
+--
 -- * 'edfuEditId'
+--
+-- * 'edfuCallback'
 editsDeobfuscationFilesUpload
     :: EditsDeobfuscationFilesUploadDeobfuscationFileType -- ^ 'edfuDeobfuscationFileType'
     -> Text -- ^ 'edfuPackageName'
@@ -113,35 +143,68 @@ editsDeobfuscationFilesUpload
 editsDeobfuscationFilesUpload pEdfuDeobfuscationFileType_ pEdfuPackageName_ pEdfuAPKVersionCode_ pEdfuEditId_ =
   EditsDeobfuscationFilesUpload'
     { _edfuDeobfuscationFileType = pEdfuDeobfuscationFileType_
+    , _edfuXgafv = Nothing
+    , _edfuUploadProtocol = Nothing
     , _edfuPackageName = pEdfuPackageName_
     , _edfuAPKVersionCode = _Coerce # pEdfuAPKVersionCode_
+    , _edfuAccessToken = Nothing
+    , _edfuUploadType = Nothing
     , _edfuEditId = pEdfuEditId_
+    , _edfuCallback = Nothing
     }
 
 
+-- | The type of the deobfuscation file.
 edfuDeobfuscationFileType :: Lens' EditsDeobfuscationFilesUpload EditsDeobfuscationFilesUploadDeobfuscationFileType
 edfuDeobfuscationFileType
   = lens _edfuDeobfuscationFileType
       (\ s a -> s{_edfuDeobfuscationFileType = a})
 
--- | Unique identifier of the Android app for which the deobfuscatiuon files
--- are being uploaded; for example, \"com.spiffygame\".
+-- | V1 error format.
+edfuXgafv :: Lens' EditsDeobfuscationFilesUpload (Maybe Xgafv)
+edfuXgafv
+  = lens _edfuXgafv (\ s a -> s{_edfuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+edfuUploadProtocol :: Lens' EditsDeobfuscationFilesUpload (Maybe Text)
+edfuUploadProtocol
+  = lens _edfuUploadProtocol
+      (\ s a -> s{_edfuUploadProtocol = a})
+
+-- | Unique identifier for the Android app.
 edfuPackageName :: Lens' EditsDeobfuscationFilesUpload Text
 edfuPackageName
   = lens _edfuPackageName
       (\ s a -> s{_edfuPackageName = a})
 
--- | The version code of the APK whose deobfuscation file is being uploaded.
+-- | The version code of the APK whose Deobfuscation File is being uploaded.
 edfuAPKVersionCode :: Lens' EditsDeobfuscationFilesUpload Int32
 edfuAPKVersionCode
   = lens _edfuAPKVersionCode
       (\ s a -> s{_edfuAPKVersionCode = a})
       . _Coerce
 
+-- | OAuth access token.
+edfuAccessToken :: Lens' EditsDeobfuscationFilesUpload (Maybe Text)
+edfuAccessToken
+  = lens _edfuAccessToken
+      (\ s a -> s{_edfuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+edfuUploadType :: Lens' EditsDeobfuscationFilesUpload (Maybe Text)
+edfuUploadType
+  = lens _edfuUploadType
+      (\ s a -> s{_edfuUploadType = a})
+
 -- | Unique identifier for this edit.
 edfuEditId :: Lens' EditsDeobfuscationFilesUpload Text
 edfuEditId
   = lens _edfuEditId (\ s a -> s{_edfuEditId = a})
+
+-- | JSONP
+edfuCallback :: Lens' EditsDeobfuscationFilesUpload (Maybe Text)
+edfuCallback
+  = lens _edfuCallback (\ s a -> s{_edfuCallback = a})
 
 instance GoogleRequest EditsDeobfuscationFilesUpload
          where
@@ -152,6 +215,11 @@ instance GoogleRequest EditsDeobfuscationFilesUpload
         requestClient EditsDeobfuscationFilesUpload'{..}
           = go _edfuPackageName _edfuEditId _edfuAPKVersionCode
               _edfuDeobfuscationFileType
+              _edfuXgafv
+              _edfuUploadProtocol
+              _edfuAccessToken
+              _edfuUploadType
+              _edfuCallback
               (Just AltJSON)
               androidPublisherService
           where go :<|> _
@@ -172,6 +240,11 @@ instance GoogleRequest
           (MediaUpload EditsDeobfuscationFilesUpload'{..} body)
           = go _edfuPackageName _edfuEditId _edfuAPKVersionCode
               _edfuDeobfuscationFileType
+              _edfuXgafv
+              _edfuUploadProtocol
+              _edfuAccessToken
+              _edfuUploadType
+              _edfuCallback
               (Just AltJSON)
               (Just AltMedia)
               body

@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Insert
     , uciAdClientId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.urlchannels.insert@ method which the
 -- 'URLChannelsInsert' request conforms to.
@@ -56,7 +56,7 @@ type URLChannelsInsertResource =
 -- /See:/ 'urlChannelsInsert' smart constructor.
 data URLChannelsInsert =
   URLChannelsInsert'
-    { _uciPayload    :: !URLChannel
+    { _uciPayload :: !URLChannel
     , _uciAdClientId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

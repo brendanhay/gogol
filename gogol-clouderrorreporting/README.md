@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Stackdriver Error Reporting.
+A client library for the Google Error Reporting.
 
 
 ## Contribute

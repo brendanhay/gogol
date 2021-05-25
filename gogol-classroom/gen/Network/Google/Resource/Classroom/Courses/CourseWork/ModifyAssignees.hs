@@ -49,8 +49,8 @@ module Network.Google.Resource.Classroom.Courses.CourseWork.ModifyAssignees
     , ccwmaCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.courseWork.modifyAssignees@ method which the
 -- 'CoursesCourseWorkModifyAssignees' request conforms to.
@@ -80,14 +80,14 @@ type CoursesCourseWorkModifyAssigneesResource =
 -- /See:/ 'coursesCourseWorkModifyAssignees' smart constructor.
 data CoursesCourseWorkModifyAssignees =
   CoursesCourseWorkModifyAssignees'
-    { _ccwmaXgafv          :: !(Maybe Xgafv)
+    { _ccwmaXgafv :: !(Maybe Xgafv)
     , _ccwmaUploadProtocol :: !(Maybe Text)
-    , _ccwmaCourseId       :: !Text
-    , _ccwmaAccessToken    :: !(Maybe Text)
-    , _ccwmaUploadType     :: !(Maybe Text)
-    , _ccwmaPayload        :: !ModifyCourseWorkAssigneesRequest
-    , _ccwmaId             :: !Text
-    , _ccwmaCallback       :: !(Maybe Text)
+    , _ccwmaCourseId :: !Text
+    , _ccwmaAccessToken :: !(Maybe Text)
+    , _ccwmaUploadType :: !(Maybe Text)
+    , _ccwmaPayload :: !ModifyCourseWorkAssigneesRequest
+    , _ccwmaId :: !Text
+    , _ccwmaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

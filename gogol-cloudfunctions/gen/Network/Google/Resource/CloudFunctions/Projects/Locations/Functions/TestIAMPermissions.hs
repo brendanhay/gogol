@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.TestI
     , plftipCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.testIamPermissions@ method which the
 -- 'ProjectsLocationsFunctionsTestIAMPermissions' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsLocationsFunctionsTestIAMPermissionsResource
 -- /See:/ 'projectsLocationsFunctionsTestIAMPermissions' smart constructor.
 data ProjectsLocationsFunctionsTestIAMPermissions =
   ProjectsLocationsFunctionsTestIAMPermissions'
-    { _plftipXgafv          :: !(Maybe Xgafv)
+    { _plftipXgafv :: !(Maybe Xgafv)
     , _plftipUploadProtocol :: !(Maybe Text)
-    , _plftipAccessToken    :: !(Maybe Text)
-    , _plftipUploadType     :: !(Maybe Text)
-    , _plftipPayload        :: !TestIAMPermissionsRequest
-    , _plftipResource       :: !Text
-    , _plftipCallback       :: !(Maybe Text)
+    , _plftipAccessToken :: !(Maybe Text)
+    , _plftipUploadType :: !(Maybe Text)
+    , _plftipPayload :: !TestIAMPermissionsRequest
+    , _plftipResource :: !Text
+    , _plftipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

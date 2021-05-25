@@ -47,8 +47,8 @@ module Network.Google.Resource.Genomics.Projects.Operations.List
     , polCallback
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @genomics.projects.operations.list@ method which the
 -- 'ProjectsOperationsList' request conforms to.
@@ -74,15 +74,15 @@ type ProjectsOperationsListResource =
 -- /See:/ 'projectsOperationsList' smart constructor.
 data ProjectsOperationsList =
   ProjectsOperationsList'
-    { _polXgafv          :: !(Maybe Xgafv)
+    { _polXgafv :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
-    , _polAccessToken    :: !(Maybe Text)
-    , _polUploadType     :: !(Maybe Text)
-    , _polName           :: !Text
-    , _polFilter         :: !(Maybe Text)
-    , _polPageToken      :: !(Maybe Text)
-    , _polPageSize       :: !(Maybe (Textual Int32))
-    , _polCallback       :: !(Maybe Text)
+    , _polAccessToken :: !(Maybe Text)
+    , _polUploadType :: !(Maybe Text)
+    , _polName :: !Text
+    , _polFilter :: !(Maybe Text)
+    , _polPageToken :: !(Maybe Text)
+    , _polPageSize :: !(Maybe (Textual Int32))
+    , _polCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -159,18 +159,11 @@ polName = lens _polName (\ s a -> s{_polName = a})
 -- Once the pipeline finishes, the value is the standard Google error code.
 -- * labels.key or labels.\"key with space\" where key is a label key. *
 -- done: If the pipeline is running, this value is false. Once the pipeline
--- finishes, the value is true. In v1 and v1alpha2, the following filter
--- fields are supported: * projectId: Required. Corresponds to
--- OperationMetadata.projectId. * createTime: The time this job was
--- created, in seconds from the
--- [epoch](http:\/\/en.wikipedia.org\/wiki\/Unix_time). Can use \`>=\`
--- and\/or \`\<=\` operators. * status: Can be \`RUNNING\`, \`SUCCESS\`,
--- \`FAILURE\`, or \`CANCELED\`. Only one status may be specified. *
--- labels.key where key is a label key. Examples: * \`projectId =
--- my-project AND createTime >= 1432140000\` * \`projectId = my-project AND
--- createTime >= 1432140000 AND createTime \<= 1432150000 AND status =
--- RUNNING\` * \`projectId = my-project AND labels.color = *\` *
--- \`projectId = my-project AND labels.color = red\`
+-- finishes, the value is true. Examples: * \`projectId = my-project AND
+-- createTime >= 1432140000\` * \`projectId = my-project AND createTime >=
+-- 1432140000 AND createTime \<= 1432150000 AND status = RUNNING\` *
+-- \`projectId = my-project AND labels.color = *\` * \`projectId =
+-- my-project AND labels.color = red\`
 polFilter :: Lens' ProjectsOperationsList (Maybe Text)
 polFilter
   = lens _polFilter (\ s a -> s{_polFilter = a})

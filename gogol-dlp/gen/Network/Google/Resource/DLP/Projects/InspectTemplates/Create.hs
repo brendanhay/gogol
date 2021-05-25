@@ -44,8 +44,8 @@ module Network.Google.Resource.DLP.Projects.InspectTemplates.Create
     , pitcCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.inspectTemplates.create@ method which the
 -- 'ProjectsInspectTemplatesCreate' request conforms to.
@@ -70,13 +70,13 @@ type ProjectsInspectTemplatesCreateResource =
 -- /See:/ 'projectsInspectTemplatesCreate' smart constructor.
 data ProjectsInspectTemplatesCreate =
   ProjectsInspectTemplatesCreate'
-    { _pitcParent         :: !Text
-    , _pitcXgafv          :: !(Maybe Xgafv)
+    { _pitcParent :: !Text
+    , _pitcXgafv :: !(Maybe Xgafv)
     , _pitcUploadProtocol :: !(Maybe Text)
-    , _pitcAccessToken    :: !(Maybe Text)
-    , _pitcUploadType     :: !(Maybe Text)
-    , _pitcPayload        :: !GooglePrivacyDlpV2CreateInspectTemplateRequest
-    , _pitcCallback       :: !(Maybe Text)
+    , _pitcAccessToken :: !(Maybe Text)
+    , _pitcUploadType :: !(Maybe Text)
+    , _pitcPayload :: !GooglePrivacyDlpV2CreateInspectTemplateRequest
+    , _pitcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,8 +114,20 @@ projectsInspectTemplatesCreate pPitcParent_ pPitcPayload_ =
     }
 
 
--- | The parent resource name, for example projects\/my-project-id or
--- organizations\/my-org-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on the scope of the request (project or organization) and
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID +
+-- Organizations scope, location specified:
+-- \`organizations\/\`ORG_ID\`\/locations\/\`LOCATION_ID + Organizations
+-- scope, no location specified (defaults to global):
+-- \`organizations\/\`ORG_ID The following example \`parent\` string
+-- specifies a parent project with the identifier \`example-project\`, and
+-- specifies the \`europe-west3\` location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pitcParent :: Lens' ProjectsInspectTemplatesCreate Text
 pitcParent
   = lens _pitcParent (\ s a -> s{_pitcParent = a})

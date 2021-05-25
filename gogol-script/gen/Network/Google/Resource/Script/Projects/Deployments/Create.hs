@@ -42,8 +42,8 @@ module Network.Google.Resource.Script.Projects.Deployments.Create
     , pdcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.deployments.create@ method which the
 -- 'ProjectsDeploymentsCreate' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsDeploymentsCreateResource =
 -- /See:/ 'projectsDeploymentsCreate' smart constructor.
 data ProjectsDeploymentsCreate =
   ProjectsDeploymentsCreate'
-    { _pdcXgafv          :: !(Maybe Xgafv)
+    { _pdcXgafv :: !(Maybe Xgafv)
     , _pdcUploadProtocol :: !(Maybe Text)
-    , _pdcAccessToken    :: !(Maybe Text)
-    , _pdcUploadType     :: !(Maybe Text)
-    , _pdcPayload        :: !DeploymentConfig
-    , _pdcScriptId       :: !Text
-    , _pdcCallback       :: !(Maybe Text)
+    , _pdcAccessToken :: !(Maybe Text)
+    , _pdcUploadType :: !(Maybe Text)
+    , _pdcPayload :: !DeploymentConfig
+    , _pdcScriptId :: !Text
+    , _pdcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

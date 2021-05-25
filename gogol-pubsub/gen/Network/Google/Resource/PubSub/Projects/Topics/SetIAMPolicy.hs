@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.setIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
@@ -43,8 +44,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
     , ptsipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.setIamPolicy@ method which the
 -- 'ProjectsTopicsSetIAMPolicy' request conforms to.
@@ -61,18 +62,19 @@ type ProjectsTopicsSetIAMPolicyResource =
                        Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
--- existing policy.
+-- existing policy. Can return \`NOT_FOUND\`, \`INVALID_ARGUMENT\`, and
+-- \`PERMISSION_DENIED\` errors.
 --
 -- /See:/ 'projectsTopicsSetIAMPolicy' smart constructor.
 data ProjectsTopicsSetIAMPolicy =
   ProjectsTopicsSetIAMPolicy'
-    { _ptsipXgafv          :: !(Maybe Xgafv)
+    { _ptsipXgafv :: !(Maybe Xgafv)
     , _ptsipUploadProtocol :: !(Maybe Text)
-    , _ptsipAccessToken    :: !(Maybe Text)
-    , _ptsipUploadType     :: !(Maybe Text)
-    , _ptsipPayload        :: !SetIAMPolicyRequest
-    , _ptsipResource       :: !Text
-    , _ptsipCallback       :: !(Maybe Text)
+    , _ptsipAccessToken :: !(Maybe Text)
+    , _ptsipUploadType :: !(Maybe Text)
+    , _ptsipPayload :: !SetIAMPolicyRequest
+    , _ptsipResource :: !Text
+    , _ptsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

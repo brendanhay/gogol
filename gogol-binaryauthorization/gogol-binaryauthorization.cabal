@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta1@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -44,11 +44,13 @@ library
         , Network.Google.Resource.BinaryAuthorization.Projects.Attestors.SetIAMPolicy
         , Network.Google.Resource.BinaryAuthorization.Projects.Attestors.TestIAMPermissions
         , Network.Google.Resource.BinaryAuthorization.Projects.Attestors.Update
+        , Network.Google.Resource.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
         , Network.Google.Resource.BinaryAuthorization.Projects.GetPolicy
         , Network.Google.Resource.BinaryAuthorization.Projects.Policy.GetIAMPolicy
         , Network.Google.Resource.BinaryAuthorization.Projects.Policy.SetIAMPolicy
         , Network.Google.Resource.BinaryAuthorization.Projects.Policy.TestIAMPermissions
         , Network.Google.Resource.BinaryAuthorization.Projects.UpdatePolicy
+        , Network.Google.Resource.BinaryAuthorization.Systempolicy.GetPolicy
 
     other-modules:
           Network.Google.BinaryAuthorization.Types.Product

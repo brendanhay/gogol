@@ -20,14 +20,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a billing account. This method can only be used to create
--- [billing
--- subaccounts](https:\/\/cloud.google.com\/billing\/docs\/concepts) by GCP
--- resellers. When creating a subaccount, the current authenticated user
--- must have the \`billing.accounts.update\` IAM permission on the master
--- account, which is typically given to billing account
+-- This method creates [billing
+-- subaccounts](https:\/\/cloud.google.com\/billing\/docs\/concepts#subaccounts).
+-- Google Cloud resellers should use the Channel Services APIs,
+-- [accounts.customers.create](https:\/\/cloud.google.com\/channel\/docs\/reference\/rest\/v1\/accounts.customers\/create)
+-- and
+-- [accounts.customers.entitlements.create](https:\/\/cloud.google.com\/channel\/docs\/reference\/rest\/v1\/accounts.customers.entitlements\/create).
+-- When creating a subaccount, the current authenticated user must have the
+-- \`billing.accounts.update\` IAM permission on the parent account, which
+-- is typically given to billing account
 -- [administrators](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
--- This method will return an error if the master account has not been
+-- This method will return an error if the parent account has not been
 -- provisioned as a reseller account.
 --
 -- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.create@.
@@ -49,8 +52,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Create
     , bacCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.create@ method which the
 -- 'BillingAccountsCreate' request conforms to.
@@ -66,25 +69,28 @@ type BillingAccountsCreateResource =
                      ReqBody '[JSON] BillingAccount :>
                        Post '[JSON] BillingAccount
 
--- | Creates a billing account. This method can only be used to create
--- [billing
--- subaccounts](https:\/\/cloud.google.com\/billing\/docs\/concepts) by GCP
--- resellers. When creating a subaccount, the current authenticated user
--- must have the \`billing.accounts.update\` IAM permission on the master
--- account, which is typically given to billing account
+-- | This method creates [billing
+-- subaccounts](https:\/\/cloud.google.com\/billing\/docs\/concepts#subaccounts).
+-- Google Cloud resellers should use the Channel Services APIs,
+-- [accounts.customers.create](https:\/\/cloud.google.com\/channel\/docs\/reference\/rest\/v1\/accounts.customers\/create)
+-- and
+-- [accounts.customers.entitlements.create](https:\/\/cloud.google.com\/channel\/docs\/reference\/rest\/v1\/accounts.customers.entitlements\/create).
+-- When creating a subaccount, the current authenticated user must have the
+-- \`billing.accounts.update\` IAM permission on the parent account, which
+-- is typically given to billing account
 -- [administrators](https:\/\/cloud.google.com\/billing\/docs\/how-to\/billing-access).
--- This method will return an error if the master account has not been
+-- This method will return an error if the parent account has not been
 -- provisioned as a reseller account.
 --
 -- /See:/ 'billingAccountsCreate' smart constructor.
 data BillingAccountsCreate =
   BillingAccountsCreate'
-    { _bacXgafv          :: !(Maybe Xgafv)
+    { _bacXgafv :: !(Maybe Xgafv)
     , _bacUploadProtocol :: !(Maybe Text)
-    , _bacAccessToken    :: !(Maybe Text)
-    , _bacUploadType     :: !(Maybe Text)
-    , _bacPayload        :: !BillingAccount
-    , _bacCallback       :: !(Maybe Text)
+    , _bacAccessToken :: !(Maybe Text)
+    , _bacUploadType :: !(Maybe Text)
+    , _bacPayload :: !BillingAccount
+    , _bacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -153,7 +159,8 @@ bacCallback
 instance GoogleRequest BillingAccountsCreate where
         type Rs BillingAccountsCreate = BillingAccount
         type Scopes BillingAccountsCreate =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsCreate'{..}
           = go _bacXgafv _bacUploadProtocol _bacAccessToken
               _bacUploadType

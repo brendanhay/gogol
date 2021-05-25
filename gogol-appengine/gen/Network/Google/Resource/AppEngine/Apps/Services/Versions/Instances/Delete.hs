@@ -20,7 +20,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops a running instance.
+-- Stops a running instance.The instance might be automatically recreated
+-- based on the scaling settings of the version. For more information, see
+-- \"How Instances are Managed\" (standard environment
+-- (https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/how-instances-are-managed)
+-- | flexible environment
+-- (https:\/\/cloud.google.com\/appengine\/docs\/flexible\/python\/how-instances-are-managed)).To
+-- ensure that instances are not re-created and avoid getting billed, you
+-- can stop all instances within the target version by changing the serving
+-- status of the version to STOPPED with the apps.services.versions.patch
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions\/patch)
+-- method.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ App Engine Admin API Reference> for @appengine.apps.services.versions.instances.delete@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
@@ -44,8 +54,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
     , aCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.versions.instances.delete@ method which the
 -- 'AppsServicesVersionsInstancesDelete' request conforms to.
@@ -67,20 +77,30 @@ type AppsServicesVersionsInstancesDeleteResource =
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Operation
 
--- | Stops a running instance.
+-- | Stops a running instance.The instance might be automatically recreated
+-- based on the scaling settings of the version. For more information, see
+-- \"How Instances are Managed\" (standard environment
+-- (https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/how-instances-are-managed)
+-- | flexible environment
+-- (https:\/\/cloud.google.com\/appengine\/docs\/flexible\/python\/how-instances-are-managed)).To
+-- ensure that instances are not re-created and avoid getting billed, you
+-- can stop all instances within the target version by changing the serving
+-- status of the version to STOPPED with the apps.services.versions.patch
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions\/patch)
+-- method.
 --
 -- /See:/ 'appsServicesVersionsInstancesDelete' smart constructor.
 data AppsServicesVersionsInstancesDelete =
   AppsServicesVersionsInstancesDelete'
-    { _aXgafv          :: !(Maybe Xgafv)
-    , _aInstancesId    :: !Text
+    { _aXgafv :: !(Maybe Xgafv)
+    , _aInstancesId :: !Text
     , _aUploadProtocol :: !(Maybe Text)
-    , _aAccessToken    :: !(Maybe Text)
-    , _aUploadType     :: !(Maybe Text)
-    , _aVersionsId     :: !Text
-    , _aAppsId         :: !Text
-    , _aServicesId     :: !Text
-    , _aCallback       :: !(Maybe Text)
+    , _aAccessToken :: !(Maybe Text)
+    , _aUploadType :: !(Maybe Text)
+    , _aVersionsId :: !Text
+    , _aAppsId :: !Text
+    , _aServicesId :: !Text
+    , _aCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

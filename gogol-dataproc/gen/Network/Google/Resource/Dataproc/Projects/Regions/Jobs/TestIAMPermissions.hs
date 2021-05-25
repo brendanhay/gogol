@@ -47,8 +47,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.TestIAMPermissions
     , prjtipCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.jobs.testIamPermissions@ method which the
 -- 'ProjectsRegionsJobsTestIAMPermissions' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsRegionsJobsTestIAMPermissionsResource =
 -- /See:/ 'projectsRegionsJobsTestIAMPermissions' smart constructor.
 data ProjectsRegionsJobsTestIAMPermissions =
   ProjectsRegionsJobsTestIAMPermissions'
-    { _prjtipXgafv          :: !(Maybe Xgafv)
+    { _prjtipXgafv :: !(Maybe Xgafv)
     , _prjtipUploadProtocol :: !(Maybe Text)
-    , _prjtipAccessToken    :: !(Maybe Text)
-    , _prjtipUploadType     :: !(Maybe Text)
-    , _prjtipPayload        :: !TestIAMPermissionsRequest
-    , _prjtipResource       :: !Text
-    , _prjtipCallback       :: !(Maybe Text)
+    , _prjtipAccessToken :: !(Maybe Text)
+    , _prjtipUploadType :: !(Maybe Text)
+    , _prjtipPayload :: !TestIAMPermissionsRequest
+    , _prjtipResource :: !Text
+    , _prjtipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

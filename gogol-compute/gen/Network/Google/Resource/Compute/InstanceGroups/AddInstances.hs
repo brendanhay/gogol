@@ -42,8 +42,8 @@ module Network.Google.Resource.Compute.InstanceGroups.AddInstances
     , igaiInstanceGroup
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.addInstances@ method which the
 -- 'InstanceGroupsAddInstances' request conforms to.
@@ -69,10 +69,10 @@ type InstanceGroupsAddInstancesResource =
 -- /See:/ 'instanceGroupsAddInstances' smart constructor.
 data InstanceGroupsAddInstances =
   InstanceGroupsAddInstances'
-    { _igaiRequestId     :: !(Maybe Text)
-    , _igaiProject       :: !Text
-    , _igaiZone          :: !Text
-    , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
+    { _igaiRequestId :: !(Maybe Text)
+    , _igaiProject :: !Text
+    , _igaiZone :: !Text
+    , _igaiPayload :: !InstanceGroupsAddInstancesRequest
     , _igaiInstanceGroup :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -45,8 +45,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.AccessLevels.
     , apalcCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.create@ method which the
 -- 'AccessPoliciesAccessLevelsCreate' request conforms to.
@@ -70,13 +70,13 @@ type AccessPoliciesAccessLevelsCreateResource =
 -- /See:/ 'accessPoliciesAccessLevelsCreate' smart constructor.
 data AccessPoliciesAccessLevelsCreate =
   AccessPoliciesAccessLevelsCreate'
-    { _apalcParent         :: !Text
-    , _apalcXgafv          :: !(Maybe Xgafv)
+    { _apalcParent :: !Text
+    , _apalcXgafv :: !(Maybe Xgafv)
     , _apalcUploadProtocol :: !(Maybe Text)
-    , _apalcAccessToken    :: !(Maybe Text)
-    , _apalcUploadType     :: !(Maybe Text)
-    , _apalcPayload        :: !AccessLevel
-    , _apalcCallback       :: !(Maybe Text)
+    , _apalcAccessToken :: !(Maybe Text)
+    , _apalcUploadType :: !(Maybe Text)
+    , _apalcPayload :: !AccessLevel
+    , _apalcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

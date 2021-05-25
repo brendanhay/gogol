@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Zones.Get
     , zgZone
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.zones.get@ method which the
 -- 'ZonesGet' request conforms to.
@@ -59,7 +59,7 @@ type ZonesGetResource =
 data ZonesGet =
   ZonesGet'
     { _zgProject :: !Text
-    , _zgZone    :: !Text
+    , _zgZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

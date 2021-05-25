@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPool
     , rigmstpRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.setTargetPools@ method which the
 -- 'RegionInstanceGroupManagersSetTargetPools' request conforms to.
@@ -69,11 +69,11 @@ type RegionInstanceGroupManagersSetTargetPoolsResource
 -- /See:/ 'regionInstanceGroupManagersSetTargetPools' smart constructor.
 data RegionInstanceGroupManagersSetTargetPools =
   RegionInstanceGroupManagersSetTargetPools'
-    { _rigmstpRequestId            :: !(Maybe Text)
-    , _rigmstpProject              :: !Text
+    { _rigmstpRequestId :: !(Maybe Text)
+    , _rigmstpProject :: !Text
     , _rigmstpInstanceGroupManager :: !Text
-    , _rigmstpPayload              :: !RegionInstanceGroupManagersSetTargetPoolsRequest
-    , _rigmstpRegion               :: !Text
+    , _rigmstpPayload :: !RegionInstanceGroupManagersSetTargetPoolsRequest
+    , _rigmstpRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

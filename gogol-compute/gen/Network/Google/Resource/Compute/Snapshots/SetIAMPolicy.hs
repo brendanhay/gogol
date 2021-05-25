@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Snapshots.SetIAMPolicy
     , ssipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.setIamPolicy@ method which the
 -- 'SnapshotsSetIAMPolicy' request conforms to.
@@ -63,8 +63,8 @@ type SnapshotsSetIAMPolicyResource =
 -- /See:/ 'snapshotsSetIAMPolicy' smart constructor.
 data SnapshotsSetIAMPolicy =
   SnapshotsSetIAMPolicy'
-    { _ssipProject  :: !Text
-    , _ssipPayload  :: !GlobalSetPolicyRequest
+    { _ssipProject :: !Text
+    , _ssipPayload :: !GlobalSetPolicyRequest
     , _ssipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

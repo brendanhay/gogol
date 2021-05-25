@@ -22,7 +22,7 @@
 --
 -- Return a list of books in My Library.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.mybooks.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.volumes.mybooks.list@.
 module Network.Google.Resource.Books.Volumes.Mybooks.List
     (
     -- * REST Resource
@@ -34,16 +34,21 @@ module Network.Google.Resource.Books.Volumes.Mybooks.List
 
     -- * Request Lenses
     , vmlProcessingState
+    , vmlXgafv
     , vmlAcquireMethod
+    , vmlUploadProtocol
     , vmlCountry
     , vmlLocale
+    , vmlAccessToken
+    , vmlUploadType
     , vmlSource
     , vmlStartIndex
     , vmlMaxResults
+    , vmlCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.mybooks.list@ method which the
 -- 'VolumesMybooksList' request conforms to.
@@ -55,15 +60,21 @@ type VolumesMybooksListResource =
              QueryParams "processingState"
                VolumesMybooksListProcessingState
                :>
-               QueryParams "acquireMethod"
-                 VolumesMybooksListAcquireMethod
-                 :>
-                 QueryParam "country" Text :>
-                   QueryParam "locale" Text :>
-                     QueryParam "source" Text :>
-                       QueryParam "startIndex" (Textual Word32) :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParams "acquireMethod"
+                   VolumesMybooksListAcquireMethod
+                   :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "country" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "startIndex" (Textual Word32) :>
+                                 QueryParam "maxResults" (Textual Word32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
 --
@@ -71,12 +82,17 @@ type VolumesMybooksListResource =
 data VolumesMybooksList =
   VolumesMybooksList'
     { _vmlProcessingState :: !(Maybe [VolumesMybooksListProcessingState])
-    , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
-    , _vmlCountry         :: !(Maybe Text)
-    , _vmlLocale          :: !(Maybe Text)
-    , _vmlSource          :: !(Maybe Text)
-    , _vmlStartIndex      :: !(Maybe (Textual Word32))
-    , _vmlMaxResults      :: !(Maybe (Textual Word32))
+    , _vmlXgafv :: !(Maybe Xgafv)
+    , _vmlAcquireMethod :: !(Maybe [VolumesMybooksListAcquireMethod])
+    , _vmlUploadProtocol :: !(Maybe Text)
+    , _vmlCountry :: !(Maybe Text)
+    , _vmlLocale :: !(Maybe Text)
+    , _vmlAccessToken :: !(Maybe Text)
+    , _vmlUploadType :: !(Maybe Text)
+    , _vmlSource :: !(Maybe Text)
+    , _vmlStartIndex :: !(Maybe (Textual Word32))
+    , _vmlMaxResults :: !(Maybe (Textual Word32))
+    , _vmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,28 +103,43 @@ data VolumesMybooksList =
 --
 -- * 'vmlProcessingState'
 --
+-- * 'vmlXgafv'
+--
 -- * 'vmlAcquireMethod'
+--
+-- * 'vmlUploadProtocol'
 --
 -- * 'vmlCountry'
 --
 -- * 'vmlLocale'
+--
+-- * 'vmlAccessToken'
+--
+-- * 'vmlUploadType'
 --
 -- * 'vmlSource'
 --
 -- * 'vmlStartIndex'
 --
 -- * 'vmlMaxResults'
+--
+-- * 'vmlCallback'
 volumesMybooksList
     :: VolumesMybooksList
 volumesMybooksList =
   VolumesMybooksList'
     { _vmlProcessingState = Nothing
+    , _vmlXgafv = Nothing
     , _vmlAcquireMethod = Nothing
+    , _vmlUploadProtocol = Nothing
     , _vmlCountry = Nothing
     , _vmlLocale = Nothing
+    , _vmlAccessToken = Nothing
+    , _vmlUploadType = Nothing
     , _vmlSource = Nothing
     , _vmlStartIndex = Nothing
     , _vmlMaxResults = Nothing
+    , _vmlCallback = Nothing
     }
 
 
@@ -121,6 +152,10 @@ vmlProcessingState
       . _Default
       . _Coerce
 
+-- | V1 error format.
+vmlXgafv :: Lens' VolumesMybooksList (Maybe Xgafv)
+vmlXgafv = lens _vmlXgafv (\ s a -> s{_vmlXgafv = a})
+
 -- | How the book was acquired
 vmlAcquireMethod :: Lens' VolumesMybooksList [VolumesMybooksListAcquireMethod]
 vmlAcquireMethod
@@ -128,6 +163,12 @@ vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})
       . _Default
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vmlUploadProtocol :: Lens' VolumesMybooksList (Maybe Text)
+vmlUploadProtocol
+  = lens _vmlUploadProtocol
+      (\ s a -> s{_vmlUploadProtocol = a})
 
 -- | ISO-3166-1 code to override the IP-based location.
 vmlCountry :: Lens' VolumesMybooksList (Maybe Text)
@@ -139,6 +180,18 @@ vmlCountry
 vmlLocale :: Lens' VolumesMybooksList (Maybe Text)
 vmlLocale
   = lens _vmlLocale (\ s a -> s{_vmlLocale = a})
+
+-- | OAuth access token.
+vmlAccessToken :: Lens' VolumesMybooksList (Maybe Text)
+vmlAccessToken
+  = lens _vmlAccessToken
+      (\ s a -> s{_vmlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vmlUploadType :: Lens' VolumesMybooksList (Maybe Text)
+vmlUploadType
+  = lens _vmlUploadType
+      (\ s a -> s{_vmlUploadType = a})
 
 -- | String to identify the originator of this request.
 vmlSource :: Lens' VolumesMybooksList (Maybe Text)
@@ -159,18 +212,27 @@ vmlMaxResults
       (\ s a -> s{_vmlMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+vmlCallback :: Lens' VolumesMybooksList (Maybe Text)
+vmlCallback
+  = lens _vmlCallback (\ s a -> s{_vmlCallback = a})
+
 instance GoogleRequest VolumesMybooksList where
         type Rs VolumesMybooksList = Volumes
         type Scopes VolumesMybooksList =
              '["https://www.googleapis.com/auth/books"]
         requestClient VolumesMybooksList'{..}
-          = go (_vmlProcessingState ^. _Default)
+          = go (_vmlProcessingState ^. _Default) _vmlXgafv
               (_vmlAcquireMethod ^. _Default)
+              _vmlUploadProtocol
               _vmlCountry
               _vmlLocale
+              _vmlAccessToken
+              _vmlUploadType
               _vmlSource
               _vmlStartIndex
               _vmlMaxResults
+              _vmlCallback
               (Just AltJSON)
               booksService
           where go

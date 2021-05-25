@@ -34,12 +34,17 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
 
     -- * Request Lenses
     , egEntitlementId
+    , egXgafv
+    , egUploadProtocol
     , egEnterpriseId
+    , egAccessToken
+    , egUploadType
     , egUserId
+    , egCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.get@ method which the
 -- 'EntitlementsGet' request conforms to.
@@ -52,7 +57,13 @@ type EntitlementsGetResource =
                Capture "userId" Text :>
                  "entitlements" :>
                    Capture "entitlementId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Entitlement
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] Entitlement
 
 -- | Retrieves details of an entitlement.
 --
@@ -60,8 +71,13 @@ type EntitlementsGetResource =
 data EntitlementsGet =
   EntitlementsGet'
     { _egEntitlementId :: !Text
-    , _egEnterpriseId  :: !Text
-    , _egUserId        :: !Text
+    , _egXgafv :: !(Maybe Xgafv)
+    , _egUploadProtocol :: !(Maybe Text)
+    , _egEnterpriseId :: !Text
+    , _egAccessToken :: !(Maybe Text)
+    , _egUploadType :: !(Maybe Text)
+    , _egUserId :: !Text
+    , _egCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,9 +88,19 @@ data EntitlementsGet =
 --
 -- * 'egEntitlementId'
 --
+-- * 'egXgafv'
+--
+-- * 'egUploadProtocol'
+--
 -- * 'egEnterpriseId'
 --
+-- * 'egAccessToken'
+--
+-- * 'egUploadType'
+--
 -- * 'egUserId'
+--
+-- * 'egCallback'
 entitlementsGet
     :: Text -- ^ 'egEntitlementId'
     -> Text -- ^ 'egEnterpriseId'
@@ -83,8 +109,13 @@ entitlementsGet
 entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
   EntitlementsGet'
     { _egEntitlementId = pEgEntitlementId_
+    , _egXgafv = Nothing
+    , _egUploadProtocol = Nothing
     , _egEnterpriseId = pEgEnterpriseId_
+    , _egAccessToken = Nothing
+    , _egUploadType = Nothing
     , _egUserId = pEgUserId_
+    , _egCallback = Nothing
     }
 
 
@@ -95,15 +126,41 @@ egEntitlementId
   = lens _egEntitlementId
       (\ s a -> s{_egEntitlementId = a})
 
+-- | V1 error format.
+egXgafv :: Lens' EntitlementsGet (Maybe Xgafv)
+egXgafv = lens _egXgafv (\ s a -> s{_egXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+egUploadProtocol :: Lens' EntitlementsGet (Maybe Text)
+egUploadProtocol
+  = lens _egUploadProtocol
+      (\ s a -> s{_egUploadProtocol = a})
+
 -- | The ID of the enterprise.
 egEnterpriseId :: Lens' EntitlementsGet Text
 egEnterpriseId
   = lens _egEnterpriseId
       (\ s a -> s{_egEnterpriseId = a})
 
+-- | OAuth access token.
+egAccessToken :: Lens' EntitlementsGet (Maybe Text)
+egAccessToken
+  = lens _egAccessToken
+      (\ s a -> s{_egAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+egUploadType :: Lens' EntitlementsGet (Maybe Text)
+egUploadType
+  = lens _egUploadType (\ s a -> s{_egUploadType = a})
+
 -- | The ID of the user.
 egUserId :: Lens' EntitlementsGet Text
 egUserId = lens _egUserId (\ s a -> s{_egUserId = a})
+
+-- | JSONP
+egCallback :: Lens' EntitlementsGet (Maybe Text)
+egCallback
+  = lens _egCallback (\ s a -> s{_egCallback = a})
 
 instance GoogleRequest EntitlementsGet where
         type Rs EntitlementsGet = Entitlement
@@ -111,6 +168,11 @@ instance GoogleRequest EntitlementsGet where
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EntitlementsGet'{..}
           = go _egEnterpriseId _egUserId _egEntitlementId
+              _egXgafv
+              _egUploadProtocol
+              _egAccessToken
+              _egUploadType
+              _egCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

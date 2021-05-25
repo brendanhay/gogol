@@ -42,8 +42,8 @@ module Network.Google.Resource.Datastore.Projects.Indexes.Get
     , pigCallback
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datastore.projects.indexes.get@ method which the
 -- 'ProjectsIndexesGet' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsIndexesGetResource =
 -- /See:/ 'projectsIndexesGet' smart constructor.
 data ProjectsIndexesGet =
   ProjectsIndexesGet'
-    { _pigXgafv          :: !(Maybe Xgafv)
+    { _pigXgafv :: !(Maybe Xgafv)
     , _pigUploadProtocol :: !(Maybe Text)
-    , _pigAccessToken    :: !(Maybe Text)
-    , _pigUploadType     :: !(Maybe Text)
-    , _pigProjectId      :: !Text
-    , _pigIndexId        :: !Text
-    , _pigCallback       :: !(Maybe Text)
+    , _pigAccessToken :: !(Maybe Text)
+    , _pigUploadType :: !(Maybe Text)
+    , _pigProjectId :: !Text
+    , _pigIndexId :: !Text
+    , _pigCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

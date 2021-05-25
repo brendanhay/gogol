@@ -23,7 +23,7 @@
 -- Retrieves a report file by its report ID and file ID. This method
 -- supports media download.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.files.get@.
 module Network.Google.Resource.DFAReporting.Files.Get
     (
     -- * REST Resource
@@ -34,32 +34,47 @@ module Network.Google.Resource.DFAReporting.Files.Get
     , FilesGet
 
     -- * Request Lenses
+    , fgXgafv
+    , fgUploadProtocol
+    , fgAccessToken
     , fgReportId
+    , fgUploadType
     , fgFileId
+    , fgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.files.get@ method which the
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "reports" :>
            Capture "reportId" (Textual Int64) :>
              "files" :>
                Capture "fileId" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] File
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v3.3" :>
+         "v3.5" :>
            "reports" :>
              Capture "reportId" (Textual Int64) :>
                "files" :>
                  Capture "fileId" (Textual Int64) :>
-                   QueryParam "alt" AltMedia :>
-                     Get '[OctetStream] Stream
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltMedia :>
+                               Get '[OctetStream] Stream
 
 -- | Retrieves a report file by its report ID and file ID. This method
 -- supports media download.
@@ -67,8 +82,13 @@ type FilesGetResource =
 -- /See:/ 'filesGet' smart constructor.
 data FilesGet =
   FilesGet'
-    { _fgReportId :: !(Textual Int64)
-    , _fgFileId   :: !(Textual Int64)
+    { _fgXgafv :: !(Maybe Xgafv)
+    , _fgUploadProtocol :: !(Maybe Text)
+    , _fgAccessToken :: !(Maybe Text)
+    , _fgReportId :: !(Textual Int64)
+    , _fgUploadType :: !(Maybe Text)
+    , _fgFileId :: !(Textual Int64)
+    , _fgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,17 +97,50 @@ data FilesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fgXgafv'
+--
+-- * 'fgUploadProtocol'
+--
+-- * 'fgAccessToken'
+--
 -- * 'fgReportId'
 --
+-- * 'fgUploadType'
+--
 -- * 'fgFileId'
+--
+-- * 'fgCallback'
 filesGet
     :: Int64 -- ^ 'fgReportId'
     -> Int64 -- ^ 'fgFileId'
     -> FilesGet
 filesGet pFgReportId_ pFgFileId_ =
   FilesGet'
-    {_fgReportId = _Coerce # pFgReportId_, _fgFileId = _Coerce # pFgFileId_}
+    { _fgXgafv = Nothing
+    , _fgUploadProtocol = Nothing
+    , _fgAccessToken = Nothing
+    , _fgReportId = _Coerce # pFgReportId_
+    , _fgUploadType = Nothing
+    , _fgFileId = _Coerce # pFgFileId_
+    , _fgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+fgXgafv :: Lens' FilesGet (Maybe Xgafv)
+fgXgafv = lens _fgXgafv (\ s a -> s{_fgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+fgUploadProtocol :: Lens' FilesGet (Maybe Text)
+fgUploadProtocol
+  = lens _fgUploadProtocol
+      (\ s a -> s{_fgUploadProtocol = a})
+
+-- | OAuth access token.
+fgAccessToken :: Lens' FilesGet (Maybe Text)
+fgAccessToken
+  = lens _fgAccessToken
+      (\ s a -> s{_fgAccessToken = a})
 
 -- | The ID of the report.
 fgReportId :: Lens' FilesGet Int64
@@ -95,18 +148,32 @@ fgReportId
   = lens _fgReportId (\ s a -> s{_fgReportId = a}) .
       _Coerce
 
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+fgUploadType :: Lens' FilesGet (Maybe Text)
+fgUploadType
+  = lens _fgUploadType (\ s a -> s{_fgUploadType = a})
+
 -- | The ID of the report file.
 fgFileId :: Lens' FilesGet Int64
 fgFileId
   = lens _fgFileId (\ s a -> s{_fgFileId = a}) .
       _Coerce
 
+-- | JSONP
+fgCallback :: Lens' FilesGet (Maybe Text)
+fgCallback
+  = lens _fgCallback (\ s a -> s{_fgCallback = a})
+
 instance GoogleRequest FilesGet where
         type Rs FilesGet = File
         type Scopes FilesGet =
              '["https://www.googleapis.com/auth/dfareporting"]
         requestClient FilesGet'{..}
-          = go _fgReportId _fgFileId (Just AltJSON)
+          = go _fgReportId _fgFileId _fgXgafv _fgUploadProtocol
+              _fgAccessToken
+              _fgUploadType
+              _fgCallback
+              (Just AltJSON)
               dFAReportingService
           where go :<|> _
                   = buildClient (Proxy :: Proxy FilesGetResource)
@@ -117,7 +184,11 @@ instance GoogleRequest (MediaDownload FilesGet) where
         type Scopes (MediaDownload FilesGet) =
              Scopes FilesGet
         requestClient (MediaDownload FilesGet'{..})
-          = go _fgReportId _fgFileId (Just AltMedia)
+          = go _fgReportId _fgFileId _fgXgafv _fgUploadProtocol
+              _fgAccessToken
+              _fgUploadType
+              _fgCallback
+              (Just AltMedia)
               dFAReportingService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy FilesGetResource)

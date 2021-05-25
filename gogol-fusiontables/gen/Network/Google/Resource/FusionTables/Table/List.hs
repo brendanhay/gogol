@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Table.List
     , tMaxResults
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.list@ method which the
 -- 'TableList'' request conforms to.
@@ -55,7 +55,7 @@ type TableListResource =
 -- /See:/ 'tableList'' smart constructor.
 data TableList' =
   TableList''
-    { _tPageToken  :: !(Maybe Text)
+    { _tPageToken :: !(Maybe Text)
     , _tMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

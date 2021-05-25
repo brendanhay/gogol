@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all images for the specified language and image type.
+-- Lists all images. The response may be empty.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.list@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.images.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.List
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.List
     , EditsImagesList
 
     -- * Request Lenses
+    , eilXgafv
+    , eilUploadProtocol
     , eilPackageName
+    , eilAccessToken
+    , eilUploadType
     , eilImageType
     , eilLanguage
     , eilEditId
+    , eilCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.images.list@ method which the
 -- 'EditsImagesList' request conforms to.
@@ -54,18 +59,28 @@ type EditsImagesListResource =
                  "listings" :>
                    Capture "language" Text :>
                      Capture "imageType" EditsImagesListImageType :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ImagesListResponse
+                       QueryParam "$.xgafv" Xgafv :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ImagesListResponse
 
--- | Lists all images for the specified language and image type.
+-- | Lists all images. The response may be empty.
 --
 -- /See:/ 'editsImagesList' smart constructor.
 data EditsImagesList =
   EditsImagesList'
-    { _eilPackageName :: !Text
-    , _eilImageType   :: !EditsImagesListImageType
-    , _eilLanguage    :: !Text
-    , _eilEditId      :: !Text
+    { _eilXgafv :: !(Maybe Xgafv)
+    , _eilUploadProtocol :: !(Maybe Text)
+    , _eilPackageName :: !Text
+    , _eilAccessToken :: !(Maybe Text)
+    , _eilUploadType :: !(Maybe Text)
+    , _eilImageType :: !EditsImagesListImageType
+    , _eilLanguage :: !Text
+    , _eilEditId :: !Text
+    , _eilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,13 +89,23 @@ data EditsImagesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eilXgafv'
+--
+-- * 'eilUploadProtocol'
+--
 -- * 'eilPackageName'
+--
+-- * 'eilAccessToken'
+--
+-- * 'eilUploadType'
 --
 -- * 'eilImageType'
 --
 -- * 'eilLanguage'
 --
 -- * 'eilEditId'
+--
+-- * 'eilCallback'
 editsImagesList
     :: Text -- ^ 'eilPackageName'
     -> EditsImagesListImageType -- ^ 'eilImageType'
@@ -89,35 +114,68 @@ editsImagesList
     -> EditsImagesList
 editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
   EditsImagesList'
-    { _eilPackageName = pEilPackageName_
+    { _eilXgafv = Nothing
+    , _eilUploadProtocol = Nothing
+    , _eilPackageName = pEilPackageName_
+    , _eilAccessToken = Nothing
+    , _eilUploadType = Nothing
     , _eilImageType = pEilImageType_
     , _eilLanguage = pEilLanguage_
     , _eilEditId = pEilEditId_
+    , _eilCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+eilXgafv :: Lens' EditsImagesList (Maybe Xgafv)
+eilXgafv = lens _eilXgafv (\ s a -> s{_eilXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eilUploadProtocol :: Lens' EditsImagesList (Maybe Text)
+eilUploadProtocol
+  = lens _eilUploadProtocol
+      (\ s a -> s{_eilUploadProtocol = a})
+
+-- | Package name of the app.
 eilPackageName :: Lens' EditsImagesList Text
 eilPackageName
   = lens _eilPackageName
       (\ s a -> s{_eilPackageName = a})
 
+-- | OAuth access token.
+eilAccessToken :: Lens' EditsImagesList (Maybe Text)
+eilAccessToken
+  = lens _eilAccessToken
+      (\ s a -> s{_eilAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eilUploadType :: Lens' EditsImagesList (Maybe Text)
+eilUploadType
+  = lens _eilUploadType
+      (\ s a -> s{_eilUploadType = a})
+
+-- | Type of the Image. Providing an image type that refers to no images will
+-- return an empty response.
 eilImageType :: Lens' EditsImagesList EditsImagesListImageType
 eilImageType
   = lens _eilImageType (\ s a -> s{_eilImageType = a})
 
--- | The language code (a BCP-47 language tag) of the localized listing whose
--- images are to read or modified. For example, to select Austrian German,
--- pass \"de-AT\".
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German). There must be a store listing for the
+-- specified language.
 eilLanguage :: Lens' EditsImagesList Text
 eilLanguage
   = lens _eilLanguage (\ s a -> s{_eilLanguage = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 eilEditId :: Lens' EditsImagesList Text
 eilEditId
   = lens _eilEditId (\ s a -> s{_eilEditId = a})
+
+-- | JSONP
+eilCallback :: Lens' EditsImagesList (Maybe Text)
+eilCallback
+  = lens _eilCallback (\ s a -> s{_eilCallback = a})
 
 instance GoogleRequest EditsImagesList where
         type Rs EditsImagesList = ImagesListResponse
@@ -126,6 +184,11 @@ instance GoogleRequest EditsImagesList where
         requestClient EditsImagesList'{..}
           = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType
+              _eilXgafv
+              _eilUploadProtocol
+              _eilAccessToken
+              _eilUploadType
+              _eilCallback
               (Just AltJSON)
               androidPublisherService
           where go

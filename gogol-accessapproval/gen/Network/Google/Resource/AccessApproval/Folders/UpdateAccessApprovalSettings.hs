@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the settings associated with a project, folder, or organization.
--- Completely replaces the existing settings.
+-- Settings to update are determined by the value of field_mask.
 --
 -- /See:/ <https://cloud.google.com/access-approval/docs Access Approval API Reference> for @accessapproval.folders.updateAccessApprovalSettings@.
 module Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettings
@@ -36,6 +36,7 @@ module Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettin
     -- * Request Lenses
     , fuaasXgafv
     , fuaasUploadProtocol
+    , fuaasUpdateMask
     , fuaasAccessToken
     , fuaasUploadType
     , fuaasPayload
@@ -43,36 +44,38 @@ module Network.Google.Resource.AccessApproval.Folders.UpdateAccessApprovalSettin
     , fuaasCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.folders.updateAccessApprovalSettings@ method which the
 -- 'FoldersUpdateAccessApprovalSettings' request conforms to.
 type FoldersUpdateAccessApprovalSettingsResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] AccessApprovalSettings :>
-                       Patch '[JSON] AccessApprovalSettings
+             QueryParam "updateMask" GFieldMask :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AccessApprovalSettings :>
+                         Patch '[JSON] AccessApprovalSettings
 
 -- | Updates the settings associated with a project, folder, or organization.
--- Completely replaces the existing settings.
+-- Settings to update are determined by the value of field_mask.
 --
 -- /See:/ 'foldersUpdateAccessApprovalSettings' smart constructor.
 data FoldersUpdateAccessApprovalSettings =
   FoldersUpdateAccessApprovalSettings'
-    { _fuaasXgafv          :: !(Maybe Xgafv)
+    { _fuaasXgafv :: !(Maybe Xgafv)
     , _fuaasUploadProtocol :: !(Maybe Text)
-    , _fuaasAccessToken    :: !(Maybe Text)
-    , _fuaasUploadType     :: !(Maybe Text)
-    , _fuaasPayload        :: !AccessApprovalSettings
-    , _fuaasName           :: !Text
-    , _fuaasCallback       :: !(Maybe Text)
+    , _fuaasUpdateMask :: !(Maybe GFieldMask)
+    , _fuaasAccessToken :: !(Maybe Text)
+    , _fuaasUploadType :: !(Maybe Text)
+    , _fuaasPayload :: !AccessApprovalSettings
+    , _fuaasName :: !Text
+    , _fuaasCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -84,6 +87,8 @@ data FoldersUpdateAccessApprovalSettings =
 -- * 'fuaasXgafv'
 --
 -- * 'fuaasUploadProtocol'
+--
+-- * 'fuaasUpdateMask'
 --
 -- * 'fuaasAccessToken'
 --
@@ -102,6 +107,7 @@ foldersUpdateAccessApprovalSettings pFuaasPayload_ pFuaasName_ =
   FoldersUpdateAccessApprovalSettings'
     { _fuaasXgafv = Nothing
     , _fuaasUploadProtocol = Nothing
+    , _fuaasUpdateMask = Nothing
     , _fuaasAccessToken = Nothing
     , _fuaasUploadType = Nothing
     , _fuaasPayload = pFuaasPayload_
@@ -121,6 +127,19 @@ fuaasUploadProtocol
   = lens _fuaasUploadProtocol
       (\ s a -> s{_fuaasUploadProtocol = a})
 
+-- | The update mask applies to the settings. Only the top level fields of
+-- AccessApprovalSettings (notification_emails & enrolled_services) are
+-- supported. For each field, if it is included, the currently stored value
+-- will be entirely overwritten with the value of the field passed in this
+-- request. For the \`FieldMask\` definition, see
+-- https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+-- If this field is left unset, only the notification_emails field will be
+-- updated.
+fuaasUpdateMask :: Lens' FoldersUpdateAccessApprovalSettings (Maybe GFieldMask)
+fuaasUpdateMask
+  = lens _fuaasUpdateMask
+      (\ s a -> s{_fuaasUpdateMask = a})
+
 -- | OAuth access token.
 fuaasAccessToken :: Lens' FoldersUpdateAccessApprovalSettings (Maybe Text)
 fuaasAccessToken
@@ -138,10 +157,10 @@ fuaasPayload :: Lens' FoldersUpdateAccessApprovalSettings AccessApprovalSettings
 fuaasPayload
   = lens _fuaasPayload (\ s a -> s{_fuaasPayload = a})
 
--- | The resource name of the settings. Format is one of:
--- \"projects\/{project_id}\/accessApprovalSettings\"
--- \"folders\/{folder_id}\/accessApprovalSettings\"
--- \"organizations\/{organization_id}\/accessApprovalSettings\"
+-- | The resource name of the settings. Format is one of: *
+-- \"projects\/{project}\/accessApprovalSettings\" *
+-- \"folders\/{folder}\/accessApprovalSettings\" *
+-- \"organizations\/{organization}\/accessApprovalSettings\"
 fuaasName :: Lens' FoldersUpdateAccessApprovalSettings Text
 fuaasName
   = lens _fuaasName (\ s a -> s{_fuaasName = a})
@@ -162,6 +181,7 @@ instance GoogleRequest
         requestClient
           FoldersUpdateAccessApprovalSettings'{..}
           = go _fuaasName _fuaasXgafv _fuaasUploadProtocol
+              _fuaasUpdateMask
               _fuaasAccessToken
               _fuaasUploadType
               _fuaasCallback

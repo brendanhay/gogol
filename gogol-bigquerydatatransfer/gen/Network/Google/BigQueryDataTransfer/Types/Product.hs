@@ -17,50 +17,62 @@
 --
 module Network.Google.BigQueryDataTransfer.Types.Product where
 
-import           Network.Google.BigQueryDataTransfer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types.Sum
+import Network.Google.Prelude
+
+-- | Represents preferences for sending email notifications for transfer run
+-- events.
+--
+-- /See:/ 'emailPreferences' smart constructor.
+newtype EmailPreferences =
+  EmailPreferences'
+    { _epEnableFailureEmail :: Maybe Bool
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EmailPreferences' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epEnableFailureEmail'
+emailPreferences
+    :: EmailPreferences
+emailPreferences = EmailPreferences' {_epEnableFailureEmail = Nothing}
+
+
+-- | If true, email notifications will be sent on transfer run failures.
+epEnableFailureEmail :: Lens' EmailPreferences (Maybe Bool)
+epEnableFailureEmail
+  = lens _epEnableFailureEmail
+      (\ s a -> s{_epEnableFailureEmail = a})
+
+instance FromJSON EmailPreferences where
+        parseJSON
+          = withObject "EmailPreferences"
+              (\ o ->
+                 EmailPreferences' <$> (o .:? "enableFailureEmail"))
+
+instance ToJSON EmailPreferences where
+        toJSON EmailPreferences'{..}
+          = object
+              (catMaybes
+                 [("enableFailureEmail" .=) <$>
+                    _epEnableFailureEmail])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -122,7 +134,7 @@ instance ToJSON Status where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -175,7 +187,7 @@ instance ToJSON ListLocationsResponse where
 data TimeRange =
   TimeRange'
     { _trStartTime :: !(Maybe DateTime')
-    , _trEndTime   :: !(Maybe DateTime')
+    , _trEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -195,7 +207,7 @@ timeRange = TimeRange' {_trStartTime = Nothing, _trEndTime = Nothing}
 -- | Start time of the range of transfer runs. For example,
 -- \`\"2017-05-25T00:00:00+00:00\"\`. The start_time must be strictly less
 -- than the end_time. Creates transfer runs where run_time is in the range
--- betwen start_time (inclusive) and end_time (exlusive).
+-- between start_time (inclusive) and end_time (exclusive).
 trStartTime :: Lens' TimeRange (Maybe UTCTime)
 trStartTime
   = lens _trStartTime (\ s a -> s{_trStartTime = a}) .
@@ -203,8 +215,8 @@ trStartTime
 
 -- | End time of the range of transfer runs. For example,
 -- \`\"2017-05-30T00:00:00+00:00\"\`. The end_time must not be in the
--- future. Creates transfer runs where run_time is in the range betwen
--- start_time (inclusive) and end_time (exlusive).
+-- future. Creates transfer runs where run_time is in the range between
+-- start_time (inclusive) and end_time (exclusive).
 trEndTime :: Lens' TimeRange (Maybe UTCTime)
 trEndTime
   = lens _trEndTime (\ s a -> s{_trEndTime = a}) .
@@ -229,18 +241,20 @@ instance ToJSON TimeRange where
 -- /See:/ 'transferRun' smart constructor.
 data TransferRun =
   TransferRun'
-    { _tRunTime              :: !(Maybe DateTime')
-    , _tErrorStatus          :: !(Maybe Status)
-    , _tState                :: !(Maybe TransferRunState)
-    , _tSchedule             :: !(Maybe Text)
-    , _tStartTime            :: !(Maybe DateTime')
-    , _tScheduleTime         :: !(Maybe DateTime')
-    , _tDataSourceId         :: !(Maybe Text)
-    , _tParams               :: !(Maybe TransferRunParams)
-    , _tUserId               :: !(Maybe (Textual Int64))
-    , _tUpdateTime           :: !(Maybe DateTime')
-    , _tName                 :: !(Maybe Text)
-    , _tEndTime              :: !(Maybe DateTime')
+    { _tRunTime :: !(Maybe DateTime')
+    , _tEmailPreferences :: !(Maybe EmailPreferences)
+    , _tErrorStatus :: !(Maybe Status)
+    , _tNotificationPubsubTopic :: !(Maybe Text)
+    , _tState :: !(Maybe TransferRunState)
+    , _tSchedule :: !(Maybe Text)
+    , _tStartTime :: !(Maybe DateTime')
+    , _tScheduleTime :: !(Maybe DateTime')
+    , _tDataSourceId :: !(Maybe Text)
+    , _tParams :: !(Maybe TransferRunParams)
+    , _tUserId :: !(Maybe (Textual Int64))
+    , _tUpdateTime :: !(Maybe DateTime')
+    , _tName :: !(Maybe Text)
+    , _tEndTime :: !(Maybe DateTime')
     , _tDestinationDataSetId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -252,7 +266,11 @@ data TransferRun =
 --
 -- * 'tRunTime'
 --
+-- * 'tEmailPreferences'
+--
 -- * 'tErrorStatus'
+--
+-- * 'tNotificationPubsubTopic'
 --
 -- * 'tState'
 --
@@ -280,7 +298,9 @@ transferRun
 transferRun =
   TransferRun'
     { _tRunTime = Nothing
+    , _tEmailPreferences = Nothing
     , _tErrorStatus = Nothing
+    , _tNotificationPubsubTopic = Nothing
     , _tState = Nothing
     , _tSchedule = Nothing
     , _tStartTime = Nothing
@@ -295,17 +315,32 @@ transferRun =
     }
 
 
--- | For batch transfer runs, specifies the date and time that data should be
--- ingested.
+-- | For batch transfer runs, specifies the date and time of the data should
+-- be ingested.
 tRunTime :: Lens' TransferRun (Maybe UTCTime)
 tRunTime
   = lens _tRunTime (\ s a -> s{_tRunTime = a}) .
       mapping _DateTime
 
+-- | Output only. Email notifications will be sent according to these
+-- preferences to the email address of the user who owns the transfer
+-- config this run was derived from.
+tEmailPreferences :: Lens' TransferRun (Maybe EmailPreferences)
+tEmailPreferences
+  = lens _tEmailPreferences
+      (\ s a -> s{_tEmailPreferences = a})
+
 -- | Status of the transfer run.
 tErrorStatus :: Lens' TransferRun (Maybe Status)
 tErrorStatus
   = lens _tErrorStatus (\ s a -> s{_tErrorStatus = a})
+
+-- | Output only. Pub\/Sub topic where a notification will be sent after this
+-- transfer run finishes
+tNotificationPubsubTopic :: Lens' TransferRun (Maybe Text)
+tNotificationPubsubTopic
+  = lens _tNotificationPubsubTopic
+      (\ s a -> s{_tNotificationPubsubTopic = a})
 
 -- | Data transfer run state. Ignored for input requests.
 tState :: Lens' TransferRun (Maybe TransferRunState)
@@ -340,7 +375,11 @@ tDataSourceId
   = lens _tDataSourceId
       (\ s a -> s{_tDataSourceId = a})
 
--- | Output only. Data transfer specific parameters.
+-- | Output only. Parameters specific to each data source. For more
+-- information see the bq tab in the \'Setting up a data transfer\' section
+-- for each data source. For example the parameters for Cloud Storage
+-- transfers are listed here:
+-- https:\/\/cloud.google.com\/bigquery-transfer\/docs\/cloud-storage-transfer#bq
 tParams :: Lens' TransferRun (Maybe TransferRunParams)
 tParams = lens _tParams (\ s a -> s{_tParams = a})
 
@@ -380,8 +419,10 @@ instance FromJSON TransferRun where
           = withObject "TransferRun"
               (\ o ->
                  TransferRun' <$>
-                   (o .:? "runTime") <*> (o .:? "errorStatus") <*>
-                     (o .:? "state")
+                   (o .:? "runTime") <*> (o .:? "emailPreferences") <*>
+                     (o .:? "errorStatus")
+                     <*> (o .:? "notificationPubsubTopic")
+                     <*> (o .:? "state")
                      <*> (o .:? "schedule")
                      <*> (o .:? "startTime")
                      <*> (o .:? "scheduleTime")
@@ -398,7 +439,10 @@ instance ToJSON TransferRun where
           = object
               (catMaybes
                  [("runTime" .=) <$> _tRunTime,
+                  ("emailPreferences" .=) <$> _tEmailPreferences,
                   ("errorStatus" .=) <$> _tErrorStatus,
+                  ("notificationPubsubTopic" .=) <$>
+                    _tNotificationPubsubTopic,
                   ("state" .=) <$> _tState,
                   ("schedule" .=) <$> _tSchedule,
                   ("startTime" .=) <$> _tStartTime,
@@ -439,7 +483,10 @@ instance FromJSON CheckValidCredsRequest where
 instance ToJSON CheckValidCredsRequest where
         toJSON = const emptyObject
 
--- | Data transfer specific parameters.
+-- | Parameters specific to each data source. For more information see the bq
+-- tab in the \'Setting up a data transfer\' section for each data source.
+-- For example the parameters for Cloud Storage transfers are listed here:
+-- https:\/\/cloud.google.com\/bigquery-transfer\/docs\/cloud-storage-transfer#bq
 --
 -- /See:/ 'transferConfigParams' smart constructor.
 newtype TransferConfigParams =
@@ -482,7 +529,7 @@ instance ToJSON TransferConfigParams where
 data ScheduleTransferRunsRequest =
   ScheduleTransferRunsRequest'
     { _strrStartTime :: !(Maybe DateTime')
-    , _strrEndTime   :: !(Maybe DateTime')
+    , _strrEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -501,7 +548,7 @@ scheduleTransferRunsRequest =
     {_strrStartTime = Nothing, _strrEndTime = Nothing}
 
 
--- | Start time of the range of transfer runs. For example,
+-- | Required. Start time of the range of transfer runs. For example,
 -- \`\"2017-05-25T00:00:00+00:00\"\`.
 strrStartTime :: Lens' ScheduleTransferRunsRequest (Maybe UTCTime)
 strrStartTime
@@ -509,7 +556,7 @@ strrStartTime
       (\ s a -> s{_strrStartTime = a})
       . mapping _DateTime
 
--- | End time of the range of transfer runs. For example,
+-- | Required. End time of the range of transfer runs. For example,
 -- \`\"2017-05-30T00:00:00+00:00\"\`.
 strrEndTime :: Lens' ScheduleTransferRunsRequest (Maybe UTCTime)
 strrEndTime
@@ -535,11 +582,11 @@ instance ToJSON ScheduleTransferRunsRequest where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -646,9 +693,9 @@ instance ToJSON Empty where
 -- /See:/ 'scheduleOptions' smart constructor.
 data ScheduleOptions =
   ScheduleOptions'
-    { _soStartTime             :: !(Maybe DateTime')
+    { _soStartTime :: !(Maybe DateTime')
     , _soDisableAutoScheduling :: !(Maybe Bool)
-    , _soEndTime               :: !(Maybe DateTime')
+    , _soEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -723,7 +770,7 @@ instance ToJSON ScheduleOptions where
 -- /See:/ 'listTransferLogsResponse' smart constructor.
 data ListTransferLogsResponse =
   ListTransferLogsResponse'
-    { _ltlrNextPageToken    :: !(Maybe Text)
+    { _ltlrNextPageToken :: !(Maybe Text)
     , _ltlrTransferMessages :: !(Maybe [TransferMessage])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -848,7 +895,11 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | Output only. Data transfer specific parameters.
+-- | Output only. Parameters specific to each data source. For more
+-- information see the bq tab in the \'Setting up a data transfer\' section
+-- for each data source. For example the parameters for Cloud Storage
+-- transfers are listed here:
+-- https:\/\/cloud.google.com\/bigquery-transfer\/docs\/cloud-storage-transfer#bq
 --
 -- /See:/ 'transferRunParams' smart constructor.
 newtype TransferRunParams =
@@ -893,21 +944,22 @@ instance ToJSON TransferRunParams where
 -- /See:/ 'dataSourceParameter' smart constructor.
 data DataSourceParameter =
   DataSourceParameter'
-    { _dspMaxValue              :: !(Maybe (Textual Double))
-    , _dspParamId               :: !(Maybe Text)
-    , _dspImmutable             :: !(Maybe Bool)
-    , _dspRecurse               :: !(Maybe Bool)
+    { _dspMaxValue :: !(Maybe (Textual Double))
+    , _dspParamId :: !(Maybe Text)
+    , _dspImmutable :: !(Maybe Bool)
+    , _dspRecurse :: !(Maybe Bool)
     , _dspValidationDescription :: !(Maybe Text)
-    , _dspRequired              :: !(Maybe Bool)
-    , _dspDisplayName           :: !(Maybe Text)
-    , _dspType                  :: !(Maybe DataSourceParameterType)
-    , _dspAllowedValues         :: !(Maybe [Text])
-    , _dspRepeated              :: !(Maybe Bool)
-    , _dspDescription           :: !(Maybe Text)
-    , _dspValidationRegex       :: !(Maybe Text)
-    , _dspMinValue              :: !(Maybe (Textual Double))
-    , _dspValidationHelpURL     :: !(Maybe Text)
-    , _dspFields                :: !(Maybe [DataSourceParameter])
+    , _dspRequired :: !(Maybe Bool)
+    , _dspDisplayName :: !(Maybe Text)
+    , _dspType :: !(Maybe DataSourceParameterType)
+    , _dspAllowedValues :: !(Maybe [Text])
+    , _dspRepeated :: !(Maybe Bool)
+    , _dspDescription :: !(Maybe Text)
+    , _dspValidationRegex :: !(Maybe Text)
+    , _dspMinValue :: !(Maybe (Textual Double))
+    , _dspValidationHelpURL :: !(Maybe Text)
+    , _dspFields :: !(Maybe [DataSourceParameter])
+    , _dspDeprecated :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -945,6 +997,8 @@ data DataSourceParameter =
 -- * 'dspValidationHelpURL'
 --
 -- * 'dspFields'
+--
+-- * 'dspDeprecated'
 dataSourceParameter
     :: DataSourceParameter
 dataSourceParameter =
@@ -964,6 +1018,7 @@ dataSourceParameter =
     , _dspMinValue = Nothing
     , _dspValidationHelpURL = Nothing
     , _dspFields = Nothing
+    , _dspDeprecated = Nothing
     }
 
 
@@ -1054,6 +1109,13 @@ dspFields
       _Default
       . _Coerce
 
+-- | If true, it should not be used in new transfers, and it should not be
+-- visible to users.
+dspDeprecated :: Lens' DataSourceParameter (Maybe Bool)
+dspDeprecated
+  = lens _dspDeprecated
+      (\ s a -> s{_dspDeprecated = a})
+
 instance FromJSON DataSourceParameter where
         parseJSON
           = withObject "DataSourceParameter"
@@ -1072,7 +1134,8 @@ instance FromJSON DataSourceParameter where
                      <*> (o .:? "validationRegex")
                      <*> (o .:? "minValue")
                      <*> (o .:? "validationHelpUrl")
-                     <*> (o .:? "fields" .!= mempty))
+                     <*> (o .:? "fields" .!= mempty)
+                     <*> (o .:? "deprecated"))
 
 instance ToJSON DataSourceParameter where
         toJSON DataSourceParameter'{..}
@@ -1093,7 +1156,8 @@ instance ToJSON DataSourceParameter where
                   ("validationRegex" .=) <$> _dspValidationRegex,
                   ("minValue" .=) <$> _dspMinValue,
                   ("validationHelpUrl" .=) <$> _dspValidationHelpURL,
-                  ("fields" .=) <$> _dspFields])
+                  ("fields" .=) <$> _dspFields,
+                  ("deprecated" .=) <$> _dspDeprecated])
 
 -- | A response to schedule transfer runs for a time range.
 --
@@ -1140,7 +1204,7 @@ instance ToJSON ScheduleTransferRunsResponse where
 data ListDataSourcesResponse =
   ListDataSourcesResponse'
     { _ldsrNextPageToken :: !(Maybe Text)
-    , _ldsrDataSources   :: !(Maybe [DataSource])
+    , _ldsrDataSources :: !(Maybe [DataSource])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1195,7 +1259,7 @@ instance ToJSON ListDataSourcesResponse where
 -- /See:/ 'startManualTransferRunsRequest' smart constructor.
 data StartManualTransferRunsRequest =
   StartManualTransferRunsRequest'
-    { _smtrrRequestedRunTime   :: !(Maybe DateTime')
+    { _smtrrRequestedRunTime :: !(Maybe DateTime')
     , _smtrrRequestedTimeRange :: !(Maybe TimeRange)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1252,24 +1316,24 @@ instance ToJSON StartManualTransferRunsRequest where
 -- /See:/ 'dataSource' smart constructor.
 data DataSource =
   DataSource'
-    { _dsClientId                     :: !(Maybe Text)
-    , _dsMinimumScheduleInterval      :: !(Maybe GDuration)
-    , _dsSupportsCustomSchedule       :: !(Maybe Bool)
-    , _dsUpdateDeadlineSeconds        :: !(Maybe (Textual Int32))
-    , _dsManualRunsDisabled           :: !(Maybe Bool)
-    , _dsDataSourceId                 :: !(Maybe Text)
-    , _dsTransferType                 :: !(Maybe DataSourceTransferType)
-    , _dsScopes                       :: !(Maybe [Text])
-    , _dsSupportsMultipleTransfers    :: !(Maybe Bool)
-    , _dsName                         :: !(Maybe Text)
-    , _dsParameters                   :: !(Maybe [DataSourceParameter])
-    , _dsHelpURL                      :: !(Maybe Text)
+    { _dsClientId :: !(Maybe Text)
+    , _dsMinimumScheduleInterval :: !(Maybe GDuration)
+    , _dsSupportsCustomSchedule :: !(Maybe Bool)
+    , _dsUpdateDeadlineSeconds :: !(Maybe (Textual Int32))
+    , _dsManualRunsDisabled :: !(Maybe Bool)
+    , _dsDataSourceId :: !(Maybe Text)
+    , _dsTransferType :: !(Maybe DataSourceTransferType)
+    , _dsScopes :: !(Maybe [Text])
+    , _dsSupportsMultipleTransfers :: !(Maybe Bool)
+    , _dsName :: !(Maybe Text)
+    , _dsParameters :: !(Maybe [DataSourceParameter])
+    , _dsHelpURL :: !(Maybe Text)
     , _dsDefaultDataRefreshWindowDays :: !(Maybe (Textual Int32))
-    , _dsDisplayName                  :: !(Maybe Text)
-    , _dsDataRefreshType              :: !(Maybe DataSourceDataRefreshType)
-    , _dsAuthorizationType            :: !(Maybe DataSourceAuthorizationType)
-    , _dsDefaultSchedule              :: !(Maybe Text)
-    , _dsDescription                  :: !(Maybe Text)
+    , _dsDisplayName :: !(Maybe Text)
+    , _dsDataRefreshType :: !(Maybe DataSourceDataRefreshType)
+    , _dsAuthorizationType :: !(Maybe DataSourceAuthorizationType)
+    , _dsDefaultSchedule :: !(Maybe Text)
+    , _dsDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1516,7 +1580,7 @@ instance ToJSON DataSource where
 data ListTransferRunsResponse =
   ListTransferRunsResponse'
     { _ltrrNextPageToken :: !(Maybe Text)
-    , _ltrrTransferRuns  :: !(Maybe [TransferRun])
+    , _ltrrTransferRuns :: !(Maybe [TransferRun])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1571,7 +1635,7 @@ instance ToJSON ListTransferRunsResponse where
 -- /See:/ 'transferMessage' smart constructor.
 data TransferMessage =
   TransferMessage'
-    { _tmSeverity    :: !(Maybe TransferMessageSeverity)
+    { _tmSeverity :: !(Maybe TransferMessageSeverity)
     , _tmMessageTime :: !(Maybe DateTime')
     , _tmMessageText :: !(Maybe Text)
     }
@@ -1746,7 +1810,7 @@ instance ToJSON LocationMetadata where
 -- /See:/ 'listTransferConfigsResponse' smart constructor.
 data ListTransferConfigsResponse =
   ListTransferConfigsResponse'
-    { _ltcrNextPageToken   :: !(Maybe Text)
+    { _ltcrNextPageToken :: !(Maybe Text)
     , _ltcrTransferConfigs :: !(Maybe [TransferConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1807,19 +1871,21 @@ instance ToJSON ListTransferConfigsResponse where
 -- /See:/ 'transferConfig' smart constructor.
 data TransferConfig =
   TransferConfig'
-    { _tcState                 :: !(Maybe TransferConfigState)
-    , _tcSchedule              :: !(Maybe Text)
-    , _tcScheduleOptions       :: !(Maybe ScheduleOptions)
-    , _tcDisabled              :: !(Maybe Bool)
-    , _tcDataSourceId          :: !(Maybe Text)
-    , _tcParams                :: !(Maybe TransferConfigParams)
-    , _tcUserId                :: !(Maybe (Textual Int64))
-    , _tcUpdateTime            :: !(Maybe DateTime')
-    , _tcName                  :: !(Maybe Text)
-    , _tcDataSetRegion         :: !(Maybe Text)
-    , _tcDisplayName           :: !(Maybe Text)
-    , _tcNextRunTime           :: !(Maybe DateTime')
-    , _tcDestinationDataSetId  :: !(Maybe Text)
+    { _tcEmailPreferences :: !(Maybe EmailPreferences)
+    , _tcNotificationPubsubTopic :: !(Maybe Text)
+    , _tcState :: !(Maybe TransferConfigState)
+    , _tcSchedule :: !(Maybe Text)
+    , _tcScheduleOptions :: !(Maybe ScheduleOptions)
+    , _tcDisabled :: !(Maybe Bool)
+    , _tcDataSourceId :: !(Maybe Text)
+    , _tcParams :: !(Maybe TransferConfigParams)
+    , _tcUserId :: !(Maybe (Textual Int64))
+    , _tcUpdateTime :: !(Maybe DateTime')
+    , _tcName :: !(Maybe Text)
+    , _tcDataSetRegion :: !(Maybe Text)
+    , _tcDisplayName :: !(Maybe Text)
+    , _tcNextRunTime :: !(Maybe DateTime')
+    , _tcDestinationDataSetId :: !(Maybe Text)
     , _tcDataRefreshWindowDays :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1828,6 +1894,10 @@ data TransferConfig =
 -- | Creates a value of 'TransferConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tcEmailPreferences'
+--
+-- * 'tcNotificationPubsubTopic'
 --
 -- * 'tcState'
 --
@@ -1860,7 +1930,9 @@ transferConfig
     :: TransferConfig
 transferConfig =
   TransferConfig'
-    { _tcState = Nothing
+    { _tcEmailPreferences = Nothing
+    , _tcNotificationPubsubTopic = Nothing
+    , _tcState = Nothing
     , _tcSchedule = Nothing
     , _tcScheduleOptions = Nothing
     , _tcDisabled = Nothing
@@ -1876,6 +1948,20 @@ transferConfig =
     , _tcDataRefreshWindowDays = Nothing
     }
 
+
+-- | Email notifications will be sent according to these preferences to the
+-- email address of the user who owns this transfer config.
+tcEmailPreferences :: Lens' TransferConfig (Maybe EmailPreferences)
+tcEmailPreferences
+  = lens _tcEmailPreferences
+      (\ s a -> s{_tcEmailPreferences = a})
+
+-- | Pub\/Sub topic where notifications will be sent after transfer runs
+-- associated with this transfer config finish.
+tcNotificationPubsubTopic :: Lens' TransferConfig (Maybe Text)
+tcNotificationPubsubTopic
+  = lens _tcNotificationPubsubTopic
+      (\ s a -> s{_tcNotificationPubsubTopic = a})
 
 -- | Output only. State of the most recently updated transfer run.
 tcState :: Lens' TransferConfig (Maybe TransferConfigState)
@@ -1911,7 +1997,10 @@ tcDataSourceId
   = lens _tcDataSourceId
       (\ s a -> s{_tcDataSourceId = a})
 
--- | Data transfer specific parameters.
+-- | Parameters specific to each data source. For more information see the bq
+-- tab in the \'Setting up a data transfer\' section for each data source.
+-- For example the parameters for Cloud Storage transfers are listed here:
+-- https:\/\/cloud.google.com\/bigquery-transfer\/docs\/cloud-storage-transfer#bq
 tcParams :: Lens' TransferConfig (Maybe TransferConfigParams)
 tcParams = lens _tcParams (\ s a -> s{_tcParams = a})
 
@@ -1929,12 +2018,10 @@ tcUpdateTime
       . mapping _DateTime
 
 -- | The resource name of the transfer config. Transfer config names have the
--- form of
+-- form
 -- \`projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}\`.
--- The name is automatically generated based on the config_id specified in
--- CreateTransferConfigRequest along with project_id and region. If
--- config_id is not provided, usually a uuid, even though it is not
--- guaranteed or required, will be generated for config_id.
+-- Where \`config_id\` is usually a uuid, even though it is not guaranteed
+-- or required. The name is ignored when creating a transfer config.
 tcName :: Lens' TransferConfig (Maybe Text)
 tcName = lens _tcName (\ s a -> s{_tcName = a})
 
@@ -1979,8 +2066,11 @@ instance FromJSON TransferConfig where
           = withObject "TransferConfig"
               (\ o ->
                  TransferConfig' <$>
-                   (o .:? "state") <*> (o .:? "schedule") <*>
-                     (o .:? "scheduleOptions")
+                   (o .:? "emailPreferences") <*>
+                     (o .:? "notificationPubsubTopic")
+                     <*> (o .:? "state")
+                     <*> (o .:? "schedule")
+                     <*> (o .:? "scheduleOptions")
                      <*> (o .:? "disabled")
                      <*> (o .:? "dataSourceId")
                      <*> (o .:? "params")
@@ -1997,7 +2087,10 @@ instance ToJSON TransferConfig where
         toJSON TransferConfig'{..}
           = object
               (catMaybes
-                 [("state" .=) <$> _tcState,
+                 [("emailPreferences" .=) <$> _tcEmailPreferences,
+                  ("notificationPubsubTopic" .=) <$>
+                    _tcNotificationPubsubTopic,
+                  ("state" .=) <$> _tcState,
                   ("schedule" .=) <$> _tcSchedule,
                   ("scheduleOptions" .=) <$> _tcScheduleOptions,
                   ("disabled" .=) <$> _tcDisabled,

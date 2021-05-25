@@ -43,8 +43,8 @@ module Network.Google.Resource.ServiceNetworking.Services.Connections.List
     , sclCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceNetworking.Types
+import Network.Google.Prelude
+import Network.Google.ServiceNetworking.Types
 
 -- | A resource alias for @servicenetworking.services.connections.list@ method which the
 -- 'ServicesConnectionsList' request conforms to.
@@ -67,13 +67,13 @@ type ServicesConnectionsListResource =
 -- /See:/ 'servicesConnectionsList' smart constructor.
 data ServicesConnectionsList =
   ServicesConnectionsList'
-    { _sclParent         :: !Text
-    , _sclXgafv          :: !(Maybe Xgafv)
+    { _sclParent :: !Text
+    , _sclXgafv :: !(Maybe Xgafv)
     , _sclUploadProtocol :: !(Maybe Text)
-    , _sclAccessToken    :: !(Maybe Text)
-    , _sclUploadType     :: !(Maybe Text)
-    , _sclNetwork        :: !(Maybe Text)
-    , _sclCallback       :: !(Maybe Text)
+    , _sclAccessToken :: !(Maybe Text)
+    , _sclUploadType :: !(Maybe Text)
+    , _sclNetwork :: !(Maybe Text)
+    , _sclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

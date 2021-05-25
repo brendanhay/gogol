@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a datasource.
+-- Updates a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.update@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.datasources.update@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Update
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.Datasources.Update
     , sduCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.datasources.update@ method which the
 -- 'SettingsDatasourcesUpdate' request conforms to.
@@ -60,18 +61,19 @@ type SettingsDatasourcesUpdateResource =
                        ReqBody '[JSON] UpdateDataSourceRequest :>
                          Put '[JSON] Operation
 
--- | Updates a datasource.
+-- | Updates a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
 -- /See:/ 'settingsDatasourcesUpdate' smart constructor.
 data SettingsDatasourcesUpdate =
   SettingsDatasourcesUpdate'
-    { _sduXgafv          :: !(Maybe Xgafv)
+    { _sduXgafv :: !(Maybe Xgafv)
     , _sduUploadProtocol :: !(Maybe Text)
-    , _sduAccessToken    :: !(Maybe Text)
-    , _sduUploadType     :: !(Maybe Text)
-    , _sduPayload        :: !UpdateDataSourceRequest
-    , _sduName           :: !Text
-    , _sduCallback       :: !(Maybe Text)
+    , _sduAccessToken :: !(Maybe Text)
+    , _sduUploadType :: !(Maybe Text)
+    , _sduPayload :: !UpdateDataSourceRequest
+    , _sduName :: !Text
+    , _sduCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,8 +138,8 @@ sduPayload :: Lens' SettingsDatasourcesUpdate UpdateDataSourceRequest
 sduPayload
   = lens _sduPayload (\ s a -> s{_sduPayload = a})
 
--- | Name of the datasource resource. Format: datasources\/{source_id}.
--- The name is ignored when creating a datasource.
+-- | Name of the datasource resource. Format: datasources\/{source_id}. The
+-- name is ignored when creating a datasource.
 sduName :: Lens' SettingsDatasourcesUpdate Text
 sduName = lens _sduName (\ s a -> s{_sduName = a})
 

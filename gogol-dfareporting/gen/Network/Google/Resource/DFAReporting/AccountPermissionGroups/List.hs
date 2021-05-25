@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of account permission groups.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountPermissionGroups.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.accountPermissionGroups.list@.
 module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
     (
     -- * REST Resource
@@ -33,29 +33,44 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
     , AccountPermissionGroupsList
 
     -- * Request Lenses
+    , apglXgafv
+    , apglUploadProtocol
+    , apglAccessToken
+    , apglUploadType
     , apglProFileId
+    , apglCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountPermissionGroups.list@ method which the
 -- 'AccountPermissionGroupsList' request conforms to.
 type AccountPermissionGroupsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] AccountPermissionGroupsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] AccountPermissionGroupsListResponse
 
 -- | Retrieves the list of account permission groups.
 --
 -- /See:/ 'accountPermissionGroupsList' smart constructor.
-newtype AccountPermissionGroupsList =
+data AccountPermissionGroupsList =
   AccountPermissionGroupsList'
-    { _apglProFileId :: Textual Int64
+    { _apglXgafv :: !(Maybe Xgafv)
+    , _apglUploadProtocol :: !(Maybe Text)
+    , _apglAccessToken :: !(Maybe Text)
+    , _apglUploadType :: !(Maybe Text)
+    , _apglProFileId :: !(Textual Int64)
+    , _apglCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -64,13 +79,53 @@ newtype AccountPermissionGroupsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'apglXgafv'
+--
+-- * 'apglUploadProtocol'
+--
+-- * 'apglAccessToken'
+--
+-- * 'apglUploadType'
+--
 -- * 'apglProFileId'
+--
+-- * 'apglCallback'
 accountPermissionGroupsList
     :: Int64 -- ^ 'apglProFileId'
     -> AccountPermissionGroupsList
 accountPermissionGroupsList pApglProFileId_ =
-  AccountPermissionGroupsList' {_apglProFileId = _Coerce # pApglProFileId_}
+  AccountPermissionGroupsList'
+    { _apglXgafv = Nothing
+    , _apglUploadProtocol = Nothing
+    , _apglAccessToken = Nothing
+    , _apglUploadType = Nothing
+    , _apglProFileId = _Coerce # pApglProFileId_
+    , _apglCallback = Nothing
+    }
 
+
+-- | V1 error format.
+apglXgafv :: Lens' AccountPermissionGroupsList (Maybe Xgafv)
+apglXgafv
+  = lens _apglXgafv (\ s a -> s{_apglXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+apglUploadProtocol :: Lens' AccountPermissionGroupsList (Maybe Text)
+apglUploadProtocol
+  = lens _apglUploadProtocol
+      (\ s a -> s{_apglUploadProtocol = a})
+
+-- | OAuth access token.
+apglAccessToken :: Lens' AccountPermissionGroupsList (Maybe Text)
+apglAccessToken
+  = lens _apglAccessToken
+      (\ s a -> s{_apglAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+apglUploadType :: Lens' AccountPermissionGroupsList (Maybe Text)
+apglUploadType
+  = lens _apglUploadType
+      (\ s a -> s{_apglUploadType = a})
 
 -- | User profile ID associated with this request.
 apglProFileId :: Lens' AccountPermissionGroupsList Int64
@@ -79,6 +134,11 @@ apglProFileId
       (\ s a -> s{_apglProFileId = a})
       . _Coerce
 
+-- | JSONP
+apglCallback :: Lens' AccountPermissionGroupsList (Maybe Text)
+apglCallback
+  = lens _apglCallback (\ s a -> s{_apglCallback = a})
+
 instance GoogleRequest AccountPermissionGroupsList
          where
         type Rs AccountPermissionGroupsList =
@@ -86,7 +146,11 @@ instance GoogleRequest AccountPermissionGroupsList
         type Scopes AccountPermissionGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient AccountPermissionGroupsList'{..}
-          = go _apglProFileId (Just AltJSON)
+          = go _apglProFileId _apglXgafv _apglUploadProtocol
+              _apglAccessToken
+              _apglUploadType
+              _apglCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

@@ -44,6 +44,7 @@ library
         , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
         , Network.Google.Resource.FireStore.Projects.Databases.CollectionGroups.Indexes.List
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchGet
+        , Network.Google.Resource.FireStore.Projects.Databases.Documents.BatchWrite
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.BeginTransaction
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.Commit
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.CreateDocument
@@ -52,6 +53,7 @@ library
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.List
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.ListCollectionIds
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.Listen
+        , Network.Google.Resource.FireStore.Projects.Databases.Documents.PartitionQuery
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.Patch
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.Rollback
         , Network.Google.Resource.FireStore.Projects.Databases.Documents.RunQuery

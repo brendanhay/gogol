@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new uptime check configuration.
+-- Creates a new Uptime check configuration.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.uptimeCheckConfigs.create@.
 module Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Create
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.Monitoring.Projects.UptimeCheckConfigs.Create
     , pucccCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.uptimeCheckConfigs.create@ method which the
 -- 'ProjectsUptimeCheckConfigsCreate' request conforms to.
@@ -60,18 +60,18 @@ type ProjectsUptimeCheckConfigsCreateResource =
                        ReqBody '[JSON] UptimeCheckConfig :>
                          Post '[JSON] UptimeCheckConfig
 
--- | Creates a new uptime check configuration.
+-- | Creates a new Uptime check configuration.
 --
 -- /See:/ 'projectsUptimeCheckConfigsCreate' smart constructor.
 data ProjectsUptimeCheckConfigsCreate =
   ProjectsUptimeCheckConfigsCreate'
-    { _pucccParent         :: !Text
-    , _pucccXgafv          :: !(Maybe Xgafv)
+    { _pucccParent :: !Text
+    , _pucccXgafv :: !(Maybe Xgafv)
     , _pucccUploadProtocol :: !(Maybe Text)
-    , _pucccAccessToken    :: !(Maybe Text)
-    , _pucccUploadType     :: !(Maybe Text)
-    , _pucccPayload        :: !UptimeCheckConfig
-    , _pucccCallback       :: !(Maybe Text)
+    , _pucccAccessToken :: !(Maybe Text)
+    , _pucccUploadType :: !(Maybe Text)
+    , _pucccPayload :: !UptimeCheckConfig
+    , _pucccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -109,8 +109,10 @@ projectsUptimeCheckConfigsCreate pPucccParent_ pPucccPayload_ =
     }
 
 
--- | The project in which to create the uptime check. The format is
--- projects\/[PROJECT_ID].
+-- | Required. The project
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3#project_name) in which
+-- to create the Uptime check. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]
 pucccParent :: Lens' ProjectsUptimeCheckConfigsCreate Text
 pucccParent
   = lens _pucccParent (\ s a -> s{_pucccParent = a})

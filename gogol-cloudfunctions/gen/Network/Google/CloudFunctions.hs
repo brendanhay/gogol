@@ -74,6 +74,12 @@ module Network.Google.CloudFunctions
 
     -- * Types
 
+    -- ** SecretVersion
+    , SecretVersion
+    , secretVersion
+    , svPath
+    , svVersion
+
     -- ** Status
     , Status
     , status
@@ -89,15 +95,6 @@ module Network.Google.CloudFunctions
 
     -- ** OperationMetadataV1Type
     , OperationMetadataV1Type (..)
-
-    -- ** OperationMetadataV1Beta2
-    , OperationMetadataV1Beta2
-    , operationMetadataV1Beta2
-    , omvbVersionId
-    , omvbUpdateTime
-    , omvbType
-    , omvbTarget
-    , omvbRequest
 
     -- ** Expr
     , Expr
@@ -146,6 +143,14 @@ module Network.Google.CloudFunctions
     , generateDownloadURLRequest
     , gdurVersionId
 
+    -- ** CloudFunctionBuildEnvironmentVariables
+    , CloudFunctionBuildEnvironmentVariables
+    , cloudFunctionBuildEnvironmentVariables
+    , cfbevAddtional
+
+    -- ** CloudFunctionVPCConnectorEgressSettings
+    , CloudFunctionVPCConnectorEgressSettings (..)
+
     -- ** Retry
     , Retry
     , retry
@@ -170,6 +175,7 @@ module Network.Google.CloudFunctions
     -- ** HTTPSTrigger
     , HTTPSTrigger
     , httpsTrigger
+    , htSecurityLevel
     , htURL
 
     -- ** StatusDetailsItem
@@ -186,6 +192,14 @@ module Network.Google.CloudFunctions
     , OperationMetadataV1Request
     , operationMetadataV1Request
     , omvrAddtional
+
+    -- ** SecretVolume
+    , SecretVolume
+    , secretVolume
+    , svSecret
+    , svVersions
+    , svProjectId
+    , svMountPath
 
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -211,16 +225,16 @@ module Network.Google.CloudFunctions
     , OperationMetadataV1
     , operationMetadataV1
     , omvVersionId
+    , omvBuildId
+    , omvBuildName
     , omvUpdateTime
     , omvType
+    , omvSourceToken
     , omvTarget
     , omvRequest
 
     -- ** CloudFunctionStatus
     , CloudFunctionStatus (..)
-
-    -- ** OperationMetadataV1Beta2Type
-    , OperationMetadataV1Beta2Type (..)
 
     -- ** GenerateDownloadURLResponse
     , GenerateDownloadURLResponse
@@ -260,6 +274,7 @@ module Network.Google.CloudFunctions
     , ListFunctionsResponse
     , listFunctionsResponse
     , lfrNextPageToken
+    , lfrUnreachable
     , lfrFunctions
 
     -- ** LocationMetadata
@@ -278,34 +293,40 @@ module Network.Google.CloudFunctions
     , alcLogType
     , alcExemptedMembers
 
+    -- ** HTTPSTriggerSecurityLevel
+    , HTTPSTriggerSecurityLevel (..)
+
     -- ** CloudFunction
     , CloudFunction
     , cloudFunction
     , cfRuntime
+    , cfBuildWorkerPool
     , cfStatus
     , cfSourceArchiveURL
     , cfVersionId
+    , cfSecretVolumes
     , cfSourceUploadURL
     , cfEntryPoint
+    , cfBuildId
     , cfHTTPSTrigger
     , cfNetwork
     , cfMaxInstances
+    , cfVPCConnectorEgressSettings
     , cfEventTrigger
     , cfUpdateTime
     , cfName
     , cfSourceRepository
     , cfAvailableMemoryMb
+    , cfIngressSettings
     , cfLabels
     , cfServiceAccountEmail
     , cfEnvironmentVariables
     , cfTimeout
+    , cfSourceToken
+    , cfBuildEnvironmentVariables
     , cfVPCConnector
+    , cfSecretEnvironmentVariables
     , cfDescription
-
-    -- ** OperationMetadataV1Beta2Request
-    , OperationMetadataV1Beta2Request
-    , operationMetadataV1Beta2Request
-    , omvbrAddtional
 
     -- ** CloudFunctionLabels
     , CloudFunctionLabels
@@ -316,6 +337,14 @@ module Network.Google.CloudFunctions
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- ** SecretEnvVar
+    , SecretEnvVar
+    , secretEnvVar
+    , sevSecret
+    , sevKey
+    , sevVersion
+    , sevProjectId
 
     -- ** CallFunctionRequest
     , CallFunctionRequest
@@ -328,24 +357,27 @@ module Network.Google.CloudFunctions
     , bMembers
     , bRole
     , bCondition
+
+    -- ** CloudFunctionIngressSettings
+    , CloudFunctionIngressSettings (..)
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudFunctions.Operations.Get
-import           Network.Google.Resource.CloudFunctions.Operations.List
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Call
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Create
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Delete
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateDownloadURL
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateUploadURL
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Get
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GetIAMPolicy
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.List
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Patch
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.SetIAMPolicy
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.TestIAMPermissions
-import           Network.Google.Resource.CloudFunctions.Projects.Locations.List
+import Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Resource.CloudFunctions.Operations.Get
+import Network.Google.Resource.CloudFunctions.Operations.List
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Call
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Create
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Delete
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateDownloadURL
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GenerateUploadURL
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Get
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.GetIAMPolicy
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.List
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Patch
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.SetIAMPolicy
+import Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.TestIAMPermissions
+import Network.Google.Resource.CloudFunctions.Projects.Locations.List
 
 {- $resources
 TODO

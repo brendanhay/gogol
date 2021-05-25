@@ -42,13 +42,13 @@ module Network.Google.Resource.AccessApproval.Projects.ApprovalRequests.Get
     , pargCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.projects.approvalRequests.get@ method which the
 -- 'ProjectsApprovalRequestsGet' request conforms to.
 type ProjectsApprovalRequestsGetResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,12 +64,12 @@ type ProjectsApprovalRequestsGetResource =
 -- /See:/ 'projectsApprovalRequestsGet' smart constructor.
 data ProjectsApprovalRequestsGet =
   ProjectsApprovalRequestsGet'
-    { _pargXgafv          :: !(Maybe Xgafv)
+    { _pargXgafv :: !(Maybe Xgafv)
     , _pargUploadProtocol :: !(Maybe Text)
-    , _pargAccessToken    :: !(Maybe Text)
-    , _pargUploadType     :: !(Maybe Text)
-    , _pargName           :: !Text
-    , _pargCallback       :: !(Maybe Text)
+    , _pargAccessToken :: !(Maybe Text)
+    , _pargUploadType :: !(Maybe Text)
+    , _pargName :: !Text
+    , _pargCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

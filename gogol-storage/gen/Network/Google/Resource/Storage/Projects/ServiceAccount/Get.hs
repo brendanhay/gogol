@@ -35,11 +35,12 @@ module Network.Google.Resource.Storage.Projects.ServiceAccount.Get
 
     -- * Request Lenses
     , psagUserProject
+    , psagProvisionalUserProject
     , psagProjectId
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.projects.serviceAccount.get@ method which the
 -- 'ProjectsServiceAccountGet' request conforms to.
@@ -50,8 +51,9 @@ type ProjectsServiceAccountGetResource =
            Capture "projectId" Text :>
              "serviceAccount" :>
                QueryParam "userProject" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] ServiceAccount
+                 QueryParam "provisionalUserProject" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] ServiceAccount
 
 -- | Get the email address of this project\'s Google Cloud Storage service
 -- account.
@@ -60,7 +62,8 @@ type ProjectsServiceAccountGetResource =
 data ProjectsServiceAccountGet =
   ProjectsServiceAccountGet'
     { _psagUserProject :: !(Maybe Text)
-    , _psagProjectId   :: !Text
+    , _psagProvisionalUserProject :: !(Maybe Text)
+    , _psagProjectId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,13 +74,18 @@ data ProjectsServiceAccountGet =
 --
 -- * 'psagUserProject'
 --
+-- * 'psagProvisionalUserProject'
+--
 -- * 'psagProjectId'
 projectsServiceAccountGet
     :: Text -- ^ 'psagProjectId'
     -> ProjectsServiceAccountGet
 projectsServiceAccountGet pPsagProjectId_ =
   ProjectsServiceAccountGet'
-    {_psagUserProject = Nothing, _psagProjectId = pPsagProjectId_}
+    { _psagUserProject = Nothing
+    , _psagProvisionalUserProject = Nothing
+    , _psagProjectId = pPsagProjectId_
+    }
 
 
 -- | The project to be billed for this request.
@@ -85,6 +93,13 @@ psagUserProject :: Lens' ProjectsServiceAccountGet (Maybe Text)
 psagUserProject
   = lens _psagUserProject
       (\ s a -> s{_psagUserProject = a})
+
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+psagProvisionalUserProject :: Lens' ProjectsServiceAccountGet (Maybe Text)
+psagProvisionalUserProject
+  = lens _psagProvisionalUserProject
+      (\ s a -> s{_psagProvisionalUserProject = a})
 
 -- | Project ID
 psagProjectId :: Lens' ProjectsServiceAccountGet Text
@@ -102,7 +117,9 @@ instance GoogleRequest ProjectsServiceAccountGet
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ProjectsServiceAccountGet'{..}
-          = go _psagProjectId _psagUserProject (Just AltJSON)
+          = go _psagProjectId _psagUserProject
+              _psagProvisionalUserProject
+              (Just AltJSON)
               storageService
           where go
                   = buildClient

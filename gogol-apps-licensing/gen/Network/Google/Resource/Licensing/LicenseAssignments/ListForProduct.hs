@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List license assignments for given product of the customer.
+-- List all users assigned licenses for a specific product SKU.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.listForProduct@.
+-- /See:/ <https://developers.google.com/admin-sdk/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.listForProduct@.
 module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
     (
     -- * REST Resource
@@ -33,14 +33,19 @@ module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
     , LicenseAssignmentsListForProduct
 
     -- * Request Lenses
+    , lalfpXgafv
+    , lalfpUploadProtocol
+    , lalfpAccessToken
+    , lalfpUploadType
     , lalfpCustomerId
     , lalfpPageToken
     , lalfpProductId
     , lalfpMaxResults
+    , lalfpCallback
     ) where
 
-import           Network.Google.AppsLicensing.Types
-import           Network.Google.Prelude
+import Network.Google.AppsLicensing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.listForProduct@ method which the
 -- 'LicenseAssignmentsListForProduct' request conforms to.
@@ -52,20 +57,30 @@ type LicenseAssignmentsListForProductResource =
              Capture "productId" Text :>
                "users" :>
                  QueryParam "customerId" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] LicenseAssignmentList
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] LicenseAssignmentList
 
--- | List license assignments for given product of the customer.
+-- | List all users assigned licenses for a specific product SKU.
 --
 -- /See:/ 'licenseAssignmentsListForProduct' smart constructor.
 data LicenseAssignmentsListForProduct =
   LicenseAssignmentsListForProduct'
-    { _lalfpCustomerId :: !Text
-    , _lalfpPageToken  :: !Text
-    , _lalfpProductId  :: !Text
+    { _lalfpXgafv :: !(Maybe Xgafv)
+    , _lalfpUploadProtocol :: !(Maybe Text)
+    , _lalfpAccessToken :: !(Maybe Text)
+    , _lalfpUploadType :: !(Maybe Text)
+    , _lalfpCustomerId :: !Text
+    , _lalfpPageToken :: !Text
+    , _lalfpProductId :: !Text
     , _lalfpMaxResults :: !(Textual Word32)
+    , _lalfpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,6 +89,14 @@ data LicenseAssignmentsListForProduct =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lalfpXgafv'
+--
+-- * 'lalfpUploadProtocol'
+--
+-- * 'lalfpAccessToken'
+--
+-- * 'lalfpUploadType'
+--
 -- * 'lalfpCustomerId'
 --
 -- * 'lalfpPageToken'
@@ -81,46 +104,87 @@ data LicenseAssignmentsListForProduct =
 -- * 'lalfpProductId'
 --
 -- * 'lalfpMaxResults'
+--
+-- * 'lalfpCallback'
 licenseAssignmentsListForProduct
     :: Text -- ^ 'lalfpCustomerId'
     -> Text -- ^ 'lalfpProductId'
     -> LicenseAssignmentsListForProduct
 licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
   LicenseAssignmentsListForProduct'
-    { _lalfpCustomerId = pLalfpCustomerId_
+    { _lalfpXgafv = Nothing
+    , _lalfpUploadProtocol = Nothing
+    , _lalfpAccessToken = Nothing
+    , _lalfpUploadType = Nothing
+    , _lalfpCustomerId = pLalfpCustomerId_
     , _lalfpPageToken = ""
     , _lalfpProductId = pLalfpProductId_
     , _lalfpMaxResults = 100
+    , _lalfpCallback = Nothing
     }
 
 
--- | CustomerId represents the customer for whom licenseassignments are
--- queried
+-- | V1 error format.
+lalfpXgafv :: Lens' LicenseAssignmentsListForProduct (Maybe Xgafv)
+lalfpXgafv
+  = lens _lalfpXgafv (\ s a -> s{_lalfpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lalfpUploadProtocol :: Lens' LicenseAssignmentsListForProduct (Maybe Text)
+lalfpUploadProtocol
+  = lens _lalfpUploadProtocol
+      (\ s a -> s{_lalfpUploadProtocol = a})
+
+-- | OAuth access token.
+lalfpAccessToken :: Lens' LicenseAssignmentsListForProduct (Maybe Text)
+lalfpAccessToken
+  = lens _lalfpAccessToken
+      (\ s a -> s{_lalfpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lalfpUploadType :: Lens' LicenseAssignmentsListForProduct (Maybe Text)
+lalfpUploadType
+  = lens _lalfpUploadType
+      (\ s a -> s{_lalfpUploadType = a})
+
+-- | Customer\'s \`customerId\`. A previous version of this API accepted the
+-- primary domain name as a value for this field. If the customer is
+-- suspended, the server returns an error.
 lalfpCustomerId :: Lens' LicenseAssignmentsListForProduct Text
 lalfpCustomerId
   = lens _lalfpCustomerId
       (\ s a -> s{_lalfpCustomerId = a})
 
--- | Token to fetch the next page.Optional. By default server will return
--- first page
+-- | Token to fetch the next page of data. The \`maxResults\` query string is
+-- related to the \`pageToken\` since \`maxResults\` determines how many
+-- entries are returned on each page. This is an optional query string. If
+-- not specified, the server returns the first page.
 lalfpPageToken :: Lens' LicenseAssignmentsListForProduct Text
 lalfpPageToken
   = lens _lalfpPageToken
       (\ s a -> s{_lalfpPageToken = a})
 
--- | Name for product
+-- | A product\'s unique identifier. For more information about products in
+-- this version of the API, see Products and SKUs.
 lalfpProductId :: Lens' LicenseAssignmentsListForProduct Text
 lalfpProductId
   = lens _lalfpProductId
       (\ s a -> s{_lalfpProductId = a})
 
--- | Maximum number of campaigns to return at one time. Must be positive.
--- Optional. Default value is 100.
+-- | The \`maxResults\` query string determines how many entries are returned
+-- on each page of a large response. This is an optional parameter. The
+-- value must be a positive number.
 lalfpMaxResults :: Lens' LicenseAssignmentsListForProduct Word32
 lalfpMaxResults
   = lens _lalfpMaxResults
       (\ s a -> s{_lalfpMaxResults = a})
       . _Coerce
+
+-- | JSONP
+lalfpCallback :: Lens' LicenseAssignmentsListForProduct (Maybe Text)
+lalfpCallback
+  = lens _lalfpCallback
+      (\ s a -> s{_lalfpCallback = a})
 
 instance GoogleRequest
            LicenseAssignmentsListForProduct
@@ -131,8 +195,13 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient LicenseAssignmentsListForProduct'{..}
           = go _lalfpProductId (Just _lalfpCustomerId)
+              _lalfpXgafv
+              _lalfpUploadProtocol
+              _lalfpAccessToken
+              _lalfpUploadType
               (Just _lalfpPageToken)
               (Just _lalfpMaxResults)
+              _lalfpCallback
               (Just AltJSON)
               appsLicensingService
           where go

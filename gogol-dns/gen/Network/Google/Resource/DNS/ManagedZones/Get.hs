@@ -22,7 +22,7 @@
 --
 -- Fetch the representation of an existing ManagedZone.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.get@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.managedZones.get@.
 module Network.Google.Resource.DNS.ManagedZones.Get
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.DNS.ManagedZones.Get
     , ManagedZonesGet
 
     -- * Request Lenses
+    , mzgXgafv
+    , mzgUploadProtocol
     , mzgProject
+    , mzgAccessToken
+    , mzgUploadType
     , mzgManagedZone
     , mzgClientOperationId
+    , mzgCallback
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.managedZones.get@ method which the
 -- 'ManagedZonesGet' request conforms to.
@@ -50,17 +55,27 @@ type ManagedZonesGetResource =
            Capture "project" Text :>
              "managedZones" :>
                Capture "managedZone" Text :>
-                 QueryParam "clientOperationId" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "clientOperationId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
 
 -- | Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ 'managedZonesGet' smart constructor.
 data ManagedZonesGet =
   ManagedZonesGet'
-    { _mzgProject           :: !Text
-    , _mzgManagedZone       :: !Text
+    { _mzgXgafv :: !(Maybe Xgafv)
+    , _mzgUploadProtocol :: !(Maybe Text)
+    , _mzgProject :: !Text
+    , _mzgAccessToken :: !(Maybe Text)
+    , _mzgUploadType :: !(Maybe Text)
+    , _mzgManagedZone :: !Text
     , _mzgClientOperationId :: !(Maybe Text)
+    , _mzgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,27 +84,64 @@ data ManagedZonesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mzgXgafv'
+--
+-- * 'mzgUploadProtocol'
+--
 -- * 'mzgProject'
+--
+-- * 'mzgAccessToken'
+--
+-- * 'mzgUploadType'
 --
 -- * 'mzgManagedZone'
 --
 -- * 'mzgClientOperationId'
+--
+-- * 'mzgCallback'
 managedZonesGet
     :: Text -- ^ 'mzgProject'
     -> Text -- ^ 'mzgManagedZone'
     -> ManagedZonesGet
 managedZonesGet pMzgProject_ pMzgManagedZone_ =
   ManagedZonesGet'
-    { _mzgProject = pMzgProject_
+    { _mzgXgafv = Nothing
+    , _mzgUploadProtocol = Nothing
+    , _mzgProject = pMzgProject_
+    , _mzgAccessToken = Nothing
+    , _mzgUploadType = Nothing
     , _mzgManagedZone = pMzgManagedZone_
     , _mzgClientOperationId = Nothing
+    , _mzgCallback = Nothing
     }
 
+
+-- | V1 error format.
+mzgXgafv :: Lens' ManagedZonesGet (Maybe Xgafv)
+mzgXgafv = lens _mzgXgafv (\ s a -> s{_mzgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mzgUploadProtocol :: Lens' ManagedZonesGet (Maybe Text)
+mzgUploadProtocol
+  = lens _mzgUploadProtocol
+      (\ s a -> s{_mzgUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 mzgProject :: Lens' ManagedZonesGet Text
 mzgProject
   = lens _mzgProject (\ s a -> s{_mzgProject = a})
+
+-- | OAuth access token.
+mzgAccessToken :: Lens' ManagedZonesGet (Maybe Text)
+mzgAccessToken
+  = lens _mzgAccessToken
+      (\ s a -> s{_mzgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mzgUploadType :: Lens' ManagedZonesGet (Maybe Text)
+mzgUploadType
+  = lens _mzgUploadType
+      (\ s a -> s{_mzgUploadType = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -106,6 +158,11 @@ mzgClientOperationId
   = lens _mzgClientOperationId
       (\ s a -> s{_mzgClientOperationId = a})
 
+-- | JSONP
+mzgCallback :: Lens' ManagedZonesGet (Maybe Text)
+mzgCallback
+  = lens _mzgCallback (\ s a -> s{_mzgCallback = a})
+
 instance GoogleRequest ManagedZonesGet where
         type Rs ManagedZonesGet = ManagedZone
         type Scopes ManagedZonesGet =
@@ -114,8 +171,12 @@ instance GoogleRequest ManagedZonesGet where
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesGet'{..}
-          = go _mzgProject _mzgManagedZone
+          = go _mzgProject _mzgManagedZone _mzgXgafv
+              _mzgUploadProtocol
+              _mzgAccessToken
+              _mzgUploadType
               _mzgClientOperationId
+              _mzgCallback
               (Just AltJSON)
               dNSService
           where go

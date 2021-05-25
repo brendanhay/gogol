@@ -74,6 +74,9 @@ module Network.Google.CloudProFiler
     -- ** Xgafv
     , Xgafv (..)
 
+    -- ** CreateProFileRequestProFileTypeItem
+    , CreateProFileRequestProFileTypeItem (..)
+
     -- ** Deployment
     , Deployment
     , deployment
@@ -82,11 +85,11 @@ module Network.Google.CloudProFiler
     , dTarget
     ) where
 
-import           Network.Google.CloudProFiler.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudProFiler.Projects.ProFiles.Create
-import           Network.Google.Resource.CloudProFiler.Projects.ProFiles.CreateOffline
-import           Network.Google.Resource.CloudProFiler.Projects.ProFiles.Patch
+import Network.Google.Prelude
+import Network.Google.CloudProFiler.Types
+import Network.Google.Resource.CloudProFiler.Projects.ProFiles.Create
+import Network.Google.Resource.CloudProFiler.Projects.ProFiles.CreateOffline
+import Network.Google.Resource.CloudProFiler.Projects.ProFiles.Patch
 
 {- $resources
 TODO

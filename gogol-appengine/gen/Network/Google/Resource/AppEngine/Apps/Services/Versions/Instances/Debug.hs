@@ -51,8 +51,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
     , asvidCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.versions.instances.debug@ method which the
 -- 'AppsServicesVersionsInstancesDebug' request conforms to.
@@ -86,16 +86,16 @@ type AppsServicesVersionsInstancesDebugResource =
 -- /See:/ 'appsServicesVersionsInstancesDebug' smart constructor.
 data AppsServicesVersionsInstancesDebug =
   AppsServicesVersionsInstancesDebug'
-    { _asvidXgafv          :: !(Maybe Xgafv)
-    , _asvidInstancesId    :: !Text
+    { _asvidXgafv :: !(Maybe Xgafv)
+    , _asvidInstancesId :: !Text
     , _asvidUploadProtocol :: !(Maybe Text)
-    , _asvidAccessToken    :: !(Maybe Text)
-    , _asvidUploadType     :: !(Maybe Text)
-    , _asvidPayload        :: !DebugInstanceRequest
-    , _asvidVersionsId     :: !Text
-    , _asvidAppsId         :: !Text
-    , _asvidServicesId     :: !Text
-    , _asvidCallback       :: !(Maybe Text)
+    , _asvidAccessToken :: !(Maybe Text)
+    , _asvidUploadType :: !(Maybe Text)
+    , _asvidPayload :: !DebugInstanceRequest
+    , _asvidVersionsId :: !Text
+    , _asvidAppsId :: !Text
+    , _asvidServicesId :: !Text
+    , _asvidCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

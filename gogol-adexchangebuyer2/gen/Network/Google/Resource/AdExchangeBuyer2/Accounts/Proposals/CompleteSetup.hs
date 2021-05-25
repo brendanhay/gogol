@@ -48,8 +48,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
     , apcsCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.completeSetup@ method which the
 -- 'AccountsProposalsCompleteSetup' request conforms to.
@@ -78,14 +78,14 @@ type AccountsProposalsCompleteSetupResource =
 -- /See:/ 'accountsProposalsCompleteSetup' smart constructor.
 data AccountsProposalsCompleteSetup =
   AccountsProposalsCompleteSetup'
-    { _apcsXgafv          :: !(Maybe Xgafv)
+    { _apcsXgafv :: !(Maybe Xgafv)
     , _apcsUploadProtocol :: !(Maybe Text)
-    , _apcsAccessToken    :: !(Maybe Text)
-    , _apcsUploadType     :: !(Maybe Text)
-    , _apcsPayload        :: !CompleteSetupRequest
-    , _apcsProposalId     :: !Text
-    , _apcsAccountId      :: !Text
-    , _apcsCallback       :: !(Maybe Text)
+    , _apcsAccessToken :: !(Maybe Text)
+    , _apcsUploadType :: !(Maybe Text)
+    , _apcsPayload :: !CompleteSetupRequest
+    , _apcsProposalId :: !Text
+    , _apcsAccountId :: !Text
+    , _apcsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

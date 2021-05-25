@@ -17,8 +17,90 @@
 --
 module Network.Google.BinaryAuthorization.Types.Product where
 
-import           Network.Google.BinaryAuthorization.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types.Sum
+import Network.Google.Prelude
+
+-- | Verifiers (e.g. Kritis implementations) MUST verify signatures with
+-- respect to the trust anchors defined in policy (e.g. a Kritis policy).
+-- Typically this means that the verifier has been configured with a map
+-- from \`public_key_id\` to public key material (and any required
+-- parameters, e.g. signing algorithm). In particular, verification
+-- implementations MUST NOT treat the signature \`public_key_id\` as
+-- anything more than a key lookup hint. The \`public_key_id\` DOES NOT
+-- validate or authenticate a public key; it only provides a mechanism for
+-- quickly selecting a public key ALREADY CONFIGURED on the verifier
+-- through a trusted channel. Verification implementations MUST reject
+-- signatures in any of the following circumstances: * The
+-- \`public_key_id\` is not recognized by the verifier. * The public key
+-- that \`public_key_id\` refers to does not verify the signature with
+-- respect to the payload. The \`signature\` contents SHOULD NOT be
+-- \"attached\" (where the payload is included with the serialized
+-- \`signature\` bytes). Verifiers MUST ignore any \"attached\" payload and
+-- only verify signatures with respect to explicitly provided payload (e.g.
+-- a \`payload\` field on the proto message that holds this Signature, or
+-- the canonical serialization of the proto message that holds this
+-- signature).
+--
+-- /See:/ 'signature' smart constructor.
+data Signature =
+  Signature'
+    { _sSignature :: !(Maybe Bytes)
+    , _sPublicKeyId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Signature' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sSignature'
+--
+-- * 'sPublicKeyId'
+signature
+    :: Signature
+signature = Signature' {_sSignature = Nothing, _sPublicKeyId = Nothing}
+
+
+-- | The content of the signature, an opaque bytestring. The payload that
+-- this signature verifies MUST be unambiguously provided with the
+-- Signature during verification. A wrapper message might provide the
+-- payload explicitly. Alternatively, a message might have a canonical
+-- serialization that can always be unambiguously computed to derive the
+-- payload.
+sSignature :: Lens' Signature (Maybe ByteString)
+sSignature
+  = lens _sSignature (\ s a -> s{_sSignature = a}) .
+      mapping _Bytes
+
+-- | The identifier for the public key that verifies this signature. * The
+-- \`public_key_id\` is required. * The \`public_key_id\` SHOULD be an
+-- RFC3986 conformant URI. * When possible, the \`public_key_id\` SHOULD be
+-- an immutable reference, such as a cryptographic digest. Examples of
+-- valid \`public_key_id\`s: OpenPGP V4 public key fingerprint: *
+-- \"openpgp4fpr:74FAF3B861BDA0870C7B6DEF607E48D2A663AEEA\" See
+-- https:\/\/www.iana.org\/assignments\/uri-schemes\/prov\/openpgp4fpr for
+-- more details on this scheme. RFC6920 digest-named SubjectPublicKeyInfo
+-- (digest of the DER serialization): *
+-- \"ni:\/\/\/sha-256;cD9o9Cq6LG3jD0iKXqEi_vdjJGecm_iXkbqVoScViaU\" *
+-- \"nih:\/\/\/sha-256;703f68f42aba2c6de30f488a5ea122fef76324679c9bf89791ba95a1271589a5\"
+sPublicKeyId :: Lens' Signature (Maybe Text)
+sPublicKeyId
+  = lens _sPublicKeyId (\ s a -> s{_sPublicKeyId = a})
+
+instance FromJSON Signature where
+        parseJSON
+          = withObject "Signature"
+              (\ o ->
+                 Signature' <$>
+                   (o .:? "signature") <*> (o .:? "publicKeyId"))
+
+instance ToJSON Signature where
+        toJSON Signature'{..}
+          = object
+              (catMaybes
+                 [("signature" .=) <$> _sSignature,
+                  ("publicKeyId" .=) <$> _sPublicKeyId])
 
 -- | A public key in the PkixPublicKey format (see
 -- https:\/\/tools.ietf.org\/html\/rfc5280#section-4.1.2.7 for details).
@@ -28,7 +110,7 @@ import           Network.Google.Prelude
 -- /See:/ 'pkixPublicKey' smart constructor.
 data PkixPublicKey =
   PkixPublicKey'
-    { _ppkPublicKeyPem       :: !(Maybe Text)
+    { _ppkPublicKeyPem :: !(Maybe Text)
     , _ppkSignatureAlgorithm :: !(Maybe PkixPublicKeySignatureAlgorithm)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -79,16 +161,30 @@ instance ToJSON PkixPublicKey where
                   ("signatureAlgorithm" .=) <$>
                     _ppkSignatureAlgorithm])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -116,26 +212,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -158,93 +253,6 @@ instance ToJSON Expr where
                   ("expression" .=) <$> _eExpression,
                   ("title" .=) <$> _eTitle,
                   ("description" .=) <$> _eDescription])
-
--- | An user owned drydock note references a Drydock ATTESTATION_AUTHORITY
--- Note created by the user.
---
--- /See:/ 'userOwnedDrydockNote' smart constructor.
-data UserOwnedDrydockNote =
-  UserOwnedDrydockNote'
-    { _uodnDelegationServiceAccountEmail :: !(Maybe Text)
-    , _uodnPublicKeys                    :: !(Maybe [AttestorPublicKey])
-    , _uodnNoteReference                 :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'UserOwnedDrydockNote' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'uodnDelegationServiceAccountEmail'
---
--- * 'uodnPublicKeys'
---
--- * 'uodnNoteReference'
-userOwnedDrydockNote
-    :: UserOwnedDrydockNote
-userOwnedDrydockNote =
-  UserOwnedDrydockNote'
-    { _uodnDelegationServiceAccountEmail = Nothing
-    , _uodnPublicKeys = Nothing
-    , _uodnNoteReference = Nothing
-    }
-
-
--- | Output only. This field will contain the service account email address
--- that this Attestor will use as the principal when querying Container
--- Analysis. Attestor administrators must grant this service account the
--- IAM role needed to read attestations from the note_reference in
--- Container Analysis (\`containeranalysis.notes.occurrences.viewer\`).
--- This email address is fixed for the lifetime of the Attestor, but
--- callers should not make any other assumptions about the service account
--- email; future versions may use an email based on a different naming
--- pattern.
-uodnDelegationServiceAccountEmail :: Lens' UserOwnedDrydockNote (Maybe Text)
-uodnDelegationServiceAccountEmail
-  = lens _uodnDelegationServiceAccountEmail
-      (\ s a -> s{_uodnDelegationServiceAccountEmail = a})
-
--- | Optional. Public keys that verify attestations signed by this attestor.
--- This field may be updated. If this field is non-empty, one of the
--- specified public keys must verify that an attestation was signed by this
--- attestor for the image specified in the admission request. If this field
--- is empty, this attestor always returns that no valid attestations exist.
-uodnPublicKeys :: Lens' UserOwnedDrydockNote [AttestorPublicKey]
-uodnPublicKeys
-  = lens _uodnPublicKeys
-      (\ s a -> s{_uodnPublicKeys = a})
-      . _Default
-      . _Coerce
-
--- | Required. The Drydock resource name of a ATTESTATION_AUTHORITY Note,
--- created by the user, in the format: \`projects\/*\/notes\/*\` (or the
--- legacy \`providers\/*\/notes\/*\`). This field may not be updated. An
--- attestation by this attestor is stored as a Drydock
--- ATTESTATION_AUTHORITY Occurrence that names a container image and that
--- links to this Note. Drydock is an external dependency.
-uodnNoteReference :: Lens' UserOwnedDrydockNote (Maybe Text)
-uodnNoteReference
-  = lens _uodnNoteReference
-      (\ s a -> s{_uodnNoteReference = a})
-
-instance FromJSON UserOwnedDrydockNote where
-        parseJSON
-          = withObject "UserOwnedDrydockNote"
-              (\ o ->
-                 UserOwnedDrydockNote' <$>
-                   (o .:? "delegationServiceAccountEmail") <*>
-                     (o .:? "publicKeys" .!= mempty)
-                     <*> (o .:? "noteReference"))
-
-instance ToJSON UserOwnedDrydockNote where
-        toJSON UserOwnedDrydockNote'{..}
-          = object
-              (catMaybes
-                 [("delegationServiceAccountEmail" .=) <$>
-                    _uodnDelegationServiceAccountEmail,
-                  ("publicKeys" .=) <$> _uodnPublicKeys,
-                  ("noteReference" .=) <$> _uodnNoteReference])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
@@ -270,6 +278,51 @@ instance FromJSON Empty where
 
 instance ToJSON Empty where
         toJSON = const emptyObject
+
+-- | Optional. Per-kubernetes-namespace admission rules. K8s namespace spec
+-- format: [a-z.-]+, e.g. \'some-namespace\'
+--
+-- /See:/ 'policyKubernetesNamespaceAdmissionRules' smart constructor.
+newtype PolicyKubernetesNamespaceAdmissionRules =
+  PolicyKubernetesNamespaceAdmissionRules'
+    { _pknarAddtional :: HashMap Text AdmissionRule
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PolicyKubernetesNamespaceAdmissionRules' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pknarAddtional'
+policyKubernetesNamespaceAdmissionRules
+    :: HashMap Text AdmissionRule -- ^ 'pknarAddtional'
+    -> PolicyKubernetesNamespaceAdmissionRules
+policyKubernetesNamespaceAdmissionRules pPknarAddtional_ =
+  PolicyKubernetesNamespaceAdmissionRules'
+    {_pknarAddtional = _Coerce # pPknarAddtional_}
+
+
+pknarAddtional :: Lens' PolicyKubernetesNamespaceAdmissionRules (HashMap Text AdmissionRule)
+pknarAddtional
+  = lens _pknarAddtional
+      (\ s a -> s{_pknarAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           PolicyKubernetesNamespaceAdmissionRules
+         where
+        parseJSON
+          = withObject
+              "PolicyKubernetesNamespaceAdmissionRules"
+              (\ o ->
+                 PolicyKubernetesNamespaceAdmissionRules' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           PolicyKubernetesNamespaceAdmissionRules
+         where
+        toJSON = toJSON . _pknarAddtional
 
 -- | Request message for \`SetIamPolicy\` method.
 --
@@ -308,13 +361,122 @@ instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
+-- | Request message for ValidationHelperV1.ValidateAttestationOccurrence.
+--
+-- /See:/ 'validateAttestationOccurrenceRequest' smart constructor.
+data ValidateAttestationOccurrenceRequest =
+  ValidateAttestationOccurrenceRequest'
+    { _vaorOccurrenceNote :: !(Maybe Text)
+    , _vaorAttestation :: !(Maybe AttestationOccurrence)
+    , _vaorOccurrenceResourceURI :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateAttestationOccurrenceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vaorOccurrenceNote'
+--
+-- * 'vaorAttestation'
+--
+-- * 'vaorOccurrenceResourceURI'
+validateAttestationOccurrenceRequest
+    :: ValidateAttestationOccurrenceRequest
+validateAttestationOccurrenceRequest =
+  ValidateAttestationOccurrenceRequest'
+    { _vaorOccurrenceNote = Nothing
+    , _vaorAttestation = Nothing
+    , _vaorOccurrenceResourceURI = Nothing
+    }
+
+
+-- | Required. The resource name of the Note to which the containing
+-- Occurrence is associated.
+vaorOccurrenceNote :: Lens' ValidateAttestationOccurrenceRequest (Maybe Text)
+vaorOccurrenceNote
+  = lens _vaorOccurrenceNote
+      (\ s a -> s{_vaorOccurrenceNote = a})
+
+-- | Required. An AttestationOccurrence to be checked that it can be verified
+-- by the Attestor. It does not have to be an existing entity in Container
+-- Analysis. It must otherwise be a valid AttestationOccurrence.
+vaorAttestation :: Lens' ValidateAttestationOccurrenceRequest (Maybe AttestationOccurrence)
+vaorAttestation
+  = lens _vaorAttestation
+      (\ s a -> s{_vaorAttestation = a})
+
+-- | Required. The URI of the artifact (e.g. container image) that is the
+-- subject of the containing Occurrence.
+vaorOccurrenceResourceURI :: Lens' ValidateAttestationOccurrenceRequest (Maybe Text)
+vaorOccurrenceResourceURI
+  = lens _vaorOccurrenceResourceURI
+      (\ s a -> s{_vaorOccurrenceResourceURI = a})
+
+instance FromJSON
+           ValidateAttestationOccurrenceRequest
+         where
+        parseJSON
+          = withObject "ValidateAttestationOccurrenceRequest"
+              (\ o ->
+                 ValidateAttestationOccurrenceRequest' <$>
+                   (o .:? "occurrenceNote") <*> (o .:? "attestation")
+                     <*> (o .:? "occurrenceResourceUri"))
+
+instance ToJSON ValidateAttestationOccurrenceRequest
+         where
+        toJSON ValidateAttestationOccurrenceRequest'{..}
+          = object
+              (catMaybes
+                 [("occurrenceNote" .=) <$> _vaorOccurrenceNote,
+                  ("attestation" .=) <$> _vaorAttestation,
+                  ("occurrenceResourceUri" .=) <$>
+                    _vaorOccurrenceResourceURI])
+
+--
+-- /See:/ 'jwt' smart constructor.
+newtype Jwt =
+  Jwt'
+    { _jCompactJwt :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Jwt' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jCompactJwt'
+jwt
+    :: Jwt
+jwt = Jwt' {_jCompactJwt = Nothing}
+
+
+-- | The compact encoding of a JWS, which is always three base64 encoded
+-- strings joined by periods. For details, see:
+-- https:\/\/tools.ietf.org\/html\/rfc7515.html#section-3.1
+jCompactJwt :: Lens' Jwt (Maybe Text)
+jCompactJwt
+  = lens _jCompactJwt (\ s a -> s{_jCompactJwt = a})
+
+instance FromJSON Jwt where
+        parseJSON
+          = withObject "Jwt"
+              (\ o -> Jwt' <$> (o .:? "compactJwt"))
+
+instance ToJSON Jwt where
+        toJSON Jwt'{..}
+          = object
+              (catMaybes [("compactJwt" .=) <$> _jCompactJwt])
+
 -- | Response message for BinauthzManagementService.ListAttestors.
 --
 -- /See:/ 'listAttestorsResponse' smart constructor.
 data ListAttestorsResponse =
   ListAttestorsResponse'
     { _larNextPageToken :: !(Maybe Text)
-    , _larAttestors     :: !(Maybe [Attestor])
+    , _larAttestors :: !(Maybe [Attestor])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -362,7 +524,60 @@ instance ToJSON ListAttestorsResponse where
                  [("nextPageToken" .=) <$> _larNextPageToken,
                   ("attestors" .=) <$> _larAttestors])
 
--- | An admission whitelist pattern exempts images from checks by admission
+-- | Response message for ValidationHelperV1.ValidateAttestationOccurrence.
+--
+-- /See:/ 'validateAttestationOccurrenceResponse' smart constructor.
+data ValidateAttestationOccurrenceResponse =
+  ValidateAttestationOccurrenceResponse'
+    { _vaorDenialReason :: !(Maybe Text)
+    , _vaorResult :: !(Maybe ValidateAttestationOccurrenceResponseResult)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateAttestationOccurrenceResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vaorDenialReason'
+--
+-- * 'vaorResult'
+validateAttestationOccurrenceResponse
+    :: ValidateAttestationOccurrenceResponse
+validateAttestationOccurrenceResponse =
+  ValidateAttestationOccurrenceResponse'
+    {_vaorDenialReason = Nothing, _vaorResult = Nothing}
+
+
+-- | The reason for denial if the Attestation couldn\'t be validated.
+vaorDenialReason :: Lens' ValidateAttestationOccurrenceResponse (Maybe Text)
+vaorDenialReason
+  = lens _vaorDenialReason
+      (\ s a -> s{_vaorDenialReason = a})
+
+-- | The result of the Attestation validation.
+vaorResult :: Lens' ValidateAttestationOccurrenceResponse (Maybe ValidateAttestationOccurrenceResponseResult)
+vaorResult
+  = lens _vaorResult (\ s a -> s{_vaorResult = a})
+
+instance FromJSON
+           ValidateAttestationOccurrenceResponse
+         where
+        parseJSON
+          = withObject "ValidateAttestationOccurrenceResponse"
+              (\ o ->
+                 ValidateAttestationOccurrenceResponse' <$>
+                   (o .:? "denialReason") <*> (o .:? "result"))
+
+instance ToJSON ValidateAttestationOccurrenceResponse
+         where
+        toJSON ValidateAttestationOccurrenceResponse'{..}
+          = object
+              (catMaybes
+                 [("denialReason" .=) <$> _vaorDenialReason,
+                  ("result" .=) <$> _vaorResult])
+
+-- | An admission allowlist pattern exempts images from checks by admission
 -- rules.
 --
 -- /See:/ 'admissionWhiteListPattern' smart constructor.
@@ -384,10 +599,11 @@ admissionWhiteListPattern =
   AdmissionWhiteListPattern' {_awlpNamePattern = Nothing}
 
 
--- | An image name pattern to whitelist, in the form
--- \`registry\/path\/to\/image\`. This supports a trailing \`*\` as a
--- wildcard, but this is allowed only in text after the \`registry\/\`
--- part.
+-- | An image name pattern to allowlist, in the form
+-- \`registry\/path\/to\/image\`. This supports a trailing \`*\` wildcard,
+-- but this is allowed only in text after the \`registry\/\` part. This
+-- also supports a trailing \`**\` wildcard which matches subdirectories of
+-- a given entry.
 awlpNamePattern :: Lens' AdmissionWhiteListPattern (Maybe Text)
 awlpNamePattern
   = lens _awlpNamePattern
@@ -404,17 +620,63 @@ instance ToJSON AdmissionWhiteListPattern where
           = object
               (catMaybes [("namePattern" .=) <$> _awlpNamePattern])
 
+-- | Optional. Per-istio-service-identity admission rules. Istio service
+-- identity spec format: spiffe:\/\/\/ns\/\/sa\/ or \/ns\/\/sa\/ e.g.
+-- spiffe:\/\/example.com\/ns\/test-ns\/sa\/default
+--
+-- /See:/ 'policyIstioServiceIdentityAdmissionRules' smart constructor.
+newtype PolicyIstioServiceIdentityAdmissionRules =
+  PolicyIstioServiceIdentityAdmissionRules'
+    { _pisiarAddtional :: HashMap Text AdmissionRule
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PolicyIstioServiceIdentityAdmissionRules' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pisiarAddtional'
+policyIstioServiceIdentityAdmissionRules
+    :: HashMap Text AdmissionRule -- ^ 'pisiarAddtional'
+    -> PolicyIstioServiceIdentityAdmissionRules
+policyIstioServiceIdentityAdmissionRules pPisiarAddtional_ =
+  PolicyIstioServiceIdentityAdmissionRules'
+    {_pisiarAddtional = _Coerce # pPisiarAddtional_}
+
+
+pisiarAddtional :: Lens' PolicyIstioServiceIdentityAdmissionRules (HashMap Text AdmissionRule)
+pisiarAddtional
+  = lens _pisiarAddtional
+      (\ s a -> s{_pisiarAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           PolicyIstioServiceIdentityAdmissionRules
+         where
+        parseJSON
+          = withObject
+              "PolicyIstioServiceIdentityAdmissionRules"
+              (\ o ->
+                 PolicyIstioServiceIdentityAdmissionRules' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           PolicyIstioServiceIdentityAdmissionRules
+         where
+        toJSON = toJSON . _pisiarAddtional
+
 -- | An admission rule specifies either that all container images used in a
 -- pod creation request must be attested to by one or more attestors, that
 -- all pod creations will be allowed, or that all pod creations will be
--- denied. Images matching an admission whitelist pattern are exempted from
+-- denied. Images matching an admission allowlist pattern are exempted from
 -- admission rules and will never block a pod creation.
 --
 -- /See:/ 'admissionRule' smart constructor.
 data AdmissionRule =
   AdmissionRule'
-    { _arEnforcementMode       :: !(Maybe AdmissionRuleEnforcementMode)
-    , _arEvaluationMode        :: !(Maybe AdmissionRuleEvaluationMode)
+    { _arEnforcementMode :: !(Maybe AdmissionRuleEnforcementMode)
+    , _arEvaluationMode :: !(Maybe AdmissionRuleEvaluationMode)
     , _arRequireAttestationsBy :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -528,29 +790,92 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | Optional. Per-kubernetes-service-account admission rules. Service
+-- account spec format: \`namespace:serviceaccount\`. e.g.
+-- \'test-ns:default\'
+--
+-- /See:/ 'policyKubernetesServiceAccountAdmissionRules' smart constructor.
+newtype PolicyKubernetesServiceAccountAdmissionRules =
+  PolicyKubernetesServiceAccountAdmissionRules'
+    { _pksaarAddtional :: HashMap Text AdmissionRule
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PolicyKubernetesServiceAccountAdmissionRules' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pksaarAddtional'
+policyKubernetesServiceAccountAdmissionRules
+    :: HashMap Text AdmissionRule -- ^ 'pksaarAddtional'
+    -> PolicyKubernetesServiceAccountAdmissionRules
+policyKubernetesServiceAccountAdmissionRules pPksaarAddtional_ =
+  PolicyKubernetesServiceAccountAdmissionRules'
+    {_pksaarAddtional = _Coerce # pPksaarAddtional_}
+
+
+pksaarAddtional :: Lens' PolicyKubernetesServiceAccountAdmissionRules (HashMap Text AdmissionRule)
+pksaarAddtional
+  = lens _pksaarAddtional
+      (\ s a -> s{_pksaarAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           PolicyKubernetesServiceAccountAdmissionRules
+         where
+        parseJSON
+          = withObject
+              "PolicyKubernetesServiceAccountAdmissionRules"
+              (\ o ->
+                 PolicyKubernetesServiceAccountAdmissionRules' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           PolicyKubernetesServiceAccountAdmissionRules
+         where
+        toJSON = toJSON . _pksaarAddtional
+
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'iamPolicy' smart constructor.
 data IAMPolicy =
   IAMPolicy'
-    { _ipEtag     :: !(Maybe Bytes)
-    , _ipVersion  :: !(Maybe (Textual Int32))
+    { _ipEtag :: !(Maybe Bytes)
+    , _ipVersion :: !(Maybe (Textual Int32))
     , _ipBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -578,21 +903,40 @@ iamPolicy =
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 ipEtag :: Lens' IAMPolicy (Maybe ByteString)
 ipEtag
   = lens _ipEtag (\ s a -> s{_ipEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 ipVersion :: Lens' IAMPolicy (Maybe Int32)
 ipVersion
   = lens _ipVersion (\ s a -> s{_ipVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 ipBindings :: Lens' IAMPolicy [Binding]
 ipBindings
   = lens _ipBindings (\ s a -> s{_ipBindings = a}) .
@@ -621,10 +965,10 @@ instance ToJSON IAMPolicy where
 -- /See:/ 'attestorPublicKey' smart constructor.
 data AttestorPublicKey =
   AttestorPublicKey'
-    { _apkPkixPublicKey            :: !(Maybe PkixPublicKey)
+    { _apkPkixPublicKey :: !(Maybe PkixPublicKey)
     , _apkAsciiArmoredPgpPublicKey :: !(Maybe Text)
-    , _apkId                       :: !(Maybe Text)
-    , _apkComment                  :: !(Maybe Text)
+    , _apkId :: !(Maybe Text)
+    , _apkComment :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -755,13 +1099,16 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pDefaultAdmissionRule       :: !(Maybe AdmissionRule)
+    { _pDefaultAdmissionRule :: !(Maybe AdmissionRule)
+    , _pIstioServiceIdentityAdmissionRules :: !(Maybe PolicyIstioServiceIdentityAdmissionRules)
     , _pAdmissionWhiteListPatterns :: !(Maybe [AdmissionWhiteListPattern])
-    , _pClusterAdmissionRules      :: !(Maybe PolicyClusterAdmissionRules)
-    , _pUpdateTime                 :: !(Maybe DateTime')
-    , _pName                       :: !(Maybe Text)
+    , _pKubernetesServiceAccountAdmissionRules :: !(Maybe PolicyKubernetesServiceAccountAdmissionRules)
+    , _pClusterAdmissionRules :: !(Maybe PolicyClusterAdmissionRules)
+    , _pUpdateTime :: !(Maybe DateTime')
+    , _pName :: !(Maybe Text)
+    , _pKubernetesNamespaceAdmissionRules :: !(Maybe PolicyKubernetesNamespaceAdmissionRules)
     , _pGlobalPolicyEvaluationMode :: !(Maybe PolicyGlobalPolicyEvaluationMode)
-    , _pDescription                :: !(Maybe Text)
+    , _pDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -772,13 +1119,19 @@ data Policy =
 --
 -- * 'pDefaultAdmissionRule'
 --
+-- * 'pIstioServiceIdentityAdmissionRules'
+--
 -- * 'pAdmissionWhiteListPatterns'
+--
+-- * 'pKubernetesServiceAccountAdmissionRules'
 --
 -- * 'pClusterAdmissionRules'
 --
 -- * 'pUpdateTime'
 --
 -- * 'pName'
+--
+-- * 'pKubernetesNamespaceAdmissionRules'
 --
 -- * 'pGlobalPolicyEvaluationMode'
 --
@@ -788,10 +1141,13 @@ policy
 policy =
   Policy'
     { _pDefaultAdmissionRule = Nothing
+    , _pIstioServiceIdentityAdmissionRules = Nothing
     , _pAdmissionWhiteListPatterns = Nothing
+    , _pKubernetesServiceAccountAdmissionRules = Nothing
     , _pClusterAdmissionRules = Nothing
     , _pUpdateTime = Nothing
     , _pName = Nothing
+    , _pKubernetesNamespaceAdmissionRules = Nothing
     , _pGlobalPolicyEvaluationMode = Nothing
     , _pDescription = Nothing
     }
@@ -805,7 +1161,16 @@ pDefaultAdmissionRule
   = lens _pDefaultAdmissionRule
       (\ s a -> s{_pDefaultAdmissionRule = a})
 
--- | Optional. Admission policy whitelisting. A matching admission request
+-- | Optional. Per-istio-service-identity admission rules. Istio service
+-- identity spec format: spiffe:\/\/\/ns\/\/sa\/ or \/ns\/\/sa\/ e.g.
+-- spiffe:\/\/example.com\/ns\/test-ns\/sa\/default
+pIstioServiceIdentityAdmissionRules :: Lens' Policy (Maybe PolicyIstioServiceIdentityAdmissionRules)
+pIstioServiceIdentityAdmissionRules
+  = lens _pIstioServiceIdentityAdmissionRules
+      (\ s a ->
+         s{_pIstioServiceIdentityAdmissionRules = a})
+
+-- | Optional. Admission policy allowlisting. A matching admission request
 -- will always be permitted. This feature is typically used to exclude
 -- Google or third-party infrastructure images from Binary Authorization
 -- policies.
@@ -815,6 +1180,15 @@ pAdmissionWhiteListPatterns
       (\ s a -> s{_pAdmissionWhiteListPatterns = a})
       . _Default
       . _Coerce
+
+-- | Optional. Per-kubernetes-service-account admission rules. Service
+-- account spec format: \`namespace:serviceaccount\`. e.g.
+-- \'test-ns:default\'
+pKubernetesServiceAccountAdmissionRules :: Lens' Policy (Maybe PolicyKubernetesServiceAccountAdmissionRules)
+pKubernetesServiceAccountAdmissionRules
+  = lens _pKubernetesServiceAccountAdmissionRules
+      (\ s a ->
+         s{_pKubernetesServiceAccountAdmissionRules = a})
 
 -- | Optional. Per-cluster admission rules. Cluster spec format:
 -- \`location.clusterId\`. There can be at most one admission rule per
@@ -838,6 +1212,13 @@ pUpdateTime
 pName :: Lens' Policy (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
+-- | Optional. Per-kubernetes-namespace admission rules. K8s namespace spec
+-- format: [a-z.-]+, e.g. \'some-namespace\'
+pKubernetesNamespaceAdmissionRules :: Lens' Policy (Maybe PolicyKubernetesNamespaceAdmissionRules)
+pKubernetesNamespaceAdmissionRules
+  = lens _pKubernetesNamespaceAdmissionRules
+      (\ s a -> s{_pKubernetesNamespaceAdmissionRules = a})
+
 -- | Optional. Controls the evaluation of a Google-maintained global
 -- admission policy for common system-level images. Images not covered by
 -- the global policy will be subject to the project admission policy. This
@@ -858,10 +1239,13 @@ instance FromJSON Policy where
               (\ o ->
                  Policy' <$>
                    (o .:? "defaultAdmissionRule") <*>
-                     (o .:? "admissionWhitelistPatterns" .!= mempty)
+                     (o .:? "istioServiceIdentityAdmissionRules")
+                     <*> (o .:? "admissionWhitelistPatterns" .!= mempty)
+                     <*> (o .:? "kubernetesServiceAccountAdmissionRules")
                      <*> (o .:? "clusterAdmissionRules")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
+                     <*> (o .:? "kubernetesNamespaceAdmissionRules")
                      <*> (o .:? "globalPolicyEvaluationMode")
                      <*> (o .:? "description"))
 
@@ -871,15 +1255,107 @@ instance ToJSON Policy where
               (catMaybes
                  [("defaultAdmissionRule" .=) <$>
                     _pDefaultAdmissionRule,
+                  ("istioServiceIdentityAdmissionRules" .=) <$>
+                    _pIstioServiceIdentityAdmissionRules,
                   ("admissionWhitelistPatterns" .=) <$>
                     _pAdmissionWhiteListPatterns,
+                  ("kubernetesServiceAccountAdmissionRules" .=) <$>
+                    _pKubernetesServiceAccountAdmissionRules,
                   ("clusterAdmissionRules" .=) <$>
                     _pClusterAdmissionRules,
                   ("updateTime" .=) <$> _pUpdateTime,
                   ("name" .=) <$> _pName,
+                  ("kubernetesNamespaceAdmissionRules" .=) <$>
+                    _pKubernetesNamespaceAdmissionRules,
                   ("globalPolicyEvaluationMode" .=) <$>
                     _pGlobalPolicyEvaluationMode,
                   ("description" .=) <$> _pDescription])
+
+-- | An user owned Grafeas note references a Grafeas Attestation.Authority
+-- Note created by the user.
+--
+-- /See:/ 'userOwnedGrafeasNote' smart constructor.
+data UserOwnedGrafeasNote =
+  UserOwnedGrafeasNote'
+    { _uognDelegationServiceAccountEmail :: !(Maybe Text)
+    , _uognPublicKeys :: !(Maybe [AttestorPublicKey])
+    , _uognNoteReference :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UserOwnedGrafeasNote' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uognDelegationServiceAccountEmail'
+--
+-- * 'uognPublicKeys'
+--
+-- * 'uognNoteReference'
+userOwnedGrafeasNote
+    :: UserOwnedGrafeasNote
+userOwnedGrafeasNote =
+  UserOwnedGrafeasNote'
+    { _uognDelegationServiceAccountEmail = Nothing
+    , _uognPublicKeys = Nothing
+    , _uognNoteReference = Nothing
+    }
+
+
+-- | Output only. This field will contain the service account email address
+-- that this Attestor will use as the principal when querying Container
+-- Analysis. Attestor administrators must grant this service account the
+-- IAM role needed to read attestations from the note_reference in
+-- Container Analysis (\`containeranalysis.notes.occurrences.viewer\`).
+-- This email address is fixed for the lifetime of the Attestor, but
+-- callers should not make any other assumptions about the service account
+-- email; future versions may use an email based on a different naming
+-- pattern.
+uognDelegationServiceAccountEmail :: Lens' UserOwnedGrafeasNote (Maybe Text)
+uognDelegationServiceAccountEmail
+  = lens _uognDelegationServiceAccountEmail
+      (\ s a -> s{_uognDelegationServiceAccountEmail = a})
+
+-- | Optional. Public keys that verify attestations signed by this attestor.
+-- This field may be updated. If this field is non-empty, one of the
+-- specified public keys must verify that an attestation was signed by this
+-- attestor for the image specified in the admission request. If this field
+-- is empty, this attestor always returns that no valid attestations exist.
+uognPublicKeys :: Lens' UserOwnedGrafeasNote [AttestorPublicKey]
+uognPublicKeys
+  = lens _uognPublicKeys
+      (\ s a -> s{_uognPublicKeys = a})
+      . _Default
+      . _Coerce
+
+-- | Required. The Grafeas resource name of a Attestation.Authority Note,
+-- created by the user, in the format: \`projects\/*\/notes\/*\`. This
+-- field may not be updated. An attestation by this attestor is stored as a
+-- Grafeas Attestation.Authority Occurrence that names a container image
+-- and that links to this Note. Grafeas is an external dependency.
+uognNoteReference :: Lens' UserOwnedGrafeasNote (Maybe Text)
+uognNoteReference
+  = lens _uognNoteReference
+      (\ s a -> s{_uognNoteReference = a})
+
+instance FromJSON UserOwnedGrafeasNote where
+        parseJSON
+          = withObject "UserOwnedGrafeasNote"
+              (\ o ->
+                 UserOwnedGrafeasNote' <$>
+                   (o .:? "delegationServiceAccountEmail") <*>
+                     (o .:? "publicKeys" .!= mempty)
+                     <*> (o .:? "noteReference"))
+
+instance ToJSON UserOwnedGrafeasNote where
+        toJSON UserOwnedGrafeasNote'{..}
+          = object
+              (catMaybes
+                 [("delegationServiceAccountEmail" .=) <$>
+                    _uognDelegationServiceAccountEmail,
+                  ("publicKeys" .=) <$> _uognPublicKeys,
+                  ("noteReference" .=) <$> _uognNoteReference])
 
 -- | Optional. Per-cluster admission rules. Cluster spec format:
 -- \`location.clusterId\`. There can be at most one admission rule per
@@ -929,10 +1405,10 @@ instance ToJSON PolicyClusterAdmissionRules where
 -- /See:/ 'attestor' smart constructor.
 data Attestor =
   Attestor'
-    { _aUserOwnedDrydockNote :: !(Maybe UserOwnedDrydockNote)
-    , _aUpdateTime           :: !(Maybe DateTime')
-    , _aName                 :: !(Maybe Text)
-    , _aDescription          :: !(Maybe Text)
+    { _aUpdateTime :: !(Maybe DateTime')
+    , _aName :: !(Maybe Text)
+    , _aUserOwnedGrafeasNote :: !(Maybe UserOwnedGrafeasNote)
+    , _aDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -941,29 +1417,23 @@ data Attestor =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aUserOwnedDrydockNote'
---
 -- * 'aUpdateTime'
 --
 -- * 'aName'
+--
+-- * 'aUserOwnedGrafeasNote'
 --
 -- * 'aDescription'
 attestor
     :: Attestor
 attestor =
   Attestor'
-    { _aUserOwnedDrydockNote = Nothing
-    , _aUpdateTime = Nothing
+    { _aUpdateTime = Nothing
     , _aName = Nothing
+    , _aUserOwnedGrafeasNote = Nothing
     , _aDescription = Nothing
     }
 
-
--- | A Drydock ATTESTATION_AUTHORITY Note, created by the user.
-aUserOwnedDrydockNote :: Lens' Attestor (Maybe UserOwnedDrydockNote)
-aUserOwnedDrydockNote
-  = lens _aUserOwnedDrydockNote
-      (\ s a -> s{_aUserOwnedDrydockNote = a})
 
 -- | Output only. Time when the attestor was last updated.
 aUpdateTime :: Lens' Attestor (Maybe UTCTime)
@@ -976,6 +1446,13 @@ aUpdateTime
 aName :: Lens' Attestor (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
+-- | This specifies how an attestation will be read, and how it will be used
+-- during policy enforcement.
+aUserOwnedGrafeasNote :: Lens' Attestor (Maybe UserOwnedGrafeasNote)
+aUserOwnedGrafeasNote
+  = lens _aUserOwnedGrafeasNote
+      (\ s a -> s{_aUserOwnedGrafeasNote = a})
+
 -- | Optional. A descriptive comment. This field may be updated. The field
 -- may be displayed in chooser dialogs.
 aDescription :: Lens' Attestor (Maybe Text)
@@ -987,28 +1464,111 @@ instance FromJSON Attestor where
           = withObject "Attestor"
               (\ o ->
                  Attestor' <$>
-                   (o .:? "userOwnedDrydockNote") <*>
-                     (o .:? "updateTime")
-                     <*> (o .:? "name")
+                   (o .:? "updateTime") <*> (o .:? "name") <*>
+                     (o .:? "userOwnedGrafeasNote")
                      <*> (o .:? "description"))
 
 instance ToJSON Attestor where
         toJSON Attestor'{..}
           = object
               (catMaybes
-                 [("userOwnedDrydockNote" .=) <$>
-                    _aUserOwnedDrydockNote,
-                  ("updateTime" .=) <$> _aUpdateTime,
+                 [("updateTime" .=) <$> _aUpdateTime,
                   ("name" .=) <$> _aName,
+                  ("userOwnedGrafeasNote" .=) <$>
+                    _aUserOwnedGrafeasNote,
                   ("description" .=) <$> _aDescription])
+
+-- | Occurrence that represents a single \"attestation\". The authenticity of
+-- an attestation can be verified using the attached signature. If the
+-- verifier trusts the public key of the signer, then verifying the
+-- signature is sufficient to establish trust. In this circumstance, the
+-- authority to which this attestation is attached is primarily useful for
+-- lookup (how to find this attestation if you already know the authority
+-- and artifact to be verified) and intent (for which authority this
+-- attestation was intended to sign.
+--
+-- /See:/ 'attestationOccurrence' smart constructor.
+data AttestationOccurrence =
+  AttestationOccurrence'
+    { _aoSerializedPayload :: !(Maybe Bytes)
+    , _aoJwts :: !(Maybe [Jwt])
+    , _aoSignatures :: !(Maybe [Signature])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AttestationOccurrence' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aoSerializedPayload'
+--
+-- * 'aoJwts'
+--
+-- * 'aoSignatures'
+attestationOccurrence
+    :: AttestationOccurrence
+attestationOccurrence =
+  AttestationOccurrence'
+    {_aoSerializedPayload = Nothing, _aoJwts = Nothing, _aoSignatures = Nothing}
+
+
+-- | Required. The serialized payload that is verified by one or more
+-- \`signatures\`.
+aoSerializedPayload :: Lens' AttestationOccurrence (Maybe ByteString)
+aoSerializedPayload
+  = lens _aoSerializedPayload
+      (\ s a -> s{_aoSerializedPayload = a})
+      . mapping _Bytes
+
+-- | One or more JWTs encoding a self-contained attestation. Each JWT encodes
+-- the payload that it verifies within the JWT itself. Verifier
+-- implementation SHOULD ignore the \`serialized_payload\` field when
+-- verifying these JWTs. If only JWTs are present on this
+-- AttestationOccurrence, then the \`serialized_payload\` SHOULD be left
+-- empty. Each JWT SHOULD encode a claim specific to the \`resource_uri\`
+-- of this Occurrence, but this is not validated by Grafeas metadata API
+-- implementations. The JWT itself is opaque to Grafeas.
+aoJwts :: Lens' AttestationOccurrence [Jwt]
+aoJwts
+  = lens _aoJwts (\ s a -> s{_aoJwts = a}) . _Default .
+      _Coerce
+
+-- | One or more signatures over \`serialized_payload\`. Verifier
+-- implementations should consider this attestation message verified if at
+-- least one \`signature\` verifies \`serialized_payload\`. See
+-- \`Signature\` in common.proto for more details on signature structure
+-- and verification.
+aoSignatures :: Lens' AttestationOccurrence [Signature]
+aoSignatures
+  = lens _aoSignatures (\ s a -> s{_aoSignatures = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AttestationOccurrence where
+        parseJSON
+          = withObject "AttestationOccurrence"
+              (\ o ->
+                 AttestationOccurrence' <$>
+                   (o .:? "serializedPayload") <*>
+                     (o .:? "jwts" .!= mempty)
+                     <*> (o .:? "signatures" .!= mempty))
+
+instance ToJSON AttestationOccurrence where
+        toJSON AttestationOccurrence'{..}
+          = object
+              (catMaybes
+                 [("serializedPayload" .=) <$> _aoSerializedPayload,
+                  ("jwts" .=) <$> _aoJwts,
+                  ("signatures" .=) <$> _aoSignatures])
 
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1036,13 +1596,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -1054,9 +1631,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

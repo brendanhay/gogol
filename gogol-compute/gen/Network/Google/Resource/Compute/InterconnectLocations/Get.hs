@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.InterconnectLocations.Get
     , ilgInterconnectLocation
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.interconnectLocations.get@ method which the
 -- 'InterconnectLocationsGet' request conforms to.
@@ -60,7 +60,7 @@ type InterconnectLocationsGetResource =
 -- /See:/ 'interconnectLocationsGet' smart constructor.
 data InterconnectLocationsGet =
   InterconnectLocationsGet'
-    { _ilgProject              :: !Text
+    { _ilgProject :: !Text
     , _ilgInterconnectLocation :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

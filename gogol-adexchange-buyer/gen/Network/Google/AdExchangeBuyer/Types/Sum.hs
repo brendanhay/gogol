@@ -16,7 +16,7 @@
 --
 module Network.Google.AdExchangeBuyer.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | When specified, only creatives having the given open auction status are
 -- returned.

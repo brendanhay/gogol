@@ -48,6 +48,9 @@ module Network.Google.DigitalAssetLinks
     , sSource
     , sTarget
 
+    -- ** CheckResponseErrorCodeItem
+    , CheckResponseErrorCodeItem (..)
+
     -- ** Asset
     , Asset
     , asset
@@ -82,12 +85,15 @@ module Network.Google.DigitalAssetLinks
     , CertificateInfo
     , certificateInfo
     , ciSha256Fingerprint
+
+    -- ** ListResponseErrorCodeItem
+    , ListResponseErrorCodeItem (..)
     ) where
 
-import           Network.Google.DigitalAssetLinks.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DigitalAssetLinks.Assetlinks.Check
-import           Network.Google.Resource.DigitalAssetLinks.Statements.List
+import Network.Google.Prelude
+import Network.Google.DigitalAssetLinks.Types
+import Network.Google.Resource.DigitalAssetLinks.Assetlinks.Check
+import Network.Google.Resource.DigitalAssetLinks.Statements.List
 
 {- $resources
 TODO

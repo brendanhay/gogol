@@ -16,10 +16,10 @@
 --
 module Network.Google.BigtableAdmin.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
--- | (\`CreationOnly\`) The type of storage used by this cluster to serve its
--- parent instance\'s tables, unless explicitly overridden.
+-- | Immutable. The type of storage used by this cluster to serve its parent
+-- instance\'s tables, unless explicitly overridden.
 data ClusterDefaultStorageType
     = StorageTypeUnspecified
       -- ^ @STORAGE_TYPE_UNSPECIFIED@
@@ -53,6 +53,158 @@ instance FromJSON ClusterDefaultStorageType where
 instance ToJSON ClusterDefaultStorageType where
     toJSON = toJSONText
 
+-- | The type of the restore source.
+data RestoreInfoSourceType
+    = RISTRestoreSourceTypeUnspecified
+      -- ^ @RESTORE_SOURCE_TYPE_UNSPECIFIED@
+      -- No restore associated.
+    | RISTBackup
+      -- ^ @BACKUP@
+      -- A backup was used as the source of the restore.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RestoreInfoSourceType
+
+instance FromHttpApiData RestoreInfoSourceType where
+    parseQueryParam = \case
+        "RESTORE_SOURCE_TYPE_UNSPECIFIED" -> Right RISTRestoreSourceTypeUnspecified
+        "BACKUP" -> Right RISTBackup
+        x -> Left ("Unable to parse RestoreInfoSourceType from: " <> x)
+
+instance ToHttpApiData RestoreInfoSourceType where
+    toQueryParam = \case
+        RISTRestoreSourceTypeUnspecified -> "RESTORE_SOURCE_TYPE_UNSPECIFIED"
+        RISTBackup -> "BACKUP"
+
+instance FromJSON RestoreInfoSourceType where
+    parseJSON = parseJSONText "RestoreInfoSourceType"
+
+instance ToJSON RestoreInfoSourceType where
+    toJSON = toJSONText
+
+-- | The view to be applied to the returned tables\' fields. Only NAME_ONLY
+-- view (default) and REPLICATION_VIEW are supported.
+data ProjectsInstancesTablesListView
+    = ViewUnspecified
+      -- ^ @VIEW_UNSPECIFIED@
+      -- Uses the default view for each method as documented in its request.
+    | NameOnly
+      -- ^ @NAME_ONLY@
+      -- Only populates \`name\`.
+    | SchemaView
+      -- ^ @SCHEMA_VIEW@
+      -- Only populates \`name\` and fields related to the table\'s schema.
+    | ReplicationView
+      -- ^ @REPLICATION_VIEW@
+      -- Only populates \`name\` and fields related to the table\'s replication
+      -- state.
+    | EncryptionView
+      -- ^ @ENCRYPTION_VIEW@
+      -- Only populates \`name\` and fields related to the table\'s encryption
+      -- state.
+    | Full
+      -- ^ @FULL@
+      -- Populates all fields.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsInstancesTablesListView
+
+instance FromHttpApiData ProjectsInstancesTablesListView where
+    parseQueryParam = \case
+        "VIEW_UNSPECIFIED" -> Right ViewUnspecified
+        "NAME_ONLY" -> Right NameOnly
+        "SCHEMA_VIEW" -> Right SchemaView
+        "REPLICATION_VIEW" -> Right ReplicationView
+        "ENCRYPTION_VIEW" -> Right EncryptionView
+        "FULL" -> Right Full
+        x -> Left ("Unable to parse ProjectsInstancesTablesListView from: " <> x)
+
+instance ToHttpApiData ProjectsInstancesTablesListView where
+    toQueryParam = \case
+        ViewUnspecified -> "VIEW_UNSPECIFIED"
+        NameOnly -> "NAME_ONLY"
+        SchemaView -> "SCHEMA_VIEW"
+        ReplicationView -> "REPLICATION_VIEW"
+        EncryptionView -> "ENCRYPTION_VIEW"
+        Full -> "FULL"
+
+instance FromJSON ProjectsInstancesTablesListView where
+    parseJSON = parseJSONText "ProjectsInstancesTablesListView"
+
+instance ToJSON ProjectsInstancesTablesListView where
+    toJSON = toJSONText
+
+-- | Output only. The type of encryption used to protect this resource.
+data EncryptionInfoEncryptionType
+    = EncryptionTypeUnspecified
+      -- ^ @ENCRYPTION_TYPE_UNSPECIFIED@
+      -- Encryption type was not specified, though data at rest remains
+      -- encrypted.
+    | GoogleDefaultEncryption
+      -- ^ @GOOGLE_DEFAULT_ENCRYPTION@
+      -- The data backing this resource is encrypted at rest with a key that is
+      -- fully managed by Google. No key version or status will be populated.
+      -- This is the default state.
+    | CustomerManagedEncryption
+      -- ^ @CUSTOMER_MANAGED_ENCRYPTION@
+      -- The data backing this resource is encrypted at rest with a key that is
+      -- managed by the customer. The in-use version of the key and its status
+      -- are populated for CMEK-protected tables. CMEK-protected backups are
+      -- pinned to the key version that was in use at the time the backup was
+      -- taken. This key version is populated but its status is not tracked and
+      -- is reported as \`UNKNOWN\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EncryptionInfoEncryptionType
+
+instance FromHttpApiData EncryptionInfoEncryptionType where
+    parseQueryParam = \case
+        "ENCRYPTION_TYPE_UNSPECIFIED" -> Right EncryptionTypeUnspecified
+        "GOOGLE_DEFAULT_ENCRYPTION" -> Right GoogleDefaultEncryption
+        "CUSTOMER_MANAGED_ENCRYPTION" -> Right CustomerManagedEncryption
+        x -> Left ("Unable to parse EncryptionInfoEncryptionType from: " <> x)
+
+instance ToHttpApiData EncryptionInfoEncryptionType where
+    toQueryParam = \case
+        EncryptionTypeUnspecified -> "ENCRYPTION_TYPE_UNSPECIFIED"
+        GoogleDefaultEncryption -> "GOOGLE_DEFAULT_ENCRYPTION"
+        CustomerManagedEncryption -> "CUSTOMER_MANAGED_ENCRYPTION"
+
+instance FromJSON EncryptionInfoEncryptionType where
+    parseJSON = parseJSONText "EncryptionInfoEncryptionType"
+
+instance ToJSON EncryptionInfoEncryptionType where
+    toJSON = toJSONText
+
+-- | The type of the restore source.
+data RestoreTableMetadataSourceType
+    = RTMSTRestoreSourceTypeUnspecified
+      -- ^ @RESTORE_SOURCE_TYPE_UNSPECIFIED@
+      -- No restore associated.
+    | RTMSTBackup
+      -- ^ @BACKUP@
+      -- A backup was used as the source of the restore.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RestoreTableMetadataSourceType
+
+instance FromHttpApiData RestoreTableMetadataSourceType where
+    parseQueryParam = \case
+        "RESTORE_SOURCE_TYPE_UNSPECIFIED" -> Right RTMSTRestoreSourceTypeUnspecified
+        "BACKUP" -> Right RTMSTBackup
+        x -> Left ("Unable to parse RestoreTableMetadataSourceType from: " <> x)
+
+instance ToHttpApiData RestoreTableMetadataSourceType where
+    toQueryParam = \case
+        RTMSTRestoreSourceTypeUnspecified -> "RESTORE_SOURCE_TYPE_UNSPECIFIED"
+        RTMSTBackup -> "BACKUP"
+
+instance FromJSON RestoreTableMetadataSourceType where
+    parseJSON = parseJSONText "RestoreTableMetadataSourceType"
+
+instance ToJSON RestoreTableMetadataSourceType where
+    toJSON = toJSONText
+
 -- | Output only. The state of replication for the table in this cluster.
 data ClusterStateReplicationState
     = StateNotKnown
@@ -76,6 +228,11 @@ data ClusterStateReplicationState
       -- The table can serve Data API requests from this cluster. Depending on
       -- replication delay, reads may not immediately reflect the state of the
       -- table in other clusters.
+    | ReadyOptimizing
+      -- ^ @READY_OPTIMIZING@
+      -- The table is fully created and ready for use after a restore, and is
+      -- being optimized for performance. When optimizations are complete, the
+      -- table will transition to \`READY\` state.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ClusterStateReplicationState
@@ -87,6 +244,7 @@ instance FromHttpApiData ClusterStateReplicationState where
         "PLANNED_MAINTENANCE" -> Right PlannedMaintenance
         "UNPLANNED_MAINTENANCE" -> Right UnplannedMaintenance
         "READY" -> Right Ready
+        "READY_OPTIMIZING" -> Right ReadyOptimizing
         x -> Left ("Unable to parse ClusterStateReplicationState from: " <> x)
 
 instance ToHttpApiData ClusterStateReplicationState where
@@ -96,6 +254,7 @@ instance ToHttpApiData ClusterStateReplicationState where
         PlannedMaintenance -> "PLANNED_MAINTENANCE"
         UnplannedMaintenance -> "UNPLANNED_MAINTENANCE"
         Ready -> "READY"
+        ReadyOptimizing -> "READY_OPTIMIZING"
 
 instance FromJSON ClusterStateReplicationState where
     parseJSON = parseJSONText "ClusterStateReplicationState"
@@ -103,7 +262,7 @@ instance FromJSON ClusterStateReplicationState where
 instance ToJSON ClusterStateReplicationState where
     toJSON = toJSONText
 
--- | The type of the instance. Defaults to \`PRODUCTION\`.
+-- | Required. The type of the instance. Defaults to \`PRODUCTION\`.
 data InstanceType
     = TypeUnspecified
       -- ^ @TYPE_UNSPECIFIED@
@@ -116,12 +275,8 @@ data InstanceType
       -- cluster.
     | Development
       -- ^ @DEVELOPMENT@
-      -- The instance is meant for development and testing purposes only; it has
-      -- no performance or uptime guarantees and is not covered by SLA. After a
-      -- development instance is created, it can be upgraded by updating the
-      -- instance to type \`PRODUCTION\`. An instance created as a production
-      -- instance cannot be changed to a development instance. When creating a
-      -- development instance, \`serve_nodes\` on the cluster must not be set.
+      -- DEPRECATED: Prefer PRODUCTION for all use cases, as it no longer
+      -- enforces a higher minimum node count than DEVELOPMENT.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceType
@@ -257,9 +412,9 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
--- | (\`CreationOnly\`) The granularity (i.e. \`MILLIS\`) at which timestamps
--- are stored in this table. Timestamps not matching the granularity will
--- be rejected. If unspecified at creation time, the value will be set to
+-- | Immutable. The granularity (i.e. \`MILLIS\`) at which timestamps are
+-- stored in this table. Timestamps not matching the granularity will be
+-- rejected. If unspecified at creation time, the value will be set to
 -- \`MILLIS\`. Views: \`SCHEMA_VIEW\`, \`FULL\`.
 data TableGranularity
     = TimestampGranularityUnspecified
@@ -290,7 +445,7 @@ instance FromJSON TableGranularity where
 instance ToJSON TableGranularity where
     toJSON = toJSONText
 
--- | (\`OutputOnly\`) The current state of the cluster.
+-- | Output only. The current state of the cluster.
 data ClusterType
     = CTStateNotKnown
       -- ^ @STATE_NOT_KNOWN@
@@ -342,7 +497,59 @@ instance FromJSON ClusterType where
 instance ToJSON ClusterType where
     toJSON = toJSONText
 
--- | (\`OutputOnly\`) The current state of the instance.
+-- | The view to be applied to the returned table\'s fields. Defaults to
+-- \`SCHEMA_VIEW\` if unspecified.
+data ProjectsInstancesTablesGetView
+    = PITGVViewUnspecified
+      -- ^ @VIEW_UNSPECIFIED@
+      -- Uses the default view for each method as documented in its request.
+    | PITGVNameOnly
+      -- ^ @NAME_ONLY@
+      -- Only populates \`name\`.
+    | PITGVSchemaView
+      -- ^ @SCHEMA_VIEW@
+      -- Only populates \`name\` and fields related to the table\'s schema.
+    | PITGVReplicationView
+      -- ^ @REPLICATION_VIEW@
+      -- Only populates \`name\` and fields related to the table\'s replication
+      -- state.
+    | PITGVEncryptionView
+      -- ^ @ENCRYPTION_VIEW@
+      -- Only populates \`name\` and fields related to the table\'s encryption
+      -- state.
+    | PITGVFull
+      -- ^ @FULL@
+      -- Populates all fields.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsInstancesTablesGetView
+
+instance FromHttpApiData ProjectsInstancesTablesGetView where
+    parseQueryParam = \case
+        "VIEW_UNSPECIFIED" -> Right PITGVViewUnspecified
+        "NAME_ONLY" -> Right PITGVNameOnly
+        "SCHEMA_VIEW" -> Right PITGVSchemaView
+        "REPLICATION_VIEW" -> Right PITGVReplicationView
+        "ENCRYPTION_VIEW" -> Right PITGVEncryptionView
+        "FULL" -> Right PITGVFull
+        x -> Left ("Unable to parse ProjectsInstancesTablesGetView from: " <> x)
+
+instance ToHttpApiData ProjectsInstancesTablesGetView where
+    toQueryParam = \case
+        PITGVViewUnspecified -> "VIEW_UNSPECIFIED"
+        PITGVNameOnly -> "NAME_ONLY"
+        PITGVSchemaView -> "SCHEMA_VIEW"
+        PITGVReplicationView -> "REPLICATION_VIEW"
+        PITGVEncryptionView -> "ENCRYPTION_VIEW"
+        PITGVFull -> "FULL"
+
+instance FromJSON ProjectsInstancesTablesGetView where
+    parseJSON = parseJSONText "ProjectsInstancesTablesGetView"
+
+instance ToJSON ProjectsInstancesTablesGetView where
+    toJSON = toJSONText
+
+-- | Output only. The current state of the instance.
 data InstanceState
     = ISStateNotKnown
       -- ^ @STATE_NOT_KNOWN@
@@ -376,4 +583,39 @@ instance FromJSON InstanceState where
     parseJSON = parseJSONText "InstanceState"
 
 instance ToJSON InstanceState where
+    toJSON = toJSONText
+
+-- | Output only. The current state of the backup.
+data BackupState
+    = BSStateUnspecified
+      -- ^ @STATE_UNSPECIFIED@
+      -- Not specified.
+    | BSCreating
+      -- ^ @CREATING@
+      -- The pending backup is still being created. Operations on the backup may
+      -- fail with \`FAILED_PRECONDITION\` in this state.
+    | BSReady
+      -- ^ @READY@
+      -- The backup is complete and ready for use.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackupState
+
+instance FromHttpApiData BackupState where
+    parseQueryParam = \case
+        "STATE_UNSPECIFIED" -> Right BSStateUnspecified
+        "CREATING" -> Right BSCreating
+        "READY" -> Right BSReady
+        x -> Left ("Unable to parse BackupState from: " <> x)
+
+instance ToHttpApiData BackupState where
+    toQueryParam = \case
+        BSStateUnspecified -> "STATE_UNSPECIFIED"
+        BSCreating -> "CREATING"
+        BSReady -> "READY"
+
+instance FromJSON BackupState where
+    parseJSON = parseJSONText "BackupState"
+
+instance ToJSON BackupState where
     toJSON = toJSONText

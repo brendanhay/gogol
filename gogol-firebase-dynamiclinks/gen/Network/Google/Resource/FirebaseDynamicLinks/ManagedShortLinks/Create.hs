@@ -49,8 +49,8 @@ module Network.Google.Resource.FirebaseDynamicLinks.ManagedShortLinks.Create
     , mslcCallback
     ) where
 
-import           Network.Google.FirebaseDynamicLinks.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseDynamicLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebasedynamiclinks.managedShortLinks.create@ method which the
 -- 'ManagedShortLinksCreate' request conforms to.
@@ -79,12 +79,12 @@ type ManagedShortLinksCreateResource =
 -- /See:/ 'managedShortLinksCreate' smart constructor.
 data ManagedShortLinksCreate =
   ManagedShortLinksCreate'
-    { _mslcXgafv          :: !(Maybe Xgafv)
+    { _mslcXgafv :: !(Maybe Xgafv)
     , _mslcUploadProtocol :: !(Maybe Text)
-    , _mslcAccessToken    :: !(Maybe Text)
-    , _mslcUploadType     :: !(Maybe Text)
-    , _mslcPayload        :: !CreateManagedShortLinkRequest
-    , _mslcCallback       :: !(Maybe Text)
+    , _mslcAccessToken :: !(Maybe Text)
+    , _mslcUploadType :: !(Maybe Text)
+    , _mslcPayload :: !CreateManagedShortLinkRequest
+    , _mslcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

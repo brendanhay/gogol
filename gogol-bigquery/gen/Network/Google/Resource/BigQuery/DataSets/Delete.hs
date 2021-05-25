@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQuery.DataSets.Delete
     , dsdDeleteContents
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.delete@ method which the
 -- 'DataSetsDelete' request conforms to.
@@ -64,8 +64,8 @@ type DataSetsDeleteResource =
 -- /See:/ 'dataSetsDelete' smart constructor.
 data DataSetsDelete =
   DataSetsDelete'
-    { _dsdDataSetId      :: !Text
-    , _dsdProjectId      :: !Text
+    { _dsdDataSetId :: !Text
+    , _dsdProjectId :: !Text
     , _dsdDeleteContents :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

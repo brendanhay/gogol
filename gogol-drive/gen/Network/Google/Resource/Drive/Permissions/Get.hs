@@ -40,8 +40,8 @@ module Network.Google.Resource.Drive.Permissions.Get
     , pgPermissionId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.get@ method which the
 -- 'PermissionsGet' request conforms to.
@@ -62,11 +62,11 @@ type PermissionsGetResource =
 -- /See:/ 'permissionsGet' smart constructor.
 data PermissionsGet =
   PermissionsGet'
-    { _pgSupportsAllDrives    :: !Bool
+    { _pgSupportsAllDrives :: !Bool
     , _pgUseDomainAdminAccess :: !Bool
-    , _pgFileId               :: !Text
-    , _pgSupportsTeamDrives   :: !Bool
-    , _pgPermissionId         :: !Text
+    , _pgFileId :: !Text
+    , _pgSupportsTeamDrives :: !Bool
+    , _pgPermissionId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -44,13 +44,13 @@ module Network.Google.Resource.AccessApproval.Folders.ApprovalRequests.Approve
     , faraCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.folders.approvalRequests.approve@ method which the
 -- 'FoldersApprovalRequestsApprove' request conforms to.
 type FoldersApprovalRequestsApproveResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "name" "approve" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -68,13 +68,13 @@ type FoldersApprovalRequestsApproveResource =
 -- /See:/ 'foldersApprovalRequestsApprove' smart constructor.
 data FoldersApprovalRequestsApprove =
   FoldersApprovalRequestsApprove'
-    { _faraXgafv          :: !(Maybe Xgafv)
+    { _faraXgafv :: !(Maybe Xgafv)
     , _faraUploadProtocol :: !(Maybe Text)
-    , _faraAccessToken    :: !(Maybe Text)
-    , _faraUploadType     :: !(Maybe Text)
-    , _faraPayload        :: !ApproveApprovalRequestMessage
-    , _faraName           :: !Text
-    , _faraCallback       :: !(Maybe Text)
+    , _faraAccessToken :: !(Maybe Text)
+    , _faraUploadType :: !(Maybe Text)
+    , _faraPayload :: !ApproveApprovalRequestMessage
+    , _faraName :: !Text
+    , _faraCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
     , rPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.deleteAccount@ method which the
 -- 'RelyingPartyDeleteAccount' request conforms to.

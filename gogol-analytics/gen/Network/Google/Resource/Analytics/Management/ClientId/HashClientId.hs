@@ -36,8 +36,8 @@ module Network.Google.Resource.Analytics.Management.ClientId.HashClientId
     , mcihciPayload
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.clientId.hashClientId@ method which the
 -- 'ManagementClientIdHashClientId' request conforms to.

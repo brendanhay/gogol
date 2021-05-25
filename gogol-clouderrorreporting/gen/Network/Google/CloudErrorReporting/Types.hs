@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -21,6 +21,9 @@ module Network.Google.CloudErrorReporting.Types
 
     -- * OAuth Scopes
     , cloudPlatformScope
+
+    -- * ProjectsEventsListTimeRangePeriod
+    , ProjectsEventsListTimeRangePeriod (..)
 
     -- * ErrorEvent
     , ErrorEvent
@@ -44,10 +47,14 @@ module Network.Google.CloudErrorReporting.Types
     , egTrackingIssues
     , egName
     , egGroupId
+    , egResolutionStatus
 
     -- * DeleteEventsResponse
     , DeleteEventsResponse
     , deleteEventsResponse
+
+    -- * ProjectsGroupStatsListAlignment
+    , ProjectsGroupStatsListAlignment (..)
 
     -- * ReportedErrorEvent
     , ReportedErrorEvent
@@ -92,6 +99,9 @@ module Network.Google.CloudErrorReporting.Types
     , egsLastSeenTime
     , egsRepresentative
 
+    -- * ProjectsGroupStatsListOrder
+    , ProjectsGroupStatsListOrder (..)
+
     -- * ListGroupStatsResponse
     , ListGroupStatsResponse
     , listGroupStatsResponse
@@ -116,6 +126,12 @@ module Network.Google.CloudErrorReporting.Types
     , tcCount
     , tcEndTime
 
+    -- * ProjectsGroupStatsListTimeRangePeriod
+    , ProjectsGroupStatsListTimeRangePeriod (..)
+
+    -- * ErrorGroupResolutionStatus
+    , ErrorGroupResolutionStatus (..)
+
     -- * SourceLocation
     , SourceLocation
     , sourceLocation
@@ -134,17 +150,17 @@ module Network.Google.CloudErrorReporting.Types
     , reportErrorEventResponse
     ) where
 
-import           Network.Google.CloudErrorReporting.Types.Product
-import           Network.Google.CloudErrorReporting.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types.Product
+import Network.Google.CloudErrorReporting.Types.Sum
+import Network.Google.Prelude
 
--- | Default request referring to version 'v1beta1' of the Stackdriver Error Reporting API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1beta1' of the Error Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 cloudErrorReportingService :: ServiceConfig
 cloudErrorReportingService
   = defaultService
       (ServiceId "clouderrorreporting:v1beta1")
       "clouderrorreporting.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

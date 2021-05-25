@@ -33,12 +33,17 @@ module Network.Google.Resource.AndroidEnterprise.WebApps.Get
     , WebAppsGet
 
     -- * Request Lenses
+    , wagXgafv
     , wagWebAppId
+    , wagUploadProtocol
     , wagEnterpriseId
+    , wagAccessToken
+    , wagUploadType
+    , wagCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.webapps.get@ method which the
 -- 'WebAppsGet' request conforms to.
@@ -49,15 +54,25 @@ type WebAppsGetResource =
            Capture "enterpriseId" Text :>
              "webApps" :>
                Capture "webAppId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] WebApp
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] WebApp
 
 -- | Gets an existing web app.
 --
 -- /See:/ 'webAppsGet' smart constructor.
 data WebAppsGet =
   WebAppsGet'
-    { _wagWebAppId     :: !Text
+    { _wagXgafv :: !(Maybe Xgafv)
+    , _wagWebAppId :: !Text
+    , _wagUploadProtocol :: !(Maybe Text)
     , _wagEnterpriseId :: !Text
+    , _wagAccessToken :: !(Maybe Text)
+    , _wagUploadType :: !(Maybe Text)
+    , _wagCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,22 +81,49 @@ data WebAppsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'wagXgafv'
+--
 -- * 'wagWebAppId'
 --
+-- * 'wagUploadProtocol'
+--
 -- * 'wagEnterpriseId'
+--
+-- * 'wagAccessToken'
+--
+-- * 'wagUploadType'
+--
+-- * 'wagCallback'
 webAppsGet
     :: Text -- ^ 'wagWebAppId'
     -> Text -- ^ 'wagEnterpriseId'
     -> WebAppsGet
 webAppsGet pWagWebAppId_ pWagEnterpriseId_ =
   WebAppsGet'
-    {_wagWebAppId = pWagWebAppId_, _wagEnterpriseId = pWagEnterpriseId_}
+    { _wagXgafv = Nothing
+    , _wagWebAppId = pWagWebAppId_
+    , _wagUploadProtocol = Nothing
+    , _wagEnterpriseId = pWagEnterpriseId_
+    , _wagAccessToken = Nothing
+    , _wagUploadType = Nothing
+    , _wagCallback = Nothing
+    }
 
+
+-- | V1 error format.
+wagXgafv :: Lens' WebAppsGet (Maybe Xgafv)
+wagXgafv = lens _wagXgafv (\ s a -> s{_wagXgafv = a})
 
 -- | The ID of the web app.
 wagWebAppId :: Lens' WebAppsGet Text
 wagWebAppId
   = lens _wagWebAppId (\ s a -> s{_wagWebAppId = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+wagUploadProtocol :: Lens' WebAppsGet (Maybe Text)
+wagUploadProtocol
+  = lens _wagUploadProtocol
+      (\ s a -> s{_wagUploadProtocol = a})
 
 -- | The ID of the enterprise.
 wagEnterpriseId :: Lens' WebAppsGet Text
@@ -89,12 +131,34 @@ wagEnterpriseId
   = lens _wagEnterpriseId
       (\ s a -> s{_wagEnterpriseId = a})
 
+-- | OAuth access token.
+wagAccessToken :: Lens' WebAppsGet (Maybe Text)
+wagAccessToken
+  = lens _wagAccessToken
+      (\ s a -> s{_wagAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+wagUploadType :: Lens' WebAppsGet (Maybe Text)
+wagUploadType
+  = lens _wagUploadType
+      (\ s a -> s{_wagUploadType = a})
+
+-- | JSONP
+wagCallback :: Lens' WebAppsGet (Maybe Text)
+wagCallback
+  = lens _wagCallback (\ s a -> s{_wagCallback = a})
+
 instance GoogleRequest WebAppsGet where
         type Rs WebAppsGet = WebApp
         type Scopes WebAppsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient WebAppsGet'{..}
-          = go _wagEnterpriseId _wagWebAppId (Just AltJSON)
+          = go _wagEnterpriseId _wagWebAppId _wagXgafv
+              _wagUploadProtocol
+              _wagAccessToken
+              _wagUploadType
+              _wagCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy WebAppsGetResource)

@@ -20,16 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the Cloud IAM access control policy for a ServiceAccount. Note:
--- Service accounts are both [resources and
--- identities](\/iam\/docs\/service-accounts#service_account_permissions).
--- This method treats the service account as a resource. It returns the
--- Cloud IAM policy that reflects what members have access to the service
--- account. This method does not return what resources the service account
--- has access to. To see if a service account has access to a resource,
--- call the \`getIamPolicy\` method on the target resource. For example, to
--- view grants for a project, call the
--- [projects.getIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/getIamPolicy)
+-- Gets the IAM policy that is attached to a ServiceAccount. This IAM
+-- policy specifies which members have access to the service account. This
+-- method does not tell you whether the service account has been granted
+-- any roles on other resources. To check whether a service account has
+-- role grants on a resource, use the \`getIamPolicy\` method for that
+-- resource. For example, to view the role grants for a project, call the
+-- Resource Manager API\'s
+-- [\`projects.getIamPolicy\`](https:\/\/cloud.google.com\/resource-manager\/reference\/rest\/v1\/projects\/getIamPolicy)
 -- method.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.getIamPolicy@.
@@ -43,6 +41,7 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
     , ProjectsServiceAccountsGetIAMPolicy
 
     -- * Request Lenses
+    , psagipOptionsRequestedPolicyVersion
     , psagipXgafv
     , psagipUploadProtocol
     , psagipAccessToken
@@ -51,42 +50,44 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
     , psagipCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.getIamPolicy@ method which the
 -- 'ProjectsServiceAccountsGetIAMPolicy' request conforms to.
 type ProjectsServiceAccountsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Policy
 
--- | Returns the Cloud IAM access control policy for a ServiceAccount. Note:
--- Service accounts are both [resources and
--- identities](\/iam\/docs\/service-accounts#service_account_permissions).
--- This method treats the service account as a resource. It returns the
--- Cloud IAM policy that reflects what members have access to the service
--- account. This method does not return what resources the service account
--- has access to. To see if a service account has access to a resource,
--- call the \`getIamPolicy\` method on the target resource. For example, to
--- view grants for a project, call the
--- [projects.getIamPolicy](\/resource-manager\/reference\/rest\/v1\/projects\/getIamPolicy)
+-- | Gets the IAM policy that is attached to a ServiceAccount. This IAM
+-- policy specifies which members have access to the service account. This
+-- method does not tell you whether the service account has been granted
+-- any roles on other resources. To check whether a service account has
+-- role grants on a resource, use the \`getIamPolicy\` method for that
+-- resource. For example, to view the role grants for a project, call the
+-- Resource Manager API\'s
+-- [\`projects.getIamPolicy\`](https:\/\/cloud.google.com\/resource-manager\/reference\/rest\/v1\/projects\/getIamPolicy)
 -- method.
 --
 -- /See:/ 'projectsServiceAccountsGetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsGetIAMPolicy =
   ProjectsServiceAccountsGetIAMPolicy'
-    { _psagipXgafv          :: !(Maybe Xgafv)
+    { _psagipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _psagipXgafv :: !(Maybe Xgafv)
     , _psagipUploadProtocol :: !(Maybe Text)
-    , _psagipAccessToken    :: !(Maybe Text)
-    , _psagipUploadType     :: !(Maybe Text)
-    , _psagipResource       :: !Text
-    , _psagipCallback       :: !(Maybe Text)
+    , _psagipAccessToken :: !(Maybe Text)
+    , _psagipUploadType :: !(Maybe Text)
+    , _psagipResource :: !Text
+    , _psagipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -94,6 +95,8 @@ data ProjectsServiceAccountsGetIAMPolicy =
 -- | Creates a value of 'ProjectsServiceAccountsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psagipOptionsRequestedPolicyVersion'
 --
 -- * 'psagipXgafv'
 --
@@ -111,7 +114,8 @@ projectsServiceAccountsGetIAMPolicy
     -> ProjectsServiceAccountsGetIAMPolicy
 projectsServiceAccountsGetIAMPolicy pPsagipResource_ =
   ProjectsServiceAccountsGetIAMPolicy'
-    { _psagipXgafv = Nothing
+    { _psagipOptionsRequestedPolicyVersion = Nothing
+    , _psagipXgafv = Nothing
     , _psagipUploadProtocol = Nothing
     , _psagipAccessToken = Nothing
     , _psagipUploadType = Nothing
@@ -119,6 +123,20 @@ projectsServiceAccountsGetIAMPolicy pPsagipResource_ =
     , _psagipCallback = Nothing
     }
 
+
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+psagipOptionsRequestedPolicyVersion :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Int32)
+psagipOptionsRequestedPolicyVersion
+  = lens _psagipOptionsRequestedPolicyVersion
+      (\ s a ->
+         s{_psagipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
 
 -- | V1 error format.
 psagipXgafv :: Lens' ProjectsServiceAccountsGetIAMPolicy (Maybe Xgafv)
@@ -164,7 +182,9 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient
           ProjectsServiceAccountsGetIAMPolicy'{..}
-          = go _psagipResource _psagipXgafv
+          = go _psagipResource
+              _psagipOptionsRequestedPolicyVersion
+              _psagipXgafv
               _psagipUploadProtocol
               _psagipAccessToken
               _psagipUploadType

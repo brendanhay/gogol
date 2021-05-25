@@ -22,7 +22,7 @@
 --
 -- Deletes a chat message.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveChatMessages.delete@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.liveChatMessages.delete@.
 module Network.Google.Resource.YouTube.LiveChatMessages.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.YouTube.LiveChatMessages.Delete
     , LiveChatMessagesDelete
 
     -- * Request Lenses
-    , lId
+    , lcmdcXgafv
+    , lcmdcUploadProtocol
+    , lcmdcAccessToken
+    , lcmdcUploadType
+    , lcmdcId
+    , lcmdcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatMessages.delete@ method which the
 -- 'LiveChatMessagesDelete' request conforms to.
@@ -47,14 +52,24 @@ type LiveChatMessagesDeleteResource =
          "liveChat" :>
            "messages" :>
              QueryParam "id" Text :>
-               QueryParam "alt" AltJSON :> Delete '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a chat message.
 --
 -- /See:/ 'liveChatMessagesDelete' smart constructor.
-newtype LiveChatMessagesDelete =
+data LiveChatMessagesDelete =
   LiveChatMessagesDelete'
-    { _lId :: Text
+    { _lcmdcXgafv :: !(Maybe Xgafv)
+    , _lcmdcUploadProtocol :: !(Maybe Text)
+    , _lcmdcAccessToken :: !(Maybe Text)
+    , _lcmdcUploadType :: !(Maybe Text)
+    , _lcmdcId :: !Text
+    , _lcmdcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,17 +78,62 @@ newtype LiveChatMessagesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lId'
+-- * 'lcmdcXgafv'
+--
+-- * 'lcmdcUploadProtocol'
+--
+-- * 'lcmdcAccessToken'
+--
+-- * 'lcmdcUploadType'
+--
+-- * 'lcmdcId'
+--
+-- * 'lcmdcCallback'
 liveChatMessagesDelete
-    :: Text -- ^ 'lId'
+    :: Text -- ^ 'lcmdcId'
     -> LiveChatMessagesDelete
-liveChatMessagesDelete pLId_ = LiveChatMessagesDelete' {_lId = pLId_}
+liveChatMessagesDelete pLcmdcId_ =
+  LiveChatMessagesDelete'
+    { _lcmdcXgafv = Nothing
+    , _lcmdcUploadProtocol = Nothing
+    , _lcmdcAccessToken = Nothing
+    , _lcmdcUploadType = Nothing
+    , _lcmdcId = pLcmdcId_
+    , _lcmdcCallback = Nothing
+    }
 
 
--- | The id parameter specifies the YouTube chat message ID of the resource
--- that is being deleted.
-lId :: Lens' LiveChatMessagesDelete Text
-lId = lens _lId (\ s a -> s{_lId = a})
+-- | V1 error format.
+lcmdcXgafv :: Lens' LiveChatMessagesDelete (Maybe Xgafv)
+lcmdcXgafv
+  = lens _lcmdcXgafv (\ s a -> s{_lcmdcXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lcmdcUploadProtocol :: Lens' LiveChatMessagesDelete (Maybe Text)
+lcmdcUploadProtocol
+  = lens _lcmdcUploadProtocol
+      (\ s a -> s{_lcmdcUploadProtocol = a})
+
+-- | OAuth access token.
+lcmdcAccessToken :: Lens' LiveChatMessagesDelete (Maybe Text)
+lcmdcAccessToken
+  = lens _lcmdcAccessToken
+      (\ s a -> s{_lcmdcAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lcmdcUploadType :: Lens' LiveChatMessagesDelete (Maybe Text)
+lcmdcUploadType
+  = lens _lcmdcUploadType
+      (\ s a -> s{_lcmdcUploadType = a})
+
+lcmdcId :: Lens' LiveChatMessagesDelete Text
+lcmdcId = lens _lcmdcId (\ s a -> s{_lcmdcId = a})
+
+-- | JSONP
+lcmdcCallback :: Lens' LiveChatMessagesDelete (Maybe Text)
+lcmdcCallback
+  = lens _lcmdcCallback
+      (\ s a -> s{_lcmdcCallback = a})
 
 instance GoogleRequest LiveChatMessagesDelete where
         type Rs LiveChatMessagesDelete = ()
@@ -81,7 +141,12 @@ instance GoogleRequest LiveChatMessagesDelete where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient LiveChatMessagesDelete'{..}
-          = go (Just _lId) (Just AltJSON) youTubeService
+          = go (Just _lcmdcId) _lcmdcXgafv _lcmdcUploadProtocol
+              _lcmdcAccessToken
+              _lcmdcUploadType
+              _lcmdcCallback
+              (Just AltJSON)
+              youTubeService
           where go
                   = buildClient
                       (Proxy :: Proxy LiveChatMessagesDeleteResource)

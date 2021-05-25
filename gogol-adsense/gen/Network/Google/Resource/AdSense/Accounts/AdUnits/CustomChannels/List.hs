@@ -40,8 +40,8 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
     , aaucclMaxResults
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.adunits.customchannels.list@ method which the
 -- 'AccountsAdUnitsCustomChannelsList' request conforms to.
@@ -65,10 +65,10 @@ type AccountsAdUnitsCustomChannelsListResource =
 -- /See:/ 'accountsAdUnitsCustomChannelsList' smart constructor.
 data AccountsAdUnitsCustomChannelsList =
   AccountsAdUnitsCustomChannelsList'
-    { _aaucclAdUnitId   :: !Text
+    { _aaucclAdUnitId :: !Text
     , _aaucclAdClientId :: !Text
-    , _aaucclAccountId  :: !Text
-    , _aaucclPageToken  :: !(Maybe Text)
+    , _aaucclAccountId :: !Text
+    , _aaucclPageToken :: !(Maybe Text)
     , _aaucclMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

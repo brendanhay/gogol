@@ -44,8 +44,8 @@ module Network.Google.Resource.YouTubeReporting.ReportTypes.List
     , rtlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.reportTypes.list@ method which the
 -- 'ReportTypesList' request conforms to.
@@ -69,15 +69,15 @@ type ReportTypesListResource =
 -- /See:/ 'reportTypesList' smart constructor.
 data ReportTypesList =
   ReportTypesList'
-    { _rtlXgafv                  :: !(Maybe Xgafv)
-    , _rtlUploadProtocol         :: !(Maybe Text)
-    , _rtlAccessToken            :: !(Maybe Text)
-    , _rtlUploadType             :: !(Maybe Text)
-    , _rtlIncludeSystemManaged   :: !(Maybe Bool)
+    { _rtlXgafv :: !(Maybe Xgafv)
+    , _rtlUploadProtocol :: !(Maybe Text)
+    , _rtlAccessToken :: !(Maybe Text)
+    , _rtlUploadType :: !(Maybe Text)
+    , _rtlIncludeSystemManaged :: !(Maybe Bool)
     , _rtlOnBehalfOfContentOwner :: !(Maybe Text)
-    , _rtlPageToken              :: !(Maybe Text)
-    , _rtlPageSize               :: !(Maybe (Textual Int32))
-    , _rtlCallback               :: !(Maybe Text)
+    , _rtlPageToken :: !(Maybe Text)
+    , _rtlPageSize :: !(Maybe (Textual Int32))
+    , _rtlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

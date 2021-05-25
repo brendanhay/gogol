@@ -41,8 +41,8 @@ module Network.Google.Resource.Redis.Projects.Locations.Instances.Get
     , pligCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Redis.Types
+import Network.Google.Prelude
+import Network.Google.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.get@ method which the
 -- 'ProjectsLocationsInstancesGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsInstancesGetResource =
 -- /See:/ 'projectsLocationsInstancesGet' smart constructor.
 data ProjectsLocationsInstancesGet =
   ProjectsLocationsInstancesGet'
-    { _pligXgafv          :: !(Maybe Xgafv)
+    { _pligXgafv :: !(Maybe Xgafv)
     , _pligUploadProtocol :: !(Maybe Text)
-    , _pligAccessToken    :: !(Maybe Text)
-    , _pligUploadType     :: !(Maybe Text)
-    , _pligName           :: !Text
-    , _pligCallback       :: !(Maybe Text)
+    , _pligAccessToken :: !(Maybe Text)
+    , _pligUploadType :: !(Maybe Text)
+    , _pligName :: !Text
+    , _pligCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -125,7 +125,7 @@ pligUploadType
 
 -- | Required. Redis instance resource name using the form:
 -- \`projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}\`
--- where \`location_id\` refers to a GCP region
+-- where \`location_id\` refers to a GCP region.
 pligName :: Lens' ProjectsLocationsInstancesGet Text
 pligName = lens _pligName (\ s a -> s{_pligName = a})
 

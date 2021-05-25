@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Regions.Get
     , rgRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regions.get@ method which the
 -- 'RegionsGet' request conforms to.
@@ -59,7 +59,7 @@ type RegionsGetResource =
 data RegionsGet =
   RegionsGet'
     { _rgProject :: !Text
-    , _rgRegion  :: !Text
+    , _rgRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

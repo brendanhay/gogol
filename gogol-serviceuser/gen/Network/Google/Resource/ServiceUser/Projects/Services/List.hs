@@ -43,8 +43,8 @@ module Network.Google.Resource.ServiceUser.Projects.Services.List
     , pslCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceUser.Types
+import Network.Google.Prelude
+import Network.Google.ServiceUser.Types
 
 -- | A resource alias for @serviceuser.projects.services.list@ method which the
 -- 'ProjectsServicesList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsServicesListResource =
 -- /See:/ 'projectsServicesList' smart constructor.
 data ProjectsServicesList =
   ProjectsServicesList'
-    { _pslParent         :: !Text
-    , _pslXgafv          :: !(Maybe Xgafv)
+    { _pslParent :: !Text
+    , _pslXgafv :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
-    , _pslAccessToken    :: !(Maybe Text)
-    , _pslUploadType     :: !(Maybe Text)
-    , _pslPageToken      :: !(Maybe Text)
-    , _pslPageSize       :: !(Maybe (Textual Int32))
-    , _pslCallback       :: !(Maybe Text)
+    , _pslAccessToken :: !(Maybe Text)
+    , _pslUploadType :: !(Maybe Text)
+    , _pslPageToken :: !(Maybe Text)
+    , _pslPageSize :: !(Maybe (Textual Int32))
+    , _pslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

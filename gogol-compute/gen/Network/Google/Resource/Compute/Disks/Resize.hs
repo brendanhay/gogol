@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Disks.Resize
     , drPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.resize@ method which the
 -- 'DisksResize' request conforms to.
@@ -68,10 +68,10 @@ type DisksResizeResource =
 data DisksResize =
   DisksResize'
     { _drRequestId :: !(Maybe Text)
-    , _drProject   :: !Text
-    , _drDisk      :: !Text
-    , _drZone      :: !Text
-    , _drPayload   :: !DisksResizeRequest
+    , _drProject :: !Text
+    , _drDisk :: !Text
+    , _drZone :: !Text
+    , _drPayload :: !DisksResizeRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

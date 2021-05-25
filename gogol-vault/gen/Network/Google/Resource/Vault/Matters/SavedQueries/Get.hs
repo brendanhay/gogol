@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a saved query by Id.
+-- Retrieves the specified saved query.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.savedQueries.get@.
 module Network.Google.Resource.Vault.Matters.SavedQueries.Get
@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.SavedQueries.Get
     , msqgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.savedQueries.get@ method which the
 -- 'MattersSavedQueriesGet' request conforms to.
@@ -60,18 +60,18 @@ type MattersSavedQueriesGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] SavedQuery
 
--- | Retrieves a saved query by Id.
+-- | Retrieves the specified saved query.
 --
 -- /See:/ 'mattersSavedQueriesGet' smart constructor.
 data MattersSavedQueriesGet =
   MattersSavedQueriesGet'
-    { _msqgXgafv          :: !(Maybe Xgafv)
-    , _msqgSavedQueryId   :: !Text
+    { _msqgXgafv :: !(Maybe Xgafv)
+    , _msqgSavedQueryId :: !Text
     , _msqgUploadProtocol :: !(Maybe Text)
-    , _msqgAccessToken    :: !(Maybe Text)
-    , _msqgUploadType     :: !(Maybe Text)
-    , _msqgMatterId       :: !Text
-    , _msqgCallback       :: !(Maybe Text)
+    , _msqgAccessToken :: !(Maybe Text)
+    , _msqgUploadType :: !(Maybe Text)
+    , _msqgMatterId :: !Text
+    , _msqgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,7 +114,7 @@ msqgXgafv :: Lens' MattersSavedQueriesGet (Maybe Xgafv)
 msqgXgafv
   = lens _msqgXgafv (\ s a -> s{_msqgXgafv = a})
 
--- | Id of the saved query to be retrieved.
+-- | ID of the saved query to retrieve.
 msqgSavedQueryId :: Lens' MattersSavedQueriesGet Text
 msqgSavedQueryId
   = lens _msqgSavedQueryId
@@ -138,8 +138,7 @@ msqgUploadType
   = lens _msqgUploadType
       (\ s a -> s{_msqgUploadType = a})
 
--- | The matter id of the parent matter for which the saved query is to be
--- retrieved.
+-- | The ID of the matter to get the saved query from.
 msqgMatterId :: Lens' MattersSavedQueriesGet Text
 msqgMatterId
   = lens _msqgMatterId (\ s a -> s{_msqgMatterId = a})

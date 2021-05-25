@@ -43,8 +43,8 @@ module Network.Google.Resource.ServiceManagement.Services.Consumers.GetIAMPolicy
     , scgipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceManagement.Types
+import Network.Google.Prelude
+import Network.Google.ServiceManagement.Types
 
 -- | A resource alias for @servicemanagement.services.consumers.getIamPolicy@ method which the
 -- 'ServicesConsumersGetIAMPolicy' request conforms to.
@@ -66,13 +66,13 @@ type ServicesConsumersGetIAMPolicyResource =
 -- /See:/ 'servicesConsumersGetIAMPolicy' smart constructor.
 data ServicesConsumersGetIAMPolicy =
   ServicesConsumersGetIAMPolicy'
-    { _scgipXgafv          :: !(Maybe Xgafv)
+    { _scgipXgafv :: !(Maybe Xgafv)
     , _scgipUploadProtocol :: !(Maybe Text)
-    , _scgipAccessToken    :: !(Maybe Text)
-    , _scgipUploadType     :: !(Maybe Text)
-    , _scgipPayload        :: !GetIAMPolicyRequest
-    , _scgipResource       :: !Text
-    , _scgipCallback       :: !(Maybe Text)
+    , _scgipAccessToken :: !(Maybe Text)
+    , _scgipUploadType :: !(Maybe Text)
+    , _scgipPayload :: !GetIAMPolicyRequest
+    , _scgipResource :: !Text
+    , _scgipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

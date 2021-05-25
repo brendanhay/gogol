@@ -22,9 +22,9 @@
 --
 -- Lists an organization or source\'s findings. To list across all sources
 -- provide a \`-\` as the source id. Example:
--- \/v1\/organizations\/123\/sources\/-\/findings
+-- \/v1p1beta1\/organizations\/{organization_id}\/sources\/-\/findings
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.findings.list@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.findings.list@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.List
     (
     -- * REST Resource
@@ -50,13 +50,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.Findings.Lis
     , osflCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.findings.list@ method which the
 -- 'OrganizationsSourcesFindingsList' request conforms to.
 type OrganizationsSourcesFindingsListResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "parent" Text :>
          "findings" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -76,24 +76,24 @@ type OrganizationsSourcesFindingsListResource =
 
 -- | Lists an organization or source\'s findings. To list across all sources
 -- provide a \`-\` as the source id. Example:
--- \/v1\/organizations\/123\/sources\/-\/findings
+-- \/v1p1beta1\/organizations\/{organization_id}\/sources\/-\/findings
 --
 -- /See:/ 'organizationsSourcesFindingsList' smart constructor.
 data OrganizationsSourcesFindingsList =
   OrganizationsSourcesFindingsList'
-    { _osflParent          :: !Text
-    , _osflXgafv           :: !(Maybe Xgafv)
-    , _osflReadTime        :: !(Maybe DateTime')
-    , _osflUploadProtocol  :: !(Maybe Text)
-    , _osflOrderBy         :: !(Maybe Text)
-    , _osflAccessToken     :: !(Maybe Text)
-    , _osflUploadType      :: !(Maybe Text)
-    , _osflFieldMask       :: !(Maybe GFieldMask)
-    , _osflFilter          :: !(Maybe Text)
-    , _osflPageToken       :: !(Maybe Text)
-    , _osflPageSize        :: !(Maybe (Textual Int32))
+    { _osflParent :: !Text
+    , _osflXgafv :: !(Maybe Xgafv)
+    , _osflReadTime :: !(Maybe DateTime')
+    , _osflUploadProtocol :: !(Maybe Text)
+    , _osflOrderBy :: !(Maybe Text)
+    , _osflAccessToken :: !(Maybe Text)
+    , _osflUploadType :: !(Maybe Text)
+    , _osflFieldMask :: !(Maybe GFieldMask)
+    , _osflFilter :: !(Maybe Text)
+    , _osflPageToken :: !(Maybe Text)
+    , _osflPageSize :: !(Maybe (Textual Int32))
     , _osflCompareDuration :: !(Maybe GDuration)
-    , _osflCallback        :: !(Maybe Text)
+    , _osflCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -148,10 +148,10 @@ organizationsSourcesFindingsList pOsflParent_ =
     }
 
 
--- | Name of the source the findings belong to. Its format is
+-- | Required. Name of the source the findings belong to. Its format is
 -- \"organizations\/[organization_id]\/sources\/[source_id]\". To list
 -- across all sources provide a source_id of \`-\`. For example:
--- organizations\/123\/sources\/-
+-- organizations\/{organization_id}\/sources\/-
 osflParent :: Lens' OrganizationsSourcesFindingsList Text
 osflParent
   = lens _osflParent (\ s a -> s{_osflParent = a})
@@ -186,7 +186,7 @@ osflUploadProtocol
 -- desc,source_properties.a_property\" and \" name desc ,
 -- source_properties.a_property \" are equivalent. The following fields are
 -- supported: name parent state category resource_name event_time
--- source_properties security_marks
+-- source_properties security_marks.marks
 osflOrderBy :: Lens' OrganizationsSourcesFindingsList (Maybe Text)
 osflOrderBy
   = lens _osflOrderBy (\ s a -> s{_osflOrderBy = a})
@@ -203,8 +203,8 @@ osflUploadType
   = lens _osflUploadType
       (\ s a -> s{_osflUploadType = a})
 
--- | Optional. A field mask to specify the Finding fields to be listed in the
--- response. An empty field mask will list all fields.
+-- | A field mask to specify the Finding fields to be listed in the response.
+-- An empty field mask will list all fields.
 osflFieldMask :: Lens' OrganizationsSourcesFindingsList (Maybe GFieldMask)
 osflFieldMask
   = lens _osflFieldMask
@@ -221,12 +221,18 @@ osflFieldMask
 -- \`:\`, meaning substring matching, for strings. The supported value
 -- types are: * string literals in quotes. * integer literals without
 -- quotes. * boolean literals \`true\` and \`false\` without quotes. The
--- following field and operator combinations are supported: name | \`=\`
--- parent | \'=\', \':\' resource_name | \'=\', \':\' state | \'=\', \':\'
--- category | \'=\', \':\' external_uri | \'=\', \':\' event_time | \`>\`,
--- \`\<\`, \`>=\`, \`\<=\` security_marks | \'=\', \':\' source_properties
--- | \'=\', \':\', \`>\`, \`\<\`, \`>=\`, \`\<=\` For example,
--- \`source_properties.size = 100\` is a valid filter string.
+-- following field and operator combinations are supported: name: \`=\`
+-- parent: \`=\`, \`:\` resource_name: \`=\`, \`:\` state: \`=\`, \`:\`
+-- category: \`=\`, \`:\` external_uri: \`=\`, \`:\` event_time: \`=\`,
+-- \`>\`, \`\<\`, \`>=\`, \`\<=\` Usage: This should be milliseconds since
+-- epoch or an RFC3339 string. Examples: \`event_time =
+-- \"2019-06-10T16:07:18-07:00\"\` \`event_time = 1560208038000\`
+-- security_marks.marks: \`=\`, \`:\` source_properties: \`=\`, \`:\`,
+-- \`>\`, \`\<\`, \`>=\`, \`\<=\` For example, \`source_properties.size =
+-- 100\` is a valid filter string. Use a partial match on the empty string
+-- to filter based on a property existing: \`source_properties.my_property
+-- : \"\"\` Use a negated partial match on the empty string to filter based
+-- on a property not existing: \`-source_properties.my_property : \"\"\`
 osflFilter :: Lens' OrganizationsSourcesFindingsList (Maybe Text)
 osflFilter
   = lens _osflFilter (\ s a -> s{_osflFilter = a})
@@ -257,13 +263,17 @@ osflPageSize
 -- result. For example, the results aren\'t affected if the finding is made
 -- inactive and then active again. Possible \"state_change\" values when
 -- compare_duration is specified: * \"CHANGED\": indicates that the finding
--- was present at the start of compare_duration, but changed its state at
--- read_time. * \"UNCHANGED\": indicates that the finding was present at
+-- was present and matched the given filter at the start of
+-- compare_duration, but changed its state at read_time. * \"UNCHANGED\":
+-- indicates that the finding was present and matched the given filter at
 -- the start of compare_duration and did not change state at read_time. *
--- \"ADDED\": indicates that the finding was not present at the start of
--- compare_duration, but was present at read_time. If compare_duration is
--- not specified, then the only possible state_change is \"UNUSED\", which
--- will be the state_change set for all findings present at read_time.
+-- \"ADDED\": indicates that the finding did not match the given filter or
+-- was not present at the start of compare_duration, but was present at
+-- read_time. * \"REMOVED\": indicates that the finding was present and
+-- matched the filter at the start of compare_duration, but did not match
+-- the filter at read_time. If compare_duration is not specified, then the
+-- only possible state_change is \"UNUSED\", which will be the state_change
+-- set for all findings present at read_time.
 osflCompareDuration :: Lens' OrganizationsSourcesFindingsList (Maybe Scientific)
 osflCompareDuration
   = lens _osflCompareDuration

@@ -53,13 +53,13 @@ module Network.Google.Resource.Speech.Projects.Locations.Operations.List
     , plolCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Speech.Types
+import Network.Google.Prelude
+import Network.Google.Speech.Types
 
 -- | A resource alias for @speech.projects.locations.operations.list@ method which the
 -- 'ProjectsLocationsOperationsList' request conforms to.
 type ProjectsLocationsOperationsListResource =
-     "v1p1beta1" :>
+     "v2beta1" :>
        Capture "name" Text :>
          "operations" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -87,15 +87,15 @@ type ProjectsLocationsOperationsListResource =
 -- /See:/ 'projectsLocationsOperationsList' smart constructor.
 data ProjectsLocationsOperationsList =
   ProjectsLocationsOperationsList'
-    { _plolXgafv          :: !(Maybe Xgafv)
+    { _plolXgafv :: !(Maybe Xgafv)
     , _plolUploadProtocol :: !(Maybe Text)
-    , _plolAccessToken    :: !(Maybe Text)
-    , _plolUploadType     :: !(Maybe Text)
-    , _plolName           :: !Text
-    , _plolFilter         :: !(Maybe Text)
-    , _plolPageToken      :: !(Maybe Text)
-    , _plolPageSize       :: !(Maybe (Textual Int32))
-    , _plolCallback       :: !(Maybe Text)
+    , _plolAccessToken :: !(Maybe Text)
+    , _plolUploadType :: !(Maybe Text)
+    , _plolName :: !Text
+    , _plolFilter :: !(Maybe Text)
+    , _plolPageToken :: !(Maybe Text)
+    , _plolPageSize :: !(Maybe (Textual Int32))
+    , _plolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

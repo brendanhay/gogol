@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
     , mauluLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountUserLinks.update@ method which the
 -- 'ManagementAccountUserLinksUpdate' request conforms to.
@@ -60,9 +60,9 @@ type ManagementAccountUserLinksUpdateResource =
 -- /See:/ 'managementAccountUserLinksUpdate' smart constructor.
 data ManagementAccountUserLinksUpdate =
   ManagementAccountUserLinksUpdate'
-    { _mauluPayload   :: !EntityUserLink
+    { _mauluPayload :: !EntityUserLink
     , _mauluAccountId :: !Text
-    , _mauluLinkId    :: !Text
+    , _mauluLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

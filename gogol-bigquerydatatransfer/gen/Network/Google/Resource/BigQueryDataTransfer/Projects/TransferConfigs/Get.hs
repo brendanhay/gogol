@@ -22,7 +22,7 @@
 --
 -- Returns information about a data transfer config.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.get@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.transferConfigs.get@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.TransferConfigs.Get
     , ptcgCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.get@ method which the
 -- 'ProjectsTransferConfigsGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsTransferConfigsGetResource =
 -- /See:/ 'projectsTransferConfigsGet' smart constructor.
 data ProjectsTransferConfigsGet =
   ProjectsTransferConfigsGet'
-    { _ptcgXgafv          :: !(Maybe Xgafv)
+    { _ptcgXgafv :: !(Maybe Xgafv)
     , _ptcgUploadProtocol :: !(Maybe Text)
-    , _ptcgAccessToken    :: !(Maybe Text)
-    , _ptcgUploadType     :: !(Maybe Text)
-    , _ptcgName           :: !Text
-    , _ptcgCallback       :: !(Maybe Text)
+    , _ptcgAccessToken :: !(Maybe Text)
+    , _ptcgUploadType :: !(Maybe Text)
+    , _ptcgName :: !Text
+    , _ptcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,9 @@ ptcgUploadType
   = lens _ptcgUploadType
       (\ s a -> s{_ptcgUploadType = a})
 
--- | The field will contain name of the resource requested, for example:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`
+-- | Required. The field will contain name of the resource requested, for
+-- example: \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`
 ptcgName :: Lens' ProjectsTransferConfigsGet Text
 ptcgName = lens _ptcgName (\ s a -> s{_ptcgName = a})
 

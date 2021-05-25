@@ -48,8 +48,8 @@ module Network.Google.Resource.StreetViewPublish.Photos.BatchGet
     , pbgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StreetViewPublish.Types
+import Network.Google.Prelude
+import Network.Google.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.batchGet@ method which the
 -- 'PhotosBatchGet' request conforms to.
@@ -62,7 +62,7 @@ type PhotosBatchGetResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParams "photoIds" Text :>
-                     QueryParam "view" Text :>
+                     QueryParam "view" PhotosBatchGetView :>
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] BatchGetPhotosResponse
@@ -77,14 +77,14 @@ type PhotosBatchGetResource =
 -- /See:/ 'photosBatchGet' smart constructor.
 data PhotosBatchGet =
   PhotosBatchGet'
-    { _pbgXgafv          :: !(Maybe Xgafv)
-    , _pbgLanguageCode   :: !(Maybe Text)
+    { _pbgXgafv :: !(Maybe Xgafv)
+    , _pbgLanguageCode :: !(Maybe Text)
     , _pbgUploadProtocol :: !(Maybe Text)
-    , _pbgAccessToken    :: !(Maybe Text)
-    , _pbgUploadType     :: !(Maybe Text)
-    , _pbgPhotoIds       :: !(Maybe [Text])
-    , _pbgView           :: !(Maybe Text)
-    , _pbgCallback       :: !(Maybe Text)
+    , _pbgAccessToken :: !(Maybe Text)
+    , _pbgUploadType :: !(Maybe Text)
+    , _pbgPhotoIds :: !(Maybe [Text])
+    , _pbgView :: !(Maybe PhotosBatchGetView)
+    , _pbgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -163,9 +163,9 @@ pbgPhotoIds
       _Default
       . _Coerce
 
--- | Specifies if a download URL for the photo bytes should be returned in
--- the Photo response.
-pbgView :: Lens' PhotosBatchGet (Maybe Text)
+-- | Required. Specifies if a download URL for the photo bytes should be
+-- returned in the Photo response.
+pbgView :: Lens' PhotosBatchGet (Maybe PhotosBatchGetView)
 pbgView = lens _pbgView (\ s a -> s{_pbgView = a})
 
 -- | JSONP

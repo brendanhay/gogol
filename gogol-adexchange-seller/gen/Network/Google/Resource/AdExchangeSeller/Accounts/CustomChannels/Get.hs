@@ -38,8 +38,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
     , accgAccountId
     ) where
 
-import           Network.Google.AdExchangeSeller.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeSeller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.customchannels.get@ method which the
 -- 'AccountsCustomChannelsGet' request conforms to.
@@ -60,8 +60,8 @@ type AccountsCustomChannelsGetResource =
 data AccountsCustomChannelsGet =
   AccountsCustomChannelsGet'
     { _accgCustomChannelId :: !Text
-    , _accgAdClientId      :: !Text
-    , _accgAccountId       :: !Text
+    , _accgAdClientId :: !Text
+    , _accgAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

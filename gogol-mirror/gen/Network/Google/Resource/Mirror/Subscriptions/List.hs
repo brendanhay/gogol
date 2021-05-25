@@ -35,8 +35,8 @@ module Network.Google.Resource.Mirror.Subscriptions.List
 
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.list@ method which the
 -- 'SubscriptionsList' request conforms to.

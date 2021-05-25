@@ -20,9 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Pushes an item onto a queue for later polling and updating.
+-- Pushes an item onto a queue for later polling and updating. This API
+-- requires an admin or service account to execute. The service account
+-- used is the one whitelisted in the corresponding data source.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.push@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.items.push@.
 module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Push
     (
     -- * REST Resource
@@ -42,8 +44,8 @@ module Network.Google.Resource.CloudSearch.Indexing.Datasources.Items.Push
     , idipCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.indexing.datasources.items.push@ method which the
 -- 'IndexingDatasourcesItemsPush' request conforms to.
@@ -59,18 +61,20 @@ type IndexingDatasourcesItemsPushResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] PushItemRequest :> Post '[JSON] Item
 
--- | Pushes an item onto a queue for later polling and updating.
+-- | Pushes an item onto a queue for later polling and updating. This API
+-- requires an admin or service account to execute. The service account
+-- used is the one whitelisted in the corresponding data source.
 --
 -- /See:/ 'indexingDatasourcesItemsPush' smart constructor.
 data IndexingDatasourcesItemsPush =
   IndexingDatasourcesItemsPush'
-    { _idipXgafv          :: !(Maybe Xgafv)
+    { _idipXgafv :: !(Maybe Xgafv)
     , _idipUploadProtocol :: !(Maybe Text)
-    , _idipAccessToken    :: !(Maybe Text)
-    , _idipUploadType     :: !(Maybe Text)
-    , _idipPayload        :: !PushItemRequest
-    , _idipName           :: !Text
-    , _idipCallback       :: !(Maybe Text)
+    , _idipAccessToken :: !(Maybe Text)
+    , _idipUploadType :: !(Maybe Text)
+    , _idipPayload :: !PushItemRequest
+    , _idipName :: !Text
+    , _idipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -136,9 +140,9 @@ idipPayload :: Lens' IndexingDatasourcesItemsPush PushItemRequest
 idipPayload
   = lens _idipPayload (\ s a -> s{_idipPayload = a})
 
--- | Name of the item to push into the indexing queue.
--- Format: datasources\/{source_id}\/items\/{ID}
--- This is a required field. The maximum length is 1536 characters.
+-- | Name of the item to push into the indexing queue. Format:
+-- datasources\/{source_id}\/items\/{ID} This is a required field. The
+-- maximum length is 1536 characters.
 idipName :: Lens' IndexingDatasourcesItemsPush Text
 idipName = lens _idipName (\ s a -> s{_idipName = a})
 

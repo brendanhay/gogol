@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -162,9 +162,9 @@ module Network.Google.ReplicaPoolUpdater.Types
     , owiMessage
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types.Product
-import           Network.Google.ReplicaPoolUpdater.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types.Product
+import Network.Google.ReplicaPoolUpdater.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API. This contains the host and root path used as a starting point for constructing service requests.
 replicaPoolUpdaterService :: ServiceConfig

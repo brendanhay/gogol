@@ -36,11 +36,12 @@ module Network.Google.Resource.Storage.Objects.GetIAMPolicy
     , ogipBucket
     , ogipUserProject
     , ogipObject
+    , ogipProvisionalUserProject
     , ogipGeneration
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.getIamPolicy@ method which the
 -- 'ObjectsGetIAMPolicy' request conforms to.
@@ -53,18 +54,20 @@ type ObjectsGetIAMPolicyResource =
                Capture "object" Text :>
                  "iam" :>
                    QueryParam "userProject" Text :>
-                     QueryParam "generation" (Textual Int64) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                     QueryParam "provisionalUserProject" Text :>
+                       QueryParam "generation" (Textual Int64) :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Returns an IAM policy for the specified object.
 --
 -- /See:/ 'objectsGetIAMPolicy' smart constructor.
 data ObjectsGetIAMPolicy =
   ObjectsGetIAMPolicy'
-    { _ogipBucket      :: !Text
+    { _ogipBucket :: !Text
     , _ogipUserProject :: !(Maybe Text)
-    , _ogipObject      :: !Text
-    , _ogipGeneration  :: !(Maybe (Textual Int64))
+    , _ogipObject :: !Text
+    , _ogipProvisionalUserProject :: !(Maybe Text)
+    , _ogipGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,6 +82,8 @@ data ObjectsGetIAMPolicy =
 --
 -- * 'ogipObject'
 --
+-- * 'ogipProvisionalUserProject'
+--
 -- * 'ogipGeneration'
 objectsGetIAMPolicy
     :: Text -- ^ 'ogipBucket'
@@ -89,6 +94,7 @@ objectsGetIAMPolicy pOgipBucket_ pOgipObject_ =
     { _ogipBucket = pOgipBucket_
     , _ogipUserProject = Nothing
     , _ogipObject = pOgipObject_
+    , _ogipProvisionalUserProject = Nothing
     , _ogipGeneration = Nothing
     }
 
@@ -111,6 +117,13 @@ ogipObject :: Lens' ObjectsGetIAMPolicy Text
 ogipObject
   = lens _ogipObject (\ s a -> s{_ogipObject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+ogipProvisionalUserProject :: Lens' ObjectsGetIAMPolicy (Maybe Text)
+ogipProvisionalUserProject
+  = lens _ogipProvisionalUserProject
+      (\ s a -> s{_ogipProvisionalUserProject = a})
+
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
 ogipGeneration :: Lens' ObjectsGetIAMPolicy (Maybe Int64)
@@ -129,6 +142,7 @@ instance GoogleRequest ObjectsGetIAMPolicy where
                "https://www.googleapis.com/auth/devstorage.read_write"]
         requestClient ObjectsGetIAMPolicy'{..}
           = go _ogipBucket _ogipObject _ogipUserProject
+              _ogipProvisionalUserProject
               _ogipGeneration
               (Just AltJSON)
               storageService

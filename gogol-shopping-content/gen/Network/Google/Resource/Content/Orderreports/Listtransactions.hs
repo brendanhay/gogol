@@ -23,7 +23,7 @@
 -- Retrieves a list of transactions for a disbursement from your Merchant
 -- Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orderreports.listtransactions@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orderreports.listtransactions@.
 module Network.Google.Resource.Content.Orderreports.Listtransactions
     (
     -- * REST Resource
@@ -34,16 +34,21 @@ module Network.Google.Resource.Content.Orderreports.Listtransactions
     , OrderreportsListtransactions
 
     -- * Request Lenses
+    , olsXgafv
     , olsMerchantId
     , olsDisbursementId
+    , olsUploadProtocol
     , olsTransactionStartDate
+    , olsAccessToken
+    , olsUploadType
     , olsTransactionEndDate
     , olsPageToken
     , olsMaxResults
+    , olsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orderreports.listtransactions@ method which the
 -- 'OrderreportsListtransactions' request conforms to.
@@ -55,12 +60,18 @@ type OrderreportsListtransactionsResource =
              "disbursements" :>
                Capture "disbursementId" Text :>
                  "transactions" :>
-                   QueryParam "transactionStartDate" Text :>
-                     QueryParam "transactionEndDate" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] OrderreportsListTransactionsResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "transactionStartDate" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "transactionEndDate" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "maxResults" (Textual Word32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON]
+                                         OrderreportsListTransactionsResponse
 
 -- | Retrieves a list of transactions for a disbursement from your Merchant
 -- Center account.
@@ -68,12 +79,17 @@ type OrderreportsListtransactionsResource =
 -- /See:/ 'orderreportsListtransactions' smart constructor.
 data OrderreportsListtransactions =
   OrderreportsListtransactions'
-    { _olsMerchantId           :: !(Textual Word64)
-    , _olsDisbursementId       :: !Text
-    , _olsTransactionStartDate :: !Text
-    , _olsTransactionEndDate   :: !(Maybe Text)
-    , _olsPageToken            :: !(Maybe Text)
-    , _olsMaxResults           :: !(Maybe (Textual Word32))
+    { _olsXgafv :: !(Maybe Xgafv)
+    , _olsMerchantId :: !(Textual Word64)
+    , _olsDisbursementId :: !Text
+    , _olsUploadProtocol :: !(Maybe Text)
+    , _olsTransactionStartDate :: !(Maybe Text)
+    , _olsAccessToken :: !(Maybe Text)
+    , _olsUploadType :: !(Maybe Text)
+    , _olsTransactionEndDate :: !(Maybe Text)
+    , _olsPageToken :: !(Maybe Text)
+    , _olsMaxResults :: !(Maybe (Textual Word32))
+    , _olsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -82,32 +98,50 @@ data OrderreportsListtransactions =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'olsXgafv'
+--
 -- * 'olsMerchantId'
 --
 -- * 'olsDisbursementId'
 --
+-- * 'olsUploadProtocol'
+--
 -- * 'olsTransactionStartDate'
+--
+-- * 'olsAccessToken'
+--
+-- * 'olsUploadType'
 --
 -- * 'olsTransactionEndDate'
 --
 -- * 'olsPageToken'
 --
 -- * 'olsMaxResults'
+--
+-- * 'olsCallback'
 orderreportsListtransactions
     :: Word64 -- ^ 'olsMerchantId'
     -> Text -- ^ 'olsDisbursementId'
-    -> Text -- ^ 'olsTransactionStartDate'
     -> OrderreportsListtransactions
-orderreportsListtransactions pOlsMerchantId_ pOlsDisbursementId_ pOlsTransactionStartDate_ =
+orderreportsListtransactions pOlsMerchantId_ pOlsDisbursementId_ =
   OrderreportsListtransactions'
-    { _olsMerchantId = _Coerce # pOlsMerchantId_
+    { _olsXgafv = Nothing
+    , _olsMerchantId = _Coerce # pOlsMerchantId_
     , _olsDisbursementId = pOlsDisbursementId_
-    , _olsTransactionStartDate = pOlsTransactionStartDate_
+    , _olsUploadProtocol = Nothing
+    , _olsTransactionStartDate = Nothing
+    , _olsAccessToken = Nothing
+    , _olsUploadType = Nothing
     , _olsTransactionEndDate = Nothing
     , _olsPageToken = Nothing
     , _olsMaxResults = Nothing
+    , _olsCallback = Nothing
     }
 
+
+-- | V1 error format.
+olsXgafv :: Lens' OrderreportsListtransactions (Maybe Xgafv)
+olsXgafv = lens _olsXgafv (\ s a -> s{_olsXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -123,11 +157,29 @@ olsDisbursementId
   = lens _olsDisbursementId
       (\ s a -> s{_olsDisbursementId = a})
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+olsUploadProtocol :: Lens' OrderreportsListtransactions (Maybe Text)
+olsUploadProtocol
+  = lens _olsUploadProtocol
+      (\ s a -> s{_olsUploadProtocol = a})
+
 -- | The first date in which transaction occurred. In ISO 8601 format.
-olsTransactionStartDate :: Lens' OrderreportsListtransactions Text
+olsTransactionStartDate :: Lens' OrderreportsListtransactions (Maybe Text)
 olsTransactionStartDate
   = lens _olsTransactionStartDate
       (\ s a -> s{_olsTransactionStartDate = a})
+
+-- | OAuth access token.
+olsAccessToken :: Lens' OrderreportsListtransactions (Maybe Text)
+olsAccessToken
+  = lens _olsAccessToken
+      (\ s a -> s{_olsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+olsUploadType :: Lens' OrderreportsListtransactions (Maybe Text)
+olsUploadType
+  = lens _olsUploadType
+      (\ s a -> s{_olsUploadType = a})
 
 -- | The last date in which transaction occurred. In ISO 8601 format.
 -- Default: current date.
@@ -149,6 +201,11 @@ olsMaxResults
       (\ s a -> s{_olsMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+olsCallback :: Lens' OrderreportsListtransactions (Maybe Text)
+olsCallback
+  = lens _olsCallback (\ s a -> s{_olsCallback = a})
+
 instance GoogleRequest OrderreportsListtransactions
          where
         type Rs OrderreportsListtransactions =
@@ -156,11 +213,15 @@ instance GoogleRequest OrderreportsListtransactions
         type Scopes OrderreportsListtransactions =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrderreportsListtransactions'{..}
-          = go _olsMerchantId _olsDisbursementId
-              (Just _olsTransactionStartDate)
+          = go _olsMerchantId _olsDisbursementId _olsXgafv
+              _olsUploadProtocol
+              _olsTransactionStartDate
+              _olsAccessToken
+              _olsUploadType
               _olsTransactionEndDate
               _olsPageToken
               _olsMaxResults
+              _olsCallback
               (Just AltJSON)
               shoppingContentService
           where go

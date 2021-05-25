@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Delete
     , pljdCallback
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.delete@ method which the
 -- 'ProjectsLocationsJobsDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsJobsDeleteResource =
 -- /See:/ 'projectsLocationsJobsDelete' smart constructor.
 data ProjectsLocationsJobsDelete =
   ProjectsLocationsJobsDelete'
-    { _pljdXgafv          :: !(Maybe Xgafv)
+    { _pljdXgafv :: !(Maybe Xgafv)
     , _pljdUploadProtocol :: !(Maybe Text)
-    , _pljdAccessToken    :: !(Maybe Text)
-    , _pljdUploadType     :: !(Maybe Text)
-    , _pljdName           :: !Text
-    , _pljdCallback       :: !(Maybe Text)
+    , _pljdAccessToken :: !(Maybe Text)
+    , _pljdUploadType :: !(Maybe Text)
+    , _pljdName :: !Text
+    , _pljdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

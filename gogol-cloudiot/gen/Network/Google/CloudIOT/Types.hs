@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -30,6 +30,9 @@ module Network.Google.CloudIOT.Types
     , sCode
     , sMessage
 
+    -- * ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType
+    , ProjectsLocationsRegistriesGroupsDevicesListGatewayListOptionsGatewayType (..)
+
     -- * UnbindDeviceFromGatewayResponse
     , UnbindDeviceFromGatewayResponse
     , unbindDeviceFromGatewayResponse
@@ -51,6 +54,7 @@ module Network.Google.CloudIOT.Types
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
+    , giprOptions
 
     -- * ListDeviceRegistriesResponse
     , ListDeviceRegistriesResponse
@@ -90,6 +94,9 @@ module Network.Google.CloudIOT.Types
     -- * Empty
     , Empty
     , empty
+
+    -- * ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType
+    , ProjectsLocationsRegistriesDevicesListGatewayListOptionsGatewayType (..)
 
     -- * StateNotificationConfig
     , StateNotificationConfig
@@ -156,6 +163,11 @@ module Network.Google.CloudIOT.Types
 
     -- * PublicKeyCredentialFormat
     , PublicKeyCredentialFormat (..)
+
+    -- * GetPolicyOptions
+    , GetPolicyOptions
+    , getPolicyOptions
+    , gpoRequestedPolicyVersion
 
     -- * MqttConfig
     , MqttConfig
@@ -281,9 +293,9 @@ module Network.Google.CloudIOT.Types
     , bCondition
     ) where
 
-import           Network.Google.CloudIOT.Types.Product
-import           Network.Google.CloudIOT.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudIOT.Types.Product
+import Network.Google.CloudIOT.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud IoT API. This contains the host and root path used as a starting point for constructing service requests.
 cloudIOTService :: ServiceConfig
@@ -295,6 +307,6 @@ cloudIOTService
 cloudIOTScope :: Proxy '["https://www.googleapis.com/auth/cloudiot"]
 cloudIOTScope = Proxy
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

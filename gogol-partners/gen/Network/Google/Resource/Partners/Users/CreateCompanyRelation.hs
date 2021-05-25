@@ -49,8 +49,8 @@ module Network.Google.Resource.Partners.Users.CreateCompanyRelation
     , uccrCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.users.createCompanyRelation@ method which the
 -- 'UsersCreateCompanyRelation' request conforms to.
@@ -91,20 +91,20 @@ type UsersCreateCompanyRelationResource =
 -- /See:/ 'usersCreateCompanyRelation' smart constructor.
 data UsersCreateCompanyRelation =
   UsersCreateCompanyRelation'
-    { _uccrXgafv                                       :: !(Maybe Xgafv)
-    , _uccrUploadProtocol                              :: !(Maybe Text)
-    , _uccrAccessToken                                 :: !(Maybe Text)
-    , _uccrUploadType                                  :: !(Maybe Text)
-    , _uccrPayload                                     :: !CompanyRelation
-    , _uccrUserId                                      :: !Text
-    , _uccrRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _uccrRequestMetadataLocale                       :: !(Maybe Text)
-    , _uccrRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _uccrRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _uccrRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _uccrRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _uccrXgafv :: !(Maybe Xgafv)
+    , _uccrUploadProtocol :: !(Maybe Text)
+    , _uccrAccessToken :: !(Maybe Text)
+    , _uccrUploadType :: !(Maybe Text)
+    , _uccrPayload :: !CompanyRelation
+    , _uccrUserId :: !Text
+    , _uccrRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _uccrRequestMetadataLocale :: !(Maybe Text)
+    , _uccrRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _uccrRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _uccrRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _uccrRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _uccrRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _uccrCallback                                    :: !(Maybe Text)
+    , _uccrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

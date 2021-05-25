@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -119,9 +119,9 @@ module Network.Google.AppsActivity.Types
     , mRemovedParents
     ) where
 
-import           Network.Google.AppsActivity.Types.Product
-import           Network.Google.AppsActivity.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppsActivity.Types.Product
+import Network.Google.AppsActivity.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
 appsActivityService :: ServiceConfig

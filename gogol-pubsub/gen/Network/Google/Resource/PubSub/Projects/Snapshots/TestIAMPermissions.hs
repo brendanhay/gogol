@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,8 +47,8 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
     , pstipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.snapshots.testIamPermissions@ method which the
 -- 'ProjectsSnapshotsTestIAMPermissions' request conforms to.
@@ -66,21 +66,21 @@ type ProjectsSnapshotsTestIAMPermissionsResource =
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsSnapshotsTestIAMPermissions' smart constructor.
 data ProjectsSnapshotsTestIAMPermissions =
   ProjectsSnapshotsTestIAMPermissions'
-    { _pstipXgafv          :: !(Maybe Xgafv)
+    { _pstipXgafv :: !(Maybe Xgafv)
     , _pstipUploadProtocol :: !(Maybe Text)
-    , _pstipAccessToken    :: !(Maybe Text)
-    , _pstipUploadType     :: !(Maybe Text)
-    , _pstipPayload        :: !TestIAMPermissionsRequest
-    , _pstipResource       :: !Text
-    , _pstipCallback       :: !(Maybe Text)
+    , _pstipAccessToken :: !(Maybe Text)
+    , _pstipUploadType :: !(Maybe Text)
+    , _pstipPayload :: !TestIAMPermissionsRequest
+    , _pstipResource :: !Text
+    , _pstipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

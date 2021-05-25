@@ -22,10 +22,9 @@
 --
 -- Resets all player progress on the event with the given ID for the
 -- currently authenticated player. This method is only accessible to
--- whitelisted tester accounts for your application. All quests for this
--- player that use the event will also be reset.
+-- whitelisted tester accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.events.reset@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Management Reference> for @gamesManagement.events.reset@.
 module Network.Google.Resource.GamesManagement.Events.Reset
     (
     -- * REST Resource
@@ -36,11 +35,16 @@ module Network.Google.Resource.GamesManagement.Events.Reset
     , EventsReset
 
     -- * Request Lenses
+    , erXgafv
+    , erUploadProtocol
+    , erAccessToken
+    , erUploadType
     , erEventId
+    , erCallback
     ) where
 
-import           Network.Google.GamesManagement.Types
-import           Network.Google.Prelude
+import Network.Google.GamesManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.events.reset@ method which the
 -- 'EventsReset' request conforms to.
@@ -50,17 +54,26 @@ type EventsResetResource =
          "events" :>
            Capture "eventId" Text :>
              "reset" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on the event with the given ID for the
 -- currently authenticated player. This method is only accessible to
--- whitelisted tester accounts for your application. All quests for this
--- player that use the event will also be reset.
+-- whitelisted tester accounts for your application.
 --
 -- /See:/ 'eventsReset' smart constructor.
-newtype EventsReset =
+data EventsReset =
   EventsReset'
-    { _erEventId :: Text
+    { _erXgafv :: !(Maybe Xgafv)
+    , _erUploadProtocol :: !(Maybe Text)
+    , _erAccessToken :: !(Maybe Text)
+    , _erUploadType :: !(Maybe Text)
+    , _erEventId :: !Text
+    , _erCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,24 +82,73 @@ newtype EventsReset =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'erXgafv'
+--
+-- * 'erUploadProtocol'
+--
+-- * 'erAccessToken'
+--
+-- * 'erUploadType'
+--
 -- * 'erEventId'
+--
+-- * 'erCallback'
 eventsReset
     :: Text -- ^ 'erEventId'
     -> EventsReset
-eventsReset pErEventId_ = EventsReset' {_erEventId = pErEventId_}
+eventsReset pErEventId_ =
+  EventsReset'
+    { _erXgafv = Nothing
+    , _erUploadProtocol = Nothing
+    , _erAccessToken = Nothing
+    , _erUploadType = Nothing
+    , _erEventId = pErEventId_
+    , _erCallback = Nothing
+    }
 
+
+-- | V1 error format.
+erXgafv :: Lens' EventsReset (Maybe Xgafv)
+erXgafv = lens _erXgafv (\ s a -> s{_erXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+erUploadProtocol :: Lens' EventsReset (Maybe Text)
+erUploadProtocol
+  = lens _erUploadProtocol
+      (\ s a -> s{_erUploadProtocol = a})
+
+-- | OAuth access token.
+erAccessToken :: Lens' EventsReset (Maybe Text)
+erAccessToken
+  = lens _erAccessToken
+      (\ s a -> s{_erAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+erUploadType :: Lens' EventsReset (Maybe Text)
+erUploadType
+  = lens _erUploadType (\ s a -> s{_erUploadType = a})
 
 -- | The ID of the event.
 erEventId :: Lens' EventsReset Text
 erEventId
   = lens _erEventId (\ s a -> s{_erEventId = a})
 
+-- | JSONP
+erCallback :: Lens' EventsReset (Maybe Text)
+erCallback
+  = lens _erCallback (\ s a -> s{_erCallback = a})
+
 instance GoogleRequest EventsReset where
         type Rs EventsReset = ()
         type Scopes EventsReset =
              '["https://www.googleapis.com/auth/games"]
         requestClient EventsReset'{..}
-          = go _erEventId (Just AltJSON) gamesManagementService
+          = go _erEventId _erXgafv _erUploadProtocol
+              _erAccessToken
+              _erUploadType
+              _erCallback
+              (Just AltJSON)
+              gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetResource)
                       mempty

@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPool.Pools.Updatetemplate
     , puProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.updatetemplate@ method which the
 -- 'PoolsUpdatetemplate' request conforms to.
@@ -62,9 +62,9 @@ type PoolsUpdatetemplateResource =
 -- /See:/ 'poolsUpdatetemplate' smart constructor.
 data PoolsUpdatetemplate =
   PoolsUpdatetemplate'
-    { _puPoolName    :: !Text
-    , _puZone        :: !Text
-    , _puPayload     :: !Template
+    { _puPoolName :: !Text
+    , _puZone :: !Text
+    , _puPayload :: !Template
     , _puProjectName :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

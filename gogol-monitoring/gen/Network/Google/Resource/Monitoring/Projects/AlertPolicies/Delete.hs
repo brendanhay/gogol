@@ -22,7 +22,7 @@
 --
 -- Deletes an alerting policy.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.alertPolicies.delete@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.delete@.
 module Network.Google.Resource.Monitoring.Projects.AlertPolicies.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Monitoring.Projects.AlertPolicies.Delete
     , papdCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.alertPolicies.delete@ method which the
 -- 'ProjectsAlertPoliciesDelete' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsAlertPoliciesDeleteResource =
 -- /See:/ 'projectsAlertPoliciesDelete' smart constructor.
 data ProjectsAlertPoliciesDelete =
   ProjectsAlertPoliciesDelete'
-    { _papdXgafv          :: !(Maybe Xgafv)
+    { _papdXgafv :: !(Maybe Xgafv)
     , _papdUploadProtocol :: !(Maybe Text)
-    , _papdAccessToken    :: !(Maybe Text)
-    , _papdUploadType     :: !(Maybe Text)
-    , _papdName           :: !Text
-    , _papdCallback       :: !(Maybe Text)
+    , _papdAccessToken :: !(Maybe Text)
+    , _papdUploadType :: !(Maybe Text)
+    , _papdName :: !Text
+    , _papdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,9 +123,9 @@ papdUploadType
   = lens _papdUploadType
       (\ s a -> s{_papdUploadType = a})
 
--- | The alerting policy to delete. The format is:
--- projects\/[PROJECT_ID]\/alertPolicies\/[ALERT_POLICY_ID] For more
--- information, see AlertPolicy.
+-- | Required. The alerting policy to delete. The format is:
+-- projects\/[PROJECT_ID_OR_NUMBER]\/alertPolicies\/[ALERT_POLICY_ID] For
+-- more information, see AlertPolicy.
 papdName :: Lens' ProjectsAlertPoliciesDelete Text
 papdName = lens _papdName (\ s a -> s{_papdName = a})
 

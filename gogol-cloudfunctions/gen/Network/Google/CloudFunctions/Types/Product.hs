@@ -17,50 +17,74 @@
 --
 module Network.Google.CloudFunctions.Types.Product where
 
-import           Network.Google.CloudFunctions.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types.Sum
+import Network.Google.Prelude
+
+-- | Configuration for a single version.
+--
+-- /See:/ 'secretVersion' smart constructor.
+data SecretVersion =
+  SecretVersion'
+    { _svPath :: !(Maybe Text)
+    , _svVersion :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SecretVersion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'svPath'
+--
+-- * 'svVersion'
+secretVersion
+    :: SecretVersion
+secretVersion = SecretVersion' {_svPath = Nothing, _svVersion = Nothing}
+
+
+-- | Relative path of the file under the mount path where the secret value
+-- for this version will be fetched and made available. For example,
+-- setting the mount_path as \'\/etc\/secrets\' and path as
+-- \`\/secret_foo\` would mount the secret value file at
+-- \`\/etc\/secrets\/secret_foo\`.
+svPath :: Lens' SecretVersion (Maybe Text)
+svPath = lens _svPath (\ s a -> s{_svPath = a})
+
+-- | Version of the secret (version number or the string \'latest\'). It is
+-- preferrable to use \`latest\` version with secret volumes as secret
+-- value changes are reflected immediately.
+svVersion :: Lens' SecretVersion (Maybe Text)
+svVersion
+  = lens _svVersion (\ s a -> s{_svVersion = a})
+
+instance FromJSON SecretVersion where
+        parseJSON
+          = withObject "SecretVersion"
+              (\ o ->
+                 SecretVersion' <$>
+                   (o .:? "path") <*> (o .:? "version"))
+
+instance ToJSON SecretVersion where
+        toJSON SecretVersion'{..}
+          = object
+              (catMaybes
+                 [("path" .=) <$> _svPath,
+                  ("version" .=) <$> _svVersion])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -124,20 +148,20 @@ instance ToJSON Status where
 -- service: the log_types specified in each AuditConfig are enabled, and
 -- the exempted_members in each AuditLogConfig are exempted. Example Policy
 -- with multiple AuditConfigs: { \"audit_configs\": [ { \"service\":
--- \"allServices\" \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", }, { \"log_type\": \"ADMIN_READ\", } ] }, { \"service\":
--- \"fooservice.googleapis.com\" \"audit_log_configs\": [ { \"log_type\":
--- \"DATA_READ\", }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\":
--- [ \"user:bar\'gmail.com\" ] } ] } ] } For fooservice, this policy
--- enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts
--- foo\'gmail.com from DATA_READ logging, and bar\'gmail.com from
--- DATA_WRITE logging.
+-- \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\":
+-- \"sampleservice.googleapis.com\", \"audit_log_configs\": [ {
+-- \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\",
+-- \"exempted_members\": [ \"user:aliya\'example.com\" ] } ] } ] } For
+-- sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+-- logging. It also exempts jose\'example.com from DATA_READ logging, and
+-- aliya\'example.com from DATA_WRITE logging.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig =
   AuditConfig'
-    { _acService         :: !(Maybe Text)
+    { _acService :: !(Maybe Text)
     , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -185,105 +209,30 @@ instance ToJSON AuditConfig where
                  [("service" .=) <$> _acService,
                   ("auditLogConfigs" .=) <$> _acAuditLogConfigs])
 
--- | Metadata describing an Operation
---
--- /See:/ 'operationMetadataV1Beta2' smart constructor.
-data OperationMetadataV1Beta2 =
-  OperationMetadataV1Beta2'
-    { _omvbVersionId  :: !(Maybe (Textual Int64))
-    , _omvbUpdateTime :: !(Maybe DateTime')
-    , _omvbType       :: !(Maybe OperationMetadataV1Beta2Type)
-    , _omvbTarget     :: !(Maybe Text)
-    , _omvbRequest    :: !(Maybe OperationMetadataV1Beta2Request)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationMetadataV1Beta2' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'omvbVersionId'
---
--- * 'omvbUpdateTime'
---
--- * 'omvbType'
---
--- * 'omvbTarget'
---
--- * 'omvbRequest'
-operationMetadataV1Beta2
-    :: OperationMetadataV1Beta2
-operationMetadataV1Beta2 =
-  OperationMetadataV1Beta2'
-    { _omvbVersionId = Nothing
-    , _omvbUpdateTime = Nothing
-    , _omvbType = Nothing
-    , _omvbTarget = Nothing
-    , _omvbRequest = Nothing
-    }
-
-
--- | Version id of the function created or updated by an API call. This field
--- is only populated for Create and Update operations.
-omvbVersionId :: Lens' OperationMetadataV1Beta2 (Maybe Int64)
-omvbVersionId
-  = lens _omvbVersionId
-      (\ s a -> s{_omvbVersionId = a})
-      . mapping _Coerce
-
--- | The last update timestamp of the operation.
-omvbUpdateTime :: Lens' OperationMetadataV1Beta2 (Maybe UTCTime)
-omvbUpdateTime
-  = lens _omvbUpdateTime
-      (\ s a -> s{_omvbUpdateTime = a})
-      . mapping _DateTime
-
--- | Type of operation.
-omvbType :: Lens' OperationMetadataV1Beta2 (Maybe OperationMetadataV1Beta2Type)
-omvbType = lens _omvbType (\ s a -> s{_omvbType = a})
-
--- | Target of the operation - for example
--- projects\/project-1\/locations\/region-1\/functions\/function-1
-omvbTarget :: Lens' OperationMetadataV1Beta2 (Maybe Text)
-omvbTarget
-  = lens _omvbTarget (\ s a -> s{_omvbTarget = a})
-
--- | The original request that started the operation.
-omvbRequest :: Lens' OperationMetadataV1Beta2 (Maybe OperationMetadataV1Beta2Request)
-omvbRequest
-  = lens _omvbRequest (\ s a -> s{_omvbRequest = a})
-
-instance FromJSON OperationMetadataV1Beta2 where
-        parseJSON
-          = withObject "OperationMetadataV1Beta2"
-              (\ o ->
-                 OperationMetadataV1Beta2' <$>
-                   (o .:? "versionId") <*> (o .:? "updateTime") <*>
-                     (o .:? "type")
-                     <*> (o .:? "target")
-                     <*> (o .:? "request"))
-
-instance ToJSON OperationMetadataV1Beta2 where
-        toJSON OperationMetadataV1Beta2'{..}
-          = object
-              (catMaybes
-                 [("versionId" .=) <$> _omvbVersionId,
-                  ("updateTime" .=) <$> _omvbUpdateTime,
-                  ("type" .=) <$> _omvbType,
-                  ("target" .=) <$> _omvbTarget,
-                  ("request" .=) <$> _omvbRequest])
-
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -311,26 +260,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -360,7 +308,7 @@ instance ToJSON Expr where
 data ListLocationsResponse =
   ListLocationsResponse'
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLocations     :: !(Maybe [Location])
+    , _llrLocations :: !(Maybe [Location])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -412,7 +360,7 @@ instance ToJSON ListLocationsResponse where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -488,11 +436,11 @@ instance ToJSON GenerateUploadURLRequest where
 -- /See:/ 'location' smart constructor.
 data Location =
   Location'
-    { _lName        :: !(Maybe Text)
-    , _lMetadata    :: !(Maybe LocationMetadata)
+    { _lName :: !(Maybe Text)
+    , _lMetadata :: !(Maybe LocationMetadata)
     , _lDisplayName :: !(Maybe Text)
-    , _lLabels      :: !(Maybe LocationLabels)
-    , _lLocationId  :: !(Maybe Text)
+    , _lLabels :: !(Maybe LocationLabels)
+    , _lLocationId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -575,10 +523,10 @@ instance ToJSON Location where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -633,7 +581,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -703,6 +652,49 @@ instance ToJSON GenerateDownloadURLRequest where
         toJSON GenerateDownloadURLRequest'{..}
           = object
               (catMaybes [("versionId" .=) <$> _gdurVersionId])
+
+-- | Build environment variables that shall be available during build time.
+--
+-- /See:/ 'cloudFunctionBuildEnvironmentVariables' smart constructor.
+newtype CloudFunctionBuildEnvironmentVariables =
+  CloudFunctionBuildEnvironmentVariables'
+    { _cfbevAddtional :: HashMap Text Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CloudFunctionBuildEnvironmentVariables' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfbevAddtional'
+cloudFunctionBuildEnvironmentVariables
+    :: HashMap Text Text -- ^ 'cfbevAddtional'
+    -> CloudFunctionBuildEnvironmentVariables
+cloudFunctionBuildEnvironmentVariables pCfbevAddtional_ =
+  CloudFunctionBuildEnvironmentVariables'
+    {_cfbevAddtional = _Coerce # pCfbevAddtional_}
+
+
+cfbevAddtional :: Lens' CloudFunctionBuildEnvironmentVariables (HashMap Text Text)
+cfbevAddtional
+  = lens _cfbevAddtional
+      (\ s a -> s{_cfbevAddtional = a})
+      . _Coerce
+
+instance FromJSON
+           CloudFunctionBuildEnvironmentVariables
+         where
+        parseJSON
+          = withObject "CloudFunctionBuildEnvironmentVariables"
+              (\ o ->
+                 CloudFunctionBuildEnvironmentVariables' <$>
+                   (parseJSONObject o))
+
+instance ToJSON
+           CloudFunctionBuildEnvironmentVariables
+         where
+        toJSON = toJSON . _cfbevAddtional
 
 -- | Describes the retry policy in case of function\'s execution failure. A
 -- function execution will be retried on any failure. A failed execution
@@ -808,8 +800,8 @@ instance ToJSON FailurePolicy where
 data CallFunctionResponse =
   CallFunctionResponse'
     { _cfrExecutionId :: !(Maybe Text)
-    , _cfrError       :: !(Maybe Text)
-    , _cfrResult      :: !(Maybe Text)
+    , _cfrError :: !(Maybe Text)
+    , _cfrResult :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -866,9 +858,10 @@ instance ToJSON CallFunctionResponse where
 -- | Describes HttpsTrigger, could be used to connect web hooks to function.
 --
 -- /See:/ 'httpsTrigger' smart constructor.
-newtype HTTPSTrigger =
+data HTTPSTrigger =
   HTTPSTrigger'
-    { _htURL :: Maybe Text
+    { _htSecurityLevel :: !(Maybe HTTPSTriggerSecurityLevel)
+    , _htURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -877,11 +870,19 @@ newtype HTTPSTrigger =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'htSecurityLevel'
+--
 -- * 'htURL'
 httpsTrigger
     :: HTTPSTrigger
-httpsTrigger = HTTPSTrigger' {_htURL = Nothing}
+httpsTrigger = HTTPSTrigger' {_htSecurityLevel = Nothing, _htURL = Nothing}
 
+
+-- | The security level for the function.
+htSecurityLevel :: Lens' HTTPSTrigger (Maybe HTTPSTriggerSecurityLevel)
+htSecurityLevel
+  = lens _htSecurityLevel
+      (\ s a -> s{_htSecurityLevel = a})
 
 -- | Output only. The deployed url for the function.
 htURL :: Lens' HTTPSTrigger (Maybe Text)
@@ -890,11 +891,16 @@ htURL = lens _htURL (\ s a -> s{_htURL = a})
 instance FromJSON HTTPSTrigger where
         parseJSON
           = withObject "HTTPSTrigger"
-              (\ o -> HTTPSTrigger' <$> (o .:? "url"))
+              (\ o ->
+                 HTTPSTrigger' <$>
+                   (o .:? "securityLevel") <*> (o .:? "url"))
 
 instance ToJSON HTTPSTrigger where
         toJSON HTTPSTrigger'{..}
-          = object (catMaybes [("url" .=) <$> _htURL])
+          = object
+              (catMaybes
+                 [("securityLevel" .=) <$> _htSecurityLevel,
+                  ("url" .=) <$> _htURL])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -1010,13 +1016,102 @@ instance FromJSON OperationMetadataV1Request where
 instance ToJSON OperationMetadataV1Request where
         toJSON = toJSON . _omvrAddtional
 
+-- | Configuration for a secret volume. It has the information necessary to
+-- fetch the secret value from secret manager and make it available as
+-- files mounted at the requested paths within the application container.
+-- Secret value is not a part of the configuration. Every filesystem read
+-- operation performs a lookup in secret manager to retrieve the secret
+-- value.
+--
+-- /See:/ 'secretVolume' smart constructor.
+data SecretVolume =
+  SecretVolume'
+    { _svSecret :: !(Maybe Text)
+    , _svVersions :: !(Maybe [SecretVersion])
+    , _svProjectId :: !(Maybe Text)
+    , _svMountPath :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SecretVolume' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'svSecret'
+--
+-- * 'svVersions'
+--
+-- * 'svProjectId'
+--
+-- * 'svMountPath'
+secretVolume
+    :: SecretVolume
+secretVolume =
+  SecretVolume'
+    { _svSecret = Nothing
+    , _svVersions = Nothing
+    , _svProjectId = Nothing
+    , _svMountPath = Nothing
+    }
+
+
+-- | Name of the secret in secret manager (not the full resource name).
+svSecret :: Lens' SecretVolume (Maybe Text)
+svSecret = lens _svSecret (\ s a -> s{_svSecret = a})
+
+-- | List of secret versions to mount for this secret. If empty, the
+-- \`latest\` version of the secret will be made available in a file named
+-- after the secret under the mount point.
+svVersions :: Lens' SecretVolume [SecretVersion]
+svVersions
+  = lens _svVersions (\ s a -> s{_svVersions = a}) .
+      _Default
+      . _Coerce
+
+-- | Project identifier (preferrably project number but can also be the
+-- project ID) of the project that contains the secret. If not set, it will
+-- be populated with the function\'s project assuming that the secret
+-- exists in the same project as of the function.
+svProjectId :: Lens' SecretVolume (Maybe Text)
+svProjectId
+  = lens _svProjectId (\ s a -> s{_svProjectId = a})
+
+-- | The path within the container to mount the secret volume. For example,
+-- setting the mount_path as \`\/etc\/secrets\` would mount the secret
+-- value files under the \`\/etc\/secrets\` directory. This directory will
+-- also be completely shadowed and unavailable to mount any other secrets.
+-- Recommended mount paths: \/etc\/secrets Restricted mount paths:
+-- \/cloudsql, \/dev\/log, \/pod, \/proc, \/var\/log
+svMountPath :: Lens' SecretVolume (Maybe Text)
+svMountPath
+  = lens _svMountPath (\ s a -> s{_svMountPath = a})
+
+instance FromJSON SecretVolume where
+        parseJSON
+          = withObject "SecretVolume"
+              (\ o ->
+                 SecretVolume' <$>
+                   (o .:? "secret") <*> (o .:? "versions" .!= mempty)
+                     <*> (o .:? "projectId")
+                     <*> (o .:? "mountPath"))
+
+instance ToJSON SecretVolume where
+        toJSON SecretVolume'{..}
+          = object
+              (catMaybes
+                 [("secret" .=) <$> _svSecret,
+                  ("versions" .=) <$> _svVersions,
+                  ("projectId" .=) <$> _svProjectId,
+                  ("mountPath" .=) <$> _svMountPath])
+
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
 data SetIAMPolicyRequest =
   SetIAMPolicyRequest'
     { _siprUpdateMask :: !(Maybe GFieldMask)
-    , _siprPolicy     :: !(Maybe Policy)
+    , _siprPolicy :: !(Maybe Policy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1036,8 +1131,7 @@ setIAMPolicyRequest =
 
 -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
 -- Only the fields in the mask will be modified. If no mask is provided,
--- the following default mask is used: paths: \"bindings, etag\" This field
--- is only used by Cloud IAM.
+-- the following default mask is used: \`paths: \"bindings, etag\"\`
 siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe GFieldMask)
 siprUpdateMask
   = lens _siprUpdateMask
@@ -1071,10 +1165,10 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'eventTrigger' smart constructor.
 data EventTrigger =
   EventTrigger'
-    { _etService       :: !(Maybe Text)
+    { _etService :: !(Maybe Text)
     , _etFailurePolicy :: !(Maybe FailurePolicy)
-    , _etEventType     :: !(Maybe Text)
-    , _etResource      :: !(Maybe Text)
+    , _etEventType :: !(Maybe Text)
+    , _etResource :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1169,7 +1263,7 @@ instance ToJSON EventTrigger where
 -- /See:/ 'sourceRepository' smart constructor.
 data SourceRepository =
   SourceRepository'
-    { _srURL         :: !(Maybe Text)
+    { _srURL :: !(Maybe Text)
     , _srDeployedURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1228,11 +1322,14 @@ instance ToJSON SourceRepository where
 -- /See:/ 'operationMetadataV1' smart constructor.
 data OperationMetadataV1 =
   OperationMetadataV1'
-    { _omvVersionId  :: !(Maybe (Textual Int64))
+    { _omvVersionId :: !(Maybe (Textual Int64))
+    , _omvBuildId :: !(Maybe Text)
+    , _omvBuildName :: !(Maybe Text)
     , _omvUpdateTime :: !(Maybe DateTime')
-    , _omvType       :: !(Maybe OperationMetadataV1Type)
-    , _omvTarget     :: !(Maybe Text)
-    , _omvRequest    :: !(Maybe OperationMetadataV1Request)
+    , _omvType :: !(Maybe OperationMetadataV1Type)
+    , _omvSourceToken :: !(Maybe Text)
+    , _omvTarget :: !(Maybe Text)
+    , _omvRequest :: !(Maybe OperationMetadataV1Request)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1243,9 +1340,15 @@ data OperationMetadataV1 =
 --
 -- * 'omvVersionId'
 --
+-- * 'omvBuildId'
+--
+-- * 'omvBuildName'
+--
 -- * 'omvUpdateTime'
 --
 -- * 'omvType'
+--
+-- * 'omvSourceToken'
 --
 -- * 'omvTarget'
 --
@@ -1255,8 +1358,11 @@ operationMetadataV1
 operationMetadataV1 =
   OperationMetadataV1'
     { _omvVersionId = Nothing
+    , _omvBuildId = Nothing
+    , _omvBuildName = Nothing
     , _omvUpdateTime = Nothing
     , _omvType = Nothing
+    , _omvSourceToken = Nothing
     , _omvTarget = Nothing
     , _omvRequest = Nothing
     }
@@ -1269,6 +1375,19 @@ omvVersionId
   = lens _omvVersionId (\ s a -> s{_omvVersionId = a})
       . mapping _Coerce
 
+-- | The Cloud Build ID of the function created or updated by an API call.
+-- This field is only populated for Create and Update operations.
+omvBuildId :: Lens' OperationMetadataV1 (Maybe Text)
+omvBuildId
+  = lens _omvBuildId (\ s a -> s{_omvBuildId = a})
+
+-- | The Cloud Build Name of the function deployment. This field is only
+-- populated for Create and Update operations.
+-- projects\/\/locations\/\/builds\/.
+omvBuildName :: Lens' OperationMetadataV1 (Maybe Text)
+omvBuildName
+  = lens _omvBuildName (\ s a -> s{_omvBuildName = a})
+
 -- | The last update timestamp of the operation.
 omvUpdateTime :: Lens' OperationMetadataV1 (Maybe UTCTime)
 omvUpdateTime
@@ -1279,6 +1398,13 @@ omvUpdateTime
 -- | Type of operation.
 omvType :: Lens' OperationMetadataV1 (Maybe OperationMetadataV1Type)
 omvType = lens _omvType (\ s a -> s{_omvType = a})
+
+-- | An identifier for Firebase function sources. Disclaimer: This field is
+-- only supported for Firebase function deployments.
+omvSourceToken :: Lens' OperationMetadataV1 (Maybe Text)
+omvSourceToken
+  = lens _omvSourceToken
+      (\ s a -> s{_omvSourceToken = a})
 
 -- | Target of the operation - for example
 -- projects\/project-1\/locations\/region-1\/functions\/function-1
@@ -1296,8 +1422,11 @@ instance FromJSON OperationMetadataV1 where
           = withObject "OperationMetadataV1"
               (\ o ->
                  OperationMetadataV1' <$>
-                   (o .:? "versionId") <*> (o .:? "updateTime") <*>
-                     (o .:? "type")
+                   (o .:? "versionId") <*> (o .:? "buildId") <*>
+                     (o .:? "buildName")
+                     <*> (o .:? "updateTime")
+                     <*> (o .:? "type")
+                     <*> (o .:? "sourceToken")
                      <*> (o .:? "target")
                      <*> (o .:? "request"))
 
@@ -1306,8 +1435,11 @@ instance ToJSON OperationMetadataV1 where
           = object
               (catMaybes
                  [("versionId" .=) <$> _omvVersionId,
+                  ("buildId" .=) <$> _omvBuildId,
+                  ("buildName" .=) <$> _omvBuildName,
                   ("updateTime" .=) <$> _omvUpdateTime,
                   ("type" .=) <$> _omvType,
+                  ("sourceToken" .=) <$> _omvSourceToken,
                   ("target" .=) <$> _omvTarget,
                   ("request" .=) <$> _omvRequest])
 
@@ -1438,31 +1570,48 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Bytes)
-    , _pVersion      :: !(Maybe (Textual Int32))
-    , _pBindings     :: !(Maybe [Binding])
+    , _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
+    , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1504,21 +1653,40 @@ pAuditConfigs
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -1584,7 +1752,8 @@ instance ToJSON LocationLabels where
 data ListFunctionsResponse =
   ListFunctionsResponse'
     { _lfrNextPageToken :: !(Maybe Text)
-    , _lfrFunctions     :: !(Maybe [CloudFunction])
+    , _lfrUnreachable :: !(Maybe [Text])
+    , _lfrFunctions :: !(Maybe [CloudFunction])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1595,11 +1764,17 @@ data ListFunctionsResponse =
 --
 -- * 'lfrNextPageToken'
 --
+-- * 'lfrUnreachable'
+--
 -- * 'lfrFunctions'
 listFunctionsResponse
     :: ListFunctionsResponse
 listFunctionsResponse =
-  ListFunctionsResponse' {_lfrNextPageToken = Nothing, _lfrFunctions = Nothing}
+  ListFunctionsResponse'
+    { _lfrNextPageToken = Nothing
+    , _lfrUnreachable = Nothing
+    , _lfrFunctions = Nothing
+    }
 
 
 -- | If not empty, indicates that there may be more functions that match the
@@ -1609,6 +1784,15 @@ lfrNextPageToken :: Lens' ListFunctionsResponse (Maybe Text)
 lfrNextPageToken
   = lens _lfrNextPageToken
       (\ s a -> s{_lfrNextPageToken = a})
+
+-- | Locations that could not be reached. The response does not include any
+-- functions from these locations.
+lfrUnreachable :: Lens' ListFunctionsResponse [Text]
+lfrUnreachable
+  = lens _lfrUnreachable
+      (\ s a -> s{_lfrUnreachable = a})
+      . _Default
+      . _Coerce
 
 -- | The functions that match the request.
 lfrFunctions :: Lens' ListFunctionsResponse [CloudFunction]
@@ -1623,13 +1807,15 @@ instance FromJSON ListFunctionsResponse where
               (\ o ->
                  ListFunctionsResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "functions" .!= mempty))
+                     (o .:? "unreachable" .!= mempty)
+                     <*> (o .:? "functions" .!= mempty))
 
 instance ToJSON ListFunctionsResponse where
         toJSON ListFunctionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lfrNextPageToken,
+                  ("unreachable" .=) <$> _lfrUnreachable,
                   ("functions" .=) <$> _lfrFunctions])
 
 -- | Service-specific metadata. For example the available capacity at the
@@ -1710,14 +1896,14 @@ instance ToJSON OperationMetadata where
 
 -- | Provides the configuration for logging a type of permissions. Example: {
 -- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
--- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
--- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
--- logging, while exempting foo\'gmail.com from DATA_READ logging.
+-- \"exempted_members\": [ \"user:jose\'example.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\" } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting jose\'example.com from DATA_READ logging.
 --
 -- /See:/ 'auditLogConfig' smart constructor.
 data AuditLogConfig =
   AuditLogConfig'
-    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    { _alcLogType :: !(Maybe AuditLogConfigLogType)
     , _alcExemptedMembers :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1767,31 +1953,39 @@ instance ToJSON AuditLogConfig where
 
 -- | Describes a Cloud Function that contains user computation executed in
 -- response to an event. It encapsulate function and triggers
--- configurations. LINT.IfChange
+-- configurations. Next tag: 35
 --
 -- /See:/ 'cloudFunction' smart constructor.
 data CloudFunction =
   CloudFunction'
-    { _cfRuntime              :: !(Maybe Text)
-    , _cfStatus               :: !(Maybe CloudFunctionStatus)
-    , _cfSourceArchiveURL     :: !(Maybe Text)
-    , _cfVersionId            :: !(Maybe (Textual Int64))
-    , _cfSourceUploadURL      :: !(Maybe Text)
-    , _cfEntryPoint           :: !(Maybe Text)
-    , _cfHTTPSTrigger         :: !(Maybe HTTPSTrigger)
-    , _cfNetwork              :: !(Maybe Text)
-    , _cfMaxInstances         :: !(Maybe (Textual Int32))
-    , _cfEventTrigger         :: !(Maybe EventTrigger)
-    , _cfUpdateTime           :: !(Maybe DateTime')
-    , _cfName                 :: !(Maybe Text)
-    , _cfSourceRepository     :: !(Maybe SourceRepository)
-    , _cfAvailableMemoryMb    :: !(Maybe (Textual Int32))
-    , _cfLabels               :: !(Maybe CloudFunctionLabels)
-    , _cfServiceAccountEmail  :: !(Maybe Text)
+    { _cfRuntime :: !(Maybe Text)
+    , _cfBuildWorkerPool :: !(Maybe Text)
+    , _cfStatus :: !(Maybe CloudFunctionStatus)
+    , _cfSourceArchiveURL :: !(Maybe Text)
+    , _cfVersionId :: !(Maybe (Textual Int64))
+    , _cfSecretVolumes :: !(Maybe [SecretVolume])
+    , _cfSourceUploadURL :: !(Maybe Text)
+    , _cfEntryPoint :: !(Maybe Text)
+    , _cfBuildId :: !(Maybe Text)
+    , _cfHTTPSTrigger :: !(Maybe HTTPSTrigger)
+    , _cfNetwork :: !(Maybe Text)
+    , _cfMaxInstances :: !(Maybe (Textual Int32))
+    , _cfVPCConnectorEgressSettings :: !(Maybe CloudFunctionVPCConnectorEgressSettings)
+    , _cfEventTrigger :: !(Maybe EventTrigger)
+    , _cfUpdateTime :: !(Maybe DateTime')
+    , _cfName :: !(Maybe Text)
+    , _cfSourceRepository :: !(Maybe SourceRepository)
+    , _cfAvailableMemoryMb :: !(Maybe (Textual Int32))
+    , _cfIngressSettings :: !(Maybe CloudFunctionIngressSettings)
+    , _cfLabels :: !(Maybe CloudFunctionLabels)
+    , _cfServiceAccountEmail :: !(Maybe Text)
     , _cfEnvironmentVariables :: !(Maybe CloudFunctionEnvironmentVariables)
-    , _cfTimeout              :: !(Maybe GDuration)
-    , _cfVPCConnector         :: !(Maybe Text)
-    , _cfDescription          :: !(Maybe Text)
+    , _cfTimeout :: !(Maybe GDuration)
+    , _cfSourceToken :: !(Maybe Text)
+    , _cfBuildEnvironmentVariables :: !(Maybe CloudFunctionBuildEnvironmentVariables)
+    , _cfVPCConnector :: !(Maybe Text)
+    , _cfSecretEnvironmentVariables :: !(Maybe [SecretEnvVar])
+    , _cfDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1802,21 +1996,29 @@ data CloudFunction =
 --
 -- * 'cfRuntime'
 --
+-- * 'cfBuildWorkerPool'
+--
 -- * 'cfStatus'
 --
 -- * 'cfSourceArchiveURL'
 --
 -- * 'cfVersionId'
 --
+-- * 'cfSecretVolumes'
+--
 -- * 'cfSourceUploadURL'
 --
 -- * 'cfEntryPoint'
+--
+-- * 'cfBuildId'
 --
 -- * 'cfHTTPSTrigger'
 --
 -- * 'cfNetwork'
 --
 -- * 'cfMaxInstances'
+--
+-- * 'cfVPCConnectorEgressSettings'
 --
 -- * 'cfEventTrigger'
 --
@@ -1828,6 +2030,8 @@ data CloudFunction =
 --
 -- * 'cfAvailableMemoryMb'
 --
+-- * 'cfIngressSettings'
+--
 -- * 'cfLabels'
 --
 -- * 'cfServiceAccountEmail'
@@ -1836,7 +2040,13 @@ data CloudFunction =
 --
 -- * 'cfTimeout'
 --
+-- * 'cfSourceToken'
+--
+-- * 'cfBuildEnvironmentVariables'
+--
 -- * 'cfVPCConnector'
+--
+-- * 'cfSecretEnvironmentVariables'
 --
 -- * 'cfDescription'
 cloudFunction
@@ -1844,34 +2054,58 @@ cloudFunction
 cloudFunction =
   CloudFunction'
     { _cfRuntime = Nothing
+    , _cfBuildWorkerPool = Nothing
     , _cfStatus = Nothing
     , _cfSourceArchiveURL = Nothing
     , _cfVersionId = Nothing
+    , _cfSecretVolumes = Nothing
     , _cfSourceUploadURL = Nothing
     , _cfEntryPoint = Nothing
+    , _cfBuildId = Nothing
     , _cfHTTPSTrigger = Nothing
     , _cfNetwork = Nothing
     , _cfMaxInstances = Nothing
+    , _cfVPCConnectorEgressSettings = Nothing
     , _cfEventTrigger = Nothing
     , _cfUpdateTime = Nothing
     , _cfName = Nothing
     , _cfSourceRepository = Nothing
     , _cfAvailableMemoryMb = Nothing
+    , _cfIngressSettings = Nothing
     , _cfLabels = Nothing
     , _cfServiceAccountEmail = Nothing
     , _cfEnvironmentVariables = Nothing
     , _cfTimeout = Nothing
+    , _cfSourceToken = Nothing
+    , _cfBuildEnvironmentVariables = Nothing
     , _cfVPCConnector = Nothing
+    , _cfSecretEnvironmentVariables = Nothing
     , _cfDescription = Nothing
     }
 
 
--- | Required. The runtime in which the function is going to run. Choices: *
--- \`nodejs6\`: Node.js 6 * \`nodejs8\`: Node.js 8 * \`nodejs10\`: Node.js
--- 10 * \`python37\`: Python 3.7 * \`go111\`: Go 1.11
+-- | The runtime in which to run the function. Required when deploying a new
+-- function, optional when updating an existing function. For a complete
+-- list of possible choices, see the [\`gcloud\` command
+-- reference](\/sdk\/gcloud\/reference\/functions\/deploy#--runtime).
 cfRuntime :: Lens' CloudFunction (Maybe Text)
 cfRuntime
   = lens _cfRuntime (\ s a -> s{_cfRuntime = a})
+
+-- | Name of the Cloud Build Custom Worker Pool that should be used to build
+-- the function. The format of this field is
+-- \`projects\/{project}\/locations\/{region}\/workerPools\/{workerPool}\`
+-- where {project} and {region} are the project id and region respectively
+-- where the worker pool is defined and {workerPool} is the short name of
+-- the worker pool. If the project id is not the same as the function, then
+-- the Cloud Functions Service Agent
+-- (service-\'gcf-admin-robot.iam.gserviceaccount.com) must be granted the
+-- role Cloud Build Custom Workers Builder
+-- (roles\/cloudbuild.customworkers.builder) in the project.
+cfBuildWorkerPool :: Lens' CloudFunction (Maybe Text)
+cfBuildWorkerPool
+  = lens _cfBuildWorkerPool
+      (\ s a -> s{_cfBuildWorkerPool = a})
 
 -- | Output only. Status of the function deployment.
 cfStatus :: Lens' CloudFunction (Maybe CloudFunctionStatus)
@@ -1891,6 +2125,14 @@ cfVersionId
   = lens _cfVersionId (\ s a -> s{_cfVersionId = a}) .
       mapping _Coerce
 
+-- | Secret volumes configuration.
+cfSecretVolumes :: Lens' CloudFunction [SecretVolume]
+cfSecretVolumes
+  = lens _cfSecretVolumes
+      (\ s a -> s{_cfSecretVolumes = a})
+      . _Default
+      . _Coerce
+
 -- | The Google Cloud Storage signed URL used for source uploading, generated
 -- by google.cloud.functions.v1.GenerateUploadUrl
 cfSourceUploadURL :: Lens' CloudFunction (Maybe Text)
@@ -1908,6 +2150,12 @@ cfEntryPoint :: Lens' CloudFunction (Maybe Text)
 cfEntryPoint
   = lens _cfEntryPoint (\ s a -> s{_cfEntryPoint = a})
 
+-- | Output only. The Cloud Build ID of the latest successful deployment of
+-- the function.
+cfBuildId :: Lens' CloudFunction (Maybe Text)
+cfBuildId
+  = lens _cfBuildId (\ s a -> s{_cfBuildId = a})
+
 -- | An HTTPS endpoint type of source that can be triggered via URL.
 cfHTTPSTrigger :: Lens' CloudFunction (Maybe HTTPSTrigger)
 cfHTTPSTrigger
@@ -1924,19 +2172,31 @@ cfHTTPSTrigger
 -- {network} is the short name of the network. This field is mutually
 -- exclusive with \`vpc_connector\` and will be replaced by it. See [the
 -- VPC documentation](https:\/\/cloud.google.com\/compute\/docs\/vpc) for
--- more information on connecting Cloud projects. This feature is currently
--- in alpha, available only for whitelisted users.
+-- more information on connecting Cloud projects.
 cfNetwork :: Lens' CloudFunction (Maybe Text)
 cfNetwork
   = lens _cfNetwork (\ s a -> s{_cfNetwork = a})
 
 -- | The limit on the maximum number of function instances that may coexist
--- at a given time.
+-- at a given time. In some cases, such as rapid traffic surges, Cloud
+-- Functions may, for a short period of time, create more instances than
+-- the specified max instances limit. If your function cannot tolerate this
+-- temporary behavior, you may want to factor in a safety margin and set a
+-- lower max instances value than your function can tolerate. See the [Max
+-- Instances](https:\/\/cloud.google.com\/functions\/docs\/max-instances)
+-- Guide for more details.
 cfMaxInstances :: Lens' CloudFunction (Maybe Int32)
 cfMaxInstances
   = lens _cfMaxInstances
       (\ s a -> s{_cfMaxInstances = a})
       . mapping _Coerce
+
+-- | The egress settings for the connector, controlling what traffic is
+-- diverted through it.
+cfVPCConnectorEgressSettings :: Lens' CloudFunction (Maybe CloudFunctionVPCConnectorEgressSettings)
+cfVPCConnectorEgressSettings
+  = lens _cfVPCConnectorEgressSettings
+      (\ s a -> s{_cfVPCConnectorEgressSettings = a})
 
 -- | A source that fires events in response to a condition in another
 -- service.
@@ -1969,12 +2229,19 @@ cfAvailableMemoryMb
       (\ s a -> s{_cfAvailableMemoryMb = a})
       . mapping _Coerce
 
+-- | The ingress settings for the function, controlling what traffic can
+-- reach it.
+cfIngressSettings :: Lens' CloudFunction (Maybe CloudFunctionIngressSettings)
+cfIngressSettings
+  = lens _cfIngressSettings
+      (\ s a -> s{_cfIngressSettings = a})
+
 -- | Labels associated with this Cloud Function.
 cfLabels :: Lens' CloudFunction (Maybe CloudFunctionLabels)
 cfLabels = lens _cfLabels (\ s a -> s{_cfLabels = a})
 
 -- | The email of the function\'s service account. If empty, defaults to
--- {project_id}\'appspot.gserviceaccount.com.
+-- \`{project_id}\'appspot.gserviceaccount.com\`.
 cfServiceAccountEmail :: Lens' CloudFunction (Maybe Text)
 cfServiceAccountEmail
   = lens _cfServiceAccountEmail
@@ -1994,18 +2261,38 @@ cfTimeout
   = lens _cfTimeout (\ s a -> s{_cfTimeout = a}) .
       mapping _GDuration
 
+-- | Input only. An identifier for Firebase function sources. Disclaimer:
+-- This field is only supported for Firebase function deployments.
+cfSourceToken :: Lens' CloudFunction (Maybe Text)
+cfSourceToken
+  = lens _cfSourceToken
+      (\ s a -> s{_cfSourceToken = a})
+
+-- | Build environment variables that shall be available during build time.
+cfBuildEnvironmentVariables :: Lens' CloudFunction (Maybe CloudFunctionBuildEnvironmentVariables)
+cfBuildEnvironmentVariables
+  = lens _cfBuildEnvironmentVariables
+      (\ s a -> s{_cfBuildEnvironmentVariables = a})
+
 -- | The VPC Network Connector that this cloud function can connect to. It
 -- can be either the fully-qualified URI, or the short name of the network
 -- connector resource. The format of this field is
 -- \`projects\/*\/locations\/*\/connectors\/*\` This field is mutually
 -- exclusive with \`network\` field and will eventually replace it. See
 -- [the VPC documentation](https:\/\/cloud.google.com\/compute\/docs\/vpc)
--- for more information on connecting Cloud projects. This feature is
--- currently in alpha, available only for whitelisted users.
+-- for more information on connecting Cloud projects.
 cfVPCConnector :: Lens' CloudFunction (Maybe Text)
 cfVPCConnector
   = lens _cfVPCConnector
       (\ s a -> s{_cfVPCConnector = a})
+
+-- | Secret environment variables configuration.
+cfSecretEnvironmentVariables :: Lens' CloudFunction [SecretEnvVar]
+cfSecretEnvironmentVariables
+  = lens _cfSecretEnvironmentVariables
+      (\ s a -> s{_cfSecretEnvironmentVariables = a})
+      . _Default
+      . _Coerce
 
 -- | User-provided description of a function.
 cfDescription :: Lens' CloudFunction (Maybe Text)
@@ -2018,24 +2305,32 @@ instance FromJSON CloudFunction where
           = withObject "CloudFunction"
               (\ o ->
                  CloudFunction' <$>
-                   (o .:? "runtime") <*> (o .:? "status") <*>
-                     (o .:? "sourceArchiveUrl")
+                   (o .:? "runtime") <*> (o .:? "buildWorkerPool") <*>
+                     (o .:? "status")
+                     <*> (o .:? "sourceArchiveUrl")
                      <*> (o .:? "versionId")
+                     <*> (o .:? "secretVolumes" .!= mempty)
                      <*> (o .:? "sourceUploadUrl")
                      <*> (o .:? "entryPoint")
+                     <*> (o .:? "buildId")
                      <*> (o .:? "httpsTrigger")
                      <*> (o .:? "network")
                      <*> (o .:? "maxInstances")
+                     <*> (o .:? "vpcConnectorEgressSettings")
                      <*> (o .:? "eventTrigger")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
                      <*> (o .:? "sourceRepository")
                      <*> (o .:? "availableMemoryMb")
+                     <*> (o .:? "ingressSettings")
                      <*> (o .:? "labels")
                      <*> (o .:? "serviceAccountEmail")
                      <*> (o .:? "environmentVariables")
                      <*> (o .:? "timeout")
+                     <*> (o .:? "sourceToken")
+                     <*> (o .:? "buildEnvironmentVariables")
                      <*> (o .:? "vpcConnector")
+                     <*> (o .:? "secretEnvironmentVariables" .!= mempty)
                      <*> (o .:? "description"))
 
 instance ToJSON CloudFunction where
@@ -2043,68 +2338,38 @@ instance ToJSON CloudFunction where
           = object
               (catMaybes
                  [("runtime" .=) <$> _cfRuntime,
+                  ("buildWorkerPool" .=) <$> _cfBuildWorkerPool,
                   ("status" .=) <$> _cfStatus,
                   ("sourceArchiveUrl" .=) <$> _cfSourceArchiveURL,
                   ("versionId" .=) <$> _cfVersionId,
+                  ("secretVolumes" .=) <$> _cfSecretVolumes,
                   ("sourceUploadUrl" .=) <$> _cfSourceUploadURL,
                   ("entryPoint" .=) <$> _cfEntryPoint,
+                  ("buildId" .=) <$> _cfBuildId,
                   ("httpsTrigger" .=) <$> _cfHTTPSTrigger,
                   ("network" .=) <$> _cfNetwork,
                   ("maxInstances" .=) <$> _cfMaxInstances,
+                  ("vpcConnectorEgressSettings" .=) <$>
+                    _cfVPCConnectorEgressSettings,
                   ("eventTrigger" .=) <$> _cfEventTrigger,
                   ("updateTime" .=) <$> _cfUpdateTime,
                   ("name" .=) <$> _cfName,
                   ("sourceRepository" .=) <$> _cfSourceRepository,
                   ("availableMemoryMb" .=) <$> _cfAvailableMemoryMb,
+                  ("ingressSettings" .=) <$> _cfIngressSettings,
                   ("labels" .=) <$> _cfLabels,
                   ("serviceAccountEmail" .=) <$>
                     _cfServiceAccountEmail,
                   ("environmentVariables" .=) <$>
                     _cfEnvironmentVariables,
                   ("timeout" .=) <$> _cfTimeout,
+                  ("sourceToken" .=) <$> _cfSourceToken,
+                  ("buildEnvironmentVariables" .=) <$>
+                    _cfBuildEnvironmentVariables,
                   ("vpcConnector" .=) <$> _cfVPCConnector,
+                  ("secretEnvironmentVariables" .=) <$>
+                    _cfSecretEnvironmentVariables,
                   ("description" .=) <$> _cfDescription])
-
--- | The original request that started the operation.
---
--- /See:/ 'operationMetadataV1Beta2Request' smart constructor.
-newtype OperationMetadataV1Beta2Request =
-  OperationMetadataV1Beta2Request'
-    { _omvbrAddtional :: HashMap Text JSONValue
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'OperationMetadataV1Beta2Request' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'omvbrAddtional'
-operationMetadataV1Beta2Request
-    :: HashMap Text JSONValue -- ^ 'omvbrAddtional'
-    -> OperationMetadataV1Beta2Request
-operationMetadataV1Beta2Request pOmvbrAddtional_ =
-  OperationMetadataV1Beta2Request'
-    {_omvbrAddtional = _Coerce # pOmvbrAddtional_}
-
-
--- | Properties of the object. Contains field \'type with type URL.
-omvbrAddtional :: Lens' OperationMetadataV1Beta2Request (HashMap Text JSONValue)
-omvbrAddtional
-  = lens _omvbrAddtional
-      (\ s a -> s{_omvbrAddtional = a})
-      . _Coerce
-
-instance FromJSON OperationMetadataV1Beta2Request
-         where
-        parseJSON
-          = withObject "OperationMetadataV1Beta2Request"
-              (\ o ->
-                 OperationMetadataV1Beta2Request' <$>
-                   (parseJSONObject o))
-
-instance ToJSON OperationMetadataV1Beta2Request where
-        toJSON = toJSON . _omvbrAddtional
 
 -- | Labels associated with this Cloud Function.
 --
@@ -2184,6 +2449,86 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
+-- | Configuration for a secret environment variable. It has the information
+-- necessary to fetch the secret value from secret manager and expose it as
+-- an environment variable. Secret value is not a part of the
+-- configuration. Secret values are only fetched when a new clone starts.
+--
+-- /See:/ 'secretEnvVar' smart constructor.
+data SecretEnvVar =
+  SecretEnvVar'
+    { _sevSecret :: !(Maybe Text)
+    , _sevKey :: !(Maybe Text)
+    , _sevVersion :: !(Maybe Text)
+    , _sevProjectId :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SecretEnvVar' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sevSecret'
+--
+-- * 'sevKey'
+--
+-- * 'sevVersion'
+--
+-- * 'sevProjectId'
+secretEnvVar
+    :: SecretEnvVar
+secretEnvVar =
+  SecretEnvVar'
+    { _sevSecret = Nothing
+    , _sevKey = Nothing
+    , _sevVersion = Nothing
+    , _sevProjectId = Nothing
+    }
+
+
+-- | Name of the secret in secret manager (not the full resource name).
+sevSecret :: Lens' SecretEnvVar (Maybe Text)
+sevSecret
+  = lens _sevSecret (\ s a -> s{_sevSecret = a})
+
+-- | Name of the environment variable.
+sevKey :: Lens' SecretEnvVar (Maybe Text)
+sevKey = lens _sevKey (\ s a -> s{_sevKey = a})
+
+-- | Version of the secret (version number or the string \'latest\'). It is
+-- recommended to use a numeric version for secret environment variables as
+-- any updates to the secret value is not reflected until new clones start.
+sevVersion :: Lens' SecretEnvVar (Maybe Text)
+sevVersion
+  = lens _sevVersion (\ s a -> s{_sevVersion = a})
+
+-- | Project identifier (preferrably project number but can also be the
+-- project ID) of the project that contains the secret. If not set, it will
+-- be populated with the function\'s project assuming that the secret
+-- exists in the same project as of the function.
+sevProjectId :: Lens' SecretEnvVar (Maybe Text)
+sevProjectId
+  = lens _sevProjectId (\ s a -> s{_sevProjectId = a})
+
+instance FromJSON SecretEnvVar where
+        parseJSON
+          = withObject "SecretEnvVar"
+              (\ o ->
+                 SecretEnvVar' <$>
+                   (o .:? "secret") <*> (o .:? "key") <*>
+                     (o .:? "version")
+                     <*> (o .:? "projectId"))
+
+instance ToJSON SecretEnvVar where
+        toJSON SecretEnvVar'{..}
+          = object
+              (catMaybes
+                 [("secret" .=) <$> _sevSecret,
+                  ("key" .=) <$> _sevKey,
+                  ("version" .=) <$> _sevVersion,
+                  ("projectId" .=) <$> _sevProjectId])
+
 -- | Request for the \`CallFunction\` method.
 --
 -- /See:/ 'callFunctionRequest' smart constructor.
@@ -2204,7 +2549,7 @@ callFunctionRequest
 callFunctionRequest = CallFunctionRequest' {_cfrData = Nothing}
 
 
--- | Input to be passed to the function.
+-- | Required. Input to be passed to the function.
 cfrData :: Lens' CallFunctionRequest (Maybe Text)
 cfrData = lens _cfrData (\ s a -> s{_cfrData = a})
 
@@ -2222,8 +2567,8 @@ instance ToJSON CallFunctionRequest where
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2251,13 +2596,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -2269,9 +2631,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})

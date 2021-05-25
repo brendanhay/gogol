@@ -45,8 +45,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.Create
     , apcCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.create@ method which the
 -- 'AccessPoliciesCreate' request conforms to.
@@ -71,12 +71,12 @@ type AccessPoliciesCreateResource =
 -- /See:/ 'accessPoliciesCreate' smart constructor.
 data AccessPoliciesCreate =
   AccessPoliciesCreate'
-    { _apcXgafv          :: !(Maybe Xgafv)
+    { _apcXgafv :: !(Maybe Xgafv)
     , _apcUploadProtocol :: !(Maybe Text)
-    , _apcAccessToken    :: !(Maybe Text)
-    , _apcUploadType     :: !(Maybe Text)
-    , _apcPayload        :: !AccessPolicy
-    , _apcCallback       :: !(Maybe Text)
+    , _apcAccessToken :: !(Maybe Text)
+    , _apcUploadType :: !(Maybe Text)
+    , _apcPayload :: !AccessPolicy
+    , _apcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

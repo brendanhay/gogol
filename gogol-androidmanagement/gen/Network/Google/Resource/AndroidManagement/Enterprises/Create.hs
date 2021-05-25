@@ -35,6 +35,7 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Create
 
     -- * Request Lenses
     , ecXgafv
+    , ecAgreementAccepted
     , ecSignupURLName
     , ecUploadProtocol
     , ecAccessToken
@@ -45,8 +46,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Create
     , ecCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.create@ method which the
 -- 'EnterprisesCreate' request conforms to.
@@ -54,15 +55,17 @@ type EnterprisesCreateResource =
      "v1" :>
        "enterprises" :>
          QueryParam "$.xgafv" Xgafv :>
-           QueryParam "signupUrlName" Text :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "projectId" Text :>
-                     QueryParam "enterpriseToken" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
+           QueryParam "agreementAccepted" Bool :>
+             QueryParam "signupUrlName" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "projectId" Text :>
+                       QueryParam "enterpriseToken" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Enterprise :>
+                               Post '[JSON] Enterprise
 
 -- | Creates an enterprise. This is the last step in the enterprise signup
 -- flow.
@@ -70,15 +73,16 @@ type EnterprisesCreateResource =
 -- /See:/ 'enterprisesCreate' smart constructor.
 data EnterprisesCreate =
   EnterprisesCreate'
-    { _ecXgafv           :: !(Maybe Xgafv)
-    , _ecSignupURLName   :: !(Maybe Text)
-    , _ecUploadProtocol  :: !(Maybe Text)
-    , _ecAccessToken     :: !(Maybe Text)
-    , _ecUploadType      :: !(Maybe Text)
-    , _ecPayload         :: !Enterprise
-    , _ecProjectId       :: !(Maybe Text)
+    { _ecXgafv :: !(Maybe Xgafv)
+    , _ecAgreementAccepted :: !(Maybe Bool)
+    , _ecSignupURLName :: !(Maybe Text)
+    , _ecUploadProtocol :: !(Maybe Text)
+    , _ecAccessToken :: !(Maybe Text)
+    , _ecUploadType :: !(Maybe Text)
+    , _ecPayload :: !Enterprise
+    , _ecProjectId :: !(Maybe Text)
     , _ecEnterpriseToken :: !(Maybe Text)
-    , _ecCallback        :: !(Maybe Text)
+    , _ecCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -88,6 +92,8 @@ data EnterprisesCreate =
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ecXgafv'
+--
+-- * 'ecAgreementAccepted'
 --
 -- * 'ecSignupURLName'
 --
@@ -110,6 +116,7 @@ enterprisesCreate
 enterprisesCreate pEcPayload_ =
   EnterprisesCreate'
     { _ecXgafv = Nothing
+    , _ecAgreementAccepted = Nothing
     , _ecSignupURLName = Nothing
     , _ecUploadProtocol = Nothing
     , _ecAccessToken = Nothing
@@ -125,7 +132,17 @@ enterprisesCreate pEcPayload_ =
 ecXgafv :: Lens' EnterprisesCreate (Maybe Xgafv)
 ecXgafv = lens _ecXgafv (\ s a -> s{_ecXgafv = a})
 
--- | The name of the SignupUrl used to sign up for the enterprise.
+-- | Whether the enterprise admin has seen and agreed to the managed Google
+-- Play Agreement (https:\/\/www.android.com\/enterprise\/terms\/). Always
+-- set this to true when creating an EMM-managed enterprise. Do not create
+-- the enterprise until the admin has viewed and accepted the agreement.
+ecAgreementAccepted :: Lens' EnterprisesCreate (Maybe Bool)
+ecAgreementAccepted
+  = lens _ecAgreementAccepted
+      (\ s a -> s{_ecAgreementAccepted = a})
+
+-- | The name of the SignupUrl used to sign up for the enterprise. Only set
+-- this when creating a customer-managed enterprise.
 ecSignupURLName :: Lens' EnterprisesCreate (Maybe Text)
 ecSignupURLName
   = lens _ecSignupURLName
@@ -159,7 +176,8 @@ ecProjectId :: Lens' EnterprisesCreate (Maybe Text)
 ecProjectId
   = lens _ecProjectId (\ s a -> s{_ecProjectId = a})
 
--- | The enterprise token appended to the callback URL.
+-- | The enterprise token appended to the callback URL. Only set this when
+-- creating a customer-managed enterprise.
 ecEnterpriseToken :: Lens' EnterprisesCreate (Maybe Text)
 ecEnterpriseToken
   = lens _ecEnterpriseToken
@@ -175,7 +193,8 @@ instance GoogleRequest EnterprisesCreate where
         type Scopes EnterprisesCreate =
              '["https://www.googleapis.com/auth/androidmanagement"]
         requestClient EnterprisesCreate'{..}
-          = go _ecXgafv _ecSignupURLName _ecUploadProtocol
+          = go _ecXgafv _ecAgreementAccepted _ecSignupURLName
+              _ecUploadProtocol
               _ecAccessToken
               _ecUploadType
               _ecProjectId

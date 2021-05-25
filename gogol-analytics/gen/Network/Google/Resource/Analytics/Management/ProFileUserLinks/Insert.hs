@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
     , mpfuliAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileUserLinks.insert@ method which the
 -- 'ManagementProFileUserLinksInsert' request conforms to.
@@ -65,9 +65,9 @@ type ManagementProFileUserLinksInsertResource =
 data ManagementProFileUserLinksInsert =
   ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId :: !Text
-    , _mpfuliProFileId     :: !Text
-    , _mpfuliPayload       :: !EntityUserLink
-    , _mpfuliAccountId     :: !Text
+    , _mpfuliProFileId :: !Text
+    , _mpfuliPayload :: !EntityUserLink
+    , _mpfuliAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

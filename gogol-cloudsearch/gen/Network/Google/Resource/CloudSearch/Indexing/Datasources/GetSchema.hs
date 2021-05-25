@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the schema of a data source.
+-- Gets the schema of a data source. **Note:** This API requires an admin
+-- or service account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.getSchema@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.indexing.datasources.getSchema@.
 module Network.Google.Resource.CloudSearch.Indexing.Datasources.GetSchema
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Indexing.Datasources.GetSchema
     , idgsCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.indexing.datasources.getSchema@ method which the
 -- 'IndexingDatasourcesGetSchema' request conforms to.
@@ -60,18 +61,19 @@ type IndexingDatasourcesGetSchemaResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Schema
 
--- | Gets the schema of a data source.
+-- | Gets the schema of a data source. **Note:** This API requires an admin
+-- or service account to execute.
 --
 -- /See:/ 'indexingDatasourcesGetSchema' smart constructor.
 data IndexingDatasourcesGetSchema =
   IndexingDatasourcesGetSchema'
-    { _idgsXgafv                       :: !(Maybe Xgafv)
-    , _idgsUploadProtocol              :: !(Maybe Text)
-    , _idgsAccessToken                 :: !(Maybe Text)
-    , _idgsUploadType                  :: !(Maybe Text)
-    , _idgsName                        :: !Text
+    { _idgsXgafv :: !(Maybe Xgafv)
+    , _idgsUploadProtocol :: !(Maybe Text)
+    , _idgsAccessToken :: !(Maybe Text)
+    , _idgsUploadType :: !(Maybe Text)
+    , _idgsName :: !Text
     , _idgsDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _idgsCallback                    :: !(Maybe Text)
+    , _idgsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

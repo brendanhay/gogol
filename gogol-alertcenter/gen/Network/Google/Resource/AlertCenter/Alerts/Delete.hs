@@ -26,7 +26,7 @@
 -- marked for deletion. Attempting to mark a nonexistent alert for deletion
 -- results in a \`NOT_FOUND\` error.
 --
--- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ G Suite Alert Center API Reference> for @alertcenter.alerts.delete@.
+-- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference> for @alertcenter.alerts.delete@.
 module Network.Google.Resource.AlertCenter.Alerts.Delete
     (
     -- * REST Resource
@@ -46,8 +46,8 @@ module Network.Google.Resource.AlertCenter.Alerts.Delete
     , adCallback
     ) where
 
-import           Network.Google.AlertCenter.Types
-import           Network.Google.Prelude
+import Network.Google.AlertCenter.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @alertcenter.alerts.delete@ method which the
 -- 'AlertsDelete' request conforms to.
@@ -72,13 +72,13 @@ type AlertsDeleteResource =
 -- /See:/ 'alertsDelete' smart constructor.
 data AlertsDelete =
   AlertsDelete'
-    { _adXgafv          :: !(Maybe Xgafv)
+    { _adXgafv :: !(Maybe Xgafv)
     , _adUploadProtocol :: !(Maybe Text)
-    , _adAccessToken    :: !(Maybe Text)
-    , _adAlertId        :: !Text
-    , _adUploadType     :: !(Maybe Text)
-    , _adCustomerId     :: !(Maybe Text)
-    , _adCallback       :: !(Maybe Text)
+    , _adAccessToken :: !(Maybe Text)
+    , _adAlertId :: !Text
+    , _adUploadType :: !(Maybe Text)
+    , _adCustomerId :: !(Maybe Text)
+    , _adCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -141,9 +141,9 @@ adUploadType :: Lens' AlertsDelete (Maybe Text)
 adUploadType
   = lens _adUploadType (\ s a -> s{_adUploadType = a})
 
--- | Optional. The unique identifier of the G Suite organization account of
--- the customer the alert is associated with. Inferred from the caller
--- identity if not provided.
+-- | Optional. The unique identifier of the Google Workspace organization
+-- account of the customer the alert is associated with. Inferred from the
+-- caller identity if not provided.
 adCustomerId :: Lens' AlertsDelete (Maybe Text)
 adCustomerId
   = lens _adCustomerId (\ s a -> s{_adCustomerId = a})

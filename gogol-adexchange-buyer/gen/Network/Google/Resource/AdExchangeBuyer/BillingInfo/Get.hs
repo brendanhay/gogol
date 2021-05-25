@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
     , bigAccountId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.billingInfo.get@ method which the
 -- 'BillingInfoGet' request conforms to.

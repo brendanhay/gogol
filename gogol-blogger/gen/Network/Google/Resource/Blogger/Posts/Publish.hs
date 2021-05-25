@@ -20,10 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Publishes a draft post, optionally at the specific time of the given
--- publishDate parameter.
+-- Publishes a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.publish@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.publish@.
 module Network.Google.Resource.Blogger.Posts.Publish
     (
     -- * REST Resource
@@ -34,36 +33,49 @@ module Network.Google.Resource.Blogger.Posts.Publish
     , PostsPublish
 
     -- * Request Lenses
+    , pppXgafv
+    , pppUploadProtocol
     , pppPublishDate
+    , pppAccessToken
+    , pppUploadType
     , pppBlogId
     , pppPostId
+    , pppCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.publish@ method which the
 -- 'PostsPublish' request conforms to.
 type PostsPublishResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               Capture "postId" Text :>
-                 "publish" :>
-                   QueryParam "publishDate" DateTime' :>
-                     QueryParam "alt" AltJSON :> Post '[JSON] Post'
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             Capture "postId" Text :>
+               "publish" :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "publishDate" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Post '[JSON] Post'
 
--- | Publishes a draft post, optionally at the specific time of the given
--- publishDate parameter.
+-- | Publishes a post.
 --
 -- /See:/ 'postsPublish' smart constructor.
 data PostsPublish =
   PostsPublish'
-    { _pppPublishDate :: !(Maybe DateTime')
-    , _pppBlogId      :: !Text
-    , _pppPostId      :: !Text
+    { _pppXgafv :: !(Maybe Xgafv)
+    , _pppUploadProtocol :: !(Maybe Text)
+    , _pppPublishDate :: !(Maybe Text)
+    , _pppAccessToken :: !(Maybe Text)
+    , _pppUploadType :: !(Maybe Text)
+    , _pppBlogId :: !Text
+    , _pppPostId :: !Text
+    , _pppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,49 +84,89 @@ data PostsPublish =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pppXgafv'
+--
+-- * 'pppUploadProtocol'
+--
 -- * 'pppPublishDate'
+--
+-- * 'pppAccessToken'
+--
+-- * 'pppUploadType'
 --
 -- * 'pppBlogId'
 --
 -- * 'pppPostId'
+--
+-- * 'pppCallback'
 postsPublish
     :: Text -- ^ 'pppBlogId'
     -> Text -- ^ 'pppPostId'
     -> PostsPublish
 postsPublish pPppBlogId_ pPppPostId_ =
   PostsPublish'
-    { _pppPublishDate = Nothing
+    { _pppXgafv = Nothing
+    , _pppUploadProtocol = Nothing
+    , _pppPublishDate = Nothing
+    , _pppAccessToken = Nothing
+    , _pppUploadType = Nothing
     , _pppBlogId = pPppBlogId_
     , _pppPostId = pPppPostId_
+    , _pppCallback = Nothing
     }
 
 
--- | Optional date and time to schedule the publishing of the Blog. If no
--- publishDate parameter is given, the post is either published at the a
--- previously saved schedule date (if present), or the current time. If a
--- future date is given, the post will be scheduled to be published.
-pppPublishDate :: Lens' PostsPublish (Maybe UTCTime)
+-- | V1 error format.
+pppXgafv :: Lens' PostsPublish (Maybe Xgafv)
+pppXgafv = lens _pppXgafv (\ s a -> s{_pppXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pppUploadProtocol :: Lens' PostsPublish (Maybe Text)
+pppUploadProtocol
+  = lens _pppUploadProtocol
+      (\ s a -> s{_pppUploadProtocol = a})
+
+pppPublishDate :: Lens' PostsPublish (Maybe Text)
 pppPublishDate
   = lens _pppPublishDate
       (\ s a -> s{_pppPublishDate = a})
-      . mapping _DateTime
 
--- | The ID of the Blog.
+-- | OAuth access token.
+pppAccessToken :: Lens' PostsPublish (Maybe Text)
+pppAccessToken
+  = lens _pppAccessToken
+      (\ s a -> s{_pppAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pppUploadType :: Lens' PostsPublish (Maybe Text)
+pppUploadType
+  = lens _pppUploadType
+      (\ s a -> s{_pppUploadType = a})
+
 pppBlogId :: Lens' PostsPublish Text
 pppBlogId
   = lens _pppBlogId (\ s a -> s{_pppBlogId = a})
 
--- | The ID of the Post.
 pppPostId :: Lens' PostsPublish Text
 pppPostId
   = lens _pppPostId (\ s a -> s{_pppPostId = a})
+
+-- | JSONP
+pppCallback :: Lens' PostsPublish (Maybe Text)
+pppCallback
+  = lens _pppCallback (\ s a -> s{_pppCallback = a})
 
 instance GoogleRequest PostsPublish where
         type Rs PostsPublish = Post'
         type Scopes PostsPublish =
              '["https://www.googleapis.com/auth/blogger"]
         requestClient PostsPublish'{..}
-          = go _pppBlogId _pppPostId _pppPublishDate
+          = go _pppBlogId _pppPostId _pppXgafv
+              _pppUploadProtocol
+              _pppPublishDate
+              _pppAccessToken
+              _pppUploadType
+              _pppCallback
               (Just AltJSON)
               bloggerService
           where go

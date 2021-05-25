@@ -38,8 +38,8 @@ module Network.Google.Resource.AdSenseHost.URLChannels.List
     , uclMaxResults
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.urlchannels.list@ method which the
 -- 'URLChannelsList' request conforms to.
@@ -59,7 +59,7 @@ type URLChannelsListResource =
 data URLChannelsList =
   URLChannelsList'
     { _uclAdClientId :: !Text
-    , _uclPageToken  :: !(Maybe Text)
+    , _uclPageToken :: !(Maybe Text)
     , _uclMaxResults :: !(Maybe (Textual Word32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)

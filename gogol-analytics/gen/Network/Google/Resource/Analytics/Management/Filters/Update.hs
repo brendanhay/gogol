@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Update
     , mfuAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.update@ method which the
 -- 'ManagementFiltersUpdate' request conforms to.
@@ -59,8 +59,8 @@ type ManagementFiltersUpdateResource =
 -- /See:/ 'managementFiltersUpdate' smart constructor.
 data ManagementFiltersUpdate =
   ManagementFiltersUpdate'
-    { _mfuFilterId  :: !Text
-    , _mfuPayload   :: !Filter
+    { _mfuFilterId :: !Text
+    , _mfuPayload :: !Filter
     , _mfuAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

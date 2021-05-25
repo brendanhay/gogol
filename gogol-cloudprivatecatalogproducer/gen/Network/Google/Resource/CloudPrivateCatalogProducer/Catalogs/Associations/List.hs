@@ -22,7 +22,7 @@
 --
 -- Lists all Association resources under a catalog.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.associations.list@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.associations.list@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations.List
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Associations
     , calCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.associations.list@ method which the
 -- 'CatalogsAssociationsList' request conforms to.
@@ -68,14 +68,14 @@ type CatalogsAssociationsListResource =
 -- /See:/ 'catalogsAssociationsList' smart constructor.
 data CatalogsAssociationsList =
   CatalogsAssociationsList'
-    { _calParent         :: !Text
-    , _calXgafv          :: !(Maybe Xgafv)
+    { _calParent :: !Text
+    , _calXgafv :: !(Maybe Xgafv)
     , _calUploadProtocol :: !(Maybe Text)
-    , _calAccessToken    :: !(Maybe Text)
-    , _calUploadType     :: !(Maybe Text)
-    , _calPageToken      :: !(Maybe Text)
-    , _calPageSize       :: !(Maybe (Textual Int32))
-    , _calCallback       :: !(Maybe Text)
+    , _calAccessToken :: !(Maybe Text)
+    , _calUploadType :: !(Maybe Text)
+    , _calPageToken :: !(Maybe Text)
+    , _calPageSize :: !(Maybe (Textual Int32))
+    , _calCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

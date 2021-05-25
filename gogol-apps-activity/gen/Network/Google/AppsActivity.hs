@@ -131,9 +131,9 @@ module Network.Google.AppsActivity
     , mRemovedParents
     ) where
 
-import           Network.Google.AppsActivity.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.AppsActivity.Activities.List
+import Network.Google.Prelude
+import Network.Google.AppsActivity.Types
+import Network.Google.Resource.AppsActivity.Activities.List
 
 {- $resources
 TODO

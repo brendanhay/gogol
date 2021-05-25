@@ -22,7 +22,7 @@
 --
 -- Gets the volume annotations for a volume and layer.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.volumeAnnotations.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.layers.volumeAnnotations.list@.
 module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     (
     -- * REST Resource
@@ -33,9 +33,13 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     , LayersVolumeAnnotationsList
 
     -- * Request Lenses
+    , lvalXgafv
+    , lvalUploadProtocol
     , lvalStartOffSet
     , lvalLocale
+    , lvalAccessToken
     , lvalContentVersion
+    , lvalUploadType
     , lvalShowDeleted
     , lvalVolumeAnnotationsVersion
     , lvalUpdatedMax
@@ -48,10 +52,11 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     , lvalLayerId
     , lvalMaxResults
     , lvalStartPosition
+    , lvalCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.layers.volumeAnnotations.list@ method which the
 -- 'LayersVolumeAnnotationsList' request conforms to.
@@ -63,42 +68,55 @@ type LayersVolumeAnnotationsListResource =
              "layers" :>
                Capture "layerId" Text :>
                  QueryParam "contentVersion" Text :>
-                   QueryParam "startOffset" Text :>
-                     QueryParam "locale" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "volumeAnnotationsVersion" Text :>
-                           QueryParam "updatedMax" Text :>
-                             QueryParam "updatedMin" Text :>
-                               QueryParam "endOffset" Text :>
-                                 QueryParam "source" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "endPosition" Text :>
-                                       QueryParam "maxResults" (Textual Word32)
-                                         :>
-                                         QueryParam "startPosition" Text :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] Volumeannotations
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "startOffset" Text :>
+                         QueryParam "locale" Text :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "showDeleted" Bool :>
+                                 QueryParam "volumeAnnotationsVersion" Text :>
+                                   QueryParam "updatedMax" Text :>
+                                     QueryParam "updatedMin" Text :>
+                                       QueryParam "endOffset" Text :>
+                                         QueryParam "source" Text :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "endPosition" Text :>
+                                               QueryParam "maxResults"
+                                                 (Textual Word32)
+                                                 :>
+                                                 QueryParam "startPosition" Text
+                                                   :>
+                                                   QueryParam "callback" Text :>
+                                                     QueryParam "alt" AltJSON :>
+                                                       Get '[JSON]
+                                                         Volumeannotations
 
 -- | Gets the volume annotations for a volume and layer.
 --
 -- /See:/ 'layersVolumeAnnotationsList' smart constructor.
 data LayersVolumeAnnotationsList =
   LayersVolumeAnnotationsList'
-    { _lvalStartOffSet              :: !(Maybe Text)
-    , _lvalLocale                   :: !(Maybe Text)
-    , _lvalContentVersion           :: !Text
-    , _lvalShowDeleted              :: !(Maybe Bool)
+    { _lvalXgafv :: !(Maybe Xgafv)
+    , _lvalUploadProtocol :: !(Maybe Text)
+    , _lvalStartOffSet :: !(Maybe Text)
+    , _lvalLocale :: !(Maybe Text)
+    , _lvalAccessToken :: !(Maybe Text)
+    , _lvalContentVersion :: !Text
+    , _lvalUploadType :: !(Maybe Text)
+    , _lvalShowDeleted :: !(Maybe Bool)
     , _lvalVolumeAnnotationsVersion :: !(Maybe Text)
-    , _lvalUpdatedMax               :: !(Maybe Text)
-    , _lvalUpdatedMin               :: !(Maybe Text)
-    , _lvalEndOffSet                :: !(Maybe Text)
-    , _lvalVolumeId                 :: !Text
-    , _lvalSource                   :: !(Maybe Text)
-    , _lvalPageToken                :: !(Maybe Text)
-    , _lvalEndPosition              :: !(Maybe Text)
-    , _lvalLayerId                  :: !Text
-    , _lvalMaxResults               :: !(Maybe (Textual Word32))
-    , _lvalStartPosition            :: !(Maybe Text)
+    , _lvalUpdatedMax :: !(Maybe Text)
+    , _lvalUpdatedMin :: !(Maybe Text)
+    , _lvalEndOffSet :: !(Maybe Text)
+    , _lvalVolumeId :: !Text
+    , _lvalSource :: !(Maybe Text)
+    , _lvalPageToken :: !(Maybe Text)
+    , _lvalEndPosition :: !(Maybe Text)
+    , _lvalLayerId :: !Text
+    , _lvalMaxResults :: !(Maybe (Textual Word32))
+    , _lvalStartPosition :: !(Maybe Text)
+    , _lvalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -107,11 +125,19 @@ data LayersVolumeAnnotationsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lvalXgafv'
+--
+-- * 'lvalUploadProtocol'
+--
 -- * 'lvalStartOffSet'
 --
 -- * 'lvalLocale'
 --
+-- * 'lvalAccessToken'
+--
 -- * 'lvalContentVersion'
+--
+-- * 'lvalUploadType'
 --
 -- * 'lvalShowDeleted'
 --
@@ -136,6 +162,8 @@ data LayersVolumeAnnotationsList =
 -- * 'lvalMaxResults'
 --
 -- * 'lvalStartPosition'
+--
+-- * 'lvalCallback'
 layersVolumeAnnotationsList
     :: Text -- ^ 'lvalContentVersion'
     -> Text -- ^ 'lvalVolumeId'
@@ -143,9 +171,13 @@ layersVolumeAnnotationsList
     -> LayersVolumeAnnotationsList
 layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
   LayersVolumeAnnotationsList'
-    { _lvalStartOffSet = Nothing
+    { _lvalXgafv = Nothing
+    , _lvalUploadProtocol = Nothing
+    , _lvalStartOffSet = Nothing
     , _lvalLocale = Nothing
+    , _lvalAccessToken = Nothing
     , _lvalContentVersion = pLvalContentVersion_
+    , _lvalUploadType = Nothing
     , _lvalShowDeleted = Nothing
     , _lvalVolumeAnnotationsVersion = Nothing
     , _lvalUpdatedMax = Nothing
@@ -158,8 +190,20 @@ layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     , _lvalLayerId = pLvalLayerId_
     , _lvalMaxResults = Nothing
     , _lvalStartPosition = Nothing
+    , _lvalCallback = Nothing
     }
 
+
+-- | V1 error format.
+lvalXgafv :: Lens' LayersVolumeAnnotationsList (Maybe Xgafv)
+lvalXgafv
+  = lens _lvalXgafv (\ s a -> s{_lvalXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lvalUploadProtocol :: Lens' LayersVolumeAnnotationsList (Maybe Text)
+lvalUploadProtocol
+  = lens _lvalUploadProtocol
+      (\ s a -> s{_lvalUploadProtocol = a})
 
 -- | The start offset to start retrieving data from.
 lvalStartOffSet :: Lens' LayersVolumeAnnotationsList (Maybe Text)
@@ -173,11 +217,23 @@ lvalLocale :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalLocale
   = lens _lvalLocale (\ s a -> s{_lvalLocale = a})
 
+-- | OAuth access token.
+lvalAccessToken :: Lens' LayersVolumeAnnotationsList (Maybe Text)
+lvalAccessToken
+  = lens _lvalAccessToken
+      (\ s a -> s{_lvalAccessToken = a})
+
 -- | The content version for the requested volume.
 lvalContentVersion :: Lens' LayersVolumeAnnotationsList Text
 lvalContentVersion
   = lens _lvalContentVersion
       (\ s a -> s{_lvalContentVersion = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lvalUploadType :: Lens' LayersVolumeAnnotationsList (Maybe Text)
+lvalUploadType
+  = lens _lvalUploadType
+      (\ s a -> s{_lvalUploadType = a})
 
 -- | Set to true to return deleted annotations. updatedMin must be in the
 -- request to use this. Defaults to false.
@@ -252,6 +308,11 @@ lvalStartPosition
   = lens _lvalStartPosition
       (\ s a -> s{_lvalStartPosition = a})
 
+-- | JSONP
+lvalCallback :: Lens' LayersVolumeAnnotationsList (Maybe Text)
+lvalCallback
+  = lens _lvalCallback (\ s a -> s{_lvalCallback = a})
+
 instance GoogleRequest LayersVolumeAnnotationsList
          where
         type Rs LayersVolumeAnnotationsList =
@@ -261,8 +322,12 @@ instance GoogleRequest LayersVolumeAnnotationsList
         requestClient LayersVolumeAnnotationsList'{..}
           = go _lvalVolumeId _lvalLayerId
               (Just _lvalContentVersion)
+              _lvalXgafv
+              _lvalUploadProtocol
               _lvalStartOffSet
               _lvalLocale
+              _lvalAccessToken
+              _lvalUploadType
               _lvalShowDeleted
               _lvalVolumeAnnotationsVersion
               _lvalUpdatedMax
@@ -273,6 +338,7 @@ instance GoogleRequest LayersVolumeAnnotationsList
               _lvalEndPosition
               _lvalMaxResults
               _lvalStartPosition
+              _lvalCallback
               (Just AltJSON)
               booksService
           where go

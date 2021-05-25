@@ -42,8 +42,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     , topCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.StorageTransfer.Types
+import Network.Google.Prelude
+import Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.pause@ method which the
 -- 'TransferOperationsPause' request conforms to.
@@ -64,13 +64,13 @@ type TransferOperationsPauseResource =
 -- /See:/ 'transferOperationsPause' smart constructor.
 data TransferOperationsPause =
   TransferOperationsPause'
-    { _topXgafv          :: !(Maybe Xgafv)
+    { _topXgafv :: !(Maybe Xgafv)
     , _topUploadProtocol :: !(Maybe Text)
-    , _topAccessToken    :: !(Maybe Text)
-    , _topUploadType     :: !(Maybe Text)
-    , _topPayload        :: !PauseTransferOperationRequest
-    , _topName           :: !Text
-    , _topCallback       :: !(Maybe Text)
+    , _topAccessToken :: !(Maybe Text)
+    , _topUploadType :: !(Maybe Text)
+    , _topPayload :: !PauseTransferOperationRequest
+    , _topName :: !Text
+    , _topCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,7 +135,7 @@ topPayload :: Lens' TransferOperationsPause PauseTransferOperationRequest
 topPayload
   = lens _topPayload (\ s a -> s{_topPayload = a})
 
--- | The name of the transfer operation. Required.
+-- | Required. The name of the transfer operation.
 topName :: Lens' TransferOperationsPause Text
 topName = lens _topName (\ s a -> s{_topName = a})
 

@@ -46,8 +46,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Create
     , pidcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.create@ method which the
 -- 'ProjectsInstancesDatabasesCreate' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsInstancesDatabasesCreateResource =
 -- /See:/ 'projectsInstancesDatabasesCreate' smart constructor.
 data ProjectsInstancesDatabasesCreate =
   ProjectsInstancesDatabasesCreate'
-    { _pidcParent         :: !Text
-    , _pidcXgafv          :: !(Maybe Xgafv)
+    { _pidcParent :: !Text
+    , _pidcXgafv :: !(Maybe Xgafv)
     , _pidcUploadProtocol :: !(Maybe Text)
-    , _pidcAccessToken    :: !(Maybe Text)
-    , _pidcUploadType     :: !(Maybe Text)
-    , _pidcPayload        :: !CreateDatabaseRequest
-    , _pidcCallback       :: !(Maybe Text)
+    , _pidcAccessToken :: !(Maybe Text)
+    , _pidcUploadType :: !(Maybe Text)
+    , _pidcPayload :: !CreateDatabaseRequest
+    , _pidcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

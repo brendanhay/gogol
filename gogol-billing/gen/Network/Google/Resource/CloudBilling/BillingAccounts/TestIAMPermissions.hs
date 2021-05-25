@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.TestIAMPermissions
     , batipCallback
     ) where
 
-import           Network.Google.Billing.Types
-import           Network.Google.Prelude
+import Network.Google.Billing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.testIamPermissions@ method which the
 -- 'BillingAccountsTestIAMPermissions' request conforms to.
@@ -68,13 +68,13 @@ type BillingAccountsTestIAMPermissionsResource =
 -- /See:/ 'billingAccountsTestIAMPermissions' smart constructor.
 data BillingAccountsTestIAMPermissions =
   BillingAccountsTestIAMPermissions'
-    { _batipXgafv          :: !(Maybe Xgafv)
+    { _batipXgafv :: !(Maybe Xgafv)
     , _batipUploadProtocol :: !(Maybe Text)
-    , _batipAccessToken    :: !(Maybe Text)
-    , _batipUploadType     :: !(Maybe Text)
-    , _batipPayload        :: !TestIAMPermissionsRequest
-    , _batipResource       :: !Text
-    , _batipCallback       :: !(Maybe Text)
+    , _batipAccessToken :: !(Maybe Text)
+    , _batipUploadType :: !(Maybe Text)
+    , _batipPayload :: !TestIAMPermissionsRequest
+    , _batipResource :: !Text
+    , _batipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,7 +160,9 @@ instance GoogleRequest
         type Rs BillingAccountsTestIAMPermissions =
              TestIAMPermissionsResponse
         type Scopes BillingAccountsTestIAMPermissions =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-billing",
+               "https://www.googleapis.com/auth/cloud-billing.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient BillingAccountsTestIAMPermissions'{..}
           = go _batipResource _batipXgafv _batipUploadProtocol
               _batipAccessToken

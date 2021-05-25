@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a file\'s metadata and\/or content with patch semantics.
+-- Updates a file\'s metadata and\/or content. This method supports patch
+-- semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.update@.
 module Network.Google.Resource.Drive.Files.Update
@@ -39,13 +40,15 @@ module Network.Google.Resource.Drive.Files.Update
     , fuOCRLanguage
     , fuKeepRevisionForever
     , fuSupportsAllDrives
+    , fuIncludePermissionsForView
+    , fuEnforceSingleParent
     , fuFileId
     , fuAddParents
     , fuSupportsTeamDrives
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.update@ method which the
 -- 'FilesUpdate' request conforms to.
@@ -59,10 +62,12 @@ type FilesUpdateResource =
                  QueryParam "ocrLanguage" Text :>
                    QueryParam "keepRevisionForever" Bool :>
                      QueryParam "supportsAllDrives" Bool :>
-                       QueryParam "addParents" Text :>
-                         QueryParam "supportsTeamDrives" Bool :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] File :> Patch '[JSON] File
+                       QueryParam "includePermissionsForView" Text :>
+                         QueryParam "enforceSingleParent" Bool :>
+                           QueryParam "addParents" Text :>
+                             QueryParam "supportsTeamDrives" Bool :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] File :> Patch '[JSON] File
        :<|>
        "upload" :>
          "drive" :>
@@ -74,27 +79,32 @@ type FilesUpdateResource =
                      QueryParam "ocrLanguage" Text :>
                        QueryParam "keepRevisionForever" Bool :>
                          QueryParam "supportsAllDrives" Bool :>
-                           QueryParam "addParents" Text :>
-                             QueryParam "supportsTeamDrives" Bool :>
-                               QueryParam "alt" AltJSON :>
-                                 QueryParam "uploadType" Multipart :>
-                                   MultipartRelated '[JSON] File :>
-                                     Patch '[JSON] File
+                           QueryParam "includePermissionsForView" Text :>
+                             QueryParam "enforceSingleParent" Bool :>
+                               QueryParam "addParents" Text :>
+                                 QueryParam "supportsTeamDrives" Bool :>
+                                   QueryParam "alt" AltJSON :>
+                                     QueryParam "uploadType" Multipart :>
+                                       MultipartRelated '[JSON] File :>
+                                         Patch '[JSON] File
 
--- | Updates a file\'s metadata and\/or content with patch semantics.
+-- | Updates a file\'s metadata and\/or content. This method supports patch
+-- semantics.
 --
 -- /See:/ 'filesUpdate' smart constructor.
 data FilesUpdate =
   FilesUpdate'
-    { _fuPayload                   :: !File
-    , _fuRemoveParents             :: !(Maybe Text)
+    { _fuPayload :: !File
+    , _fuRemoveParents :: !(Maybe Text)
     , _fuUseContentAsIndexableText :: !Bool
-    , _fuOCRLanguage               :: !(Maybe Text)
-    , _fuKeepRevisionForever       :: !Bool
-    , _fuSupportsAllDrives         :: !Bool
-    , _fuFileId                    :: !Text
-    , _fuAddParents                :: !(Maybe Text)
-    , _fuSupportsTeamDrives        :: !Bool
+    , _fuOCRLanguage :: !(Maybe Text)
+    , _fuKeepRevisionForever :: !Bool
+    , _fuSupportsAllDrives :: !Bool
+    , _fuIncludePermissionsForView :: !(Maybe Text)
+    , _fuEnforceSingleParent :: !Bool
+    , _fuFileId :: !Text
+    , _fuAddParents :: !(Maybe Text)
+    , _fuSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,6 +125,10 @@ data FilesUpdate =
 --
 -- * 'fuSupportsAllDrives'
 --
+-- * 'fuIncludePermissionsForView'
+--
+-- * 'fuEnforceSingleParent'
+--
 -- * 'fuFileId'
 --
 -- * 'fuAddParents'
@@ -132,6 +146,8 @@ filesUpdate pFuPayload_ pFuFileId_ =
     , _fuOCRLanguage = Nothing
     , _fuKeepRevisionForever = False
     , _fuSupportsAllDrives = False
+    , _fuIncludePermissionsForView = Nothing
+    , _fuEnforceSingleParent = False
     , _fuFileId = pFuFileId_
     , _fuAddParents = Nothing
     , _fuSupportsTeamDrives = False
@@ -162,7 +178,9 @@ fuOCRLanguage
       (\ s a -> s{_fuOCRLanguage = a})
 
 -- | Whether to set the \'keepForever\' field in the new head revision. This
--- is only applicable to files with binary content in Google Drive.
+-- is only applicable to files with binary content in Google Drive. Only
+-- 200 revisions for the file can be kept forever. If the limit is reached,
+-- try deleting pinned revisions.
 fuKeepRevisionForever :: Lens' FilesUpdate Bool
 fuKeepRevisionForever
   = lens _fuKeepRevisionForever
@@ -174,6 +192,20 @@ fuSupportsAllDrives :: Lens' FilesUpdate Bool
 fuSupportsAllDrives
   = lens _fuSupportsAllDrives
       (\ s a -> s{_fuSupportsAllDrives = a})
+
+-- | Specifies which additional view\'s permissions to include in the
+-- response. Only \'published\' is supported.
+fuIncludePermissionsForView :: Lens' FilesUpdate (Maybe Text)
+fuIncludePermissionsForView
+  = lens _fuIncludePermissionsForView
+      (\ s a -> s{_fuIncludePermissionsForView = a})
+
+-- | Deprecated. Adding files to multiple folders is no longer supported. Use
+-- shortcuts instead.
+fuEnforceSingleParent :: Lens' FilesUpdate Bool
+fuEnforceSingleParent
+  = lens _fuEnforceSingleParent
+      (\ s a -> s{_fuEnforceSingleParent = a})
 
 -- | The ID of the file.
 fuFileId :: Lens' FilesUpdate Text
@@ -204,6 +236,8 @@ instance GoogleRequest FilesUpdate where
               _fuOCRLanguage
               (Just _fuKeepRevisionForever)
               (Just _fuSupportsAllDrives)
+              _fuIncludePermissionsForView
+              (Just _fuEnforceSingleParent)
               _fuAddParents
               (Just _fuSupportsTeamDrives)
               (Just AltJSON)
@@ -224,6 +258,8 @@ instance GoogleRequest (MediaUpload FilesUpdate)
               _fuOCRLanguage
               (Just _fuKeepRevisionForever)
               (Just _fuSupportsAllDrives)
+              _fuIncludePermissionsForView
+              (Just _fuEnforceSingleParent)
               _fuAddParents
               (Just _fuSupportsTeamDrives)
               (Just AltJSON)

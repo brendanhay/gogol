@@ -45,8 +45,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.Tables.ModifyCol
     , pitmcfCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.modifyColumnFamilies@ method which the
 -- 'ProjectsInstancesTablesModifyColumnFamilies' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsInstancesTablesModifyColumnFamiliesResource
 -- /See:/ 'projectsInstancesTablesModifyColumnFamilies' smart constructor.
 data ProjectsInstancesTablesModifyColumnFamilies =
   ProjectsInstancesTablesModifyColumnFamilies'
-    { _pitmcfXgafv          :: !(Maybe Xgafv)
+    { _pitmcfXgafv :: !(Maybe Xgafv)
     , _pitmcfUploadProtocol :: !(Maybe Text)
-    , _pitmcfAccessToken    :: !(Maybe Text)
-    , _pitmcfUploadType     :: !(Maybe Text)
-    , _pitmcfPayload        :: !ModifyColumnFamiliesRequest
-    , _pitmcfName           :: !Text
-    , _pitmcfCallback       :: !(Maybe Text)
+    , _pitmcfAccessToken :: !(Maybe Text)
+    , _pitmcfUploadType :: !(Maybe Text)
+    , _pitmcfPayload :: !ModifyColumnFamiliesRequest
+    , _pitmcfName :: !Text
+    , _pitmcfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -144,9 +144,9 @@ pitmcfPayload
   = lens _pitmcfPayload
       (\ s a -> s{_pitmcfPayload = a})
 
--- | The unique name of the table whose families should be modified. Values
--- are of the form \`projects\/\/instances\/\/tables\/
--- \`.
+-- | Required. The unique name of the table whose families should be
+-- modified. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/tables\/{table}\`.
 pitmcfName :: Lens' ProjectsInstancesTablesModifyColumnFamilies Text
 pitmcfName
   = lens _pitmcfName (\ s a -> s{_pitmcfName = a})

@@ -51,8 +51,8 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
     , rqCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.reports.query@ method which the
 -- 'ReportsQuery' request conforms to.
@@ -83,22 +83,22 @@ type ReportsQueryResource =
 -- /See:/ 'reportsQuery' smart constructor.
 data ReportsQuery =
   ReportsQuery'
-    { _rqXgafv                        :: !(Maybe Xgafv)
-    , _rqMetrics                      :: !(Maybe Text)
-    , _rqUploadProtocol               :: !(Maybe Text)
-    , _rqAccessToken                  :: !(Maybe Text)
-    , _rqEndDate                      :: !(Maybe Text)
+    { _rqXgafv :: !(Maybe Xgafv)
+    , _rqMetrics :: !(Maybe Text)
+    , _rqUploadProtocol :: !(Maybe Text)
+    , _rqAccessToken :: !(Maybe Text)
+    , _rqEndDate :: !(Maybe Text)
     , _rqIncludeHistoricalChannelData :: !(Maybe Bool)
-    , _rqFilters                      :: !(Maybe Text)
-    , _rqUploadType                   :: !(Maybe Text)
-    , _rqIds                          :: !(Maybe Text)
-    , _rqStartDate                    :: !(Maybe Text)
-    , _rqCurrency                     :: !(Maybe Text)
-    , _rqSort                         :: !(Maybe Text)
-    , _rqDimensions                   :: !(Maybe Text)
-    , _rqStartIndex                   :: !(Maybe (Textual Int32))
-    , _rqMaxResults                   :: !(Maybe (Textual Int32))
-    , _rqCallback                     :: !(Maybe Text)
+    , _rqFilters :: !(Maybe Text)
+    , _rqUploadType :: !(Maybe Text)
+    , _rqIds :: !(Maybe Text)
+    , _rqStartDate :: !(Maybe Text)
+    , _rqCurrency :: !(Maybe Text)
+    , _rqSort :: !(Maybe Text)
+    , _rqDimensions :: !(Maybe Text)
+    , _rqStartIndex :: !(Maybe (Textual Int32))
+    , _rqMaxResults :: !(Maybe (Textual Int32))
+    , _rqCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -49,8 +49,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     , bdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.deactivate@ method which the
 -- 'BeaconsDeactivate' request conforms to.
@@ -77,13 +77,13 @@ type BeaconsDeactivateResource =
 -- /See:/ 'beaconsDeactivate' smart constructor.
 data BeaconsDeactivate =
   BeaconsDeactivate'
-    { _bdXgafv          :: !(Maybe Xgafv)
+    { _bdXgafv :: !(Maybe Xgafv)
     , _bdUploadProtocol :: !(Maybe Text)
-    , _bdAccessToken    :: !(Maybe Text)
-    , _bdBeaconName     :: !Text
-    , _bdUploadType     :: !(Maybe Text)
-    , _bdProjectId      :: !(Maybe Text)
-    , _bdCallback       :: !(Maybe Text)
+    , _bdAccessToken :: !(Maybe Text)
+    , _bdBeaconName :: !Text
+    , _bdUploadType :: !(Maybe Text)
+    , _bdProjectId :: !(Maybe Text)
+    , _bdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

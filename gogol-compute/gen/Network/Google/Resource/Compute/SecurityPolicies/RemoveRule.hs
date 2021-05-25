@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.RemoveRule
     , sprrSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.removeRule@ method which the
 -- 'SecurityPoliciesRemoveRule' request conforms to.
@@ -60,8 +60,8 @@ type SecurityPoliciesRemoveRuleResource =
 -- /See:/ 'securityPoliciesRemoveRule' smart constructor.
 data SecurityPoliciesRemoveRule =
   SecurityPoliciesRemoveRule'
-    { _sprrPriority       :: !(Maybe (Textual Int32))
-    , _sprrProject        :: !Text
+    { _sprrPriority :: !(Maybe (Textual Int32))
+    , _sprrProject :: !Text
     , _sprrSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

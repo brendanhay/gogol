@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Autoscalers.Delete
     , adAutoscaler
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.autoscalers.delete@ method which the
 -- 'AutoscalersDelete' request conforms to.
@@ -61,9 +61,9 @@ type AutoscalersDeleteResource =
 -- /See:/ 'autoscalersDelete' smart constructor.
 data AutoscalersDelete =
   AutoscalersDelete'
-    { _adRequestId  :: !(Maybe Text)
-    , _adProject    :: !Text
-    , _adZone       :: !Text
+    { _adRequestId :: !(Maybe Text)
+    , _adProject :: !Text
+    , _adZone :: !Text
     , _adAutoscaler :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -43,8 +43,8 @@ module Network.Google.Resource.LibraryAgent.Shelves.List
     , slCallback
     ) where
 
-import           Network.Google.LibraryAgent.Types
-import           Network.Google.Prelude
+import Network.Google.LibraryAgent.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @libraryagent.shelves.list@ method which the
 -- 'ShelvesList' request conforms to.
@@ -68,13 +68,13 @@ type ShelvesListResource =
 -- /See:/ 'shelvesList' smart constructor.
 data ShelvesList =
   ShelvesList'
-    { _slXgafv          :: !(Maybe Xgafv)
+    { _slXgafv :: !(Maybe Xgafv)
     , _slUploadProtocol :: !(Maybe Text)
-    , _slAccessToken    :: !(Maybe Text)
-    , _slUploadType     :: !(Maybe Text)
-    , _slPageToken      :: !(Maybe Text)
-    , _slPageSize       :: !(Maybe (Textual Int32))
-    , _slCallback       :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slPageToken :: !(Maybe Text)
+    , _slPageSize :: !(Maybe (Textual Int32))
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

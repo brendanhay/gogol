@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQuery.Tables.Update
     , tuTableId
     ) where
 
-import           Network.Google.BigQuery.Types
-import           Network.Google.Prelude
+import Network.Google.BigQuery.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.update@ method which the
 -- 'TablesUpdate' request conforms to.
@@ -65,10 +65,10 @@ type TablesUpdateResource =
 -- /See:/ 'tablesUpdate' smart constructor.
 data TablesUpdate =
   TablesUpdate'
-    { _tuPayload   :: !Table
+    { _tuPayload :: !Table
     , _tuDataSetId :: !Text
     , _tuProjectId :: !Text
-    , _tuTableId   :: !Text
+    , _tuTableId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

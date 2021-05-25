@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a cluster in a project.
+-- Updates a cluster in a project. The returned Operation.metadata will be
+-- ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
+-- The cluster must be in a RUNNING state or an error is returned.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.regions.clusters.patch@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
@@ -47,8 +50,8 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Patch
     , prcpCallback
     ) where
 
-import           Network.Google.Dataproc.Types
-import           Network.Google.Prelude
+import Network.Google.Dataproc.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataproc.projects.regions.clusters.patch@ method which the
 -- 'ProjectsRegionsClustersPatch' request conforms to.
@@ -74,23 +77,26 @@ type ProjectsRegionsClustersPatchResource =
                                      ReqBody '[JSON] Cluster :>
                                        Patch '[JSON] Operation
 
--- | Updates a cluster in a project.
+-- | Updates a cluster in a project. The returned Operation.metadata will be
+-- ClusterOperationMetadata
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#clusteroperationmetadata).
+-- The cluster must be in a RUNNING state or an error is returned.
 --
 -- /See:/ 'projectsRegionsClustersPatch' smart constructor.
 data ProjectsRegionsClustersPatch =
   ProjectsRegionsClustersPatch'
-    { _prcpXgafv                       :: !(Maybe Xgafv)
-    , _prcpRequestId                   :: !(Maybe Text)
-    , _prcpUploadProtocol              :: !(Maybe Text)
-    , _prcpUpdateMask                  :: !(Maybe GFieldMask)
-    , _prcpAccessToken                 :: !(Maybe Text)
-    , _prcpUploadType                  :: !(Maybe Text)
-    , _prcpPayload                     :: !Cluster
+    { _prcpXgafv :: !(Maybe Xgafv)
+    , _prcpRequestId :: !(Maybe Text)
+    , _prcpUploadProtocol :: !(Maybe Text)
+    , _prcpUpdateMask :: !(Maybe GFieldMask)
+    , _prcpAccessToken :: !(Maybe Text)
+    , _prcpUploadType :: !(Maybe Text)
+    , _prcpPayload :: !Cluster
     , _prcpGracefulDecommissionTimeout :: !(Maybe GDuration)
-    , _prcpClusterName                 :: !Text
-    , _prcpRegion                      :: !Text
-    , _prcpProjectId                   :: !Text
-    , _prcpCallback                    :: !(Maybe Text)
+    , _prcpClusterName :: !Text
+    , _prcpRegion :: !Text
+    , _prcpProjectId :: !Text
+    , _prcpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,12 +156,13 @@ prcpXgafv :: Lens' ProjectsRegionsClustersPatch (Maybe Xgafv)
 prcpXgafv
   = lens _prcpXgafv (\ s a -> s{_prcpXgafv = a})
 
--- | Optional. A unique id used to identify the request. If the server
--- receives two UpdateClusterRequest requests with the same id, then the
--- second request will be ignored and the first
+-- | Optional. A unique ID used to identify the request. If the server
+-- receives two UpdateClusterRequest
+-- (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
+-- with the same id, then the second request will be ignored and the first
 -- google.longrunning.Operation created and stored in the backend is
 -- returned.It is recommended to always set this value to a UUID
--- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The id
+-- (https:\/\/en.wikipedia.org\/wiki\/Universally_unique_identifier).The ID
 -- must contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
 -- and hyphens (-). The maximum length is 40 characters.
 prcpRequestId :: Lens' ProjectsRegionsClustersPatch (Maybe Text)
@@ -178,19 +185,12 @@ prcpUploadProtocol
 -- preemptible workers in a cluster to 5, the update_mask parameter would
 -- be config.secondary_worker_config.num_instances, and the PATCH request
 -- body would be set as follows: { \"config\":{ \"secondaryWorkerConfig\":{
--- \"numInstances\":\"5\" } } } __Note:__ Currently, only the following
--- fields can be updated:
--- > +-----------------------------------+-----------------------------------+
--- > | __Mask__                          | __Purpose__                       |
--- > +-----------------------------------+-----------------------------------+
--- > | __/labels/__                      | Update labels                     |
--- > +-----------------------------------+-----------------------------------+
--- > | __/config.worker_config.num_insta | Resize primary worker group       |
--- > | nces/__                           |                                   |
--- > +-----------------------------------+-----------------------------------+
--- > | __/config.secondary_worker_config | Resize secondary worker group     |
--- > | .num_instances/__                 |                                   |
--- > +-----------------------------------+-----------------------------------+
+-- \"numInstances\":\"5\" } } } *Note:* Currently, only the following
+-- fields can be updated: *Mask* *Purpose* *labels* Update labels
+-- *config.worker_config.num_instances* Resize primary worker group
+-- *config.secondary_worker_config.num_instances* Resize secondary worker
+-- group config.autoscaling_config.policy_uri Use, stop using, or change
+-- autoscaling policies
 prcpUpdateMask :: Lens' ProjectsRegionsClustersPatch (Maybe GFieldMask)
 prcpUpdateMask
   = lens _prcpUpdateMask
@@ -218,8 +218,10 @@ prcpPayload
 -- interrupting jobs in progress. Timeout specifies how long to wait for
 -- jobs in progress to finish before forcefully removing nodes (and
 -- potentially interrupting jobs). Default timeout is 0 (for forceful
--- decommission), and the maximum allowed timeout is 1 day.Only supported
--- on Dataproc image versions 1.2 and higher.
+-- decommission), and the maximum allowed timeout is 1 day. (see JSON
+-- representation of Duration
+-- (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).Only
+-- supported on Dataproc image versions 1.2 and higher.
 prcpGracefulDecommissionTimeout :: Lens' ProjectsRegionsClustersPatch (Maybe Scientific)
 prcpGracefulDecommissionTimeout
   = lens _prcpGracefulDecommissionTimeout
@@ -232,7 +234,7 @@ prcpClusterName
   = lens _prcpClusterName
       (\ s a -> s{_prcpClusterName = a})
 
--- | Required. The Cloud Dataproc region in which to handle the request.
+-- | Required. The Dataproc region in which to handle the request.
 prcpRegion :: Lens' ProjectsRegionsClustersPatch Text
 prcpRegion
   = lens _prcpRegion (\ s a -> s{_prcpRegion = a})

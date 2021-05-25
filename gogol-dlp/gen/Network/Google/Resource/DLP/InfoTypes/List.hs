@@ -35,32 +35,36 @@ module Network.Google.Resource.DLP.InfoTypes.List
     , InfoTypesList
 
     -- * Request Lenses
+    , itlParent
     , itlXgafv
     , itlLanguageCode
     , itlUploadProtocol
     , itlAccessToken
     , itlUploadType
     , itlFilter
+    , itlLocationId
     , itlCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.infoTypes.list@ method which the
 -- 'InfoTypesList' request conforms to.
 type InfoTypesListResource =
      "v2" :>
        "infoTypes" :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "languageCode" Text :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] GooglePrivacyDlpV2ListInfoTypesResponse
+         QueryParam "parent" Text :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "languageCode" Text :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "locationId" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] GooglePrivacyDlpV2ListInfoTypesResponse
 
 -- | Returns a list of the sensitive information types that the DLP API
 -- supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference
@@ -69,13 +73,15 @@ type InfoTypesListResource =
 -- /See:/ 'infoTypesList' smart constructor.
 data InfoTypesList =
   InfoTypesList'
-    { _itlXgafv          :: !(Maybe Xgafv)
-    , _itlLanguageCode   :: !(Maybe Text)
+    { _itlParent :: !(Maybe Text)
+    , _itlXgafv :: !(Maybe Xgafv)
+    , _itlLanguageCode :: !(Maybe Text)
     , _itlUploadProtocol :: !(Maybe Text)
-    , _itlAccessToken    :: !(Maybe Text)
-    , _itlUploadType     :: !(Maybe Text)
-    , _itlFilter         :: !(Maybe Text)
-    , _itlCallback       :: !(Maybe Text)
+    , _itlAccessToken :: !(Maybe Text)
+    , _itlUploadType :: !(Maybe Text)
+    , _itlFilter :: !(Maybe Text)
+    , _itlLocationId :: !(Maybe Text)
+    , _itlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,6 +89,8 @@ data InfoTypesList =
 -- | Creates a value of 'InfoTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itlParent'
 --
 -- * 'itlXgafv'
 --
@@ -96,28 +104,38 @@ data InfoTypesList =
 --
 -- * 'itlFilter'
 --
+-- * 'itlLocationId'
+--
 -- * 'itlCallback'
 infoTypesList
     :: InfoTypesList
 infoTypesList =
   InfoTypesList'
-    { _itlXgafv = Nothing
+    { _itlParent = Nothing
+    , _itlXgafv = Nothing
     , _itlLanguageCode = Nothing
     , _itlUploadProtocol = Nothing
     , _itlAccessToken = Nothing
     , _itlUploadType = Nothing
     , _itlFilter = Nothing
+    , _itlLocationId = Nothing
     , _itlCallback = Nothing
     }
 
+
+-- | The parent resource name. The format of this value is as follows:
+-- locations\/ LOCATION_ID
+itlParent :: Lens' InfoTypesList (Maybe Text)
+itlParent
+  = lens _itlParent (\ s a -> s{_itlParent = a})
 
 -- | V1 error format.
 itlXgafv :: Lens' InfoTypesList (Maybe Xgafv)
 itlXgafv = lens _itlXgafv (\ s a -> s{_itlXgafv = a})
 
--- | Optional BCP-47 language code for localized infoType friendly names. If
--- omitted, or if localized strings are not available, en-US strings will
--- be returned.
+-- | BCP-47 language code for localized infoType friendly names. If omitted,
+-- or if localized strings are not available, en-US strings will be
+-- returned.
 itlLanguageCode :: Lens' InfoTypesList (Maybe Text)
 itlLanguageCode
   = lens _itlLanguageCode
@@ -141,11 +159,17 @@ itlUploadType
   = lens _itlUploadType
       (\ s a -> s{_itlUploadType = a})
 
--- | Optional filter to only return infoTypes supported by certain parts of
--- the API. Defaults to supported_by=INSPECT.
+-- | filter to only return infoTypes supported by certain parts of the API.
+-- Defaults to supported_by=INSPECT.
 itlFilter :: Lens' InfoTypesList (Maybe Text)
 itlFilter
   = lens _itlFilter (\ s a -> s{_itlFilter = a})
+
+-- | Deprecated. This field has no effect.
+itlLocationId :: Lens' InfoTypesList (Maybe Text)
+itlLocationId
+  = lens _itlLocationId
+      (\ s a -> s{_itlLocationId = a})
 
 -- | JSONP
 itlCallback :: Lens' InfoTypesList (Maybe Text)
@@ -158,10 +182,12 @@ instance GoogleRequest InfoTypesList where
         type Scopes InfoTypesList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient InfoTypesList'{..}
-          = go _itlXgafv _itlLanguageCode _itlUploadProtocol
+          = go _itlParent _itlXgafv _itlLanguageCode
+              _itlUploadProtocol
               _itlAccessToken
               _itlUploadType
               _itlFilter
+              _itlLocationId
               _itlCallback
               (Just AltJSON)
               dLPService

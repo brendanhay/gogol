@@ -38,8 +38,8 @@ module Network.Google.Resource.Calendar.CalendarList.Update
     , cluColorRgbFormat
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.update@ method which the
 -- 'CalendarListUpdate' request conforms to.
@@ -60,8 +60,8 @@ type CalendarListUpdateResource =
 -- /See:/ 'calendarListUpdate' smart constructor.
 data CalendarListUpdate =
   CalendarListUpdate'
-    { _cluCalendarId     :: !Text
-    , _cluPayload        :: !CalendarListEntry
+    { _cluCalendarId :: !Text
+    , _cluPayload :: !CalendarListEntry
     , _cluColorRgbFormat :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

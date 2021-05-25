@@ -23,7 +23,7 @@
 -- Search Catalog resources that consumers have access to, within the scope
 -- of the consumer cloud resource hierarchy context.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog API Reference> for @cloudprivatecatalog.organizations.catalogs.search@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog API Reference> for @cloudprivatecatalog.organizations.catalogs.search@.
 module Network.Google.Resource.CloudPrivateCatalog.Organizations.Catalogs.Search
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudPrivateCatalog.Organizations.Catalogs.Search
     , ocsCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalog.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalog.organizations.catalogs.search@ method which the
 -- 'OrganizationsCatalogsSearch' request conforms to.
@@ -72,15 +72,15 @@ type OrganizationsCatalogsSearchResource =
 -- /See:/ 'organizationsCatalogsSearch' smart constructor.
 data OrganizationsCatalogsSearch =
   OrganizationsCatalogsSearch'
-    { _ocsXgafv          :: !(Maybe Xgafv)
+    { _ocsXgafv :: !(Maybe Xgafv)
     , _ocsUploadProtocol :: !(Maybe Text)
-    , _ocsAccessToken    :: !(Maybe Text)
-    , _ocsUploadType     :: !(Maybe Text)
-    , _ocsResource       :: !Text
-    , _ocsQuery          :: !(Maybe Text)
-    , _ocsPageToken      :: !(Maybe Text)
-    , _ocsPageSize       :: !(Maybe (Textual Int32))
-    , _ocsCallback       :: !(Maybe Text)
+    , _ocsAccessToken :: !(Maybe Text)
+    , _ocsUploadType :: !(Maybe Text)
+    , _ocsResource :: !Text
+    , _ocsQuery :: !(Maybe Text)
+    , _ocsPageToken :: !(Maybe Text)
+    , _ocsPageSize :: !(Maybe (Textual Int32))
+    , _ocsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

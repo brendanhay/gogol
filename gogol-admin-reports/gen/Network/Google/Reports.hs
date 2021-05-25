@@ -13,10 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Fetches reports for the administrators of G Suite customers about the
--- usage, collaboration, security, and risk for their users.
+-- Admin SDK lets administrators of enterprise domains to view and manage
+-- resources like user, groups etc. It also provides audit and usage
+-- reports of domain.
 --
--- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference>
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference>
 module Network.Google.Reports
     (
     -- * Service Configuration
@@ -51,6 +52,9 @@ module Network.Google.Reports
 
     -- * Types
 
+    -- ** ActivitiesListApplicationName
+    , ActivitiesListApplicationName (..)
+
     -- ** UsageReportParametersItem
     , UsageReportParametersItem
     , usageReportParametersItem
@@ -60,6 +64,22 @@ module Network.Google.Reports
     , urpiStringValue
     , urpiName
     , urpiMsgValue
+
+    -- ** ActivityEventsItemParametersItemMultiMessageValueItem
+    , ActivityEventsItemParametersItemMultiMessageValueItem
+    , activityEventsItemParametersItemMultiMessageValueItem
+    , aeipimmviParameter
+
+    -- ** NestedParameter
+    , NestedParameter
+    , nestedParameter
+    , npBoolValue
+    , npIntValue
+    , npValue
+    , npMultiIntValue
+    , npMultiBoolValue
+    , npName
+    , npMultiValue
 
     -- ** ActivityId
     , ActivityId
@@ -114,6 +134,9 @@ module Network.Google.Reports
     , uParameters
     , uEntity
 
+    -- ** EntityUsageReportsGetEntityType
+    , EntityUsageReportsGetEntityType (..)
+
     -- ** UsageReportsWarningsItemDataItem
     , UsageReportsWarningsItemDataItem
     , usageReportsWarningsItemDataItem
@@ -134,10 +157,16 @@ module Network.Google.Reports
     , aeiParameters
     , aeiType
 
+    -- ** ActivitiesWatchApplicationName
+    , ActivitiesWatchApplicationName (..)
+
     -- ** ChannelParams
     , ChannelParams
     , channelParams
     , cpAddtional
+
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** Activity
     , Activity
@@ -163,11 +192,18 @@ module Network.Google.Reports
     , ActivityEventsItemParametersItem
     , activityEventsItemParametersItem
     , aeipiBoolValue
+    , aeipiMessageValue
     , aeipiIntValue
     , aeipiValue
     , aeipiMultiIntValue
+    , aeipiMultiMessageValue
     , aeipiName
     , aeipiMultiValue
+
+    -- ** ActivityEventsItemParametersItemMessageValue
+    , ActivityEventsItemParametersItemMessageValue
+    , activityEventsItemParametersItemMessageValue
+    , aeipimvParameter
 
     -- ** ActivityActor
     , ActivityActor
@@ -176,22 +212,25 @@ module Network.Google.Reports
     , aaCallerType
     , aaProFileId
     , aaKey
+
+    -- ** EntityUsageReportsGetEntityKey
+    , EntityUsageReportsGetEntityKey (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Reports.Types
-import           Network.Google.Resource.Admin.Channels.Stop
-import           Network.Google.Resource.Reports.Activities.List
-import           Network.Google.Resource.Reports.Activities.Watch
-import           Network.Google.Resource.Reports.CustomerUsageReports.Get
-import           Network.Google.Resource.Reports.EntityUsageReports.Get
-import           Network.Google.Resource.Reports.UserUsageReport.Get
+import Network.Google.Prelude
+import Network.Google.Reports.Types
+import Network.Google.Resource.Admin.Channels.Stop
+import Network.Google.Resource.Reports.Activities.List
+import Network.Google.Resource.Reports.Activities.Watch
+import Network.Google.Resource.Reports.CustomerUsageReports.Get
+import Network.Google.Resource.Reports.EntityUsageReports.Get
+import Network.Google.Resource.Reports.UserUsageReport.Get
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Admin Reports API service.
+-- | Represents the entirety of the methods and resources available for the Admin SDK API service.
 type ReportsAPI =
      ChannelsStopResource :<|> ActivitiesListResource :<|>
        ActivitiesWatchResource

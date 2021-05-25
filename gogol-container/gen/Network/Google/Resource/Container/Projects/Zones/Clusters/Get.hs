@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     , pzcgCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.get@ method which the
 -- 'ProjectsZonesClustersGet' request conforms to.
@@ -70,15 +70,15 @@ type ProjectsZonesClustersGetResource =
 -- /See:/ 'projectsZonesClustersGet' smart constructor.
 data ProjectsZonesClustersGet =
   ProjectsZonesClustersGet'
-    { _pzcgXgafv          :: !(Maybe Xgafv)
+    { _pzcgXgafv :: !(Maybe Xgafv)
     , _pzcgUploadProtocol :: !(Maybe Text)
-    , _pzcgAccessToken    :: !(Maybe Text)
-    , _pzcgUploadType     :: !(Maybe Text)
-    , _pzcgZone           :: !Text
-    , _pzcgName           :: !(Maybe Text)
-    , _pzcgClusterId      :: !Text
-    , _pzcgProjectId      :: !Text
-    , _pzcgCallback       :: !(Maybe Text)
+    , _pzcgAccessToken :: !(Maybe Text)
+    , _pzcgUploadType :: !(Maybe Text)
+    , _pzcgZone :: !Text
+    , _pzcgName :: !(Maybe Text)
+    , _pzcgClusterId :: !Text
+    , _pzcgProjectId :: !Text
+    , _pzcgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -147,13 +147,14 @@ pzcgUploadType
       (\ s a -> s{_pzcgUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcgZone :: Lens' ProjectsZonesClustersGet Text
 pzcgZone = lens _pzcgZone (\ s a -> s{_pzcgZone = a})
 
 -- | The name (project, location, cluster) of the cluster to retrieve.
--- Specified in the format \'projects\/*\/locations\/*\/clusters\/*\'.
+-- Specified in the format \`projects\/*\/locations\/*\/clusters\/*\`.
 pzcgName :: Lens' ProjectsZonesClustersGet (Maybe Text)
 pzcgName = lens _pzcgName (\ s a -> s{_pzcgName = a})
 

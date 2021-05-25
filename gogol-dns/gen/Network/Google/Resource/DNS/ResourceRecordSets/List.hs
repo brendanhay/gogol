@@ -22,7 +22,7 @@
 --
 -- Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.resourceRecordSets.list@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.resourceRecordSets.list@.
 module Network.Google.Resource.DNS.ResourceRecordSets.List
     (
     -- * REST Resource
@@ -33,16 +33,21 @@ module Network.Google.Resource.DNS.ResourceRecordSets.List
     , ResourceRecordSetsList
 
     -- * Request Lenses
+    , rrslXgafv
+    , rrslUploadProtocol
     , rrslProject
+    , rrslAccessToken
+    , rrslUploadType
     , rrslName
     , rrslPageToken
     , rrslType
     , rrslManagedZone
     , rrslMaxResults
+    , rrslCallback
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.resourceRecordSets.list@ method which the
 -- 'ResourceRecordSetsList' request conforms to.
@@ -54,24 +59,35 @@ type ResourceRecordSetsListResource =
              "managedZones" :>
                Capture "managedZone" Text :>
                  "rrsets" :>
-                   QueryParam "name" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "type" Text :>
-                         QueryParam "maxResults" (Textual Int32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ResourceRecordSetsListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "type" Text :>
+                                 QueryParam "maxResults" (Textual Int32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON]
+                                         ResourceRecordSetsListResponse
 
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
 -- /See:/ 'resourceRecordSetsList' smart constructor.
 data ResourceRecordSetsList =
   ResourceRecordSetsList'
-    { _rrslProject     :: !Text
-    , _rrslName        :: !(Maybe Text)
-    , _rrslPageToken   :: !(Maybe Text)
-    , _rrslType        :: !(Maybe Text)
+    { _rrslXgafv :: !(Maybe Xgafv)
+    , _rrslUploadProtocol :: !(Maybe Text)
+    , _rrslProject :: !Text
+    , _rrslAccessToken :: !(Maybe Text)
+    , _rrslUploadType :: !(Maybe Text)
+    , _rrslName :: !(Maybe Text)
+    , _rrslPageToken :: !(Maybe Text)
+    , _rrslType :: !(Maybe Text)
     , _rrslManagedZone :: !Text
-    , _rrslMaxResults  :: !(Maybe (Textual Int32))
+    , _rrslMaxResults :: !(Maybe (Textual Int32))
+    , _rrslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -80,7 +96,15 @@ data ResourceRecordSetsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rrslXgafv'
+--
+-- * 'rrslUploadProtocol'
+--
 -- * 'rrslProject'
+--
+-- * 'rrslAccessToken'
+--
+-- * 'rrslUploadType'
 --
 -- * 'rrslName'
 --
@@ -91,25 +115,55 @@ data ResourceRecordSetsList =
 -- * 'rrslManagedZone'
 --
 -- * 'rrslMaxResults'
+--
+-- * 'rrslCallback'
 resourceRecordSetsList
     :: Text -- ^ 'rrslProject'
     -> Text -- ^ 'rrslManagedZone'
     -> ResourceRecordSetsList
 resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
   ResourceRecordSetsList'
-    { _rrslProject = pRrslProject_
+    { _rrslXgafv = Nothing
+    , _rrslUploadProtocol = Nothing
+    , _rrslProject = pRrslProject_
+    , _rrslAccessToken = Nothing
+    , _rrslUploadType = Nothing
     , _rrslName = Nothing
     , _rrslPageToken = Nothing
     , _rrslType = Nothing
     , _rrslManagedZone = pRrslManagedZone_
     , _rrslMaxResults = Nothing
+    , _rrslCallback = Nothing
     }
 
+
+-- | V1 error format.
+rrslXgafv :: Lens' ResourceRecordSetsList (Maybe Xgafv)
+rrslXgafv
+  = lens _rrslXgafv (\ s a -> s{_rrslXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rrslUploadProtocol :: Lens' ResourceRecordSetsList (Maybe Text)
+rrslUploadProtocol
+  = lens _rrslUploadProtocol
+      (\ s a -> s{_rrslUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 rrslProject :: Lens' ResourceRecordSetsList Text
 rrslProject
   = lens _rrslProject (\ s a -> s{_rrslProject = a})
+
+-- | OAuth access token.
+rrslAccessToken :: Lens' ResourceRecordSetsList (Maybe Text)
+rrslAccessToken
+  = lens _rrslAccessToken
+      (\ s a -> s{_rrslAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rrslUploadType :: Lens' ResourceRecordSetsList (Maybe Text)
+rrslUploadType
+  = lens _rrslUploadType
+      (\ s a -> s{_rrslUploadType = a})
 
 -- | Restricts the list to return only records with this fully qualified
 -- domain name.
@@ -143,6 +197,11 @@ rrslMaxResults
       (\ s a -> s{_rrslMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+rrslCallback :: Lens' ResourceRecordSetsList (Maybe Text)
+rrslCallback
+  = lens _rrslCallback (\ s a -> s{_rrslCallback = a})
+
 instance GoogleRequest ResourceRecordSetsList where
         type Rs ResourceRecordSetsList =
              ResourceRecordSetsListResponse
@@ -152,10 +211,15 @@ instance GoogleRequest ResourceRecordSetsList where
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ResourceRecordSetsList'{..}
-          = go _rrslProject _rrslManagedZone _rrslName
+          = go _rrslProject _rrslManagedZone _rrslXgafv
+              _rrslUploadProtocol
+              _rrslAccessToken
+              _rrslUploadType
+              _rrslName
               _rrslPageToken
               _rrslType
               _rrslMaxResults
+              _rrslCallback
               (Just AltJSON)
               dNSService
           where go

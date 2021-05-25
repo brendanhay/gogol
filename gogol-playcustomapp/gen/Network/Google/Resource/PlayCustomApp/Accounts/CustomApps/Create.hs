@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create and publish a new custom app.
+-- Creates a new custom app.
 --
--- /See:/ <https://developers.google.com/android/work/play/custom-app-api Google Play Custom App Publishing API Reference> for @playcustomapp.accounts.customApps.create@.
+-- /See:/ <https://developers.google.com/android/work/play/custom-app-api/ Google Play Custom App Publishing API Reference> for @playcustomapp.accounts.customApps.create@.
 module Network.Google.Resource.PlayCustomApp.Accounts.CustomApps.Create
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.PlayCustomApp.Accounts.CustomApps.Create
     , AccountsCustomAppsCreate
 
     -- * Request Lenses
+    , acacXgafv
+    , acacUploadProtocol
+    , acacAccessToken
+    , acacUploadType
     , acacPayload
     , acacAccount
+    , acacCallback
     ) where
 
-import           Network.Google.PlayCustomApp.Types
-import           Network.Google.Prelude
+import Network.Google.PlayCustomApp.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @playcustomapp.accounts.customApps.create@ method which the
 -- 'AccountsCustomAppsCreate' request conforms to.
@@ -48,8 +53,13 @@ type AccountsCustomAppsCreateResource =
          "accounts" :>
            Capture "account" (Textual Int64) :>
              "customApps" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] CustomApp :> Post '[JSON] CustomApp
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CustomApp :> Post '[JSON] CustomApp
        :<|>
        "upload" :>
          "playcustomapp" :>
@@ -57,18 +67,28 @@ type AccountsCustomAppsCreateResource =
              "accounts" :>
                Capture "account" (Textual Int64) :>
                  "customApps" :>
-                   QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" Multipart :>
-                       MultipartRelated '[JSON] CustomApp :>
-                         Post '[JSON] CustomApp
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               QueryParam "uploadType" Multipart :>
+                                 MultipartRelated '[JSON] CustomApp :>
+                                   Post '[JSON] CustomApp
 
--- | Create and publish a new custom app.
+-- | Creates a new custom app.
 --
 -- /See:/ 'accountsCustomAppsCreate' smart constructor.
 data AccountsCustomAppsCreate =
   AccountsCustomAppsCreate'
-    { _acacPayload :: !CustomApp
+    { _acacXgafv :: !(Maybe Xgafv)
+    , _acacUploadProtocol :: !(Maybe Text)
+    , _acacAccessToken :: !(Maybe Text)
+    , _acacUploadType :: !(Maybe Text)
+    , _acacPayload :: !CustomApp
     , _acacAccount :: !(Textual Int64)
+    , _acacCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,17 +97,57 @@ data AccountsCustomAppsCreate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'acacXgafv'
+--
+-- * 'acacUploadProtocol'
+--
+-- * 'acacAccessToken'
+--
+-- * 'acacUploadType'
+--
 -- * 'acacPayload'
 --
 -- * 'acacAccount'
+--
+-- * 'acacCallback'
 accountsCustomAppsCreate
     :: CustomApp -- ^ 'acacPayload'
     -> Int64 -- ^ 'acacAccount'
     -> AccountsCustomAppsCreate
 accountsCustomAppsCreate pAcacPayload_ pAcacAccount_ =
   AccountsCustomAppsCreate'
-    {_acacPayload = pAcacPayload_, _acacAccount = _Coerce # pAcacAccount_}
+    { _acacXgafv = Nothing
+    , _acacUploadProtocol = Nothing
+    , _acacAccessToken = Nothing
+    , _acacUploadType = Nothing
+    , _acacPayload = pAcacPayload_
+    , _acacAccount = _Coerce # pAcacAccount_
+    , _acacCallback = Nothing
+    }
 
+
+-- | V1 error format.
+acacXgafv :: Lens' AccountsCustomAppsCreate (Maybe Xgafv)
+acacXgafv
+  = lens _acacXgafv (\ s a -> s{_acacXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acacUploadProtocol :: Lens' AccountsCustomAppsCreate (Maybe Text)
+acacUploadProtocol
+  = lens _acacUploadProtocol
+      (\ s a -> s{_acacUploadProtocol = a})
+
+-- | OAuth access token.
+acacAccessToken :: Lens' AccountsCustomAppsCreate (Maybe Text)
+acacAccessToken
+  = lens _acacAccessToken
+      (\ s a -> s{_acacAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acacUploadType :: Lens' AccountsCustomAppsCreate (Maybe Text)
+acacUploadType
+  = lens _acacUploadType
+      (\ s a -> s{_acacUploadType = a})
 
 -- | Multipart request metadata.
 acacPayload :: Lens' AccountsCustomAppsCreate CustomApp
@@ -100,12 +160,22 @@ acacAccount
   = lens _acacAccount (\ s a -> s{_acacAccount = a}) .
       _Coerce
 
+-- | JSONP
+acacCallback :: Lens' AccountsCustomAppsCreate (Maybe Text)
+acacCallback
+  = lens _acacCallback (\ s a -> s{_acacCallback = a})
+
 instance GoogleRequest AccountsCustomAppsCreate where
         type Rs AccountsCustomAppsCreate = CustomApp
         type Scopes AccountsCustomAppsCreate =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AccountsCustomAppsCreate'{..}
-          = go _acacAccount (Just AltJSON) _acacPayload
+          = go _acacAccount _acacXgafv _acacUploadProtocol
+              _acacAccessToken
+              _acacUploadType
+              _acacCallback
+              (Just AltJSON)
+              _acacPayload
               playCustomAppService
           where go :<|> _
                   = buildClient
@@ -121,7 +191,12 @@ instance GoogleRequest
              Scopes AccountsCustomAppsCreate
         requestClient
           (MediaUpload AccountsCustomAppsCreate'{..} body)
-          = go _acacAccount (Just AltJSON) (Just Multipart)
+          = go _acacAccount _acacXgafv _acacUploadProtocol
+              _acacAccessToken
+              _acacUploadType
+              _acacCallback
+              (Just AltJSON)
+              (Just Multipart)
               _acacPayload
               body
               playCustomAppService

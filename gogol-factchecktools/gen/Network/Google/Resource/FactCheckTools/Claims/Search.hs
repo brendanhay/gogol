@@ -47,8 +47,8 @@ module Network.Google.Resource.FactCheckTools.Claims.Search
     , csCallback
     ) where
 
-import           Network.Google.FactCheckTools.Types
-import           Network.Google.Prelude
+import Network.Google.FactCheckTools.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @factchecktools.claims.search@ method which the
 -- 'ClaimsSearch' request conforms to.
@@ -76,18 +76,18 @@ type ClaimsSearchResource =
 -- /See:/ 'claimsSearch' smart constructor.
 data ClaimsSearch =
   ClaimsSearch'
-    { _csXgafv                     :: !(Maybe Xgafv)
-    , _csLanguageCode              :: !(Maybe Text)
-    , _csUploadProtocol            :: !(Maybe Text)
-    , _csOffSet                    :: !(Maybe (Textual Int32))
-    , _csMaxAgeDays                :: !(Maybe (Textual Int32))
-    , _csAccessToken               :: !(Maybe Text)
-    , _csUploadType                :: !(Maybe Text)
+    { _csXgafv :: !(Maybe Xgafv)
+    , _csLanguageCode :: !(Maybe Text)
+    , _csUploadProtocol :: !(Maybe Text)
+    , _csOffSet :: !(Maybe (Textual Int32))
+    , _csMaxAgeDays :: !(Maybe (Textual Int32))
+    , _csAccessToken :: !(Maybe Text)
+    , _csUploadType :: !(Maybe Text)
     , _csReviewPublisherSiteFilter :: !(Maybe Text)
-    , _csQuery                     :: !(Maybe Text)
-    , _csPageToken                 :: !(Maybe Text)
-    , _csPageSize                  :: !(Maybe (Textual Int32))
-    , _csCallback                  :: !(Maybe Text)
+    , _csQuery :: !(Maybe Text)
+    , _csPageToken :: !(Maybe Text)
+    , _csPageSize :: !(Maybe (Textual Int32))
+    , _csCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

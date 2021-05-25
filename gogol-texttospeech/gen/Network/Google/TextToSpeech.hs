@@ -99,10 +99,10 @@ module Network.Google.TextToSpeech
     , AudioConfigAudioEncoding (..)
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.TextToSpeech.Text.Synthesize
-import           Network.Google.Resource.TextToSpeech.Voices.List
-import           Network.Google.TextToSpeech.Types
+import Network.Google.Prelude
+import Network.Google.Resource.TextToSpeech.Text.Synthesize
+import Network.Google.Resource.TextToSpeech.Voices.List
+import Network.Google.TextToSpeech.Types
 
 {- $resources
 TODO

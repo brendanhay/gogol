@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Organizations.StoredInfoTypes.Get
     , ositgCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.organizations.storedInfoTypes.get@ method which the
 -- 'OrganizationsStoredInfoTypesGet' request conforms to.
@@ -66,12 +66,12 @@ type OrganizationsStoredInfoTypesGetResource =
 -- /See:/ 'organizationsStoredInfoTypesGet' smart constructor.
 data OrganizationsStoredInfoTypesGet =
   OrganizationsStoredInfoTypesGet'
-    { _ositgXgafv          :: !(Maybe Xgafv)
+    { _ositgXgafv :: !(Maybe Xgafv)
     , _ositgUploadProtocol :: !(Maybe Text)
-    , _ositgAccessToken    :: !(Maybe Text)
-    , _ositgUploadType     :: !(Maybe Text)
-    , _ositgName           :: !Text
-    , _ositgCallback       :: !(Maybe Text)
+    , _ositgAccessToken :: !(Maybe Text)
+    , _ositgUploadType :: !(Maybe Text)
+    , _ositgName :: !Text
+    , _ositgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -128,8 +128,9 @@ ositgUploadType
   = lens _ositgUploadType
       (\ s a -> s{_ositgUploadType = a})
 
--- | Resource name of the organization and storedInfoType to be read, for
--- example \`organizations\/433245324\/storedInfoTypes\/432452342\` or
+-- | Required. Resource name of the organization and storedInfoType to be
+-- read, for example
+-- \`organizations\/433245324\/storedInfoTypes\/432452342\` or
 -- projects\/project-id\/storedInfoTypes\/432452342.
 ositgName :: Lens' OrganizationsStoredInfoTypesGet Text
 ositgName

@@ -36,10 +36,11 @@ module Network.Google.Resource.Storage.Buckets.LockRetentionPolicy
     , blrpIfMetagenerationMatch
     , blrpBucket
     , blrpUserProject
+    , blrpProvisionalUserProject
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.lockRetentionPolicy@ method which the
 -- 'BucketsLockRetentionPolicy' request conforms to.
@@ -51,7 +52,8 @@ type BucketsLockRetentionPolicyResource =
              "lockRetentionPolicy" :>
                QueryParam "ifMetagenerationMatch" (Textual Int64) :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :> Post '[JSON] Bucket
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :> Post '[JSON] Bucket
 
 -- | Locks retention policy on a bucket.
 --
@@ -59,8 +61,9 @@ type BucketsLockRetentionPolicyResource =
 data BucketsLockRetentionPolicy =
   BucketsLockRetentionPolicy'
     { _blrpIfMetagenerationMatch :: !(Textual Int64)
-    , _blrpBucket                :: !Text
-    , _blrpUserProject           :: !(Maybe Text)
+    , _blrpBucket :: !Text
+    , _blrpUserProject :: !(Maybe Text)
+    , _blrpProvisionalUserProject :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -74,6 +77,8 @@ data BucketsLockRetentionPolicy =
 -- * 'blrpBucket'
 --
 -- * 'blrpUserProject'
+--
+-- * 'blrpProvisionalUserProject'
 bucketsLockRetentionPolicy
     :: Int64 -- ^ 'blrpIfMetagenerationMatch'
     -> Text -- ^ 'blrpBucket'
@@ -83,6 +88,7 @@ bucketsLockRetentionPolicy pBlrpIfMetagenerationMatch_ pBlrpBucket_ =
     { _blrpIfMetagenerationMatch = _Coerce # pBlrpIfMetagenerationMatch_
     , _blrpBucket = pBlrpBucket_
     , _blrpUserProject = Nothing
+    , _blrpProvisionalUserProject = Nothing
     }
 
 
@@ -106,6 +112,13 @@ blrpUserProject
   = lens _blrpUserProject
       (\ s a -> s{_blrpUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+blrpProvisionalUserProject :: Lens' BucketsLockRetentionPolicy (Maybe Text)
+blrpProvisionalUserProject
+  = lens _blrpProvisionalUserProject
+      (\ s a -> s{_blrpProvisionalUserProject = a})
+
 instance GoogleRequest BucketsLockRetentionPolicy
          where
         type Rs BucketsLockRetentionPolicy = Bucket
@@ -116,6 +129,7 @@ instance GoogleRequest BucketsLockRetentionPolicy
         requestClient BucketsLockRetentionPolicy'{..}
           = go _blrpBucket (Just _blrpIfMetagenerationMatch)
               _blrpUserProject
+              _blrpProvisionalUserProject
               (Just AltJSON)
               storageService
           where go

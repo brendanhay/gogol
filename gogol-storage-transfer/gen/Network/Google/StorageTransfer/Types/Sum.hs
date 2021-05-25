@@ -16,7 +16,7 @@
 --
 module Network.Google.StorageTransfer.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Status of the transfer operation.
 data TransferOperationStatus
@@ -38,6 +38,9 @@ data TransferOperationStatus
     | Aborted
       -- ^ @ABORTED@
       -- Aborted by the user.
+    | Queued
+      -- ^ @QUEUED@
+      -- Temporarily delayed by the system. No user action is required.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TransferOperationStatus
@@ -50,6 +53,7 @@ instance FromHttpApiData TransferOperationStatus where
         "SUCCESS" -> Right Success
         "FAILED" -> Right Failed
         "ABORTED" -> Right Aborted
+        "QUEUED" -> Right Queued
         x -> Left ("Unable to parse TransferOperationStatus from: " <> x)
 
 instance ToHttpApiData TransferOperationStatus where
@@ -60,11 +64,48 @@ instance ToHttpApiData TransferOperationStatus where
         Success -> "SUCCESS"
         Failed -> "FAILED"
         Aborted -> "ABORTED"
+        Queued -> "QUEUED"
 
 instance FromJSON TransferOperationStatus where
     parseJSON = parseJSONText "TransferOperationStatus"
 
 instance ToJSON TransferOperationStatus where
+    toJSON = toJSONText
+
+-- | Required. The desired format of the notification message payloads.
+data NotificationConfigPayloadFormat
+    = PayloadFormatUnspecified
+      -- ^ @PAYLOAD_FORMAT_UNSPECIFIED@
+      -- Illegal value, to avoid allowing a default.
+    | None
+      -- ^ @NONE@
+      -- No payload is included with the notification.
+    | JSON
+      -- ^ @JSON@
+      -- \`TransferOperation\` is [formatted as a JSON
+      -- response](https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json),
+      -- in application\/json.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NotificationConfigPayloadFormat
+
+instance FromHttpApiData NotificationConfigPayloadFormat where
+    parseQueryParam = \case
+        "PAYLOAD_FORMAT_UNSPECIFIED" -> Right PayloadFormatUnspecified
+        "NONE" -> Right None
+        "JSON" -> Right JSON
+        x -> Left ("Unable to parse NotificationConfigPayloadFormat from: " <> x)
+
+instance ToHttpApiData NotificationConfigPayloadFormat where
+    toQueryParam = \case
+        PayloadFormatUnspecified -> "PAYLOAD_FORMAT_UNSPECIFIED"
+        None -> "NONE"
+        JSON -> "JSON"
+
+instance FromJSON NotificationConfigPayloadFormat where
+    parseJSON = parseJSONText "NotificationConfigPayloadFormat"
+
+instance ToJSON NotificationConfigPayloadFormat where
     toJSON = toJSONText
 
 -- | V1 error format.
@@ -96,22 +137,60 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
+data NotificationConfigEventTypesItem
+    = EventTypeUnspecified
+      -- ^ @EVENT_TYPE_UNSPECIFIED@
+      -- Illegal value, to avoid allowing a default.
+    | TransferOperationSuccess
+      -- ^ @TRANSFER_OPERATION_SUCCESS@
+      -- \`TransferOperation\` completed with status SUCCESS.
+    | TransferOperationFailed
+      -- ^ @TRANSFER_OPERATION_FAILED@
+      -- \`TransferOperation\` completed with status FAILED.
+    | TransferOperationAborted
+      -- ^ @TRANSFER_OPERATION_ABORTED@
+      -- \`TransferOperation\` completed with status ABORTED.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable NotificationConfigEventTypesItem
+
+instance FromHttpApiData NotificationConfigEventTypesItem where
+    parseQueryParam = \case
+        "EVENT_TYPE_UNSPECIFIED" -> Right EventTypeUnspecified
+        "TRANSFER_OPERATION_SUCCESS" -> Right TransferOperationSuccess
+        "TRANSFER_OPERATION_FAILED" -> Right TransferOperationFailed
+        "TRANSFER_OPERATION_ABORTED" -> Right TransferOperationAborted
+        x -> Left ("Unable to parse NotificationConfigEventTypesItem from: " <> x)
+
+instance ToHttpApiData NotificationConfigEventTypesItem where
+    toQueryParam = \case
+        EventTypeUnspecified -> "EVENT_TYPE_UNSPECIFIED"
+        TransferOperationSuccess -> "TRANSFER_OPERATION_SUCCESS"
+        TransferOperationFailed -> "TRANSFER_OPERATION_FAILED"
+        TransferOperationAborted -> "TRANSFER_OPERATION_ABORTED"
+
+instance FromJSON NotificationConfigEventTypesItem where
+    parseJSON = parseJSONText "NotificationConfigEventTypesItem"
+
+instance ToJSON NotificationConfigEventTypesItem where
+    toJSON = toJSONText
+
 -- | Status of the job. This value MUST be specified for
--- \`CreateTransferJobRequests\`. NOTE: The effect of the new job status
--- takes place during a subsequent job run. For example, if you change the
--- job status from \`ENABLED\` to \`DISABLED\`, and an operation spawned by
--- the transfer is running, the status change would not affect the current
--- operation.
+-- \`CreateTransferJobRequests\`. **Note:** The effect of the new job
+-- status takes place during a subsequent job run. For example, if you
+-- change the job status from ENABLED to DISABLED, and an operation spawned
+-- by the transfer is running, the status change would not affect the
+-- current operation.
 data TransferJobStatus
     = TJSStatusUnspecified
       -- ^ @STATUS_UNSPECIFIED@
       -- Zero is an illegal value.
     | TJSEnabled
       -- ^ @ENABLED@
-      -- New transfers will be performed based on the schedule.
+      -- New transfers are performed based on the schedule.
     | TJSDisabled
       -- ^ @DISABLED@
-      -- New transfers will not be scheduled.
+      -- New transfers are not scheduled.
     | TJSDeleted
       -- ^ @DELETED@
       -- This is a soft delete state. After a transfer job is set to this state,
@@ -176,7 +255,7 @@ data ErrorSummaryErrorCode
       -- ^ @NOT_FOUND@
       -- Some requested entity (e.g., file or directory) was not found. Note to
       -- server developers: if a request is denied for an entire class of users,
-      -- such as gradual feature rollout or undocumented whitelist, \`NOT_FOUND\`
+      -- such as gradual feature rollout or undocumented allowlist, \`NOT_FOUND\`
       -- may be used. If a request is denied for some users within a class of
       -- users, such as user-based access control, \`PERMISSION_DENIED\` must be
       -- used. HTTP Mapping: 404 Not Found
@@ -210,11 +289,11 @@ data ErrorSummaryErrorCode
       -- Service implementors can use the following guidelines to decide between
       -- \`FAILED_PRECONDITION\`, \`ABORTED\`, and \`UNAVAILABLE\`: (a) Use
       -- \`UNAVAILABLE\` if the client can retry just the failing call. (b) Use
-      -- \`ABORTED\` if the client should retry at a higher level (e.g., when a
-      -- client-specified test-and-set fails, indicating the client should
-      -- restart a read-modify-write sequence). (c) Use \`FAILED_PRECONDITION\`
-      -- if the client should not retry until the system state has been
-      -- explicitly fixed. E.g., if an \"rmdir\" fails because the directory is
+      -- \`ABORTED\` if the client should retry at a higher level. For example,
+      -- when a client-specified test-and-set fails, indicating the client should
+      -- restart a read-modify-write sequence. (c) Use \`FAILED_PRECONDITION\` if
+      -- the client should not retry until the system state has been explicitly
+      -- fixed. For example, if an \"rmdir\" fails because the directory is
       -- non-empty, \`FAILED_PRECONDITION\` should be returned since the client
       -- should not retry unless the files are deleted from the directory. HTTP
       -- Mapping: 400 Bad Request

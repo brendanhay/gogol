@@ -22,7 +22,7 @@
 --
 -- Creates a new Catalog resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.create@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.create@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Create
     , ccCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.create@ method which the
 -- 'CatalogsCreate' request conforms to.
@@ -64,12 +64,12 @@ type CatalogsCreateResource =
 -- /See:/ 'catalogsCreate' smart constructor.
 data CatalogsCreate =
   CatalogsCreate'
-    { _ccXgafv          :: !(Maybe Xgafv)
+    { _ccXgafv :: !(Maybe Xgafv)
     , _ccUploadProtocol :: !(Maybe Text)
-    , _ccAccessToken    :: !(Maybe Text)
-    , _ccUploadType     :: !(Maybe Text)
-    , _ccPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    , _ccCallback       :: !(Maybe Text)
+    , _ccAccessToken :: !(Maybe Text)
+    , _ccUploadType :: !(Maybe Text)
+    , _ccPayload :: !GoogleCloudPrivatecatalogproducerV1beta1Catalog
+    , _ccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,7 +23,7 @@
 -- List all users that have access to the account along with Account and
 -- Container user access granted to each of them.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.user_permissions.list@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.user_permissions.list@.
 module Network.Google.Resource.TagManager.Accounts.UserPermissions.List
     (
     -- * REST Resource
@@ -35,11 +35,16 @@ module Network.Google.Resource.TagManager.Accounts.UserPermissions.List
 
     -- * Request Lenses
     , auplParent
+    , auplXgafv
+    , auplUploadProtocol
+    , auplAccessToken
+    , auplUploadType
     , auplPageToken
+    , auplCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.user_permissions.list@ method which the
 -- 'AccountsUserPermissionsList' request conforms to.
@@ -48,9 +53,14 @@ type AccountsUserPermissionsListResource =
        "v2" :>
          Capture "parent" Text :>
            "user_permissions" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] ListUserPermissionsResponse
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListUserPermissionsResponse
 
 -- | List all users that have access to the account along with Account and
 -- Container user access granted to each of them.
@@ -58,8 +68,13 @@ type AccountsUserPermissionsListResource =
 -- /See:/ 'accountsUserPermissionsList' smart constructor.
 data AccountsUserPermissionsList =
   AccountsUserPermissionsList'
-    { _auplParent    :: !Text
+    { _auplParent :: !Text
+    , _auplXgafv :: !(Maybe Xgafv)
+    , _auplUploadProtocol :: !(Maybe Text)
+    , _auplAccessToken :: !(Maybe Text)
+    , _auplUploadType :: !(Maybe Text)
     , _auplPageToken :: !(Maybe Text)
+    , _auplCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,13 +85,30 @@ data AccountsUserPermissionsList =
 --
 -- * 'auplParent'
 --
+-- * 'auplXgafv'
+--
+-- * 'auplUploadProtocol'
+--
+-- * 'auplAccessToken'
+--
+-- * 'auplUploadType'
+--
 -- * 'auplPageToken'
+--
+-- * 'auplCallback'
 accountsUserPermissionsList
     :: Text -- ^ 'auplParent'
     -> AccountsUserPermissionsList
 accountsUserPermissionsList pAuplParent_ =
   AccountsUserPermissionsList'
-    {_auplParent = pAuplParent_, _auplPageToken = Nothing}
+    { _auplParent = pAuplParent_
+    , _auplXgafv = Nothing
+    , _auplUploadProtocol = Nothing
+    , _auplAccessToken = Nothing
+    , _auplUploadType = Nothing
+    , _auplPageToken = Nothing
+    , _auplCallback = Nothing
+    }
 
 
 -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
@@ -84,11 +116,39 @@ auplParent :: Lens' AccountsUserPermissionsList Text
 auplParent
   = lens _auplParent (\ s a -> s{_auplParent = a})
 
+-- | V1 error format.
+auplXgafv :: Lens' AccountsUserPermissionsList (Maybe Xgafv)
+auplXgafv
+  = lens _auplXgafv (\ s a -> s{_auplXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+auplUploadProtocol :: Lens' AccountsUserPermissionsList (Maybe Text)
+auplUploadProtocol
+  = lens _auplUploadProtocol
+      (\ s a -> s{_auplUploadProtocol = a})
+
+-- | OAuth access token.
+auplAccessToken :: Lens' AccountsUserPermissionsList (Maybe Text)
+auplAccessToken
+  = lens _auplAccessToken
+      (\ s a -> s{_auplAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+auplUploadType :: Lens' AccountsUserPermissionsList (Maybe Text)
+auplUploadType
+  = lens _auplUploadType
+      (\ s a -> s{_auplUploadType = a})
+
 -- | Continuation token for fetching the next page of results.
 auplPageToken :: Lens' AccountsUserPermissionsList (Maybe Text)
 auplPageToken
   = lens _auplPageToken
       (\ s a -> s{_auplPageToken = a})
+
+-- | JSONP
+auplCallback :: Lens' AccountsUserPermissionsList (Maybe Text)
+auplCallback
+  = lens _auplCallback (\ s a -> s{_auplCallback = a})
 
 instance GoogleRequest AccountsUserPermissionsList
          where
@@ -97,7 +157,12 @@ instance GoogleRequest AccountsUserPermissionsList
         type Scopes AccountsUserPermissionsList =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
         requestClient AccountsUserPermissionsList'{..}
-          = go _auplParent _auplPageToken (Just AltJSON)
+          = go _auplParent _auplXgafv _auplUploadProtocol
+              _auplAccessToken
+              _auplUploadType
+              _auplPageToken
+              _auplCallback
+              (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

@@ -46,8 +46,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.Patch
     , pddpCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.patch@ method which the
 -- 'ProjectsDatabasesDocumentsPatch' request conforms to.
@@ -71,17 +71,17 @@ type ProjectsDatabasesDocumentsPatchResource =
 -- /See:/ 'projectsDatabasesDocumentsPatch' smart constructor.
 data ProjectsDatabasesDocumentsPatch =
   ProjectsDatabasesDocumentsPatch'
-    { _pddpXgafv                     :: !(Maybe Xgafv)
-    , _pddpUpdateMaskFieldPaths      :: !(Maybe [Text])
-    , _pddpUploadProtocol            :: !(Maybe Text)
-    , _pddpCurrentDocumentExists     :: !(Maybe Bool)
-    , _pddpAccessToken               :: !(Maybe Text)
-    , _pddpUploadType                :: !(Maybe Text)
-    , _pddpPayload                   :: !Document
+    { _pddpXgafv :: !(Maybe Xgafv)
+    , _pddpUpdateMaskFieldPaths :: !(Maybe [Text])
+    , _pddpUploadProtocol :: !(Maybe Text)
+    , _pddpCurrentDocumentExists :: !(Maybe Bool)
+    , _pddpAccessToken :: !(Maybe Text)
+    , _pddpUploadType :: !(Maybe Text)
+    , _pddpPayload :: !Document
     , _pddpCurrentDocumentUpdateTime :: !(Maybe DateTime')
-    , _pddpName                      :: !Text
-    , _pddpMaskFieldPaths            :: !(Maybe [Text])
-    , _pddpCallback                  :: !(Maybe Text)
+    , _pddpName :: !Text
+    , _pddpMaskFieldPaths :: !(Maybe [Text])
+    , _pddpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

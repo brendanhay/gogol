@@ -51,8 +51,8 @@ module Network.Google.Resource.RemoteBuildExecution.Blobs.BatchRead
     , bbrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.batchRead@ method which the
 -- 'BlobsBatchRead' request conforms to.
@@ -86,13 +86,13 @@ type BlobsBatchReadResource =
 -- /See:/ 'blobsBatchRead' smart constructor.
 data BlobsBatchRead =
   BlobsBatchRead'
-    { _bbrXgafv          :: !(Maybe Xgafv)
+    { _bbrXgafv :: !(Maybe Xgafv)
     , _bbrUploadProtocol :: !(Maybe Text)
-    , _bbrAccessToken    :: !(Maybe Text)
-    , _bbrUploadType     :: !(Maybe Text)
-    , _bbrPayload        :: !BuildBazelRemoteExecutionV2BatchReadBlobsRequest
-    , _bbrInstanceName   :: !Text
-    , _bbrCallback       :: !(Maybe Text)
+    , _bbrAccessToken :: !(Maybe Text)
+    , _bbrUploadType :: !(Maybe Text)
+    , _bbrPayload :: !BuildBazelRemoteExecutionV2BatchReadBlobsRequest
+    , _bbrInstanceName :: !Text
+    , _bbrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

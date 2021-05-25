@@ -24,9 +24,11 @@
 -- access control based on the type of action, and to assist with client
 -- debugging, the client MUST first upload the Action that produced the
 -- result, along with its Command, into the \`ContentAddressableStorage\`.
--- Errors: * \`INVALID_ARGUMENT\`: One or more arguments are invalid. *
--- \`FAILED_PRECONDITION\`: One or more errors occurred in updating the
--- action result, such as a missing command or action. *
+-- Server implementations MAY modify the
+-- \`UpdateActionResultRequest.action_result\` and return an equivalent
+-- value. Errors: * \`INVALID_ARGUMENT\`: One or more arguments are
+-- invalid. * \`FAILED_PRECONDITION\`: One or more errors occurred in
+-- updating the action result, such as a missing command or action. *
 -- \`RESOURCE_EXHAUSTED\`: There is insufficient storage space to add the
 -- entry to the cache.
 --
@@ -53,8 +55,8 @@ module Network.Google.Resource.RemoteBuildExecution.ActionResults.Update
     , aruCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RemoteBuildExecution.Types
+import Network.Google.Prelude
+import Network.Google.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actionResults.update@ method which the
 -- 'ActionResultsUpdate' request conforms to.
@@ -83,25 +85,27 @@ type ActionResultsUpdateResource =
 -- access control based on the type of action, and to assist with client
 -- debugging, the client MUST first upload the Action that produced the
 -- result, along with its Command, into the \`ContentAddressableStorage\`.
--- Errors: * \`INVALID_ARGUMENT\`: One or more arguments are invalid. *
--- \`FAILED_PRECONDITION\`: One or more errors occurred in updating the
--- action result, such as a missing command or action. *
+-- Server implementations MAY modify the
+-- \`UpdateActionResultRequest.action_result\` and return an equivalent
+-- value. Errors: * \`INVALID_ARGUMENT\`: One or more arguments are
+-- invalid. * \`FAILED_PRECONDITION\`: One or more errors occurred in
+-- updating the action result, such as a missing command or action. *
 -- \`RESOURCE_EXHAUSTED\`: There is insufficient storage space to add the
 -- entry to the cache.
 --
 -- /See:/ 'actionResultsUpdate' smart constructor.
 data ActionResultsUpdate =
   ActionResultsUpdate'
-    { _aruSizeBytes                  :: !(Textual Int64)
-    , _aruXgafv                      :: !(Maybe Xgafv)
-    , _aruHash                       :: !Text
-    , _aruUploadProtocol             :: !(Maybe Text)
-    , _aruAccessToken                :: !(Maybe Text)
-    , _aruUploadType                 :: !(Maybe Text)
-    , _aruPayload                    :: !BuildBazelRemoteExecutionV2ActionResult
+    { _aruSizeBytes :: !(Textual Int64)
+    , _aruXgafv :: !(Maybe Xgafv)
+    , _aruHash :: !Text
+    , _aruUploadProtocol :: !(Maybe Text)
+    , _aruAccessToken :: !(Maybe Text)
+    , _aruUploadType :: !(Maybe Text)
+    , _aruPayload :: !BuildBazelRemoteExecutionV2ActionResult
     , _aruResultsCachePolicyPriority :: !(Maybe (Textual Int32))
-    , _aruInstanceName               :: !Text
-    , _aruCallback                   :: !(Maybe Text)
+    , _aruInstanceName :: !Text
+    , _aruCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

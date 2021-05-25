@@ -49,8 +49,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.Devices.Operations.
     , edocCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.devices.operations.cancel@ method which the
 -- 'EnterprisesDevicesOperationsCancel' request conforms to.
@@ -77,12 +77,12 @@ type EnterprisesDevicesOperationsCancelResource =
 -- /See:/ 'enterprisesDevicesOperationsCancel' smart constructor.
 data EnterprisesDevicesOperationsCancel =
   EnterprisesDevicesOperationsCancel'
-    { _edocXgafv          :: !(Maybe Xgafv)
+    { _edocXgafv :: !(Maybe Xgafv)
     , _edocUploadProtocol :: !(Maybe Text)
-    , _edocAccessToken    :: !(Maybe Text)
-    , _edocUploadType     :: !(Maybe Text)
-    , _edocName           :: !Text
-    , _edocCallback       :: !(Maybe Text)
+    , _edocAccessToken :: !(Maybe Text)
+    , _edocUploadType :: !(Maybe Text)
+    , _edocName :: !Text
+    , _edocCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -46,8 +46,8 @@ module Network.Google.Resource.Script.Projects.UpdateContent
     , pucCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.updateContent@ method which the
 -- 'ProjectsUpdateContent' request conforms to.
@@ -73,13 +73,13 @@ type ProjectsUpdateContentResource =
 -- /See:/ 'projectsUpdateContent' smart constructor.
 data ProjectsUpdateContent =
   ProjectsUpdateContent'
-    { _pucXgafv          :: !(Maybe Xgafv)
+    { _pucXgafv :: !(Maybe Xgafv)
     , _pucUploadProtocol :: !(Maybe Text)
-    , _pucAccessToken    :: !(Maybe Text)
-    , _pucUploadType     :: !(Maybe Text)
-    , _pucPayload        :: !Content
-    , _pucScriptId       :: !Text
-    , _pucCallback       :: !(Maybe Text)
+    , _pucAccessToken :: !(Maybe Text)
+    , _pucUploadType :: !(Maybe Text)
+    , _pucPayload :: !Content
+    , _pucScriptId :: !Text
+    , _pucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

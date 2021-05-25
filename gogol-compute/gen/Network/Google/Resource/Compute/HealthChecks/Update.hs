@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.HealthChecks.Update
     , hcuPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.healthChecks.update@ method which the
 -- 'HealthChecksUpdate' request conforms to.
@@ -63,10 +63,10 @@ type HealthChecksUpdateResource =
 -- /See:/ 'healthChecksUpdate' smart constructor.
 data HealthChecksUpdate =
   HealthChecksUpdate'
-    { _hcuRequestId   :: !(Maybe Text)
+    { _hcuRequestId :: !(Maybe Text)
     , _hcuHealthCheck :: !Text
-    , _hcuProject     :: !Text
-    , _hcuPayload     :: !HealthCheck
+    , _hcuProject :: !Text
+    , _hcuPayload :: !HealthCheck
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

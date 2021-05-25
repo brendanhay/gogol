@@ -44,8 +44,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
     , ssctCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.sheets.copyTo@ method which the
 -- 'SpreadsheetsSheetsCopyTo' request conforms to.
@@ -70,14 +70,14 @@ type SpreadsheetsSheetsCopyToResource =
 -- /See:/ 'spreadsheetsSheetsCopyTo' smart constructor.
 data SpreadsheetsSheetsCopyTo =
   SpreadsheetsSheetsCopyTo'
-    { _ssctXgafv          :: !(Maybe Xgafv)
+    { _ssctXgafv :: !(Maybe Xgafv)
     , _ssctUploadProtocol :: !(Maybe Text)
-    , _ssctAccessToken    :: !(Maybe Text)
-    , _ssctSpreadsheetId  :: !Text
-    , _ssctUploadType     :: !(Maybe Text)
-    , _ssctPayload        :: !CopySheetToAnotherSpreadsheetRequest
-    , _ssctSheetId        :: !(Textual Int32)
-    , _ssctCallback       :: !(Maybe Text)
+    , _ssctAccessToken :: !(Maybe Text)
+    , _ssctSpreadsheetId :: !Text
+    , _ssctUploadType :: !(Maybe Text)
+    , _ssctPayload :: !CopySheetToAnotherSpreadsheetRequest
+    , _ssctSheetId :: !(Textual Int32)
+    , _ssctCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

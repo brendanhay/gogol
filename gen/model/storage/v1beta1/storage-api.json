@@ -20,7 +20,7 @@
   "description": "Lets you store and retrieve potentially-large, immutable data objects.",
   "discoveryVersion": "v1",
   "documentationLink": "https://developers.google.com/storage/docs/json_api/",
-  "etag": "\"Zkyw9ACJZUvcYmlFaKGChzhmtnE/dt1zHSfweiWpwzdGsqXwuJZqiD0\"",
+  "etag": "\"LYADMvHWYH2ul9D6m9UT9gT77YM/IphI2pem5FsMq1hJhGR4_28s4Kk\"",
   "icons": {
     "x16": "https://www.google.com/images/icons/product/cloud_storage-16.png",
     "x32": "https://www.google.com/images/icons/product/cloud_storage-32.png"
@@ -996,7 +996,7 @@
       }
     }
   },
-  "revision": "20180404",
+  "revision": "20190913",
   "rootUrl": "https://www.googleapis.com/",
   "schemas": {
     "Bucket": {

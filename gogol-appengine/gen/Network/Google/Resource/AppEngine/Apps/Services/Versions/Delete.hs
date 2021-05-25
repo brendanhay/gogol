@@ -43,8 +43,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
     , asvdCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.versions.delete@ method which the
 -- 'AppsServicesVersionsDelete' request conforms to.
@@ -69,14 +69,14 @@ type AppsServicesVersionsDeleteResource =
 -- /See:/ 'appsServicesVersionsDelete' smart constructor.
 data AppsServicesVersionsDelete =
   AppsServicesVersionsDelete'
-    { _asvdXgafv          :: !(Maybe Xgafv)
+    { _asvdXgafv :: !(Maybe Xgafv)
     , _asvdUploadProtocol :: !(Maybe Text)
-    , _asvdAccessToken    :: !(Maybe Text)
-    , _asvdUploadType     :: !(Maybe Text)
-    , _asvdVersionsId     :: !Text
-    , _asvdAppsId         :: !Text
-    , _asvdServicesId     :: !Text
-    , _asvdCallback       :: !(Maybe Text)
+    , _asvdAccessToken :: !(Maybe Text)
+    , _asvdUploadType :: !(Maybe Text)
+    , _asvdVersionsId :: !Text
+    , _asvdAppsId :: !Text
+    , _asvdServicesId :: !Text
+    , _asvdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

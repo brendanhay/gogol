@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates a set of file IDs which can be provided in create requests.
+-- Generates a set of file IDs which can be provided in create or copy
+-- requests.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.generateIds@.
 module Network.Google.Resource.Drive.Files.GenerateIds
@@ -35,10 +36,11 @@ module Network.Google.Resource.Drive.Files.GenerateIds
     -- * Request Lenses
     , fgiSpace
     , fgiCount
+    , fgiType
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.files.generateIds@ method which the
 -- 'FilesGenerateIds' request conforms to.
@@ -49,15 +51,18 @@ type FilesGenerateIdsResource =
            "generateIds" :>
              QueryParam "space" Text :>
                QueryParam "count" (Textual Int32) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
+                 QueryParam "type" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
 
--- | Generates a set of file IDs which can be provided in create requests.
+-- | Generates a set of file IDs which can be provided in create or copy
+-- requests.
 --
 -- /See:/ 'filesGenerateIds' smart constructor.
 data FilesGenerateIds =
   FilesGenerateIds'
     { _fgiSpace :: !Text
     , _fgiCount :: !(Textual Int32)
+    , _fgiType :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,13 +74,16 @@ data FilesGenerateIds =
 -- * 'fgiSpace'
 --
 -- * 'fgiCount'
+--
+-- * 'fgiType'
 filesGenerateIds
     :: FilesGenerateIds
-filesGenerateIds = FilesGenerateIds' {_fgiSpace = "drive", _fgiCount = 10}
+filesGenerateIds =
+  FilesGenerateIds' {_fgiSpace = "drive", _fgiCount = 10, _fgiType = "files"}
 
 
 -- | The space in which the IDs can be used to create new files. Supported
--- values are \'drive\' and \'appDataFolder\'.
+-- values are \'drive\' and \'appDataFolder\'. (Default: \'drive\')
 fgiSpace :: Lens' FilesGenerateIds Text
 fgiSpace = lens _fgiSpace (\ s a -> s{_fgiSpace = a})
 
@@ -85,6 +93,12 @@ fgiCount
   = lens _fgiCount (\ s a -> s{_fgiCount = a}) .
       _Coerce
 
+-- | The type of items which the IDs can be used for. Supported values are
+-- \'files\' and \'shortcuts\'. Note that \'shortcuts\' are only supported
+-- in the drive \'space\'. (Default: \'files\')
+fgiType :: Lens' FilesGenerateIds Text
+fgiType = lens _fgiType (\ s a -> s{_fgiType = a})
+
 instance GoogleRequest FilesGenerateIds where
         type Rs FilesGenerateIds = GeneratedIds
         type Scopes FilesGenerateIds =
@@ -92,7 +106,9 @@ instance GoogleRequest FilesGenerateIds where
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
         requestClient FilesGenerateIds'{..}
-          = go (Just _fgiSpace) (Just _fgiCount) (Just AltJSON)
+          = go (Just _fgiSpace) (Just _fgiCount)
+              (Just _fgiType)
+              (Just AltJSON)
               driveService
           where go
                   = buildClient

@@ -42,8 +42,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.EnrollmentTokens.De
     , eetdCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.enrollmentTokens.delete@ method which the
 -- 'EnterprisesEnrollmentTokensDelete' request conforms to.
@@ -63,12 +63,12 @@ type EnterprisesEnrollmentTokensDeleteResource =
 -- /See:/ 'enterprisesEnrollmentTokensDelete' smart constructor.
 data EnterprisesEnrollmentTokensDelete =
   EnterprisesEnrollmentTokensDelete'
-    { _eetdXgafv          :: !(Maybe Xgafv)
+    { _eetdXgafv :: !(Maybe Xgafv)
     , _eetdUploadProtocol :: !(Maybe Text)
-    , _eetdAccessToken    :: !(Maybe Text)
-    , _eetdUploadType     :: !(Maybe Text)
-    , _eetdName           :: !Text
-    , _eetdCallback       :: !(Maybe Text)
+    , _eetdAccessToken :: !(Maybe Text)
+    , _eetdUploadType :: !(Maybe Text)
+    , _eetdName :: !Text
+    , _eetdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

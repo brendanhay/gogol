@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.SecurityPolicies.AddRule
     , sparSecurityPolicy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.securityPolicies.addRule@ method which the
 -- 'SecurityPoliciesAddRule' request conforms to.
@@ -61,8 +61,8 @@ type SecurityPoliciesAddRuleResource =
 -- /See:/ 'securityPoliciesAddRule' smart constructor.
 data SecurityPoliciesAddRule =
   SecurityPoliciesAddRule'
-    { _sparProject        :: !Text
-    , _sparPayload        :: !SecurityPolicyRule
+    { _sparProject :: !Text
+    , _sparPayload :: !SecurityPolicyRule
     , _sparSecurityPolicy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

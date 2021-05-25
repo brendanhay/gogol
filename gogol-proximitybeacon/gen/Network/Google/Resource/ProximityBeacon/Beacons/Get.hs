@@ -51,8 +51,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Get
     , bgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.get@ method which the
 -- 'BeaconsGet' request conforms to.
@@ -81,13 +81,13 @@ type BeaconsGetResource =
 -- /See:/ 'beaconsGet' smart constructor.
 data BeaconsGet =
   BeaconsGet'
-    { _bgXgafv          :: !(Maybe Xgafv)
+    { _bgXgafv :: !(Maybe Xgafv)
     , _bgUploadProtocol :: !(Maybe Text)
-    , _bgAccessToken    :: !(Maybe Text)
-    , _bgBeaconName     :: !Text
-    , _bgUploadType     :: !(Maybe Text)
-    , _bgProjectId      :: !(Maybe Text)
-    , _bgCallback       :: !(Maybe Text)
+    , _bgAccessToken :: !(Maybe Text)
+    , _bgBeaconName :: !Text
+    , _bgUploadType :: !(Maybe Text)
+    , _bgProjectId :: !(Maybe Text)
+    , _bgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

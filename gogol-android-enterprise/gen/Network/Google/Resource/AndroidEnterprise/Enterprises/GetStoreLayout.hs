@@ -34,11 +34,16 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
     , EnterprisesGetStoreLayout
 
     -- * Request Lenses
+    , egslXgafv
+    , egslUploadProtocol
     , egslEnterpriseId
+    , egslAccessToken
+    , egslUploadType
+    , egslCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.getStoreLayout@ method which the
 -- 'EnterprisesGetStoreLayout' request conforms to.
@@ -48,15 +53,25 @@ type EnterprisesGetStoreLayoutResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "storeLayout" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] StoreLayout
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] StoreLayout
 
 -- | Returns the store layout for the enterprise. If the store layout has not
 -- been set, returns \"basic\" as the store layout type and no homepage.
 --
 -- /See:/ 'enterprisesGetStoreLayout' smart constructor.
-newtype EnterprisesGetStoreLayout =
+data EnterprisesGetStoreLayout =
   EnterprisesGetStoreLayout'
-    { _egslEnterpriseId :: Text
+    { _egslXgafv :: !(Maybe Xgafv)
+    , _egslUploadProtocol :: !(Maybe Text)
+    , _egslEnterpriseId :: !Text
+    , _egslAccessToken :: !(Maybe Text)
+    , _egslUploadType :: !(Maybe Text)
+    , _egslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,13 +80,41 @@ newtype EnterprisesGetStoreLayout =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'egslXgafv'
+--
+-- * 'egslUploadProtocol'
+--
 -- * 'egslEnterpriseId'
+--
+-- * 'egslAccessToken'
+--
+-- * 'egslUploadType'
+--
+-- * 'egslCallback'
 enterprisesGetStoreLayout
     :: Text -- ^ 'egslEnterpriseId'
     -> EnterprisesGetStoreLayout
 enterprisesGetStoreLayout pEgslEnterpriseId_ =
-  EnterprisesGetStoreLayout' {_egslEnterpriseId = pEgslEnterpriseId_}
+  EnterprisesGetStoreLayout'
+    { _egslXgafv = Nothing
+    , _egslUploadProtocol = Nothing
+    , _egslEnterpriseId = pEgslEnterpriseId_
+    , _egslAccessToken = Nothing
+    , _egslUploadType = Nothing
+    , _egslCallback = Nothing
+    }
 
+
+-- | V1 error format.
+egslXgafv :: Lens' EnterprisesGetStoreLayout (Maybe Xgafv)
+egslXgafv
+  = lens _egslXgafv (\ s a -> s{_egslXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+egslUploadProtocol :: Lens' EnterprisesGetStoreLayout (Maybe Text)
+egslUploadProtocol
+  = lens _egslUploadProtocol
+      (\ s a -> s{_egslUploadProtocol = a})
 
 -- | The ID of the enterprise.
 egslEnterpriseId :: Lens' EnterprisesGetStoreLayout Text
@@ -79,13 +122,34 @@ egslEnterpriseId
   = lens _egslEnterpriseId
       (\ s a -> s{_egslEnterpriseId = a})
 
+-- | OAuth access token.
+egslAccessToken :: Lens' EnterprisesGetStoreLayout (Maybe Text)
+egslAccessToken
+  = lens _egslAccessToken
+      (\ s a -> s{_egslAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+egslUploadType :: Lens' EnterprisesGetStoreLayout (Maybe Text)
+egslUploadType
+  = lens _egslUploadType
+      (\ s a -> s{_egslUploadType = a})
+
+-- | JSONP
+egslCallback :: Lens' EnterprisesGetStoreLayout (Maybe Text)
+egslCallback
+  = lens _egslCallback (\ s a -> s{_egslCallback = a})
+
 instance GoogleRequest EnterprisesGetStoreLayout
          where
         type Rs EnterprisesGetStoreLayout = StoreLayout
         type Scopes EnterprisesGetStoreLayout =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesGetStoreLayout'{..}
-          = go _egslEnterpriseId (Just AltJSON)
+          = go _egslEnterpriseId _egslXgafv _egslUploadProtocol
+              _egslAccessToken
+              _egslUploadType
+              _egslCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

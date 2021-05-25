@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.CustomDataSources.List
     , mcdslMaxResults
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customDataSources.list@ method which the
 -- 'ManagementCustomDataSourcesList' request conforms to.
@@ -64,9 +64,9 @@ type ManagementCustomDataSourcesListResource =
 data ManagementCustomDataSourcesList =
   ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId :: !Text
-    , _mcdslAccountId     :: !Text
-    , _mcdslStartIndex    :: !(Maybe (Textual Int32))
-    , _mcdslMaxResults    :: !(Maybe (Textual Int32))
+    , _mcdslAccountId :: !Text
+    , _mcdslStartIndex :: !(Maybe (Textual Int32))
+    , _mcdslMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

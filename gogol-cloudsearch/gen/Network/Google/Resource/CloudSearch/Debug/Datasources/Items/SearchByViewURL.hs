@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Fetches the item whose viewUrl exactly matches that of the URL provided
--- in the request.
+-- in the request. **Note:** This API requires an admin account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.searchByViewUrl@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.searchByViewUrl@.
 module Network.Google.Resource.CloudSearch.Debug.Datasources.Items.SearchByViewURL
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Debug.Datasources.Items.SearchByViewU
     , ddisbvuCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.debug.datasources.items.searchByViewUrl@ method which the
 -- 'DebugDatasourcesItemsSearchByViewURL' request conforms to.
@@ -63,18 +63,18 @@ type DebugDatasourcesItemsSearchByViewURLResource =
                            Post '[JSON] SearchItemsByViewURLResponse
 
 -- | Fetches the item whose viewUrl exactly matches that of the URL provided
--- in the request.
+-- in the request. **Note:** This API requires an admin account to execute.
 --
 -- /See:/ 'debugDatasourcesItemsSearchByViewURL' smart constructor.
 data DebugDatasourcesItemsSearchByViewURL =
   DebugDatasourcesItemsSearchByViewURL'
-    { _ddisbvuXgafv          :: !(Maybe Xgafv)
+    { _ddisbvuXgafv :: !(Maybe Xgafv)
     , _ddisbvuUploadProtocol :: !(Maybe Text)
-    , _ddisbvuAccessToken    :: !(Maybe Text)
-    , _ddisbvuUploadType     :: !(Maybe Text)
-    , _ddisbvuPayload        :: !SearchItemsByViewURLRequest
-    , _ddisbvuName           :: !Text
-    , _ddisbvuCallback       :: !(Maybe Text)
+    , _ddisbvuAccessToken :: !(Maybe Text)
+    , _ddisbvuUploadType :: !(Maybe Text)
+    , _ddisbvuPayload :: !SearchItemsByViewURLRequest
+    , _ddisbvuName :: !Text
+    , _ddisbvuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

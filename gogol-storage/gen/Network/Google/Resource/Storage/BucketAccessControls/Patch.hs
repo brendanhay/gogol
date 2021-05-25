@@ -36,11 +36,12 @@ module Network.Google.Resource.Storage.BucketAccessControls.Patch
     , bacpBucket
     , bacpPayload
     , bacpUserProject
+    , bacpProvisionalUserProject
     , bacpEntity
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.patch@ method which the
 -- 'BucketAccessControlsPatch' request conforms to.
@@ -52,19 +53,21 @@ type BucketAccessControlsPatchResource =
              "acl" :>
                Capture "entity" Text :>
                  QueryParam "userProject" Text :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] BucketAccessControl :>
-                       Patch '[JSON] BucketAccessControl
+                   QueryParam "provisionalUserProject" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] BucketAccessControl :>
+                         Patch '[JSON] BucketAccessControl
 
 -- | Patches an ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsPatch' smart constructor.
 data BucketAccessControlsPatch =
   BucketAccessControlsPatch'
-    { _bacpBucket      :: !Text
-    , _bacpPayload     :: !BucketAccessControl
+    { _bacpBucket :: !Text
+    , _bacpPayload :: !BucketAccessControl
     , _bacpUserProject :: !(Maybe Text)
-    , _bacpEntity      :: !Text
+    , _bacpProvisionalUserProject :: !(Maybe Text)
+    , _bacpEntity :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -79,6 +82,8 @@ data BucketAccessControlsPatch =
 --
 -- * 'bacpUserProject'
 --
+-- * 'bacpProvisionalUserProject'
+--
 -- * 'bacpEntity'
 bucketAccessControlsPatch
     :: Text -- ^ 'bacpBucket'
@@ -90,6 +95,7 @@ bucketAccessControlsPatch pBacpBucket_ pBacpPayload_ pBacpEntity_ =
     { _bacpBucket = pBacpBucket_
     , _bacpPayload = pBacpPayload_
     , _bacpUserProject = Nothing
+    , _bacpProvisionalUserProject = Nothing
     , _bacpEntity = pBacpEntity_
     }
 
@@ -111,6 +117,13 @@ bacpUserProject
   = lens _bacpUserProject
       (\ s a -> s{_bacpUserProject = a})
 
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+bacpProvisionalUserProject :: Lens' BucketAccessControlsPatch (Maybe Text)
+bacpProvisionalUserProject
+  = lens _bacpProvisionalUserProject
+      (\ s a -> s{_bacpProvisionalUserProject = a})
+
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
@@ -127,6 +140,7 @@ instance GoogleRequest BucketAccessControlsPatch
                "https://www.googleapis.com/auth/devstorage.full_control"]
         requestClient BucketAccessControlsPatch'{..}
           = go _bacpBucket _bacpEntity _bacpUserProject
+              _bacpProvisionalUserProject
               (Just AltJSON)
               _bacpPayload
               storageService

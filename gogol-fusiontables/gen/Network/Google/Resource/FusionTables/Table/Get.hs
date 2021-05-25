@@ -36,8 +36,8 @@ module Network.Google.Resource.FusionTables.Table.Get
     , tgTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.get@ method which the
 -- 'TableGet' request conforms to.

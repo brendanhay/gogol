@@ -36,8 +36,8 @@ module Network.Google.Resource.AdExchangeBuyer.Proposals.Insert
     , piPayload
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.proposals.insert@ method which the
 -- 'ProposalsInsert' request conforms to.

@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPool.Pools.List
     , plMaxResults
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.list@ method which the
 -- 'PoolsList' request conforms to.
@@ -62,10 +62,10 @@ type PoolsListResource =
 -- /See:/ 'poolsList' smart constructor.
 data PoolsList =
   PoolsList'
-    { _plZone        :: !Text
+    { _plZone :: !Text
     , _plProjectName :: !Text
-    , _plPageToken   :: !(Maybe Text)
-    , _plMaxResults  :: !(Textual Int32)
+    , _plPageToken :: !(Maybe Text)
+    , _plMaxResults :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

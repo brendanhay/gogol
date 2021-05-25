@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
     , seicirrRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.expandIpCidrRange@ method which the
 -- 'SubnetworksExpandIPCIdRRange' request conforms to.
@@ -65,11 +65,11 @@ type SubnetworksExpandIPCIdRRangeResource =
 -- /See:/ 'subnetworksExpandIPCIdRRange' smart constructor.
 data SubnetworksExpandIPCIdRRange =
   SubnetworksExpandIPCIdRRange'
-    { _seicirrRequestId  :: !(Maybe Text)
-    , _seicirrProject    :: !Text
-    , _seicirrPayload    :: !SubnetworksExpandIPCIdRRangeRequest
+    { _seicirrRequestId :: !(Maybe Text)
+    , _seicirrProject :: !Text
+    , _seicirrPayload :: !SubnetworksExpandIPCIdRRangeRequest
     , _seicirrSubnetwork :: !Text
-    , _seicirrRegion     :: !Text
+    , _seicirrRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -25,7 +25,7 @@
 -- one transfer run is created. Note that runs are created per UTC time in
 -- the time range. DEPRECATED: use StartManualTransferRuns instead.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.TransferC
     , pltcsrCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns@ method which the
 -- 'ProjectsLocationsTransferConfigsScheduleRuns' request conforms to.
@@ -71,13 +71,13 @@ type ProjectsLocationsTransferConfigsScheduleRunsResource
 -- /See:/ 'projectsLocationsTransferConfigsScheduleRuns' smart constructor.
 data ProjectsLocationsTransferConfigsScheduleRuns =
   ProjectsLocationsTransferConfigsScheduleRuns'
-    { _pltcsrParent         :: !Text
-    , _pltcsrXgafv          :: !(Maybe Xgafv)
+    { _pltcsrParent :: !Text
+    , _pltcsrXgafv :: !(Maybe Xgafv)
     , _pltcsrUploadProtocol :: !(Maybe Text)
-    , _pltcsrAccessToken    :: !(Maybe Text)
-    , _pltcsrUploadType     :: !(Maybe Text)
-    , _pltcsrPayload        :: !ScheduleTransferRunsRequest
-    , _pltcsrCallback       :: !(Maybe Text)
+    , _pltcsrAccessToken :: !(Maybe Text)
+    , _pltcsrUploadType :: !(Maybe Text)
+    , _pltcsrPayload :: !ScheduleTransferRunsRequest
+    , _pltcsrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,8 +115,9 @@ projectsLocationsTransferConfigsScheduleRuns pPltcsrParent_ pPltcsrPayload_ =
     }
 
 
--- | Transfer configuration name in the form:
--- \`projects\/{project_id}\/transferConfigs\/{config_id}\`.
+-- | Required. Transfer configuration name in the form:
+-- \`projects\/{project_id}\/transferConfigs\/{config_id}\` or
+-- \`projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\`.
 pltcsrParent :: Lens' ProjectsLocationsTransferConfigsScheduleRuns Text
 pltcsrParent
   = lens _pltcsrParent (\ s a -> s{_pltcsrParent = a})

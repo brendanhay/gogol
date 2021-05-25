@@ -51,8 +51,8 @@ module Network.Google.Resource.AppEngine.Apps.Repair
     , arCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.repair@ method which the
 -- 'AppsRepair' request conforms to.
@@ -83,13 +83,13 @@ type AppsRepairResource =
 -- /See:/ 'appsRepair' smart constructor.
 data AppsRepair =
   AppsRepair'
-    { _arXgafv          :: !(Maybe Xgafv)
+    { _arXgafv :: !(Maybe Xgafv)
     , _arUploadProtocol :: !(Maybe Text)
-    , _arAccessToken    :: !(Maybe Text)
-    , _arUploadType     :: !(Maybe Text)
-    , _arPayload        :: !RepairApplicationRequest
-    , _arAppsId         :: !Text
-    , _arCallback       :: !(Maybe Text)
+    , _arAccessToken :: !(Maybe Text)
+    , _arUploadType :: !(Maybe Text)
+    , _arPayload :: !RepairApplicationRequest
+    , _arAppsId :: !Text
+    , _arCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

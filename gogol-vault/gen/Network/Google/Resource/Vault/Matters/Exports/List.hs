@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists Exports.
+-- Lists details about the exports in the specified matter.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.exports.list@.
 module Network.Google.Resource.Vault.Matters.Exports.List
@@ -43,8 +43,8 @@ module Network.Google.Resource.Vault.Matters.Exports.List
     , melCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.exports.list@ method which the
 -- 'MattersExportsList' request conforms to.
@@ -63,19 +63,19 @@ type MattersExportsListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListExportsResponse
 
--- | Lists Exports.
+-- | Lists details about the exports in the specified matter.
 --
 -- /See:/ 'mattersExportsList' smart constructor.
 data MattersExportsList =
   MattersExportsList'
-    { _melXgafv          :: !(Maybe Xgafv)
+    { _melXgafv :: !(Maybe Xgafv)
     , _melUploadProtocol :: !(Maybe Text)
-    , _melAccessToken    :: !(Maybe Text)
-    , _melUploadType     :: !(Maybe Text)
-    , _melMatterId       :: !Text
-    , _melPageToken      :: !(Maybe Text)
-    , _melPageSize       :: !(Maybe (Textual Int32))
-    , _melCallback       :: !(Maybe Text)
+    , _melAccessToken :: !(Maybe Text)
+    , _melUploadType :: !(Maybe Text)
+    , _melMatterId :: !Text
+    , _melPageToken :: !(Maybe Text)
+    , _melPageSize :: !(Maybe (Textual Int32))
+    , _melCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

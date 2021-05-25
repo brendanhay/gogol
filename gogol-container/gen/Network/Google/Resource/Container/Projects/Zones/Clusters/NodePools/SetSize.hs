@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the size for a specific node pool.
+-- Sets the size for a specific node pool. The new size will be used for
+-- all replicas, including future replicas created by modifying
+-- NodePool.locations.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.setSize@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetSize
@@ -45,8 +47,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetSi
     , pzcnpssCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.setSize@ method which the
 -- 'ProjectsZonesClustersNodePoolsSetSize' request conforms to.
@@ -70,21 +72,23 @@ type ProjectsZonesClustersNodePoolsSetSizeResource =
                                      ReqBody '[JSON] SetNodePoolSizeRequest :>
                                        Post '[JSON] Operation
 
--- | Sets the size for a specific node pool.
+-- | Sets the size for a specific node pool. The new size will be used for
+-- all replicas, including future replicas created by modifying
+-- NodePool.locations.
 --
 -- /See:/ 'projectsZonesClustersNodePoolsSetSize' smart constructor.
 data ProjectsZonesClustersNodePoolsSetSize =
   ProjectsZonesClustersNodePoolsSetSize'
-    { _pzcnpssXgafv          :: !(Maybe Xgafv)
+    { _pzcnpssXgafv :: !(Maybe Xgafv)
     , _pzcnpssUploadProtocol :: !(Maybe Text)
-    , _pzcnpssAccessToken    :: !(Maybe Text)
-    , _pzcnpssUploadType     :: !(Maybe Text)
-    , _pzcnpssZone           :: !Text
-    , _pzcnpssPayload        :: !SetNodePoolSizeRequest
-    , _pzcnpssNodePoolId     :: !Text
-    , _pzcnpssClusterId      :: !Text
-    , _pzcnpssProjectId      :: !Text
-    , _pzcnpssCallback       :: !(Maybe Text)
+    , _pzcnpssAccessToken :: !(Maybe Text)
+    , _pzcnpssUploadType :: !(Maybe Text)
+    , _pzcnpssZone :: !Text
+    , _pzcnpssPayload :: !SetNodePoolSizeRequest
+    , _pzcnpssNodePoolId :: !Text
+    , _pzcnpssClusterId :: !Text
+    , _pzcnpssProjectId :: !Text
+    , _pzcnpssCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,8 +162,9 @@ pzcnpssUploadType
       (\ s a -> s{_pzcnpssUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcnpssZone :: Lens' ProjectsZonesClustersNodePoolsSetSize Text
 pzcnpssZone
   = lens _pzcnpssZone (\ s a -> s{_pzcnpssZone = a})

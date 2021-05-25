@@ -13,9 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Accesses Tag Manager accounts and containers.
+-- This API allows clients to access and modify container and tag
+-- configuration.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference>
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference>
 module Network.Google.TagManager
     (
     -- * Service Configuration
@@ -176,6 +177,24 @@ module Network.Google.TagManager
     -- ** tagmanager.accounts.containers.workspaces.tags.update
     , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
 
+    -- ** tagmanager.accounts.containers.workspaces.templates.create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Create
+
+    -- ** tagmanager.accounts.containers.workspaces.templates.delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Delete
+
+    -- ** tagmanager.accounts.containers.workspaces.templates.get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Get
+
+    -- ** tagmanager.accounts.containers.workspaces.templates.list
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.List
+
+    -- ** tagmanager.accounts.containers.workspaces.templates.revert
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Revert
+
+    -- ** tagmanager.accounts.containers.workspaces.templates.update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Update
+
     -- ** tagmanager.accounts.containers.workspaces.triggers.create
     , module Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
 
@@ -316,6 +335,7 @@ module Network.Google.TagManager
     -- ** ContainerVersionHeader
     , ContainerVersionHeader
     , containerVersionHeader
+    , cvhNumClients
     , cvhNumTags
     , cvhNumMacros
     , cvhContainerId
@@ -336,11 +356,17 @@ module Network.Google.TagManager
     , ttStopTeardownOnFailure
     , ttTagName
 
+    -- ** ListTemplatesResponse
+    , ListTemplatesResponse
+    , listTemplatesResponse
+    , ltrNextPageToken
+    , ltrTemplate
+
     -- ** ListTriggersResponse
     , ListTriggersResponse
     , listTriggersResponse
-    , ltrNextPageToken
-    , ltrTrigger
+    , lNextPageToken
+    , lTrigger
 
     -- ** Tag
     , Tag
@@ -354,6 +380,7 @@ module Network.Google.TagManager
     , tTeardownTag
     , tPath
     , tFingerprint
+    , tMonitoringMetadata
     , tTagFiringOption
     , tAccountId
     , tTagId
@@ -365,6 +392,7 @@ module Network.Google.TagManager
     , tWorkspaceId
     , tType
     , tScheduleStartMs
+    , tMonitoringMetadataTagNameKey
     , tNotes
     , tPaused
     , tFiringRuleId
@@ -467,6 +495,16 @@ module Network.Google.TagManager
     , larNextPageToken
     , larAccount
 
+    -- ** GalleryReference
+    , GalleryReference
+    , galleryReference
+    , grSignature
+    , grRepository
+    , grOwner
+    , grVersion
+    , grHost
+    , grIsModified
+
     -- ** MergeConflict
     , MergeConflict
     , mergeConflict
@@ -534,6 +572,11 @@ module Network.Google.TagManager
 
     -- ** AccountAccessPermission
     , AccountAccessPermission (..)
+
+    -- ** RevertTemplateResponse
+    , RevertTemplateResponse
+    , revertTemplateResponse
+    , rtrTemplate
 
     -- ** SyncWorkspaceResponse
     , SyncWorkspaceResponse
@@ -617,6 +660,9 @@ module Network.Google.TagManager
     -- ** VariableFormatValueCaseConversionType
     , VariableFormatValueCaseConversionType (..)
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** ContainerVersion
     , ContainerVersion
     , containerVersion
@@ -637,6 +683,7 @@ module Network.Google.TagManager
     , cvTrigger
     , cvCustomTemplate
     , cvDescription
+    , cvClient
 
     -- ** EnvironmentType
     , EnvironmentType (..)
@@ -692,8 +739,8 @@ module Network.Google.TagManager
     -- ** ListTagsResponse
     , ListTagsResponse
     , listTagsResponse
-    , lNextPageToken
-    , lTag
+    , lisNextPageToken
+    , lisTag
 
     -- ** ListEnabledBuiltInVariablesResponse
     , ListEnabledBuiltInVariablesResponse
@@ -708,6 +755,7 @@ module Network.Google.TagManager
     , ctPath
     , ctTemplateId
     , ctFingerprint
+    , ctGalleryReference
     , ctAccountId
     , ctName
     , ctTagManagerURL
@@ -747,18 +795,13 @@ module Network.Google.TagManager
     , eVariable
     , eChangeStatus
     , eTrigger
+    , eClient
 
     -- ** ContainerAccess
     , ContainerAccess
     , containerAccess
     , caContainerId
     , caPermission
-
-    -- ** Timestamp
-    , Timestamp
-    , timestamp
-    , tNanos
-    , tSeconds
 
     -- ** VariableFormatValue
     , VariableFormatValue
@@ -777,6 +820,23 @@ module Network.Google.TagManager
     -- ** AccountsContainersWorkspacesBuilt_in_variablesRevertType
     , AccountsContainersWorkspacesBuilt_in_variablesRevertType (..)
 
+    -- ** Client
+    , Client
+    , client
+    , cliClientId
+    , cliParentFolderId
+    , cliContainerId
+    , cliPriority
+    , cliPath
+    , cliFingerprint
+    , cliAccountId
+    , cliName
+    , cliTagManagerURL
+    , cliWorkspaceId
+    , cliType
+    , cliNotes
+    , cliParameter
+
     -- ** Parameter
     , Parameter
     , parameter
@@ -787,82 +847,88 @@ module Network.Google.TagManager
     , pType
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.TagManager.Accounts.Containers.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Reauthorize
-import           Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.Latest
-import           Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.SetLatest
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Revert
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.CreateVersion
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Entities
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.MoveEntitiesToFolder
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetStatus
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.QuickPreview
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Sync
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Revert
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Revert
-import           Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Update
-import           Network.Google.Resource.TagManager.Accounts.Get
-import           Network.Google.Resource.TagManager.Accounts.List
-import           Network.Google.Resource.TagManager.Accounts.Update
-import           Network.Google.Resource.TagManager.Accounts.UserPermissions.Create
-import           Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
-import           Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
-import           Network.Google.Resource.TagManager.Accounts.UserPermissions.List
-import           Network.Google.Resource.TagManager.Accounts.UserPermissions.Update
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.Resource.TagManager.Accounts.Containers.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Reauthorize
+import Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.Latest
+import Network.Google.Resource.TagManager.Accounts.Containers.VersionHeaders.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Live
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.SetLatest
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
+import Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.BuiltInVariables.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.CreateVersion
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Entities
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.MoveEntitiesToFolder
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Folders.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.GetStatus
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.QuickPreview
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.ResolveConflict
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Sync
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Tags.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Templates.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Triggers.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Variables.Update
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Create
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Delete
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Get
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.List
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Revert
+import Network.Google.Resource.TagManager.Accounts.Containers.Workspaces.Zones.Update
+import Network.Google.Resource.TagManager.Accounts.Get
+import Network.Google.Resource.TagManager.Accounts.List
+import Network.Google.Resource.TagManager.Accounts.Update
+import Network.Google.Resource.TagManager.Accounts.UserPermissions.Create
+import Network.Google.Resource.TagManager.Accounts.UserPermissions.Delete
+import Network.Google.Resource.TagManager.Accounts.UserPermissions.Get
+import Network.Google.Resource.TagManager.Accounts.UserPermissions.List
+import Network.Google.Resource.TagManager.Accounts.UserPermissions.Update
+import Network.Google.TagManager.Types
 
 {- $resources
 TODO
@@ -922,6 +988,17 @@ type TagManagerAPI =
        AccountsContainersWorkspacesFoldersDeleteResource
        :<|>
        AccountsContainersWorkspacesFoldersUpdateResource
+       :<|>
+       AccountsContainersWorkspacesTemplatesListResource
+       :<|> AccountsContainersWorkspacesTemplatesGetResource
+       :<|>
+       AccountsContainersWorkspacesTemplatesCreateResource
+       :<|>
+       AccountsContainersWorkspacesTemplatesRevertResource
+       :<|>
+       AccountsContainersWorkspacesTemplatesDeleteResource
+       :<|>
+       AccountsContainersWorkspacesTemplatesUpdateResource
        :<|> AccountsContainersWorkspacesTriggersListResource
        :<|> AccountsContainersWorkspacesTriggersGetResource
        :<|>

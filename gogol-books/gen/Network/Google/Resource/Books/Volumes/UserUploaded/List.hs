@@ -22,7 +22,7 @@
 --
 -- Return a list of books uploaded by the current user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.useruploaded.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.volumes.useruploaded.list@.
 module Network.Google.Resource.Books.Volumes.UserUploaded.List
     (
     -- * REST Resource
@@ -34,15 +34,20 @@ module Network.Google.Resource.Books.Volumes.UserUploaded.List
 
     -- * Request Lenses
     , vuulProcessingState
+    , vuulXgafv
+    , vuulUploadProtocol
     , vuulLocale
+    , vuulAccessToken
+    , vuulUploadType
     , vuulVolumeId
     , vuulSource
     , vuulStartIndex
     , vuulMaxResults
+    , vuulCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.useruploaded.list@ method which the
 -- 'VolumesUserUploadedList' request conforms to.
@@ -54,12 +59,18 @@ type VolumesUserUploadedListResource =
              QueryParams "processingState"
                VolumesUserUploadedListProcessingState
                :>
-               QueryParam "locale" Text :>
-                 QueryParams "volumeId" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "startIndex" (Textual Word32) :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] Volumes
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "volumeId" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "startIndex" (Textual Word32) :>
+                               QueryParam "maxResults" (Textual Word32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Volumes
 
 -- | Return a list of books uploaded by the current user.
 --
@@ -67,11 +78,16 @@ type VolumesUserUploadedListResource =
 data VolumesUserUploadedList =
   VolumesUserUploadedList'
     { _vuulProcessingState :: !(Maybe [VolumesUserUploadedListProcessingState])
-    , _vuulLocale          :: !(Maybe Text)
-    , _vuulVolumeId        :: !(Maybe [Text])
-    , _vuulSource          :: !(Maybe Text)
-    , _vuulStartIndex      :: !(Maybe (Textual Word32))
-    , _vuulMaxResults      :: !(Maybe (Textual Word32))
+    , _vuulXgafv :: !(Maybe Xgafv)
+    , _vuulUploadProtocol :: !(Maybe Text)
+    , _vuulLocale :: !(Maybe Text)
+    , _vuulAccessToken :: !(Maybe Text)
+    , _vuulUploadType :: !(Maybe Text)
+    , _vuulVolumeId :: !(Maybe [Text])
+    , _vuulSource :: !(Maybe Text)
+    , _vuulStartIndex :: !(Maybe (Textual Word32))
+    , _vuulMaxResults :: !(Maybe (Textual Word32))
+    , _vuulCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -82,7 +98,15 @@ data VolumesUserUploadedList =
 --
 -- * 'vuulProcessingState'
 --
+-- * 'vuulXgafv'
+--
+-- * 'vuulUploadProtocol'
+--
 -- * 'vuulLocale'
+--
+-- * 'vuulAccessToken'
+--
+-- * 'vuulUploadType'
 --
 -- * 'vuulVolumeId'
 --
@@ -91,16 +115,23 @@ data VolumesUserUploadedList =
 -- * 'vuulStartIndex'
 --
 -- * 'vuulMaxResults'
+--
+-- * 'vuulCallback'
 volumesUserUploadedList
     :: VolumesUserUploadedList
 volumesUserUploadedList =
   VolumesUserUploadedList'
     { _vuulProcessingState = Nothing
+    , _vuulXgafv = Nothing
+    , _vuulUploadProtocol = Nothing
     , _vuulLocale = Nothing
+    , _vuulAccessToken = Nothing
+    , _vuulUploadType = Nothing
     , _vuulVolumeId = Nothing
     , _vuulSource = Nothing
     , _vuulStartIndex = Nothing
     , _vuulMaxResults = Nothing
+    , _vuulCallback = Nothing
     }
 
 
@@ -112,11 +143,34 @@ vuulProcessingState
       . _Default
       . _Coerce
 
+-- | V1 error format.
+vuulXgafv :: Lens' VolumesUserUploadedList (Maybe Xgafv)
+vuulXgafv
+  = lens _vuulXgafv (\ s a -> s{_vuulXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vuulUploadProtocol :: Lens' VolumesUserUploadedList (Maybe Text)
+vuulUploadProtocol
+  = lens _vuulUploadProtocol
+      (\ s a -> s{_vuulUploadProtocol = a})
+
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
 vuulLocale :: Lens' VolumesUserUploadedList (Maybe Text)
 vuulLocale
   = lens _vuulLocale (\ s a -> s{_vuulLocale = a})
+
+-- | OAuth access token.
+vuulAccessToken :: Lens' VolumesUserUploadedList (Maybe Text)
+vuulAccessToken
+  = lens _vuulAccessToken
+      (\ s a -> s{_vuulAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vuulUploadType :: Lens' VolumesUserUploadedList (Maybe Text)
+vuulUploadType
+  = lens _vuulUploadType
+      (\ s a -> s{_vuulUploadType = a})
 
 -- | The ids of the volumes to be returned. If not specified all that match
 -- the processingState are returned.
@@ -145,16 +199,26 @@ vuulMaxResults
       (\ s a -> s{_vuulMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+vuulCallback :: Lens' VolumesUserUploadedList (Maybe Text)
+vuulCallback
+  = lens _vuulCallback (\ s a -> s{_vuulCallback = a})
+
 instance GoogleRequest VolumesUserUploadedList where
         type Rs VolumesUserUploadedList = Volumes
         type Scopes VolumesUserUploadedList =
              '["https://www.googleapis.com/auth/books"]
         requestClient VolumesUserUploadedList'{..}
-          = go (_vuulProcessingState ^. _Default) _vuulLocale
+          = go (_vuulProcessingState ^. _Default) _vuulXgafv
+              _vuulUploadProtocol
+              _vuulLocale
+              _vuulAccessToken
+              _vuulUploadType
               (_vuulVolumeId ^. _Default)
               _vuulSource
               _vuulStartIndex
               _vuulMaxResults
+              _vuulCallback
               (Just AltJSON)
               booksService
           where go

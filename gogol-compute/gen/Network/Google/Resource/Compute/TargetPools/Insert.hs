@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.TargetPools.Insert
     , tpiRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.insert@ method which the
 -- 'TargetPoolsInsert' request conforms to.
@@ -64,9 +64,9 @@ type TargetPoolsInsertResource =
 data TargetPoolsInsert =
   TargetPoolsInsert'
     { _tpiRequestId :: !(Maybe Text)
-    , _tpiProject   :: !Text
-    , _tpiPayload   :: !TargetPool
-    , _tpiRegion    :: !Text
+    , _tpiProject :: !Text
+    , _tpiPayload :: !TargetPool
+    , _tpiRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

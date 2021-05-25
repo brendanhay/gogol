@@ -22,7 +22,7 @@
 --
 -- Sandbox only. Creates a test return.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.createtestreturn@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.createtestreturn@.
 module Network.Google.Resource.Content.Orders.Createtestreturn
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Orders.Createtestreturn
     , OrdersCreatetestreturn
 
     -- * Request Lenses
-    , occMerchantId
-    , occPayload
-    , occOrderId
+    , oc1Xgafv
+    , oc1MerchantId
+    , oc1UploadProtocol
+    , oc1AccessToken
+    , oc1UploadType
+    , oc1Payload
+    , oc1OrderId
+    , oc1Callback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.createtestreturn@ method which the
 -- 'OrdersCreatetestreturn' request conforms to.
@@ -50,18 +55,28 @@ type OrdersCreatetestreturnResource =
            "orders" :>
              Capture "orderId" Text :>
                "testreturn" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] OrdersCreateTestReturnRequest :>
-                     Post '[JSON] OrdersCreateTestReturnResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] OrdersCreateTestReturnRequest :>
+                               Post '[JSON] OrdersCreateTestReturnResponse
 
 -- | Sandbox only. Creates a test return.
 --
 -- /See:/ 'ordersCreatetestreturn' smart constructor.
 data OrdersCreatetestreturn =
   OrdersCreatetestreturn'
-    { _occMerchantId :: !(Textual Word64)
-    , _occPayload    :: !OrdersCreateTestReturnRequest
-    , _occOrderId    :: !Text
+    { _oc1Xgafv :: !(Maybe Xgafv)
+    , _oc1MerchantId :: !(Textual Word64)
+    , _oc1UploadProtocol :: !(Maybe Text)
+    , _oc1AccessToken :: !(Maybe Text)
+    , _oc1UploadType :: !(Maybe Text)
+    , _oc1Payload :: !OrdersCreateTestReturnRequest
+    , _oc1OrderId :: !Text
+    , _oc1Callback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,41 +85,83 @@ data OrdersCreatetestreturn =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'occMerchantId'
+-- * 'oc1Xgafv'
 --
--- * 'occPayload'
+-- * 'oc1MerchantId'
 --
--- * 'occOrderId'
+-- * 'oc1UploadProtocol'
+--
+-- * 'oc1AccessToken'
+--
+-- * 'oc1UploadType'
+--
+-- * 'oc1Payload'
+--
+-- * 'oc1OrderId'
+--
+-- * 'oc1Callback'
 ordersCreatetestreturn
-    :: Word64 -- ^ 'occMerchantId'
-    -> OrdersCreateTestReturnRequest -- ^ 'occPayload'
-    -> Text -- ^ 'occOrderId'
+    :: Word64 -- ^ 'oc1MerchantId'
+    -> OrdersCreateTestReturnRequest -- ^ 'oc1Payload'
+    -> Text -- ^ 'oc1OrderId'
     -> OrdersCreatetestreturn
-ordersCreatetestreturn pOccMerchantId_ pOccPayload_ pOccOrderId_ =
+ordersCreatetestreturn pOc1MerchantId_ pOc1Payload_ pOc1OrderId_ =
   OrdersCreatetestreturn'
-    { _occMerchantId = _Coerce # pOccMerchantId_
-    , _occPayload = pOccPayload_
-    , _occOrderId = pOccOrderId_
+    { _oc1Xgafv = Nothing
+    , _oc1MerchantId = _Coerce # pOc1MerchantId_
+    , _oc1UploadProtocol = Nothing
+    , _oc1AccessToken = Nothing
+    , _oc1UploadType = Nothing
+    , _oc1Payload = pOc1Payload_
+    , _oc1OrderId = pOc1OrderId_
+    , _oc1Callback = Nothing
     }
 
 
+-- | V1 error format.
+oc1Xgafv :: Lens' OrdersCreatetestreturn (Maybe Xgafv)
+oc1Xgafv = lens _oc1Xgafv (\ s a -> s{_oc1Xgafv = a})
+
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
-occMerchantId :: Lens' OrdersCreatetestreturn Word64
-occMerchantId
-  = lens _occMerchantId
-      (\ s a -> s{_occMerchantId = a})
+oc1MerchantId :: Lens' OrdersCreatetestreturn Word64
+oc1MerchantId
+  = lens _oc1MerchantId
+      (\ s a -> s{_oc1MerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+oc1UploadProtocol :: Lens' OrdersCreatetestreturn (Maybe Text)
+oc1UploadProtocol
+  = lens _oc1UploadProtocol
+      (\ s a -> s{_oc1UploadProtocol = a})
+
+-- | OAuth access token.
+oc1AccessToken :: Lens' OrdersCreatetestreturn (Maybe Text)
+oc1AccessToken
+  = lens _oc1AccessToken
+      (\ s a -> s{_oc1AccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+oc1UploadType :: Lens' OrdersCreatetestreturn (Maybe Text)
+oc1UploadType
+  = lens _oc1UploadType
+      (\ s a -> s{_oc1UploadType = a})
+
 -- | Multipart request metadata.
-occPayload :: Lens' OrdersCreatetestreturn OrdersCreateTestReturnRequest
-occPayload
-  = lens _occPayload (\ s a -> s{_occPayload = a})
+oc1Payload :: Lens' OrdersCreatetestreturn OrdersCreateTestReturnRequest
+oc1Payload
+  = lens _oc1Payload (\ s a -> s{_oc1Payload = a})
 
 -- | The ID of the order.
-occOrderId :: Lens' OrdersCreatetestreturn Text
-occOrderId
-  = lens _occOrderId (\ s a -> s{_occOrderId = a})
+oc1OrderId :: Lens' OrdersCreatetestreturn Text
+oc1OrderId
+  = lens _oc1OrderId (\ s a -> s{_oc1OrderId = a})
+
+-- | JSONP
+oc1Callback :: Lens' OrdersCreatetestreturn (Maybe Text)
+oc1Callback
+  = lens _oc1Callback (\ s a -> s{_oc1Callback = a})
 
 instance GoogleRequest OrdersCreatetestreturn where
         type Rs OrdersCreatetestreturn =
@@ -112,8 +169,13 @@ instance GoogleRequest OrdersCreatetestreturn where
         type Scopes OrdersCreatetestreturn =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersCreatetestreturn'{..}
-          = go _occMerchantId _occOrderId (Just AltJSON)
-              _occPayload
+          = go _oc1MerchantId _oc1OrderId _oc1Xgafv
+              _oc1UploadProtocol
+              _oc1AccessToken
+              _oc1UploadType
+              _oc1Callback
+              (Just AltJSON)
+              _oc1Payload
               shoppingContentService
           where go
                   = buildClient

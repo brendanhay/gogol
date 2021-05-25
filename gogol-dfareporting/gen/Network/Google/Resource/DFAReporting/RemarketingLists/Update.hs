@@ -22,7 +22,7 @@
 --
 -- Updates an existing remarketing list.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.remarketingLists.update@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     , RemarketingListsUpdate
 
     -- * Request Lenses
+    , rluXgafv
+    , rluUploadProtocol
+    , rluAccessToken
+    , rluUploadType
     , rluProFileId
     , rluPayload
+    , rluCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.update@ method which the
 -- 'RemarketingListsUpdate' request conforms to.
 type RemarketingListsUpdateResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] RemarketingList :>
-                   Put '[JSON] RemarketingList
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] RemarketingList :>
+                             Put '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.
 --
 -- /See:/ 'remarketingListsUpdate' smart constructor.
 data RemarketingListsUpdate =
   RemarketingListsUpdate'
-    { _rluProFileId :: !(Textual Int64)
-    , _rluPayload   :: !RemarketingList
+    { _rluXgafv :: !(Maybe Xgafv)
+    , _rluUploadProtocol :: !(Maybe Text)
+    , _rluAccessToken :: !(Maybe Text)
+    , _rluUploadType :: !(Maybe Text)
+    , _rluProFileId :: !(Textual Int64)
+    , _rluPayload :: !RemarketingList
+    , _rluCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data RemarketingListsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rluXgafv'
+--
+-- * 'rluUploadProtocol'
+--
+-- * 'rluAccessToken'
+--
+-- * 'rluUploadType'
+--
 -- * 'rluProFileId'
 --
 -- * 'rluPayload'
+--
+-- * 'rluCallback'
 remarketingListsUpdate
     :: Int64 -- ^ 'rluProFileId'
     -> RemarketingList -- ^ 'rluPayload'
     -> RemarketingListsUpdate
 remarketingListsUpdate pRluProFileId_ pRluPayload_ =
   RemarketingListsUpdate'
-    {_rluProFileId = _Coerce # pRluProFileId_, _rluPayload = pRluPayload_}
+    { _rluXgafv = Nothing
+    , _rluUploadProtocol = Nothing
+    , _rluAccessToken = Nothing
+    , _rluUploadType = Nothing
+    , _rluProFileId = _Coerce # pRluProFileId_
+    , _rluPayload = pRluPayload_
+    , _rluCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rluXgafv :: Lens' RemarketingListsUpdate (Maybe Xgafv)
+rluXgafv = lens _rluXgafv (\ s a -> s{_rluXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rluUploadProtocol :: Lens' RemarketingListsUpdate (Maybe Text)
+rluUploadProtocol
+  = lens _rluUploadProtocol
+      (\ s a -> s{_rluUploadProtocol = a})
+
+-- | OAuth access token.
+rluAccessToken :: Lens' RemarketingListsUpdate (Maybe Text)
+rluAccessToken
+  = lens _rluAccessToken
+      (\ s a -> s{_rluAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rluUploadType :: Lens' RemarketingListsUpdate (Maybe Text)
+rluUploadType
+  = lens _rluUploadType
+      (\ s a -> s{_rluUploadType = a})
 
 -- | User profile ID associated with this request.
 rluProFileId :: Lens' RemarketingListsUpdate Int64
@@ -90,12 +144,22 @@ rluPayload :: Lens' RemarketingListsUpdate RemarketingList
 rluPayload
   = lens _rluPayload (\ s a -> s{_rluPayload = a})
 
+-- | JSONP
+rluCallback :: Lens' RemarketingListsUpdate (Maybe Text)
+rluCallback
+  = lens _rluCallback (\ s a -> s{_rluCallback = a})
+
 instance GoogleRequest RemarketingListsUpdate where
         type Rs RemarketingListsUpdate = RemarketingList
         type Scopes RemarketingListsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient RemarketingListsUpdate'{..}
-          = go _rluProFileId (Just AltJSON) _rluPayload
+          = go _rluProFileId _rluXgafv _rluUploadProtocol
+              _rluAccessToken
+              _rluUploadType
+              _rluCallback
+              (Just AltJSON)
+              _rluPayload
               dFAReportingService
           where go
                   = buildClient

@@ -22,7 +22,7 @@
 --
 -- Submit inventory for the given merchant.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.pos.inventory@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.pos.inventory@.
 module Network.Google.Resource.Content.Pos.Inventory
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.Content.Pos.Inventory
     , PosInventory'
 
     -- * Request Lenses
+    , piXgafv
     , piMerchantId
+    , piUploadProtocol
+    , piAccessToken
+    , piUploadType
     , piTargetMerchantId
     , piPayload
+    , piCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.pos.inventory@ method which the
 -- 'PosInventory'' request conforms to.
@@ -50,18 +55,28 @@ type PosInventoryResource =
            "pos" :>
              Capture "targetMerchantId" (Textual Word64) :>
                "inventory" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] PosInventoryRequest :>
-                     Post '[JSON] PosInventoryResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] PosInventoryRequest :>
+                               Post '[JSON] PosInventoryResponse
 
 -- | Submit inventory for the given merchant.
 --
 -- /See:/ 'posInventory'' smart constructor.
 data PosInventory' =
   PosInventory''
-    { _piMerchantId       :: !(Textual Word64)
+    { _piXgafv :: !(Maybe Xgafv)
+    , _piMerchantId :: !(Textual Word64)
+    , _piUploadProtocol :: !(Maybe Text)
+    , _piAccessToken :: !(Maybe Text)
+    , _piUploadType :: !(Maybe Text)
     , _piTargetMerchantId :: !(Textual Word64)
-    , _piPayload          :: !PosInventoryRequest
+    , _piPayload :: !PosInventoryRequest
+    , _piCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -70,11 +85,21 @@ data PosInventory' =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'piXgafv'
+--
 -- * 'piMerchantId'
+--
+-- * 'piUploadProtocol'
+--
+-- * 'piAccessToken'
+--
+-- * 'piUploadType'
 --
 -- * 'piTargetMerchantId'
 --
 -- * 'piPayload'
+--
+-- * 'piCallback'
 posInventory'
     :: Word64 -- ^ 'piMerchantId'
     -> Word64 -- ^ 'piTargetMerchantId'
@@ -82,17 +107,43 @@ posInventory'
     -> PosInventory'
 posInventory' pPiMerchantId_ pPiTargetMerchantId_ pPiPayload_ =
   PosInventory''
-    { _piMerchantId = _Coerce # pPiMerchantId_
+    { _piXgafv = Nothing
+    , _piMerchantId = _Coerce # pPiMerchantId_
+    , _piUploadProtocol = Nothing
+    , _piAccessToken = Nothing
+    , _piUploadType = Nothing
     , _piTargetMerchantId = _Coerce # pPiTargetMerchantId_
     , _piPayload = pPiPayload_
+    , _piCallback = Nothing
     }
 
+
+-- | V1 error format.
+piXgafv :: Lens' PosInventory' (Maybe Xgafv)
+piXgafv = lens _piXgafv (\ s a -> s{_piXgafv = a})
 
 -- | The ID of the POS or inventory data provider.
 piMerchantId :: Lens' PosInventory' Word64
 piMerchantId
   = lens _piMerchantId (\ s a -> s{_piMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+piUploadProtocol :: Lens' PosInventory' (Maybe Text)
+piUploadProtocol
+  = lens _piUploadProtocol
+      (\ s a -> s{_piUploadProtocol = a})
+
+-- | OAuth access token.
+piAccessToken :: Lens' PosInventory' (Maybe Text)
+piAccessToken
+  = lens _piAccessToken
+      (\ s a -> s{_piAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+piUploadType :: Lens' PosInventory' (Maybe Text)
+piUploadType
+  = lens _piUploadType (\ s a -> s{_piUploadType = a})
 
 -- | The ID of the target merchant.
 piTargetMerchantId :: Lens' PosInventory' Word64
@@ -106,12 +157,22 @@ piPayload :: Lens' PosInventory' PosInventoryRequest
 piPayload
   = lens _piPayload (\ s a -> s{_piPayload = a})
 
+-- | JSONP
+piCallback :: Lens' PosInventory' (Maybe Text)
+piCallback
+  = lens _piCallback (\ s a -> s{_piCallback = a})
+
 instance GoogleRequest PosInventory' where
         type Rs PosInventory' = PosInventoryResponse
         type Scopes PosInventory' =
              '["https://www.googleapis.com/auth/content"]
         requestClient PosInventory''{..}
-          = go _piMerchantId _piTargetMerchantId (Just AltJSON)
+          = go _piMerchantId _piTargetMerchantId _piXgafv
+              _piUploadProtocol
+              _piAccessToken
+              _piUploadType
+              _piCallback
+              (Just AltJSON)
               _piPayload
               shoppingContentService
           where go

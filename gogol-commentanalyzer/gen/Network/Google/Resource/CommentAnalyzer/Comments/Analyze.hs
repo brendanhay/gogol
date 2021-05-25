@@ -22,7 +22,7 @@
 --
 -- Analyzes the provided text and returns scores for requested attributes.
 --
--- /See:/ <https://conversationai.github.io/ Perspective Comment Analyzer API Reference> for @commentanalyzer.comments.analyze@.
+-- /See:/ <https://github.com/conversationai/perspectiveapi/blob/master/README.md Perspective Comment Analyzer API Reference> for @commentanalyzer.comments.analyze@.
 module Network.Google.Resource.CommentAnalyzer.Comments.Analyze
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CommentAnalyzer.Comments.Analyze
     , caCallback
     ) where
 
-import           Network.Google.CommentAnalyzer.Types
-import           Network.Google.Prelude
+import Network.Google.CommentAnalyzer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @commentanalyzer.comments.analyze@ method which the
 -- 'CommentsAnalyze' request conforms to.
@@ -63,12 +63,12 @@ type CommentsAnalyzeResource =
 -- /See:/ 'commentsAnalyze' smart constructor.
 data CommentsAnalyze =
   CommentsAnalyze'
-    { _caXgafv          :: !(Maybe Xgafv)
+    { _caXgafv :: !(Maybe Xgafv)
     , _caUploadProtocol :: !(Maybe Text)
-    , _caAccessToken    :: !(Maybe Text)
-    , _caUploadType     :: !(Maybe Text)
-    , _caPayload        :: !AnalyzeCommentRequest
-    , _caCallback       :: !(Maybe Text)
+    , _caAccessToken :: !(Maybe Text)
+    , _caUploadType :: !(Maybe Text)
+    , _caPayload :: !AnalyzeCommentRequest
+    , _caCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

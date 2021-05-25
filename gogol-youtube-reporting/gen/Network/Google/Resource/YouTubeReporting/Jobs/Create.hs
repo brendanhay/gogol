@@ -42,8 +42,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Create
     , jcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.create@ method which the
 -- 'JobsCreate' request conforms to.
@@ -64,13 +64,13 @@ type JobsCreateResource =
 -- /See:/ 'jobsCreate' smart constructor.
 data JobsCreate =
   JobsCreate'
-    { _jcXgafv                  :: !(Maybe Xgafv)
-    , _jcUploadProtocol         :: !(Maybe Text)
-    , _jcAccessToken            :: !(Maybe Text)
-    , _jcUploadType             :: !(Maybe Text)
-    , _jcPayload                :: !Job
+    { _jcXgafv :: !(Maybe Xgafv)
+    , _jcUploadProtocol :: !(Maybe Text)
+    , _jcAccessToken :: !(Maybe Text)
+    , _jcUploadType :: !(Maybe Text)
+    , _jcPayload :: !Job
     , _jcOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jcCallback               :: !(Maybe Text)
+    , _jcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

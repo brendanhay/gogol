@@ -42,15 +42,16 @@ module Network.Google.Resource.DataFusion.Projects.Locations.List
     , pllPageToken
     , pllPageSize
     , pllCallback
+    , pllIncludeUnrevealedLocations
     ) where
 
-import           Network.Google.DataFusion.Types
-import           Network.Google.Prelude
+import Network.Google.DataFusion.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @datafusion.projects.locations.list@ method which the
 -- 'ProjectsLocationsList' request conforms to.
 type ProjectsLocationsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "name" Text :>
          "locations" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -61,23 +62,25 @@ type ProjectsLocationsListResource =
                      QueryParam "pageToken" Text :>
                        QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListLocationsResponse
+                           QueryParam "includeUnrevealedLocations" Bool :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListLocationsResponse
 
 -- | Lists information about the supported locations for this service.
 --
 -- /See:/ 'projectsLocationsList' smart constructor.
 data ProjectsLocationsList =
   ProjectsLocationsList'
-    { _pllXgafv          :: !(Maybe Xgafv)
+    { _pllXgafv :: !(Maybe Xgafv)
     , _pllUploadProtocol :: !(Maybe Text)
-    , _pllAccessToken    :: !(Maybe Text)
-    , _pllUploadType     :: !(Maybe Text)
-    , _pllName           :: !Text
-    , _pllFilter         :: !(Maybe Text)
-    , _pllPageToken      :: !(Maybe Text)
-    , _pllPageSize       :: !(Maybe (Textual Int32))
-    , _pllCallback       :: !(Maybe Text)
+    , _pllAccessToken :: !(Maybe Text)
+    , _pllUploadType :: !(Maybe Text)
+    , _pllName :: !Text
+    , _pllFilter :: !(Maybe Text)
+    , _pllPageToken :: !(Maybe Text)
+    , _pllPageSize :: !(Maybe (Textual Int32))
+    , _pllCallback :: !(Maybe Text)
+    , _pllIncludeUnrevealedLocations :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -103,6 +106,8 @@ data ProjectsLocationsList =
 -- * 'pllPageSize'
 --
 -- * 'pllCallback'
+--
+-- * 'pllIncludeUnrevealedLocations'
 projectsLocationsList
     :: Text -- ^ 'pllName'
     -> ProjectsLocationsList
@@ -117,6 +122,7 @@ projectsLocationsList pPllName_ =
     , _pllPageToken = Nothing
     , _pllPageSize = Nothing
     , _pllCallback = Nothing
+    , _pllIncludeUnrevealedLocations = Nothing
     }
 
 
@@ -146,17 +152,21 @@ pllUploadType
 pllName :: Lens' ProjectsLocationsList Text
 pllName = lens _pllName (\ s a -> s{_pllName = a})
 
--- | The standard list filter.
+-- | A filter to narrow down results to a preferred subset. The filtering
+-- language accepts strings like \"displayName=tokyo\", and is documented
+-- in more detail in [AIP-160](https:\/\/google.aip.dev\/160).
 pllFilter :: Lens' ProjectsLocationsList (Maybe Text)
 pllFilter
   = lens _pllFilter (\ s a -> s{_pllFilter = a})
 
--- | The standard list page token.
+-- | A page token received from the \`next_page_token\` field in the
+-- response. Send that page token to receive the subsequent page.
 pllPageToken :: Lens' ProjectsLocationsList (Maybe Text)
 pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
--- | The standard list page size.
+-- | The maximum number of results to return. If not set, the service selects
+-- a default.
 pllPageSize :: Lens' ProjectsLocationsList (Maybe Int32)
 pllPageSize
   = lens _pllPageSize (\ s a -> s{_pllPageSize = a}) .
@@ -166,6 +176,13 @@ pllPageSize
 pllCallback :: Lens' ProjectsLocationsList (Maybe Text)
 pllCallback
   = lens _pllCallback (\ s a -> s{_pllCallback = a})
+
+-- | If true, the returned list will include locations which are not yet
+-- revealed.
+pllIncludeUnrevealedLocations :: Lens' ProjectsLocationsList (Maybe Bool)
+pllIncludeUnrevealedLocations
+  = lens _pllIncludeUnrevealedLocations
+      (\ s a -> s{_pllIncludeUnrevealedLocations = a})
 
 instance GoogleRequest ProjectsLocationsList where
         type Rs ProjectsLocationsList = ListLocationsResponse
@@ -179,6 +196,7 @@ instance GoogleRequest ProjectsLocationsList where
               _pllPageToken
               _pllPageSize
               _pllCallback
+              _pllIncludeUnrevealedLocations
               (Just AltJSON)
               dataFusionService
           where go

@@ -41,8 +41,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Create
     , scCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.create@ method which the
 -- 'SpreadsheetsCreate' request conforms to.
@@ -63,12 +63,12 @@ type SpreadsheetsCreateResource =
 -- /See:/ 'spreadsheetsCreate' smart constructor.
 data SpreadsheetsCreate =
   SpreadsheetsCreate'
-    { _scXgafv          :: !(Maybe Xgafv)
+    { _scXgafv :: !(Maybe Xgafv)
     , _scUploadProtocol :: !(Maybe Text)
-    , _scAccessToken    :: !(Maybe Text)
-    , _scUploadType     :: !(Maybe Text)
-    , _scPayload        :: !Spreadsheet
-    , _scCallback       :: !(Maybe Text)
+    , _scAccessToken :: !(Maybe Text)
+    , _scUploadType :: !(Maybe Text)
+    , _scPayload :: !Spreadsheet
+    , _scCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

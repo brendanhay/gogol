@@ -22,8 +22,8 @@
 --
 -- Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
@@ -47,13 +47,13 @@ module Network.Google.Resource.BinaryAuthorization.Projects.Policy.TestIAMPermis
     , pptipCallback
     ) where
 
-import           Network.Google.BinaryAuthorization.Types
-import           Network.Google.Prelude
+import Network.Google.BinaryAuthorization.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @binaryauthorization.projects.policy.testIamPermissions@ method which the
 -- 'ProjectsPolicyTestIAMPermissions' request conforms to.
 type ProjectsPolicyTestIAMPermissionsResource =
-     "v1beta1" :>
+     "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -66,21 +66,21 @@ type ProjectsPolicyTestIAMPermissionsResource =
 
 -- | Returns permissions that a caller has on the specified resource. If the
 -- resource does not exist, this will return an empty set of permissions,
--- not a NOT_FOUND error. Note: This operation is designed to be used for
--- building permission-aware UIs and command-line tools, not for
+-- not a \`NOT_FOUND\` error. Note: This operation is designed to be used
+-- for building permission-aware UIs and command-line tools, not for
 -- authorization checking. This operation may \"fail open\" without
 -- warning.
 --
 -- /See:/ 'projectsPolicyTestIAMPermissions' smart constructor.
 data ProjectsPolicyTestIAMPermissions =
   ProjectsPolicyTestIAMPermissions'
-    { _pptipXgafv          :: !(Maybe Xgafv)
+    { _pptipXgafv :: !(Maybe Xgafv)
     , _pptipUploadProtocol :: !(Maybe Text)
-    , _pptipAccessToken    :: !(Maybe Text)
-    , _pptipUploadType     :: !(Maybe Text)
-    , _pptipPayload        :: !TestIAMPermissionsRequest
-    , _pptipResource       :: !Text
-    , _pptipCallback       :: !(Maybe Text)
+    , _pptipAccessToken :: !(Maybe Text)
+    , _pptipUploadType :: !(Maybe Text)
+    , _pptipPayload :: !TestIAMPermissionsRequest
+    , _pptipResource :: !Text
+    , _pptipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

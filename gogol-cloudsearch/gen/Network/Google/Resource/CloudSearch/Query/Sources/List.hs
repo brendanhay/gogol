@@ -21,8 +21,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns list of sources that user can use for Search and Suggest APIs.
+-- **Note:** This API requires a standard end user account to execute. A
+-- service account can\'t perform Query API requests directly; to use a
+-- service account to perform queries, set up [Google Workspace domain-wide
+-- delegation of
+-- authority](https:\/\/developers.google.com\/cloud-search\/docs\/guides\/delegation\/).
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.query.sources.list@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.query.sources.list@.
 module Network.Google.Resource.CloudSearch.Query.Sources.List
     (
     -- * REST Resource
@@ -45,8 +50,8 @@ module Network.Google.Resource.CloudSearch.Query.Sources.List
     , qslCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.query.sources.list@ method which the
 -- 'QuerySourcesList' request conforms to.
@@ -72,20 +77,25 @@ type QuerySourcesListResource =
                                  Get '[JSON] ListQuerySourcesResponse
 
 -- | Returns list of sources that user can use for Search and Suggest APIs.
+-- **Note:** This API requires a standard end user account to execute. A
+-- service account can\'t perform Query API requests directly; to use a
+-- service account to perform queries, set up [Google Workspace domain-wide
+-- delegation of
+-- authority](https:\/\/developers.google.com\/cloud-search\/docs\/guides\/delegation\/).
 --
 -- /See:/ 'querySourcesList' smart constructor.
 data QuerySourcesList =
   QuerySourcesList'
-    { _qslXgafv                                     :: !(Maybe Xgafv)
-    , _qslRequestOptionsTimeZone                    :: !(Maybe Text)
+    { _qslXgafv :: !(Maybe Xgafv)
+    , _qslRequestOptionsTimeZone :: !(Maybe Text)
     , _qslRequestOptionsDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _qslUploadProtocol                            :: !(Maybe Text)
-    , _qslAccessToken                               :: !(Maybe Text)
-    , _qslUploadType                                :: !(Maybe Text)
-    , _qslRequestOptionsSearchApplicationId         :: !(Maybe Text)
-    , _qslRequestOptionsLanguageCode                :: !(Maybe Text)
-    , _qslPageToken                                 :: !(Maybe Text)
-    , _qslCallback                                  :: !(Maybe Text)
+    , _qslUploadProtocol :: !(Maybe Text)
+    , _qslAccessToken :: !(Maybe Text)
+    , _qslUploadType :: !(Maybe Text)
+    , _qslRequestOptionsSearchApplicationId :: !(Maybe Text)
+    , _qslRequestOptionsLanguageCode :: !(Maybe Text)
+    , _qslPageToken :: !(Maybe Text)
+    , _qslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,7 +148,9 @@ qslXgafv = lens _qslXgafv (\ s a -> s{_qslXgafv = a})
 -- \"Australia\/Sydney\". These IDs are defined by [Unicode Common Locale
 -- Data Repository (CLDR)](http:\/\/cldr.unicode.org\/) project, and
 -- currently available in the file
--- [timezone.xml](http:\/\/unicode.org\/repos\/cldr\/trunk\/common\/bcp47\/timezone.xml)
+-- [timezone.xml](http:\/\/unicode.org\/repos\/cldr\/trunk\/common\/bcp47\/timezone.xml).
+-- This field is used to correctly interpret date and time queries. If this
+-- field is not specified, the default time zone (UTC) is used.
 qslRequestOptionsTimeZone :: Lens' QuerySourcesList (Maybe Text)
 qslRequestOptionsTimeZone
   = lens _qslRequestOptionsTimeZone
@@ -170,7 +182,8 @@ qslUploadType
   = lens _qslUploadType
       (\ s a -> s{_qslUploadType = a})
 
--- | Id of the application created using SearchApplicationsService.
+-- | The ID generated when you create a search application using the [admin
+-- console](https:\/\/support.google.com\/a\/answer\/9043922).
 qslRequestOptionsSearchApplicationId :: Lens' QuerySourcesList (Maybe Text)
 qslRequestOptionsSearchApplicationId
   = lens _qslRequestOptionsSearchApplicationId
@@ -180,9 +193,12 @@ qslRequestOptionsSearchApplicationId
 -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more
 -- information, see
 -- http:\/\/www.unicode.org\/reports\/tr35\/#Unicode_locale_identifier. For
--- translations. When specified, the documents in search results are biased
--- towards the specified language. Suggest API does not use this parameter.
--- It autocompletes only based on characters in the query.
+-- translations. Set this field using the language set in browser or for
+-- the page. In the event that the user\'s language preference is known,
+-- set this field to the known user language. When specified, the documents
+-- in search results are biased towards the specified language. The suggest
+-- API does not use this parameter. Instead, suggest autocompletes only
+-- based on characters in the query.
 qslRequestOptionsLanguageCode :: Lens' QuerySourcesList (Maybe Text)
 qslRequestOptionsLanguageCode
   = lens _qslRequestOptionsLanguageCode

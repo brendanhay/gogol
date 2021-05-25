@@ -22,7 +22,7 @@
 --
 -- Gets information about a location.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.get@.
+-- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.get@.
 module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.BigQueryDataTransfer.Projects.Locations.Get
     , plgCallback
     ) where
 
-import           Network.Google.BigQueryDataTransfer.Types
-import           Network.Google.Prelude
+import Network.Google.BigQueryDataTransfer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.get@ method which the
 -- 'ProjectsLocationsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsGetResource =
 -- /See:/ 'projectsLocationsGet' smart constructor.
 data ProjectsLocationsGet =
   ProjectsLocationsGet'
-    { _plgXgafv          :: !(Maybe Xgafv)
+    { _plgXgafv :: !(Maybe Xgafv)
     , _plgUploadProtocol :: !(Maybe Text)
-    , _plgAccessToken    :: !(Maybe Text)
-    , _plgUploadType     :: !(Maybe Text)
-    , _plgName           :: !Text
-    , _plgCallback       :: !(Maybe Text)
+    , _plgAccessToken :: !(Maybe Text)
+    , _plgUploadType :: !(Maybe Text)
+    , _plgName :: !Text
+    , _plgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -23,9 +23,10 @@
 -- Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with
 -- subsquent calls to retrieve this dataset. Data points can belong to more
--- than one dataset. This method does not use patch semantics.
+-- than one dataset. This method does not use patch semantics: the data
+-- points provided are merely inserted, with no existing data replaced.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.datasets.patch@.
+-- /See:/ <https://developers.google.com/fit/rest/v1/get-started Fitness API Reference> for @fitness.users.dataSources.datasets.patch@.
 module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
     (
     -- * REST Resource
@@ -36,15 +37,19 @@ module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
     , UsersDataSourcesDataSetsPatch
 
     -- * Request Lenses
+    , udsdspXgafv
+    , udsdspUploadProtocol
+    , udsdspAccessToken
     , udsdspDataSourceId
+    , udsdspUploadType
     , udsdspPayload
     , udsdspUserId
     , udsdspDataSetId
-    , udsdspCurrentTimeMillis
+    , udsdspCallback
     ) where
 
-import           Network.Google.Fitness.Types
-import           Network.Google.Prelude
+import Network.Google.Fitness.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.datasets.patch@ method which the
 -- 'UsersDataSourcesDataSetsPatch' request conforms to.
@@ -57,23 +62,33 @@ type UsersDataSourcesDataSetsPatchResource =
                Capture "dataSourceId" Text :>
                  "datasets" :>
                    Capture "datasetId" Text :>
-                     QueryParam "currentTimeMillis" (Textual Int64) :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] DataSet :>
+                                   Patch '[JSON] DataSet
 
 -- | Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with
 -- subsquent calls to retrieve this dataset. Data points can belong to more
--- than one dataset. This method does not use patch semantics.
+-- than one dataset. This method does not use patch semantics: the data
+-- points provided are merely inserted, with no existing data replaced.
 --
 -- /See:/ 'usersDataSourcesDataSetsPatch' smart constructor.
 data UsersDataSourcesDataSetsPatch =
   UsersDataSourcesDataSetsPatch'
-    { _udsdspDataSourceId      :: !Text
-    , _udsdspPayload           :: !DataSet
-    , _udsdspUserId            :: !Text
-    , _udsdspDataSetId         :: !Text
-    , _udsdspCurrentTimeMillis :: !(Maybe (Textual Int64))
+    { _udsdspXgafv :: !(Maybe Xgafv)
+    , _udsdspUploadProtocol :: !(Maybe Text)
+    , _udsdspAccessToken :: !(Maybe Text)
+    , _udsdspDataSourceId :: !Text
+    , _udsdspUploadType :: !(Maybe Text)
+    , _udsdspPayload :: !DataSet
+    , _udsdspUserId :: !Text
+    , _udsdspDataSetId :: !Text
+    , _udsdspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -82,7 +97,15 @@ data UsersDataSourcesDataSetsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'udsdspXgafv'
+--
+-- * 'udsdspUploadProtocol'
+--
+-- * 'udsdspAccessToken'
+--
 -- * 'udsdspDataSourceId'
+--
+-- * 'udsdspUploadType'
 --
 -- * 'udsdspPayload'
 --
@@ -90,7 +113,7 @@ data UsersDataSourcesDataSetsPatch =
 --
 -- * 'udsdspDataSetId'
 --
--- * 'udsdspCurrentTimeMillis'
+-- * 'udsdspCallback'
 usersDataSourcesDataSetsPatch
     :: Text -- ^ 'udsdspDataSourceId'
     -> DataSet -- ^ 'udsdspPayload'
@@ -99,19 +122,46 @@ usersDataSourcesDataSetsPatch
     -> UsersDataSourcesDataSetsPatch
 usersDataSourcesDataSetsPatch pUdsdspDataSourceId_ pUdsdspPayload_ pUdsdspUserId_ pUdsdspDataSetId_ =
   UsersDataSourcesDataSetsPatch'
-    { _udsdspDataSourceId = pUdsdspDataSourceId_
+    { _udsdspXgafv = Nothing
+    , _udsdspUploadProtocol = Nothing
+    , _udsdspAccessToken = Nothing
+    , _udsdspDataSourceId = pUdsdspDataSourceId_
+    , _udsdspUploadType = Nothing
     , _udsdspPayload = pUdsdspPayload_
     , _udsdspUserId = pUdsdspUserId_
     , _udsdspDataSetId = pUdsdspDataSetId_
-    , _udsdspCurrentTimeMillis = Nothing
+    , _udsdspCallback = Nothing
     }
 
+
+-- | V1 error format.
+udsdspXgafv :: Lens' UsersDataSourcesDataSetsPatch (Maybe Xgafv)
+udsdspXgafv
+  = lens _udsdspXgafv (\ s a -> s{_udsdspXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+udsdspUploadProtocol :: Lens' UsersDataSourcesDataSetsPatch (Maybe Text)
+udsdspUploadProtocol
+  = lens _udsdspUploadProtocol
+      (\ s a -> s{_udsdspUploadProtocol = a})
+
+-- | OAuth access token.
+udsdspAccessToken :: Lens' UsersDataSourcesDataSetsPatch (Maybe Text)
+udsdspAccessToken
+  = lens _udsdspAccessToken
+      (\ s a -> s{_udsdspAccessToken = a})
 
 -- | The data stream ID of the data source that created the dataset.
 udsdspDataSourceId :: Lens' UsersDataSourcesDataSetsPatch Text
 udsdspDataSourceId
   = lens _udsdspDataSourceId
       (\ s a -> s{_udsdspDataSourceId = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+udsdspUploadType :: Lens' UsersDataSourcesDataSetsPatch (Maybe Text)
+udsdspUploadType
+  = lens _udsdspUploadType
+      (\ s a -> s{_udsdspUploadType = a})
 
 -- | Multipart request metadata.
 udsdspPayload :: Lens' UsersDataSourcesDataSetsPatch DataSet
@@ -125,23 +175,17 @@ udsdspUserId :: Lens' UsersDataSourcesDataSetsPatch Text
 udsdspUserId
   = lens _udsdspUserId (\ s a -> s{_udsdspUserId = a})
 
--- | Dataset identifier that is a composite of the minimum data point start
--- time and maximum data point end time represented as nanoseconds from the
--- epoch. The ID is formatted like: \"startTime-endTime\" where startTime
--- and endTime are 64 bit integers.
+-- | This field is not used, and can be safely omitted.
 udsdspDataSetId :: Lens' UsersDataSourcesDataSetsPatch Text
 udsdspDataSetId
   = lens _udsdspDataSetId
       (\ s a -> s{_udsdspDataSetId = a})
 
--- | The client\'s current time in milliseconds since epoch. Note that the
--- minStartTimeNs and maxEndTimeNs properties in the request body are in
--- nanoseconds instead of milliseconds.
-udsdspCurrentTimeMillis :: Lens' UsersDataSourcesDataSetsPatch (Maybe Int64)
-udsdspCurrentTimeMillis
-  = lens _udsdspCurrentTimeMillis
-      (\ s a -> s{_udsdspCurrentTimeMillis = a})
-      . mapping _Coerce
+-- | JSONP
+udsdspCallback :: Lens' UsersDataSourcesDataSetsPatch (Maybe Text)
+udsdspCallback
+  = lens _udsdspCallback
+      (\ s a -> s{_udsdspCallback = a})
 
 instance GoogleRequest UsersDataSourcesDataSetsPatch
          where
@@ -152,14 +196,20 @@ instance GoogleRequest UsersDataSourcesDataSetsPatch
                "https://www.googleapis.com/auth/fitness.blood_pressure.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.body_temperature.write",
+               "https://www.googleapis.com/auth/fitness.heart_rate.write",
                "https://www.googleapis.com/auth/fitness.location.write",
                "https://www.googleapis.com/auth/fitness.nutrition.write",
                "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
-               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write",
+               "https://www.googleapis.com/auth/fitness.sleep.write"]
         requestClient UsersDataSourcesDataSetsPatch'{..}
           = go _udsdspUserId _udsdspDataSourceId
               _udsdspDataSetId
-              _udsdspCurrentTimeMillis
+              _udsdspXgafv
+              _udsdspUploadProtocol
+              _udsdspAccessToken
+              _udsdspUploadType
+              _udsdspCallback
               (Just AltJSON)
               _udsdspPayload
               fitnessService

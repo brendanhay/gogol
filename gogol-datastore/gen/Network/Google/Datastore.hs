@@ -46,6 +46,12 @@ module Network.Google.Datastore
     -- ** datastore.projects.import
     , module Network.Google.Resource.Datastore.Projects.Import
 
+    -- ** datastore.projects.indexes.create
+    , module Network.Google.Resource.Datastore.Projects.Indexes.Create
+
+    -- ** datastore.projects.indexes.delete
+    , module Network.Google.Resource.Datastore.Projects.Indexes.Delete
+
     -- ** datastore.projects.indexes.get
     , module Network.Google.Resource.Datastore.Projects.Indexes.Get
 
@@ -583,23 +589,25 @@ module Network.Google.Datastore
     , GoogleDatastoreAdminV1CommonMetadataState (..)
     ) where
 
-import           Network.Google.Datastore.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Datastore.Projects.AllocateIds
-import           Network.Google.Resource.Datastore.Projects.BeginTransaction
-import           Network.Google.Resource.Datastore.Projects.Commit
-import           Network.Google.Resource.Datastore.Projects.Export
-import           Network.Google.Resource.Datastore.Projects.Import
-import           Network.Google.Resource.Datastore.Projects.Indexes.Get
-import           Network.Google.Resource.Datastore.Projects.Indexes.List
-import           Network.Google.Resource.Datastore.Projects.Lookup
-import           Network.Google.Resource.Datastore.Projects.Operations.Cancel
-import           Network.Google.Resource.Datastore.Projects.Operations.Delete
-import           Network.Google.Resource.Datastore.Projects.Operations.Get
-import           Network.Google.Resource.Datastore.Projects.Operations.List
-import           Network.Google.Resource.Datastore.Projects.ReserveIds
-import           Network.Google.Resource.Datastore.Projects.Rollback
-import           Network.Google.Resource.Datastore.Projects.RunQuery
+import Network.Google.Prelude
+import Network.Google.Datastore.Types
+import Network.Google.Resource.Datastore.Projects.AllocateIds
+import Network.Google.Resource.Datastore.Projects.BeginTransaction
+import Network.Google.Resource.Datastore.Projects.Commit
+import Network.Google.Resource.Datastore.Projects.Export
+import Network.Google.Resource.Datastore.Projects.Import
+import Network.Google.Resource.Datastore.Projects.Indexes.Create
+import Network.Google.Resource.Datastore.Projects.Indexes.Delete
+import Network.Google.Resource.Datastore.Projects.Indexes.Get
+import Network.Google.Resource.Datastore.Projects.Indexes.List
+import Network.Google.Resource.Datastore.Projects.Lookup
+import Network.Google.Resource.Datastore.Projects.Operations.Cancel
+import Network.Google.Resource.Datastore.Projects.Operations.Delete
+import Network.Google.Resource.Datastore.Projects.Operations.Get
+import Network.Google.Resource.Datastore.Projects.Operations.List
+import Network.Google.Resource.Datastore.Projects.ReserveIds
+import Network.Google.Resource.Datastore.Projects.Rollback
+import Network.Google.Resource.Datastore.Projects.RunQuery
 
 {- $resources
 TODO
@@ -609,6 +617,8 @@ TODO
 type DatastoreAPI =
      ProjectsIndexesListResource :<|>
        ProjectsIndexesGetResource
+       :<|> ProjectsIndexesCreateResource
+       :<|> ProjectsIndexesDeleteResource
        :<|> ProjectsOperationsListResource
        :<|> ProjectsOperationsGetResource
        :<|> ProjectsOperationsCancelResource

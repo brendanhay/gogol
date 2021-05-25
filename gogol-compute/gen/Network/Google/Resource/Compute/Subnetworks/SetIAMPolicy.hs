@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Subnetworks.SetIAMPolicy
     , ssiampRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.subnetworks.setIamPolicy@ method which the
 -- 'SubnetworksSetIAMPolicy' request conforms to.
@@ -65,10 +65,10 @@ type SubnetworksSetIAMPolicyResource =
 -- /See:/ 'subnetworksSetIAMPolicy' smart constructor.
 data SubnetworksSetIAMPolicy =
   SubnetworksSetIAMPolicy'
-    { _ssiampProject  :: !Text
-    , _ssiampPayload  :: !RegionSetPolicyRequest
+    { _ssiampProject :: !Text
+    , _ssiampPayload :: !RegionSetPolicyRequest
     , _ssiampResource :: !Text
-    , _ssiampRegion   :: !Text
+    , _ssiampRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

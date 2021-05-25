@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.SSLPolicies.Get
     , spgProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.sslPolicies.get@ method which the
 -- 'SSLPoliciesGet' request conforms to.
@@ -58,7 +58,7 @@ type SSLPoliciesGetResource =
 data SSLPoliciesGet =
   SSLPoliciesGet'
     { _spgSSLPolicy :: !Text
-    , _spgProject   :: !Text
+    , _spgProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

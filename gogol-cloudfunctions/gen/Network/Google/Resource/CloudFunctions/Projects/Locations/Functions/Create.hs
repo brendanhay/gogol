@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudFunctions.Projects.Locations.Functions.Creat
     , plfcCallback
     ) where
 
-import           Network.Google.CloudFunctions.Types
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.create@ method which the
 -- 'ProjectsLocationsFunctionsCreate' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsLocationsFunctionsCreateResource =
 -- /See:/ 'projectsLocationsFunctionsCreate' smart constructor.
 data ProjectsLocationsFunctionsCreate =
   ProjectsLocationsFunctionsCreate'
-    { _plfcXgafv          :: !(Maybe Xgafv)
+    { _plfcXgafv :: !(Maybe Xgafv)
     , _plfcUploadProtocol :: !(Maybe Text)
-    , _plfcLocation       :: !Text
-    , _plfcAccessToken    :: !(Maybe Text)
-    , _plfcUploadType     :: !(Maybe Text)
-    , _plfcPayload        :: !CloudFunction
-    , _plfcCallback       :: !(Maybe Text)
+    , _plfcLocation :: !Text
+    , _plfcAccessToken :: !(Maybe Text)
+    , _plfcUploadType :: !(Maybe Text)
+    , _plfcPayload :: !CloudFunction
+    , _plfcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ plfcUploadProtocol
   = lens _plfcUploadProtocol
       (\ s a -> s{_plfcUploadProtocol = a})
 
--- | The project and location in which the function should be created,
--- specified in the format \`projects\/*\/locations\/*\`
+-- | Required. The project and location in which the function should be
+-- created, specified in the format \`projects\/*\/locations\/*\`
 plfcLocation :: Lens' ProjectsLocationsFunctionsCreate Text
 plfcLocation
   = lens _plfcLocation (\ s a -> s{_plfcLocation = a})

@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Teamdrives.Create
     , tcPayload
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.teamdrives.create@ method which the
 -- 'TeamdrivesCreate' request conforms to.
@@ -56,7 +56,7 @@ type TeamdrivesCreateResource =
 data TeamdrivesCreate =
   TeamdrivesCreate'
     { _tcRequestId :: !Text
-    , _tcPayload   :: !TeamDrive
+    , _tcPayload :: !TeamDrive
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

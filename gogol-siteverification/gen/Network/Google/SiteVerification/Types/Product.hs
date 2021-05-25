@@ -17,8 +17,8 @@
 --
 module Network.Google.SiteVerification.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.SiteVerification.Types.Sum
+import Network.Google.Prelude
+import Network.Google.SiteVerification.Types.Sum
 
 -- | The site for which a verification token will be generated.
 --
@@ -26,7 +26,7 @@ import           Network.Google.SiteVerification.Types.Sum
 data SiteVerificationWebResourceGettokenRequestSite =
   SiteVerificationWebResourceGettokenRequestSite'
     { _svwrgrsIdentifier :: !(Maybe Text)
-    , _svwrgrsType       :: !(Maybe Text)
+    , _svwrgrsType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,7 +83,7 @@ instance ToJSON
 -- /See:/ 'siteVerificationWebResourceGettokenResponse' smart constructor.
 data SiteVerificationWebResourceGettokenResponse =
   SiteVerificationWebResourceGettokenResponse'
-    { _svwrgrToken  :: !(Maybe Text)
+    { _svwrgrToken :: !(Maybe Text)
     , _svwrgrMethod :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -187,7 +187,7 @@ instance ToJSON
 data SiteVerificationWebResourceResourceSite =
   SiteVerificationWebResourceResourceSite'
     { _svwrrsIdentifier :: !(Maybe Text)
-    , _svwrrsType       :: !(Maybe Text)
+    , _svwrrsType :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -242,7 +242,7 @@ instance ToJSON
 -- /See:/ 'siteVerificationWebResourceGettokenRequest' smart constructor.
 data SiteVerificationWebResourceGettokenRequest =
   SiteVerificationWebResourceGettokenRequest'
-    { _svwrgrSite               :: !(Maybe SiteVerificationWebResourceGettokenRequestSite)
+    { _svwrgrSite :: !(Maybe SiteVerificationWebResourceGettokenRequestSite)
     , _svwrgrVerificationMethod :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -301,8 +301,8 @@ instance ToJSON
 data SiteVerificationWebResourceResource =
   SiteVerificationWebResourceResource'
     { _svwrrOwners :: !(Maybe [Text])
-    , _svwrrId     :: !(Maybe Text)
-    , _svwrrSite   :: !(Maybe SiteVerificationWebResourceResourceSite)
+    , _svwrrId :: !(Maybe Text)
+    , _svwrrSite :: !(Maybe SiteVerificationWebResourceResourceSite)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

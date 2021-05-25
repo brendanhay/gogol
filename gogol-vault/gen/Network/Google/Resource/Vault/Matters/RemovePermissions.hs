@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.RemovePermissions
     , mrpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.removePermissions@ method which the
 -- 'MattersRemovePermissions' request conforms to.
@@ -65,13 +65,13 @@ type MattersRemovePermissionsResource =
 -- /See:/ 'mattersRemovePermissions' smart constructor.
 data MattersRemovePermissions =
   MattersRemovePermissions'
-    { _mrpXgafv          :: !(Maybe Xgafv)
+    { _mrpXgafv :: !(Maybe Xgafv)
     , _mrpUploadProtocol :: !(Maybe Text)
-    , _mrpAccessToken    :: !(Maybe Text)
-    , _mrpUploadType     :: !(Maybe Text)
-    , _mrpPayload        :: !RemoveMatterPermissionsRequest
-    , _mrpMatterId       :: !Text
-    , _mrpCallback       :: !(Maybe Text)
+    , _mrpAccessToken :: !(Maybe Text)
+    , _mrpUploadType :: !(Maybe Text)
+    , _mrpPayload :: !RemoveMatterPermissionsRequest
+    , _mrpMatterId :: !Text
+    , _mrpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

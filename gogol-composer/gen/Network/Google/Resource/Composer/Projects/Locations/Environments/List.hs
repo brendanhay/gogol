@@ -43,8 +43,8 @@ module Network.Google.Resource.Composer.Projects.Locations.Environments.List
     , plelCallback
     ) where
 
-import           Network.Google.Composer.Types
-import           Network.Google.Prelude
+import Network.Google.Composer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @composer.projects.locations.environments.list@ method which the
 -- 'ProjectsLocationsEnvironmentsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsEnvironmentsListResource =
 -- /See:/ 'projectsLocationsEnvironmentsList' smart constructor.
 data ProjectsLocationsEnvironmentsList =
   ProjectsLocationsEnvironmentsList'
-    { _plelParent         :: !Text
-    , _plelXgafv          :: !(Maybe Xgafv)
+    { _plelParent :: !Text
+    , _plelXgafv :: !(Maybe Xgafv)
     , _plelUploadProtocol :: !(Maybe Text)
-    , _plelAccessToken    :: !(Maybe Text)
-    , _plelUploadType     :: !(Maybe Text)
-    , _plelPageToken      :: !(Maybe Text)
-    , _plelPageSize       :: !(Maybe (Textual Int32))
-    , _plelCallback       :: !(Maybe Text)
+    , _plelAccessToken :: !(Maybe Text)
+    , _plelUploadType :: !(Maybe Text)
+    , _plelPageToken :: !(Maybe Text)
+    , _plelPageSize :: !(Maybe (Textual Int32))
+    , _plelCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

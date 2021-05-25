@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Drives.Create
     , dcPayload
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.drives.create@ method which the
 -- 'DrivesCreate' request conforms to.
@@ -56,7 +56,7 @@ type DrivesCreateResource =
 data DrivesCreate =
   DrivesCreate'
     { _dcRequestId :: !Text
-    , _dcPayload   :: !Drive
+    , _dcPayload :: !Drive
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

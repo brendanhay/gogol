@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Instances.SetIAMPolicy
     , isipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setIamPolicy@ method which the
 -- 'InstancesSetIAMPolicy' request conforms to.
@@ -65,9 +65,9 @@ type InstancesSetIAMPolicyResource =
 -- /See:/ 'instancesSetIAMPolicy' smart constructor.
 data InstancesSetIAMPolicy =
   InstancesSetIAMPolicy'
-    { _isipProject  :: !Text
-    , _isipZone     :: !Text
-    , _isipPayload  :: !ZoneSetPolicyRequest
+    { _isipProject :: !Text
+    , _isipZone :: !Text
+    , _isipPayload :: !ZoneSetPolicyRequest
     , _isipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

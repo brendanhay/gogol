@@ -22,7 +22,7 @@
 --
 -- Gets the description of an exclusion.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.exclusions.get@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.exclusions.get@.
 module Network.Google.Resource.Logging.Folders.Exclusions.Get
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.Logging.Folders.Exclusions.Get
     , fegCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.folders.exclusions.get@ method which the
 -- 'FoldersExclusionsGet' request conforms to.
@@ -61,12 +61,12 @@ type FoldersExclusionsGetResource =
 -- /See:/ 'foldersExclusionsGet' smart constructor.
 data FoldersExclusionsGet =
   FoldersExclusionsGet'
-    { _fegXgafv          :: !(Maybe Xgafv)
+    { _fegXgafv :: !(Maybe Xgafv)
     , _fegUploadProtocol :: !(Maybe Text)
-    , _fegAccessToken    :: !(Maybe Text)
-    , _fegUploadType     :: !(Maybe Text)
-    , _fegName           :: !Text
-    , _fegCallback       :: !(Maybe Text)
+    , _fegAccessToken :: !(Maybe Text)
+    , _fegUploadType :: !(Maybe Text)
+    , _fegName :: !Text
+    , _fegCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

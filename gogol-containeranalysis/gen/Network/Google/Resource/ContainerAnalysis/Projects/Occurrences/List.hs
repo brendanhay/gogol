@@ -44,8 +44,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.List
     , polCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.list@ method which the
 -- 'ProjectsOccurrencesList' request conforms to.
@@ -69,15 +69,15 @@ type ProjectsOccurrencesListResource =
 -- /See:/ 'projectsOccurrencesList' smart constructor.
 data ProjectsOccurrencesList =
   ProjectsOccurrencesList'
-    { _polParent         :: !Text
-    , _polXgafv          :: !(Maybe Xgafv)
+    { _polParent :: !Text
+    , _polXgafv :: !(Maybe Xgafv)
     , _polUploadProtocol :: !(Maybe Text)
-    , _polAccessToken    :: !(Maybe Text)
-    , _polUploadType     :: !(Maybe Text)
-    , _polFilter         :: !(Maybe Text)
-    , _polPageToken      :: !(Maybe Text)
-    , _polPageSize       :: !(Maybe (Textual Int32))
-    , _polCallback       :: !(Maybe Text)
+    , _polAccessToken :: !(Maybe Text)
+    , _polUploadType :: !(Maybe Text)
+    , _polFilter :: !(Maybe Text)
+    , _polPageToken :: !(Maybe Text)
+    , _polPageSize :: !(Maybe (Textual Int32))
+    , _polCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,7 +120,7 @@ projectsOccurrencesList pPolParent_ =
     }
 
 
--- | The name of the project to list occurrences for in the form of
+-- | Required. The name of the project to list occurrences for in the form of
 -- \`projects\/[PROJECT_ID]\`.
 polParent :: Lens' ProjectsOccurrencesList Text
 polParent

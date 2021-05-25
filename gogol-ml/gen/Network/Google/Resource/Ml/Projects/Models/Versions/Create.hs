@@ -26,9 +26,9 @@
 -- model. When you add a version to a model that already has one or more
 -- versions, the default version does not automatically change. If you want
 -- a new version to be the default, you must call
--- [projects.models.versions.setDefault](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/setDefault).
+-- projects.models.versions.setDefault.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.versions.create@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.versions.create@.
 module Network.Google.Resource.Ml.Projects.Models.Versions.Create
     (
     -- * REST Resource
@@ -48,8 +48,8 @@ module Network.Google.Resource.Ml.Projects.Models.Versions.Create
     , pmvcCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.versions.create@ method which the
 -- 'ProjectsModelsVersionsCreate' request conforms to.
@@ -72,18 +72,18 @@ type ProjectsModelsVersionsCreateResource =
 -- model. When you add a version to a model that already has one or more
 -- versions, the default version does not automatically change. If you want
 -- a new version to be the default, you must call
--- [projects.models.versions.setDefault](\/ml-engine\/reference\/rest\/v1\/projects.models.versions\/setDefault).
+-- projects.models.versions.setDefault.
 --
 -- /See:/ 'projectsModelsVersionsCreate' smart constructor.
 data ProjectsModelsVersionsCreate =
   ProjectsModelsVersionsCreate'
-    { _pmvcParent         :: !Text
-    , _pmvcXgafv          :: !(Maybe Xgafv)
+    { _pmvcParent :: !Text
+    , _pmvcXgafv :: !(Maybe Xgafv)
     , _pmvcUploadProtocol :: !(Maybe Text)
-    , _pmvcAccessToken    :: !(Maybe Text)
-    , _pmvcUploadType     :: !(Maybe Text)
-    , _pmvcPayload        :: !GoogleCloudMlV1__Version
-    , _pmvcCallback       :: !(Maybe Text)
+    , _pmvcAccessToken :: !(Maybe Text)
+    , _pmvcUploadType :: !(Maybe Text)
+    , _pmvcPayload :: !GoogleCloudMlV1__Version
+    , _pmvcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

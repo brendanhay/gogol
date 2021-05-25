@@ -16,7 +16,7 @@
 --
 module Network.Google.Dataproc.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Output only. A state message specifying the overall job state.
 data JobStatusState
@@ -140,6 +140,191 @@ instance FromJSON WorkflowNodeState where
 instance ToJSON WorkflowNodeState where
     toJSON = toJSONText
 
+-- | Optional. Specifies enumerated categories of jobs to list. (default =
+-- match ALL jobs).If filter is provided, jobStateMatcher will be ignored.
+data ProjectsRegionsJobsListJobStateMatcher
+    = All
+      -- ^ @ALL@
+      -- Match all jobs, regardless of state.
+    | Active
+      -- ^ @ACTIVE@
+      -- Only match jobs in non-terminal states: PENDING, RUNNING, or
+      -- CANCEL_PENDING.
+    | NonActive
+      -- ^ @NON_ACTIVE@
+      -- Only match jobs in terminal states: CANCELLED, DONE, or ERROR.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsRegionsJobsListJobStateMatcher
+
+instance FromHttpApiData ProjectsRegionsJobsListJobStateMatcher where
+    parseQueryParam = \case
+        "ALL" -> Right All
+        "ACTIVE" -> Right Active
+        "NON_ACTIVE" -> Right NonActive
+        x -> Left ("Unable to parse ProjectsRegionsJobsListJobStateMatcher from: " <> x)
+
+instance ToHttpApiData ProjectsRegionsJobsListJobStateMatcher where
+    toQueryParam = \case
+        All -> "ALL"
+        Active -> "ACTIVE"
+        NonActive -> "NON_ACTIVE"
+
+instance FromJSON ProjectsRegionsJobsListJobStateMatcher where
+    parseJSON = parseJSONText "ProjectsRegionsJobsListJobStateMatcher"
+
+instance ToJSON ProjectsRegionsJobsListJobStateMatcher where
+    toJSON = toJSONText
+
+data LoggingConfigDriverLogLevelsAdditional
+    = LCDLLALevelUnspecified
+      -- ^ @LEVEL_UNSPECIFIED@
+      -- Level is unspecified. Use default level for log4j.
+    | LCDLLAAll
+      -- ^ @ALL@
+      -- Use ALL level for log4j.
+    | LCDLLATrace
+      -- ^ @TRACE@
+      -- Use TRACE level for log4j.
+    | LCDLLADebug
+      -- ^ @DEBUG@
+      -- Use DEBUG level for log4j.
+    | LCDLLAInfo
+      -- ^ @INFO@
+      -- Use INFO level for log4j.
+    | LCDLLAWarn
+      -- ^ @WARN@
+      -- Use WARN level for log4j.
+    | LCDLLAError'
+      -- ^ @ERROR@
+      -- Use ERROR level for log4j.
+    | LCDLLAFatal
+      -- ^ @FATAL@
+      -- Use FATAL level for log4j.
+    | LCDLLAOff
+      -- ^ @OFF@
+      -- Turn off log4j.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LoggingConfigDriverLogLevelsAdditional
+
+instance FromHttpApiData LoggingConfigDriverLogLevelsAdditional where
+    parseQueryParam = \case
+        "LEVEL_UNSPECIFIED" -> Right LCDLLALevelUnspecified
+        "ALL" -> Right LCDLLAAll
+        "TRACE" -> Right LCDLLATrace
+        "DEBUG" -> Right LCDLLADebug
+        "INFO" -> Right LCDLLAInfo
+        "WARN" -> Right LCDLLAWarn
+        "ERROR" -> Right LCDLLAError'
+        "FATAL" -> Right LCDLLAFatal
+        "OFF" -> Right LCDLLAOff
+        x -> Left ("Unable to parse LoggingConfigDriverLogLevelsAdditional from: " <> x)
+
+instance ToHttpApiData LoggingConfigDriverLogLevelsAdditional where
+    toQueryParam = \case
+        LCDLLALevelUnspecified -> "LEVEL_UNSPECIFIED"
+        LCDLLAAll -> "ALL"
+        LCDLLATrace -> "TRACE"
+        LCDLLADebug -> "DEBUG"
+        LCDLLAInfo -> "INFO"
+        LCDLLAWarn -> "WARN"
+        LCDLLAError' -> "ERROR"
+        LCDLLAFatal -> "FATAL"
+        LCDLLAOff -> "OFF"
+
+instance FromJSON LoggingConfigDriverLogLevelsAdditional where
+    parseJSON = parseJSONText "LoggingConfigDriverLogLevelsAdditional"
+
+instance ToJSON LoggingConfigDriverLogLevelsAdditional where
+    toJSON = toJSONText
+
+data SoftwareConfigOptionalComponentsItem
+    = ComponentUnspecified
+      -- ^ @COMPONENT_UNSPECIFIED@
+      -- Unspecified component. Specifying this will cause Cluster creation to
+      -- fail.
+    | Anaconda
+      -- ^ @ANACONDA@
+      -- The Anaconda python distribution. The Anaconda component is not
+      -- supported in the Dataproc 2.0 image. The 2.0 image is pre-installed with
+      -- Miniconda.
+    | Docker
+      -- ^ @DOCKER@
+      -- Docker
+    | Druid
+      -- ^ @DRUID@
+      -- The Druid query engine. (alpha)
+    | Flink
+      -- ^ @FLINK@
+      -- Flink
+    | Hbase
+      -- ^ @HBASE@
+      -- HBase. (beta)
+    | HiveWebhcat
+      -- ^ @HIVE_WEBHCAT@
+      -- The Hive Web HCatalog (the REST service for accessing HCatalog).
+    | Jupyter
+      -- ^ @JUPYTER@
+      -- The Jupyter Notebook.
+    | Presto
+      -- ^ @PRESTO@
+      -- The Presto query engine.
+    | Ranger
+      -- ^ @RANGER@
+      -- The Ranger service.
+    | Solr
+      -- ^ @SOLR@
+      -- The Solr service.
+    | Zeppelin
+      -- ^ @ZEPPELIN@
+      -- The Zeppelin notebook.
+    | Zookeeper
+      -- ^ @ZOOKEEPER@
+      -- The Zookeeper service.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SoftwareConfigOptionalComponentsItem
+
+instance FromHttpApiData SoftwareConfigOptionalComponentsItem where
+    parseQueryParam = \case
+        "COMPONENT_UNSPECIFIED" -> Right ComponentUnspecified
+        "ANACONDA" -> Right Anaconda
+        "DOCKER" -> Right Docker
+        "DRUID" -> Right Druid
+        "FLINK" -> Right Flink
+        "HBASE" -> Right Hbase
+        "HIVE_WEBHCAT" -> Right HiveWebhcat
+        "JUPYTER" -> Right Jupyter
+        "PRESTO" -> Right Presto
+        "RANGER" -> Right Ranger
+        "SOLR" -> Right Solr
+        "ZEPPELIN" -> Right Zeppelin
+        "ZOOKEEPER" -> Right Zookeeper
+        x -> Left ("Unable to parse SoftwareConfigOptionalComponentsItem from: " <> x)
+
+instance ToHttpApiData SoftwareConfigOptionalComponentsItem where
+    toQueryParam = \case
+        ComponentUnspecified -> "COMPONENT_UNSPECIFIED"
+        Anaconda -> "ANACONDA"
+        Docker -> "DOCKER"
+        Druid -> "DRUID"
+        Flink -> "FLINK"
+        Hbase -> "HBASE"
+        HiveWebhcat -> "HIVE_WEBHCAT"
+        Jupyter -> "JUPYTER"
+        Presto -> "PRESTO"
+        Ranger -> "RANGER"
+        Solr -> "SOLR"
+        Zeppelin -> "ZEPPELIN"
+        Zookeeper -> "ZOOKEEPER"
+
+instance FromJSON SoftwareConfigOptionalComponentsItem where
+    parseJSON = parseJSONText "SoftwareConfigOptionalComponentsItem"
+
+instance ToJSON SoftwareConfigOptionalComponentsItem where
+    toJSON = toJSONText
+
 -- | Output only. Additional state information that includes status reported
 -- by the agent.
 data ClusterStatusSubState
@@ -153,8 +338,8 @@ data ClusterStatusSubState
       -- RUNNING state.
     | StaleStatus
       -- ^ @STALE_STATUS@
-      -- The agent-reported status is out of date (may occur if Cloud Dataproc
-      -- loses communication with Agent).Applies to RUNNING state.
+      -- The agent-reported status is out of date (may occur if Dataproc loses
+      -- communication with Agent).Applies to RUNNING state.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ClusterStatusSubState
@@ -176,6 +361,120 @@ instance FromJSON ClusterStatusSubState where
     parseJSON = parseJSONText "ClusterStatusSubState"
 
 instance ToJSON ClusterStatusSubState where
+    toJSON = toJSONText
+
+-- | Optional. Specifies the preemptibility of the instance group.The default
+-- value for master and worker groups is NON_PREEMPTIBLE. This default
+-- cannot be changed.The default value for secondary instances is
+-- PREEMPTIBLE.
+data InstanceGroupConfigPreemptibility
+    = PreemptibilityUnspecified
+      -- ^ @PREEMPTIBILITY_UNSPECIFIED@
+      -- Preemptibility is unspecified, the system will choose the appropriate
+      -- setting for each instance group.
+    | NonPreemptible
+      -- ^ @NON_PREEMPTIBLE@
+      -- Instances are non-preemptible.This option is allowed for all instance
+      -- groups and is the only valid value for Master and Worker instance
+      -- groups.
+    | Preemptible
+      -- ^ @PREEMPTIBLE@
+      -- Instances are preemptible.This option is allowed only for secondary
+      -- worker groups.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InstanceGroupConfigPreemptibility
+
+instance FromHttpApiData InstanceGroupConfigPreemptibility where
+    parseQueryParam = \case
+        "PREEMPTIBILITY_UNSPECIFIED" -> Right PreemptibilityUnspecified
+        "NON_PREEMPTIBLE" -> Right NonPreemptible
+        "PREEMPTIBLE" -> Right Preemptible
+        x -> Left ("Unable to parse InstanceGroupConfigPreemptibility from: " <> x)
+
+instance ToHttpApiData InstanceGroupConfigPreemptibility where
+    toQueryParam = \case
+        PreemptibilityUnspecified -> "PREEMPTIBILITY_UNSPECIFIED"
+        NonPreemptible -> "NON_PREEMPTIBLE"
+        Preemptible -> "PREEMPTIBLE"
+
+instance FromJSON InstanceGroupConfigPreemptibility where
+    parseJSON = parseJSONText "InstanceGroupConfigPreemptibility"
+
+instance ToJSON InstanceGroupConfigPreemptibility where
+    toJSON = toJSONText
+
+-- | Optional. The type of IPv6 access for a cluster.
+data GceClusterConfigPrivateIPv6GoogleAccess
+    = PrivateIPV6GoogleAccessUnspecified
+      -- ^ @PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED@
+      -- If unspecified, Compute Engine default behavior will apply, which is the
+      -- same as INHERIT_FROM_SUBNETWORK.
+    | InheritFromSubnetwork
+      -- ^ @INHERIT_FROM_SUBNETWORK@
+      -- Private access to and from Google Services configuration inherited from
+      -- the subnetwork configuration. This is the default Compute Engine
+      -- behavior.
+    | Outbound
+      -- ^ @OUTBOUND@
+      -- Enables outbound private IPv6 access to Google Services from the
+      -- Dataproc cluster.
+    | Bidirectional
+      -- ^ @BIDIRECTIONAL@
+      -- Enables bidirectional private IPv6 access between Google Services and
+      -- the Dataproc cluster.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GceClusterConfigPrivateIPv6GoogleAccess
+
+instance FromHttpApiData GceClusterConfigPrivateIPv6GoogleAccess where
+    parseQueryParam = \case
+        "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" -> Right PrivateIPV6GoogleAccessUnspecified
+        "INHERIT_FROM_SUBNETWORK" -> Right InheritFromSubnetwork
+        "OUTBOUND" -> Right Outbound
+        "BIDIRECTIONAL" -> Right Bidirectional
+        x -> Left ("Unable to parse GceClusterConfigPrivateIPv6GoogleAccess from: " <> x)
+
+instance ToHttpApiData GceClusterConfigPrivateIPv6GoogleAccess where
+    toQueryParam = \case
+        PrivateIPV6GoogleAccessUnspecified -> "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED"
+        InheritFromSubnetwork -> "INHERIT_FROM_SUBNETWORK"
+        Outbound -> "OUTBOUND"
+        Bidirectional -> "BIDIRECTIONAL"
+
+instance FromJSON GceClusterConfigPrivateIPv6GoogleAccess where
+    parseJSON = parseJSONText "GceClusterConfigPrivateIPv6GoogleAccess"
+
+instance ToJSON GceClusterConfigPrivateIPv6GoogleAccess where
+    toJSON = toJSONText
+
+-- | The operation type.
+data BatchOperationMetadataOperationType
+    = BatchOperationTypeUnspecified
+      -- ^ @BATCH_OPERATION_TYPE_UNSPECIFIED@
+      -- Batch operation type is unknown.
+    | Batch
+      -- ^ @BATCH@
+      -- Batch operation type.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchOperationMetadataOperationType
+
+instance FromHttpApiData BatchOperationMetadataOperationType where
+    parseQueryParam = \case
+        "BATCH_OPERATION_TYPE_UNSPECIFIED" -> Right BatchOperationTypeUnspecified
+        "BATCH" -> Right Batch
+        x -> Left ("Unable to parse BatchOperationMetadataOperationType from: " <> x)
+
+instance ToHttpApiData BatchOperationMetadataOperationType where
+    toQueryParam = \case
+        BatchOperationTypeUnspecified -> "BATCH_OPERATION_TYPE_UNSPECIFIED"
+        Batch -> "BATCH"
+
+instance FromJSON BatchOperationMetadataOperationType where
+    parseJSON = parseJSONText "BatchOperationMetadataOperationType"
+
+instance ToJSON BatchOperationMetadataOperationType where
     toJSON = toJSONText
 
 -- | Output only. The workflow state.
@@ -295,12 +594,25 @@ data ClusterStatusState
     | CSSError'
       -- ^ @ERROR@
       -- The cluster encountered an error. It is not ready for use.
+    | CSSErrorDueToUpdate
+      -- ^ @ERROR_DUE_TO_UPDATE@
+      -- The cluster has encountered an error while being updated. Jobs can be
+      -- submitted to the cluster, but the cluster cannot be updated.
     | CSSDeleting
       -- ^ @DELETING@
       -- The cluster is being deleted. It cannot be used.
     | CSSUpdating
       -- ^ @UPDATING@
       -- The cluster is being updated. It continues to accept and process jobs.
+    | CSSStopping
+      -- ^ @STOPPING@
+      -- The cluster is being stopped. It cannot be used.
+    | CSSStopped
+      -- ^ @STOPPED@
+      -- The cluster is currently stopped. It is not ready for use.
+    | CSSStarting
+      -- ^ @STARTING@
+      -- The cluster is being started. It is not ready for use.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ClusterStatusState
@@ -311,8 +623,12 @@ instance FromHttpApiData ClusterStatusState where
         "CREATING" -> Right CSSCreating
         "RUNNING" -> Right CSSRunning
         "ERROR" -> Right CSSError'
+        "ERROR_DUE_TO_UPDATE" -> Right CSSErrorDueToUpdate
         "DELETING" -> Right CSSDeleting
         "UPDATING" -> Right CSSUpdating
+        "STOPPING" -> Right CSSStopping
+        "STOPPED" -> Right CSSStopped
+        "STARTING" -> Right CSSStarting
         x -> Left ("Unable to parse ClusterStatusState from: " <> x)
 
 instance ToHttpApiData ClusterStatusState where
@@ -321,8 +637,12 @@ instance ToHttpApiData ClusterStatusState where
         CSSCreating -> "CREATING"
         CSSRunning -> "RUNNING"
         CSSError' -> "ERROR"
+        CSSErrorDueToUpdate -> "ERROR_DUE_TO_UPDATE"
         CSSDeleting -> "DELETING"
         CSSUpdating -> "UPDATING"
+        CSSStopping -> "STOPPING"
+        CSSStopped -> "STOPPED"
+        CSSStarting -> "STARTING"
 
 instance FromJSON ClusterStatusState where
     parseJSON = parseJSONText "ClusterStatusState"
@@ -415,8 +735,8 @@ data JobStatusSubState
     | JSSSStaleStatus
       -- ^ @STALE_STATUS@
       -- The agent-reported status is out of date, which may be caused by a loss
-      -- of communication between the agent and Cloud Dataproc. If the agent does
-      -- not send a timely update, the job will fail.Applies to RUNNING state.
+      -- of communication between the agent and Dataproc. If the agent does not
+      -- send a timely update, the job will fail.Applies to RUNNING state.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobStatusSubState
@@ -440,4 +760,43 @@ instance FromJSON JobStatusSubState where
     parseJSON = parseJSONText "JobStatusSubState"
 
 instance ToJSON JobStatusSubState where
+    toJSON = toJSONText
+
+-- | Optional. Type of reservation to consume
+data ReservationAffinityConsumeReservationType
+    = TypeUnspecified
+      -- ^ @TYPE_UNSPECIFIED@
+    | NoReservation
+      -- ^ @NO_RESERVATION@
+      -- Do not consume from any allocated capacity.
+    | AnyReservation
+      -- ^ @ANY_RESERVATION@
+      -- Consume any reservation available.
+    | SpecificReservation
+      -- ^ @SPECIFIC_RESERVATION@
+      -- Must consume from a specific reservation. Must specify key value fields
+      -- for specifying the reservations.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReservationAffinityConsumeReservationType
+
+instance FromHttpApiData ReservationAffinityConsumeReservationType where
+    parseQueryParam = \case
+        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
+        "NO_RESERVATION" -> Right NoReservation
+        "ANY_RESERVATION" -> Right AnyReservation
+        "SPECIFIC_RESERVATION" -> Right SpecificReservation
+        x -> Left ("Unable to parse ReservationAffinityConsumeReservationType from: " <> x)
+
+instance ToHttpApiData ReservationAffinityConsumeReservationType where
+    toQueryParam = \case
+        TypeUnspecified -> "TYPE_UNSPECIFIED"
+        NoReservation -> "NO_RESERVATION"
+        AnyReservation -> "ANY_RESERVATION"
+        SpecificReservation -> "SPECIFIC_RESERVATION"
+
+instance FromJSON ReservationAffinityConsumeReservationType where
+    parseJSON = parseJSONText "ReservationAffinityConsumeReservationType"
+
+instance ToJSON ReservationAffinityConsumeReservationType where
     toJSON = toJSONText

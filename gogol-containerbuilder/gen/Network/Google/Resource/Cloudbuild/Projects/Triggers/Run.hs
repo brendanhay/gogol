@@ -39,12 +39,13 @@ module Network.Google.Resource.Cloudbuild.Projects.Triggers.Run
     , ptrAccessToken
     , ptrUploadType
     , ptrPayload
+    , ptrName
     , ptrProjectId
     , ptrCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.triggers.run@ method which the
 -- 'ProjectsTriggersRun' request conforms to.
@@ -58,23 +59,26 @@ type ProjectsTriggersRunResource =
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] RepoSource :> Post '[JSON] Operation
+                       QueryParam "name" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] RepoSource :>
+                               Post '[JSON] Operation
 
 -- | Runs a \`BuildTrigger\` at a particular source revision.
 --
 -- /See:/ 'projectsTriggersRun' smart constructor.
 data ProjectsTriggersRun =
   ProjectsTriggersRun'
-    { _ptrXgafv          :: !(Maybe Xgafv)
+    { _ptrXgafv :: !(Maybe Xgafv)
     , _ptrUploadProtocol :: !(Maybe Text)
-    , _ptrTriggerId      :: !Text
-    , _ptrAccessToken    :: !(Maybe Text)
-    , _ptrUploadType     :: !(Maybe Text)
-    , _ptrPayload        :: !RepoSource
-    , _ptrProjectId      :: !Text
-    , _ptrCallback       :: !(Maybe Text)
+    , _ptrTriggerId :: !Text
+    , _ptrAccessToken :: !(Maybe Text)
+    , _ptrUploadType :: !(Maybe Text)
+    , _ptrPayload :: !RepoSource
+    , _ptrName :: !(Maybe Text)
+    , _ptrProjectId :: !Text
+    , _ptrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -95,6 +99,8 @@ data ProjectsTriggersRun =
 --
 -- * 'ptrPayload'
 --
+-- * 'ptrName'
+--
 -- * 'ptrProjectId'
 --
 -- * 'ptrCallback'
@@ -111,6 +117,7 @@ projectsTriggersRun pPtrTriggerId_ pPtrPayload_ pPtrProjectId_ =
     , _ptrAccessToken = Nothing
     , _ptrUploadType = Nothing
     , _ptrPayload = pPtrPayload_
+    , _ptrName = Nothing
     , _ptrProjectId = pPtrProjectId_
     , _ptrCallback = Nothing
     }
@@ -126,7 +133,7 @@ ptrUploadProtocol
   = lens _ptrUploadProtocol
       (\ s a -> s{_ptrUploadProtocol = a})
 
--- | ID of the trigger.
+-- | Required. ID of the trigger.
 ptrTriggerId :: Lens' ProjectsTriggersRun Text
 ptrTriggerId
   = lens _ptrTriggerId (\ s a -> s{_ptrTriggerId = a})
@@ -148,7 +155,12 @@ ptrPayload :: Lens' ProjectsTriggersRun RepoSource
 ptrPayload
   = lens _ptrPayload (\ s a -> s{_ptrPayload = a})
 
--- | ID of the project.
+-- | The name of the \`Trigger\` to run. Format:
+-- \`projects\/{project}\/locations\/{location}\/triggers\/{trigger}\`
+ptrName :: Lens' ProjectsTriggersRun (Maybe Text)
+ptrName = lens _ptrName (\ s a -> s{_ptrName = a})
+
+-- | Required. ID of the project.
 ptrProjectId :: Lens' ProjectsTriggersRun Text
 ptrProjectId
   = lens _ptrProjectId (\ s a -> s{_ptrProjectId = a})
@@ -167,6 +179,7 @@ instance GoogleRequest ProjectsTriggersRun where
               _ptrUploadProtocol
               _ptrAccessToken
               _ptrUploadType
+              _ptrName
               _ptrCallback
               (Just AltJSON)
               _ptrPayload

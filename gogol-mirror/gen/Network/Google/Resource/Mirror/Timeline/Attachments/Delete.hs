@@ -37,8 +37,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
     , tadAttachmentId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.delete@ method which the
 -- 'TimelineAttachmentsDelete' request conforms to.
@@ -56,7 +56,7 @@ type TimelineAttachmentsDeleteResource =
 -- /See:/ 'timelineAttachmentsDelete' smart constructor.
 data TimelineAttachmentsDelete =
   TimelineAttachmentsDelete'
-    { _tadItemId       :: !Text
+    { _tadItemId :: !Text
     , _tadAttachmentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

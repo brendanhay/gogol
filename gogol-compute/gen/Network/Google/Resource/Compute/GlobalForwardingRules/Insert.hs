@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
     , gfriPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.insert@ method which the
 -- 'GlobalForwardingRulesInsert' request conforms to.
@@ -63,8 +63,8 @@ type GlobalForwardingRulesInsertResource =
 data GlobalForwardingRulesInsert =
   GlobalForwardingRulesInsert'
     { _gfriRequestId :: !(Maybe Text)
-    , _gfriProject   :: !Text
-    , _gfriPayload   :: !ForwardingRule
+    , _gfriProject :: !Text
+    , _gfriPayload :: !ForwardingRule
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

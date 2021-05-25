@@ -43,8 +43,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.Create
     , prcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.create@ method which the
 -- 'ProjectsReposCreate' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsReposCreateResource =
 -- /See:/ 'projectsReposCreate' smart constructor.
 data ProjectsReposCreate =
   ProjectsReposCreate'
-    { _prcParent         :: !Text
-    , _prcXgafv          :: !(Maybe Xgafv)
+    { _prcParent :: !Text
+    , _prcXgafv :: !(Maybe Xgafv)
     , _prcUploadProtocol :: !(Maybe Text)
-    , _prcAccessToken    :: !(Maybe Text)
-    , _prcUploadType     :: !(Maybe Text)
-    , _prcPayload        :: !Repo
-    , _prcCallback       :: !(Maybe Text)
+    , _prcAccessToken :: !(Maybe Text)
+    , _prcUploadType :: !(Maybe Text)
+    , _prcPayload :: !Repo
+    , _prcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

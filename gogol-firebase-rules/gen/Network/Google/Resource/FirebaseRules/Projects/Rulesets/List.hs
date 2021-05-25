@@ -46,8 +46,8 @@ module Network.Google.Resource.FirebaseRules.Projects.Rulesets.List
     , prlCallback
     ) where
 
-import           Network.Google.FirebaseRules.Types
-import           Network.Google.Prelude
+import Network.Google.FirebaseRules.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firebaserules.projects.rulesets.list@ method which the
 -- 'ProjectsRulesetsList' request conforms to.
@@ -73,15 +73,15 @@ type ProjectsRulesetsListResource =
 -- /See:/ 'projectsRulesetsList' smart constructor.
 data ProjectsRulesetsList =
   ProjectsRulesetsList'
-    { _prlXgafv          :: !(Maybe Xgafv)
+    { _prlXgafv :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
-    , _prlAccessToken    :: !(Maybe Text)
-    , _prlUploadType     :: !(Maybe Text)
-    , _prlName           :: !Text
-    , _prlFilter         :: !(Maybe Text)
-    , _prlPageToken      :: !(Maybe Text)
-    , _prlPageSize       :: !(Maybe (Textual Int32))
-    , _prlCallback       :: !(Maybe Text)
+    , _prlAccessToken :: !(Maybe Text)
+    , _prlUploadType :: !(Maybe Text)
+    , _prlName :: !Text
+    , _prlFilter :: !(Maybe Text)
+    , _prlPageToken :: !(Maybe Text)
+    , _prlPageSize :: !(Maybe (Textual Int32))
+    , _prlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -146,7 +146,8 @@ prlUploadType
   = lens _prlUploadType
       (\ s a -> s{_prlUploadType = a})
 
--- | Resource name for the project. Format: \`projects\/{project_id}\`
+-- | Required. Resource name for the project. Format:
+-- \`projects\/{project_id}\`
 prlName :: Lens' ProjectsRulesetsList Text
 prlName = lens _prlName (\ s a -> s{_prlName = a})
 

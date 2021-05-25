@@ -41,8 +41,8 @@ module Network.Google.Resource.Slides.Presentations.Get
     , pgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Slides.Types
+import Network.Google.Prelude
+import Network.Google.Slides.Types
 
 -- | A resource alias for @slides.presentations.get@ method which the
 -- 'PresentationsGet' request conforms to.
@@ -62,12 +62,12 @@ type PresentationsGetResource =
 -- /See:/ 'presentationsGet' smart constructor.
 data PresentationsGet =
   PresentationsGet'
-    { _pgXgafv          :: !(Maybe Xgafv)
+    { _pgXgafv :: !(Maybe Xgafv)
     , _pgUploadProtocol :: !(Maybe Text)
-    , _pgAccessToken    :: !(Maybe Text)
-    , _pgUploadType     :: !(Maybe Text)
+    , _pgAccessToken :: !(Maybe Text)
+    , _pgUploadType :: !(Maybe Text)
     , _pgPresentationId :: !Text
-    , _pgCallback       :: !(Maybe Text)
+    , _pgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

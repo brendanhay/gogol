@@ -44,8 +44,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.List
     , prlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.list@ method which the
 -- 'ProjectsReposList' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsReposListResource =
 -- /See:/ 'projectsReposList' smart constructor.
 data ProjectsReposList =
   ProjectsReposList'
-    { _prlXgafv          :: !(Maybe Xgafv)
+    { _prlXgafv :: !(Maybe Xgafv)
     , _prlUploadProtocol :: !(Maybe Text)
-    , _prlAccessToken    :: !(Maybe Text)
-    , _prlUploadType     :: !(Maybe Text)
-    , _prlName           :: !Text
-    , _prlPageToken      :: !(Maybe Text)
-    , _prlPageSize       :: !(Maybe (Textual Int32))
-    , _prlCallback       :: !(Maybe Text)
+    , _prlAccessToken :: !(Maybe Text)
+    , _prlUploadType :: !(Maybe Text)
+    , _prlName :: !Text
+    , _prlPageToken :: !(Maybe Text)
+    , _prlPageSize :: !(Maybe (Textual Int32))
+    , _prlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

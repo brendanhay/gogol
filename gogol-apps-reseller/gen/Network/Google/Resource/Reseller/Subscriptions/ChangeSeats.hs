@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a subscription\'s user license settings.
+-- Updates a subscription\'s user license settings. For more information
+-- about updating an annual commitment plan or a flexible plan
+-- subscription’s licenses, see [Manage
+-- Subscriptions](\/admin-sdk\/reseller\/v1\/how-tos\/manage_subscriptions#update_subscription_seat).
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.changeSeats@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Google Workspace Reseller API Reference> for @reseller.subscriptions.changeSeats@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
     (
     -- * REST Resource
@@ -33,13 +36,18 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
     , SubscriptionsChangeSeats
 
     -- * Request Lenses
+    , scsXgafv
+    , scsUploadProtocol
+    , scsAccessToken
+    , scsUploadType
     , scsPayload
     , scsCustomerId
     , scsSubscriptionId
+    , scsCallback
     ) where
 
-import           Network.Google.AppsReseller.Types
-import           Network.Google.Prelude
+import Network.Google.AppsReseller.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.changeSeats@ method which the
 -- 'SubscriptionsChangeSeats' request conforms to.
@@ -52,17 +60,31 @@ type SubscriptionsChangeSeatsResource =
                "subscriptions" :>
                  Capture "subscriptionId" Text :>
                    "changeSeats" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] Seats :> Post '[JSON] Subscription
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Seats :>
+                                   Post '[JSON] Subscription
 
--- | Update a subscription\'s user license settings.
+-- | Updates a subscription\'s user license settings. For more information
+-- about updating an annual commitment plan or a flexible plan
+-- subscription’s licenses, see [Manage
+-- Subscriptions](\/admin-sdk\/reseller\/v1\/how-tos\/manage_subscriptions#update_subscription_seat).
 --
 -- /See:/ 'subscriptionsChangeSeats' smart constructor.
 data SubscriptionsChangeSeats =
   SubscriptionsChangeSeats'
-    { _scsPayload        :: !Seats
-    , _scsCustomerId     :: !Text
+    { _scsXgafv :: !(Maybe Xgafv)
+    , _scsUploadProtocol :: !(Maybe Text)
+    , _scsAccessToken :: !(Maybe Text)
+    , _scsUploadType :: !(Maybe Text)
+    , _scsPayload :: !Seats
+    , _scsCustomerId :: !Text
     , _scsSubscriptionId :: !Text
+    , _scsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -71,11 +93,21 @@ data SubscriptionsChangeSeats =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'scsXgafv'
+--
+-- * 'scsUploadProtocol'
+--
+-- * 'scsAccessToken'
+--
+-- * 'scsUploadType'
+--
 -- * 'scsPayload'
 --
 -- * 'scsCustomerId'
 --
 -- * 'scsSubscriptionId'
+--
+-- * 'scsCallback'
 subscriptionsChangeSeats
     :: Seats -- ^ 'scsPayload'
     -> Text -- ^ 'scsCustomerId'
@@ -83,11 +115,38 @@ subscriptionsChangeSeats
     -> SubscriptionsChangeSeats
 subscriptionsChangeSeats pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
   SubscriptionsChangeSeats'
-    { _scsPayload = pScsPayload_
+    { _scsXgafv = Nothing
+    , _scsUploadProtocol = Nothing
+    , _scsAccessToken = Nothing
+    , _scsUploadType = Nothing
+    , _scsPayload = pScsPayload_
     , _scsCustomerId = pScsCustomerId_
     , _scsSubscriptionId = pScsSubscriptionId_
+    , _scsCallback = Nothing
     }
 
+
+-- | V1 error format.
+scsXgafv :: Lens' SubscriptionsChangeSeats (Maybe Xgafv)
+scsXgafv = lens _scsXgafv (\ s a -> s{_scsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+scsUploadProtocol :: Lens' SubscriptionsChangeSeats (Maybe Text)
+scsUploadProtocol
+  = lens _scsUploadProtocol
+      (\ s a -> s{_scsUploadProtocol = a})
+
+-- | OAuth access token.
+scsAccessToken :: Lens' SubscriptionsChangeSeats (Maybe Text)
+scsAccessToken
+  = lens _scsAccessToken
+      (\ s a -> s{_scsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+scsUploadType :: Lens' SubscriptionsChangeSeats (Maybe Text)
+scsUploadType
+  = lens _scsUploadType
+      (\ s a -> s{_scsUploadType = a})
 
 -- | Multipart request metadata.
 scsPayload :: Lens' SubscriptionsChangeSeats Seats
@@ -96,29 +155,39 @@ scsPayload
 
 -- | Either the customer\'s primary domain name or the customer\'s unique
 -- identifier. If using the domain name, we do not recommend using a
--- customerId as a key for persistent data. If the domain name for a
--- customerId is changed, the Google system automatically updates.
+-- \`customerId\` as a key for persistent data. If the domain name for a
+-- \`customerId\` is changed, the Google system automatically updates.
 scsCustomerId :: Lens' SubscriptionsChangeSeats Text
 scsCustomerId
   = lens _scsCustomerId
       (\ s a -> s{_scsCustomerId = a})
 
--- | This is a required property. The subscriptionId is the subscription
--- identifier and is unique for each customer. Since a subscriptionId
+-- | This is a required property. The \`subscriptionId\` is the subscription
+-- identifier and is unique for each customer. Since a \`subscriptionId\`
 -- changes when a subscription is updated, we recommend to not use this ID
--- as a key for persistent data. And the subscriptionId can be found using
--- the retrieve all reseller subscriptions method.
+-- as a key for persistent data. And the \`subscriptionId\` can be found
+-- using the retrieve all reseller subscriptions method.
 scsSubscriptionId :: Lens' SubscriptionsChangeSeats Text
 scsSubscriptionId
   = lens _scsSubscriptionId
       (\ s a -> s{_scsSubscriptionId = a})
+
+-- | JSONP
+scsCallback :: Lens' SubscriptionsChangeSeats (Maybe Text)
+scsCallback
+  = lens _scsCallback (\ s a -> s{_scsCallback = a})
 
 instance GoogleRequest SubscriptionsChangeSeats where
         type Rs SubscriptionsChangeSeats = Subscription
         type Scopes SubscriptionsChangeSeats =
              '["https://www.googleapis.com/auth/apps.order"]
         requestClient SubscriptionsChangeSeats'{..}
-          = go _scsCustomerId _scsSubscriptionId (Just AltJSON)
+          = go _scsCustomerId _scsSubscriptionId _scsXgafv
+              _scsUploadProtocol
+              _scsAccessToken
+              _scsUploadType
+              _scsCallback
+              (Just AltJSON)
               _scsPayload
               appsResellerService
           where go

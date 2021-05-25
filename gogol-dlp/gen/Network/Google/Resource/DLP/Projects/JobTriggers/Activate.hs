@@ -43,8 +43,8 @@ module Network.Google.Resource.DLP.Projects.JobTriggers.Activate
     , pjtaCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.jobTriggers.activate@ method which the
 -- 'ProjectsJobTriggersActivate' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsJobTriggersActivateResource =
 -- /See:/ 'projectsJobTriggersActivate' smart constructor.
 data ProjectsJobTriggersActivate =
   ProjectsJobTriggersActivate'
-    { _pjtaXgafv          :: !(Maybe Xgafv)
+    { _pjtaXgafv :: !(Maybe Xgafv)
     , _pjtaUploadProtocol :: !(Maybe Text)
-    , _pjtaAccessToken    :: !(Maybe Text)
-    , _pjtaUploadType     :: !(Maybe Text)
-    , _pjtaPayload        :: !GooglePrivacyDlpV2ActivateJobTriggerRequest
-    , _pjtaName           :: !Text
-    , _pjtaCallback       :: !(Maybe Text)
+    , _pjtaAccessToken :: !(Maybe Text)
+    , _pjtaUploadType :: !(Maybe Text)
+    , _pjtaPayload :: !GooglePrivacyDlpV2ActivateJobTriggerRequest
+    , _pjtaName :: !Text
+    , _pjtaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,7 +139,7 @@ pjtaPayload :: Lens' ProjectsJobTriggersActivate GooglePrivacyDlpV2ActivateJobTr
 pjtaPayload
   = lens _pjtaPayload (\ s a -> s{_pjtaPayload = a})
 
--- | Resource name of the trigger to activate, for example
+-- | Required. Resource name of the trigger to activate, for example
 -- \`projects\/dlp-test-project\/jobTriggers\/53234423\`.
 pjtaName :: Lens' ProjectsJobTriggersActivate Text
 pjtaName = lens _pjtaName (\ s a -> s{_pjtaName = a})

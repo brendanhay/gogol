@@ -22,7 +22,7 @@
 --
 -- Deletes the breakpoint from the debuggee.
 --
--- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Dele
     , ddbdCallback
     ) where
 
-import           Network.Google.Debugger.Types
-import           Network.Google.Prelude
+import Network.Google.Debugger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.delete@ method which the
 -- 'DebuggerDebuggeesBreakpointsDelete' request conforms to.
@@ -68,14 +68,14 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
 -- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
 data DebuggerDebuggeesBreakpointsDelete =
   DebuggerDebuggeesBreakpointsDelete'
-    { _ddbdXgafv          :: !(Maybe Xgafv)
+    { _ddbdXgafv :: !(Maybe Xgafv)
     , _ddbdUploadProtocol :: !(Maybe Text)
-    , _ddbdAccessToken    :: !(Maybe Text)
-    , _ddbdUploadType     :: !(Maybe Text)
-    , _ddbdBreakpointId   :: !Text
-    , _ddbdDebuggeeId     :: !Text
-    , _ddbdClientVersion  :: !(Maybe Text)
-    , _ddbdCallback       :: !(Maybe Text)
+    , _ddbdAccessToken :: !(Maybe Text)
+    , _ddbdUploadType :: !(Maybe Text)
+    , _ddbdBreakpointId :: !Text
+    , _ddbdDebuggeeId :: !Text
+    , _ddbdClientVersion :: !(Maybe Text)
+    , _ddbdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,20 +139,20 @@ ddbdUploadType
   = lens _ddbdUploadType
       (\ s a -> s{_ddbdUploadType = a})
 
--- | ID of the breakpoint to delete.
+-- | Required. ID of the breakpoint to delete.
 ddbdBreakpointId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdBreakpointId
   = lens _ddbdBreakpointId
       (\ s a -> s{_ddbdBreakpointId = a})
 
--- | ID of the debuggee whose breakpoint to delete.
+-- | Required. ID of the debuggee whose breakpoint to delete.
 ddbdDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdDebuggeeId
   = lens _ddbdDebuggeeId
       (\ s a -> s{_ddbdDebuggeeId = a})
 
--- | The client version making the call. Schema: \`domain\/type\/version\`
--- (e.g., \`google.com\/intellij\/v1\`).
+-- | Required. The client version making the call. Schema:
+-- \`domain\/type\/version\` (e.g., \`google.com\/intellij\/v1\`).
 ddbdClientVersion :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdClientVersion
   = lens _ddbdClientVersion

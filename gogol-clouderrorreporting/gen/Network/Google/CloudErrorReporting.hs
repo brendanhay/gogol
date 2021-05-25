@@ -17,7 +17,7 @@
 -- reports new errors, and provides access to error groups and their
 -- associated errors.
 --
--- /See:/ <https://cloud.google.com/error-reporting/ Stackdriver Error Reporting API Reference>
+-- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference>
 module Network.Google.CloudErrorReporting
     (
     -- * Service Configuration
@@ -51,6 +51,9 @@ module Network.Google.CloudErrorReporting
 
     -- * Types
 
+    -- ** ProjectsEventsListTimeRangePeriod
+    , ProjectsEventsListTimeRangePeriod (..)
+
     -- ** ErrorEvent
     , ErrorEvent
     , errorEvent
@@ -73,10 +76,14 @@ module Network.Google.CloudErrorReporting
     , egTrackingIssues
     , egName
     , egGroupId
+    , egResolutionStatus
 
     -- ** DeleteEventsResponse
     , DeleteEventsResponse
     , deleteEventsResponse
+
+    -- ** ProjectsGroupStatsListAlignment
+    , ProjectsGroupStatsListAlignment (..)
 
     -- ** ReportedErrorEvent
     , ReportedErrorEvent
@@ -121,6 +128,9 @@ module Network.Google.CloudErrorReporting
     , egsLastSeenTime
     , egsRepresentative
 
+    -- ** ProjectsGroupStatsListOrder
+    , ProjectsGroupStatsListOrder (..)
+
     -- ** ListGroupStatsResponse
     , ListGroupStatsResponse
     , listGroupStatsResponse
@@ -145,6 +155,12 @@ module Network.Google.CloudErrorReporting
     , tcCount
     , tcEndTime
 
+    -- ** ProjectsGroupStatsListTimeRangePeriod
+    , ProjectsGroupStatsListTimeRangePeriod (..)
+
+    -- ** ErrorGroupResolutionStatus
+    , ErrorGroupResolutionStatus (..)
+
     -- ** SourceLocation
     , SourceLocation
     , sourceLocation
@@ -163,20 +179,20 @@ module Network.Google.CloudErrorReporting
     , reportErrorEventResponse
     ) where
 
-import           Network.Google.CloudErrorReporting.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.CloudErrorReporting.Projects.DeleteEvents
-import           Network.Google.Resource.CloudErrorReporting.Projects.Events.List
-import           Network.Google.Resource.CloudErrorReporting.Projects.Events.Report
-import           Network.Google.Resource.CloudErrorReporting.Projects.Groups.Get
-import           Network.Google.Resource.CloudErrorReporting.Projects.Groups.Update
-import           Network.Google.Resource.CloudErrorReporting.Projects.GroupStats.List
+import Network.Google.Prelude
+import Network.Google.CloudErrorReporting.Types
+import Network.Google.Resource.CloudErrorReporting.Projects.DeleteEvents
+import Network.Google.Resource.CloudErrorReporting.Projects.Events.List
+import Network.Google.Resource.CloudErrorReporting.Projects.Events.Report
+import Network.Google.Resource.CloudErrorReporting.Projects.GroupStats.List
+import Network.Google.Resource.CloudErrorReporting.Projects.Groups.Get
+import Network.Google.Resource.CloudErrorReporting.Projects.Groups.Update
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Stackdriver Error Reporting API service.
+-- | Represents the entirety of the methods and resources available for the Error Reporting API service.
 type CloudErrorReportingAPI =
      ProjectsGroupsGetResource :<|>
        ProjectsGroupsUpdateResource

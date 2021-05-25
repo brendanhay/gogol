@@ -36,11 +36,12 @@ module Network.Google.Resource.Compute.NodeTemplates.GetIAMPolicy
     -- * Request Lenses
     , ntgipProject
     , ntgipResource
+    , ntgipOptionsRequestedPolicyVersion
     , ntgipRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeTemplates.getIamPolicy@ method which the
 -- 'NodeTemplatesGetIAMPolicy' request conforms to.
@@ -54,7 +55,9 @@ type NodeTemplatesGetIAMPolicyResource =
                  "nodeTemplates" :>
                    Capture "resource" Text :>
                      "getIamPolicy" :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                       QueryParam "optionsRequestedPolicyVersion"
+                         (Textual Int32)
+                         :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
 -- policy or resource exists.
@@ -62,9 +65,10 @@ type NodeTemplatesGetIAMPolicyResource =
 -- /See:/ 'nodeTemplatesGetIAMPolicy' smart constructor.
 data NodeTemplatesGetIAMPolicy =
   NodeTemplatesGetIAMPolicy'
-    { _ntgipProject  :: !Text
+    { _ntgipProject :: !Text
     , _ntgipResource :: !Text
-    , _ntgipRegion   :: !Text
+    , _ntgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _ntgipRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,6 +81,8 @@ data NodeTemplatesGetIAMPolicy =
 --
 -- * 'ntgipResource'
 --
+-- * 'ntgipOptionsRequestedPolicyVersion'
+--
 -- * 'ntgipRegion'
 nodeTemplatesGetIAMPolicy
     :: Text -- ^ 'ntgipProject'
@@ -87,6 +93,7 @@ nodeTemplatesGetIAMPolicy pNtgipProject_ pNtgipResource_ pNtgipRegion_ =
   NodeTemplatesGetIAMPolicy'
     { _ntgipProject = pNtgipProject_
     , _ntgipResource = pNtgipResource_
+    , _ntgipOptionsRequestedPolicyVersion = Nothing
     , _ntgipRegion = pNtgipRegion_
     }
 
@@ -102,6 +109,13 @@ ntgipResource
   = lens _ntgipResource
       (\ s a -> s{_ntgipResource = a})
 
+-- | Requested IAM Policy version.
+ntgipOptionsRequestedPolicyVersion :: Lens' NodeTemplatesGetIAMPolicy (Maybe Int32)
+ntgipOptionsRequestedPolicyVersion
+  = lens _ntgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_ntgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 -- | The name of the region for this request.
 ntgipRegion :: Lens' NodeTemplatesGetIAMPolicy Text
 ntgipRegion
@@ -116,6 +130,7 @@ instance GoogleRequest NodeTemplatesGetIAMPolicy
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NodeTemplatesGetIAMPolicy'{..}
           = go _ntgipProject _ntgipRegion _ntgipResource
+              _ntgipOptionsRequestedPolicyVersion
               (Just AltJSON)
               computeService
           where go

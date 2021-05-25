@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Images.Delete
     , iddProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.delete@ method which the
 -- 'ImagesDelete' request conforms to.
@@ -60,8 +60,8 @@ type ImagesDeleteResource =
 data ImagesDelete =
   ImagesDelete'
     { _iddRequestId :: !(Maybe Text)
-    , _iddImage     :: !Text
-    , _iddProject   :: !Text
+    , _iddImage :: !Text
+    , _iddProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

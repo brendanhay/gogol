@@ -16,7 +16,7 @@
 --
 module Network.Google.Classroom.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The type of grade change at this time in the submission grade history.
 data GradeHistoryGradeChangeType
@@ -211,9 +211,9 @@ instance FromJSON CourseWorkWorkType where
 instance ToJSON CourseWorkWorkType where
     toJSON = toJSONText
 
--- | Mode of the coursework describing whether it will be assigned to all
--- students or specified individual students.
-data ModifyCourseWorkAssigneesRequestAssigneeMode
+-- | Assignee mode of the course work material. If unspecified, the default
+-- value is \`ALL_STUDENTS\`.
+data CourseWorkMaterialAssigneeMode
     = AssigneeModeUnspecified
       -- ^ @ASSIGNEE_MODE_UNSPECIFIED@
       -- No mode specified. This is never returned.
@@ -225,20 +225,116 @@ data ModifyCourseWorkAssigneesRequestAssigneeMode
       -- A subset of the students can see the item.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable ModifyCourseWorkAssigneesRequestAssigneeMode
+instance Hashable CourseWorkMaterialAssigneeMode
 
-instance FromHttpApiData ModifyCourseWorkAssigneesRequestAssigneeMode where
+instance FromHttpApiData CourseWorkMaterialAssigneeMode where
     parseQueryParam = \case
         "ASSIGNEE_MODE_UNSPECIFIED" -> Right AssigneeModeUnspecified
         "ALL_STUDENTS" -> Right AllStudents
         "INDIVIDUAL_STUDENTS" -> Right IndividualStudents
-        x -> Left ("Unable to parse ModifyCourseWorkAssigneesRequestAssigneeMode from: " <> x)
+        x -> Left ("Unable to parse CourseWorkMaterialAssigneeMode from: " <> x)
 
-instance ToHttpApiData ModifyCourseWorkAssigneesRequestAssigneeMode where
+instance ToHttpApiData CourseWorkMaterialAssigneeMode where
     toQueryParam = \case
         AssigneeModeUnspecified -> "ASSIGNEE_MODE_UNSPECIFIED"
         AllStudents -> "ALL_STUDENTS"
         IndividualStudents -> "INDIVIDUAL_STUDENTS"
+
+instance FromJSON CourseWorkMaterialAssigneeMode where
+    parseJSON = parseJSONText "CourseWorkMaterialAssigneeMode"
+
+instance ToJSON CourseWorkMaterialAssigneeMode where
+    toJSON = toJSONText
+
+-- | Restricts returned courses to those in one of the specified states The
+-- default value is ACTIVE, ARCHIVED, PROVISIONED, DECLINED.
+data CoursesListCourseStates
+    = CLCSCourseStateUnspecified
+      -- ^ @COURSE_STATE_UNSPECIFIED@
+      -- No course state. No returned Course message will use this value.
+    | CLCSActive
+      -- ^ @ACTIVE@
+      -- The course is active.
+    | CLCSArchived
+      -- ^ @ARCHIVED@
+      -- The course has been archived. You cannot modify it except to change it
+      -- to a different state.
+    | CLCSProvisioned
+      -- ^ @PROVISIONED@
+      -- The course has been created, but not yet activated. It is accessible by
+      -- the primary teacher and domain administrators, who may modify it or
+      -- change it to the \`ACTIVE\` or \`DECLINED\` states. A course may only be
+      -- changed to \`PROVISIONED\` if it is in the \`DECLINED\` state.
+    | CLCSDeclined
+      -- ^ @DECLINED@
+      -- The course has been created, but declined. It is accessible by the
+      -- course owner and domain administrators, though it will not be displayed
+      -- in the web UI. You cannot modify the course except to change it to the
+      -- \`PROVISIONED\` state. A course may only be changed to \`DECLINED\` if
+      -- it is in the \`PROVISIONED\` state.
+    | CLCSSuspended
+      -- ^ @SUSPENDED@
+      -- The course has been suspended. You cannot modify the course, and only
+      -- the user identified by the \`owner_id\` can view the course. A course
+      -- may be placed in this state if it potentially violates the Terms of
+      -- Service.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CoursesListCourseStates
+
+instance FromHttpApiData CoursesListCourseStates where
+    parseQueryParam = \case
+        "COURSE_STATE_UNSPECIFIED" -> Right CLCSCourseStateUnspecified
+        "ACTIVE" -> Right CLCSActive
+        "ARCHIVED" -> Right CLCSArchived
+        "PROVISIONED" -> Right CLCSProvisioned
+        "DECLINED" -> Right CLCSDeclined
+        "SUSPENDED" -> Right CLCSSuspended
+        x -> Left ("Unable to parse CoursesListCourseStates from: " <> x)
+
+instance ToHttpApiData CoursesListCourseStates where
+    toQueryParam = \case
+        CLCSCourseStateUnspecified -> "COURSE_STATE_UNSPECIFIED"
+        CLCSActive -> "ACTIVE"
+        CLCSArchived -> "ARCHIVED"
+        CLCSProvisioned -> "PROVISIONED"
+        CLCSDeclined -> "DECLINED"
+        CLCSSuspended -> "SUSPENDED"
+
+instance FromJSON CoursesListCourseStates where
+    parseJSON = parseJSONText "CoursesListCourseStates"
+
+instance ToJSON CoursesListCourseStates where
+    toJSON = toJSONText
+
+-- | Mode of the coursework describing whether it will be assigned to all
+-- students or specified individual students.
+data ModifyCourseWorkAssigneesRequestAssigneeMode
+    = MCWARAMAssigneeModeUnspecified
+      -- ^ @ASSIGNEE_MODE_UNSPECIFIED@
+      -- No mode specified. This is never returned.
+    | MCWARAMAllStudents
+      -- ^ @ALL_STUDENTS@
+      -- All students can see the item. This is the default state.
+    | MCWARAMIndividualStudents
+      -- ^ @INDIVIDUAL_STUDENTS@
+      -- A subset of the students can see the item.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ModifyCourseWorkAssigneesRequestAssigneeMode
+
+instance FromHttpApiData ModifyCourseWorkAssigneesRequestAssigneeMode where
+    parseQueryParam = \case
+        "ASSIGNEE_MODE_UNSPECIFIED" -> Right MCWARAMAssigneeModeUnspecified
+        "ALL_STUDENTS" -> Right MCWARAMAllStudents
+        "INDIVIDUAL_STUDENTS" -> Right MCWARAMIndividualStudents
+        x -> Left ("Unable to parse ModifyCourseWorkAssigneesRequestAssigneeMode from: " <> x)
+
+instance ToHttpApiData ModifyCourseWorkAssigneesRequestAssigneeMode where
+    toQueryParam = \case
+        MCWARAMAssigneeModeUnspecified -> "ASSIGNEE_MODE_UNSPECIFIED"
+        MCWARAMAllStudents -> "ALL_STUDENTS"
+        MCWARAMIndividualStudents -> "INDIVIDUAL_STUDENTS"
 
 instance FromJSON ModifyCourseWorkAssigneesRequestAssigneeMode where
     parseJSON = parseJSONText "ModifyCourseWorkAssigneesRequestAssigneeMode"
@@ -320,7 +416,7 @@ instance FromJSON SharedDriveFileShareMode where
 instance ToJSON SharedDriveFileShareMode where
     toJSON = toJSONText
 
--- | Mode of the announcement describing whether it will be accessible by all
+-- | Mode of the announcement describing whether it is accessible by all
 -- students or specified individual students.
 data ModifyAnnouncementAssigneesRequestAssigneeMode
     = MAARAMAssigneeModeUnspecified
@@ -483,6 +579,93 @@ instance FromJSON StudentSubmissionState where
 instance ToJSON StudentSubmissionState where
     toJSON = toJSONText
 
+-- | Requested lateness value. If specified, returned student submissions are
+-- restricted by the requested value. If unspecified, submissions are
+-- returned regardless of \`late\` value.
+data CoursesCourseWorkStudentSubmissionsListLate
+    = LateValuesUnspecified
+      -- ^ @LATE_VALUES_UNSPECIFIED@
+      -- No restriction on submission late values specified.
+    | LateOnly
+      -- ^ @LATE_ONLY@
+      -- Return StudentSubmissions where late is true.
+    | NotLateOnly
+      -- ^ @NOT_LATE_ONLY@
+      -- Return StudentSubmissions where late is false.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CoursesCourseWorkStudentSubmissionsListLate
+
+instance FromHttpApiData CoursesCourseWorkStudentSubmissionsListLate where
+    parseQueryParam = \case
+        "LATE_VALUES_UNSPECIFIED" -> Right LateValuesUnspecified
+        "LATE_ONLY" -> Right LateOnly
+        "NOT_LATE_ONLY" -> Right NotLateOnly
+        x -> Left ("Unable to parse CoursesCourseWorkStudentSubmissionsListLate from: " <> x)
+
+instance ToHttpApiData CoursesCourseWorkStudentSubmissionsListLate where
+    toQueryParam = \case
+        LateValuesUnspecified -> "LATE_VALUES_UNSPECIFIED"
+        LateOnly -> "LATE_ONLY"
+        NotLateOnly -> "NOT_LATE_ONLY"
+
+instance FromJSON CoursesCourseWorkStudentSubmissionsListLate where
+    parseJSON = parseJSONText "CoursesCourseWorkStudentSubmissionsListLate"
+
+instance ToJSON CoursesCourseWorkStudentSubmissionsListLate where
+    toJSON = toJSONText
+
+-- | Requested submission states. If specified, returned student submissions
+-- match one of the specified submission states.
+data CoursesCourseWorkStudentSubmissionsListStates
+    = CCWSSLSSubmissionStateUnspecified
+      -- ^ @SUBMISSION_STATE_UNSPECIFIED@
+      -- No state specified. This should never be returned.
+    | CCWSSLSNew
+      -- ^ @NEW@
+      -- The student has never accessed this submission. Attachments are not
+      -- returned and timestamps is not set.
+    | CCWSSLSCreated
+      -- ^ @CREATED@
+      -- Has been created.
+    | CCWSSLSTurnedIn
+      -- ^ @TURNED_IN@
+      -- Has been turned in to the teacher.
+    | CCWSSLSReturned
+      -- ^ @RETURNED@
+      -- Has been returned to the student.
+    | CCWSSLSReclaimedByStudent
+      -- ^ @RECLAIMED_BY_STUDENT@
+      -- Student chose to \"unsubmit\" the assignment.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CoursesCourseWorkStudentSubmissionsListStates
+
+instance FromHttpApiData CoursesCourseWorkStudentSubmissionsListStates where
+    parseQueryParam = \case
+        "SUBMISSION_STATE_UNSPECIFIED" -> Right CCWSSLSSubmissionStateUnspecified
+        "NEW" -> Right CCWSSLSNew
+        "CREATED" -> Right CCWSSLSCreated
+        "TURNED_IN" -> Right CCWSSLSTurnedIn
+        "RETURNED" -> Right CCWSSLSReturned
+        "RECLAIMED_BY_STUDENT" -> Right CCWSSLSReclaimedByStudent
+        x -> Left ("Unable to parse CoursesCourseWorkStudentSubmissionsListStates from: " <> x)
+
+instance ToHttpApiData CoursesCourseWorkStudentSubmissionsListStates where
+    toQueryParam = \case
+        CCWSSLSSubmissionStateUnspecified -> "SUBMISSION_STATE_UNSPECIFIED"
+        CCWSSLSNew -> "NEW"
+        CCWSSLSCreated -> "CREATED"
+        CCWSSLSTurnedIn -> "TURNED_IN"
+        CCWSSLSReturned -> "RETURNED"
+        CCWSSLSReclaimedByStudent -> "RECLAIMED_BY_STUDENT"
+
+instance FromJSON CoursesCourseWorkStudentSubmissionsListStates where
+    parseJSON = parseJSONText "CoursesCourseWorkStudentSubmissionsListStates"
+
+instance ToJSON CoursesCourseWorkStudentSubmissionsListStates where
+    toJSON = toJSONText
+
 -- | Status of this announcement. If unspecified, the default state is
 -- \`DRAFT\`.
 data AnnouncementState
@@ -635,6 +818,52 @@ instance FromJSON StudentSubmissionCourseWorkType where
 instance ToJSON StudentSubmissionCourseWorkType where
     toJSON = toJSONText
 
+-- | Status of this course work material. If unspecified, the default state
+-- is \`DRAFT\`.
+data CourseWorkMaterialState
+    = CWMSCourseworkMaterialStateUnspecified
+      -- ^ @COURSEWORK_MATERIAL_STATE_UNSPECIFIED@
+      -- No state specified. This is never returned.
+    | CWMSPublished
+      -- ^ @PUBLISHED@
+      -- Status for course work material that has been published. This is the
+      -- default state.
+    | CWMSDraft
+      -- ^ @DRAFT@
+      -- Status for an course work material that is not yet published. Course
+      -- work material in this state is visible only to course teachers and
+      -- domain administrators.
+    | CWMSDeleted
+      -- ^ @DELETED@
+      -- Status for course work material that was published but is now deleted.
+      -- Course work material in this state is visible only to course teachers
+      -- and domain administrators. Course work material in this state is deleted
+      -- after some time.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CourseWorkMaterialState
+
+instance FromHttpApiData CourseWorkMaterialState where
+    parseQueryParam = \case
+        "COURSEWORK_MATERIAL_STATE_UNSPECIFIED" -> Right CWMSCourseworkMaterialStateUnspecified
+        "PUBLISHED" -> Right CWMSPublished
+        "DRAFT" -> Right CWMSDraft
+        "DELETED" -> Right CWMSDeleted
+        x -> Left ("Unable to parse CourseWorkMaterialState from: " <> x)
+
+instance ToHttpApiData CourseWorkMaterialState where
+    toQueryParam = \case
+        CWMSCourseworkMaterialStateUnspecified -> "COURSEWORK_MATERIAL_STATE_UNSPECIFIED"
+        CWMSPublished -> "PUBLISHED"
+        CWMSDraft -> "DRAFT"
+        CWMSDeleted -> "DELETED"
+
+instance FromJSON CourseWorkMaterialState where
+    parseJSON = parseJSONText "CourseWorkMaterialState"
+
+instance ToJSON CourseWorkMaterialState where
+    toJSON = toJSONText
+
 -- | The type of feed.
 data FeedFeedType
     = FeedTypeUnspecified
@@ -685,6 +914,141 @@ instance FromJSON FeedFeedType where
     parseJSON = parseJSONText "FeedFeedType"
 
 instance ToJSON FeedFeedType where
+    toJSON = toJSONText
+
+-- | Restriction on the work status to return. Only courseWork that matches
+-- is returned. If unspecified, items with a work status of \`PUBLISHED\`
+-- is returned.
+data CoursesCourseWorkListCourseWorkStates
+    = CCWLCWSCourseWorkStateUnspecified
+      -- ^ @COURSE_WORK_STATE_UNSPECIFIED@
+      -- No state specified. This is never returned.
+    | CCWLCWSPublished
+      -- ^ @PUBLISHED@
+      -- Status for work that has been published. This is the default state.
+    | CCWLCWSDraft
+      -- ^ @DRAFT@
+      -- Status for work that is not yet published. Work in this state is visible
+      -- only to course teachers and domain administrators.
+    | CCWLCWSDeleted
+      -- ^ @DELETED@
+      -- Status for work that was published but is now deleted. Work in this
+      -- state is visible only to course teachers and domain administrators. Work
+      -- in this state is deleted after some time.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CoursesCourseWorkListCourseWorkStates
+
+instance FromHttpApiData CoursesCourseWorkListCourseWorkStates where
+    parseQueryParam = \case
+        "COURSE_WORK_STATE_UNSPECIFIED" -> Right CCWLCWSCourseWorkStateUnspecified
+        "PUBLISHED" -> Right CCWLCWSPublished
+        "DRAFT" -> Right CCWLCWSDraft
+        "DELETED" -> Right CCWLCWSDeleted
+        x -> Left ("Unable to parse CoursesCourseWorkListCourseWorkStates from: " <> x)
+
+instance ToHttpApiData CoursesCourseWorkListCourseWorkStates where
+    toQueryParam = \case
+        CCWLCWSCourseWorkStateUnspecified -> "COURSE_WORK_STATE_UNSPECIFIED"
+        CCWLCWSPublished -> "PUBLISHED"
+        CCWLCWSDraft -> "DRAFT"
+        CCWLCWSDeleted -> "DELETED"
+
+instance FromJSON CoursesCourseWorkListCourseWorkStates where
+    parseJSON = parseJSONText "CoursesCourseWorkListCourseWorkStates"
+
+instance ToJSON CoursesCourseWorkListCourseWorkStates where
+    toJSON = toJSONText
+
+-- | Restriction on the \`state\` of announcements returned. If this argument
+-- is left unspecified, the default value is \`PUBLISHED\`.
+data CoursesAnnouncementsListAnnouncementStates
+    = CALASAnnouncementStateUnspecified
+      -- ^ @ANNOUNCEMENT_STATE_UNSPECIFIED@
+      -- No state specified. This is never returned.
+    | CALASPublished
+      -- ^ @PUBLISHED@
+      -- Status for announcement that has been published. This is the default
+      -- state.
+    | CALASDraft
+      -- ^ @DRAFT@
+      -- Status for an announcement that is not yet published. Announcement in
+      -- this state is visible only to course teachers and domain administrators.
+    | CALASDeleted
+      -- ^ @DELETED@
+      -- Status for announcement that was published but is now deleted.
+      -- Announcement in this state is visible only to course teachers and domain
+      -- administrators. Announcement in this state is deleted after some time.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CoursesAnnouncementsListAnnouncementStates
+
+instance FromHttpApiData CoursesAnnouncementsListAnnouncementStates where
+    parseQueryParam = \case
+        "ANNOUNCEMENT_STATE_UNSPECIFIED" -> Right CALASAnnouncementStateUnspecified
+        "PUBLISHED" -> Right CALASPublished
+        "DRAFT" -> Right CALASDraft
+        "DELETED" -> Right CALASDeleted
+        x -> Left ("Unable to parse CoursesAnnouncementsListAnnouncementStates from: " <> x)
+
+instance ToHttpApiData CoursesAnnouncementsListAnnouncementStates where
+    toQueryParam = \case
+        CALASAnnouncementStateUnspecified -> "ANNOUNCEMENT_STATE_UNSPECIFIED"
+        CALASPublished -> "PUBLISHED"
+        CALASDraft -> "DRAFT"
+        CALASDeleted -> "DELETED"
+
+instance FromJSON CoursesAnnouncementsListAnnouncementStates where
+    parseJSON = parseJSONText "CoursesAnnouncementsListAnnouncementStates"
+
+instance ToJSON CoursesAnnouncementsListAnnouncementStates where
+    toJSON = toJSONText
+
+-- | Restriction on the work status to return. Only course work material that
+-- matches is returned. If unspecified, items with a work status of
+-- \`PUBLISHED\` is returned.
+data CoursesCourseWorkMaterialsListCourseWorkMaterialStates
+    = CCWMLCWMSCourseworkMaterialStateUnspecified
+      -- ^ @COURSEWORK_MATERIAL_STATE_UNSPECIFIED@
+      -- No state specified. This is never returned.
+    | CCWMLCWMSPublished
+      -- ^ @PUBLISHED@
+      -- Status for course work material that has been published. This is the
+      -- default state.
+    | CCWMLCWMSDraft
+      -- ^ @DRAFT@
+      -- Status for an course work material that is not yet published. Course
+      -- work material in this state is visible only to course teachers and
+      -- domain administrators.
+    | CCWMLCWMSDeleted
+      -- ^ @DELETED@
+      -- Status for course work material that was published but is now deleted.
+      -- Course work material in this state is visible only to course teachers
+      -- and domain administrators. Course work material in this state is deleted
+      -- after some time.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CoursesCourseWorkMaterialsListCourseWorkMaterialStates
+
+instance FromHttpApiData CoursesCourseWorkMaterialsListCourseWorkMaterialStates where
+    parseQueryParam = \case
+        "COURSEWORK_MATERIAL_STATE_UNSPECIFIED" -> Right CCWMLCWMSCourseworkMaterialStateUnspecified
+        "PUBLISHED" -> Right CCWMLCWMSPublished
+        "DRAFT" -> Right CCWMLCWMSDraft
+        "DELETED" -> Right CCWMLCWMSDeleted
+        x -> Left ("Unable to parse CoursesCourseWorkMaterialsListCourseWorkMaterialStates from: " <> x)
+
+instance ToHttpApiData CoursesCourseWorkMaterialsListCourseWorkMaterialStates where
+    toQueryParam = \case
+        CCWMLCWMSCourseworkMaterialStateUnspecified -> "COURSEWORK_MATERIAL_STATE_UNSPECIFIED"
+        CCWMLCWMSPublished -> "PUBLISHED"
+        CCWMLCWMSDraft -> "DRAFT"
+        CCWMLCWMSDeleted -> "DELETED"
+
+instance FromJSON CoursesCourseWorkMaterialsListCourseWorkMaterialStates where
+    parseJSON = parseJSONText "CoursesCourseWorkMaterialsListCourseWorkMaterialStates"
+
+instance ToJSON CoursesCourseWorkMaterialsListCourseWorkMaterialStates where
     toJSON = toJSONText
 
 -- | Permission value.
@@ -750,6 +1114,43 @@ instance FromJSON CourseWorkAssigneeMode where
     parseJSON = parseJSONText "CourseWorkAssigneeMode"
 
 instance ToJSON CourseWorkAssigneeMode where
+    toJSON = toJSONText
+
+-- | If specified, only results with the specified \`state\` values are
+-- returned. Otherwise, results with a \`state\` of \`PENDING\` are
+-- returned.
+data UserProFilesGuardianInvitationsListStates
+    = UPFGILSGuardianInvitationStateUnspecified
+      -- ^ @GUARDIAN_INVITATION_STATE_UNSPECIFIED@
+      -- Should never be returned.
+    | UPFGILSPending
+      -- ^ @PENDING@
+      -- The invitation is active and awaiting a response.
+    | UPFGILSComplete
+      -- ^ @COMPLETE@
+      -- The invitation is no longer active. It may have been accepted, declined,
+      -- withdrawn or it may have expired.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable UserProFilesGuardianInvitationsListStates
+
+instance FromHttpApiData UserProFilesGuardianInvitationsListStates where
+    parseQueryParam = \case
+        "GUARDIAN_INVITATION_STATE_UNSPECIFIED" -> Right UPFGILSGuardianInvitationStateUnspecified
+        "PENDING" -> Right UPFGILSPending
+        "COMPLETE" -> Right UPFGILSComplete
+        x -> Left ("Unable to parse UserProFilesGuardianInvitationsListStates from: " <> x)
+
+instance ToHttpApiData UserProFilesGuardianInvitationsListStates where
+    toQueryParam = \case
+        UPFGILSGuardianInvitationStateUnspecified -> "GUARDIAN_INVITATION_STATE_UNSPECIFIED"
+        UPFGILSPending -> "PENDING"
+        UPFGILSComplete -> "COMPLETE"
+
+instance FromJSON UserProFilesGuardianInvitationsListStates where
+    parseJSON = parseJSONText "UserProFilesGuardianInvitationsListStates"
+
+instance ToJSON UserProFilesGuardianInvitationsListStates where
     toJSON = toJSONText
 
 -- | Setting to determine when students are allowed to modify submissions. If

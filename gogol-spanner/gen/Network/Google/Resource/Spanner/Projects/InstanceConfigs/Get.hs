@@ -41,8 +41,8 @@ module Network.Google.Resource.Spanner.Projects.InstanceConfigs.Get
     , picgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instanceConfigs.get@ method which the
 -- 'ProjectsInstanceConfigsGet' request conforms to.
@@ -62,12 +62,12 @@ type ProjectsInstanceConfigsGetResource =
 -- /See:/ 'projectsInstanceConfigsGet' smart constructor.
 data ProjectsInstanceConfigsGet =
   ProjectsInstanceConfigsGet'
-    { _picgXgafv          :: !(Maybe Xgafv)
+    { _picgXgafv :: !(Maybe Xgafv)
     , _picgUploadProtocol :: !(Maybe Text)
-    , _picgAccessToken    :: !(Maybe Text)
-    , _picgUploadType     :: !(Maybe Text)
-    , _picgName           :: !Text
-    , _picgCallback       :: !(Maybe Text)
+    , _picgAccessToken :: !(Maybe Text)
+    , _picgUploadType :: !(Maybe Text)
+    , _picgName :: !Text
+    , _picgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

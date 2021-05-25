@@ -21,14 +21,20 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Executes all the requests in the given Bundle. Implements the FHIR
--- standard [batch\/transaction
--- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#transaction).
+-- standard batch\/transaction interaction
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#transaction),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#transaction),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#transaction)).
 -- Supports all interactions within a bundle, except search. This method
 -- accepts Bundles of type \`batch\` and \`transaction\`, processing them
--- according to the [batch processing
--- rules](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.1)
--- and [transaction processing
--- rules](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.2).
+-- according to the batch processing rules
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#2.1.0.16.1),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.1),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#brules))
+-- and transaction processing rules
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#2.1.0.16.2),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.2),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#trules)).
 -- The request body must contain a JSON-encoded FHIR \`Bundle\` resource,
 -- and the request headers must contain \`Content-Type:
 -- application\/fhir+json\`. For a batch bundle or a successful transaction
@@ -39,7 +45,9 @@
 -- error for a transaction bundle, the response body will contain a
 -- JSON-encoded \`OperationOutcome\` resource describing the reason for the
 -- error. If the request cannot be mapped to a valid API method on a FHIR
--- store, a generic GCP error might be returned instead.
+-- store, a generic GCP error might be returned instead. For samples that
+-- show how to call \`executeBundle\`, see [Managing FHIR resources using
+-- FHIR bundles](\/healthcare\/docs\/how-tos\/fhir-bundles).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores.Fhir.ExecuteBundle
@@ -61,14 +69,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.FhirStores
     , pldsfsfebCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle@ method which the
 -- 'ProjectsLocationsDataSetsFhirStoresFhirExecuteBundle' request conforms to.
 type ProjectsLocationsDataSetsFhirStoresFhirExecuteBundleResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "fhir" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -80,14 +88,20 @@ type ProjectsLocationsDataSetsFhirStoresFhirExecuteBundleResource
                        ReqBody '[JSON] HTTPBody :> Post '[JSON] HTTPBody
 
 -- | Executes all the requests in the given Bundle. Implements the FHIR
--- standard [batch\/transaction
--- interaction](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#transaction).
+-- standard batch\/transaction interaction
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#transaction),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#transaction),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#transaction)).
 -- Supports all interactions within a bundle, except search. This method
 -- accepts Bundles of type \`batch\` and \`transaction\`, processing them
--- according to the [batch processing
--- rules](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.1)
--- and [transaction processing
--- rules](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.2).
+-- according to the batch processing rules
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#2.1.0.16.1),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.1),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#brules))
+-- and transaction processing rules
+-- ([DSTU2](http:\/\/hl7.org\/implement\/standards\/fhir\/DSTU2\/http.html#2.1.0.16.2),
+-- [STU3](http:\/\/hl7.org\/implement\/standards\/fhir\/STU3\/http.html#2.21.0.17.2),
+-- [R4](http:\/\/hl7.org\/implement\/standards\/fhir\/R4\/http.html#trules)).
 -- The request body must contain a JSON-encoded FHIR \`Bundle\` resource,
 -- and the request headers must contain \`Content-Type:
 -- application\/fhir+json\`. For a batch bundle or a successful transaction
@@ -98,18 +112,20 @@ type ProjectsLocationsDataSetsFhirStoresFhirExecuteBundleResource
 -- error for a transaction bundle, the response body will contain a
 -- JSON-encoded \`OperationOutcome\` resource describing the reason for the
 -- error. If the request cannot be mapped to a valid API method on a FHIR
--- store, a generic GCP error might be returned instead.
+-- store, a generic GCP error might be returned instead. For samples that
+-- show how to call \`executeBundle\`, see [Managing FHIR resources using
+-- FHIR bundles](\/healthcare\/docs\/how-tos\/fhir-bundles).
 --
 -- /See:/ 'projectsLocationsDataSetsFhirStoresFhirExecuteBundle' smart constructor.
 data ProjectsLocationsDataSetsFhirStoresFhirExecuteBundle =
   ProjectsLocationsDataSetsFhirStoresFhirExecuteBundle'
-    { _pldsfsfebParent         :: !Text
-    , _pldsfsfebXgafv          :: !(Maybe Xgafv)
+    { _pldsfsfebParent :: !Text
+    , _pldsfsfebXgafv :: !(Maybe Xgafv)
     , _pldsfsfebUploadProtocol :: !(Maybe Text)
-    , _pldsfsfebAccessToken    :: !(Maybe Text)
-    , _pldsfsfebUploadType     :: !(Maybe Text)
-    , _pldsfsfebPayload        :: !HTTPBody
-    , _pldsfsfebCallback       :: !(Maybe Text)
+    , _pldsfsfebAccessToken :: !(Maybe Text)
+    , _pldsfsfebUploadType :: !(Maybe Text)
+    , _pldsfsfebPayload :: !HTTPBody
+    , _pldsfsfebCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

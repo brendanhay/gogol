@@ -38,8 +38,8 @@ module Network.Google.Resource.FusionTables.Table.RefetchSheet
     , trsTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.refetchSheet@ method which the
 -- 'TableRefetchSheet' request conforms to.

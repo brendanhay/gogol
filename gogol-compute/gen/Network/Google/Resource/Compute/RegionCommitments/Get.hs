@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.RegionCommitments.Get
     , rcgCommitment
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionCommitments.get@ method which the
 -- 'RegionCommitmentsGet' request conforms to.
@@ -61,8 +61,8 @@ type RegionCommitmentsGetResource =
 -- /See:/ 'regionCommitmentsGet' smart constructor.
 data RegionCommitmentsGet =
   RegionCommitmentsGet'
-    { _rcgProject    :: !Text
-    , _rcgRegion     :: !Text
+    { _rcgProject :: !Text
+    , _rcgRegion :: !Text
     , _rcgCommitment :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Machine Learning Engine.
+A client library for the Google AI Platform Training & Prediction.
 
 
 ## Contribute

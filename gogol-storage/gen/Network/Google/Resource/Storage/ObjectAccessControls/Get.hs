@@ -36,12 +36,13 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Get
     , oacgBucket
     , oacgUserProject
     , oacgObject
+    , oacgProvisionalUserProject
     , oacgEntity
     , oacgGeneration
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Storage.Types
+import Network.Google.Prelude
+import Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.get@ method which the
 -- 'ObjectAccessControlsGet' request conforms to.
@@ -55,20 +56,22 @@ type ObjectAccessControlsGetResource =
                  "acl" :>
                    Capture "entity" Text :>
                      QueryParam "userProject" Text :>
-                       QueryParam "generation" (Textual Int64) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ObjectAccessControl
+                       QueryParam "provisionalUserProject" Text :>
+                         QueryParam "generation" (Textual Int64) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ObjectAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
 -- /See:/ 'objectAccessControlsGet' smart constructor.
 data ObjectAccessControlsGet =
   ObjectAccessControlsGet'
-    { _oacgBucket      :: !Text
+    { _oacgBucket :: !Text
     , _oacgUserProject :: !(Maybe Text)
-    , _oacgObject      :: !Text
-    , _oacgEntity      :: !Text
-    , _oacgGeneration  :: !(Maybe (Textual Int64))
+    , _oacgObject :: !Text
+    , _oacgProvisionalUserProject :: !(Maybe Text)
+    , _oacgEntity :: !Text
+    , _oacgGeneration :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -83,6 +86,8 @@ data ObjectAccessControlsGet =
 --
 -- * 'oacgObject'
 --
+-- * 'oacgProvisionalUserProject'
+--
 -- * 'oacgEntity'
 --
 -- * 'oacgGeneration'
@@ -96,6 +101,7 @@ objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
     { _oacgBucket = pOacgBucket_
     , _oacgUserProject = Nothing
     , _oacgObject = pOacgObject_
+    , _oacgProvisionalUserProject = Nothing
     , _oacgEntity = pOacgEntity_
     , _oacgGeneration = Nothing
     }
@@ -118,6 +124,13 @@ oacgUserProject
 oacgObject :: Lens' ObjectAccessControlsGet Text
 oacgObject
   = lens _oacgObject (\ s a -> s{_oacgObject = a})
+
+-- | The project to be billed for this request if the target bucket is
+-- requester-pays bucket.
+oacgProvisionalUserProject :: Lens' ObjectAccessControlsGet (Maybe Text)
+oacgProvisionalUserProject
+  = lens _oacgProvisionalUserProject
+      (\ s a -> s{_oacgProvisionalUserProject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -142,6 +155,7 @@ instance GoogleRequest ObjectAccessControlsGet where
         requestClient ObjectAccessControlsGet'{..}
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgUserProject
+              _oacgProvisionalUserProject
               _oacgGeneration
               (Just AltJSON)
               storageService

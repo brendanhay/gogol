@@ -22,7 +22,7 @@
 --
 -- Gets one operating system version by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystemVersions.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.operatingSystemVersions.get@.
 module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     , OperatingSystemVersionsGet
 
     -- * Request Lenses
+    , osvgXgafv
+    , osvgUploadProtocol
+    , osvgAccessToken
+    , osvgUploadType
     , osvgProFileId
     , osvgId
+    , osvgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.operatingSystemVersions.get@ method which the
 -- 'OperatingSystemVersionsGet' request conforms to.
 type OperatingSystemVersionsGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>
                Capture "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] OperatingSystemVersion
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] OperatingSystemVersion
 
 -- | Gets one operating system version by ID.
 --
 -- /See:/ 'operatingSystemVersionsGet' smart constructor.
 data OperatingSystemVersionsGet =
   OperatingSystemVersionsGet'
-    { _osvgProFileId :: !(Textual Int64)
-    , _osvgId        :: !(Textual Int64)
+    { _osvgXgafv :: !(Maybe Xgafv)
+    , _osvgUploadProtocol :: !(Maybe Text)
+    , _osvgAccessToken :: !(Maybe Text)
+    , _osvgUploadType :: !(Maybe Text)
+    , _osvgProFileId :: !(Textual Int64)
+    , _osvgId :: !(Textual Int64)
+    , _osvgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,57 @@ data OperatingSystemVersionsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'osvgXgafv'
+--
+-- * 'osvgUploadProtocol'
+--
+-- * 'osvgAccessToken'
+--
+-- * 'osvgUploadType'
+--
 -- * 'osvgProFileId'
 --
 -- * 'osvgId'
+--
+-- * 'osvgCallback'
 operatingSystemVersionsGet
     :: Int64 -- ^ 'osvgProFileId'
     -> Int64 -- ^ 'osvgId'
     -> OperatingSystemVersionsGet
 operatingSystemVersionsGet pOsvgProFileId_ pOsvgId_ =
   OperatingSystemVersionsGet'
-    {_osvgProFileId = _Coerce # pOsvgProFileId_, _osvgId = _Coerce # pOsvgId_}
+    { _osvgXgafv = Nothing
+    , _osvgUploadProtocol = Nothing
+    , _osvgAccessToken = Nothing
+    , _osvgUploadType = Nothing
+    , _osvgProFileId = _Coerce # pOsvgProFileId_
+    , _osvgId = _Coerce # pOsvgId_
+    , _osvgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+osvgXgafv :: Lens' OperatingSystemVersionsGet (Maybe Xgafv)
+osvgXgafv
+  = lens _osvgXgafv (\ s a -> s{_osvgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+osvgUploadProtocol :: Lens' OperatingSystemVersionsGet (Maybe Text)
+osvgUploadProtocol
+  = lens _osvgUploadProtocol
+      (\ s a -> s{_osvgUploadProtocol = a})
+
+-- | OAuth access token.
+osvgAccessToken :: Lens' OperatingSystemVersionsGet (Maybe Text)
+osvgAccessToken
+  = lens _osvgAccessToken
+      (\ s a -> s{_osvgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+osvgUploadType :: Lens' OperatingSystemVersionsGet (Maybe Text)
+osvgUploadType
+  = lens _osvgUploadType
+      (\ s a -> s{_osvgUploadType = a})
 
 -- | User profile ID associated with this request.
 osvgProFileId :: Lens' OperatingSystemVersionsGet Int64
@@ -91,6 +146,11 @@ osvgId :: Lens' OperatingSystemVersionsGet Int64
 osvgId
   = lens _osvgId (\ s a -> s{_osvgId = a}) . _Coerce
 
+-- | JSONP
+osvgCallback :: Lens' OperatingSystemVersionsGet (Maybe Text)
+osvgCallback
+  = lens _osvgCallback (\ s a -> s{_osvgCallback = a})
+
 instance GoogleRequest OperatingSystemVersionsGet
          where
         type Rs OperatingSystemVersionsGet =
@@ -98,7 +158,12 @@ instance GoogleRequest OperatingSystemVersionsGet
         type Scopes OperatingSystemVersionsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient OperatingSystemVersionsGet'{..}
-          = go _osvgProFileId _osvgId (Just AltJSON)
+          = go _osvgProFileId _osvgId _osvgXgafv
+              _osvgUploadProtocol
+              _osvgAccessToken
+              _osvgUploadType
+              _osvgCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

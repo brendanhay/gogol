@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a comment.
+-- Deletes a resource.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.delete@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.comments.delete@.
 module Network.Google.Resource.YouTube.Comments.Delete
     (
     -- * REST Resource
@@ -33,11 +33,16 @@ module Network.Google.Resource.YouTube.Comments.Delete
     , CommentsDelete
 
     -- * Request Lenses
+    , cdXgafv
+    , cdUploadProtocol
+    , cdAccessToken
+    , cdUploadType
     , cdId
+    , cdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.delete@ method which the
 -- 'CommentsDelete' request conforms to.
@@ -46,14 +51,24 @@ type CommentsDeleteResource =
        "v3" :>
          "comments" :>
            QueryParam "id" Text :>
-             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a comment.
+-- | Deletes a resource.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-newtype CommentsDelete =
+data CommentsDelete =
   CommentsDelete'
-    { _cdId :: Text
+    { _cdXgafv :: !(Maybe Xgafv)
+    , _cdUploadProtocol :: !(Maybe Text)
+    , _cdAccessToken :: !(Maybe Text)
+    , _cdUploadType :: !(Maybe Text)
+    , _cdId :: !Text
+    , _cdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -62,24 +77,71 @@ newtype CommentsDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdXgafv'
+--
+-- * 'cdUploadProtocol'
+--
+-- * 'cdAccessToken'
+--
+-- * 'cdUploadType'
+--
 -- * 'cdId'
+--
+-- * 'cdCallback'
 commentsDelete
     :: Text -- ^ 'cdId'
     -> CommentsDelete
-commentsDelete pCdId_ = CommentsDelete' {_cdId = pCdId_}
+commentsDelete pCdId_ =
+  CommentsDelete'
+    { _cdXgafv = Nothing
+    , _cdUploadProtocol = Nothing
+    , _cdAccessToken = Nothing
+    , _cdUploadType = Nothing
+    , _cdId = pCdId_
+    , _cdCallback = Nothing
+    }
 
 
--- | The id parameter specifies the comment ID for the resource that is being
--- deleted.
+-- | V1 error format.
+cdXgafv :: Lens' CommentsDelete (Maybe Xgafv)
+cdXgafv = lens _cdXgafv (\ s a -> s{_cdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cdUploadProtocol :: Lens' CommentsDelete (Maybe Text)
+cdUploadProtocol
+  = lens _cdUploadProtocol
+      (\ s a -> s{_cdUploadProtocol = a})
+
+-- | OAuth access token.
+cdAccessToken :: Lens' CommentsDelete (Maybe Text)
+cdAccessToken
+  = lens _cdAccessToken
+      (\ s a -> s{_cdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cdUploadType :: Lens' CommentsDelete (Maybe Text)
+cdUploadType
+  = lens _cdUploadType (\ s a -> s{_cdUploadType = a})
+
 cdId :: Lens' CommentsDelete Text
 cdId = lens _cdId (\ s a -> s{_cdId = a})
+
+-- | JSONP
+cdCallback :: Lens' CommentsDelete (Maybe Text)
+cdCallback
+  = lens _cdCallback (\ s a -> s{_cdCallback = a})
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
         type Scopes CommentsDelete =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
         requestClient CommentsDelete'{..}
-          = go (Just _cdId) (Just AltJSON) youTubeService
+          = go (Just _cdId) _cdXgafv _cdUploadProtocol
+              _cdAccessToken
+              _cdUploadType
+              _cdCallback
+              (Just AltJSON)
+              youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)
                       mempty

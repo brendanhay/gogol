@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetTCPProxies.SetProxyHeader
     , ttpsphTargetTCPProxy
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetTcpProxies.setProxyHeader@ method which the
 -- 'TargetTCPProxiesSetProxyHeader' request conforms to.
@@ -63,9 +63,9 @@ type TargetTCPProxiesSetProxyHeaderResource =
 -- /See:/ 'targetTCPProxiesSetProxyHeader' smart constructor.
 data TargetTCPProxiesSetProxyHeader =
   TargetTCPProxiesSetProxyHeader'
-    { _ttpsphRequestId      :: !(Maybe Text)
-    , _ttpsphProject        :: !Text
-    , _ttpsphPayload        :: !TargetTCPProxiesSetProxyHeaderRequest
+    { _ttpsphRequestId :: !(Maybe Text)
+    , _ttpsphProject :: !Text
+    , _ttpsphPayload :: !TargetTCPProxiesSetProxyHeaderRequest
     , _ttpsphTargetTCPProxy :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

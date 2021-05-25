@@ -47,8 +47,8 @@ module Network.Google.Resource.Dataflow.Projects.Templates.Launch
     , ptlDynamicTemplateGcsPath
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.templates.launch@ method which the
 -- 'ProjectsTemplatesLaunch' request conforms to.
@@ -76,18 +76,18 @@ type ProjectsTemplatesLaunchResource =
 -- /See:/ 'projectsTemplatesLaunch' smart constructor.
 data ProjectsTemplatesLaunch =
   ProjectsTemplatesLaunch'
-    { _ptlXgafv                          :: !(Maybe Xgafv)
-    , _ptlValidateOnly                   :: !(Maybe Bool)
-    , _ptlUploadProtocol                 :: !(Maybe Text)
-    , _ptlLocation                       :: !(Maybe Text)
-    , _ptlAccessToken                    :: !(Maybe Text)
-    , _ptlUploadType                     :: !(Maybe Text)
-    , _ptlPayload                        :: !LaunchTemplateParameters
+    { _ptlXgafv :: !(Maybe Xgafv)
+    , _ptlValidateOnly :: !(Maybe Bool)
+    , _ptlUploadProtocol :: !(Maybe Text)
+    , _ptlLocation :: !(Maybe Text)
+    , _ptlAccessToken :: !(Maybe Text)
+    , _ptlUploadType :: !(Maybe Text)
+    , _ptlPayload :: !LaunchTemplateParameters
     , _ptlDynamicTemplateStagingLocation :: !(Maybe Text)
-    , _ptlGcsPath                        :: !(Maybe Text)
-    , _ptlProjectId                      :: !Text
-    , _ptlCallback                       :: !(Maybe Text)
-    , _ptlDynamicTemplateGcsPath         :: !(Maybe Text)
+    , _ptlGcsPath :: !(Maybe Text)
+    , _ptlProjectId :: !Text
+    , _ptlCallback :: !(Maybe Text)
+    , _ptlDynamicTemplateGcsPath :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -204,8 +204,8 @@ ptlCallback :: Lens' ProjectsTemplatesLaunch (Maybe Text)
 ptlCallback
   = lens _ptlCallback (\ s a -> s{_ptlCallback = a})
 
--- | Path to dynamic template spec file on GCS. The file must be a Json
--- serialized DynamicTemplateFieSpec object.
+-- | Path to dynamic template spec file on Cloud Storage. The file must be a
+-- Json serialized DynamicTemplateFieSpec object.
 ptlDynamicTemplateGcsPath :: Lens' ProjectsTemplatesLaunch (Maybe Text)
 ptlDynamicTemplateGcsPath
   = lens _ptlDynamicTemplateGcsPath

@@ -22,7 +22,7 @@
 --
 -- Retrieves an order using merchant order ID.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.getbymerchantorderid@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.getbymerchantorderid@.
 module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
     , OrdersGetbymerchantOrderid
 
     -- * Request Lenses
+    , ogogXgafv
     , ogogMerchantId
+    , ogogUploadProtocol
+    , ogogAccessToken
+    , ogogUploadType
     , ogogMerchantOrderId
+    , ogogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.getbymerchantorderid@ method which the
 -- 'OrdersGetbymerchantOrderid' request conforms to.
@@ -48,16 +53,26 @@ type OrdersGetbymerchantOrderidResource =
          Capture "merchantId" (Textual Word64) :>
            "ordersbymerchantid" :>
              Capture "merchantOrderId" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] OrdersGetByMerchantOrderIdResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
 -- | Retrieves an order using merchant order ID.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
 data OrdersGetbymerchantOrderid =
   OrdersGetbymerchantOrderid'
-    { _ogogMerchantId      :: !(Textual Word64)
+    { _ogogXgafv :: !(Maybe Xgafv)
+    , _ogogMerchantId :: !(Textual Word64)
+    , _ogogUploadProtocol :: !(Maybe Text)
+    , _ogogAccessToken :: !(Maybe Text)
+    , _ogogUploadType :: !(Maybe Text)
     , _ogogMerchantOrderId :: !Text
+    , _ogogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,19 +81,39 @@ data OrdersGetbymerchantOrderid =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ogogXgafv'
+--
 -- * 'ogogMerchantId'
 --
+-- * 'ogogUploadProtocol'
+--
+-- * 'ogogAccessToken'
+--
+-- * 'ogogUploadType'
+--
 -- * 'ogogMerchantOrderId'
+--
+-- * 'ogogCallback'
 ordersGetbymerchantOrderid
     :: Word64 -- ^ 'ogogMerchantId'
     -> Text -- ^ 'ogogMerchantOrderId'
     -> OrdersGetbymerchantOrderid
 ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
   OrdersGetbymerchantOrderid'
-    { _ogogMerchantId = _Coerce # pOgogMerchantId_
+    { _ogogXgafv = Nothing
+    , _ogogMerchantId = _Coerce # pOgogMerchantId_
+    , _ogogUploadProtocol = Nothing
+    , _ogogAccessToken = Nothing
+    , _ogogUploadType = Nothing
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
+    , _ogogCallback = Nothing
     }
 
+
+-- | V1 error format.
+ogogXgafv :: Lens' OrdersGetbymerchantOrderid (Maybe Xgafv)
+ogogXgafv
+  = lens _ogogXgafv (\ s a -> s{_ogogXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -88,11 +123,34 @@ ogogMerchantId
       (\ s a -> s{_ogogMerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ogogUploadProtocol :: Lens' OrdersGetbymerchantOrderid (Maybe Text)
+ogogUploadProtocol
+  = lens _ogogUploadProtocol
+      (\ s a -> s{_ogogUploadProtocol = a})
+
+-- | OAuth access token.
+ogogAccessToken :: Lens' OrdersGetbymerchantOrderid (Maybe Text)
+ogogAccessToken
+  = lens _ogogAccessToken
+      (\ s a -> s{_ogogAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ogogUploadType :: Lens' OrdersGetbymerchantOrderid (Maybe Text)
+ogogUploadType
+  = lens _ogogUploadType
+      (\ s a -> s{_ogogUploadType = a})
+
 -- | The merchant order ID to be looked for.
 ogogMerchantOrderId :: Lens' OrdersGetbymerchantOrderid Text
 ogogMerchantOrderId
   = lens _ogogMerchantOrderId
       (\ s a -> s{_ogogMerchantOrderId = a})
+
+-- | JSONP
+ogogCallback :: Lens' OrdersGetbymerchantOrderid (Maybe Text)
+ogogCallback
+  = lens _ogogCallback (\ s a -> s{_ogogCallback = a})
 
 instance GoogleRequest OrdersGetbymerchantOrderid
          where
@@ -101,7 +159,11 @@ instance GoogleRequest OrdersGetbymerchantOrderid
         type Scopes OrdersGetbymerchantOrderid =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersGetbymerchantOrderid'{..}
-          = go _ogogMerchantId _ogogMerchantOrderId
+          = go _ogogMerchantId _ogogMerchantOrderId _ogogXgafv
+              _ogogUploadProtocol
+              _ogogAccessToken
+              _ogogUploadType
+              _ogogCallback
               (Just AltJSON)
               shoppingContentService
           where go

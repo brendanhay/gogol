@@ -43,8 +43,8 @@ module Network.Google.Resource.Poly.Assets.Get
     , agCallback
     ) where
 
-import           Network.Google.Poly.Types
-import           Network.Google.Prelude
+import Network.Google.Poly.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @poly.assets.get@ method which the
 -- 'AssetsGet' request conforms to.
@@ -65,12 +65,12 @@ type AssetsGetResource =
 -- /See:/ 'assetsGet' smart constructor.
 data AssetsGet =
   AssetsGet'
-    { _agXgafv          :: !(Maybe Xgafv)
+    { _agXgafv :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
-    , _agAccessToken    :: !(Maybe Text)
-    , _agUploadType     :: !(Maybe Text)
-    , _agName           :: !Text
-    , _agCallback       :: !(Maybe Text)
+    , _agAccessToken :: !(Maybe Text)
+    , _agUploadType :: !(Maybe Text)
+    , _agName :: !Text
+    , _agCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

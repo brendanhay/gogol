@@ -17,8 +17,8 @@
 --
 module Network.Google.AppState.Types.Product where
 
-import           Network.Google.AppState.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AppState.Types.Sum
+import Network.Google.Prelude
 
 -- | This is a JSON template for an app state write result.
 --
@@ -26,8 +26,8 @@ import           Network.Google.Prelude
 data WriteResult =
   WriteResult'
     { _wrCurrentStateVersion :: !(Maybe Text)
-    , _wrKind                :: !Text
-    , _wrStateKey            :: !(Maybe (Textual Int32))
+    , _wrKind :: !Text
+    , _wrStateKey :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -92,8 +92,8 @@ instance ToJSON WriteResult where
 data ListResponse =
   ListResponse'
     { _lrMaximumKeyCount :: !(Maybe (Textual Int32))
-    , _lrKind            :: !Text
-    , _lrItems           :: !(Maybe [GetResponse])
+    , _lrKind :: !Text
+    , _lrItems :: !(Maybe [GetResponse])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -157,9 +157,9 @@ instance ToJSON ListResponse where
 data GetResponse =
   GetResponse'
     { _grCurrentStateVersion :: !(Maybe Text)
-    , _grKind                :: !Text
-    , _grData                :: !(Maybe Text)
-    , _grStateKey            :: !(Maybe (Textual Int32))
+    , _grKind :: !Text
+    , _grData :: !(Maybe Text)
+    , _grStateKey :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a summary of the abusive experience rating of a site.
+-- Gets a site\'s Abusive Experience Report summary.
 --
 -- /See:/ <https://developers.google.com/abusive-experience-report/ Abusive Experience Report API Reference> for @abusiveexperiencereport.sites.get@.
 module Network.Google.Resource.AbusiveExperienceReport.Sites.Get
@@ -41,8 +41,8 @@ module Network.Google.Resource.AbusiveExperienceReport.Sites.Get
     , sgCallback
     ) where
 
-import           Network.Google.AbusiveExperienceReport.Types
-import           Network.Google.Prelude
+import Network.Google.AbusiveExperienceReport.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @abusiveexperiencereport.sites.get@ method which the
 -- 'SitesGet' request conforms to.
@@ -57,17 +57,17 @@ type SitesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] SiteSummaryResponse
 
--- | Gets a summary of the abusive experience rating of a site.
+-- | Gets a site\'s Abusive Experience Report summary.
 --
 -- /See:/ 'sitesGet' smart constructor.
 data SitesGet =
   SitesGet'
-    { _sgXgafv          :: !(Maybe Xgafv)
+    { _sgXgafv :: !(Maybe Xgafv)
     , _sgUploadProtocol :: !(Maybe Text)
-    , _sgAccessToken    :: !(Maybe Text)
-    , _sgUploadType     :: !(Maybe Text)
-    , _sgName           :: !Text
-    , _sgCallback       :: !(Maybe Text)
+    , _sgAccessToken :: !(Maybe Text)
+    , _sgUploadType :: !(Maybe Text)
+    , _sgName :: !Text
+    , _sgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -122,14 +122,8 @@ sgUploadType :: Lens' SitesGet (Maybe Text)
 sgUploadType
   = lens _sgUploadType (\ s a -> s{_sgUploadType = a})
 
--- | The required site name. This is the site property whose abusive
--- experiences have been reviewed, and it must be URL-encoded. For example,
--- sites\/https%3A%2F%2Fwww.google.com. The server will return an error of
--- BAD_REQUEST if this field is not filled in. Note that if the site
--- property is not yet verified in Search Console, the reportUrl field
--- returned by the API will lead to the verification page, prompting the
--- user to go through that process before they can gain access to the
--- Abusive Experience Report.
+-- | Required. The name of the site whose summary to get, e.g.
+-- \`sites\/http%3A%2F%2Fwww.google.com%2F\`. Format: \`sites\/{site}\`
 sgName :: Lens' SitesGet Text
 sgName = lens _sgName (\ s a -> s{_sgName = a})
 
@@ -140,8 +134,7 @@ sgCallback
 
 instance GoogleRequest SitesGet where
         type Rs SitesGet = SiteSummaryResponse
-        type Scopes SitesGet =
-             '["https://www.googleapis.com/auth/xapi.zoo"]
+        type Scopes SitesGet = '[]
         requestClient SitesGet'{..}
           = go _sgName _sgXgafv _sgUploadProtocol
               _sgAccessToken

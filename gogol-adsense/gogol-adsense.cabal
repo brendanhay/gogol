@@ -14,13 +14,13 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Accesses AdSense publishers\' inventory and generates performance
-    reports.
+    The AdSense Management API allows publishers to access their inventory
+    and run earnings and performance reports.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1.4@
+    This library is compatible with version @v2@
     of the API.
 
 source-repository head
@@ -36,45 +36,28 @@ library
     exposed-modules:
           Network.Google.AdSense
         , Network.Google.AdSense.Types
-        , Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
+        , Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.Get
+        , Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.GetAdcode
+        , Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.List
+        , Network.Google.Resource.AdSense.Accounts.AdClients.AdUnits.ListLinkedCustomChannels
+        , Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.Get
+        , Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.List
+        , Network.Google.Resource.AdSense.Accounts.AdClients.CustomChannels.ListLinkedAdUnits
+        , Network.Google.Resource.AdSense.Accounts.AdClients.GetAdcode
         , Network.Google.Resource.AdSense.Accounts.AdClients.List
-        , Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
-        , Network.Google.Resource.AdSense.Accounts.AdUnits.Get
-        , Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
-        , Network.Google.Resource.AdSense.Accounts.AdUnits.List
-        , Network.Google.Resource.AdSense.Accounts.Alerts.Delete
+        , Network.Google.Resource.AdSense.Accounts.AdClients.URLChannels.List
         , Network.Google.Resource.AdSense.Accounts.Alerts.List
-        , Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
-        , Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
-        , Network.Google.Resource.AdSense.Accounts.CustomChannels.List
         , Network.Google.Resource.AdSense.Accounts.Get
         , Network.Google.Resource.AdSense.Accounts.List
+        , Network.Google.Resource.AdSense.Accounts.ListChildAccounts
         , Network.Google.Resource.AdSense.Accounts.Payments.List
         , Network.Google.Resource.AdSense.Accounts.Reports.Generate
+        , Network.Google.Resource.AdSense.Accounts.Reports.GenerateCSV
         , Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
+        , Network.Google.Resource.AdSense.Accounts.Reports.Saved.GenerateCSV
         , Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
-        , Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
-        , Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
-        , Network.Google.Resource.AdSense.Accounts.URLChannels.List
-        , Network.Google.Resource.AdSense.AdClients.List
-        , Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
-        , Network.Google.Resource.AdSense.AdUnits.Get
-        , Network.Google.Resource.AdSense.AdUnits.GetAdCode
-        , Network.Google.Resource.AdSense.AdUnits.List
-        , Network.Google.Resource.AdSense.Alerts.Delete
-        , Network.Google.Resource.AdSense.Alerts.List
-        , Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
-        , Network.Google.Resource.AdSense.CustomChannels.Get
-        , Network.Google.Resource.AdSense.CustomChannels.List
-        , Network.Google.Resource.AdSense.Metadata.Dimensions.List
-        , Network.Google.Resource.AdSense.Metadata.Metrics.List
-        , Network.Google.Resource.AdSense.Payments.List
-        , Network.Google.Resource.AdSense.Reports.Generate
-        , Network.Google.Resource.AdSense.Reports.Saved.Generate
-        , Network.Google.Resource.AdSense.Reports.Saved.List
-        , Network.Google.Resource.AdSense.Savedadstyles.Get
-        , Network.Google.Resource.AdSense.Savedadstyles.List
-        , Network.Google.Resource.AdSense.URLChannels.List
+        , Network.Google.Resource.AdSense.Accounts.Sites.Get
+        , Network.Google.Resource.AdSense.Accounts.Sites.List
 
     other-modules:
           Network.Google.AdSense.Types.Product

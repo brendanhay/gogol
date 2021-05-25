@@ -22,7 +22,7 @@
 --
 -- Gets one targeting template by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetingTemplates.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.targetingTemplates.get@.
 module Network.Google.Resource.DFAReporting.TargetingTemplates.Get
     (
     -- * REST Resource
@@ -33,32 +33,47 @@ module Network.Google.Resource.DFAReporting.TargetingTemplates.Get
     , TargetingTemplatesGet
 
     -- * Request Lenses
+    , ttgXgafv
+    , ttgUploadProtocol
+    , ttgAccessToken
+    , ttgUploadType
     , ttgProFileId
     , ttgId
+    , ttgCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.targetingTemplates.get@ method which the
 -- 'TargetingTemplatesGet' request conforms to.
 type TargetingTemplatesGetResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetingTemplates" :>
                Capture "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] TargetingTemplate
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] TargetingTemplate
 
 -- | Gets one targeting template by ID.
 --
 -- /See:/ 'targetingTemplatesGet' smart constructor.
 data TargetingTemplatesGet =
   TargetingTemplatesGet'
-    { _ttgProFileId :: !(Textual Int64)
-    , _ttgId        :: !(Textual Int64)
+    { _ttgXgafv :: !(Maybe Xgafv)
+    , _ttgUploadProtocol :: !(Maybe Text)
+    , _ttgAccessToken :: !(Maybe Text)
+    , _ttgUploadType :: !(Maybe Text)
+    , _ttgProFileId :: !(Textual Int64)
+    , _ttgId :: !(Textual Int64)
+    , _ttgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data TargetingTemplatesGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ttgXgafv'
+--
+-- * 'ttgUploadProtocol'
+--
+-- * 'ttgAccessToken'
+--
+-- * 'ttgUploadType'
+--
 -- * 'ttgProFileId'
 --
 -- * 'ttgId'
+--
+-- * 'ttgCallback'
 targetingTemplatesGet
     :: Int64 -- ^ 'ttgProFileId'
     -> Int64 -- ^ 'ttgId'
     -> TargetingTemplatesGet
 targetingTemplatesGet pTtgProFileId_ pTtgId_ =
   TargetingTemplatesGet'
-    {_ttgProFileId = _Coerce # pTtgProFileId_, _ttgId = _Coerce # pTtgId_}
+    { _ttgXgafv = Nothing
+    , _ttgUploadProtocol = Nothing
+    , _ttgAccessToken = Nothing
+    , _ttgUploadType = Nothing
+    , _ttgProFileId = _Coerce # pTtgProFileId_
+    , _ttgId = _Coerce # pTtgId_
+    , _ttgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ttgXgafv :: Lens' TargetingTemplatesGet (Maybe Xgafv)
+ttgXgafv = lens _ttgXgafv (\ s a -> s{_ttgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ttgUploadProtocol :: Lens' TargetingTemplatesGet (Maybe Text)
+ttgUploadProtocol
+  = lens _ttgUploadProtocol
+      (\ s a -> s{_ttgUploadProtocol = a})
+
+-- | OAuth access token.
+ttgAccessToken :: Lens' TargetingTemplatesGet (Maybe Text)
+ttgAccessToken
+  = lens _ttgAccessToken
+      (\ s a -> s{_ttgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ttgUploadType :: Lens' TargetingTemplatesGet (Maybe Text)
+ttgUploadType
+  = lens _ttgUploadType
+      (\ s a -> s{_ttgUploadType = a})
 
 -- | User profile ID associated with this request.
 ttgProFileId :: Lens' TargetingTemplatesGet Int64
@@ -90,12 +144,22 @@ ttgId :: Lens' TargetingTemplatesGet Int64
 ttgId
   = lens _ttgId (\ s a -> s{_ttgId = a}) . _Coerce
 
+-- | JSONP
+ttgCallback :: Lens' TargetingTemplatesGet (Maybe Text)
+ttgCallback
+  = lens _ttgCallback (\ s a -> s{_ttgCallback = a})
+
 instance GoogleRequest TargetingTemplatesGet where
         type Rs TargetingTemplatesGet = TargetingTemplate
         type Scopes TargetingTemplatesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient TargetingTemplatesGet'{..}
-          = go _ttgProFileId _ttgId (Just AltJSON)
+          = go _ttgProFileId _ttgId _ttgXgafv
+              _ttgUploadProtocol
+              _ttgAccessToken
+              _ttgUploadType
+              _ttgCallback
+              (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

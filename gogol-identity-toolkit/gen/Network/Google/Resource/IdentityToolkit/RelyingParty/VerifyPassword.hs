@@ -36,8 +36,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
     , rpvpPayload
     ) where
 
-import           Network.Google.IdentityToolkit.Types
-import           Network.Google.Prelude
+import Network.Google.IdentityToolkit.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.verifyPassword@ method which the
 -- 'RelyingPartyVerifyPassword' request conforms to.

@@ -49,8 +49,8 @@ module Network.Google.Resource.Poly.Assets.List
     , alCallback
     ) where
 
-import           Network.Google.Poly.Types
-import           Network.Google.Prelude
+import Network.Google.Poly.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @poly.assets.list@ method which the
 -- 'AssetsList' request conforms to.
@@ -67,7 +67,8 @@ type AssetsListResource =
                        QueryParam "keywords" Text :>
                          QueryParam "pageToken" Text :>
                            QueryParam "curated" Bool :>
-                             QueryParam "maxComplexity" Text :>
+                             QueryParam "maxComplexity" AssetsListMaxComplexity
+                               :>
                                QueryParam "pageSize" (Textual Int32) :>
                                  QueryParam "callback" Text :>
                                    QueryParam "alt" AltJSON :>
@@ -79,19 +80,19 @@ type AssetsListResource =
 -- /See:/ 'assetsList' smart constructor.
 data AssetsList =
   AssetsList'
-    { _alXgafv          :: !(Maybe Xgafv)
+    { _alXgafv :: !(Maybe Xgafv)
     , _alUploadProtocol :: !(Maybe Text)
-    , _alOrderBy        :: !(Maybe Text)
-    , _alCategory       :: !(Maybe Text)
-    , _alAccessToken    :: !(Maybe Text)
-    , _alFormat         :: !(Maybe Text)
-    , _alUploadType     :: !(Maybe Text)
-    , _alKeywords       :: !(Maybe Text)
-    , _alPageToken      :: !(Maybe Text)
-    , _alCurated        :: !(Maybe Bool)
-    , _alMaxComplexity  :: !(Maybe Text)
-    , _alPageSize       :: !(Maybe (Textual Int32))
-    , _alCallback       :: !(Maybe Text)
+    , _alOrderBy :: !(Maybe Text)
+    , _alCategory :: !(Maybe Text)
+    , _alAccessToken :: !(Maybe Text)
+    , _alFormat :: !(Maybe Text)
+    , _alUploadType :: !(Maybe Text)
+    , _alKeywords :: !(Maybe Text)
+    , _alPageToken :: !(Maybe Text)
+    , _alCurated :: !(Maybe Bool)
+    , _alMaxComplexity :: !(Maybe AssetsListMaxComplexity)
+    , _alPageSize :: !(Maybe (Textual Int32))
+    , _alCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -207,7 +208,7 @@ alCurated
 -- | Returns assets that are of the specified complexity or less. Defaults to
 -- COMPLEX. For example, a request for MEDIUM assets also includes SIMPLE
 -- assets.
-alMaxComplexity :: Lens' AssetsList (Maybe Text)
+alMaxComplexity :: Lens' AssetsList (Maybe AssetsListMaxComplexity)
 alMaxComplexity
   = lens _alMaxComplexity
       (\ s a -> s{_alMaxComplexity = a})

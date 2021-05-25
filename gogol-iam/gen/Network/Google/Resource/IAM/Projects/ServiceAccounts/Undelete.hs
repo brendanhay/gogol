@@ -20,8 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Restores a deleted ServiceAccount. This is to be used as an action of
--- last resort. A service account may not always be restorable.
+-- Restores a deleted ServiceAccount. **Important:** It is not always
+-- possible to restore a deleted service account. Use this method only as a
+-- last resort. After you delete a service account, IAM permanently removes
+-- the service account 30 days later. There is no way to restore a deleted
+-- service account that has been permanently removed.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.undelete@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
@@ -43,8 +46,8 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
     , psauCallback
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @iam.projects.serviceAccounts.undelete@ method which the
 -- 'ProjectsServiceAccountsUndelete' request conforms to.
@@ -60,19 +63,22 @@ type ProjectsServiceAccountsUndeleteResource =
                      ReqBody '[JSON] UndeleteServiceAccountRequest :>
                        Post '[JSON] UndeleteServiceAccountResponse
 
--- | Restores a deleted ServiceAccount. This is to be used as an action of
--- last resort. A service account may not always be restorable.
+-- | Restores a deleted ServiceAccount. **Important:** It is not always
+-- possible to restore a deleted service account. Use this method only as a
+-- last resort. After you delete a service account, IAM permanently removes
+-- the service account 30 days later. There is no way to restore a deleted
+-- service account that has been permanently removed.
 --
 -- /See:/ 'projectsServiceAccountsUndelete' smart constructor.
 data ProjectsServiceAccountsUndelete =
   ProjectsServiceAccountsUndelete'
-    { _psauXgafv          :: !(Maybe Xgafv)
+    { _psauXgafv :: !(Maybe Xgafv)
     , _psauUploadProtocol :: !(Maybe Text)
-    , _psauAccessToken    :: !(Maybe Text)
-    , _psauUploadType     :: !(Maybe Text)
-    , _psauPayload        :: !UndeleteServiceAccountRequest
-    , _psauName           :: !Text
-    , _psauCallback       :: !(Maybe Text)
+    , _psauAccessToken :: !(Maybe Text)
+    , _psauUploadType :: !(Maybe Text)
+    , _psauPayload :: !UndeleteServiceAccountRequest
+    , _psauName :: !Text
+    , _psauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,7 +145,7 @@ psauPayload
   = lens _psauPayload (\ s a -> s{_psauPayload = a})
 
 -- | The resource name of the service account in the following format:
--- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT_UNIQUE_ID}\'. Using
+-- \`projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT_UNIQUE_ID}\`. Using
 -- \`-\` as a wildcard for the \`PROJECT_ID\` will infer the project from
 -- the account.
 psauName :: Lens' ProjectsServiceAccountsUndelete Text

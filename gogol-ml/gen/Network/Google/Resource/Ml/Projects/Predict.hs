@@ -20,13 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Performs prediction on the data in the request. Cloud ML Engine
--- implements a custom \`predict\` verb on top of an HTTP POST method.
+-- Performs online prediction on the data in the request. {% dynamic
+-- include \"\/ai-platform\/includes\/___predict-request\" %}
 --
--- For details of the request and response format, see the **guide to the
--- [predict request format](\/ml-engine\/docs\/v1\/predict-request)**.
---
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.predict@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.predict@.
 module Network.Google.Resource.Ml.Projects.Predict
     (
     -- * REST Resource
@@ -46,8 +43,8 @@ module Network.Google.Resource.Ml.Projects.Predict
     , ppCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.predict@ method which the
 -- 'ProjectsPredict' request conforms to.
@@ -63,22 +60,19 @@ type ProjectsPredictResource =
                      ReqBody '[JSON] GoogleCloudMlV1__PredictRequest :>
                        Post '[JSON] GoogleAPI__HTTPBody
 
--- | Performs prediction on the data in the request. Cloud ML Engine
--- implements a custom \`predict\` verb on top of an HTTP POST method.
---
--- For details of the request and response format, see the **guide to the
--- [predict request format](\/ml-engine\/docs\/v1\/predict-request)**.
+-- | Performs online prediction on the data in the request. {% dynamic
+-- include \"\/ai-platform\/includes\/___predict-request\" %}
 --
 -- /See:/ 'projectsPredict' smart constructor.
 data ProjectsPredict =
   ProjectsPredict'
-    { _ppXgafv          :: !(Maybe Xgafv)
+    { _ppXgafv :: !(Maybe Xgafv)
     , _ppUploadProtocol :: !(Maybe Text)
-    , _ppAccessToken    :: !(Maybe Text)
-    , _ppUploadType     :: !(Maybe Text)
-    , _ppPayload        :: !GoogleCloudMlV1__PredictRequest
-    , _ppName           :: !Text
-    , _ppCallback       :: !(Maybe Text)
+    , _ppAccessToken :: !(Maybe Text)
+    , _ppUploadType :: !(Maybe Text)
+    , _ppPayload :: !GoogleCloudMlV1__PredictRequest
+    , _ppName :: !Text
+    , _ppCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

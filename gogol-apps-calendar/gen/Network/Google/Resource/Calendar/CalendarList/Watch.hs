@@ -42,8 +42,8 @@ module Network.Google.Resource.Calendar.CalendarList.Watch
     , clwMaxResults
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.watch@ method which the
 -- 'CalendarListWatch' request conforms to.
@@ -70,13 +70,13 @@ type CalendarListWatchResource =
 -- /See:/ 'calendarListWatch' smart constructor.
 data CalendarListWatch =
   CalendarListWatch'
-    { _clwSyncToken     :: !(Maybe Text)
+    { _clwSyncToken :: !(Maybe Text)
     , _clwMinAccessRole :: !(Maybe CalendarListWatchMinAccessRole)
-    , _clwShowDeleted   :: !(Maybe Bool)
-    , _clwPayload       :: !Channel
-    , _clwShowHidden    :: !(Maybe Bool)
-    , _clwPageToken     :: !(Maybe Text)
-    , _clwMaxResults    :: !(Maybe (Textual Int32))
+    , _clwShowDeleted :: !(Maybe Bool)
+    , _clwPayload :: !Channel
+    , _clwShowHidden :: !(Maybe Bool)
+    , _clwPageToken :: !(Maybe Text)
+    , _clwMaxResults :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

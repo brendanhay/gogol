@@ -42,8 +42,8 @@ module Network.Google.Resource.Mirror.Timeline.List
     , tlIncludeDeleted
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.list@ method which the
 -- 'TimelineList' request conforms to.
@@ -66,12 +66,12 @@ type TimelineListResource =
 -- /See:/ 'timelineList' smart constructor.
 data TimelineList =
   TimelineList'
-    { _tlPinnedOnly     :: !(Maybe Bool)
-    , _tlOrderBy        :: !(Maybe TimelineListOrderBy)
-    , _tlBundleId       :: !(Maybe Text)
-    , _tlSourceItemId   :: !(Maybe Text)
-    , _tlPageToken      :: !(Maybe Text)
-    , _tlMaxResults     :: !(Maybe (Textual Word32))
+    { _tlPinnedOnly :: !(Maybe Bool)
+    , _tlOrderBy :: !(Maybe TimelineListOrderBy)
+    , _tlBundleId :: !(Maybe Text)
+    , _tlSourceItemId :: !(Maybe Text)
+    , _tlPageToken :: !(Maybe Text)
+    , _tlMaxResults :: !(Maybe (Textual Word32))
     , _tlIncludeDeleted :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

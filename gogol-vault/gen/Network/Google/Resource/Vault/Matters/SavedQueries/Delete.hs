@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a saved query by Id.
+-- Deletes the specified saved query.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.savedQueries.delete@.
 module Network.Google.Resource.Vault.Matters.SavedQueries.Delete
@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.SavedQueries.Delete
     , msqdCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.savedQueries.delete@ method which the
 -- 'MattersSavedQueriesDelete' request conforms to.
@@ -60,18 +60,18 @@ type MattersSavedQueriesDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a saved query by Id.
+-- | Deletes the specified saved query.
 --
 -- /See:/ 'mattersSavedQueriesDelete' smart constructor.
 data MattersSavedQueriesDelete =
   MattersSavedQueriesDelete'
-    { _msqdXgafv          :: !(Maybe Xgafv)
-    , _msqdSavedQueryId   :: !Text
+    { _msqdXgafv :: !(Maybe Xgafv)
+    , _msqdSavedQueryId :: !Text
     , _msqdUploadProtocol :: !(Maybe Text)
-    , _msqdAccessToken    :: !(Maybe Text)
-    , _msqdUploadType     :: !(Maybe Text)
-    , _msqdMatterId       :: !Text
-    , _msqdCallback       :: !(Maybe Text)
+    , _msqdAccessToken :: !(Maybe Text)
+    , _msqdUploadType :: !(Maybe Text)
+    , _msqdMatterId :: !Text
+    , _msqdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,7 +114,7 @@ msqdXgafv :: Lens' MattersSavedQueriesDelete (Maybe Xgafv)
 msqdXgafv
   = lens _msqdXgafv (\ s a -> s{_msqdXgafv = a})
 
--- | Id of the saved query to be deleted.
+-- | ID of the saved query to delete.
 msqdSavedQueryId :: Lens' MattersSavedQueriesDelete Text
 msqdSavedQueryId
   = lens _msqdSavedQueryId
@@ -138,8 +138,7 @@ msqdUploadType
   = lens _msqdUploadType
       (\ s a -> s{_msqdUploadType = a})
 
--- | The matter id of the parent matter for which the saved query is to be
--- deleted.
+-- | The ID of the matter to delete the saved query from.
 msqdMatterId :: Lens' MattersSavedQueriesDelete Text
 msqdMatterId
   = lens _msqdMatterId (\ s a -> s{_msqdMatterId = a})

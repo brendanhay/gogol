@@ -34,6 +34,7 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.List
     , ProjectsBuildsList
 
     -- * Request Lenses
+    , pblParent
     , pblXgafv
     , pblUploadProtocol
     , pblAccessToken
@@ -45,8 +46,8 @@ module Network.Google.Resource.Cloudbuild.Projects.Builds.List
     , pblCallback
     ) where
 
-import           Network.Google.ContainerBuilder.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerBuilder.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudbuild.projects.builds.list@ method which the
 -- 'ProjectsBuildsList' request conforms to.
@@ -55,16 +56,17 @@ type ProjectsBuildsListResource =
        "projects" :>
          Capture "projectId" Text :>
            "builds" :>
-             QueryParam "$.xgafv" Xgafv :>
-               QueryParam "upload_protocol" Text :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListBuildsResponse
+             QueryParam "parent" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListBuildsResponse
 
 -- | Lists previously requested builds. Previously requested builds may still
 -- be in-progress, or may have finished successfully or unsuccessfully.
@@ -72,15 +74,16 @@ type ProjectsBuildsListResource =
 -- /See:/ 'projectsBuildsList' smart constructor.
 data ProjectsBuildsList =
   ProjectsBuildsList'
-    { _pblXgafv          :: !(Maybe Xgafv)
+    { _pblParent :: !(Maybe Text)
+    , _pblXgafv :: !(Maybe Xgafv)
     , _pblUploadProtocol :: !(Maybe Text)
-    , _pblAccessToken    :: !(Maybe Text)
-    , _pblUploadType     :: !(Maybe Text)
-    , _pblFilter         :: !(Maybe Text)
-    , _pblPageToken      :: !(Maybe Text)
-    , _pblProjectId      :: !Text
-    , _pblPageSize       :: !(Maybe (Textual Int32))
-    , _pblCallback       :: !(Maybe Text)
+    , _pblAccessToken :: !(Maybe Text)
+    , _pblUploadType :: !(Maybe Text)
+    , _pblFilter :: !(Maybe Text)
+    , _pblPageToken :: !(Maybe Text)
+    , _pblProjectId :: !Text
+    , _pblPageSize :: !(Maybe (Textual Int32))
+    , _pblCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -88,6 +91,8 @@ data ProjectsBuildsList =
 -- | Creates a value of 'ProjectsBuildsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pblParent'
 --
 -- * 'pblXgafv'
 --
@@ -111,7 +116,8 @@ projectsBuildsList
     -> ProjectsBuildsList
 projectsBuildsList pPblProjectId_ =
   ProjectsBuildsList'
-    { _pblXgafv = Nothing
+    { _pblParent = Nothing
+    , _pblXgafv = Nothing
     , _pblUploadProtocol = Nothing
     , _pblAccessToken = Nothing
     , _pblUploadType = Nothing
@@ -122,6 +128,12 @@ projectsBuildsList pPblProjectId_ =
     , _pblCallback = Nothing
     }
 
+
+-- | The parent of the collection of \`Builds\`. Format:
+-- \`projects\/{project}\/locations\/location\`
+pblParent :: Lens' ProjectsBuildsList (Maybe Text)
+pblParent
+  = lens _pblParent (\ s a -> s{_pblParent = a})
 
 -- | V1 error format.
 pblXgafv :: Lens' ProjectsBuildsList (Maybe Xgafv)
@@ -150,12 +162,16 @@ pblFilter :: Lens' ProjectsBuildsList (Maybe Text)
 pblFilter
   = lens _pblFilter (\ s a -> s{_pblFilter = a})
 
--- | Token to provide to skip to a particular spot in the list.
+-- | The page token for the next page of Builds. If unspecified, the first
+-- page of results is returned. If the token is rejected for any reason,
+-- INVALID_ARGUMENT will be thrown. In this case, the token should be
+-- discarded, and pagination should be restarted from the first page of
+-- results. See https:\/\/google.aip.dev\/158 for more.
 pblPageToken :: Lens' ProjectsBuildsList (Maybe Text)
 pblPageToken
   = lens _pblPageToken (\ s a -> s{_pblPageToken = a})
 
--- | ID of the project.
+-- | Required. ID of the project.
 pblProjectId :: Lens' ProjectsBuildsList Text
 pblProjectId
   = lens _pblProjectId (\ s a -> s{_pblProjectId = a})
@@ -176,7 +192,8 @@ instance GoogleRequest ProjectsBuildsList where
         type Scopes ProjectsBuildsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient ProjectsBuildsList'{..}
-          = go _pblProjectId _pblXgafv _pblUploadProtocol
+          = go _pblProjectId _pblParent _pblXgafv
+              _pblUploadProtocol
               _pblAccessToken
               _pblUploadType
               _pblFilter

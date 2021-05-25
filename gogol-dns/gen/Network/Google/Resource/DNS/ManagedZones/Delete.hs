@@ -22,7 +22,7 @@
 --
 -- Delete a previously created ManagedZone.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.delete@.
+-- /See:/ <http://developers.google.com/cloud-dns Cloud DNS API Reference> for @dns.managedZones.delete@.
 module Network.Google.Resource.DNS.ManagedZones.Delete
     (
     -- * REST Resource
@@ -33,13 +33,18 @@ module Network.Google.Resource.DNS.ManagedZones.Delete
     , ManagedZonesDelete
 
     -- * Request Lenses
+    , mzdXgafv
+    , mzdUploadProtocol
     , mzdProject
+    , mzdAccessToken
+    , mzdUploadType
     , mzdManagedZone
     , mzdClientOperationId
+    , mzdCallback
     ) where
 
-import           Network.Google.DNS.Types
-import           Network.Google.Prelude
+import Network.Google.DNS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dns.managedZones.delete@ method which the
 -- 'ManagedZonesDelete' request conforms to.
@@ -50,17 +55,27 @@ type ManagedZonesDeleteResource =
            Capture "project" Text :>
              "managedZones" :>
                Capture "managedZone" Text :>
-                 QueryParam "clientOperationId" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "clientOperationId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a previously created ManagedZone.
 --
 -- /See:/ 'managedZonesDelete' smart constructor.
 data ManagedZonesDelete =
   ManagedZonesDelete'
-    { _mzdProject           :: !Text
-    , _mzdManagedZone       :: !Text
+    { _mzdXgafv :: !(Maybe Xgafv)
+    , _mzdUploadProtocol :: !(Maybe Text)
+    , _mzdProject :: !Text
+    , _mzdAccessToken :: !(Maybe Text)
+    , _mzdUploadType :: !(Maybe Text)
+    , _mzdManagedZone :: !Text
     , _mzdClientOperationId :: !(Maybe Text)
+    , _mzdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,27 +84,64 @@ data ManagedZonesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mzdXgafv'
+--
+-- * 'mzdUploadProtocol'
+--
 -- * 'mzdProject'
+--
+-- * 'mzdAccessToken'
+--
+-- * 'mzdUploadType'
 --
 -- * 'mzdManagedZone'
 --
 -- * 'mzdClientOperationId'
+--
+-- * 'mzdCallback'
 managedZonesDelete
     :: Text -- ^ 'mzdProject'
     -> Text -- ^ 'mzdManagedZone'
     -> ManagedZonesDelete
 managedZonesDelete pMzdProject_ pMzdManagedZone_ =
   ManagedZonesDelete'
-    { _mzdProject = pMzdProject_
+    { _mzdXgafv = Nothing
+    , _mzdUploadProtocol = Nothing
+    , _mzdProject = pMzdProject_
+    , _mzdAccessToken = Nothing
+    , _mzdUploadType = Nothing
     , _mzdManagedZone = pMzdManagedZone_
     , _mzdClientOperationId = Nothing
+    , _mzdCallback = Nothing
     }
 
+
+-- | V1 error format.
+mzdXgafv :: Lens' ManagedZonesDelete (Maybe Xgafv)
+mzdXgafv = lens _mzdXgafv (\ s a -> s{_mzdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mzdUploadProtocol :: Lens' ManagedZonesDelete (Maybe Text)
+mzdUploadProtocol
+  = lens _mzdUploadProtocol
+      (\ s a -> s{_mzdUploadProtocol = a})
 
 -- | Identifies the project addressed by this request.
 mzdProject :: Lens' ManagedZonesDelete Text
 mzdProject
   = lens _mzdProject (\ s a -> s{_mzdProject = a})
+
+-- | OAuth access token.
+mzdAccessToken :: Lens' ManagedZonesDelete (Maybe Text)
+mzdAccessToken
+  = lens _mzdAccessToken
+      (\ s a -> s{_mzdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mzdUploadType :: Lens' ManagedZonesDelete (Maybe Text)
+mzdUploadType
+  = lens _mzdUploadType
+      (\ s a -> s{_mzdUploadType = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -106,14 +158,23 @@ mzdClientOperationId
   = lens _mzdClientOperationId
       (\ s a -> s{_mzdClientOperationId = a})
 
+-- | JSONP
+mzdCallback :: Lens' ManagedZonesDelete (Maybe Text)
+mzdCallback
+  = lens _mzdCallback (\ s a -> s{_mzdCallback = a})
+
 instance GoogleRequest ManagedZonesDelete where
         type Rs ManagedZonesDelete = ()
         type Scopes ManagedZonesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesDelete'{..}
-          = go _mzdProject _mzdManagedZone
+          = go _mzdProject _mzdManagedZone _mzdXgafv
+              _mzdUploadProtocol
+              _mzdAccessToken
+              _mzdUploadType
               _mzdClientOperationId
+              _mzdCallback
               (Just AltJSON)
               dNSService
           where go

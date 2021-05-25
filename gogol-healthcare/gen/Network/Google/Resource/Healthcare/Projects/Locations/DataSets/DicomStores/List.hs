@@ -44,14 +44,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdslCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.list@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresList' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresListResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomStores" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -70,15 +70,15 @@ type ProjectsLocationsDataSetsDicomStoresListResource
 -- /See:/ 'projectsLocationsDataSetsDicomStoresList' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresList =
   ProjectsLocationsDataSetsDicomStoresList'
-    { _pldsdslParent         :: !Text
-    , _pldsdslXgafv          :: !(Maybe Xgafv)
+    { _pldsdslParent :: !Text
+    , _pldsdslXgafv :: !(Maybe Xgafv)
     , _pldsdslUploadProtocol :: !(Maybe Text)
-    , _pldsdslAccessToken    :: !(Maybe Text)
-    , _pldsdslUploadType     :: !(Maybe Text)
-    , _pldsdslFilter         :: !(Maybe Text)
-    , _pldsdslPageToken      :: !(Maybe Text)
-    , _pldsdslPageSize       :: !(Maybe (Textual Int32))
-    , _pldsdslCallback       :: !(Maybe Text)
+    , _pldsdslAccessToken :: !(Maybe Text)
+    , _pldsdslUploadType :: !(Maybe Text)
+    , _pldsdslFilter :: !(Maybe Text)
+    , _pldsdslPageToken :: !(Maybe Text)
+    , _pldsdslPageSize :: !(Maybe (Textual Int32))
+    , _pldsdslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -150,9 +150,30 @@ pldsdslUploadType
   = lens _pldsdslUploadType
       (\ s a -> s{_pldsdslUploadType = a})
 
--- | Restricts stores returned to those matching a filter. Syntax:
--- https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/search\/query_strings
--- Only filtering on labels is supported, for example \`labels.key=value\`.
+-- | Restricts stores returned to those matching a filter. The following
+-- syntax is available: * A string field value can be written as text
+-- inside quotation marks, for example \`\"query text\"\`. The only valid
+-- relational operation for text fields is equality (\`=\`), where text is
+-- searched within the field, rather than having the field be equal to the
+-- text. For example, \`\"Comment = great\"\` returns messages with
+-- \`great\` in the comment field. * A number field value can be written as
+-- an integer, a decimal, or an exponential. The valid relational operators
+-- for number fields are the equality operator (\`=\`), along with the less
+-- than\/greater than operators (\`\<\`, \`\<=\`, \`>\`, \`>=\`). Note that
+-- there is no inequality (\`!=\`) operator. You can prepend the \`NOT\`
+-- operator to an expression to negate it. * A date field value must be
+-- written in \`yyyy-mm-dd\` form. Fields with date and time use the
+-- RFC3339 time format. Leading zeros are required for one-digit months and
+-- days. The valid relational operators for date fields are the equality
+-- operator (\`=\`) , along with the less than\/greater than operators
+-- (\`\<\`, \`\<=\`, \`>\`, \`>=\`). Note that there is no inequality
+-- (\`!=\`) operator. You can prepend the \`NOT\` operator to an expression
+-- to negate it. * Multiple field query expressions can be combined in one
+-- query by adding \`AND\` or \`OR\` operators between the expressions. If
+-- a boolean operator appears within a quoted string, it is not treated as
+-- special, it\'s just another part of the character string to be matched.
+-- You can prepend the \`NOT\` operator to an expression to negate it. Only
+-- filtering on labels is supported. For example, \`labels.key=value\`.
 pldsdslFilter :: Lens' ProjectsLocationsDataSetsDicomStoresList (Maybe Text)
 pldsdslFilter
   = lens _pldsdslFilter
@@ -166,7 +187,7 @@ pldsdslPageToken
       (\ s a -> s{_pldsdslPageToken = a})
 
 -- | Limit on the number of DICOM stores to return in a single response. If
--- zero the default page size of 100 is used.
+-- not specified, 100 is used. May not be larger than 1000.
 pldsdslPageSize :: Lens' ProjectsLocationsDataSetsDicomStoresList (Maybe Int32)
 pldsdslPageSize
   = lens _pldsdslPageSize

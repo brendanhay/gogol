@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists matters the user has access to.
+-- Lists matters the requestor has access to.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.list@.
 module Network.Google.Resource.Vault.Matters.List
@@ -44,8 +44,8 @@ module Network.Google.Resource.Vault.Matters.List
     , mlCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.list@ method which the
 -- 'MattersList' request conforms to.
@@ -53,31 +53,31 @@ type MattersListResource =
      "v1" :>
        "matters" :>
          QueryParam "$.xgafv" Xgafv :>
-           QueryParam "state" Text :>
+           QueryParam "state" MattersListState :>
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "view" Text :>
+                   QueryParam "view" MattersListView :>
                      QueryParam "pageToken" Text :>
                        QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListMattersResponse
 
--- | Lists matters the user has access to.
+-- | Lists matters the requestor has access to.
 --
 -- /See:/ 'mattersList' smart constructor.
 data MattersList =
   MattersList'
-    { _mlXgafv          :: !(Maybe Xgafv)
-    , _mlState          :: !(Maybe Text)
+    { _mlXgafv :: !(Maybe Xgafv)
+    , _mlState :: !(Maybe MattersListState)
     , _mlUploadProtocol :: !(Maybe Text)
-    , _mlAccessToken    :: !(Maybe Text)
-    , _mlUploadType     :: !(Maybe Text)
-    , _mlView           :: !(Maybe Text)
-    , _mlPageToken      :: !(Maybe Text)
-    , _mlPageSize       :: !(Maybe (Textual Int32))
-    , _mlCallback       :: !(Maybe Text)
+    , _mlAccessToken :: !(Maybe Text)
+    , _mlUploadType :: !(Maybe Text)
+    , _mlView :: !(Maybe MattersListView)
+    , _mlPageToken :: !(Maybe Text)
+    , _mlPageSize :: !(Maybe (Textual Int32))
+    , _mlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,9 +123,9 @@ mattersList =
 mlXgafv :: Lens' MattersList (Maybe Xgafv)
 mlXgafv = lens _mlXgafv (\ s a -> s{_mlXgafv = a})
 
--- | If set, list only matters with that specific state. The default is
--- listing matters of all states.
-mlState :: Lens' MattersList (Maybe Text)
+-- | If set, lists only matters with the specified state. The default lists
+-- matters of all states.
+mlState :: Lens' MattersList (Maybe MattersListState)
 mlState = lens _mlState (\ s a -> s{_mlState = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -145,8 +145,8 @@ mlUploadType :: Lens' MattersList (Maybe Text)
 mlUploadType
   = lens _mlUploadType (\ s a -> s{_mlUploadType = a})
 
--- | Specifies which parts of the matter to return in response.
-mlView :: Lens' MattersList (Maybe Text)
+-- | Specifies how much information about the matter to return in response.
+mlView :: Lens' MattersList (Maybe MattersListView)
 mlView = lens _mlView (\ s a -> s{_mlView = a})
 
 -- | The pagination token as returned in the response.

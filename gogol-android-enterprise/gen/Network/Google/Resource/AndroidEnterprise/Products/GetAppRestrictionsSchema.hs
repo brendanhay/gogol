@@ -38,13 +38,18 @@ module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSche
     , ProductsGetAppRestrictionsSchema
 
     -- * Request Lenses
+    , pgarsXgafv
+    , pgarsUploadProtocol
     , pgarsEnterpriseId
+    , pgarsAccessToken
+    , pgarsUploadType
     , pgarsLanguage
     , pgarsProductId
+    , pgarsCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.getAppRestrictionsSchema@ method which the
 -- 'ProductsGetAppRestrictionsSchema' request conforms to.
@@ -56,9 +61,14 @@ type ProductsGetAppRestrictionsSchemaResource =
              "products" :>
                Capture "productId" Text :>
                  "appRestrictionsSchema" :>
-                   QueryParam "language" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] AppRestrictionsSchema
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "language" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] AppRestrictionsSchema
 
 -- | Retrieves the schema that defines the configurable properties for this
 -- product. All products have a schema, but this schema may be empty if no
@@ -70,9 +80,14 @@ type ProductsGetAppRestrictionsSchemaResource =
 -- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
 data ProductsGetAppRestrictionsSchema =
   ProductsGetAppRestrictionsSchema'
-    { _pgarsEnterpriseId :: !Text
-    , _pgarsLanguage     :: !(Maybe Text)
-    , _pgarsProductId    :: !Text
+    { _pgarsXgafv :: !(Maybe Xgafv)
+    , _pgarsUploadProtocol :: !(Maybe Text)
+    , _pgarsEnterpriseId :: !Text
+    , _pgarsAccessToken :: !(Maybe Text)
+    , _pgarsUploadType :: !(Maybe Text)
+    , _pgarsLanguage :: !(Maybe Text)
+    , _pgarsProductId :: !Text
+    , _pgarsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -81,28 +96,66 @@ data ProductsGetAppRestrictionsSchema =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pgarsXgafv'
+--
+-- * 'pgarsUploadProtocol'
+--
 -- * 'pgarsEnterpriseId'
+--
+-- * 'pgarsAccessToken'
+--
+-- * 'pgarsUploadType'
 --
 -- * 'pgarsLanguage'
 --
 -- * 'pgarsProductId'
+--
+-- * 'pgarsCallback'
 productsGetAppRestrictionsSchema
     :: Text -- ^ 'pgarsEnterpriseId'
     -> Text -- ^ 'pgarsProductId'
     -> ProductsGetAppRestrictionsSchema
 productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
   ProductsGetAppRestrictionsSchema'
-    { _pgarsEnterpriseId = pPgarsEnterpriseId_
+    { _pgarsXgafv = Nothing
+    , _pgarsUploadProtocol = Nothing
+    , _pgarsEnterpriseId = pPgarsEnterpriseId_
+    , _pgarsAccessToken = Nothing
+    , _pgarsUploadType = Nothing
     , _pgarsLanguage = Nothing
     , _pgarsProductId = pPgarsProductId_
+    , _pgarsCallback = Nothing
     }
 
+
+-- | V1 error format.
+pgarsXgafv :: Lens' ProductsGetAppRestrictionsSchema (Maybe Xgafv)
+pgarsXgafv
+  = lens _pgarsXgafv (\ s a -> s{_pgarsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pgarsUploadProtocol :: Lens' ProductsGetAppRestrictionsSchema (Maybe Text)
+pgarsUploadProtocol
+  = lens _pgarsUploadProtocol
+      (\ s a -> s{_pgarsUploadProtocol = a})
 
 -- | The ID of the enterprise.
 pgarsEnterpriseId :: Lens' ProductsGetAppRestrictionsSchema Text
 pgarsEnterpriseId
   = lens _pgarsEnterpriseId
       (\ s a -> s{_pgarsEnterpriseId = a})
+
+-- | OAuth access token.
+pgarsAccessToken :: Lens' ProductsGetAppRestrictionsSchema (Maybe Text)
+pgarsAccessToken
+  = lens _pgarsAccessToken
+      (\ s a -> s{_pgarsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pgarsUploadType :: Lens' ProductsGetAppRestrictionsSchema (Maybe Text)
+pgarsUploadType
+  = lens _pgarsUploadType
+      (\ s a -> s{_pgarsUploadType = a})
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",
 -- \"de\").
@@ -117,6 +170,12 @@ pgarsProductId
   = lens _pgarsProductId
       (\ s a -> s{_pgarsProductId = a})
 
+-- | JSONP
+pgarsCallback :: Lens' ProductsGetAppRestrictionsSchema (Maybe Text)
+pgarsCallback
+  = lens _pgarsCallback
+      (\ s a -> s{_pgarsCallback = a})
+
 instance GoogleRequest
            ProductsGetAppRestrictionsSchema
          where
@@ -125,8 +184,12 @@ instance GoogleRequest
         type Scopes ProductsGetAppRestrictionsSchema =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient ProductsGetAppRestrictionsSchema'{..}
-          = go _pgarsEnterpriseId _pgarsProductId
+          = go _pgarsEnterpriseId _pgarsProductId _pgarsXgafv
+              _pgarsUploadProtocol
+              _pgarsAccessToken
+              _pgarsUploadType
               _pgarsLanguage
+              _pgarsCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

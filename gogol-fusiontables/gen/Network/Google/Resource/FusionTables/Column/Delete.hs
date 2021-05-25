@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Column.Delete
     , cdColumnId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.column.delete@ method which the
 -- 'ColumnDelete' request conforms to.
@@ -56,7 +56,7 @@ type ColumnDeleteResource =
 -- /See:/ 'columnDelete' smart constructor.
 data ColumnDelete =
   ColumnDelete'
-    { _cdTableId  :: !Text
+    { _cdTableId :: !Text
     , _cdColumnId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

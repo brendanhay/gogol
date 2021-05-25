@@ -42,8 +42,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Get
     , jgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeReporting.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.get@ method which the
 -- 'JobsGet' request conforms to.
@@ -64,13 +64,13 @@ type JobsGetResource =
 -- /See:/ 'jobsGet' smart constructor.
 data JobsGet =
   JobsGet'
-    { _jgXgafv                  :: !(Maybe Xgafv)
-    , _jgJobId                  :: !Text
-    , _jgUploadProtocol         :: !(Maybe Text)
-    , _jgAccessToken            :: !(Maybe Text)
-    , _jgUploadType             :: !(Maybe Text)
+    { _jgXgafv :: !(Maybe Xgafv)
+    , _jgJobId :: !Text
+    , _jgUploadProtocol :: !(Maybe Text)
+    , _jgAccessToken :: !(Maybe Text)
+    , _jgUploadType :: !(Maybe Text)
     , _jgOnBehalfOfContentOwner :: !(Maybe Text)
-    , _jgCallback               :: !(Maybe Text)
+    , _jgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

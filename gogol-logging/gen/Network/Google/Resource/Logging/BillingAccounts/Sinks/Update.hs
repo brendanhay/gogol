@@ -25,7 +25,7 @@
 -- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.billingAccounts.sinks.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.sinks.update@.
 module Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
     , basuCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.billingAccounts.sinks.update@ method which the
 -- 'BillingAccountsSinksUpdate' request conforms to.
@@ -73,15 +73,15 @@ type BillingAccountsSinksUpdateResource =
 -- /See:/ 'billingAccountsSinksUpdate' smart constructor.
 data BillingAccountsSinksUpdate =
   BillingAccountsSinksUpdate'
-    { _basuXgafv                :: !(Maybe Xgafv)
+    { _basuXgafv :: !(Maybe Xgafv)
     , _basuUniqueWriterIdentity :: !(Maybe Bool)
-    , _basuUploadProtocol       :: !(Maybe Text)
-    , _basuUpdateMask           :: !(Maybe GFieldMask)
-    , _basuAccessToken          :: !(Maybe Text)
-    , _basuUploadType           :: !(Maybe Text)
-    , _basuPayload              :: !LogSink
-    , _basuSinkName             :: !Text
-    , _basuCallback             :: !(Maybe Text)
+    , _basuUploadProtocol :: !(Maybe Text)
+    , _basuUpdateMask :: !(Maybe GFieldMask)
+    , _basuAccessToken :: !(Maybe Text)
+    , _basuUploadType :: !(Maybe Text)
+    , _basuPayload :: !LogSink
+    , _basuSinkName :: !Text
+    , _basuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

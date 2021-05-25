@@ -16,7 +16,7 @@
 --
 module Network.Google.PlayMoviesPartner.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Work type as enumerated in EMA.
 data AvailWorkType

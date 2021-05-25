@@ -23,7 +23,7 @@
 -- Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.floodlightConfigurations.patch@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     (
     -- * REST Resource
@@ -34,26 +34,36 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     , FloodlightConfigurationsPatch
 
     -- * Request Lenses
+    , fcpXgafv
+    , fcpUploadProtocol
+    , fcpAccessToken
+    , fcpUploadType
     , fcpProFileId
     , fcpPayload
     , fcpId
+    , fcpCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightConfigurations.patch@ method which the
 -- 'FloodlightConfigurationsPatch' request conforms to.
 type FloodlightConfigurationsPatchResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
                QueryParam "id" (Textual Int64) :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] FloodlightConfiguration :>
-                     Patch '[JSON] FloodlightConfiguration
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] FloodlightConfiguration :>
+                               Patch '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration. This method supports patch
 -- semantics.
@@ -61,9 +71,14 @@ type FloodlightConfigurationsPatchResource =
 -- /See:/ 'floodlightConfigurationsPatch' smart constructor.
 data FloodlightConfigurationsPatch =
   FloodlightConfigurationsPatch'
-    { _fcpProFileId :: !(Textual Int64)
-    , _fcpPayload   :: !FloodlightConfiguration
-    , _fcpId        :: !(Textual Int64)
+    { _fcpXgafv :: !(Maybe Xgafv)
+    , _fcpUploadProtocol :: !(Maybe Text)
+    , _fcpAccessToken :: !(Maybe Text)
+    , _fcpUploadType :: !(Maybe Text)
+    , _fcpProFileId :: !(Textual Int64)
+    , _fcpPayload :: !FloodlightConfiguration
+    , _fcpId :: !(Textual Int64)
+    , _fcpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,11 +87,21 @@ data FloodlightConfigurationsPatch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'fcpXgafv'
+--
+-- * 'fcpUploadProtocol'
+--
+-- * 'fcpAccessToken'
+--
+-- * 'fcpUploadType'
+--
 -- * 'fcpProFileId'
 --
 -- * 'fcpPayload'
 --
 -- * 'fcpId'
+--
+-- * 'fcpCallback'
 floodlightConfigurationsPatch
     :: Int64 -- ^ 'fcpProFileId'
     -> FloodlightConfiguration -- ^ 'fcpPayload'
@@ -84,11 +109,38 @@ floodlightConfigurationsPatch
     -> FloodlightConfigurationsPatch
 floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
   FloodlightConfigurationsPatch'
-    { _fcpProFileId = _Coerce # pFcpProFileId_
+    { _fcpXgafv = Nothing
+    , _fcpUploadProtocol = Nothing
+    , _fcpAccessToken = Nothing
+    , _fcpUploadType = Nothing
+    , _fcpProFileId = _Coerce # pFcpProFileId_
     , _fcpPayload = pFcpPayload_
     , _fcpId = _Coerce # pFcpId_
+    , _fcpCallback = Nothing
     }
 
+
+-- | V1 error format.
+fcpXgafv :: Lens' FloodlightConfigurationsPatch (Maybe Xgafv)
+fcpXgafv = lens _fcpXgafv (\ s a -> s{_fcpXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+fcpUploadProtocol :: Lens' FloodlightConfigurationsPatch (Maybe Text)
+fcpUploadProtocol
+  = lens _fcpUploadProtocol
+      (\ s a -> s{_fcpUploadProtocol = a})
+
+-- | OAuth access token.
+fcpAccessToken :: Lens' FloodlightConfigurationsPatch (Maybe Text)
+fcpAccessToken
+  = lens _fcpAccessToken
+      (\ s a -> s{_fcpAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+fcpUploadType :: Lens' FloodlightConfigurationsPatch (Maybe Text)
+fcpUploadType
+  = lens _fcpUploadType
+      (\ s a -> s{_fcpUploadType = a})
 
 -- | User profile ID associated with this request.
 fcpProFileId :: Lens' FloodlightConfigurationsPatch Int64
@@ -101,10 +153,15 @@ fcpPayload :: Lens' FloodlightConfigurationsPatch FloodlightConfiguration
 fcpPayload
   = lens _fcpPayload (\ s a -> s{_fcpPayload = a})
 
--- | Floodlight configuration ID.
+-- | FloodlightConfiguration ID.
 fcpId :: Lens' FloodlightConfigurationsPatch Int64
 fcpId
   = lens _fcpId (\ s a -> s{_fcpId = a}) . _Coerce
+
+-- | JSONP
+fcpCallback :: Lens' FloodlightConfigurationsPatch (Maybe Text)
+fcpCallback
+  = lens _fcpCallback (\ s a -> s{_fcpCallback = a})
 
 instance GoogleRequest FloodlightConfigurationsPatch
          where
@@ -113,7 +170,12 @@ instance GoogleRequest FloodlightConfigurationsPatch
         type Scopes FloodlightConfigurationsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient FloodlightConfigurationsPatch'{..}
-          = go _fcpProFileId (Just _fcpId) (Just AltJSON)
+          = go _fcpProFileId (Just _fcpId) _fcpXgafv
+              _fcpUploadProtocol
+              _fcpAccessToken
+              _fcpUploadType
+              _fcpCallback
+              (Just AltJSON)
               _fcpPayload
               dFAReportingService
           where go

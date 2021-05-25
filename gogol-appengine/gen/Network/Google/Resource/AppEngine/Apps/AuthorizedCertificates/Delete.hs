@@ -42,8 +42,8 @@ module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.Delete
     , aacdCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.delete@ method which the
 -- 'AppsAuthorizedCertificatesDelete' request conforms to.
@@ -66,12 +66,12 @@ type AppsAuthorizedCertificatesDeleteResource =
 data AppsAuthorizedCertificatesDelete =
   AppsAuthorizedCertificatesDelete'
     { _aacdAuthorizedCertificatesId :: !Text
-    , _aacdXgafv                    :: !(Maybe Xgafv)
-    , _aacdUploadProtocol           :: !(Maybe Text)
-    , _aacdAccessToken              :: !(Maybe Text)
-    , _aacdUploadType               :: !(Maybe Text)
-    , _aacdAppsId                   :: !Text
-    , _aacdCallback                 :: !(Maybe Text)
+    , _aacdXgafv :: !(Maybe Xgafv)
+    , _aacdUploadProtocol :: !(Maybe Text)
+    , _aacdAccessToken :: !(Maybe Text)
+    , _aacdUploadType :: !(Maybe Text)
+    , _aacdAppsId :: !Text
+    , _aacdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

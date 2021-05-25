@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google YouTube Data.
+A client library for the Google YouTube Data API v3.
 
 
 ## Contribute

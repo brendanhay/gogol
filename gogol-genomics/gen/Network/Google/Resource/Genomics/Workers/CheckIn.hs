@@ -43,8 +43,8 @@ module Network.Google.Resource.Genomics.Workers.CheckIn
     , wciCallback
     ) where
 
-import           Network.Google.Genomics.Types
-import           Network.Google.Prelude
+import Network.Google.Genomics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @genomics.workers.checkIn@ method which the
 -- 'WorkersCheckIn' request conforms to.
@@ -67,13 +67,13 @@ type WorkersCheckInResource =
 -- /See:/ 'workersCheckIn' smart constructor.
 data WorkersCheckIn =
   WorkersCheckIn'
-    { _wciXgafv          :: !(Maybe Xgafv)
+    { _wciXgafv :: !(Maybe Xgafv)
     , _wciUploadProtocol :: !(Maybe Text)
-    , _wciAccessToken    :: !(Maybe Text)
-    , _wciUploadType     :: !(Maybe Text)
-    , _wciPayload        :: !CheckInRequest
-    , _wciId             :: !Text
-    , _wciCallback       :: !(Maybe Text)
+    , _wciAccessToken :: !(Maybe Text)
+    , _wciUploadType :: !(Maybe Text)
+    , _wciPayload :: !CheckInRequest
+    , _wciId :: !Text
+    , _wciCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -138,7 +138,8 @@ wciPayload :: Lens' WorkersCheckIn CheckInRequest
 wciPayload
   = lens _wciPayload (\ s a -> s{_wciPayload = a})
 
--- | The worker id, assigned when it was created.
+-- | The VM identity token for authenticating the VM instance.
+-- https:\/\/cloud.google.com\/compute\/docs\/instances\/verifying-instance-identity
 wciId :: Lens' WorkersCheckIn Text
 wciId = lens _wciId (\ s a -> s{_wciId = a})
 

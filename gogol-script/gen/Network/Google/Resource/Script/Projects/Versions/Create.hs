@@ -43,8 +43,8 @@ module Network.Google.Resource.Script.Projects.Versions.Create
     , pvcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.versions.create@ method which the
 -- 'ProjectsVersionsCreate' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsVersionsCreateResource =
 -- /See:/ 'projectsVersionsCreate' smart constructor.
 data ProjectsVersionsCreate =
   ProjectsVersionsCreate'
-    { _pvcXgafv          :: !(Maybe Xgafv)
+    { _pvcXgafv :: !(Maybe Xgafv)
     , _pvcUploadProtocol :: !(Maybe Text)
-    , _pvcAccessToken    :: !(Maybe Text)
-    , _pvcUploadType     :: !(Maybe Text)
-    , _pvcPayload        :: !Version
-    , _pvcScriptId       :: !Text
-    , _pvcCallback       :: !(Maybe Text)
+    , _pvcAccessToken :: !(Maybe Text)
+    , _pvcUploadType :: !(Maybe Text)
+    , _pvcPayload :: !Version
+    , _pvcScriptId :: !Text
+    , _pvcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

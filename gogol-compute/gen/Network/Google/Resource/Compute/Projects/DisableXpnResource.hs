@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disable a serivce resource (a.k.a service project) associated with this
--- host project.
+-- Disable a service resource (also known as service project) associated
+-- with this host project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.disableXpnResource@.
 module Network.Google.Resource.Compute.Projects.DisableXpnResource
@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Projects.DisableXpnResource
     , pdxrPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.disableXpnResource@ method which the
 -- 'ProjectsDisableXpnResource' request conforms to.
@@ -55,15 +55,15 @@ type ProjectsDisableXpnResourceResource =
                    ReqBody '[JSON] ProjectsDisableXpnResourceRequest :>
                      Post '[JSON] Operation
 
--- | Disable a serivce resource (a.k.a service project) associated with this
--- host project.
+-- | Disable a service resource (also known as service project) associated
+-- with this host project.
 --
 -- /See:/ 'projectsDisableXpnResource' smart constructor.
 data ProjectsDisableXpnResource =
   ProjectsDisableXpnResource'
     { _pdxrRequestId :: !(Maybe Text)
-    , _pdxrProject   :: !Text
-    , _pdxrPayload   :: !ProjectsDisableXpnResourceRequest
+    , _pdxrProject :: !Text
+    , _pdxrPayload :: !ProjectsDisableXpnResourceRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

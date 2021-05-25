@@ -17,10 +17,11 @@
 --
 module Network.Google.AndroidPublisher.Types.Product where
 
-import           Network.Google.AndroidPublisher.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types.Sum
+import Network.Google.Prelude
 
--- | List of localized title and description data.
+-- | List of localized title and description data. Map key is the language of
+-- the localized data, as defined by BCP-47, e.g. \"en-US\".
 --
 -- /See:/ 'inAppProductListings' smart constructor.
 newtype InAppProductListings =
@@ -42,8 +43,6 @@ inAppProductListings pIaplAddtional_ =
   InAppProductListings' {_iaplAddtional = _Coerce # pIaplAddtional_}
 
 
--- | The language of the localized data, as defined by BCP 47. i.e.:
--- \"en-US\", \"en-GB\".
 iaplAddtional :: Lens' InAppProductListings (HashMap Text InAppProductListing)
 iaplAddtional
   = lens _iaplAddtional
@@ -59,58 +58,12 @@ instance FromJSON InAppProductListings where
 instance ToJSON InAppProductListings where
         toJSON = toJSON . _iaplAddtional
 
---
--- /See:/ 'monthDay' smart constructor.
-data MonthDay =
-  MonthDay'
-    { _mdDay   :: !(Maybe (Textual Word32))
-    , _mdMonth :: !(Maybe (Textual Word32))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'MonthDay' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mdDay'
---
--- * 'mdMonth'
-monthDay
-    :: MonthDay
-monthDay = MonthDay' {_mdDay = Nothing, _mdMonth = Nothing}
-
-
--- | Day of a month, value in [1, 31] range. Valid range depends on the
--- specified month.
-mdDay :: Lens' MonthDay (Maybe Word32)
-mdDay
-  = lens _mdDay (\ s a -> s{_mdDay = a}) .
-      mapping _Coerce
-
--- | Month of a year. e.g. 1 = JAN, 2 = FEB etc.
-mdMonth :: Lens' MonthDay (Maybe Word32)
-mdMonth
-  = lens _mdMonth (\ s a -> s{_mdMonth = a}) .
-      mapping _Coerce
-
-instance FromJSON MonthDay where
-        parseJSON
-          = withObject "MonthDay"
-              (\ o ->
-                 MonthDay' <$> (o .:? "day") <*> (o .:? "month"))
-
-instance ToJSON MonthDay where
-        toJSON MonthDay'{..}
-          = object
-              (catMaybes
-                 [("day" .=) <$> _mdDay, ("month" .=) <$> _mdMonth])
-
+-- | A track configuration. The resource for TracksService.
 --
 -- /See:/ 'track' smart constructor.
 data Track =
   Track'
-    { _tTrack    :: !(Maybe Text)
+    { _tTrack :: !(Maybe Text)
     , _tReleases :: !(Maybe [TrackRelease])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -128,12 +81,12 @@ track
 track = Track' {_tTrack = Nothing, _tReleases = Nothing}
 
 
--- | Identifier for this track.
+-- | Identifier of the track.
 tTrack :: Lens' Track (Maybe Text)
 tTrack = lens _tTrack (\ s a -> s{_tTrack = a})
 
--- | A list of all active releases in this track during a read request. On an
--- update request, it represents desired changes.
+-- | In a read request, represents all active releases in the track. In an
+-- update request, represents desired changes.
 tReleases :: Lens' Track [TrackRelease]
 tReleases
   = lens _tReleases (\ s a -> s{_tReleases = a}) .
@@ -154,13 +107,64 @@ instance ToJSON Track where
                  [("track" .=) <$> _tTrack,
                   ("releases" .=) <$> _tReleases])
 
+-- | APK that is suitable for inclusion in a system image. The resource of
+-- SystemApksService.
+--
+-- /See:/ 'variant' smart constructor.
+data Variant =
+  Variant'
+    { _vVariantId :: !(Maybe (Textual Word32))
+    , _vDeviceSpec :: !(Maybe DeviceSpec)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Variant' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vVariantId'
+--
+-- * 'vDeviceSpec'
+variant
+    :: Variant
+variant = Variant' {_vVariantId = Nothing, _vDeviceSpec = Nothing}
+
+
+-- | Output only. The ID of a previously created system APK variant.
+vVariantId :: Lens' Variant (Maybe Word32)
+vVariantId
+  = lens _vVariantId (\ s a -> s{_vVariantId = a}) .
+      mapping _Coerce
+
+-- | The device spec used to generate the APK.
+vDeviceSpec :: Lens' Variant (Maybe DeviceSpec)
+vDeviceSpec
+  = lens _vDeviceSpec (\ s a -> s{_vDeviceSpec = a})
+
+instance FromJSON Variant where
+        parseJSON
+          = withObject "Variant"
+              (\ o ->
+                 Variant' <$>
+                   (o .:? "variantId") <*> (o .:? "deviceSpec"))
+
+instance ToJSON Variant where
+        toJSON Variant'{..}
+          = object
+              (catMaybes
+                 [("variantId" .=) <$> _vVariantId,
+                  ("deviceSpec" .=) <$> _vDeviceSpec])
+
+-- | An uploaded image. The resource for ImagesService.
 --
 -- /See:/ 'image' smart constructor.
 data Image =
   Image'
-    { _iURL  :: !(Maybe Text)
+    { _iURL :: !(Maybe Text)
     , _iSha1 :: !(Maybe Text)
-    , _iId   :: !(Maybe Text)
+    , _iId :: !(Maybe Text)
+    , _iSha256 :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -174,16 +178,19 @@ data Image =
 -- * 'iSha1'
 --
 -- * 'iId'
+--
+-- * 'iSha256'
 image
     :: Image
-image = Image' {_iURL = Nothing, _iSha1 = Nothing, _iId = Nothing}
+image =
+  Image' {_iURL = Nothing, _iSha1 = Nothing, _iId = Nothing, _iSha256 = Nothing}
 
 
 -- | A URL that will serve a preview of the image.
 iURL :: Lens' Image (Maybe Text)
 iURL = lens _iURL (\ s a -> s{_iURL = a})
 
--- | A sha1 hash of the image that was uploaded.
+-- | A sha1 hash of the image.
 iSha1 :: Lens' Image (Maybe Text)
 iSha1 = lens _iSha1 (\ s a -> s{_iSha1 = a})
 
@@ -191,25 +198,32 @@ iSha1 = lens _iSha1 (\ s a -> s{_iSha1 = a})
 iId :: Lens' Image (Maybe Text)
 iId = lens _iId (\ s a -> s{_iId = a})
 
+-- | A sha256 hash of the image.
+iSha256 :: Lens' Image (Maybe Text)
+iSha256 = lens _iSha256 (\ s a -> s{_iSha256 = a})
+
 instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
                  Image' <$>
-                   (o .:? "url") <*> (o .:? "sha1") <*> (o .:? "id"))
+                   (o .:? "url") <*> (o .:? "sha1") <*> (o .:? "id") <*>
+                     (o .:? "sha256"))
 
 instance ToJSON Image where
         toJSON Image'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _iURL, ("sha1" .=) <$> _iSha1,
-                  ("id" .=) <$> _iId])
+                  ("id" .=) <$> _iId, ("sha256" .=) <$> _iSha256])
 
+-- | Store listing of a single in-app product.
 --
 -- /See:/ 'inAppProductListing' smart constructor.
 data InAppProductListing =
   InAppProductListing'
-    { _iaplTitle       :: !(Maybe Text)
+    { _iaplBenefits :: !(Maybe [Text])
+    , _iaplTitle :: !(Maybe Text)
     , _iaplDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -219,19 +233,31 @@ data InAppProductListing =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'iaplBenefits'
+--
 -- * 'iaplTitle'
 --
 -- * 'iaplDescription'
 inAppProductListing
     :: InAppProductListing
 inAppProductListing =
-  InAppProductListing' {_iaplTitle = Nothing, _iaplDescription = Nothing}
+  InAppProductListing'
+    {_iaplBenefits = Nothing, _iaplTitle = Nothing, _iaplDescription = Nothing}
 
 
+-- | Localized entitlement benefits for a subscription.
+iaplBenefits :: Lens' InAppProductListing [Text]
+iaplBenefits
+  = lens _iaplBenefits (\ s a -> s{_iaplBenefits = a})
+      . _Default
+      . _Coerce
+
+-- | Title for the store listing.
 iaplTitle :: Lens' InAppProductListing (Maybe Text)
 iaplTitle
   = lens _iaplTitle (\ s a -> s{_iaplTitle = a})
 
+-- | Description for the store listing.
 iaplDescription :: Lens' InAppProductListing (Maybe Text)
 iaplDescription
   = lens _iaplDescription
@@ -242,15 +268,18 @@ instance FromJSON InAppProductListing where
           = withObject "InAppProductListing"
               (\ o ->
                  InAppProductListing' <$>
-                   (o .:? "title") <*> (o .:? "description"))
+                   (o .:? "benefits" .!= mempty) <*> (o .:? "title") <*>
+                     (o .:? "description"))
 
 instance ToJSON InAppProductListing where
         toJSON InAppProductListing'{..}
           = object
               (catMaybes
-                 [("title" .=) <$> _iaplTitle,
+                 [("benefits" .=) <$> _iaplBenefits,
+                  ("title" .=) <$> _iaplTitle,
                   ("description" .=) <$> _iaplDescription])
 
+-- | Response for deleting all images.
 --
 -- /See:/ 'imagesDeleteAllResponse' smart constructor.
 newtype ImagesDeleteAllResponse =
@@ -270,6 +299,7 @@ imagesDeleteAllResponse
 imagesDeleteAllResponse = ImagesDeleteAllResponse' {_idarDeleted = Nothing}
 
 
+-- | The deleted images.
 idarDeleted :: Lens' ImagesDeleteAllResponse [Image]
 idarDeleted
   = lens _idarDeleted (\ s a -> s{_idarDeleted = a}) .
@@ -288,11 +318,112 @@ instance ToJSON ImagesDeleteAllResponse where
           = object
               (catMaybes [("deleted" .=) <$> _idarDeleted])
 
+-- | Contains the introductory price information for a subscription.
+--
+-- /See:/ 'introductoryPriceInfo' smart constructor.
+data IntroductoryPriceInfo =
+  IntroductoryPriceInfo'
+    { _ipiIntroductoryPricePeriod :: !(Maybe Text)
+    , _ipiIntroductoryPriceAmountMicros :: !(Maybe (Textual Int64))
+    , _ipiIntroductoryPriceCycles :: !(Maybe (Textual Int32))
+    , _ipiIntroductoryPriceCurrencyCode :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'IntroductoryPriceInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ipiIntroductoryPricePeriod'
+--
+-- * 'ipiIntroductoryPriceAmountMicros'
+--
+-- * 'ipiIntroductoryPriceCycles'
+--
+-- * 'ipiIntroductoryPriceCurrencyCode'
+introductoryPriceInfo
+    :: IntroductoryPriceInfo
+introductoryPriceInfo =
+  IntroductoryPriceInfo'
+    { _ipiIntroductoryPricePeriod = Nothing
+    , _ipiIntroductoryPriceAmountMicros = Nothing
+    , _ipiIntroductoryPriceCycles = Nothing
+    , _ipiIntroductoryPriceCurrencyCode = Nothing
+    }
+
+
+-- | Introductory price period, specified in ISO 8601 format. Common values
+-- are (but not limited to) \"P1W\" (one week), \"P1M\" (one month),
+-- \"P3M\" (three months), \"P6M\" (six months), and \"P1Y\" (one year).
+ipiIntroductoryPricePeriod :: Lens' IntroductoryPriceInfo (Maybe Text)
+ipiIntroductoryPricePeriod
+  = lens _ipiIntroductoryPricePeriod
+      (\ s a -> s{_ipiIntroductoryPricePeriod = a})
+
+-- | Introductory price of the subscription, not including tax. The currency
+-- is the same as price_currency_code. Price is expressed in micro-units,
+-- where 1,000,000 micro-units represents one unit of the currency. For
+-- example, if the subscription price is €1.99, price_amount_micros is
+-- 1990000.
+ipiIntroductoryPriceAmountMicros :: Lens' IntroductoryPriceInfo (Maybe Int64)
+ipiIntroductoryPriceAmountMicros
+  = lens _ipiIntroductoryPriceAmountMicros
+      (\ s a -> s{_ipiIntroductoryPriceAmountMicros = a})
+      . mapping _Coerce
+
+-- | The number of billing period to offer introductory pricing.
+ipiIntroductoryPriceCycles :: Lens' IntroductoryPriceInfo (Maybe Int32)
+ipiIntroductoryPriceCycles
+  = lens _ipiIntroductoryPriceCycles
+      (\ s a -> s{_ipiIntroductoryPriceCycles = a})
+      . mapping _Coerce
+
+-- | ISO 4217 currency code for the introductory subscription price. For
+-- example, if the price is specified in British pounds sterling,
+-- price_currency_code is \"GBP\".
+ipiIntroductoryPriceCurrencyCode :: Lens' IntroductoryPriceInfo (Maybe Text)
+ipiIntroductoryPriceCurrencyCode
+  = lens _ipiIntroductoryPriceCurrencyCode
+      (\ s a -> s{_ipiIntroductoryPriceCurrencyCode = a})
+
+instance FromJSON IntroductoryPriceInfo where
+        parseJSON
+          = withObject "IntroductoryPriceInfo"
+              (\ o ->
+                 IntroductoryPriceInfo' <$>
+                   (o .:? "introductoryPricePeriod") <*>
+                     (o .:? "introductoryPriceAmountMicros")
+                     <*> (o .:? "introductoryPriceCycles")
+                     <*> (o .:? "introductoryPriceCurrencyCode"))
+
+instance ToJSON IntroductoryPriceInfo where
+        toJSON IntroductoryPriceInfo'{..}
+          = object
+              (catMaybes
+                 [("introductoryPricePeriod" .=) <$>
+                    _ipiIntroductoryPricePeriod,
+                  ("introductoryPriceAmountMicros" .=) <$>
+                    _ipiIntroductoryPriceAmountMicros,
+                  ("introductoryPriceCycles" .=) <$>
+                    _ipiIntroductoryPriceCycles,
+                  ("introductoryPriceCurrencyCode" .=) <$>
+                    _ipiIntroductoryPriceCurrencyCode])
+
+-- | Pagination information returned by a List operation when token
+-- pagination is enabled. List operations that supports paging return only
+-- one \"page\" of results. This protocol buffer message describes the page
+-- that has been returned. When using token pagination, clients should use
+-- the next\/previous token to get another page of the result. The presence
+-- or absence of next\/previous token indicates whether a next\/previous
+-- page is available and provides a mean of accessing this page.
+-- ListRequest.page_token should be set to either next_page_token or
+-- previous_page_token to access another page.
 --
 -- /See:/ 'tokenPagination' smart constructor.
 data TokenPagination =
   TokenPagination'
-    { _tpNextPageToken     :: !(Maybe Text)
+    { _tpNextPageToken :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -311,6 +442,8 @@ tokenPagination =
   TokenPagination' {_tpNextPageToken = Nothing, _tpPreviousPageToken = Nothing}
 
 
+-- | Tokens to pass to the standard list field \'page_token\'. Whenever
+-- available, tokens are preferred over manipulating start_index.
 tpNextPageToken :: Lens' TokenPagination (Maybe Text)
 tpNextPageToken
   = lens _tpNextPageToken
@@ -336,11 +469,12 @@ instance ToJSON TokenPagination where
                  [("nextPageToken" .=) <$> _tpNextPageToken,
                   ("previousPageToken" .=) <$> _tpPreviousPageToken])
 
+-- | An expansion file. The resource for ExpansionFilesService.
 --
 -- /See:/ 'expansionFile' smart constructor.
 data ExpansionFile =
   ExpansionFile'
-    { _efFileSize          :: !(Maybe (Textual Int64))
+    { _efFileSize :: !(Maybe (Textual Int64))
     , _efReferencesVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -359,16 +493,17 @@ expansionFile =
   ExpansionFile' {_efFileSize = Nothing, _efReferencesVersion = Nothing}
 
 
--- | If set this field indicates that this APK has an Expansion File uploaded
--- to it: this APK does not reference another APK\'s Expansion File. The
--- field\'s value is the size of the uploaded Expansion File in bytes.
+-- | If set, this field indicates that this APK has an expansion file
+-- uploaded to it: this APK does not reference another APK\'s expansion
+-- file. The field\'s value is the size of the uploaded expansion file in
+-- bytes.
 efFileSize :: Lens' ExpansionFile (Maybe Int64)
 efFileSize
   = lens _efFileSize (\ s a -> s{_efFileSize = a}) .
       mapping _Coerce
 
--- | If set this APK\'s Expansion File references another APK\'s Expansion
--- File. The file_size field will not be set.
+-- | If set, this APK\'s expansion file references another APK\'s expansion
+-- file. The file_size field will not be set.
 efReferencesVersion :: Lens' ExpansionFile (Maybe Int32)
 efReferencesVersion
   = lens _efReferencesVersion
@@ -389,22 +524,68 @@ instance ToJSON ExpansionFile where
                  [("fileSize" .=) <$> _efFileSize,
                   ("referencesVersion" .=) <$> _efReferencesVersion])
 
+-- | Request for the purchases.subscriptions.acknowledge API.
+--
+-- /See:/ 'subscriptionPurchasesAcknowledgeRequest' smart constructor.
+newtype SubscriptionPurchasesAcknowledgeRequest =
+  SubscriptionPurchasesAcknowledgeRequest'
+    { _sparDeveloperPayload :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SubscriptionPurchasesAcknowledgeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sparDeveloperPayload'
+subscriptionPurchasesAcknowledgeRequest
+    :: SubscriptionPurchasesAcknowledgeRequest
+subscriptionPurchasesAcknowledgeRequest =
+  SubscriptionPurchasesAcknowledgeRequest' {_sparDeveloperPayload = Nothing}
+
+
+-- | Payload to attach to the purchase.
+sparDeveloperPayload :: Lens' SubscriptionPurchasesAcknowledgeRequest (Maybe Text)
+sparDeveloperPayload
+  = lens _sparDeveloperPayload
+      (\ s a -> s{_sparDeveloperPayload = a})
+
+instance FromJSON
+           SubscriptionPurchasesAcknowledgeRequest
+         where
+        parseJSON
+          = withObject
+              "SubscriptionPurchasesAcknowledgeRequest"
+              (\ o ->
+                 SubscriptionPurchasesAcknowledgeRequest' <$>
+                   (o .:? "developerPayload"))
+
+instance ToJSON
+           SubscriptionPurchasesAcknowledgeRequest
+         where
+        toJSON SubscriptionPurchasesAcknowledgeRequest'{..}
+          = object
+              (catMaybes
+                 [("developerPayload" .=) <$> _sparDeveloperPayload])
+
+-- | User entry from conversation between user and developer.
 --
 -- /See:/ 'userComment' smart constructor.
 data UserComment =
   UserComment'
     { _ucAndroidOSVersion :: !(Maybe (Textual Int32))
-    , _ucText             :: !(Maybe Text)
-    , _ucDevice           :: !(Maybe Text)
-    , _ucThumbsUpCount    :: !(Maybe (Textual Int32))
-    , _ucAppVersionCode   :: !(Maybe (Textual Int32))
-    , _ucThumbsDownCount  :: !(Maybe (Textual Int32))
-    , _ucOriginalText     :: !(Maybe Text)
-    , _ucAppVersionName   :: !(Maybe Text)
+    , _ucText :: !(Maybe Text)
+    , _ucDevice :: !(Maybe Text)
+    , _ucThumbsUpCount :: !(Maybe (Textual Int32))
+    , _ucAppVersionCode :: !(Maybe (Textual Int32))
+    , _ucThumbsDownCount :: !(Maybe (Textual Int32))
+    , _ucOriginalText :: !(Maybe Text)
+    , _ucAppVersionName :: !(Maybe Text)
     , _ucReviewerLanguage :: !(Maybe Text)
-    , _ucDeviceMetadata   :: !(Maybe DeviceMetadata)
-    , _ucStarRating       :: !(Maybe (Textual Int32))
-    , _ucLastModified     :: !(Maybe Timestamp)
+    , _ucDeviceMetadata :: !(Maybe DeviceMetadata)
+    , _ucStarRating :: !(Maybe (Textual Int32))
+    , _ucLastModified :: !(Maybe Timestamp)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -473,7 +654,7 @@ ucText = lens _ucText (\ s a -> s{_ucText = a})
 ucDevice :: Lens' UserComment (Maybe Text)
 ucDevice = lens _ucDevice (\ s a -> s{_ucDevice = a})
 
--- | Number of users who have given this review a thumbs up
+-- | Number of users who have given this review a thumbs up.
 ucThumbsUpCount :: Lens' UserComment (Maybe Int32)
 ucThumbsUpCount
   = lens _ucThumbsUpCount
@@ -488,15 +669,15 @@ ucAppVersionCode
       (\ s a -> s{_ucAppVersionCode = a})
       . mapping _Coerce
 
--- | Number of users who have given this review a thumbs down
+-- | Number of users who have given this review a thumbs down.
 ucThumbsDownCount :: Lens' UserComment (Maybe Int32)
 ucThumbsDownCount
   = lens _ucThumbsDownCount
       (\ s a -> s{_ucThumbsDownCount = a})
       . mapping _Coerce
 
--- | Untranslated text of the review, in the case where the review has been
--- translated. If the review has not been translated this is left blank.
+-- | Untranslated text of the review, where the review was translated. If the
+-- review was not translated this is left blank.
 ucOriginalText :: Lens' UserComment (Maybe Text)
 ucOriginalText
   = lens _ucOriginalText
@@ -517,7 +698,7 @@ ucReviewerLanguage
   = lens _ucReviewerLanguage
       (\ s a -> s{_ucReviewerLanguage = a})
 
--- | Some information about the characteristics of the user\'s device
+-- | Information about the characteristics of the user\'s device.
 ucDeviceMetadata :: Lens' UserComment (Maybe DeviceMetadata)
 ucDeviceMetadata
   = lens _ucDeviceMetadata
@@ -568,12 +749,12 @@ instance ToJSON UserComment where
                   ("starRating" .=) <$> _ucStarRating,
                   ("lastModified" .=) <$> _ucLastModified])
 
+-- | The testers of an app. The resource for TestersService.
 --
 -- /See:/ 'testers' smart constructor.
-data Testers =
+newtype Testers =
   Testers'
-    { _tGooglePlusCommUnities :: !(Maybe [Text])
-    , _tGoogleGroups          :: !(Maybe [Text])
+    { _tGoogleGroups :: Maybe [Text]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -582,21 +763,13 @@ data Testers =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tGooglePlusCommUnities'
---
 -- * 'tGoogleGroups'
 testers
     :: Testers
-testers = Testers' {_tGooglePlusCommUnities = Nothing, _tGoogleGroups = Nothing}
+testers = Testers' {_tGoogleGroups = Nothing}
 
 
-tGooglePlusCommUnities :: Lens' Testers [Text]
-tGooglePlusCommUnities
-  = lens _tGooglePlusCommUnities
-      (\ s a -> s{_tGooglePlusCommUnities = a})
-      . _Default
-      . _Coerce
-
+-- | All testing Google Groups, as email addresses.
 tGoogleGroups :: Lens' Testers [Text]
 tGoogleGroups
   = lens _tGoogleGroups
@@ -608,17 +781,12 @@ instance FromJSON Testers where
         parseJSON
           = withObject "Testers"
               (\ o ->
-                 Testers' <$>
-                   (o .:? "googlePlusCommunities" .!= mempty) <*>
-                     (o .:? "googleGroups" .!= mempty))
+                 Testers' <$> (o .:? "googleGroups" .!= mempty))
 
 instance ToJSON Testers where
         toJSON Testers'{..}
           = object
-              (catMaybes
-                 [("googlePlusCommunities" .=) <$>
-                    _tGooglePlusCommUnities,
-                  ("googleGroups" .=) <$> _tGoogleGroups])
+              (catMaybes [("googleGroups" .=) <$> _tGoogleGroups])
 
 -- | Information provided by the user when they complete the subscription
 -- cancellation flow (cancellation reason survey).
@@ -626,7 +794,7 @@ instance ToJSON Testers where
 -- /See:/ 'subscriptionCancelSurveyResult' smart constructor.
 data SubscriptionCancelSurveyResult =
   SubscriptionCancelSurveyResult'
-    { _scsrCancelSurveyReason    :: !(Maybe (Textual Int32))
+    { _scsrCancelSurveyReason :: !(Maybe (Textual Int32))
     , _scsrUserInputCancelReason :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -647,8 +815,8 @@ subscriptionCancelSurveyResult =
 
 
 -- | The cancellation reason the user chose in the survey. Possible values
--- are: - Other - I don\'t use this service enough - Technical issues -
--- Cost-related reasons - I found a better app
+-- are: 0. Other 1. I don\'t use this service enough 2. Technical issues 3.
+-- Cost-related reasons 4. I found a better app
 scsrCancelSurveyReason :: Lens' SubscriptionCancelSurveyResult (Maybe Int32)
 scsrCancelSurveyReason
   = lens _scsrCancelSurveyReason
@@ -680,15 +848,16 @@ instance ToJSON SubscriptionCancelSurveyResult where
                   ("userInputCancelReason" .=) <$>
                     _scsrUserInputCancelReason])
 
+-- | A localized store listing. The resource for ListingsService.
 --
 -- /See:/ 'listing' smart constructor.
 data Listing =
   Listing'
-    { _lFullDescription  :: !(Maybe Text)
-    , _lVideo            :: !(Maybe Text)
+    { _lFullDescription :: !(Maybe Text)
+    , _lVideo :: !(Maybe Text)
     , _lShortDescription :: !(Maybe Text)
-    , _lLanguage         :: !(Maybe Text)
-    , _lTitle            :: !(Maybe Text)
+    , _lLanguage :: !(Maybe Text)
+    , _lTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -718,8 +887,7 @@ listing =
     }
 
 
--- | Full description of the app; this may be up to 4000 characters in
--- length.
+-- | Full description of the app.
 lFullDescription :: Lens' Listing (Maybe Text)
 lFullDescription
   = lens _lFullDescription
@@ -729,19 +897,19 @@ lFullDescription
 lVideo :: Lens' Listing (Maybe Text)
 lVideo = lens _lVideo (\ s a -> s{_lVideo = a})
 
--- | Short description of the app (previously known as promo text); this may
--- be up to 80 characters in length.
+-- | Short description of the app.
 lShortDescription :: Lens' Listing (Maybe Text)
 lShortDescription
   = lens _lShortDescription
       (\ s a -> s{_lShortDescription = a})
 
--- | Language localization code (for example, \"de-AT\" for Austrian German).
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German).
 lLanguage :: Lens' Listing (Maybe Text)
 lLanguage
   = lens _lLanguage (\ s a -> s{_lLanguage = a})
 
--- | App\'s localized title.
+-- | Localized title of the app.
 lTitle :: Lens' Listing (Maybe Text)
 lTitle = lens _lTitle (\ s a -> s{_lTitle = a})
 
@@ -765,12 +933,55 @@ instance ToJSON Listing where
                   ("language" .=) <$> _lLanguage,
                   ("title" .=) <$> _lTitle])
 
+-- | Request for the product.purchases.acknowledge API.
+--
+-- /See:/ 'productPurchasesAcknowledgeRequest' smart constructor.
+newtype ProductPurchasesAcknowledgeRequest =
+  ProductPurchasesAcknowledgeRequest'
+    { _pparDeveloperPayload :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ProductPurchasesAcknowledgeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pparDeveloperPayload'
+productPurchasesAcknowledgeRequest
+    :: ProductPurchasesAcknowledgeRequest
+productPurchasesAcknowledgeRequest =
+  ProductPurchasesAcknowledgeRequest' {_pparDeveloperPayload = Nothing}
+
+
+-- | Payload to attach to the purchase.
+pparDeveloperPayload :: Lens' ProductPurchasesAcknowledgeRequest (Maybe Text)
+pparDeveloperPayload
+  = lens _pparDeveloperPayload
+      (\ s a -> s{_pparDeveloperPayload = a})
+
+instance FromJSON ProductPurchasesAcknowledgeRequest
+         where
+        parseJSON
+          = withObject "ProductPurchasesAcknowledgeRequest"
+              (\ o ->
+                 ProductPurchasesAcknowledgeRequest' <$>
+                   (o .:? "developerPayload"))
+
+instance ToJSON ProductPurchasesAcknowledgeRequest
+         where
+        toJSON ProductPurchasesAcknowledgeRequest'{..}
+          = object
+              (catMaybes
+                 [("developerPayload" .=) <$> _pparDeveloperPayload])
+
+-- | Information about an APK. The resource for ApksService.
 --
 -- /See:/ 'aPK' smart constructor.
 data APK =
   APK'
     { _aVersionCode :: !(Maybe (Textual Int32))
-    , _aBinary      :: !(Maybe APKBinary)
+    , _aBinary :: !(Maybe APKBinary)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -787,7 +998,7 @@ aPK
 aPK = APK' {_aVersionCode = Nothing, _aBinary = Nothing}
 
 
--- | The version code of the APK, as specified in the APK\'s manifest file.
+-- | The version code of the APK, as specified in the manifest file.
 aVersionCode :: Lens' APK (Maybe Int32)
 aVersionCode
   = lens _aVersionCode (\ s a -> s{_aVersionCode = a})
@@ -810,6 +1021,7 @@ instance ToJSON APK where
                  [("versionCode" .=) <$> _aVersionCode,
                   ("binary" .=) <$> _aBinary])
 
+-- | Request for the purchases.subscriptions.defer API.
 --
 -- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
 newtype SubscriptionPurchasesDeferRequest =
@@ -851,12 +1063,13 @@ instance ToJSON SubscriptionPurchasesDeferRequest
               (catMaybes
                  [("deferralInfo" .=) <$> _spdrDeferralInfo])
 
+-- | Response listing all tracks.
 --
 -- /See:/ 'tracksListResponse' smart constructor.
 data TracksListResponse =
   TracksListResponse'
     { _tlrTracks :: !(Maybe [Track])
-    , _tlrKind   :: !Text
+    , _tlrKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -871,19 +1084,18 @@ data TracksListResponse =
 tracksListResponse
     :: TracksListResponse
 tracksListResponse =
-  TracksListResponse'
-    {_tlrTracks = Nothing, _tlrKind = "androidpublisher#tracksListResponse"}
+  TracksListResponse' {_tlrTracks = Nothing, _tlrKind = Nothing}
 
 
+-- | All tracks.
 tlrTracks :: Lens' TracksListResponse [Track]
 tlrTracks
   = lens _tlrTracks (\ s a -> s{_tlrTracks = a}) .
       _Default
       . _Coerce
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#tracksListResponse\".
-tlrKind :: Lens' TracksListResponse Text
+-- | The kind of this response (\"androidpublisher#tracksListResponse\").
+tlrKind :: Lens' TracksListResponse (Maybe Text)
 tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
 
 instance FromJSON TracksListResponse where
@@ -891,82 +1103,25 @@ instance FromJSON TracksListResponse where
           = withObject "TracksListResponse"
               (\ o ->
                  TracksListResponse' <$>
-                   (o .:? "tracks" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#tracksListResponse"))
+                   (o .:? "tracks" .!= mempty) <*> (o .:? "kind"))
 
 instance ToJSON TracksListResponse where
         toJSON TracksListResponse'{..}
           = object
               (catMaybes
                  [("tracks" .=) <$> _tlrTracks,
-                  Just ("kind" .= _tlrKind)])
+                  ("kind" .=) <$> _tlrKind])
 
---
--- /See:/ 'season' smart constructor.
-data Season =
-  Season'
-    { _sStart      :: !(Maybe MonthDay)
-    , _sEnd        :: !(Maybe MonthDay)
-    , _sProrations :: !(Maybe [Prorate])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Season' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sStart'
---
--- * 'sEnd'
---
--- * 'sProrations'
-season
-    :: Season
-season = Season' {_sStart = Nothing, _sEnd = Nothing, _sProrations = Nothing}
-
-
--- | Inclusive start date of the recurrence period.
-sStart :: Lens' Season (Maybe MonthDay)
-sStart = lens _sStart (\ s a -> s{_sStart = a})
-
--- | Inclusive end date of the recurrence period.
-sEnd :: Lens' Season (Maybe MonthDay)
-sEnd = lens _sEnd (\ s a -> s{_sEnd = a})
-
--- | Optionally present list of prorations for the season. Each proration is
--- a one-off discounted entry into a subscription. Each proration contains
--- the first date on which the discount is available and the new pricing
--- information.
-sProrations :: Lens' Season [Prorate]
-sProrations
-  = lens _sProrations (\ s a -> s{_sProrations = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON Season where
-        parseJSON
-          = withObject "Season"
-              (\ o ->
-                 Season' <$>
-                   (o .:? "start") <*> (o .:? "end") <*>
-                     (o .:? "prorations" .!= mempty))
-
-instance ToJSON Season where
-        toJSON Season'{..}
-          = object
-              (catMaybes
-                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd,
-                  ("prorations" .=) <$> _sProrations])
-
+-- | Information about the current page. List operations that supports paging
+-- return only one \"page\" of results. This protocol buffer message
+-- describes the page that has been returned.
 --
 -- /See:/ 'pageInfo' smart constructor.
 data PageInfo =
   PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
-    , _piTotalResults  :: !(Maybe (Textual Int32))
-    , _piStartIndex    :: !(Maybe (Textual Int32))
+    , _piTotalResults :: !(Maybe (Textual Int32))
+    , _piStartIndex :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -990,18 +1145,23 @@ pageInfo =
     }
 
 
+-- | Maximum number of results returned in one page. ! The number of results
+-- included in the API response.
 piResultPerPage :: Lens' PageInfo (Maybe Int32)
 piResultPerPage
   = lens _piResultPerPage
       (\ s a -> s{_piResultPerPage = a})
       . mapping _Coerce
 
+-- | Total number of results available on the backend ! The total number of
+-- results in the result set.
 piTotalResults :: Lens' PageInfo (Maybe Int32)
 piTotalResults
   = lens _piTotalResults
       (\ s a -> s{_piTotalResults = a})
       . mapping _Coerce
 
+-- | Index of the first result returned in the current page.
 piStartIndex :: Lens' PageInfo (Maybe Int32)
 piStartIndex
   = lens _piStartIndex (\ s a -> s{_piStartIndex = a})
@@ -1023,6 +1183,7 @@ instance ToJSON PageInfo where
                   ("totalResults" .=) <$> _piTotalResults,
                   ("startIndex" .=) <$> _piStartIndex])
 
+-- | Response listing all images.
 --
 -- /See:/ 'imagesListResponse' smart constructor.
 newtype ImagesListResponse =
@@ -1042,6 +1203,7 @@ imagesListResponse
 imagesListResponse = ImagesListResponse' {_ilrImages = Nothing}
 
 
+-- | All listed Images.
 ilrImages :: Lens' ImagesListResponse [Image]
 ilrImages
   = lens _ilrImages (\ s a -> s{_ilrImages = a}) .
@@ -1058,13 +1220,12 @@ instance ToJSON ImagesListResponse where
         toJSON ImagesListResponse'{..}
           = object (catMaybes [("images" .=) <$> _ilrImages])
 
--- | Represents an edit of an app. An edit allows clients to make multiple
--- changes before committing them in one operation.
+-- | An app edit. The resource for EditsService.
 --
 -- /See:/ 'appEdit' smart constructor.
 data AppEdit =
   AppEdit'
-    { _aeId                :: !(Maybe Text)
+    { _aeId :: !(Maybe Text)
     , _aeExpiryTimeSeconds :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1082,12 +1243,13 @@ appEdit
 appEdit = AppEdit' {_aeId = Nothing, _aeExpiryTimeSeconds = Nothing}
 
 
--- | The ID of the edit that can be used in subsequent API calls.
+-- | Output only. Identifier of the edit. Can be used in subsequent API
+-- calls.
 aeId :: Lens' AppEdit (Maybe Text)
 aeId = lens _aeId (\ s a -> s{_aeId = a})
 
--- | The time at which the edit will expire and will be no longer valid for
--- use in any subsequent API calls (encoded as seconds since the Epoch).
+-- | Output only. The time (as seconds since Epoch) at which the edit will
+-- expire and will be no longer valid for use.
 aeExpiryTimeSeconds :: Lens' AppEdit (Maybe Text)
 aeExpiryTimeSeconds
   = lens _aeExpiryTimeSeconds
@@ -1113,13 +1275,20 @@ instance ToJSON AppEdit where
 -- /See:/ 'productPurchase' smart constructor.
 data ProductPurchase =
   ProductPurchase'
-    { _ppPurchaseState      :: !(Maybe (Textual Int32))
-    , _ppConsumptionState   :: !(Maybe (Textual Int32))
-    , _ppKind               :: !Text
+    { _ppPurchaseState :: !(Maybe (Textual Int32))
+    , _ppConsumptionState :: !(Maybe (Textual Int32))
+    , _ppRegionCode :: !(Maybe Text)
+    , _ppAcknowledgementState :: !(Maybe (Textual Int32))
+    , _ppKind :: !(Maybe Text)
     , _ppPurchaseTimeMillis :: !(Maybe (Textual Int64))
-    , _ppPurchaseType       :: !(Maybe (Textual Int32))
-    , _ppDeveloperPayload   :: !(Maybe Text)
-    , _ppOrderId            :: !(Maybe Text)
+    , _ppPurchaseToken :: !(Maybe Text)
+    , _ppQuantity :: !(Maybe (Textual Int32))
+    , _ppObfuscatedExternalAccountId :: !(Maybe Text)
+    , _ppPurchaseType :: !(Maybe (Textual Int32))
+    , _ppObfuscatedExternalProFileId :: !(Maybe Text)
+    , _ppDeveloperPayload :: !(Maybe Text)
+    , _ppOrderId :: !(Maybe Text)
+    , _ppProductId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1132,48 +1301,83 @@ data ProductPurchase =
 --
 -- * 'ppConsumptionState'
 --
+-- * 'ppRegionCode'
+--
+-- * 'ppAcknowledgementState'
+--
 -- * 'ppKind'
 --
 -- * 'ppPurchaseTimeMillis'
 --
+-- * 'ppPurchaseToken'
+--
+-- * 'ppQuantity'
+--
+-- * 'ppObfuscatedExternalAccountId'
+--
 -- * 'ppPurchaseType'
+--
+-- * 'ppObfuscatedExternalProFileId'
 --
 -- * 'ppDeveloperPayload'
 --
 -- * 'ppOrderId'
+--
+-- * 'ppProductId'
 productPurchase
     :: ProductPurchase
 productPurchase =
   ProductPurchase'
     { _ppPurchaseState = Nothing
     , _ppConsumptionState = Nothing
-    , _ppKind = "androidpublisher#productPurchase"
+    , _ppRegionCode = Nothing
+    , _ppAcknowledgementState = Nothing
+    , _ppKind = Nothing
     , _ppPurchaseTimeMillis = Nothing
+    , _ppPurchaseToken = Nothing
+    , _ppQuantity = Nothing
+    , _ppObfuscatedExternalAccountId = Nothing
     , _ppPurchaseType = Nothing
+    , _ppObfuscatedExternalProFileId = Nothing
     , _ppDeveloperPayload = Nothing
     , _ppOrderId = Nothing
+    , _ppProductId = Nothing
     }
 
 
--- | The purchase state of the order. Possible values are: - Purchased -
--- Canceled
+-- | The purchase state of the order. Possible values are: 0. Purchased 1.
+-- Canceled 2. Pending
 ppPurchaseState :: Lens' ProductPurchase (Maybe Int32)
 ppPurchaseState
   = lens _ppPurchaseState
       (\ s a -> s{_ppPurchaseState = a})
       . mapping _Coerce
 
--- | The consumption state of the inapp product. Possible values are: - Yet
--- to be consumed - Consumed
+-- | The consumption state of the inapp product. Possible values are: 0. Yet
+-- to be consumed 1. Consumed
 ppConsumptionState :: Lens' ProductPurchase (Maybe Int32)
 ppConsumptionState
   = lens _ppConsumptionState
       (\ s a -> s{_ppConsumptionState = a})
       . mapping _Coerce
 
+-- | ISO 3166-1 alpha-2 billing region code of the user at the time the
+-- product was granted.
+ppRegionCode :: Lens' ProductPurchase (Maybe Text)
+ppRegionCode
+  = lens _ppRegionCode (\ s a -> s{_ppRegionCode = a})
+
+-- | The acknowledgement state of the inapp product. Possible values are: 0.
+-- Yet to be acknowledged 1. Acknowledged
+ppAcknowledgementState :: Lens' ProductPurchase (Maybe Int32)
+ppAcknowledgementState
+  = lens _ppAcknowledgementState
+      (\ s a -> s{_ppAcknowledgementState = a})
+      . mapping _Coerce
+
 -- | This kind represents an inappPurchase object in the androidpublisher
 -- service.
-ppKind :: Lens' ProductPurchase Text
+ppKind :: Lens' ProductPurchase (Maybe Text)
 ppKind = lens _ppKind (\ s a -> s{_ppKind = a})
 
 -- | The time the product was purchased, in milliseconds since the epoch (Jan
@@ -1184,16 +1388,46 @@ ppPurchaseTimeMillis
       (\ s a -> s{_ppPurchaseTimeMillis = a})
       . mapping _Coerce
 
+-- | The purchase token generated to identify this purchase.
+ppPurchaseToken :: Lens' ProductPurchase (Maybe Text)
+ppPurchaseToken
+  = lens _ppPurchaseToken
+      (\ s a -> s{_ppPurchaseToken = a})
+
+-- | The quantity associated with the purchase of the inapp product.
+ppQuantity :: Lens' ProductPurchase (Maybe Int32)
+ppQuantity
+  = lens _ppQuantity (\ s a -> s{_ppQuantity = a}) .
+      mapping _Coerce
+
+-- | An obfuscated version of the id that is uniquely associated with the
+-- user\'s account in your app. Only present if specified using
+-- https:\/\/developer.android.com\/reference\/com\/android\/billingclient\/api\/BillingFlowParams.Builder#setobfuscatedaccountid
+-- when the purchase was made.
+ppObfuscatedExternalAccountId :: Lens' ProductPurchase (Maybe Text)
+ppObfuscatedExternalAccountId
+  = lens _ppObfuscatedExternalAccountId
+      (\ s a -> s{_ppObfuscatedExternalAccountId = a})
+
 -- | The type of purchase of the inapp product. This field is only set if
 -- this purchase was not made using the standard in-app billing flow.
--- Possible values are: - Test (i.e. purchased from a license testing
--- account) - Promo (i.e. purchased using a promo code) - Rewarded (i.e.
+-- Possible values are: 0. Test (i.e. purchased from a license testing
+-- account) 1. Promo (i.e. purchased using a promo code) 2. Rewarded (i.e.
 -- from watching a video ad instead of paying)
 ppPurchaseType :: Lens' ProductPurchase (Maybe Int32)
 ppPurchaseType
   = lens _ppPurchaseType
       (\ s a -> s{_ppPurchaseType = a})
       . mapping _Coerce
+
+-- | An obfuscated version of the id that is uniquely associated with the
+-- user\'s profile in your app. Only present if specified using
+-- https:\/\/developer.android.com\/reference\/com\/android\/billingclient\/api\/BillingFlowParams.Builder#setobfuscatedprofileid
+-- when the purchase was made.
+ppObfuscatedExternalProFileId :: Lens' ProductPurchase (Maybe Text)
+ppObfuscatedExternalProFileId
+  = lens _ppObfuscatedExternalProFileId
+      (\ s a -> s{_ppObfuscatedExternalProFileId = a})
 
 -- | A developer-specified string that contains supplemental information
 -- about an order.
@@ -1207,6 +1441,11 @@ ppOrderId :: Lens' ProductPurchase (Maybe Text)
 ppOrderId
   = lens _ppOrderId (\ s a -> s{_ppOrderId = a})
 
+-- | The inapp product SKU.
+ppProductId :: Lens' ProductPurchase (Maybe Text)
+ppProductId
+  = lens _ppProductId (\ s a -> s{_ppProductId = a})
+
 instance FromJSON ProductPurchase where
         parseJSON
           = withObject "ProductPurchase"
@@ -1214,12 +1453,18 @@ instance FromJSON ProductPurchase where
                  ProductPurchase' <$>
                    (o .:? "purchaseState") <*>
                      (o .:? "consumptionState")
-                     <*>
-                     (o .:? "kind" .!= "androidpublisher#productPurchase")
+                     <*> (o .:? "regionCode")
+                     <*> (o .:? "acknowledgementState")
+                     <*> (o .:? "kind")
                      <*> (o .:? "purchaseTimeMillis")
+                     <*> (o .:? "purchaseToken")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "obfuscatedExternalAccountId")
                      <*> (o .:? "purchaseType")
+                     <*> (o .:? "obfuscatedExternalProfileId")
                      <*> (o .:? "developerPayload")
-                     <*> (o .:? "orderId"))
+                     <*> (o .:? "orderId")
+                     <*> (o .:? "productId"))
 
 instance ToJSON ProductPurchase where
         toJSON ProductPurchase'{..}
@@ -1227,19 +1472,30 @@ instance ToJSON ProductPurchase where
               (catMaybes
                  [("purchaseState" .=) <$> _ppPurchaseState,
                   ("consumptionState" .=) <$> _ppConsumptionState,
-                  Just ("kind" .= _ppKind),
+                  ("regionCode" .=) <$> _ppRegionCode,
+                  ("acknowledgementState" .=) <$>
+                    _ppAcknowledgementState,
+                  ("kind" .=) <$> _ppKind,
                   ("purchaseTimeMillis" .=) <$> _ppPurchaseTimeMillis,
+                  ("purchaseToken" .=) <$> _ppPurchaseToken,
+                  ("quantity" .=) <$> _ppQuantity,
+                  ("obfuscatedExternalAccountId" .=) <$>
+                    _ppObfuscatedExternalAccountId,
                   ("purchaseType" .=) <$> _ppPurchaseType,
+                  ("obfuscatedExternalProfileId" .=) <$>
+                    _ppObfuscatedExternalProFileId,
                   ("developerPayload" .=) <$> _ppDeveloperPayload,
-                  ("orderId" .=) <$> _ppOrderId])
+                  ("orderId" .=) <$> _ppOrderId,
+                  ("productId" .=) <$> _ppProductId])
 
+-- | Response listing reviews.
 --
 -- /See:/ 'reviewsListResponse' smart constructor.
 data ReviewsListResponse =
   ReviewsListResponse'
     { _rlrTokenPagination :: !(Maybe TokenPagination)
-    , _rlrPageInfo        :: !(Maybe PageInfo)
-    , _rlrReviews         :: !(Maybe [Review])
+    , _rlrPageInfo :: !(Maybe PageInfo)
+    , _rlrReviews :: !(Maybe [Review])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1263,15 +1519,18 @@ reviewsListResponse =
     }
 
 
+-- | Pagination token, to handle a number of products that is over one page.
 rlrTokenPagination :: Lens' ReviewsListResponse (Maybe TokenPagination)
 rlrTokenPagination
   = lens _rlrTokenPagination
       (\ s a -> s{_rlrTokenPagination = a})
 
+-- | Information about the current page.
 rlrPageInfo :: Lens' ReviewsListResponse (Maybe PageInfo)
 rlrPageInfo
   = lens _rlrPageInfo (\ s a -> s{_rlrPageInfo = a})
 
+-- | List of reviews.
 rlrReviews :: Lens' ReviewsListResponse [Review]
 rlrReviews
   = lens _rlrReviews (\ s a -> s{_rlrReviews = a}) .
@@ -1294,6 +1553,7 @@ instance ToJSON ReviewsListResponse where
                   ("pageInfo" .=) <$> _rlrPageInfo,
                   ("reviews" .=) <$> _rlrReviews])
 
+-- | Response for the purchases.subscriptions.defer API.
 --
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
 newtype SubscriptionPurchasesDeferResponse =
@@ -1344,28 +1604,35 @@ instance ToJSON SubscriptionPurchasesDeferResponse
 -- /See:/ 'subscriptionPurchase' smart constructor.
 data SubscriptionPurchase =
   SubscriptionPurchase'
-    { _spGivenName                  :: !(Maybe Text)
-    , _spAutoResumeTimeMillis       :: !(Maybe (Textual Int64))
+    { _spGivenName :: !(Maybe Text)
+    , _spIntroductoryPriceInfo :: !(Maybe IntroductoryPriceInfo)
+    , _spAcknowledgementState :: !(Maybe (Textual Int32))
+    , _spAutoResumeTimeMillis :: !(Maybe (Textual Int64))
     , _spUserCancellationTimeMillis :: !(Maybe (Textual Int64))
-    , _spPaymentState               :: !(Maybe (Textual Int32))
-    , _spKind                       :: !Text
-    , _spPurchaseType               :: !(Maybe (Textual Int32))
-    , _spPriceChange                :: !(Maybe SubscriptionPriceChange)
-    , _spProFileId                  :: !(Maybe Text)
-    , _spLinkedPurchaseToken        :: !(Maybe Text)
-    , _spFamilyName                 :: !(Maybe Text)
-    , _spProFileName                :: !(Maybe Text)
-    , _spExpiryTimeMillis           :: !(Maybe (Textual Int64))
-    , _spAutoRenewing               :: !(Maybe Bool)
-    , _spPriceCurrencyCode          :: !(Maybe Text)
-    , _spEmailAddress               :: !(Maybe Text)
-    , _spCancelReason               :: !(Maybe (Textual Int32))
-    , _spCountryCode                :: !(Maybe Text)
-    , _spDeveloperPayload           :: !(Maybe Text)
-    , _spPriceAmountMicros          :: !(Maybe (Textual Int64))
-    , _spStartTimeMillis            :: !(Maybe (Textual Int64))
-    , _spOrderId                    :: !(Maybe Text)
-    , _spCancelSurveyResult         :: !(Maybe SubscriptionCancelSurveyResult)
+    , _spPaymentState :: !(Maybe (Textual Int32))
+    , _spKind :: !(Maybe Text)
+    , _spObfuscatedExternalAccountId :: !(Maybe Text)
+    , _spPurchaseType :: !(Maybe (Textual Int32))
+    , _spPromotionType :: !(Maybe (Textual Int32))
+    , _spPriceChange :: !(Maybe SubscriptionPriceChange)
+    , _spProFileId :: !(Maybe Text)
+    , _spLinkedPurchaseToken :: !(Maybe Text)
+    , _spObfuscatedExternalProFileId :: !(Maybe Text)
+    , _spFamilyName :: !(Maybe Text)
+    , _spExternalAccountId :: !(Maybe Text)
+    , _spProFileName :: !(Maybe Text)
+    , _spExpiryTimeMillis :: !(Maybe (Textual Int64))
+    , _spAutoRenewing :: !(Maybe Bool)
+    , _spPriceCurrencyCode :: !(Maybe Text)
+    , _spEmailAddress :: !(Maybe Text)
+    , _spCancelReason :: !(Maybe (Textual Int32))
+    , _spCountryCode :: !(Maybe Text)
+    , _spDeveloperPayload :: !(Maybe Text)
+    , _spPriceAmountMicros :: !(Maybe (Textual Int64))
+    , _spStartTimeMillis :: !(Maybe (Textual Int64))
+    , _spOrderId :: !(Maybe Text)
+    , _spPromotionCode :: !(Maybe Text)
+    , _spCancelSurveyResult :: !(Maybe SubscriptionCancelSurveyResult)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1376,6 +1643,10 @@ data SubscriptionPurchase =
 --
 -- * 'spGivenName'
 --
+-- * 'spIntroductoryPriceInfo'
+--
+-- * 'spAcknowledgementState'
+--
 -- * 'spAutoResumeTimeMillis'
 --
 -- * 'spUserCancellationTimeMillis'
@@ -1384,7 +1655,11 @@ data SubscriptionPurchase =
 --
 -- * 'spKind'
 --
+-- * 'spObfuscatedExternalAccountId'
+--
 -- * 'spPurchaseType'
+--
+-- * 'spPromotionType'
 --
 -- * 'spPriceChange'
 --
@@ -1392,7 +1667,11 @@ data SubscriptionPurchase =
 --
 -- * 'spLinkedPurchaseToken'
 --
+-- * 'spObfuscatedExternalProFileId'
+--
 -- * 'spFamilyName'
+--
+-- * 'spExternalAccountId'
 --
 -- * 'spProFileName'
 --
@@ -1416,21 +1695,29 @@ data SubscriptionPurchase =
 --
 -- * 'spOrderId'
 --
+-- * 'spPromotionCode'
+--
 -- * 'spCancelSurveyResult'
 subscriptionPurchase
     :: SubscriptionPurchase
 subscriptionPurchase =
   SubscriptionPurchase'
     { _spGivenName = Nothing
+    , _spIntroductoryPriceInfo = Nothing
+    , _spAcknowledgementState = Nothing
     , _spAutoResumeTimeMillis = Nothing
     , _spUserCancellationTimeMillis = Nothing
     , _spPaymentState = Nothing
-    , _spKind = "androidpublisher#subscriptionPurchase"
+    , _spKind = Nothing
+    , _spObfuscatedExternalAccountId = Nothing
     , _spPurchaseType = Nothing
+    , _spPromotionType = Nothing
     , _spPriceChange = Nothing
     , _spProFileId = Nothing
     , _spLinkedPurchaseToken = Nothing
+    , _spObfuscatedExternalProFileId = Nothing
     , _spFamilyName = Nothing
+    , _spExternalAccountId = Nothing
     , _spProFileName = Nothing
     , _spExpiryTimeMillis = Nothing
     , _spAutoRenewing = Nothing
@@ -1442,6 +1729,7 @@ subscriptionPurchase =
     , _spPriceAmountMicros = Nothing
     , _spStartTimeMillis = Nothing
     , _spOrderId = Nothing
+    , _spPromotionCode = Nothing
     , _spCancelSurveyResult = Nothing
     }
 
@@ -1451,6 +1739,23 @@ subscriptionPurchase =
 spGivenName :: Lens' SubscriptionPurchase (Maybe Text)
 spGivenName
   = lens _spGivenName (\ s a -> s{_spGivenName = a})
+
+-- | Introductory price information of the subscription. This is only present
+-- when the subscription was purchased with an introductory price. This
+-- field does not indicate the subscription is currently in introductory
+-- price period.
+spIntroductoryPriceInfo :: Lens' SubscriptionPurchase (Maybe IntroductoryPriceInfo)
+spIntroductoryPriceInfo
+  = lens _spIntroductoryPriceInfo
+      (\ s a -> s{_spIntroductoryPriceInfo = a})
+
+-- | The acknowledgement state of the subscription product. Possible values
+-- are: 0. Yet to be acknowledged 1. Acknowledged
+spAcknowledgementState :: Lens' SubscriptionPurchase (Maybe Int32)
+spAcknowledgementState
+  = lens _spAcknowledgementState
+      (\ s a -> s{_spAcknowledgementState = a})
+      . mapping _Coerce
 
 -- | Time at which the subscription will be automatically resumed, in
 -- milliseconds since the Epoch. Only present if the user has requested to
@@ -1469,9 +1774,9 @@ spUserCancellationTimeMillis
       (\ s a -> s{_spUserCancellationTimeMillis = a})
       . mapping _Coerce
 
--- | The payment state of the subscription. Possible values are: - Payment
--- pending - Payment received - Free trial - Pending deferred
--- upgrade\/downgrade
+-- | The payment state of the subscription. Possible values are: 0. Payment
+-- pending 1. Payment received 2. Free trial 3. Pending deferred
+-- upgrade\/downgrade Not present for canceled, expired subscriptions.
 spPaymentState :: Lens' SubscriptionPurchase (Maybe Int32)
 spPaymentState
   = lens _spPaymentState
@@ -1480,16 +1785,37 @@ spPaymentState
 
 -- | This kind represents a subscriptionPurchase object in the
 -- androidpublisher service.
-spKind :: Lens' SubscriptionPurchase Text
+spKind :: Lens' SubscriptionPurchase (Maybe Text)
 spKind = lens _spKind (\ s a -> s{_spKind = a})
+
+-- | An obfuscated version of the id that is uniquely associated with the
+-- user\'s account in your app. Present for the following purchases: * If
+-- account linking happened as part of the subscription purchase flow. * It
+-- was specified using
+-- https:\/\/developer.android.com\/reference\/com\/android\/billingclient\/api\/BillingFlowParams.Builder#setobfuscatedaccountid
+-- when the purchase was made.
+spObfuscatedExternalAccountId :: Lens' SubscriptionPurchase (Maybe Text)
+spObfuscatedExternalAccountId
+  = lens _spObfuscatedExternalAccountId
+      (\ s a -> s{_spObfuscatedExternalAccountId = a})
 
 -- | The type of purchase of the subscription. This field is only set if this
 -- purchase was not made using the standard in-app billing flow. Possible
--- values are: - Test (i.e. purchased from a license testing account)
+-- values are: 0. Test (i.e. purchased from a license testing account) 1.
+-- Promo (i.e. purchased using a promo code)
 spPurchaseType :: Lens' SubscriptionPurchase (Maybe Int32)
 spPurchaseType
   = lens _spPurchaseType
       (\ s a -> s{_spPurchaseType = a})
+      . mapping _Coerce
+
+-- | The type of promotion applied on this purchase. This field is only set
+-- if a promotion is applied when the subscription was purchased. Possible
+-- values are: 0. One time code 1. Vanity code
+spPromotionType :: Lens' SubscriptionPurchase (Maybe Int32)
+spPromotionType
+  = lens _spPromotionType
+      (\ s a -> s{_spPromotionType = a})
       . mapping _Coerce
 
 -- | The latest price change information available. This is present only when
@@ -1501,15 +1827,15 @@ spPriceChange
   = lens _spPriceChange
       (\ s a -> s{_spPriceChange = a})
 
--- | The profile id of the user when the subscription was purchased. Only
--- present for purchases made with \'Subscribe with Google\'.
+-- | The Google profile id of the user when the subscription was purchased.
+-- Only present for purchases made with \'Subscribe with Google\'.
 spProFileId :: Lens' SubscriptionPurchase (Maybe Text)
 spProFileId
   = lens _spProFileId (\ s a -> s{_spProFileId = a})
 
 -- | The purchase token of the originating purchase if this subscription is
--- one of the following: - Re-signup of a canceled but non-lapsed
--- subscription - Upgrade\/downgrade from a previous subscription For
+-- one of the following: 0. Re-signup of a canceled but non-lapsed
+-- subscription 1. Upgrade\/downgrade from a previous subscription For
 -- example, suppose a user originally signs up and you receive purchase
 -- token X, then the user cancels and goes through the resignup flow
 -- (before their subscription lapses) and you receive purchase token Y, and
@@ -1523,11 +1849,27 @@ spLinkedPurchaseToken
   = lens _spLinkedPurchaseToken
       (\ s a -> s{_spLinkedPurchaseToken = a})
 
+-- | An obfuscated version of the id that is uniquely associated with the
+-- user\'s profile in your app. Only present if specified using
+-- https:\/\/developer.android.com\/reference\/com\/android\/billingclient\/api\/BillingFlowParams.Builder#setobfuscatedprofileid
+-- when the purchase was made.
+spObfuscatedExternalProFileId :: Lens' SubscriptionPurchase (Maybe Text)
+spObfuscatedExternalProFileId
+  = lens _spObfuscatedExternalProFileId
+      (\ s a -> s{_spObfuscatedExternalProFileId = a})
+
 -- | The family name of the user when the subscription was purchased. Only
 -- present for purchases made with \'Subscribe with Google\'.
 spFamilyName :: Lens' SubscriptionPurchase (Maybe Text)
 spFamilyName
   = lens _spFamilyName (\ s a -> s{_spFamilyName = a})
+
+-- | User account identifier in the third-party service. Only present if
+-- account linking happened as part of the subscription purchase flow.
+spExternalAccountId :: Lens' SubscriptionPurchase (Maybe Text)
+spExternalAccountId
+  = lens _spExternalAccountId
+      (\ s a -> s{_spExternalAccountId = a})
 
 -- | The profile name of the user when the subscription was purchased. Only
 -- present for purchases made with \'Subscribe with Google\'.
@@ -1567,9 +1909,9 @@ spEmailAddress
       (\ s a -> s{_spEmailAddress = a})
 
 -- | The reason why a subscription was canceled or is not auto-renewing.
--- Possible values are: - User canceled the subscription - Subscription was
--- canceled by the system, for example because of a billing problem -
--- Subscription was replaced with a new subscription - Subscription was
+-- Possible values are: 0. User canceled the subscription 1. Subscription
+-- was canceled by the system, for example because of a billing problem 2.
+-- Subscription was replaced with a new subscription 3. Subscription was
 -- canceled by the developer
 spCancelReason :: Lens' SubscriptionPurchase (Maybe Int32)
 spCancelReason
@@ -1591,10 +1933,11 @@ spDeveloperPayload
   = lens _spDeveloperPayload
       (\ s a -> s{_spDeveloperPayload = a})
 
--- | Price of the subscription, not including tax. Price is expressed in
--- micro-units, where 1,000,000 micro-units represents one unit of the
--- currency. For example, if the subscription price is €1.99,
--- price_amount_micros is 1990000.
+-- | Price of the subscription, For tax exclusive countries, the price
+-- doesn\'t include tax. For tax inclusive countries, the price includes
+-- tax. Price is expressed in micro-units, where 1,000,000 micro-units
+-- represents one unit of the currency. For example, if the subscription
+-- price is €1.99, price_amount_micros is 1990000.
 spPriceAmountMicros :: Lens' SubscriptionPurchase (Maybe Int64)
 spPriceAmountMicros
   = lens _spPriceAmountMicros
@@ -1610,10 +1953,18 @@ spStartTimeMillis
       . mapping _Coerce
 
 -- | The order id of the latest recurring order associated with the purchase
--- of the subscription.
+-- of the subscription. If the subscription was canceled because payment
+-- was declined, this will be the order id from the payment declined order.
 spOrderId :: Lens' SubscriptionPurchase (Maybe Text)
 spOrderId
   = lens _spOrderId (\ s a -> s{_spOrderId = a})
+
+-- | The promotion code applied on this purchase. This field is only set if a
+-- vanity code promotion is applied when the subscription was purchased.
+spPromotionCode :: Lens' SubscriptionPurchase (Maybe Text)
+spPromotionCode
+  = lens _spPromotionCode
+      (\ s a -> s{_spPromotionCode = a})
 
 -- | Information provided by the user when they complete the subscription
 -- cancellation flow (cancellation reason survey).
@@ -1628,17 +1979,21 @@ instance FromJSON SubscriptionPurchase where
               (\ o ->
                  SubscriptionPurchase' <$>
                    (o .:? "givenName") <*>
-                     (o .:? "autoResumeTimeMillis")
+                     (o .:? "introductoryPriceInfo")
+                     <*> (o .:? "acknowledgementState")
+                     <*> (o .:? "autoResumeTimeMillis")
                      <*> (o .:? "userCancellationTimeMillis")
                      <*> (o .:? "paymentState")
-                     <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#subscriptionPurchase")
+                     <*> (o .:? "kind")
+                     <*> (o .:? "obfuscatedExternalAccountId")
                      <*> (o .:? "purchaseType")
+                     <*> (o .:? "promotionType")
                      <*> (o .:? "priceChange")
                      <*> (o .:? "profileId")
                      <*> (o .:? "linkedPurchaseToken")
+                     <*> (o .:? "obfuscatedExternalProfileId")
                      <*> (o .:? "familyName")
+                     <*> (o .:? "externalAccountId")
                      <*> (o .:? "profileName")
                      <*> (o .:? "expiryTimeMillis")
                      <*> (o .:? "autoRenewing")
@@ -1650,6 +2005,7 @@ instance FromJSON SubscriptionPurchase where
                      <*> (o .:? "priceAmountMicros")
                      <*> (o .:? "startTimeMillis")
                      <*> (o .:? "orderId")
+                     <*> (o .:? "promotionCode")
                      <*> (o .:? "cancelSurveyResult"))
 
 instance ToJSON SubscriptionPurchase where
@@ -1657,18 +2013,28 @@ instance ToJSON SubscriptionPurchase where
           = object
               (catMaybes
                  [("givenName" .=) <$> _spGivenName,
+                  ("introductoryPriceInfo" .=) <$>
+                    _spIntroductoryPriceInfo,
+                  ("acknowledgementState" .=) <$>
+                    _spAcknowledgementState,
                   ("autoResumeTimeMillis" .=) <$>
                     _spAutoResumeTimeMillis,
                   ("userCancellationTimeMillis" .=) <$>
                     _spUserCancellationTimeMillis,
                   ("paymentState" .=) <$> _spPaymentState,
-                  Just ("kind" .= _spKind),
+                  ("kind" .=) <$> _spKind,
+                  ("obfuscatedExternalAccountId" .=) <$>
+                    _spObfuscatedExternalAccountId,
                   ("purchaseType" .=) <$> _spPurchaseType,
+                  ("promotionType" .=) <$> _spPromotionType,
                   ("priceChange" .=) <$> _spPriceChange,
                   ("profileId" .=) <$> _spProFileId,
                   ("linkedPurchaseToken" .=) <$>
                     _spLinkedPurchaseToken,
+                  ("obfuscatedExternalProfileId" .=) <$>
+                    _spObfuscatedExternalProFileId,
                   ("familyName" .=) <$> _spFamilyName,
+                  ("externalAccountId" .=) <$> _spExternalAccountId,
                   ("profileName" .=) <$> _spProFileName,
                   ("expiryTimeMillis" .=) <$> _spExpiryTimeMillis,
                   ("autoRenewing" .=) <$> _spAutoRenewing,
@@ -1680,6 +2046,7 @@ instance ToJSON SubscriptionPurchase where
                   ("priceAmountMicros" .=) <$> _spPriceAmountMicros,
                   ("startTimeMillis" .=) <$> _spStartTimeMillis,
                   ("orderId" .=) <$> _spOrderId,
+                  ("promotionCode" .=) <$> _spPromotionCode,
                   ("cancelSurveyResult" .=) <$> _spCancelSurveyResult])
 
 -- | Contains the price change information for a subscription that can be
@@ -1690,7 +2057,7 @@ instance ToJSON SubscriptionPurchase where
 -- /See:/ 'subscriptionPriceChange' smart constructor.
 data SubscriptionPriceChange =
   SubscriptionPriceChange'
-    { _spcState    :: !(Maybe (Textual Int32))
+    { _spcState :: !(Maybe (Textual Int32))
     , _spcNewPrice :: !(Maybe Price)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1709,10 +2076,10 @@ subscriptionPriceChange =
   SubscriptionPriceChange' {_spcState = Nothing, _spcNewPrice = Nothing}
 
 
--- | The current state of the price change. Possible values are: -
+-- | The current state of the price change. Possible values are: 0.
 -- Outstanding: State for a pending price change waiting for the user to
 -- agree. In this state, you can optionally seek confirmation from the user
--- using the In-App API. - Accepted: State for an accepted price change
+-- using the In-App API. 1. Accepted: State for an accepted price change
 -- that the subscription will renew with unless it\'s canceled. The price
 -- change takes effect on a future date when the subscription renews. Note
 -- that the change might not occur when the subscription is renewed next.
@@ -1741,13 +2108,14 @@ instance ToJSON SubscriptionPriceChange where
                  [("state" .=) <$> _spcState,
                   ("newPrice" .=) <$> _spcNewPrice])
 
+-- | The app details. The resource for DetailsService.
 --
 -- /See:/ 'appDetails' smart constructor.
 data AppDetails =
   AppDetails'
-    { _adContactPhone    :: !(Maybe Text)
-    , _adContactEmail    :: !(Maybe Text)
-    , _adContactWebsite  :: !(Maybe Text)
+    { _adContactPhone :: !(Maybe Text)
+    , _adContactEmail :: !(Maybe Text)
+    , _adContactWebsite :: !(Maybe Text)
     , _adDefaultLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1817,8 +2185,8 @@ instance ToJSON AppDetails where
                   ("contactWebsite" .=) <$> _adContactWebsite,
                   ("defaultLanguage" .=) <$> _adDefaultLanguage])
 
--- | Prices per buyer region. None of these prices should be zero. In-app
--- products can never be free.
+-- | Prices per buyer region. None of these can be zero, as in-app products
+-- are never free. Map key is region code, as defined by ISO 3166-2.
 --
 -- /See:/ 'inAppProductPrices' smart constructor.
 newtype InAppProductPrices =
@@ -1840,7 +2208,6 @@ inAppProductPrices pIAppAddtional_ =
   InAppProductPrices' {_iAppAddtional = _Coerce # pIAppAddtional_}
 
 
--- | Region code, as defined by ISO 3166-2.
 iAppAddtional :: Lens' InAppProductPrices (HashMap Text Price)
 iAppAddtional
   = lens _iAppAddtional
@@ -1857,27 +2224,27 @@ instance ToJSON InAppProductPrices where
 
 -- | Defines an APK available for this application that is hosted externally
 -- and not uploaded to Google Play. This function is only available to
--- enterprises who are using Google Play for Work, and whos application is
--- restricted to the enterprise private channel
+-- organizations using Managed Play whose application is configured to
+-- restrict distribution to the organizations.
 --
 -- /See:/ 'externallyHostedAPK' smart constructor.
 data ExternallyHostedAPK =
   ExternallyHostedAPK'
-    { _ehapkApplicationLabel    :: !(Maybe Text)
-    , _ehapkMaximumSdk          :: !(Maybe (Textual Int32))
-    , _ehapkNATiveCodes         :: !(Maybe [Text])
-    , _ehapkVersionCode         :: !(Maybe (Textual Int32))
-    , _ehapkFileSha256Base64    :: !(Maybe Text)
+    { _ehapkApplicationLabel :: !(Maybe Text)
+    , _ehapkMaximumSdk :: !(Maybe (Textual Int32))
+    , _ehapkNATiveCodes :: !(Maybe [Text])
+    , _ehapkVersionCode :: !(Maybe (Textual Int32))
+    , _ehapkFileSha256Base64 :: !(Maybe Text)
     , _ehapkExternallyHostedURL :: !(Maybe Text)
-    , _ehapkVersionName         :: !(Maybe Text)
-    , _ehapkPackageName         :: !(Maybe Text)
-    , _ehapkFileSize            :: !(Maybe (Textual Int64))
-    , _ehapkIconBase64          :: !(Maybe Text)
-    , _ehapkUsesFeatures        :: !(Maybe [Text])
-    , _ehapkMinimumSdk          :: !(Maybe (Textual Int32))
-    , _ehapkFileSha1Base64      :: !(Maybe Text)
-    , _ehapkUsesPermissions     :: !(Maybe [ExternallyHostedAPKUsesPermission])
-    , _ehapkCertificateBase64s  :: !(Maybe [Text])
+    , _ehapkVersionName :: !(Maybe Text)
+    , _ehapkPackageName :: !(Maybe Text)
+    , _ehapkFileSize :: !(Maybe (Textual Int64))
+    , _ehapkIconBase64 :: !(Maybe Text)
+    , _ehapkUsesFeatures :: !(Maybe [Text])
+    , _ehapkMinimumSdk :: !(Maybe (Textual Int32))
+    , _ehapkFileSha1Base64 :: !(Maybe Text)
+    , _ehapkUsesPermissions :: !(Maybe [UsesPermission])
+    , _ehapkCertificateBase64s :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1965,7 +2332,7 @@ ehapkVersionCode
       (\ s a -> s{_ehapkVersionCode = a})
       . mapping _Coerce
 
--- | The SHA256 checksum of this APK, represented as a base64 encoded byte
+-- | The sha256 checksum of this APK, represented as a base64 encoded byte
 -- array.
 ehapkFileSha256Base64 :: Lens' ExternallyHostedAPK (Maybe Text)
 ehapkFileSha256Base64
@@ -2018,7 +2385,7 @@ ehapkMinimumSdk
       (\ s a -> s{_ehapkMinimumSdk = a})
       . mapping _Coerce
 
--- | The SHA1 checksum of this APK, represented as a base64 encoded byte
+-- | The sha1 checksum of this APK, represented as a base64 encoded byte
 -- array.
 ehapkFileSha1Base64 :: Lens' ExternallyHostedAPK (Maybe Text)
 ehapkFileSha1Base64
@@ -2026,7 +2393,7 @@ ehapkFileSha1Base64
       (\ s a -> s{_ehapkFileSha1Base64 = a})
 
 -- | The permissions requested by this APK.
-ehapkUsesPermissions :: Lens' ExternallyHostedAPK [ExternallyHostedAPKUsesPermission]
+ehapkUsesPermissions :: Lens' ExternallyHostedAPK [UsesPermission]
 ehapkUsesPermissions
   = lens _ehapkUsesPermissions
       (\ s a -> s{_ehapkUsesPermissions = a})
@@ -2034,7 +2401,7 @@ ehapkUsesPermissions
       . _Coerce
 
 -- | A certificate (or array of certificates if a certificate-chain is used)
--- used to signed this APK, represented as a base64 encoded byte array.
+-- used to sign this APK, represented as a base64 encoded byte array.
 ehapkCertificateBase64s :: Lens' ExternallyHostedAPK [Text]
 ehapkCertificateBase64s
   = lens _ehapkCertificateBase64s
@@ -2084,16 +2451,18 @@ instance ToJSON ExternallyHostedAPK where
                   ("certificateBase64s" .=) <$>
                     _ehapkCertificateBase64s])
 
+-- | A release within a track.
 --
 -- /See:/ 'trackRelease' smart constructor.
 data TrackRelease =
   TrackRelease'
-    { _trVersionCodes     :: !(Maybe [Textual Int64])
-    , _trStatus           :: !(Maybe Text)
-    , _trReleaseNotes     :: !(Maybe [LocalizedText])
-    , _trUserFraction     :: !(Maybe (Textual Double))
+    { _trVersionCodes :: !(Maybe [Textual Int64])
+    , _trStatus :: !(Maybe TrackReleaseStatus)
+    , _trReleaseNotes :: !(Maybe [LocalizedText])
+    , _trUserFraction :: !(Maybe (Textual Double))
     , _trCountryTargeting :: !(Maybe CountryTargeting)
-    , _trName             :: !(Maybe Text)
+    , _trName :: !(Maybe Text)
+    , _trInAppUpdatePriority :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2113,6 +2482,8 @@ data TrackRelease =
 -- * 'trCountryTargeting'
 --
 -- * 'trName'
+--
+-- * 'trInAppUpdatePriority'
 trackRelease
     :: TrackRelease
 trackRelease =
@@ -2123,12 +2494,11 @@ trackRelease =
     , _trUserFraction = Nothing
     , _trCountryTargeting = Nothing
     , _trName = Nothing
+    , _trInAppUpdatePriority = Nothing
     }
 
 
--- | A list of all version codes of APKs that will be exposed to the users of
--- this track when this release is rolled out. Note that this list should
--- contain all versions you wish to be active, including those you wish to
+-- | Version codes of all APKs in the release. Must include version codes to
 -- retain from previous releases.
 trVersionCodes :: Lens' TrackRelease [Int64]
 trVersionCodes
@@ -2137,11 +2507,11 @@ trVersionCodes
       . _Default
       . _Coerce
 
--- | The desired status of this release.
-trStatus :: Lens' TrackRelease (Maybe Text)
+-- | The status of the release.
+trStatus :: Lens' TrackRelease (Maybe TrackReleaseStatus)
 trStatus = lens _trStatus (\ s a -> s{_trStatus = a})
 
--- | The description of what is new in the app in this release.
+-- | A description of what is new in this release.
 trReleaseNotes :: Lens' TrackRelease [LocalizedText]
 trReleaseNotes
   = lens _trReleaseNotes
@@ -2149,24 +2519,37 @@ trReleaseNotes
       . _Default
       . _Coerce
 
--- | Fraction of users who are eligible to receive the release. 0 \< fraction
--- \< 1. To be set, release status must be \"inProgress\" or \"halted\".
+-- | Fraction of users who are eligible for a staged release. 0 \< fraction
+-- \< 1. Can only be set when status is \"inProgress\" or \"halted\".
 trUserFraction :: Lens' TrackRelease (Maybe Double)
 trUserFraction
   = lens _trUserFraction
       (\ s a -> s{_trUserFraction = a})
       . mapping _Coerce
 
+-- | Restricts a release to a specific set of countries.
 trCountryTargeting :: Lens' TrackRelease (Maybe CountryTargeting)
 trCountryTargeting
   = lens _trCountryTargeting
       (\ s a -> s{_trCountryTargeting = a})
 
--- | The release name, used to identify this release in the Play Console UI.
--- Not required to be unique. This is optional, if not set it will be
--- generated from the version_name in the APKs.
+-- | The release name. Not required to be unique. If not set, the name is
+-- generated from the APK\'s version_name. If the release contains multiple
+-- APKs, the name is generated from the date.
 trName :: Lens' TrackRelease (Maybe Text)
 trName = lens _trName (\ s a -> s{_trName = a})
+
+-- | In-app update priority of the release. All newly added APKs in the
+-- release will be considered at this priority. Can take values in the
+-- range [0, 5], with 5 the highest priority. Defaults to 0.
+-- in_app_update_priority can not be updated once the release is rolled
+-- out. See
+-- https:\/\/developer.android.com\/guide\/playcore\/in-app-updates.
+trInAppUpdatePriority :: Lens' TrackRelease (Maybe Int32)
+trInAppUpdatePriority
+  = lens _trInAppUpdatePriority
+      (\ s a -> s{_trInAppUpdatePriority = a})
+      . mapping _Coerce
 
 instance FromJSON TrackRelease where
         parseJSON
@@ -2178,7 +2561,8 @@ instance FromJSON TrackRelease where
                      <*> (o .:? "releaseNotes" .!= mempty)
                      <*> (o .:? "userFraction")
                      <*> (o .:? "countryTargeting")
-                     <*> (o .:? "name"))
+                     <*> (o .:? "name")
+                     <*> (o .:? "inAppUpdatePriority"))
 
 instance ToJSON TrackRelease where
         toJSON TrackRelease'{..}
@@ -2189,14 +2573,17 @@ instance ToJSON TrackRelease where
                   ("releaseNotes" .=) <$> _trReleaseNotes,
                   ("userFraction" .=) <$> _trUserFraction,
                   ("countryTargeting" .=) <$> _trCountryTargeting,
-                  ("name" .=) <$> _trName])
+                  ("name" .=) <$> _trName,
+                  ("inAppUpdatePriority" .=) <$>
+                    _trInAppUpdatePriority])
 
+-- | Country targeting specification.
 --
 -- /See:/ 'countryTargeting' smart constructor.
 data CountryTargeting =
   CountryTargeting'
     { _ctIncludeRestOfWorld :: !(Maybe Bool)
-    , _ctCountries          :: !(Maybe [Text])
+    , _ctCountries :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2214,11 +2601,14 @@ countryTargeting =
   CountryTargeting' {_ctIncludeRestOfWorld = Nothing, _ctCountries = Nothing}
 
 
+-- | Include \"rest of world\" as well as explicitly targeted countries.
 ctIncludeRestOfWorld :: Lens' CountryTargeting (Maybe Bool)
 ctIncludeRestOfWorld
   = lens _ctIncludeRestOfWorld
       (\ s a -> s{_ctIncludeRestOfWorld = a})
 
+-- | Countries to target, specified as two letter [CLDR
+-- codes](https:\/\/unicode.org\/cldr\/charts\/latest\/supplemental\/territory_containment_un_m_49.html).
 ctCountries :: Lens' CountryTargeting [Text]
 ctCountries
   = lens _ctCountries (\ s a -> s{_ctCountries = a}) .
@@ -2240,13 +2630,14 @@ instance ToJSON CountryTargeting where
                  [("includeRestOfWorld" .=) <$> _ctIncludeRestOfWorld,
                   ("countries" .=) <$> _ctCountries])
 
+-- | Information about an app bundle. The resource for BundlesService.
 --
 -- /See:/ 'bundle' smart constructor.
 data Bundle =
   Bundle'
     { _bVersionCode :: !(Maybe (Textual Int32))
-    , _bSha1        :: !(Maybe Text)
-    , _bSha256      :: !(Maybe Text)
+    , _bSha1 :: !(Maybe Text)
+    , _bSha256 :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2265,7 +2656,7 @@ bundle
 bundle = Bundle' {_bVersionCode = Nothing, _bSha1 = Nothing, _bSha256 = Nothing}
 
 
--- | The version code of the Android App Bundle. As specified in the Android
+-- | The version code of the Android App Bundle, as specified in the Android
 -- App Bundle\'s base module APK manifest file.
 bVersionCode :: Lens' Bundle (Maybe Int32)
 bVersionCode
@@ -2302,7 +2693,7 @@ instance ToJSON Bundle where
 -- /See:/ 'deobfuscationFile' smart constructor.
 newtype DeobfuscationFile =
   DeobfuscationFile'
-    { _dfSymbolType :: Maybe Text
+    { _dfSymbolType :: Maybe DeobfuscationFileSymbolType
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2318,7 +2709,7 @@ deobfuscationFile = DeobfuscationFile' {_dfSymbolType = Nothing}
 
 
 -- | The type of the deobfuscation file.
-dfSymbolType :: Lens' DeobfuscationFile (Maybe Text)
+dfSymbolType :: Lens' DeobfuscationFile (Maybe DeobfuscationFileSymbolType)
 dfSymbolType
   = lens _dfSymbolType (\ s a -> s{_dfSymbolType = a})
 
@@ -2332,12 +2723,13 @@ instance ToJSON DeobfuscationFile where
           = object
               (catMaybes [("symbolType" .=) <$> _dfSymbolType])
 
+-- | Response for the voidedpurchases.list API.
 --
 -- /See:/ 'voidedPurchasesListResponse' smart constructor.
 data VoidedPurchasesListResponse =
   VoidedPurchasesListResponse'
     { _vplrTokenPagination :: !(Maybe TokenPagination)
-    , _vplrPageInfo        :: !(Maybe PageInfo)
+    , _vplrPageInfo :: !(Maybe PageInfo)
     , _vplrVoidedPurchases :: !(Maybe [VoidedPurchase])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2362,11 +2754,13 @@ voidedPurchasesListResponse =
     }
 
 
+-- | Pagination information for token pagination.
 vplrTokenPagination :: Lens' VoidedPurchasesListResponse (Maybe TokenPagination)
 vplrTokenPagination
   = lens _vplrTokenPagination
       (\ s a -> s{_vplrTokenPagination = a})
 
+-- | General pagination information.
 vplrPageInfo :: Lens' VoidedPurchasesListResponse (Maybe PageInfo)
 vplrPageInfo
   = lens _vplrPageInfo (\ s a -> s{_vplrPageInfo = a})
@@ -2394,6 +2788,7 @@ instance ToJSON VoidedPurchasesListResponse where
                   ("pageInfo" .=) <$> _vplrPageInfo,
                   ("voidedPurchases" .=) <$> _vplrVoidedPurchases])
 
+-- | Response for uploading an expansion file.
 --
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
 newtype ExpansionFilesUploadResponse =
@@ -2414,6 +2809,7 @@ expansionFilesUploadResponse =
   ExpansionFilesUploadResponse' {_efurExpansionFile = Nothing}
 
 
+-- | The uploaded expansion file configuration.
 efurExpansionFile :: Lens' ExpansionFilesUploadResponse (Maybe ExpansionFile)
 efurExpansionFile
   = lens _efurExpansionFile
@@ -2432,6 +2828,7 @@ instance ToJSON ExpansionFilesUploadResponse where
               (catMaybes
                  [("expansionFile" .=) <$> _efurExpansionFile])
 
+-- | Response for uploading an image.
 --
 -- /See:/ 'imagesUploadResponse' smart constructor.
 newtype ImagesUploadResponse =
@@ -2451,6 +2848,7 @@ imagesUploadResponse
 imagesUploadResponse = ImagesUploadResponse' {_iurImage = Nothing}
 
 
+-- | The uploaded image.
 iurImage :: Lens' ImagesUploadResponse (Maybe Image)
 iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
 
@@ -2463,55 +2861,7 @@ instance ToJSON ImagesUploadResponse where
         toJSON ImagesUploadResponse'{..}
           = object (catMaybes [("image" .=) <$> _iurImage])
 
---
--- /See:/ 'prorate' smart constructor.
-data Prorate =
-  Prorate'
-    { _pStart        :: !(Maybe MonthDay)
-    , _pDefaultPrice :: !(Maybe Price)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Prorate' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pStart'
---
--- * 'pDefaultPrice'
-prorate
-    :: Prorate
-prorate = Prorate' {_pStart = Nothing, _pDefaultPrice = Nothing}
-
-
--- | Defines the first day on which the price takes effect.
-pStart :: Lens' Prorate (Maybe MonthDay)
-pStart = lens _pStart (\ s a -> s{_pStart = a})
-
--- | Default price cannot be zero and must be less than the full subscription
--- price. Default price is always in the developer\'s Checkout merchant
--- currency. Targeted countries have their prices set automatically based
--- on the default_price.
-pDefaultPrice :: Lens' Prorate (Maybe Price)
-pDefaultPrice
-  = lens _pDefaultPrice
-      (\ s a -> s{_pDefaultPrice = a})
-
-instance FromJSON Prorate where
-        parseJSON
-          = withObject "Prorate"
-              (\ o ->
-                 Prorate' <$>
-                   (o .:? "start") <*> (o .:? "defaultPrice"))
-
-instance ToJSON Prorate where
-        toJSON Prorate'{..}
-          = object
-              (catMaybes
-                 [("start" .=) <$> _pStart,
-                  ("defaultPrice" .=) <$> _pDefaultPrice])
-
+-- | Responses for the upload.
 --
 -- /See:/ 'deobfuscationFilesUploadResponse' smart constructor.
 newtype DeobfuscationFilesUploadResponse =
@@ -2532,6 +2882,7 @@ deobfuscationFilesUploadResponse =
   DeobfuscationFilesUploadResponse' {_dfurDeobfuscationFile = Nothing}
 
 
+-- | The uploaded Deobfuscation File configuration.
 dfurDeobfuscationFile :: Lens' DeobfuscationFilesUploadResponse (Maybe DeobfuscationFile)
 dfurDeobfuscationFile
   = lens _dfurDeobfuscationFile
@@ -2553,14 +2904,15 @@ instance ToJSON DeobfuscationFilesUploadResponse
                  [("deobfuscationFile" .=) <$>
                     _dfurDeobfuscationFile])
 
+-- | Response listing all in-app products.
 --
 -- /See:/ 'inAppProductsListResponse' smart constructor.
 data InAppProductsListResponse =
   InAppProductsListResponse'
     { _iaplrTokenPagination :: !(Maybe TokenPagination)
-    , _iaplrPageInfo        :: !(Maybe PageInfo)
-    , _iaplrKind            :: !Text
-    , _iaplrInAppProduct    :: !(Maybe [InAppProduct])
+    , _iaplrPageInfo :: !(Maybe PageInfo)
+    , _iaplrKind :: !(Maybe Text)
+    , _iaplrInAppProduct :: !(Maybe [InAppProduct])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2582,27 +2934,30 @@ inAppProductsListResponse =
   InAppProductsListResponse'
     { _iaplrTokenPagination = Nothing
     , _iaplrPageInfo = Nothing
-    , _iaplrKind = "androidpublisher#inappproductsListResponse"
+    , _iaplrKind = Nothing
     , _iaplrInAppProduct = Nothing
     }
 
 
+-- | Pagination token, to handle a number of products that is over one page.
 iaplrTokenPagination :: Lens' InAppProductsListResponse (Maybe TokenPagination)
 iaplrTokenPagination
   = lens _iaplrTokenPagination
       (\ s a -> s{_iaplrTokenPagination = a})
 
+-- | Information about the current page.
 iaplrPageInfo :: Lens' InAppProductsListResponse (Maybe PageInfo)
 iaplrPageInfo
   = lens _iaplrPageInfo
       (\ s a -> s{_iaplrPageInfo = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#inappproductsListResponse\".
-iaplrKind :: Lens' InAppProductsListResponse Text
+-- | The kind of this response
+-- (\"androidpublisher#inappproductsListResponse\").
+iaplrKind :: Lens' InAppProductsListResponse (Maybe Text)
 iaplrKind
   = lens _iaplrKind (\ s a -> s{_iaplrKind = a})
 
+-- | All in-app products.
 iaplrInAppProduct :: Lens' InAppProductsListResponse [InAppProduct]
 iaplrInAppProduct
   = lens _iaplrInAppProduct
@@ -2616,8 +2971,7 @@ instance FromJSON InAppProductsListResponse where
               (\ o ->
                  InAppProductsListResponse' <$>
                    (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#inappproductsListResponse")
+                     (o .:? "kind")
                      <*> (o .:? "inappproduct" .!= mempty))
 
 instance ToJSON InAppProductsListResponse where
@@ -2626,14 +2980,15 @@ instance ToJSON InAppProductsListResponse where
               (catMaybes
                  [("tokenPagination" .=) <$> _iaplrTokenPagination,
                   ("pageInfo" .=) <$> _iaplrPageInfo,
-                  Just ("kind" .= _iaplrKind),
+                  ("kind" .=) <$> _iaplrKind,
                   ("inappproduct" .=) <$> _iaplrInAppProduct])
 
+-- | Release notes specification, i.e. language and text.
 --
 -- /See:/ 'localizedText' smart constructor.
 data LocalizedText =
   LocalizedText'
-    { _ltText     :: !(Maybe Text)
+    { _ltText :: !(Maybe Text)
     , _ltLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2651,11 +3006,12 @@ localizedText
 localizedText = LocalizedText' {_ltText = Nothing, _ltLanguage = Nothing}
 
 
--- | The text in the given \`language\`.
+-- | The text in the given language.
 ltText :: Lens' LocalizedText (Maybe Text)
 ltText = lens _ltText (\ s a -> s{_ltText = a})
 
--- | The language code, in BCP 47 format (eg \"en-US\").
+-- | Language localization code (a BCP-47 language tag; for example,
+-- \"de-AT\" for Austrian German).
 ltLanguage :: Lens' LocalizedText (Maybe Text)
 ltLanguage
   = lens _ltLanguage (\ s a -> s{_ltLanguage = a})
@@ -2674,13 +3030,14 @@ instance ToJSON LocalizedText where
                  [("text" .=) <$> _ltText,
                   ("language" .=) <$> _ltLanguage])
 
+-- | An Android app review.
 --
 -- /See:/ 'review' smart constructor.
 data Review =
   Review'
-    { _rReviewId   :: !(Maybe Text)
+    { _rReviewId :: !(Maybe Text)
     , _rAuthorName :: !(Maybe Text)
-    , _rComments   :: !(Maybe [Comment])
+    , _rComments :: !(Maybe [Comment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2733,6 +3090,7 @@ instance ToJSON Review where
                   ("authorName" .=) <$> _rAuthorName,
                   ("comments" .=) <$> _rComments])
 
+-- | Response for creating a new externally hosted APK.
 --
 -- /See:/ 'aPKsAddExternallyHostedResponse' smart constructor.
 newtype APKsAddExternallyHostedResponse =
@@ -2780,7 +3138,7 @@ instance ToJSON APKsAddExternallyHostedResponse where
 -- /See:/ 'subscriptionDeferralInfo' smart constructor.
 data SubscriptionDeferralInfo =
   SubscriptionDeferralInfo'
-    { _sdiDesiredExpiryTimeMillis  :: !(Maybe (Textual Int64))
+    { _sdiDesiredExpiryTimeMillis :: !(Maybe (Textual Int64))
     , _sdiExpectedExpiryTimeMillis :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2837,6 +3195,7 @@ instance ToJSON SubscriptionDeferralInfo where
                   ("expectedExpiryTimeMillis" .=) <$>
                     _sdiExpectedExpiryTimeMillis])
 
+-- | Request to reply to review or update existing reply.
 --
 -- /See:/ 'reviewsReplyRequest' smart constructor.
 newtype ReviewsReplyRequest =
@@ -2872,20 +3231,94 @@ instance ToJSON ReviewsReplyRequest where
           = object
               (catMaybes [("replyText" .=) <$> _rrrReplyText])
 
+-- | The device spec used to generate a system APK.
+--
+-- /See:/ 'deviceSpec' smart constructor.
+data DeviceSpec =
+  DeviceSpec'
+    { _dsSupportedAbis :: !(Maybe [Text])
+    , _dsSupportedLocales :: !(Maybe [Text])
+    , _dsScreenDensity :: !(Maybe (Textual Word32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeviceSpec' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsSupportedAbis'
+--
+-- * 'dsSupportedLocales'
+--
+-- * 'dsScreenDensity'
+deviceSpec
+    :: DeviceSpec
+deviceSpec =
+  DeviceSpec'
+    { _dsSupportedAbis = Nothing
+    , _dsSupportedLocales = Nothing
+    , _dsScreenDensity = Nothing
+    }
+
+
+-- | Supported ABI architectures in the order of preference. The values
+-- should be the string as reported by the platform, e.g. \"armeabi-v7a\",
+-- \"x86_64\".
+dsSupportedAbis :: Lens' DeviceSpec [Text]
+dsSupportedAbis
+  = lens _dsSupportedAbis
+      (\ s a -> s{_dsSupportedAbis = a})
+      . _Default
+      . _Coerce
+
+-- | All installed locales represented as BCP-47 strings, e.g. \"en-US\".
+dsSupportedLocales :: Lens' DeviceSpec [Text]
+dsSupportedLocales
+  = lens _dsSupportedLocales
+      (\ s a -> s{_dsSupportedLocales = a})
+      . _Default
+      . _Coerce
+
+-- | Screen dpi.
+dsScreenDensity :: Lens' DeviceSpec (Maybe Word32)
+dsScreenDensity
+  = lens _dsScreenDensity
+      (\ s a -> s{_dsScreenDensity = a})
+      . mapping _Coerce
+
+instance FromJSON DeviceSpec where
+        parseJSON
+          = withObject "DeviceSpec"
+              (\ o ->
+                 DeviceSpec' <$>
+                   (o .:? "supportedAbis" .!= mempty) <*>
+                     (o .:? "supportedLocales" .!= mempty)
+                     <*> (o .:? "screenDensity"))
+
+instance ToJSON DeviceSpec where
+        toJSON DeviceSpec'{..}
+          = object
+              (catMaybes
+                 [("supportedAbis" .=) <$> _dsSupportedAbis,
+                  ("supportedLocales" .=) <$> _dsSupportedLocales,
+                  ("screenDensity" .=) <$> _dsScreenDensity])
+
+-- | Characteristics of the user\'s device.
 --
 -- /See:/ 'deviceMetadata' smart constructor.
 data DeviceMetadata =
   DeviceMetadata'
-    { _dmProductName      :: !(Maybe Text)
-    , _dmGlEsVersion      :: !(Maybe (Textual Int32))
-    , _dmManufacturer     :: !(Maybe Text)
-    , _dmScreenWidthPx    :: !(Maybe (Textual Int32))
-    , _dmRamMb            :: !(Maybe (Textual Int32))
-    , _dmCPUMake          :: !(Maybe Text)
-    , _dmScreenHeightPx   :: !(Maybe (Textual Int32))
-    , _dmNATivePlatform   :: !(Maybe Text)
-    , _dmDeviceClass      :: !(Maybe Text)
-    , _dmCPUModel         :: !(Maybe Text)
+    { _dmProductName :: !(Maybe Text)
+    , _dmGlEsVersion :: !(Maybe (Textual Int32))
+    , _dmManufacturer :: !(Maybe Text)
+    , _dmScreenWidthPx :: !(Maybe (Textual Int32))
+    , _dmRamMb :: !(Maybe (Textual Int32))
+    , _dmCPUMake :: !(Maybe Text)
+    , _dmScreenHeightPx :: !(Maybe (Textual Int32))
+    , _dmNATivePlatform :: !(Maybe Text)
+    , _dmDeviceClass :: !(Maybe Text)
+    , _dmCPUModel :: !(Maybe Text)
     , _dmScreenDensityDpi :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2960,13 +3393,13 @@ dmScreenWidthPx
       (\ s a -> s{_dmScreenWidthPx = a})
       . mapping _Coerce
 
--- | Device RAM in Megabytes e.g. \"2048\"
+-- | Device RAM in Megabytes, e.g. \"2048\"
 dmRamMb :: Lens' DeviceMetadata (Maybe Int32)
 dmRamMb
   = lens _dmRamMb (\ s a -> s{_dmRamMb = a}) .
       mapping _Coerce
 
--- | Device CPU make e.g. \"Qualcomm\"
+-- | Device CPU make, e.g. \"Qualcomm\"
 dmCPUMake :: Lens' DeviceMetadata (Maybe Text)
 dmCPUMake
   = lens _dmCPUMake (\ s a -> s{_dmCPUMake = a})
@@ -2990,7 +3423,7 @@ dmDeviceClass
   = lens _dmDeviceClass
       (\ s a -> s{_dmDeviceClass = a})
 
--- | Device CPU model e.g. \"MSM8974\"
+-- | Device CPU model, e.g. \"MSM8974\"
 dmCPUModel :: Lens' DeviceMetadata (Maybe Text)
 dmCPUModel
   = lens _dmCPUModel (\ s a -> s{_dmCPUModel = a})
@@ -3034,11 +3467,12 @@ instance ToJSON DeviceMetadata where
                   ("cpuModel" .=) <$> _dmCPUModel,
                   ("screenDensityDpi" .=) <$> _dmScreenDensityDpi])
 
+-- | Developer entry from conversation between user and developer.
 --
 -- /See:/ 'developerComment' smart constructor.
 data DeveloperComment =
   DeveloperComment'
-    { _dcText         :: !(Maybe Text)
+    { _dcText :: !(Maybe Text)
     , _dcLastModified :: !(Maybe Timestamp)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3081,22 +3515,22 @@ instance ToJSON DeveloperComment where
                  [("text" .=) <$> _dcText,
                   ("lastModified" .=) <$> _dcLastModified])
 
+-- | An in-app product. The resource for InappproductsService.
 --
 -- /See:/ 'inAppProduct' smart constructor.
 data InAppProduct =
   InAppProduct'
-    { _iapStatus             :: !(Maybe Text)
-    , _iapGracePeriod        :: !(Maybe Text)
-    , _iapTrialPeriod        :: !(Maybe Text)
-    , _iapPackageName        :: !(Maybe Text)
-    , _iapSeason             :: !(Maybe Season)
-    , _iapPurchaseType       :: !(Maybe Text)
+    { _iapStatus :: !(Maybe InAppProductStatus)
+    , _iapGracePeriod :: !(Maybe Text)
+    , _iapTrialPeriod :: !(Maybe Text)
+    , _iapPackageName :: !(Maybe Text)
+    , _iapPurchaseType :: !(Maybe InAppProductPurchaseType)
     , _iapSubscriptionPeriod :: !(Maybe Text)
-    , _iapPrices             :: !(Maybe InAppProductPrices)
-    , _iapSKU                :: !(Maybe Text)
-    , _iapDefaultPrice       :: !(Maybe Price)
-    , _iapListings           :: !(Maybe InAppProductListings)
-    , _iapDefaultLanguage    :: !(Maybe Text)
+    , _iapPrices :: !(Maybe InAppProductPrices)
+    , _iapSKU :: !(Maybe Text)
+    , _iapDefaultPrice :: !(Maybe Price)
+    , _iapListings :: !(Maybe InAppProductListings)
+    , _iapDefaultLanguage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3112,8 +3546,6 @@ data InAppProduct =
 -- * 'iapTrialPeriod'
 --
 -- * 'iapPackageName'
---
--- * 'iapSeason'
 --
 -- * 'iapPurchaseType'
 --
@@ -3136,7 +3568,6 @@ inAppProduct =
     , _iapGracePeriod = Nothing
     , _iapTrialPeriod = Nothing
     , _iapPackageName = Nothing
-    , _iapSeason = Nothing
     , _iapPurchaseType = Nothing
     , _iapSubscriptionPeriod = Nothing
     , _iapPrices = Nothing
@@ -3147,77 +3578,73 @@ inAppProduct =
     }
 
 
-iapStatus :: Lens' InAppProduct (Maybe Text)
+-- | The status of the product, e.g. whether it\'s active.
+iapStatus :: Lens' InAppProduct (Maybe InAppProductStatus)
 iapStatus
   = lens _iapStatus (\ s a -> s{_iapStatus = a})
 
--- | Grace period of the subscription, specified in ISO 8601 format. It will
--- allow developers to give their subscribers a grace period when the
--- payment for the new recurrence period is declined. Acceptable values =
--- \"P3D\" (three days) and \"P7D\" (seven days)
+-- | Grace period of the subscription, specified in ISO 8601 format. Allows
+-- developers to give their subscribers a grace period when the payment for
+-- the new recurrence period is declined. Acceptable values are P0D (zero
+-- days), P3D (three days), P7D (seven days), P14D (14 days), and P30D (30
+-- days).
 iapGracePeriod :: Lens' InAppProduct (Maybe Text)
 iapGracePeriod
   = lens _iapGracePeriod
       (\ s a -> s{_iapGracePeriod = a})
 
 -- | Trial period, specified in ISO 8601 format. Acceptable values are
--- anything between \"P7D\" (seven days) and \"P999D\" (999 days). Seasonal
--- subscriptions cannot have a trial period.
+-- anything between P7D (seven days) and P999D (999 days).
 iapTrialPeriod :: Lens' InAppProduct (Maybe Text)
 iapTrialPeriod
   = lens _iapTrialPeriod
       (\ s a -> s{_iapTrialPeriod = a})
 
--- | The package name of the parent app.
+-- | Package name of the parent app.
 iapPackageName :: Lens' InAppProduct (Maybe Text)
 iapPackageName
   = lens _iapPackageName
       (\ s a -> s{_iapPackageName = a})
 
--- | Definition of a season for a seasonal subscription. Can be defined only
--- for yearly subscriptions.
-iapSeason :: Lens' InAppProduct (Maybe Season)
-iapSeason
-  = lens _iapSeason (\ s a -> s{_iapSeason = a})
-
--- | Purchase type enum value. Unmodifiable after creation.
-iapPurchaseType :: Lens' InAppProduct (Maybe Text)
+-- | The type of the product, e.g. a recurring subscription.
+iapPurchaseType :: Lens' InAppProduct (Maybe InAppProductPurchaseType)
 iapPurchaseType
   = lens _iapPurchaseType
       (\ s a -> s{_iapPurchaseType = a})
 
 -- | Subscription period, specified in ISO 8601 format. Acceptable values are
--- \"P1W\" (one week), \"P1M\" (one month), \"P3M\" (three months), \"P6M\"
--- (six months), and \"P1Y\" (one year).
+-- P1W (one week), P1M (one month), P3M (three months), P6M (six months),
+-- and P1Y (one year).
 iapSubscriptionPeriod :: Lens' InAppProduct (Maybe Text)
 iapSubscriptionPeriod
   = lens _iapSubscriptionPeriod
       (\ s a -> s{_iapSubscriptionPeriod = a})
 
--- | Prices per buyer region. None of these prices should be zero. In-app
--- products can never be free.
+-- | Prices per buyer region. None of these can be zero, as in-app products
+-- are never free. Map key is region code, as defined by ISO 3166-2.
 iapPrices :: Lens' InAppProduct (Maybe InAppProductPrices)
 iapPrices
   = lens _iapPrices (\ s a -> s{_iapPrices = a})
 
--- | The stock-keeping-unit (SKU) of the product, unique within an app.
+-- | Stock-keeping-unit (SKU) of the product, unique within an app.
 iapSKU :: Lens' InAppProduct (Maybe Text)
 iapSKU = lens _iapSKU (\ s a -> s{_iapSKU = a})
 
--- | Default price cannot be zero. In-app products can never be free. Default
--- price is always in the developer\'s Checkout merchant currency.
+-- | Default price. Cannot be zero, as in-app products are never free. Always
+-- in the developer\'s Checkout merchant currency.
 iapDefaultPrice :: Lens' InAppProduct (Maybe Price)
 iapDefaultPrice
   = lens _iapDefaultPrice
       (\ s a -> s{_iapDefaultPrice = a})
 
--- | List of localized title and description data.
+-- | List of localized title and description data. Map key is the language of
+-- the localized data, as defined by BCP-47, e.g. \"en-US\".
 iapListings :: Lens' InAppProduct (Maybe InAppProductListings)
 iapListings
   = lens _iapListings (\ s a -> s{_iapListings = a})
 
--- | The default language of the localized data, as defined by BCP 47. e.g.
--- \"en-US\", \"en-GB\".
+-- | Default language of the localized data, as defined by BCP-47. e.g.
+-- \"en-US\".
 iapDefaultLanguage :: Lens' InAppProduct (Maybe Text)
 iapDefaultLanguage
   = lens _iapDefaultLanguage
@@ -3231,7 +3658,6 @@ instance FromJSON InAppProduct where
                    (o .:? "status") <*> (o .:? "gracePeriod") <*>
                      (o .:? "trialPeriod")
                      <*> (o .:? "packageName")
-                     <*> (o .:? "season")
                      <*> (o .:? "purchaseType")
                      <*> (o .:? "subscriptionPeriod")
                      <*> (o .:? "prices")
@@ -3248,7 +3674,6 @@ instance ToJSON InAppProduct where
                   ("gracePeriod" .=) <$> _iapGracePeriod,
                   ("trialPeriod" .=) <$> _iapTrialPeriod,
                   ("packageName" .=) <$> _iapPackageName,
-                  ("season" .=) <$> _iapSeason,
                   ("purchaseType" .=) <$> _iapPurchaseType,
                   ("subscriptionPeriod" .=) <$> _iapSubscriptionPeriod,
                   ("prices" .=) <$> _iapPrices, ("sku" .=) <$> _iapSKU,
@@ -3256,12 +3681,13 @@ instance ToJSON InAppProduct where
                   ("listings" .=) <$> _iapListings,
                   ("defaultLanguage" .=) <$> _iapDefaultLanguage])
 
+-- | Definition of a price, i.e. currency and units.
 --
 -- /See:/ 'price' smart constructor.
 data Price =
   Price'
     { _pPriceMicros :: !(Maybe Text)
-    , _pCurrency    :: !(Maybe Text)
+    , _pCurrency :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3278,13 +3704,13 @@ price
 price = Price' {_pPriceMicros = Nothing, _pCurrency = Nothing}
 
 
--- | The price in millionths of the currency base unit represented as a
--- string.
+-- | Price in 1\/million of the currency base unit, represented as a string.
 pPriceMicros :: Lens' Price (Maybe Text)
 pPriceMicros
   = lens _pPriceMicros (\ s a -> s{_pPriceMicros = a})
 
--- | 3 letter Currency code, as defined by ISO 4217.
+-- | 3 letter Currency code, as defined by ISO 4217. See
+-- java\/com\/google\/common\/money\/CurrencyCode.java
 pCurrency :: Lens' Price (Maybe Text)
 pCurrency
   = lens _pCurrency (\ s a -> s{_pCurrency = a})
@@ -3303,12 +3729,52 @@ instance ToJSON Price where
                  [("priceMicros" .=) <$> _pPriceMicros,
                   ("currency" .=) <$> _pCurrency])
 
+-- | Response to list previously created system APK variants.
+--
+-- /See:/ 'systemAPKsListResponse' smart constructor.
+newtype SystemAPKsListResponse =
+  SystemAPKsListResponse'
+    { _sapklrVariants :: Maybe [Variant]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SystemAPKsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sapklrVariants'
+systemAPKsListResponse
+    :: SystemAPKsListResponse
+systemAPKsListResponse = SystemAPKsListResponse' {_sapklrVariants = Nothing}
+
+
+-- | All system APK variants created.
+sapklrVariants :: Lens' SystemAPKsListResponse [Variant]
+sapklrVariants
+  = lens _sapklrVariants
+      (\ s a -> s{_sapklrVariants = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON SystemAPKsListResponse where
+        parseJSON
+          = withObject "SystemAPKsListResponse"
+              (\ o ->
+                 SystemAPKsListResponse' <$>
+                   (o .:? "variants" .!= mempty))
+
+instance ToJSON SystemAPKsListResponse where
+        toJSON SystemAPKsListResponse'{..}
+          = object
+              (catMaybes [("variants" .=) <$> _sapklrVariants])
+
 -- | Represents the binary payload of an APK.
 --
 -- /See:/ 'aPKBinary' smart constructor.
 data APKBinary =
   APKBinary'
-    { _apkbSha1   :: !(Maybe Text)
+    { _apkbSha1 :: !(Maybe Text)
     , _apkbSha256 :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3350,11 +3816,12 @@ instance ToJSON APKBinary where
                  [("sha1" .=) <$> _apkbSha1,
                   ("sha256" .=) <$> _apkbSha256])
 
+-- | Response listing all APKs.
 --
 -- /See:/ 'aPKsListResponse' smart constructor.
 data APKsListResponse =
   APKsListResponse'
-    { _apklrKind :: !Text
+    { _apklrKind :: !(Maybe Text)
     , _apklrAPKs :: !(Maybe [APK])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3370,16 +3837,15 @@ data APKsListResponse =
 aPKsListResponse
     :: APKsListResponse
 aPKsListResponse =
-  APKsListResponse'
-    {_apklrKind = "androidpublisher#apksListResponse", _apklrAPKs = Nothing}
+  APKsListResponse' {_apklrKind = Nothing, _apklrAPKs = Nothing}
 
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#apksListResponse\".
-apklrKind :: Lens' APKsListResponse Text
+-- | The kind of this response (\"androidpublisher#apksListResponse\").
+apklrKind :: Lens' APKsListResponse (Maybe Text)
 apklrKind
   = lens _apklrKind (\ s a -> s{_apklrKind = a})
 
+-- | All APKs.
 apklrAPKs :: Lens' APKsListResponse [APK]
 apklrAPKs
   = lens _apklrAPKs (\ s a -> s{_apklrAPKs = a}) .
@@ -3391,17 +3857,16 @@ instance FromJSON APKsListResponse where
           = withObject "APKsListResponse"
               (\ o ->
                  APKsListResponse' <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#apksListResponse")
-                     <*> (o .:? "apks" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "apks" .!= mempty))
 
 instance ToJSON APKsListResponse where
         toJSON APKsListResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _apklrKind),
+                 [("kind" .=) <$> _apklrKind,
                   ("apks" .=) <$> _apklrAPKs])
 
+-- | Response on status of replying to a review.
 --
 -- /See:/ 'reviewsReplyResponse' smart constructor.
 newtype ReviewsReplyResponse =
@@ -3421,6 +3886,7 @@ reviewsReplyResponse
 reviewsReplyResponse = ReviewsReplyResponse' {_rrrResult = Nothing}
 
 
+-- | The result of replying\/updating a reply to review.
 rrrResult :: Lens' ReviewsReplyResponse (Maybe ReviewReplyResult)
 rrrResult
   = lens _rrrResult (\ s a -> s{_rrrResult = a})
@@ -3434,65 +3900,12 @@ instance ToJSON ReviewsReplyResponse where
         toJSON ReviewsReplyResponse'{..}
           = object (catMaybes [("result" .=) <$> _rrrResult])
 
--- | A permission used by this APK.
---
--- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
-data ExternallyHostedAPKUsesPermission =
-  ExternallyHostedAPKUsesPermission'
-    { _ehapkupName          :: !(Maybe Text)
-    , _ehapkupMaxSdkVersion :: !(Maybe (Textual Int32))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'ExternallyHostedAPKUsesPermission' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ehapkupName'
---
--- * 'ehapkupMaxSdkVersion'
-externallyHostedAPKUsesPermission
-    :: ExternallyHostedAPKUsesPermission
-externallyHostedAPKUsesPermission =
-  ExternallyHostedAPKUsesPermission'
-    {_ehapkupName = Nothing, _ehapkupMaxSdkVersion = Nothing}
-
-
--- | The name of the permission requested.
-ehapkupName :: Lens' ExternallyHostedAPKUsesPermission (Maybe Text)
-ehapkupName
-  = lens _ehapkupName (\ s a -> s{_ehapkupName = a})
-
--- | Optionally, the maximum SDK version for which the permission is
--- required.
-ehapkupMaxSdkVersion :: Lens' ExternallyHostedAPKUsesPermission (Maybe Int32)
-ehapkupMaxSdkVersion
-  = lens _ehapkupMaxSdkVersion
-      (\ s a -> s{_ehapkupMaxSdkVersion = a})
-      . mapping _Coerce
-
-instance FromJSON ExternallyHostedAPKUsesPermission
-         where
-        parseJSON
-          = withObject "ExternallyHostedAPKUsesPermission"
-              (\ o ->
-                 ExternallyHostedAPKUsesPermission' <$>
-                   (o .:? "name") <*> (o .:? "maxSdkVersion"))
-
-instance ToJSON ExternallyHostedAPKUsesPermission
-         where
-        toJSON ExternallyHostedAPKUsesPermission'{..}
-          = object
-              (catMaybes
-                 [("name" .=) <$> _ehapkupName,
-                  ("maxSdkVersion" .=) <$> _ehapkupMaxSdkVersion])
-
+-- | Response listing all localized listings.
 --
 -- /See:/ 'listingsListResponse' smart constructor.
 data ListingsListResponse =
   ListingsListResponse'
-    { _llrKind     :: !Text
+    { _llrKind :: !(Maybe Text)
     , _llrListings :: !(Maybe [Listing])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3508,15 +3921,14 @@ data ListingsListResponse =
 listingsListResponse
     :: ListingsListResponse
 listingsListResponse =
-  ListingsListResponse'
-    {_llrKind = "androidpublisher#listingsListResponse", _llrListings = Nothing}
+  ListingsListResponse' {_llrKind = Nothing, _llrListings = Nothing}
 
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#listingsListResponse\".
-llrKind :: Lens' ListingsListResponse Text
+-- | The kind of this response (\"androidpublisher#listingsListResponse\").
+llrKind :: Lens' ListingsListResponse (Maybe Text)
 llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
+-- | All localized listings.
 llrListings :: Lens' ListingsListResponse [Listing]
 llrListings
   = lens _llrListings (\ s a -> s{_llrListings = a}) .
@@ -3528,17 +3940,16 @@ instance FromJSON ListingsListResponse where
           = withObject "ListingsListResponse"
               (\ o ->
                  ListingsListResponse' <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#listingsListResponse")
-                     <*> (o .:? "listings" .!= mempty))
+                   (o .:? "kind") <*> (o .:? "listings" .!= mempty))
 
 instance ToJSON ListingsListResponse where
         toJSON ListingsListResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _llrKind),
+                 [("kind" .=) <$> _llrKind,
                   ("listings" .=) <$> _llrListings])
 
+-- | Request to create a new externally hosted APK.
 --
 -- /See:/ 'aPKsAddExternallyHostedRequest' smart constructor.
 newtype APKsAddExternallyHostedRequest =
@@ -3580,11 +3991,132 @@ instance ToJSON APKsAddExternallyHostedRequest where
                  [("externallyHostedApk" .=) <$>
                     _aExternallyHostedAPK])
 
+-- | An artifact resource which gets created when uploading an APK or Android
+-- App Bundle through internal app sharing.
+--
+-- /See:/ 'internalAppSharingArtifact' smart constructor.
+data InternalAppSharingArtifact =
+  InternalAppSharingArtifact'
+    { _iasaCertificateFingerprint :: !(Maybe Text)
+    , _iasaDownloadURL :: !(Maybe Text)
+    , _iasaSha256 :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InternalAppSharingArtifact' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iasaCertificateFingerprint'
+--
+-- * 'iasaDownloadURL'
+--
+-- * 'iasaSha256'
+internalAppSharingArtifact
+    :: InternalAppSharingArtifact
+internalAppSharingArtifact =
+  InternalAppSharingArtifact'
+    { _iasaCertificateFingerprint = Nothing
+    , _iasaDownloadURL = Nothing
+    , _iasaSha256 = Nothing
+    }
+
+
+-- | The sha256 fingerprint of the certificate used to sign the generated
+-- artifact.
+iasaCertificateFingerprint :: Lens' InternalAppSharingArtifact (Maybe Text)
+iasaCertificateFingerprint
+  = lens _iasaCertificateFingerprint
+      (\ s a -> s{_iasaCertificateFingerprint = a})
+
+-- | The download URL generated for the uploaded artifact. Users that are
+-- authorized to download can follow the link to the Play Store app to
+-- install it.
+iasaDownloadURL :: Lens' InternalAppSharingArtifact (Maybe Text)
+iasaDownloadURL
+  = lens _iasaDownloadURL
+      (\ s a -> s{_iasaDownloadURL = a})
+
+-- | The sha256 hash of the artifact represented as a lowercase hexadecimal
+-- number, matching the output of the sha256sum command.
+iasaSha256 :: Lens' InternalAppSharingArtifact (Maybe Text)
+iasaSha256
+  = lens _iasaSha256 (\ s a -> s{_iasaSha256 = a})
+
+instance FromJSON InternalAppSharingArtifact where
+        parseJSON
+          = withObject "InternalAppSharingArtifact"
+              (\ o ->
+                 InternalAppSharingArtifact' <$>
+                   (o .:? "certificateFingerprint") <*>
+                     (o .:? "downloadUrl")
+                     <*> (o .:? "sha256"))
+
+instance ToJSON InternalAppSharingArtifact where
+        toJSON InternalAppSharingArtifact'{..}
+          = object
+              (catMaybes
+                 [("certificateFingerprint" .=) <$>
+                    _iasaCertificateFingerprint,
+                  ("downloadUrl" .=) <$> _iasaDownloadURL,
+                  ("sha256" .=) <$> _iasaSha256])
+
+-- | A permission used by this APK.
+--
+-- /See:/ 'usesPermission' smart constructor.
+data UsesPermission =
+  UsesPermission'
+    { _upName :: !(Maybe Text)
+    , _upMaxSdkVersion :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'UsesPermission' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upName'
+--
+-- * 'upMaxSdkVersion'
+usesPermission
+    :: UsesPermission
+usesPermission = UsesPermission' {_upName = Nothing, _upMaxSdkVersion = Nothing}
+
+
+-- | The name of the permission requested.
+upName :: Lens' UsesPermission (Maybe Text)
+upName = lens _upName (\ s a -> s{_upName = a})
+
+-- | Optionally, the maximum SDK version for which the permission is
+-- required.
+upMaxSdkVersion :: Lens' UsesPermission (Maybe Int32)
+upMaxSdkVersion
+  = lens _upMaxSdkVersion
+      (\ s a -> s{_upMaxSdkVersion = a})
+      . mapping _Coerce
+
+instance FromJSON UsesPermission where
+        parseJSON
+          = withObject "UsesPermission"
+              (\ o ->
+                 UsesPermission' <$>
+                   (o .:? "name") <*> (o .:? "maxSdkVersion"))
+
+instance ToJSON UsesPermission where
+        toJSON UsesPermission'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _upName,
+                  ("maxSdkVersion" .=) <$> _upMaxSdkVersion])
+
+-- | An entry of conversation between user and developer.
 --
 -- /See:/ 'comment' smart constructor.
 data Comment =
   Comment'
-    { _cUserComment      :: !(Maybe UserComment)
+    { _cUserComment :: !(Maybe UserComment)
     , _cDeveloperComment :: !(Maybe DeveloperComment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3627,11 +4159,15 @@ instance ToJSON Comment where
                  [("userComment" .=) <$> _cUserComment,
                   ("developerComment" .=) <$> _cDeveloperComment])
 
+-- | A Timestamp represents a point in time independent of any time zone or
+-- local calendar, encoded as a count of seconds and fractions of seconds
+-- at nanosecond resolution. The count is relative to an epoch at UTC
+-- midnight on January 1, 1970.
 --
 -- /See:/ 'timestamp' smart constructor.
 data Timestamp =
   Timestamp'
-    { _tNanos   :: !(Maybe (Textual Int32))
+    { _tNanos :: !(Maybe (Textual Int32))
     , _tSeconds :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3649,11 +4185,14 @@ timestamp
 timestamp = Timestamp' {_tNanos = Nothing, _tSeconds = Nothing}
 
 
+-- | Non-negative fractions of a second at nanosecond resolution. Must be
+-- from 0 to 999,999,999 inclusive.
 tNanos :: Lens' Timestamp (Maybe Int32)
 tNanos
   = lens _tNanos (\ s a -> s{_tNanos = a}) .
       mapping _Coerce
 
+-- | Represents seconds of UTC time since Unix epoch.
 tSeconds :: Lens' Timestamp (Maybe Int64)
 tSeconds
   = lens _tSeconds (\ s a -> s{_tSeconds = a}) .
@@ -3678,10 +4217,13 @@ instance ToJSON Timestamp where
 -- /See:/ 'voidedPurchase' smart constructor.
 data VoidedPurchase =
   VoidedPurchase'
-    { _vpKind               :: !Text
+    { _vpKind :: !(Maybe Text)
     , _vpPurchaseTimeMillis :: !(Maybe (Textual Int64))
-    , _vpPurchaseToken      :: !(Maybe Text)
-    , _vpVoidedTimeMillis   :: !(Maybe (Textual Int64))
+    , _vpPurchaseToken :: !(Maybe Text)
+    , _vpVoidedSource :: !(Maybe (Textual Int32))
+    , _vpVoidedReason :: !(Maybe (Textual Int32))
+    , _vpOrderId :: !(Maybe Text)
+    , _vpVoidedTimeMillis :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3696,21 +4238,30 @@ data VoidedPurchase =
 --
 -- * 'vpPurchaseToken'
 --
+-- * 'vpVoidedSource'
+--
+-- * 'vpVoidedReason'
+--
+-- * 'vpOrderId'
+--
 -- * 'vpVoidedTimeMillis'
 voidedPurchase
     :: VoidedPurchase
 voidedPurchase =
   VoidedPurchase'
-    { _vpKind = "androidpublisher#voidedPurchase"
+    { _vpKind = Nothing
     , _vpPurchaseTimeMillis = Nothing
     , _vpPurchaseToken = Nothing
+    , _vpVoidedSource = Nothing
+    , _vpVoidedReason = Nothing
+    , _vpOrderId = Nothing
     , _vpVoidedTimeMillis = Nothing
     }
 
 
 -- | This kind represents a voided purchase object in the androidpublisher
 -- service.
-vpKind :: Lens' VoidedPurchase Text
+vpKind :: Lens' VoidedPurchase (Maybe Text)
 vpKind = lens _vpKind (\ s a -> s{_vpKind = a})
 
 -- | The time at which the purchase was made, in milliseconds since the epoch
@@ -3721,12 +4272,36 @@ vpPurchaseTimeMillis
       (\ s a -> s{_vpPurchaseTimeMillis = a})
       . mapping _Coerce
 
--- | The token that was generated when a purchase was made. This uniquely
--- identifies a purchase.
+-- | The token which uniquely identifies a one-time purchase or subscription.
+-- To uniquely identify subscription renewals use order_id (available
+-- starting from version 3 of the API).
 vpPurchaseToken :: Lens' VoidedPurchase (Maybe Text)
 vpPurchaseToken
   = lens _vpPurchaseToken
       (\ s a -> s{_vpPurchaseToken = a})
+
+-- | The initiator of voided purchase, possible values are: 0. User 1.
+-- Developer 2. Google
+vpVoidedSource :: Lens' VoidedPurchase (Maybe Int32)
+vpVoidedSource
+  = lens _vpVoidedSource
+      (\ s a -> s{_vpVoidedSource = a})
+      . mapping _Coerce
+
+-- | The reason why the purchase was voided, possible values are: 0. Other 1.
+-- Remorse 2. Not_received 3. Defective 4. Accidental_purchase 5. Fraud 6.
+-- Friendly_fraud 7. Chargeback
+vpVoidedReason :: Lens' VoidedPurchase (Maybe Int32)
+vpVoidedReason
+  = lens _vpVoidedReason
+      (\ s a -> s{_vpVoidedReason = a})
+      . mapping _Coerce
+
+-- | The order id which uniquely identifies a one-time purchase, subscription
+-- purchase, or subscription renewal.
+vpOrderId :: Lens' VoidedPurchase (Maybe Text)
+vpOrderId
+  = lens _vpOrderId (\ s a -> s{_vpOrderId = a})
 
 -- | The time at which the purchase was canceled\/refunded\/charged-back, in
 -- milliseconds since the epoch (Jan 1, 1970).
@@ -3741,26 +4316,32 @@ instance FromJSON VoidedPurchase where
           = withObject "VoidedPurchase"
               (\ o ->
                  VoidedPurchase' <$>
-                   (o .:? "kind" .!= "androidpublisher#voidedPurchase")
-                     <*> (o .:? "purchaseTimeMillis")
-                     <*> (o .:? "purchaseToken")
+                   (o .:? "kind") <*> (o .:? "purchaseTimeMillis") <*>
+                     (o .:? "purchaseToken")
+                     <*> (o .:? "voidedSource")
+                     <*> (o .:? "voidedReason")
+                     <*> (o .:? "orderId")
                      <*> (o .:? "voidedTimeMillis"))
 
 instance ToJSON VoidedPurchase where
         toJSON VoidedPurchase'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _vpKind),
+                 [("kind" .=) <$> _vpKind,
                   ("purchaseTimeMillis" .=) <$> _vpPurchaseTimeMillis,
                   ("purchaseToken" .=) <$> _vpPurchaseToken,
+                  ("voidedSource" .=) <$> _vpVoidedSource,
+                  ("voidedReason" .=) <$> _vpVoidedReason,
+                  ("orderId" .=) <$> _vpOrderId,
                   ("voidedTimeMillis" .=) <$> _vpVoidedTimeMillis])
 
+-- | Response listing all app bundles.
 --
 -- /See:/ 'bundlesListResponse' smart constructor.
 data BundlesListResponse =
   BundlesListResponse'
     { _blrBundles :: !(Maybe [Bundle])
-    , _blrKind    :: !Text
+    , _blrKind :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3775,19 +4356,18 @@ data BundlesListResponse =
 bundlesListResponse
     :: BundlesListResponse
 bundlesListResponse =
-  BundlesListResponse'
-    {_blrBundles = Nothing, _blrKind = "androidpublisher#bundlesListResponse"}
+  BundlesListResponse' {_blrBundles = Nothing, _blrKind = Nothing}
 
 
+-- | All app bundles.
 blrBundles :: Lens' BundlesListResponse [Bundle]
 blrBundles
   = lens _blrBundles (\ s a -> s{_blrBundles = a}) .
       _Default
       . _Coerce
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidpublisher#bundlesListResponse\".
-blrKind :: Lens' BundlesListResponse Text
+-- | The kind of this response (\"androidpublisher#bundlesListResponse\").
+blrKind :: Lens' BundlesListResponse (Maybe Text)
 blrKind = lens _blrKind (\ s a -> s{_blrKind = a})
 
 instance FromJSON BundlesListResponse where
@@ -3795,22 +4375,21 @@ instance FromJSON BundlesListResponse where
           = withObject "BundlesListResponse"
               (\ o ->
                  BundlesListResponse' <$>
-                   (o .:? "bundles" .!= mempty) <*>
-                     (o .:? "kind" .!=
-                        "androidpublisher#bundlesListResponse"))
+                   (o .:? "bundles" .!= mempty) <*> (o .:? "kind"))
 
 instance ToJSON BundlesListResponse where
         toJSON BundlesListResponse'{..}
           = object
               (catMaybes
                  [("bundles" .=) <$> _blrBundles,
-                  Just ("kind" .= _blrKind)])
+                  ("kind" .=) <$> _blrKind])
 
+-- | The result of replying\/updating a reply to review.
 --
 -- /See:/ 'reviewReplyResult' smart constructor.
 data ReviewReplyResult =
   ReviewReplyResult'
-    { _rReplyText  :: !(Maybe Text)
+    { _rReplyText :: !(Maybe Text)
     , _rLastEdited :: !(Maybe Timestamp)
     }
   deriving (Eq, Show, Data, Typeable, Generic)

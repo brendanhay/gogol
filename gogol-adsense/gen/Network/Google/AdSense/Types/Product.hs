@@ -17,287 +17,211 @@
 --
 module Network.Google.AdSense.Types.Product where
 
-import           Network.Google.AdSense.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types.Sum
+import Network.Google.Prelude
 
+-- | Response definition for the alerts list rpc.
 --
--- /See:/ 'adClients' smart constructor.
-data AdClients =
-  AdClients'
-    { _acEtag          :: !(Maybe Text)
-    , _acNextPageToken :: !(Maybe Text)
-    , _acKind          :: !Text
-    , _acItems         :: !(Maybe [AdClient])
+-- /See:/ 'listAlertsResponse' smart constructor.
+newtype ListAlertsResponse =
+  ListAlertsResponse'
+    { _larAlerts :: Maybe [Alert]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdClients' with the minimum fields required to make a request.
+-- | Creates a value of 'ListAlertsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acEtag'
---
--- * 'acNextPageToken'
---
--- * 'acKind'
---
--- * 'acItems'
-adClients
-    :: AdClients
-adClients =
-  AdClients'
-    { _acEtag = Nothing
-    , _acNextPageToken = Nothing
-    , _acKind = "adsense#adClients"
-    , _acItems = Nothing
-    }
+-- * 'larAlerts'
+listAlertsResponse
+    :: ListAlertsResponse
+listAlertsResponse = ListAlertsResponse' {_larAlerts = Nothing}
 
 
--- | ETag of this response for caching purposes.
-acEtag :: Lens' AdClients (Maybe Text)
-acEtag = lens _acEtag (\ s a -> s{_acEtag = a})
-
--- | Continuation token used to page through ad clients. To retrieve the next
--- page of results, set the next request\'s \"pageToken\" value to this.
-acNextPageToken :: Lens' AdClients (Maybe Text)
-acNextPageToken
-  = lens _acNextPageToken
-      (\ s a -> s{_acNextPageToken = a})
-
--- | Kind of list this is, in this case adsense#adClients.
-acKind :: Lens' AdClients Text
-acKind = lens _acKind (\ s a -> s{_acKind = a})
-
--- | The ad clients returned in this list response.
-acItems :: Lens' AdClients [AdClient]
-acItems
-  = lens _acItems (\ s a -> s{_acItems = a}) . _Default
+-- | The alerts returned in this list response.
+larAlerts :: Lens' ListAlertsResponse [Alert]
+larAlerts
+  = lens _larAlerts (\ s a -> s{_larAlerts = a}) .
+      _Default
       . _Coerce
 
-instance FromJSON AdClients where
+instance FromJSON ListAlertsResponse where
         parseJSON
-          = withObject "AdClients"
+          = withObject "ListAlertsResponse"
               (\ o ->
-                 AdClients' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#adClients")
-                     <*> (o .:? "items" .!= mempty))
+                 ListAlertsResponse' <$> (o .:? "alerts" .!= mempty))
 
-instance ToJSON AdClients where
-        toJSON AdClients'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _acEtag,
-                  ("nextPageToken" .=) <$> _acNextPageToken,
-                  Just ("kind" .= _acKind), ("items" .=) <$> _acItems])
+instance ToJSON ListAlertsResponse where
+        toJSON ListAlertsResponse'{..}
+          = object (catMaybes [("alerts" .=) <$> _larAlerts])
 
+-- | Representation of the AdSense code for a given ad client. For more
+-- information, see [About the AdSense
+-- code](https:\/\/support.google.com\/adsense\/answer\/9274634).
 --
--- /See:/ 'reportingMetadataEntry' smart constructor.
-data ReportingMetadataEntry =
-  ReportingMetadataEntry'
-    { _rmeKind                 :: !Text
-    , _rmeRequiredMetrics      :: !(Maybe [Text])
-    , _rmeCompatibleMetrics    :: !(Maybe [Text])
-    , _rmeRequiredDimensions   :: !(Maybe [Text])
-    , _rmeId                   :: !(Maybe Text)
-    , _rmeCompatibleDimensions :: !(Maybe [Text])
-    , _rmeSupportedProducts    :: !(Maybe [Text])
+-- /See:/ 'adClientAdCode' smart constructor.
+data AdClientAdCode =
+  AdClientAdCode'
+    { _acacAmpHead :: !(Maybe Text)
+    , _acacAmpBody :: !(Maybe Text)
+    , _acacAdCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'ReportingMetadataEntry' with the minimum fields required to make a request.
+-- | Creates a value of 'AdClientAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rmeKind'
+-- * 'acacAmpHead'
 --
--- * 'rmeRequiredMetrics'
+-- * 'acacAmpBody'
 --
--- * 'rmeCompatibleMetrics'
---
--- * 'rmeRequiredDimensions'
---
--- * 'rmeId'
---
--- * 'rmeCompatibleDimensions'
---
--- * 'rmeSupportedProducts'
-reportingMetadataEntry
-    :: ReportingMetadataEntry
-reportingMetadataEntry =
-  ReportingMetadataEntry'
-    { _rmeKind = "adsense#reportingMetadataEntry"
-    , _rmeRequiredMetrics = Nothing
-    , _rmeCompatibleMetrics = Nothing
-    , _rmeRequiredDimensions = Nothing
-    , _rmeId = Nothing
-    , _rmeCompatibleDimensions = Nothing
-    , _rmeSupportedProducts = Nothing
-    }
+-- * 'acacAdCode'
+adClientAdCode
+    :: AdClientAdCode
+adClientAdCode =
+  AdClientAdCode'
+    {_acacAmpHead = Nothing, _acacAmpBody = Nothing, _acacAdCode = Nothing}
 
 
--- | Kind of resource this is, in this case adsense#reportingMetadataEntry.
-rmeKind :: Lens' ReportingMetadataEntry Text
-rmeKind = lens _rmeKind (\ s a -> s{_rmeKind = a})
+-- | Output only. The AdSense code snippet to add to the head of an AMP page.
+acacAmpHead :: Lens' AdClientAdCode (Maybe Text)
+acacAmpHead
+  = lens _acacAmpHead (\ s a -> s{_acacAmpHead = a})
 
--- | The names of the metrics which the dimension or metric this reporting
--- metadata entry describes requires to also be present in order for the
--- report to be valid. Omitting these will not cause an error or warning,
--- but may result in data which cannot be correctly interpreted.
-rmeRequiredMetrics :: Lens' ReportingMetadataEntry [Text]
-rmeRequiredMetrics
-  = lens _rmeRequiredMetrics
-      (\ s a -> s{_rmeRequiredMetrics = a})
-      . _Default
-      . _Coerce
+-- | Output only. The AdSense code snippet to add to the body of an AMP page.
+acacAmpBody :: Lens' AdClientAdCode (Maybe Text)
+acacAmpBody
+  = lens _acacAmpBody (\ s a -> s{_acacAmpBody = a})
 
--- | The names of the metrics the dimension or metric this reporting metadata
--- entry describes is compatible with.
-rmeCompatibleMetrics :: Lens' ReportingMetadataEntry [Text]
-rmeCompatibleMetrics
-  = lens _rmeCompatibleMetrics
-      (\ s a -> s{_rmeCompatibleMetrics = a})
-      . _Default
-      . _Coerce
+-- | Output only. The AdSense code snippet to add to the head of an HTML
+-- page.
+acacAdCode :: Lens' AdClientAdCode (Maybe Text)
+acacAdCode
+  = lens _acacAdCode (\ s a -> s{_acacAdCode = a})
 
--- | The names of the dimensions which the dimension or metric this reporting
--- metadata entry describes requires to also be present in order for the
--- report to be valid. Omitting these will not cause an error or warning,
--- but may result in data which cannot be correctly interpreted.
-rmeRequiredDimensions :: Lens' ReportingMetadataEntry [Text]
-rmeRequiredDimensions
-  = lens _rmeRequiredDimensions
-      (\ s a -> s{_rmeRequiredDimensions = a})
-      . _Default
-      . _Coerce
-
--- | Unique identifier of this reporting metadata entry, corresponding to the
--- name of the appropriate dimension or metric.
-rmeId :: Lens' ReportingMetadataEntry (Maybe Text)
-rmeId = lens _rmeId (\ s a -> s{_rmeId = a})
-
--- | For metrics this is a list of dimension IDs which the metric is
--- compatible with, for dimensions it is a list of compatibility groups the
--- dimension belongs to.
-rmeCompatibleDimensions :: Lens' ReportingMetadataEntry [Text]
-rmeCompatibleDimensions
-  = lens _rmeCompatibleDimensions
-      (\ s a -> s{_rmeCompatibleDimensions = a})
-      . _Default
-      . _Coerce
-
--- | The codes of the projects supported by the dimension or metric this
--- reporting metadata entry describes.
-rmeSupportedProducts :: Lens' ReportingMetadataEntry [Text]
-rmeSupportedProducts
-  = lens _rmeSupportedProducts
-      (\ s a -> s{_rmeSupportedProducts = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON ReportingMetadataEntry where
+instance FromJSON AdClientAdCode where
         parseJSON
-          = withObject "ReportingMetadataEntry"
+          = withObject "AdClientAdCode"
               (\ o ->
-                 ReportingMetadataEntry' <$>
-                   (o .:? "kind" .!= "adsense#reportingMetadataEntry")
-                     <*> (o .:? "requiredMetrics" .!= mempty)
-                     <*> (o .:? "compatibleMetrics" .!= mempty)
-                     <*> (o .:? "requiredDimensions" .!= mempty)
-                     <*> (o .:? "id")
-                     <*> (o .:? "compatibleDimensions" .!= mempty)
-                     <*> (o .:? "supportedProducts" .!= mempty))
+                 AdClientAdCode' <$>
+                   (o .:? "ampHead") <*> (o .:? "ampBody") <*>
+                     (o .:? "adCode"))
 
-instance ToJSON ReportingMetadataEntry where
-        toJSON ReportingMetadataEntry'{..}
+instance ToJSON AdClientAdCode where
+        toJSON AdClientAdCode'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _rmeKind),
-                  ("requiredMetrics" .=) <$> _rmeRequiredMetrics,
-                  ("compatibleMetrics" .=) <$> _rmeCompatibleMetrics,
-                  ("requiredDimensions" .=) <$> _rmeRequiredDimensions,
-                  ("id" .=) <$> _rmeId,
-                  ("compatibleDimensions" .=) <$>
-                    _rmeCompatibleDimensions,
-                  ("supportedProducts" .=) <$> _rmeSupportedProducts])
+                 [("ampHead" .=) <$> _acacAmpHead,
+                  ("ampBody" .=) <$> _acacAmpBody,
+                  ("adCode" .=) <$> _acacAdCode])
 
 --
--- /See:/ 'adsenseReportsGenerateResponseHeadersItem' smart constructor.
-data AdsenseReportsGenerateResponseHeadersItem =
-  AdsenseReportsGenerateResponseHeadersItem'
-    { _argrhiName     :: !(Maybe Text)
-    , _argrhiCurrency :: !(Maybe Text)
-    , _argrhiType     :: !(Maybe Text)
+-- /See:/ 'hTTPBodyExtensionsItem' smart constructor.
+newtype HTTPBodyExtensionsItem =
+  HTTPBodyExtensionsItem'
+    { _httpbeiAddtional :: HashMap Text JSONValue
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdsenseReportsGenerateResponseHeadersItem' with the minimum fields required to make a request.
+-- | Creates a value of 'HTTPBodyExtensionsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'argrhiName'
---
--- * 'argrhiCurrency'
---
--- * 'argrhiType'
-adsenseReportsGenerateResponseHeadersItem
-    :: AdsenseReportsGenerateResponseHeadersItem
-adsenseReportsGenerateResponseHeadersItem =
-  AdsenseReportsGenerateResponseHeadersItem'
-    {_argrhiName = Nothing, _argrhiCurrency = Nothing, _argrhiType = Nothing}
+-- * 'httpbeiAddtional'
+hTTPBodyExtensionsItem
+    :: HashMap Text JSONValue -- ^ 'httpbeiAddtional'
+    -> HTTPBodyExtensionsItem
+hTTPBodyExtensionsItem pHttpbeiAddtional_ =
+  HTTPBodyExtensionsItem' {_httpbeiAddtional = _Coerce # pHttpbeiAddtional_}
 
 
--- | The name of the header.
-argrhiName :: Lens' AdsenseReportsGenerateResponseHeadersItem (Maybe Text)
-argrhiName
-  = lens _argrhiName (\ s a -> s{_argrhiName = a})
+-- | Properties of the object. Contains field \'type with type URL.
+httpbeiAddtional :: Lens' HTTPBodyExtensionsItem (HashMap Text JSONValue)
+httpbeiAddtional
+  = lens _httpbeiAddtional
+      (\ s a -> s{_httpbeiAddtional = a})
+      . _Coerce
 
--- | The currency of this column. Only present if the header type is
--- METRIC_CURRENCY.
-argrhiCurrency :: Lens' AdsenseReportsGenerateResponseHeadersItem (Maybe Text)
-argrhiCurrency
-  = lens _argrhiCurrency
-      (\ s a -> s{_argrhiCurrency = a})
-
--- | The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or
--- METRIC_CURRENCY.
-argrhiType :: Lens' AdsenseReportsGenerateResponseHeadersItem (Maybe Text)
-argrhiType
-  = lens _argrhiType (\ s a -> s{_argrhiType = a})
-
-instance FromJSON
-           AdsenseReportsGenerateResponseHeadersItem
-         where
+instance FromJSON HTTPBodyExtensionsItem where
         parseJSON
-          = withObject
-              "AdsenseReportsGenerateResponseHeadersItem"
+          = withObject "HTTPBodyExtensionsItem"
               (\ o ->
-                 AdsenseReportsGenerateResponseHeadersItem' <$>
-                   (o .:? "name") <*> (o .:? "currency") <*>
-                     (o .:? "type"))
+                 HTTPBodyExtensionsItem' <$> (parseJSONObject o))
 
-instance ToJSON
-           AdsenseReportsGenerateResponseHeadersItem
-         where
-        toJSON AdsenseReportsGenerateResponseHeadersItem'{..}
+instance ToJSON HTTPBodyExtensionsItem where
+        toJSON = toJSON . _httpbeiAddtional
+
+-- | Response definition for the url channels list rpc.
+--
+-- /See:/ 'listURLChannelsResponse' smart constructor.
+data ListURLChannelsResponse =
+  ListURLChannelsResponse'
+    { _lucrNextPageToken :: !(Maybe Text)
+    , _lucrURLChannels :: !(Maybe [URLChannel])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListURLChannelsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lucrNextPageToken'
+--
+-- * 'lucrURLChannels'
+listURLChannelsResponse
+    :: ListURLChannelsResponse
+listURLChannelsResponse =
+  ListURLChannelsResponse'
+    {_lucrNextPageToken = Nothing, _lucrURLChannels = Nothing}
+
+
+-- | Continuation token used to page through url channels. To retrieve the
+-- next page of the results, set the next request\'s \"page_token\" value
+-- to this.
+lucrNextPageToken :: Lens' ListURLChannelsResponse (Maybe Text)
+lucrNextPageToken
+  = lens _lucrNextPageToken
+      (\ s a -> s{_lucrNextPageToken = a})
+
+-- | The url channels returned in this list response.
+lucrURLChannels :: Lens' ListURLChannelsResponse [URLChannel]
+lucrURLChannels
+  = lens _lucrURLChannels
+      (\ s a -> s{_lucrURLChannels = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListURLChannelsResponse where
+        parseJSON
+          = withObject "ListURLChannelsResponse"
+              (\ o ->
+                 ListURLChannelsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "urlChannels" .!= mempty))
+
+instance ToJSON ListURLChannelsResponse where
+        toJSON ListURLChannelsResponse'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _argrhiName,
-                  ("currency" .=) <$> _argrhiCurrency,
-                  ("type" .=) <$> _argrhiType])
+                 [("nextPageToken" .=) <$> _lucrNextPageToken,
+                  ("urlChannels" .=) <$> _lucrURLChannels])
 
+-- | Representation of an unpaid or paid payment. See [Payment timelines for
+-- AdSense](https:\/\/support.google.com\/adsense\/answer\/7164703) for
+-- more information about payments.
 --
 -- /See:/ 'payment' smart constructor.
 data Payment =
   Payment'
-    { _pPaymentAmountCurrencyCode :: !(Maybe Text)
-    , _pKind                      :: !Text
-    , _pPaymentDate               :: !(Maybe Text)
-    , _pId                        :: !(Maybe Text)
-    , _pPaymentAmount             :: !(Maybe Text)
+    { _pAmount :: !(Maybe Text)
+    , _pDate :: !(Maybe Date)
+    , _pName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -306,347 +230,222 @@ data Payment =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pPaymentAmountCurrencyCode'
+-- * 'pAmount'
 --
--- * 'pKind'
+-- * 'pDate'
 --
--- * 'pPaymentDate'
---
--- * 'pId'
---
--- * 'pPaymentAmount'
+-- * 'pName'
 payment
     :: Payment
-payment =
-  Payment'
-    { _pPaymentAmountCurrencyCode = Nothing
-    , _pKind = "adsense#payment"
-    , _pPaymentDate = Nothing
-    , _pId = Nothing
-    , _pPaymentAmount = Nothing
-    }
+payment = Payment' {_pAmount = Nothing, _pDate = Nothing, _pName = Nothing}
 
 
--- | The currency code for the amount to be paid.
-pPaymentAmountCurrencyCode :: Lens' Payment (Maybe Text)
-pPaymentAmountCurrencyCode
-  = lens _pPaymentAmountCurrencyCode
-      (\ s a -> s{_pPaymentAmountCurrencyCode = a})
+-- | Output only. The amount of unpaid or paid earnings, as a formatted
+-- string, including the currency. E.g. \"¥1,235 JPY\", \"$1,234.57\",
+-- \"£87.65\".
+pAmount :: Lens' Payment (Maybe Text)
+pAmount = lens _pAmount (\ s a -> s{_pAmount = a})
 
--- | Kind of resource this is, in this case adsense#payment.
-pKind :: Lens' Payment Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
+-- | Output only. For paid earnings, the date that the payment was credited.
+-- For unpaid earnings, this field is empty. Payment dates are always
+-- returned in the billing timezone (America\/Los_Angeles).
+pDate :: Lens' Payment (Maybe Date)
+pDate = lens _pDate (\ s a -> s{_pDate = a})
 
--- | The date this payment was\/will be credited to the user, or none if the
--- payment threshold has not been met.
-pPaymentDate :: Lens' Payment (Maybe Text)
-pPaymentDate
-  = lens _pPaymentDate (\ s a -> s{_pPaymentDate = a})
-
--- | Unique identifier of this Payment.
-pId :: Lens' Payment (Maybe Text)
-pId = lens _pId (\ s a -> s{_pId = a})
-
--- | The amount to be paid.
-pPaymentAmount :: Lens' Payment (Maybe Text)
-pPaymentAmount
-  = lens _pPaymentAmount
-      (\ s a -> s{_pPaymentAmount = a})
+-- | Resource name of the payment. Format:
+-- accounts\/{account}\/payments\/unpaid for unpaid (current) earnings.
+-- accounts\/{account}\/payments\/yyyy-MM-dd for paid earnings.
+pName :: Lens' Payment (Maybe Text)
+pName = lens _pName (\ s a -> s{_pName = a})
 
 instance FromJSON Payment where
         parseJSON
           = withObject "Payment"
               (\ o ->
                  Payment' <$>
-                   (o .:? "paymentAmountCurrencyCode") <*>
-                     (o .:? "kind" .!= "adsense#payment")
-                     <*> (o .:? "paymentDate")
-                     <*> (o .:? "id")
-                     <*> (o .:? "paymentAmount"))
+                   (o .:? "amount") <*> (o .:? "date") <*>
+                     (o .:? "name"))
 
 instance ToJSON Payment where
         toJSON Payment'{..}
           = object
               (catMaybes
-                 [("paymentAmountCurrencyCode" .=) <$>
-                    _pPaymentAmountCurrencyCode,
-                  Just ("kind" .= _pKind),
-                  ("paymentDate" .=) <$> _pPaymentDate,
-                  ("id" .=) <$> _pId,
-                  ("paymentAmount" .=) <$> _pPaymentAmount])
+                 [("amount" .=) <$> _pAmount, ("date" .=) <$> _pDate,
+                  ("name" .=) <$> _pName])
 
+-- | Response definition for the custom channel list rpc.
 --
--- /See:/ 'accounts' smart constructor.
-data Accounts =
-  Accounts'
-    { _aEtag          :: !(Maybe Text)
-    , _aNextPageToken :: !(Maybe Text)
-    , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Account])
+-- /See:/ 'listCustomChannelsResponse' smart constructor.
+data ListCustomChannelsResponse =
+  ListCustomChannelsResponse'
+    { _lccrNextPageToken :: !(Maybe Text)
+    , _lccrCustomChannels :: !(Maybe [CustomChannel])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'Accounts' with the minimum fields required to make a request.
+-- | Creates a value of 'ListCustomChannelsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aEtag'
+-- * 'lccrNextPageToken'
 --
--- * 'aNextPageToken'
---
--- * 'aKind'
---
--- * 'aItems'
-accounts
-    :: Accounts
-accounts =
-  Accounts'
-    { _aEtag = Nothing
-    , _aNextPageToken = Nothing
-    , _aKind = "adsense#accounts"
-    , _aItems = Nothing
-    }
+-- * 'lccrCustomChannels'
+listCustomChannelsResponse
+    :: ListCustomChannelsResponse
+listCustomChannelsResponse =
+  ListCustomChannelsResponse'
+    {_lccrNextPageToken = Nothing, _lccrCustomChannels = Nothing}
 
 
--- | ETag of this response for caching purposes.
-aEtag :: Lens' Accounts (Maybe Text)
-aEtag = lens _aEtag (\ s a -> s{_aEtag = a})
+-- | Continuation token used to page through alerts. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+lccrNextPageToken :: Lens' ListCustomChannelsResponse (Maybe Text)
+lccrNextPageToken
+  = lens _lccrNextPageToken
+      (\ s a -> s{_lccrNextPageToken = a})
 
--- | Continuation token used to page through accounts. To retrieve the next
--- page of results, set the next request\'s \"pageToken\" value to this.
-aNextPageToken :: Lens' Accounts (Maybe Text)
-aNextPageToken
-  = lens _aNextPageToken
-      (\ s a -> s{_aNextPageToken = a})
+-- | The custom channels returned in this list response.
+lccrCustomChannels :: Lens' ListCustomChannelsResponse [CustomChannel]
+lccrCustomChannels
+  = lens _lccrCustomChannels
+      (\ s a -> s{_lccrCustomChannels = a})
+      . _Default
+      . _Coerce
 
--- | Kind of list this is, in this case adsense#accounts.
-aKind :: Lens' Accounts Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
-
--- | The accounts returned in this list response.
-aItems :: Lens' Accounts [Account]
-aItems
-  = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
-      _Coerce
-
-instance FromJSON Accounts where
+instance FromJSON ListCustomChannelsResponse where
         parseJSON
-          = withObject "Accounts"
+          = withObject "ListCustomChannelsResponse"
               (\ o ->
-                 Accounts' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#accounts")
-                     <*> (o .:? "items" .!= mempty))
+                 ListCustomChannelsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "customChannels" .!= mempty))
 
-instance ToJSON Accounts where
-        toJSON Accounts'{..}
+instance ToJSON ListCustomChannelsResponse where
+        toJSON ListCustomChannelsResponse'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _aEtag,
-                  ("nextPageToken" .=) <$> _aNextPageToken,
-                  Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
+                 [("nextPageToken" .=) <$> _lccrNextPageToken,
+                  ("customChannels" .=) <$> _lccrCustomChannels])
 
+-- | Response definition for the ad units linked to a custom channel list
+-- rpc.
 --
--- /See:/ 'alerts' smart constructor.
-data Alerts =
-  Alerts'
-    { _aleKind  :: !Text
-    , _aleItems :: !(Maybe [Alert])
+-- /See:/ 'listLinkedAdUnitsResponse' smart constructor.
+data ListLinkedAdUnitsResponse =
+  ListLinkedAdUnitsResponse'
+    { _llaurNextPageToken :: !(Maybe Text)
+    , _llaurAdUnits :: !(Maybe [AdUnit])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'Alerts' with the minimum fields required to make a request.
+-- | Creates a value of 'ListLinkedAdUnitsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aleKind'
+-- * 'llaurNextPageToken'
 --
--- * 'aleItems'
-alerts
-    :: Alerts
-alerts = Alerts' {_aleKind = "adsense#alerts", _aleItems = Nothing}
+-- * 'llaurAdUnits'
+listLinkedAdUnitsResponse
+    :: ListLinkedAdUnitsResponse
+listLinkedAdUnitsResponse =
+  ListLinkedAdUnitsResponse'
+    {_llaurNextPageToken = Nothing, _llaurAdUnits = Nothing}
 
 
--- | Kind of list this is, in this case adsense#alerts.
-aleKind :: Lens' Alerts Text
-aleKind = lens _aleKind (\ s a -> s{_aleKind = a})
+-- | Continuation token used to page through ad units. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+llaurNextPageToken :: Lens' ListLinkedAdUnitsResponse (Maybe Text)
+llaurNextPageToken
+  = lens _llaurNextPageToken
+      (\ s a -> s{_llaurNextPageToken = a})
 
--- | The alerts returned in this list response.
-aleItems :: Lens' Alerts [Alert]
-aleItems
-  = lens _aleItems (\ s a -> s{_aleItems = a}) .
+-- | The ad units returned in the list response.
+llaurAdUnits :: Lens' ListLinkedAdUnitsResponse [AdUnit]
+llaurAdUnits
+  = lens _llaurAdUnits (\ s a -> s{_llaurAdUnits = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListLinkedAdUnitsResponse where
+        parseJSON
+          = withObject "ListLinkedAdUnitsResponse"
+              (\ o ->
+                 ListLinkedAdUnitsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "adUnits" .!= mempty))
+
+instance ToJSON ListLinkedAdUnitsResponse where
+        toJSON ListLinkedAdUnitsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llaurNextPageToken,
+                  ("adUnits" .=) <$> _llaurAdUnits])
+
+-- | Response definition for the account list rpc.
+--
+-- /See:/ 'listAccountsResponse' smart constructor.
+data ListAccountsResponse =
+  ListAccountsResponse'
+    { _larNextPageToken :: !(Maybe Text)
+    , _larAccounts :: !(Maybe [Account])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListAccountsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'larNextPageToken'
+--
+-- * 'larAccounts'
+listAccountsResponse
+    :: ListAccountsResponse
+listAccountsResponse =
+  ListAccountsResponse' {_larNextPageToken = Nothing, _larAccounts = Nothing}
+
+
+-- | Continuation token used to page through accounts. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+larNextPageToken :: Lens' ListAccountsResponse (Maybe Text)
+larNextPageToken
+  = lens _larNextPageToken
+      (\ s a -> s{_larNextPageToken = a})
+
+-- | The accounts returned in this list response.
+larAccounts :: Lens' ListAccountsResponse [Account]
+larAccounts
+  = lens _larAccounts (\ s a -> s{_larAccounts = a}) .
       _Default
       . _Coerce
 
-instance FromJSON Alerts where
+instance FromJSON ListAccountsResponse where
         parseJSON
-          = withObject "Alerts"
+          = withObject "ListAccountsResponse"
               (\ o ->
-                 Alerts' <$>
-                   (o .:? "kind" .!= "adsense#alerts") <*>
-                     (o .:? "items" .!= mempty))
+                 ListAccountsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "accounts" .!= mempty))
 
-instance ToJSON Alerts where
-        toJSON Alerts'{..}
+instance ToJSON ListAccountsResponse where
+        toJSON ListAccountsResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _aleKind),
-                  ("items" .=) <$> _aleItems])
+                 [("nextPageToken" .=) <$> _larNextPageToken,
+                  ("accounts" .=) <$> _larAccounts])
 
---
--- /See:/ 'savedReports' smart constructor.
-data SavedReports =
-  SavedReports'
-    { _srEtag          :: !(Maybe Text)
-    , _srNextPageToken :: !(Maybe Text)
-    , _srKind          :: !Text
-    , _srItems         :: !(Maybe [SavedReport])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'SavedReports' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'srEtag'
---
--- * 'srNextPageToken'
---
--- * 'srKind'
---
--- * 'srItems'
-savedReports
-    :: SavedReports
-savedReports =
-  SavedReports'
-    { _srEtag = Nothing
-    , _srNextPageToken = Nothing
-    , _srKind = "adsense#savedReports"
-    , _srItems = Nothing
-    }
-
-
--- | ETag of this response for caching purposes.
-srEtag :: Lens' SavedReports (Maybe Text)
-srEtag = lens _srEtag (\ s a -> s{_srEtag = a})
-
--- | Continuation token used to page through saved reports. To retrieve the
--- next page of results, set the next request\'s \"pageToken\" value to
--- this.
-srNextPageToken :: Lens' SavedReports (Maybe Text)
-srNextPageToken
-  = lens _srNextPageToken
-      (\ s a -> s{_srNextPageToken = a})
-
--- | Kind of list this is, in this case adsense#savedReports.
-srKind :: Lens' SavedReports Text
-srKind = lens _srKind (\ s a -> s{_srKind = a})
-
--- | The saved reports returned in this list response.
-srItems :: Lens' SavedReports [SavedReport]
-srItems
-  = lens _srItems (\ s a -> s{_srItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON SavedReports where
-        parseJSON
-          = withObject "SavedReports"
-              (\ o ->
-                 SavedReports' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#savedReports")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON SavedReports where
-        toJSON SavedReports'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _srEtag,
-                  ("nextPageToken" .=) <$> _srNextPageToken,
-                  Just ("kind" .= _srKind), ("items" .=) <$> _srItems])
-
---
--- /See:/ 'adUnits' smart constructor.
-data AdUnits =
-  AdUnits'
-    { _auEtag          :: !(Maybe Text)
-    , _auNextPageToken :: !(Maybe Text)
-    , _auKind          :: !Text
-    , _auItems         :: !(Maybe [AdUnit])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AdUnits' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'auEtag'
---
--- * 'auNextPageToken'
---
--- * 'auKind'
---
--- * 'auItems'
-adUnits
-    :: AdUnits
-adUnits =
-  AdUnits'
-    { _auEtag = Nothing
-    , _auNextPageToken = Nothing
-    , _auKind = "adsense#adUnits"
-    , _auItems = Nothing
-    }
-
-
--- | ETag of this response for caching purposes.
-auEtag :: Lens' AdUnits (Maybe Text)
-auEtag = lens _auEtag (\ s a -> s{_auEtag = a})
-
--- | Continuation token used to page through ad units. To retrieve the next
--- page of results, set the next request\'s \"pageToken\" value to this.
-auNextPageToken :: Lens' AdUnits (Maybe Text)
-auNextPageToken
-  = lens _auNextPageToken
-      (\ s a -> s{_auNextPageToken = a})
-
--- | Kind of list this is, in this case adsense#adUnits.
-auKind :: Lens' AdUnits Text
-auKind = lens _auKind (\ s a -> s{_auKind = a})
-
--- | The ad units returned in this list response.
-auItems :: Lens' AdUnits [AdUnit]
-auItems
-  = lens _auItems (\ s a -> s{_auItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON AdUnits where
-        parseJSON
-          = withObject "AdUnits"
-              (\ o ->
-                 AdUnits' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#adUnits")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON AdUnits where
-        toJSON AdUnits'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _auEtag,
-                  ("nextPageToken" .=) <$> _auNextPageToken,
-                  Just ("kind" .= _auKind), ("items" .=) <$> _auItems])
-
+-- | Representation of a saved report.
 --
 -- /See:/ 'savedReport' smart constructor.
 data SavedReport =
   SavedReport'
-    { _sKind :: !Text
-    , _sName :: !(Maybe Text)
-    , _sId   :: !(Maybe Text)
+    { _srName :: !(Maybe Text)
+    , _srTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -655,206 +454,47 @@ data SavedReport =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sKind'
+-- * 'srName'
 --
--- * 'sName'
---
--- * 'sId'
+-- * 'srTitle'
 savedReport
     :: SavedReport
-savedReport =
-  SavedReport'
-    {_sKind = "adsense#savedReport", _sName = Nothing, _sId = Nothing}
+savedReport = SavedReport' {_srName = Nothing, _srTitle = Nothing}
 
 
--- | Kind of resource this is, in this case adsense#savedReport.
-sKind :: Lens' SavedReport Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
+-- | Resource name of the report. Format:
+-- accounts\/{account}\/reports\/{report}
+srName :: Lens' SavedReport (Maybe Text)
+srName = lens _srName (\ s a -> s{_srName = a})
 
--- | This saved report\'s name.
-sName :: Lens' SavedReport (Maybe Text)
-sName = lens _sName (\ s a -> s{_sName = a})
-
--- | Unique identifier of this saved report.
-sId :: Lens' SavedReport (Maybe Text)
-sId = lens _sId (\ s a -> s{_sId = a})
+-- | Report title as specified by publisher.
+srTitle :: Lens' SavedReport (Maybe Text)
+srTitle = lens _srTitle (\ s a -> s{_srTitle = a})
 
 instance FromJSON SavedReport where
         parseJSON
           = withObject "SavedReport"
               (\ o ->
-                 SavedReport' <$>
-                   (o .:? "kind" .!= "adsense#savedReport") <*>
-                     (o .:? "name")
-                     <*> (o .:? "id"))
+                 SavedReport' <$> (o .:? "name") <*> (o .:? "title"))
 
 instance ToJSON SavedReport where
         toJSON SavedReport'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _sKind), ("name" .=) <$> _sName,
-                  ("id" .=) <$> _sId])
+                 [("name" .=) <$> _srName, ("title" .=) <$> _srTitle])
 
---
--- /See:/ 'urlChannels' smart constructor.
-data URLChannels =
-  URLChannels'
-    { _ucEtag          :: !(Maybe Text)
-    , _ucNextPageToken :: !(Maybe Text)
-    , _ucKind          :: !Text
-    , _ucItems         :: !(Maybe [URLChannel])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ucEtag'
---
--- * 'ucNextPageToken'
---
--- * 'ucKind'
---
--- * 'ucItems'
-urlChannels
-    :: URLChannels
-urlChannels =
-  URLChannels'
-    { _ucEtag = Nothing
-    , _ucNextPageToken = Nothing
-    , _ucKind = "adsense#urlChannels"
-    , _ucItems = Nothing
-    }
-
-
--- | ETag of this response for caching purposes.
-ucEtag :: Lens' URLChannels (Maybe Text)
-ucEtag = lens _ucEtag (\ s a -> s{_ucEtag = a})
-
--- | Continuation token used to page through URL channels. To retrieve the
--- next page of results, set the next request\'s \"pageToken\" value to
--- this.
-ucNextPageToken :: Lens' URLChannels (Maybe Text)
-ucNextPageToken
-  = lens _ucNextPageToken
-      (\ s a -> s{_ucNextPageToken = a})
-
--- | Kind of list this is, in this case adsense#urlChannels.
-ucKind :: Lens' URLChannels Text
-ucKind = lens _ucKind (\ s a -> s{_ucKind = a})
-
--- | The URL channels returned in this list response.
-ucItems :: Lens' URLChannels [URLChannel]
-ucItems
-  = lens _ucItems (\ s a -> s{_ucItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON URLChannels where
-        parseJSON
-          = withObject "URLChannels"
-              (\ o ->
-                 URLChannels' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#urlChannels")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON URLChannels where
-        toJSON URLChannels'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _ucEtag,
-                  ("nextPageToken" .=) <$> _ucNextPageToken,
-                  Just ("kind" .= _ucKind), ("items" .=) <$> _ucItems])
-
---
--- /See:/ 'customChannels' smart constructor.
-data CustomChannels =
-  CustomChannels'
-    { _ccEtag          :: !(Maybe Text)
-    , _ccNextPageToken :: !(Maybe Text)
-    , _ccKind          :: !Text
-    , _ccItems         :: !(Maybe [CustomChannel])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ccEtag'
---
--- * 'ccNextPageToken'
---
--- * 'ccKind'
---
--- * 'ccItems'
-customChannels
-    :: CustomChannels
-customChannels =
-  CustomChannels'
-    { _ccEtag = Nothing
-    , _ccNextPageToken = Nothing
-    , _ccKind = "adsense#customChannels"
-    , _ccItems = Nothing
-    }
-
-
--- | ETag of this response for caching purposes.
-ccEtag :: Lens' CustomChannels (Maybe Text)
-ccEtag = lens _ccEtag (\ s a -> s{_ccEtag = a})
-
--- | Continuation token used to page through custom channels. To retrieve the
--- next page of results, set the next request\'s \"pageToken\" value to
--- this.
-ccNextPageToken :: Lens' CustomChannels (Maybe Text)
-ccNextPageToken
-  = lens _ccNextPageToken
-      (\ s a -> s{_ccNextPageToken = a})
-
--- | Kind of list this is, in this case adsense#customChannels.
-ccKind :: Lens' CustomChannels Text
-ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
-
--- | The custom channels returned in this list response.
-ccItems :: Lens' CustomChannels [CustomChannel]
-ccItems
-  = lens _ccItems (\ s a -> s{_ccItems = a}) . _Default
-      . _Coerce
-
-instance FromJSON CustomChannels where
-        parseJSON
-          = withObject "CustomChannels"
-              (\ o ->
-                 CustomChannels' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#customChannels")
-                     <*> (o .:? "items" .!= mempty))
-
-instance ToJSON CustomChannels where
-        toJSON CustomChannels'{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _ccEtag,
-                  ("nextPageToken" .=) <$> _ccNextPageToken,
-                  Just ("kind" .= _ccKind), ("items" .=) <$> _ccItems])
-
+-- | Representation of an ad unit. An ad unit represents a saved ad unit with
+-- a specific set of ad settings that have been customized within an
+-- account.
 --
 -- /See:/ 'adUnit' smart constructor.
 data AdUnit =
   AdUnit'
-    { _auuStatus                   :: !(Maybe Text)
-    , _auuMobileContentAdsSettings :: !(Maybe AdUnitMobileContentAdsSettings)
-    , _auuKind                     :: !Text
-    , _auuFeedAdsSettings          :: !(Maybe AdUnitFeedAdsSettings)
-    , _auuCustomStyle              :: !(Maybe AdStyle)
-    , _auuSavedStyleId             :: !(Maybe Text)
-    , _auuName                     :: !(Maybe Text)
-    , _auuContentAdsSettings       :: !(Maybe AdUnitContentAdsSettings)
-    , _auuCode                     :: !(Maybe Text)
-    , _auuId                       :: !(Maybe Text)
+    { _auState :: !(Maybe AdUnitState)
+    , _auReportingDimensionId :: !(Maybe Text)
+    , _auName :: !(Maybe Text)
+    , _auContentAdsSettings :: !(Maybe ContentAdsSettings)
+    , _auDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -863,140 +503,119 @@ data AdUnit =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auuStatus'
+-- * 'auState'
 --
--- * 'auuMobileContentAdsSettings'
+-- * 'auReportingDimensionId'
 --
--- * 'auuKind'
+-- * 'auName'
 --
--- * 'auuFeedAdsSettings'
+-- * 'auContentAdsSettings'
 --
--- * 'auuCustomStyle'
---
--- * 'auuSavedStyleId'
---
--- * 'auuName'
---
--- * 'auuContentAdsSettings'
---
--- * 'auuCode'
---
--- * 'auuId'
+-- * 'auDisplayName'
 adUnit
     :: AdUnit
 adUnit =
   AdUnit'
-    { _auuStatus = Nothing
-    , _auuMobileContentAdsSettings = Nothing
-    , _auuKind = "adsense#adUnit"
-    , _auuFeedAdsSettings = Nothing
-    , _auuCustomStyle = Nothing
-    , _auuSavedStyleId = Nothing
-    , _auuName = Nothing
-    , _auuContentAdsSettings = Nothing
-    , _auuCode = Nothing
-    , _auuId = Nothing
+    { _auState = Nothing
+    , _auReportingDimensionId = Nothing
+    , _auName = Nothing
+    , _auContentAdsSettings = Nothing
+    , _auDisplayName = Nothing
     }
 
 
--- | Status of this ad unit. Possible values are: NEW: Indicates that the ad
--- unit was created within the last seven days and does not yet have any
--- activity associated with it. ACTIVE: Indicates that there has been
--- activity on this ad unit in the last seven days. INACTIVE: Indicates
--- that there has been no activity on this ad unit in the last seven days.
-auuStatus :: Lens' AdUnit (Maybe Text)
-auuStatus
-  = lens _auuStatus (\ s a -> s{_auuStatus = a})
+-- | State of the ad unit.
+auState :: Lens' AdUnit (Maybe AdUnitState)
+auState = lens _auState (\ s a -> s{_auState = a})
 
--- | Settings specific to WAP mobile content ads (AFMC) - deprecated.
-auuMobileContentAdsSettings :: Lens' AdUnit (Maybe AdUnitMobileContentAdsSettings)
-auuMobileContentAdsSettings
-  = lens _auuMobileContentAdsSettings
-      (\ s a -> s{_auuMobileContentAdsSettings = a})
+-- | Output only. Unique ID of the ad unit as used in the \`AD_UNIT_ID\`
+-- reporting dimension.
+auReportingDimensionId :: Lens' AdUnit (Maybe Text)
+auReportingDimensionId
+  = lens _auReportingDimensionId
+      (\ s a -> s{_auReportingDimensionId = a})
 
--- | Kind of resource this is, in this case adsense#adUnit.
-auuKind :: Lens' AdUnit Text
-auuKind = lens _auuKind (\ s a -> s{_auuKind = a})
+-- | Resource name of the ad unit. Format:
+-- accounts\/{account}\/adclient\/{adclient}\/adunits\/{adunit}
+auName :: Lens' AdUnit (Maybe Text)
+auName = lens _auName (\ s a -> s{_auName = a})
 
--- | Settings specific to feed ads (AFF) - deprecated.
-auuFeedAdsSettings :: Lens' AdUnit (Maybe AdUnitFeedAdsSettings)
-auuFeedAdsSettings
-  = lens _auuFeedAdsSettings
-      (\ s a -> s{_auuFeedAdsSettings = a})
+-- | Settings specific to content ads (AFC).
+auContentAdsSettings :: Lens' AdUnit (Maybe ContentAdsSettings)
+auContentAdsSettings
+  = lens _auContentAdsSettings
+      (\ s a -> s{_auContentAdsSettings = a})
 
--- | Custom style information specific to this ad unit.
-auuCustomStyle :: Lens' AdUnit (Maybe AdStyle)
-auuCustomStyle
-  = lens _auuCustomStyle
-      (\ s a -> s{_auuCustomStyle = a})
-
--- | ID of the saved ad style which holds this ad unit\'s style information.
-auuSavedStyleId :: Lens' AdUnit (Maybe Text)
-auuSavedStyleId
-  = lens _auuSavedStyleId
-      (\ s a -> s{_auuSavedStyleId = a})
-
--- | Name of this ad unit.
-auuName :: Lens' AdUnit (Maybe Text)
-auuName = lens _auuName (\ s a -> s{_auuName = a})
-
--- | Settings specific to content ads (AFC) and highend mobile content ads
--- (AFMC - deprecated).
-auuContentAdsSettings :: Lens' AdUnit (Maybe AdUnitContentAdsSettings)
-auuContentAdsSettings
-  = lens _auuContentAdsSettings
-      (\ s a -> s{_auuContentAdsSettings = a})
-
--- | Identity code of this ad unit, not necessarily unique across ad clients.
-auuCode :: Lens' AdUnit (Maybe Text)
-auuCode = lens _auuCode (\ s a -> s{_auuCode = a})
-
--- | Unique identifier of this ad unit. This should be considered an opaque
--- identifier; it is not safe to rely on it being in any particular format.
-auuId :: Lens' AdUnit (Maybe Text)
-auuId = lens _auuId (\ s a -> s{_auuId = a})
+-- | Display name of the ad unit, as provided when the ad unit was created.
+auDisplayName :: Lens' AdUnit (Maybe Text)
+auDisplayName
+  = lens _auDisplayName
+      (\ s a -> s{_auDisplayName = a})
 
 instance FromJSON AdUnit where
         parseJSON
           = withObject "AdUnit"
               (\ o ->
                  AdUnit' <$>
-                   (o .:? "status") <*>
-                     (o .:? "mobileContentAdsSettings")
-                     <*> (o .:? "kind" .!= "adsense#adUnit")
-                     <*> (o .:? "feedAdsSettings")
-                     <*> (o .:? "customStyle")
-                     <*> (o .:? "savedStyleId")
+                   (o .:? "state") <*> (o .:? "reportingDimensionId")
                      <*> (o .:? "name")
                      <*> (o .:? "contentAdsSettings")
-                     <*> (o .:? "code")
-                     <*> (o .:? "id"))
+                     <*> (o .:? "displayName"))
 
 instance ToJSON AdUnit where
         toJSON AdUnit'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _auuStatus,
-                  ("mobileContentAdsSettings" .=) <$>
-                    _auuMobileContentAdsSettings,
-                  Just ("kind" .= _auuKind),
-                  ("feedAdsSettings" .=) <$> _auuFeedAdsSettings,
-                  ("customStyle" .=) <$> _auuCustomStyle,
-                  ("savedStyleId" .=) <$> _auuSavedStyleId,
-                  ("name" .=) <$> _auuName,
-                  ("contentAdsSettings" .=) <$> _auuContentAdsSettings,
-                  ("code" .=) <$> _auuCode, ("id" .=) <$> _auuId])
+                 [("state" .=) <$> _auState,
+                  ("reportingDimensionId" .=) <$>
+                    _auReportingDimensionId,
+                  ("name" .=) <$> _auName,
+                  ("contentAdsSettings" .=) <$> _auContentAdsSettings,
+                  ("displayName" .=) <$> _auDisplayName])
 
+-- | Cell representation.
+--
+-- /See:/ 'cell' smart constructor.
+newtype Cell =
+  Cell'
+    { _cValue :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Cell' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cValue'
+cell
+    :: Cell
+cell = Cell' {_cValue = Nothing}
+
+
+-- | Value in the cell. The dimension cells contain strings, and the metric
+-- cells contain numbers.
+cValue :: Lens' Cell (Maybe Text)
+cValue = lens _cValue (\ s a -> s{_cValue = a})
+
+instance FromJSON Cell where
+        parseJSON
+          = withObject "Cell"
+              (\ o -> Cell' <$> (o .:? "value"))
+
+instance ToJSON Cell where
+        toJSON Cell'{..}
+          = object (catMaybes [("value" .=) <$> _cValue])
+
+-- | Representation of an alert.
 --
 -- /See:/ 'alert' smart constructor.
 data Alert =
   Alert'
-    { _aaIsDismissible :: !(Maybe Bool)
-    , _aaKind          :: !Text
-    , _aaSeverity      :: !(Maybe Text)
-    , _aaId            :: !(Maybe Text)
-    , _aaType          :: !(Maybe Text)
-    , _aaMessage       :: !(Maybe Text)
+    { _aSeverity :: !(Maybe AlertSeverity)
+    , _aName :: !(Maybe Text)
+    , _aType :: !(Maybe Text)
+    , _aMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1005,139 +624,183 @@ data Alert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaIsDismissible'
+-- * 'aSeverity'
 --
--- * 'aaKind'
+-- * 'aName'
 --
--- * 'aaSeverity'
+-- * 'aType'
 --
--- * 'aaId'
---
--- * 'aaType'
---
--- * 'aaMessage'
+-- * 'aMessage'
 alert
     :: Alert
 alert =
   Alert'
-    { _aaIsDismissible = Nothing
-    , _aaKind = "adsense#alert"
-    , _aaSeverity = Nothing
-    , _aaId = Nothing
-    , _aaType = Nothing
-    , _aaMessage = Nothing
+    { _aSeverity = Nothing
+    , _aName = Nothing
+    , _aType = Nothing
+    , _aMessage = Nothing
     }
 
 
--- | Whether this alert can be dismissed.
-aaIsDismissible :: Lens' Alert (Maybe Bool)
-aaIsDismissible
-  = lens _aaIsDismissible
-      (\ s a -> s{_aaIsDismissible = a})
+-- | Output only. Severity of this alert.
+aSeverity :: Lens' Alert (Maybe AlertSeverity)
+aSeverity
+  = lens _aSeverity (\ s a -> s{_aSeverity = a})
 
--- | Kind of resource this is, in this case adsense#alert.
-aaKind :: Lens' Alert Text
-aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
+-- | Resource name of the alert. Format: accounts\/{account}\/alerts\/{alert}
+aName :: Lens' Alert (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
 
--- | Severity of this alert. Possible values: INFO, WARNING, SEVERE.
-aaSeverity :: Lens' Alert (Maybe Text)
-aaSeverity
-  = lens _aaSeverity (\ s a -> s{_aaSeverity = a})
+-- | Output only. Type of alert. This identifies the broad type of this
+-- alert, and provides a stable machine-readable identifier that will not
+-- be translated. For example, \"payment-hold\".
+aType :: Lens' Alert (Maybe Text)
+aType = lens _aType (\ s a -> s{_aType = a})
 
--- | Unique identifier of this alert. This should be considered an opaque
--- identifier; it is not safe to rely on it being in any particular format.
-aaId :: Lens' Alert (Maybe Text)
-aaId = lens _aaId (\ s a -> s{_aaId = a})
-
--- | Type of this alert. Possible values: SELF_HOLD, MIGRATED_TO_BILLING3,
--- ADDRESS_PIN_VERIFICATION, PHONE_PIN_VERIFICATION, CORPORATE_ENTITY,
--- GRAYLISTED_PUBLISHER, API_HOLD.
-aaType :: Lens' Alert (Maybe Text)
-aaType = lens _aaType (\ s a -> s{_aaType = a})
-
--- | The localized alert message.
-aaMessage :: Lens' Alert (Maybe Text)
-aaMessage
-  = lens _aaMessage (\ s a -> s{_aaMessage = a})
+-- | Output only. The localized alert message. This may contain HTML markup,
+-- such as phrase elements or links.
+aMessage :: Lens' Alert (Maybe Text)
+aMessage = lens _aMessage (\ s a -> s{_aMessage = a})
 
 instance FromJSON Alert where
         parseJSON
           = withObject "Alert"
               (\ o ->
                  Alert' <$>
-                   (o .:? "isDismissible") <*>
-                     (o .:? "kind" .!= "adsense#alert")
-                     <*> (o .:? "severity")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type")
+                   (o .:? "severity") <*> (o .:? "name") <*>
+                     (o .:? "type")
                      <*> (o .:? "message"))
 
 instance ToJSON Alert where
         toJSON Alert'{..}
           = object
               (catMaybes
-                 [("isDismissible" .=) <$> _aaIsDismissible,
-                  Just ("kind" .= _aaKind),
-                  ("severity" .=) <$> _aaSeverity, ("id" .=) <$> _aaId,
-                  ("type" .=) <$> _aaType,
-                  ("message" .=) <$> _aaMessage])
+                 [("severity" .=) <$> _aSeverity,
+                  ("name" .=) <$> _aName, ("type" .=) <$> _aType,
+                  ("message" .=) <$> _aMessage])
 
--- | The font which is included in the style.
+-- | Response definition for the saved reports list rpc.
 --
--- /See:/ 'adStyleFont' smart constructor.
-data AdStyleFont =
-  AdStyleFont'
-    { _asfSize   :: !(Maybe Text)
-    , _asfFamily :: !(Maybe Text)
+-- /See:/ 'listSavedReportsResponse' smart constructor.
+data ListSavedReportsResponse =
+  ListSavedReportsResponse'
+    { _lsrrNextPageToken :: !(Maybe Text)
+    , _lsrrSavedReports :: !(Maybe [SavedReport])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdStyleFont' with the minimum fields required to make a request.
+-- | Creates a value of 'ListSavedReportsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asfSize'
+-- * 'lsrrNextPageToken'
 --
--- * 'asfFamily'
-adStyleFont
-    :: AdStyleFont
-adStyleFont = AdStyleFont' {_asfSize = Nothing, _asfFamily = Nothing}
+-- * 'lsrrSavedReports'
+listSavedReportsResponse
+    :: ListSavedReportsResponse
+listSavedReportsResponse =
+  ListSavedReportsResponse'
+    {_lsrrNextPageToken = Nothing, _lsrrSavedReports = Nothing}
 
 
--- | The size of the font.
-asfSize :: Lens' AdStyleFont (Maybe Text)
-asfSize = lens _asfSize (\ s a -> s{_asfSize = a})
+-- | Continuation token used to page through reports. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+lsrrNextPageToken :: Lens' ListSavedReportsResponse (Maybe Text)
+lsrrNextPageToken
+  = lens _lsrrNextPageToken
+      (\ s a -> s{_lsrrNextPageToken = a})
 
--- | The family of the font.
-asfFamily :: Lens' AdStyleFont (Maybe Text)
-asfFamily
-  = lens _asfFamily (\ s a -> s{_asfFamily = a})
+-- | The reports returned in this list response.
+lsrrSavedReports :: Lens' ListSavedReportsResponse [SavedReport]
+lsrrSavedReports
+  = lens _lsrrSavedReports
+      (\ s a -> s{_lsrrSavedReports = a})
+      . _Default
+      . _Coerce
 
-instance FromJSON AdStyleFont where
+instance FromJSON ListSavedReportsResponse where
         parseJSON
-          = withObject "AdStyleFont"
+          = withObject "ListSavedReportsResponse"
               (\ o ->
-                 AdStyleFont' <$> (o .:? "size") <*> (o .:? "family"))
+                 ListSavedReportsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "savedReports" .!= mempty))
 
-instance ToJSON AdStyleFont where
-        toJSON AdStyleFont'{..}
+instance ToJSON ListSavedReportsResponse where
+        toJSON ListSavedReportsResponse'{..}
           = object
               (catMaybes
-                 [("size" .=) <$> _asfSize,
-                  ("family" .=) <$> _asfFamily])
+                 [("nextPageToken" .=) <$> _lsrrNextPageToken,
+                  ("savedReports" .=) <$> _lsrrSavedReports])
 
+-- | Response definition for the child account list rpc.
+--
+-- /See:/ 'listChildAccountsResponse' smart constructor.
+data ListChildAccountsResponse =
+  ListChildAccountsResponse'
+    { _lcarNextPageToken :: !(Maybe Text)
+    , _lcarAccounts :: !(Maybe [Account])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListChildAccountsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcarNextPageToken'
+--
+-- * 'lcarAccounts'
+listChildAccountsResponse
+    :: ListChildAccountsResponse
+listChildAccountsResponse =
+  ListChildAccountsResponse'
+    {_lcarNextPageToken = Nothing, _lcarAccounts = Nothing}
+
+
+-- | Continuation token used to page through accounts. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+lcarNextPageToken :: Lens' ListChildAccountsResponse (Maybe Text)
+lcarNextPageToken
+  = lens _lcarNextPageToken
+      (\ s a -> s{_lcarNextPageToken = a})
+
+-- | The accounts returned in this list response.
+lcarAccounts :: Lens' ListChildAccountsResponse [Account]
+lcarAccounts
+  = lens _lcarAccounts (\ s a -> s{_lcarAccounts = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListChildAccountsResponse where
+        parseJSON
+          = withObject "ListChildAccountsResponse"
+              (\ o ->
+                 ListChildAccountsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "accounts" .!= mempty))
+
+instance ToJSON ListChildAccountsResponse where
+        toJSON ListChildAccountsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcarNextPageToken,
+                  ("accounts" .=) <$> _lcarAccounts])
+
+-- | Representation of an account.
 --
 -- /See:/ 'account' smart constructor.
 data Account =
   Account'
-    { _accKind         :: !Text
-    , _accCreationTime :: !(Maybe (Textual Int64))
-    , _accPremium      :: !(Maybe Bool)
-    , _accName         :: !(Maybe Text)
-    , _accId           :: !(Maybe Text)
-    , _accTimezone     :: !(Maybe Text)
-    , _accSubAccounts  :: !(Maybe [Account])
+    { _accPremium :: !(Maybe Bool)
+    , _accPendingTasks :: !(Maybe [Text])
+    , _accName :: !(Maybe Text)
+    , _accDisplayName :: !(Maybe Text)
+    , _accTimeZone :: !(Maybe TimeZone)
+    , _accCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1146,396 +809,225 @@ data Account =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accKind'
---
--- * 'accCreationTime'
---
 -- * 'accPremium'
+--
+-- * 'accPendingTasks'
 --
 -- * 'accName'
 --
--- * 'accId'
+-- * 'accDisplayName'
 --
--- * 'accTimezone'
+-- * 'accTimeZone'
 --
--- * 'accSubAccounts'
+-- * 'accCreateTime'
 account
     :: Account
 account =
   Account'
-    { _accKind = "adsense#account"
-    , _accCreationTime = Nothing
-    , _accPremium = Nothing
+    { _accPremium = Nothing
+    , _accPendingTasks = Nothing
     , _accName = Nothing
-    , _accId = Nothing
-    , _accTimezone = Nothing
-    , _accSubAccounts = Nothing
+    , _accDisplayName = Nothing
+    , _accTimeZone = Nothing
+    , _accCreateTime = Nothing
     }
 
 
--- | Kind of resource this is, in this case adsense#account.
-accKind :: Lens' Account Text
-accKind = lens _accKind (\ s a -> s{_accKind = a})
-
-accCreationTime :: Lens' Account (Maybe Int64)
-accCreationTime
-  = lens _accCreationTime
-      (\ s a -> s{_accCreationTime = a})
-      . mapping _Coerce
-
--- | Whether this account is premium.
+-- | Output only. Whether this account is premium.
 accPremium :: Lens' Account (Maybe Bool)
 accPremium
   = lens _accPremium (\ s a -> s{_accPremium = a})
 
--- | Name of this account.
+-- | Output only. Outstanding tasks that need to be completed as part of the
+-- sign-up process for a new account. e.g. \"billing-profile-creation\",
+-- \"phone-pin-verification\".
+accPendingTasks :: Lens' Account [Text]
+accPendingTasks
+  = lens _accPendingTasks
+      (\ s a -> s{_accPendingTasks = a})
+      . _Default
+      . _Coerce
+
+-- | Resource name of the account. Format: accounts\/pub-[0-9]+
 accName :: Lens' Account (Maybe Text)
 accName = lens _accName (\ s a -> s{_accName = a})
 
--- | Unique identifier of this account.
-accId :: Lens' Account (Maybe Text)
-accId = lens _accId (\ s a -> s{_accId = a})
+-- | Output only. Display name of this account.
+accDisplayName :: Lens' Account (Maybe Text)
+accDisplayName
+  = lens _accDisplayName
+      (\ s a -> s{_accDisplayName = a})
 
--- | AdSense timezone of this account.
-accTimezone :: Lens' Account (Maybe Text)
-accTimezone
-  = lens _accTimezone (\ s a -> s{_accTimezone = a})
+-- | The account time zone, as used by reporting. For more information, see
+-- [changing the time zone of your
+-- reports](https:\/\/support.google.com\/adsense\/answer\/9830725).
+accTimeZone :: Lens' Account (Maybe TimeZone)
+accTimeZone
+  = lens _accTimeZone (\ s a -> s{_accTimeZone = a})
 
--- | Sub accounts of the this account.
-accSubAccounts :: Lens' Account [Account]
-accSubAccounts
-  = lens _accSubAccounts
-      (\ s a -> s{_accSubAccounts = a})
-      . _Default
-      . _Coerce
+-- | Output only. Creation time of the account.
+accCreateTime :: Lens' Account (Maybe UTCTime)
+accCreateTime
+  = lens _accCreateTime
+      (\ s a -> s{_accCreateTime = a})
+      . mapping _DateTime
 
 instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
                  Account' <$>
-                   (o .:? "kind" .!= "adsense#account") <*>
-                     (o .:? "creation_time")
-                     <*> (o .:? "premium")
+                   (o .:? "premium") <*>
+                     (o .:? "pendingTasks" .!= mempty)
                      <*> (o .:? "name")
-                     <*> (o .:? "id")
-                     <*> (o .:? "timezone")
-                     <*> (o .:? "subAccounts" .!= mempty))
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "timeZone")
+                     <*> (o .:? "createTime"))
 
 instance ToJSON Account where
         toJSON Account'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _accKind),
-                  ("creation_time" .=) <$> _accCreationTime,
-                  ("premium" .=) <$> _accPremium,
-                  ("name" .=) <$> _accName, ("id" .=) <$> _accId,
-                  ("timezone" .=) <$> _accTimezone,
-                  ("subAccounts" .=) <$> _accSubAccounts])
+                 [("premium" .=) <$> _accPremium,
+                  ("pendingTasks" .=) <$> _accPendingTasks,
+                  ("name" .=) <$> _accName,
+                  ("displayName" .=) <$> _accDisplayName,
+                  ("timeZone" .=) <$> _accTimeZone,
+                  ("createTime" .=) <$> _accCreateTime])
 
--- | Settings specific to WAP mobile content ads (AFMC) - deprecated.
+-- | Response definition for the adunit list rpc.
 --
--- /See:/ 'adUnitMobileContentAdsSettings' smart constructor.
-data AdUnitMobileContentAdsSettings =
-  AdUnitMobileContentAdsSettings'
-    { _aumcasSize              :: !(Maybe Text)
-    , _aumcasScriptingLanguage :: !(Maybe Text)
-    , _aumcasMarkupLanguage    :: !(Maybe Text)
-    , _aumcasType              :: !(Maybe Text)
+-- /See:/ 'listAdUnitsResponse' smart constructor.
+data ListAdUnitsResponse =
+  ListAdUnitsResponse'
+    { _laurNextPageToken :: !(Maybe Text)
+    , _laurAdUnits :: !(Maybe [AdUnit])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdUnitMobileContentAdsSettings' with the minimum fields required to make a request.
+-- | Creates a value of 'ListAdUnitsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aumcasSize'
+-- * 'laurNextPageToken'
 --
--- * 'aumcasScriptingLanguage'
---
--- * 'aumcasMarkupLanguage'
---
--- * 'aumcasType'
-adUnitMobileContentAdsSettings
-    :: AdUnitMobileContentAdsSettings
-adUnitMobileContentAdsSettings =
-  AdUnitMobileContentAdsSettings'
-    { _aumcasSize = Nothing
-    , _aumcasScriptingLanguage = Nothing
-    , _aumcasMarkupLanguage = Nothing
-    , _aumcasType = Nothing
-    }
+-- * 'laurAdUnits'
+listAdUnitsResponse
+    :: ListAdUnitsResponse
+listAdUnitsResponse =
+  ListAdUnitsResponse' {_laurNextPageToken = Nothing, _laurAdUnits = Nothing}
 
-
--- | Size of this ad unit.
-aumcasSize :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
-aumcasSize
-  = lens _aumcasSize (\ s a -> s{_aumcasSize = a})
-
--- | The scripting language to use for this ad unit.
-aumcasScriptingLanguage :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
-aumcasScriptingLanguage
-  = lens _aumcasScriptingLanguage
-      (\ s a -> s{_aumcasScriptingLanguage = a})
-
--- | The markup language to use for this ad unit.
-aumcasMarkupLanguage :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
-aumcasMarkupLanguage
-  = lens _aumcasMarkupLanguage
-      (\ s a -> s{_aumcasMarkupLanguage = a})
-
--- | Type of this ad unit.
-aumcasType :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
-aumcasType
-  = lens _aumcasType (\ s a -> s{_aumcasType = a})
-
-instance FromJSON AdUnitMobileContentAdsSettings
-         where
-        parseJSON
-          = withObject "AdUnitMobileContentAdsSettings"
-              (\ o ->
-                 AdUnitMobileContentAdsSettings' <$>
-                   (o .:? "size") <*> (o .:? "scriptingLanguage") <*>
-                     (o .:? "markupLanguage")
-                     <*> (o .:? "type"))
-
-instance ToJSON AdUnitMobileContentAdsSettings where
-        toJSON AdUnitMobileContentAdsSettings'{..}
-          = object
-              (catMaybes
-                 [("size" .=) <$> _aumcasSize,
-                  ("scriptingLanguage" .=) <$>
-                    _aumcasScriptingLanguage,
-                  ("markupLanguage" .=) <$> _aumcasMarkupLanguage,
-                  ("type" .=) <$> _aumcasType])
-
---
--- /See:/ 'savedAdStyles' smart constructor.
-data SavedAdStyles =
-  SavedAdStyles'
-    { _sasEtag          :: !(Maybe Text)
-    , _sasNextPageToken :: !(Maybe Text)
-    , _sasKind          :: !Text
-    , _sasItems         :: !(Maybe [SavedAdStyle])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'SavedAdStyles' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sasEtag'
---
--- * 'sasNextPageToken'
---
--- * 'sasKind'
---
--- * 'sasItems'
-savedAdStyles
-    :: SavedAdStyles
-savedAdStyles =
-  SavedAdStyles'
-    { _sasEtag = Nothing
-    , _sasNextPageToken = Nothing
-    , _sasKind = "adsense#savedAdStyles"
-    , _sasItems = Nothing
-    }
-
-
--- | ETag of this response for caching purposes.
-sasEtag :: Lens' SavedAdStyles (Maybe Text)
-sasEtag = lens _sasEtag (\ s a -> s{_sasEtag = a})
 
 -- | Continuation token used to page through ad units. To retrieve the next
--- page of results, set the next request\'s \"pageToken\" value to this.
-sasNextPageToken :: Lens' SavedAdStyles (Maybe Text)
-sasNextPageToken
-  = lens _sasNextPageToken
-      (\ s a -> s{_sasNextPageToken = a})
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+laurNextPageToken :: Lens' ListAdUnitsResponse (Maybe Text)
+laurNextPageToken
+  = lens _laurNextPageToken
+      (\ s a -> s{_laurNextPageToken = a})
 
--- | Kind of list this is, in this case adsense#savedAdStyles.
-sasKind :: Lens' SavedAdStyles Text
-sasKind = lens _sasKind (\ s a -> s{_sasKind = a})
-
--- | The saved ad styles returned in this list response.
-sasItems :: Lens' SavedAdStyles [SavedAdStyle]
-sasItems
-  = lens _sasItems (\ s a -> s{_sasItems = a}) .
+-- | The ad units returned in the list response.
+laurAdUnits :: Lens' ListAdUnitsResponse [AdUnit]
+laurAdUnits
+  = lens _laurAdUnits (\ s a -> s{_laurAdUnits = a}) .
       _Default
       . _Coerce
 
-instance FromJSON SavedAdStyles where
+instance FromJSON ListAdUnitsResponse where
         parseJSON
-          = withObject "SavedAdStyles"
+          = withObject "ListAdUnitsResponse"
               (\ o ->
-                 SavedAdStyles' <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!= "adsense#savedAdStyles")
-                     <*> (o .:? "items" .!= mempty))
+                 ListAdUnitsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "adUnits" .!= mempty))
 
-instance ToJSON SavedAdStyles where
-        toJSON SavedAdStyles'{..}
+instance ToJSON ListAdUnitsResponse where
+        toJSON ListAdUnitsResponse'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _sasEtag,
-                  ("nextPageToken" .=) <$> _sasNextPageToken,
-                  Just ("kind" .= _sasKind),
-                  ("items" .=) <$> _sasItems])
+                 [("nextPageToken" .=) <$> _laurNextPageToken,
+                  ("adUnits" .=) <$> _laurAdUnits])
 
--- | The colors which are included in the style. These are represented as six
--- hexadecimal characters, similar to HTML color codes, but without the
--- leading hash.
+-- | Represents a whole or partial calendar date, such as a birthday. The
+-- time of day and time zone are either specified elsewhere or are
+-- insignificant. The date is relative to the Gregorian Calendar. This can
+-- represent one of the following: * A full date, with non-zero year,
+-- month, and day values * A month and day value, with a zero year, such as
+-- an anniversary * A year on its own, with zero month and day values * A
+-- year and month value, with a zero day, such as a credit card expiration
+-- date Related types are google.type.TimeOfDay and
+-- \`google.protobuf.Timestamp\`.
 --
--- /See:/ 'adStyleColors' smart constructor.
-data AdStyleColors =
-  AdStyleColors'
-    { _ascText       :: !(Maybe Text)
-    , _ascURL        :: !(Maybe Text)
-    , _ascBOrder     :: !(Maybe Text)
-    , _ascTitle      :: !(Maybe Text)
-    , _ascBackgRound :: !(Maybe Text)
+-- /See:/ 'date' smart constructor.
+data Date =
+  Date'
+    { _dDay :: !(Maybe (Textual Int32))
+    , _dYear :: !(Maybe (Textual Int32))
+    , _dMonth :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdStyleColors' with the minimum fields required to make a request.
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ascText'
+-- * 'dDay'
 --
--- * 'ascURL'
+-- * 'dYear'
 --
--- * 'ascBOrder'
---
--- * 'ascTitle'
---
--- * 'ascBackgRound'
-adStyleColors
-    :: AdStyleColors
-adStyleColors =
-  AdStyleColors'
-    { _ascText = Nothing
-    , _ascURL = Nothing
-    , _ascBOrder = Nothing
-    , _ascTitle = Nothing
-    , _ascBackgRound = Nothing
-    }
+-- * 'dMonth'
+date
+    :: Date
+date = Date' {_dDay = Nothing, _dYear = Nothing, _dMonth = Nothing}
 
 
--- | The color of the ad text.
-ascText :: Lens' AdStyleColors (Maybe Text)
-ascText = lens _ascText (\ s a -> s{_ascText = a})
+-- | Day of a month. Must be from 1 to 31 and valid for the year and month,
+-- or 0 to specify a year by itself or a year and month where the day
+-- isn\'t significant.
+dDay :: Lens' Date (Maybe Int32)
+dDay
+  = lens _dDay (\ s a -> s{_dDay = a}) .
+      mapping _Coerce
 
--- | The color of the ad url.
-ascURL :: Lens' AdStyleColors (Maybe Text)
-ascURL = lens _ascURL (\ s a -> s{_ascURL = a})
+-- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+-- a year.
+dYear :: Lens' Date (Maybe Int32)
+dYear
+  = lens _dYear (\ s a -> s{_dYear = a}) .
+      mapping _Coerce
 
--- | The color of the ad border.
-ascBOrder :: Lens' AdStyleColors (Maybe Text)
-ascBOrder
-  = lens _ascBOrder (\ s a -> s{_ascBOrder = a})
+-- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+-- month and day.
+dMonth :: Lens' Date (Maybe Int32)
+dMonth
+  = lens _dMonth (\ s a -> s{_dMonth = a}) .
+      mapping _Coerce
 
--- | The color of the ad title.
-ascTitle :: Lens' AdStyleColors (Maybe Text)
-ascTitle = lens _ascTitle (\ s a -> s{_ascTitle = a})
-
--- | The color of the ad background.
-ascBackgRound :: Lens' AdStyleColors (Maybe Text)
-ascBackgRound
-  = lens _ascBackgRound
-      (\ s a -> s{_ascBackgRound = a})
-
-instance FromJSON AdStyleColors where
+instance FromJSON Date where
         parseJSON
-          = withObject "AdStyleColors"
+          = withObject "Date"
               (\ o ->
-                 AdStyleColors' <$>
-                   (o .:? "text") <*> (o .:? "url") <*> (o .:? "border")
-                     <*> (o .:? "title")
-                     <*> (o .:? "background"))
+                 Date' <$>
+                   (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
 
-instance ToJSON AdStyleColors where
-        toJSON AdStyleColors'{..}
+instance ToJSON Date where
+        toJSON Date'{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascURL,
-                  ("border" .=) <$> _ascBOrder,
-                  ("title" .=) <$> _ascTitle,
-                  ("background" .=) <$> _ascBackgRound])
+                 [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
+                  ("month" .=) <$> _dMonth])
 
--- | The backup option to be used in instances where no ad is available.
---
--- /See:/ 'adUnitContentAdsSettingsBackupOption' smart constructor.
-data AdUnitContentAdsSettingsBackupOption =
-  AdUnitContentAdsSettingsBackupOption'
-    { _aucasboColor :: !(Maybe Text)
-    , _aucasboURL   :: !(Maybe Text)
-    , _aucasboType  :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AdUnitContentAdsSettingsBackupOption' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aucasboColor'
---
--- * 'aucasboURL'
---
--- * 'aucasboType'
-adUnitContentAdsSettingsBackupOption
-    :: AdUnitContentAdsSettingsBackupOption
-adUnitContentAdsSettingsBackupOption =
-  AdUnitContentAdsSettingsBackupOption'
-    {_aucasboColor = Nothing, _aucasboURL = Nothing, _aucasboType = Nothing}
-
-
--- | Color to use when type is set to COLOR.
-aucasboColor :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
-aucasboColor
-  = lens _aucasboColor (\ s a -> s{_aucasboColor = a})
-
--- | URL to use when type is set to URL.
-aucasboURL :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
-aucasboURL
-  = lens _aucasboURL (\ s a -> s{_aucasboURL = a})
-
--- | Type of the backup option. Possible values are BLANK, COLOR and URL.
-aucasboType :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
-aucasboType
-  = lens _aucasboType (\ s a -> s{_aucasboType = a})
-
-instance FromJSON
-           AdUnitContentAdsSettingsBackupOption
-         where
-        parseJSON
-          = withObject "AdUnitContentAdsSettingsBackupOption"
-              (\ o ->
-                 AdUnitContentAdsSettingsBackupOption' <$>
-                   (o .:? "color") <*> (o .:? "url") <*> (o .:? "type"))
-
-instance ToJSON AdUnitContentAdsSettingsBackupOption
-         where
-        toJSON AdUnitContentAdsSettingsBackupOption'{..}
-          = object
-              (catMaybes
-                 [("color" .=) <$> _aucasboColor,
-                  ("url" .=) <$> _aucasboURL,
-                  ("type" .=) <$> _aucasboType])
-
+-- | Representation of an ad client. An ad client represents a user\'s
+-- subscription with a specific AdSense product.
 --
 -- /See:/ 'adClient' smart constructor.
 data AdClient =
   AdClient'
-    { _adKind              :: !Text
-    , _adArcOptIn          :: !(Maybe Bool)
-    , _adSupportsReporting :: !(Maybe Bool)
-    , _adId                :: !(Maybe Text)
-    , _adProductCode       :: !(Maybe Text)
+    { _acReportingDimensionId :: !(Maybe Text)
+    , _acName :: !(Maybe Text)
+    , _acProductCode :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1544,431 +1036,329 @@ data AdClient =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adKind'
+-- * 'acReportingDimensionId'
 --
--- * 'adArcOptIn'
+-- * 'acName'
 --
--- * 'adSupportsReporting'
---
--- * 'adId'
---
--- * 'adProductCode'
+-- * 'acProductCode'
 adClient
     :: AdClient
 adClient =
   AdClient'
-    { _adKind = "adsense#adClient"
-    , _adArcOptIn = Nothing
-    , _adSupportsReporting = Nothing
-    , _adId = Nothing
-    , _adProductCode = Nothing
+    { _acReportingDimensionId = Nothing
+    , _acName = Nothing
+    , _acProductCode = Nothing
     }
 
 
--- | Kind of resource this is, in this case adsense#adClient.
-adKind :: Lens' AdClient Text
-adKind = lens _adKind (\ s a -> s{_adKind = a})
+-- | Output only. Unique ID of the ad client as used in the \`AD_CLIENT_ID\`
+-- reporting dimension. Present only if the ad client supports reporting.
+acReportingDimensionId :: Lens' AdClient (Maybe Text)
+acReportingDimensionId
+  = lens _acReportingDimensionId
+      (\ s a -> s{_acReportingDimensionId = a})
 
--- | Whether this ad client is opted in to ARC.
-adArcOptIn :: Lens' AdClient (Maybe Bool)
-adArcOptIn
-  = lens _adArcOptIn (\ s a -> s{_adArcOptIn = a})
+-- | Resource name of the ad client. Format:
+-- accounts\/{account}\/adclient\/{adclient}
+acName :: Lens' AdClient (Maybe Text)
+acName = lens _acName (\ s a -> s{_acName = a})
 
--- | Whether this ad client supports being reported on.
-adSupportsReporting :: Lens' AdClient (Maybe Bool)
-adSupportsReporting
-  = lens _adSupportsReporting
-      (\ s a -> s{_adSupportsReporting = a})
-
--- | Unique identifier of this ad client.
-adId :: Lens' AdClient (Maybe Text)
-adId = lens _adId (\ s a -> s{_adId = a})
-
--- | This ad client\'s product code, which corresponds to the PRODUCT_CODE
--- report dimension.
-adProductCode :: Lens' AdClient (Maybe Text)
-adProductCode
-  = lens _adProductCode
-      (\ s a -> s{_adProductCode = a})
+-- | Output only. Product code of the ad client. For example, \"AFC\" for
+-- AdSense for Content.
+acProductCode :: Lens' AdClient (Maybe Text)
+acProductCode
+  = lens _acProductCode
+      (\ s a -> s{_acProductCode = a})
 
 instance FromJSON AdClient where
         parseJSON
           = withObject "AdClient"
               (\ o ->
                  AdClient' <$>
-                   (o .:? "kind" .!= "adsense#adClient") <*>
-                     (o .:? "arcOptIn")
-                     <*> (o .:? "supportsReporting")
-                     <*> (o .:? "id")
-                     <*> (o .:? "productCode"))
+                   (o .:? "reportingDimensionId") <*> (o .:? "name") <*>
+                     (o .:? "productCode"))
 
 instance ToJSON AdClient where
         toJSON AdClient'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _adKind),
-                  ("arcOptIn" .=) <$> _adArcOptIn,
-                  ("supportsReporting" .=) <$> _adSupportsReporting,
-                  ("id" .=) <$> _adId,
-                  ("productCode" .=) <$> _adProductCode])
+                 [("reportingDimensionId" .=) <$>
+                    _acReportingDimensionId,
+                  ("name" .=) <$> _acName,
+                  ("productCode" .=) <$> _acProductCode])
 
+-- | Result of a generated report.
 --
--- /See:/ 'savedAdStyle' smart constructor.
-data SavedAdStyle =
-  SavedAdStyle'
-    { _savKind    :: !Text
-    , _savName    :: !(Maybe Text)
-    , _savAdStyle :: !(Maybe AdStyle)
-    , _savId      :: !(Maybe Text)
+-- /See:/ 'reportResult' smart constructor.
+data ReportResult =
+  ReportResult'
+    { _rrAverages :: !(Maybe Row)
+    , _rrEndDate :: !(Maybe Date)
+    , _rrWarnings :: !(Maybe [Text])
+    , _rrRows :: !(Maybe [Row])
+    , _rrTotals :: !(Maybe Row)
+    , _rrStartDate :: !(Maybe Date)
+    , _rrHeaders :: !(Maybe [Header])
+    , _rrTotalMatchedRows :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'SavedAdStyle' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'savKind'
+-- * 'rrAverages'
 --
--- * 'savName'
+-- * 'rrEndDate'
 --
--- * 'savAdStyle'
+-- * 'rrWarnings'
 --
--- * 'savId'
-savedAdStyle
-    :: SavedAdStyle
-savedAdStyle =
-  SavedAdStyle'
-    { _savKind = "adsense#savedAdStyle"
-    , _savName = Nothing
-    , _savAdStyle = Nothing
-    , _savId = Nothing
+-- * 'rrRows'
+--
+-- * 'rrTotals'
+--
+-- * 'rrStartDate'
+--
+-- * 'rrHeaders'
+--
+-- * 'rrTotalMatchedRows'
+reportResult
+    :: ReportResult
+reportResult =
+  ReportResult'
+    { _rrAverages = Nothing
+    , _rrEndDate = Nothing
+    , _rrWarnings = Nothing
+    , _rrRows = Nothing
+    , _rrTotals = Nothing
+    , _rrStartDate = Nothing
+    , _rrHeaders = Nothing
+    , _rrTotalMatchedRows = Nothing
     }
 
 
--- | Kind of resource this is, in this case adsense#savedAdStyle.
-savKind :: Lens' SavedAdStyle Text
-savKind = lens _savKind (\ s a -> s{_savKind = a})
+-- | The averages of the report. This is the same length as any other row in
+-- the report; cells corresponding to dimension columns are empty.
+rrAverages :: Lens' ReportResult (Maybe Row)
+rrAverages
+  = lens _rrAverages (\ s a -> s{_rrAverages = a})
 
--- | The user selected name of this SavedAdStyle.
-savName :: Lens' SavedAdStyle (Maybe Text)
-savName = lens _savName (\ s a -> s{_savName = a})
+-- | Required. End date of the range (inclusive).
+rrEndDate :: Lens' ReportResult (Maybe Date)
+rrEndDate
+  = lens _rrEndDate (\ s a -> s{_rrEndDate = a})
 
--- | The AdStyle itself.
-savAdStyle :: Lens' SavedAdStyle (Maybe AdStyle)
-savAdStyle
-  = lens _savAdStyle (\ s a -> s{_savAdStyle = a})
+-- | Any warnings associated with generation of the report. These warnings
+-- are always returned in English.
+rrWarnings :: Lens' ReportResult [Text]
+rrWarnings
+  = lens _rrWarnings (\ s a -> s{_rrWarnings = a}) .
+      _Default
+      . _Coerce
 
--- | Unique identifier of this saved ad style. This should be considered an
--- opaque identifier; it is not safe to rely on it being in any particular
--- format.
-savId :: Lens' SavedAdStyle (Maybe Text)
-savId = lens _savId (\ s a -> s{_savId = a})
-
-instance FromJSON SavedAdStyle where
-        parseJSON
-          = withObject "SavedAdStyle"
-              (\ o ->
-                 SavedAdStyle' <$>
-                   (o .:? "kind" .!= "adsense#savedAdStyle") <*>
-                     (o .:? "name")
-                     <*> (o .:? "adStyle")
-                     <*> (o .:? "id"))
-
-instance ToJSON SavedAdStyle where
-        toJSON SavedAdStyle'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _savKind), ("name" .=) <$> _savName,
-                  ("adStyle" .=) <$> _savAdStyle,
-                  ("id" .=) <$> _savId])
-
--- | The targeting information of this custom channel, if activated.
---
--- /See:/ 'customChannelTargetingInfo' smart constructor.
-data CustomChannelTargetingInfo =
-  CustomChannelTargetingInfo'
-    { _cctiLocation     :: !(Maybe Text)
-    , _cctiSiteLanguage :: !(Maybe Text)
-    , _cctiAdsAppearOn  :: !(Maybe Text)
-    , _cctiDescription  :: !(Maybe Text)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'CustomChannelTargetingInfo' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cctiLocation'
---
--- * 'cctiSiteLanguage'
---
--- * 'cctiAdsAppearOn'
---
--- * 'cctiDescription'
-customChannelTargetingInfo
-    :: CustomChannelTargetingInfo
-customChannelTargetingInfo =
-  CustomChannelTargetingInfo'
-    { _cctiLocation = Nothing
-    , _cctiSiteLanguage = Nothing
-    , _cctiAdsAppearOn = Nothing
-    , _cctiDescription = Nothing
-    }
-
-
--- | The locations in which ads appear. (Only valid for content and mobile
--- content ads (deprecated)). Acceptable values for content ads are:
--- TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER,
--- MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT,
--- MULTIPLE_LOCATIONS. Acceptable values for mobile content ads
--- (deprecated) are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS.
-cctiLocation :: Lens' CustomChannelTargetingInfo (Maybe Text)
-cctiLocation
-  = lens _cctiLocation (\ s a -> s{_cctiLocation = a})
-
--- | The language of the sites ads will be displayed on.
-cctiSiteLanguage :: Lens' CustomChannelTargetingInfo (Maybe Text)
-cctiSiteLanguage
-  = lens _cctiSiteLanguage
-      (\ s a -> s{_cctiSiteLanguage = a})
-
--- | The name used to describe this channel externally.
-cctiAdsAppearOn :: Lens' CustomChannelTargetingInfo (Maybe Text)
-cctiAdsAppearOn
-  = lens _cctiAdsAppearOn
-      (\ s a -> s{_cctiAdsAppearOn = a})
-
--- | The external description of the channel.
-cctiDescription :: Lens' CustomChannelTargetingInfo (Maybe Text)
-cctiDescription
-  = lens _cctiDescription
-      (\ s a -> s{_cctiDescription = a})
-
-instance FromJSON CustomChannelTargetingInfo where
-        parseJSON
-          = withObject "CustomChannelTargetingInfo"
-              (\ o ->
-                 CustomChannelTargetingInfo' <$>
-                   (o .:? "location") <*> (o .:? "siteLanguage") <*>
-                     (o .:? "adsAppearOn")
-                     <*> (o .:? "description"))
-
-instance ToJSON CustomChannelTargetingInfo where
-        toJSON CustomChannelTargetingInfo'{..}
-          = object
-              (catMaybes
-                 [("location" .=) <$> _cctiLocation,
-                  ("siteLanguage" .=) <$> _cctiSiteLanguage,
-                  ("adsAppearOn" .=) <$> _cctiAdsAppearOn,
-                  ("description" .=) <$> _cctiDescription])
-
---
--- /See:/ 'adStyle' smart constructor.
-data AdStyle =
-  AdStyle'
-    { _asCorners :: !(Maybe Text)
-    , _asKind    :: !Text
-    , _asFont    :: !(Maybe AdStyleFont)
-    , _asColors  :: !(Maybe AdStyleColors)
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AdStyle' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'asCorners'
---
--- * 'asKind'
---
--- * 'asFont'
---
--- * 'asColors'
-adStyle
-    :: AdStyle
-adStyle =
-  AdStyle'
-    { _asCorners = Nothing
-    , _asKind = "adsense#adStyle"
-    , _asFont = Nothing
-    , _asColors = Nothing
-    }
-
-
--- | The style of the corners in the ad (deprecated: never populated,
--- ignored).
-asCorners :: Lens' AdStyle (Maybe Text)
-asCorners
-  = lens _asCorners (\ s a -> s{_asCorners = a})
-
--- | Kind this is, in this case adsense#adStyle.
-asKind :: Lens' AdStyle Text
-asKind = lens _asKind (\ s a -> s{_asKind = a})
-
--- | The font which is included in the style.
-asFont :: Lens' AdStyle (Maybe AdStyleFont)
-asFont = lens _asFont (\ s a -> s{_asFont = a})
-
--- | The colors which are included in the style. These are represented as six
--- hexadecimal characters, similar to HTML color codes, but without the
--- leading hash.
-asColors :: Lens' AdStyle (Maybe AdStyleColors)
-asColors = lens _asColors (\ s a -> s{_asColors = a})
-
-instance FromJSON AdStyle where
-        parseJSON
-          = withObject "AdStyle"
-              (\ o ->
-                 AdStyle' <$>
-                   (o .:? "corners") <*>
-                     (o .:? "kind" .!= "adsense#adStyle")
-                     <*> (o .:? "font")
-                     <*> (o .:? "colors"))
-
-instance ToJSON AdStyle where
-        toJSON AdStyle'{..}
-          = object
-              (catMaybes
-                 [("corners" .=) <$> _asCorners,
-                  Just ("kind" .= _asKind), ("font" .=) <$> _asFont,
-                  ("colors" .=) <$> _asColors])
-
--- | Settings specific to feed ads (AFF) - deprecated.
---
--- /See:/ 'adUnitFeedAdsSettings' smart constructor.
-data AdUnitFeedAdsSettings =
-  AdUnitFeedAdsSettings'
-    { _aufasFrequency        :: !(Maybe (Textual Int32))
-    , _aufasAdPosition       :: !(Maybe Text)
-    , _aufasType             :: !(Maybe Text)
-    , _aufasMinimumWordCount :: !(Maybe (Textual Int32))
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'AdUnitFeedAdsSettings' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aufasFrequency'
---
--- * 'aufasAdPosition'
---
--- * 'aufasType'
---
--- * 'aufasMinimumWordCount'
-adUnitFeedAdsSettings
-    :: AdUnitFeedAdsSettings
-adUnitFeedAdsSettings =
-  AdUnitFeedAdsSettings'
-    { _aufasFrequency = Nothing
-    , _aufasAdPosition = Nothing
-    , _aufasType = Nothing
-    , _aufasMinimumWordCount = Nothing
-    }
-
-
--- | The frequency at which ads should appear in the feed (i.e. every N
--- entries).
-aufasFrequency :: Lens' AdUnitFeedAdsSettings (Maybe Int32)
-aufasFrequency
-  = lens _aufasFrequency
-      (\ s a -> s{_aufasFrequency = a})
-      . mapping _Coerce
-
--- | The position of the ads relative to the feed entries.
-aufasAdPosition :: Lens' AdUnitFeedAdsSettings (Maybe Text)
-aufasAdPosition
-  = lens _aufasAdPosition
-      (\ s a -> s{_aufasAdPosition = a})
-
--- | The type of ads which should appear.
-aufasType :: Lens' AdUnitFeedAdsSettings (Maybe Text)
-aufasType
-  = lens _aufasType (\ s a -> s{_aufasType = a})
-
--- | The minimum length an entry should be in order to have attached ads.
-aufasMinimumWordCount :: Lens' AdUnitFeedAdsSettings (Maybe Int32)
-aufasMinimumWordCount
-  = lens _aufasMinimumWordCount
-      (\ s a -> s{_aufasMinimumWordCount = a})
-      . mapping _Coerce
-
-instance FromJSON AdUnitFeedAdsSettings where
-        parseJSON
-          = withObject "AdUnitFeedAdsSettings"
-              (\ o ->
-                 AdUnitFeedAdsSettings' <$>
-                   (o .:? "frequency") <*> (o .:? "adPosition") <*>
-                     (o .:? "type")
-                     <*> (o .:? "minimumWordCount"))
-
-instance ToJSON AdUnitFeedAdsSettings where
-        toJSON AdUnitFeedAdsSettings'{..}
-          = object
-              (catMaybes
-                 [("frequency" .=) <$> _aufasFrequency,
-                  ("adPosition" .=) <$> _aufasAdPosition,
-                  ("type" .=) <$> _aufasType,
-                  ("minimumWordCount" .=) <$> _aufasMinimumWordCount])
-
---
--- /See:/ 'metadata' smart constructor.
-data Metadata =
-  Metadata'
-    { _mKind  :: !Text
-    , _mItems :: !(Maybe [ReportingMetadataEntry])
-    }
-  deriving (Eq, Show, Data, Typeable, Generic)
-
-
--- | Creates a value of 'Metadata' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mKind'
---
--- * 'mItems'
-metadata
-    :: Metadata
-metadata = Metadata' {_mKind = "adsense#metadata", _mItems = Nothing}
-
-
--- | Kind of list this is, in this case adsense#metadata.
-mKind :: Lens' Metadata Text
-mKind = lens _mKind (\ s a -> s{_mKind = a})
-
-mItems :: Lens' Metadata [ReportingMetadataEntry]
-mItems
-  = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
+-- | The output rows of the report. Each row is a list of cells; one for each
+-- dimension in the request, followed by one for each metric in the
+-- request.
+rrRows :: Lens' ReportResult [Row]
+rrRows
+  = lens _rrRows (\ s a -> s{_rrRows = a}) . _Default .
       _Coerce
 
-instance FromJSON Metadata where
-        parseJSON
-          = withObject "Metadata"
-              (\ o ->
-                 Metadata' <$>
-                   (o .:? "kind" .!= "adsense#metadata") <*>
-                     (o .:? "items" .!= mempty))
+-- | The totals of the report. This is the same length as any other row in
+-- the report; cells corresponding to dimension columns are empty.
+rrTotals :: Lens' ReportResult (Maybe Row)
+rrTotals = lens _rrTotals (\ s a -> s{_rrTotals = a})
 
-instance ToJSON Metadata where
-        toJSON Metadata'{..}
+-- | Required. Start date of the range (inclusive).
+rrStartDate :: Lens' ReportResult (Maybe Date)
+rrStartDate
+  = lens _rrStartDate (\ s a -> s{_rrStartDate = a})
+
+-- | The header information; one for each dimension in the request, followed
+-- by one for each metric in the request.
+rrHeaders :: Lens' ReportResult [Header]
+rrHeaders
+  = lens _rrHeaders (\ s a -> s{_rrHeaders = a}) .
+      _Default
+      . _Coerce
+
+-- | The total number of rows matched by the report request.
+rrTotalMatchedRows :: Lens' ReportResult (Maybe Int64)
+rrTotalMatchedRows
+  = lens _rrTotalMatchedRows
+      (\ s a -> s{_rrTotalMatchedRows = a})
+      . mapping _Coerce
+
+instance FromJSON ReportResult where
+        parseJSON
+          = withObject "ReportResult"
+              (\ o ->
+                 ReportResult' <$>
+                   (o .:? "averages") <*> (o .:? "endDate") <*>
+                     (o .:? "warnings" .!= mempty)
+                     <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "totals")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "headers" .!= mempty)
+                     <*> (o .:? "totalMatchedRows"))
+
+instance ToJSON ReportResult where
+        toJSON ReportResult'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
+                 [("averages" .=) <$> _rrAverages,
+                  ("endDate" .=) <$> _rrEndDate,
+                  ("warnings" .=) <$> _rrWarnings,
+                  ("rows" .=) <$> _rrRows, ("totals" .=) <$> _rrTotals,
+                  ("startDate" .=) <$> _rrStartDate,
+                  ("headers" .=) <$> _rrHeaders,
+                  ("totalMatchedRows" .=) <$> _rrTotalMatchedRows])
 
+-- | The header information of the columns requested in the report.
+--
+-- /See:/ 'header' smart constructor.
+data Header =
+  Header'
+    { _hCurrencyCode :: !(Maybe Text)
+    , _hName :: !(Maybe Text)
+    , _hType :: !(Maybe HeaderType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Header' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hCurrencyCode'
+--
+-- * 'hName'
+--
+-- * 'hType'
+header
+    :: Header
+header = Header' {_hCurrencyCode = Nothing, _hName = Nothing, _hType = Nothing}
+
+
+-- | The [ISO-4217 currency code](https:\/\/en.wikipedia.org\/wiki\/ISO_4217)
+-- of this column. Only present if the header type is METRIC_CURRENCY.
+hCurrencyCode :: Lens' Header (Maybe Text)
+hCurrencyCode
+  = lens _hCurrencyCode
+      (\ s a -> s{_hCurrencyCode = a})
+
+-- | Required. Name of the header.
+hName :: Lens' Header (Maybe Text)
+hName = lens _hName (\ s a -> s{_hName = a})
+
+-- | Required. Type of the header.
+hType :: Lens' Header (Maybe HeaderType)
+hType = lens _hType (\ s a -> s{_hType = a})
+
+instance FromJSON Header where
+        parseJSON
+          = withObject "Header"
+              (\ o ->
+                 Header' <$>
+                   (o .:? "currencyCode") <*> (o .:? "name") <*>
+                     (o .:? "type"))
+
+instance ToJSON Header where
+        toJSON Header'{..}
+          = object
+              (catMaybes
+                 [("currencyCode" .=) <$> _hCurrencyCode,
+                  ("name" .=) <$> _hName, ("type" .=) <$> _hType])
+
+-- | Settings specific to content ads (AFC).
+--
+-- /See:/ 'contentAdsSettings' smart constructor.
+data ContentAdsSettings =
+  ContentAdsSettings'
+    { _casSize :: !(Maybe Text)
+    , _casType :: !(Maybe ContentAdsSettingsType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ContentAdsSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'casSize'
+--
+-- * 'casType'
+contentAdsSettings
+    :: ContentAdsSettings
+contentAdsSettings =
+  ContentAdsSettings' {_casSize = Nothing, _casType = Nothing}
+
+
+-- | Size of the ad unit. e.g. \"728x90\", \"1x3\" (for responsive ad units).
+casSize :: Lens' ContentAdsSettings (Maybe Text)
+casSize = lens _casSize (\ s a -> s{_casSize = a})
+
+-- | Type of the ad unit.
+casType :: Lens' ContentAdsSettings (Maybe ContentAdsSettingsType)
+casType = lens _casType (\ s a -> s{_casType = a})
+
+instance FromJSON ContentAdsSettings where
+        parseJSON
+          = withObject "ContentAdsSettings"
+              (\ o ->
+                 ContentAdsSettings' <$>
+                   (o .:? "size") <*> (o .:? "type"))
+
+instance ToJSON ContentAdsSettings where
+        toJSON ContentAdsSettings'{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _casSize, ("type" .=) <$> _casType])
+
+-- | Row representation.
+--
+-- /See:/ 'row' smart constructor.
+newtype Row =
+  Row'
+    { _rCells :: Maybe [Cell]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Row' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rCells'
+row
+    :: Row
+row = Row' {_rCells = Nothing}
+
+
+-- | Cells in the row.
+rCells :: Lens' Row [Cell]
+rCells
+  = lens _rCells (\ s a -> s{_rCells = a}) . _Default .
+      _Coerce
+
+instance FromJSON Row where
+        parseJSON
+          = withObject "Row"
+              (\ o -> Row' <$> (o .:? "cells" .!= mempty))
+
+instance ToJSON Row where
+        toJSON Row'{..}
+          = object (catMaybes [("cells" .=) <$> _rCells])
+
+-- | Representation of a custom channel.
 --
 -- /See:/ 'customChannel' smart constructor.
 data CustomChannel =
   CustomChannel'
-    { _cTargetingInfo :: !(Maybe CustomChannelTargetingInfo)
-    , _cKind          :: !Text
-    , _cName          :: !(Maybe Text)
-    , _cCode          :: !(Maybe Text)
-    , _cId            :: !(Maybe Text)
+    { _ccReportingDimensionId :: !(Maybe Text)
+    , _ccName :: !(Maybe Text)
+    , _ccDisplayName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1977,77 +1367,67 @@ data CustomChannel =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cTargetingInfo'
+-- * 'ccReportingDimensionId'
 --
--- * 'cKind'
+-- * 'ccName'
 --
--- * 'cName'
---
--- * 'cCode'
---
--- * 'cId'
+-- * 'ccDisplayName'
 customChannel
     :: CustomChannel
 customChannel =
   CustomChannel'
-    { _cTargetingInfo = Nothing
-    , _cKind = "adsense#customChannel"
-    , _cName = Nothing
-    , _cCode = Nothing
-    , _cId = Nothing
+    { _ccReportingDimensionId = Nothing
+    , _ccName = Nothing
+    , _ccDisplayName = Nothing
     }
 
 
--- | The targeting information of this custom channel, if activated.
-cTargetingInfo :: Lens' CustomChannel (Maybe CustomChannelTargetingInfo)
-cTargetingInfo
-  = lens _cTargetingInfo
-      (\ s a -> s{_cTargetingInfo = a})
+-- | Output only. Unique ID of the custom channel as used in the
+-- \`CUSTOM_CHANNEL_ID\` reporting dimension.
+ccReportingDimensionId :: Lens' CustomChannel (Maybe Text)
+ccReportingDimensionId
+  = lens _ccReportingDimensionId
+      (\ s a -> s{_ccReportingDimensionId = a})
 
--- | Kind of resource this is, in this case adsense#customChannel.
-cKind :: Lens' CustomChannel Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
+-- | Resource name of the custom channel. Format:
+-- accounts\/{account}\/adclients\/{adclient}\/customchannels\/{customchannel}
+ccName :: Lens' CustomChannel (Maybe Text)
+ccName = lens _ccName (\ s a -> s{_ccName = a})
 
--- | Name of this custom channel.
-cName :: Lens' CustomChannel (Maybe Text)
-cName = lens _cName (\ s a -> s{_cName = a})
-
--- | Code of this custom channel, not necessarily unique across ad clients.
-cCode :: Lens' CustomChannel (Maybe Text)
-cCode = lens _cCode (\ s a -> s{_cCode = a})
-
--- | Unique identifier of this custom channel. This should be considered an
--- opaque identifier; it is not safe to rely on it being in any particular
--- format.
-cId :: Lens' CustomChannel (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
+-- | Display name of the custom channel.
+ccDisplayName :: Lens' CustomChannel (Maybe Text)
+ccDisplayName
+  = lens _ccDisplayName
+      (\ s a -> s{_ccDisplayName = a})
 
 instance FromJSON CustomChannel where
         parseJSON
           = withObject "CustomChannel"
               (\ o ->
                  CustomChannel' <$>
-                   (o .:? "targetingInfo") <*>
-                     (o .:? "kind" .!= "adsense#customChannel")
-                     <*> (o .:? "name")
-                     <*> (o .:? "code")
-                     <*> (o .:? "id"))
+                   (o .:? "reportingDimensionId") <*> (o .:? "name") <*>
+                     (o .:? "displayName"))
 
 instance ToJSON CustomChannel where
         toJSON CustomChannel'{..}
           = object
               (catMaybes
-                 [("targetingInfo" .=) <$> _cTargetingInfo,
-                  Just ("kind" .= _cKind), ("name" .=) <$> _cName,
-                  ("code" .=) <$> _cCode, ("id" .=) <$> _cId])
+                 [("reportingDimensionId" .=) <$>
+                    _ccReportingDimensionId,
+                  ("name" .=) <$> _ccName,
+                  ("displayName" .=) <$> _ccDisplayName])
 
+-- | Representation of a URL channel. URL channels allow you to track the
+-- performance of particular pages in your site; see [URL
+-- channels](https:\/\/support.google.com\/adsense\/answer\/2923836) for
+-- more information.
 --
 -- /See:/ 'urlChannel' smart constructor.
 data URLChannel =
   URLChannel'
-    { _urlcKind       :: !Text
-    , _urlcId         :: !(Maybe Text)
-    , _urlcURLPattern :: !(Maybe Text)
+    { _ucReportingDimensionId :: !(Maybe Text)
+    , _ucURIPattern :: !(Maybe Text)
+    , _ucName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2056,382 +1436,512 @@ data URLChannel =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urlcKind'
+-- * 'ucReportingDimensionId'
 --
--- * 'urlcId'
+-- * 'ucURIPattern'
 --
--- * 'urlcURLPattern'
+-- * 'ucName'
 urlChannel
     :: URLChannel
 urlChannel =
   URLChannel'
-    { _urlcKind = "adsense#urlChannel"
-    , _urlcId = Nothing
-    , _urlcURLPattern = Nothing
+    { _ucReportingDimensionId = Nothing
+    , _ucURIPattern = Nothing
+    , _ucName = Nothing
     }
 
 
--- | Kind of resource this is, in this case adsense#urlChannel.
-urlcKind :: Lens' URLChannel Text
-urlcKind = lens _urlcKind (\ s a -> s{_urlcKind = a})
+-- | Output only. Unique ID of the custom channel as used in the
+-- \`URL_CHANNEL_ID\` reporting dimension.
+ucReportingDimensionId :: Lens' URLChannel (Maybe Text)
+ucReportingDimensionId
+  = lens _ucReportingDimensionId
+      (\ s a -> s{_ucReportingDimensionId = a})
 
--- | Unique identifier of this URL channel. This should be considered an
--- opaque identifier; it is not safe to rely on it being in any particular
--- format.
-urlcId :: Lens' URLChannel (Maybe Text)
-urlcId = lens _urlcId (\ s a -> s{_urlcId = a})
-
--- | URL Pattern of this URL channel. Does not include \"http:\/\/\" or
+-- | URI pattern of the channel. Does not include \"http:\/\/\" or
 -- \"https:\/\/\". Example: www.example.com\/home
-urlcURLPattern :: Lens' URLChannel (Maybe Text)
-urlcURLPattern
-  = lens _urlcURLPattern
-      (\ s a -> s{_urlcURLPattern = a})
+ucURIPattern :: Lens' URLChannel (Maybe Text)
+ucURIPattern
+  = lens _ucURIPattern (\ s a -> s{_ucURIPattern = a})
+
+-- | Resource name of the URL channel. Format:
+-- accounts\/{account}\/adclient\/{adclient}\/urlchannels\/{urlchannel}
+ucName :: Lens' URLChannel (Maybe Text)
+ucName = lens _ucName (\ s a -> s{_ucName = a})
 
 instance FromJSON URLChannel where
         parseJSON
           = withObject "URLChannel"
               (\ o ->
                  URLChannel' <$>
-                   (o .:? "kind" .!= "adsense#urlChannel") <*>
-                     (o .:? "id")
-                     <*> (o .:? "urlPattern"))
+                   (o .:? "reportingDimensionId") <*>
+                     (o .:? "uriPattern")
+                     <*> (o .:? "name"))
 
 instance ToJSON URLChannel where
         toJSON URLChannel'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _urlcKind), ("id" .=) <$> _urlcId,
-                  ("urlPattern" .=) <$> _urlcURLPattern])
+                 [("reportingDimensionId" .=) <$>
+                    _ucReportingDimensionId,
+                  ("uriPattern" .=) <$> _ucURIPattern,
+                  ("name" .=) <$> _ucName])
 
+-- | Response definition for the payments list rpc.
 --
--- /See:/ 'adCode' smart constructor.
-data AdCode =
-  AdCode'
-    { _addKind    :: !Text
-    , _addAmpHead :: !(Maybe Text)
-    , _addAmpBody :: !(Maybe Text)
-    , _addAdCode  :: !(Maybe Text)
+-- /See:/ 'listPaymentsResponse' smart constructor.
+newtype ListPaymentsResponse =
+  ListPaymentsResponse'
+    { _lprPayments :: Maybe [Payment]
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdCode' with the minimum fields required to make a request.
+-- | Creates a value of 'ListPaymentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'addKind'
+-- * 'lprPayments'
+listPaymentsResponse
+    :: ListPaymentsResponse
+listPaymentsResponse = ListPaymentsResponse' {_lprPayments = Nothing}
+
+
+-- | The payments returned in this list response.
+lprPayments :: Lens' ListPaymentsResponse [Payment]
+lprPayments
+  = lens _lprPayments (\ s a -> s{_lprPayments = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListPaymentsResponse where
+        parseJSON
+          = withObject "ListPaymentsResponse"
+              (\ o ->
+                 ListPaymentsResponse' <$>
+                   (o .:? "payments" .!= mempty))
+
+instance ToJSON ListPaymentsResponse where
+        toJSON ListPaymentsResponse'{..}
+          = object
+              (catMaybes [("payments" .=) <$> _lprPayments])
+
+-- | Message that represents an arbitrary HTTP body. It should only be used
+-- for payload formats that can\'t be represented as JSON, such as raw
+-- binary or an HTML page. This message can be used both in streaming and
+-- non-streaming API methods in the request as well as the response. It can
+-- be used as a top-level request field, which is convenient if one wants
+-- to extract parameters from either the URL or HTTP template into the
+-- request fields and also want access to the raw HTTP body. Example:
+-- message GetResourceRequest { \/\/ A unique request id. string request_id
+-- = 1; \/\/ The raw HTTP body is bound to this field. google.api.HttpBody
+-- http_body = 2; } service ResourceService { rpc
+-- GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc
+-- UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); }
+-- Example with streaming methods: service CaldavService { rpc
+-- GetCalendar(stream google.api.HttpBody) returns (stream
+-- google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody)
+-- returns (stream google.api.HttpBody); } Use of this type only changes
+-- how the request and response bodies are handled, all other features will
+-- continue to work unchanged.
 --
--- * 'addAmpHead'
+-- /See:/ 'hTTPBody' smart constructor.
+data HTTPBody =
+  HTTPBody'
+    { _httpbExtensions :: !(Maybe [HTTPBodyExtensionsItem])
+    , _httpbData :: !(Maybe Bytes)
+    , _httpbContentType :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'HTTPBody' with the minimum fields required to make a request.
 --
--- * 'addAmpBody'
+-- Use one of the following lenses to modify other fields as desired:
 --
--- * 'addAdCode'
-adCode
-    :: AdCode
-adCode =
-  AdCode'
-    { _addKind = "adsense#adCode"
-    , _addAmpHead = Nothing
-    , _addAmpBody = Nothing
-    , _addAdCode = Nothing
+-- * 'httpbExtensions'
+--
+-- * 'httpbData'
+--
+-- * 'httpbContentType'
+hTTPBody
+    :: HTTPBody
+hTTPBody =
+  HTTPBody'
+    { _httpbExtensions = Nothing
+    , _httpbData = Nothing
+    , _httpbContentType = Nothing
     }
 
 
--- | Kind this is, in this case adsense#adCode.
-addKind :: Lens' AdCode Text
-addKind = lens _addKind (\ s a -> s{_addKind = a})
+-- | Application specific response metadata. Must be set in the first
+-- response for streaming APIs.
+httpbExtensions :: Lens' HTTPBody [HTTPBodyExtensionsItem]
+httpbExtensions
+  = lens _httpbExtensions
+      (\ s a -> s{_httpbExtensions = a})
+      . _Default
+      . _Coerce
 
--- | The AMP Auto ad code snippet that goes in the head of an AMP page.
-addAmpHead :: Lens' AdCode (Maybe Text)
-addAmpHead
-  = lens _addAmpHead (\ s a -> s{_addAmpHead = a})
+-- | The HTTP request\/response body as raw binary.
+httpbData :: Lens' HTTPBody (Maybe ByteString)
+httpbData
+  = lens _httpbData (\ s a -> s{_httpbData = a}) .
+      mapping _Bytes
 
--- | The AMP Auto ad code snippet that goes in the body of an AMP page.
-addAmpBody :: Lens' AdCode (Maybe Text)
-addAmpBody
-  = lens _addAmpBody (\ s a -> s{_addAmpBody = a})
+-- | The HTTP Content-Type header value specifying the content type of the
+-- body.
+httpbContentType :: Lens' HTTPBody (Maybe Text)
+httpbContentType
+  = lens _httpbContentType
+      (\ s a -> s{_httpbContentType = a})
 
--- | The Auto ad code snippet. The ad code snippet.
-addAdCode :: Lens' AdCode (Maybe Text)
-addAdCode
-  = lens _addAdCode (\ s a -> s{_addAdCode = a})
-
-instance FromJSON AdCode where
+instance FromJSON HTTPBody where
         parseJSON
-          = withObject "AdCode"
+          = withObject "HTTPBody"
               (\ o ->
-                 AdCode' <$>
-                   (o .:? "kind" .!= "adsense#adCode") <*>
-                     (o .:? "ampHead")
-                     <*> (o .:? "ampBody")
-                     <*> (o .:? "adCode"))
+                 HTTPBody' <$>
+                   (o .:? "extensions" .!= mempty) <*> (o .:? "data")
+                     <*> (o .:? "contentType"))
 
-instance ToJSON AdCode where
-        toJSON AdCode'{..}
+instance ToJSON HTTPBody where
+        toJSON HTTPBody'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _addKind),
-                  ("ampHead" .=) <$> _addAmpHead,
-                  ("ampBody" .=) <$> _addAmpBody,
-                  ("adCode" .=) <$> _addAdCode])
+                 [("extensions" .=) <$> _httpbExtensions,
+                  ("data" .=) <$> _httpbData,
+                  ("contentType" .=) <$> _httpbContentType])
 
+-- | Response definition for the custom channels linked to an adunit list
+-- rpc.
 --
--- /See:/ 'adsenseReportsGenerateResponse' smart constructor.
-data AdsenseReportsGenerateResponse =
-  AdsenseReportsGenerateResponse'
-    { _argrKind             :: !Text
-    , _argrAverages         :: !(Maybe [Text])
-    , _argrEndDate          :: !(Maybe Text)
-    , _argrWarnings         :: !(Maybe [Text])
-    , _argrRows             :: !(Maybe [[Text]])
-    , _argrTotals           :: !(Maybe [Text])
-    , _argrStartDate        :: !(Maybe Text)
-    , _argrHeaders          :: !(Maybe [AdsenseReportsGenerateResponseHeadersItem])
-    , _argrTotalMatchedRows :: !(Maybe (Textual Int64))
+-- /See:/ 'listLinkedCustomChannelsResponse' smart constructor.
+data ListLinkedCustomChannelsResponse =
+  ListLinkedCustomChannelsResponse'
+    { _llccrNextPageToken :: !(Maybe Text)
+    , _llccrCustomChannels :: !(Maybe [CustomChannel])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdsenseReportsGenerateResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListLinkedCustomChannelsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'argrKind'
+-- * 'llccrNextPageToken'
 --
--- * 'argrAverages'
---
--- * 'argrEndDate'
---
--- * 'argrWarnings'
---
--- * 'argrRows'
---
--- * 'argrTotals'
---
--- * 'argrStartDate'
---
--- * 'argrHeaders'
---
--- * 'argrTotalMatchedRows'
-adsenseReportsGenerateResponse
-    :: AdsenseReportsGenerateResponse
-adsenseReportsGenerateResponse =
-  AdsenseReportsGenerateResponse'
-    { _argrKind = "adsense#report"
-    , _argrAverages = Nothing
-    , _argrEndDate = Nothing
-    , _argrWarnings = Nothing
-    , _argrRows = Nothing
-    , _argrTotals = Nothing
-    , _argrStartDate = Nothing
-    , _argrHeaders = Nothing
-    , _argrTotalMatchedRows = Nothing
-    }
+-- * 'llccrCustomChannels'
+listLinkedCustomChannelsResponse
+    :: ListLinkedCustomChannelsResponse
+listLinkedCustomChannelsResponse =
+  ListLinkedCustomChannelsResponse'
+    {_llccrNextPageToken = Nothing, _llccrCustomChannels = Nothing}
 
 
--- | Kind this is, in this case adsense#report.
-argrKind :: Lens' AdsenseReportsGenerateResponse Text
-argrKind = lens _argrKind (\ s a -> s{_argrKind = a})
+-- | Continuation token used to page through alerts. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+llccrNextPageToken :: Lens' ListLinkedCustomChannelsResponse (Maybe Text)
+llccrNextPageToken
+  = lens _llccrNextPageToken
+      (\ s a -> s{_llccrNextPageToken = a})
 
--- | The averages of the report. This is the same length as any other row in
--- the report; cells corresponding to dimension columns are empty.
-argrAverages :: Lens' AdsenseReportsGenerateResponse [Text]
-argrAverages
-  = lens _argrAverages (\ s a -> s{_argrAverages = a})
+-- | The custom channels returned in this list response.
+llccrCustomChannels :: Lens' ListLinkedCustomChannelsResponse [CustomChannel]
+llccrCustomChannels
+  = lens _llccrCustomChannels
+      (\ s a -> s{_llccrCustomChannels = a})
       . _Default
       . _Coerce
 
--- | The requested end date in yyyy-mm-dd format.
-argrEndDate :: Lens' AdsenseReportsGenerateResponse (Maybe Text)
-argrEndDate
-  = lens _argrEndDate (\ s a -> s{_argrEndDate = a})
-
--- | Any warnings associated with generation of the report.
-argrWarnings :: Lens' AdsenseReportsGenerateResponse [Text]
-argrWarnings
-  = lens _argrWarnings (\ s a -> s{_argrWarnings = a})
-      . _Default
-      . _Coerce
-
--- | The output rows of the report. Each row is a list of cells; one for each
--- dimension in the request, followed by one for each metric in the
--- request. The dimension cells contain strings, and the metric cells
--- contain numbers.
-argrRows :: Lens' AdsenseReportsGenerateResponse [[Text]]
-argrRows
-  = lens _argrRows (\ s a -> s{_argrRows = a}) .
-      _Default
-      . _Coerce
-
--- | The totals of the report. This is the same length as any other row in
--- the report; cells corresponding to dimension columns are empty.
-argrTotals :: Lens' AdsenseReportsGenerateResponse [Text]
-argrTotals
-  = lens _argrTotals (\ s a -> s{_argrTotals = a}) .
-      _Default
-      . _Coerce
-
--- | The requested start date in yyyy-mm-dd format.
-argrStartDate :: Lens' AdsenseReportsGenerateResponse (Maybe Text)
-argrStartDate
-  = lens _argrStartDate
-      (\ s a -> s{_argrStartDate = a})
-
--- | The header information of the columns requested in the report. This is a
--- list of headers; one for each dimension in the request, followed by one
--- for each metric in the request.
-argrHeaders :: Lens' AdsenseReportsGenerateResponse [AdsenseReportsGenerateResponseHeadersItem]
-argrHeaders
-  = lens _argrHeaders (\ s a -> s{_argrHeaders = a}) .
-      _Default
-      . _Coerce
-
--- | The total number of rows matched by the report request. Fewer rows may
--- be returned in the response due to being limited by the row count
--- requested or the report row limit.
-argrTotalMatchedRows :: Lens' AdsenseReportsGenerateResponse (Maybe Int64)
-argrTotalMatchedRows
-  = lens _argrTotalMatchedRows
-      (\ s a -> s{_argrTotalMatchedRows = a})
-      . mapping _Coerce
-
-instance FromJSON AdsenseReportsGenerateResponse
+instance FromJSON ListLinkedCustomChannelsResponse
          where
         parseJSON
-          = withObject "AdsenseReportsGenerateResponse"
+          = withObject "ListLinkedCustomChannelsResponse"
               (\ o ->
-                 AdsenseReportsGenerateResponse' <$>
-                   (o .:? "kind" .!= "adsense#report") <*>
-                     (o .:? "averages" .!= mempty)
-                     <*> (o .:? "endDate")
-                     <*> (o .:? "warnings" .!= mempty)
-                     <*> (o .:? "rows" .!= mempty)
-                     <*> (o .:? "totals" .!= mempty)
-                     <*> (o .:? "startDate")
-                     <*> (o .:? "headers" .!= mempty)
-                     <*> (o .:? "totalMatchedRows"))
+                 ListLinkedCustomChannelsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "customChannels" .!= mempty))
 
-instance ToJSON AdsenseReportsGenerateResponse where
-        toJSON AdsenseReportsGenerateResponse'{..}
+instance ToJSON ListLinkedCustomChannelsResponse
+         where
+        toJSON ListLinkedCustomChannelsResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _argrKind),
-                  ("averages" .=) <$> _argrAverages,
-                  ("endDate" .=) <$> _argrEndDate,
-                  ("warnings" .=) <$> _argrWarnings,
-                  ("rows" .=) <$> _argrRows,
-                  ("totals" .=) <$> _argrTotals,
-                  ("startDate" .=) <$> _argrStartDate,
-                  ("headers" .=) <$> _argrHeaders,
-                  ("totalMatchedRows" .=) <$> _argrTotalMatchedRows])
+                 [("nextPageToken" .=) <$> _llccrNextPageToken,
+                  ("customChannels" .=) <$> _llccrCustomChannels])
 
--- | Settings specific to content ads (AFC) and highend mobile content ads
--- (AFMC - deprecated).
+-- | Representation of the AdSense code for a given ad unit.
 --
--- /See:/ 'adUnitContentAdsSettings' smart constructor.
-data AdUnitContentAdsSettings =
-  AdUnitContentAdsSettings'
-    { _aucasBackupOption :: !(Maybe AdUnitContentAdsSettingsBackupOption)
-    , _aucasSize         :: !(Maybe Text)
-    , _aucasType         :: !(Maybe Text)
+-- /See:/ 'adUnitAdCode' smart constructor.
+newtype AdUnitAdCode =
+  AdUnitAdCode'
+    { _auacAdCode :: Maybe Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AdUnitContentAdsSettings' with the minimum fields required to make a request.
+-- | Creates a value of 'AdUnitAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aucasBackupOption'
---
--- * 'aucasSize'
---
--- * 'aucasType'
-adUnitContentAdsSettings
-    :: AdUnitContentAdsSettings
-adUnitContentAdsSettings =
-  AdUnitContentAdsSettings'
-    {_aucasBackupOption = Nothing, _aucasSize = Nothing, _aucasType = Nothing}
+-- * 'auacAdCode'
+adUnitAdCode
+    :: AdUnitAdCode
+adUnitAdCode = AdUnitAdCode' {_auacAdCode = Nothing}
 
 
--- | The backup option to be used in instances where no ad is available.
-aucasBackupOption :: Lens' AdUnitContentAdsSettings (Maybe AdUnitContentAdsSettingsBackupOption)
-aucasBackupOption
-  = lens _aucasBackupOption
-      (\ s a -> s{_aucasBackupOption = a})
+-- | Output only. The AdSense code snippet to add to the body of an HTML
+-- page.
+auacAdCode :: Lens' AdUnitAdCode (Maybe Text)
+auacAdCode
+  = lens _auacAdCode (\ s a -> s{_auacAdCode = a})
 
--- | Size of this ad unit.
-aucasSize :: Lens' AdUnitContentAdsSettings (Maybe Text)
-aucasSize
-  = lens _aucasSize (\ s a -> s{_aucasSize = a})
-
--- | Type of this ad unit.
-aucasType :: Lens' AdUnitContentAdsSettings (Maybe Text)
-aucasType
-  = lens _aucasType (\ s a -> s{_aucasType = a})
-
-instance FromJSON AdUnitContentAdsSettings where
+instance FromJSON AdUnitAdCode where
         parseJSON
-          = withObject "AdUnitContentAdsSettings"
-              (\ o ->
-                 AdUnitContentAdsSettings' <$>
-                   (o .:? "backupOption") <*> (o .:? "size") <*>
-                     (o .:? "type"))
+          = withObject "AdUnitAdCode"
+              (\ o -> AdUnitAdCode' <$> (o .:? "adCode"))
 
-instance ToJSON AdUnitContentAdsSettings where
-        toJSON AdUnitContentAdsSettings'{..}
-          = object
-              (catMaybes
-                 [("backupOption" .=) <$> _aucasBackupOption,
-                  ("size" .=) <$> _aucasSize,
-                  ("type" .=) <$> _aucasType])
+instance ToJSON AdUnitAdCode where
+        toJSON AdUnitAdCode'{..}
+          = object (catMaybes [("adCode" .=) <$> _auacAdCode])
 
+-- | Represents a time zone from the [IANA Time Zone
+-- Database](https:\/\/www.iana.org\/time-zones).
 --
--- /See:/ 'payments' smart constructor.
-data Payments =
-  Payments'
-    { _payKind  :: !Text
-    , _payItems :: !(Maybe [Payment])
+-- /See:/ 'timeZone' smart constructor.
+data TimeZone =
+  TimeZone'
+    { _tzVersion :: !(Maybe Text)
+    , _tzId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'Payments' with the minimum fields required to make a request.
+-- | Creates a value of 'TimeZone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'payKind'
+-- * 'tzVersion'
 --
--- * 'payItems'
-payments
-    :: Payments
-payments = Payments' {_payKind = "adsense#payments", _payItems = Nothing}
+-- * 'tzId'
+timeZone
+    :: TimeZone
+timeZone = TimeZone' {_tzVersion = Nothing, _tzId = Nothing}
 
 
--- | Kind of list this is, in this case adsense#payments.
-payKind :: Lens' Payments Text
-payKind = lens _payKind (\ s a -> s{_payKind = a})
+-- | Optional. IANA Time Zone Database version number, e.g. \"2019a\".
+tzVersion :: Lens' TimeZone (Maybe Text)
+tzVersion
+  = lens _tzVersion (\ s a -> s{_tzVersion = a})
 
--- | The list of Payments for the account. One or both of a) the account\'s
--- most recent payment; and b) the account\'s upcoming payment.
-payItems :: Lens' Payments [Payment]
-payItems
-  = lens _payItems (\ s a -> s{_payItems = a}) .
+-- | IANA Time Zone Database time zone, e.g. \"America\/New_York\".
+tzId :: Lens' TimeZone (Maybe Text)
+tzId = lens _tzId (\ s a -> s{_tzId = a})
+
+instance FromJSON TimeZone where
+        parseJSON
+          = withObject "TimeZone"
+              (\ o ->
+                 TimeZone' <$> (o .:? "version") <*> (o .:? "id"))
+
+instance ToJSON TimeZone where
+        toJSON TimeZone'{..}
+          = object
+              (catMaybes
+                 [("version" .=) <$> _tzVersion, ("id" .=) <$> _tzId])
+
+-- | Representation of a Site.
+--
+-- /See:/ 'site' smart constructor.
+data Site =
+  Site'
+    { _sAutoAdsEnabled :: !(Maybe Bool)
+    , _sState :: !(Maybe SiteState)
+    , _sDomain :: !(Maybe Text)
+    , _sReportingDimensionId :: !(Maybe Text)
+    , _sName :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Site' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sAutoAdsEnabled'
+--
+-- * 'sState'
+--
+-- * 'sDomain'
+--
+-- * 'sReportingDimensionId'
+--
+-- * 'sName'
+site
+    :: Site
+site =
+  Site'
+    { _sAutoAdsEnabled = Nothing
+    , _sState = Nothing
+    , _sDomain = Nothing
+    , _sReportingDimensionId = Nothing
+    , _sName = Nothing
+    }
+
+
+-- | Whether auto ads is turned on for the site.
+sAutoAdsEnabled :: Lens' Site (Maybe Bool)
+sAutoAdsEnabled
+  = lens _sAutoAdsEnabled
+      (\ s a -> s{_sAutoAdsEnabled = a})
+
+-- | Output only. State of a site.
+sState :: Lens' Site (Maybe SiteState)
+sState = lens _sState (\ s a -> s{_sState = a})
+
+-- | Domain (or subdomain) of the site, e.g. \"example.com\" or
+-- \"www.example.com\". This is used in the \`OWNED_SITE_DOMAIN_NAME\`
+-- reporting dimension.
+sDomain :: Lens' Site (Maybe Text)
+sDomain = lens _sDomain (\ s a -> s{_sDomain = a})
+
+-- | Output only. Unique ID of the site as used in the \`OWNED_SITE_ID\`
+-- reporting dimension.
+sReportingDimensionId :: Lens' Site (Maybe Text)
+sReportingDimensionId
+  = lens _sReportingDimensionId
+      (\ s a -> s{_sReportingDimensionId = a})
+
+-- | Resource name of a site. Format: accounts\/{account}\/sites\/{site}
+sName :: Lens' Site (Maybe Text)
+sName = lens _sName (\ s a -> s{_sName = a})
+
+instance FromJSON Site where
+        parseJSON
+          = withObject "Site"
+              (\ o ->
+                 Site' <$>
+                   (o .:? "autoAdsEnabled") <*> (o .:? "state") <*>
+                     (o .:? "domain")
+                     <*> (o .:? "reportingDimensionId")
+                     <*> (o .:? "name"))
+
+instance ToJSON Site where
+        toJSON Site'{..}
+          = object
+              (catMaybes
+                 [("autoAdsEnabled" .=) <$> _sAutoAdsEnabled,
+                  ("state" .=) <$> _sState, ("domain" .=) <$> _sDomain,
+                  ("reportingDimensionId" .=) <$>
+                    _sReportingDimensionId,
+                  ("name" .=) <$> _sName])
+
+-- | Response definition for the ad client list rpc.
+--
+-- /See:/ 'listAdClientsResponse' smart constructor.
+data ListAdClientsResponse =
+  ListAdClientsResponse'
+    { _lacrNextPageToken :: !(Maybe Text)
+    , _lacrAdClients :: !(Maybe [AdClient])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListAdClientsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lacrNextPageToken'
+--
+-- * 'lacrAdClients'
+listAdClientsResponse
+    :: ListAdClientsResponse
+listAdClientsResponse =
+  ListAdClientsResponse'
+    {_lacrNextPageToken = Nothing, _lacrAdClients = Nothing}
+
+
+-- | Continuation token used to page through ad clients. To retrieve the next
+-- page of the results, set the next request\'s \"page_token\" value to
+-- this.
+lacrNextPageToken :: Lens' ListAdClientsResponse (Maybe Text)
+lacrNextPageToken
+  = lens _lacrNextPageToken
+      (\ s a -> s{_lacrNextPageToken = a})
+
+-- | The ad clients returned in this list response.
+lacrAdClients :: Lens' ListAdClientsResponse [AdClient]
+lacrAdClients
+  = lens _lacrAdClients
+      (\ s a -> s{_lacrAdClients = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListAdClientsResponse where
+        parseJSON
+          = withObject "ListAdClientsResponse"
+              (\ o ->
+                 ListAdClientsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "adClients" .!= mempty))
+
+instance ToJSON ListAdClientsResponse where
+        toJSON ListAdClientsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lacrNextPageToken,
+                  ("adClients" .=) <$> _lacrAdClients])
+
+-- | Response definition for the sites list rpc.
+--
+-- /See:/ 'listSitesResponse' smart constructor.
+data ListSitesResponse =
+  ListSitesResponse'
+    { _lsrNextPageToken :: !(Maybe Text)
+    , _lsrSites :: !(Maybe [Site])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListSitesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrNextPageToken'
+--
+-- * 'lsrSites'
+listSitesResponse
+    :: ListSitesResponse
+listSitesResponse =
+  ListSitesResponse' {_lsrNextPageToken = Nothing, _lsrSites = Nothing}
+
+
+-- | Continuation token used to page through sites. To retrieve the next page
+-- of the results, set the next request\'s \"page_token\" value to this.
+lsrNextPageToken :: Lens' ListSitesResponse (Maybe Text)
+lsrNextPageToken
+  = lens _lsrNextPageToken
+      (\ s a -> s{_lsrNextPageToken = a})
+
+-- | The sites returned in this list response.
+lsrSites :: Lens' ListSitesResponse [Site]
+lsrSites
+  = lens _lsrSites (\ s a -> s{_lsrSites = a}) .
       _Default
       . _Coerce
 
-instance FromJSON Payments where
+instance FromJSON ListSitesResponse where
         parseJSON
-          = withObject "Payments"
+          = withObject "ListSitesResponse"
               (\ o ->
-                 Payments' <$>
-                   (o .:? "kind" .!= "adsense#payments") <*>
-                     (o .:? "items" .!= mempty))
+                 ListSitesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "sites" .!= mempty))
 
-instance ToJSON Payments where
-        toJSON Payments'{..}
+instance ToJSON ListSitesResponse where
+        toJSON ListSitesResponse'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _payKind),
-                  ("items" .=) <$> _payItems])
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("sites" .=) <$> _lsrSites])

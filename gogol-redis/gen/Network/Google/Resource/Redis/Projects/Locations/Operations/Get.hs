@@ -43,8 +43,8 @@ module Network.Google.Resource.Redis.Projects.Locations.Operations.Get
     , plogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Redis.Types
+import Network.Google.Prelude
+import Network.Google.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.operations.get@ method which the
 -- 'ProjectsLocationsOperationsGet' request conforms to.
@@ -65,12 +65,12 @@ type ProjectsLocationsOperationsGetResource =
 -- /See:/ 'projectsLocationsOperationsGet' smart constructor.
 data ProjectsLocationsOperationsGet =
   ProjectsLocationsOperationsGet'
-    { _plogXgafv          :: !(Maybe Xgafv)
+    { _plogXgafv :: !(Maybe Xgafv)
     , _plogUploadProtocol :: !(Maybe Text)
-    , _plogAccessToken    :: !(Maybe Text)
-    , _plogUploadType     :: !(Maybe Text)
-    , _plogName           :: !Text
-    , _plogCallback       :: !(Maybe Text)
+    , _plogAccessToken :: !(Maybe Text)
+    , _plogUploadType :: !(Maybe Text)
+    , _plogName :: !Text
+    , _plogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

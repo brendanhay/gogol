@@ -17,50 +17,136 @@
 --
 module Network.Google.CloudShell.Types.Product where
 
-import           Network.Google.CloudShell.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudShell.Types.Sum
+import Network.Google.Prelude
+
+-- | Response message for AddPublicKey.
+--
+-- /See:/ 'addPublicKeyResponse' smart constructor.
+newtype AddPublicKeyResponse =
+  AddPublicKeyResponse'
+    { _apkrKey :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddPublicKeyResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apkrKey'
+addPublicKeyResponse
+    :: AddPublicKeyResponse
+addPublicKeyResponse = AddPublicKeyResponse' {_apkrKey = Nothing}
+
+
+-- | Key that was added to the environment.
+apkrKey :: Lens' AddPublicKeyResponse (Maybe Text)
+apkrKey = lens _apkrKey (\ s a -> s{_apkrKey = a})
+
+instance FromJSON AddPublicKeyResponse where
+        parseJSON
+          = withObject "AddPublicKeyResponse"
+              (\ o -> AddPublicKeyResponse' <$> (o .:? "key"))
+
+instance ToJSON AddPublicKeyResponse where
+        toJSON AddPublicKeyResponse'{..}
+          = object (catMaybes [("key" .=) <$> _apkrKey])
+
+-- | Message included in the metadata field of operations returned from
+-- CreateEnvironment.
+--
+-- /See:/ 'createEnvironmentMetadata' smart constructor.
+data CreateEnvironmentMetadata =
+  CreateEnvironmentMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CreateEnvironmentMetadata' with the minimum fields required to make a request.
+--
+createEnvironmentMetadata
+    :: CreateEnvironmentMetadata
+createEnvironmentMetadata = CreateEnvironmentMetadata'
+
+
+instance FromJSON CreateEnvironmentMetadata where
+        parseJSON
+          = withObject "CreateEnvironmentMetadata"
+              (\ o -> pure CreateEnvironmentMetadata')
+
+instance ToJSON CreateEnvironmentMetadata where
+        toJSON = const emptyObject
+
+-- | Request message for StartEnvironment.
+--
+-- /See:/ 'startEnvironmentRequest' smart constructor.
+data StartEnvironmentRequest =
+  StartEnvironmentRequest'
+    { _serAccessToken :: !(Maybe Text)
+    , _serPublicKeys :: !(Maybe [Text])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'StartEnvironmentRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'serAccessToken'
+--
+-- * 'serPublicKeys'
+startEnvironmentRequest
+    :: StartEnvironmentRequest
+startEnvironmentRequest =
+  StartEnvironmentRequest' {_serAccessToken = Nothing, _serPublicKeys = Nothing}
+
+
+-- | The initial access token passed to the environment. If this is present
+-- and valid, the environment will be pre-authenticated with gcloud so that
+-- the user can run gcloud commands in Cloud Shell without having to log
+-- in. This code can be updated later by calling AuthorizeEnvironment.
+serAccessToken :: Lens' StartEnvironmentRequest (Maybe Text)
+serAccessToken
+  = lens _serAccessToken
+      (\ s a -> s{_serAccessToken = a})
+
+-- | Public keys that should be added to the environment before it is
+-- started.
+serPublicKeys :: Lens' StartEnvironmentRequest [Text]
+serPublicKeys
+  = lens _serPublicKeys
+      (\ s a -> s{_serPublicKeys = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON StartEnvironmentRequest where
+        parseJSON
+          = withObject "StartEnvironmentRequest"
+              (\ o ->
+                 StartEnvironmentRequest' <$>
+                   (o .:? "accessToken") <*>
+                     (o .:? "publicKeys" .!= mempty))
+
+instance ToJSON StartEnvironmentRequest where
+        toJSON StartEnvironmentRequest'{..}
+          = object
+              (catMaybes
+                 [("accessToken" .=) <$> _serAccessToken,
+                  ("publicKeys" .=) <$> _serPublicKeys])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
+-- is used by [gRPC](https:\/\/github.com\/grpc). Each \`Status\` message
 -- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` that can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting. -
--- Batch operations. If a client uses batch request and batch response, the
--- \`Status\` message should be used directly inside batch response, one
--- for each error sub-response. - Asynchronous operations. If an API call
--- embeds asynchronous operation results in its response, the status of
--- those operations should be represented directly using the \`Status\`
--- message. - Logging. If some API errors are stored in logs, the message
--- \`Status\` could be used directly after any stripping needed for
--- security\/privacy reasons.
+-- details. You can find out more about this error model and how to work
+-- with it in the [API Design
+-- Guide](https:\/\/cloud.google.com\/apis\/design\/errors).
 --
 -- /See:/ 'status' smart constructor.
 data Status =
   Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
+    , _sCode :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -122,7 +208,7 @@ instance ToJSON Status where
 data ListOperationsResponse =
   ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Operation])
+    , _lorOperations :: !(Maybe [Operation])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -170,6 +256,69 @@ instance ToJSON ListOperationsResponse where
                  [("nextPageToken" .=) <$> _lorNextPageToken,
                   ("operations" .=) <$> _lorOperations])
 
+-- | Request message for AuthorizeEnvironment.
+--
+-- /See:/ 'authorizeEnvironmentRequest' smart constructor.
+data AuthorizeEnvironmentRequest =
+  AuthorizeEnvironmentRequest'
+    { _aerAccessToken :: !(Maybe Text)
+    , _aerExpireTime :: !(Maybe DateTime')
+    , _aerIdToken :: !(Maybe Text)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AuthorizeEnvironmentRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aerAccessToken'
+--
+-- * 'aerExpireTime'
+--
+-- * 'aerIdToken'
+authorizeEnvironmentRequest
+    :: AuthorizeEnvironmentRequest
+authorizeEnvironmentRequest =
+  AuthorizeEnvironmentRequest'
+    {_aerAccessToken = Nothing, _aerExpireTime = Nothing, _aerIdToken = Nothing}
+
+
+-- | The OAuth access token that should be sent to the environment.
+aerAccessToken :: Lens' AuthorizeEnvironmentRequest (Maybe Text)
+aerAccessToken
+  = lens _aerAccessToken
+      (\ s a -> s{_aerAccessToken = a})
+
+-- | The time when the credentials expire. If not set, defaults to one hour
+-- from when the server received the request.
+aerExpireTime :: Lens' AuthorizeEnvironmentRequest (Maybe UTCTime)
+aerExpireTime
+  = lens _aerExpireTime
+      (\ s a -> s{_aerExpireTime = a})
+      . mapping _DateTime
+
+-- | The OAuth ID token that should be sent to the environment.
+aerIdToken :: Lens' AuthorizeEnvironmentRequest (Maybe Text)
+aerIdToken
+  = lens _aerIdToken (\ s a -> s{_aerIdToken = a})
+
+instance FromJSON AuthorizeEnvironmentRequest where
+        parseJSON
+          = withObject "AuthorizeEnvironmentRequest"
+              (\ o ->
+                 AuthorizeEnvironmentRequest' <$>
+                   (o .:? "accessToken") <*> (o .:? "expireTime") <*>
+                     (o .:? "idToken"))
+
+instance ToJSON AuthorizeEnvironmentRequest where
+        toJSON AuthorizeEnvironmentRequest'{..}
+          = object
+              (catMaybes
+                 [("accessToken" .=) <$> _aerAccessToken,
+                  ("expireTime" .=) <$> _aerExpireTime,
+                  ("idToken" .=) <$> _aerIdToken])
+
 -- | The request message for Operations.CancelOperation.
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
@@ -199,10 +348,10 @@ instance ToJSON CancelOperationRequest where
 -- /See:/ 'operation' smart constructor.
 data Operation =
   Operation'
-    { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe Status)
+    { _oDone :: !(Maybe Bool)
+    , _oError :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
-    , _oName     :: !(Maybe Text)
+    , _oName :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -257,7 +406,8 @@ oResponse
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- \`name\` should be a resource name ending with
+-- \`operations\/{unique_id}\`.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -316,19 +466,20 @@ instance ToJSON Empty where
 -- | A Cloud Shell environment, which is defined as the combination of a
 -- Docker image specifying what is installed on the environment and a home
 -- directory containing the user\'s data that will remain across sessions.
--- Each user has a single environment with the ID \"default\".
+-- Each user has at least an environment with the ID \"default\".
 --
 -- /See:/ 'environment' smart constructor.
 data Environment =
   Environment'
-    { _eState       :: !(Maybe EnvironmentState)
-    , _ePublicKeys  :: !(Maybe [PublicKey])
+    { _eState :: !(Maybe EnvironmentState)
+    , _ePublicKeys :: !(Maybe [Text])
+    , _eWebHost :: !(Maybe Text)
     , _eSSHUsername :: !(Maybe Text)
-    , _eName        :: !(Maybe Text)
-    , _eId          :: !(Maybe Text)
-    , _eSSHHost     :: !(Maybe Text)
+    , _eName :: !(Maybe Text)
+    , _eId :: !(Maybe Text)
+    , _eSSHHost :: !(Maybe Text)
     , _eDockerImage :: !(Maybe Text)
-    , _eSSHPort     :: !(Maybe (Textual Int32))
+    , _eSSHPort :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -340,6 +491,8 @@ data Environment =
 -- * 'eState'
 --
 -- * 'ePublicKeys'
+--
+-- * 'eWebHost'
 --
 -- * 'eSSHUsername'
 --
@@ -358,6 +511,7 @@ environment =
   Environment'
     { _eState = Nothing
     , _ePublicKeys = Nothing
+    , _eWebHost = Nothing
     , _eSSHUsername = Nothing
     , _eName = Nothing
     , _eId = Nothing
@@ -374,13 +528,18 @@ eState = lens _eState (\ s a -> s{_eState = a})
 -- | Output only. Public keys associated with the environment. Clients can
 -- connect to this environment via SSH only if they possess a private key
 -- corresponding to at least one of these public keys. Keys can be added to
--- or removed from the environment using the CreatePublicKey and
--- DeletePublicKey methods.
-ePublicKeys :: Lens' Environment [PublicKey]
+-- or removed from the environment using the AddPublicKey and
+-- RemovePublicKey methods.
+ePublicKeys :: Lens' Environment [Text]
 ePublicKeys
   = lens _ePublicKeys (\ s a -> s{_ePublicKeys = a}) .
       _Default
       . _Coerce
+
+-- | Output only. Host to which clients can connect to initiate HTTPS or WSS
+-- connections with the environment.
+eWebHost :: Lens' Environment (Maybe Text)
+eWebHost = lens _eWebHost (\ s a -> s{_eWebHost = a})
 
 -- | Output only. Username that clients should use when initiating SSH
 -- sessions with the environment.
@@ -388,7 +547,7 @@ eSSHUsername :: Lens' Environment (Maybe Text)
 eSSHUsername
   = lens _eSSHUsername (\ s a -> s{_eSSHUsername = a})
 
--- | Output only. Full name of this resource, in the format
+-- | Immutable. Full name of this resource, in the format
 -- \`users\/{owner_email}\/environments\/{environment_id}\`.
 -- \`{owner_email}\` is the email address of the user to whom this
 -- environment belongs, and \`{environment_id}\` is the identifier of this
@@ -397,7 +556,8 @@ eSSHUsername
 eName :: Lens' Environment (Maybe Text)
 eName = lens _eName (\ s a -> s{_eName = a})
 
--- | Output only. The environment\'s identifier, which is always \"default\".
+-- | Output only. The environment\'s identifier, unique among the user\'s
+-- environments.
 eId :: Lens' Environment (Maybe Text)
 eId = lens _eId (\ s a -> s{_eId = a})
 
@@ -406,8 +566,8 @@ eId = lens _eId (\ s a -> s{_eId = a})
 eSSHHost :: Lens' Environment (Maybe Text)
 eSSHHost = lens _eSSHHost (\ s a -> s{_eSSHHost = a})
 
--- | Required. Full path to the Docker image used to run this environment,
--- e.g. \"gcr.io\/dev-con\/cloud-devshell:latest\".
+-- | Required. Immutable. Full path to the Docker image used to run this
+-- environment, e.g. \"gcr.io\/dev-con\/cloud-devshell:latest\".
 eDockerImage :: Lens' Environment (Maybe Text)
 eDockerImage
   = lens _eDockerImage (\ s a -> s{_eDockerImage = a})
@@ -425,6 +585,7 @@ instance FromJSON Environment where
               (\ o ->
                  Environment' <$>
                    (o .:? "state") <*> (o .:? "publicKeys" .!= mempty)
+                     <*> (o .:? "webHost")
                      <*> (o .:? "sshUsername")
                      <*> (o .:? "name")
                      <*> (o .:? "id")
@@ -438,11 +599,59 @@ instance ToJSON Environment where
               (catMaybes
                  [("state" .=) <$> _eState,
                   ("publicKeys" .=) <$> _ePublicKeys,
+                  ("webHost" .=) <$> _eWebHost,
                   ("sshUsername" .=) <$> _eSSHUsername,
                   ("name" .=) <$> _eName, ("id" .=) <$> _eId,
                   ("sshHost" .=) <$> _eSSHHost,
                   ("dockerImage" .=) <$> _eDockerImage,
                   ("sshPort" .=) <$> _eSSHPort])
+
+-- | Message included in the metadata field of operations returned from
+-- AuthorizeEnvironment.
+--
+-- /See:/ 'authorizeEnvironmentMetadata' smart constructor.
+data AuthorizeEnvironmentMetadata =
+  AuthorizeEnvironmentMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AuthorizeEnvironmentMetadata' with the minimum fields required to make a request.
+--
+authorizeEnvironmentMetadata
+    :: AuthorizeEnvironmentMetadata
+authorizeEnvironmentMetadata = AuthorizeEnvironmentMetadata'
+
+
+instance FromJSON AuthorizeEnvironmentMetadata where
+        parseJSON
+          = withObject "AuthorizeEnvironmentMetadata"
+              (\ o -> pure AuthorizeEnvironmentMetadata')
+
+instance ToJSON AuthorizeEnvironmentMetadata where
+        toJSON = const emptyObject
+
+-- | Response message for RemovePublicKey.
+--
+-- /See:/ 'removePublicKeyResponse' smart constructor.
+data RemovePublicKeyResponse =
+  RemovePublicKeyResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RemovePublicKeyResponse' with the minimum fields required to make a request.
+--
+removePublicKeyResponse
+    :: RemovePublicKeyResponse
+removePublicKeyResponse = RemovePublicKeyResponse'
+
+
+instance FromJSON RemovePublicKeyResponse where
+        parseJSON
+          = withObject "RemovePublicKeyResponse"
+              (\ o -> pure RemovePublicKeyResponse')
+
+instance ToJSON RemovePublicKeyResponse where
+        toJSON = const emptyObject
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
@@ -479,67 +688,76 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | A public SSH key, corresponding to a private SSH key held by the client.
+-- | Message included in the metadata field of operations returned from
+-- AddPublicKey.
 --
--- /See:/ 'publicKey' smart constructor.
-data PublicKey =
-  PublicKey'
-    { _pkFormat :: !(Maybe PublicKeyFormat)
-    , _pkKey    :: !(Maybe Bytes)
-    , _pkName   :: !(Maybe Text)
-    }
+-- /See:/ 'addPublicKeyMetadata' smart constructor.
+data AddPublicKeyMetadata =
+  AddPublicKeyMetadata'
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'PublicKey' with the minimum fields required to make a request.
+-- | Creates a value of 'AddPublicKeyMetadata' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pkFormat'
---
--- * 'pkKey'
---
--- * 'pkName'
-publicKey
-    :: PublicKey
-publicKey =
-  PublicKey' {_pkFormat = Nothing, _pkKey = Nothing, _pkName = Nothing}
+addPublicKeyMetadata
+    :: AddPublicKeyMetadata
+addPublicKeyMetadata = AddPublicKeyMetadata'
 
 
--- | Required. Format of this key\'s content.
-pkFormat :: Lens' PublicKey (Maybe PublicKeyFormat)
-pkFormat = lens _pkFormat (\ s a -> s{_pkFormat = a})
-
--- | Required. Content of this key.
-pkKey :: Lens' PublicKey (Maybe ByteString)
-pkKey
-  = lens _pkKey (\ s a -> s{_pkKey = a}) .
-      mapping _Bytes
-
--- | Output only. Full name of this resource, in the format
--- \`users\/{owner_email}\/environments\/{environment_id}\/publicKeys\/{key_id}\`.
--- \`{owner_email}\` is the email address of the user to whom the key
--- belongs. \`{environment_id}\` is the identifier of the environment to
--- which the key grants access. \`{key_id}\` is the unique identifier of
--- the key. For example,
--- \`users\/someone\'example.com\/environments\/default\/publicKeys\/myKey\`.
-pkName :: Lens' PublicKey (Maybe Text)
-pkName = lens _pkName (\ s a -> s{_pkName = a})
-
-instance FromJSON PublicKey where
+instance FromJSON AddPublicKeyMetadata where
         parseJSON
-          = withObject "PublicKey"
-              (\ o ->
-                 PublicKey' <$>
-                   (o .:? "format") <*> (o .:? "key") <*>
-                     (o .:? "name"))
+          = withObject "AddPublicKeyMetadata"
+              (\ o -> pure AddPublicKeyMetadata')
 
-instance ToJSON PublicKey where
-        toJSON PublicKey'{..}
-          = object
-              (catMaybes
-                 [("format" .=) <$> _pkFormat, ("key" .=) <$> _pkKey,
-                  ("name" .=) <$> _pkName])
+instance ToJSON AddPublicKeyMetadata where
+        toJSON = const emptyObject
+
+-- | Response message for AuthorizeEnvironment.
+--
+-- /See:/ 'authorizeEnvironmentResponse' smart constructor.
+data AuthorizeEnvironmentResponse =
+  AuthorizeEnvironmentResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AuthorizeEnvironmentResponse' with the minimum fields required to make a request.
+--
+authorizeEnvironmentResponse
+    :: AuthorizeEnvironmentResponse
+authorizeEnvironmentResponse = AuthorizeEnvironmentResponse'
+
+
+instance FromJSON AuthorizeEnvironmentResponse where
+        parseJSON
+          = withObject "AuthorizeEnvironmentResponse"
+              (\ o -> pure AuthorizeEnvironmentResponse')
+
+instance ToJSON AuthorizeEnvironmentResponse where
+        toJSON = const emptyObject
+
+-- | Message included in the metadata field of operations returned from
+-- RemovePublicKey.
+--
+-- /See:/ 'removePublicKeyMetadata' smart constructor.
+data RemovePublicKeyMetadata =
+  RemovePublicKeyMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RemovePublicKeyMetadata' with the minimum fields required to make a request.
+--
+removePublicKeyMetadata
+    :: RemovePublicKeyMetadata
+removePublicKeyMetadata = RemovePublicKeyMetadata'
+
+
+instance FromJSON RemovePublicKeyMetadata where
+        parseJSON
+          = withObject "RemovePublicKeyMetadata"
+              (\ o -> pure RemovePublicKeyMetadata')
+
+instance ToJSON RemovePublicKeyMetadata where
+        toJSON = const emptyObject
 
 -- | Message included in the metadata field of operations returned from
 -- StartEnvironment.
@@ -614,6 +832,43 @@ instance FromJSON OperationMetadata where
 
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
+
+-- | Request message for AddPublicKey.
+--
+-- /See:/ 'addPublicKeyRequest' smart constructor.
+newtype AddPublicKeyRequest =
+  AddPublicKeyRequest'
+    { _aKey :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'AddPublicKeyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aKey'
+addPublicKeyRequest
+    :: AddPublicKeyRequest
+addPublicKeyRequest = AddPublicKeyRequest' {_aKey = Nothing}
+
+
+-- | Key that should be added to the environment. Supported formats are
+-- \`ssh-dss\` (see RFC4253), \`ssh-rsa\` (see RFC4253),
+-- \`ecdsa-sha2-nistp256\` (see RFC5656), \`ecdsa-sha2-nistp384\` (see
+-- RFC5656) and \`ecdsa-sha2-nistp521\` (see RFC5656). It should be
+-- structured as , where part is encoded with Base64.
+aKey :: Lens' AddPublicKeyRequest (Maybe Text)
+aKey = lens _aKey (\ s a -> s{_aKey = a})
+
+instance FromJSON AddPublicKeyRequest where
+        parseJSON
+          = withObject "AddPublicKeyRequest"
+              (\ o -> AddPublicKeyRequest' <$> (o .:? "key"))
+
+instance ToJSON AddPublicKeyRequest where
+        toJSON AddPublicKeyRequest'{..}
+          = object (catMaybes [("key" .=) <$> _aKey])
 
 -- | Message included in the response field of operations returned from
 -- StartEnvironment once the operation is complete.
@@ -695,3 +950,60 @@ instance FromJSON OperationResponse where
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
+
+-- | Request message for RemovePublicKey.
+--
+-- /See:/ 'removePublicKeyRequest' smart constructor.
+newtype RemovePublicKeyRequest =
+  RemovePublicKeyRequest'
+    { _rpkrKey :: Maybe Text
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RemovePublicKeyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rpkrKey'
+removePublicKeyRequest
+    :: RemovePublicKeyRequest
+removePublicKeyRequest = RemovePublicKeyRequest' {_rpkrKey = Nothing}
+
+
+-- | Key that should be removed from the environment.
+rpkrKey :: Lens' RemovePublicKeyRequest (Maybe Text)
+rpkrKey = lens _rpkrKey (\ s a -> s{_rpkrKey = a})
+
+instance FromJSON RemovePublicKeyRequest where
+        parseJSON
+          = withObject "RemovePublicKeyRequest"
+              (\ o -> RemovePublicKeyRequest' <$> (o .:? "key"))
+
+instance ToJSON RemovePublicKeyRequest where
+        toJSON RemovePublicKeyRequest'{..}
+          = object (catMaybes [("key" .=) <$> _rpkrKey])
+
+-- | Message included in the metadata field of operations returned from
+-- DeleteEnvironment.
+--
+-- /See:/ 'deleteEnvironmentMetadata' smart constructor.
+data DeleteEnvironmentMetadata =
+  DeleteEnvironmentMetadata'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeleteEnvironmentMetadata' with the minimum fields required to make a request.
+--
+deleteEnvironmentMetadata
+    :: DeleteEnvironmentMetadata
+deleteEnvironmentMetadata = DeleteEnvironmentMetadata'
+
+
+instance FromJSON DeleteEnvironmentMetadata where
+        parseJSON
+          = withObject "DeleteEnvironmentMetadata"
+              (\ o -> pure DeleteEnvironmentMetadata')
+
+instance ToJSON DeleteEnvironmentMetadata where
+        toJSON = const emptyObject

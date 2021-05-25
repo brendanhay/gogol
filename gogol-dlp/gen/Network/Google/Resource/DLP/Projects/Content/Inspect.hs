@@ -48,8 +48,8 @@ module Network.Google.Resource.DLP.Projects.Content.Inspect
     , pciCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.content.inspect@ method which the
 -- 'ProjectsContentInspect' request conforms to.
@@ -79,13 +79,13 @@ type ProjectsContentInspectResource =
 -- /See:/ 'projectsContentInspect' smart constructor.
 data ProjectsContentInspect =
   ProjectsContentInspect'
-    { _pciParent         :: !Text
-    , _pciXgafv          :: !(Maybe Xgafv)
+    { _pciParent :: !Text
+    , _pciXgafv :: !(Maybe Xgafv)
     , _pciUploadProtocol :: !(Maybe Text)
-    , _pciAccessToken    :: !(Maybe Text)
-    , _pciUploadType     :: !(Maybe Text)
-    , _pciPayload        :: !GooglePrivacyDlpV2InspectContentRequest
-    , _pciCallback       :: !(Maybe Text)
+    , _pciAccessToken :: !(Maybe Text)
+    , _pciUploadType :: !(Maybe Text)
+    , _pciPayload :: !GooglePrivacyDlpV2InspectContentRequest
+    , _pciCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +123,16 @@ projectsContentInspect pPciParent_ pPciPayload_ =
     }
 
 
--- | The parent resource name, for example projects\/my-project-id.
+-- | Parent resource name. The format of this value varies depending on
+-- whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID The
+-- following example \`parent\` string specifies a parent project with the
+-- identifier \`example-project\`, and specifies the \`europe-west3\`
+-- location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pciParent :: Lens' ProjectsContentInspect Text
 pciParent
   = lens _pciParent (\ s a -> s{_pciParent = a})

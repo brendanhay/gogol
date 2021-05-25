@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Pause
     , proCallback
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.pause@ method which the
 -- 'ProjectsLocationsJobsPause' request conforms to.
@@ -69,13 +69,13 @@ type ProjectsLocationsJobsPauseResource =
 -- /See:/ 'projectsLocationsJobsPause' smart constructor.
 data ProjectsLocationsJobsPause =
   ProjectsLocationsJobsPause'
-    { _proXgafv          :: !(Maybe Xgafv)
+    { _proXgafv :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
-    , _proAccessToken    :: !(Maybe Text)
-    , _proUploadType     :: !(Maybe Text)
-    , _proPayload        :: !PauseJobRequest
-    , _proName           :: !Text
-    , _proCallback       :: !(Maybe Text)
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proPayload :: !PauseJobRequest
+    , _proName :: !Text
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

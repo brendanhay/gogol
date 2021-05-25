@@ -22,7 +22,7 @@
 --
 -- Creates a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v2/ Tag Manager API Reference> for @tagmanager.accounts.containers.create@.
+-- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Create
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
     , AccountsContainersCreate
 
     -- * Request Lenses
-    , accParent
-    , accPayload
+    , acccParent
+    , acccXgafv
+    , acccUploadProtocol
+    , acccAccessToken
+    , acccUploadType
+    , acccPayload
+    , acccCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.TagManager.Types
+import Network.Google.Prelude
+import Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.create@ method which the
 -- 'AccountsContainersCreate' request conforms to.
@@ -47,16 +52,26 @@ type AccountsContainersCreateResource =
        "v2" :>
          Capture "parent" Text :>
            "containers" :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Container :> Post '[JSON] Container
+             QueryParam "$.xgafv" Xgafv :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "callback" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Container :> Post '[JSON] Container
 
 -- | Creates a Container.
 --
 -- /See:/ 'accountsContainersCreate' smart constructor.
 data AccountsContainersCreate =
   AccountsContainersCreate'
-    { _accParent  :: !Text
-    , _accPayload :: !Container
+    { _acccParent :: !Text
+    , _acccXgafv :: !(Maybe Xgafv)
+    , _acccUploadProtocol :: !(Maybe Text)
+    , _acccAccessToken :: !(Maybe Text)
+    , _acccUploadType :: !(Maybe Text)
+    , _acccPayload :: !Container
+    , _acccCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -65,34 +80,84 @@ data AccountsContainersCreate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accParent'
+-- * 'acccParent'
 --
--- * 'accPayload'
+-- * 'acccXgafv'
+--
+-- * 'acccUploadProtocol'
+--
+-- * 'acccAccessToken'
+--
+-- * 'acccUploadType'
+--
+-- * 'acccPayload'
+--
+-- * 'acccCallback'
 accountsContainersCreate
-    :: Text -- ^ 'accParent'
-    -> Container -- ^ 'accPayload'
+    :: Text -- ^ 'acccParent'
+    -> Container -- ^ 'acccPayload'
     -> AccountsContainersCreate
-accountsContainersCreate pAccParent_ pAccPayload_ =
+accountsContainersCreate pAcccParent_ pAcccPayload_ =
   AccountsContainersCreate'
-    {_accParent = pAccParent_, _accPayload = pAccPayload_}
+    { _acccParent = pAcccParent_
+    , _acccXgafv = Nothing
+    , _acccUploadProtocol = Nothing
+    , _acccAccessToken = Nothing
+    , _acccUploadType = Nothing
+    , _acccPayload = pAcccPayload_
+    , _acccCallback = Nothing
+    }
 
 
 -- | GTM Account\'s API relative path. Example: accounts\/{account_id}.
-accParent :: Lens' AccountsContainersCreate Text
-accParent
-  = lens _accParent (\ s a -> s{_accParent = a})
+acccParent :: Lens' AccountsContainersCreate Text
+acccParent
+  = lens _acccParent (\ s a -> s{_acccParent = a})
+
+-- | V1 error format.
+acccXgafv :: Lens' AccountsContainersCreate (Maybe Xgafv)
+acccXgafv
+  = lens _acccXgafv (\ s a -> s{_acccXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+acccUploadProtocol :: Lens' AccountsContainersCreate (Maybe Text)
+acccUploadProtocol
+  = lens _acccUploadProtocol
+      (\ s a -> s{_acccUploadProtocol = a})
+
+-- | OAuth access token.
+acccAccessToken :: Lens' AccountsContainersCreate (Maybe Text)
+acccAccessToken
+  = lens _acccAccessToken
+      (\ s a -> s{_acccAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+acccUploadType :: Lens' AccountsContainersCreate (Maybe Text)
+acccUploadType
+  = lens _acccUploadType
+      (\ s a -> s{_acccUploadType = a})
 
 -- | Multipart request metadata.
-accPayload :: Lens' AccountsContainersCreate Container
-accPayload
-  = lens _accPayload (\ s a -> s{_accPayload = a})
+acccPayload :: Lens' AccountsContainersCreate Container
+acccPayload
+  = lens _acccPayload (\ s a -> s{_acccPayload = a})
+
+-- | JSONP
+acccCallback :: Lens' AccountsContainersCreate (Maybe Text)
+acccCallback
+  = lens _acccCallback (\ s a -> s{_acccCallback = a})
 
 instance GoogleRequest AccountsContainersCreate where
         type Rs AccountsContainersCreate = Container
         type Scopes AccountsContainersCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient AccountsContainersCreate'{..}
-          = go _accParent (Just AltJSON) _accPayload
+          = go _acccParent _acccXgafv _acccUploadProtocol
+              _acccAccessToken
+              _acccUploadType
+              _acccCallback
+              (Just AltJSON)
+              _acccPayload
               tagManagerService
           where go
                   = buildClient

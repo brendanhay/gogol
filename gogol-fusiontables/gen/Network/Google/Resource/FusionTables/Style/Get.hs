@@ -37,8 +37,8 @@ module Network.Google.Resource.FusionTables.Style.Get
     , sgTableId
     ) where
 
-import           Network.Google.FusionTables.Types
-import           Network.Google.Prelude
+import Network.Google.FusionTables.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.get@ method which the
 -- 'StyleGet' request conforms to.

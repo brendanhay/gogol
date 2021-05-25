@@ -20,19 +20,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Moves a Folder under a new resource parent. Returns an Operation which
--- can be used to track the progress of the folder move workflow. Upon
--- success the Operation.response field will be populated with the moved
--- Folder. Upon failure, a FolderOperationError categorizing the failure
--- cause will be returned - if the failure occurs synchronously then the
--- FolderOperationError will be returned via the Status.details field and
--- if it occurs asynchronously then the FolderOperation will be returned
--- via the Operation.error field. In addition, the Operation.metadata field
--- will be populated with a FolderOperation message as an aid to stateless
--- clients. Folder moves will be rejected if they violate either the
--- naming, height or fanout constraints described in the CreateFolder
--- documentation. The caller must have \`resourcemanager.folders.move\`
--- permission on the folder\'s current and proposed new parent.
+-- Moves a folder under a new resource parent. Returns an \`Operation\`
+-- which can be used to track the progress of the folder move workflow.
+-- Upon success, the \`Operation.response\` field will be populated with
+-- the moved folder. Upon failure, a \`FolderOperationError\` categorizing
+-- the failure cause will be returned - if the failure occurs synchronously
+-- then the \`FolderOperationError\` will be returned in the
+-- \`Status.details\` field. If it occurs asynchronously, then the
+-- FolderOperation will be returned in the \`Operation.error\` field. In
+-- addition, the \`Operation.metadata\` field will be populated with a
+-- \`FolderOperation\` message as an aid to stateless clients. Folder moves
+-- will be rejected if they violate either the naming, height, or fanout
+-- constraints described in the CreateFolder documentation. The caller must
+-- have \`resourcemanager.folders.move\` permission on the folder\'s
+-- current and proposed new parent.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.folders.move@.
 module Network.Google.Resource.CloudResourceManager.Folders.Move
@@ -54,13 +55,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.Move
     , fmCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.move@ method which the
 -- 'FoldersMove' request conforms to.
 type FoldersMoveResource =
-     "v2" :>
+     "v3" :>
        CaptureMode "name" "move" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -71,30 +72,31 @@ type FoldersMoveResource =
                      ReqBody '[JSON] MoveFolderRequest :>
                        Post '[JSON] Operation
 
--- | Moves a Folder under a new resource parent. Returns an Operation which
--- can be used to track the progress of the folder move workflow. Upon
--- success the Operation.response field will be populated with the moved
--- Folder. Upon failure, a FolderOperationError categorizing the failure
--- cause will be returned - if the failure occurs synchronously then the
--- FolderOperationError will be returned via the Status.details field and
--- if it occurs asynchronously then the FolderOperation will be returned
--- via the Operation.error field. In addition, the Operation.metadata field
--- will be populated with a FolderOperation message as an aid to stateless
--- clients. Folder moves will be rejected if they violate either the
--- naming, height or fanout constraints described in the CreateFolder
--- documentation. The caller must have \`resourcemanager.folders.move\`
--- permission on the folder\'s current and proposed new parent.
+-- | Moves a folder under a new resource parent. Returns an \`Operation\`
+-- which can be used to track the progress of the folder move workflow.
+-- Upon success, the \`Operation.response\` field will be populated with
+-- the moved folder. Upon failure, a \`FolderOperationError\` categorizing
+-- the failure cause will be returned - if the failure occurs synchronously
+-- then the \`FolderOperationError\` will be returned in the
+-- \`Status.details\` field. If it occurs asynchronously, then the
+-- FolderOperation will be returned in the \`Operation.error\` field. In
+-- addition, the \`Operation.metadata\` field will be populated with a
+-- \`FolderOperation\` message as an aid to stateless clients. Folder moves
+-- will be rejected if they violate either the naming, height, or fanout
+-- constraints described in the CreateFolder documentation. The caller must
+-- have \`resourcemanager.folders.move\` permission on the folder\'s
+-- current and proposed new parent.
 --
 -- /See:/ 'foldersMove' smart constructor.
 data FoldersMove =
   FoldersMove'
-    { _fmXgafv          :: !(Maybe Xgafv)
+    { _fmXgafv :: !(Maybe Xgafv)
     , _fmUploadProtocol :: !(Maybe Text)
-    , _fmAccessToken    :: !(Maybe Text)
-    , _fmUploadType     :: !(Maybe Text)
-    , _fmPayload        :: !MoveFolderRequest
-    , _fmName           :: !Text
-    , _fmCallback       :: !(Maybe Text)
+    , _fmAccessToken :: !(Maybe Text)
+    , _fmUploadType :: !(Maybe Text)
+    , _fmPayload :: !MoveFolderRequest
+    , _fmName :: !Text
+    , _fmCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -158,7 +160,7 @@ fmPayload :: Lens' FoldersMove MoveFolderRequest
 fmPayload
   = lens _fmPayload (\ s a -> s{_fmPayload = a})
 
--- | The resource name of the Folder to move. Must be of the form
+-- | Required. The resource name of the Folder to move. Must be of the form
 -- folders\/{folder_id}
 fmName :: Lens' FoldersMove Text
 fmName = lens _fmName (\ s a -> s{_fmName = a})

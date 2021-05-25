@@ -42,8 +42,8 @@ module Network.Google.Resource.Script.Projects.Versions.Get
     , pvgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.versions.get@ method which the
 -- 'ProjectsVersionsGet' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsVersionsGetResource =
 -- /See:/ 'projectsVersionsGet' smart constructor.
 data ProjectsVersionsGet =
   ProjectsVersionsGet'
-    { _pvgXgafv          :: !(Maybe Xgafv)
+    { _pvgXgafv :: !(Maybe Xgafv)
     , _pvgUploadProtocol :: !(Maybe Text)
-    , _pvgAccessToken    :: !(Maybe Text)
-    , _pvgUploadType     :: !(Maybe Text)
-    , _pvgVersionNumber  :: !(Textual Int32)
-    , _pvgScriptId       :: !Text
-    , _pvgCallback       :: !(Maybe Text)
+    , _pvgAccessToken :: !(Maybe Text)
+    , _pvgUploadType :: !(Maybe Text)
+    , _pvgVersionNumber :: !(Textual Int32)
+    , _pvgScriptId :: !Text
+    , _pvgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

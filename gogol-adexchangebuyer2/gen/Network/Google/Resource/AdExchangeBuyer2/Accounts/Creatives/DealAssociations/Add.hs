@@ -43,8 +43,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.DealAssociati
     , acdaaCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.dealAssociations.add@ method which the
 -- 'AccountsCreativesDealAssociationsAdd' request conforms to.
@@ -69,14 +69,14 @@ type AccountsCreativesDealAssociationsAddResource =
 -- /See:/ 'accountsCreativesDealAssociationsAdd' smart constructor.
 data AccountsCreativesDealAssociationsAdd =
   AccountsCreativesDealAssociationsAdd'
-    { _acdaaXgafv          :: !(Maybe Xgafv)
+    { _acdaaXgafv :: !(Maybe Xgafv)
     , _acdaaUploadProtocol :: !(Maybe Text)
-    , _acdaaAccessToken    :: !(Maybe Text)
-    , _acdaaUploadType     :: !(Maybe Text)
-    , _acdaaCreativeId     :: !Text
-    , _acdaaPayload        :: !AddDealAssociationRequest
-    , _acdaaAccountId      :: !Text
-    , _acdaaCallback       :: !(Maybe Text)
+    , _acdaaAccessToken :: !(Maybe Text)
+    , _acdaaUploadType :: !(Maybe Text)
+    , _acdaaCreativeId :: !Text
+    , _acdaaPayload :: !AddDealAssociationRequest
+    , _acdaaAccountId :: !Text
+    , _acdaaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

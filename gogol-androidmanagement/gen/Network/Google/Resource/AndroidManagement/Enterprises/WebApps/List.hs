@@ -43,8 +43,8 @@ module Network.Google.Resource.AndroidManagement.Enterprises.WebApps.List
     , ewalCallback
     ) where
 
-import           Network.Google.AndroidManagement.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidManagement.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidmanagement.enterprises.webApps.list@ method which the
 -- 'EnterprisesWebAppsList' request conforms to.
@@ -67,14 +67,14 @@ type EnterprisesWebAppsListResource =
 -- /See:/ 'enterprisesWebAppsList' smart constructor.
 data EnterprisesWebAppsList =
   EnterprisesWebAppsList'
-    { _ewalParent         :: !Text
-    , _ewalXgafv          :: !(Maybe Xgafv)
+    { _ewalParent :: !Text
+    , _ewalXgafv :: !(Maybe Xgafv)
     , _ewalUploadProtocol :: !(Maybe Text)
-    , _ewalAccessToken    :: !(Maybe Text)
-    , _ewalUploadType     :: !(Maybe Text)
-    , _ewalPageToken      :: !(Maybe Text)
-    , _ewalPageSize       :: !(Maybe (Textual Int32))
-    , _ewalCallback       :: !(Maybe Text)
+    , _ewalAccessToken :: !(Maybe Text)
+    , _ewalUploadType :: !(Maybe Text)
+    , _ewalPageToken :: !(Maybe Text)
+    , _ewalPageSize :: !(Maybe (Textual Int32))
+    , _ewalCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

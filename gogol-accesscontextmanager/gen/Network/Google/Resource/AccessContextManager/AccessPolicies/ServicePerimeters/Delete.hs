@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete an Service Perimeter by resource name. The longrunning operation
+-- Delete a Service Perimeter by resource name. The longrunning operation
 -- from this RPC will have a successful status once the Service Perimeter
 -- has been removed from long-lasting storage.
 --
@@ -43,8 +43,8 @@ module Network.Google.Resource.AccessContextManager.AccessPolicies.ServicePerime
     , apspdCallback
     ) where
 
-import           Network.Google.AccessContextManager.Types
-import           Network.Google.Prelude
+import Network.Google.AccessContextManager.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.delete@ method which the
 -- 'AccessPoliciesServicePerimetersDelete' request conforms to.
@@ -58,19 +58,19 @@ type AccessPoliciesServicePerimetersDeleteResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Delete an Service Perimeter by resource name. The longrunning operation
+-- | Delete a Service Perimeter by resource name. The longrunning operation
 -- from this RPC will have a successful status once the Service Perimeter
 -- has been removed from long-lasting storage.
 --
 -- /See:/ 'accessPoliciesServicePerimetersDelete' smart constructor.
 data AccessPoliciesServicePerimetersDelete =
   AccessPoliciesServicePerimetersDelete'
-    { _apspdXgafv          :: !(Maybe Xgafv)
+    { _apspdXgafv :: !(Maybe Xgafv)
     , _apspdUploadProtocol :: !(Maybe Text)
-    , _apspdAccessToken    :: !(Maybe Text)
-    , _apspdUploadType     :: !(Maybe Text)
-    , _apspdName           :: !Text
-    , _apspdCallback       :: !(Maybe Text)
+    , _apspdAccessToken :: !(Maybe Text)
+    , _apspdUploadType :: !(Maybe Text)
+    , _apspdName :: !Text
+    , _apspdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

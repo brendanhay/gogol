@@ -43,8 +43,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.Sync
     , prsCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.sync@ method which the
 -- 'ProjectsReposSync' request conforms to.
@@ -66,13 +66,13 @@ type ProjectsReposSyncResource =
 -- /See:/ 'projectsReposSync' smart constructor.
 data ProjectsReposSync =
   ProjectsReposSync'
-    { _prsXgafv          :: !(Maybe Xgafv)
+    { _prsXgafv :: !(Maybe Xgafv)
     , _prsUploadProtocol :: !(Maybe Text)
-    , _prsAccessToken    :: !(Maybe Text)
-    , _prsUploadType     :: !(Maybe Text)
-    , _prsPayload        :: !SyncRepoRequest
-    , _prsName           :: !Text
-    , _prsCallback       :: !(Maybe Text)
+    , _prsAccessToken :: !(Maybe Text)
+    , _prsUploadType :: !(Maybe Text)
+    , _prsPayload :: !SyncRepoRequest
+    , _prsName :: !Text
+    , _prsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

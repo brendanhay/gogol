@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.RegionDiskTypes.List
     , RegionDiskTypesList
 
     -- * Request Lenses
+    , rdtlReturnPartialSuccess
     , rdtlOrderBy
     , rdtlProject
     , rdtlFilter
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.RegionDiskTypes.List
     , rdtlMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDiskTypes.list@ method which the
 -- 'RegionDiskTypesList' request conforms to.
@@ -55,12 +56,13 @@ type RegionDiskTypesListResource =
              "regions" :>
                Capture "region" Text :>
                  "diskTypes" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] RegionDiskTypeList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] RegionDiskTypeList
 
 -- | Retrieves a list of regional disk types available to the specified
 -- project.
@@ -68,11 +70,12 @@ type RegionDiskTypesListResource =
 -- /See:/ 'regionDiskTypesList' smart constructor.
 data RegionDiskTypesList =
   RegionDiskTypesList'
-    { _rdtlOrderBy    :: !(Maybe Text)
-    , _rdtlProject    :: !Text
-    , _rdtlFilter     :: !(Maybe Text)
-    , _rdtlRegion     :: !Text
-    , _rdtlPageToken  :: !(Maybe Text)
+    { _rdtlReturnPartialSuccess :: !(Maybe Bool)
+    , _rdtlOrderBy :: !(Maybe Text)
+    , _rdtlProject :: !Text
+    , _rdtlFilter :: !(Maybe Text)
+    , _rdtlRegion :: !Text
+    , _rdtlPageToken :: !(Maybe Text)
     , _rdtlMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,6 +84,8 @@ data RegionDiskTypesList =
 -- | Creates a value of 'RegionDiskTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdtlReturnPartialSuccess'
 --
 -- * 'rdtlOrderBy'
 --
@@ -99,7 +104,8 @@ regionDiskTypesList
     -> RegionDiskTypesList
 regionDiskTypesList pRdtlProject_ pRdtlRegion_ =
   RegionDiskTypesList'
-    { _rdtlOrderBy = Nothing
+    { _rdtlReturnPartialSuccess = Nothing
+    , _rdtlOrderBy = Nothing
     , _rdtlProject = pRdtlProject_
     , _rdtlFilter = Nothing
     , _rdtlRegion = pRdtlRegion_
@@ -108,14 +114,21 @@ regionDiskTypesList pRdtlProject_ pRdtlRegion_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+rdtlReturnPartialSuccess :: Lens' RegionDiskTypesList (Maybe Bool)
+rdtlReturnPartialSuccess
+  = lens _rdtlReturnPartialSuccess
+      (\ s a -> s{_rdtlReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 rdtlOrderBy :: Lens' RegionDiskTypesList (Maybe Text)
 rdtlOrderBy
   = lens _rdtlOrderBy (\ s a -> s{_rdtlOrderBy = a})
@@ -128,19 +141,20 @@ rdtlProject
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 rdtlFilter :: Lens' RegionDiskTypesList (Maybe Text)
 rdtlFilter
   = lens _rdtlFilter (\ s a -> s{_rdtlFilter = a})
@@ -150,18 +164,19 @@ rdtlRegion :: Lens' RegionDiskTypesList Text
 rdtlRegion
   = lens _rdtlRegion (\ s a -> s{_rdtlRegion = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 rdtlPageToken :: Lens' RegionDiskTypesList (Maybe Text)
 rdtlPageToken
   = lens _rdtlPageToken
       (\ s a -> s{_rdtlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 rdtlMaxResults :: Lens' RegionDiskTypesList Word32
 rdtlMaxResults
   = lens _rdtlMaxResults
@@ -175,7 +190,9 @@ instance GoogleRequest RegionDiskTypesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionDiskTypesList'{..}
-          = go _rdtlProject _rdtlRegion _rdtlOrderBy
+          = go _rdtlProject _rdtlRegion
+              _rdtlReturnPartialSuccess
+              _rdtlOrderBy
               _rdtlFilter
               _rdtlPageToken
               (Just _rdtlMaxResults)

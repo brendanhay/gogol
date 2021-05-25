@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -30,11 +30,22 @@ module Network.Google.PubSub.Types
     , pcAttributes
     , pcPushEndpoint
 
+    -- * ValidateSchemaResponse
+    , ValidateSchemaResponse
+    , validateSchemaResponse
+
+    -- * SchemaSettings
+    , SchemaSettings
+    , schemaSettings
+    , ssSchema
+    , ssEncoding
+
     -- * ReceivedMessage
     , ReceivedMessage
     , receivedMessage
     , rmAckId
     , rmMessage
+    , rmDeliveryAttempt
 
     -- * Snapshot
     , Snapshot
@@ -43,6 +54,9 @@ module Network.Google.PubSub.Types
     , sName
     , sLabels
     , sExpireTime
+
+    -- * ProjectsSchemasGetView
+    , ProjectsSchemasGetView (..)
 
     -- * ListTopicSnapshotsResponse
     , ListTopicSnapshotsResponse
@@ -57,6 +71,9 @@ module Network.Google.PubSub.Types
     , eExpression
     , eTitle
     , eDescription
+
+    -- * ValidateMessageRequestEncoding
+    , ValidateMessageRequestEncoding (..)
 
     -- * OidcToken
     , OidcToken
@@ -86,6 +103,7 @@ module Network.Google.PubSub.Types
     , pmPublishTime
     , pmAttributes
     , pmMessageId
+    , pmOrderingKey
 
     -- * ListTopicSubscriptionsResponse
     , ListTopicSubscriptionsResponse
@@ -99,16 +117,26 @@ module Network.Google.PubSub.Types
     , ltrNextPageToken
     , ltrTopics
 
+    -- * ListSchemasResponse
+    , ListSchemasResponse
+    , listSchemasResponse
+    , lsrNextPageToken
+    , lsrSchemas
+
     -- * PullResponse
     , PullResponse
     , pullResponse
     , prReceivedMessages
 
+    -- * ValidateMessageResponse
+    , ValidateMessageResponse
+    , validateMessageResponse
+
     -- * ListSnapshotsResponse
     , ListSnapshotsResponse
     , listSnapshotsResponse
-    , lsrNextPageToken
-    , lsrSnapshots
+    , lisNextPageToken
+    , lisSnapshots
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -127,11 +155,22 @@ module Network.Google.PubSub.Types
     , srSnapshot
     , srTime
 
+    -- * Schema
+    , Schema
+    , schema
+    , schDefinition
+    , schName
+    , schType
+
     -- * Topic
     , Topic
     , topic
+    , tSchemaSettings
+    , tSatisfiesPzs
     , tName
+    , tMessageStoragePolicy
     , tLabels
+    , tKmsKeyName
 
     -- * TopicLabels
     , TopicLabels
@@ -149,11 +188,26 @@ module Network.Google.PubSub.Types
     , usrSnapshot
     , usrUpdateMask
 
+    -- * ValidateMessageRequest
+    , ValidateMessageRequest
+    , validateMessageRequest
+    , vmrSchema
+    , vmrName
+    , vmrMessage
+    , vmrEncoding
+
     -- * PullRequest
     , PullRequest
     , pullRequest
     , prMaxMessages
     , prReturnImmediately
+
+    -- * SchemaSettingsEncoding
+    , SchemaSettingsEncoding (..)
+
+    -- * DetachSubscriptionResponse
+    , DetachSubscriptionResponse
+    , detachSubscriptionResponse
 
     -- * PubsubMessageAttributes
     , PubsubMessageAttributes
@@ -162,6 +216,17 @@ module Network.Google.PubSub.Types
 
     -- * Xgafv
     , Xgafv (..)
+
+    -- * DeadLetterPolicy
+    , DeadLetterPolicy
+    , deadLetterPolicy
+    , dlpDeadLetterTopic
+    , dlpMaxDeliveryAttempts
+
+    -- * MessageStoragePolicy
+    , MessageStoragePolicy
+    , messageStoragePolicy
+    , mspAllowedPersistenceRegions
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
@@ -172,6 +237,12 @@ module Network.Google.PubSub.Types
     , PublishResponse
     , publishResponse
     , prMessageIds
+
+    -- * RetryPolicy
+    , RetryPolicy
+    , retryPolicy
+    , rpMinimumBackoff
+    , rpMaximumBackoff
 
     -- * PublishRequest
     , PublishRequest
@@ -208,13 +279,21 @@ module Network.Google.PubSub.Types
     , Subscription
     , subscription
     , subPushConfig
+    , subEnableMessageOrdering
+    , subDetached
     , subMessageRetentionDuration
     , subTopic
     , subName
+    , subDeadLetterPolicy
     , subLabels
     , subRetainAckedMessages
+    , subFilter
     , subAckDeadlineSeconds
+    , subRetryPolicy
     , subExpirationPolicy
+
+    -- * ProjectsSchemasListView
+    , ProjectsSchemasListView (..)
 
     -- * UpdateSubscriptionRequest
     , UpdateSubscriptionRequest
@@ -227,6 +306,11 @@ module Network.Google.PubSub.Types
     , subscriptionLabels
     , slAddtional
 
+    -- * ValidateSchemaRequest
+    , ValidateSchemaRequest
+    , validateSchemaRequest
+    , vsrSchema
+
     -- * SnapshotLabels
     , SnapshotLabels
     , snapshotLabels
@@ -235,8 +319,8 @@ module Network.Google.PubSub.Types
     -- * ListSubscriptionsResponse
     , ListSubscriptionsResponse
     , listSubscriptionsResponse
-    , lisNextPageToken
-    , lisSubscriptions
+    , lsrsNextPageToken
+    , lsrsSubscriptions
 
     -- * Binding
     , Binding
@@ -251,15 +335,18 @@ module Network.Google.PubSub.Types
     , utrUpdateMask
     , utrTopic
 
+    -- * SchemaType
+    , SchemaType (..)
+
     -- * AcknowledgeRequest
     , AcknowledgeRequest
     , acknowledgeRequest
     , arAckIds
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types.Product
-import           Network.Google.PubSub.Types.Sum
+import Network.Google.Prelude
+import Network.Google.PubSub.Types.Product
+import Network.Google.PubSub.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Pub/Sub API. This contains the host and root path used as a starting point for constructing service requests.
 pubSubService :: ServiceConfig
@@ -267,7 +354,7 @@ pubSubService
   = defaultService (ServiceId "pubsub:v1")
       "pubsub.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy
 

@@ -57,8 +57,8 @@ module Network.Google.Resource.DigitalAssetLinks.Statements.List
     , slCallback
     ) where
 
-import           Network.Google.DigitalAssetLinks.Types
-import           Network.Google.Prelude
+import Network.Google.DigitalAssetLinks.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @digitalassetlinks.statements.list@ method which the
 -- 'StatementsList' request conforms to.
@@ -97,15 +97,15 @@ type StatementsListResource =
 -- /See:/ 'statementsList' smart constructor.
 data StatementsList =
   StatementsList'
-    { _slXgafv                                        :: !(Maybe Xgafv)
+    { _slXgafv :: !(Maybe Xgafv)
     , _slSourceAndroidAppCertificateSha256Fingerprint :: !(Maybe Text)
-    , _slSourceAndroidAppPackageName                  :: !(Maybe Text)
-    , _slUploadProtocol                               :: !(Maybe Text)
-    , _slAccessToken                                  :: !(Maybe Text)
-    , _slUploadType                                   :: !(Maybe Text)
-    , _slRelation                                     :: !(Maybe Text)
-    , _slSourceWebSite                                :: !(Maybe Text)
-    , _slCallback                                     :: !(Maybe Text)
+    , _slSourceAndroidAppPackageName :: !(Maybe Text)
+    , _slUploadProtocol :: !(Maybe Text)
+    , _slAccessToken :: !(Maybe Text)
+    , _slUploadType :: !(Maybe Text)
+    , _slRelation :: !(Maybe Text)
+    , _slSourceWebSite :: !(Maybe Text)
+    , _slCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

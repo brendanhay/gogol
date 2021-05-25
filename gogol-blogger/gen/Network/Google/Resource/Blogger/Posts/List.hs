@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of posts, possibly filtered.
+-- Lists posts.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.list@.
 module Network.Google.Resource.Blogger.Posts.List
     (
     -- * REST Resource
@@ -34,9 +34,13 @@ module Network.Google.Resource.Blogger.Posts.List
 
     -- * Request Lenses
     , pllStatus
+    , pllXgafv
+    , pllUploadProtocol
     , pllOrderBy
+    , pllAccessToken
     , pllFetchImages
     , pllEndDate
+    , pllUploadType
     , pllBlogId
     , pllStartDate
     , pllFetchBodies
@@ -44,48 +48,59 @@ module Network.Google.Resource.Blogger.Posts.List
     , pllLabels
     , pllPageToken
     , pllMaxResults
+    , pllCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.list@ method which the
 -- 'PostsList' request conforms to.
 type PostsListResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               QueryParams "status" PostsListStatus :>
-                 QueryParam "orderBy" PostsListOrderBy :>
-                   QueryParam "fetchImages" Bool :>
-                     QueryParam "endDate" DateTime' :>
-                       QueryParam "startDate" DateTime' :>
-                         QueryParam "fetchBodies" Bool :>
-                           QueryParam "view" PostsListView :>
-                             QueryParam "labels" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "maxResults" (Textual Word32) :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] PostList
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             QueryParams "status" PostsListStatus :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "orderBy" PostsListOrderBy :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "fetchImages" Bool :>
+                         QueryParam "endDate" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "startDate" Text :>
+                               QueryParam "fetchBodies" Bool :>
+                                 QueryParam "view" PostsListView :>
+                                   QueryParam "labels" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "maxResults" (Textual Word32)
+                                         :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] PostList
 
--- | Retrieves a list of posts, possibly filtered.
+-- | Lists posts.
 --
 -- /See:/ 'postsList' smart constructor.
 data PostsList =
   PostsList'
-    { _pllStatus      :: !(Maybe [PostsListStatus])
-    , _pllOrderBy     :: !PostsListOrderBy
+    { _pllStatus :: !(Maybe [PostsListStatus])
+    , _pllXgafv :: !(Maybe Xgafv)
+    , _pllUploadProtocol :: !(Maybe Text)
+    , _pllOrderBy :: !PostsListOrderBy
+    , _pllAccessToken :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
-    , _pllEndDate     :: !(Maybe DateTime')
-    , _pllBlogId      :: !Text
-    , _pllStartDate   :: !(Maybe DateTime')
+    , _pllEndDate :: !(Maybe Text)
+    , _pllUploadType :: !(Maybe Text)
+    , _pllBlogId :: !Text
+    , _pllStartDate :: !(Maybe Text)
     , _pllFetchBodies :: !Bool
-    , _pllView        :: !(Maybe PostsListView)
-    , _pllLabels      :: !(Maybe Text)
-    , _pllPageToken   :: !(Maybe Text)
-    , _pllMaxResults  :: !(Maybe (Textual Word32))
+    , _pllView :: !(Maybe PostsListView)
+    , _pllLabels :: !(Maybe Text)
+    , _pllPageToken :: !(Maybe Text)
+    , _pllMaxResults :: !(Maybe (Textual Word32))
+    , _pllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -96,11 +111,19 @@ data PostsList =
 --
 -- * 'pllStatus'
 --
+-- * 'pllXgafv'
+--
+-- * 'pllUploadProtocol'
+--
 -- * 'pllOrderBy'
+--
+-- * 'pllAccessToken'
 --
 -- * 'pllFetchImages'
 --
 -- * 'pllEndDate'
+--
+-- * 'pllUploadType'
 --
 -- * 'pllBlogId'
 --
@@ -115,15 +138,21 @@ data PostsList =
 -- * 'pllPageToken'
 --
 -- * 'pllMaxResults'
+--
+-- * 'pllCallback'
 postsList
     :: Text -- ^ 'pllBlogId'
     -> PostsList
 postsList pPllBlogId_ =
   PostsList'
     { _pllStatus = Nothing
+    , _pllXgafv = Nothing
+    , _pllUploadProtocol = Nothing
     , _pllOrderBy = Published
+    , _pllAccessToken = Nothing
     , _pllFetchImages = Nothing
     , _pllEndDate = Nothing
+    , _pllUploadType = Nothing
     , _pllBlogId = pPllBlogId_
     , _pllStartDate = Nothing
     , _pllFetchBodies = True
@@ -131,73 +160,85 @@ postsList pPllBlogId_ =
     , _pllLabels = Nothing
     , _pllPageToken = Nothing
     , _pllMaxResults = Nothing
+    , _pllCallback = Nothing
     }
 
 
--- | Statuses to include in the results.
 pllStatus :: Lens' PostsList [PostsListStatus]
 pllStatus
   = lens _pllStatus (\ s a -> s{_pllStatus = a}) .
       _Default
       . _Coerce
 
--- | Sort search results
+-- | V1 error format.
+pllXgafv :: Lens' PostsList (Maybe Xgafv)
+pllXgafv = lens _pllXgafv (\ s a -> s{_pllXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pllUploadProtocol :: Lens' PostsList (Maybe Text)
+pllUploadProtocol
+  = lens _pllUploadProtocol
+      (\ s a -> s{_pllUploadProtocol = a})
+
 pllOrderBy :: Lens' PostsList PostsListOrderBy
 pllOrderBy
   = lens _pllOrderBy (\ s a -> s{_pllOrderBy = a})
 
--- | Whether image URL metadata for each post is included.
+-- | OAuth access token.
+pllAccessToken :: Lens' PostsList (Maybe Text)
+pllAccessToken
+  = lens _pllAccessToken
+      (\ s a -> s{_pllAccessToken = a})
+
 pllFetchImages :: Lens' PostsList (Maybe Bool)
 pllFetchImages
   = lens _pllFetchImages
       (\ s a -> s{_pllFetchImages = a})
 
--- | Latest post date to fetch, a date-time with RFC 3339 formatting.
-pllEndDate :: Lens' PostsList (Maybe UTCTime)
+pllEndDate :: Lens' PostsList (Maybe Text)
 pllEndDate
-  = lens _pllEndDate (\ s a -> s{_pllEndDate = a}) .
-      mapping _DateTime
+  = lens _pllEndDate (\ s a -> s{_pllEndDate = a})
 
--- | ID of the blog to fetch posts from.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pllUploadType :: Lens' PostsList (Maybe Text)
+pllUploadType
+  = lens _pllUploadType
+      (\ s a -> s{_pllUploadType = a})
+
 pllBlogId :: Lens' PostsList Text
 pllBlogId
   = lens _pllBlogId (\ s a -> s{_pllBlogId = a})
 
--- | Earliest post date to fetch, a date-time with RFC 3339 formatting.
-pllStartDate :: Lens' PostsList (Maybe UTCTime)
+pllStartDate :: Lens' PostsList (Maybe Text)
 pllStartDate
   = lens _pllStartDate (\ s a -> s{_pllStartDate = a})
-      . mapping _DateTime
 
--- | Whether the body content of posts is included (default: true). This
--- should be set to false when the post bodies are not required, to help
--- minimize traffic.
 pllFetchBodies :: Lens' PostsList Bool
 pllFetchBodies
   = lens _pllFetchBodies
       (\ s a -> s{_pllFetchBodies = a})
 
--- | Access level with which to view the returned result. Note that some
--- fields require escalated access.
 pllView :: Lens' PostsList (Maybe PostsListView)
 pllView = lens _pllView (\ s a -> s{_pllView = a})
 
--- | Comma-separated list of labels to search for.
 pllLabels :: Lens' PostsList (Maybe Text)
 pllLabels
   = lens _pllLabels (\ s a -> s{_pllLabels = a})
 
--- | Continuation token if the request is paged.
 pllPageToken :: Lens' PostsList (Maybe Text)
 pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
--- | Maximum number of posts to fetch.
 pllMaxResults :: Lens' PostsList (Maybe Word32)
 pllMaxResults
   = lens _pllMaxResults
       (\ s a -> s{_pllMaxResults = a})
       . mapping _Coerce
+
+-- | JSONP
+pllCallback :: Lens' PostsList (Maybe Text)
+pllCallback
+  = lens _pllCallback (\ s a -> s{_pllCallback = a})
 
 instance GoogleRequest PostsList where
         type Rs PostsList = PostList
@@ -205,16 +246,20 @@ instance GoogleRequest PostsList where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsList'{..}
-          = go _pllBlogId (_pllStatus ^. _Default)
+          = go _pllBlogId (_pllStatus ^. _Default) _pllXgafv
+              _pllUploadProtocol
               (Just _pllOrderBy)
+              _pllAccessToken
               _pllFetchImages
               _pllEndDate
+              _pllUploadType
               _pllStartDate
               (Just _pllFetchBodies)
               _pllView
               _pllLabels
               _pllPageToken
               _pllMaxResults
+              _pllCallback
               (Just AltJSON)
               bloggerService
           where go

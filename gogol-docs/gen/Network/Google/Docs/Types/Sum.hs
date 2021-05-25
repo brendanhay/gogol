@@ -16,7 +16,7 @@
 --
 module Network.Google.Docs.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The text direction of this paragraph. If unset, the value defaults to
 -- LEFT_TO_RIGHT since paragraph direction is not inherited.
@@ -131,6 +131,41 @@ instance FromJSON TableColumnPropertiesWidthType where
     parseJSON = parseJSONText "TableColumnPropertiesWidthType"
 
 instance ToJSON TableColumnPropertiesWidthType where
+    toJSON = toJSONText
+
+-- | Output only. The type of section.
+data SectionStyleSectionType
+    = SectionTypeUnspecified
+      -- ^ @SECTION_TYPE_UNSPECIFIED@
+      -- The section type is unspecified.
+    | Continuous
+      -- ^ @CONTINUOUS@
+      -- The section starts immediately after the last paragraph of the previous
+      -- section.
+    | NextPage
+      -- ^ @NEXT_PAGE@
+      -- The section starts on the next page.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SectionStyleSectionType
+
+instance FromHttpApiData SectionStyleSectionType where
+    parseQueryParam = \case
+        "SECTION_TYPE_UNSPECIFIED" -> Right SectionTypeUnspecified
+        "CONTINUOUS" -> Right Continuous
+        "NEXT_PAGE" -> Right NextPage
+        x -> Left ("Unable to parse SectionStyleSectionType from: " <> x)
+
+instance ToHttpApiData SectionStyleSectionType where
+    toQueryParam = \case
+        SectionTypeUnspecified -> "SECTION_TYPE_UNSPECIFIED"
+        Continuous -> "CONTINUOUS"
+        NextPage -> "NEXT_PAGE"
+
+instance FromJSON SectionStyleSectionType where
+    parseJSON = parseJSONText "SectionStyleSectionType"
+
+instance ToJSON SectionStyleSectionType where
     toJSON = toJSONText
 
 -- | The kinds of bullet glyphs to be used.
@@ -507,6 +542,56 @@ instance FromJSON ParagraphBOrderDashStyle where
 instance ToJSON ParagraphBOrderDashStyle where
     toJSON = toJSONText
 
+-- | The suggestions view mode to apply to the document. This allows viewing
+-- the document with all suggestions inline, accepted or rejected. If one
+-- is not specified, DEFAULT_FOR_CURRENT_ACCESS is used.
+data DocumentsGetSuggestionsViewMode
+    = DefaultForCurrentAccess
+      -- ^ @DEFAULT_FOR_CURRENT_ACCESS@
+      -- The SuggestionsViewMode applied to the returned document depends on the
+      -- user\'s current access level. If the user only has view access,
+      -- PREVIEW_WITHOUT_SUGGESTIONS is applied. Otherwise, SUGGESTIONS_INLINE is
+      -- applied. This is the default suggestions view mode.
+    | SuggestionsInline
+      -- ^ @SUGGESTIONS_INLINE@
+      -- The returned document has suggestions inline. Suggested changes will be
+      -- differentiated from base content within the document. Requests to
+      -- retrieve a document using this mode will return a 403 error if the user
+      -- does not have permission to view suggested changes.
+    | PreviewSuggestionsAccepted
+      -- ^ @PREVIEW_SUGGESTIONS_ACCEPTED@
+      -- The returned document is a preview with all suggested changes accepted.
+      -- Requests to retrieve a document using this mode will return a 403 error
+      -- if the user does not have permission to view suggested changes.
+    | PreviewWithoutSuggestions
+      -- ^ @PREVIEW_WITHOUT_SUGGESTIONS@
+      -- The returned document is a preview with all suggested changes rejected
+      -- if there are any suggestions in the document.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DocumentsGetSuggestionsViewMode
+
+instance FromHttpApiData DocumentsGetSuggestionsViewMode where
+    parseQueryParam = \case
+        "DEFAULT_FOR_CURRENT_ACCESS" -> Right DefaultForCurrentAccess
+        "SUGGESTIONS_INLINE" -> Right SuggestionsInline
+        "PREVIEW_SUGGESTIONS_ACCEPTED" -> Right PreviewSuggestionsAccepted
+        "PREVIEW_WITHOUT_SUGGESTIONS" -> Right PreviewWithoutSuggestions
+        x -> Left ("Unable to parse DocumentsGetSuggestionsViewMode from: " <> x)
+
+instance ToHttpApiData DocumentsGetSuggestionsViewMode where
+    toQueryParam = \case
+        DefaultForCurrentAccess -> "DEFAULT_FOR_CURRENT_ACCESS"
+        SuggestionsInline -> "SUGGESTIONS_INLINE"
+        PreviewSuggestionsAccepted -> "PREVIEW_SUGGESTIONS_ACCEPTED"
+        PreviewWithoutSuggestions -> "PREVIEW_WITHOUT_SUGGESTIONS"
+
+instance FromJSON DocumentsGetSuggestionsViewMode where
+    parseJSON = parseJSONText "DocumentsGetSuggestionsViewMode"
+
+instance ToJSON DocumentsGetSuggestionsViewMode where
+    toJSON = toJSONText
+
 -- | The text alignment for this paragraph.
 data ParagraphStyleAlignment
     = PSAAlignmentUnspecified
@@ -553,6 +638,41 @@ instance FromJSON ParagraphStyleAlignment where
 instance ToJSON ParagraphStyleAlignment where
     toJSON = toJSONText
 
+-- | The type of section to insert.
+data InsertSectionBreakRequestSectionType
+    = ISBRSTSectionTypeUnspecified
+      -- ^ @SECTION_TYPE_UNSPECIFIED@
+      -- The section type is unspecified.
+    | ISBRSTContinuous
+      -- ^ @CONTINUOUS@
+      -- The section starts immediately after the last paragraph of the previous
+      -- section.
+    | ISBRSTNextPage
+      -- ^ @NEXT_PAGE@
+      -- The section starts on the next page.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InsertSectionBreakRequestSectionType
+
+instance FromHttpApiData InsertSectionBreakRequestSectionType where
+    parseQueryParam = \case
+        "SECTION_TYPE_UNSPECIFIED" -> Right ISBRSTSectionTypeUnspecified
+        "CONTINUOUS" -> Right ISBRSTContinuous
+        "NEXT_PAGE" -> Right ISBRSTNextPage
+        x -> Left ("Unable to parse InsertSectionBreakRequestSectionType from: " <> x)
+
+instance ToHttpApiData InsertSectionBreakRequestSectionType where
+    toQueryParam = \case
+        ISBRSTSectionTypeUnspecified -> "SECTION_TYPE_UNSPECIFIED"
+        ISBRSTContinuous -> "CONTINUOUS"
+        ISBRSTNextPage -> "NEXT_PAGE"
+
+instance FromJSON InsertSectionBreakRequestSectionType where
+    parseJSON = parseJSONText "InsertSectionBreakRequestSectionType"
+
+instance ToJSON InsertSectionBreakRequestSectionType where
+    toJSON = toJSONText
+
 -- | The property state of the border property.
 data EmbeddedObjectBOrderPropertyState
     = Rendered
@@ -585,8 +705,39 @@ instance FromJSON EmbeddedObjectBOrderPropertyState where
 instance ToJSON EmbeddedObjectBOrderPropertyState where
     toJSON = toJSONText
 
+-- | The type of header to create.
+data CreateHeaderRequestType
+    = HeaderFooterTypeUnspecified
+      -- ^ @HEADER_FOOTER_TYPE_UNSPECIFIED@
+      -- The header\/footer type is unspecified.
+    | Default
+      -- ^ @DEFAULT@
+      -- A default header\/footer.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreateHeaderRequestType
+
+instance FromHttpApiData CreateHeaderRequestType where
+    parseQueryParam = \case
+        "HEADER_FOOTER_TYPE_UNSPECIFIED" -> Right HeaderFooterTypeUnspecified
+        "DEFAULT" -> Right Default
+        x -> Left ("Unable to parse CreateHeaderRequestType from: " <> x)
+
+instance ToHttpApiData CreateHeaderRequestType where
+    toQueryParam = \case
+        HeaderFooterTypeUnspecified -> "HEADER_FOOTER_TYPE_UNSPECIFIED"
+        Default -> "DEFAULT"
+
+instance FromJSON CreateHeaderRequestType where
+    parseJSON = parseJSONText "CreateHeaderRequestType"
+
+instance ToJSON CreateHeaderRequestType where
+    toJSON = toJSONText
+
 -- | The style of column separators. This style can be set even when there is
--- one column in the section.
+-- one column in the section. When updating this property, setting a
+-- concrete value is required. Unsetting this property results in a 400 bad
+-- request error.
 data SectionStyleColumnSeparatorStyle
     = SSCSSColumnSeparatorStyleUnspecified
       -- ^ @COLUMN_SEPARATOR_STYLE_UNSPECIFIED@
@@ -685,7 +836,8 @@ instance ToJSON AutoTextType where
     toJSON = toJSONText
 
 -- | The content direction of this section. If unset, the value defaults to
--- LEFT_TO_RIGHT.
+-- LEFT_TO_RIGHT. When updating this property, setting a concrete value is
+-- required. Unsetting this property results in a 400 bad request error.
 data SectionStyleContentDirection
     = SSCDContentDirectionUnspecified
       -- ^ @CONTENT_DIRECTION_UNSPECIFIED@
@@ -717,6 +869,35 @@ instance FromJSON SectionStyleContentDirection where
     parseJSON = parseJSONText "SectionStyleContentDirection"
 
 instance ToJSON SectionStyleContentDirection where
+    toJSON = toJSONText
+
+-- | The type of footer to create.
+data CreateFooterRequestType
+    = CFRTHeaderFooterTypeUnspecified
+      -- ^ @HEADER_FOOTER_TYPE_UNSPECIFIED@
+      -- The header\/footer type is unspecified.
+    | CFRTDefault
+      -- ^ @DEFAULT@
+      -- A default header\/footer.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreateFooterRequestType
+
+instance FromHttpApiData CreateFooterRequestType where
+    parseQueryParam = \case
+        "HEADER_FOOTER_TYPE_UNSPECIFIED" -> Right CFRTHeaderFooterTypeUnspecified
+        "DEFAULT" -> Right CFRTDefault
+        x -> Left ("Unable to parse CreateFooterRequestType from: " <> x)
+
+instance ToHttpApiData CreateFooterRequestType where
+    toQueryParam = \case
+        CFRTHeaderFooterTypeUnspecified -> "HEADER_FOOTER_TYPE_UNSPECIFIED"
+        CFRTDefault -> "DEFAULT"
+
+instance FromJSON CreateFooterRequestType where
+    parseJSON = parseJSONText "CreateFooterRequestType"
+
+instance ToJSON CreateFooterRequestType where
     toJSON = toJSONText
 
 -- | The type of this named style.
@@ -977,27 +1158,28 @@ instance FromJSON EmbeddedObjectBOrderDashStyle where
 instance ToJSON EmbeddedObjectBOrderDashStyle where
     toJSON = toJSONText
 
--- | The suggestions view mode applied to the document. Note: When editing a
--- document, changes must be based on a document with SUGGESTIONS_INLINE.
+-- | Output only. The suggestions view mode applied to the document. Note:
+-- When editing a document, changes must be based on a document with
+-- SUGGESTIONS_INLINE.
 data DocumentSuggestionsViewMode
-    = DefaultForCurrentAccess
+    = DSVMDefaultForCurrentAccess
       -- ^ @DEFAULT_FOR_CURRENT_ACCESS@
       -- The SuggestionsViewMode applied to the returned document depends on the
       -- user\'s current access level. If the user only has view access,
       -- PREVIEW_WITHOUT_SUGGESTIONS is applied. Otherwise, SUGGESTIONS_INLINE is
       -- applied. This is the default suggestions view mode.
-    | SuggestionsInline
+    | DSVMSuggestionsInline
       -- ^ @SUGGESTIONS_INLINE@
       -- The returned document has suggestions inline. Suggested changes will be
       -- differentiated from base content within the document. Requests to
       -- retrieve a document using this mode will return a 403 error if the user
       -- does not have permission to view suggested changes.
-    | PreviewSuggestionsAccepted
+    | DSVMPreviewSuggestionsAccepted
       -- ^ @PREVIEW_SUGGESTIONS_ACCEPTED@
       -- The returned document is a preview with all suggested changes accepted.
       -- Requests to retrieve a document using this mode will return a 403 error
       -- if the user does not have permission to view suggested changes.
-    | PreviewWithoutSuggestions
+    | DSVMPreviewWithoutSuggestions
       -- ^ @PREVIEW_WITHOUT_SUGGESTIONS@
       -- The returned document is a preview with all suggested changes rejected
       -- if there are any suggestions in the document.
@@ -1007,18 +1189,18 @@ instance Hashable DocumentSuggestionsViewMode
 
 instance FromHttpApiData DocumentSuggestionsViewMode where
     parseQueryParam = \case
-        "DEFAULT_FOR_CURRENT_ACCESS" -> Right DefaultForCurrentAccess
-        "SUGGESTIONS_INLINE" -> Right SuggestionsInline
-        "PREVIEW_SUGGESTIONS_ACCEPTED" -> Right PreviewSuggestionsAccepted
-        "PREVIEW_WITHOUT_SUGGESTIONS" -> Right PreviewWithoutSuggestions
+        "DEFAULT_FOR_CURRENT_ACCESS" -> Right DSVMDefaultForCurrentAccess
+        "SUGGESTIONS_INLINE" -> Right DSVMSuggestionsInline
+        "PREVIEW_SUGGESTIONS_ACCEPTED" -> Right DSVMPreviewSuggestionsAccepted
+        "PREVIEW_WITHOUT_SUGGESTIONS" -> Right DSVMPreviewWithoutSuggestions
         x -> Left ("Unable to parse DocumentSuggestionsViewMode from: " <> x)
 
 instance ToHttpApiData DocumentSuggestionsViewMode where
     toQueryParam = \case
-        DefaultForCurrentAccess -> "DEFAULT_FOR_CURRENT_ACCESS"
-        SuggestionsInline -> "SUGGESTIONS_INLINE"
-        PreviewSuggestionsAccepted -> "PREVIEW_SUGGESTIONS_ACCEPTED"
-        PreviewWithoutSuggestions -> "PREVIEW_WITHOUT_SUGGESTIONS"
+        DSVMDefaultForCurrentAccess -> "DEFAULT_FOR_CURRENT_ACCESS"
+        DSVMSuggestionsInline -> "SUGGESTIONS_INLINE"
+        DSVMPreviewSuggestionsAccepted -> "PREVIEW_SUGGESTIONS_ACCEPTED"
+        DSVMPreviewWithoutSuggestions -> "PREVIEW_WITHOUT_SUGGESTIONS"
 
 instance FromJSON DocumentSuggestionsViewMode where
     parseJSON = parseJSONText "DocumentSuggestionsViewMode"
@@ -1049,6 +1231,9 @@ data PositionedObjectPositioningLayout
     | InFrontOfText
       -- ^ @IN_FRONT_OF_TEXT@
       -- The positioned object is in front of the text.
+    | BehindText
+      -- ^ @BEHIND_TEXT@
+      -- The positioned object is behind the text.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PositionedObjectPositioningLayout
@@ -1061,6 +1246,7 @@ instance FromHttpApiData PositionedObjectPositioningLayout where
         "BREAK_RIGHT" -> Right BreakRight
         "BREAK_LEFT_RIGHT" -> Right BreakLeftRight
         "IN_FRONT_OF_TEXT" -> Right InFrontOfText
+        "BEHIND_TEXT" -> Right BehindText
         x -> Left ("Unable to parse PositionedObjectPositioningLayout from: " <> x)
 
 instance ToHttpApiData PositionedObjectPositioningLayout where
@@ -1071,6 +1257,7 @@ instance ToHttpApiData PositionedObjectPositioningLayout where
         BreakRight -> "BREAK_RIGHT"
         BreakLeftRight -> "BREAK_LEFT_RIGHT"
         InFrontOfText -> "IN_FRONT_OF_TEXT"
+        BehindText -> "BEHIND_TEXT"
 
 instance FromJSON PositionedObjectPositioningLayout where
     parseJSON = parseJSONText "PositionedObjectPositioningLayout"
@@ -1105,6 +1292,38 @@ instance FromJSON DimensionUnit where
     parseJSON = parseJSONText "DimensionUnit"
 
 instance ToJSON DimensionUnit where
+    toJSON = toJSONText
+
+-- | The replacement method.
+data ReplaceImageRequestImageReplaceMethod
+    = ImageReplaceMethodUnspecified
+      -- ^ @IMAGE_REPLACE_METHOD_UNSPECIFIED@
+      -- Unspecified image replace method. This value must not be used.
+    | CenterCrop
+      -- ^ @CENTER_CROP@
+      -- Scales and centers the image to fill the bounds of the original image.
+      -- The image may be cropped in order to fill the original image\'s bounds.
+      -- The rendered size of the image will be the same as that of the original
+      -- image.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ReplaceImageRequestImageReplaceMethod
+
+instance FromHttpApiData ReplaceImageRequestImageReplaceMethod where
+    parseQueryParam = \case
+        "IMAGE_REPLACE_METHOD_UNSPECIFIED" -> Right ImageReplaceMethodUnspecified
+        "CENTER_CROP" -> Right CenterCrop
+        x -> Left ("Unable to parse ReplaceImageRequestImageReplaceMethod from: " <> x)
+
+instance ToHttpApiData ReplaceImageRequestImageReplaceMethod where
+    toQueryParam = \case
+        ImageReplaceMethodUnspecified -> "IMAGE_REPLACE_METHOD_UNSPECIFIED"
+        CenterCrop -> "CENTER_CROP"
+
+instance FromJSON ReplaceImageRequestImageReplaceMethod where
+    parseJSON = parseJSONText "ReplaceImageRequestImageReplaceMethod"
+
+instance ToJSON ReplaceImageRequestImageReplaceMethod where
     toJSON = toJSONText
 
 -- | The alignment of the content in the table cell. The default alignment

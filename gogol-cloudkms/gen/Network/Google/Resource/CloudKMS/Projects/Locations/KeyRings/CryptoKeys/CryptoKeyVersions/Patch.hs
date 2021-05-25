@@ -45,8 +45,8 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.C
     , plkrckckvpCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.patch@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch' request conforms to.
@@ -71,14 +71,14 @@ type ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchResource
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch =
   ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch'
-    { _plkrckckvpXgafv          :: !(Maybe Xgafv)
+    { _plkrckckvpXgafv :: !(Maybe Xgafv)
     , _plkrckckvpUploadProtocol :: !(Maybe Text)
-    , _plkrckckvpUpdateMask     :: !(Maybe GFieldMask)
-    , _plkrckckvpAccessToken    :: !(Maybe Text)
-    , _plkrckckvpUploadType     :: !(Maybe Text)
-    , _plkrckckvpPayload        :: !CryptoKeyVersion
-    , _plkrckckvpName           :: !Text
-    , _plkrckckvpCallback       :: !(Maybe Text)
+    , _plkrckckvpUpdateMask :: !(Maybe GFieldMask)
+    , _plkrckckvpAccessToken :: !(Maybe Text)
+    , _plkrckckvpUploadType :: !(Maybe Text)
+    , _plkrckckvpPayload :: !CryptoKeyVersion
+    , _plkrckckvpName :: !Text
+    , _plkrckckvpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -131,7 +131,7 @@ plkrckckvpUploadProtocol
   = lens _plkrckckvpUploadProtocol
       (\ s a -> s{_plkrckckvpUploadProtocol = a})
 
--- | Required list of fields to be updated in this request.
+-- | Required. List of fields to be updated in this request.
 plkrckckvpUpdateMask :: Lens' ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch (Maybe GFieldMask)
 plkrckckvpUpdateMask
   = lens _plkrckckvpUpdateMask

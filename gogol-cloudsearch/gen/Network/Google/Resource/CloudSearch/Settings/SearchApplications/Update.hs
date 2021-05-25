@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a search application.
+-- Updates a search application. **Note:** This API requires an admin
+-- account to execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.update@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.searchapplications.update@.
 module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.SearchApplications.Update
     , ssauCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.searchapplications.update@ method which the
 -- 'SettingsSearchApplicationsUpdate' request conforms to.
@@ -60,18 +61,19 @@ type SettingsSearchApplicationsUpdateResource =
                        ReqBody '[JSON] SearchApplication :>
                          Put '[JSON] Operation
 
--- | Updates a search application.
+-- | Updates a search application. **Note:** This API requires an admin
+-- account to execute.
 --
 -- /See:/ 'settingsSearchApplicationsUpdate' smart constructor.
 data SettingsSearchApplicationsUpdate =
   SettingsSearchApplicationsUpdate'
-    { _ssauXgafv          :: !(Maybe Xgafv)
+    { _ssauXgafv :: !(Maybe Xgafv)
     , _ssauUploadProtocol :: !(Maybe Text)
-    , _ssauAccessToken    :: !(Maybe Text)
-    , _ssauUploadType     :: !(Maybe Text)
-    , _ssauPayload        :: !SearchApplication
-    , _ssauName           :: !Text
-    , _ssauCallback       :: !(Maybe Text)
+    , _ssauAccessToken :: !(Maybe Text)
+    , _ssauUploadType :: !(Maybe Text)
+    , _ssauPayload :: !SearchApplication
+    , _ssauName :: !Text
+    , _ssauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -137,8 +139,8 @@ ssauPayload :: Lens' SettingsSearchApplicationsUpdate SearchApplication
 ssauPayload
   = lens _ssauPayload (\ s a -> s{_ssauPayload = a})
 
--- | Name of the Search Application.
--- Format: searchapplications\/{application_id}.
+-- | Name of the Search Application. Format:
+-- searchapplications\/{application_id}.
 ssauName :: Lens' SettingsSearchApplicationsUpdate Text
 ssauName = lens _ssauName (\ s a -> s{_ssauName = a})
 

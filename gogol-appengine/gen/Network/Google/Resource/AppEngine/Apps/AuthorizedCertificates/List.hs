@@ -44,8 +44,8 @@ module Network.Google.Resource.AppEngine.Apps.AuthorizedCertificates.List
     , aaclCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.list@ method which the
 -- 'AppsAuthorizedCertificatesList' request conforms to.
@@ -58,7 +58,8 @@ type AppsAuthorizedCertificatesListResource =
                QueryParam "upload_protocol" Text :>
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
-                     QueryParam "view" Text :>
+                     QueryParam "view" AppsAuthorizedCertificatesListView
+                       :>
                        QueryParam "pageToken" Text :>
                          QueryParam "pageSize" (Textual Int32) :>
                            QueryParam "callback" Text :>
@@ -70,15 +71,15 @@ type AppsAuthorizedCertificatesListResource =
 -- /See:/ 'appsAuthorizedCertificatesList' smart constructor.
 data AppsAuthorizedCertificatesList =
   AppsAuthorizedCertificatesList'
-    { _aaclXgafv          :: !(Maybe Xgafv)
+    { _aaclXgafv :: !(Maybe Xgafv)
     , _aaclUploadProtocol :: !(Maybe Text)
-    , _aaclAccessToken    :: !(Maybe Text)
-    , _aaclUploadType     :: !(Maybe Text)
-    , _aaclAppsId         :: !Text
-    , _aaclView           :: !(Maybe Text)
-    , _aaclPageToken      :: !(Maybe Text)
-    , _aaclPageSize       :: !(Maybe (Textual Int32))
-    , _aaclCallback       :: !(Maybe Text)
+    , _aaclAccessToken :: !(Maybe Text)
+    , _aaclUploadType :: !(Maybe Text)
+    , _aaclAppsId :: !Text
+    , _aaclView :: !(Maybe AppsAuthorizedCertificatesListView)
+    , _aaclPageToken :: !(Maybe Text)
+    , _aaclPageSize :: !(Maybe (Textual Int32))
+    , _aaclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -151,7 +152,7 @@ aaclAppsId
   = lens _aaclAppsId (\ s a -> s{_aaclAppsId = a})
 
 -- | Controls the set of fields returned in the LIST response.
-aaclView :: Lens' AppsAuthorizedCertificatesList (Maybe Text)
+aaclView :: Lens' AppsAuthorizedCertificatesList (Maybe AppsAuthorizedCertificatesListView)
 aaclView = lens _aaclView (\ s a -> s{_aaclView = a})
 
 -- | Continuation token for fetching the next page of results.

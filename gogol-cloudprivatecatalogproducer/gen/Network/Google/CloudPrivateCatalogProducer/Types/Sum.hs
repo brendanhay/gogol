@@ -16,7 +16,7 @@
 --
 module Network.Google.CloudPrivateCatalogProducer.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The log type that this config enables.
 data GoogleIAMV1AuditLogConfigLogType

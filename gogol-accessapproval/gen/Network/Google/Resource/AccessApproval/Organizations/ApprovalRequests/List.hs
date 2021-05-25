@@ -46,13 +46,13 @@ module Network.Google.Resource.AccessApproval.Organizations.ApprovalRequests.Lis
     , oarlCallback
     ) where
 
-import           Network.Google.AccessApproval.Types
-import           Network.Google.Prelude
+import Network.Google.AccessApproval.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @accessapproval.organizations.approvalRequests.list@ method which the
 -- 'OrganizationsApprovalRequestsList' request conforms to.
 type OrganizationsApprovalRequestsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "approvalRequests" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -73,15 +73,15 @@ type OrganizationsApprovalRequestsListResource =
 -- /See:/ 'organizationsApprovalRequestsList' smart constructor.
 data OrganizationsApprovalRequestsList =
   OrganizationsApprovalRequestsList'
-    { _oarlParent         :: !Text
-    , _oarlXgafv          :: !(Maybe Xgafv)
+    { _oarlParent :: !Text
+    , _oarlXgafv :: !(Maybe Xgafv)
     , _oarlUploadProtocol :: !(Maybe Text)
-    , _oarlAccessToken    :: !(Maybe Text)
-    , _oarlUploadType     :: !(Maybe Text)
-    , _oarlFilter         :: !(Maybe Text)
-    , _oarlPageToken      :: !(Maybe Text)
-    , _oarlPageSize       :: !(Maybe (Textual Int32))
-    , _oarlCallback       :: !(Maybe Text)
+    , _oarlAccessToken :: !(Maybe Text)
+    , _oarlUploadType :: !(Maybe Text)
+    , _oarlFilter :: !(Maybe Text)
+    , _oarlPageToken :: !(Maybe Text)
+    , _oarlPageSize :: !(Maybe (Textual Int32))
+    , _oarlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ organizationsApprovalRequestsList pOarlParent_ =
     }
 
 
--- | The parent resource. This may be \"projects\/{project_id}\",
--- \"folders\/{folder_id}\", or \"organizations\/{organization_id}\".
+-- | The parent resource. This may be \"projects\/{project}\",
+-- \"folders\/{folder}\", or \"organizations\/{organization}\".
 oarlParent :: Lens' OrganizationsApprovalRequestsList Text
 oarlParent
   = lens _oarlParent (\ s a -> s{_oarlParent = a})
@@ -154,13 +154,13 @@ oarlUploadType
       (\ s a -> s{_oarlUploadType = a})
 
 -- | A filter on the type of approval requests to retrieve. Must be one of
--- the following values:
---
--- 1.  [not set]: Requests that are pending or have active approvals.
--- 2.  ALL: All requests.
--- 3.  PENDING: Only pending requests.
--- 4.  ACTIVE: Only active (i.e. currently approved) requests.
--- 5.  DISMISSED: Only dismissed (including expired) requests.
+-- the following values: * [not set]: Requests that are pending or have
+-- active approvals. * ALL: All requests. * PENDING: Only pending requests.
+-- * ACTIVE: Only active (i.e. currently approved) requests. * DISMISSED:
+-- Only requests that have been dismissed, or requests that are not
+-- approved and past expiration. * EXPIRED: Only requests that have been
+-- approved, and the approval has expired. * HISTORY: Active, dismissed and
+-- expired requests.
 oarlFilter :: Lens' OrganizationsApprovalRequestsList (Maybe Text)
 oarlFilter
   = lens _oarlFilter (\ s a -> s{_oarlFilter = a})

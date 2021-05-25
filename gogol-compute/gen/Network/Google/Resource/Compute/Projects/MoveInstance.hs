@@ -34,13 +34,13 @@ module Network.Google.Resource.Compute.Projects.MoveInstance
     , ProjectsMoveInstance
 
     -- * Request Lenses
-    , pmiRequestId
-    , pmiProject
-    , pmiPayload
+    , proRequestId
+    , proProject
+    , proPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.moveInstance@ method which the
 -- 'ProjectsMoveInstance' request conforms to.
@@ -61,9 +61,9 @@ type ProjectsMoveInstanceResource =
 -- /See:/ 'projectsMoveInstance' smart constructor.
 data ProjectsMoveInstance =
   ProjectsMoveInstance'
-    { _pmiRequestId :: !(Maybe Text)
-    , _pmiProject   :: !Text
-    , _pmiPayload   :: !InstanceMoveRequest
+    { _proRequestId :: !(Maybe Text)
+    , _proProject :: !Text
+    , _proPayload :: !InstanceMoveRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,20 +72,20 @@ data ProjectsMoveInstance =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pmiRequestId'
+-- * 'proRequestId'
 --
--- * 'pmiProject'
+-- * 'proProject'
 --
--- * 'pmiPayload'
+-- * 'proPayload'
 projectsMoveInstance
-    :: Text -- ^ 'pmiProject'
-    -> InstanceMoveRequest -- ^ 'pmiPayload'
+    :: Text -- ^ 'proProject'
+    -> InstanceMoveRequest -- ^ 'proPayload'
     -> ProjectsMoveInstance
-projectsMoveInstance pPmiProject_ pPmiPayload_ =
+projectsMoveInstance pProProject_ pProPayload_ =
   ProjectsMoveInstance'
-    { _pmiRequestId = Nothing
-    , _pmiProject = pPmiProject_
-    , _pmiPayload = pPmiPayload_
+    { _proRequestId = Nothing
+    , _proProject = pProProject_
+    , _proPayload = pProPayload_
     }
 
 
@@ -99,19 +99,19 @@ projectsMoveInstance pPmiProject_ pPmiPayload_ =
 -- accidentally creating duplicate commitments. The request ID must be a
 -- valid UUID with the exception that zero UUID is not supported
 -- (00000000-0000-0000-0000-000000000000).
-pmiRequestId :: Lens' ProjectsMoveInstance (Maybe Text)
-pmiRequestId
-  = lens _pmiRequestId (\ s a -> s{_pmiRequestId = a})
+proRequestId :: Lens' ProjectsMoveInstance (Maybe Text)
+proRequestId
+  = lens _proRequestId (\ s a -> s{_proRequestId = a})
 
 -- | Project ID for this request.
-pmiProject :: Lens' ProjectsMoveInstance Text
-pmiProject
-  = lens _pmiProject (\ s a -> s{_pmiProject = a})
+proProject :: Lens' ProjectsMoveInstance Text
+proProject
+  = lens _proProject (\ s a -> s{_proProject = a})
 
 -- | Multipart request metadata.
-pmiPayload :: Lens' ProjectsMoveInstance InstanceMoveRequest
-pmiPayload
-  = lens _pmiPayload (\ s a -> s{_pmiPayload = a})
+proPayload :: Lens' ProjectsMoveInstance InstanceMoveRequest
+proPayload
+  = lens _proPayload (\ s a -> s{_proPayload = a})
 
 instance GoogleRequest ProjectsMoveInstance where
         type Rs ProjectsMoveInstance = Operation
@@ -119,8 +119,8 @@ instance GoogleRequest ProjectsMoveInstance where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient ProjectsMoveInstance'{..}
-          = go _pmiProject _pmiRequestId (Just AltJSON)
-              _pmiPayload
+          = go _proProject _proRequestId (Just AltJSON)
+              _proPayload
               computeService
           where go
                   = buildClient

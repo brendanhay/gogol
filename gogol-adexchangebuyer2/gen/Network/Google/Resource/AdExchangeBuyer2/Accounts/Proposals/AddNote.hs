@@ -45,8 +45,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Proposals.AddNote
     , apanCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.addNote@ method which the
 -- 'AccountsProposalsAddNote' request conforms to.
@@ -71,14 +71,14 @@ type AccountsProposalsAddNoteResource =
 -- /See:/ 'accountsProposalsAddNote' smart constructor.
 data AccountsProposalsAddNote =
   AccountsProposalsAddNote'
-    { _apanXgafv          :: !(Maybe Xgafv)
+    { _apanXgafv :: !(Maybe Xgafv)
     , _apanUploadProtocol :: !(Maybe Text)
-    , _apanAccessToken    :: !(Maybe Text)
-    , _apanUploadType     :: !(Maybe Text)
-    , _apanPayload        :: !AddNoteRequest
-    , _apanProposalId     :: !Text
-    , _apanAccountId      :: !Text
-    , _apanCallback       :: !(Maybe Text)
+    , _apanAccessToken :: !(Maybe Text)
+    , _apanUploadType :: !(Maybe Text)
+    , _apanPayload :: !AddNoteRequest
+    , _apanProposalId :: !Text
+    , _apanAccountId :: !Text
+    , _apanCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

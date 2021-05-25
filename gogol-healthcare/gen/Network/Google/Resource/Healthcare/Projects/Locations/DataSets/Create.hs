@@ -46,13 +46,13 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.Create
     , pldscCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.create@ method which the
 -- 'ProjectsLocationsDataSetsCreate' request conforms to.
 type ProjectsLocationsDataSetsCreateResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "datasets" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -72,14 +72,14 @@ type ProjectsLocationsDataSetsCreateResource =
 -- /See:/ 'projectsLocationsDataSetsCreate' smart constructor.
 data ProjectsLocationsDataSetsCreate =
   ProjectsLocationsDataSetsCreate'
-    { _pldscParent         :: !Text
-    , _pldscXgafv          :: !(Maybe Xgafv)
+    { _pldscParent :: !Text
+    , _pldscXgafv :: !(Maybe Xgafv)
     , _pldscUploadProtocol :: !(Maybe Text)
-    , _pldscAccessToken    :: !(Maybe Text)
-    , _pldscUploadType     :: !(Maybe Text)
-    , _pldscPayload        :: !DataSet
-    , _pldscDataSetId      :: !(Maybe Text)
-    , _pldscCallback       :: !(Maybe Text)
+    , _pldscAccessToken :: !(Maybe Text)
+    , _pldscUploadType :: !(Maybe Text)
+    , _pldscPayload :: !DataSet
+    , _pldscDataSetId :: !(Maybe Text)
+    , _pldscCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,8 +120,8 @@ projectsLocationsDataSetsCreate pPldscParent_ pPldscPayload_ =
     }
 
 
--- | The name of the project in which the dataset should be created (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\`).
+-- | The name of the project where the server creates the dataset. For
+-- example, \`projects\/{project_id}\/locations\/{location_id}\`.
 pldscParent :: Lens' ProjectsLocationsDataSetsCreate Text
 pldscParent
   = lens _pldscParent (\ s a -> s{_pldscParent = a})

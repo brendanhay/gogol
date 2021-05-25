@@ -37,8 +37,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
     , mdlPqlQuery
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.list@ method which the
 -- 'MarketplaceDealsList' request conforms to.
@@ -58,7 +58,7 @@ type MarketplaceDealsListResource =
 data MarketplaceDealsList =
   MarketplaceDealsList'
     { _mdlProposalId :: !Text
-    , _mdlPqlQuery   :: !(Maybe Text)
+    , _mdlPqlQuery :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

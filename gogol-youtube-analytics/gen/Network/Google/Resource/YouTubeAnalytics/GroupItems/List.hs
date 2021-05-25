@@ -43,8 +43,8 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
     , gilCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groupItems.list@ method which the
 -- 'GroupItemsList' request conforms to.
@@ -67,13 +67,13 @@ type GroupItemsListResource =
 -- /See:/ 'groupItemsList' smart constructor.
 data GroupItemsList =
   GroupItemsList'
-    { _gilXgafv                  :: !(Maybe Xgafv)
-    , _gilUploadProtocol         :: !(Maybe Text)
-    , _gilAccessToken            :: !(Maybe Text)
-    , _gilUploadType             :: !(Maybe Text)
+    { _gilXgafv :: !(Maybe Xgafv)
+    , _gilUploadProtocol :: !(Maybe Text)
+    , _gilAccessToken :: !(Maybe Text)
+    , _gilUploadType :: !(Maybe Text)
     , _gilOnBehalfOfContentOwner :: !(Maybe Text)
-    , _gilGroupId                :: !(Maybe Text)
-    , _gilCallback               :: !(Maybe Text)
+    , _gilGroupId :: !(Maybe Text)
+    , _gilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

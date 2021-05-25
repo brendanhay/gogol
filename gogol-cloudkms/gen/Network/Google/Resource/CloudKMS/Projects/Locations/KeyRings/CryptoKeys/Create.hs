@@ -41,11 +41,12 @@ module Network.Google.Resource.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.C
     , plkrckcUploadType
     , plkrckcPayload
     , plkrckcCryptoKeyId
+    , plkrckcSkipInitialVersionCreation
     , plkrckcCallback
     ) where
 
-import           Network.Google.CloudKMS.Types
-import           Network.Google.Prelude
+import Network.Google.CloudKMS.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.create@ method which the
 -- 'ProjectsLocationsKeyRingsCryptoKeysCreate' request conforms to.
@@ -59,9 +60,10 @@ type ProjectsLocationsKeyRingsCryptoKeysCreateResource
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "cryptoKeyId" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] CryptoKey :> Post '[JSON] CryptoKey
+                     QueryParam "skipInitialVersionCreation" Bool :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CryptoKey :> Post '[JSON] CryptoKey
 
 -- | Create a new CryptoKey within a KeyRing. CryptoKey.purpose and
 -- CryptoKey.version_template.algorithm are required.
@@ -69,14 +71,15 @@ type ProjectsLocationsKeyRingsCryptoKeysCreateResource
 -- /See:/ 'projectsLocationsKeyRingsCryptoKeysCreate' smart constructor.
 data ProjectsLocationsKeyRingsCryptoKeysCreate =
   ProjectsLocationsKeyRingsCryptoKeysCreate'
-    { _plkrckcParent         :: !Text
-    , _plkrckcXgafv          :: !(Maybe Xgafv)
+    { _plkrckcParent :: !Text
+    , _plkrckcXgafv :: !(Maybe Xgafv)
     , _plkrckcUploadProtocol :: !(Maybe Text)
-    , _plkrckcAccessToken    :: !(Maybe Text)
-    , _plkrckcUploadType     :: !(Maybe Text)
-    , _plkrckcPayload        :: !CryptoKey
-    , _plkrckcCryptoKeyId    :: !(Maybe Text)
-    , _plkrckcCallback       :: !(Maybe Text)
+    , _plkrckcAccessToken :: !(Maybe Text)
+    , _plkrckcUploadType :: !(Maybe Text)
+    , _plkrckcPayload :: !CryptoKey
+    , _plkrckcCryptoKeyId :: !(Maybe Text)
+    , _plkrckcSkipInitialVersionCreation :: !(Maybe Bool)
+    , _plkrckcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -99,6 +102,8 @@ data ProjectsLocationsKeyRingsCryptoKeysCreate =
 --
 -- * 'plkrckcCryptoKeyId'
 --
+-- * 'plkrckcSkipInitialVersionCreation'
+--
 -- * 'plkrckcCallback'
 projectsLocationsKeyRingsCryptoKeysCreate
     :: Text -- ^ 'plkrckcParent'
@@ -113,6 +118,7 @@ projectsLocationsKeyRingsCryptoKeysCreate pPlkrckcParent_ pPlkrckcPayload_ =
     , _plkrckcUploadType = Nothing
     , _plkrckcPayload = pPlkrckcPayload_
     , _plkrckcCryptoKeyId = Nothing
+    , _plkrckcSkipInitialVersionCreation = Nothing
     , _plkrckcCallback = Nothing
     }
 
@@ -159,6 +165,14 @@ plkrckcCryptoKeyId
   = lens _plkrckcCryptoKeyId
       (\ s a -> s{_plkrckcCryptoKeyId = a})
 
+-- | If set to true, the request will create a CryptoKey without any
+-- CryptoKeyVersions. You must manually call CreateCryptoKeyVersion or
+-- ImportCryptoKeyVersion before you can use this CryptoKey.
+plkrckcSkipInitialVersionCreation :: Lens' ProjectsLocationsKeyRingsCryptoKeysCreate (Maybe Bool)
+plkrckcSkipInitialVersionCreation
+  = lens _plkrckcSkipInitialVersionCreation
+      (\ s a -> s{_plkrckcSkipInitialVersionCreation = a})
+
 -- | JSONP
 plkrckcCallback :: Lens' ProjectsLocationsKeyRingsCryptoKeysCreate (Maybe Text)
 plkrckcCallback
@@ -181,6 +195,7 @@ instance GoogleRequest
               _plkrckcAccessToken
               _plkrckcUploadType
               _plkrckcCryptoKeyId
+              _plkrckcSkipInitialVersionCreation
               _plkrckcCallback
               (Just AltJSON)
               _plkrckcPayload

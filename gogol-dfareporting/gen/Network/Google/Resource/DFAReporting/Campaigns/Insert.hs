@@ -22,7 +22,7 @@
 --
 -- Inserts a new campaign.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.campaigns.insert@.
 module Network.Google.Resource.DFAReporting.Campaigns.Insert
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
     , CampaignsInsert
 
     -- * Request Lenses
+    , camXgafv
+    , camUploadProtocol
+    , camAccessToken
+    , camUploadType
     , camProFileId
     , camPayload
+    , camCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.insert@ method which the
 -- 'CampaignsInsert' request conforms to.
 type CampaignsInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --
 -- /See:/ 'campaignsInsert' smart constructor.
 data CampaignsInsert =
   CampaignsInsert'
-    { _camProFileId :: !(Textual Int64)
-    , _camPayload   :: !Campaign
+    { _camXgafv :: !(Maybe Xgafv)
+    , _camUploadProtocol :: !(Maybe Text)
+    , _camAccessToken :: !(Maybe Text)
+    , _camUploadType :: !(Maybe Text)
+    , _camProFileId :: !(Textual Int64)
+    , _camPayload :: !Campaign
+    , _camCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,56 @@ data CampaignsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'camXgafv'
+--
+-- * 'camUploadProtocol'
+--
+-- * 'camAccessToken'
+--
+-- * 'camUploadType'
+--
 -- * 'camProFileId'
 --
 -- * 'camPayload'
+--
+-- * 'camCallback'
 campaignsInsert
     :: Int64 -- ^ 'camProFileId'
     -> Campaign -- ^ 'camPayload'
     -> CampaignsInsert
 campaignsInsert pCamProFileId_ pCamPayload_ =
   CampaignsInsert'
-    {_camProFileId = _Coerce # pCamProFileId_, _camPayload = pCamPayload_}
+    { _camXgafv = Nothing
+    , _camUploadProtocol = Nothing
+    , _camAccessToken = Nothing
+    , _camUploadType = Nothing
+    , _camProFileId = _Coerce # pCamProFileId_
+    , _camPayload = pCamPayload_
+    , _camCallback = Nothing
+    }
 
+
+-- | V1 error format.
+camXgafv :: Lens' CampaignsInsert (Maybe Xgafv)
+camXgafv = lens _camXgafv (\ s a -> s{_camXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+camUploadProtocol :: Lens' CampaignsInsert (Maybe Text)
+camUploadProtocol
+  = lens _camUploadProtocol
+      (\ s a -> s{_camUploadProtocol = a})
+
+-- | OAuth access token.
+camAccessToken :: Lens' CampaignsInsert (Maybe Text)
+camAccessToken
+  = lens _camAccessToken
+      (\ s a -> s{_camAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+camUploadType :: Lens' CampaignsInsert (Maybe Text)
+camUploadType
+  = lens _camUploadType
+      (\ s a -> s{_camUploadType = a})
 
 -- | User profile ID associated with this request.
 camProFileId :: Lens' CampaignsInsert Int64
@@ -89,12 +143,22 @@ camPayload :: Lens' CampaignsInsert Campaign
 camPayload
   = lens _camPayload (\ s a -> s{_camPayload = a})
 
+-- | JSONP
+camCallback :: Lens' CampaignsInsert (Maybe Text)
+camCallback
+  = lens _camCallback (\ s a -> s{_camCallback = a})
+
 instance GoogleRequest CampaignsInsert where
         type Rs CampaignsInsert = Campaign
         type Scopes CampaignsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient CampaignsInsert'{..}
-          = go _camProFileId (Just AltJSON) _camPayload
+          = go _camProFileId _camXgafv _camUploadProtocol
+              _camAccessToken
+              _camUploadType
+              _camCallback
+              (Just AltJSON)
+              _camPayload
               dFAReportingService
           where go
                   = buildClient

@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of projects, possibly filtered. This method supports
--- paging.
+-- paging .
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.projects.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.projects.list@.
 module Network.Google.Resource.DFAReporting.Projects.List
     (
     -- * REST Resource
@@ -34,7 +34,11 @@ module Network.Google.Resource.DFAReporting.Projects.List
     , ProjectsList
 
     -- * Request Lenses
+    , plXgafv
+    , plUploadProtocol
+    , plAccessToken
     , plSearchString
+    , plUploadType
     , plIds
     , plProFileId
     , plSortOrder
@@ -42,43 +46,54 @@ module Network.Google.Resource.DFAReporting.Projects.List
     , plSortField
     , plAdvertiserIds
     , plMaxResults
+    , plCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.projects.list@ method which the
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" (Textual Int64) :>
-                   QueryParam "sortOrder" ProjectsListSortOrder :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" ProjectsListSortField :>
-                         QueryParams "advertiserIds" (Textual Int64) :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ProjectsListResponse
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParams "ids" (Textual Int64) :>
+                           QueryParam "sortOrder" ProjectsListSortOrder :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField" ProjectsListSortField :>
+                                 QueryParams "advertiserIds" (Textual Int64) :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] ProjectsListResponse
 
 -- | Retrieves a list of projects, possibly filtered. This method supports
--- paging.
+-- paging .
 --
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList =
   ProjectsList'
-    { _plSearchString  :: !(Maybe Text)
-    , _plIds           :: !(Maybe [Textual Int64])
-    , _plProFileId     :: !(Textual Int64)
-    , _plSortOrder     :: !ProjectsListSortOrder
-    , _plPageToken     :: !(Maybe Text)
-    , _plSortField     :: !ProjectsListSortField
+    { _plXgafv :: !(Maybe Xgafv)
+    , _plUploadProtocol :: !(Maybe Text)
+    , _plAccessToken :: !(Maybe Text)
+    , _plSearchString :: !(Maybe Text)
+    , _plUploadType :: !(Maybe Text)
+    , _plIds :: !(Maybe [Textual Int64])
+    , _plProFileId :: !(Textual Int64)
+    , _plSortOrder :: !ProjectsListSortOrder
+    , _plPageToken :: !(Maybe Text)
+    , _plSortField :: !ProjectsListSortField
     , _plAdvertiserIds :: !(Maybe [Textual Int64])
-    , _plMaxResults    :: !(Textual Int32)
+    , _plMaxResults :: !(Textual Int32)
+    , _plCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -87,7 +102,15 @@ data ProjectsList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'plXgafv'
+--
+-- * 'plUploadProtocol'
+--
+-- * 'plAccessToken'
+--
 -- * 'plSearchString'
+--
+-- * 'plUploadType'
 --
 -- * 'plIds'
 --
@@ -102,12 +125,18 @@ data ProjectsList =
 -- * 'plAdvertiserIds'
 --
 -- * 'plMaxResults'
+--
+-- * 'plCallback'
 projectsList
     :: Int64 -- ^ 'plProFileId'
     -> ProjectsList
 projectsList pPlProFileId_ =
   ProjectsList'
-    { _plSearchString = Nothing
+    { _plXgafv = Nothing
+    , _plUploadProtocol = Nothing
+    , _plAccessToken = Nothing
+    , _plSearchString = Nothing
+    , _plUploadType = Nothing
     , _plIds = Nothing
     , _plProFileId = _Coerce # pPlProFileId_
     , _plSortOrder = PLSOAscending
@@ -115,8 +144,25 @@ projectsList pPlProFileId_ =
     , _plSortField = PID
     , _plAdvertiserIds = Nothing
     , _plMaxResults = 1000
+    , _plCallback = Nothing
     }
 
+
+-- | V1 error format.
+plXgafv :: Lens' ProjectsList (Maybe Xgafv)
+plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+plUploadProtocol :: Lens' ProjectsList (Maybe Text)
+plUploadProtocol
+  = lens _plUploadProtocol
+      (\ s a -> s{_plUploadProtocol = a})
+
+-- | OAuth access token.
+plAccessToken :: Lens' ProjectsList (Maybe Text)
+plAccessToken
+  = lens _plAccessToken
+      (\ s a -> s{_plAccessToken = a})
 
 -- | Allows searching for projects by name or ID. Wildcards (*) are allowed.
 -- For example, \"project*2015\" will return projects with names like
@@ -129,6 +175,11 @@ plSearchString :: Lens' ProjectsList (Maybe Text)
 plSearchString
   = lens _plSearchString
       (\ s a -> s{_plSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+plUploadType :: Lens' ProjectsList (Maybe Text)
+plUploadType
+  = lens _plUploadType (\ s a -> s{_plUploadType = a})
 
 -- | Select only projects with these IDs.
 plIds :: Lens' ProjectsList [Int64]
@@ -171,18 +222,27 @@ plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
       . _Coerce
 
+-- | JSONP
+plCallback :: Lens' ProjectsList (Maybe Text)
+plCallback
+  = lens _plCallback (\ s a -> s{_plCallback = a})
+
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
         type Scopes ProjectsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ProjectsList'{..}
-          = go _plProFileId _plSearchString
+          = go _plProFileId _plXgafv _plUploadProtocol
+              _plAccessToken
+              _plSearchString
+              _plUploadType
               (_plIds ^. _Default)
               (Just _plSortOrder)
               _plPageToken
               (Just _plSortField)
               (_plAdvertiserIds ^. _Default)
               (Just _plMaxResults)
+              _plCallback
               (Just AltJSON)
               dFAReportingService
           where go

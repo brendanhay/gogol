@@ -22,7 +22,7 @@
 --
 -- Creates a Product instance under a given Catalog.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.create@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.create@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Create
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Cre
     , cpcCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.create@ method which the
 -- 'CatalogsProductsCreate' request conforms to.
@@ -68,13 +68,13 @@ type CatalogsProductsCreateResource =
 -- /See:/ 'catalogsProductsCreate' smart constructor.
 data CatalogsProductsCreate =
   CatalogsProductsCreate'
-    { _cpcParent         :: !Text
-    , _cpcXgafv          :: !(Maybe Xgafv)
+    { _cpcParent :: !Text
+    , _cpcXgafv :: !(Maybe Xgafv)
     , _cpcUploadProtocol :: !(Maybe Text)
-    , _cpcAccessToken    :: !(Maybe Text)
-    , _cpcUploadType     :: !(Maybe Text)
-    , _cpcPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1Product
-    , _cpcCallback       :: !(Maybe Text)
+    , _cpcAccessToken :: !(Maybe Text)
+    , _cpcUploadType :: !(Maybe Text)
+    , _cpcPayload :: !GoogleCloudPrivatecatalogproducerV1beta1Product
+    , _cpcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

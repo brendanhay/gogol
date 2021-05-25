@@ -22,7 +22,7 @@
 --
 -- Deletes a database from a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.databases.delete@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.databases.delete@.
 module Network.Google.Resource.SQL.Databases.Delete
     (
     -- * REST Resource
@@ -33,34 +33,49 @@ module Network.Google.Resource.SQL.Databases.Delete
     , DatabasesDelete
 
     -- * Request Lenses
+    , ddXgafv
+    , ddUploadProtocol
     , ddProject
     , ddDatabase
+    , ddAccessToken
+    , ddUploadType
+    , ddCallback
     , ddInstance
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.delete@ method which the
 -- 'DatabasesDelete' request conforms to.
 type DatabasesDeleteResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "instances" :>
-               Capture "instance" Text :>
-                 "databases" :>
-                   Capture "database" Text :>
-                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "instances" :>
+             Capture "instance" Text :>
+               "databases" :>
+                 Capture "database" Text :>
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Delete '[JSON] Operation
 
 -- | Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ 'databasesDelete' smart constructor.
 data DatabasesDelete =
   DatabasesDelete'
-    { _ddProject  :: !Text
+    { _ddXgafv :: !(Maybe Xgafv)
+    , _ddUploadProtocol :: !(Maybe Text)
+    , _ddProject :: !Text
     , _ddDatabase :: !Text
+    , _ddAccessToken :: !(Maybe Text)
+    , _ddUploadType :: !(Maybe Text)
+    , _ddCallback :: !(Maybe Text)
     , _ddInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -70,9 +85,19 @@ data DatabasesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ddXgafv'
+--
+-- * 'ddUploadProtocol'
+--
 -- * 'ddProject'
 --
 -- * 'ddDatabase'
+--
+-- * 'ddAccessToken'
+--
+-- * 'ddUploadType'
+--
+-- * 'ddCallback'
 --
 -- * 'ddInstance'
 databasesDelete
@@ -82,11 +107,26 @@ databasesDelete
     -> DatabasesDelete
 databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
   DatabasesDelete'
-    { _ddProject = pDdProject_
+    { _ddXgafv = Nothing
+    , _ddUploadProtocol = Nothing
+    , _ddProject = pDdProject_
     , _ddDatabase = pDdDatabase_
+    , _ddAccessToken = Nothing
+    , _ddUploadType = Nothing
+    , _ddCallback = Nothing
     , _ddInstance = pDdInstance_
     }
 
+
+-- | V1 error format.
+ddXgafv :: Lens' DatabasesDelete (Maybe Xgafv)
+ddXgafv = lens _ddXgafv (\ s a -> s{_ddXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ddUploadProtocol :: Lens' DatabasesDelete (Maybe Text)
+ddUploadProtocol
+  = lens _ddUploadProtocol
+      (\ s a -> s{_ddUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 ddProject :: Lens' DatabasesDelete Text
@@ -97,6 +137,22 @@ ddProject
 ddDatabase :: Lens' DatabasesDelete Text
 ddDatabase
   = lens _ddDatabase (\ s a -> s{_ddDatabase = a})
+
+-- | OAuth access token.
+ddAccessToken :: Lens' DatabasesDelete (Maybe Text)
+ddAccessToken
+  = lens _ddAccessToken
+      (\ s a -> s{_ddAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ddUploadType :: Lens' DatabasesDelete (Maybe Text)
+ddUploadType
+  = lens _ddUploadType (\ s a -> s{_ddUploadType = a})
+
+-- | JSONP
+ddCallback :: Lens' DatabasesDelete (Maybe Text)
+ddCallback
+  = lens _ddCallback (\ s a -> s{_ddCallback = a})
 
 -- | Database instance ID. This does not include the project ID.
 ddInstance :: Lens' DatabasesDelete Text
@@ -109,7 +165,11 @@ instance GoogleRequest DatabasesDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient DatabasesDelete'{..}
-          = go _ddProject _ddInstance _ddDatabase
+          = go _ddProject _ddInstance _ddDatabase _ddXgafv
+              _ddUploadProtocol
+              _ddAccessToken
+              _ddUploadType
+              _ddCallback
               (Just AltJSON)
               sQLAdminService
           where go

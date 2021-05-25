@@ -44,8 +44,8 @@ module Network.Google.Resource.RuntimeConfig.Operations.Delete
     , odCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.RuntimeConfig.Types
+import Network.Google.Prelude
+import Network.Google.RuntimeConfig.Types
 
 -- | A resource alias for @runtimeconfig.operations.delete@ method which the
 -- 'OperationsDelete' request conforms to.
@@ -67,12 +67,12 @@ type OperationsDeleteResource =
 -- /See:/ 'operationsDelete' smart constructor.
 data OperationsDelete =
   OperationsDelete'
-    { _odXgafv          :: !(Maybe Xgafv)
+    { _odXgafv :: !(Maybe Xgafv)
     , _odUploadProtocol :: !(Maybe Text)
-    , _odAccessToken    :: !(Maybe Text)
-    , _odUploadType     :: !(Maybe Text)
-    , _odName           :: !Text
-    , _odCallback       :: !(Maybe Text)
+    , _odAccessToken :: !(Maybe Text)
+    , _odUploadType :: !(Maybe Text)
+    , _odName :: !Text
+    , _odCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

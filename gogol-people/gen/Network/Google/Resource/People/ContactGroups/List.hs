@@ -39,13 +39,14 @@ module Network.Google.Resource.People.ContactGroups.List
     , cglUploadProtocol
     , cglAccessToken
     , cglUploadType
+    , cglGroupFields
     , cglPageToken
     , cglPageSize
     , cglCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.contactGroups.list@ method which the
 -- 'ContactGroupsList' request conforms to.
@@ -57,11 +58,12 @@ type ContactGroupsListResource =
              QueryParam "upload_protocol" Text :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" (Textual Int32) :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ListContactGroupsResponse
+                   QueryParam "groupFields" GFieldMask :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "pageSize" (Textual Int32) :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListContactGroupsResponse
 
 -- | List all contact groups owned by the authenticated user. Members of the
 -- contact groups are not populated.
@@ -69,14 +71,15 @@ type ContactGroupsListResource =
 -- /See:/ 'contactGroupsList' smart constructor.
 data ContactGroupsList =
   ContactGroupsList'
-    { _cglSyncToken      :: !(Maybe Text)
-    , _cglXgafv          :: !(Maybe Xgafv)
+    { _cglSyncToken :: !(Maybe Text)
+    , _cglXgafv :: !(Maybe Xgafv)
     , _cglUploadProtocol :: !(Maybe Text)
-    , _cglAccessToken    :: !(Maybe Text)
-    , _cglUploadType     :: !(Maybe Text)
-    , _cglPageToken      :: !(Maybe Text)
-    , _cglPageSize       :: !(Maybe (Textual Int32))
-    , _cglCallback       :: !(Maybe Text)
+    , _cglAccessToken :: !(Maybe Text)
+    , _cglUploadType :: !(Maybe Text)
+    , _cglGroupFields :: !(Maybe GFieldMask)
+    , _cglPageToken :: !(Maybe Text)
+    , _cglPageSize :: !(Maybe (Textual Int32))
+    , _cglCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -95,6 +98,8 @@ data ContactGroupsList =
 --
 -- * 'cglUploadType'
 --
+-- * 'cglGroupFields'
+--
 -- * 'cglPageToken'
 --
 -- * 'cglPageSize'
@@ -109,15 +114,16 @@ contactGroupsList =
     , _cglUploadProtocol = Nothing
     , _cglAccessToken = Nothing
     , _cglUploadType = Nothing
+    , _cglGroupFields = Nothing
     , _cglPageToken = Nothing
     , _cglPageSize = Nothing
     , _cglCallback = Nothing
     }
 
 
--- | A sync token, returned by a previous call to \`contactgroups.list\`.
--- Only resources changed since the sync token was created will be
--- returned.
+-- | Optional. A sync token, returned by a previous call to
+-- \`contactgroups.list\`. Only resources changed since the sync token was
+-- created will be returned.
 cglSyncToken :: Lens' ContactGroupsList (Maybe Text)
 cglSyncToken
   = lens _cglSyncToken (\ s a -> s{_cglSyncToken = a})
@@ -144,14 +150,24 @@ cglUploadType
   = lens _cglUploadType
       (\ s a -> s{_cglUploadType = a})
 
--- | The next_page_token value returned from a previous call to
+-- | Optional. A field mask to restrict which fields on the group are
+-- returned. Defaults to \`metadata\`, \`groupType\`, \`memberCount\`, and
+-- \`name\` if not set or set to empty. Valid fields are: * clientData *
+-- groupType * memberCount * metadata * name
+cglGroupFields :: Lens' ContactGroupsList (Maybe GFieldMask)
+cglGroupFields
+  = lens _cglGroupFields
+      (\ s a -> s{_cglGroupFields = a})
+
+-- | Optional. The next_page_token value returned from a previous call to
 -- [ListContactGroups](\/people\/api\/rest\/v1\/contactgroups\/list).
 -- Requests the next page of resources.
 cglPageToken :: Lens' ContactGroupsList (Maybe Text)
 cglPageToken
   = lens _cglPageToken (\ s a -> s{_cglPageToken = a})
 
--- | The maximum number of resources to return.
+-- | Optional. The maximum number of resources to return. Valid values are
+-- between 1 and 1000, inclusive. Defaults to 30 if not set or set to 0.
 cglPageSize :: Lens' ContactGroupsList (Maybe Int32)
 cglPageSize
   = lens _cglPageSize (\ s a -> s{_cglPageSize = a}) .
@@ -171,6 +187,7 @@ instance GoogleRequest ContactGroupsList where
           = go _cglSyncToken _cglXgafv _cglUploadProtocol
               _cglAccessToken
               _cglUploadType
+              _cglGroupFields
               _cglPageToken
               _cglPageSize
               _cglCallback

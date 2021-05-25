@@ -57,8 +57,8 @@ module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
     , upfgilCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.guardianInvitations.list@ method which the
 -- 'UserProFilesGuardianInvitationsList' request conforms to.
@@ -67,7 +67,9 @@ type UserProFilesGuardianInvitationsListResource =
        "userProfiles" :>
          Capture "studentId" Text :>
            "guardianInvitations" :>
-             QueryParams "states" Text :>
+             QueryParams "states"
+               UserProFilesGuardianInvitationsListStates
+               :>
                QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "access_token" Text :>
@@ -96,16 +98,16 @@ type UserProFilesGuardianInvitationsListResource =
 -- /See:/ 'userProFilesGuardianInvitationsList' smart constructor.
 data UserProFilesGuardianInvitationsList =
   UserProFilesGuardianInvitationsList'
-    { _upfgilStudentId           :: !Text
-    , _upfgilStates              :: !(Maybe [Text])
-    , _upfgilXgafv               :: !(Maybe Xgafv)
-    , _upfgilUploadProtocol      :: !(Maybe Text)
-    , _upfgilAccessToken         :: !(Maybe Text)
-    , _upfgilUploadType          :: !(Maybe Text)
+    { _upfgilStudentId :: !Text
+    , _upfgilStates :: !(Maybe [UserProFilesGuardianInvitationsListStates])
+    , _upfgilXgafv :: !(Maybe Xgafv)
+    , _upfgilUploadProtocol :: !(Maybe Text)
+    , _upfgilAccessToken :: !(Maybe Text)
+    , _upfgilUploadType :: !(Maybe Text)
     , _upfgilInvitedEmailAddress :: !(Maybe Text)
-    , _upfgilPageToken           :: !(Maybe Text)
-    , _upfgilPageSize            :: !(Maybe (Textual Int32))
-    , _upfgilCallback            :: !(Maybe Text)
+    , _upfgilPageToken :: !(Maybe Text)
+    , _upfgilPageSize :: !(Maybe (Textual Int32))
+    , _upfgilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -162,10 +164,10 @@ upfgilStudentId
   = lens _upfgilStudentId
       (\ s a -> s{_upfgilStudentId = a})
 
--- | If specified, only results with the specified \`state\` values will be
--- returned. Otherwise, results with a \`state\` of \`PENDING\` will be
+-- | If specified, only results with the specified \`state\` values are
+-- returned. Otherwise, results with a \`state\` of \`PENDING\` are
 -- returned.
-upfgilStates :: Lens' UserProFilesGuardianInvitationsList [Text]
+upfgilStates :: Lens' UserProFilesGuardianInvitationsList [UserProFilesGuardianInvitationsListStates]
 upfgilStates
   = lens _upfgilStates (\ s a -> s{_upfgilStates = a})
       . _Default
@@ -195,7 +197,7 @@ upfgilUploadType
       (\ s a -> s{_upfgilUploadType = a})
 
 -- | If specified, only results with the specified \`invited_email_address\`
--- will be returned.
+-- are returned.
 upfgilInvitedEmailAddress :: Lens' UserProFilesGuardianInvitationsList (Maybe Text)
 upfgilInvitedEmailAddress
   = lens _upfgilInvitedEmailAddress

@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search for a post.
+-- Searches for posts matching given query terms in the specified blog.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.search@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.search@.
 module Network.Google.Resource.Blogger.Posts.Search
     (
     -- * REST Resource
@@ -33,38 +33,52 @@ module Network.Google.Resource.Blogger.Posts.Search
     , PostsSearch
 
     -- * Request Lenses
+    , psXgafv
+    , psUploadProtocol
     , psOrderBy
+    , psAccessToken
+    , psUploadType
     , psBlogId
     , psQ
     , psFetchBodies
+    , psCallback
     ) where
 
-import           Network.Google.Blogger.Types
-import           Network.Google.Prelude
+import Network.Google.Blogger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.search@ method which the
 -- 'PostsSearch' request conforms to.
 type PostsSearchResource =
-     "blogger" :>
-       "v3" :>
-         "blogs" :>
-           Capture "blogId" Text :>
-             "posts" :>
-               "search" :>
-                 QueryParam "q" Text :>
-                   QueryParam "orderBy" PostsSearchOrderBy :>
-                     QueryParam "fetchBodies" Bool :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] PostList
+     "v3" :>
+       "blogs" :>
+         Capture "blogId" Text :>
+           "posts" :>
+             "search" :>
+               QueryParam "q" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "orderBy" PostsSearchOrderBy :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "fetchBodies" Bool :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] PostList
 
--- | Search for a post.
+-- | Searches for posts matching given query terms in the specified blog.
 --
 -- /See:/ 'postsSearch' smart constructor.
 data PostsSearch =
   PostsSearch'
-    { _psOrderBy     :: !PostsSearchOrderBy
-    , _psBlogId      :: !Text
-    , _psQ           :: !Text
+    { _psXgafv :: !(Maybe Xgafv)
+    , _psUploadProtocol :: !(Maybe Text)
+    , _psOrderBy :: !PostsSearchOrderBy
+    , _psAccessToken :: !(Maybe Text)
+    , _psUploadType :: !(Maybe Text)
+    , _psBlogId :: !Text
+    , _psQ :: !Text
     , _psFetchBodies :: !Bool
+    , _psCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,46 +87,81 @@ data PostsSearch =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'psXgafv'
+--
+-- * 'psUploadProtocol'
+--
 -- * 'psOrderBy'
+--
+-- * 'psAccessToken'
+--
+-- * 'psUploadType'
 --
 -- * 'psBlogId'
 --
 -- * 'psQ'
 --
 -- * 'psFetchBodies'
+--
+-- * 'psCallback'
 postsSearch
     :: Text -- ^ 'psBlogId'
     -> Text -- ^ 'psQ'
     -> PostsSearch
 postsSearch pPsBlogId_ pPsQ_ =
   PostsSearch'
-    { _psOrderBy = PSOBPublished
+    { _psXgafv = Nothing
+    , _psUploadProtocol = Nothing
+    , _psOrderBy = PSOBPublished
+    , _psAccessToken = Nothing
+    , _psUploadType = Nothing
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
     , _psFetchBodies = True
+    , _psCallback = Nothing
     }
 
 
--- | Sort search results
+-- | V1 error format.
+psXgafv :: Lens' PostsSearch (Maybe Xgafv)
+psXgafv = lens _psXgafv (\ s a -> s{_psXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+psUploadProtocol :: Lens' PostsSearch (Maybe Text)
+psUploadProtocol
+  = lens _psUploadProtocol
+      (\ s a -> s{_psUploadProtocol = a})
+
 psOrderBy :: Lens' PostsSearch PostsSearchOrderBy
 psOrderBy
   = lens _psOrderBy (\ s a -> s{_psOrderBy = a})
 
--- | ID of the blog to fetch the post from.
+-- | OAuth access token.
+psAccessToken :: Lens' PostsSearch (Maybe Text)
+psAccessToken
+  = lens _psAccessToken
+      (\ s a -> s{_psAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+psUploadType :: Lens' PostsSearch (Maybe Text)
+psUploadType
+  = lens _psUploadType (\ s a -> s{_psUploadType = a})
+
 psBlogId :: Lens' PostsSearch Text
 psBlogId = lens _psBlogId (\ s a -> s{_psBlogId = a})
 
--- | Query terms to search this blog for matching posts.
 psQ :: Lens' PostsSearch Text
 psQ = lens _psQ (\ s a -> s{_psQ = a})
 
--- | Whether the body content of posts is included (default: true). This
--- should be set to false when the post bodies are not required, to help
--- minimize traffic.
 psFetchBodies :: Lens' PostsSearch Bool
 psFetchBodies
   = lens _psFetchBodies
       (\ s a -> s{_psFetchBodies = a})
+
+-- | JSONP
+psCallback :: Lens' PostsSearch (Maybe Text)
+psCallback
+  = lens _psCallback (\ s a -> s{_psCallback = a})
 
 instance GoogleRequest PostsSearch where
         type Rs PostsSearch = PostList
@@ -120,8 +169,12 @@ instance GoogleRequest PostsSearch where
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
         requestClient PostsSearch'{..}
-          = go _psBlogId (Just _psQ) (Just _psOrderBy)
+          = go _psBlogId (Just _psQ) _psXgafv _psUploadProtocol
+              (Just _psOrderBy)
+              _psAccessToken
+              _psUploadType
               (Just _psFetchBodies)
+              _psCallback
               (Just AltJSON)
               bloggerService
           where go

@@ -49,8 +49,8 @@ module Network.Google.Resource.Kgsearch.Entities.Search
     , esCallback
     ) where
 
-import           Network.Google.KnowledgeGraphSearch.Types
-import           Network.Google.Prelude
+import Network.Google.KnowledgeGraphSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @kgsearch.entities.search@ method which the
 -- 'EntitiesSearch' request conforms to.
@@ -79,18 +79,18 @@ type EntitiesSearchResource =
 -- /See:/ 'entitiesSearch' smart constructor.
 data EntitiesSearch =
   EntitiesSearch'
-    { _esXgafv          :: !(Maybe Xgafv)
+    { _esXgafv :: !(Maybe Xgafv)
     , _esUploadProtocol :: !(Maybe Text)
-    , _esPrefix         :: !(Maybe Bool)
-    , _esAccessToken    :: !(Maybe Text)
-    , _esUploadType     :: !(Maybe Text)
-    , _esTypes          :: !(Maybe [Text])
-    , _esIds            :: !(Maybe [Text])
-    , _esLanguages      :: !(Maybe [Text])
-    , _esIndent         :: !(Maybe Bool)
-    , _esQuery          :: !(Maybe Text)
-    , _esLimit          :: !(Maybe (Textual Int32))
-    , _esCallback       :: !(Maybe Text)
+    , _esPrefix :: !(Maybe Bool)
+    , _esAccessToken :: !(Maybe Text)
+    , _esUploadType :: !(Maybe Text)
+    , _esTypes :: !(Maybe [Text])
+    , _esIds :: !(Maybe [Text])
+    , _esLanguages :: !(Maybe [Text])
+    , _esIndent :: !(Maybe Bool)
+    , _esQuery :: !(Maybe Text)
+    , _esLimit :: !(Maybe (Textual Int32))
+    , _esCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

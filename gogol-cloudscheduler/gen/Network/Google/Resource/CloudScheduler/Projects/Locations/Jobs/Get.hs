@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Get
     , pljgCallback
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.get@ method which the
 -- 'ProjectsLocationsJobsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsJobsGetResource =
 -- /See:/ 'projectsLocationsJobsGet' smart constructor.
 data ProjectsLocationsJobsGet =
   ProjectsLocationsJobsGet'
-    { _pljgXgafv          :: !(Maybe Xgafv)
+    { _pljgXgafv :: !(Maybe Xgafv)
     , _pljgUploadProtocol :: !(Maybe Text)
-    , _pljgAccessToken    :: !(Maybe Text)
-    , _pljgUploadType     :: !(Maybe Text)
-    , _pljgName           :: !Text
-    , _pljgCallback       :: !(Maybe Text)
+    , _pljgAccessToken :: !(Maybe Text)
+    , _pljgUploadType :: !(Maybe Text)
+    , _pljgName :: !Text
+    , _pljgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

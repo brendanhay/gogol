@@ -24,7 +24,7 @@
 -- set), and the default version (if at least one version of the model has
 -- been deployed).
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.get@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.get@.
 module Network.Google.Resource.Ml.Projects.Models.Get
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.Ml.Projects.Models.Get
     , pmgCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.get@ method which the
 -- 'ProjectsModelsGet' request conforms to.
@@ -66,12 +66,12 @@ type ProjectsModelsGetResource =
 -- /See:/ 'projectsModelsGet' smart constructor.
 data ProjectsModelsGet =
   ProjectsModelsGet'
-    { _pmgXgafv          :: !(Maybe Xgafv)
+    { _pmgXgafv :: !(Maybe Xgafv)
     , _pmgUploadProtocol :: !(Maybe Text)
-    , _pmgAccessToken    :: !(Maybe Text)
-    , _pmgUploadType     :: !(Maybe Text)
-    , _pmgName           :: !Text
-    , _pmgCallback       :: !(Maybe Text)
+    , _pmgAccessToken :: !(Maybe Text)
+    , _pmgUploadType :: !(Maybe Text)
+    , _pmgName :: !Text
+    , _pmgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,7 +139,8 @@ pmgCallback
 instance GoogleRequest ProjectsModelsGet where
         type Rs ProjectsModelsGet = GoogleCloudMlV1__Model
         type Scopes ProjectsModelsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsModelsGet'{..}
           = go _pmgName _pmgXgafv _pmgUploadProtocol
               _pmgAccessToken

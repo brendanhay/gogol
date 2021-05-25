@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
     , mwpuluLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webpropertyUserLinks.update@ method which the
 -- 'ManagementWebPropertyUserLinksUpdate' request conforms to.
@@ -64,9 +64,9 @@ type ManagementWebPropertyUserLinksUpdateResource =
 data ManagementWebPropertyUserLinksUpdate =
   ManagementWebPropertyUserLinksUpdate'
     { _mwpuluWebPropertyId :: !Text
-    , _mwpuluPayload       :: !EntityUserLink
-    , _mwpuluAccountId     :: !Text
-    , _mwpuluLinkId        :: !Text
+    , _mwpuluPayload :: !EntityUserLink
+    , _mwpuluAccountId :: !Text
+    , _mwpuluLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

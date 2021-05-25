@@ -26,7 +26,7 @@
 -- in batches (called pages). If there are no versions that match the
 -- request parameters, the list request returns an empty response body: {}.
 --
--- /See:/ <https://cloud.google.com/ml/ Cloud Machine Learning Engine Reference> for @ml.projects.models.versions.list@.
+-- /See:/ <https://cloud.google.com/ml/ AI Platform Training & Prediction API Reference> for @ml.projects.models.versions.list@.
 module Network.Google.Resource.Ml.Projects.Models.Versions.List
     (
     -- * REST Resource
@@ -48,8 +48,8 @@ module Network.Google.Resource.Ml.Projects.Models.Versions.List
     , pmvlCallback
     ) where
 
-import           Network.Google.MachineLearning.Types
-import           Network.Google.Prelude
+import Network.Google.MachineLearning.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @ml.projects.models.versions.list@ method which the
 -- 'ProjectsModelsVersionsList' request conforms to.
@@ -77,15 +77,15 @@ type ProjectsModelsVersionsListResource =
 -- /See:/ 'projectsModelsVersionsList' smart constructor.
 data ProjectsModelsVersionsList =
   ProjectsModelsVersionsList'
-    { _pmvlParent         :: !Text
-    , _pmvlXgafv          :: !(Maybe Xgafv)
+    { _pmvlParent :: !Text
+    , _pmvlXgafv :: !(Maybe Xgafv)
     , _pmvlUploadProtocol :: !(Maybe Text)
-    , _pmvlAccessToken    :: !(Maybe Text)
-    , _pmvlUploadType     :: !(Maybe Text)
-    , _pmvlFilter         :: !(Maybe Text)
-    , _pmvlPageToken      :: !(Maybe Text)
-    , _pmvlPageSize       :: !(Maybe (Textual Int32))
-    , _pmvlCallback       :: !(Maybe Text)
+    , _pmvlAccessToken :: !(Maybe Text)
+    , _pmvlUploadType :: !(Maybe Text)
+    , _pmvlFilter :: !(Maybe Text)
+    , _pmvlPageToken :: !(Maybe Text)
+    , _pmvlPageSize :: !(Maybe (Textual Int32))
+    , _pmvlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -188,7 +188,8 @@ instance GoogleRequest ProjectsModelsVersionsList
         type Rs ProjectsModelsVersionsList =
              GoogleCloudMlV1__ListVersionsResponse
         type Scopes ProjectsModelsVersionsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient ProjectsModelsVersionsList'{..}
           = go _pmvlParent _pmvlXgafv _pmvlUploadProtocol
               _pmvlAccessToken

@@ -40,9 +40,24 @@ library
         , Network.Google.Resource.ServiceNetworking.Operations.List
         , Network.Google.Resource.ServiceNetworking.Services.AddSubnetwork
         , Network.Google.Resource.ServiceNetworking.Services.Connections.Create
+        , Network.Google.Resource.ServiceNetworking.Services.Connections.DeleteConnection
         , Network.Google.Resource.ServiceNetworking.Services.Connections.List
         , Network.Google.Resource.ServiceNetworking.Services.Connections.Patch
+        , Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Add
+        , Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Remove
+        , Network.Google.Resource.ServiceNetworking.Services.DNSRecordSets.Update
+        , Network.Google.Resource.ServiceNetworking.Services.DNSZones.Add
+        , Network.Google.Resource.ServiceNetworking.Services.DNSZones.Remove
+        , Network.Google.Resource.ServiceNetworking.Services.DisableVPCServiceControls
+        , Network.Google.Resource.ServiceNetworking.Services.EnableVPCServiceControls
+        , Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.Get
+        , Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.Create
+        , Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.Delete
+        , Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.PeeredDNSDomains.List
+        , Network.Google.Resource.ServiceNetworking.Services.Projects.Global.Networks.UpdateConsumerConfig
+        , Network.Google.Resource.ServiceNetworking.Services.Roles.Add
         , Network.Google.Resource.ServiceNetworking.Services.SearchRange
+        , Network.Google.Resource.ServiceNetworking.Services.Validate
         , Network.Google.ServiceNetworking
         , Network.Google.ServiceNetworking.Types
 

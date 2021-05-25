@@ -39,8 +39,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
     , rurZone
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.rollback@ method which the
 -- 'RollingUpdatesRollback' request conforms to.
@@ -63,8 +63,8 @@ type RollingUpdatesRollbackResource =
 data RollingUpdatesRollback =
   RollingUpdatesRollback'
     { _rurRollingUpdate :: !Text
-    , _rurProject       :: !Text
-    , _rurZone          :: !Text
+    , _rurProject :: !Text
+    , _rurZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

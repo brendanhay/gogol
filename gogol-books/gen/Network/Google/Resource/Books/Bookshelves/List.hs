@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of public bookshelves for the specified user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.bookshelves.list@.
+-- /See:/ <https://code.google.com/apis/books/docs/v1/getting_started.html Books API Reference> for @books.bookshelves.list@.
 module Network.Google.Resource.Books.Bookshelves.List
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Books.Bookshelves.List
     , BookshelvesList
 
     -- * Request Lenses
+    , blXgafv
+    , blUploadProtocol
+    , blAccessToken
+    , blUploadType
     , blUserId
     , blSource
+    , blCallback
     ) where
 
-import           Network.Google.Books.Types
-import           Network.Google.Prelude
+import Network.Google.Books.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @books.bookshelves.list@ method which the
 -- 'BookshelvesList' request conforms to.
@@ -48,16 +53,26 @@ type BookshelvesListResource =
          "users" :>
            Capture "userId" Text :>
              "bookshelves" :>
-               QueryParam "source" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of public bookshelves for the specified user.
 --
 -- /See:/ 'bookshelvesList' smart constructor.
 data BookshelvesList =
   BookshelvesList'
-    { _blUserId :: !Text
+    { _blXgafv :: !(Maybe Xgafv)
+    , _blUploadProtocol :: !(Maybe Text)
+    , _blAccessToken :: !(Maybe Text)
+    , _blUploadType :: !(Maybe Text)
+    , _blUserId :: !Text
     , _blSource :: !(Maybe Text)
+    , _blCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,15 +81,54 @@ data BookshelvesList =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'blXgafv'
+--
+-- * 'blUploadProtocol'
+--
+-- * 'blAccessToken'
+--
+-- * 'blUploadType'
+--
 -- * 'blUserId'
 --
 -- * 'blSource'
+--
+-- * 'blCallback'
 bookshelvesList
     :: Text -- ^ 'blUserId'
     -> BookshelvesList
 bookshelvesList pBlUserId_ =
-  BookshelvesList' {_blUserId = pBlUserId_, _blSource = Nothing}
+  BookshelvesList'
+    { _blXgafv = Nothing
+    , _blUploadProtocol = Nothing
+    , _blAccessToken = Nothing
+    , _blUploadType = Nothing
+    , _blUserId = pBlUserId_
+    , _blSource = Nothing
+    , _blCallback = Nothing
+    }
 
+
+-- | V1 error format.
+blXgafv :: Lens' BookshelvesList (Maybe Xgafv)
+blXgafv = lens _blXgafv (\ s a -> s{_blXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+blUploadProtocol :: Lens' BookshelvesList (Maybe Text)
+blUploadProtocol
+  = lens _blUploadProtocol
+      (\ s a -> s{_blUploadProtocol = a})
+
+-- | OAuth access token.
+blAccessToken :: Lens' BookshelvesList (Maybe Text)
+blAccessToken
+  = lens _blAccessToken
+      (\ s a -> s{_blAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+blUploadType :: Lens' BookshelvesList (Maybe Text)
+blUploadType
+  = lens _blUploadType (\ s a -> s{_blUploadType = a})
 
 -- | ID of user for whom to retrieve bookshelves.
 blUserId :: Lens' BookshelvesList Text
@@ -84,12 +138,23 @@ blUserId = lens _blUserId (\ s a -> s{_blUserId = a})
 blSource :: Lens' BookshelvesList (Maybe Text)
 blSource = lens _blSource (\ s a -> s{_blSource = a})
 
+-- | JSONP
+blCallback :: Lens' BookshelvesList (Maybe Text)
+blCallback
+  = lens _blCallback (\ s a -> s{_blCallback = a})
+
 instance GoogleRequest BookshelvesList where
         type Rs BookshelvesList = Bookshelves
         type Scopes BookshelvesList =
              '["https://www.googleapis.com/auth/books"]
         requestClient BookshelvesList'{..}
-          = go _blUserId _blSource (Just AltJSON) booksService
+          = go _blUserId _blXgafv _blUploadProtocol
+              _blAccessToken
+              _blUploadType
+              _blSource
+              _blCallback
+              (Just AltJSON)
+              booksService
           where go
                   = buildClient
                       (Proxy :: Proxy BookshelvesListResource)

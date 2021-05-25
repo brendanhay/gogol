@@ -42,8 +42,8 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Update
     , guCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groups.update@ method which the
 -- 'GroupsUpdate' request conforms to.
@@ -64,13 +64,13 @@ type GroupsUpdateResource =
 -- /See:/ 'groupsUpdate' smart constructor.
 data GroupsUpdate =
   GroupsUpdate'
-    { _guXgafv                  :: !(Maybe Xgafv)
-    , _guUploadProtocol         :: !(Maybe Text)
-    , _guAccessToken            :: !(Maybe Text)
-    , _guUploadType             :: !(Maybe Text)
-    , _guPayload                :: !Group
+    { _guXgafv :: !(Maybe Xgafv)
+    , _guUploadProtocol :: !(Maybe Text)
+    , _guAccessToken :: !(Maybe Text)
+    , _guUploadType :: !(Maybe Text)
+    , _guPayload :: !Group
     , _guOnBehalfOfContentOwner :: !(Maybe Text)
-    , _guCallback               :: !(Maybe Text)
+    , _guCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -43,8 +43,8 @@ module Network.Google.Resource.Container.Projects.Locations.Operations.List
     , plolCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.operations.list@ method which the
 -- 'ProjectsLocationsOperationsList' request conforms to.
@@ -67,14 +67,14 @@ type ProjectsLocationsOperationsListResource =
 -- /See:/ 'projectsLocationsOperationsList' smart constructor.
 data ProjectsLocationsOperationsList =
   ProjectsLocationsOperationsList'
-    { _plolParent         :: !Text
-    , _plolXgafv          :: !(Maybe Xgafv)
+    { _plolParent :: !Text
+    , _plolXgafv :: !(Maybe Xgafv)
     , _plolUploadProtocol :: !(Maybe Text)
-    , _plolAccessToken    :: !(Maybe Text)
-    , _plolUploadType     :: !(Maybe Text)
-    , _plolZone           :: !(Maybe Text)
-    , _plolProjectId      :: !(Maybe Text)
-    , _plolCallback       :: !(Maybe Text)
+    , _plolAccessToken :: !(Maybe Text)
+    , _plolUploadType :: !(Maybe Text)
+    , _plolZone :: !(Maybe Text)
+    , _plolProjectId :: !(Maybe Text)
+    , _plolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -115,7 +115,7 @@ projectsLocationsOperationsList pPlolParent_ =
 
 
 -- | The parent (project and location) where the operations will be listed.
--- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"
+-- Specified in the format \`projects\/*\/locations\/*\`. Location \"-\"
 -- matches all zones and all regions.
 plolParent :: Lens' ProjectsLocationsOperationsList Text
 plolParent
@@ -145,9 +145,9 @@ plolUploadType
       (\ s a -> s{_plolUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) to return operations for, or
--- \`-\` for all zones. This field has been deprecated and replaced by the
--- parent field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) to
+-- return operations for, or \`-\` for all zones. This field has been
+-- deprecated and replaced by the parent field.
 plolZone :: Lens' ProjectsLocationsOperationsList (Maybe Text)
 plolZone = lens _plolZone (\ s a -> s{_plolZone = a})
 

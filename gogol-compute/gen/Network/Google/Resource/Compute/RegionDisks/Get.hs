@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.RegionDisks.Get
     , rdgRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionDisks.get@ method which the
 -- 'RegionDisksGet' request conforms to.
@@ -60,8 +60,8 @@ type RegionDisksGetResource =
 data RegionDisksGet =
   RegionDisksGet'
     { _rdgProject :: !Text
-    , _rdgDisk    :: !Text
-    , _rdgRegion  :: !Text
+    , _rdgDisk :: !Text
+    , _rdgRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

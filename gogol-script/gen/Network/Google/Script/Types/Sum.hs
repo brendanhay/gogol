@@ -16,7 +16,7 @@
 --
 module Network.Google.Script.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The executions type.
 data GoogleAppsScriptTypeProcessProcessType
@@ -131,6 +131,76 @@ instance FromJSON GoogleAppsScriptTypeProcessUserAccessLevel where
 instance ToJSON GoogleAppsScriptTypeProcessUserAccessLevel where
     toJSON = toJSONText
 
+-- | Optional field used to limit returned processes to those having one of
+-- the specified process types.
+data ProcessesListScriptProcessesScriptProcessFilterTypes
+    = PLSPSPFTProcessTypeUnspecified
+      -- ^ @PROCESS_TYPE_UNSPECIFIED@
+      -- Unspecified type.
+    | PLSPSPFTAddOn
+      -- ^ @ADD_ON@
+      -- The process was started from an add-on entry point.
+    | PLSPSPFTExecutionAPI
+      -- ^ @EXECUTION_API@
+      -- The process was started using the Apps Script API.
+    | PLSPSPFTTimeDriven
+      -- ^ @TIME_DRIVEN@
+      -- The process was started from a time-based trigger.
+    | PLSPSPFTTrigger
+      -- ^ @TRIGGER@
+      -- The process was started from an event-based trigger.
+    | PLSPSPFTWebApp
+      -- ^ @WEBAPP@
+      -- The process was started from a web app entry point.
+    | PLSPSPFTEditor
+      -- ^ @EDITOR@
+      -- The process was started using the Apps Script IDE.
+    | PLSPSPFTSimpleTrigger
+      -- ^ @SIMPLE_TRIGGER@
+      -- The process was started from a G Suite simple trigger.
+    | PLSPSPFTMenu
+      -- ^ @MENU@
+      -- The process was started from a G Suite menu item.
+    | PLSPSPFTBatchTask
+      -- ^ @BATCH_TASK@
+      -- The process was started as a task in a batch job.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProcessesListScriptProcessesScriptProcessFilterTypes
+
+instance FromHttpApiData ProcessesListScriptProcessesScriptProcessFilterTypes where
+    parseQueryParam = \case
+        "PROCESS_TYPE_UNSPECIFIED" -> Right PLSPSPFTProcessTypeUnspecified
+        "ADD_ON" -> Right PLSPSPFTAddOn
+        "EXECUTION_API" -> Right PLSPSPFTExecutionAPI
+        "TIME_DRIVEN" -> Right PLSPSPFTTimeDriven
+        "TRIGGER" -> Right PLSPSPFTTrigger
+        "WEBAPP" -> Right PLSPSPFTWebApp
+        "EDITOR" -> Right PLSPSPFTEditor
+        "SIMPLE_TRIGGER" -> Right PLSPSPFTSimpleTrigger
+        "MENU" -> Right PLSPSPFTMenu
+        "BATCH_TASK" -> Right PLSPSPFTBatchTask
+        x -> Left ("Unable to parse ProcessesListScriptProcessesScriptProcessFilterTypes from: " <> x)
+
+instance ToHttpApiData ProcessesListScriptProcessesScriptProcessFilterTypes where
+    toQueryParam = \case
+        PLSPSPFTProcessTypeUnspecified -> "PROCESS_TYPE_UNSPECIFIED"
+        PLSPSPFTAddOn -> "ADD_ON"
+        PLSPSPFTExecutionAPI -> "EXECUTION_API"
+        PLSPSPFTTimeDriven -> "TIME_DRIVEN"
+        PLSPSPFTTrigger -> "TRIGGER"
+        PLSPSPFTWebApp -> "WEBAPP"
+        PLSPSPFTEditor -> "EDITOR"
+        PLSPSPFTSimpleTrigger -> "SIMPLE_TRIGGER"
+        PLSPSPFTMenu -> "MENU"
+        PLSPSPFTBatchTask -> "BATCH_TASK"
+
+instance FromJSON ProcessesListScriptProcessesScriptProcessFilterTypes where
+    parseJSON = parseJSONText "ProcessesListScriptProcessesScriptProcessFilterTypes"
+
+instance ToJSON ProcessesListScriptProcessesScriptProcessFilterTypes where
+    toJSON = toJSONText
+
 -- | Who to execute the web app as.
 data GoogleAppsScriptTypeWebAppConfigExecuteAs
     = UnknownExecuteAs
@@ -212,6 +282,95 @@ instance FromJSON GoogleAppsScriptTypeExecutionAPIConfigAccess where
 instance ToJSON GoogleAppsScriptTypeExecutionAPIConfigAccess where
     toJSON = toJSONText
 
+-- | Optional field used to limit returned processes to those having one of
+-- the specified process statuses.
+data ProcessesListScriptProcessesScriptProcessFilterStatuses
+    = ProcessStatusUnspecified
+      -- ^ @PROCESS_STATUS_UNSPECIFIED@
+      -- Unspecified status.
+    | Running
+      -- ^ @RUNNING@
+      -- The process is currently running.
+    | Paused
+      -- ^ @PAUSED@
+      -- The process has paused.
+    | Completed
+      -- ^ @COMPLETED@
+      -- The process has completed.
+    | Canceled
+      -- ^ @CANCELED@
+      -- The process was cancelled.
+    | Failed
+      -- ^ @FAILED@
+      -- The process failed.
+    | TimedOut
+      -- ^ @TIMED_OUT@
+      -- The process timed out.
+    | Unknown
+      -- ^ @UNKNOWN@
+      -- Process status unknown.
+    | Delayed
+      -- ^ @DELAYED@
+      -- The process is delayed, waiting for quota.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProcessesListScriptProcessesScriptProcessFilterStatuses
+
+instance FromHttpApiData ProcessesListScriptProcessesScriptProcessFilterStatuses where
+    parseQueryParam = \case
+        "PROCESS_STATUS_UNSPECIFIED" -> Right ProcessStatusUnspecified
+        "RUNNING" -> Right Running
+        "PAUSED" -> Right Paused
+        "COMPLETED" -> Right Completed
+        "CANCELED" -> Right Canceled
+        "FAILED" -> Right Failed
+        "TIMED_OUT" -> Right TimedOut
+        "UNKNOWN" -> Right Unknown
+        "DELAYED" -> Right Delayed
+        x -> Left ("Unable to parse ProcessesListScriptProcessesScriptProcessFilterStatuses from: " <> x)
+
+instance ToHttpApiData ProcessesListScriptProcessesScriptProcessFilterStatuses where
+    toQueryParam = \case
+        ProcessStatusUnspecified -> "PROCESS_STATUS_UNSPECIFIED"
+        Running -> "RUNNING"
+        Paused -> "PAUSED"
+        Completed -> "COMPLETED"
+        Canceled -> "CANCELED"
+        Failed -> "FAILED"
+        TimedOut -> "TIMED_OUT"
+        Unknown -> "UNKNOWN"
+        Delayed -> "DELAYED"
+
+instance FromJSON ProcessesListScriptProcessesScriptProcessFilterStatuses where
+    parseJSON = parseJSONText "ProcessesListScriptProcessesScriptProcessFilterStatuses"
+
+instance ToJSON ProcessesListScriptProcessesScriptProcessFilterStatuses where
+    toJSON = toJSONText
+
+-- | Represents a null value.
+data ValueNullValue
+    = NullValue
+      -- ^ @NULL_VALUE@
+      -- Null value.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ValueNullValue
+
+instance FromHttpApiData ValueNullValue where
+    parseQueryParam = \case
+        "NULL_VALUE" -> Right NullValue
+        x -> Left ("Unable to parse ValueNullValue from: " <> x)
+
+instance ToHttpApiData ValueNullValue where
+    toQueryParam = \case
+        NullValue -> "NULL_VALUE"
+
+instance FromJSON ValueNullValue where
+    parseJSON = parseJSONText "ValueNullValue"
+
+instance ToJSON ValueNullValue where
+    toJSON = toJSONText
+
 -- | The type of the file.
 data FileType
     = EnumTypeUnspecified
@@ -253,6 +412,155 @@ instance FromJSON FileType where
 instance ToJSON FileType where
     toJSON = toJSONText
 
+-- | Optional field used to limit returned processes to those having one of
+-- the specified process types.
+data ProcessesListUserProcessFilterTypes
+    = PLUPFTProcessTypeUnspecified
+      -- ^ @PROCESS_TYPE_UNSPECIFIED@
+      -- Unspecified type.
+    | PLUPFTAddOn
+      -- ^ @ADD_ON@
+      -- The process was started from an add-on entry point.
+    | PLUPFTExecutionAPI
+      -- ^ @EXECUTION_API@
+      -- The process was started using the Apps Script API.
+    | PLUPFTTimeDriven
+      -- ^ @TIME_DRIVEN@
+      -- The process was started from a time-based trigger.
+    | PLUPFTTrigger
+      -- ^ @TRIGGER@
+      -- The process was started from an event-based trigger.
+    | PLUPFTWebApp
+      -- ^ @WEBAPP@
+      -- The process was started from a web app entry point.
+    | PLUPFTEditor
+      -- ^ @EDITOR@
+      -- The process was started using the Apps Script IDE.
+    | PLUPFTSimpleTrigger
+      -- ^ @SIMPLE_TRIGGER@
+      -- The process was started from a G Suite simple trigger.
+    | PLUPFTMenu
+      -- ^ @MENU@
+      -- The process was started from a G Suite menu item.
+    | PLUPFTBatchTask
+      -- ^ @BATCH_TASK@
+      -- The process was started as a task in a batch job.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProcessesListUserProcessFilterTypes
+
+instance FromHttpApiData ProcessesListUserProcessFilterTypes where
+    parseQueryParam = \case
+        "PROCESS_TYPE_UNSPECIFIED" -> Right PLUPFTProcessTypeUnspecified
+        "ADD_ON" -> Right PLUPFTAddOn
+        "EXECUTION_API" -> Right PLUPFTExecutionAPI
+        "TIME_DRIVEN" -> Right PLUPFTTimeDriven
+        "TRIGGER" -> Right PLUPFTTrigger
+        "WEBAPP" -> Right PLUPFTWebApp
+        "EDITOR" -> Right PLUPFTEditor
+        "SIMPLE_TRIGGER" -> Right PLUPFTSimpleTrigger
+        "MENU" -> Right PLUPFTMenu
+        "BATCH_TASK" -> Right PLUPFTBatchTask
+        x -> Left ("Unable to parse ProcessesListUserProcessFilterTypes from: " <> x)
+
+instance ToHttpApiData ProcessesListUserProcessFilterTypes where
+    toQueryParam = \case
+        PLUPFTProcessTypeUnspecified -> "PROCESS_TYPE_UNSPECIFIED"
+        PLUPFTAddOn -> "ADD_ON"
+        PLUPFTExecutionAPI -> "EXECUTION_API"
+        PLUPFTTimeDriven -> "TIME_DRIVEN"
+        PLUPFTTrigger -> "TRIGGER"
+        PLUPFTWebApp -> "WEBAPP"
+        PLUPFTEditor -> "EDITOR"
+        PLUPFTSimpleTrigger -> "SIMPLE_TRIGGER"
+        PLUPFTMenu -> "MENU"
+        PLUPFTBatchTask -> "BATCH_TASK"
+
+instance FromJSON ProcessesListUserProcessFilterTypes where
+    parseJSON = parseJSONText "ProcessesListUserProcessFilterTypes"
+
+instance ToJSON ProcessesListUserProcessFilterTypes where
+    toJSON = toJSONText
+
+-- | Optional field used to limit returned processes to those having one of
+-- the specified user access levels.
+data ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
+    = PLSPSPFUALUserAccessLevelUnspecified
+      -- ^ @USER_ACCESS_LEVEL_UNSPECIFIED@
+      -- User access level unspecified
+    | PLSPSPFUALNone
+      -- ^ @NONE@
+      -- The user has no access.
+    | PLSPSPFUALRead'
+      -- ^ @READ@
+      -- The user has read-only access.
+    | PLSPSPFUALWrite
+      -- ^ @WRITE@
+      -- The user has write access.
+    | PLSPSPFUALOwner
+      -- ^ @OWNER@
+      -- The user is an owner.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels
+
+instance FromHttpApiData ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels where
+    parseQueryParam = \case
+        "USER_ACCESS_LEVEL_UNSPECIFIED" -> Right PLSPSPFUALUserAccessLevelUnspecified
+        "NONE" -> Right PLSPSPFUALNone
+        "READ" -> Right PLSPSPFUALRead'
+        "WRITE" -> Right PLSPSPFUALWrite
+        "OWNER" -> Right PLSPSPFUALOwner
+        x -> Left ("Unable to parse ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels from: " <> x)
+
+instance ToHttpApiData ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels where
+    toQueryParam = \case
+        PLSPSPFUALUserAccessLevelUnspecified -> "USER_ACCESS_LEVEL_UNSPECIFIED"
+        PLSPSPFUALNone -> "NONE"
+        PLSPSPFUALRead' -> "READ"
+        PLSPSPFUALWrite -> "WRITE"
+        PLSPSPFUALOwner -> "OWNER"
+
+instance FromJSON ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels where
+    parseJSON = parseJSONText "ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels"
+
+instance ToJSON ProcessesListScriptProcessesScriptProcessFilterUserAccessLevels where
+    toJSON = toJSONText
+
+-- | Required field indicating what granularity of metrics are returned.
+data ProjectsGetMetricsMetricsGranularity
+    = UnspecifiedGranularity
+      -- ^ @UNSPECIFIED_GRANULARITY@
+      -- Default metric granularity used to query no metrics.
+    | Weekly
+      -- ^ @WEEKLY@
+      -- Represents weekly metrics.
+    | Daily
+      -- ^ @DAILY@
+      -- Represents daily metrics over a period of 7 days.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProjectsGetMetricsMetricsGranularity
+
+instance FromHttpApiData ProjectsGetMetricsMetricsGranularity where
+    parseQueryParam = \case
+        "UNSPECIFIED_GRANULARITY" -> Right UnspecifiedGranularity
+        "WEEKLY" -> Right Weekly
+        "DAILY" -> Right Daily
+        x -> Left ("Unable to parse ProjectsGetMetricsMetricsGranularity from: " <> x)
+
+instance ToHttpApiData ProjectsGetMetricsMetricsGranularity where
+    toQueryParam = \case
+        UnspecifiedGranularity -> "UNSPECIFIED_GRANULARITY"
+        Weekly -> "WEEKLY"
+        Daily -> "DAILY"
+
+instance FromJSON ProjectsGetMetricsMetricsGranularity where
+    parseJSON = parseJSONText "ProjectsGetMetricsMetricsGranularity"
+
+instance ToJSON ProjectsGetMetricsMetricsGranularity where
+    toJSON = toJSONText
+
 -- | The add-on\'s required list of supported container types.
 data GoogleAppsScriptTypeAddOnEntryPointAddOnType
     = UnknownAddonType
@@ -287,6 +595,71 @@ instance FromJSON GoogleAppsScriptTypeAddOnEntryPointAddOnType where
 instance ToJSON GoogleAppsScriptTypeAddOnEntryPointAddOnType where
     toJSON = toJSONText
 
+-- | Optional field used to limit returned processes to those having one of
+-- the specified process statuses.
+data ProcessesListUserProcessFilterStatuses
+    = PLUPFSProcessStatusUnspecified
+      -- ^ @PROCESS_STATUS_UNSPECIFIED@
+      -- Unspecified status.
+    | PLUPFSRunning
+      -- ^ @RUNNING@
+      -- The process is currently running.
+    | PLUPFSPaused
+      -- ^ @PAUSED@
+      -- The process has paused.
+    | PLUPFSCompleted
+      -- ^ @COMPLETED@
+      -- The process has completed.
+    | PLUPFSCanceled
+      -- ^ @CANCELED@
+      -- The process was cancelled.
+    | PLUPFSFailed
+      -- ^ @FAILED@
+      -- The process failed.
+    | PLUPFSTimedOut
+      -- ^ @TIMED_OUT@
+      -- The process timed out.
+    | PLUPFSUnknown
+      -- ^ @UNKNOWN@
+      -- Process status unknown.
+    | PLUPFSDelayed
+      -- ^ @DELAYED@
+      -- The process is delayed, waiting for quota.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProcessesListUserProcessFilterStatuses
+
+instance FromHttpApiData ProcessesListUserProcessFilterStatuses where
+    parseQueryParam = \case
+        "PROCESS_STATUS_UNSPECIFIED" -> Right PLUPFSProcessStatusUnspecified
+        "RUNNING" -> Right PLUPFSRunning
+        "PAUSED" -> Right PLUPFSPaused
+        "COMPLETED" -> Right PLUPFSCompleted
+        "CANCELED" -> Right PLUPFSCanceled
+        "FAILED" -> Right PLUPFSFailed
+        "TIMED_OUT" -> Right PLUPFSTimedOut
+        "UNKNOWN" -> Right PLUPFSUnknown
+        "DELAYED" -> Right PLUPFSDelayed
+        x -> Left ("Unable to parse ProcessesListUserProcessFilterStatuses from: " <> x)
+
+instance ToHttpApiData ProcessesListUserProcessFilterStatuses where
+    toQueryParam = \case
+        PLUPFSProcessStatusUnspecified -> "PROCESS_STATUS_UNSPECIFIED"
+        PLUPFSRunning -> "RUNNING"
+        PLUPFSPaused -> "PAUSED"
+        PLUPFSCompleted -> "COMPLETED"
+        PLUPFSCanceled -> "CANCELED"
+        PLUPFSFailed -> "FAILED"
+        PLUPFSTimedOut -> "TIMED_OUT"
+        PLUPFSUnknown -> "UNKNOWN"
+        PLUPFSDelayed -> "DELAYED"
+
+instance FromJSON ProcessesListUserProcessFilterStatuses where
+    parseJSON = parseJSONText "ProcessesListUserProcessFilterStatuses"
+
+instance ToJSON ProcessesListUserProcessFilterStatuses where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1
@@ -314,6 +687,51 @@ instance FromJSON Xgafv where
     parseJSON = parseJSONText "Xgafv"
 
 instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | Optional field used to limit returned processes to those having one of
+-- the specified user access levels.
+data ProcessesListUserProcessFilterUserAccessLevels
+    = PLUPFUALUserAccessLevelUnspecified
+      -- ^ @USER_ACCESS_LEVEL_UNSPECIFIED@
+      -- User access level unspecified
+    | PLUPFUALNone
+      -- ^ @NONE@
+      -- The user has no access.
+    | PLUPFUALRead'
+      -- ^ @READ@
+      -- The user has read-only access.
+    | PLUPFUALWrite
+      -- ^ @WRITE@
+      -- The user has write access.
+    | PLUPFUALOwner
+      -- ^ @OWNER@
+      -- The user is an owner.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ProcessesListUserProcessFilterUserAccessLevels
+
+instance FromHttpApiData ProcessesListUserProcessFilterUserAccessLevels where
+    parseQueryParam = \case
+        "USER_ACCESS_LEVEL_UNSPECIFIED" -> Right PLUPFUALUserAccessLevelUnspecified
+        "NONE" -> Right PLUPFUALNone
+        "READ" -> Right PLUPFUALRead'
+        "WRITE" -> Right PLUPFUALWrite
+        "OWNER" -> Right PLUPFUALOwner
+        x -> Left ("Unable to parse ProcessesListUserProcessFilterUserAccessLevels from: " <> x)
+
+instance ToHttpApiData ProcessesListUserProcessFilterUserAccessLevels where
+    toQueryParam = \case
+        PLUPFUALUserAccessLevelUnspecified -> "USER_ACCESS_LEVEL_UNSPECIFIED"
+        PLUPFUALNone -> "NONE"
+        PLUPFUALRead' -> "READ"
+        PLUPFUALWrite -> "WRITE"
+        PLUPFUALOwner -> "OWNER"
+
+instance FromJSON ProcessesListUserProcessFilterUserAccessLevels where
+    parseJSON = parseJSONText "ProcessesListUserProcessFilterUserAccessLevels"
+
+instance ToJSON ProcessesListUserProcessFilterUserAccessLevels where
     toJSON = toJSONText
 
 -- | The type of the entry point.
@@ -357,31 +775,31 @@ instance ToJSON EntryPointEntryPointType where
 
 -- | The executions status.
 data GoogleAppsScriptTypeProcessProcessStatus
-    = ProcessStatusUnspecified
+    = GASTPPSProcessStatusUnspecified
       -- ^ @PROCESS_STATUS_UNSPECIFIED@
       -- Unspecified status.
-    | Running
+    | GASTPPSRunning
       -- ^ @RUNNING@
       -- The process is currently running.
-    | Paused
+    | GASTPPSPaused
       -- ^ @PAUSED@
       -- The process has paused.
-    | Completed
+    | GASTPPSCompleted
       -- ^ @COMPLETED@
       -- The process has completed.
-    | Canceled
+    | GASTPPSCanceled
       -- ^ @CANCELED@
       -- The process was cancelled.
-    | Failed
+    | GASTPPSFailed
       -- ^ @FAILED@
       -- The process failed.
-    | TimedOut
+    | GASTPPSTimedOut
       -- ^ @TIMED_OUT@
       -- The process timed out.
-    | Unknown
+    | GASTPPSUnknown
       -- ^ @UNKNOWN@
       -- Process status unknown.
-    | Delayed
+    | GASTPPSDelayed
       -- ^ @DELAYED@
       -- The process is delayed, waiting for quota.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -390,28 +808,28 @@ instance Hashable GoogleAppsScriptTypeProcessProcessStatus
 
 instance FromHttpApiData GoogleAppsScriptTypeProcessProcessStatus where
     parseQueryParam = \case
-        "PROCESS_STATUS_UNSPECIFIED" -> Right ProcessStatusUnspecified
-        "RUNNING" -> Right Running
-        "PAUSED" -> Right Paused
-        "COMPLETED" -> Right Completed
-        "CANCELED" -> Right Canceled
-        "FAILED" -> Right Failed
-        "TIMED_OUT" -> Right TimedOut
-        "UNKNOWN" -> Right Unknown
-        "DELAYED" -> Right Delayed
+        "PROCESS_STATUS_UNSPECIFIED" -> Right GASTPPSProcessStatusUnspecified
+        "RUNNING" -> Right GASTPPSRunning
+        "PAUSED" -> Right GASTPPSPaused
+        "COMPLETED" -> Right GASTPPSCompleted
+        "CANCELED" -> Right GASTPPSCanceled
+        "FAILED" -> Right GASTPPSFailed
+        "TIMED_OUT" -> Right GASTPPSTimedOut
+        "UNKNOWN" -> Right GASTPPSUnknown
+        "DELAYED" -> Right GASTPPSDelayed
         x -> Left ("Unable to parse GoogleAppsScriptTypeProcessProcessStatus from: " <> x)
 
 instance ToHttpApiData GoogleAppsScriptTypeProcessProcessStatus where
     toQueryParam = \case
-        ProcessStatusUnspecified -> "PROCESS_STATUS_UNSPECIFIED"
-        Running -> "RUNNING"
-        Paused -> "PAUSED"
-        Completed -> "COMPLETED"
-        Canceled -> "CANCELED"
-        Failed -> "FAILED"
-        TimedOut -> "TIMED_OUT"
-        Unknown -> "UNKNOWN"
-        Delayed -> "DELAYED"
+        GASTPPSProcessStatusUnspecified -> "PROCESS_STATUS_UNSPECIFIED"
+        GASTPPSRunning -> "RUNNING"
+        GASTPPSPaused -> "PAUSED"
+        GASTPPSCompleted -> "COMPLETED"
+        GASTPPSCanceled -> "CANCELED"
+        GASTPPSFailed -> "FAILED"
+        GASTPPSTimedOut -> "TIMED_OUT"
+        GASTPPSUnknown -> "UNKNOWN"
+        GASTPPSDelayed -> "DELAYED"
 
 instance FromJSON GoogleAppsScriptTypeProcessProcessStatus where
     parseJSON = parseJSONText "GoogleAppsScriptTypeProcessProcessStatus"

@@ -39,8 +39,8 @@ module Network.Google.Resource.Calendar.Events.QuickAdd
     , eqaSendUpdates
     ) where
 
-import           Network.Google.AppsCalendar.Types
-import           Network.Google.Prelude
+import Network.Google.AppsCalendar.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.quickAdd@ method which the
 -- 'EventsQuickAdd' request conforms to.
@@ -61,10 +61,10 @@ type EventsQuickAddResource =
 -- /See:/ 'eventsQuickAdd' smart constructor.
 data EventsQuickAdd =
   EventsQuickAdd'
-    { _eqaCalendarId        :: !Text
-    , _eqaText              :: !Text
+    { _eqaCalendarId :: !Text
+    , _eqaText :: !Text
     , _eqaSendNotifications :: !(Maybe Bool)
-    , _eqaSendUpdates       :: !(Maybe EventsQuickAddSendUpdates)
+    , _eqaSendUpdates :: !(Maybe EventsQuickAddSendUpdates)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

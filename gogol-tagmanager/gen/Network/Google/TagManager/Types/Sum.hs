@@ -16,54 +16,83 @@
 --
 module Network.Google.TagManager.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Type of built-in variable.
+-- \'required.tagmanager.accounts.containers.workspaces.built_in_variable.update
+-- \'mutable
+-- tagmanager.accounts.containers.workspaces.built_in_variable.update
 data BuiltInVariableType
-    = BIVTAdvertiserId
-      -- ^ @advertiserId@
-    | BIVTAdvertisingTrackingEnabled
-      -- ^ @advertisingTrackingEnabled@
-    | BIVTAmpBrowserLanguage
-      -- ^ @ampBrowserLanguage@
-    | BIVTAmpCanonicalHost
-      -- ^ @ampCanonicalHost@
-    | BIVTAmpCanonicalPath
-      -- ^ @ampCanonicalPath@
-    | BIVTAmpCanonicalURL
-      -- ^ @ampCanonicalUrl@
-    | BIVTAmpClientId
-      -- ^ @ampClientId@
-    | BIVTAmpClientMaxScrollX
-      -- ^ @ampClientMaxScrollX@
-    | BIVTAmpClientMaxScrollY
-      -- ^ @ampClientMaxScrollY@
-    | BIVTAmpClientScreenHeight
-      -- ^ @ampClientScreenHeight@
-    | BIVTAmpClientScreenWidth
-      -- ^ @ampClientScreenWidth@
-    | BIVTAmpClientScrollX
-      -- ^ @ampClientScrollX@
-    | BIVTAmpClientScrollY
-      -- ^ @ampClientScrollY@
-    | BIVTAmpClientTimestamp
-      -- ^ @ampClientTimestamp@
-    | BIVTAmpClientTimezone
-      -- ^ @ampClientTimezone@
-    | BIVTAmpGtmEvent
-      -- ^ @ampGtmEvent@
-    | BIVTAmpPageDownloadTime
-      -- ^ @ampPageDownloadTime@
-    | BIVTAmpPageLoadTime
-      -- ^ @ampPageLoadTime@
-    | BIVTAmpPageViewId
-      -- ^ @ampPageViewId@
-    | BIVTAmpReferrer
-      -- ^ @ampReferrer@
-    | BIVTAmpTitle
-      -- ^ @ampTitle@
-    | BIVTAmpTotalEngagedTime
-      -- ^ @ampTotalEngagedTime@
+    = BIVTBuiltInVariableTypeUnspecified
+      -- ^ @builtInVariableTypeUnspecified@
+    | BIVTPageURL
+      -- ^ @pageUrl@
+    | BIVTPageHostname
+      -- ^ @pageHostname@
+    | BIVTPagePath
+      -- ^ @pagePath@
+    | BIVTReferrer
+      -- ^ @referrer@
+    | BIVTEvent
+      -- ^ @event@
+      -- For web or mobile.
+    | BIVTClickElement
+      -- ^ @clickElement@
+    | BIVTClickClasses
+      -- ^ @clickClasses@
+    | BIVTClickId
+      -- ^ @clickId@
+    | BIVTClickTarget
+      -- ^ @clickTarget@
+    | BIVTClickURL
+      -- ^ @clickUrl@
+    | BIVTClickText
+      -- ^ @clickText@
+    | BIVTFirstPartyServingURL
+      -- ^ @firstPartyServingUrl@
+    | BIVTFormElement
+      -- ^ @formElement@
+    | BIVTFormClasses
+      -- ^ @formClasses@
+    | BIVTFormId
+      -- ^ @formId@
+    | BIVTFormTarget
+      -- ^ @formTarget@
+    | BIVTFormURL
+      -- ^ @formUrl@
+    | BIVTFormText
+      -- ^ @formText@
+    | BIVTErrorMessage
+      -- ^ @errorMessage@
+    | BIVTErrorURL
+      -- ^ @errorUrl@
+    | BIVTErrorLine
+      -- ^ @errorLine@
+    | BIVTNewHistoryURL
+      -- ^ @newHistoryUrl@
+    | BIVTOldHistoryURL
+      -- ^ @oldHistoryUrl@
+    | BIVTNewHistoryFragment
+      -- ^ @newHistoryFragment@
+    | BIVTOldHistoryFragment
+      -- ^ @oldHistoryFragment@
+    | BIVTNewHistoryState
+      -- ^ @newHistoryState@
+    | BIVTOldHistoryState
+      -- ^ @oldHistoryState@
+    | BIVTHistorySource
+      -- ^ @historySource@
+    | BIVTContainerVersion
+      -- ^ @containerVersion@
+      -- For web or mobile.
+    | BIVTDebugMode
+      -- ^ @debugMode@
+    | BIVTRandomNumber
+      -- ^ @randomNumber@
+      -- For web or mobile.
+    | BIVTContainerId
+      -- ^ @containerId@
+      -- For web or mobile.
     | BIVTAppId
       -- ^ @appId@
     | BIVTAppName
@@ -72,46 +101,66 @@ data BuiltInVariableType
       -- ^ @appVersionCode@
     | BIVTAppVersionName
       -- ^ @appVersionName@
-    | BIVTBuiltInVariableTypeUnspecified
-      -- ^ @builtInVariableTypeUnspecified@
-    | BIVTClickClasses
-      -- ^ @clickClasses@
-    | BIVTClickElement
-      -- ^ @clickElement@
-    | BIVTClickId
-      -- ^ @clickId@
-    | BIVTClickTarget
-      -- ^ @clickTarget@
-    | BIVTClickText
-      -- ^ @clickText@
-    | BIVTClickURL
-      -- ^ @clickUrl@
-    | BIVTContainerId
-      -- ^ @containerId@
-    | BIVTContainerVersion
-      -- ^ @containerVersion@
-    | BIVTDebugMode
-      -- ^ @debugMode@
+    | BIVTLanguage
+      -- ^ @language@
+    | BIVTOSVersion
+      -- ^ @osVersion@
+    | BIVTPlatform
+      -- ^ @platform@
+    | BIVTSdkVersion
+      -- ^ @sdkVersion@
     | BIVTDeviceName
       -- ^ @deviceName@
-    | BIVTElementVisibilityFirstTime
-      -- ^ @elementVisibilityFirstTime@
-    | BIVTElementVisibilityRatio
-      -- ^ @elementVisibilityRatio@
-    | BIVTElementVisibilityRecentTime
-      -- ^ @elementVisibilityRecentTime@
-    | BIVTElementVisibilityTime
-      -- ^ @elementVisibilityTime@
+    | BIVTResolution
+      -- ^ @resolution@
+    | BIVTAdvertiserId
+      -- ^ @advertiserId@
+    | BIVTAdvertisingTrackingEnabled
+      -- ^ @advertisingTrackingEnabled@
+    | BIVTHTMLId
+      -- ^ @htmlId@
     | BIVTEnvironmentName
       -- ^ @environmentName@
-    | BIVTErrorLine
-      -- ^ @errorLine@
-    | BIVTErrorMessage
-      -- ^ @errorMessage@
-    | BIVTErrorURL
-      -- ^ @errorUrl@
-    | BIVTEvent
-      -- ^ @event@
+    | BIVTAmpBrowserLanguage
+      -- ^ @ampBrowserLanguage@
+    | BIVTAmpCanonicalPath
+      -- ^ @ampCanonicalPath@
+    | BIVTAmpCanonicalURL
+      -- ^ @ampCanonicalUrl@
+    | BIVTAmpCanonicalHost
+      -- ^ @ampCanonicalHost@
+    | BIVTAmpReferrer
+      -- ^ @ampReferrer@
+    | BIVTAmpTitle
+      -- ^ @ampTitle@
+    | BIVTAmpClientId
+      -- ^ @ampClientId@
+    | BIVTAmpClientTimezone
+      -- ^ @ampClientTimezone@
+    | BIVTAmpClientTimestamp
+      -- ^ @ampClientTimestamp@
+    | BIVTAmpClientScreenWidth
+      -- ^ @ampClientScreenWidth@
+    | BIVTAmpClientScreenHeight
+      -- ^ @ampClientScreenHeight@
+    | BIVTAmpClientScrollX
+      -- ^ @ampClientScrollX@
+    | BIVTAmpClientScrollY
+      -- ^ @ampClientScrollY@
+    | BIVTAmpClientMaxScrollX
+      -- ^ @ampClientMaxScrollX@
+    | BIVTAmpClientMaxScrollY
+      -- ^ @ampClientMaxScrollY@
+    | BIVTAmpTotalEngagedTime
+      -- ^ @ampTotalEngagedTime@
+    | BIVTAmpPageViewId
+      -- ^ @ampPageViewId@
+    | BIVTAmpPageLoadTime
+      -- ^ @ampPageLoadTime@
+    | BIVTAmpPageDownloadTime
+      -- ^ @ampPageDownloadTime@
+    | BIVTAmpGtmEvent
+      -- ^ @ampGtmEvent@
     | BIVTEventName
       -- ^ @eventName@
     | BIVTFirebaseEventParameterCampaign
@@ -160,124 +209,123 @@ data BuiltInVariableType
       -- ^ @firebaseEventParameterQuantity@
     | BIVTFirebaseEventParameterValue
       -- ^ @firebaseEventParameterValue@
-    | BIVTFormClasses
-      -- ^ @formClasses@
-    | BIVTFormElement
-      -- ^ @formElement@
-    | BIVTFormId
-      -- ^ @formId@
-    | BIVTFormTarget
-      -- ^ @formTarget@
-    | BIVTFormText
-      -- ^ @formText@
-    | BIVTFormURL
-      -- ^ @formUrl@
-    | BIVTHistorySource
-      -- ^ @historySource@
-    | BIVTHTMLId
-      -- ^ @htmlId@
-    | BIVTLanguage
-      -- ^ @language@
-    | BIVTNewHistoryFragment
-      -- ^ @newHistoryFragment@
-    | BIVTNewHistoryState
-      -- ^ @newHistoryState@
-    | BIVTOldHistoryFragment
-      -- ^ @oldHistoryFragment@
-    | BIVTOldHistoryState
-      -- ^ @oldHistoryState@
-    | BIVTOSVersion
-      -- ^ @osVersion@
-    | BIVTPageHostname
-      -- ^ @pageHostname@
-    | BIVTPagePath
-      -- ^ @pagePath@
-    | BIVTPageURL
-      -- ^ @pageUrl@
-    | BIVTPlatform
-      -- ^ @platform@
-    | BIVTRandomNumber
-      -- ^ @randomNumber@
-    | BIVTReferrer
-      -- ^ @referrer@
-    | BIVTResolution
-      -- ^ @resolution@
-    | BIVTScrollDepthDirection
-      -- ^ @scrollDepthDirection@
-    | BIVTScrollDepthThreshold
-      -- ^ @scrollDepthThreshold@
-    | BIVTScrollDepthUnits
-      -- ^ @scrollDepthUnits@
-    | BIVTSdkVersion
-      -- ^ @sdkVersion@
-    | BIVTVideoCurrentTime
-      -- ^ @videoCurrentTime@
+    | BIVTVideoProvider
+      -- ^ @videoProvider@
+    | BIVTVideoURL
+      -- ^ @videoUrl@
+    | BIVTVideoTitle
+      -- ^ @videoTitle@
     | BIVTVideoDuration
       -- ^ @videoDuration@
     | BIVTVideoPercent
       -- ^ @videoPercent@
-    | BIVTVideoProvider
-      -- ^ @videoProvider@
-    | BIVTVideoStatus
-      -- ^ @videoStatus@
-    | BIVTVideoTitle
-      -- ^ @videoTitle@
-    | BIVTVideoURL
-      -- ^ @videoUrl@
     | BIVTVideoVisible
       -- ^ @videoVisible@
+    | BIVTVideoStatus
+      -- ^ @videoStatus@
+    | BIVTVideoCurrentTime
+      -- ^ @videoCurrentTime@
+    | BIVTScrollDepthThreshold
+      -- ^ @scrollDepthThreshold@
+    | BIVTScrollDepthUnits
+      -- ^ @scrollDepthUnits@
+    | BIVTScrollDepthDirection
+      -- ^ @scrollDepthDirection@
+    | BIVTElementVisibilityRatio
+      -- ^ @elementVisibilityRatio@
+    | BIVTElementVisibilityTime
+      -- ^ @elementVisibilityTime@
+    | BIVTElementVisibilityFirstTime
+      -- ^ @elementVisibilityFirstTime@
+    | BIVTElementVisibilityRecentTime
+      -- ^ @elementVisibilityRecentTime@
+    | BIVTRequestPath
+      -- ^ @requestPath@
+    | BIVTRequestMethod
+      -- ^ @requestMethod@
+    | BIVTClientName
+      -- ^ @clientName@
+    | BIVTQueryString
+      -- ^ @queryString@
+    | BIVTServerPageLocationURL
+      -- ^ @serverPageLocationUrl@
+    | BIVTServerPageLocationPath
+      -- ^ @serverPageLocationPath@
+    | BIVTServerPageLocationHostname
+      -- ^ @serverPageLocationHostname@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BuiltInVariableType
 
 instance FromHttpApiData BuiltInVariableType where
     parseQueryParam = \case
-        "advertiserId" -> Right BIVTAdvertiserId
-        "advertisingTrackingEnabled" -> Right BIVTAdvertisingTrackingEnabled
-        "ampBrowserLanguage" -> Right BIVTAmpBrowserLanguage
-        "ampCanonicalHost" -> Right BIVTAmpCanonicalHost
-        "ampCanonicalPath" -> Right BIVTAmpCanonicalPath
-        "ampCanonicalUrl" -> Right BIVTAmpCanonicalURL
-        "ampClientId" -> Right BIVTAmpClientId
-        "ampClientMaxScrollX" -> Right BIVTAmpClientMaxScrollX
-        "ampClientMaxScrollY" -> Right BIVTAmpClientMaxScrollY
-        "ampClientScreenHeight" -> Right BIVTAmpClientScreenHeight
-        "ampClientScreenWidth" -> Right BIVTAmpClientScreenWidth
-        "ampClientScrollX" -> Right BIVTAmpClientScrollX
-        "ampClientScrollY" -> Right BIVTAmpClientScrollY
-        "ampClientTimestamp" -> Right BIVTAmpClientTimestamp
-        "ampClientTimezone" -> Right BIVTAmpClientTimezone
-        "ampGtmEvent" -> Right BIVTAmpGtmEvent
-        "ampPageDownloadTime" -> Right BIVTAmpPageDownloadTime
-        "ampPageLoadTime" -> Right BIVTAmpPageLoadTime
-        "ampPageViewId" -> Right BIVTAmpPageViewId
-        "ampReferrer" -> Right BIVTAmpReferrer
-        "ampTitle" -> Right BIVTAmpTitle
-        "ampTotalEngagedTime" -> Right BIVTAmpTotalEngagedTime
+        "builtInVariableTypeUnspecified" -> Right BIVTBuiltInVariableTypeUnspecified
+        "pageUrl" -> Right BIVTPageURL
+        "pageHostname" -> Right BIVTPageHostname
+        "pagePath" -> Right BIVTPagePath
+        "referrer" -> Right BIVTReferrer
+        "event" -> Right BIVTEvent
+        "clickElement" -> Right BIVTClickElement
+        "clickClasses" -> Right BIVTClickClasses
+        "clickId" -> Right BIVTClickId
+        "clickTarget" -> Right BIVTClickTarget
+        "clickUrl" -> Right BIVTClickURL
+        "clickText" -> Right BIVTClickText
+        "firstPartyServingUrl" -> Right BIVTFirstPartyServingURL
+        "formElement" -> Right BIVTFormElement
+        "formClasses" -> Right BIVTFormClasses
+        "formId" -> Right BIVTFormId
+        "formTarget" -> Right BIVTFormTarget
+        "formUrl" -> Right BIVTFormURL
+        "formText" -> Right BIVTFormText
+        "errorMessage" -> Right BIVTErrorMessage
+        "errorUrl" -> Right BIVTErrorURL
+        "errorLine" -> Right BIVTErrorLine
+        "newHistoryUrl" -> Right BIVTNewHistoryURL
+        "oldHistoryUrl" -> Right BIVTOldHistoryURL
+        "newHistoryFragment" -> Right BIVTNewHistoryFragment
+        "oldHistoryFragment" -> Right BIVTOldHistoryFragment
+        "newHistoryState" -> Right BIVTNewHistoryState
+        "oldHistoryState" -> Right BIVTOldHistoryState
+        "historySource" -> Right BIVTHistorySource
+        "containerVersion" -> Right BIVTContainerVersion
+        "debugMode" -> Right BIVTDebugMode
+        "randomNumber" -> Right BIVTRandomNumber
+        "containerId" -> Right BIVTContainerId
         "appId" -> Right BIVTAppId
         "appName" -> Right BIVTAppName
         "appVersionCode" -> Right BIVTAppVersionCode
         "appVersionName" -> Right BIVTAppVersionName
-        "builtInVariableTypeUnspecified" -> Right BIVTBuiltInVariableTypeUnspecified
-        "clickClasses" -> Right BIVTClickClasses
-        "clickElement" -> Right BIVTClickElement
-        "clickId" -> Right BIVTClickId
-        "clickTarget" -> Right BIVTClickTarget
-        "clickText" -> Right BIVTClickText
-        "clickUrl" -> Right BIVTClickURL
-        "containerId" -> Right BIVTContainerId
-        "containerVersion" -> Right BIVTContainerVersion
-        "debugMode" -> Right BIVTDebugMode
+        "language" -> Right BIVTLanguage
+        "osVersion" -> Right BIVTOSVersion
+        "platform" -> Right BIVTPlatform
+        "sdkVersion" -> Right BIVTSdkVersion
         "deviceName" -> Right BIVTDeviceName
-        "elementVisibilityFirstTime" -> Right BIVTElementVisibilityFirstTime
-        "elementVisibilityRatio" -> Right BIVTElementVisibilityRatio
-        "elementVisibilityRecentTime" -> Right BIVTElementVisibilityRecentTime
-        "elementVisibilityTime" -> Right BIVTElementVisibilityTime
+        "resolution" -> Right BIVTResolution
+        "advertiserId" -> Right BIVTAdvertiserId
+        "advertisingTrackingEnabled" -> Right BIVTAdvertisingTrackingEnabled
+        "htmlId" -> Right BIVTHTMLId
         "environmentName" -> Right BIVTEnvironmentName
-        "errorLine" -> Right BIVTErrorLine
-        "errorMessage" -> Right BIVTErrorMessage
-        "errorUrl" -> Right BIVTErrorURL
-        "event" -> Right BIVTEvent
+        "ampBrowserLanguage" -> Right BIVTAmpBrowserLanguage
+        "ampCanonicalPath" -> Right BIVTAmpCanonicalPath
+        "ampCanonicalUrl" -> Right BIVTAmpCanonicalURL
+        "ampCanonicalHost" -> Right BIVTAmpCanonicalHost
+        "ampReferrer" -> Right BIVTAmpReferrer
+        "ampTitle" -> Right BIVTAmpTitle
+        "ampClientId" -> Right BIVTAmpClientId
+        "ampClientTimezone" -> Right BIVTAmpClientTimezone
+        "ampClientTimestamp" -> Right BIVTAmpClientTimestamp
+        "ampClientScreenWidth" -> Right BIVTAmpClientScreenWidth
+        "ampClientScreenHeight" -> Right BIVTAmpClientScreenHeight
+        "ampClientScrollX" -> Right BIVTAmpClientScrollX
+        "ampClientScrollY" -> Right BIVTAmpClientScrollY
+        "ampClientMaxScrollX" -> Right BIVTAmpClientMaxScrollX
+        "ampClientMaxScrollY" -> Right BIVTAmpClientMaxScrollY
+        "ampTotalEngagedTime" -> Right BIVTAmpTotalEngagedTime
+        "ampPageViewId" -> Right BIVTAmpPageViewId
+        "ampPageLoadTime" -> Right BIVTAmpPageLoadTime
+        "ampPageDownloadTime" -> Right BIVTAmpPageDownloadTime
+        "ampGtmEvent" -> Right BIVTAmpGtmEvent
         "eventName" -> Right BIVTEventName
         "firebaseEventParameterCampaign" -> Right BIVTFirebaseEventParameterCampaign
         "firebaseEventParameterCampaignAclid" -> Right BIVTFirebaseEventParameterCampaignACLid
@@ -302,89 +350,99 @@ instance FromHttpApiData BuiltInVariableType where
         "firebaseEventParameterProductId" -> Right BIVTFirebaseEventParameterProductId
         "firebaseEventParameterQuantity" -> Right BIVTFirebaseEventParameterQuantity
         "firebaseEventParameterValue" -> Right BIVTFirebaseEventParameterValue
-        "formClasses" -> Right BIVTFormClasses
-        "formElement" -> Right BIVTFormElement
-        "formId" -> Right BIVTFormId
-        "formTarget" -> Right BIVTFormTarget
-        "formText" -> Right BIVTFormText
-        "formUrl" -> Right BIVTFormURL
-        "historySource" -> Right BIVTHistorySource
-        "htmlId" -> Right BIVTHTMLId
-        "language" -> Right BIVTLanguage
-        "newHistoryFragment" -> Right BIVTNewHistoryFragment
-        "newHistoryState" -> Right BIVTNewHistoryState
-        "oldHistoryFragment" -> Right BIVTOldHistoryFragment
-        "oldHistoryState" -> Right BIVTOldHistoryState
-        "osVersion" -> Right BIVTOSVersion
-        "pageHostname" -> Right BIVTPageHostname
-        "pagePath" -> Right BIVTPagePath
-        "pageUrl" -> Right BIVTPageURL
-        "platform" -> Right BIVTPlatform
-        "randomNumber" -> Right BIVTRandomNumber
-        "referrer" -> Right BIVTReferrer
-        "resolution" -> Right BIVTResolution
-        "scrollDepthDirection" -> Right BIVTScrollDepthDirection
-        "scrollDepthThreshold" -> Right BIVTScrollDepthThreshold
-        "scrollDepthUnits" -> Right BIVTScrollDepthUnits
-        "sdkVersion" -> Right BIVTSdkVersion
-        "videoCurrentTime" -> Right BIVTVideoCurrentTime
+        "videoProvider" -> Right BIVTVideoProvider
+        "videoUrl" -> Right BIVTVideoURL
+        "videoTitle" -> Right BIVTVideoTitle
         "videoDuration" -> Right BIVTVideoDuration
         "videoPercent" -> Right BIVTVideoPercent
-        "videoProvider" -> Right BIVTVideoProvider
-        "videoStatus" -> Right BIVTVideoStatus
-        "videoTitle" -> Right BIVTVideoTitle
-        "videoUrl" -> Right BIVTVideoURL
         "videoVisible" -> Right BIVTVideoVisible
+        "videoStatus" -> Right BIVTVideoStatus
+        "videoCurrentTime" -> Right BIVTVideoCurrentTime
+        "scrollDepthThreshold" -> Right BIVTScrollDepthThreshold
+        "scrollDepthUnits" -> Right BIVTScrollDepthUnits
+        "scrollDepthDirection" -> Right BIVTScrollDepthDirection
+        "elementVisibilityRatio" -> Right BIVTElementVisibilityRatio
+        "elementVisibilityTime" -> Right BIVTElementVisibilityTime
+        "elementVisibilityFirstTime" -> Right BIVTElementVisibilityFirstTime
+        "elementVisibilityRecentTime" -> Right BIVTElementVisibilityRecentTime
+        "requestPath" -> Right BIVTRequestPath
+        "requestMethod" -> Right BIVTRequestMethod
+        "clientName" -> Right BIVTClientName
+        "queryString" -> Right BIVTQueryString
+        "serverPageLocationUrl" -> Right BIVTServerPageLocationURL
+        "serverPageLocationPath" -> Right BIVTServerPageLocationPath
+        "serverPageLocationHostname" -> Right BIVTServerPageLocationHostname
         x -> Left ("Unable to parse BuiltInVariableType from: " <> x)
 
 instance ToHttpApiData BuiltInVariableType where
     toQueryParam = \case
-        BIVTAdvertiserId -> "advertiserId"
-        BIVTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
-        BIVTAmpBrowserLanguage -> "ampBrowserLanguage"
-        BIVTAmpCanonicalHost -> "ampCanonicalHost"
-        BIVTAmpCanonicalPath -> "ampCanonicalPath"
-        BIVTAmpCanonicalURL -> "ampCanonicalUrl"
-        BIVTAmpClientId -> "ampClientId"
-        BIVTAmpClientMaxScrollX -> "ampClientMaxScrollX"
-        BIVTAmpClientMaxScrollY -> "ampClientMaxScrollY"
-        BIVTAmpClientScreenHeight -> "ampClientScreenHeight"
-        BIVTAmpClientScreenWidth -> "ampClientScreenWidth"
-        BIVTAmpClientScrollX -> "ampClientScrollX"
-        BIVTAmpClientScrollY -> "ampClientScrollY"
-        BIVTAmpClientTimestamp -> "ampClientTimestamp"
-        BIVTAmpClientTimezone -> "ampClientTimezone"
-        BIVTAmpGtmEvent -> "ampGtmEvent"
-        BIVTAmpPageDownloadTime -> "ampPageDownloadTime"
-        BIVTAmpPageLoadTime -> "ampPageLoadTime"
-        BIVTAmpPageViewId -> "ampPageViewId"
-        BIVTAmpReferrer -> "ampReferrer"
-        BIVTAmpTitle -> "ampTitle"
-        BIVTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        BIVTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
+        BIVTPageURL -> "pageUrl"
+        BIVTPageHostname -> "pageHostname"
+        BIVTPagePath -> "pagePath"
+        BIVTReferrer -> "referrer"
+        BIVTEvent -> "event"
+        BIVTClickElement -> "clickElement"
+        BIVTClickClasses -> "clickClasses"
+        BIVTClickId -> "clickId"
+        BIVTClickTarget -> "clickTarget"
+        BIVTClickURL -> "clickUrl"
+        BIVTClickText -> "clickText"
+        BIVTFirstPartyServingURL -> "firstPartyServingUrl"
+        BIVTFormElement -> "formElement"
+        BIVTFormClasses -> "formClasses"
+        BIVTFormId -> "formId"
+        BIVTFormTarget -> "formTarget"
+        BIVTFormURL -> "formUrl"
+        BIVTFormText -> "formText"
+        BIVTErrorMessage -> "errorMessage"
+        BIVTErrorURL -> "errorUrl"
+        BIVTErrorLine -> "errorLine"
+        BIVTNewHistoryURL -> "newHistoryUrl"
+        BIVTOldHistoryURL -> "oldHistoryUrl"
+        BIVTNewHistoryFragment -> "newHistoryFragment"
+        BIVTOldHistoryFragment -> "oldHistoryFragment"
+        BIVTNewHistoryState -> "newHistoryState"
+        BIVTOldHistoryState -> "oldHistoryState"
+        BIVTHistorySource -> "historySource"
+        BIVTContainerVersion -> "containerVersion"
+        BIVTDebugMode -> "debugMode"
+        BIVTRandomNumber -> "randomNumber"
+        BIVTContainerId -> "containerId"
         BIVTAppId -> "appId"
         BIVTAppName -> "appName"
         BIVTAppVersionCode -> "appVersionCode"
         BIVTAppVersionName -> "appVersionName"
-        BIVTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
-        BIVTClickClasses -> "clickClasses"
-        BIVTClickElement -> "clickElement"
-        BIVTClickId -> "clickId"
-        BIVTClickTarget -> "clickTarget"
-        BIVTClickText -> "clickText"
-        BIVTClickURL -> "clickUrl"
-        BIVTContainerId -> "containerId"
-        BIVTContainerVersion -> "containerVersion"
-        BIVTDebugMode -> "debugMode"
+        BIVTLanguage -> "language"
+        BIVTOSVersion -> "osVersion"
+        BIVTPlatform -> "platform"
+        BIVTSdkVersion -> "sdkVersion"
         BIVTDeviceName -> "deviceName"
-        BIVTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
-        BIVTElementVisibilityRatio -> "elementVisibilityRatio"
-        BIVTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
-        BIVTElementVisibilityTime -> "elementVisibilityTime"
+        BIVTResolution -> "resolution"
+        BIVTAdvertiserId -> "advertiserId"
+        BIVTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
+        BIVTHTMLId -> "htmlId"
         BIVTEnvironmentName -> "environmentName"
-        BIVTErrorLine -> "errorLine"
-        BIVTErrorMessage -> "errorMessage"
-        BIVTErrorURL -> "errorUrl"
-        BIVTEvent -> "event"
+        BIVTAmpBrowserLanguage -> "ampBrowserLanguage"
+        BIVTAmpCanonicalPath -> "ampCanonicalPath"
+        BIVTAmpCanonicalURL -> "ampCanonicalUrl"
+        BIVTAmpCanonicalHost -> "ampCanonicalHost"
+        BIVTAmpReferrer -> "ampReferrer"
+        BIVTAmpTitle -> "ampTitle"
+        BIVTAmpClientId -> "ampClientId"
+        BIVTAmpClientTimezone -> "ampClientTimezone"
+        BIVTAmpClientTimestamp -> "ampClientTimestamp"
+        BIVTAmpClientScreenWidth -> "ampClientScreenWidth"
+        BIVTAmpClientScreenHeight -> "ampClientScreenHeight"
+        BIVTAmpClientScrollX -> "ampClientScrollX"
+        BIVTAmpClientScrollY -> "ampClientScrollY"
+        BIVTAmpClientMaxScrollX -> "ampClientMaxScrollX"
+        BIVTAmpClientMaxScrollY -> "ampClientMaxScrollY"
+        BIVTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        BIVTAmpPageViewId -> "ampPageViewId"
+        BIVTAmpPageLoadTime -> "ampPageLoadTime"
+        BIVTAmpPageDownloadTime -> "ampPageDownloadTime"
+        BIVTAmpGtmEvent -> "ampGtmEvent"
         BIVTEventName -> "eventName"
         BIVTFirebaseEventParameterCampaign -> "firebaseEventParameterCampaign"
         BIVTFirebaseEventParameterCampaignACLid -> "firebaseEventParameterCampaignAclid"
@@ -409,39 +467,28 @@ instance ToHttpApiData BuiltInVariableType where
         BIVTFirebaseEventParameterProductId -> "firebaseEventParameterProductId"
         BIVTFirebaseEventParameterQuantity -> "firebaseEventParameterQuantity"
         BIVTFirebaseEventParameterValue -> "firebaseEventParameterValue"
-        BIVTFormClasses -> "formClasses"
-        BIVTFormElement -> "formElement"
-        BIVTFormId -> "formId"
-        BIVTFormTarget -> "formTarget"
-        BIVTFormText -> "formText"
-        BIVTFormURL -> "formUrl"
-        BIVTHistorySource -> "historySource"
-        BIVTHTMLId -> "htmlId"
-        BIVTLanguage -> "language"
-        BIVTNewHistoryFragment -> "newHistoryFragment"
-        BIVTNewHistoryState -> "newHistoryState"
-        BIVTOldHistoryFragment -> "oldHistoryFragment"
-        BIVTOldHistoryState -> "oldHistoryState"
-        BIVTOSVersion -> "osVersion"
-        BIVTPageHostname -> "pageHostname"
-        BIVTPagePath -> "pagePath"
-        BIVTPageURL -> "pageUrl"
-        BIVTPlatform -> "platform"
-        BIVTRandomNumber -> "randomNumber"
-        BIVTReferrer -> "referrer"
-        BIVTResolution -> "resolution"
-        BIVTScrollDepthDirection -> "scrollDepthDirection"
-        BIVTScrollDepthThreshold -> "scrollDepthThreshold"
-        BIVTScrollDepthUnits -> "scrollDepthUnits"
-        BIVTSdkVersion -> "sdkVersion"
-        BIVTVideoCurrentTime -> "videoCurrentTime"
+        BIVTVideoProvider -> "videoProvider"
+        BIVTVideoURL -> "videoUrl"
+        BIVTVideoTitle -> "videoTitle"
         BIVTVideoDuration -> "videoDuration"
         BIVTVideoPercent -> "videoPercent"
-        BIVTVideoProvider -> "videoProvider"
-        BIVTVideoStatus -> "videoStatus"
-        BIVTVideoTitle -> "videoTitle"
-        BIVTVideoURL -> "videoUrl"
         BIVTVideoVisible -> "videoVisible"
+        BIVTVideoStatus -> "videoStatus"
+        BIVTVideoCurrentTime -> "videoCurrentTime"
+        BIVTScrollDepthThreshold -> "scrollDepthThreshold"
+        BIVTScrollDepthUnits -> "scrollDepthUnits"
+        BIVTScrollDepthDirection -> "scrollDepthDirection"
+        BIVTElementVisibilityRatio -> "elementVisibilityRatio"
+        BIVTElementVisibilityTime -> "elementVisibilityTime"
+        BIVTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
+        BIVTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
+        BIVTRequestPath -> "requestPath"
+        BIVTRequestMethod -> "requestMethod"
+        BIVTClientName -> "clientName"
+        BIVTQueryString -> "queryString"
+        BIVTServerPageLocationURL -> "serverPageLocationUrl"
+        BIVTServerPageLocationPath -> "serverPageLocationPath"
+        BIVTServerPageLocationHostname -> "serverPageLocationHostname"
 
 instance FromJSON BuiltInVariableType where
     parseJSON = parseJSONText "BuiltInVariableType"
@@ -451,50 +498,76 @@ instance ToJSON BuiltInVariableType where
 
 -- | The types of built-in variables to delete.
 data AccountsContainersWorkspacesBuilt_in_variablesDeleteType
-    = ACWBDTAdvertiserId
-      -- ^ @advertiserId@
-    | ACWBDTAdvertisingTrackingEnabled
-      -- ^ @advertisingTrackingEnabled@
-    | ACWBDTAmpBrowserLanguage
-      -- ^ @ampBrowserLanguage@
-    | ACWBDTAmpCanonicalHost
-      -- ^ @ampCanonicalHost@
-    | ACWBDTAmpCanonicalPath
-      -- ^ @ampCanonicalPath@
-    | ACWBDTAmpCanonicalURL
-      -- ^ @ampCanonicalUrl@
-    | ACWBDTAmpClientId
-      -- ^ @ampClientId@
-    | ACWBDTAmpClientMaxScrollX
-      -- ^ @ampClientMaxScrollX@
-    | ACWBDTAmpClientMaxScrollY
-      -- ^ @ampClientMaxScrollY@
-    | ACWBDTAmpClientScreenHeight
-      -- ^ @ampClientScreenHeight@
-    | ACWBDTAmpClientScreenWidth
-      -- ^ @ampClientScreenWidth@
-    | ACWBDTAmpClientScrollX
-      -- ^ @ampClientScrollX@
-    | ACWBDTAmpClientScrollY
-      -- ^ @ampClientScrollY@
-    | ACWBDTAmpClientTimestamp
-      -- ^ @ampClientTimestamp@
-    | ACWBDTAmpClientTimezone
-      -- ^ @ampClientTimezone@
-    | ACWBDTAmpGtmEvent
-      -- ^ @ampGtmEvent@
-    | ACWBDTAmpPageDownloadTime
-      -- ^ @ampPageDownloadTime@
-    | ACWBDTAmpPageLoadTime
-      -- ^ @ampPageLoadTime@
-    | ACWBDTAmpPageViewId
-      -- ^ @ampPageViewId@
-    | ACWBDTAmpReferrer
-      -- ^ @ampReferrer@
-    | ACWBDTAmpTitle
-      -- ^ @ampTitle@
-    | ACWBDTAmpTotalEngagedTime
-      -- ^ @ampTotalEngagedTime@
+    = ACWBDTBuiltInVariableTypeUnspecified
+      -- ^ @builtInVariableTypeUnspecified@
+    | ACWBDTPageURL
+      -- ^ @pageUrl@
+    | ACWBDTPageHostname
+      -- ^ @pageHostname@
+    | ACWBDTPagePath
+      -- ^ @pagePath@
+    | ACWBDTReferrer
+      -- ^ @referrer@
+    | ACWBDTEvent
+      -- ^ @event@
+      -- For web or mobile.
+    | ACWBDTClickElement
+      -- ^ @clickElement@
+    | ACWBDTClickClasses
+      -- ^ @clickClasses@
+    | ACWBDTClickId
+      -- ^ @clickId@
+    | ACWBDTClickTarget
+      -- ^ @clickTarget@
+    | ACWBDTClickURL
+      -- ^ @clickUrl@
+    | ACWBDTClickText
+      -- ^ @clickText@
+    | ACWBDTFirstPartyServingURL
+      -- ^ @firstPartyServingUrl@
+    | ACWBDTFormElement
+      -- ^ @formElement@
+    | ACWBDTFormClasses
+      -- ^ @formClasses@
+    | ACWBDTFormId
+      -- ^ @formId@
+    | ACWBDTFormTarget
+      -- ^ @formTarget@
+    | ACWBDTFormURL
+      -- ^ @formUrl@
+    | ACWBDTFormText
+      -- ^ @formText@
+    | ACWBDTErrorMessage
+      -- ^ @errorMessage@
+    | ACWBDTErrorURL
+      -- ^ @errorUrl@
+    | ACWBDTErrorLine
+      -- ^ @errorLine@
+    | ACWBDTNewHistoryURL
+      -- ^ @newHistoryUrl@
+    | ACWBDTOldHistoryURL
+      -- ^ @oldHistoryUrl@
+    | ACWBDTNewHistoryFragment
+      -- ^ @newHistoryFragment@
+    | ACWBDTOldHistoryFragment
+      -- ^ @oldHistoryFragment@
+    | ACWBDTNewHistoryState
+      -- ^ @newHistoryState@
+    | ACWBDTOldHistoryState
+      -- ^ @oldHistoryState@
+    | ACWBDTHistorySource
+      -- ^ @historySource@
+    | ACWBDTContainerVersion
+      -- ^ @containerVersion@
+      -- For web or mobile.
+    | ACWBDTDebugMode
+      -- ^ @debugMode@
+    | ACWBDTRandomNumber
+      -- ^ @randomNumber@
+      -- For web or mobile.
+    | ACWBDTContainerId
+      -- ^ @containerId@
+      -- For web or mobile.
     | ACWBDTAppId
       -- ^ @appId@
     | ACWBDTAppName
@@ -503,46 +576,66 @@ data AccountsContainersWorkspacesBuilt_in_variablesDeleteType
       -- ^ @appVersionCode@
     | ACWBDTAppVersionName
       -- ^ @appVersionName@
-    | ACWBDTBuiltInVariableTypeUnspecified
-      -- ^ @builtInVariableTypeUnspecified@
-    | ACWBDTClickClasses
-      -- ^ @clickClasses@
-    | ACWBDTClickElement
-      -- ^ @clickElement@
-    | ACWBDTClickId
-      -- ^ @clickId@
-    | ACWBDTClickTarget
-      -- ^ @clickTarget@
-    | ACWBDTClickText
-      -- ^ @clickText@
-    | ACWBDTClickURL
-      -- ^ @clickUrl@
-    | ACWBDTContainerId
-      -- ^ @containerId@
-    | ACWBDTContainerVersion
-      -- ^ @containerVersion@
-    | ACWBDTDebugMode
-      -- ^ @debugMode@
+    | ACWBDTLanguage
+      -- ^ @language@
+    | ACWBDTOSVersion
+      -- ^ @osVersion@
+    | ACWBDTPlatform
+      -- ^ @platform@
+    | ACWBDTSdkVersion
+      -- ^ @sdkVersion@
     | ACWBDTDeviceName
       -- ^ @deviceName@
-    | ACWBDTElementVisibilityFirstTime
-      -- ^ @elementVisibilityFirstTime@
-    | ACWBDTElementVisibilityRatio
-      -- ^ @elementVisibilityRatio@
-    | ACWBDTElementVisibilityRecentTime
-      -- ^ @elementVisibilityRecentTime@
-    | ACWBDTElementVisibilityTime
-      -- ^ @elementVisibilityTime@
+    | ACWBDTResolution
+      -- ^ @resolution@
+    | ACWBDTAdvertiserId
+      -- ^ @advertiserId@
+    | ACWBDTAdvertisingTrackingEnabled
+      -- ^ @advertisingTrackingEnabled@
+    | ACWBDTHTMLId
+      -- ^ @htmlId@
     | ACWBDTEnvironmentName
       -- ^ @environmentName@
-    | ACWBDTErrorLine
-      -- ^ @errorLine@
-    | ACWBDTErrorMessage
-      -- ^ @errorMessage@
-    | ACWBDTErrorURL
-      -- ^ @errorUrl@
-    | ACWBDTEvent
-      -- ^ @event@
+    | ACWBDTAmpBrowserLanguage
+      -- ^ @ampBrowserLanguage@
+    | ACWBDTAmpCanonicalPath
+      -- ^ @ampCanonicalPath@
+    | ACWBDTAmpCanonicalURL
+      -- ^ @ampCanonicalUrl@
+    | ACWBDTAmpCanonicalHost
+      -- ^ @ampCanonicalHost@
+    | ACWBDTAmpReferrer
+      -- ^ @ampReferrer@
+    | ACWBDTAmpTitle
+      -- ^ @ampTitle@
+    | ACWBDTAmpClientId
+      -- ^ @ampClientId@
+    | ACWBDTAmpClientTimezone
+      -- ^ @ampClientTimezone@
+    | ACWBDTAmpClientTimestamp
+      -- ^ @ampClientTimestamp@
+    | ACWBDTAmpClientScreenWidth
+      -- ^ @ampClientScreenWidth@
+    | ACWBDTAmpClientScreenHeight
+      -- ^ @ampClientScreenHeight@
+    | ACWBDTAmpClientScrollX
+      -- ^ @ampClientScrollX@
+    | ACWBDTAmpClientScrollY
+      -- ^ @ampClientScrollY@
+    | ACWBDTAmpClientMaxScrollX
+      -- ^ @ampClientMaxScrollX@
+    | ACWBDTAmpClientMaxScrollY
+      -- ^ @ampClientMaxScrollY@
+    | ACWBDTAmpTotalEngagedTime
+      -- ^ @ampTotalEngagedTime@
+    | ACWBDTAmpPageViewId
+      -- ^ @ampPageViewId@
+    | ACWBDTAmpPageLoadTime
+      -- ^ @ampPageLoadTime@
+    | ACWBDTAmpPageDownloadTime
+      -- ^ @ampPageDownloadTime@
+    | ACWBDTAmpGtmEvent
+      -- ^ @ampGtmEvent@
     | ACWBDTEventName
       -- ^ @eventName@
     | ACWBDTFirebaseEventParameterCampaign
@@ -591,124 +684,123 @@ data AccountsContainersWorkspacesBuilt_in_variablesDeleteType
       -- ^ @firebaseEventParameterQuantity@
     | ACWBDTFirebaseEventParameterValue
       -- ^ @firebaseEventParameterValue@
-    | ACWBDTFormClasses
-      -- ^ @formClasses@
-    | ACWBDTFormElement
-      -- ^ @formElement@
-    | ACWBDTFormId
-      -- ^ @formId@
-    | ACWBDTFormTarget
-      -- ^ @formTarget@
-    | ACWBDTFormText
-      -- ^ @formText@
-    | ACWBDTFormURL
-      -- ^ @formUrl@
-    | ACWBDTHistorySource
-      -- ^ @historySource@
-    | ACWBDTHTMLId
-      -- ^ @htmlId@
-    | ACWBDTLanguage
-      -- ^ @language@
-    | ACWBDTNewHistoryFragment
-      -- ^ @newHistoryFragment@
-    | ACWBDTNewHistoryState
-      -- ^ @newHistoryState@
-    | ACWBDTOldHistoryFragment
-      -- ^ @oldHistoryFragment@
-    | ACWBDTOldHistoryState
-      -- ^ @oldHistoryState@
-    | ACWBDTOSVersion
-      -- ^ @osVersion@
-    | ACWBDTPageHostname
-      -- ^ @pageHostname@
-    | ACWBDTPagePath
-      -- ^ @pagePath@
-    | ACWBDTPageURL
-      -- ^ @pageUrl@
-    | ACWBDTPlatform
-      -- ^ @platform@
-    | ACWBDTRandomNumber
-      -- ^ @randomNumber@
-    | ACWBDTReferrer
-      -- ^ @referrer@
-    | ACWBDTResolution
-      -- ^ @resolution@
-    | ACWBDTScrollDepthDirection
-      -- ^ @scrollDepthDirection@
-    | ACWBDTScrollDepthThreshold
-      -- ^ @scrollDepthThreshold@
-    | ACWBDTScrollDepthUnits
-      -- ^ @scrollDepthUnits@
-    | ACWBDTSdkVersion
-      -- ^ @sdkVersion@
-    | ACWBDTVideoCurrentTime
-      -- ^ @videoCurrentTime@
+    | ACWBDTVideoProvider
+      -- ^ @videoProvider@
+    | ACWBDTVideoURL
+      -- ^ @videoUrl@
+    | ACWBDTVideoTitle
+      -- ^ @videoTitle@
     | ACWBDTVideoDuration
       -- ^ @videoDuration@
     | ACWBDTVideoPercent
       -- ^ @videoPercent@
-    | ACWBDTVideoProvider
-      -- ^ @videoProvider@
-    | ACWBDTVideoStatus
-      -- ^ @videoStatus@
-    | ACWBDTVideoTitle
-      -- ^ @videoTitle@
-    | ACWBDTVideoURL
-      -- ^ @videoUrl@
     | ACWBDTVideoVisible
       -- ^ @videoVisible@
+    | ACWBDTVideoStatus
+      -- ^ @videoStatus@
+    | ACWBDTVideoCurrentTime
+      -- ^ @videoCurrentTime@
+    | ACWBDTScrollDepthThreshold
+      -- ^ @scrollDepthThreshold@
+    | ACWBDTScrollDepthUnits
+      -- ^ @scrollDepthUnits@
+    | ACWBDTScrollDepthDirection
+      -- ^ @scrollDepthDirection@
+    | ACWBDTElementVisibilityRatio
+      -- ^ @elementVisibilityRatio@
+    | ACWBDTElementVisibilityTime
+      -- ^ @elementVisibilityTime@
+    | ACWBDTElementVisibilityFirstTime
+      -- ^ @elementVisibilityFirstTime@
+    | ACWBDTElementVisibilityRecentTime
+      -- ^ @elementVisibilityRecentTime@
+    | ACWBDTRequestPath
+      -- ^ @requestPath@
+    | ACWBDTRequestMethod
+      -- ^ @requestMethod@
+    | ACWBDTClientName
+      -- ^ @clientName@
+    | ACWBDTQueryString
+      -- ^ @queryString@
+    | ACWBDTServerPageLocationURL
+      -- ^ @serverPageLocationUrl@
+    | ACWBDTServerPageLocationPath
+      -- ^ @serverPageLocationPath@
+    | ACWBDTServerPageLocationHostname
+      -- ^ @serverPageLocationHostname@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsContainersWorkspacesBuilt_in_variablesDeleteType
 
 instance FromHttpApiData AccountsContainersWorkspacesBuilt_in_variablesDeleteType where
     parseQueryParam = \case
-        "advertiserId" -> Right ACWBDTAdvertiserId
-        "advertisingTrackingEnabled" -> Right ACWBDTAdvertisingTrackingEnabled
-        "ampBrowserLanguage" -> Right ACWBDTAmpBrowserLanguage
-        "ampCanonicalHost" -> Right ACWBDTAmpCanonicalHost
-        "ampCanonicalPath" -> Right ACWBDTAmpCanonicalPath
-        "ampCanonicalUrl" -> Right ACWBDTAmpCanonicalURL
-        "ampClientId" -> Right ACWBDTAmpClientId
-        "ampClientMaxScrollX" -> Right ACWBDTAmpClientMaxScrollX
-        "ampClientMaxScrollY" -> Right ACWBDTAmpClientMaxScrollY
-        "ampClientScreenHeight" -> Right ACWBDTAmpClientScreenHeight
-        "ampClientScreenWidth" -> Right ACWBDTAmpClientScreenWidth
-        "ampClientScrollX" -> Right ACWBDTAmpClientScrollX
-        "ampClientScrollY" -> Right ACWBDTAmpClientScrollY
-        "ampClientTimestamp" -> Right ACWBDTAmpClientTimestamp
-        "ampClientTimezone" -> Right ACWBDTAmpClientTimezone
-        "ampGtmEvent" -> Right ACWBDTAmpGtmEvent
-        "ampPageDownloadTime" -> Right ACWBDTAmpPageDownloadTime
-        "ampPageLoadTime" -> Right ACWBDTAmpPageLoadTime
-        "ampPageViewId" -> Right ACWBDTAmpPageViewId
-        "ampReferrer" -> Right ACWBDTAmpReferrer
-        "ampTitle" -> Right ACWBDTAmpTitle
-        "ampTotalEngagedTime" -> Right ACWBDTAmpTotalEngagedTime
+        "builtInVariableTypeUnspecified" -> Right ACWBDTBuiltInVariableTypeUnspecified
+        "pageUrl" -> Right ACWBDTPageURL
+        "pageHostname" -> Right ACWBDTPageHostname
+        "pagePath" -> Right ACWBDTPagePath
+        "referrer" -> Right ACWBDTReferrer
+        "event" -> Right ACWBDTEvent
+        "clickElement" -> Right ACWBDTClickElement
+        "clickClasses" -> Right ACWBDTClickClasses
+        "clickId" -> Right ACWBDTClickId
+        "clickTarget" -> Right ACWBDTClickTarget
+        "clickUrl" -> Right ACWBDTClickURL
+        "clickText" -> Right ACWBDTClickText
+        "firstPartyServingUrl" -> Right ACWBDTFirstPartyServingURL
+        "formElement" -> Right ACWBDTFormElement
+        "formClasses" -> Right ACWBDTFormClasses
+        "formId" -> Right ACWBDTFormId
+        "formTarget" -> Right ACWBDTFormTarget
+        "formUrl" -> Right ACWBDTFormURL
+        "formText" -> Right ACWBDTFormText
+        "errorMessage" -> Right ACWBDTErrorMessage
+        "errorUrl" -> Right ACWBDTErrorURL
+        "errorLine" -> Right ACWBDTErrorLine
+        "newHistoryUrl" -> Right ACWBDTNewHistoryURL
+        "oldHistoryUrl" -> Right ACWBDTOldHistoryURL
+        "newHistoryFragment" -> Right ACWBDTNewHistoryFragment
+        "oldHistoryFragment" -> Right ACWBDTOldHistoryFragment
+        "newHistoryState" -> Right ACWBDTNewHistoryState
+        "oldHistoryState" -> Right ACWBDTOldHistoryState
+        "historySource" -> Right ACWBDTHistorySource
+        "containerVersion" -> Right ACWBDTContainerVersion
+        "debugMode" -> Right ACWBDTDebugMode
+        "randomNumber" -> Right ACWBDTRandomNumber
+        "containerId" -> Right ACWBDTContainerId
         "appId" -> Right ACWBDTAppId
         "appName" -> Right ACWBDTAppName
         "appVersionCode" -> Right ACWBDTAppVersionCode
         "appVersionName" -> Right ACWBDTAppVersionName
-        "builtInVariableTypeUnspecified" -> Right ACWBDTBuiltInVariableTypeUnspecified
-        "clickClasses" -> Right ACWBDTClickClasses
-        "clickElement" -> Right ACWBDTClickElement
-        "clickId" -> Right ACWBDTClickId
-        "clickTarget" -> Right ACWBDTClickTarget
-        "clickText" -> Right ACWBDTClickText
-        "clickUrl" -> Right ACWBDTClickURL
-        "containerId" -> Right ACWBDTContainerId
-        "containerVersion" -> Right ACWBDTContainerVersion
-        "debugMode" -> Right ACWBDTDebugMode
+        "language" -> Right ACWBDTLanguage
+        "osVersion" -> Right ACWBDTOSVersion
+        "platform" -> Right ACWBDTPlatform
+        "sdkVersion" -> Right ACWBDTSdkVersion
         "deviceName" -> Right ACWBDTDeviceName
-        "elementVisibilityFirstTime" -> Right ACWBDTElementVisibilityFirstTime
-        "elementVisibilityRatio" -> Right ACWBDTElementVisibilityRatio
-        "elementVisibilityRecentTime" -> Right ACWBDTElementVisibilityRecentTime
-        "elementVisibilityTime" -> Right ACWBDTElementVisibilityTime
+        "resolution" -> Right ACWBDTResolution
+        "advertiserId" -> Right ACWBDTAdvertiserId
+        "advertisingTrackingEnabled" -> Right ACWBDTAdvertisingTrackingEnabled
+        "htmlId" -> Right ACWBDTHTMLId
         "environmentName" -> Right ACWBDTEnvironmentName
-        "errorLine" -> Right ACWBDTErrorLine
-        "errorMessage" -> Right ACWBDTErrorMessage
-        "errorUrl" -> Right ACWBDTErrorURL
-        "event" -> Right ACWBDTEvent
+        "ampBrowserLanguage" -> Right ACWBDTAmpBrowserLanguage
+        "ampCanonicalPath" -> Right ACWBDTAmpCanonicalPath
+        "ampCanonicalUrl" -> Right ACWBDTAmpCanonicalURL
+        "ampCanonicalHost" -> Right ACWBDTAmpCanonicalHost
+        "ampReferrer" -> Right ACWBDTAmpReferrer
+        "ampTitle" -> Right ACWBDTAmpTitle
+        "ampClientId" -> Right ACWBDTAmpClientId
+        "ampClientTimezone" -> Right ACWBDTAmpClientTimezone
+        "ampClientTimestamp" -> Right ACWBDTAmpClientTimestamp
+        "ampClientScreenWidth" -> Right ACWBDTAmpClientScreenWidth
+        "ampClientScreenHeight" -> Right ACWBDTAmpClientScreenHeight
+        "ampClientScrollX" -> Right ACWBDTAmpClientScrollX
+        "ampClientScrollY" -> Right ACWBDTAmpClientScrollY
+        "ampClientMaxScrollX" -> Right ACWBDTAmpClientMaxScrollX
+        "ampClientMaxScrollY" -> Right ACWBDTAmpClientMaxScrollY
+        "ampTotalEngagedTime" -> Right ACWBDTAmpTotalEngagedTime
+        "ampPageViewId" -> Right ACWBDTAmpPageViewId
+        "ampPageLoadTime" -> Right ACWBDTAmpPageLoadTime
+        "ampPageDownloadTime" -> Right ACWBDTAmpPageDownloadTime
+        "ampGtmEvent" -> Right ACWBDTAmpGtmEvent
         "eventName" -> Right ACWBDTEventName
         "firebaseEventParameterCampaign" -> Right ACWBDTFirebaseEventParameterCampaign
         "firebaseEventParameterCampaignAclid" -> Right ACWBDTFirebaseEventParameterCampaignACLid
@@ -733,89 +825,99 @@ instance FromHttpApiData AccountsContainersWorkspacesBuilt_in_variablesDeleteTyp
         "firebaseEventParameterProductId" -> Right ACWBDTFirebaseEventParameterProductId
         "firebaseEventParameterQuantity" -> Right ACWBDTFirebaseEventParameterQuantity
         "firebaseEventParameterValue" -> Right ACWBDTFirebaseEventParameterValue
-        "formClasses" -> Right ACWBDTFormClasses
-        "formElement" -> Right ACWBDTFormElement
-        "formId" -> Right ACWBDTFormId
-        "formTarget" -> Right ACWBDTFormTarget
-        "formText" -> Right ACWBDTFormText
-        "formUrl" -> Right ACWBDTFormURL
-        "historySource" -> Right ACWBDTHistorySource
-        "htmlId" -> Right ACWBDTHTMLId
-        "language" -> Right ACWBDTLanguage
-        "newHistoryFragment" -> Right ACWBDTNewHistoryFragment
-        "newHistoryState" -> Right ACWBDTNewHistoryState
-        "oldHistoryFragment" -> Right ACWBDTOldHistoryFragment
-        "oldHistoryState" -> Right ACWBDTOldHistoryState
-        "osVersion" -> Right ACWBDTOSVersion
-        "pageHostname" -> Right ACWBDTPageHostname
-        "pagePath" -> Right ACWBDTPagePath
-        "pageUrl" -> Right ACWBDTPageURL
-        "platform" -> Right ACWBDTPlatform
-        "randomNumber" -> Right ACWBDTRandomNumber
-        "referrer" -> Right ACWBDTReferrer
-        "resolution" -> Right ACWBDTResolution
-        "scrollDepthDirection" -> Right ACWBDTScrollDepthDirection
-        "scrollDepthThreshold" -> Right ACWBDTScrollDepthThreshold
-        "scrollDepthUnits" -> Right ACWBDTScrollDepthUnits
-        "sdkVersion" -> Right ACWBDTSdkVersion
-        "videoCurrentTime" -> Right ACWBDTVideoCurrentTime
+        "videoProvider" -> Right ACWBDTVideoProvider
+        "videoUrl" -> Right ACWBDTVideoURL
+        "videoTitle" -> Right ACWBDTVideoTitle
         "videoDuration" -> Right ACWBDTVideoDuration
         "videoPercent" -> Right ACWBDTVideoPercent
-        "videoProvider" -> Right ACWBDTVideoProvider
-        "videoStatus" -> Right ACWBDTVideoStatus
-        "videoTitle" -> Right ACWBDTVideoTitle
-        "videoUrl" -> Right ACWBDTVideoURL
         "videoVisible" -> Right ACWBDTVideoVisible
+        "videoStatus" -> Right ACWBDTVideoStatus
+        "videoCurrentTime" -> Right ACWBDTVideoCurrentTime
+        "scrollDepthThreshold" -> Right ACWBDTScrollDepthThreshold
+        "scrollDepthUnits" -> Right ACWBDTScrollDepthUnits
+        "scrollDepthDirection" -> Right ACWBDTScrollDepthDirection
+        "elementVisibilityRatio" -> Right ACWBDTElementVisibilityRatio
+        "elementVisibilityTime" -> Right ACWBDTElementVisibilityTime
+        "elementVisibilityFirstTime" -> Right ACWBDTElementVisibilityFirstTime
+        "elementVisibilityRecentTime" -> Right ACWBDTElementVisibilityRecentTime
+        "requestPath" -> Right ACWBDTRequestPath
+        "requestMethod" -> Right ACWBDTRequestMethod
+        "clientName" -> Right ACWBDTClientName
+        "queryString" -> Right ACWBDTQueryString
+        "serverPageLocationUrl" -> Right ACWBDTServerPageLocationURL
+        "serverPageLocationPath" -> Right ACWBDTServerPageLocationPath
+        "serverPageLocationHostname" -> Right ACWBDTServerPageLocationHostname
         x -> Left ("Unable to parse AccountsContainersWorkspacesBuilt_in_variablesDeleteType from: " <> x)
 
 instance ToHttpApiData AccountsContainersWorkspacesBuilt_in_variablesDeleteType where
     toQueryParam = \case
-        ACWBDTAdvertiserId -> "advertiserId"
-        ACWBDTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
-        ACWBDTAmpBrowserLanguage -> "ampBrowserLanguage"
-        ACWBDTAmpCanonicalHost -> "ampCanonicalHost"
-        ACWBDTAmpCanonicalPath -> "ampCanonicalPath"
-        ACWBDTAmpCanonicalURL -> "ampCanonicalUrl"
-        ACWBDTAmpClientId -> "ampClientId"
-        ACWBDTAmpClientMaxScrollX -> "ampClientMaxScrollX"
-        ACWBDTAmpClientMaxScrollY -> "ampClientMaxScrollY"
-        ACWBDTAmpClientScreenHeight -> "ampClientScreenHeight"
-        ACWBDTAmpClientScreenWidth -> "ampClientScreenWidth"
-        ACWBDTAmpClientScrollX -> "ampClientScrollX"
-        ACWBDTAmpClientScrollY -> "ampClientScrollY"
-        ACWBDTAmpClientTimestamp -> "ampClientTimestamp"
-        ACWBDTAmpClientTimezone -> "ampClientTimezone"
-        ACWBDTAmpGtmEvent -> "ampGtmEvent"
-        ACWBDTAmpPageDownloadTime -> "ampPageDownloadTime"
-        ACWBDTAmpPageLoadTime -> "ampPageLoadTime"
-        ACWBDTAmpPageViewId -> "ampPageViewId"
-        ACWBDTAmpReferrer -> "ampReferrer"
-        ACWBDTAmpTitle -> "ampTitle"
-        ACWBDTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        ACWBDTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
+        ACWBDTPageURL -> "pageUrl"
+        ACWBDTPageHostname -> "pageHostname"
+        ACWBDTPagePath -> "pagePath"
+        ACWBDTReferrer -> "referrer"
+        ACWBDTEvent -> "event"
+        ACWBDTClickElement -> "clickElement"
+        ACWBDTClickClasses -> "clickClasses"
+        ACWBDTClickId -> "clickId"
+        ACWBDTClickTarget -> "clickTarget"
+        ACWBDTClickURL -> "clickUrl"
+        ACWBDTClickText -> "clickText"
+        ACWBDTFirstPartyServingURL -> "firstPartyServingUrl"
+        ACWBDTFormElement -> "formElement"
+        ACWBDTFormClasses -> "formClasses"
+        ACWBDTFormId -> "formId"
+        ACWBDTFormTarget -> "formTarget"
+        ACWBDTFormURL -> "formUrl"
+        ACWBDTFormText -> "formText"
+        ACWBDTErrorMessage -> "errorMessage"
+        ACWBDTErrorURL -> "errorUrl"
+        ACWBDTErrorLine -> "errorLine"
+        ACWBDTNewHistoryURL -> "newHistoryUrl"
+        ACWBDTOldHistoryURL -> "oldHistoryUrl"
+        ACWBDTNewHistoryFragment -> "newHistoryFragment"
+        ACWBDTOldHistoryFragment -> "oldHistoryFragment"
+        ACWBDTNewHistoryState -> "newHistoryState"
+        ACWBDTOldHistoryState -> "oldHistoryState"
+        ACWBDTHistorySource -> "historySource"
+        ACWBDTContainerVersion -> "containerVersion"
+        ACWBDTDebugMode -> "debugMode"
+        ACWBDTRandomNumber -> "randomNumber"
+        ACWBDTContainerId -> "containerId"
         ACWBDTAppId -> "appId"
         ACWBDTAppName -> "appName"
         ACWBDTAppVersionCode -> "appVersionCode"
         ACWBDTAppVersionName -> "appVersionName"
-        ACWBDTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
-        ACWBDTClickClasses -> "clickClasses"
-        ACWBDTClickElement -> "clickElement"
-        ACWBDTClickId -> "clickId"
-        ACWBDTClickTarget -> "clickTarget"
-        ACWBDTClickText -> "clickText"
-        ACWBDTClickURL -> "clickUrl"
-        ACWBDTContainerId -> "containerId"
-        ACWBDTContainerVersion -> "containerVersion"
-        ACWBDTDebugMode -> "debugMode"
+        ACWBDTLanguage -> "language"
+        ACWBDTOSVersion -> "osVersion"
+        ACWBDTPlatform -> "platform"
+        ACWBDTSdkVersion -> "sdkVersion"
         ACWBDTDeviceName -> "deviceName"
-        ACWBDTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
-        ACWBDTElementVisibilityRatio -> "elementVisibilityRatio"
-        ACWBDTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
-        ACWBDTElementVisibilityTime -> "elementVisibilityTime"
+        ACWBDTResolution -> "resolution"
+        ACWBDTAdvertiserId -> "advertiserId"
+        ACWBDTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
+        ACWBDTHTMLId -> "htmlId"
         ACWBDTEnvironmentName -> "environmentName"
-        ACWBDTErrorLine -> "errorLine"
-        ACWBDTErrorMessage -> "errorMessage"
-        ACWBDTErrorURL -> "errorUrl"
-        ACWBDTEvent -> "event"
+        ACWBDTAmpBrowserLanguage -> "ampBrowserLanguage"
+        ACWBDTAmpCanonicalPath -> "ampCanonicalPath"
+        ACWBDTAmpCanonicalURL -> "ampCanonicalUrl"
+        ACWBDTAmpCanonicalHost -> "ampCanonicalHost"
+        ACWBDTAmpReferrer -> "ampReferrer"
+        ACWBDTAmpTitle -> "ampTitle"
+        ACWBDTAmpClientId -> "ampClientId"
+        ACWBDTAmpClientTimezone -> "ampClientTimezone"
+        ACWBDTAmpClientTimestamp -> "ampClientTimestamp"
+        ACWBDTAmpClientScreenWidth -> "ampClientScreenWidth"
+        ACWBDTAmpClientScreenHeight -> "ampClientScreenHeight"
+        ACWBDTAmpClientScrollX -> "ampClientScrollX"
+        ACWBDTAmpClientScrollY -> "ampClientScrollY"
+        ACWBDTAmpClientMaxScrollX -> "ampClientMaxScrollX"
+        ACWBDTAmpClientMaxScrollY -> "ampClientMaxScrollY"
+        ACWBDTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        ACWBDTAmpPageViewId -> "ampPageViewId"
+        ACWBDTAmpPageLoadTime -> "ampPageLoadTime"
+        ACWBDTAmpPageDownloadTime -> "ampPageDownloadTime"
+        ACWBDTAmpGtmEvent -> "ampGtmEvent"
         ACWBDTEventName -> "eventName"
         ACWBDTFirebaseEventParameterCampaign -> "firebaseEventParameterCampaign"
         ACWBDTFirebaseEventParameterCampaignACLid -> "firebaseEventParameterCampaignAclid"
@@ -840,39 +942,28 @@ instance ToHttpApiData AccountsContainersWorkspacesBuilt_in_variablesDeleteType 
         ACWBDTFirebaseEventParameterProductId -> "firebaseEventParameterProductId"
         ACWBDTFirebaseEventParameterQuantity -> "firebaseEventParameterQuantity"
         ACWBDTFirebaseEventParameterValue -> "firebaseEventParameterValue"
-        ACWBDTFormClasses -> "formClasses"
-        ACWBDTFormElement -> "formElement"
-        ACWBDTFormId -> "formId"
-        ACWBDTFormTarget -> "formTarget"
-        ACWBDTFormText -> "formText"
-        ACWBDTFormURL -> "formUrl"
-        ACWBDTHistorySource -> "historySource"
-        ACWBDTHTMLId -> "htmlId"
-        ACWBDTLanguage -> "language"
-        ACWBDTNewHistoryFragment -> "newHistoryFragment"
-        ACWBDTNewHistoryState -> "newHistoryState"
-        ACWBDTOldHistoryFragment -> "oldHistoryFragment"
-        ACWBDTOldHistoryState -> "oldHistoryState"
-        ACWBDTOSVersion -> "osVersion"
-        ACWBDTPageHostname -> "pageHostname"
-        ACWBDTPagePath -> "pagePath"
-        ACWBDTPageURL -> "pageUrl"
-        ACWBDTPlatform -> "platform"
-        ACWBDTRandomNumber -> "randomNumber"
-        ACWBDTReferrer -> "referrer"
-        ACWBDTResolution -> "resolution"
-        ACWBDTScrollDepthDirection -> "scrollDepthDirection"
-        ACWBDTScrollDepthThreshold -> "scrollDepthThreshold"
-        ACWBDTScrollDepthUnits -> "scrollDepthUnits"
-        ACWBDTSdkVersion -> "sdkVersion"
-        ACWBDTVideoCurrentTime -> "videoCurrentTime"
+        ACWBDTVideoProvider -> "videoProvider"
+        ACWBDTVideoURL -> "videoUrl"
+        ACWBDTVideoTitle -> "videoTitle"
         ACWBDTVideoDuration -> "videoDuration"
         ACWBDTVideoPercent -> "videoPercent"
-        ACWBDTVideoProvider -> "videoProvider"
-        ACWBDTVideoStatus -> "videoStatus"
-        ACWBDTVideoTitle -> "videoTitle"
-        ACWBDTVideoURL -> "videoUrl"
         ACWBDTVideoVisible -> "videoVisible"
+        ACWBDTVideoStatus -> "videoStatus"
+        ACWBDTVideoCurrentTime -> "videoCurrentTime"
+        ACWBDTScrollDepthThreshold -> "scrollDepthThreshold"
+        ACWBDTScrollDepthUnits -> "scrollDepthUnits"
+        ACWBDTScrollDepthDirection -> "scrollDepthDirection"
+        ACWBDTElementVisibilityRatio -> "elementVisibilityRatio"
+        ACWBDTElementVisibilityTime -> "elementVisibilityTime"
+        ACWBDTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
+        ACWBDTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
+        ACWBDTRequestPath -> "requestPath"
+        ACWBDTRequestMethod -> "requestMethod"
+        ACWBDTClientName -> "clientName"
+        ACWBDTQueryString -> "queryString"
+        ACWBDTServerPageLocationURL -> "serverPageLocationUrl"
+        ACWBDTServerPageLocationPath -> "serverPageLocationPath"
+        ACWBDTServerPageLocationHostname -> "serverPageLocationHostname"
 
 instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesDeleteType where
     parseJSON = parseJSONText "AccountsContainersWorkspacesBuilt_in_variablesDeleteType"
@@ -880,28 +971,30 @@ instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesDeleteType where
 instance ToJSON AccountsContainersWorkspacesBuilt_in_variablesDeleteType where
     toJSON = toJSONText
 
--- | Defines the data layer event that causes this trigger.
+-- | Defines the data layer event that causes this trigger. \'mutable
+-- tagmanager.accounts.containers.workspaces.triggers.create \'mutable
+-- tagmanager.accounts.containers.workspaces.triggers.update
 data TriggerType
-    = Always
-      -- ^ @always@
-    | AmpClick
-      -- ^ @ampClick@
-    | AmpScroll
-      -- ^ @ampScroll@
-    | AmpTimer
-      -- ^ @ampTimer@
-    | AmpVisibility
-      -- ^ @ampVisibility@
-    | Click
-      -- ^ @click@
-    | CustomEvent
-      -- ^ @customEvent@
+    = EventTypeUnspecified
+      -- ^ @eventTypeUnspecified@
+    | Pageview
+      -- ^ @pageview@
     | DomReady
       -- ^ @domReady@
-    | ElementVisibility
-      -- ^ @elementVisibility@
-    | EventTypeUnspecified
-      -- ^ @eventTypeUnspecified@
+    | WindowLoaded
+      -- ^ @windowLoaded@
+    | CustomEvent
+      -- ^ @customEvent@
+    | TriggerGroup
+      -- ^ @triggerGroup@
+    | Init
+      -- ^ @init@
+    | ConsentInit
+      -- ^ @consentInit@
+    | ServerPageview
+      -- ^ @serverPageview@
+    | Always
+      -- ^ @always@
     | FirebaseAppException
       -- ^ @firebaseAppException@
     | FirebaseAppUpdate
@@ -928,38 +1021,46 @@ data TriggerType
       -- ^ @firebaseUserEngagement@
     | FormSubmission
       -- ^ @formSubmission@
-    | HistoryChange
-      -- ^ @historyChange@
-    | JsError
-      -- ^ @jsError@
+    | Click
+      -- ^ @click@
     | LinkClick
       -- ^ @linkClick@
-    | Pageview
-      -- ^ @pageview@
-    | ScrollDepth
-      -- ^ @scrollDepth@
+    | JsError
+      -- ^ @jsError@
+    | HistoryChange
+      -- ^ @historyChange@
     | Timer
       -- ^ @timer@
-    | WindowLoaded
-      -- ^ @windowLoaded@
+    | AmpClick
+      -- ^ @ampClick@
+    | AmpTimer
+      -- ^ @ampTimer@
+    | AmpScroll
+      -- ^ @ampScroll@
+    | AmpVisibility
+      -- ^ @ampVisibility@
     | YouTubeVideo
       -- ^ @youTubeVideo@
+    | ScrollDepth
+      -- ^ @scrollDepth@
+    | ElementVisibility
+      -- ^ @elementVisibility@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TriggerType
 
 instance FromHttpApiData TriggerType where
     parseQueryParam = \case
-        "always" -> Right Always
-        "ampClick" -> Right AmpClick
-        "ampScroll" -> Right AmpScroll
-        "ampTimer" -> Right AmpTimer
-        "ampVisibility" -> Right AmpVisibility
-        "click" -> Right Click
-        "customEvent" -> Right CustomEvent
-        "domReady" -> Right DomReady
-        "elementVisibility" -> Right ElementVisibility
         "eventTypeUnspecified" -> Right EventTypeUnspecified
+        "pageview" -> Right Pageview
+        "domReady" -> Right DomReady
+        "windowLoaded" -> Right WindowLoaded
+        "customEvent" -> Right CustomEvent
+        "triggerGroup" -> Right TriggerGroup
+        "init" -> Right Init
+        "consentInit" -> Right ConsentInit
+        "serverPageview" -> Right ServerPageview
+        "always" -> Right Always
         "firebaseAppException" -> Right FirebaseAppException
         "firebaseAppUpdate" -> Right FirebaseAppUpdate
         "firebaseCampaign" -> Right FirebaseCampaign
@@ -973,28 +1074,32 @@ instance FromHttpApiData TriggerType where
         "firebaseSessionStart" -> Right FirebaseSessionStart
         "firebaseUserEngagement" -> Right FirebaseUserEngagement
         "formSubmission" -> Right FormSubmission
-        "historyChange" -> Right HistoryChange
-        "jsError" -> Right JsError
+        "click" -> Right Click
         "linkClick" -> Right LinkClick
-        "pageview" -> Right Pageview
-        "scrollDepth" -> Right ScrollDepth
+        "jsError" -> Right JsError
+        "historyChange" -> Right HistoryChange
         "timer" -> Right Timer
-        "windowLoaded" -> Right WindowLoaded
+        "ampClick" -> Right AmpClick
+        "ampTimer" -> Right AmpTimer
+        "ampScroll" -> Right AmpScroll
+        "ampVisibility" -> Right AmpVisibility
         "youTubeVideo" -> Right YouTubeVideo
+        "scrollDepth" -> Right ScrollDepth
+        "elementVisibility" -> Right ElementVisibility
         x -> Left ("Unable to parse TriggerType from: " <> x)
 
 instance ToHttpApiData TriggerType where
     toQueryParam = \case
-        Always -> "always"
-        AmpClick -> "ampClick"
-        AmpScroll -> "ampScroll"
-        AmpTimer -> "ampTimer"
-        AmpVisibility -> "ampVisibility"
-        Click -> "click"
-        CustomEvent -> "customEvent"
-        DomReady -> "domReady"
-        ElementVisibility -> "elementVisibility"
         EventTypeUnspecified -> "eventTypeUnspecified"
+        Pageview -> "pageview"
+        DomReady -> "domReady"
+        WindowLoaded -> "windowLoaded"
+        CustomEvent -> "customEvent"
+        TriggerGroup -> "triggerGroup"
+        Init -> "init"
+        ConsentInit -> "consentInit"
+        ServerPageview -> "serverPageview"
+        Always -> "always"
         FirebaseAppException -> "firebaseAppException"
         FirebaseAppUpdate -> "firebaseAppUpdate"
         FirebaseCampaign -> "firebaseCampaign"
@@ -1008,14 +1113,18 @@ instance ToHttpApiData TriggerType where
         FirebaseSessionStart -> "firebaseSessionStart"
         FirebaseUserEngagement -> "firebaseUserEngagement"
         FormSubmission -> "formSubmission"
-        HistoryChange -> "historyChange"
-        JsError -> "jsError"
+        Click -> "click"
         LinkClick -> "linkClick"
-        Pageview -> "pageview"
-        ScrollDepth -> "scrollDepth"
+        JsError -> "jsError"
+        HistoryChange -> "historyChange"
         Timer -> "timer"
-        WindowLoaded -> "windowLoaded"
+        AmpClick -> "ampClick"
+        AmpTimer -> "ampTimer"
+        AmpScroll -> "ampScroll"
+        AmpVisibility -> "ampVisibility"
         YouTubeVideo -> "youTubeVideo"
+        ScrollDepth -> "scrollDepth"
+        ElementVisibility -> "elementVisibility"
 
 instance FromJSON TriggerType where
     parseJSON = parseJSONText "TriggerType"
@@ -1023,42 +1132,44 @@ instance FromJSON TriggerType where
 instance ToJSON TriggerType where
     toJSON = toJSONText
 
--- | List of Container permissions.
+-- | List of Container permissions. \'mutable
+-- tagmanager.accounts.permissions.create \'mutable
+-- tagmanager.accounts.permissions.update
 data ContainerAccessPermission
-    = Approve
-      -- ^ @approve@
-    | ContainerPermissionUnspecified
+    = ContainerPermissionUnspecified
       -- ^ @containerPermissionUnspecified@
-    | Edit
-      -- ^ @edit@
     | NoAccess
       -- ^ @noAccess@
-    | Publish
-      -- ^ @publish@
     | Read'
       -- ^ @read@
+    | Edit
+      -- ^ @edit@
+    | Approve
+      -- ^ @approve@
+    | Publish
+      -- ^ @publish@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerAccessPermission
 
 instance FromHttpApiData ContainerAccessPermission where
     parseQueryParam = \case
-        "approve" -> Right Approve
         "containerPermissionUnspecified" -> Right ContainerPermissionUnspecified
-        "edit" -> Right Edit
         "noAccess" -> Right NoAccess
-        "publish" -> Right Publish
         "read" -> Right Read'
+        "edit" -> Right Edit
+        "approve" -> Right Approve
+        "publish" -> Right Publish
         x -> Left ("Unable to parse ContainerAccessPermission from: " <> x)
 
 instance ToHttpApiData ContainerAccessPermission where
     toQueryParam = \case
-        Approve -> "approve"
         ContainerPermissionUnspecified -> "containerPermissionUnspecified"
-        Edit -> "edit"
         NoAccess -> "noAccess"
-        Publish -> "publish"
         Read' -> "read"
+        Edit -> "edit"
+        Approve -> "approve"
+        Publish -> "publish"
 
 instance FromJSON ContainerAccessPermission where
     parseJSON = parseJSONText "ContainerAccessPermission"
@@ -1067,44 +1178,48 @@ instance ToJSON ContainerAccessPermission where
     toJSON = toJSONText
 
 data ContainerUsageContextItem
-    = Amp
-      -- ^ @amp@
-    | Android
-      -- ^ @android@
-    | ANDROIdSDK5
-      -- ^ @androidSdk5@
-    | Ios
-      -- ^ @ios@
-    | IOSSDK5
-      -- ^ @iosSdk5@
-    | UsageContextUnspecified
+    = UsageContextUnspecified
       -- ^ @usageContextUnspecified@
     | Web
       -- ^ @web@
+    | Android
+      -- ^ @android@
+    | Ios
+      -- ^ @ios@
+    | ANDROIdSDK5
+      -- ^ @androidSdk5@
+    | IOSSDK5
+      -- ^ @iosSdk5@
+    | Amp
+      -- ^ @amp@
+    | Server
+      -- ^ @server@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerUsageContextItem
 
 instance FromHttpApiData ContainerUsageContextItem where
     parseQueryParam = \case
-        "amp" -> Right Amp
-        "android" -> Right Android
-        "androidSdk5" -> Right ANDROIdSDK5
-        "ios" -> Right Ios
-        "iosSdk5" -> Right IOSSDK5
         "usageContextUnspecified" -> Right UsageContextUnspecified
         "web" -> Right Web
+        "android" -> Right Android
+        "ios" -> Right Ios
+        "androidSdk5" -> Right ANDROIdSDK5
+        "iosSdk5" -> Right IOSSDK5
+        "amp" -> Right Amp
+        "server" -> Right Server
         x -> Left ("Unable to parse ContainerUsageContextItem from: " <> x)
 
 instance ToHttpApiData ContainerUsageContextItem where
     toQueryParam = \case
-        Amp -> "amp"
-        Android -> "android"
-        ANDROIdSDK5 -> "androidSdk5"
-        Ios -> "ios"
-        IOSSDK5 -> "iosSdk5"
         UsageContextUnspecified -> "usageContextUnspecified"
         Web -> "web"
+        Android -> "android"
+        Ios -> "ios"
+        ANDROIdSDK5 -> "androidSdk5"
+        IOSSDK5 -> "iosSdk5"
+        Amp -> "amp"
+        Server -> "server"
 
 instance FromJSON ContainerUsageContextItem where
     parseJSON = parseJSONText "ContainerUsageContextItem"
@@ -1114,50 +1229,76 @@ instance ToJSON ContainerUsageContextItem where
 
 -- | The types of built-in variables to enable.
 data AccountsContainersWorkspacesBuilt_in_variablesCreateType
-    = ACWBCTAdvertiserId
-      -- ^ @advertiserId@
-    | ACWBCTAdvertisingTrackingEnabled
-      -- ^ @advertisingTrackingEnabled@
-    | ACWBCTAmpBrowserLanguage
-      -- ^ @ampBrowserLanguage@
-    | ACWBCTAmpCanonicalHost
-      -- ^ @ampCanonicalHost@
-    | ACWBCTAmpCanonicalPath
-      -- ^ @ampCanonicalPath@
-    | ACWBCTAmpCanonicalURL
-      -- ^ @ampCanonicalUrl@
-    | ACWBCTAmpClientId
-      -- ^ @ampClientId@
-    | ACWBCTAmpClientMaxScrollX
-      -- ^ @ampClientMaxScrollX@
-    | ACWBCTAmpClientMaxScrollY
-      -- ^ @ampClientMaxScrollY@
-    | ACWBCTAmpClientScreenHeight
-      -- ^ @ampClientScreenHeight@
-    | ACWBCTAmpClientScreenWidth
-      -- ^ @ampClientScreenWidth@
-    | ACWBCTAmpClientScrollX
-      -- ^ @ampClientScrollX@
-    | ACWBCTAmpClientScrollY
-      -- ^ @ampClientScrollY@
-    | ACWBCTAmpClientTimestamp
-      -- ^ @ampClientTimestamp@
-    | ACWBCTAmpClientTimezone
-      -- ^ @ampClientTimezone@
-    | ACWBCTAmpGtmEvent
-      -- ^ @ampGtmEvent@
-    | ACWBCTAmpPageDownloadTime
-      -- ^ @ampPageDownloadTime@
-    | ACWBCTAmpPageLoadTime
-      -- ^ @ampPageLoadTime@
-    | ACWBCTAmpPageViewId
-      -- ^ @ampPageViewId@
-    | ACWBCTAmpReferrer
-      -- ^ @ampReferrer@
-    | ACWBCTAmpTitle
-      -- ^ @ampTitle@
-    | ACWBCTAmpTotalEngagedTime
-      -- ^ @ampTotalEngagedTime@
+    = ACWBCTBuiltInVariableTypeUnspecified
+      -- ^ @builtInVariableTypeUnspecified@
+    | ACWBCTPageURL
+      -- ^ @pageUrl@
+    | ACWBCTPageHostname
+      -- ^ @pageHostname@
+    | ACWBCTPagePath
+      -- ^ @pagePath@
+    | ACWBCTReferrer
+      -- ^ @referrer@
+    | ACWBCTEvent
+      -- ^ @event@
+      -- For web or mobile.
+    | ACWBCTClickElement
+      -- ^ @clickElement@
+    | ACWBCTClickClasses
+      -- ^ @clickClasses@
+    | ACWBCTClickId
+      -- ^ @clickId@
+    | ACWBCTClickTarget
+      -- ^ @clickTarget@
+    | ACWBCTClickURL
+      -- ^ @clickUrl@
+    | ACWBCTClickText
+      -- ^ @clickText@
+    | ACWBCTFirstPartyServingURL
+      -- ^ @firstPartyServingUrl@
+    | ACWBCTFormElement
+      -- ^ @formElement@
+    | ACWBCTFormClasses
+      -- ^ @formClasses@
+    | ACWBCTFormId
+      -- ^ @formId@
+    | ACWBCTFormTarget
+      -- ^ @formTarget@
+    | ACWBCTFormURL
+      -- ^ @formUrl@
+    | ACWBCTFormText
+      -- ^ @formText@
+    | ACWBCTErrorMessage
+      -- ^ @errorMessage@
+    | ACWBCTErrorURL
+      -- ^ @errorUrl@
+    | ACWBCTErrorLine
+      -- ^ @errorLine@
+    | ACWBCTNewHistoryURL
+      -- ^ @newHistoryUrl@
+    | ACWBCTOldHistoryURL
+      -- ^ @oldHistoryUrl@
+    | ACWBCTNewHistoryFragment
+      -- ^ @newHistoryFragment@
+    | ACWBCTOldHistoryFragment
+      -- ^ @oldHistoryFragment@
+    | ACWBCTNewHistoryState
+      -- ^ @newHistoryState@
+    | ACWBCTOldHistoryState
+      -- ^ @oldHistoryState@
+    | ACWBCTHistorySource
+      -- ^ @historySource@
+    | ACWBCTContainerVersion
+      -- ^ @containerVersion@
+      -- For web or mobile.
+    | ACWBCTDebugMode
+      -- ^ @debugMode@
+    | ACWBCTRandomNumber
+      -- ^ @randomNumber@
+      -- For web or mobile.
+    | ACWBCTContainerId
+      -- ^ @containerId@
+      -- For web or mobile.
     | ACWBCTAppId
       -- ^ @appId@
     | ACWBCTAppName
@@ -1166,46 +1307,66 @@ data AccountsContainersWorkspacesBuilt_in_variablesCreateType
       -- ^ @appVersionCode@
     | ACWBCTAppVersionName
       -- ^ @appVersionName@
-    | ACWBCTBuiltInVariableTypeUnspecified
-      -- ^ @builtInVariableTypeUnspecified@
-    | ACWBCTClickClasses
-      -- ^ @clickClasses@
-    | ACWBCTClickElement
-      -- ^ @clickElement@
-    | ACWBCTClickId
-      -- ^ @clickId@
-    | ACWBCTClickTarget
-      -- ^ @clickTarget@
-    | ACWBCTClickText
-      -- ^ @clickText@
-    | ACWBCTClickURL
-      -- ^ @clickUrl@
-    | ACWBCTContainerId
-      -- ^ @containerId@
-    | ACWBCTContainerVersion
-      -- ^ @containerVersion@
-    | ACWBCTDebugMode
-      -- ^ @debugMode@
+    | ACWBCTLanguage
+      -- ^ @language@
+    | ACWBCTOSVersion
+      -- ^ @osVersion@
+    | ACWBCTPlatform
+      -- ^ @platform@
+    | ACWBCTSdkVersion
+      -- ^ @sdkVersion@
     | ACWBCTDeviceName
       -- ^ @deviceName@
-    | ACWBCTElementVisibilityFirstTime
-      -- ^ @elementVisibilityFirstTime@
-    | ACWBCTElementVisibilityRatio
-      -- ^ @elementVisibilityRatio@
-    | ACWBCTElementVisibilityRecentTime
-      -- ^ @elementVisibilityRecentTime@
-    | ACWBCTElementVisibilityTime
-      -- ^ @elementVisibilityTime@
+    | ACWBCTResolution
+      -- ^ @resolution@
+    | ACWBCTAdvertiserId
+      -- ^ @advertiserId@
+    | ACWBCTAdvertisingTrackingEnabled
+      -- ^ @advertisingTrackingEnabled@
+    | ACWBCTHTMLId
+      -- ^ @htmlId@
     | ACWBCTEnvironmentName
       -- ^ @environmentName@
-    | ACWBCTErrorLine
-      -- ^ @errorLine@
-    | ACWBCTErrorMessage
-      -- ^ @errorMessage@
-    | ACWBCTErrorURL
-      -- ^ @errorUrl@
-    | ACWBCTEvent
-      -- ^ @event@
+    | ACWBCTAmpBrowserLanguage
+      -- ^ @ampBrowserLanguage@
+    | ACWBCTAmpCanonicalPath
+      -- ^ @ampCanonicalPath@
+    | ACWBCTAmpCanonicalURL
+      -- ^ @ampCanonicalUrl@
+    | ACWBCTAmpCanonicalHost
+      -- ^ @ampCanonicalHost@
+    | ACWBCTAmpReferrer
+      -- ^ @ampReferrer@
+    | ACWBCTAmpTitle
+      -- ^ @ampTitle@
+    | ACWBCTAmpClientId
+      -- ^ @ampClientId@
+    | ACWBCTAmpClientTimezone
+      -- ^ @ampClientTimezone@
+    | ACWBCTAmpClientTimestamp
+      -- ^ @ampClientTimestamp@
+    | ACWBCTAmpClientScreenWidth
+      -- ^ @ampClientScreenWidth@
+    | ACWBCTAmpClientScreenHeight
+      -- ^ @ampClientScreenHeight@
+    | ACWBCTAmpClientScrollX
+      -- ^ @ampClientScrollX@
+    | ACWBCTAmpClientScrollY
+      -- ^ @ampClientScrollY@
+    | ACWBCTAmpClientMaxScrollX
+      -- ^ @ampClientMaxScrollX@
+    | ACWBCTAmpClientMaxScrollY
+      -- ^ @ampClientMaxScrollY@
+    | ACWBCTAmpTotalEngagedTime
+      -- ^ @ampTotalEngagedTime@
+    | ACWBCTAmpPageViewId
+      -- ^ @ampPageViewId@
+    | ACWBCTAmpPageLoadTime
+      -- ^ @ampPageLoadTime@
+    | ACWBCTAmpPageDownloadTime
+      -- ^ @ampPageDownloadTime@
+    | ACWBCTAmpGtmEvent
+      -- ^ @ampGtmEvent@
     | ACWBCTEventName
       -- ^ @eventName@
     | ACWBCTFirebaseEventParameterCampaign
@@ -1254,124 +1415,123 @@ data AccountsContainersWorkspacesBuilt_in_variablesCreateType
       -- ^ @firebaseEventParameterQuantity@
     | ACWBCTFirebaseEventParameterValue
       -- ^ @firebaseEventParameterValue@
-    | ACWBCTFormClasses
-      -- ^ @formClasses@
-    | ACWBCTFormElement
-      -- ^ @formElement@
-    | ACWBCTFormId
-      -- ^ @formId@
-    | ACWBCTFormTarget
-      -- ^ @formTarget@
-    | ACWBCTFormText
-      -- ^ @formText@
-    | ACWBCTFormURL
-      -- ^ @formUrl@
-    | ACWBCTHistorySource
-      -- ^ @historySource@
-    | ACWBCTHTMLId
-      -- ^ @htmlId@
-    | ACWBCTLanguage
-      -- ^ @language@
-    | ACWBCTNewHistoryFragment
-      -- ^ @newHistoryFragment@
-    | ACWBCTNewHistoryState
-      -- ^ @newHistoryState@
-    | ACWBCTOldHistoryFragment
-      -- ^ @oldHistoryFragment@
-    | ACWBCTOldHistoryState
-      -- ^ @oldHistoryState@
-    | ACWBCTOSVersion
-      -- ^ @osVersion@
-    | ACWBCTPageHostname
-      -- ^ @pageHostname@
-    | ACWBCTPagePath
-      -- ^ @pagePath@
-    | ACWBCTPageURL
-      -- ^ @pageUrl@
-    | ACWBCTPlatform
-      -- ^ @platform@
-    | ACWBCTRandomNumber
-      -- ^ @randomNumber@
-    | ACWBCTReferrer
-      -- ^ @referrer@
-    | ACWBCTResolution
-      -- ^ @resolution@
-    | ACWBCTScrollDepthDirection
-      -- ^ @scrollDepthDirection@
-    | ACWBCTScrollDepthThreshold
-      -- ^ @scrollDepthThreshold@
-    | ACWBCTScrollDepthUnits
-      -- ^ @scrollDepthUnits@
-    | ACWBCTSdkVersion
-      -- ^ @sdkVersion@
-    | ACWBCTVideoCurrentTime
-      -- ^ @videoCurrentTime@
+    | ACWBCTVideoProvider
+      -- ^ @videoProvider@
+    | ACWBCTVideoURL
+      -- ^ @videoUrl@
+    | ACWBCTVideoTitle
+      -- ^ @videoTitle@
     | ACWBCTVideoDuration
       -- ^ @videoDuration@
     | ACWBCTVideoPercent
       -- ^ @videoPercent@
-    | ACWBCTVideoProvider
-      -- ^ @videoProvider@
-    | ACWBCTVideoStatus
-      -- ^ @videoStatus@
-    | ACWBCTVideoTitle
-      -- ^ @videoTitle@
-    | ACWBCTVideoURL
-      -- ^ @videoUrl@
     | ACWBCTVideoVisible
       -- ^ @videoVisible@
+    | ACWBCTVideoStatus
+      -- ^ @videoStatus@
+    | ACWBCTVideoCurrentTime
+      -- ^ @videoCurrentTime@
+    | ACWBCTScrollDepthThreshold
+      -- ^ @scrollDepthThreshold@
+    | ACWBCTScrollDepthUnits
+      -- ^ @scrollDepthUnits@
+    | ACWBCTScrollDepthDirection
+      -- ^ @scrollDepthDirection@
+    | ACWBCTElementVisibilityRatio
+      -- ^ @elementVisibilityRatio@
+    | ACWBCTElementVisibilityTime
+      -- ^ @elementVisibilityTime@
+    | ACWBCTElementVisibilityFirstTime
+      -- ^ @elementVisibilityFirstTime@
+    | ACWBCTElementVisibilityRecentTime
+      -- ^ @elementVisibilityRecentTime@
+    | ACWBCTRequestPath
+      -- ^ @requestPath@
+    | ACWBCTRequestMethod
+      -- ^ @requestMethod@
+    | ACWBCTClientName
+      -- ^ @clientName@
+    | ACWBCTQueryString
+      -- ^ @queryString@
+    | ACWBCTServerPageLocationURL
+      -- ^ @serverPageLocationUrl@
+    | ACWBCTServerPageLocationPath
+      -- ^ @serverPageLocationPath@
+    | ACWBCTServerPageLocationHostname
+      -- ^ @serverPageLocationHostname@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsContainersWorkspacesBuilt_in_variablesCreateType
 
 instance FromHttpApiData AccountsContainersWorkspacesBuilt_in_variablesCreateType where
     parseQueryParam = \case
-        "advertiserId" -> Right ACWBCTAdvertiserId
-        "advertisingTrackingEnabled" -> Right ACWBCTAdvertisingTrackingEnabled
-        "ampBrowserLanguage" -> Right ACWBCTAmpBrowserLanguage
-        "ampCanonicalHost" -> Right ACWBCTAmpCanonicalHost
-        "ampCanonicalPath" -> Right ACWBCTAmpCanonicalPath
-        "ampCanonicalUrl" -> Right ACWBCTAmpCanonicalURL
-        "ampClientId" -> Right ACWBCTAmpClientId
-        "ampClientMaxScrollX" -> Right ACWBCTAmpClientMaxScrollX
-        "ampClientMaxScrollY" -> Right ACWBCTAmpClientMaxScrollY
-        "ampClientScreenHeight" -> Right ACWBCTAmpClientScreenHeight
-        "ampClientScreenWidth" -> Right ACWBCTAmpClientScreenWidth
-        "ampClientScrollX" -> Right ACWBCTAmpClientScrollX
-        "ampClientScrollY" -> Right ACWBCTAmpClientScrollY
-        "ampClientTimestamp" -> Right ACWBCTAmpClientTimestamp
-        "ampClientTimezone" -> Right ACWBCTAmpClientTimezone
-        "ampGtmEvent" -> Right ACWBCTAmpGtmEvent
-        "ampPageDownloadTime" -> Right ACWBCTAmpPageDownloadTime
-        "ampPageLoadTime" -> Right ACWBCTAmpPageLoadTime
-        "ampPageViewId" -> Right ACWBCTAmpPageViewId
-        "ampReferrer" -> Right ACWBCTAmpReferrer
-        "ampTitle" -> Right ACWBCTAmpTitle
-        "ampTotalEngagedTime" -> Right ACWBCTAmpTotalEngagedTime
+        "builtInVariableTypeUnspecified" -> Right ACWBCTBuiltInVariableTypeUnspecified
+        "pageUrl" -> Right ACWBCTPageURL
+        "pageHostname" -> Right ACWBCTPageHostname
+        "pagePath" -> Right ACWBCTPagePath
+        "referrer" -> Right ACWBCTReferrer
+        "event" -> Right ACWBCTEvent
+        "clickElement" -> Right ACWBCTClickElement
+        "clickClasses" -> Right ACWBCTClickClasses
+        "clickId" -> Right ACWBCTClickId
+        "clickTarget" -> Right ACWBCTClickTarget
+        "clickUrl" -> Right ACWBCTClickURL
+        "clickText" -> Right ACWBCTClickText
+        "firstPartyServingUrl" -> Right ACWBCTFirstPartyServingURL
+        "formElement" -> Right ACWBCTFormElement
+        "formClasses" -> Right ACWBCTFormClasses
+        "formId" -> Right ACWBCTFormId
+        "formTarget" -> Right ACWBCTFormTarget
+        "formUrl" -> Right ACWBCTFormURL
+        "formText" -> Right ACWBCTFormText
+        "errorMessage" -> Right ACWBCTErrorMessage
+        "errorUrl" -> Right ACWBCTErrorURL
+        "errorLine" -> Right ACWBCTErrorLine
+        "newHistoryUrl" -> Right ACWBCTNewHistoryURL
+        "oldHistoryUrl" -> Right ACWBCTOldHistoryURL
+        "newHistoryFragment" -> Right ACWBCTNewHistoryFragment
+        "oldHistoryFragment" -> Right ACWBCTOldHistoryFragment
+        "newHistoryState" -> Right ACWBCTNewHistoryState
+        "oldHistoryState" -> Right ACWBCTOldHistoryState
+        "historySource" -> Right ACWBCTHistorySource
+        "containerVersion" -> Right ACWBCTContainerVersion
+        "debugMode" -> Right ACWBCTDebugMode
+        "randomNumber" -> Right ACWBCTRandomNumber
+        "containerId" -> Right ACWBCTContainerId
         "appId" -> Right ACWBCTAppId
         "appName" -> Right ACWBCTAppName
         "appVersionCode" -> Right ACWBCTAppVersionCode
         "appVersionName" -> Right ACWBCTAppVersionName
-        "builtInVariableTypeUnspecified" -> Right ACWBCTBuiltInVariableTypeUnspecified
-        "clickClasses" -> Right ACWBCTClickClasses
-        "clickElement" -> Right ACWBCTClickElement
-        "clickId" -> Right ACWBCTClickId
-        "clickTarget" -> Right ACWBCTClickTarget
-        "clickText" -> Right ACWBCTClickText
-        "clickUrl" -> Right ACWBCTClickURL
-        "containerId" -> Right ACWBCTContainerId
-        "containerVersion" -> Right ACWBCTContainerVersion
-        "debugMode" -> Right ACWBCTDebugMode
+        "language" -> Right ACWBCTLanguage
+        "osVersion" -> Right ACWBCTOSVersion
+        "platform" -> Right ACWBCTPlatform
+        "sdkVersion" -> Right ACWBCTSdkVersion
         "deviceName" -> Right ACWBCTDeviceName
-        "elementVisibilityFirstTime" -> Right ACWBCTElementVisibilityFirstTime
-        "elementVisibilityRatio" -> Right ACWBCTElementVisibilityRatio
-        "elementVisibilityRecentTime" -> Right ACWBCTElementVisibilityRecentTime
-        "elementVisibilityTime" -> Right ACWBCTElementVisibilityTime
+        "resolution" -> Right ACWBCTResolution
+        "advertiserId" -> Right ACWBCTAdvertiserId
+        "advertisingTrackingEnabled" -> Right ACWBCTAdvertisingTrackingEnabled
+        "htmlId" -> Right ACWBCTHTMLId
         "environmentName" -> Right ACWBCTEnvironmentName
-        "errorLine" -> Right ACWBCTErrorLine
-        "errorMessage" -> Right ACWBCTErrorMessage
-        "errorUrl" -> Right ACWBCTErrorURL
-        "event" -> Right ACWBCTEvent
+        "ampBrowserLanguage" -> Right ACWBCTAmpBrowserLanguage
+        "ampCanonicalPath" -> Right ACWBCTAmpCanonicalPath
+        "ampCanonicalUrl" -> Right ACWBCTAmpCanonicalURL
+        "ampCanonicalHost" -> Right ACWBCTAmpCanonicalHost
+        "ampReferrer" -> Right ACWBCTAmpReferrer
+        "ampTitle" -> Right ACWBCTAmpTitle
+        "ampClientId" -> Right ACWBCTAmpClientId
+        "ampClientTimezone" -> Right ACWBCTAmpClientTimezone
+        "ampClientTimestamp" -> Right ACWBCTAmpClientTimestamp
+        "ampClientScreenWidth" -> Right ACWBCTAmpClientScreenWidth
+        "ampClientScreenHeight" -> Right ACWBCTAmpClientScreenHeight
+        "ampClientScrollX" -> Right ACWBCTAmpClientScrollX
+        "ampClientScrollY" -> Right ACWBCTAmpClientScrollY
+        "ampClientMaxScrollX" -> Right ACWBCTAmpClientMaxScrollX
+        "ampClientMaxScrollY" -> Right ACWBCTAmpClientMaxScrollY
+        "ampTotalEngagedTime" -> Right ACWBCTAmpTotalEngagedTime
+        "ampPageViewId" -> Right ACWBCTAmpPageViewId
+        "ampPageLoadTime" -> Right ACWBCTAmpPageLoadTime
+        "ampPageDownloadTime" -> Right ACWBCTAmpPageDownloadTime
+        "ampGtmEvent" -> Right ACWBCTAmpGtmEvent
         "eventName" -> Right ACWBCTEventName
         "firebaseEventParameterCampaign" -> Right ACWBCTFirebaseEventParameterCampaign
         "firebaseEventParameterCampaignAclid" -> Right ACWBCTFirebaseEventParameterCampaignACLid
@@ -1396,89 +1556,99 @@ instance FromHttpApiData AccountsContainersWorkspacesBuilt_in_variablesCreateTyp
         "firebaseEventParameterProductId" -> Right ACWBCTFirebaseEventParameterProductId
         "firebaseEventParameterQuantity" -> Right ACWBCTFirebaseEventParameterQuantity
         "firebaseEventParameterValue" -> Right ACWBCTFirebaseEventParameterValue
-        "formClasses" -> Right ACWBCTFormClasses
-        "formElement" -> Right ACWBCTFormElement
-        "formId" -> Right ACWBCTFormId
-        "formTarget" -> Right ACWBCTFormTarget
-        "formText" -> Right ACWBCTFormText
-        "formUrl" -> Right ACWBCTFormURL
-        "historySource" -> Right ACWBCTHistorySource
-        "htmlId" -> Right ACWBCTHTMLId
-        "language" -> Right ACWBCTLanguage
-        "newHistoryFragment" -> Right ACWBCTNewHistoryFragment
-        "newHistoryState" -> Right ACWBCTNewHistoryState
-        "oldHistoryFragment" -> Right ACWBCTOldHistoryFragment
-        "oldHistoryState" -> Right ACWBCTOldHistoryState
-        "osVersion" -> Right ACWBCTOSVersion
-        "pageHostname" -> Right ACWBCTPageHostname
-        "pagePath" -> Right ACWBCTPagePath
-        "pageUrl" -> Right ACWBCTPageURL
-        "platform" -> Right ACWBCTPlatform
-        "randomNumber" -> Right ACWBCTRandomNumber
-        "referrer" -> Right ACWBCTReferrer
-        "resolution" -> Right ACWBCTResolution
-        "scrollDepthDirection" -> Right ACWBCTScrollDepthDirection
-        "scrollDepthThreshold" -> Right ACWBCTScrollDepthThreshold
-        "scrollDepthUnits" -> Right ACWBCTScrollDepthUnits
-        "sdkVersion" -> Right ACWBCTSdkVersion
-        "videoCurrentTime" -> Right ACWBCTVideoCurrentTime
+        "videoProvider" -> Right ACWBCTVideoProvider
+        "videoUrl" -> Right ACWBCTVideoURL
+        "videoTitle" -> Right ACWBCTVideoTitle
         "videoDuration" -> Right ACWBCTVideoDuration
         "videoPercent" -> Right ACWBCTVideoPercent
-        "videoProvider" -> Right ACWBCTVideoProvider
-        "videoStatus" -> Right ACWBCTVideoStatus
-        "videoTitle" -> Right ACWBCTVideoTitle
-        "videoUrl" -> Right ACWBCTVideoURL
         "videoVisible" -> Right ACWBCTVideoVisible
+        "videoStatus" -> Right ACWBCTVideoStatus
+        "videoCurrentTime" -> Right ACWBCTVideoCurrentTime
+        "scrollDepthThreshold" -> Right ACWBCTScrollDepthThreshold
+        "scrollDepthUnits" -> Right ACWBCTScrollDepthUnits
+        "scrollDepthDirection" -> Right ACWBCTScrollDepthDirection
+        "elementVisibilityRatio" -> Right ACWBCTElementVisibilityRatio
+        "elementVisibilityTime" -> Right ACWBCTElementVisibilityTime
+        "elementVisibilityFirstTime" -> Right ACWBCTElementVisibilityFirstTime
+        "elementVisibilityRecentTime" -> Right ACWBCTElementVisibilityRecentTime
+        "requestPath" -> Right ACWBCTRequestPath
+        "requestMethod" -> Right ACWBCTRequestMethod
+        "clientName" -> Right ACWBCTClientName
+        "queryString" -> Right ACWBCTQueryString
+        "serverPageLocationUrl" -> Right ACWBCTServerPageLocationURL
+        "serverPageLocationPath" -> Right ACWBCTServerPageLocationPath
+        "serverPageLocationHostname" -> Right ACWBCTServerPageLocationHostname
         x -> Left ("Unable to parse AccountsContainersWorkspacesBuilt_in_variablesCreateType from: " <> x)
 
 instance ToHttpApiData AccountsContainersWorkspacesBuilt_in_variablesCreateType where
     toQueryParam = \case
-        ACWBCTAdvertiserId -> "advertiserId"
-        ACWBCTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
-        ACWBCTAmpBrowserLanguage -> "ampBrowserLanguage"
-        ACWBCTAmpCanonicalHost -> "ampCanonicalHost"
-        ACWBCTAmpCanonicalPath -> "ampCanonicalPath"
-        ACWBCTAmpCanonicalURL -> "ampCanonicalUrl"
-        ACWBCTAmpClientId -> "ampClientId"
-        ACWBCTAmpClientMaxScrollX -> "ampClientMaxScrollX"
-        ACWBCTAmpClientMaxScrollY -> "ampClientMaxScrollY"
-        ACWBCTAmpClientScreenHeight -> "ampClientScreenHeight"
-        ACWBCTAmpClientScreenWidth -> "ampClientScreenWidth"
-        ACWBCTAmpClientScrollX -> "ampClientScrollX"
-        ACWBCTAmpClientScrollY -> "ampClientScrollY"
-        ACWBCTAmpClientTimestamp -> "ampClientTimestamp"
-        ACWBCTAmpClientTimezone -> "ampClientTimezone"
-        ACWBCTAmpGtmEvent -> "ampGtmEvent"
-        ACWBCTAmpPageDownloadTime -> "ampPageDownloadTime"
-        ACWBCTAmpPageLoadTime -> "ampPageLoadTime"
-        ACWBCTAmpPageViewId -> "ampPageViewId"
-        ACWBCTAmpReferrer -> "ampReferrer"
-        ACWBCTAmpTitle -> "ampTitle"
-        ACWBCTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        ACWBCTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
+        ACWBCTPageURL -> "pageUrl"
+        ACWBCTPageHostname -> "pageHostname"
+        ACWBCTPagePath -> "pagePath"
+        ACWBCTReferrer -> "referrer"
+        ACWBCTEvent -> "event"
+        ACWBCTClickElement -> "clickElement"
+        ACWBCTClickClasses -> "clickClasses"
+        ACWBCTClickId -> "clickId"
+        ACWBCTClickTarget -> "clickTarget"
+        ACWBCTClickURL -> "clickUrl"
+        ACWBCTClickText -> "clickText"
+        ACWBCTFirstPartyServingURL -> "firstPartyServingUrl"
+        ACWBCTFormElement -> "formElement"
+        ACWBCTFormClasses -> "formClasses"
+        ACWBCTFormId -> "formId"
+        ACWBCTFormTarget -> "formTarget"
+        ACWBCTFormURL -> "formUrl"
+        ACWBCTFormText -> "formText"
+        ACWBCTErrorMessage -> "errorMessage"
+        ACWBCTErrorURL -> "errorUrl"
+        ACWBCTErrorLine -> "errorLine"
+        ACWBCTNewHistoryURL -> "newHistoryUrl"
+        ACWBCTOldHistoryURL -> "oldHistoryUrl"
+        ACWBCTNewHistoryFragment -> "newHistoryFragment"
+        ACWBCTOldHistoryFragment -> "oldHistoryFragment"
+        ACWBCTNewHistoryState -> "newHistoryState"
+        ACWBCTOldHistoryState -> "oldHistoryState"
+        ACWBCTHistorySource -> "historySource"
+        ACWBCTContainerVersion -> "containerVersion"
+        ACWBCTDebugMode -> "debugMode"
+        ACWBCTRandomNumber -> "randomNumber"
+        ACWBCTContainerId -> "containerId"
         ACWBCTAppId -> "appId"
         ACWBCTAppName -> "appName"
         ACWBCTAppVersionCode -> "appVersionCode"
         ACWBCTAppVersionName -> "appVersionName"
-        ACWBCTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
-        ACWBCTClickClasses -> "clickClasses"
-        ACWBCTClickElement -> "clickElement"
-        ACWBCTClickId -> "clickId"
-        ACWBCTClickTarget -> "clickTarget"
-        ACWBCTClickText -> "clickText"
-        ACWBCTClickURL -> "clickUrl"
-        ACWBCTContainerId -> "containerId"
-        ACWBCTContainerVersion -> "containerVersion"
-        ACWBCTDebugMode -> "debugMode"
+        ACWBCTLanguage -> "language"
+        ACWBCTOSVersion -> "osVersion"
+        ACWBCTPlatform -> "platform"
+        ACWBCTSdkVersion -> "sdkVersion"
         ACWBCTDeviceName -> "deviceName"
-        ACWBCTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
-        ACWBCTElementVisibilityRatio -> "elementVisibilityRatio"
-        ACWBCTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
-        ACWBCTElementVisibilityTime -> "elementVisibilityTime"
+        ACWBCTResolution -> "resolution"
+        ACWBCTAdvertiserId -> "advertiserId"
+        ACWBCTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
+        ACWBCTHTMLId -> "htmlId"
         ACWBCTEnvironmentName -> "environmentName"
-        ACWBCTErrorLine -> "errorLine"
-        ACWBCTErrorMessage -> "errorMessage"
-        ACWBCTErrorURL -> "errorUrl"
-        ACWBCTEvent -> "event"
+        ACWBCTAmpBrowserLanguage -> "ampBrowserLanguage"
+        ACWBCTAmpCanonicalPath -> "ampCanonicalPath"
+        ACWBCTAmpCanonicalURL -> "ampCanonicalUrl"
+        ACWBCTAmpCanonicalHost -> "ampCanonicalHost"
+        ACWBCTAmpReferrer -> "ampReferrer"
+        ACWBCTAmpTitle -> "ampTitle"
+        ACWBCTAmpClientId -> "ampClientId"
+        ACWBCTAmpClientTimezone -> "ampClientTimezone"
+        ACWBCTAmpClientTimestamp -> "ampClientTimestamp"
+        ACWBCTAmpClientScreenWidth -> "ampClientScreenWidth"
+        ACWBCTAmpClientScreenHeight -> "ampClientScreenHeight"
+        ACWBCTAmpClientScrollX -> "ampClientScrollX"
+        ACWBCTAmpClientScrollY -> "ampClientScrollY"
+        ACWBCTAmpClientMaxScrollX -> "ampClientMaxScrollX"
+        ACWBCTAmpClientMaxScrollY -> "ampClientMaxScrollY"
+        ACWBCTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        ACWBCTAmpPageViewId -> "ampPageViewId"
+        ACWBCTAmpPageLoadTime -> "ampPageLoadTime"
+        ACWBCTAmpPageDownloadTime -> "ampPageDownloadTime"
+        ACWBCTAmpGtmEvent -> "ampGtmEvent"
         ACWBCTEventName -> "eventName"
         ACWBCTFirebaseEventParameterCampaign -> "firebaseEventParameterCampaign"
         ACWBCTFirebaseEventParameterCampaignACLid -> "firebaseEventParameterCampaignAclid"
@@ -1503,39 +1673,28 @@ instance ToHttpApiData AccountsContainersWorkspacesBuilt_in_variablesCreateType 
         ACWBCTFirebaseEventParameterProductId -> "firebaseEventParameterProductId"
         ACWBCTFirebaseEventParameterQuantity -> "firebaseEventParameterQuantity"
         ACWBCTFirebaseEventParameterValue -> "firebaseEventParameterValue"
-        ACWBCTFormClasses -> "formClasses"
-        ACWBCTFormElement -> "formElement"
-        ACWBCTFormId -> "formId"
-        ACWBCTFormTarget -> "formTarget"
-        ACWBCTFormText -> "formText"
-        ACWBCTFormURL -> "formUrl"
-        ACWBCTHistorySource -> "historySource"
-        ACWBCTHTMLId -> "htmlId"
-        ACWBCTLanguage -> "language"
-        ACWBCTNewHistoryFragment -> "newHistoryFragment"
-        ACWBCTNewHistoryState -> "newHistoryState"
-        ACWBCTOldHistoryFragment -> "oldHistoryFragment"
-        ACWBCTOldHistoryState -> "oldHistoryState"
-        ACWBCTOSVersion -> "osVersion"
-        ACWBCTPageHostname -> "pageHostname"
-        ACWBCTPagePath -> "pagePath"
-        ACWBCTPageURL -> "pageUrl"
-        ACWBCTPlatform -> "platform"
-        ACWBCTRandomNumber -> "randomNumber"
-        ACWBCTReferrer -> "referrer"
-        ACWBCTResolution -> "resolution"
-        ACWBCTScrollDepthDirection -> "scrollDepthDirection"
-        ACWBCTScrollDepthThreshold -> "scrollDepthThreshold"
-        ACWBCTScrollDepthUnits -> "scrollDepthUnits"
-        ACWBCTSdkVersion -> "sdkVersion"
-        ACWBCTVideoCurrentTime -> "videoCurrentTime"
+        ACWBCTVideoProvider -> "videoProvider"
+        ACWBCTVideoURL -> "videoUrl"
+        ACWBCTVideoTitle -> "videoTitle"
         ACWBCTVideoDuration -> "videoDuration"
         ACWBCTVideoPercent -> "videoPercent"
-        ACWBCTVideoProvider -> "videoProvider"
-        ACWBCTVideoStatus -> "videoStatus"
-        ACWBCTVideoTitle -> "videoTitle"
-        ACWBCTVideoURL -> "videoUrl"
         ACWBCTVideoVisible -> "videoVisible"
+        ACWBCTVideoStatus -> "videoStatus"
+        ACWBCTVideoCurrentTime -> "videoCurrentTime"
+        ACWBCTScrollDepthThreshold -> "scrollDepthThreshold"
+        ACWBCTScrollDepthUnits -> "scrollDepthUnits"
+        ACWBCTScrollDepthDirection -> "scrollDepthDirection"
+        ACWBCTElementVisibilityRatio -> "elementVisibilityRatio"
+        ACWBCTElementVisibilityTime -> "elementVisibilityTime"
+        ACWBCTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
+        ACWBCTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
+        ACWBCTRequestPath -> "requestPath"
+        ACWBCTRequestMethod -> "requestMethod"
+        ACWBCTClientName -> "clientName"
+        ACWBCTQueryString -> "queryString"
+        ACWBCTServerPageLocationURL -> "serverPageLocationUrl"
+        ACWBCTServerPageLocationPath -> "serverPageLocationPath"
+        ACWBCTServerPageLocationHostname -> "serverPageLocationHostname"
 
 instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesCreateType where
     parseJSON = parseJSONText "AccountsContainersWorkspacesBuilt_in_variablesCreateType"
@@ -1543,18 +1702,22 @@ instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesCreateType where
 instance ToJSON AccountsContainersWorkspacesBuilt_in_variablesCreateType where
     toJSON = toJSONText
 
--- | The type of operator for this condition.
+-- | The type of operator for this condition. \'mutable
+-- tagmanager.accounts.containers.workspaces.triggers.create \'mutable
+-- tagmanager.accounts.containers.workspaces.triggers.update
 data ConditionType
     = ConditionTypeUnspecified
       -- ^ @conditionTypeUnspecified@
-    | Contains
-      -- ^ @contains@
-    | CssSelector
-      -- ^ @cssSelector@
-    | EndsWith
-      -- ^ @endsWith@
     | Equals
       -- ^ @equals@
+    | Contains
+      -- ^ @contains@
+    | StartsWith
+      -- ^ @startsWith@
+    | EndsWith
+      -- ^ @endsWith@
+    | MatchRegex
+      -- ^ @matchRegex@
     | Greater
       -- ^ @greater@
     | GreaterOrEquals
@@ -1563,12 +1726,12 @@ data ConditionType
       -- ^ @less@
     | LessOrEquals
       -- ^ @lessOrEquals@
-    | MatchRegex
-      -- ^ @matchRegex@
-    | StartsWith
-      -- ^ @startsWith@
+    | CssSelector
+      -- ^ @cssSelector@
     | URLMatches
       -- ^ @urlMatches@
+      -- NOTE(lanzone): When defining a ConditionType here, don\'t forget to also
+      -- define a matching PredicateType (in condition.proto).
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ConditionType
@@ -1576,32 +1739,32 @@ instance Hashable ConditionType
 instance FromHttpApiData ConditionType where
     parseQueryParam = \case
         "conditionTypeUnspecified" -> Right ConditionTypeUnspecified
-        "contains" -> Right Contains
-        "cssSelector" -> Right CssSelector
-        "endsWith" -> Right EndsWith
         "equals" -> Right Equals
+        "contains" -> Right Contains
+        "startsWith" -> Right StartsWith
+        "endsWith" -> Right EndsWith
+        "matchRegex" -> Right MatchRegex
         "greater" -> Right Greater
         "greaterOrEquals" -> Right GreaterOrEquals
         "less" -> Right Less
         "lessOrEquals" -> Right LessOrEquals
-        "matchRegex" -> Right MatchRegex
-        "startsWith" -> Right StartsWith
+        "cssSelector" -> Right CssSelector
         "urlMatches" -> Right URLMatches
         x -> Left ("Unable to parse ConditionType from: " <> x)
 
 instance ToHttpApiData ConditionType where
     toQueryParam = \case
         ConditionTypeUnspecified -> "conditionTypeUnspecified"
-        Contains -> "contains"
-        CssSelector -> "cssSelector"
-        EndsWith -> "endsWith"
         Equals -> "equals"
+        Contains -> "contains"
+        StartsWith -> "startsWith"
+        EndsWith -> "endsWith"
+        MatchRegex -> "matchRegex"
         Greater -> "greater"
         GreaterOrEquals -> "greaterOrEquals"
         Less -> "less"
         LessOrEquals -> "lessOrEquals"
-        MatchRegex -> "matchRegex"
-        StartsWith -> "startsWith"
+        CssSelector -> "cssSelector"
         URLMatches -> "urlMatches"
 
 instance FromJSON ConditionType where
@@ -1612,32 +1775,36 @@ instance ToJSON ConditionType where
 
 -- | Option to fire this tag.
 data TagTagFiringOption
-    = OncePerEvent
-      -- ^ @oncePerEvent@
-    | OncePerLoad
-      -- ^ @oncePerLoad@
-    | TagFiringOptionUnspecified
+    = TagFiringOptionUnspecified
       -- ^ @tagFiringOptionUnspecified@
     | Unlimited
       -- ^ @unlimited@
+      -- Tag can be fired multiple times per event.
+    | OncePerEvent
+      -- ^ @oncePerEvent@
+      -- Tag can only be fired per event but can be fired multiple times per load
+      -- (e.g., app load or page load).
+    | OncePerLoad
+      -- ^ @oncePerLoad@
+      -- Tag can only be fired per load (e.g., app load or page load).
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagTagFiringOption
 
 instance FromHttpApiData TagTagFiringOption where
     parseQueryParam = \case
-        "oncePerEvent" -> Right OncePerEvent
-        "oncePerLoad" -> Right OncePerLoad
         "tagFiringOptionUnspecified" -> Right TagFiringOptionUnspecified
         "unlimited" -> Right Unlimited
+        "oncePerEvent" -> Right OncePerEvent
+        "oncePerLoad" -> Right OncePerLoad
         x -> Left ("Unable to parse TagTagFiringOption from: " <> x)
 
 instance ToHttpApiData TagTagFiringOption where
     toQueryParam = \case
-        OncePerEvent -> "oncePerEvent"
-        OncePerLoad -> "oncePerLoad"
         TagFiringOptionUnspecified -> "tagFiringOptionUnspecified"
         Unlimited -> "unlimited"
+        OncePerEvent -> "oncePerEvent"
+        OncePerLoad -> "oncePerLoad"
 
 instance FromJSON TagTagFiringOption where
     parseJSON = parseJSONText "TagTagFiringOption"
@@ -1646,16 +1813,17 @@ instance ToJSON TagTagFiringOption where
     toJSON = toJSONText
 
 -- | Whether the user has no access, user access, or admin access to an
--- account.
+-- account. \'mutable tagmanager.accounts.permissions.create \'mutable
+-- tagmanager.accounts.permissions.update
 data AccountAccessPermission
     = AAPAccountPermissionUnspecified
       -- ^ @accountPermissionUnspecified@
-    | AAPAdmin
-      -- ^ @admin@
     | AAPNoAccess
       -- ^ @noAccess@
     | AAPUser
       -- ^ @user@
+    | AAPAdmin
+      -- ^ @admin@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountAccessPermission
@@ -1663,17 +1831,17 @@ instance Hashable AccountAccessPermission
 instance FromHttpApiData AccountAccessPermission where
     parseQueryParam = \case
         "accountPermissionUnspecified" -> Right AAPAccountPermissionUnspecified
-        "admin" -> Right AAPAdmin
         "noAccess" -> Right AAPNoAccess
         "user" -> Right AAPUser
+        "admin" -> Right AAPAdmin
         x -> Left ("Unable to parse AccountAccessPermission from: " <> x)
 
 instance ToHttpApiData AccountAccessPermission where
     toQueryParam = \case
         AAPAccountPermissionUnspecified -> "accountPermissionUnspecified"
-        AAPAdmin -> "admin"
         AAPNoAccess -> "noAccess"
         AAPUser -> "user"
+        AAPAdmin -> "admin"
 
 instance FromJSON AccountAccessPermission where
     parseJSON = parseJSONText "AccountAccessPermission"
@@ -1687,42 +1855,59 @@ instance ToJSON AccountAccessPermission where
 -- parameters should be specified - map: A map of parameters should be
 -- specified - template: The value represents any text; this can include
 -- variable references (even variable references that might return
--- non-string types)
+-- non-string types) - trigger_reference: The value represents a trigger,
+-- represented as the trigger id - tag_reference: The value represents a
+-- tag, represented as the tag name \'mutable
+-- tagmanager.accounts.containers.workspaces.variables.create \'mutable
+-- tagmanager.accounts.containers.workspaces.variables.update \'mutable
+-- tagmanager.accounts.containers.workspaces.triggers.create \'mutable
+-- tagmanager.accounts.containers.workspaces.triggers.update \'mutable
+-- tagmanager.accounts.containers.workspaces.tags.create \'mutable
+-- tagmanager.accounts.containers.workspaces.tags.update
 data ParameterType
-    = Boolean
-      -- ^ @boolean@
+    = TypeUnspecified
+      -- ^ @typeUnspecified@
+    | Template
+      -- ^ @template@
+      -- May include variable references (such as \"{{myVariable}}\").
     | Integer
       -- ^ @integer@
+    | Boolean
+      -- ^ @boolean@
     | List
       -- ^ @list@
     | Map
       -- ^ @map@
-    | Template
-      -- ^ @template@
-    | TypeUnspecified
-      -- ^ @typeUnspecified@
+    | TriggerReference
+      -- ^ @triggerReference@
+    | TagReference
+      -- ^ @tagReference@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ParameterType
 
 instance FromHttpApiData ParameterType where
     parseQueryParam = \case
-        "boolean" -> Right Boolean
+        "typeUnspecified" -> Right TypeUnspecified
+        "template" -> Right Template
         "integer" -> Right Integer
+        "boolean" -> Right Boolean
         "list" -> Right List
         "map" -> Right Map
-        "template" -> Right Template
-        "typeUnspecified" -> Right TypeUnspecified
+        "triggerReference" -> Right TriggerReference
+        "tagReference" -> Right TagReference
         x -> Left ("Unable to parse ParameterType from: " <> x)
 
 instance ToHttpApiData ParameterType where
     toQueryParam = \case
-        Boolean -> "boolean"
+        TypeUnspecified -> "typeUnspecified"
+        Template -> "template"
         Integer -> "integer"
+        Boolean -> "boolean"
         List -> "list"
         Map -> "map"
-        Template -> "template"
-        TypeUnspecified -> "typeUnspecified"
+        TriggerReference -> "triggerReference"
+        TagReference -> "tagReference"
 
 instance FromJSON ParameterType where
     parseJSON = parseJSONText "ParameterType"
@@ -1732,35 +1917,39 @@ instance ToJSON ParameterType where
 
 -- | Represents how the entity has been changed in the workspace.
 data EntityChangeStatus
-    = Added
-      -- ^ @added@
-    | ChangeStatusUnspecified
+    = ChangeStatusUnspecified
       -- ^ @changeStatusUnspecified@
-    | Deleted
-      -- ^ @deleted@
     | None
       -- ^ @none@
+      -- The entity has never been changed.
+    | Added
+      -- ^ @added@
+      -- The entity is added to the workspace.
+    | Deleted
+      -- ^ @deleted@
+      -- The entity is deleted from the workspace.
     | Updated
       -- ^ @updated@
+      -- The entity has been updated in the workspace.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EntityChangeStatus
 
 instance FromHttpApiData EntityChangeStatus where
     parseQueryParam = \case
-        "added" -> Right Added
         "changeStatusUnspecified" -> Right ChangeStatusUnspecified
-        "deleted" -> Right Deleted
         "none" -> Right None
+        "added" -> Right Added
+        "deleted" -> Right Deleted
         "updated" -> Right Updated
         x -> Left ("Unable to parse EntityChangeStatus from: " <> x)
 
 instance ToHttpApiData EntityChangeStatus where
     toQueryParam = \case
-        Added -> "added"
         ChangeStatusUnspecified -> "changeStatusUnspecified"
-        Deleted -> "deleted"
         None -> "none"
+        Added -> "added"
+        Deleted -> "deleted"
         Updated -> "updated"
 
 instance FromJSON EntityChangeStatus where
@@ -1772,27 +1961,29 @@ instance ToJSON EntityChangeStatus where
 -- | The option to convert a string-type variable value to either lowercase
 -- or uppercase.
 data VariableFormatValueCaseConversionType
-    = VFVCCTLowercase
-      -- ^ @lowercase@
-    | VFVCCTNone
+    = VFVCCTNone
       -- ^ @none@
+    | VFVCCTLowercase
+      -- ^ @lowercase@
+      -- The option to convert a variable value to lowercase.
     | VFVCCTUppercase
       -- ^ @uppercase@
+      -- The option to convert a variable value to uppercase.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VariableFormatValueCaseConversionType
 
 instance FromHttpApiData VariableFormatValueCaseConversionType where
     parseQueryParam = \case
-        "lowercase" -> Right VFVCCTLowercase
         "none" -> Right VFVCCTNone
+        "lowercase" -> Right VFVCCTLowercase
         "uppercase" -> Right VFVCCTUppercase
         x -> Left ("Unable to parse VariableFormatValueCaseConversionType from: " <> x)
 
 instance ToHttpApiData VariableFormatValueCaseConversionType where
     toQueryParam = \case
-        VFVCCTLowercase -> "lowercase"
         VFVCCTNone -> "none"
+        VFVCCTLowercase -> "lowercase"
         VFVCCTUppercase -> "uppercase"
 
 instance FromJSON VariableFormatValueCaseConversionType where
@@ -1801,33 +1992,67 @@ instance FromJSON VariableFormatValueCaseConversionType where
 instance ToJSON VariableFormatValueCaseConversionType where
     toJSON = toJSONText
 
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
 -- | The type of this environment.
 data EnvironmentType
-    = ETLatest
-      -- ^ @latest@
+    = ETUser
+      -- ^ @user@
+      -- Points to a user defined environment.
     | ETLive
       -- ^ @live@
-    | ETUser
-      -- ^ @user@
+      -- Points to the current live container version.
+    | ETLatest
+      -- ^ @latest@
+      -- Points to the latest container version.
     | ETWorkspace
       -- ^ @workspace@
+      -- Automatically managed environment that points to a workspace preview or
+      -- version created by a workspace.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EnvironmentType
 
 instance FromHttpApiData EnvironmentType where
     parseQueryParam = \case
-        "latest" -> Right ETLatest
-        "live" -> Right ETLive
         "user" -> Right ETUser
+        "live" -> Right ETLive
+        "latest" -> Right ETLatest
         "workspace" -> Right ETWorkspace
         x -> Left ("Unable to parse EnvironmentType from: " <> x)
 
 instance ToHttpApiData EnvironmentType where
     toQueryParam = \case
-        ETLatest -> "latest"
-        ETLive -> "live"
         ETUser -> "user"
+        ETLive -> "live"
+        ETLatest -> "latest"
         ETWorkspace -> "workspace"
 
 instance FromJSON EnvironmentType where
@@ -1838,50 +2063,76 @@ instance ToJSON EnvironmentType where
 
 -- | The type of built-in variable to revert.
 data AccountsContainersWorkspacesBuilt_in_variablesRevertType
-    = ACWBRTAdvertiserId
-      -- ^ @advertiserId@
-    | ACWBRTAdvertisingTrackingEnabled
-      -- ^ @advertisingTrackingEnabled@
-    | ACWBRTAmpBrowserLanguage
-      -- ^ @ampBrowserLanguage@
-    | ACWBRTAmpCanonicalHost
-      -- ^ @ampCanonicalHost@
-    | ACWBRTAmpCanonicalPath
-      -- ^ @ampCanonicalPath@
-    | ACWBRTAmpCanonicalURL
-      -- ^ @ampCanonicalUrl@
-    | ACWBRTAmpClientId
-      -- ^ @ampClientId@
-    | ACWBRTAmpClientMaxScrollX
-      -- ^ @ampClientMaxScrollX@
-    | ACWBRTAmpClientMaxScrollY
-      -- ^ @ampClientMaxScrollY@
-    | ACWBRTAmpClientScreenHeight
-      -- ^ @ampClientScreenHeight@
-    | ACWBRTAmpClientScreenWidth
-      -- ^ @ampClientScreenWidth@
-    | ACWBRTAmpClientScrollX
-      -- ^ @ampClientScrollX@
-    | ACWBRTAmpClientScrollY
-      -- ^ @ampClientScrollY@
-    | ACWBRTAmpClientTimestamp
-      -- ^ @ampClientTimestamp@
-    | ACWBRTAmpClientTimezone
-      -- ^ @ampClientTimezone@
-    | ACWBRTAmpGtmEvent
-      -- ^ @ampGtmEvent@
-    | ACWBRTAmpPageDownloadTime
-      -- ^ @ampPageDownloadTime@
-    | ACWBRTAmpPageLoadTime
-      -- ^ @ampPageLoadTime@
-    | ACWBRTAmpPageViewId
-      -- ^ @ampPageViewId@
-    | ACWBRTAmpReferrer
-      -- ^ @ampReferrer@
-    | ACWBRTAmpTitle
-      -- ^ @ampTitle@
-    | ACWBRTAmpTotalEngagedTime
-      -- ^ @ampTotalEngagedTime@
+    = ACWBRTBuiltInVariableTypeUnspecified
+      -- ^ @builtInVariableTypeUnspecified@
+    | ACWBRTPageURL
+      -- ^ @pageUrl@
+    | ACWBRTPageHostname
+      -- ^ @pageHostname@
+    | ACWBRTPagePath
+      -- ^ @pagePath@
+    | ACWBRTReferrer
+      -- ^ @referrer@
+    | ACWBRTEvent
+      -- ^ @event@
+      -- For web or mobile.
+    | ACWBRTClickElement
+      -- ^ @clickElement@
+    | ACWBRTClickClasses
+      -- ^ @clickClasses@
+    | ACWBRTClickId
+      -- ^ @clickId@
+    | ACWBRTClickTarget
+      -- ^ @clickTarget@
+    | ACWBRTClickURL
+      -- ^ @clickUrl@
+    | ACWBRTClickText
+      -- ^ @clickText@
+    | ACWBRTFirstPartyServingURL
+      -- ^ @firstPartyServingUrl@
+    | ACWBRTFormElement
+      -- ^ @formElement@
+    | ACWBRTFormClasses
+      -- ^ @formClasses@
+    | ACWBRTFormId
+      -- ^ @formId@
+    | ACWBRTFormTarget
+      -- ^ @formTarget@
+    | ACWBRTFormURL
+      -- ^ @formUrl@
+    | ACWBRTFormText
+      -- ^ @formText@
+    | ACWBRTErrorMessage
+      -- ^ @errorMessage@
+    | ACWBRTErrorURL
+      -- ^ @errorUrl@
+    | ACWBRTErrorLine
+      -- ^ @errorLine@
+    | ACWBRTNewHistoryURL
+      -- ^ @newHistoryUrl@
+    | ACWBRTOldHistoryURL
+      -- ^ @oldHistoryUrl@
+    | ACWBRTNewHistoryFragment
+      -- ^ @newHistoryFragment@
+    | ACWBRTOldHistoryFragment
+      -- ^ @oldHistoryFragment@
+    | ACWBRTNewHistoryState
+      -- ^ @newHistoryState@
+    | ACWBRTOldHistoryState
+      -- ^ @oldHistoryState@
+    | ACWBRTHistorySource
+      -- ^ @historySource@
+    | ACWBRTContainerVersion
+      -- ^ @containerVersion@
+      -- For web or mobile.
+    | ACWBRTDebugMode
+      -- ^ @debugMode@
+    | ACWBRTRandomNumber
+      -- ^ @randomNumber@
+      -- For web or mobile.
+    | ACWBRTContainerId
+      -- ^ @containerId@
+      -- For web or mobile.
     | ACWBRTAppId
       -- ^ @appId@
     | ACWBRTAppName
@@ -1890,46 +2141,66 @@ data AccountsContainersWorkspacesBuilt_in_variablesRevertType
       -- ^ @appVersionCode@
     | ACWBRTAppVersionName
       -- ^ @appVersionName@
-    | ACWBRTBuiltInVariableTypeUnspecified
-      -- ^ @builtInVariableTypeUnspecified@
-    | ACWBRTClickClasses
-      -- ^ @clickClasses@
-    | ACWBRTClickElement
-      -- ^ @clickElement@
-    | ACWBRTClickId
-      -- ^ @clickId@
-    | ACWBRTClickTarget
-      -- ^ @clickTarget@
-    | ACWBRTClickText
-      -- ^ @clickText@
-    | ACWBRTClickURL
-      -- ^ @clickUrl@
-    | ACWBRTContainerId
-      -- ^ @containerId@
-    | ACWBRTContainerVersion
-      -- ^ @containerVersion@
-    | ACWBRTDebugMode
-      -- ^ @debugMode@
+    | ACWBRTLanguage
+      -- ^ @language@
+    | ACWBRTOSVersion
+      -- ^ @osVersion@
+    | ACWBRTPlatform
+      -- ^ @platform@
+    | ACWBRTSdkVersion
+      -- ^ @sdkVersion@
     | ACWBRTDeviceName
       -- ^ @deviceName@
-    | ACWBRTElementVisibilityFirstTime
-      -- ^ @elementVisibilityFirstTime@
-    | ACWBRTElementVisibilityRatio
-      -- ^ @elementVisibilityRatio@
-    | ACWBRTElementVisibilityRecentTime
-      -- ^ @elementVisibilityRecentTime@
-    | ACWBRTElementVisibilityTime
-      -- ^ @elementVisibilityTime@
+    | ACWBRTResolution
+      -- ^ @resolution@
+    | ACWBRTAdvertiserId
+      -- ^ @advertiserId@
+    | ACWBRTAdvertisingTrackingEnabled
+      -- ^ @advertisingTrackingEnabled@
+    | ACWBRTHTMLId
+      -- ^ @htmlId@
     | ACWBRTEnvironmentName
       -- ^ @environmentName@
-    | ACWBRTErrorLine
-      -- ^ @errorLine@
-    | ACWBRTErrorMessage
-      -- ^ @errorMessage@
-    | ACWBRTErrorURL
-      -- ^ @errorUrl@
-    | ACWBRTEvent
-      -- ^ @event@
+    | ACWBRTAmpBrowserLanguage
+      -- ^ @ampBrowserLanguage@
+    | ACWBRTAmpCanonicalPath
+      -- ^ @ampCanonicalPath@
+    | ACWBRTAmpCanonicalURL
+      -- ^ @ampCanonicalUrl@
+    | ACWBRTAmpCanonicalHost
+      -- ^ @ampCanonicalHost@
+    | ACWBRTAmpReferrer
+      -- ^ @ampReferrer@
+    | ACWBRTAmpTitle
+      -- ^ @ampTitle@
+    | ACWBRTAmpClientId
+      -- ^ @ampClientId@
+    | ACWBRTAmpClientTimezone
+      -- ^ @ampClientTimezone@
+    | ACWBRTAmpClientTimestamp
+      -- ^ @ampClientTimestamp@
+    | ACWBRTAmpClientScreenWidth
+      -- ^ @ampClientScreenWidth@
+    | ACWBRTAmpClientScreenHeight
+      -- ^ @ampClientScreenHeight@
+    | ACWBRTAmpClientScrollX
+      -- ^ @ampClientScrollX@
+    | ACWBRTAmpClientScrollY
+      -- ^ @ampClientScrollY@
+    | ACWBRTAmpClientMaxScrollX
+      -- ^ @ampClientMaxScrollX@
+    | ACWBRTAmpClientMaxScrollY
+      -- ^ @ampClientMaxScrollY@
+    | ACWBRTAmpTotalEngagedTime
+      -- ^ @ampTotalEngagedTime@
+    | ACWBRTAmpPageViewId
+      -- ^ @ampPageViewId@
+    | ACWBRTAmpPageLoadTime
+      -- ^ @ampPageLoadTime@
+    | ACWBRTAmpPageDownloadTime
+      -- ^ @ampPageDownloadTime@
+    | ACWBRTAmpGtmEvent
+      -- ^ @ampGtmEvent@
     | ACWBRTEventName
       -- ^ @eventName@
     | ACWBRTFirebaseEventParameterCampaign
@@ -1978,124 +2249,123 @@ data AccountsContainersWorkspacesBuilt_in_variablesRevertType
       -- ^ @firebaseEventParameterQuantity@
     | ACWBRTFirebaseEventParameterValue
       -- ^ @firebaseEventParameterValue@
-    | ACWBRTFormClasses
-      -- ^ @formClasses@
-    | ACWBRTFormElement
-      -- ^ @formElement@
-    | ACWBRTFormId
-      -- ^ @formId@
-    | ACWBRTFormTarget
-      -- ^ @formTarget@
-    | ACWBRTFormText
-      -- ^ @formText@
-    | ACWBRTFormURL
-      -- ^ @formUrl@
-    | ACWBRTHistorySource
-      -- ^ @historySource@
-    | ACWBRTHTMLId
-      -- ^ @htmlId@
-    | ACWBRTLanguage
-      -- ^ @language@
-    | ACWBRTNewHistoryFragment
-      -- ^ @newHistoryFragment@
-    | ACWBRTNewHistoryState
-      -- ^ @newHistoryState@
-    | ACWBRTOldHistoryFragment
-      -- ^ @oldHistoryFragment@
-    | ACWBRTOldHistoryState
-      -- ^ @oldHistoryState@
-    | ACWBRTOSVersion
-      -- ^ @osVersion@
-    | ACWBRTPageHostname
-      -- ^ @pageHostname@
-    | ACWBRTPagePath
-      -- ^ @pagePath@
-    | ACWBRTPageURL
-      -- ^ @pageUrl@
-    | ACWBRTPlatform
-      -- ^ @platform@
-    | ACWBRTRandomNumber
-      -- ^ @randomNumber@
-    | ACWBRTReferrer
-      -- ^ @referrer@
-    | ACWBRTResolution
-      -- ^ @resolution@
-    | ACWBRTScrollDepthDirection
-      -- ^ @scrollDepthDirection@
-    | ACWBRTScrollDepthThreshold
-      -- ^ @scrollDepthThreshold@
-    | ACWBRTScrollDepthUnits
-      -- ^ @scrollDepthUnits@
-    | ACWBRTSdkVersion
-      -- ^ @sdkVersion@
-    | ACWBRTVideoCurrentTime
-      -- ^ @videoCurrentTime@
+    | ACWBRTVideoProvider
+      -- ^ @videoProvider@
+    | ACWBRTVideoURL
+      -- ^ @videoUrl@
+    | ACWBRTVideoTitle
+      -- ^ @videoTitle@
     | ACWBRTVideoDuration
       -- ^ @videoDuration@
     | ACWBRTVideoPercent
       -- ^ @videoPercent@
-    | ACWBRTVideoProvider
-      -- ^ @videoProvider@
-    | ACWBRTVideoStatus
-      -- ^ @videoStatus@
-    | ACWBRTVideoTitle
-      -- ^ @videoTitle@
-    | ACWBRTVideoURL
-      -- ^ @videoUrl@
     | ACWBRTVideoVisible
       -- ^ @videoVisible@
+    | ACWBRTVideoStatus
+      -- ^ @videoStatus@
+    | ACWBRTVideoCurrentTime
+      -- ^ @videoCurrentTime@
+    | ACWBRTScrollDepthThreshold
+      -- ^ @scrollDepthThreshold@
+    | ACWBRTScrollDepthUnits
+      -- ^ @scrollDepthUnits@
+    | ACWBRTScrollDepthDirection
+      -- ^ @scrollDepthDirection@
+    | ACWBRTElementVisibilityRatio
+      -- ^ @elementVisibilityRatio@
+    | ACWBRTElementVisibilityTime
+      -- ^ @elementVisibilityTime@
+    | ACWBRTElementVisibilityFirstTime
+      -- ^ @elementVisibilityFirstTime@
+    | ACWBRTElementVisibilityRecentTime
+      -- ^ @elementVisibilityRecentTime@
+    | ACWBRTRequestPath
+      -- ^ @requestPath@
+    | ACWBRTRequestMethod
+      -- ^ @requestMethod@
+    | ACWBRTClientName
+      -- ^ @clientName@
+    | ACWBRTQueryString
+      -- ^ @queryString@
+    | ACWBRTServerPageLocationURL
+      -- ^ @serverPageLocationUrl@
+    | ACWBRTServerPageLocationPath
+      -- ^ @serverPageLocationPath@
+    | ACWBRTServerPageLocationHostname
+      -- ^ @serverPageLocationHostname@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsContainersWorkspacesBuilt_in_variablesRevertType
 
 instance FromHttpApiData AccountsContainersWorkspacesBuilt_in_variablesRevertType where
     parseQueryParam = \case
-        "advertiserId" -> Right ACWBRTAdvertiserId
-        "advertisingTrackingEnabled" -> Right ACWBRTAdvertisingTrackingEnabled
-        "ampBrowserLanguage" -> Right ACWBRTAmpBrowserLanguage
-        "ampCanonicalHost" -> Right ACWBRTAmpCanonicalHost
-        "ampCanonicalPath" -> Right ACWBRTAmpCanonicalPath
-        "ampCanonicalUrl" -> Right ACWBRTAmpCanonicalURL
-        "ampClientId" -> Right ACWBRTAmpClientId
-        "ampClientMaxScrollX" -> Right ACWBRTAmpClientMaxScrollX
-        "ampClientMaxScrollY" -> Right ACWBRTAmpClientMaxScrollY
-        "ampClientScreenHeight" -> Right ACWBRTAmpClientScreenHeight
-        "ampClientScreenWidth" -> Right ACWBRTAmpClientScreenWidth
-        "ampClientScrollX" -> Right ACWBRTAmpClientScrollX
-        "ampClientScrollY" -> Right ACWBRTAmpClientScrollY
-        "ampClientTimestamp" -> Right ACWBRTAmpClientTimestamp
-        "ampClientTimezone" -> Right ACWBRTAmpClientTimezone
-        "ampGtmEvent" -> Right ACWBRTAmpGtmEvent
-        "ampPageDownloadTime" -> Right ACWBRTAmpPageDownloadTime
-        "ampPageLoadTime" -> Right ACWBRTAmpPageLoadTime
-        "ampPageViewId" -> Right ACWBRTAmpPageViewId
-        "ampReferrer" -> Right ACWBRTAmpReferrer
-        "ampTitle" -> Right ACWBRTAmpTitle
-        "ampTotalEngagedTime" -> Right ACWBRTAmpTotalEngagedTime
+        "builtInVariableTypeUnspecified" -> Right ACWBRTBuiltInVariableTypeUnspecified
+        "pageUrl" -> Right ACWBRTPageURL
+        "pageHostname" -> Right ACWBRTPageHostname
+        "pagePath" -> Right ACWBRTPagePath
+        "referrer" -> Right ACWBRTReferrer
+        "event" -> Right ACWBRTEvent
+        "clickElement" -> Right ACWBRTClickElement
+        "clickClasses" -> Right ACWBRTClickClasses
+        "clickId" -> Right ACWBRTClickId
+        "clickTarget" -> Right ACWBRTClickTarget
+        "clickUrl" -> Right ACWBRTClickURL
+        "clickText" -> Right ACWBRTClickText
+        "firstPartyServingUrl" -> Right ACWBRTFirstPartyServingURL
+        "formElement" -> Right ACWBRTFormElement
+        "formClasses" -> Right ACWBRTFormClasses
+        "formId" -> Right ACWBRTFormId
+        "formTarget" -> Right ACWBRTFormTarget
+        "formUrl" -> Right ACWBRTFormURL
+        "formText" -> Right ACWBRTFormText
+        "errorMessage" -> Right ACWBRTErrorMessage
+        "errorUrl" -> Right ACWBRTErrorURL
+        "errorLine" -> Right ACWBRTErrorLine
+        "newHistoryUrl" -> Right ACWBRTNewHistoryURL
+        "oldHistoryUrl" -> Right ACWBRTOldHistoryURL
+        "newHistoryFragment" -> Right ACWBRTNewHistoryFragment
+        "oldHistoryFragment" -> Right ACWBRTOldHistoryFragment
+        "newHistoryState" -> Right ACWBRTNewHistoryState
+        "oldHistoryState" -> Right ACWBRTOldHistoryState
+        "historySource" -> Right ACWBRTHistorySource
+        "containerVersion" -> Right ACWBRTContainerVersion
+        "debugMode" -> Right ACWBRTDebugMode
+        "randomNumber" -> Right ACWBRTRandomNumber
+        "containerId" -> Right ACWBRTContainerId
         "appId" -> Right ACWBRTAppId
         "appName" -> Right ACWBRTAppName
         "appVersionCode" -> Right ACWBRTAppVersionCode
         "appVersionName" -> Right ACWBRTAppVersionName
-        "builtInVariableTypeUnspecified" -> Right ACWBRTBuiltInVariableTypeUnspecified
-        "clickClasses" -> Right ACWBRTClickClasses
-        "clickElement" -> Right ACWBRTClickElement
-        "clickId" -> Right ACWBRTClickId
-        "clickTarget" -> Right ACWBRTClickTarget
-        "clickText" -> Right ACWBRTClickText
-        "clickUrl" -> Right ACWBRTClickURL
-        "containerId" -> Right ACWBRTContainerId
-        "containerVersion" -> Right ACWBRTContainerVersion
-        "debugMode" -> Right ACWBRTDebugMode
+        "language" -> Right ACWBRTLanguage
+        "osVersion" -> Right ACWBRTOSVersion
+        "platform" -> Right ACWBRTPlatform
+        "sdkVersion" -> Right ACWBRTSdkVersion
         "deviceName" -> Right ACWBRTDeviceName
-        "elementVisibilityFirstTime" -> Right ACWBRTElementVisibilityFirstTime
-        "elementVisibilityRatio" -> Right ACWBRTElementVisibilityRatio
-        "elementVisibilityRecentTime" -> Right ACWBRTElementVisibilityRecentTime
-        "elementVisibilityTime" -> Right ACWBRTElementVisibilityTime
+        "resolution" -> Right ACWBRTResolution
+        "advertiserId" -> Right ACWBRTAdvertiserId
+        "advertisingTrackingEnabled" -> Right ACWBRTAdvertisingTrackingEnabled
+        "htmlId" -> Right ACWBRTHTMLId
         "environmentName" -> Right ACWBRTEnvironmentName
-        "errorLine" -> Right ACWBRTErrorLine
-        "errorMessage" -> Right ACWBRTErrorMessage
-        "errorUrl" -> Right ACWBRTErrorURL
-        "event" -> Right ACWBRTEvent
+        "ampBrowserLanguage" -> Right ACWBRTAmpBrowserLanguage
+        "ampCanonicalPath" -> Right ACWBRTAmpCanonicalPath
+        "ampCanonicalUrl" -> Right ACWBRTAmpCanonicalURL
+        "ampCanonicalHost" -> Right ACWBRTAmpCanonicalHost
+        "ampReferrer" -> Right ACWBRTAmpReferrer
+        "ampTitle" -> Right ACWBRTAmpTitle
+        "ampClientId" -> Right ACWBRTAmpClientId
+        "ampClientTimezone" -> Right ACWBRTAmpClientTimezone
+        "ampClientTimestamp" -> Right ACWBRTAmpClientTimestamp
+        "ampClientScreenWidth" -> Right ACWBRTAmpClientScreenWidth
+        "ampClientScreenHeight" -> Right ACWBRTAmpClientScreenHeight
+        "ampClientScrollX" -> Right ACWBRTAmpClientScrollX
+        "ampClientScrollY" -> Right ACWBRTAmpClientScrollY
+        "ampClientMaxScrollX" -> Right ACWBRTAmpClientMaxScrollX
+        "ampClientMaxScrollY" -> Right ACWBRTAmpClientMaxScrollY
+        "ampTotalEngagedTime" -> Right ACWBRTAmpTotalEngagedTime
+        "ampPageViewId" -> Right ACWBRTAmpPageViewId
+        "ampPageLoadTime" -> Right ACWBRTAmpPageLoadTime
+        "ampPageDownloadTime" -> Right ACWBRTAmpPageDownloadTime
+        "ampGtmEvent" -> Right ACWBRTAmpGtmEvent
         "eventName" -> Right ACWBRTEventName
         "firebaseEventParameterCampaign" -> Right ACWBRTFirebaseEventParameterCampaign
         "firebaseEventParameterCampaignAclid" -> Right ACWBRTFirebaseEventParameterCampaignACLid
@@ -2120,89 +2390,99 @@ instance FromHttpApiData AccountsContainersWorkspacesBuilt_in_variablesRevertTyp
         "firebaseEventParameterProductId" -> Right ACWBRTFirebaseEventParameterProductId
         "firebaseEventParameterQuantity" -> Right ACWBRTFirebaseEventParameterQuantity
         "firebaseEventParameterValue" -> Right ACWBRTFirebaseEventParameterValue
-        "formClasses" -> Right ACWBRTFormClasses
-        "formElement" -> Right ACWBRTFormElement
-        "formId" -> Right ACWBRTFormId
-        "formTarget" -> Right ACWBRTFormTarget
-        "formText" -> Right ACWBRTFormText
-        "formUrl" -> Right ACWBRTFormURL
-        "historySource" -> Right ACWBRTHistorySource
-        "htmlId" -> Right ACWBRTHTMLId
-        "language" -> Right ACWBRTLanguage
-        "newHistoryFragment" -> Right ACWBRTNewHistoryFragment
-        "newHistoryState" -> Right ACWBRTNewHistoryState
-        "oldHistoryFragment" -> Right ACWBRTOldHistoryFragment
-        "oldHistoryState" -> Right ACWBRTOldHistoryState
-        "osVersion" -> Right ACWBRTOSVersion
-        "pageHostname" -> Right ACWBRTPageHostname
-        "pagePath" -> Right ACWBRTPagePath
-        "pageUrl" -> Right ACWBRTPageURL
-        "platform" -> Right ACWBRTPlatform
-        "randomNumber" -> Right ACWBRTRandomNumber
-        "referrer" -> Right ACWBRTReferrer
-        "resolution" -> Right ACWBRTResolution
-        "scrollDepthDirection" -> Right ACWBRTScrollDepthDirection
-        "scrollDepthThreshold" -> Right ACWBRTScrollDepthThreshold
-        "scrollDepthUnits" -> Right ACWBRTScrollDepthUnits
-        "sdkVersion" -> Right ACWBRTSdkVersion
-        "videoCurrentTime" -> Right ACWBRTVideoCurrentTime
+        "videoProvider" -> Right ACWBRTVideoProvider
+        "videoUrl" -> Right ACWBRTVideoURL
+        "videoTitle" -> Right ACWBRTVideoTitle
         "videoDuration" -> Right ACWBRTVideoDuration
         "videoPercent" -> Right ACWBRTVideoPercent
-        "videoProvider" -> Right ACWBRTVideoProvider
-        "videoStatus" -> Right ACWBRTVideoStatus
-        "videoTitle" -> Right ACWBRTVideoTitle
-        "videoUrl" -> Right ACWBRTVideoURL
         "videoVisible" -> Right ACWBRTVideoVisible
+        "videoStatus" -> Right ACWBRTVideoStatus
+        "videoCurrentTime" -> Right ACWBRTVideoCurrentTime
+        "scrollDepthThreshold" -> Right ACWBRTScrollDepthThreshold
+        "scrollDepthUnits" -> Right ACWBRTScrollDepthUnits
+        "scrollDepthDirection" -> Right ACWBRTScrollDepthDirection
+        "elementVisibilityRatio" -> Right ACWBRTElementVisibilityRatio
+        "elementVisibilityTime" -> Right ACWBRTElementVisibilityTime
+        "elementVisibilityFirstTime" -> Right ACWBRTElementVisibilityFirstTime
+        "elementVisibilityRecentTime" -> Right ACWBRTElementVisibilityRecentTime
+        "requestPath" -> Right ACWBRTRequestPath
+        "requestMethod" -> Right ACWBRTRequestMethod
+        "clientName" -> Right ACWBRTClientName
+        "queryString" -> Right ACWBRTQueryString
+        "serverPageLocationUrl" -> Right ACWBRTServerPageLocationURL
+        "serverPageLocationPath" -> Right ACWBRTServerPageLocationPath
+        "serverPageLocationHostname" -> Right ACWBRTServerPageLocationHostname
         x -> Left ("Unable to parse AccountsContainersWorkspacesBuilt_in_variablesRevertType from: " <> x)
 
 instance ToHttpApiData AccountsContainersWorkspacesBuilt_in_variablesRevertType where
     toQueryParam = \case
-        ACWBRTAdvertiserId -> "advertiserId"
-        ACWBRTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
-        ACWBRTAmpBrowserLanguage -> "ampBrowserLanguage"
-        ACWBRTAmpCanonicalHost -> "ampCanonicalHost"
-        ACWBRTAmpCanonicalPath -> "ampCanonicalPath"
-        ACWBRTAmpCanonicalURL -> "ampCanonicalUrl"
-        ACWBRTAmpClientId -> "ampClientId"
-        ACWBRTAmpClientMaxScrollX -> "ampClientMaxScrollX"
-        ACWBRTAmpClientMaxScrollY -> "ampClientMaxScrollY"
-        ACWBRTAmpClientScreenHeight -> "ampClientScreenHeight"
-        ACWBRTAmpClientScreenWidth -> "ampClientScreenWidth"
-        ACWBRTAmpClientScrollX -> "ampClientScrollX"
-        ACWBRTAmpClientScrollY -> "ampClientScrollY"
-        ACWBRTAmpClientTimestamp -> "ampClientTimestamp"
-        ACWBRTAmpClientTimezone -> "ampClientTimezone"
-        ACWBRTAmpGtmEvent -> "ampGtmEvent"
-        ACWBRTAmpPageDownloadTime -> "ampPageDownloadTime"
-        ACWBRTAmpPageLoadTime -> "ampPageLoadTime"
-        ACWBRTAmpPageViewId -> "ampPageViewId"
-        ACWBRTAmpReferrer -> "ampReferrer"
-        ACWBRTAmpTitle -> "ampTitle"
-        ACWBRTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        ACWBRTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
+        ACWBRTPageURL -> "pageUrl"
+        ACWBRTPageHostname -> "pageHostname"
+        ACWBRTPagePath -> "pagePath"
+        ACWBRTReferrer -> "referrer"
+        ACWBRTEvent -> "event"
+        ACWBRTClickElement -> "clickElement"
+        ACWBRTClickClasses -> "clickClasses"
+        ACWBRTClickId -> "clickId"
+        ACWBRTClickTarget -> "clickTarget"
+        ACWBRTClickURL -> "clickUrl"
+        ACWBRTClickText -> "clickText"
+        ACWBRTFirstPartyServingURL -> "firstPartyServingUrl"
+        ACWBRTFormElement -> "formElement"
+        ACWBRTFormClasses -> "formClasses"
+        ACWBRTFormId -> "formId"
+        ACWBRTFormTarget -> "formTarget"
+        ACWBRTFormURL -> "formUrl"
+        ACWBRTFormText -> "formText"
+        ACWBRTErrorMessage -> "errorMessage"
+        ACWBRTErrorURL -> "errorUrl"
+        ACWBRTErrorLine -> "errorLine"
+        ACWBRTNewHistoryURL -> "newHistoryUrl"
+        ACWBRTOldHistoryURL -> "oldHistoryUrl"
+        ACWBRTNewHistoryFragment -> "newHistoryFragment"
+        ACWBRTOldHistoryFragment -> "oldHistoryFragment"
+        ACWBRTNewHistoryState -> "newHistoryState"
+        ACWBRTOldHistoryState -> "oldHistoryState"
+        ACWBRTHistorySource -> "historySource"
+        ACWBRTContainerVersion -> "containerVersion"
+        ACWBRTDebugMode -> "debugMode"
+        ACWBRTRandomNumber -> "randomNumber"
+        ACWBRTContainerId -> "containerId"
         ACWBRTAppId -> "appId"
         ACWBRTAppName -> "appName"
         ACWBRTAppVersionCode -> "appVersionCode"
         ACWBRTAppVersionName -> "appVersionName"
-        ACWBRTBuiltInVariableTypeUnspecified -> "builtInVariableTypeUnspecified"
-        ACWBRTClickClasses -> "clickClasses"
-        ACWBRTClickElement -> "clickElement"
-        ACWBRTClickId -> "clickId"
-        ACWBRTClickTarget -> "clickTarget"
-        ACWBRTClickText -> "clickText"
-        ACWBRTClickURL -> "clickUrl"
-        ACWBRTContainerId -> "containerId"
-        ACWBRTContainerVersion -> "containerVersion"
-        ACWBRTDebugMode -> "debugMode"
+        ACWBRTLanguage -> "language"
+        ACWBRTOSVersion -> "osVersion"
+        ACWBRTPlatform -> "platform"
+        ACWBRTSdkVersion -> "sdkVersion"
         ACWBRTDeviceName -> "deviceName"
-        ACWBRTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
-        ACWBRTElementVisibilityRatio -> "elementVisibilityRatio"
-        ACWBRTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
-        ACWBRTElementVisibilityTime -> "elementVisibilityTime"
+        ACWBRTResolution -> "resolution"
+        ACWBRTAdvertiserId -> "advertiserId"
+        ACWBRTAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
+        ACWBRTHTMLId -> "htmlId"
         ACWBRTEnvironmentName -> "environmentName"
-        ACWBRTErrorLine -> "errorLine"
-        ACWBRTErrorMessage -> "errorMessage"
-        ACWBRTErrorURL -> "errorUrl"
-        ACWBRTEvent -> "event"
+        ACWBRTAmpBrowserLanguage -> "ampBrowserLanguage"
+        ACWBRTAmpCanonicalPath -> "ampCanonicalPath"
+        ACWBRTAmpCanonicalURL -> "ampCanonicalUrl"
+        ACWBRTAmpCanonicalHost -> "ampCanonicalHost"
+        ACWBRTAmpReferrer -> "ampReferrer"
+        ACWBRTAmpTitle -> "ampTitle"
+        ACWBRTAmpClientId -> "ampClientId"
+        ACWBRTAmpClientTimezone -> "ampClientTimezone"
+        ACWBRTAmpClientTimestamp -> "ampClientTimestamp"
+        ACWBRTAmpClientScreenWidth -> "ampClientScreenWidth"
+        ACWBRTAmpClientScreenHeight -> "ampClientScreenHeight"
+        ACWBRTAmpClientScrollX -> "ampClientScrollX"
+        ACWBRTAmpClientScrollY -> "ampClientScrollY"
+        ACWBRTAmpClientMaxScrollX -> "ampClientMaxScrollX"
+        ACWBRTAmpClientMaxScrollY -> "ampClientMaxScrollY"
+        ACWBRTAmpTotalEngagedTime -> "ampTotalEngagedTime"
+        ACWBRTAmpPageViewId -> "ampPageViewId"
+        ACWBRTAmpPageLoadTime -> "ampPageLoadTime"
+        ACWBRTAmpPageDownloadTime -> "ampPageDownloadTime"
+        ACWBRTAmpGtmEvent -> "ampGtmEvent"
         ACWBRTEventName -> "eventName"
         ACWBRTFirebaseEventParameterCampaign -> "firebaseEventParameterCampaign"
         ACWBRTFirebaseEventParameterCampaignACLid -> "firebaseEventParameterCampaignAclid"
@@ -2227,39 +2507,28 @@ instance ToHttpApiData AccountsContainersWorkspacesBuilt_in_variablesRevertType 
         ACWBRTFirebaseEventParameterProductId -> "firebaseEventParameterProductId"
         ACWBRTFirebaseEventParameterQuantity -> "firebaseEventParameterQuantity"
         ACWBRTFirebaseEventParameterValue -> "firebaseEventParameterValue"
-        ACWBRTFormClasses -> "formClasses"
-        ACWBRTFormElement -> "formElement"
-        ACWBRTFormId -> "formId"
-        ACWBRTFormTarget -> "formTarget"
-        ACWBRTFormText -> "formText"
-        ACWBRTFormURL -> "formUrl"
-        ACWBRTHistorySource -> "historySource"
-        ACWBRTHTMLId -> "htmlId"
-        ACWBRTLanguage -> "language"
-        ACWBRTNewHistoryFragment -> "newHistoryFragment"
-        ACWBRTNewHistoryState -> "newHistoryState"
-        ACWBRTOldHistoryFragment -> "oldHistoryFragment"
-        ACWBRTOldHistoryState -> "oldHistoryState"
-        ACWBRTOSVersion -> "osVersion"
-        ACWBRTPageHostname -> "pageHostname"
-        ACWBRTPagePath -> "pagePath"
-        ACWBRTPageURL -> "pageUrl"
-        ACWBRTPlatform -> "platform"
-        ACWBRTRandomNumber -> "randomNumber"
-        ACWBRTReferrer -> "referrer"
-        ACWBRTResolution -> "resolution"
-        ACWBRTScrollDepthDirection -> "scrollDepthDirection"
-        ACWBRTScrollDepthThreshold -> "scrollDepthThreshold"
-        ACWBRTScrollDepthUnits -> "scrollDepthUnits"
-        ACWBRTSdkVersion -> "sdkVersion"
-        ACWBRTVideoCurrentTime -> "videoCurrentTime"
+        ACWBRTVideoProvider -> "videoProvider"
+        ACWBRTVideoURL -> "videoUrl"
+        ACWBRTVideoTitle -> "videoTitle"
         ACWBRTVideoDuration -> "videoDuration"
         ACWBRTVideoPercent -> "videoPercent"
-        ACWBRTVideoProvider -> "videoProvider"
-        ACWBRTVideoStatus -> "videoStatus"
-        ACWBRTVideoTitle -> "videoTitle"
-        ACWBRTVideoURL -> "videoUrl"
         ACWBRTVideoVisible -> "videoVisible"
+        ACWBRTVideoStatus -> "videoStatus"
+        ACWBRTVideoCurrentTime -> "videoCurrentTime"
+        ACWBRTScrollDepthThreshold -> "scrollDepthThreshold"
+        ACWBRTScrollDepthUnits -> "scrollDepthUnits"
+        ACWBRTScrollDepthDirection -> "scrollDepthDirection"
+        ACWBRTElementVisibilityRatio -> "elementVisibilityRatio"
+        ACWBRTElementVisibilityTime -> "elementVisibilityTime"
+        ACWBRTElementVisibilityFirstTime -> "elementVisibilityFirstTime"
+        ACWBRTElementVisibilityRecentTime -> "elementVisibilityRecentTime"
+        ACWBRTRequestPath -> "requestPath"
+        ACWBRTRequestMethod -> "requestMethod"
+        ACWBRTClientName -> "clientName"
+        ACWBRTQueryString -> "queryString"
+        ACWBRTServerPageLocationURL -> "serverPageLocationUrl"
+        ACWBRTServerPageLocationPath -> "serverPageLocationPath"
+        ACWBRTServerPageLocationHostname -> "serverPageLocationHostname"
 
 instance FromJSON AccountsContainersWorkspacesBuilt_in_variablesRevertType where
     parseJSON = parseJSONText "AccountsContainersWorkspacesBuilt_in_variablesRevertType"

@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reads and publishes results from Firebase Test Lab.
+-- API to publish and access results from developer tools.
 --
 -- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Tool Results API Reference>
 module Network.Google.ToolResults
@@ -21,642 +21,188 @@ module Network.Google.ToolResults
     -- * Service Configuration
       toolResultsService
 
-    -- * OAuth Scopes
-    , cloudPlatformScope
-
     -- * API Declaration
     , ToolResultsAPI
 
-    -- * Resources
-
-    -- ** toolresults.projects.getSettings
-    , module Network.Google.Resource.ToolResults.Projects.GetSettings
-
-    -- ** toolresults.projects.histories.create
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Create
-
-    -- ** toolresults.projects.histories.executions.clusters.get
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.Get
-
-    -- ** toolresults.projects.histories.executions.clusters.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.List
-
-    -- ** toolresults.projects.histories.executions.create
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Create
-
-    -- ** toolresults.projects.histories.executions.get
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Get
-
-    -- ** toolresults.projects.histories.executions.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.List
-
-    -- ** toolresults.projects.histories.executions.patch
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Patch
-
-    -- ** toolresults.projects.histories.executions.steps.create
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Create
-
-    -- ** toolresults.projects.histories.executions.steps.get
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Get
-
-    -- ** toolresults.projects.histories.executions.steps.getPerfMetricsSummary
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.GetPerfMetricsSummary
-
-    -- ** toolresults.projects.histories.executions.steps.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.List
-
-    -- ** toolresults.projects.histories.executions.steps.patch
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Patch
-
-    -- ** toolresults.projects.histories.executions.steps.perfMetricsSummary.create
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfMetricsSummary.Create
-
-    -- ** toolresults.projects.histories.executions.steps.perfSampleSeries.create
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Create
-
-    -- ** toolresults.projects.histories.executions.steps.perfSampleSeries.get
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Get
-
-    -- ** toolresults.projects.histories.executions.steps.perfSampleSeries.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.List
-
-    -- ** toolresults.projects.histories.executions.steps.perfSampleSeries.samples.batchCreate
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
-
-    -- ** toolresults.projects.histories.executions.steps.perfSampleSeries.samples.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
-
-    -- ** toolresults.projects.histories.executions.steps.publishXunitXmlFiles
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
-
-    -- ** toolresults.projects.histories.executions.steps.testCases.get
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
-
-    -- ** toolresults.projects.histories.executions.steps.testCases.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
-
-    -- ** toolresults.projects.histories.executions.steps.thumbnails.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
-
-    -- ** toolresults.projects.histories.get
-    , module Network.Google.Resource.ToolResults.Projects.Histories.Get
-
-    -- ** toolresults.projects.histories.list
-    , module Network.Google.Resource.ToolResults.Projects.Histories.List
-
-    -- ** toolresults.projects.initializeSettings
-    , module Network.Google.Resource.ToolResults.Projects.InitializeSettings
-
     -- * Types
 
-    -- ** ListStepThumbnailsResponse
-    , ListStepThumbnailsResponse
-    , listStepThumbnailsResponse
-    , lstrNextPageToken
-    , lstrThumbnails
+    -- ** LauncherActivityNotFound
+    , LauncherActivityNotFound
+    , launcherActivityNotFound
 
-    -- ** Screen
-    , Screen
-    , screen
-    , sFileReference
-    , sLocale
-    , sModel
-    , sVersion
+    -- ** NATiveCrash
+    , NATiveCrash
+    , nATiveCrash
+    , natcStackTrace
 
-    -- ** TestIssueSeverity
-    , TestIssueSeverity (..)
+    -- ** OverlAppingUIElements
+    , OverlAppingUIElements
+    , overlAppingUIElements
+    , oauieResourceName
+    , oauieScreenId
 
-    -- ** Thumbnail
-    , Thumbnail
-    , thumbnail
-    , tData
-    , tHeightPx
-    , tWidthPx
-    , tContentType
+    -- ** RoboScriptExecution
+    , RoboScriptExecution
+    , roboScriptExecution
+    , rseTotalActions
+    , rseSuccessfulActions
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
+    -- ** ANR
+    , ANR
+    , aNR
+    , aStackTrace
 
-    -- ** ToolOutputReference
-    , ToolOutputReference
-    , toolOutputReference
-    , torCreationTime
-    , torTestCase
-    , torOutput
+    -- ** InAppPurchasesFound
+    , InAppPurchasesFound
+    , inAppPurchasesFound
+    , iapfInAppPurchasesFlowsExplored
+    , iapfInAppPurchasesFlowsStarted
 
-    -- ** PerfSampleSeries
-    , PerfSampleSeries
-    , perfSampleSeries
-    , pssExecutionId
-    , pssStepId
-    , pssHistoryId
-    , pssProjectId
-    , pssSampleSeriesId
-    , pssBasicPerfSampleSeries
+    -- ** EncounteredNonAndroidUiWidgetScreen
+    , EncounteredNonAndroidUiWidgetScreen
+    , encounteredNonAndroidUiWidgetScreen
+    , enauwsDistinctScreens
+    , enauwsScreenIds
 
-    -- ** AndroidAppInfo
-    , AndroidAppInfo
-    , androidAppInfo
-    , aaiVersionCode
-    , aaiVersionName
-    , aaiPackageName
-    , aaiName
+    -- ** StartActivityNotFound
+    , StartActivityNotFound
+    , startActivityNotFound
+    , sanfURI
+    , sanfAction
 
-    -- ** PerfSample
-    , PerfSample
-    , perfSample
-    , psValue
-    , psSampleTime
+    -- ** AvailableDeepLinks
+    , AvailableDeepLinks
+    , availableDeepLinks
 
-    -- ** TestIssue
-    , TestIssue
-    , testIssue
-    , tiCategory
-    , tiSeverity
-    , tiStackTrace
-    , tiWarning
-    , tiType
-    , tiErrorMessage
+    -- ** IosAppCrashed
+    , IosAppCrashed
+    , iosAppCrashed
+    , iacStackTrace
 
-    -- ** MemoryInfo
-    , MemoryInfo
-    , memoryInfo
-    , miMemoryCapInKibibyte
-    , miMemoryTotalInKibibyte
+    -- ** UpgradeInsight
+    , UpgradeInsight
+    , upgradeInsight
+    , uiPackageName
+    , uiUpgradeToVersion
 
-    -- ** Image
-    , Image
-    , image
-    , iThumbnail
-    , iStepId
-    , iSourceImage
-    , iError
+    -- ** PerformedMonkeyActions
+    , PerformedMonkeyActions
+    , performedMonkeyActions
+    , pmaTotalActions
 
-    -- ** InconclusiveDetail
-    , InconclusiveDetail
-    , inconclusiveDetail
-    , idInfrastructureFailure
-    , idAbortedByUser
+    -- ** NonSdkAPIUsageViolationReport
+    , NonSdkAPIUsageViolationReport
+    , nonSdkAPIUsageViolationReport
+    , nsauvrMinSdkVersion
+    , nsauvrTargetSdkVersion
+    , nsauvrUniqueAPIs
+    , nsauvrExampleAPIs
 
-    -- ** TestIssueCategory
-    , TestIssueCategory (..)
-
-    -- ** TestCase
-    , TestCase
-    , testCase
-    , tcStatus
-    , tcStartTime
-    , tcTestCaseReference
-    , tcToolOutputs
-    , tcStackTraces
-    , tcTestCaseId
-    , tcEndTime
-    , tcSkippedMessage
-
-    -- ** GraphicsStatsBucket
-    , GraphicsStatsBucket
-    , graphicsStatsBucket
-    , gsbRenderMillis
-    , gsbFrameCount
-
-    -- ** History
-    , History
-    , history
-    , hName
-    , hHistoryId
-    , hDisplayName
-
-    -- ** BatchCreatePerfSamplesRequest
-    , BatchCreatePerfSamplesRequest
-    , batchCreatePerfSamplesRequest
-    , bcpsrPerfSamples
-
-    -- ** ListPerfSampleSeriesResponse
-    , ListPerfSampleSeriesResponse
-    , listPerfSampleSeriesResponse
-    , lpssrPerfSampleSeries
-
-    -- ** ListPerfSamplesResponse
-    , ListPerfSamplesResponse
-    , listPerfSamplesResponse
-    , lpsrPerfSamples
-    , lpsrNextPageToken
-
-    -- ** AndroidTest
-    , AndroidTest
-    , androidTest
-    , atAndroidAppInfo
-    , atTestTimeout
-    , atAndroidRoboTest
-    , atAndroidInstrumentationTest
-
-    -- ** AndroidRoboTest
-    , AndroidRoboTest
-    , androidRoboTest
-    , artBootstrapRunnerClass
-    , artAppInitialActivity
-    , artMaxSteps
-    , artBootstrapPackageId
-    , artMaxDepth
-
-    -- ** FileReference
-    , FileReference
-    , fileReference
-    , frFileURI
-
-    -- ** IndividualOutcomeOutcomeSummary
-    , IndividualOutcomeOutcomeSummary (..)
-
-    -- ** CPUInfo
-    , CPUInfo
-    , cpuInfo
-    , ciNumberOfCores
-    , ciCPUProcessor
-    , ciCPUSpeedInGhz
-
-    -- ** ListExecutionsResponse
-    , ListExecutionsResponse
-    , listExecutionsResponse
-    , lerNextPageToken
-    , lerExecutions
-
-    -- ** ListStepsResponse
-    , ListStepsResponse
-    , listStepsResponse
-    , lsrNextPageToken
-    , lsrSteps
-
-    -- ** ProjectSettings
-    , ProjectSettings
-    , projectSettings
-    , psName
-    , psDefaultBucket
-
-    -- ** ToolExecutionStep
-    , ToolExecutionStep
-    , toolExecutionStep
-    , tesToolExecution
-
-    -- ** BasicPerfSampleSeriesPerfMetricType
-    , BasicPerfSampleSeriesPerfMetricType (..)
-
-    -- ** StepLabelsEntry
-    , StepLabelsEntry
-    , stepLabelsEntry
-    , sleValue
-    , sleKey
-
-    -- ** OutcomeSummary
-    , OutcomeSummary (..)
-
-    -- ** TestExecutionStep
-    , TestExecutionStep
-    , testExecutionStep
-    , tTestIssues
-    , tToolExecution
-    , tTestSuiteOverviews
-    , tTestTiming
-
-    -- ** TestCaseReference
-    , TestCaseReference
-    , testCaseReference
-    , tcrTestSuiteName
-    , tcrName
-    , tcrClassName
-
-    -- ** BasicPerfSampleSeriesPerfUnit
-    , BasicPerfSampleSeriesPerfUnit (..)
-
-    -- ** FailureDetail
-    , FailureDetail
-    , failureDetail
-    , fdCrashed
-    , fdNotInstalled
-    , fdTimedOut
-    , fdOtherNATiveCrash
-    , fdUnableToCrawl
-
-    -- ** ProjectsHistoriesExecutionsStepsPerfSampleSeriesListFilter
-    , ProjectsHistoriesExecutionsStepsPerfSampleSeriesListFilter (..)
-
-    -- ** PerfEnvironment
-    , PerfEnvironment
-    , perfEnvironment
-    , peMemoryInfo
-    , peCPUInfo
-
-    -- ** ListScreenshotClustersResponse
-    , ListScreenshotClustersResponse
-    , listScreenshotClustersResponse
-    , lscrClusters
-
-    -- ** AppStartTime
-    , AppStartTime
-    , appStartTime
-    , astInitialDisplayTime
-    , astFullyDrawnTime
-
-    -- ** GraphicsStats
-    , GraphicsStats
-    , graphicsStats
-    , gsSlowDrawCount
-    , gsTotalFrames
-    , gsSlowBitmapUploadCount
-    , gsMissedVsyncCount
-    , gsP95Millis
-    , gsBuckets
-    , gsP90Millis
-    , gsP50Millis
-    , gsHighInputLatencyCount
-    , gsP99Millis
-    , gsSlowUiThreadCount
-    , gsJankyFrames
+    -- ** PendingGoogleUpdateInsight
+    , PendingGoogleUpdateInsight
+    , pendingGoogleUpdateInsight
+    , pguiNameOfGoogleLibrary
 
     -- ** StackTrace
     , StackTrace
     , stackTrace
     , stException
 
-    -- ** BatchCreatePerfSamplesResponse
-    , BatchCreatePerfSamplesResponse
-    , batchCreatePerfSamplesResponse
-    , bPerfSamples
+    -- ** NonSdkAPIUsageViolation
+    , NonSdkAPIUsageViolation
+    , nonSdkAPIUsageViolation
+    , nsauvAPISignatures
+    , nsauvUniqueAPIs
 
-    -- ** TestIssueType
-    , TestIssueType (..)
+    -- ** UIElementTooDeep
+    , UIElementTooDeep
+    , uIElementTooDeep
+    , uietdScreenStateId
+    , uietdDepth
+    , uietdScreenId
 
-    -- ** Execution
-    , Execution
-    , execution
-    , eCreationTime
-    , eExecutionId
-    , eState
-    , eCompletionTime
-    , eTestExecutionMatrixId
-    , eOutcome
-    , eSpecification
+    -- ** PerformedGoogleLogin
+    , PerformedGoogleLogin
+    , performedGoogleLogin
 
-    -- ** Outcome
-    , Outcome
-    , outcome
-    , oSummary
-    , oInconclusiveDetail
-    , oFailureDetail
-    , oSuccessDetail
-    , oSkippedDetail
+    -- ** Xgafv
+    , Xgafv (..)
 
-    -- ** Step
-    , Step
-    , step
-    , sCreationTime
-    , sRunDuration
-    , sState
-    , sStepId
-    , sToolExecutionStep
-    , sDimensionValue
-    , sHasImages
-    , sTestExecutionStep
-    , sCompletionTime
-    , sName
-    , sOutcome
-    , sLabels
-    , sMultiStep
-    , sDeviceUsageDuration
-    , sDescription
+    -- ** NonSdkAPIInsight
+    , NonSdkAPIInsight
+    , nonSdkAPIInsight
+    , nsaiUpgradeInsight
+    , nsaiPendingGoogleUpdateInsight
+    , nsaiExampleTraceMessages
+    , nsaiMatcherId
 
-    -- ** SuccessDetail
-    , SuccessDetail
-    , successDetail
-    , sdOtherNATiveCrash
+    -- ** UsedRoboIgnoreDirective
+    , UsedRoboIgnoreDirective
+    , usedRoboIgnoreDirective
+    , uridResourceName
 
-    -- ** ToolExecution
-    , ToolExecution
-    , toolExecution
-    , teCommandLineArguments
-    , teToolOutputs
-    , teToolLogs
-    , teExitCode
+    -- ** UsedRoboDirective
+    , UsedRoboDirective
+    , usedRoboDirective
+    , urdResourceName
 
-    -- ** PublishXUnitXMLFilesRequest
-    , PublishXUnitXMLFilesRequest
-    , publishXUnitXMLFilesRequest
-    , pxuxfrXUnitXMLFiles
+    -- ** UnspecifiedWarning
+    , UnspecifiedWarning
+    , unspecifiedWarning
 
-    -- ** PerfMetricsSummary
-    , PerfMetricsSummary
-    , perfMetricsSummary
-    , pmsExecutionId
-    , pmsStepId
-    , pmsPerfMetrics
-    , pmsPerfEnvironment
-    , pmsGraphicsStats
-    , pmsAppStartTime
-    , pmsHistoryId
-    , pmsProjectId
+    -- ** UnusedRoboDirective
+    , UnusedRoboDirective
+    , unusedRoboDirective
+    , uResourceName
 
-    -- ** StepState
-    , StepState (..)
+    -- ** CrashDialogError
+    , CrashDialogError
+    , crashDialogError
+    , cdeCrashPackage
 
-    -- ** ListHistoriesResponse
-    , ListHistoriesResponse
-    , listHistoriesResponse
-    , lhrNextPageToken
-    , lhrHistories
+    -- ** NonSdkAPI
+    , NonSdkAPI
+    , nonSdkAPI
+    , nsaList
+    , nsaInsights
+    , nsaAPISignature
+    , nsaExampleStackTraces
+    , nsaInvocationCount
 
-    -- ** ToolExitCode
-    , ToolExitCode
-    , toolExitCode
-    , tecNumber
+    -- ** InsufficientCoverage
+    , InsufficientCoverage
+    , insufficientCoverage
 
-    -- ** ExecutionState
-    , ExecutionState (..)
+    -- ** BlankScreen
+    , BlankScreen
+    , blankScreen
+    , bsScreenId
 
-    -- ** AndroidInstrumentationTest
-    , AndroidInstrumentationTest
-    , androidInstrumentationTest
-    , aitTestTargets
-    , aitUseOrchestrator
-    , aitTestRunnerClass
-    , aitTestPackageId
+    -- ** FailedToInstall
+    , FailedToInstall
+    , failedToInstall
 
-    -- ** StepDimensionValueEntry
-    , StepDimensionValueEntry
-    , stepDimensionValueEntry
-    , sdveValue
-    , sdveKey
+    -- ** FatalException
+    , FatalException
+    , fatalException
+    , feStackTrace
 
-    -- ** Specification
-    , Specification
-    , specification
-    , sAndroidTest
+    -- ** NonSdkAPIList
+    , NonSdkAPIList (..)
 
-    -- ** BasicPerfSampleSeriesSampleSeriesLabel
-    , BasicPerfSampleSeriesSampleSeriesLabel (..)
-
-    -- ** ListTestCasesResponse
-    , ListTestCasesResponse
-    , listTestCasesResponse
-    , ltcrNextPageToken
-    , ltcrTestCases
-
-    -- ** IndividualOutcome
-    , IndividualOutcome
-    , individualOutcome
-    , ioRunDuration
-    , ioStepId
-    , ioMultistepNumber
-    , ioOutcomeSummary
-
-    -- ** TestSuiteOverview
-    , TestSuiteOverview
-    , testSuiteOverview
-    , tsoSkippedCount
-    , tsoErrorCount
-    , tsoXMLSource
-    , tsoName
-    , tsoFailureCount
-    , tsoTotalCount
-
-    -- ** MultiStep
-    , MultiStep
-    , multiStep
-    , msMultistepNumber
-    , msPrimaryStepId
-    , msPrimaryStep
-
-    -- ** Duration
-    , Duration
-    , duration
-    , dNanos
-    , dSeconds
-
-    -- ** Timestamp
-    , Timestamp
-    , timestamp
-    , tNanos
-    , tSeconds
-
-    -- ** Any
-    , Any
-    , any
-    , aValue
-    , aTypeURL
-
-    -- ** TestTiming
-    , TestTiming
-    , testTiming
-    , ttTestProcessDuration
-
-    -- ** ScreenshotCluster
-    , ScreenshotCluster
-    , screenshotCluster
-    , scClusterId
-    , scScreens
-    , scActivity
-    , scKeyScreen
-
-    -- ** BasicPerfSampleSeries
-    , BasicPerfSampleSeries
-    , basicPerfSampleSeries
-    , bpssPerfUnit
-    , bpssPerfMetricType
-    , bpssSampleSeriesLabel
-
-    -- ** TestCaseStatus
-    , TestCaseStatus (..)
-
-    -- ** PrimaryStepRollUp
-    , PrimaryStepRollUp (..)
-
-    -- ** PrimaryStep
-    , PrimaryStep
-    , primaryStep
-    , psRollUp
-    , psIndividualOutcome
-
-    -- ** PerfMetricsSummaryPerfMetricsItem
-    , PerfMetricsSummaryPerfMetricsItem (..)
-
-    -- ** SkippedDetail
-    , SkippedDetail
-    , skippedDetail
-    , sdIncompatibleArchitecture
-    , sdIncompatibleAppVersion
-    , sdIncompatibleDevice
+    -- ** EncounteredLoginScreen
+    , EncounteredLoginScreen
+    , encounteredLoginScreen
+    , elsDistinctScreens
+    , elsScreenIds
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Resource.ToolResults.Projects.GetSettings
-import           Network.Google.Resource.ToolResults.Projects.Histories.Create
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.Get
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Clusters.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Create
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Get
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Patch
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Create
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Get
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.GetPerfMetricsSummary
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Patch
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfMetricsSummary.Create
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Create
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Get
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.BatchCreate
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PerfSampleSeries.Samples.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.PublishXUnitXMLFiles
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.Get
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.TestCases.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Executions.Steps.Thumbnails.List
-import           Network.Google.Resource.ToolResults.Projects.Histories.Get
-import           Network.Google.Resource.ToolResults.Projects.Histories.List
-import           Network.Google.Resource.ToolResults.Projects.InitializeSettings
-import           Network.Google.ToolResults.Types
+import Network.Google.Prelude
+import Network.Google.ToolResults.Types
 
 {- $resources
 TODO
 -}
 
 -- | Represents the entirety of the methods and resources available for the Cloud Tool Results API service.
-type ToolResultsAPI =
-     ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesListResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsPerfSampleSeriesSamplesBatchCreateResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsPerfSampleSeriesListResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsPerfSampleSeriesGetResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsThumbnailsListResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsPerfMetricsSummaryCreateResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsTestCasesListResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsTestCasesGetResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsGetPerfMetricsSummaryResource
-       :<|> ProjectsHistoriesExecutionsStepsListResource
-       :<|> ProjectsHistoriesExecutionsStepsPatchResource
-       :<|> ProjectsHistoriesExecutionsStepsGetResource
-       :<|> ProjectsHistoriesExecutionsStepsCreateResource
-       :<|>
-       ProjectsHistoriesExecutionsStepsPublishXUnitXMLFilesResource
-       :<|> ProjectsHistoriesExecutionsClustersListResource
-       :<|> ProjectsHistoriesExecutionsClustersGetResource
-       :<|> ProjectsHistoriesExecutionsListResource
-       :<|> ProjectsHistoriesExecutionsPatchResource
-       :<|> ProjectsHistoriesExecutionsGetResource
-       :<|> ProjectsHistoriesExecutionsCreateResource
-       :<|> ProjectsHistoriesListResource
-       :<|> ProjectsHistoriesGetResource
-       :<|> ProjectsHistoriesCreateResource
-       :<|> ProjectsInitializeSettingsResource
-       :<|> ProjectsGetSettingsResource
+type ToolResultsAPI = ()

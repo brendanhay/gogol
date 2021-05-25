@@ -17,17 +17,17 @@
 --
 module Network.Google.AnalyticsReporting.Types.Product where
 
-import           Network.Google.AnalyticsReporting.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.AnalyticsReporting.Types.Sum
+import Network.Google.Prelude
 
 -- | MetricFilter specifies the filter on a metric.
 --
 -- /See:/ 'metricFilter' smart constructor.
 data MetricFilter =
   MetricFilter'
-    { _mfNot             :: !(Maybe Bool)
-    , _mfOperator        :: !(Maybe MetricFilterOperator)
-    , _mfMetricName      :: !(Maybe Text)
+    { _mfNot :: !(Maybe Bool)
+    , _mfOperator :: !(Maybe MetricFilterOperator)
+    , _mfMetricName :: !(Maybe Text)
     , _mfComparisonValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -106,10 +106,10 @@ instance ToJSON MetricFilter where
 data EventData =
   EventData'
     { _edEventCategory :: !(Maybe Text)
-    , _edEventCount    :: !(Maybe (Textual Int64))
-    , _edEventValue    :: !(Maybe (Textual Int64))
-    , _edEventLabel    :: !(Maybe Text)
-    , _edEventAction   :: !(Maybe Text)
+    , _edEventCount :: !(Maybe (Textual Int64))
+    , _edEventValue :: !(Maybe (Textual Int64))
+    , _edEventLabel :: !(Maybe Text)
+    , _edEventAction :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -193,7 +193,7 @@ instance ToJSON EventData where
 -- /See:/ 'reportRow' smart constructor.
 data ReportRow =
   ReportRow'
-    { _rrMetrics    :: !(Maybe [DateRangeValues])
+    { _rrMetrics :: !(Maybe [DateRangeValues])
     , _rrDimensions :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -247,8 +247,8 @@ instance ToJSON ReportRow where
 data PivotHeaderEntry =
   PivotHeaderEntry'
     { _pheDimensionValues :: !(Maybe [Text])
-    , _pheDimensionNames  :: !(Maybe [Text])
-    , _pheMetric          :: !(Maybe MetricHeaderEntry)
+    , _pheDimensionNames :: !(Maybe [Text])
+    , _pheMetric :: !(Maybe MetricHeaderEntry)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -352,23 +352,23 @@ instance ToJSON PivotValueRegion where
 -- /See:/ 'reportRequest' smart constructor.
 data ReportRequest =
   ReportRequest'
-    { _rMetrics                :: !(Maybe [Metric])
-    , _rPivots                 :: !(Maybe [Pivot])
-    , _rCohortGroup            :: !(Maybe CohortGroup)
-    , _rSamplingLevel          :: !(Maybe ReportRequestSamplingLevel)
-    , _rIncludeEmptyRows       :: !(Maybe Bool)
-    , _rDateRanges             :: !(Maybe [DateRange])
-    , _rViewId                 :: !(Maybe Text)
-    , _rHideTotals             :: !(Maybe Bool)
-    , _rHideValueRanges        :: !(Maybe Bool)
-    , _rMetricFilterClauses    :: !(Maybe [MetricFilterClause])
-    , _rSegments               :: !(Maybe [Segment])
-    , _rPageToken              :: !(Maybe Text)
-    , _rDimensions             :: !(Maybe [Dimension])
+    { _rMetrics :: !(Maybe [Metric])
+    , _rPivots :: !(Maybe [Pivot])
+    , _rCohortGroup :: !(Maybe CohortGroup)
+    , _rSamplingLevel :: !(Maybe ReportRequestSamplingLevel)
+    , _rIncludeEmptyRows :: !(Maybe Bool)
+    , _rDateRanges :: !(Maybe [DateRange])
+    , _rViewId :: !(Maybe Text)
+    , _rHideTotals :: !(Maybe Bool)
+    , _rHideValueRanges :: !(Maybe Bool)
+    , _rMetricFilterClauses :: !(Maybe [MetricFilterClause])
+    , _rSegments :: !(Maybe [Segment])
+    , _rPageToken :: !(Maybe Text)
+    , _rDimensions :: !(Maybe [Dimension])
     , _rDimensionFilterClauses :: !(Maybe [DimensionFilterClause])
-    , _rPageSize               :: !(Maybe (Textual Int32))
-    , _rOrderBys               :: !(Maybe [OrderBy])
-    , _rFiltersExpression      :: !(Maybe Text)
+    , _rPageSize :: !(Maybe (Textual Int32))
+    , _rOrderBys :: !(Maybe [OrderBy])
+    , _rFiltersExpression :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -544,7 +544,7 @@ rPageToken :: Lens' ReportRequest (Maybe Text)
 rPageToken
   = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
--- | The dimensions requested. Requests can have a total of 7 dimensions.
+-- | The dimensions requested. Requests can have a total of 9 dimensions.
 rDimensions :: Lens' ReportRequest [Dimension]
 rDimensions
   = lens _rDimensions (\ s a -> s{_rDimensions = a}) .
@@ -731,7 +731,7 @@ instance ToJSON GoalSetData where
 -- /See:/ 'cohortGroup' smart constructor.
 data CohortGroup =
   CohortGroup'
-    { _cgCohorts       :: !(Maybe [Cohort])
+    { _cgCohorts :: !(Maybe [Cohort])
     , _cgLifetimeValue :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -848,7 +848,7 @@ instance ToJSON SimpleSegment where
 data DimensionFilterClause =
   DimensionFilterClause'
     { _dfcOperator :: !(Maybe DimensionFilterClauseOperator)
-    , _dfcFilters  :: !(Maybe [DimensionFilter])
+    , _dfcFilters :: !(Maybe [DimensionFilter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -963,7 +963,7 @@ instance ToJSON OrderBy where
 -- /See:/ 'dimension' smart constructor.
 data Dimension =
   Dimension'
-    { _dName             :: !(Maybe Text)
+    { _dName :: !(Maybe Text)
     , _dHistogramBuckets :: !(Maybe [Textual Int64])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1036,7 +1036,7 @@ instance ToJSON Dimension where
 data DateRangeValues =
   DateRangeValues'
     { _drvPivotValueRegions :: !(Maybe [PivotValueRegion])
-    , _drvValues            :: !(Maybe [Text])
+    , _drvValues :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1090,7 +1090,7 @@ instance ToJSON DateRangeValues where
 data PivotHeader =
   PivotHeader'
     { _phTotalPivotGroupsCount :: !(Maybe (Textual Int32))
-    , _phPivotHeaderEntries    :: !(Maybe [PivotHeaderEntry])
+    , _phPivotHeaderEntries :: !(Maybe [PivotHeaderEntry])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1146,12 +1146,12 @@ instance ToJSON PivotHeader where
 -- /See:/ 'searchUserActivityRequest' smart constructor.
 data SearchUserActivityRequest =
   SearchUserActivityRequest'
-    { _suarViewId        :: !(Maybe Text)
-    , _suarDateRange     :: !(Maybe DateRange)
-    , _suarUser          :: !(Maybe User)
-    , _suarPageToken     :: !(Maybe Text)
-    , _suarPageSize      :: !(Maybe (Textual Int32))
-    , _suarActivityTypes :: !(Maybe [Text])
+    { _suarViewId :: !(Maybe Text)
+    , _suarDateRange :: !(Maybe DateRange)
+    , _suarUser :: !(Maybe User)
+    , _suarPageToken :: !(Maybe Text)
+    , _suarPageSize :: !(Maybe (Textual Int32))
+    , _suarActivityTypes :: !(Maybe [SearchUserActivityRequestActivityTypesItem])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1228,7 +1228,7 @@ suarPageSize
 -- | Set of all activity types being requested. Only acvities matching these
 -- types will be returned in the response. If empty, all activies will be
 -- returned.
-suarActivityTypes :: Lens' SearchUserActivityRequest [Text]
+suarActivityTypes :: Lens' SearchUserActivityRequest [SearchUserActivityRequestActivityTypesItem]
 suarActivityTypes
   = lens _suarActivityTypes
       (\ s a -> s{_suarActivityTypes = a})
@@ -1262,7 +1262,7 @@ instance ToJSON SearchUserActivityRequest where
 -- /See:/ 'metricHeader' smart constructor.
 data MetricHeader =
   MetricHeader'
-    { _mhPivotHeaders        :: !(Maybe [PivotHeader])
+    { _mhPivotHeaders :: !(Maybe [PivotHeader])
     , _mhMetricHeaderEntries :: !(Maybe [MetricHeaderEntry])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1321,8 +1321,8 @@ instance ToJSON MetricHeader where
 -- /See:/ 'segmentFilter' smart constructor.
 data SegmentFilter =
   SegmentFilter'
-    { _sfNot             :: !(Maybe Bool)
-    , _sfSimpleSegment   :: !(Maybe SimpleSegment)
+    { _sfNot :: !(Maybe Bool)
+    , _sfSimpleSegment :: !(Maybe SimpleSegment)
     , _sfSequenceSegment :: !(Maybe SequenceSegment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1393,7 +1393,7 @@ instance ToJSON SegmentFilter where
 -- /See:/ 'dateRange' smart constructor.
 data DateRange =
   DateRange'
-    { _drEndDate   :: !(Maybe Text)
+    { _drEndDate :: !(Maybe Text)
     , _drStartDate :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1441,8 +1441,8 @@ instance ToJSON DateRange where
 data Report =
   Report'
     { _rNextPageToken :: !(Maybe Text)
-    , _rData          :: !(Maybe ReportData)
-    , _rColumnHeader  :: !(Maybe ColumnHeader)
+    , _rData :: !(Maybe ReportData)
+    , _rColumnHeader :: !(Maybe ColumnHeader)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1501,7 +1501,7 @@ instance ToJSON Report where
 data PageviewData =
   PageviewData'
     { _pdPageTitle :: !(Maybe Text)
-    , _pdPagePath  :: !(Maybe Text)
+    , _pdPagePath :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1547,15 +1547,15 @@ instance ToJSON PageviewData where
 -- /See:/ 'reportData' smart constructor.
 data ReportData =
   ReportData'
-    { _rdMinimums           :: !(Maybe [DateRangeValues])
-    , _rdRows               :: !(Maybe [ReportRow])
-    , _rdTotals             :: !(Maybe [DateRangeValues])
-    , _rdSamplesReadCounts  :: !(Maybe [Textual Int64])
-    , _rdMaximums           :: !(Maybe [DateRangeValues])
-    , _rdDataLastRefreshed  :: !(Maybe DateTime')
-    , _rdRowCount           :: !(Maybe (Textual Int32))
+    { _rdMinimums :: !(Maybe [DateRangeValues])
+    , _rdRows :: !(Maybe [ReportRow])
+    , _rdTotals :: !(Maybe [DateRangeValues])
+    , _rdSamplesReadCounts :: !(Maybe [Textual Int64])
+    , _rdMaximums :: !(Maybe [DateRangeValues])
+    , _rdDataLastRefreshed :: !(Maybe DateTime')
+    , _rdRowCount :: !(Maybe (Textual Int32))
     , _rdSamplingSpaceSizes :: !(Maybe [Textual Int64])
-    , _rdIsDataGolden       :: !(Maybe Bool)
+    , _rdIsDataGolden :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1719,8 +1719,8 @@ instance ToJSON ReportData where
 -- /See:/ 'segmentFilterClause' smart constructor.
 data SegmentFilterClause =
   SegmentFilterClause'
-    { _sfcMetricFilter    :: !(Maybe SegmentMetricFilter)
-    , _sfcNot             :: !(Maybe Bool)
+    { _sfcMetricFilter :: !(Maybe SegmentMetricFilter)
+    , _sfcNot :: !(Maybe Bool)
     , _sfcDimensionFilter :: !(Maybe SegmentDimensionFilter)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1782,7 +1782,7 @@ instance ToJSON SegmentFilterClause where
 -- /See:/ 'segmentSequenceStep' smart constructor.
 data SegmentSequenceStep =
   SegmentSequenceStep'
-    { _sssMatchType           :: !(Maybe SegmentSequenceStepMatchType)
+    { _sssMatchType :: !(Maybe SegmentSequenceStepMatchType)
     , _sssOrFiltersForSegment :: !(Maybe [OrFiltersForSegment])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1925,7 +1925,7 @@ instance ToJSON SegmentDefinition where
 data User =
   User'
     { _uUserId :: !(Maybe Text)
-    , _uType   :: !(Maybe UserType)
+    , _uType :: !(Maybe UserType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1970,10 +1970,10 @@ instance ToJSON User where
 -- /See:/ 'pivot' smart constructor.
 data Pivot =
   Pivot'
-    { _pStartGroup             :: !(Maybe (Textual Int32))
-    , _pMetrics                :: !(Maybe [Metric])
-    , _pMaxGroupCount          :: !(Maybe (Textual Int32))
-    , _pDimensions             :: !(Maybe [Dimension])
+    { _pStartGroup :: !(Maybe (Textual Int32))
+    , _pMetrics :: !(Maybe [Metric])
+    , _pMaxGroupCount :: !(Maybe (Textual Int32))
+    , _pDimensions :: !(Maybe [Dimension])
     , _pDimensionFilterClauses :: !(Maybe [DimensionFilterClause])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2087,10 +2087,10 @@ instance ToJSON Pivot where
 -- /See:/ 'transactionData' smart constructor.
 data TransactionData =
   TransactionData'
-    { _tdTransactionId       :: !(Maybe Text)
-    , _tdTransactionTax      :: !(Maybe (Textual Double))
+    { _tdTransactionId :: !(Maybe Text)
+    , _tdTransactionTax :: !(Maybe (Textual Double))
     , _tdTransactionShipping :: !(Maybe (Textual Double))
-    , _tdTransactionRevenue  :: !(Maybe (Textual Double))
+    , _tdTransactionRevenue :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2172,7 +2172,7 @@ instance ToJSON TransactionData where
 data SequenceSegment =
   SequenceSegment'
     { _ssFirstStepShouldMatchFirstHit :: !(Maybe Bool)
-    , _ssSegmentSequenceSteps         :: !(Maybe [SegmentSequenceStep])
+    , _ssSegmentSequenceSteps :: !(Maybe [SegmentSequenceStep])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2233,8 +2233,8 @@ instance ToJSON SequenceSegment where
 data Metric =
   Metric'
     { _mFormattingType :: !(Maybe MetricFormattingType)
-    , _mAlias          :: !(Maybe Text)
-    , _mExpression     :: !(Maybe Text)
+    , _mAlias :: !(Maybe Text)
+    , _mExpression :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2303,11 +2303,11 @@ instance ToJSON Metric where
 -- /See:/ 'segmentMetricFilter' smart constructor.
 data SegmentMetricFilter =
   SegmentMetricFilter'
-    { _smfOperator           :: !(Maybe SegmentMetricFilterOperator)
-    , _smfMetricName         :: !(Maybe Text)
+    { _smfOperator :: !(Maybe SegmentMetricFilterOperator)
+    , _smfMetricName :: !(Maybe Text)
     , _smfMaxComparisonValue :: !(Maybe Text)
-    , _smfScope              :: !(Maybe SegmentMetricFilterScope)
-    , _smfComparisonValue    :: !(Maybe Text)
+    , _smfScope :: !(Maybe SegmentMetricFilterScope)
+    , _smfComparisonValue :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2396,7 +2396,7 @@ instance ToJSON SegmentMetricFilter where
 data GetReportsRequest =
   GetReportsRequest'
     { _grrUseResourceQuotas :: !(Maybe Bool)
-    , _grrReportRequests    :: !(Maybe [ReportRequest])
+    , _grrReportRequests :: !(Maybe [ReportRequest])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2459,12 +2459,12 @@ instance ToJSON GetReportsRequest where
 -- /See:/ 'userActivitySession' smart constructor.
 data UserActivitySession =
   UserActivitySession'
-    { _uasPlatform       :: !(Maybe Text)
+    { _uasPlatform :: !(Maybe Text)
     , _uasDeviceCategory :: !(Maybe Text)
-    , _uasActivities     :: !(Maybe [Activity])
-    , _uasSessionDate    :: !(Maybe Text)
-    , _uasDataSource     :: !(Maybe Text)
-    , _uasSessionId      :: !(Maybe Text)
+    , _uasActivities :: !(Maybe [Activity])
+    , _uasSessionDate :: !(Maybe Text)
+    , _uasDataSource :: !(Maybe Text)
+    , _uasSessionId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2562,14 +2562,14 @@ instance ToJSON UserActivitySession where
 -- /See:/ 'goalData' smart constructor.
 data GoalData =
   GoalData'
-    { _gdGoalPreviousStep2      :: !(Maybe Text)
-    , _gdGoalName               :: !(Maybe Text)
-    , _gdGoalPreviousStep3      :: !(Maybe Text)
-    , _gdGoalIndex              :: !(Maybe (Textual Int32))
+    { _gdGoalPreviousStep2 :: !(Maybe Text)
+    , _gdGoalName :: !(Maybe Text)
+    , _gdGoalPreviousStep3 :: !(Maybe Text)
+    , _gdGoalIndex :: !(Maybe (Textual Int32))
     , _gdGoalCompletionLocation :: !(Maybe Text)
-    , _gdGoalPreviousStep1      :: !(Maybe Text)
-    , _gdGoalCompletions        :: !(Maybe (Textual Int64))
-    , _gdGoalValue              :: !(Maybe (Textual Double))
+    , _gdGoalPreviousStep1 :: !(Maybe Text)
+    , _gdGoalCompletions :: !(Maybe (Textual Int64))
+    , _gdGoalValue :: !(Maybe (Textual Double))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2695,20 +2695,20 @@ instance ToJSON GoalData where
 -- /See:/ 'activity' smart constructor.
 data Activity =
   Activity'
-    { _aEvent           :: !(Maybe EventData)
-    , _aHostname        :: !(Maybe Text)
-    , _aActivityType    :: !(Maybe ActivityActivityType)
-    , _aMedium          :: !(Maybe Text)
-    , _aPageview        :: !(Maybe PageviewData)
-    , _aCampaign        :: !(Maybe Text)
-    , _aGoals           :: !(Maybe GoalSetData)
+    { _aEvent :: !(Maybe EventData)
+    , _aHostname :: !(Maybe Text)
+    , _aActivityType :: !(Maybe ActivityActivityType)
+    , _aMedium :: !(Maybe Text)
+    , _aPageview :: !(Maybe PageviewData)
+    , _aCampaign :: !(Maybe Text)
+    , _aGoals :: !(Maybe GoalSetData)
     , _aChannelGrouping :: !(Maybe Text)
-    , _aAppview         :: !(Maybe ScreenviewData)
-    , _aSource          :: !(Maybe Text)
-    , _aActivityTime    :: !(Maybe DateTime')
-    , _aEcommerce       :: !(Maybe EcommerceData)
+    , _aAppview :: !(Maybe ScreenviewData)
+    , _aSource :: !(Maybe Text)
+    , _aActivityTime :: !(Maybe DateTime')
+    , _aEcommerce :: !(Maybe EcommerceData)
     , _aCustomDimension :: !(Maybe [CustomDimension])
-    , _aKeyword         :: !(Maybe Text)
+    , _aKeyword :: !(Maybe Text)
     , _aLandingPagePath :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2833,7 +2833,12 @@ aAppview = lens _aAppview (\ s a -> s{_aAppview = a})
 aSource :: Lens' Activity (Maybe Text)
 aSource = lens _aSource (\ s a -> s{_aSource = a})
 
--- | Timestamp of the activity.
+-- | Timestamp of the activity. If activities for a visit cross midnight and
+-- occur in two separate dates, then two sessions (one per date) share the
+-- session identifier. For example, say session ID 113472 has activity
+-- within 2019-08-20, and session ID 243742 has activity within 2019-08-25
+-- and 2019-08-26. Session ID 113472 is one session, and session ID 243742
+-- is two sessions.
 aActivityTime :: Lens' Activity (Maybe UTCTime)
 aActivityTime
   = lens _aActivityTime
@@ -2917,8 +2922,8 @@ instance ToJSON Activity where
 data Cohort =
   Cohort'
     { _cDateRange :: !(Maybe DateRange)
-    , _cName      :: !(Maybe Text)
-    , _cType      :: !(Maybe CohortType)
+    , _cName :: !(Maybe Text)
+    , _cType :: !(Maybe CohortType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2983,9 +2988,9 @@ instance ToJSON Cohort where
 data EcommerceData =
   EcommerceData'
     { _edEcommerceType :: !(Maybe EcommerceDataEcommerceType)
-    , _edTransaction   :: !(Maybe TransactionData)
-    , _edProducts      :: !(Maybe [ProductData])
-    , _edActionType    :: !(Maybe EcommerceDataActionType)
+    , _edTransaction :: !(Maybe TransactionData)
+    , _edProducts :: !(Maybe [ProductData])
+    , _edActionType :: !(Maybe EcommerceDataActionType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3059,9 +3064,9 @@ instance ToJSON EcommerceData where
 -- /See:/ 'dimensionFilter' smart constructor.
 data DimensionFilter =
   DimensionFilter'
-    { _dfNot           :: !(Maybe Bool)
-    , _dfOperator      :: !(Maybe DimensionFilterOperator)
-    , _dfExpressions   :: !(Maybe [Text])
+    { _dfNot :: !(Maybe Bool)
+    , _dfOperator :: !(Maybe DimensionFilterOperator)
+    , _dfExpressions :: !(Maybe [Text])
     , _dfDimensionName :: !(Maybe Text)
     , _dfCaseSensitive :: !(Maybe Bool)
     }
@@ -3153,9 +3158,9 @@ instance ToJSON DimensionFilter where
 -- /See:/ 'getReportsResponse' smart constructor.
 data GetReportsResponse =
   GetReportsResponse'
-    { _grrReports                 :: !(Maybe [Report])
+    { _grrReports :: !(Maybe [Report])
     , _grrResourceQuotasRemaining :: !(Maybe ResourceQuotasRemaining)
-    , _grrQueryCost               :: !(Maybe (Textual Int32))
+    , _grrQueryCost :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3273,7 +3278,7 @@ instance ToJSON CustomDimension where
 data Segment =
   Segment'
     { _sDynamicSegment :: !(Maybe DynamicSegment)
-    , _sSegmentId      :: !(Maybe Text)
+    , _sSegmentId :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3321,9 +3326,9 @@ instance ToJSON Segment where
 -- /See:/ 'productData' smart constructor.
 data ProductData =
   ProductData'
-    { _pdProductName     :: !(Maybe Text)
-    , _pdProductSKU      :: !(Maybe Text)
-    , _pdItemRevenue     :: !(Maybe (Textual Double))
+    { _pdProductName :: !(Maybe Text)
+    , _pdProductSKU :: !(Maybe Text)
+    , _pdItemRevenue :: !(Maybe (Textual Double))
     , _pdProductQuantity :: !(Maybe (Textual Int64))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3402,7 +3407,7 @@ instance ToJSON ProductData where
 data ResourceQuotasRemaining =
   ResourceQuotasRemaining'
     { _rqrHourlyQuotaTokensRemaining :: !(Maybe (Textual Int32))
-    , _rqrDailyQuotaTokensRemaining  :: !(Maybe (Textual Int32))
+    , _rqrDailyQuotaTokensRemaining :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3459,12 +3464,12 @@ instance ToJSON ResourceQuotasRemaining where
 -- /See:/ 'segmentDimensionFilter' smart constructor.
 data SegmentDimensionFilter =
   SegmentDimensionFilter'
-    { _sdfOperator           :: !(Maybe SegmentDimensionFilterOperator)
+    { _sdfOperator :: !(Maybe SegmentDimensionFilterOperator)
     , _sdfMinComparisonValue :: !(Maybe Text)
     , _sdfMaxComparisonValue :: !(Maybe Text)
-    , _sdfExpressions        :: !(Maybe [Text])
-    , _sdfDimensionName      :: !(Maybe Text)
-    , _sdfCaseSensitive      :: !(Maybe Bool)
+    , _sdfExpressions :: !(Maybe [Text])
+    , _sdfDimensionName :: !(Maybe Text)
+    , _sdfCaseSensitive :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3563,8 +3568,8 @@ instance ToJSON SegmentDimensionFilter where
 -- /See:/ 'dynamicSegment' smart constructor.
 data DynamicSegment =
   DynamicSegment'
-    { _dsUserSegment    :: !(Maybe SegmentDefinition)
-    , _dsName           :: !(Maybe Text)
+    { _dsUserSegment :: !(Maybe SegmentDefinition)
+    , _dsName :: !(Maybe Text)
     , _dsSessionSegment :: !(Maybe SegmentDefinition)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -3625,7 +3630,7 @@ instance ToJSON DynamicSegment where
 data MetricFilterClause =
   MetricFilterClause'
     { _mfcOperator :: !(Maybe MetricFilterClauseOperator)
-    , _mfcFilters  :: !(Maybe [MetricFilter])
+    , _mfcFilters :: !(Maybe [MetricFilter])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3677,7 +3682,7 @@ instance ToJSON MetricFilterClause where
 data ColumnHeader =
   ColumnHeader'
     { _chMetricHeader :: !(Maybe MetricHeader)
-    , _chDimensions   :: !(Maybe [Text])
+    , _chDimensions :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3729,9 +3734,9 @@ instance ToJSON ColumnHeader where
 data SearchUserActivityResponse =
   SearchUserActivityResponse'
     { _suarNextPageToken :: !(Maybe Text)
-    , _suarSampleRate    :: !(Maybe (Textual Double))
-    , _suarSessions      :: !(Maybe [UserActivitySession])
-    , _suarTotalRows     :: !(Maybe (Textual Int32))
+    , _suarSampleRate :: !(Maybe (Textual Double))
+    , _suarSessions :: !(Maybe [UserActivitySession])
+    , _suarTotalRows :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -3813,10 +3818,10 @@ instance ToJSON SearchUserActivityResponse where
 -- /See:/ 'screenviewData' smart constructor.
 data ScreenviewData =
   ScreenviewData'
-    { _sdMobileDeviceModel    :: !(Maybe Text)
+    { _sdMobileDeviceModel :: !(Maybe Text)
     , _sdMobileDeviceBranding :: !(Maybe Text)
-    , _sdAppName              :: !(Maybe Text)
-    , _sdScreenName           :: !(Maybe Text)
+    , _sdAppName :: !(Maybe Text)
+    , _sdScreenName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -46,8 +46,6 @@ library
         , Network.Google.Resource.ServiceManagement.Services.Consumers.TestIAMPermissions
         , Network.Google.Resource.ServiceManagement.Services.Create
         , Network.Google.Resource.ServiceManagement.Services.Delete
-        , Network.Google.Resource.ServiceManagement.Services.Disable
-        , Network.Google.Resource.ServiceManagement.Services.Enable
         , Network.Google.Resource.ServiceManagement.Services.GenerateConfigReport
         , Network.Google.Resource.ServiceManagement.Services.Get
         , Network.Google.Resource.ServiceManagement.Services.GetConfig

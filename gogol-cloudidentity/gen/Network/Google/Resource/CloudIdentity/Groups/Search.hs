@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for Groups.
+-- Searches for \`Group\` resources matching a specified query.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.search@.
 module Network.Google.Resource.CloudIdentity.Groups.Search
@@ -44,8 +44,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Search
     , gsCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.search@ method which the
 -- 'GroupsSearch' request conforms to.
@@ -57,27 +57,27 @@ type GroupsSearchResource =
              QueryParam "access_token" Text :>
                QueryParam "uploadType" Text :>
                  QueryParam "query" Text :>
-                   QueryParam "view" Text :>
+                   QueryParam "view" GroupsSearchView :>
                      QueryParam "pageToken" Text :>
                        QueryParam "pageSize" (Textual Int32) :>
                          QueryParam "callback" Text :>
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] SearchGroupsResponse
 
--- | Searches for Groups.
+-- | Searches for \`Group\` resources matching a specified query.
 --
 -- /See:/ 'groupsSearch' smart constructor.
 data GroupsSearch =
   GroupsSearch'
-    { _gsXgafv          :: !(Maybe Xgafv)
+    { _gsXgafv :: !(Maybe Xgafv)
     , _gsUploadProtocol :: !(Maybe Text)
-    , _gsAccessToken    :: !(Maybe Text)
-    , _gsUploadType     :: !(Maybe Text)
-    , _gsQuery          :: !(Maybe Text)
-    , _gsView           :: !(Maybe Text)
-    , _gsPageToken      :: !(Maybe Text)
-    , _gsPageSize       :: !(Maybe (Textual Int32))
-    , _gsCallback       :: !(Maybe Text)
+    , _gsAccessToken :: !(Maybe Text)
+    , _gsUploadType :: !(Maybe Text)
+    , _gsQuery :: !(Maybe Text)
+    , _gsView :: !(Maybe GroupsSearchView)
+    , _gsPageToken :: !(Maybe Text)
+    , _gsPageSize :: !(Maybe (Textual Int32))
+    , _gsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -140,24 +140,33 @@ gsUploadType :: Lens' GroupsSearch (Maybe Text)
 gsUploadType
   = lens _gsUploadType (\ s a -> s{_gsUploadType = a})
 
--- | \`Required\`. Query string for performing search on groups. Users can
--- search on parent and label attributes of groups. EXACT match (\'==\') is
--- supported on parent, and CONTAINS match (\'in\') is supported on labels.
+-- | Required. The search query. Must be specified in [Common Expression
+-- Language](https:\/\/opensource.google\/projects\/cel). May only contain
+-- equality operators on the parent and inclusion operators on labels
+-- (e.g., \`parent == \'customers\/{customer_id}\' &&
+-- \'cloudidentity.googleapis.com\/groups.discussion_forum\' in labels\`).
+-- The \`customer_id\` must begin with \"C\" (for example, \'C046psxkn\').
 gsQuery :: Lens' GroupsSearch (Maybe Text)
 gsQuery = lens _gsQuery (\ s a -> s{_gsQuery = a})
 
--- | Group resource view to be returned. Defaults to [View.BASIC]().
-gsView :: Lens' GroupsSearch (Maybe Text)
+-- | The level of detail to be returned. If unspecified, defaults to
+-- \`View.BASIC\`.
+gsView :: Lens' GroupsSearch (Maybe GroupsSearchView)
 gsView = lens _gsView (\ s a -> s{_gsView = a})
 
--- | The next_page_token value returned from a previous search request, if
--- any.
+-- | The \`next_page_token\` value returned from a previous search request,
+-- if any.
 gsPageToken :: Lens' GroupsSearch (Maybe Text)
 gsPageToken
   = lens _gsPageToken (\ s a -> s{_gsPageToken = a})
 
--- | The default page size is 200 (max 1000) for the BASIC view, and 50 (max
--- 500) for the FULL view.
+-- | The maximum number of results to return. Note that the number of results
+-- returned may be less than this value even if there are more available
+-- results. To fetch all results, clients must continue calling this method
+-- repeatedly until the response no longer contains a \`next_page_token\`.
+-- If unspecified, defaults to 200 for \`GroupView.BASIC\` and 50 for
+-- \`GroupView.FULL\`. Must not be greater than 1000 for
+-- \`GroupView.BASIC\` or 500 for \`GroupView.FULL\`.
 gsPageSize :: Lens' GroupsSearch (Maybe Int32)
 gsPageSize
   = lens _gsPageSize (\ s a -> s{_gsPageSize = a}) .
@@ -172,7 +181,8 @@ instance GoogleRequest GroupsSearch where
         type Rs GroupsSearch = SearchGroupsResponse
         type Scopes GroupsSearch =
              '["https://www.googleapis.com/auth/cloud-identity.groups",
-               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsSearch'{..}
           = go _gsXgafv _gsUploadProtocol _gsAccessToken
               _gsUploadType

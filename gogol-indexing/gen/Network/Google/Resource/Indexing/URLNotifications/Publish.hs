@@ -41,8 +41,8 @@ module Network.Google.Resource.Indexing.URLNotifications.Publish
     , unpCallback
     ) where
 
-import           Network.Google.Indexing.Types
-import           Network.Google.Prelude
+import Network.Google.Indexing.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @indexing.urlNotifications.publish@ method which the
 -- 'URLNotificationsPublish' request conforms to.
@@ -63,12 +63,12 @@ type URLNotificationsPublishResource =
 -- /See:/ 'urlNotificationsPublish' smart constructor.
 data URLNotificationsPublish =
   URLNotificationsPublish'
-    { _unpXgafv          :: !(Maybe Xgafv)
+    { _unpXgafv :: !(Maybe Xgafv)
     , _unpUploadProtocol :: !(Maybe Text)
-    , _unpAccessToken    :: !(Maybe Text)
-    , _unpUploadType     :: !(Maybe Text)
-    , _unpPayload        :: !URLNotification
-    , _unpCallback       :: !(Maybe Text)
+    , _unpAccessToken :: !(Maybe Text)
+    , _unpUploadType :: !(Maybe Text)
+    , _unpPayload :: !URLNotification
+    , _unpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

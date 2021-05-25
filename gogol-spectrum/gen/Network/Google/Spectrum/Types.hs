@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -288,9 +288,9 @@ module Network.Google.Spectrum.Types
     , dcFrequencyRanges
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spectrum.Types.Product
-import           Network.Google.Spectrum.Types.Sum
+import Network.Google.Prelude
+import Network.Google.Spectrum.Types.Product
+import Network.Google.Spectrum.Types.Sum
 
 -- | Default request referring to version 'v1explorer' of the Google Spectrum Database API. This contains the host and root path used as a starting point for constructing service requests.
 spectrumService :: ServiceConfig

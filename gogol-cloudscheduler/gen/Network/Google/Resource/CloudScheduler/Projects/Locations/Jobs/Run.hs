@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudScheduler.Projects.Locations.Jobs.Run
     , pCallback
     ) where
 
-import           Network.Google.CloudScheduler.Types
-import           Network.Google.Prelude
+import Network.Google.CloudScheduler.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.run@ method which the
 -- 'ProjectsLocationsJobsRun' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsLocationsJobsRunResource =
 -- /See:/ 'projectsLocationsJobsRun' smart constructor.
 data ProjectsLocationsJobsRun =
   ProjectsLocationsJobsRun'
-    { _pXgafv          :: !(Maybe Xgafv)
+    { _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !RunJobRequest
-    , _pName           :: !Text
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !RunJobRequest
+    , _pName :: !Text
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

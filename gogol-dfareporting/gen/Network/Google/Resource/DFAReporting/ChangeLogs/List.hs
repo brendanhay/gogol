@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of change logs. This method supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.changeLogs.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.changeLogs.list@.
 module Network.Google.Resource.DFAReporting.ChangeLogs.List
     (
     -- * REST Resource
@@ -34,8 +34,12 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
 
     -- * Request Lenses
     , cllUserProFileIds
+    , cllXgafv
+    , cllUploadProtocol
     , cllObjectType
+    , cllAccessToken
     , cllSearchString
+    , cllUploadType
     , cllIds
     , cllProFileId
     , cllAction
@@ -44,31 +48,40 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
     , cllPageToken
     , cllObjectIds
     , cllMaxResults
+    , cllCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.changeLogs.list@ method which the
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
                QueryParams "userProfileIds" (Textual Int64) :>
-                 QueryParam "objectType" ChangeLogsListObjectType :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" (Textual Int64) :>
-                       QueryParam "action" ChangeLogsListAction :>
-                         QueryParam "minChangeTime" Text :>
-                           QueryParam "maxChangeTime" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParams "objectIds" (Textual Int64) :>
-                                 QueryParam "maxResults" (Textual Int32) :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ChangeLogsListResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "objectType" ChangeLogsListObjectType :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParams "ids" (Textual Int64) :>
+                               QueryParam "action" ChangeLogsListAction :>
+                                 QueryParam "minChangeTime" Text :>
+                                   QueryParam "maxChangeTime" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParams "objectIds" (Textual Int64)
+                                         :>
+                                         QueryParam "maxResults" (Textual Int32)
+                                           :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON]
+                                                 ChangeLogsListResponse
 
 -- | Retrieves a list of change logs. This method supports paging.
 --
@@ -76,16 +89,21 @@ type ChangeLogsListResource =
 data ChangeLogsList =
   ChangeLogsList'
     { _cllUserProFileIds :: !(Maybe [Textual Int64])
-    , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
-    , _cllSearchString   :: !(Maybe Text)
-    , _cllIds            :: !(Maybe [Textual Int64])
-    , _cllProFileId      :: !(Textual Int64)
-    , _cllAction         :: !(Maybe ChangeLogsListAction)
-    , _cllMinChangeTime  :: !(Maybe Text)
-    , _cllMaxChangeTime  :: !(Maybe Text)
-    , _cllPageToken      :: !(Maybe Text)
-    , _cllObjectIds      :: !(Maybe [Textual Int64])
-    , _cllMaxResults     :: !(Textual Int32)
+    , _cllXgafv :: !(Maybe Xgafv)
+    , _cllUploadProtocol :: !(Maybe Text)
+    , _cllObjectType :: !(Maybe ChangeLogsListObjectType)
+    , _cllAccessToken :: !(Maybe Text)
+    , _cllSearchString :: !(Maybe Text)
+    , _cllUploadType :: !(Maybe Text)
+    , _cllIds :: !(Maybe [Textual Int64])
+    , _cllProFileId :: !(Textual Int64)
+    , _cllAction :: !(Maybe ChangeLogsListAction)
+    , _cllMinChangeTime :: !(Maybe Text)
+    , _cllMaxChangeTime :: !(Maybe Text)
+    , _cllPageToken :: !(Maybe Text)
+    , _cllObjectIds :: !(Maybe [Textual Int64])
+    , _cllMaxResults :: !(Textual Int32)
+    , _cllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -96,9 +114,17 @@ data ChangeLogsList =
 --
 -- * 'cllUserProFileIds'
 --
+-- * 'cllXgafv'
+--
+-- * 'cllUploadProtocol'
+--
 -- * 'cllObjectType'
 --
+-- * 'cllAccessToken'
+--
 -- * 'cllSearchString'
+--
+-- * 'cllUploadType'
 --
 -- * 'cllIds'
 --
@@ -115,14 +141,20 @@ data ChangeLogsList =
 -- * 'cllObjectIds'
 --
 -- * 'cllMaxResults'
+--
+-- * 'cllCallback'
 changeLogsList
     :: Int64 -- ^ 'cllProFileId'
     -> ChangeLogsList
 changeLogsList pCllProFileId_ =
   ChangeLogsList'
     { _cllUserProFileIds = Nothing
+    , _cllXgafv = Nothing
+    , _cllUploadProtocol = Nothing
     , _cllObjectType = Nothing
+    , _cllAccessToken = Nothing
     , _cllSearchString = Nothing
+    , _cllUploadType = Nothing
     , _cllIds = Nothing
     , _cllProFileId = _Coerce # pCllProFileId_
     , _cllAction = Nothing
@@ -131,6 +163,7 @@ changeLogsList pCllProFileId_ =
     , _cllPageToken = Nothing
     , _cllObjectIds = Nothing
     , _cllMaxResults = 1000
+    , _cllCallback = Nothing
     }
 
 
@@ -142,11 +175,27 @@ cllUserProFileIds
       . _Default
       . _Coerce
 
+-- | V1 error format.
+cllXgafv :: Lens' ChangeLogsList (Maybe Xgafv)
+cllXgafv = lens _cllXgafv (\ s a -> s{_cllXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+cllUploadProtocol :: Lens' ChangeLogsList (Maybe Text)
+cllUploadProtocol
+  = lens _cllUploadProtocol
+      (\ s a -> s{_cllUploadProtocol = a})
+
 -- | Select only change logs with the specified object type.
 cllObjectType :: Lens' ChangeLogsList (Maybe ChangeLogsListObjectType)
 cllObjectType
   = lens _cllObjectType
       (\ s a -> s{_cllObjectType = a})
+
+-- | OAuth access token.
+cllAccessToken :: Lens' ChangeLogsList (Maybe Text)
+cllAccessToken
+  = lens _cllAccessToken
+      (\ s a -> s{_cllAccessToken = a})
 
 -- | Select only change logs whose object ID, user name, old or new values
 -- match the search string.
@@ -154,6 +203,12 @@ cllSearchString :: Lens' ChangeLogsList (Maybe Text)
 cllSearchString
   = lens _cllSearchString
       (\ s a -> s{_cllSearchString = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+cllUploadType :: Lens' ChangeLogsList (Maybe Text)
+cllUploadType
+  = lens _cllUploadType
+      (\ s a -> s{_cllUploadType = a})
 
 -- | Select only change logs with these IDs.
 cllIds :: Lens' ChangeLogsList [Int64]
@@ -172,7 +227,7 @@ cllAction :: Lens' ChangeLogsList (Maybe ChangeLogsListAction)
 cllAction
   = lens _cllAction (\ s a -> s{_cllAction = a})
 
--- | Select only change logs whose change time is before the specified
+-- | Select only change logs whose change time is after the specified
 -- minChangeTime.The time should be formatted as an RFC3339 date\/time
 -- string. For example, for 10:54 PM on July 18th, 2015, in the
 -- America\/New York time zone, the format is
@@ -215,14 +270,23 @@ cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
       . _Coerce
 
+-- | JSONP
+cllCallback :: Lens' ChangeLogsList (Maybe Text)
+cllCallback
+  = lens _cllCallback (\ s a -> s{_cllCallback = a})
+
 instance GoogleRequest ChangeLogsList where
         type Rs ChangeLogsList = ChangeLogsListResponse
         type Scopes ChangeLogsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient ChangeLogsList'{..}
           = go _cllProFileId (_cllUserProFileIds ^. _Default)
+              _cllXgafv
+              _cllUploadProtocol
               _cllObjectType
+              _cllAccessToken
               _cllSearchString
+              _cllUploadType
               (_cllIds ^. _Default)
               _cllAction
               _cllMinChangeTime
@@ -230,6 +294,7 @@ instance GoogleRequest ChangeLogsList where
               _cllPageToken
               (_cllObjectIds ^. _Default)
               (Just _cllMaxResults)
+              _cllCallback
               (Just AltJSON)
               dFAReportingService
           where go

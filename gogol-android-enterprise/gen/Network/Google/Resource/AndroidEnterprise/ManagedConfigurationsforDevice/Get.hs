@@ -33,14 +33,19 @@ module Network.Google.Resource.AndroidEnterprise.ManagedConfigurationsforDevice.
     , ManagedConfigurationsforDeviceGet
 
     -- * Request Lenses
+    , mcdgXgafv
+    , mcdgUploadProtocol
     , mcdgEnterpriseId
+    , mcdgAccessToken
+    , mcdgUploadType
     , mcdgUserId
     , mcdgDeviceId
     , mcdgManagedConfigurationForDeviceId
+    , mcdgCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.managedconfigurationsfordevice.get@ method which the
 -- 'ManagedConfigurationsforDeviceGet' request conforms to.
@@ -55,18 +60,28 @@ type ManagedConfigurationsforDeviceGetResource =
                    Capture "deviceId" Text :>
                      "managedConfigurationsForDevice" :>
                        Capture "managedConfigurationForDeviceId" Text :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ManagedConfiguration
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ManagedConfiguration
 
 -- | Retrieves details of a per-device managed configuration.
 --
 -- /See:/ 'managedConfigurationsforDeviceGet' smart constructor.
 data ManagedConfigurationsforDeviceGet =
   ManagedConfigurationsforDeviceGet'
-    { _mcdgEnterpriseId                    :: !Text
-    , _mcdgUserId                          :: !Text
-    , _mcdgDeviceId                        :: !Text
+    { _mcdgXgafv :: !(Maybe Xgafv)
+    , _mcdgUploadProtocol :: !(Maybe Text)
+    , _mcdgEnterpriseId :: !Text
+    , _mcdgAccessToken :: !(Maybe Text)
+    , _mcdgUploadType :: !(Maybe Text)
+    , _mcdgUserId :: !Text
+    , _mcdgDeviceId :: !Text
     , _mcdgManagedConfigurationForDeviceId :: !Text
+    , _mcdgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -75,13 +90,23 @@ data ManagedConfigurationsforDeviceGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mcdgXgafv'
+--
+-- * 'mcdgUploadProtocol'
+--
 -- * 'mcdgEnterpriseId'
+--
+-- * 'mcdgAccessToken'
+--
+-- * 'mcdgUploadType'
 --
 -- * 'mcdgUserId'
 --
 -- * 'mcdgDeviceId'
 --
 -- * 'mcdgManagedConfigurationForDeviceId'
+--
+-- * 'mcdgCallback'
 managedConfigurationsforDeviceGet
     :: Text -- ^ 'mcdgEnterpriseId'
     -> Text -- ^ 'mcdgUserId'
@@ -90,19 +115,47 @@ managedConfigurationsforDeviceGet
     -> ManagedConfigurationsforDeviceGet
 managedConfigurationsforDeviceGet pMcdgEnterpriseId_ pMcdgUserId_ pMcdgDeviceId_ pMcdgManagedConfigurationForDeviceId_ =
   ManagedConfigurationsforDeviceGet'
-    { _mcdgEnterpriseId = pMcdgEnterpriseId_
+    { _mcdgXgafv = Nothing
+    , _mcdgUploadProtocol = Nothing
+    , _mcdgEnterpriseId = pMcdgEnterpriseId_
+    , _mcdgAccessToken = Nothing
+    , _mcdgUploadType = Nothing
     , _mcdgUserId = pMcdgUserId_
     , _mcdgDeviceId = pMcdgDeviceId_
     , _mcdgManagedConfigurationForDeviceId =
         pMcdgManagedConfigurationForDeviceId_
+    , _mcdgCallback = Nothing
     }
 
+
+-- | V1 error format.
+mcdgXgafv :: Lens' ManagedConfigurationsforDeviceGet (Maybe Xgafv)
+mcdgXgafv
+  = lens _mcdgXgafv (\ s a -> s{_mcdgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+mcdgUploadProtocol :: Lens' ManagedConfigurationsforDeviceGet (Maybe Text)
+mcdgUploadProtocol
+  = lens _mcdgUploadProtocol
+      (\ s a -> s{_mcdgUploadProtocol = a})
 
 -- | The ID of the enterprise.
 mcdgEnterpriseId :: Lens' ManagedConfigurationsforDeviceGet Text
 mcdgEnterpriseId
   = lens _mcdgEnterpriseId
       (\ s a -> s{_mcdgEnterpriseId = a})
+
+-- | OAuth access token.
+mcdgAccessToken :: Lens' ManagedConfigurationsforDeviceGet (Maybe Text)
+mcdgAccessToken
+  = lens _mcdgAccessToken
+      (\ s a -> s{_mcdgAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+mcdgUploadType :: Lens' ManagedConfigurationsforDeviceGet (Maybe Text)
+mcdgUploadType
+  = lens _mcdgUploadType
+      (\ s a -> s{_mcdgUploadType = a})
 
 -- | The ID of the user.
 mcdgUserId :: Lens' ManagedConfigurationsforDeviceGet Text
@@ -122,6 +175,11 @@ mcdgManagedConfigurationForDeviceId
       (\ s a ->
          s{_mcdgManagedConfigurationForDeviceId = a})
 
+-- | JSONP
+mcdgCallback :: Lens' ManagedConfigurationsforDeviceGet (Maybe Text)
+mcdgCallback
+  = lens _mcdgCallback (\ s a -> s{_mcdgCallback = a})
+
 instance GoogleRequest
            ManagedConfigurationsforDeviceGet
          where
@@ -132,6 +190,11 @@ instance GoogleRequest
         requestClient ManagedConfigurationsforDeviceGet'{..}
           = go _mcdgEnterpriseId _mcdgUserId _mcdgDeviceId
               _mcdgManagedConfigurationForDeviceId
+              _mcdgXgafv
+              _mcdgUploadProtocol
+              _mcdgAccessToken
+              _mcdgUploadType
+              _mcdgCallback
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -17,8 +17,8 @@
 --
 module Network.Google.DriveActivity.Types.Product where
 
-import           Network.Google.DriveActivity.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.DriveActivity.Types.Sum
+import Network.Google.Prelude
 
 -- | A suggestion.
 --
@@ -58,8 +58,8 @@ instance ToJSON Suggestion where
 -- /See:/ 'drive' smart constructor.
 data Drive =
   Drive'
-    { _dRoot  :: !(Maybe DriveItem)
-    , _dName  :: !(Maybe Text)
+    { _dRoot :: !(Maybe DriveItem)
+    , _dName :: !(Maybe Text)
     , _dTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -84,7 +84,7 @@ dRoot :: Lens' Drive (Maybe DriveItem)
 dRoot = lens _dRoot (\ s a -> s{_dRoot = a})
 
 -- | The resource name of the shared drive. The format is
--- \"COLLECTION_ID\/DRIVE_ID\". Clients should not assume a specific
+-- \`COLLECTION_ID\/DRIVE_ID\`. Clients should not assume a specific
 -- collection ID for this resource name.
 dName :: Lens' Drive (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
@@ -173,17 +173,17 @@ instance ToJSON Edit where
 -- /See:/ 'actionDetail' smart constructor.
 data ActionDetail =
   ActionDetail'
-    { _adEdit             :: !(Maybe Edit)
+    { _adEdit :: !(Maybe Edit)
     , _adPermissionChange :: !(Maybe PermissionChange)
-    , _adRestore          :: !(Maybe Restore)
-    , _adReference        :: !(Maybe ApplicationReference)
-    , _adCreate           :: !(Maybe Create)
-    , _adRename           :: !(Maybe Rename)
-    , _adComment          :: !(Maybe Comment)
-    , _adSettingsChange   :: !(Maybe SettingsChange)
-    , _adDlpChange        :: !(Maybe DataLeakPreventionChange)
-    , _adDelete           :: !(Maybe Delete')
-    , _adMove             :: !(Maybe Move)
+    , _adRestore :: !(Maybe Restore)
+    , _adReference :: !(Maybe ApplicationReference)
+    , _adCreate :: !(Maybe Create)
+    , _adRename :: !(Maybe Rename)
+    , _adComment :: !(Maybe Comment)
+    , _adSettingsChange :: !(Maybe SettingsChange)
+    , _adDlpChange :: !(Maybe DataLeakPreventionChange)
+    , _adDelete :: !(Maybe Delete')
+    , _adMove :: !(Maybe Move)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -320,7 +320,7 @@ instance ToJSON ActionDetail where
 -- /See:/ 'driveReference' smart constructor.
 data DriveReference =
   DriveReference'
-    { _drName  :: !(Maybe Text)
+    { _drName :: !(Maybe Text)
     , _drTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -339,7 +339,7 @@ driveReference = DriveReference' {_drName = Nothing, _drTitle = Nothing}
 
 
 -- | The resource name of the shared drive. The format is
--- \"COLLECTION_ID\/DRIVE_ID\". Clients should not assume a specific
+-- \`COLLECTION_ID\/DRIVE_ID\`. Clients should not assume a specific
 -- collection ID for this resource name.
 drName :: Lens' DriveReference (Maybe Text)
 drName = lens _drName (\ s a -> s{_drName = a})
@@ -432,7 +432,7 @@ instance ToJSON DriveFile where
 data TimeRange =
   TimeRange'
     { _trStartTime :: !(Maybe DateTime')
-    , _trEndTime   :: !(Maybe DateTime')
+    , _trEndTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -480,12 +480,12 @@ instance ToJSON TimeRange where
 -- /See:/ 'queryDriveActivityRequest' smart constructor.
 data QueryDriveActivityRequest =
   QueryDriveActivityRequest'
-    { _qdarAncestorName          :: !(Maybe Text)
-    , _qdarItemName              :: !(Maybe Text)
+    { _qdarAncestorName :: !(Maybe Text)
+    , _qdarItemName :: !(Maybe Text)
     , _qdarConsolidationStrategy :: !(Maybe ConsolidationStrategy)
-    , _qdarFilter                :: !(Maybe Text)
-    , _qdarPageToken             :: !(Maybe Text)
-    , _qdarPageSize              :: !(Maybe (Textual Int32))
+    , _qdarFilter :: !(Maybe Text)
+    , _qdarPageToken :: !(Maybe Text)
+    , _qdarPageSize :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -519,19 +519,19 @@ queryDriveActivityRequest =
 
 
 -- | Return activities for this Drive folder and all children and
--- descendants. The format is \"items\/ITEM_ID\".
+-- descendants. The format is \`items\/ITEM_ID\`.
 qdarAncestorName :: Lens' QueryDriveActivityRequest (Maybe Text)
 qdarAncestorName
   = lens _qdarAncestorName
       (\ s a -> s{_qdarAncestorName = a})
 
--- | Return activities for this Drive item. The format is \"items\/ITEM_ID\".
+-- | Return activities for this Drive item. The format is \`items\/ITEM_ID\`.
 qdarItemName :: Lens' QueryDriveActivityRequest (Maybe Text)
 qdarItemName
   = lens _qdarItemName (\ s a -> s{_qdarItemName = a})
 
 -- | Details on how to consolidate related actions that make up the activity.
--- If not set, then related actions will not be consolidated.
+-- If not set, then related actions are not consolidated.
 qdarConsolidationStrategy :: Lens' QueryDriveActivityRequest (Maybe ConsolidationStrategy)
 qdarConsolidationStrategy
   = lens _qdarConsolidationStrategy
@@ -540,28 +540,32 @@ qdarConsolidationStrategy
 -- | The filtering for items returned from this query request. The format of
 -- the filter string is a sequence of expressions, joined by an optional
 -- \"AND\", where each expression is of the form \"field operator value\".
--- Supported fields: - 'time': Uses numerical operators on date values
+-- Supported fields: - \`time\`: Uses numerical operators on date values
 -- either in terms of milliseconds since Jan 1, 1970 or in RFC 3339 format.
--- Examples: - 'time > 1452409200000 AND time \<= 1492812924310' -
--- 'time >= \"2016-01-10T01:02:03-05:00\"' - 'detail.action_detail_case':
--- Uses the \"has\" operator (:) and either a singular value or a list of
+-- Examples: - \`time > 1452409200000 AND time \<= 1492812924310\` - \`time
+-- >= \"2016-01-10T01:02:03-05:00\"\` - \`detail.action_detail_case\`: Uses
+-- the \"has\" operator (:) and either a singular value or a list of
 -- allowed action types enclosed in parentheses. Examples: -
--- 'detail.action_detail_case: RENAME' -
--- 'detail.action_detail_case:(CREATE UPLOAD)' -
--- '-detail.action_detail_case:MOVE'
+-- \`detail.action_detail_case: RENAME\` -
+-- \`detail.action_detail_case:(CREATE EDIT)\` -
+-- \`-detail.action_detail_case:MOVE\`
 qdarFilter :: Lens' QueryDriveActivityRequest (Maybe Text)
 qdarFilter
   = lens _qdarFilter (\ s a -> s{_qdarFilter = a})
 
--- | The next_page_token value returned from a previous QueryDriveActivity
--- request, if any.
+-- | The token identifying which page of results to return. Set this to the
+-- next_page_token value returned from a previous query to obtain the
+-- following page of results. If not set, the first page of results will be
+-- returned.
 qdarPageToken :: Lens' QueryDriveActivityRequest (Maybe Text)
 qdarPageToken
   = lens _qdarPageToken
       (\ s a -> s{_qdarPageToken = a})
 
--- | The requested number of activity to return. If not set, a default value
--- will be used.
+-- | The miminum number of activities desired in the response; the server
+-- will attempt to return at least this quanitity. The server may also
+-- return fewer activities if it has a partial response ready before the
+-- request times out. If not set, a default value is used.
 qdarPageSize :: Lens' QueryDriveActivityRequest (Maybe Int32)
 qdarPageSize
   = lens _qdarPageSize (\ s a -> s{_qdarPageSize = a})
@@ -595,12 +599,12 @@ instance ToJSON QueryDriveActivityRequest where
 -- /See:/ 'driveItemReference' smart constructor.
 data DriveItemReference =
   DriveItemReference'
-    { _dirDriveFile   :: !(Maybe DriveFile)
-    , _dirFolder      :: !(Maybe Folder)
-    , _dirName        :: !(Maybe Text)
+    { _dirDriveFile :: !(Maybe DriveFile)
+    , _dirFolder :: !(Maybe Folder)
+    , _dirName :: !(Maybe Text)
     , _dirDriveFolder :: !(Maybe DriveFolder)
-    , _dirTitle       :: !(Maybe Text)
-    , _dirFile        :: !(Maybe File)
+    , _dirTitle :: !(Maybe Text)
+    , _dirFile :: !(Maybe File)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -643,11 +647,12 @@ dirFolder :: Lens' DriveItemReference (Maybe Folder)
 dirFolder
   = lens _dirFolder (\ s a -> s{_dirFolder = a})
 
--- | The target Drive item. The format is \"items\/ITEM_ID\".
+-- | The target Drive item. The format is \`items\/ITEM_ID\`.
 dirName :: Lens' DriveItemReference (Maybe Text)
 dirName = lens _dirName (\ s a -> s{_dirName = a})
 
--- | The Drive item is a folder.
+-- | The Drive item is a folder. Includes information about the type of
+-- folder.
 dirDriveFolder :: Lens' DriveItemReference (Maybe DriveFolder)
 dirDriveFolder
   = lens _dirDriveFolder
@@ -688,7 +693,7 @@ instance ToJSON DriveItemReference where
 -- /See:/ 'knownUser' smart constructor.
 data KnownUser =
   KnownUser'
-    { _kuPersonName    :: !(Maybe Text)
+    { _kuPersonName :: !(Maybe Text)
     , _kuIsCurrentUser :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -707,7 +712,7 @@ knownUser = KnownUser' {_kuPersonName = Nothing, _kuIsCurrentUser = Nothing}
 
 
 -- | The identifier for this user that can be used with the People API to get
--- more information. The format is \"people\/ACCOUNT_ID\". See
+-- more information. The format is \`people\/ACCOUNT_ID\`. See
 -- https:\/\/developers.google.com\/people\/.
 kuPersonName :: Lens' KnownUser (Maybe Text)
 kuPersonName
@@ -738,7 +743,7 @@ instance ToJSON KnownUser where
 -- /See:/ 'targetReference' smart constructor.
 data TargetReference =
   TargetReference'
-    { _trDrive     :: !(Maybe DriveReference)
+    { _trDrive :: !(Maybe DriveReference)
     , _trTeamDrive :: !(Maybe TeamDriveReference)
     , _trDriveItem :: !(Maybe DriveItemReference)
     }
@@ -811,7 +816,7 @@ copy
 copy = Copy' {_cOriginalObject = Nothing}
 
 
--- | The the original object.
+-- | The original object.
 cOriginalObject :: Lens' Copy (Maybe TargetReference)
 cOriginalObject
   = lens _cOriginalObject
@@ -833,7 +838,7 @@ instance ToJSON Copy where
 -- /See:/ 'permissionChange' smart constructor.
 data PermissionChange =
   PermissionChange'
-    { _pcAddedPermissions   :: !(Maybe [Permission])
+    { _pcAddedPermissions :: !(Maybe [Permission])
     , _pcRemovedPermissions :: !(Maybe [Permission])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -890,7 +895,7 @@ instance ToJSON PermissionChange where
 data QueryDriveActivityResponse =
   QueryDriveActivityResponse'
     { _qdarNextPageToken :: !(Maybe Text)
-    , _qdarActivities    :: !(Maybe [DriveActivity])
+    , _qdarActivities :: !(Maybe [DriveActivity])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1011,7 +1016,7 @@ instance ToJSON Restore where
 data Domain =
   Domain'
     { _domLegacyId :: !(Maybe Text)
-    , _domName     :: !(Maybe Text)
+    , _domName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1033,7 +1038,7 @@ domLegacyId :: Lens' Domain (Maybe Text)
 domLegacyId
   = lens _domLegacyId (\ s a -> s{_domLegacyId = a})
 
--- | The name of the domain, e.g. \"google.com\".
+-- | The name of the domain, e.g. \`google.com\`.
 domName :: Lens' Domain (Maybe Text)
 domName = lens _domName (\ s a -> s{_domName = a})
 
@@ -1112,10 +1117,10 @@ instance ToJSON DataLeakPreventionChange where
 data Actor =
   Actor'
     { _aImpersonation :: !(Maybe Impersonation)
-    , _aSystem        :: !(Maybe SystemEvent)
+    , _aSystem :: !(Maybe SystemEvent)
     , _aAdministrator :: !(Maybe Administrator)
-    , _aUser          :: !(Maybe User)
-    , _aAnonymous     :: !(Maybe AnonymousUser)
+    , _aUser :: !(Maybe User)
+    , _aAnonymous :: !(Maybe AnonymousUser)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1229,10 +1234,10 @@ instance ToJSON Folder where
 data Action =
   Action'
     { _aTimeRange :: !(Maybe TimeRange)
-    , _aActor     :: !(Maybe Actor)
+    , _aActor :: !(Maybe Actor)
     , _aTimestamp :: !(Maybe DateTime')
-    , _aTarget    :: !(Maybe Target)
-    , _aDetail    :: !(Maybe ActionDetail)
+    , _aTarget :: !(Maybe Target)
+    , _aDetail :: !(Maybe ActionDetail)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1313,8 +1318,8 @@ instance ToJSON Action where
 -- /See:/ 'teamDrive' smart constructor.
 data TeamDrive =
   TeamDrive'
-    { _tdRoot  :: !(Maybe DriveItem)
-    , _tdName  :: !(Maybe Text)
+    { _tdRoot :: !(Maybe DriveItem)
+    , _tdName :: !(Maybe Text)
     , _tdTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1389,10 +1394,10 @@ instance ToJSON UnknownUser where
 -- /See:/ 'owner' smart constructor.
 data Owner =
   Owner'
-    { _oDrive     :: !(Maybe DriveReference)
-    , _oDomain    :: !(Maybe Domain)
+    { _oDrive :: !(Maybe DriveReference)
+    , _oDomain :: !(Maybe Domain)
     , _oTeamDrive :: !(Maybe TeamDriveReference)
-    , _oUser      :: !(Maybe User)
+    , _oUser :: !(Maybe User)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1496,7 +1501,7 @@ instance ToJSON ApplicationReference where
 -- /See:/ 'consolidationStrategy' smart constructor.
 data ConsolidationStrategy =
   ConsolidationStrategy'
-    { _csNone   :: !(Maybe NoConsolidation)
+    { _csNone :: !(Maybe NoConsolidation)
     , _csLegacy :: !(Maybe Legacy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1542,7 +1547,7 @@ instance ToJSON ConsolidationStrategy where
 -- /See:/ 'user' smart constructor.
 data User =
   User'
-    { _uKnownUser   :: !(Maybe KnownUser)
+    { _uKnownUser :: !(Maybe KnownUser)
     , _uUnknownUser :: !(Maybe UnknownUser)
     , _uDeletedUser :: !(Maybe DeletedUser)
     }
@@ -1623,8 +1628,8 @@ instance ToJSON DeletedUser where
 -- /See:/ 'create' smart constructor.
 data Create =
   Create'
-    { _cCopy   :: !(Maybe Copy)
-    , _cNew    :: !(Maybe New)
+    { _cCopy :: !(Maybe Copy)
+    , _cNew :: !(Maybe New)
     , _cUpload :: !(Maybe Upload)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1700,7 +1705,7 @@ instance ToJSON New where
 -- /See:/ 'teamDriveReference' smart constructor.
 data TeamDriveReference =
   TeamDriveReference'
-    { _tdrName  :: !(Maybe Text)
+    { _tdrName :: !(Maybe Text)
     , _tdrTitle :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1824,7 +1829,7 @@ instance ToJSON Anyone where
 -- /See:/ 'restrictionChange' smart constructor.
 data RestrictionChange =
   RestrictionChange'
-    { _rcFeature        :: !(Maybe RestrictionChangeFeature)
+    { _rcFeature :: !(Maybe RestrictionChangeFeature)
     , _rcNewRestriction :: !(Maybe RestrictionChangeNewRestriction)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1899,10 +1904,10 @@ instance ToJSON Legacy where
 -- /See:/ 'fileComment' smart constructor.
 data FileComment =
   FileComment'
-    { _fcParent             :: !(Maybe DriveItem)
+    { _fcParent :: !(Maybe DriveItem)
     , _fcLegacyDiscussionId :: !(Maybe Text)
-    , _fcLegacyCommentId    :: !(Maybe Text)
-    , _fcLinkToDiscussion   :: !(Maybe Text)
+    , _fcLegacyCommentId :: !(Maybe Text)
+    , _fcLinkToDiscussion :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1951,7 +1956,7 @@ fcLegacyCommentId
       (\ s a -> s{_fcLegacyCommentId = a})
 
 -- | The link to the discussion thread containing this comment, for example,
--- \"https:\/\/docs.google.com\/DOCUMENT_ID\/edit?disco=THREAD_ID\".
+-- \`https:\/\/docs.google.com\/DOCUMENT_ID\/edit?disco=THREAD_ID\`.
 fcLinkToDiscussion :: Lens' FileComment (Maybe Text)
 fcLinkToDiscussion
   = lens _fcLinkToDiscussion
@@ -2069,9 +2074,10 @@ instance ToJSON NoConsolidation where
 -- | A comment with an assignment.
 --
 -- /See:/ 'assignment' smart constructor.
-newtype Assignment =
+data Assignment =
   Assignment'
-    { _aSubtype :: Maybe AssignmentSubtype
+    { _aAssignedUser :: !(Maybe User)
+    , _aSubtype :: !(Maybe AssignmentSubtype)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2080,11 +2086,19 @@ newtype Assignment =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aAssignedUser'
+--
 -- * 'aSubtype'
 assignment
     :: Assignment
-assignment = Assignment' {_aSubtype = Nothing}
+assignment = Assignment' {_aAssignedUser = Nothing, _aSubtype = Nothing}
 
+
+-- | The user to whom the comment was assigned.
+aAssignedUser :: Lens' Assignment (Maybe User)
+aAssignedUser
+  = lens _aAssignedUser
+      (\ s a -> s{_aAssignedUser = a})
 
 -- | The sub-type of this event.
 aSubtype :: Lens' Assignment (Maybe AssignmentSubtype)
@@ -2093,11 +2107,16 @@ aSubtype = lens _aSubtype (\ s a -> s{_aSubtype = a})
 instance FromJSON Assignment where
         parseJSON
           = withObject "Assignment"
-              (\ o -> Assignment' <$> (o .:? "subtype"))
+              (\ o ->
+                 Assignment' <$>
+                   (o .:? "assignedUser") <*> (o .:? "subtype"))
 
 instance ToJSON Assignment where
         toJSON Assignment'{..}
-          = object (catMaybes [("subtype" .=) <$> _aSubtype])
+          = object
+              (catMaybes
+                 [("assignedUser" .=) <$> _aAssignedUser,
+                  ("subtype" .=) <$> _aSubtype])
 
 -- | Information about settings changes.
 --
@@ -2146,10 +2165,10 @@ instance ToJSON SettingsChange where
 -- /See:/ 'comment' smart constructor.
 data Comment =
   Comment'
-    { _cSuggestion     :: !(Maybe Suggestion)
-    , _cPost           :: !(Maybe Post')
+    { _cSuggestion :: !(Maybe Suggestion)
+    , _cPost :: !(Maybe Post')
     , _cMentionedUsers :: !(Maybe [User])
-    , _cAssignment     :: !(Maybe Assignment)
+    , _cAssignment :: !(Maybe Assignment)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2221,11 +2240,11 @@ instance ToJSON Comment where
 -- /See:/ 'permission' smart constructor.
 data Permission =
   Permission'
-    { _pGroup          :: !(Maybe Group)
-    , _pDomain         :: !(Maybe Domain)
-    , _pUser           :: !(Maybe User)
-    , _pRole           :: !(Maybe PermissionRole)
-    , _pAnyone         :: !(Maybe Anyone)
+    { _pGroup :: !(Maybe Group)
+    , _pDomain :: !(Maybe Domain)
+    , _pUser :: !(Maybe User)
+    , _pRole :: !(Maybe PermissionRole)
+    , _pAnyone :: !(Maybe Anyone)
     , _pAllowDiscovery :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2271,9 +2290,10 @@ pDomain = lens _pDomain (\ s a -> s{_pDomain = a})
 pUser :: Lens' Permission (Maybe User)
 pUser = lens _pUser (\ s a -> s{_pUser = a})
 
--- | Indicates the
--- </drive/web/manage-sharing#roles Google Drive permissions role>. The
--- role determines a user\'s ability to read, write, and comment on items.
+-- | Indicates the [Google Drive permissions
+-- role](https:\/\/developers.google.com\/drive\/web\/manage-sharing#roles).
+-- The role determines a user\'s ability to read, write, and comment on
+-- items.
 pRole :: Lens' Permission (Maybe PermissionRole)
 pRole = lens _pRole (\ s a -> s{_pRole = a})
 
@@ -2367,10 +2387,10 @@ instance ToJSON Delete' where
 -- /See:/ 'target' smart constructor.
 data Target =
   Target'
-    { _tDrive       :: !(Maybe Drive)
-    , _tTeamDrive   :: !(Maybe TeamDrive)
+    { _tDrive :: !(Maybe Drive)
+    , _tTeamDrive :: !(Maybe TeamDrive)
     , _tFileComment :: !(Maybe FileComment)
-    , _tDriveItem   :: !(Maybe DriveItem)
+    , _tDriveItem :: !(Maybe DriveItem)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2439,7 +2459,7 @@ instance ToJSON Target where
 -- /See:/ 'move' smart constructor.
 data Move =
   Move'
-    { _mAddedParents   :: !(Maybe [TargetReference])
+    { _mAddedParents :: !(Maybe [TargetReference])
     , _mRemovedParents :: !(Maybe [TargetReference])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2499,12 +2519,12 @@ instance ToJSON Move where
 -- /See:/ 'driveActivity' smart constructor.
 data DriveActivity =
   DriveActivity'
-    { _daTimeRange           :: !(Maybe TimeRange)
-    , _daActions             :: !(Maybe [Action])
-    , _daActors              :: !(Maybe [Actor])
-    , _daTargets             :: !(Maybe [Target])
+    { _daTimeRange :: !(Maybe TimeRange)
+    , _daActions :: !(Maybe [Action])
+    , _daActors :: !(Maybe [Actor])
+    , _daTargets :: !(Maybe [Target])
     , _daPrimaryActionDetail :: !(Maybe ActionDetail)
-    , _daTimestamp           :: !(Maybe DateTime')
+    , _daTimestamp :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2607,14 +2627,14 @@ instance ToJSON DriveActivity where
 -- /See:/ 'driveItem' smart constructor.
 data DriveItem =
   DriveItem'
-    { _diDriveFile   :: !(Maybe DriveFile)
-    , _diFolder      :: !(Maybe Folder)
-    , _diOwner       :: !(Maybe Owner)
-    , _diMimeType    :: !(Maybe Text)
-    , _diName        :: !(Maybe Text)
+    { _diDriveFile :: !(Maybe DriveFile)
+    , _diFolder :: !(Maybe Folder)
+    , _diOwner :: !(Maybe Owner)
+    , _diMimeType :: !(Maybe Text)
+    , _diName :: !(Maybe Text)
     , _diDriveFolder :: !(Maybe DriveFolder)
-    , _diTitle       :: !(Maybe Text)
-    , _diFile        :: !(Maybe File)
+    , _diTitle :: !(Maybe Text)
+    , _diFile :: !(Maybe File)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2672,11 +2692,12 @@ diMimeType :: Lens' DriveItem (Maybe Text)
 diMimeType
   = lens _diMimeType (\ s a -> s{_diMimeType = a})
 
--- | The target Drive item. The format is \"items\/ITEM_ID\".
+-- | The target Drive item. The format is \`items\/ITEM_ID\`.
 diName :: Lens' DriveItem (Maybe Text)
 diName = lens _diName (\ s a -> s{_diName = a})
 
--- | The Drive item is a folder.
+-- | The Drive item is a folder. Includes information about the type of
+-- folder.
 diDriveFolder :: Lens' DriveItem (Maybe DriveFolder)
 diDriveFolder
   = lens _diDriveFolder

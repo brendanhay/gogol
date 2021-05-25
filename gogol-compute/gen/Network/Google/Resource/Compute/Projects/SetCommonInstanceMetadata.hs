@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
     , pscimPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.setCommonInstanceMetadata@ method which the
 -- 'ProjectsSetCommonInstanceMetadata' request conforms to.
@@ -61,8 +61,8 @@ type ProjectsSetCommonInstanceMetadataResource =
 data ProjectsSetCommonInstanceMetadata =
   ProjectsSetCommonInstanceMetadata'
     { _pscimRequestId :: !(Maybe Text)
-    , _pscimProject   :: !Text
-    , _pscimPayload   :: !Metadata
+    , _pscimProject :: !Text
+    , _pscimPayload :: !Metadata
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

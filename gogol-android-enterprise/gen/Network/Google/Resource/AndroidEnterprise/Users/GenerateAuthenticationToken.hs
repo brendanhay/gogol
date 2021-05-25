@@ -37,12 +37,17 @@ module Network.Google.Resource.AndroidEnterprise.Users.GenerateAuthenticationTok
     , UsersGenerateAuthenticationToken
 
     -- * Request Lenses
+    , ugatXgafv
+    , ugatUploadProtocol
     , ugatEnterpriseId
+    , ugatAccessToken
+    , ugatUploadType
     , ugatUserId
+    , ugatCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.users.generateAuthenticationToken@ method which the
 -- 'UsersGenerateAuthenticationToken' request conforms to.
@@ -54,8 +59,13 @@ type UsersGenerateAuthenticationTokenResource =
              "users" :>
                Capture "userId" Text :>
                  "authenticationToken" :>
-                   QueryParam "alt" AltJSON :>
-                     Post '[JSON] AuthenticationToken
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Post '[JSON] AuthenticationToken
 
 -- | Generates an authentication token which the device policy client can use
 -- to provision the given EMM-managed user account on a device. The
@@ -66,8 +76,13 @@ type UsersGenerateAuthenticationTokenResource =
 -- /See:/ 'usersGenerateAuthenticationToken' smart constructor.
 data UsersGenerateAuthenticationToken =
   UsersGenerateAuthenticationToken'
-    { _ugatEnterpriseId :: !Text
-    , _ugatUserId       :: !Text
+    { _ugatXgafv :: !(Maybe Xgafv)
+    , _ugatUploadProtocol :: !(Maybe Text)
+    , _ugatEnterpriseId :: !Text
+    , _ugatAccessToken :: !(Maybe Text)
+    , _ugatUploadType :: !(Maybe Text)
+    , _ugatUserId :: !Text
+    , _ugatCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,17 +91,45 @@ data UsersGenerateAuthenticationToken =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ugatXgafv'
+--
+-- * 'ugatUploadProtocol'
+--
 -- * 'ugatEnterpriseId'
 --
+-- * 'ugatAccessToken'
+--
+-- * 'ugatUploadType'
+--
 -- * 'ugatUserId'
+--
+-- * 'ugatCallback'
 usersGenerateAuthenticationToken
     :: Text -- ^ 'ugatEnterpriseId'
     -> Text -- ^ 'ugatUserId'
     -> UsersGenerateAuthenticationToken
 usersGenerateAuthenticationToken pUgatEnterpriseId_ pUgatUserId_ =
   UsersGenerateAuthenticationToken'
-    {_ugatEnterpriseId = pUgatEnterpriseId_, _ugatUserId = pUgatUserId_}
+    { _ugatXgafv = Nothing
+    , _ugatUploadProtocol = Nothing
+    , _ugatEnterpriseId = pUgatEnterpriseId_
+    , _ugatAccessToken = Nothing
+    , _ugatUploadType = Nothing
+    , _ugatUserId = pUgatUserId_
+    , _ugatCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ugatXgafv :: Lens' UsersGenerateAuthenticationToken (Maybe Xgafv)
+ugatXgafv
+  = lens _ugatXgafv (\ s a -> s{_ugatXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ugatUploadProtocol :: Lens' UsersGenerateAuthenticationToken (Maybe Text)
+ugatUploadProtocol
+  = lens _ugatUploadProtocol
+      (\ s a -> s{_ugatUploadProtocol = a})
 
 -- | The ID of the enterprise.
 ugatEnterpriseId :: Lens' UsersGenerateAuthenticationToken Text
@@ -94,10 +137,27 @@ ugatEnterpriseId
   = lens _ugatEnterpriseId
       (\ s a -> s{_ugatEnterpriseId = a})
 
+-- | OAuth access token.
+ugatAccessToken :: Lens' UsersGenerateAuthenticationToken (Maybe Text)
+ugatAccessToken
+  = lens _ugatAccessToken
+      (\ s a -> s{_ugatAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ugatUploadType :: Lens' UsersGenerateAuthenticationToken (Maybe Text)
+ugatUploadType
+  = lens _ugatUploadType
+      (\ s a -> s{_ugatUploadType = a})
+
 -- | The ID of the user.
 ugatUserId :: Lens' UsersGenerateAuthenticationToken Text
 ugatUserId
   = lens _ugatUserId (\ s a -> s{_ugatUserId = a})
+
+-- | JSONP
+ugatCallback :: Lens' UsersGenerateAuthenticationToken (Maybe Text)
+ugatCallback
+  = lens _ugatCallback (\ s a -> s{_ugatCallback = a})
 
 instance GoogleRequest
            UsersGenerateAuthenticationToken
@@ -107,7 +167,12 @@ instance GoogleRequest
         type Scopes UsersGenerateAuthenticationToken =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersGenerateAuthenticationToken'{..}
-          = go _ugatEnterpriseId _ugatUserId (Just AltJSON)
+          = go _ugatEnterpriseId _ugatUserId _ugatXgafv
+              _ugatUploadProtocol
+              _ugatAccessToken
+              _ugatUploadType
+              _ugatCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

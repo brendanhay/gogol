@@ -21,10 +21,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates language settings. If successful, the return object contains the
--- displayLanguage that was saved for the user, which may differ from the
--- value passed into the request. This is because the requested
--- displayLanguage may not be directly supported by Gmail but have a close
--- variant that is, and so the variant may be chosen and saved instead.
+-- \`displayLanguage\` that was saved for the user, which may differ from
+-- the value passed into the request. This is because the requested
+-- \`displayLanguage\` may not be directly supported by Gmail but have a
+-- close variant that is, and so the variant may be chosen and saved
+-- instead.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.settings.updateLanguage@.
 module Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
@@ -37,12 +38,17 @@ module Network.Google.Resource.Gmail.Users.Settings.UpdateLanguage
     , UsersSettingsUpdateLanguage
 
     -- * Request Lenses
+    , usulXgafv
+    , usulUploadProtocol
+    , usulAccessToken
+    , usulUploadType
     , usulPayload
     , usulUserId
+    , usulCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.updateLanguage@ method which the
 -- 'UsersSettingsUpdateLanguage' request conforms to.
@@ -53,21 +59,32 @@ type UsersSettingsUpdateLanguageResource =
            Capture "userId" Text :>
              "settings" :>
                "language" :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] LanguageSettings :>
-                     Put '[JSON] LanguageSettings
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] LanguageSettings :>
+                               Put '[JSON] LanguageSettings
 
 -- | Updates language settings. If successful, the return object contains the
--- displayLanguage that was saved for the user, which may differ from the
--- value passed into the request. This is because the requested
--- displayLanguage may not be directly supported by Gmail but have a close
--- variant that is, and so the variant may be chosen and saved instead.
+-- \`displayLanguage\` that was saved for the user, which may differ from
+-- the value passed into the request. This is because the requested
+-- \`displayLanguage\` may not be directly supported by Gmail but have a
+-- close variant that is, and so the variant may be chosen and saved
+-- instead.
 --
 -- /See:/ 'usersSettingsUpdateLanguage' smart constructor.
 data UsersSettingsUpdateLanguage =
   UsersSettingsUpdateLanguage'
-    { _usulPayload :: !LanguageSettings
-    , _usulUserId  :: !Text
+    { _usulXgafv :: !(Maybe Xgafv)
+    , _usulUploadProtocol :: !(Maybe Text)
+    , _usulAccessToken :: !(Maybe Text)
+    , _usulUploadType :: !(Maybe Text)
+    , _usulPayload :: !LanguageSettings
+    , _usulUserId :: !Text
+    , _usulCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -76,16 +93,56 @@ data UsersSettingsUpdateLanguage =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'usulXgafv'
+--
+-- * 'usulUploadProtocol'
+--
+-- * 'usulAccessToken'
+--
+-- * 'usulUploadType'
+--
 -- * 'usulPayload'
 --
 -- * 'usulUserId'
+--
+-- * 'usulCallback'
 usersSettingsUpdateLanguage
     :: LanguageSettings -- ^ 'usulPayload'
     -> UsersSettingsUpdateLanguage
 usersSettingsUpdateLanguage pUsulPayload_ =
   UsersSettingsUpdateLanguage'
-    {_usulPayload = pUsulPayload_, _usulUserId = "me"}
+    { _usulXgafv = Nothing
+    , _usulUploadProtocol = Nothing
+    , _usulAccessToken = Nothing
+    , _usulUploadType = Nothing
+    , _usulPayload = pUsulPayload_
+    , _usulUserId = "me"
+    , _usulCallback = Nothing
+    }
 
+
+-- | V1 error format.
+usulXgafv :: Lens' UsersSettingsUpdateLanguage (Maybe Xgafv)
+usulXgafv
+  = lens _usulXgafv (\ s a -> s{_usulXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+usulUploadProtocol :: Lens' UsersSettingsUpdateLanguage (Maybe Text)
+usulUploadProtocol
+  = lens _usulUploadProtocol
+      (\ s a -> s{_usulUploadProtocol = a})
+
+-- | OAuth access token.
+usulAccessToken :: Lens' UsersSettingsUpdateLanguage (Maybe Text)
+usulAccessToken
+  = lens _usulAccessToken
+      (\ s a -> s{_usulAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+usulUploadType :: Lens' UsersSettingsUpdateLanguage (Maybe Text)
+usulUploadType
+  = lens _usulUploadType
+      (\ s a -> s{_usulUploadType = a})
 
 -- | Multipart request metadata.
 usulPayload :: Lens' UsersSettingsUpdateLanguage LanguageSettings
@@ -98,6 +155,11 @@ usulUserId :: Lens' UsersSettingsUpdateLanguage Text
 usulUserId
   = lens _usulUserId (\ s a -> s{_usulUserId = a})
 
+-- | JSONP
+usulCallback :: Lens' UsersSettingsUpdateLanguage (Maybe Text)
+usulCallback
+  = lens _usulCallback (\ s a -> s{_usulCallback = a})
+
 instance GoogleRequest UsersSettingsUpdateLanguage
          where
         type Rs UsersSettingsUpdateLanguage =
@@ -105,7 +167,12 @@ instance GoogleRequest UsersSettingsUpdateLanguage
         type Scopes UsersSettingsUpdateLanguage =
              '["https://www.googleapis.com/auth/gmail.settings.basic"]
         requestClient UsersSettingsUpdateLanguage'{..}
-          = go _usulUserId (Just AltJSON) _usulPayload
+          = go _usulUserId _usulXgafv _usulUploadProtocol
+              _usulAccessToken
+              _usulUploadType
+              _usulCallback
+              (Just AltJSON)
+              _usulPayload
               gmailService
           where go
                   = buildClient

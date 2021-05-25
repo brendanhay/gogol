@@ -51,8 +51,8 @@ module Network.Google.Resource.Partners.Leads.List
     , llCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.leads.list@ method which the
 -- 'LeadsList' request conforms to.
@@ -95,21 +95,21 @@ type LeadsListResource =
 -- /See:/ 'leadsList' smart constructor.
 data LeadsList =
   LeadsList'
-    { _llXgafv                                       :: !(Maybe Xgafv)
-    , _llUploadProtocol                              :: !(Maybe Text)
-    , _llOrderBy                                     :: !(Maybe Text)
-    , _llAccessToken                                 :: !(Maybe Text)
-    , _llUploadType                                  :: !(Maybe Text)
-    , _llRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _llRequestMetadataLocale                       :: !(Maybe Text)
-    , _llRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _llRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _llPageToken                                   :: !(Maybe Text)
-    , _llRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _llPageSize                                    :: !(Maybe (Textual Int32))
-    , _llRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _llXgafv :: !(Maybe Xgafv)
+    , _llUploadProtocol :: !(Maybe Text)
+    , _llOrderBy :: !(Maybe Text)
+    , _llAccessToken :: !(Maybe Text)
+    , _llUploadType :: !(Maybe Text)
+    , _llRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _llRequestMetadataLocale :: !(Maybe Text)
+    , _llRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _llRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _llPageToken :: !(Maybe Text)
+    , _llRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _llPageSize :: !(Maybe (Textual Int32))
+    , _llRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _llRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _llCallback                                    :: !(Maybe Text)
+    , _llCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

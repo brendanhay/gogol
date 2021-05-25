@@ -40,8 +40,8 @@ module Network.Google.Resource.SafeBrowsing.ThreatLists.List
     , tllCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SafeBrowsing.Types
+import Network.Google.Prelude
+import Network.Google.SafeBrowsing.Types
 
 -- | A resource alias for @safebrowsing.threatLists.list@ method which the
 -- 'ThreatListsList' request conforms to.
@@ -54,18 +54,19 @@ type ThreatListsListResource =
                QueryParam "uploadType" Text :>
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :>
-                     Get '[JSON] ListThreatListsResponse
+                     Get '[JSON]
+                       GoogleSecuritySafebrowsingV4ListThreatListsResponse
 
 -- | Lists the Safe Browsing threat lists available for download.
 --
 -- /See:/ 'threatListsList' smart constructor.
 data ThreatListsList =
   ThreatListsList'
-    { _tllXgafv          :: !(Maybe Xgafv)
+    { _tllXgafv :: !(Maybe Xgafv)
     , _tllUploadProtocol :: !(Maybe Text)
-    , _tllAccessToken    :: !(Maybe Text)
-    , _tllUploadType     :: !(Maybe Text)
-    , _tllCallback       :: !(Maybe Text)
+    , _tllAccessToken :: !(Maybe Text)
+    , _tllUploadType :: !(Maybe Text)
+    , _tllCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -123,7 +124,8 @@ tllCallback
   = lens _tllCallback (\ s a -> s{_tllCallback = a})
 
 instance GoogleRequest ThreatListsList where
-        type Rs ThreatListsList = ListThreatListsResponse
+        type Rs ThreatListsList =
+             GoogleSecuritySafebrowsingV4ListThreatListsResponse
         type Scopes ThreatListsList = '[]
         requestClient ThreatListsList'{..}
           = go _tllXgafv _tllUploadProtocol _tllAccessToken

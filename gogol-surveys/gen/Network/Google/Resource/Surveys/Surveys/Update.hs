@@ -38,8 +38,8 @@ module Network.Google.Resource.Surveys.Surveys.Update
     , suPayload
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Surveys.Types
+import Network.Google.Prelude
+import Network.Google.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.update@ method which the
 -- 'SurveysUpdate' request conforms to.
@@ -58,7 +58,7 @@ type SurveysUpdateResource =
 data SurveysUpdate =
   SurveysUpdate'
     { _suSurveyURLId :: !Text
-    , _suPayload     :: !Survey
+    , _suPayload :: !Survey
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

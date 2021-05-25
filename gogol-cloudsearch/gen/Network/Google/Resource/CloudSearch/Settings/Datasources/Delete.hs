@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a datasource.
+-- Deletes a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
--- /See:/ <https://gsuite.google.com/products/cloud-search/ Cloud Search API Reference> for @cloudsearch.settings.datasources.delete@.
+-- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.settings.datasources.delete@.
 module Network.Google.Resource.CloudSearch.Settings.Datasources.Delete
     (
     -- * REST Resource
@@ -42,8 +43,8 @@ module Network.Google.Resource.CloudSearch.Settings.Datasources.Delete
     , sddCallback
     ) where
 
-import           Network.Google.CloudSearch.Types
-import           Network.Google.Prelude
+import Network.Google.CloudSearch.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudsearch.settings.datasources.delete@ method which the
 -- 'SettingsDatasourcesDelete' request conforms to.
@@ -59,18 +60,19 @@ type SettingsDatasourcesDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a datasource.
+-- | Deletes a datasource. **Note:** This API requires an admin account to
+-- execute.
 --
 -- /See:/ 'settingsDatasourcesDelete' smart constructor.
 data SettingsDatasourcesDelete =
   SettingsDatasourcesDelete'
-    { _sddXgafv                       :: !(Maybe Xgafv)
-    , _sddUploadProtocol              :: !(Maybe Text)
-    , _sddAccessToken                 :: !(Maybe Text)
-    , _sddUploadType                  :: !(Maybe Text)
-    , _sddName                        :: !Text
+    { _sddXgafv :: !(Maybe Xgafv)
+    , _sddUploadProtocol :: !(Maybe Text)
+    , _sddAccessToken :: !(Maybe Text)
+    , _sddUploadType :: !(Maybe Text)
+    , _sddName :: !Text
     , _sddDebugOptionsEnableDebugging :: !(Maybe Bool)
-    , _sddCallback                    :: !(Maybe Text)
+    , _sddCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

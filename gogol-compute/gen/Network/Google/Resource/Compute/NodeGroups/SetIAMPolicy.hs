@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.NodeGroups.SetIAMPolicy
     , ngsipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.nodeGroups.setIamPolicy@ method which the
 -- 'NodeGroupsSetIAMPolicy' request conforms to.
@@ -65,9 +65,9 @@ type NodeGroupsSetIAMPolicyResource =
 -- /See:/ 'nodeGroupsSetIAMPolicy' smart constructor.
 data NodeGroupsSetIAMPolicy =
   NodeGroupsSetIAMPolicy'
-    { _ngsipProject  :: !Text
-    , _ngsipZone     :: !Text
-    , _ngsipPayload  :: !ZoneSetPolicyRequest
+    { _ngsipProject :: !Text
+    , _ngsipZone :: !Text
+    , _ngsipPayload :: !ZoneSetPolicyRequest
     , _ngsipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

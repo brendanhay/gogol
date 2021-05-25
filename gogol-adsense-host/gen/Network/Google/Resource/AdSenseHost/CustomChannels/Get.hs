@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Get
     , ccgAdClientId
     ) where
 
-import           Network.Google.AdSenseHost.Types
-import           Network.Google.Prelude
+import Network.Google.AdSenseHost.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.customchannels.get@ method which the
 -- 'CustomChannelsGet' request conforms to.
@@ -57,7 +57,7 @@ type CustomChannelsGetResource =
 data CustomChannelsGet =
   CustomChannelsGet'
     { _ccgCustomChannelId :: !Text
-    , _ccgAdClientId      :: !Text
+    , _ccgAdClientId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

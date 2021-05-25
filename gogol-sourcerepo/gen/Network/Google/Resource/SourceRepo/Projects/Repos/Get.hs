@@ -41,8 +41,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.Get
     , prgCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.get@ method which the
 -- 'ProjectsReposGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsReposGetResource =
 -- /See:/ 'projectsReposGet' smart constructor.
 data ProjectsReposGet =
   ProjectsReposGet'
-    { _prgXgafv          :: !(Maybe Xgafv)
+    { _prgXgafv :: !(Maybe Xgafv)
     , _prgUploadProtocol :: !(Maybe Text)
-    , _prgAccessToken    :: !(Maybe Text)
-    , _prgUploadType     :: !(Maybe Text)
-    , _prgName           :: !Text
-    , _prgCallback       :: !(Maybe Text)
+    , _prgAccessToken :: !(Maybe Text)
+    , _prgUploadType :: !(Maybe Text)
+    , _prgName :: !Text
+    , _prgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

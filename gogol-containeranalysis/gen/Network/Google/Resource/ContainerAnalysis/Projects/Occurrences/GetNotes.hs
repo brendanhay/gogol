@@ -42,8 +42,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Occurrences.GetNotes
     , pognCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.occurrences.getNotes@ method which the
 -- 'ProjectsOccurrencesGetNotes' request conforms to.
@@ -64,12 +64,12 @@ type ProjectsOccurrencesGetNotesResource =
 -- /See:/ 'projectsOccurrencesGetNotes' smart constructor.
 data ProjectsOccurrencesGetNotes =
   ProjectsOccurrencesGetNotes'
-    { _pognXgafv          :: !(Maybe Xgafv)
+    { _pognXgafv :: !(Maybe Xgafv)
     , _pognUploadProtocol :: !(Maybe Text)
-    , _pognAccessToken    :: !(Maybe Text)
-    , _pognUploadType     :: !(Maybe Text)
-    , _pognName           :: !Text
-    , _pognCallback       :: !(Maybe Text)
+    , _pognAccessToken :: !(Maybe Text)
+    , _pognUploadType :: !(Maybe Text)
+    , _pognName :: !Text
+    , _pognCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -126,7 +126,7 @@ pognUploadType
   = lens _pognUploadType
       (\ s a -> s{_pognUploadType = a})
 
--- | The name of the occurrence in the form of
+-- | Required. The name of the occurrence in the form of
 -- \`projects\/[PROJECT_ID]\/occurrences\/[OCCURRENCE_ID]\`.
 pognName :: Lens' ProjectsOccurrencesGetNotes Text
 pognName = lens _pognName (\ s a -> s{_pognName = a})

@@ -47,8 +47,8 @@ module Network.Google.Resource.Partners.Offers.List
     , olCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.offers.list@ method which the
 -- 'OffersList' request conforms to.
@@ -86,18 +86,18 @@ type OffersListResource =
 -- /See:/ 'offersList' smart constructor.
 data OffersList =
   OffersList'
-    { _olXgafv                                       :: !(Maybe Xgafv)
-    , _olUploadProtocol                              :: !(Maybe Text)
-    , _olAccessToken                                 :: !(Maybe Text)
-    , _olUploadType                                  :: !(Maybe Text)
-    , _olRequestMetadataPartnersSessionId            :: !(Maybe Text)
-    , _olRequestMetadataLocale                       :: !(Maybe Text)
-    , _olRequestMetadataExperimentIds                :: !(Maybe [Text])
-    , _olRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
-    , _olRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _olRequestMetadataUserOverridesUserId          :: !(Maybe Text)
+    { _olXgafv :: !(Maybe Xgafv)
+    , _olUploadProtocol :: !(Maybe Text)
+    , _olAccessToken :: !(Maybe Text)
+    , _olUploadType :: !(Maybe Text)
+    , _olRequestMetadataPartnersSessionId :: !(Maybe Text)
+    , _olRequestMetadataLocale :: !(Maybe Text)
+    , _olRequestMetadataExperimentIds :: !(Maybe [Text])
+    , _olRequestMetadataUserOverridesIPAddress :: !(Maybe Text)
+    , _olRequestMetadataTrafficSourceTrafficSubId :: !(Maybe Text)
+    , _olRequestMetadataUserOverridesUserId :: !(Maybe Text)
     , _olRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
-    , _olCallback                                    :: !(Maybe Text)
+    , _olCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.Compute.Firewalls.Patch
     , fpFirewall
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.patch@ method which the
 -- 'FirewallsPatch' request conforms to.
@@ -66,9 +66,9 @@ type FirewallsPatchResource =
 data FirewallsPatch =
   FirewallsPatch'
     { _fpRequestId :: !(Maybe Text)
-    , _fpProject   :: !Text
-    , _fpPayload   :: !Firewall
-    , _fpFirewall  :: !Text
+    , _fpProject :: !Text
+    , _fpPayload :: !Firewall
+    , _fpFirewall :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

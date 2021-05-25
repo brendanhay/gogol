@@ -21,8 +21,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- RetrieveInstance returns instance associated with the given study,
--- series, and SOP Instance UID. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.3.
+-- series, and SOP Instance UID. See [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4).
+-- For details on the implementation of RetrieveInstance, see [DICOM
+-- study\/series\/instances](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#dicom_studyseriesinstances)
+-- and [DICOM
+-- instances](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#dicom_instances)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveInstance, see [Retrieving an
+-- instance](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_an_instance).
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveInstance@.
 module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStores.Studies.Series.Instances.RetrieveInstance
@@ -44,14 +51,14 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.DicomStore
     , pldsdsssiriDicomWebPath
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveInstance@ method which the
 -- 'ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance' request conforms to.
 type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstanceResource
      =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "dicomWeb" :>
            Capture "dicomWebPath" Text :>
@@ -63,19 +70,26 @@ type ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstanceR
                        QueryParam "alt" AltJSON :> Get '[JSON] HTTPBody
 
 -- | RetrieveInstance returns instance associated with the given study,
--- series, and SOP Instance UID. See
--- http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_6.5.3.
+-- series, and SOP Instance UID. See [RetrieveTransaction]
+-- (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4).
+-- For details on the implementation of RetrieveInstance, see [DICOM
+-- study\/series\/instances](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#dicom_studyseriesinstances)
+-- and [DICOM
+-- instances](https:\/\/cloud.google.com\/healthcare\/docs\/dicom#dicom_instances)
+-- in the Cloud Healthcare API conformance statement. For samples that show
+-- how to call RetrieveInstance, see [Retrieving an
+-- instance](https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/dicomweb#retrieving_an_instance).
 --
 -- /See:/ 'projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance' smart constructor.
 data ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance =
   ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance'
-    { _pldsdsssiriParent         :: !Text
-    , _pldsdsssiriXgafv          :: !(Maybe Xgafv)
+    { _pldsdsssiriParent :: !Text
+    , _pldsdsssiriXgafv :: !(Maybe Xgafv)
     , _pldsdsssiriUploadProtocol :: !(Maybe Text)
-    , _pldsdsssiriAccessToken    :: !(Maybe Text)
-    , _pldsdsssiriUploadType     :: !(Maybe Text)
-    , _pldsdsssiriCallback       :: !(Maybe Text)
-    , _pldsdsssiriDicomWebPath   :: !Text
+    , _pldsdsssiriAccessToken :: !(Maybe Text)
+    , _pldsdsssiriUploadType :: !(Maybe Text)
+    , _pldsdsssiriCallback :: !(Maybe Text)
+    , _pldsdsssiriDicomWebPath :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -113,8 +127,8 @@ projectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance pPlds
     }
 
 
--- | The name of the DICOM store that is being accessed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`).
+-- | The name of the DICOM store that is being accessed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\`.
 pldsdsssiriParent :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance Text
 pldsdsssiriParent
   = lens _pldsdsssiriParent
@@ -150,9 +164,8 @@ pldsdsssiriCallback
   = lens _pldsdsssiriCallback
       (\ s a -> s{_pldsdsssiriCallback = a})
 
--- | The path of the DICOMweb request, as specified in the STOW-RS, WADO-RS,
--- or QIDO-RS standard (e.g.,
--- \`studies\/{study_id}\/series\/{series_id}\/instance\/{instance_id}\`).
+-- | The path of the RetrieveInstance DICOMweb request. For example,
+-- \`studies\/{study_uid}\/series\/{series_uid}\/instances\/{instance_uid}\`.
 pldsdsssiriDicomWebPath :: Lens' ProjectsLocationsDataSetsDicomStoresStudiesSeriesInstancesRetrieveInstance Text
 pldsdsssiriDicomWebPath
   = lens _pldsdsssiriDicomWebPath

@@ -13,97 +13,150 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
+-- Module      : Network.Google.Resource.AdSense.Accounts.AdClients.GetAdcode
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get Auto ad code for a given ad client.
+-- Gets the AdSense code for a given ad client. This returns what was
+-- previously known as the \'auto ad code\'. This is only supported for ad
+-- clients with a product_code of AFC. For more information, see [About the
+-- AdSense code](https:\/\/support.google.com\/adsense\/answer\/9274634).
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.getAdCode@.
-module Network.Google.Resource.AdSense.Accounts.AdClients.GetAdCode
+-- /See:/ <http://code.google.com/apis/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.getAdcode@.
+module Network.Google.Resource.AdSense.Accounts.AdClients.GetAdcode
     (
     -- * REST Resource
-      AccountsAdClientsGetAdCodeResource
+      AccountsAdClientsGetAdcodeResource
 
     -- * Creating a Request
-    , accountsAdClientsGetAdCode
-    , AccountsAdClientsGetAdCode
+    , accountsAdClientsGetAdcode
+    , AccountsAdClientsGetAdcode
 
     -- * Request Lenses
-    , aacgacAdClientId
-    , aacgacAccountId
+    , aacgaXgafv
+    , aacgaUploadProtocol
+    , aacgaAccessToken
+    , aacgaUploadType
+    , aacgaName
+    , aacgaCallback
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
--- | A resource alias for @adsense.accounts.adclients.getAdCode@ method which the
--- 'AccountsAdClientsGetAdCode' request conforms to.
-type AccountsAdClientsGetAdCodeResource =
-     "adsense" :>
-       "v1.4" :>
-         "accounts" :>
-           Capture "accountId" Text :>
-             "adclients" :>
-               Capture "adClientId" Text :>
-                 "adcode" :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] AdCode
+-- | A resource alias for @adsense.accounts.adclients.getAdcode@ method which the
+-- 'AccountsAdClientsGetAdcode' request conforms to.
+type AccountsAdClientsGetAdcodeResource =
+     "v2" :>
+       Capture "name" Text :>
+         "adcode" :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] AdClientAdCode
 
--- | Get Auto ad code for a given ad client.
+-- | Gets the AdSense code for a given ad client. This returns what was
+-- previously known as the \'auto ad code\'. This is only supported for ad
+-- clients with a product_code of AFC. For more information, see [About the
+-- AdSense code](https:\/\/support.google.com\/adsense\/answer\/9274634).
 --
--- /See:/ 'accountsAdClientsGetAdCode' smart constructor.
-data AccountsAdClientsGetAdCode =
-  AccountsAdClientsGetAdCode'
-    { _aacgacAdClientId :: !Text
-    , _aacgacAccountId  :: !Text
+-- /See:/ 'accountsAdClientsGetAdcode' smart constructor.
+data AccountsAdClientsGetAdcode =
+  AccountsAdClientsGetAdcode'
+    { _aacgaXgafv :: !(Maybe Xgafv)
+    , _aacgaUploadProtocol :: !(Maybe Text)
+    , _aacgaAccessToken :: !(Maybe Text)
+    , _aacgaUploadType :: !(Maybe Text)
+    , _aacgaName :: !Text
+    , _aacgaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
 
--- | Creates a value of 'AccountsAdClientsGetAdCode' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdClientsGetAdcode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aacgacAdClientId'
+-- * 'aacgaXgafv'
 --
--- * 'aacgacAccountId'
-accountsAdClientsGetAdCode
-    :: Text -- ^ 'aacgacAdClientId'
-    -> Text -- ^ 'aacgacAccountId'
-    -> AccountsAdClientsGetAdCode
-accountsAdClientsGetAdCode pAacgacAdClientId_ pAacgacAccountId_ =
-  AccountsAdClientsGetAdCode'
-    { _aacgacAdClientId = pAacgacAdClientId_
-    , _aacgacAccountId = pAacgacAccountId_
+-- * 'aacgaUploadProtocol'
+--
+-- * 'aacgaAccessToken'
+--
+-- * 'aacgaUploadType'
+--
+-- * 'aacgaName'
+--
+-- * 'aacgaCallback'
+accountsAdClientsGetAdcode
+    :: Text -- ^ 'aacgaName'
+    -> AccountsAdClientsGetAdcode
+accountsAdClientsGetAdcode pAacgaName_ =
+  AccountsAdClientsGetAdcode'
+    { _aacgaXgafv = Nothing
+    , _aacgaUploadProtocol = Nothing
+    , _aacgaAccessToken = Nothing
+    , _aacgaUploadType = Nothing
+    , _aacgaName = pAacgaName_
+    , _aacgaCallback = Nothing
     }
 
 
--- | Ad client to get the code for.
-aacgacAdClientId :: Lens' AccountsAdClientsGetAdCode Text
-aacgacAdClientId
-  = lens _aacgacAdClientId
-      (\ s a -> s{_aacgacAdClientId = a})
+-- | V1 error format.
+aacgaXgafv :: Lens' AccountsAdClientsGetAdcode (Maybe Xgafv)
+aacgaXgafv
+  = lens _aacgaXgafv (\ s a -> s{_aacgaXgafv = a})
 
--- | Account which contains the ad client.
-aacgacAccountId :: Lens' AccountsAdClientsGetAdCode Text
-aacgacAccountId
-  = lens _aacgacAccountId
-      (\ s a -> s{_aacgacAccountId = a})
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aacgaUploadProtocol :: Lens' AccountsAdClientsGetAdcode (Maybe Text)
+aacgaUploadProtocol
+  = lens _aacgaUploadProtocol
+      (\ s a -> s{_aacgaUploadProtocol = a})
 
-instance GoogleRequest AccountsAdClientsGetAdCode
+-- | OAuth access token.
+aacgaAccessToken :: Lens' AccountsAdClientsGetAdcode (Maybe Text)
+aacgaAccessToken
+  = lens _aacgaAccessToken
+      (\ s a -> s{_aacgaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aacgaUploadType :: Lens' AccountsAdClientsGetAdcode (Maybe Text)
+aacgaUploadType
+  = lens _aacgaUploadType
+      (\ s a -> s{_aacgaUploadType = a})
+
+-- | Required. Name of the ad client for which to get the adcode. Format:
+-- accounts\/{account}\/adclients\/{adclient}
+aacgaName :: Lens' AccountsAdClientsGetAdcode Text
+aacgaName
+  = lens _aacgaName (\ s a -> s{_aacgaName = a})
+
+-- | JSONP
+aacgaCallback :: Lens' AccountsAdClientsGetAdcode (Maybe Text)
+aacgaCallback
+  = lens _aacgaCallback
+      (\ s a -> s{_aacgaCallback = a})
+
+instance GoogleRequest AccountsAdClientsGetAdcode
          where
-        type Rs AccountsAdClientsGetAdCode = AdCode
-        type Scopes AccountsAdClientsGetAdCode =
+        type Rs AccountsAdClientsGetAdcode = AdClientAdCode
+        type Scopes AccountsAdClientsGetAdcode =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsAdClientsGetAdCode'{..}
-          = go _aacgacAccountId _aacgacAdClientId
+        requestClient AccountsAdClientsGetAdcode'{..}
+          = go _aacgaName _aacgaXgafv _aacgaUploadProtocol
+              _aacgaAccessToken
+              _aacgaUploadType
+              _aacgaCallback
               (Just AltJSON)
               adSenseService
           where go
                   = buildClient
-                      (Proxy :: Proxy AccountsAdClientsGetAdCodeResource)
+                      (Proxy :: Proxy AccountsAdClientsGetAdcodeResource)
                       mempty

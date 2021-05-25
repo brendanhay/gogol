@@ -32,53 +32,74 @@ module Network.Google.Jobs
 
     -- * Resources
 
-    -- ** jobs.projects.clientEvents.create
-    , module Network.Google.Resource.Jobs.Projects.ClientEvents.Create
-
-    -- ** jobs.projects.companies.create
-    , module Network.Google.Resource.Jobs.Projects.Companies.Create
-
-    -- ** jobs.projects.companies.delete
-    , module Network.Google.Resource.Jobs.Projects.Companies.Delete
-
-    -- ** jobs.projects.companies.get
-    , module Network.Google.Resource.Jobs.Projects.Companies.Get
-
-    -- ** jobs.projects.companies.list
-    , module Network.Google.Resource.Jobs.Projects.Companies.List
-
-    -- ** jobs.projects.companies.patch
-    , module Network.Google.Resource.Jobs.Projects.Companies.Patch
-
-    -- ** jobs.projects.complete
-    , module Network.Google.Resource.Jobs.Projects.Complete
-
-    -- ** jobs.projects.jobs.batchDelete
-    , module Network.Google.Resource.Jobs.Projects.Jobs.BatchDelete
-
-    -- ** jobs.projects.jobs.create
-    , module Network.Google.Resource.Jobs.Projects.Jobs.Create
-
-    -- ** jobs.projects.jobs.delete
-    , module Network.Google.Resource.Jobs.Projects.Jobs.Delete
-
-    -- ** jobs.projects.jobs.get
-    , module Network.Google.Resource.Jobs.Projects.Jobs.Get
-
-    -- ** jobs.projects.jobs.list
-    , module Network.Google.Resource.Jobs.Projects.Jobs.List
-
-    -- ** jobs.projects.jobs.patch
-    , module Network.Google.Resource.Jobs.Projects.Jobs.Patch
-
-    -- ** jobs.projects.jobs.search
-    , module Network.Google.Resource.Jobs.Projects.Jobs.Search
-
-    -- ** jobs.projects.jobs.searchForAlert
-    , module Network.Google.Resource.Jobs.Projects.Jobs.SearchForAlert
-
     -- ** jobs.projects.operations.get
     , module Network.Google.Resource.Jobs.Projects.Operations.Get
+
+    -- ** jobs.projects.tenants.clientEvents.create
+    , module Network.Google.Resource.Jobs.Projects.Tenants.ClientEvents.Create
+
+    -- ** jobs.projects.tenants.companies.create
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Companies.Create
+
+    -- ** jobs.projects.tenants.companies.delete
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Companies.Delete
+
+    -- ** jobs.projects.tenants.companies.get
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Companies.Get
+
+    -- ** jobs.projects.tenants.companies.list
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Companies.List
+
+    -- ** jobs.projects.tenants.companies.patch
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Companies.Patch
+
+    -- ** jobs.projects.tenants.completeQuery
+    , module Network.Google.Resource.Jobs.Projects.Tenants.CompleteQuery
+
+    -- ** jobs.projects.tenants.create
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Create
+
+    -- ** jobs.projects.tenants.delete
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Delete
+
+    -- ** jobs.projects.tenants.get
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Get
+
+    -- ** jobs.projects.tenants.jobs.batchCreate
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchCreate
+
+    -- ** jobs.projects.tenants.jobs.batchDelete
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchDelete
+
+    -- ** jobs.projects.tenants.jobs.batchUpdate
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchUpdate
+
+    -- ** jobs.projects.tenants.jobs.create
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Create
+
+    -- ** jobs.projects.tenants.jobs.delete
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Delete
+
+    -- ** jobs.projects.tenants.jobs.get
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Get
+
+    -- ** jobs.projects.tenants.jobs.list
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.List
+
+    -- ** jobs.projects.tenants.jobs.patch
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Patch
+
+    -- ** jobs.projects.tenants.jobs.search
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Search
+
+    -- ** jobs.projects.tenants.jobs.searchForAlert
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Jobs.SearchForAlert
+
+    -- ** jobs.projects.tenants.list
+    , module Network.Google.Resource.Jobs.Projects.Tenants.List
+
+    -- ** jobs.projects.tenants.patch
+    , module Network.Google.Resource.Jobs.Projects.Tenants.Patch
 
     -- * Types
 
@@ -88,12 +109,22 @@ module Network.Google.Jobs
     , llLatitude
     , llLongitude
 
+    -- ** MendelDebugInputNamespacedDebugInput
+    , MendelDebugInputNamespacedDebugInput
+    , mendelDebugInputNamespacedDebugInput
+    , mdindiAddtional
+
     -- ** ApplicationInfo
     , ApplicationInfo
     , applicationInfo
     , aiURIs
     , aiEmails
     , aiInstruction
+
+    -- ** MendelDebugInput
+    , MendelDebugInput
+    , mendelDebugInput
+    , mdiNamespacedDebugInput
 
     -- ** MatchingJob
     , MatchingJob
@@ -118,33 +149,18 @@ module Network.Google.Jobs
     , RequestMetadata
     , requestMetadata
     , rmDomain
+    , rmAllowMissingIds
     , rmUserId
     , rmSessionId
     , rmDeviceInfo
 
-    -- ** UpdateCompanyRequest
-    , UpdateCompanyRequest
-    , updateCompanyRequest
-    , ucrUpdateMask
-    , ucrCompany
-
-    -- ** HistogramResultSearchType
-    , HistogramResultSearchType (..)
-
     -- ** CommuteFilterCommuteMethod
     , CommuteFilterCommuteMethod (..)
 
-    -- ** UpdateJobRequest
-    , UpdateJobRequest
-    , updateJobRequest
-    , ujrUpdateMask
-    , ujrJob
-
-    -- ** BucketizedCount
-    , BucketizedCount
-    , bucketizedCount
-    , bcCount
-    , bcRange
+    -- ** BatchCreateJobsResponse
+    , BatchCreateJobsResponse
+    , batchCreateJobsResponse
+    , bcjrJobResults
 
     -- ** SearchJobsRequestDiversificationLevel
     , SearchJobsRequestDiversificationLevel (..)
@@ -156,20 +172,20 @@ module Network.Google.Jobs
     , ciEntries
     , ciAnnualizedBaseCompensationRange
 
-    -- ** CreateCompanyRequest
-    , CreateCompanyRequest
-    , createCompanyRequest
-    , ccrCompany
+    -- ** BatchUpdateJobsResponse
+    , BatchUpdateJobsResponse
+    , batchUpdateJobsResponse
+    , bujrJobResults
+
+    -- ** BatchDeleteJobsResponse
+    , BatchDeleteJobsResponse
+    , batchDeleteJobsResponse
+    , bdjrJobResults
 
     -- ** HistogramQuery
     , HistogramQuery
     , histogramQuery
     , hqHistogramQuery
-
-    -- ** CreateJobRequest
-    , CreateJobRequest
-    , createJobRequest
-    , cjrJob
 
     -- ** CompletionResult
     , CompletionResult
@@ -178,16 +194,13 @@ module Network.Google.Jobs
     , crImageURI
     , crType
 
-    -- ** CompensationHistogramResultType
-    , CompensationHistogramResultType (..)
-
     -- ** Location
     , Location
     , location
     , lLatLng
+    , lRadiusMiles
     , lLocationType
     , lPostalAddress
-    , lRadiusInMiles
 
     -- ** Operation
     , Operation
@@ -206,17 +219,22 @@ module Network.Google.Jobs
     , ClientEvent
     , clientEvent
     , ceRequestId
-    , ceExtraInfo
     , ceJobEvent
-    , ceParentEventId
+    , ceEventNotes
     , ceCreateTime
     , ceEventId
 
-    -- ** CompensationHistogramRequest
-    , CompensationHistogramRequest
-    , compensationHistogramRequest
-    , chrBucketingOption
-    , chrType
+    -- ** JobDegreeTypesItem
+    , JobDegreeTypesItem (..)
+
+    -- ** ProjectsTenantsJobsListJobView
+    , ProjectsTenantsJobsListJobView (..)
+
+    -- ** BatchUpdateJobsRequest
+    , BatchUpdateJobsRequest
+    , batchUpdateJobsRequest
+    , bujrUpdateMask
+    , bujrJobs
 
     -- ** Money
     , Money
@@ -224,6 +242,9 @@ module Network.Google.Jobs
     , mCurrencyCode
     , mNanos
     , mUnits
+
+    -- ** JobDerivedInfoJobCategoriesItem
+    , JobDerivedInfoJobCategoriesItem (..)
 
     -- ** ListCompaniesResponse
     , ListCompaniesResponse
@@ -234,6 +255,24 @@ module Network.Google.Jobs
 
     -- ** CompensationEntryType
     , CompensationEntryType (..)
+
+    -- ** NamespacedDebugInput
+    , NamespacedDebugInput
+    , namespacedDebugInput
+    , ndiDisableAutomaticEnrollmentSelection
+    , ndiDisableExpTags
+    , ndiDisableOrganicSelection
+    , ndiForcedFlags
+    , ndiConditionallyForcedExps
+    , ndiAbsolutelyForcedExpTags
+    , ndiAbsolutelyForcedExpNames
+    , ndiDisableManualEnrollmentSelection
+    , ndiDisableExps
+    , ndiAbsolutelyForcedExps
+    , ndiDisableExpNames
+    , ndiConditionallyForcedExpNames
+    , ndiConditionallyForcedExpTags
+    , ndiForcedRollouts
 
     -- ** CommuteFilter
     , CommuteFilter
@@ -248,7 +287,10 @@ module Network.Google.Jobs
     -- ** BatchDeleteJobsRequest
     , BatchDeleteJobsRequest
     , batchDeleteJobsRequest
-    , bdjrFilter
+    , bdjrNames
+
+    -- ** JobQueryEmploymentTypesItem
+    , JobQueryEmploymentTypesItem (..)
 
     -- ** JobCustomAttributes
     , JobCustomAttributes
@@ -266,19 +308,17 @@ module Network.Google.Jobs
     , searchJobsRequest
     , sjrRequestMetadata
     , sjrJobView
+    , sjrMaxPageSize
     , sjrOrderBy
     , sjrOffSet
     , sjrSearchMode
     , sjrDiversificationLevel
     , sjrHistogramQueries
-    , sjrRequirePreciseResultSize
     , sjrJobQuery
     , sjrEnableBroadening
     , sjrPageToken
     , sjrCustomRankingInfo
     , sjrDisableKeywordMatch
-    , sjrPageSize
-    , sjrHistogramFacets
 
     -- ** HistogramQueryResultHistogram
     , HistogramQueryResultHistogram
@@ -302,12 +342,16 @@ module Network.Google.Jobs
     -- ** CompensationEntryUnit
     , CompensationEntryUnit (..)
 
-    -- ** CustomAttributeHistogramRequest
-    , CustomAttributeHistogramRequest
-    , customAttributeHistogramRequest
-    , cahrLongValueHistogramBucketingOption
-    , cahrKey
-    , cahrStringValueHistogram
+    -- ** JobResult
+    , JobResult
+    , jobResult
+    , jrStatus
+    , jrJob
+
+    -- ** NamespacedDebugInputForcedFlags
+    , NamespacedDebugInputForcedFlags
+    , namespacedDebugInputForcedFlags
+    , ndiffAddtional
 
     -- ** ResponseMetadata
     , ResponseMetadata
@@ -323,31 +367,14 @@ module Network.Google.Jobs
     -- ** JobJobLevel
     , JobJobLevel (..)
 
-    -- ** CustomAttributeHistogramResult
-    , CustomAttributeHistogramResult
-    , customAttributeHistogramResult
-    , cStringValueHistogramResult
-    , cLongValueHistogramResult
-    , cKey
-
-    -- ** BucketRange
-    , BucketRange
-    , bucketRange
-    , brTo
-    , brFrom
-
     -- ** JobVisibility
     , JobVisibility (..)
 
+    -- ** JobEmploymentTypesItem
+    , JobEmploymentTypesItem (..)
+
     -- ** CustomRankingInfoImportanceLevel
     , CustomRankingInfoImportanceLevel (..)
-
-    -- ** NumericBucketingResult
-    , NumericBucketingResult
-    , numericBucketingResult
-    , nbrMaxValue
-    , nbrCounts
-    , nbrMinValue
 
     -- ** JobDerivedInfo
     , JobDerivedInfo
@@ -355,10 +382,25 @@ module Network.Google.Jobs
     , jdiJobCategories
     , jdiLocations
 
+    -- ** BatchOperationMetadata
+    , BatchOperationMetadata
+    , batchOperationMetadata
+    , bomState
+    , bomUpdateTime
+    , bomEndTime
+    , bomSuccessCount
+    , bomFailureCount
+    , bomCreateTime
+    , bomStateDescription
+    , bomTotalCount
+
     -- ** CompanyDerivedInfo
     , CompanyDerivedInfo
     , companyDerivedInfo
     , cdiHeadquartersLocation
+
+    -- ** CompensationFilterUnitsItem
+    , CompensationFilterUnitsItem (..)
 
     -- ** CompensationFilter
     , CompensationFilter
@@ -367,6 +409,12 @@ module Network.Google.Jobs
     , cfRange
     , cfUnits
     , cfType
+
+    -- ** Tenant
+    , Tenant
+    , tenant
+    , tName
+    , tExternalId
 
     -- ** JobPostingRegion
     , JobPostingRegion (..)
@@ -393,6 +441,7 @@ module Network.Google.Jobs
     , customAttribute
     , caLongValues
     , caFilterable
+    , caKeywordSearchable
     , caStringValues
 
     -- ** Job
@@ -405,7 +454,6 @@ module Network.Google.Jobs
     , jResponsibilities
     , jJobStartTime
     , jPromotionValue
-    , jCompanyName
     , jAddresses
     , jJobBenefits
     , jVisibility
@@ -415,6 +463,7 @@ module Network.Google.Jobs
     , jPostingPublishTime
     , jName
     , jDegreeTypes
+    , jCompany
     , jQualifications
     , jCompanyDisplayName
     , jIncentives
@@ -429,15 +478,11 @@ module Network.Google.Jobs
     , jRequisitionId
     , jPostingCreateTime
 
-    -- ** HistogramResults
-    , HistogramResults
-    , histogramResults
-    , hrSimpleHistogramResults
-    , hrCustomAttributeHistogramResults
-    , hrCompensationHistogramResults
-
     -- ** CompanySize
     , CompanySize (..)
+
+    -- ** ProjectsTenantsCompleteQueryType
+    , ProjectsTenantsCompleteQueryType (..)
 
     -- ** Xgafv
     , Xgafv (..)
@@ -461,15 +506,6 @@ module Network.Google.Jobs
     -- ** CommuteFilterRoadTraffic
     , CommuteFilterRoadTraffic (..)
 
-    -- ** CompensationHistogramResult
-    , CompensationHistogramResult
-    , compensationHistogramResult
-    , cResult
-    , cType
-
-    -- ** CompensationHistogramRequestType
-    , CompensationHistogramRequestType (..)
-
     -- ** CompletionResultType
     , CompletionResultType (..)
 
@@ -484,22 +520,27 @@ module Network.Google.Jobs
     , jqLocationFilters
     , jqCompanyDisplayNames
     , jqJobCategories
+    , jqCompanies
     , jqCompensationFilter
     , jqQuery
-    , jqCompanyNames
+    , jqQueryLanguageCode
     , jqEmploymentTypes
     , jqExcludedJobs
 
-    -- ** CreateClientEventRequest
-    , CreateClientEventRequest
-    , createClientEventRequest
-    , ccerClientEvent
+    -- ** BatchCreateJobsRequest
+    , BatchCreateJobsRequest
+    , batchCreateJobsRequest
+    , bcjrJobs
+
+    -- ** ProjectsTenantsCompleteQueryScope
+    , ProjectsTenantsCompleteQueryScope (..)
 
     -- ** SpellingCorrection
     , SpellingCorrection
     , spellingCorrection
     , scCorrected
     , scCorrectedText
+    , scCorrectedHTML
 
     -- ** CompleteQueryResponse
     , CompleteQueryResponse
@@ -569,17 +610,21 @@ module Network.Google.Jobs
     , paRevision
     , paOrganization
 
+    -- ** BatchOperationMetadataState
+    , BatchOperationMetadataState (..)
+
     -- ** DeviceInfo
     , DeviceInfo
     , deviceInfo
     , diId
     , diDeviceType
 
-    -- ** NumericBucketingOption
-    , NumericBucketingOption
-    , numericBucketingOption
-    , nboBucketBounds
-    , nboRequiresMinMax
+    -- ** ListTenantsResponse
+    , ListTenantsResponse
+    , listTenantsResponse
+    , ltrTenants
+    , ltrNextPageToken
+    , ltrMetadata
 
     -- ** OperationResponse
     , OperationResponse
@@ -589,56 +634,37 @@ module Network.Google.Jobs
     -- ** SearchJobsRequestSearchMode
     , SearchJobsRequestSearchMode (..)
 
-    -- ** HistogramFacets
-    , HistogramFacets
-    , histogramFacets
-    , hfCompensationHistogramFacets
-    , hfCustomAttributeHistogramFacets
-    , hfSimpleHistogramFacets
-
     -- ** LocationFilterTelecommutePreference
     , LocationFilterTelecommutePreference (..)
 
     -- ** ProcessingOptionsHTMLSanitization
     , ProcessingOptionsHTMLSanitization (..)
 
-    -- ** HistogramResult
-    , HistogramResult
-    , histogramResult
-    , hrValues
-    , hrSearchType
-
-    -- ** CustomAttributeHistogramResultStringValueHistogramResult
-    , CustomAttributeHistogramResultStringValueHistogramResult
-    , customAttributeHistogramResultStringValueHistogramResult
-    , cahrsvhrAddtional
-
-    -- ** ClientEventExtraInfo
-    , ClientEventExtraInfo
-    , clientEventExtraInfo
-    , ceeiAddtional
+    -- ** JobQueryJobCategoriesItem
+    , JobQueryJobCategoriesItem (..)
 
     -- ** SearchJobsResponse
     , SearchJobsResponse
     , searchJobsResponse
     , sjrNextPageToken
-    , sjrEstimatedTotalSize
     , sjrHistogramQueryResults
     , sjrLocationFilters
     , sjrMatchingJobs
     , sjrTotalSize
-    , sjrHistogramResults
     , sjrMetadata
     , sjrBroadenedQueryJobsCount
     , sjrSpellCorrection
 
+    -- ** JobJobBenefitsItem
+    , JobJobBenefitsItem (..)
+
     -- ** SearchJobsRequestJobView
     , SearchJobsRequestJobView (..)
 
-    -- ** HistogramResultValues
-    , HistogramResultValues
-    , histogramResultValues
-    , hrvAddtional
+    -- ** NamespacedDebugInputForcedRollouts
+    , NamespacedDebugInputForcedRollouts
+    , namespacedDebugInputForcedRollouts
+    , ndifrAddtional
 
     -- ** TimestampRange
     , TimestampRange
@@ -647,24 +673,31 @@ module Network.Google.Jobs
     , trEndTime
     ) where
 
-import           Network.Google.Jobs.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.Jobs.Projects.ClientEvents.Create
-import           Network.Google.Resource.Jobs.Projects.Companies.Create
-import           Network.Google.Resource.Jobs.Projects.Companies.Delete
-import           Network.Google.Resource.Jobs.Projects.Companies.Get
-import           Network.Google.Resource.Jobs.Projects.Companies.List
-import           Network.Google.Resource.Jobs.Projects.Companies.Patch
-import           Network.Google.Resource.Jobs.Projects.Complete
-import           Network.Google.Resource.Jobs.Projects.Jobs.BatchDelete
-import           Network.Google.Resource.Jobs.Projects.Jobs.Create
-import           Network.Google.Resource.Jobs.Projects.Jobs.Delete
-import           Network.Google.Resource.Jobs.Projects.Jobs.Get
-import           Network.Google.Resource.Jobs.Projects.Jobs.List
-import           Network.Google.Resource.Jobs.Projects.Jobs.Patch
-import           Network.Google.Resource.Jobs.Projects.Jobs.Search
-import           Network.Google.Resource.Jobs.Projects.Jobs.SearchForAlert
-import           Network.Google.Resource.Jobs.Projects.Operations.Get
+import Network.Google.Prelude
+import Network.Google.Jobs.Types
+import Network.Google.Resource.Jobs.Projects.Operations.Get
+import Network.Google.Resource.Jobs.Projects.Tenants.ClientEvents.Create
+import Network.Google.Resource.Jobs.Projects.Tenants.Companies.Create
+import Network.Google.Resource.Jobs.Projects.Tenants.Companies.Delete
+import Network.Google.Resource.Jobs.Projects.Tenants.Companies.Get
+import Network.Google.Resource.Jobs.Projects.Tenants.Companies.List
+import Network.Google.Resource.Jobs.Projects.Tenants.Companies.Patch
+import Network.Google.Resource.Jobs.Projects.Tenants.CompleteQuery
+import Network.Google.Resource.Jobs.Projects.Tenants.Create
+import Network.Google.Resource.Jobs.Projects.Tenants.Delete
+import Network.Google.Resource.Jobs.Projects.Tenants.Get
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchCreate
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchDelete
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.BatchUpdate
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Create
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Delete
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Get
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.List
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Patch
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.Search
+import Network.Google.Resource.Jobs.Projects.Tenants.Jobs.SearchForAlert
+import Network.Google.Resource.Jobs.Projects.Tenants.List
+import Network.Google.Resource.Jobs.Projects.Tenants.Patch
 
 {- $resources
 TODO
@@ -672,19 +705,26 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Cloud Talent Solution API service.
 type JobsAPI =
-     ProjectsCompaniesListResource :<|>
-       ProjectsCompaniesPatchResource
-       :<|> ProjectsCompaniesGetResource
-       :<|> ProjectsCompaniesCreateResource
-       :<|> ProjectsCompaniesDeleteResource
-       :<|> ProjectsJobsListResource
-       :<|> ProjectsJobsPatchResource
-       :<|> ProjectsJobsGetResource
-       :<|> ProjectsJobsCreateResource
-       :<|> ProjectsJobsBatchDeleteResource
-       :<|> ProjectsJobsSearchForAlertResource
-       :<|> ProjectsJobsSearchResource
-       :<|> ProjectsJobsDeleteResource
-       :<|> ProjectsClientEventsCreateResource
+     ProjectsTenantsCompaniesListResource :<|>
+       ProjectsTenantsCompaniesPatchResource
+       :<|> ProjectsTenantsCompaniesGetResource
+       :<|> ProjectsTenantsCompaniesCreateResource
+       :<|> ProjectsTenantsCompaniesDeleteResource
+       :<|> ProjectsTenantsJobsListResource
+       :<|> ProjectsTenantsJobsPatchResource
+       :<|> ProjectsTenantsJobsGetResource
+       :<|> ProjectsTenantsJobsCreateResource
+       :<|> ProjectsTenantsJobsBatchUpdateResource
+       :<|> ProjectsTenantsJobsBatchDeleteResource
+       :<|> ProjectsTenantsJobsBatchCreateResource
+       :<|> ProjectsTenantsJobsSearchForAlertResource
+       :<|> ProjectsTenantsJobsSearchResource
+       :<|> ProjectsTenantsJobsDeleteResource
+       :<|> ProjectsTenantsClientEventsCreateResource
+       :<|> ProjectsTenantsListResource
+       :<|> ProjectsTenantsPatchResource
+       :<|> ProjectsTenantsGetResource
+       :<|> ProjectsTenantsCreateResource
+       :<|> ProjectsTenantsCompleteQueryResource
+       :<|> ProjectsTenantsDeleteResource
        :<|> ProjectsOperationsGetResource
-       :<|> ProjectsCompleteResource

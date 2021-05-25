@@ -44,8 +44,8 @@ module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdateByDataFilte
     , svbubdfCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Sheets.Types
+import Network.Google.Prelude
+import Network.Google.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchUpdateByDataFilter@ method which the
 -- 'SpreadsheetsValuesBatchUpdateByDataFilter' request conforms to.
@@ -71,13 +71,13 @@ type SpreadsheetsValuesBatchUpdateByDataFilterResource
 -- /See:/ 'spreadsheetsValuesBatchUpdateByDataFilter' smart constructor.
 data SpreadsheetsValuesBatchUpdateByDataFilter =
   SpreadsheetsValuesBatchUpdateByDataFilter'
-    { _svbubdfXgafv          :: !(Maybe Xgafv)
+    { _svbubdfXgafv :: !(Maybe Xgafv)
     , _svbubdfUploadProtocol :: !(Maybe Text)
-    , _svbubdfAccessToken    :: !(Maybe Text)
-    , _svbubdfSpreadsheetId  :: !Text
-    , _svbubdfUploadType     :: !(Maybe Text)
-    , _svbubdfPayload        :: !BatchUpdateValuesByDataFilterRequest
-    , _svbubdfCallback       :: !(Maybe Text)
+    , _svbubdfAccessToken :: !(Maybe Text)
+    , _svbubdfSpreadsheetId :: !Text
+    , _svbubdfUploadType :: !(Maybe Text)
+    , _svbubdfPayload :: !BatchUpdateValuesByDataFilterRequest
+    , _svbubdfCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

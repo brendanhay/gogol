@@ -42,8 +42,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Delete
     , asdCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.delete@ method which the
 -- 'AppsServicesDelete' request conforms to.
@@ -65,13 +65,13 @@ type AppsServicesDeleteResource =
 -- /See:/ 'appsServicesDelete' smart constructor.
 data AppsServicesDelete =
   AppsServicesDelete'
-    { _asdXgafv          :: !(Maybe Xgafv)
+    { _asdXgafv :: !(Maybe Xgafv)
     , _asdUploadProtocol :: !(Maybe Text)
-    , _asdAccessToken    :: !(Maybe Text)
-    , _asdUploadType     :: !(Maybe Text)
-    , _asdAppsId         :: !Text
-    , _asdServicesId     :: !Text
-    , _asdCallback       :: !(Maybe Text)
+    , _asdAccessToken :: !(Maybe Text)
+    , _asdUploadType :: !(Maybe Text)
+    , _asdAppsId :: !Text
+    , _asdServicesId :: !Text
+    , _asdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

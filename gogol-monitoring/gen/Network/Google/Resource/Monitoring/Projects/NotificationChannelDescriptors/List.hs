@@ -24,7 +24,7 @@
 -- descriptors makes it possible for new channel types to be dynamically
 -- added.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.notificationChannelDescriptors.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannelDescriptors.list@.
 module Network.Google.Resource.Monitoring.Projects.NotificationChannelDescriptors.List
     (
     -- * REST Resource
@@ -45,8 +45,8 @@ module Network.Google.Resource.Monitoring.Projects.NotificationChannelDescriptor
     , pncdlCallback
     ) where
 
-import           Network.Google.Monitoring.Types
-import           Network.Google.Prelude
+import Network.Google.Monitoring.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @monitoring.projects.notificationChannelDescriptors.list@ method which the
 -- 'ProjectsNotificationChannelDescriptorsList' request conforms to.
@@ -73,14 +73,14 @@ type ProjectsNotificationChannelDescriptorsListResource
 -- /See:/ 'projectsNotificationChannelDescriptorsList' smart constructor.
 data ProjectsNotificationChannelDescriptorsList =
   ProjectsNotificationChannelDescriptorsList'
-    { _pncdlXgafv          :: !(Maybe Xgafv)
+    { _pncdlXgafv :: !(Maybe Xgafv)
     , _pncdlUploadProtocol :: !(Maybe Text)
-    , _pncdlAccessToken    :: !(Maybe Text)
-    , _pncdlUploadType     :: !(Maybe Text)
-    , _pncdlName           :: !Text
-    , _pncdlPageToken      :: !(Maybe Text)
-    , _pncdlPageSize       :: !(Maybe (Textual Int32))
-    , _pncdlCallback       :: !(Maybe Text)
+    , _pncdlAccessToken :: !(Maybe Text)
+    , _pncdlUploadType :: !(Maybe Text)
+    , _pncdlName :: !Text
+    , _pncdlPageToken :: !(Maybe Text)
+    , _pncdlPageSize :: !(Maybe (Textual Int32))
+    , _pncdlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -143,11 +143,13 @@ pncdlUploadType
   = lens _pncdlUploadType
       (\ s a -> s{_pncdlUploadType = a})
 
--- | The REST resource name of the parent from which to retrieve the
--- notification channel descriptors. The expected syntax is:
--- projects\/[PROJECT_ID] Note that this names the parent container in
--- which to look for the descriptors; to retrieve a single descriptor by
--- name, use the GetNotificationChannelDescriptor operation, instead.
+-- | Required. The REST resource name of the parent from which to retrieve
+-- the notification channel descriptors. The expected syntax is:
+-- projects\/[PROJECT_ID_OR_NUMBER] Note that this names
+-- (https:\/\/cloud.google.com\/monitoring\/api\/v3#project_name) the
+-- parent container in which to look for the descriptors; to retrieve a
+-- single descriptor by name, use the GetNotificationChannelDescriptor
+-- operation, instead.
 pncdlName :: Lens' ProjectsNotificationChannelDescriptorsList Text
 pncdlName
   = lens _pncdlName (\ s a -> s{_pncdlName = a})

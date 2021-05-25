@@ -34,28 +34,32 @@ module Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
     , ProjectsSnapshotsGetIAMPolicy
 
     -- * Request Lenses
-    , psgipXgafv
-    , psgipUploadProtocol
-    , psgipAccessToken
-    , psgipUploadType
-    , psgipResource
-    , psgipCallback
+    , psgiampOptionsRequestedPolicyVersion
+    , psgiampXgafv
+    , psgiampUploadProtocol
+    , psgiampAccessToken
+    , psgiampUploadType
+    , psgiampResource
+    , psgiampCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types
+import Network.Google.Prelude
+import Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.snapshots.getIamPolicy@ method which the
 -- 'ProjectsSnapshotsGetIAMPolicy' request conforms to.
 type ProjectsSnapshotsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "access_token" Text :>
-               QueryParam "uploadType" Text :>
-                 QueryParam "callback" Text :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] Policy
+         QueryParam "options.requestedPolicyVersion"
+           (Textual Int32)
+           :>
+           QueryParam "$.xgafv" Xgafv :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "access_token" Text :>
+                 QueryParam "uploadType" Text :>
+                   QueryParam "callback" Text :>
+                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Returns an empty policy
 -- if the resource exists and does not have a policy set.
@@ -63,12 +67,13 @@ type ProjectsSnapshotsGetIAMPolicyResource =
 -- /See:/ 'projectsSnapshotsGetIAMPolicy' smart constructor.
 data ProjectsSnapshotsGetIAMPolicy =
   ProjectsSnapshotsGetIAMPolicy'
-    { _psgipXgafv          :: !(Maybe Xgafv)
-    , _psgipUploadProtocol :: !(Maybe Text)
-    , _psgipAccessToken    :: !(Maybe Text)
-    , _psgipUploadType     :: !(Maybe Text)
-    , _psgipResource       :: !Text
-    , _psgipCallback       :: !(Maybe Text)
+    { _psgiampOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
+    , _psgiampXgafv :: !(Maybe Xgafv)
+    , _psgiampUploadProtocol :: !(Maybe Text)
+    , _psgiampAccessToken :: !(Maybe Text)
+    , _psgiampUploadType :: !(Maybe Text)
+    , _psgiampResource :: !Text
+    , _psgiampCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -77,66 +82,83 @@ data ProjectsSnapshotsGetIAMPolicy =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psgipXgafv'
+-- * 'psgiampOptionsRequestedPolicyVersion'
 --
--- * 'psgipUploadProtocol'
+-- * 'psgiampXgafv'
 --
--- * 'psgipAccessToken'
+-- * 'psgiampUploadProtocol'
 --
--- * 'psgipUploadType'
+-- * 'psgiampAccessToken'
 --
--- * 'psgipResource'
+-- * 'psgiampUploadType'
 --
--- * 'psgipCallback'
+-- * 'psgiampResource'
+--
+-- * 'psgiampCallback'
 projectsSnapshotsGetIAMPolicy
-    :: Text -- ^ 'psgipResource'
+    :: Text -- ^ 'psgiampResource'
     -> ProjectsSnapshotsGetIAMPolicy
-projectsSnapshotsGetIAMPolicy pPsgipResource_ =
+projectsSnapshotsGetIAMPolicy pPsgiampResource_ =
   ProjectsSnapshotsGetIAMPolicy'
-    { _psgipXgafv = Nothing
-    , _psgipUploadProtocol = Nothing
-    , _psgipAccessToken = Nothing
-    , _psgipUploadType = Nothing
-    , _psgipResource = pPsgipResource_
-    , _psgipCallback = Nothing
+    { _psgiampOptionsRequestedPolicyVersion = Nothing
+    , _psgiampXgafv = Nothing
+    , _psgiampUploadProtocol = Nothing
+    , _psgiampAccessToken = Nothing
+    , _psgiampUploadType = Nothing
+    , _psgiampResource = pPsgiampResource_
+    , _psgiampCallback = Nothing
     }
 
 
+-- | Optional. The policy format version to be returned. Valid values are 0,
+-- 1, and 3. Requests specifying an invalid value will be rejected.
+-- Requests for policies with any conditional bindings must specify version
+-- 3. Policies without any conditional bindings may specify any valid value
+-- or leave the field unset. To learn which resources support conditions in
+-- their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+psgiampOptionsRequestedPolicyVersion :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Int32)
+psgiampOptionsRequestedPolicyVersion
+  = lens _psgiampOptionsRequestedPolicyVersion
+      (\ s a ->
+         s{_psgiampOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 -- | V1 error format.
-psgipXgafv :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Xgafv)
-psgipXgafv
-  = lens _psgipXgafv (\ s a -> s{_psgipXgafv = a})
+psgiampXgafv :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Xgafv)
+psgiampXgafv
+  = lens _psgiampXgafv (\ s a -> s{_psgiampXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psgipUploadProtocol :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
-psgipUploadProtocol
-  = lens _psgipUploadProtocol
-      (\ s a -> s{_psgipUploadProtocol = a})
+psgiampUploadProtocol :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
+psgiampUploadProtocol
+  = lens _psgiampUploadProtocol
+      (\ s a -> s{_psgiampUploadProtocol = a})
 
 -- | OAuth access token.
-psgipAccessToken :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
-psgipAccessToken
-  = lens _psgipAccessToken
-      (\ s a -> s{_psgipAccessToken = a})
+psgiampAccessToken :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
+psgiampAccessToken
+  = lens _psgiampAccessToken
+      (\ s a -> s{_psgiampAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psgipUploadType :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
-psgipUploadType
-  = lens _psgipUploadType
-      (\ s a -> s{_psgipUploadType = a})
+psgiampUploadType :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
+psgiampUploadType
+  = lens _psgiampUploadType
+      (\ s a -> s{_psgiampUploadType = a})
 
 -- | REQUIRED: The resource for which the policy is being requested. See the
 -- operation documentation for the appropriate value for this field.
-psgipResource :: Lens' ProjectsSnapshotsGetIAMPolicy Text
-psgipResource
-  = lens _psgipResource
-      (\ s a -> s{_psgipResource = a})
+psgiampResource :: Lens' ProjectsSnapshotsGetIAMPolicy Text
+psgiampResource
+  = lens _psgiampResource
+      (\ s a -> s{_psgiampResource = a})
 
 -- | JSONP
-psgipCallback :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
-psgipCallback
-  = lens _psgipCallback
-      (\ s a -> s{_psgipCallback = a})
+psgiampCallback :: Lens' ProjectsSnapshotsGetIAMPolicy (Maybe Text)
+psgiampCallback
+  = lens _psgiampCallback
+      (\ s a -> s{_psgiampCallback = a})
 
 instance GoogleRequest ProjectsSnapshotsGetIAMPolicy
          where
@@ -145,10 +167,13 @@ instance GoogleRequest ProjectsSnapshotsGetIAMPolicy
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
         requestClient ProjectsSnapshotsGetIAMPolicy'{..}
-          = go _psgipResource _psgipXgafv _psgipUploadProtocol
-              _psgipAccessToken
-              _psgipUploadType
-              _psgipCallback
+          = go _psgiampResource
+              _psgiampOptionsRequestedPolicyVersion
+              _psgiampXgafv
+              _psgiampUploadProtocol
+              _psgiampAccessToken
+              _psgiampUploadType
+              _psgiampCallback
               (Just AltJSON)
               pubSubService
           where go

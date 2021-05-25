@@ -23,7 +23,7 @@
 -- Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.listWindow@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference> for @games.scores.listWindow@.
 module Network.Google.Resource.Games.Scores.ListWindow
     (
     -- * REST Resource
@@ -34,6 +34,10 @@ module Network.Google.Resource.Games.Scores.ListWindow
     , ScoresListWindow
 
     -- * Request Lenses
+    , slwXgafv
+    , slwUploadProtocol
+    , slwAccessToken
+    , slwUploadType
     , slwCollection
     , slwTimeSpan
     , slwReturnTopIfAbsent
@@ -42,10 +46,11 @@ module Network.Google.Resource.Games.Scores.ListWindow
     , slwResultsAbove
     , slwPageToken
     , slwMaxResults
+    , slwCallback
     ) where
 
-import           Network.Google.Games.Types
-import           Network.Google.Prelude
+import Network.Google.Games.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @games.scores.listWindow@ method which the
 -- 'ScoresListWindow' request conforms to.
@@ -57,13 +62,18 @@ type ScoresListWindowResource =
              "window" :>
                Capture "collection" ScoresListWindowCollection :>
                  QueryParam "timeSpan" ScoresListWindowTimeSpan :>
-                   QueryParam "returnTopIfAbsent" Bool :>
-                     QueryParam "language" Text :>
-                       QueryParam "resultsAbove" (Textual Int32) :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] LeaderboardScores
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "returnTopIfAbsent" Bool :>
+                             QueryParam "language" Text :>
+                               QueryParam "resultsAbove" (Textual Int32) :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "maxResults" (Textual Int32) :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
@@ -71,14 +81,19 @@ type ScoresListWindowResource =
 -- /See:/ 'scoresListWindow' smart constructor.
 data ScoresListWindow =
   ScoresListWindow'
-    { _slwCollection        :: !ScoresListWindowCollection
-    , _slwTimeSpan          :: !ScoresListWindowTimeSpan
+    { _slwXgafv :: !(Maybe Xgafv)
+    , _slwUploadProtocol :: !(Maybe Text)
+    , _slwAccessToken :: !(Maybe Text)
+    , _slwUploadType :: !(Maybe Text)
+    , _slwCollection :: !ScoresListWindowCollection
+    , _slwTimeSpan :: !ScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
-    , _slwLeaderboardId     :: !Text
-    , _slwLanguage          :: !(Maybe Text)
-    , _slwResultsAbove      :: !(Maybe (Textual Int32))
-    , _slwPageToken         :: !(Maybe Text)
-    , _slwMaxResults        :: !(Maybe (Textual Int32))
+    , _slwLeaderboardId :: !Text
+    , _slwLanguage :: !(Maybe Text)
+    , _slwResultsAbove :: !(Maybe (Textual Int32))
+    , _slwPageToken :: !(Maybe Text)
+    , _slwMaxResults :: !(Maybe (Textual Int32))
+    , _slwCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -86,6 +101,14 @@ data ScoresListWindow =
 -- | Creates a value of 'ScoresListWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slwXgafv'
+--
+-- * 'slwUploadProtocol'
+--
+-- * 'slwAccessToken'
+--
+-- * 'slwUploadType'
 --
 -- * 'slwCollection'
 --
@@ -102,6 +125,8 @@ data ScoresListWindow =
 -- * 'slwPageToken'
 --
 -- * 'slwMaxResults'
+--
+-- * 'slwCallback'
 scoresListWindow
     :: ScoresListWindowCollection -- ^ 'slwCollection'
     -> ScoresListWindowTimeSpan -- ^ 'slwTimeSpan'
@@ -109,7 +134,11 @@ scoresListWindow
     -> ScoresListWindow
 scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
   ScoresListWindow'
-    { _slwCollection = pSlwCollection_
+    { _slwXgafv = Nothing
+    , _slwUploadProtocol = Nothing
+    , _slwAccessToken = Nothing
+    , _slwUploadType = Nothing
+    , _slwCollection = pSlwCollection_
     , _slwTimeSpan = pSlwTimeSpan_
     , _slwReturnTopIfAbsent = Nothing
     , _slwLeaderboardId = pSlwLeaderboardId_
@@ -117,8 +146,31 @@ scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     , _slwResultsAbove = Nothing
     , _slwPageToken = Nothing
     , _slwMaxResults = Nothing
+    , _slwCallback = Nothing
     }
 
+
+-- | V1 error format.
+slwXgafv :: Lens' ScoresListWindow (Maybe Xgafv)
+slwXgafv = lens _slwXgafv (\ s a -> s{_slwXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+slwUploadProtocol :: Lens' ScoresListWindow (Maybe Text)
+slwUploadProtocol
+  = lens _slwUploadProtocol
+      (\ s a -> s{_slwUploadProtocol = a})
+
+-- | OAuth access token.
+slwAccessToken :: Lens' ScoresListWindow (Maybe Text)
+slwAccessToken
+  = lens _slwAccessToken
+      (\ s a -> s{_slwAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+slwUploadType :: Lens' ScoresListWindow (Maybe Text)
+slwUploadType
+  = lens _slwUploadType
+      (\ s a -> s{_slwUploadType = a})
 
 -- | The collection of scores you\'re requesting.
 slwCollection :: Lens' ScoresListWindow ScoresListWindowCollection
@@ -166,26 +218,35 @@ slwPageToken
 
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
--- less than the specified maxResults.
+-- less than the specified \`maxResults\`.
 slwMaxResults :: Lens' ScoresListWindow (Maybe Int32)
 slwMaxResults
   = lens _slwMaxResults
       (\ s a -> s{_slwMaxResults = a})
       . mapping _Coerce
 
+-- | JSONP
+slwCallback :: Lens' ScoresListWindow (Maybe Text)
+slwCallback
+  = lens _slwCallback (\ s a -> s{_slwCallback = a})
+
 instance GoogleRequest ScoresListWindow where
         type Rs ScoresListWindow = LeaderboardScores
         type Scopes ScoresListWindow =
-             '["https://www.googleapis.com/auth/games",
-               "https://www.googleapis.com/auth/plus.me"]
+             '["https://www.googleapis.com/auth/games"]
         requestClient ScoresListWindow'{..}
           = go _slwLeaderboardId _slwCollection
               (Just _slwTimeSpan)
+              _slwXgafv
+              _slwUploadProtocol
+              _slwAccessToken
+              _slwUploadType
               _slwReturnTopIfAbsent
               _slwLanguage
               _slwResultsAbove
               _slwPageToken
               _slwMaxResults
+              _slwCallback
               (Just AltJSON)
               gamesService
           where go

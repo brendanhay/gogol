@@ -16,7 +16,90 @@
 --
 module Network.Google.Genomics.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
+
+data ActionFlagsItem
+    = FlagUnspecified
+      -- ^ @FLAG_UNSPECIFIED@
+      -- Unspecified flag.
+    | IgnoreExitStatus
+      -- ^ @IGNORE_EXIT_STATUS@
+      -- Normally, a non-zero exit status causes the pipeline to fail. This flag
+      -- allows execution of other actions to continue instead.
+    | RunInBackgRound
+      -- ^ @RUN_IN_BACKGROUND@
+      -- This flag allows an action to continue running in the background while
+      -- executing subsequent actions. This is useful to provide services to
+      -- other actions (or to provide debugging support tools like SSH servers).
+    | AlwaysRun
+      -- ^ @ALWAYS_RUN@
+      -- By default, after an action fails, no further actions are run. This flag
+      -- indicates that this action must be run even if the pipeline has already
+      -- failed. This is useful for actions that copy output files off of the VM
+      -- or for debugging. Note that no actions will be run if image prefetching
+      -- fails.
+    | EnableFuse
+      -- ^ @ENABLE_FUSE@
+      -- Enable access to the FUSE device for this action. Filesystems can then
+      -- be mounted into disks shared with other actions. The other actions do
+      -- not need the \`ENABLE_FUSE\` flag to access the mounted filesystem. This
+      -- has the effect of causing the container to be executed with
+      -- \`CAP_SYS_ADMIN\` and exposes \`\/dev\/fuse\` to the container, so use
+      -- it only for containers you trust.
+    | PublishExposedPorts
+      -- ^ @PUBLISH_EXPOSED_PORTS@
+      -- Exposes all ports specified by \`EXPOSE\` statements in the container.
+      -- To discover the host side port numbers, consult the \`ACTION_STARTED\`
+      -- event in the operation metadata.
+    | DisableImagePrefetch
+      -- ^ @DISABLE_IMAGE_PREFETCH@
+      -- All container images are typically downloaded before any actions are
+      -- executed. This helps prevent typos in URIs or issues like lack of disk
+      -- space from wasting large amounts of compute resources. If set, this flag
+      -- prevents the worker from downloading the image until just before the
+      -- action is executed.
+    | DisableStandardErrorCapture
+      -- ^ @DISABLE_STANDARD_ERROR_CAPTURE@
+      -- A small portion of the container\'s standard error stream is typically
+      -- captured and returned inside the \`ContainerStoppedEvent\`. Setting this
+      -- flag disables this functionality.
+    | BlockExternalNetwork
+      -- ^ @BLOCK_EXTERNAL_NETWORK@
+      -- Prevents the container from accessing the external network.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ActionFlagsItem
+
+instance FromHttpApiData ActionFlagsItem where
+    parseQueryParam = \case
+        "FLAG_UNSPECIFIED" -> Right FlagUnspecified
+        "IGNORE_EXIT_STATUS" -> Right IgnoreExitStatus
+        "RUN_IN_BACKGROUND" -> Right RunInBackgRound
+        "ALWAYS_RUN" -> Right AlwaysRun
+        "ENABLE_FUSE" -> Right EnableFuse
+        "PUBLISH_EXPOSED_PORTS" -> Right PublishExposedPorts
+        "DISABLE_IMAGE_PREFETCH" -> Right DisableImagePrefetch
+        "DISABLE_STANDARD_ERROR_CAPTURE" -> Right DisableStandardErrorCapture
+        "BLOCK_EXTERNAL_NETWORK" -> Right BlockExternalNetwork
+        x -> Left ("Unable to parse ActionFlagsItem from: " <> x)
+
+instance ToHttpApiData ActionFlagsItem where
+    toQueryParam = \case
+        FlagUnspecified -> "FLAG_UNSPECIFIED"
+        IgnoreExitStatus -> "IGNORE_EXIT_STATUS"
+        RunInBackgRound -> "RUN_IN_BACKGROUND"
+        AlwaysRun -> "ALWAYS_RUN"
+        EnableFuse -> "ENABLE_FUSE"
+        PublishExposedPorts -> "PUBLISH_EXPOSED_PORTS"
+        DisableImagePrefetch -> "DISABLE_IMAGE_PREFETCH"
+        DisableStandardErrorCapture -> "DISABLE_STANDARD_ERROR_CAPTURE"
+        BlockExternalNetwork -> "BLOCK_EXTERNAL_NETWORK"
+
+instance FromJSON ActionFlagsItem where
+    parseJSON = parseJSONText "ActionFlagsItem"
+
+instance ToJSON ActionFlagsItem where
+    toJSON = toJSONText
 
 -- | The Google standard error code that best describes this failure.
 data FailedEventCode
@@ -51,7 +134,7 @@ data FailedEventCode
       -- ^ @NOT_FOUND@
       -- Some requested entity (e.g., file or directory) was not found. Note to
       -- server developers: if a request is denied for an entire class of users,
-      -- such as gradual feature rollout or undocumented whitelist, \`NOT_FOUND\`
+      -- such as gradual feature rollout or undocumented allowlist, \`NOT_FOUND\`
       -- may be used. If a request is denied for some users within a class of
       -- users, such as user-based access control, \`PERMISSION_DENIED\` must be
       -- used. HTTP Mapping: 404 Not Found
@@ -85,11 +168,11 @@ data FailedEventCode
       -- Service implementors can use the following guidelines to decide between
       -- \`FAILED_PRECONDITION\`, \`ABORTED\`, and \`UNAVAILABLE\`: (a) Use
       -- \`UNAVAILABLE\` if the client can retry just the failing call. (b) Use
-      -- \`ABORTED\` if the client should retry at a higher level (e.g., when a
-      -- client-specified test-and-set fails, indicating the client should
-      -- restart a read-modify-write sequence). (c) Use \`FAILED_PRECONDITION\`
-      -- if the client should not retry until the system state has been
-      -- explicitly fixed. E.g., if an \"rmdir\" fails because the directory is
+      -- \`ABORTED\` if the client should retry at a higher level. For example,
+      -- when a client-specified test-and-set fails, indicating the client should
+      -- restart a read-modify-write sequence. (c) Use \`FAILED_PRECONDITION\` if
+      -- the client should not retry until the system state has been explicitly
+      -- fixed. For example, if an \"rmdir\" fails because the directory is
       -- non-empty, \`FAILED_PRECONDITION\` should be returned since the client
       -- should not retry unless the files are deleted from the directory. HTTP
       -- Mapping: 400 Bad Request
@@ -125,7 +208,8 @@ data FailedEventCode
     | Unavailable
       -- ^ @UNAVAILABLE@
       -- The service is currently unavailable. This is most likely a transient
-      -- condition, which can be corrected by retrying with a backoff. See the
+      -- condition, which can be corrected by retrying with a backoff. Note that
+      -- it is not always safe to retry non-idempotent operations. See the
       -- guidelines above for deciding between \`FAILED_PRECONDITION\`,
       -- \`ABORTED\`, and \`UNAVAILABLE\`. HTTP Mapping: 503 Service Unavailable
     | DataLoss

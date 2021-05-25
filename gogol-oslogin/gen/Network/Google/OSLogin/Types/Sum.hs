@@ -16,7 +16,7 @@
 --
 module Network.Google.OSLogin.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | The operating system type where this account applies.
 data PosixAccountOperatingSystemType

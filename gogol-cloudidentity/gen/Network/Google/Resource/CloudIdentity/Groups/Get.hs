@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a Group.
+-- Retrieves a \`Group\`.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.groups.get@.
 module Network.Google.Resource.CloudIdentity.Groups.Get
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudIdentity.Groups.Get
     , ggCallback
     ) where
 
-import           Network.Google.CloudIdentity.Types
-import           Network.Google.Prelude
+import Network.Google.CloudIdentity.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudidentity.groups.get@ method which the
 -- 'GroupsGet' request conforms to.
@@ -56,17 +56,17 @@ type GroupsGetResource =
                  QueryParam "callback" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Group
 
--- | Retrieves a Group.
+-- | Retrieves a \`Group\`.
 --
 -- /See:/ 'groupsGet' smart constructor.
 data GroupsGet =
   GroupsGet'
-    { _ggXgafv          :: !(Maybe Xgafv)
+    { _ggXgafv :: !(Maybe Xgafv)
     , _ggUploadProtocol :: !(Maybe Text)
-    , _ggAccessToken    :: !(Maybe Text)
-    , _ggUploadType     :: !(Maybe Text)
-    , _ggName           :: !Text
-    , _ggCallback       :: !(Maybe Text)
+    , _ggAccessToken :: !(Maybe Text)
+    , _ggUploadType :: !(Maybe Text)
+    , _ggName :: !Text
+    , _ggCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -121,10 +121,9 @@ ggUploadType :: Lens' GroupsGet (Maybe Text)
 ggUploadType
   = lens _ggUploadType (\ s a -> s{_ggUploadType = a})
 
--- | [Resource
+-- | Required. The [resource
 -- name](https:\/\/cloud.google.com\/apis\/design\/resource_names) of the
--- Group in the format: \`groups\/{group_id}\`, where \`group_id\` is the
--- unique ID assigned to the Group.
+-- \`Group\` to retrieve. Must be of the form \`groups\/{group_id}\`.
 ggName :: Lens' GroupsGet Text
 ggName = lens _ggName (\ s a -> s{_ggName = a})
 
@@ -137,7 +136,8 @@ instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Group
         type Scopes GroupsGet =
              '["https://www.googleapis.com/auth/cloud-identity.groups",
-               "https://www.googleapis.com/auth/cloud-identity.groups.readonly"]
+               "https://www.googleapis.com/auth/cloud-identity.groups.readonly",
+               "https://www.googleapis.com/auth/cloud-platform"]
         requestClient GroupsGet'{..}
           = go _ggName _ggXgafv _ggUploadProtocol
               _ggAccessToken

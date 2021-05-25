@@ -45,8 +45,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
     , igmstpPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.setTargetPools@ method which the
 -- 'InstanceGroupManagersSetTargetPools' request conforms to.
@@ -76,11 +76,11 @@ type InstanceGroupManagersSetTargetPoolsResource =
 -- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
 data InstanceGroupManagersSetTargetPools =
   InstanceGroupManagersSetTargetPools'
-    { _igmstpRequestId            :: !(Maybe Text)
-    , _igmstpProject              :: !Text
+    { _igmstpRequestId :: !(Maybe Text)
+    , _igmstpProject :: !Text
     , _igmstpInstanceGroupManager :: !Text
-    , _igmstpZone                 :: !Text
-    , _igmstpPayload              :: !InstanceGroupManagersSetTargetPoolsRequest
+    , _igmstpZone :: !Text
+    , _igmstpPayload :: !InstanceGroupManagersSetTargetPoolsRequest
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

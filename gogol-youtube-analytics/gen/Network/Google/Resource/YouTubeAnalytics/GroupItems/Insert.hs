@@ -42,8 +42,8 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
     , giiCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTubeAnalytics.Types
+import Network.Google.Prelude
+import Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groupItems.insert@ method which the
 -- 'GroupItemsInsert' request conforms to.
@@ -64,13 +64,13 @@ type GroupItemsInsertResource =
 -- /See:/ 'groupItemsInsert' smart constructor.
 data GroupItemsInsert =
   GroupItemsInsert'
-    { _giiXgafv                  :: !(Maybe Xgafv)
-    , _giiUploadProtocol         :: !(Maybe Text)
-    , _giiAccessToken            :: !(Maybe Text)
-    , _giiUploadType             :: !(Maybe Text)
-    , _giiPayload                :: !GroupItem
+    { _giiXgafv :: !(Maybe Xgafv)
+    , _giiUploadProtocol :: !(Maybe Text)
+    , _giiAccessToken :: !(Maybe Text)
+    , _giiUploadType :: !(Maybe Text)
+    , _giiPayload :: !GroupItem
     , _giiOnBehalfOfContentOwner :: !(Maybe Text)
-    , _giiCallback               :: !(Maybe Text)
+    , _giiCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

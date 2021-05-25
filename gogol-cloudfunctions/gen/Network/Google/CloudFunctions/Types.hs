@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -22,6 +22,12 @@ module Network.Google.CloudFunctions.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * SecretVersion
+    , SecretVersion
+    , secretVersion
+    , svPath
+    , svVersion
+
     -- * Status
     , Status
     , status
@@ -37,15 +43,6 @@ module Network.Google.CloudFunctions.Types
 
     -- * OperationMetadataV1Type
     , OperationMetadataV1Type (..)
-
-    -- * OperationMetadataV1Beta2
-    , OperationMetadataV1Beta2
-    , operationMetadataV1Beta2
-    , omvbVersionId
-    , omvbUpdateTime
-    , omvbType
-    , omvbTarget
-    , omvbRequest
 
     -- * Expr
     , Expr
@@ -94,6 +91,14 @@ module Network.Google.CloudFunctions.Types
     , generateDownloadURLRequest
     , gdurVersionId
 
+    -- * CloudFunctionBuildEnvironmentVariables
+    , CloudFunctionBuildEnvironmentVariables
+    , cloudFunctionBuildEnvironmentVariables
+    , cfbevAddtional
+
+    -- * CloudFunctionVPCConnectorEgressSettings
+    , CloudFunctionVPCConnectorEgressSettings (..)
+
     -- * Retry
     , Retry
     , retry
@@ -118,6 +123,7 @@ module Network.Google.CloudFunctions.Types
     -- * HTTPSTrigger
     , HTTPSTrigger
     , httpsTrigger
+    , htSecurityLevel
     , htURL
 
     -- * StatusDetailsItem
@@ -134,6 +140,14 @@ module Network.Google.CloudFunctions.Types
     , OperationMetadataV1Request
     , operationMetadataV1Request
     , omvrAddtional
+
+    -- * SecretVolume
+    , SecretVolume
+    , secretVolume
+    , svSecret
+    , svVersions
+    , svProjectId
+    , svMountPath
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -159,16 +173,16 @@ module Network.Google.CloudFunctions.Types
     , OperationMetadataV1
     , operationMetadataV1
     , omvVersionId
+    , omvBuildId
+    , omvBuildName
     , omvUpdateTime
     , omvType
+    , omvSourceToken
     , omvTarget
     , omvRequest
 
     -- * CloudFunctionStatus
     , CloudFunctionStatus (..)
-
-    -- * OperationMetadataV1Beta2Type
-    , OperationMetadataV1Beta2Type (..)
 
     -- * GenerateDownloadURLResponse
     , GenerateDownloadURLResponse
@@ -208,6 +222,7 @@ module Network.Google.CloudFunctions.Types
     , ListFunctionsResponse
     , listFunctionsResponse
     , lfrNextPageToken
+    , lfrUnreachable
     , lfrFunctions
 
     -- * LocationMetadata
@@ -226,34 +241,40 @@ module Network.Google.CloudFunctions.Types
     , alcLogType
     , alcExemptedMembers
 
+    -- * HTTPSTriggerSecurityLevel
+    , HTTPSTriggerSecurityLevel (..)
+
     -- * CloudFunction
     , CloudFunction
     , cloudFunction
     , cfRuntime
+    , cfBuildWorkerPool
     , cfStatus
     , cfSourceArchiveURL
     , cfVersionId
+    , cfSecretVolumes
     , cfSourceUploadURL
     , cfEntryPoint
+    , cfBuildId
     , cfHTTPSTrigger
     , cfNetwork
     , cfMaxInstances
+    , cfVPCConnectorEgressSettings
     , cfEventTrigger
     , cfUpdateTime
     , cfName
     , cfSourceRepository
     , cfAvailableMemoryMb
+    , cfIngressSettings
     , cfLabels
     , cfServiceAccountEmail
     , cfEnvironmentVariables
     , cfTimeout
+    , cfSourceToken
+    , cfBuildEnvironmentVariables
     , cfVPCConnector
+    , cfSecretEnvironmentVariables
     , cfDescription
-
-    -- * OperationMetadataV1Beta2Request
-    , OperationMetadataV1Beta2Request
-    , operationMetadataV1Beta2Request
-    , omvbrAddtional
 
     -- * CloudFunctionLabels
     , CloudFunctionLabels
@@ -264,6 +285,14 @@ module Network.Google.CloudFunctions.Types
     , OperationResponse
     , operationResponse
     , orAddtional
+
+    -- * SecretEnvVar
+    , SecretEnvVar
+    , secretEnvVar
+    , sevSecret
+    , sevKey
+    , sevVersion
+    , sevProjectId
 
     -- * CallFunctionRequest
     , CallFunctionRequest
@@ -276,11 +305,14 @@ module Network.Google.CloudFunctions.Types
     , bMembers
     , bRole
     , bCondition
+
+    -- * CloudFunctionIngressSettings
+    , CloudFunctionIngressSettings (..)
     ) where
 
-import           Network.Google.CloudFunctions.Types.Product
-import           Network.Google.CloudFunctions.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudFunctions.Types.Product
+import Network.Google.CloudFunctions.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Cloud Functions API. This contains the host and root path used as a starting point for constructing service requests.
 cloudFunctionsService :: ServiceConfig
@@ -288,6 +320,6 @@ cloudFunctionsService
   = defaultService (ServiceId "cloudfunctions:v1")
       "cloudfunctions.googleapis.com"
 
--- | View and manage your data across Google Cloud Platform services
+-- | See, edit, configure, and delete your Google Cloud Platform data
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy

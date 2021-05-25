@@ -17,16 +17,16 @@
 --
 module Network.Google.PubSub.Types.Product where
 
-import           Network.Google.Prelude
-import           Network.Google.PubSub.Types.Sum
+import Network.Google.Prelude
+import Network.Google.PubSub.Types.Sum
 
 -- | Configuration for a push delivery endpoint.
 --
 -- /See:/ 'pushConfig' smart constructor.
 data PushConfig =
   PushConfig'
-    { _pcOidcToken    :: !(Maybe OidcToken)
-    , _pcAttributes   :: !(Maybe PushConfigAttributes)
+    { _pcOidcToken :: !(Maybe OidcToken)
+    , _pcAttributes :: !(Maybe PushConfigAttributes)
     , _pcPushEndpoint :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -54,27 +54,27 @@ pcOidcToken :: Lens' PushConfig (Maybe OidcToken)
 pcOidcToken
   = lens _pcOidcToken (\ s a -> s{_pcOidcToken = a})
 
--- | Endpoint configuration attributes. Every endpoint has a set of API
--- supported attributes that can be used to control different aspects of
--- the message delivery. The currently supported attribute is
--- \`x-goog-version\`, which you can use to change the format of the pushed
--- message. This attribute indicates the version of the data expected by
--- the endpoint. This controls the shape of the pushed message (i.e., its
--- fields and metadata). The endpoint version is based on the version of
--- the Pub\/Sub API. If not present during the \`CreateSubscription\` call,
--- it will default to the version of the API used to make such call. If not
--- present during a \`ModifyPushConfig\` call, its value will not be
--- changed. \`GetSubscription\` calls will always return a valid version,
--- even if the subscription was created without this attribute. The
--- possible values for this attribute are: * \`v1beta1\`: uses the push
--- format defined in the v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`:
--- uses the push format defined in the v1 Pub\/Sub API.
+-- | Endpoint configuration attributes that can be used to control different
+-- aspects of the message delivery. The only currently supported attribute
+-- is \`x-goog-version\`, which you can use to change the format of the
+-- pushed message. This attribute indicates the version of the data
+-- expected by the endpoint. This controls the shape of the pushed message
+-- (i.e., its fields and metadata). If not present during the
+-- \`CreateSubscription\` call, it will default to the version of the
+-- Pub\/Sub API used to make such call. If not present in a
+-- \`ModifyPushConfig\` call, its value will not be changed.
+-- \`GetSubscription\` calls will always return a valid version, even if
+-- the subscription was created without this attribute. The only supported
+-- values for the \`x-goog-version\` attribute are: * \`v1beta1\`: uses the
+-- push format defined in the v1beta1 Pub\/Sub API. * \`v1\` or
+-- \`v1beta2\`: uses the push format defined in the v1 Pub\/Sub API. For
+-- example: attributes { \"x-goog-version\": \"v1\" }
 pcAttributes :: Lens' PushConfig (Maybe PushConfigAttributes)
 pcAttributes
   = lens _pcAttributes (\ s a -> s{_pcAttributes = a})
 
 -- | A URL locating the endpoint to which messages should be pushed. For
--- example, a Webhook endpoint might use \"https:\/\/example.com\/push\".
+-- example, a Webhook endpoint might use \`https:\/\/example.com\/push\`.
 pcPushEndpoint :: Lens' PushConfig (Maybe Text)
 pcPushEndpoint
   = lens _pcPushEndpoint
@@ -96,13 +96,86 @@ instance ToJSON PushConfig where
                   ("attributes" .=) <$> _pcAttributes,
                   ("pushEndpoint" .=) <$> _pcPushEndpoint])
 
+-- | Response for the \`ValidateSchema\` method. Empty for now.
+--
+-- /See:/ 'validateSchemaResponse' smart constructor.
+data ValidateSchemaResponse =
+  ValidateSchemaResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateSchemaResponse' with the minimum fields required to make a request.
+--
+validateSchemaResponse
+    :: ValidateSchemaResponse
+validateSchemaResponse = ValidateSchemaResponse'
+
+
+instance FromJSON ValidateSchemaResponse where
+        parseJSON
+          = withObject "ValidateSchemaResponse"
+              (\ o -> pure ValidateSchemaResponse')
+
+instance ToJSON ValidateSchemaResponse where
+        toJSON = const emptyObject
+
+-- | Settings for validating messages published against a schema.
+--
+-- /See:/ 'schemaSettings' smart constructor.
+data SchemaSettings =
+  SchemaSettings'
+    { _ssSchema :: !(Maybe Text)
+    , _ssEncoding :: !(Maybe SchemaSettingsEncoding)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SchemaSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssSchema'
+--
+-- * 'ssEncoding'
+schemaSettings
+    :: SchemaSettings
+schemaSettings = SchemaSettings' {_ssSchema = Nothing, _ssEncoding = Nothing}
+
+
+-- | Required. The name of the schema that messages published should be
+-- validated against. Format is \`projects\/{project}\/schemas\/{schema}\`.
+-- The value of this field will be \`_deleted-schema_\` if the schema has
+-- been deleted.
+ssSchema :: Lens' SchemaSettings (Maybe Text)
+ssSchema = lens _ssSchema (\ s a -> s{_ssSchema = a})
+
+-- | The encoding of messages validated against \`schema\`.
+ssEncoding :: Lens' SchemaSettings (Maybe SchemaSettingsEncoding)
+ssEncoding
+  = lens _ssEncoding (\ s a -> s{_ssEncoding = a})
+
+instance FromJSON SchemaSettings where
+        parseJSON
+          = withObject "SchemaSettings"
+              (\ o ->
+                 SchemaSettings' <$>
+                   (o .:? "schema") <*> (o .:? "encoding"))
+
+instance ToJSON SchemaSettings where
+        toJSON SchemaSettings'{..}
+          = object
+              (catMaybes
+                 [("schema" .=) <$> _ssSchema,
+                  ("encoding" .=) <$> _ssEncoding])
+
 -- | A message and its corresponding acknowledgment ID.
 --
 -- /See:/ 'receivedMessage' smart constructor.
 data ReceivedMessage =
   ReceivedMessage'
-    { _rmAckId   :: !(Maybe Text)
+    { _rmAckId :: !(Maybe Text)
     , _rmMessage :: !(Maybe PubsubMessage)
+    , _rmDeliveryAttempt :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,9 +187,13 @@ data ReceivedMessage =
 -- * 'rmAckId'
 --
 -- * 'rmMessage'
+--
+-- * 'rmDeliveryAttempt'
 receivedMessage
     :: ReceivedMessage
-receivedMessage = ReceivedMessage' {_rmAckId = Nothing, _rmMessage = Nothing}
+receivedMessage =
+  ReceivedMessage'
+    {_rmAckId = Nothing, _rmMessage = Nothing, _rmDeliveryAttempt = Nothing}
 
 
 -- | This ID can be used to acknowledge the received message.
@@ -128,32 +205,51 @@ rmMessage :: Lens' ReceivedMessage (Maybe PubsubMessage)
 rmMessage
   = lens _rmMessage (\ s a -> s{_rmMessage = a})
 
+-- | The approximate number of times that Cloud Pub\/Sub has attempted to
+-- deliver the associated message to a subscriber. More precisely, this is
+-- 1 + (number of NACKs) + (number of ack_deadline exceeds) for this
+-- message. A NACK is any call to ModifyAckDeadline with a 0 deadline. An
+-- ack_deadline exceeds event is whenever a message is not acknowledged
+-- within ack_deadline. Note that ack_deadline is initially
+-- Subscription.ackDeadlineSeconds, but may get extended automatically by
+-- the client library. Upon the first delivery of a given message,
+-- \`delivery_attempt\` will have a value of 1. The value is calculated at
+-- best effort and is approximate. If a DeadLetterPolicy is not set on the
+-- subscription, this will be 0.
+rmDeliveryAttempt :: Lens' ReceivedMessage (Maybe Int32)
+rmDeliveryAttempt
+  = lens _rmDeliveryAttempt
+      (\ s a -> s{_rmDeliveryAttempt = a})
+      . mapping _Coerce
+
 instance FromJSON ReceivedMessage where
         parseJSON
           = withObject "ReceivedMessage"
               (\ o ->
                  ReceivedMessage' <$>
-                   (o .:? "ackId") <*> (o .:? "message"))
+                   (o .:? "ackId") <*> (o .:? "message") <*>
+                     (o .:? "deliveryAttempt"))
 
 instance ToJSON ReceivedMessage where
         toJSON ReceivedMessage'{..}
           = object
               (catMaybes
                  [("ackId" .=) <$> _rmAckId,
-                  ("message" .=) <$> _rmMessage])
+                  ("message" .=) <$> _rmMessage,
+                  ("deliveryAttempt" .=) <$> _rmDeliveryAttempt])
 
 -- | A snapshot resource. Snapshots are used in
--- <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations,
--- which allow you to manage message acknowledgments in bulk. That is, you
--- can set the acknowledgment state of messages in an existing subscription
--- to the state captured by a snapshot.
+-- [Seek](https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview)
+-- operations, which allow you to manage message acknowledgments in bulk.
+-- That is, you can set the acknowledgment state of messages in an existing
+-- subscription to the state captured by a snapshot.
 --
 -- /See:/ 'snapshot' smart constructor.
 data Snapshot =
   Snapshot'
-    { _sTopic      :: !(Maybe Text)
-    , _sName       :: !(Maybe Text)
-    , _sLabels     :: !(Maybe SnapshotLabels)
+    { _sTopic :: !(Maybe Text)
+    , _sName :: !(Maybe Text)
+    , _sLabels :: !(Maybe SnapshotLabels)
     , _sExpireTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -189,8 +285,8 @@ sTopic = lens _sTopic (\ s a -> s{_sTopic = a})
 sName :: Lens' Snapshot (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | See [Creating and managing labels]
+-- (https:\/\/cloud.google.com\/pubsub\/docs\/labels).
 sLabels :: Lens' Snapshot (Maybe SnapshotLabels)
 sLabels = lens _sLabels (\ s a -> s{_sLabels = a})
 
@@ -232,7 +328,7 @@ instance ToJSON Snapshot where
 data ListTopicSnapshotsResponse =
   ListTopicSnapshotsResponse'
     { _ltsrNextPageToken :: !(Maybe Text)
-    , _ltsrSnapshots     :: !(Maybe [Text])
+    , _ltsrSnapshots :: !(Maybe [Text])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -282,16 +378,30 @@ instance ToJSON ListTopicSnapshotsResponse where
                  [("nextPageToken" .=) <$> _ltsrNextPageToken,
                   ("snapshots" .=) <$> _ltsrSnapshots])
 
--- | Represents an expression text. Example: title: \"User account presence\"
--- description: \"Determines whether the request has a user account\"
--- expression: \"size(request.user) > 0\"
+-- | Represents a textual expression in the Common Expression Language (CEL)
+-- syntax. CEL is a C-like expression language. The syntax and semantics of
+-- CEL are documented at https:\/\/github.com\/google\/cel-spec. Example
+-- (Comparison): title: \"Summary size limit\" description: \"Determines if
+-- a summary is less than 100 chars\" expression: \"document.summary.size()
+-- \< 100\" Example (Equality): title: \"Requestor is owner\" description:
+-- \"Determines if requestor is the document owner\" expression:
+-- \"document.owner == request.auth.claims.email\" Example (Logic): title:
+-- \"Public documents\" description: \"Determine whether the document
+-- should be publicly visible\" expression: \"document.type != \'private\'
+-- && document.type != \'internal\'\" Example (Data Manipulation): title:
+-- \"Notification string\" description: \"Create a notification string with
+-- a timestamp.\" expression: \"\'New message received at \' +
+-- string(document.create_time)\" The exact variables and functions that
+-- may be referenced within an expression are determined by the service
+-- that evaluates it. See the service documentation for additional
+-- information.
 --
 -- /See:/ 'expr' smart constructor.
 data Expr =
   Expr'
-    { _eLocation    :: !(Maybe Text)
-    , _eExpression  :: !(Maybe Text)
-    , _eTitle       :: !(Maybe Text)
+    { _eLocation :: !(Maybe Text)
+    , _eExpression :: !(Maybe Text)
+    , _eTitle :: !(Maybe Text)
     , _eDescription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -319,26 +429,25 @@ expr =
     }
 
 
--- | An optional string indicating the location of the expression for error
+-- | Optional. String indicating the location of the expression for error
 -- reporting, e.g. a file name and a position in the file.
 eLocation :: Lens' Expr (Maybe Text)
 eLocation
   = lens _eLocation (\ s a -> s{_eLocation = a})
 
 -- | Textual representation of an expression in Common Expression Language
--- syntax. The application context of the containing message determines
--- which well-known feature set of CEL is supported.
+-- syntax.
 eExpression :: Lens' Expr (Maybe Text)
 eExpression
   = lens _eExpression (\ s a -> s{_eExpression = a})
 
--- | An optional title for the expression, i.e. a short string describing its
+-- | Optional. Title for the expression, i.e. a short string describing its
 -- purpose. This can be used e.g. in UIs which allow to enter the
 -- expression.
 eTitle :: Lens' Expr (Maybe Text)
 eTitle = lens _eTitle (\ s a -> s{_eTitle = a})
 
--- | An optional description of the expression. This is a longer text which
+-- | Optional. Description of the expression. This is a longer text which
 -- describes the expression, e.g. when hovered over it in a UI.
 eDescription :: Lens' Expr (Maybe Text)
 eDescription
@@ -368,7 +477,7 @@ instance ToJSON Expr where
 -- /See:/ 'oidcToken' smart constructor.
 data OidcToken =
   OidcToken'
-    { _otAudience            :: !(Maybe Text)
+    { _otAudience :: !(Maybe Text)
     , _otServiceAccountEmail :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -427,7 +536,7 @@ instance ToJSON OidcToken where
 -- /See:/ 'modifyAckDeadlineRequest' smart constructor.
 data ModifyAckDeadlineRequest =
   ModifyAckDeadlineRequest'
-    { _madrAckIds             :: !(Maybe [Text])
+    { _madrAckIds :: !(Maybe [Text])
     , _madrAckDeadlineSeconds :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -447,18 +556,18 @@ modifyAckDeadlineRequest =
     {_madrAckIds = Nothing, _madrAckDeadlineSeconds = Nothing}
 
 
--- | List of acknowledgment IDs.
+-- | Required. List of acknowledgment IDs.
 madrAckIds :: Lens' ModifyAckDeadlineRequest [Text]
 madrAckIds
   = lens _madrAckIds (\ s a -> s{_madrAckIds = a}) .
       _Default
       . _Coerce
 
--- | The new ack deadline with respect to the time this request was sent to
--- the Pub\/Sub system. For example, if the value is 10, the new ack
--- deadline will expire 10 seconds after the \`ModifyAckDeadline\` call was
--- made. Specifying zero might immediately make the message available for
--- delivery to another subscriber client. This typically results in an
+-- | Required. The new ack deadline with respect to the time this request was
+-- sent to the Pub\/Sub system. For example, if the value is 10, the new
+-- ack deadline will expire 10 seconds after the \`ModifyAckDeadline\` call
+-- was made. Specifying zero might immediately make the message available
+-- for delivery to another subscriber client. This typically results in an
 -- increase in the rate of message redeliveries (that is, duplicates). The
 -- minimum deadline you can specify is 0 seconds. The maximum deadline you
 -- can specify is 600 seconds (10 minutes).
@@ -504,11 +613,11 @@ modifyPushConfigRequest
 modifyPushConfigRequest = ModifyPushConfigRequest' {_mpcrPushConfig = Nothing}
 
 
--- | The push configuration for future deliveries. An empty \`pushConfig\`
--- indicates that the Pub\/Sub system should stop pushing messages from the
--- given subscription and allow messages to be pulled and acknowledged -
--- effectively pausing the subscription if \`Pull\` or \`StreamingPull\` is
--- not called.
+-- | Required. The push configuration for future deliveries. An empty
+-- \`pushConfig\` indicates that the Pub\/Sub system should stop pushing
+-- messages from the given subscription and allow messages to be pulled and
+-- acknowledged - effectively pausing the subscription if \`Pull\` or
+-- \`StreamingPull\` is not called.
 mpcrPushConfig :: Lens' ModifyPushConfigRequest (Maybe PushConfig)
 mpcrPushConfig
   = lens _mpcrPushConfig
@@ -553,19 +662,20 @@ instance ToJSON Empty where
 -- | A message that is published by publishers and consumed by subscribers.
 -- The message must contain either a non-empty data field or at least one
 -- attribute. Note that client libraries represent this object differently
--- depending on the language. See the corresponding
--- <https://cloud.google.com/pubsub/docs/reference/libraries client library documentation>
--- for more information. See
--- <https://cloud.google.com/pubsub/quotas Quotas and limits> for more
--- information about message limits.
+-- depending on the language. See the corresponding [client library
+-- documentation](https:\/\/cloud.google.com\/pubsub\/docs\/reference\/libraries)
+-- for more information. See [quotas and limits]
+-- (https:\/\/cloud.google.com\/pubsub\/quotas) for more information about
+-- message limits.
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage =
   PubsubMessage'
-    { _pmData        :: !(Maybe Bytes)
+    { _pmData :: !(Maybe Bytes)
     , _pmPublishTime :: !(Maybe DateTime')
-    , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
-    , _pmMessageId   :: !(Maybe Text)
+    , _pmAttributes :: !(Maybe PubsubMessageAttributes)
+    , _pmMessageId :: !(Maybe Text)
+    , _pmOrderingKey :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -581,6 +691,8 @@ data PubsubMessage =
 -- * 'pmAttributes'
 --
 -- * 'pmMessageId'
+--
+-- * 'pmOrderingKey'
 pubsubMessage
     :: PubsubMessage
 pubsubMessage =
@@ -589,6 +701,7 @@ pubsubMessage =
     , _pmPublishTime = Nothing
     , _pmAttributes = Nothing
     , _pmMessageId = Nothing
+    , _pmOrderingKey = Nothing
     }
 
 
@@ -608,7 +721,9 @@ pmPublishTime
       (\ s a -> s{_pmPublishTime = a})
       . mapping _DateTime
 
--- | Optional attributes for this message.
+-- | Attributes for this message. If this field is empty, the message must
+-- contain non-empty data. This can be used to filter messages on the
+-- subscription.
 pmAttributes :: Lens' PubsubMessage (Maybe PubsubMessageAttributes)
 pmAttributes
   = lens _pmAttributes (\ s a -> s{_pmAttributes = a})
@@ -622,6 +737,17 @@ pmMessageId :: Lens' PubsubMessage (Maybe Text)
 pmMessageId
   = lens _pmMessageId (\ s a -> s{_pmMessageId = a})
 
+-- | If non-empty, identifies related messages for which publish order should
+-- be respected. If a \`Subscription\` has \`enable_message_ordering\` set
+-- to \`true\`, messages published with the same non-empty \`ordering_key\`
+-- value will be delivered to subscribers in the order in which they are
+-- received by the Pub\/Sub system. All \`PubsubMessage\`s published in a
+-- given \`PublishRequest\` must specify the same \`ordering_key\` value.
+pmOrderingKey :: Lens' PubsubMessage (Maybe Text)
+pmOrderingKey
+  = lens _pmOrderingKey
+      (\ s a -> s{_pmOrderingKey = a})
+
 instance FromJSON PubsubMessage where
         parseJSON
           = withObject "PubsubMessage"
@@ -629,7 +755,8 @@ instance FromJSON PubsubMessage where
                  PubsubMessage' <$>
                    (o .:? "data") <*> (o .:? "publishTime") <*>
                      (o .:? "attributes")
-                     <*> (o .:? "messageId"))
+                     <*> (o .:? "messageId")
+                     <*> (o .:? "orderingKey"))
 
 instance ToJSON PubsubMessage where
         toJSON PubsubMessage'{..}
@@ -638,7 +765,8 @@ instance ToJSON PubsubMessage where
                  [("data" .=) <$> _pmData,
                   ("publishTime" .=) <$> _pmPublishTime,
                   ("attributes" .=) <$> _pmAttributes,
-                  ("messageId" .=) <$> _pmMessageId])
+                  ("messageId" .=) <$> _pmMessageId,
+                  ("orderingKey" .=) <$> _pmOrderingKey])
 
 -- | Response for the \`ListTopicSubscriptions\` method.
 --
@@ -673,7 +801,8 @@ lNextPageToken
   = lens _lNextPageToken
       (\ s a -> s{_lNextPageToken = a})
 
--- | The names of the subscriptions that match the request.
+-- | The names of subscriptions attached to the topic specified in the
+-- request.
 lSubscriptions :: Lens' ListTopicSubscriptionsResponse [Text]
 lSubscriptions
   = lens _lSubscriptions
@@ -703,7 +832,7 @@ instance ToJSON ListTopicSubscriptionsResponse where
 data ListTopicsResponse =
   ListTopicsResponse'
     { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrTopics        :: !(Maybe [Topic])
+    , _ltrTopics :: !(Maybe [Topic])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -750,6 +879,59 @@ instance ToJSON ListTopicsResponse where
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
                   ("topics" .=) <$> _ltrTopics])
 
+-- | Response for the \`ListSchemas\` method.
+--
+-- /See:/ 'listSchemasResponse' smart constructor.
+data ListSchemasResponse =
+  ListSchemasResponse'
+    { _lsrNextPageToken :: !(Maybe Text)
+    , _lsrSchemas :: !(Maybe [Schema])
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ListSchemasResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsrNextPageToken'
+--
+-- * 'lsrSchemas'
+listSchemasResponse
+    :: ListSchemasResponse
+listSchemasResponse =
+  ListSchemasResponse' {_lsrNextPageToken = Nothing, _lsrSchemas = Nothing}
+
+
+-- | If not empty, indicates that there may be more schemas that match the
+-- request; this value should be passed in a new \`ListSchemasRequest\`.
+lsrNextPageToken :: Lens' ListSchemasResponse (Maybe Text)
+lsrNextPageToken
+  = lens _lsrNextPageToken
+      (\ s a -> s{_lsrNextPageToken = a})
+
+-- | The resulting schemas.
+lsrSchemas :: Lens' ListSchemasResponse [Schema]
+lsrSchemas
+  = lens _lsrSchemas (\ s a -> s{_lsrSchemas = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListSchemasResponse where
+        parseJSON
+          = withObject "ListSchemasResponse"
+              (\ o ->
+                 ListSchemasResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "schemas" .!= mempty))
+
+instance ToJSON ListSchemasResponse where
+        toJSON ListSchemasResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lsrNextPageToken,
+                  ("schemas" .=) <$> _lsrSchemas])
+
 -- | Response for the \`Pull\` method.
 --
 -- /See:/ 'pullResponse' smart constructor.
@@ -795,13 +977,36 @@ instance ToJSON PullResponse where
               (catMaybes
                  [("receivedMessages" .=) <$> _prReceivedMessages])
 
+-- | Response for the \`ValidateMessage\` method. Empty for now.
+--
+-- /See:/ 'validateMessageResponse' smart constructor.
+data ValidateMessageResponse =
+  ValidateMessageResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateMessageResponse' with the minimum fields required to make a request.
+--
+validateMessageResponse
+    :: ValidateMessageResponse
+validateMessageResponse = ValidateMessageResponse'
+
+
+instance FromJSON ValidateMessageResponse where
+        parseJSON
+          = withObject "ValidateMessageResponse"
+              (\ o -> pure ValidateMessageResponse')
+
+instance ToJSON ValidateMessageResponse where
+        toJSON = const emptyObject
+
 -- | Response for the \`ListSnapshots\` method.
 --
 -- /See:/ 'listSnapshotsResponse' smart constructor.
 data ListSnapshotsResponse =
   ListSnapshotsResponse'
-    { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrSnapshots     :: !(Maybe [Snapshot])
+    { _lisNextPageToken :: !(Maybe Text)
+    , _lisSnapshots :: !(Maybe [Snapshot])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -810,26 +1015,26 @@ data ListSnapshotsResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsrNextPageToken'
+-- * 'lisNextPageToken'
 --
--- * 'lsrSnapshots'
+-- * 'lisSnapshots'
 listSnapshotsResponse
     :: ListSnapshotsResponse
 listSnapshotsResponse =
-  ListSnapshotsResponse' {_lsrNextPageToken = Nothing, _lsrSnapshots = Nothing}
+  ListSnapshotsResponse' {_lisNextPageToken = Nothing, _lisSnapshots = Nothing}
 
 
 -- | If not empty, indicates that there may be more snapshot that match the
 -- request; this value should be passed in a new \`ListSnapshotsRequest\`.
-lsrNextPageToken :: Lens' ListSnapshotsResponse (Maybe Text)
-lsrNextPageToken
-  = lens _lsrNextPageToken
-      (\ s a -> s{_lsrNextPageToken = a})
+lisNextPageToken :: Lens' ListSnapshotsResponse (Maybe Text)
+lisNextPageToken
+  = lens _lisNextPageToken
+      (\ s a -> s{_lisNextPageToken = a})
 
 -- | The resulting snapshots.
-lsrSnapshots :: Lens' ListSnapshotsResponse [Snapshot]
-lsrSnapshots
-  = lens _lsrSnapshots (\ s a -> s{_lsrSnapshots = a})
+lisSnapshots :: Lens' ListSnapshotsResponse [Snapshot]
+lisSnapshots
+  = lens _lisSnapshots (\ s a -> s{_lisSnapshots = a})
       . _Default
       . _Coerce
 
@@ -845,8 +1050,8 @@ instance ToJSON ListSnapshotsResponse where
         toJSON ListSnapshotsResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lsrNextPageToken,
-                  ("snapshots" .=) <$> _lsrSnapshots])
+                 [("nextPageToken" .=) <$> _lisNextPageToken,
+                  ("snapshots" .=) <$> _lisSnapshots])
 
 -- | Request message for \`SetIamPolicy\` method.
 --
@@ -890,7 +1095,7 @@ instance ToJSON SetIAMPolicyRequest where
 -- /See:/ 'createSnapshotRequest' smart constructor.
 data CreateSnapshotRequest =
   CreateSnapshotRequest'
-    { _csrLabels       :: !(Maybe CreateSnapshotRequestLabels)
+    { _csrLabels :: !(Maybe CreateSnapshotRequestLabels)
     , _csrSubscription :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -909,19 +1114,18 @@ createSnapshotRequest =
   CreateSnapshotRequest' {_csrLabels = Nothing, _csrSubscription = Nothing}
 
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | See Creating and managing labels.
 csrLabels :: Lens' CreateSnapshotRequest (Maybe CreateSnapshotRequestLabels)
 csrLabels
   = lens _csrLabels (\ s a -> s{_csrLabels = a})
 
--- | The subscription whose backlog the snapshot retains. Specifically, the
--- created snapshot is guaranteed to retain: (a) The existing backlog on
--- the subscription. More precisely, this is defined as the messages in the
--- subscription\'s backlog that are unacknowledged upon the successful
--- completion of the \`CreateSnapshot\` request; as well as: (b) Any
--- messages published to the subscription\'s topic following the successful
--- completion of the CreateSnapshot request. Format is
+-- | Required. The subscription whose backlog the snapshot retains.
+-- Specifically, the created snapshot is guaranteed to retain: (a) The
+-- existing backlog on the subscription. More precisely, this is defined as
+-- the messages in the subscription\'s backlog that are unacknowledged upon
+-- the successful completion of the \`CreateSnapshot\` request; as well as:
+-- (b) Any messages published to the subscription\'s topic following the
+-- successful completion of the CreateSnapshot request. Format is
 -- \`projects\/{project}\/subscriptions\/{sub}\`.
 csrSubscription :: Lens' CreateSnapshotRequest (Maybe Text)
 csrSubscription
@@ -948,7 +1152,7 @@ instance ToJSON CreateSnapshotRequest where
 data SeekRequest =
   SeekRequest'
     { _srSnapshot :: !(Maybe Text)
-    , _srTime     :: !(Maybe DateTime')
+    , _srTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1001,13 +1205,76 @@ instance ToJSON SeekRequest where
                  [("snapshot" .=) <$> _srSnapshot,
                   ("time" .=) <$> _srTime])
 
+-- | A schema resource.
+--
+-- /See:/ 'schema' smart constructor.
+data Schema =
+  Schema'
+    { _schDefinition :: !(Maybe Text)
+    , _schName :: !(Maybe Text)
+    , _schType :: !(Maybe SchemaType)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Schema' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'schDefinition'
+--
+-- * 'schName'
+--
+-- * 'schType'
+schema
+    :: Schema
+schema =
+  Schema' {_schDefinition = Nothing, _schName = Nothing, _schType = Nothing}
+
+
+-- | The definition of the schema. This should contain a string representing
+-- the full definition of the schema that is a valid schema definition of
+-- the type specified in \`type\`.
+schDefinition :: Lens' Schema (Maybe Text)
+schDefinition
+  = lens _schDefinition
+      (\ s a -> s{_schDefinition = a})
+
+-- | Required. Name of the schema. Format is
+-- \`projects\/{project}\/schemas\/{schema}\`.
+schName :: Lens' Schema (Maybe Text)
+schName = lens _schName (\ s a -> s{_schName = a})
+
+-- | The type of the schema definition.
+schType :: Lens' Schema (Maybe SchemaType)
+schType = lens _schType (\ s a -> s{_schType = a})
+
+instance FromJSON Schema where
+        parseJSON
+          = withObject "Schema"
+              (\ o ->
+                 Schema' <$>
+                   (o .:? "definition") <*> (o .:? "name") <*>
+                     (o .:? "type"))
+
+instance ToJSON Schema where
+        toJSON Schema'{..}
+          = object
+              (catMaybes
+                 [("definition" .=) <$> _schDefinition,
+                  ("name" .=) <$> _schName, ("type" .=) <$> _schType])
+
 -- | A topic resource.
 --
 -- /See:/ 'topic' smart constructor.
 data Topic =
   Topic'
-    { _tName   :: !(Maybe Text)
+    { _tSchemaSettings :: !(Maybe SchemaSettings)
+    , _tSatisfiesPzs :: !(Maybe Bool)
+    , _tName :: !(Maybe Text)
+    , _tMessageStoragePolicy :: !(Maybe MessageStoragePolicy)
     , _tLabels :: !(Maybe TopicLabels)
+    , _tKmsKeyName :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1016,15 +1283,44 @@ data Topic =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'tSchemaSettings'
+--
+-- * 'tSatisfiesPzs'
+--
 -- * 'tName'
 --
+-- * 'tMessageStoragePolicy'
+--
 -- * 'tLabels'
+--
+-- * 'tKmsKeyName'
 topic
     :: Topic
-topic = Topic' {_tName = Nothing, _tLabels = Nothing}
+topic =
+  Topic'
+    { _tSchemaSettings = Nothing
+    , _tSatisfiesPzs = Nothing
+    , _tName = Nothing
+    , _tMessageStoragePolicy = Nothing
+    , _tLabels = Nothing
+    , _tKmsKeyName = Nothing
+    }
 
 
--- | The name of the topic. It must have the format
+-- | Settings for validating messages published against a schema.
+tSchemaSettings :: Lens' Topic (Maybe SchemaSettings)
+tSchemaSettings
+  = lens _tSchemaSettings
+      (\ s a -> s{_tSchemaSettings = a})
+
+-- | Reserved for future use. This field is set only in responses from the
+-- server; it is ignored if it is set in any requests.
+tSatisfiesPzs :: Lens' Topic (Maybe Bool)
+tSatisfiesPzs
+  = lens _tSatisfiesPzs
+      (\ s a -> s{_tSatisfiesPzs = a})
+
+-- | Required. The name of the topic. It must have the format
 -- \`\"projects\/{project}\/topics\/{topic}\"\`. \`{topic}\` must start
 -- with a letter, and contain only letters (\`[A-Za-z]\`), numbers
 -- (\`[0-9]\`), dashes (\`-\`), underscores (\`_\`), periods (\`.\`),
@@ -1034,25 +1330,51 @@ topic = Topic' {_tName = Nothing, _tLabels = Nothing}
 tName :: Lens' Topic (Maybe Text)
 tName = lens _tName (\ s a -> s{_tName = a})
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | Policy constraining the set of Google Cloud Platform regions where
+-- messages published to the topic may be stored. If not present, then no
+-- constraints are in effect.
+tMessageStoragePolicy :: Lens' Topic (Maybe MessageStoragePolicy)
+tMessageStoragePolicy
+  = lens _tMessageStoragePolicy
+      (\ s a -> s{_tMessageStoragePolicy = a})
+
+-- | See [Creating and managing labels]
+-- (https:\/\/cloud.google.com\/pubsub\/docs\/labels).
 tLabels :: Lens' Topic (Maybe TopicLabels)
 tLabels = lens _tLabels (\ s a -> s{_tLabels = a})
+
+-- | The resource name of the Cloud KMS CryptoKey to be used to protect
+-- access to messages published on this topic. The expected format is
+-- \`projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*\`.
+tKmsKeyName :: Lens' Topic (Maybe Text)
+tKmsKeyName
+  = lens _tKmsKeyName (\ s a -> s{_tKmsKeyName = a})
 
 instance FromJSON Topic where
         parseJSON
           = withObject "Topic"
               (\ o ->
-                 Topic' <$> (o .:? "name") <*> (o .:? "labels"))
+                 Topic' <$>
+                   (o .:? "schemaSettings") <*> (o .:? "satisfiesPzs")
+                     <*> (o .:? "name")
+                     <*> (o .:? "messageStoragePolicy")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "kmsKeyName"))
 
 instance ToJSON Topic where
         toJSON Topic'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _tName, ("labels" .=) <$> _tLabels])
+                 [("schemaSettings" .=) <$> _tSchemaSettings,
+                  ("satisfiesPzs" .=) <$> _tSatisfiesPzs,
+                  ("name" .=) <$> _tName,
+                  ("messageStoragePolicy" .=) <$>
+                    _tMessageStoragePolicy,
+                  ("labels" .=) <$> _tLabels,
+                  ("kmsKeyName" .=) <$> _tKmsKeyName])
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | See [Creating and managing labels]
+-- (https:\/\/cloud.google.com\/pubsub\/docs\/labels).
 --
 -- /See:/ 'topicLabels' smart constructor.
 newtype TopicLabels =
@@ -1087,8 +1409,7 @@ instance FromJSON TopicLabels where
 instance ToJSON TopicLabels where
         toJSON = toJSON . _tlAddtional
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | See Creating and managing labels.
 --
 -- /See:/ 'createSnapshotRequestLabels' smart constructor.
 newtype CreateSnapshotRequestLabels =
@@ -1130,7 +1451,7 @@ instance ToJSON CreateSnapshotRequestLabels where
 -- /See:/ 'updateSnapshotRequest' smart constructor.
 data UpdateSnapshotRequest =
   UpdateSnapshotRequest'
-    { _usrSnapshot   :: !(Maybe Snapshot)
+    { _usrSnapshot :: !(Maybe Snapshot)
     , _usrUpdateMask :: !(Maybe GFieldMask)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1149,13 +1470,13 @@ updateSnapshotRequest =
   UpdateSnapshotRequest' {_usrSnapshot = Nothing, _usrUpdateMask = Nothing}
 
 
--- | The updated snapshot object.
+-- | Required. The updated snapshot object.
 usrSnapshot :: Lens' UpdateSnapshotRequest (Maybe Snapshot)
 usrSnapshot
   = lens _usrSnapshot (\ s a -> s{_usrSnapshot = a})
 
--- | Indicates which fields in the provided snapshot to update. Must be
--- specified and non-empty.
+-- | Required. Indicates which fields in the provided snapshot to update.
+-- Must be specified and non-empty.
 usrUpdateMask :: Lens' UpdateSnapshotRequest (Maybe GFieldMask)
 usrUpdateMask
   = lens _usrUpdateMask
@@ -1175,12 +1496,86 @@ instance ToJSON UpdateSnapshotRequest where
                  [("snapshot" .=) <$> _usrSnapshot,
                   ("updateMask" .=) <$> _usrUpdateMask])
 
+-- | Request for the \`ValidateMessage\` method.
+--
+-- /See:/ 'validateMessageRequest' smart constructor.
+data ValidateMessageRequest =
+  ValidateMessageRequest'
+    { _vmrSchema :: !(Maybe Schema)
+    , _vmrName :: !(Maybe Text)
+    , _vmrMessage :: !(Maybe Bytes)
+    , _vmrEncoding :: !(Maybe ValidateMessageRequestEncoding)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateMessageRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vmrSchema'
+--
+-- * 'vmrName'
+--
+-- * 'vmrMessage'
+--
+-- * 'vmrEncoding'
+validateMessageRequest
+    :: ValidateMessageRequest
+validateMessageRequest =
+  ValidateMessageRequest'
+    { _vmrSchema = Nothing
+    , _vmrName = Nothing
+    , _vmrMessage = Nothing
+    , _vmrEncoding = Nothing
+    }
+
+
+-- | Ad-hoc schema against which to validate
+vmrSchema :: Lens' ValidateMessageRequest (Maybe Schema)
+vmrSchema
+  = lens _vmrSchema (\ s a -> s{_vmrSchema = a})
+
+-- | Name of the schema against which to validate. Format is
+-- \`projects\/{project}\/schemas\/{schema}\`.
+vmrName :: Lens' ValidateMessageRequest (Maybe Text)
+vmrName = lens _vmrName (\ s a -> s{_vmrName = a})
+
+-- | Message to validate against the provided \`schema_spec\`.
+vmrMessage :: Lens' ValidateMessageRequest (Maybe ByteString)
+vmrMessage
+  = lens _vmrMessage (\ s a -> s{_vmrMessage = a}) .
+      mapping _Bytes
+
+-- | The encoding expected for messages
+vmrEncoding :: Lens' ValidateMessageRequest (Maybe ValidateMessageRequestEncoding)
+vmrEncoding
+  = lens _vmrEncoding (\ s a -> s{_vmrEncoding = a})
+
+instance FromJSON ValidateMessageRequest where
+        parseJSON
+          = withObject "ValidateMessageRequest"
+              (\ o ->
+                 ValidateMessageRequest' <$>
+                   (o .:? "schema") <*> (o .:? "name") <*>
+                     (o .:? "message")
+                     <*> (o .:? "encoding"))
+
+instance ToJSON ValidateMessageRequest where
+        toJSON ValidateMessageRequest'{..}
+          = object
+              (catMaybes
+                 [("schema" .=) <$> _vmrSchema,
+                  ("name" .=) <$> _vmrName,
+                  ("message" .=) <$> _vmrMessage,
+                  ("encoding" .=) <$> _vmrEncoding])
+
 -- | Request for the \`Pull\` method.
 --
 -- /See:/ 'pullRequest' smart constructor.
 data PullRequest =
   PullRequest'
-    { _prMaxMessages       :: !(Maybe (Textual Int32))
+    { _prMaxMessages :: !(Maybe (Textual Int32))
     , _prReturnImmediately :: !(Maybe Bool)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1199,18 +1594,22 @@ pullRequest =
   PullRequest' {_prMaxMessages = Nothing, _prReturnImmediately = Nothing}
 
 
--- | The maximum number of messages returned for this request. The Pub\/Sub
--- system may return fewer than the number specified.
+-- | Required. The maximum number of messages to return for this request.
+-- Must be a positive integer. The Pub\/Sub system may return fewer than
+-- the number specified.
 prMaxMessages :: Lens' PullRequest (Maybe Int32)
 prMaxMessages
   = lens _prMaxMessages
       (\ s a -> s{_prMaxMessages = a})
       . mapping _Coerce
 
--- | If this field set to true, the system will respond immediately even if
--- it there are no messages available to return in the \`Pull\` response.
--- Otherwise, the system may wait (for a bounded amount of time) until at
--- least one message is available, rather than returning no messages.
+-- | Optional. If this field set to true, the system will respond immediately
+-- even if it there are no messages available to return in the \`Pull\`
+-- response. Otherwise, the system may wait (for a bounded amount of time)
+-- until at least one message is available, rather than returning no
+-- messages. Warning: setting this field to \`true\` is discouraged because
+-- it adversely impacts the performance of \`Pull\` operations. We
+-- recommend that users do not set this field.
 prReturnImmediately :: Lens' PullRequest (Maybe Bool)
 prReturnImmediately
   = lens _prReturnImmediately
@@ -1231,7 +1630,32 @@ instance ToJSON PullRequest where
                  [("maxMessages" .=) <$> _prMaxMessages,
                   ("returnImmediately" .=) <$> _prReturnImmediately])
 
--- | Optional attributes for this message.
+-- | Response for the DetachSubscription method. Reserved for future use.
+--
+-- /See:/ 'detachSubscriptionResponse' smart constructor.
+data DetachSubscriptionResponse =
+  DetachSubscriptionResponse'
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DetachSubscriptionResponse' with the minimum fields required to make a request.
+--
+detachSubscriptionResponse
+    :: DetachSubscriptionResponse
+detachSubscriptionResponse = DetachSubscriptionResponse'
+
+
+instance FromJSON DetachSubscriptionResponse where
+        parseJSON
+          = withObject "DetachSubscriptionResponse"
+              (\ o -> pure DetachSubscriptionResponse')
+
+instance ToJSON DetachSubscriptionResponse where
+        toJSON = const emptyObject
+
+-- | Attributes for this message. If this field is empty, the message must
+-- contain non-empty data. This can be used to filter messages on the
+-- subscription.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
 newtype PubsubMessageAttributes =
@@ -1266,6 +1690,125 @@ instance FromJSON PubsubMessageAttributes where
 
 instance ToJSON PubsubMessageAttributes where
         toJSON = toJSON . _pmaAddtional
+
+-- | Dead lettering is done on a best effort basis. The same message might be
+-- dead lettered multiple times. If validation on any of the fields fails
+-- at subscription creation\/updation, the create\/update subscription
+-- request will fail.
+--
+-- /See:/ 'deadLetterPolicy' smart constructor.
+data DeadLetterPolicy =
+  DeadLetterPolicy'
+    { _dlpDeadLetterTopic :: !(Maybe Text)
+    , _dlpMaxDeliveryAttempts :: !(Maybe (Textual Int32))
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeadLetterPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlpDeadLetterTopic'
+--
+-- * 'dlpMaxDeliveryAttempts'
+deadLetterPolicy
+    :: DeadLetterPolicy
+deadLetterPolicy =
+  DeadLetterPolicy'
+    {_dlpDeadLetterTopic = Nothing, _dlpMaxDeliveryAttempts = Nothing}
+
+
+-- | The name of the topic to which dead letter messages should be published.
+-- Format is \`projects\/{project}\/topics\/{topic}\`.The Cloud Pub\/Sub
+-- service account associated with the enclosing subscription\'s parent
+-- project (i.e.,
+-- service-{project_number}\'gcp-sa-pubsub.iam.gserviceaccount.com) must
+-- have permission to Publish() to this topic. The operation will fail if
+-- the topic does not exist. Users should ensure that there is a
+-- subscription attached to this topic since messages published to a topic
+-- with no subscriptions are lost.
+dlpDeadLetterTopic :: Lens' DeadLetterPolicy (Maybe Text)
+dlpDeadLetterTopic
+  = lens _dlpDeadLetterTopic
+      (\ s a -> s{_dlpDeadLetterTopic = a})
+
+-- | The maximum number of delivery attempts for any message. The value must
+-- be between 5 and 100. The number of delivery attempts is defined as 1 +
+-- (the sum of number of NACKs and number of times the acknowledgement
+-- deadline has been exceeded for the message). A NACK is any call to
+-- ModifyAckDeadline with a 0 deadline. Note that client libraries may
+-- automatically extend ack_deadlines. This field will be honored on a best
+-- effort basis. If this parameter is 0, a default value of 5 is used.
+dlpMaxDeliveryAttempts :: Lens' DeadLetterPolicy (Maybe Int32)
+dlpMaxDeliveryAttempts
+  = lens _dlpMaxDeliveryAttempts
+      (\ s a -> s{_dlpMaxDeliveryAttempts = a})
+      . mapping _Coerce
+
+instance FromJSON DeadLetterPolicy where
+        parseJSON
+          = withObject "DeadLetterPolicy"
+              (\ o ->
+                 DeadLetterPolicy' <$>
+                   (o .:? "deadLetterTopic") <*>
+                     (o .:? "maxDeliveryAttempts"))
+
+instance ToJSON DeadLetterPolicy where
+        toJSON DeadLetterPolicy'{..}
+          = object
+              (catMaybes
+                 [("deadLetterTopic" .=) <$> _dlpDeadLetterTopic,
+                  ("maxDeliveryAttempts" .=) <$>
+                    _dlpMaxDeliveryAttempts])
+
+-- | A policy constraining the storage of messages published to the topic.
+--
+-- /See:/ 'messageStoragePolicy' smart constructor.
+newtype MessageStoragePolicy =
+  MessageStoragePolicy'
+    { _mspAllowedPersistenceRegions :: Maybe [Text]
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'MessageStoragePolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mspAllowedPersistenceRegions'
+messageStoragePolicy
+    :: MessageStoragePolicy
+messageStoragePolicy =
+  MessageStoragePolicy' {_mspAllowedPersistenceRegions = Nothing}
+
+
+-- | A list of IDs of GCP regions where messages that are published to the
+-- topic may be persisted in storage. Messages published by publishers
+-- running in non-allowed GCP regions (or running outside of GCP
+-- altogether) will be routed for storage in one of the allowed regions. An
+-- empty list means that no regions are allowed, and is not a valid
+-- configuration.
+mspAllowedPersistenceRegions :: Lens' MessageStoragePolicy [Text]
+mspAllowedPersistenceRegions
+  = lens _mspAllowedPersistenceRegions
+      (\ s a -> s{_mspAllowedPersistenceRegions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON MessageStoragePolicy where
+        parseJSON
+          = withObject "MessageStoragePolicy"
+              (\ o ->
+                 MessageStoragePolicy' <$>
+                   (o .:? "allowedPersistenceRegions" .!= mempty))
+
+instance ToJSON MessageStoragePolicy where
+        toJSON MessageStoragePolicy'{..}
+          = object
+              (catMaybes
+                 [("allowedPersistenceRegions" .=) <$>
+                    _mspAllowedPersistenceRegions])
 
 -- | Request message for \`TestIamPermissions\` method.
 --
@@ -1351,6 +1894,68 @@ instance ToJSON PublishResponse where
           = object
               (catMaybes [("messageIds" .=) <$> _prMessageIds])
 
+-- | A policy that specifies how Cloud Pub\/Sub retries message delivery.
+-- Retry delay will be exponential based on provided minimum and maximum
+-- backoffs. https:\/\/en.wikipedia.org\/wiki\/Exponential_backoff.
+-- RetryPolicy will be triggered on NACKs or acknowledgement deadline
+-- exceeded events for a given message. Retry Policy is implemented on a
+-- best effort basis. At times, the delay between consecutive deliveries
+-- may not match the configuration. That is, delay can be more or less than
+-- configured backoff.
+--
+-- /See:/ 'retryPolicy' smart constructor.
+data RetryPolicy =
+  RetryPolicy'
+    { _rpMinimumBackoff :: !(Maybe GDuration)
+    , _rpMaximumBackoff :: !(Maybe GDuration)
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RetryPolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rpMinimumBackoff'
+--
+-- * 'rpMaximumBackoff'
+retryPolicy
+    :: RetryPolicy
+retryPolicy =
+  RetryPolicy' {_rpMinimumBackoff = Nothing, _rpMaximumBackoff = Nothing}
+
+
+-- | The minimum delay between consecutive deliveries of a given message.
+-- Value should be between 0 and 600 seconds. Defaults to 10 seconds.
+rpMinimumBackoff :: Lens' RetryPolicy (Maybe Scientific)
+rpMinimumBackoff
+  = lens _rpMinimumBackoff
+      (\ s a -> s{_rpMinimumBackoff = a})
+      . mapping _GDuration
+
+-- | The maximum delay between consecutive deliveries of a given message.
+-- Value should be between 0 and 600 seconds. Defaults to 600 seconds.
+rpMaximumBackoff :: Lens' RetryPolicy (Maybe Scientific)
+rpMaximumBackoff
+  = lens _rpMaximumBackoff
+      (\ s a -> s{_rpMaximumBackoff = a})
+      . mapping _GDuration
+
+instance FromJSON RetryPolicy where
+        parseJSON
+          = withObject "RetryPolicy"
+              (\ o ->
+                 RetryPolicy' <$>
+                   (o .:? "minimumBackoff") <*>
+                     (o .:? "maximumBackoff"))
+
+instance ToJSON RetryPolicy where
+        toJSON RetryPolicy'{..}
+          = object
+              (catMaybes
+                 [("minimumBackoff" .=) <$> _rpMinimumBackoff,
+                  ("maximumBackoff" .=) <$> _rpMaximumBackoff])
+
 -- | Request for the Publish method.
 --
 -- /See:/ 'publishRequest' smart constructor.
@@ -1371,7 +1976,7 @@ publishRequest
 publishRequest = PublishRequest' {_prMessages = Nothing}
 
 
--- | The messages to publish.
+-- | Required. The messages to publish.
 prMessages :: Lens' PublishRequest [PubsubMessage]
 prMessages
   = lens _prMessages (\ s a -> s{_prMessages = a}) .
@@ -1432,29 +2037,46 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | Defines an Identity and Access Management (IAM) policy. It is used to
--- specify access control policies for Cloud Platform resources. A
--- \`Policy\` consists of a list of \`bindings\`. A \`binding\` binds a
--- list of \`members\` to a \`role\`, where the members can be user
--- accounts, Google groups, Google domains, and service accounts. A
--- \`role\` is a named list of permissions defined by IAM. **JSON Example**
--- { \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- | An Identity and Access Management (IAM) policy, which specifies access
+-- controls for Google Cloud resources. A \`Policy\` is a collection of
+-- \`bindings\`. A \`binding\` binds one or more \`members\` to a single
+-- \`role\`. Members can be user accounts, service accounts, Google groups,
+-- and domains (such as G Suite). A \`role\` is a named list of
+-- permissions; each \`role\` can be an IAM predefined role or a
+-- user-created custom role. For some types of Google Cloud resources, a
+-- \`binding\` can also specify a \`condition\`, which is a logical
+-- expression that allows access to a resource only if the expression
+-- evaluates to \`true\`. A condition can add constraints based on
+-- attributes of the request, the resource, or both. To learn which
+-- resources support conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
+-- **JSON example:** { \"bindings\": [ { \"role\":
+-- \"roles\/resourcemanager.organizationAdmin\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\" ] }, {
--- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } **YAML Example** bindings: - members: - user:mike\'example.com -
--- group:admins\'example.com - domain:google.com -
--- serviceAccount:my-other-app\'appspot.gserviceaccount.com role:
--- roles\/owner - members: - user:sean\'example.com role: roles\/viewer For
--- a description of IAM and its features, see the [IAM developer\'s
--- guide](https:\/\/cloud.google.com\/iam\/docs).
+-- \"serviceAccount:my-project-id\'appspot.gserviceaccount.com\" ] }, {
+-- \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [
+-- \"user:eve\'example.com\" ], \"condition\": { \"title\": \"expirable
+-- access\", \"description\": \"Does not grant access after Sep 2020\",
+-- \"expression\": \"request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\":
+-- \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: -
+-- members: - user:mike\'example.com - group:admins\'example.com -
+-- domain:google.com -
+-- serviceAccount:my-project-id\'appspot.gserviceaccount.com role:
+-- roles\/resourcemanager.organizationAdmin - members: -
+-- user:eve\'example.com role: roles\/resourcemanager.organizationViewer
+-- condition: title: expirable access description: Does not grant access
+-- after Sep 2020 expression: request.time \<
+-- timestamp(\'2020-10-01T00:00:00.000Z\') - etag: BwWWja0YfJA= - version:
+-- 3 For a description of IAM and its features, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/docs\/).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy =
   Policy'
-    { _pEtag     :: !(Maybe Bytes)
-    , _pVersion  :: !(Maybe (Textual Int32))
+    { _pEtag :: !(Maybe Bytes)
+    , _pVersion :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1481,21 +2103,40 @@ policy = Policy' {_pEtag = Nothing, _pVersion = Nothing, _pBindings = Nothing}
 -- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
 -- and systems are expected to put that etag in the request to
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
--- version of the policy. If no \`etag\` is provided in the call to
--- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+-- version of the policy. **Important:** If you use IAM Conditions, you
+-- must include the \`etag\` field whenever you call \`setIamPolicy\`. If
+-- you omit this field, then IAM allows you to overwrite a version \`3\`
+-- policy with a version \`1\` policy, and all of the conditions in the
+-- version \`3\` policy are lost.
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Bytes
 
--- | Deprecated.
+-- | Specifies the format of the policy. Valid values are \`0\`, \`1\`, and
+-- \`3\`. Requests that specify an invalid value are rejected. Any
+-- operation that affects conditional role bindings must specify version
+-- \`3\`. This requirement applies to the following operations: * Getting a
+-- policy that includes a conditional role binding * Adding a conditional
+-- role binding to a policy * Changing a conditional role binding in a
+-- policy * Removing any role binding, with or without a condition, from a
+-- policy that includes conditions **Important:** If you use IAM
+-- Conditions, you must include the \`etag\` field whenever you call
+-- \`setIamPolicy\`. If you omit this field, then IAM allows you to
+-- overwrite a version \`3\` policy with a version \`1\` policy, and all of
+-- the conditions in the version \`3\` policy are lost. If a policy does
+-- not include any conditions, operations on that policy may specify any
+-- valid version or leave the field unset. To learn which resources support
+-- conditions in their IAM policies, see the [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion
   = lens _pVersion (\ s a -> s{_pVersion = a}) .
       mapping _Coerce
 
--- | Associates a list of \`members\` to a \`role\`. \`bindings\` with no
--- members will result in an error.
+-- | Associates a list of \`members\` to a \`role\`. Optionally, may specify
+-- a \`condition\` that determines how and when the \`bindings\` are
+-- applied. Each of the \`bindings\` must contain at least one member.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -1582,21 +2223,21 @@ instance ToJSON ExpirationPolicy where
         toJSON ExpirationPolicy'{..}
           = object (catMaybes [("ttl" .=) <$> _epTtl])
 
--- | Endpoint configuration attributes. Every endpoint has a set of API
--- supported attributes that can be used to control different aspects of
--- the message delivery. The currently supported attribute is
--- \`x-goog-version\`, which you can use to change the format of the pushed
--- message. This attribute indicates the version of the data expected by
--- the endpoint. This controls the shape of the pushed message (i.e., its
--- fields and metadata). The endpoint version is based on the version of
--- the Pub\/Sub API. If not present during the \`CreateSubscription\` call,
--- it will default to the version of the API used to make such call. If not
--- present during a \`ModifyPushConfig\` call, its value will not be
--- changed. \`GetSubscription\` calls will always return a valid version,
--- even if the subscription was created without this attribute. The
--- possible values for this attribute are: * \`v1beta1\`: uses the push
--- format defined in the v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`:
--- uses the push format defined in the v1 Pub\/Sub API.
+-- | Endpoint configuration attributes that can be used to control different
+-- aspects of the message delivery. The only currently supported attribute
+-- is \`x-goog-version\`, which you can use to change the format of the
+-- pushed message. This attribute indicates the version of the data
+-- expected by the endpoint. This controls the shape of the pushed message
+-- (i.e., its fields and metadata). If not present during the
+-- \`CreateSubscription\` call, it will default to the version of the
+-- Pub\/Sub API used to make such call. If not present in a
+-- \`ModifyPushConfig\` call, its value will not be changed.
+-- \`GetSubscription\` calls will always return a valid version, even if
+-- the subscription was created without this attribute. The only supported
+-- values for the \`x-goog-version\` attribute are: * \`v1beta1\`: uses the
+-- push format defined in the v1beta1 Pub\/Sub API. * \`v1\` or
+-- \`v1beta2\`: uses the push format defined in the v1 Pub\/Sub API. For
+-- example: attributes { \"x-goog-version\": \"v1\" }
 --
 -- /See:/ 'pushConfigAttributes' smart constructor.
 newtype PushConfigAttributes =
@@ -1637,14 +2278,19 @@ instance ToJSON PushConfigAttributes where
 -- /See:/ 'subscription' smart constructor.
 data Subscription =
   Subscription'
-    { _subPushConfig               :: !(Maybe PushConfig)
+    { _subPushConfig :: !(Maybe PushConfig)
+    , _subEnableMessageOrdering :: !(Maybe Bool)
+    , _subDetached :: !(Maybe Bool)
     , _subMessageRetentionDuration :: !(Maybe GDuration)
-    , _subTopic                    :: !(Maybe Text)
-    , _subName                     :: !(Maybe Text)
-    , _subLabels                   :: !(Maybe SubscriptionLabels)
-    , _subRetainAckedMessages      :: !(Maybe Bool)
-    , _subAckDeadlineSeconds       :: !(Maybe (Textual Int32))
-    , _subExpirationPolicy         :: !(Maybe ExpirationPolicy)
+    , _subTopic :: !(Maybe Text)
+    , _subName :: !(Maybe Text)
+    , _subDeadLetterPolicy :: !(Maybe DeadLetterPolicy)
+    , _subLabels :: !(Maybe SubscriptionLabels)
+    , _subRetainAckedMessages :: !(Maybe Bool)
+    , _subFilter :: !(Maybe Text)
+    , _subAckDeadlineSeconds :: !(Maybe (Textual Int32))
+    , _subRetryPolicy :: !(Maybe RetryPolicy)
+    , _subExpirationPolicy :: !(Maybe ExpirationPolicy)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1655,17 +2301,27 @@ data Subscription =
 --
 -- * 'subPushConfig'
 --
+-- * 'subEnableMessageOrdering'
+--
+-- * 'subDetached'
+--
 -- * 'subMessageRetentionDuration'
 --
 -- * 'subTopic'
 --
 -- * 'subName'
 --
+-- * 'subDeadLetterPolicy'
+--
 -- * 'subLabels'
 --
 -- * 'subRetainAckedMessages'
 --
+-- * 'subFilter'
+--
 -- * 'subAckDeadlineSeconds'
+--
+-- * 'subRetryPolicy'
 --
 -- * 'subExpirationPolicy'
 subscription
@@ -1673,12 +2329,17 @@ subscription
 subscription =
   Subscription'
     { _subPushConfig = Nothing
+    , _subEnableMessageOrdering = Nothing
+    , _subDetached = Nothing
     , _subMessageRetentionDuration = Nothing
     , _subTopic = Nothing
     , _subName = Nothing
+    , _subDeadLetterPolicy = Nothing
     , _subLabels = Nothing
     , _subRetainAckedMessages = Nothing
+    , _subFilter = Nothing
     , _subAckDeadlineSeconds = Nothing
+    , _subRetryPolicy = Nothing
     , _subExpirationPolicy = Nothing
     }
 
@@ -1690,6 +2351,24 @@ subPushConfig :: Lens' Subscription (Maybe PushConfig)
 subPushConfig
   = lens _subPushConfig
       (\ s a -> s{_subPushConfig = a})
+
+-- | If true, messages published with the same \`ordering_key\` in
+-- \`PubsubMessage\` will be delivered to the subscribers in the order in
+-- which they are received by the Pub\/Sub system. Otherwise, they may be
+-- delivered in any order.
+subEnableMessageOrdering :: Lens' Subscription (Maybe Bool)
+subEnableMessageOrdering
+  = lens _subEnableMessageOrdering
+      (\ s a -> s{_subEnableMessageOrdering = a})
+
+-- | Indicates whether the subscription is detached from its topic. Detached
+-- subscriptions don\'t receive messages from their topic and don\'t retain
+-- any backlog. \`Pull\` and \`StreamingPull\` requests will return
+-- FAILED_PRECONDITION. If the subscription is a push subscription, pushes
+-- to the endpoint will not be made.
+subDetached :: Lens' Subscription (Maybe Bool)
+subDetached
+  = lens _subDetached (\ s a -> s{_subDetached = a})
 
 -- | How long to retain unacknowledged messages in the subscription\'s
 -- backlog, from the moment a message is published. If
@@ -1703,13 +2382,14 @@ subMessageRetentionDuration
       (\ s a -> s{_subMessageRetentionDuration = a})
       . mapping _GDuration
 
--- | The name of the topic from which this subscription is receiving
--- messages. Format is \`projects\/{project}\/topics\/{topic}\`. The value
--- of this field will be \`_deleted-topic_\` if the topic has been deleted.
+-- | Required. The name of the topic from which this subscription is
+-- receiving messages. Format is \`projects\/{project}\/topics\/{topic}\`.
+-- The value of this field will be \`_deleted-topic_\` if the topic has
+-- been deleted.
 subTopic :: Lens' Subscription (Maybe Text)
 subTopic = lens _subTopic (\ s a -> s{_subTopic = a})
 
--- | The name of the subscription. It must have the format
+-- | Required. The name of the subscription. It must have the format
 -- \`\"projects\/{project}\/subscriptions\/{subscription}\"\`.
 -- \`{subscription}\` must start with a letter, and contain only letters
 -- (\`[A-Za-z]\`), numbers (\`[0-9]\`), dashes (\`-\`), underscores
@@ -1719,8 +2399,18 @@ subTopic = lens _subTopic (\ s a -> s{_subTopic = a})
 subName :: Lens' Subscription (Maybe Text)
 subName = lens _subName (\ s a -> s{_subName = a})
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | A policy that specifies the conditions for dead lettering messages in
+-- this subscription. If dead_letter_policy is not set, dead lettering is
+-- disabled. The Cloud Pub\/Sub service account associated with this
+-- subscriptions\'s parent project (i.e.,
+-- service-{project_number}\'gcp-sa-pubsub.iam.gserviceaccount.com) must
+-- have permission to Acknowledge() messages on this subscription.
+subDeadLetterPolicy :: Lens' Subscription (Maybe DeadLetterPolicy)
+subDeadLetterPolicy
+  = lens _subDeadLetterPolicy
+      (\ s a -> s{_subDeadLetterPolicy = a})
+
+-- | See Creating and managing labels.
 subLabels :: Lens' Subscription (Maybe SubscriptionLabels)
 subLabels
   = lens _subLabels (\ s a -> s{_subLabels = a})
@@ -1729,17 +2419,27 @@ subLabels
 -- messages are not expunged from the subscription\'s backlog, even if they
 -- are acknowledged, until they fall out of the
 -- \`message_retention_duration\` window. This must be true if you would
--- like to
--- <https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time Seek to a timestamp>.
+-- like to [\`Seek\` to a timestamp]
+-- (https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview#seek_to_a_time)
+-- in the past to replay previously-acknowledged messages.
 subRetainAckedMessages :: Lens' Subscription (Maybe Bool)
 subRetainAckedMessages
   = lens _subRetainAckedMessages
       (\ s a -> s{_subRetainAckedMessages = a})
 
+-- | An expression written in the Pub\/Sub [filter
+-- language](https:\/\/cloud.google.com\/pubsub\/docs\/filtering). If
+-- non-empty, then only \`PubsubMessage\`s whose \`attributes\` field
+-- matches the filter are delivered on this subscription. If empty, then no
+-- messages are filtered out.
+subFilter :: Lens' Subscription (Maybe Text)
+subFilter
+  = lens _subFilter (\ s a -> s{_subFilter = a})
+
 -- | The approximate amount of time (on a best-effort basis) Pub\/Sub waits
 -- for the subscriber to acknowledge receipt before resending the message.
 -- In the interval after the message is delivered and before it is
--- acknowledged, it is considered to be /outstanding/. During that time
+-- acknowledged, it is considered to be *outstanding*. During that time
 -- period, the message will not be redelivered (on a best-effort basis).
 -- For pull subscriptions, this value is used as the initial value for the
 -- ack deadline. To override this value for a given message, call
@@ -1758,15 +2458,22 @@ subAckDeadlineSeconds
       (\ s a -> s{_subAckDeadlineSeconds = a})
       . mapping _Coerce
 
+-- | A policy that specifies how Pub\/Sub retries message delivery for this
+-- subscription. If not set, the default retry policy is applied. This
+-- generally implies that messages will be retried as soon as possible for
+-- healthy subscribers. RetryPolicy will be triggered on NACKs or
+-- acknowledgement deadline exceeded events for a given message.
+subRetryPolicy :: Lens' Subscription (Maybe RetryPolicy)
+subRetryPolicy
+  = lens _subRetryPolicy
+      (\ s a -> s{_subRetryPolicy = a})
+
 -- | A policy that specifies the conditions for this subscription\'s
 -- expiration. A subscription is considered active as long as any connected
 -- subscriber is successfully consuming messages from the subscription or
 -- is issuing operations on the subscription. If \`expiration_policy\` is
 -- not set, a *default policy* with \`ttl\` of 31 days will be used. The
--- minimum allowed value for \`expiration_policy.ttl\` is 1 day. __BETA:__
--- This feature is part of a beta release. This API might be changed in
--- backward-incompatible ways and is not recommended for production use. It
--- is not subject to any SLA or deprecation policy.
+-- minimum allowed value for \`expiration_policy.ttl\` is 1 day.
 subExpirationPolicy :: Lens' Subscription (Maybe ExpirationPolicy)
 subExpirationPolicy
   = lens _subExpirationPolicy
@@ -1778,12 +2485,17 @@ instance FromJSON Subscription where
               (\ o ->
                  Subscription' <$>
                    (o .:? "pushConfig") <*>
-                     (o .:? "messageRetentionDuration")
+                     (o .:? "enableMessageOrdering")
+                     <*> (o .:? "detached")
+                     <*> (o .:? "messageRetentionDuration")
                      <*> (o .:? "topic")
                      <*> (o .:? "name")
+                     <*> (o .:? "deadLetterPolicy")
                      <*> (o .:? "labels")
                      <*> (o .:? "retainAckedMessages")
+                     <*> (o .:? "filter")
                      <*> (o .:? "ackDeadlineSeconds")
+                     <*> (o .:? "retryPolicy")
                      <*> (o .:? "expirationPolicy"))
 
 instance ToJSON Subscription where
@@ -1791,13 +2503,19 @@ instance ToJSON Subscription where
           = object
               (catMaybes
                  [("pushConfig" .=) <$> _subPushConfig,
+                  ("enableMessageOrdering" .=) <$>
+                    _subEnableMessageOrdering,
+                  ("detached" .=) <$> _subDetached,
                   ("messageRetentionDuration" .=) <$>
                     _subMessageRetentionDuration,
                   ("topic" .=) <$> _subTopic, ("name" .=) <$> _subName,
+                  ("deadLetterPolicy" .=) <$> _subDeadLetterPolicy,
                   ("labels" .=) <$> _subLabels,
                   ("retainAckedMessages" .=) <$>
                     _subRetainAckedMessages,
+                  ("filter" .=) <$> _subFilter,
                   ("ackDeadlineSeconds" .=) <$> _subAckDeadlineSeconds,
+                  ("retryPolicy" .=) <$> _subRetryPolicy,
                   ("expirationPolicy" .=) <$> _subExpirationPolicy])
 
 -- | Request for the UpdateSubscription method.
@@ -1805,7 +2523,7 @@ instance ToJSON Subscription where
 -- /See:/ 'updateSubscriptionRequest' smart constructor.
 data UpdateSubscriptionRequest =
   UpdateSubscriptionRequest'
-    { _uUpdateMask   :: !(Maybe GFieldMask)
+    { _uUpdateMask :: !(Maybe GFieldMask)
     , _uSubscription :: !(Maybe Subscription)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -1824,13 +2542,13 @@ updateSubscriptionRequest =
   UpdateSubscriptionRequest' {_uUpdateMask = Nothing, _uSubscription = Nothing}
 
 
--- | Indicates which fields in the provided subscription to update. Must be
--- specified and non-empty.
+-- | Required. Indicates which fields in the provided subscription to update.
+-- Must be specified and non-empty.
 uUpdateMask :: Lens' UpdateSubscriptionRequest (Maybe GFieldMask)
 uUpdateMask
   = lens _uUpdateMask (\ s a -> s{_uUpdateMask = a})
 
--- | The updated subscription object.
+-- | Required. The updated subscription object.
 uSubscription :: Lens' UpdateSubscriptionRequest (Maybe Subscription)
 uSubscription
   = lens _uSubscription
@@ -1850,8 +2568,7 @@ instance ToJSON UpdateSubscriptionRequest where
                  [("updateMask" .=) <$> _uUpdateMask,
                   ("subscription" .=) <$> _uSubscription])
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | See Creating and managing labels.
 --
 -- /See:/ 'subscriptionLabels' smart constructor.
 newtype SubscriptionLabels =
@@ -1886,8 +2603,42 @@ instance FromJSON SubscriptionLabels where
 instance ToJSON SubscriptionLabels where
         toJSON = toJSON . _slAddtional
 
--- | See
--- <https://cloud.google.com/pubsub/docs/labels Creating and managing labels>.
+-- | Request for the \`ValidateSchema\` method.
+--
+-- /See:/ 'validateSchemaRequest' smart constructor.
+newtype ValidateSchemaRequest =
+  ValidateSchemaRequest'
+    { _vsrSchema :: Maybe Schema
+    }
+  deriving (Eq, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ValidateSchemaRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsrSchema'
+validateSchemaRequest
+    :: ValidateSchemaRequest
+validateSchemaRequest = ValidateSchemaRequest' {_vsrSchema = Nothing}
+
+
+-- | Required. The schema object to validate.
+vsrSchema :: Lens' ValidateSchemaRequest (Maybe Schema)
+vsrSchema
+  = lens _vsrSchema (\ s a -> s{_vsrSchema = a})
+
+instance FromJSON ValidateSchemaRequest where
+        parseJSON
+          = withObject "ValidateSchemaRequest"
+              (\ o -> ValidateSchemaRequest' <$> (o .:? "schema"))
+
+instance ToJSON ValidateSchemaRequest where
+        toJSON ValidateSchemaRequest'{..}
+          = object (catMaybes [("schema" .=) <$> _vsrSchema])
+
+-- | See [Creating and managing labels]
+-- (https:\/\/cloud.google.com\/pubsub\/docs\/labels).
 --
 -- /See:/ 'snapshotLabels' smart constructor.
 newtype SnapshotLabels =
@@ -1927,8 +2678,8 @@ instance ToJSON SnapshotLabels where
 -- /See:/ 'listSubscriptionsResponse' smart constructor.
 data ListSubscriptionsResponse =
   ListSubscriptionsResponse'
-    { _lisNextPageToken :: !(Maybe Text)
-    , _lisSubscriptions :: !(Maybe [Subscription])
+    { _lsrsNextPageToken :: !(Maybe Text)
+    , _lsrsSubscriptions :: !(Maybe [Subscription])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -1937,29 +2688,29 @@ data ListSubscriptionsResponse =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lisNextPageToken'
+-- * 'lsrsNextPageToken'
 --
--- * 'lisSubscriptions'
+-- * 'lsrsSubscriptions'
 listSubscriptionsResponse
     :: ListSubscriptionsResponse
 listSubscriptionsResponse =
   ListSubscriptionsResponse'
-    {_lisNextPageToken = Nothing, _lisSubscriptions = Nothing}
+    {_lsrsNextPageToken = Nothing, _lsrsSubscriptions = Nothing}
 
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
 -- \`ListSubscriptionsRequest\` to get more subscriptions.
-lisNextPageToken :: Lens' ListSubscriptionsResponse (Maybe Text)
-lisNextPageToken
-  = lens _lisNextPageToken
-      (\ s a -> s{_lisNextPageToken = a})
+lsrsNextPageToken :: Lens' ListSubscriptionsResponse (Maybe Text)
+lsrsNextPageToken
+  = lens _lsrsNextPageToken
+      (\ s a -> s{_lsrsNextPageToken = a})
 
 -- | The subscriptions that match the request.
-lisSubscriptions :: Lens' ListSubscriptionsResponse [Subscription]
-lisSubscriptions
-  = lens _lisSubscriptions
-      (\ s a -> s{_lisSubscriptions = a})
+lsrsSubscriptions :: Lens' ListSubscriptionsResponse [Subscription]
+lsrsSubscriptions
+  = lens _lsrsSubscriptions
+      (\ s a -> s{_lsrsSubscriptions = a})
       . _Default
       . _Coerce
 
@@ -1975,16 +2726,16 @@ instance ToJSON ListSubscriptionsResponse where
         toJSON ListSubscriptionsResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lisNextPageToken,
-                  ("subscriptions" .=) <$> _lisSubscriptions])
+                 [("nextPageToken" .=) <$> _lsrsNextPageToken,
+                  ("subscriptions" .=) <$> _lsrsSubscriptions])
 
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding =
   Binding'
-    { _bMembers   :: !(Maybe [Text])
-    , _bRole      :: !(Maybe Text)
+    { _bMembers :: !(Maybe [Text])
+    , _bRole :: !(Maybe Text)
     , _bCondition :: !(Maybe Expr)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -2012,13 +2763,30 @@ binding =
 -- identifier that represents anyone who is authenticated with a Google
 -- account or a service account. * \`user:{emailid}\`: An email address
 -- that represents a specific Google account. For example,
--- \`alice\'gmail.com\` . * \`serviceAccount:{emailid}\`: An email address
--- that represents a service account. For example,
+-- \`alice\'example.com\` . * \`serviceAccount:{emailid}\`: An email
+-- address that represents a service account. For example,
 -- \`my-other-app\'appspot.gserviceaccount.com\`. * \`group:{emailid}\`: An
 -- email address that represents a Google group. For example,
--- \`admins\'example.com\`. * \`domain:{domain}\`: The G Suite domain
--- (primary) that represents all the users of that domain. For example,
--- \`google.com\` or \`example.com\`.
+-- \`admins\'example.com\`. * \`deleted:user:{emailid}?uid={uniqueid}\`: An
+-- email address (plus unique identifier) representing a user that has been
+-- recently deleted. For example,
+-- \`alice\'example.com?uid=123456789012345678901\`. If the user is
+-- recovered, this value reverts to \`user:{emailid}\` and the recovered
+-- user retains the role in the binding. *
+-- \`deleted:serviceAccount:{emailid}?uid={uniqueid}\`: An email address
+-- (plus unique identifier) representing a service account that has been
+-- recently deleted. For example,
+-- \`my-other-app\'appspot.gserviceaccount.com?uid=123456789012345678901\`.
+-- If the service account is undeleted, this value reverts to
+-- \`serviceAccount:{emailid}\` and the undeleted service account retains
+-- the role in the binding. * \`deleted:group:{emailid}?uid={uniqueid}\`:
+-- An email address (plus unique identifier) representing a Google group
+-- that has been recently deleted. For example,
+-- \`admins\'example.com?uid=123456789012345678901\`. If the group is
+-- recovered, this value reverts to \`group:{emailid}\` and the recovered
+-- group retains the role in the binding. * \`domain:{domain}\`: The G
+-- Suite domain (primary) that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
@@ -2030,9 +2798,14 @@ bMembers
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
--- | The condition that is associated with this binding. NOTE: An unsatisfied
--- condition will not allow user access via current binding. Different
--- bindings, including their conditions, are examined independently.
+-- | The condition that is associated with this binding. If the condition
+-- evaluates to \`true\`, then this binding applies to the current request.
+-- If the condition evaluates to \`false\`, then this binding does not
+-- apply to the current request. However, a different role binding might
+-- grant the same role to one or more of the members in this binding. To
+-- learn which resources support conditions in their IAM policies, see the
+-- [IAM
+-- documentation](https:\/\/cloud.google.com\/iam\/help\/conditions\/resource-policies).
 bCondition :: Lens' Binding (Maybe Expr)
 bCondition
   = lens _bCondition (\ s a -> s{_bCondition = a})
@@ -2059,7 +2832,7 @@ instance ToJSON Binding where
 data UpdateTopicRequest =
   UpdateTopicRequest'
     { _utrUpdateMask :: !(Maybe GFieldMask)
-    , _utrTopic      :: !(Maybe Topic)
+    , _utrTopic :: !(Maybe Topic)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -2077,18 +2850,17 @@ updateTopicRequest =
   UpdateTopicRequest' {_utrUpdateMask = Nothing, _utrTopic = Nothing}
 
 
--- | Indicates which fields in the provided topic to update. Must be
--- specified and non-empty. Note that if \`update_mask\` contains
--- \"message_storage_policy\" then the new value will be determined based
--- on the policy configured at the project or organization level. The
--- \`message_storage_policy\` must not be set in the \`topic\` provided
--- above.
+-- | Required. Indicates which fields in the provided topic to update. Must
+-- be specified and non-empty. Note that if \`update_mask\` contains
+-- \"message_storage_policy\" but the \`message_storage_policy\` is not set
+-- in the \`topic\` provided above, then the updated value is determined by
+-- the policy configured at the project or organization level.
 utrUpdateMask :: Lens' UpdateTopicRequest (Maybe GFieldMask)
 utrUpdateMask
   = lens _utrUpdateMask
       (\ s a -> s{_utrUpdateMask = a})
 
--- | The updated topic object.
+-- | Required. The updated topic object.
 utrTopic :: Lens' UpdateTopicRequest (Maybe Topic)
 utrTopic = lens _utrTopic (\ s a -> s{_utrTopic = a})
 
@@ -2126,9 +2898,9 @@ acknowledgeRequest
 acknowledgeRequest = AcknowledgeRequest' {_arAckIds = Nothing}
 
 
--- | The acknowledgment ID for the messages being acknowledged that was
--- returned by the Pub\/Sub system in the \`Pull\` response. Must not be
--- empty.
+-- | Required. The acknowledgment ID for the messages being acknowledged that
+-- was returned by the Pub\/Sub system in the \`Pull\` response. Must not
+-- be empty.
 arAckIds :: Lens' AcknowledgeRequest [Text]
 arAckIds
   = lens _arAckIds (\ s a -> s{_arAckIds = a}) .

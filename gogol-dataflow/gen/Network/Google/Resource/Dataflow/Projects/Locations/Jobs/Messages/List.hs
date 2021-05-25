@@ -53,8 +53,8 @@ module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
     , pljmlCallback
     ) where
 
-import           Network.Google.Dataflow.Types
-import           Network.Google.Prelude
+import Network.Google.Dataflow.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.locations.jobs.messages.list@ method which the
 -- 'ProjectsLocationsJobsMessagesList' request conforms to.
@@ -73,7 +73,9 @@ type ProjectsLocationsJobsMessagesListResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "endTime" DateTime' :>
-                                 QueryParam "minimumImportance" Text :>
+                                 QueryParam "minimumImportance"
+                                   ProjectsLocationsJobsMessagesListMinimumImportance
+                                   :>
                                    QueryParam "pageToken" Text :>
                                      QueryParam "pageSize" (Textual Int32) :>
                                        QueryParam "callback" Text :>
@@ -90,19 +92,19 @@ type ProjectsLocationsJobsMessagesListResource =
 -- /See:/ 'projectsLocationsJobsMessagesList' smart constructor.
 data ProjectsLocationsJobsMessagesList =
   ProjectsLocationsJobsMessagesList'
-    { _pljmlXgafv             :: !(Maybe Xgafv)
-    , _pljmlJobId             :: !Text
-    , _pljmlUploadProtocol    :: !(Maybe Text)
-    , _pljmlLocation          :: !Text
-    , _pljmlStartTime         :: !(Maybe DateTime')
-    , _pljmlAccessToken       :: !(Maybe Text)
-    , _pljmlUploadType        :: !(Maybe Text)
-    , _pljmlEndTime           :: !(Maybe DateTime')
-    , _pljmlMinimumImportance :: !(Maybe Text)
-    , _pljmlPageToken         :: !(Maybe Text)
-    , _pljmlProjectId         :: !Text
-    , _pljmlPageSize          :: !(Maybe (Textual Int32))
-    , _pljmlCallback          :: !(Maybe Text)
+    { _pljmlXgafv :: !(Maybe Xgafv)
+    , _pljmlJobId :: !Text
+    , _pljmlUploadProtocol :: !(Maybe Text)
+    , _pljmlLocation :: !Text
+    , _pljmlStartTime :: !(Maybe DateTime')
+    , _pljmlAccessToken :: !(Maybe Text)
+    , _pljmlUploadType :: !(Maybe Text)
+    , _pljmlEndTime :: !(Maybe DateTime')
+    , _pljmlMinimumImportance :: !(Maybe ProjectsLocationsJobsMessagesListMinimumImportance)
+    , _pljmlPageToken :: !(Maybe Text)
+    , _pljmlProjectId :: !Text
+    , _pljmlPageSize :: !(Maybe (Textual Int32))
+    , _pljmlCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -211,7 +213,7 @@ pljmlEndTime
       . mapping _DateTime
 
 -- | Filter to only get messages with importance >= level
-pljmlMinimumImportance :: Lens' ProjectsLocationsJobsMessagesList (Maybe Text)
+pljmlMinimumImportance :: Lens' ProjectsLocationsJobsMessagesList (Maybe ProjectsLocationsJobsMessagesListMinimumImportance)
 pljmlMinimumImportance
   = lens _pljmlMinimumImportance
       (\ s a -> s{_pljmlMinimumImportance = a})

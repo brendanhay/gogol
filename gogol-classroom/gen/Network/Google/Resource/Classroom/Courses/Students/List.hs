@@ -46,8 +46,8 @@ module Network.Google.Resource.Classroom.Courses.Students.List
     , cslCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.students.list@ method which the
 -- 'CoursesStudentsList' request conforms to.
@@ -74,14 +74,14 @@ type CoursesStudentsListResource =
 -- /See:/ 'coursesStudentsList' smart constructor.
 data CoursesStudentsList =
   CoursesStudentsList'
-    { _cslXgafv          :: !(Maybe Xgafv)
+    { _cslXgafv :: !(Maybe Xgafv)
     , _cslUploadProtocol :: !(Maybe Text)
-    , _cslCourseId       :: !Text
-    , _cslAccessToken    :: !(Maybe Text)
-    , _cslUploadType     :: !(Maybe Text)
-    , _cslPageToken      :: !(Maybe Text)
-    , _cslPageSize       :: !(Maybe (Textual Int32))
-    , _cslCallback       :: !(Maybe Text)
+    , _cslCourseId :: !Text
+    , _cslAccessToken :: !(Maybe Text)
+    , _cslUploadType :: !(Maybe Text)
+    , _cslPageToken :: !(Maybe Text)
+    , _cslPageSize :: !(Maybe (Textual Int32))
+    , _cslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -156,8 +156,8 @@ cslPageToken :: Lens' CoursesStudentsList (Maybe Text)
 cslPageToken
   = lens _cslPageToken (\ s a -> s{_cslPageToken = a})
 
--- | Maximum number of items to return. Zero means no maximum. The server may
--- return fewer than the specified number of results.
+-- | Maximum number of items to return. The default is 30 if unspecified or
+-- \`0\`. The server may return fewer than the specified number of results.
 cslPageSize :: Lens' CoursesStudentsList (Maybe Int32)
 cslPageSize
   = lens _cslPageSize (\ s a -> s{_cslPageSize = a}) .

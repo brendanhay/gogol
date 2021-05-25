@@ -17,8 +17,8 @@
 --
 module Network.Google.CloudPrivateCatalog.Types.Product where
 
-import           Network.Google.CloudPrivateCatalog.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalog.Types.Sum
+import Network.Google.Prelude
 
 -- | Response message for PrivateCatalog.SearchCatalogs.
 --
@@ -26,7 +26,7 @@ import           Network.Google.Prelude
 data GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse =
   GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse'
     { _gcpvscrNextPageToken :: !(Maybe Text)
-    , _gcpvscrCatalogs      :: !(Maybe [GoogleCloudPrivatecatalogV1beta1Catalog])
+    , _gcpvscrCatalogs :: !(Maybe [GoogleCloudPrivatecatalogV1beta1Catalog])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -160,11 +160,11 @@ instance ToJSON
 -- /See:/ 'googleCloudPrivatecatalogV1beta1Catalog' smart constructor.
 data GoogleCloudPrivatecatalogV1beta1Catalog =
   GoogleCloudPrivatecatalogV1beta1Catalog'
-    { _gcpvcUpdateTime  :: !(Maybe DateTime')
-    , _gcpvcName        :: !(Maybe Text)
+    { _gcpvcUpdateTime :: !(Maybe DateTime')
+    , _gcpvcName :: !(Maybe Text)
     , _gcpvcDisplayName :: !(Maybe Text)
     , _gcpvcDescription :: !(Maybe Text)
-    , _gcpvcCreateTime  :: !(Maybe DateTime')
+    , _gcpvcCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -257,7 +257,7 @@ instance ToJSON
 data GoogleCloudPrivatecatalogV1beta1SearchProductsResponse =
   GoogleCloudPrivatecatalogV1beta1SearchProductsResponse'
     { _gcpvsprNextPageToken :: !(Maybe Text)
-    , _gcpvsprProducts      :: !(Maybe [GoogleCloudPrivatecatalogV1beta1Product])
+    , _gcpvsprProducts :: !(Maybe [GoogleCloudPrivatecatalogV1beta1Product])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -366,11 +366,11 @@ instance ToJSON
 -- /See:/ 'googleCloudPrivatecatalogV1beta1Version' smart constructor.
 data GoogleCloudPrivatecatalogV1beta1Version =
   GoogleCloudPrivatecatalogV1beta1Version'
-    { _gcpvvAsset       :: !(Maybe GoogleCloudPrivatecatalogV1beta1VersionAsset)
-    , _gcpvvUpdateTime  :: !(Maybe DateTime')
-    , _gcpvvName        :: !(Maybe Text)
+    { _gcpvvAsset :: !(Maybe GoogleCloudPrivatecatalogV1beta1VersionAsset)
+    , _gcpvvUpdateTime :: !(Maybe DateTime')
+    , _gcpvvName :: !(Maybe Text)
     , _gcpvvDescription :: !(Maybe Text)
-    , _gcpvvCreateTime  :: !(Maybe DateTime')
+    , _gcpvvCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -466,7 +466,7 @@ instance ToJSON
 data GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse =
   GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse'
     { _gcpvsvrNextPageToken :: !(Maybe Text)
-    , _gcpvsvrVersions      :: !(Maybe [GoogleCloudPrivatecatalogV1beta1Version])
+    , _gcpvsvrVersions :: !(Maybe [GoogleCloudPrivatecatalogV1beta1Version])
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -529,12 +529,12 @@ instance ToJSON
 -- /See:/ 'googleCloudPrivatecatalogV1beta1Product' smart constructor.
 data GoogleCloudPrivatecatalogV1beta1Product =
   GoogleCloudPrivatecatalogV1beta1Product'
-    { _gcpvpIconURI         :: !(Maybe Text)
-    , _gcpvpUpdateTime      :: !(Maybe DateTime')
+    { _gcpvpIconURI :: !(Maybe Text)
+    , _gcpvpUpdateTime :: !(Maybe DateTime')
     , _gcpvpDisplayMetadata :: !(Maybe GoogleCloudPrivatecatalogV1beta1ProductDisplayMetadata)
-    , _gcpvpName            :: !(Maybe Text)
-    , _gcpvpAssetType       :: !(Maybe Text)
-    , _gcpvpCreateTime      :: !(Maybe DateTime')
+    , _gcpvpName :: !(Maybe Text)
+    , _gcpvpAssetType :: !(Maybe Text)
+    , _gcpvpCreateTime :: !(Maybe DateTime')
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

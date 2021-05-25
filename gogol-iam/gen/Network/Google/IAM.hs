@@ -58,6 +58,48 @@ module Network.Google.IAM
     -- ** iam.permissions.queryTestablePermissions
     , module Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
 
+    -- ** iam.projects.locations.workloadIdentityPools.create
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Create
+
+    -- ** iam.projects.locations.workloadIdentityPools.delete
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Delete
+
+    -- ** iam.projects.locations.workloadIdentityPools.get
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Get
+
+    -- ** iam.projects.locations.workloadIdentityPools.list
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.List
+
+    -- ** iam.projects.locations.workloadIdentityPools.operations.get
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Operations.Get
+
+    -- ** iam.projects.locations.workloadIdentityPools.patch
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Patch
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.create
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Create
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.delete
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Delete
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.get
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Get
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.list
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.List
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.operations.get
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Operations.Get
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.patch
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Patch
+
+    -- ** iam.projects.locations.workloadIdentityPools.providers.undelete
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Undelete
+
+    -- ** iam.projects.locations.workloadIdentityPools.undelete
+    , module Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Undelete
+
     -- ** iam.projects.roles.create
     , module Network.Google.Resource.IAM.Projects.Roles.Create
 
@@ -106,6 +148,9 @@ module Network.Google.IAM
     -- ** iam.projects.serviceAccounts.keys.list
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
 
+    -- ** iam.projects.serviceAccounts.keys.upload
+    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Upload
+
     -- ** iam.projects.serviceAccounts.list
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
 
@@ -149,6 +194,26 @@ module Network.Google.IAM
     -- ** CreateServiceAccountKeyRequestPrivateKeyType
     , CreateServiceAccountKeyRequestPrivateKeyType (..)
 
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- ** WorkLoadIdentityPoolProvider
+    , WorkLoadIdentityPoolProvider
+    , workLoadIdentityPoolProvider
+    , wlippState
+    , wlippAws
+    , wlippDisabled
+    , wlippAttributeCondition
+    , wlippName
+    , wlippDisplayName
+    , wlippAttributeMApping
+    , wlippDescription
+    , wlippOidc
+
     -- ** UndeleteRoleRequest
     , UndeleteRoleRequest
     , undeleteRoleRequest
@@ -180,10 +245,25 @@ module Network.Google.IAM
     , auditableService
     , asName
 
+    -- ** WorkLoadIdentityPoolState
+    , WorkLoadIdentityPoolState (..)
+
     -- ** QueryAuditableServicesRequest
     , QueryAuditableServicesRequest
     , queryAuditableServicesRequest
     , qasrFullResourceName
+
+    -- ** ProjectsServiceAccountsKeysGetPublicKeyType
+    , ProjectsServiceAccountsKeysGetPublicKeyType (..)
+
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
 
     -- ** QueryGrantableRolesRequestView
     , QueryGrantableRolesRequestView (..)
@@ -191,6 +271,11 @@ module Network.Google.IAM
     -- ** Empty
     , Empty
     , empty
+
+    -- ** Aws
+    , Aws
+    , aws
+    , aAccountId
 
     -- ** QueryTestablePermissionsResponse
     , QueryTestablePermissionsResponse
@@ -203,21 +288,46 @@ module Network.Google.IAM
     , auditData
     , adPolicyDelta
 
+    -- ** OrganizationsRolesListView
+    , OrganizationsRolesListView (..)
+
     -- ** QueryAuditableServicesResponse
     , QueryAuditableServicesResponse
     , queryAuditableServicesResponse
     , qasrServices
 
+    -- ** ServiceAccountKeyKeyOrigin
+    , ServiceAccountKeyKeyOrigin (..)
+
     -- ** ServiceAccountKey
     , ServiceAccountKey
     , serviceAccountKey
     , sakValidAfterTime
+    , sakKeyType
     , sakPrivateKeyData
     , sakPublicKeyData
     , sakName
     , sakPrivateKeyType
     , sakValidBeforeTime
     , sakKeyAlgorithm
+    , sakKeyOrigin
+
+    -- ** WorkLoadIdentityPoolProviderState
+    , WorkLoadIdentityPoolProviderState (..)
+
+    -- ** PermissionDelta
+    , PermissionDelta
+    , permissionDelta
+    , pdAddedPermissions
+    , pdRemovedPermissions
+
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- ** ProjectsRolesListView
+    , ProjectsRolesListView (..)
 
     -- ** LintResult
     , LintResult
@@ -226,9 +336,18 @@ module Network.Google.IAM
     , lrDebugMessage
     , lrLocationOffSet
     , lrSeverity
-    , lrBindingOrdinal
     , lrFieldName
     , lrLevel
+
+    -- ** UndeleteWorkLoadIdentityPoolRequest
+    , UndeleteWorkLoadIdentityPoolRequest
+    , undeleteWorkLoadIdentityPoolRequest
+
+    -- ** ListWorkLoadIdentityPoolProvidersResponse
+    , ListWorkLoadIdentityPoolProvidersResponse
+    , listWorkLoadIdentityPoolProvidersResponse
+    , lwlipprNextPageToken
+    , lwlipprWorkLoadIdentityPoolProviders
 
     -- ** CreateServiceAccountKeyRequest
     , CreateServiceAccountKeyRequest
@@ -256,11 +375,6 @@ module Network.Google.IAM
     , bdMember
     , bdCondition
 
-    -- ** LintPolicyRequestContext
-    , LintPolicyRequestContext
-    , lintPolicyRequestContext
-    , lprcAddtional
-
     -- ** SignBlobRequest
     , SignBlobRequest
     , signBlobRequest
@@ -286,6 +400,9 @@ module Network.Google.IAM
     , rTitle
     , rDescription
 
+    -- ** ServiceAccountKeyKeyType
+    , ServiceAccountKeyKeyType (..)
+
     -- ** ServiceAccount
     , ServiceAccount
     , serviceAccount
@@ -299,6 +416,17 @@ module Network.Google.IAM
     , saDescription
     , saOAuth2ClientId
 
+    -- ** WorkLoadIdentityPoolProviderAttributeMApping
+    , WorkLoadIdentityPoolProviderAttributeMApping
+    , workLoadIdentityPoolProviderAttributeMApping
+    , wlippamaAddtional
+
+    -- ** ListWorkLoadIdentityPoolsResponse
+    , ListWorkLoadIdentityPoolsResponse
+    , listWorkLoadIdentityPoolsResponse
+    , lwliprNextPageToken
+    , lwliprWorkLoadIdentityPools
+
     -- ** QueryTestablePermissionsRequest
     , QueryTestablePermissionsRequest
     , queryTestablePermissionsRequest
@@ -308,6 +436,10 @@ module Network.Google.IAM
 
     -- ** BindingDeltaAction
     , BindingDeltaAction (..)
+
+    -- ** UndeleteWorkLoadIdentityPoolProviderRequest
+    , UndeleteWorkLoadIdentityPoolProviderRequest
+    , undeleteWorkLoadIdentityPoolProviderRequest
 
     -- ** AuditLogConfigLogType
     , AuditLogConfigLogType (..)
@@ -326,6 +458,11 @@ module Network.Google.IAM
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- ** AdminAuditData
+    , AdminAuditData
+    , adminAuditData
+    , aadPermissionDelta
+
     -- ** LintResultSeverity
     , LintResultSeverity (..)
 
@@ -333,6 +470,18 @@ module Network.Google.IAM
     , UndeleteServiceAccountResponse
     , undeleteServiceAccountResponse
     , usarRestoredAccount
+
+    -- ** WorkLoadIdentityPool
+    , WorkLoadIdentityPool
+    , workLoadIdentityPool
+    , wlipState
+    , wlipDisabled
+    , wlipName
+    , wlipDisplayName
+    , wlipDescription
+
+    -- ** RolesListView
+    , RolesListView (..)
 
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -366,6 +515,11 @@ module Network.Google.IAM
     , qgrrPageToken
     , qgrrPageSize
 
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
     -- ** SignJwtRequest
     , SignJwtRequest
     , signJwtRequest
@@ -386,10 +540,14 @@ module Network.Google.IAM
     , alcLogType
     , alcExemptedMembers
 
+    -- ** ProjectsServiceAccountsKeysListKeyTypes
+    , ProjectsServiceAccountsKeysListKeyTypes (..)
+
     -- ** Permission
     , Permission
     , permission
     , perStage
+    , perPrimaryPermission
     , perOnlyInPredefinedRoles
     , perCustomRolesSupportLevel
     , perName
@@ -412,17 +570,19 @@ module Network.Google.IAM
     -- ** LintPolicyRequest
     , LintPolicyRequest
     , lintPolicyRequest
-    , lprContext
     , lprFullResourceName
-    , lprPolicy
     , lprCondition
-    , lprBinding
 
     -- ** ListRolesResponse
     , ListRolesResponse
     , listRolesResponse
     , lrrRoles
     , lrrNextPageToken
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- ** CreateServiceAccountKeyRequestKeyAlgorithm
     , CreateServiceAccountKeyRequestKeyAlgorithm (..)
@@ -436,6 +596,12 @@ module Network.Google.IAM
     , csarServiceAccount
     , csarAccountId
 
+    -- ** Oidc
+    , Oidc
+    , oidc
+    , oAllowedAudiences
+    , oIssuerURI
+
     -- ** CreateRoleRequest
     , CreateRoleRequest
     , createRoleRequest
@@ -444,6 +610,11 @@ module Network.Google.IAM
 
     -- ** ServiceAccountKeyPrivateKeyType
     , ServiceAccountKeyPrivateKeyType (..)
+
+    -- ** UploadServiceAccountKeyRequest
+    , UploadServiceAccountKeyRequest
+    , uploadServiceAccountKeyRequest
+    , usakrPublicKeyData
 
     -- ** Binding
     , Binding
@@ -457,44 +628,59 @@ module Network.Google.IAM
     , disableServiceAccountRequest
     ) where
 
-import           Network.Google.IAM.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.IAM.IAMPolicies.LintPolicy
-import           Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
-import           Network.Google.Resource.IAM.Organizations.Roles.Create
-import           Network.Google.Resource.IAM.Organizations.Roles.Delete
-import           Network.Google.Resource.IAM.Organizations.Roles.Get
-import           Network.Google.Resource.IAM.Organizations.Roles.List
-import           Network.Google.Resource.IAM.Organizations.Roles.Patch
-import           Network.Google.Resource.IAM.Organizations.Roles.Undelete
-import           Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
-import           Network.Google.Resource.IAM.Projects.Roles.Create
-import           Network.Google.Resource.IAM.Projects.Roles.Delete
-import           Network.Google.Resource.IAM.Projects.Roles.Get
-import           Network.Google.Resource.IAM.Projects.Roles.List
-import           Network.Google.Resource.IAM.Projects.Roles.Patch
-import           Network.Google.Resource.IAM.Projects.Roles.Undelete
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.List
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
-import           Network.Google.Resource.IAM.Roles.Get
-import           Network.Google.Resource.IAM.Roles.List
-import           Network.Google.Resource.IAM.Roles.QueryGrantableRoles
+import Network.Google.Prelude
+import Network.Google.IAM.Types
+import Network.Google.Resource.IAM.IAMPolicies.LintPolicy
+import Network.Google.Resource.IAM.IAMPolicies.QueryAuditableServices
+import Network.Google.Resource.IAM.Organizations.Roles.Create
+import Network.Google.Resource.IAM.Organizations.Roles.Delete
+import Network.Google.Resource.IAM.Organizations.Roles.Get
+import Network.Google.Resource.IAM.Organizations.Roles.List
+import Network.Google.Resource.IAM.Organizations.Roles.Patch
+import Network.Google.Resource.IAM.Organizations.Roles.Undelete
+import Network.Google.Resource.IAM.Permissions.QueryTestablePermissions
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Create
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Delete
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Get
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.List
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Operations.Get
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Patch
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Create
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Delete
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Get
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.List
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Operations.Get
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Patch
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Providers.Undelete
+import Network.Google.Resource.IAM.Projects.Locations.WorkLoadIdentityPools.Undelete
+import Network.Google.Resource.IAM.Projects.Roles.Create
+import Network.Google.Resource.IAM.Projects.Roles.Delete
+import Network.Google.Resource.IAM.Projects.Roles.Get
+import Network.Google.Resource.IAM.Projects.Roles.List
+import Network.Google.Resource.IAM.Projects.Roles.Patch
+import Network.Google.Resource.IAM.Projects.Roles.Undelete
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Disable
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Enable
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Upload
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.List
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Patch
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.SignJwt
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Undelete
+import Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+import Network.Google.Resource.IAM.Roles.Get
+import Network.Google.Resource.IAM.Roles.List
+import Network.Google.Resource.IAM.Roles.QueryGrantableRoles
 
 {- $resources
 TODO
@@ -522,6 +708,7 @@ type IAMAPI =
        :<|> ProjectsServiceAccountsKeysListResource
        :<|> ProjectsServiceAccountsKeysGetResource
        :<|> ProjectsServiceAccountsKeysCreateResource
+       :<|> ProjectsServiceAccountsKeysUploadResource
        :<|> ProjectsServiceAccountsKeysDeleteResource
        :<|> ProjectsServiceAccountsListResource
        :<|> ProjectsServiceAccountsSignJwtResource
@@ -538,3 +725,31 @@ type IAMAPI =
        ProjectsServiceAccountsTestIAMPermissionsResource
        :<|> ProjectsServiceAccountsDeleteResource
        :<|> ProjectsServiceAccountsUpdateResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersOperationsGetResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersListResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersUndeleteResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersPatchResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersGetResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersCreateResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsProvidersDeleteResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsOperationsGetResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsListResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsUndeleteResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsPatchResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsGetResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsCreateResource
+       :<|>
+       ProjectsLocationsWorkLoadIdentityPoolsDeleteResource

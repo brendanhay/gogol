@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Teamdrives.Get
     , tgUseDomainAdminAccess
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.teamdrives.get@ method which the
 -- 'TeamdrivesGet' request conforms to.
@@ -55,7 +55,7 @@ type TeamdrivesGetResource =
 -- /See:/ 'teamdrivesGet' smart constructor.
 data TeamdrivesGet =
   TeamdrivesGet'
-    { _tgTeamDriveId          :: !Text
+    { _tgTeamDriveId :: !Text
     , _tgUseDomainAdminAccess :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)

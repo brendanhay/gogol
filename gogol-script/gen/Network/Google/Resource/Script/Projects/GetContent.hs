@@ -43,8 +43,8 @@ module Network.Google.Resource.Script.Projects.GetContent
     , pgcCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Script.Types
+import Network.Google.Prelude
+import Network.Google.Script.Types
 
 -- | A resource alias for @script.projects.getContent@ method which the
 -- 'ProjectsGetContent' request conforms to.
@@ -67,13 +67,13 @@ type ProjectsGetContentResource =
 -- /See:/ 'projectsGetContent' smart constructor.
 data ProjectsGetContent =
   ProjectsGetContent'
-    { _pgcXgafv          :: !(Maybe Xgafv)
+    { _pgcXgafv :: !(Maybe Xgafv)
     , _pgcUploadProtocol :: !(Maybe Text)
-    , _pgcAccessToken    :: !(Maybe Text)
-    , _pgcUploadType     :: !(Maybe Text)
-    , _pgcVersionNumber  :: !(Maybe (Textual Int32))
-    , _pgcScriptId       :: !Text
-    , _pgcCallback       :: !(Maybe Text)
+    , _pgcAccessToken :: !(Maybe Text)
+    , _pgcUploadType :: !(Maybe Text)
+    , _pgcVersionNumber :: !(Maybe (Textual Int32))
+    , _pgcScriptId :: !Text
+    , _pgcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

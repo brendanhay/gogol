@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an Export.
+-- Deletes an export.
 --
 -- /See:/ <https://developers.google.com/vault G Suite Vault API Reference> for @vault.matters.exports.delete@.
 module Network.Google.Resource.Vault.Matters.Exports.Delete
@@ -42,8 +42,8 @@ module Network.Google.Resource.Vault.Matters.Exports.Delete
     , medCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Vault.Types
+import Network.Google.Prelude
+import Network.Google.Vault.Types
 
 -- | A resource alias for @vault.matters.exports.delete@ method which the
 -- 'MattersExportsDelete' request conforms to.
@@ -60,18 +60,18 @@ type MattersExportsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes an Export.
+-- | Deletes an export.
 --
 -- /See:/ 'mattersExportsDelete' smart constructor.
 data MattersExportsDelete =
   MattersExportsDelete'
-    { _medXgafv          :: !(Maybe Xgafv)
+    { _medXgafv :: !(Maybe Xgafv)
     , _medUploadProtocol :: !(Maybe Text)
-    , _medAccessToken    :: !(Maybe Text)
-    , _medUploadType     :: !(Maybe Text)
-    , _medMatterId       :: !Text
-    , _medExportId       :: !Text
-    , _medCallback       :: !(Maybe Text)
+    , _medAccessToken :: !(Maybe Text)
+    , _medUploadType :: !(Maybe Text)
+    , _medMatterId :: !Text
+    , _medExportId :: !Text
+    , _medCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\".
+-- Sandbox only. Moves a test order from state \"\`inProgress\`\" to state
+-- \"\`pendingShipment\`\".
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.advancetestorder@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.orders.advancetestorder@.
 module Network.Google.Resource.Content.Orders.AdvancetestOrder
     (
     -- * REST Resource
@@ -34,12 +34,17 @@ module Network.Google.Resource.Content.Orders.AdvancetestOrder
     , OrdersAdvancetestOrder
 
     -- * Request Lenses
+    , oaoXgafv
     , oaoMerchantId
+    , oaoUploadProtocol
+    , oaoAccessToken
+    , oaoUploadType
     , oaoOrderId
+    , oaoCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.advancetestorder@ method which the
 -- 'OrdersAdvancetestOrder' request conforms to.
@@ -50,17 +55,27 @@ type OrdersAdvancetestOrderResource =
            "testorders" :>
              Capture "orderId" Text :>
                "advance" :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] OrdersAdvanceTestOrderResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Post '[JSON] OrdersAdvanceTestOrderResponse
 
--- | Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\".
+-- | Sandbox only. Moves a test order from state \"\`inProgress\`\" to state
+-- \"\`pendingShipment\`\".
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
 data OrdersAdvancetestOrder =
   OrdersAdvancetestOrder'
-    { _oaoMerchantId :: !(Textual Word64)
-    , _oaoOrderId    :: !Text
+    { _oaoXgafv :: !(Maybe Xgafv)
+    , _oaoMerchantId :: !(Textual Word64)
+    , _oaoUploadProtocol :: !(Maybe Text)
+    , _oaoAccessToken :: !(Maybe Text)
+    , _oaoUploadType :: !(Maybe Text)
+    , _oaoOrderId :: !Text
+    , _oaoCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,17 +84,38 @@ data OrdersAdvancetestOrder =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'oaoXgafv'
+--
 -- * 'oaoMerchantId'
 --
+-- * 'oaoUploadProtocol'
+--
+-- * 'oaoAccessToken'
+--
+-- * 'oaoUploadType'
+--
 -- * 'oaoOrderId'
+--
+-- * 'oaoCallback'
 ordersAdvancetestOrder
     :: Word64 -- ^ 'oaoMerchantId'
     -> Text -- ^ 'oaoOrderId'
     -> OrdersAdvancetestOrder
 ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
   OrdersAdvancetestOrder'
-    {_oaoMerchantId = _Coerce # pOaoMerchantId_, _oaoOrderId = pOaoOrderId_}
+    { _oaoXgafv = Nothing
+    , _oaoMerchantId = _Coerce # pOaoMerchantId_
+    , _oaoUploadProtocol = Nothing
+    , _oaoAccessToken = Nothing
+    , _oaoUploadType = Nothing
+    , _oaoOrderId = pOaoOrderId_
+    , _oaoCallback = Nothing
+    }
 
+
+-- | V1 error format.
+oaoXgafv :: Lens' OrdersAdvancetestOrder (Maybe Xgafv)
+oaoXgafv = lens _oaoXgafv (\ s a -> s{_oaoXgafv = a})
 
 -- | The ID of the account that manages the order. This cannot be a
 -- multi-client account.
@@ -89,10 +125,33 @@ oaoMerchantId
       (\ s a -> s{_oaoMerchantId = a})
       . _Coerce
 
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+oaoUploadProtocol :: Lens' OrdersAdvancetestOrder (Maybe Text)
+oaoUploadProtocol
+  = lens _oaoUploadProtocol
+      (\ s a -> s{_oaoUploadProtocol = a})
+
+-- | OAuth access token.
+oaoAccessToken :: Lens' OrdersAdvancetestOrder (Maybe Text)
+oaoAccessToken
+  = lens _oaoAccessToken
+      (\ s a -> s{_oaoAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+oaoUploadType :: Lens' OrdersAdvancetestOrder (Maybe Text)
+oaoUploadType
+  = lens _oaoUploadType
+      (\ s a -> s{_oaoUploadType = a})
+
 -- | The ID of the test order to modify.
 oaoOrderId :: Lens' OrdersAdvancetestOrder Text
 oaoOrderId
   = lens _oaoOrderId (\ s a -> s{_oaoOrderId = a})
+
+-- | JSONP
+oaoCallback :: Lens' OrdersAdvancetestOrder (Maybe Text)
+oaoCallback
+  = lens _oaoCallback (\ s a -> s{_oaoCallback = a})
 
 instance GoogleRequest OrdersAdvancetestOrder where
         type Rs OrdersAdvancetestOrder =
@@ -100,7 +159,12 @@ instance GoogleRequest OrdersAdvancetestOrder where
         type Scopes OrdersAdvancetestOrder =
              '["https://www.googleapis.com/auth/content"]
         requestClient OrdersAdvancetestOrder'{..}
-          = go _oaoMerchantId _oaoOrderId (Just AltJSON)
+          = go _oaoMerchantId _oaoOrderId _oaoXgafv
+              _oaoUploadProtocol
+              _oaoAccessToken
+              _oaoUploadType
+              _oaoCallback
+              (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

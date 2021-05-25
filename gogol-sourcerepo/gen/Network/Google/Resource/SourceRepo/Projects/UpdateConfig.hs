@@ -42,8 +42,8 @@ module Network.Google.Resource.SourceRepo.Projects.UpdateConfig
     , pucCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.updateConfig@ method which the
 -- 'ProjectsUpdateConfig' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsUpdateConfigResource =
 -- /See:/ 'projectsUpdateConfig' smart constructor.
 data ProjectsUpdateConfig =
   ProjectsUpdateConfig'
-    { _pucXgafv          :: !(Maybe Xgafv)
+    { _pucXgafv :: !(Maybe Xgafv)
     , _pucUploadProtocol :: !(Maybe Text)
-    , _pucAccessToken    :: !(Maybe Text)
-    , _pucUploadType     :: !(Maybe Text)
-    , _pucPayload        :: !UpdateProjectConfigRequest
-    , _pucName           :: !Text
-    , _pucCallback       :: !(Maybe Text)
+    , _pucAccessToken :: !(Maybe Text)
+    , _pucUploadType :: !(Maybe Text)
+    , _pucPayload :: !UpdateProjectConfigRequest
+    , _pucName :: !Text
+    , _pucCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

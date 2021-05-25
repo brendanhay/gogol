@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Instances.TestIAMPermissions
     , itipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.testIamPermissions@ method which the
 -- 'InstancesTestIAMPermissions' request conforms to.
@@ -63,9 +63,9 @@ type InstancesTestIAMPermissionsResource =
 -- /See:/ 'instancesTestIAMPermissions' smart constructor.
 data InstancesTestIAMPermissions =
   InstancesTestIAMPermissions'
-    { _itipProject  :: !Text
-    , _itipZone     :: !Text
-    , _itipPayload  :: !TestPermissionsRequest
+    { _itipProject :: !Text
+    , _itipZone :: !Text
+    , _itipPayload :: !TestPermissionsRequest
     , _itipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

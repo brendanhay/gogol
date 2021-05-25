@@ -42,8 +42,8 @@ module Network.Google.Resource.SourceRepo.Projects.Repos.Patch
     , prpCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SourceRepo.Types
+import Network.Google.Prelude
+import Network.Google.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.patch@ method which the
 -- 'ProjectsReposPatch' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsReposPatchResource =
 -- /See:/ 'projectsReposPatch' smart constructor.
 data ProjectsReposPatch =
   ProjectsReposPatch'
-    { _prpXgafv          :: !(Maybe Xgafv)
+    { _prpXgafv :: !(Maybe Xgafv)
     , _prpUploadProtocol :: !(Maybe Text)
-    , _prpAccessToken    :: !(Maybe Text)
-    , _prpUploadType     :: !(Maybe Text)
-    , _prpPayload        :: !UpdateRepoRequest
-    , _prpName           :: !Text
-    , _prpCallback       :: !(Maybe Text)
+    , _prpAccessToken :: !(Maybe Text)
+    , _prpUploadType :: !(Maybe Text)
+    , _prpPayload :: !UpdateRepoRequest
+    , _prpName :: !Text
+    , _prpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

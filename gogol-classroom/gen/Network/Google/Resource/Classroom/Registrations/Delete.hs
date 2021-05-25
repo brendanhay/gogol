@@ -42,8 +42,8 @@ module Network.Google.Resource.Classroom.Registrations.Delete
     , rdCallback
     ) where
 
-import           Network.Google.Classroom.Types
-import           Network.Google.Prelude
+import Network.Google.Classroom.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @classroom.registrations.delete@ method which the
 -- 'RegistrationsDelete' request conforms to.
@@ -65,11 +65,11 @@ type RegistrationsDeleteResource =
 data RegistrationsDelete =
   RegistrationsDelete'
     { _rdRegistrationId :: !Text
-    , _rdXgafv          :: !(Maybe Xgafv)
+    , _rdXgafv :: !(Maybe Xgafv)
     , _rdUploadProtocol :: !(Maybe Text)
-    , _rdAccessToken    :: !(Maybe Text)
-    , _rdUploadType     :: !(Maybe Text)
-    , _rdCallback       :: !(Maybe Text)
+    , _rdAccessToken :: !(Maybe Text)
+    , _rdUploadType :: !(Maybe Text)
+    , _rdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

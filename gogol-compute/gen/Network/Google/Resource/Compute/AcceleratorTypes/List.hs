@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of accelerator types available to the specified
--- project.
+-- Retrieves a list of accelerator types that are available to the
+-- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.acceleratorTypes.list@.
 module Network.Google.Resource.Compute.AcceleratorTypes.List
@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.AcceleratorTypes.List
     , AcceleratorTypesList
 
     -- * Request Lenses
+    , atlReturnPartialSuccess
     , atlOrderBy
     , atlProject
     , atlZone
@@ -42,8 +43,8 @@ module Network.Google.Resource.Compute.AcceleratorTypes.List
     , atlMaxResults
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.acceleratorTypes.list@ method which the
 -- 'AcceleratorTypesList' request conforms to.
@@ -55,24 +56,26 @@ type AcceleratorTypesListResource =
              "zones" :>
                Capture "zone" Text :>
                  "acceleratorTypes" :>
-                   QueryParam "orderBy" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] AcceleratorTypeList
+                   QueryParam "returnPartialSuccess" Bool :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] AcceleratorTypeList
 
--- | Retrieves a list of accelerator types available to the specified
--- project.
+-- | Retrieves a list of accelerator types that are available to the
+-- specified project.
 --
 -- /See:/ 'acceleratorTypesList' smart constructor.
 data AcceleratorTypesList =
   AcceleratorTypesList'
-    { _atlOrderBy    :: !(Maybe Text)
-    , _atlProject    :: !Text
-    , _atlZone       :: !Text
-    , _atlFilter     :: !(Maybe Text)
-    , _atlPageToken  :: !(Maybe Text)
+    { _atlReturnPartialSuccess :: !(Maybe Bool)
+    , _atlOrderBy :: !(Maybe Text)
+    , _atlProject :: !Text
+    , _atlZone :: !Text
+    , _atlFilter :: !(Maybe Text)
+    , _atlPageToken :: !(Maybe Text)
     , _atlMaxResults :: !(Textual Word32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
@@ -81,6 +84,8 @@ data AcceleratorTypesList =
 -- | Creates a value of 'AcceleratorTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'atlReturnPartialSuccess'
 --
 -- * 'atlOrderBy'
 --
@@ -99,7 +104,8 @@ acceleratorTypesList
     -> AcceleratorTypesList
 acceleratorTypesList pAtlProject_ pAtlZone_ =
   AcceleratorTypesList'
-    { _atlOrderBy = Nothing
+    { _atlReturnPartialSuccess = Nothing
+    , _atlOrderBy = Nothing
     , _atlProject = pAtlProject_
     , _atlZone = pAtlZone_
     , _atlFilter = Nothing
@@ -108,14 +114,21 @@ acceleratorTypesList pAtlProject_ pAtlZone_ =
     }
 
 
+-- | Opt-in for partial success behavior which provides partial results in
+-- case of failure. The default value is false.
+atlReturnPartialSuccess :: Lens' AcceleratorTypesList (Maybe Bool)
+atlReturnPartialSuccess
+  = lens _atlReturnPartialSuccess
+      (\ s a -> s{_atlReturnPartialSuccess = a})
+
 -- | Sorts list results by a certain order. By default, results are returned
 -- in alphanumerical order based on the resource name. You can also sort
 -- results in descending order based on the creation timestamp using
--- orderBy=\"creationTimestamp desc\". This sorts results based on the
--- creationTimestamp field in reverse chronological order (newest result
--- first). Use this to sort resources like operations so that the newest
--- operation is returned first. Currently, only sorting by name or
--- creationTimestamp desc is supported.
+-- \`orderBy=\"creationTimestamp desc\"\`. This sorts results based on the
+-- \`creationTimestamp\` field in reverse chronological order (newest
+-- result first). Use this to sort resources like operations so that the
+-- newest operation is returned first. Currently, only sorting by \`name\`
+-- or \`creationTimestamp desc\` is supported.
 atlOrderBy :: Lens' AcceleratorTypesList (Maybe Text)
 atlOrderBy
   = lens _atlOrderBy (\ s a -> s{_atlOrderBy = a})
@@ -132,34 +145,36 @@ atlZone = lens _atlZone (\ s a -> s{_atlZone = a})
 -- | A filter expression that filters resources listed in the response. The
 -- expression must specify the field name, a comparison operator, and the
 -- value that you want to use for filtering. The value must be a string, a
--- number, or a boolean. The comparison operator must be either =, !=, >,
--- or \<. For example, if you are filtering Compute Engine instances, you
--- can exclude instances named example-instance by specifying name !=
--- example-instance. You can also filter nested fields. For example, you
--- could specify scheduling.automaticRestart = false to include instances
--- only if they are not scheduled for automatic restarts. You can use
--- filtering on nested fields to filter based on resource labels. To filter
--- on multiple expressions, provide each separate expression within
--- parentheses. For example, (scheduling.automaticRestart = true)
--- (cpuPlatform = \"Intel Skylake\"). By default, each expression is an AND
--- expression. However, you can include AND and OR expressions explicitly.
--- For example, (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
--- Broadwell\") AND (scheduling.automaticRestart = true).
+-- number, or a boolean. The comparison operator must be either \`=\`,
+-- \`!=\`, \`>\`, or \`\<\`. For example, if you are filtering Compute
+-- Engine instances, you can exclude instances named \`example-instance\`
+-- by specifying \`name != example-instance\`. You can also filter nested
+-- fields. For example, you could specify \`scheduling.automaticRestart =
+-- false\` to include instances only if they are not scheduled for
+-- automatic restarts. You can use filtering on nested fields to filter
+-- based on resource labels. To filter on multiple expressions, provide
+-- each separate expression within parentheses. For example: \`\`\`
+-- (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")
+-- \`\`\` By default, each expression is an \`AND\` expression. However,
+-- you can include \`AND\` and \`OR\` expressions explicitly. For example:
+-- \`\`\` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel
+-- Broadwell\") AND (scheduling.automaticRestart = true) \`\`\`
 atlFilter :: Lens' AcceleratorTypesList (Maybe Text)
 atlFilter
   = lens _atlFilter (\ s a -> s{_atlFilter = a})
 
--- | Specifies a page token to use. Set pageToken to the nextPageToken
--- returned by a previous list request to get the next page of results.
+-- | Specifies a page token to use. Set \`pageToken\` to the
+-- \`nextPageToken\` returned by a previous list request to get the next
+-- page of results.
 atlPageToken :: Lens' AcceleratorTypesList (Maybe Text)
 atlPageToken
   = lens _atlPageToken (\ s a -> s{_atlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
--- number of available results is larger than maxResults, Compute Engine
--- returns a nextPageToken that can be used to get the next page of results
--- in subsequent list requests. Acceptable values are 0 to 500, inclusive.
--- (Default: 500)
+-- number of available results is larger than \`maxResults\`, Compute
+-- Engine returns a \`nextPageToken\` that can be used to get the next page
+-- of results in subsequent list requests. Acceptable values are \`0\` to
+-- \`500\`, inclusive. (Default: \`500\`)
 atlMaxResults :: Lens' AcceleratorTypesList Word32
 atlMaxResults
   = lens _atlMaxResults
@@ -173,7 +188,9 @@ instance GoogleRequest AcceleratorTypesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AcceleratorTypesList'{..}
-          = go _atlProject _atlZone _atlOrderBy _atlFilter
+          = go _atlProject _atlZone _atlReturnPartialSuccess
+              _atlOrderBy
+              _atlFilter
               _atlPageToken
               (Just _atlMaxResults)
               (Just AltJSON)

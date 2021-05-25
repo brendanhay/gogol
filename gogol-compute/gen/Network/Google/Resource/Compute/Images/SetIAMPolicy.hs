@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Images.SetIAMPolicy
     , isiampResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.setIamPolicy@ method which the
 -- 'ImagesSetIAMPolicy' request conforms to.
@@ -63,8 +63,8 @@ type ImagesSetIAMPolicyResource =
 -- /See:/ 'imagesSetIAMPolicy' smart constructor.
 data ImagesSetIAMPolicy =
   ImagesSetIAMPolicy'
-    { _isiampProject  :: !Text
-    , _isiampPayload  :: !GlobalSetPolicyRequest
+    { _isiampProject :: !Text
+    , _isiampPayload :: !GlobalSetPolicyRequest
     , _isiampResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

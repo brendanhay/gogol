@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -63,9 +63,9 @@ module Network.Google.ServiceBroker.Types
     , giamvtiamprPermissions
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ServiceBroker.Types.Product
-import           Network.Google.ServiceBroker.Types.Sum
+import Network.Google.Prelude
+import Network.Google.ServiceBroker.Types.Product
+import Network.Google.ServiceBroker.Types.Sum
 
 -- | Default request referring to version 'v1' of the Service Broker API. This contains the host and root path used as a starting point for constructing service requests.
 serviceBrokerService :: ServiceConfig

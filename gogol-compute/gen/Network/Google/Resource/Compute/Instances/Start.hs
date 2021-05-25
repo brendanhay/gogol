@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.Instances.Start
     , insnInstance
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.start@ method which the
 -- 'InstancesStart' request conforms to.
@@ -65,9 +65,9 @@ type InstancesStartResource =
 data InstancesStart =
   InstancesStart'
     { _insnRequestId :: !(Maybe Text)
-    , _insnProject   :: !Text
-    , _insnZone      :: !Text
-    , _insnInstance  :: !Text
+    , _insnProject :: !Text
+    , _insnZone :: !Text
+    , _insnInstance :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

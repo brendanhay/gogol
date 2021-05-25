@@ -34,8 +34,8 @@ module Network.Google.Resource.AdSense.Payments.List
 
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.payments.list@ method which the
 -- 'PaymentsList' request conforms to.

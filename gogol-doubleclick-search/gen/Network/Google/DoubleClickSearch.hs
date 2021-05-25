@@ -13,10 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reports and modifies your advertising data in DoubleClick Search (for
--- example, campaigns, ad groups, keywords, and conversions).
+-- The Search Ads 360 API allows developers to automate uploading
+-- conversions and downloading reports from Search Ads 360.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>
+-- /See:/ <https://developers.google.com/search-ads Search Ads 360 API Reference>
 module Network.Google.DoubleClickSearch
     (
     -- * Service Configuration
@@ -35,9 +35,6 @@ module Network.Google.DoubleClickSearch
 
     -- ** doubleclicksearch.conversion.insert
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
-
-    -- ** doubleclicksearch.conversion.patch
-    , module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
 
     -- ** doubleclicksearch.conversion.update
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Update
@@ -144,6 +141,9 @@ module Network.Google.DoubleClickSearch
     , clKind
     , clConversion
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** ReportAPIColumnSpec
     , ReportAPIColumnSpec
     , reportAPIColumnSpec
@@ -239,31 +239,29 @@ module Network.Google.DoubleClickSearch
     , sclItems
     ) where
 
-import           Network.Google.DoubleClickSearch.Types
-import           Network.Google.Prelude
-import           Network.Google.Resource.DoubleClickSearch.Conversion.Get
-import           Network.Google.Resource.DoubleClickSearch.Conversion.Insert
-import           Network.Google.Resource.DoubleClickSearch.Conversion.Patch
-import           Network.Google.Resource.DoubleClickSearch.Conversion.Update
-import           Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
-import           Network.Google.Resource.DoubleClickSearch.Reports.Generate
-import           Network.Google.Resource.DoubleClickSearch.Reports.Get
-import           Network.Google.Resource.DoubleClickSearch.Reports.GetFile
-import           Network.Google.Resource.DoubleClickSearch.Reports.Request
-import           Network.Google.Resource.DoubleClickSearch.SavedColumns.List
+import Network.Google.Prelude
+import Network.Google.DoubleClickSearch.Types
+import Network.Google.Resource.DoubleClickSearch.Conversion.Get
+import Network.Google.Resource.DoubleClickSearch.Conversion.Insert
+import Network.Google.Resource.DoubleClickSearch.Conversion.Update
+import Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
+import Network.Google.Resource.DoubleClickSearch.Reports.Generate
+import Network.Google.Resource.DoubleClickSearch.Reports.Get
+import Network.Google.Resource.DoubleClickSearch.Reports.GetFile
+import Network.Google.Resource.DoubleClickSearch.Reports.Request
+import Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the DoubleClick Search API service.
+-- | Represents the entirety of the methods and resources available for the Search Ads 360 API service.
 type DoubleClickSearchAPI =
      ReportsGetResource :<|> ReportsGetFileResource :<|>
        ReportsGenerateResource
        :<|> ReportsRequestResource
        :<|> SavedColumnsListResource
        :<|> ConversionInsertResource
-       :<|> ConversionPatchResource
        :<|> ConversionGetResource
        :<|> ConversionUpdateAvailabilityResource
        :<|> ConversionUpdateResource

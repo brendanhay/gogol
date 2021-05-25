@@ -48,8 +48,8 @@ module Network.Google.Resource.DLP.Projects.DlpJobs.Create
     , pCallback
     ) where
 
-import           Network.Google.DLP.Types
-import           Network.Google.Prelude
+import Network.Google.DLP.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dlp.projects.dlpJobs.create@ method which the
 -- 'ProjectsDlpJobsCreate' request conforms to.
@@ -77,13 +77,13 @@ type ProjectsDlpJobsCreateResource =
 -- /See:/ 'projectsDlpJobsCreate' smart constructor.
 data ProjectsDlpJobsCreate =
   ProjectsDlpJobsCreate'
-    { _pParent         :: !Text
-    , _pXgafv          :: !(Maybe Xgafv)
+    { _pParent :: !Text
+    , _pXgafv :: !(Maybe Xgafv)
     , _pUploadProtocol :: !(Maybe Text)
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !GooglePrivacyDlpV2CreateDlpJobRequest
-    , _pCallback       :: !(Maybe Text)
+    , _pAccessToken :: !(Maybe Text)
+    , _pUploadType :: !(Maybe Text)
+    , _pPayload :: !GooglePrivacyDlpV2CreateDlpJobRequest
+    , _pCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -121,7 +121,16 @@ projectsDlpJobsCreate pPParent_ pPPayload_ =
     }
 
 
--- | The parent resource name, for example projects\/my-project-id.
+-- | Required. Parent resource name. The format of this value varies
+-- depending on whether you have [specified a processing
+-- location](https:\/\/cloud.google.com\/dlp\/docs\/specifying-location): +
+-- Projects scope, location specified:
+-- \`projects\/\`PROJECT_ID\`\/locations\/\`LOCATION_ID + Projects scope,
+-- no location specified (defaults to global): \`projects\/\`PROJECT_ID The
+-- following example \`parent\` string specifies a parent project with the
+-- identifier \`example-project\`, and specifies the \`europe-west3\`
+-- location for processing data:
+-- parent=projects\/example-project\/locations\/europe-west3
 pParent :: Lens' ProjectsDlpJobsCreate Text
 pParent = lens _pParent (\ s a -> s{_pParent = a})
 

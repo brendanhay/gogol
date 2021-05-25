@@ -22,7 +22,7 @@
 --
 -- Returns the permissions that a caller has on the specified source.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.sources.testIamPermissions@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.sources.testIamPermissions@.
 module Network.Google.Resource.SecurityCenter.Organizations.Sources.TestIAMPermissions
     (
     -- * REST Resource
@@ -42,13 +42,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.Sources.TestIAMPermi
     , ostipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.testIamPermissions@ method which the
 -- 'OrganizationsSourcesTestIAMPermissions' request conforms to.
 type OrganizationsSourcesTestIAMPermissionsResource =
-     "v1" :>
+     "v1p1beta1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -64,13 +64,13 @@ type OrganizationsSourcesTestIAMPermissionsResource =
 -- /See:/ 'organizationsSourcesTestIAMPermissions' smart constructor.
 data OrganizationsSourcesTestIAMPermissions =
   OrganizationsSourcesTestIAMPermissions'
-    { _ostipXgafv          :: !(Maybe Xgafv)
+    { _ostipXgafv :: !(Maybe Xgafv)
     , _ostipUploadProtocol :: !(Maybe Text)
-    , _ostipAccessToken    :: !(Maybe Text)
-    , _ostipUploadType     :: !(Maybe Text)
-    , _ostipPayload        :: !TestIAMPermissionsRequest
-    , _ostipResource       :: !Text
-    , _ostipCallback       :: !(Maybe Text)
+    , _ostipAccessToken :: !(Maybe Text)
+    , _ostipUploadType :: !(Maybe Text)
+    , _ostipPayload :: !TestIAMPermissionsRequest
+    , _ostipResource :: !Text
+    , _ostipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

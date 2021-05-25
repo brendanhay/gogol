@@ -42,8 +42,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Documents.Commit
     , pddcCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.documents.commit@ method which the
 -- 'ProjectsDatabasesDocumentsCommit' request conforms to.
@@ -65,13 +65,13 @@ type ProjectsDatabasesDocumentsCommitResource =
 -- /See:/ 'projectsDatabasesDocumentsCommit' smart constructor.
 data ProjectsDatabasesDocumentsCommit =
   ProjectsDatabasesDocumentsCommit'
-    { _pddcXgafv          :: !(Maybe Xgafv)
+    { _pddcXgafv :: !(Maybe Xgafv)
     , _pddcUploadProtocol :: !(Maybe Text)
-    , _pddcDatabase       :: !Text
-    , _pddcAccessToken    :: !(Maybe Text)
-    , _pddcUploadType     :: !(Maybe Text)
-    , _pddcPayload        :: !CommitRequest
-    , _pddcCallback       :: !(Maybe Text)
+    , _pddcDatabase :: !Text
+    , _pddcAccessToken :: !(Maybe Text)
+    , _pddcUploadType :: !(Maybe Text)
+    , _pddcPayload :: !CommitRequest
+    , _pddcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -120,7 +120,7 @@ pddcUploadProtocol
   = lens _pddcUploadProtocol
       (\ s a -> s{_pddcUploadProtocol = a})
 
--- | The database name. In the format:
+-- | Required. The database name. In the format:
 -- \`projects\/{project_id}\/databases\/{database_id}\`.
 pddcDatabase :: Lens' ProjectsDatabasesDocumentsCommit Text
 pddcDatabase

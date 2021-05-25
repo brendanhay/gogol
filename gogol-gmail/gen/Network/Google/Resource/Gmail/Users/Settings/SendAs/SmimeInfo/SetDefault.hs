@@ -33,13 +33,18 @@ module Network.Google.Resource.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
     , UsersSettingsSendAsSmimeInfoSetDefault
 
     -- * Request Lenses
+    , ussasisdXgafv
+    , ussasisdUploadProtocol
+    , ussasisdAccessToken
+    , ussasisdUploadType
     , ussasisdUserId
     , ussasisdSendAsEmail
     , ussasisdId
+    , ussasisdCallback
     ) where
 
-import           Network.Google.Gmail.Types
-import           Network.Google.Prelude
+import Network.Google.Gmail.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.settings.sendAs.smimeInfo.setDefault@ method which the
 -- 'UsersSettingsSendAsSmimeInfoSetDefault' request conforms to.
@@ -54,16 +59,26 @@ type UsersSettingsSendAsSmimeInfoSetDefaultResource =
                    "smimeInfo" :>
                      Capture "id" Text :>
                        "setDefault" :>
-                         QueryParam "alt" AltJSON :> Post '[JSON] ()
+                         QueryParam "$.xgafv" Xgafv :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets the default S\/MIME config for the specified send-as alias.
 --
 -- /See:/ 'usersSettingsSendAsSmimeInfoSetDefault' smart constructor.
 data UsersSettingsSendAsSmimeInfoSetDefault =
   UsersSettingsSendAsSmimeInfoSetDefault'
-    { _ussasisdUserId      :: !Text
+    { _ussasisdXgafv :: !(Maybe Xgafv)
+    , _ussasisdUploadProtocol :: !(Maybe Text)
+    , _ussasisdAccessToken :: !(Maybe Text)
+    , _ussasisdUploadType :: !(Maybe Text)
+    , _ussasisdUserId :: !Text
     , _ussasisdSendAsEmail :: !Text
-    , _ussasisdId          :: !Text
+    , _ussasisdId :: !Text
+    , _ussasisdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -72,25 +87,64 @@ data UsersSettingsSendAsSmimeInfoSetDefault =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ussasisdXgafv'
+--
+-- * 'ussasisdUploadProtocol'
+--
+-- * 'ussasisdAccessToken'
+--
+-- * 'ussasisdUploadType'
+--
 -- * 'ussasisdUserId'
 --
 -- * 'ussasisdSendAsEmail'
 --
 -- * 'ussasisdId'
+--
+-- * 'ussasisdCallback'
 usersSettingsSendAsSmimeInfoSetDefault
     :: Text -- ^ 'ussasisdSendAsEmail'
     -> Text -- ^ 'ussasisdId'
     -> UsersSettingsSendAsSmimeInfoSetDefault
 usersSettingsSendAsSmimeInfoSetDefault pUssasisdSendAsEmail_ pUssasisdId_ =
   UsersSettingsSendAsSmimeInfoSetDefault'
-    { _ussasisdUserId = "me"
+    { _ussasisdXgafv = Nothing
+    , _ussasisdUploadProtocol = Nothing
+    , _ussasisdAccessToken = Nothing
+    , _ussasisdUploadType = Nothing
+    , _ussasisdUserId = "me"
     , _ussasisdSendAsEmail = pUssasisdSendAsEmail_
     , _ussasisdId = pUssasisdId_
+    , _ussasisdCallback = Nothing
     }
 
 
--- | The user\'s email address. The special value me can be used to indicate
--- the authenticated user.
+-- | V1 error format.
+ussasisdXgafv :: Lens' UsersSettingsSendAsSmimeInfoSetDefault (Maybe Xgafv)
+ussasisdXgafv
+  = lens _ussasisdXgafv
+      (\ s a -> s{_ussasisdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ussasisdUploadProtocol :: Lens' UsersSettingsSendAsSmimeInfoSetDefault (Maybe Text)
+ussasisdUploadProtocol
+  = lens _ussasisdUploadProtocol
+      (\ s a -> s{_ussasisdUploadProtocol = a})
+
+-- | OAuth access token.
+ussasisdAccessToken :: Lens' UsersSettingsSendAsSmimeInfoSetDefault (Maybe Text)
+ussasisdAccessToken
+  = lens _ussasisdAccessToken
+      (\ s a -> s{_ussasisdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ussasisdUploadType :: Lens' UsersSettingsSendAsSmimeInfoSetDefault (Maybe Text)
+ussasisdUploadType
+  = lens _ussasisdUploadType
+      (\ s a -> s{_ussasisdUploadType = a})
+
+-- | The user\'s email address. The special value \`me\` can be used to
+-- indicate the authenticated user.
 ussasisdUserId :: Lens' UsersSettingsSendAsSmimeInfoSetDefault Text
 ussasisdUserId
   = lens _ussasisdUserId
@@ -108,6 +162,12 @@ ussasisdId :: Lens' UsersSettingsSendAsSmimeInfoSetDefault Text
 ussasisdId
   = lens _ussasisdId (\ s a -> s{_ussasisdId = a})
 
+-- | JSONP
+ussasisdCallback :: Lens' UsersSettingsSendAsSmimeInfoSetDefault (Maybe Text)
+ussasisdCallback
+  = lens _ussasisdCallback
+      (\ s a -> s{_ussasisdCallback = a})
+
 instance GoogleRequest
            UsersSettingsSendAsSmimeInfoSetDefault
          where
@@ -118,6 +178,11 @@ instance GoogleRequest
         requestClient
           UsersSettingsSendAsSmimeInfoSetDefault'{..}
           = go _ussasisdUserId _ussasisdSendAsEmail _ussasisdId
+              _ussasisdXgafv
+              _ussasisdUploadProtocol
+              _ussasisdAccessToken
+              _ussasisdUploadType
+              _ussasisdCallback
               (Just AltJSON)
               gmailService
           where go

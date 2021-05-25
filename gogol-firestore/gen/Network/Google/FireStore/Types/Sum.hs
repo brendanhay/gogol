@@ -16,10 +16,10 @@
 --
 module Network.Google.FireStore.Types.Sum where
 
-import           Network.Google.Prelude hiding (Bytes)
+import Network.Google.Prelude hiding (Bytes)
 
 -- | Indicates that this field supports ordering by the specified order or
--- comparing using =, \<, \<=, >, >=.
+-- comparing using =, !=, \<, \<=, >, >=.
 data GoogleFirestoreAdminV1IndexFieldOrder
     = OrderUnspecified
       -- ^ @ORDER_UNSPECIFIED@
@@ -179,6 +179,11 @@ data GoogleFirestoreAdminV1IndexQueryScope
       -- Indexes with a collection query scope specified allow queries against a
       -- collection that is the child of a specific document, specified at query
       -- time, and that has the collection id specified by the index.
+    | CollectionGroup
+      -- ^ @COLLECTION_GROUP@
+      -- Indexes with a collection group query scope specified allow queries
+      -- against all collections that has the collection id specified by the
+      -- index.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GoogleFirestoreAdminV1IndexQueryScope
@@ -187,12 +192,14 @@ instance FromHttpApiData GoogleFirestoreAdminV1IndexQueryScope where
     parseQueryParam = \case
         "QUERY_SCOPE_UNSPECIFIED" -> Right QueryScopeUnspecified
         "COLLECTION" -> Right Collection
+        "COLLECTION_GROUP" -> Right CollectionGroup
         x -> Left ("Unable to parse GoogleFirestoreAdminV1IndexQueryScope from: " <> x)
 
 instance ToHttpApiData GoogleFirestoreAdminV1IndexQueryScope where
     toQueryParam = \case
         QueryScopeUnspecified -> "QUERY_SCOPE_UNSPECIFIED"
         Collection -> "COLLECTION"
+        CollectionGroup -> "COLLECTION_GROUP"
 
 instance FromJSON GoogleFirestoreAdminV1IndexQueryScope where
     parseJSON = parseJSONText "GoogleFirestoreAdminV1IndexQueryScope"
@@ -265,10 +272,20 @@ data UnaryFilterOp
       -- Unspecified. This value must not be used.
     | UFOIsNan
       -- ^ @IS_NAN@
-      -- Test if a field is equal to NaN.
+      -- The given \`field\` is equal to \`NaN\`.
     | UFOIsNull
       -- ^ @IS_NULL@
-      -- Test if an exprestion evaluates to Null.
+      -- The given \`field\` is equal to \`NULL\`.
+    | UFOIsNotNan
+      -- ^ @IS_NOT_NAN@
+      -- The given \`field\` is not equal to \`NaN\`. Requires: * No other
+      -- \`NOT_EQUAL\`, \`NOT_IN\`, \`IS_NOT_NULL\`, or \`IS_NOT_NAN\`. * That
+      -- \`field\` comes first in the \`order_by\`.
+    | UFOIsNotNull
+      -- ^ @IS_NOT_NULL@
+      -- The given \`field\` is not equal to \`NULL\`. Requires: * A single
+      -- \`NOT_EQUAL\`, \`NOT_IN\`, \`IS_NOT_NULL\`, or \`IS_NOT_NAN\`. * That
+      -- \`field\` comes first in the \`order_by\`.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UnaryFilterOp
@@ -278,6 +295,8 @@ instance FromHttpApiData UnaryFilterOp where
         "OPERATOR_UNSPECIFIED" -> Right UFOOperatorUnspecified
         "IS_NAN" -> Right UFOIsNan
         "IS_NULL" -> Right UFOIsNull
+        "IS_NOT_NAN" -> Right UFOIsNotNan
+        "IS_NOT_NULL" -> Right UFOIsNotNull
         x -> Left ("Unable to parse UnaryFilterOp from: " <> x)
 
 instance ToHttpApiData UnaryFilterOp where
@@ -285,6 +304,8 @@ instance ToHttpApiData UnaryFilterOp where
         UFOOperatorUnspecified -> "OPERATOR_UNSPECIFIED"
         UFOIsNan -> "IS_NAN"
         UFOIsNull -> "IS_NULL"
+        UFOIsNotNan -> "IS_NOT_NAN"
+        UFOIsNotNull -> "IS_NOT_NULL"
 
 instance FromJSON UnaryFilterOp where
     parseJSON = parseJSONText "UnaryFilterOp"
@@ -418,23 +439,49 @@ data FieldFilterOp
       -- Unspecified. This value must not be used.
     | FFOLessThan
       -- ^ @LESS_THAN@
-      -- Less than. Requires that the field come first in \`order_by\`.
+      -- The given \`field\` is less than the given \`value\`. Requires: * That
+      -- \`field\` come first in \`order_by\`.
     | FFOLessThanOrEqual
       -- ^ @LESS_THAN_OR_EQUAL@
-      -- Less than or equal. Requires that the field come first in \`order_by\`.
+      -- The given \`field\` is less than or equal to the given \`value\`.
+      -- Requires: * That \`field\` come first in \`order_by\`.
     | FFOGreaterThan
       -- ^ @GREATER_THAN@
-      -- Greater than. Requires that the field come first in \`order_by\`.
+      -- The given \`field\` is greater than the given \`value\`. Requires: *
+      -- That \`field\` come first in \`order_by\`.
     | FFOGreaterThanOrEqual
       -- ^ @GREATER_THAN_OR_EQUAL@
-      -- Greater than or equal. Requires that the field come first in
-      -- \`order_by\`.
+      -- The given \`field\` is greater than or equal to the given \`value\`.
+      -- Requires: * That \`field\` come first in \`order_by\`.
     | FFOEqual
       -- ^ @EQUAL@
-      -- Equal.
+      -- The given \`field\` is equal to the given \`value\`.
+    | FFONotEqual
+      -- ^ @NOT_EQUAL@
+      -- The given \`field\` is not equal to the given \`value\`. Requires: * No
+      -- other \`NOT_EQUAL\`, \`NOT_IN\`, \`IS_NOT_NULL\`, or \`IS_NOT_NAN\`. *
+      -- That \`field\` comes first in the \`order_by\`.
     | FFOArrayContains
       -- ^ @ARRAY_CONTAINS@
-      -- Contains. Requires that the field is an array.
+      -- The given \`field\` is an array that contains the given \`value\`.
+    | FFOIN
+      -- ^ @IN@
+      -- The given \`field\` is equal to at least one value in the given array.
+      -- Requires: * That \`value\` is a non-empty \`ArrayValue\` with at most 10
+      -- values. * No other \`IN\` or \`ARRAY_CONTAINS_ANY\` or \`NOT_IN\`.
+    | FFOArrayContainsAny
+      -- ^ @ARRAY_CONTAINS_ANY@
+      -- The given \`field\` is an array that contains any of the values in the
+      -- given array. Requires: * That \`value\` is a non-empty \`ArrayValue\`
+      -- with at most 10 values. * No other \`IN\` or \`ARRAY_CONTAINS_ANY\` or
+      -- \`NOT_IN\`.
+    | FFONotIn
+      -- ^ @NOT_IN@
+      -- The value of the \`field\` is not in the given array. Requires: * That
+      -- \`value\` is a non-empty \`ArrayValue\` with at most 10 values. * No
+      -- other \`IN\`, \`ARRAY_CONTAINS_ANY\`, \`NOT_IN\`, \`NOT_EQUAL\`,
+      -- \`IS_NOT_NULL\`, or \`IS_NOT_NAN\`. * That \`field\` comes first in the
+      -- \`order_by\`.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FieldFilterOp
@@ -447,7 +494,11 @@ instance FromHttpApiData FieldFilterOp where
         "GREATER_THAN" -> Right FFOGreaterThan
         "GREATER_THAN_OR_EQUAL" -> Right FFOGreaterThanOrEqual
         "EQUAL" -> Right FFOEqual
+        "NOT_EQUAL" -> Right FFONotEqual
         "ARRAY_CONTAINS" -> Right FFOArrayContains
+        "IN" -> Right FFOIN
+        "ARRAY_CONTAINS_ANY" -> Right FFOArrayContainsAny
+        "NOT_IN" -> Right FFONotIn
         x -> Left ("Unable to parse FieldFilterOp from: " <> x)
 
 instance ToHttpApiData FieldFilterOp where
@@ -458,7 +509,11 @@ instance ToHttpApiData FieldFilterOp where
         FFOGreaterThan -> "GREATER_THAN"
         FFOGreaterThanOrEqual -> "GREATER_THAN_OR_EQUAL"
         FFOEqual -> "EQUAL"
+        FFONotEqual -> "NOT_EQUAL"
         FFOArrayContains -> "ARRAY_CONTAINS"
+        FFOIN -> "IN"
+        FFOArrayContainsAny -> "ARRAY_CONTAINS_ANY"
+        FFONotIn -> "NOT_IN"
 
 instance FromJSON FieldFilterOp where
     parseJSON = parseJSONText "FieldFilterOp"
@@ -647,7 +702,8 @@ data FieldTransformSetToServerValue
     | RequestTime
       -- ^ @REQUEST_TIME@
       -- The time at which the server processed the request, with millisecond
-      -- precision.
+      -- precision. If used on multiple fields (same or different documents) in a
+      -- transaction, all the fields will get the same server timestamp.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FieldTransformSetToServerValue

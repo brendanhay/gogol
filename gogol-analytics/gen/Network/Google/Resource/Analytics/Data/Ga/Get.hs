@@ -48,8 +48,8 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
     , dggStartDate
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.data.ga.get@ method which the
 -- 'DataGaGet' request conforms to.
@@ -79,19 +79,19 @@ type DataGaGetResource =
 -- /See:/ 'dataGaGet' smart constructor.
 data DataGaGet =
   DataGaGet'
-    { _dggMetrics          :: !Text
-    , _dggSamplingLevel    :: !(Maybe DataGaGetSamplingLevel)
-    , _dggFilters          :: !(Maybe Text)
-    , _dggIds              :: !Text
-    , _dggEndDate          :: !Text
-    , _dggOutput           :: !(Maybe DataGaGetOutput)
-    , _dggSort             :: !(Maybe Text)
+    { _dggMetrics :: !Text
+    , _dggSamplingLevel :: !(Maybe DataGaGetSamplingLevel)
+    , _dggFilters :: !(Maybe Text)
+    , _dggIds :: !Text
+    , _dggEndDate :: !Text
+    , _dggOutput :: !(Maybe DataGaGetOutput)
+    , _dggSort :: !(Maybe Text)
     , _dggIncludeEmptyRows :: !(Maybe Bool)
-    , _dggDimensions       :: !(Maybe Text)
-    , _dggStartIndex       :: !(Maybe (Textual Int32))
-    , _dggMaxResults       :: !(Maybe (Textual Int32))
-    , _dggSegment          :: !(Maybe Text)
-    , _dggStartDate        :: !Text
+    , _dggDimensions :: !(Maybe Text)
+    , _dggStartIndex :: !(Maybe (Textual Int32))
+    , _dggMaxResults :: !(Maybe (Textual Int32))
+    , _dggSegment :: !(Maybe Text)
+    , _dggStartDate :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

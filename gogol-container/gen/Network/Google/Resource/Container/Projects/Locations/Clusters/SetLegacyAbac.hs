@@ -42,8 +42,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.SetLegacyAb
     , plcslaCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.setLegacyAbac@ method which the
 -- 'ProjectsLocationsClustersSetLegacyAbac' request conforms to.
@@ -64,13 +64,13 @@ type ProjectsLocationsClustersSetLegacyAbacResource =
 -- /See:/ 'projectsLocationsClustersSetLegacyAbac' smart constructor.
 data ProjectsLocationsClustersSetLegacyAbac =
   ProjectsLocationsClustersSetLegacyAbac'
-    { _plcslaXgafv          :: !(Maybe Xgafv)
+    { _plcslaXgafv :: !(Maybe Xgafv)
     , _plcslaUploadProtocol :: !(Maybe Text)
-    , _plcslaAccessToken    :: !(Maybe Text)
-    , _plcslaUploadType     :: !(Maybe Text)
-    , _plcslaPayload        :: !SetLegacyAbacRequest
-    , _plcslaName           :: !Text
-    , _plcslaCallback       :: !(Maybe Text)
+    , _plcslaAccessToken :: !(Maybe Text)
+    , _plcslaUploadType :: !(Maybe Text)
+    , _plcslaPayload :: !SetLegacyAbacRequest
+    , _plcslaName :: !Text
+    , _plcslaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,7 +139,7 @@ plcslaPayload
 
 -- | The name (project, location, cluster id) of the cluster to set legacy
 -- abac. Specified in the format
--- \'projects\/*\/locations\/*\/clusters\/*\'.
+-- \`projects\/*\/locations\/*\/clusters\/*\`.
 plcslaName :: Lens' ProjectsLocationsClustersSetLegacyAbac Text
 plcslaName
   = lens _plcslaName (\ s a -> s{_plcslaName = a})

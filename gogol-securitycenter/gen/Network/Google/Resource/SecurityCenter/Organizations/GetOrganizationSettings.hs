@@ -22,7 +22,7 @@
 --
 -- Gets the settings for an organization.
 --
--- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Cloud Security Command Center API Reference> for @securitycenter.organizations.getOrganizationSettings@.
+-- /See:/ <https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview Security Command Center API Reference> for @securitycenter.organizations.getOrganizationSettings@.
 module Network.Google.Resource.SecurityCenter.Organizations.GetOrganizationSettings
     (
     -- * REST Resource
@@ -41,13 +41,13 @@ module Network.Google.Resource.SecurityCenter.Organizations.GetOrganizationSetti
     , ogosCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SecurityCenter.Types
+import Network.Google.Prelude
+import Network.Google.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.getOrganizationSettings@ method which the
 -- 'OrganizationsGetOrganizationSettings' request conforms to.
 type OrganizationsGetOrganizationSettingsResource =
-     "v1" :>
+     "v1p1beta1" :>
        Capture "name" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -62,12 +62,12 @@ type OrganizationsGetOrganizationSettingsResource =
 -- /See:/ 'organizationsGetOrganizationSettings' smart constructor.
 data OrganizationsGetOrganizationSettings =
   OrganizationsGetOrganizationSettings'
-    { _ogosXgafv          :: !(Maybe Xgafv)
+    { _ogosXgafv :: !(Maybe Xgafv)
     , _ogosUploadProtocol :: !(Maybe Text)
-    , _ogosAccessToken    :: !(Maybe Text)
-    , _ogosUploadType     :: !(Maybe Text)
-    , _ogosName           :: !Text
-    , _ogosCallback       :: !(Maybe Text)
+    , _ogosAccessToken :: !(Maybe Text)
+    , _ogosUploadType :: !(Maybe Text)
+    , _ogosName :: !Text
+    , _ogosCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -124,8 +124,8 @@ ogosUploadType
   = lens _ogosUploadType
       (\ s a -> s{_ogosUploadType = a})
 
--- | Name of the organization to get organization settings for. Its format is
--- \"organizations\/[organization_id]\/organizationSettings\".
+-- | Required. Name of the organization to get organization settings for. Its
+-- format is \"organizations\/[organization_id]\/organizationSettings\".
 ogosName :: Lens' OrganizationsGetOrganizationSettings Text
 ogosName = lens _ogosName (\ s a -> s{_ogosName = a})
 

@@ -41,8 +41,8 @@ module Network.Google.Resource.Composer.Projects.Locations.Environments.Get
     , plegCallback
     ) where
 
-import           Network.Google.Composer.Types
-import           Network.Google.Prelude
+import Network.Google.Composer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @composer.projects.locations.environments.get@ method which the
 -- 'ProjectsLocationsEnvironmentsGet' request conforms to.
@@ -61,12 +61,12 @@ type ProjectsLocationsEnvironmentsGetResource =
 -- /See:/ 'projectsLocationsEnvironmentsGet' smart constructor.
 data ProjectsLocationsEnvironmentsGet =
   ProjectsLocationsEnvironmentsGet'
-    { _plegXgafv          :: !(Maybe Xgafv)
+    { _plegXgafv :: !(Maybe Xgafv)
     , _plegUploadProtocol :: !(Maybe Text)
-    , _plegAccessToken    :: !(Maybe Text)
-    , _plegUploadType     :: !(Maybe Text)
-    , _plegName           :: !Text
-    , _plegCallback       :: !(Maybe Text)
+    , _plegAccessToken :: !(Maybe Text)
+    , _plegUploadType :: !(Maybe Text)
+    , _plegName :: !Text
+    , _plegCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

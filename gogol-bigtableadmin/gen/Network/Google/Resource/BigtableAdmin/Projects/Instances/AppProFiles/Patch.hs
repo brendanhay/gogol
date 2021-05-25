@@ -44,8 +44,8 @@ module Network.Google.Resource.BigtableAdmin.Projects.Instances.AppProFiles.Patc
     , piapfpCallback
     ) where
 
-import           Network.Google.BigtableAdmin.Types
-import           Network.Google.Prelude
+import Network.Google.BigtableAdmin.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @bigtableadmin.projects.instances.appProfiles.patch@ method which the
 -- 'ProjectsInstancesAppProFilesPatch' request conforms to.
@@ -67,15 +67,15 @@ type ProjectsInstancesAppProFilesPatchResource =
 -- /See:/ 'projectsInstancesAppProFilesPatch' smart constructor.
 data ProjectsInstancesAppProFilesPatch =
   ProjectsInstancesAppProFilesPatch'
-    { _piapfpXgafv          :: !(Maybe Xgafv)
+    { _piapfpXgafv :: !(Maybe Xgafv)
     , _piapfpUploadProtocol :: !(Maybe Text)
-    , _piapfpUpdateMask     :: !(Maybe GFieldMask)
-    , _piapfpAccessToken    :: !(Maybe Text)
-    , _piapfpUploadType     :: !(Maybe Text)
-    , _piapfpPayload        :: !AppProFile
+    , _piapfpUpdateMask :: !(Maybe GFieldMask)
+    , _piapfpAccessToken :: !(Maybe Text)
+    , _piapfpUploadType :: !(Maybe Text)
+    , _piapfpPayload :: !AppProFile
     , _piapfpIgnoreWarnings :: !(Maybe Bool)
-    , _piapfpName           :: !Text
-    , _piapfpCallback       :: !(Maybe Text)
+    , _piapfpName :: !Text
+    , _piapfpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -130,8 +130,8 @@ piapfpUploadProtocol
   = lens _piapfpUploadProtocol
       (\ s a -> s{_piapfpUploadProtocol = a})
 
--- | The subset of app profile fields which should be replaced. If unset, all
--- fields will be replaced.
+-- | Required. The subset of app profile fields which should be replaced. If
+-- unset, all fields will be replaced.
 piapfpUpdateMask :: Lens' ProjectsInstancesAppProFilesPatch (Maybe GFieldMask)
 piapfpUpdateMask
   = lens _piapfpUpdateMask
@@ -161,8 +161,8 @@ piapfpIgnoreWarnings
   = lens _piapfpIgnoreWarnings
       (\ s a -> s{_piapfpIgnoreWarnings = a})
 
--- | (\`OutputOnly\`) The unique name of the app profile. Values are of the
--- form \`projects\/\/instances\/\/appProfiles\/_a-zA-Z0-9*\`.
+-- | The unique name of the app profile. Values are of the form
+-- \`projects\/{project}\/instances\/{instance}\/appProfiles\/_a-zA-Z0-9*\`.
 piapfpName :: Lens' ProjectsInstancesAppProFilesPatch Text
 piapfpName
   = lens _piapfpName (\ s a -> s{_piapfpName = a})

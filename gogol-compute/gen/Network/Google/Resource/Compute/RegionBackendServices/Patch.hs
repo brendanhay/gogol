@@ -21,10 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the specified regional BackendService resource with the data
--- included in the request. There are several restrictions and guidelines
--- to keep in mind when updating a backend service. Read Restrictions and
--- Guidelines for more information. This method supports PATCH semantics
--- and uses the JSON merge patch format and processing rules.
+-- included in the request. For more information, see Understanding backend
+-- services This method supports PATCH semantics and uses the JSON merge
+-- patch format and processing rules.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionBackendServices.patch@.
 module Network.Google.Resource.Compute.RegionBackendServices.Patch
@@ -44,8 +43,8 @@ module Network.Google.Resource.Compute.RegionBackendServices.Patch
     , rbspBackendService
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionBackendServices.patch@ method which the
 -- 'RegionBackendServicesPatch' request conforms to.
@@ -64,18 +63,17 @@ type RegionBackendServicesPatchResource =
                            Patch '[JSON] Operation
 
 -- | Updates the specified regional BackendService resource with the data
--- included in the request. There are several restrictions and guidelines
--- to keep in mind when updating a backend service. Read Restrictions and
--- Guidelines for more information. This method supports PATCH semantics
--- and uses the JSON merge patch format and processing rules.
+-- included in the request. For more information, see Understanding backend
+-- services This method supports PATCH semantics and uses the JSON merge
+-- patch format and processing rules.
 --
 -- /See:/ 'regionBackendServicesPatch' smart constructor.
 data RegionBackendServicesPatch =
   RegionBackendServicesPatch'
-    { _rbspRequestId      :: !(Maybe Text)
-    , _rbspProject        :: !Text
-    , _rbspPayload        :: !BackendService
-    , _rbspRegion         :: !Text
+    { _rbspRequestId :: !(Maybe Text)
+    , _rbspProject :: !Text
+    , _rbspPayload :: !BackendService
+    , _rbspRegion :: !Text
     , _rbspBackendService :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

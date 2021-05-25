@@ -22,7 +22,7 @@
 --
 -- Deletes a role.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.delete@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.roles.delete@.
 module Network.Google.Resource.Directory.Roles.Delete
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Roles.Delete
     , RolesDelete
 
     -- * Request Lenses
+    , rdXgafv
+    , rdUploadProtocol
+    , rdAccessToken
+    , rdUploadType
     , rdRoleId
     , rdCustomer
+    , rdCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.delete@ method which the
 -- 'RolesDelete' request conforms to.
@@ -50,15 +55,25 @@ type RolesDeleteResource =
              Capture "customer" Text :>
                "roles" :>
                  Capture "roleId" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a role.
 --
 -- /See:/ 'rolesDelete' smart constructor.
 data RolesDelete =
   RolesDelete'
-    { _rdRoleId   :: !Text
+    { _rdXgafv :: !(Maybe Xgafv)
+    , _rdUploadProtocol :: !(Maybe Text)
+    , _rdAccessToken :: !(Maybe Text)
+    , _rdUploadType :: !(Maybe Text)
+    , _rdRoleId :: !Text
     , _rdCustomer :: !Text
+    , _rdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,32 +82,80 @@ data RolesDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rdXgafv'
+--
+-- * 'rdUploadProtocol'
+--
+-- * 'rdAccessToken'
+--
+-- * 'rdUploadType'
+--
 -- * 'rdRoleId'
 --
 -- * 'rdCustomer'
+--
+-- * 'rdCallback'
 rolesDelete
     :: Text -- ^ 'rdRoleId'
     -> Text -- ^ 'rdCustomer'
     -> RolesDelete
 rolesDelete pRdRoleId_ pRdCustomer_ =
-  RolesDelete' {_rdRoleId = pRdRoleId_, _rdCustomer = pRdCustomer_}
+  RolesDelete'
+    { _rdXgafv = Nothing
+    , _rdUploadProtocol = Nothing
+    , _rdAccessToken = Nothing
+    , _rdUploadType = Nothing
+    , _rdRoleId = pRdRoleId_
+    , _rdCustomer = pRdCustomer_
+    , _rdCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rdXgafv :: Lens' RolesDelete (Maybe Xgafv)
+rdXgafv = lens _rdXgafv (\ s a -> s{_rdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rdUploadProtocol :: Lens' RolesDelete (Maybe Text)
+rdUploadProtocol
+  = lens _rdUploadProtocol
+      (\ s a -> s{_rdUploadProtocol = a})
+
+-- | OAuth access token.
+rdAccessToken :: Lens' RolesDelete (Maybe Text)
+rdAccessToken
+  = lens _rdAccessToken
+      (\ s a -> s{_rdAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rdUploadType :: Lens' RolesDelete (Maybe Text)
+rdUploadType
+  = lens _rdUploadType (\ s a -> s{_rdUploadType = a})
 
 -- | Immutable ID of the role.
 rdRoleId :: Lens' RolesDelete Text
 rdRoleId = lens _rdRoleId (\ s a -> s{_rdRoleId = a})
 
--- | Immutable ID of the G Suite account.
+-- | Immutable ID of the Google Workspace account.
 rdCustomer :: Lens' RolesDelete Text
 rdCustomer
   = lens _rdCustomer (\ s a -> s{_rdCustomer = a})
+
+-- | JSONP
+rdCallback :: Lens' RolesDelete (Maybe Text)
+rdCallback
+  = lens _rdCallback (\ s a -> s{_rdCallback = a})
 
 instance GoogleRequest RolesDelete where
         type Rs RolesDelete = ()
         type Scopes RolesDelete =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
         requestClient RolesDelete'{..}
-          = go _rdCustomer _rdRoleId (Just AltJSON)
+          = go _rdCustomer _rdRoleId _rdXgafv _rdUploadProtocol
+              _rdAccessToken
+              _rdUploadType
+              _rdCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient (Proxy :: Proxy RolesDeleteResource)

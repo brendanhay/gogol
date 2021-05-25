@@ -22,7 +22,7 @@
 --
 -- Retrieves a building.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.resources.buildings.get@.
+-- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.resources.buildings.get@.
 module Network.Google.Resource.Directory.Resources.Buildings.Get
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Directory.Resources.Buildings.Get
     , ResourcesBuildingsGet
 
     -- * Request Lenses
+    , rbgXgafv
+    , rbgUploadProtocol
+    , rbgAccessToken
     , rbgBuildingId
+    , rbgUploadType
     , rbgCustomer
+    , rbgCallback
     ) where
 
-import           Network.Google.Directory.Types
-import           Network.Google.Prelude
+import Network.Google.Directory.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @directory.resources.buildings.get@ method which the
 -- 'ResourcesBuildingsGet' request conforms to.
@@ -51,15 +56,25 @@ type ResourcesBuildingsGetResource =
                "resources" :>
                  "buildings" :>
                    Capture "buildingId" Text :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Building
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Get '[JSON] Building
 
 -- | Retrieves a building.
 --
 -- /See:/ 'resourcesBuildingsGet' smart constructor.
 data ResourcesBuildingsGet =
   ResourcesBuildingsGet'
-    { _rbgBuildingId :: !Text
-    , _rbgCustomer   :: !Text
+    { _rbgXgafv :: !(Maybe Xgafv)
+    , _rbgUploadProtocol :: !(Maybe Text)
+    , _rbgAccessToken :: !(Maybe Text)
+    , _rbgBuildingId :: !Text
+    , _rbgUploadType :: !(Maybe Text)
+    , _rbgCustomer :: !Text
+    , _rbgCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,17 +83,50 @@ data ResourcesBuildingsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rbgXgafv'
+--
+-- * 'rbgUploadProtocol'
+--
+-- * 'rbgAccessToken'
+--
 -- * 'rbgBuildingId'
 --
+-- * 'rbgUploadType'
+--
 -- * 'rbgCustomer'
+--
+-- * 'rbgCallback'
 resourcesBuildingsGet
     :: Text -- ^ 'rbgBuildingId'
     -> Text -- ^ 'rbgCustomer'
     -> ResourcesBuildingsGet
 resourcesBuildingsGet pRbgBuildingId_ pRbgCustomer_ =
   ResourcesBuildingsGet'
-    {_rbgBuildingId = pRbgBuildingId_, _rbgCustomer = pRbgCustomer_}
+    { _rbgXgafv = Nothing
+    , _rbgUploadProtocol = Nothing
+    , _rbgAccessToken = Nothing
+    , _rbgBuildingId = pRbgBuildingId_
+    , _rbgUploadType = Nothing
+    , _rbgCustomer = pRbgCustomer_
+    , _rbgCallback = Nothing
+    }
 
+
+-- | V1 error format.
+rbgXgafv :: Lens' ResourcesBuildingsGet (Maybe Xgafv)
+rbgXgafv = lens _rbgXgafv (\ s a -> s{_rbgXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+rbgUploadProtocol :: Lens' ResourcesBuildingsGet (Maybe Text)
+rbgUploadProtocol
+  = lens _rbgUploadProtocol
+      (\ s a -> s{_rbgUploadProtocol = a})
+
+-- | OAuth access token.
+rbgAccessToken :: Lens' ResourcesBuildingsGet (Maybe Text)
+rbgAccessToken
+  = lens _rbgAccessToken
+      (\ s a -> s{_rbgAccessToken = a})
 
 -- | The unique ID of the building to retrieve.
 rbgBuildingId :: Lens' ResourcesBuildingsGet Text
@@ -86,12 +134,23 @@ rbgBuildingId
   = lens _rbgBuildingId
       (\ s a -> s{_rbgBuildingId = a})
 
--- | The unique ID for the customer\'s G Suite account. As an account
--- administrator, you can also use the my_customer alias to represent your
--- account\'s customer ID.
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+rbgUploadType :: Lens' ResourcesBuildingsGet (Maybe Text)
+rbgUploadType
+  = lens _rbgUploadType
+      (\ s a -> s{_rbgUploadType = a})
+
+-- | The unique ID for the customer\'s Google Workspace account. As an
+-- account administrator, you can also use the \`my_customer\` alias to
+-- represent your account\'s customer ID.
 rbgCustomer :: Lens' ResourcesBuildingsGet Text
 rbgCustomer
   = lens _rbgCustomer (\ s a -> s{_rbgCustomer = a})
+
+-- | JSONP
+rbgCallback :: Lens' ResourcesBuildingsGet (Maybe Text)
+rbgCallback
+  = lens _rbgCallback (\ s a -> s{_rbgCallback = a})
 
 instance GoogleRequest ResourcesBuildingsGet where
         type Rs ResourcesBuildingsGet = Building
@@ -99,7 +158,12 @@ instance GoogleRequest ResourcesBuildingsGet where
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
                "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
         requestClient ResourcesBuildingsGet'{..}
-          = go _rbgCustomer _rbgBuildingId (Just AltJSON)
+          = go _rbgCustomer _rbgBuildingId _rbgXgafv
+              _rbgUploadProtocol
+              _rbgAccessToken
+              _rbgUploadType
+              _rbgCallback
+              (Just AltJSON)
               directoryService
           where go
                   = buildClient

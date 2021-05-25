@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.Disks.TestIAMPermissions
     , dtipResource
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.testIamPermissions@ method which the
 -- 'DisksTestIAMPermissions' request conforms to.
@@ -63,9 +63,9 @@ type DisksTestIAMPermissionsResource =
 -- /See:/ 'disksTestIAMPermissions' smart constructor.
 data DisksTestIAMPermissions =
   DisksTestIAMPermissions'
-    { _dtipProject  :: !Text
-    , _dtipZone     :: !Text
-    , _dtipPayload  :: !TestPermissionsRequest
+    { _dtipProject :: !Text
+    , _dtipZone :: !Text
+    , _dtipPayload :: !TestPermissionsRequest
     , _dtipResource :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

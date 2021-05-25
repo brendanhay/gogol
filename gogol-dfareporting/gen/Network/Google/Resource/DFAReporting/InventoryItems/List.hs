@@ -23,7 +23,7 @@
 -- Retrieves a list of inventory items, possibly filtered. This method
 -- supports paging.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.inventoryItems.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.inventoryItems.list@.
 module Network.Google.Resource.DFAReporting.InventoryItems.List
     (
     -- * REST Resource
@@ -34,6 +34,10 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
     , InventoryItemsList
 
     -- * Request Lenses
+    , iilXgafv
+    , iilUploadProtocol
+    , iilAccessToken
+    , iilUploadType
     , iilIds
     , iilProFileId
     , iilSortOrder
@@ -45,32 +49,44 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
     , iilOrderId
     , iilSiteId
     , iilMaxResults
+    , iilCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.inventoryItems.list@ method which the
 -- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
                Capture "projectId" (Textual Int64) :>
                  "inventoryItems" :>
-                   QueryParams "ids" (Textual Int64) :>
-                     QueryParam "sortOrder" InventoryItemsListSortOrder :>
-                       QueryParam "inPlan" Bool :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" InventoryItemsListSortField :>
-                             QueryParam "type" InventoryItemsListType :>
-                               QueryParams "orderId" (Textual Int64) :>
-                                 QueryParams "siteId" (Textual Int64) :>
-                                   QueryParam "maxResults" (Textual Int32) :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] InventoryItemsListResponse
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParams "ids" (Textual Int64) :>
+                             QueryParam "sortOrder" InventoryItemsListSortOrder
+                               :>
+                               QueryParam "inPlan" Bool :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     InventoryItemsListSortField
+                                     :>
+                                     QueryParam "type" InventoryItemsListType :>
+                                       QueryParams "orderId" (Textual Int64) :>
+                                         QueryParams "siteId" (Textual Int64) :>
+                                           QueryParam "maxResults"
+                                             (Textual Int32)
+                                             :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON]
+                                                   InventoryItemsListResponse
 
 -- | Retrieves a list of inventory items, possibly filtered. This method
 -- supports paging.
@@ -78,17 +94,22 @@ type InventoryItemsListResource =
 -- /See:/ 'inventoryItemsList' smart constructor.
 data InventoryItemsList =
   InventoryItemsList'
-    { _iilIds        :: !(Maybe [Textual Int64])
-    , _iilProFileId  :: !(Textual Int64)
-    , _iilSortOrder  :: !InventoryItemsListSortOrder
-    , _iilInPlan     :: !(Maybe Bool)
-    , _iilPageToken  :: !(Maybe Text)
-    , _iilProjectId  :: !(Textual Int64)
-    , _iilSortField  :: !InventoryItemsListSortField
-    , _iilType       :: !(Maybe InventoryItemsListType)
-    , _iilOrderId    :: !(Maybe [Textual Int64])
-    , _iilSiteId     :: !(Maybe [Textual Int64])
+    { _iilXgafv :: !(Maybe Xgafv)
+    , _iilUploadProtocol :: !(Maybe Text)
+    , _iilAccessToken :: !(Maybe Text)
+    , _iilUploadType :: !(Maybe Text)
+    , _iilIds :: !(Maybe [Textual Int64])
+    , _iilProFileId :: !(Textual Int64)
+    , _iilSortOrder :: !InventoryItemsListSortOrder
+    , _iilInPlan :: !(Maybe Bool)
+    , _iilPageToken :: !(Maybe Text)
+    , _iilProjectId :: !(Textual Int64)
+    , _iilSortField :: !InventoryItemsListSortField
+    , _iilType :: !(Maybe InventoryItemsListType)
+    , _iilOrderId :: !(Maybe [Textual Int64])
+    , _iilSiteId :: !(Maybe [Textual Int64])
     , _iilMaxResults :: !(Textual Int32)
+    , _iilCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -96,6 +117,14 @@ data InventoryItemsList =
 -- | Creates a value of 'InventoryItemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iilXgafv'
+--
+-- * 'iilUploadProtocol'
+--
+-- * 'iilAccessToken'
+--
+-- * 'iilUploadType'
 --
 -- * 'iilIds'
 --
@@ -118,13 +147,19 @@ data InventoryItemsList =
 -- * 'iilSiteId'
 --
 -- * 'iilMaxResults'
+--
+-- * 'iilCallback'
 inventoryItemsList
     :: Int64 -- ^ 'iilProFileId'
     -> Int64 -- ^ 'iilProjectId'
     -> InventoryItemsList
 inventoryItemsList pIilProFileId_ pIilProjectId_ =
   InventoryItemsList'
-    { _iilIds = Nothing
+    { _iilXgafv = Nothing
+    , _iilUploadProtocol = Nothing
+    , _iilAccessToken = Nothing
+    , _iilUploadType = Nothing
+    , _iilIds = Nothing
     , _iilProFileId = _Coerce # pIilProFileId_
     , _iilSortOrder = IILSOAscending
     , _iilInPlan = Nothing
@@ -135,8 +170,31 @@ inventoryItemsList pIilProFileId_ pIilProjectId_ =
     , _iilOrderId = Nothing
     , _iilSiteId = Nothing
     , _iilMaxResults = 1000
+    , _iilCallback = Nothing
     }
 
+
+-- | V1 error format.
+iilXgafv :: Lens' InventoryItemsList (Maybe Xgafv)
+iilXgafv = lens _iilXgafv (\ s a -> s{_iilXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+iilUploadProtocol :: Lens' InventoryItemsList (Maybe Text)
+iilUploadProtocol
+  = lens _iilUploadProtocol
+      (\ s a -> s{_iilUploadProtocol = a})
+
+-- | OAuth access token.
+iilAccessToken :: Lens' InventoryItemsList (Maybe Text)
+iilAccessToken
+  = lens _iilAccessToken
+      (\ s a -> s{_iilAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+iilUploadType :: Lens' InventoryItemsList (Maybe Text)
+iilUploadType
+  = lens _iilUploadType
+      (\ s a -> s{_iilUploadType = a})
 
 -- | Select only inventory items with these IDs.
 iilIds :: Lens' InventoryItemsList [Int64]
@@ -201,13 +259,21 @@ iilMaxResults
       (\ s a -> s{_iilMaxResults = a})
       . _Coerce
 
+-- | JSONP
+iilCallback :: Lens' InventoryItemsList (Maybe Text)
+iilCallback
+  = lens _iilCallback (\ s a -> s{_iilCallback = a})
+
 instance GoogleRequest InventoryItemsList where
         type Rs InventoryItemsList =
              InventoryItemsListResponse
         type Scopes InventoryItemsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient InventoryItemsList'{..}
-          = go _iilProFileId _iilProjectId
+          = go _iilProFileId _iilProjectId _iilXgafv
+              _iilUploadProtocol
+              _iilAccessToken
+              _iilUploadType
               (_iilIds ^. _Default)
               (Just _iilSortOrder)
               _iilInPlan
@@ -217,6 +283,7 @@ instance GoogleRequest InventoryItemsList where
               (_iilOrderId ^. _Default)
               (_iilSiteId ^. _Default)
               (Just _iilMaxResults)
+              _iilCallback
               (Just AltJSON)
               dFAReportingService
           where go

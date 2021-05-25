@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.SetNetworkPolic
     , pzcsnpCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.setNetworkPolicy@ method which the
 -- 'ProjectsZonesClustersSetNetworkPolicy' request conforms to.
@@ -71,15 +71,15 @@ type ProjectsZonesClustersSetNetworkPolicyResource =
 -- /See:/ 'projectsZonesClustersSetNetworkPolicy' smart constructor.
 data ProjectsZonesClustersSetNetworkPolicy =
   ProjectsZonesClustersSetNetworkPolicy'
-    { _pzcsnpXgafv          :: !(Maybe Xgafv)
+    { _pzcsnpXgafv :: !(Maybe Xgafv)
     , _pzcsnpUploadProtocol :: !(Maybe Text)
-    , _pzcsnpAccessToken    :: !(Maybe Text)
-    , _pzcsnpUploadType     :: !(Maybe Text)
-    , _pzcsnpZone           :: !Text
-    , _pzcsnpPayload        :: !SetNetworkPolicyRequest
-    , _pzcsnpClusterId      :: !Text
-    , _pzcsnpProjectId      :: !Text
-    , _pzcsnpCallback       :: !(Maybe Text)
+    , _pzcsnpAccessToken :: !(Maybe Text)
+    , _pzcsnpUploadType :: !(Maybe Text)
+    , _pzcsnpZone :: !Text
+    , _pzcsnpPayload :: !SetNetworkPolicyRequest
+    , _pzcsnpClusterId :: !Text
+    , _pzcsnpProjectId :: !Text
+    , _pzcsnpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -149,8 +149,9 @@ pzcsnpUploadType
       (\ s a -> s{_pzcsnpUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
--- This field has been deprecated and replaced by the name field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides. This field has been deprecated and replaced
+-- by the name field.
 pzcsnpZone :: Lens' ProjectsZonesClustersSetNetworkPolicy Text
 pzcsnpZone
   = lens _pzcsnpZone (\ s a -> s{_pzcsnpZone = a})

@@ -47,8 +47,8 @@ module Network.Google.Resource.ContainerAnalysis.Projects.Notes.TestIAMPermissio
     , pntipCallback
     ) where
 
-import           Network.Google.ContainerAnalysis.Types
-import           Network.Google.Prelude
+import Network.Google.ContainerAnalysis.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @containeranalysis.projects.notes.testIamPermissions@ method which the
 -- 'ProjectsNotesTestIAMPermissions' request conforms to.
@@ -74,13 +74,13 @@ type ProjectsNotesTestIAMPermissionsResource =
 -- /See:/ 'projectsNotesTestIAMPermissions' smart constructor.
 data ProjectsNotesTestIAMPermissions =
   ProjectsNotesTestIAMPermissions'
-    { _pntipXgafv          :: !(Maybe Xgafv)
+    { _pntipXgafv :: !(Maybe Xgafv)
     , _pntipUploadProtocol :: !(Maybe Text)
-    , _pntipAccessToken    :: !(Maybe Text)
-    , _pntipUploadType     :: !(Maybe Text)
-    , _pntipPayload        :: !TestIAMPermissionsRequest
-    , _pntipResource       :: !Text
-    , _pntipCallback       :: !(Maybe Text)
+    , _pntipAccessToken :: !(Maybe Text)
+    , _pntipUploadType :: !(Maybe Text)
+    , _pntipPayload :: !TestIAMPermissionsRequest
+    , _pntipResource :: !Text
+    , _pntipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

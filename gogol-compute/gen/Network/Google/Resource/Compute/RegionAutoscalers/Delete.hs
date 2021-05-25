@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.RegionAutoscalers.Delete
     , radRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.regionAutoscalers.delete@ method which the
 -- 'RegionAutoscalersDelete' request conforms to.
@@ -61,10 +61,10 @@ type RegionAutoscalersDeleteResource =
 -- /See:/ 'regionAutoscalersDelete' smart constructor.
 data RegionAutoscalersDelete =
   RegionAutoscalersDelete'
-    { _radRequestId  :: !(Maybe Text)
-    , _radProject    :: !Text
+    { _radRequestId :: !(Maybe Text)
+    , _radProject :: !Text
     , _radAutoscaler :: !Text
-    , _radRegion     :: !Text
+    , _radRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

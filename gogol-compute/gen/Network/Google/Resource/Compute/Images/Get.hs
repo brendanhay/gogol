@@ -38,8 +38,8 @@ module Network.Google.Resource.Compute.Images.Get
     , imaProject
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.images.get@ method which the
 -- 'ImagesGet' request conforms to.
@@ -59,7 +59,7 @@ type ImagesGetResource =
 -- /See:/ 'imagesGet' smart constructor.
 data ImagesGet =
   ImagesGet'
-    { _imaImage   :: !Text
+    { _imaImage :: !Text
     , _imaProject :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

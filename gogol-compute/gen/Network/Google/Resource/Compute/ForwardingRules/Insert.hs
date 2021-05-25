@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.ForwardingRules.Insert
     , friRegion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.insert@ method which the
 -- 'ForwardingRulesInsert' request conforms to.
@@ -65,9 +65,9 @@ type ForwardingRulesInsertResource =
 data ForwardingRulesInsert =
   ForwardingRulesInsert'
     { _friRequestId :: !(Maybe Text)
-    , _friProject   :: !Text
-    , _friPayload   :: !ForwardingRule
-    , _friRegion    :: !Text
+    , _friProject :: !Text
+    , _friPayload :: !ForwardingRule
+    , _friRegion :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

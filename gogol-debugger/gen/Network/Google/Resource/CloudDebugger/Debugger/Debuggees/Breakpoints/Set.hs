@@ -22,7 +22,7 @@
 --
 -- Sets the breakpoint to the debuggee.
 --
--- /See:/ <https://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     (
     -- * REST Resource
@@ -35,6 +35,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     -- * Request Lenses
     , ddbsXgafv
     , ddbsUploadProtocol
+    , ddbsCanaryOption
     , ddbsAccessToken
     , ddbsUploadType
     , ddbsPayload
@@ -43,8 +44,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     , ddbsCallback
     ) where
 
-import           Network.Google.Debugger.Types
-import           Network.Google.Prelude
+import Network.Google.Debugger.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.set@ method which the
 -- 'DebuggerDebuggeesBreakpointsSet' request conforms to.
@@ -57,27 +58,31 @@ type DebuggerDebuggeesBreakpointsSetResource =
                "set" :>
                  QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "clientVersion" Text :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               ReqBody '[JSON] Breakpoint :>
-                                 Post '[JSON] SetBreakpointResponse
+                     QueryParam "canaryOption"
+                       DebuggerDebuggeesBreakpointsSetCanaryOption
+                       :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "clientVersion" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Breakpoint :>
+                                   Post '[JSON] SetBreakpointResponse
 
 -- | Sets the breakpoint to the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsSet' smart constructor.
 data DebuggerDebuggeesBreakpointsSet =
   DebuggerDebuggeesBreakpointsSet'
-    { _ddbsXgafv          :: !(Maybe Xgafv)
+    { _ddbsXgafv :: !(Maybe Xgafv)
     , _ddbsUploadProtocol :: !(Maybe Text)
-    , _ddbsAccessToken    :: !(Maybe Text)
-    , _ddbsUploadType     :: !(Maybe Text)
-    , _ddbsPayload        :: !Breakpoint
-    , _ddbsDebuggeeId     :: !Text
-    , _ddbsClientVersion  :: !(Maybe Text)
-    , _ddbsCallback       :: !(Maybe Text)
+    , _ddbsCanaryOption :: !(Maybe DebuggerDebuggeesBreakpointsSetCanaryOption)
+    , _ddbsAccessToken :: !(Maybe Text)
+    , _ddbsUploadType :: !(Maybe Text)
+    , _ddbsPayload :: !Breakpoint
+    , _ddbsDebuggeeId :: !Text
+    , _ddbsClientVersion :: !(Maybe Text)
+    , _ddbsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -89,6 +94,8 @@ data DebuggerDebuggeesBreakpointsSet =
 -- * 'ddbsXgafv'
 --
 -- * 'ddbsUploadProtocol'
+--
+-- * 'ddbsCanaryOption'
 --
 -- * 'ddbsAccessToken'
 --
@@ -109,6 +116,7 @@ debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
   DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
     , _ddbsUploadProtocol = Nothing
+    , _ddbsCanaryOption = Nothing
     , _ddbsAccessToken = Nothing
     , _ddbsUploadType = Nothing
     , _ddbsPayload = pDdbsPayload_
@@ -129,6 +137,12 @@ ddbsUploadProtocol
   = lens _ddbsUploadProtocol
       (\ s a -> s{_ddbsUploadProtocol = a})
 
+-- | The canary option set by the user upon setting breakpoint.
+ddbsCanaryOption :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe DebuggerDebuggeesBreakpointsSetCanaryOption)
+ddbsCanaryOption
+  = lens _ddbsCanaryOption
+      (\ s a -> s{_ddbsCanaryOption = a})
+
 -- | OAuth access token.
 ddbsAccessToken :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsAccessToken
@@ -146,14 +160,14 @@ ddbsPayload :: Lens' DebuggerDebuggeesBreakpointsSet Breakpoint
 ddbsPayload
   = lens _ddbsPayload (\ s a -> s{_ddbsPayload = a})
 
--- | ID of the debuggee where the breakpoint is to be set.
+-- | Required. ID of the debuggee where the breakpoint is to be set.
 ddbsDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsSet Text
 ddbsDebuggeeId
   = lens _ddbsDebuggeeId
       (\ s a -> s{_ddbsDebuggeeId = a})
 
--- | The client version making the call. Schema: \`domain\/type\/version\`
--- (e.g., \`google.com\/intellij\/v1\`).
+-- | Required. The client version making the call. Schema:
+-- \`domain\/type\/version\` (e.g., \`google.com\/intellij\/v1\`).
 ddbsClientVersion :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsClientVersion
   = lens _ddbsClientVersion
@@ -174,6 +188,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient DebuggerDebuggeesBreakpointsSet'{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
+              _ddbsCanaryOption
               _ddbsAccessToken
               _ddbsUploadType
               _ddbsClientVersion

@@ -22,7 +22,7 @@
 --
 -- Updates a specific Version resource.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.patch@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.versions.patch@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Versions.Patch
     (
     -- * REST Resource
@@ -43,8 +43,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Ver
     , cpvpCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.versions.patch@ method which the
 -- 'CatalogsProductsVersionsPatch' request conforms to.
@@ -69,14 +69,14 @@ type CatalogsProductsVersionsPatchResource =
 -- /See:/ 'catalogsProductsVersionsPatch' smart constructor.
 data CatalogsProductsVersionsPatch =
   CatalogsProductsVersionsPatch'
-    { _cpvpXgafv          :: !(Maybe Xgafv)
+    { _cpvpXgafv :: !(Maybe Xgafv)
     , _cpvpUploadProtocol :: !(Maybe Text)
-    , _cpvpUpdateMask     :: !(Maybe GFieldMask)
-    , _cpvpAccessToken    :: !(Maybe Text)
-    , _cpvpUploadType     :: !(Maybe Text)
-    , _cpvpPayload        :: !GoogleCloudPrivatecatalogproducerV1beta1Version
-    , _cpvpName           :: !Text
-    , _cpvpCallback       :: !(Maybe Text)
+    , _cpvpUpdateMask :: !(Maybe GFieldMask)
+    , _cpvpAccessToken :: !(Maybe Text)
+    , _cpvpUploadType :: !(Maybe Text)
+    , _cpvpPayload :: !GoogleCloudPrivatecatalogproducerV1beta1Version
+    , _cpvpName :: !Text
+    , _cpvpCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Stackdriver Trace.
+A client library for the Google Cloud Trace.
 
 
 ## Contribute

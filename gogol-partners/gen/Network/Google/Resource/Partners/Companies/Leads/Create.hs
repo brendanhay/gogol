@@ -42,8 +42,8 @@ module Network.Google.Resource.Partners.Companies.Leads.Create
     , clcCallback
     ) where
 
-import           Network.Google.Partners.Types
-import           Network.Google.Prelude
+import Network.Google.Partners.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @partners.companies.leads.create@ method which the
 -- 'CompaniesLeadsCreate' request conforms to.
@@ -66,13 +66,13 @@ type CompaniesLeadsCreateResource =
 -- /See:/ 'companiesLeadsCreate' smart constructor.
 data CompaniesLeadsCreate =
   CompaniesLeadsCreate'
-    { _clcXgafv          :: !(Maybe Xgafv)
+    { _clcXgafv :: !(Maybe Xgafv)
     , _clcUploadProtocol :: !(Maybe Text)
-    , _clcCompanyId      :: !Text
-    , _clcAccessToken    :: !(Maybe Text)
-    , _clcUploadType     :: !(Maybe Text)
-    , _clcPayload        :: !CreateLeadRequest
-    , _clcCallback       :: !(Maybe Text)
+    , _clcCompanyId :: !Text
+    , _clcAccessToken :: !(Maybe Text)
+    , _clcUploadType :: !(Maybe Text)
+    , _clcPayload :: !CreateLeadRequest
+    , _clcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

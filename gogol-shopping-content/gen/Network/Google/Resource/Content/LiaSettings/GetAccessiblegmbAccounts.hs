@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of accessible Google My Business accounts.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.liasettings.getaccessiblegmbaccounts@.
+-- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.liasettings.getaccessiblegmbaccounts@.
 module Network.Google.Resource.Content.LiaSettings.GetAccessiblegmbAccounts
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.Content.LiaSettings.GetAccessiblegmbAccounts
     , LiaSettingsGetAccessiblegmbAccounts
 
     -- * Request Lenses
+    , lsgaaXgafv
     , lsgaaMerchantId
+    , lsgaaUploadProtocol
+    , lsgaaAccessToken
+    , lsgaaUploadType
     , lsgaaAccountId
+    , lsgaaCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ShoppingContent.Types
+import Network.Google.Prelude
+import Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.liasettings.getaccessiblegmbaccounts@ method which the
 -- 'LiaSettingsGetAccessiblegmbAccounts' request conforms to.
@@ -49,17 +54,27 @@ type LiaSettingsGetAccessiblegmbAccountsResource =
            "liasettings" :>
              Capture "accountId" (Textual Word64) :>
                "accessiblegmbaccounts" :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON]
-                     LiaSettingsGetAccessibleGmbAccountsResponse
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON]
+                               LiaSettingsGetAccessibleGmbAccountsResponse
 
 -- | Retrieves the list of accessible Google My Business accounts.
 --
 -- /See:/ 'liaSettingsGetAccessiblegmbAccounts' smart constructor.
 data LiaSettingsGetAccessiblegmbAccounts =
   LiaSettingsGetAccessiblegmbAccounts'
-    { _lsgaaMerchantId :: !(Textual Word64)
-    , _lsgaaAccountId  :: !(Textual Word64)
+    { _lsgaaXgafv :: !(Maybe Xgafv)
+    , _lsgaaMerchantId :: !(Textual Word64)
+    , _lsgaaUploadProtocol :: !(Maybe Text)
+    , _lsgaaAccessToken :: !(Maybe Text)
+    , _lsgaaUploadType :: !(Maybe Text)
+    , _lsgaaAccountId :: !(Textual Word64)
+    , _lsgaaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -68,28 +83,66 @@ data LiaSettingsGetAccessiblegmbAccounts =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lsgaaXgafv'
+--
 -- * 'lsgaaMerchantId'
 --
+-- * 'lsgaaUploadProtocol'
+--
+-- * 'lsgaaAccessToken'
+--
+-- * 'lsgaaUploadType'
+--
 -- * 'lsgaaAccountId'
+--
+-- * 'lsgaaCallback'
 liaSettingsGetAccessiblegmbAccounts
     :: Word64 -- ^ 'lsgaaMerchantId'
     -> Word64 -- ^ 'lsgaaAccountId'
     -> LiaSettingsGetAccessiblegmbAccounts
 liaSettingsGetAccessiblegmbAccounts pLsgaaMerchantId_ pLsgaaAccountId_ =
   LiaSettingsGetAccessiblegmbAccounts'
-    { _lsgaaMerchantId = _Coerce # pLsgaaMerchantId_
+    { _lsgaaXgafv = Nothing
+    , _lsgaaMerchantId = _Coerce # pLsgaaMerchantId_
+    , _lsgaaUploadProtocol = Nothing
+    , _lsgaaAccessToken = Nothing
+    , _lsgaaUploadType = Nothing
     , _lsgaaAccountId = _Coerce # pLsgaaAccountId_
+    , _lsgaaCallback = Nothing
     }
 
 
+-- | V1 error format.
+lsgaaXgafv :: Lens' LiaSettingsGetAccessiblegmbAccounts (Maybe Xgafv)
+lsgaaXgafv
+  = lens _lsgaaXgafv (\ s a -> s{_lsgaaXgafv = a})
+
 -- | The ID of the managing account. If this parameter is not the same as
 -- accountId, then this account must be a multi-client account and
--- accountId must be the ID of a sub-account of this account.
+-- \`accountId\` must be the ID of a sub-account of this account.
 lsgaaMerchantId :: Lens' LiaSettingsGetAccessiblegmbAccounts Word64
 lsgaaMerchantId
   = lens _lsgaaMerchantId
       (\ s a -> s{_lsgaaMerchantId = a})
       . _Coerce
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+lsgaaUploadProtocol :: Lens' LiaSettingsGetAccessiblegmbAccounts (Maybe Text)
+lsgaaUploadProtocol
+  = lens _lsgaaUploadProtocol
+      (\ s a -> s{_lsgaaUploadProtocol = a})
+
+-- | OAuth access token.
+lsgaaAccessToken :: Lens' LiaSettingsGetAccessiblegmbAccounts (Maybe Text)
+lsgaaAccessToken
+  = lens _lsgaaAccessToken
+      (\ s a -> s{_lsgaaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+lsgaaUploadType :: Lens' LiaSettingsGetAccessiblegmbAccounts (Maybe Text)
+lsgaaUploadType
+  = lens _lsgaaUploadType
+      (\ s a -> s{_lsgaaUploadType = a})
 
 -- | The ID of the account for which to retrieve accessible Google My
 -- Business accounts.
@@ -98,6 +151,12 @@ lsgaaAccountId
   = lens _lsgaaAccountId
       (\ s a -> s{_lsgaaAccountId = a})
       . _Coerce
+
+-- | JSONP
+lsgaaCallback :: Lens' LiaSettingsGetAccessiblegmbAccounts (Maybe Text)
+lsgaaCallback
+  = lens _lsgaaCallback
+      (\ s a -> s{_lsgaaCallback = a})
 
 instance GoogleRequest
            LiaSettingsGetAccessiblegmbAccounts
@@ -108,7 +167,12 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/content"]
         requestClient
           LiaSettingsGetAccessiblegmbAccounts'{..}
-          = go _lsgaaMerchantId _lsgaaAccountId (Just AltJSON)
+          = go _lsgaaMerchantId _lsgaaAccountId _lsgaaXgafv
+              _lsgaaUploadProtocol
+              _lsgaaAccessToken
+              _lsgaaUploadType
+              _lsgaaCallback
+              (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

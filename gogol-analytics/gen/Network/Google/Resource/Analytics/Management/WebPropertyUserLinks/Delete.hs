@@ -38,8 +38,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
     , mwpuldLinkId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webpropertyUserLinks.delete@ method which the
 -- 'ManagementWebPropertyUserLinksDelete' request conforms to.
@@ -61,8 +61,8 @@ type ManagementWebPropertyUserLinksDeleteResource =
 data ManagementWebPropertyUserLinksDelete =
   ManagementWebPropertyUserLinksDelete'
     { _mwpuldWebPropertyId :: !Text
-    , _mwpuldAccountId     :: !Text
-    , _mwpuldLinkId        :: !Text
+    , _mwpuldAccountId :: !Text
+    , _mwpuldLinkId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

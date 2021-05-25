@@ -45,8 +45,8 @@ module Network.Google.Resource.AppEngine.Apps.Services.Patch
     , aspCallback
     ) where
 
-import           Network.Google.AppEngine.Types
-import           Network.Google.Prelude
+import Network.Google.AppEngine.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.services.patch@ method which the
 -- 'AppsServicesPatch' request conforms to.
@@ -72,16 +72,16 @@ type AppsServicesPatchResource =
 -- /See:/ 'appsServicesPatch' smart constructor.
 data AppsServicesPatch =
   AppsServicesPatch'
-    { _aspXgafv          :: !(Maybe Xgafv)
+    { _aspXgafv :: !(Maybe Xgafv)
     , _aspUploadProtocol :: !(Maybe Text)
-    , _aspUpdateMask     :: !(Maybe GFieldMask)
-    , _aspAccessToken    :: !(Maybe Text)
-    , _aspUploadType     :: !(Maybe Text)
-    , _aspPayload        :: !Service
+    , _aspUpdateMask :: !(Maybe GFieldMask)
+    , _aspAccessToken :: !(Maybe Text)
+    , _aspUploadType :: !(Maybe Text)
+    , _aspPayload :: !Service
     , _aspMigrateTraffic :: !(Maybe Bool)
-    , _aspAppsId         :: !Text
-    , _aspServicesId     :: !Text
-    , _aspCallback       :: !(Maybe Text)
+    , _aspAppsId :: !Text
+    , _aspServicesId :: !Text
+    , _aspCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -139,7 +139,7 @@ aspUploadProtocol
   = lens _aspUploadProtocol
       (\ s a -> s{_aspUploadProtocol = a})
 
--- | Standard field mask for the set of fields to be updated.
+-- | Required. Standard field mask for the set of fields to be updated.
 aspUpdateMask :: Lens' AppsServicesPatch (Maybe GFieldMask)
 aspUpdateMask
   = lens _aspUpdateMask

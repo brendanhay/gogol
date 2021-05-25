@@ -37,8 +37,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Get
     , tagAttachmentId
     ) where
 
-import           Network.Google.Mirror.Types
-import           Network.Google.Prelude
+import Network.Google.Mirror.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.get@ method which the
 -- 'TimelineAttachmentsGet' request conforms to.
@@ -65,7 +65,7 @@ type TimelineAttachmentsGetResource =
 -- /See:/ 'timelineAttachmentsGet' smart constructor.
 data TimelineAttachmentsGet =
   TimelineAttachmentsGet'
-    { _tagItemId       :: !Text
+    { _tagItemId :: !Text
     , _tagAttachmentId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

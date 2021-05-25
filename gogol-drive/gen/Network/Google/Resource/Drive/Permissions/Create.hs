@@ -36,15 +36,17 @@ module Network.Google.Resource.Drive.Permissions.Create
     , pcSendNotificationEmail
     , pcPayload
     , pcEmailMessage
+    , pcMoveToNewOwnersRoot
     , pcSupportsAllDrives
+    , pcEnforceSingleParent
     , pcUseDomainAdminAccess
     , pcTransferOwnership
     , pcFileId
     , pcSupportsTeamDrives
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.create@ method which the
 -- 'PermissionsCreate' request conforms to.
@@ -56,13 +58,15 @@ type PermissionsCreateResource =
              "permissions" :>
                QueryParam "sendNotificationEmail" Bool :>
                  QueryParam "emailMessage" Text :>
-                   QueryParam "supportsAllDrives" Bool :>
-                     QueryParam "useDomainAdminAccess" Bool :>
-                       QueryParam "transferOwnership" Bool :>
-                         QueryParam "supportsTeamDrives" Bool :>
-                           QueryParam "alt" AltJSON :>
-                             ReqBody '[JSON] Permission :>
-                               Post '[JSON] Permission
+                   QueryParam "moveToNewOwnersRoot" Bool :>
+                     QueryParam "supportsAllDrives" Bool :>
+                       QueryParam "enforceSingleParent" Bool :>
+                         QueryParam "useDomainAdminAccess" Bool :>
+                           QueryParam "transferOwnership" Bool :>
+                             QueryParam "supportsTeamDrives" Bool :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Permission :>
+                                   Post '[JSON] Permission
 
 -- | Creates a permission for a file or shared drive.
 --
@@ -70,13 +74,15 @@ type PermissionsCreateResource =
 data PermissionsCreate =
   PermissionsCreate'
     { _pcSendNotificationEmail :: !(Maybe Bool)
-    , _pcPayload               :: !Permission
-    , _pcEmailMessage          :: !(Maybe Text)
-    , _pcSupportsAllDrives     :: !Bool
-    , _pcUseDomainAdminAccess  :: !Bool
-    , _pcTransferOwnership     :: !Bool
-    , _pcFileId                :: !Text
-    , _pcSupportsTeamDrives    :: !Bool
+    , _pcPayload :: !Permission
+    , _pcEmailMessage :: !(Maybe Text)
+    , _pcMoveToNewOwnersRoot :: !Bool
+    , _pcSupportsAllDrives :: !Bool
+    , _pcEnforceSingleParent :: !Bool
+    , _pcUseDomainAdminAccess :: !Bool
+    , _pcTransferOwnership :: !Bool
+    , _pcFileId :: !Text
+    , _pcSupportsTeamDrives :: !Bool
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -91,7 +97,11 @@ data PermissionsCreate =
 --
 -- * 'pcEmailMessage'
 --
+-- * 'pcMoveToNewOwnersRoot'
+--
 -- * 'pcSupportsAllDrives'
+--
+-- * 'pcEnforceSingleParent'
 --
 -- * 'pcUseDomainAdminAccess'
 --
@@ -109,7 +119,9 @@ permissionsCreate pPcPayload_ pPcFileId_ =
     { _pcSendNotificationEmail = Nothing
     , _pcPayload = pPcPayload_
     , _pcEmailMessage = Nothing
+    , _pcMoveToNewOwnersRoot = False
     , _pcSupportsAllDrives = False
+    , _pcEnforceSingleParent = False
     , _pcUseDomainAdminAccess = False
     , _pcTransferOwnership = False
     , _pcFileId = pPcFileId_
@@ -136,12 +148,28 @@ pcEmailMessage
   = lens _pcEmailMessage
       (\ s a -> s{_pcEmailMessage = a})
 
+-- | This parameter will only take effect if the item is not in a shared
+-- drive and the request is attempting to transfer the ownership of the
+-- item. If set to true, the item will be moved to the new owner\'s My
+-- Drive root folder and all prior parents removed. If set to false,
+-- parents are not changed.
+pcMoveToNewOwnersRoot :: Lens' PermissionsCreate Bool
+pcMoveToNewOwnersRoot
+  = lens _pcMoveToNewOwnersRoot
+      (\ s a -> s{_pcMoveToNewOwnersRoot = a})
+
 -- | Whether the requesting application supports both My Drives and shared
 -- drives.
 pcSupportsAllDrives :: Lens' PermissionsCreate Bool
 pcSupportsAllDrives
   = lens _pcSupportsAllDrives
       (\ s a -> s{_pcSupportsAllDrives = a})
+
+-- | Deprecated. See moveToNewOwnersRoot for details.
+pcEnforceSingleParent :: Lens' PermissionsCreate Bool
+pcEnforceSingleParent
+  = lens _pcEnforceSingleParent
+      (\ s a -> s{_pcEnforceSingleParent = a})
 
 -- | Issue the request as a domain administrator; if set to true, then the
 -- requester will be granted access if the file ID parameter refers to a
@@ -154,7 +182,12 @@ pcUseDomainAdminAccess
 
 -- | Whether to transfer ownership to the specified user and downgrade the
 -- current owner to a writer. This parameter is required as an
--- acknowledgement of the side effect.
+-- acknowledgement of the side effect. File owners can only transfer
+-- ownership of files existing on My Drive. Files existing in a shared
+-- drive are owned by the organization that owns that shared drive.
+-- Ownership transfers are not supported for files and folders in shared
+-- drives. Organizers of a shared drive can move items from that shared
+-- drive into their My Drive which transfers the ownership to them.
 pcTransferOwnership :: Lens' PermissionsCreate Bool
 pcTransferOwnership
   = lens _pcTransferOwnership
@@ -178,7 +211,9 @@ instance GoogleRequest PermissionsCreate where
         requestClient PermissionsCreate'{..}
           = go _pcFileId _pcSendNotificationEmail
               _pcEmailMessage
+              (Just _pcMoveToNewOwnersRoot)
               (Just _pcSupportsAllDrives)
+              (Just _pcEnforceSingleParent)
               (Just _pcUseDomainAdminAccess)
               (Just _pcTransferOwnership)
               (Just _pcSupportsTeamDrives)

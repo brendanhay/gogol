@@ -35,8 +35,18 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Vision.Files.AsyncBatchAnnotate
+          Network.Google.Resource.Vision.Files.Annotate
+        , Network.Google.Resource.Vision.Files.AsyncBatchAnnotate
         , Network.Google.Resource.Vision.Images.Annotate
+        , Network.Google.Resource.Vision.Images.AsyncBatchAnnotate
+        , Network.Google.Resource.Vision.Projects.Files.Annotate
+        , Network.Google.Resource.Vision.Projects.Files.AsyncBatchAnnotate
+        , Network.Google.Resource.Vision.Projects.Images.Annotate
+        , Network.Google.Resource.Vision.Projects.Images.AsyncBatchAnnotate
+        , Network.Google.Resource.Vision.Projects.Locations.Files.Annotate
+        , Network.Google.Resource.Vision.Projects.Locations.Files.AsyncBatchAnnotate
+        , Network.Google.Resource.Vision.Projects.Locations.Images.Annotate
+        , Network.Google.Resource.Vision.Projects.Locations.Images.AsyncBatchAnnotate
         , Network.Google.Vision
         , Network.Google.Vision.Types
 

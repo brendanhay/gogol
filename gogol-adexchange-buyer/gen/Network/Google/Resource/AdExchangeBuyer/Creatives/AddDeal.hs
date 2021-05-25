@@ -38,8 +38,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.AddDeal
     , cadAccountId
     ) where
 
-import           Network.Google.AdExchangeBuyer.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.creatives.addDeal@ method which the
 -- 'CreativesAddDeal' request conforms to.
@@ -59,8 +59,8 @@ type CreativesAddDealResource =
 data CreativesAddDeal =
   CreativesAddDeal'
     { _cadBuyerCreativeId :: !Text
-    , _cadDealId          :: !(Textual Int64)
-    , _cadAccountId       :: !(Textual Int32)
+    , _cadDealId :: !(Textual Int64)
+    , _cadAccountId :: !(Textual Int32)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

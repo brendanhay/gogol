@@ -39,8 +39,8 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
     , thttppiPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpProxies.insert@ method which the
 -- 'TargetHTTPProxiesInsert' request conforms to.
@@ -63,8 +63,8 @@ type TargetHTTPProxiesInsertResource =
 data TargetHTTPProxiesInsert =
   TargetHTTPProxiesInsert'
     { _thttppiRequestId :: !(Maybe Text)
-    , _thttppiProject   :: !Text
-    , _thttppiPayload   :: !TargetHTTPProxy
+    , _thttppiProject :: !Text
+    , _thttppiPayload :: !TargetHTTPProxy
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

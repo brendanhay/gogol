@@ -1,5 +1,5 @@
-{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
 {-# LANGUAGE OverloadedStrings  #-}
@@ -132,9 +132,9 @@ module Network.Google.CommentAnalyzer.Types
     , TextEntryType (..)
     ) where
 
-import           Network.Google.CommentAnalyzer.Types.Product
-import           Network.Google.CommentAnalyzer.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.CommentAnalyzer.Types.Product
+import Network.Google.CommentAnalyzer.Types.Sum
+import Network.Google.Prelude
 
 -- | Default request referring to version 'v1alpha1' of the Perspective Comment Analyzer API. This contains the host and root path used as a starting point for constructing service requests.
 commentAnalyzerService :: ServiceConfig

@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified License resource.
+-- Returns the specified License resource. Caution This resource is
+-- intended for use only by third-party partners who are creating Cloud
+-- Marketplace images.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.licenses.get@.
 module Network.Google.Resource.Compute.Licenses.Get
@@ -37,8 +39,8 @@ module Network.Google.Resource.Compute.Licenses.Get
     , lgLicense
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.licenses.get@ method which the
 -- 'LicensesGet' request conforms to.
@@ -52,7 +54,9 @@ type LicensesGetResource =
                  Capture "license" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] License
 
--- | Returns the specified License resource.
+-- | Returns the specified License resource. Caution This resource is
+-- intended for use only by third-party partners who are creating Cloud
+-- Marketplace images.
 --
 -- /See:/ 'licensesGet' smart constructor.
 data LicensesGet =

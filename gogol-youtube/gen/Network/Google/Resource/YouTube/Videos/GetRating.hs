@@ -23,7 +23,7 @@
 -- Retrieves the ratings that the authorized user gave to a list of
 -- specified videos.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.getRating@.
+-- /See:/ <https://developers.google.com/youtube/ YouTube Data API v3 Reference> for @youtube.videos.getRating@.
 module Network.Google.Resource.YouTube.Videos.GetRating
     (
     -- * REST Resource
@@ -34,12 +34,17 @@ module Network.Google.Resource.YouTube.Videos.GetRating
     , VideosGetRating
 
     -- * Request Lenses
+    , vgrXgafv
+    , vgrUploadProtocol
+    , vgrAccessToken
+    , vgrUploadType
     , vgrOnBehalfOfContentOwner
     , vgrId
+    , vgrCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.YouTube.Types
+import Network.Google.Prelude
+import Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.getRating@ method which the
 -- 'VideosGetRating' request conforms to.
@@ -48,10 +53,15 @@ type VideosGetRatingResource =
        "v3" :>
          "videos" :>
            "getRating" :>
-             QueryParam "id" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] VideoGetRatingResponse
+             QueryParams "id" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "onBehalfOfContentOwner" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] VideoGetRatingResponse
 
 -- | Retrieves the ratings that the authorized user gave to a list of
 -- specified videos.
@@ -59,8 +69,13 @@ type VideosGetRatingResource =
 -- /See:/ 'videosGetRating' smart constructor.
 data VideosGetRating =
   VideosGetRating'
-    { _vgrOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vgrId                     :: !Text
+    { _vgrXgafv :: !(Maybe Xgafv)
+    , _vgrUploadProtocol :: !(Maybe Text)
+    , _vgrAccessToken :: !(Maybe Text)
+    , _vgrUploadType :: !(Maybe Text)
+    , _vgrOnBehalfOfContentOwner :: !(Maybe Text)
+    , _vgrId :: ![Text]
+    , _vgrCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,18 +84,58 @@ data VideosGetRating =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vgrXgafv'
+--
+-- * 'vgrUploadProtocol'
+--
+-- * 'vgrAccessToken'
+--
+-- * 'vgrUploadType'
+--
 -- * 'vgrOnBehalfOfContentOwner'
 --
 -- * 'vgrId'
+--
+-- * 'vgrCallback'
 videosGetRating
-    :: Text -- ^ 'vgrId'
+    :: [Text] -- ^ 'vgrId'
     -> VideosGetRating
 videosGetRating pVgrId_ =
-  VideosGetRating' {_vgrOnBehalfOfContentOwner = Nothing, _vgrId = pVgrId_}
+  VideosGetRating'
+    { _vgrXgafv = Nothing
+    , _vgrUploadProtocol = Nothing
+    , _vgrAccessToken = Nothing
+    , _vgrUploadType = Nothing
+    , _vgrOnBehalfOfContentOwner = Nothing
+    , _vgrId = _Coerce # pVgrId_
+    , _vgrCallback = Nothing
+    }
 
 
--- | Note: This parameter is intended exclusively for YouTube content
--- partners. The onBehalfOfContentOwner parameter indicates that the
+-- | V1 error format.
+vgrXgafv :: Lens' VideosGetRating (Maybe Xgafv)
+vgrXgafv = lens _vgrXgafv (\ s a -> s{_vgrXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+vgrUploadProtocol :: Lens' VideosGetRating (Maybe Text)
+vgrUploadProtocol
+  = lens _vgrUploadProtocol
+      (\ s a -> s{_vgrUploadProtocol = a})
+
+-- | OAuth access token.
+vgrAccessToken :: Lens' VideosGetRating (Maybe Text)
+vgrAccessToken
+  = lens _vgrAccessToken
+      (\ s a -> s{_vgrAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+vgrUploadType :: Lens' VideosGetRating (Maybe Text)
+vgrUploadType
+  = lens _vgrUploadType
+      (\ s a -> s{_vgrUploadType = a})
+
+-- | *Note:* This parameter is intended exclusively for YouTube content
+-- partners. The *onBehalfOfContentOwner* parameter indicates that the
 -- request\'s authorization credentials identify a YouTube CMS user who is
 -- acting on behalf of the content owner specified in the parameter value.
 -- This parameter is intended for YouTube content partners that own and
@@ -94,11 +149,14 @@ vgrOnBehalfOfContentOwner
   = lens _vgrOnBehalfOfContentOwner
       (\ s a -> s{_vgrOnBehalfOfContentOwner = a})
 
--- | The id parameter specifies a comma-separated list of the YouTube video
--- ID(s) for the resource(s) for which you are retrieving rating data. In a
--- video resource, the id property specifies the video\'s ID.
-vgrId :: Lens' VideosGetRating Text
-vgrId = lens _vgrId (\ s a -> s{_vgrId = a})
+vgrId :: Lens' VideosGetRating [Text]
+vgrId
+  = lens _vgrId (\ s a -> s{_vgrId = a}) . _Coerce
+
+-- | JSONP
+vgrCallback :: Lens' VideosGetRating (Maybe Text)
+vgrCallback
+  = lens _vgrCallback (\ s a -> s{_vgrCallback = a})
 
 instance GoogleRequest VideosGetRating where
         type Rs VideosGetRating = VideoGetRatingResponse
@@ -107,7 +165,11 @@ instance GoogleRequest VideosGetRating where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient VideosGetRating'{..}
-          = go (Just _vgrId) _vgrOnBehalfOfContentOwner
+          = go _vgrId _vgrXgafv _vgrUploadProtocol
+              _vgrAccessToken
+              _vgrUploadType
+              _vgrOnBehalfOfContentOwner
+              _vgrCallback
               (Just AltJSON)
               youTubeService
           where go

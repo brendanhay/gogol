@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the access control policy for a resource. May be empty if no such
--- policy or resource exists.
+-- policy or resource exists. Caution This resource is intended for use
+-- only by third-party partners who are creating Cloud Marketplace images.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.licenses.getIamPolicy@.
 module Network.Google.Resource.Compute.Licenses.GetIAMPolicy
@@ -36,10 +37,11 @@ module Network.Google.Resource.Compute.Licenses.GetIAMPolicy
     -- * Request Lenses
     , lgipProject
     , lgipResource
+    , lgipOptionsRequestedPolicyVersion
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.licenses.getIamPolicy@ method which the
 -- 'LicensesGetIAMPolicy' request conforms to.
@@ -52,16 +54,20 @@ type LicensesGetIAMPolicyResource =
                "licenses" :>
                  Capture "resource" Text :>
                    "getIamPolicy" :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] Policy
+                     QueryParam "optionsRequestedPolicyVersion"
+                       (Textual Int32)
+                       :> QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. May be empty if no such
--- policy or resource exists.
+-- policy or resource exists. Caution This resource is intended for use
+-- only by third-party partners who are creating Cloud Marketplace images.
 --
 -- /See:/ 'licensesGetIAMPolicy' smart constructor.
 data LicensesGetIAMPolicy =
   LicensesGetIAMPolicy'
-    { _lgipProject  :: !Text
+    { _lgipProject :: !Text
     , _lgipResource :: !Text
+    , _lgipOptionsRequestedPolicyVersion :: !(Maybe (Textual Int32))
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,13 +79,18 @@ data LicensesGetIAMPolicy =
 -- * 'lgipProject'
 --
 -- * 'lgipResource'
+--
+-- * 'lgipOptionsRequestedPolicyVersion'
 licensesGetIAMPolicy
     :: Text -- ^ 'lgipProject'
     -> Text -- ^ 'lgipResource'
     -> LicensesGetIAMPolicy
 licensesGetIAMPolicy pLgipProject_ pLgipResource_ =
   LicensesGetIAMPolicy'
-    {_lgipProject = pLgipProject_, _lgipResource = pLgipResource_}
+    { _lgipProject = pLgipProject_
+    , _lgipResource = pLgipResource_
+    , _lgipOptionsRequestedPolicyVersion = Nothing
+    }
 
 
 -- | Project ID for this request.
@@ -92,6 +103,13 @@ lgipResource :: Lens' LicensesGetIAMPolicy Text
 lgipResource
   = lens _lgipResource (\ s a -> s{_lgipResource = a})
 
+-- | Requested IAM Policy version.
+lgipOptionsRequestedPolicyVersion :: Lens' LicensesGetIAMPolicy (Maybe Int32)
+lgipOptionsRequestedPolicyVersion
+  = lens _lgipOptionsRequestedPolicyVersion
+      (\ s a -> s{_lgipOptionsRequestedPolicyVersion = a})
+      . mapping _Coerce
+
 instance GoogleRequest LicensesGetIAMPolicy where
         type Rs LicensesGetIAMPolicy = Policy
         type Scopes LicensesGetIAMPolicy =
@@ -99,7 +117,9 @@ instance GoogleRequest LicensesGetIAMPolicy where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient LicensesGetIAMPolicy'{..}
-          = go _lgipProject _lgipResource (Just AltJSON)
+          = go _lgipProject _lgipResource
+              _lgipOptionsRequestedPolicyVersion
+              (Just AltJSON)
               computeService
           where go
                   = buildClient

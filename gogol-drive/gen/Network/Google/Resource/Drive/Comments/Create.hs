@@ -37,8 +37,8 @@ module Network.Google.Resource.Drive.Comments.Create
     , ccFileId
     ) where
 
-import           Network.Google.Drive.Types
-import           Network.Google.Prelude
+import Network.Google.Drive.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.create@ method which the
 -- 'CommentsCreate' request conforms to.
@@ -57,7 +57,7 @@ type CommentsCreateResource =
 data CommentsCreate =
   CommentsCreate'
     { _ccPayload :: !Comment
-    , _ccFileId  :: !Text
+    , _ccFileId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

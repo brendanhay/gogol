@@ -36,8 +36,8 @@ module Network.Google.Resource.Analytics.UserDeletion.UserDeletionRequest.Upsert
     , ududruPayload
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.userDeletion.userDeletionRequest.upsert@ method which the
 -- 'UserDeletionUserDeletionRequestUpsert' request conforms to.

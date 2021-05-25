@@ -17,8 +17,8 @@
 --
 module Network.Google.Indexing.Types.Product where
 
-import           Network.Google.Indexing.Types.Sum
-import           Network.Google.Prelude
+import Network.Google.Indexing.Types.Sum
+import Network.Google.Prelude
 
 -- | Output for PublishUrlNotification
 --
@@ -70,7 +70,7 @@ data URLNotificationMetadata =
   URLNotificationMetadata'
     { _unmLatestUpdate :: !(Maybe URLNotification)
     , _unmLatestRemove :: !(Maybe URLNotification)
-    , _unmURL          :: !(Maybe Text)
+    , _unmURL :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -129,9 +129,9 @@ instance ToJSON URLNotificationMetadata where
 -- /See:/ 'urlNotification' smart constructor.
 data URLNotification =
   URLNotification'
-    { _unURL        :: !(Maybe Text)
+    { _unURL :: !(Maybe Text)
     , _unNotifyTime :: !(Maybe DateTime')
-    , _unType       :: !(Maybe URLNotificationType)
+    , _unType :: !(Maybe URLNotificationType)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

@@ -22,7 +22,7 @@
 --
 -- Creates a new span.
 --
--- /See:/ <https://cloud.google.com/trace Stackdriver Trace API Reference> for @cloudtrace.projects.traces.spans.createSpan@.
+-- /See:/ <https://cloud.google.com/trace Cloud Trace API Reference> for @cloudtrace.projects.traces.spans.createSpan@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
     (
     -- * REST Resource
@@ -42,8 +42,8 @@ module Network.Google.Resource.CloudTrace.Projects.Traces.Spans.CreateSpan
     , ptscsCallback
     ) where
 
-import           Network.Google.CloudTrace.Types
-import           Network.Google.Prelude
+import Network.Google.CloudTrace.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudtrace.projects.traces.spans.createSpan@ method which the
 -- 'ProjectsTracesSpansCreateSpan' request conforms to.
@@ -63,13 +63,13 @@ type ProjectsTracesSpansCreateSpanResource =
 -- /See:/ 'projectsTracesSpansCreateSpan' smart constructor.
 data ProjectsTracesSpansCreateSpan =
   ProjectsTracesSpansCreateSpan'
-    { _ptscsXgafv          :: !(Maybe Xgafv)
+    { _ptscsXgafv :: !(Maybe Xgafv)
     , _ptscsUploadProtocol :: !(Maybe Text)
-    , _ptscsAccessToken    :: !(Maybe Text)
-    , _ptscsUploadType     :: !(Maybe Text)
-    , _ptscsPayload        :: !Span
-    , _ptscsName           :: !Text
-    , _ptscsCallback       :: !(Maybe Text)
+    , _ptscsAccessToken :: !(Maybe Text)
+    , _ptscsUploadType :: !(Maybe Text)
+    , _ptscsPayload :: !Span
+    , _ptscsName :: !Text
+    , _ptscsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -135,12 +135,12 @@ ptscsPayload :: Lens' ProjectsTracesSpansCreateSpan Span
 ptscsPayload
   = lens _ptscsPayload (\ s a -> s{_ptscsPayload = a})
 
--- | The resource name of the span in the following format:
+-- | Required. The resource name of the span in the following format:
 -- projects\/[PROJECT_ID]\/traces\/[TRACE_ID]\/spans\/SPAN_ID is a unique
 -- identifier for a trace within a project; it is a 32-character
 -- hexadecimal encoding of a 16-byte array. [SPAN_ID] is a unique
 -- identifier for a span within a trace; it is a 16-character hexadecimal
--- encoding of an 8-byte array.
+-- encoding of an 8-byte array. It should not be zero.
 ptscsName :: Lens' ProjectsTracesSpansCreateSpan Text
 ptscsName
   = lens _ptscsName (\ s a -> s{_ptscsName = a})

@@ -22,7 +22,7 @@
 --
 -- Retrieves an instance operation that has been performed on an instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Admin API Reference> for @sql.operations.get@.
+-- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.operations.get@.
 module Network.Google.Resource.SQL.Operations.Get
     (
     -- * REST Resource
@@ -33,31 +33,45 @@ module Network.Google.Resource.SQL.Operations.Get
     , OperationsGet
 
     -- * Request Lenses
+    , ogXgafv
+    , ogUploadProtocol
     , ogProject
     , ogOperation
+    , ogAccessToken
+    , ogUploadType
+    , ogCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.SQLAdmin.Types
+import Network.Google.Prelude
+import Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.operations.get@ method which the
 -- 'OperationsGet' request conforms to.
 type OperationsGetResource =
-     "sql" :>
-       "v1beta4" :>
-         "projects" :>
-           Capture "project" Text :>
-             "operations" :>
-               Capture "operation" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Operation
+     "v1" :>
+       "projects" :>
+         Capture "project" Text :>
+           "operations" :>
+             Capture "operation" Text :>
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves an instance operation that has been performed on an instance.
 --
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet =
   OperationsGet'
-    { _ogProject   :: !Text
+    { _ogXgafv :: !(Maybe Xgafv)
+    , _ogUploadProtocol :: !(Maybe Text)
+    , _ogProject :: !Text
     , _ogOperation :: !Text
+    , _ogAccessToken :: !(Maybe Text)
+    , _ogUploadType :: !(Maybe Text)
+    , _ogCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,16 +80,44 @@ data OperationsGet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ogXgafv'
+--
+-- * 'ogUploadProtocol'
+--
 -- * 'ogProject'
 --
 -- * 'ogOperation'
+--
+-- * 'ogAccessToken'
+--
+-- * 'ogUploadType'
+--
+-- * 'ogCallback'
 operationsGet
     :: Text -- ^ 'ogProject'
     -> Text -- ^ 'ogOperation'
     -> OperationsGet
 operationsGet pOgProject_ pOgOperation_ =
-  OperationsGet' {_ogProject = pOgProject_, _ogOperation = pOgOperation_}
+  OperationsGet'
+    { _ogXgafv = Nothing
+    , _ogUploadProtocol = Nothing
+    , _ogProject = pOgProject_
+    , _ogOperation = pOgOperation_
+    , _ogAccessToken = Nothing
+    , _ogUploadType = Nothing
+    , _ogCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ogXgafv :: Lens' OperationsGet (Maybe Xgafv)
+ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ogUploadProtocol :: Lens' OperationsGet (Maybe Text)
+ogUploadProtocol
+  = lens _ogUploadProtocol
+      (\ s a -> s{_ogUploadProtocol = a})
 
 -- | Project ID of the project that contains the instance.
 ogProject :: Lens' OperationsGet Text
@@ -87,13 +129,34 @@ ogOperation :: Lens' OperationsGet Text
 ogOperation
   = lens _ogOperation (\ s a -> s{_ogOperation = a})
 
+-- | OAuth access token.
+ogAccessToken :: Lens' OperationsGet (Maybe Text)
+ogAccessToken
+  = lens _ogAccessToken
+      (\ s a -> s{_ogAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ogUploadType :: Lens' OperationsGet (Maybe Text)
+ogUploadType
+  = lens _ogUploadType (\ s a -> s{_ogUploadType = a})
+
+-- | JSONP
+ogCallback :: Lens' OperationsGet (Maybe Text)
+ogCallback
+  = lens _ogCallback (\ s a -> s{_ogCallback = a})
+
 instance GoogleRequest OperationsGet where
         type Rs OperationsGet = Operation
         type Scopes OperationsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
         requestClient OperationsGet'{..}
-          = go _ogProject _ogOperation (Just AltJSON)
+          = go _ogProject _ogOperation _ogXgafv
+              _ogUploadProtocol
+              _ogAccessToken
+              _ogUploadType
+              _ogCallback
+              (Just AltJSON)
               sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy OperationsGetResource)

@@ -39,8 +39,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
     , meiAccountId
     ) where
 
-import           Network.Google.Analytics.Types
-import           Network.Google.Prelude
+import Network.Google.Analytics.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.insert@ method which the
 -- 'ManagementExperimentsInsert' request conforms to.
@@ -64,9 +64,9 @@ type ManagementExperimentsInsertResource =
 data ManagementExperimentsInsert =
   ManagementExperimentsInsert'
     { _meiWebPropertyId :: !Text
-    , _meiProFileId     :: !Text
-    , _meiPayload       :: !Experiment
-    , _meiAccountId     :: !Text
+    , _meiProFileId :: !Text
+    , _meiPayload :: !Experiment
+    , _meiAccountId :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

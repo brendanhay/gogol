@@ -26,13 +26,12 @@
 -- execute one transaction at a time. To execute multiple concurrent
 -- read-write\/write-only transactions, create multiple sessions. Note that
 -- standalone reads and queries use a transaction internally, and count
--- toward the one transaction limit. Cloud Spanner limits the number of
--- sessions that can exist at any given time; thus, it is a good idea to
--- delete idle and\/or unneeded sessions. Aside from explicit deletes,
--- Cloud Spanner can delete sessions for which no operations are sent for
--- more than an hour. If a session is deleted, requests to it return
--- \`NOT_FOUND\`. Idle sessions can be kept alive by sending a trivial SQL
--- query periodically, e.g., \`\"SELECT 1\"\`.
+-- toward the one transaction limit. Active sessions use additional server
+-- resources, so it is a good idea to delete idle and unneeded sessions.
+-- Aside from explicit deletes, Cloud Spanner may delete sessions for which
+-- no operations are sent for more than an hour. If a session is deleted,
+-- requests to it return \`NOT_FOUND\`. Idle sessions can be kept alive by
+-- sending a trivial SQL query periodically, e.g., \`\"SELECT 1\"\`.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.sessions.create@.
 module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Create
@@ -45,17 +44,17 @@ module Network.Google.Resource.Spanner.Projects.Instances.Databases.Sessions.Cre
     , ProjectsInstancesDatabasesSessionsCreate
 
     -- * Request Lenses
-    , pXgafv
-    , pUploadProtocol
-    , pDatabase
-    , pAccessToken
-    , pUploadType
-    , pPayload
-    , pCallback
+    , proXgafv
+    , proUploadProtocol
+    , proDatabase
+    , proAccessToken
+    , proUploadType
+    , proPayload
+    , proCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.create@ method which the
 -- 'ProjectsInstancesDatabasesSessionsCreate' request conforms to.
@@ -79,24 +78,23 @@ type ProjectsInstancesDatabasesSessionsCreateResource
 -- execute one transaction at a time. To execute multiple concurrent
 -- read-write\/write-only transactions, create multiple sessions. Note that
 -- standalone reads and queries use a transaction internally, and count
--- toward the one transaction limit. Cloud Spanner limits the number of
--- sessions that can exist at any given time; thus, it is a good idea to
--- delete idle and\/or unneeded sessions. Aside from explicit deletes,
--- Cloud Spanner can delete sessions for which no operations are sent for
--- more than an hour. If a session is deleted, requests to it return
--- \`NOT_FOUND\`. Idle sessions can be kept alive by sending a trivial SQL
--- query periodically, e.g., \`\"SELECT 1\"\`.
+-- toward the one transaction limit. Active sessions use additional server
+-- resources, so it is a good idea to delete idle and unneeded sessions.
+-- Aside from explicit deletes, Cloud Spanner may delete sessions for which
+-- no operations are sent for more than an hour. If a session is deleted,
+-- requests to it return \`NOT_FOUND\`. Idle sessions can be kept alive by
+-- sending a trivial SQL query periodically, e.g., \`\"SELECT 1\"\`.
 --
 -- /See:/ 'projectsInstancesDatabasesSessionsCreate' smart constructor.
 data ProjectsInstancesDatabasesSessionsCreate =
   ProjectsInstancesDatabasesSessionsCreate'
-    { _pXgafv          :: !(Maybe Xgafv)
-    , _pUploadProtocol :: !(Maybe Text)
-    , _pDatabase       :: !Text
-    , _pAccessToken    :: !(Maybe Text)
-    , _pUploadType     :: !(Maybe Text)
-    , _pPayload        :: !CreateSessionRequest
-    , _pCallback       :: !(Maybe Text)
+    { _proXgafv :: !(Maybe Xgafv)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proDatabase :: !Text
+    , _proAccessToken :: !(Maybe Text)
+    , _proUploadType :: !(Maybe Text)
+    , _proPayload :: !CreateSessionRequest
+    , _proCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -105,68 +103,71 @@ data ProjectsInstancesDatabasesSessionsCreate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pXgafv'
+-- * 'proXgafv'
 --
--- * 'pUploadProtocol'
+-- * 'proUploadProtocol'
 --
--- * 'pDatabase'
+-- * 'proDatabase'
 --
--- * 'pAccessToken'
+-- * 'proAccessToken'
 --
--- * 'pUploadType'
+-- * 'proUploadType'
 --
--- * 'pPayload'
+-- * 'proPayload'
 --
--- * 'pCallback'
+-- * 'proCallback'
 projectsInstancesDatabasesSessionsCreate
-    :: Text -- ^ 'pDatabase'
-    -> CreateSessionRequest -- ^ 'pPayload'
+    :: Text -- ^ 'proDatabase'
+    -> CreateSessionRequest -- ^ 'proPayload'
     -> ProjectsInstancesDatabasesSessionsCreate
-projectsInstancesDatabasesSessionsCreate pPDatabase_ pPPayload_ =
+projectsInstancesDatabasesSessionsCreate pProDatabase_ pProPayload_ =
   ProjectsInstancesDatabasesSessionsCreate'
-    { _pXgafv = Nothing
-    , _pUploadProtocol = Nothing
-    , _pDatabase = pPDatabase_
-    , _pAccessToken = Nothing
-    , _pUploadType = Nothing
-    , _pPayload = pPPayload_
-    , _pCallback = Nothing
+    { _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proDatabase = pProDatabase_
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proPayload = pProPayload_
+    , _proCallback = Nothing
     }
 
 
 -- | V1 error format.
-pXgafv :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Xgafv)
-pXgafv = lens _pXgafv (\ s a -> s{_pXgafv = a})
+proXgafv :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Xgafv)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pUploadProtocol :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
-pUploadProtocol
-  = lens _pUploadProtocol
-      (\ s a -> s{_pUploadProtocol = a})
+proUploadProtocol :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | Required. The database in which the new session is created.
-pDatabase :: Lens' ProjectsInstancesDatabasesSessionsCreate Text
-pDatabase
-  = lens _pDatabase (\ s a -> s{_pDatabase = a})
+proDatabase :: Lens' ProjectsInstancesDatabasesSessionsCreate Text
+proDatabase
+  = lens _proDatabase (\ s a -> s{_proDatabase = a})
 
 -- | OAuth access token.
-pAccessToken :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
-pAccessToken
-  = lens _pAccessToken (\ s a -> s{_pAccessToken = a})
+proAccessToken :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pUploadType :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
-pUploadType
-  = lens _pUploadType (\ s a -> s{_pUploadType = a})
+proUploadType :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
 -- | Multipart request metadata.
-pPayload :: Lens' ProjectsInstancesDatabasesSessionsCreate CreateSessionRequest
-pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
+proPayload :: Lens' ProjectsInstancesDatabasesSessionsCreate CreateSessionRequest
+proPayload
+  = lens _proPayload (\ s a -> s{_proPayload = a})
 
 -- | JSONP
-pCallback :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
-pCallback
-  = lens _pCallback (\ s a -> s{_pCallback = a})
+proCallback :: Lens' ProjectsInstancesDatabasesSessionsCreate (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
 instance GoogleRequest
            ProjectsInstancesDatabasesSessionsCreate
@@ -179,12 +180,12 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/spanner.data"]
         requestClient
           ProjectsInstancesDatabasesSessionsCreate'{..}
-          = go _pDatabase _pXgafv _pUploadProtocol
-              _pAccessToken
-              _pUploadType
-              _pCallback
+          = go _proDatabase _proXgafv _proUploadProtocol
+              _proAccessToken
+              _proUploadType
+              _proCallback
               (Just AltJSON)
-              _pPayload
+              _proPayload
               spannerService
           where go
                   = buildClient

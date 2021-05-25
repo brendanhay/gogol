@@ -33,11 +33,16 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
     , EnterprisesUnenroll
 
     -- * Request Lenses
-    , entEnterpriseId
+    , euuXgafv
+    , euuUploadProtocol
+    , euuEnterpriseId
+    , euuAccessToken
+    , euuUploadType
+    , euuCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.unenroll@ method which the
 -- 'EnterprisesUnenroll' request conforms to.
@@ -47,14 +52,24 @@ type EnterprisesUnenrollResource =
          "enterprises" :>
            Capture "enterpriseId" Text :>
              "unenroll" :>
-               QueryParam "alt" AltJSON :> Post '[JSON] ()
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Unenrolls an enterprise from the calling EMM.
 --
 -- /See:/ 'enterprisesUnenroll' smart constructor.
-newtype EnterprisesUnenroll =
+data EnterprisesUnenroll =
   EnterprisesUnenroll'
-    { _entEnterpriseId :: Text
+    { _euuXgafv :: !(Maybe Xgafv)
+    , _euuUploadProtocol :: !(Maybe Text)
+    , _euuEnterpriseId :: !Text
+    , _euuAccessToken :: !(Maybe Text)
+    , _euuUploadType :: !(Maybe Text)
+    , _euuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -63,26 +78,74 @@ newtype EnterprisesUnenroll =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'entEnterpriseId'
+-- * 'euuXgafv'
+--
+-- * 'euuUploadProtocol'
+--
+-- * 'euuEnterpriseId'
+--
+-- * 'euuAccessToken'
+--
+-- * 'euuUploadType'
+--
+-- * 'euuCallback'
 enterprisesUnenroll
-    :: Text -- ^ 'entEnterpriseId'
+    :: Text -- ^ 'euuEnterpriseId'
     -> EnterprisesUnenroll
-enterprisesUnenroll pEntEnterpriseId_ =
-  EnterprisesUnenroll' {_entEnterpriseId = pEntEnterpriseId_}
+enterprisesUnenroll pEuuEnterpriseId_ =
+  EnterprisesUnenroll'
+    { _euuXgafv = Nothing
+    , _euuUploadProtocol = Nothing
+    , _euuEnterpriseId = pEuuEnterpriseId_
+    , _euuAccessToken = Nothing
+    , _euuUploadType = Nothing
+    , _euuCallback = Nothing
+    }
 
+
+-- | V1 error format.
+euuXgafv :: Lens' EnterprisesUnenroll (Maybe Xgafv)
+euuXgafv = lens _euuXgafv (\ s a -> s{_euuXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+euuUploadProtocol :: Lens' EnterprisesUnenroll (Maybe Text)
+euuUploadProtocol
+  = lens _euuUploadProtocol
+      (\ s a -> s{_euuUploadProtocol = a})
 
 -- | The ID of the enterprise.
-entEnterpriseId :: Lens' EnterprisesUnenroll Text
-entEnterpriseId
-  = lens _entEnterpriseId
-      (\ s a -> s{_entEnterpriseId = a})
+euuEnterpriseId :: Lens' EnterprisesUnenroll Text
+euuEnterpriseId
+  = lens _euuEnterpriseId
+      (\ s a -> s{_euuEnterpriseId = a})
+
+-- | OAuth access token.
+euuAccessToken :: Lens' EnterprisesUnenroll (Maybe Text)
+euuAccessToken
+  = lens _euuAccessToken
+      (\ s a -> s{_euuAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+euuUploadType :: Lens' EnterprisesUnenroll (Maybe Text)
+euuUploadType
+  = lens _euuUploadType
+      (\ s a -> s{_euuUploadType = a})
+
+-- | JSONP
+euuCallback :: Lens' EnterprisesUnenroll (Maybe Text)
+euuCallback
+  = lens _euuCallback (\ s a -> s{_euuCallback = a})
 
 instance GoogleRequest EnterprisesUnenroll where
         type Rs EnterprisesUnenroll = ()
         type Scopes EnterprisesUnenroll =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient EnterprisesUnenroll'{..}
-          = go _entEnterpriseId (Just AltJSON)
+          = go _euuEnterpriseId _euuXgafv _euuUploadProtocol
+              _euuAccessToken
+              _euuUploadType
+              _euuCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

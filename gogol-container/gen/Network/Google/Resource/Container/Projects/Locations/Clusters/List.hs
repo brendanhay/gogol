@@ -44,8 +44,8 @@ module Network.Google.Resource.Container.Projects.Locations.Clusters.List
     , plclCallback
     ) where
 
-import           Network.Google.Container.Types
-import           Network.Google.Prelude
+import Network.Google.Container.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @container.projects.locations.clusters.list@ method which the
 -- 'ProjectsLocationsClustersList' request conforms to.
@@ -69,14 +69,14 @@ type ProjectsLocationsClustersListResource =
 -- /See:/ 'projectsLocationsClustersList' smart constructor.
 data ProjectsLocationsClustersList =
   ProjectsLocationsClustersList'
-    { _plclParent         :: !Text
-    , _plclXgafv          :: !(Maybe Xgafv)
+    { _plclParent :: !Text
+    , _plclXgafv :: !(Maybe Xgafv)
     , _plclUploadProtocol :: !(Maybe Text)
-    , _plclAccessToken    :: !(Maybe Text)
-    , _plclUploadType     :: !(Maybe Text)
-    , _plclZone           :: !(Maybe Text)
-    , _plclProjectId      :: !(Maybe Text)
-    , _plclCallback       :: !(Maybe Text)
+    , _plclAccessToken :: !(Maybe Text)
+    , _plclUploadType :: !(Maybe Text)
+    , _plclZone :: !(Maybe Text)
+    , _plclProjectId :: !(Maybe Text)
+    , _plclCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -117,7 +117,7 @@ projectsLocationsClustersList pPlclParent_ =
 
 
 -- | The parent (project and location) where the clusters will be listed.
--- Specified in the format \'projects\/*\/locations\/*\'. Location \"-\"
+-- Specified in the format \`projects\/*\/locations\/*\`. Location \"-\"
 -- matches all zones and all regions.
 plclParent :: Lens' ProjectsLocationsClustersList Text
 plclParent
@@ -147,9 +147,9 @@ plclUploadType
       (\ s a -> s{_plclUploadType = a})
 
 -- | Deprecated. The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) in which the cluster resides,
--- or \"-\" for all zones. This field has been deprecated and replaced by
--- the parent field.
+-- [zone](https:\/\/cloud.google.com\/compute\/docs\/zones#available) in
+-- which the cluster resides, or \"-\" for all zones. This field has been
+-- deprecated and replaced by the parent field.
 plclZone :: Lens' ProjectsLocationsClustersList (Maybe Text)
 plclZone = lens _plclZone (\ s a -> s{_plclZone = a})
 

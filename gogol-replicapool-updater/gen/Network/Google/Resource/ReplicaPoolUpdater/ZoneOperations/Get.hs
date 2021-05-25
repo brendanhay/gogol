@@ -38,8 +38,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
     , zogZone
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPoolUpdater.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.zoneOperations.get@ method which the
 -- 'ZoneOperationsGet' request conforms to.
@@ -59,9 +59,9 @@ type ZoneOperationsGetResource =
 -- /See:/ 'zoneOperationsGet' smart constructor.
 data ZoneOperationsGet =
   ZoneOperationsGet'
-    { _zogProject   :: !Text
+    { _zogProject :: !Text
     , _zogOperation :: !Text
-    , _zogZone      :: !Text
+    , _zogZone :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

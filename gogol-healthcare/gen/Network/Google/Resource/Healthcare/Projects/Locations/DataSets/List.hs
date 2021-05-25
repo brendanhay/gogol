@@ -43,13 +43,13 @@ module Network.Google.Resource.Healthcare.Projects.Locations.DataSets.List
     , pldslCallback
     ) where
 
-import           Network.Google.Healthcare.Types
-import           Network.Google.Prelude
+import Network.Google.Healthcare.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @healthcare.projects.locations.datasets.list@ method which the
 -- 'ProjectsLocationsDataSetsList' request conforms to.
 type ProjectsLocationsDataSetsListResource =
-     "v1beta1" :>
+     "v1" :>
        Capture "parent" Text :>
          "datasets" :>
            QueryParam "$.xgafv" Xgafv :>
@@ -67,14 +67,14 @@ type ProjectsLocationsDataSetsListResource =
 -- /See:/ 'projectsLocationsDataSetsList' smart constructor.
 data ProjectsLocationsDataSetsList =
   ProjectsLocationsDataSetsList'
-    { _pldslParent         :: !Text
-    , _pldslXgafv          :: !(Maybe Xgafv)
+    { _pldslParent :: !Text
+    , _pldslXgafv :: !(Maybe Xgafv)
     , _pldslUploadProtocol :: !(Maybe Text)
-    , _pldslAccessToken    :: !(Maybe Text)
-    , _pldslUploadType     :: !(Maybe Text)
-    , _pldslPageToken      :: !(Maybe Text)
-    , _pldslPageSize       :: !(Maybe (Textual Int32))
-    , _pldslCallback       :: !(Maybe Text)
+    , _pldslAccessToken :: !(Maybe Text)
+    , _pldslUploadType :: !(Maybe Text)
+    , _pldslPageToken :: !(Maybe Text)
+    , _pldslPageSize :: !(Maybe (Textual Int32))
+    , _pldslCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -114,8 +114,8 @@ projectsLocationsDataSetsList pPldslParent_ =
     }
 
 
--- | The name of the project whose datasets should be listed (e.g.,
--- \`projects\/{project_id}\/locations\/{location_id}\`).
+-- | The name of the project whose datasets should be listed. For example,
+-- \`projects\/{project_id}\/locations\/{location_id}\`.
 pldslParent :: Lens' ProjectsLocationsDataSetsList Text
 pldslParent
   = lens _pldslParent (\ s a -> s{_pldslParent = a})
@@ -149,7 +149,7 @@ pldslPageToken
   = lens _pldslPageToken
       (\ s a -> s{_pldslPageToken = a})
 
--- | The maximum number of items to return. Capped to 100 if not specified.
+-- | The maximum number of items to return. If not specified, 100 is used.
 -- May not be larger than 1000.
 pldslPageSize :: Lens' ProjectsLocationsDataSetsList (Maybe Int32)
 pldslPageSize

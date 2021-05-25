@@ -45,8 +45,8 @@ module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
     , bigoCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ProximityBeacon.Types
+import Network.Google.Prelude
+import Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beaconinfo.getforobserved@ method which the
 -- 'BeaconInfoGetforObserved' request conforms to.
@@ -71,12 +71,12 @@ type BeaconInfoGetforObservedResource =
 -- /See:/ 'beaconInfoGetforObserved' smart constructor.
 data BeaconInfoGetforObserved =
   BeaconInfoGetforObserved'
-    { _bigoXgafv          :: !(Maybe Xgafv)
+    { _bigoXgafv :: !(Maybe Xgafv)
     , _bigoUploadProtocol :: !(Maybe Text)
-    , _bigoAccessToken    :: !(Maybe Text)
-    , _bigoUploadType     :: !(Maybe Text)
-    , _bigoPayload        :: !GetInfoForObservedBeaconsRequest
-    , _bigoCallback       :: !(Maybe Text)
+    , _bigoAccessToken :: !(Maybe Text)
+    , _bigoUploadType :: !(Maybe Text)
+    , _bigoPayload :: !GetInfoForObservedBeaconsRequest
+    , _bigoCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

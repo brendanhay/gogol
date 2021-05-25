@@ -44,8 +44,8 @@ module Network.Google.Resource.AdExchangeBuyer2.Accounts.Creatives.Watch
     , acwCallback
     ) where
 
-import           Network.Google.AdExchangeBuyer2.Types
-import           Network.Google.Prelude
+import Network.Google.AdExchangeBuyer2.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.watch@ method which the
 -- 'AccountsCreativesWatch' request conforms to.
@@ -70,14 +70,14 @@ type AccountsCreativesWatchResource =
 -- /See:/ 'accountsCreativesWatch' smart constructor.
 data AccountsCreativesWatch =
   AccountsCreativesWatch'
-    { _acwXgafv          :: !(Maybe Xgafv)
+    { _acwXgafv :: !(Maybe Xgafv)
     , _acwUploadProtocol :: !(Maybe Text)
-    , _acwAccessToken    :: !(Maybe Text)
-    , _acwUploadType     :: !(Maybe Text)
-    , _acwCreativeId     :: !Text
-    , _acwPayload        :: !WatchCreativeRequest
-    , _acwAccountId      :: !Text
-    , _acwCallback       :: !(Maybe Text)
+    , _acwAccessToken :: !(Maybe Text)
+    , _acwUploadType :: !(Maybe Text)
+    , _acwCreativeId :: !Text
+    , _acwPayload :: !WatchCreativeRequest
+    , _acwAccountId :: !Text
+    , _acwCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

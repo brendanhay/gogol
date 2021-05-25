@@ -41,8 +41,8 @@ module Network.Google.Resource.ReplicaPool.Pools.Resize
     , prProjectName
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ReplicaPool.Types
+import Network.Google.Prelude
+import Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.resize@ method which the
 -- 'PoolsResize' request conforms to.
@@ -67,8 +67,8 @@ type PoolsResizeResource =
 data PoolsResize =
   PoolsResize'
     { _prNumReplicas :: !(Maybe (Textual Int32))
-    , _prPoolName    :: !Text
-    , _prZone        :: !Text
+    , _prPoolName :: !Text
+    , _prZone :: !Text
     , _prProjectName :: !Text
     }
   deriving (Eq, Show, Data, Typeable, Generic)

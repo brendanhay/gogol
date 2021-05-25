@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on a Folder, replacing any existing
--- policy. The \`resource\` field should be the Folder\'s resource name,
--- e.g. \"folders\/1234\". The caller must have
+-- Sets the access control policy on a folder, replacing any existing
+-- policy. The \`resource\` field should be the folder\'s resource name,
+-- for example: \"folders\/1234\". The caller must have
 -- \`resourcemanager.folders.setIamPolicy\` permission on the identified
 -- folder.
 --
@@ -46,13 +46,13 @@ module Network.Google.Resource.CloudResourceManager.Folders.SetIAMPolicy
     , fsipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.ResourceManager.Types
+import Network.Google.Prelude
+import Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.folders.setIamPolicy@ method which the
 -- 'FoldersSetIAMPolicy' request conforms to.
 type FoldersSetIAMPolicyResource =
-     "v2" :>
+     "v3" :>
        CaptureMode "resource" "setIamPolicy" Text :>
          QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
@@ -63,22 +63,22 @@ type FoldersSetIAMPolicyResource =
                      ReqBody '[JSON] SetIAMPolicyRequest :>
                        Post '[JSON] Policy
 
--- | Sets the access control policy on a Folder, replacing any existing
--- policy. The \`resource\` field should be the Folder\'s resource name,
--- e.g. \"folders\/1234\". The caller must have
+-- | Sets the access control policy on a folder, replacing any existing
+-- policy. The \`resource\` field should be the folder\'s resource name,
+-- for example: \"folders\/1234\". The caller must have
 -- \`resourcemanager.folders.setIamPolicy\` permission on the identified
 -- folder.
 --
 -- /See:/ 'foldersSetIAMPolicy' smart constructor.
 data FoldersSetIAMPolicy =
   FoldersSetIAMPolicy'
-    { _fsipXgafv          :: !(Maybe Xgafv)
+    { _fsipXgafv :: !(Maybe Xgafv)
     , _fsipUploadProtocol :: !(Maybe Text)
-    , _fsipAccessToken    :: !(Maybe Text)
-    , _fsipUploadType     :: !(Maybe Text)
-    , _fsipPayload        :: !SetIAMPolicyRequest
-    , _fsipResource       :: !Text
-    , _fsipCallback       :: !(Maybe Text)
+    , _fsipAccessToken :: !(Maybe Text)
+    , _fsipUploadType :: !(Maybe Text)
+    , _fsipPayload :: !SetIAMPolicyRequest
+    , _fsipResource :: !Text
+    , _fsipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

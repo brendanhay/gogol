@@ -33,12 +33,17 @@ module Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
     , UsersGetAvailableProductSet
 
     -- * Request Lenses
+    , ugapsXgafv
+    , ugapsUploadProtocol
     , ugapsEnterpriseId
+    , ugapsAccessToken
+    , ugapsUploadType
     , ugapsUserId
+    , ugapsCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.users.getAvailableProductSet@ method which the
 -- 'UsersGetAvailableProductSet' request conforms to.
@@ -50,15 +55,25 @@ type UsersGetAvailableProductSetResource =
              "users" :>
                Capture "userId" Text :>
                  "availableProductSet" :>
-                   QueryParam "alt" AltJSON :> Get '[JSON] ProductSet
+                   QueryParam "$.xgafv" Xgafv :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :> Get '[JSON] ProductSet
 
 -- | Retrieves the set of products a user is entitled to access.
 --
 -- /See:/ 'usersGetAvailableProductSet' smart constructor.
 data UsersGetAvailableProductSet =
   UsersGetAvailableProductSet'
-    { _ugapsEnterpriseId :: !Text
-    , _ugapsUserId       :: !Text
+    { _ugapsXgafv :: !(Maybe Xgafv)
+    , _ugapsUploadProtocol :: !(Maybe Text)
+    , _ugapsEnterpriseId :: !Text
+    , _ugapsAccessToken :: !(Maybe Text)
+    , _ugapsUploadType :: !(Maybe Text)
+    , _ugapsUserId :: !Text
+    , _ugapsCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,45 @@ data UsersGetAvailableProductSet =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ugapsXgafv'
+--
+-- * 'ugapsUploadProtocol'
+--
 -- * 'ugapsEnterpriseId'
 --
+-- * 'ugapsAccessToken'
+--
+-- * 'ugapsUploadType'
+--
 -- * 'ugapsUserId'
+--
+-- * 'ugapsCallback'
 usersGetAvailableProductSet
     :: Text -- ^ 'ugapsEnterpriseId'
     -> Text -- ^ 'ugapsUserId'
     -> UsersGetAvailableProductSet
 usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
   UsersGetAvailableProductSet'
-    {_ugapsEnterpriseId = pUgapsEnterpriseId_, _ugapsUserId = pUgapsUserId_}
+    { _ugapsXgafv = Nothing
+    , _ugapsUploadProtocol = Nothing
+    , _ugapsEnterpriseId = pUgapsEnterpriseId_
+    , _ugapsAccessToken = Nothing
+    , _ugapsUploadType = Nothing
+    , _ugapsUserId = pUgapsUserId_
+    , _ugapsCallback = Nothing
+    }
 
+
+-- | V1 error format.
+ugapsXgafv :: Lens' UsersGetAvailableProductSet (Maybe Xgafv)
+ugapsXgafv
+  = lens _ugapsXgafv (\ s a -> s{_ugapsXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ugapsUploadProtocol :: Lens' UsersGetAvailableProductSet (Maybe Text)
+ugapsUploadProtocol
+  = lens _ugapsUploadProtocol
+      (\ s a -> s{_ugapsUploadProtocol = a})
 
 -- | The ID of the enterprise.
 ugapsEnterpriseId :: Lens' UsersGetAvailableProductSet Text
@@ -85,10 +128,28 @@ ugapsEnterpriseId
   = lens _ugapsEnterpriseId
       (\ s a -> s{_ugapsEnterpriseId = a})
 
+-- | OAuth access token.
+ugapsAccessToken :: Lens' UsersGetAvailableProductSet (Maybe Text)
+ugapsAccessToken
+  = lens _ugapsAccessToken
+      (\ s a -> s{_ugapsAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ugapsUploadType :: Lens' UsersGetAvailableProductSet (Maybe Text)
+ugapsUploadType
+  = lens _ugapsUploadType
+      (\ s a -> s{_ugapsUploadType = a})
+
 -- | The ID of the user.
 ugapsUserId :: Lens' UsersGetAvailableProductSet Text
 ugapsUserId
   = lens _ugapsUserId (\ s a -> s{_ugapsUserId = a})
+
+-- | JSONP
+ugapsCallback :: Lens' UsersGetAvailableProductSet (Maybe Text)
+ugapsCallback
+  = lens _ugapsCallback
+      (\ s a -> s{_ugapsCallback = a})
 
 instance GoogleRequest UsersGetAvailableProductSet
          where
@@ -96,7 +157,12 @@ instance GoogleRequest UsersGetAvailableProductSet
         type Scopes UsersGetAvailableProductSet =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient UsersGetAvailableProductSet'{..}
-          = go _ugapsEnterpriseId _ugapsUserId (Just AltJSON)
+          = go _ugapsEnterpriseId _ugapsUserId _ugapsXgafv
+              _ugapsUploadProtocol
+              _ugapsAccessToken
+              _ugapsUploadType
+              _ugapsCallback
+              (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

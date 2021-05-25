@@ -41,8 +41,8 @@ module Network.Google.Resource.People.People.DeleteContact
     , pdcCallback
     ) where
 
-import           Network.Google.People.Types
-import           Network.Google.Prelude
+import Network.Google.People.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @people.people.deleteContact@ method which the
 -- 'PeopleDeleteContact' request conforms to.
@@ -61,12 +61,12 @@ type PeopleDeleteContactResource =
 -- /See:/ 'peopleDeleteContact' smart constructor.
 data PeopleDeleteContact =
   PeopleDeleteContact'
-    { _pdcXgafv          :: !(Maybe Xgafv)
+    { _pdcXgafv :: !(Maybe Xgafv)
     , _pdcUploadProtocol :: !(Maybe Text)
-    , _pdcResourceName   :: !Text
-    , _pdcAccessToken    :: !(Maybe Text)
-    , _pdcUploadType     :: !(Maybe Text)
-    , _pdcCallback       :: !(Maybe Text)
+    , _pdcResourceName :: !Text
+    , _pdcAccessToken :: !(Maybe Text)
+    , _pdcUploadType :: !(Maybe Text)
+    , _pdcCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -110,7 +110,7 @@ pdcUploadProtocol
   = lens _pdcUploadProtocol
       (\ s a -> s{_pdcUploadProtocol = a})
 
--- | The resource name of the contact to delete.
+-- | Required. The resource name of the contact to delete.
 pdcResourceName :: Lens' PeopleDeleteContact Text
 pdcResourceName
   = lens _pdcResourceName

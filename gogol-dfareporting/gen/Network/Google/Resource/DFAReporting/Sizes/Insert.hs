@@ -22,7 +22,7 @@
 --
 -- Inserts a new size.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sizes.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.sizes.insert@.
 module Network.Google.Resource.DFAReporting.Sizes.Insert
     (
     -- * REST Resource
@@ -33,31 +33,46 @@ module Network.Google.Resource.DFAReporting.Sizes.Insert
     , SizesInsert
 
     -- * Request Lenses
+    , siXgafv
+    , siUploadProtocol
+    , siAccessToken
+    , siUploadType
     , siProFileId
     , siPayload
+    , siCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sizes.insert@ method which the
 -- 'SizesInsert' request conforms to.
 type SizesInsertResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] Size :> Post '[JSON] Size
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Size :> Post '[JSON] Size
 
 -- | Inserts a new size.
 --
 -- /See:/ 'sizesInsert' smart constructor.
 data SizesInsert =
   SizesInsert'
-    { _siProFileId :: !(Textual Int64)
-    , _siPayload   :: !Size
+    { _siXgafv :: !(Maybe Xgafv)
+    , _siUploadProtocol :: !(Maybe Text)
+    , _siAccessToken :: !(Maybe Text)
+    , _siUploadType :: !(Maybe Text)
+    , _siProFileId :: !(Textual Int64)
+    , _siPayload :: !Size
+    , _siCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -66,17 +81,55 @@ data SizesInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'siXgafv'
+--
+-- * 'siUploadProtocol'
+--
+-- * 'siAccessToken'
+--
+-- * 'siUploadType'
+--
 -- * 'siProFileId'
 --
 -- * 'siPayload'
+--
+-- * 'siCallback'
 sizesInsert
     :: Int64 -- ^ 'siProFileId'
     -> Size -- ^ 'siPayload'
     -> SizesInsert
 sizesInsert pSiProFileId_ pSiPayload_ =
   SizesInsert'
-    {_siProFileId = _Coerce # pSiProFileId_, _siPayload = pSiPayload_}
+    { _siXgafv = Nothing
+    , _siUploadProtocol = Nothing
+    , _siAccessToken = Nothing
+    , _siUploadType = Nothing
+    , _siProFileId = _Coerce # pSiProFileId_
+    , _siPayload = pSiPayload_
+    , _siCallback = Nothing
+    }
 
+
+-- | V1 error format.
+siXgafv :: Lens' SizesInsert (Maybe Xgafv)
+siXgafv = lens _siXgafv (\ s a -> s{_siXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+siUploadProtocol :: Lens' SizesInsert (Maybe Text)
+siUploadProtocol
+  = lens _siUploadProtocol
+      (\ s a -> s{_siUploadProtocol = a})
+
+-- | OAuth access token.
+siAccessToken :: Lens' SizesInsert (Maybe Text)
+siAccessToken
+  = lens _siAccessToken
+      (\ s a -> s{_siAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+siUploadType :: Lens' SizesInsert (Maybe Text)
+siUploadType
+  = lens _siUploadType (\ s a -> s{_siUploadType = a})
 
 -- | User profile ID associated with this request.
 siProFileId :: Lens' SizesInsert Int64
@@ -89,12 +142,22 @@ siPayload :: Lens' SizesInsert Size
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
+-- | JSONP
+siCallback :: Lens' SizesInsert (Maybe Text)
+siCallback
+  = lens _siCallback (\ s a -> s{_siCallback = a})
+
 instance GoogleRequest SizesInsert where
         type Rs SizesInsert = Size
         type Scopes SizesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
         requestClient SizesInsert'{..}
-          = go _siProFileId (Just AltJSON) _siPayload
+          = go _siProFileId _siXgafv _siUploadProtocol
+              _siAccessToken
+              _siUploadType
+              _siCallback
+              (Just AltJSON)
+              _siPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SizesInsertResource)

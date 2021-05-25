@@ -46,8 +46,8 @@ module Network.Google.Resource.Spanner.Projects.Instances.TestIAMPermissions
     , pitipCallback
     ) where
 
-import           Network.Google.Prelude
-import           Network.Google.Spanner.Types
+import Network.Google.Prelude
+import Network.Google.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.testIamPermissions@ method which the
 -- 'ProjectsInstancesTestIAMPermissions' request conforms to.
@@ -72,13 +72,13 @@ type ProjectsInstancesTestIAMPermissionsResource =
 -- /See:/ 'projectsInstancesTestIAMPermissions' smart constructor.
 data ProjectsInstancesTestIAMPermissions =
   ProjectsInstancesTestIAMPermissions'
-    { _pitipXgafv          :: !(Maybe Xgafv)
+    { _pitipXgafv :: !(Maybe Xgafv)
     , _pitipUploadProtocol :: !(Maybe Text)
-    , _pitipAccessToken    :: !(Maybe Text)
-    , _pitipUploadType     :: !(Maybe Text)
-    , _pitipPayload        :: !TestIAMPermissionsRequest
-    , _pitipResource       :: !Text
-    , _pitipCallback       :: !(Maybe Text)
+    , _pitipAccessToken :: !(Maybe Text)
+    , _pitipUploadType :: !(Maybe Text)
+    , _pitipPayload :: !TestIAMPermissionsRequest
+    , _pitipResource :: !Text
+    , _pitipCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

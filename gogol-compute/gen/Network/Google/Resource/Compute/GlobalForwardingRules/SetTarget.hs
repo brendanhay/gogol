@@ -40,8 +40,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
     , gfrstPayload
     ) where
 
-import           Network.Google.Compute.Types
-import           Network.Google.Prelude
+import Network.Google.Compute.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.setTarget@ method which the
 -- 'GlobalForwardingRulesSetTarget' request conforms to.
@@ -65,10 +65,10 @@ type GlobalForwardingRulesSetTargetResource =
 -- /See:/ 'globalForwardingRulesSetTarget' smart constructor.
 data GlobalForwardingRulesSetTarget =
   GlobalForwardingRulesSetTarget'
-    { _gfrstRequestId      :: !(Maybe Text)
-    , _gfrstProject        :: !Text
+    { _gfrstRequestId :: !(Maybe Text)
+    , _gfrstProject :: !Text
     , _gfrstForwardingRule :: !Text
-    , _gfrstPayload        :: !TargetReference
+    , _gfrstPayload :: !TargetReference
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

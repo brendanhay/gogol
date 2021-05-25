@@ -22,7 +22,7 @@
 --
 -- Insert a new achievement configuration in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.insert@.
+-- /See:/ <https://developers.google.com/games/ Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.insert@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
     (
     -- * REST Resource
@@ -33,12 +33,17 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Inse
     , AchievementConfigurationsInsert
 
     -- * Request Lenses
+    , aciXgafv
+    , aciUploadProtocol
+    , aciAccessToken
+    , aciUploadType
     , aciPayload
     , aciApplicationId
+    , aciCallback
     ) where
 
-import           Network.Google.GamesConfiguration.Types
-import           Network.Google.Prelude
+import Network.Google.GamesConfiguration.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.insert@ method which the
 -- 'AchievementConfigurationsInsert' request conforms to.
@@ -48,17 +53,27 @@ type AchievementConfigurationsInsertResource =
          "applications" :>
            Capture "applicationId" Text :>
              "achievements" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] AchievementConfiguration :>
-                   Post '[JSON] AchievementConfiguration
+               QueryParam "$.xgafv" Xgafv :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AchievementConfiguration :>
+                             Post '[JSON] AchievementConfiguration
 
 -- | Insert a new achievement configuration in this application.
 --
 -- /See:/ 'achievementConfigurationsInsert' smart constructor.
 data AchievementConfigurationsInsert =
   AchievementConfigurationsInsert'
-    { _aciPayload       :: !AchievementConfiguration
+    { _aciXgafv :: !(Maybe Xgafv)
+    , _aciUploadProtocol :: !(Maybe Text)
+    , _aciAccessToken :: !(Maybe Text)
+    , _aciUploadType :: !(Maybe Text)
+    , _aciPayload :: !AchievementConfiguration
     , _aciApplicationId :: !Text
+    , _aciCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -67,17 +82,56 @@ data AchievementConfigurationsInsert =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aciXgafv'
+--
+-- * 'aciUploadProtocol'
+--
+-- * 'aciAccessToken'
+--
+-- * 'aciUploadType'
+--
 -- * 'aciPayload'
 --
 -- * 'aciApplicationId'
+--
+-- * 'aciCallback'
 achievementConfigurationsInsert
     :: AchievementConfiguration -- ^ 'aciPayload'
     -> Text -- ^ 'aciApplicationId'
     -> AchievementConfigurationsInsert
 achievementConfigurationsInsert pAciPayload_ pAciApplicationId_ =
   AchievementConfigurationsInsert'
-    {_aciPayload = pAciPayload_, _aciApplicationId = pAciApplicationId_}
+    { _aciXgafv = Nothing
+    , _aciUploadProtocol = Nothing
+    , _aciAccessToken = Nothing
+    , _aciUploadType = Nothing
+    , _aciPayload = pAciPayload_
+    , _aciApplicationId = pAciApplicationId_
+    , _aciCallback = Nothing
+    }
 
+
+-- | V1 error format.
+aciXgafv :: Lens' AchievementConfigurationsInsert (Maybe Xgafv)
+aciXgafv = lens _aciXgafv (\ s a -> s{_aciXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+aciUploadProtocol :: Lens' AchievementConfigurationsInsert (Maybe Text)
+aciUploadProtocol
+  = lens _aciUploadProtocol
+      (\ s a -> s{_aciUploadProtocol = a})
+
+-- | OAuth access token.
+aciAccessToken :: Lens' AchievementConfigurationsInsert (Maybe Text)
+aciAccessToken
+  = lens _aciAccessToken
+      (\ s a -> s{_aciAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+aciUploadType :: Lens' AchievementConfigurationsInsert (Maybe Text)
+aciUploadType
+  = lens _aciUploadType
+      (\ s a -> s{_aciUploadType = a})
 
 -- | Multipart request metadata.
 aciPayload :: Lens' AchievementConfigurationsInsert AchievementConfiguration
@@ -90,6 +144,11 @@ aciApplicationId
   = lens _aciApplicationId
       (\ s a -> s{_aciApplicationId = a})
 
+-- | JSONP
+aciCallback :: Lens' AchievementConfigurationsInsert (Maybe Text)
+aciCallback
+  = lens _aciCallback (\ s a -> s{_aciCallback = a})
+
 instance GoogleRequest
            AchievementConfigurationsInsert
          where
@@ -98,7 +157,12 @@ instance GoogleRequest
         type Scopes AchievementConfigurationsInsert =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient AchievementConfigurationsInsert'{..}
-          = go _aciApplicationId (Just AltJSON) _aciPayload
+          = go _aciApplicationId _aciXgafv _aciUploadProtocol
+              _aciAccessToken
+              _aciUploadType
+              _aciCallback
+              (Just AltJSON)
+              _aciPayload
               gamesConfigurationService
           where go
                   = buildClient

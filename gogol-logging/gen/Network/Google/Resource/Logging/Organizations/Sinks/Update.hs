@@ -25,7 +25,7 @@
 -- updated sink might also have a new writer_identity; see the
 -- unique_writer_identity field.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.sinks.update@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Update
     (
     -- * REST Resource
@@ -47,8 +47,8 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Update
     , osuCallback
     ) where
 
-import           Network.Google.Logging.Types
-import           Network.Google.Prelude
+import Network.Google.Logging.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @logging.organizations.sinks.update@ method which the
 -- 'OrganizationsSinksUpdate' request conforms to.
@@ -73,15 +73,15 @@ type OrganizationsSinksUpdateResource =
 -- /See:/ 'organizationsSinksUpdate' smart constructor.
 data OrganizationsSinksUpdate =
   OrganizationsSinksUpdate'
-    { _osuXgafv                :: !(Maybe Xgafv)
+    { _osuXgafv :: !(Maybe Xgafv)
     , _osuUniqueWriterIdentity :: !(Maybe Bool)
-    , _osuUploadProtocol       :: !(Maybe Text)
-    , _osuUpdateMask           :: !(Maybe GFieldMask)
-    , _osuAccessToken          :: !(Maybe Text)
-    , _osuUploadType           :: !(Maybe Text)
-    , _osuPayload              :: !LogSink
-    , _osuSinkName             :: !Text
-    , _osuCallback             :: !(Maybe Text)
+    , _osuUploadProtocol :: !(Maybe Text)
+    , _osuUpdateMask :: !(Maybe GFieldMask)
+    , _osuAccessToken :: !(Maybe Text)
+    , _osuUploadType :: !(Maybe Text)
+    , _osuPayload :: !LogSink
+    , _osuSinkName :: !Text
+    , _osuCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

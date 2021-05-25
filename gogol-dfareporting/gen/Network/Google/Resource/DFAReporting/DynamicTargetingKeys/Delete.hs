@@ -22,7 +22,7 @@
 --
 -- Deletes an existing dynamic targeting key.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dynamicTargetingKeys.delete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.dynamicTargetingKeys.delete@.
 module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
     (
     -- * REST Resource
@@ -33,20 +33,25 @@ module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
     , DynamicTargetingKeysDelete
 
     -- * Request Lenses
+    , dtkdXgafv
+    , dtkdUploadProtocol
     , dtkdObjectType
+    , dtkdAccessToken
     , dtkdObjectId
+    , dtkdUploadType
     , dtkdProFileId
     , dtkdName
+    , dtkdCallback
     ) where
 
-import           Network.Google.DFAReporting.Types
-import           Network.Google.Prelude
+import Network.Google.DFAReporting.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.dynamicTargetingKeys.delete@ method which the
 -- 'DynamicTargetingKeysDelete' request conforms to.
 type DynamicTargetingKeysDeleteResource =
      "dfareporting" :>
-       "v3.3" :>
+       "v3.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>
@@ -54,17 +59,28 @@ type DynamicTargetingKeysDeleteResource =
                  QueryParam "name" Text :>
                    QueryParam "objectType"
                      DynamicTargetingKeysDeleteObjectType
-                     :> QueryParam "alt" AltJSON :> Delete '[JSON] ()
+                     :>
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing dynamic targeting key.
 --
 -- /See:/ 'dynamicTargetingKeysDelete' smart constructor.
 data DynamicTargetingKeysDelete =
   DynamicTargetingKeysDelete'
-    { _dtkdObjectType :: !DynamicTargetingKeysDeleteObjectType
-    , _dtkdObjectId   :: !(Textual Int64)
-    , _dtkdProFileId  :: !(Textual Int64)
-    , _dtkdName       :: !Text
+    { _dtkdXgafv :: !(Maybe Xgafv)
+    , _dtkdUploadProtocol :: !(Maybe Text)
+    , _dtkdObjectType :: !DynamicTargetingKeysDeleteObjectType
+    , _dtkdAccessToken :: !(Maybe Text)
+    , _dtkdObjectId :: !(Textual Int64)
+    , _dtkdUploadType :: !(Maybe Text)
+    , _dtkdProFileId :: !(Textual Int64)
+    , _dtkdName :: !Text
+    , _dtkdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -73,13 +89,23 @@ data DynamicTargetingKeysDelete =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dtkdXgafv'
+--
+-- * 'dtkdUploadProtocol'
+--
 -- * 'dtkdObjectType'
 --
+-- * 'dtkdAccessToken'
+--
 -- * 'dtkdObjectId'
+--
+-- * 'dtkdUploadType'
 --
 -- * 'dtkdProFileId'
 --
 -- * 'dtkdName'
+--
+-- * 'dtkdCallback'
 dynamicTargetingKeysDelete
     :: DynamicTargetingKeysDeleteObjectType -- ^ 'dtkdObjectType'
     -> Int64 -- ^ 'dtkdObjectId'
@@ -88,12 +114,28 @@ dynamicTargetingKeysDelete
     -> DynamicTargetingKeysDelete
 dynamicTargetingKeysDelete pDtkdObjectType_ pDtkdObjectId_ pDtkdProFileId_ pDtkdName_ =
   DynamicTargetingKeysDelete'
-    { _dtkdObjectType = pDtkdObjectType_
+    { _dtkdXgafv = Nothing
+    , _dtkdUploadProtocol = Nothing
+    , _dtkdObjectType = pDtkdObjectType_
+    , _dtkdAccessToken = Nothing
     , _dtkdObjectId = _Coerce # pDtkdObjectId_
+    , _dtkdUploadType = Nothing
     , _dtkdProFileId = _Coerce # pDtkdProFileId_
     , _dtkdName = pDtkdName_
+    , _dtkdCallback = Nothing
     }
 
+
+-- | V1 error format.
+dtkdXgafv :: Lens' DynamicTargetingKeysDelete (Maybe Xgafv)
+dtkdXgafv
+  = lens _dtkdXgafv (\ s a -> s{_dtkdXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+dtkdUploadProtocol :: Lens' DynamicTargetingKeysDelete (Maybe Text)
+dtkdUploadProtocol
+  = lens _dtkdUploadProtocol
+      (\ s a -> s{_dtkdUploadProtocol = a})
 
 -- | Type of the object of this dynamic targeting key. This is a required
 -- field.
@@ -102,12 +144,24 @@ dtkdObjectType
   = lens _dtkdObjectType
       (\ s a -> s{_dtkdObjectType = a})
 
+-- | OAuth access token.
+dtkdAccessToken :: Lens' DynamicTargetingKeysDelete (Maybe Text)
+dtkdAccessToken
+  = lens _dtkdAccessToken
+      (\ s a -> s{_dtkdAccessToken = a})
+
 -- | ID of the object of this dynamic targeting key. This is a required
 -- field.
 dtkdObjectId :: Lens' DynamicTargetingKeysDelete Int64
 dtkdObjectId
   = lens _dtkdObjectId (\ s a -> s{_dtkdObjectId = a})
       . _Coerce
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+dtkdUploadType :: Lens' DynamicTargetingKeysDelete (Maybe Text)
+dtkdUploadType
+  = lens _dtkdUploadType
+      (\ s a -> s{_dtkdUploadType = a})
 
 -- | User profile ID associated with this request.
 dtkdProFileId :: Lens' DynamicTargetingKeysDelete Int64
@@ -122,6 +176,11 @@ dtkdProFileId
 dtkdName :: Lens' DynamicTargetingKeysDelete Text
 dtkdName = lens _dtkdName (\ s a -> s{_dtkdName = a})
 
+-- | JSONP
+dtkdCallback :: Lens' DynamicTargetingKeysDelete (Maybe Text)
+dtkdCallback
+  = lens _dtkdCallback (\ s a -> s{_dtkdCallback = a})
+
 instance GoogleRequest DynamicTargetingKeysDelete
          where
         type Rs DynamicTargetingKeysDelete = ()
@@ -130,6 +189,11 @@ instance GoogleRequest DynamicTargetingKeysDelete
         requestClient DynamicTargetingKeysDelete'{..}
           = go _dtkdProFileId _dtkdObjectId (Just _dtkdName)
               (Just _dtkdObjectType)
+              _dtkdXgafv
+              _dtkdUploadProtocol
+              _dtkdAccessToken
+              _dtkdUploadType
+              _dtkdCallback
               (Just AltJSON)
               dFAReportingService
           where go

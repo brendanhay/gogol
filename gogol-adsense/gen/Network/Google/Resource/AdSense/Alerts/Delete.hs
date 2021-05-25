@@ -37,8 +37,8 @@ module Network.Google.Resource.AdSense.Alerts.Delete
     , adAlertId
     ) where
 
-import           Network.Google.AdSense.Types
-import           Network.Google.Prelude
+import Network.Google.AdSense.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @adsense.alerts.delete@ method which the
 -- 'AlertsDelete' request conforms to.

@@ -22,7 +22,7 @@
 --
 -- Hard deletes a Product.
 --
--- /See:/ <https://sites.google.com/corp/google.com/cloudprivatecatalog Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.delete@.
+-- /See:/ <https://cloud.google.com/private-catalog/ Cloud Private Catalog Producer API Reference> for @cloudprivatecatalogproducer.catalogs.products.delete@.
 module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Delete
     (
     -- * REST Resource
@@ -41,8 +41,8 @@ module Network.Google.Resource.CloudPrivateCatalogProducer.Catalogs.Products.Del
     , cpdCallback
     ) where
 
-import           Network.Google.CloudPrivateCatalogProducer.Types
-import           Network.Google.Prelude
+import Network.Google.CloudPrivateCatalogProducer.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.delete@ method which the
 -- 'CatalogsProductsDelete' request conforms to.
@@ -62,12 +62,12 @@ type CatalogsProductsDeleteResource =
 -- /See:/ 'catalogsProductsDelete' smart constructor.
 data CatalogsProductsDelete =
   CatalogsProductsDelete'
-    { _cpdXgafv          :: !(Maybe Xgafv)
+    { _cpdXgafv :: !(Maybe Xgafv)
     , _cpdUploadProtocol :: !(Maybe Text)
-    , _cpdAccessToken    :: !(Maybe Text)
-    , _cpdUploadType     :: !(Maybe Text)
-    , _cpdName           :: !Text
-    , _cpdCallback       :: !(Maybe Text)
+    , _cpdAccessToken :: !(Maybe Text)
+    , _cpdUploadType :: !(Maybe Text)
+    , _cpdName :: !Text
+    , _cpdCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

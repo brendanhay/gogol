@@ -53,8 +53,8 @@ module Network.Google.Resource.FireStore.Projects.Databases.Operations.List
     , pdolCallback
     ) where
 
-import           Network.Google.FireStore.Types
-import           Network.Google.Prelude
+import Network.Google.FireStore.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @firestore.projects.databases.operations.list@ method which the
 -- 'ProjectsDatabasesOperationsList' request conforms to.
@@ -87,15 +87,15 @@ type ProjectsDatabasesOperationsListResource =
 -- /See:/ 'projectsDatabasesOperationsList' smart constructor.
 data ProjectsDatabasesOperationsList =
   ProjectsDatabasesOperationsList'
-    { _pdolXgafv          :: !(Maybe Xgafv)
+    { _pdolXgafv :: !(Maybe Xgafv)
     , _pdolUploadProtocol :: !(Maybe Text)
-    , _pdolAccessToken    :: !(Maybe Text)
-    , _pdolUploadType     :: !(Maybe Text)
-    , _pdolName           :: !Text
-    , _pdolFilter         :: !(Maybe Text)
-    , _pdolPageToken      :: !(Maybe Text)
-    , _pdolPageSize       :: !(Maybe (Textual Int32))
-    , _pdolCallback       :: !(Maybe Text)
+    , _pdolAccessToken :: !(Maybe Text)
+    , _pdolUploadType :: !(Maybe Text)
+    , _pdolName :: !Text
+    , _pdolFilter :: !(Maybe Text)
+    , _pdolPageToken :: !(Maybe Text)
+    , _pdolPageSize :: !(Maybe (Textual Int32))
+    , _pdolCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 

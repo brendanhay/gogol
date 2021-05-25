@@ -33,13 +33,18 @@ module Network.Google.Resource.AndroidEnterprise.WebApps.Update
     , WebAppsUpdate
 
     -- * Request Lenses
+    , wauXgafv
     , wauWebAppId
+    , wauUploadProtocol
     , wauEnterpriseId
+    , wauAccessToken
+    , wauUploadType
     , wauPayload
+    , wauCallback
     ) where
 
-import           Network.Google.AndroidEnterprise.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidEnterprise.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.webapps.update@ method which the
 -- 'WebAppsUpdate' request conforms to.
@@ -50,17 +55,27 @@ type WebAppsUpdateResource =
            Capture "enterpriseId" Text :>
              "webApps" :>
                Capture "webAppId" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] WebApp :> Put '[JSON] WebApp
+                 QueryParam "$.xgafv" Xgafv :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] WebApp :> Put '[JSON] WebApp
 
 -- | Updates an existing web app.
 --
 -- /See:/ 'webAppsUpdate' smart constructor.
 data WebAppsUpdate =
   WebAppsUpdate'
-    { _wauWebAppId     :: !Text
+    { _wauXgafv :: !(Maybe Xgafv)
+    , _wauWebAppId :: !Text
+    , _wauUploadProtocol :: !(Maybe Text)
     , _wauEnterpriseId :: !Text
-    , _wauPayload      :: !WebApp
+    , _wauAccessToken :: !(Maybe Text)
+    , _wauUploadType :: !(Maybe Text)
+    , _wauPayload :: !WebApp
+    , _wauCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -69,11 +84,21 @@ data WebAppsUpdate =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'wauXgafv'
+--
 -- * 'wauWebAppId'
+--
+-- * 'wauUploadProtocol'
 --
 -- * 'wauEnterpriseId'
 --
+-- * 'wauAccessToken'
+--
+-- * 'wauUploadType'
+--
 -- * 'wauPayload'
+--
+-- * 'wauCallback'
 webAppsUpdate
     :: Text -- ^ 'wauWebAppId'
     -> Text -- ^ 'wauEnterpriseId'
@@ -81,16 +106,31 @@ webAppsUpdate
     -> WebAppsUpdate
 webAppsUpdate pWauWebAppId_ pWauEnterpriseId_ pWauPayload_ =
   WebAppsUpdate'
-    { _wauWebAppId = pWauWebAppId_
+    { _wauXgafv = Nothing
+    , _wauWebAppId = pWauWebAppId_
+    , _wauUploadProtocol = Nothing
     , _wauEnterpriseId = pWauEnterpriseId_
+    , _wauAccessToken = Nothing
+    , _wauUploadType = Nothing
     , _wauPayload = pWauPayload_
+    , _wauCallback = Nothing
     }
 
+
+-- | V1 error format.
+wauXgafv :: Lens' WebAppsUpdate (Maybe Xgafv)
+wauXgafv = lens _wauXgafv (\ s a -> s{_wauXgafv = a})
 
 -- | The ID of the web app.
 wauWebAppId :: Lens' WebAppsUpdate Text
 wauWebAppId
   = lens _wauWebAppId (\ s a -> s{_wauWebAppId = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+wauUploadProtocol :: Lens' WebAppsUpdate (Maybe Text)
+wauUploadProtocol
+  = lens _wauUploadProtocol
+      (\ s a -> s{_wauUploadProtocol = a})
 
 -- | The ID of the enterprise.
 wauEnterpriseId :: Lens' WebAppsUpdate Text
@@ -98,17 +138,39 @@ wauEnterpriseId
   = lens _wauEnterpriseId
       (\ s a -> s{_wauEnterpriseId = a})
 
+-- | OAuth access token.
+wauAccessToken :: Lens' WebAppsUpdate (Maybe Text)
+wauAccessToken
+  = lens _wauAccessToken
+      (\ s a -> s{_wauAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+wauUploadType :: Lens' WebAppsUpdate (Maybe Text)
+wauUploadType
+  = lens _wauUploadType
+      (\ s a -> s{_wauUploadType = a})
+
 -- | Multipart request metadata.
 wauPayload :: Lens' WebAppsUpdate WebApp
 wauPayload
   = lens _wauPayload (\ s a -> s{_wauPayload = a})
+
+-- | JSONP
+wauCallback :: Lens' WebAppsUpdate (Maybe Text)
+wauCallback
+  = lens _wauCallback (\ s a -> s{_wauCallback = a})
 
 instance GoogleRequest WebAppsUpdate where
         type Rs WebAppsUpdate = WebApp
         type Scopes WebAppsUpdate =
              '["https://www.googleapis.com/auth/androidenterprise"]
         requestClient WebAppsUpdate'{..}
-          = go _wauEnterpriseId _wauWebAppId (Just AltJSON)
+          = go _wauEnterpriseId _wauWebAppId _wauXgafv
+              _wauUploadProtocol
+              _wauAccessToken
+              _wauUploadType
+              _wauCallback
+              (Just AltJSON)
               _wauPayload
               androidEnterpriseService
           where go

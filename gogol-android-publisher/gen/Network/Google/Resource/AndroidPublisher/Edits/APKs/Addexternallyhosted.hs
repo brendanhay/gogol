@@ -22,10 +22,10 @@
 --
 -- Creates a new APK without uploading the APK itself to Google Play,
 -- instead hosting the APK at a specified URL. This function is only
--- available to enterprises using Google Play for Work whose application is
--- configured to restrict distribution to the enterprise domain.
+-- available to organizations using Managed Play whose application is
+-- configured to restrict distribution to the organizations.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apks.addexternallyhosted@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.apks.addexternallyhosted@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
     (
     -- * REST Resource
@@ -36,13 +36,18 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
     , EditsAPKsAddexternallyhosted
 
     -- * Request Lenses
+    , eapkaXgafv
+    , eapkaUploadProtocol
     , eapkaPackageName
+    , eapkaAccessToken
+    , eapkaUploadType
     , eapkaPayload
     , eapkaEditId
+    , eapkaCallback
     ) where
 
-import           Network.Google.AndroidPublisher.Types
-import           Network.Google.Prelude
+import Network.Google.AndroidPublisher.Types
+import Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apks.addexternallyhosted@ method which the
 -- 'EditsAPKsAddexternallyhosted' request conforms to.
@@ -55,21 +60,32 @@ type EditsAPKsAddexternallyhostedResource =
                Capture "editId" Text :>
                  "apks" :>
                    "externallyHosted" :>
-                     QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] APKsAddExternallyHostedRequest :>
-                         Post '[JSON] APKsAddExternallyHostedResponse
+                     QueryParam "$.xgafv" Xgafv :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] APKsAddExternallyHostedRequest
+                                   :>
+                                   Post '[JSON] APKsAddExternallyHostedResponse
 
 -- | Creates a new APK without uploading the APK itself to Google Play,
 -- instead hosting the APK at a specified URL. This function is only
--- available to enterprises using Google Play for Work whose application is
--- configured to restrict distribution to the enterprise domain.
+-- available to organizations using Managed Play whose application is
+-- configured to restrict distribution to the organizations.
 --
 -- /See:/ 'editsAPKsAddexternallyhosted' smart constructor.
 data EditsAPKsAddexternallyhosted =
   EditsAPKsAddexternallyhosted'
-    { _eapkaPackageName :: !Text
-    , _eapkaPayload     :: !APKsAddExternallyHostedRequest
-    , _eapkaEditId      :: !Text
+    { _eapkaXgafv :: !(Maybe Xgafv)
+    , _eapkaUploadProtocol :: !(Maybe Text)
+    , _eapkaPackageName :: !Text
+    , _eapkaAccessToken :: !(Maybe Text)
+    , _eapkaUploadType :: !(Maybe Text)
+    , _eapkaPayload :: !APKsAddExternallyHostedRequest
+    , _eapkaEditId :: !Text
+    , _eapkaCallback :: !(Maybe Text)
     }
   deriving (Eq, Show, Data, Typeable, Generic)
 
@@ -78,11 +94,21 @@ data EditsAPKsAddexternallyhosted =
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eapkaXgafv'
+--
+-- * 'eapkaUploadProtocol'
+--
 -- * 'eapkaPackageName'
+--
+-- * 'eapkaAccessToken'
+--
+-- * 'eapkaUploadType'
 --
 -- * 'eapkaPayload'
 --
 -- * 'eapkaEditId'
+--
+-- * 'eapkaCallback'
 editsAPKsAddexternallyhosted
     :: Text -- ^ 'eapkaPackageName'
     -> APKsAddExternallyHostedRequest -- ^ 'eapkaPayload'
@@ -90,28 +116,61 @@ editsAPKsAddexternallyhosted
     -> EditsAPKsAddexternallyhosted
 editsAPKsAddexternallyhosted pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
   EditsAPKsAddexternallyhosted'
-    { _eapkaPackageName = pEapkaPackageName_
+    { _eapkaXgafv = Nothing
+    , _eapkaUploadProtocol = Nothing
+    , _eapkaPackageName = pEapkaPackageName_
+    , _eapkaAccessToken = Nothing
+    , _eapkaUploadType = Nothing
     , _eapkaPayload = pEapkaPayload_
     , _eapkaEditId = pEapkaEditId_
+    , _eapkaCallback = Nothing
     }
 
 
--- | Unique identifier for the Android app that is being updated; for
--- example, \"com.spiffygame\".
+-- | V1 error format.
+eapkaXgafv :: Lens' EditsAPKsAddexternallyhosted (Maybe Xgafv)
+eapkaXgafv
+  = lens _eapkaXgafv (\ s a -> s{_eapkaXgafv = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+eapkaUploadProtocol :: Lens' EditsAPKsAddexternallyhosted (Maybe Text)
+eapkaUploadProtocol
+  = lens _eapkaUploadProtocol
+      (\ s a -> s{_eapkaUploadProtocol = a})
+
+-- | Package name of the app.
 eapkaPackageName :: Lens' EditsAPKsAddexternallyhosted Text
 eapkaPackageName
   = lens _eapkaPackageName
       (\ s a -> s{_eapkaPackageName = a})
+
+-- | OAuth access token.
+eapkaAccessToken :: Lens' EditsAPKsAddexternallyhosted (Maybe Text)
+eapkaAccessToken
+  = lens _eapkaAccessToken
+      (\ s a -> s{_eapkaAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+eapkaUploadType :: Lens' EditsAPKsAddexternallyhosted (Maybe Text)
+eapkaUploadType
+  = lens _eapkaUploadType
+      (\ s a -> s{_eapkaUploadType = a})
 
 -- | Multipart request metadata.
 eapkaPayload :: Lens' EditsAPKsAddexternallyhosted APKsAddExternallyHostedRequest
 eapkaPayload
   = lens _eapkaPayload (\ s a -> s{_eapkaPayload = a})
 
--- | Unique identifier for this edit.
+-- | Identifier of the edit.
 eapkaEditId :: Lens' EditsAPKsAddexternallyhosted Text
 eapkaEditId
   = lens _eapkaEditId (\ s a -> s{_eapkaEditId = a})
+
+-- | JSONP
+eapkaCallback :: Lens' EditsAPKsAddexternallyhosted (Maybe Text)
+eapkaCallback
+  = lens _eapkaCallback
+      (\ s a -> s{_eapkaCallback = a})
 
 instance GoogleRequest EditsAPKsAddexternallyhosted
          where
@@ -120,7 +179,12 @@ instance GoogleRequest EditsAPKsAddexternallyhosted
         type Scopes EditsAPKsAddexternallyhosted =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient EditsAPKsAddexternallyhosted'{..}
-          = go _eapkaPackageName _eapkaEditId (Just AltJSON)
+          = go _eapkaPackageName _eapkaEditId _eapkaXgafv
+              _eapkaUploadProtocol
+              _eapkaAccessToken
+              _eapkaUploadType
+              _eapkaCallback
+              (Just AltJSON)
               _eapkaPayload
               androidPublisherService
           where go
